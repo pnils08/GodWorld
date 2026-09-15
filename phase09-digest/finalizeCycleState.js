@@ -449,7 +449,7 @@ function savePreviousCycleState_(ctx) {
     }
     // engine.228: the Phase-2 activity history rides its OWN key (≤12 entries, ~850 chars) —
     // the baseline the relative gates divide by; without it every ratio read 1.
-    var actObs = compactActivityObservations_(S.activityObservations);
+    var actObs = compactActivityObservations_(S);
     if (actObs) {
       var actJson = JSON.stringify(actObs);
       saveCarryForwardBlob_(ctx, 'PREV_ACTIVITY_OBS_JSON', actJson, snapshot.cycle);
@@ -485,21 +485,38 @@ function compactNeighborhoodEconomies_(ne) {
 }
 
 /**
- * engine.228: the last 12 activity observations, six numbers each — what Phase 2 averages next
- * Cycle. Anything else on the object (latest, rolling) is recomputed every Cycle.
+ * engine.228: this Cycle's activity observation, taken HERE (Phase 9) where the counts exist —
+ * events, story seeds, media, crime spikes and world events are all written by Phases 3–8, so
+ * the observation Phase 2 used to record was {0,0,0,0,0} every Cycle (bench C108 @41 carried
+ * exactly that). Appended to the carried history (last 12, six numbers each, ~850 chars); Phase 2
+ * reads the last entry as "last night" and the entries before it as the baseline. `media` has no
+ * count writer anywhere (S.mediaCoverage / S.mediaCount) and stays 0 — recorded, not invented.
  */
-function compactActivityObservations_(ao) {
-  if (!ao || !Array.isArray(ao.history) || !ao.history.length) return null;
+function compactActivityObservations_(S) {
+  if (!S) return null;
   var keys = ['cycle', 'events', 'storySeedCount', 'media', 'crime', 'shockCount'];
+  var cycle = Number(S.cycleId || S.cycle || 0);
+  var worldEvents = S.worldEvents || [];
+  var crime = S.crimeSpikes || S.crimeEvents || ((S.crimeMetrics && typeof compactCrimeSpikes_ === 'function') ? compactCrimeSpikes_(S.crimeMetrics) : []);
+  var entry = {
+    cycle: cycle,
+    events: (typeof S.eventsGenerated === 'number') ? S.eventsGenerated : worldEvents.length,
+    storySeedCount: (S.storySeeds || []).length,
+    media: Number(S.mediaCoverage || S.mediaCount || 0),
+    crime: Array.isArray(crime) ? crime.length : Number(crime || 0),
+    shockCount: worldEvents.length
+  };
+  var prior = (S.activityObservations && Array.isArray(S.activityObservations.history)) ? S.activityObservations.history : [];
   var out = [];
-  var h = ao.history.slice(-12);
-  for (var i = 0; i < h.length; i++) {
-    if (!h[i]) continue;
+  for (var i = 0; i < prior.length; i++) {
+    var h = prior[i];
+    if (!h || Number(h.cycle) === cycle) continue;   // never two entries for one Cycle
     var o = {};
-    for (var k = 0; k < keys.length; k++) { var v = Number(h[i][keys[k]]); o[keys[k]] = isFinite(v) ? v : 0; }
+    for (var k = 0; k < keys.length; k++) { var v = Number(h[keys[k]]); o[keys[k]] = isFinite(v) ? v : 0; }
     out.push(o);
   }
-  return out.length ? { history: out } : null;
+  out.push(entry);
+  return { history: out.slice(-12) };
 }
 
 function compactNeighborhoodDynamics_(nd) {

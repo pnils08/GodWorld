@@ -740,7 +740,15 @@ function applyCityDynamics_(ctx) {
   // ─────────────────────────────────────────────────────────────────────────
   if (!S.activityObservations) S.activityObservations = { history: [] };
 
-  var obs = {
+  // engine.228: nothing has happened yet at Phase 2 — the observation this block used to
+  // record here read {0,0,0,0,0} every Cycle (events, seeds, media, crime and world events are
+  // all written by Phases 3–8; bench C108 @41 carried exactly that), and the history it sat in
+  // was rebuilt from nothing each fire, so every "more than usual?" ratio below read exactly 1.
+  // Now Phase 9 takes the observation (compactActivityObservations_) and it carries on its own
+  // key; here "now" is last night — the last carried entry — and the baseline is the nights
+  // before it. A first fire (nothing carried) still reads this Cycle's empty counts: ratio 1.
+  var obsHistAll = S.activityObservations.history;
+  var obs = obsHistAll.length ? obsHistAll[obsHistAll.length - 1] : {
     cycle: (S.absoluteCycle || S.cycleId || ctx.config.cycleCount || 0),
     events: eventsGenerated,
     storySeedCount: storySeeds.length,
@@ -749,11 +757,8 @@ function applyCityDynamics_(ctx) {
     shockCount: worldEvents.length
   };
 
-  S.activityObservations.history.push(obs);
-  if (S.activityObservations.history.length > 12) S.activityObservations.history.shift();
-
   function rollingAvg_(key, n) {
-    var h = S.activityObservations.history;
+    var h = (obsHistAll.length > 1) ? obsHistAll.slice(0, -1) : obsHistAll;
     var start = Math.max(0, h.length - n);
     var sum = 0;
     var count = 0;
@@ -775,8 +780,7 @@ function applyCityDynamics_(ctx) {
   // worldEvents.length runs 8-13 EVERY cycle (mostly low-severity texture — a
   // holy day counts), so `shocks >= 3` was true 19 of 19 cycles measured and
   // the line it gates was a flat per-cycle tax, never a shock signal.
-  var obsHist = S.activityObservations.history;
-  var obsCur = obsHist[obsHist.length - 1] || obs;
+  var obsCur = obs;   // engine.228: last night's real counts (or this Cycle's empty ones on a first fire)
 
   // ─────────────────────────────────────────────────────────────────────────
   // STORY SEED SIGNALS (cluster-aware, calendar-aware)

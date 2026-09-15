@@ -41,19 +41,23 @@ function ctxFor(cycle, extra) {
     summary: Object.assign({ cycleId: cycle, season: 'Spring', month: 4, simMonth: 4, holiday: 'none', sportsSeason: 'off-season', weather: { type: 'clear', impact: 1 },
       neighborhoodState: {}, neighborhoodEconomies: {}, neighborhoodDemographics: {}, economicMood: 55, economicRipples: [], worldEvents: [], storySeeds: [], crimeByNeighborhood: {} }, extra || {}) };
 }
-const obs = (cycle, events, seeds) => ({ cycle, events, storySeedCount: seeds, media: 8, crime: 5, shockCount: events });
+const obs = (cycle, events, seeds) => ({ cycle, events, storySeedCount: seeds, media: 8, crime: 5, shockCount: 10 });   // shockCount held flat: engine.185's shock ratio is a separate gate on world-event volume
 
 console.log('engine.228 — activity observations carry');
 
-// ── compact ──────────────────────────────────────────────────────────────────
+// ── compact: taken at Phase 9 from the end-of-Cycle counts ───────────────────
 {
   const w = world();
-  const hist = []; for (let c = 90; c < 108; c++) hist.push(Object.assign(obs(c, 10, 30), { extra: 'dropped' }));
-  const c = w.sb.compactActivityObservations_({ history: hist, latest: {}, rolling: {} });
-  check('compact: keeps the last 12 entries only', c && c.history.length === 12 && c.history[0].cycle === 96, c && c.history.length);
-  check('compact: six numbers per entry, nothing else', c.history.every(o => Object.keys(o).length === 6 && o.extra === undefined));
-  check('compact: 12 entries fit well under 1 KB (' + JSON.stringify(c).length + ' chars)', JSON.stringify(c).length < 1000);
-  check('compact: empty → null', w.sb.compactActivityObservations_({ history: [] }) === null && w.sb.compactActivityObservations_(null) === null);
+  const S = { cycleId: 108, eventsGenerated: 12, storySeeds: new Array(31), worldEvents: new Array(9), crimeSpikes: [1, 2], activityObservations: { history: [] } };
+  const c = w.sb.compactActivityObservations_(S);
+  check('compact: one entry from this Cycle\'s real counts', c && c.history.length === 1 && JSON.stringify(c.history[0]) === JSON.stringify({ cycle: 108, events: 12, storySeedCount: 31, media: 0, crime: 2, shockCount: 9 }), JSON.stringify(c));
+  const hist = []; for (let cy = 90; cy < 108; cy++) hist.push(Object.assign(obs(cy, 10, 30), { extra: 'dropped' }));
+  const c2 = w.sb.compactActivityObservations_(Object.assign({}, S, { activityObservations: { history: hist } }));
+  check('compact: appends to the carried history, keeps the last 12', c2.history.length === 12 && c2.history[11].cycle === 108 && c2.history[0].cycle === 97, c2.history.length);
+  check('compact: six numbers per entry, nothing else', c2.history.every(o => Object.keys(o).length === 6 && o.extra === undefined));
+  check('compact: 12 entries fit well under 1 KB (' + JSON.stringify(c2).length + ' chars)', JSON.stringify(c2).length < 1000);
+  const c3 = w.sb.compactActivityObservations_(Object.assign({}, S, { activityObservations: { history: [obs(108, 0, 0)] } }));
+  check('compact: never two entries for one Cycle (a stale same-Cycle entry is replaced)', c3.history.length === 1 && c3.history[0].events === 12);
 }
 
 // ── seed ─────────────────────────────────────────────────────────────────────
@@ -73,45 +77,47 @@ console.log('engine.228 — activity observations carry');
 
 // ── the defect, then the fix: Phase 2 on a carried history ───────────────────
 {
-  // before: one entry → rolling == latest → every ratio 1
+  // first fire: nothing carried, nothing happened yet → one empty observation, ratio 1 by construction
   const w0 = world();
-  const A0 = ctxFor(108, { eventsGenerated: 15, storySeeds: new Array(45) });
+  const A0 = ctxFor(108);
   w0.sb.applyCityDynamics_(A0);
   const ao0 = A0.summary.activityObservations;
-  check('uncarried: history holds one entry and rolling == latest (the ratio is 1 by construction)', ao0.history.length === 1 && ao0.rolling.events === ao0.latest.events, JSON.stringify(ao0.rolling));
+  check('first fire: Phase 2 records nothing (no push), latest is this Cycle\'s empty counts, rolling == latest', ao0.history.length === 0 && ao0.latest.events === 0 && ao0.rolling.events === ao0.latest.events, JSON.stringify(ao0));
 
-  // carried: three ordinary Cycles (events 10) then a busy one (15) → rolling < latest
+  // carried: three ordinary nights (10 events) then a busy one (15) → "now" = last night 15, baseline = the three before = 10
   const w = world();
   w.props.PREV_CYCLE_STATE_JSON = JSON.stringify({ cycle: 107, econMood: 55 }); w.props.PREV_CYCLE_STATE_JSON_CYCLE = '107';
-  w.props.PREV_ACTIVITY_OBS_JSON = JSON.stringify({ history: [obs(105, 10, 30), obs(106, 10, 30), obs(107, 10, 30)] }); w.props.PREV_ACTIVITY_OBS_JSON_CYCLE = '107';
-  const A = ctxFor(108, { eventsGenerated: 15, storySeeds: new Array(45) });
+  w.props.PREV_ACTIVITY_OBS_JSON = JSON.stringify({ history: [obs(104, 10, 30), obs(105, 10, 30), obs(106, 10, 30), obs(107, 15, 45)] }); w.props.PREV_ACTIVITY_OBS_JSON_CYCLE = '107';
+  const A = ctxFor(108);
   w.sb.loadPreviousCycleState_(A);
   w.sb.applyCityDynamics_(A);
   const ao = A.summary.activityObservations;
-  check('carried: Phase 2 pushes on top of the carried history (4 entries)', ao.history.length === 4 && ao.history[3].cycle === 108, ao.history.length);
-  check('carried: rolling events = mean of the four (11.25), latest 15 — the ratio is 1.33, no longer 1', ao.rolling.events === 11.25 && ao.latest.events === 15, JSON.stringify(ao.rolling) + ' ' + JSON.stringify(ao.latest));
-  // the engine.188 gate reads that ratio: a busier-than-usual Cycle lifts sentiment vs the same Cycle with no baseline
+  check('carried: Phase 2 leaves the history as carried (4 entries, no Phase-2 push)', ao.history.length === 4 && ao.history[3].cycle === 107, ao.history.length);
+  check('carried: latest = last night (15), rolling = the nights before it (10) — the ratio is 1.5, no longer 1', ao.latest.events === 15 && ao.rolling.events === 10, JSON.stringify(ao.rolling) + ' ' + JSON.stringify(ao.latest));
+  // engine.188's 1.5 tier: publicSpaces ×1.08, culturalActivity ×1.06, sentiment +0.05 vs the same Cycle on a flat baseline
   const flat = world();
   flat.props.PREV_CYCLE_STATE_JSON = JSON.stringify({ cycle: 107, econMood: 55 }); flat.props.PREV_CYCLE_STATE_JSON_CYCLE = '107';
-  flat.props.PREV_ACTIVITY_OBS_JSON = JSON.stringify({ history: [obs(105, 15, 45), obs(106, 15, 45), obs(107, 15, 45)] }); flat.props.PREV_ACTIVITY_OBS_JSON_CYCLE = '107';
-  const F = ctxFor(108, { eventsGenerated: 15, storySeeds: new Array(45) });
+  flat.props.PREV_ACTIVITY_OBS_JSON = JSON.stringify({ history: [obs(104, 15, 45), obs(105, 15, 45), obs(106, 15, 45), obs(107, 15, 45)] }); flat.props.PREV_ACTIVITY_OBS_JSON_CYCLE = '107';
+  const F = ctxFor(108);
   flat.sb.loadPreviousCycleState_(F);
   flat.sb.applyCityDynamics_(F);
-  // engine.188's 1.25 tier: publicSpaces ×1.04, culturalActivity ×1.03 (sentiment moves only at the 1.5 tier)
-  check('the relative gate fires: a Cycle 1.33× its own baseline lifts public spaces and cultural activity vs the same Cycle on a flat baseline',
-    A.summary.cityDynamics.publicSpaces > F.summary.cityDynamics.publicSpaces && A.summary.cityDynamics.culturalActivity > F.summary.cityDynamics.culturalActivity,
-    A.summary.cityDynamics.publicSpaces + ' vs ' + F.summary.cityDynamics.publicSpaces);
+  check('the relative gate fires: a night 1.5× its own baseline lifts public spaces, cultural activity and sentiment vs the same night on a flat baseline',
+    A.summary.cityDynamics.publicSpaces > F.summary.cityDynamics.publicSpaces && A.summary.cityDynamics.culturalActivity > F.summary.cityDynamics.culturalActivity && A.summary.cityDynamics.sentiment > F.summary.cityDynamics.sentiment,
+    A.summary.cityDynamics.sentiment + ' vs ' + F.summary.cityDynamics.sentiment);
 
-  // Phase 10 saves it on its own key; next Cycle opens on five entries
+  // Phase 9 takes this Cycle's observation from the real counts and saves it on its own key
+  A.summary.eventsGenerated = 12; A.summary.storySeeds = new Array(31); A.summary.worldEvents = new Array(9);
   w.sb.finalizeCycleState_(A);
   w.sb.savePreviousCycleState_(A);
   check('save: PREV_ACTIVITY_OBS_JSON written for cycle 108, not inside PREV_CYCLE_STATE_JSON',
     typeof w.props.PREV_ACTIVITY_OBS_JSON === 'string' && w.props.PREV_ACTIVITY_OBS_JSON_CYCLE === '108' && JSON.parse(w.props.PREV_CYCLE_STATE_JSON).activityObservations === undefined);
-  const B = ctxFor(109, { eventsGenerated: 10, storySeeds: new Array(30) });
+  const saved = JSON.parse(w.props.PREV_ACTIVITY_OBS_JSON).history;
+  check('save: five entries, the new one carrying the real end-of-Cycle counts', saved.length === 5 && saved[4].cycle === 108 && saved[4].events === 12 && saved[4].storySeedCount === 31 && saved[4].shockCount === 9, JSON.stringify(saved[4]));
+  const B = ctxFor(109);
   w.sb.loadPreviousCycleState_(B);
-  check('next Cycle: opens on the four carried entries', B.summary.activityObservations.history.length === 4);
   w.sb.applyCityDynamics_(B);
-  check('next Cycle: five entries after Phase 2, rolling over the last six', B.summary.activityObservations.history.length === 5 && B.summary.activityObservations.rolling.events === 11);
+  const aoB = B.summary.activityObservations;
+  check('next Cycle: latest = Cycle 108\'s real observation (12 events), rolling over the four nights before it (11.25)', aoB.latest.events === 12 && aoB.rolling.events === 11.25, JSON.stringify(aoB.latest) + ' ' + JSON.stringify(aoB.rolling));
 }
 
 console.log('\n' + passed + ' passed, ' + failed + ' failed');

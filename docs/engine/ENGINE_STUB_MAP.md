@@ -2944,11 +2944,13 @@
   Reads: S.eveningSnapshot, S.previousCycleState
 
 - **savePreviousCycleState_(ctx)**
-  Reads: S.activityObservations, S.neighborhoodEconomies, S.previousCycleState
+  Reads: S.neighborhoodEconomies, S.previousCycleState
 
 - **compactNeighborhoodEconomies_(ne)**
+  Reads: S.mediaCount, S.mediaCoverage
 
-- **compactActivityObservations_(ao)**
+- **compactActivityObservations_(S)**
+  Reads: S.activityObservations, S.crimeEvents, S.crimeMetrics, S.crimeSpikes, S.cycle, S.cycleId, S.eventsGenerated, S.mediaCount, S.mediaCoverage, S.storySeeds, S.worldEvents
 
 - **compactNeighborhoodDynamics_(nd)**
 

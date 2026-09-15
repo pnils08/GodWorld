@@ -1,0 +1,257 @@
+{
+ "readAt": "2026-09-15T08:19:54.200Z",
+ "bench": "SANDBOX 0908 1FFpUs98L0wrEcfAaQy6-Ir2xYiCq9baCc0SzqzAMrtM",
+ "cycle": 108,
+ "cycleCount": "108",
+ "econMoodInertia": "0.3",
+ "engineErrorsRows": 0,
+ "engineErrorsTail": [
+  "Timestamp | Cycle | Phase | Error | Stack | Class | Source | Severity | Resolved | Hash"
+ ],
+ "ringKeys": [
+  "CHAOS_NBHD_FOLD_JSON@108",
+  "PREV_EVENING_JSON@108",
+  "PREV_CYCLE_STATE_JSON@108",
+  "CHAOS_NBHD_FOLD_JSON@106",
+  "PREV_EVENING_JSON@106",
+  "PREV_CYCLE_STATE_JSON@106",
+  "CHAOS_NBHD_FOLD_JSON@107",
+  "PREV_EVENING_JSON@107",
+  "PREV_CYCLE_STATE_JSON@107",
+  "PREV_HOOD_ECON_JSON@108",
+  "PREV_ACTIVITY_OBS_JSON@108"
+ ],
+ "hoodBlob": {
+  "Downtown": 54.4,
+  "Temescal": 56.3,
+  "Laurel": 55,
+  "West Oakland": 54.1,
+  "Fruitvale": 53.7,
+  "Jack London": 57.4,
+  "Rockridge": 56.2,
+  "Adams Point": 56.2,
+  "Grand Lake": 57.4,
+  "Piedmont Ave": 54.6,
+  "Chinatown": 54.6,
+  "Brooklyn": 55.3,
+  "Eastlake": 56.2,
+  "Glenview": 55.5,
+  "Dimond": 55.9,
+  "Ivy Hill": 55.9,
+  "San Antonio": 56.7,
+  "KONO": 55.4,
+  "Lake Merritt": 55.8,
+  "Uptown": 55.4,
+  "Baylight District": 55.3,
+  "East Oakland": 55.8
+ },
+ "hoodBlobChars": 380,
+ "hoodMin": 53.7,
+ "hoodMax": 57.4,
+ "hoodNonInteger": [
+  "Downtown=54.4",
+  "Temescal=56.3",
+  "West Oakland=54.1",
+  "Fruitvale=53.7",
+  "Jack London=57.4",
+  "Rockridge=56.2",
+  "Adams Point=56.2",
+  "Grand Lake=57.4",
+  "Piedmont Ave=54.6",
+  "Chinatown=54.6",
+  "Brooklyn=55.3",
+  "Eastlake=56.2",
+  "Glenview=55.5",
+  "Dimond=55.9",
+  "Ivy Hill=55.9",
+  "San Antonio=56.7",
+  "KONO=55.4",
+  "Lake Merritt=55.8",
+  "Uptown=55.4",
+  "Baylight District=55.3",
+  "East Oakland=55.8"
+ ],
+ "hoodMedian": 55.65,
+ "hoodTop": [
+  [
+   "Jack London",
+   57.4
+  ],
+  [
+   "Grand Lake",
+   57.4
+  ],
+  [
+   "San Antonio",
+   56.7
+  ]
+ ],
+ "hoodBottom": [
+  [
+   "Fruitvale",
+   53.7
+  ],
+  [
+   "West Oakland",
+   54.1
+  ],
+  [
+   "Downtown",
+   54.4
+  ]
+ ],
+ "activityObs": [
+  {
+   "cycle": 108,
+   "events": 0,
+   "storySeedCount": 0,
+   "media": 0,
+   "crime": 0,
+   "shockCount": 0
+  }
+ ],
+ "activityObsChars": 92,
+ "stateChars": 8246,
+ "econMood": 56,
+ "sentiment": -0.16,
+ "cycleWeight": "high-signal",
+ "neighborhoodDynamics": {
+  "Downtown": {
+   "sentiment": -0.17449711999999995,
+   "retail": 1.383291820410143
+  },
+  "Uptown": {
+   "sentiment": -0.19127431999999997,
+   "retail": 1.3440028967069286
+  },
+  "KONO": {
+   "sentiment": -0.19127431999999997,
+   "retail": 1.1590182086593628
+  },
+  "Chinatown": {
+   "sentiment": -0.19127431999999997,
+   "retail": 1.2521844610881994
+  },
+  "Jack London": {
+   "sentiment": -0.17685961999999994,
+   "retail": 1.1695018755837134
+  },
+  "West Oakland": {
+   "sentiment": -0.004871619999999965,
+   "retail": 1.309117446820987
+  },
+  "Lake Merritt": {
+   "sentiment": -0.19365571999999998,
+   "retail": 1.1473735435755272
+  },
+  "Piedmont Ave": {
+   "sentiment": -0.19365571999999998,
+   "retail": 1.1171286575546344
+  },
+  "Rockridge": {
+   "sentiment": -0.19280521999999997,
+   "retail": 1.3003283771088092
+  },
+  "Temescal": {
+   "sentiment": -0.12440041999999997,
+   "retail": 1.3951979058534811
+  },
+  "Fruitvale": {
+   "sentiment": -0.06520011999999994,
+   "retail": 1.1942327825176984
+  },
+  "Laurel": {
+   "sentiment": -0.19380691999999997,
+   "retail": 1.063255790397155
+  }
+ },
+ "stateKeys": [
+  "cycle",
+  "events",
+  "chaosCount",
+  "sentiment",
+  "econMood",
+  "pattern",
+  "shockFlag",
+  "shockStartCycle",
+  "civicLoad",
+  "civicLoadScore",
+  "weatherType",
+  "weatherImpact",
+  "cycleWeight",
+  "cycleWeightScore",
+  "recoveryLevel",
+  "overloadScore",
+  "activeCooldowns",
+  "holiday",
+  "holidayPriority",
+  "isFirstFriday",
+  "isCreationDay",
+  "sportsSeason",
+  "season",
+  "mediaEffects",
+  "neighborhoodDynamics",
+  "domainPresence",
+  "dominantDomain",
+  "economicRipples",
+  "initiativeRipples",
+  "initiativePhases",
+  "approvalHoodMoodEma",
+  "migrationDrift",
+  "migrationDriftFactors",
+  "bankRate",
+  "crimeSpikes",
+  "weatherTracking",
+  "weatherFrontTracking",
+  "transitDisrupted",
+  "crisisArcs",
+  "hospitalEvents",
+  "businessDynamics"
+ ],
+ "ripples": [
+  "CRIME_SPIKE(-8,108)",
+  "PLAYOFF_SPENDING(9.6,107)",
+  "BUSINESS_EXPANSION(6,107)",
+  "WINTER_DOLDRUMS(-4,108)",
+  "PLAYOFF_SPENDING(8,106)",
+  "CRIME_SPIKE(-8,105)"
+ ],
+ "rippleSources": [
+  "Downtown under strain: crime index 1.00 (city 0.65); housing",
+  "Playoff game spending",
+  "Gridiron Analytics added 2 employees",
+  "Post-holiday spending slowdown",
+  "Playoff game spending",
+  "West Oakland under strain: retail vitality 3.5 (city 6.4); c"
+ ],
+ "migrationFlow": {
+  "Downtown": "-1",
+  "Temescal": "2",
+  "Laurel": "-1",
+  "West Oakland": "-3",
+  "Fruitvale": "-1",
+  "Jack London": "1",
+  "Rockridge": "2",
+  "Adams Point": "2",
+  "Grand Lake": "5",
+  "Piedmont Ave": "-2",
+  "Chinatown": "-2",
+  "Brooklyn": "0",
+  "Eastlake": "2",
+  "Glenview": "0",
+  "Dimond": "1",
+  "Ivy Hill": "1",
+  "San Antonio": "3",
+  "KONO": "0",
+  "Lake Merritt": "1",
+  "Uptown": "0",
+  "Baylight District": "0",
+  "East Oakland": "1"
+ },
+ "rileyDigest": {
+  "Cycle": "108",
+  "CycleWeight": "high-signal",
+  "CycleWeightReason": "High event volume (9); Notable weather impact; Shock event detected; Recovery moderate; Strain trend detected.",
+  "CitySentiment": "-0.16"
+ }
+}

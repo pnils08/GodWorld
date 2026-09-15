@@ -751,6 +751,7 @@
         "phase08-v3-chicago/v3TextureWriter.js::saveV3Textures_",
         "phase09-digest/applyCompressionDigestSummary.js::applyCompressedDigestSummary_",
         "phase09-digest/applyCycleWeight.js::applyCycleWeight_",
+        "phase09-digest/finalizeCycleState.js::compactActivityObservations_",
         "phase09-digest/finalizeCycleState.js::finalizeCycleState_",
         "phase09-digest/finalizeCycleState.js::snapshotEveningForCarryForward_",
         "phase10-persistence/buildCyclePacket.js::buildCyclePacket_",
@@ -788,6 +789,7 @@
         "phase07-evening-media/buildContractSeeds.js::buildContractSeeds_",
         "phase09-digest/applyCompressionDigestSummary.js::applyCompressedDigestSummary_",
         "phase09-digest/applyCycleWeight.js::applyCycleWeight_",
+        "phase09-digest/finalizeCycleState.js::compactActivityObservations_",
         "phase09-digest/finalizeCycleState.js::finalizeCycleState_",
         "utilities/rippleLedger.js::recordRipple_"
       ]
@@ -1405,6 +1407,7 @@
         "phase08-v3-chicago/v3preLoader.js::v3PreloadContext_",
         "phase09-digest/applyCompressionDigestSummary.js::applyCompressedDigestSummary_",
         "phase09-digest/applyCycleWeight.js::applyCycleWeight_",
+        "phase09-digest/finalizeCycleState.js::compactActivityObservations_",
         "phase09-digest/finalizeCycleState.js::finalizeCycleState_",
         "phase10-persistence/buildCyclePacket.js::buildCyclePacket_",
         "phase10-persistence/recordMediaLedger.js::recordMediaLedger_",
@@ -1553,6 +1556,7 @@
         "phase05-citizens/runRelationshipEngine.js::runRelationshipEngine_",
         "phase06-analysis/applyShockMonitor.js::applyShockMonitor_",
         "phase09-digest/applyCompressionDigestSummary.js::applyCompressedDigestSummary_",
+        "phase09-digest/finalizeCycleState.js::compactActivityObservations_",
         "phase09-digest/finalizeCycleState.js::finalizeCycleState_"
       ]
     },
@@ -1652,6 +1656,7 @@
         "phase08-v3-chicago/v3preLoader.js::v3PreloadContext_",
         "phase09-digest/applyCompressionDigestSummary.js::applyCompressedDigestSummary_",
         "phase09-digest/applyCycleWeight.js::applyCycleWeight_",
+        "phase09-digest/finalizeCycleState.js::compactActivityObservations_",
         "phase10-persistence/recordMediaLedger.js::recordMediaLedger_",
         "phase10-persistence/recordWorldEventsv25.js::recordWorldEvents25_",
         "utilities/cycleModes.js::buildCycleChecksum_"
@@ -1833,7 +1838,7 @@
         "phase01-config/loadPreviousEvening.js::seedCarriedActivityObservations_",
         "phase01-config/loadPreviousEvening.js::seedCarriedNeighborhoodEconomies_",
         "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
-        "phase09-digest/finalizeCycleState.js::savePreviousCycleState_"
+        "phase09-digest/finalizeCycleState.js::compactActivityObservations_"
       ]
     },
     "economicRipples": {
@@ -2016,13 +2021,15 @@
     "crimeEvents": {
       "writers": [],
       "readers": [
-        "phase02-world-state/applyCityDynamics.js::applyCityDynamics_"
+        "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
+        "phase09-digest/finalizeCycleState.js::compactActivityObservations_"
       ]
     },
     "crimeSpikes": {
       "writers": [],
       "readers": [
         "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
+        "phase09-digest/finalizeCycleState.js::compactActivityObservations_",
         "phase09-digest/finalizeCycleState.js::finalizeCycleState_"
       ]
     },
@@ -2063,14 +2070,18 @@
       "writers": [],
       "readers": [
         "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
-        "phase03-population/updateCrimeMetrics.js::updateCrimeMetrics_Phase3_"
+        "phase03-population/updateCrimeMetrics.js::updateCrimeMetrics_Phase3_",
+        "phase09-digest/finalizeCycleState.js::compactActivityObservations_",
+        "phase09-digest/finalizeCycleState.js::compactNeighborhoodEconomies_"
       ]
     },
     "mediaCoverage": {
       "writers": [],
       "readers": [
         "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
-        "phase03-population/updateCrimeMetrics.js::updateCrimeMetrics_Phase3_"
+        "phase03-population/updateCrimeMetrics.js::updateCrimeMetrics_Phase3_",
+        "phase09-digest/finalizeCycleState.js::compactActivityObservations_",
+        "phase09-digest/finalizeCycleState.js::compactNeighborhoodEconomies_"
       ]
     },
     "neighborhoodWeather": {
@@ -2616,6 +2627,7 @@
         "phase05-citizens/runYouthEngine.js::runYouthEngine_",
         "phase07-evening-media/applyStorySeeds.js::applyStorySeeds_",
         "phase08-v3-chicago/v3NeighborhoodWriter.js::saveV3NeighborhoodMap_",
+        "phase09-digest/finalizeCycleState.js::compactActivityObservations_",
         "phase09-digest/finalizeCycleState.js::finalizeCycleState_",
         "phase10-persistence/buildCyclePacket.js::buildCyclePacket_",
         "utilities/exportCycleArtifacts.js::buildCycleContextPack_"

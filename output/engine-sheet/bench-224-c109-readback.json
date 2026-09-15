@@ -1,0 +1,48 @@
+{
+ "readAt": "2026-09-15T06:41:52.989Z",
+ "bench": "1FFpUs98…",
+ "cycleCount": {
+  "value": 109,
+  "type": "number"
+ },
+ "econMoodInertia": {
+  "value": 0.3,
+  "type": "number",
+  "present": true
+ },
+ "engineErrorsRows": 0,
+ "engineErrorsText": [],
+ "carryHeader": [
+  "Key",
+  "Cycle",
+  "UpdatedAt",
+  "JSON"
+ ],
+ "carry": [
+  {
+   "cycle": 108,
+   "cycleType": "number",
+   "econMood": 56,
+   "sentiment": -0.16,
+   "jsonCycle": 108,
+   "keys": 41
+  },
+  {
+   "cycle": 109,
+   "cycleType": "number",
+   "econMood": 54,
+   "sentiment": -0.14,
+   "jsonCycle": 109,
+   "keys": 41
+  },
+  {
+   "cycle": 107,
+   "cycleType": "number",
+   "econMood": 59.01,
+   "sentiment": 0.51,
+   "jsonCycle": 107,
+   "keys": 41
+  }
+ ],
+ "ledgerRows": 955
+}

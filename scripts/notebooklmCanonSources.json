@@ -38,7 +38,6 @@
     "45906537-074f-4107-b971-862627341bc4",
     "defd4884-1954-4657-84af-a19e69435ba3",
     "833558a2-2829-4d84-8677-7d9a2b510a58",
-    "3b0b7cb7-439b-4a0c-8ea1-c3687a48432b",
     "fe335f6a-5be4-4d67-bcd9-08e496cf2d74",
     "f5c42008-321f-4228-b0cb-6e6f24ca8ef4"
   ],
@@ -53,7 +52,6 @@
   "excludedSourceIds": [
     "3271f3d6-377e-4cb9-a2a7-03ca596e1a83",
     "e96f7462-8916-4eee-95b5-455a8929346e",
-    "385edefc-c728-4984-a144-6c6cd11adf64",
     "874d2f64-0fb3-48e2-98d5-95b40ada1894",
     "af829925-5cd7-41f1-b5a0-828b5de835b7",
     "3016e5a1-da7d-4152-9fff-505ab5ec5bce",
@@ -70,16 +68,9 @@
     "057778f5-b71b-43ae-bd92-723e34e43dbb",
     "a51f9726-252b-449d-9101-9170bcb12efa",
     "4d61e8ac-da0e-4181-9988-18a88ec2340a",
-    "7c65472d-24a7-4ad3-8eaf-59a9db1a0aac",
     "92577b7f-67e9-424a-b7c7-a210247f6616",
     "45ef514c-3ac2-4134-8b6c-c8a3ba5ac40b",
     "d31ecbea-6a82-4cbc-b422-f3eb399cd031",
-    "2226ad6f-dc7c-47d9-b003-dcc1149e7b7b",
-    "643194dc-7727-4494-a96c-79aee836e127",
-    "3cc32530-82fe-4d93-b5d5-cf41c4323e44",
-    "be06b3b9-df30-4389-8907-bf82202736bf",
-    "bc65ed60-397d-4de4-b1fe-f853428fabee",
-    "d62a5043-a859-4bcb-bb25-081a63acea25",
     "fc84bf14-d03d-41c8-9e8a-e83abed56cfd",
     "b2f8b11f-5799-4408-9903-b6971920ae05",
     "56f79960-1550-4769-9591-b1b4add11f82",
@@ -87,7 +78,6 @@
   ],
   "allowedLoreSourceIds": [
     "a1722406-93b3-4ba5-afa9-61e4b82344d5",
-    "a870cd68-4e21-4445-80e0-0709c806822e",
     "05877c39-bde2-4acc-bbb2-506169187290",
     "419fc423-8d81-4a8e-9447-aaabe18e3958"
   ],
@@ -303,14 +293,6 @@
       "title": "Mike Paulson-chat",
       "classification": "excluded",
       "reason": "Saved builder/Gemini interview and generated synthesis, not a published interview artifact or primary canon record.",
-      "evidence": [
-        "NotebookLM raw source content contains alternating User and Gemini turns."
-      ]
-    },
-    "385edefc-c728-4984-a144-6c6cd11adf64": {
-      "title": "Oakland Civic",
-      "classification": "excluded",
-      "reason": "Saved User/Gemini notebook-curation chat derived from other sources.",
       "evidence": [
         "NotebookLM raw source content contains alternating User and Gemini turns."
       ]
@@ -570,14 +552,6 @@
         "excluded precedent 78327e9c-62fe-4405-9a5c-b5543fd534de"
       ]
     },
-    "7c65472d-24a7-4ad3-8eaf-59a9db1a0aac": {
-      "title": "Notebook Formatting Assistant Initialization",
-      "classification": "excluded",
-      "reason": "Non-content notebook initialization artifact, not source material — same class as the already-excluded \"Mike Paulson\" / \"Oakland Civic\" saved-chat entries.",
-      "evidence": [
-        "NotebookLM raw source content"
-      ]
-    },
     "92577b7f-67e9-424a-b7c7-a210247f6616": {
       "title": "POP-00034_Reframing Success: The OARI Metric Evolution",
       "classification": "excluded",
@@ -606,55 +580,6 @@
         "docs/media/CITIZEN_NARRATIVE_MEMORY.md — no entry for POP-01046"
       ]
     },
-    "2226ad6f-dc7c-47d9-b003-dcc1149e7b7b": {
-      "title": "Simulation_Narrative - Business_Ledger",
-      "classification": "excluded",
-      "reason": "Simulation_Narrative tab-dump (Business_Ledger) — engine-derived tabular data narrated into prose, same class as the already-excluded world_summary_c100.txt: not a publication, stale-prone against live Sheet state.",
-      "evidence": [
-        "NotebookLM AI-generated source summary",
-        "docs/research/2026-07-07-simulation-narrative-open-items.md"
-      ]
-    },
-    "643194dc-7727-4494-a96c-79aee836e127": {
-      "title": "Simulation_Narrative - Initiative_Tracker",
-      "classification": "excluded",
-      "reason": "Simulation_Narrative tab-dump (Initiative_Tracker) — same class as the Business_Ledger sibling above.",
-      "evidence": [
-        "sibling entry 2226ad6f-dc7c-47d9-b003-dcc1149e7b7b"
-      ]
-    },
-    "3cc32530-82fe-4d93-b5d5-cf41c4323e44": {
-      "title": "Simulation_Narrative - Neighborhood_Demographics",
-      "classification": "excluded",
-      "reason": "Simulation_Narrative tab-dump (Neighborhood_Demographics) — same class as the Business_Ledger sibling above.",
-      "evidence": [
-        "sibling entry 2226ad6f-dc7c-47d9-b003-dcc1149e7b7b"
-      ]
-    },
-    "be06b3b9-df30-4389-8907-bf82202736bf": {
-      "title": "Simulation_Narrative - Neighborhood_Map",
-      "classification": "excluded",
-      "reason": "Simulation_Narrative tab-dump (Neighborhood_Map) — same class as the Business_Ledger sibling above.",
-      "evidence": [
-        "sibling entry 2226ad6f-dc7c-47d9-b003-dcc1149e7b7b"
-      ]
-    },
-    "bc65ed60-397d-4de4-b1fe-f853428fabee": {
-      "title": "Simulation_Narrative - Oakland_Sports_Feed",
-      "classification": "excluded",
-      "reason": "Simulation_Narrative tab-dump (Oakland_Sports_Feed) — same class as the Business_Ledger sibling above.",
-      "evidence": [
-        "sibling entry 2226ad6f-dc7c-47d9-b003-dcc1149e7b7b"
-      ]
-    },
-    "d62a5043-a859-4bcb-bb25-081a63acea25": {
-      "title": "Simulation_Narrative - Riley_Digest",
-      "classification": "excluded",
-      "reason": "Simulation_Narrative tab-dump (Riley_Digest) — same class as the Business_Ledger sibling above.",
-      "evidence": [
-        "sibling entry 2226ad6f-dc7c-47d9-b003-dcc1149e7b7b"
-      ]
-    },
     "fc84bf14-d03d-41c8-9e8a-e83abed56cfd": {
       "title": "c102_health_center_acceleration_v4.md",
       "classification": "excluded",
@@ -681,25 +606,6 @@
       "evidence": [
         "docs/mags-corliss/JOURNAL_RECENT.md:884",
         "docs/mags-corliss/SESSION_HISTORY.md:15"
-      ]
-    },
-    "a870cd68-4e21-4445-80e0-0709c806822e": {
-      "title": "Lore: AUTOSAVE-1788554266831-write-a-ledger-grounded-deep-dive-on-mag (Y3C1)",
-      "classification": "lore",
-      "reason": "Graded lore piece promoted out of quarantine by the rhea gate (pipeline.59); ledger-grounded deep background, not a published edition.",
-      "evidence": [
-        "Source file: output/lore-quarantine/AUTOSAVE-1788554266831-write-a-ledger-grounded-deep-dive-on-mag.md",
-        "Cycle placement: Y3C1",
-        "Verdict: pass (rhea) — builder ruling 2026-09-06: lore is open-book; every ledger figure verified",
-        "Source id recovered from source list after the push printed no Source ID line (S429)"
-      ]
-    },
-    "3b0b7cb7-439b-4a0c-8ea1-c3687a48432b": {
-      "title": "The Cycle Pulse — Y2C104",
-      "classification": "published",
-      "reason": "Published Cycle Pulse edition (C104), added by the Saturday run; backfilled S429 — the run never recorded it.",
-      "evidence": [
-        "editions/cycle_pulse_c104.txt"
       ]
     },
     "fe335f6a-5be4-4d67-bcd9-08e496cf2d74": {

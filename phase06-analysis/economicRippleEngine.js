@@ -506,7 +506,6 @@ function detectNewRipples_(ctx, currentCycle) {
   var cal = ctx.economicCalendarContext || {};
   var worldEvents = S.worldEvents || [];
   var citizenEvents = S.citizenEvents || [];
-  var crisisEvents = S.crisisSpikes || [];
   var domains = S.domainPresence || {};
   
   // engine.226: the detector reads WORLD events only. Citizen lines carry their text in `text`
@@ -557,17 +556,29 @@ function detectNewRipples_(ctx, currentCycle) {
     createRipple_(S, 'NEW_BUSINESS', currentCycle, { description: 'Business activity surge' }, '', cal);
   }
   
-  for (var j = 0; j < crisisEvents.length; j++) {
-    var crisis = crisisEvents[j];
-    if (crisis.type === 'natural_disaster' || crisis.severity > 7) {
-      createRipple_(S, 'NATURAL_DISASTER', currentCycle, crisis, '', cal);
+  // engine.229 (builder-graded 2026-09-15): the world's disasters are the weather model's salient
+  // events, on the hoods it names. The branch this replaces read `S.crisisSpikes` — a field nothing
+  // has ever written — and gated on `severity > 7` against severities that are the words low /
+  // medium / high; the `weather.impact >= 1.4` branch beside it never crossed on any recorded
+  // Cycle (32 rows, max 1.33) and pinned its ripple to a West Oakland literal. Neither fired once.
+  var weatherEvents = S.weatherEvents || [];
+  for (var wi = 0; wi < weatherEvents.length; wi++) {
+    var wx = weatherEvents[wi];
+    if (!wx || !wx.salient) continue;
+    var wxType = (wx.type === 'flood_conditions') ? 'NATURAL_DISASTER'
+      : (wx.type === 'storm' || wx.type === 'heat_wave') ? 'INFRASTRUCTURE_FAILURE' : null;
+    if (!wxType) continue;
+    var wxHoods = Array.isArray(wx.hoods) ? wx.hoods.filter(function(h) { return !!h; }) : [];
+    // primary = the first hood the weather engine names ("worst along …"). A citywide event
+    // passes 'all' so createRipple_ makes no rng draw from the template's hood list (the
+    // seeded stream stays byte-identical whether or not the weather turned), then reads as
+    // citywide (no primary).
+    var wxRipple = createRipple_(S, wxType, currentCycle, { description: wx.detail || wx.type }, wxHoods[0] || 'all', cal);
+    if (wxRipple) {
+      wxRipple.neighborhoods = wxHoods.length ? wxHoods.slice() : ['all'];
+      if (!wxHoods.length) wxRipple.primaryNeighborhood = '';
+      wxRipple.weatherType = wx.type;
     }
-  }
-  
-  var weather = S.weather || {};
-  if (weather.impact >= 1.4) {
-    createRipple_(S, 'INFRASTRUCTURE_FAILURE', currentCycle, 
-      { description: 'Severe weather disruption' }, 'West Oakland', cal);
   }
 }
 

@@ -580,7 +580,6 @@
         "phase06-analysis/applyCivicLoadIndicator.js::applyCivicLoadIndicator_",
         "phase06-analysis/applyMigrationDrift.js::applyMigrationDrift_",
         "phase06-analysis/applyShockMonitor.js::applyShockMonitor_",
-        "phase06-analysis/economicRippleEngine.js::detectNewRipples_",
         "phase06-analysis/filterNoiseEvents.js::filterNoiseEvents_",
         "phase06-analysis/prePublicationValidation.js::checkToneContradictions_",
         "phase06-analysis/prioritizeEvents.js::prioritizeEvents_",
@@ -2338,6 +2337,7 @@
         "phase03-population/updateNeighborhoodDemographics.js::buildHoodIllnessWeights_",
         "phase04-events/chaosCarsEngine.js::runChaosCarsEngine_",
         "phase04-events/generationalEventsEngine.js::runGenerationalEngine_",
+        "phase06-analysis/economicRippleEngine.js::detectNewRipples_",
         "phase07-evening-media/storyHook.js::storyHookEngine_"
       ]
     },

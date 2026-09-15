@@ -2339,7 +2339,7 @@
   Reads: S.economicRipples
 
 - **detectNewRipples_(ctx, currentCycle)**
-  Reads: S.citizenEvents, S.crisisSpikes, S.domainPresence, S.weather, S.worldEvents
+  Reads: S.citizenEvents, S.crisisSpikes, S.domainPresence, S.weatherEvents, S.worldEvents
 
 - **isConstructionBoom_(evt, evtText)**
 

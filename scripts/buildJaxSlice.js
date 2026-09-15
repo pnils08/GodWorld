@@ -39,6 +39,65 @@ function loadText(p) {
   try { return fs.readFileSync(p, 'utf8'); } catch (_) { return null; }
 }
 
+// --- beat-dump readers (media-lane civic tabs) --------------------------------
+// SOFT by contract: a missing/stale dump or a missing tab file yields empty
+// structures, never a throw — the stink-scanner spine must behave exactly as
+// before when the dump is absent. Rows are sheet-header-keyed objects, one
+// JSON row per line (scripts/dumpBeatTabs.js).
+function readJsonl(p) {
+  try {
+    return fs.readFileSync(p, 'utf8').split(/\r?\n/).filter(Boolean)
+      .map(line => { try { return JSON.parse(line); } catch (_) { return null; } })
+      .filter(Boolean);
+  } catch (_) { return []; }
+}
+
+function loadBeatDump(root, cycle) {
+  const dir = path.join(root, 'output', 'beats');
+  const meta = loadJson(path.join(dir, 'meta.json'));
+  if (!meta || Number(meta.cycle) !== Number(cycle)) {
+    return { ok: false, scandalRows: [], hooks: [] };
+  }
+  const scandalRows = [];
+  for (const row of readJsonl(path.join(dir, 'Civic_Office_Ledger.jsonl'))) {
+    // Scandal state lives in two fields: Status can read plain 'active' while
+    // AutoScandalUntilCycle carries the cycle the seeded scandal runs through
+    // (AutoScandalSource names why). Either signal counts.
+    const status = String(row.Status || '').trim();
+    const untilRaw = String(row.AutoScandalUntilCycle == null ? '' : row.AutoScandalUntilCycle).trim();
+    const autoUntil = untilRaw ? Number(untilRaw) : NaN;
+    const autoScandal = Number.isFinite(autoUntil) && autoUntil >= Number(cycle);
+    if (!/scandal/i.test(status) && !autoScandal) continue;
+    scandalRows.push({
+      office: String(row.Title || row.OfficeId || 'office').trim(),
+      holder: String(row.Holder || row.Name || '').trim() || null,
+      approval: String(row.Approval != null ? row.Approval : '').trim() || null,
+      status: status,
+      autoScandalSource: autoScandal
+        ? (String(row.AutoScandalSource || '').trim() || null)
+        : null,
+      source: 'output/beats/Civic_Office_Ledger.jsonl'
+    });
+  }
+  const hooks = [];
+  const seen = new Set();
+  for (const row of readJsonl(path.join(dir, 'Story_Hook_Deck.jsonl'))) {
+    if (Number(row.Cycle) !== Number(cycle)) continue;
+    if (String(row.Domain || '').toUpperCase() !== 'CIVIC') continue;
+    const text = String(row.HookText || '').trim();
+    if (!text || seen.has(text)) continue;
+    const who = String(row.SuggestedJournalist || '').trim();
+    if (who.toLowerCase() !== 'jax caldera') continue;
+    seen.add(text);
+    hooks.push({
+      text,
+      angle: String(row.SuggestedAngle || '').trim() || null,
+      hood: row.Neighborhood || null
+    });
+  }
+  return { ok: true, scandalRows, hooks };
+}
+
 function extractSection(md, heading) {
   if (!md) return null;
   const re = new RegExp('^##\\s+' + heading.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\s*$', 'mi');
@@ -395,6 +454,12 @@ function buildJaxSlice(cycle, opts) {
   }
 
   const contradiction = buildContradiction(top, report.illnessRate, auditPattern, cycle);
+
+  // Beat dump (civic tabs) — scandal office rows + Jax's CIVIC hooks.
+  // Colour/pointers on top of the stink spine; soft when the dump is absent.
+  const beatDump = loadBeatDump(root, cycle);
+  const scandalRows = beatDump.scandalRows;
+  const civicHooks = beatDump.hooks;
   const scene = {
     weather: weatherLine(summary),
     hood,
@@ -505,6 +570,8 @@ function buildJaxSlice(cycle, opts) {
     kind: 'jax-accountability',
     journalist: { name: 'Jax Caldera', popid: 'POP-00799', persona: 'freelance-firebrand' },
     approach: FIREBRAND_APPROACH,
+    scandalRows,
+    hooks: civicHooks,
     stink: {
       className: top.className,
       score: top.score,
@@ -529,7 +596,11 @@ function buildJaxSlice(cycle, opts) {
       contradiction && contradiction.aSrc,
       contradiction && contradiction.bSrc,
       top.ref
-    ].filter(Boolean),
+    ].concat(
+      (scandalRows.length || civicHooks.length)
+        ? ['output/beats/Civic_Office_Ledger.jsonl + Story_Hook_Deck.jsonl (civic, this cycle)']
+        : []
+    ).filter(Boolean),
     reportMeta: {
       illnessRate: report.illnessRate,
       maxScore: report.maxScore,
@@ -599,6 +670,22 @@ function formatJaxSliceMarkdown(slice) {
   }
   L.push('COLOR ROOM: ' + slice.scene.colorRoom);
   L.push('');
+  if ((slice.scandalRows && slice.scandalRows.length) || (slice.hooks && slice.hooks.length)) {
+    L.push('## ON THE CIVIC RECORD (beat dump — record + colour)');
+    for (const row of slice.scandalRows || []) {
+      L.push('- SCANDAL (Civic_Office_Ledger): ' + row.office +
+        (row.holder ? ' — ' + row.holder : '') +
+        (row.approval ? ' — approval ' + row.approval : '') +
+        ' [' + row.status +
+        (row.autoScandalSource ? ' — auto-scandal: ' + row.autoScandalSource : '') + ']');
+    }
+    for (const hook of slice.hooks || []) {
+      L.push('- HOOK (colour, not fact): ' + hook.text +
+        (hook.angle ? ' — angle: ' + hook.angle : '') +
+        (hook.hood ? ' [' + hook.hood + ']' : ''));
+    }
+    L.push('');
+  }
   L.push('## GAPS (deepen later)');
   for (const g of slice.gaps.missingOrThin) {
     L.push('- **' + g.source + '** [' + g.status + ']: ' + g.why);

@@ -253,6 +253,175 @@ try {
     fs.rmSync(emptyRoot, { recursive: true, force: true });
   }
 
+  // --- beat-dump wiring (media-lane civic tabs) — SYNTHETIC fixture, not canon ---
+  const beatsRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'godworld-civic-beats-'));
+  try {
+    const beatsOut = path.join(beatsRoot, 'output');
+    fs.mkdirSync(beatsOut, { recursive: true });
+    fs.writeFileSync(path.join(beatsOut, 'desk_signal_c103.json'), JSON.stringify({
+      lanes: {
+        civic: [
+          { kind: 'initiative', ref: 'INIT-SYNTH', label: 'SYNTH Test Initiative | Status active', hood: 'Fruitvale' },
+          { kind: 'anomaly', ref: 'AUDIT-SYNTH', label: 'SYNTH stuck-initiative test row', hood: 'Fruitvale' }
+        ]
+      }
+    }, null, 2));
+    const beatsDir = path.join(beatsOut, 'beats');
+    const prevDir = path.join(beatsDir, 'prev');
+    fs.mkdirSync(prevDir, { recursive: true });
+    fs.writeFileSync(path.join(beatsDir, 'meta.json'), JSON.stringify({ cycle: 103 }));
+    fs.writeFileSync(path.join(prevDir, 'meta.json'), JSON.stringify({ cycle: 102 }));
+    // Initiative_Tracker: one moved, one stuck (identical status+phase), one new.
+    fs.writeFileSync(path.join(prevDir, 'Initiative_Tracker.jsonl'), [
+      { InitiativeID: 'INIT-MOVED', Name: 'SYNTH Moved Initiative', Type: 'visioning', Status: 'visioning-complete', ImplementationPhase: 'visioning', VoteCycle: '', Outcome: '', Budget: '$10M' },
+      { InitiativeID: 'INIT-STUCK', Name: 'SYNTH Stuck Initiative', Type: 'visioning', Status: 'active', ImplementationPhase: 'planning', VoteCycle: '100', Outcome: '', Budget: '$4M' }
+    ].map(row => JSON.stringify(row)).join('\n') + '\n');
+    fs.writeFileSync(path.join(beatsDir, 'Initiative_Tracker.jsonl'), [
+      { InitiativeID: 'INIT-MOVED', Name: 'SYNTH Moved Initiative', Type: 'visioning', Status: 'active', ImplementationPhase: 'construction-active', VoteCycle: '103', Outcome: '', Budget: '$10M' },
+      { InitiativeID: 'INIT-STUCK', Name: 'SYNTH Stuck Initiative', Type: 'visioning', Status: 'active', ImplementationPhase: 'planning', VoteCycle: '100', Outcome: '', Budget: '$4M' },
+      { InitiativeID: 'INIT-NEW', Name: 'SYNTH New Initiative', Type: 'grant', Status: 'proposed', ImplementationPhase: '', VoteCycle: '', Outcome: '', Budget: '$2M' }
+    ].map(row => JSON.stringify(row)).join('\n') + '\n');
+    fs.writeFileSync(path.join(beatsDir, 'Civic_Office_Ledger.jsonl'), [
+      { OfficeId: 'MAYOR-01', Title: 'Mayor', Type: 'MAYOR', Holder: 'SYNTH Mayor Name', Status: 'active', Approval: 62, Faction: 'OPP', VotingPower: 'yes' },
+      { OfficeId: 'COUNCIL-D1', Title: 'Council D1', Type: 'COUNCIL', Holder: 'SYNTH Councilor', Status: 'scandal', Approval: 41, Faction: 'CRC', VotingPower: 'yes' },
+      { OfficeId: 'CLERK-01', Title: 'City Clerk', Type: 'STAFF', Holder: 'SYNTH Clerk', Status: 'active', Approval: '', Faction: 'STAFF', VotingPower: 'no' },
+      { OfficeId: '', Title: '', Type: '', Holder: '', Status: '', Approval: '', Faction: '', VotingPower: '' }
+    ].map(row => JSON.stringify(row)).join('\n') + '\n');
+    fs.writeFileSync(path.join(beatsDir, 'Election_Log.jsonl'), [
+      { Cycle: 103, OfficeId: 'COUNCIL-D1', Winner: 'SYNTH Councilor', Margin: '7%' }
+    ].map(row => JSON.stringify(row)).join('\n') + '\n');
+    // Civic_Ledger rows stay on disk to prove the office ledger wins when both
+    // carry factions (fallback-only coverage lives in the mini-root below).
+    fs.writeFileSync(path.join(beatsDir, 'Civic_Ledger.jsonl'), [
+      { OfficeId: 'MAYOR-01', Title: 'Mayor', Holder: 'SYNTH Mayor Name', Faction: 'OPP', VotingPower: 'yes', Approval: 62 },
+      { OfficeId: 'COUNCIL-D1', Title: 'Council D1', Holder: 'SYNTH Councilor', Faction: 'CRC', VotingPower: 'yes', Approval: 41 },
+      { OfficeId: 'CLERK-01', Title: 'City Clerk', Holder: 'SYNTH Clerk', Faction: 'STAFF', VotingPower: 'no', Approval: '' }
+    ].map(row => JSON.stringify(row)).join('\n') + '\n');
+    fs.writeFileSync(path.join(beatsDir, 'Story_Hook_Deck.jsonl'), [
+      { Cycle: 103, Domain: 'CIVIC', HookText: 'SYNTH civic hook for Carmen Delaine', SuggestedAngle: 'watch', Neighborhood: 'Fruitvale', SuggestedJournalist: 'Carmen Delaine' },
+      { Cycle: 103, Domain: 'CIVIC', HookText: 'SYNTH civic hook for Luis Navarro', SuggestedAngle: 'probe', Neighborhood: 'Downtown', SuggestedJournalist: 'Luis Navarro' },
+      { Cycle: 103, Domain: 'CIVIC', HookText: 'SYNTH civic hook for someone else', SuggestedAngle: 'x', Neighborhood: 'Downtown', SuggestedJournalist: 'Mags Corliss' },
+      { Cycle: 103, Domain: 'SPORTS', HookText: 'SYNTH sports hook for Carmen Delaine', SuggestedAngle: 'x', Neighborhood: 'Rockridge', SuggestedJournalist: 'Carmen Delaine' },
+      { Cycle: 102, Domain: 'CIVIC', HookText: 'SYNTH prior-cycle civic hook', SuggestedAngle: 'x', Neighborhood: 'Downtown', SuggestedJournalist: 'Carmen Delaine' }
+    ].map(row => JSON.stringify(row)).join('\n') + '\n');
+
+    const withDump = civic.buildCivicDomainSlice(103, { root: beatsRoot });
+    // (a) Carmen: trackerFacts carry the changed-initiative row + office rows,
+    //     her named CIVIC hook lands on packet.hooks, and the record facts
+    //     ALSO ride in prewrite.anchorFacts.
+    const carmen = withDump.packets['carmen-delaine'];
+    assert.strictEqual(carmen.empty, false);
+    assert(carmen.trackerFacts.some(f => /SYNTH Moved Initiative/.test(f) && /\[Initiative_Tracker\]/.test(f)),
+      'changed-initiative fact present with source file');
+    assert(carmen.trackerFacts.some(f => /Mayor — SYNTH Mayor Name/.test(f) && /\[Civic_Office_Ledger\]/.test(f)),
+      'office-holder fact present with source file');
+    assert(carmen.trackerFacts.length >= 4 && carmen.trackerFacts.length <= 8,
+      'trackerFacts stay in the 4–8 band');
+    assert(carmen.hooks.some(h => h.text === 'SYNTH civic hook for Carmen Delaine'),
+      'named CIVIC hook attached');
+    assert.deepStrictEqual(carmen.prewrite.anchorFacts.slice(0, 2),
+      ['SYNTH Test Initiative | Status active', 'INIT-SYNTH'],
+      'desk-signal spine facts keep their order ahead of the dump facts');
+    assert.deepStrictEqual(carmen.prewrite.anchorFacts.slice(2), carmen.trackerFacts,
+      'trackerFacts appended to anchorFacts (record facts, unlike hooks)');
+    assert(!carmen.prewrite.anchorFacts.some(f => /civic hook for/.test(f)),
+      'hooks must never leak into anchorFacts');
+    // (b) Luis: his named hook + the stuck initiative (identical status+phase
+    //     in prev/ and current) + faction standings.
+    const luis = withDump.packets['luis-navarro'];
+    assert.strictEqual(luis.empty, false);
+    assert(luis.hooks.some(h => h.text === 'SYNTH civic hook for Luis Navarro'));
+    assert(luis.stalling.some(s => /SYNTH Stuck Initiative/.test(s) && /unchanged since C102/.test(s) && /\[Initiative_Tracker\]/.test(s)),
+      'stuck initiative surfaces as a stalling row');
+    assert(luis.factions.some(f => /OPP: 1 office \(1 voting\)/.test(f) && /\[Civic_Office_Ledger\]/.test(f)),
+      'faction standings read from Civic_Office_Ledger (the tab that carries Faction/VotingPower)');
+    assert(!luis.factions.some(f => /\[Civic_Ledger\]/.test(f)),
+      'office-ledger factions win over Civic_Ledger.jsonl when both exist');
+    // Pre-sized blank rows (no OfficeId/Title/Holder/Faction) produce neither
+    // office facts nor an empty-named faction group.
+    assert.strictEqual(
+      carmen.trackerFacts.filter(f => /\[Civic_Office_Ledger\]/.test(f)).length, 3,
+      'blank pre-sized office row produces no office fact');
+    assert.strictEqual(luis.factions.length, 3, 'one faction group per real office row');
+    assert(luis.factions.every(f => !/^:\s/.test(f)),
+      'a blank Faction value never emits an empty group');
+    assert(!luis.prewrite.anchorFacts.join(' ').includes('unchanged since'),
+      'stalling colour must not leak into Luis anchorFacts');
+    // (c) unchanged-vs-prev initiatives are not "moved" for Carmen.
+    assert(!carmen.trackerFacts.some(f => /SYNTH Stuck Initiative/.test(f)),
+      'an unchanged initiative must not appear as a moved row');
+    assert(!luis.stalling.some(s => /SYNTH Moved Initiative|SYNTH New Initiative/.test(s)),
+      'moved/new initiatives must not appear as stalling');
+    // hook filtering: other journalist, other domain, other cycle.
+    for (const packet of [carmen, luis]) {
+      const name = packet.seat.slug === 'carmen-delaine' ? 'Carmen Delaine' : 'Luis Navarro';
+      assert(!packet.hooks.some(h => /someone else/.test(h.text)), 'other-journalist hook excluded (' + name + ')');
+      assert(!packet.hooks.some(h => /sports hook/.test(h.text)), 'non-CIVIC hook excluded (' + name + ')');
+      assert(!packet.hooks.some(h => /prior-cycle/.test(h.text)), 'prior-cycle hook excluded (' + name + ')');
+    }
+    const md = civic.formatCivicDomainSliceMarkdown(withDump);
+    assert(md.includes('TrackerFacts (beat dump, record facts)'), 'md renders trackerFacts section');
+    assert(md.includes('Stalling initiatives'), 'md renders stalling section');
+    assert(md.includes('Faction standings'), 'md renders factions section');
+    assert(md.includes('SYNTH civic hook for Carmen Delaine'), 'md renders hooks');
+
+    // Fallback: Civic_Office_Ledger rows carry no Faction → Civic_Ledger.jsonl
+    // rows are used and tagged [Civic_Ledger].
+    const fallbackRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'godworld-civic-fallback-'));
+    try {
+      const fbOut = path.join(fallbackRoot, 'output');
+      fs.mkdirSync(fbOut, { recursive: true });
+      fs.writeFileSync(path.join(fbOut, 'desk_signal_c103.json'), JSON.stringify({
+        lanes: { civic: [{ kind: 'anomaly', ref: 'AUDIT-SYNTH', label: 'SYNTH stuck-initiative test row', hood: 'Fruitvale' }] }
+      }, null, 2));
+      const fbBeats = path.join(fbOut, 'beats');
+      fs.mkdirSync(fbBeats, { recursive: true });
+      fs.writeFileSync(path.join(fbBeats, 'meta.json'), JSON.stringify({ cycle: 103 }));
+      fs.writeFileSync(path.join(fbBeats, 'Civic_Office_Ledger.jsonl'), [
+        { OfficeId: 'MAYOR-01', Title: 'Mayor', Holder: 'SYNTH Mayor Name', Status: 'active', Approval: 62 }
+      ].map(row => JSON.stringify(row)).join('\n') + '\n');
+      fs.writeFileSync(path.join(fbBeats, 'Civic_Ledger.jsonl'), [
+        { OfficeId: 'MAYOR-01', Title: 'Mayor', Holder: 'SYNTH Mayor Name', Faction: 'OPP', VotingPower: 'yes' }
+      ].map(row => JSON.stringify(row)).join('\n') + '\n');
+      const fbLuis = civic.buildCivicDomainSlice(103, { root: fallbackRoot }).packets['luis-navarro'];
+      assert(fbLuis.factions.some(f => /OPP: 1 office \(1 voting\)/.test(f) && /\[Civic_Ledger\]/.test(f)),
+        'Civic_Ledger.jsonl factions used when office rows carry no Faction');
+    } finally {
+      fs.rmSync(fallbackRoot, { recursive: true, force: true });
+    }
+
+    // (e) no dump at all → exactly-as-before shape, empty attachments.
+    const noDumpRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'godworld-civic-nodump-'));
+    try {
+      fs.mkdirSync(path.join(noDumpRoot, 'output'), { recursive: true });
+      fs.writeFileSync(path.join(noDumpRoot, 'output', 'desk_signal_c103.json'), JSON.stringify({
+        lanes: {
+          civic: [
+            { kind: 'initiative', ref: 'INIT-SYNTH', label: 'SYNTH Test Initiative | Status active', hood: 'Fruitvale' },
+            { kind: 'anomaly', ref: 'AUDIT-SYNTH', label: 'SYNTH stuck-initiative test row', hood: 'Fruitvale' }
+          ]
+        }
+      }, null, 2));
+      const withoutDump = civic.buildCivicDomainSlice(103, { root: noDumpRoot });
+      const carmenBare = withoutDump.packets['carmen-delaine'];
+      const luisBare = withoutDump.packets['luis-navarro'];
+      assert.deepStrictEqual(carmenBare.trackerFacts, [], 'no dump → empty trackerFacts');
+      assert.deepStrictEqual(carmenBare.hooks, [], 'no dump → empty hooks');
+      assert.deepStrictEqual(carmenBare.prewrite.anchorFacts,
+        ['SYNTH Test Initiative | Status active', 'INIT-SYNTH'],
+        'no dump → Carmen anchorFacts exactly as before');
+      assert.deepStrictEqual(luisBare.hooks, [], 'no dump → empty hooks (Luis)');
+      assert.deepStrictEqual(luisBare.stalling, [], 'no dump → empty stalling');
+      assert.deepStrictEqual(luisBare.factions, [], 'no dump → empty factions');
+      assert(!civic.formatCivicDomainSliceMarkdown(withoutDump).includes('TrackerFacts'),
+        'no dump → md omits the dump sections');
+    } finally {
+      fs.rmSync(noDumpRoot, { recursive: true, force: true });
+    }
+  } finally {
+    fs.rmSync(beatsRoot, { recursive: true, force: true });
+  }
+
   console.log('buildCivicDomainSlice.test.js PASS');
 } finally {
   fs.rmSync(root, { recursive: true, force: true });

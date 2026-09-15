@@ -239,6 +239,158 @@ function loadJson(file) {
   try { return JSON.parse(fs.readFileSync(file, 'utf8')); } catch (_) { return null; }
 }
 
+// --- beat-dump readers (media-lane civic tabs) --------------------------------
+// SOFT by contract: a missing/stale dump or a missing tab file yields empty
+// structures, never a throw — the desk_signal spine must behave exactly as
+// before when the dump is absent. Rows are sheet-header-keyed objects, one
+// JSON row per line (scripts/dumpBeatTabs.js).
+function readJsonl(file) {
+  try {
+    return fs.readFileSync(file, 'utf8').split(/\r?\n/).filter(Boolean)
+      .map(line => { try { return JSON.parse(line); } catch (_) { return null; } })
+      .filter(Boolean);
+  } catch (_) { return []; }
+}
+
+const CIVIC_DUMP_TABS = ['Initiative_Tracker', 'Civic_Office_Ledger', 'Election_Log', 'Civic_Ledger', 'Story_Hook_Deck'];
+
+function loadBeatDump(cycle, root = ROOT) {
+  const dir = path.join(root, 'output', 'beats');
+  const meta = loadJson(path.join(dir, 'meta.json'));
+  if (!meta || Number(meta.cycle) !== Number(cycle)) {
+    return { ok: false, cycle: Number(cycle), tabs: {}, prevTabs: {}, prevCycle: null };
+  }
+  const tabs = {};
+  for (const tab of CIVIC_DUMP_TABS) tabs[tab] = readJsonl(path.join(dir, tab + '.jsonl'));
+  // prev/ holds exactly one prior dump (rotatePrev), staged with its own
+  // meta.json. Any strictly-earlier stamp is a usable baseline for diffs.
+  const prevMeta = loadJson(path.join(dir, 'prev', 'meta.json'));
+  const prevCycle = prevMeta && Number(prevMeta.cycle) < Number(cycle) ? Number(prevMeta.cycle) : null;
+  const prevTabs = {};
+  if (prevCycle != null) {
+    for (const tab of ['Initiative_Tracker', 'Civic_Office_Ledger', 'Civic_Ledger']) {
+      prevTabs[tab] = readJsonl(path.join(dir, 'prev', tab + '.jsonl'));
+    }
+  }
+  return { ok: true, cycle: Number(cycle), tabs, prevTabs, prevCycle };
+}
+
+// This cycle's CIVIC-domain Story_Hook_Deck rows naming a journalist —
+// colour/pointers only, NEVER anchorFacts.
+function civicHooksFor(deck, journalistName) {
+  if (!deck || !deck.ok) return [];
+  const seen = new Set();
+  const out = [];
+  for (const r of deck.tabs.Story_Hook_Deck || []) {
+    if (Number(r.Cycle) !== Number(deck.cycle)) continue;
+    if (String(r.Domain || '').toUpperCase() !== 'CIVIC') continue;
+    const text = String(r.HookText || '').trim();
+    if (!text || seen.has(text)) continue;
+    const who = String(r.SuggestedJournalist || '').trim();
+    if (who.toLowerCase() !== String(journalistName).toLowerCase()) continue;
+    seen.add(text);
+    out.push({ text, angle: String(r.SuggestedAngle || '').trim() || null, hood: r.Neighborhood || null });
+  }
+  return out;
+}
+
+// The columns a per-cycle diff cares about, per civicInitiativeEngine.js:
+// Status, ImplementationPhase (v1.9), VoteCycle, and Outcome.
+function initiativeMotionKey(row) {
+  return ['Status', 'ImplementationPhase', 'VoteCycle', 'Outcome']
+    .map(col => String(row[col] == null ? '' : row[col]).trim().toLowerCase())
+    .join('|');
+}
+
+function initiativeFact(row) {
+  const name = String(row.Name || row.InitiativeID || 'initiative').trim();
+  const bits = [];
+  if (String(row.Status || '').trim()) bits.push('status ' + String(row.Status).trim());
+  if (String(row.ImplementationPhase || '').trim()) bits.push('phase ' + String(row.ImplementationPhase).trim());
+  if (String(row.VoteCycle || '').trim()) bits.push('VoteCycle ' + String(row.VoteCycle).trim());
+  if (String(row.Outcome || '').trim()) bits.push('outcome ' + String(row.Outcome).trim());
+  if (String(row.Budget || '').trim()) bits.push('budget ' + String(row.Budget).trim());
+  return name + ' — ' + (bits.join(', ') || 'listed') + ' [Initiative_Tracker]';
+}
+
+// Carmen: initiatives whose record moved this cycle vs prev/ (new rows count
+// as moved). Without prev/, fall back to rows carrying a vote/outcome this
+// cycle — the columns civicInitiativeEngine writes per cycle.
+function movedInitiativeRows(deck) {
+  const cur = deck.tabs.Initiative_Tracker || [];
+  const prev = deck.prevTabs.Initiative_Tracker || [];
+  if (!prev.length) {
+    return cur.filter(row => Number(row.VoteCycle) === Number(deck.cycle) ||
+      String(row.Outcome || '').trim());
+  }
+  const prevById = new Map(prev.map(row => [String(row.InitiativeID || ''), row]));
+  return cur.filter(row => {
+    const prevRow = prevById.get(String(row.InitiativeID || ''));
+    if (!prevRow) return true;
+    return initiativeMotionKey(row) !== initiativeMotionKey(prevRow);
+  });
+}
+
+// Luis: initiatives whose status/phase is UNCHANGED vs prev/ — the stuck
+// record. Without prev/ there is no stall to claim.
+function stallingInitiativeRows(deck) {
+  const cur = deck.tabs.Initiative_Tracker || [];
+  const prev = deck.prevTabs.Initiative_Tracker || [];
+  if (!prev.length) return [];
+  const prevById = new Map(prev.map(row => [String(row.InitiativeID || ''), row]));
+  return cur.filter(row => {
+    const prevRow = prevById.get(String(row.InitiativeID || ''));
+    if (!prevRow) return false;
+    return String(row.Status || '').trim().toLowerCase() === String(prevRow.Status || '').trim().toLowerCase() &&
+      String(row.ImplementationPhase || '').trim().toLowerCase() ===
+        String(prevRow.ImplementationPhase || '').trim().toLowerCase();
+  });
+}
+
+function officeFact(row) {
+  const office = String(row.Title || row.OfficeId || 'office').trim();
+  const holder = String(row.Holder || row.Name || '').trim();
+  const bits = [office + (holder ? ' — ' + holder : '')];
+  if (String(row.Approval != null ? row.Approval : '').trim() !== '') {
+    bits.push('approval ' + String(row.Approval).trim());
+  }
+  if (String(row.Status || '').trim()) bits.push(String(row.Status).trim());
+  return bits.join(' — ') + ' [Civic_Office_Ledger]';
+}
+
+// Luis: current faction standings from Civic_Ledger (the Faction/VotingPower
+// columns updateCivicLedgerFactions maintains). Colour/pointers only.
+function factionStandings(rows, sourceTag) {
+  const groups = new Map();
+  for (const row of rows || []) {
+    const faction = String(row.Faction || '').trim().toUpperCase();
+    if (!faction) continue;
+    if (!groups.has(faction)) groups.set(faction, { offices: 0, voting: 0, holders: [] });
+    const g = groups.get(faction);
+    g.offices += 1;
+    if (/^yes$/i.test(String(row.VotingPower || '').trim())) g.voting += 1;
+    const holder = String(row.Holder || row.Name || '').trim();
+    if (holder && g.holders.length < 3 && !g.holders.includes(holder)) g.holders.push(holder);
+  }
+  return [...groups.entries()].map(([faction, g]) =>
+    faction + ': ' + g.offices + ' office' + (g.offices === 1 ? '' : 's') +
+    (g.voting ? ' (' + g.voting + ' voting)' : '') +
+    (g.holders.length ? ' — ' + g.holders.join(', ') : '') + ' [' + sourceTag + ']');
+}
+
+// The Faction/VotingPower columns are written onto Civic_Office_Ledger by
+// updateCivicLedgerFactions.js — no writer maintains a tab literally named
+// Civic_Ledger. Read the office ledger first; fall back to Civic_Ledger.jsonl
+// rows only when no office row carries a Faction value.
+function loadFactionStandings(deck) {
+  if (!deck || !deck.ok) return [];
+  const officeRows = deck.tabs.Civic_Office_Ledger || [];
+  if (officeRows.some(row => String(row.Faction || '').trim())) {
+    return factionStandings(officeRows, 'Civic_Office_Ledger');
+  }
+  return factionStandings(deck.tabs.Civic_Ledger || [], 'Civic_Ledger');
+}
+
 function loadCitizenProfiles(root = ROOT) {
   const file = path.join(root, 'output', 'simulation_ledger_snapshot.jsonl');
   const out = new Map();
@@ -634,7 +786,7 @@ function prewriteForSeat(slug, top, candidateScope, cityHealth) {
   };
 }
 
-function packetForEntries(entries, slug, profiles) {
+function packetForEntries(entries, slug, profiles, deck) {
   const seat = CIVIC_SEATS[slug];
   if (!seat) return null;
   const candidates = entries
@@ -672,7 +824,7 @@ function packetForEntries(entries, slug, profiles) {
         : slug === 'noah-tan'
           ? (top.kind === 'season-feel' ? top.label : publicWeatherFact(top))
           : top.label;
-  return {
+  const packet = {
     seat: { slug, name: seat.name, popid: seat.popid, domain: seat.domain },
     empty: false,
     approach: seat.approach,
@@ -703,13 +855,58 @@ function packetForEntries(entries, slug, profiles) {
     candidates,
     pointers: unique(candidates.map(candidate => candidate.ref))
   };
+  attachCivicDump(packet, slug, deck);
+  return packet;
+}
+
+// Beat-dump attachments for the two live civic seats. Carmen gets record
+// facts (trackerFacts, also appended to her anchorFacts) plus CIVIC hooks;
+// Luis gets CIVIC hooks, stalling-initiative colour, and faction standings.
+// Hooks/stalling/factions are colour/pointers — never anchorFacts. Every read
+// is soft: a missing/stale dump leaves all four fields empty.
+function attachCivicDump(packet, slug, deck) {
+  if (!packet || packet.empty) return packet;
+  if (slug === 'carmen-delaine') {
+    const moved = deck && deck.ok ? movedInitiativeRows(deck) : [];
+    const offices = deck && deck.ok ? (deck.tabs.Civic_Office_Ledger || []) : [];
+    // The tab is pre-sized with fully blank rows (no OfficeId/Title/Holder) —
+    // keep them out so they cannot eat the fact cap with placeholder facts.
+    const realOffices = offices.filter(row =>
+      String(row.OfficeId || '').trim() ||
+      String(row.Title || '').trim() ||
+      String(row.Holder || row.Name || '').trim());
+    const trackerFacts = moved.map(initiativeFact)
+      .concat(realOffices.map(officeFact))
+      .slice(0, 8);
+    packet.trackerFacts = trackerFacts;
+    if (trackerFacts.length) {
+      packet.prewrite.anchorFacts = (packet.prewrite.anchorFacts || []).concat(trackerFacts);
+    }
+    packet.hooks = civicHooksFor(deck, 'Carmen Delaine');
+    return packet;
+  }
+  if (slug === 'luis-navarro') {
+    const stalled = deck && deck.ok ? stallingInitiativeRows(deck) : [];
+    packet.hooks = civicHooksFor(deck, 'Luis Navarro');
+    packet.stalling = stalled.map(row =>
+      String(row.Name || row.InitiativeID || 'initiative').trim() +
+      ' — still ' + (String(row.Status || '').trim() || 'listed') +
+      (String(row.ImplementationPhase || '').trim()
+        ? ' / ' + String(row.ImplementationPhase).trim() : '') +
+      (deck.prevCycle != null ? ' (unchanged since C' + deck.prevCycle + ')' : '') +
+      ' [Initiative_Tracker]');
+    packet.factions = loadFactionStandings(deck);
+    return packet;
+  }
+  return packet;
 }
 
 function buildCivicDomainSlice(cycle, { root = ROOT } = {}) {
   const profiles = loadCitizenProfiles(root);
   const entries = loadCycleCivicEntries(cycle, root, profiles);
+  const deck = loadBeatDump(cycle, root);
   const packets = Object.fromEntries(Object.keys(CIVIC_SEATS).map(slug =>
-    [slug, packetForEntries(entries, slug, profiles)]));
+    [slug, packetForEntries(entries, slug, profiles, deck)]));
   const nonempty = Object.values(packets).filter(packet => packet && !packet.empty);
   return {
     version: 'CIVIC-DOMAIN-SLICE-5',
@@ -746,6 +943,25 @@ function formatCivicDomainSliceMarkdown(slice) {
     lines.push('- Candidates:');
     for (const candidate of packet.candidates) {
       lines.push('  - [' + candidate.score + '] ' + candidate.label + ' — ' + candidate.ref);
+    }
+    if (packet.trackerFacts && packet.trackerFacts.length) {
+      lines.push('- TrackerFacts (beat dump, record facts):');
+      for (const fact of packet.trackerFacts) lines.push('  - ' + fact);
+    }
+    if (packet.stalling && packet.stalling.length) {
+      lines.push('- Stalling initiatives (unchanged vs prev cycle, colour):');
+      for (const row of packet.stalling) lines.push('  - ' + row);
+    }
+    if (packet.factions && packet.factions.length) {
+      lines.push('- Faction standings (colour):');
+      for (const row of packet.factions) lines.push('  - ' + row);
+    }
+    if (packet.hooks && packet.hooks.length) {
+      lines.push('- Engine hooks (colour, not fact):');
+      for (const hook of packet.hooks) {
+        lines.push('  - ' + hook.text + (hook.angle ? ' — angle: ' + hook.angle : '') +
+          (hook.hood ? ' [' + hook.hood + ']' : ''));
+      }
     }
     lines.push('');
   }

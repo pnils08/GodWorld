@@ -129,6 +129,78 @@ if (!fs.existsSync(signalPath)) {
     !slice.contradiction.aSrc || /A REF:/.test(md));
 }
 
+console.log('beat-dump wiring (civic tabs, synthetic fixture):');
+{
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'jax-beats-'));
+  fs.mkdirSync(path.join(tmp, 'output'), { recursive: true });
+  fs.writeFileSync(path.join(tmp, 'output', 'simulation_ledger_snapshot.jsonl'), [
+    { POPID: 'POP-99001', Name: 'Test Resident One', RoleType: 'Mechanic', Neighborhood: 'Test Hood', Status: 'active' },
+  ].map(row => JSON.stringify(row)).join('\n') + '\n');
+  const beatsDir = path.join(tmp, 'output', 'beats');
+  fs.mkdirSync(beatsDir, { recursive: true });
+  fs.writeFileSync(path.join(beatsDir, 'meta.json'), JSON.stringify({ cycle: 998 }));
+  fs.writeFileSync(path.join(beatsDir, 'Civic_Office_Ledger.jsonl'), [
+    { OfficeId: 'MAYOR-01', Title: 'Mayor', Holder: 'SYNTH Scandal Official', Status: 'scandal', Approval: 33 },
+    { OfficeId: 'CLERK-01', Title: 'City Clerk', Holder: 'SYNTH Clean Clerk', Status: 'active', Approval: 71 },
+    { OfficeId: 'AUD-01', Title: 'Auditor', Holder: 'SYNTH Auto Official', Status: 'active', Approval: 55,
+      AutoScandalUntilCycle: 999, AutoScandalSource: 'approval-ceiling' },
+    { OfficeId: 'TREAS-01', Title: 'Treasurer', Holder: 'SYNTH Past Official', Status: 'active', Approval: 80,
+      AutoScandalUntilCycle: 997, AutoScandalSource: 'approval-ceiling' }
+  ].map(row => JSON.stringify(row)).join('\n') + '\n');
+  fs.writeFileSync(path.join(beatsDir, 'Story_Hook_Deck.jsonl'), [
+    { Cycle: 998, Domain: 'CIVIC', HookText: 'SYNTH civic hook for Jax Caldera', SuggestedAngle: 'stink', Neighborhood: 'Downtown', SuggestedJournalist: 'Jax Caldera' },
+    { Cycle: 998, Domain: 'CIVIC', HookText: 'SYNTH civic hook for someone else', SuggestedAngle: 'x', Neighborhood: 'Downtown', SuggestedJournalist: 'Mags Corliss' },
+    { Cycle: 998, Domain: 'SPORTS', HookText: 'SYNTH sports hook for Jax Caldera', SuggestedAngle: 'x', Neighborhood: 'Rockridge', SuggestedJournalist: 'Jax Caldera' },
+    { Cycle: 997, Domain: 'CIVIC', HookText: 'SYNTH prior-cycle civic hook', SuggestedAngle: 'x', Neighborhood: 'Downtown', SuggestedJournalist: 'Jax Caldera' }
+  ].map(row => JSON.stringify(row)).join('\n') + '\n');
+  const healthTop = {
+    label: 'crisis-unattended (high) | TEST-ONLY illness 10.1%',
+    ref: 'output/world_summary_c998.md#illness-rate', className: 'crisis-unattended',
+    score: 40, kind: 'health-crisis', story: { illnessRate: 10.1 }, popids: []
+  };
+  const slice = buildJaxSlice(998, { root: tmp, report: {
+    top: healthTop, candidates: [healthTop], illnessRate: 10.1,
+    maxScore: 40, shouldForce: true, candidateCount: 1
+  } });
+  ok('status-scandal row carried', slice.scandalRows.some(r =>
+    r.office === 'Mayor' && r.holder === 'SYNTH Scandal Official' &&
+    r.approval === '33' && r.status === 'scandal'));
+  ok('auto-scandal row carried while Status stays active', slice.scandalRows.some(r =>
+    r.office === 'Auditor' && r.holder === 'SYNTH Auto Official' &&
+    r.status === 'active' && r.autoScandalSource === 'approval-ceiling'));
+  ok('expired auto-scandal row excluded', !slice.scandalRows.some(r => /Past Official/.test(r.holder || '')));
+  ok('clean non-scandal office row excluded', !slice.scandalRows.some(r => /Clean Clerk/.test(r.holder || '')));
+  ok('Jax-named CIVIC hook attached', slice.hooks.length === 1 &&
+    slice.hooks[0].text === 'SYNTH civic hook for Jax Caldera' &&
+    slice.hooks[0].hood === 'Downtown');
+  ok('other-journalist / other-domain / prior-cycle hooks excluded',
+    !slice.hooks.some(h => /someone else|sports hook|prior-cycle/.test(h.text)));
+  ok('beat-dump pointers entry present', slice.pointers.some(p =>
+    /Civic_Office_Ledger\.jsonl \+ Story_Hook_Deck\.jsonl \(civic, this cycle\)/.test(p)));
+  const md = formatJaxSliceMarkdown(slice);
+  ok('markdown has ON THE CIVIC RECORD section', /## ON THE CIVIC RECORD/.test(md) &&
+    /SCANDAL \(Civic_Office_Ledger\): Mayor — SYNTH Scandal Official — approval 33 \[scandal\]/.test(md) &&
+    /SCANDAL \(Civic_Office_Ledger\): Auditor — SYNTH Auto Official — approval 55 \[active — auto-scandal: approval-ceiling\]/.test(md) &&
+    /SYNTH civic hook for Jax Caldera/.test(md));
+
+  // (e) no dump at all → exactly-as-before shape, empty attachments.
+  const bare = fs.mkdtempSync(path.join(os.tmpdir(), 'jax-nodump-'));
+  fs.mkdirSync(path.join(bare, 'output'), { recursive: true });
+  fs.writeFileSync(path.join(bare, 'output', 'simulation_ledger_snapshot.jsonl'), [
+    { POPID: 'POP-99001', Name: 'Test Resident One', RoleType: 'Mechanic', Neighborhood: 'Test Hood', Status: 'active' },
+  ].map(row => JSON.stringify(row)).join('\n') + '\n');
+  const bareSlice = buildJaxSlice(998, { root: bare, report: {
+    top: healthTop, candidates: [healthTop], illnessRate: 10.1,
+    maxScore: 40, shouldForce: true, candidateCount: 1
+  } });
+  ok('no dump → empty scandalRows', Array.isArray(bareSlice.scandalRows) && bareSlice.scandalRows.length === 0);
+  ok('no dump → empty hooks', Array.isArray(bareSlice.hooks) && bareSlice.hooks.length === 0);
+  ok('no dump → md omits ON THE CIVIC RECORD', !/## ON THE CIVIC RECORD/.test(formatJaxSliceMarkdown(bareSlice)));
+  ok('no dump → no beat-dump pointers entry', !bareSlice.pointers.some(p => /beats/.test(p)));
+  fs.rmSync(bare, { recursive: true, force: true });
+  fs.rmSync(tmp, { recursive: true, force: true });
+}
+
 if (failures) {
   console.error('\nbuildJaxSlice tests: ' + failures + ' FAILURE(S)');
   process.exit(1);

@@ -68,6 +68,10 @@ const OPTIONAL_TABS = [
   'Cultural_Ledger',          // Kai / Sharon — fame scores + trajectories per cultural figure
   'Oakland_Sports_Feed',      // sports seats — raw feed rows (A's AND Oaks; FranchiseStability, EconomicFootprint survive here)
   // Chicago_Sports_Feed is NOT dumped: dead legacy tab (Bulls rows end C91; Chicago is retired from the sim). The Oaks live on Oakland_Sports_Feed.
+  'Initiative_Tracker',       // Carmen / Luis — votes, phases, budgets (the civic record raw)
+  'Civic_Office_Ledger',      // Carmen / Jax — office holders, approvals, Status=scandal
+  'Election_Log',             // Carmen — outcomes and margins
+  'Civic_Ledger',             // Luis — faction standings
 ];
 
 const args = process.argv.slice(2);

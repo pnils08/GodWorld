@@ -438,6 +438,11 @@ function buildHalSlice(cycle, opts) {
   const presentFacts = buildPublishablePresentFacts(row, players, cyc);
   const claim = buildHistorianClaim(row, cls, foil, closing);
 
+  // Engine beat decks — COLOUR/POINTERS only, never facts (no merge into presentFacts)
+  const decks = sports.loadBeatDecks(root, cyc);
+  const hooks = sports.sportsHooks(decks, cyc, 'Hal Richmond');
+  const seeds = sports.sportsSeeds(decks, cyc, 'Hal Richmond');
+
   const safeLabel = (row.team || 'Sports') + ' — ' + (row.eventKind || 'feed') +
     ' — supplied C' + cyc + ' line card';
   const story = {
@@ -473,10 +478,11 @@ function buildHalSlice(cycle, opts) {
       'No x-stats / barrel% / invented OPS+',
       'Not a business-desk storefront assignment',
       'Not P Slayer charge; not Anthony board architecture as spine'
-    ]
+    ],
+    hooks
   };
 
-  return {
+  const slice = {
     empty: false,
     cycle: cyc,
     kind: 'hal-archive',
@@ -514,6 +520,8 @@ function buildHalSlice(cycle, opts) {
       frame: 'Present first, then echo — end on ' + closing + '.'
     },
     prewrite,
+    hooks,
+    seeds,
     priorTakes: priors,
     story,
     approach: HAL_APPROACH,
@@ -542,6 +550,10 @@ function buildHalSlice(cycle, opts) {
       'docs/plans/2026-08-08-journalist-heat-slice-packs.md Task 5'
     ]
   };
+  if (hooks.length || seeds.length) {
+    slice.pointers.push('output/beats/Story_Hook_Deck.jsonl + Story_Seed_Deck.jsonl (sports, this cycle)');
+  }
+  return slice;
 }
 
 function formatHalSliceMarkdown(slice) {
@@ -615,6 +627,21 @@ function formatHalSliceMarkdown(slice) {
       ' — ' + c.angle);
   }
   L.push('');
+  if ((slice.hooks && slice.hooks.length) || (slice.seeds && slice.seeds.length)) {
+    L.push('## ENGINE HOOKS / SEEDS (colour, not fact)');
+    L.push('_Colour and pointers only — never merge into presentFacts / anchorFacts._');
+    for (const h of slice.hooks || []) {
+      L.push('- HOOK: ' + h.text + (h.angle ? ' — angle: ' + h.angle : '') +
+        (h.hood ? ' [' + h.hood + ']' : ''));
+    }
+    for (const s of slice.seeds || []) {
+      L.push('- SEED: ' + (s.seedId || 'seed') + (s.angle ? ' — ' + s.angle : '') +
+        (s.hood ? ' [' + s.hood + ']' : '') +
+        (s.citizens && s.citizens.length ? ' · citizens: ' + s.citizens.join(', ') : '') +
+        (s.businesses && s.businesses.length ? ' · businesses: ' + s.businesses.join(', ') : ''));
+    }
+    L.push('');
+  }
   L.push('## POINTERS');
   for (const p of slice.pointers || []) L.push('- ' + p);
   L.push('');

@@ -484,6 +484,11 @@ function buildPSlayerSlice(cycle, opts) {
   const priors = matchPriorTakes(row, priorCols, 4);
   const friction = buildContradiction(row, cls);
 
+  // Engine beat decks — COLOUR/POINTERS only, never facts (no merge into anchorFacts)
+  const decks = sports.loadBeatDecks(root, cyc);
+  const hooks = sports.sportsHooks(decks, cyc, 'P Slayer');
+  const seeds = sports.sportsSeeds(decks, cyc, 'P Slayer');
+
   // Prefer NamesUsed (structured) then angle; notes last (noisier prose)
   const namePool = [
     ...extractPlayerNames(row.namesUsed),
@@ -516,7 +521,8 @@ function buildPSlayerSlice(cycle, opts) {
       : 'NONE — write cold or invent no prior; wall may still inject at wake',
     anchorFacts: anchors.slice(0, 4),
     foilNumber: foil || 'NONE',
-    centralFeeling: centralFeeling(cls, fanCharge)
+    centralFeeling: centralFeeling(cls, fanCharge),
+    hooks
   };
 
   const story = {
@@ -560,7 +566,7 @@ function buildPSlayerSlice(cycle, opts) {
     priorHits: s.priorHits
   }));
 
-  return {
+  const slice = {
     cycle: cyc,
     builtAt: new Date().toISOString(),
     empty: false,
@@ -591,6 +597,8 @@ function buildPSlayerSlice(cycle, opts) {
       palette: CHARGE_PALETTE
     },
     prewrite,
+    hooks,
+    seeds,
     friction,
     priorTakes: priors,
     story,
@@ -626,6 +634,10 @@ function buildPSlayerSlice(cycle, opts) {
       ]
     }
   };
+  if (hooks.length || seeds.length) {
+    slice.pointers.push('output/beats/Story_Hook_Deck.jsonl + Story_Seed_Deck.jsonl (sports, this cycle)');
+  }
+  return slice;
 }
 
 function formatPSlayerSliceMarkdown(slice) {
@@ -711,6 +723,21 @@ function formatPSlayerSliceMarkdown(slice) {
       (c.priorHits ? ' (priorHits=' + c.priorHits + ')' : ''));
   }
   L.push('');
+  if ((slice.hooks && slice.hooks.length) || (slice.seeds && slice.seeds.length)) {
+    L.push('## ENGINE HOOKS / SEEDS (colour, not fact)');
+    L.push('_Colour and pointers only — never merge into anchorFacts._');
+    for (const h of slice.hooks || []) {
+      L.push('- HOOK: ' + h.text + (h.angle ? ' — angle: ' + h.angle : '') +
+        (h.hood ? ' [' + h.hood + ']' : ''));
+    }
+    for (const s of slice.seeds || []) {
+      L.push('- SEED: ' + (s.seedId || 'seed') + (s.angle ? ' — ' + s.angle : '') +
+        (s.hood ? ' [' + s.hood + ']' : '') +
+        (s.citizens && s.citizens.length ? ' · citizens: ' + s.citizens.join(', ') : '') +
+        (s.businesses && s.businesses.length ? ' · businesses: ' + s.businesses.join(', ') : ''));
+    }
+    L.push('');
+  }
   L.push('## POINTERS');
   for (const p of slice.pointers) L.push('- ' + p);
   L.push('');

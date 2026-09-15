@@ -5,6 +5,7 @@
 'use strict';
 
 const fs = require('fs');
+const os = require('os');
 const path = require('path');
 const {
   buildHalSlice,
@@ -137,6 +138,78 @@ if (fs.existsSync(summary103)) {
 }
 
 ok('HAL_APPROACH', typeof HAL_APPROACH === 'string' && HAL_APPROACH.length > 40);
+
+// --- engine beat-deck wiring (pipeline.68) — SYNTHETIC fixture root, not canon ---
+function synthFixtureRoot(cycle, journalist, withDecks) {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'gw-beats-hal-'));
+  const outDir = path.join(root, 'output');
+  fs.mkdirSync(outDir, { recursive: true });
+  fs.writeFileSync(path.join(outDir, 'world_summary_c' + cycle + '.md'), [
+    '# World Summary C' + cycle + ' (SYNTHETIC TEST FIXTURE — not canon)',
+    '',
+    '## Sports',
+    '',
+    '### C' + cycle + ' (2 entries)',
+    '',
+    "- **A's — game-result (late-season):** Danny Horn (CF)",
+    '  - StoryAngle: Danny Horn stays hot as the club keeps winning',
+    '  - Notes: SYNTHETIC fixture row for beat-deck wiring tests only',
+    '  - Stats: Danny Horn 2-4, HR, 3 RBI',
+    '  - Record 77-25, Streak W5, Mood locked-in, FanSentiment electric, Neighborhood Rockridge',
+    "- **A's — player-feature (late-season):** Benji Dillon (SP)",
+    '  - StoryAngle: Benji Dillon moves to the bullpen for the remainder of the season',
+    '  - Notes: SYNTHETIC fixture row for beat-deck wiring tests only',
+    '  - Stats: -',
+    '  - Record 77-25, Streak W5, Mood reflective, FanSentiment high, Neighborhood Lake Merritt',
+    ''
+  ].join('\n'));
+  if (withDecks) {
+    const beatsDir = path.join(outDir, 'beats');
+    fs.mkdirSync(beatsDir, { recursive: true });
+    fs.writeFileSync(path.join(beatsDir, 'meta.json'), JSON.stringify({ cycle: cycle }));
+    const hooks = [
+      { Cycle: cycle, Domain: 'SPORTS', HookText: 'SYNTH named hook for ' + journalist, SuggestedAngle: 'angle-named', Neighborhood: 'Rockridge', SuggestedJournalist: journalist },
+      { Cycle: cycle, Domain: 'SPORTS', HookText: 'SYNTH hook for a different journalist', SuggestedAngle: 'angle-other', Neighborhood: 'Fruitvale', SuggestedJournalist: 'Mags Corliss' },
+      { Cycle: cycle, Domain: 'SPORTS', HookText: 'SYNTH unnamed sports hook', SuggestedAngle: 'angle-unnamed', Neighborhood: '', SuggestedJournalist: '' },
+      { Cycle: cycle, Domain: 'CIVIC', HookText: 'SYNTH civic-domain hook for ' + journalist, SuggestedAngle: 'angle-civic', Neighborhood: 'Downtown', SuggestedJournalist: journalist },
+      { Cycle: cycle - 1, Domain: 'SPORTS', HookText: 'SYNTH prior-cycle sports hook', SuggestedAngle: 'angle-prior', Neighborhood: 'Temescal', SuggestedJournalist: journalist }
+    ];
+    const seeds = [
+      { Cycle: cycle, Desk: 'sports', SeedID: 'SEED-SYN-NAMED', SuggestedJournalist: journalist, Neighborhood: 'Rockridge', Citizens: 'Citizen One; Citizen Two', Businesses: 'Biz One', SuggestedAngle: 'seed-angle' },
+      { Cycle: cycle, Desk: 'sports', SeedID: 'SEED-SYN-OTHER', SuggestedJournalist: 'Mags Corliss', Neighborhood: 'Fruitvale', Citizens: 'Citizen Three', Businesses: '', SuggestedAngle: 'other-angle' },
+      { Cycle: cycle - 1, Desk: 'sports', SeedID: 'SEED-SYN-PRIOR', SuggestedJournalist: journalist, Neighborhood: 'Temescal', Citizens: '', Businesses: '', SuggestedAngle: 'prior-angle' },
+      { Cycle: cycle, Desk: 'civic', SeedID: 'SEED-SYN-CIVIC', SuggestedJournalist: journalist, Neighborhood: 'Downtown', Citizens: '', Businesses: '', SuggestedAngle: 'civic-angle' }
+    ];
+    fs.writeFileSync(path.join(beatsDir, 'Story_Hook_Deck.jsonl'), hooks.map(h => JSON.stringify(h)).join('\n') + '\n');
+    fs.writeFileSync(path.join(beatsDir, 'Story_Seed_Deck.jsonl'), seeds.map(s => JSON.stringify(s)).join('\n') + '\n');
+  }
+  return root;
+}
+
+console.log('beat-deck wiring (synthetic fixture root):');
+{
+  const FIX_CYCLE = 910;
+  const root = synthFixtureRoot(FIX_CYCLE, 'Hal Richmond', true);
+  const slice = buildHalSlice(FIX_CYCLE, { root: root });
+  ok('fixture slice not empty', slice && !slice.empty);
+  ok('named SPORTS hook in slice.hooks', (slice.hooks || []).some(h => h.text === 'SYNTH named hook for Hal Richmond'));
+  ok('named SPORTS hook mirrored in prewrite.hooks', (slice.prewrite.hooks || []).some(h => h.text === 'SYNTH named hook for Hal Richmond'));
+  ok('unnamed SPORTS hook excluded (no opts.unnamed)', !(slice.hooks || []).some(h => /unnamed/.test(h.text)));
+  ok('other-journalist hook excluded', !(slice.hooks || []).some(h => /different journalist/.test(h.text)));
+  ok('civic-domain hook excluded', !(slice.hooks || []).some(h => /civic-domain/.test(h.text)));
+  ok('prior-cycle hook excluded', !(slice.hooks || []).some(h => /prior-cycle/.test(h.text)));
+  ok('named sports-desk seed in slice.seeds', (slice.seeds || []).some(s => s.seedId === 'SEED-SYN-NAMED'));
+  ok('prior-cycle seed excluded', !(slice.seeds || []).some(s => s.seedId === 'SEED-SYN-PRIOR'));
+  ok('beat-decks pointer entry present', (slice.pointers || []).some(p => /Story_Hook_Deck\.jsonl \+ Story_Seed_Deck\.jsonl \(sports, this cycle\)/.test(p)));
+  const mdOut = formatHalSliceMarkdown(slice);
+  ok('md has ENGINE HOOKS / SEEDS section', /## ENGINE HOOKS \/ SEEDS \(colour, not fact\)/.test(mdOut));
+
+  const bareRoot = synthFixtureRoot(FIX_CYCLE, 'Hal Richmond', false);
+  const bare = buildHalSlice(FIX_CYCLE, { root: bareRoot });
+  ok('no beats dump → hooks empty', Array.isArray(bare.hooks) && bare.hooks.length === 0);
+  ok('no beats dump → seeds empty', Array.isArray(bare.seeds) && bare.seeds.length === 0);
+  ok('no beats dump → md omits section', !/## ENGINE HOOKS/.test(formatHalSliceMarkdown(bare)));
+}
 
 if (failures) {
   console.error('\nbuildHalSlice tests: ' + failures + ' FAILURE(S)');

@@ -311,6 +311,76 @@ function hasUsableStats(row) {
 }
 
 /**
+ * Soft beat-deck read for the sports seats. The substrate's spine stays the
+ * world summary; the dump is OPTIONAL here — an absent or stale dump yields
+ * empty decks, never a throw (the five sports builders predate the beat-dump
+ * fail-loud pattern).
+ */
+function loadBeatDecks(root, cycle) {
+  const dir = path.join(root || ROOT, 'output', 'beats');
+  const meta = loadJson(path.join(dir, 'meta.json'));
+  if (!meta || Number(meta.cycle) !== Number(cycle)) return { ok: false, hooks: [], seeds: [] };
+  const readTab = t => {
+    try {
+      return fs.readFileSync(path.join(dir, t + '.jsonl'), 'utf8').split('\n').filter(Boolean).map(JSON.parse);
+    } catch (_) { return []; }
+  };
+  return { ok: true, hooks: readTab('Story_Hook_Deck'), seeds: readTab('Story_Seed_Deck') };
+}
+
+/**
+ * This cycle's SPORTS hooks for a journalist. Name match first; with
+ * `unnamed: true`, also SPORTS-domain rows carrying no journalist (the signal
+ * map's sports seat is the catch-all — the theme scorer otherwise gives every
+ * sports hook to the same name).
+ */
+function sportsHooks(decks, cycle, journalistName, opts) {
+  if (!decks || !decks.ok) return [];
+  const seen = new Set();
+  const named = [];
+  const unnamed = [];
+  for (const r of decks.hooks) {
+    if (Number(r.Cycle) !== Number(cycle)) continue;
+    if (String(r.Domain || '').toUpperCase() !== 'SPORTS') continue;
+    const text = String(r.HookText || '').trim();
+    if (!text || seen.has(text)) continue;
+    const who = String(r.SuggestedJournalist || '').trim();
+    const h = { text, angle: String(r.SuggestedAngle || '').trim() || null, hood: r.Neighborhood || null };
+    if (who && who.toLowerCase() === String(journalistName).toLowerCase()) { seen.add(text); named.push(h); }
+    else if (!who) { seen.add(text); unnamed.push(h); }
+  }
+  return named.concat(opts && opts.unnamed ? unnamed : []);
+}
+
+/** This cycle's sports-desk seeds addressed to a journalist (the engine's usage rotation spreads names). */
+function sportsSeeds(decks, cycle, journalistName) {
+  if (!decks || !decks.ok) return [];
+  return decks.seeds
+    .filter(r => Number(r.Cycle) === Number(cycle) && /^sports$/i.test(String(r.Desk || '')) &&
+      String(r.SuggestedJournalist || '').trim().toLowerCase() === String(journalistName).toLowerCase())
+    .map(r => ({
+      seedId: r.SeedID || null, hood: r.Neighborhood || null,
+      citizens: String(r.Citizens || '').split(';').map(t => t.trim()).filter(Boolean),
+      businesses: String(r.Businesses || '').split(';').map(t => t.trim()).filter(Boolean),
+      angle: String(r.SuggestedAngle || '').trim() || null
+    }));
+}
+
+/** Raw feed rows from a dumped sports feed tab (Oakland_Sports_Feed / Chicago_Sports_Feed), current cycle + 2 prior. Soft — empty array on any absence. */
+function loadRawFeedRows(root, tab, cycle) {
+  const p = path.join(root || ROOT, 'output', 'beats', tab + '.jsonl');
+  let rows;
+  try {
+    rows = fs.readFileSync(p, 'utf8').split('\n').filter(Boolean).map(JSON.parse);
+  } catch (_) { return []; }
+  const cyc = Number(cycle);
+  return rows.filter(r => {
+    const c = Number(r.Cycle);
+    return Number.isFinite(c) && c <= cyc && c >= cyc - 2;
+  });
+}
+
+/**
  * Load sports feed rows for a cycle: world_summary first, desk_signal sports fallback.
  */
 function loadSportsRows(cycle, opts) {
@@ -415,6 +485,10 @@ module.exports = {
   loadSportsRows,
   resolveFeedPlayers,
   buildFeedAnchorFacts,
+  loadBeatDecks,
+  sportsHooks,
+  sportsSeeds,
+  loadRawFeedRows,
   NAME_ALIASES,
   NON_NAME_FIRST
 };

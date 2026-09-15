@@ -66,6 +66,8 @@ const BEAT_TABS = [
 const OPTIONAL_TABS = [
   'Business_Archive',         // business — closures + exit metadata (engine.96 Phase11)
   'Cultural_Ledger',          // Kai / Sharon — fame scores + trajectories per cultural figure
+  'Oakland_Sports_Feed',      // sports seats — raw feed rows (A's AND Oaks; FranchiseStability, EconomicFootprint survive here)
+  // Chicago_Sports_Feed is NOT dumped: dead legacy tab (Bulls rows end C91; Chicago is retired from the sim). The Oaks live on Oakland_Sports_Feed.
 ];
 
 const args = process.argv.slice(2);

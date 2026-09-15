@@ -363,6 +363,11 @@ function buildAnthonySlice(cycle, opts) {
   const claim = buildClaim(row, cls, foil);
   const missing = buildMissingList(row, cls, players);
 
+  // Engine beat decks — COLOUR/POINTERS only, never facts (no merge into lineFacts/feedFacts)
+  const decks = sports.loadBeatDecks(root, cyc);
+  const hooks = sports.sportsHooks(decks, cyc, 'Anthony Raines', { unnamed: true });
+  const seeds = sports.sportsSeeds(decks, cyc, 'Anthony Raines');
+
   const story = {
     kind: 'sports-analytics',
     angle: claim,
@@ -392,7 +397,8 @@ function buildAnthonySlice(cycle, opts) {
     claim,
     missing,
     foilNumber: foil,
-    anchorFacts: lineFacts.slice(0, 4)
+    anchorFacts: lineFacts.slice(0, 4),
+    hooks
   };
 
   const candidates = scored.slice(0, 10).map(s => ({
@@ -404,7 +410,7 @@ function buildAnthonySlice(cycle, opts) {
     angle: String(s.row.storyAngle || s.row.rawHeader || '').slice(0, 100)
   }));
 
-  return {
+  const slice = {
     empty: false,
     cycle: cyc,
     kind: 'anthony-analytic',
@@ -440,6 +446,8 @@ function buildAnthonySlice(cycle, opts) {
       frame: 'Evaluate fit and process with numbers — one claim, third person.'
     },
     prewrite,
+    hooks,
+    seeds,
     story,
     approach: ANTHONY_APPROACH,
     players,
@@ -459,6 +467,10 @@ function buildAnthonySlice(cycle, opts) {
       'docs/plans/2026-08-08-journalist-heat-slice-packs.md Task 4'
     ]
   };
+  if (hooks.length || seeds.length) {
+    slice.pointers.push('output/beats/Story_Hook_Deck.jsonl + Story_Seed_Deck.jsonl (sports, this cycle)');
+  }
+  return slice;
 }
 
 function formatAnthonySliceMarkdown(slice) {
@@ -519,6 +531,21 @@ function formatAnthonySliceMarkdown(slice) {
       (c.hasStats ? ' · stats' : '') + ' — ' + c.angle);
   }
   L.push('');
+  if ((slice.hooks && slice.hooks.length) || (slice.seeds && slice.seeds.length)) {
+    L.push('## ENGINE HOOKS / SEEDS (colour, not fact)');
+    L.push('_Colour and pointers only — never merge into anchorFacts / lineFacts / feedFacts._');
+    for (const h of slice.hooks || []) {
+      L.push('- HOOK: ' + h.text + (h.angle ? ' — angle: ' + h.angle : '') +
+        (h.hood ? ' [' + h.hood + ']' : ''));
+    }
+    for (const s of slice.seeds || []) {
+      L.push('- SEED: ' + (s.seedId || 'seed') + (s.angle ? ' — ' + s.angle : '') +
+        (s.hood ? ' [' + s.hood + ']' : '') +
+        (s.citizens && s.citizens.length ? ' · citizens: ' + s.citizens.join(', ') : '') +
+        (s.businesses && s.businesses.length ? ' · businesses: ' + s.businesses.join(', ') : ''));
+    }
+    L.push('');
+  }
   L.push('## POINTERS');
   for (const p of slice.pointers || []) L.push('- ' + p);
   L.push('');

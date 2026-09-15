@@ -123,6 +123,11 @@ function writeDump(dir, cycle) {
     ],
     Story_Seed_Deck: [
       { Cycle: String(cycle), SeedID: 'cs1', Desk: 'culture', Class: 'minor', Domain: 'COMMUNITY', Neighborhood: 'Temescal', What: 'holy_day +0.01', Why: 'x', Citizens: 'POP-90001 Test Civic Resident', CitizenEvents: '', Businesses: '', OtherEntities: '', Magnitude: '0.01', Trend: '', SuggestedJournalist: '', SuggestedAngle: '' }
+    ],
+    // The Oaks rows live on the shared Oakland feed (Chicago_Sports_Feed is dead legacy, ends C91).
+    Oakland_Sports_Feed: [
+      { Cycle: String(cycle), SeasonType: 'regular', EventType: 'game-result', TeamsUsed: 'Oaks', NamesUsed: 'Test Oaks Shortstop', Notes: 'Oaks drop another late', Stats: 'Test Oaks Shortstop 2-4, 1 HR', 'Team Record': '12-30', StoryAngle: 'Oaks fall late again', PlayerMood: 'frustrated', EventTrigger: 'late collapse', HomeNeighborhood: 'Jack London', Streak: 'L4', FanSentiment: 'restless', FranchiseStability: 'stable', EconomicFootprint: 'modest' },
+      { Cycle: String(cycle - 1), SeasonType: 'regular', EventType: 'game-result', TeamsUsed: 'Oaks', NamesUsed: '', Notes: 'Oaks shut out', Stats: '', 'Team Record': '12-29', StoryAngle: 'blanked at home', PlayerMood: 'flat', EventTrigger: '', HomeNeighborhood: 'Jack London', Streak: 'L3', FanSentiment: 'weary', FranchiseStability: 'stable', EconomicFootprint: 'modest' }
     ]
   };
   const rows = {};
@@ -148,7 +153,8 @@ try {
     { Name: 'Rev. Test Leader', POPID: 'POP-90010', RoleType: 'Senior Pastor / Faith Leader', Neighborhood: 'Downtown' },
     { Name: 'Test Grade Schooler', POPID: 'POP-90030', RoleType: 'Grade Schooler', Neighborhood: 'Rockridge' },
     { Name: 'Test Science Teacher', POPID: 'POP-90031', RoleType: 'High School Science Teacher', Neighborhood: 'Rockridge' },
-    { Name: 'Test College Student', POPID: 'POP-90032', RoleType: 'Community College Student', Neighborhood: 'Chinatown' }
+    { Name: 'Test College Student', POPID: 'POP-90032', RoleType: 'Community College Student', Neighborhood: 'Chinatown' },
+    { Name: 'Test Oaks Shortstop', POPID: 'POP-90050', RoleType: 'Shortstop, Test Oaks', Neighborhood: 'Jack London' }
   ]);
   fs.writeFileSync(path.join(output, 'world_summary_c' + CYCLE + '.md'), [
     '# World Summary — Cycle ' + CYCLE, '',
@@ -288,8 +294,19 @@ try {
   })());
   ok('maria: deltas typed', m.prewrite.deltas && (m.prewrite.deltas.state === 'NO_PRIOR_CYCLE' || m.prewrite.deltas.state === 'PRIOR_CYCLE_ON_DISK'));
 
+  console.log('oaks seats (selena / talia):');
+  const sg = arts && require('./buildOaksBeatSlice').buildOaksBeatSlice(CYCLE, { root });
+  ok('selena: current-cycle feed row leads with record + streak', sg.facts.some(f => /Record 12-30 · streak L4/.test(f.text)) && sg.facts.some(f => /Oaks fall late again/.test(f.text)));
+  ok('selena: raw columns survive (trigger + franchise stability)', sg.facts.some(f => /Trigger: late collapse/.test(f.text)) && sg.facts.some(f => /Franchise stability: stable/.test(f.text)));
+  ok('selena: stats line carried', sg.facts.some(f => /Stats \(feed\): Test Oaks Shortstop 2-4, 1 HR/.test(f.text)));
+  ok('selena: feed name resolves to the ledger', sg.citizens.some(c => c.popid === 'POP-90050' && /named on the Oaks feed/.test(c.why)));
+  ok('selena: empty state without feed rows', require('./buildOaksBeatSlice').buildOaksBeatSlice(CYCLE, { root, beats: { meta: { cycle: CYCLE } } }).empty === true);
+  const tf = require('./buildOaksGroundSlice').buildOaksGroundSlice(CYCLE, { root });
+  ok('talia: fans + mood lead', /Oaks fans, C103: restless/.test(tf.facts[0].text) && tf.facts.some(f => /Room mood, C103: frustrated/.test(f.text)));
+  ok('talia: record is context, not the lead', tf.facts.some(f => /Context: record 12-30 · streak L4/.test(f.text)) && /Jack London/.test(tf.hood));
+
   console.log('typed packet (LEP/2) per seat:');
-  for (const [label, slice, popid] of [['trevor', t, 'POP-00155'], ['lila', h, 'POP-00154'], ['angela', s, 'POP-00156'], ['noah', e, 'POP-00157'], ['graye', f, 'POP-00012'], ['rachel', r, 'POP-00057'], ['kai', k, 'POP-00158'], ['sharon', sh, 'POP-00159'], ['maria', m, 'POP-00013']]) {
+  for (const [label, slice, popid] of [['trevor', t, 'POP-00155'], ['lila', h, 'POP-00154'], ['angela', s, 'POP-00156'], ['noah', e, 'POP-00157'], ['graye', f, 'POP-00012'], ['rachel', r, 'POP-00057'], ['kai', k, 'POP-00158'], ['sharon', sh, 'POP-00159'], ['maria', m, 'POP-00013'], ['selena', sg, 'POP-00591'], ['talia', tf, 'POP-00592']]) {
     const pk = v2.buildAnglePacket({ cycle: CYCLE, desk: slice.seat.desk, reporter: { popid, name: slice.seat.name }, story: slice.story, approach: slice.approach, slice, lane: [] });
     const b = pk.task.creativeBrief;
     ok(label + ': brief beat-slice with facts + room', b && b.kind === 'beat-slice' && b.facts.length >= 1 && !!b.roomIsYours);

@@ -52,9 +52,11 @@ const BEAT_BUILDERS = {
   'rachel-torres': 'buildSafetySlice',
   'kai-marston': 'buildArtsSlice',
   'sharon-okafor': 'buildLifestyleSlice',
-  'maria-keen': 'buildNeighborhoodSlice'
+  'maria-keen': 'buildNeighborhoodSlice',
+  'selena-grant': 'buildOaksBeatSlice',
+  'talia-finch': 'buildOaksGroundSlice'
 };
-const BEAT_NAME_RE = /trevor\s*shimizu|lila\s*mezran|angela\s*reyes|noah\s*tan|elliot\s*graye|rachel\s*torres|kai\s*marston|sharon\s*okafor|maria\s*keen/i;
+const BEAT_NAME_RE = /trevor\s*shimizu|lila\s*mezran|angela\s*reyes|noah\s*tan|elliot\s*graye|rachel\s*torres|kai\s*marston|sharon\s*okafor|maria\s*keen|selena\s*grant|talia\s*finch/i;
 function beatSlugForName(name) {
   const n = String(name || '');
   if (/trevor\s*shimizu/i.test(n)) return 'trevor-shimizu';
@@ -66,6 +68,8 @@ function beatSlugForName(name) {
   if (/kai\s*marston/i.test(n)) return 'kai-marston';
   if (/sharon\s*okafor/i.test(n)) return 'sharon-okafor';
   if (/maria\s*keen/i.test(n)) return 'maria-keen';
+  if (/selena\s*grant/i.test(n)) return 'selena-grant';
+  if (/talia\s*finch/i.test(n)) return 'talia-finch';
   return null;
 } // --no-gate ungated review samples (S332): never canon
 
@@ -848,6 +852,12 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
       L.push('ONE piece — not multi-voice culture-desk average.');
     } else if (persona.name && /tanya\s*cruz/i.test(persona.name)) {
       L.push('STANCE: sideline dispatch. Clubhouse signal. Packet quotes only.');
+      L.push('ONE piece — not multi-voice sports-desk average.');
+    } else if (persona.name && /selena\s*grant/i.test(persona.name)) {
+      L.push('STANCE: Oaks beat analyst. The second club, board read. Feed numbers only — never invent a stat.');
+      L.push('ONE piece — not multi-voice sports-desk average.');
+    } else if (persona.name && /talia\s*finch/i.test(persona.name)) {
+      L.push('STANCE: Oaks ground. The street around the park, first-person. The record is context, the people are the story.');
       L.push('ONE piece — not multi-voice sports-desk average.');
     } else if (persona.name && /simon\s*leary/i.test(persona.name)) {
       L.push('STANCE: long view. Sports as civic architecture. Quiet continuity.');

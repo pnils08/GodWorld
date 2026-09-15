@@ -673,7 +673,9 @@ async function buildFanout(date) {
     'rachel-torres': 'buildSafetySlice',
     'kai-marston': 'buildArtsSlice',
     'sharon-okafor': 'buildLifestyleSlice',
-    'maria-keen': 'buildNeighborhoodSlice'
+    'maria-keen': 'buildNeighborhoodSlice',
+    'selena-grant': 'buildOaksBeatSlice',
+    'talia-finch': 'buildOaksGroundSlice'
   };
   let beatEnrich = { enriched: false, reason: 'none', seats: [], dropped: [] };
   if (cycle != null) {

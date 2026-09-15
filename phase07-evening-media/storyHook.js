@@ -94,30 +94,38 @@ function storyHookEngine_(ctx) {
   var season = S.season || "Spring";
 
   // ═══════════════════════════════════════════════════════════
-  // DESK MAPPING BY DOMAIN
+  // DESK MAPPING BY DOMAIN — engine.232 (S463): ONE table, mirroring the
+  // newsroom router (scripts/buildDeskPackets.js DOMAIN_TO_DESKS), which is
+  // what actually routes a hook into a desk packet. `desk` is the packet desk
+  // name the deck's SuggestedDesks column carries; `keys` are the roster desk
+  // keys (utilities/rosterLookup.js roster.desks) the journalist match is
+  // scoped to. Before 232 this map named desks that exist nowhere ('Education
+  // Desk', 'Community Desk', 'Health Desk', 'City Desk', 'Features Desk') and
+  // had no ARTS / CELEBRITY / FESTIVAL / FOOD / TRAFFIC / CRIME keys.
   // ═══════════════════════════════════════════════════════════
-  var deskMap = {
-    'HEALTH': 'Health Desk',
-    'CIVIC': 'Civic Desk',
-    'INFRASTRUCTURE': 'Civic Desk',
-    'SAFETY': 'Civic Desk',
-    'WEATHER': 'Civic Desk',
-    'SPORTS': 'Sports Desk',
-    'BUSINESS': 'Business Desk',
-    'EDUCATION': 'Education Desk',
-    'CULTURE': 'Culture Desk',
-    'COMMUNITY': 'Community Desk',
-    'NIGHTLIFE': 'Culture Desk',
-    'ENVIRONMENT': 'Civic Desk',
-    'GENERAL': 'City Desk',
-    'HOLIDAY': 'Features Desk',
-    'CULTURAL': 'Culture Desk',
-    'FAITH': 'Culture Desk',      // engine.231: no key → City Desk; Elliot Graye sits on culture
-    'OAKLAND': 'Community Desk'
+  var DESK_CIVIC = { desk: 'Civic Desk', keys: ['metro'] };
+  var DESK_SPORTS = { desk: 'Sports Desk', keys: ['sports'] };
+  var DESK_CULTURE = { desk: 'Culture Desk', keys: ['culture'] };
+  var DESK_BUSINESS = { desk: 'Business Desk', keys: ['business'] };
+  var DESK_GENERAL = { desk: 'Civic Desk; Culture Desk', keys: null };
+  var DOMAIN_DESKS_ = {
+    'CIVIC': DESK_CIVIC, 'INFRASTRUCTURE': DESK_CIVIC, 'HEALTH': DESK_CIVIC, 'CRIME': DESK_CIVIC,
+    'SAFETY': DESK_CIVIC, 'GOVERNMENT': DESK_CIVIC, 'TRANSIT': DESK_CIVIC, 'TRAFFIC': DESK_CIVIC,
+    'SPORTS': DESK_SPORTS,
+    'CULTURE': DESK_CULTURE, 'CULTURAL': DESK_CULTURE, 'FAITH': DESK_CULTURE, 'COMMUNITY': DESK_CULTURE,
+    'OAKLAND': DESK_CULTURE, 'FESTIVAL': DESK_CULTURE, 'ARTS': DESK_CULTURE, 'CELEBRITY': DESK_CULTURE,
+    'EDUCATION': DESK_CULTURE, 'WEATHER': DESK_CULTURE, 'ENVIRONMENT': DESK_CULTURE, 'FOOD': DESK_CULTURE,
+    'HOLIDAY': DESK_CULTURE,
+    'BUSINESS': DESK_BUSINESS, 'ECONOMIC': DESK_BUSINESS, 'RETAIL': DESK_BUSINESS, 'LABOR': DESK_BUSINESS,
+    'NIGHTLIFE': { desk: 'Culture Desk; Business Desk', keys: ['culture', 'business'] },
+    'GENERAL': DESK_GENERAL
   };
 
+  function deskEntry_(domain) {
+    return DOMAIN_DESKS_[String(domain || '').toUpperCase()] || DESK_GENERAL;
+  }
   function getDesks(domain) {
-    return deskMap[domain] || 'City Desk';
+    return deskEntry_(domain).desk;
   }
 
   // ═══════════════════════════════════════════════════════════
@@ -157,10 +165,11 @@ function storyHookEngine_(ctx) {
       'initiative-ripple': 'civic'
     };
 
-    var signal = hookToSignal[hookType];
-    if (signal) return signal;
-
-    // Fall back to domain-based signal
+    // engine.232 (S463): the DOMAIN's seat first, the hookType's second. The
+    // hookType signals are generic (arc → crisis → Luis, demographic →
+    // community → Sharon) and used to fire before the domain had a say — so
+    // demographic/EDUCATION named Sharon Okafor on 16 of 21 rows, never Angela
+    // Reyes, and cluster/FAITH named Luis. A domain with a seat names it.
     var domainSignals = {
       'HEALTH': 'health_arc',
       'CIVIC': 'civic',
@@ -178,8 +187,11 @@ function storyHookEngine_(ctx) {
       'WEATHER': 'weather',
       'ENVIRONMENT': 'environment'
     };
+    if (domainSignals[domain]) return domainSignals[domain];
 
-    return domainSignals[domain] || 'human_interest';
+    var signal = hookToSignal[hookType];
+    if (signal) return signal;
+    return 'human_interest';
   }
 
   // ═══════════════════════════════════════════════════════════
@@ -190,6 +202,14 @@ function storyHookEngine_(ctx) {
    * carry-over below both go through it — themes by domain + hookType, then
    * the theme scorer with the signal fallback (suggestStoryAngle_).
    */
+  // engine.232 (S463): in-Cycle usage tally — the seed engine's rotation
+  // (engine.78c, buildContractSeeds) applied to hooks. Each name a hook takes
+  // this Cycle costs that name 2 theme points on the next hook (capped at 2
+  // uses), so a fixed domain vocabulary stops electing the same argmax every
+  // time (P Slayer on 32 of 38 all-time SPORTS hooks, Luis on 65 of 150 CIVIC).
+  var hookUsage_ = {};
+  var hookNamed_ = 0;
+
   function matchJournalist_(domain, hookType) {
     var themes = [];
     if (typeof getThemeKeywordsForDomain_ === 'function') {
@@ -197,7 +217,22 @@ function storyHookEngine_(ctx) {
     }
     var suggestion = null;
     if (typeof suggestStoryAngle_ === 'function') {
-      suggestion = suggestStoryAngle_(themes, mapHookTypeToSignal_(hookType, domain));
+      // The seed engine's in-Cycle hint cap (buildContractSeeds hintCapN): a
+      // name holds at most max(2, 25%) of the Cycle's named hooks — applied
+      // incrementally, so the cap opens as the Cycle fills. A capped name is
+      // excluded outright; the next-best on-desk name surfaces, or blank
+      // (legal — the column is a hint, the packet still routes by Domain).
+      var cap = Math.max(2, Math.floor((hookNamed_ + 1) * 0.25));
+      var capped = {};
+      for (var un in hookUsage_) {
+        if (hookUsage_.hasOwnProperty(un) && hookUsage_[un] >= cap) capped[un] = true;
+      }
+      suggestion = suggestStoryAngle_(themes, mapHookTypeToSignal_(hookType, domain),
+        hookUsage_, capped, deskEntry_(domain).keys);
+      if (suggestion && suggestion.journalist) {
+        hookUsage_[suggestion.journalist] = (hookUsage_[suggestion.journalist] || 0) + 1;
+        hookNamed_++;
+      }
     }
     return { themes: themes, suggestion: suggestion };
   }

@@ -248,6 +248,10 @@ const DOMAIN_TO_DESKS = {
   'ECONOMIC': ['business'],
   'RETAIL': ['business'],
   'LABOR': ['business'],
+  'BUSINESS': ['business'],   // engine.232: the engine emits BUSINESS (HOME_PURCHASE, CAREER_STAGNATION, archetype hooks) — fell to civic+culture
+  'CELEBRITY': ['culture'],
+  'TRAFFIC': ['civic'],
+  'HOLIDAY': ['culture'],
   'CHICAGO': ['chicago'],
   'GENERAL': ['civic', 'culture']
 };

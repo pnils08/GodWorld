@@ -885,7 +885,30 @@ function bylineEligible_(name) {
   return true;
 }
 
-function suggestStoryAngle_(eventThemes, signalType, usageCounts, excludeNames) {
+/** engine.232: is this journalist on one of the desks the caller scoped to?
+ *  deskKeys null/empty = no scoping (pre-232 behaviour). A name counts as
+ *  on-desk by its own `desk` key OR by membership in roster.desks[key] (P Slayer
+ *  sits on sports and opinion). */
+function onDesk_(name, deskKeys) {
+  if (!deskKeys || !deskKeys.length) return true;
+  var roster = getRoster_();
+  var j = roster.journalists[name];
+  for (var i = 0; i < deskKeys.length; i++) {
+    if (j && j.desk === deskKeys[i]) return true;
+    var members = roster.desks[deskKeys[i]] || [];
+    if (members.indexOf(name) >= 0) return true;
+  }
+  return false;
+}
+
+function suggestStoryAngle_(eventThemes, signalType, usageCounts, excludeNames, deskKeys) {
+  // deskKeys (S463 engine.232, optional): roster desk keys the hook's domain
+  // routes to (storyHook.js DOMAIN_DESKS_ mirrors buildDeskPackets
+  // DOMAIN_TO_DESKS). The theme loop and both signal fallbacks consider only
+  // journalists on those desks — the theme vocabulary is shared across desks
+  // ('legacy' on every arc scored Hal Richmond onto 71 HEALTH/CIVIC arcs;
+  // 'community' put Sharon Okafor on BUSINESS), so an off-desk winner is a
+  // leak, not a match. Omitted → identical to pre-232.
   // excludeNames (S331 engine.80c, optional): map name -> truthy. Names the
   // caller has ruled out entirely this seed (e.g. at the in-cycle hint cap in
   // buildContractSeeds). Excluded from the theme loop AND both signal
@@ -907,7 +930,7 @@ function suggestStoryAngle_(eventThemes, signalType, usageCounts, excludeNames) 
     // Fall back to signal-based assignment
     if (signalType) {
       var bySignal = getJournalistBySignal_(signalType);
-      if (bySignal && bylineEligible_(bySignal) && !(excludeNames && excludeNames[bySignal])) {
+      if (bySignal && bylineEligible_(bySignal) && onDesk_(bySignal, deskKeys) && !(excludeNames && excludeNames[bySignal])) {
         result.journalist = bySignal;
         result.angle = 'signal-matched coverage';
         result.voiceGuidance = getVoiceGuidance_(bySignal, 'feature') || '';
@@ -948,6 +971,8 @@ function suggestStoryAngle_(eventThemes, signalType, usageCounts, excludeNames) 
     // S331 Phase 2.0: full eligibility gate (supersedes the S329 editorial-only
     // skip — see bylineEligible_ for the exclusion classes).
     if (!bylineEligible_(name)) continue;
+    // S463 engine.232: off-desk names never score (see deskKeys above).
+    if (!onDesk_(name, deskKeys)) continue;
     // S331 engine.80c: caller-ruled-out names (in-cycle hint cap) skip scoring.
     if (excludeNames && excludeNames[name]) continue;
     var journoThemes = journalist.themes || [];
@@ -1006,7 +1031,7 @@ function suggestStoryAngle_(eventThemes, signalType, usageCounts, excludeNames) 
     // re-elected the same name 13x after the penalty knocked out the theme
     // path). Blank is legal — the deck column is a HINT, not direction.
     var bySignalFallback = getJournalistBySignal_(signalType);
-    if (bySignalFallback && bylineEligible_(bySignalFallback) &&
+    if (bySignalFallback && bylineEligible_(bySignalFallback) && onDesk_(bySignalFallback, deskKeys) &&
         !(excludeNames && excludeNames[bySignalFallback]) &&
         !(usageCounts && usageCounts[bySignalFallback] >= 6)) {
       result.journalist = bySignalFallback;

@@ -65,18 +65,18 @@ check('hookType untouched (kimi slices regex on HookType)', raw.every(r => by(r.
 
 const j = t => by(t).suggestedJournalist;
 console.log('  journalists: ' + raw.map(r => r.hookType + '→' + j(r.hookType) + '/' + by(r.hookType).matchConfidence).join('; '));
-check('COMMUNITY (move/boom/rent) → Maria Keen via the community themes', ['CITIZEN_RELOCATED', 'NEIGHBORHOOD_BOOM', 'RENT_BURDEN_CRISIS'].every(t => j(t) === 'Maria Keen'));
+check('COMMUNITY (move/boom) → Maria Keen via the community themes; the third rotates on-desk (engine.232 cap)', j('CITIZEN_RELOCATED') === 'Maria Keen' && j('NEIGHBORHOOD_BOOM') === 'Maria Keen' && ['Elliot Graye', 'Sharon Okafor', 'Maria Keen'].indexOf(j('RENT_BURDEN_CRISIS')) >= 0);
 check('CULTURE fame → Kai Marston via the culture themes', j('FAME_WATCH') === 'Kai Marston');
 check('EDUCATION → Angela Reyes via the education signal', j('DROPOUT_WAVE') === 'Angela Reyes');
 check('BUSINESS → Jordan Velez via the business signal', j('CAREER_STAGNATION') === 'Jordan Velez');
 check('HEALTH → Dr. Lila Mezran', j('CITIZEN_HOSPITALIZED') === 'Dr. Lila Mezran');
 check('CIVIC hooks name a journalist', !!j('CIVIC_APPROVAL_SCANDAL') && !!j('MAYORAL_VETO'));
 check('a producer-supplied suggestedAngle is kept', by('MAYORAL_VETO').suggestedAngle === raw[7].suggestedAngle);
-check('desk strings come from the deskMap', by('CITIZEN_RELOCATED').suggestedDesks === 'Community Desk' && by('DROPOUT_WAVE').suggestedDesks === 'Education Desk' && by('FAME_WATCH').suggestedDesks === 'Culture Desk');
+check('desk strings come from the desk table (engine.232: packet desk names)', by('CITIZEN_RELOCATED').suggestedDesks === 'Culture Desk' && by('DROPOUT_WAVE').suggestedDesks === 'Culture Desk' && by('FAME_WATCH').suggestedDesks === 'Culture Desk' && by('CAREER_STAGNATION').suggestedDesks === 'Business Desk');
 
 const faithArc = out.find(h => h.hookType === 'arc' && h.domain === 'FAITH');
 check('makeHook FAITH arc still built (shared matcher)', !!faithArc && faithArc.suggestedDesks === 'Culture Desk', faithArc && JSON.stringify([faithArc.suggestedDesks, faithArc.suggestedJournalist]));
-console.log('  faith arc → ' + (faithArc && faithArc.suggestedJournalist) + ' (arc hookType signal = crisis fires before the FAITH domain fallback — next cut)');
+check('FAITH arc → Elliot Graye (engine.232: domain seat first, desk-scoped)', faithArc && faithArc.suggestedJournalist === 'Elliot Graye', faithArc && faithArc.suggestedJournalist);
 
 console.log('\n' + passed + ' passed, ' + failed + ' failed');
 process.exit(failed ? 1 : 0);

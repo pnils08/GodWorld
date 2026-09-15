@@ -42,7 +42,8 @@ function mkSheet(rows) {
   s.getRange = (r, c, nr, nc) => ({
     getValues: () => [s.rows[r - 1].slice(c - 1, c - 1 + (nc || 1))],
     setValue: (v) => { while (s.rows[r - 1].length < c) s.rows[r - 1].push(''); s.rows[r - 1][c - 1] = v; s.setCells.push([r, c, v]); },
-    clearContent: () => { s.cleared.push(r); s.rows[r - 1] = s.rows[r - 1].map(() => ''); },
+    clearContent: () => { for (let k = 0; k < (nr || 1); k++) { s.cleared.push(r + k); if (s.rows[r + k - 1]) s.rows[r + k - 1] = s.rows[r + k - 1].map(() => ''); } },
+    setValues: (vals) => { for (let k = 0; k < vals.length; k++) { while (!s.rows[r + k - 1]) s.rows.push([]); for (let m = 0; m < vals[k].length; m++) { while (s.rows[r + k - 1].length < c + m) s.rows[r + k - 1].push(''); s.rows[r + k - 1][c + m - 1] = vals[k][m]; s.setCells.push([r + k, c + m, vals[k][m]]); } } },
   });
   return s;
 }

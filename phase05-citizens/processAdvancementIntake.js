@@ -499,10 +499,19 @@ function processMediaUsage_(ctx, now, cycle) {
     }
   }
   
-  if (genericSheet && gEmergenceCol >= 0) {
-    for (var gRow in genericUpdates) {
-      genericSheet.getRange(Number(gRow) + 1, gEmergenceCol + 1).setValue(genericUpdates[gRow]);
+  if (genericSheet && gEmergenceCol >= 0 && genericData.length > 1) {
+    // engine.230: ONE column write instead of a setValue per touched GC row — each was its own
+    // Sheets call, and this phase's wall doubles with per-call latency (bench 79 s at night →
+    // 140–152 s in the afternoon; a killed run at the 6-minute cap). The column is rebuilt from
+    // the values read at the top of this function plus this Cycle's increments; nothing else
+    // writes EmergenceCount inside the phase.
+    var gTouched = 0;
+    var emergenceCol = [];
+    for (var gi = 1; gi < genericData.length; gi++) {
+      if (genericUpdates[gi] !== undefined) { emergenceCol.push([genericUpdates[gi]]); gTouched++; }
+      else emergenceCol.push([genericData[gi][gEmergenceCol] === undefined ? '' : genericData[gi][gEmergenceCol]]);
     }
+    if (gTouched > 0) genericSheet.getRange(2, gEmergenceCol + 1, emergenceCol.length, 1).setValues(emergenceCol);
   }
   
   // Phase 42 §5.6: per-row mutations on ctx.ledger.rows; flip dirty.
@@ -947,9 +956,16 @@ function processAdvancementRows_(ctx, now, cycle) {
   results.ownersWired = owned.wired;
 
   if (rowsToClear.length > 0) {
-    rowsToClear.sort(function(a, b) { return b - a; });
-    for (var c = 0; c < rowsToClear.length; c++) {
-      intakeSheet.getRange(rowsToClear[c], 1, 1, intakeSheet.getLastColumn()).clearContent();
+    // engine.230: processed rows are cleared in contiguous RUNS, one call each, instead of one
+    // call per row — 143 rows on live C107, each a Sheets round-trip inside Phase5-Advancement.
+    rowsToClear.sort(function(a, b) { return a - b; });
+    var clearCols = intakeSheet.getLastColumn();
+    var runStart = rowsToClear[0], runPrev = rowsToClear[0];
+    for (var c = 1; c <= rowsToClear.length; c++) {
+      var nextRow = rowsToClear[c];
+      if (c < rowsToClear.length && (nextRow === runPrev || nextRow === runPrev + 1)) { runPrev = nextRow; continue; }
+      intakeSheet.getRange(runStart, 1, runPrev - runStart + 1, clearCols).clearContent();
+      if (c < rowsToClear.length) { runStart = nextRow; runPrev = nextRow; }
     }
   }
   

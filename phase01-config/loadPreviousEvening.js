@@ -280,6 +280,7 @@ function loadPreviousCycleState_(ctx) {
       restoreCarriedRipples_(S);
       seedCarriedEconomicMood_(S);
       seedCarriedNeighborhoodEconomies_(ctx, S);
+      seedCarriedActivityObservations_(ctx, S);   // engine.228
     } else {
       S.previousCycleState = null;
       Logger.log('loadPreviousCycleState_: No previous cycle state found (first cycle or cleared)');
@@ -343,6 +344,36 @@ function seedCarriedNeighborhoodEconomies_(ctx, S) {
   if (n) {
     S.neighborhoodEconomies = out;
     Logger.log('seedCarriedNeighborhoodEconomies_: ' + n + ' hood(s) opened on last Cycle\'s economic mood');
+  }
+}
+
+
+/**
+ * engine.228: Phase 2's activity history — the 6-Cycle baseline every engine.185/188
+ * relative gate divides by (events, seeds, media, crime, shock "more than usual?") — was
+ * built fresh every Cycle (`applyCityDynamics.js`: `if (!S.activityObservations) … history: []`)
+ * and nothing carried it, so the history held one entry, every rolling average equalled this
+ * Cycle's own count, and every ratio read exactly 1: none of those gates has ever fired, up or
+ * down. Own key (PREV_ACTIVITY_OBS_JSON, ≤12 entries, ~850 chars — never inside the 9 KB
+ * PREV_CYCLE_STATE_JSON); a missing blob (first fire on this code) is a graceful no-op. Phase 2
+ * pushes this Cycle's observation on top of the carried ones (cap 12) as before.
+ */
+function seedCarriedActivityObservations_(ctx, S) {
+  if (S.activityObservations && S.activityObservations.history && S.activityObservations.history.length) return;
+  var json = null;
+  try { json = loadCarryForwardBlob_(ctx, 'PREV_ACTIVITY_OBS_JSON', carryForwardCycleId_(ctx)); } catch (e) { json = null; }
+  if (!json) return;
+  var carried;
+  try { carried = JSON.parse(json); } catch (e) { return; }
+  if (!carried || !Array.isArray(carried.history)) return;
+  var hist = [];
+  for (var i = 0; i < carried.history.length; i++) {
+    var o = carried.history[i];
+    if (o && typeof o === 'object') hist.push(o);
+  }
+  if (hist.length) {
+    S.activityObservations = { history: hist.slice(-12), carried: true };
+    Logger.log('seedCarriedActivityObservations_: ' + hist.length + ' Cycle(s) of activity history opened (baseline for the relative gates)');
   }
 }
 

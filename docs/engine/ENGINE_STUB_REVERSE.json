@@ -2,7 +2,7 @@
   "generated": "2026-09-15",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 183,
-  "functionsMapped": 1400,
+  "functionsMapped": 1402,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -1824,6 +1824,18 @@
         "phase10-persistence/buildCyclePacket.js::buildCyclePacket_"
       ]
     },
+    "activityObservations": {
+      "writers": [
+        "phase01-config/loadPreviousEvening.js::seedCarriedActivityObservations_",
+        "phase02-world-state/applyCityDynamics.js::applyCityDynamics_"
+      ],
+      "readers": [
+        "phase01-config/loadPreviousEvening.js::seedCarriedActivityObservations_",
+        "phase01-config/loadPreviousEvening.js::seedCarriedNeighborhoodEconomies_",
+        "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
+        "phase09-digest/finalizeCycleState.js::savePreviousCycleState_"
+      ]
+    },
     "economicRipples": {
       "writers": [
         "phase01-config/loadPreviousEvening.js::restoreCarriedRipples_",
@@ -1864,14 +1876,6 @@
         "phase05-citizens/civicInitiativeEngine.js::applyNeighborhoodRipple_",
         "phase07-evening-media/storyHook.js::storyHookEngine_",
         "phase09-digest/finalizeCycleState.js::finalizeCycleState_"
-      ]
-    },
-    "activityObservations": {
-      "writers": [
-        "phase02-world-state/applyCityDynamics.js::applyCityDynamics_"
-      ],
-      "readers": [
-        "phase02-world-state/applyCityDynamics.js::applyCityDynamics_"
       ]
     },
     "approvalNeighborhoodEffects": {

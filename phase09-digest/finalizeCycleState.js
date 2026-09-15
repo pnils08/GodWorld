@@ -447,6 +447,14 @@ function savePreviousCycleState_(ctx) {
       saveCarryForwardBlob_(ctx, 'PREV_HOOD_ECON_JSON', hoodJson, snapshot.cycle);
       Logger.log('savePreviousCycleState_: Saved ' + hoodJson.length + ' bytes of hood economies for cycle ' + snapshot.cycle);
     }
+    // engine.228: the Phase-2 activity history rides its OWN key (≤12 entries, ~850 chars) —
+    // the baseline the relative gates divide by; without it every ratio read 1.
+    var actObs = compactActivityObservations_(S.activityObservations);
+    if (actObs) {
+      var actJson = JSON.stringify(actObs);
+      saveCarryForwardBlob_(ctx, 'PREV_ACTIVITY_OBS_JSON', actJson, snapshot.cycle);
+      Logger.log('savePreviousCycleState_: Saved ' + actJson.length + ' bytes of activity history for cycle ' + snapshot.cycle);
+    }
   } catch (e) {
     Logger.log('savePreviousCycleState_: Failed - ' + e.message);
   }
@@ -474,6 +482,24 @@ function compactNeighborhoodEconomies_(ne) {
     n++;
   }
   return n ? out : null;
+}
+
+/**
+ * engine.228: the last 12 activity observations, six numbers each — what Phase 2 averages next
+ * Cycle. Anything else on the object (latest, rolling) is recomputed every Cycle.
+ */
+function compactActivityObservations_(ao) {
+  if (!ao || !Array.isArray(ao.history) || !ao.history.length) return null;
+  var keys = ['cycle', 'events', 'storySeedCount', 'media', 'crime', 'shockCount'];
+  var out = [];
+  var h = ao.history.slice(-12);
+  for (var i = 0; i < h.length; i++) {
+    if (!h[i]) continue;
+    var o = {};
+    for (var k = 0; k < keys.length; k++) { var v = Number(h[i][keys[k]]); o[keys[k]] = isFinite(v) ? v : 0; }
+    out.push(o);
+  }
+  return out.length ? { history: out } : null;
 }
 
 function compactNeighborhoodDynamics_(nd) {

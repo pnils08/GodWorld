@@ -187,6 +187,8 @@ Cut order: (1) coverage intensity relative to its own 6-Cycle baseline (the engi
 
 ## Changelog
 
+- 2026-09-15 (engine-sheet S462) — engine.226 bench-proven SANDBOX 0908 @40 C108–C109 on its own typed live-C107 resync: no change vs @39 (ripples, economy, hood blob, dynamics identical) — the declared proof for a latent gate. 225 + 226 stack on one live fire; PROD push waits on Mike (classifier-blocked).
+
 - 2026-09-15 (engine-sheet S462) — engine.225 CUT `a2f3661f` + bench-proven SANDBOX 0908 @39 C108–C109 (`output/engine-sheet/bench-readback-225-c108-c109.md`: C108 identical to @38 on the first fire; C109 12/12 hoods move with their own delta from the median; ring decimals). engine.226 CUT `328bf87c` (typed construction source; detector reads world events only), test 15/15, bench next. PROD push for 225 classifier-blocked — Mike's go.
 
 - 2026-09-15 (engine-sheet S462) — S461 watch list filed as engine.225 / 226 / 227 (ROLLOUT) with detail in the new `## Status log`; the cycle-weight reason cap moved to Watch List. Wiring cards spawned per target before filing; no cut yet.

@@ -801,7 +801,6 @@
         "phase01-config/canonNeighborhoodLoader.js::hoodsWithScene_",
         "phase01-config/canonNeighborhoodLoader.js::isCanonNeighborhood_",
         "phase01-config/canonNeighborhoodLoader.js::resolveHoodOrChild_",
-        "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
         "utilities/ensureCrimeMetrics.js::crimeIterationHoods_"
       ]
     },
@@ -811,7 +810,6 @@
       ],
       "readers": [
         "phase01-config/canonNeighborhoodLoader.js::getAdjacentHoods_",
-        "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
         "phase03-population/updateCrimeMetrics.js::buildCrimeAdjacencyGraph_"
       ]
     },

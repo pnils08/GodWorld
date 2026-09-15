@@ -497,7 +497,8 @@ function runWorldCycle() {
   // canonical cycle row including CycleWeight + Reason from
   // ctx.summary populated here.)
   // ═══════════════════════════════════════════════════════════
-  safePhaseCall_(ctx, 'Phase8-CycleWeightSignal', function() { applyCycleWeight_(ctx); });
+  // engine.224 (S461): Phase8-CycleWeightSignal moved AFTER Phase8-V3Integration — the scorer
+  // reads S.mediaEffects, S.domainPresence and S.storyHooks, all written inside the integration.
   safePhaseCall_(ctx, 'Phase8-V3Preload', function() { v3PreloadContext_(ctx); });
   // Arc loop DISABLED S313 (Mike-direct): stories are seeded, never re-ingested.
   // Zombie loop — spawner off-path since S185, 36 arcs stuck at peak re-injecting
@@ -521,6 +522,7 @@ function runWorldCycle() {
   // safePhaseCall_(ctx, 'Phase8-StorylineStatus', function() { updateStorylineStatus_(ctx); });
   // safePhaseCall_(ctx, 'Phase8-StorylineHealth', function() { monitorStorylineHealth_(ctx); });
   safePhaseCall_(ctx, 'Phase8-V3Integration', function() { v3Integration_(ctx); });
+  safePhaseCall_(ctx, 'Phase8-CycleWeightSignal', function() { applyCycleWeight_(ctx); });
   safePhaseCall_(ctx, 'Phase8-DemographicDrift', function() { deriveDemographicDrift_(ctx); });
 
   // S229 DISABLED — Chicago is canonically dead in the sim (Path B no-grow-legacy,
@@ -2244,7 +2246,8 @@ function runCyclePhases_(ctx) {
   // canonical cycle row including CycleWeight + Reason from
   // ctx.summary populated here.)
   // ═══════════════════════════════════════════════════════════
-  safePhaseCall_(ctx, 'Phase8-CycleWeightSignal', function() { applyCycleWeight_(ctx); });
+  // engine.224 (S461): Phase8-CycleWeightSignal moved AFTER Phase8-V3Integration — the scorer
+  // reads S.mediaEffects, S.domainPresence and S.storyHooks, all written inside the integration.
   safePhaseCall_(ctx, 'Phase8-V3Preload', function() { v3PreloadContext_(ctx); });
   // Arc loop DISABLED S313 (Mike-direct): stories are seeded, never re-ingested.
   // Zombie loop — spawner off-path since S185, 36 arcs stuck at peak re-injecting
@@ -2268,6 +2271,7 @@ function runCyclePhases_(ctx) {
   // safePhaseCall_(ctx, 'Phase8-StorylineStatus', function() { updateStorylineStatus_(ctx); });
   // safePhaseCall_(ctx, 'Phase8-StorylineHealth', function() { monitorStorylineHealth_(ctx); });
   safePhaseCall_(ctx, 'Phase8-V3Integration', function() { v3Integration_(ctx); });
+  safePhaseCall_(ctx, 'Phase8-CycleWeightSignal', function() { applyCycleWeight_(ctx); });
   safePhaseCall_(ctx, 'Phase8-DemographicDrift', function() { deriveDemographicDrift_(ctx); });
   // S229 DISABLED — Chicago Path B no-grow-legacy. See production entry point
   // comment block above for full rationale + reversibility note. Cycle-phases sister.

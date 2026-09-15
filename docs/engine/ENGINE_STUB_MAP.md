@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-09-14 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-09-15 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -164,7 +164,7 @@
   Reads: S.cycleId, S.phaseTimings
 
 - **runWorldCycle()**
-  Reads: S.auditIssues, S.citizenEvents, S.cityEvents, S.contractSeeds, S.engineErrorCount, S.eveningSports, S.mediaIntake, S.nightlife, S.nightlifeVolume, S.rippleEvents, S.storylineHealth, S.undockedFeedEntries
+  Reads: S.auditIssues, S.citizenEvents, S.cityEvents, S.contractSeeds, S.domainPresence, S.engineErrorCount, S.eveningSports, S.mediaEffects, S.mediaIntake, S.nightlife, S.nightlifeVolume, S.rippleEvents, S.storyHooks, S.storylineHealth, S.undockedFeedEntries
   Writes: S.faithStorySignals, S.transitStorySignals, S.validationReport
   RNG: ctx.rng / safeRand_(ctx)
 
@@ -219,7 +219,7 @@
 - **replayCycle(cycleId)**
 
 - **runCyclePhases_(ctx)**
-  Reads: S.citizenEvents, S.cityEvents, S.compressedLine, S.contractSeeds, S.cycleSummary, S.eveningSports, S.nightlife, S.nightlifeVolume, S.rippleEvents, S.storyHooks, S.storylineHealth, S.storylineWeaving, S.undockedFeedEntries
+  Reads: S.citizenEvents, S.cityEvents, S.compressedLine, S.contractSeeds, S.cycleSummary, S.domainPresence, S.eveningSports, S.mediaEffects, S.nightlife, S.nightlifeVolume, S.rippleEvents, S.storyHooks, S.storylineHealth, S.storylineWeaving, S.undockedFeedEntries
   Writes: S.faithStorySignals, S.transitStorySignals, S.validationReport
 
 ### initSimulationLedger.js

@@ -129,6 +129,14 @@ pointers:
 
 ## PROD deploy log — full trail
 
+### PROD @93 — engine.231: the raw-carried hook reaches a desk and a journalist (2026-09-15 ~17:45 Chicago, engine-sheet)
+
+Commit `ea3fda33` (engine tree = @92 `47063de6` + `storyHook.js`, `storylineWeavingEngine.js`, `rosterLookup.js` + seven Phase-5 producers carrying domain at the source: `neighborhoodTrajectoryEngine`, `migrationTrackingEngine`, `householdFormationEngine`, `educationCareerEngine`, `updateCivicApprovalRatings`, `civicInitiativeEngine`, `generationalWealthEngine`). Apps Script version 82, read back @82. Pushed from an isolated `git archive HEAD` stage (repo-root `.clasp.json` copied in last, sandbox id absent); pull-back 169 files, 168 js byte-identical, 0 test files, no overlays. Bench SANDBOX 0908 @47 C109: 166 s ok:true, 0 Engine_Errors, 40 deck rows, 0 desk-empty (C108 on the old code: 34 of 47).
+
+- **engine.231:** 52 Story_Hook_Deck rows at live C106–C107 carried no SuggestedDesks and no SuggestedJournalist — every Phase-4/5 hook the Phase-8 carry loop merged with text/priority only; 19 producers had no domain and the loop wrote the hookType INTO Domain. The desk packets route by Domain, the per-seat slices by journalist name: a move, a boom, a fame turn, a dropout wave reached nobody by name. Now one `matchJournalist_` path for makeHook and the carried hooks; FAITH → Culture Desk + Elliot Graye signal; EDUCATION/FAITH/WEATHER/ENVIRONMENT domain signals; the veto hooks get a description (they had no text).
+- **Expect at the next live fire (C108), on top of §PROD @92–@86:** every new Story_Hook_Deck row carries SuggestedDesks + SuggestedJournalist + HookId; Domain is never equal to HookType; CITIZEN_RELOCATED / NEIGHBORHOOD_* / RENT_BURDEN_CRISIS / FORCED_MIGRATION read `COMMUNITY | Community Desk | Maria Keen`, FAME_WATCH `CULTURE | Culture Desk | Kai Marston`, CAREER_STAGNATION `BUSINESS | Business Desk | Jordan Velez`, DROPOUT_WAVE `EDUCATION | Education Desk | Angela Reyes`; one `storyHookEngine_ engine.231: … has no domain` Logger line per domain-less producer if any slipped (none on the bench). Known and unchanged: arc/cluster hookType signals fire before the domain fallback (arc/HEALTH → Hal Richmond, cluster/FAITH → Luis, demographic/EDUCATION → Sharon Okafor) — the next cut.
+- **Rollback:** `clasp deploy -i AKfycbwUvd4… -V 81` repoints to @92. No sheet migration.
+
 ### PROD @92 — engine.229 + 230: the weather's disasters reach the economy; Advancement stops dying at the six-minute cap (2026-09-15 ~15:12 Chicago, engine-sheet, on Mike's go)
 
 Commit `47063de6` (engine tree = @91 `8ea1624b` + `economicRippleEngine.js` [229] + `processAdvancementIntake.js` [230]). Apps Script version 81, read back @81. Pushed from an isolated `git archive 47063de6` stage in a fresh mktemp dir; pull-back 169 files, 168 js byte-identical, 0 test files, no overlays.

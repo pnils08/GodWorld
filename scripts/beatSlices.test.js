@@ -17,6 +17,9 @@ const schools = require('./buildSchoolsSlice');
 const environment = require('./buildEnvironmentSlice');
 const faith = require('./buildFaithSlice');
 const safety = require('./buildSafetySlice');
+const arts = require('./buildArtsSlice');
+const lifestyle = require('./buildLifestyleSlice');
+const neighborhood = require('./buildNeighborhoodSlice');
 const v2 = require('./livedExperiencePacketV2');
 
 const CYCLE = 103;
@@ -48,7 +51,15 @@ function writeDump(dir, cycle) {
     Neighborhood_Demographics: [
       { Neighborhood: 'Rockridge', Students: '223', Adults: '2000', Seniors: '300', Unemployed: '50', Sick: '60', SchoolQualityIndex: '9', GraduationRate: '95', CollegeReadinessRate: '78', TeacherQuality: '9', Funding: '15000' },
       { Neighborhood: 'Chinatown', Students: '180', Adults: '2100', Seniors: '400', Unemployed: '70', Sick: '125', SchoolQualityIndex: '7', GraduationRate: '87', CollegeReadinessRate: '56', TeacherQuality: '7', Funding: '12000' },
-      { Neighborhood: 'Fruitvale', Students: '200', Adults: '1900', Seniors: '250', Unemployed: '60', Sick: '110', SchoolQualityIndex: '8', GraduationRate: '90', CollegeReadinessRate: '60', TeacherQuality: '8', Funding: '13000' }
+      { Neighborhood: 'Fruitvale', Students: '200', Adults: '1900', Seniors: '250', Unemployed: '60', Sick: '110', SchoolQualityIndex: '8', GraduationRate: '90', CollegeReadinessRate: '60', TeacherQuality: '8', Funding: '13000' },
+      { Neighborhood: 'Downtown', Students: '300', Adults: '5000', Seniors: '600', Unemployed: '80', Sick: '', SchoolQualityIndex: '8', GraduationRate: '90', CollegeReadinessRate: '60', TeacherQuality: '8', Funding: '14000' }
+    ],
+    Cultural_Ledger: [
+      { 'CUL-ID': 'CUL-T1', Name: 'Test Rising Musician', RoleType: 'Musician', FameCategory: 'musician', CulturalDomain: 'Arts', Status: 'Active', UniverseLinks: 'POP-90001', FirstSeenCycle: '80', LastSeenCycle: String(cycle), MediaCount: '7', FameScore: '34', TrendTrajectory: 'rising', CityTier: 'Local', Neighborhood: 'Temescal' },
+      { 'CUL-ID': 'CUL-T2', Name: 'Test Fading Actor', RoleType: 'Actor', FameCategory: 'actor', CulturalDomain: 'Media', Status: 'Active', UniverseLinks: '', FirstSeenCycle: '60', LastSeenCycle: '98', MediaCount: '21', FameScore: '58', TrendTrajectory: 'fading', CityTier: 'City', Neighborhood: 'Piedmont Ave' },
+      { 'CUL-ID': 'CUL-T3', Name: 'Test New Chef', RoleType: 'Chef', FameCategory: 'chef', CulturalDomain: 'Culinary', Status: 'Active', UniverseLinks: 'POP-90003', FirstSeenCycle: String(cycle), LastSeenCycle: String(cycle), MediaCount: '1', FameScore: '12', TrendTrajectory: 'quiet', CityTier: 'Local', Neighborhood: 'Fruitvale' },
+      // Inactive — never rides a slice.
+      { 'CUL-ID': 'CUL-T4', Name: 'Test Retired Poet', RoleType: 'Poet', CulturalDomain: 'Literature', Status: 'inactive', UniverseLinks: '', FirstSeenCycle: '40', LastSeenCycle: '70', MediaCount: '3', FameScore: '44', TrendTrajectory: 'quiet', CityTier: 'City', Neighborhood: 'Downtown' }
     ],
     Hospital_Ledger: [
       { POPID: 'POP-90003', Name: 'Test Clinic Patient', Neighborhood: 'Temescal', Cause: 'a workplace accident', AdmitCycle: String(cycle), StatusNow: 'critical' },
@@ -102,9 +113,17 @@ function writeDump(dir, cycle) {
       // EDUCATION hooks route to an "Education Desk" no roster carries and pre-match a culture generalist.
       { Cycle: String(cycle), HookId: 'h3', HookType: 'demographic', Domain: 'EDUCATION', Neighborhood: 'Rockridge', Priority: '2', HookText: 'School-age population growing in Rockridge. Education story opportunity.', SuggestedDesks: 'Education Desk', SuggestedJournalist: 'Sharon Okafor', SuggestedAngle: '' },
       // DROPOUT_WAVE bypasses makeHook — no desk, no journalist, reaches nobody.
-      { Cycle: String(cycle), HookId: 'h4', HookType: 'DROPOUT_WAVE', Domain: 'DROPOUT_WAVE', Neighborhood: 'West Oakland', Priority: '', HookText: 'DROPOUT_WAVE: West Oakland graduation rate at 62% — below the 65% line.', SuggestedDesks: '', SuggestedJournalist: '', SuggestedAngle: '' }
+      { Cycle: String(cycle), HookId: 'h4', HookType: 'DROPOUT_WAVE', Domain: 'DROPOUT_WAVE', Neighborhood: 'West Oakland', Priority: '', HookText: 'DROPOUT_WAVE: West Oakland graduation rate at 62% — below the 65% line.', SuggestedDesks: '', SuggestedJournalist: '', SuggestedAngle: '' },
+      // CELEBRITY is not in the deskMap — falls through to City Desk and a metro generalist.
+      { Cycle: String(cycle), HookId: 'h5', HookType: 'signal', Domain: 'CELEBRITY', Neighborhood: 'Downtown', Priority: '2', HookText: 'Notable event: "Test Fading Actor spotted at a gala". Follow-up recommended.', SuggestedDesks: 'City Desk', SuggestedJournalist: 'Dana Reeve', SuggestedAngle: '' },
+      // FAME_WATCH is raw-carried — no desk, no journalist.
+      { Cycle: String(cycle), HookId: 'h6', HookType: 'FAME_WATCH', Domain: 'CULTURE', Neighborhood: '', Priority: '', HookText: 'FAME_WATCH: Test Rising Musician gaining attention.', SuggestedDesks: '', SuggestedJournalist: '', SuggestedAngle: '' },
+      // NEIGHBORHOOD_* are raw-carried too.
+      { Cycle: String(cycle), HookId: 'h7', HookType: 'NEIGHBORHOOD_RISING', Domain: 'NEIGHBORHOOD_RISING', Neighborhood: 'Downtown', Priority: '', HookText: 'Downtown is rising — momentum building.', SuggestedDesks: '', SuggestedJournalist: '', SuggestedAngle: '' }
     ],
-    Story_Seed_Deck: []
+    Story_Seed_Deck: [
+      { Cycle: String(cycle), SeedID: 'cs1', Desk: 'culture', Class: 'minor', Domain: 'COMMUNITY', Neighborhood: 'Temescal', What: 'holy_day +0.01', Why: 'x', Citizens: 'POP-90001 Test Civic Resident', CitizenEvents: '', Businesses: '', OtherEntities: '', Magnitude: '0.01', Trend: '', SuggestedJournalist: '', SuggestedAngle: '' }
+    ]
   };
   const rows = {};
   for (const [tab, list] of Object.entries(tabs)) { writeJsonl(path.join(dir, tab + '.jsonl'), list); rows[tab] = list.length; }
@@ -238,8 +257,39 @@ try {
   ok('"Vertical Farm Systems Engineer" never matches a safety regex', !JSON.stringify(r.citizens).includes('Farmer'));
   ok('legacy loadSafetySlice export still works', typeof safety.loadSafetySlice === 'function');
 
+  console.log('culture lane (kai / sharon / maria):');
+  const k = arts.buildArtsSlice(CYCLE, { root });
+  ok('kai: rising figure leads with trajectory + fame', k.facts.some(f => /Test Rising Musician \(Musician\), Arts, Temescal — fame rising \(fame 34, rising\), last seen C103/.test(f.text)));
+  ok('kai: new-on-record figure', k.facts.some(f => /Test New Chef.*new on the culture record this cycle/.test(f.text)));
+  ok('kai: fading is the other side of the file', k.facts.some(f => /Test Fading Actor.*fading — the where-are-they-now file/.test(f.text)));
+  ok('kai: inactive figure never rides', !JSON.stringify(k.facts).includes('Test Retired Poet'));
+  ok('kai: universe-linked figure resolves to the ledger citizen', k.citizens.some(c => c.popid === 'POP-90001' && /fame rising/.test(c.why)));
+  ok('kai: CULTURE hook reaches him by domain despite no desk', k.prewrite.hooks.some(h => /Test Rising Musician gaining attention/.test(h.text)));
+  ok('kai: culture-desk seed becomes a fact + a candidate', k.facts.some(f => /ENGINE SEED \(Temescal\): Test Civic Resident/.test(f.text)));
+  const sh = lifestyle.buildLifestyleSlice(CYCLE, { root });
+  ok('sharon: fading leads the fame file', /Test Fading Actor.*fading — the where-are-they-now file/.test(sh.facts[0].text) && /City-tier/.test(sh.facts[0].text));
+  ok('sharon: the city-knows-them row', sh.facts.some(f => /Test Rising Musician.*the city knows them/.test(f.text)));
+  ok('sharon: CELEBRITY hook by domain (City Desk misroute)', sh.prewrite.hooks.some(h => /Test Fading Actor spotted at a gala/.test(h.text)));
+  ok('sharon: FAME_WATCH hook by type (raw-carried, no desk)', sh.prewrite.hooks.some(h => /Test Rising Musician gaining attention/.test(h.text)));
+  const m = neighborhood.buildNeighborhoodSlice(CYCLE, { root });
+  ok('maria: program + founder from the ledger', m.facts.some(f => /Test Program \(mutual-aid\), Downtown — founded by Test Civic Resident, since C100/.test(f.text)) &&
+    m.citizens.some(c => c.popid === 'POP-90001' && /founded Test Program/.test(c.why)));
+  ok('maria: NEIGHBORHOOD_RISING hook by domain', m.prewrite.hooks.some(h => /Downtown is rising/.test(h.text)));
+  ok('maria: hood population movement vs prev/', (() => {
+    const pd = path.join(output, 'beats', 'prev');
+    fs.mkdirSync(pd, { recursive: true });
+    writeJsonl(path.join(pd, 'Neighborhood_Demographics.jsonl'), [
+      { Neighborhood: 'Downtown', Students: '290', Adults: '4950', Seniors: '600' }
+    ]);
+    fs.writeFileSync(path.join(pd, 'meta.json'), JSON.stringify({ cycle: CYCLE - 1, rows: { Neighborhood_Demographics: 1 } }));
+    const x = neighborhood.buildNeighborhoodSlice(CYCLE, { root });
+    fs.rmSync(pd, { recursive: true, force: true });
+    return x.facts.some(f => /Downtown this cycle: 300 students, 5,000 adults, 600 seniors — moved vs C102: \+10 students, \+50 adults/.test(f.text));
+  })());
+  ok('maria: deltas typed', m.prewrite.deltas && (m.prewrite.deltas.state === 'NO_PRIOR_CYCLE' || m.prewrite.deltas.state === 'PRIOR_CYCLE_ON_DISK'));
+
   console.log('typed packet (LEP/2) per seat:');
-  for (const [label, slice, popid] of [['trevor', t, 'POP-00155'], ['lila', h, 'POP-00154'], ['angela', s, 'POP-00156'], ['noah', e, 'POP-00157'], ['graye', f, 'POP-00012'], ['rachel', r, 'POP-00057']]) {
+  for (const [label, slice, popid] of [['trevor', t, 'POP-00155'], ['lila', h, 'POP-00154'], ['angela', s, 'POP-00156'], ['noah', e, 'POP-00157'], ['graye', f, 'POP-00012'], ['rachel', r, 'POP-00057'], ['kai', k, 'POP-00158'], ['sharon', sh, 'POP-00159'], ['maria', m, 'POP-00013']]) {
     const pk = v2.buildAnglePacket({ cycle: CYCLE, desk: slice.seat.desk, reporter: { popid, name: slice.seat.name }, story: slice.story, approach: slice.approach, slice, lane: [] });
     const b = pk.task.creativeBrief;
     ok(label + ': brief beat-slice with facts + room', b && b.kind === 'beat-slice' && b.facts.length >= 1 && !!b.roomIsYours);

@@ -65,6 +65,7 @@ const BEAT_TABS = [
 // legal state — dumped as an empty file, never an abort.
 const OPTIONAL_TABS = [
   'Business_Archive',         // business — closures + exit metadata (engine.96 Phase11)
+  'Cultural_Ledger',          // Kai / Sharon — fame scores + trajectories per cultural figure
 ];
 
 const args = process.argv.slice(2);

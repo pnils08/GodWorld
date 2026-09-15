@@ -49,9 +49,12 @@ const BEAT_BUILDERS = {
   'angela-reyes': 'buildSchoolsSlice',
   'noah-tan': 'buildEnvironmentSlice',
   'elliot-graye': 'buildFaithSlice',
-  'rachel-torres': 'buildSafetySlice'
+  'rachel-torres': 'buildSafetySlice',
+  'kai-marston': 'buildArtsSlice',
+  'sharon-okafor': 'buildLifestyleSlice',
+  'maria-keen': 'buildNeighborhoodSlice'
 };
-const BEAT_NAME_RE = /trevor\s*shimizu|lila\s*mezran|angela\s*reyes|noah\s*tan|elliot\s*graye|rachel\s*torres/i;
+const BEAT_NAME_RE = /trevor\s*shimizu|lila\s*mezran|angela\s*reyes|noah\s*tan|elliot\s*graye|rachel\s*torres|kai\s*marston|sharon\s*okafor|maria\s*keen/i;
 function beatSlugForName(name) {
   const n = String(name || '');
   if (/trevor\s*shimizu/i.test(n)) return 'trevor-shimizu';
@@ -60,6 +63,9 @@ function beatSlugForName(name) {
   if (/noah\s*tan/i.test(n)) return 'noah-tan';
   if (/elliot\s*graye/i.test(n)) return 'elliot-graye';
   if (/rachel\s*torres/i.test(n)) return 'rachel-torres';
+  if (/kai\s*marston/i.test(n)) return 'kai-marston';
+  if (/sharon\s*okafor/i.test(n)) return 'sharon-okafor';
+  if (/maria\s*keen/i.test(n)) return 'maria-keen';
   return null;
 } // --no-gate ungated review samples (S332): never canon
 
@@ -1537,6 +1543,23 @@ async function runAngle(assign) {
           ' ref ' + packet.pulse.source);
       }
     } catch (e) { log('civic-domain slice load failed (non-fatal): ' + e.message); }
+  }
+  // The culture-lane seats (kai/sharon/maria) ride the evening pack AND their
+  // own beat slice (2026-09-14 culture lane): the else-if chain above serves
+  // the pack, this serves the slice. The slice leads the typed packet
+  // (selectTypedSlice reads beatSlice first); the pack stays as texture.
+  // No try/catch — same rule as every beat seat: a missing/stale dump fails
+  // this one wake, loudly, and nothing else.
+  if (!beatSlice && personaSlug && BEAT_BUILDERS[personaSlug]) {
+    const { loadSlice } = require(path.join(__dirname, BEAT_BUILDERS[personaSlug]));
+    const bs = loadSlice(cycle);
+    if (bs && !bs.empty) {
+      beatSlice = bs;
+      story = beatSlice.story || story;
+      approach = beatSlice.approach || approach;
+      log('beat slice loaded [' + beatSlice.kind + '] — ' + personaSlug + ' hood ' + (beatSlice.hood || '—') +
+        ' facts ' + beatSlice.facts.length + ' people ' + beatSlice.citizens.length);
+    }
   }
   let angleRead = null;
   let inputPacket = null;

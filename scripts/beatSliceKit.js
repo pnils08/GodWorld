@@ -102,6 +102,27 @@ function hooksFor(beats, cycle, journalistName) {
     .filter(h => h.text);
 }
 
+/**
+ * hooksFor plus a domain fallback: the engine misroutes or bare-carries several
+ * hook classes (FAITH → City Desk, EDUCATION → a desk no roster carries,
+ * FAME_WATCH / NEIGHBORHOOD_* / DROPOUT_WAVE raw-carried with no desk at all —
+ * engine cuts filed 2026-09-10/14). domainRe matches Domain or HookType;
+ * name-matched rows win, domain rows dedupe by text.
+ */
+function domainHooks(beats, cycle, journalistName, domainRe) {
+  const named = hooksFor(beats, cycle, journalistName);
+  const seen = new Set(named.map(h => h.text));
+  const domain = (beats.Story_Hook_Deck || [])
+    .filter(r => Number(r.Cycle) === Number(cycle) &&
+      (domainRe.test(String(r.Domain || '').toUpperCase()) || domainRe.test(String(r.HookType || '').toUpperCase())))
+    .map(r => ({
+      text: String(r.HookText || r.Description || '').trim(), angle: String(r.SuggestedAngle || '').trim() || null,
+      domain: r.Domain || r.HookType || null, hood: r.Neighborhood || null, priority: num(r.Priority)
+    }))
+    .filter(h => h.text && !seen.has(h.text));
+  return named.concat(domain);
+}
+
 /** Story_Seed_Deck rows for this cycle on a desk — citizens/businesses/colour lines, never the What/Why metric strings. */
 function seedsFor(beats, cycle, deskRe) {
   return (beats.Story_Seed_Deck || [])
@@ -303,6 +324,6 @@ function wire(seat) {
 module.exports = {
   ROOT, SCHEMA, FACTS_TAIL, FORBIDDEN,
   num, hoodKey, fmtInt, loadJson, arg,
-  loadBeatTabs, loadProfiles, prevTabRows, rosterAtSectors, hooksFor, seedsFor,
+  loadBeatTabs, loadProfiles, prevTabRows, rosterAtSectors, hooksFor, domainHooks, seedsFor,
   person, personFromProfile, citizenTags, makeSlice, emptySlice, formatMarkdown, wire
 };

@@ -88,5 +88,20 @@ const cm = {}; comm.forEach(h => { cm[h.suggestedJournalist] = (cm[h.suggestedJo
 console.log('  8 COMMUNITY moves: ' + JSON.stringify(cm));
 check('COMMUNITY stays on culture, Maria Keen named first and capped at 25% (min 2)', comm.every(h => !h.suggestedJournalist || onDesk(h.suggestedJournalist, 'culture')) && comm[0].suggestedJournalist === 'Maria Keen' && (cm['Maria Keen'] || 0) >= 2 && (cm['Maria Keen'] || 0) <= 3, JSON.stringify(cm));
 
+console.log('engine.190 — a high-severity world event hooks');
+(function () {
+  const ctx = { config: { cycleCount: 110 }, summary: { absoluteCycle: 110, cycleOfYear: 6, storyHooks: [], eventArcs: [],
+    worldEvents: [
+      { domain: 'BUSINESS', severity: 'high', neighborhood: 'Fruitvale', description: 'Ridgeline Tools is closing in Fruitvale — 6 weeks of decline; 14 jobs go with it' },
+      { domain: 'BUSINESS', severity: 'medium', neighborhood: 'Temescal', description: 'Corner Loaf is closing in Temescal — 5 weeks of decline; 3 jobs go with it' },
+      { domain: 'CIVIC', severity: 'low', neighborhood: '', description: 'a routine notice' }
+    ] } };
+  sb.storyHookEngine_(ctx);
+  const ev = ctx.summary.storyHooks.filter(h => h.hookType === 'event' && h.domain === 'BUSINESS');
+  // The domain-hookType dedupe keeps the highest-priority 'event' hook per domain (pre-existing), so the high closure survives and the medium one folds into it.
+  check('high BUSINESS event hooks (dedupe keeps the top one per domain), low does not', ev.length === 1 && !ctx.summary.storyHooks.some(h => h.hookType === 'event' && h.domain === 'CIVIC'), String(ev.length));
+  check('the high one carries priority 3, Business Desk, Jordan Velez', ev.some(h => h.priority === 3 && h.suggestedDesks === 'Business Desk' && h.suggestedJournalist === 'Jordan Velez'), JSON.stringify(ev.map(h => [h.priority, h.suggestedDesks, h.suggestedJournalist])));
+})();
+
 console.log('\n' + passed + ' passed, ' + failed + ' failed');
 process.exit(failed ? 1 : 0);

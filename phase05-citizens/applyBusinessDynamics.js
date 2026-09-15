@@ -462,12 +462,29 @@ function applyBusinessDynamics_(ctx) {
       closures.push({ id: id, name: bName, hood: hood, sector: String(row[iSec] || ''), closedCycle: cycle, stated: stated });
       out.ownersRetrenched = (out.ownersRetrenched || 0) + noteVentureClosedOwners_(ctx, iKP >= 0 ? row[iKP] : '', bName, cycle); // engine.201 Wave 2
       S.worldEvents = S.worldEvents || [];
+      // engine.190 (S463): a closure is the BUSINESS desk's event (was COMMUNITY —
+      // it routed to the culture packet, and Jordan Velez never saw the biggest
+      // business story of the week). The ≥10-job 'high' severity now hooks too
+      // (storyHook.js world-event loop, §15: a gate the beat's biggest event
+      // could not pass).
       S.worldEvents.push({
-        cycle: cycle, domain: 'COMMUNITY', subdomain: 'business-closure', neighborhood: hood,
+        cycle: cycle, domain: 'BUSINESS', subdomain: 'business-closure', neighborhood: hood,
         severity: stated >= 10 ? 'high' : 'medium',
         description: bName + ' is closing in ' + (hood || 'Oakland') + ' — ' + d.streak + (d.streak === 1 ? ' week' : ' weeks') + ' of decline and revenue under the line; ' + stated + ' jobs go with it',
         impactScore: stated >= 10 ? 40 : 25, source: 'ENGINE', timestamp: ctx.now, businessId: id
       });
+      // engine.190: one ripple per closure, business-scoped, so the closure is
+      // an ECONOMIC seed the same Cycle (buildContractSeeds economic-event →
+      // ECONOMIC → business). Mirrors economicRippleEngine's ledger row.
+      if (typeof recordRipple_ === 'function') {
+        recordRipple_(ctx, {
+          causeType: 'economic-event', causeId: id,
+          causeDetail: 'closure: ' + bName + ' (' + String(row[iSec] || '') + ') — ' + stated + ' jobs',
+          effectType: 'business-closure', targetScope: 'business', targetIds: [id],
+          neighborhood: hood || '', magnitude: -(stated >= 10 ? 40 : 25), duration: 1,
+          remainingStrength: 1, cycle: cycle, sourceEngine: 'applyBusinessDynamics'
+        });
+      }
       if (typeof queueEnsureTabIntent_ === 'function') {
         queueEnsureTabIntent_(ctx, 'Business_Archive', BIZ_ARCHIVE_HEADERS, 'engine.96 closure ledger (lazy tab, Phase-10 ensure)', 'economy', 25);
       }

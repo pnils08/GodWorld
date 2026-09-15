@@ -313,6 +313,25 @@ function runConductEngine_(ctx) {
       committed: committed
     });
 
+    // engine.233 (S463): a Serious or Grave transgression is a SAFETY story
+    // hook — before this S.conductEvents lived in memory only and the
+    // accountability desk (Luis, Jax, Rachel) never saw the human behind the
+    // crime number the same events raise. Petty stays in LifeHistory only;
+    // Resisted / Boundary* are private.
+    if (eventTag === "Transgression-Grave" || eventTag === "Transgression-Serious") {
+      S.storyHooks = S.storyHooks || [];
+      S.storyHooks.push({
+        hookType: 'CITIZEN_TRANSGRESSION',
+        domain: 'SAFETY',
+        severity: eventTag === "Transgression-Grave" ? 7 : 5,
+        description: ((row[iFirst] || '') + " " + (row[iLast] || '')).trim() + ' — ' + pick,
+        cycleGenerated: cycle,
+        popid: row[iPopID],
+        neighborhood: neighborhood,
+        tag: eventTag
+      });
+    }
+
     rows[r] = row;
     count++;
     S.eventsGenerated = (S.eventsGenerated || 0) + 1;

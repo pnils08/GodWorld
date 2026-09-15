@@ -973,12 +973,14 @@ function storyHookEngine_(ctx) {
     var desc = (ev.description || '').toLowerCase();
     var severity = ev.severity || 'low';
 
-    // Only hook on medium severity or specific keywords
-    if (severity === 'medium') {
+    // Hook on medium AND high severity (engine.190, S463: 'high' never hooked —
+    // a ≥10-job closure, the beat's biggest event, got no hook at all; §15).
+    // 'low' and the specific keywords below stay as they were.
+    if (severity === 'medium' || severity === 'high') {
       hooks.push(makeHook(
         ev.domain || 'GENERAL',
         ev.neighborhood || '',
-        2,
+        severity === 'high' ? 3 : 2,
         'Notable event: "' + ev.description + '". Follow-up recommended.',
         null,
         'event'

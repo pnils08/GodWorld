@@ -36,6 +36,7 @@
 | 1-Calendar | `advanceSimulationCalendar_()` | phase01-config/advanceSimulationCalendar.js | Set holiday, season, isFirstFriday, isCreationDay on ctx.summary |
 | 1-ResetAudit | `resetCycleAuditIssues_()` | godWorldEngine2.js | Clear previous cycle's audit flags |
 | 1-PrevEvening | `loadPreviousEvening_()` | phase01-config/loadPreviousEvening.js | Load previous cycle's evening snapshot from PropertiesService. **S116** |
+| 1-PrevCycleState (seeds) | `seedCarriedEconomicMood_()` · `seedCarriedNeighborhoodEconomies_()` · `seedCarriedActivityObservations_()` | phase01-config/loadPreviousEvening.js | Open the Cycle on last Cycle's city econ mood (engine.221), per-hood econ moods from `PREV_HOOD_ECON_JSON` (engine.219) and the activity history from `PREV_ACTIVITY_OBS_JSON` (engine.228, S462) — each its own carry key, missing blob = graceful no-op |
 
 **ctx.summary after Phase 1:** `cycleId`, `simDate`, `simYear`, `season`, `holiday`, `holidayPriority`, `isFirstFriday`, `isCreationDay`, `previousEvening`
 
@@ -52,7 +53,7 @@
 | 2-EditionCoverage | `applyEditionCoverageEffects_()` | phase02-world-state/applyEditionCoverageEffects.js | Per-domain media ratings (-5 to +5) → sentiment, domain cooldowns, neighborhood effects, story triggers. Compounds with civic voice sentiment (v2.0 S137b) |
 | 2-InitiativeEffects | `applyInitiativeImplementationEffects_()` | phase02-world-state/applyInitiativeImplementationEffects.js | Reads ImplementationPhase from Initiative_Tracker → domain ripples into AffectedNeighborhoods. Active programs benefit, stalled programs harm (v1.0 S137b) |
 | 2-Weather | `applyWeatherModel_()` | phase02-world-state/applyWeatherModel.js | Temperature, precipitation, visibility, wind, fronts; per-hood micro-climate for every hood on Neighborhood_Map via `WeatherZone` → `WEATHER_ZONES_` (engine.148 P2) |
-| 2-CityDynamics | `applyCityDynamics_()` | phase02-world-state/applyCityDynamics.js | Sentiment, cultural activity, community engagement, nightlife |
+| 2-CityDynamics | `applyCityDynamics_()` | phase02-world-state/applyCityDynamics.js | Sentiment, cultural activity, community engagement, nightlife **engine.225 (S462):** hood-economy terms price a hood by its delta from the hoods' own median (`hoodMoodMedian_`, nested); descriptor via `describeHoodEconomy_`. **engine.228b:** reads the carried activity history — last night = now, the nights before = baseline; no Phase-2 push. |
 | 2-Transit | `updateTransitMetrics_Phase2_()` | phase02-world-state/updateTransitMetrics.js | Transit ridership, delays, construction status |
 
 **ctx.summary after Phase 2:** adds `weather`, `sportsSeason`, `sportsFeedEntries`, `activeSports`, `cityDynamics`, `seasonalWeights`, `transitMetrics`, `editionSentimentBoost`, `editionDomainBalance`, `editionCoverageTriggers`, `editionNeighborhoodEffects`, `editionCoverageEffects`, `civicVoiceSentiment`, `initiativeImplementationEffects`, `initiativeNeighborhoodEffects`, `initiativeImplementationTriggers`
@@ -146,7 +147,7 @@
 | 5-NamedCitizens | `updateNamedCitizens_()` | godWorldEngine2.js | Update named citizen status/fields |
 | 5-CitizenEvents | `generateCitizensEvents_()` | phase05-citizens/generateCitizensEvents.js | ENGINE-only citizen life events (rich pipeline) |
 | 5-Promotions | `checkForPromotions_()` | phase05-citizens/checkForPromotions.js | Generic_Citizens → Simulation_Ledger emergence: the engine.58 lottery (EmergenceCount ≥ 3) + the engine.148 **migration wave** (`selectFloorWaveRows_`: `hoodFloorPromotePerCycle` rows into under-floor hoods, most-deficient first, under-represented sex first, one-cycle seasoning) |
-| 5-Advancement | `processAdvancementIntake_()` | phase05-citizens/processAdvancementIntake.js | Process advancement intake rows | **⚠ AUDIT:** Writes `ctx.summary.advancementResults` — nothing reads it. |
+| 5-Advancement | `processAdvancementIntake_()` | phase05-citizens/processAdvancementIntake.js | Process advancement intake rows. engine.230 (S462): processed rows cleared in contiguous runs, EmergenceCount written as one column — was one Sheets call per row, the slowest phase (48–152 s) | **⚠ AUDIT:** Writes `ctx.summary.advancementResults` — nothing reads it. |
 
 ### 5g: Tier-5 Engines (direct sheet writes)
 
@@ -169,9 +170,9 @@
 | 6-Spotlights | `applyNamedCitizenSpotlights_()` | phase05-citizens/applyNamedCitizenSpotlight.js | Highlight named citizens for coverage |
 | 6-RecurringCitizens | `computeRecurringCitizens_()` | phase06-analysis/computeRecurringCitizens.js | Identify citizens appearing in multiple data sources |
 | 6-CivicLoad | `applyCivicLoadIndicator_()` | phase06-analysis/applyCivicLoadIndicator.js | Civic system strain level |
-| 6-EconomicRipple | `runEconomicRippleEngine_()` | phase06-analysis/economicRippleEngine.js | Business economic triggers. Reads `S.careerSignals` from Career Engine, writes `S.economicMood`. |
+| 6-EconomicRipple | `runEconomicRippleEngine_()` | phase06-analysis/economicRippleEngine.js | Business economic triggers. Reads `S.careerSignals` from Career Engine, writes `S.economicMood`. `detectNewRipples_` reads WORLD events only (engine.226, S462: citizen lines never matched); `isBusinessClosure_` (222) and `isConstructionBoom_` (226) type the closure / construction keywords; `S.weatherEvents` salient events file NATURAL_DISASTER (flood) / INFRASTRUCTURE_FAILURE (storm, heat wave) on their own hoods (engine.229). |
 | 6-InitiativeRipple | `applyActiveInitiativeRipples_()` | (conditional) | Initiative cascading effects |
-| 6-Migration | `applyMigrationDrift_()` | phase06-analysis/applyMigrationDrift.js | Population movement trends. Reads `S.economicMood` from Economic Ripple. |
+| 6-Migration | `applyMigrationDrift_()` | phase06-analysis/applyMigrationDrift.js | Population movement trends. Reads `S.economicMood` from Economic Ripple. engine.225 (S462): hood mood band is a ±1.5 offset from the hood median (not a ratio); hood moods keep one decimal; descriptor via `describeHoodEconomy_`. |
 | 6-PatternDetect | `applyPatternDetection_()` | phase06-analysis/applyPatternDetection.js | Multi-cycle pattern recognition. Writes `S.patternFlag` (9+ readers). `S.patternCalendarContext` is orphaned. |
 | 6-ShockMonitor | `applyShockMonitor_()` | phase06-analysis/applyShockMonitor.js | Detect sudden state changes |
 | ~~6-ArcLifecycle~~ | ~~`processArcLifecycle_()`~~ | — | **Moved to Phase 8** (S116). Was no-op here — arcs load in Phase 8. |
@@ -226,6 +227,7 @@
 | 9-FinalizePopulation | `finalizeWorldPopulation_()` | phase03-population/finalizeWorldPopulation.js | Lock population numbers |
 | 9-EveningSnapshot | `snapshotEveningForCarryForward_()` | phase09-digest/finalizeCycleState.js | Snapshot evening data for next cycle's citizen events. **S116** |
 | 9-FinalizeCycleState | `finalizeCycleState_()` | phase09-digest/finalizeCycleState.js | Lock cycle state |
+| 9/10-CycleState (carry) | `savePreviousCycleState_()` → `compactNeighborhoodEconomies_()` · `compactActivityObservations_(S)` | phase09-digest/finalizeCycleState.js | `PREV_CYCLE_STATE_JSON` (9 KB prop cap, engine.223 guard) + own keys `PREV_HOOD_ECON_JSON` (219) and `PREV_ACTIVITY_OBS_JSON` (228b: this Cycle's real end-of-Cycle counts appended to the carried history, ≤12 entries) |
 
 ---
 

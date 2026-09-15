@@ -129,6 +129,13 @@ pointers:
 
 ## PROD deploy log — full trail
 
+### PROD @95 — engine.190 + 233: the closure and the transgression reach a desk (2026-09-15 ~18:50 Chicago, engine-sheet)
+
+Commit `eb289123` (engine tree = @94 `fbb4af97` + `applyBusinessDynamics.js` [closure domain BUSINESS + ripple] + `runConductEngine.js` [CITIZEN_TRANSGRESSION hook] + `storyHook.js` [world-event loop hooks 'high']). Apps Script version 84, read back @84. Isolated `git archive` stage; pull-back 169 files, 168 js byte-identical, 0 test files. Bench SANDBOX 0908 @50 C112: 136 s ok:true, 0 Engine_Errors, 38 deck rows — neither stream occurred on that Cycle (no-throw proven only).
+
+- **Expect at the next live fire (C108), on top of §PROD @94–@86:** any business closure that Cycle reads `domain BUSINESS` on the world event, a `business-closure` Ripple_Ledger row (economic-event, business-scoped, magnitude −25 / −40), and an `event | BUSINESS | Business Desk | Jordan Velez` deck row at priority 3 if ≥10 jobs (2 otherwise); any Transgression-Serious / -Grave from the conduct engine reads as a `CITIZEN_TRANSGRESSION | SAFETY | Civic Desk` deck row naming Rachel Torres or Luis Navarro, with the citizen and the LifeHistory line as HookText. Neither is guaranteed on a given Cycle (live C103–C106: ≤1 Serious per Cycle; closures rarer).
+- **Rollback:** `clasp deploy -i AKfycbwUvd4… -V 83` repoints to @94. No sheet migration.
+
 ### PROD @94 — engine.232: the hook names a desk that exists and a journalist on it (2026-09-15 ~18:20 Chicago, engine-sheet)
 
 Commit `fbb4af97` (engine tree = @93 `ea3fda33` + `storyHook.js` [DOMAIN_DESKS_, domain-first signal, in-Cycle rotation + 25% cap] + `rosterLookup.js` [deskKeys scoping]). Apps Script version 83, read back @83. Isolated `git archive` stage, repo-root `.clasp.json` copied in last; pull-back 169 files, 168 js byte-identical, 0 test files. Bench SANDBOX 0908 @48 C110 (67 rows, 0 errors) + @49 C111 (48 rows, 0 errors, 133 s).

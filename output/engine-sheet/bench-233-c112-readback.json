@@ -1,0 +1,23 @@
+{
+ "cycle": 112,
+ "rows": 38,
+ "errors": 0,
+ "journalists": {
+  "Elliot Graye": 2,
+  "Dana Reeve": 1,
+  "Luis Navarro": 1,
+  "(blank)": 11,
+  "Jordan Velez": 3,
+  "Sgt. Rachel Torres": 3,
+  "Angela Reyes": 1,
+  "Dr. Lila Mezran": 1,
+  "Maria Keen": 6,
+  "Carmen Delaine": 1,
+  "Kai Marston": 2,
+  "Sharon Okafor": 6
+ },
+ "transgressionHooks": 0,
+ "lifeHistoryTags": {
+  "Transgression-Serious|chaos_cars|cop_car": 1
+ }
+}

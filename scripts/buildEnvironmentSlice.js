@@ -15,7 +15,7 @@ const seasonFeel = require('./buildSeasonFeelSlice');
 const SEAT = {
   slug: 'noah-tan', name: 'Noah Tan', popid: 'POP-00157', desk: 'civic',
   kind: 'beat-weather', domain: 'environment', artifact: 'environment', builder: 'buildEnvironmentSlice.js',
-  version: 'ENVIRONMENT-SLICE-1', nameRe: /noah\s*tan/i,
+  version: 'ENVIRONMENT-SLICE-2', nameRe: /noah\s*tan/i,
   tabs: ['Cycle_Weather', 'Story_Hook_Deck'],
   approach: 'Weather and environment approach: this slice is the cycle\'s weather row, the streak, and the last three cycles beside it, plus whoever the record says lived it. Science-first ground translation — temperature is context, never the lede. Show what this weather moved.',
   roomIsYours: 'the sidewalk, the coats, what this weather does to a plan, who is out in it and who stayed in, what the bay smells like today',
@@ -30,7 +30,8 @@ function build(cycle, { root, beats, profiles }) {
   const src = 'output/beats/Cycle_Weather.jsonl CycleID ' + cycle;
   const streak = K.num(now.Streak);
   const facts = [{
-    text: 'This cycle: ' + now.Type + ', ' + now.Temp + '°F' + (now.Comfort ? ', comfort ' + now.Comfort : '') + (now.Mood ? ', mood ' + now.Mood : '') +
+    text: 'This cycle: ' + now.Type + ', ' + now.Temp + '°F' + (now.Impact ? ', impact ' + now.Impact : '') +
+      (now.Comfort ? ', comfort ' + now.Comfort : '') + (now.Mood ? ', mood ' + now.Mood : '') +
       (streak > 1 ? ', ' + streak + ' cycles of ' + now.StreakType : '') + (now.Advisory ? ', advisory: ' + now.Advisory : '') + (now.Alerts ? ', alerts: ' + now.Alerts : ''),
     src
   }];
@@ -60,7 +61,7 @@ function build(cycle, { root, beats, profiles }) {
     hookLine: label + (people.length ? '; ' + people.length + ' residents on the record lived it.' : '.'),
     facts, people,
     deltas: { state: recent.length ? 'PRIOR_CYCLE_IN_TABLE' : 'NO_PRIOR_CYCLE', vs: last ? K.num(last.CycleID) : null },
-    hooks: K.hooksFor(beats, cycle, SEAT.name),
+    hooks: K.domainHooks(beats, cycle, SEAT.name, /^(ENVIRONMENT)$/),
     note: people.length ? null : 'no resident on the record lived the weather this cycle — the people out in it are yours, unnamed',
     extra: { weather: now, recent }
   });

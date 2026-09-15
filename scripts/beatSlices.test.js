@@ -75,7 +75,7 @@ function writeDump(dir, cycle) {
     Cycle_Weather: [
       { CycleID: String(cycle - 2), Type: 'rain', Temp: '48', Comfort: '0.2', Mood: 'introspective', Streak: '1', StreakType: 'rain' },
       { CycleID: String(cycle - 1), Type: 'rain', Temp: '49', Comfort: '0.2', Mood: 'introspective', Streak: '2', StreakType: 'rain' },
-      { CycleID: String(cycle), Type: 'overcast', Temp: '52', Comfort: '0.5', Mood: 'neutral', Streak: '1', StreakType: 'overcast' }
+      { CycleID: String(cycle), Type: 'overcast', Temp: '52', Impact: 'moderate', Comfort: '0.5', Mood: 'neutral', Streak: '1', StreakType: 'overcast' }
     ],
     Faith_Organizations: [
       { Organization: 'Test Fellowship', FaithTradition: 'Protestant', Neighborhood: 'Downtown', Congregation: '450', Leader: 'Rev. Test Leader', LeaderPOPID: 'POP-90010', MembersList: '["POP-90001"]', ActiveStatus: 'active' },
@@ -119,7 +119,9 @@ function writeDump(dir, cycle) {
       // FAME_WATCH is raw-carried — no desk, no journalist.
       { Cycle: String(cycle), HookId: 'h6', HookType: 'FAME_WATCH', Domain: 'CULTURE', Neighborhood: '', Priority: '', HookText: 'FAME_WATCH: Test Rising Musician gaining attention.', SuggestedDesks: '', SuggestedJournalist: '', SuggestedAngle: '' },
       // NEIGHBORHOOD_* are raw-carried too.
-      { Cycle: String(cycle), HookId: 'h7', HookType: 'NEIGHBORHOOD_RISING', Domain: 'NEIGHBORHOOD_RISING', Neighborhood: 'Downtown', Priority: '', HookText: 'Downtown is rising — momentum building.', SuggestedDesks: '', SuggestedJournalist: '', SuggestedAngle: '' }
+      { Cycle: String(cycle), HookId: 'h7', HookType: 'NEIGHBORHOOD_RISING', Domain: 'NEIGHBORHOOD_RISING', Neighborhood: 'Downtown', Priority: '', HookText: 'Downtown is rising — momentum building.', SuggestedDesks: '', SuggestedJournalist: '', SuggestedAngle: '' },
+      // ENVIRONMENT routes to the Civic Desk and a non-seat journalist — Noah gets it by domain.
+      { Cycle: String(cycle), HookId: 'h8', HookType: 'signal', Domain: 'ENVIRONMENT', Neighborhood: '', Priority: '1', HookText: 'Air quality watch: wildfire smoke drifts in from the hills.', SuggestedDesks: 'Civic Desk', SuggestedJournalist: 'Mags Corliss', SuggestedAngle: '' }
     ],
     Story_Seed_Deck: [
       { Cycle: String(cycle), SeedID: 'cs1', Desk: 'culture', Class: 'minor', Domain: 'COMMUNITY', Neighborhood: 'Temescal', What: 'holy_day +0.01', Why: 'x', Citizens: 'POP-90001 Test Civic Resident', CitizenEvents: '', Businesses: '', OtherEntities: '', Magnitude: '0.01', Trend: '', SuggestedJournalist: '', SuggestedAngle: '' }
@@ -230,6 +232,8 @@ try {
   ok('label', e.story.label === 'C103 overcast, 52°F after rain');
   ok('recent cycles fact', e.facts.some(f => /Last 2 cycles: C101 rain 48°F, C102 rain 49°F/.test(f.text)));
   ok('season-feel citizen rides along with ledger role', e.citizens.some(c => c.popid === 'POP-90004' && c.role === 'Bus Operator'));
+  ok('impact column read', e.facts[0].text.includes('impact moderate'));
+  ok('ENVIRONMENT hook reaches him by domain (Civic Desk misroute)', e.prewrite.hooks.some(h => /wildfire smoke drifts in/.test(h.text) && h.domain === 'ENVIRONMENT'));
 
   console.log('faith:');
   const f = faith.buildFaithSlice(CYCLE, { root });

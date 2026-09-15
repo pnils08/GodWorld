@@ -509,7 +509,11 @@ function detectNewRipples_(ctx, currentCycle) {
   var crisisEvents = S.crisisSpikes || [];
   var domains = S.domainPresence || {};
   
-  var allEvents = worldEvents.concat(citizenEvents);
+  // engine.226: the detector reads WORLD events only. Citizen lines carry their text in `text`
+  // (never `headline`/`description`), so the concat below had matched nothing since it was
+  // written — and opening it would turn 200+ texture lines a Cycle ("noticed cranes over the
+  // block", "crime" in a passing sentence) into ripples. Texture is colour, not a cause.
+  var allEvents = worldEvents.slice();
   
   for (var i = 0; i < allEvents.length; i++) {
     var evt = allEvents[i];
@@ -525,7 +529,9 @@ function detectNewRipples_(ctx, currentCycle) {
     else if (evtText.indexOf('new store') >= 0 || evtText.indexOf('grand opening') >= 0) {
       createRipple_(S, 'NEW_BUSINESS', currentCycle, evt, evtNeighborhood, cal);
     }
-    else if (evtText.indexOf('construction') >= 0 || evtText.indexOf('development') >= 0) {
+    else if ((evtText.indexOf('construction') >= 0 || evtText.indexOf('development') >= 0) && isConstructionBoom_(evt, evtText)) {
+      // engine.226: a CONSTRUCTION_BOOM (+12 for 10 Cycles) only when a build is the subject — typed
+      // domain first, then a build noun; "Community Development committee" is neither.
       createRipple_(S, 'CONSTRUCTION_BOOM', currentCycle, evt, evtNeighborhood, cal);
     }
     else if (evtText.indexOf('layoff') >= 0 || evtText.indexOf('job cuts') >= 0) {
@@ -571,6 +577,26 @@ function detectNewRipples_(ctx, currentCycle) {
  * first (worldEventsEngine / generateCitizensEvents tag `domain`), then a business noun
  * in the text for untyped sources. A CIVIC "road closure decision" is neither.
  */
+/**
+ * engine.226: does this construction/development text describe a build the economy feels? Typed
+ * domain first — BUSINESS, or any event carrying a business id, passes; CIVIC / TRAFFIC /
+ * INFRASTRUCTURE / WEATHER / SAFETY / HEALTH refuse (a permit vote, "Economic Development" as a
+ * portfolio name); anything else needs a build noun. Live C95–C107: 0 keyword hits in 136 world
+ * events, 0 CONSTRUCTION_BOOM on the ring or Ripple_Ledger — latent, the same untyped-keyword
+ * class engine.222 closed for closures.
+ */
+var CONSTRUCTION_BOOM_NOUNS_ = ['crane', 'groundbreaking', 'broke ground', 'breaks ground', 'break ground', 'contractor',
+  'builders', 'construction firm', 'construction crew', 'tower', 'units', 'build site', 'housing development', 'mixed-use'];
+function isConstructionBoom_(evt, evtText) {
+  var domain = String((evt && evt.domain) || '').toUpperCase();
+  if (domain === 'BUSINESS' || (evt && (evt.bizId || evt.businessId))) return true;
+  if (domain === 'CIVIC' || domain === 'TRAFFIC' || domain === 'INFRASTRUCTURE' || domain === 'WEATHER' || domain === 'SAFETY' || domain === 'HEALTH') return false;
+  for (var i = 0; i < CONSTRUCTION_BOOM_NOUNS_.length; i++) {
+    if (evtText.indexOf(CONSTRUCTION_BOOM_NOUNS_[i]) >= 0) return true;
+  }
+  return false;
+}
+
 var BUSINESS_CLOSURE_NOUNS_ = ['factory', 'plant', 'business', 'store', 'shop', 'restaurant', 'warehouse',
   'employer', 'company', 'firm', 'office', 'workers', 'jobs', 'mill', 'brewery', 'cafe', 'bar '];
 function isBusinessClosure_(evt, evtText) {

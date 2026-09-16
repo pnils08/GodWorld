@@ -54,9 +54,10 @@ const BEAT_BUILDERS = {
   'sharon-okafor': 'buildLifestyleSlice',
   'maria-keen': 'buildNeighborhoodSlice',
   'selena-grant': 'buildOaksBeatSlice',
-  'talia-finch': 'buildOaksGroundSlice'
+  'talia-finch': 'buildOaksGroundSlice',
+  'celeste-tran': 'buildTrendsSlice'
 };
-const BEAT_NAME_RE = /trevor\s*shimizu|lila\s*mezran|angela\s*reyes|noah\s*tan|elliot\s*graye|rachel\s*torres|kai\s*marston|sharon\s*okafor|maria\s*keen|selena\s*grant|talia\s*finch/i;
+const BEAT_NAME_RE = /trevor\s*shimizu|lila\s*mezran|angela\s*reyes|noah\s*tan|elliot\s*graye|rachel\s*torres|kai\s*marston|sharon\s*okafor|maria\s*keen|selena\s*grant|talia\s*finch|celeste\s*tran/i;
 function beatSlugForName(name) {
   const n = String(name || '');
   if (/trevor\s*shimizu/i.test(n)) return 'trevor-shimizu';
@@ -70,6 +71,7 @@ function beatSlugForName(name) {
   if (/maria\s*keen/i.test(n)) return 'maria-keen';
   if (/selena\s*grant/i.test(n)) return 'selena-grant';
   if (/talia\s*finch/i.test(n)) return 'talia-finch';
+  if (/celeste\s*tran/i.test(n)) return 'celeste-tran';
   return null;
 } // --no-gate ungated review samples (S332): never canon
 
@@ -859,6 +861,9 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
     } else if (persona.name && /talia\s*finch/i.test(persona.name)) {
       L.push('STANCE: Oaks ground. The street around the park, first-person. The record is context, the people are the story.');
       L.push('ONE piece — not multi-voice sports-desk average.');
+    } else if (persona.name && /celeste\s*tran/i.test(persona.name)) {
+      L.push('STANCE: social trends. Fast, reactive, grounded — a trend claim needs a window and a number from the slice.');
+      L.push('ONE piece — not multi-voice culture-desk average.');
     } else if (persona.name && /simon\s*leary/i.test(persona.name)) {
       L.push('STANCE: long view. Sports as civic architecture. Quiet continuity.');
       L.push('ONE piece — not multi-voice sports-desk average.');

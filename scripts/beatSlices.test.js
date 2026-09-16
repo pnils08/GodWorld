@@ -20,6 +20,7 @@ const safety = require('./buildSafetySlice');
 const arts = require('./buildArtsSlice');
 const lifestyle = require('./buildLifestyleSlice');
 const neighborhood = require('./buildNeighborhoodSlice');
+const trends = require('./buildTrendsSlice');
 const v2 = require('./livedExperiencePacketV2');
 
 const CYCLE = 103;
@@ -58,6 +59,8 @@ function writeDump(dir, cycle) {
       { 'CUL-ID': 'CUL-T1', Name: 'Test Rising Musician', RoleType: 'Musician', FameCategory: 'musician', CulturalDomain: 'Arts', Status: 'Active', UniverseLinks: 'POP-90001', FirstSeenCycle: '80', LastSeenCycle: String(cycle), MediaCount: '7', FameScore: '34', TrendTrajectory: 'rising', CityTier: 'Local', Neighborhood: 'Temescal' },
       { 'CUL-ID': 'CUL-T2', Name: 'Test Fading Actor', RoleType: 'Actor', FameCategory: 'actor', CulturalDomain: 'Media', Status: 'Active', UniverseLinks: '', FirstSeenCycle: '60', LastSeenCycle: '98', MediaCount: '21', FameScore: '58', TrendTrajectory: 'fading', CityTier: 'City', Neighborhood: 'Piedmont Ave' },
       { 'CUL-ID': 'CUL-T3', Name: 'Test New Chef', RoleType: 'Chef', FameCategory: 'chef', CulturalDomain: 'Culinary', Status: 'Active', UniverseLinks: 'POP-90003', FirstSeenCycle: String(cycle), LastSeenCycle: String(cycle), MediaCount: '1', FameScore: '12', TrendTrajectory: 'quiet', CityTier: 'Local', Neighborhood: 'Fruitvale' },
+      // No mentions yet — never makes the talked-about list; the appeared list catches her.
+      { 'CUL-ID': 'CUL-T5', Name: 'Test Fresh Poet', RoleType: 'Poet', FameCategory: 'poet', CulturalDomain: 'Literature', Status: 'Active', UniverseLinks: '', FirstSeenCycle: String(cycle - 1), LastSeenCycle: String(cycle - 1), MediaCount: '', FameScore: '8', TrendTrajectory: 'quiet', CityTier: 'Local', Neighborhood: 'Temescal' },
       // Inactive — never rides a slice.
       { 'CUL-ID': 'CUL-T4', Name: 'Test Retired Poet', RoleType: 'Poet', CulturalDomain: 'Literature', Status: 'inactive', UniverseLinks: '', FirstSeenCycle: '40', LastSeenCycle: '70', MediaCount: '3', FameScore: '44', TrendTrajectory: 'quiet', CityTier: 'City', Neighborhood: 'Downtown' }
     ],
@@ -309,8 +312,29 @@ try {
   ok('talia: fans + mood lead', /Oaks fans, C103: restless/.test(tf.facts[0].text) && tf.facts.some(f => /Room mood, C103: frustrated/.test(f.text)));
   ok('talia: record is context, not the lead', tf.facts.some(f => /Context: record 12-30 · streak L4/.test(f.text)) && /Jack London/.test(tf.hood));
 
+  console.log('trends (celeste):');
+  const ct = trends.buildTrendsSlice(CYCLE, { root });
+  ok('celeste: most-mentioned leads the conversation', /Test Fading Actor \(Actor\), Media — 21 media mentions, fading/.test(ct.facts[0].text));
+  ok('celeste: new-on-record rides (and never double-lists)', ct.facts.some(f => /Test Fresh Poet \(Literature\) — new on the culture record C102/.test(f.text)) &&
+    ct.facts.filter(f => /Test New Chef/.test(f.text)).length === 1);
+  ok('celeste: universe-linked figure resolves', ct.citizens.some(c => c.popid === 'POP-90001' && /city is talking about them/.test(c.why)));
+  ok('celeste: movement needs prev/ (none here → no movement fact)', !ct.facts.some(f => /Movement vs/.test(f.text)) && ct.prewrite.deltas.state === 'NO_PRIOR_CYCLE');
+  ok('celeste: movement fact when prev/ exists', (() => {
+    const pd = path.join(output, 'beats', 'prev');
+    fs.mkdirSync(pd, { recursive: true });
+    writeJsonl(path.join(pd, 'Neighborhood_Demographics.jsonl'), [
+      { Neighborhood: 'Downtown', Students: '290', Adults: '4950', Seniors: '600' }
+    ]);
+    fs.writeFileSync(path.join(pd, 'meta.json'), JSON.stringify({ cycle: CYCLE - 1, rows: { Neighborhood_Demographics: 1 } }));
+    const x = trends.buildTrendsSlice(CYCLE, { root });
+    fs.rmSync(pd, { recursive: true, force: true });
+    return x.facts.some(f => /Movement vs C102: Downtown \+60 people/.test(f.text));
+  })());
+  ok('celeste: NEIGHBORHOOD_RISING hook by domain', ct.prewrite.hooks.some(h => /Downtown is rising/.test(h.text)));
+  ok('celeste: CELEBRITY/FAME_WATCH are not hers', !ct.prewrite.hooks.some(h => /gala|gaining attention/.test(h.text)));
+
   console.log('typed packet (LEP/2) per seat:');
-  for (const [label, slice, popid] of [['trevor', t, 'POP-00155'], ['lila', h, 'POP-00154'], ['angela', s, 'POP-00156'], ['noah', e, 'POP-00157'], ['graye', f, 'POP-00012'], ['rachel', r, 'POP-00057'], ['kai', k, 'POP-00158'], ['sharon', sh, 'POP-00159'], ['maria', m, 'POP-00013'], ['selena', sg, 'POP-00591'], ['talia', tf, 'POP-00592']]) {
+  for (const [label, slice, popid] of [['trevor', t, 'POP-00155'], ['lila', h, 'POP-00154'], ['angela', s, 'POP-00156'], ['noah', e, 'POP-00157'], ['graye', f, 'POP-00012'], ['rachel', r, 'POP-00057'], ['kai', k, 'POP-00158'], ['sharon', sh, 'POP-00159'], ['maria', m, 'POP-00013'], ['selena', sg, 'POP-00591'], ['talia', tf, 'POP-00592'], ['celeste', ct, 'POP-00164']]) {
     const pk = v2.buildAnglePacket({ cycle: CYCLE, desk: slice.seat.desk, reporter: { popid, name: slice.seat.name }, story: slice.story, approach: slice.approach, slice, lane: [] });
     const b = pk.task.creativeBrief;
     ok(label + ': brief beat-slice with facts + room', b && b.kind === 'beat-slice' && b.facts.length >= 1 && !!b.roomIsYours);

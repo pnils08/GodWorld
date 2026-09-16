@@ -49,7 +49,7 @@ const WEEK_GRID = Object.freeze({
   2: ['luis-navarro', 'rachel-torres', 'angela-reyes', 'selena-grant'],
   3: ['freelance-firebrand', 'noah-tan', 'p-slayer'],
   4: ['elliot-graye', 'simon-leary', 'hal-richmond|tanya-cruz', 'talia-finch'],
-  5: ['mason-ortega', 'kai-marston', 'sharon-okafor', 'maria-keen']
+  5: ['mason-ortega', 'kai-marston', 'sharon-okafor', 'maria-keen', 'celeste-tran']
 });
 function weekdayOf(date) {
   return new Date(String(date) + 'T12:00:00Z').getUTCDay();
@@ -675,7 +675,8 @@ async function buildFanout(date) {
     'sharon-okafor': 'buildLifestyleSlice',
     'maria-keen': 'buildNeighborhoodSlice',
     'selena-grant': 'buildOaksBeatSlice',
-    'talia-finch': 'buildOaksGroundSlice'
+    'talia-finch': 'buildOaksGroundSlice',
+    'celeste-tran': 'buildTrendsSlice'
   };
   let beatEnrich = { enriched: false, reason: 'none', seats: [], dropped: [] };
   if (cycle != null) {

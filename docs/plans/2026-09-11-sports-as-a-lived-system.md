@@ -302,7 +302,7 @@ Repurpose **`VideoGame` to `WeekRecord`** at the later migration; remove `VideoG
 One weekly summary per franchise per Cycle, plus optional narrative rows. `WeekRecord` contains games in played order, separated by spaces: **`H:W H:L A:W`** means a home win, home loss, away win (synthetic syntax example, not a recorded week). From this one authored cell the shared parser derives `2-1`, three games, two home games, one away game, and first result `W`. `Team Record` remains the separate cumulative/current-series record; `Streak` remains the actual ending streak, which can cross a Cycle boundary. Neither is fabricated from the weekly sequence.
 
 - Played games require `EventType=game-result`. An explicit **`none`** reports zero games using `EventType=season-state`, avoiding a fake game-result event. Blank means unreported/supplemental; it does not mean zero.
-- The reader rejects malformed input, unknown weekly franchises and duplicate summaries after team normalization. Case and whitespace normalize; unsupported venues/results and free-text fragments fail visibly. Only current-Cycle rows are validated; no historical replay or carry-forward of weekly results.
+- The reader rejects malformed input, unknown weekly franchises and duplicate summaries after team normalization — **per cell, never per cycle**: the row stays, its weekly facts are dropped, the rejection lands in `Engine_Errors` (`Phase2-SportsSeason:WeekRecord`, row number included). Case and whitespace normalize; unsupported venues/results and free-text fragments are rejected visibly. Only current-Cycle rows are validated; no historical replay or carry-forward of weekly results.
 - The casino uses the **first result inside the weekly summary**, preserving the accepted first-result rule. It does not use majority wins or the ending `Streak`. A weekly summary takes precedence over supplemental rows; explicit no-games carries. With no weekly summary, the existing legacy first-parseable-result path remains.
 - Both Apps Script and the Node casino helper use the same pure helper. The parser produces fresh derived objects; the selector retains a read-only reference to its input entry. Neither caller mutates that entry; the regression checks input preservation and outcome parity.
 - This cut carries raw normalized `weekRecord` on existing feed entries and consumes it for settlement. It does **not** reprice sentiment, odds, employment, migration, activity intensity or geographic reach. Derived game/home counts become inputs to Tasks 3–4 when those readers are built.
@@ -370,14 +370,18 @@ harness does fail the build (`process.exitCode = 1`).
 5. **Dead-column wording overstates the absence of readers.** Phase 10 still copies `VideoGameDate`/`VideoGame` into handoff entries (`compileHandoff.js:1680-1681,1716-1717`). They have no numeric engine role; schema migration must still update the export. Other media/wake projections must carry the new weekly facts before author entry switches.
 6. **The §3 impact destinations still require causal implementation.** EconomicFootprint, CommunityInvestment and FranchiseStability cannot be called wired on the strength of parsed values alone. Their actual sector/community/business readers belong with Tasks 3–4; keep this dependency explicit when sequencing contract preparation and activation.
 
-7. **The reader's throw blanks the whole sports channel for the Cycle.** `readOaklandFeedEntries_`
-   is called at `applySportsSeason.js:68`, *before* `S.sportsFeedEntries`, `S.sportsSeason`,
-   `S.sportsZones`, `S.baylightOpenings` and `S.sportsSeasonByTeam` are assigned. `safePhaseCall_`
-   (`godWorldEngine2.js:159-170`) catches the throw and writes `Engine_Errors`, so the cycle
-   survives — but every one of those fields stays unset, and `S.sportsSeason` is read in 64 files.
-   Codex's "fails visibly" is one error row plus a silent city-wide sports outage. Decide
-   throw-vs-log-and-skip-the-row **before** the header migration. Inert today (no `WeekRecord`
-   header → `findColumnIndex_` returns -1 → `getColVal_` returns `''`), so it does not block landing.
+7. ~~The reader's throw blanks the whole sports channel for the Cycle~~ **RESOLVED (engine-sheet,
+   2026-09-16).** `readOaklandFeedEntries_` runs at `applySportsSeason.js:68` before any `S.sports*`
+   field is assigned, so a throw there — caught by `safePhaseCall_`, logged to `Engine_Errors` — left
+   `S.sportsSeason` (64 readers), `S.sportsZones`, `S.sportsSeasonByTeam` unset for the cycle: one
+   authored typo, one error row, a silent city-wide sports blank. Ruling applied: **a bad cell rejects
+   the cell, never the cycle.** The weekly block is wrapped; on rejection the row is kept (its
+   SeasonType / Streak / Team Record are still recorded facts), only `weekRecord` is dropped, and the
+   rejection goes to `Engine_Errors` via `logEngineError_` tagged `Phase2-SportsSeason:WeekRecord`,
+   with the row number. Duplicates: the first summary per franchise stands, later ones are rejected.
+   The casino then falls back to the legacy first-parseable-`Streak` path for that team. Proven:
+   `sportsWeekRecord.test.js` 37/37, including a case where a garbage A's cell sits beside a valid
+   Oaks week and season derivation, Oaks settlement and the A's legacy settlement all still fire.
 8. ~~nba→Oaks fold in season derivation~~ **RESOLVED by ruling (Mike, 2026-09-16): "it's just A's and
    Oaks now. Bulls/Chicago is strictly canon, not active. NBA was used for the build-up before the
    Oaks story arc began."** `NBA`/`Warriors` are retired labels: `normalizeOaklandFeedTeam_` returns

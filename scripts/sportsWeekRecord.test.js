@@ -25,6 +25,20 @@ const parse = raw => {
 };
 const base = { Cycle: 404, TeamsUsed: "A's", EventType: 'game-result', SeasonType: 'regular-season',
   'Team Record': '12-7', Streak: 'L1', Notes: 'SYNTHETIC NON-CANON weekly fixture' };
+// The reader must never throw: a bad cell is rejected into Engine_Errors and
+// the row survives without weekly facts (engine.202 defect 7).
+box.__rejections = [];
+box.logEngineError_ = (ctx, phase, err) => box.__rejections.push(phase + ': ' + err.message);
+const rejected = () => { const r = box.__rejections.slice(); box.__rejections.length = 0; return r; };
+function readRejecting(rows, pattern) {
+  box.__rejections.length = 0;
+  const entries = read(rows);
+  const errs = rejected();
+  assert.ok(errs.length >= 1, 'expected a rejection, got none');
+  assert.match(errs.join('\n'), pattern);
+  assert.ok(errs.every(e => /^Phase2-SportsSeason:WeekRecord: /.test(e)), 'rejection must be phase-tagged');
+  return entries;
+}
 function read(rows, extraHeaders = ['WeekRecord']) {
   const headers = [...Object.keys(base), ...extraHeaders];
   const values = [headers, ...rows.map(row => headers.map(h => row[h] ?? ''))];
@@ -77,34 +91,54 @@ test('current-Cycle reader carries normalized weekly input only', () => {
   assert.strictEqual(result.length, 1);
   assert.strictEqual(result[0].weekRecord, 'H:W A:L');
 });
-test('malformed current weekly input rejects the read', () => {
-  assert.throws(() => read([row({ WeekRecord: 'H:W bad' })]), /WeekRecord/);
+test('malformed weekly input rejects the cell, keeps the row, never the cycle', () => {
+  const entries = readRejecting([row({ WeekRecord: 'H:W bad' })], /WeekRecord/);
+  assert.strictEqual(entries.length, 1, 'the row still carries its recorded facts');
+  assert.strictEqual(entries[0].streak, 'L1');
+  assert.strictEqual('weekRecord' in entries[0], false, 'no weekly facts survive a bad cell');
 });
-test('duplicate weekly summaries reject instead of silently choosing a result', () => {
-  assert.throws(() => read([row({ WeekRecord: 'H:W' }), row({ WeekRecord: 'A:L' })]), /duplicate.*WeekRecord/i);
+test('duplicate weekly summaries: first stands, later rejected, never silently merged', () => {
+  const entries = readRejecting([row({ WeekRecord: 'H:W' }), row({ WeekRecord: 'A:L' })], /duplicate.*WeekRecord/i);
+  assert.strictEqual(entries.length, 2);
+  assert.strictEqual(entries[0].weekRecord, 'H:W');
+  assert.strictEqual('weekRecord' in entries[1], false);
 });
 test('team aliases cannot bypass duplicate protection', () => {
   // 'as' and "A's" both normalize to the A's, so a spelling change must not buy a second week.
-  assert.throws(() => read([row({ TeamsUsed: 'as', WeekRecord: 'H:W' }), row({ TeamsUsed: "A's", WeekRecord: 'A:L' })]), /duplicate.*WeekRecord/i);
+  const entries = readRejecting([row({ TeamsUsed: 'as', WeekRecord: 'H:W' }), row({ TeamsUsed: "A's", WeekRecord: 'A:L' })], /duplicate.*WeekRecord/i);
+  assert.strictEqual(entries[0].weekRecord, 'H:W');
+  assert.strictEqual('weekRecord' in entries[1], false);
 });
 test('two franchises may each report a week', () => {
   assert.strictEqual(read([row({ WeekRecord: 'H:W' }), row({ TeamsUsed: 'Oaks', WeekRecord: 'A:L' })]).length, 2);
+  assert.deepStrictEqual(rejected(), []);
 });
 test('real-NBA rows never claim the Oaks week or settle an Oaks wager', () => {
-  // Live feed: all 8 TeamsUsed='NBA' rows are real-NBA canon (C84 Bulls 121-105,
-  // C88-C92 expansion bid / Paulson), predating the Oaks' first result at C101.
+  // NBA/Warriors are retired pre-Oaks build-up labels (ruling 2026-09-16); the
+  // live feed's 8 NBA rows are C84 Bulls 121-105 and the C88-C92 expansion arc.
   // A Bulls box score must never resolve an Oaks moneyline.
-  assert.throws(() => read([row({ TeamsUsed: 'NBA', WeekRecord: 'H:W A:L' })]), /requires an Oakland franchise/);
+  const nba = readRejecting([row({ TeamsUsed: 'NBA', WeekRecord: 'H:W A:L' })], /requires an Oakland franchise/);
+  assert.strictEqual(box.casinoParseSports_(nba, 'oaks').kind, 'carry');
   const oaks = read([row({ TeamsUsed: 'Oaks', WeekRecord: 'H:W A:L' })]);
   assert.strictEqual(box.casinoParseSports_(oaks, 'oaks').franchiseWon, true);
 });
 test('weekly games require game-result; no-games requires season-state', () => {
-  assert.throws(() => read([row({ WeekRecord: 'H:W', EventType: 'player-feature' })]), /WeekRecord/);
-  assert.throws(() => read([row({ WeekRecord: 'none' })]), /WeekRecord/);
+  readRejecting([row({ WeekRecord: 'H:W', EventType: 'player-feature' })], /games require game-result/);
+  readRejecting([row({ WeekRecord: 'none' })], /none requires season-state/);
   assert.strictEqual(read([row({ WeekRecord: 'none', EventType: 'season-state' })])[0].weekRecord, 'none');
 });
-test('unknown weekly team fails visibly instead of becoming an unassigned result', () => {
-  assert.throws(() => read([row({ WeekRecord: 'H:W', TeamsUsed: 'SYNTHETIC-UNKNOWN' })]), /WeekRecord/);
+test('unknown weekly team is rejected visibly instead of becoming an unassigned result', () => {
+  const entries = readRejecting([row({ WeekRecord: 'H:W', TeamsUsed: 'SYNTHETIC-UNKNOWN' })], /requires an Oakland franchise/);
+  assert.strictEqual('weekRecord' in entries[0], false);
+});
+test('a rejected cell leaves the rest of the cycle\'s sports state intact', () => {
+  // The whole point of defect 7: one bad cell must not blank the city.
+  const entries = readRejecting([row({ WeekRecord: 'garbage' }), row({ TeamsUsed: 'Oaks', WeekRecord: 'A:W', SeasonType: 'playoffs' })], /WeekRecord/);
+  assert.strictEqual(entries.length, 2);
+  assert.deepStrictEqual(plain(box.deriveSeasonByTeamFromFeed_(entries)), { "A's": 'regular-season', Oaks: 'playoffs' });
+  assert.strictEqual(box.casinoParseSports_(entries, 'oaks').franchiseWon, true);
+  // The A's row lost its weekly facts but its Streak still settles by the legacy path.
+  assert.strictEqual(box.casinoParseSports_(entries, 'as').franchiseWon, false);
 });
 test('first weekly result wins despite a losing final streak', () => {
   assert.strictEqual(resolve(read([row({ WeekRecord: 'H:W A:L' })])).status, 'settled-win');

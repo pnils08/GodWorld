@@ -214,19 +214,38 @@ function readOaklandFeedEntries_(ctx, currentCycle) {
     };
     // Only the explicit new header carries weekly facts. Historical dead-column
     // values and blank supplemental rows never become game results.
+    //
+    // A bad cell rejects the CELL, never the cycle (engine.202 defect 7). This
+    // reader runs first in applySportsSeason_, before the summary's season,
+    // zone and by-team sports fields are assigned; a throw here is caught by
+    // safePhaseCall_ but leaves all of them unset for 64 downstream readers —
+    // one authored typo would blank the city's sports for the cycle. So the
+    // row stays (its SeasonType / Streak / Team Record are still recorded
+    // facts), only its weekly facts are dropped, and the rejection goes to
+    // Engine_Errors where the author can see it. First summary per franchise
+    // stands; later duplicates are the ones rejected.
     var weeklyText = getColVal_(row, weekRecordCol);
     if (weeklyText) {
       entry.weekRecord = weeklyText;
-      var week = sportsWeekForEntry_(entry);
-      var weeklyTeam = normalizeOaklandFeedTeam_(entry.teamsUsed);
-      if (weeklyTeam !== "A's" && weeklyTeam !== 'Oaks') {
-        throw new Error('WeekRecord: row ' + (i + 1) + ' requires an Oakland franchise');
+      try {
+        var week = sportsWeekForEntry_(entry);
+        var weeklyTeam = normalizeOaklandFeedTeam_(entry.teamsUsed);
+        if (weeklyTeam !== "A's" && weeklyTeam !== 'Oaks') {
+          throw new Error('WeekRecord: row ' + (i + 1) + ' requires an Oakland franchise');
+        }
+        if (weeklyTeams[weeklyTeam]) {
+          throw new Error('duplicate WeekRecord: ' + weeklyTeam + ' at Cycle ' + currentCycle + ' (row ' + (i + 1) + ' rejected; first summary stands)');
+        }
+        weeklyTeams[weeklyTeam] = true;
+        entry.weekRecord = week.value;
+      } catch (weekErr) {
+        delete entry.weekRecord;
+        if (typeof logEngineError_ === 'function') {
+          logEngineError_(ctx, 'Phase2-SportsSeason:WeekRecord', weekErr);
+        } else {
+          Logger.log('WeekRecord rejected: ' + weekErr.message);
+        }
       }
-      if (weeklyTeams[weeklyTeam]) {
-        throw new Error('duplicate WeekRecord: ' + weeklyTeam + ' at Cycle ' + currentCycle);
-      }
-      weeklyTeams[weeklyTeam] = true;
-      entry.weekRecord = week.value;
     }
     entries.push(entry);
   }

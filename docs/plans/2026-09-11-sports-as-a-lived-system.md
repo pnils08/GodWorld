@@ -330,7 +330,7 @@ The required Haiku run encountered two sandbox connection failures; the network-
 #### Remaining Task 1 cuts and discovered defects
 
 1. **Header migration must follow compatible code.** `sportsFeedWriter` and dashboard routes reject any layout except the current 20 columns; `setupFeedSheet_` writes validations/notes by physical position. Removing columns first could put validations on the wrong fields. Prepare header-aware Node projections/preview/write checks, schema documentation and an Oakland-only migration; preserve the Chicago setup contract.
-2. **New fields can disappear silently from drafts.** `validateDraft` copies only `FEED_HEADERS`, so an unrecognized `WeekRecord` draft is dropped today. Wire it through validation and preview before enabling weekly writes. Do not describe this reader cut as a ready authoring interface.
+2. **Draft data loss guarded (codex).** `validateDraft` copies only `FEED_HEADERS`, which silently discarded a submitted `WeekRecord`. The interim fix rejects a nonblank weekly field until authoring is enabled; blank optional fields remain compatible. Wire the field through validation and preview as part of migration, then replace the rejection with weekly validation. Do not describe this reader cut as a ready authoring interface.
 3. **Vocabulary parity is incomplete.** Sheet setup configures only columns A–O; it provides no dropdowns/notes for FanSentiment through MediaProfile (P–T). Sheet triggers still advertise `trade-deadline`, `all-star`, `draft`, which have no `TRIGGER_HOOKS` entry, and omit the implemented `injury`, `injury-return`, `debut`. Resolve validator/reader parity when publishing the vocabulary, without inventing consequences for unsupported signals.
 4. **Game geography is not yet weekly-aware.** `gameDayHoodsFor_` (`updateTransitMetrics.js:666-681`) unions every row's neighborhood with all stadium zones. It does not check home-game counts or franchise-specific activity. Wire the per-franchise venue fact in Tasks 3–4 before treating column deletion as the traffic fix.
 5. **Dead-column wording overstates the absence of readers.** Phase 10 still copies `VideoGameDate`/`VideoGame` into handoff entries (`compileHandoff.js:1680-1681,1716-1717`). They have no numeric engine role; schema migration must still update the export. Other media/wake projections must carry the new weekly facts before author entry switches.
@@ -416,6 +416,8 @@ Sentiment sums two franchises into one scalar; `cal.sportsSeason` resolves one c
 ---
 
 ## Changelog
+
+- 2026-09-16 (codex) — Guarded legacy draft projection against silently dropping WeekRecord; the new contract regression fails before the guard and passes afterward.
 
 - 2026-09-16 (codex) — Task 1 started: ordered WeekRecord reader/settlement cut prepared with 35 passing cases; header migration and vocabulary defects recorded; engine-sheet review pending.
 

@@ -87,6 +87,11 @@ assert.strictEqual(contract.validateDraft(syntheticDraft({ HomeNeighborhood: 'Sy
 assert.strictEqual(contract.validateDraft(syntheticDraft({ EventType: 'game-result', 'Team Record': '' })).valid, false);
 assert.strictEqual(contract.validateDraft(syntheticDraft({ Cycle: '0' })).valid, false);
 assert.strictEqual(contract.validateDraft(syntheticDraft({ VideoGame: 'legacy value' })).valid, false);
+// The weekly engine reader can precede the authoring migration. Never silently
+// discard the new field while preview/write still use the legacy header layout.
+assert.strictEqual(contract.validateDraft(syntheticDraft({ WeekRecord: 'H:W A:L' })).valid, false);
+assert.throws(() => contract.projectNewRow(syntheticDraft({ WeekRecord: 'H:W A:L' })), /WeekRecord/);
+assert.strictEqual(contract.validateDraft(syntheticDraft({ WeekRecord: ' ' })).valid, true);
 assert.ok(contract.EVENT_TYPES.includes('stat-capture'));
 
 const row = contract.projectNewRow(syntheticDraft({ TeamsUsed: 'oaks', EventType: 'editorial-note', 'Team Record': '' }));

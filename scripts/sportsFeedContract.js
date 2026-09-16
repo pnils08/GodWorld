@@ -275,6 +275,9 @@ function validateDraft(draft) {
   if (value.EventType === 'game-result' && !value['Team Record']) errors.push('Team Record is required for game-result');
   if (value.Streak && !STREAK_RE.test(value.Streak)) errors.push('Streak must use W<n> or L<n> format');
   if (value.VideoGameDate || value.VideoGame) errors.push('VideoGameDate and VideoGame must be blank');
+  // engine.202: reader support precedes the header/authoring migration. The
+  // legacy projection must not silently discard a supplied weekly result.
+  if (text(source.WeekRecord)) errors.push('WeekRecord entry is not enabled yet; this draft cannot be saved');
   return { valid: errors.length === 0, errors, value, team: team || null };
 }
 

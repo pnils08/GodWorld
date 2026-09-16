@@ -324,7 +324,7 @@
 
 - **getColVal_(row, colIdx)**
 
-- **normalizeOaklandFeedTeam_(value)**
+- **normalizeOaklandFeedTeam_(value, strict)**
 
 - **canonicalSportsPhase_(rawSeasonType)**
 
@@ -3977,6 +3977,13 @@
 ### sheetNames.js
 - **getSheet_(ss, sheetNameConstant)**
 
+### sportsWeekRecord.js
+- **parseSportsWeekRecord_(raw)**
+
+- **sportsWeekForEntry_(entry)**
+
+- **sportsWeeklyResult_(entries, matchesTeam)**
+
 ### textCrawler.js
 - **crawlAllTxtFiles(rootFolderId, outputFileName)**
 
@@ -4058,5 +4065,5 @@ _No top-level function declarations found (helper/constants file)._
 
 ---
 
-**Files scanned:** 183
-**Functions mapped:** 1407
+**Files scanned:** 184
+**Functions mapped:** 1410

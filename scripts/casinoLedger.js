@@ -12,6 +12,7 @@
 
 const crypto = require('crypto');
 const { TEAM_CONFIG } = require('./sportsFeedContract');
+const { sportsWeeklyResult_ } = require('../utilities/sportsWeekRecord');
 
 // Same shape as sportsFeedContract.js RECORD_RE — copied, not imported, so
 // this helper does not become a new sports-contract consumer.
@@ -185,6 +186,8 @@ function sportsEventId(entry) {
 
 function parseSportsMoneyline(feedEntries, franchiseId) {
   var rows = feedEntries || [];
+  var weekly = sportsWeeklyResult_(rows, function(team) { return teamsMatchFranchise(team, franchiseId); });
+  if (weekly) return weekly;
   for (var i = 0; i < rows.length; i++) {
     var e = rows[i];
     if (String(e.eventType || '').toLowerCase() !== 'game-result') continue;

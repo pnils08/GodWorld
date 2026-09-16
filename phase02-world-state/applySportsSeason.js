@@ -173,6 +173,7 @@ function readOaklandFeedEntries_(ctx, currentCycle) {
   var statsCol = findColumnIndex_(headers, ['Stats', 'stats']);
   var recordCol = findColumnIndex_(headers, ['Team Record', 'teamrecord', 'record']);
   var storyAngleCol = findColumnIndex_(headers, ['StoryAngle', 'storyangle']);
+  var weekRecordCol = findColumnIndex_(headers, ['WeekRecord']);
   var playerMoodCol = findColumnIndex_(headers, ['PlayerMood', 'playermood']);
   var triggerCol = findColumnIndex_(headers, ['EventTrigger', 'eventtrigger', 'trigger']);
   var neighborhoodCol = findColumnIndex_(headers, ['HomeNeighborhood', 'homeneighborhood', 'neighborhood']);
@@ -184,13 +185,14 @@ function readOaklandFeedEntries_(ctx, currentCycle) {
   var mediaProfileCol = findColumnIndex_(headers, ['MediaProfile', 'mediaprofile']);
 
   var entries = [];
+  var weeklyTeams = {};
 
   for (var i = 1; i < data.length; i++) {
     var row = data[i];
     var cycle = cycleCol !== -1 ? parseInt(row[cycleCol], 10) : 0;
     if (isNaN(cycle) || cycle !== currentCycle) continue;
 
-    entries.push({
+    var entry = {
       cycle: cycle,
       seasonType: getColVal_(row, seasonTypeCol),
       eventType: getColVal_(row, eventTypeCol),
@@ -209,7 +211,24 @@ function readOaklandFeedEntries_(ctx, currentCycle) {
       economicFootprint: getColVal_(row, economicCol),
       communityInvestment: getColVal_(row, communityCol),
       mediaProfile: getColVal_(row, mediaProfileCol)
-    });
+    };
+    // Only the explicit new header carries weekly facts. Historical dead-column
+    // values and blank supplemental rows never become game results.
+    var weeklyText = getColVal_(row, weekRecordCol);
+    if (weeklyText) {
+      entry.weekRecord = weeklyText;
+      var week = sportsWeekForEntry_(entry);
+      var weeklyTeam = normalizeOaklandFeedTeam_(entry.teamsUsed, true);
+      if (weeklyTeam !== "A's" && weeklyTeam !== 'Oaks') {
+        throw new Error('WeekRecord: row ' + (i + 1) + ' requires an Oakland franchise');
+      }
+      if (weeklyTeams[weeklyTeam]) {
+        throw new Error('duplicate WeekRecord: ' + weeklyTeam + ' at Cycle ' + currentCycle);
+      }
+      weeklyTeams[weeklyTeam] = true;
+      entry.weekRecord = week.value;
+    }
+    entries.push(entry);
   }
 
   return entries;
@@ -228,18 +247,23 @@ function getColVal_(row, colIdx) {
  * Normalizes the active Oakland team contract without introducing a Node
  * dependency into Apps Script. Free-text matching preserves the historical
  * read path; NBA/Warriors and NFL remain read-only compatibility values.
+ *
+ * `strict` (engine.202) drops the NBA/Warriors compatibility fold. Measured
+ * live feed, 221 rows: all 8 `TeamsUsed='NBA'` rows are real-NBA canon, not
+ * the Oaks — C84 is a Bulls 121-105 game-result, C88-C92 are the expansion
+ * bid and Paulson's Warriors GM arc, and they predate the Oaks' own first
+ * game-result at C101. Season derivation keeps the legacy fold (its callers
+ * pass nothing); any path that settles money or claims a franchise's week
+ * passes true, so a Bulls box score can never resolve an Oaks wager.
  */
-function normalizeOaklandFeedTeam_(value) {
+function normalizeOaklandFeedTeam_(value, strict) {
   var rawTeam = (value || '').toString().trim();
   if (!rawTeam) return '';
 
   var team = rawTeam.toLowerCase();
   if (team === 'as' || team.indexOf("a's") !== -1) return "A's";
-  if (
-    team.indexOf('oaks') !== -1 ||
-    team.indexOf('nba') !== -1 ||
-    team.indexOf('warriors') !== -1
-  ) return 'Oaks';
+  if (team.indexOf('oaks') !== -1) return 'Oaks';
+  if (!strict && (team.indexOf('nba') !== -1 || team.indexOf('warriors') !== -1)) return 'Oaks';
   if (team.indexOf('nfl') !== -1) return 'NFL';
 
   Logger.log(

@@ -291,7 +291,7 @@ Haiku cards were requested through `runEngineAgent.js` for the atmosphere and se
 - **Card reliability:** the first network call failed; the permitted retry succeeded. Generated cards misstated some paths and current-state claims; direct code verification above takes precedence.
 
 ### Task 1 — engine.202: wire or delete, and publish the vocabulary
-**Status: in-progress (codex, 2026-09-16). First reader/settlement cut proposed; engine-sheet review and landing pending. No Sheet migration or live deployment.**
+**Status: LANDED, not deployed (engine-sheet, 2026-09-16). Codex's reader/settlement cut reviewed, corrected and committed to the repo. Inert on PROD until the `WeekRecord` header exists. No Sheet migration, no clasp push, no bench fire yet.**
 
 Resolve every dead column per §3. Surface every closed vocabulary into the tab (data validation + legend) so authored effort lands by construction. Repurpose one of `VideoGame` / `VideoGameDate` as the week's record; delete the other. The weekly home/away or home-count contract remains implementation work and does not authorize a new authored column.
 
@@ -309,7 +309,7 @@ One weekly summary per franchise per Cycle, plus optional narrative rows. `WeekR
 
 **Review payload:** `output/codex/engine202-week-record.patch` (three gated engine/utility files plus `scripts/casinoLedger.js`), with `scripts/sportsWeekRecord.test.js`. Engine-sheet applies/lands the gated files. Local proposal tree: `/tmp/codex-engine202`; targeted proof: `SPORTS_ENGINE_ROOT=/tmp/codex-engine202 node scripts/sportsWeekRecord.test.js`.
 
-**Local proof:** 35 cases pass against the proposed files, including actual `processCasinoLedger_` settlement into queued `CycleSettled`/Status/Payout cells, issued-odds payout and citizen NetWorth/LifeHistory in isolated synthetic fixtures. Existing parser (47/47), sports phase including T7 reconciliation, team compatibility and both casino suites pass. No live settlement is claimed. The first 32-case regression had 26 failures against unchanged source; the six controls passed.
+**Local proof (engine-sheet re-run against the REAL repo tree, not `/tmp/codex-engine202`):** 36 cases, 36 pass. Codex reported "35/35"; the real tree carries 36 and one FAILED on arrival — see §Review correction below. All 12 casino/sports suites green after the correction. Cases include actual `processCasinoLedger_` settlement into queued `CycleSettled`/Status/Payout cells, including actual `processCasinoLedger_` settlement into queued `CycleSettled`/Status/Payout cells, issued-odds payout and citizen NetWorth/LifeHistory in isolated synthetic fixtures. Existing parser (47/47), sports phase including T7 reconciliation, team compatibility and both casino suites pass. No live settlement is claimed. The first 32-case regression had 26 failures against unchanged source; the six controls passed.
 
 #### Verified wiring card — engine.202 first cut
 
@@ -327,6 +327,40 @@ The required Haiku run encountered two sandbox connection failures; the network-
 | Dashboard exact-header check and preview projection | `dashboard/sportsRoutes.js:293-304`, `:876-878` |
 | Existing media consumers and independent Phase 10 feed reader | `phase05-citizens/applyGameNightMoments.js:73`; `phase07-evening-media/sportsStreaming.js:35`; `phase10-persistence/compileHandoff.js:1668-1728` |
 
+#### Review correction (engine-sheet, 2026-09-16) — `TeamsUsed='NBA'` is not the Oaks
+
+Codex's suite arrived with one failing case against the real tree: *"weekly legacy team alias
+reaches its normalized franchise settlement"* asserted that an `NBA`-tagged weekly row settles an
+**Oaks** wager as a win. It does not, and it must not.
+
+**Measured, live feed (`output/beats/Oakland_Sports_Feed.jsonl`, 221 rows):** `A's` 182 | `Oaks` 26 |
+`NBA` 8 | blank 5. All eight `NBA` rows are real-NBA canon, not Oakland's franchise — C84 is a
+`game-result` reading *"Bulls pull away in the 4th to win 121-105"* (Giddey, Huerter, Curry,
+Giannis); C88–C92 are the expansion bid and Paulson's Warriors-GM arc. They **predate the Oaks
+existing**: the Oaks' own first `game-result` is C101 (`0-0`), then C105 `L3 0-3`, C106 `L4 0-4`.
+
+Settling an Oaks moneyline off a Chicago Bulls box score is a money-moving error, so the failing
+assertion was the defect, not the code. `casinoTeamsMatch_`'s narrowness
+(`casinoLedgerEngine.js:137`, `oaks` only) is **correct and was left alone.** Widening it with
+nba/warriors aliases was the first fix considered and was reversed on this evidence.
+
+**What was actually wrong:** `normalizeOaklandFeedTeam_` folds `nba|warriors` → `'Oaks'`, so codex's
+new duplicate guard let a real-NBA row occupy the Oaks weekly slot — and a genuine Oaks row in the
+same Cycle would then throw (see defect 7 below). Fix landed: an optional `strict` second argument
+that drops the compatibility fold. **Season derivation is untouched** — all four pre-existing callers
+(`:349` `deriveSeasonByTeamFromFeed_`, `:458` `deriveBaylightOpenings_`, `:514`
+`deriveActiveSportsFromFeed_`, `:713` `processFeedSheet_`) pass one argument and keep legacy
+behavior; only the weekly gate passes `true`. `scripts/applySportsSeasonTeamCompatibility.test.js`
+confirms the legacy contract still holds. Two test cases were rewritten to the corrected intent.
+
+**Also verified during review, and *not* defects:** the `var sportsWeeklyResult_ = require(...)`
+inside the module guard does **not** clobber the Apps Script global (proven in a `vm` context, both
+file load orders); `utilities/` is clasp-pushed while `scripts/` and `**/*.test.js` are ignored, so
+the helper reaches Apps Script and the test never does; the Node/Apps-Script return-shape asymmetry
+(`entry` vs `teamRecord`) is pre-existing and was preserved correctly on each side; the new
+`eventId` shape is write-only — neither resolver compares a wager's stored `EventId`; and the test
+harness does fail the build (`process.exitCode = 1`).
+
 #### Remaining Task 1 cuts and discovered defects
 
 1. **Header migration must follow compatible code.** `sportsFeedWriter` and dashboard routes reject any layout except the current 20 columns; `setupFeedSheet_` writes validations/notes by physical position. Removing columns first could put validations on the wrong fields. Prepare header-aware Node projections/preview/write checks, schema documentation and an Oakland-only migration; preserve the Chicago setup contract.
@@ -335,6 +369,31 @@ The required Haiku run encountered two sandbox connection failures; the network-
 4. **Game geography is not yet weekly-aware.** `gameDayHoodsFor_` (`updateTransitMetrics.js:666-681`) unions every row's neighborhood with all stadium zones. It does not check home-game counts or franchise-specific activity. Wire the per-franchise venue fact in Tasks 3–4 before treating column deletion as the traffic fix.
 5. **Dead-column wording overstates the absence of readers.** Phase 10 still copies `VideoGameDate`/`VideoGame` into handoff entries (`compileHandoff.js:1680-1681,1716-1717`). They have no numeric engine role; schema migration must still update the export. Other media/wake projections must carry the new weekly facts before author entry switches.
 6. **The §3 impact destinations still require causal implementation.** EconomicFootprint, CommunityInvestment and FranchiseStability cannot be called wired on the strength of parsed values alone. Their actual sector/community/business readers belong with Tasks 3–4; keep this dependency explicit when sequencing contract preparation and activation.
+
+7. **The reader's throw blanks the whole sports channel for the Cycle.** `readOaklandFeedEntries_`
+   is called at `applySportsSeason.js:68`, *before* `S.sportsFeedEntries`, `S.sportsSeason`,
+   `S.sportsZones`, `S.baylightOpenings` and `S.sportsSeasonByTeam` are assigned. `safePhaseCall_`
+   (`godWorldEngine2.js:159-170`) catches the throw and writes `Engine_Errors`, so the cycle
+   survives — but every one of those fields stays unset, and `S.sportsSeason` is read in 64 files.
+   Codex's "fails visibly" is one error row plus a silent city-wide sports outage. Decide
+   throw-vs-log-and-skip-the-row **before** the header migration. Inert today (no `WeekRecord`
+   header → `findColumnIndex_` returns -1 → `getColVal_` returns `''`), so it does not block landing.
+8. **`normalizeOaklandFeedTeam_`'s nba→Oaks fold still drives season derivation.** The `strict` flag
+   fixed only the money path. Season phase, Baylight openings and `S.sportsSeasonByTeam` still read
+   eight real-NBA rows as Oakland's franchise — which is why C84's Bulls game can move an Oaks
+   season phase. That is pre-existing behavior with 64 downstream readers and it is a **sim**
+   question, not a code one: it needs Mike's eye before it changes. Not this commit.
+9. **`TEAM_CONFIG.oaks.aliases: ['NBA','Warriors']`** (`scripts/sportsFeedContract.js:18`) carries the
+   same conflation on the Node side, live today — `teamsMatchFranchise('NBA','oaks')` returns true,
+   so the Node casino helper and the Apps Script engine now disagree about who played. Reconcile
+   with defect 8, same ruling.
+
+**Three team-matching implementations exist** and no longer agree:
+`normalizeOaklandFeedTeam_` (`applySportsSeason.js:251`, folds NBA unless `strict`) ·
+`casinoTeamsMatch_` (`casinoLedgerEngine.js:130`, never folds — the correct one) ·
+`teamsMatchFranchise`/`TEAM_CONFIG` (`scripts/sportsFeedContract.js:18`, folds). Consolidating them
+onto one pushed, Node-requirable source is the real cure; `utilities/sportsWeekRecord.js` is now a
+proven home for that shape. Filed, not built.
 
 ### Task 2 — engine.203: one parser per column
 **Status: in-progress — D1 + widened D4 are in repository commit `6b4a8701`; D3 remains unbuilt. Deployment was not reverified this session.** See [[research/2026-09-11-sports-feed-ingest-contract]] §4.

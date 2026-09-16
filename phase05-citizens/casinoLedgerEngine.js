@@ -147,6 +147,18 @@ function casinoParseStreak_(streak) {
 function casinoParseSports_(feedEntries, franchiseId) {
   var rows = feedEntries || [];
   var i, e, wl;
+  // A weekly summary is the authoritative game sequence, even when narrative
+  // rows precede it. Preserve the accepted first-result rule inside that week.
+  var weekly = sportsWeeklyResult_(rows, function(team) { return casinoTeamsMatch_(team, franchiseId); });
+  if (weekly) {
+    if (weekly.kind === 'carry') return weekly;
+    return {
+      kind: 'settle',
+      franchiseWon: weekly.franchiseWon,
+      eventId: weekly.eventId,
+      teamRecord: weekly.entry.teamRecord
+    };
+  }
   for (i = 0; i < rows.length; i++) {
     e = rows[i];
     if (String(e.eventType || '').toLowerCase() !== 'game-result') continue;
@@ -976,6 +988,7 @@ function processCasinoLedger_(ctx, cycle) {
 }
 
 if (typeof module !== 'undefined' && module.exports) {
+  var sportsWeeklyResult_ = require('../utilities/sportsWeekRecord.js').sportsWeeklyResult_;
   module.exports = {
     processCasinoLedger_: processCasinoLedger_,
     casinoResolve_: casinoResolve_,

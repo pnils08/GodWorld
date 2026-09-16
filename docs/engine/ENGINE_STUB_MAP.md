@@ -324,7 +324,7 @@
 
 - **getColVal_(row, colIdx)**
 
-- **normalizeOaklandFeedTeam_(value, strict)**
+- **normalizeOaklandFeedTeam_(value)**
 
 - **canonicalSportsPhase_(rawSeasonType)**
 

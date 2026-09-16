@@ -41,8 +41,10 @@ assert.strictEqual(
 );
 assert.strictEqual(normalize('Oaks'), 'Oaks');
 assert.strictEqual(normalize('The Oaks vs Synthetic Visitors'), 'Oaks');
-assert.strictEqual(normalize('NBA legacy label'), 'Oaks');
-assert.strictEqual(normalize('Warriors legacy label'), 'Oaks');
+logs.length = 0;
+assert.strictEqual(normalize('NBA legacy label'), '', 'retired pre-Oaks label is not the Oaks');
+assert.strictEqual(normalize('Warriors legacy label'), '', 'retired pre-Oaks label is not the Oaks');
+assert.strictEqual(logs.length, 0, 'retired labels are recognised history and stay silent');
 assert.strictEqual(
   normalize('NFL historical label'),
   'NFL',
@@ -57,7 +59,7 @@ assert.deepStrictEqual(
       { teamsUsed: 'NFL historical label' },
     ])
   ),
-  ['baseball', 'basketball', 'football']
+  ['baseball', 'football']
 );
 
 logs.length = 0;

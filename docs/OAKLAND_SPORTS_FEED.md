@@ -58,11 +58,16 @@ separately gated. The write feature is disabled by default.
 | Internal ID | Dashboard label | New feed value | Compatibility reads |
 |---|---|---|---|
 | `as` | The A's | `A's` | — |
-| `oaks` | The Oaks | `Oaks` | `NBA`, `Warriors` |
+| `oaks` | The Oaks | `Oaks` | `NBA`, `Warriors` — **retired**, read-only history (see below) |
 
 New drafts accept only the internal IDs and project only `A's` or `Oaks`.
-Historical `NBA` and `Warriors` cells remain readable as Oaks aliases; the
-implementation does not rewrite them. The Phase 2 reader also preserves its
+`NBA` and `Warriors` are **retired pre-Oaks labels** (C84–C92, the build-up
+before the Oaks story arc; Bulls/Chicago is canon only, not active). The Node
+contract still reads them without throwing, tagged `legacy: true` with a
+warning, so history projections and the dashboard keep working; the Phase 2
+engine reader returns `''` for them and ignores the row, and **neither casino
+path matches them to the Oaks** — a real-NBA game-result can never settle an
+Oaks wager. Nothing rewrites the cells. The Phase 2 reader also preserves its
 historical free-text matching and NFL active-sport compatibility; neither is a
 third new-write team. Unknown nonblank values are logged and skipped, while
 blank values remain silent.
@@ -155,8 +160,8 @@ and the deferred population/economy effects are recorded in the owning plan.
 For each normalized A's/Oaks team key—and any historical NFL compatibility
 row—the reducer keeps the latest non-empty, non-dash record, streak, fan sentiment,
 franchise stability, economic footprint, community investment, media profile,
-and related values through the Cycle. `NBA` and `Warriors` normalize to Oaks
-only on read.
+and related values through the Cycle. `NBA` and `Warriors` rows are retired
+history and contribute nothing to team state.
 
 The engine.203 D1/D4 correction is present in repository commit `6b4a8701`;
 deployment was not reverified for this reference update.

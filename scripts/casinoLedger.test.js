@@ -154,6 +154,12 @@ check('house exhaustion voids the slip', brokeHouse.results[0].status === C.STAT
 check('void-house does not move money', brokeHouse.results[0].money === null);
 check('void-house does not print float', brokeHouse.houseFloat === 100);
 
+check('retired NBA label never matches the Oaks franchise', C.teamsMatchFranchise('NBA', 'oaks') === false);
+check('retired Warriors label never matches the Oaks franchise', C.teamsMatchFranchise('Warriors', 'oaks') === false);
+check('Oaks still match their own franchise', C.teamsMatchFranchise('Oaks', 'oaks') === true);
+const bulls = C.parseSportsMoneyline([{ eventType: 'game-result', teamsUsed: 'NBA', streak: 'W1', cycle: 84 }], 'oaks');
+check('a real-NBA game-result carries an Oaks wager instead of settling it', bulls.kind === 'carry');
+
 const aged = C.ageOpenWager({ cyclePlaced: 100 }, 103);
 check('unmatched after 3 cycles voids', aged === C.STATUS.VOID_GATE);
 

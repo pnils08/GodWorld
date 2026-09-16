@@ -378,22 +378,21 @@ harness does fail the build (`process.exitCode = 1`).
    Codex's "fails visibly" is one error row plus a silent city-wide sports outage. Decide
    throw-vs-log-and-skip-the-row **before** the header migration. Inert today (no `WeekRecord`
    header → `findColumnIndex_` returns -1 → `getColVal_` returns `''`), so it does not block landing.
-8. **`normalizeOaklandFeedTeam_`'s nba→Oaks fold still drives season derivation.** The `strict` flag
-   fixed only the money path. Season phase, Baylight openings and `S.sportsSeasonByTeam` still read
-   eight real-NBA rows as Oakland's franchise — which is why C84's Bulls game can move an Oaks
-   season phase. That is pre-existing behavior with 64 downstream readers and it is a **sim**
-   question, not a code one: it needs Mike's eye before it changes. Not this commit.
-9. **`TEAM_CONFIG.oaks.aliases: ['NBA','Warriors']`** (`scripts/sportsFeedContract.js:18`) carries the
-   same conflation on the Node side, live today — `teamsMatchFranchise('NBA','oaks')` returns true,
-   so the Node casino helper and the Apps Script engine now disagree about who played. Reconcile
-   with defect 8, same ruling.
+8. ~~nba→Oaks fold in season derivation~~ **RESOLVED by ruling (Mike, 2026-09-16): "it's just A's and
+   Oaks now. Bulls/Chicago is strictly canon, not active. NBA was used for the build-up before the
+   Oaks story arc began."** `NBA`/`Warriors` are retired labels: `normalizeOaklandFeedTeam_` returns
+   `''` for them, silently (`RETIRED_FEED_TEAM_LABELS_`), and the `strict` flag is gone — one
+   behavior everywhere. Verified no live effect: `deriveBaylightOpenings_` skips rows ≤ C104 before
+   normalizing, and `processFeedSheet_`'s later-rows-win state was already superseded by Oaks rows
+   from C101. engine.75 had already recorded this fold injecting phantom sentiment for 10+ cycles.
+9. ~~`TEAM_CONFIG.oaks.aliases` on the Node side~~ **RESOLVED, same ruling.** `franchiseAliases`
+   (`scripts/casinoLedger.js`) now matches identity only (`id`/`label`/`sheetValue`); the aliases stay
+   on `TEAM_CONFIG` solely so `normalizeTeam` can read pre-Oaks history without throwing
+   (`legacy: true` + warning — dashboard/projection contract, not money, not engine state).
 
-**Three team-matching implementations exist** and no longer agree:
-`normalizeOaklandFeedTeam_` (`applySportsSeason.js:251`, folds NBA unless `strict`) ·
-`casinoTeamsMatch_` (`casinoLedgerEngine.js:130`, never folds — the correct one) ·
-`teamsMatchFranchise`/`TEAM_CONFIG` (`scripts/sportsFeedContract.js:18`, folds). Consolidating them
-onto one pushed, Node-requirable source is the real cure; `utilities/sportsWeekRecord.js` is now a
-proven home for that shape. Filed, not built.
+**Team matching now agrees across all three implementations:** `normalizeOaklandFeedTeam_`,
+`casinoTeamsMatch_`, `teamsMatchFranchise` — none treats NBA/Warriors as the Oaks. Consolidation onto
+one pushed, Node-requirable source remains Watch List; no longer a correctness gap.
 
 ### Task 2 — engine.203: one parser per column
 **Status: in-progress — D1 + widened D4 are in repository commit `6b4a8701`; D3 remains unbuilt. Deployment was not reverified this session.** See [[research/2026-09-11-sports-feed-ingest-contract]] §4.

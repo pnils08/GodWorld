@@ -218,7 +218,7 @@ function readOaklandFeedEntries_(ctx, currentCycle) {
     if (weeklyText) {
       entry.weekRecord = weeklyText;
       var week = sportsWeekForEntry_(entry);
-      var weeklyTeam = normalizeOaklandFeedTeam_(entry.teamsUsed, true);
+      var weeklyTeam = normalizeOaklandFeedTeam_(entry.teamsUsed);
       if (weeklyTeam !== "A's" && weeklyTeam !== 'Oaks') {
         throw new Error('WeekRecord: row ' + (i + 1) + ' requires an Oakland franchise');
       }
@@ -246,24 +246,29 @@ function getColVal_(row, colIdx) {
 /**
  * Normalizes the active Oakland team contract without introducing a Node
  * dependency into Apps Script. Free-text matching preserves the historical
- * read path; NBA/Warriors and NFL remain read-only compatibility values.
+ * read path; NFL remains a read-only compatibility value.
  *
- * `strict` (engine.202) drops the NBA/Warriors compatibility fold. Measured
- * live feed, 221 rows: all 8 `TeamsUsed='NBA'` rows are real-NBA canon, not
- * the Oaks — C84 is a Bulls 121-105 game-result, C88-C92 are the expansion
- * bid and Paulson's Warriors GM arc, and they predate the Oaks' own first
- * game-result at C101. Season derivation keeps the legacy fold (its callers
- * pass nothing); any path that settles money or claims a franchise's week
- * passes true, so a Bulls box score can never resolve an Oaks wager.
+ * `NBA` / `Warriors` are RETIRED labels, not Oaks aliases (ruling, engine.202
+ * review): the feed is A's and Oaks only. Measured live feed, 221 rows — all
+ * 8 `TeamsUsed='NBA'` rows (C84–C92) are the pre-Oaks build-up and real-NBA
+ * canon (C84 is a Bulls 121-105 game-result; C88–C92 the expansion bid and
+ * Paulson's Warriors-GM arc); the Oaks' own first game-result is C101. Folding
+ * them onto the Oaks already bit once — engine.75's phantom sentiment for 10+
+ * cycles — and would let a Bulls box score settle an Oaks wager. They return
+ * '' without a log line: recognised history, deliberately ignored.
  */
-function normalizeOaklandFeedTeam_(value, strict) {
+var RETIRED_FEED_TEAM_LABELS_ = ['nba', 'warriors'];
+
+function normalizeOaklandFeedTeam_(value) {
   var rawTeam = (value || '').toString().trim();
   if (!rawTeam) return '';
 
   var team = rawTeam.toLowerCase();
   if (team === 'as' || team.indexOf("a's") !== -1) return "A's";
   if (team.indexOf('oaks') !== -1) return 'Oaks';
-  if (!strict && (team.indexOf('nba') !== -1 || team.indexOf('warriors') !== -1)) return 'Oaks';
+  for (var r = 0; r < RETIRED_FEED_TEAM_LABELS_.length; r++) {
+    if (team.indexOf(RETIRED_FEED_TEAM_LABELS_[r]) !== -1) return '';
+  }
   if (team.indexOf('nfl') !== -1) return 'NFL';
 
   Logger.log(
@@ -1094,7 +1099,7 @@ function findColumnIndex_(headers, possibleNames) {
  * TeamsUsed values (Oakland_Sports_Feed):
  * - A's              : Oakland A's baseball
  * - Oaks             : Oakland Oaks basketball
- * - NBA / Warriors   : legacy read aliases for Oaks; never write new rows with them
+ * - NBA / Warriors   : RETIRED pre-Oaks build-up labels (C84–C92); read as '' and ignored
  * - NFL / free text  : historical read compatibility only; not a new-write value
  *
  * ============================================================================

@@ -102,10 +102,11 @@ assert.deepStrictEqual(byTeam(c104Entries), {
   Oaks: 'preseason',
 });
 
-// Legacy team aliases still resolve (NBA/Warriors are historical Oaks cells).
+// NBA/Warriors are RETIRED pre-Oaks build-up labels, not the Oaks (ruling
+// 2026-09-16, engine.202 review). They contribute no team phase at all.
 assert.deepStrictEqual(
   byTeam([{ teamsUsed: 'NBA legacy label', seasonType: 'playoffs' }]),
-  { Oaks: 'playoffs' }
+  {}
 );
 
 // Within one cycle, later rows override earlier ones for the same team —

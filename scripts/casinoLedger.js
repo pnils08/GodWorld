@@ -157,10 +157,13 @@ function payoutFor(stake, odds) {
   return roundMoney((Number(stake) || 0) * (Number(odds) || 0));
 }
 
+// Identity only — TEAM_CONFIG.aliases (NBA/Warriors) exist so the contract can
+// READ pre-Oaks history without throwing; they are retired labels, not the Oaks,
+// and money never settles on them (engine.202 review).
 function franchiseAliases(franchiseId) {
   var cfg = TEAM_CONFIG[franchiseId];
   if (!cfg) return [];
-  var out = [cfg.id, cfg.label, cfg.sheetValue].concat(cfg.aliases || []);
+  var out = [cfg.id, cfg.label, cfg.sheetValue];
   return out.map(function (s) { return String(s).toLowerCase(); });
 }
 

@@ -1,0 +1,176 @@
+--- /dev/null
++++ b/utilities/sportsWeekRecord.js
+@@ -0,0 +1,73 @@
++/**
++ * engine.202 — pure, shared WeekRecord grammar for Apps Script and Node.
++ * Ordered H:W / H:L / A:W / A:L tokens, separated by whitespace.
++ * Blank is unreported; "none" explicitly reports no games this Cycle.
++ * Does not infer venues, outcomes, a season record, or a carried streak.
++ */
++function parseSportsWeekRecord_(raw) {
++  var text = raw == null ? '' : String(raw).trim();
++  if (!text) return null;
++  var games = [];
++  var wins = 0, losses = 0, home = 0, away = 0;
++  if (text.toLowerCase() !== 'none') {
++    var tokens = text.toUpperCase().split(/\s+/);
++    for (var i = 0; i < tokens.length; i++) {
++      var match = /^([HA]):([WL])$/.exec(tokens[i]);
++      if (!match) throw new Error('WeekRecord: use ordered H:W H:L A:W A:L tokens, or none');
++      games.push({ venue: match[1], result: match[2] });
++      if (match[1] === 'H') home++; else away++;
++      if (match[2] === 'W') wins++; else losses++;
++    }
++  }
++  return {
++    value: games.length ? games.map(function(g) { return g.venue + ':' + g.result; }).join(' ') : 'none',
++    games: games,
++    wins: wins,
++    losses: losses,
++    record: wins + '-' + losses,
++    gamesPlayed: games.length,
++    homeGames: home,
++    awayGames: away,
++    firstResult: games.length ? games[0].result : null
++  };
++}
++
++function sportsWeekForEntry_(entry) {
++  var week = parseSportsWeekRecord_(entry.weekRecord);
++  if (!week) return null;
++  var expectedType = week.gamesPlayed ? 'game-result' : 'season-state';
++  if (String(entry.eventType || '').toLowerCase() !== expectedType) {
++    throw new Error('WeekRecord: ' + (week.gamesPlayed ? 'games require game-result' : 'none requires season-state'));
++  }
++  return week;
++}
++
++// Null means no weekly report: callers may use their historical reader.
++// An explicit no-games week returns carry and forbids stale-result fallback.
++function sportsWeeklyResult_(entries, matchesTeam) {
++  var weekly = null, selected = null;
++  for (var i = 0; i < entries.length; i++) {
++    var entry = entries[i];
++    if (!matchesTeam(entry.teamsUsed) || !String(entry.weekRecord || '').trim()) continue;
++    var candidate = sportsWeekForEntry_(entry);
++    if (weekly) throw new Error('duplicate WeekRecord: casino franchise');
++    weekly = candidate;
++    selected = entry;
++  }
++  if (!weekly) return null;
++  if (!weekly.gamesPlayed) return { kind: 'carry' };
++  return {
++    kind: 'settle',
++    franchiseWon: weekly.firstResult === 'W',
++    eventId: [selected.cycle, selected.teamsUsed, 'week', 1, weekly.firstResult].join('|'),
++    entry: selected
++  };
++}
++
++if (typeof module !== 'undefined' && module.exports) {
++  module.exports = {
++    parseSportsWeekRecord_: parseSportsWeekRecord_,
++    sportsWeekForEntry_: sportsWeekForEntry_,
++    sportsWeeklyResult_: sportsWeeklyResult_
++  };
++}
+--- a/phase02-world-state/applySportsSeason.js
++++ b/phase02-world-state/applySportsSeason.js
+@@ -173,6 +173,7 @@
+   var statsCol = findColumnIndex_(headers, ['Stats', 'stats']);
+   var recordCol = findColumnIndex_(headers, ['Team Record', 'teamrecord', 'record']);
+   var storyAngleCol = findColumnIndex_(headers, ['StoryAngle', 'storyangle']);
++  var weekRecordCol = findColumnIndex_(headers, ['WeekRecord']);
+   var playerMoodCol = findColumnIndex_(headers, ['PlayerMood', 'playermood']);
+   var triggerCol = findColumnIndex_(headers, ['EventTrigger', 'eventtrigger', 'trigger']);
+   var neighborhoodCol = findColumnIndex_(headers, ['HomeNeighborhood', 'homeneighborhood', 'neighborhood']);
+@@ -184,13 +185,14 @@
+   var mediaProfileCol = findColumnIndex_(headers, ['MediaProfile', 'mediaprofile']);
+ 
+   var entries = [];
++  var weeklyTeams = {};
+ 
+   for (var i = 1; i < data.length; i++) {
+     var row = data[i];
+     var cycle = cycleCol !== -1 ? parseInt(row[cycleCol], 10) : 0;
+     if (isNaN(cycle) || cycle !== currentCycle) continue;
+ 
+-    entries.push({
++    var entry = {
+       cycle: cycle,
+       seasonType: getColVal_(row, seasonTypeCol),
+       eventType: getColVal_(row, eventTypeCol),
+@@ -209,7 +211,24 @@
+       economicFootprint: getColVal_(row, economicCol),
+       communityInvestment: getColVal_(row, communityCol),
+       mediaProfile: getColVal_(row, mediaProfileCol)
+-    });
++    };
++    // Only the explicit new header carries weekly facts. Historical dead-column
++    // values and blank supplemental rows never become game results.
++    var weeklyText = getColVal_(row, weekRecordCol);
++    if (weeklyText) {
++      entry.weekRecord = weeklyText;
++      var week = sportsWeekForEntry_(entry);
++      var weeklyTeam = normalizeOaklandFeedTeam_(entry.teamsUsed);
++      if (weeklyTeam !== "A's" && weeklyTeam !== 'Oaks') {
++        throw new Error('WeekRecord: row ' + (i + 1) + ' requires an Oakland franchise');
++      }
++      if (weeklyTeams[weeklyTeam]) {
++        throw new Error('duplicate WeekRecord: ' + weeklyTeam + ' at Cycle ' + currentCycle);
++      }
++      weeklyTeams[weeklyTeam] = true;
++      entry.weekRecord = week.value;
++    }
++    entries.push(entry);
+   }
+ 
+   return entries;
+--- a/phase05-citizens/casinoLedgerEngine.js
++++ b/phase05-citizens/casinoLedgerEngine.js
+@@ -147,6 +147,18 @@
+ function casinoParseSports_(feedEntries, franchiseId) {
+   var rows = feedEntries || [];
+   var i, e, wl;
++  // A weekly summary is the authoritative game sequence, even when narrative
++  // rows precede it. Preserve the accepted first-result rule inside that week.
++  var weekly = sportsWeeklyResult_(rows, function(team) { return casinoTeamsMatch_(team, franchiseId); });
++  if (weekly) {
++    if (weekly.kind === 'carry') return weekly;
++    return {
++      kind: 'settle',
++      franchiseWon: weekly.franchiseWon,
++      eventId: weekly.eventId,
++      teamRecord: weekly.entry.teamRecord
++    };
++  }
+   for (i = 0; i < rows.length; i++) {
+     e = rows[i];
+     if (String(e.eventType || '').toLowerCase() !== 'game-result') continue;
+@@ -976,6 +988,7 @@
+ }
+ 
+ if (typeof module !== 'undefined' && module.exports) {
++  var sportsWeeklyResult_ = require('../utilities/sportsWeekRecord.js').sportsWeeklyResult_;
+   module.exports = {
+     processCasinoLedger_: processCasinoLedger_,
+     casinoResolve_: casinoResolve_,
+--- a/scripts/casinoLedger.js
++++ b/scripts/casinoLedger.js
+@@ -12,6 +12,7 @@
+ 
+ const crypto = require('crypto');
+ const { TEAM_CONFIG } = require('./sportsFeedContract');
++const { sportsWeeklyResult_ } = require('../utilities/sportsWeekRecord');
+ 
+ // Same shape as sportsFeedContract.js RECORD_RE — copied, not imported, so
+ // this helper does not become a new sports-contract consumer.
+@@ -185,6 +186,8 @@
+ 
+ function parseSportsMoneyline(feedEntries, franchiseId) {
+   var rows = feedEntries || [];
++  var weekly = sportsWeeklyResult_(rows, function(team) { return teamsMatchFranchise(team, franchiseId); });
++  if (weekly) return weekly;
+   for (var i = 0; i < rows.length; i++) {
+     var e = rows[i];
+     if (String(e.eventType || '').toLowerCase() !== 'game-result') continue;

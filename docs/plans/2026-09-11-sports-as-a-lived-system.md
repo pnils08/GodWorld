@@ -291,7 +291,50 @@ Haiku cards were requested through `runEngineAgent.js` for the atmosphere and se
 - **Card reliability:** the first network call failed; the permitted retry succeeded. Generated cards misstated some paths and current-state claims; direct code verification above takes precedence.
 
 ### Task 1 — engine.202: wire or delete, and publish the vocabulary
+**Status: in-progress (codex, 2026-09-16). First reader/settlement cut proposed; engine-sheet review and landing pending. No Sheet migration or live deployment.**
+
 Resolve every dead column per §3. Surface every closed vocabulary into the tab (data validation + legend) so authored effort lands by construction. Repurpose one of `VideoGame` / `VideoGameDate` as the week's record; delete the other. The weekly home/away or home-count contract remains implementation work and does not authorize a new authored column.
+
+#### Weekly contract — first code cut
+
+Repurpose **`VideoGame` to `WeekRecord`** at the later migration; remove `VideoGameDate` and `HomeNeighborhood` once the dependent writers/readers are ready. Final header count is 18. The initial cut recognizes only the explicit new header; it never reinterprets historical `VideoGame` text as results. Existing Sheet headers stay authoritative until migration.
+
+One weekly summary per franchise per Cycle, plus optional narrative rows. `WeekRecord` contains games in played order, separated by spaces: **`H:W H:L A:W`** means a home win, home loss, away win (synthetic syntax example, not a recorded week). From this one authored cell the shared parser derives `2-1`, three games, two home games, one away game, and first result `W`. `Team Record` remains the separate cumulative/current-series record; `Streak` remains the actual ending streak, which can cross a Cycle boundary. Neither is fabricated from the weekly sequence.
+
+- Played games require `EventType=game-result`. An explicit **`none`** reports zero games using `EventType=season-state`, avoiding a fake game-result event. Blank means unreported/supplemental; it does not mean zero.
+- The reader rejects malformed input, unknown weekly franchises and duplicate summaries after team normalization. Case and whitespace normalize; unsupported venues/results and free-text fragments fail visibly. Only current-Cycle rows are validated; no historical replay or carry-forward of weekly results.
+- The casino uses the **first result inside the weekly summary**, preserving the accepted first-result rule. It does not use majority wins or the ending `Streak`. A weekly summary takes precedence over supplemental rows; explicit no-games carries. With no weekly summary, the existing legacy first-parseable-result path remains.
+- Both Apps Script and the Node casino helper use the same pure helper. The parser produces fresh derived objects; the selector retains a read-only reference to its input entry. Neither caller mutates that entry; the regression checks input preservation and outcome parity.
+- This cut carries raw normalized `weekRecord` on existing feed entries and consumes it for settlement. It does **not** reprice sentiment, odds, employment, migration, activity intensity or geographic reach. Derived game/home counts become inputs to Tasks 3–4 when those readers are built.
+
+**Review payload:** `output/codex/engine202-week-record.patch` (three gated engine/utility files plus `scripts/casinoLedger.js`), with `scripts/sportsWeekRecord.test.js`. Engine-sheet applies/lands the gated files. Local proposal tree: `/tmp/codex-engine202`; targeted proof: `SPORTS_ENGINE_ROOT=/tmp/codex-engine202 node scripts/sportsWeekRecord.test.js`.
+
+**Local proof:** 35 cases pass against the proposed files, including actual `processCasinoLedger_` settlement into queued `CycleSettled`/Status/Payout cells, issued-odds payout and citizen NetWorth/LifeHistory in isolated synthetic fixtures. Existing parser (47/47), sports phase including T7 reconciliation, team compatibility and both casino suites pass. No live settlement is claimed. The first 32-case regression had 26 failures against unchanged source; the six controls passed.
+
+#### Verified wiring card — engine.202 first cut
+
+The required Haiku run encountered two sandbox connection failures; the network-enabled run reached its turn limit without a finished card. Codex verified the depended-on pointers directly; an agent's claimed scan count is not coverage proof.
+
+| Surface | Verified source pointer before the cut |
+|---|---|
+| Current-Cycle reader / publication on existing summary | `phase02-world-state/applySportsSeason.js:151`, `:68-70` |
+| Both Cycle entry paths / persistence after producers | `phase01-config/godWorldEngine2.js:288`, `:2037`, `:595`, `:2330` |
+| Casino feed / first-result reader / outcome | `phase05-citizens/casinoLedgerEngine.js:605`, `:147-164`, `:283-290` |
+| Casino posted-odds payout and citizen consequence / queued settlement | `phase05-citizens/casinoLedgerEngine.js:753-785`, `:824-830` |
+| Node settlement helper, preserved output shape | `scripts/casinoLedger.js:186-204` |
+| Current Sheet setup depends on physical positions | `utilities/setupSportsFeedValidation.js:263-336` |
+| Current Node contract and exact-header writer | `scripts/sportsFeedContract.js:8-13`, `:246-277`; `scripts/sportsFeedWriter.js:156-159` |
+| Dashboard exact-header check and preview projection | `dashboard/sportsRoutes.js:293-304`, `:876-878` |
+| Existing media consumers and independent Phase 10 feed reader | `phase05-citizens/applyGameNightMoments.js:73`; `phase07-evening-media/sportsStreaming.js:35`; `phase10-persistence/compileHandoff.js:1668-1728` |
+
+#### Remaining Task 1 cuts and discovered defects
+
+1. **Header migration must follow compatible code.** `sportsFeedWriter` and dashboard routes reject any layout except the current 20 columns; `setupFeedSheet_` writes validations/notes by physical position. Removing columns first could put validations on the wrong fields. Prepare header-aware Node projections/preview/write checks, schema documentation and an Oakland-only migration; preserve the Chicago setup contract.
+2. **New fields can disappear silently from drafts.** `validateDraft` copies only `FEED_HEADERS`, so an unrecognized `WeekRecord` draft is dropped today. Wire it through validation and preview before enabling weekly writes. Do not describe this reader cut as a ready authoring interface.
+3. **Vocabulary parity is incomplete.** Sheet setup configures only columns A–O; it provides no dropdowns/notes for FanSentiment through MediaProfile (P–T). Sheet triggers still advertise `trade-deadline`, `all-star`, `draft`, which have no `TRIGGER_HOOKS` entry, and omit the implemented `injury`, `injury-return`, `debut`. Resolve validator/reader parity when publishing the vocabulary, without inventing consequences for unsupported signals.
+4. **Game geography is not yet weekly-aware.** `gameDayHoodsFor_` (`updateTransitMetrics.js:666-681`) unions every row's neighborhood with all stadium zones. It does not check home-game counts or franchise-specific activity. Wire the per-franchise venue fact in Tasks 3–4 before treating column deletion as the traffic fix.
+5. **Dead-column wording overstates the absence of readers.** Phase 10 still copies `VideoGameDate`/`VideoGame` into handoff entries (`compileHandoff.js:1680-1681,1716-1717`). They have no numeric engine role; schema migration must still update the export. Other media/wake projections must carry the new weekly facts before author entry switches.
+6. **The §3 impact destinations still require causal implementation.** EconomicFootprint, CommunityInvestment and FranchiseStability cannot be called wired on the strength of parsed values alone. Their actual sector/community/business readers belong with Tasks 3–4; keep this dependency explicit when sequencing contract preparation and activation.
 
 ### Task 2 — engine.203: one parser per column
 **Status: in-progress — D1 + widened D4 are in repository commit `6b4a8701`; D3 remains unbuilt. Deployment was not reverified this session.** See [[research/2026-09-11-sports-feed-ingest-contract]] §4.
@@ -373,6 +416,8 @@ Sentiment sums two franchises into one scalar; `cal.sportsSeason` resolves one c
 ---
 
 ## Changelog
+
+- 2026-09-16 (codex) — Task 1 started: ordered WeekRecord reader/settlement cut prepared with 35 passing cases; header migration and vocabulary defects recorded; engine-sheet review pending.
 
 - 2026-09-16 (codex) — Builder accepted the recommendation: engine.210 restores activity weights; phase-only employment, economic-label and residential migration boosts remain guarded and move to Tasks 3–4's record-driven impact work. Sim ruling closed; engine-sheet landed the first cut as `44cf056f`; sandbox proof remains.
 

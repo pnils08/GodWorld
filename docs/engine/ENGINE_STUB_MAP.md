@@ -369,8 +369,6 @@
 - **parseFranchiseStability_(val)**
 
 - **findColumnIndex_(headers, possibleNames)**
-  Reads: S.sportsFeedEntries, S.sportsFeedSeasonType, S.sportsSeason
-  Writes: S.sportsAtmosphereEnabled
 
 ### applyWeatherModel.js
 - **hoodWeatherProfile_(ctx, hood)**

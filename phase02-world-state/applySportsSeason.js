@@ -1040,15 +1040,32 @@ function findColumnIndex_(headers, possibleNames) {
  * SPORTS STATE VALUES
  * ============================================================================
  *
- * S.sportsSeason values (S302 semantics):
- * - From World_Config override (sportsState_Oakland) ONLY: spring-training /
+ * ctx.summary sports fields (S302 semantics as corrected by engine.131).
+ * NOTE: field names below are deliberately written WITHOUT the `S.` prefix —
+ * stubEngine.js scans this trailing block as part of the last function above
+ * it, so a prefixed name here invents a false read/write edge on
+ * findColumnIndex_ in ENGINE_STUB_REVERSE.
+ *
+ * `sportsSeason` values:
+ * - World_Config override (sportsState_Oakland): spring-training /
  *   early-season / mid-season / late-season / playoffs / championship /
- *   off-season — Maker-declared canon, licenses sports atmosphere
- *   (S.sportsAtmosphereEnabled = true).
- * - Feed mode / empty feed: ALWAYS "off-season" (sentinel — keeps ~40
- *   downstream playoff/championship/!== off-season branches inert).
- *   The feed's own SeasonType label lives on S.sportsFeedSeasonType.
- *   Real game content flows via S.sportsFeedEntries + applySportsFeedTriggers_.
+ *   off-season — Maker-declared canon, and the ONLY source that licenses
+ *   invented sports atmosphere (`sportsAtmosphereEnabled` true).
+ * - Feed mode: the DEEPEST recorded phase across teams, in Mike's own feed
+ *   vocabulary (deriveSeasonByTeamFromFeed_ -> deepestSportsPhase_). The
+ *   blanket "off-season" sentinel this block used to describe was removed by
+ *   engine.131 — it had pinned the world record to no-baseball while the A's
+ *   sat 126-35. Per-team phases live on `sportsSeasonByTeam`; the last row's
+ *   raw label on `sportsFeedSeasonType`.
+ * - Empty feed for the cycle: "off-season" — no game was recorded, so nothing
+ *   is being masked.
+ *
+ * The invent-prose / move-dial seam: `sportsAtmosphereEnabled` stays FALSE on
+ * every feed cycle and still gates dedicated sports prose at the nine named
+ * generators. A recorded phase may move ordinary dials — engine.210 lets it
+ * reach applySeasonalWeights_, which now runs AFTER this function in both
+ * Cycle entry paths. Real game content flows via `sportsFeedEntries` +
+ * applySportsFeedTriggers_.
  *
  * TeamsUsed values (Oakland_Sports_Feed):
  * - A's              : Oakland A's baseball

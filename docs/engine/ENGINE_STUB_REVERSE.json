@@ -1282,7 +1282,6 @@
         "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
         "phase02-world-state/applySeasonWeights.js::applySeasonalWeights_",
         "phase02-world-state/applySportsSeason.js::applySportsSeason_",
-        "phase02-world-state/applySportsSeason.js::findColumnIndex_",
         "phase02-world-state/calendarChaosWeights.js::applyChaosCategoryWeights_",
         "phase03-population/applyDemographicDrift.js::applyDemographicDrift_",
         "phase03-population/deriveDemographicDrift.js::deriveDemographicDrift_",
@@ -2209,8 +2208,7 @@
     },
     "sportsAtmosphereEnabled": {
       "writers": [
-        "phase02-world-state/applySportsSeason.js::applySportsSeason_",
-        "phase02-world-state/applySportsSeason.js::findColumnIndex_"
+        "phase02-world-state/applySportsSeason.js::applySportsSeason_"
       ],
       "readers": [
         "phase02-world-state/applySeasonWeights.js::applySeasonalWeights_",
@@ -2255,7 +2253,6 @@
         "phase02-world-state/applySportsSeason.js::applySportsSeason_"
       ],
       "readers": [
-        "phase02-world-state/applySportsSeason.js::findColumnIndex_",
         "phase02-world-state/updateTransitMetrics.js::countMajorEvents_",
         "phase02-world-state/updateTransitMetrics.js::gameDayHoodsFor_",
         "phase02-world-state/updateTransitMetrics.js::isGameDay_",
@@ -2271,9 +2268,7 @@
       "writers": [
         "phase02-world-state/applySportsSeason.js::applySportsSeason_"
       ],
-      "readers": [
-        "phase02-world-state/applySportsSeason.js::findColumnIndex_"
-      ]
+      "readers": []
     },
     "sportsSeasonByTeam": {
       "writers": [

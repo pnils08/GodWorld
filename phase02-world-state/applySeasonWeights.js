@@ -27,11 +27,11 @@ function applySeasonalWeights_(ctx) {
   var season = S.season;
   var holiday = S.holiday || "none";
   var holidayPriority = S.holidayPriority || "none";
-  // S302 gate. NOTE: Phase2-SeasonalWeights runs BEFORE Phase2-SportsSeason
-  // (godWorldEngine2.js:217 vs :218, both entries), so S.sportsSeason has
-  // always been undefined here and these multipliers have never fired.
-  // Gated for correctness if the ordering ever changes.
-  var sports = (S.sportsAtmosphereEnabled === true) ? S.sportsSeason : "";
+  // engine.210: Phase2-SportsSeason runs first. Recorded feed phases can
+  // weight ordinary city events; the separate atmosphere license still gates
+  // dedicated sports prose in event/citizen generators (S302).
+  var sports = (S.sportsSource === 'oakland-feed' || S.sportsAtmosphereEnabled === true)
+    ? S.sportsSeason : "";
   var econMood = S.economicMood || 50;
   var weatherMood = S.weatherMood || {};
   var isWeekend = S.isWeekend || false;

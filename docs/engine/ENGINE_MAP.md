@@ -46,8 +46,8 @@
 
 | Step | Function | File | Purpose |
 |------|----------|------|---------|
-| 2-SeasonalWeights | `applySeasonalWeights_()` | phase02-world-state/applySeasonWeights.js | Season-based multipliers for event domains |
-| 2-SportsSeason | `applySportsSeason_()` | phase02-world-state/applySportsSeason.js | Read Oakland_Sports_Feed, set sportsSeason from SeasonType, store sportsFeedEntries (v3.0) |
+| 2-SportsSeason | `applySportsSeason_()` | phase02-world-state/applySportsSeason.js | Read Oakland_Sports_Feed, set sportsSeason from SeasonType, store sportsFeedEntries (v3.0). **engine.210:** moved ahead of 2-SeasonalWeights in both Cycle entry paths so the recorded phase is readable when weights are computed |
+| 2-SeasonalWeights | `applySeasonalWeights_()` | phase02-world-state/applySeasonWeights.js | Season-based multipliers for event domains. **engine.210:** admits the recorded feed phase (`S.sportsSource === 'oakland-feed'`) alongside the explicit atmosphere override; coefficients unchanged |
 | 2-SportsFeed | `applySportsFeedTriggers_()` | phase02-world-state/applySportsSeason.js | Oakland feed → sentiment, triggers, neighborhood effects. Now wires FanSentiment, PlayerMood, FranchiseStability, EconomicFootprint, CommunityInvestment, MediaProfile (v3.0 S137b) |
 | 2-CivicSentiment | `loadCivicVoiceSentiment_()` | phase02-world-state/applyInitiativeImplementationEffects.js | Load civic voice sentiment from decision files. Sets S.civicVoiceSentiment for EditionCoverage compounding (v1.0 S137b) |
 | 2-EditionCoverage | `applyEditionCoverageEffects_()` | phase02-world-state/applyEditionCoverageEffects.js | Per-domain media ratings (-5 to +5) → sentiment, domain cooldowns, neighborhood effects, story triggers. Compounds with civic voice sentiment (v2.0 S137b) |
@@ -56,7 +56,7 @@
 | 2-CityDynamics | `applyCityDynamics_()` | phase02-world-state/applyCityDynamics.js | Sentiment, cultural activity, community engagement, nightlife **engine.225 (S462):** hood-economy terms price a hood by its delta from the hoods' own median (`hoodMoodMedian_`, nested); descriptor via `describeHoodEconomy_`. **engine.228b:** reads the carried activity history — last night = now, the nights before = baseline; no Phase-2 push. |
 | 2-Transit | `updateTransitMetrics_Phase2_()` | phase02-world-state/updateTransitMetrics.js | Transit ridership, delays, construction status |
 
-**ctx.summary after Phase 2:** adds `weather`, `sportsSeason`, `sportsFeedEntries`, `activeSports`, `cityDynamics`, `seasonalWeights`, `transitMetrics`, `editionSentimentBoost`, `editionDomainBalance`, `editionCoverageTriggers`, `editionNeighborhoodEffects`, `editionCoverageEffects`, `civicVoiceSentiment`, `initiativeImplementationEffects`, `initiativeNeighborhoodEffects`, `initiativeImplementationTriggers`
+**ctx.summary after Phase 2:** adds `weather`, `sportsSeason`, `sportsFeedEntries`, `activeSports`, `cityDynamics`, `seasonal`, `sportsSource`, `sportsSeasonByTeam`, `transitMetrics`, `editionSentimentBoost`, `editionDomainBalance`, `editionCoverageTriggers`, `editionNeighborhoodEffects`, `editionCoverageEffects`, `civicVoiceSentiment`, `initiativeImplementationEffects`, `initiativeNeighborhoodEffects`, `initiativeImplementationTriggers`
 
 ---
 

@@ -285,8 +285,8 @@ function runWorldCycle() {
   // ═══════════════════════════════════════════════════════════
   // PHASE 2: WORLD STATE (MUST run BEFORE population/events)
   // ═══════════════════════════════════════════════════════════
-  safePhaseCall_(ctx, 'Phase2-SeasonalWeights', function() { applySeasonalWeights_(ctx); });
   safePhaseCall_(ctx, 'Phase2-SportsSeason', function() { applySportsSeason_(ctx); });
+  safePhaseCall_(ctx, 'Phase2-SeasonalWeights', function() { applySeasonalWeights_(ctx); });
   safePhaseCall_(ctx, 'Phase2-SportsFeed', function() { applySportsFeedTriggers_(ctx); });  // v2.14
   safePhaseCall_(ctx, 'Phase2-CivicSentiment', function() { loadCivicVoiceSentiment_(ctx); });  // v1.0 S137b
   safePhaseCall_(ctx, 'Phase2-EditionCoverage', function() { applyEditionCoverageEffects_(ctx); });  // v2.0 S137b
@@ -2034,8 +2034,8 @@ function runCyclePhases_(ctx) {
   // ═══════════════════════════════════════════════════════════
   // PHASE 2: WORLD STATE
   // ═══════════════════════════════════════════════════════════
-  safePhaseCall_(ctx, 'Phase2-SeasonalWeights', function() { applySeasonalWeights_(ctx); });
   safePhaseCall_(ctx, 'Phase2-SportsSeason', function() { applySportsSeason_(ctx); });
+  safePhaseCall_(ctx, 'Phase2-SeasonalWeights', function() { applySeasonalWeights_(ctx); });
   safePhaseCall_(ctx, 'Phase2-SportsFeed', function() { applySportsFeedTriggers_(ctx); });  // v2.14
   safePhaseCall_(ctx, 'Phase2-CivicSentiment', function() { loadCivicVoiceSentiment_(ctx); });  // v1.0 S137b
   safePhaseCall_(ctx, 'Phase2-EditionCoverage', function() { applyEditionCoverageEffects_(ctx); });  // v2.0 S137b

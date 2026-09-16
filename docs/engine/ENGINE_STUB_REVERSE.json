@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-15",
+  "generated": "2026-09-16",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 183,
   "functionsMapped": 1407,
@@ -2224,6 +2224,16 @@
         "phase05-citizens/runEducationEngine.js::runEducationEngine_"
       ]
     },
+    "sportsSource": {
+      "writers": [
+        "phase02-world-state/applySportsSeason.js::applySportsSeason_"
+      ],
+      "readers": [
+        "phase02-world-state/applySeasonWeights.js::applySeasonalWeights_",
+        "phase04-events/worldEventsEngine.js::worldEventsEngine_",
+        "phase06-analysis/applyShockMonitor.js::applyShockMonitor_"
+      ]
+    },
     "activeSports": {
       "writers": [
         "phase02-world-state/applySportsSeason.js::applySportsSeason_"
@@ -2284,15 +2294,6 @@
         "phase02-world-state/applySportsSeason.js::applySportsSeason_"
       ],
       "readers": []
-    },
-    "sportsSource": {
-      "writers": [
-        "phase02-world-state/applySportsSeason.js::applySportsSeason_"
-      ],
-      "readers": [
-        "phase04-events/worldEventsEngine.js::worldEventsEngine_",
-        "phase06-analysis/applyShockMonitor.js::applyShockMonitor_"
-      ]
     },
     "sportsEventTriggers": {
       "writers": [

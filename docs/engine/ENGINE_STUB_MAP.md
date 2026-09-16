@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-09-15 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-09-16 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -310,7 +310,7 @@
 
 ### applySeasonWeights.js
 - **applySeasonalWeights_(ctx)**
-  Reads: S.cycleOfYear, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.isWeekend, S.mediaEffects, S.season, S.sportsAtmosphereEnabled, S.sportsSeason, S.weatherMood
+  Reads: S.cycleOfYear, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.isWeekend, S.mediaEffects, S.season, S.sportsAtmosphereEnabled, S.sportsSeason, S.sportsSource, S.weatherMood
   Writes: S.creationDayActive, S.seasonal
 
 ### applySportsSeason.js

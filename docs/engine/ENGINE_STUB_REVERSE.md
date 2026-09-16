@@ -1,6 +1,6 @@
 # Engine Stub Reverse Index
 
-**Generated:** 2026-09-15 by `scripts/stubEngine.js` (mechanical — no LLM).
+**Generated:** 2026-09-16 by `scripts/stubEngine.js` (mechanical — no LLM).
 
 **Purpose:** Cheap lookup — given an `S.*` field or sheet name, find every function that reads or writes it. Companion to `ENGINE_STUB_MAP.md` (forward: function → fields).
 
@@ -323,7 +323,7 @@
 | `S.sportsSeasonChicago` | `phase02-world-state/applySportsSeason.js::applySportsSeason_` | _(none)_ | 1 | 0 |
 | `S.sportsSeasonOakland` | `phase02-world-state/applySportsSeason.js::applySportsSeason_` | _(none)_ | 1 | 0 |
 | `S.sportsSentimentBoost` | `phase02-world-state/applySportsSeason.js::applySportsFeedTriggers_` | `phase02-world-state/applyCityDynamics.js::applyCityDynamics_`, `phase02-world-state/applySportsSeason.js::applySportsFeedTriggers_`, `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_` | 1 | 3 |
-| `S.sportsSource` | `phase02-world-state/applySportsSeason.js::applySportsSeason_` | `phase04-events/worldEventsEngine.js::worldEventsEngine_`, `phase06-analysis/applyShockMonitor.js::applyShockMonitor_` | 1 | 2 |
+| `S.sportsSource` | `phase02-world-state/applySportsSeason.js::applySportsSeason_` | `phase02-world-state/applySeasonWeights.js::applySeasonalWeights_`, `phase04-events/worldEventsEngine.js::worldEventsEngine_`, `phase06-analysis/applyShockMonitor.js::applyShockMonitor_` | 1 | 3 |
 | `S.sportsState_Chicago` | _(none)_ | `phase08-v3-chicago/chicagoSatellite.js::chicagoSatelliteEngine_` | 0 | 1 |
 | `S.sportsZones` | `phase02-world-state/applySportsSeason.js::applySportsSeason_` | `phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_`, `phase02-world-state/applyInitiativeImplementationEffects.js::sportsHasOpenedBaylight_`, `phase02-world-state/updateTransitMetrics.js::calculateStationMetrics_`, `phase02-world-state/updateTransitMetrics.js::gameDayHoodsFor_`, `phase02-world-state/updateTransitMetrics.js::updateTransitMetrics_Phase2_`, `phase03-population/generateCrisisSpikes.js::generateCrisisSpikes_`, …(+5 more) | 1 | 11 |
 | `S.spotlightStats` | `phase05-citizens/applyNamedCitizenSpotlight.js::applyNamedCitizenSpotlights_` | _(none)_ | 1 | 0 |

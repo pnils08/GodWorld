@@ -102,6 +102,9 @@
 - **ensureEngine213Config_(ss)**
   Sheets: World_Config
 
+- **ensureEngine192Config_(ss)**
+  Sheets: World_Config
+
 - **ensureEngine221Config_(ss)**
   Reads: S.neighborhoodState
   Sheets: World_Config
@@ -664,7 +667,15 @@
   Reads: S.hoodEmployerDepth, S.neighborhoodState
 
 - **buildNeighborhoodDemographicModifiers_(holiday, isFirstFriday, isCreationDay, sportsSeason)**
-  Reads: S.demographicShifts, S.demographicShiftsCount, S.neighborhoodDemographics, S.neighborhoodIllnessWeights
+  Reads: S.demographicShifts, S.demographicShiftsCount, S.neighborhoodDemographics, S.neighborhoodIllnessWeights, S.schoolDrift
+
+- **schoolDriftMedian_(arr)**
+
+- **schoolDriftConfig_(ctx)**
+
+- **driftNeighborhoodEducation_(ctx, demographics)**
+  Reads: S.crimeMetrics, S.initiativeNeighborhoodEffects, S.neighborhoodState
+  Writes: S.schoolDrift
 
 ## Phase 4: Events (`phase04-events/`)
 
@@ -1511,7 +1522,7 @@
   Sheets: Household_Ledger
 
 - **checkSchoolQuality_(ss, ctx, cycle)**
-  Reads: S.storyHooks
+  Reads: S.schoolDrift, S.storyHooks
   Writes: S.storyHooks
   Sheets: Neighborhood_Demographics
 
@@ -2056,8 +2067,8 @@
 
 ### runConductEngine.js
 - **runConductEngine_(ctx)**
-  Reads: S.absoluteCycle, S.crimeMetrics, S.cycleId, S.economicMood, S.eventsGenerated, S.neighborhoodState
-  Writes: S.conductEvents, S.eventsGenerated
+  Reads: S.absoluteCycle, S.conductEvents, S.crimeMetrics, S.cycleId, S.economicMood, S.eventsGenerated, S.neighborhoodState, S.storyHooks
+  Writes: S.conductEvents, S.eventsGenerated, S.storyHooks
   Config: ctx.config.cycleCount
   Sheets: LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)
@@ -3901,7 +3912,9 @@
 
 - **bylineEligible_(name)**
 
-- **suggestStoryAngle_(eventThemes, signalType, usageCounts, excludeNames)**
+- **onDesk_(name, deskKeys)**
+
+- **suggestStoryAngle_(eventThemes, signalType, usageCounts, excludeNames, deskKeys)**
 
 - **matchCitizenToJournalist_(citizenArchetype, neighborhoodContext, storyDomain)**
 
@@ -4048,4 +4061,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 183
-**Functions mapped:** 1402
+**Functions mapped:** 1407

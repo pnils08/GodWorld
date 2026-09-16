@@ -140,6 +140,27 @@ function ensureEngine213Config_(ss) {
 // engine.221 (S461) - the city economic mood has memory. Phase 6 computes this
 // Cycle's level from base 50 as before and the carried mood closes this share
 // of the gap to it. Same self-arm contract; getEconMoodCarryConfig_ asserts it.
+var ENGINE192_CONFIG_SEEDS = [
+  ['schoolDriftStep', 0.1, 'engine.192 max move per Cycle of SchoolQualityIndex / TeacherQuality from signed causes (hood pressure, crime, funding, education initiatives - each relative to the city median)', 0.01, 1, false],
+  ['schoolDriftPull', 0.02, 'engine.192 slow pull per Cycle of quality/teacher toward what the hood funding says (7.5 + 5 x (funding / city median - 1))', 0, 0.2, false],
+  ['schoolGradStep', 0.5, 'engine.192 max move per Cycle of GraduationRate / CollegeReadinessRate as they lag quality', 0.1, 5, false],
+  ['schoolFundingInitiativePct', 2, 'engine.192 % Funding growth per Cycle while a delivering education initiative targets the hood - the only thing that moves Funding', 0, 20, false]
+];
+
+function ensureEngine192Config_(ss) {
+  if (!ss) throw new Error('engine.192 config: spreadsheet required');
+  var configSheet = ss.getSheetByName('World_Config');
+  if (!configSheet) throw new Error('engine.192 config: World_Config not found');
+  var plan = inspectEngine94Config_(configSheet.getDataRange().getValues(), ENGINE192_CONFIG_SEEDS);
+  if (plan.additions.length > 0) {
+    configSheet.getRange(configSheet.getLastRow() + 1, 1, plan.additions.length, 3).setValues(plan.additions);
+    var verified = inspectEngine94Config_(configSheet.getDataRange().getValues(), ENGINE192_CONFIG_SEEDS);
+    if (verified.additions.length > 0) throw new Error('engine.192 config: post-write verification failed');
+  }
+  Logger.log('engine.192 config ready: seeded ' + plan.additions.length + ' row(s)');
+  return { configSeeded: plan.additions.length };
+}
+
 var ENGINE221_CONFIG_SEEDS = [
   ['econMoodInertia', 0.3, 'engine.221 share of the gap between last Cycle\'s carried city economic mood and this Cycle\'s computed level closed at Phase 6 (a mood with memory; 0.3 ≈ 3-4 Cycles to settle; 1 = no memory, the pre-221 behaviour)', 0.05, 1, false]
 ];

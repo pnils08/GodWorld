@@ -230,7 +230,8 @@ function applyInitiativeImplementationEffects_(ctx) {
       sentiment: 0.05, publicSpaces: 0.04, communityEngagement: 0.03
     },
     'education': {
-      sentiment: 0.04, communityEngagement: 0.05
+      sentiment: 0.04, communityEngagement: 0.05,
+      schoolQuality: 0.05   // engine.192: a delivering education initiative is the one thing that moves a hood's school funding and pulls its quality up (read by driftNeighborhoodEducation_)
     }
   };
 
@@ -367,7 +368,8 @@ function applyInitiativeImplementationEffects_(ctx) {
       if (!neighborhoodEffects[hood]) {
         neighborhoodEffects[hood] = {
           traffic: 0, retail: 0, nightlife: 0,
-          publicSpaces: 0, communityEngagement: 0, sentiment: 0
+          publicSpaces: 0, communityEngagement: 0, sentiment: 0,
+          schoolQuality: 0   // engine.192
         };
       }
 

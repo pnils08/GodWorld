@@ -228,6 +228,7 @@ function runWorldCycle() {
     ensureEngine148Config_(ss);  // engine.148 hood floor + GC surfacing dials, same self-arm contract
     ensureEngine176Config_(ss);  // engine.176 pressure-tag bars (rent burden, hood pressure/crime, setback loss), same self-arm contract
     ensureEngine178Config_(ss);  // engine.178 dial gates (misfit move, owner room/expansion, integrity on the scandal ceiling), same self-arm contract
+    ensureEngine192Config_(ss);  // engine.192 school drift - step, pull, grad lag, initiative funding %, same self-arm contract
     ensureEngine221Config_(ss);  // engine.221 econMoodInertia - the city economic mood's memory, same self-arm contract
   } catch (e) {
     Logger.log('FATAL: Cannot open or prepare spreadsheet: ' + e.message);

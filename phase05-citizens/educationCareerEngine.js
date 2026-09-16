@@ -1349,8 +1349,17 @@ function checkSchoolQuality_(ss, ctx, cycle) {
     var quality = Number(row[iQuality]) || 5;
     var gradRate = Number(row[iGradRate]) || 75;
 
+    // engine.192 (S463): the columns drift now, so an alert is a CROSSING -
+    // the hook fires the Cycle a hood falls under the bar (prev at/over it),
+    // and again every 8th Cycle it stays under, not every Cycle forever
+    // (kimi education Cut 2: DROPOUT_WAVE re-alerted identically each Cycle).
+    var drift = (ctx.summary && ctx.summary.schoolDrift && ctx.summary.schoolDrift[neighborhood]) || null;
+    var prevQ = drift ? Number(drift.prev.quality) : quality;
+    var prevG = drift ? Number(drift.prev.gradRate) : gradRate;
+    var reminder = (Number(cycle) % 8) === 0;
+
     // Alert if school quality is critically low
-    if (quality < 3) {
+    if (quality < 3 && (prevQ >= 3 || reminder)) {
       ctx.summary.storyHooks = ctx.summary.storyHooks || [];
       ctx.summary.storyHooks.push({
         hookType: 'SCHOOL_QUALITY_CRISIS',
@@ -1366,7 +1375,7 @@ function checkSchoolQuality_(ss, ctx, cycle) {
     }
 
     // Alert if graduation rate is very low
-    if (gradRate < 65) {
+    if (gradRate < 65 && (prevG >= 65 || reminder)) {
       ctx.summary.storyHooks = ctx.summary.storyHooks || [];
       ctx.summary.storyHooks.push({
         hookType: 'DROPOUT_WAVE',

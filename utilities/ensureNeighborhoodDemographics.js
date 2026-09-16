@@ -150,6 +150,10 @@ function getNeighborhoodDemographics_(ss) {
   var iUnemployed = idx('Unemployed');
   var iSick = idx('Sick');
   var iLastUpdated = idx('LastUpdated');
+  // engine.192: the five education columns ride the demographics object so
+  // Phase 3 can drift them and the batch writer can persist them.
+  var iSQ = idx('SchoolQualityIndex'), iGR = idx('GraduationRate'), iCR = idx('CollegeReadinessRate'),
+      iTQ = idx('TeacherQuality'), iFU = idx('Funding');
 
   for (var r = 1; r < values.length; r++) {
     var row = values[r];
@@ -164,7 +168,14 @@ function getNeighborhoodDemographics_(ss) {
       unemployed: Number(row[iUnemployed]) || 0,
       sick: Number(row[iSick]) || 0,
       lastUpdated: Number(row[iLastUpdated]) || 0,
-      totalPopulation: (Number(row[iStudents]) || 0) + (Number(row[iAdults]) || 0) + (Number(row[iSeniors]) || 0)
+      totalPopulation: (Number(row[iStudents]) || 0) + (Number(row[iAdults]) || 0) + (Number(row[iSeniors]) || 0),
+      education: (iSQ >= 0 && row[iSQ] !== '' && row[iSQ] !== null) ? {
+        quality: Number(row[iSQ]) || 0,
+        gradRate: iGR >= 0 ? (Number(row[iGR]) || 0) : 0,
+        readiness: iCR >= 0 ? (Number(row[iCR]) || 0) : 0,
+        teacher: iTQ >= 0 ? (Number(row[iTQ]) || 0) : 0,
+        funding: iFU >= 0 ? (Number(row[iFU]) || 0) : 0
+      } : null
     };
   }
 
@@ -313,6 +324,17 @@ function batchUpdateNeighborhoodDemographics_(ss, demographicsMap, cycle) {
     rowData[iUnemployed] = demo.unemployed || 0;
     rowData[iSick] = demo.sick || 0;
     rowData[iLastUpdated] = cycle;
+    // engine.192: persist the drifted education columns when the row carries them
+    // (a row without them keeps whatever it had — the S247 preserve rule holds).
+    if (demo.education) {
+      var iSQw = header.indexOf('SchoolQualityIndex'), iGRw = header.indexOf('GraduationRate'),
+          iCRw = header.indexOf('CollegeReadinessRate'), iTQw = header.indexOf('TeacherQuality'), iFUw = header.indexOf('Funding');
+      if (iSQw >= 0) rowData[iSQw] = demo.education.quality;
+      if (iGRw >= 0) rowData[iGRw] = demo.education.gradRate;
+      if (iCRw >= 0) rowData[iCRw] = demo.education.readiness;
+      if (iTQw >= 0) rowData[iTQw] = demo.education.teacher;
+      if (iFUw >= 0) rowData[iFUw] = demo.education.funding;
+    }
 
     if (existingRowIndex !== undefined) {
       // Store for batch update

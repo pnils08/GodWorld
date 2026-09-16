@@ -275,6 +275,7 @@ function updateNeighborhoodDemographics_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // WRITE UPDATES
   // ═══════════════════════════════════════════════════════════════════════════
+  driftNeighborhoodEducation_(ctx, demographics);   // engine.192 — the school table breathes before the write
   batchUpdateNeighborhoodDemographics_(ss, demographics, cycle);
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -604,3 +605,94 @@ function buildNeighborhoodDemographicModifiers_(holiday, isFirstFriday, isCreati
  *
  * ============================================================================
  */
+
+
+// ════════════════════════════════════════════════════════════════════════════
+// engine.192 (S463) — SCHOOL DRIFT: the five education columns move per Cycle
+// off causes, relative to the city's own middle (SIM_DOCTRINE §16 drift over
+// backfill; the engine.212 crime-carry shape — signed causes, a step cap, a
+// slow pull, no literal equilibrium).
+//
+//   quality  += clamp(step × Σcauses, ±step) + pull × (fundingLevel − quality)
+//     causes: −(housingPressure − city median)/5, −(crime level / city median − 1),
+//             +(funding / city median − 1) × 2, +education initiative effect × 10
+//     fundingLevel = 7.5 + 5 × (funding / city median − 1)  — what the money says
+//   teacher  += clamp(step × (fundingCause + ½ initiativeCause), ±step) + pull × (fundingLevel − teacher)
+//   gradRate  lags quality: target 50 + 5q, moves 10% of the gap, capped ±gradStep
+//   readiness lags quality: target 12q − 32 (20–95), same lag
+//   funding   moves ONLY with a delivering education initiative in the hood (+pct/Cycle)
+// Bounds: quality/teacher 1–10, gradRate 40–99, readiness 20–95. Deterministic —
+// causes, no dice. Publishes S.schoolDrift[hood] = {prev, now, causes} for the
+// Phase-5 alert gate (checkSchoolQuality_ fires on a crossing, not every Cycle).
+// ════════════════════════════════════════════════════════════════════════════
+function schoolDriftMedian_(arr) {
+  var a = arr.filter(function(v) { return typeof v === 'number' && !isNaN(v); }).sort(function(x, y) { return x - y; });
+  if (!a.length) return 0;
+  var m = Math.floor(a.length / 2);
+  return a.length % 2 ? a[m] : (a[m - 1] + a[m]) / 2;
+}
+
+function schoolDriftConfig_(ctx) {
+  var cfg = (ctx && ctx.config) || {};
+  function num(k, d) { var v = Number(cfg[k]); return isNaN(v) ? d : v; }
+  return {
+    step: num('schoolDriftStep', 0.1),
+    pull: num('schoolDriftPull', 0.02),
+    gradStep: num('schoolGradStep', 0.5),
+    fundingPct: num('schoolFundingInitiativePct', 2)
+  };
+}
+
+function driftNeighborhoodEducation_(ctx, demographics) {
+  var S = ctx.summary;
+  var cfg = schoolDriftConfig_(ctx);
+  var nState = S.neighborhoodState || {};
+  var crimeBy = (S.crimeMetrics && S.crimeMetrics.byNeighborhood) || {};
+  var initEff = S.initiativeNeighborhoodEffects || {};
+  var hoods = [];
+  for (var h in demographics) if (demographics.hasOwnProperty(h) && demographics[h].education) hoods.push(h);
+  if (!hoods.length) { S.schoolDrift = {}; return { drifted: 0, hoods: 0 }; }
+
+  function pressureOf(h) { var st = nState[h]; return st ? (Number(st.housingPressure) || 0) : 0; }
+  function crimeOf(h) {
+    var cm = crimeBy[h];
+    if (cm && (cm.propertyLevel !== undefined || cm.violentLevel !== undefined)) return ((Number(cm.propertyLevel) || 0) + (Number(cm.violentLevel) || 0)) / 2;
+    var st = nState[h]; return st ? (Number(st.crimeIndex) || 0) : 0;
+  }
+  var medPressure = schoolDriftMedian_(hoods.map(pressureOf));
+  var medCrime = schoolDriftMedian_(hoods.map(crimeOf));
+  var medFunding = schoolDriftMedian_(hoods.map(function(hh) { return demographics[hh].education.funding; }));
+  function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+  function r2(v) { return Math.round(v * 100) / 100; }
+
+  var out = {}; var drifted = 0;
+  for (var i = 0; i < hoods.length; i++) {
+    var hood = hoods[i];
+    var e = demographics[hood].education;
+    var prev = { quality: e.quality, gradRate: e.gradRate, readiness: e.readiness, teacher: e.teacher, funding: e.funding };
+    var fundRel = medFunding > 0 ? e.funding / medFunding : 1;
+    var crimeRel = medCrime > 0 ? crimeOf(hood) / medCrime : 1;
+    var initiative = Number((initEff[hood] || {}).schoolQuality) || 0;
+    var causes = {
+      pressure: -(pressureOf(hood) - medPressure) / 5,
+      crime: -(crimeRel - 1),
+      funding: (fundRel - 1) * 2,
+      initiative: initiative * 10
+    };
+    var fundingLevel = 7.5 + 5 * (fundRel - 1);
+    var sum = causes.pressure + causes.crime + causes.funding + causes.initiative;
+    var q = clamp(e.quality + clamp(cfg.step * sum, -cfg.step, cfg.step) + cfg.pull * (fundingLevel - e.quality), 1, 10);
+    var t = clamp(e.teacher + clamp(cfg.step * (causes.funding + 0.5 * causes.initiative), -cfg.step, cfg.step) + cfg.pull * (fundingLevel - e.teacher), 1, 10);
+    var gTarget = 50 + 5 * q;
+    var g = clamp(e.gradRate + clamp(0.1 * (gTarget - e.gradRate), -cfg.gradStep, cfg.gradStep), 40, 99);
+    var cTarget = clamp(12 * q - 32, 20, 95);
+    var c = clamp(e.readiness + clamp(0.1 * (cTarget - e.readiness), -cfg.gradStep, cfg.gradStep), 20, 95);
+    var f = initiative > 0 ? Math.round(e.funding * (1 + cfg.fundingPct / 100)) : e.funding;
+    e.quality = r2(q); e.teacher = r2(t); e.gradRate = r2(g); e.readiness = r2(c); e.funding = f;
+    out[hood] = { prev: prev, now: { quality: e.quality, gradRate: e.gradRate, readiness: e.readiness, teacher: e.teacher, funding: e.funding }, causes: causes };
+    if (e.quality !== prev.quality || e.gradRate !== prev.gradRate || e.funding !== prev.funding) drifted++;
+  }
+  S.schoolDrift = out;
+  Logger.log('driftNeighborhoodEducation_ engine.192: ' + drifted + '/' + hoods.length + ' hoods moved (medians pressure ' + medPressure + ' crime ' + r2(medCrime) + ' funding ' + medFunding + ')');
+  return { drifted: drifted, hoods: hoods.length };
+}

@@ -2,7 +2,7 @@
   "generated": "2026-09-15",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 183,
-  "functionsMapped": 1402,
+  "functionsMapped": 1407,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -848,6 +848,7 @@
         "phase03-population/generateCrisisSpikes.js::crisisHoodWeight_",
         "phase03-population/updateNeighborhoodDemographics.js::buildHoodEmploymentWeights_",
         "phase03-population/updateNeighborhoodDemographics.js::buildHoodIllnessWeights_",
+        "phase03-population/updateNeighborhoodDemographics.js::driftNeighborhoodEducation_",
         "phase03-population/updateNeighborhoodDemographics.js::updateNeighborhoodDemographics_",
         "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_",
         "phase05-citizens/bondEngine.js::bondProsperityTerm_",
@@ -1120,6 +1121,7 @@
         "phase05-citizens/processAdvancementIntake.js::formIntakeHouseholds_",
         "phase05-citizens/processAdvancementIntake.js::wireBusinessOwners_",
         "phase05-citizens/processAdvancementIntake.js::wireFamilyMatch_",
+        "phase05-citizens/runConductEngine.js::runConductEngine_",
         "phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_",
         "phase07-evening-media/storyHook.js::storyHookEngine_",
         "phase07-evening-media/storylineWeavingEngine.js::weaveStorylines_",
@@ -1150,6 +1152,7 @@
         "phase05-citizens/processAdvancementIntake.js::formIntakeHouseholds_",
         "phase05-citizens/processAdvancementIntake.js::wireBusinessOwners_",
         "phase05-citizens/processAdvancementIntake.js::wireFamilyMatch_",
+        "phase05-citizens/runConductEngine.js::runConductEngine_",
         "phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_",
         "phase07-evening-media/storyHook.js::storyHookEngine_",
         "phase07-evening-media/storylineWeavingEngine.js::weaveStorylines_",
@@ -1931,6 +1934,7 @@
       "readers": [
         "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
         "phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_",
+        "phase03-population/updateNeighborhoodDemographics.js::driftNeighborhoodEducation_",
         "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_"
       ]
     },
@@ -2620,6 +2624,7 @@
       ],
       "readers": [
         "phase03-population/updateNeighborhoodDemographics.js::buildHoodIllnessWeights_",
+        "phase03-population/updateNeighborhoodDemographics.js::driftNeighborhoodEducation_",
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
         "phase05-citizens/generateCivicModeEvents.js::generateCivicModeEvents_",
         "phase05-citizens/generateMediaModeEvents.js::generateMediaModeEvents_",
@@ -2675,6 +2680,15 @@
       "readers": [
         "phase03-population/updateNeighborhoodDemographics.js::buildNeighborhoodDemographicModifiers_",
         "phase03-population/updateNeighborhoodDemographics.js::updateNeighborhoodDemographics_"
+      ]
+    },
+    "schoolDrift": {
+      "writers": [
+        "phase03-population/updateNeighborhoodDemographics.js::driftNeighborhoodEducation_"
+      ],
+      "readers": [
+        "phase03-population/updateNeighborhoodDemographics.js::buildNeighborhoodDemographicModifiers_",
+        "phase05-citizens/educationCareerEngine.js::checkSchoolQuality_"
       ]
     },
     "cityEventDetails": {
@@ -3409,7 +3423,9 @@
       "writers": [
         "phase05-citizens/runConductEngine.js::runConductEngine_"
       ],
-      "readers": []
+      "readers": [
+        "phase05-citizens/runConductEngine.js::runConductEngine_"
+      ]
     },
     "educationEvents": {
       "writers": [
@@ -4270,6 +4286,7 @@
         "phase01-config/engine94SheetContract.js::ensureEngine161Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine176Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine178Config_",
+        "phase01-config/engine94SheetContract.js::ensureEngine192Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine213Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine221Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine94SheetContract_",

@@ -46,6 +46,7 @@ These reporters map 1:1 to a desk agent. Voice file's `**Desk:**` header is cano
 | Angela Reyes | `docs/media/voices/angela_reyes.md` | `culture-desk` | Schools, youth programs, packet-supplied school systems, after-school athletics |
 | Selena Grant | `docs/media/voices/selena_grant.md` | `selena-grant` (solo) | Oaks beat — roster construction, player development, the expansion front office (pipeline.67) |
 | Talia Finch | `docs/media/voices/talia_finch.md` | `talia-finch` (solo) | Oaks from the street — bars, platforms, who is deciding to become a fan (pipeline.67) |
+| Celeste Tran | `docs/media/voices/celeste_tran.md` | `celeste-tran` (solo) | Social trends — culture-record mentions, new arrivals, neighborhood movement (Friday WEEK_GRID seat) |
 | Letters | (anonymous slate) | `letters-desk` | Citizen letters reacting to the edition |
 
 ## Beat-axis routing (multi-desk reporters)
@@ -65,7 +66,6 @@ These voices exist in `docs/media/voices/` but have no corresponding desk agent.
 
 | Reporter | Voice file | Desk header | Closest-fit launch agent |
 |----------|-----------|-------------|--------------------------|
-| Celeste Tran | `docs/media/voices/celeste_tran.md` | Wire / Rumor / Social — Hashtags, viral moments, fanbase temperature | `sports-desk` (most A's-adjacent) |
 | Reed Thompson | `docs/media/voices/reed_thompson.md` | Wire / Rumor / Social — Neutral rumor verification | `civic-desk` or `sports-desk` by brief topic |
 | MintConditionOakTown | `docs/media/voices/mintconditionoaktown.md` | Wire / Rumor / Social — Anonymous rumor aggregation | `freelance-firebrand` (closest tonal fit) |
 

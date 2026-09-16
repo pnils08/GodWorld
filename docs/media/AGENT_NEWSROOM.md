@@ -255,7 +255,11 @@ Rhea's 7-point check: citizen names, vote positions, sports records, engine metr
 |------|------|
 | Reed Thompson | Wire Editor |
 | MintConditionOakTown | Speculation / Rumor |
-| Celeste Tran | Social / Trends |
+
+### Wire/Social (solo agent)
+| Name | Role |
+|------|------|
+| Celeste Tran | Social / Trends (`celeste-tran` solo, Friday WEEK_GRID seat) |
 
 ### Opinion (covered by existing desk agents)
 | Name | Role |

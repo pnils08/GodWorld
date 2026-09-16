@@ -1,7 +1,7 @@
 ---
 title: Oakland_Sports_Feed — ingest contract audit
 created: 2026-09-11
-updated: 2026-09-12
+updated: 2026-09-16
 type: reference
 tags: [research, engine, sports, ingest, active]
 sources:
@@ -134,7 +134,7 @@ At audit, `canonicalSportsPhase_` (applySportsSeason.js:296) had an alias table 
 
 **D3 — Field carry-forward never expires.** `processFeedSheet_` scans every row ever written and applies "last non-empty wins" per team. engine.75 ages out the *team* (`state.cycle !== currentCycle` → skip) but never the *fields*. An A's `MediaProfile` set at C85 is still in force at C106 if no later row re-states it. At 46% fill this is the normal case, not the edge case — roughly half of every cycle's sentiment is computed from values authored in an earlier cycle.
 
-**S447 ruling: engine.203-D3 deferred, not built.** Current-Cycle-only reduction was denied: the C106 damaging rows are current-Cycle, and removing historical fields changes sim-visible outputs. Engine.210 benches first and alone. Any D3 implementation follows it and requires the builder's ruling. D1/D4 retain existing historical carry-forward and team aging.
+**S447 ruling: engine.203d (D3), unbuilt.** Inactivity drifts toward the city's own baseline across Cycles; it neither snaps to zero nor holds stale values. The current-Cycle-only proposal was denied. Sequence after engine.210 benches first and alone; D1/D4 preserve existing historical carry-forward and team aging.
 
 **D4 — No-information fields overwrite informative state (widened S447).** The old `if (record) ts.record = record` accepted both literal `-` and filler `0-0`. Engine-sheet measured C106 A's rows in order: player-feature `127-35`, player-feature blank, roster-move `0-0`, team-update `0-0`. The final two erased the record, reducing its base sentiment to zero before the playoff multiplier.
 
@@ -161,11 +161,11 @@ Net effect on the city: in C105 the Oaks going **0-3 in preseason** pulled city 
 
 ## 5b. The casino is the proof (added S446)
 
-`Casino_Ledger` carries **12 live sports wagers** — `MarketFamily=sports`, `MarketId=sports:as`, `EventId=next-as` — placed by named citizens (POP-00214, POP-00335, …) at C106. **All 12 are `open`. Not one has ever settled.**
+**C106 snapshot:** Casino_Ledger carried 12 newly placed open sports wagers (MarketFamily=sports, MarketId=sports:as, EventId=next-as). Open status in their placement Cycle was expected and did not prove a settlement stall.
 
-`casinoResolveSports_` → `casinoParseSports_` (phase05-citizens/casinoLedgerEngine.js:147) needs a feed row with `EventType='game-result'` **and** a parseable W/L `Streak`, matched to the franchise. Measured: 33 `game-result` rows across 48 cycles, only **20** with a parseable streak, and **C106 carries no A's `game-result` row at all** — the A's last one was C105, before that C95. With no settleable event the resolver returns `carry`, every cycle, forever.
+`casinoResolveSports_` → `casinoParseSports_` (phase05-citizens/casinoLedgerEngine.js:147) needs a feed row with `EventType='game-result'` **and** a parseable W/L `Streak`, matched to the franchise. Measured: 33 `game-result` rows across 48 cycles, only **20** with a parseable streak, and **C106 carries no A's `game-result` row at all** — the A's last one was C105, before that C95. Without settleable input, slips carry until the three-Cycle expiry and then void-gate; the C106 slips would expire at C109.
 
-This is the ingest defect in its purest form: a fully-built mechanism that took real citizens' money and has been silently stuck since it shipped, waiting on a row the tab never told the author to write.
+**Later S447 correction:** C107 already contained usable A's game-result rows, so settlement was not blocked. First-result casino selection was accepted by the builder; EventId comparison is parked for intake work. Weekly entry work provides dependable input. This session has not read live settlement/payout results; the historical input prediction is not a claim of completed settlement.
 
 ---
 
@@ -175,7 +175,7 @@ The sentiment scalar this audit opened with is **not** the engine's main sports 
 
 `applySportsSeason.js:110` sets `S.sportsAtmosphereEnabled = false` whenever the source is the feed — S302's ruling that *"feed rows are Mike's game logs, not a license to synthesize city-wide sports mood."* The flag goes true only via a `World_Config` key `sportsState_Oakland`. **World_Config has 104 rows and zero `sportsState*` keys**, so the flag has been permanently false on live.
 
-Nine consumers gate on it and read an empty string every cycle — `applySeasonWeights:34`, `calendarChaosWeights:33`, `buildCityEvents:75`, `generateGameModeMicroEvents:91`, `runEducationEngine:159`, `updateNeighborhoodDemographics:97`, `deriveDemographicDrift:69`, `applyDemographicDrift:123`, `generateGenericCitizenMicroEvent:79`. City events, demographic drift, micro-events, season weights, chaos weights and education are structurally blind to sports. Not mis-tuned — switched off.
+At the S446 audit, nine consumers gated on it (eight empty-string fallbacks; generic citizen events used off-season) — `applySeasonWeights:34`, `calendarChaosWeights:33`, `buildCityEvents:75`, `generateGameModeMicroEvents:91`, `runEducationEngine:159`, `updateNeighborhoodDemographics:97`, `deriveDemographicDrift:69`, `applyDemographicDrift:123`, `generateGenericCitizenMicroEvent:79`. These branches mix numeric effects and dedicated sports prose. The 2026-09-16 audit found a separate seasonal ordering defect and zero consumers for chaosCategoryWeights. The owning plan Task 0 carries the bounded correction and pending population/economy ruling; the full engine is not blind to sports.
 
 Of 64 files, 9 are gated and 55 ungated; the counted branch census is championship 78 / playoffs 60 / post-season 27 / late-season 16 / off-season 2 / world-series 1 / regular 1 — 165 of 185 tests (89%) at the three extremes. Crime linkage does exist (`generateCrisisSpikes.js:191`, SAFETY × championship) but only at that extreme — correcting §2's "crime: no linkage" line, which was scoped to the crime-metrics file alone.
 
@@ -206,7 +206,7 @@ And `deepestSportsPhase_` resolves the city phase as the **max depth across fran
 
 **Verdict:** `adopt` — engine.194 was scoped as a magnitude question ("should the record swing harder"). This audit shows magnitude is downstream of a broken contract: the record is the weakest term in its own formula, three columns feed dead fields, 44% of triggers land nowhere, and half the sentiment is computed from stale carry-forward. The contract gets fixed first.
 
-**Ignited plans:** [[../plans/2026-09-11-sports-as-a-lived-system]] — engine.194 (reprice), engine.202 (dead-field wiring + vocabulary in-tab), engine.203 (parser merge), engine.204 (feed drives geography), engine.205 (game-day economy), fandom unfiled pending Mike.
+**Ignited plans:** [[../plans/2026-09-11-sports-as-a-lived-system]] — engine.194 (reprice), engine.202 (dead-field wiring + vocabulary in-tab), engine.203 (parser merge), engine.204 (intensity and city-wide reach), engine.205 (game-day economy), engine.206 (crossover seeds), engine.208 (fandom and Event_Content_Ledger), engine.209 (drifting franchise weight).
 
 ---
 
@@ -220,6 +220,8 @@ And `deepestSportsPhase_` resolves the city phase as the **max depth across fran
 - 2026-09-12 — Dial-system trace (F6 in the plan): `DialState` is ledger **column 48**, JSON `{base,mood,streak}`, 919/930 rows — a ninth dial costs no schema change. Sports' whole dial footprint is `'Sports': {outabout:1}` (citizenDialMap.js:156). `DIALS` array duplicated across six files. Fandom RULED as dial 9 → engine.208; franchise weight as a drifting number → engine.209.
 
 ## Changelog
+
+- 2026-09-16 (codex) — Corrected historical casino stall/expiry claims, recorded the existing D3 decay ruling under tracker-safe engine.203d, and pointed current gate/order/dead-reader findings to the sports plan Task 0. Event_Content_Ledger/fandom work is tracked by engine.208.
 
 - 2026-09-12 (codex) — S447 D1/D4 source fixes built and tested locally; corrected D2's unsupported reset diagnosis using engine-sheet's four-row C106 measurement; D3 deferred after engine.210 pending builder ruling, no deployment.
 - 2026-09-11 — Initial audit (S446). Method: full-tab fill/variance analysis + consumer grep per column + Ripple_Ledger cross-check of replayed sentiment.

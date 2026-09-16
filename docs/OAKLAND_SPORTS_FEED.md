@@ -1,7 +1,7 @@
 ---
 title: Oakland Sports Feed
 created: 2026-07-28
-updated: 2026-09-12
+updated: 2026-09-16
 type: reference
 tags: [sports, engine, citizens, active]
 sources:
@@ -150,7 +150,7 @@ Record assignment uses the same `parseWinPercentage_` as sentiment: filler `0-0`
 or an unparseable value cannot erase a played record. A team with only `0-0`
 keeps it and contributes zero base sentiment; a played `0-3` remains informative.
 Blank and literal `-` fields preserve earlier values. Historical field
-carry-forward remains unchanged (engine.203-D3 is deferred).
+carry-forward remains unchanged (engine.203d / D3 is unbuilt; ruled decay follows engine.210).
 
 The reducer uses `canonicalSportsPhase_` for SeasonType before sentiment and
 season-trigger inference. Existing aliases apply, including `summer league`
@@ -377,6 +377,8 @@ Do not repair the world by changing historical feed values. Align the active
 parsers, validators, and consumers through an approved implementation plan.
 
 ## Changelog
+
+- 2026-09-16 (codex) — Updated the D3 pointer to tracker-safe engine.203d; decay is ruled and remains unbuilt after engine.210.
 
 - 2026-09-12 (codex) — Documented locally built engine.203 D1/D4: shared SeasonType parsing and informative-record preservation; genuine 0-0 and historical carry-forward retained; review and deployment pending.
 - 2026-07-28 — Created from the schema and end-to-end consumer trace; documented

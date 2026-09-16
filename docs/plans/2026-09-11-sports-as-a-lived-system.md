@@ -1,17 +1,20 @@
 ---
 title: Sports as a lived system — plan
 created: 2026-09-11
-updated: 2026-09-12
+updated: 2026-09-16
 type: plan
 status: draft
 tags: [plan, engine, sports, ingest, fandom, active]
 sources:
   - Mike-direct S446 — the direction block captured verbatim in §0
+  - Mike-direct 2026-09-15/16 — reconcile, start engine.210, include Event_Content_Ledger and dial-based event selection
   - "[[../research/2026-09-11-sports-feed-ingest-contract]] — the measure-twice substrate"
 pointers:
   - "[[../engine/ROLLOUT_PLAN]] — engine.194 / .202 / .203 / .204 / .205 / .206 carry pending state"
   - "[[../SIM_DOCTRINE]] §15 gates that can't fire, §16 columns that never move"
   - "[[../research/index]] — research registration"
+  - "[[../index]] — plan registration"
+  - "[[plans/2026-07-01-persistence-seams-content-ledger]] — existing Event_Content_Ledger contract"
 ---
 
 # Sports as a lived system — Plan
@@ -20,7 +23,7 @@ pointers:
 
 **Architecture:** Three seams, in order. (1) **Cadence** — define what a cycle's worth of sports *is*, since one cycle carries a week and two franchises. (2) **Channels** — route the feed into the engine paths that already exist and already work (`S.sportsZones`, transit, economic ripple, crisis spikes) instead of the one clamped scalar. (3) **Fandom** — give citizens a relationship to the teams, so a game day is something that happens to people and not just to a neighborhood average.
 
-**Terminal:** engine/sheet
+**Implementation:** codex (builder-directed 2026-09-15); engine-sheet reviews and lands substrate changes and owns live deployment.
 
 **Acceptance criteria:**
 1. **Mike's test, verbatim:** NotebookLM's daily news stops telling him the data and the lived experience don't align. A cycle where the A's had a big week reads like one in the slices AND in the numbers.
@@ -28,6 +31,7 @@ pointers:
 3. `Casino_Ledger` sports wagers settle — Status leaves `open`, `CycleSettled` populates.
 4. A cycle's sports emits seeds in at least three non-sports lanes (transit, economic-food, civic).
 5. Author workload goes **down**: two dead columns repurposed to one load-bearing one, `HomeNeighborhood` deleted, every remaining vocabulary visible in the tab.
+6. Event_Content_Ledger supplies sports content; recorded context and fandom select who receives it. Signed causal events feed the existing LifeHistory/compressor path and influence later selection.
 
 ---
 
@@ -69,6 +73,8 @@ pointers:
 
 ## 1. Measured starting state
 
+Unless explicitly corrected below, counts and live observations in this section are the historical S446/C106 snapshot. Current Task 0 evidence is local code/test verification, not a fresh live-sheet audit.
+
 Feed volume: **mean 4.4 rows per cycle**, 5–8 in recent cycles (C105 = 8), across two franchises whose seasons rarely overlap in phase. C106: A's `playoffs`, Oaks `preseason`.
 
 What the engine currently does with a cycle of sports:
@@ -76,11 +82,11 @@ What the engine currently does with a cycle of sports:
 | Channel | Driven by | Sees the record? | Sees the feed? |
 |---|---|---|---|
 | City sentiment | record + streak + 2 typed labels, clamped ±0.10 | yes, capped ±0.03 | yes |
-| City mood modifiers (`applySportsModifiers_`) | **calendar phase only** | **no** | phase only |
+| City mood modifiers (`applySportsModifiers_`) | **resolved feed phase only** | **no** | phase only |
 | Economic ripple | **`cal.sportsSeason` ∈ {championship, playoffs} + OpeningDay** | **no** | **no** |
-| Transit / game-day hoods | `HomeNeighborhood` ∪ `S.sportsZones` | no | **yes** |
+| Transit / game-day hoods | current `HomeNeighborhood` plus sports zones; replacement weekly contract unbuilt | no | **yes** |
 | Crisis spikes, evening media, neighborhood writer | `S.sportsZones` | no | **no** |
-| Crime | — | **no** | **no** |
+| Crime | playoffs/post-season/championship crisis weighting | **no** | **yes, at those phases** |
 | Citizens | `abs(sportsSentimentBoost)/0.15` game-night intensity, city-wide uniform | indirectly | indirectly |
 
 Two structural facts that decide the design:
@@ -89,7 +95,7 @@ Two structural facts that decide the design:
 
 *Corrected by Mike, S446:* a stadium does not move, so a static zone set is the right shape and it already tracks the one move that matters (Baylight). The defect is not that geography is static — it is that **nothing varies the intensity driven into it**, and that the effect is confined to the zone when a pennant race is felt city-wide. The fix is magnitude and reach, not per-row geography. `HomeNeighborhood` therefore comes off the tab rather than being wired deeper.
 
-**F2 — Economically, sports only exists at championship level.** `economicRippleEngine.js:441-452` fires three ripples, all off `cal.sportsSeason` (the *city-wide resolved* phase, so it cannot tell the A's from the Oaks): `CHAMPIONSHIP_BOOM`, `PLAYOFF_SPENDING`, and `SPORTS_CHAMPIONSHIP` on OpeningDay. A 127-win regular season produces **zero** economic ripple. There is no game-day economy.
+**F2 — Economic ripples are phase-gated, not record-driven.** `economicRippleEngine.js:441-452` fires three ripples, all off `cal.sportsSeason` (the *city-wide resolved* phase, so it cannot tell the A's from the Oaks): `CHAMPIONSHIP_BOOM`, `PLAYOFF_SPENDING`, and `SPORTS_CHAMPIONSHIP` on OpeningDay. A 127-win regular season produces **zero** economic ripple. There is no game-day economy.
 
 **F3 — There is no fandom.** All 55 `Simulation_Ledger` columns read; none encodes a relationship to a team. Greps for `fandom|fanAffinity|isFan|fanTier|superfan|casualFan` across `phase*/ lib/ utilities/ scripts/` return no engine concept. Every citizen reacts to a pennant race identically, through one city-wide scalar.
 
@@ -99,17 +105,17 @@ Two structural facts that decide the design:
 
 `casinoResolveSports_` → `casinoParseSports_` (casinoLedgerEngine.js:147) requires a feed row with `EventType='game-result'` **and** a parseable W/L `Streak`, matched to the franchise. The feed carries 33 `game-result` rows across 48 cycles — only 20 with a parseable streak — and **C106 has no A's `game-result` row at all** (the A's last one was C105; before that C95). With no settleable event the resolver returns `carry`, but `processCasinoLedger_` checks expiry first: `CASINO_VOID_AFTER = 3` (:52), gate at :699-701. An unmatched C106 slip carries at C107/C108 and void-gates at C109.
 
-The sparse usable results support the one-row-per-team-per-week ruling: the settlement mechanism is already built, but needs dependable input to resolve wagers before expiry. The C106 snapshot establishes newly placed wagers, not a history of failed settlement. **Measured live S447 (engine-sheet): the feed ALREADY carries the settling input — C107 has three A's `game-result` rows (`W1` rec 1-0, `W1` rec 2-1, `W2` rec 3-1), and `casinoResolveSports_` does not compare the wager's stored `EventId`, so all 12 open C106 slips settle on the builder's next fire with no feed-contract change.** The input is sporadic, not absent — which is still the argument for one row per team per week, but the mechanism is not blocked today. Independently, pricing used the last feed row's record regardless of team; engine.207a now selects the A's own usable current-Cycle record while preserving issued odds and the existing juice fallback (code and tests accepted S447; not deployed).
+The sparse usable results support the one-row-per-team-per-week ruling: the settlement mechanism is already built, but needs dependable input to resolve wagers before expiry. The C106 snapshot establishes newly placed wagers, not a history of failed settlement. **Measured live S447 (engine-sheet): the feed ALREADY carries the settling input — C107 has three A's `game-result` rows (`W1` rec 1-0, `W1` rec 2-1, `W2` rec 3-1), and `casinoResolveSports_` does not compare the wager's stored `EventId`, so the recorded prediction was that all 12 open C106 slips could settle at the next fire without a feed-contract change. This session has not verified actual settlement/payout rows.** The input is sporadic, not absent — which is still the argument for one row per team per week, but the mechanism is not blocked today. Independently, pricing used the last feed row's record regardless of team; engine.207a now selects the A's own usable current-Cycle record while preserving issued odds and the existing juice fallback (code and tests accepted S447; deployment not reverified here).
 
 **F6 — The dial system can take a ninth dial at no schema cost, and sports barely touches the eight it has.** `DialState` is **ledger column 48** (919 of 930 rows populated) and stores JSON — `{base:{...}, mood:{...}, streak:{...}}` keyed by dial name. **Adding a ninth dial requires no new *column*** — but see §4: it is not free, because `TraitProfile` (col 18) is the same data's readable face and must render the ninth dial too.
 
 The eight today: `drive, sociability, warmth, openness, composure, integrity, family, outabout`.
 
-Sports' entire footprint in that system is one line — `'Sports': { outabout: 1 }` in `utilities/citizenDialMap.js:156`, an engine.176 ambient tint. A pennant race and a last-place season move the same dial by the same +1. The `Sports` calendar suffix is the only other hook.
+**Current correction (2026-09-16):** `utilities/citizenDialMap.js:163` now maps plain `Sports` to `{}` under engine.201's plain-day ruling. The older outabout +1 observation is superseded. Task 8 must supply signed, causal sports events; merely receiving sports texture must not restore a blanket dial lift.
 
-The prerequisite census found **seven** identical `DIALS` arrays: `utilities/citizenMemory.js`, `lib/citizenDials.js`, `scripts/classifierGate.js`, `scripts/seedTier1Essence.js`, `scripts/_probe_voice_openrouter.js`, `scripts/_probe_voice_grounded.js`, and `scripts/_probe_classifier.js`. **Consolidated locally (codex, S447; review pending):** `utilities/citizenMemory.js` remains the single definition, an Apps Script global with its existing guarded CommonJS export. Node consumers import that export; `lib/citizenDials.js` re-exports it and `seedTier1Essence.js` uses that existing import. No dial values, order, or behavior changed.
+The prerequisite census found **seven** identical `DIALS` arrays: `utilities/citizenMemory.js`, `lib/citizenDials.js`, `scripts/classifierGate.js`, `scripts/seedTier1Essence.js`, `scripts/_probe_voice_openrouter.js`, `scripts/_probe_voice_grounded.js`, and `scripts/_probe_classifier.js`. **Consolidation accepted S447 (`0c1fa07b`):** `utilities/citizenMemory.js` remains the single definition, an Apps Script global with its existing guarded CommonJS export. Node consumers import that export; `lib/citizenDials.js` re-exports it and `seedTier1Essence.js` uses that existing import. No dial values, order, or behavior changed.
 
-**F7 — The feed is FORBIDDEN from moving the city, by design, and the switch that would allow it has never been set.** This is the literal answer to "nothing in the engine knows it exists."
+**F7 — The atmosphere guard also blocks some numeric effects.** The feed already reaches ungated consumers; the guarded readers need separate treatment, not blanket activation. Task 0 records the current audit.
 
 `S.sportsSeason` — not sentiment — is the engine's real sports channel. It is read in **64 files across every phase** (counted, not estimated): crisis spikes, promotions, bonds, nightlife, evening food, migration drift, cycle weight, event prioritisation, civic load, the neighborhood writer, demographics. It dwarfs the ±0.10 sentiment scalar (64 files vs 1 fold).
 
@@ -117,13 +123,13 @@ It is **not** calendar-derived. `applySportsSeason.js:98` sets it from Mike's ow
 
 **But `applySportsSeason.js:110` then sets `S.sportsAtmosphereEnabled = false` on the feed path**, with the comment: *"feed rows are Mike's game logs, not a license to synthesize city-wide sports mood (S302 C122 'playoffs' contamination)."* The flag is set `true` **only** by a `World_Config` override key `sportsState_Oakland`.
 
-**Measured: `World_Config` has 104 rows and zero `sportsState*` keys. The flag has therefore been permanently `false` on live.**
+**S446 snapshot:** World_Config had 104 rows and zero sportsState keys. The feed path still sets the flag false in current code; this session has not refreshed live configuration.
 
-Nine consumers gate on it and see an **empty string** every cycle, so every sports branch inside them is dead code:
+At audit, nine consumers gated on it: eight used an empty string, while the generic citizen generator used `off-season`. Task 0 separates numeric effects from dedicated sports prose:
 
 `applySeasonWeights.js:34` · `calendarChaosWeights.js:33` · `buildCityEvents.js:75` · `generateGameModeMicroEvents.js:91` · `runEducationEngine.js:159` · `updateNeighborhoodDemographics.js:97` · `deriveDemographicDrift.js:69` · `applyDemographicDrift.js:123` · `generateGenericCitizenMicroEvent.js:79`
 
-City events, demographic drift, micro-events, season weights, chaos weights and the education engine are all structurally blind to sports. Not mis-tuned — **switched off**, by a gate built to stop the author's own game logs from reaching the city.
+These guarded paths mix weights, population changes and dedicated prose. Seasonal weights also ran before the sports read; chaos weights have no consumer. The full engine is not blind to sports. See Task 0 for the bounded restoration and remaining decisions.
 
 **F8 — The 55 ungated consumers listen for a handful of extreme words.** Counted branch census across `phase*/` — every `sportsSeason === '<word>'` test in the engine:
 
@@ -138,7 +144,7 @@ City events, demographic drift, micro-events, season weights, chaos weights and 
 
 165 of 185 tests (89%) are for championship / playoffs / post-season. A 127-win regular season satisfies none of them. This is §15 at scale: the machinery Mike wants for traffic, retail, nightlife and crime **already exists and is already wired everywhere** — it is gated on two words the feed almost never says.
 
-*(This also corrects an earlier claim in this plan: crime IS linked to sports — `generateCrisisSpikes.js:191` raises SAFETY pressure on `championship` — but only at that extreme.)*
+*(Crime linkage exists: `generateCrisisSpikes.js:191-194` raises SAFETY pressure during championship, playoffs and post-season. Record-driven magnitude remains open.)*
 
 **F9 — `deepestSportsPhase_` takes the MAX of the two franchises.** With per-team phases from the feed, the city-wide value is whichever team is deepest in its season. Live C106: A's `playoffs` (depth 5), Oaks `preseason` (depth 1) → the city reads **`playoffs`**. This is precisely Mike's "one of them is always late in a season" observation, confirmed in code: the resolver guarantees the city sits at the deeper team's phase permanently. It is an always-on shape *and* it erases the other franchise.
 
@@ -154,7 +160,7 @@ A cycle is a week and carries ~4-6 authored rows across two franchises. A week i
 2. **Direction** — how it went. Week record (not season record), which moves sentiment and fan mood up or down.
 3. **Stakes** — what it meant. Phase depth (`SPORTS_PHASE_DEPTH_` already exists, 0–6) × record quality. Stakes is what escalates a normal week into an event the city references afterward (§15's chain: start → peak → end → aftermath → referenced).
 
-Home vs away is the game-day switch: `HomeNeighborhood` filled = the crowd is physically here. That column is already 54-100% filled and already reaches transit. It is the existing hook for "what is a game day."
+The stadium zone set establishes venue geography. The weekly feed still needs an explicit home/away or home-count contract for game-day intensity; that implementation remains open. `HomeNeighborhood` is not the carrier for it and is removed from authored input.
 
 **Consequence for the feed contract (RULED, Mike S446):** **one row per team per cycle** carrying the week's record and game details, stamped `EventType='game-result'` with a parseable `Streak`. It costs **no new column** — `VideoGame` / `VideoGameDate` are repurposed to hold the week's record, which is also what the Casino reads (F5). `HomeNeighborhood` comes **off** the tab; the stadium's hood is canon, already tracked by `S.sportsZones` through the Baylight move, and does not need re-typing every row.
 
@@ -167,9 +173,9 @@ Net effect on the author's workload: **two dead columns become the one load-bear
 | Column | Today | Proposed | If rejected |
 |---|---|---|---|
 | `EconomicFootprint` | `ne.retail` (dead) + `ne.traffic` (crowd count only) | the **retail/food multiplier** on game-day hoods — the existing economic-ripple sector list (`entertainment`, `food`, `retail`) already exists at championship level; this is the same mechanism at week scale | delete |
-| `CommunityInvestment` | `ne.communityEngagement` (dead) | **youth/community program pressure** in `HomeNeighborhood` — the academy and community-program surfaces already exist; this is the authored signal for whether the franchise is showing up | delete |
+| `CommunityInvestment` | `ne.communityEngagement` (dead) | **youth/community program pressure** in canonical stadium zones and the wider city — the academy and community-program surfaces already exist; this is the authored signal for whether the franchise is showing up | delete |
 | `FranchiseStability` | `ne.retail` (dead) | **business-confidence signal** near the stadium; also the natural driver of relocation/ownership arcs. The one authored column that genuinely varies (Oaks `uncertain` 21 / `stable` 10) | delete |
-| `VideoGame` / `VideoGameDate` | marked DEAD by the tab's own validation, still filled 32-45% | **RULED: one of them becomes the week's record** — the Casino's missing input (F5), and the intensity/direction source for §2. The other is deleted | — |
+| `VideoGame` / `VideoGameDate` | marked DEAD by the tab's own validation, still filled 32-45% | **RULED: one of them becomes the week's record** — the Casino's dependable weekly input (F5), and the intensity/direction source for §2. The other is deleted | — |
 | `PlayerMood` | story hooks only | keep as MEDIA; also the input to **player-citizen** dial movement once the roster is ledger-linked | keep as media |
 | `HomeNeighborhood` | transit game-day hoods | **RULED: delete.** Stadium hood is canon, already carried by `S.sportsZones`. Transit reads the zone set instead of a typed column | — |
 | trade news / injuries | `roster-move`(22) / `injury`(12) EventTypes, media-only | **the negative drift channel** (RULED). Today the feed has no downside vocabulary that reaches a number — these are it | — |
@@ -216,7 +222,7 @@ Same eight dials, same names, same values — `TraitProfile` is the **rounded re
 
 Currently sports reaches the story layer through `S.sportsEventTriggers` → `storyHook.js` TRIGGER_HOOKS (12 recognized values, 44% of authored triggers land nowhere) and through desk packets. It does **not** produce `Cycle_Seeds` / economic seeds except at championship level.
 
-Target: a week of sports emits seeds the same way a business closure does after engine.190 — intensity and stakes produce `recordRipple_` entries with real geography (`HomeNeighborhood`, not the static zone list), which become economic and story seeds in the same cycle.
+Target: a week of sports emits seeds the same way a business closure does after engine.190 — intensity and stakes produce `recordRipple_` entries located through canonical `S.sportsZones` and the city-wide component, which become economic and story seeds in the same cycle.
 
 ---
 
@@ -242,18 +248,48 @@ That also gives Mike's franchise-weight ruling its home: weight is **derived, no
 
 *Ordered. Each is independently benchable. Task 1 is the prerequisite for 2-5.*
 
-### Task 0 — engine.210: let the feed reach the city (DO FIRST)
-`S.sportsAtmosphereEnabled` is permanently `false` on live (F7), so nine consumers see an empty string and every sports branch in them is dead. This is the single highest-leverage change in the plan and also the highest blast radius — nine files, all of them population/event generators, wake up at once. Do it FIRST because every later task's measurement is meaningless while the channel is off, and do it ALONE on the bench (TERMINAL.md: one unbenched change in flight) so a failure stays attributable. Respect S302's actual concern — the fear was invented atmosphere, so the fix is not "flip the flag" but "let RECORDED facts through while invented atmosphere stays gated." Verify: a bench cycle where the flag is live shows movement in demographic drift, city events and micro-events that C106 does not have.
+### Task 0 — engine.210: separate recorded effects from atmosphere (DO FIRST)
+**Status: in-progress — first cut implemented locally, 13/13 regression cases pass; engine-sheet landing and isolated sandbox proof remain.**
+
+Move `Phase2-SportsSeason` before `Phase2-SeasonalWeights` in both Cycle entry paths. `applySeasonalWeights_` accepts the recorded phase when `sportsSource === 'oakland-feed'`, or the existing explicit atmosphere override. Existing coefficients remain unchanged. The feed's `sportsAtmosphereEnabled` remains false. No new state field or Sheet schema. `worldEventsEngine_` consumes the changed `S.seasonal.eventWeight`.
+
+**Local proof (codex, 2026-09-16):** six failures against unchanged engine code; 13/13 cases pass after the two-file cut. In 128 matched synthetic seeds, 55 produce different actual world events from the restored weights. Dedicated playoff/championship atmosphere is absent on feed input; the override positive control produces 33 such events. Existing sports phase, parser (47/47), and team compatibility suites pass. Empty, historical-only, unknown and off-season input preserve baseline weights. This proves local event selection, not live impact or record-driven economics.
+
+**Sim ruling pending:** existing gated code adds employment from phase alone, can set the economy to `booming`, and changes residential inflow/outflow in hardcoded Jack London/Downtown. The builder was asked whether to activate these or defer them to record-driven impact. They remain unchanged until answered. No claim that all nine consumers are restored.
+
+#### Verified wiring card — engine.210
+Haiku cards were requested through `runEngineAgent.js` for the atmosphere and seasonal targets. Codex checked the depended-on pointers below and corrected card errors: filename `applySeasonWeights.js`, generic guard fallback `off-season`, historical rather than current live config counts.
+
+| Surface | Verified pointer |
+|---|---|
+| Feed phase/source/atmosphere producer | `phase02-world-state/applySportsSeason.js:97-110` |
+| Both Cycle calls, now sports before weights | `phase01-config/godWorldEngine2.js:288-289`, `:2037-2038` |
+| Weight reader and output | `phase02-world-state/applySeasonWeights.js:30-34`, `:420` |
+| Actual event consumer and category arithmetic | `phase04-events/worldEventsEngine.js:60`, `:103-118` |
+| Dedicated sports atmosphere remains config-only | `phase04-events/worldEventsEngine.js:95-96`, `:244-249` |
+| Existing feed/config safety tests | `scripts/sportsSeasonPhase.test.js:203-232` |
+| Behavioral regression | `scripts/sportsRecordedWeights.test.js:1` |
+
+#### Engine.210 findings and decisions
+
+- **Fixed locally — ordering:** seasonal weights could not see current sports. Tests execute the actual phase-call closures from both Cycle paths.
+- **Open — dead chaos output:** `phase02-world-state/calendarChaosWeights.js:471` writes `S.chaosCategoryWeights`; no repository consumer reads it. Changing that gate alone restores nothing.
+- **Open — unused weight members:** `S.seasonal` has one engine reader at `worldEventsEngine.js:60`. Its sports-dependent `eventWeight` is used, but `sportsWeight`, `nightlifeWeight` and `mediaWeight` are not used in category arithmetic. Do not report those fields as actual nightlife/retail effects; Tasks 3–4 own those channels.
+- **Pending sim ruling — population/economy:** `applyDemographicDrift.js:306-309,372-373` and `updateNeighborhoodDemographics.js:556-566` contain phase-only boosts and fixed geography.
+- **Existing prose paths:** generic athlete activity at `worldEventsEngine.js:141-144`, in-season sports content at `:241-242`, and OpeningDay content already operate independently. This cut preserves dedicated atmosphere guards; it does not claim all sports prose is guarded.
+- **Fixed tracker ID:** `scripts/docLoopStatus.js:49` and `scripts/rolloutSweep.js:30` accept an optional single-letter suffix, so `engine.203-D3` was skipped by parsing AND lint. Use `engine.203d`; D3 remains the defect label.
+- **Open process defect — inactive hook target:** `.githooks/pre-commit:73` watches `docs/engine/archive/ROLLOUT_PLAN.md`, not the current tracker. No hook edit here. Manual lint still surfaces unrelated pre-existing rows.
+- **Card reliability:** the first network call failed; the permitted retry succeeded. Generated cards misstated some paths and current-state claims; direct code verification above takes precedence.
 
 ### Task 1 — engine.202: wire or delete, and publish the vocabulary
-Resolve every dead column per §3. Surface every closed vocabulary into the tab (data validation + legend) so authored effort lands by construction. Add the games-played/home-count column from §2. Delete `VideoGame` / `VideoGameDate`.
+Resolve every dead column per §3. Surface every closed vocabulary into the tab (data validation + legend) so authored effort lands by construction. Repurpose one of `VideoGame` / `VideoGameDate` as the week's record; delete the other. The weekly home/away or home-count contract remains implementation work and does not authorize a new authored column.
 
 ### Task 2 — engine.203: one parser per column
-**Status: in-progress — D1 + widened D4 built locally by codex (S447), review pending; no push or deployment.** See [[research/2026-09-11-sports-feed-ingest-contract]] §4.
+**Status: in-progress — D1 + widened D4 are in repository commit `6b4a8701`; D3 remains unbuilt. Deployment was not reverified this session.** See [[research/2026-09-11-sports-feed-ingest-contract]] §4.
 
 - **D1:** `processFeedSheet_` uses `canonicalSportsPhase_` before sentiment and inferred season triggers. Existing aliases and fail-closed `off-season` behavior are preserved; no vocabulary expansion.
 - **D4:** the reducer uses the existing `parseWinPercentage_` to prevent a no-information record from replacing an informative record. Engine-sheet's measured C106 sequence (`127-35`, blank, `0-0`, `0-0`) now retains `127-35`; a lone Oaks `0-0` remains valid with zero base sentiment. Literal `-` acts as blank across all eleven state fields. Published `S.` field shapes are unchanged.
-- **engine.203-D3: deferred, not built.** The proposed current-Cycle-only reducer was denied: it does not fix the same-Cycle overwrites and changes sim-visible carry-forward. Sequence after engine.210, which benches first and alone; a builder ruling is required before implementation.
+- **engine.203d (D3): ruled decay, not current-Cycle reset.** Inactivity drifts toward the city's baseline across cycles; it neither snaps to zero nor holds stale values. Sequence after engine.210, which benches first and alone.
 
 **Local proof:** `scripts/sportsFeedParser.test.js` has 47 cases: 23 fail against the pre-fix engine and all 47 pass with D1/D4. Coverage includes the measured four-row sequence, genuine 0-0, played 0-3, each dash field, aliases/unknown labels, retained historical carry-forward, and unchanged published output shapes.
 
@@ -272,10 +308,10 @@ Resolve every dead column per §3. Surface every closed vocabulary into the tab 
 Original scope (union `HomeNeighborhood` into `S.sportsZones`) is **superseded** — the zone set is correctly static and already tracks the Baylight move. New scope: (a) drive a **varying intensity** into the existing zone set from record × season state instead of the current constant; (b) give sports a **city-wide component** so a pennant race is felt outside the stadium hood, with the zone set as the concentration; (c) transit reads the zone set directly so `HomeNeighborhood` can come off the tab. Same seven already-wired consumers benefit — economic ripple, crisis spikes, evening food/famous, `v3NeighborhoodWriter`, transit, initiatives.
 
 ### Task 4 — engine.205 (NEW): the game-day economy
-Intensity × stakes drives traffic / retail / transit at week scale, both directions, off the §2 derivation. Retires the championship-only ripple gates as the *only* sports economy (they stay as the top of the scale). Crime enters here or is explicitly ruled out — today it has no sports linkage at all.
+Intensity × stakes drives traffic / retail / transit at week scale, both directions, off the §2 derivation. Retires the championship-only ripple gates as the *only* sports economy (they stay as the top of the scale). Postseason safety/crisis linkage already exists. Design the broader record-driven crowd/crime channel here; do not describe it as starting from zero linkage.
 
 ### Task 5 — engine.207 (NEW): unstick the casino
-Repurposed `VideoGame`/`VideoGameDate` week-record column feeds `casinoParseSports_` once the weekly feed and settlement contract is defined. The current resolver requires `EventType='game-result'` and a parseable `Streak`; dependable input must reach it before the three-Cycle expiry (`CASINO_VOID_AFTER = 3`), or an unmatched C106 slip void-gates at C109. The 12 C106 slips were newly placed, so their open status does not prove a stall. Engine.207a's team-specific pricing correction is built and accepted S447, not deployed; weekly settlement is NOT blocked — C107's existing `game-result` rows settle the 12 open slips on the next fire (measured S447). What the feed contract buys is *dependable* settlement, not settlement at all. **Open sim call (engine.207b): C107 holds THREE A's game-result rows and settlement reads only the first, so two games that cycle reach no wager.** Verify actual win/loss settlement, `CycleSettled`, posted-odds payouts, and financial consequences; a void alone is not proof of successful settlement.
+Repurposed `VideoGame`/`VideoGameDate` week-record column feeds `casinoParseSports_` once the weekly feed and settlement contract is defined. The current resolver requires `EventType='game-result'` and a parseable `Streak`; dependable input must reach it before the three-Cycle expiry (`CASINO_VOID_AFTER = 3`), or an unmatched C106 slip void-gates at C109. The 12 C106 slips were newly placed, so their open status does not prove a stall. Engine.207a's team-specific pricing correction is built and accepted S447; deployment not reverified here; the S447 audit established available C107 settling input, not a verified payout result. This session has not re-read those live slips. What the feed contract buys is *dependable* settlement, not settlement at all. **RULED S447 (engine.207b):** the casino reading the first game-result is acceptable for now; all games still reach media/crons. The stored wager `EventId` mismatch remains parked for intake work. Verify actual win/loss settlement, `CycleSettled`, posted-odds payouts, and financial consequences; a void alone is not proof of successful settlement.
 
 ### Task 6 — engine.206 (NEW): sports as a crossover seed
 Sports stops being a lane and becomes a horizontal. A cycle's sports emits seeds tagged with the lane they land in, not just `SPORTS` — a homestand is a **transit** seed and a **restaurant** seed; a stadium-adjacent hood on a playoff week is an **economic** seed; a franchise-stability wobble is a **civic** seed. Mechanism already exists in two places to copy: engine.190 stamps `domain` on business closures so a closure becomes an ECONOMIC seed the same cycle, and `recordRipple_` already carries `targetScope` / `neighborhood`. The slice builders then read the seed by domain, which is how every other lane already works — no per-slice sports wiring. Depends on Task 3 (geography) so a seed knows where it landed.
@@ -284,10 +320,28 @@ Sports stops being a lane and becomes a horizontal. A cycle's sports emits seeds
 Only after 1-4. Magnitude is downstream of the contract. Carries the `generateCitizensEvents.js:1707` saturation fix (`min(1,abs(boost)/0.15)`).
 **Builder 2026-09-14: folded to codex.** The open sim question on the ROLLOUT row (title magnitude vs the ±0.20 edition / ±0.15 initiative siblings) is decided here as part of the contract work, not posed separately. Owner codex; engine-sheet lands and benches the cut.
 
-Cuts carried from the drained engine.194 row (measured C101–C106, detail in the research doc §1 and §4): mean +0.015 vs a ±0.10 clamp that never fired in 48 cycles; the record term `(winPct-0.5)*0.06` caps at ±0.03 and is the weakest of five factors; `MediaProfile` multiplies everything ×0.8–1.5; postseason zeroes the record so the ×2 playoff multiplier multiplies nothing; calendar phase pays +0.06 flat for late-season vs +0.017 for going 127-35. The cut: record dominant and clamp-reachable; postseason reads the series record with the regular season as earned baseline; off-season decays the final record; MediaProfile stops multiplying the record; reprice `generateCitizensEvents.js:1707` game-night intensity in the same change.
+Cuts carried from the drained engine.194 row (measured C101–C106, detail in the research doc §1 and §4): mean +0.015 vs a ±0.10 clamp that never fired in 48 cycles; the record term `(winPct-0.5)*0.06` caps at ±0.03 and is the weakest of five factors; `MediaProfile` multiplies everything ×0.8–1.5; postseason zeroes the record so the ×2 playoff multiplier multiplies nothing; resolved phase pays +0.06 flat for late-season vs +0.017 for going 127-35. The cut: record dominant and clamp-reachable; postseason reads the series record with the regular season as earned baseline; off-season decays the final record; MediaProfile stops multiplying the record; reprice `generateCitizensEvents.js:1707` game-night intensity in the same change.
 
 ### Task 8 — engine.208 (NEW): dial 9, fandom
-RULED by Mike S446. Ships with its negative pole or not at all (engine.197's lesson). **Prerequisite built locally (codex, S447; review pending):** the seven `DIALS` copies now use the existing exported source in `utilities/citizenMemory.js` (F6). Apps Script keeps its global `var`; Node keeps CommonJS imports. Remaining: poles, `DIAL_MAP` entries both directions, inheritance from household, and the cron-tone feedback channel. Verify against engine.197 criterion 4 (a spread, not two blobs) and engine.201 (does it wake citizens the pools never reach).
+RULED by Mike S446. Ships with its negative pole or not at all (engine.197's lesson). **Prerequisite accepted S447 (`0c1fa07b`):** the seven `DIALS` copies now use the existing exported source in `utilities/citizenMemory.js` (F6). Apps Script keeps its global `var`; Node keeps CommonJS imports. Remaining: poles, `DIAL_MAP` entries both directions, inheritance from household, and the cron-tone feedback channel. Verify against engine.197 criterion 4 (a spread, not two blobs) and engine.201 (does it wake citizens the pools never reach).
+
+
+#### Event_Content_Ledger — sports event content and fandom (builder-directed 2026-09-16)
+
+**Status: ready design work under engine.208; implementation follows recorded franchise context and dial 9.** Extend the existing ledger and composer, with no parallel sports-event library.
+
+**Verified wiring card:** `phase02-world-state/loadEventContentLedger.js:45` accepts `source:sports`; Conditions at `:64-111` include warmth/drive but no fandom or sports context. `generateCitizensEvents.js:955-977` evaluates conditions fail-closed, `:2755-2756` supplies current dial values, `:2904` weights sports through `dm.outabout`, and `:842` routes the primary tag to Sports. `utilities/citizenDialMap.js:163` currently maps plain Sports to `{}` (engine.201: a plain day moves nothing). The Haiku ECL card run exhausted its turn limit without a finished card; codex verified these pointers directly.
+
+Build and acceptance:
+
+1. Supply recorded per-franchise context to the existing condition scopes. Distinguish actual phase/results and home/away where relevant; stadium location cannot establish a home game.
+2. Extend loader validation and per-citizen scope evaluation together for fandom. Missing required team/dial context rejects the affected row; unrelated content stays eligible. Choose condition keys in implementation with validator/composer parity.
+3. Use fandom for eligibility and draw weighting as appropriate. Prove otherwise-equivalent citizens with different fandom draw different sports-event distributions. Preserve life-state/age/occupation checks and PoolKey balancing.
+4. Author positive and negative sports-event content with causal tags that reach LifeHistory → compressor → DialState. Only received causal events move dials; candidate rows and plain sports texture do not. Cover enthusiasm, losses and injury/trade disappointment; poles and magnitudes remain sim decisions.
+5. Connect the resulting event to ripples/domain-tagged seeds (Task 6). Prove later-Cycle persistence and changed selection after the dial moves.
+6. Synthetic fixtures remain local. Actual content-row authoring/activation is a separately gated Sheet write.
+
+Required implementation card: loader → condition scopes → eligible balanced pool → fandom weighting → received LifeHistory event → signed dial fold → next-Cycle selection. Existing tests: `scripts/contentLedgerLoader.test.js`, `scripts/contentLedgerCompose.test.js`, `scripts/contentLedgerBalance.test.js`.
 
 ### Task 9 — engine.209 (NEW): franchise weight that drifts
 RULED by Mike S446 — the A's weigh harder than the Oaks and the weight is a number that drifts, not a constant. Derived, never authored; carried in `Carry_Forward_Store` (World_Config is config and holds zero sports keys). Coefficient on every sports effect, per franchise, moving on results, tenure and attendance. Fixes the symmetry artefact where an 0-3 Oaks preseason outweighed a 127-win A's season.
@@ -299,15 +353,17 @@ Sentiment sums two franchises into one scalar; `cal.sportsSeason` resolves one c
 
 ## Open questions
 
-1. **Fandom shape and magnitude** — §4, Mike's call (Task 6).
-2. **Does sport touch crime?** Game-day crowds, rivalry nights, championship celebrations. Today: zero linkage. Sim call, not a code call.
-3. **Two franchises, one city phase — PARTLY ANSWERED (Mike S446).** `cal.sportsSeason` resolves a single city-wide phase, so the economic ripple cannot tell the A's from the Oaks; live C106 has A's=playoffs, Oaks=preseason and one of them is invisible. Mike's ruling constrains the fix: *with two teams one of them is always late in a season*, so **season state alone can never be the magnitude** — it is permanently "on," the same always-on shape §15 condemns. The record supplies the magnitude; the phase only scales it. Remaining question is mechanical: whether the city carries two phases or a resolved maximum.
+1. **Fandom poles and magnitude** — §4 and Task 8. Dial 9 and Event_Content_Ledger integration are directed; exact personal responses remain sim decisions.
+2. **Broader crime effects:** postseason safety pressure exists; record-driven crowd consequences remain under Task 4.
+3. **Two franchises, one city phase — PARTLY ANSWERED (Mike S446).** `cal.sportsSeason` resolves a single city-wide phase, so the economic ripple cannot tell the A's from the Oaks; live C106 has A's=playoffs, Oaks=preseason and one of them is invisible. Mike's ruling constrains the fix: *with two teams one of them is always late in a season*, so **season state alone can never be the magnitude** — it is permanently "on," the same always-on shape §15 condemns. The record supplies the magnitude; the phase only scales it. Task 10 carries per-franchise state through relevant consumers; the current maximum remains compatibility state.
 4. **Conversational ingest** — Mike's long-term answer to vocabulary compliance is talking to a cron that fills the tab correctly. Parked; §3's in-tab validation is the interim. Note the design constraint this sets: the tab is the **instrument he reports a game through**, not a form he completes — which is why repurposing dead columns beats adding new ones.
-5. **Does the Oaks' week matter as much as the A's?** The A's are the heart of the city (Mike-direct); the Oaks are an expansion team in preseason. Today the formula treats them symmetrically, which is how a 0-3 Oaks preseason outweighed a 127-win A's season. Whether the two franchises should carry different weight is a sim call.
+5. **Population/economy effects in .210:** awaiting the builder's response to phase-only employment, economic-label and residential migration changes. Different drifting franchise weights are already ruled in Task 9.
 
 ---
 
 ## Changelog
+
+- 2026-09-16 (codex) — Reconciled rulings, geography, casino evidence and task links; registered this plan; corrected tracker ID engine.203d. Engine.210 first two-file cut locally proven (6 failures before, 13/13 after; 55/128 matched event seeds differ), not deployed. Recorded dead readers, stale hook path and card errors. Added Event_Content_Ledger content/selection/dial feedback to Task 8 on builder direction. Population/economy ruling and engine-sheet landing/bench proof remain.
 
 - 2026-09-14 (engine-sheet S459) — engine.194 folded into Task 7 under codex (builder ruling); the magnitude question closes with the contract.
 - 2026-09-12 (codex) — engine.203 D1 + widened D4 built locally with 47 passing parser tests (23 fail pre-fix); D3 denied as proposed and deferred after engine.210 pending builder ruling; review pending, no push/deployment.

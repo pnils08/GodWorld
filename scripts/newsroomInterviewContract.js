@@ -134,8 +134,8 @@ function directReactionIssues(quote) {
   const text = clean(quote);
   if (text.split(/\s+/).length > 80) issues.push('direct reaction exceeds 80 words');
   const sentences = text.split(/(?<=[.!?])\s+/).map(value => value.trim()).filter(Boolean);
-  if (sentences.length < 1 || sentences.length > 3) issues.push('direct reaction must be one to three sentences');
-  if (!/^(?:I\b|I['’]m\b|My\b|To me\b|For me\b)/i.test(text)) {
+  if (sentences.length < 1 || sentences.length > 4) issues.push('direct reaction must be one to four sentences');
+  if (!/\b(?:I|I['’]m|I['’]ve|I['’]d|I['’]ll|my|mine|me|we|we['’]re|we['’]ve|our|us)\b/i.test(text)) {
     issues.push('direct reaction must be first person');
   }
   const unsupportedHistory = [

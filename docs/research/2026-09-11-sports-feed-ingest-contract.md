@@ -175,7 +175,7 @@ The sentiment scalar this audit opened with is **not** the engine's main sports 
 
 `applySportsSeason.js:110` sets `S.sportsAtmosphereEnabled = false` whenever the source is the feed — S302's ruling that *"feed rows are Mike's game logs, not a license to synthesize city-wide sports mood."* The flag goes true only via a `World_Config` key `sportsState_Oakland`. **World_Config has 104 rows and zero `sportsState*` keys**, so the flag has been permanently false on live.
 
-At the S446 audit, nine consumers gated on it (eight empty-string fallbacks; generic citizen events used off-season) — `applySeasonWeights:34`, `calendarChaosWeights:33`, `buildCityEvents:75`, `generateGameModeMicroEvents:91`, `runEducationEngine:159`, `updateNeighborhoodDemographics:97`, `deriveDemographicDrift:69`, `applyDemographicDrift:123`, `generateGenericCitizenMicroEvent:79`. These branches mix numeric effects and dedicated sports prose. The 2026-09-16 audit found a separate seasonal ordering defect and zero consumers for chaosCategoryWeights. The owning plan Task 0 carries the bounded correction and pending population/economy ruling; the full engine is not blind to sports.
+At the S446 audit, nine consumers gated on it (eight empty-string fallbacks; generic citizen events used off-season) — `applySeasonWeights:34`, `calendarChaosWeights:33`, `buildCityEvents:75`, `generateGameModeMicroEvents:91`, `runEducationEngine:159`, `updateNeighborhoodDemographics:97`, `deriveDemographicDrift:69`, `applyDemographicDrift:123`, `generateGenericCitizenMicroEvent:79`. These branches mix numeric effects and dedicated sports prose. The 2026-09-16 audit found a separate seasonal ordering defect and zero consumers for chaosCategoryWeights. The owning plan Task 0 carries the bounded correction. Builder ruling 2026-09-16: activity weights now; population/economy boosts remain guarded until record-driven impact work. The full engine is not blind to sports.
 
 Of 64 files, 9 are gated and 55 ungated; the counted branch census is championship 78 / playoffs 60 / post-season 27 / late-season 16 / off-season 2 / world-series 1 / regular 1 — 165 of 185 tests (89%) at the three extremes. Crime linkage does exist (`generateCrisisSpikes.js:191`, SAFETY × championship) but only at that extreme — correcting §2's "crime: no linkage" line, which was scoped to the crime-metrics file alone.
 
@@ -220,6 +220,8 @@ And `deepestSportsPhase_` resolves the city phase as the **max depth across fran
 - 2026-09-12 — Dial-system trace (F6 in the plan): `DialState` is ledger **column 48**, JSON `{base,mood,streak}`, 919/930 rows — a ninth dial costs no schema change. Sports' whole dial footprint is `'Sports': {outabout:1}` (citizenDialMap.js:156). `DIALS` array duplicated across six files. Fandom RULED as dial 9 → engine.208; franchise weight as a drifting number → engine.209.
 
 ## Changelog
+
+- 2026-09-16 (codex) — Linked the builder's accepted .210 boundary: restore activity weights; defer population/economy effects to record-driven impact.
 
 - 2026-09-16 (codex) — Corrected historical casino stall/expiry claims, recorded the existing D3 decay ruling under tracker-safe engine.203d, and pointed current gate/order/dead-reader findings to the sports plan Task 0. Event_Content_Ledger/fandom work is tracked by engine.208.
 

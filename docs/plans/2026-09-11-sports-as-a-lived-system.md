@@ -249,13 +249,13 @@ That also gives Mike's franchise-weight ruling its home: weight is **derived, no
 *Ordered. Each is independently benchable. Task 1 is the prerequisite for 2-5.*
 
 ### Task 0 — engine.210: separate recorded effects from atmosphere (DO FIRST)
-**Status: in-progress — first cut implemented locally, 13/13 regression cases pass; engine-sheet landing and isolated sandbox proof remain.**
+**Status: in-progress — first cut landed by engine-sheet as `44cf056f`, 13/13 regression cases pass; isolated sandbox proof remains.**
 
 Move `Phase2-SportsSeason` before `Phase2-SeasonalWeights` in both Cycle entry paths. `applySeasonalWeights_` accepts the recorded phase when `sportsSource === 'oakland-feed'`, or the existing explicit atmosphere override. Existing coefficients remain unchanged. The feed's `sportsAtmosphereEnabled` remains false. No new state field or Sheet schema. `worldEventsEngine_` consumes the changed `S.seasonal.eventWeight`.
 
 **Local proof (codex, 2026-09-16):** six failures against unchanged engine code; 13/13 cases pass after the two-file cut. In 128 matched synthetic seeds, 55 produce different actual world events from the restored weights. Dedicated playoff/championship atmosphere is absent on feed input; the override positive control produces 33 such events. Existing sports phase, parser (47/47), and team compatibility suites pass. Empty, historical-only, unknown and off-season input preserve baseline weights. This proves local event selection, not live impact or record-driven economics.
 
-**Sim ruling pending:** existing gated code adds employment from phase alone, can set the economy to `booming`, and changes residential inflow/outflow in hardcoded Jack London/Downtown. The builder was asked whether to activate these or defer them to record-driven impact. They remain unchanged until answered. No claim that all nine consumers are restored.
+**RULED 2026-09-16 (builder accepts recommendation):** restore activity/event weights in engine.210. Defer phase-only employment boosts, the `booming` economic label and residential inflow/outflow changes to the record-driven city-impact work in Tasks 3–4. Keep those existing guards in place; season phase alone does not authorize these effects. This closes the population/economy decision for .210 without claiming all nine consumers are restored.
 
 #### Verified wiring card — engine.210
 Haiku cards were requested through `runEngineAgent.js` for the atmosphere and seasonal targets. Codex checked the depended-on pointers below and corrected card errors: filename `applySeasonWeights.js`, generic guard fallback `off-season`, historical rather than current live config counts.
@@ -275,7 +275,7 @@ Haiku cards were requested through `runEngineAgent.js` for the atmosphere and se
 - **Fixed locally — ordering:** seasonal weights could not see current sports. Tests execute the actual phase-call closures from both Cycle paths.
 - **Open — dead chaos output:** `phase02-world-state/calendarChaosWeights.js:471` writes `S.chaosCategoryWeights`; no repository consumer reads it. Changing that gate alone restores nothing.
 - **Open — unused weight members:** `S.seasonal` has one engine reader at `worldEventsEngine.js:60`. Its sports-dependent `eventWeight` is used, but `sportsWeight`, `nightlifeWeight` and `mediaWeight` are not used in category arithmetic. Do not report those fields as actual nightlife/retail effects; Tasks 3–4 own those channels.
-- **Pending sim ruling — population/economy:** `applyDemographicDrift.js:306-309,372-373` and `updateNeighborhoodDemographics.js:556-566` contain phase-only boosts and fixed geography.
+- **Ruled deferral — population/economy:** `applyDemographicDrift.js:306-309,372-373` and `updateNeighborhoodDemographics.js:556-566` contain phase-only boosts and fixed geography. Their guards stay in place during .210; Tasks 3–4 must establish record-driven causes before replacing them.
 - **Existing prose paths:** generic athlete activity at `worldEventsEngine.js:141-144`, in-season sports content at `:241-242`, and OpeningDay content already operate independently. This cut preserves dedicated atmosphere guards; it does not claim all sports prose is guarded.
 - **Fixed tracker ID:** `scripts/docLoopStatus.js:49` and `scripts/rolloutSweep.js:30` accept an optional single-letter suffix, so `engine.203-D3` was skipped by parsing AND lint. Use `engine.203d`; D3 remains the defect label.
 - **Open process defect — inactive hook target:** `.githooks/pre-commit:73` watches `docs/engine/archive/ROLLOUT_PLAN.md`, not the current tracker. No hook edit here. Manual lint still surfaces unrelated pre-existing rows.
@@ -309,6 +309,8 @@ Original scope (union `HomeNeighborhood` into `S.sportsZones`) is **superseded**
 
 ### Task 4 — engine.205 (NEW): the game-day economy
 Intensity × stakes drives traffic / retail / transit at week scale, both directions, off the §2 derivation. Retires the championship-only ripple gates as the *only* sports economy (they stay as the top of the scale). Postseason safety/crisis linkage already exists. Design the broader record-driven crowd/crime channel here; do not describe it as starting from zero linkage.
+
+**Builder ruling 2026-09-16:** population/employment/economic-label consequences deferred from .210 belong to this record-driven impact work with Task 3. Do not activate the old phase-only boosts as a shortcut. Establish the causal inputs and resulting behavior before changing those guards.
 
 ### Task 5 — engine.207 (NEW): unstick the casino
 Repurposed `VideoGame`/`VideoGameDate` week-record column feeds `casinoParseSports_` once the weekly feed and settlement contract is defined. The current resolver requires `EventType='game-result'` and a parseable `Streak`; dependable input must reach it before the three-Cycle expiry (`CASINO_VOID_AFTER = 3`), or an unmatched C106 slip void-gates at C109. The 12 C106 slips were newly placed, so their open status does not prove a stall. Engine.207a's team-specific pricing correction is built and accepted S447; deployment not reverified here; the S447 audit established available C107 settling input, not a verified payout result. This session has not re-read those live slips. What the feed contract buys is *dependable* settlement, not settlement at all. **RULED S447 (engine.207b):** the casino reading the first game-result is acceptable for now; all games still reach media/crons. The stored wager `EventId` mismatch remains parked for intake work. Verify actual win/loss settlement, `CycleSettled`, posted-odds payouts, and financial consequences; a void alone is not proof of successful settlement.
@@ -357,11 +359,13 @@ Sentiment sums two franchises into one scalar; `cal.sportsSeason` resolves one c
 2. **Broader crime effects:** postseason safety pressure exists; record-driven crowd consequences remain under Task 4.
 3. **Two franchises, one city phase — PARTLY ANSWERED (Mike S446).** `cal.sportsSeason` resolves a single city-wide phase, so the economic ripple cannot tell the A's from the Oaks; live C106 has A's=playoffs, Oaks=preseason and one of them is invisible. Mike's ruling constrains the fix: *with two teams one of them is always late in a season*, so **season state alone can never be the magnitude** — it is permanently "on," the same always-on shape §15 condemns. The record supplies the magnitude; the phase only scales it. Task 10 carries per-franchise state through relevant consumers; the current maximum remains compatibility state.
 4. **Conversational ingest** — Mike's long-term answer to vocabulary compliance is talking to a cron that fills the tab correctly. Parked; §3's in-tab validation is the interim. Note the design constraint this sets: the tab is the **instrument he reports a game through**, not a form he completes — which is why repurposing dead columns beats adding new ones.
-5. **Population/economy effects in .210:** awaiting the builder's response to phase-only employment, economic-label and residential migration changes. Different drifting franchise weights are already ruled in Task 9.
+5. **Population/economy effects — resolved 2026-09-16:** .210 restores activity weights only; population/employment/economic-label changes wait for record-driven impact in Tasks 3–4. Different drifting franchise weights are already ruled in Task 9.
 
 ---
 
 ## Changelog
+
+- 2026-09-16 (codex) — Builder accepted the recommendation: engine.210 restores activity weights; phase-only employment, economic-label and residential migration boosts remain guarded and move to Tasks 3–4's record-driven impact work. Sim ruling closed; engine-sheet landed the first cut as `44cf056f`; sandbox proof remains.
 
 - 2026-09-16 (codex) — Reconciled rulings, geography, casino evidence and task links; registered this plan; corrected tracker ID engine.203d. Engine.210 first two-file cut locally proven (6 failures before, 13/13 after; 55/128 matched event seeds differ), not deployed. Recorded dead readers, stale hook path and card errors. Added Event_Content_Ledger content/selection/dial feedback to Task 8 on builder direction. Population/economy ruling and engine-sheet landing/bench proof remain.
 

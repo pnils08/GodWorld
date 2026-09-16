@@ -110,7 +110,7 @@ has a current-Cycle row. Old team state does not speak by itself.
 | K | `StoryAngle` | Preferred story framing for sports media surfaces | Preserve the builder's wording |
 | L | `PlayerMood` | Affects game-night tone; frustrated/angry and electric/confident emit player triggers | Use only when grounded by the event |
 | M | `EventTrigger` | Manual sports trigger; otherwise some triggers are inferred | Not every accepted trigger reaches every consumer |
-| N | `HomeNeighborhood` | Enables neighborhood traffic, retail, nightlife, or community effects | Use an existing canonical neighborhood |
+| N | `HomeNeighborhood` | Supplies transit geography and computed neighborhood effects; the evening consumer reads traffic only | Existing contract; removal is planned in Task 1 |
 | O | `Streak` | Adjusts sentiment and game-night win/loss tone | Use a parseable `W<n>` or `L<n>` form |
 | P | `FanSentiment` | Adjusts city sports sentiment | Use the existing controlled vocabulary |
 | Q | `FranchiseStability` | Supplies team/franchise state and can affect neighborhood logic | Change only when the world state changed |
@@ -123,6 +123,15 @@ The current preflight requires `Cycle`, `SeasonType`, `EventType`, and
 `Team Record`, `FanSentiment`, and `PlayerMood`. It checks presence, not the
 complete format or roster contract.
 
+### Weekly contract preparation
+
+Task 1 of [[plans/2026-09-11-sports-as-a-lived-system]] prepares `WeekRecord`
+by repurposing `VideoGame`, then removing `VideoGameDate` and
+`HomeNeighborhood`. That migration has not run. The current Node draft
+validator rejects nonblank `WeekRecord` input so the 20-column projection
+cannot silently discard it. Reader support, authoring support and schema
+activation are separate steps; the owning plan tracks their status.
+
 ## Phase 2 behavior
 
 [phase02-world-state/applySportsSeason.js](../phase02-world-state/applySportsSeason.js)
@@ -130,12 +139,16 @@ has two related jobs.
 
 ### Current-Cycle context
 
-It maps all active columns except the legacy `VideoGameDate` and `VideoGame`
-fields into in-memory sports entries. Feed-driven mode records the raw
-`SeasonType` but deliberately sets the generic sports-season switch to
-`off-season`. A separate `World_Config` override is required to enable the
-generic seasonal atmosphere branches. This prevents a raw feed label from
-activating unrelated synthetic sports atmosphere.
+It maps the active columns into in-memory sports entries. Feed-driven mode
+derives a canonical phase for each team and publishes the deepest phase as
+`sportsSeason`; an empty current-Cycle feed yields `off-season`. The old
+blanket off-season sentinel was removed by engine.131.
+
+The feed still sets `sportsAtmosphereEnabled=false`. A `World_Config`
+override enables the dedicated atmosphere branches. Engine.210 runs the
+sports read before seasonal weights and lets recorded feed phases affect
+event weights while retaining those atmosphere guards. Its sandbox proof
+and the deferred population/economy effects are recorded in the owning plan.
 
 ### Team state and effects
 
@@ -145,7 +158,8 @@ franchise stability, economic footprint, community investment, media profile,
 and related values through the Cycle. `NBA` and `Warriors` normalize to Oaks
 only on read.
 
-The engine.203 D1/D4 source change is built locally, pending review and deployment.
+The engine.203 D1/D4 correction is present in repository commit `6b4a8701`;
+deployment was not reverified for this reference update.
 Record assignment uses the same `parseWinPercentage_` as sentiment: filler `0-0`
 or an unparseable value cannot erase a played record. A team with only `0-0`
 keeps it and contributes zero base sentiment; a played `0-3` remains informative.
@@ -164,8 +178,9 @@ Current effects include:
   `sportsSentimentBoost`;
 - folding that boost into final city sentiment;
 - manual or inferred sports triggers;
-- neighborhood traffic, retail, nightlife, and community effects when
-  `HomeNeighborhood` and the relevant state are present;
+- computed neighborhood traffic, retail, nightlife, and community values;
+  the evening consumer uses only traffic to adjust crowd counts, while the
+  retail/nightlife/community values still lack consumers;
 - attributed `Ripple_Ledger` rows with cause `Oakland_Sports_Feed`.
 
 The exact sentiment calculation is engine logic, not an entry target. The
@@ -377,6 +392,8 @@ Do not repair the world by changing historical feed values. Align the active
 parsers, validators, and consumers through an approved implementation plan.
 
 ## Changelog
+
+- 2026-09-16 (codex) — Corrected the retired off-season sentinel claim and distinguished computed neighborhood values from consumed effects; documented the interim WeekRecord draft guard and pending schema migration.
 
 - 2026-09-16 (codex) — Updated the D3 pointer to tracker-safe engine.203d; decay is ruled and remains unbuilt after engine.210.
 

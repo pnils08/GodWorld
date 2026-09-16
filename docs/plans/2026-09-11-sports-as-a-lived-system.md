@@ -249,7 +249,13 @@ That also gives Mike's franchise-weight ruling its home: weight is **derived, no
 *Ordered. Each is independently benchable. Task 1 is the prerequisite for 2-5.*
 
 ### Task 0 — engine.210: separate recorded effects from atmosphere (DO FIRST)
-**Status: in-progress — first cut landed by engine-sheet as `44cf056f`, 13/13 regression cases pass; isolated sandbox proof remains.**
+**Status: DONE (bench-proven) — landed by engine-sheet as `44cf056f`, proven on SANDBOX 0908 @52 at C114.**
+
+**Bench proof (engine-sheet, 2026-09-16, SANDBOX 0908 @52 = `44cf056f`):** the pull-back of the served version is byte-identical to the repo for both changed files. C114 fired `ok:true` in 143.6s, 132 phases, **0 failed phases, `Engine_Errors` empty**. Four expectations were declared before the fire and all held: (1) cycleCount 113 -> 114; (2) the fire response's ordered `timing.timings` puts `Phase2-SportsSeason` at index 8 and `Phase2-SeasonalWeights` at index 9 — the order proven on the deployed run, not only in the repo; (3) `Neighborhood_Map.SportsSeason` reads `playoffs` on 22/22 hoods, so the recorded phase was real at weights time and the `oakland-feed` gate was open; (4) no new Baylight opening, since the A's opening trigger is `early-season`, not `playoffs`. The full repo suite passes 251/251 test files with the cut in the tree.
+
+The bench needed a phase to gate on: its feed's last row was C107, so an unseeded C114 takes the empty branch (`sportsSource = 'oakland-feed-empty'`), the gate stays shut, and the fire exercises none of the new code. **BENCH-ONLY, NEVER REPLAY:** one `Oakland_Sports_Feed` row at C114 (A's / playoffs / game-result, Notes stamped `S465 BENCH-ONLY engine.210 proof - NEVER REPLAY`) and everything C114 wrote. `playoffs` was chosen because it is not either franchise's Baylight opening phase.
+
+What the bench does **not** prove: that the restored weights changed which events fired. `S.seasonal` is never persisted and one fire has no control arm — that is the 55-of-128-matched-seeds result below, which runs the real engine files in an isolated VM.
 
 Move `Phase2-SportsSeason` before `Phase2-SeasonalWeights` in both Cycle entry paths. `applySeasonalWeights_` accepts the recorded phase when `sportsSource === 'oakland-feed'`, or the existing explicit atmosphere override. Existing coefficients remain unchanged. The feed's `sportsAtmosphereEnabled` remains false. No new state field or Sheet schema. `worldEventsEngine_` consumes the changed `S.seasonal.eventWeight`.
 

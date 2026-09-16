@@ -1,0 +1,178 @@
+{
+ "Downtown": {
+  "SchoolQualityIndex": "8",
+  "GraduationRate": "91",
+  "CollegeReadinessRate": "66",
+  "TeacherQuality": "8",
+  "Funding": "14500",
+  "LastUpdated": "112"
+ },
+ "Temescal": {
+  "SchoolQualityIndex": "7",
+  "GraduationRate": "86",
+  "CollegeReadinessRate": "58",
+  "TeacherQuality": "7",
+  "Funding": "11500",
+  "LastUpdated": "112"
+ },
+ "Laurel": {
+  "SchoolQualityIndex": "8",
+  "GraduationRate": "89",
+  "CollegeReadinessRate": "61",
+  "TeacherQuality": "8",
+  "Funding": "13000",
+  "LastUpdated": "112"
+ },
+ "West Oakland": {
+  "SchoolQualityIndex": "8",
+  "GraduationRate": "91",
+  "CollegeReadinessRate": "66",
+  "TeacherQuality": "8",
+  "Funding": "14500",
+  "LastUpdated": "112"
+ },
+ "Fruitvale": {
+  "SchoolQualityIndex": "8",
+  "GraduationRate": "89",
+  "CollegeReadinessRate": "61",
+  "TeacherQuality": "8",
+  "Funding": "13000",
+  "LastUpdated": "112"
+ },
+ "Jack London": {
+  "SchoolQualityIndex": "8",
+  "GraduationRate": "91",
+  "CollegeReadinessRate": "66",
+  "TeacherQuality": "8",
+  "Funding": "14500",
+  "LastUpdated": "112"
+ },
+ "Rockridge": {
+  "SchoolQualityIndex": "9",
+  "GraduationRate": "95",
+  "CollegeReadinessRate": "78",
+  "TeacherQuality": "9",
+  "Funding": "15000",
+  "LastUpdated": "112"
+ },
+ "Adams Point": {
+  "SchoolQualityIndex": "8",
+  "GraduationRate": "89",
+  "CollegeReadinessRate": "61",
+  "TeacherQuality": "8",
+  "Funding": "13000",
+  "LastUpdated": "112"
+ },
+ "Grand Lake": {
+  "SchoolQualityIndex": "8",
+  "GraduationRate": "89",
+  "CollegeReadinessRate": "61",
+  "TeacherQuality": "8",
+  "Funding": "13000",
+  "LastUpdated": "112"
+ },
+ "Piedmont Ave": {
+  "SchoolQualityIndex": "8",
+  "GraduationRate": "93",
+  "CollegeReadinessRate": "72",
+  "TeacherQuality": "8",
+  "Funding": "14500",
+  "LastUpdated": "112"
+ },
+ "Chinatown": {
+  "SchoolQualityIndex": "7",
+  "GraduationRate": "87",
+  "CollegeReadinessRate": "56",
+  "TeacherQuality": "7",
+  "Funding": "12000",
+  "LastUpdated": "112"
+ },
+ "Brooklyn": {
+  "SchoolQualityIndex": "8",
+  "GraduationRate": "91",
+  "CollegeReadinessRate": "66",
+  "TeacherQuality": "8",
+  "Funding": "14500",
+  "LastUpdated": "112"
+ },
+ "Eastlake": {
+  "SchoolQualityIndex": "7",
+  "GraduationRate": "87",
+  "CollegeReadinessRate": "56",
+  "TeacherQuality": "7",
+  "Funding": "12000",
+  "LastUpdated": "112"
+ },
+ "Glenview": {
+  "SchoolQualityIndex": "7",
+  "GraduationRate": "87",
+  "CollegeReadinessRate": "56",
+  "TeacherQuality": "7",
+  "Funding": "12000",
+  "LastUpdated": "112"
+ },
+ "Dimond": {
+  "SchoolQualityIndex": "7",
+  "GraduationRate": "87",
+  "CollegeReadinessRate": "56",
+  "TeacherQuality": "7",
+  "Funding": "12000",
+  "LastUpdated": "112"
+ },
+ "Ivy Hill": {
+  "SchoolQualityIndex": "7",
+  "GraduationRate": "85",
+  "CollegeReadinessRate": "52",
+  "TeacherQuality": "7",
+  "Funding": "11000",
+  "LastUpdated": "112"
+ },
+ "San Antonio": {
+  "SchoolQualityIndex": "7",
+  "GraduationRate": "85",
+  "CollegeReadinessRate": "52",
+  "TeacherQuality": "7",
+  "Funding": "11000",
+  "LastUpdated": "112"
+ },
+ "Lake Merritt": {
+  "SchoolQualityIndex": "8",
+  "GraduationRate": "91",
+  "CollegeReadinessRate": "66",
+  "TeacherQuality": "8",
+  "Funding": "14500",
+  "LastUpdated": "112"
+ },
+ "Uptown": {
+  "SchoolQualityIndex": "8",
+  "GraduationRate": "89",
+  "CollegeReadinessRate": "61",
+  "TeacherQuality": "8",
+  "Funding": "13000",
+  "LastUpdated": "112"
+ },
+ "KONO": {
+  "SchoolQualityIndex": "7",
+  "GraduationRate": "87",
+  "CollegeReadinessRate": "56",
+  "TeacherQuality": "7",
+  "Funding": "12000",
+  "LastUpdated": "112"
+ },
+ "Baylight District": {
+  "SchoolQualityIndex": "8",
+  "GraduationRate": "91",
+  "CollegeReadinessRate": "66",
+  "TeacherQuality": "8",
+  "Funding": "14500",
+  "LastUpdated": "112"
+ },
+ "East Oakland": {
+  "SchoolQualityIndex": "7",
+  "GraduationRate": "85",
+  "CollegeReadinessRate": "52",
+  "TeacherQuality": "7",
+  "Funding": "11000",
+  "LastUpdated": "112"
+ }
+}

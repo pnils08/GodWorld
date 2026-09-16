@@ -129,6 +129,13 @@ pointers:
 
 ## PROD deploy log — full trail
 
+### PROD @96 — engine.192 + 232b: the school table breathes; a name on every deck row (2026-09-15 ~19:45 Chicago, engine-sheet)
+
+Commit `0a8013fc` (engine tree = @95 `eb289123` + engine.192 [`updateNeighborhoodDemographics.js` driftNeighborhoodEducation_, `ensureNeighborhoodDemographics.js` loader/writer carry the five education columns, `applyInitiativeImplementationEffects.js` education → schoolQuality, `engine94SheetContract.js` + `godWorldEngine2.js` ensureEngine192Config_, `educationCareerEngine.js` crossing-gated alerts] + engine.232b `512ca101` [`storyHook.js` desk-rotation fallback]). Apps Script version 85, read back @85. Isolated `git archive` stage; pull-back 169 files, 168 js byte-identical, 0 test files. Bench SANDBOX 0908 @51 C113: 173 s ok:true, 0 Engine_Errors, 22/22 hoods moved ≤0.11, 4 keys self-armed, deck 45 rows 0 blank.
+
+- **Expect at the next live fire (C108), on top of §PROD @95–@86:** World_Config gains `schoolDriftStep` 0.1, `schoolDriftPull` 0.02, `schoolGradStep` 0.5, `schoolFundingInitiativePct` 2 (self-arm, one log line `engine.192 config ready: seeded 4 row(s)`); every Neighborhood_Demographics row's SchoolQualityIndex / GraduationRate / CollegeReadinessRate / TeacherQuality moves by a fraction (|ΔQ| ≤ 0.12, |ΔG| ≤ 0.5) with two decimals and LastUpdated 108 — no blank cell, no hood past 1–10 / 40–99 / 20–95; Funding unchanged on every hood (no education initiative is delivering on live); no DROPOUT_WAVE / SCHOOL_QUALITY_CRISIS row unless a hood crosses the bar; one `driftNeighborhoodEducation_ engine.192: N/22 hoods moved` log line. Deck: every row carries a SuggestedJournalist (232b), no name above 25% of the Cycle's rows + 1.
+- **Rollback:** `clasp deploy -i AKfycbwUvd4… -V 84` repoints to @95. The 4 config rows are inert under @95 (no reader); the drifted cells stay as the record — a rollback does not restore the backfill and should not.
+
 ### PROD @95 — engine.190 + 233: the closure and the transgression reach a desk (2026-09-15 ~18:50 Chicago, engine-sheet)
 
 Commit `eb289123` (engine tree = @94 `fbb4af97` + `applyBusinessDynamics.js` [closure domain BUSINESS + ripple] + `runConductEngine.js` [CITIZEN_TRANSGRESSION hook] + `storyHook.js` [world-event loop hooks 'high']). Apps Script version 84, read back @84. Isolated `git archive` stage; pull-back 169 files, 168 js byte-identical, 0 test files. Bench SANDBOX 0908 @50 C112: 136 s ok:true, 0 Engine_Errors, 38 deck rows — neither stream occurred on that Cycle (no-throw proven only).

@@ -1,0 +1,378 @@
+{
+ "cycle": 113,
+ "errors": 0,
+ "moved": 22,
+ "blank": 0,
+ "pre": {
+  "Downtown": {
+   "SchoolQualityIndex": "8",
+   "GraduationRate": "91",
+   "CollegeReadinessRate": "66",
+   "TeacherQuality": "8",
+   "Funding": "14500",
+   "LastUpdated": "112"
+  },
+  "Temescal": {
+   "SchoolQualityIndex": "7",
+   "GraduationRate": "86",
+   "CollegeReadinessRate": "58",
+   "TeacherQuality": "7",
+   "Funding": "11500",
+   "LastUpdated": "112"
+  },
+  "Laurel": {
+   "SchoolQualityIndex": "8",
+   "GraduationRate": "89",
+   "CollegeReadinessRate": "61",
+   "TeacherQuality": "8",
+   "Funding": "13000",
+   "LastUpdated": "112"
+  },
+  "West Oakland": {
+   "SchoolQualityIndex": "8",
+   "GraduationRate": "91",
+   "CollegeReadinessRate": "66",
+   "TeacherQuality": "8",
+   "Funding": "14500",
+   "LastUpdated": "112"
+  },
+  "Fruitvale": {
+   "SchoolQualityIndex": "8",
+   "GraduationRate": "89",
+   "CollegeReadinessRate": "61",
+   "TeacherQuality": "8",
+   "Funding": "13000",
+   "LastUpdated": "112"
+  },
+  "Jack London": {
+   "SchoolQualityIndex": "8",
+   "GraduationRate": "91",
+   "CollegeReadinessRate": "66",
+   "TeacherQuality": "8",
+   "Funding": "14500",
+   "LastUpdated": "112"
+  },
+  "Rockridge": {
+   "SchoolQualityIndex": "9",
+   "GraduationRate": "95",
+   "CollegeReadinessRate": "78",
+   "TeacherQuality": "9",
+   "Funding": "15000",
+   "LastUpdated": "112"
+  },
+  "Adams Point": {
+   "SchoolQualityIndex": "8",
+   "GraduationRate": "89",
+   "CollegeReadinessRate": "61",
+   "TeacherQuality": "8",
+   "Funding": "13000",
+   "LastUpdated": "112"
+  },
+  "Grand Lake": {
+   "SchoolQualityIndex": "8",
+   "GraduationRate": "89",
+   "CollegeReadinessRate": "61",
+   "TeacherQuality": "8",
+   "Funding": "13000",
+   "LastUpdated": "112"
+  },
+  "Piedmont Ave": {
+   "SchoolQualityIndex": "8",
+   "GraduationRate": "93",
+   "CollegeReadinessRate": "72",
+   "TeacherQuality": "8",
+   "Funding": "14500",
+   "LastUpdated": "112"
+  },
+  "Chinatown": {
+   "SchoolQualityIndex": "7",
+   "GraduationRate": "87",
+   "CollegeReadinessRate": "56",
+   "TeacherQuality": "7",
+   "Funding": "12000",
+   "LastUpdated": "112"
+  },
+  "Brooklyn": {
+   "SchoolQualityIndex": "8",
+   "GraduationRate": "91",
+   "CollegeReadinessRate": "66",
+   "TeacherQuality": "8",
+   "Funding": "14500",
+   "LastUpdated": "112"
+  },
+  "Eastlake": {
+   "SchoolQualityIndex": "7",
+   "GraduationRate": "87",
+   "CollegeReadinessRate": "56",
+   "TeacherQuality": "7",
+   "Funding": "12000",
+   "LastUpdated": "112"
+  },
+  "Glenview": {
+   "SchoolQualityIndex": "7",
+   "GraduationRate": "87",
+   "CollegeReadinessRate": "56",
+   "TeacherQuality": "7",
+   "Funding": "12000",
+   "LastUpdated": "112"
+  },
+  "Dimond": {
+   "SchoolQualityIndex": "7",
+   "GraduationRate": "87",
+   "CollegeReadinessRate": "56",
+   "TeacherQuality": "7",
+   "Funding": "12000",
+   "LastUpdated": "112"
+  },
+  "Ivy Hill": {
+   "SchoolQualityIndex": "7",
+   "GraduationRate": "85",
+   "CollegeReadinessRate": "52",
+   "TeacherQuality": "7",
+   "Funding": "11000",
+   "LastUpdated": "112"
+  },
+  "San Antonio": {
+   "SchoolQualityIndex": "7",
+   "GraduationRate": "85",
+   "CollegeReadinessRate": "52",
+   "TeacherQuality": "7",
+   "Funding": "11000",
+   "LastUpdated": "112"
+  },
+  "Lake Merritt": {
+   "SchoolQualityIndex": "8",
+   "GraduationRate": "91",
+   "CollegeReadinessRate": "66",
+   "TeacherQuality": "8",
+   "Funding": "14500",
+   "LastUpdated": "112"
+  },
+  "Uptown": {
+   "SchoolQualityIndex": "8",
+   "GraduationRate": "89",
+   "CollegeReadinessRate": "61",
+   "TeacherQuality": "8",
+   "Funding": "13000",
+   "LastUpdated": "112"
+  },
+  "KONO": {
+   "SchoolQualityIndex": "7",
+   "GraduationRate": "87",
+   "CollegeReadinessRate": "56",
+   "TeacherQuality": "7",
+   "Funding": "12000",
+   "LastUpdated": "112"
+  },
+  "Baylight District": {
+   "SchoolQualityIndex": "8",
+   "GraduationRate": "91",
+   "CollegeReadinessRate": "66",
+   "TeacherQuality": "8",
+   "Funding": "14500",
+   "LastUpdated": "112"
+  },
+  "East Oakland": {
+   "SchoolQualityIndex": "7",
+   "GraduationRate": "85",
+   "CollegeReadinessRate": "52",
+   "TeacherQuality": "7",
+   "Funding": "11000",
+   "LastUpdated": "112"
+  }
+ },
+ "post": {
+  "Downtown": {
+   "SchoolQualityIndex": "7.9",
+   "GraduationRate": "90.85",
+   "CollegeReadinessRate": "65.68",
+   "TeacherQuality": "8.02",
+   "Funding": "14500",
+   "LastUpdated": "113"
+  },
+  "Temescal": {
+   "SchoolQualityIndex": "6.9",
+   "GraduationRate": "85.85",
+   "CollegeReadinessRate": "57.5",
+   "TeacherQuality": "6.98",
+   "Funding": "11500",
+   "LastUpdated": "113"
+  },
+  "Laurel": {
+   "SchoolQualityIndex": "8.01",
+   "GraduationRate": "89.1",
+   "CollegeReadinessRate": "61.31",
+   "TeacherQuality": "7.99",
+   "Funding": "13000",
+   "LastUpdated": "113"
+  },
+  "West Oakland": {
+   "SchoolQualityIndex": "7.98",
+   "GraduationRate": "90.89",
+   "CollegeReadinessRate": "65.78",
+   "TeacherQuality": "8.02",
+   "Funding": "14500",
+   "LastUpdated": "113"
+  },
+  "Fruitvale": {
+   "SchoolQualityIndex": "7.96",
+   "GraduationRate": "89.08",
+   "CollegeReadinessRate": "61.25",
+   "TeacherQuality": "7.99",
+   "Funding": "13000",
+   "LastUpdated": "113"
+  },
+  "Jack London": {
+   "SchoolQualityIndex": "7.92",
+   "GraduationRate": "90.86",
+   "CollegeReadinessRate": "65.7",
+   "TeacherQuality": "8.02",
+   "Funding": "14500",
+   "LastUpdated": "113"
+  },
+  "Rockridge": {
+   "SchoolQualityIndex": "8.89",
+   "GraduationRate": "94.94",
+   "CollegeReadinessRate": "77.66",
+   "TeacherQuality": "9.02",
+   "Funding": "15000",
+   "LastUpdated": "113"
+  },
+  "Adams Point": {
+   "SchoolQualityIndex": "7.99",
+   "GraduationRate": "89.09",
+   "CollegeReadinessRate": "61.28",
+   "TeacherQuality": "7.99",
+   "Funding": "13000",
+   "LastUpdated": "113"
+  },
+  "Grand Lake": {
+   "SchoolQualityIndex": "7.93",
+   "GraduationRate": "89.07",
+   "CollegeReadinessRate": "61.22",
+   "TeacherQuality": "7.99",
+   "Funding": "13000",
+   "LastUpdated": "113"
+  },
+  "Piedmont Ave": {
+   "SchoolQualityIndex": "8.07",
+   "GraduationRate": "92.73",
+   "CollegeReadinessRate": "71.5",
+   "TeacherQuality": "8.02",
+   "Funding": "14500",
+   "LastUpdated": "113"
+  },
+  "Chinatown": {
+   "SchoolQualityIndex": "6.96",
+   "GraduationRate": "86.78",
+   "CollegeReadinessRate": "55.56",
+   "TeacherQuality": "6.99",
+   "Funding": "12000",
+   "LastUpdated": "113"
+  },
+  "Brooklyn": {
+   "SchoolQualityIndex": "8.04",
+   "GraduationRate": "90.92",
+   "CollegeReadinessRate": "65.85",
+   "TeacherQuality": "8.02",
+   "Funding": "14500",
+   "LastUpdated": "113"
+  },
+  "Eastlake": {
+   "SchoolQualityIndex": "7",
+   "GraduationRate": "86.8",
+   "CollegeReadinessRate": "55.6",
+   "TeacherQuality": "6.99",
+   "Funding": "12000",
+   "LastUpdated": "113"
+  },
+  "Glenview": {
+   "SchoolQualityIndex": "7.01",
+   "GraduationRate": "86.8",
+   "CollegeReadinessRate": "55.61",
+   "TeacherQuality": "6.99",
+   "Funding": "12000",
+   "LastUpdated": "113"
+  },
+  "Dimond": {
+   "SchoolQualityIndex": "6.99",
+   "GraduationRate": "86.8",
+   "CollegeReadinessRate": "55.59",
+   "TeacherQuality": "6.99",
+   "Funding": "12000",
+   "LastUpdated": "113"
+  },
+  "Ivy Hill": {
+   "SchoolQualityIndex": "6.98",
+   "GraduationRate": "84.99",
+   "CollegeReadinessRate": "51.98",
+   "TeacherQuality": "6.96",
+   "Funding": "11000",
+   "LastUpdated": "113"
+  },
+  "San Antonio": {
+   "SchoolQualityIndex": "6.95",
+   "GraduationRate": "84.97",
+   "CollegeReadinessRate": "51.94",
+   "TeacherQuality": "6.96",
+   "Funding": "11000",
+   "LastUpdated": "113"
+  },
+  "Lake Merritt": {
+   "SchoolQualityIndex": "7.95",
+   "GraduationRate": "90.88",
+   "CollegeReadinessRate": "65.74",
+   "TeacherQuality": "8.02",
+   "Funding": "14500",
+   "LastUpdated": "113"
+  },
+  "Uptown": {
+   "SchoolQualityIndex": "7.89",
+   "GraduationRate": "89.05",
+   "CollegeReadinessRate": "61.17",
+   "TeacherQuality": "7.99",
+   "Funding": "13000",
+   "LastUpdated": "113"
+  },
+  "KONO": {
+   "SchoolQualityIndex": "6.99",
+   "GraduationRate": "86.8",
+   "CollegeReadinessRate": "55.59",
+   "TeacherQuality": "6.99",
+   "Funding": "12000",
+   "LastUpdated": "113"
+  },
+  "Baylight District": {
+   "SchoolQualityIndex": "8.01",
+   "GraduationRate": "90.9",
+   "CollegeReadinessRate": "65.81",
+   "TeacherQuality": "8.02",
+   "Funding": "14500",
+   "LastUpdated": "113"
+  },
+  "East Oakland": {
+   "SchoolQualityIndex": "6.92",
+   "GraduationRate": "84.96",
+   "CollegeReadinessRate": "51.9",
+   "TeacherQuality": "6.96",
+   "Funding": "11000",
+   "LastUpdated": "113"
+  }
+ },
+ "deckRows": 45,
+ "journalists": {
+  "Sgt. Rachel Torres": 2,
+  "Elliot Graye": 3,
+  "Dana Reeve": 2,
+  "Luis Navarro": 1,
+  "Dr. Lila Mezran": 1,
+  "Noah Tan": 3,
+  "Carmen Delaine": 1,
+  "Angela Reyes": 1,
+  "Maria Keen": 11,
+  "Jordan Velez": 6,
+  "Sharon Okafor": 6,
+  "Kai Marston": 4,
+  "Mason Ortega": 4
+ }
+}

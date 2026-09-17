@@ -1,0 +1,56 @@
+{
+  "_meta": {
+    "task": "governance.47 Task 2 — lane registry for scripts/laneMessage.js",
+    "source": "docs/reference/CROSS_LANE_MESSAGING.md + live tmux capture, verified 2026-09-17",
+    "note": "Claude-session lanes are NOT delivered by this script — SendMessage reaches them directly and only from inside a Claude Code tool-use context, which a standalone node process doesn't have. Their entries exist here only so a caller gets a clear redirect instead of a silent no-op.",
+    "blockedMarkers": [
+      "usage limit",
+      "rate limit",
+      "quota",
+      "Press a number to choose",
+      "Upgrade to Pro",
+      "add credits",
+      "Add Credits",
+      "auth_error",
+      "Disconnected from this task",
+      "session_required",
+      "session_invalid"
+    ]
+  },
+  "lanes": {
+    "research-build": { "kind": "claude-session", "transport": "SendMessage", "window": "research-build" },
+    "engine-sheet": { "kind": "claude-session", "transport": "SendMessage", "window": "engine-sheet" },
+    "kimi": {
+      "kind": "cli",
+      "transport": "mailbox",
+      "window": "kimi",
+      "expectedCmd": "kimi-code",
+      "idleMarkers": ["╭", "╰"],
+      "busyMarkers": ["esc to interrupt", "Thinking", "Running…"]
+    },
+    "codex": {
+      "kind": "cli",
+      "transport": "mailbox",
+      "window": "codex",
+      "expectedCmd": "node",
+      "idleMarkers": ["Ask Codex to do anything"],
+      "busyMarkers": ["esc to interrupt", "Working"]
+    },
+    "antigravity": {
+      "kind": "cli",
+      "transport": "mailbox",
+      "window": "agy",
+      "expectedCmd": "agy",
+      "idleMarkers": ["? for shortcuts"],
+      "busyMarkers": ["esc to cancel"]
+    },
+    "grok": {
+      "kind": "cli",
+      "transport": "mailbox",
+      "window": "grok",
+      "expectedCmd": "grok",
+      "idleMarkers": [],
+      "busyMarkers": []
+    }
+  }
+}

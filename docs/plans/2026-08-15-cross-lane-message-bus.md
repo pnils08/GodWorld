@@ -40,9 +40,11 @@ This inverts the intuition that cheapness comes from a smaller model. Here it co
 
 ## 2. Tasks
 
+**Task 1 redesigned 2026-09-17** (research basis: [[../research/2026-09-17-munder-difflin-multi-agent-harness]], Mike-shared) — file-based mailbox instead of live `tmux send-keys`. A message writes to `logs/mailbox/<to-lane>/inbox/<id>.json` via a single committer (one process owns every write to `logs/mailbox/**`, closing the concurrent-commit `index.lock` risk this repo already carries on shared tracked files like `ROLLOUT_PLAN.md`); the target lane polls its own `inbox/` on its own cadence and moves a processed message to `outbox/` with its reply. This replaces the old idle-check-then-inject dance and its two worst failure modes named in the pre-mortem below: a keystroke landing on a dead `bash` prompt, or — proven this session — landing on a blocking non-shell menu (codex's rate-limit/billing prompt) instead of the input box. `tmux send-keys` stays as a fallback only for a lane that cannot poll a file (none currently — all lanes are long-running processes that can check a directory).
+
 | # | Task | Detail | Terminal |
 |---|---|---|---|
-| 1 | `scripts/laneMessage.js` | Pane discovery by window name (never cached ids), idle-check via footer marker, `send-keys -l` + delayed `C-m`, until-loop reply capture, single-line payload enforcement | research-build |
+| 1 | `scripts/laneMessage.js` | File-mailbox transport: write `logs/mailbox/<to>/inbox/<id>.json` (single committer), poll-based pickup, reply lands in `logs/mailbox/<to>/outbox/<id>.json`; single-line payload enforcement retained; `tmux send-keys -l` + delayed `C-m` kept as the fallback path for a lane with no poll loop | research-build |
 | 2 | Lane registry | `scripts/lane-map.json` — window name → CLI, busy-marker string, whether it accepts `SendMessage` instead. Sibling of `civic-office-map.json` | research-build |
 | 3 | Append-only transcript | Every send + reply to `logs/cross-lane.jsonl` — from, to, timestamp, payload, reply. **Non-optional:** if lanes talk without the operator, the record has to be readable after the fact | research-build |
 | 4 | Hop limit | N hops per exchange (start N=3), then halt and surface to the operator. Two lanes can ping-pong indefinitely with nobody watching | research-build |
@@ -57,11 +59,17 @@ This inverts the intuition that cheapness comes from a smaller model. Here it co
 
 ## 4. Pre-mortem — what makes this wrong in 3 sessions
 
-- **Pane ids rot.** `%20` is not stable across restarts. Resolve by window name every call; never persist an id.
-- **Dead-pane injection.** A pane at bare `bash` executes the message. Idle-check must verify the *expected CLI is running*, not merely that the pane exists.
-- **Silent lane drift.** A lane that changes its busy-marker string breaks the reply wait. Fail loud on unknown footer, never assume completion.
+- ~~**Pane ids rot.** `%20` is not stable across restarts. Resolve by window name every call; never persist an id.~~ — superseded 2026-09-17: the file-mailbox transport doesn't address a pane at all; still true for the `tmux send-keys` fallback path.
+- ~~**Dead-pane injection.** A pane at bare `bash` executes the message.~~ — superseded 2026-09-17 for the mailbox path (a file write can't execute as shell); still the live risk on the `tmux` fallback, sharpened by the codex incident below.
+- **Silent lane drift.** A lane that changes its busy-marker string breaks the reply wait (fallback path only under the new design); a lane that stops polling its `inbox/` at all is the mailbox-path equivalent — fail loud on a message that ages past a threshold with no pickup, never assume delivery.
 - **Autonomy creep.** This plan is transport only. It does not authorise lanes to *initiate* work at each other unprompted — that is a separate decision and should stay one.
+- **A pane that isn't dead but isn't listening either.** 2026-09-17: research-build held a real message to codex rather than `tmux send-keys` into its pane, because codex was sitting at a rate-limit/billing menu ("1. Upgrade 2. Add Credits") — not bare `bash`, but not its normal prompt either. A keystroke there could have landed on the menu instead of the input box. The mailbox design sidesteps this class entirely (the lane reads its `inbox/` on its own terms, whenever it's actually able to); the `tmux` fallback still needs an idle-check that verifies the *normal* prompt, not just "a process is running."
 
 ## 5. Blocked on
 
 Operator approval — Task 1 creates a new `.js`, which is a standing approval gate. Filed as design so the direction is captured; no code until the gate clears.
+
+## Changelog
+
+- 2026-08-15 — Initial design, tmux-keystroke transport.
+- 2026-09-17 — Task 1 redesigned to a file-mailbox transport (research: [[../research/2026-09-17-munder-difflin-multi-agent-harness]]); still gated on §5.

@@ -455,14 +455,31 @@ function chaseIsJsonShaped(text) {
   return false;
 }
 
+// A chase earns a block for REPLACING the assignment, never for merely
+// coloring it (Mike-direct 2026-09-17): reporters cover what they want, they
+// just can't break canon. A thin "record-only" pulse (angle == label ==
+// hookLine, no hooks, no seeds — Tanya Cruz C107 / P Slayer C107, both
+// same-day W1 failures) left almost no literal words for a legitimate,
+// atmospheric chase to land on, since the reporter's whole mandate on that
+// slice class is painting a room the packet never lists. Widen the anchor
+// set past the angle/label/hookLine strings to the assignment's actual
+// canon nouns — citizens and team — since a grounded chase is far more
+// likely to name a player than to repeat the editor's exact hookLine back
+// verbatim. This does not loosen the check itself: a chase about a genuinely
+// different subject (no shared player, team, hood, or known fact) still
+// fails exactly as before.
 function chaseReplacesAssignment(chase, input) {
   const assignment = clean((input && input.task && input.task.assignment) || '');
   const hood = clean((input && input.signal && input.signal.hood) || '');
-  const story = (input && input.story) || {};
   const known = Array.isArray(input && input.known) ? input.known : [];
+  // buildAnglePacket's returned packet carries no top-level `story` — the
+  // assignment's actual canon nouns (citizen names) live in
+  // exposure.candidates, built from that same story before it's dropped.
+  const candidates = (input && input.exposure && input.exposure.candidates) || [];
+  const candidateNames = candidates.map(function (c) { return c && c.name || ''; }).join(' ');
   const blob = [
     assignment, hood,
-    story.angle || '', story.label || '', story.hookLine || '',
+    candidateNames,
     known.map(function (k) { return k && (k.text || k.t) || ''; }).join(' ')
   ].join(' ').toLowerCase();
   const tokens = blob.split(/[^a-z0-9-]+/).filter(function (w) {

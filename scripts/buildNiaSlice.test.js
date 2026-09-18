@@ -36,5 +36,16 @@ if (hasSidecar && slice.standings) {
   check('sidecar -> leader named in angle', slice.laneEntries.every(e => e.handle.angle.includes('leads the board')));
 }
 
+// Regression (2026-09-18, Nia Rook C107): a feed event with no `Holder`
+// resolved to the raw POPID as the pilot's printed "name" — the ledger name
+// lookup existed for hood but never for name. citizenInfoFor now resolves
+// both in the same pass.
+const POPID_RE = /\bPOP-\d{5}\b/;
+check('no raw POPID leaks into a lane label when the ledger has a name',
+  slice.laneEntries.every(e => !POPID_RE.test(e.label)),
+  slice.laneEntries.map(e => e.label).join(' | '));
+check('no raw POPID leaks into a lane angle', slice.laneEntries.every(e => !POPID_RE.test(e.handle.angle)));
+check('no raw POPID leaks into lane citizens', slice.laneEntries.every(e => e.handle.citizens.every(c => !POPID_RE.test(c))));
+
 if (failed) { console.error('buildNiaSlice: ' + failed + ' FAIL'); process.exit(1); }
 console.log('buildNiaSlice: ok');

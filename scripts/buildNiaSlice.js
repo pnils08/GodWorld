@@ -63,9 +63,14 @@ function standingsNote(leader) {
     leader.CyclesLed + ' cycle(s) led, current streak ' + leader.CurrentStreak + '.';
 }
 
-// One ledger scan for pilot hoods — cheap, and hood seats the wake-2 bench
-// fill (neighborsFromLedger) in the pilot's own part of Oakland.
-function hoodsFor(popids) {
+// One ledger scan for pilot hood + name — cheap, and hood seats the wake-2
+// bench fill (neighborsFromLedger) in the pilot's own part of Oakland. The
+// feed pack event never carries a display name (only POPID), so laneEntryFor
+// fell back to printing the raw POPID as the pilot's "name" — a canon leak
+// caught 2026-09-18 (Nia Rook C107, "POP-00495" printed instead of Rosalind
+// Young, who the ledger and Undocked_Draw both name correctly). Same single
+// pass now also resolves Name.
+function citizenInfoFor(popids) {
   const want = new Set(popids.map(p => String(p).toUpperCase()));
   const out = {};
   if (!want.size || !fs.existsSync(SNAPSHOT)) return out;
@@ -75,7 +80,10 @@ function hoodsFor(popids) {
     try { r = JSON.parse(line); } catch (_) { continue; }
     const pop = String(r.POPID || '').toUpperCase();
     if (!want.has(pop)) continue;
-    out[pop] = String(r.Neighborhood || '').trim() || null;
+    out[pop] = {
+      hood: String(r.Neighborhood || '').trim() || null,
+      name: String(r.Name || '').trim() || null,
+    };
     if (Object.keys(out).length === want.size) break;
   }
   return out;
@@ -89,8 +97,10 @@ function creditsPhrase(delta) {
   return 'dead even on the night';
 }
 
-function laneEntryFor(e, hood, leader) {
-  const label = 'UNDOCKED: ' + (e.Holder || e.POPID) + ' — ' + creditsPhrase(e.CreditsDelta) +
+function laneEntryFor(e, info, leader) {
+  const hood = info && info.hood;
+  const name = e.Holder || (info && info.name) || e.POPID;
+  const label = 'UNDOCKED: ' + name + ' — ' + creditsPhrase(e.CreditsDelta) +
     (e.CombatEvents ? ', ' + e.CombatEvents + ' combat event(s)' : '') +
     (e.MishapCount ? ', ' + e.MishapCount + ' mishap(s)' : '');
   const entry = {
@@ -99,7 +109,7 @@ function laneEntryFor(e, hood, leader) {
     kind: 'undocked',
     popids: [e.POPID],
     handle: {
-      angle: 'Recap ' + (e.Holder || 'the pilot') + '\'s UNDOCKED episode — who\'s up, who\'s down, ' +
+      angle: 'Recap ' + (name || 'the pilot') + '\'s UNDOCKED episode — who\'s up, who\'s down, ' +
         'what the city argues about tomorrow. Facts: credits ' +
         (e.CreditsDelta == null ? 'unsettled' : e.CreditsDelta) +
         ', systems ' + ((e.Systems || []).join(', ') || 'unlisted') +
@@ -107,7 +117,7 @@ function laneEntryFor(e, hood, leader) {
         ', magnitude ' + (e.Magnitude || 1) + '/5' +
         ((e.Flags || []).indexOf('open_escrow') >= 0 ? ', open escrow position' : '') + '.' +
         standingsNote(leader),
-      citizens: [(e.Holder || e.POPID) + ' — UNDOCKED cast pilot'],
+      citizens: [name + ' — UNDOCKED cast pilot'],
     },
     // typed feed facts ride whole for the write stage — never a new fact source
     undockedEvent: e,
@@ -125,7 +135,7 @@ function buildNiaSlice(cycle) {
   const recaps = loadRecaps();
   const unwritten = pack.events.filter(e => e && e.EpisodeId && !recaps[e.EpisodeId]);
   if (!unwritten.length) return empty;
-  const hoods = hoodsFor(unwritten.map(e => e.POPID));
+  const citizenInfo = citizenInfoFor(unwritten.map(e => e.POPID));
   const standings = loadStandings();
   const leader = standingsLeader(standings);
   return {
@@ -133,7 +143,7 @@ function buildNiaSlice(cycle) {
     cycle: c,
     empty: false,
     events: unwritten,
-    laneEntries: unwritten.map(e => laneEntryFor(e, hoods[String(e.POPID).toUpperCase()], leader)),
+    laneEntries: unwritten.map(e => laneEntryFor(e, citizenInfo[String(e.POPID).toUpperCase()], leader)),
     standings: leader ? { asOf: standings.computedAt, leader } : null,
     generatedAt: new Date().toISOString(),
   };

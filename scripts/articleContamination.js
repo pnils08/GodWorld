@@ -45,11 +45,20 @@ const ROOM_SOURCED_SPEECH = [
   { id: 'room-sourced-speech', re: /\b(?:in|from|inside) the (?:clubhouse|dugout|locker room|press[ -]?box)\b[^.]{0,80}\b(?:said|told|whispered)\b/i },
 ];
 
+// `groundedBy`: a phrase this blunt is normally a reporter inventing real-world
+// Oakland cynicism from nothing — UNLESS the packet itself already carries a
+// labeled engine anomaly the phrase could be a citizen's plain-language
+// translation of. c107 Caldera/Chinatown false-positive (2026-09-17): a citizen
+// quote used "falling apart" to describe a packet FACT literally labeled
+// "Chinatown: decay [Sentiment -0.060, HousingPressure +0.500]" — the phrase
+// was reporting a real, cited anomaly, not importing one. `groundedBy` checks
+// the packet blob for that anomaly's own vocabulary before blocking; absent
+// any such signal, the phrase blocks exactly as before.
 const BLIGHT = [
   { id: 'decay-narrative', re: /\bdecay(?:'s|s)?\b.{0,40}\b(?:eating|metrics|epicenter|neighborhood|chinatown|west oakland)\b|\b(?:eating away at|epicenter of the city's decay)\b/i },
-  { id: 'real-life-struggles', re: /real-life struggles/i },
-  { id: 'falling-apart', re: /falling apart/i },
-  { id: 'isnt-safe', re: /isn['’]?t safe|city isn['’]?t safe/i },
+  { id: 'real-life-struggles', re: /real-life struggles/i, groundedBy: /\bdecay\b|\banomaly\b|\bcrisis\b/i },
+  { id: 'falling-apart', re: /falling apart/i, groundedBy: /\bdecay\b|\banomaly\b/i },
+  { id: 'isnt-safe', re: /isn['’]?t safe|city isn['’]?t safe/i, groundedBy: /\bcrime\b|\bviolentcrimeindex\b|\bsafety\b|\bunsafe\b/i },
   { id: 'zombie-set', re: /zombie movie/i },
   { id: 'shadow-leverage', re: /shadow leverage/i },
   { id: 'vacuum-crime', re: /fills? the vacuum|kind of vacuum in a neighborhood/i },
@@ -77,10 +86,12 @@ function scanLattice(prose) {
   return hits;
 }
 
-function scanPatterns(prose, list, check) {
+function scanPatterns(prose, list, check, blob) {
   const hits = [];
   for (const p of list) {
-    if (p.re.test(prose)) hits.push({ check, issue: p.id });
+    if (!p.re.test(prose)) continue;
+    if (p.groundedBy && blob && p.groundedBy.test(blob)) continue;
+    hits.push({ check, issue: p.id });
   }
   return hits;
 }
@@ -171,10 +182,11 @@ function scan(text, opts) {
   const prose = proseOnly(text);
   const desk = opts && opts.desk;
   const packet = opts && opts.packet;
+  const blob = packetBlob(packet);
   const findings = [];
   findings.push(...scanLattice(prose));
   findings.push(...scanPatterns(prose, REAL_OAKLAND, 'real-oakland-leak'));
-  findings.push(...scanPatterns(prose, BLIGHT, 'blight-import'));
+  findings.push(...scanPatterns(prose, BLIGHT, 'blight-import', blob));
   findings.push(...scanPatterns(prose, REPAIR_CHROME, 'repair-chrome'));
   findings.push(...scanUnsuppliedAccess(prose, packet));
   findings.push(...scanVoices(prose, desk));

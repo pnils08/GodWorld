@@ -626,7 +626,16 @@ async function main() {
   const bodyForScan = unwrapWholeDocFence(draftText).replace(/```[\s\S]*?```/g, '');
   const popHits = bodyForScan.match(/\bPOP-\d{5}\b/g);
   if (popHits) detBlockers.push({ severity: 'high', check: 'popid-leak', issue: 'raw POPID(s) in prose: ' + [...new Set(popHits)].join(', ') });
-  const worldLeak = require('./articleContamination').scan(articleProseForReview(draftText), { desk: PERSONA && /civic|firebrand|delaine|navarro|reyes|torres/i.test(PERSONA) ? 'civic' : undefined });
+  // groundedBy support (articleContamination.js, 2026-09-17 Chinatown/Caldera
+  // false-positive fix): a blunt decay/safety phrase only blocks when the
+  // packet carries no matching engine-anomaly signal, so this call needs the
+  // same packet the writer saw, not just the desk hint.
+  let worldLeakPacket;
+  if (PACKET_FILE) {
+    try { worldLeakPacket = JSON.parse(fs.readFileSync(path.resolve(ROOT, PACKET_FILE), 'utf8')); }
+    catch (e) { log.warn('contamination-gate packet load failed (grounding check skipped): ' + e.message); }
+  }
+  const worldLeak = require('./articleContamination').scan(articleProseForReview(draftText), { desk: PERSONA && /civic|firebrand|delaine|navarro|reyes|torres/i.test(PERSONA) ? 'civic' : undefined, packet: worldLeakPacket });
   for (const f of worldLeak.findings) {
     detBlockers.push({ severity: 'high', check: f.check, issue: f.issue });
   }

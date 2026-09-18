@@ -132,7 +132,10 @@ function reconcileVerdict({ root = ROOT, verdictPath, apply = false, now = new D
   if (!wake.desk || !byline.name || !/^POP-\d{5}$/.test(String(byline.popid || byline.id || ''))) {
     throw new Error('wake record lacks desk or stable byline identity for ' + base);
   }
-  const contamination = articleContamination.scanFile(draftAbs, { desk: wake.desk });
+  // groundedBy support (articleContamination.js, 2026-09-17 Chinatown/Caldera
+  // false-positive fix) needs the same facts the writer packet carried; the
+  // wake-3 state's manifest.approvedFacts already holds that grounding text.
+  const contamination = articleContamination.scanFile(draftAbs, { desk: wake.desk, packet: state && state.manifest });
   const effectivePass = verdict.pass && !contamination.fail;
 
   const stamp = now.toISOString().replace(/\D/g, '').slice(0, 14);

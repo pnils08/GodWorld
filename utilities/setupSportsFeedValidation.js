@@ -83,7 +83,9 @@ var EVENT_TYPE_VALUES = [
 
 // The engine acts on game-result (and any type containing "game") and on
 // season-state (a WeekRecord of none). Every other type is newsroom context.
-// injury … draft are the types the builder authors (live counts 2026-09-19);
+// injury … community-outreach are the kinds of entry the builder authors (live
+// counts 2026-09-19; breaking-news / awards / community-outreach had been going
+// into EventTrigger, which is for moments);
 // injuries and trades are the S446-ruled negative-drift channel.
 var OAKLAND_EVENT_TYPE_VALUES = [
   'game-result',
@@ -99,7 +101,10 @@ var OAKLAND_EVENT_TYPE_VALUES = [
   'team-update',
   're-signing',
   'rumor',
-  'draft'
+  'draft',
+  'breaking-news',
+  'awards',
+  'community-outreach'
 ];
 
 var PLAYER_MOOD_VALUES = [
@@ -133,7 +138,13 @@ var EVENT_TRIGGER_VALUES = [
   'season-finale',
   'injury',
   'injury-return',
-  'debut'
+  'debut',
+  'draft-night',
+  'trade-deadline',
+  'all-star',
+  'series-clinch',
+  'walk-off',
+  'no-hitter'
 ];
 
 // P–T: exactly the words applySportsSeason.js parses (parseFanSentiment_,
@@ -207,10 +218,11 @@ var HEADER_NOTES = {
   'PlayerMood': 'Clubhouse mood of the named player(s).\n' +
     'Game-night tone: a W streak makes it a win night; otherwise confident leans win, frustrated (or an L streak) leans loss.\n' +
     'The other moods are newsroom color.',
-  'EventTrigger': 'Optional. Each dropdown word makes a sports story hook for the newsroom.\n' +
+  'EventTrigger': 'Optional. A MOMENT in the week (home-opener, debut, draft-night, walk-off) — not the season phase\n' +
+    '(that is SeasonType) or the kind of entry (that is EventType). Each dropdown word makes a sports story for the newsroom.\n' +
+    "Only the team's LAST row of the Cycle counts; a blank row keeps the earlier trigger.\n" +
     'Leave blank and the engine picks one: W6+ streak = hot-streak, L6+ = cold-streak, championship phase = championship.\n' +
-    'Any other word you type makes NO hook and also stops that automatic pick.\n' +
-    "A blank row keeps the team's last trigger.",
+    'Any other word you type makes NO story and also stops that automatic pick.',
   'HomeNeighborhood': 'Optional. Where this event lands: that neighborhood counts as a game day for transit,\n' +
     "and the team's game-day crowd goes there in the evening crowd map.\n" +
     'Use one of the 22 map neighborhoods (Montclair is Piedmont Ave, Old Oakland is Downtown).\n' +

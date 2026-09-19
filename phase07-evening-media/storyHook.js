@@ -677,7 +677,15 @@ function storyHookEngine_(ctx) {
       'season-finale':  { priority: 2, text: function(t) { return t.team + ' season finale. End-of-year reflection. Player profiles, record wrap-up.'; } },
       'injury':         { priority: 2, text: function(t) { return t.team + ' lose a player to injury. Roster impact, recovery timeline, who steps up' + (t.neighborhood ? ' — reaction in ' + t.neighborhood : '') + '.'; } },
       'injury-return':  { priority: 2, text: function(t) { return t.team + ' get a player back from injury. Comeback story, rhythm question, lineup ripple.'; } },
-      'debut':          { priority: 2, text: function(t) { return t.team + ' debut a new face. First-impression story, scouting-report-vs-reality, fan verdict' + (t.neighborhood ? ' in ' + t.neighborhood : '') + '.'; } }
+      'debut':          { priority: 2, text: function(t) { return t.team + ' debut a new face. First-impression story, scouting-report-vs-reality, fan verdict' + (t.neighborhood ? ' in ' + t.neighborhood : '') + '.'; } },
+      // Moment words the builder asked for (2026-09-19): a trigger is a moment
+      // in the week — not the season phase (SeasonType) or the entry kind (EventType).
+      'draft-night':    { priority: 2, text: function(t) { return t.team + ' draft night. New prospects, scouting reports, future-of-the-franchise angle' + (t.neighborhood ? ' — watch party in ' + t.neighborhood : '') + '.'; } },
+      'trade-deadline': { priority: 2, text: function(t) { return t.team + ' at the trade deadline. Buyers or sellers, roster shake-up, clubhouse nerves, fan verdict.'; } },
+      'all-star':       { priority: 2, text: function(t) { return t.team + ' send an All-Star. Recognition story, career arc, hometown pride' + (t.neighborhood ? ' in ' + t.neighborhood : '') + '.'; } },
+      'series-clinch':  { priority: 3, text: function(t) { return t.team + ' clinch the series! Celebration' + (t.neighborhood ? ' in ' + t.neighborhood : '') + '. Who carried them, next-round stakes.'; } },
+      'walk-off':       { priority: 2, text: function(t) { return t.team + ' win it on a walk-off. Instant-classic story, the hero, the crowd' + (t.neighborhood ? ' in ' + t.neighborhood : '') + '.'; } },
+      'no-hitter':      { priority: 3, text: function(t) { return t.team + ' throw a no-hitter. Historic night, pitcher profile, where-were-you story.'; } }
     };
 
     for (var sti = 0; sti < sportsTriggers.length; sti++) {

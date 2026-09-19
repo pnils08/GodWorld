@@ -384,7 +384,7 @@ function applyBusinessDynamics_(ctx) {
   var sheet = ctx.ss ? ctx.ss.getSheetByName('Business_Ledger') : null;
   if (!sheet) throw new Error('applyBusinessDynamics_: Business_Ledger not found');
   var bl = sheet.getDataRange().getValues();
-  if (!bl || bl.length < 2) { S.businessDynamicsState = {}; return out; }
+  if (!bl || bl.length < 2) { S.businessDynamicsState = {}; S.hoodBusinessMomentum = {}; return out; }
   var bh = bl[0];
   var col = function(name) { for (var c = 0; c < bh.length; c++) if (String(bh[c]).trim() === name) return c; return -1; };
   var iId = col('BIZ_ID'), iSec = col('Sector'), iHood = col('Neighborhood'), iRev = col('Annual_Revenue'), iGrow = col('Growth_Rate');
@@ -408,6 +408,31 @@ function applyBusinessDynamics_(ctx) {
   var declines = {}, closures = [];
   out.shed = 0; out.closed = 0; out.closing = 0;
   var revCol = [], growCol = [];
+  // 2026-09-19 (builder ruling: "businesses having a whole loop but not felt in their
+  // hoods is trick code"): per-hood business momentum. The loop moved every business's
+  // growth, shed jobs and closed doors, and none of it reached the hood's street — only
+  // Employee_Count presence (saturated for the five biggest-employer hoods). Tallied here
+  // per PARENT hood (child areas fold, SIM_DOCTRINE §17), read by the Phase-10 writer.
+  // Feedback, named: bizDriftOne_ reads the hood's last-cycle RetailVitality (vitMod), and
+  // the writer now reads this momentum into this cycle's RetailVitality — a loop, bounded
+  // both ends (drift ±bizDriftMax pp/cycle; writer factor 0.88–1.12 against the city's
+  // median growth, so a citywide rise moves nobody). A closure is felt the cycle it closes
+  // (its revenue share leaves the street); winding-down rows after that are not tallied —
+  // the street reads without them.
+  var hoodBiz = {};
+  var bizHoodKey = function(h) {
+    if (!h) return '';
+    if (typeof resolveHoodOrChild_ === 'function' && S.canonHoods) return resolveHoodOrChild_(ctx, h) || h;
+    return h;
+  };
+  var tallyBiz = function(h, revenue, growth, closedNow) {
+    var k = bizHoodKey(h);
+    if (!k || revenue === null || !(revenue > 0)) return;
+    var t = hoodBiz[k] || (hoodBiz[k] = { revenue: 0, growthWeighted: 0, closedRevenue: 0, closures: 0, businesses: 0 });
+    t.revenue += revenue; t.businesses++;
+    if (closedNow) { t.closedRevenue += revenue; t.closures++; }
+    else t.growthWeighted += revenue * growth;
+  };
   for (var r = 1; r < bl.length; r++) {
     var row = bl[r];
     var id = String(row[iId] || '').trim();
@@ -460,6 +485,7 @@ function applyBusinessDynamics_(ctx) {
       if (stated > 0) { declines[id] = stated; out.shed += stated; }
       state[id] = [d.streak, 0, cycle];
       closures.push({ id: id, name: bName, hood: hood, sector: String(row[iSec] || ''), closedCycle: cycle, stated: stated });
+      tallyBiz(hood, biz.revenue, 0, true);
       out.ownersRetrenched = (out.ownersRetrenched || 0) + noteVentureClosedOwners_(ctx, iKP >= 0 ? row[iKP] : '', bName, cycle); // engine.201 Wave 2
       S.worldEvents = S.worldEvents || [];
       // engine.190 (S463): a closure is the BUSINESS desk's event (was COMMUNITY —
@@ -500,7 +526,20 @@ function applyBusinessDynamics_(ctx) {
     if (d.streak || d.win) state[id] = [d.streak, d.win, 0];
     revCol.push([d.revenue === null ? row[iRev] : d.revenue]);
     growCol.push([d.growth]);
+    tallyBiz(hood, d.revenue, d.growth, false);
   }
+  var momentum = {};
+  for (var hk in hoodBiz) {
+    if (!hoodBiz.hasOwnProperty(hk)) continue;
+    var tb = hoodBiz[hk];
+    var open = tb.revenue - tb.closedRevenue;
+    momentum[hk] = {
+      growth: open > 0 ? Math.round(tb.growthWeighted / open * 100) / 100 : 0,   // revenue-weighted Growth_Rate (pp/yr) of the hood's open businesses
+      closedShare: tb.revenue > 0 ? Math.round(tb.closedRevenue / tb.revenue * 1000) / 1000 : 0,  // revenue that closed this cycle
+      closures: tb.closures, businesses: tb.businesses
+    };
+  }
+  S.hoodBusinessMomentum = momentum;
   S.businessDeclines = declines;   // runCareerEngine_ folds these into careerSignals.businessDeltas[id].lost
   S.businessClosures = closures;   // archiveClosedBusinesses_ (Phase 11) reads these
 

@@ -234,6 +234,34 @@ function hoodCharacterCity_(S, hoods) {
   return city;
 }
 
+// 2026-09-19 (builder ruling: a business loop not felt in its hood is trick code):
+// this cycle's business momentum on the hood's street (S.hoodBusinessMomentum,
+// applyBusinessDynamics_ Phase 5). Growth is read against the city's median hood
+// growth (1% of retail per pp, bounded), and a closure takes its share of the
+// hood's tracked revenue off the street the cycle it closes. Change, not size —
+// so it moves the big-employer hoods the depth factor saturates on.
+var HOOD_BIZ_GROWTH_GAIN = 0.01;          // retail share per pp of growth vs the city median
+var HOOD_BIZ_GROWTH_BAND = [0.88, 1.12];
+var HOOD_BIZ_CLOSURE_CAP = 0.5;           // a closure never removes more than half the street
+
+function hoodBusinessCity_(S) {
+  var mom = S.hoodBusinessMomentum || {};
+  var g = [];
+  for (var h in mom) if (mom.hasOwnProperty(h) && mom[h] && isFinite(Number(mom[h].growth))) g.push(Number(mom[h].growth));
+  return hoodMedian_(g);
+}
+
+function hoodBusinessFactor_(name, S, cityGrowth) {
+  var m = (S.hoodBusinessMomentum || {})[name];
+  if (!m) return 1;
+  var f = 1;
+  if (cityGrowth !== null && isFinite(Number(m.growth))) {
+    f = hoodClamp_(1 + HOOD_BIZ_GROWTH_GAIN * (Number(m.growth) - cityGrowth), HOOD_BIZ_GROWTH_BAND);
+  }
+  var closed = Math.min(HOOD_BIZ_CLOSURE_CAP, Math.max(0, Number(m.closedShare) || 0));
+  return f * (1 - closed);
+}
+
 function hoodProfileFromCanon_(name, S, city) {
   var label = hoodLabelOf_(name, S);
   var mods = hoodLabelMods_(name, S, label);
@@ -432,6 +460,7 @@ function saveV3NeighborhoodMap_(ctx) {
   // Hood profiles are read from canon each cycle (hoodProfileFromCanon_, top of
   // file) — the hand-set per-hood table that stood here is retired.
   var hoodCity = hoodCharacterCity_(S, NMAP_NEIGHBORHOODS);
+  var hoodBizGrowthMedian = hoodBusinessCity_(S);
 
   // Holiday / calendar neighborhood boosts
   var holidayMods = buildHolidayNeighborhoodMods_(holiday, isFirstFriday, isCreationDay, sportsSeason);
@@ -481,7 +510,7 @@ function saveV3NeighborhoodMap_(ctx) {
     var crime = hoodCm
       ? round2(Math.max(0, ((Number(hoodCm.propertyCrimeIndex) || 50) + (Number(hoodCm.violentCrimeIndex) || 50)) / 2 / 50))
       : round2(Math.max(0, cityCrimeAvg / 50));
-    var retail = round2(Math.max(0, baseRetail * profile.retailMod * (1 + variance())));
+    var retail = round2(Math.max(0, baseRetail * profile.retailMod * hoodBusinessFactor_(name, S, hoodBizGrowthMedian) * (1 + variance())));
     var eventAttract = Math.max(0, Math.round(baseEventAttract * effectiveEventMod));
     // G-EC33 fix: per-hood base from the per-hood dynamics track (input-driven,
     // persists 30%/cycle) breaks the citywide-scalar lockstep. Frozen profile

@@ -291,3 +291,13 @@ Ten newly tracked hoods, per-cycle Sentiment deltas: C109→C110 [0.07,0.04,0.06
 6. Ripple_Ledger C108: 70 engine rows, no retired-template hood. Migration reads as a city with a ladder — 15 relocations naming their reason (moving up from Temescal, priced out of Lake Merritt, displaced from Lake Merritt), 3 forced moves at severe displacement risk.
 
 **Verdict: deployable.** One open defect (shock flag restates the load class) carried to engine.187 part 3.
+
+## PRE-DECLARED — engine.187 part 3 bench, engine tree `4302317c`, fresh live-synced C107 (written BEFORE the fire)
+1. `ok:true`, 0 Engine_Errors C108–C111.
+2. **ShockFlag is not `shock-flag` on all four.** C108 inherits live C107's stuck flag with no genuine break under it, so it should read `shock-resolved` and then fall to `none` — a shock cycle after that only where a real condition fires (collapse, chaos saturation, severe weather, economic crash, arc peak cluster, civicLoadScore ≥ 15).
+3. **Downtown is not "Shock event zone" every cycle** (`v3NeighborhoodWriter:777` reads `shockFlag === 'shock-flag'`).
+4. C108 story hooks carry the recovery line ("SHOCK LIFTED…"), **not** "Unexpected disruption detected" — the false alert on the all-clear cycle is the thing part 3 fixes.
+5. Knock-ons, expected and wanted: sentiment momentum returns to 0.50 from the in-shock 0.40 (`applyCityDynamics:169`), so C108 city mood should land at or above the previous bench's 0.45 — call it 0.45–0.60, still under 1.0 with hood spread intact. Cycle weight loses its automatic +6 (`applyCycleWeight:161`), so not every cycle should read `high-signal`. `deriveDemographicDrift` instability goes to 0 on non-shock cycles.
+6. Everything from the deploy-candidate bench still holds: QoL lines with causes, 0 papered-over lines, canon-shaped retail ranking, no fake Downtown crisis, hoods carrying their own Sentiment.
+
+**Commit-message note:** `4302317c`'s message lost two clauses to shell backticks (the kept `civicLoadScore >= 15` gate, and the `flag && flag !== 'none'` test the four readers used). No `--amend` per the standing rule; the code comments carry both.

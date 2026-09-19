@@ -247,5 +247,66 @@ function runShock(curEvents, prevEvents, sOverrides) {
     fading.flag === 'shock-fading', fading.flag + ' ' + JSON.stringify(fading.reasons));
 }
 
+// engine.187 part 4 (2026-09-19): four gates were absolute numbers from a ~52-event, small-
+// population world. Bench C104-C111 measured what the city actually runs: 8-13 chaos events every
+// cycle (saturation bar 8), 0-9 medium-severity (wave bar 4), ~1,295 net migration head count
+// (surge bar 150), coverageIntensity 'saturated' 8 of 8. All four fired on ordinary life, which is
+// why the shock flag survived part 3.
+{
+  const ev = (n, sev) => new Array(n).fill(0).map(() => ({ severity: sev }));
+  const runGate = cur => {
+    const ctx = {
+      config: { cycleCount: 100, employmentFallbackRate: 0.91 },
+      summary: Object.assign({
+        eventsGenerated: 600, worldEvents: ev(10, 'low'),
+        cityDynamics: { sentiment: 0.3, culturalActivity: 1, communityEngagement: 1 },
+        economicMood: 56, civicLoad: 'minor-variance', civicLoadScore: 8, patternFlag: 'none',
+        weather: { type: 'clear', impact: 1 }, weatherMood: {}, mediaEffects: {},
+        eventArcs: [], demographicDrift: { migration: 1295, employmentRate: 0.95 },
+        worldPopulation: { totalPopulation: 391000 },
+        holiday: 'none', holidayPriority: 'none', simMonth: 6,
+        previousCycleState: { events: 600, chaosCount: 11, sentiment: 0.3, econMood: 56, pattern: 'none', shockFlag: 'none', shockStartCycle: 0 },
+        currentCycle: 100,
+      }, cur || {}),
+    };
+    applyShockMonitor_(ctx);
+    return (ctx.summary.shockReasons || []).join(',');
+  };
+
+  ok('an ordinary cycle (10 chaos, 1295 migrants, busy newsroom) is NOT a shock',
+    runGate({ mediaEffects: { coverageIntensity: 'saturated' } }) === '', runGate({ mediaEffects: { coverageIntensity: 'saturated' } }));
+
+  ok('chaos saturation needs volume above the city\'s own norm, not 8',
+    runGate({ worldEvents: ev(13, 'low') }).indexOf('saturation') === -1, runGate({ worldEvents: ev(13, 'low') }));
+  ok('a real chaos surge (11 -> 20) IS saturation',
+    runGate({ worldEvents: ev(20, 'low') }).indexOf('chaos saturation') !== -1, runGate({ worldEvents: ev(20, 'low') }));
+
+  ok('4 medium of 10 is ordinary texture, not a severity wave',
+    runGate({ worldEvents: ev(4, 'medium').concat(ev(6, 'low')) }).indexOf('medium severity wave') === -1,
+    runGate({ worldEvents: ev(4, 'medium').concat(ev(6, 'low')) }));
+  ok('8 medium of 10 IS a severity wave (the mix tilted)',
+    runGate({ worldEvents: ev(8, 'medium').concat(ev(2, 'low')) }).indexOf('medium severity wave') !== -1,
+    runGate({ worldEvents: ev(8, 'medium').concat(ev(2, 'low')) }));
+  ok('two high-severity events are still a cluster (genuinely rare)',
+    runGate({ worldEvents: ev(2, 'high').concat(ev(8, 'low')) }).indexOf('high severity cluster') !== -1,
+    runGate({ worldEvents: ev(2, 'high').concat(ev(8, 'low')) }));
+
+  ok('ordinary migration for a 391k city is not a surge',
+    runGate({}).indexOf('migration surge') === -1, runGate({}));
+  ok('migration above 0.5% of the population IS a surge',
+    runGate({ demographicDrift: { migration: 2400, employmentRate: 0.95 } }).indexOf('migration surge') !== -1,
+    runGate({ demographicDrift: { migration: 2400, employmentRate: 0.95 } }));
+  ok('a small city keeps the legacy 150 floor',
+    runGate({ worldPopulation: { totalPopulation: 9000 }, demographicDrift: { migration: 200, employmentRate: 0.95 } }).indexOf('migration surge') !== -1,
+    runGate({ worldPopulation: { totalPopulation: 9000 }, demographicDrift: { migration: 200, employmentRate: 0.95 } }));
+
+  ok('a busy newsroom alone is not a shock (and cannot re-arm itself through intensity)',
+    runGate({ mediaEffects: { coverageIntensity: 'saturated' } }).indexOf('media') === -1,
+    runGate({ mediaEffects: { coverageIntensity: 'saturated' } }));
+  ok('crisis coverage crowding out the rest IS a shock',
+    runGate({ mediaEffects: { crisisSaturation: 0.85 } }).indexOf('media crisis saturation') !== -1,
+    runGate({ mediaEffects: { crisisSaturation: 0.85 } }));
+}
+
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);

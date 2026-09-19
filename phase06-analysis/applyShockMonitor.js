@@ -200,12 +200,24 @@ function applyShockMonitor_(ctx) {
     if (sev === "high" || sev === "major" || sev === "critical") curHigh++;
     if (sev === "medium" || sev === "moderate") curMed++;
   }
+  // engine.187 part 4 (2026-09-19): a high-severity pair stays absolute — bench C104-C111 shows
+  // high/major/critical is genuinely rare (one single across eight cycles), so 2 is a real cluster.
+  // The medium bar was NOT rare: the city files 8-13 chaos events every cycle and 4+ of them were
+  // medium on 5 of those 8, so "wave" fired on ordinary texture. A wave is the MIX tilting
+  // mid-severity, not the volume being normal.
   if (curHigh >= 2) { shock = true; shockReasons.push("high severity cluster"); }
-  if (curMed >= 4)  { shock = true; shockReasons.push("medium severity wave"); }
+  if (curMed >= 4 && curMed >= Math.ceil(curChaos * 0.6)) { shock = true; shockReasons.push("medium severity wave"); }
 
   // 3) CHAOS SPIKE
   var chaosSpikeThreshold = 4 + chaosThresholdMod;
-  var chaosSaturationThreshold = 8 + chaosThresholdMod;
+  // engine.187 part 4: saturation was an absolute 8 against a city that files 8-13 chaos events
+  // EVERY cycle (bench C104-C111: 12, 13, 8, 11, 10, 8, 11, 8) — the floor of the world's normal
+  // range was the threshold, so it fired 8 of 8 and the shock flag could never clear. Same class
+  // as the engine.38 B3 event thresholds above and as the civic-load cap in part 1: a gate that
+  // cannot NOT fire. Now relative to the city's own volume, with the legacy 8 as a floor so a
+  // genuinely quiet world keeps the old behaviour.
+  var chaosRef = Math.max(prevChaos, 5);
+  var chaosSaturationThreshold = Math.max(8 + chaosThresholdMod, Math.round(chaosRef * 1.6));
 
   if (curChaos - prevChaos >= chaosSpikeThreshold) { shock = true; shockReasons.push("chaos spike"); }
   if (curChaos >= chaosSaturationThreshold)        { shock = true; shockReasons.push("chaos saturation"); }
@@ -228,8 +240,14 @@ function applyShockMonitor_(ctx) {
   if (econMood <= 25)                { shock = true; shockReasons.push("economic crisis"); }
 
   // 7) MIGRATION DRIFT SHOCK
+  // engine.187 part 4: `demographicDrift.migration` is a net HEAD COUNT (~1,295/cycle on bench
+  // C104-C111), not the +/-20 index the digest's MigrationDrift column carries — the same
+  // scale mix-up engine.184 found in the v3 writer's thresholds. An absolute 150 against a
+  // 391,000-person city meant every ordinary cycle was a "migration surge". Now a share of the
+  // population the city actually has; the legacy 150 survives as a floor for a small world.
   var migration = demographicDrift.migration || 0;
-  var migrationThreshold = 150 + migrationThresholdMod;
+  var shockPop = (S.worldPopulation && Number(S.worldPopulation.totalPopulation)) || 0;
+  var migrationThreshold = Math.max(150 + migrationThresholdMod, Math.round(shockPop * 0.005));
   if (Math.abs(migration) >= migrationThreshold) { shock = true; shockReasons.push("migration surge"); }
 
   // 8) EMPLOYMENT SHOCK
@@ -276,8 +294,12 @@ function applyShockMonitor_(ctx) {
   if (highTensionArcs >= 2){ shock = true; shockReasons.push("high tension arcs"); }
 
   // 12) MEDIA CRISIS SATURATION
+  // engine.187 part 4: CRISIS saturation stays — that measures crisis coverage crowding out the
+  // rest, which is a real signal. Generic `coverageIntensity === "saturated"` is cut: it reads
+  // "the newsroom is busy", which in a 600-event city is every cycle (saturated 8 of 8 on bench,
+  // 90 of 103 live Media_Ledger rows per engine.227), and it fed a loop — the shock flag added
+  // +0.3 to that same intensity in mediaFeedbackEngine, so each flag helped re-arm itself.
   if (mediaEffects.crisisSaturation && mediaEffects.crisisSaturation >= 0.8) { shock = true; shockReasons.push("media crisis saturation"); }
-  if (mediaEffects.coverageIntensity === "saturated")                        { shock = true; shockReasons.push("media saturation"); }
 
   // 13) CALENDAR-SPECIFIC SHOCKS — engine.38 B3: dead-zone is <10% of normal
   // volume on a major holiday (was absolute <5, unreachable at high volume).

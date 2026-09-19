@@ -301,3 +301,31 @@ Ten newly tracked hoods, per-cycle Sentiment deltas: C109→C110 [0.07,0.04,0.06
 6. Everything from the deploy-candidate bench still holds: QoL lines with causes, 0 papered-over lines, canon-shaped retail ranking, no fake Downtown crisis, hoods carrying their own Sentiment.
 
 **Commit-message note:** `4302317c`'s message lost two clauses to shell backticks (the kept `civicLoadScore >= 15` gate, and the `flag && flag !== 'none'` test the four readers used). No `--amend` per the standing rule; the code comments carry both.
+
+## RESULT — engine.187 part 3 bench (`23802d43`, SANDBOX 0908 @67, live-synced C107)
+
+1. **MET.** ok:true ×4, Engine_Errors 0.
+2. **FAILED.** ShockFlag C108 `shock-flag`, C109 `shock-chronic`, C110 `shock-flag`, C111 `shock-chronic`. Cutting the two classifier restatements was necessary but not sufficient — they were masking four more gates of the same class. Measured against the bench (C104–C111):
+
+   | gate | fires at | what the city actually runs | fired |
+   |---|---|---|---|
+   | chaos saturation | `curChaos >= 8` | 12, 13, 8, 11, 10, 8, 11, 8 | **8 of 8** |
+   | medium severity wave | `curMed >= 4` | 9, 7, 0, 5, 4, 3, 4, 0 | 5 of 8 |
+   | media saturation | `coverageIntensity === 'saturated'` | saturated 8 of 8 (90 of 103 live rows, engine.227) | **8 of 8** |
+   | migration surge | `abs(migration) >= 150` | ~1,295 net head count (the digest's ±20 `MigrationDrift` is a different field) | **8 of 8** |
+
+   All four are the engine.38 B3 mistake in a different corner: numbers tuned for a ~52-event, small-population world, still judging a 391,000-person city that files 600+ events and 8–13 chaos events a cycle. The prediction failure is mine — the wiring card listed all four and I classified them as genuine detectors without counting what the world produces first.
+3. **NOT REACHED** (shock never cleared, so the label never cleared).
+4. **NOT REACHED.** `Story_Hook_Deck` shock rows exist for C108–C111 but the hook text column read empty in the readback — recheck on the next bench.
+5. Knock-ons unmeasurable while the flag is pinned. C108 mood 0.45, C109 0.12, C110 0.37, C111 0.40 (unchanged from the previous bench, as expected — the flag was on in both).
+6. **MET.** Markers spread across 6 kinds (Inflow surge 6, Mild outflow 7, Mild inflow 3, Outflow accelerating 3, Stable 2, Civic pressure zone 1) — Downtown reads "Inflow surge", not a permanent pressure label.
+
+**Also found:** `buildCyclePacket`'s SHOCK CONTEXT block never appears in a written packet (C108–C111 packets contain no "SHOCK" string at all) — a dead diagnostic. Filed, not fixed.
+
+## PRE-DECLARED — engine.187 part 4 bench (written BEFORE the fire)
+1. ok:true, 0 Engine_Errors C108–C111.
+2. **ShockFlag is not an active shock on all four.** C108 inherits live C107's flag with no qualifying condition under it → `shock-resolved`, then `none`. A shock cycle only where a real break lands.
+3. C108 hooks carry "SHOCK LIFTED", not "Unexpected disruption detected"; hook text reads back non-empty this time.
+4. Sentiment momentum returns to 0.50, so C108 city mood ≥ 0.45 (0.45–0.60), hood spread intact, max < 1.0.
+5. Not every cycle reads `high-signal` CycleWeight (the automatic +6 is gone with the flag).
+6. Everything from the deploy-candidate bench holds: QoL lines with causes, 0 papered-over lines, canon-shaped retail, spread markers.

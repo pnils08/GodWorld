@@ -129,6 +129,10 @@ pointers:
 
 ## PROD deploy log — full trail
 
+### PROD @99 — sports feed setup audit (2026-09-19 ~01:40 Chicago, engine-sheet)
+
+Commit `9bd306c7`, one file vs @98: `utilities/setupSportsFeedValidation.js` (off-cycle menu utility — no cycle path; vm load + 0 collisions): Oakland HomeNeighborhood dropdown read from Neighborhood_Map at setup (22 hoods), the six authored EventTypes listed, every column note rewritten from the code. Apps Script version 88, read back @88; pull-back 169 js byte-identical, 0 test files. Takes effect when the **Setup Sports Feed Validation** menu item is re-run. No cycle-behaviour change — nothing to smoke at C108 beyond §PROD @98.
+
 ### PROD @98 — engine.202 LIVE: the WeekRecord column exists and the week settles the casino (2026-09-18 ~23:40 Chicago, engine-sheet)
 
 Engine tree `b2607ebe` (HEAD `0ffbe9be`, research-build docs only on top) = @97 + three files: `applySportsSeason.js` (a rejected WeekRecord cell names its sheet row), `compileHandoff.js` (WeekRecord replaces the dead VideoGameDate/VideoGame handoff fields; `Week:` line), `setupSportsFeedValidation.js` v3.0 (columns by header name; vocabulary single-sourced to Node; EventTrigger = TRIGGER_HOOKS keys; P–T dropdowns). Apps Script version 87, read back @87. Isolated `git archive` stage; pull-back 170 files, 169 js byte-identical, 0 test files. **Sheet write, live, same session:** `Oakland_Sports_Feed!U1` = `WeekRecord` (one cell, grid already 28 wide, column U blank on every row before; read back 21 headers; `resolveFeedLayout` on the dashboard's raw-snapshot path resolves the 21-column layout).

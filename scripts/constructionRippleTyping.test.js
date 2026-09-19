@@ -72,5 +72,24 @@ check('source: the detector no longer concatenates citizenEvents', !/worldEvents
 // the engine.222 closure typing still holds beside it
 check('engine.222: CIVIC "road closure decision" still files no FACTORY_CLOSURE', detect([{ domain: 'CIVIC', description: 'road closure decision' }]).indexOf('FACTORY_CLOSURE') < 0);
 
+// engine.240 (2026-09-19): a ripple lands where its event happened — its hood + that hood's canon
+// neighbours — or citywide when the engine never said where; the per-trigger real-Oakland hood lists
+// (FACTORY_CLOSURE → West Oakland …) are gone.
+{
+  const sb = sandbox();
+  const S = { economicRipples: [], neighborhoodAdjacency: { Dimond: ['Laurel', 'Glenview'] } };
+  const r = sb.createRipple_(S, 'FACTORY_CLOSURE', 108, { description: 'x' }, 'Dimond', {});
+  check('engine.240: a Dimond closure lands on Dimond (primary) + its canon neighbours, not West Oakland',
+    r && r.primaryNeighborhood === 'Dimond' && JSON.stringify(r.neighborhoods) === JSON.stringify(['Dimond', 'Laurel', 'Glenview']));
+  const c = sb.createRipple_(S, 'CRIME_SPIKE', 108, { description: 'y' }, '', {});
+  check('engine.240: a hoodless ripple is citywide with no invented primary', c && c.primaryNeighborhood === '' && c.neighborhoods[0] === 'all');
+  const w = sb.createRipple_(S, 'NATURAL_DISASTER', 108, { description: 'z' }, 'all', {});
+  check('engine.240: "all" is citywide, not a hood named all', w && w.primaryNeighborhood === '' && w.neighborhoods[0] === 'all');
+  const src = fs.readFileSync(path.join(ROOT, 'phase06-analysis/economicRippleEngine.js'), 'utf8');
+  const trig = src.slice(src.indexOf('var ECONOMIC_TRIGGERS = {'), src.indexOf('};', src.indexOf('var ECONOMIC_TRIGGERS = {')));
+  check('engine.240: no trigger carries a hood list; HOLIDAY_ECONOMIC_ZONES is gone',
+    !/neighborhoods:/.test(trig) && !/var HOLIDAY_ECONOMIC_ZONES/.test(src));
+}
+
 console.log('\n' + passed + ' passed, ' + failed + ' failed');
 process.exit(failed ? 1 : 0);

@@ -39,43 +39,51 @@
 // RIPPLE TYPES & CONSTANTS
 // ═══════════════════════════════════════════════════════════════
 
+// engine.240 (2026-09-19, SIM_DOCTRINE §17): the per-trigger `neighborhoods` lists are gone.
+// They were 2020s Oakland (FACTORY_CLOSURE → West Oakland only, MAJOR_LAYOFFS → Downtown /
+// Rockridge, CRIME_SPIKE → Downtown / Fruitvale …) and did two things every cycle: a hoodless
+// event drew its location from them at random, and EVERY ripple spread to them wherever its
+// event happened — a closure in Dimond moved West Oakland's economy and not Dimond's own
+// (calculateNeighborhoodEconomies_ only credits hoods on the spread). Geography now comes from
+// the event: its own hood + that hood's canon neighbours (Neighborhood_Map.Adjacent), the
+// holiday's authored Scenes, the sports zones, or citywide when the engine never said where.
 var ECONOMIC_TRIGGERS = {
   // Positive triggers
-  TECH_INVESTMENT: { impact: 15, duration: 8, sectors: ['tech', 'retail'], neighborhoods: ['Downtown', 'Jack London'] },
-  SPORTS_CHAMPIONSHIP: { impact: 10, duration: 4, sectors: ['entertainment', 'food', 'retail'], neighborhoods: ['Downtown', 'Jack London'] },
-  NEW_BUSINESS: { impact: 5, duration: 6, sectors: ['retail', 'services'], neighborhoods: ['Rockridge', 'Temescal', 'Laurel'] },
-  CONSTRUCTION_BOOM: { impact: 12, duration: 10, sectors: ['construction', 'retail', 'housing'], neighborhoods: ['West Oakland', 'Downtown'] },
-  TOURISM_SPIKE: { impact: 8, duration: 3, sectors: ['food', 'entertainment', 'retail'], neighborhoods: ['Jack London', 'Lake Merritt'] },
-  CULTURAL_EVENT: { impact: 6, duration: 3, sectors: ['entertainment', 'food'], neighborhoods: ['Jack London', 'Fruitvale', 'Lake Merritt'] },
+  TECH_INVESTMENT: { impact: 15, duration: 8, sectors: ['tech', 'retail'] },
+  SPORTS_CHAMPIONSHIP: { impact: 10, duration: 4, sectors: ['entertainment', 'food', 'retail'] },
+  NEW_BUSINESS: { impact: 5, duration: 6, sectors: ['retail', 'services'] },
+  CONSTRUCTION_BOOM: { impact: 12, duration: 10, sectors: ['construction', 'retail', 'housing'] },
+  TOURISM_SPIKE: { impact: 8, duration: 3, sectors: ['food', 'entertainment', 'retail'] },
+  CULTURAL_EVENT: { impact: 6, duration: 3, sectors: ['entertainment', 'food'] },
   
   // Negative triggers
-  FACTORY_CLOSURE: { impact: -20, duration: 12, sectors: ['manufacturing', 'retail'], neighborhoods: ['West Oakland'] },
-  CRIME_SPIKE: { impact: -8, duration: 4, sectors: ['retail', 'entertainment', 'tourism'], neighborhoods: ['Downtown', 'Fruitvale'] },
-  NATURAL_DISASTER: { impact: -25, duration: 8, sectors: ['all'], neighborhoods: ['all'] },
-  MAJOR_LAYOFFS: { impact: -15, duration: 10, sectors: ['tech', 'services', 'retail'], neighborhoods: ['Downtown', 'Rockridge'] },
-  INFRASTRUCTURE_FAILURE: { impact: -10, duration: 6, sectors: ['transit', 'retail'], neighborhoods: ['West Oakland', 'Downtown'] },
-  HEALTH_CRISIS: { impact: -12, duration: 8, sectors: ['healthcare', 'retail', 'food'], neighborhoods: ['Temescal', 'Fruitvale'] },
+  FACTORY_CLOSURE: { impact: -20, duration: 12, sectors: ['manufacturing', 'retail'] },
+  CRIME_SPIKE: { impact: -8, duration: 4, sectors: ['retail', 'entertainment', 'tourism'] },
+  NATURAL_DISASTER: { impact: -25, duration: 8, sectors: ['all'] },
+  MAJOR_LAYOFFS: { impact: -15, duration: 10, sectors: ['tech', 'services', 'retail'] },
+  INFRASTRUCTURE_FAILURE: { impact: -10, duration: 6, sectors: ['transit', 'retail'] },
+  HEALTH_CRISIS: { impact: -12, duration: 8, sectors: ['healthcare', 'retail', 'food'] },
   
   // Calendar triggers
-  HOLIDAY_SHOPPING: { impact: 18, duration: 4, sectors: ['retail', 'food', 'services'], neighborhoods: ['all'] },
-  FESTIVAL_TOURISM: { impact: 12, duration: 2, sectors: ['entertainment', 'food', 'retail', 'tourism'], neighborhoods: ['Downtown', 'Jack London'] },
-  PLAYOFF_SPENDING: { impact: 8, duration: 3, sectors: ['entertainment', 'food', 'retail'], neighborhoods: ['Jack London', 'Downtown'] },
-  CHAMPIONSHIP_BOOM: { impact: 15, duration: 3, sectors: ['entertainment', 'food', 'retail', 'merchandise'], neighborhoods: ['Jack London', 'Downtown'] },
-  ARTS_DISTRICT_BOOST: { impact: 6, duration: 1, sectors: ['arts', 'entertainment', 'food'], neighborhoods: ['Temescal', 'Jack London'] },
-  LOCAL_PRIDE_BOOST: { impact: 5, duration: 2, sectors: ['retail', 'food', 'local'], neighborhoods: ['all'] },
-  SUMMER_TOURISM: { impact: 7, duration: 8, sectors: ['tourism', 'entertainment', 'food'], neighborhoods: ['Jack London', 'Lake Merritt'] },
-  CULTURAL_CELEBRATION: { impact: 10, duration: 2, sectors: ['food', 'retail', 'entertainment'], neighborhoods: [] },
-  WINTER_DOLDRUMS: { impact: -4, duration: 6, sectors: ['retail', 'entertainment'], neighborhoods: ['all'] },
+  HOLIDAY_SHOPPING: { impact: 18, duration: 4, sectors: ['retail', 'food', 'services'] },
+  FESTIVAL_TOURISM: { impact: 12, duration: 2, sectors: ['entertainment', 'food', 'retail', 'tourism'] },
+  PLAYOFF_SPENDING: { impact: 8, duration: 3, sectors: ['entertainment', 'food', 'retail'] },
+  CHAMPIONSHIP_BOOM: { impact: 15, duration: 3, sectors: ['entertainment', 'food', 'retail', 'merchandise'] },
+  ARTS_DISTRICT_BOOST: { impact: 6, duration: 1, sectors: ['arts', 'entertainment', 'food'] },
+  LOCAL_PRIDE_BOOST: { impact: 5, duration: 2, sectors: ['retail', 'food', 'local'] },
+  SUMMER_TOURISM: { impact: 7, duration: 8, sectors: ['tourism', 'entertainment', 'food'] },
+  CULTURAL_CELEBRATION: { impact: 10, duration: 2, sectors: ['food', 'retail', 'entertainment'] },
+  WINTER_DOLDRUMS: { impact: -4, duration: 6, sectors: ['retail', 'entertainment'] },
   
   // v2.2: Migration-triggered
-  POPULATION_SURGE: { impact: 8, duration: 4, sectors: ['housing', 'retail', 'services'], neighborhoods: ['all'] },
-  POPULATION_EXODUS: { impact: -10, duration: 5, sectors: ['retail', 'services', 'housing'], neighborhoods: ['all'] },
-  WORKFORCE_GROWTH: { impact: 6, duration: 3, sectors: ['business', 'services'], neighborhoods: ['Downtown', 'Rockridge'] },
-  WORKFORCE_DECLINE: { impact: -8, duration: 4, sectors: ['business', 'services'], neighborhoods: ['Downtown', 'West Oakland'] },
+  POPULATION_SURGE: { impact: 8, duration: 4, sectors: ['housing', 'retail', 'services'] },
+  POPULATION_EXODUS: { impact: -10, duration: 5, sectors: ['retail', 'services', 'housing'] },
+  WORKFORCE_GROWTH: { impact: 6, duration: 3, sectors: ['business', 'services'] },
+  WORKFORCE_DECLINE: { impact: -8, duration: 4, sectors: ['business', 'services'] },
 
   // v2.5: Business-specific triggers from Career Engine v2.4 businessDeltas
-  BUSINESS_CONTRACTION: { impact: -8, duration: 4, sectors: ['services', 'retail'], neighborhoods: [] },
-  BUSINESS_EXPANSION: { impact: 5, duration: 3, sectors: ['services', 'business'], neighborhoods: [] }
+  BUSINESS_CONTRACTION: { impact: -8, duration: 4, sectors: ['services', 'retail'] },
+  BUSINESS_EXPANSION: { impact: 5, duration: 3, sectors: ['services', 'business'] }
 };
 
 // engine.131 T7 — ripple types whose geography follows the stadium.
@@ -129,14 +137,39 @@ var EMPLOYER_CHARACTER_SECTORS_ = {
 };
 var DEFAULT_SECTORS_ = ['retail', 'services', 'community'];
 
-var HOLIDAY_ECONOMIC_ZONES = {
-  'OaklandPride': ['Downtown', 'Lake Merritt', 'Grand Lake', 'Jack London'],
-  'ArtSoulFestival': ['Downtown', 'Jack London'],
-  'LunarNewYear': ['Chinatown', 'Downtown'],
-  'CincoDeMayo': ['Fruitvale'],
-  'DiaDeMuertos': ['Fruitvale'],
-  'Juneteenth': ['West Oakland', 'Downtown']
-};
+// engine.240: HOLIDAY_ECONOMIC_ZONES (a code copy of which hoods a holiday draws to) is gone —
+// that is Neighborhood_Map.Scenes (`<Holiday>:weight`, authored canon, engine.148 P3), the same
+// tags the evening crowd reads. sceneHoods_ returns them heaviest first.
+function sceneHoods_(ctx, tag) {
+  var S = ctx && ctx.summary;
+  if (!tag || !S || !S.canonHoods || !S.canonHoods.scenes || typeof hoodsWithScene_ !== 'function') return [];
+  var rows = hoodsWithScene_(ctx, tag).slice();
+  rows.sort(function(x, y) { return y[1] - x[1]; });
+  var out = [];
+  for (var i = 0; i < rows.length; i++) out.push(rows[i][0]);
+  return out;
+}
+
+// engine.240: the hood a set of job moves actually happened in — the business hood with the most
+// jobs moved in `field` ('lost' / 'gained'), via the Business_Ledger lookup + the child→parent
+// fold. '' when none resolve (the ripple is then citywide — no invented location).
+function hoodOfJobMoves_(ctx, field) {
+  var S = ctx.summary || {};
+  var deltas = (S.careerSignals && S.careerSignals.businessDeltas) || {};
+  var bizLookup = S._bizLookup || {};
+  var byHood = {}, best = '', bestN = 0;
+  for (var id in deltas) {
+    if (!deltas.hasOwnProperty(id)) continue;
+    var n = Number(deltas[id] && deltas[id][field]) || 0;
+    var biz = bizLookup[id];
+    if (!n || !biz || !biz.neighborhood) continue;
+    var h = mapToCanonicalNeighborhood_(biz.neighborhood, ctx);
+    if (!h) continue;
+    byHood[h] = (byHood[h] || 0) + n;
+    if (byHood[h] > bestN) { bestN = byHood[h]; best = h; }
+  }
+  return best;
+}
 
 var SHOPPING_HOLIDAYS = ['Thanksgiving', 'Holiday', 'BlackFriday'];
 var FESTIVAL_HOLIDAYS = ['OaklandPride', 'ArtSoulFestival', 'Independence'];
@@ -298,7 +331,7 @@ function detectMigrationRipples_(ctx, currentCycle) {
       { description: 'Population influx boosting local economy' }, '', cal);
   } else if (prevMig >= 20) {
     createRipple_(S, 'WORKFORCE_GROWTH', currentCycle, 
-      { description: 'Growing workforce expanding business activity' }, 'Downtown', cal);
+      { description: 'Growing workforce expanding business activity' }, '', cal);   // engine.240: citywide (was a 'Downtown' literal)
   }
   
   // Population exodus (high negative migration)
@@ -307,7 +340,7 @@ function detectMigrationRipples_(ctx, currentCycle) {
       { description: 'Population decline impacting local businesses' }, '', cal);
   } else if (prevMig <= -20) {
     createRipple_(S, 'WORKFORCE_DECLINE', currentCycle, 
-      { description: 'Shrinking workforce affecting business climate' }, 'Downtown', cal);
+      { description: 'Shrinking workforce affecting business climate' }, '', cal);   // engine.240: citywide (was a 'Downtown' literal)
   }
 }
 
@@ -326,7 +359,7 @@ function detectCareerRipples_(ctx, currentCycle) {
   var layoffs = careerSignals.layoffs || 0;
   if (layoffs >= 3) {
     createRipple_(S, 'MAJOR_LAYOFFS', currentCycle,
-      { description: 'Multiple layoffs reported across industries' }, 'Downtown', cal);
+      { description: 'Multiple layoffs reported across industries' }, hoodOfJobMoves_(ctx, 'lost'), cal);   // engine.240: where the jobs were lost
   }
 
   // WORKFORCE_GROWTH: triggered by high promotion rate
@@ -334,7 +367,7 @@ function detectCareerRipples_(ctx, currentCycle) {
   var promotions = careerSignals.promotions || 0;
   if (promotions >= 4) {
     createRipple_(S, 'WORKFORCE_GROWTH', currentCycle,
-      { description: 'Career advancement activity signals strong job market' }, 'Downtown', cal);
+      { description: 'Career advancement activity signals strong job market' }, hoodOfJobMoves_(ctx, 'gained'), cal);   // engine.240: where the jobs were added
   }
 
   // Sector shifts can indicate economic churn
@@ -416,25 +449,28 @@ function detectCalendarRipples_(ctx, currentCycle) {
   }
   
   // Festival tourism
+  // engine.240: festival / celebration / cultural ripples land on the hoods the holiday's authored
+  // Scenes name (heaviest first = primary), spread over all of them.
+  var festHoods = sceneHoods_(ctx, cal.holiday);
   if (FESTIVAL_HOLIDAYS.indexOf(cal.holiday) >= 0) {
-    createRipple_(S, 'FESTIVAL_TOURISM', currentCycle, 
-      { description: cal.holiday + ' festival tourism' }, 'Downtown', cal);
+    var fr = createRipple_(S, 'FESTIVAL_TOURISM', currentCycle, 
+      { description: cal.holiday + ' festival tourism' }, festHoods[0] || '', cal);
+    if (fr && festHoods.length) fr.neighborhoods = festHoods.slice();
   }
   
   if (cal.holidayPriority === 'oakland' && FESTIVAL_HOLIDAYS.indexOf(cal.holiday) < 0) {
-    var zones = HOLIDAY_ECONOMIC_ZONES[cal.holiday] || ['Downtown'];
-    createRipple_(S, 'FESTIVAL_TOURISM', currentCycle, 
-      { description: cal.holiday + ' celebration tourism' }, zones[0], cal);
+    var fr2 = createRipple_(S, 'FESTIVAL_TOURISM', currentCycle, 
+      { description: cal.holiday + ' celebration tourism' }, festHoods[0] || '', cal);
+    if (fr2 && festHoods.length) fr2.neighborhoods = festHoods.slice();
   }
   
   // Cultural celebrations
   var culturalHolidays = ['LunarNewYear', 'CincoDeMayo', 'DiaDeMuertos', 'Juneteenth'];
   if (culturalHolidays.indexOf(cal.holiday) >= 0) {
-    var cZones = HOLIDAY_ECONOMIC_ZONES[cal.holiday] || ['Downtown'];
     var ripple = createRipple_(S, 'CULTURAL_CELEBRATION', currentCycle, 
-      { description: cal.holiday + ' economic activity' }, cZones[0], cal);
-    if (ripple) {
-      ripple.neighborhoods = cZones;
+      { description: cal.holiday + ' economic activity' }, festHoods[0] || '', cal);
+    if (ripple && festHoods.length) {
+      ripple.neighborhoods = festHoods.slice();
     }
   }
   
@@ -454,8 +490,10 @@ function detectCalendarRipples_(ctx, currentCycle) {
   
   // First Friday
   if (cal.isFirstFriday) {
-    createRipple_(S, 'ARTS_DISTRICT_BOOST', currentCycle, 
-      { description: 'First Friday arts district activity' }, 'Temescal', cal);
+    var ffHoods = sceneHoods_(ctx, 'FirstFriday');   // engine.240: the authored First Friday hoods (was a 'Temescal' literal)
+    var ffr = createRipple_(S, 'ARTS_DISTRICT_BOOST', currentCycle, 
+      { description: 'First Friday arts district activity' }, ffHoods[0] || '', cal);
+    if (ffr && ffHoods.length) ffr.neighborhoods = ffHoods.slice();
   }
   
   // Creation Day
@@ -476,7 +514,7 @@ function detectCalendarRipples_(ctx, currentCycle) {
     }
     if (!summerExists) {
       createRipple_(S, 'SUMMER_TOURISM', currentCycle, 
-        { description: 'Summer tourism season' }, 'Jack London', cal);
+        { description: 'Summer tourism season' }, '', cal);   // engine.240: citywide (was a 'Jack London' literal)
     }
   }
   
@@ -629,12 +667,15 @@ function createRipple_(S, triggerType, cycle, sourceEvent, eventNeighborhood, ca
     if (S.economicRipples[i] && S.economicRipples[i].id === rippleId) return null;
   }
   
-  var neighborhood = eventNeighborhood || '';
-  if (!neighborhood && trigger.neighborhoods && trigger.neighborhoods.length > 0 &&
-      trigger.neighborhoods[0] !== 'all') {
-    if (typeof S._rng !== 'function') throw new Error('economicRippleEngine.createRipple_: S._rng required (Phase 40.3 Path 1)');
-    var _rng = S._rng;
-    neighborhood = trigger.neighborhoods[Math.floor(_rng() * trigger.neighborhoods.length)];
+  // engine.240: the ripple's geography is its event's — the hood it happened in plus that hood's
+  // canon neighbours (S.neighborhoodAdjacency, Phase1-CanonHoods). No hood, or 'all': citywide,
+  // no primary. The random draw from a template list is gone (so is its rng draw).
+  var neighborhood = (eventNeighborhood && eventNeighborhood !== 'all') ? eventNeighborhood : '';
+  var spread = ['all'];
+  if (neighborhood) {
+    spread = [neighborhood];
+    var adj = (S.neighborhoodAdjacency && S.neighborhoodAdjacency[neighborhood]) || [];
+    for (var ai = 0; ai < adj.length; ai++) if (spread.indexOf(adj[ai]) < 0) spread.push(adj[ai]);
   }
   
   var impact = trigger.impact;
@@ -661,7 +702,7 @@ function createRipple_(S, triggerType, cycle, sourceEvent, eventNeighborhood, ca
     // and means the two-district changeover window works without editing templates.
     neighborhoods: SPORTS_TRIGGER_TYPES_[triggerType] && cal && cal.sportsZones && cal.sportsZones.length
       ? cal.sportsZones.slice()
-      : trigger.neighborhoods,
+      : spread,
     primaryNeighborhood: neighborhood,
     startCycle: cycle,
     endCycle: cycle + trigger.duration,
@@ -898,7 +939,7 @@ function calculateNeighborhoodEconomies_(ctx) {
   var baseMood = S.economicMood || 50;
   
   var nhEconomies = {};
-  var holidayZones = HOLIDAY_ECONOMIC_ZONES[cal.holiday] || [];
+  var holidayZones = sceneHoods_(ctx, cal.holiday);   // engine.240: authored Scenes
   var sportsZones = cal.sportsZones || [];
   var hoodState = S.neighborhoodState || {};
 

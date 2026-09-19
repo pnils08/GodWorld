@@ -2,7 +2,7 @@
   "generated": "2026-09-19",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 184,
-  "functionsMapped": 1412,
+  "functionsMapped": 1415,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -1959,6 +1959,7 @@
         "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
         "phase02-world-state/applyCityDynamics.js::getNeighborhoodDynamics_",
         "phase03-population/updateCrimeMetrics.js::updateCrimeMetrics_Phase3_",
+        "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
         "phase08-v3-chicago/v3NeighborhoodWriter.js::saveV3NeighborhoodMap_",
         "phase09-digest/finalizeCycleState.js::finalizeCycleState_",
         "phase10-persistence/buildCyclePacket.js::buildCyclePacket_"
@@ -2619,6 +2620,7 @@
         "phase07-evening-media/applyStorySeeds.js::generateAngle_"
       ],
       "readers": [
+        "phase03-population/updateCrimeMetrics.js::deriveReportingSignal_",
         "phase03-population/updateNeighborhoodDemographics.js::buildHoodIllnessWeights_",
         "phase03-population/updateNeighborhoodDemographics.js::driftNeighborhoodEducation_",
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",

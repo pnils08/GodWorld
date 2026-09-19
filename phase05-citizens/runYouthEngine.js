@@ -365,15 +365,17 @@ function runYouthEngine_(ctx) {
   var season = S.season || 'spring';
 
   // v1.1: Get crimeMetrics context for QoL awareness
-  var crimeMetrics = S.crimeMetrics || {};
-  var neighborhoodCrime = crimeMetrics.neighborhoodBreakdown || {};
-  var crimeHotspots = crimeMetrics.hotspots || [];
+  // engine.237: read the crime reader contract — neighborhoodBreakdown / a city qualityOfLifeIndex
+  // were never written, and hotspots are objects (indexOf a hood name was always -1).
+  var crimeCtx = (S.crimeMetrics && S.crimeMetrics.context) || { city: {}, byHood: {} };
+  var neighborhoodCrime = crimeCtx.byHood || {};
+  var crimeHotspots = crimeCtx.city.hotspotHoods || [];
 
   function getNeighborhoodQoL_(nh) {
     if (neighborhoodCrime[nh] && typeof neighborhoodCrime[nh].qualityOfLifeIndex === 'number') {
       return neighborhoodCrime[nh].qualityOfLifeIndex;
     }
-    return crimeMetrics.qualityOfLifeIndex || 0.5;
+    return 0.5;
   }
 
   // Get demographics for youth populations

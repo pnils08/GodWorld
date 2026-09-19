@@ -215,5 +215,112 @@ console.log('═══ 8 — 200 live-shaped cycles: no ratchet, no pins, hoods 
     (() => { const s2 = sandbox(); const a = runCycle(s2, liveRows(), 107, { demo: flatDemo, worldEvents: [{ domain: 'SAFETY', neighborhood: 'Dimond' }] }, () => 0.5).written;
       const b = runCycle(s2, liveRows(), 107, { demo: flatDemo }, () => 0.5).written; return a['Dimond'].propertyLevel > b['Dimond'].propertyLevel && a['Laurel'].propertyLevel === b['Laurel'].propertyLevel; })());
 }
+
+// ── 9. engine.237 — hotspots are relative to the city's own median, and they spill ────────────
+console.log('═══ 9 — hotspots fire on the live range (the absolute 70 never did) and spill into neighbours');
+{
+  const sb = sandbox();
+  const rows = liveRows();
+  const hs = sb.calculateCrimeHotspots_(rows, {}).map(h => h.neighborhood);
+  check('9a live C106 hotspots are the three hoods 1.25× over the median score: ' + hs.join(', '),
+    hs.length === 3 && ['Downtown', 'West Oakland', 'East Oakland'].every(h => hs.indexOf(h) >= 0), JSON.stringify(hs));
+  const adj = { 'Downtown': ['Chinatown', 'Uptown'] };
+  const p = sb.computeHotspotPressure_(rows, adj, NM);
+  check('9b a hotspot spills pressure onto its neighbours (Chinatown ' + p['Chinatown'] + ')', p['Chinatown'] > 0 && p['Uptown'] > 0 && p['Laurel'] === 0, JSON.stringify(p));
+  const stale = Object.assign({}, rows, { Montclair: { neighborhood: 'Montclair', propertyCrimeIndex: 95, violentCrimeIndex: 95 } });
+  const p2 = sb.computeHotspotPressure_(stale, { Montclair: ['Laurel'] }, NM);
+  check('9c a stale row off the map never spills into a real hood', p2['Laurel'] === 0, JSON.stringify(p2['Laurel']));
+  check('9d the two passes score one way (QoL is not persisted, so it is not in the score)',
+    sb.crimeHotspotScore_({ propertyCrimeIndex: 40, violentCrimeIndex: 20, qualityOfLifeIndex: 90 }) === 40);
+}
+
+// ── 10. engine.237 — police capacity is sized to the city; clearance leaves the floor ─────────
+console.log('═══ 10 — capacity scales with the map; clearance reads the cycle, it does not ratchet');
+{
+  const cap = (n) => { const sb = sandbox(); return sb.derivePolicingCapacity_({}, n).unitsCity; };
+  check('10a 22 hoods → 66 units (3 a hood, the 36-for-12 design ratio)', cap(22) === 66 && cap(12) === 36, String(cap(22)));
+  const sb0 = sandbox();
+  check('10b live C107 incidents (152) against 66 units read load 0.81, not the 1.0 clamp',
+    Math.abs(sb0.computeCityEnforcementLoad_(sb0.derivePolicingCapacity_({}, 22), 152).loadRatio - 0.81) < 0.01);
+  // from the live C107 state: every hood on the 0.15 floor, 7 incidents a hood (152 / 22)
+  const sb = sandbox(); let rows = liveRows();
+  NM.forEach(h => { rows[h].clearanceRate = 0.15; rows[h].incidentCount = 7; });
+  const rng = makeRng(107);
+  const traj = [];
+  let floorHits = 0, ceilHits = 0, n = 0;
+  for (let c = 108; c < 308; c++) {
+    rows = runCycle(sb, rows, c, { demo: flatDemo }, rng).next;
+    traj.push(NM.reduce((a, h) => a + rows[h].clearanceRate, 0) / NM.length);
+    NM.forEach(h => { n++; if (rows[h].clearanceRate <= 0.15) floorHits++; if (rows[h].clearanceRate >= 0.7) ceilHits++; });
+  }
+  check('10c three cycles off the live floor the city mean clearance has climbed (' + traj[2].toFixed(3) + ' > 0.17)', traj[2] > 0.17, traj.slice(0, 3).map(x => x.toFixed(3)).join(' '));
+  check('10d over 200 cycles clearance is not pinned: floor ' + floorHits + ' / ceiling ' + ceilHits + ' of ' + n + ' hood-cycles',
+    floorHits / n < 0.05 && ceilHits === 0, JSON.stringify({ floorHits, ceilHits, n }));
+  const late = NM.map(h => rows[h].clearanceRate);
+  check('10e hoods differ by their own response profile (spread ' + (Math.max(...late) - Math.min(...late)).toFixed(2) + ' ≥ 0.04)',
+    Math.max(...late) - Math.min(...late) >= 0.04, JSON.stringify(late));
+  const r1 = runCycle(sandbox(), (() => { const x = liveRows(); NM.forEach(h => { x[h].clearanceRate = 0.25; x[h].incidentCount = 3; }); return x; })(), 108, { demo: flatDemo }, () => 0.5).written;
+  const r2 = runCycle(sandbox(), (() => { const x = liveRows(); NM.forEach(h => { x[h].clearanceRate = 0.25; x[h].incidentCount = 12; }); return x; })(), 108, { demo: flatDemo }, () => 0.5).written;
+  check('10f a heavier load cycle clears less than a light one (Downtown ' + r2['Downtown'].clearanceRate + ' < ' + r1['Downtown'].clearanceRate + ')',
+    r2['Downtown'].clearanceRate < r1['Downtown'].clearanceRate);
+}
+
+// ── 11. engine.237 — the reader contract: S.crimeMetrics.context ─────────────────────────────
+console.log('═══ 11 — S.crimeMetrics.context: the bands the readers compare against, on the live range');
+{
+  const sb = sandbox();
+  const r = runCycle(sb, liveRows(), 107, { demo: flatDemo }, makeRng(5));
+  const cx = r.ctx.summary.crimeMetrics.context;
+  const by = cx.byHood;
+  check('11a every simulated hood has a context row', NM.every(h => by[h] && isFinite(by[h].qualityOfLifeIndex)), Object.keys(by).length + ' rows');
+  check('11b QoL is on the readers\' 0–1 scale, higher = safer (Downtown ' + by['Downtown'].qualityOfLifeIndex + ' < Piedmont Ave ' + by['Piedmont Ave'].qualityOfLifeIndex + ')',
+    by['Downtown'].qualityOfLifeIndex < by['Piedmont Ave'].qualityOfLifeIndex && NM.every(h => by[h].qualityOfLifeIndex >= 0.05 && by[h].qualityOfLifeIndex <= 0.95));
+  const low = NM.filter(h => by[h].qualityOfLifeIndex <= 0.35), high = NM.filter(h => by[h].qualityOfLifeIndex >= 0.65);
+  check('11c BOTH reader bands fire on the live range — low QoL: ' + low.join(', ') + ' | high: ' + high.join(', '), low.length >= 2 && high.length >= 1);
+  check('11d crimeLevel agrees with the QoL band (high ⇔ ≤ 0.35)', NM.every(h => (by[h].crimeLevel === 'high') === (by[h].qualityOfLifeIndex <= 0.35)));
+  check('11e isHotspot ⇔ on the hotspot list; city.hotspotHoods are NAMES a reader can indexOf',
+    cx.city.hotspotHoods.every(h => typeof h === 'string' && by[h].isHotspot) && NM.filter(h => by[h].isHotspot).length === cx.city.hotspotHoods.length);
+  check('11f city fields present on the reader scale', isFinite(cx.city.qualityOfLifeIndex) && isFinite(cx.city.incidentTrend) && isFinite(cx.city.enforcementCapacity)
+    && typeof cx.city.patrolStrategy === 'string' && cx.city.trueIncidentCount >= 0, JSON.stringify(cx.city));
+  const rows = liveRows(); NM.forEach(h => { rows[h].incidentCount = 3; });   // a quiet last cycle
+  const surge = runCycle(sandbox(), rows, 107, { demo: flatDemo, chaos: 6 }, makeRng(6)).ctx.summary.crimeMetrics.context.city;
+  check('11g incidents well up on last cycle read as a city QoL concern (trend ' + surge.incidentTrend + ' → QoL ' + surge.qualityOfLifeIndex + ' < 0.4)',
+    surge.incidentTrend > 1.2 && surge.qualityOfLifeIndex < 0.4, JSON.stringify(surge));
+}
+
+{
+  const sbT = sandbox(); const m = liveRows();
+  const shifts = [{ neighborhood: 'Downtown', metric: 'violentCrime', direction: 'increase' }, { neighborhood: 'Laurel', metric: 'propertyCrime', direction: 'decrease' },
+    { neighborhood: 'Dimond', metric: 'responseTime', direction: 'slower' }];
+  const t = sbT.buildCrimeReaderContext_(m, [], { totalIncidents: 110 }, {}, 110, { unitsCity: 66, strength: 1 }, { name: 'balanced' }, shifts).byHood;
+  check('11h the engine\'s own shifts set the hood trend (Downtown ' + t['Downtown'].trend + ', Laurel ' + t['Laurel'].trend + ', Dimond ' + t['Dimond'].trend + ' — response shifts are not crime)',
+    t['Downtown'].trend === 'rising' && t['Laurel'].trend === 'falling' && t['Dimond'].trend === 'steady');
+  const cx = runCycle(sandbox(), liveRows(), 107, { demo: flatDemo }, makeRng(8)).ctx.summary.crimeMetrics.context;
+  check('11i steady hoods read "steady" or "falling", never undefined', NM.every(h => ['rising', 'falling', 'steady'].indexOf(cx.byHood[h].trend) >= 0));
+  check('11j reportingGap is measured from the engine base (finite, |gap| < 0.5): ' + cx.city.reportingGap, isFinite(cx.city.reportingGap) && Math.abs(cx.city.reportingGap) < 0.5);
+}
+
+// ── 12. engine.237 — no reader reads the v1.2 names the writer never emitted ─────────────────
+console.log('═══ 12 — contract guard: the dead v1.2 crime names stay dead; the packet reads the writer\'s keys');
+{
+  const dirs = fs.readdirSync(ROOT).filter(d => /^phase\d\d/.test(d) || d === 'utilities');
+  const files = [];
+  dirs.forEach(d => fs.readdirSync(path.join(ROOT, d)).filter(f => f.endsWith('.js')).forEach(f => files.push(path.join(d, f))));
+  const DEAD = [/crimeMetrics\.neighborhoodBreakdown/, /crimeMetrics\.qualityOfLifeIndex/, /crimeMetrics\.patrolStrategy/,
+    /crimeMetrics\.enforcementCapacity/, /crimeMetrics\.(true|reported)IncidentCount/, /crimeMetrics\.hotspots\s*\|\|/];
+  const hits = [];
+  files.forEach(f => fs.readFileSync(path.join(ROOT, f), 'utf8').split('\n').forEach((line, i) => {
+    const code = line.replace(/\/\/.*$/, '');
+    if (/^\s*\*/.test(line)) return;                       // JSDoc
+    DEAD.forEach(re => { if (re.test(code)) hits.push(f + ':' + (i + 1)); });
+  }));
+  check('12a no engine file reads a never-written v1.2 crime field (' + files.length + ' files scanned)', hits.length === 0, hits.join(', '));
+  const sb = sandbox();
+  const keys = Object.keys(sb.calculateCityWideFromMap_({ A: { propertyCrimeIndex: 1, violentCrimeIndex: 1, responseTimeAvg: 1, clearanceRate: 0.2, incidentCount: 1 } }));
+  const pkt = fs.readFileSync(path.join(ROOT, 'phase10-persistence/buildCyclePacket.js'), 'utf8');
+  const read = (pkt.match(/crimeCity\.([A-Za-z]+)/g) || []).map(x => x.split('.')[1]);
+  check('12b every crimeCity.<key> the cycle packet prints is a key calculateCityWideFromMap_ returns (' + read.join(', ') + ')',
+    read.length === 5 && read.every(k => keys.indexOf(k) >= 0), JSON.stringify({ read, keys }));
+}
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

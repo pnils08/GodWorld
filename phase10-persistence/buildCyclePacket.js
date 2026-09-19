@@ -504,19 +504,23 @@ function buildCyclePacket_(ctx) {
   var crime = S.crimeMetrics || {};
   var crimeCity = crime.cityWide || {};
   if (crime.updated) {
+    // engine.237: calculateCityWideFromMap_ has returned avgPropertyCrime / avgViolentCrime /
+    // totalIncidents / avgResponseTime / avgClearanceRate since 2026-01-26; this block (v3.9,
+    // 2026-03-16) read property / violent / incidents / response / clearance and printed 0 for all
+    // five every cycle since — the desk packets' crime snapshot (buildDeskPackets.js) was zeros.
     lines.push('--- CRIME SNAPSHOT ---');
-    lines.push('PropertyCrime: ' + round2(crimeCity.property || 0));
-    lines.push('ViolentCrime: ' + round2(crimeCity.violent || 0));
-    lines.push('Incidents: ' + round2(crimeCity.incidents || 0));
-    lines.push('ResponseTime: ' + round2(crimeCity.response || 0) + 'min');
-    lines.push('ClearanceRate: ' + round2(crimeCity.clearance || 0));
+    lines.push('PropertyCrime: ' + round2(crimeCity.avgPropertyCrime || 0));
+    lines.push('ViolentCrime: ' + round2(crimeCity.avgViolentCrime || 0));
+    lines.push('Incidents: ' + round2(crimeCity.totalIncidents || 0));
+    lines.push('ResponseTime: ' + round2(crimeCity.avgResponseTime || 0) + 'min');
+    lines.push('ClearanceRate: ' + round2(crimeCity.avgClearanceRate || 0));
 
     var hotspots2 = crime.hotspots || [];
     if (hotspots2.length > 0) {
       var hotNames = [];
       for (var hi2 = 0; hi2 < Math.min(hotspots2.length, 4); hi2++) {
         var hs = hotspots2[hi2];
-        hotNames.push((hs.neighborhood || hs.name || 'unknown') + ' (' + (hs.reason || hs.type || 'elevated') + ')');
+        hotNames.push((hs.neighborhood || hs.name || 'unknown') + ' (score ' + (hs.score || '?') + ')');
       }
       lines.push('Hotspots: ' + hotNames.join(', '));
     }

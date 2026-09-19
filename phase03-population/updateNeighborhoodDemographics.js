@@ -357,7 +357,10 @@ function buildHoodIllnessWeights_(ctx, S, demographics) {
   var byHood = {};
   var weightedSum = 0, popSum = 0;
   var wEvts = S.weatherEvents || [];
-  var qolMap = S.crimeMetrics && S.crimeMetrics.neighborhoodBreakdown;
+  // engine.237: the crime reader contract (0–1, higher = safer). neighborhoodBreakdown was never
+  // written, and its /100 fallback below read the crime layer's DISORDER index as a quality score —
+  // inverted: the roughest hood would have read as the healthiest.
+  var qolMap = S.crimeMetrics && S.crimeMetrics.context && S.crimeMetrics.context.byHood;
   for (hood in demographics) {
     if (!demographics.hasOwnProperty(hood)) continue;
     var dd = demographics[hood];
@@ -381,9 +384,8 @@ function buildHoodIllnessWeights_(ctx, S, demographics) {
       else if (ev.type === 'flood_conditions' || ev.type === 'storm') event += 0.15;
     }
     var nbQoL = qolMap && qolMap[hood];
-    if (nbQoL && nbQoL.qualityOfLifeIndex !== undefined) {
-      var qol = Number(nbQoL.qualityOfLifeIndex);
-      if (qol > 1) qol = qol / 100; // metrics layer is 5-95 scale
+    if (nbQoL && typeof nbQoL.qualityOfLifeIndex === 'number') {
+      var qol = nbQoL.qualityOfLifeIndex;
       if (qol <= 0.35) event += 0.10;
       else if (qol >= 0.65) event -= 0.10;
     }

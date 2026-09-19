@@ -76,7 +76,8 @@ function generateMediaModeEvents_(ctx) {
   var dynamics = S.cityDynamics || { sentiment: 0, culturalActivity: 1, communityEngagement: 1 };
   var sentiment = dynamics.sentiment || 0;
   var civicLoad = S.civicLoad || "normal";
-  var crimeMetrics = S.crimeMetrics || {};
+  // engine.237: the crime reader contract — the city qualityOfLifeIndex read below was never written.
+  var crimeCity = (S.crimeMetrics && S.crimeMetrics.context && S.crimeMetrics.context.city) || {};
   var holiday = S.holiday || "none";
   var holidayPriority = S.holidayPriority || "none";
   var sportsSeason = S.sportsSeason || "off-season";
@@ -195,7 +196,7 @@ function generateMediaModeEvents_(ctx) {
     }
 
     // Crime beat
-    var qol = crimeMetrics.qualityOfLifeIndex || 0.5;
+    var qol = crimeCity.qualityOfLifeIndex || 0.5;
     if (qol < 0.4) {
       pool.push(ev("worked the public safety beat, talking to residents about what changed", ["media:reporter", "type:crime"], "Media"));
     }

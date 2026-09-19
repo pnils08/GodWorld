@@ -384,35 +384,31 @@ function generateCitizensEvents_(ctx) {
   // =========================================================================
   // v2.6: CRIME METRICS CONTEXT (from updateCrimeMetrics v1.2)
   // =========================================================================
-  var crimeMetrics = S.crimeMetrics || {};
-  var cityQoL = crimeMetrics.qualityOfLifeIndex || 0.5;
-  var patrolStrategy = crimeMetrics.patrolStrategy || 'balanced';
-  var enforcementCapacity = crimeMetrics.enforcementCapacity || 1.0;
-  var crimeHotspots = crimeMetrics.hotspots || [];
-  var neighborhoodCrime = crimeMetrics.neighborhoodBreakdown || {};
+  // engine.237: the crime reader contract (updateCrimeMetrics.js buildCrimeReaderContext_). The v1.2
+  // names read here before (neighborhoodBreakdown, a city qualityOfLifeIndex, top-level
+  // patrolStrategy / enforcementCapacity, hotspots as strings) were never written — every citizen
+  // read QoL 0.5, no hotspot, balanced patrol, full capacity, every cycle.
+  var crimeCtx = (S.crimeMetrics && S.crimeMetrics.context) || { city: {}, byHood: {} };
+  var patrolStrategy = crimeCtx.city.patrolStrategy || 'balanced';
+  var enforcementCapacity = crimeCtx.city.enforcementCapacity || 1.0;
+  var crimeHotspots = crimeCtx.city.hotspotHoods || [];
+  var neighborhoodCrime = crimeCtx.byHood || {};
 
   // =========================================================================
   // v2.6: NEIGHBORHOOD DYNAMICS ACCESSOR (from applyCityDynamics v2.6)
+  // engine.237: dynamics + the hood's crime context. The dynamics accessor always existed, so the
+  // crime fallback below it never ran and qualityOfLifeIndex was never on the context at all.
   // =========================================================================
   function getNeighborhoodContext_(nh) {
-    // Try accessor function first
-    if (typeof getNeighborhoodDynamics_ === 'function') {
-      return getNeighborhoodDynamics_(ctx, nh);
-    }
-    // Fallback to crimeMetrics neighborhood breakdown
-    if (neighborhoodCrime[nh]) {
-      return {
-        qualityOfLifeIndex: neighborhoodCrime[nh].qualityOfLifeIndex || 0.5,
-        sentiment: dynamics.sentiment || 0,
-        crimeLevel: neighborhoodCrime[nh].crimeLevel || 'moderate'
-      };
-    }
-    // Default
-    return {
-      qualityOfLifeIndex: cityQoL,
-      sentiment: dynamics.sentiment || 0,
-      crimeLevel: 'moderate'
-    };
+    var base = (typeof getNeighborhoodDynamics_ === 'function')
+      ? getNeighborhoodDynamics_(ctx, nh)
+      : { sentiment: dynamics.sentiment || 0 };
+    var out = {};
+    for (var key in base) { if (base.hasOwnProperty(key)) out[key] = base[key]; } // copy — never mutate S.neighborhoodDynamics
+    var crime = neighborhoodCrime[nh];
+    out.qualityOfLifeIndex = crime ? crime.qualityOfLifeIndex : 0.5;
+    out.crimeLevel = crime ? crime.crimeLevel : 'moderate';
+    return out;
   }
 
   // =========================================================================

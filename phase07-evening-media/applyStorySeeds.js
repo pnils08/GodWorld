@@ -225,15 +225,17 @@ function applyStorySeeds_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // CRIME METRICS CONTEXT (v3.6)
   // ═══════════════════════════════════════════════════════════════════════════
-  var crimeMetrics = S.crimeMetrics || {};
-  var qualityOfLifeIndex = crimeMetrics.qualityOfLifeIndex || 0.5;
-  var reportedIncidentCount = crimeMetrics.reportedIncidentCount || 0;
-  var trueIncidentCount = crimeMetrics.trueIncidentCount || 0;
-  var reportingRatio = (trueIncidentCount > 0) ? (reportedIncidentCount / trueIncidentCount) : 1;
-  var patrolStrategy = crimeMetrics.patrolStrategy || 'balanced';
-  var enforcementCapacity = crimeMetrics.enforcementCapacity || 1.0;
-  var crimeHotspots = crimeMetrics.hotspots || [];
-  var neighborhoodCrime = crimeMetrics.neighborhoodBreakdown || {};
+  // engine.237: the crime reader contract (updateCrimeMetrics.js buildCrimeReaderContext_). Every
+  // name read here before was a v1.2 field the writer never emitted — each crime seed below sat on
+  // its default and had never fired.
+  var crimeCtx = (S.crimeMetrics && S.crimeMetrics.context) || { city: {}, byHood: {} };
+  var qualityOfLifeIndex = crimeCtx.city.qualityOfLifeIndex || 0.5;          // city: incidents vs last cycle
+  var trueIncidentCount = crimeCtx.city.trueIncidentCount || 0;
+  var reportingGap = crimeCtx.city.reportingGap || 0;                        // > 0 = under the engine's base rate
+  var patrolStrategy = crimeCtx.city.patrolStrategy || 'balanced';
+  var enforcementCapacity = crimeCtx.city.enforcementCapacity || 1.0;
+  var crimeHotspots = crimeCtx.city.hotspotHoods || [];
+  var neighborhoodCrime = crimeCtx.byHood || {};
 
   // ═══════════════════════════════════════════════════════════════════════════
   // CALENDAR CONTEXT (v3.2)
@@ -1067,13 +1069,14 @@ function applyStorySeeds_(ctx) {
     ));
   }
 
-  // Reporting gap seeds — underreporting angle
-  if (reportingRatio < 0.5 && trueIncidentCount > 10) {
+  // Reporting gap seeds — underreporting angle. engine.237: measured against the engine's own base
+  // rate (0.62) — the old absolute < 0.65 sat above the base and would have fired almost every cycle.
+  if (reportingGap >= 0.12 && trueIncidentCount > 10) {
     seeds.push(makeSeed(
       "Significant gap between reported and actual incidents. Why aren't residents calling it in?",
       'CIVIC', '', 3, 'qol'
     ));
-  } else if (reportingRatio < 0.65 && trueIncidentCount > 5) {
+  } else if (reportingGap >= 0.06 && trueIncidentCount > 5) {
     seeds.push(makeSeed(
       "Underreporting pattern detected. Trust or fatigue? Community voices needed.",
       'CIVIC', '', 2, 'qol'
@@ -1111,7 +1114,9 @@ function applyStorySeeds_(ctx) {
     if (!neighborhoodCrime.hasOwnProperty(nhKey)) continue;
     var nhData = neighborhoodCrime[nhKey];
     var nhQol = nhData.qualityOfLifeIndex || 0.5;
-    if (nhQol <= 0.3) {
+    // engine.237: the crisis needs the hood RISING this cycle — a hood that sits high every cycle is
+    // where it is, not an event (SIM_DOCTRINE §15: start → peak → end, not a standing drumbeat).
+    if (nhQol <= 0.3 && nhData.trend === 'rising') {
       seeds.push(makeSeedWithCitizens_(
         "Quality of life crisis in " + nhKey + ". Noise, disorder, and frustration peak.",
         'CIVIC', nhKey, 3, 'qol'

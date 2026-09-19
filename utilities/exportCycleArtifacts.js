@@ -163,7 +163,10 @@ function buildCycleContextPack_(S, ctx, cycleId) {
   if (chaosEvents >= 2) riskFlags.push("high-tension");
   if (dynamics.sentiment != null && dynamics.sentiment <= -0.35) riskFlags.push("negative-sentiment");
   if (econMood <= 35) riskFlags.push("economic-stress");
-  if (cityCrime && cityCrime.totalIncidents != null && cityCrime.totalIncidents > 80) riskFlags.push("high-incident-volume");
+  // engine.237: incidents well up on last cycle (the crime reader contract's trend). The absolute
+  // > 80 it replaces was set for the 12-hood city — at 22 hoods (116 / 152 live) it flagged every cycle.
+  var crimeTrend = crime.context && crime.context.city ? crime.context.city.incidentTrend : null;
+  if (crimeTrend != null && crimeTrend >= 1.3) riskFlags.push("high-incident-volume");
 
   // conflicts placeholder (you can wire real checks later)
   var conflictsDetected = false;

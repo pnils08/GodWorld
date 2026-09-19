@@ -634,13 +634,20 @@
 - **buildCrimeAdjacencyGraph_(S)**
   Reads: S.neighborhoodAdjacency
 
-- **computeHotspotPressure_(currentMetrics, adjacency)**
+- **crimeHotspotScore_(m)**
+
+- **crimeHotspotThreshold_(metricsMap, hoods)**
+
+- **computeHotspotPressure_(currentMetrics, adjacency, hoods)**
 
 - **calculateCrimeHotspots_(metricsMap, adjacency)**
 
 - **deriveReportingSignal_(input)**
+  Reads: S.crimeMetrics
 
-- **derivePolicingCapacity_(S, cfg, patrolStrategy)**
+- **buildCrimeReaderContext_(metricsMap, hotspots, cityWide, categoryCityWide, prevIncidents, policingCapacity, patrolStrategy, shifts)**
+
+- **derivePolicingCapacity_(cfg, hoodCount)**
 
 - **computeCityEnforcementLoad_(policingCapacity, predictedCityIncidents)**
 
@@ -1553,7 +1560,7 @@
 - **applyGriefPoolWeights_(pool, griefConfig)**
 
 - **generateCitizensEvents_(ctx)**
-  Reads: S.biasIntents, S.citizenEventMemory, S.citizenEvents, S.cityDynamics, S.contentLedger, S.crimeByNeighborhood, S.crimeMetrics, S.cycle, S.cycleActiveCitizens, S.cycleId, S.economicMood, S.eventsGenerated, S.faithEvents, S.faithExposures, S.holiday, S.holidayPriority, S.initiativeEvents, S.isCreationDay, S.isFirstFriday, S.localEntities, S.neighborhoodState, S.neighborhoodWeather, S.previousEvening, S.season, S.sportsFeedEntries, S.sportsSeason, S.sportsSentimentBoost, S.storyHooks, S.templateCooldowns, S.transitState, S.undockedFeedEntries, S.undockedPilots, S.weather, S.worldEvents
+  Reads: S.biasIntents, S.citizenEventMemory, S.citizenEvents, S.cityDynamics, S.contentLedger, S.crimeByNeighborhood, S.crimeMetrics, S.cycle, S.cycleActiveCitizens, S.cycleId, S.economicMood, S.eventsGenerated, S.faithEvents, S.faithExposures, S.holiday, S.holidayPriority, S.initiativeEvents, S.isCreationDay, S.isFirstFriday, S.localEntities, S.neighborhoodDynamics, S.neighborhoodState, S.neighborhoodWeather, S.previousEvening, S.season, S.sportsFeedEntries, S.sportsSeason, S.sportsSentimentBoost, S.storyHooks, S.templateCooldowns, S.transitState, S.undockedFeedEntries, S.undockedPilots, S.weather, S.worldEvents
   Writes: S.biasIntents, S.citizenEventMemory, S.citizenEvents, S.crimeMetrics, S.cycleActiveCitizens, S.eventsGenerated, S.faithExposures, S.householdMoments, S.minorsSkippedTexture, S.storyHooks, S.templateCooldowns
   Config: ctx.config.cycleCount, ctx.config.eclExclusiveMinLines, ctx.config.eclExclusivePools, ctx.config.gcSurfaceChance, ctx.config.hoodFloorSurfaceQuota, ctx.config.rngSeed
   Sheets: Content_Telemetry, Generic_Citizens, LifeHistory_Log
@@ -4071,4 +4078,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 184
-**Functions mapped:** 1412
+**Functions mapped:** 1415

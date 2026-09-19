@@ -21,7 +21,18 @@
  * Signed causes move the level, a slow pull toward the city's own median centres it, transient
  * conditions overlay the observed index. No literal is read on the per-cycle path.
  *
- * @version 1.3 (additive; CRIME_UPDATE_VERSION remains compatible)
+ * v1.4 (engine.237, S470): crime reaches the citizens. (1) S.crimeMetrics.context is the ONE
+ * reader contract — per-hood pressure / QoL (0–1, higher = safer) / level / hotspot, and the
+ * city's incident trend / enforcement headroom / strategy — every band relative to the city's own
+ * middle (SIM_DOCTRINE §15). Ten reader sites read v1.2 field names the writer never emitted and
+ * sat on their defaults every cycle. (2) Hotspots are a ratio of the city median score; the
+ * absolute 70 was never reached (live max 53), so spillover and every hotspot branch were dead.
+ * (3) Police capacity scales with the simulated city (3 units a hood, the 36-for-12 design ratio)
+ * — the flat 36 pinned load at 1.0 once the map grew to 22 hoods. (4) Clearance moves toward the
+ * cycle's own reading instead of compounding the overload penalty onto last cycle's rate, which
+ * ratcheted every hood onto the 0.15 floor by C107.
+ *
+ * @version 1.4 (additive; CRIME_UPDATE_VERSION remains compatible)
  * @tier 6.2
  */
 
@@ -50,7 +61,9 @@ var CRIME_FACTORS = {
 
   RESPONSE_TIME_VARIANCE: 1.5,
 
-  CLEARANCE_DECAY: 0.02,
+  // engine.237: clearance closes this share of the gap to the cycle's own reading each cycle
+  // (replaces the unread CLEARANCE_DECAY). The rate still carries momentum; the penalty no longer compounds.
+  CLEARANCE_ADJUST: 0.5,
   CLEARANCE_RECOVERY: 0.03
 };
 
@@ -77,11 +90,20 @@ var CRIME_ADVANCED = {
   // Spillover / diffusion
   DIFFUSION_RATE: 0.14,
   DISPLACEMENT_RATE: 0.10,
-  HOTSPOT_THRESHOLD: 70,
+  // engine.237: a hotspot is a hood whose score runs this far over the city's own median score
+  // (was an absolute 70 no hood reached — live C106/C107 max 53). Live: Downtown / West Oakland /
+  // East Oakland both cycles.
+  HOTSPOT_RATIO: 1.25,
   HOTSPOT_PRESSURE_CAP: 18,
 
-  // Enforcement capacity
-  BASE_UNITS_CITY: 36,
+  // engine.237 reader bands — a hood's pressure (mean of its property + violent index) as a ratio
+  // of the city median: >= HIGH reads 'high' crime / QoL <= 0.35, <= LOW reads 'low' / QoL >= 0.65.
+  PRESSURE_HIGH_RATIO: 1.3,
+  PRESSURE_LOW_RATIO: 0.7,
+
+  // Enforcement capacity — engine.237: scales with the simulated city (the 36-unit / 12-hood design
+  // ratio). A flat 36 against 22 hoods held the load ratio at its 1.0 clamp every cycle.
+  UNITS_PER_HOOD: 3,
   UNITS_PER_INCIDENT: 0.35,
   OVERLOAD_RESPONSE_PENALTY: 3.2,
   OVERLOAD_CLEARANCE_PENALTY: 0.18,
@@ -185,12 +207,12 @@ function updateCrimeMetrics_Phase3_(ctx) {
 
   // Enforcement capacity
   var enforcementCfg = (ctx.config && ctx.config.enforcement) || S.enforcement || {};
-  var policingCapacity = derivePolicingCapacity_(S, enforcementCfg, patrolStrategy);
 
   // Calculate new metrics
   var newMetrics = {};
   // engine.134 Task 4 (S423): the Neighborhood_Map set, not the profile table's keys.
   var neighborhoods = crimeIterationHoods_(S);
+  var policingCapacity = derivePolicingCapacity_(enforcementCfg, neighborhoods.length); // engine.237: sized to the city
 
   // Precompute reporting signal
   var reportingSignal = deriveReportingSignal_({
@@ -203,8 +225,9 @@ function updateCrimeMetrics_Phase3_(ctx) {
     storySeedCount: storySeeds.length
   });
 
-  // Precompute hotspot pressure from previous cycle
-  var hotspotPressure = computeHotspotPressure_(currentMetrics, adjacency);
+  // Precompute hotspot pressure from previous cycle (engine.237: the simulated hoods only — a
+  // stale row for a place off the map never spills into a real one)
+  var hotspotPressure = computeHotspotPressure_(currentMetrics, adjacency, neighborhoods);
 
   // engine.212: the reversion target is the city's own median level from LAST cycle's rows
   var cityMedianLevel = crimeCityMedianLevels_(currentMetrics);
@@ -277,6 +300,8 @@ function updateCrimeMetrics_Phase3_(ctx) {
   var cityWide = calculateCityWideFromMap_(newMetrics);
   var categoryCityWide = calculateCityWideCategoriesFromMap_(newMetrics);
   var hotspots = calculateCrimeHotspots_(newMetrics, adjacency);
+  var context = buildCrimeReaderContext_(newMetrics, hotspots, cityWide, categoryCityWide,
+    predictedCityIncidents, policingCapacity, patrolStrategy, shifts);
 
   // Summary
   S.crimeMetrics = {
@@ -288,6 +313,9 @@ function updateCrimeMetrics_Phase3_(ctx) {
     byNeighborhood: newMetrics,
     cityWide: cityWide,
     shifts: shifts,
+    // engine.237: the reader contract — citizen events, youth, story seeds, demographics and the
+    // civic/media pools read THIS, never the raw index scale (see buildCrimeReaderContext_).
+    context: context,
     factors: {
       weather: weatherType,
       sentiment: sentiment,
@@ -418,7 +446,7 @@ function calculateNeighborhoodCrime_(neighborhood, profile, demo, prev, context,
   var levelQoL = crimeLevelFrom_(prev, 'qolLevel', 'qualityOfLifeIndex', seedQoL);
 
   var baseResponse = 8 / profile.responseMod;
-  var baseClearance = 0.35 * profile.responseMod;
+  var baseClearance = 0.35 * profile.responseMod; // the hood's unloaded clearance — the cycle's reading builds on it
 
   // Demographics
   var totalPop = (demo.students || 0) + (demo.adults || 0) + (demo.seniors || 0);
@@ -426,7 +454,7 @@ function calculateNeighborhoodCrime_(neighborhood, profile, demo, prev, context,
   var youthRatio = totalPop > 0 ? ((demo.students || 0) / totalPop) : 0.2;
 
   // Enforcement (needed by both the level causes and the overlay)
-  var policingCapacity = advanced && advanced.policingCapacity ? advanced.policingCapacity : derivePolicingCapacity_({}, {}, { name: 'balanced' });
+  var policingCapacity = advanced && advanced.policingCapacity ? advanced.policingCapacity : derivePolicingCapacity_({}, 1);
   var cityLoad = advanced && advanced.cityLoad ? advanced.cityLoad : { loadRatio: 0.5 };
   var patrolStrategy = advanced && advanced.patrolStrategy ? advanced.patrolStrategy : { name: 'balanced', displacementMult: 1.0, clearanceMult: 1.0, qolReduction: 0 };
   var enforcementShare = clamp01_(policingCapacity.neighborhoodShare[neighborhood] || policingCapacity.defaultNeighborhoodShare);
@@ -546,11 +574,13 @@ function calculateNeighborhoodCrime_(neighborhood, profile, demo, prev, context,
     if (traffic >= 1.3) { ovProperty *= 1.02; baseIncidents += 1; }
   }
 
-  // Clearance momentum (same two draws as v1.2, same position)
+  // Clearance momentum (same two draws as v1.2, same position). engine.237: the draw is held and
+  // applied after the overload / enforcement terms below, to the gap-closing step — not added to a
+  // carried rate the overload penalty then compounds on.
+  var clearanceChange = 0;
   if (prev) {
     var clearanceDir = (rng() > 0.5) ? 1 : -1;
-    var clearanceChange = clearanceDir * rng() * CRIME_FACTORS.CLEARANCE_RECOVERY;
-    baseClearance = (prev.clearanceRate || baseClearance) + clearanceChange;
+    clearanceChange = clearanceDir * rng() * CRIME_FACTORS.CLEARANCE_RECOVERY;
   }
 
   var baseProperty = levelProperty * ovProperty;
@@ -569,8 +599,17 @@ function calculateNeighborhoodCrime_(neighborhood, profile, demo, prev, context,
   // Overload penalties (response / clearance are same-cycle readings, not carried levels)
   var overload = clamp01_(cityLoad.loadRatio);
   baseResponse += overload * CRIME_ADVANCED.OVERLOAD_RESPONSE_PENALTY;
-  baseClearance -= overload * CRIME_ADVANCED.OVERLOAD_CLEARANCE_PENALTY;
-  baseClearance += enforcementPower * CRIME_ADVANCED.ENFORCEMENT_BOOST_CLEARANCE * patrolStrategy.clearanceMult;
+  // engine.237: this cycle's clearance READING (unloaded rate − overload + enforcement), then the
+  // carried rate closes CLEARANCE_ADJUST of the gap to it. v1.3 subtracted the overload penalty from
+  // LAST cycle's rate every cycle: at load 1.0 that is −0.18 a cycle against a +0.007 boost, and every
+  // hood sat on the 0.15 floor by C107 with no way off it.
+  var clearanceReading = baseClearance
+    - overload * CRIME_ADVANCED.OVERLOAD_CLEARANCE_PENALTY
+    + enforcementPower * CRIME_ADVANCED.ENFORCEMENT_BOOST_CLEARANCE * patrolStrategy.clearanceMult;
+  var prevClearance = prev ? Number(prev.clearanceRate) : NaN;
+  baseClearance = (isFinite(prevClearance) && prevClearance > 0)
+    ? prevClearance + CRIME_FACTORS.CLEARANCE_ADJUST * (clearanceReading - prevClearance) + clearanceChange
+    : clearanceReading;
 
   // Reporting model
   var reportingSignal = (advanced && advanced.reportingSignal) ? advanced.reportingSignal : { reportingMultiplier: 1, effectiveRate: CRIME_ADVANCED.BASE_REPORTING_RATE };
@@ -761,24 +800,38 @@ function buildCrimeAdjacencyGraph_(S) {
   return JSON.parse(JSON.stringify(S.neighborhoodAdjacency));
 }
 
-function computeHotspotPressure_(currentMetrics, adjacency) {
+// engine.237: one hotspot score for both passes — the two PERSISTED indices. The QoL index is not a
+// Crime_Metrics column, so last cycle's rows never carry it (v1.3 read it as 50 for every hood in
+// the pressure pass, 45-ish live in the hotspot pass — two different scores for one question).
+function crimeHotspotScore_(m) {
+  return Math.max(Number(m.propertyCrimeIndex || 0), Number(m.violentCrimeIndex || 0) * 0.95);
+}
+
+// engine.237: the hotspot bar is a ratio of the city's own median score (SIM_DOCTRINE §15). The
+// absolute 70 it replaces was never crossed live, so no hood was ever a hotspot. Null when no data.
+function crimeHotspotThreshold_(metricsMap, hoods) {
+  var scores = [];
+  for (var i = 0; i < hoods.length; i++) { var m = metricsMap[hoods[i]]; if (m) scores.push(crimeHotspotScore_(m)); }
+  var med = crimeMedian_(scores);
+  return med === null ? null : med * CRIME_ADVANCED.HOTSPOT_RATIO;
+}
+
+function computeHotspotPressure_(currentMetrics, adjacency, hoods) {
   var pressure = {};
-  var keys = Object.keys(currentMetrics || {});
+  var keys = hoods || Object.keys(currentMetrics || {});
   for (var i = 0; i < keys.length; i++) pressure[keys[i]] = 0;
+  var threshold = crimeHotspotThreshold_(currentMetrics || {}, keys);
+  if (threshold === null) return pressure;
 
   for (var n = 0; n < keys.length; n++) {
     var hood = keys[n];
     var m = currentMetrics[hood];
     if (!m) continue;
 
-    var prop = Number(m.propertyCrimeIndex || 50);
-    var viol = Number(m.violentCrimeIndex || 50);
-    var qol = (m.qualityOfLifeIndex !== undefined) ? Number(m.qualityOfLifeIndex) : 50;
+    var hotspotScore = crimeHotspotScore_(m);
+    if (hotspotScore < threshold) continue;
 
-    var hotspotScore = Math.max(prop, (viol * 0.95), qol);
-    if (hotspotScore < CRIME_ADVANCED.HOTSPOT_THRESHOLD) continue;
-
-    var spill = Math.min(CRIME_ADVANCED.HOTSPOT_PRESSURE_CAP, (hotspotScore - CRIME_ADVANCED.HOTSPOT_THRESHOLD) * 0.45);
+    var spill = Math.min(CRIME_ADVANCED.HOTSPOT_PRESSURE_CAP, (hotspotScore - threshold) * 0.45);
     var neighbors = (adjacency && adjacency[hood]) ? adjacency[hood] : [];
     if (neighbors.length === 0) continue;
 
@@ -800,6 +853,8 @@ function computeHotspotPressure_(currentMetrics, adjacency) {
 function calculateCrimeHotspots_(metricsMap, adjacency) {
   var list = [];
   var neighborhoods = Object.keys(metricsMap || {});
+  var threshold = crimeHotspotThreshold_(metricsMap || {}, neighborhoods);
+  if (threshold === null) return list;
   for (var i = 0; i < neighborhoods.length; i++) {
     var hood = neighborhoods[i];
     var m = metricsMap[hood];
@@ -809,8 +864,8 @@ function calculateCrimeHotspots_(metricsMap, adjacency) {
     var viol = Number(m.violentCrimeIndex || 50);
     var qol = (m.qualityOfLifeIndex !== undefined) ? Number(m.qualityOfLifeIndex) : 50;
 
-    var score = Math.max(prop, viol, qol);
-    if (score >= CRIME_ADVANCED.HOTSPOT_THRESHOLD) {
+    var score = crimeHotspotScore_(m);
+    if (score >= threshold) {
       list.push({
         neighborhood: hood,
         score: Math.round(score),
@@ -865,12 +920,98 @@ function deriveReportingSignal_(input) {
   };
 }
 
-function derivePolicingCapacity_(S, cfg, patrolStrategy) {
+// ============================================================================
+// engine.237 — THE READER CONTRACT (S.crimeMetrics.context)
+// ============================================================================
+// Ten reader sites (citizen events, youth, story seeds, demographics, civic + media pools) were
+// written against v1.2 field names — neighborhoodBreakdown, a city qualityOfLifeIndex on a 0–1
+// scale, top-level patrolStrategy / enforcementCapacity, hotspots as hood strings — that this
+// writer never emitted. Every one sat on its default every cycle: no citizen ever lived in a
+// rough block. This is the one place those readers' values are made, each band relative to the
+// city's own middle (SIM_DOCTRINE §15), so a reader never re-derives a scale.
+//
+//   byHood[hood].pressureRatio      mean(property, violent index) ÷ city median — the hood vs its city
+//   byHood[hood].qualityOfLifeIndex 0.05–0.95, HIGHER = SAFER: 1 − ratio/2 (1.3× the median → 0.35,
+//                                   0.7× → 0.65 — exactly the readers' existing low / high bands)
+//   byHood[hood].crimeLevel         'high' ≥ PRESSURE_HIGH_RATIO, 'low' ≤ PRESSURE_LOW_RATIO, else 'moderate'
+//   byHood[hood].isHotspot          on this cycle's hotspot list
+//   byHood[hood].trend              'rising' / 'falling' / 'steady' — this cycle's property/violent shifts
+//                                   (calculateCrimeShifts_). A hood that sits high every cycle is where it
+//                                   IS; the rising cycle is the event (start → peak → end, §15).
+//   city.incidentTrend              this cycle's incidents ÷ last cycle's (1 = flat)
+//   city.qualityOfLifeIndex         0.05–0.95 from the trend: 1 − trend/2 (+31% → 0.35)
+//   city.enforcementCapacity        police headroom: capacity units × strength ÷ this cycle's demand
+//   city.reportingGap               BASE_REPORTING_RATE − this cycle's reported ÷ true (> 0 = under-
+//                                   reporting against the engine's own base; the base alone sits at 0.62)
+//   city.patrolStrategy / hotspotHoods / trueIncidentCount / reportedIncidentCount
+function buildCrimeReaderContext_(metricsMap, hotspots, cityWide, categoryCityWide, prevIncidents, policingCapacity, patrolStrategy, shifts) {
+  var hoods = Object.keys(metricsMap || {});
+  var band = function(x) { return Math.round(Math.max(0.05, Math.min(0.95, x)) * 100) / 100; };
+  var pressures = {};
+  var list = [];
+  for (var i = 0; i < hoods.length; i++) {
+    var m = metricsMap[hoods[i]];
+    if (!m) continue;
+    pressures[hoods[i]] = (Number(m.propertyCrimeIndex || 0) + Number(m.violentCrimeIndex || 0)) / 2;
+    list.push(pressures[hoods[i]]);
+  }
+  var med = crimeMedian_(list);
+  var hotSet = {};
+  var hotspotHoods = [];
+  for (var h = 0; h < (hotspots || []).length; h++) {
+    if (hotspots[h] && hotspots[h].neighborhood) { hotSet[hotspots[h].neighborhood] = true; hotspotHoods.push(hotspots[h].neighborhood); }
+  }
+  var moved = {};
+  for (var sI = 0; sI < (shifts || []).length; sI++) {
+    var sh = shifts[sI];
+    if (!sh || (sh.metric !== 'propertyCrime' && sh.metric !== 'violentCrime')) continue;
+    moved[sh.neighborhood] = (moved[sh.neighborhood] || 0) + (sh.direction === 'increase' ? 1 : -1);
+  }
+  var byHood = {};
+  for (var k = 0; k < hoods.length; k++) {
+    var hood = hoods[k];
+    if (pressures[hood] === undefined) continue;
+    var r = med ? pressures[hood] / med : 1;
+    byHood[hood] = {
+      pressureRatio: Math.round(r * 100) / 100,
+      qualityOfLifeIndex: band(1 - r / 2),
+      crimeLevel: r >= CRIME_ADVANCED.PRESSURE_HIGH_RATIO ? 'high' : (r <= CRIME_ADVANCED.PRESSURE_LOW_RATIO ? 'low' : 'moderate'),
+      isHotspot: !!hotSet[hood],
+      trend: moved[hood] > 0 ? 'rising' : (moved[hood] < 0 ? 'falling' : 'steady')
+    };
+  }
+  var total = Number((cityWide && cityWide.totalIncidents) || 0);
+  var prev = Number(prevIncidents || 0);
+  var trend = prev > 0 ? total / prev : 1;
+  var demand = total * CRIME_ADVANCED.UNITS_PER_INCIDENT;
+  var capacity = Number((policingCapacity && policingCapacity.unitsCity) || 0) * Number((policingCapacity && policingCapacity.strength) || 1);
+  var cat = categoryCityWide || {};
+  var trueN = Number(cat.totalTrueIncidents || total);
+  var reportedN = Number(cat.totalReportedIncidents || 0);
+  return {
+    byHood: byHood,
+    city: {
+      incidentTrend: Math.round(trend * 100) / 100,
+      qualityOfLifeIndex: band(1 - trend / 2),
+      enforcementCapacity: demand > 0 ? Math.round(Math.min(3, capacity / demand) * 100) / 100 : 3,
+      patrolStrategy: (patrolStrategy && patrolStrategy.name) || 'balanced',
+      hotspotHoods: hotspotHoods,
+      trueIncidentCount: trueN,
+      reportedIncidentCount: reportedN,
+      reportingGap: trueN > 0 ? Math.round((CRIME_ADVANCED.BASE_REPORTING_RATE - reportedN / trueN) * 100) / 100 : 0
+    }
+  };
+}
+
+// engine.237: capacity is sized to the simulated city — UNITS_PER_HOOD × the hoods the cycle iterates
+// (a config unitsCity still overrides, clamped as before). The unused S / patrolStrategy params are gone.
+function derivePolicingCapacity_(cfg, hoodCount) {
   var strength = (cfg && cfg.strength !== undefined) ? Number(cfg.strength) : 1.0;
   strength = Math.max(0.6, Math.min(1.4, strength));
 
-  var unitsCity = (cfg && cfg.unitsCity !== undefined) ? Number(cfg.unitsCity) : CRIME_ADVANCED.BASE_UNITS_CITY;
-  unitsCity = Math.max(12, Math.min(90, unitsCity));
+  var unitsCity = (cfg && cfg.unitsCity !== undefined)
+    ? Math.max(12, Math.min(90, Number(cfg.unitsCity)))
+    : CRIME_ADVANCED.UNITS_PER_HOOD * Math.max(1, Number(hoodCount) || 0);
 
   var shareMap = (cfg && cfg.neighborhoodShare && typeof cfg.neighborhoodShare === 'object') ? cfg.neighborhoodShare : null;
   var defaultShare = 1 / 12;
@@ -897,7 +1038,7 @@ function derivePolicingCapacity_(S, cfg, patrolStrategy) {
 }
 
 function computeCityEnforcementLoad_(policingCapacity, predictedCityIncidents) {
-  var units = Number(policingCapacity.unitsCity || CRIME_ADVANCED.BASE_UNITS_CITY);
+  var units = Number(policingCapacity.unitsCity) || 0;
   var demand = Math.max(0, Number(predictedCityIncidents || 0)) * CRIME_ADVANCED.UNITS_PER_INCIDENT;
   var ratio = (units <= 0) ? 1 : (demand / units);
   return {

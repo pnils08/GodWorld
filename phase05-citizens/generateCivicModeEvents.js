@@ -78,7 +78,10 @@ function generateCivicModeEvents_(ctx) {
   var dynamics = S.cityDynamics || { sentiment: 0, culturalActivity: 1, communityEngagement: 1 };
   var sentiment = dynamics.sentiment || 0;
   var civicLoad = S.civicLoad || "normal";
-  var crimeMetrics = S.crimeMetrics || {};
+  // engine.237: the crime reader contract (updateCrimeMetrics.js buildCrimeReaderContext_). The city
+  // qualityOfLifeIndex / patrolStrategy read here were never written; hotspots are objects, so the
+  // chief's line would have printed "[object Object]" had one ever existed (none did — threshold 70).
+  var crimeCity = (S.crimeMetrics && S.crimeMetrics.context && S.crimeMetrics.context.city) || {};
   var holiday = S.holiday || "none";
   var holidayPriority = S.holidayPriority || "none";
   var sportsSeason = S.sportsSeason || "off-season";
@@ -197,7 +200,7 @@ function generateCivicModeEvents_(ctx) {
 
   function buildDAPool_() {
     var pool = [];
-    var qol = crimeMetrics.qualityOfLifeIndex || 0.5;
+    var qol = crimeCity.qualityOfLifeIndex || 0.5;
 
     pool.push(
       ev("reviewed active case files with senior prosecutors", ["civic:da", "type:legal"], "Civic"),
@@ -220,9 +223,9 @@ function generateCivicModeEvents_(ctx) {
 
   function buildPoliceChiefPool_() {
     var pool = [];
-    var qol = crimeMetrics.qualityOfLifeIndex || 0.5;
-    var strategy = crimeMetrics.patrolStrategy || "balanced";
-    var hotspots = crimeMetrics.hotspots || [];
+    var qol = crimeCity.qualityOfLifeIndex || 0.5;
+    var strategy = crimeCity.patrolStrategy || "balanced";
+    var hotspots = crimeCity.hotspotHoods || [];   // hood names
 
     pool.push(
       ev("reviewed department performance metrics with command staff", ["civic:police", "type:internal"], "Civic"),

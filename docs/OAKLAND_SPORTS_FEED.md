@@ -98,7 +98,9 @@ The feed has two different time views:
 Phase 2 only lets a team's accumulated state affect a Cycle when that team also
 has a current-Cycle row. Old team state does not speak by itself.
 
-## Twenty-one-column contract
+## Nineteen-column contract
+
+`VideoGameDate` and `VideoGame` were deleted on 2026-09-19 (Mike's go; plan §0 "no new column" ruling). Their 139 historical cells are archived in `output/engine-sheet/oakland_sports_feed_dead_columns_2026-09-19.json`. Every reader finds columns by header name, so letters below describe today's sheet, not a contract.
 
 | Col | Header | Verified role | Entry guidance |
 |---|---|---|---|
@@ -110,21 +112,19 @@ has a current-Cycle row. Old team state does not speak by itself.
 | F | `Notes` | Factual event detail for media and summaries | Keep concrete and operator-authored |
 | G | `Stats` | Event-specific free-text statistics passed to newsroom consumers | Record only verified event statistics; this does not update the roster's current stat line |
 | H | `Team Record` | Contributes to city sports sentiment and media context | Use the established record format |
-| I | `VideoGameDate` | Legacy column; no current Phase 2 mapping | Leave blank unless an active contract is added |
-| J | `VideoGame` | Legacy column; no current Phase 2 mapping | Leave blank unless an active contract is added |
-| K | `StoryAngle` | Preferred story framing for sports media surfaces | Preserve the builder's wording |
-| L | `PlayerMood` | Affects game-night tone; frustrated/angry and electric/confident emit player triggers | Use only when grounded by the event |
-| M | `EventTrigger` | Manual sports trigger; otherwise some triggers are inferred | The dropdown is exactly the triggers that make a story hook: hot-streak, cold-streak, playoff-push, playoff-clinch, eliminated, championship, rivalry, home-opener, season-finale, injury, injury-return, debut. Other words are still allowed and reach the media handoff as text, but make no hook |
-| N | `HomeNeighborhood` | Supplies transit geography and computed neighborhood effects; the evening consumer reads traffic only | Existing contract; removal is planned in Task 1 |
-| O | `Streak` | Adjusts sentiment and game-night win/loss tone | Use a parseable `W<n>` or `L<n>` form |
-| P | `FanSentiment` | Adjusts city sports sentiment | Use the existing controlled vocabulary |
-| Q | `FranchiseStability` | Supplies team/franchise state and can affect neighborhood logic | Change only when the world state changed |
-| R | `EconomicFootprint` | Supplies economic team state and neighborhood effects | Change only when grounded |
-| S | `CommunityInvestment` | Supplies community team state and neighborhood effects | Change only when grounded |
-| T | `MediaProfile` | Scales sports sentiment and supplies newsroom context | Use the existing local/regional/national/international scale |
-| U | `WeekRecord` | This franchise's games this Cycle, in played order. Settles the casino (first game) and feeds the handoff | One summary per franchise per Cycle, on its own row: `H:W H:L A:W` (H/A = home/away, W/L = result). `none` = no games (EventType `season-state`); games need EventType `game-result`. Blank = not reported. `Team Record` and `Streak` stay as they are — the week does not replace them |
+| I | `StoryAngle` | Preferred story framing for sports media surfaces | Preserve the builder's wording |
+| J | `PlayerMood` | Affects game-night tone; frustrated/angry and electric/confident emit player triggers | Use only when grounded by the event |
+| K | `EventTrigger` | Manual sports trigger; otherwise some triggers are inferred | The dropdown is exactly the triggers that make a story hook: hot-streak, cold-streak, playoff-push, playoff-clinch, eliminated, championship, rivalry, home-opener, season-finale, injury, injury-return, debut. Other words are still allowed and reach the media handoff as text, but make no hook |
+| L | `HomeNeighborhood` | Supplies transit geography and computed neighborhood effects; the evening consumer reads traffic only | Existing contract; removal is planned in Task 1 |
+| M | `Streak` | Adjusts sentiment and game-night win/loss tone | Use a parseable `W<n>` or `L<n>` form |
+| N | `FanSentiment` | Adjusts city sports sentiment | Use the existing controlled vocabulary |
+| O | `FranchiseStability` | Supplies team/franchise state and can affect neighborhood logic | Change only when the world state changed |
+| P | `EconomicFootprint` | Supplies economic team state and neighborhood effects | Change only when grounded |
+| Q | `CommunityInvestment` | Supplies community team state and neighborhood effects | Change only when grounded |
+| R | `MediaProfile` | Scales sports sentiment and supplies newsroom context | Use the existing local/regional/national/international scale |
+| S | `WeekRecord` | This franchise's games this Cycle, in played order. Settles the casino (first game) and feeds the handoff | One summary per franchise per Cycle, on its own row: `H:W H:L A:W` (H/A = home/away, W/L = result). `none` = no games (EventType `season-state`); games need EventType `game-result`. Blank = not reported. `Team Record` and `Streak` stay as they are — the week does not replace them |
 
-P–T dropdowns carry exactly the words the engine reads (engine.202 cut 3);
+The FanSentiment–MediaProfile dropdowns carry exactly the words the engine reads (engine.202 cut 3);
 the sheet still allows other text, which the engine treats as neutral. Re-run
 **Setup Sports Feed Validation** from the GodWorld menu to apply the current
 dropdowns and notes — the setup reads columns by header name.
@@ -136,14 +136,14 @@ complete format or roster contract.
 
 ### Weekly contract (LIVE 2026-09-18)
 
-`WeekRecord` is column U, appended — not a rename of `VideoGame`, whose 81
-historical cells (C30–C83) stay where they are. Live since 2026-09-18 (PROD
-@98, header written the same night) after a bench proof on SANDBOX 0908 C115.
+`WeekRecord` is the last column (S since the 2026-09-19 dead-column deletion;
+appended at U on 2026-09-18). Live since PROD @98 after a bench proof on
+SANDBOX 0908 C115.
 A bad cell is rejected alone, never the Cycle: the row still counts, its week
 is dropped, and one `Engine_Errors` row names the sheet row. A second week for
 the same franchise and Cycle is refused by the dashboard and ignored by the
-engine (the first stands). `VideoGameDate` / `VideoGame` deletion and the
-later `HomeNeighborhood` removal are separate steps tracked in Task 1 of
+engine (the first stands). The later `HomeNeighborhood` removal waits on
+Task 3 (transit reads the stadium zone instead); tracked in Task 1 of
 [[plans/2026-09-11-sports-as-a-lived-system]].
 
 ## Phase 2 behavior

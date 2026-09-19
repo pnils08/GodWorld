@@ -1,0 +1,599 @@
+{
+ "note": "Oakland_Sports_Feed columns I (VideoGameDate) and J (VideoGame) as they stood on LIVE before deletion (Mike go 2026-09-19, plan §0 second-block ruling). sheetRow = physical row at capture. Restore: re-insert 2 columns after H and write these values back by sheetRow.",
+ "capturedAt": "2026-09-19T05:42:02.790Z",
+ "headerBefore": [
+  "Cycle",
+  "SeasonType",
+  "EventType",
+  "TeamsUsed",
+  "NamesUsed",
+  "Notes",
+  "Stats",
+  "Team Record",
+  "VideoGameDate",
+  "VideoGame",
+  "StoryAngle",
+  "PlayerMood",
+  "EventTrigger",
+  "HomeNeighborhood",
+  "Streak",
+  "FanSentiment",
+  "FranchiseStability",
+  "EconomicFootprint",
+  "CommunityInvestment",
+  "MediaProfile",
+  "WeekRecord"
+ ],
+ "rowCount": 227,
+ "nonBlankRows": 81,
+ "nonBlankCells": 139,
+ "rows": [
+  {
+   "sheetRow": 2,
+   "Cycle": "30",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "7/31/2040",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 3,
+   "Cycle": "30",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "7/31/2040",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 4,
+   "Cycle": "30",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "7/31/2040",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 5,
+   "Cycle": "30",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "8/5/2040",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 6,
+   "Cycle": "30",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "8/5/2040",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 7,
+   "Cycle": "30",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "off-season",
+   "VideoGame": "NBA 2K 26"
+  },
+  {
+   "sheetRow": 8,
+   "Cycle": "30",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "8/6/2040",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 9,
+   "Cycle": "30",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "8/6/2040",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 10,
+   "Cycle": "31",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "8/10/2040",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 11,
+   "Cycle": "31",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "8/12/2040",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 12,
+   "Cycle": "31",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "9/1/2040",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 13,
+   "Cycle": "32",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "9/1/2040",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 14,
+   "Cycle": "32",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "9/1/2040",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 15,
+   "Cycle": "32",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "9/11/2040",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 16,
+   "Cycle": "32",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "9/11/2040",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 17,
+   "Cycle": "33",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "9/20/2040",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 18,
+   "Cycle": "33",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "9/26/1940",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 19,
+   "Cycle": "33",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "9/26/2040",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 20,
+   "Cycle": "34",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "9/26/2040",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 21,
+   "Cycle": "34",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "9/30/2040",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 22,
+   "Cycle": "35",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "10/1/2040",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 23,
+   "Cycle": "35",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "10/1/2040",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 24,
+   "Cycle": "35",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "10/1/2040",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 25,
+   "Cycle": "35",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "10/1/2040",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 26,
+   "Cycle": "35",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "10/1/2040",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 27,
+   "Cycle": "35",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "10/3/2040",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 28,
+   "Cycle": "35",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "10/7/2040",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 29,
+   "Cycle": "36",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "10/7/2040",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 30,
+   "Cycle": "36",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "10/8/2040",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 31,
+   "Cycle": "36",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "10/10/2040",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 32,
+   "Cycle": "37",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "10/15/2040",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 33,
+   "Cycle": "37",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "10/16/2040",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 34,
+   "Cycle": "37",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "10/18/2040",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 35,
+   "Cycle": "37",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "10/19/2040",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 36,
+   "Cycle": "37",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "10/19/2040",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 37,
+   "Cycle": "37",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "10/20/2040",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 38,
+   "Cycle": "37",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "10/22/2040",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 39,
+   "Cycle": "38",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "10/23/2040",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 40,
+   "Cycle": "38",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "11/1/2040",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 41,
+   "Cycle": "38",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "11/1/2040",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 42,
+   "Cycle": "38",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "11/1/2040",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 43,
+   "Cycle": "39",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "11/1/2040",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 44,
+   "Cycle": "39",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "",
+   "VideoGame": "NBA 2K 26"
+  },
+  {
+   "sheetRow": 45,
+   "Cycle": "39",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "11/3/2040",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 46,
+   "Cycle": "39",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "11/5/2040",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 47,
+   "Cycle": "39",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "11/10/2040",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 48,
+   "Cycle": "39",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "11/24/2040",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 49,
+   "Cycle": "39",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "2/15/2040",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 50,
+   "Cycle": "39",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "2/22/2040",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 51,
+   "Cycle": "40",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "",
+   "VideoGame": "NBA 2K 26"
+  },
+  {
+   "sheetRow": 52,
+   "Cycle": "40",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 53,
+   "Cycle": "44",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 54,
+   "Cycle": "44",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 55,
+   "Cycle": "44",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "2/23/2040",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 56,
+   "Cycle": "44",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "2/23/2040",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 57,
+   "Cycle": "69",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 58,
+   "Cycle": "69",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 59,
+   "Cycle": "69",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 60,
+   "Cycle": "69",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 61,
+   "Cycle": "69",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 62,
+   "Cycle": "71",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 63,
+   "Cycle": "72",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 64,
+   "Cycle": "73",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 65,
+   "Cycle": "73",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 66,
+   "Cycle": "73",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 67,
+   "Cycle": "73",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 68,
+   "Cycle": "73",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 69,
+   "Cycle": "73",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 70,
+   "Cycle": "75",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 71,
+   "Cycle": "76",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 72,
+   "Cycle": "77",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 73,
+   "Cycle": "77",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 74,
+   "Cycle": "77",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 84,
+   "Cycle": "82",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "12/15/2040",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 85,
+   "Cycle": "82",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "3/1/2041",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 86,
+   "Cycle": "82",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "3/5/2041",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 87,
+   "Cycle": "82",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "3/10/2041",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 90,
+   "Cycle": "83",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "3/15/2041",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 91,
+   "Cycle": "83",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "3/20/2041",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 92,
+   "Cycle": "83",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "3/12/2041",
+   "VideoGame": "MLB The Show 25"
+  },
+  {
+   "sheetRow": 93,
+   "Cycle": "83",
+   "TeamsUsed": "A's",
+   "VideoGameDate": "3/18/2041",
+   "VideoGame": "MLB The Show 25"
+  }
+ ]
+}

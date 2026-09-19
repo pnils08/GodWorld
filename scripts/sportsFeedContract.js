@@ -19,7 +19,7 @@ const FEED_HEADERS = Object.freeze([
   'CommunityInvestment', 'MediaProfile'
 ]);
 
-// engine.202: the weekly summary is an APPENDED column (U), not a rename of
+// engine.202: the weekly summary was APPENDED (col U), not a rename of
 // VideoGame — 81 historical VideoGame cells (C30–C83, "MLB The Show 25")
 // would otherwise sit under a WeekRecord header for every all-cycle reader.
 // The writer and dashboard accept exactly these layouts, oldest first, and

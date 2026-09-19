@@ -137,6 +137,7 @@ Engine tree `b2607ebe` (HEAD `0ffbe9be`, research-build docs only on top) = @97 
 
 - **Expect at the next live fire (C108), on top of §PROD @97–@86:** C108's feed rows carry no WeekRecord → the weekly path is inert this Cycle (run on the live 21-column sheet after the header write: 6 C108 entries, none carries `weekRecord`, 0 rejections, `sportsSeasonByTeam` {A's: championship, Oaks: preseason}); 0 `Phase2-SportsSeason:WeekRecord` rows; casino settles on the legacy first-streak path as before. Handoff `Week:` lines appear from the first authored week.
 - **Rollback:** `clasp deploy -i AKfycbwUvd4… -V 86` repoints to @97 (the reader there is the same engine.202 cut, minus the row name). Clearing `U1` returns the feed to the 20-column layout; the dashboard accepts both.
+- **2026-09-19 live sheet write (no deploy):** `VideoGameDate` / `VideoGame` columns deleted on Mike's go — `WeekRecord` now column S, 19 columns, 0 cell mismatches; archive `output/engine-sheet/oakland_sports_feed_dead_columns_2026-09-19.json`. The bench keeps the 21-column layout until its next resync (every reader is header-keyed).
 
 ### PROD @97 — engine.210 + engine.202 (inert): the recorded sports phase reaches seasonal weights (2026-09-18 ~23:05 Chicago, engine-sheet, on Mike's go)
 

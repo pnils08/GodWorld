@@ -5,8 +5,8 @@
  * ============================================================================
  *
  * v3.0 (engine.202): every step finds its column by HEADER NAME. The feed
- * grows (WeekRecord appended at U on Oakland) and will shrink (dead columns
- * deleted on Mike's go), so nothing past the K–O bootstrap assumes a position.
+ * grew (WeekRecord appended) and shrank (VideoGameDate / VideoGame deleted
+ * 2026-09-19), so nothing past the K–O bootstrap assumes a position.
  * A header the sheet does not carry is skipped, which is how Chicago (no
  * WeekRecord) keeps its own contract.
  *

@@ -240,10 +240,14 @@ function readOaklandFeedEntries_(ctx, currentCycle) {
         entry.weekRecord = week.value;
       } catch (weekErr) {
         delete entry.weekRecord;
+        // Name the sheet row so the author can find the cell — the grammar
+        // errors from sportsWeekForEntry_ do not know it.
+        var located = /\brow \d+/.test(weekErr.message) ? weekErr
+          : new Error(weekErr.message + ' (Oakland_Sports_Feed row ' + (i + 1) + ')');
         if (typeof logEngineError_ === 'function') {
-          logEngineError_(ctx, 'Phase2-SportsSeason:WeekRecord', weekErr);
+          logEngineError_(ctx, 'Phase2-SportsSeason:WeekRecord', located);
         } else {
-          Logger.log('WeekRecord rejected: ' + weekErr.message);
+          Logger.log('WeekRecord rejected: ' + located.message);
         }
       }
     }

@@ -133,7 +133,7 @@ test('unknown weekly team is rejected visibly instead of becoming an unassigned 
 });
 test('a rejected cell leaves the rest of the cycle\'s sports state intact', () => {
   // The whole point of defect 7: one bad cell must not blank the city.
-  const entries = readRejecting([row({ WeekRecord: 'garbage' }), row({ TeamsUsed: 'Oaks', WeekRecord: 'A:W', SeasonType: 'playoffs' })], /WeekRecord/);
+  const entries = readRejecting([row({ WeekRecord: 'garbage' }), row({ TeamsUsed: 'Oaks', WeekRecord: 'A:W', SeasonType: 'playoffs' })], /WeekRecord: use ordered .*\(Oakland_Sports_Feed row 2\)/);
   assert.strictEqual(entries.length, 2);
   assert.deepStrictEqual(plain(box.deriveSeasonByTeamFromFeed_(entries)), { "A's": 'regular-season', Oaks: 'playoffs' });
   assert.strictEqual(box.casinoParseSports_(entries, 'oaks').franchiseWon, true);

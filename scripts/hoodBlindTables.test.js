@@ -275,5 +275,26 @@ t('a low-mood city holds its civic forums in the lowest-mood hoods; a bust holds
   assert.ok(!/"West Oakland Neighborhood Watch Meet"/.test(src2) && !/"Fruitvale Job Fair"/.test(src2) && !/"Rockridge Investment Summit"/.test(src2));
 });
 
+console.log('T11 the evening crowd map reads canon, not named hoods (engine.240)');
+t('evening districts are the nightlife-label hoods; bad weather empties waterfront/lake; a bust thins the strongest economies', () => {
+  load(sb, 'phase07-evening-media/cityEveningSystems.js');
+  const run = over => {
+    const ctx = makeCtx(sb);
+    Object.assign(ctx.summary, { season: 'Winter', weather: { type: 'clear', impact: 1 }, weatherMood: {}, worldEvents: [], cityDynamics: {},
+      economicMood: 50, nightlife: {}, cityEvents: [], cityEventDetails: [], holiday: 'none', sportsSeason: 'off-season' }, over || {});
+    HOODS.forEach(h => { ctx.summary.neighborhoodState[h].employerCharacter = ({ 'Jack London': 'nightlife', Uptown: 'nightlife', Downtown: 'institutional' })[h] || 'residential'; });
+    sb.buildCityEveningSystems_(ctx);
+    return ctx.summary.crowdMap;
+  };
+  const base = run();
+  assert.ok(base['Jack London'] === 2 && base['Uptown'] === 2 && base['Downtown'] === 1, JSON.stringify(base));
+  const wet = run({ weather: { type: 'rain', impact: 1.4 } });
+  assert.ok(wet['Lake Merritt'] === base['Lake Merritt'] - 1 && wet['Jack London'] === base['Jack London'] - 1, 'waterfront/lake did not empty');
+  assert.ok(wet['Downtown'] > base['Downtown'] && wet['Chinatown'] > base['Chinatown'], 'urban core did not fill');
+  const bust = run({ economicMood: 30, neighborhoodEconomies: { Rockridge: { mood: 80 }, 'Piedmont Ave': { mood: 75 }, 'Lake Merritt': { mood: 70 }, 'West Oakland': { mood: 20 } } });
+  assert.ok(bust['Rockridge'] === base['Rockridge'] - 1 && bust['West Oakland'] === base['West Oakland'], JSON.stringify(bust));
+  assert.ok(!/crowd\["/.test(src('phase07-evening-media/cityEveningSystems.js')));
+});
+
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

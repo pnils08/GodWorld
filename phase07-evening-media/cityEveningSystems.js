@@ -304,9 +304,37 @@ function buildCityEveningSystems_(ctx) {
     crowd[neighborhoods[ni]] = 1;
   }
 
-  // Baseline bumps
-  crowd["Downtown"] = 2;
-  crowd["Jack London"] = 2;
+  // engine.240 (2026-09-19, SIM_DOCTRINE §17): the crowd map reads canon, not named hoods. It had
+  // Downtown as an evening district (canon: "thinner after dark than Uptown or Jack London"), a bust
+  // sending crowds to Fruitvale / West Oakland, community engagement always in West Oakland /
+  // Fruitvale, chaos emptying Downtown into Fruitvale / Laurel / Piedmont Ave. Now:
+  //   evening districts = EmployerCharacter 'nightlife' (S.neighborhoodState, Neighborhood_Map);
+  //   arts crowds = the authored 'arts' Scene; weather = the authored WeatherZone (waterfront / lake
+  //   are outdoors; urban core / corridor are indoors); sports = the sports zones; economy / chaos /
+  //   engagement = the hoods that carry them this cycle (neighborhoodEconomies, the world events'
+  //   own hoods, neighborhoodDynamics).
+  var nsC = S.neighborhoodState || {};
+  var byLabel = function(label) { var out = []; for (var h in crowd) if (crowd.hasOwnProperty(h) && nsC[h] && nsC[h].employerCharacter === label) out.push(h); return out; };
+  var byZone = function(zones) {
+    var out = [];
+    if (!S.canonHoods || !S.canonHoods.weatherZone) return out;
+    for (var h in crowd) if (crowd.hasOwnProperty(h) && zones.indexOf(S.canonHoods.weatherZone[h]) >= 0) out.push(h);
+    return out;
+  };
+  var bump = function(hoods, n) { for (var i = 0; i < hoods.length; i++) if (crowd[hoods[i]] !== undefined) crowd[hoods[i]] += n; };
+  var topBy = function(map, field, dir, k) {
+    var rows = [];
+    for (var h in map) if (map.hasOwnProperty(h) && map[h] && isFinite(Number(map[h][field])) && crowd[h] !== undefined) rows.push([h, Number(map[h][field])]);
+    rows.sort(function(x, y) { return dir > 0 ? y[1] - x[1] : x[1] - y[1]; });
+    var out = []; for (var i = 0; i < rows.length && i < k; i++) out.push(rows[i][0]); return out;
+  };
+  var eveningHoods = byLabel('nightlife');
+  var artsHoods = (S.canonHoods && S.canonHoods.scenes && typeof hoodNamesWithScene_ === 'function') ? hoodNamesWithScene_(ctx, 'arts') : [];
+  var sportsHoods0 = (S.sportsZones && S.sportsZones.length) ? S.sportsZones
+    : (typeof primarySportsZone_ === 'function' ? [primarySportsZone_({})] : []);
+
+  // Baseline: the evening districts
+  bump(eveningHoods, 1);
 
   // engine.148 P3: holiday / First Friday / Creation Day crowd draws are
   // Neighborhood_Map.Scenes tags (`<Holiday>:weight`, `FirstFriday:n`,
@@ -318,9 +346,9 @@ function buildCityEveningSystems_(ctx) {
   if (isCreationDay) applyCrowdBoosts_(crowd, hoodsWithScene_(ctx, 'CreationDay'));
 
   if (sportsSeason === "championship") {
-    applyCrowdBoosts_(crowd, [["Jack London", 4], ["Downtown", 3], ["Lake Merritt", 2]]);
+    bump(sportsHoods0, 4); bump(eveningHoods, 2);
   } else if (sportsSeason === "playoffs") {
-    applyCrowdBoosts_(crowd, [["Jack London", 3], ["Downtown", 2]]);
+    bump(sportsHoods0, 3); bump(eveningHoods, 1);
   }
 
   // Event-driven distribution (details)
@@ -341,10 +369,9 @@ function buildCityEveningSystems_(ctx) {
     }
   }
 
-  // Sports → Jack London / Downtown cluster
+  // Sports tonight → the sports zones, then the evening districts
   if (sports && sports !== "(none)") {
-    crowd["Jack London"] += 2;
-    crowd["Downtown"] += 1;
+    bump(sportsHoods0, 2); bump(eveningHoods, 1);
   }
 
   // Nightlife clusters
@@ -357,64 +384,38 @@ function buildCityEveningSystems_(ctx) {
   }
 
   // Volume-based distribution
-  if (volume >= 7) {
-    crowd["Downtown"] += 2;
-    crowd["Jack London"] += 1;
-    crowd["Temescal"] += 1;
-    crowd["Uptown"] += 1;
-  }
-  if (volume >= 9) {
-    crowd["Lake Merritt"] += 1;
-    crowd["KONO"] += 1;
-  }
+  if (volume >= 7) { bump(eveningHoods, 2); bump(artsHoods, 1); }
+  if (volume >= 9) { bump(byLabel('retail').concat(byLabel('family-retail')), 1); }
 
-  // Weather pushes crowds indoors
+  // Weather pushes crowds indoors — off the waterfront and the lake, into the urban core
   if (weather.impact >= 1.3) {
-    crowd["Lake Merritt"] -= 1;
-    crowd["Jack London"] -= 1;
-    crowd["Downtown"] += 2;
-    crowd["Temescal"] += 1;
-    crowd["Uptown"] += 1;
+    bump(byZone(['waterfront', 'lake']), -1);
+    bump(byZone(['urban-core', 'urban-corridor']), 1);
   }
 
   // Perfect weather spreads crowds outdoors
   if (weatherMood.perfectWeather) {
-    crowd["Lake Merritt"] += 2;
-    crowd["Jack London"] += 1;
-    crowd["Piedmont Ave"] += 1;
+    bump(byZone(['lake']), 2);
+    bump(byZone(['waterfront']), 1);
   }
 
-  // Chaos disperses downtown crowds
+  // Chaos: people steer around where it is happening
   if (chaos.length >= 3) {
-    crowd["Downtown"] -= 2;
-    crowd["Fruitvale"] += 1;
-    crowd["Laurel"] += 1;
-    crowd["Piedmont Ave"] += 1;
+    var chaosCount = {};
+    for (var cci = 0; cci < chaos.length; cci++) { var chn = chaos[cci] && chaos[cci].neighborhood; if (chn) chaosCount[chn] = { c: ((chaosCount[chn] || {}).c || 0) + 1 }; }
+    bump(topBy(chaosCount, 'c', 1, 3), -1);
   }
 
-  // Economic effects
-  if (econMood >= 65) {
-    crowd["Rockridge"] += 1;
-    crowd["Jack London"] += 1;
-    crowd["Piedmont Ave"] += 1;
-  }
-  if (econMood <= 35) {
-    crowd["Rockridge"] -= 1;
-    crowd["Fruitvale"] += 1;
-    crowd["West Oakland"] += 1;
-  }
+  // Economic effects: where the money is fills up in a boom and thins in a bust
+  var econTop = topBy(S.neighborhoodEconomies || {}, 'mood', 1, 3);
+  if (econMood >= 65) bump(econTop, 1);
+  if (econMood <= 35) bump(econTop, -1);
 
-  // Cultural activity
-  if (culturalActivity >= 1.4) {
-    crowd["Uptown"] += 1;
-    crowd["KONO"] += 1;
-  }
+  // Cultural activity → the arts scene
+  if (culturalActivity >= 1.4) bump(artsHoods, 1);
 
-  // Community engagement
-  if (communityEngagement >= 1.4) {
-    crowd["West Oakland"] += 1;
-    crowd["Fruitvale"] += 1;
-  }
+  // Community engagement → the hoods most engaged this cycle
+  if (communityEngagement >= 1.4) bump(topBy(S.neighborhoodDynamics || {}, 'communityEngagement', 1, 2), 1);
 
   // v2.4: Sports neighborhood effects (game-day crowd boost)
   var sportsEffects = S.sportsNeighborhoodEffects || {};

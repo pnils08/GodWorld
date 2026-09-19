@@ -295,6 +295,23 @@ The core of Task 10 is replacing `deepestSportsPhase_`'s MAX with a weighted sum
 
 Each is a sim call. The data under it is what the mechanism can't decide on its own.
 
+### Rulings (Mike, 2026-09-19)
+
+- **Q1 — a week without games does not move the city.** The buzz still happens, but the crons generate it (media and citizen wakes), not the engine's dials. This is the invent-prose / move-dial seam `sportsAtmosphereEnabled` already guards.
+- **Q2 — yes.** Crowd, traffic and transit follow volume at the venue (unsigned). Retail, nightlife and sentiment follow the result (signed).
+- **Q3 — measure against each team's own expectation, for the fun of the sim.** The A's are measured against the dynasty norm. The Oaks are measured against what an expansion team's inaugural season should look like.
+- **Q4 — each playoff round casts a bigger net; by the championship the whole city buys in.** Reach grows round by round, not in one playoff step.
+
+**What follows from these, without a further ruling:**
+- **Q6.** Under Q1, an announcement row with no games (C108's "World Series set") is buzz for the crons. The week's phase for engine magnitude is the round its games were played in, carried on the summary row.
+- **Q7.** Under Q3, the Oaks losing preseason games is close to an expansion team's expectation, so it costs little. Beating that expectation is what generates excitement.
+- **Q5.** Under Q4, stakes widen reach round by round. Volume still saturates, so a 20-game September can't outweigh the World Series.
+
+**What the rulings need from the feed:**
+- The engine must be able to tell rounds apart. Today's vocabulary has one `playoffs` word before `championship`.
+- It needs an expectation baseline per franchise. For the A's that is derived from their own running record. For the Oaks it is an expansion prior until their record accumulates.
+- The week's summary row (the one carrying `WeekRecord`) must own the week's phase, instead of the last row in the cycle.
+
 **Q1. Does a week without games still count?**
 - C106: the A's were set for the ALDS and played no games. The city ran at playoffs: PLAYOFF_SPENDING 8, sentiment +0.20 per cluster.
 - K1 scores that week near zero (0.05, from the Oaks' summer-league loss).
@@ -364,3 +381,4 @@ Each is a sim call. The data under it is what the mechanism can't decide on its 
 ## Changelog
 
 - 2026-09-18 (S467, research-build) — Initial census, live measurement, candidate formulas and sim questions, at engine-sheet's request (Mike-routed).
+- 2026-09-19 (S467, research-build) — Mike ruled Q1–Q4; recorded under §6 with the consequences for Q5–Q7 and for the feed contract.

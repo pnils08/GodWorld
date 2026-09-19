@@ -163,6 +163,27 @@ slice or story-hook path reads with no phase writer. Flag on discovery, file
 per-system as found (engine.192 is the first instance); a project-wide sweep
 is Watch List, not a build (ROLLOUT §Watch List).
 
+## 17. Every hood is a character. Its data is canon. (S470, Mike-direct)
+
+"There are 22 tracked hoods, all are their own character in the sim, nothing
+about the hoods is background, as almost every event and effect a citizen
+encounters comes from where they live." "Their data being off is no different
+than a citizen canon being broken — calling West Oakland real-world Oakland is
+the same as calling Vinnie Keane a retired 85-year-old woman." "The sub hoods use
+the parent hood data sets for canon purposes."
+
+So: a hood's numbers are read from its own canon (Neighborhood_Map's authored
+columns — IncomeTier, BoomIndex, EmployerCharacter, MedianIncome, Adjacent,
+ChildAreas — rendered from INSTITUTIONS.md §Neighborhoods) and moved by what
+happens in it. A hood-name-keyed numeric table on the cycle path is a canon
+violation, however its character strings read (engine.134 rewrote the strings and
+left 2020s Oakland in the numbers; engine.239 took the last per-cycle one out of
+the Neighborhood_Map writer). An engine that can see fewer than the 22 is a
+defect, not a simplification (engine.239b: ten hoods had no mood track). A child
+area is its parent (`resolveHoodOrChild_`), in every count and every read.
+Repairing hood data that encodes the real city is canon repair — targeted, like
+restoring a broken citizen row.
+
 ## The test
 Before shipping any mechanic, one question, Mike's phrasing: **does this make
 a row drive a fate the builder didn't choose — or does it just tidy data?**

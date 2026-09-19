@@ -2,7 +2,7 @@
 
 **Droplet:** `ubuntu-s-1vcpu-2gb` | 1 vCPU, 2GB RAM, 25GB disk | $12/mo | nyc3
 **IP:** 64.225.50.16 | **Access:** SSH as root, or `mags` command (tmux auto-wiring)
-**Last verified:** crontab 2026-09-08 via live `crontab -l` (all times
+**Last verified:** crontab 2026-09-19 via live `crontab -l` (all times
 server-local America/Chicago — the table previously claimed UTC); PM2 2026-07-28 via
 live `pm2 list`. Dashboard transport reverified 2026-08-03 via live Tailscale,
 UFW, and health probes.
@@ -64,6 +64,7 @@ it is weekly).
 | `0 17 * * *` | Citizen exchange | `scripts/citizen-exchange.js` | `logs/citizen-exchange.log` |
 | `15 18 * * 1-5` | Weekday newsroom write + Rhea gate | `scripts/cron-desk-run.js --stage=write --fanout --gate-backend api` | `logs/newsroom-fanout.log` |
 | `45 18 * * 1-5` | Weekday articles to Discord | `scripts/deliver-articles.js` | `logs/deliver-articles.log` |
+| `18 20 * * 2,4` | Work-wake packs — working citizens on their day's data (civic.34; ME/EMS/players registry in `scripts/work-wake-packages.json`) | `scripts/cron-work-wake.js` | `logs/cron-work-wake.log` |
 | `30 20 * * *` | UNDOCKED daily flight (orchestrator: flight→adapter→gate→push→standings) | `scripts/cron-undocked-run.js` | `logs/undocked-run.log` |
 | `0 21 * * 0` | Civic Sunday chain late retry (same guard) | `scripts/cron-civic-run.js --stage=chain --apply` | `logs/civic-cron.log` |
 | `30 21 * * *` | Citizen night wake | `scripts/citizen-wake.js --wake=night` | `logs/citizen-wake.log` |

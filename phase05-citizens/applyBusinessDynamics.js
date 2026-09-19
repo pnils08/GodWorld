@@ -420,10 +420,13 @@ function applyBusinessDynamics_(ctx) {
   // (its revenue share leaves the street); winding-down rows after that are not tallied —
   // the street reads without them.
   var hoodBiz = {};
+  // Only a canon hood (or a child area folded to its parent) carries momentum. 'City-wide' and
+  // unmapped labels are skipped — they are not a street, and as keys they polluted the city median
+  // the writer centres every hood's factor on (kimi review 2026-09-19). No canon seed (an offline
+  // harness) → no momentum at all, never raw labels.
   var bizHoodKey = function(h) {
-    if (!h) return '';
-    if (typeof resolveHoodOrChild_ === 'function' && S.canonHoods) return resolveHoodOrChild_(ctx, h) || h;
-    return h;
+    if (!h || typeof resolveHoodOrChild_ !== 'function' || !S.canonHoods) return '';
+    return resolveHoodOrChild_(ctx, h) || '';
   };
   var tallyBiz = function(h, revenue, growth, closedNow) {
     var k = bizHoodKey(h);

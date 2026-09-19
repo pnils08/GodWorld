@@ -102,5 +102,37 @@ for (const [name, rows, personnel] of [
   const low = w.applyBusinessDynamics_(owned), plain = w.applyBusinessDynamics_(neutral);
   check('verified low composure still closes a declining venture one Cycle earlier', low.closed === 1 && plain.closed === 0, { low: low.closed, neutral: plain.closed });
 }
+// engine.242b (2026-09-19): per-hood business momentum. Child areas fold to their parent; 'City-wide'
+// and unmapped labels carry none; no canon seed → no momentum (never raw labels); a closure takes its
+// revenue share; the writer factor is growth vs the city's median hood growth, bounded 0.88–1.12.
+{
+  const cfgBase = fixture([], '').config;
+  const rows = [['BIZ_ID', 'Name', 'Sector', 'Neighborhood', 'Employee_Count', 'Annual_Revenue', 'Growth_Rate', 'Key_Personnel'],
+    ['BIZ-A', 'A', 'Retail', 'Parent Hood', 5, 1000, 10, ''],
+    ['BIZ-B', 'B', 'Retail', 'Child Area', 5, 1000, 20, ''],
+    ['BIZ-C', 'C', 'Retail', 'City-wide', 5, 1000, 40, ''],
+    ['BIZ-D', 'D', 'Retail', 'Other Hood', 5, 2000, 2, '']];
+  const mk = canon => ({ config: cfgBase, now: 'C200', writes: [], rng() { return 0.5; },
+    ledger: { headers: H.slice(), rows: [], dirty: false },
+    summary: { cycleId: 200, neighborhoodState: {}, previousCycleState: { businessDynamics: {} },
+      canonHoods: canon ? { list: ['Parent Hood', 'Other Hood'] } : undefined },
+    ss: { getSheetByName: tab => tab === 'Business_Ledger' ? { getDataRange: () => ({ getValues: () => rows.map(r => r.slice()) }) } : null } });
+  w.resolveHoodOrChild_ = (ctx, h) => ({ 'parent hood': 'Parent Hood', 'child area': 'Parent Hood', 'other hood': 'Other Hood' })[String(h).toLowerCase()] || null;
+  const ctx = mk(true);
+  w.applyBusinessDynamics_(ctx);
+  const m = ctx.summary.hoodBusinessMomentum;
+  check('242b child area folds into its parent (2 businesses on Parent Hood)', m['Parent Hood'] && m['Parent Hood'].businesses === 2, m);
+  check('242b City-wide / unmapped labels carry no momentum key', !m['City-wide'] && !m['Child Area'] && Object.keys(m).length === 2, Object.keys(m));
+  check('242b Parent Hood growth is revenue-weighted over its open businesses (≈15)', Math.abs(m['Parent Hood'].growth - 15) < 1.5, m['Parent Hood']);
+  const noCanon = mk(false); w.applyBusinessDynamics_(noCanon);
+  check('242b no canon seed → no momentum at all (never raw labels)', Object.keys(noCanon.summary.hoodBusinessMomentum).length === 0, noCanon.summary.hoodBusinessMomentum);
+  vm.runInContext(fs.readFileSync(path.join(__dirname, '..', 'phase08-v3-chicago/v3NeighborhoodWriter.js'), 'utf8'), w, { filename: 'v3NeighborhoodWriter.js' });
+  const S = { hoodBusinessMomentum: { X: { growth: 40, closedShare: 0 }, Y: { growth: 0, closedShare: 0.8 }, Z: { growth: 5, closedShare: 0 } } };
+  const med = w.hoodBusinessCity_(S);
+  check('242b writer: a hood far above the city median growth is capped at 1.12', Math.abs(w.hoodBusinessFactor_('X', S, med) - 1.12) < 1e-9, w.hoodBusinessFactor_('X', S, med));
+  check('242b writer: a closure takes its share, capped at half the street', Math.abs(w.hoodBusinessFactor_('Y', S, med) - 0.95 * 0.5) < 1e-9, w.hoodBusinessFactor_('Y', S, med));
+  check('242b writer: the median hood reads 1.0; a hood with no momentum reads 1.0', w.hoodBusinessFactor_('Z', S, med) === 1 && w.hoodBusinessFactor_('Q', S, med) === 1);
+}
+
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exitCode = failed ? 1 : 0;

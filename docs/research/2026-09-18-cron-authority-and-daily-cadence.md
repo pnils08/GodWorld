@@ -138,7 +138,79 @@ shipped twice already (engine.67 lifestate/band, research.27 undocked).
   (declare in a wake, a later cron checks delivery, outcome emits an event).
   Anything needing state the sheets do not hold does not.
 
-## 6. OPEN — Mike's sections
+## 6. Persisting a citizen's life back into the engine (Mike, 2026-09-18)
+
+Mike's framing: LifeHistory should carry logged events, but the quotes already
+feed the dials, so if the same quote also becomes an event the input is scored
+twice. Crons should also get a citizen's recent page entries fired back. The
+standing question is how a citizen's life persists into the engine at all.
+
+### 6.1 There are two folds, with independent guards
+
+Both ultimately call the same scorer, `nudgesForEvent_` (`citizenDialMap.js:279`).
+
+| Fold | Input | Strength | Idempotency guard |
+|---|---|---|---|
+| LifeHistory watermark fold — `foldNewEntries_` (`compressLifeHistory.js:1472`, engine.177/201) | LifeHistory entries with `cycle > c.folded` | full (`mult 1`), netted per cycle | the `folded` watermark |
+| Reflection drain — `accreteReflectionsIntoBase_` (`citizenMemory.js:181`) | `Reflection_Intake` rows where `applied != 'yes'` | `REFLECTION_MULT` 0.45 x `REFLECTION_ACCRETION_FRAC` 0.5 | the `applied` flag |
+
+**Mike's concern is mechanically exact.** The two guards do not know about each
+other. One stops a LifeHistory line folding twice; the other stops an intake row
+draining twice. Neither stops *the same sentence* entering both paths and being
+scored once as a reflection at 0.225 effective and again as an event at 1.0.
+
+### 6.2 The engine already solved this once, narrowly
+
+`nudgesForReflection_` (`citizenDialMap.js:316`) carries the rule in its own
+header comment: the same Divorce both folds objectively at full composure cost
+and is reflected on subjectively, and only the affect mood is allowed to reach
+composure, explicitly so the objective event is not double-counted.
+
+That is the right doctrine, applied to exactly one dial. **The event scores the
+fact; the reflection scores the feeling.** Generalised, it answers the question:
+a logged life entry derived from a quote must not re-score what the quote already
+scored.
+
+### 6.3 You cannot log a LifeHistory entry for free
+
+`nudgesForEvent_` falls through to `DEFAULT_AMBIENT` — "a logged ordinary day" —
+for any tag it does not recognise. Only two tags are inert:
+`STRUCTURAL = { Compressed: true, CareerState: true, EngineEvent: false }`
+(`citizenDialMap.js:203`), and both mean *a summary of events*. `EngineEvent` is
+explicitly **not** inert; it routes through the content rules.
+
+So there is today no way to write "this happened, and it was already scored
+elsewhere." Every logged line either scores or lies about being a summary.
+
+**The cut that follows:** a third structural marker meaning *logged, scored
+elsewhere*. One entry in `STRUCTURAL`, plus the discipline that the reflection
+write-back path uses it. Life becomes readable in the column without a second
+scoring, and the drain stays the single scorer of a quote.
+
+### 6.4 Page read-back already works — correcting the assumption
+
+Wakes do get recent page entries fired back. `lib/wakePerception.js:282` calls
+`citizenPage.recentPage_(popId, PAGE_CANDIDATE_N)` and the result reaches the
+prompt at `citizen-wake.js:318` as *"What's been on your mind lately, from your
+own private reflections."* Recency by document list, deliberately not v4 search,
+which silently missed documents (S272). `cron-desk-writer`, `officeWall`,
+`reporterWall` and `discord-reflection` read it too.
+
+The gap is not that crons cannot see the page. It is §6.5.
+
+### 6.5 The actual persistence gap
+
+**No cron writes `LifeHistory`.** Every writer is an engine phase; the only
+script-side writers are probes, tests, audits and the `backdateCitizenDials.js`
+manual lever. And the page itself is Supermemory, which the engine reads in
+exactly one place (`phase07-evening-media/applyStorySeeds.js`).
+
+So a citizen's week of life lives in two places the engine's life record never
+sees, and reaches the engine only as a bounded dial nudge through
+`Reflection_Intake`. **The life is not persisted; a scalar summary of its mood
+is.** That is the thing to fix, and §6.3 is what makes fixing it safe.
+
+## 7. OPEN — Mike's sections
 
 *Mike fills these; engine-sheet reviews for what is missing and what the
 mechanism can actually carry.*
@@ -150,8 +222,16 @@ mechanism can actually carry.*
 - **OPEN: borrowed concepts** — which games, which mechanics.
 - **OPEN: cadence** — whether the world should visibly move daily, and what that
   means for the weekly fire.
+- **OPEN: what a logged life entry is for** — if a cron-written LifeHistory line
+  does not score (§6.3), what reads it? Story seeds, desk slices, wake memory,
+  the citizen's own continuity. Naming the reader decides the format.
 
 ## Changelog
 
 - 2026-09-18 — created from the Mike-direct design conversation; §1-5 verified
-  against live code and sheets, §6 left open for Mike.
+  against live code and sheets, §7 left open for Mike.
+- 2026-09-18 — §6 added (Mike: LifeHistory double-scoring, page read-back,
+  persistence). Two folds and their independent guards traced; the objective/
+  subjective rule found already in `nudgesForReflection_`; `DEFAULT_AMBIENT`
+  confirmed as the reason nothing logs for free; page read-back confirmed live
+  at `wakePerception.js:282`, correcting the assumption it was missing.

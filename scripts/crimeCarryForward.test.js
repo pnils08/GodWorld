@@ -285,6 +285,12 @@ console.log('═══ 10q — quality of life is read from the hood\'s own meas
     cx.byHood.A.qualityOfLifeIndex > cx.byHood.C.qualityOfLifeIndex && cx.byHood.C.qualityOfLifeIndex > cx.byHood.B.qualityOfLifeIndex);
   cx = mk(); sb.applyHoodLifeQuality_(cx, { A: demo(50), B: demo(50), C: demo(50) }, base, ['A', 'B', 'C']);
   check('10q-d a hood at the city middle on everything reads 0.5', cx.byHood.A.qualityOfLifeIndex === 0.5);
+  // the medians count zeros and negatives (crimeMedian_ drops them — right for crime, wrong here):
+  // most hoods at HousingPressure 0 means 0 IS the middle, so a hood at 0 gets no housing bonus
+  cx = mk(); sb.applyHoodLifeQuality_(cx, { A: demo(50), B: demo(50), C: demo(50) }, { A: st(8, 0, 0.4), B: st(8, 0, 0.4), C: st(8, 5, 0.4) }, ['A', 'B', 'C']);
+  check('10q-e housing median counts the zero hoods — A at 0 gets no housing part (' + cx.byHood.A.qolParts.housing + ')', cx.byHood.A.qolParts.housing === 0);
+  cx = mk(); sb.applyHoodLifeQuality_(cx, { A: demo(50), B: demo(50), C: demo(50) }, { A: st(8, 0, -0.2), B: st(8, 0, -0.1), C: st(8, 0, 0.3) }, ['A', 'B', 'C']);
+  check('10q-f mood median counts negative sentiment — B at the middle (−0.1) gets no mood part', Math.abs(cx.byHood.B.qolParts.mood) < 1e-9);
 }
 
 console.log('═══ 11 — S.crimeMetrics.context: the bands the readers compare against, on the live range');

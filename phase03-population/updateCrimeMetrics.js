@@ -1030,9 +1030,8 @@ function buildCrimeReaderContext_(metricsMap, hotspots, cityWide, categoryCityWi
 //   street  0.15  RetailVitality (last cycle's map)      (ratio − 1) / 2
 //   housing 0.10  HousingPressure 0–10 (last cycle)      −(hp − median) / 20
 //   mood    0.10  Sentiment (last cycle's map)           sentiment − median
-// QoL = 0.5 + Σ w·d over the components the hood carries (weights renormalised), banded
-// 0.05–0.95 — a hood bad on everything reads where a crime-only 1.3× hood read before
-// (0.35), so the readers' bands stand. Canon enters through these: income tier and boom
+// QoL = 0.5 + Σ w·d ÷ √Σw² over the components the hood carries, banded 0.05–0.95 — the
+// composite keeps one measure's scale, so the readers' 0.35 / 0.45 / 0.65 / 0.75 bands stand. Canon enters through these: income tier and boom
 // set a hood's joblessness and street life (engine.135 / engine.239).
 // byHood[hood].safetyIndex keeps the crime-only reading for the readers that mean safety
 // alone (the unemployment envelope reads it — a composite with work in it would loop).
@@ -1040,7 +1039,16 @@ var HOOD_QOL_WEIGHTS = { safety: 0.30, work: 0.20, health: 0.15, street: 0.15, h
 
 function applyHoodLifeQuality_(context, demographics, nState, hoods) {
   var byHood = (context && context.byHood) || {};
-  var med = function(arr) { return crimeMedian_(arr); };
+  // A true median — zeros and negatives count (crimeMedian_ drops them: right for a crime index,
+  // wrong for HousingPressure, where 0 is most hoods, and for Sentiment, which goes negative).
+  var med = function(arr) {
+    var a = [];
+    for (var i = 0; i < arr.length; i++) { var n = Number(arr[i]); if (isFinite(n)) a.push(n); }
+    if (!a.length) return null;
+    a.sort(function(x, y) { return x - y; });
+    var mid = Math.floor(a.length / 2);
+    return a.length % 2 ? a[mid] : (a[mid - 1] + a[mid]) / 2;
+  };
   var un = {}, sk = {}, uL = [], sL = [], rL = [], hL = [], mL = [];
   for (var i = 0; i < hoods.length; i++) {
     var h = hoods[i], d = demographics[h];
@@ -1069,13 +1077,17 @@ function applyHoodLifeQuality_(context, demographics, nState, hoods) {
     if (mR && s2.retailVitality !== null && isFinite(Number(s2.retailVitality))) parts.street = (Number(s2.retailVitality) / mR - 1) / 2;
     if (mH !== null && s2.housingPressure !== null && isFinite(Number(s2.housingPressure))) parts.housing = -(Number(s2.housingPressure) - mH) / 20;
     if (mM !== null && s2.sentiment !== null && isFinite(Number(s2.sentiment))) parts.mood = Number(s2.sentiment) - mM;
-    var sum = 0, wSum = 0;
+    // Weighted sum ÷ √Σw² (not ÷ Σw): averaging six measures would shrink the spread to ~0.44 of
+    // one measure's and leave every hood inside the readers' 0.45 / 0.65 bands (bench C108: all 22
+    // at 0.44–0.59, zero QoL lines). Dividing by the weights' root-sum-square keeps the composite on
+    // the scale of a single measure — a hood that is behind on everything reads that far behind.
+    var sum = 0, w2 = 0;
     for (var k in parts) {
       if (!parts.hasOwnProperty(k)) continue;
       var dk = Math.max(-0.5, Math.min(0.5, parts[k]));
-      sum += HOOD_QOL_WEIGHTS[k] * dk; wSum += HOOD_QOL_WEIGHTS[k];
+      sum += HOOD_QOL_WEIGHTS[k] * dk; w2 += HOOD_QOL_WEIGHTS[k] * HOOD_QOL_WEIGHTS[k];
     }
-    if (wSum > 0) b.qualityOfLifeIndex = band(0.5 + sum / wSum);
+    if (w2 > 0) b.qualityOfLifeIndex = band(0.5 + sum / Math.sqrt(w2));
     b.qolParts = parts;
   }
 }

@@ -204,5 +204,16 @@ console.log('6. resting level has headroom both ways');
     Math.abs(vals.reduce((a, c) => a + c, 0) / 4) < 0.35);
 }
 
+console.log('7. weather is a shade; a catastrophe is a crisis (2026-09-19 ruling)');
+{
+  const wx = (type, cat) => { const m = M.makeMetrics_(); const b = m.sentiment;
+    M.applyWeatherModifiers_(m, { type: type, impact: 1.3, front: type.toUpperCase() }, { precipIntensity: 0, precipType: 'none', windSpeed: 5, visibility: 10, catastrophe: cat }, 'DOWNTOWN_CORE'); return m.sentiment - b; };
+  const fog = wx('fog', false), storm = wx('rain', true);
+  ok('an ordinary fog week costs under 0.05 (was 0.10)', fog < 0 && fog > -0.05, 'fog=' + fog.toFixed(3));
+  ok('a catastrophe costs more than a playoff run can lift (0.10 cap)', storm <= -0.2, 'storm=' + storm.toFixed(3));
+  const w = M.makeMetrics_(); const b = w.sentiment; M.applySeasonModifiers_(w, 'Winter');
+  ok('winter is a shade under the playoffs, not over them', Math.abs(w.sentiment - b) < 0.1, 'winter=' + (w.sentiment - b).toFixed(3));
+}
+
 console.log('\n' + pass + ' passed, ' + fail + ' failed\n');
 process.exit(fail ? 1 : 0);

@@ -209,7 +209,7 @@ function applyCityDynamics_(ctx) {
       m.tourism *= 0.6;
       m.nightlife *= 0.7;
       m.publicSpaces *= 0.7;
-      m.sentiment -= 0.25;   // engine.188: season centred (see note below)
+      m.sentiment -= 0.05;   // engine.188 centred; 2026-09-19 season is a shade, not a verdict (was 0.25)
       m.culturalActivity *= 0.9;
       m.communityEngagement *= 0.8;
     } else if (seasonName === 'Spring') {
@@ -218,7 +218,7 @@ function applyCityDynamics_(ctx) {
       m.tourism *= 1.2;
       m.nightlife *= 1.1;
       m.publicSpaces *= 1.1;
-      m.sentiment += 0.15;   // engine.188
+      m.sentiment += 0.03;   // engine.188; 2026-09-19 (was 0.15)
       m.culturalActivity *= 1.2;
       m.communityEngagement *= 1.1;
     } else if (seasonName === 'Summer') {
@@ -227,20 +227,33 @@ function applyCityDynamics_(ctx) {
       m.tourism *= 1.6;
       m.nightlife *= 1.4;
       m.publicSpaces *= 1.4;
-      m.sentiment += 0.25;   // engine.188
+      m.sentiment += 0.05;   // engine.188; 2026-09-19 (was 0.25)
       m.culturalActivity *= 1.3;
       m.communityEngagement *= 1.2;
     } else if (seasonName === 'Fall') {
       m.retail *= 1.1;
       m.tourism *= 0.9;
       m.publicSpaces *= 0.9;
-      m.sentiment -= 0.15;   // engine.188
+      m.sentiment -= 0.03;   // engine.188; 2026-09-19 (was 0.15)
       m.culturalActivity *= 1.1;
       m.communityEngagement *= 1.0;
     }
   }
 
+  // 2026-09-19 (builder ruling: "why would weather outweigh major city events? is
+  // the weather a CAT crisis?"). Ordinary weather is a shade on the city's mood,
+  // never the headline: a foggy winter week used to cost −0.35 (season −0.25, fog
+  // −0.10) against at most +0.10 for the A's in the playoffs, and C108 read the
+  // city at 0.02 during an ALCS run. Ordinary weather's mood terms now count at
+  // WEATHER_MOOD_SCALE; a CATASTROPHE — a salient storm / flood / heat wave from
+  // the weather model (S.weatherEvents, the same events engine.229 ripples as
+  // disasters) — counts in full plus WEATHER_CAT_MOOD. Traffic / public-space /
+  // tourism effects are unchanged: rain still empties the parks.
   function applyWeatherModifiers_(m, weather, extra, clusterName) {
+    var WEATHER_MOOD_SCALE = 0.3;
+    var WEATHER_CAT_MOOD = 0.15;
+    var moodBefore = m.sentiment;
+    var catastrophe = !!(extra && extra.catastrophe);
     var t = weather.type || 'clear';
     var impact = safeNum_(weather.impact, 1);
     var front = (weather.front || t || 'CLEAR').toString().toUpperCase();
@@ -321,6 +334,10 @@ function applyCityDynamics_(ctx) {
       m.tourism *= 0.92;
       m.traffic *= 0.95;
     }
+
+    // Mood: ordinary weather shades it; a catastrophe hits it (see note above).
+    var weatherMood = m.sentiment - moodBefore;
+    m.sentiment = moodBefore + (catastrophe ? weatherMood - WEATHER_CAT_MOOD : weatherMood * WEATHER_MOOD_SCALE);
   }
 
   function applyHolidayModifiers_(m, holiday, holidayPriority, flags, seasonName, clusterName) {
@@ -1087,6 +1104,15 @@ function applyCityDynamics_(ctx) {
     }
   }
 
+  // A catastrophe this cycle: a salient storm / flood / heat wave (applyWeatherModel_,
+  // Phase2-Weather, runs before this at both entry points).
+  var weatherCatastrophe = false;
+  var wxEvents = S.weatherEvents || [];
+  for (var wxi = 0; wxi < wxEvents.length; wxi++) {
+    var wxe = wxEvents[wxi];
+    if (wxe && wxe.salient && (wxe.type === 'storm' || wxe.type === 'flood_conditions' || wxe.type === 'heat_wave')) weatherCatastrophe = true;
+  }
+
   // First pass: compute cluster dynamics
   for (var cname in CLUSTERS) {
     if (!CLUSTERS.hasOwnProperty(cname)) continue;
@@ -1100,7 +1126,8 @@ function applyCityDynamics_(ctx) {
       precipIntensity: precipIntensity,
       precipType: precipType,
       windSpeed: windSpeed,
-      visibility: visibility
+      visibility: visibility,
+      catastrophe: weatherCatastrophe
     }, cname);
     applyHolidayModifiers_(m, holiday, holidayPriority, { isFirstFriday: isFirstFriday, isCreationDay: isCreationDay }, season, cname);
     applySportsModifiers_(m, ss, cname);

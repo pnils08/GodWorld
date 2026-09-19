@@ -198,17 +198,51 @@ which silently missed documents (S272). `cron-desk-writer`, `officeWall`,
 
 The gap is not that crons cannot see the page. It is §6.5.
 
-### 6.5 The actual persistence gap
+### 6.5 The two-layer design, and why the engine cannot read the page
 
-**No cron writes `LifeHistory`.** Every writer is an engine phase; the only
-script-side writers are probes, tests, audits and the `backdateCitizenDials.js`
-manual lever. And the page itself is Supermemory, which the engine reads in
-exactly one place (`phase07-evening-media/applyStorySeeds.js`).
+The crons do write a per-citizen page, keyed by POPID. `citizenPage.js` mints the
+tag `cp-POP-XXXXX` from the POPID and throws on a malformed id, and the tag is
+denormalized into `Simulation_Ledger` col AW (`SMPageId`). **334 of 943 citizens
+carry a page tag today.** Wakes, exchanges, the desk writer, both walls and the
+nightly reflection all append to it; it is read back through
+`wakePerception.js:282`. That layer works.
 
-So a citizen's week of life lives in two places the engine's life record never
-sees, and reaches the engine only as a bounded dial nudge through
-`Reflection_Intake`. **The life is not persisted; a scalar summary of its mood
-is.** That is the thing to fix, and §6.3 is what makes fixing it safe.
+What it is, in the module's own words, is the **subjective** layer riding
+*alongside* the objective LifeHistory and dials — deliberate two-layer ownership,
+in an isolated Supermemory container specifically so a citizen's first-person
+prose can never leak into canon, city-state lookups or Mags' brain.
+
+**The engine cannot read it, and that is a guard, not an oversight.**
+`citizenPage.js` states the contract: wake-side only, never called from the cycle
+path, because the module is inherently non-deterministic I/O and a replay
+re-running the cycle would re-hit Supermemory and break the invariant `ctx.rng`
+protects. The cycle is allowed to read only the **frozen persisted tag** (col AW,
+and the classifier intake), never the live store.
+
+So the gap is not a missing pipe. It is a determinism boundary, and there is
+exactly one sanctioned way across it, already proven by `Reflection_Intake`:
+
+> **Freeze it wake-side into a deterministic row, and let the cycle read the
+> frozen row.** The classification happens at wake time and is written down; the
+> cycle reads a value that cannot change on replay.
+
+That is the pattern any life-persistence design must copy. "Let the engine read
+the page" is not available at any price.
+
+### 6.6 What that leaves
+
+A cron-written LifeHistory entry is legitimate under exactly two conditions:
+
+1. It is composed and frozen wake-side, written as ordinary text into the ledger
+   column, so the cycle reads a fixed value (replay-safe, same class as the
+   intake).
+2. It carries a marker that does not re-score what the drain already scored
+   (§6.3), so the objective/subjective split of §6.2 holds.
+
+Both are small. Neither exists yet. Today no cron writes LifeHistory at all —
+every writer is an engine phase, and the only script-side writers are probes,
+tests, audits and the `backdateCitizenDials.js` manual lever. A citizen's week
+reaches the engine as a bounded dial nudge and nothing else.
 
 ## 7. OPEN — Mike's sections
 
@@ -235,3 +269,8 @@ mechanism can actually carry.*
   subjective rule found already in `nudgesForReflection_`; `DEFAULT_AMBIENT`
   confirmed as the reason nothing logs for free; page read-back confirmed live
   at `wakePerception.js:282`, correcting the assumption it was missing.
+- 2026-09-18 — §6.5 rewritten after Mike pushed back: the per-citizen pages ARE
+  POPID-keyed and cron-written (334/943 carry a tag). Reframed from "no pipe"
+  to the real constraint — `citizenPage.js` is quarantined from the cycle path
+  as a determinism guard, and the only sanctioned crossing is to freeze a value
+  wake-side and let the cycle read the frozen row. §6.6 added.

@@ -1075,8 +1075,8 @@ A blank level cell (first fire after the columns arm) seeds from that row's last
 
 ## Oakland_Sports_Feed
 
-- **Rows:** 218
-- **Columns:** 20
+- **Rows:** 227
+- **Columns:** 19 (2026-09-19: WeekRecord appended, VideoGameDate/VideoGame deleted — engine.202)
 
 | Col | Header |
 |-----|--------|
@@ -1088,18 +1088,17 @@ A blank level cell (first fire after the columns arm) seeds from that row's last
 | F | Notes |
 | G | Stats |
 | H | Team Record |
-| I | VideoGameDate |
-| J | VideoGame |
-| K | StoryAngle |
-| L | PlayerMood |
-| M | EventTrigger |
-| N | HomeNeighborhood |
-| O | Streak |
-| P | FanSentiment |
-| Q | FranchiseStability |
-| R | EconomicFootprint |
-| S | CommunityInvestment |
-| T | MediaProfile |
+| I | StoryAngle |
+| J | PlayerMood |
+| K | EventTrigger |
+| L | HomeNeighborhood |
+| M | Streak |
+| N | FanSentiment |
+| O | FranchiseStability |
+| P | EconomicFootprint |
+| Q | CommunityInvestment |
+| R | MediaProfile |
+| S | WeekRecord |
 
 ---
 

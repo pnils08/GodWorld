@@ -122,10 +122,17 @@ function buildCommuteFlows_(ctx) {
     if (!bh) continue;
     var empN = iEmpCount >= 0 ? (Number(bizVals[b][iEmpCount]) || 0) : 0;
     var grN = iGrowth >= 0 ? (Number(bizVals[b][iGrowth]) || 0) : 0;
-    if (!depth[bh]) depth[bh] = { rows: 0, employees: 0, growthWeighted: 0 };
-    depth[bh].rows++;
-    depth[bh].employees += empN;
-    depth[bh].growthWeighted += empN * grN / 100;
+    // 2026-09-19 (builder ruling: a sub-area uses its parent hood's data for
+    // canon purposes): a child-area business counts toward its parent —
+    // Coliseum / Elmhurst -> East Oakland, Brooklyn Basin -> Jack London, Old
+    // Oakland -> Downtown, Telegraph corridor -> Temescal (Neighborhood_Map.
+    // ChildAreas). It was keyed by the raw label, so those employers were
+    // invisible to their hood. City-wide and unknown labels keep their own key.
+    var dh = resolveHoodOrChild_(ctx, bh) || bh;
+    if (!depth[dh]) depth[dh] = { rows: 0, employees: 0, growthWeighted: 0 };
+    depth[dh].rows++;
+    depth[dh].employees += empN;
+    depth[dh].growthWeighted += empN * grN / 100;
   }
   S.hoodEmployerDepth = depth;
 

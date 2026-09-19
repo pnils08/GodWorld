@@ -1411,6 +1411,16 @@ function applyCityDynamics_(ctx) {
       // neighborhoodDynamics → previousCycleState, so momentum self-heals from cycle 2.
       var prevNhoodState = (S.previousCycleState || {}).neighborhoodDynamics || {};
       var prevNhood = prevNhoodState[nhood] || null;
+      // 2026-09-19: a hood with no carried dynamics (the ten adopted hoods on
+      // their first tracked cycle) carries its mood from last cycle's persisted
+      // Neighborhood_Map Sentiment instead of none — without it their first
+      // cycle is the bare cluster value with no memory (bench C108: all ten
+      // 0.1–0.3 under their neighbours). Sentiment only: the sheet's other
+      // columns are on different scales from these multipliers.
+      if (!prevNhood && S.neighborhoodState && S.neighborhoodState[nhood] &&
+          S.neighborhoodState[nhood].sentiment !== null && isFinite(Number(S.neighborhoodState[nhood].sentiment))) {
+        prevNhood = { sentiment: Number(S.neighborhoodState[nhood].sentiment) };
+      }
       if (prevNhood) {
         var nhMom = 0.3; // 30% carry-forward from last cycle
         if (prevNhood.sentiment !== undefined) nm.sentiment = nm.sentiment * (1 - nhMom) + prevNhood.sentiment * nhMom;

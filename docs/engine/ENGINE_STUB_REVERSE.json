@@ -844,6 +844,7 @@
       ],
       "readers": [
         "phase01-config/engine94SheetContract.js::ensureEngine221Config_",
+        "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
         "phase02-world-state/loadNeighborhoodState.js::loadNeighborhoodState_",
         "phase03-population/generateCrisisBuckets.js::generateCrisisBuckets_",
         "phase03-population/generateCrisisSpikes.js::crisisHoodWeight_",

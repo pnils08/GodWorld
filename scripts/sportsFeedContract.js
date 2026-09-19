@@ -5,6 +5,8 @@
  * Pure helpers only: no Sheet, file, or network access.
  */
 
+const { sportsWeekForEntry_ } = require('../utilities/sportsWeekRecord.js');
+
 const FEED_HEADERS = Object.freeze([
   'Cycle', 'SeasonType', 'EventType', 'TeamsUsed', 'NamesUsed', 'Notes',
   'Stats', 'Team Record', 'VideoGameDate', 'VideoGame', 'StoryAngle',
@@ -12,6 +14,18 @@ const FEED_HEADERS = Object.freeze([
   'FanSentiment', 'FranchiseStability', 'EconomicFootprint',
   'CommunityInvestment', 'MediaProfile'
 ]);
+
+// engine.202: the weekly summary is an APPENDED column (U), not a rename of
+// VideoGame — 81 historical VideoGame cells (C30–C83, "MLB The Show 25")
+// would otherwise sit under a WeekRecord header for every all-cycle reader.
+// The writer and dashboard accept exactly these layouts, oldest first, and
+// project a draft by header name; a later migration step is one entry here.
+const WEEK_RECORD_HEADER = 'WeekRecord';
+const FEED_LAYOUTS = Object.freeze([
+  FEED_HEADERS,
+  Object.freeze([...FEED_HEADERS, WEEK_RECORD_HEADER]),
+]);
+const DRAFT_FIELDS = Object.freeze([...new Set(FEED_LAYOUTS.flat())]);
 
 const TEAM_CONFIG = Object.freeze({
   as: Object.freeze({ id: 'as', label: "The A's", sheetValue: "A's", aliases: [] }),
@@ -241,11 +255,22 @@ function splitOaklandFeedEntries(rows) {
   return result;
 }
 
+function resolveFeedLayout(headers) {
+  const actual = (Array.isArray(headers) ? headers : [])
+    .map((header) => (header == null ? '' : String(header)));
+  const layout = FEED_LAYOUTS.find((known) => (
+    known.length === actual.length &&
+    known.every((header, index) => header === actual[index])
+  ));
+  if (!layout) throw new Error('Oakland_Sports_Feed header layout changed');
+  return layout;
+}
+
 function validateDraft(draft) {
   const source = draft || {};
   const value = {};
   const errors = [];
-  FEED_HEADERS.forEach((header) => {
+  DRAFT_FIELDS.forEach((header) => {
     const raw = source[header] == null ? '' : String(source[header]);
     if (raw.length > MAX_DRAFT_FIELD_CHARACTERS) {
       errors.push(
@@ -275,9 +300,17 @@ function validateDraft(draft) {
   if (value.EventType === 'game-result' && !value['Team Record']) errors.push('Team Record is required for game-result');
   if (value.Streak && !STREAK_RE.test(value.Streak)) errors.push('Streak must use W<n> or L<n> format');
   if (value.VideoGameDate || value.VideoGame) errors.push('VideoGameDate and VideoGame must be blank');
-  // engine.202: reader support precedes the header/authoring migration. The
-  // legacy projection must not silently discard a supplied weekly result.
-  if (text(source.WeekRecord)) errors.push('WeekRecord entry is not enabled yet; this draft cannot be saved');
+  // engine.202: the same grammar and EventType pairing the engine enforces
+  // (utilities/sportsWeekRecord.js), so a bad cell is caught at entry rather
+  // than rejected to Engine_Errors at the next Cycle. Blank stays valid.
+  if (value.WeekRecord) {
+    try {
+      value.WeekRecord = sportsWeekForEntry_({
+        weekRecord: value.WeekRecord,
+        eventType: value.EventType,
+      }).value;
+    } catch (error) { errors.push(error.message); }
+  }
   return { valid: errors.length === 0, errors, value, team: team || null };
 }
 
@@ -730,23 +763,46 @@ function validateSportsSubmission(input) {
   };
 }
 
-function projectNewRow(draft) {
+// The engine keeps the FIRST WeekRecord per franchise per Cycle and rejects
+// later ones (applySportsSeason.js readOaklandFeedEntries_). rows are
+// header-keyed objects; returns the sheet row number holding the week, or null.
+function findWeekRecordRow(rows, cycle, teamId) {
+  const target = String(cycle);
+  let found = null;
+  (rows || []).forEach((row, index) => {
+    if (found !== null || !row || !text(row[WEEK_RECORD_HEADER])) return;
+    if (text(row.Cycle) !== target) return;
+    let team;
+    try { team = normalizeTeam(row.TeamsUsed, { allowLegacy: false }); } catch { return; }
+    if (team.id !== teamId) return;
+    found = Number.isInteger(row.__rowNumber) ? row.__rowNumber : index + 2;
+  });
+  return found;
+}
+
+function projectNewRow(draft, layout = FEED_HEADERS) {
+  if (!FEED_LAYOUTS.includes(layout)) throw new Error('Unknown Oakland_Sports_Feed layout');
   const result = validateDraft(draft);
+  if (result.valid && result.value.WeekRecord && !layout.includes(WEEK_RECORD_HEADER)) {
+    result.valid = false;
+    result.errors.push('WeekRecord needs the Oakland_Sports_Feed WeekRecord column, which this sheet does not have yet');
+  }
   if (!result.valid) {
     const error = new Error(`Invalid Oakland sports draft: ${result.errors.join('; ')}`);
     error.validation = result;
     throw error;
   }
-  return FEED_HEADERS.map((header) => result.value[header]);
+  return layout.map((header) => result.value[header]);
 }
 
 module.exports = {
-  FEED_HEADERS, TEAM_CONFIG, EVENT_TYPES, SEASON_TYPES, OAKLAND_NEIGHBORHOODS,
+  FEED_HEADERS, FEED_LAYOUTS, WEEK_RECORD_HEADER, DRAFT_FIELDS, TEAM_CONFIG, EVENT_TYPES, SEASON_TYPES, OAKLAND_NEIGHBORHOODS,
   SAFE_ENUMS, REQUIRED_FIELDS, MAX_DRAFT_FIELD_CHARACTERS, POPID_RE,
   ROSTER_SOURCES, STAT_FIELD_MAPS,
   ACTION_MATRIX, ROSTER_EVENT_FIELDS, ROSTER_EVENT_EFFECT_TYPES,
   VERIFICATION_SOURCES,
   normalizeTeam, normalizeDraftTeam, filterFeedRowsForCycle, splitOaklandFeedEntries,
   validateDraft, validateSportsSubmission, projectNewRow,
+  resolveFeedLayout, findWeekRecordRow,
   projectRosterEventMutation,
 };

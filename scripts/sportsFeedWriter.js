@@ -6,8 +6,11 @@ const fs = require('fs');
 const path = require('path');
 const {
   FEED_HEADERS,
+  FEED_LAYOUTS,
   STAT_FIELD_MAPS,
+  findWeekRecordRow,
   projectNewRow,
+  resolveFeedLayout,
   projectRosterEventMutation,
   validateSportsSubmission,
 } = require('./sportsFeedContract.js');
@@ -106,15 +109,25 @@ function safeCell(value) {
   return value == null ? '' : String(value);
 }
 
-function normalizedRow(values) {
+// Pads to the layout width: the Sheets API drops trailing blank cells on
+// read-back, so an unpadded compare would fail a row that ends in blanks.
+function normalizedRow(values, width) {
   const source = Array.isArray(values) ? values : [];
-  return FEED_HEADERS.map((_, index) => safeCell(source[index]));
+  return Array.from({ length: width }, (_, index) => safeCell(source[index]));
 }
 
-function rowsMatch(left, right) {
-  const a = normalizedRow(left);
-  const b = normalizedRow(right);
+function rowsMatch(left, right, width = FEED_HEADERS.length) {
+  const a = normalizedRow(left, width);
+  const b = normalizedRow(right, width);
   return a.every((value, index) => value === b[index]);
+}
+
+// The preview's signed preconditions carry the hash of the feed header row it
+// projected against; commit requires those preconditions to match the live
+// sheet exactly, so this recovers the one layout both sides agree on.
+function feedLayoutForPreconditions(preconditions) {
+  const hash = preconditions && preconditions.feedHeaderHash;
+  return FEED_LAYOUTS.find((layout) => sha256(stableStringify(layout)) === hash) || null;
 }
 
 function rosterTeamId(rosterSource) {
@@ -154,9 +167,9 @@ function normalizedRawSnapshot(snapshot, sheetName, options = {}) {
 }
 
 function normalizedFeedSnapshot(snapshot) {
-  return normalizedRawSnapshot(snapshot, FEED_SHEET, {
-    exactHeaders: FEED_HEADERS,
-  });
+  const feed = normalizedRawSnapshot(snapshot, FEED_SHEET);
+  feed.layout = resolveFeedLayout(feed.headers);
+  return feed;
 }
 
 function selectedRosterRow(snapshot, participant) {
@@ -648,10 +661,24 @@ function createSportsFeedWriter(dependencies) {
       );
     }
 
-    const row = projectNewRow(
-      input.submission ? input.submission.draft : input.draft
-    );
-    if (!rowsMatch(row, input.expectedRow)) {
+    const layout = feedLayoutForPreconditions(input.sourcePreconditions);
+    if (!layout) {
+      throw new SportsFeedWriterError(
+        'sports_source_preconditions_missing',
+        'The preview does not name a known Oakland_Sports_Feed layout',
+        409
+      );
+    }
+    let row;
+    try {
+      row = projectNewRow(
+        input.submission ? input.submission.draft : input.draft,
+        layout
+      );
+    } catch (error) {
+      throw new SportsFeedWriterError('sports_validation_failed', error.message, 422);
+    }
+    if (!rowsMatch(row, input.expectedRow, layout.length)) {
       throw new SportsFeedWriterError(
         'sports_preview_row_mismatch',
         'The confirmed row no longer matches its preview',
@@ -811,6 +838,21 @@ function createSportsFeedWriter(dependencies) {
           409
         );
       }
+      if (validation.draft.WeekRecord) {
+        const feed = normalizedFeedSnapshot(feedRows);
+        const weekRow = findWeekRecordRow(feed.rows.map((feedRow) => {
+          const byHeader = { __rowNumber: feedRow.rowNumber };
+          feed.headers.forEach((header, index) => { byHeader[header] = feedRow.values[index]; });
+          return byHeader;
+        }), validation.draft.Cycle, validation.team.id);
+        if (weekRow !== null) {
+          throw new SportsFeedWriterError(
+            'sports_week_record_duplicate',
+            `Row ${weekRow} already holds this franchise's WeekRecord for Cycle ${validation.draft.Cycle}`,
+            409
+          );
+        }
+      }
 
       const statChanges = changedStatFields(validation);
       let selectedRoster = null;
@@ -886,7 +928,7 @@ function createSportsFeedWriter(dependencies) {
       const feedRange = rowRange(
         FEED_SHEET,
         'A',
-        'T',
+        columnLetter(layout.length - 1),
         currentPreconditions.nextFeedRow,
       );
       let mutationRanges = [];
@@ -1148,7 +1190,7 @@ function createSportsFeedWriter(dependencies) {
 
       const feedReadBack = await readRange(feedRange);
       if (!Array.isArray(feedReadBack) || feedReadBack.length !== 1 ||
-          !rowsMatch(row, feedReadBack[0])) {
+          !rowsMatch(row, feedReadBack[0], layout.length)) {
         throw new SportsFeedWriterError(
           'sports_readback_mismatch',
           'The appended row did not match exact-range read-back',

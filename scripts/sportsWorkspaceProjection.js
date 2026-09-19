@@ -47,7 +47,7 @@ function rowNumber(row, index) { return Number.isInteger(row && row.__rowNumber)
 function parseCycle(row) { const raw = value(row, 'Cycle'); return /^\d+$/.test(raw) ? Number(raw) : null; }
 function eventFromRow(row, index, team, cycle) {
   const event = { cycle, sourceRow: rowNumber(row, index), teamId: team.id, team: team.sheetValue, legacyTeamAlias: team.legacy };
-  ['SeasonType', 'EventType', 'NamesUsed', 'Notes', 'Stats', 'Team Record', 'StoryAngle', 'PlayerMood', 'EventTrigger', 'HomeNeighborhood', 'Streak', 'FanSentiment', 'FranchiseStability', 'EconomicFootprint', 'CommunityInvestment', 'MediaProfile'].forEach((header) => { event[header] = value(row, header); });
+  ['SeasonType', 'EventType', 'NamesUsed', 'Notes', 'Stats', 'Team Record', 'StoryAngle', 'PlayerMood', 'EventTrigger', 'HomeNeighborhood', 'Streak', 'FanSentiment', 'FranchiseStability', 'EconomicFootprint', 'CommunityInvestment', 'MediaProfile', 'WeekRecord'].forEach((header) => { event[header] = value(row, header); });
   return event;
 }
 

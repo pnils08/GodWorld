@@ -4,7 +4,6 @@ import { createRequire } from 'module';
 
 const require = createRequire(import.meta.url);
 const {
-  FEED_HEADERS,
   TEAM_CONFIG,
   EVENT_TYPES,
   ACTION_MATRIX,
@@ -15,6 +14,8 @@ const {
   projectRosterEventMutation,
   validateSportsSubmission,
   projectNewRow,
+  resolveFeedLayout,
+  findWeekRecordRow,
 } = require('../scripts/sportsFeedContract.js');
 const { projectSportsWorkspace } = require('../scripts/sportsWorkspaceProjection.js');
 const { readDailyInbox } = require('../scripts/notebookDailyInbox.js');
@@ -289,9 +290,10 @@ function feedRowsFromSnapshot(data) {
       true,
     );
   }
-  const headers = data.headers.map((header) => String(header || ''));
-  if (headers.length !== FEED_HEADERS.length ||
-      headers.some((header, index) => header !== FEED_HEADERS[index])) {
+  let layout;
+  try {
+    layout = resolveFeedLayout(data.headers.map((header) => String(header || '')));
+  } catch {
     throw routeError(
       'sports_source_schema_changed',
       'Oakland_Sports_Feed header layout changed',
@@ -301,7 +303,7 @@ function feedRowsFromSnapshot(data) {
   }
   return data.rows.map((row) => {
     const result = { __rowNumber: row.rowNumber };
-    FEED_HEADERS.forEach((header, index) => {
+    layout.forEach((header, index) => {
       result[header] = row.values[index] == null
         ? ''
         : String(row.values[index]);
@@ -426,6 +428,7 @@ async function loadProjection(readSheet, requestedCycle) {
     cycle,
     cycles,
     projection,
+    feedRows,
     snapshots: { feed, asRoster, oaksRoster },
     source,
     warnings,
@@ -873,9 +876,27 @@ async function preparePreview(readSheet, submissionInput, provenanceInput) {
       mutation: validation.mutation,
     }
     : null;
-  const row = projectNewRow(canonicalDraft);
+  const layout = resolveFeedLayout(
+    result.snapshots.feed.data.headers.map((header) => String(header || '')),
+  );
+  if (validation.draft.WeekRecord) {
+    const weekRow = findWeekRecordRow(result.feedRows, validation.draft.Cycle, validation.team.id);
+    if (weekRow !== null) {
+      throw routeError(
+        'sports_week_record_duplicate',
+        `Row ${weekRow} already holds this franchise's WeekRecord for Cycle ${validation.draft.Cycle}`,
+        409,
+      );
+    }
+  }
+  let row;
+  try {
+    row = projectNewRow(canonicalDraft, layout);
+  } catch (error) {
+    throw routeError('sports_validation_failed', error.message, 422);
+  }
   const rowByHeader = {};
-  FEED_HEADERS.forEach((header, index) => { rowByHeader[header] = row[index]; });
+  layout.forEach((header, index) => { rowByHeader[header] = row[index]; });
   const provenance = sanitizeNotebookProvenance(provenanceInput);
   const mutationPreview = buildMutationPreview(validation, resolvedParticipant);
   const sourcePreconditions = createSportsSourcePreconditions({

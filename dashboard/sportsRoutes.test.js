@@ -555,6 +555,46 @@ assert.strictEqual(
   'Synthetic Middle Batter',
 );
 
+// engine.202: the 21-column feed (WeekRecord appended at U). Preview projects
+// against the live layout; a second week for the same franchise and Cycle is
+// refused at entry (row 3 already holds the A's week; row 4's retired
+// 'Warriors' label never occupies the Oaks slot), and the legacy layout
+// refuses a weekly draft outright.
+const weeklyReadSheet = async (sheetName) => {
+  const snapshot = await readSheet(sheetName);
+  if (sheetName !== 'Oakland_Sports_Feed') return snapshot;
+  return {
+    ...snapshot,
+    data: {
+      ...snapshot.data,
+      headers: [...snapshot.data.headers, 'WeekRecord'],
+      rows: snapshot.data.rows.map((row) => ({
+        ...row,
+        values: [...row.values, row.rowNumber >= 3 ? 'H:L' : ''],
+      })),
+    },
+  };
+};
+const weeklyHandlers = createSportsHandlers({ readSheet: weeklyReadSheet });
+const weeklyWorkspace = await call(weeklyHandlers.workspace, { query: { cycle: '404', team: 'as' } });
+assert.strictEqual(weeklyWorkspace.statusCode, 200);
+const weeklyPreview = await call(weeklyHandlers.preview, {
+  body: { draft: { ...validDraft, TeamsUsed: 'oaks', NamesUsed: '', WeekRecord: 'h:w  a:l' } },
+});
+assert.strictEqual(weeklyPreview.statusCode, 200, JSON.stringify(weeklyPreview.body.error));
+assert.strictEqual(weeklyPreview.body.data.row.length, 21);
+assert.strictEqual(weeklyPreview.body.data.rowByHeader.WeekRecord, 'H:W A:L');
+const asWeekDuplicate = await call(weeklyHandlers.preview, {
+  body: { draft: { ...validDraft, WeekRecord: 'A:W' } },
+});
+assert.strictEqual(asWeekDuplicate.statusCode, 409);
+assert.strictEqual(asWeekDuplicate.body.error.code, 'sports_week_record_duplicate');
+const legacyWeekly = await call(handlers.preview, {
+  body: { draft: { ...validDraft, WeekRecord: 'H:W' } },
+});
+assert.strictEqual(legacyWeekly.statusCode, 422);
+assert.match(legacyWeekly.body.error.message, /WeekRecord column/);
+
 const invalidStatPreview = await call(handlers.preview, {
   body: statSubmission({
     changes: [

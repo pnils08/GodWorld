@@ -87,11 +87,41 @@ assert.strictEqual(contract.validateDraft(syntheticDraft({ HomeNeighborhood: 'Sy
 assert.strictEqual(contract.validateDraft(syntheticDraft({ EventType: 'game-result', 'Team Record': '' })).valid, false);
 assert.strictEqual(contract.validateDraft(syntheticDraft({ Cycle: '0' })).valid, false);
 assert.strictEqual(contract.validateDraft(syntheticDraft({ VideoGame: 'legacy value' })).valid, false);
-// The weekly engine reader can precede the authoring migration. Never silently
-// discard the new field while preview/write still use the legacy header layout.
-assert.strictEqual(contract.validateDraft(syntheticDraft({ WeekRecord: 'H:W A:L' })).valid, false);
-assert.throws(() => contract.projectNewRow(syntheticDraft({ WeekRecord: 'H:W A:L' })), /WeekRecord/);
+// engine.202 WeekRecord: validated with the engine's own grammar and
+// EventType pairing, normalized, and projected only onto a layout that has
+// the column — the legacy 20-column layout refuses it, never drops it.
+const weekly = contract.validateDraft(syntheticDraft({ WeekRecord: ' h:w  a:l ' }));
+assert.strictEqual(weekly.valid, true);
+assert.strictEqual(weekly.value.WeekRecord, 'H:W A:L');
+assert.strictEqual(contract.validateDraft(syntheticDraft({ WeekRecord: 'H:W 3-1' })).valid, false);
+assert.strictEqual(contract.validateDraft(syntheticDraft({ WeekRecord: 'H:W', EventType: 'season-state' })).valid, false);
+assert.strictEqual(contract.validateDraft(syntheticDraft({ WeekRecord: 'none', EventType: 'game-result' })).valid, false);
+assert.strictEqual(contract.validateDraft(syntheticDraft({ WeekRecord: 'none', EventType: 'season-state' })).valid, true);
 assert.strictEqual(contract.validateDraft(syntheticDraft({ WeekRecord: ' ' })).valid, true);
+assert.throws(() => contract.projectNewRow(syntheticDraft({ WeekRecord: 'H:W A:L' })), /WeekRecord column/);
+assert.throws(() => contract.projectNewRow(syntheticDraft(), [...contract.FEED_HEADERS]), /Unknown/);
+
+const [legacyLayout, weeklyLayout] = contract.FEED_LAYOUTS;
+assert.strictEqual(contract.resolveFeedLayout([...contract.FEED_HEADERS]), legacyLayout);
+assert.strictEqual(contract.resolveFeedLayout([...contract.FEED_HEADERS, 'WeekRecord']), weeklyLayout);
+assert.throws(() => contract.resolveFeedLayout([...contract.FEED_HEADERS, 'Other']), /layout changed/);
+assert.throws(() => contract.resolveFeedLayout(contract.FEED_HEADERS.slice(0, 19)), /layout changed/);
+const weeklyRow = contract.projectNewRow(syntheticDraft({ WeekRecord: 'H:W A:L' }), weeklyLayout);
+assert.strictEqual(weeklyRow.length, 21);
+assert.strictEqual(weeklyRow[20], 'H:W A:L');
+assert.strictEqual(contract.projectNewRow(syntheticDraft(), weeklyLayout)[20], '');
+assert.deepStrictEqual(contract.projectNewRow(syntheticDraft(), weeklyLayout).slice(0, 20),
+  contract.projectNewRow(syntheticDraft()));
+
+const feedRows = [
+  { __rowNumber: 5, Cycle: '404', TeamsUsed: 'Oaks', WeekRecord: 'H:L' },
+  { __rowNumber: 6, Cycle: '404', TeamsUsed: "A's", WeekRecord: '' },
+  { __rowNumber: 7, Cycle: '403', TeamsUsed: "A's", WeekRecord: 'H:W' },
+  { __rowNumber: 8, Cycle: '404', TeamsUsed: 'NBA', WeekRecord: 'H:W' },
+];
+assert.strictEqual(contract.findWeekRecordRow(feedRows, 404, 'as'), null);
+assert.strictEqual(contract.findWeekRecordRow(feedRows, 404, 'oaks'), 5);
+assert.strictEqual(contract.findWeekRecordRow(feedRows, 403, 'as'), 7);
 assert.ok(contract.EVENT_TYPES.includes('stat-capture'));
 
 const row = contract.projectNewRow(syntheticDraft({ TeamsUsed: 'oaks', EventType: 'editorial-note', 'Team Record': '' }));

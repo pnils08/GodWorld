@@ -17,6 +17,7 @@ const {
 const {
   FEED_HEADERS,
   projectNewRow,
+  resolveFeedLayout,
   validateSportsSubmission,
 } = require('./sportsFeedContract.js');
 
@@ -285,7 +286,7 @@ function writerHarness(options = {}) {
           appendedRow = values;
           feedSnapshot.rows.push({
             rowNumber: feedSnapshot.rows.length + 2,
-            values: FEED_HEADERS.map((_, index) => values[index] || ''),
+            values: feedSnapshot.headers.map((_, index) => values[index] || ''),
           });
         } else if (append.sheetId === 404) {
           const storedValues = LIFE_HISTORY_LOG_HEADERS.map(
@@ -328,7 +329,7 @@ function writerHarness(options = {}) {
       return { replies: requests.map(() => ({})) };
     },
     readRange: async (range) => {
-      if (/^Oakland_Sports_Feed!A\d+:T\d+$/.test(range)) {
+      if (/^Oakland_Sports_Feed!A\d+:[TU]\d+$/.test(range)) {
         const row = options.readBackMismatch
           ? appendedRow.map((value, index) => index === 5 ? 'DIFFERENT' : value)
           : appendedRow;
@@ -439,7 +440,7 @@ function inputFor(value, key, harness) {
       mutation: validation.mutation,
     }
     : null;
-  const row = projectNewRow(value.draft || value);
+  const row = projectNewRow(value.draft || value, resolveFeedLayout(harness.feedRows.headers));
   const participant = validation.participant;
   const sourcePreconditions = createSportsSourcePreconditions({
     feedRows: harness.feedRows,
@@ -1070,6 +1071,51 @@ async function expectCode(promise, code) {
     /header layout changed/,
   );
   assert.strictEqual(headerSwapHarness.batchCalls, 0);
+
+  // engine.202: the 21-column layout (WeekRecord appended at U). The row is
+  // projected, appended and read back at the layout's own width.
+  const weeklyHeaders = [...FEED_HEADERS, 'WeekRecord'];
+  const weeklyHarness = writerHarness({ feedHeaders: weeklyHeaders });
+  const weeklyInput = inputFor(
+    draft({ WeekRecord: 'h:w a:l' }),
+    'synthetic-weekly-key-01',
+    weeklyHarness,
+  );
+  assert.strictEqual(weeklyInput.expectedRow.length, 21);
+  const weeklyWrite = await weeklyHarness.writer(weeklyInput);
+  assert.strictEqual(weeklyWrite.updatedRange, 'Oakland_Sports_Feed!A3:U3');
+  const weeklyAppend = weeklyHarness.capturedBatches[0][0].appendCells.rows[0].values;
+  assert.strictEqual(weeklyAppend.length, 21);
+  assert.strictEqual(weeklyAppend[20].userEnteredValue.stringValue, 'H:W A:L');
+
+  // One weekly summary per franchise per Cycle — the engine keeps the first
+  // and rejects the rest, so the writer refuses the second at entry.
+  const duplicateInput = inputFor(
+    draft({ WeekRecord: 'A:W', Notes: 'SYNTHETIC second week.' }),
+    'synthetic-weekly-key-02',
+    weeklyHarness,
+  );
+  await expectCode(weeklyHarness.writer(duplicateInput), 'sports_week_record_duplicate');
+  assert.strictEqual(weeklyHarness.batchCalls, 1);
+  const otherTeamInput = inputFor(
+    draft({ WeekRecord: 'none', TeamsUsed: 'oaks', EventType: 'season-state', 'Team Record': '' }),
+    'synthetic-weekly-key-03',
+    weeklyHarness,
+  );
+  await weeklyHarness.writer(otherTeamInput);
+  assert.strictEqual(weeklyHarness.batchCalls, 2);
+
+  // A weekly draft cannot be previewed against the legacy layout ...
+  assert.throws(
+    () => inputFor(draft({ WeekRecord: 'H:W' }), 'synthetic-weekly-key-04', writerHarness()),
+    /WeekRecord column/,
+  );
+  // ... and a header migration between preview and commit is a source change.
+  const migratedHarness = writerHarness();
+  const migratedInput = inputFor(draft(), 'synthetic-weekly-key-05', migratedHarness);
+  migratedHarness.feedSnapshot.headers.push('WeekRecord');
+  await expectCode(migratedHarness.writer(migratedInput), 'sports_source_changed');
+  assert.strictEqual(migratedHarness.batchCalls, 0);
 
   console.log('sportsFeedWriter.test.js: all assertions passed');
 })().catch((error) => {

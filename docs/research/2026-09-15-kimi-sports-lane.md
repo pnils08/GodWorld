@@ -91,3 +91,11 @@ reviewer wants it.
 Wiring card landed after the OpenRouter limit was lifted:
 `output/agent_engine-wiring_2026-09-15T22-03-40.md` (Oakland_Sports_Feed). The
 "wiring card status" section above is superseded.
+
+## Review — research-build, 2026-09-19 (S467)
+
+Accepted into docs/research. The scripts-side slice work stands as landed. Disposition of the proposed engine cuts:
+
+- **Cut 1 (sports hook theme monopoly): already shipped.** engine.232 / engine.232b (S463, `ecf6d5ce`, `512ca101`, live on PROD @96) added a desk-scoped theme scorer, domain seat before the hookType signal, and a 25% per-Cycle cap on hook naming (`storyHook.js:234-241`, `suggestStoryAngle_` at `utilities/rosterLookup.js:904`). The report's `storyHook.js:192-195` pointer predates that cut. The monopoly is verified in the historical deck: 32 of 38 SPORTS hooks named P Slayer, 6 unnamed, C80–C107. The first Cycle fired under the cap is the one to check.
+- **Cut 2 (stadium state is S.*-only): folds into engine.204.** Same gap as [[2026-09-18-sports-intensity-and-game-day-economy]] §1.6-1: `S.baylightOpenings` and `S.sportsSeasonByTeam` are orphaned writes. Task 3 derives per-franchise venue from them, so no separate row.
+- **Chicago_Sports_Feed archive:** a sheet-structure change on a retired tab. The builder's go is needed; no row filed.

@@ -18,6 +18,12 @@
  * ============================================================================
  */
 
+// engine.187 part 4 diag-emit: three separate sessions have had to reverse-engineer WHY the shock
+// flag was set, because shockReasons lives in memory and the Cycle_Packet's SHOCK CONTEXT section is
+// trimmed at the compile layer (S328 KEEP_SECTIONS, deliberate). Same idiom as ENGINE59/61/95: the
+// fire response carries the why, so a bench read never has to infer it from correlations again.
+var ENGINE187_DIAG = null;
+
 function applyShockMonitor_(ctx) {
 
   var S = ctx.summary || {};
@@ -414,6 +420,26 @@ function applyShockMonitor_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   S.shockFlag = finalShockFlag;
   S.shockReasons = shockReasons;
+
+  ENGINE187_DIAG = {
+    cycle: currentCycle,
+    flag: finalShockFlag,
+    prevFlag: prevShockFlag,
+    reasons: shockReasons.slice(0),
+    duration: shockDuration,
+    read: {
+      chaos: curChaos, prevChaos: prevChaos, chaosSaturationThreshold: chaosSaturationThreshold,
+      medium: curMed, high: curHigh,
+      migration: migration, migrationThreshold: migrationThreshold,
+      civicLoadScore: civicLoadScore, sentiment: curSent, prevSentiment: prevSent,
+      econMood: econMood, weatherImpact: wxImpact,
+      comfortIndex: (weatherMood.comfortIndex === undefined ? null : weatherMood.comfortIndex),
+      conflictPotential: (weatherMood.conflictPotential === undefined ? null : weatherMood.conflictPotential),
+      peakArcs: peakArcs, highTensionArcs: highTensionArcs,
+      coverageIntensity: mediaEffects.coverageIntensity || null,
+      crisisSaturation: mediaEffects.crisisSaturation || null
+    }
+  };
   S.shockScore = shockReasons.length;
   S.shockStartCycle = shockStartCycle;
   S.shockDuration = shockDuration;

@@ -48,6 +48,8 @@ function doGet(e) {
           if (typeof ENGINE61_DIAG !== 'undefined' && ENGINE61_DIAG) out.diag61 = ENGINE61_DIAG;
           // engine.95 Task 2: per-phase timings (no GCP project → clasp logs unavailable)
           if (typeof ENGINE95_TIMING_DIAG !== 'undefined' && ENGINE95_TIMING_DIAG) out.timing = ENGINE95_TIMING_DIAG;
+          // engine.187 part 4 diag-emit: which shock gate fired, and every number it read
+          if (typeof ENGINE187_DIAG !== 'undefined' && ENGINE187_DIAG) out.diag187 = ENGINE187_DIAG;
           // engine.119 T3: carry-forward ghost skips / sheet recoveries (empty on a clean fire)
           if (typeof CARRY_FORWARD_DIAG !== 'undefined' && CARRY_FORWARD_DIAG && CARRY_FORWARD_DIAG.length) out.carryForward = CARRY_FORWARD_DIAG;
           if (typeof CITIZEN_ARCHIVE_DIAG !== 'undefined' && CITIZEN_ARCHIVE_DIAG && CITIZEN_ARCHIVE_DIAG.enabled) out.citizenArchive = CITIZEN_ARCHIVE_DIAG; // engine.90

@@ -137,3 +137,118 @@ Civis storyline rows in tracker: 1
 Neighborhood_Map CrimeIndex C108: Downtown 0.54 | Temescal 0.65 | Laurel 0.52 | West Oakland 0.58 | Fruitvale 0.64 | Jack London 0.53 | Rockridge 0.54 | Adams Point 0.6 | Grand Lake 0.6 | Piedmont Ave 0.54 | Chinatown 0.6 | Brooklyn 0.57 | Eastlake 0.61 | Glenview 0.56 | Dimond 0.66 | Ivy Hill 0.59 | San Antonio 0.65 | KONO 0.61 | Lake Merritt 0.52 | Uptown 0.52 | Baylight District 0.55 | East Oakland 0.66
 
 Previous readings were then rewritten on live as level + each hood's own C107 swing (writeCrimePrevReadings.js): against this C108 output, 2 hoods cross the 5-point shift threshold (East Oakland violent +5, Dimond property +5) instead of 9 all-falling.
+
+## MULTI-CYCLE — bench @62 (= PROD @101) C109–C111 continuing from treatment 4 (answers kimi final review B2/B3)
+
+### C109 Neighborhood_Map
+BENCH cycleCount 109
+Engine_Errors rows total 0 | mentioning 108: 0
+hood | cyc | retail | night | noise | event | sent | crime | traj | hp | demo
+Jack London | 109 | 11.4 | 0.92 | 4.63 | 8.1 | -0.05 | 0.52 | growth | 4.5 | Mild inflow
+Uptown | 109 | 10.1 | 0.98 | 4.83 | 8.21 | -0.17 | 0.53 | steady | 4.5 | Mild inflow
+Fruitvale | 109 | 10.08 | 0.69 | 4.49 | 6.41 | 0.01 | 0.62 | growth | 0.5 | Inflow surge
+Piedmont Ave | 109 | 10 | 0.46 | 2.32 | 4.53 | -0.18 | 0.51 | steady | 0 | Stable
+Rockridge | 109 | 9.62 | 0.66 | 2.54 | 5.18 | -0.2 | 0.56 | growth | 6 | Civic pressure zone
+Grand Lake | 109 | 9.58 | 0.72 | 3.64 | 7 | -0.15 | 0.57 | growth | 4 | Inflow surge
+Downtown | 109 | 9 | 0.59 | 5.18 | 9.2 | 0.02 | 0.52 | steady | 4.5 | Civic pressure zone
+Chinatown | 109 | 8.08 | 0.74 | 4.6 | 7.32 | -0.11 | 0.62 | steady | 0 | Mild inflow
+West Oakland | 109 | 7.78 | 0.58 | 4.38 | 5.21 | -0.01 | 0.6 | steady | 0 | Civic pressure zone
+Lake Merritt | 109 | 7.46 | 0.39 | 2.14 | 3.33 | -0.07 | 0.53 | steady | 3 | Mild outflow
+Brooklyn | 109 | 7.14 | 0.46 | 2.16 | 3.04 | -0.2 | 0.59 | steady | 0 | Mild outflow
+KONO | 109 | 6.85 | 0.89 | 3.99 | 7.25 | -0.29 | 0.58 | steady | 0 | Stable
+Dimond | 109 | 6.43 | 0.5 | 2.51 | 4.25 | -0.31 | 0.65 | decay | 0 | Mild outflow
+Laurel | 109 | 5.84 | 0.53 | 2.82 | 5.45 | -0.08 | 0.62 | steady | 0 | Mild inflow
+Eastlake | 109 | 5.51 | 0.6 | 3.03 | 6.72 | -0.13 | 0.57 | growth | 0.5 | Mild inflow
+Temescal | 109 | 5 | 0.7 | 3.4 | 5.2 | -0.05 | 0.64 | steady | 6 | Stable
+Adams Point | 109 | 4.96 | 0.44 | 2.23 | 3.1 | -0.14 | 0.58 | steady | 0 | Stable
+East Oakland | 109 | 4.89 | 0.58 | 4.49 | 4.25 | -0.06 | 0.67 | steady | 0 | Mild outflow
+Baylight District | 109 | 4.74 | 0.37 | 4.99 | 4 | -0.13 | 0.5 | decay | 0 | Mild outflow
+Glenview | 109 | 4.47 | 0.43 | 2.1 | 3 | -0.14 | 0.65 | steady | 0 | Mild outflow
+Ivy Hill | 109 | 4.39 | 0.42 | 2.28 | 3 | -0.22 | 0.6 | decay | 0 | Outflow accelerating
+San Antonio | 109 | 2.09 | 0.73 | 4.27 | 5.25 | -0.34 | 0.63 | decay | 0 | Outflow accelerating
+
+### C109 LifeHistory neighborhood lines (source:nbhdState), by hood
+papered      0 {}
+notMuchOpen  0 {}
+newShop      11 {"Rockridge":3,"Jack London":1,"Downtown":1,"Piedmont Ave":1,"Uptown":2,"Fruitvale":3}
+rentNotes    32 {"Lake Merritt":6,"Rockridge":6,"Temescal":9,"Uptown":4,"Downtown":4,"Jack London":3}
+goodStretch  0 {}
+heaviness    0 {}
+locks        0 {}
+  e.g. {"Timestamp":"9/19/2026","POPID":"POP-00019","Name":"Isley Kelley","EventTag":"Neighborhood|source:nbhdState|state:housing|occupation:Shortstop, Oakland A's Legend|ageGroup:youngAdult|neighborhood:Rockridge|tier:1|archetype:Striver","EventText":"compared rent 
+
+### C110 Neighborhood_Map
+BENCH cycleCount 110
+Engine_Errors rows total 0 | mentioning 108: 0
+hood | cyc | retail | night | noise | event | sent | crime | traj | hp | demo
+Uptown | 110 | 12.06 | 1.03 | 6.13 | 35.76 | 0 | 0.56 | growth | 5.5 | Inflow surge
+Jack London | 110 | 11.6 | 1.02 | 5.79 | 46.53 | 0.03 | 0.48 | growth | 5.5 | Inflow surge
+Fruitvale | 110 | 11.38 | 0.84 | 5.6 | 27.46 | 0.09 | 0.64 | growth | 1.5 | Inflow surge
+Rockridge | 110 | 10.47 | 0.83 | 3.06 | 23.93 | -0.08 | 0.57 | steady | 5.5 | Civic pressure zone
+Piedmont Ave | 110 | 10.47 | 0.66 | 3.02 | 16.4 | -0.04 | 0.54 | steady | 0 | Mild inflow
+Grand Lake | 110 | 10.36 | 0.84 | 4.35 | 30.25 | -0.08 | 0.63 | growth | 5 | Inflow surge
+West Oakland | 110 | 10.3 | 0.82 | 5.49 | 22.29 | 0.13 | 0.58 | steady | 0 | Civic pressure zone
+Chinatown | 110 | 9.81 | 0.79 | 5.9 | 30.67 | 0.01 | 0.47 | growth | 0.5 | Inflow surge
+Lake Merritt | 110 | 8.3 | 0.53 | 2.88 | 15.68 | 0 | 0.52 | steady | 2.5 | Inflow surge
+KONO | 110 | 8.17 | 1.02 | 4.93 | 33 | -0.1 | 0.61 | steady | 0 | Mild inflow
+Downtown | 110 | 8.01 | 0.83 | 6.62 | 43.45 | 0.07 | 0.54 | growth | 5.5 | Civic pressure zone
+Laurel | 110 | 7.58 | 0.74 | 3.81 | 22.64 | -0.05 | 0.59 | steady | 0 | Mild inflow
+Dimond | 110 | 7.2 | 0.65 | 3.02 | 19.25 | -0.22 | 0.67 | decay | 0 | Mild outflow
+Brooklyn | 110 | 7.09 | 0.54 | 2.57 | 15.02 | -0.22 | 0.6 | decay | 0 | Mild outflow
+Glenview | 110 | 7.02 | 0.49 | 2.87 | 15.5 | -0.17 | 0.61 | decay | 0 | Mild outflow
+Adams Point | 110 | 6.19 | 0.56 | 2.64 | 15.55 | -0.06 | 0.6 | decay | 0 | Mild inflow
+Eastlake | 110 | 5.8 | 0.75 | 3.81 | 20.86 | -0.05 | 0.58 | steady | 0 | Mild inflow
+Temescal | 110 | 5.78 | 1.15 | 4.6 | 44.58 | 0.05 | 0.56 | steady | 5.5 | First Friday arts walk zone
+East Oakland | 110 | 5.76 | 0.75 | 5.42 | 19.75 | 0.01 | 0.68 | steady | 0 | Mild inflow
+Baylight District | 110 | 5.38 | 0.4 | 6.29 | 16.5 | -0.09 | 0.53 | decay | 0 | Mild outflow
+Ivy Hill | 110 | 5.05 | 0.5 | 2.75 | 15 | -0.13 | 0.6 | decay | 0 | Stable
+San Antonio | 110 | 2.77 | 0.86 | 5.08 | 22 | -0.28 | 0.65 | decay | 0 | Civic pressure zone
+
+### C110 LifeHistory neighborhood lines (source:nbhdState), by hood
+papered      0 {}
+notMuchOpen  1 {"Temescal":1}
+newShop      7 {"Uptown":2,"Rockridge":4,"Fruitvale":1}
+rentNotes    32 {"Jack London":6,"Rockridge":7,"Uptown":4,"Temescal":4,"Lake Merritt":6,"Downtown":4,"Grand Lake":1}
+goodStretch  5 {"Downtown":5}
+heaviness    0 {}
+locks        0 {}
+  e.g. {"Timestamp":"9/19/2026","POPID":"POP-00121","Name":"Otis Redd","EventTag":"Neighborhood|source:nbhdState|state:housing|holiday:BlackHistoryMonth|holidayPriority:cultural|firstFriday|occupation:Scout, Oakland A's|ageGroup:adult|neighborhood:Rockridge|tier:4","
+
+### C111 Neighborhood_Map
+BENCH cycleCount 111
+Engine_Errors rows total 0 | mentioning 108: 0
+hood | cyc | retail | night | noise | event | sent | crime | traj | hp | demo
+Jack London | 111 | 15.33 | 1.26 | 5.04 | 10.76 | 0.24 | 0.49 | growth | 6.5 | Inflow surge
+Fruitvale | 111 | 13.66 | 1.09 | 4.4 | 8.24 | 0.31 | 0.63 | growth | 2.5 | Inflow surge
+Piedmont Ave | 111 | 13.6 | 0.7 | 2.38 | 5.31 | 0.15 | 0.58 | steady | 0 | Mild inflow
+Uptown | 111 | 12.68 | 1.28 | 5.06 | 10.56 | 0.16 | 0.55 | growth | 6.5 | Inflow surge
+Grand Lake | 111 | 12.58 | 0.97 | 3.71 | 9.25 | 0.14 | 0.58 | growth | 6 | Inflow surge
+Chinatown | 111 | 12.26 | 0.95 | 4.92 | 9.38 | 0.19 | 0.52 | growth | 1.5 | Inflow surge
+Rockridge | 111 | 12.13 | 0.94 | 2.45 | 7.18 | 0.1 | 0.57 | steady | 5 | Civic pressure zone
+West Oakland | 111 | 11.97 | 0.86 | 4.4 | 6.33 | 0.36 | 0.59 | growth | 0.5 | Mild inflow
+Downtown | 111 | 11.6 | 0.83 | 5.33 | 9.55 | 0.22 | 0.56 | growth | 6.5 | Shock event zone
+East Oakland | 111 | 9.71 | 0.79 | 4.48 | 6.25 | 0.2 | 0.7 | steady | 0 | Mild inflow
+Dimond | 111 | 9.7 | 0.69 | 2.6 | 6 | -0.03 | 0.61 | decay | 0 | Mild outflow
+Brooklyn | 111 | 9.65 | 0.62 | 2.18 | 4 | 0.03 | 0.36 | decay | 0 | Mild outflow
+Lake Merritt | 111 | 9.31 | 0.56 | 2.46 | 4.38 | 0.13 | 0.53 | steady | 2 | Stable
+KONO | 111 | 9.04 | 1.11 | 4.15 | 10.25 | 0.12 | 0.57 | steady | 0 | Stable
+Laurel | 111 | 8.57 | 0.8 | 3.25 | 6.71 | 0.14 | 0.5 | steady | 0 | Stable
+Eastlake | 111 | 8.11 | 0.84 | 3.22 | 6.68 | 0.07 | 0.59 | steady | 0 | Mild outflow
+Adams Point | 111 | 7.68 | 0.64 | 2.08 | 4.03 | 0.09 | 0.57 | decay | 0 | Mild outflow
+Temescal | 111 | 7.47 | 0.96 | 3.72 | 7.2 | 0.25 | 0.64 | growth | 6.5 | Mild inflow
+Baylight District | 111 | 7 | 0.48 | 5.31 | 5 | 0.16 | 0.53 | decay | 0 | Mild outflow
+Glenview | 111 | 6.92 | 0.58 | 2.48 | 4 | 0.07 | 0.65 | decay | 0 | Outflow accelerating
+Ivy Hill | 111 | 6.74 | 0.65 | 2.33 | 4 | 0.04 | 0.62 | decay | 0 | Outflow pressure
+San Antonio | 111 | 5.03 | 0.98 | 4.33 | 6.25 | -0.09 | 0.64 | decay | 0 | Civic pressure zone
+
+### C111 LifeHistory neighborhood lines (source:nbhdState), by hood
+papered      0 {}
+notMuchOpen  4 {"Temescal":3,"Ivy Hill":1}
+newShop      13 {"Uptown":2,"Brooklyn":1,"Jack London":3,"Fruitvale":2,"Piedmont Ave":3,"Chinatown":1,"West Oakland":1}
+rentNotes    25 {"Rockridge":8,"Jack London":7,"Downtown":2,"Temescal":4,"Uptown":4}
+goodStretch  0 {}
+heaviness    0 {}
+locks        0 {}
+  e.g. {"Timestamp":"9/19/2026","POPID":"POP-00016","Name":"Simon Leary","EventTag":"Neighborhood|source:nbhdState|state:housing|holiday:Valentine|holidayPriority:minor|occupation:Journalist, The Long View Columnist|ageGroup:adult|neighborhood:Rockridge|tier:3|archet
+
+Ten newly tracked hoods, per-cycle Sentiment deltas: C109→C110 [0.07,0.04,0.06,0.09,-0.03,0.09,0.08,0.07,0.08,-0.02] sd 0.041; C110→C111 [0.19,0.25,0.19,0.17,0.24,0.19,0.15,0.22,0.12,0.25] sd 0.041 (a citywide Valentine/First Friday rise, each hood by its own amount). Before engine.239b these ten carried the identical city value (sd 0). 0 Engine_Errors C109–C111.

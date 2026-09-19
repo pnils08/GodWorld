@@ -17,7 +17,14 @@ const OLD_RETAIL_MOD = { 'Downtown': 1.3, 'Temescal': 1.2, 'Laurel': 0.9, 'West 
   const bk = require('/root/GodWorld/output/engine-sheet/2026-09-19-crime-metrics-live-pre-recalibration-c107.json');
   const BH = bk[0]; const oldCM = {}; bk.slice(1).forEach(r => { oldCM[r[0]] = { p: +r[BH.indexOf('PropertyCrimeIndex')], v: +r[BH.indexOf('ViolentCrimeIndex')] }; });
   const cm = await sheets.getSheetAsObjects('Crime_Metrics'); const newCM = {}; cm.forEach(r => { newCM[r.Neighborhood] = { p: +r.PropertyCrimeIndex, v: +r.ViolentCrimeIndex }; });
-  const raw = await sheets.getSheetData('Neighborhood_Map'); const H = raw[0];
+  // NOT idempotent: it reads the CURRENT readings as the old ones. After the apply, the pre-write
+  // tab is the only valid "before" — --verify recomputes from it and compares to live; --apply
+  // refuses once that backup exists.
+  const BACKUP = '/root/GodWorld/output/engine-sheet/2026-09-19-neighborhood-map-live-pre-recalibration.json';
+  const VERIFY = process.argv.includes('--verify');
+  if (APPLY && fs.existsSync(BACKUP)) throw new Error('already applied (backup exists) — refusing a second transform; use --verify');
+  const live = await sheets.getSheetData('Neighborhood_Map');
+  const raw = VERIFY ? JSON.parse(fs.readFileSync(BACKUP, 'utf8')) : live; const H = raw[0];
   const col = n => H.indexOf(n); const L = i => { let s = ''; i++; while (i > 0) { const m = (i - 1) % 26; s = String.fromCharCode(65 + m) + s; i = Math.floor((i - 1) / 26); } return s; };
   const iH = col('Neighborhood'), iC = col('CrimeIndex'), iR = col('RetailVitality'), iCy = col('Cycle');
   // canon retailMod via the deployed writer code on the live canon columns + tracked employer depth
@@ -36,6 +43,14 @@ const OLD_RETAIL_MOD = { 'Downtown': 1.3, 'Temescal': 1.2, 'Laurel': 0.9, 'West 
     const rv = Math.round(oldR * mod / OLD_RETAIL_MOD[h] * 100) / 100;
     console.log(h.padEnd(18), 'cycle', raw[r][iCy], '| CrimeIndex', oldCI, '->', ci, '| RetailVitality', oldR, '->', rv);
     updates.push({ range: `Neighborhood_Map!${L(iC)}${r + 1}`, values: [[ci]] }, { range: `Neighborhood_Map!${L(iR)}${r + 1}`, values: [[rv]] });
+  }
+  if (VERIFY) {
+    const LH = live[0], lc = LH.indexOf('CrimeIndex'), lr = LH.indexOf('RetailVitality'), lh = LH.indexOf('Neighborhood');
+    const want = {}; for (let u = 0; u < updates.length; u += 2) { const row = Number(updates[u].range.match(/(\d+)$/)[1]); want[row] = [updates[u].values[0][0], updates[u + 1].values[0][0]]; }
+    let ok = 0, bad = 0;
+    for (const row in want) { const r = live[row - 1]; if (Number(r[lc]) === want[row][0] && Number(r[lr]) === want[row][1]) ok++; else { bad++; console.log('MISMATCH', r[lh], r[lc], r[lr], 'want', want[row]); } }
+    console.log('verify against the pre-write backup:', ok, 'match,', bad, 'mismatch');
+    return;
   }
   console.log(updates.length / 2, 'hoods;', APPLY ? 'APPLYING' : 'dry-run (no writes)');
   if (!APPLY) return;

@@ -1,8 +1,14 @@
 // @cycle-status: off-cycle — one-time setup, menu item (utilities/godWorldMenu.js)
 /**
  * ============================================================================
- * setupSportsFeedValidation.js v2.2
+ * setupSportsFeedValidation.js v3.0
  * ============================================================================
+ *
+ * v3.0 (engine.202): every step finds its column by HEADER NAME. The feed
+ * grows (WeekRecord appended at U on Oakland) and will shrink (dead columns
+ * deleted on Mike's go), so nothing past the K–O bootstrap assumes a position.
+ * A header the sheet does not carry is skipped, which is how Chicago (no
+ * WeekRecord) keeps its own contract.
  *
  * Sets up Oakland_Sports_Feed and Chicago_Sports_Feed with:
  *   - Dropdown validation on key columns (EventType, SeasonType, TeamsUsed,
@@ -28,6 +34,11 @@
  *   M: EventTrigger    (NEW — dropdown)
  *   N: HomeNeighborhood (NEW — dropdown, team-specific)
  *   O: Streak          (NEW — text, W6/L3 format — feeds engine sentiment)
+ *   P–T: FanSentiment, FranchiseStability, EconomicFootprint,
+ *        CommunityInvestment, MediaProfile
+ *   U: WeekRecord      (Oakland only — engine.202 weekly summary)
+ *
+ * Positions above describe today's sheets; the code reads names, not letters.
  *
  * Run from Apps Script editor:
  *   setupSportsFeedValidation()    — sets up both sheets
@@ -37,7 +48,7 @@
  *
  * Safe to run multiple times — updates existing validations.
  *
- * @version 2.2
+ * @version 3.0
  * ============================================================================
  */
 
@@ -174,7 +185,22 @@ var HEADER_NOTES = {
   'PlayerMood': 'Select from dropdown. One-word emotional register.\nApplies to the primary player(s) in NamesUsed.',
   'EventTrigger': 'Select from dropdown. Optional.\nFlags special story-generating moments.\nLeave blank for routine entries.',
   'HomeNeighborhood': 'Select from dropdown. Optional.\nWhere the impact of this event lands.\nUsed for neighborhood-specific coverage.',
-  'Streak': 'Current team streak. Format: W6 or L3.\nW = wins, L = losses, number = consecutive games.\nFeeds engine sentiment calculation.\nLeave blank if not applicable.'
+  'Streak': 'Current team streak. Format: W6 or L3.\nW = wins, L = losses, number = consecutive games.\nFeeds engine sentiment calculation.\nLeave blank if not applicable.',
+  'WeekRecord': 'This franchise\'s games this Cycle, in played order.\nOne summary row per franchise per Cycle.\n' +
+    'H:W = home win, H:L = home loss, A:W = away win, A:L = away loss.\nExample: H:W H:L A:W\n' +
+    'Games need EventType game-result. none = no games this Cycle (EventType season-state).\n' +
+    'Blank = not reported. The casino settles on the first game.'
+};
+
+// Header-name layout for setupFeedSheet_ / clearSportsFeedValidation.
+var FEED_DEAD_HEADERS = ['VideoGameDate', 'VideoGame'];
+var FEED_NEW_HEADERS = ['StoryAngle', 'PlayerMood', 'EventTrigger', 'HomeNeighborhood', 'Streak', 'WeekRecord'];
+var FEED_DROPDOWN_HEADERS = ['SeasonType', 'EventType', 'TeamsUsed', 'PlayerMood', 'EventTrigger', 'HomeNeighborhood'];
+var FEED_COLUMN_WIDTHS = {
+  'Cycle': 60, 'SeasonType': 120, 'EventType': 120, 'TeamsUsed': 90,
+  'NamesUsed': 200, 'Notes': 350, 'Stats': 160, 'Team Record': 90,
+  'VideoGameDate': 50, 'VideoGame': 50, 'StoryAngle': 250, 'PlayerMood': 100,
+  'EventTrigger': 120, 'HomeNeighborhood': 140, 'Streak': 80, 'WeekRecord': 140
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -205,24 +231,12 @@ function setupSportsFeedValidation() {
     results.push('Chicago_Sports_Feed: NOT FOUND (skipped)');
   }
 
-  Logger.log('setupSportsFeedValidation v2.2: Complete');
+  Logger.log('setupSportsFeedValidation v3.0: Complete');
   SpreadsheetApp.getUi().alert(
     'Sports Feed Setup Complete!\n\n' +
     results.join('\n') + '\n\n' +
-    'Columns with dropdowns:\n' +
-    '  B: SeasonType\n' +
-    '  C: EventType (NEW taxonomy)\n' +
-    '  D: TeamsUsed\n' +
-    '  L: PlayerMood (NEW)\n' +
-    '  M: EventTrigger (NEW)\n' +
-    '  N: HomeNeighborhood (NEW)\n\n' +
-    'New columns added:\n' +
-    '  K: StoryAngle (text)\n' +
-    '  L: PlayerMood (dropdown)\n' +
-    '  O: Streak (text — W6/L3 format)\n\n' +
-    'Dead columns grayed out:\n' +
-    '  I: VideoGameDate\n' +
-    '  J: VideoGame'
+    'Columns with dropdowns:\n  ' + FEED_DROPDOWN_HEADERS.join(', ') + '\n\n' +
+    'Dead columns grayed out:\n  ' + FEED_DEAD_HEADERS.join(', ')
   );
 }
 
@@ -286,92 +300,93 @@ function setupFeedSheet_(sheet, city, teamValues, neighborhoodValues) {
     }
   }
 
+  // ── Everything below reads the live header row by NAME ──
+  var headerRow = feedHeaderRow_(sheet);
+  var colOf = function(name) { return headerRow.indexOf(name) + 1; }; // 0 = absent
+
   // ── Apply dropdowns ──
-
-  // B: SeasonType (column 2)
-  applyDropdownValidation_(sheet, 2, 2, dataRows, SEASON_TYPE_VALUES, 'SeasonType');
-
-  // C: EventType (column 3)
   var eventTypeValues = city === 'Oakland'
     ? OAKLAND_EVENT_TYPE_VALUES
     : EVENT_TYPE_VALUES;
-  applyDropdownValidation_(sheet, 2, 3, dataRows, eventTypeValues, 'EventType');
-
-  // D: TeamsUsed (column 4)
-  applyDropdownValidation_(sheet, 2, 4, dataRows, teamValues, 'TeamsUsed');
-
-  // L: PlayerMood (column 12)
-  applyDropdownValidation_(sheet, 2, 12, dataRows, PLAYER_MOOD_VALUES, 'PlayerMood');
-
-  // M: EventTrigger (column 13)
-  applyDropdownValidation_(sheet, 2, 13, dataRows, EVENT_TRIGGER_VALUES, 'EventTrigger');
-
-  // N: HomeNeighborhood (column 14)
-  applyDropdownValidation_(sheet, 2, 14, dataRows, neighborhoodValues, 'HomeNeighborhood');
+  var dropdownValues = {
+    'SeasonType': SEASON_TYPE_VALUES,
+    'EventType': eventTypeValues,
+    'TeamsUsed': teamValues,
+    'PlayerMood': PLAYER_MOOD_VALUES,
+    'EventTrigger': EVENT_TRIGGER_VALUES,
+    'HomeNeighborhood': neighborhoodValues
+  };
+  var dropdownCount = 0;
+  for (var d = 0; d < FEED_DROPDOWN_HEADERS.length; d++) {
+    var dropdownCol = colOf(FEED_DROPDOWN_HEADERS[d]);
+    if (!dropdownCol) continue;
+    applyDropdownValidation_(sheet, 2, dropdownCol, dataRows,
+      dropdownValues[FEED_DROPDOWN_HEADERS[d]], FEED_DROPDOWN_HEADERS[d]);
+    dropdownCount++;
+  }
 
   // ── Header notes (hover help) ──
-  var allHeaders = ['Cycle', 'SeasonType', 'EventType', 'TeamsUsed', 'NamesUsed',
-                    'Notes', 'Stats', 'Team Record', 'VideoGameDate', 'VideoGame',
-                    'StoryAngle', 'PlayerMood', 'EventTrigger', 'HomeNeighborhood', 'Streak'];
-
-  for (var i = 0; i < allHeaders.length; i++) {
-    var note = HEADER_NOTES[allHeaders[i]];
+  for (var i = 0; i < headerRow.length; i++) {
+    var note = HEADER_NOTES[headerRow[i]];
     if (note) {
       sheet.getRange(1, i + 1).setNote(note);
     }
   }
 
   // ── Format ALL headers ──
-  var headerRange = sheet.getRange(1, 1, 1, 15);
+  var headerRange = sheet.getRange(1, 1, 1, headerRow.length);
   headerRange.setFontWeight('bold');
   headerRange.setBackground('#e8f0fe');
 
-  // ── Gray out dead columns (I: VideoGameDate, J: VideoGame) ──
-  var deadColI = sheet.getRange(1, 9, lastRow, 1);
-  var deadColJ = sheet.getRange(1, 10, lastRow, 1);
-  deadColI.setBackground('#f0f0f0');
-  deadColI.setFontColor('#999999');
-  deadColJ.setBackground('#f0f0f0');
-  deadColJ.setFontColor('#999999');
+  // ── Gray out dead columns ──
+  var deadCount = 0;
+  for (var g = 0; g < FEED_DEAD_HEADERS.length; g++) {
+    var deadCol = colOf(FEED_DEAD_HEADERS[g]);
+    if (!deadCol) continue;
+    var deadRange = sheet.getRange(1, deadCol, lastRow, 1);
+    deadRange.setBackground('#f0f0f0');
+    deadRange.setFontColor('#999999');
+    deadCount++;
+  }
 
   // ── Highlight new columns with light green headers ──
-  var newColHeaders = sheet.getRange(1, 11, 1, 5); // K, L, M, N, O
-  newColHeaders.setBackground('#d9ead3');
+  for (var n = 0; n < FEED_NEW_HEADERS.length; n++) {
+    var newCol = colOf(FEED_NEW_HEADERS[n]);
+    if (newCol) sheet.getRange(1, newCol).setBackground('#d9ead3');
+  }
 
-  // ── Color-code dropdown columns lightly ──
-  // SeasonType header
-  sheet.getRange(1, 2).setBackground('#fce5cd');
-  // EventType header
-  sheet.getRange(1, 3).setBackground('#fce5cd');
-  // TeamsUsed header
-  sheet.getRange(1, 4).setBackground('#fce5cd');
+  // ── Color-code the core dropdown headers lightly ──
+  ['SeasonType', 'EventType', 'TeamsUsed'].forEach(function(name) {
+    var coreCol = colOf(name);
+    if (coreCol) sheet.getRange(1, coreCol).setBackground('#fce5cd');
+  });
 
   // ── Column widths ──
-  sheet.setColumnWidth(1, 60);   // A: Cycle
-  sheet.setColumnWidth(2, 120);  // B: SeasonType
-  sheet.setColumnWidth(3, 120);  // C: EventType
-  sheet.setColumnWidth(4, 90);   // D: TeamsUsed
-  sheet.setColumnWidth(5, 200);  // E: NamesUsed
-  sheet.setColumnWidth(6, 350);  // F: Notes (wide — your voice)
-  sheet.setColumnWidth(7, 160);  // G: Stats
-  sheet.setColumnWidth(8, 90);   // H: Team Record
-  sheet.setColumnWidth(9, 50);   // I: VideoGameDate (narrow — dead)
-  sheet.setColumnWidth(10, 50);  // J: VideoGame (narrow — dead)
-  sheet.setColumnWidth(11, 250); // K: StoryAngle (wide)
-  sheet.setColumnWidth(12, 100); // L: PlayerMood
-  sheet.setColumnWidth(13, 120); // M: EventTrigger
-  sheet.setColumnWidth(14, 140); // N: HomeNeighborhood
-  sheet.setColumnWidth(15, 80);  // O: Streak
+  for (var w = 0; w < headerRow.length; w++) {
+    var width = FEED_COLUMN_WIDTHS[headerRow[w]];
+    if (width) sheet.setColumnWidth(w + 1, width);
+  }
 
   // ── Freeze header row ──
   sheet.setFrozenRows(1);
 
-  Logger.log('setupFeedSheet_(' + city + '): Complete — 15 columns, 6 dropdowns, 2 dead cols grayed');
+  Logger.log('setupFeedSheet_(' + city + '): Complete — ' + headerRow.length + ' columns, ' +
+    dropdownCount + ' dropdowns, ' + deadCount + ' dead cols grayed');
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
 // HELPERS
 // ─────────────────────────────────────────────────────────────────────────────
+
+/**
+ * The live header row as trimmed strings, full width.
+ */
+function feedHeaderRow_(sheet) {
+  var width = Math.max(sheet.getLastColumn(), 1);
+  return sheet.getRange(1, 1, 1, width).getValues()[0].map(function(h) {
+    return String(h == null ? '' : h).trim();
+  });
+}
 
 /**
  * Apply dropdown validation to a column range.
@@ -394,15 +409,17 @@ function applyDropdownValidation_(sheet, startRow, col, numRows, values, name) {
 function clearSportsFeedValidation() {
   var ss = openSimSpreadsheet_();
   var sheetNames = ['Oakland_Sports_Feed', 'Chicago_Sports_Feed'];
-  var dropdownCols = [2, 3, 4, 12, 13, 14]; // B, C, D, L, M, N
 
   for (var s = 0; s < sheetNames.length; s++) {
     var sheet = ss.getSheetByName(sheetNames[s]);
     if (!sheet) continue;
     var lastRow = sheet.getLastRow();
+    var headerRow = feedHeaderRow_(sheet);
 
-    for (var i = 0; i < dropdownCols.length; i++) {
-      var range = sheet.getRange(2, dropdownCols[i], Math.max(lastRow - 1, 1), 1);
+    for (var i = 0; i < FEED_DROPDOWN_HEADERS.length; i++) {
+      var col = headerRow.indexOf(FEED_DROPDOWN_HEADERS[i]) + 1;
+      if (!col) continue;
+      var range = sheet.getRange(2, col, Math.max(lastRow - 1, 1), 1);
       range.clearDataValidations();
     }
     Logger.log('Cleared validation from ' + sheetNames[s]);

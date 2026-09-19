@@ -1677,8 +1677,9 @@ function loadSingleSportsFeed_(cache, sheetName, cycle) {
   var iNotes = idx('Notes');
   var iStats = idx('Stats');
   var iRecord = idx('Team Record');
-  var iGameDate = idx('VideoGameDate');
-  var iGame = idx('VideoGame');
+  // engine.202: WeekRecord (col U) replaces the dead VideoGameDate/VideoGame
+  // pair on the handoff — nothing ever rendered those two fields.
+  var iWeekRecord = idx('WeekRecord');
   var iStoryAngle = idx('StoryAngle');
   var iPlayerMood = idx('PlayerMood');
   var iEventTrigger = idx('EventTrigger');
@@ -1713,8 +1714,7 @@ function loadSingleSportsFeed_(cache, sheetName, cycle) {
       notes: notes,
       stats: String(safeColRead_(row, iStats, '')).trim(),
       record: String(safeColRead_(row, iRecord, '')).trim(),
-      gameDate: String(safeColRead_(row, iGameDate, '')).trim(),
-      videoGame: String(safeColRead_(row, iGame, '')).trim(),
+      weekRecord: String(safeColRead_(row, iWeekRecord, '')).trim(),
       storyAngle: String(safeColRead_(row, iStoryAngle, '')).trim(),
       playerMood: String(safeColRead_(row, iPlayerMood, '')).trim(),
       eventTrigger: String(safeColRead_(row, iEventTrigger, '')).trim(),
@@ -1803,6 +1803,9 @@ function formatSportsFeedEntry_(entry) {
   }
   if (entry.record) {
     line += '\n  Record: ' + entry.record;
+  }
+  if (entry.weekRecord) {
+    line += '\n  Week: ' + entry.weekRecord;
   }
   if (entry.storyAngle) {
     line += '\n  Story angle: ' + entry.storyAngle;

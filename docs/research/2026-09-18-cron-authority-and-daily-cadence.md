@@ -211,16 +211,23 @@ actual words reach the engine and move their dials, which shape their events.**
 Mike's model is correct.
 
 What is genuinely walled off is narrower: the engine never performs a **live
-lookup** against the Supermemory store. `citizenPage.js` is wake-side only,
-because a live network read inside the cycle would not reproduce on a replay
-(`godWorldEngine2.js` stores a per-cycle seed at Phase 10 and exposes
-`replayCycle(cycleId)`; the rng is seeded at `Phase1-SeedRng`). The content still
-gets through — it is copied to the sheet first. The store is not queried; the
-copy is read.
+lookup** against the Supermemory store. The content still gets through anyway —
+it is copied to the sheet first. The store is not queried; the copy is read.
+
+**Provenance warning on the reason for that wall.** `citizenPage.js` justifies it
+in its own header as replay-safety. The replay machinery is real but has never
+been exercised: `utilities/cycleModes.js` defines `initializeSeededRng_` and
+`saveCycleSeed_`, `godWorldEngine2.js:1941` defines `replayCycle(cycleId)`, and
+the `Cycle_Seeds` tab holds 30 rows, C78 through C107, so a seed is written every
+cycle at Phase 10. But **no session has ever run a replay or a dry-run** (Mike,
+2026-09-18). So the wake-side-only rule is a convention a module author wrote
+down, not a ruling anyone made and not a practice anyone exercises. Treat it as
+changeable if there is a reason to change it — do not cite it as a law.
 
 So the design rule is modest, not dramatic: **whatever the crons want the engine
 to see, they write into a sheet at cron time.** That is already how reflections
-work. It is not an obstacle to overcome, it is the existing, working pattern.
+work. It is not an obstacle to overcome, it is the existing, working pattern —
+and it is the only part of this subsection that should influence a design.
 
 ### 6.6 The real gap, stated plainly
 

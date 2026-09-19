@@ -364,5 +364,24 @@ try {
   fs.rmSync(root, { recursive: true, force: true });
 }
 
+// Sports row delivery (2026-09-19): which writers received each feed row.
+{
+  const dr = fs.mkdtempSync(path.join(os.tmpdir(), 'godworld-row-delivery-'));
+  const out = (rel, text) => { const f = path.join(dr, 'output', rel); fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, text); };
+  out('beats/Oakland_Sports_Feed.jsonl', [
+    { Cycle: 404, TeamsUsed: "A's", EventType: 'game-result', StoryAngle: 'Synthetic walk-off in the ninth inning tonight' },
+    { Cycle: 404, TeamsUsed: 'Oaks', EventType: 'player-feature', Notes: 'Synthetic community clinic at a rec center' },
+    { Cycle: 403, TeamsUsed: "A's", EventType: 'game-result', StoryAngle: 'Synthetic older row from the prior cycle' },
+  ].map(r => JSON.stringify(r)).join('\n'));
+  out('slices/c404/p-slayer.md', 'LEAD: Synthetic walk-off in the ninth inning tonight\n');
+  out('cron-compare/simon_slice_c404.json', JSON.stringify({ lead: { angle: 'Synthetic walk-off in the ninth\ninning tonight' } }));
+  out('world_summary_c404.md', 'Synthetic community clinic at a rec center');
+  const rep = require('./sportsSubstrate').feedRowDelivery(404, { root: dr });
+  ok('row delivery: only the Cycle\'s rows', rep.rows.length === 2);
+  ok('row delivery: slice md + decoded slice json both count', JSON.stringify(rep.rows[0].writers) === JSON.stringify(['P Slayer', 'Simon Leary']));
+  ok('row delivery: summary-only row is STRANDED', rep.rows[1].stranded === true && rep.rows[1].shared.indexOf('world summary') >= 0 && rep.stranded === 1);
+  fs.rmSync(dr, { recursive: true, force: true });
+}
+
 if (failures) { console.error('\nbeatSlices tests: ' + failures + ' FAILURE(S)'); process.exit(1); }
 console.log('\nbeatSlices tests: PASS');

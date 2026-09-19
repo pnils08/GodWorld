@@ -380,6 +380,81 @@ function loadRawFeedRows(root, tab, cycle) {
   });
 }
 
+// Which sports writers received each feed row (Mike-asked 2026-09-19: "I don't
+// spend an hour entering those rows for them to be window dressing"). Matches
+// each current-Cycle row's StoryAngle / Notes opening against every file a
+// writer is handed — their slice and their packet — plus the shared world
+// summary and sports desk packet. A row no writer received is STRANDED.
+// Substring evidence only; no LLM. Written by the angle wake, cumulative
+// through the week (each writer's files appear on their grid day).
+const DELIVERY_WRITERS = Object.freeze({
+  'Anthony Raines': ['slices/c{N}/anthony.md', 'cron-compare/anthony_slice_c{N}.json', 'cron-compare/sports_c{N}_anthony-raines_packet-v2_packet.json'],
+  'Hal Richmond': ['slices/c{N}/hal.md', 'cron-compare/hal_slice_c{N}.json', 'cron-compare/sports_c{N}_hal-richmond_packet-v2_packet.json'],
+  'P Slayer': ['slices/c{N}/p-slayer.md', 'cron-compare/pslayer_slice_c{N}.json', 'cron-compare/sports_c{N}_p-slayer_packet-v2_packet.json'],
+  'Simon Leary': ['cron-compare/simon_slice_c{N}.json', 'cron-compare/sports_c{N}_simon-leary_packet-v2_packet.json'],
+  'Tanya Cruz': ['cron-compare/tanya_slice_c{N}.json', 'cron-compare/sports_c{N}_tanya-cruz_packet-v2_packet.json'],
+  'Selena Grant': ['slices/c{N}/selena-grant.md', 'cron-compare/oaks_beat_slice_c{N}.json', 'cron-compare/sports_c{N}_selena-grant_packet-v2_packet.json'],
+  'Talia Finch': ['slices/c{N}/talia-finch.md', 'cron-compare/oaks_ground_slice_c{N}.json', 'cron-compare/sports_c{N}_talia-finch_packet-v2_packet.json'],
+});
+const DELIVERY_SHARED = Object.freeze({
+  'world summary': ['world_summary_c{N}.md'],
+  'sports desk packet': ['desk-packets/sports_c{N}.json', 'desk-packets/sports_summary_c{N}.json'],
+});
+
+function deliveryText_(file) {
+  const raw = loadText(file);
+  if (!raw) return '';
+  let text = raw;
+  if (/\.json$/.test(file)) {
+    // JSON escapes quotes and newlines — match against the decoded strings.
+    try {
+      const parts = [];
+      (function walk(v) {
+        if (typeof v === 'string') parts.push(v);
+        else if (v && typeof v === 'object') Object.keys(v).forEach(k => walk(v[k]));
+      })(JSON.parse(raw));
+      text = parts.join('\n');
+    } catch (_) { /* keep raw */ }
+  }
+  return text.replace(/\s+/g, ' ');
+}
+
+function feedRowDelivery(cycle, opts) {
+  const o = opts || {};
+  const root = o.root || ROOT;
+  const cyc = Number(cycle);
+  const out = path.join(root, 'output');
+  const read = (list) => list.map(t => deliveryText_(path.join(out, t.replace(/\{N\}/g, String(cyc))))).join(' ');
+  const writers = {};
+  Object.keys(DELIVERY_WRITERS).forEach(name => { writers[name] = read(DELIVERY_WRITERS[name]); });
+  const shared = {};
+  Object.keys(DELIVERY_SHARED).forEach(name => { shared[name] = read(DELIVERY_SHARED[name]); });
+  const probe = (v) => String(v == null ? '' : v).replace(/\s+/g, ' ').trim().slice(0, 38);
+  const rows = loadRawFeedRows(root, 'Oakland_Sports_Feed', cyc).filter(r => Number(r.Cycle) === cyc);
+  const report = rows.map((r, i) => {
+    const probes = [probe(r.StoryAngle), probe(r.Notes)].filter(p => p.length > 12);
+    const hit = (text) => probes.some(p => text.indexOf(p) >= 0);
+    const reached = Object.keys(writers).filter(n => writers[n] && hit(writers[n]));
+    return {
+      n: i + 1,
+      team: String(r.TeamsUsed || ''),
+      eventType: String(r.EventType || ''),
+      eventTrigger: String(r.EventTrigger || ''),
+      snippet: probe(r.StoryAngle || r.Notes),
+      writers: reached,
+      shared: Object.keys(shared).filter(n => shared[n] && hit(shared[n])),
+      stranded: probes.length > 0 && reached.length === 0,
+      unprobeable: probes.length === 0,
+    };
+  });
+  return {
+    cycle: cyc,
+    writersWithFiles: Object.keys(writers).filter(n => writers[n]),
+    rows: report,
+    stranded: report.filter(r => r.stranded).length,
+  };
+}
+
 /**
  * Load sports feed rows for a cycle: world_summary first, desk_signal sports fallback.
  */
@@ -472,6 +547,7 @@ function buildFeedAnchorFacts(row, cycle) {
 
 module.exports = {
   ROOT,
+  feedRowDelivery,
   loadJson,
   loadText,
   extractSection,

@@ -244,6 +244,15 @@ guarantee a moment for every citizen.
 
 ## Media and supporting consumers
 
+**Row delivery log (2026-09-19).** Every weekday angle wake (06:15) logs which
+sports writers have received each of the Cycle's feed rows — matched against
+each writer's slice and packet, plus the world summary and sports desk packet.
+Lines tagged `[sports-rows]` in `logs/newsroom-fanout.log`; full report in
+`output/cron-compare/sports_row_delivery_c{N}.json`. Cumulative through the
+week (each sports seat's files appear on its grid day), so Thursday's run is
+the verdict. A `STRANDED` row reached no writer (it may still be in the world
+summary). Built by `feedRowDelivery` in `scripts/sportsSubstrate.js`.
+
 | Consumer | Current use | Important limitation |
 |---|---|---|
 | `phase07-evening-media/sportsStreaming.js` | Builds evening sports text, preferring `StoryAngle` and then team/event/notes | Uses current-Cycle entries and last-entry details |

@@ -3045,7 +3045,32 @@ async function runFanoutStage() {
   console.log('\n=== fan-out ' + STAGE + ': ' + (results.length - failed.length) + '/' + results.length + ' ok' +
     (failed.length ? ' — FAILED: ' + failed.map(f => f.name).join(', ') : '') + ' ===');
   console.log('results → ' + path.relative(ROOT, rPath));
+  if (STAGE === 'angle') logSportsRowDelivery(fanout.cycle);
   if (failed.length) await notifyFanoutFailures(date, failed, results.length);
+}
+
+// Sports row delivery (Mike-asked 2026-09-19): after the angle wake builds the
+// day's slices, log which writers have received each of the Cycle's
+// Oakland_Sports_Feed rows. Cumulative through the week — each sports seat's
+// files appear on its grid day, so Thursday's line is the week's verdict.
+// A STRANDED row reached no writer. Never fails the wake.
+function logSportsRowDelivery(cycle) {
+  try {
+    if (!cycle) return;
+    const report = require('./sportsSubstrate').feedRowDelivery(cycle, { root: ROOT });
+    const file = path.join(COMPARE, 'sports_row_delivery_c' + cycle + '.json');
+    fs.writeFileSync(file, JSON.stringify(Object.assign({ loggedAt: new Date().toISOString() }, report), null, 2));
+    console.log('\n[sports-rows] C' + cycle + ': ' + report.rows.length + ' feed row(s), ' +
+      (report.rows.length - report.stranded) + ' reached a writer, ' + report.stranded + ' STRANDED · writers with files so far: ' +
+      (report.writersWithFiles.join(', ') || 'none'));
+    for (const r of report.rows) {
+      console.log('  [sports-rows] ' + r.n + ' ' + r.team + ' ' + r.eventType + ' "' + r.snippet + '" → ' +
+        (r.stranded ? 'STRANDED' : r.unprobeable ? '(no StoryAngle/Notes to trace)' : r.writers.join(', ')));
+    }
+    console.log('  [sports-rows] → ' + path.relative(ROOT, file));
+  } catch (e) {
+    console.error('[sports-rows] delivery log skipped: ' + e.message);
+  }
 }
 
 // Failure ping (2026-07-26): a failed wake should reach Mike's phone, not wait

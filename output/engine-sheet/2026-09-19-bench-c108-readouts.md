@@ -252,3 +252,12 @@ locks        0 {}
   e.g. {"Timestamp":"9/19/2026","POPID":"POP-00016","Name":"Simon Leary","EventTag":"Neighborhood|source:nbhdState|state:housing|holiday:Valentine|holidayPriority:minor|occupation:Journalist, The Long View Columnist|ageGroup:adult|neighborhood:Rockridge|tier:3|archet
 
 Ten newly tracked hoods, per-cycle Sentiment deltas: C109→C110 [0.07,0.04,0.06,0.09,-0.03,0.09,0.08,0.07,0.08,-0.02] sd 0.041; C110→C111 [0.19,0.25,0.19,0.17,0.24,0.19,0.15,0.22,0.12,0.25] sd 0.041 (a citywide Valentine/First Friday rise, each hood by its own amount). Before engine.239b these ten carried the identical city value (sd 0). 0 Engine_Errors C109–C111.
+
+## PRE-DECLARED — bench C108 on HEAD 17233d75 (engine.242a–c + engine.240a–g), fresh live-synced C107 (written BEFORE the fire)
+1. ok:true, 0 Engine_Errors.
+2. City Sentiment (World_Population.sentiment) above the control's 0.02 — expect roughly 0.2–0.3 (winter −0.05, fog ≈ −0.03 instead of −0.25 / −0.10). Max hood Sentiment < 1.0.
+3. RetailVitality per hood within ~0.85–1.15 of treatment 3's value (bench @62) except a hood with a closure this cycle; ranking still canon-shaped (Jack London / Rockridge / Downtown / Grand Lake / Uptown high; Temescal / San Antonio / Glenview / Ivy Hill / Baylight low).
+4. LifeHistory C108 neighborhood QoL lines carry qol-cause tags, and not every low-QoL line is a safety line.
+5. Ripple_Ledger C108 rows (engine-written, not the 3 recalibration rows): no hood from a retired template — neighborhood is an event/business hood or blank; MAJOR_LAYOFFS / WORKFORCE_GROWTH not 'Downtown' unless jobs moved there.
+6. WorldEvents_V3_Ledger C108 texture rows: SAFETY / HEALTH / INFRASTRUCTURE hoods spread over core-sim hoods, not only West Oakland / Downtown / Fruitvale / Chinatown.
+7. No city event named for a stereotype hood by condition (no "West Oakland Neighborhood Watch Meet", "Fruitvale Job Fair", "Rockridge Investment Summit" …).

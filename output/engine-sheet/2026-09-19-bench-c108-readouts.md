@@ -261,3 +261,10 @@ Ten newly tracked hoods, per-cycle Sentiment deltas: C109→C110 [0.07,0.04,0.06
 5. Ripple_Ledger C108 rows (engine-written, not the 3 recalibration rows): no hood from a retired template — neighborhood is an event/business hood or blank; MAJOR_LAYOFFS / WORKFORCE_GROWTH not 'Downtown' unless jobs moved there.
 6. WorldEvents_V3_Ledger C108 texture rows: SAFETY / HEALTH / INFRASTRUCTURE hoods spread over core-sim hoods, not only West Oakland / Downtown / Fruitvale / Chinatown.
 7. No city event named for a stereotype hood by condition (no "West Oakland Neighborhood Watch Meet", "Fruitvale Job Fair", "Rockridge Investment Summit" …).
+
+## PRE-DECLARED — final bench, engine tree 1c7af123 (242a–c + 240a–g + 242c fix) on live-synced C107 AFTER the map recalibration (written BEFORE the fire)
+1. ok:true, 0 Engine_Errors on C108–C111.
+2. C108: no "Downtown under strain: crime index 1.00" crisis onset; no "Temescal boom sustained"; no "West Oakland cooling off" driven by the old readings.
+3. C108 LifeHistory: QoL lines present (source:qol with qol-cause tags), low-band causes led by work/health/street in Temescal / San Antonio / Ivy Hill class hoods, not only safety.
+4. City Sentiment in the 0.3–0.5 range (momentum from C107's 0.51); max hood < 1.0.
+5. C108–C111: RetailVitality spread (max − min) does not widen every cycle (no business↔retail ratchet); ranking canon-shaped each cycle.

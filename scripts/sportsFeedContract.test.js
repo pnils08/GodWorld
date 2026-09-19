@@ -101,7 +101,17 @@ assert.strictEqual(contract.validateDraft(syntheticDraft({ WeekRecord: ' ' })).v
 assert.throws(() => contract.projectNewRow(syntheticDraft({ WeekRecord: 'H:W A:L' })), /WeekRecord column/);
 assert.throws(() => contract.projectNewRow(syntheticDraft(), [...contract.FEED_HEADERS]), /Unknown/);
 
-const [legacyLayout, weeklyLayout] = contract.FEED_LAYOUTS;
+const [legacyLayout, weeklyLayout, trimmedLayout] = contract.FEED_LAYOUTS;
+assert.strictEqual(trimmedLayout.length, 19);
+assert.strictEqual(trimmedLayout.includes('VideoGame') || trimmedLayout.includes('VideoGameDate'), false);
+assert.strictEqual(trimmedLayout[18], 'WeekRecord');
+assert.strictEqual(contract.resolveFeedLayout([...trimmedLayout]), trimmedLayout);
+const trimmedRow = contract.projectNewRow(syntheticDraft({ WeekRecord: 'A:L' }), trimmedLayout);
+assert.strictEqual(trimmedRow.length, 19);
+assert.strictEqual(trimmedRow[8], contract.projectNewRow(syntheticDraft())[10]); // StoryAngle slides I<-K
+assert.strictEqual(trimmedRow[18], 'A:L');
+// A retired field is still refused, even though the layout no longer carries it.
+assert.strictEqual(contract.validateDraft(syntheticDraft({ VideoGame: 'legacy value' })).valid, false);
 assert.strictEqual(contract.resolveFeedLayout([...contract.FEED_HEADERS]), legacyLayout);
 assert.strictEqual(contract.resolveFeedLayout([...contract.FEED_HEADERS, 'WeekRecord']), weeklyLayout);
 assert.throws(() => contract.resolveFeedLayout([...contract.FEED_HEADERS, 'Other']), /layout changed/);

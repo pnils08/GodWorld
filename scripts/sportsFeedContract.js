@@ -25,9 +25,14 @@ const FEED_HEADERS = Object.freeze([
 // The writer and dashboard accept exactly these layouts, oldest first, and
 // project a draft by header name; a later migration step is one entry here.
 const WEEK_RECORD_HEADER = 'WeekRecord';
+// Third layout (Mike's go, 2026-09-19): VideoGameDate / VideoGame deleted —
+// the end state of the plan §0 ruling "no new column, repurpose a dead one".
+// Their 139 historical cells are archived in output/engine-sheet/.
+const DEAD_FEED_HEADERS = Object.freeze(['VideoGameDate', 'VideoGame']);
 const FEED_LAYOUTS = Object.freeze([
   FEED_HEADERS,
   Object.freeze([...FEED_HEADERS, WEEK_RECORD_HEADER]),
+  Object.freeze([...FEED_HEADERS.filter((header) => !DEAD_FEED_HEADERS.includes(header)), WEEK_RECORD_HEADER]),
 ]);
 const DRAFT_FIELDS = Object.freeze([...new Set(FEED_LAYOUTS.flat())]);
 

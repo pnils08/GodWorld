@@ -329,7 +329,7 @@ function writerHarness(options = {}) {
       return { replies: requests.map(() => ({})) };
     },
     readRange: async (range) => {
-      if (/^Oakland_Sports_Feed!A\d+:[TU]\d+$/.test(range)) {
+      if (/^Oakland_Sports_Feed!A\d+:[STU]\d+$/.test(range)) {
         const row = options.readBackMismatch
           ? appendedRow.map((value, index) => index === 5 ? 'DIFFERENT' : value)
           : appendedRow;
@@ -1110,6 +1110,17 @@ async function expectCode(promise, code) {
     () => inputFor(draft({ WeekRecord: 'H:W' }), 'synthetic-weekly-key-04', writerHarness()),
     /WeekRecord column/,
   );
+  // The 19-column layout (dead VideoGame columns deleted): append A:S.
+  const trimmedHeaders = [...FEED_HEADERS.filter((h) => h !== 'VideoGameDate' && h !== 'VideoGame'), 'WeekRecord'];
+  const trimmedHarness = writerHarness({ feedHeaders: trimmedHeaders });
+  const trimmedInput = inputFor(draft({ WeekRecord: 'H:L' }), 'synthetic-trimmed-key-01', trimmedHarness);
+  assert.strictEqual(trimmedInput.expectedRow.length, 19);
+  const trimmedWrite = await trimmedHarness.writer(trimmedInput);
+  assert.strictEqual(trimmedWrite.updatedRange, 'Oakland_Sports_Feed!A3:S3');
+  const trimmedAppend = trimmedHarness.capturedBatches[0][0].appendCells.rows[0].values;
+  assert.strictEqual(trimmedAppend[8].userEnteredValue.stringValue, 'Synthetic angle');
+  assert.strictEqual(trimmedAppend[18].userEnteredValue.stringValue, 'H:L');
+
   // ... and a header migration between preview and commit is a source change.
   const migratedHarness = writerHarness();
   const migratedInput = inputFor(draft(), 'synthetic-weekly-key-05', migratedHarness);

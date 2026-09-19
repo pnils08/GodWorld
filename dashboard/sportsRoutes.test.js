@@ -589,6 +589,31 @@ const asWeekDuplicate = await call(weeklyHandlers.preview, {
 });
 assert.strictEqual(asWeekDuplicate.statusCode, 409);
 assert.strictEqual(asWeekDuplicate.body.error.code, 'sports_week_record_duplicate');
+// The 19-column layout (dead VideoGame columns deleted): same projection by name.
+const trimmedReadSheet = async (sheetName) => {
+  const snapshot = await weeklyReadSheet(sheetName);
+  if (sheetName !== 'Oakland_Sports_Feed') return snapshot;
+  const drop = ['VideoGameDate', 'VideoGame'].map((h) => snapshot.data.headers.indexOf(h));
+  const keep = (_, index) => !drop.includes(index);
+  return {
+    ...snapshot,
+    data: {
+      ...snapshot.data,
+      headers: snapshot.data.headers.filter(keep),
+      rows: snapshot.data.rows.map((row) => ({ ...row, values: row.values.filter(keep) })),
+    },
+  };
+};
+const trimmedHandlers = createSportsHandlers({ readSheet: trimmedReadSheet });
+const trimmedPreview = await call(trimmedHandlers.preview, {
+  body: { draft: { ...validDraft, TeamsUsed: 'oaks', NamesUsed: '', WeekRecord: 'H:W' } },
+});
+assert.strictEqual(trimmedPreview.statusCode, 200, JSON.stringify(trimmedPreview.body.error));
+assert.strictEqual(trimmedPreview.body.data.row.length, 19);
+assert.strictEqual(trimmedPreview.body.data.rowByHeader.StoryAngle, 'Synthetic angle');
+assert.strictEqual(trimmedPreview.body.data.row[8], 'Synthetic angle');
+assert.strictEqual('VideoGame' in trimmedPreview.body.data.rowByHeader, false);
+
 const legacyWeekly = await call(handlers.preview, {
   body: { draft: { ...validDraft, WeekRecord: 'H:W' } },
 });

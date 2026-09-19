@@ -129,6 +129,13 @@ pointers:
 
 ## PROD deploy log — full trail
 
+### PROD @97 — engine.210 + engine.202 (inert): the recorded sports phase reaches seasonal weights (2026-09-18 ~23:05 Chicago, engine-sheet, on Mike's go)
+
+Commit `7dffdf76` (engine tree = @96 `0a8013fc` + engine.210 `44cf056f` [`godWorldEngine2.js` Phase2-SportsSeason before Phase2-SeasonalWeights in both entry paths, `applySeasonWeights.js` reads the recorded phase] + engine.202 `34ef94ae`/`038e2ce1`/`dcf92551` [`applySportsSeason.js` WeekRecord reader + NBA/Warriors fold retired, `casinoLedgerEngine.js` weekly-result branch, NEW `utilities/sportsWeekRecord.js`] + `0cbb837d` comment-only). Apps Script version 86, read back @86. Isolated `git archive` stage; pull-back 170 files, 169 js byte-identical, 0 test files; 0 function collisions. engine.210 bench-proven @52 C114; engine.202 NOT benched and rides inert: no `WeekRecord` header on the live feed (`getColVal_(row, -1)` → '', `sportsWeeklyResult_` → null → the old casino path), and `processFeedSheet_` returns byte-identical output under @96 and @97 code on the live feed at C107 and C108 (the retired NBA rows C84–C92 carry nothing into the Oaks' state).
+
+- **Expect at the next live fire (C108), on top of §PROD @96–@86:** live feed C108 rows are A's playoffs ×3 + A's `championship` season-state (7-2) + Oaks preseason ×2 → `sportsSeasonByTeam` {A's: championship, Oaks: preseason}, `sportsSeason` `championship`; `Neighborhood_Map.SportsSeason` `championship` 22/22; `Phase2-SportsSeason` runs before `Phase2-SeasonalWeights`. 0 `Phase2-SportsSeason:WeekRecord` rows on Engine_Errors. Casino settles C107's A's slips off the first C108 A's game-result as before.
+- **Rollback:** `clasp deploy -i AKfycbwUvd4… -V 85` repoints to @96. No sheet writes ride this deploy.
+
 ### PROD @96 — engine.192 + 232b: the school table breathes; a name on every deck row (2026-09-15 ~19:45 Chicago, engine-sheet)
 
 Commit `0a8013fc` (engine tree = @95 `eb289123` + engine.192 [`updateNeighborhoodDemographics.js` driftNeighborhoodEducation_, `ensureNeighborhoodDemographics.js` loader/writer carry the five education columns, `applyInitiativeImplementationEffects.js` education → schoolQuality, `engine94SheetContract.js` + `godWorldEngine2.js` ensureEngine192Config_, `educationCareerEngine.js` crossing-gated alerts] + engine.232b `512ca101` [`storyHook.js` desk-rotation fallback]). Apps Script version 85, read back @85. Isolated `git archive` stage; pull-back 169 files, 168 js byte-identical, 0 test files. Bench SANDBOX 0908 @51 C113: 173 s ok:true, 0 Engine_Errors, 22/22 hoods moved ≤0.11, 4 keys self-armed, deck 45 rows 0 blank.

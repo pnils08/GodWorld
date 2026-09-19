@@ -216,7 +216,10 @@ function applyShockMonitor_(ctx) {
   if (weatherMood.comfortIndex && weatherMood.comfortIndex < 0.2)            { shock = true; shockReasons.push("weather distress"); }
 
   // 5) SENTIMENT COLLAPSE
-  if (prevSent - curSent >= 0.3) { shock = true; shockReasons.push("sentiment collapse"); }
+  // 2026-09-19 (kimi review of engine.242a): a drop only counts as a collapse when it also takes the
+  // city below neutral. A holiday lift (+0.2…+0.5) unwinding the next cycle is a drop of ≥ 0.3 back to
+  // an ordinary positive mood — it was flagging "sentiment collapse" on the calendar, forever.
+  if (prevSent - curSent >= 0.3 && curSent < 0) { shock = true; shockReasons.push("sentiment collapse"); }
   if (curSent <= -0.5)           { shock = true; shockReasons.push("severe negative sentiment"); }
 
   // 6) ECONOMIC MOOD CRASH

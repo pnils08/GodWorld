@@ -138,5 +138,13 @@ function runShock(curEvents, prevEvents, sOverrides) {
   ok('legacy low-volume real spike (40->55) still detected', score >= 1, 'score=' + score);
 }
 
+// 2026-09-19: a holiday lift unwinding is not a collapse; a real fall below neutral is.
+{
+  const unwind = runShock(600, 600, { cur: { cityDynamics: { sentiment: 0.15, culturalActivity: 1, communityEngagement: 1 } }, prev: { sentiment: 0.55 } });
+  ok('holiday unwind 0.55 → 0.15 is not a sentiment collapse', unwind === 0, 'score=' + unwind);
+  const fall = runShock(600, 600, { cur: { cityDynamics: { sentiment: -0.2, culturalActivity: 1, communityEngagement: 1 } }, prev: { sentiment: 0.2 } });
+  ok('a fall 0.2 → −0.2 is a sentiment collapse', fall >= 1, 'score=' + fall);
+}
+
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);

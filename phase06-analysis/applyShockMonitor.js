@@ -267,13 +267,19 @@ function applyShockMonitor_(ctx) {
   var employment = demographicDrift.employmentRate || employmentFallbackRate;
   if (employment < 0.85) { shock = true; shockReasons.push("employment crisis"); }
 
-  // 9) CIVIC LOAD STRAIN
-  // engine.187 part 3 (2026-09-19): `civicLoad === "load-strain"` removed. It was not a
-  // detector — it restated the class applyCivicLoadIndicator had just assigned, so every
-  // strained cycle was also a shock cycle by definition and Downtown wore 'Shock event
-  // zone' (v3NeighborhoodWriter:777) permanently. The class boundary is score >= 12; a
-  // shock is the magnitude BEYOND the boundary, which is what the next line reads.
-  if (civicLoadScore >= 15)        { shock = true; shockReasons.push("civic strain extreme"); }
+  // 9) CIVIC LOAD — NO SHOCK TERM.
+  // engine.187 part 3 cut `civicLoad === "load-strain"` (a restatement of the class the
+  // classifier had just assigned) but kept `civicLoadScore >= 15`, arguing that was the
+  // magnitude BEYOND the class boundary. Part 4b's diag-emit proved that wrong on the bench:
+  // C110 fired shock with exactly one reason, "civic strain extreme", at score 16 — while the
+  // city's sentiment was RISING 0.12 -> 0.35, chaos sat under its own threshold (11 vs 13),
+  // no arc was at peak and the economy was flat. The class boundary is 12, so 15 is four
+  // points up a scale an ordinary heavy cycle reaches: the same restatement wearing a number.
+  // Civic load is SUSTAINED PRESSURE; a shock is a BREAK. They are different axes and both
+  // are published — a reader who wants "the city is under strain" reads civicLoad. Where high
+  // load is driven by something genuinely shocking (a severity cluster, arcs at peak, a
+  // collapse), that cause has its own gate above and fires on its own merits.
+  // civicLoadScore is still read for the diag-emit, so the number stays visible.
 
   // 10) PATTERN BREAK — engine.38 B3: a stability streak (quiet stretch) breaks
   // when activity jumps >=40% above the streak's level (was absolute >=10, which

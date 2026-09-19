@@ -231,9 +231,16 @@ function runShock(curEvents, prevEvents, sOverrides) {
   ok('a strain trend alone is NOT a shock (a trend is not a break)',
     trend.flag === 'none', trend.flag + ' ' + JSON.stringify(trend.reasons));
 
-  const extreme = runFlag({ civicLoad: 'load-strain', civicLoadScore: 15 });
-  ok('civic load BEYOND the class boundary (score 15) still shocks',
-    extreme.flag === 'shock-flag', extreme.flag + ' ' + JSON.stringify(extreme.reasons));
+  // Part 4b correction: `civicLoadScore >= 15` was kept in part 3 as "the magnitude beyond the
+  // class boundary" and the bench disproved it — C110 shocked on that gate alone at score 16
+  // while sentiment ROSE 0.12 -> 0.35. The boundary is 12; 15 is an ordinary heavy cycle.
+  const extreme = runFlag({ civicLoad: 'load-strain', civicLoadScore: 16 });
+  ok('a heavy civic-load score is pressure, not a shock (no civic term at all now)',
+    extreme.flag === 'none', extreme.flag + ' ' + JSON.stringify(extreme.reasons));
+  const extremeWithCause = runFlag({ civicLoad: 'load-strain', civicLoadScore: 16, eventArcs: [{ phase: 'peak', tension: 9 }, { phase: 'peak', tension: 9 }] });
+  ok('high load WITH a real cause under it (two arcs at peak) still shocks',
+    extremeWithCause.flag === 'shock-flag' && extremeWithCause.reasons.join(',').indexOf('arc peak') !== -1,
+    extremeWithCause.flag + ' ' + JSON.stringify(extremeWithCause.reasons));
 
   const collapse = runFlag({ cityDynamics: { sentiment: -0.2, culturalActivity: 1, communityEngagement: 1 }, civicLoad: 'load-strain' }, { sentiment: 0.2 });
   ok('a real break (sentiment 0.2 -> -0.2) still shocks',
@@ -242,7 +249,8 @@ function runShock(curEvents, prevEvents, sOverrides) {
 
   // The two cut lines used to push 1-2 reasons EVERY cycle, and shockReasons.length is what
   // decides fading (>=2) / chronic (>=3). With them gone a lone lingering cause can decay.
-  const fading = runFlag({ civicLoad: 'load-strain', civicLoadScore: 15 }, { shockFlag: 'shock-flag', shockStartCycle: 96 });
+  // ONE reason only: two arcs at peak but below the tension bar, so 'arc peak cluster' alone.
+  const fading = runFlag({ eventArcs: [{ phase: 'peak', tension: 5 }, { phase: 'peak', tension: 5 }] }, { shockFlag: 'shock-flag', shockStartCycle: 96 });
   ok('a single lingering cause after 4 cycles reads shock-fading, not shock-flag',
     fading.flag === 'shock-fading', fading.flag + ' ' + JSON.stringify(fading.reasons));
 }

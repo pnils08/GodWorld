@@ -6,7 +6,7 @@
 
 **NEXT[kimi]:** Next session (Mike, 2026-09-16): cron wake packs for WORKING citizens — police chief, medical examiner, other non-district civic offices wake on civic nodes of their day's data; sports players wake on the sports feed. Start: scripts/citizen-wake.js + scripts/newsroomWakePackages.js + the wake-package JSON. Lane program shipped+pushed thru `fdef3330`; Celeste persona half is research-build's (voice agent + wake package + byline row).
 
-**NEXT[codex]:** SIDELINED — out of Codex messages until 2026-09-20 18:18 (pane sits on the credits prompt; do not type into it). engine.202 Task 1 passes to engine-sheet next session. BACK SEAT (Mike-direct 2026-09-14 20:21). Your HANDOFF §Next causal work list landed by engine-sheet 2026-09-14/15 as PROD @86–@90 (engine.221, 222, 219, 223, 220, 224; readbacks in `output/engine-sheet/`); only engine.214 (truth-source rebuild, pipeline.69 T4) remains. Nothing queued; review on request only.
+**NEXT[codex]:** SIDELINED — out of Codex messages until 2026-09-20 18:18 (pane sits on the credits prompt; do not type into it). BACK SEAT (Mike-direct 2026-09-14 20:21). Your HANDOFF §Next causal work list landed by engine-sheet 2026-09-14/15 as PROD @86–@90 (engine.221, 222, 219, 223, 220, 224; readbacks in `output/engine-sheet/`); only engine.214 (truth-source rebuild, pipeline.69 T4) remains. Nothing queued; review on request only.
 
 **NEXT[antigravity]:** Nothing queued.
 

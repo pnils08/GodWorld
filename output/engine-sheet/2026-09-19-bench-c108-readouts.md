@@ -329,3 +329,16 @@ Ten newly tracked hoods, per-cycle Sentiment deltas: C109→C110 [0.07,0.04,0.06
 4. Sentiment momentum returns to 0.50, so C108 city mood ≥ 0.45 (0.45–0.60), hood spread intact, max < 1.0.
 5. Not every cycle reads `high-signal` CycleWeight (the automatic +6 is gone with the flag).
 6. Everything from the deploy-candidate bench holds: QoL lines with causes, 0 papered-over lines, canon-shaped retail, spread markers.
+
+## RESULT — engine.187 part 4 + 4b + 4c, engine tree `54165d22`, SANDBOX 0908 @70, live-synced C107
+
+1. **MET.** ok:true ×4, Engine_Errors 0.
+2. **MET — the flag clears.** C108 `shock-resolved` (inherits live C107's stuck flag, nothing under it), then **C109 / C110 / C111 all `none` with an empty reasons list.** First cycles on record where the city is not in a declared emergency. The diag-emit carries the proof per cycle: C110 chaos 11 vs its own threshold 13, medium 4 (36% of the mix), migration 1,230 vs 1,976, sentiment rising 0.12 → 0.35, peakArcs 0, no media saturation.
+3. **MET.** Downtown reads "Inflow surge". Markers spread 6 ways (Inflow surge 10, Mild inflow 4, Mild outflow 4, Outflow pressure 2, Stable 1, Civic pressure zone 1).
+4. **MET.** C108 hook: `HookType shock, Priority 2, Civic Desk — "SHOCK LIFTED: the disruption that had the city on edge eased this cycle. What it cost, and who is still catching up."` No "Unexpected disruption detected" anywhere. The only other shock-word hook is C110's citizen-level `MONEY_SHOCK` in West Oakland ("the bad week cost more than the savings could hold — borrowed to cover it") — a life, not a flag.
+5. City mood 0.45 / 0.14 / 0.35 / 0.39. CycleWeight still reads `high-signal` on all four — the shock term is gone but event volume alone sustains it; filed as a follow-up, not a blocker.
+6. **MET.** Everything from the deploy-candidate bench holds.
+
+**The full engine.187 chain, measured not inferred:** severity cap = its own threshold (part 1) → strain-trend on 2 scattered cycles (part 2) → shock restating the class twice (part 3) → four absolute gates from a ~52-event world: chaos ≥8 against 8–13/cycle, medium ≥4 against ordinary texture, `coverageIntensity === 'saturated'` against a permanently busy newsroom, migration ≥150 against a ~1,250 head count in a 391,000-person city (part 4) → `civicLoadScore >= 15` against a class boundary of 12 (part 4c). Every one was a gate that could not not fire. The detector now says why in the fire response (part 4b) so the next reader measures instead of inferring.
+
+**Correction to the part-3 result above:** I recorded `buildCyclePacket`'s SHOCK CONTEXT block as "a dead diagnostic". It is not dead — it is trimmed at the compile layer by the S328 W2b `KEEP_SECTIONS` list, which is deliberate and approved. Checked before touching it; nothing was changed there.

@@ -85,26 +85,17 @@ function recordWorldEventsv3_(ctx) {
   var cycle = ctx.config.cycleCount || ctx.summary.cycleId;
 
   // engine.99 Cohort 2 — core-sim hoods from Neighborhood_Map CoreSimRank
-  // (ADR-0016). Fallback pool when a domain has no curated preference list;
-  // domainNeighborhoods below stays — curated design data, not the drift class.
+  // (ADR-0016). The pool for any event that arrives without a hood.
   var neighborhoods = getCoreSimNeighborhoods_(ctx);
 
-  // v3.5: Domain → preferred neighborhoods (meaningful assignment)
-  var domainNeighborhoods = {
-    'SPORTS':         ['Jack London', 'Downtown', 'West Oakland'],
-    'CULTURE':        ['Temescal', 'KONO', 'Uptown', 'Jack London'],
-    'BUSINESS':       ['Downtown', 'Jack London', 'Uptown'],
-    'SAFETY':         ['West Oakland', 'Downtown', 'Fruitvale', 'Chinatown'],
-    'CIVIC':          ['Downtown', 'Lake Merritt', 'Uptown'],
-    'HEALTH':         ['Fruitvale', 'West Oakland', 'Downtown', 'Chinatown'],
-    'EDUCATION':      ['Fruitvale', 'Temescal', 'Laurel', 'Rockridge'],
-    'INFRASTRUCTURE': ['West Oakland', 'Downtown', 'Fruitvale', 'Chinatown'],
-    'FESTIVAL':       ['Jack London', 'Downtown', 'Uptown', 'Lake Merritt'],
-    'HOLIDAY':        ['Lake Merritt', 'Temescal', 'Piedmont Ave', 'Rockridge'],
-    'ENVIRONMENT':    ['Lake Merritt', 'West Oakland', 'Fruitvale'],
-    'COMMUNITY':      ['Temescal', 'Fruitvale', 'Laurel', 'West Oakland'],
-    'TECHNOLOGY':     ['Uptown', 'KONO', 'Rockridge']
-  };
+  // engine.240 (2026-09-19, SIM_DOCTRINE §17): the domain → hood pools are gone. They were 2020s
+  // Oakland (SAFETY / HEALTH / INFRASTRUCTURE → West Oakland, Downtown, Fruitvale, Chinatown;
+  // HOLIDAY → Lake Merritt, Temescal, Piedmont Ave, Rockridge …) and put every hoodless texture
+  // event (worldEventsEngine) on the ledger in those hoods — the location the newsroom and
+  // updateTransitMetrics read. A hoodless event now takes the canon core-sim pool above
+  // (Neighborhood_Map CoreSimRank), as unmapped domains already did. Follow-up (engine.240):
+  // give texture events their hood at creation so the engine's own effects follow it.
+
 
   // ═══════════════════════════════════════════════════════════════════════════
   // DOMAIN MAP (v3.2 - expanded for calendar events)
@@ -247,9 +238,8 @@ function recordWorldEventsv3_(ctx) {
     var domain = String(ev.domain || deriveDomain(desc)).toUpperCase();
     var eventType = deriveEventType(desc, domain);
 
-    // v3.5: Domain-aware neighborhood (deterministic rng)
-    var pool = domainNeighborhoods[domain] || neighborhoods;
-    var neighborhood = ev.neighborhood || pool[Math.floor(rng() * pool.length)];
+    // engine.240: canon core-sim pool for a hoodless event (deterministic rng)
+    var neighborhood = ev.neighborhood || neighborhoods[Math.floor(rng() * neighborhoods.length)];
 
     rows.push([
       now,                                     // A - Timestamp

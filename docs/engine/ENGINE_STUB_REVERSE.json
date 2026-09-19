@@ -2,7 +2,7 @@
   "generated": "2026-09-19",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 184,
-  "functionsMapped": 1415,
+  "functionsMapped": 1423,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -868,6 +868,7 @@
         "phase05-citizens/processAdvancementIntake.js::queueHouseholdIntake_",
         "phase05-citizens/runConductEngine.js::runConductEngine_",
         "phase05-citizens/runNeighborhoodEngine.js::hoodCrimeBar_",
+        "phase05-citizens/runNeighborhoodEngine.js::hoodStateMedian_",
         "phase05-citizens/runNeighborhoodEngine.js::runNeighborhoodEngine_",
         "phase05-citizens/updateCivicApprovalRatings.js::cityStateMiddle_",
         "phase05-citizens/updateCivicApprovalRatings.js::districtStateScore_",
@@ -876,6 +877,9 @@
         "phase06-analysis/economicRippleEngine.js::calculateNeighborhoodEconomies_",
         "phase06-analysis/economicRippleEngine.js::primarySportsZone_",
         "phase07-evening-media/buildEveningFood.js::eveningFoodHoodsByCharacter_",
+        "phase08-v3-chicago/v3NeighborhoodWriter.js::hoodCharacterCity_",
+        "phase08-v3-chicago/v3NeighborhoodWriter.js::hoodLabelOf_",
+        "phase08-v3-chicago/v3NeighborhoodWriter.js::hoodRetailRaw_",
         "utilities/ensureCrimeMetrics.js::crimeIterationHoods_",
         "utilities/ensureCrimeMetrics.js::crimeProfileFor_"
       ]
@@ -1262,6 +1266,7 @@
         "phase07-evening-media/storyHook.js::storyHookEngine_",
         "phase07-evening-media/textureTriggers.js::textureTriggerEngine_",
         "phase08-v3-chicago/v3DomainWriter.js::deriveDomainPresenceV34_",
+        "phase08-v3-chicago/v3NeighborhoodWriter.js::hoodLabelMods_",
         "phase08-v3-chicago/v3NeighborhoodWriter.js::saveV3NeighborhoodMap_",
         "phase09-digest/applyCompressionDigestSummary.js::applyCompressedDigestSummary_",
         "phase09-digest/applyCycleWeight.js::applyCycleWeight_",
@@ -2176,6 +2181,7 @@
         "phase07-evening-media/buildEveningFamous.js::buildEveningFamous_",
         "phase07-evening-media/buildEveningFamous.js::pickAthleteSightingHood_",
         "phase07-evening-media/buildEveningFood.js::buildEveningFood_",
+        "phase08-v3-chicago/v3NeighborhoodWriter.js::hoodLabelMods_",
         "phase08-v3-chicago/v3NeighborhoodWriter.js::saveV3NeighborhoodMap_"
       ]
     },
@@ -2417,7 +2423,9 @@
         "phase02-world-state/commuteFlowEngine.js::buildCommuteFlows_"
       ],
       "readers": [
-        "phase03-population/updateNeighborhoodDemographics.js::buildHoodEmploymentWeights_"
+        "phase03-population/updateNeighborhoodDemographics.js::buildHoodEmploymentWeights_",
+        "phase08-v3-chicago/v3NeighborhoodWriter.js::hoodCharacterCity_",
+        "phase08-v3-chicago/v3NeighborhoodWriter.js::hoodRetailRaw_"
       ]
     },
     "contentLedger": {

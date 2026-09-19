@@ -2098,6 +2098,9 @@
 - **hoodCrimeBar_(ctx, S)**
   Reads: S.neighborhoodState
 
+- **hoodStateMedian_(ctx, S, field)**
+  Reads: S.neighborhoodState
+
 - **runNeighborhoodEngine_(ctx)**
   Reads: S.absoluteCycle, S.cityDynamics, S.cycleId, S.economicMood, S.eventsGenerated, S.holiday, S.holidayNeighborhood, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.neighborhoodState, S.season, S.weather, S.weatherMood, S.worldEvents
   Writes: S.eventsGenerated, S.neighborhoodAssignments, S.neighborhoodDriftEvents
@@ -2887,6 +2890,24 @@
   Config: ctx.config.cycleCount
 
 ### v3NeighborhoodWriter.js
+- **hoodClamp_(v, band)**
+
+- **hoodMedian_(vals)**
+
+- **hoodRetailRaw_(name, S, city, label)**
+  Reads: S.hoodEmployerDepth, S.neighborhoodState
+
+- **hoodLabelOf_(name, S)**
+  Reads: S.neighborhoodState
+
+- **hoodLabelMods_(name, S, label)**
+  Reads: S.cityDynamics, S.sportsZones
+
+- **hoodCharacterCity_(S, hoods)**
+  Reads: S.hoodEmployerDepth, S.neighborhoodState
+
+- **hoodProfileFromCanon_(name, S, city)**
+
 - **pulseFoldDelta_(pulse, key)**
 
 - **saveV3NeighborhoodMap_(ctx)**
@@ -4078,4 +4099,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 184
-**Functions mapped:** 1415
+**Functions mapped:** 1423

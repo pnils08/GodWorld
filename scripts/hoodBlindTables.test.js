@@ -143,5 +143,79 @@ t('v3NeighborhoodWriter self-arms the three headers', () => {
   assert.ok(/'WeatherZone', 'Adjacent', 'AttentionWeight'/.test(s));
 });
 
+// Live C107 canon (Neighborhood_Map EmployerCharacter, MedianIncome, BoomIndex)
+// + tracked Business_Ledger employees per hood.
+const CANON_C107 = {"Downtown":["institutional",120721,0.6,6739],"Temescal":["clinic",68409,-0.7,89],"Laurel":["schools-retail",86000,-0.1,56],"West Oakland":["campus",144855,0.9,775],"Fruitvale":["transit-retail",98196,0.7,209],"Jack London":["nightlife",118472,0.6,1781],"Rockridge":["professional",160962,0.7,79],"Adams Point":["residential",95190,0.4,41],"Grand Lake":["retail",105420,0.4,56],"Piedmont Ave":["medical",150000,0.4,2650],"Chinatown":["family-retail",84336,0,78],"Brooklyn":["residential",129870,0.8,64],"Eastlake":["mixed",84000,0,47],"Glenview":["residential",81918,-0.4,42],"Dimond":["village-retail",80000,-0.4,52],"Ivy Hill":["residential",78000,-0.4,27],"San Antonio":["service-labor",69930,-0.3,48],"KONO":["arts",82164,0.3,46],"Lake Merritt":["residential",185741,0.3,134],"Uptown":["nightlife",96577,0.6,204],"Baylight District":["stadium",140000,1,2813],"East Oakland":["construction",72144,0.2,73]};
+function canonS(over) {
+  const S = { neighborhoodState: {}, hoodEmployerDepth: {}, sportsZones: [] };
+  for (const [h, [label, income, boom, emp]] of Object.entries(Object.assign({}, CANON_C107, over || {}))) {
+    S.neighborhoodState[h] = { employerCharacter: label, medianIncome: income, boomIndex: boom };
+    if (emp) S.hoodEmployerDepth[h] = { employees: emp };
+  }
+  return S;
+}
+function writerSandbox() {
+  const w = { console, Logger: { log() {} } };
+  vm.createContext(w);
+  load(w, 'phase08-v3-chicago/v3NeighborhoodWriter.js');
+  return w;
+}
+
+console.log('T7 hood profile is read from canon, not a hood table (real-Oakland retail/crime/mood table retired)');
+t('no hood-name-keyed profile table on the per-cycle path', () => {
+  const s = src('phase08-v3-chicago/v3NeighborhoodWriter.js');
+  assert.ok(!/var neighborhoods = \{/.test(s));
+  assert.ok(!/'West Oakland':\s*\{\s*nightlifeMod/.test(s));
+  assert.ok(!/profile\.(crimeMod|sentimentMod)/.test(s));
+  assert.ok(/hoodProfileFromCanon_\(name, S, hoodCity\)/.test(s));
+});
+t('C107 canon: the boom\'s birthplace is above the city on retail, the hood it left behind is below', () => {
+  const w = writerSandbox();
+  const S = canonS();
+  const city = w.hoodCharacterCity_(S, w.NMAP_NEIGHBORHOODS);
+  const mod = {};
+  for (const h of w.NMAP_NEIGHBORHOODS) mod[h] = w.hoodProfileFromCanon_(h, S, city).retailMod;
+  const sorted = Object.values(mod).sort((a, b) => a - b);
+  const med = (sorted[10] + sorted[11]) / 2;
+  assert.ok(mod['West Oakland'] > med, 'West Oakland ' + mod['West Oakland'] + ' vs median ' + med);
+  assert.ok(mod['Temescal'] < med, 'Temescal ' + mod['Temescal']);
+  assert.ok(mod['San Antonio'] < med && mod['Grand Lake'] > med && mod['Rockridge'] > med);
+  for (const v of Object.values(mod)) assert.ok(v >= 0.5 && v <= 1.6);
+  assert.ok(Object.values(mod).filter(v => v >= 1.6).length === 0, "no hood pinned at the cap");
+  assert.ok(Math.abs(Object.values(mod).reduce((a, b) => a + b, 0) / 22 - 1) < 0.01, "centred on the city mean");
+});
+t('Baylight is a build site until a franchise opens in it, then the stadium district', () => {
+  const w = writerSandbox();
+  const S = canonS();
+  const city = w.hoodCharacterCity_(S, w.NMAP_NEIGHBORHOODS);
+  const site = w.hoodProfileFromCanon_('Baylight District', S, city);
+  S.sportsZones = ['Baylight District'];
+  const open = w.hoodProfileFromCanon_('Baylight District', S, city);
+  assert.ok(open.retailMod > site.retailMod && open.eventMod === 1.35 && site.eventMod === 0.6);
+});
+t('the name carries nothing: same canon, same profile', () => {
+  const w = writerSandbox();
+  const S = canonS({ Rockridge: CANON_C107['West Oakland'] });
+  const city = w.hoodCharacterCity_(S, w.NMAP_NEIGHBORHOODS);
+  eq(w.hoodProfileFromCanon_('Rockridge', S, city), w.hoodProfileFromCanon_('West Oakland', S, city));
+});
+t('businesses move it, bounded: a hood whose employers grow gains retail, capped at +10%', () => {
+  const w = writerSandbox();
+  const S0 = canonS();
+  const c0 = w.hoodCharacterCity_(S0, w.NMAP_NEIGHBORHOODS);
+  const before = w.hoodProfileFromCanon_('Dimond', S0, c0).retailMod;
+  const S1 = canonS({ Dimond: ['village-retail', 80000, -0.4, 5000] });
+  const after = w.hoodProfileFromCanon_('Dimond', S1, w.hoodCharacterCity_(S1, w.NMAP_NEIGHBORHOODS)).retailMod;
+  const S2 = canonS({ Dimond: ['village-retail', 80000, -0.4, 0] });   // no tracked employers → depth neutral
+  const base = w.hoodProfileFromCanon_('Dimond', S2, w.hoodCharacterCity_(S2, w.NMAP_NEIGHBORHOODS)).retailMod;
+  assert.ok(after > before && after <= base * 1.1 + 1e-9, before + ' -> ' + after + ' (base ' + base + ')');
+});
+t('a blank or unknown label throws (a new label needs a row)', () => {
+  const w = writerSandbox();
+  const city = { income: 90000, employees: 60 };
+  assert.throws(() => w.hoodProfileFromCanon_('KONO', canonS({ KONO: ['', 82164, 0.3, 46] }), city), /EmployerCharacter is blank/);
+  assert.throws(() => w.hoodProfileFromCanon_('KONO', canonS({ KONO: ['spaceport', 82164, 0.3, 46] }), city), /no HOOD_CHARACTER_MODS row/);
+});
+
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

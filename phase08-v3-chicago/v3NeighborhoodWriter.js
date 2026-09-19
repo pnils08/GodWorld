@@ -113,6 +113,138 @@ var PULSE_REF_EVENTS = 8;
 // +0.16 citywide swing contributes ~+0.024 shared, well under the per-hood deltas.
 var CITY_SENTIMENT_NUDGE = 0.15;
 
+// ── Hood character from canon (engine-sheet 2026-09-19) ─────────────────────
+// Replaces the hand-set per-hood profile table ({ 'West Oakland': { retailMod:
+// 0.7, crimeMod: 1.3, sentimentMod: -0.05 }, ... }) read every cycle below.
+// Its numbers were 2020s real-world Oakland under canon strings, and the table
+// WAS the RetailVitality ranking: C107 West Oakland 3.53 (22 of 22) and
+// Baylight 3.66 (21 of 22) at the bottom of the city while canon has West
+// Oakland the boom's birthplace (IncomeTier 5, Civis campus, 14 tracked
+// employers / 775 jobs) — and Temescal, the one hood the boom left behind,
+// 2nd (10.35). The daily news read that contradiction every morning.
+//
+// Now the profile is a reading of the hood's own canon columns on
+// Neighborhood_Map (INSTITUTIONS.md §Neighborhoods, loaded as
+// S.neighborhoodState, engine.135 B1): the EmployerCharacter label says what
+// kind of place it is; spending power (median income vs the city's median)
+// and BoomIndex (how far the boom reached it) scale its retail; its tracked
+// employer depth (S.hoodEmployerDepth — the bounded presence signal
+// buildHoodEmploymentWeights_ uses) nudges retail as its businesses hire or
+// close. Keyed by canon LABEL, never by hood name: a hood's numbers change
+// when its canon does. A label with no row throws (hoodTexturePool_ rule,
+// engine.148 P3) — a new label needs a row.
+//
+// crimeMod and sentimentMod are gone. CrimeIndex is Crime_Metrics' own (every
+// hood has a row; one without reads the city average), and a hood's mood is
+// its own S.neighborhoodDynamics track — a fixed per-hood mood offset was a
+// verdict, not a cause.
+var HOOD_CHARACTER_MODS = {
+  // label            what the street sells, after dark, density, draws a crowd
+  'institutional':  { retail: 1.15, nightlife: 0.90, noise: 1.30, event: 1.00 }, // towers, courts; thinner after dark than Uptown / Jack London
+  'campus':         { retail: 1.00, nightlife: 0.90, noise: 1.10, event: 0.80 }, // the first campuses — a working landscape that got rich
+  'nightlife':      { retail: 1.25, nightlife: 1.30, noise: 1.20, event: 1.30 },
+  'arts':           { retail: 1.10, nightlife: 1.15, noise: 1.00, event: 1.20 },
+  'retail':         { retail: 1.30, nightlife: 1.00, noise: 0.90, event: 1.10 }, // theater, weekend market, family retail
+  'family-retail':  { retail: 1.20, nightlife: 1.00, noise: 1.20, event: 1.10 }, // dense, family businesses older than any campus
+  'transit-retail': { retail: 1.20, nightlife: 1.00, noise: 1.10, event: 1.00 }, // the strip over the hub, turning over fast
+  'village-retail': { retail: 1.10, nightlife: 0.75, noise: 0.65, event: 0.70 },
+  'schools-retail': { retail: 1.00, nightlife: 0.80, noise: 0.75, event: 0.80 },
+  'professional':   { retail: 1.05, nightlife: 0.90, noise: 0.60, event: 0.85 },
+  'medical':        { retail: 1.05, nightlife: 0.70, noise: 0.60, event: 0.60 }, // clinics, specialists, small storefronts
+  'clinic':         { retail: 0.90, nightlife: 0.90, noise: 0.90, event: 0.90 }, // a clinic waiting list where the boom should have been
+  'service-labor':  { retail: 0.90, nightlife: 0.95, noise: 1.05, event: 0.80 }, // the dense core the boom's workers live in
+  'construction':   { retail: 0.85, nightlife: 0.80, noise: 1.10, event: 0.70 }, // the frontier being built
+  'mixed':          { retail: 0.95, nightlife: 0.85, noise: 0.80, event: 0.75 },
+  'residential':    { retail: 0.80, nightlife: 0.60, noise: 0.55, event: 0.55 },
+  'stadium':        { retail: 1.20, nightlife: 1.20, noise: 1.25, event: 1.35 }  // once a franchise plays there (S.sportsZones)
+};
+// engine.131 T7, carried: the stadium district before a franchise opens in it
+// is a build site — quiet street, construction noise.
+var HOOD_STADIUM_BUILD_SITE = { retail: 0.50, nightlife: 0.50, noise: 1.30, event: 0.60 };
+var HOOD_RETAIL_SPEND_BAND = [0.85, 1.15];  // sqrt(hood median income ÷ city median income)
+var HOOD_RETAIL_BOOM_WEIGHT = 0.10;         // × BoomIndex (−1..+1)
+var HOOD_RETAIL_DEPTH_BAND = [0.93, 1.07];  // 1 + 0.1 × log2(hood tracked employees ÷ city median)
+var HOOD_RETAIL_MOD_BAND = [0.50, 1.60];    // after centring on the city's own mean (1.0)
+
+function hoodClamp_(v, band) { return Math.max(band[0], Math.min(band[1], v)); }
+
+function hoodMedian_(vals) {
+  if (!vals.length) return null;
+  var s = vals.slice().sort(function(a, b) { return a - b; });
+  var mid = Math.floor(s.length / 2);
+  return s.length % 2 ? s[mid] : (s[mid - 1] + s[mid]) / 2;
+}
+
+// A hood's retail reading before centring: label × spending power × boom ×
+// employer depth. `city` supplies the medians it is read against.
+function hoodRetailRaw_(name, S, city, label) {
+  var st = S.neighborhoodState[name];
+  var mods = hoodLabelMods_(name, S, label);
+  var spend = 1;
+  if (city.income && Number(st.medianIncome) > 0) {
+    spend = hoodClamp_(Math.sqrt(Number(st.medianIncome) / city.income), HOOD_RETAIL_SPEND_BAND);
+  }
+  var boom = (st.boomIndex !== null && st.boomIndex !== undefined && isFinite(Number(st.boomIndex)))
+    ? 1 + HOOD_RETAIL_BOOM_WEIGHT * Number(st.boomIndex) : 1;
+  var depthF = 1;
+  var d = (S.hoodEmployerDepth || {})[name];
+  if (city.employees && d && Number(d.employees) > 0) {
+    depthF = hoodClamp_(1 + 0.1 * (Math.log(Number(d.employees) / city.employees) / Math.LN2), HOOD_RETAIL_DEPTH_BAND);
+  }
+  return mods.retail * spend * boom * depthF;
+}
+
+function hoodLabelOf_(name, S) {
+  var st = (S.neighborhoodState || {})[name];
+  var label = st ? st.employerCharacter : '';
+  if (!label) {
+    throw new Error('saveV3NeighborhoodMap_: Neighborhood_Map.EmployerCharacter is blank for ' + name +
+      ' (or Phase-2 loadNeighborhoodState_ did not run) — author the cell (engine.148 P3).');
+  }
+  if (!HOOD_CHARACTER_MODS[label]) {
+    throw new Error('saveV3NeighborhoodMap_: no HOOD_CHARACTER_MODS row for EmployerCharacter "' + label +
+      '" (' + name + ') — a new label needs a row.');
+  }
+  return label;
+}
+
+function hoodLabelMods_(name, S, label) {
+  if (label === 'stadium' && (S.sportsZones || []).indexOf(name) < 0) return HOOD_STADIUM_BUILD_SITE;
+  return HOOD_CHARACTER_MODS[label];
+}
+
+// The city the hoods are read against: median income and tracked employer
+// depth, then the mean raw retail reading — retailMod is centred on it, so the
+// profile moves a hood's standing inside the city, never the city's level
+// (that stays S.cityDynamics.retail).
+function hoodCharacterCity_(S, hoods) {
+  var ns = S.neighborhoodState || {};
+  var depth = S.hoodEmployerDepth || {};
+  var incomes = [], employees = [];
+  for (var i = 0; i < hoods.length; i++) {
+    var st = ns[hoods[i]];
+    if (st && Number(st.medianIncome) > 0) incomes.push(Number(st.medianIncome));
+    var d = depth[hoods[i]];
+    if (d && Number(d.employees) > 0) employees.push(Number(d.employees));
+  }
+  var city = { income: hoodMedian_(incomes), employees: hoodMedian_(employees), retailMean: 1 };
+  var sum = 0;
+  for (var j = 0; j < hoods.length; j++) sum += hoodRetailRaw_(hoods[j], S, city, hoodLabelOf_(hoods[j], S));
+  if (hoods.length && sum > 0) city.retailMean = sum / hoods.length;
+  return city;
+}
+
+function hoodProfileFromCanon_(name, S, city) {
+  var label = hoodLabelOf_(name, S);
+  var mods = hoodLabelMods_(name, S, label);
+  return {
+    retailMod: hoodClamp_(hoodRetailRaw_(name, S, city, label) / city.retailMean, HOOD_RETAIL_MOD_BAND),
+    nightlifeMod: mods.nightlife,
+    noiseMod: mods.noise,
+    eventMod: mods.event
+  };
+}
+
 // engine.33 — dampened, capped pulse delta for one metric (0 when no pulse).
 // engine.38 S2 — volume-normalized (see PULSE_REF_EVENTS).
 function pulseFoldDelta_(pulse, key) {
@@ -297,41 +429,9 @@ function saveV3NeighborhoodMap_(ctx) {
     if (hood && !arcByNeighborhood[hood]) arcByNeighborhood[hood] = arc;
   }
 
-  // Neighborhood baseline profiles
-  var neighborhoods = {
-    'Downtown': { nightlifeMod: 1.3, noiseMod: 1.4, crimeMod: 1.1, retailMod: 1.3, eventMod: 1.2, sentimentMod: 0.0 },
-    'Temescal': { nightlifeMod: 1.1, noiseMod: 0.9, crimeMod: 0.7, retailMod: 1.2, eventMod: 1.1, sentimentMod: 0.05 },
-    'Laurel': { nightlifeMod: 0.8, noiseMod: 0.7, crimeMod: 0.6, retailMod: 0.9, eventMod: 0.8, sentimentMod: 0.03 },
-    'West Oakland': { nightlifeMod: 0.9, noiseMod: 1.1, crimeMod: 1.3, retailMod: 0.7, eventMod: 0.7, sentimentMod: -0.05 },
-    'Fruitvale': { nightlifeMod: 1.0, noiseMod: 1.0, crimeMod: 1.0, retailMod: 1.0, eventMod: 1.0, sentimentMod: 0.0 },
-    'Jack London': { nightlifeMod: 1.2, noiseMod: 1.2, crimeMod: 0.9, retailMod: 1.1, eventMod: 1.3, sentimentMod: 0.02 },
-    'Rockridge': { nightlifeMod: 0.9, noiseMod: 0.6, crimeMod: 0.5, retailMod: 1.2, eventMod: 0.9, sentimentMod: 0.08 },
-    'Adams Point': { nightlifeMod: 0.8, noiseMod: 0.7, crimeMod: 0.6, retailMod: 0.8, eventMod: 0.7, sentimentMod: 0.04 },
-    'Grand Lake': { nightlifeMod: 1.0, noiseMod: 0.8, crimeMod: 0.7, retailMod: 1.1, eventMod: 1.0, sentimentMod: 0.05 },
-    'Piedmont Ave': { nightlifeMod: 0.7, noiseMod: 0.5, crimeMod: 0.4, retailMod: 1.0, eventMod: 0.6, sentimentMod: 0.06 },
-    'Chinatown': { nightlifeMod: 1.1, noiseMod: 1.3, crimeMod: 1.0, retailMod: 1.0, eventMod: 1.1, sentimentMod: -0.02 },
-    'Brooklyn': { nightlifeMod: 0.7, noiseMod: 0.8, crimeMod: 0.9, retailMod: 0.7, eventMod: 0.5, sentimentMod: -0.03 },
-    'Eastlake': { nightlifeMod: 0.8, noiseMod: 0.7, crimeMod: 0.7, retailMod: 0.8, eventMod: 0.7, sentimentMod: 0.01 },
-    'Glenview': { nightlifeMod: 0.6, noiseMod: 0.5, crimeMod: 0.4, retailMod: 0.7, eventMod: 0.5, sentimentMod: 0.05 },
-    'Dimond': { nightlifeMod: 0.7, noiseMod: 0.6, crimeMod: 0.5, retailMod: 0.8, eventMod: 0.6, sentimentMod: 0.04 },
-    'Ivy Hill': { nightlifeMod: 0.5, noiseMod: 0.4, crimeMod: 0.3, retailMod: 0.5, eventMod: 0.4, sentimentMod: 0.06 },
-    'San Antonio': { nightlifeMod: 0.9, noiseMod: 1.0, crimeMod: 1.1, retailMod: 0.8, eventMod: 0.8, sentimentMod: -0.02 },
-    // S256 — KONO was in the roster but had NO profile, so saveV3NeighborhoodMap_
-    // silently skipped it every cycle (line ~259 `if (!profile) continue`) → dark row,
-    // 12 residents untracked. Telegraph arts corridor: event/nightlife dense.
-    'KONO': { nightlifeMod: 1.15, noiseMod: 1.0, crimeMod: 0.85, retailMod: 1.1, eventMod: 1.15, sentimentMod: 0.03 },
-    // S256 neighborhood-roster alignment (Mike-approved profiles).
-    'Lake Merritt': { nightlifeMod: 0.9, noiseMod: 0.7, crimeMod: 0.6, retailMod: 1.0, eventMod: 1.0, sentimentMod: 0.06 },
-    'Uptown': { nightlifeMod: 1.25, noiseMod: 1.2, crimeMod: 1.0, retailMod: 1.2, eventMod: 1.25, sentimentMod: 0.02 },
-    // Baylight District — under-construction remediation zone: quiet retail/nightlife now,
-    // construction noise, investment optimism in sentiment. Profile rises as the build completes.
-    'Baylight District': { nightlifeMod: 0.5, noiseMod: 1.3, crimeMod: 0.9, retailMod: 0.5, eventMod: 0.6, sentimentMod: 0.04 },
-    // S328 (Mike-direct) — East Oakland: the broad east flatlands. Working-class,
-    // wide geography, OARI + Youth Apprenticeship ground; crime profile already
-    // existed in ensureCrimeMetrics so the physics-derived CrimeIndex has real
-    // per-hood data from cycle one.
-    'East Oakland': { nightlifeMod: 0.8, noiseMod: 1.0, crimeMod: 1.2, retailMod: 0.8, eventMod: 0.8, sentimentMod: -0.03 }
-  };
+  // Hood profiles are read from canon each cycle (hoodProfileFromCanon_, top of
+  // file) — the hand-set per-hood table that stood here is retired.
+  var hoodCity = hoodCharacterCity_(S, NMAP_NEIGHBORHOODS);
 
   // Holiday / calendar neighborhood boosts
   var holidayMods = buildHolidayNeighborhoodMods_(holiday, isFirstFriday, isCreationDay, sportsSeason);
@@ -351,36 +451,16 @@ function saveV3NeighborhoodMap_(ctx) {
 
   for (var i = 0; i < NMAP_NEIGHBORHOODS.length; i++) {
     var name = NMAP_NEIGHBORHOODS[i];
-    var profile = neighborhoods[name];
-
-    // engine.131 T7 — the stadium district stops being a construction site the
-    // cycle a franchise opens in it. The frozen profile below is deliberately
-    // damped ("under-construction remediation zone", S256) and its own comment
-    // promises it "rises as the build completes" — but nothing ever raised it.
-    // Left alone, Baylight would host a 35,000-seat stadium while still dialled
-    // retailMod 0.5 / eventMod 0.6, and the district would open dead.
-    if (profile && name === 'Baylight District' &&
-        (S.sportsZones || []).indexOf('Baylight District') >= 0) {
-      profile = {
-        nightlifeMod: 1.20,   // was 0.50 — a stadium crowd has somewhere to go after
-        noiseMod: 1.25,       // was 1.30 — construction noise gives way to event noise
-        crimeMod: 0.95,       // was 0.90 — more people, still a new and policed build
-        retailMod: 1.15,      // was 0.50 — ground-floor retail has its anchor tenant
-        eventMod: 1.35,       // was 0.60 — this is now the city's event address
-        sentimentMod: 0.06    // was 0.04 — the thing the city was promised arrived
-      };
-    }
-
-    if (!profile) {
-      Logger.log('saveV3NeighborhoodMap_: No profile for "' + name + '", skipping');
-      continue;
-    }
+    // engine.131 T7 (the stadium district is a build site until a franchise
+    // opens in it) now lives in hoodProfileFromCanon_ as the 'stadium' label's
+    // S.sportsZones check.
+    var profile = hoodProfileFromCanon_(name, S, hoodCity);
     var hMod = holidayMods[name] || {};
 
     var effectiveEventMod = profile.eventMod * (hMod.eventMod || 1);
     var effectiveNightlifeMod = profile.nightlifeMod * (hMod.nightlifeMod || 1);
     var effectiveNoiseMod = profile.noiseMod * (hMod.noiseMod || 1);
-    var effectiveSentimentMod = profile.sentimentMod + (hMod.sentimentMod || 0);
+    var effectiveSentimentMod = hMod.sentimentMod || 0;
 
     var nightlife = round2(baseNightlife * effectiveNightlifeMod * (1 + variance()));
     var noise = round2(Math.max(0, baseNoise * effectiveNoiseMod + (variance() * 2)));
@@ -390,17 +470,17 @@ function saveV3NeighborhoodMap_(ctx) {
     // SAFETY-event-count proxy (× crimeMod + random +1) that read ~0 for 100
     // cycles because nothing was domain-classed SAFETY, then jumped to 2-3
     // citywide when engine.70/71 emitted the first SAFETY events while real
-    // crime FELL 3-4σ. Hoods absent from Crime_Metrics (Brooklyn, Eastlake,
-    // Ivy Hill, San Antonio, Baylight District) fall back to city average ×
-    // the frozen profile crimeMod for hood flavor. Pulse/chaos folds below
-    // stay additive — citizens shade the hood.
+    // crime FELL 3-4σ. A hood absent from Crime_Metrics reads the city
+    // average (every hood has a row since engine.134; the old × crimeMod
+    // "flavor" was the real-Oakland table, retired 2026-09-19). Pulse/chaos
+    // folds below stay additive — citizens shade the hood.
     var cmByHood = (S.crimeMetrics && S.crimeMetrics.byNeighborhood) || {};
     var cmCity = (S.crimeMetrics && S.crimeMetrics.cityWide) || {};
     var cityCrimeAvg = ((Number(cmCity.avgPropertyCrime) || 50) + (Number(cmCity.avgViolentCrime) || 50)) / 2;
     var hoodCm = cmByHood[name];
     var crime = hoodCm
       ? round2(Math.max(0, ((Number(hoodCm.propertyCrimeIndex) || 50) + (Number(hoodCm.violentCrimeIndex) || 50)) / 2 / 50))
-      : round2(Math.max(0, cityCrimeAvg / 50 * (profile.crimeMod || 1)));
+      : round2(Math.max(0, cityCrimeAvg / 50));
     var retail = round2(Math.max(0, baseRetail * profile.retailMod * (1 + variance())));
     var eventAttract = Math.max(0, Math.round(baseEventAttract * effectiveEventMod));
     // G-EC33 fix: per-hood base from the per-hood dynamics track (input-driven,

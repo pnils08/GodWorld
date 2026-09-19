@@ -1371,8 +1371,11 @@ function generateCitizensEvents_(ctx) {
     }
 
     // Housing pressure (/10) — prosperity strain: hot blocks price people tight
+    // 2026-09-19: the bar is dialHoodPressureBar (the same World_Config knob the
+    // hood dial line tints on). The literal 6 sat above every live value (C107 max
+    // 5.5) — the rent line never reached a citizen (SIM_DOCTRINE §15).
     var hp = Number(st.housingPressure) || 0;
-    if (hp >= 6) {
+    if (hp > 0 && hp >= pressureBar_(ctx, 'dialHoodPressureBar')) {
       pool.push(makeEntry("compared rent notes with a neighbor over the fence in " + neighborhood,
         ["source:nbhdState", "state:housing"], pw(1.1, hp / 10), false));
       pool.push(makeEntry("ran the numbers on staying put another year",
@@ -1393,30 +1396,45 @@ function generateCitizensEvents_(ctx) {
         ["source:nbhdState", "state:watchful"], pw(1.0, ci), false));
     }
 
-    // Retail vitality — street life or papered storefronts
-    if ((st.retailVitality || 0) >= 13) {
+    // Retail vitality — the hood's street life against the city's own middle
+    // (2026-09-19). The literals (>= 13 busy, <= 8 papered-over) were sized off a
+    // C96 range the column left long ago: at C107 (3.5–10.9, median 7.3) no hood
+    // reached 13 and 14 of 22 sat under 8 — most of a prosperous city walked past
+    // boarded storefronts every cycle. A quiet street is not a dying one: the
+    // decline line lives on the trajectory branch above (decay = storefronts that
+    // never reopened); low retail here is a hood with little open, said as that.
+    var retailMed = hoodStateMedian_(ctx, S, 'retailVitality');
+    var rv = Number(st.retailVitality) || 0;
+    if (retailMed && rv >= retailMed * 1.25) {
       pool.push(makeEntry("checked out a new shop that just opened nearby",
         ["source:nbhdState", "state:retail"], 1.1, false));
       pool.push(makeEntry("browsed a busy weekend market in " + neighborhood,
         ["source:nbhdState", "state:retail"], 1.05, false));
-    } else if ((st.retailVitality || 0) > 0 && st.retailVitality <= 8) {
-      pool.push(makeEntry("walked past another papered-over storefront in " + neighborhood,
+    } else if (retailMed && rv > 0 && rv <= retailMed * 0.75) {
+      pool.push(makeEntry("made the trip out of " + neighborhood + " for errands — not much open on the block",
         ["source:nbhdState", "state:retail-low"], 1.05, false));
     }
 
-    // Local crime index high — watchfulness at hood grain (not citywide)
-    if ((st.crimeIndex || 0) >= 1) {
+    // Local crime index high — watchfulness at hood grain (not citywide).
+    // 2026-09-19: against the city's own median (hoodCrimeBar_, the relative bar
+    // the hood dial line uses — engine.212), not the literal 1 the index barely
+    // touches (C107 max 1.00, median 0.65).
+    if ((Number(st.crimeIndex) || 0) >= hoodCrimeBar_(ctx, S)) {
       pool.push(makeEntry("double-checked the locks after talk of break-ins nearby",
         ["source:nbhdState", "state:watchful"], 1.1, false));
       pool.push(makeEntry("noticed neighbors swapping safety tips on the block",
         ["source:nbhdState", "state:watchful"], 1.05, false));
     }
 
-    // Neighborhood mood, strongly ±
-    if ((st.sentiment || 0) >= 0.7) {
+    // Neighborhood mood, strongly ± — 0.15 off the city's median hood mood
+    // (2026-09-19). The literals 0.7 / 0.2 sat outside the whole live range
+    // (C107 0.24–0.66): neither mood line reached anyone.
+    var sentMed = hoodStateMedian_(ctx, S, 'sentiment');
+    var hs = Number(st.sentiment);
+    if (sentMed !== null && st.sentiment !== null && isFinite(hs) && hs >= sentMed + 0.15) {
       pool.push(makeEntry("felt " + neighborhood + " riding a genuine good stretch",
         ["source:nbhdState", "state:mood-up"], 1.1, false));
-    } else if (st.sentiment !== null && st.sentiment <= 0.2) {
+    } else if (sentMed !== null && st.sentiment !== null && isFinite(hs) && hs <= sentMed - 0.15) {
       pool.push(makeEntry("picked up on a heaviness around " + neighborhood + " lately",
         ["source:nbhdState", "state:mood-down"], 1.1, false));
     }

@@ -174,6 +174,29 @@ function hoodCrimeBar_(ctx, S) {
   return bar;
 }
 
+// 2026-09-19: the city's median of one S.neighborhoodState field (the persisted
+// snapshot) — the middle a hood's life lines are read against, so no line gates
+// on a number the column has drifted away from (SIM_DOCTRINE §15). null when no
+// hood carries the field. Cached per cycle on ctx.
+function hoodStateMedian_(ctx, S, field) {
+  var cache = ctx ? (ctx._hoodStateMedian || (ctx._hoodStateMedian = {})) : {};
+  if (cache.hasOwnProperty(field)) return cache[field];
+  var vals = [], st = S && S.neighborhoodState;
+  for (var h in st) {
+    if (!st.hasOwnProperty(h) || !st[h] || st[h][field] === null || st[h][field] === undefined || st[h][field] === '') continue;
+    var v = Number(st[h][field]);
+    if (isFinite(v)) vals.push(v);
+  }
+  var median = null;
+  if (vals.length) {
+    vals.sort(function(a, b) { return a - b; });
+    var mid = Math.floor(vals.length / 2);
+    median = vals.length % 2 ? vals[mid] : (vals[mid - 1] + vals[mid]) / 2;
+  }
+  cache[field] = median;
+  return median;
+}
+
 function runNeighborhoodEngine_(ctx) {
 
   var rng = safeRand_(ctx);

@@ -217,5 +217,21 @@ t('a blank or unknown label throws (a new label needs a row)', () => {
   assert.throws(() => w.hoodProfileFromCanon_('KONO', canonS({ KONO: ['spaceport', 82164, 0.3, 46] }), city), /no HOOD_CHARACTER_MODS row/);
 });
 
+console.log('T8 every canon hood gets a dynamics track (10 of 22 had none — city scalar, lockstep)');
+t('unclustered hoods adopt the cluster of their canon neighbours; none left unplaced', () => {
+  load(sb, 'phase02-world-state/applyCityDynamics.js');
+  const ctx = makeCtx(sb);
+  const CL = { DOWNTOWN_CORE: { hoods: ['Downtown', 'Uptown', 'KONO', 'Chinatown'] }, WATERFRONT_WEST: { hoods: ['Jack London', 'West Oakland'] },
+    LAKE_CORRIDOR: { hoods: ['Lake Merritt', 'Piedmont Ave'] }, NORTH_HILLS: { hoods: ['Rockridge', 'Temescal'] }, EAST_OAKLAND: { hoods: ['Fruitvale', 'Laurel'] } };
+  const r = sb.buildHoodClusterAssignment_(ctx, CL);
+  assert.strictEqual(r.unplaced.length, 0);
+  HOODS.forEach(h => assert.ok(r.byHood[h], h + ' unplaced'));
+  const all = [].concat(...Object.values(r.members));
+  assert.strictEqual(all.length, 22);
+  assert.strictEqual(new Set(all).size, 22);
+  ['Rockridge', 'Temescal'].forEach(h => assert.strictEqual(r.byHood[h], 'NORTH_HILLS'));   // named members keep their cluster
+  assert.ok(/buildHoodClusterAssignment_\(ctx, CLUSTERS\)/.test(src('phase02-world-state/applyCityDynamics.js')));
+});
+
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

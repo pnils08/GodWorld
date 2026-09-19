@@ -277,6 +277,9 @@
   Writes: S.activityObservations, S.approvalNeighborhoodEffects, S.cityDynamics, S.cityDynamicsCapacity, S.cityDynamicsLag, S.clusterDefinitions, S.clusterDynamics, S.initiativeNeighborhoodEffects, S.neighborhoodDemographics, S.neighborhoodDynamics, S.previousCityDynamics, S.previousClusterDynamics, S.previousNeighborhoodDynamics, S.resetDynamicsMomentum, S.storySeedSignals
   Config: ctx.config.cityCapacity, ctx.config.cycleCount, ctx.config.manualDynamicsInputs
 
+- **buildHoodClusterAssignment_(ctx, clusters)**
+  Reads: S.canonHoods
+
 - **getNeighborhoodDynamics_(ctx, neighborhood)**
   Reads: S.cityDynamics, S.neighborhoodDynamics
 
@@ -4099,4 +4102,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 184
-**Functions mapped:** 1423
+**Functions mapped:** 1424

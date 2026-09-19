@@ -2,7 +2,7 @@
   "generated": "2026-09-19",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 184,
-  "functionsMapped": 1423,
+  "functionsMapped": 1424,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -817,6 +817,7 @@
         "phase01-config/canonNeighborhoodLoader.js::hoodsWithScene_",
         "phase01-config/canonNeighborhoodLoader.js::isCanonNeighborhood_",
         "phase01-config/canonNeighborhoodLoader.js::resolveHoodOrChild_",
+        "phase02-world-state/applyCityDynamics.js::buildHoodClusterAssignment_",
         "utilities/ensureCrimeMetrics.js::crimeIterationHoods_"
       ]
     },

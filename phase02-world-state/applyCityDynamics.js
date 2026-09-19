@@ -1317,13 +1317,25 @@ function applyCityDynamics_(ctx) {
   // ─────────────────────────────────────────────────────────────────────────
   // NEIGHBORHOOD DYNAMICS (derived from clusters)
   // ─────────────────────────────────────────────────────────────────────────
+  // 2026-09-19: every canon hood gets a track. CLUSTERS name 12 of the 22; the
+  // other ten (East Oakland, Baylight District, San Antonio, Ivy Hill, Glenview,
+  // Dimond, Adams Point, Grand Lake, Eastlake, Brooklyn) got NO entry, so
+  // v3NeighborhoodWriter fell back to the city scalar for them every cycle — ten
+  // hoods with no mood of their own, moving in lockstep (C107: all ten +0.25 to
+  // +0.35 in one cycle), their own sickness / economy / crime / initiative folds
+  // never reaching them (OARI and the apprenticeship pipeline both target East
+  // Oakland). An unclustered hood now ADOPTS the cluster most of its canon
+  // neighbours belong to (Neighborhood_Map.Adjacent) as its starting point only:
+  // cluster metrics, the crime ripple and the city blend are unchanged; the
+  // per-hood pass below moves it by its own inputs.
+  var hoodClusters = buildHoodClusterAssignment_(ctx, CLUSTERS);
   for (var cname2 in CLUSTERS) {
     if (!CLUSTERS.hasOwnProperty(cname2)) continue;
-    var cdef2 = CLUSTERS[cname2];
     var clusterM = clusterDynamics[cname2];
+    var memberHoods = hoodClusters.members[cname2];   // named + adopted
 
-    for (var hn = 0; hn < cdef2.hoods.length; hn++) {
-      var nhood = cdef2.hoods[hn];
+    for (var hn = 0; hn < memberHoods.length; hn++) {
+      var nhood = memberHoods[hn];
 
       var nm = {
         traffic: clusterM.traffic,
@@ -1846,6 +1858,63 @@ function applyCityDynamics_(ctx) {
  * Safe accessor with fallback to city dynamics.
  * ============================================================================
  */
+/**
+ * 2026-09-19: hood → cluster for the per-hood dynamics pass. The CLUSTERS
+ * members keep their cluster; every other canon hood adopts the cluster most of
+ * its canon neighbours (Neighborhood_Map.Adjacent, getAdjacentHoods_) belong to,
+ * iterating so a hood whose neighbours are themselves adopted still lands.
+ * Ties go to the first cluster reached in adjacency order (deterministic). A
+ * hood with no placed neighbour at all stays unplaced and is logged — it keeps
+ * the writer's city-scalar fallback, as before.
+ * Returns { byHood: { hood: cluster }, members: { cluster: [hoods] }, unplaced: [] }.
+ */
+function buildHoodClusterAssignment_(ctx, clusters) {
+  var byHood = {}, members = {};
+  for (var c in clusters) {
+    if (!clusters.hasOwnProperty(c)) continue;
+    members[c] = [];
+    for (var i = 0; i < clusters[c].hoods.length; i++) {
+      var h = clusters[c].hoods[i];
+      if (byHood[h]) continue;
+      byHood[h] = c;
+      members[c].push(h);
+    }
+  }
+  // Unseeded canon (Phase1-CanonHoods did not run — only an offline harness
+  // calling applyCityDynamics_ alone): the named members only, as before.
+  if (typeof getCanonNeighborhoods_ !== 'function' || !(ctx && ctx.summary && ctx.summary.canonHoods)) {
+    Logger.log('buildHoodClusterAssignment_: canon hoods not seeded — named cluster members only');
+    return { byHood: byHood, members: members, unplaced: [] };
+  }
+  var canon = getCanonNeighborhoods_(ctx);
+  var pending = [];
+  for (var k = 0; k < canon.length; k++) if (!byHood[canon[k]]) pending.push(canon[k]);
+  var progress = true;
+  while (pending.length && progress) {
+    progress = false;
+    var still = [];
+    for (var p = 0; p < pending.length; p++) {
+      var hood = pending[p];
+      var adj = getAdjacentHoods_(ctx, hood);
+      var counts = {}, best = null;
+      for (var a = 0; a < adj.length; a++) {
+        var ac = byHood[adj[a]];
+        if (!ac) continue;
+        counts[ac] = (counts[ac] || 0) + 1;
+        if (best === null || counts[ac] > counts[best]) best = ac;
+      }
+      if (best) { byHood[hood] = best; members[best].push(hood); progress = true; }
+      else still.push(hood);
+    }
+    pending = still;
+  }
+  if (pending.length) {
+    Logger.log('buildHoodClusterAssignment_: no placed canon neighbour for ' + pending.join(', ') +
+      ' — city-scalar fallback in the writer (check Neighborhood_Map.Adjacent)');
+  }
+  return { byHood: byHood, members: members, unplaced: pending };
+}
+
 function getNeighborhoodDynamics_(ctx, neighborhood) {
   var S = ctx && ctx.summary;
   if (!S) return {

@@ -129,6 +129,15 @@ pointers:
 
 ## PROD deploy log — full trail
 
+### PROD @101 — hoods read their own canon + crime reaches the citizens (2026-09-19 ~14:55 Chicago, engine-sheet)
+
+Commit `a1f973a3` (engine tree; docs commits after it touch no pushed file), 15 files vs @100: engine.237 + fix-up (crime reader contract, relative hotspots, city-sized capacity, clearance off the floor), engine.235 (crime read persisted), engine.239 (`v3NeighborhoodWriter` hood-name-keyed retail/crime/mood table → `hoodProfileFromCanon_`; life-line gates city-relative), engine.239b (all 22 hoods get a `S.neighborhoodDynamics` track via canon Adjacent), engine.239c (child-area employers fold to parent; Phase2-NeighborhoodState now before Phase2-CityDynamics at both entry points). Isolated `git archive a1f973a3` stage, pushed 170 files, clasp version 90, deployment read back @90; pull-back 169/169 js byte-identical, 0 test files.
+
+**Bench SANDBOX 0908 (each fire on a fresh live-synced C107):** @59 = `536684df` treatment C108 ok:true 268 s; @60 = CONTROL `b58d8a2b` (PROD @100) C108 ok:true 197 s; @61 = `2cd142a9` ok:true 209 s; @62 = `a1f973a3` ok:true, 0 Engine_Errors on all four. Control vs @62: West Oakland RetailVitality 3.42 (22/22) → 7.92; Temescal 8.07 → 4.97; Jack London / Rockridge / Downtown top. City Sentiment 0.02 on BOTH control and treatment (winter −0.25, fog −0.10, MLK +0.20 and edition boost +0.13 gone) — not this deploy. @61 showed the ten newly tracked hoods 0.1–0.3 under neighbours (no carried momentum) → fixed in 239c; @62 in line. C108 LifeHistory: "papered-over storefront" 0 hoods (was 13/22 eligible), new-shop lines Rockridge/Uptown/Jack London, rent lines 13 (first time reachable).
+
+- **Expect at live C108:** 0 Engine_Errors; Neighborhood_Map RetailVitality ranking follows canon (West Oakland mid-city, Temescal / San Antonio / Glenview / Ivy Hill low, Baylight low until a franchise opens there); no two hoods sharing the city Sentiment; CrimeIndex unchanged by this deploy (carried levels — engine.241).
+- **Rollback:** `clasp deploy -i AKfycbwUvd4… -V 89` repoints to @100 (and `git archive b58d8a2b` + push for editor fires).
+
 ### PROD @100 — moment triggers: six new story hooks, and triggers stop losing to the phase hook (2026-09-19 ~02:10 Chicago, engine-sheet)
 
 Commit `b58d8a2b`, two files vs @99: `storyHook.js` (TRIGGER_HOOKS +draft-night / trade-deadline / all-star / series-clinch / walk-off / no-hitter; moment hooks collected apart from the one-per-domain dedupe so the phase hook no longer wins every tie) and `setupSportsFeedValidation.js` (EventTrigger list = the 18 hook keys; EventType + breaking-news / awards / community-outreach; moment note). Apps Script version 89, read back @89; pull-back 169 js byte-identical, 0 test files.

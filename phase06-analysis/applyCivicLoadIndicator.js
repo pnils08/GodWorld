@@ -101,10 +101,15 @@ function applyCivicLoadIndicator_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // CHAOS EVENTS (v2.3: current cycle only)
   // ═══════════════════════════════════════════════════════════════════════════
-  if (chaosCount >= 5) {
+  // engine.187 (2026-09-19): a SURGE against last cycle's count, not a count. ≥ 5 world events fired
+  // every cycle (the ordinary volume is 8–13), so this was a standing +4 (SIM_DOCTRINE §15). Last
+  // cycle's count is the shock monitor's carried chaosCount; no carried count → no volume term.
+  var prevChaosCount = Number((S.previousCycleState || {}).chaosCount);
+  var chaosSurge = isFinite(prevChaosCount) ? chaosCount - prevChaosCount : 0;
+  if (chaosSurge >= 4) {
     score += 4;
-    factors.push('high event volume');
-  } else if (chaosCount >= 2) {
+    factors.push('event volume surge');
+  } else if (chaosSurge >= 2) {
     score += 2;
   }
 
@@ -127,8 +132,12 @@ function applyCivicLoadIndicator_(ctx) {
     }
   }
   
-  // v2.3: Cap severity contribution at 12 points
-  score += Math.min(severityScore, 12);
+  // engine.187 (2026-09-19): cap 8, not 12. The cap equalled the load-strain threshold (12), so ~6
+  // medium events — the ordinary texture volume, 8–13 world events a cycle — pinned the top class by
+  // themselves every cycle (bench C109–C122: load-strain 11/14, stable 0/14; SIM_DOCTRINE §15). Event
+  // severity alone now reaches minor-variance at most; load-strain needs a second stressor (peak arcs,
+  // tension, weather, economy, migration, mood, calendar).
+  score += Math.min(severityScore, 8);
 
   if (highSeverity > 0) {
     factors.push(highSeverity + ' high-severity event(s)');
@@ -222,7 +231,8 @@ function applyCivicLoadIndicator_(ctx) {
   if (patternFlag === "micro-event-wave") {
     score += 1;
   } else if (patternFlag === "strain-trend") {
-    score += 3;
+    // engine.187: no score. strain-trend is applyPatternDetection's read of THIS classifier's own
+    // history (strainCycles ≥ 2) — adding it back latched the class at load-strain.
     factors.push('strain trend');
   } else if (patternFlag === "stability-streak") {
     score -= 2;
@@ -233,8 +243,9 @@ function applyCivicLoadIndicator_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // SHOCK FLAG
   // ═══════════════════════════════════════════════════════════════════════════
+  // engine.187: no score. The shock flag this reads is last cycle's, and applyShockMonitor sets it
+  // FROM this classifier (civicLoad === 'load-strain', :243) — +4 here closed the latch.
   if (shockFlag && shockFlag !== "none") {
-    score += 4;
     factors.push('shock event');
   }
 

@@ -2,7 +2,7 @@
   "generated": "2026-09-19",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 184,
-  "functionsMapped": 1424,
+  "functionsMapped": 1432,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -818,6 +818,12 @@
         "phase01-config/canonNeighborhoodLoader.js::isCanonNeighborhood_",
         "phase01-config/canonNeighborhoodLoader.js::resolveHoodOrChild_",
         "phase02-world-state/applyCityDynamics.js::buildHoodClusterAssignment_",
+        "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_",
+        "phase06-analysis/economicRippleEngine.js::sceneHoods_",
+        "phase07-evening-media/cityEveningSystems.js::buildCityEveningSystems_",
+        "phase07-evening-media/mediaFeedbackEngine.js::mediaHoodWeight_",
+        "phase07-evening-media/mediaFeedbackEngine.js::mediaHoods_",
+        "phase07-evening-media/mediaFeedbackEngine.js::mediaSceneHoods_",
         "utilities/ensureCrimeMetrics.js::crimeIterationHoods_"
       ]
     },
@@ -827,7 +833,8 @@
       ],
       "readers": [
         "phase01-config/canonNeighborhoodLoader.js::getAdjacentHoods_",
-        "phase03-population/updateCrimeMetrics.js::buildCrimeAdjacencyGraph_"
+        "phase03-population/updateCrimeMetrics.js::buildCrimeAdjacencyGraph_",
+        "phase06-analysis/economicRippleEngine.js::createRipple_"
       ]
     },
     "hoodHeadcount": {
@@ -848,6 +855,7 @@
         "phase02-world-state/loadNeighborhoodState.js::loadNeighborhoodState_",
         "phase03-population/generateCrisisBuckets.js::generateCrisisBuckets_",
         "phase03-population/generateCrisisSpikes.js::crisisHoodWeight_",
+        "phase03-population/updateCrimeMetrics.js::updateCrimeMetrics_Phase3_",
         "phase03-population/updateNeighborhoodDemographics.js::buildHoodEmploymentWeights_",
         "phase03-population/updateNeighborhoodDemographics.js::buildHoodIllnessWeights_",
         "phase03-population/updateNeighborhoodDemographics.js::driftNeighborhoodEducation_",
@@ -879,6 +887,8 @@
         "phase06-analysis/economicRippleEngine.js::calculateNeighborhoodEconomies_",
         "phase06-analysis/economicRippleEngine.js::primarySportsZone_",
         "phase07-evening-media/buildEveningFood.js::eveningFoodHoodsByCharacter_",
+        "phase07-evening-media/cityEveningSystems.js::buildCityEveningSystems_",
+        "phase07-evening-media/mediaFeedbackEngine.js::mediaHoods_",
         "phase08-v3-chicago/v3NeighborhoodWriter.js::hoodCharacterCity_",
         "phase08-v3-chicago/v3NeighborhoodWriter.js::hoodLabelOf_",
         "phase08-v3-chicago/v3NeighborhoodWriter.js::hoodRetailRaw_",
@@ -1736,6 +1746,7 @@
         "phase05-citizens/generationalWealthEngine.js::processBankRate_",
         "phase05-citizens/updateCivicApprovalRatings.js::hoodMoodEma_",
         "phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_",
+        "phase06-analysis/applyCivicLoadIndicator.js::applyCivicLoadIndicator_",
         "phase06-analysis/applyShockMonitor.js::applyShockMonitor_",
         "phase06-analysis/economicRippleEngine.js::runEconomicRippleEngine_",
         "phase07-evening-media/domainTracker.js::domainTracker_",
@@ -1830,9 +1841,13 @@
         "phase01-config/loadPreviousEvening.js::seedCarriedEconomicMood_",
         "phase01-config/loadPreviousEvening.js::seedCarriedNeighborhoodEconomies_",
         "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
+        "phase04-events/buildCityEvents.js::buildCityEvents_",
         "phase06-analysis/applyMigrationDrift.js::applyMigrationDrift_",
         "phase06-analysis/economicRippleEngine.js::generateEconomicSummary_",
         "phase06-analysis/economicRippleEngine.js::runEconomicRippleEngine_",
+        "phase07-evening-media/applyStorySeeds.js::applyStorySeeds_",
+        "phase07-evening-media/buildNightLife.js::buildNightlife_",
+        "phase07-evening-media/cityEveningSystems.js::buildCityEveningSystems_",
         "phase09-digest/finalizeCycleState.js::savePreviousCycleState_",
         "phase10-persistence/buildCyclePacket.js::buildCyclePacket_"
       ]
@@ -1966,7 +1981,10 @@
         "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
         "phase02-world-state/applyCityDynamics.js::getNeighborhoodDynamics_",
         "phase03-population/updateCrimeMetrics.js::updateCrimeMetrics_Phase3_",
+        "phase04-events/buildCityEvents.js::buildCityEvents_",
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
+        "phase07-evening-media/applyStorySeeds.js::applyStorySeeds_",
+        "phase07-evening-media/cityEveningSystems.js::buildCityEveningSystems_",
         "phase08-v3-chicago/v3NeighborhoodWriter.js::saveV3NeighborhoodMap_",
         "phase09-digest/finalizeCycleState.js::finalizeCycleState_",
         "phase10-persistence/buildCyclePacket.js::buildCyclePacket_"
@@ -2127,6 +2145,23 @@
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_"
       ]
     },
+    "weatherEvents": {
+      "writers": [
+        "phase02-world-state/applyWeatherModel.js::applyWeatherModel_"
+      ],
+      "readers": [
+        "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
+        "phase02-world-state/applyWeatherModel.js::applyWeatherModel_",
+        "phase02-world-state/applyWeatherModel.js::hasWeatherCondition_",
+        "phase03-population/applyDemographicDrift.js::applyDemographicDrift_",
+        "phase03-population/generateCrisisBuckets.js::generateCrisisBuckets_",
+        "phase03-population/updateNeighborhoodDemographics.js::buildHoodIllnessWeights_",
+        "phase04-events/chaosCarsEngine.js::runChaosCarsEngine_",
+        "phase04-events/generationalEventsEngine.js::runGenerationalEngine_",
+        "phase06-analysis/economicRippleEngine.js::detectNewRipples_",
+        "phase07-evening-media/storyHook.js::storyHookEngine_"
+      ]
+    },
     "domainCooldowns": {
       "writers": [
         "phase02-world-state/applyEditionCoverageEffects.js::applyEditionCoverageEffects_",
@@ -2183,6 +2218,8 @@
         "phase07-evening-media/buildEveningFamous.js::buildEveningFamous_",
         "phase07-evening-media/buildEveningFamous.js::pickAthleteSightingHood_",
         "phase07-evening-media/buildEveningFood.js::buildEveningFood_",
+        "phase07-evening-media/cityEveningSystems.js::buildCityEveningSystems_",
+        "phase07-evening-media/mediaFeedbackEngine.js::applyNeighborhoodMediaEffects_",
         "phase08-v3-chicago/v3NeighborhoodWriter.js::hoodLabelMods_",
         "phase08-v3-chicago/v3NeighborhoodWriter.js::saveV3NeighborhoodMap_"
       ]
@@ -2332,22 +2369,6 @@
         "phase02-world-state/applyWeatherModel.js::getNeighborhoodWeatherEvent_",
         "phase02-world-state/applyWeatherModel.js::getWeatherEvent_",
         "phase05-citizens/runRelationshipEngine.js::runRelationshipEngine_"
-      ]
-    },
-    "weatherEvents": {
-      "writers": [
-        "phase02-world-state/applyWeatherModel.js::applyWeatherModel_"
-      ],
-      "readers": [
-        "phase02-world-state/applyWeatherModel.js::applyWeatherModel_",
-        "phase02-world-state/applyWeatherModel.js::hasWeatherCondition_",
-        "phase03-population/applyDemographicDrift.js::applyDemographicDrift_",
-        "phase03-population/generateCrisisBuckets.js::generateCrisisBuckets_",
-        "phase03-population/updateNeighborhoodDemographics.js::buildHoodIllnessWeights_",
-        "phase04-events/chaosCarsEngine.js::runChaosCarsEngine_",
-        "phase04-events/generationalEventsEngine.js::runGenerationalEngine_",
-        "phase06-analysis/economicRippleEngine.js::detectNewRipples_",
-        "phase07-evening-media/storyHook.js::storyHookEngine_"
       ]
     },
     "weatherFrontTracking": {
@@ -2747,6 +2768,7 @@
       ],
       "readers": [
         "phase04-events/chaosCarsEngine.js::flushBusinessFold_",
+        "phase07-evening-media/applyStorySeeds.js::applyStorySeeds_",
         "phase08-v3-chicago/v3NeighborhoodWriter.js::saveV3NeighborhoodMap_",
         "utilities/neighborhoodPulseMap.js::pulseForEvent_",
         "utilities/neighborhoodPulseMap.js::recordPulse_",
@@ -2966,6 +2988,16 @@
       "readers": [
         "phase05-citizens/applyBusinessDynamics.test.js::ctxWith",
         "phase09-digest/finalizeCycleState.js::finalizeCycleState_"
+      ]
+    },
+    "hoodBusinessMomentum": {
+      "writers": [
+        "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_"
+      ],
+      "readers": [
+        "phase08-v3-chicago/v3NeighborhoodWriter.js::hoodBusinessCity_",
+        "phase08-v3-chicago/v3NeighborhoodWriter.js::hoodBusinessFactor_",
+        "phase08-v3-chicago/v3NeighborhoodWriter.js::hoodCharacterCity_"
       ]
     },
     "namedSpotlights": {
@@ -3220,6 +3252,7 @@
         "phase05-citizens/runCareerEngine.js::applyEmployerSuccess_",
         "phase05-citizens/runCareerEngine.js::runCareerEngine_",
         "phase06-analysis/economicRippleEngine.js::detectCareerRipples_",
+        "phase06-analysis/economicRippleEngine.js::hoodOfJobMoves_",
         "phase06-analysis/economicRippleEngine.js::runEconomicRippleEngine_"
       ]
     },
@@ -3590,6 +3623,7 @@
       ],
       "readers": [
         "phase06-analysis/applyMigrationDrift.js::renderMigrationBrief_",
+        "phase07-evening-media/applyStorySeeds.js::applyStorySeeds_",
         "phase08-v3-chicago/v3NeighborhoodWriter.js::saveV3NeighborhoodMap_",
         "phase10-persistence/buildCyclePacket.js::buildCyclePacket_"
       ]
@@ -3684,16 +3718,15 @@
         "phase06-analysis/economicRippleEngine.js::runEconomicRippleEngine_"
       ],
       "readers": [
-        "phase06-analysis/economicRippleEngine.js::detectCareerRipples_"
+        "phase06-analysis/economicRippleEngine.js::detectCareerRipples_",
+        "phase06-analysis/economicRippleEngine.js::hoodOfJobMoves_"
       ]
     },
     "_rng": {
       "writers": [
         "phase06-analysis/economicRippleEngine.js::runEconomicRippleEngine_"
       ],
-      "readers": [
-        "phase06-analysis/economicRippleEngine.js::createRipple_"
-      ]
+      "readers": []
     },
     "careerChurn": {
       "writers": [

@@ -146,5 +146,30 @@ function runShock(curEvents, prevEvents, sOverrides) {
   ok('a fall 0.2 → −0.2 is a sentiment collapse', fall >= 1, 'score=' + fall);
 }
 
+// engine.187 (2026-09-19): civic load cannot pin itself — severity alone tops out below load-strain,
+// and its own downstream flags (strain-trend, shock) no longer feed its score.
+{
+  const vm2 = require('vm'), fs2 = require('fs'), path2 = require('path');
+  const cl = { Logger: { log() {} }, Math, JSON, Object, Array, String, Number };
+  vm2.createContext(cl);
+  vm2.runInContext(fs2.readFileSync(path2.join(__dirname, '..', 'phase06-analysis/applyCivicLoadIndicator.js'), 'utf8'), cl);
+  const load = over => {
+    const ctx = { config: { cycleCount: 100 }, summary: Object.assign({ cycleId: 100, worldEvents: [], eventArcs: [], cityDynamics: { sentiment: 0, culturalActivity: 1, communityEngagement: 1 },
+      weather: { type: 'clear', impact: 1 }, weatherMood: {}, economicMood: 50, demographicDrift: { migration: 0 }, patternFlag: 'none', shockFlag: 'none',
+      holiday: 'none', holidayPriority: 'none', sportsSeason: 'off-season', previousCycleState: { chaosCount: 9 } }, over || {}) };
+    cl.applyCivicLoadIndicator_(ctx);
+    return ctx.summary;
+  };
+  const med = n => Array.from({ length: n }, () => ({ severity: 'medium', cycle: 100 }));
+  const texture = load({ worldEvents: med(8) });
+  ok('8 medium texture events alone read minor-variance, not load-strain', texture.civicLoad === 'minor-variance', texture.civicLoad + ' ' + texture.civicLoadScore);
+  const latch = load({ worldEvents: med(8), patternFlag: 'strain-trend', shockFlag: 'shock-flag' });
+  ok('its own strain-trend / shock flags add nothing (no latch)', latch.civicLoadScore === texture.civicLoadScore, latch.civicLoadScore + ' vs ' + texture.civicLoadScore);
+  const real = load({ worldEvents: med(8), eventArcs: [{ phase: 'peak', tension: 8 }, { phase: 'peak', tension: 8 }], weather: { type: 'rain', impact: 1.4 } });
+  ok('severity + two peak arcs + severe weather still reach load-strain', real.civicLoad === 'load-strain', real.civicLoad + ' ' + real.civicLoadScore);
+  const surge = load({ worldEvents: med(14) });
+  ok('a surge over last cycle (9 → 14 events) adds the volume points; an ordinary 8 does not', surge.civicLoadScore === texture.civicLoadScore + 4, surge.civicLoadScore + ' vs ' + texture.civicLoadScore);
+}
+
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);

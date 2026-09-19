@@ -302,6 +302,7 @@ function updateCrimeMetrics_Phase3_(ctx) {
   var hotspots = calculateCrimeHotspots_(newMetrics, adjacency);
   var context = buildCrimeReaderContext_(newMetrics, hotspots, cityWide, categoryCityWide,
     predictedCityIncidents, policingCapacity, patrolStrategy, shifts);
+  applyHoodLifeQuality_(context, demographics, S.neighborhoodState || {}, neighborhoods);
   // engine.235: the engine's read of each hood rides the row to Crime_Metrics K–M (Trend / Hotspot /
   // PressureRatio) — the newsroom reads the tab, never S.
   var hotScore = {};
@@ -1017,6 +1018,66 @@ function buildCrimeReaderContext_(metricsMap, hotspots, cityWide, categoryCityWi
       reportingGap: trueN > 0 ? Math.round((CRIME_ADVANCED.BASE_REPORTING_RATE - reportedN / trueN) * 100) / 100 : 0
     }
   };
+}
+
+// 2026-09-19 (builder ruling: "broken quality of life when canon, hood and life are
+// measurables that are available"). byHood[hood].qualityOfLifeIndex was crime alone
+// (1 − pressureRatio/2). It is now the hood's quality of life read from its own
+// measurables, each against the city's own middle (0 = the median hood), weighted:
+//   safety  0.30  crime pressure (this cycle)          (1 − ratio) / 2
+//   work    0.20  unemployed share (demographics)        (1 − ratio) / 2
+//   health  0.15  sick share (demographics)              (1 − ratio) / 2
+//   street  0.15  RetailVitality (last cycle's map)      (ratio − 1) / 2
+//   housing 0.10  HousingPressure 0–10 (last cycle)      −(hp − median) / 20
+//   mood    0.10  Sentiment (last cycle's map)           sentiment − median
+// QoL = 0.5 + Σ w·d over the components the hood carries (weights renormalised), banded
+// 0.05–0.95 — a hood bad on everything reads where a crime-only 1.3× hood read before
+// (0.35), so the readers' bands stand. Canon enters through these: income tier and boom
+// set a hood's joblessness and street life (engine.135 / engine.239).
+// byHood[hood].safetyIndex keeps the crime-only reading for the readers that mean safety
+// alone (the unemployment envelope reads it — a composite with work in it would loop).
+var HOOD_QOL_WEIGHTS = { safety: 0.30, work: 0.20, health: 0.15, street: 0.15, housing: 0.10, mood: 0.10 };
+
+function applyHoodLifeQuality_(context, demographics, nState, hoods) {
+  var byHood = (context && context.byHood) || {};
+  var med = function(arr) { return crimeMedian_(arr); };
+  var un = {}, sk = {}, uL = [], sL = [], rL = [], hL = [], mL = [];
+  for (var i = 0; i < hoods.length; i++) {
+    var h = hoods[i], d = demographics[h];
+    if (d) {
+      var tot = (d.students || 0) + (d.adults || 0) + (d.seniors || 0);
+      if (tot > 0) { un[h] = (d.unemployed || 0) / tot; sk[h] = (d.sick || 0) / tot; uL.push(un[h]); sL.push(sk[h]); }
+    }
+    var st = nState[h];
+    if (st) {
+      if (st.retailVitality !== null && isFinite(Number(st.retailVitality))) rL.push(Number(st.retailVitality));
+      if (st.housingPressure !== null && isFinite(Number(st.housingPressure))) hL.push(Number(st.housingPressure));
+      if (st.sentiment !== null && isFinite(Number(st.sentiment))) mL.push(Number(st.sentiment));
+    }
+  }
+  var mU = med(uL), mS = med(sL), mR = med(rL), mH = med(hL), mM = med(mL);
+  var band = function(x) { return Math.round(Math.max(0.05, Math.min(0.95, x)) * 100) / 100; };
+  for (var hood in byHood) {
+    if (!byHood.hasOwnProperty(hood)) continue;
+    var b = byHood[hood];
+    b.safetyIndex = b.qualityOfLifeIndex;
+    var parts = {};
+    if (isFinite(Number(b.pressureRatio))) parts.safety = (1 - Number(b.pressureRatio)) / 2;
+    if (un.hasOwnProperty(hood) && mU) parts.work = (1 - un[hood] / mU) / 2;
+    if (sk.hasOwnProperty(hood) && mS) parts.health = (1 - sk[hood] / mS) / 2;
+    var s2 = nState[hood] || {};
+    if (mR && s2.retailVitality !== null && isFinite(Number(s2.retailVitality))) parts.street = (Number(s2.retailVitality) / mR - 1) / 2;
+    if (mH !== null && s2.housingPressure !== null && isFinite(Number(s2.housingPressure))) parts.housing = -(Number(s2.housingPressure) - mH) / 20;
+    if (mM !== null && s2.sentiment !== null && isFinite(Number(s2.sentiment))) parts.mood = Number(s2.sentiment) - mM;
+    var sum = 0, wSum = 0;
+    for (var k in parts) {
+      if (!parts.hasOwnProperty(k)) continue;
+      var dk = Math.max(-0.5, Math.min(0.5, parts[k]));
+      sum += HOOD_QOL_WEIGHTS[k] * dk; wSum += HOOD_QOL_WEIGHTS[k];
+    }
+    if (wSum > 0) b.qualityOfLifeIndex = band(0.5 + sum / wSum);
+    b.qolParts = parts;
+  }
 }
 
 // engine.237: capacity is sized to the simulated city — UNITS_PER_HOOD × the hoods the cycle iterates

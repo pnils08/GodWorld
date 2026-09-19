@@ -1114,9 +1114,12 @@ function applyStorySeeds_(ctx) {
     if (!neighborhoodCrime.hasOwnProperty(nhKey)) continue;
     var nhData = neighborhoodCrime[nhKey];
     var nhQol = nhData.qualityOfLifeIndex || 0.5;
+    // 2026-09-19: the crisis seed is crime text on a rising CRIME trend — it reads the crime-only
+    // safetyIndex; qualityOfLifeIndex is now the hood's whole quality of life (bright spot below).
+    var nhSafety = (typeof nhData.safetyIndex === 'number') ? nhData.safetyIndex : nhQol;
     // engine.237: the crisis needs the hood RISING this cycle — a hood that sits high every cycle is
     // where it is, not an event (SIM_DOCTRINE §15: start → peak → end, not a standing drumbeat).
-    if (nhQol <= 0.3 && nhData.trend === 'rising') {
+    if (nhSafety <= 0.3 && nhData.trend === 'rising') {
       seeds.push(makeSeedWithCitizens_(
         "Quality of life crisis in " + nhKey + ". Noise, disorder, and frustration peak.",
         'CIVIC', nhKey, 3, 'qol'

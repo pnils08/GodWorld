@@ -270,6 +270,23 @@ console.log('═══ 10 — capacity scales with the map; clearance reads the 
 }
 
 // ── 11. engine.237 — the reader contract: S.crimeMetrics.context ─────────────────────────────
+console.log('═══ 10q — quality of life is read from the hood\'s own measurables, not crime alone');
+{
+  const sb = sandbox();
+  const mk = () => ({ byHood: { A: { pressureRatio: 1, qualityOfLifeIndex: 0.5 }, B: { pressureRatio: 1, qualityOfLifeIndex: 0.5 }, C: { pressureRatio: 1, qualityOfLifeIndex: 0.5 } } });
+  const demo = u => ({ students: 100, adults: 800, seniors: 100, unemployed: u, sick: 30 });
+  const st = (r, hp, s) => ({ retailVitality: r, housingPressure: hp, sentiment: s });
+  const base = { A: st(8, 0, 0.4), B: st(8, 0, 0.4), C: st(8, 0, 0.4) };
+  let cx = mk(); sb.applyHoodLifeQuality_(cx, { A: demo(50), B: demo(100), C: demo(50) }, base, ['A', 'B', 'C']);
+  check('10q-a same crime, twice the joblessness → lower quality of life (' + cx.byHood.A.qualityOfLifeIndex + ' > ' + cx.byHood.B.qualityOfLifeIndex + ')', cx.byHood.A.qualityOfLifeIndex > cx.byHood.B.qualityOfLifeIndex);
+  check('10q-b safetyIndex keeps the crime-only reading', cx.byHood.B.safetyIndex === 0.5);
+  cx = mk(); sb.applyHoodLifeQuality_(cx, { A: demo(50), B: demo(50), C: demo(50) }, { A: st(12, 0, 0.4), B: st(8, 6, 0.1), C: st(8, 0, 0.4) }, ['A', 'B', 'C']);
+  check('10q-c a busy street lifts it, housing pressure and a low mood cut it (A ' + cx.byHood.A.qualityOfLifeIndex + ' > C ' + cx.byHood.C.qualityOfLifeIndex + ' > B ' + cx.byHood.B.qualityOfLifeIndex + ')',
+    cx.byHood.A.qualityOfLifeIndex > cx.byHood.C.qualityOfLifeIndex && cx.byHood.C.qualityOfLifeIndex > cx.byHood.B.qualityOfLifeIndex);
+  cx = mk(); sb.applyHoodLifeQuality_(cx, { A: demo(50), B: demo(50), C: demo(50) }, base, ['A', 'B', 'C']);
+  check('10q-d a hood at the city middle on everything reads 0.5', cx.byHood.A.qualityOfLifeIndex === 0.5);
+}
+
 console.log('═══ 11 — S.crimeMetrics.context: the bands the readers compare against, on the live range');
 {
   const sb = sandbox();
@@ -281,7 +298,9 @@ console.log('═══ 11 — S.crimeMetrics.context: the bands the readers comp
     by['Downtown'].qualityOfLifeIndex < by['Piedmont Ave'].qualityOfLifeIndex && NM.every(h => by[h].qualityOfLifeIndex >= 0.05 && by[h].qualityOfLifeIndex <= 0.95));
   const low = NM.filter(h => by[h].qualityOfLifeIndex <= 0.35), high = NM.filter(h => by[h].qualityOfLifeIndex >= 0.65);
   check('11c BOTH reader bands fire on the live range — low QoL: ' + low.join(', ') + ' | high: ' + high.join(', '), low.length >= 2 && high.length >= 1);
-  check('11d crimeLevel agrees with the QoL band (high ⇔ ≤ 0.35)', NM.every(h => (by[h].crimeLevel === 'high') === (by[h].qualityOfLifeIndex <= 0.35)));
+  // 2026-09-19: qualityOfLifeIndex is the hood's whole quality of life (applyHoodLifeQuality_);
+  // the crime-only reading it used to be is safetyIndex, and that is what crimeLevel agrees with.
+  check('11d crimeLevel agrees with the SAFETY band (high ⇔ safetyIndex ≤ 0.35)', NM.every(h => (by[h].crimeLevel === 'high') === (by[h].safetyIndex <= 0.35)));
   check('11e isHotspot ⇔ on the hotspot list; city.hotspotHoods are NAMES a reader can indexOf',
     cx.city.hotspotHoods.every(h => typeof h === 'string' && by[h].isHotspot) && NM.filter(h => by[h].isHotspot).length === cx.city.hotspotHoods.length);
   check('11f city fields present on the reader scale', isFinite(cx.city.qualityOfLifeIndex) && isFinite(cx.city.incidentTrend) && isFinite(cx.city.enforcementCapacity)

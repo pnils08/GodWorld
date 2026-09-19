@@ -384,8 +384,11 @@ function buildHoodIllnessWeights_(ctx, S, demographics) {
       else if (ev.type === 'flood_conditions' || ev.type === 'storm') event += 0.15;
     }
     var nbQoL = qolMap && qolMap[hood];
-    if (nbQoL && typeof nbQoL.qualityOfLifeIndex === 'number') {
-      var qol = nbQoL.qualityOfLifeIndex;
+    // 2026-09-19: safety only — qualityOfLifeIndex is now a composite that includes
+    // joblessness, and reading it here would loop unemployment back into itself.
+    var nbSafety = nbQoL ? (typeof nbQoL.safetyIndex === 'number' ? nbQoL.safetyIndex : nbQoL.qualityOfLifeIndex) : null;
+    if (typeof nbSafety === 'number') {
+      var qol = nbSafety;
       if (qol <= 0.35) event += 0.10;
       else if (qol >= 0.65) event -= 0.10;
     }

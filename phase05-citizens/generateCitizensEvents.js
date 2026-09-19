@@ -407,6 +407,7 @@ function generateCitizensEvents_(ctx) {
     for (var key in base) { if (base.hasOwnProperty(key)) out[key] = base[key]; } // copy — never mutate S.neighborhoodDynamics
     var crime = neighborhoodCrime[nh];
     out.qualityOfLifeIndex = crime ? crime.qualityOfLifeIndex : 0.5;
+    out.qolParts = crime ? (crime.qolParts || null) : null;   // 2026-09-19: which measurable sets it
     out.crimeLevel = crime ? crime.crimeLevel : 'moderate';
     return out;
   }
@@ -1097,28 +1098,44 @@ function generateCitizensEvents_(ctx) {
   function qolPoolFor_(nhContext) {
     var qol = nhContext.qualityOfLifeIndex || 0.5;
     var pool = [];
-
-    if (qol <= 0.35) {
-      // Low QoL — negative civic texture
-      pool.push(makeEntry("noticed increased patrols on the block", ["source:qol", "qol:low"], 1.2, false));
-      pool.push(makeEntry("felt the neighborhood tension in small interactions", ["source:qol", "qol:low"], 1.15, false));
-      pool.push(makeEntry("avoided a block with reported issues", ["source:qol", "qol:low"], 1.1, false));
-      pool.push(makeEntry("overheard neighbors discussing recent disturbances", ["source:qol", "qol:low"], 1.1, false));
-      pool.push(makeEntry("noticed more people keeping to themselves lately", ["source:qol", "qol:low"], 1.05, false));
-    } else if (qol <= 0.45) {
-      // Moderate-low QoL
-      pool.push(makeEntry("noticed minor disorder that went unaddressed", ["source:qol", "qol:moderate-low"], 1.05, false));
-      pool.push(makeEntry("felt a subtle edge to the neighborhood vibe", ["source:qol", "qol:moderate-low"], 1.0, false));
-    } else if (qol >= 0.75) {
-      // High QoL — positive civic texture
-      pool.push(makeEntry("appreciated the neighborhood's calm evening atmosphere", ["source:qol", "qol:high"], 1.1, false));
-      pool.push(makeEntry("noticed neighbors looking out for each other", ["source:qol", "qol:high"], 1.1, false));
-      pool.push(makeEntry("felt safe walking the block after dark", ["source:qol", "qol:high"], 1.05, false));
-    } else if (qol >= 0.65) {
-      // Moderate-high QoL
-      pool.push(makeEntry("noticed small improvements in the neighborhood", ["source:qol", "qol:moderate-high"], 1.0, false));
-    }
-
+    // 2026-09-19: quality of life is the hood's own measurables against the city's middle
+    // (applyHoodLifeQuality_: safety, work, health, street, housing, mood). A low reading
+    // speaks in its CAUSE — the weakest measurable — so a quiet hood short on work is not
+    // handed patrol lines; a high reading speaks in its strongest. Safety keeps the old
+    // disorder / calm lines.
+    var LOW = {
+      safety: ["noticed increased patrols on the block", "avoided a block with reported issues", "overheard neighbors discussing recent disturbances"],
+      work: ["noticed more neighbors home on a weekday afternoon", "heard another neighbor was between jobs"],
+      health: ["saw the clinic line stretch out the door", "checked on a neighbor who has been sick a while"],
+      street: ["found another shop on the block keeping short hours", "made the trip across town for errands again"],
+      housing: ["heard the rent talk on the block turn anxious", "watched a neighbor pack up for somewhere cheaper"],
+      mood: ["felt the neighborhood tension in small interactions", "noticed more people keeping to themselves lately"]
+    };
+    var HIGH = {
+      safety: ["felt safe walking the block after dark", "appreciated the neighborhood's calm evening atmosphere"],
+      work: ["noticed the morning rush of neighbors heading to work"],
+      health: ["noticed the block looking healthier this season"],
+      street: ["found the corner shops busy on a weeknight"],
+      housing: ["heard a neighbor say they are staying put — the rent is holding"],
+      mood: ["noticed neighbors looking out for each other"]
+    };
+    var parts = nhContext.qolParts || null;
+    var pick = function(sign) {   // sign −1: weakest two below the middle; +1: strongest two above it
+      var keys = [];
+      if (parts) for (var k in parts) if (parts.hasOwnProperty(k) && (sign < 0 ? parts[k] < 0 : parts[k] > 0)) keys.push(k);
+      keys.sort(function(a, b) { return sign < 0 ? parts[a] - parts[b] : parts[b] - parts[a]; });
+      return keys.length ? keys.slice(0, 2) : ['mood'];
+    };
+    var add = function(bank, keys, tag, w) {
+      for (var i = 0; i < keys.length; i++) {
+        var lines = bank[keys[i]] || bank.mood;
+        for (var j = 0; j < lines.length; j++) pool.push(makeEntry(lines[j], ["source:qol", tag, "qol-cause:" + keys[i]], w - 0.05 * i, false));
+      }
+    };
+    if (qol <= 0.35) add(LOW, pick(-1), "qol:low", 1.2);
+    else if (qol <= 0.45) add(LOW, pick(-1).slice(0, 1), "qol:moderate-low", 1.05);
+    else if (qol >= 0.75) add(HIGH, pick(1), "qol:high", 1.1);
+    else if (qol >= 0.65) add(HIGH, pick(1).slice(0, 1), "qol:moderate-high", 1.0);
     return pool;
   }
 

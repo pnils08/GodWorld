@@ -174,6 +174,18 @@ Upgrade the work-wake sports node from registry-listed players to **event-trigge
 6. **The six live rows.** Convert them into stages (OARI would sit at stage 2 and need Crime_Metrics to move to clear stage 3), or let them finish under the old rules? Two don't fit either way: Baylight (INIT-006) is a `sports`-domain capital project with no target metric, and the Fruitvale transit hub (INIT-003) is a $230M visioning project that has never had a council vote. Do they get stages, or stay on the old ladder as the two exceptions?
 7. **Does clearing a stage make the news, or only finishing?**
 
+## 10. Rulings — Mike, 2026-09-19 (third pass, answers to §9)
+
+As said:
+1. "This makes them autonomous." — **Seats author initiatives.** This supersedes S406 ruling 1 ("initiatives stay hand-fed") and unblocks the authorship half of civic.22 and civic.19.
+2. "Correct." — **Districts file for their own hoods; the mayor files anywhere.**
+3. "Citizens are already complaining about it, it must be part of their wakes, the data will suggest, crons will live it — the more they complain the more their dials go down and become more upset, the ripple of it all will need work once in place. Districts and mayors can talk to citizens in wakes, look for data, that's the game. We will build a 'Mara directive' type step that confronts the districts and mayors at city-hall, so we are covering them and what they say more than what a tracker is doing." — **The petition comes out of citizen wakes, and the data suggests the problem.** Complaints lower the complaining citizens' dials, so an unanswered problem makes citizens more upset over time. Seats reach citizens and data in their own wakes. A new city-hall step, shaped like the Mara directive, confronts the district seats and the mayor, and coverage follows what the seats do and say rather than the tracker's paperwork.
+4. "4-5 sounds like a good starting point." — **Losing clock: 4–5 cycles.**
+5. "Benefit applies once running/implemented. This is what creates the game — the cron only has so much time in a week and it'll need to address active [initiatives], anything it wants to add, and the Mara directive; it'll need to make its own choices." — **The benefit starts when the initiative is deployed.** A seat's week is a limited budget split between its active initiatives, new proposals and the confrontation step, and the seat chooses how to spend it.
+6. "Everything fits this model, it's just a deployment mechanism operating as a civic system. These are coded fixes to the sim the crons decide on, vote and 3 stage gate to deploy." — **All six live rows convert, Baylight and Fruitvale included.** An initiative is a coded fix to the sim. The civic system is how it gets deployed: seats decide, council votes, three gates clear, the fix deploys. This is the 2026-08-27 repair-mechanism doctrine, now with seats doing the deciding.
+7. Unanswered: whether a stage clear makes news. Default: the confrontation step covers it; no separate rule.
+8. **Three stages, not the two-stage interim.** Stage 2 therefore depends on the seats' weekday work reaching a sheet (engine.213 open item). That write path is the plan's first task, not a reason to cut a stage.
+
 ## Rollout row (proposed — for the accepting Claude seat to file)
 
 ```text
@@ -185,7 +197,7 @@ Upgrade the work-wake sports node from registry-listed players to **event-trigge
 ## Changelog
 
 - 2026-09-19 (kimi) — Initial draft. Builder approved filing in-session; game-loop extension to all wakes (bonds/marriage/kids/house/Heritage_Ledger/media/career) added same day, same approval.
-- 2026-09-19 (research-build, S467) — Mike's second-pass direction captured above §3; Mags takes added under §3 (board state, three-stage gate, petition), §4 and §5; sim questions in §9. Kimi's text unchanged. Same day: the advisor's independent read added as `advisor:` lines under the stage gate and the petition, each with a Mags response; the economic-effects claim tightened; Q6 extended to Baylight and the Fruitvale hub.
+- 2026-09-19 (research-build, S467) — Mike's second-pass direction captured above §3; Mags takes added under §3 (board state, three-stage gate, petition), §4 and §5; sim questions in §9. Kimi's text unchanged. Same day: the advisor's independent read added as `advisor:` lines under the stage gate and the petition, each with a Mags response; the economic-effects claim tightened; Q6 extended to Baylight and the Fruitvale hub. Later the same night: Mike answered §9, recorded as §10 rulings.
 
 ## Review — research-build, 2026-09-19 (S467)
 

@@ -29,6 +29,7 @@ const sb = { Logger: { log: m => logs.push(String(m)) }, Utilities: { getUuid: (
   Math, Object, Array, Number, String, JSON, Date, isFinite, isNaN, parseFloat, parseInt, console };
 vm.createContext(sb);
 load(sb, 'utilities/rosterLookup.js');
+load(sb, 'phase06-analysis/applyShockMonitor.js');
 load(sb, 'phase07-evening-media/storyHook.js');
 
 // The producers' own shapes (post-231: domain at the source), plus one that still lacks a domain.

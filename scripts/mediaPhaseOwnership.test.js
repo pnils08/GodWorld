@@ -58,7 +58,7 @@ function world() {
         cityDynamics: { sentiment: 0.20 }, eventArcs: [] } }
   };
   vm.createContext(sb);
-  for (const rel of ['phase07-evening-media/mediaFeedbackEngine.js', 'phase08-v3-chicago/v3Integration.js']) vm.runInContext(read(rel), sb, { filename: rel });
+  for (const rel of ['phase06-analysis/applyShockMonitor.js', 'phase07-evening-media/mediaFeedbackEngine.js', 'phase08-v3-chicago/v3Integration.js']) vm.runInContext(read(rel), sb, { filename: rel });
   // Phase7-ChaosArcs: this Cycle's new arc appears AFTER the Phase-7 media slot.
   sb.createChaosArcs_ = ctx => { ctx.summary.eventArcs.push({ arcId: 'SYNTHETIC_ARC', type: 'sports-run', domainTag: 'sports', phase: 'active', tension: 5 }); };
   for (const name of ['domainTracker_', 'storyHookEngine_', 'textureTriggerEngine_', 'chicagoSatelliteEngine_']) {

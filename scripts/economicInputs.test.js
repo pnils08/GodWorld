@@ -35,6 +35,7 @@ function sandbox() {
   vm.createContext(sb);
   load(sb, 'phase01-config/advanceSimulationCalendar.js');
   load(sb, 'phase06-analysis/economicRippleEngine.js');
+  load(sb, 'phase06-analysis/applyShockMonitor.js');
   load(sb, 'phase07-evening-media/mediaFeedbackEngine.js');
   return sb;
 }

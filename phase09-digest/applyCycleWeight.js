@@ -158,7 +158,8 @@ function applyCycleWeight_(ctx) {
 
   var shockFlag = S.shockFlag || 'none';
 
-  if (shockFlag && shockFlag !== 'none') {
+  // engine.187 part 3: an ACTIVE shock makes a cycle heavy. 'shock-resolved' is the all-clear.
+  if (isActiveShock_(shockFlag)) {
     score += 6;
     reasons.push('Shock event detected');
   }

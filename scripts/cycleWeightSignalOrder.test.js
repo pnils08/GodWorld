@@ -50,7 +50,7 @@ function world() {
         worldEvents: [], citizenEvents: [], eventArcs: [], storySeeds: [], cityDynamics: { sentiment: 0.1 }, weather: { impact: 1 } } }
   };
   vm.createContext(sb);
-  for (const rel of ['phase09-digest/applyCycleWeight.js', 'phase08-v3-chicago/v3Integration.js']) vm.runInContext(read(rel), sb, { filename: rel });
+  for (const rel of ['phase06-analysis/applyShockMonitor.js', 'phase09-digest/applyCycleWeight.js', 'phase08-v3-chicago/v3Integration.js']) vm.runInContext(read(rel), sb, { filename: rel });
   // The V3 modules, as writers of the scorer's inputs.
   sb.domainTracker_ = ctx => { ctx.summary.domainPresence = { CIVIC: 4, BUSINESS: 1, SPORTS: 1, SAFETY: 1, HEALTH: 1, WEATHER: 1 }; };
   sb.storyHookEngine_ = ctx => { ctx.summary.storyHooks = [{ priority: 3 }, { priority: 3 }, { priority: 4 }]; };

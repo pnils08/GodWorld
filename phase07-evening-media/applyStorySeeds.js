@@ -1212,7 +1212,8 @@ function applyStorySeeds_(ctx) {
   // SHOCK CYCLES
   // ═══════════════════════════════════════════════════════════════════════════
 
-  if (shock && shock !== 'none') {
+  // engine.187 part 3: an ACTIVE shock. 'shock-resolved' is the all-clear, not a jolt.
+  if (isActiveShock_(shock)) {
     seeds.push(makeSeed(
       "Sudden systemic jolt disrupts normal cycle flow. Breaking developments.",
       'CIVIC', hoodTop_(S.neighborhoodDynamics, 'sentiment', -1), 3, 'shock'

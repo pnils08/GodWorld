@@ -46,7 +46,8 @@ function applyShockMonitor_(ctx) {
   var dynamics = S.cityDynamics || { sentiment: 0, culturalActivity: 1, communityEngagement: 1 };
   var curSent = dynamics.sentiment || 0;
 
-  var civicLoad = S.civicLoad || "stable";
+  // engine.187 part 3: S.civicLoad itself is no longer read here — only its SCORE, so the
+  // monitor measures magnitude instead of echoing the class the classifier just assigned.
   var civicLoadScore = S.civicLoadScore || 0;
   var patternFlag = S.patternFlag || "none";
 
@@ -243,7 +244,11 @@ function applyShockMonitor_(ctx) {
   if (employment < 0.85) { shock = true; shockReasons.push("employment crisis"); }
 
   // 9) CIVIC LOAD STRAIN
-  if (civicLoad === "load-strain") { shock = true; shockReasons.push("civic overload"); }
+  // engine.187 part 3 (2026-09-19): `civicLoad === "load-strain"` removed. It was not a
+  // detector — it restated the class applyCivicLoadIndicator had just assigned, so every
+  // strained cycle was also a shock cycle by definition and Downtown wore 'Shock event
+  // zone' (v3NeighborhoodWriter:777) permanently. The class boundary is score >= 12; a
+  // shock is the magnitude BEYOND the boundary, which is what the next line reads.
   if (civicLoadScore >= 15)        { shock = true; shockReasons.push("civic strain extreme"); }
 
   // 10) PATTERN BREAK — engine.38 B3: a stability streak (quiet stretch) breaks
@@ -251,7 +256,14 @@ function applyShockMonitor_(ctx) {
   // is trivially true at high volume). Guarded against the deploy regime-shift.
   if (prevPattern === "stability-streak" && !eventRegimeShift &&
       curEvents >= Math.max(10, eventRef * 1.40)) { shock = true; shockReasons.push("stability break"); }
-  if (patternFlag === "strain-trend")             { shock = true; shockReasons.push("strain trend"); }
+  // engine.187 part 3: `patternFlag === "strain-trend"` removed — the same restatement by a
+  // second route. applyPatternDetection reads civic load to set strain-trend, so this line
+  // made shock an alias for the load class even after the class itself was unpinned. A
+  // sustained strain is a TREND; a shock is a BREAK. Both flags are still written, and a
+  // reader that wants "the city is under strain" reads patternFlag, not shockFlag.
+  // Second effect, deliberate: these two lines pushed 1-2 reasons onto shockReasons every
+  // cycle, and shockReasons.length is what decides fading (>=2) and chronic (>=3) below.
+  // With them gone a shock can decay instead of re-arming itself at full strength.
 
   // 11) ARC PEAK CLUSTER
   var peakArcs = 0;
@@ -413,6 +425,19 @@ function applyShockMonitor_(ctx) {
   };
 
   ctx.summary = S;
+}
+
+/**
+ * engine.187 part 3 (2026-09-19): is the city IN a shock right now?
+ *
+ * `shock-resolved` is the one-cycle marker that a shock just ENDED, but three readers tested
+ * `flag && flag !== 'none'` and so treated the all-clear as an active emergency — the newsroom
+ * would publish "Unexpected disruption detected" on the cycle the disruption lifted. That matters
+ * the first cycle after this deploy, when the flag inherits live's stuck shock and then resolves.
+ * One predicate so the next reader cannot get the test wrong.
+ */
+function isActiveShock_(flag) {
+  return flag === 'shock-flag' || flag === 'shock-fading' || flag === 'shock-chronic';
 }
 
 

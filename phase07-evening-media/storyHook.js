@@ -877,12 +877,23 @@ function storyHookEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════
   // SHOCK FLAG HOOKS
   // ═══════════════════════════════════════════════════════════
-  if (S.shockFlag && S.shockFlag !== 'none') {
+  // engine.187 part 3: an ACTIVE shock only. 'shock-resolved' means it just ended — that is a
+  // recovery story, not a disruption alert, and it used to publish as one.
+  if (isActiveShock_(S.shockFlag)) {
     hooks.push(makeHook(
       'CIVIC',
       '',
       3,
       'SHOCK EVENT: Unexpected disruption detected. Breaking news potential. All desks alert.',
+      null,
+      'shock'
+    ));
+  } else if (S.shockFlag === 'shock-resolved') {
+    hooks.push(makeHook(
+      'CIVIC',
+      '',
+      2,
+      'SHOCK LIFTED: the disruption that had the city on edge eased this cycle. What it cost, and who is still catching up.',
       null,
       'shock'
     ));

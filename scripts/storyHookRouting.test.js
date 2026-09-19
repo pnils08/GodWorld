@@ -24,6 +24,7 @@ const sb = { Logger: { log: () => {} }, Utilities: { getUuid: () => 'u' + (++uui
   Math, Object, Array, Number, String, JSON, Date, isFinite, isNaN, parseFloat, parseInt, console };
 vm.createContext(sb);
 load(sb, 'utilities/rosterLookup.js');
+load(sb, 'phase06-analysis/applyShockMonitor.js');
 load(sb, 'phase07-evening-media/storyHook.js');
 const roster = sb.getRoster_();
 const deskOf = n => roster.journalists[n] && roster.journalists[n].desk;

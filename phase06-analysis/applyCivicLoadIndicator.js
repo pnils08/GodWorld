@@ -245,7 +245,8 @@ function applyCivicLoadIndicator_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // engine.187: no score. The shock flag this reads is last cycle's, and applyShockMonitor sets it
   // FROM this classifier (civicLoad === 'load-strain', :243) — +4 here closed the latch.
-  if (shockFlag && shockFlag !== "none") {
+  // engine.187 part 3: active only — the all-clear cycle is not a strain factor.
+  if (isActiveShock_(shockFlag)) {
     factors.push('shock event');
   }
 

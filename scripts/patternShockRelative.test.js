@@ -152,6 +152,7 @@ function runShock(curEvents, prevEvents, sOverrides) {
   const vm2 = require('vm'), fs2 = require('fs'), path2 = require('path');
   const cl = { Logger: { log() {} }, Math, JSON, Object, Array, String, Number };
   vm2.createContext(cl);
+  vm2.runInContext(fs2.readFileSync(path2.join(__dirname, '..', 'phase06-analysis/applyShockMonitor.js'), 'utf8'), cl);
   vm2.runInContext(fs2.readFileSync(path2.join(__dirname, '..', 'phase06-analysis/applyCivicLoadIndicator.js'), 'utf8'), cl);
   const load = over => {
     const ctx = { config: { cycleCount: 100 }, summary: Object.assign({ cycleId: 100, worldEvents: [], eventArcs: [], cityDynamics: { sentiment: 0, culturalActivity: 1, communityEngagement: 1 },
@@ -197,6 +198,53 @@ function runShock(curEvents, prevEvents, sOverrides) {
   ok('two consecutive strained cycles IS a strain trend', run2 === 'strain-trend', String(run2));
   const majority = runPattern(['minor-variance', 'load-strain', 'load-strain', 'load-strain', 'load-strain', 'load-strain', 'stable']);
   ok('a clear majority of the window is a strain trend even without a run', majority === 'strain-trend', String(majority));
+}
+
+// engine.187 part 3 (2026-09-19): the shock monitor detects a BREAK. It no longer restates the
+// civic-load class or the strain pattern — those two lines made every strained cycle a shock
+// cycle by definition (shock-flag 4 of 4 on bench C108-C111 after parts 1 and 2), which is what
+// kept Downtown labelled 'Shock event zone' permanently.
+{
+  const runFlag = (cur, prev) => {
+    const ctx = {
+      config: { cycleCount: 100, employmentFallbackRate: 0.91 },
+      summary: Object.assign({
+        eventsGenerated: 600, worldEvents: [],
+        cityDynamics: { sentiment: 0, culturalActivity: 1, communityEngagement: 1 },
+        economicMood: 50, civicLoad: 'stable', civicLoadScore: 0, patternFlag: 'none',
+        weather: { type: 'clear', impact: 1 }, weatherMood: {}, mediaEffects: {},
+        eventArcs: [], demographicDrift: { migration: 0, employmentRate: 0.91 },
+        holiday: 'none', holidayPriority: 'none', simMonth: 6,
+        previousCycleState: Object.assign({ events: 600, chaosCount: 0, sentiment: 0, econMood: 50, pattern: 'none', shockFlag: 'none', shockStartCycle: 0 }, prev || {}),
+        currentCycle: 100,
+      }, cur || {}),
+    };
+    applyShockMonitor_(ctx);
+    return { flag: ctx.summary.shockFlag, reasons: ctx.summary.shockReasons || [] };
+  };
+
+  const strained = runFlag({ civicLoad: 'load-strain', civicLoadScore: 13 });
+  ok('a strained cycle alone is NOT a shock (the class is not the break)',
+    strained.flag === 'none', strained.flag + ' ' + JSON.stringify(strained.reasons));
+
+  const trend = runFlag({ patternFlag: 'strain-trend' });
+  ok('a strain trend alone is NOT a shock (a trend is not a break)',
+    trend.flag === 'none', trend.flag + ' ' + JSON.stringify(trend.reasons));
+
+  const extreme = runFlag({ civicLoad: 'load-strain', civicLoadScore: 15 });
+  ok('civic load BEYOND the class boundary (score 15) still shocks',
+    extreme.flag === 'shock-flag', extreme.flag + ' ' + JSON.stringify(extreme.reasons));
+
+  const collapse = runFlag({ cityDynamics: { sentiment: -0.2, culturalActivity: 1, communityEngagement: 1 }, civicLoad: 'load-strain' }, { sentiment: 0.2 });
+  ok('a real break (sentiment 0.2 -> -0.2) still shocks',
+    collapse.flag === 'shock-flag' && collapse.reasons.join(',').indexOf('collapse') !== -1,
+    collapse.flag + ' ' + JSON.stringify(collapse.reasons));
+
+  // The two cut lines used to push 1-2 reasons EVERY cycle, and shockReasons.length is what
+  // decides fading (>=2) / chronic (>=3). With them gone a lone lingering cause can decay.
+  const fading = runFlag({ civicLoad: 'load-strain', civicLoadScore: 15 }, { shockFlag: 'shock-flag', shockStartCycle: 96 });
+  ok('a single lingering cause after 4 cycles reads shock-fading, not shock-flag',
+    fading.flag === 'shock-fading', fading.flag + ' ' + JSON.stringify(fading.reasons));
 }
 
 console.log(`\n${pass} passed, ${fail} failed`);

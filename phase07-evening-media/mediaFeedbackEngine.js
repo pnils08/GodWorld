@@ -709,7 +709,8 @@ function calculateCoverageIntensity_(ctx) {
   intensity += effects.crisisSaturation * 0.3;
   intensity += effects.celebrityBuzz * 0.2;
 
-  if (S.shockFlag && S.shockFlag !== 'none') {
+  // engine.187 part 3: an ACTIVE shock raises coverage intensity; the all-clear cycle does not.
+  if (isActiveShock_(S.shockFlag)) {
     intensity += 0.3;
   }
 

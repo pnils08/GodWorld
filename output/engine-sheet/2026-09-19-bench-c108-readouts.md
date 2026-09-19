@@ -273,3 +273,9 @@ Ten newly tracked hoods, per-cycle Sentiment deltas: C109→C110 [0.07,0.04,0.06
 1. ok:true, 0 Engine_Errors C108–C111.
 2. World_Population civicLoad is NOT load-strain on every cycle; shockFlag is NOT shock-flag on every cycle (C108 may still carry last cycle's shock state from live C107); no "sentiment collapse" when a holiday lift unwinds.
 3. Everything from the previous bench still holds: canon-shaped retail ranking, QoL lines with causes, no fake Downtown crisis, city mood 0.3–0.5 at C108.
+
+## PRE-DECLARED — deploy-candidate bench, engine tree b2320e09 (adds engine.240h seeds/venues, engine.187 part 2), fresh live-synced C107 (written BEFORE the fire)
+1. ok:true, 0 Engine_Errors C108–C111.
+2. patternFlag is NOT strain-trend on every cycle, and shockFlag is NOT shock-flag on every cycle (C108 may still inherit live C107's state through the digest window).
+3. Holiday seeds land on Scenes hoods; C111 (Valentine, no Scenes tag) seeds citywide.
+4. Everything from the previous benches holds: 0 papered-over lines, QoL lines with causes, canon-shaped retail ranking, no fake Downtown crisis, city mood 0.3–0.5 at C108.

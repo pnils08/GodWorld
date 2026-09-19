@@ -98,7 +98,7 @@ The feed has two different time views:
 Phase 2 only lets a team's accumulated state affect a Cycle when that team also
 has a current-Cycle row. Old team state does not speak by itself.
 
-## Twenty-column contract
+## Twenty-one-column contract
 
 | Col | Header | Verified role | Entry guidance |
 |---|---|---|---|
@@ -114,7 +114,7 @@ has a current-Cycle row. Old team state does not speak by itself.
 | J | `VideoGame` | Legacy column; no current Phase 2 mapping | Leave blank unless an active contract is added |
 | K | `StoryAngle` | Preferred story framing for sports media surfaces | Preserve the builder's wording |
 | L | `PlayerMood` | Affects game-night tone; frustrated/angry and electric/confident emit player triggers | Use only when grounded by the event |
-| M | `EventTrigger` | Manual sports trigger; otherwise some triggers are inferred | Not every accepted trigger reaches every consumer |
+| M | `EventTrigger` | Manual sports trigger; otherwise some triggers are inferred | The dropdown is exactly the triggers that make a story hook: hot-streak, cold-streak, playoff-push, playoff-clinch, eliminated, championship, rivalry, home-opener, season-finale, injury, injury-return, debut. Other words are still allowed and reach the media handoff as text, but make no hook |
 | N | `HomeNeighborhood` | Supplies transit geography and computed neighborhood effects; the evening consumer reads traffic only | Existing contract; removal is planned in Task 1 |
 | O | `Streak` | Adjusts sentiment and game-night win/loss tone | Use a parseable `W<n>` or `L<n>` form |
 | P | `FanSentiment` | Adjusts city sports sentiment | Use the existing controlled vocabulary |
@@ -122,20 +122,29 @@ has a current-Cycle row. Old team state does not speak by itself.
 | R | `EconomicFootprint` | Supplies economic team state and neighborhood effects | Change only when grounded |
 | S | `CommunityInvestment` | Supplies community team state and neighborhood effects | Change only when grounded |
 | T | `MediaProfile` | Scales sports sentiment and supplies newsroom context | Use the existing local/regional/national/international scale |
+| U | `WeekRecord` | This franchise's games this Cycle, in played order. Settles the casino (first game) and feeds the handoff | One summary per franchise per Cycle, on its own row: `H:W H:L A:W` (H/A = home/away, W/L = result). `none` = no games (EventType `season-state`); games need EventType `game-result`. Blank = not reported. `Team Record` and `Streak` stay as they are — the week does not replace them |
+
+P–T dropdowns carry exactly the words the engine reads (engine.202 cut 3);
+the sheet still allows other text, which the engine treats as neutral. Re-run
+**Setup Sports Feed Validation** from the GodWorld menu to apply the current
+dropdowns and notes — the setup reads columns by header name.
 
 The current preflight requires `Cycle`, `SeasonType`, `EventType`, and
 `TeamsUsed` on every current-Cycle row. It recommends `NamesUsed`,
 `Team Record`, `FanSentiment`, and `PlayerMood`. It checks presence, not the
 complete format or roster contract.
 
-### Weekly contract preparation
+### Weekly contract (LIVE 2026-09-18)
 
-Task 1 of [[plans/2026-09-11-sports-as-a-lived-system]] prepares `WeekRecord`
-by repurposing `VideoGame`, then removing `VideoGameDate` and
-`HomeNeighborhood`. That migration has not run. The current Node draft
-validator rejects nonblank `WeekRecord` input so the 20-column projection
-cannot silently discard it. Reader support, authoring support and schema
-activation are separate steps; the owning plan tracks their status.
+`WeekRecord` is column U, appended — not a rename of `VideoGame`, whose 81
+historical cells (C30–C83) stay where they are. Live since 2026-09-18 (PROD
+@98, header written the same night) after a bench proof on SANDBOX 0908 C115.
+A bad cell is rejected alone, never the Cycle: the row still counts, its week
+is dropped, and one `Engine_Errors` row names the sheet row. A second week for
+the same franchise and Cycle is refused by the dashboard and ignored by the
+engine (the first stands). `VideoGameDate` / `VideoGame` deletion and the
+later `HomeNeighborhood` removal are separate steps tracked in Task 1 of
+[[plans/2026-09-11-sports-as-a-lived-system]].
 
 ## Phase 2 behavior
 

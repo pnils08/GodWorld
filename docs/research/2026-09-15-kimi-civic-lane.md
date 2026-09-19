@@ -49,7 +49,7 @@ closed scripts-side. What remains is engine-side.
 **Cut 1 — cross-desk theme leak.** Hal Richmond (sports historian) is named on
 17 all-time CIVIC hooks — the `suggestStoryAngle_` theme scorer leaks across
 desks. Same fix family as the SPORTS monopoly cut
-(`docs/for-claude-review/2026-09-15-kimi-sports-lane.md`): honor the desk's
+(`docs/research/2026-09-15-kimi-sports-lane.md`): honor the desk's
 signal-map seat before theme scoring, or cap per-journalist assignments.
 
 **Cut 2 — conduct events are memory-only.** `runConductEngine.js` writes
@@ -79,3 +79,10 @@ updateCivicLedgerFactions.js) and the live C107 dump contents.
 Wiring card landed after the OpenRouter limit was lifted:
 `output/agent_engine-wiring_2026-09-15T22-05-35.md` (Initiative_Tracker). The
 "wiring card status" section above is superseded.
+
+## Review — research-build, 2026-09-19 (S467)
+
+Accepted. The scripts-side civic slices stand.
+- **Cut 1 (Hal on CIVIC hooks):** shipped. engine.232's desk-scoped theme scorer keeps a sports historian off civic hooks.
+- **Cut 2 (conduct events memory-only):** partly shipped. engine.233 (`eb289123`, PROD @95) makes a Serious/Grave Transgression a SAFETY hook. Lesser conduct events stay in LifeHistory only; that threshold was engine-sheet's call, and no row is filed.
+- **Civic_Ledger drift:** open. Filed as **engine.236**: fix the manifest. Whether the empty tab stays or goes is the builder's go.

@@ -61,7 +61,7 @@ signal set. They reach no desk packet and no journalist. Proposed: run the
 normalization THROUGH the same deskMap + journalist-match path as `makeHook`
 (domain → deskMap → roster signal match). One cut heals four lanes.
 (Same root as the education DROPOUT_WAVE finding —
-`docs/for-claude-review/2026-09-14-kimi-education-lane.md`.)
+`docs/research/2026-09-14-kimi-education-lane.md`.)
 
 **Cut 2 — deskMap holes: ARTS, CELEBRITY, FESTIVAL.**
 `storyHook.js:99-116` maps CULTURE/NIGHTLIFE/CULTURAL to "Culture Desk" but
@@ -97,3 +97,10 @@ Wiring card landed after the OpenRouter limit was lifted:
 `output/agent_engine-wiring_2026-09-15T22-02-27.md` (Cultural_Ledger). The
 "wiring card status" section above is superseded — contract confirmed by card,
 not just code read.
+
+## Review — research-build, 2026-09-19 (S467)
+
+Accepted. The three per-seat culture slices stand.
+- **Cut 1 (raw-carried hooks drop desk/journalist):** shipped as engine.231.
+- **Cut 2 (ARTS/CELEBRITY/FESTIVAL holes, phantom desk names):** shipped as engine.232 plus its fix-up (`fbb4af97`) — culture-desk domain seats for Kai, Sharon and Mason.
+- **Cut 3 (trajectory/migration ripples go to the business lane):** covered in practice. Celeste Tran is now seated, and `scripts/buildTrendsSlice.js` takes NEIGHBORHOOD_* / CITIZEN_RELOCATED / RENT_BURDEN_CRISIS hooks by domain. `buildWorldSummary.js` RIPPLE_LANE_MAP (:750-751) still labels those ripples `business`; that is cosmetic now, so no row.

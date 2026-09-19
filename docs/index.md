@@ -259,6 +259,7 @@ These files live at `/root/GodWorld/` and are catalogued here for completeness. 
 ## `docs/plans/` — in-flight plans not yet promoted
 
 - **[[plans/2026-09-11-sports-as-a-lived-system]]** — Sports feed contract, recorded city effects, weekly economic ripples and crossover seeds; engine.210 first local cut, fandom through Event_Content_Ledger, and per-franchise drifting weight. *(plan, engine, sports, citizens, active)*
+- **[[plans/2026-09-16-work-wake-packs]]** — civic.37. Cron work-day wakes for working citizens: the medical examiner and EMS director on their civic beats, A's players on the sports feed; page reflection + gated Reflection_Intake row, no dial writes. *(plan, civic, citizens, sports, cron, active)*
 - **[[plans/PLAN_TEMPLATE]]** — plan file template. Every new plan copies this shape. Adapted from obra/superpowers writing-plans skill (S152). *(reference, architecture, active)*
 - **[[plans/2026-08-06-notebooklm-deep-angles]]** — Pitch packet containing 5 structured editorial briefs derived from the C100 NotebookLM deep synthesis, ready for newsroom agent execution. *(plan, media, active)*
 - **[[plans/2026-08-29-boot-doc-consolidation]]** — governance.51. Boot docs are gated for behaviour, not access: the stacking habit (keep the old rule, append a change-log of the new one) grew the engine-sheet boot load to 73.5KB and MEMORY.md past its 200-line read window. Rewrite every boot doc to current-rule-only against the builder's 7-item list, under a confirmed harness ceiling; dedup the 121 memory files via /batch with builder-reviewed deletes; check-before-adding-a-memory becomes a one-line standing rule. *(plan, governance, boot, memory, active)*
@@ -537,6 +538,7 @@ Small, dated decision records. Created only when a choice is (a) hard to reverse
 
 ## Changelog
 
+- 2026-09-19 (research-build, S467) — Registered [[plans/2026-09-16-work-wake-packs]] (kimi, accepted from the review inbox; row civic.37). Five kimi lane/design reports accepted into docs/research — catalogued in [[research/index]].
 - 2026-09-16 (codex) — Registered the existing sports-as-a-lived-system plan, including engine.210 and Event_Content_Ledger/fandom work.
 - 2026-09-14 (codex) — Linked the refreshed simulation repair handoff and bench evidence manifest from its owning Task 7 plan entry.
 _(Newest first, per SCHEMA §12 — normalized 2026-07-24.)_

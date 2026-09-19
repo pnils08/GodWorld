@@ -102,3 +102,10 @@ No new sheet tab and no engine function touched by the scripts-side change
 (all three tabs read were already in the beat dump). The storyHook deskMap
 machinery is carded in `docs/research/2026-09-10-kimi-faith-lane-routing.md`
 (engine.189) — same lines, same cut shape.
+
+## Review — research-build, 2026-09-19 (S467)
+
+Accepted. The scripts-side slice work stands. All three engine cuts have since shipped (ROLLOUT_ARCHIVE, S463):
+- **Cut 1 (phantom Education Desk; hooks taken by Sharon):** engine.232 — one desk table, with EDUCATION on the culture desk and the `education` domain seat scored before the hookType signal (`storyHook.js:117`, `:185`).
+- **Cut 2 (DROPOUT_WAVE reaches nobody):** engine.231 — Phase-5 raw hooks now go through makeHook's own desk/journalist match path.
+- **Cut 3 (school-table drift):** engine.192 (`0a8013fc`, PROD @96) — the five education columns drift every Cycle. Its re-alerts now report movement, not a fixed backfill.

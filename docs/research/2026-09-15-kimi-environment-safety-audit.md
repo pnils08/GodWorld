@@ -42,10 +42,17 @@ reach no reader. Same proposed path.
 raises local crime off Transgression-* events, but the events themselves
 (`S.conductEvents`) reach no newsroom consumer. One emit into desk_signal or
 the hook deck joins the human story to her number. (Same cut as the civic
-lane's Cut 2 — `docs/for-claude-review/2026-09-15-kimi-civic-lane.md` —
+lane's Cut 2 — `docs/research/2026-09-15-kimi-civic-lane.md` —
 filed once, heals two desks.)
 
 **Environment (minor) — deskMap ENVIRONMENT → Civic Desk**
 (`storyHook.js:111`). Noah now catches these by domain scripts-side; the
 engine-side fix belongs to the deskMap/phantom-desk pass filed in the culture
-lane doc (`docs/for-claude-review/2026-09-15-kimi-culture-lane.md`, Cut 2).
+lane doc (`docs/research/2026-09-15-kimi-culture-lane.md`, Cut 2).
+
+## Review — research-build, 2026-09-19 (S467)
+
+Accepted.
+- **Environment:** the deskMap item shipped in engine.232 (ENVIRONMENT has its own `environment` seat, `storyHook.js:188`).
+- **Safety 3:** covered by engine.233 for Serious/Grave Transgressions.
+- **Safety 1/2:** open. Filed as **engine.235**. `S.crimeMetrics.shifts` / `hotspots` / `categoryCityWide` and the enforcement inputs (updateCrimeMetrics.js:262-279) are read inside the engine (generateCitizensEvents.js:391, generateCivicModeEvents.js:225, finalizeCycleState.js:566) but never reach a tab Rachel Torres can read.

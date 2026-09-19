@@ -7,7 +7,7 @@ tags: [research, civic, citizens, sports, design, active]
 sources:
   - Mike-direct 2026-09-19 (kimi session) — initiative voting vision + "wake as a rare opportunity to play the game"
   - SESSION_CONTEXT.md NEXT[kimi] (Mike, 2026-09-16) — work-wake packs assignment
-  - docs/for-claude-review/2026-09-16-kimi-work-wake-packs.md — civic.34, the shipped chassis this design rides
+  - docs/plans/2026-09-16-work-wake-packs.md — civic.37, the shipped chassis this design rides
 pointers:
   - "[[../engine/ROLLOUT_PLAN]] — pending-state home (proposed row civic.35, text below)"
   - "[[index]] — register on acceptance"
@@ -17,7 +17,7 @@ pointers:
 
 # Initiative stage-clearing + wake-as-turn — the wake game loop
 
-**Source:** Mike direction in the civic.34 review conversation, 2026-09-19: wakes should not be taken for granted — "the engine rolls the dice; if you wake as a cron you are getting a rare opportunity to play the game and make use of it." Long-run the game applies to **all** wakes: bonds, marriage, kids, a house, the Heritage_Ledger, media usage, career advancement.
+**Source:** Mike direction in the civic.37 review conversation, 2026-09-19: wakes should not be taken for granted — "the engine rolls the dice; if you wake as a cron you are getting a rare opportunity to play the game and make use of it." Long-run the game applies to **all** wakes: bonds, marriage, kids, a house, the Heritage_Ledger, media usage, career advancement.
 
 **What this addresses:** Today every wake path (citizen loop, civic datawake, work-wake, newsroom) hands a persona perception and collects output — reflection, statement, article. Nothing is at stake and nothing can be won. This record captures the target shape: the wake as a **turn** in a game with goals, opponents, and consequences, and the Initiative_Tracker as the civic scoreboard that turn plays on.
 
@@ -99,7 +99,7 @@ Upgrade the work-wake sports node from registry-listed players to **event-trigge
 ## Rollout row (proposed — for the accepting Claude seat to file)
 
 ```text
-| civic.35 | Wake-as-turn game loop — initiative stage-clearing (no time gates), civic pack incentive layer, chaos-car nodes for the 19 dark seats, player named-trigger | needs-info | engine-sheet / research-build | [[../research/2026-09-19-initiative-stage-voting-and-wake-incentives]] |
+| civic.38 | Wake-as-turn game loop — initiative stage-clearing (no time gates), civic pack incentive layer, chaos-car nodes for the 19 dark seats, player named-trigger | needs-info | engine-sheet / research-build | [[../research/2026-09-19-initiative-stage-voting-and-wake-incentives]] |
 ```
 
 (Research files never archive; if the row should point at a plan instead, the first spawned plan inherits the pointer.)
@@ -107,3 +107,7 @@ Upgrade the work-wake sports node from registry-listed players to **event-trigge
 ## Changelog
 
 - 2026-09-19 (kimi) — Initial draft. Builder approved filing in-session; game-loop extension to all wakes (bonds/marriage/kids/house/Heritage_Ledger/media/career) added same day, same approval.
+
+## Review — research-build, 2026-09-19 (S467)
+
+Accepted as the design baseline (builder-direct). The proposed row ID `civic.35` is already taken (archived S433), so this is filed as **civic.38**, needs-info. Each piece ignites its own plan when sequenced.

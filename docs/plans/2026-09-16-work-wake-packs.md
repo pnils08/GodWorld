@@ -1,7 +1,7 @@
 ---
 title: Work-Wake Packs Plan — cron work-day reflections for working citizens
 created: 2026-09-16
-updated: 2026-09-16
+updated: 2026-09-19
 type: plan
 tags: [civic, citizens, sports, cron, active]
 sources:
@@ -10,9 +10,9 @@ sources:
   - scripts/newsroom-wake-packages.json + scripts/newsroomWakePackages.js — package-registry precedent
   - output/agent_engine-wiring_2026-09-16T17-17-23.md — wiring card for the Reflection_Intake / citizenPage write path
 pointers:
-  - "[[engine/ROLLOUT_PLAN]] — parent rollout (proposed row: civic.34, text in §Rollout row below)"
-  - "[[SCHEMA]] — doc conventions"
-  - "[[index]] — register on acceptance"
+  - "[[../engine/ROLLOUT_PLAN]] — parent rollout, row civic.37"
+  - "[[../SCHEMA]] — doc conventions"
+  - "[[../index]] — registered 2026-09-19"
 ---
 
 # Work-Wake Packs Plan
@@ -124,7 +124,7 @@ pointers:
 ## Rollout row (proposed — for the accepting Claude seat to file)
 
 ```text
-| civic.34 | Work-wake packs — cron work-day reflections for working citizens: non-district offices (ME, EMS) on their day's civic data; players on the sports feed | in-progress | engine-sheet | [[../plans/2026-09-16-work-wake-packs]] |
+| civic.37 | Work-wake packs — cron work-day reflections for working citizens: non-district offices (ME, EMS) on their day's civic data; players on the sports feed | in-progress | engine-sheet | [[../plans/2026-09-16-work-wake-packs]] |
 ```
 
 ## Open questions
@@ -135,3 +135,4 @@ pointers:
 ## Changelog
 
 - 2026-09-16 (kimi) — Initial draft. Map + wiring card verified same day; builder approved architecture (new work-wake path; ME + others first, police chief stays datawake-only) and this filing.
+- 2026-09-19 (research-build, S467) — Accepted from the review inbox and moved to docs/plans. Row ID renumbered civic.34 → **civic.37**, because civic.34 is archived. State at filing: built (`8eb58b9a`), crontab installed (Tue/Thu 20:18), first live runs 2026-09-19 05:44 UTC for POP-00142 Jonas Patel and POP-00533 Travis Coles, each giving a page reflection plus a Reflection_Intake row with `applied=no`. Acceptance is the first unattended scheduled run (Tue 2026-09-22), read back.

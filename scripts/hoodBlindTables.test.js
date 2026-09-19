@@ -296,5 +296,27 @@ t('evening districts are the nightlife-label hoods; bad weather empties waterfro
   assert.ok(!/crowd\["/.test(src('phase07-evening-media/cityEveningSystems.js')));
 });
 
+console.log('T12 budget / upscale / chaos venues open where the condition is (engine.240)');
+t('in a bust the budget bars open in the weakest economies, never on a pinned West Oakland / Fruitvale', () => {
+  const w = { console, Logger: { log() {} }, Math, JSON, safeRand_: ctx => ctx.rng };
+  vm.createContext(w);
+  load(w, 'phase07-evening-media/buildNightLife.js');
+  const weakest = ['San Antonio', 'Eastlake', 'Brooklyn'];
+  let seen = 0;
+  [0.13, 0.41, 0.77, 0.29, 0.61, 0.91, 0.05, 0.53].forEach(seed => {
+    const ctx = { rng: (() => { let i = 0; return () => ((i++ * seed + seed) % 1); })(), config: {}, summary: {
+      season: 'Winter', weather: { type: 'clear', impact: 1 }, weatherMood: {}, worldEvents: [], cityDynamics: { nightlife: 1.3 },
+      economicMood: 30, holiday: 'none', sportsSeason: 'off-season',
+      neighborhoodEconomies: { 'San Antonio': { mood: 20 }, Eastlake: { mood: 25 }, Brooklyn: { mood: 28 }, Rockridge: { mood: 80 }, 'West Oakland': { mood: 60 } } } };
+    w.buildNightlife_(ctx);
+    ((ctx.summary.nightlife || {}).spotDetails || []).forEach(sp => {
+      if (['Dive & Dash', 'Dollar Drafts', 'The Cheap Seat'].includes(sp.name)) { seen++; assert.ok(weakest.includes(sp.neighborhood), JSON.stringify(sp)); }
+    });
+  });
+  assert.ok(seen >= 1, 'no budget venue drawn across 8 seeds');
+  const nl = src('phase07-evening-media/buildNightLife.js');
+  assert.ok(!/"Dive & Dash", neighborhood: "West Oakland"/.test(nl) && !/"Dollar Drafts", neighborhood: "Fruitvale"/.test(nl) && !/"Merritt Club", neighborhood/.test(nl) && !/"Civic Watch Patio", neighborhood: "Downtown"/.test(nl));
+});
+
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

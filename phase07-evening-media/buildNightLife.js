@@ -114,24 +114,32 @@ function buildNightlife_(ctx) {
     { name: "Haze Bar", neighborhood: "West Oakland" }
   ];
 
-  var CHAOS_SPOTS = [
-    { name: "Civic Watch Patio", neighborhood: "Downtown" },
-    { name: "Neighborhood Response Hub", neighborhood: "Fruitvale" },
-    { name: "Community Pulse Tavern", neighborhood: "West Oakland" }
-  ];
-
-  var UPSCALE = [
-    { name: "Merritt Club", neighborhood: "Lake Merritt" },
-    { name: "The Grand Oak", neighborhood: "Rockridge" },
-    { name: "Harbor House VIP", neighborhood: "Jack London" },
-    { name: "Uptown Elite", neighborhood: "Uptown" }
-  ];
-
-  var BUDGET = [
-    { name: "Dive & Dash", neighborhood: "West Oakland" },
-    { name: "Dollar Drafts", neighborhood: "Fruitvale" },
-    { name: "The Cheap Seat", neighborhood: "Downtown" }
-  ];
+  // engine.240 (2026-09-19, SIM_DOCTRINE §17): the chaos / upscale / budget venues were pinned to
+  // 2020s Oakland — the chaos and budget bars always in Downtown / Fruitvale / West Oakland, the
+  // upscale rooms always in Lake Merritt / Rockridge / Jack London / Uptown. The venues open where
+  // the condition is: chaos where this cycle's world events are, upscale in the strongest economies,
+  // budget in the weakest (S.neighborhoodEconomies, Phase 6). No hood carries it → no venue.
+  function placeVenues_(names, hoods) {
+    var out = [];
+    for (var i = 0; i < names.length && i < hoods.length; i++) out.push({ name: names[i], neighborhood: hoods[i] });
+    return out;
+  }
+  function econRank_(dir) {
+    var econ = S.neighborhoodEconomies || {}, rows = [];
+    for (var h in econ) if (econ.hasOwnProperty(h) && econ[h] && isFinite(Number(econ[h].mood))) rows.push([h, Number(econ[h].mood)]);
+    rows.sort(function(a, b) { return dir > 0 ? b[1] - a[1] : a[1] - b[1]; });
+    var out = []; for (var i = 0; i < rows.length; i++) out.push(rows[i][0]); return out;
+  }
+  function chaosHoods_() {
+    var n = {}, rows = [];
+    for (var i = 0; i < chaos.length; i++) { var h = chaos[i] && chaos[i].neighborhood; if (h) n[h] = (n[h] || 0) + 1; }
+    for (var k in n) if (n.hasOwnProperty(k)) rows.push([k, n[k]]);
+    rows.sort(function(a, b) { return b[1] - a[1]; });
+    var out = []; for (var j = 0; j < rows.length; j++) out.push(rows[j][0]); return out;
+  }
+  var CHAOS_SPOTS = placeVenues_(["Civic Watch Patio", "Neighborhood Response Hub", "Community Pulse Tavern"], chaosHoods_());
+  var UPSCALE = placeVenues_(["The Members' Club", "The Grand Oak", "The Gilded Room", "The Elite Room"], econRank_(1));
+  var BUDGET = placeVenues_(["Dive & Dash", "Dollar Drafts", "The Cheap Seat"], econRank_(-1));
 
   var LATE_NIGHT = [
     { name: "After Hours Oakland", neighborhood: "Downtown" },

@@ -455,4 +455,39 @@ const oversizedDraft = contract.validateDraft(syntheticDraft({
 }));
 assert.strictEqual(oversizedDraft.valid, false);
 assert.ok(oversizedDraft.errors.some((error) => /50,000 characters or fewer/.test(error)));
+// engine.202 cut 3 — vocabulary parity. The sheet dropdowns and this
+// validator share one source (utilities/setupSportsFeedValidation.js); these
+// pin that source to the engine's actual readers, both directions.
+{
+  const fs = require('fs');
+  const path = require('path');
+  const vm = require('vm');
+  const root = path.join(__dirname, '..');
+  const hookSource = fs.readFileSync(path.join(root, 'phase07-evening-media/storyHook.js'), 'utf8');
+  const hookBlock = hookSource.slice(hookSource.indexOf('var TRIGGER_HOOKS = {'));
+  const hookKeys = [...hookBlock.slice(0, hookBlock.indexOf('\n    };')).matchAll(/^\s*'([a-z-]+)':\s*\{/gm)]
+    .map((match) => match[1]);
+  assert.ok(hookKeys.length >= 12, 'TRIGGER_HOOKS keys must be readable');
+  assert.deepStrictEqual(contract.SAFE_ENUMS.EventTrigger.filter(Boolean).slice().sort(), hookKeys.slice().sort(),
+    'EventTrigger dropdown must equal the TRIGGER_HOOKS keys');
+
+  const sandbox = { Logger: { log() {} } };
+  vm.createContext(sandbox);
+  vm.runInContext(fs.readFileSync(path.join(root, 'phase02-world-state/applySportsSeason.js'), 'utf8'), sandbox);
+  const parserWords = (fn) => [...new Set([...sandbox[fn].toString().matchAll(/v === '([^']+)'/g)].map((m) => m[1]))].sort();
+  // FanSentiment lists two words the parser reads as neutral by falling through.
+  const neutralByDefault = { FanSentiment: ['neutral', 'moderate'] };
+  [
+    ['FanSentiment', 'parseFanSentiment_'],
+    ['FranchiseStability', 'parseFranchiseStability_'],
+    ['EconomicFootprint', 'parseEconomicFootprint_'],
+    ['CommunityInvestment', 'parseCommunityInvestment_'],
+    ['MediaProfile', 'parseMediaProfile_'],
+  ].forEach(([header, fn]) => {
+    const listed = contract.SAFE_ENUMS[header].filter(Boolean)
+      .filter((word) => !(neutralByDefault[header] || []).includes(word)).sort();
+    assert.deepStrictEqual(listed, parserWords(fn), `${header} dropdown must equal the words ${fn} reads`);
+  });
+}
+
 console.log('sportsFeedContract.test.js: all assertions passed');

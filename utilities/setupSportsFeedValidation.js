@@ -105,6 +105,11 @@ var PLAYER_MOOD_VALUES = [
   'electric'
 ];
 
+// Exactly the keys of TRIGGER_HOOKS (phase07-evening-media/storyHook.js) —
+// the only reader that turns a trigger into a story. trade-deadline / all-star
+// / draft had no hook and were dropped (engine.202 cut 3); giving them one is
+// a sim call. Free text still reaches the media handoff (allowInvalid).
+// scripts/sportsFeedContract.test.js pins this list to the hook table.
 var EVENT_TRIGGER_VALUES = [
   '',
   'hot-streak',
@@ -116,10 +121,21 @@ var EVENT_TRIGGER_VALUES = [
   'rivalry',
   'home-opener',
   'season-finale',
-  'trade-deadline',
-  'all-star',
-  'draft'
+  'injury',
+  'injury-return',
+  'debut'
 ];
+
+// P–T: exactly the words applySportsSeason.js parses (parseFanSentiment_,
+// parseFranchiseStability_, parseEconomicFootprint_,
+// parseCommunityInvestment_, parseMediaProfile_). Pinned by the same test.
+var FAN_SENTIMENT_VALUES = ['', 'electric', 'euphoric', 'high', 'confident', 'excited', 'neutral', 'moderate',
+  'uncertain', 'anxious', 'low', 'apathetic', 'disappointed', 'frustrated', 'angry', 'hostile'];
+var FRANCHISE_STABILITY_VALUES = ['', 'stable', 'strong', 'growing', 'uncertain', 'unstable', 'crisis', 'relocating'];
+var ECONOMIC_FOOTPRINT_VALUES = ['', 'growing', 'booming', 'stable', 'steady', 'shrinking', 'declining', 'uncertain'];
+var COMMUNITY_INVESTMENT_VALUES = ['', 'active', 'strong', 'heavy', 'moderate', 'growing', 'passive', 'minimal',
+  'declining', 'none', 'absent'];
+var MEDIA_PROFILE_VALUES = ['', 'local', 'regional', 'national', 'international'];
 
 var OAKLAND_TEAMS = ["A's", 'Oaks'];
 
@@ -195,7 +211,8 @@ var HEADER_NOTES = {
 // Header-name layout for setupFeedSheet_ / clearSportsFeedValidation.
 var FEED_DEAD_HEADERS = ['VideoGameDate', 'VideoGame'];
 var FEED_NEW_HEADERS = ['StoryAngle', 'PlayerMood', 'EventTrigger', 'HomeNeighborhood', 'Streak', 'WeekRecord'];
-var FEED_DROPDOWN_HEADERS = ['SeasonType', 'EventType', 'TeamsUsed', 'PlayerMood', 'EventTrigger', 'HomeNeighborhood'];
+var FEED_DROPDOWN_HEADERS = ['SeasonType', 'EventType', 'TeamsUsed', 'PlayerMood', 'EventTrigger', 'HomeNeighborhood',
+  'FanSentiment', 'FranchiseStability', 'EconomicFootprint', 'CommunityInvestment', 'MediaProfile'];
 var FEED_COLUMN_WIDTHS = {
   'Cycle': 60, 'SeasonType': 120, 'EventType': 120, 'TeamsUsed': 90,
   'NamesUsed': 200, 'Notes': 350, 'Stats': 160, 'Team Record': 90,
@@ -314,7 +331,12 @@ function setupFeedSheet_(sheet, city, teamValues, neighborhoodValues) {
     'TeamsUsed': teamValues,
     'PlayerMood': PLAYER_MOOD_VALUES,
     'EventTrigger': EVENT_TRIGGER_VALUES,
-    'HomeNeighborhood': neighborhoodValues
+    'HomeNeighborhood': neighborhoodValues,
+    'FanSentiment': FAN_SENTIMENT_VALUES,
+    'FranchiseStability': FRANCHISE_STABILITY_VALUES,
+    'EconomicFootprint': ECONOMIC_FOOTPRINT_VALUES,
+    'CommunityInvestment': COMMUNITY_INVESTMENT_VALUES,
+    'MediaProfile': MEDIA_PROFILE_VALUES
   };
   var dropdownCount = 0;
   for (var d = 0; d < FEED_DROPDOWN_HEADERS.length; d++) {
@@ -426,4 +448,21 @@ function clearSportsFeedValidation() {
   }
 
   SpreadsheetApp.getUi().alert('Validation cleared from both feed sheets.');
+}
+
+// Node: scripts/sportsFeedContract.js validates dashboard drafts against these
+// same lists, so the sheet dropdown and the validator cannot drift apart.
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = {
+    SEASON_TYPE_VALUES: SEASON_TYPE_VALUES,
+    OAKLAND_EVENT_TYPE_VALUES: OAKLAND_EVENT_TYPE_VALUES,
+    PLAYER_MOOD_VALUES: PLAYER_MOOD_VALUES,
+    EVENT_TRIGGER_VALUES: EVENT_TRIGGER_VALUES,
+    FEED_NEIGHBORHOODS: FEED_NEIGHBORHOODS,
+    FAN_SENTIMENT_VALUES: FAN_SENTIMENT_VALUES,
+    FRANCHISE_STABILITY_VALUES: FRANCHISE_STABILITY_VALUES,
+    ECONOMIC_FOOTPRINT_VALUES: ECONOMIC_FOOTPRINT_VALUES,
+    COMMUNITY_INVESTMENT_VALUES: COMMUNITY_INVESTMENT_VALUES,
+    MEDIA_PROFILE_VALUES: MEDIA_PROFILE_VALUES
+  };
 }

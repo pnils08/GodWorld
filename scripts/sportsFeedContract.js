@@ -6,6 +6,10 @@
  */
 
 const { sportsWeekForEntry_ } = require('../utilities/sportsWeekRecord.js');
+// One vocabulary source: the Apps Script sheet-setup lists (dropdowns) are
+// the lists this validator enforces (engine.202 cut 3).
+const FEED_VOCAB = require('../utilities/setupSportsFeedValidation.js');
+const frozen = (list) => Object.freeze(list.slice());
 
 const FEED_HEADERS = Object.freeze([
   'Cycle', 'SeasonType', 'EventType', 'TeamsUsed', 'NamesUsed', 'Notes',
@@ -32,31 +36,20 @@ const TEAM_CONFIG = Object.freeze({
   oaks: Object.freeze({ id: 'oaks', label: 'The Oaks', sheetValue: 'Oaks', aliases: ['NBA', 'Warriors'] })
 });
 
-const EVENT_TYPES = Object.freeze([
-  'game-result', 'stat-capture', 'roster-move', 'player-feature', 'front-office',
-  'fan-civic', 'season-state', 'editorial-note'
-]);
-const SEASON_TYPES = Object.freeze([
-  'off-season', 'spring-training', 'preseason', 'early-season', 'mid-season',
-  'late-season', 'regular-season', 'playoffs', 'post-season', 'championship',
-  'finals', 'world-series'
-]);
-const OAKLAND_NEIGHBORHOODS = Object.freeze([
-  '', 'Downtown', 'Jack London', 'Rockridge', 'Temescal', 'Fruitvale',
-  'West Oakland', 'Lake Merritt', 'Piedmont Ave', 'Grand Lake', 'Montclair',
-  'Chinatown', 'Old Oakland', 'Laurel', 'Dimond', 'Glenview', 'Eastlake'
-]);
+const EVENT_TYPES = frozen(FEED_VOCAB.OAKLAND_EVENT_TYPE_VALUES);
+const SEASON_TYPES = frozen(FEED_VOCAB.SEASON_TYPE_VALUES);
+const OAKLAND_NEIGHBORHOODS = frozen(FEED_VOCAB.FEED_NEIGHBORHOODS);
 const SAFE_ENUMS = Object.freeze({
   SeasonType: SEASON_TYPES,
   EventType: EVENT_TYPES,
-  PlayerMood: Object.freeze(['', 'confident', 'frustrated', 'hungry', 'reflective', 'dominant', 'uncertain', 'locked-in', 'quiet', 'electric']),
-  EventTrigger: Object.freeze(['', 'hot-streak', 'cold-streak', 'playoff-push', 'playoff-clinch', 'eliminated', 'championship', 'rivalry', 'home-opener', 'season-finale', 'trade-deadline', 'all-star', 'draft', 'injury', 'injury-return', 'debut']),
+  PlayerMood: frozen(FEED_VOCAB.PLAYER_MOOD_VALUES),
+  EventTrigger: frozen(FEED_VOCAB.EVENT_TRIGGER_VALUES),
   HomeNeighborhood: OAKLAND_NEIGHBORHOODS,
-  FanSentiment: Object.freeze(['', 'electric', 'euphoric', 'high', 'confident', 'excited', 'neutral', 'moderate', 'uncertain', 'anxious', 'low', 'apathetic', 'disappointed', 'frustrated', 'angry', 'hostile']),
-  FranchiseStability: Object.freeze(['', 'stable', 'strong', 'growing', 'uncertain', 'unstable', 'crisis', 'relocating']),
-  EconomicFootprint: Object.freeze(['', 'growing', 'booming', 'stable', 'steady', 'shrinking', 'declining', 'uncertain']),
-  CommunityInvestment: Object.freeze(['', 'active', 'strong', 'heavy', 'moderate', 'growing', 'passive', 'minimal', 'declining', 'none', 'absent']),
-  MediaProfile: Object.freeze(['', 'local', 'regional', 'national', 'international'])
+  FanSentiment: frozen(FEED_VOCAB.FAN_SENTIMENT_VALUES),
+  FranchiseStability: frozen(FEED_VOCAB.FRANCHISE_STABILITY_VALUES),
+  EconomicFootprint: frozen(FEED_VOCAB.ECONOMIC_FOOTPRINT_VALUES),
+  CommunityInvestment: frozen(FEED_VOCAB.COMMUNITY_INVESTMENT_VALUES),
+  MediaProfile: frozen(FEED_VOCAB.MEDIA_PROFILE_VALUES)
 });
 
 const REQUIRED_FIELDS = Object.freeze(['Cycle', 'SeasonType', 'EventType', 'TeamsUsed']);

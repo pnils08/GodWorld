@@ -279,3 +279,15 @@ Ten newly tracked hoods, per-cycle Sentiment deltas: C109→C110 [0.07,0.04,0.06
 2. patternFlag is NOT strain-trend on every cycle, and shockFlag is NOT shock-flag on every cycle (C108 may still inherit live C107's state through the digest window).
 3. Holiday seeds land on Scenes hoods; C111 (Valentine, no Scenes tag) seeds citywide.
 4. Everything from the previous benches holds: 0 papered-over lines, QoL lines with causes, canon-shaped retail ranking, no fake Downtown crisis, city mood 0.3–0.5 at C108.
+
+## RESULT — deploy-candidate bench, engine tree `b2320e09`, SANDBOX 0908 @66 on fresh live-synced C107 (C108–C111)
+
+1. **MET.** `ok:true` all four fires; Engine_Errors 0 rows total.
+2. **PART MET.** PatternFlag: C108 strain-trend, C109 strain-trend, **C110 none**, C111 strain-trend — the flag clears for the first time. ShockFlag: shock-flag 4 of 4 — NOT met. Digest window read back (Riley_Digest C101–C111) explains both: CivicLoad now alternates (C108 strain / C109 minor / C110 strain / C111 minor) where it was 11-of-14 strain before; C109 fires on a genuine run of two (C108 + live C107), C111 on 5-of-7 where C104/C105/C107 are pre-fix rows the old pinned classifier labelled — those age out of the 7-row window by live C114. The shock flag is not history: `applyShockMonitor` restates the load class (:243) and the pattern (:251), so every strained cycle is also a shock cycle — Downtown carries "Shock event zone" on all four. Open, carded.
+3. **MET.** C108 (Epiphany) seeds on Scenes hoods — city events Temescal Holiday Market, Lake Merritt Lantern Parade, Dimond stabilisation panel; faith events Lake Merritt / Fruitvale / East Oakland. C110 First Friday lands on Temescal ("First Friday arts walk zone", event index 45.97 vs 15–36 citywide).
+4. **MET.** C108 QoL lines 10, causes `housing 6 / street 2 / health 1 / mood 1` — no safety-only monoculture; `papered 0`, `notMuchOpen 0`, `goodStretch 0`, `heaviness 0`, `locks 0` (no papered-over blight lines). Retail ranking canon-shaped every cycle (Jack London / Downtown / Uptown high; Ivy Hill / Glenview / San Antonio low). No fake Downtown crime crisis — trajectory rows read Downtown boom, West Oakland / Eastlake / Baylight cooling. City Sentiment C108 0.45, C109 0.12, C110 0.37, C111 0.40 — inside 0.3–0.5 at C108 (momentum carry from live C107's 0.51), and it moves cycle to cycle instead of sitting.
+   RetailVitality spread C108 7.73 / C109 7.31 / C110 7.53 / C111 11.62 — no per-cycle ratchet; C111's widening is a citywide Valentine lift (every hood up, floor 3.95 → 5.83).
+5. World events spread over core-sim hoods: CIVIC Dimond, HEALTH KONO, SAFETY Temescal, INFRASTRUCTURE Brooklyn, GENERAL Downtown — none of the four old stereotype pins.
+6. Ripple_Ledger C108: 70 engine rows, no retired-template hood. Migration reads as a city with a ladder — 15 relocations naming their reason (moving up from Temescal, priced out of Lake Merritt, displaced from Lake Merritt), 3 forced moves at severe displacement risk.
+
+**Verdict: deployable.** One open defect (shock flag restates the load class) carried to engine.187 part 3.

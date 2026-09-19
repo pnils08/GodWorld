@@ -183,8 +183,24 @@ As said:
 4. "4-5 sounds like a good starting point." — **Losing clock: 4–5 cycles.**
 5. "Benefit applies once running/implemented. This is what creates the game — the cron only has so much time in a week and it'll need to address active [initiatives], anything it wants to add, and the Mara directive; it'll need to make its own choices." — **The benefit starts when the initiative is deployed.** A seat's week is a limited budget split between its active initiatives, new proposals and the confrontation step, and the seat chooses how to spend it.
 6. "Everything fits this model, it's just a deployment mechanism operating as a civic system. These are coded fixes to the sim the crons decide on, vote and 3 stage gate to deploy." — **All six live rows convert, Baylight and Fruitvale included.** An initiative is a coded fix to the sim. The civic system is how it gets deployed: seats decide, council votes, three gates clear, the fix deploys. This is the 2026-08-27 repair-mechanism doctrine, now with seats doing the deciding.
-7. Unanswered: whether a stage clear makes news. Default: the confrontation step covers it; no separate rule.
-8. **Three stages, not the two-stage interim.** Stage 2 therefore depends on the seats' weekday work reaching a sheet (engine.213 open item). That write path is the plan's first task, not a reason to cut a stage.
+7. "Crons write news daily and have beat writers on this." — **No special news rule.** The daily beat writers cover stage clears and seats' choices.
+8. "Once this is down as research, step 1 is what is happening M-Thu for civic wakes." — **Three stages, and the build starts with the Mon–Thu civic wakes.** Stage 2 depends on the seats' weekday work reaching a sheet (the engine.213 open item). Step 1 is measured in §11.
+
+## 11. Step 1 — what the Mon–Thu civic wakes do today (measured 2026-09-19)
+
+- **Schedule.** crontab `45 5 * * 1-4` runs `cron-civic-run.js --stage=datawake`. Each run wakes three seats (`--limit` default 3, :2069), least-recently-woken first (`datawakeRota`, :1915), across 19 seats: council, mayor, deputy mayor, chief, DA, factions and project directors. That is 12 seat-wakes a week, or one turn per seat roughly every week and a half. From 2026-08-10 to 09-17, 47 wakes landed: the mayor woke twice in five weeks, and each council seat two or three times.
+- **What a seat sees.** A fixed slice of its own data (`domainSlice`, :1861): one "pulse" line per hood for a district seat, a city digest for the mayor and other city-wide seats, and the initiative summary for a project director. Added to that are its prior position wall and "this week's lever" from its office pack (`task.goal` / `pulse.lever`, :396). **It does not see:** the tracker as a board it can act on, the citizens in its district, or what they are complaining about.
+- **What a seat can do.** Return one JSON: a statement (speech), a free-text `action`, and `numberMoved` (:1968). A grounding gate rejects any number that isn't in the seat's own slice (civic.29 / civic.35). 32 of 47 wakes declared an action, for example "request community engagement sessions in Jack London with traffic and public safety components…" or "approved_month_five_disbursement".
+- **Where it goes.** The holder's position wall (a Supermemory page), the civic desk slices (buildCivicDomainSlice.js:492) and the desk cron. **No sheet.** The engine never sees a datawake, so a declared action changes nothing, and approval can't grade the week's work (engine.213 open item).
+- **Citizens.** Seats never reach citizens. Citizens' civic complaints (Reflection_Intake tag `Civic`) reach no seat and move no dials: `utilities/citizenDialMap.js:48` maps `Civic` to `{}`. The "more complaining → more upset" loop does not exist yet.
+
+**Gaps against the §10 rulings:**
+1. **A seat's choice has no structured form and nowhere to land.** It needs a closed set of moves — propose an initiative, work a stage, answer the confrontation, go to a hood and meet its citizens — that persist through the gated Sunday apply to a sheet the engine reads.
+2. **A seat can't see its board or its constituents.** Its pack needs its own initiatives with their stage status, plus its district's citizen complaints (the petition pool).
+3. **The week has no budget.** Ruling 5 makes time scarce; today each wake produces one statement. How many moves a wake allows, and what each costs, is a design item.
+4. **Complaints move no dials.** The empty `Civic` entry in the dial map is the first engine cut on the citizen side.
+5. **The Mara directive is aimed at the wrong people.** It targets project directors' admin milestones (C106: "File the inspection calendar…"). The confrontation step re-aims it at elected seats and their hoods' data.
+6. **Turns vs the clock.** At 12 wakes a week across 19 seats, a seat gets about three turns inside a 4–5-cycle clock before a stage stalls. That scarcity is the game Mike described; the rate should be re-checked once stages exist.
 
 ## Rollout row (proposed — for the accepting Claude seat to file)
 
@@ -197,7 +213,7 @@ As said:
 ## Changelog
 
 - 2026-09-19 (kimi) — Initial draft. Builder approved filing in-session; game-loop extension to all wakes (bonds/marriage/kids/house/Heritage_Ledger/media/career) added same day, same approval.
-- 2026-09-19 (research-build, S467) — Mike's second-pass direction captured above §3; Mags takes added under §3 (board state, three-stage gate, petition), §4 and §5; sim questions in §9. Kimi's text unchanged. Same day: the advisor's independent read added as `advisor:` lines under the stage gate and the petition, each with a Mags response; the economic-effects claim tightened; Q6 extended to Baylight and the Fruitvale hub. Later the same night: Mike answered §9, recorded as §10 rulings.
+- 2026-09-19 (research-build, S467) — Mike's second-pass direction captured above §3; Mags takes added under §3 (board state, three-stage gate, petition), §4 and §5; sim questions in §9. Kimi's text unchanged. Same day: the advisor's independent read added as `advisor:` lines under the stage gate and the petition, each with a Mags response; the economic-effects claim tightened; Q6 extended to Baylight and the Fruitvale hub. Later the same night: Mike answered §9, recorded as §10 rulings; step 1 (the Mon–Thu civic wakes) measured as §11.
 
 ## Review — research-build, 2026-09-19 (S467)
 

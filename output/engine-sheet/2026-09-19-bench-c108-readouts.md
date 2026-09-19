@@ -268,3 +268,8 @@ Ten newly tracked hoods, per-cycle Sentiment deltas: C109→C110 [0.07,0.04,0.06
 3. C108 LifeHistory: QoL lines present (source:qol with qol-cause tags), low-band causes led by work/health/street in Temescal / San Antonio / Ivy Hill class hoods, not only safety.
 4. City Sentiment in the 0.3–0.5 range (momentum from C107's 0.51); max hood < 1.0.
 5. C108–C111: RetailVitality spread (max − min) does not widen every cycle (no business↔retail ratchet); ranking canon-shaped each cycle.
+
+## PRE-DECLARED — release-candidate bench, engine tree a7ec1307 (adds 2db65214 business keys, c5f52a3e collapse gate, a7ec1307 engine.187), fresh live-synced C107 (written BEFORE the fire)
+1. ok:true, 0 Engine_Errors C108–C111.
+2. World_Population civicLoad is NOT load-strain on every cycle; shockFlag is NOT shock-flag on every cycle (C108 may still carry last cycle's shock state from live C107); no "sentiment collapse" when a holiday lift unwinds.
+3. Everything from the previous bench still holds: canon-shaped retail ranking, QoL lines with causes, no fake Downtown crisis, city mood 0.3–0.5 at C108.

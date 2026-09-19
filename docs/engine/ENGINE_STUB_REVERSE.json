@@ -1,8 +1,8 @@
 {
-  "generated": "2026-09-18",
+  "generated": "2026-09-19",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 184,
-  "functionsMapped": 1411,
+  "functionsMapped": 1412,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -4268,7 +4268,8 @@
         "phase05-citizens/migrationTrackingEngine.js::buildRelocationHoodState_",
         "phase05-citizens/neighborhoodTrajectoryEngine.js::updateNeighborhoodTrajectories_",
         "phase06-analysis/applyMigrationDrift.js::applyMigrationDrift_",
-        "phase08-v3-chicago/v3NeighborhoodWriter.js::saveV3NeighborhoodMap_"
+        "phase08-v3-chicago/v3NeighborhoodWriter.js::saveV3NeighborhoodMap_",
+        "utilities/setupSportsFeedValidation.js::mapNeighborhoods_"
       ]
     },
     "World_Config": {

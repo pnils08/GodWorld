@@ -72,6 +72,23 @@ const faith = run(mk('event', 'FAITH', 2).concat(mk('cluster', 'FAITH', 2)));
 check('FAITH hooks stay on the culture desk (Luis off)', faith.every(h => !h.suggestedJournalist || onDesk(h.suggestedJournalist, 'culture')), faith.map(h => h.hookType + '→' + h.suggestedJournalist).join(','));
 check('FAITH names Elliot Graye at least once', faith.some(h => h.suggestedJournalist === 'Elliot Graye'), faith.map(h => h.suggestedJournalist).join(','));
 
+console.log('moment triggers survive the phase hook (2026-09-19)');
+function runSports(season, triggers) {
+  const ctx = { config: { cycleCount: 110 }, summary: { absoluteCycle: 110, cycleOfYear: 6, storyHooks: [], eventArcs: [],
+    sportsSeason: season, sportsEventTriggers: triggers } };
+  sb.storyHookEngine_(ctx);
+  return ctx.summary.storyHooks.filter(h => h.domain === 'SPORTS' && h.hookType === 'sports');
+}
+const clinch = runSports('playoffs', [{ team: "A's", trigger: 'series-clinch', neighborhood: 'Jack London' },
+  { team: 'Oaks', trigger: 'cold-streak', streak: 'L3' }, { team: "A's", trigger: 'series-clinch' },
+  { team: "A's", trigger: 'player-energy' }]);
+check('playoff phase hook kept', clinch.some(h => /^PLAYOFFS:/.test(h.text)), clinch.map(h => h.text.slice(0, 30)).join(' | '));
+check('series-clinch moment reaches the deck beside it', clinch.some(h => /clinch the series/.test(h.text) && h.neighborhood === 'Jack London'));
+check('cold-streak moment reaches the deck (C105 case: was dropped)', clinch.some(h => /struggling — L3/.test(h.text)));
+check('one hook per team per moment; unhooked player triggers make none', clinch.length === 3, String(clinch.length));
+const quiet = runSports('off-season', [{ team: "A's", trigger: 'no-hitter' }]);
+check('a moment with no phase hook still lands (priority 3)', quiet.length === 1 && quiet[0].priority === 3);
+
 console.log('engine.232 — rotation within the desk');
 const sports = run(mk('GAME_RESULT', 'SPORTS', 8));
 const sportsNames = sports.map(h => h.suggestedJournalist);

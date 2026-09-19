@@ -1,6 +1,6 @@
 # Engine Stub Reverse Index
 
-**Generated:** 2026-09-18 by `scripts/stubEngine.js` (mechanical — no LLM).
+**Generated:** 2026-09-19 by `scripts/stubEngine.js` (mechanical — no LLM).
 
 **Purpose:** Cheap lookup — given an `S.*` field or sheet name, find every function that reads or writes it. Companion to `ENGINE_STUB_MAP.md` (forward: function → fields).
 
@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 184 · **Functions mapped:** 1411 · **S.* fields:** 352 · **Sheets:** 57
+**Files scanned:** 184 · **Functions mapped:** 1412 · **S.* fields:** 352 · **Sheets:** 57
 
 ## S.* / ctx.summary reverse index
 
@@ -425,7 +425,7 @@ Sheet detection: `getSheetByName`, `queue*Intent_`, known sheet-name string + wr
 | `Media_Ledger` | _(none)_ | `phase07-evening-media/mediaRoomIntake.js::upgradeMediaLedgerWithCalendar_`, `phase10-persistence/recordMediaLedger.js::recordMediaLedger_` | 0 | 2 |
 | `MediaRoom_Paste` | _(none)_ | `phase07-evening-media/mediaRoomIntake.js::processRawCitizenUsageLogManual`, `phase07-evening-media/parseMediaRoomMarkdown.js::diagnosePasteSheet`, `phase07-evening-media/parseMediaRoomMarkdown.js::parseMediaRoomMarkdown` | 0 | 3 |
 | `Neighborhood_Demographics` | _(none)_ | `phase05-citizens/educationCareerEngine.js::checkSchoolQuality_`, `phase05-citizens/educationCareerEngine.js::updateMinorSchoolQuality_`, `utilities/cycleRollback.js::rollbackToCycle78`, `utilities/ensureNeighborhoodDemographics.js::ensureNeighborhoodDemographicsSchema_`, `utilities/ensureNeighborhoodDemographics.js::getNeighborhoodDemographics_` | 0 | 5 |
-| `Neighborhood_Map` | `phase05-citizens/neighborhoodTrajectoryEngine.js::updateNeighborhoodTrajectories_` | `phase01-config/canonNeighborhoodLoader.js::loadCanonNeighborhoods_`, `phase02-world-state/loadNeighborhoodState.js::loadNeighborhoodState_`, `phase04-events/chaosCarsEngine.js::loadNeighborhoodNames_`, `phase04-events/chaosCarsEngine.test.js::reset`, `phase05-citizens/bondEngine.js::loadNeighborhoodsFromSheet_`, …(+5 more) | 1 | 10 |
+| `Neighborhood_Map` | `phase05-citizens/neighborhoodTrajectoryEngine.js::updateNeighborhoodTrajectories_` | `phase01-config/canonNeighborhoodLoader.js::loadCanonNeighborhoods_`, `phase02-world-state/loadNeighborhoodState.js::loadNeighborhoodState_`, `phase04-events/chaosCarsEngine.js::loadNeighborhoodNames_`, `phase04-events/chaosCarsEngine.test.js::reset`, `phase05-citizens/bondEngine.js::loadNeighborhoodsFromSheet_`, …(+6 more) | 1 | 11 |
 | `Oakland_Sports_Feed` | _(none)_ | `phase02-world-state/applySportsSeason.js::applySportsFeedTriggers_`, `phase02-world-state/applySportsSeason.js::deriveBaylightOpenings_`, `phase02-world-state/applySportsSeason.js::readOaklandFeedEntries_`, `utilities/diagnoseDashboardData.js::diagnoseDashboardData`, `utilities/setupSportsFeedValidation.js::setupOaklandFeedOnly`, …(+1 more) | 0 | 6 |
 | `Reflection_Intake` | _(none)_ | `utilities/compressLifeHistory.js::getGriefConfig_` | 0 | 1 |
 | `Relationship_Bond_Ledger` | _(none)_ | `phase05-citizens/bondEngine.js::saveV3BondsToLedger_` | 0 | 1 |

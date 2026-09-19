@@ -663,6 +663,14 @@ function storyHookEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════
   // v3.9: SPORTS FEED TRIGGER HOOKS
   // ═══════════════════════════════════════════════════════════
+  // A trigger is a MOMENT in the week (builder ruling 2026-09-19). Moment hooks
+  // stay out of the one-per-domain dedupe below: there the phase hook
+  // ("PLAYOFFS: …", p3) is pushed first and wins every tie, so no trigger could
+  // reach the deck in late season or the postseason (live C105: the Oaks'
+  // cold-streak was dropped). They dedupe among themselves — one per team per
+  // moment — and join the deck after the domain pass.
+  var momentHooks = [];
+  var momentSeen = {};
   var sportsTriggers = S.sportsEventTriggers || [];
   if (sportsTriggers.length > 0) {
     var TRIGGER_HOOKS = {
@@ -691,8 +699,10 @@ function storyHookEngine_(ctx) {
     for (var sti = 0; sti < sportsTriggers.length; sti++) {
       var trig = sportsTriggers[sti];
       var trigDef = TRIGGER_HOOKS[trig.trigger];
-      if (trigDef) {
-        hooks.push(makeHook(
+      var momentKey = (trig.team || '') + '|' + trig.trigger;
+      if (trigDef && !momentSeen[momentKey]) {
+        momentSeen[momentKey] = true;
+        momentHooks.push(makeHook(
           'SPORTS',
           trig.neighborhood || '',
           trigDef.priority,
@@ -1474,6 +1484,8 @@ function storyHookEngine_(ctx) {
       deduped.push(seen[seenKey]);
     }
   }
+
+  for (var mh = 0; mh < momentHooks.length; mh++) deduped.push(momentHooks[mh]);
 
   // Sort by priority descending
   deduped.sort(function(a, b) { return b.priority - a.priority; });

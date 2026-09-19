@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-09-18 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-09-19 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -3957,6 +3957,9 @@
 
 - **setupFeedSheet_(sheet, city, teamValues, neighborhoodValues)**
 
+- **mapNeighborhoods_(ss)**
+  Sheets: Neighborhood_Map
+
 - **feedHeaderRow_(sheet)**
 
 - **applyDropdownValidation_(sheet, startRow, col, numRows, values, name)**
@@ -4068,4 +4071,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 184
-**Functions mapped:** 1411
+**Functions mapped:** 1412

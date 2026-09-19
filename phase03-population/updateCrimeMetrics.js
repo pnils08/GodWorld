@@ -455,8 +455,14 @@ function calculateNeighborhoodCrime_(neighborhood, profile, demo, prev, context,
   var levelViolent = crimeLevelFrom_(prev, 'violentLevel', 'violentCrimeIndex', seedViolent);
   var levelQoL = crimeLevelFrom_(prev, 'qolLevel', 'qualityOfLifeIndex', seedQoL);
 
-  var baseResponse = 8 / profile.responseMod;
-  var baseClearance = 0.35 * profile.responseMod; // the hood's unloaded clearance — the cycle's reading builds on it
+  // engine.237 fix-up: one city base response, never the authored profile's responseMod — the last per-cycle
+  // read of NEIGHBORHOOD_CRIME_PROFILES (v1.2, missed by engine.212): it kept East / West Oakland and
+  // Fruitvale slowest every cycle regardless of anything that happened in the city.
+  var baseResponse = 8;
+  // engine.237 fix-up: the unloaded clearance is ONE city base, never the authored profile. engine.212 took
+  // the NEIGHBORHOOD_CRIME_PROFILES table off the per-cycle path; reading responseMod here put it back
+  // (a real-Oakland ranking deciding which hoods clear cases). Hoods differ only through in-world causes.
+  var baseClearance = 0.35;
 
   // Demographics
   var totalPop = (demo.students || 0) + (demo.adults || 0) + (demo.seniors || 0);

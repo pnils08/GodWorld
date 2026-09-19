@@ -256,9 +256,13 @@ console.log('═══ 10 — capacity scales with the map; clearance reads the 
   check('10c three cycles off the live floor the city mean clearance has climbed (' + traj[2].toFixed(3) + ' > 0.17)', traj[2] > 0.17, traj.slice(0, 3).map(x => x.toFixed(3)).join(' '));
   check('10d over 200 cycles clearance is not pinned: floor ' + floorHits + ' / ceiling ' + ceilHits + ' of ' + n + ' hood-cycles',
     floorHits / n < 0.05 && ceilHits === 0, JSON.stringify({ floorHits, ceilHits, n }));
-  const late = NM.map(h => rows[h].clearanceRate);
-  check('10e hoods differ by their own response profile (spread ' + (Math.max(...late) - Math.min(...late)).toFixed(2) + ' ≥ 0.04)',
-    Math.max(...late) - Math.min(...late) >= 0.04, JSON.stringify(late));
+  const sbA = sandbox(), sbB = sandbox();
+  sbB.NEIGHBORHOOD_CRIME_PROFILES['West Oakland'].responseMod = 1.2;   // the authored table must not decide clearance
+  const ra = runCycle(sbA, rows, 400, { demo: flatDemo }, makeRng(400)).written, rb = runCycle(sbB, rows, 400, { demo: flatDemo }, makeRng(400)).written;
+  check('10e the authored profile table does not decide clearance (West Oakland ' + ra['West Oakland'].clearanceRate + ' == ' + rb['West Oakland'].clearanceRate + ' with its responseMod changed)',
+    ra['West Oakland'].clearanceRate === rb['West Oakland'].clearanceRate);
+  check('10g nor response time (' + ra['West Oakland'].responseTimeAvg + ' == ' + rb['West Oakland'].responseTimeAvg + ')',
+    ra['West Oakland'].responseTimeAvg === rb['West Oakland'].responseTimeAvg);
   const r1 = runCycle(sandbox(), (() => { const x = liveRows(); NM.forEach(h => { x[h].clearanceRate = 0.25; x[h].incidentCount = 3; }); return x; })(), 108, { demo: flatDemo }, () => 0.5).written;
   const r2 = runCycle(sandbox(), (() => { const x = liveRows(); NM.forEach(h => { x[h].clearanceRate = 0.25; x[h].incidentCount = 12; }); return x; })(), 108, { demo: flatDemo }, () => 0.5).written;
   check('10f a heavier load cycle clears less than a light one (Downtown ' + r2['Downtown'].clearanceRate + ' < ' + r1['Downtown'].clearanceRate + ')',

@@ -20,7 +20,7 @@
  * consecutive prior audits that carried the same finding.
  */
 
-const VERSION = '2.0.0';
+const VERSION = '2.1.0';
 
 function num(v) {
   if (v == null || v === '') return null;
@@ -89,8 +89,17 @@ function detect(ctx) {
   const nbhdByName = new Map();
   for (const n of nbhd) if (n.Neighborhood) nbhdByName.set(n.Neighborhood, n);
 
-  // Direction needs the prior snapshot (same lookup as detectMathImbalances).
-  const priorAudit = prior.find(p => p.cycle === cycle - 1) || (prior.length > 0 ? prior[0] : null);
+  // Direction needs LAST cycle's snapshot — strictly cycle - 1 (as detectImprovements).
+  // An older audit would read multi-cycle drift against single-cycle steps. When it is
+  // missing the initiative check is blind, and says so in the audit output
+  // (ctx.detectorNotes → engine_audit_cNNN.json detectorNotes) instead of passing quietly.
+  const priorAudit = prior.find(p => p.cycle === cycle - 1) || null;
+  if (!priorAudit) {
+    (ctx.detectorNotes = ctx.detectorNotes || []).push({
+      detector: 'detectIncoherence',
+      note: 'no C' + (cycle - 1) + ' audit — initiative direction check skipped this run (blind, not clean)',
+    });
+  }
   const priorSnap = (priorAudit && priorAudit.snapshots) || {};
   const priorNbhd = new Map((priorSnap.Neighborhood_Map || []).map(r => [r.Neighborhood, r]));
   const priorInits = new Map((priorSnap.Initiative_Tracker || []).map(r => [initiativeKey(r), r]));

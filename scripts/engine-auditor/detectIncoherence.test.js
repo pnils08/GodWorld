@@ -98,6 +98,19 @@ console.log('\nTest 2c: no prior audit — direction unknown, no finding');
   const init = { InitiativeID: 'INIT-CRIME', ImplementationPhase: 'operational', PolicyDomain: 'crime', AffectedNeighborhoods: 'West Oakland' };
   const ctx = { cycle: 100, snapshot: { Initiative_Tracker: [init], Neighborhood_Map: city([{ Neighborhood: 'West Oakland', CrimeIndex: 0.95 }]), Civic_Office_Ledger: [] } };
   assert('no finding without a prior snapshot', detector.detect(ctx).length === 0);
+  assert('the blind run is reported, not silent', (ctx.detectorNotes || []).some(n => n.detector === 'detectIncoherence' && /blind/.test(n.note)));
+}
+
+console.log('\nTest 2e: an OLDER audit is not a prior — multi-cycle drift is not read with single-cycle steps');
+{
+  const init = { InitiativeID: 'INIT-CRIME', ImplementationPhase: 'operational', PolicyDomain: 'crime', AffectedNeighborhoods: 'West Oakland' };
+  const ctx = {
+    cycle: 100,
+    snapshot: { Initiative_Tracker: [init], Neighborhood_Map: city([{ Neighborhood: 'West Oakland', CrimeIndex: 0.95 }]), Civic_Office_Ledger: [] },
+    prior: [Object.assign(priorAudit([init], [{ Neighborhood: 'West Oakland', CrimeIndex: 0.70 }]), { cycle: 96 })],
+  };
+  assert('a C96 audit does not stand in for C99', detector.detect(ctx).length === 0);
+  assert('and the skip is reported', (ctx.detectorNotes || []).length === 1);
 }
 
 console.log('\nTest 2d: initiative not active in the prior snapshot — not judged yet');

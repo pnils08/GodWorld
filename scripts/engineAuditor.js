@@ -255,6 +255,8 @@ async function runEngineAudit(ctx) {
     patterns,
     summary: summarize(patterns),
     measurementHistory: ctx.measurementHistory || [],
+    // detectors that could not run their check this cycle say so here (blind ≠ clean)
+    detectorNotes: ctx.detectorNotes || [],
     snapshots: persistedSnapshots,
     citizenIncomes,
     // S215 civic.10c — orphan-ailment summary (HIGH-severity patterns with

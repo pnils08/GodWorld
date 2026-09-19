@@ -1,7 +1,7 @@
 ---
 title: Oakland_Sports_Feed — ingest contract audit
 created: 2026-09-11
-updated: 2026-09-16
+updated: 2026-09-18
 type: reference
 tags: [research, engine, sports, ingest, active]
 sources:

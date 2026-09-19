@@ -62,33 +62,28 @@ var COVERAGE_INTENSITY = {
   SATURATED: 'saturated'
 };
 
-// Oakland neighborhoods
-var MEDIA_NEIGHBORHOODS = [
-  'Temescal', 'Downtown', 'Fruitvale', 'Lake Merritt',
-  'West Oakland', 'Laurel', 'Rockridge', 'Jack London'
-];
-
-// Neighborhood media profiles
-var NEIGHBORHOOD_MEDIA_PROFILES = {
-  'Downtown': { mediaWeight: 1.3, topics: ['civic', 'business', 'crime'] },
-  'Jack London': { mediaWeight: 1.2, topics: ['culture', 'nightlife', 'entertainment'] },
-  'Fruitvale': { mediaWeight: 1.0, topics: ['community', 'culture', 'safety'] },
-  'Temescal': { mediaWeight: 0.9, topics: ['health', 'education', 'community'] },
-  'Lake Merritt': { mediaWeight: 1.1, topics: ['culture', 'community', 'events'] },
-  'West Oakland': { mediaWeight: 1.0, topics: ['infrastructure', 'development', 'safety'] },
-  'Rockridge': { mediaWeight: 0.8, topics: ['business', 'retail', 'education'] },
-  'Laurel': { mediaWeight: 0.7, topics: ['community', 'local'] }
-};
-
-// v2.1: Holiday-specific media focus neighborhoods
-var HOLIDAY_MEDIA_NEIGHBORHOODS = {
-  'OaklandPride': ['Downtown', 'Lake Merritt', 'Jack London'],
-  'ArtSoulFestival': ['Downtown', 'Jack London'],
-  'LunarNewYear': ['Chinatown', 'Downtown'],
-  'CincoDeMayo': ['Fruitvale'],
-  'DiaDeMuertos': ['Fruitvale'],
-  'Juneteenth': ['West Oakland', 'Downtown']
-};
+// engine.240 (2026-09-19, SIM_DOCTRINE §17): MEDIA_NEIGHBORHOODS (8 hoods), NEIGHBORHOOD_MEDIA_PROFILES
+// (hand-set mediaWeight, Downtown 1.3 … Laurel 0.7, 'crime'/'safety' topics on Downtown / Fruitvale /
+// West Oakland) and HOLIDAY_MEDIA_NEIGHBORHOODS are gone. Fourteen hoods — Uptown, KONO, Chinatown,
+// Piedmont Ave, East Oakland, Baylight District and eight more — never felt coverage at all. Every
+// canon hood is covered now; how much the press watches a hood is its authored AttentionWeight
+// (Neighborhood_Map, engine.148 P2 — the same knob prioritizeEvents reads: 0.8 + 0.25 × attention);
+// a holiday's spotlight is its authored Scenes; the sports spotlight follows the sports zones.
+function mediaHoods_(ctx) {
+  var S = ctx.summary || {};
+  if (typeof getCanonNeighborhoods_ === 'function' && S.canonHoods && S.canonHoods.list) return getCanonNeighborhoods_(ctx);
+  return Object.keys(S.neighborhoodState || {});
+}
+function mediaHoodWeight_(ctx, hood) {
+  var S = ctx.summary || {};
+  if (typeof getHoodAttention_ === 'function' && S.canonHoods && S.canonHoods.attention) return 0.8 + 0.25 * getHoodAttention_(ctx, hood);
+  return 1.0;
+}
+function mediaSceneHoods_(ctx, tag) {
+  var S = ctx.summary || {};
+  if (!tag || typeof hoodNamesWithScene_ !== 'function' || !S.canonHoods || !S.canonHoods.scenes) return [];
+  return hoodNamesWithScene_(ctx, tag);
+}
 
 // v2.1: Feel-good holiday list
 var FEEL_GOOD_HOLIDAYS = [
@@ -231,8 +226,7 @@ function applyCalendarMediaModifiers_(ctx) {
     effects.coverageProfile.festivalCoverage = cal.holiday;
 
     // Festival neighborhoods get extra positive coverage
-    var festivalHoods = HOLIDAY_MEDIA_NEIGHBORHOODS[cal.holiday] || ['Downtown'];
-    effects.festivalSpotlight = festivalHoods;
+    effects.festivalSpotlight = mediaSceneHoods_(ctx, cal.holiday);   // engine.240: authored Scenes
   }
 
   // Cultural holidays = community focus
@@ -242,8 +236,7 @@ function applyCalendarMediaModifiers_(ctx) {
     effects.holidayNarrative = 'cultural_celebration';
     effects.coverageProfile.culturalFocus = cal.holiday;
 
-    var culturalHoods = HOLIDAY_MEDIA_NEIGHBORHOODS[cal.holiday] || [];
-    effects.festivalSpotlight = culturalHoods;
+    effects.festivalSpotlight = mediaSceneHoods_(ctx, cal.holiday);   // engine.240: authored Scenes
   }
 
   // Year-end period = recap narratives
@@ -828,9 +821,12 @@ function applyNeighborhoodMediaEffects_(ctx) {
   var festivalSpotlight = effects.festivalSpotlight || [];
   var artsSpotlight = effects.artsSpotlight || [];
 
-  for (var ni = 0; ni < MEDIA_NEIGHBORHOODS.length; ni++) {
-    var nh = MEDIA_NEIGHBORHOODS[ni];
-    var profile = NEIGHBORHOOD_MEDIA_PROFILES[nh] || { mediaWeight: 1.0, topics: [] };
+  var mediaHoods = mediaHoods_(ctx);
+  var sportsSpot = (S.sportsZones && S.sportsZones.length) ? S.sportsZones
+    : (typeof primarySportsZone_ === 'function' ? [primarySportsZone_({})] : []);
+  for (var ni = 0; ni < mediaHoods.length; ni++) {
+    var nh = mediaHoods[ni];
+    var profile = { mediaWeight: mediaHoodWeight_(ctx, nh) };
 
     var nhEffect = {
       coverageCount: 0,
@@ -879,8 +875,9 @@ function applyNeighborhoodMediaEffects_(ctx) {
       nhEffect.topics.push('arts');
     }
 
-    // v2.1: Sports spotlight (Jack London during games)
-    if (nh === 'Jack London' && (cal.sportsSeason === 'playoffs' || cal.sportsSeason === 'championship')) {
+    // v2.1: Sports spotlight during the post-season — wherever the sport is (engine.240: was a
+    // 'Jack London' literal; primarySportsZone_ keeps the pre-stadium fallback, sports lane)
+    if (sportsSpot.indexOf(nh) >= 0 && (cal.sportsSeason === 'playoffs' || cal.sportsSeason === 'championship')) {
       nhEffect.coverageCount += 2;
       nhEffect.perceptionShift += 0.25;
       nhEffect.topics.push('sports');

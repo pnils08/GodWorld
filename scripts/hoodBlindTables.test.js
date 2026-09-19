@@ -233,5 +233,22 @@ t('unclustered hoods adopt the cluster of their canon neighbours; none left unpl
   assert.ok(/buildHoodClusterAssignment_\(ctx, CLUSTERS\)/.test(src('phase02-world-state/applyCityDynamics.js')));
 });
 
+console.log('T9 media coverage reaches every canon hood, weighted by the authored attention knob (engine.240)');
+t('22 hoods get a media effect; a safety event moves perception by 0.1 × (0.8 + 0.25 × AttentionWeight)', () => {
+  load(sb, 'phase07-evening-media/mediaFeedbackEngine.js');
+  const ctx = makeCtx(sb);
+  ctx.summary.mediaEffects = { neighborhoodEffects: {}, festivalSpotlight: [] };
+  ctx.summary.worldEvents = [{ neighborhood: 'Piedmont Ave', domain: 'SAFETY', description: 'x' }];
+  ctx.mediaCalendarContext = {};
+  sb.applyNeighborhoodMediaEffects_(ctx);
+  const eff = ctx.summary.mediaEffects.neighborhoodEffects;
+  assert.strictEqual(Object.keys(eff).length, 22);
+  const w = 0.8 + 0.25 * sb.getHoodAttention_(ctx, 'Piedmont Ave');
+  assert.strictEqual(eff['Piedmont Ave'].perceptionShift, Math.round(-0.1 * w * 100) / 100);
+  ['Uptown', 'KONO', 'Chinatown', 'East Oakland', 'Baylight District'].forEach(h => assert.ok(eff[h], h + ' has no media effect'));
+  const src2 = src('phase07-evening-media/mediaFeedbackEngine.js');
+  assert.ok(!/var MEDIA_NEIGHBORHOODS/.test(src2) && !/var NEIGHBORHOOD_MEDIA_PROFILES/.test(src2) && !/var HOLIDAY_MEDIA_NEIGHBORHOODS/.test(src2));
+});
+
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

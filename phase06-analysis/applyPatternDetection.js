@@ -235,8 +235,20 @@ function applyPatternDetection_(ctx) {
       calendarContext.calendarAdjusted = true;
     }
 
+    // engine.187 (2026-09-19): a TREND is strain now, not two scattered cycles in seven. `rows` is
+    // newest-first, so count the run from this cycle backwards. With the classifier unpinned, civic
+    // load alternates load-strain / minor-variance — 2-of-7 kept strain-trend on 4 of 4 bench cycles
+    // (and through it the shock flag, applyShockMonitor :251). Now: a RUN of strainThreshold2
+    // consecutive strained cycles, or a clear majority of the window.
+    var consecutiveStrain = 0;
+    for (var cs = 0; cs < civicArr.length; cs++) {
+      if (civicArr[cs] === "load-strain") consecutiveStrain++;
+      else break;
+    }
+    var strainMajority = Math.max(strainThreshold2 + 2, Math.ceil(civicArr.length * 0.6));
+
     // More sensitive: minor-variance accumulation also counts
-    if (strainCycles >= strainThreshold2 ||
+    if (consecutiveStrain >= strainThreshold2 || strainCycles >= strainMajority ||
         (minorVariance >= minorThreshold && negSentCycles >= negSentThreshold)) {
       pattern = "strain-trend";
     }

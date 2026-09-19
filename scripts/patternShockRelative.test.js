@@ -171,5 +171,33 @@ function runShock(curEvents, prevEvents, sOverrides) {
   ok('a surge over last cycle (9 → 14 events) adds the volume points; an ordinary 8 does not', surge.civicLoadScore === texture.civicLoadScore + 4, surge.civicLoadScore + ' vs ' + texture.civicLoadScore);
 }
 
+// engine.187 (2026-09-19): strain-trend is a RUN of strained cycles (or a clear majority), not two
+// scattered ones — alternating load-strain / minor-variance no longer pins the flag (and through it
+// the shock flag).
+{
+  const vm3 = require('vm'), fs3 = require('fs'), path3 = require('path');
+  const pd = { Logger: { log() {} }, Math, JSON, Object, Array, String, Number };
+  vm3.createContext(pd);
+  vm3.runInContext(fs3.readFileSync(path3.join(__dirname, '..', 'phase06-analysis/applyPatternDetection.js'), 'utf8'), pd, { filename: 'applyPatternDetection.js' });
+  // Riley_Digest rows: E(4) events, F(5) issues, I(8) CivicLoad, J(9) drift, K(10) pattern, L(11) shock, M(12) seeds, AB(27) sentiment
+  const row = (civic, events) => { const r = new Array(28).fill(''); r[4] = events; r[5] = ''; r[8] = civic; r[9] = 0; r[10] = ''; r[11] = 'none'; r[12] = 0; r[27] = 0.2; return r; };
+  const runPattern = civicNewestFirst => {
+    const rows = civicNewestFirst.map(c => row(c, 600));
+    const sheet = { getLastRow: () => rows.length + 1, getLastColumn: () => 28,
+      getRange: (r) => ({ getValues: () => [rows[rows.length + 1 - r] || row('stable', 600)] }) };
+    const ctx = { mode: {}, ss: { getSheetByName: () => sheet }, config: { cycleCount: 120 },
+      summary: { cycleId: 120, worldEvents: new Array(9).fill({ severity: 'low' }), cityDynamics: { sentiment: 0.2, culturalActivity: 1, communityEngagement: 1 },
+        holiday: 'none', holidayPriority: 'none', isFirstFriday: false, isCreationDay: false, sportsSeason: 'off-season', worldPopulation: { totalPopulation: 391000 } } };
+    pd.applyPatternDetection_(ctx);
+    return ctx.summary.patternFlag;
+  };
+  const alternating = runPattern(['minor-variance', 'load-strain', 'minor-variance', 'load-strain', 'minor-variance', 'load-strain', 'stable']);
+  ok('alternating load-strain / minor-variance is not a strain trend', alternating !== 'strain-trend', String(alternating));
+  const run2 = runPattern(['load-strain', 'load-strain', 'minor-variance', 'stable', 'stable', 'stable', 'stable']);
+  ok('two consecutive strained cycles IS a strain trend', run2 === 'strain-trend', String(run2));
+  const majority = runPattern(['minor-variance', 'load-strain', 'load-strain', 'load-strain', 'load-strain', 'load-strain', 'stable']);
+  ok('a clear majority of the window is a strain trend even without a run', majority === 'strain-trend', String(majority));
+}
+
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);

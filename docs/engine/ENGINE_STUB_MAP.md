@@ -2437,7 +2437,7 @@
 
 ### applyStorySeeds.js
 - **applyStorySeeds_(ctx)**
-  Reads: S.chaosCarsEvents, S.cityDynamics, S.cityEvents, S.civicLoad, S.crimeMetrics, S.cycleId, S.cycleWeight, S.cycleWeightReason, S.demographicDrift, S.domainPresence, S.editionCoverageTriggers, S.eveningMedia, S.eventArcs, S.famousPeople, S.generationalEvents, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.manualStoryInputs, S.migrationDrift, S.namedSpotlights, S.neighborhoodDemographics, S.neighborhoodDynamics, S.neighborhoodEconomies, S.neighborhoodMigration, S.neighborhoodPulse, S.patternFlag, S.season, S.seasonalStorySeeds, S.shockFlag, S.sportsSeason, S.storySeeds, S.storySeedsUI, S.textureTriggers, S.tier1ChaosEvents, S.weather, S.worldEvents, S.worldPopulation
+  Reads: S.canonHoods, S.chaosCarsEvents, S.cityDynamics, S.cityEvents, S.civicLoad, S.crimeMetrics, S.cycleId, S.cycleWeight, S.cycleWeightReason, S.demographicDrift, S.domainPresence, S.editionCoverageTriggers, S.eveningMedia, S.eventArcs, S.famousPeople, S.generationalEvents, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.manualStoryInputs, S.migrationDrift, S.namedSpotlights, S.neighborhoodDemographics, S.neighborhoodDynamics, S.neighborhoodEconomies, S.neighborhoodMigration, S.neighborhoodPulse, S.patternFlag, S.season, S.seasonalStorySeeds, S.shockFlag, S.sportsSeason, S.sportsZones, S.storySeeds, S.storySeedsUI, S.textureTriggers, S.tier1ChaosEvents, S.weather, S.worldEvents, S.worldPopulation
   Writes: S.activeStorylineCount, S.storySeeds
   Config: ctx.config.cycleCount, ctx.config.manualStoryInputs
   Sheets: Edition_Coverage_Ratings, Storyline_Tracker
@@ -2540,7 +2540,7 @@
 
 ### buildNightLife.js
 - **buildNightlife_(ctx)**
-  Reads: S.cityDynamics, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.neighborhoodEconomies, S.season, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
+  Reads: S.cityDynamics, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.neighborhoodDynamics, S.neighborhoodEconomies, S.season, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
   Writes: S.nightlife, S.nightlifeVolume
   RNG: ctx.rng / safeRand_(ctx)
 

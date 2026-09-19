@@ -171,21 +171,23 @@ fact; the reflection scores the feeling.** Generalised, it answers the question:
 a logged life entry derived from a quote must not re-score what the quote already
 scored.
 
-### 6.3 You cannot log a LifeHistory entry for free
+### 6.3 What a logged line actually scores (CORRECTED)
 
-`nudgesForEvent_` falls through to `DEFAULT_AMBIENT` — "a logged ordinary day" —
-for any tag it does not recognise. Only two tags are inert:
-`STRUCTURAL = { Compressed: true, CareerState: true, EngineEvent: false }`
-(`citizenDialMap.js:203`), and both mean *a summary of events*. `EngineEvent` is
-explicitly **not** inert; it routes through the content rules.
+An earlier version of this section claimed nothing can be written to `LifeHistory`
+without scoring. **That was wrong.** `DEFAULT_AMBIENT` is `{}` (engine.201 ruling
+1): an unmatched line is a plain day and scores nothing.
 
-So there is today no way to write "this happened, and it was already scored
-elsewhere." Every logged line either scores or lies about being a summary.
+The real, narrower risk: `CONTENT_RULES` route on tag **and text**, so verbatim
+reflection prose scores at full strength whenever it happens to contain a trigger
+word, and zero otherwise. Measured: "got the promotion and bought a round for the
+block" returns `{drive:7, composure:2}`; "the diagnosis came back and it was bad"
+returns `{composure:-6}`; "lost the job this week and told nobody", "the funeral
+was small and she cried in the car" and "fell in love, plainly and late" all
+return `{}`.
 
-**The cut that follows:** a third structural marker meaning *logged, scored
-elsewhere*. One entry in `STRUCTURAL`, plus the discipline that the reflection
-write-back path uses it. Life becomes readable in the column without a second
-scoring, and the drain stays the single scorer of a quote.
+So logging quotes verbatim would double-count **unpredictably** — some citizens,
+some days, depending on wording. That is the actual problem to solve, and it is
+smaller than the earlier draft said.
 
 ### 6.4 Page read-back already works — correcting the assumption
 
@@ -239,9 +241,7 @@ The scoring survives; the life does not.
 
 That is exactly what Mike named at the outset, and the obstacle to fixing it is
 the one he also named: if a reflection is additionally logged as a life event, the
-fold scores it a second time (§6.1), on top of the drain. The enabling cut is
-§6.3 — a marker meaning *logged, already scored* — because today nothing can be
-written to that column without being scored.
+fold scores it a second time (§6.1), on top of the drain. §6.3 states the corrected, narrower version of that risk.
 
 ## 7. OPEN — Mike's sections
 
@@ -268,6 +268,10 @@ mechanism can actually carry.*
   subjective rule found already in `nudgesForReflection_`; `DEFAULT_AMBIENT`
   confirmed as the reason nothing logs for free; page read-back confirmed live
   at `wakePerception.js:282`, correcting the assumption it was missing.
+- 2026-09-18 — §6.3 CORRECTED: the claim that nothing logs for free was false;
+  DEFAULT_AMBIENT is {} and an unmatched line scores zero. Real risk is narrower
+  and prose-dependent. Caught by a test written against the claim, after Mike
+  called the research out.
 - 2026-09-18 — §6.5/6.6 rewritten TWICE after Mike pushed back, both times
   correctly. First: the pages ARE POPID-keyed and cron-written (334/943).
   Second, and the substantive one: the engine DOES read citizens' reflection

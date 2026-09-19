@@ -89,8 +89,8 @@ console.log('═══ 1 — first run seeds the level from last cycle\'s observ
   check('1b Piedmont Ave level starts at its C106 index 22, not the authored 25', Math.abs(pa.propertyLevel - 22) <= 3.5, String(pa.propertyLevel));
   check('1c every hood carries all three level columns as finite numbers',
     NM.every(h => [r.written[h].propertyLevel, r.written[h].violentLevel, r.written[h].qolLevel].every(x => isFinite(x) && x > 0)));
-  check('1d the row data written to the tab carries 10 columns in CRIME_METRICS_HEADERS order',
-    sb.CRIME_METRICS_HEADERS.length === 10 && sb.crimeMetricsRowData_('X', dt, 107).length === 10 && sb.crimeMetricsRowData_('X', dt, 107)[7] === dt.propertyLevel);
+  check('1d the row data written to the tab carries 13 columns in CRIME_METRICS_HEADERS order (engine.235 K–M)',
+    sb.CRIME_METRICS_HEADERS.length === 13 && sb.crimeMetricsRowData_('X', dt, 107).length === 13 && sb.crimeMetricsRowData_('X', dt, 107)[7] === dt.propertyLevel);
   check('1e a blank level cell reads null, never 0 (getCrimeMetrics_ contract)',
     (() => { const rows = [['Neighborhood', 'PropertyCrimeIndex', 'ViolentCrimeIndex', 'ResponseTimeAvg', 'ClearanceRate', 'IncidentCount', 'LastUpdated', 'PropertyLevel', 'ViolentLevel', 'QolLevel'], ['H', 40, 30, 8, 0.3, 4, 106, '', '', '']];
       sb.getCrimeMetrics_ = undefined; load(sb, 'utilities/ensureCrimeMetrics.js');
@@ -298,6 +298,21 @@ console.log('═══ 11 — S.crimeMetrics.context: the bands the readers comp
   const cx = runCycle(sandbox(), liveRows(), 107, { demo: flatDemo }, makeRng(8)).ctx.summary.crimeMetrics.context;
   check('11i steady hoods read "steady" or "falling", never undefined', NM.every(h => ['rising', 'falling', 'steady'].indexOf(cx.byHood[h].trend) >= 0));
   check('11j reportingGap is measured from the engine base (finite, |gap| < 0.5): ' + cx.city.reportingGap, isFinite(cx.city.reportingGap) && Math.abs(cx.city.reportingGap) < 0.5);
+}
+
+// ── 13. engine.235 — the engine's read of each hood is persisted to Crime_Metrics K–M ─────────
+console.log('═══ 13 — Trend / Hotspot / PressureRatio ride the row to the tab');
+{
+  const sb = sandbox();
+  const r = runCycle(sb, liveRows(), 107, { demo: flatDemo }, makeRng(13));
+  const H = sb.CRIME_METRICS_HEADERS, iT = H.indexOf('Trend'), iH = H.indexOf('Hotspot'), iP = H.indexOf('PressureRatio');
+  const cx = r.ctx.summary.crimeMetrics.context;
+  const row = h => sb.crimeMetricsRowData_(h, r.written[h], 107);
+  check('13a K–M are appended after QolLevel (self-arming, append-only)', iT === 10 && iH === 11 && iP === 12, JSON.stringify(H.slice(10)));
+  check('13b every hood writes its trend + pressure ratio', NM.every(h => ['rising', 'falling', 'steady'].indexOf(row(h)[iT]) >= 0 && row(h)[iP] === cx.byHood[h].pressureRatio));
+  const hot = cx.city.hotspotHoods;
+  check('13c Hotspot is the score on hotspot rows, blank elsewhere (' + hot.join(', ') + ')',
+    hot.length > 0 && NM.every(h => (hot.indexOf(h) >= 0) === (row(h)[iH] !== '')) && hot.every(h => Number(row(h)[iH]) > 0));
 }
 
 // ── 12. engine.237 — no reader reads the v1.2 names the writer never emitted ─────────────────

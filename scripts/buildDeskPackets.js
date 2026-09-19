@@ -1412,6 +1412,9 @@ function buildEveningContext(cycleMedia, packetText, rileyRow) {
         if (cline.indexOf('ClearanceRate:') === 0) ctx.crimeSnapshot.clearanceRate = parseFloat(cline.replace('ClearanceRate:', '').trim()) || 0;
         if (cline.indexOf('Hotspots:') === 0) ctx.crimeSnapshot.hotspots = cline.replace('Hotspots:', '').trim();
         if (cline.indexOf('PatrolStrategy:') === 0) ctx.crimeSnapshot.patrolStrategy = cline.replace('PatrolStrategy:', '').trim();
+        // engine.235: incidents vs last cycle + police headroom (units ÷ demand)
+        if (cline.indexOf('IncidentTrend:') === 0) ctx.crimeSnapshot.incidentTrend = parseFloat(cline.replace('IncidentTrend:', '').trim()) || 0;
+        if (cline.indexOf('EnforcementHeadroom:') === 0) ctx.crimeSnapshot.enforcementHeadroom = parseFloat(cline.replace('EnforcementHeadroom:', '').trim()) || 0;
       }
     }
 

@@ -30,7 +30,15 @@ var CRIME_METRICS_HEADERS = [
   // → seeded from that row's last observed index).
   'PropertyLevel',
   'ViolentLevel',
-  'QolLevel'
+  'QolLevel',
+  // engine.235 (S470): the engine's own read of the hood this cycle, persisted so the newsroom sees
+  // what the engine saw (was memory-only — Rachel Torres diffed the tab herself). Self-arming K–M.
+  //   Trend         rising / falling / steady — this cycle's property/violent shifts
+  //   Hotspot       hotspot score when the hood is over the city's hotspot bar, else blank
+  //   PressureRatio the hood's mean(property, violent) index ÷ the city median (1 = the city's middle)
+  'Trend',
+  'Hotspot',
+  'PressureRatio'
 ];
 
 var CRIME_METRICS_SHEET_NAME = 'Crime_Metrics';
@@ -375,7 +383,10 @@ function crimeMetricsRowData_(neighborhood, m, cycle) {
     cycle,
     lv(m.propertyLevel),
     lv(m.violentLevel),
-    lv(m.qolLevel)
+    lv(m.qolLevel),
+    m.trend || '',
+    (m.hotspotScore === null || m.hotspotScore === undefined) ? '' : m.hotspotScore,
+    lv(m.pressureRatio)
   ];
 }
 

@@ -302,6 +302,16 @@ function updateCrimeMetrics_Phase3_(ctx) {
   var hotspots = calculateCrimeHotspots_(newMetrics, adjacency);
   var context = buildCrimeReaderContext_(newMetrics, hotspots, cityWide, categoryCityWide,
     predictedCityIncidents, policingCapacity, patrolStrategy, shifts);
+  // engine.235: the engine's read of each hood rides the row to Crime_Metrics K–M (Trend / Hotspot /
+  // PressureRatio) — the newsroom reads the tab, never S.
+  var hotScore = {};
+  for (var hsI = 0; hsI < hotspots.length; hsI++) hotScore[hotspots[hsI].neighborhood] = hotspots[hsI].score;
+  for (var hood2 in newMetrics) {
+    if (!newMetrics.hasOwnProperty(hood2) || !context.byHood[hood2]) continue;
+    newMetrics[hood2].trend = context.byHood[hood2].trend;
+    newMetrics[hood2].pressureRatio = context.byHood[hood2].pressureRatio;
+    newMetrics[hood2].hotspotScore = hotScore.hasOwnProperty(hood2) ? hotScore[hood2] : null;
+  }
 
   // Summary
   S.crimeMetrics = {

@@ -25,7 +25,9 @@ const SEAT = {
 function build(cycle, { root, beats }) {
   const rows = (beats.Crime_Metrics || []).map(r => ({
     hood: r.Neighborhood, property: K.num(r.PropertyCrimeIndex), violent: K.num(r.ViolentCrimeIndex), response: K.num(r.ResponseTimeAvg),
-    clearance: K.num(r.ClearanceRate), incidents: K.num(r.IncidentCount)
+    clearance: K.num(r.ClearanceRate), incidents: K.num(r.IncidentCount),
+    // engine.235: the engine's own read of the hood (Crime_Metrics K–M; blank before the first fire that arms them)
+    trend: String(r.Trend || '').trim() || null, hotspot: K.num(r.Hotspot), pressure: K.num(r.PressureRatio)
   })).filter(r => r.hood && r.incidents != null)
     .sort((a, b) => b.incidents - a.incidents || (b.violent || 0) - (a.violent || 0) || String(a.hood).localeCompare(String(b.hood)));
   if (!rows.length) return K.emptySlice(SEAT, cycle, 'no Crime_Metrics rows');
@@ -44,6 +46,12 @@ function build(cycle, { root, beats }) {
   const facts = [{ text: K.fmtInt(total) + ' incidents across ' + rows.length + ' neighborhoods; most in ' + rows.slice(0, 5).map(r => r.hood + ' ' + r.incidents).join(', ') + '; fewest in ' + rows.slice(-3).map(r => r.hood + ' ' + r.incidents).join(', '), src }];
   facts.push({ text: fmt(lead), src });
   if (slowest !== lead) facts.push({ text: 'Slowest response: ' + fmt(slowest), src });
+  // engine.235: what the engine itself flagged — hotspots against the city's own middle, and which
+  // hoods moved this cycle. The engine computed these every cycle and kept them in memory until now.
+  const hot = rows.filter(r => r.hotspot != null).sort((a, b) => b.hotspot - a.hotspot);
+  if (hot.length) facts.push({ text: 'Engine hotspots this cycle (over the city\'s own bar): ' + hot.map(r => r.hood + (r.pressure != null ? ' (' + r.pressure + '× the city median)' : '')).join(', '), src });
+  const rising = rows.filter(r => r.trend === 'rising').map(r => r.hood), easing = rows.filter(r => r.trend === 'falling').map(r => r.hood);
+  if (rising.length || easing.length) facts.push({ text: 'Moved this cycle — rising: ' + (rising.join(', ') || 'none') + '; easing: ' + (easing.join(', ') || 'none'), src });
   const people = K.rosterAtSectors(beats, /\bpublic safety\b|crisis response/i)
     .map(w => K.person(w.popid, w.name, w.role, null, 'works at ' + w.business + ' (Employment_Roster)', w.business));
   // Desk-signal incident rows are pointers, not the source (optional file).

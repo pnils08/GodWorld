@@ -529,6 +529,12 @@ function buildCyclePacket_(ctx) {
     if (enforce.patrolStrategy) {
       lines.push('PatrolStrategy: ' + enforce.patrolStrategy);
     }
+    // engine.235: the engine's city read — incidents vs last cycle, police headroom (units ÷ demand)
+    var crimeCtxCity = (crime.context && crime.context.city) || null;
+    if (crimeCtxCity) {
+      lines.push('IncidentTrend: ' + round2(crimeCtxCity.incidentTrend));
+      lines.push('EnforcementHeadroom: ' + round2(crimeCtxCity.enforcementCapacity));
+    }
     lines.push('');
   }
 

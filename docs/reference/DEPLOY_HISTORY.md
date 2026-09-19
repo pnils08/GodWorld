@@ -129,6 +129,15 @@ pointers:
 
 ## PROD deploy log — full trail
 
+### PROD @100 — moment triggers: six new story hooks, and triggers stop losing to the phase hook (2026-09-19 ~02:10 Chicago, engine-sheet)
+
+Commit `b58d8a2b`, two files vs @99: `storyHook.js` (TRIGGER_HOOKS +draft-night / trade-deadline / all-star / series-clinch / walk-off / no-hitter; moment hooks collected apart from the one-per-domain dedupe so the phase hook no longer wins every tie) and `setupSportsFeedValidation.js` (EventTrigger list = the 18 hook keys; EventType + breaking-news / awards / community-outreach; moment note). Apps Script version 89, read back @89; pull-back 169 js byte-identical, 0 test files.
+
+**Bench SANDBOX 0908:** C116 on @55 (hooks added, dedupe unfixed) — `series-clinch` authored, NO trigger hook on the deck, only the p3 PLAYOFFS phase hook → cause found (dedupe key domain+hookType, first-pushed wins ties). C117 on @56 = `b58d8a2b`, predictions held: ok:true 137 s, 0 failed, 0 Engine_Errors; SPORTS deck = PLAYOFFS p3 + "A's clinch the series! Celebration in Jack London…" p3 (Anthony) + "Oaks struggling — L3…" p2 (Ariana Reyes). **BENCH-ONLY, NEVER REPLAY:** bench feed rows C116 (A's series-clinch) and C117 (A's series-clinch, Oaks cold-streak), Notes `2026-09-19 BENCH-ONLY …`, and everything C116–C117 wrote.
+
+- **Expect at live C108:** sports hooks follow the LAST A's / Oaks row's EventTrigger. As authored at 02:10: A's last row `playoffs`, Oaks last row `pre-season` — neither is a hook word, so C108 carries the PLAYOFFS phase hook only (the Oaks `cold-streak` on the earlier season-state row is overridden by the later row).
+- **Rollback:** `clasp deploy -i AKfycbwUvd4… -V 88` repoints to @99.
+
 ### PROD @99 — sports feed setup audit (2026-09-19 ~01:40 Chicago, engine-sheet)
 
 Commit `9bd306c7`, one file vs @98: `utilities/setupSportsFeedValidation.js` (off-cycle menu utility — no cycle path; vm load + 0 collisions): Oakland HomeNeighborhood dropdown read from Neighborhood_Map at setup (22 hoods), the six authored EventTypes listed, every column note rewritten from the code. Apps Script version 88, read back @88; pull-back 169 js byte-identical, 0 test files. Takes effect when the **Setup Sports Feed Validation** menu item is re-run. No cycle-behaviour change — nothing to smoke at C108 beyond §PROD @98.

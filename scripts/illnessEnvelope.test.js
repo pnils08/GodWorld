@@ -283,5 +283,29 @@ assert('B2 the richest hood (Rockridge/Jack London) runs below the poorest (KONO
   assert('C3 no hot hood → no HEALTH seed', c3.length === 0, 'got ' + c3.length);
 }
 
+// ═══════════════════════════════════════════════════════════════════════════
+// D. engine.240 — a city signal's seed lands on the hood that carries it (the per-hood maps the
+//    engine computed), never a named hood (was Rockridge / Jack London / Lake Merritt …).
+// ═══════════════════════════════════════════════════════════════════════════
+{
+  let uu = 0;
+  const real = { Utilities: { getUuid: () => 'uuid-' + (++uu) }, Logger: { log: () => {} }, safeRand_: ctx => ctx.rng,
+    Math, JSON, Object, Array, String, Number, Date, RegExp, Error, isNaN, isFinite, parseInt, parseFloat };
+  const sb = new Proxy(real, { has: () => true, get: (t, k) => (k in t) ? t[k] : (typeof k === 'symbol' ? undefined : function () { return undefined; }) });
+  vm.createContext(sb);
+  const p = path.join(__dirname, '..', 'phase07-evening-media', 'applyStorySeeds.js');
+  vm.runInContext(fs.readFileSync(p, 'utf8'), sb, { filename: p });
+  const S = { cycleId: 114, neighborhoodDemographics: {}, demographicDrift: {}, generationalEvents: [], worldEvents: [], weather: {},
+    cityDynamics: { retail: 1.4, nightlife: 1.35, publicSpaces: 1.0, sentiment: 0 }, worldPopulation: {}, domainPresence: {}, eventArcs: [], crimeMetrics: {},
+    neighborhoodDynamics: { Dimond: { retail: 1.5, nightlife: 0.9 }, KONO: { retail: 1.1, nightlife: 1.6 }, Rockridge: { retail: 1.0, nightlife: 1.0 } } };
+  const ctx = { ss: null, config: {}, summary: S, rng: () => 0.6, ledger: null };
+  real.applyStorySeeds_(ctx);
+  const seeds = ctx.summary.storySeeds || [];
+  const retail = seeds.find(x => x.seedType === 'retail' || /Retail surge/.test(x.text || ''));
+  const night = seeds.find(x => x.seedType === 'nightlife' || /nightlife presence/.test(x.text || ''));
+  assert('D1 the retail seed lands on the hood with the highest retail (Dimond), not Rockridge', retail && retail.neighborhood === 'Dimond', retail && JSON.stringify(retail));
+  assert('D2 the nightlife seed names the busiest nightlife hood (KONO) in hood and text', night && night.neighborhood === 'KONO' && /KONO buzzing/.test(night.text), night && JSON.stringify(night));
+}
+
 console.log('\n' + passed + ' passed, ' + failed + ' failed');
 process.exit(failed ? 1 : 0);

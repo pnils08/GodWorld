@@ -158,6 +158,25 @@ function applyStorySeeds_(ctx) {
   var seeds = [];
   var cycle = S.cycleId || (ctx.config && ctx.config.cycleCount) || 0;
 
+  // engine.240 (2026-09-19, SIM_DOCTRINE §17): a city signal's seed lands on the hood that
+  // actually carries it — the per-hood maps the engine already computed this cycle
+  // (S.neighborhoodDynamics Phase 2, S.neighborhoodMigration Phase 6, S.neighborhoodEconomies
+  // Phase 6, S.neighborhoodPulse Phase 5) — never a named hood (was Laurel / Downtown /
+  // Fruitvale / West Oakland / Lake Merritt / Rockridge / Jack London / Uptown / Temescal
+  // literals, the "invented specificity" class the crisis-bucket fix already killed below).
+  // dir +1 = highest, −1 = lowest; '' when no hood carries the field (the seed is citywide).
+  function hoodTop_(map, field, dir) {
+    var best = '', bestV = null;
+    map = map || {};
+    for (var h in map) {
+      if (!map.hasOwnProperty(h) || !map[h]) continue;
+      var v = Number(map[h][field]);
+      if (!isFinite(v)) continue;
+      if (bestV === null || (dir > 0 ? v > bestV : v < bestV)) { bestV = v; best = h; }
+    }
+    return best;
+  }
+
   // ═══════════════════════════════════════════════════════════════════════════
   // v3.11 (S206): ENGINE A — Pre-load raw sheets for priority engine
   // ═══════════════════════════════════════════════════════════════════════════
@@ -1003,7 +1022,7 @@ function applyStorySeeds_(ctx) {
   if (culturalActivity >= 1.5) {
     seeds.push(makeSeed(
       "Cultural vibrancy peaks across Oakland. Arts scene flourishing.",
-      'CULTURE', 'Uptown', 3, 'cultural'
+      'CULTURE', hoodTop_(S.neighborhoodDynamics, 'culturalActivity', 1), 3, 'cultural'
     ));
   } else if (culturalActivity >= 1.3) {
     seeds.push(makeSeed(
@@ -1029,7 +1048,7 @@ function applyStorySeeds_(ctx) {
   } else if (communityEngagement >= 1.3) {
     seeds.push(makeSeedWithCitizens_(
       "Strong community bonds shaping neighborhood life. Connection stories.",
-      'COMMUNITY', 'Temescal', 2, 'engagement'
+      'COMMUNITY', hoodTop_(S.neighborhoodDynamics, 'communityEngagement', 1), 2, 'engagement'
     ));
   } else if (communityEngagement <= 0.6) {
     seeds.push(makeSeedWithCitizens_(
@@ -1146,14 +1165,14 @@ function applyStorySeeds_(ctx) {
   if (pattern === 'micro-event-wave') {
     seeds.push(makeSeed(
       "Wave of micro-events spreading through neighborhoods. Connected or coincidence?",
-      'GENERAL', 'Laurel', 2, 'pattern'
+      'GENERAL', hoodTop_(S.neighborhoodPulse, 'events', 1), 2, 'pattern'
     ));
   }
 
   if (pattern === 'strain-trend') {
     seeds.push(makeSeed(
       "Emerging strain trend quietly reshaping community atmosphere. Pressure building.",
-      'CIVIC', 'Downtown', 3, 'pattern'
+      'CIVIC', hoodTop_(S.neighborhoodDynamics, 'sentiment', -1), 3, 'pattern'
     ));
   }
 
@@ -1178,7 +1197,7 @@ function applyStorySeeds_(ctx) {
   if (shock && shock !== 'none') {
     seeds.push(makeSeed(
       "Sudden systemic jolt disrupts normal cycle flow. Breaking developments.",
-      'CIVIC', 'Downtown', 3, 'shock'
+      'CIVIC', hoodTop_(S.neighborhoodDynamics, 'sentiment', -1), 3, 'shock'
     ));
 
     // v3.2: Calendar-contextual shock seeds
@@ -1239,7 +1258,7 @@ function applyStorySeeds_(ctx) {
   if (drift > 30) {
     seeds.push(makeSeed(
       "Notable population inflow reshaping neighborhoods. New faces, new dynamics.",
-      'COMMUNITY', 'Fruitvale', 2, 'demographic'
+      'COMMUNITY', hoodTop_(S.neighborhoodMigration, 'drift', 1), 2, 'demographic'
     ));
   } else if (drift > 15) {
     seeds.push(makeSeed(
@@ -1251,7 +1270,7 @@ function applyStorySeeds_(ctx) {
   if (drift < -30) {
     seeds.push(makeSeed(
       "Population outflow alters community composition. Who's leaving and why?",
-      'COMMUNITY', 'West Oakland', 2, 'demographic'
+      'COMMUNITY', hoodTop_(S.neighborhoodMigration, 'drift', -1), 2, 'demographic'
     ));
   } else if (drift < -15) {
     seeds.push(makeSeed(
@@ -1314,7 +1333,7 @@ function applyStorySeeds_(ctx) {
   if (sentiment >= 0.35) {
     seeds.push(makeSeed(
       "Positive sentiment lifting community engagement. What's driving the mood?",
-      'COMMUNITY', 'Lake Merritt', 2, 'sentiment'
+      'COMMUNITY', hoodTop_(S.neighborhoodDynamics, 'sentiment', 1), 2, 'sentiment'
     ));
   } else if (sentiment >= 0.2) {
     seeds.push(makeSeed(
@@ -1342,7 +1361,7 @@ function applyStorySeeds_(ctx) {
   if (econLabel === 'strong' || econLabel === 'booming') {
     seeds.push(makeSeed(
       "Strong economic posture supporting steady activity. Business confidence up.",
-      'BUSINESS', 'Rockridge', 1, 'economy'
+      'BUSINESS', hoodTop_(S.neighborhoodEconomies, 'mood', 1), 1, 'economy'
     ));
   }
 
@@ -1365,9 +1384,10 @@ function applyStorySeeds_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
 
   if (dynamics.nightlife >= 1.3) {
+    var nightHood = hoodTop_(S.neighborhoodDynamics, 'nightlife', 1);
     seeds.push(makeSeed(
-      "High nightlife presence shaping evening flow. Jack London buzzing.",
-      'NIGHTLIFE', 'Jack London', 2, 'nightlife'
+      "High nightlife presence shaping evening flow." + (nightHood ? " " + nightHood + " buzzing." : ""),
+      'NIGHTLIFE', nightHood, 2, 'nightlife'
     ));
   }
 
@@ -1381,14 +1401,14 @@ function applyStorySeeds_(ctx) {
   if (dynamics.publicSpaces >= 1.3) {
     seeds.push(makeSeed(
       "Public space activity influencing city energy. People are out.",
-      'COMMUNITY', 'Lake Merritt', 2, 'publicspace'
+      'COMMUNITY', hoodTop_(S.neighborhoodDynamics, 'publicSpaces', 1), 2, 'publicspace'
     ));
   }
 
   if (dynamics.retail >= 1.3) {
     seeds.push(makeSeed(
       "Retail surge across commercial corridors. Shoppers on the move.",
-      'BUSINESS', 'Rockridge', 1, 'retail'
+      'BUSINESS', hoodTop_(S.neighborhoodDynamics, 'retail', 1), 1, 'retail'
     ));
   }
 

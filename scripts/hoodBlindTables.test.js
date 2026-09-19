@@ -250,5 +250,30 @@ t('22 hoods get a media effect; a safety event moves perception by 0.1 × (0.8 +
   assert.ok(!/var MEDIA_NEIGHBORHOODS/.test(src2) && !/var NEIGHBORHOOD_MEDIA_PROFILES/.test(src2) && !/var HOLIDAY_MEDIA_NEIGHBORHOODS/.test(src2));
 });
 
+console.log('T10 condition city events land on the hoods carrying the condition (engine.240)');
+t('a low-mood city holds its civic forums in the lowest-mood hoods; a bust holds job fairs in the weakest economies', () => {
+  const w = { console, Logger: { log() {} }, Math, JSON };
+  vm.createContext(w);
+  load(w, 'phase04-events/buildCityEvents.js');
+  const lowHoods = ['Dimond', 'Ivy Hill', 'Glenview'], bustHoods = ['San Antonio', 'Eastlake', 'Brooklyn'];
+  const LOW = /(Civic Concern Forum|Neighborhood Watch Meet|Public Dialogue Circle)$/, BUST = /(Job Fair|Community Resource Day|Workers Rights Forum)$/;
+  let drawn = 0;
+  [0.37, 0.11, 0.73, 0.59, 0.23].forEach(seed => {
+    const ctx = { rng: (() => { let i = 0; return () => ((i++ * seed) % 1); })(), config: {}, summary: {
+      season: 'Winter', weather: { type: 'clear', impact: 1 }, weatherMood: {}, worldEvents: [],
+      cityDynamics: { sentiment: -0.4, publicSpaces: 1, nightlife: 1 }, economicMood: 30, holiday: 'none',
+      neighborhoodDynamics: { Dimond: { sentiment: -0.5 }, 'Ivy Hill': { sentiment: -0.45 }, Glenview: { sentiment: -0.42 }, Rockridge: { sentiment: 0.3 } },
+      neighborhoodEconomies: { 'San Antonio': { mood: 20 }, Eastlake: { mood: 25 }, Brooklyn: { mood: 28 }, Downtown: { mood: 70 } } } };
+    w.buildCityEvents_(ctx);
+    (ctx.summary.cityEventDetails || []).forEach(e => {
+      if (LOW.test(e.name)) { drawn++; assert.ok(lowHoods.includes(e.neighborhood) && e.name.indexOf(e.neighborhood) === 0, JSON.stringify(e)); }
+      if (BUST.test(e.name)) { drawn++; assert.ok(bustHoods.includes(e.neighborhood) && e.name.indexOf(e.neighborhood) === 0, JSON.stringify(e)); }
+    });
+  });
+  assert.ok(drawn >= 2, 'only ' + drawn + ' condition events drawn across 5 seeds');
+  const src2 = src('phase04-events/buildCityEvents.js');
+  assert.ok(!/"West Oakland Neighborhood Watch Meet"/.test(src2) && !/"Fruitvale Job Fair"/.test(src2) && !/"Rockridge Investment Summit"/.test(src2));
+});
+
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

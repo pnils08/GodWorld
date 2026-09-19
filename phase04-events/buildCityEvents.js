@@ -200,43 +200,58 @@ function buildCityEvents_(ctx) {
     { name: "West Oakland Industrial Fog Art Exhibit", neighborhood: "West Oakland" }
   ];
 
-  var CHAOS_EVENTS = [
-    { name: "Downtown Civic Response Meeting", neighborhood: "Downtown" },
-    { name: "Fruitvale Emergency Town Briefing", neighborhood: "Fruitvale" },
-    { name: "West Oakland Neighborhood Stabilization Panel", neighborhood: "West Oakland" }
-  ];
+  // engine.240 (2026-09-19, SIM_DOCTRINE §17): the six CONDITION pools below fire on a city signal
+  // (chaos, mood, economy, nightlife) and were pinned to 2020s-Oakland hoods — trouble always in
+  // Downtown / Fruitvale / West Oakland, money always in Downtown / Jack London / Rockridge. They
+  // are templates now, filled with the hoods that carry the condition this cycle (the per-hood maps
+  // the engine computed: S.neighborhoodDynamics, S.neighborhoodEconomies, the world events' own
+  // hoods). No hood carries it → no event (no invented location). Seasonal / weather / cozy pools
+  // stay: pleasant local colour spread across hoods (SIM_DOCTRINE §13).
+  function rankHoods_(map, field, dir) {
+    var rows = [];
+    map = map || {};
+    for (var h in map) {
+      if (!map.hasOwnProperty(h) || !map[h]) continue;
+      var v = Number(map[h][field]);
+      if (isFinite(v)) rows.push([h, v]);
+    }
+    rows.sort(function(a, b) { return dir > 0 ? b[1] - a[1] : a[1] - b[1]; });
+    var out = [];
+    for (var i = 0; i < rows.length; i++) out.push(rows[i][0]);
+    return out;
+  }
+  function eventHoods_() {   // hoods of this cycle's world events, busiest first
+    var n = {};
+    for (var i = 0; i < chaos.length; i++) { var h = chaos[i] && chaos[i].neighborhood; if (h) n[h] = (n[h] || 0) + 1; }
+    var m = {};
+    for (var k in n) if (n.hasOwnProperty(k)) m[k] = { c: n[k] };
+    return rankHoods_(m, 'c', 1);
+  }
+  function fillHoods_(templates, hoods) {
+    var out = [];
+    for (var i = 0; i < templates.length && i < hoods.length; i++) {
+      out.push({ name: templates[i].replace('{hood}', hoods[i]), neighborhood: hoods[i] });
+    }
+    return out;
+  }
+  var nd = S.neighborhoodDynamics || {};
+  var ne = S.neighborhoodEconomies || {};
+  var CHAOS_EVENTS = fillHoods_(["{hood} Civic Response Meeting", "{hood} Emergency Town Briefing", "{hood} Neighborhood Stabilization Panel"], eventHoods_());
+  var HIGH_SENTIMENT = fillHoods_(["{hood} Community Joy Parade", "{hood} Good News Gathering", "{hood} Volunteer Boost Rally"], rankHoods_(nd, 'sentiment', 1));
+  var LOW_SENTIMENT = fillHoods_(["{hood} Civic Concern Forum", "{hood} Neighborhood Watch Meet", "{hood} Public Dialogue Circle"], rankHoods_(nd, 'sentiment', -1));
+  var NIGHTLIFE_EVENTS = fillHoods_(["{hood} Neon Terrace DJ Night", "{hood} Rooftop Mixer", "{hood} After-Dark Cultural Showcase", "{hood} Late Night Gallery Walk", "{hood} Club Crawl"], rankHoods_(nd, 'nightlife', 1));
+  var ECON_BOOM = fillHoods_(["{hood} Business Gala", "{hood} Startup Showcase", "{hood} Investment Summit"], rankHoods_(ne, 'mood', 1));
+  var ECON_BUST = fillHoods_(["{hood} Job Fair", "{hood} Community Resource Day", "{hood} Workers Rights Forum"], rankHoods_(ne, 'mood', -1));
 
-  var HIGH_SENTIMENT = [
-    { name: "Lake Merritt Community Joy Parade", neighborhood: "Lake Merritt" },
-    { name: "Fruitvale Good News Gathering", neighborhood: "Fruitvale" },
-    { name: "Temescal Volunteer Boost Rally", neighborhood: "Temescal" }
-  ];
 
-  var LOW_SENTIMENT = [
-    { name: "Downtown Civic Concern Forum", neighborhood: "Downtown" },
-    { name: "West Oakland Neighborhood Watch Meet", neighborhood: "West Oakland" },
-    { name: "Fruitvale Public Dialogue Circle", neighborhood: "Fruitvale" }
-  ];
 
-  var NIGHTLIFE_EVENTS = [
-    { name: "Jack London Neon Terrace DJ Night", neighborhood: "Jack London" },
-    { name: "Downtown Rooftop Mixer", neighborhood: "Downtown" },
-    { name: "Lake Merritt After-Dark Cultural Showcase", neighborhood: "Lake Merritt" },
-    { name: "Temescal Late Night Gallery Walk", neighborhood: "Temescal" },
-    { name: "Uptown Club Crawl", neighborhood: "Uptown" }
-  ];
 
-  var ECON_BOOM = [
-    { name: "Downtown Business Gala", neighborhood: "Downtown" },
-    { name: "Jack London Startup Showcase", neighborhood: "Jack London" },
-    { name: "Rockridge Investment Summit", neighborhood: "Rockridge" }
-  ];
 
-  var ECON_BUST = [
-    { name: "Fruitvale Job Fair", neighborhood: "Fruitvale" },
-    { name: "West Oakland Community Resource Day", neighborhood: "West Oakland" },
-    { name: "Downtown Workers Rights Forum", neighborhood: "Downtown" }
-  ];
+
+
+
+
+
 
   var COZY_EVENTS = [
     { name: "Laurel Fireside Reading Night", neighborhood: "Laurel" },
@@ -576,7 +591,7 @@ function buildCityEvents_(ctx) {
   if (nightlife >= 1.2) addEvents_(NIGHTLIFE_EVENTS, 1, ["source:nightlife"]);
 
   if (publicSpace >= 1.3) {
-    addEvents_([{ name: "Lake Merritt Open Plaza Community Flow Event", neighborhood: "Lake Merritt" }], 1, ["source:publicSpace"]);
+    addEvents_(fillHoods_(["{hood} Open Plaza Community Flow Event"], rankHoods_(nd, 'publicSpaces', 1)), 1, ["source:publicSpace"]);   // engine.240: was a Lake Merritt literal
   }
 
   // ═══════════════════════════════════════════════════════════════════════════

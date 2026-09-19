@@ -1,0 +1,24 @@
+{
+ "sheetIdTail": "TH8Bjk",
+ "header": [
+  "Neighborhood",
+  "PropertyCrimeIndex",
+  "ViolentCrimeIndex",
+  "ResponseTimeAvg",
+  "ClearanceRate",
+  "IncidentCount",
+  "LastUpdated",
+  "PropertyLevel",
+  "ViolentLevel",
+  "QolLevel"
+ ],
+ "row11": [
+  "Montclair",
+  "17",
+  "12",
+  "10.5",
+  "0.15",
+  "4",
+  "105"
+ ]
+}

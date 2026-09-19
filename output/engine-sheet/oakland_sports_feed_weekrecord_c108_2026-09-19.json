@@ -1,0 +1,42 @@
+{
+ "sheetIdTail": "TH8Bjk",
+ "column": "S WeekRecord",
+ "cleared": [
+  {
+   "row": 223,
+   "cycle": "108",
+   "team": "A's",
+   "value": "4-1"
+  },
+  {
+   "row": 224,
+   "cycle": "108",
+   "team": "A's",
+   "value": "4-1"
+  },
+  {
+   "row": 225,
+   "cycle": "108",
+   "team": "A's",
+   "value": "4-1"
+  },
+  {
+   "row": 226,
+   "cycle": "108",
+   "team": "A's",
+   "value": "4-1"
+  },
+  {
+   "row": 227,
+   "cycle": "108",
+   "team": "Oaks",
+   "value": "0-1"
+  },
+  {
+   "row": 228,
+   "cycle": "108",
+   "team": "Oaks",
+   "value": "0-1"
+  }
+ ]
+}

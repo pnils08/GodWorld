@@ -16,6 +16,7 @@ pointers:
   - "[[../engine/ROLLOUT_PLAN]] — engine.194 / .202 / .203 / .204 / .205 / .206 / .207 carry the pending state"
   - "[[../plans/2026-09-11-sports-as-a-lived-system]] — the plan this ignited; rulings live there, findings live here"
   - "Sibling research (Mike-direct S446): every sports research file cross-points to the others and all of them feed the plan. Add the back-pointer in the same commit as the new file."
+  - "[[2026-09-18-sports-intensity-and-game-day-economy]] — sibling: consumer census, per-franchise intensity candidates and city-vs-zone split for plan Tasks 3/4/10"
   - "[[index]] — registered here"
   - "[[../SIM_DOCTRINE]] §15 a gate that can't fire, §16 a column that never moves is scenery"
 ---
@@ -218,6 +219,7 @@ And `deepestSportsPhase_` resolves the city phase as the **max depth across fran
 - 2026-09-12 — CORRECTIONS after Mike challenged the premise: `TraitProfile` is the readable face of `DialState`, not a separate layer (was asserted from the column name, never read — wrong); `~40 files` replaced with the counted 64; branch census counted (165/185 at the three extremes). Two extraction principles added on the failure itself.
 - 2026-09-12 — §5c added: `S.sportsAtmosphereEnabled` permanently false on live (World_Config has zero `sportsState*` keys), nine consumers dark; `S.sportsSeason` is the real channel at ~40 files; ungated consumers listen only for championship/playoffs; `deepestSportsPhase_` takes the max across franchises. `Sports_Calendar` confirmed dead per Mike. engine.210/.211 filed. Corrected the §2 "crime has no sports linkage" line.
 - 2026-09-12 — Dial-system trace (F6 in the plan): `DialState` is ledger **column 48**, JSON `{base,mood,streak}`, 919/930 rows — a ninth dial costs no schema change. Sports' whole dial footprint is `'Sports': {outabout:1}` (citizenDialMap.js:156). `DIALS` array duplicated across six files. Fandom RULED as dial 9 → engine.208; franchise weight as a drifting number → engine.209.
+- 2026-09-18 — Sibling [[2026-09-18-sports-intensity-and-game-day-economy]] builds on §1-6 for Tasks 3/4/10; C107 sports sentiment reached 0.094 against the ±0.10 clamp (series records parse where postseason `0-0` did not).
 
 ## Changelog
 

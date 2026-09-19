@@ -60,9 +60,9 @@ A wake becomes legible as a turn when its pack answers: *where am I on my ladder
 - **What the effects actually move:** PHASE_INTENSITY × DOMAIN_EFFECTS (applyInitiativeImplementationEffects.js:179, :207).
   - health → hood illness (engine.132), but only in delivering phases.
   - transit → stations and corridors (engine.183).
-  - Every other domain moves only mood scalars: sentiment, engagement, retail, nightlife, traffic.
+  - Every other domain moves only mood and activity scalars (sentiment, engagement, retail, nightlife, traffic), city-wide and per hood through the neighborhood fold (applyCityDynamics.js:1425-1460).
   - OARI (safety) has been at full intensity since C82 and never touches Crime_Metrics.
-  - The Stabilization Fund (economic) has been disbursing since C78 and never touches income, jobs or businesses.
+  - The Stabilization Fund (economic) has been disbursing since C78. It lifts hood retail and nightlife activity, but never touches income, Employment_Roster or Business_Ledger rows.
   - The Temescal health center, the answer to the C34 crisis, is `construction-active`, so it publishes no illness relief at all.
 - **Approval is already built for this game.** engine.139: a phase transition pays once, completion pays once, and sitting or silence drains every cycle. A seat under 40 draws a challenger from the ledger; under 20 it loses the chair. engine.213: approval reads the district against the city's middle.
 
@@ -84,6 +84,8 @@ A wake becomes legible as a turn when its pack answers: *where am I on my ladder
   Without that wire, three stages are admin tracking with fewer boxes — the same nothing, finished faster.
 - **"Not time-based" still needs a losing clock.** Stages clear on work, never on the calendar. But a stage that hasn't cleared within N cycles drops to `stalled`, which costs its owner — engine.139 charges a failed phase less than silence, but it still costs. The calendar stops being how you win and becomes how you lose. That keeps the 4–5-cycle rule, and it runs both ways (SIM_DOCTRINE §15).
 - **Approval needs no redesign.** Three stage clears plus completion are four payable events, and the drain for sitting stays. That is Mike's game: you raise your number by moving your hood.
+- **advisor:** Stage 2 has no clear condition the engine can observe today. The datawakes reach no sheet (engine.213), so "Standing" would be an agent's milestone prose again. Stages 1 and 3 are observable now: the vote result, and a target metric moving. The honest interim is a two-stage gate — Funded → Delivering — with Standing added once the datawakes persist. That is a real fork for Mike: ship two stages now, or wait for the datawake write path.
+- **Mags, on the advisor's point:** agreed, and my lean is to ship two stages now. Waiting leaves all six rows on the old ladder for as long as the datawake write path takes, and a middle stage can slot in later without changing what stages 1 and 3 mean.
 
 ### Mags take — petition to get on the board (Mike's addition, not in kimi's draft)
 
@@ -92,7 +94,9 @@ A wake becomes legible as a turn when its pack answers: *where am I on my ladder
   - "How is the West Oakland Stabilization Fund being tracked and distributed?"
   - "How can I ensure Downtown and East Oakland adopt the West Oakland model?"
 
-  They are petitions in all but name, and nothing reads them that way today.
+  They read like petitions, and nothing treats them as petitions today.
+- **advisor (verified):** those 70 measure the wake schedule, not citizens organizing. 66 of the 70 are `PRESS` rows — newsroom interview wakes asking citizens civic questions. Two are Discord `CONVO`, and only two come from citizens' own daily wakes. The C103 spike follows the cron schedule, not a movement in a hood. Signatures have to be a ledger query on citizens whose condition matches the problem. Reflections can raise a proposal's visibility, but if they count as signatures, an LLM is voting.
+- **Mags, on the advisor's point:** agreed. That corrects my first read. The signature count is the ledger query; the civic reflections become the "people are talking about it" signal a seat can point to when it files.
 - **The engine counts the signatures; no LLM declares them.** A seat files a proposal naming a hood problem. Signatures come from:
   - citizens in the affected hoods whose own condition matches the problem — rent-burdened households for housing, the sick for health, recent victims for safety;
   - Civic-tagged wake reflections that name the same problem.
@@ -167,7 +171,7 @@ Upgrade the work-wake sports node from registry-listed players to **event-trigge
 3. **Petition order and bar.** Do citizens raise a problem and a seat adopts it, or does the seat propose and citizens sign? What share of the affected hood's people makes the bar?
 4. **The losing clock.** How many cycles may a stage sit before it stalls? Doctrine puts the whole initiative at about 4–5 cycles, which works out to 1–2 cycles per stage.
 5. **When does the benefit arrive?** Only at stage 3, or partly at stage 2 — a clinic that's open but hasn't moved illness yet?
-6. **The six live rows.** Convert them into stages (OARI would sit at stage 2 and need Crime_Metrics to move to clear stage 3), or let them finish under the old rules?
+6. **The six live rows.** Convert them into stages (OARI would sit at stage 2 and need Crime_Metrics to move to clear stage 3), or let them finish under the old rules? Two don't fit either way: Baylight (INIT-006) is a `sports`-domain capital project with no target metric, and the Fruitvale transit hub (INIT-003) is a $230M visioning project that has never had a council vote. Do they get stages, or stay on the old ladder as the two exceptions?
 7. **Does clearing a stage make the news, or only finishing?**
 
 ## Rollout row (proposed — for the accepting Claude seat to file)
@@ -181,7 +185,7 @@ Upgrade the work-wake sports node from registry-listed players to **event-trigge
 ## Changelog
 
 - 2026-09-19 (kimi) — Initial draft. Builder approved filing in-session; game-loop extension to all wakes (bonds/marriage/kids/house/Heritage_Ledger/media/career) added same day, same approval.
-- 2026-09-19 (research-build, S467) — Mike's second-pass direction captured above §3; Mags takes added under §3 (board state, three-stage gate, petition), §4 and §5; sim questions in §9. Kimi's text unchanged.
+- 2026-09-19 (research-build, S467) — Mike's second-pass direction captured above §3; Mags takes added under §3 (board state, three-stage gate, petition), §4 and §5; sim questions in §9. Kimi's text unchanged. Same day: the advisor's independent read added as `advisor:` lines under the stage gate and the petition, each with a Mags response; the economic-effects claim tightened; Q6 extended to Baylight and the Fruitvale hub.
 
 ## Review — research-build, 2026-09-19 (S467)
 

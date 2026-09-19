@@ -50,6 +50,7 @@ const OLD_RETAIL_MOD = { 'Downtown': 1.3, 'Temescal': 1.2, 'Laurel': 0.9, 'West 
     let ok = 0, bad = 0;
     for (const row in want) { const r = live[row - 1]; if (Number(r[lc]) === want[row][0] && Number(r[lr]) === want[row][1]) ok++; else { bad++; console.log('MISMATCH', r[lh], r[lc], r[lr], 'want', want[row]); } }
     console.log('verify against the pre-write backup:', ok, 'match,', bad, 'mismatch');
+    if (bad) process.exitCode = 1;   // a caller must be able to see a failed verify (kimi review)
     return;
   }
   console.log(updates.length / 2, 'hoods;', APPLY ? 'APPLYING' : 'dry-run (no writes)');

@@ -9,6 +9,9 @@ const { sportsWeekForEntry_ } = require('../utilities/sportsWeekRecord.js');
 // One vocabulary source: the Apps Script sheet-setup lists (dropdowns) are
 // the lists this validator enforces (engine.202 cut 3).
 const FEED_VOCAB = require('../utilities/setupSportsFeedValidation.js');
+// Hoods: the reconciled cache of Neighborhood_Map (the sheet dropdown reads
+// the map itself at setup time).
+const { MAP_NEIGHBORHOODS } = require('../lib/canonNeighborhoods.js');
 const frozen = (list) => Object.freeze(list.slice());
 
 const FEED_HEADERS = Object.freeze([
@@ -43,7 +46,7 @@ const TEAM_CONFIG = Object.freeze({
 
 const EVENT_TYPES = frozen(FEED_VOCAB.OAKLAND_EVENT_TYPE_VALUES);
 const SEASON_TYPES = frozen(FEED_VOCAB.SEASON_TYPE_VALUES);
-const OAKLAND_NEIGHBORHOODS = frozen(FEED_VOCAB.FEED_NEIGHBORHOODS);
+const OAKLAND_NEIGHBORHOODS = frozen(['', ...MAP_NEIGHBORHOODS]);
 const SAFE_ENUMS = Object.freeze({
   SeasonType: SEASON_TYPES,
   EventType: EVENT_TYPES,

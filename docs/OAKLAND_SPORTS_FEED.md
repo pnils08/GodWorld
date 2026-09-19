@@ -102,29 +102,41 @@ has a current-Cycle row. Old team state does not speak by itself.
 
 `VideoGameDate` and `VideoGame` were deleted on 2026-09-19 (Mike's go; plan §0 "no new column" ruling). Their 139 historical cells are archived in `output/engine-sheet/oakland_sports_feed_dead_columns_2026-09-19.json`. Every reader finds columns by header name, so letters below describe today's sheet, not a contract.
 
-| Col | Header | Verified role | Entry guidance |
+| Col | Header | What the engine does with it (audited 2026-09-19) | Entry guidance |
 |---|---|---|---|
-| A | `Cycle` | Selects the engine Cycle | Required on every current-Cycle row |
-| B | `SeasonType` | Preserved as feed season context | Required; use the established controlled value |
-| C | `EventType` | Routes the event; values containing `game` activate game-night consumers | Required; choose the narrowest accurate type |
-| D | `TeamsUsed` | Exact team key for state grouping and display | Required; use the canonical team label |
-| E | `NamesUsed` | Delimited participant names; Phase 5 tries exact active `First Last` matches | Use roster-backed canonical names |
-| F | `Notes` | Factual event detail for media and summaries | Keep concrete and operator-authored |
-| G | `Stats` | Event-specific free-text statistics passed to newsroom consumers | Record only verified event statistics; this does not update the roster's current stat line |
-| H | `Team Record` | Contributes to city sports sentiment and media context | Use the established record format |
-| I | `StoryAngle` | Preferred story framing for sports media surfaces | Preserve the builder's wording |
-| J | `PlayerMood` | Affects game-night tone; frustrated/angry and electric/confident emit player triggers | Use only when grounded by the event |
-| K | `EventTrigger` | Manual sports trigger; otherwise some triggers are inferred | The dropdown is exactly the triggers that make a story hook: hot-streak, cold-streak, playoff-push, playoff-clinch, eliminated, championship, rivalry, home-opener, season-finale, injury, injury-return, debut. Other words are still allowed and reach the media handoff as text, but make no hook |
-| L | `HomeNeighborhood` | Supplies transit geography and computed neighborhood effects; the evening consumer reads traffic only | Existing contract; removal is planned in Task 1 |
-| M | `Streak` | Adjusts sentiment and game-night win/loss tone | Use a parseable `W<n>` or `L<n>` form |
-| N | `FanSentiment` | Adjusts city sports sentiment | Use the existing controlled vocabulary |
-| O | `FranchiseStability` | Supplies team/franchise state and can affect neighborhood logic | Change only when the world state changed |
-| P | `EconomicFootprint` | Supplies economic team state and neighborhood effects | Change only when grounded |
-| Q | `CommunityInvestment` | Supplies community team state and neighborhood effects | Change only when grounded |
-| R | `MediaProfile` | Scales sports sentiment and supplies newsroom context | Use the existing local/regional/national/international scale |
-| S | `WeekRecord` | This franchise's games this Cycle, in played order. Settles the casino (first game) and feeds the handoff | One summary per franchise per Cycle, on its own row: `H:W H:L A:W` (H/A = home/away, W/L = result). `none` = no games (EventType `season-state`); games need EventType `game-result`. Blank = not reported. `Team Record` and `Streak` stay as they are — the week does not replace them |
+| A | `Cycle` | Only rows for the Cycle being run are read; only teams with a row that Cycle count | Required |
+| B | `SeasonType` | City phase = the deepest phase across both teams; within a team the Cycle's LAST row wins; `world-series`/`finals` alias `championship` (final round on, not won). A no-game row still sets the phase today (fifth-block Q1 fix pending) | Required; dropdown |
+| C | `EventType` | `game-result` (and anything containing `game`) drives game-night moments and casino settlement; `season-state` pairs with a `none` week; every other type is newsroom context | Required; dropdown now lists the types actually authored (injury, trade-recap, team-update, re-signing, rumor, draft). Ledger roster changes go through the dashboard |
+| D | `TeamsUsed` | Groups state per franchise; `NBA`/`Warriors` are retired and ignored | Required: A's or Oaks |
+| E | `NamesUsed` | On game rows, a name matching an Active citizen's `First Last` (any case) gets one game-night moment; split on `, | ; /` | Use ledger names |
+| F | `Notes` | Newsroom only (handoff, desk packets, slices) | Your voice; facts in the structured columns |
+| G | `Stats` | Newsroom only; does not touch roster stat columns | Use dashboard stat capture to change roster stats |
+| H | `Team Record` | Base of the team's city sports sentiment (win % term) | `W-L`; series records like `3-1` parse; required on `game-result` in the dashboard |
+| I | `StoryAngle` | Leads the sports media line and desk slices | Your headline instinct |
+| J | `PlayerMood` | Game-night tone only: a W streak wins the night; otherwise `confident` leans win, `frustrated` (or an L streak) leans loss. `frustrated`/`angry`/`electric`/`confident` also raise a player trigger that no story hook reads | Other moods are newsroom color |
+| K | `EventTrigger` | Each of the 12 dropdown words makes a sports story hook. Blank → the engine infers `hot-streak` (W6+), `cold-streak` (L6+) or `championship`. Any other word makes no hook and blocks the inference. A blank row keeps the team's last trigger | Use the dropdown words; see the trigger audit below |
+| L | `HomeNeighborhood` | That hood counts as a game day for transit (this Cycle's rows) and gets the team's game-day crowd in the evening crowd map (a blank row keeps the last hood for the crowd) | One of the 22 map hoods — the dropdown reads Neighborhood_Map. Plan ruling: comes off the tab once Task 3 moves transit to the stadium zone |
+| M | `Streak` | Sentiment amplifier; game-night tone (W4+ = win-streak night); casino settlement when there is no `WeekRecord`; 6+ infers hot/cold-streak | `W<n>` / `L<n>` |
+| N | `FanSentiment` | City sports sentiment: electric/euphoric +0.02, high/confident/excited +0.01, uncertain/anxious −0.005, low/apathetic/disappointed −0.01, frustrated/angry/hostile −0.02, neutral/moderate 0 | Dropdown |
+| O | `FranchiseStability` | Parsed, result unread (retail term nothing consumes) — newsroom only | Dropdown; wiring is Tasks 3–4 |
+| P | `EconomicFootprint` | ±a little game-day crowd in the team's hood (traffic term); its retail term is unread | Dropdown |
+| Q | `CommunityInvestment` | Parsed, result unread (community term nothing consumes) — newsroom only | Dropdown; wiring is Tasks 3–4 |
+| R | `MediaProfile` | Scales team sentiment: local ×0.8, regional ×1.0, national/international ×1.5 | Dropdown |
+| S | `WeekRecord` | The franchise's games this Cycle in order; the casino settles on the first game; handoff `Week:` line | `H:W H:L A:W`; `none` with `season-state`; one per franchise per Cycle |
 
-The FanSentiment–MediaProfile dropdowns carry exactly the words the engine reads (engine.202 cut 3);
+### EventTrigger audit (2026-09-19)
+
+Authored C100–C108, per team per Cycle: 18 triggers; 4 made a story hook
+(`debut` ×2, `home-opener`, `cold-streak`). The rest (`playoffs`, `pre-season`,
+`awards`, `community outreach`, `breaking-news`, `all-star`, `summer league`)
+made no hook and blocked the inferred one — at C108 the A's `playoffs`
+suppresses the `championship` hook the phase would infer. All-time authored:
+hot-streak 46, breaking-news 16, playoffs 9, home-opener 8, playoff-push 8,
+pre-season 7, awards 7, cold-streak 5, draft 4, community outreach 4, and
+twelve one-to-two-use words. Which of these words should become hooks is a sim
+call for Mike (plan Task 1 item 3d).
+
+The FanSentiment–MediaProfile dropdowns carry exactly the words the engine parses (engine.202 cut 3);
 the sheet still allows other text, which the engine treats as neutral. Re-run
 **Setup Sports Feed Validation** from the GodWorld menu to apply the current
 dropdowns and notes — the setup reads columns by header name.

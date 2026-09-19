@@ -478,6 +478,17 @@ assert.ok(oversizedDraft.errors.some((error) => /50,000 characters or fewer/.tes
   const hookKeys = [...hookBlock.slice(0, hookBlock.indexOf('\n    };')).matchAll(/^\s*'([a-z-]+)':\s*\{/gm)]
     .map((match) => match[1]);
   assert.ok(hookKeys.length >= 12, 'TRIGGER_HOOKS keys must be readable');
+  // HomeNeighborhood = the Neighborhood_Map roster (lib cache, reconciled by
+  // auditHoodDrift). Child areas like Montclair never match transit.
+  const { MAP_NEIGHBORHOODS } = require('../lib/canonNeighborhoods.js');
+  assert.deepStrictEqual([...contract.SAFE_ENUMS.HomeNeighborhood], ['', ...MAP_NEIGHBORHOODS]);
+  assert.strictEqual(contract.validateDraft(syntheticDraft({ HomeNeighborhood: 'Montclair' })).valid, false);
+  assert.strictEqual(contract.validateDraft(syntheticDraft({ HomeNeighborhood: 'Baylight District' })).valid, true);
+  // The EventTypes the builder authors are listed; only game-result carries the engine's game path.
+  ['injury', 'trade-recap', 'team-update', 're-signing', 'rumor', 'draft'].forEach((type) => {
+    assert.ok(contract.EVENT_TYPES.includes(type), type);
+  });
+  assert.deepStrictEqual(contract.EVENT_TYPES.filter((type) => type.indexOf('game') >= 0), ['game-result']);
   assert.deepStrictEqual(contract.SAFE_ENUMS.EventTrigger.filter(Boolean).slice().sort(), hookKeys.slice().sort(),
     'EventTrigger dropdown must equal the TRIGGER_HOOKS keys');
 

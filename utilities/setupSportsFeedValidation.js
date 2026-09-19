@@ -81,6 +81,10 @@ var EVENT_TYPE_VALUES = [
   'editorial-note'
 ];
 
+// The engine acts on game-result (and any type containing "game") and on
+// season-state (a WeekRecord of none). Every other type is newsroom context.
+// injury … draft are the types the builder authors (live counts 2026-09-19);
+// injuries and trades are the S446-ruled negative-drift channel.
 var OAKLAND_EVENT_TYPE_VALUES = [
   'game-result',
   'stat-capture',
@@ -89,7 +93,13 @@ var OAKLAND_EVENT_TYPE_VALUES = [
   'front-office',
   'fan-civic',
   'season-state',
-  'editorial-note'
+  'editorial-note',
+  'injury',
+  'trade-recap',
+  'team-update',
+  're-signing',
+  'rumor',
+  'draft'
 ];
 
 var PLAYER_MOOD_VALUES = [
@@ -141,25 +151,12 @@ var OAKLAND_TEAMS = ["A's", 'Oaks'];
 
 var CHICAGO_TEAMS = ['Bulls'];
 
-var FEED_NEIGHBORHOODS = [
-  '',
-  'Downtown',
-  'Jack London',
-  'Rockridge',
-  'Temescal',
-  'Fruitvale',
-  'West Oakland',
-  'Lake Merritt',
-  'Piedmont Ave',
-  'Grand Lake',
-  'Montclair',
-  'Chinatown',
-  'Old Oakland',
-  'Laurel',
-  'Dimond',
-  'Glenview',
-  'Eastlake'
-];
+// Oakland's HomeNeighborhood dropdown is read from Neighborhood_Map (the hood
+// truth source, ADR-0016) at setup time — see mapNeighborhoods_. The old
+// hardcoded list carried Montclair and Old Oakland (child areas of Piedmont Ave
+// and Downtown, which transit never matches) and missed 8 of the 22 hoods,
+// Baylight District among them. Node reads lib/canonNeighborhoods.js, the
+// reconciled cache of the same sheet.
 
 var CHICAGO_NEIGHBORHOODS = [
   '',
@@ -180,28 +177,57 @@ var CHICAGO_NEIGHBORHOODS = [
 // ─────────────────────────────────────────────────────────────────────────────
 
 var HEADER_NOTES = {
-  'Cycle': 'Required. The simulation cycle number (e.g. 81, 82).',
-  'SeasonType': 'Select from dropdown. Where the team is in their season.',
-  'EventType': 'Select from dropdown. One event per row.\n\n' +
-    'game-result = After a game (score, performers, record)\n' +
-    'roster-move = Trades, signings, injuries, cuts\n' +
-    'player-feature = Community events, milestones, off-field\n' +
-    'front-office = GM moves, coaching, organizational\n' +
-    'fan-civic = Stadium, fan events, civic appearances\n' +
-    'season-state = Standings update, playoff status change\n' +
-    'editorial-note = Your instinct — story angles, observations',
-  'TeamsUsed': 'Select from dropdown. Which team this entry is about.',
-  'NamesUsed': 'Comma-separated player/person names.\nExample: Josh Giddey, Hank Trepagnier',
-  'Notes': 'Freeform description. Your voice lives here.\nKeep facts in structured columns, use Notes for color.',
-  'Stats': 'Stat line for the entry. Slash-separated.\nExample: 22pts/8ast or 8.2pts/9.1reb/2.1blk\nLeave blank if not applicable.',
-  'Team Record': 'Current W-L record after this event.\nExample: 39-16\nUpdate on every game-result row.',
-  'VideoGameDate': 'DEAD COLUMN — no longer read by any engine.\nLeave blank. Kept for backward compatibility.',
-  'VideoGame': 'DEAD COLUMN — no longer read by any engine.\nLeave blank. Kept for backward compatibility.',
-  'StoryAngle': 'Your 10-word headline instinct.\nWhat would you tell P Slayer at the morning meeting?\nExample: "Kessler gamble paying off in locker room"',
-  'PlayerMood': 'Select from dropdown. One-word emotional register.\nApplies to the primary player(s) in NamesUsed.',
-  'EventTrigger': 'Select from dropdown. Optional.\nFlags special story-generating moments.\nLeave blank for routine entries.',
-  'HomeNeighborhood': 'Select from dropdown. Optional.\nWhere the impact of this event lands.\nUsed for neighborhood-specific coverage.',
-  'Streak': 'Current team streak. Format: W6 or L3.\nW = wins, L = losses, number = consecutive games.\nFeeds engine sentiment calculation.\nLeave blank if not applicable.',
+  // Every note states what the engine actually does with the column (audited
+  // against the code 2026-09-19). Only teams with a row in the Cycle being run
+  // count at all.
+  'Cycle': 'Required. The engine Cycle this row belongs to (e.g. 108).\nOnly rows for the Cycle being run are read.',
+  'SeasonType': 'Required. Where this team is in its season.\n' +
+    'The city runs at the DEEPEST phase across both teams; within one team the LAST row of the Cycle wins.\n' +
+    'world-series and finals count as championship (the final round is on — not won).\n' +
+    'Today a row with no games still sets the phase.',
+  'EventType': 'Required. One event per row.\n' +
+    'The engine acts on:\n' +
+    '  game-result = game-night moments for named players; the casino settles on it\n' +
+    '  season-state = standings/status; required with a WeekRecord of none\n' +
+    'Everything else (stat-capture, roster-move, player-feature, front-office, fan-civic, editorial-note, ' +
+    'injury, trade-recap, team-update, re-signing, rumor, draft) goes to the newsroom as context.\n' +
+    'Roster changes to the ledger go through the dashboard, not this column.',
+  'TeamsUsed': "Required. A's or Oaks. NBA / Warriors are retired labels and are ignored.",
+  'NamesUsed': 'Player/person names, comma-separated.\n' +
+    "On game rows, a name matching an Active citizen's First Last (any case) gets that citizen one game-night moment.\n" +
+    'Example: Vinnie Keane, Benji Dillon',
+  'Notes': 'Freeform description — your voice. Goes to the newsroom (handoff, desk packets, beat slices).\nKeep facts in the structured columns.',
+  'Stats': 'Stat line for this event, e.g. 22pts/8ast. Goes to the newsroom.\n' +
+    "It does not change the roster's stat columns — use the dashboard's stat capture for that.",
+  'Team Record': 'W-L after this event, e.g. 39-16 (a playoff series record like 3-1 is fine).\n' +
+    "Sets the base of the team's city sports sentiment. Required on game-result rows.",
+  'VideoGameDate': 'DEAD COLUMN — deleted from Oakland_Sports_Feed 2026-09-19.',
+  'VideoGame': 'DEAD COLUMN — deleted from Oakland_Sports_Feed 2026-09-19.',
+  'StoryAngle': 'Your 10-word headline instinct.\nLeads the sports media line and the desk slices.\nExample: "Kessler gamble paying off in locker room"',
+  'PlayerMood': 'Clubhouse mood of the named player(s).\n' +
+    'Game-night tone: a W streak makes it a win night; otherwise confident leans win, frustrated (or an L streak) leans loss.\n' +
+    'The other moods are newsroom color.',
+  'EventTrigger': 'Optional. Each dropdown word makes a sports story hook for the newsroom.\n' +
+    'Leave blank and the engine picks one: W6+ streak = hot-streak, L6+ = cold-streak, championship phase = championship.\n' +
+    'Any other word you type makes NO hook and also stops that automatic pick.\n' +
+    "A blank row keeps the team's last trigger.",
+  'HomeNeighborhood': 'Optional. Where this event lands: that neighborhood counts as a game day for transit,\n' +
+    "and the team's game-day crowd goes there in the evening crowd map.\n" +
+    'Use one of the 22 map neighborhoods (Montclair is Piedmont Ave, Old Oakland is Downtown).\n' +
+    "For the crowd, a blank row keeps the team's last neighborhood; transit reads only this Cycle's rows.",
+  'Streak': 'Team streak after this event: W6 or L3.\n' +
+    'Amplifies city sports sentiment, sets the game-night tone (W4+ is a win-streak night),\n' +
+    'settles the casino when there is no WeekRecord, and at 6+ picks hot-/cold-streak automatically.',
+  'FanSentiment': 'How the fanbase feels. Moves city sports sentiment:\n' +
+    'electric/euphoric +, high/confident/excited slight +, uncertain/anxious slight −,\n' +
+    'low/apathetic/disappointed −, frustrated/angry/hostile − −; neutral/moderate 0.',
+  'FranchiseStability': 'Franchise health (stable … relocating). Goes to the newsroom.\n' +
+    'The engine parses it but nothing uses the result yet (sports plan Tasks 3–4).',
+  'EconomicFootprint': "The team's economic pull (booming … declining).\n" +
+    "Adds or trims a little game-day crowd in the team's neighborhood; the rest goes to the newsroom.",
+  'CommunityInvestment': 'How present the team is in the community (active … absent). Goes to the newsroom.\n' +
+    'The engine parses it but nothing uses the result yet (sports plan Tasks 3–4).',
+  'MediaProfile': "How far the story travels. Scales the team's city sports sentiment:\nlocal ×0.8, regional ×1.0, national/international ×1.5.",
   'WeekRecord': 'This franchise\'s games this Cycle, in played order.\nOne summary row per franchise per Cycle.\n' +
     'H:W = home win, H:L = home loss, A:W = away win, A:L = away loss.\nExample: H:W H:L A:W\n' +
     'Games need EventType game-result. none = no games this Cycle (EventType season-state).\n' +
@@ -234,7 +260,7 @@ function setupSportsFeedValidation() {
 
   var oakSheet = ss.getSheetByName('Oakland_Sports_Feed');
   if (oakSheet) {
-    setupFeedSheet_(oakSheet, 'Oakland', OAKLAND_TEAMS, FEED_NEIGHBORHOODS);
+    setupFeedSheet_(oakSheet, 'Oakland', OAKLAND_TEAMS, mapNeighborhoods_(ss));
     results.push('Oakland_Sports_Feed: OK');
   } else {
     results.push('Oakland_Sports_Feed: NOT FOUND (skipped)');
@@ -265,7 +291,7 @@ function setupOaklandFeedOnly() {
     SpreadsheetApp.getUi().alert('Oakland_Sports_Feed not found.');
     return;
   }
-  setupFeedSheet_(sheet, 'Oakland', OAKLAND_TEAMS, FEED_NEIGHBORHOODS);
+  setupFeedSheet_(sheet, 'Oakland', OAKLAND_TEAMS, mapNeighborhoods_(ss));
   SpreadsheetApp.getUi().alert('Oakland_Sports_Feed setup complete!');
 }
 
@@ -401,6 +427,24 @@ function setupFeedSheet_(sheet, city, teamValues, neighborhoodValues) {
 // ─────────────────────────────────────────────────────────────────────────────
 
 /**
+ * '' + every Neighborhood_Map hood, in sheet order. Throws if the map is
+ * missing — a hood dropdown built from nothing would reject every real hood.
+ */
+function mapNeighborhoods_(ss) {
+  var map = ss.getSheetByName('Neighborhood_Map');
+  if (!map) throw new Error('mapNeighborhoods_: Neighborhood_Map not found');
+  var values = map.getDataRange().getValues();
+  var col = values[0].map(function(h) { return String(h).trim(); }).indexOf('Neighborhood');
+  if (col === -1) throw new Error('mapNeighborhoods_: Neighborhood_Map has no Neighborhood column');
+  var hoods = [''];
+  for (var r = 1; r < values.length; r++) {
+    var hood = String(values[r][col] == null ? '' : values[r][col]).trim();
+    if (hood && hoods.indexOf(hood) === -1) hoods.push(hood);
+  }
+  return hoods;
+}
+
+/**
  * The live header row as trimmed strings, full width.
  */
 function feedHeaderRow_(sheet) {
@@ -458,7 +502,6 @@ if (typeof module !== 'undefined' && module.exports) {
     OAKLAND_EVENT_TYPE_VALUES: OAKLAND_EVENT_TYPE_VALUES,
     PLAYER_MOOD_VALUES: PLAYER_MOOD_VALUES,
     EVENT_TRIGGER_VALUES: EVENT_TRIGGER_VALUES,
-    FEED_NEIGHBORHOODS: FEED_NEIGHBORHOODS,
     FAN_SENTIMENT_VALUES: FAN_SENTIMENT_VALUES,
     FRANCHISE_STABILITY_VALUES: FRANCHISE_STABILITY_VALUES,
     ECONOMIC_FOOTPRINT_VALUES: ECONOMIC_FOOTPRINT_VALUES,

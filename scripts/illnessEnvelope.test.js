@@ -307,5 +307,37 @@ assert('B2 the richest hood (Rockridge/Jack London) runs below the poorest (KONO
   assert('D2 the nightlife seed names the busiest nightlife hood (KONO) in hood and text', night && night.neighborhood === 'KONO' && /KONO buzzing/.test(night.text), night && JSON.stringify(night));
 }
 
+// ═══════════════════════════════════════════════════════════════════════════
+// E. engine.240h — a holiday seed lands on the hoods the holiday's authored Scenes name,
+//    citywide when no hood carries the tag (the 13-holiday hood bank is no longer read).
+// ═══════════════════════════════════════════════════════════════════════════
+{
+  let uu = 0;
+  const real = { Utilities: { getUuid: () => 'uuid-' + (++uu) }, Logger: { log: () => {} }, safeRand_: ctx => ctx.rng,
+    Math, JSON, Object, Array, String, Number, Date, RegExp, Error, isNaN, isFinite, parseInt, parseFloat };
+  const SCENES = { LunarNewYear: [['Chinatown', 5], ['Downtown', 2]], FirstFriday: [['Uptown', 4], ['KONO', 3]] };
+  real.hoodsWithScene_ = (ctx, tag) => (SCENES[tag] || []).map(r => r.slice());
+  const sb = new Proxy(real, { has: () => true, get: (t, k) => (k in t) ? t[k] : (typeof k === 'symbol' ? undefined : function () { return undefined; }) });
+  vm.createContext(sb);
+  const p = path.join(__dirname, '..', 'phase07-evening-media', 'applyStorySeeds.js');
+  vm.runInContext(fs.readFileSync(p, 'utf8'), sb, { filename: p });
+  const seedsFor = holiday => {
+    const S = { cycleId: 114, holiday, neighborhoodDemographics: {}, demographicDrift: {}, generationalEvents: [], worldEvents: [], weather: {},
+      cityDynamics: {}, worldPopulation: {}, domainPresence: {}, eventArcs: [], crimeMetrics: {},
+      canonHoods: { list: ['Chinatown', 'Downtown', 'Uptown', 'KONO'], scenes: { Chinatown: { LunarNewYear: 5 } } } };
+    const ctx = { ss: null, config: {}, summary: S, rng: () => 0.6, ledger: null };
+    real.applyStorySeeds_(ctx);
+    return (ctx.summary.storySeeds || []).filter(x => x.seedType === 'holiday');
+  };
+  const lny = seedsFor('LunarNewYear');
+  assert('E1 Lunar New Year seeds land on the Scenes hoods, heaviest first (Chinatown, then Downtown)',
+    lny.length >= 2 && lny[0].neighborhood === 'Chinatown' && lny[1].neighborhood === 'Downtown', JSON.stringify(lny.map(x => x.neighborhood)));
+  const mlk = seedsFor('MLKDay');
+  assert('E2 a holiday no hood carries is citywide, not the old Downtown / West Oakland literals',
+    mlk.length >= 1 && mlk.every(x => !x.neighborhood), JSON.stringify(mlk.map(x => x.neighborhood)));
+  const src = fs.readFileSync(p, 'utf8');
+  assert('E3 the holiday bank\'s hood literals are no longer read', /holHoods\[hsi\] \|\| ''/.test(src) && !/'CULTURE', 'KONO'/.test(src), 'source');
+}
+
 console.log('\n' + passed + ' passed, ' + failed + ' failed');
 process.exit(failed ? 1 : 0);

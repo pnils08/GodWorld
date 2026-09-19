@@ -165,6 +165,18 @@ function applyStorySeeds_(ctx) {
   // Fruitvale / West Oakland / Lake Merritt / Rockridge / Jack London / Uptown / Temescal
   // literals, the "invented specificity" class the crisis-bucket fix already killed below).
   // dir +1 = highest, −1 = lowest; '' when no hood carries the field (the seed is citywide).
+  // engine.240h (2026-09-19, kimi review): the hoods a calendar day draws to are the authored
+  // Neighborhood_Map.Scenes tags (`<Holiday>:weight`, `FirstFriday:n`, `CreationDay:n`), heaviest
+  // first — never a hood name in code. A tag nobody carries → citywide.
+  function sceneHoodsFor_(tag) {
+    if (!tag || tag === 'none' || typeof hoodsWithScene_ !== 'function' || !S.canonHoods || !S.canonHoods.scenes) return [];
+    var rows = hoodsWithScene_(ctx, tag).slice();
+    rows.sort(function(a, b) { return b[1] - a[1]; });
+    var out = [];
+    for (var i = 0; i < rows.length; i++) out.push(rows[i][0]);
+    return out;
+  }
+
   function hoodTop_(map, field, dir) {
     var best = '', bestV = null;
     map = map || {};
@@ -915,10 +927,16 @@ function applyStorySeeds_(ctx) {
 
   // Add holiday-specific seeds
   if (holiday !== "none" && holidaySeeds[holiday]) {
+    // engine.240h: the bank's `nh` literals are ignored — a holiday seed lands on the hoods the
+    // holiday's authored Scenes name (heaviest first, one per seed), citywide when none carry it.
+    // The bank reproduced real Oakland's demographic geography in code (LunarNewYear → Chinatown,
+    // Juneteenth → West Oakland, DiaDeMuertos → Fruitvale); the same pairs now come from the sheet
+    // where canon put them, and a holiday with no tag no longer invents a place.
     var hsList = holidaySeeds[holiday].seeds;
+    var holHoods = sceneHoodsFor_(holiday);
     for (var hsi = 0; hsi < hsList.length; hsi++) {
       var hs = hsList[hsi];
-      seeds.push(makeSeed(hs.text, hs.domain, hs.nh, hs.priority, 'holiday'));
+      seeds.push(makeSeed(hs.text, hs.domain, holHoods[hsi] || '', hs.priority, 'holiday'));
     }
   }
 
@@ -929,22 +947,22 @@ function applyStorySeeds_(ctx) {
   if (isFirstFriday) {
     seeds.push(makeSeed(
       "First Friday transforms Oakland's arts districts. Galleries, street art, community.",
-      'CULTURE', 'Uptown', 3, 'firstfriday'
+      'CULTURE', sceneHoodsFor_('FirstFriday')[0] || '', 3, 'firstfriday'
     ));
     seeds.push(makeSeed(
       "Art walk draws crowds to Temescal and KONO. Creative energy stories.",
-      'CULTURE', 'KONO', 2, 'firstfriday'
+      'CULTURE', sceneHoodsFor_('FirstFriday')[1] || '', 2, 'firstfriday'
     ));
     seeds.push(makeSeed(
       "Local artists showcase work to First Friday audiences. Spotlight opportunities.",
-      'COMMUNITY', 'Uptown', 2, 'firstfriday'
+      'COMMUNITY', sceneHoodsFor_('FirstFriday')[0] || '', 2, 'firstfriday'
     ));
 
     // High cultural activity on First Friday is especially notable
     if (culturalActivity >= 1.4) {
       seeds.push(makeSeed(
         "First Friday cultural surge energizes the city. Arts scene thriving.",
-        'CULTURE', 'Uptown', 3, 'firstfriday'
+        'CULTURE', sceneHoodsFor_('FirstFriday')[0] || '', 3, 'firstfriday'
       ));
     }
   }
@@ -960,7 +978,7 @@ function applyStorySeeds_(ctx) {
     ));
     seeds.push(makeSeed(
       "City's foundational spirit felt across neighborhoods. What makes Oakland Oakland?",
-      'CULTURE', 'Downtown', 2, 'creationday'
+      'CULTURE', sceneHoodsFor_('CreationDay')[0] || '', 2, 'creationday'
     ));
     seeds.push(makeSeed(
       "Long-time residents share Oakland stories. Living history.",
@@ -995,7 +1013,7 @@ function applyStorySeeds_(ctx) {
     ));
     seeds.push(makeSeed(
       "Sports bars and watch parties gather the faithful. Community viewing.",
-      'NIGHTLIFE', 'Downtown', 2, 'sports'
+      'NIGHTLIFE', ((S.sportsZones || [])[0] || ''), 2, 'sports'   // engine.240h: where the sport is
     ));
   } else if (sportsPhase === 'late-season') {
     seeds.push(makeSeed(
@@ -1210,7 +1228,7 @@ function applyStorySeeds_(ctx) {
     if (isFirstFriday) {
       seeds.push(makeSeed(
         "First Friday atmosphere altered by breaking events. Arts community reacts.",
-        'CULTURE', 'Uptown', 2, 'shock'
+        'CULTURE', sceneHoodsFor_('FirstFriday')[0] || '', 2, 'shock'
       ));
     }
   }
@@ -1240,7 +1258,7 @@ function applyStorySeeds_(ctx) {
   if (civicLoad === 'load-strain') {
     seeds.push(makeSeed(
       "Civic strain puts pressure on core city systems. Officials feeling the heat.",
-      'CIVIC', 'Downtown', 3, 'civic'
+      'CIVIC', 'Downtown', 3, 'civic'   // canon: City Hall and the courts are Downtown (INSTITUTIONS §Neighborhoods)
     ));
   }
 

@@ -362,7 +362,14 @@ function buildNightlife_(ctx) {
   // PUBLIC SPACE
   // ───────────────────────────────────────────────────────────────────────────
   if (publicSpace >= 1.3) {
-    pool.push({ name: "Open-Air Night Plaza", neighborhood: "Lake Merritt" });
+    // engine.240h: the plaza is wherever public space is busiest this cycle (was a Lake Merritt literal)
+    var plazaHoods = placeVenues_(["Open-Air Night Plaza"], (function() {
+      var nd = S.neighborhoodDynamics || {}, rows = [];
+      for (var h in nd) if (nd.hasOwnProperty(h) && nd[h] && isFinite(Number(nd[h].publicSpaces))) rows.push([h, Number(nd[h].publicSpaces)]);
+      rows.sort(function(a, b) { return b[1] - a[1]; });
+      var out = []; for (var i = 0; i < rows.length; i++) out.push(rows[i][0]); return out;
+    })());
+    pool = pool.concat(plazaHoods);
   }
 
   // v2.3: ES5 deduplication (instead of Map)

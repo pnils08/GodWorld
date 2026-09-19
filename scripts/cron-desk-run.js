@@ -1194,7 +1194,7 @@ function loadOpenThreads(cycle, desk) {
   return (all && Array.isArray(all[desk || DESK])) ? all[desk || DESK] : [];
 }
 
-function loadLane(cycle, desk) {
+function loadLane(cycle, desk, beatDomain) {
   // pipeline.60: the undocked lane is feed-built (Nia's data contract — facts
   // only from the gate-approved feed pack), independent of desk_signal. The
   // fanout angle wake wrote the day's slice; report/write reuse it (W1 owns
@@ -1208,11 +1208,21 @@ function loadLane(cycle, desk) {
   const signalPath = path.join(ROOT, 'output', 'desk_signal_c' + cycle + '.json');
   const signal = readJson(signalPath);
   if (!signal || !signal.lanes) throw new Error('no desk_signal at ' + path.relative(ROOT, signalPath) + ' — run buildWorldSummary first');
-  const lane = (signal.lanes[desk || DESK] || []).slice();
+  // A desk with no desk_signal lane of its own reads its beat domain's lane
+  // (2026-09-19): Celeste Tran is Wire/Social by section, CULTURE by beat
+  // (AGENT_NEWSROOM.md, her IDENTITY.md). Keyed on the desk alone, every wake
+  // skipped "not an error" while her trends slice built fine — zero pieces.
+  let laneKey = desk || DESK;
+  const domainKey = beatDomain ? String(beatDomain).toLowerCase() : null;
+  if (!signal.lanes[laneKey] && domainKey && signal.lanes[domainKey]) {
+    console.log('[lane] no "' + laneKey + '" lane in desk_signal — reading beat domain lane "' + domainKey + '"');
+    laneKey = domainKey;
+  }
+  const lane = (signal.lanes[laneKey] || []).slice();
   // civic.15 Task 3.1 (S344): the civic lane also carries today's office
   // datawakes — an office-holder voicing their domain's live numbers is beat
   // signal for the civic desk. Additive; absent dir or no wakes = no-op.
-  if ((desk || DESK) === 'civic') {
+  if (laneKey === 'civic') {
     // Sunday chain decisions (S344): desk_signal is built BEFORE city hall
     // runs, so the close stage exports the cycle's decisions as lane entries.
     const civicFirst = [];
@@ -1347,7 +1357,7 @@ async function runAngle(assign) {
   const stem = evaluationStem(wakeStageStem(cycle, desk, assign, personaSlug), EVALUATION_TAG);
   console.log('Wake 1 ANGLE — ' + desk + ' c' + cycle + (personaSlug ? ' (' + personaSlug + ')' : '') + (assign ? ' [' + assign.name + ']' : ''));
   console.log('===================================');
-  const lane = loadLane(cycle, desk);
+  const lane = loadLane(cycle, desk, assign && assign.beatDomain);
   if (!lane) { console.log('[angle] no "' + desk + '" lane in desk_signal — skipping (not an error).'); return; }
   // R2 — ledger snapshot freshness before any profile resolution this wake
   // (S252/S329 pattern; desk doctrine: refresh + degrade-not-drop, never halt)
@@ -2390,7 +2400,7 @@ async function runReport(assign) {
   console.log('===================================');
   const anglePath = path.join(COMPARE, stem + 'angle.json');
   if (!fs.existsSync(anglePath)) throw new Error('no angle artifact at ' + path.relative(ROOT, anglePath) + ' — run --stage=angle first');
-  const lane = loadLane(cycle, desk);
+  const lane = loadLane(cycle, desk, assign && assign.beatDomain);
   if (!lane) { console.log('[report] no "' + desk + '" lane in desk_signal — skipping (not an error).'); return; }
   const persona = personaInfo(personaSlug);
   // voice the asks in the reporter's register even without an authored persona —
@@ -2468,7 +2478,7 @@ async function runWrite(assign) {
   const packetPath = path.join(COMPARE, stem + 'packet.json');
   if (!fs.existsSync(anglePath)) throw new Error('no angle artifact at ' + path.relative(ROOT, anglePath) + ' — run --stage=angle first');
   if (!fs.existsSync(packetPath)) throw new Error('no packet artifact at ' + path.relative(ROOT, packetPath) + ' — run --stage=report first');
-  const lane = loadLane(cycle, desk);
+  const lane = loadLane(cycle, desk, assign && assign.beatDomain);
   if (!lane) { console.log('[write] no "' + desk + '" lane in desk_signal — skipping (not an error).'); return; }
   if (budgetReached(cycle)) return;   // S339 submission budget — exit before writer spend
   // R2 — ledger snapshot freshness (S252/S329 pattern; degrade-not-drop)

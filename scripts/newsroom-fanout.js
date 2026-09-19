@@ -160,11 +160,32 @@ function assignedStoryRefs(cycle) {
 // Stale-cycle guard (2026-09-09): beat slices are version-cached per cycle, so
 // when the engine cycle has not advanced the seat would re-file the identical
 // story. Seed dedup never sees beat refs (they bypass laneSeeds), so check the
-// prior same-cycle fanouts explicitly. Returns the already-filed ref or null.
-function staleBeatRef(assignment, takenRefs) {
+// prior same-cycle fanouts explicitly. Keyed persona+ref (2026-09-19): a beat
+// ref names the TAB (`Cultural_Ledger.jsonl @C107`), and Celeste, Kai and
+// Sharon each render a different slice off that one tab — a bare-ref key let
+// the first seat's ref drop the other two as "already filed". Today's file is
+// excluded: a same-day --force rebuild is the same assignment, not a re-file.
+function priorBeatKey(persona, ref) { return String(persona) + '\u0000' + String(ref); }
+function priorBeatRefs(cycle, date) {
+  const filed = new Set();
+  let files = [];
+  try {
+    files = fs.readdirSync(COMPARE).filter(f => /^fanout-\d{4}-\d{2}-\d{2}\.json$/.test(f) && f !== 'fanout-' + date + '.json');
+  } catch (_) {}
+  for (const f of files) {
+    let j; try { j = JSON.parse(fs.readFileSync(path.join(COMPARE, f), 'utf8')); } catch (_) { continue; }
+    if (String(j.cycle) !== String(cycle)) continue;
+    for (const a of (j.assignments || [])) {
+      if (a.beatSlice && a.persona && a.story && a.story.ref) filed.add(priorBeatKey(a.persona, a.story.ref));
+    }
+  }
+  return filed;
+}
+// Returns the already-filed ref or null.
+function staleBeatRef(assignment, filedBeats) {
   if (!assignment || !assignment.beatSlice) return null;
   const ref = assignment.story && assignment.story.ref;
-  return ref && takenRefs && takenRefs.has(ref) ? ref : null;
+  return ref && filedBeats && filedBeats.has(priorBeatKey(assignment.persona, ref)) ? ref : null;
 }
 
 // Per-desk seed queue from the desk_signal lane: entries the engine framed a
@@ -680,13 +701,14 @@ async function buildFanout(date) {
   };
   let beatEnrich = { enriched: false, reason: 'none', seats: [], dropped: [] };
   if (cycle != null) {
+    const filedBeats = priorBeatRefs(cycle, date);
     for (let i = assignments.length - 1; i >= 0; i--) {
       const slug = assignments[i].persona;
       if (!slug || !BEAT_BUILDERS[slug]) continue;
       try {
         const { enrichAssignment } = require(path.join(__dirname, BEAT_BUILDERS[slug]));
         const next = enrichAssignment(assignments[i], cycle);
-        const staleRef = staleBeatRef(next, takenRefs);
+        const staleRef = staleBeatRef(next, filedBeats);
         if (staleRef) {
           console.error('[fanout] SEAT DROPPED ' + slug + ' — beat slice already filed at c' + cycle +
             ' (engine cycle has not advanced; ref: ' + staleRef + ')');
@@ -696,7 +718,6 @@ async function buildFanout(date) {
         }
         if (next && next.beatSlice) {
           assignments[i] = next;
-          if (next.story && next.story.ref) takenRefs.add(next.story.ref);
           beatEnrich.enriched = true;
           beatEnrich.seats.push(slug + '/' + next.pulse.className + ':' + (next.pulse.hood || '—'));
         }
@@ -859,5 +880,5 @@ if (require.main === module) {
 }
 
 module.exports = { buildFanout, writeFanout, loadFanout, usageHistory, stagedTally, bylinePreference,
-  assignedStoryRefs, staleBeatRef, laneSeeds, storyFromSeed, approachFor, applyStinkForce, loadFirebrandPersona,
+  assignedStoryRefs, priorBeatKey, priorBeatRefs, staleBeatRef, laneSeeds, storyFromSeed, approachFor, applyStinkForce, loadFirebrandPersona,
   applyWakePackageGate, activeRotaCandidates, boundDailyAssignments, DAILY_QUOTAS, WEEK_GRID, gridSeatsFor };

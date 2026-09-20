@@ -1,0 +1,69 @@
+{
+ "at": "2026-09-20T21:40:20.625Z",
+ "source": "docs/canon/INSTITUTIONS.md §Canon substitution table",
+ "cells": [
+  {
+   "row": 75,
+   "biz": "BIZ-00078",
+   "old": "Allen Temple Baptist Church",
+   "neu": "Foothill Baptist Tabernacle",
+   "sector": "Faith Organization",
+   "hood": "East Oakland",
+   "key": ""
+  },
+  {
+   "row": 76,
+   "biz": "BIZ-00079",
+   "old": "Masjid Al-Islam",
+   "neu": "Masjid An-Nur Oakland",
+   "sector": "Faith Organization",
+   "hood": "East Oakland",
+   "key": "Imam Yusuf Kareem"
+  },
+  {
+   "row": 77,
+   "biz": "BIZ-00080",
+   "old": "Islamic Center of Oakland",
+   "neu": "Temescal Islamic Center",
+   "sector": "Faith Organization",
+   "hood": "Temescal",
+   "key": ""
+  },
+  {
+   "row": 78,
+   "biz": "BIZ-00081",
+   "old": "St. Columba Catholic Church",
+   "neu": "St. Esperanza Parish",
+   "sector": "Faith Organization",
+   "hood": "Fruitvale",
+   "key": ""
+  },
+  {
+   "row": 79,
+   "biz": "BIZ-00082",
+   "old": "Acts Full Gospel Church",
+   "neu": "New Covenant Pentecostal Assembly",
+   "sector": "Faith Organization",
+   "hood": "West Oakland",
+   "key": ""
+  },
+  {
+   "row": 81,
+   "biz": "BIZ-00084",
+   "old": "First Unitarian Church Oakland",
+   "neu": "Lakeshore Unitarian Universalist Fellowship",
+   "sector": "Faith Organization",
+   "hood": "Lake Merritt",
+   "key": ""
+  },
+  {
+   "row": 82,
+   "biz": "BIZ-00085",
+   "old": "Temple Sinai",
+   "neu": "Temple Beth Or",
+   "sector": "Faith Organization",
+   "hood": "Rockridge",
+   "key": ""
+  }
+ ]
+}

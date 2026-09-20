@@ -203,6 +203,28 @@ console.log('\nengine.243 — crisis naming, the end of a crisis, and city memor
     elsewhere.S.eventArcs[0].summary);
 }
 
+// ── 5b. an arc already in flight when naming shipped still gets its name ───
+{
+  const sb = sandbox();
+  // exactly the bench state: CRISIS-110-ROCKRIDG carried in with NO name, detected
+  // on hospitalizations + housing pressure (hospital is the dominant channel).
+  const prev = { crisisArcs: [{
+    arcId: 'CRISIS-110-ROCKRIDG', type: 'crisis', phase: 'early', tension: 5,
+    neighborhood: 'Rockridge', domainTag: 'HEALTH', domain: 'HEALTH',
+    summary: 'Rockridge under strain: 2 hospitalizations last cycle; housing pressure 6.00 (city 1.95)',
+    citizens: [], consecutiveBad: 1, consecutiveGood: 0, cycleCreated: 110,
+    phaseStartCycle: 110, source: 'DETECTED'
+  }], crisisMemory: [], hospitalEvents: [] };
+  const r = runCycle(sb, 112, { prev, bad: { 'Rockridge': { housingPressure: 6.0, crimeIndex: 1.15 } } });
+  const arc = r.S.eventArcs[0];
+  check('an arc carried in nameless is named on its next evaluation',
+    arc.name === 'The Rockridge Hospital Run', arc.name);
+  check('the backfilled name comes from what it was DETECTED on, not the last live channel',
+    arc.nameChannel === 'hospital', arc.nameChannel);
+  check('the backfilled name reaches the summary',
+    arc.summary.indexOf('The Rockridge Hospital Run — ') === 0, arc.summary);
+}
+
 // ── 6. memory is capped and most-recent-first ──────────────────────────────
 {
   const sb = sandbox();

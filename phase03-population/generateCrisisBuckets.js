@@ -352,6 +352,20 @@ function generateCrisisBuckets_(ctx) {
     if (!arc || !arc.neighborhood) continue;
     carriedHoods[arc.neighborhood] = true;
     var ch = evalChannels_(arc.neighborhood);
+    // engine.243: an arc already in flight when naming shipped carried no name,
+    // and would have run its whole life anonymous. Name it on the first
+    // evaluation that can derive one — from its OWN carried summary first, which
+    // still holds the evidence it was detected on, so a hospital crisis in
+    // recovery is not renamed after whichever channel happens to be last active.
+    if (!arc.name) {
+      var nameSrc = arc.summary ? [String(arc.summary)] : ch.evidence;
+      var backfill = crisisNameChannel_(nameSrc) ? nameSrc : ch.evidence;
+      var bfCh = crisisNameChannel_(backfill);
+      if (bfCh) {
+        arc.name = crisisArcName_(arc.neighborhood, backfill);
+        arc.nameChannel = bfCh.key;
+      }
+    }
     arc.prevPhase = arc.phase;
     if (ch.count >= CRISIS_DETECT.ONSET_CHANNELS) {
       arc.consecutiveBad = (arc.consecutiveBad || 1) + 1;

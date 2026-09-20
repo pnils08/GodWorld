@@ -75,6 +75,119 @@ var CRISIS_DETECT = {
   RESOLVED_RIPPLE: 0.02, ONSET_RIPPLE: 0.05
 };
 
+
+/**
+ * ── CRISIS NAMING + THE REFERENCED LINK (engine.243) ────────────────────────
+ * SIM_DOCTRINE §15 ends its chain on "can it be referenced afterwards as that
+ * event." A detected arc carried an arcId (CRISIS-105-WESTOAKL) and a summary
+ * rebuilt from scratch every cycle — nothing a citizen, a desk, or a later
+ * cycle could ever name. This gives the arc ONE name at onset that never
+ * changes, and a small city memory of the crises that ended.
+ *
+ * The name is DERIVED, never invented (engine.106 was filed because crisis arcs
+ * once fed fabricated specificity to the desks). It reads only what the
+ * detector already proved: the hood, and the single highest-priority channel
+ * that fired. No dice — zero rng draws are added, so every downstream draw
+ * keeps its position (engine.212 discipline). And no synthesized causation:
+ * two channels firing in the same hood is CO-OCCURRENCE, not cause, so the name
+ * comes from ONE channel and never welds two into a phenomenon the detector
+ * never established ("Heat Sickness" would be a claim; "Heat Wave" is the
+ * channel).
+ */
+var CRISIS_NAME_CHANNELS = [
+  // order = naming priority: acute and physical before slow and diffuse.
+  { key: 'heat',      match: 'heat wave hit',        noun: 'Heat Wave' },
+  { key: 'flood',     match: 'flood conditions hit', noun: 'Flood' },
+  { key: 'storm',     match: 'storm hit',            noun: 'Storm' },
+  { key: 'hospital',  match: 'hospitalizations',     noun: 'Hospital Run' },
+  { key: 'crime',     match: 'crime ',               noun: 'Crime Spike' },
+  { key: 'transit',   match: 'transit disruption',   noun: 'Transit Snarl' },
+  { key: 'retail',    match: 'retail vitality',      noun: 'Retail Slide' },
+  { key: 'housing',   match: 'housing pressure',     noun: 'Housing Squeeze' },
+  { key: 'migration', match: 'migration outflow',    noun: 'Outflow' },
+  { key: 'sentiment', match: 'sentiment ',           noun: 'Hard Stretch' }
+];
+
+function crisisNameChannel_(evidence) {
+  var joined = (evidence || []).join('|');
+  for (var cni = 0; cni < CRISIS_NAME_CHANNELS.length; cni++) {
+    if (joined.indexOf(CRISIS_NAME_CHANNELS[cni].match) >= 0) return CRISIS_NAME_CHANNELS[cni];
+  }
+  return null;
+}
+
+function crisisArcName_(hood, evidence) {
+  var ch = crisisNameChannel_(evidence);
+  if (!hood || !ch) return '';
+  return 'The ' + hood + ' ' + ch.noun;
+}
+
+/** Prefix the arc's name onto whatever the lifecycle just wrote. One name, every phase. */
+function crisisNamed_(arc, body) {
+  return (arc && arc.name) ? arc.name + ' — ' + body : body;
+}
+
+/**
+ * Peak and resolution used to emit a ripple and an Event_Arc_Ledger row and
+ * nothing else — S.worldEvents only ever saw the ONSET, so the newsroom could
+ * report a crisis starting and never report it peaking or ending. Same class as
+ * the engine.187 shock-LIFTED line.
+ *
+ * subdomain 'crisis-lifecycle' is load-bearing: updateCrimeMetrics_ (engine.212)
+ * runs next in Phase 3 and counts any SAFETY world event in a hood as a crime
+ * CAUSE. A crisis ending must never push crime up, and a peak must not
+ * double-count pressure the crime engine already reads from its own channels —
+ * so updateCrimeMetrics_ skips this subdomain and live crime numbers are
+ * unchanged by this cut.
+ */
+function pushCrisisLifecycleEvent_(ctx, arc, stage, description, severity, cycle) {
+  var S = ctx.summary;
+  S.worldEvents = S.worldEvents || [];
+  S.worldEvents.push({
+    cycle: cycle,
+    domain: arc.domainTag || arc.domain || 'CIVIC',
+    subdomain: 'crisis-lifecycle',
+    stage: stage,
+    arcId: arc.arcId,
+    arcName: arc.name || '',
+    neighborhood: arc.neighborhood,
+    severity: severity,
+    description: description,
+    impactScore: severity === 'high' ? 40 : severity === 'medium' ? 25 : 10,
+    source: 'DETECTED',
+    timestamp: ctx.now
+  });
+  S.eventsGenerated = (S.eventsGenerated || 0) + 1;
+}
+
+/**
+ * The city's memory of crises that ENDED. Capped small and city-wide (not per
+ * hood) because it rides previousCycleState into the 9KB PropertiesService
+ * budget. Live onset rate is ~1 in 6 cycles, so six entries is years of city
+ * memory, not a rolling window.
+ */
+var CRISIS_MEMORY_CAP = 6;
+
+function rememberCrisis_(S, arc, cycle) {
+  if (!arc || !arc.name) return;
+  S.crisisMemory = S.crisisMemory || [];
+  S.crisisMemory.unshift({
+    name: arc.name,
+    hood: arc.neighborhood,
+    channel: arc.nameChannel || '',
+    cycle: cycle,
+    cycleRef: S.cycleRef || ('C' + cycle)
+  });
+  if (S.crisisMemory.length > CRISIS_MEMORY_CAP) S.crisisMemory.length = CRISIS_MEMORY_CAP;
+}
+
+/** Most recent remembered crisis in this hood, or null. */
+function lastCrisisIn_(S, hood) {
+  var mem = (S && S.crisisMemory) || [];
+  for (var mi = 0; mi < mem.length; mi++) if (mem[mi].hood === hood) return mem[mi];
+  return null;
+}
+
 function generateCrisisBuckets_(ctx) {
   var S = ctx.summary || (ctx.summary = {});
   var cycle = S.absoluteCycle || S.cycleId || (ctx.config && ctx.config.cycleCount) || 0;
@@ -83,6 +196,8 @@ function generateCrisisBuckets_(ctx) {
   if (!S.auditIssues) S.auditIssues = [];
   S.eventArcs = S.eventArcs || [];
   S.worldEvents = S.worldEvents || [];
+  // engine.243: the city's memory of ended crises, carried on previousCycleState.
+  S.crisisMemory = S.crisisMemory || (prev.crisisMemory || []).slice();
 
   // ── channel state per hood ────────────────────────────────────────────────
   var nbState = S.neighborhoodState || {};
@@ -246,13 +361,17 @@ function generateCrisisBuckets_(ctx) {
       if (newPhase !== arc.phase) {
         arc.phaseStartCycle = cycle;
         if (newPhase === 'peak') {
-          emitRipple_(arc, 'crisis-peak', CRISIS_DETECT.ONSET_RIPPLE,
-            arc.neighborhood + ' crisis at peak (' + arc.consecutiveBad + ' straight bad cycles): ' + ch.evidence.join('; '));
+          var peakLine = crisisNamed_(arc, arc.neighborhood + ' crisis at peak (' +
+            arc.consecutiveBad + ' straight bad cycles): ' + ch.evidence.join('; '));
+          emitRipple_(arc, 'crisis-peak', CRISIS_DETECT.ONSET_RIPPLE, peakLine);
           queueAppendIntent_(ctx, 'Event_Arc_Ledger', ledgerRow_(arc, 'peak'), 'crisis arc peak', 'events');
+          // engine.243: the peak reaches the newsroom, not just the ledger.
+          pushCrisisLifecycleEvent_(ctx, arc, 'peak', peakLine,
+            ch.count >= 4 ? 'high' : 'medium', cycle);
         }
       }
       arc.phase = newPhase;
-      arc.summary = arc.neighborhood + ' under strain: ' + ch.evidence.join('; ');
+      arc.summary = crisisNamed_(arc, arc.neighborhood + ' under strain: ' + ch.evidence.join('; '));
       arc.citizens = ch.citizens.length ? ch.citizens : (arc.citizens || []);
     } else {
       // engine.186: BELOW the onset bar is recovery, whether that is one channel
@@ -265,16 +384,19 @@ function generateCrisisBuckets_(ctx) {
       if (arc.consecutiveGood >= CRISIS_DETECT.RESOLVE_CYCLES) {
         arc.phase = 'resolved';
         arc.cycleResolved = cycle;
-        arc.summary = arc.neighborhood + ' crisis eased after ' +
-          arc.consecutiveGood + ' cycles back within city range';
+        arc.summary = crisisNamed_(arc, arc.neighborhood + ' crisis eased after ' +
+          arc.consecutiveGood + ' cycles back within city range');
         emitRipple_(arc, 'crisis-resolved', CRISIS_DETECT.RESOLVED_RIPPLE, arc.summary);
         queueAppendIntent_(ctx, 'Event_Arc_Ledger', ledgerRow_(arc, 'resolved'), 'crisis arc resolved', 'events');
+        // engine.243: an ending the desks can cover, and a name the city keeps.
+        pushCrisisLifecycleEvent_(ctx, arc, 'resolved', arc.summary, 'low', cycle);
+        rememberCrisis_(S, arc, cycle);
       } else {
         if (arc.phase !== 'decline') arc.phaseStartCycle = cycle;
         arc.phase = 'decline';
-        arc.summary = ch.count === 1
+        arc.summary = crisisNamed_(arc, ch.count === 1
           ? arc.neighborhood + ' easing but still strained: ' + ch.evidence.join('; ')
-          : arc.neighborhood + ' recovering — pressure lifting';
+          : arc.neighborhood + ' recovering — pressure lifting');
       }
     }
     S.eventArcs.push(arc);
@@ -290,6 +412,13 @@ function generateCrisisBuckets_(ctx) {
 
     var domain = domainFor_(chk.evidence);
     var severity = chk.count >= 4 ? 'high' : chk.count === 3 ? 'medium' : 'low';
+    // engine.243: one name, minted at onset from the dominant detected channel,
+    // and the city's last crisis here if it remembers one.
+    var nameChannel = crisisNameChannel_(chk.evidence);
+    var arcName = crisisArcName_(hood, chk.evidence);
+    var priorHere = lastCrisisIn_(S, hood);
+    var onsetBody = hood + ' under strain: ' + chk.evidence.join('; ') +
+      (priorHere ? ' — first crisis here since ' + priorHere.name + ' (' + priorHere.cycleRef + ')' : '');
     var newArc = {
       arcId: 'CRISIS-' + cycle + '-' + hood.replace(/\s+/g, '').toUpperCase().slice(0, 8),
       type: 'crisis',
@@ -299,7 +428,9 @@ function generateCrisisBuckets_(ctx) {
       neighborhood: hood,
       domainTag: domain,
       domain: domain,
-      summary: hood + ' under strain: ' + chk.evidence.join('; '),
+      name: arcName,
+      nameChannel: nameChannel ? nameChannel.key : '',
+      summary: arcName ? arcName + ' — ' + onsetBody : onsetBody,
       subtype: chk.evidence[0],
       citizens: chk.citizens,
       consecutiveBad: 1,
@@ -335,6 +466,8 @@ function generateCrisisBuckets_(ctx) {
 
   // carry surface for finalizeCycleState (compactCrisisArcs_ v1.9)
   S.crisisArcsActive = liveArcs;
+  // engine.243: named crises the city still remembers, carried for the next cycle.
+  S.crisisMemoryActive = S.crisisMemory;
 
   Logger.log('generateCrisisBuckets_ v3.0: ' + liveArcs.length + ' active crisis arc(s)' +
     (carried.length ? ' (' + carried.length + ' carried in)' : '') + ' | cycle ' + cycle);

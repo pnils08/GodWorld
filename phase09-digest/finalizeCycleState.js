@@ -164,6 +164,10 @@ function finalizeCycleState_(ctx) {
     // prev-cycle grain (Hospital_Ledger is lazy-created — absent until the
     // first admission — so the tab can't be the reliable read).
     crisisArcs: compactCrisisArcs_(S.crisisArcsActive),
+    // engine.243: the city's memory of crises that ENDED, so a later onset in the
+    // same hood can say what the last one was. Capped at CRISIS_MEMORY_CAP (6) by
+    // rememberCrisis_ — ~90 bytes an entry against the 9KB budget.
+    crisisMemory: (S.crisisMemoryActive || S.crisisMemory || []),
     hospitalEvents: compactHospitalEvents_(S.hospitalEvents),
 
     // engine.96 Task 5 (S413): per-business distress streak + success window
@@ -240,6 +244,10 @@ function compactCrisisArcs_(arcs) {
     if (!a || a.phase === 'resolved') continue;
     out.push({
       arcId: a.arcId,
+      // engine.243: the name is minted once at onset. If it does not survive the
+      // carry the arc is re-anonymised every cycle and nothing can reference it.
+      name: a.name || '',
+      nameChannel: a.nameChannel || '',
       type: a.type,
       phase: a.phase,
       tension: a.tension,

@@ -179,6 +179,10 @@ function updateCrimeMetrics_Phase3_(ctx) {
     // engine.212: SAFETY counts — crisis spikes (generateCrisisSpikes.js DOMAINS) and chaos-cars
     // outcomes emit domain 'SAFETY' with a hood; nothing live ever emitted CHAOS/CRIME, so this
     // gate had never fired (SIM_DOCTRINE §15: a gate that can't fire is a trick).
+    // engine.243: crisis LIFECYCLE events (peak / resolved) are bulletins about an
+    // arc the crime engine already reads through its own channels — and a crisis
+    // ENDING must never push crime up. They are never a crime cause.
+    if (String(evt.subdomain || '') === 'crisis-lifecycle') continue;
     if (domain === 'CHAOS' || domain === 'CRIME' || domain === 'SAFETY') {
       chaosEvents++;
       var evHood = String(evt.neighborhood || '').trim();

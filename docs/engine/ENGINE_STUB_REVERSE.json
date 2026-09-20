@@ -2,7 +2,7 @@
   "generated": "2026-09-20",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 184,
-  "functionsMapped": 1433,
+  "functionsMapped": 1439,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -96,6 +96,7 @@
       "readers": [
         "phase01-config/advanceSimulationCalendar.js::inWorldStamp_",
         "phase03-population/generateCrisisBuckets.js::generateCrisisBuckets_",
+        "phase03-population/generateCrisisBuckets.js::rememberCrisis_",
         "phase10-persistence/buildCyclePacket.js::buildCyclePacket_",
         "phase10-persistence/saveChaosCars.js::chaosTimestampUtc_",
         "utilities/rippleLedger.js::rippleCycleStamp_"
@@ -1360,6 +1361,7 @@
     "worldEvents": {
       "writers": [
         "phase03-population/generateCrisisBuckets.js::generateCrisisBuckets_",
+        "phase03-population/generateCrisisBuckets.js::pushCrisisLifecycleEvent_",
         "phase03-population/generateCrisisSpikes.js::generateCrisisSpikes_",
         "phase04-events/faithEventsEngine.js::runFaithEventsEngine_",
         "phase04-events/worldEventsEngine.js::worldEventsEngine_",
@@ -1374,7 +1376,9 @@
         "phase03-population/applyDemographicDrift.js::applyDemographicDrift_",
         "phase03-population/deriveDemographicDrift.js::deriveDemographicDrift_",
         "phase03-population/finalizeWorldPopulation.js::finalizeWorldPopulation_",
+        "phase03-population/generateCrisisBuckets.js::crisisNamed_",
         "phase03-population/generateCrisisBuckets.js::generateCrisisBuckets_",
+        "phase03-population/generateCrisisBuckets.js::pushCrisisLifecycleEvent_",
         "phase03-population/generateCrisisSpikes.js::generateCrisisSpikes_",
         "phase03-population/updateCrimeMetrics.js::updateCrimeMetrics_Phase3_",
         "phase04-events/buildCityEvents.js::buildCityEvents_",
@@ -1533,6 +1537,7 @@
     "eventsGenerated": {
       "writers": [
         "phase03-population/generateCrisisBuckets.js::generateCrisisBuckets_",
+        "phase03-population/generateCrisisBuckets.js::pushCrisisLifecycleEvent_",
         "phase03-population/generateCrisisSpikes.js::generateCrisisSpikes_",
         "phase04-events/generateGameModeMicroEvents.js::generateGameModeMicroEvents_",
         "phase04-events/generateGenericCitizenMicroEvent.js::generateGenericCitizenMicroEvents_",
@@ -1556,6 +1561,7 @@
         "phase01-config/godWorldEngine2.js::writeDigest_",
         "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
         "phase03-population/generateCrisisBuckets.js::generateCrisisBuckets_",
+        "phase03-population/generateCrisisBuckets.js::pushCrisisLifecycleEvent_",
         "phase03-population/generateCrisisSpikes.js::generateCrisisSpikes_",
         "phase04-events/generateGameModeMicroEvents.js::generateGameModeMicroEvents_",
         "phase04-events/generateGenericCitizenMicroEvent.js::generateGenericCitizenMicroEvents_",
@@ -2630,7 +2636,27 @@
         "phase10-persistence/recordMediaLedger.js::recordMediaLedger_"
       ]
     },
+    "crisisMemory": {
+      "writers": [
+        "phase03-population/generateCrisisBuckets.js::generateCrisisBuckets_",
+        "phase03-population/generateCrisisBuckets.js::rememberCrisis_"
+      ],
+      "readers": [
+        "phase03-population/generateCrisisBuckets.js::generateCrisisBuckets_",
+        "phase03-population/generateCrisisBuckets.js::lastCrisisIn_",
+        "phase03-population/generateCrisisBuckets.js::rememberCrisis_",
+        "phase09-digest/finalizeCycleState.js::finalizeCycleState_"
+      ]
+    },
     "crisisArcsActive": {
+      "writers": [
+        "phase03-population/generateCrisisBuckets.js::generateCrisisBuckets_"
+      ],
+      "readers": [
+        "phase09-digest/finalizeCycleState.js::finalizeCycleState_"
+      ]
+    },
+    "crisisMemoryActive": {
       "writers": [
         "phase03-population/generateCrisisBuckets.js::generateCrisisBuckets_"
       ],

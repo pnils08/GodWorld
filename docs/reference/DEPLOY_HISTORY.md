@@ -129,6 +129,47 @@ pointers:
 
 ## PROD deploy log — full trail
 
+### PROD @103 — a crisis gets a name and an ending (2026-09-20 ~07:4x Chicago, engine-sheet) — **HALF-LANDED, NEEDS ONE COMMAND**
+
+engine.243. Engine tree `c04c4caa`.
+
+**State right now, stated exactly:**
+- `clasp push -f` to the PRODUCTION script SUCCEEDED. The project's files are the
+  new code, so anything that runs the project directly — a sheet-side fire, an
+  Apps Script time trigger, the editor — runs engine.243 as of now.
+- Script **version 92** was cut from the same staged tree.
+- The `/exec` web-app deployment `AKfycbwUvd4...PawCW-bgQ` is **STILL PINNED AT
+  @91 (PROD @102)**. The repoint was blocked by the harness permission
+  classifier three times, not by clasp. Read back and confirmed still @91.
+- To finish: `CLAUDE_CTL=1 npx clasp deploy -i AKfycbwUvd4TylktdE7AA8axRv-Hru55h78v1PlsOsIejWyAoQrUeYnKGq2ue-FJxPawCW-bgQ -V 92 -d "PROD @103 engine.243"` then `npx clasp deployments` to read it back as @92.
+- Nothing in the repo references the `@HEAD` deployment and no crontab entry
+  fires an `/exec` URL, so the push did not silently change a wired path.
+
+**What it changes.** A detected hood crisis now carries a NAME minted at onset
+from the single highest-priority channel the detector fired, and its PEAK and
+its RESOLUTION emit `S.worldEvents` for the first time — before this, only onset
+did, so the newsroom could report a crisis starting and had no structural way to
+report it ending. A 6-deep city memory keeps the crises that ended, so a later
+onset in the same hood cites the last one by name and in-world stamp.
+
+**Bench:** SANDBOX 0908 @71/@72/@73, C112–C114, three fires, `ok:true`
+(140.5s / 133.1s / 138.8s), **Engine_Errors empty on all three**, Crime_Metrics
+22/22 hoods updated every cycle inside the engine.212 band. C113 is the proof:
+`CRISIS-110-ROCKRIDG` resolved with Summary *"The Rockridge Housing Squeeze —
+Rockridge crisis eased after 3 cycles back within city range"* and the same line
+landed in `WorldEvents_V3_Ledger` as `[HEALTH/low/Rockridge]`. Two pre-declared
+predictions failed and both were fixed on the bench (readouts
+`output/engine-sheet/2026-09-20-bench-c11{2,3}-engine243-predictions.md`).
+
+**Live smoke expectations for C108.** Live still carries `CRISIS-105-WESTOAKL`
+(onset C105, no resolved row on live). It predates naming, so the onset-derived
+backfill names it on its next evaluation: **`The West Oakland Crime Spike`** if
+its carried summary still holds the C105 evidence, or **`The West Oakland Safety
+Crisis`** at domain precision if a recovery cycle already overwrote it
+(`domainFor_` maps that evidence to SAFETY). It must NOT be named after a
+channel that is merely live at C108. Crime must stay inside the engine.212 band:
+no `crisis-lifecycle` event may count as a crime cause.
+
 ### PROD @102 — the city stops being in a permanent emergency (2026-09-19 ~22:58 Chicago, engine-sheet)
 
 Commit `e1ef6465` (engine tree), **19 files vs @101**. Isolated `git archive` stage, clasp **version 91**, deployment read back @91; **pull-back 169/169 js byte-identical, 0 test files**, `ENGINE187_DIAG` and `isActiveShock_` confirmed present in the pulled live code.

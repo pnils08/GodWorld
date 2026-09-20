@@ -1,0 +1,73 @@
+========================================================================
+sessionEndMechanical: terminal=engine-sheet, rotate-history=false, dry-run=false
+========================================================================
+Expected upstream model step (BEFORE this script):
+  1. SESSION_CONTEXT.md PIN + NEXT[terminal] line + ROLLOUT_PLAN.md updated
+
+Mechanical sub-steps (5):
+  [1/5] session summary → Supermemory (best-effort)
+  [2/5] auditPlanTagDrift (informational)
+  [3/5] ROLLOUT conformance lint (informational)
+  [4/5] cross-terminal git stack check (read-only)
+  [5/5] pm2 restart
+========================================================================
+
+--- [1/5] session summary → Supermemory (best-effort) ---
+✓ session log → Supermemory [session-logs] doc 8bsr5xbHTkrdkdqrDaxZPN (2791 chars, 2 summary rows folded)
+
+--- [2/5] auditPlanTagDrift (informational) ---
+  # Plan tag drift audit
+  
+  Generated: 2026-09-20T22:07:16.332Z
+  Plans scanned: 122
+  No frontmatter: 6
+  No changelog: 7
+  No status-verb match: 107
+  Drifts found: 0
+  
+  No plan-tag drift detected.
+  ✓ no drift detected
+
+--- [3/5] ROLLOUT conformance lint (informational) ---
+  ROLLOUT LINT: 19 non-conforming row(s) — state-cell breaks the sweep, or item cell over the 280-char pointer budget:
+    L73 pipeline.69: item cell 936 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
+    L121 engine.185: item cell 288 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
+    L122 engine.189: item cell 292 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
+    L126 engine.195: item cell 520 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
+    L127 engine.196: item cell 903 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
+    L128 engine.197: item cell 694 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
+    L132 engine.202: item cell 866 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
+    L140 engine.213: item cell 513 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
+    L145 engine.216: item cell 613 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
+    L148 engine.212: item cell 3344 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
+    L152 engine.239: item cell 797 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
+    L153 engine.243: item cell 340 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
+    L154 engine.244: item cell 331 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
+    L156 engine.246: item cell 322 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
+    L157 engine.247: item cell 617 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
+    L158 engine.248: NO clean state-token cell → the sweep SILENTLY SKIPS this row (never archives). Fix: a bare `| <state> |` cell, no prose/pipes mangling it.
+    L159 engine.249: item cell 1293 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
+    L193 infrastructure.10: item cell 386 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
+    L194 infrastructure.11: item cell 457 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
+
+--- [4/5] cross-terminal git stack check (read-only) ---
+  ⚠ 11 unpushed commit(s) ahead of origin/main:
+    d7786203 S477 session-end [engine-sheet]: engine.249 ruled (hood migration scale + split, no rebase); C108 cron artifacts committed
+    3d1a20fa Life-history residue of the legacy faith pool line swapped to canon (49 ledger cells + 51 log lines, builder go); engine.248 scoped as its own review session
+    745a174e Faith canon data pass: 2 duplicate business rows retired to Business_Archive, imam repaired, programs + pool line + C108 seeds renamed; engine.248 filed
+    76d00512 Business_Ledger: 7 ruled faith-name substitutions applied on the builder's go (read back 7/7); 2 held — canon org already its own row
+    a0b8ae63 PROD @105 landed: engine.247 live (bench C116 @75 4/4, slips 1.41/2.59); feed column H plain text, 14 cells restored; pre-flight guards
+    d5738907 engine.247: read a date-coerced Team Record as the W-L that was typed
+    9a9c68f5 C108 execution-log review: G-EC61..68 added to the gap log; review ledger line corrected
+    fb5a9c5b S477 engine-sheet: C108 live chain complete on PROD @104 (smoke green) — review + summary + signal + texture + state + gap log; skills trued
+    421e97bb C108 run notes: civic chain timing finding parked for the civic rebuild (builder call)
+    174de65a C108 pre-fire: live baseline (cycleCount 107, World_Config 127 rows, Engine_Errors 0, shockFlag shock-flag)
+    cb108e84 C108 pre-fire: G-EC86 snapshot rebase for the engine.241 Civis recalibration + run readout
+  Model decision: push if all yours, hold if other terminals stacked.
+
+--- [5/5] pm2 restart ---
+  ✓ godworld-dashboard restarted
+
+========================================================================
+sessionEndMechanical: complete (terminal=engine-sheet)
+========================================================================

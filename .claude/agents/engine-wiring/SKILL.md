@@ -59,9 +59,11 @@ Run all of these. Do not skip a step because an earlier one "answered it".
 
 1. `node scripts/ctxMap.js <field>` — quote in full.
 2. STUB_REVERSE `sFields[<field>]` (command from function step 5).
-3. `grep -rn "S\.<field>\b\|ctx\.summary\.<field>\b" phase*/ lib/ utilities/ --include=*.js` — every site, classified READ/WRITE.
-4. For each WRITER function: its phase position (function step 3).
-5. Steps 7–9 from the function procedure, keyed on the field name.
+3. `grep -rn "S\.<field>\b\|ctx\.summary\.<field>\b" phase*/ lib/ utilities/ scripts/ --include=*.js` — every site, classified READ/WRITE. **`scripts/` is in this sweep and is not optional** — it was missing until S474 and that is exactly how the miss below happened.
+4. **PROSE PARSERS.** If the field carries text a human or an agent reads (a summary, description, headline, hook, quote), the dangerous reader is rarely an engine phase — it is a script that PARSES the string instead of printing it. Run `grep -rn "<field>\|summary\|description" scripts/build*.js scripts/*Packet*.js --include=*.js | grep -E "\.match\(|\.split\(|\.replace\(|indexOf\(|substring\(|slice\("` and list every hit on the READERS line marked **[PROSE-PARSER]**. A print-only reader tolerates any change to the string; a parser does not.
+   S474, the case this step exists for: engine.243 prefixed a crisis NAME onto `arc.summary`, which reaches 27 readers that all print it — and one, `scripts/buildDeskPackets.js:499`, that harvests `/[A-Z][a-z]+ [A-Z][a-z]+/g` out of it and hands the matches to a desk **as people to quote**. "The Rockridge Housing Squeeze" became two invented citizens. The card that session did not list it, because this step did not exist and step 3 did not sweep `scripts/`.
+5. For each WRITER function: its phase position (function step 3).
+6. Steps 7–9 from the function procedure, keyed on the field name.
 
 ## Procedure — tab
 
@@ -99,6 +101,8 @@ CALLERS (<n>)
 S FIELDS
   WRITE <field>   @ :<line>   readers: <fn@file>, …          [ORPHAN?]
   READ  <field>   @ :<line>   writers: <fn@file>, …          [PHANTOM?]
+  (a reader that PARSES the value rather than printing it is marked
+   [PROSE-PARSER] with its file:line — see field-procedure step 4)
 
 OTHER CTX
   <ctx.x> @ :<line>

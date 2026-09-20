@@ -163,6 +163,8 @@ crisis-spike row non-blank; no C108 hook reads "undefined"; World_Config gains t
 two illness keys; Riley_Digest C108 Issues carries no `illnessConvergenceRate`
 notice and the "recurred N cycles" world-issue stops growing.
 
+**LIVE C108 — fired 2026-09-20 15:41 Chicago (editor run), smoke green.** 132 phases, 0 failed, 131.7s. Spike rows described 10/10, 0 "undefined" hooks of 57, both illness keys seeded (World_Config 127 → 134 with the 4 `school*` + 1 engine.221 key), no missing-key Issue, `CRISIS-105-WESTOAKL` = **The West Oakland Crime Spike** (decline, tension 1.67, consecutiveGood 2), crime 22/22 inside the band (max move 5), shockFlag `shock-resolved`, retail canon-shaped, markers spread, no hood on the city Sentiment (0.45). Two misses against the written expectations, neither code: Engine_Errors **1** (`WeekRecord=A:W` authored on a `season-state` row, feed row 226 — refused with its row named, as built) and SportsSeason `playoffs` 22/22 not `championship` (the feed carries no `championship` row any more). `ENGINE187_DIAG` not readable on an editor fire. Full table: `output/engine_review_c108.md`.
+
 ### PROD @103 — a crisis gets a name and an ending (2026-09-20 ~12:12 Chicago, engine-sheet)
 
 engine.243. Engine tree `c04c4caa`.

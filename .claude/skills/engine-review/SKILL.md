@@ -12,7 +12,7 @@ disable-model-invocation: true
 
 ## Purpose
 
-After a cycle runs, identify what's broken, stuck, improving, declining, or incoherent — and produce a structured brief per ailment that `/sift` and `/write-edition` consume.
+After a cycle runs, identify what's broken, stuck, improving, declining, or incoherent — and produce a structured brief per ailment. **Consumers are the crons, not `/sift` / `/write-edition`** — see `/run-cycle` Step 4 "Who reads what" and §What Happens After; every `/sift` reference below is historical. Write the review for the next engine session and the civic chain: what is real, what is mechanism, what is routed to engine-debug.
 
 This skill no longer scans sheets by hand. The deterministic detector lives in `scripts/engineAuditor.js` (Phase 38.1 + 38.7 + 38.8, S146). The skill is the **framer** — it reads the auditor's JSON output and turns each pattern into a seven-field ailment brief, anomaly triage, and a baseline-brief pass-through. Determinism stays in code; narrative framing stays here.
 

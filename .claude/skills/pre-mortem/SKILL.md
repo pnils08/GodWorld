@@ -25,7 +25,7 @@ node scripts/preMortemScan.js --bench=<sandboxSheetId> > output/pre_mortem_scan.
 
 The script (ES-7 / G-PM7) runs scans **0, 1, 2, 5** deterministically, driven by the data file `.claude/skills/pre-mortem/known_gaps.json` (function-name-keyed acknowledged sites — update the JSON with code changes, never skill prose). **Exit codes:** `0` SAFE TO RUN (no CRITICAL) · `1` FIX BEFORE RUNNING (≥1 CRITICAL) · `2` scan error. Stop the cycle on exit 1.
 
-> **`--since` note:** auto-derive reads SESSION_CONTEXT's "Last Updated" header. After a same-day session close that date is *today*, so scan 0 reports "none — no engine touches" even when commits landed today. Pass `--since=<last-cycle-ship-date>` to scan a real window.
+> **`--since` note (still a trap at C108 — pass it explicitly; the fire date is the first line of `output/execution_log_c{XX-1}.txt`):** auto-derive reads SESSION_CONTEXT's "Last Updated" header. After a same-day session close that date is *today*, so scan 0 reports "none — no engine touches" even when commits landed today. Pass `--since=<last-cycle-ship-date>` to scan a real window.
 
 Real output (C95 shape):
 
@@ -105,7 +105,7 @@ node scripts/ctxMap.js | sed -n '/^ORDERING/,$p'
 |---|---|---|
 | `ORDERING — READ BEFORE WRITE` | the read **always** precedes the write (readMax < writeMin) | `** N UNDEFAULTED **` / `<-- no fallback` is **CRITICAL**. `[all defaulted]` is a silent degradation — the branch never takes, but nothing crashes. Log it, don't block on it |
 | `AMBIGUOUS` | the reader runs at several slots that straddle the writer | needs a human look; may or may not be real |
-| `DEAD FILES` | **every** top-level function in the file is unreachable from `runWorldCycle()` | its ctx reads never execute at all. Since S408 the block splits **UNDECLARED** (the signal — a file with no `// @cycle-status:` header; 0 today) from declared off-cycle/retired files listed for the record. A new UNDECLARED file is a real question; the declared list is not |
+| `DEAD FILES` | **every** top-level function in the file is unreachable from `runWorldCycle()` | its ctx reads never execute at all. Since S408 the block splits **UNDECLARED** (the signal — a file with no `// @cycle-status:` header; 1 at C108: `utilities/resolveCitizen.js`, the engine.90 shared core) from declared off-cycle/retired files listed for the record. A new UNDECLARED file is a real question; the declared list is not |
 
 **Three things the script will not do for you:**
 
@@ -122,6 +122,8 @@ node scripts/ctxMap.js | sed -n '/^ORDERING/,$p'
 - ~~World Events → Arc Engine~~ — the arc engine (`eventArcEngine_`) was retired S313 (engine.72 G-EC55) and has no caller. Do not chase its reads.
 
 ### 4. Sheet Header Alignment (MANUAL — script does NOT check this)
+
+**Tools exist, none is wired in yet (C108):** `scripts/auditSheetHeaders.js`, `auditPhase5Headers.js`, `auditRemainingHeaders.js` — all read-only. `auditSheetHeaders.js` carries S44-era writer schemas and false-flags WorldEvents_V3_Ledger, Story_Seed_Deck and Story_Hook_Deck; true it before trusting a ✗. The Step 6 `header-drift` detector reads `schemas/SCHEMA_HEADERS.md` — check that file has 0 `SKIPPED` lines first (`node scripts/regenSchemaHeaders.js` retries quota errors and aborts rather than write a hole).
 Check that columns referenced in engine code actually exist in the sheets. Use the service account to read sheet headers:
 
 ```javascript

@@ -1,44 +1,44 @@
 {
   "meta": {
-    "cycle": 107,
-    "builtAt": "2026-09-14T02:25:47.402Z",
+    "cycle": 108,
+    "builtAt": "2026-09-20T20:55:30.172Z",
     "sheetId": "1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk",
     "script": "buildWorldState.js v1.0",
     "notes": []
   },
   "orientation": {
-    "cycle": 107,
+    "cycle": 108,
     "simYear": "3",
     "simMonth": "1",
-    "simDay": "3",
+    "simDay": "4",
     "season": "Winter",
-    "holiday": "MLKDay",
+    "holiday": "none",
     "weather": {
-      "temp": 44,
-      "temperature": 44,
+      "temp": 46,
+      "temperature": 46,
       "type": "fog",
       "impact": 1.3,
-      "humidity": 74,
-      "windSpeed": 8,
+      "humidity": 70,
+      "windSpeed": 9,
       "windDirection": "W",
-      "windDirectionDeg": 254,
+      "windDirectionDeg": 283,
       "precipitationIntensity": 0,
       "precipitationType": "none",
       "frontState": "MARINE",
-      "frontStrength": 0.51,
+      "frontStrength": 0.49,
       "visibility": 4
     },
-    "citySentiment": "0.51",
+    "citySentiment": "0.45",
     "cycleWeight": "high-signal",
-    "cycleWeightReason": "1 high-severity event(s); High event volume (11); Notable weather impact; Very positive sentiment; Civic load strain.",
+    "cycleWeightReason": "High event volume (10); Notable weather impact; Very positive sentiment; Civic load strain; Strain trend detected.",
     "patternFlag": "strain-trend",
-    "shockFlag": "shock-flag",
+    "shockFlag": "shock-resolved",
     "civicLoad": "load-strain",
     "sportsSeason": "playoffs",
     "firstFriday": false
   },
   "canon": {
-    "sourceCycle": 107,
+    "sourceCycle": 108,
     "stale": false,
     "sourceSheetId": "1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk",
     "asRoster": [
@@ -924,7 +924,7 @@
       },
       {
         "popId": "POP-01081",
-        "name": "Hitoki  Ka",
+        "name": "Hitoki Ka",
         "tier": "4",
         "roleType": "Relief Pitcher / Oakland A's",
         "neighborhood": "KONO",
@@ -1023,9 +1023,9 @@
         "affectedNeighborhoods": "West Oakland",
         "policyDomain": "economic",
         "implementationPhase": "disbursement-active",
-        "milestoneNotes": "C106: Month-seven batch approved (12 households, total 69); Downtown outreach expansion authorized per storefront decline signals",
-        "nextScheduledAction": "Month-eight disbursement review and Downtown canvass deployment",
-        "nextActionCycle": 107
+        "milestoneNotes": "C107: Downtown canvass deployment authorized alongside month-eight disbursement review.",
+        "nextScheduledAction": "Month-eight disbursement completion and Downtown outreach impact assessment",
+        "nextActionCycle": 108
       },
       {
         "name": "Oakland Alternative Response Initiative",
@@ -1038,10 +1038,10 @@
         "voteBreakdown": "Cycle 82: Passed 5-4. Ramon Vega voted no. Leonard Tran voted yes.",
         "affectedNeighborhoods": "West Oakland, Fruitvale, East Oakland",
         "policyDomain": "safety",
-        "implementationPhase": "implementation-active",
-        "milestoneNotes": "C106: Emergency expansion to East Oakland authorized; District 1 evaluation continues, monthly reporting to Mayor's office",
-        "nextScheduledAction": "East Oakland dispatch protocol deployment",
-        "nextActionCycle": 107
+        "implementationPhase": "dispatch-live",
+        "milestoneNotes": "C107: East Oakland dispatch protocol deployment authorized; District 1 evaluation continues.",
+        "nextScheduledAction": "District 1 evaluation completion and potential expansion decision",
+        "nextActionCycle": 108
       },
       {
         "name": "Temescal Community Health Center",
@@ -1055,9 +1055,9 @@
         "affectedNeighborhoods": "Temescal",
         "policyDomain": "health",
         "implementationPhase": "construction-active",
-        "milestoneNotes": "C106: Interior wall framing and utility inspections authorized; MEP rough-ins advancing with second shift",
-        "nextScheduledAction": "Utility inspections and interior systems rough-in completion",
-        "nextActionCycle": 107
+        "milestoneNotes": "C107: MEP rough-ins completed, utility inspections certified ahead of schedule",
+        "nextScheduledAction": "Drywall installation and fire-rated wall inspections",
+        "nextActionCycle": 108
       },
       {
         "name": "Baylight District — Final Council Vote",
@@ -1071,41 +1071,41 @@
         "affectedNeighborhoods": "Jack London, Downtown",
         "policyDomain": "sports",
         "implementationPhase": "construction-planning",
-        "milestoneNotes": "C106: Final council approval received; construction planning active, contract signing in progress",
-        "nextScheduledAction": "Contract execution and site preparation mobilization",
-        "nextActionCycle": 107
+        "milestoneNotes": "C107: Construction contracts executed; site preparation mobilization begins",
+        "nextScheduledAction": "Phase II site remediation",
+        "nextActionCycle": 108
       }
     ]
   },
   "hoods": {
-    "Downtown": "The Telegraph Presbyterian Fellowship opens its doors for community support, while the seniors lunch program celebrates a milestone. SpeedyBurger remains a quick stop for locals.",
-    "Temescal": "The Temescal Community Health Center construction continues, drawing attention on Telegraph Avenue. Gridiron Analytics has added new faces to its team.",
-    "Laurel": "A quiet week — nothing much out of the ordinary around the neighborhood.",
-    "West Oakland": "Residents receive payments from the West Oakland Stabilization Fund, and a new neighbor from Chinatown joins the block. The Varek Family Block Party brings the community together.",
-    "Fruitvale": "The Fruitvale Transit Hub Phase II design process is underway, and traditional Epiphany rituals are observed at St. Esperanza Parish. The Fruitvale Unity Gathering draws a crowd.",
-    "Jack London": "Dockhouse BBQ and Harborline Grill buzz with activity as the neighborhood sees new arrivals from Temescal. The Paulson Line Founding Celebration and the Misty Morning Coffee Club mark the week.",
-    "Rockridge": "Residents discuss the Oakland Alternative Response Initiative, feeling safer and more connected. Rico Valez is spotted at Canopy Market, and OakHouse remains a favorite spot.",
+    "Downtown": "SpeedyBurger's line stretches around the corner at lunchtime, and the sidewalks stay busy even after dark. Juliet Choi's building has more for-rent signs than usual.",
+    "Temescal": "The scaffolding around the Temescal Community Health Center is still up, and Telegraph Avenue feels quieter than usual. The holiday market draws a steady crowd, though.",
+    "Laurel": "A new neighbor's moving boxes sit piled on the porch of a house near the park. The block feels unchanged otherwise.",
+    "West Oakland": "Nightline Station's neon lights seem dimmer these days, and the sidewalks are emptier than usual. The Stabilization Fund checks are arriving in mailboxes.",
+    "Fruitvale": "The seniors lunch program at St. Esperanza Parish celebrates its milestone with a full dining hall. New faces are spotted on the block, unpacking boxes.",
+    "Jack London": "Heinold's First and Last Chance Saloon buzzes with playoff game chatter, and the waterfront walkway is crowded with joggers and dog walkers.",
+    "Rockridge": "Canopy Market's aisles are busy with shoppers, and Tara Ellison is spotted browsing the produce section. Denise Simmons' house has a \"For Rent\" sign out front.",
     "Adams Point": "A quiet week — nothing much out of the ordinary around the neighborhood.",
-    "Grand Lake": "A quiet week — nothing much out of the ordinary around the neighborhood.",
-    "Piedmont Ave": "Piedmont Pub continues to be a quiet evening retreat for locals.",
-    "Chinatown": "New residents move in from West Oakland, driven by rising rents, while Dragon Gate Lounge stays lively.",
-    "Brooklyn": "Foot traffic slows, and storefronts feel quieter compared to the rest of the city.",
-    "Eastlake": "A quiet week — nothing much out of the ordinary around the neighborhood.",
-    "Glenview": "The neighborhood remains quiet, with less foot traffic along the Dimond strip.",
-    "Dimond": "A quiet week — nothing much out of the ordinary around the neighborhood.",
+    "Grand Lake": "The theater marquee lights up the street, and the weekend market draws a steady crowd. A new neighbor mentions they were priced out of Lake Merritt.",
+    "Piedmont Ave": "A moving truck is parked outside a small apartment building, and boxes are being carried in. The street feels calm otherwise.",
+    "Chinatown": "A quiet week — nothing much out of the ordinary around the neighborhood.",
+    "Brooklyn": "Slip Street Kitchen's patio is full of diners enjoying the mild weather. A new family is spotted unpacking boxes on the block.",
+    "Eastlake": "The storefronts along the main strip feel quieter than usual, with fewer people browsing. The neighborhood feels like it's in transition.",
+    "Glenview": "A quiet week — nothing much out of the ordinary around the neighborhood.",
+    "Dimond": "The Dimond Neighborhood Stabilization Panel draws a small but engaged crowd. The strip feels unchanged otherwise.",
     "Ivy Hill": "A quiet week — nothing much out of the ordinary around the neighborhood.",
     "San Antonio": "A quiet week — nothing much out of the ordinary around the neighborhood.",
-    "KONO": "Telegraph Press and KONO Kitchen see familiar faces like GameGirl Gia and former A's Star Rodriguez, as the area continues to attract crowds.",
-    "Lake Merritt": "The Cathedral of the Living Word celebrates Epiphany, and new residents move in from Chinatown, Jack London, and Fruitvale.",
-    "Uptown": "The Coliseum District Development sparks curiosity as people imagine its future, while the neighborhood remains a bustling destination.",
-    "Baylight District": "A new resident joins the block from Laurel, adding to the growing community.",
-    "East Oakland": "Foothill Baptist Tabernacle’s food pantry serves neighbors in need, providing essential support.\n\n---\n\n_Generated by `scripts/buildNeighborhoodTexture.js` v1.1.0 from Riley_Digest + Neighborhood_Map + Story_Seed_Deck (cycle 107). One batched generation, frozen for the cycle. 15/22 hoods with engine signal; 7 quiet._"
+    "KONO": "Fox Theater Oakland's marquee lights up Telegraph Avenue, but the sidewalks feel quieter than usual. A low-severity health spike is noted.",
+    "Lake Merritt": "The Lantern Parade lights up the lakeside path, and the Cathedral of the Living Word's food pantry serves a steady line of neighbors. Yasmin Robinson's building has a \"For Rent\" sign out front.",
+    "Uptown": "Uptown Pour House's patio is packed with young professionals enjoying the evening. The sidewalks stay busy late into the night.",
+    "Baylight District": "Bubic Burgers' patio is quieter than usual, and the sidewalks feel less crowded. The neighborhood seems to be cooling off.",
+    "East Oakland": "Foothill Baptist Tabernacle's youth program graduation ceremony draws a proud crowd. The neighborhood feels unchanged otherwise.\n\n---\n\n_Generated by `scripts/buildNeighborhoodTexture.js` v1.1.0 from Riley_Digest + Neighborhood_Map + Story_Seed_Deck (cycle 108). One batched generation, frozen for the cycle. 17/22 hoods with engine signal; 5 quiet._"
   },
   "pointers": {
-    "worldSummary": "output/world_summary_c107.md",
-    "deskSignal": "output/desk_signal_c107.json",
-    "neighborhoodTexture": "output/neighborhood_texture_c107.md",
-    "engineAudit": "output/engine_audit_c107.json",
-    "engineReview": "output/engine_review_c107.md"
+    "worldSummary": "output/world_summary_c108.md",
+    "deskSignal": "output/desk_signal_c108.json",
+    "neighborhoodTexture": "output/neighborhood_texture_c108.md",
+    "engineAudit": "output/engine_audit_c108.json",
+    "engineReview": "output/engine_review_c108.md"
   }
 }

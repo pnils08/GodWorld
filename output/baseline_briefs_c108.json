@@ -1,0 +1,2988 @@
+{
+  "cycle": 108,
+  "generatedAt": "C108",
+  "generatorVersion": "1.2.0",
+  "briefs": [
+    {
+      "id": "event-civic-0-c108",
+      "eventClass": "world-event",
+      "subjectIds": [
+        "POP-00730",
+        "POP-01086",
+        "POP-01090",
+        "POP-01104"
+      ],
+      "neighborhood": "Dimond",
+      "cycle": 108,
+      "facts": {
+        "description": "Medium-severity civic spike in Dimond",
+        "descriptionSource": "ledger",
+        "eventType": "civic-activity",
+        "domain": "CIVIC",
+        "severity": "medium",
+        "lastDomainCoverageCycle": 106,
+        "neighborhoodState": {
+          "crimeIndex": {
+            "value": 0.66,
+            "delta": 0.04
+          },
+          "retailVitality": {
+            "value": 5.67,
+            "delta": -1.12
+          },
+          "eventAttractiveness": {
+            "value": 8,
+            "delta": -6
+          },
+          "sentiment": {
+            "value": 0.26,
+            "delta": -0.39
+          },
+          "medianIncome": 80000,
+          "medianRent": 1600,
+          "housingPressure": "0",
+          "trajectory": "steady"
+        },
+        "neighborhoodResidents": [
+          {
+            "name": "Clarence Moody",
+            "popId": "POP-00730",
+            "tier": "4",
+            "occupation": "Retired Machinist"
+          },
+          {
+            "name": "Bruce Turner",
+            "popId": "POP-01086",
+            "tier": "4",
+            "occupation": "Server"
+          },
+          {
+            "name": "Elijah Walker",
+            "popId": "POP-01090",
+            "tier": "4",
+            "occupation": "Taxi driver"
+          },
+          {
+            "name": "Nala Okonkwo",
+            "popId": "POP-01104",
+            "tier": "4",
+            "occupation": "Fleet dispatcher"
+          }
+        ]
+      },
+      "threeLayerHandle": {
+        "engine": "civic domain event, impact n/a",
+        "simulation": "Dimond: crime 0.66 (+0.04), retail 5.67 (-1.12), sentiment 0.26 (-0.39), median income $80,000, trajectory: steady, housing pressure: 0 | residents: Clarence Moody (Retired Machinist), Bruce Turner (Server), Elijah Walker (Taxi driver), Nala Okonkwo (Fleet dispatcher)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Dimond has an active ailment this cycle — event contextualizes it"
+      ]
+    },
+    {
+      "id": "event-health-1-c108",
+      "eventClass": "world-event",
+      "subjectIds": [
+        "POP-01024",
+        "POP-00596",
+        "POP-01061",
+        "POP-00802"
+      ],
+      "neighborhood": "KONO",
+      "cycle": 108,
+      "facts": {
+        "description": "Low-severity health spike in KONO",
+        "descriptionSource": "ledger",
+        "eventType": "health-event",
+        "domain": "HEALTH",
+        "severity": "low",
+        "lastDomainCoverageCycle": 107,
+        "neighborhoodState": {
+          "crimeIndex": {
+            "value": 0.61,
+            "delta": -0.02
+          },
+          "retailVitality": {
+            "value": 7.67,
+            "delta": 0.69
+          },
+          "eventAttractiveness": {
+            "value": 14,
+            "delta": -14.5
+          },
+          "sentiment": {
+            "value": 0.17,
+            "delta": -0.07
+          },
+          "medianIncome": 82164,
+          "medianRent": 2054,
+          "housingPressure": "0",
+          "trajectory": "steady"
+        },
+        "neighborhoodResidents": [
+          {
+            "name": "AJ Dybantsa",
+            "popId": "POP-01024",
+            "tier": "2",
+            "occupation": "SF / The Oaks"
+          },
+          {
+            "name": "Michael Corliss",
+            "popId": "POP-00596",
+            "tier": "3",
+            "occupation": "Photographer"
+          },
+          {
+            "name": "Celeste Moon",
+            "popId": "POP-01061",
+            "tier": "3",
+            "occupation": "singer"
+          },
+          {
+            "name": "Funmi Shah",
+            "popId": "POP-00802",
+            "tier": "4",
+            "occupation": "Glazier"
+          }
+        ]
+      },
+      "threeLayerHandle": {
+        "engine": "health domain event, impact n/a",
+        "simulation": "KONO: crime 0.61 (-0.02), retail 7.67 (+0.69), sentiment 0.17 (-0.07), median income $82,164, trajectory: steady, housing pressure: 0 | residents: AJ Dybantsa (SF / The Oaks), Michael Corliss (Photographer), Celeste Moon (singer), Funmi Shah (Glazier)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "KONO has an active ailment this cycle — event contextualizes it"
+      ]
+    },
+    {
+      "id": "event-safety-2-c108",
+      "eventClass": "world-event",
+      "subjectIds": [
+        "POP-00022",
+        "POP-00114",
+        "POP-00170",
+        "POP-00206"
+      ],
+      "neighborhood": "Temescal",
+      "cycle": 108,
+      "facts": {
+        "description": "graffiti tagging",
+        "descriptionSource": "ledger",
+        "eventType": "safety-incident",
+        "domain": "SAFETY",
+        "severity": "medium",
+        "lastDomainCoverageCycle": 105,
+        "neighborhoodState": {
+          "crimeIndex": {
+            "value": 0.65,
+            "delta": -0.01
+          },
+          "retailVitality": {
+            "value": 5.02,
+            "delta": -1.03
+          },
+          "eventAttractiveness": {
+            "value": 11.5,
+            "delta": -15.17
+          },
+          "sentiment": {
+            "value": 0.38,
+            "delta": -0.08
+          },
+          "medianIncome": 68409,
+          "medianRent": 1710,
+          "housingPressure": "5",
+          "trajectory": "steady"
+        },
+        "neighborhoodResidents": [
+          {
+            "name": "Danny Horn",
+            "popId": "POP-00022",
+            "tier": "1",
+            "occupation": "Center Fielder, Oakland A's - Best player in the MLB"
+          },
+          {
+            "name": "Mike Kinder",
+            "popId": "POP-00114",
+            "tier": "1",
+            "occupation": "Former Manager, Oakland A's"
+          },
+          {
+            "name": "Melton Neilon",
+            "popId": "POP-00170",
+            "tier": "2",
+            "occupation": "Sourdough Baker"
+          },
+          {
+            "name": "Omar Lingio",
+            "popId": "POP-00206",
+            "tier": "3",
+            "occupation": "Vintage Clothing Store Owner"
+          }
+        ]
+      },
+      "threeLayerHandle": {
+        "engine": "safety domain event, impact n/a",
+        "simulation": "Temescal: crime 0.65 (-0.01), retail 5.02 (-1.03), sentiment 0.38 (-0.08), median income $68,409, trajectory: steady, housing pressure: 5 | residents: Danny Horn (Center Fielder, Oakland A's - Best player in the MLB), Mike Kinder (Former Manager, Oakland A's), Melton Neilon (Sourdough Baker), Omar Lingio (Vintage Clothing Store Owner)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Temescal has an active ailment this cycle — event contextualizes it"
+      ]
+    },
+    {
+      "id": "event-infrastructure-3-c108",
+      "eventClass": "world-event",
+      "subjectIds": [
+        "POP-00666",
+        "POP-01010",
+        "POP-01091",
+        "POP-01100"
+      ],
+      "neighborhood": "Brooklyn",
+      "cycle": 108,
+      "facts": {
+        "description": "3-block flicker",
+        "descriptionSource": "ledger",
+        "eventType": "infra-incident",
+        "domain": "INFRASTRUCTURE",
+        "severity": "medium",
+        "lastDomainCoverageCycle": 107,
+        "neighborhoodState": {
+          "crimeIndex": {
+            "value": 0.57,
+            "delta": -0.03
+          },
+          "retailVitality": {
+            "value": 6.07,
+            "delta": -0.8
+          },
+          "eventAttractiveness": {
+            "value": 7.08,
+            "delta": -5.08
+          },
+          "sentiment": {
+            "value": 0.32,
+            "delta": -0.24
+          },
+          "medianIncome": 129870,
+          "medianRent": 3247,
+          "housingPressure": "0",
+          "trajectory": "steady"
+        },
+        "neighborhoodResidents": [
+          {
+            "name": "Kaila Raimon",
+            "popId": "POP-00666",
+            "tier": "4",
+            "occupation": "Sourdough Baker"
+          },
+          {
+            "name": "Minh Raimon",
+            "popId": "POP-01010",
+            "tier": "4",
+            "occupation": "Carpenter Apprentice"
+          },
+          {
+            "name": "Mateo Nguyen",
+            "popId": "POP-01091",
+            "tier": "4",
+            "occupation": "Bakery worker"
+          },
+          {
+            "name": "Marco Davis",
+            "popId": "POP-01100",
+            "tier": "4",
+            "occupation": "Taxi driver"
+          }
+        ]
+      },
+      "threeLayerHandle": {
+        "engine": "infrastructure domain event, impact n/a",
+        "simulation": "Brooklyn: crime 0.57 (-0.03), retail 6.07 (-0.8), sentiment 0.32 (-0.24), median income $129,870, trajectory: steady, housing pressure: 0 | residents: Kaila Raimon (Sourdough Baker), Minh Raimon (Carpenter Apprentice), Mateo Nguyen (Bakery worker), Marco Davis (Taxi driver)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Brooklyn has an active ailment this cycle — event contextualizes it"
+      ]
+    },
+    {
+      "id": "event-general-4-c108",
+      "eventClass": "world-event",
+      "subjectIds": [
+        "POP-00127",
+        "POP-00533",
+        "POP-00597",
+        "POP-01023"
+      ],
+      "neighborhood": "Downtown",
+      "cycle": 108,
+      "facts": {
+        "description": "balloon release",
+        "descriptionSource": "ledger",
+        "eventType": "misc-event",
+        "domain": "GENERAL",
+        "severity": "medium",
+        "lastDomainCoverageCycle": null,
+        "neighborhoodState": {
+          "crimeIndex": {
+            "value": 0.52,
+            "delta": 0.05
+          },
+          "retailVitality": {
+            "value": 11.18,
+            "delta": -0.67
+          },
+          "eventAttractiveness": {
+            "value": 12.45,
+            "delta": -17.4
+          },
+          "sentiment": {
+            "value": 0.33,
+            "delta": 0
+          },
+          "medianIncome": 120962,
+          "medianRent": 3024,
+          "housingPressure": "5",
+          "trajectory": "growth"
+        },
+        "neighborhoodResidents": [
+          {
+            "name": "Mason Miller",
+            "popId": "POP-00127",
+            "tier": "1",
+            "occupation": "Sports Analyst A's / Retired HOF A's Closer"
+          },
+          {
+            "name": "Travis Coles",
+            "popId": "POP-00533",
+            "tier": "1",
+            "occupation": "Starting Pitcher, Oakland A's"
+          },
+          {
+            "name": "Eric Taveras",
+            "popId": "POP-00597",
+            "tier": "1",
+            "occupation": "Second Baseman, Oakland A's"
+          },
+          {
+            "name": "Adash Stanley",
+            "popId": "POP-01023",
+            "tier": "1",
+            "occupation": "PG / The Oaks "
+          }
+        ]
+      },
+      "threeLayerHandle": {
+        "engine": "general domain event, impact n/a",
+        "simulation": "Downtown: crime 0.52 (+0.05), retail 11.18 (-0.67), sentiment 0.33, median income $120,962, trajectory: growth, housing pressure: 5 | residents: Mason Miller (Sports Analyst A's / Retired HOF A's Closer), Travis Coles (Starting Pitcher, Oakland A's), Eric Taveras (Second Baseman, Oakland A's), Adash Stanley (PG / The Oaks )",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Downtown has an active ailment this cycle — event contextualizes it"
+      ]
+    },
+    {
+      "id": "event-faith-5-c108",
+      "eventClass": "world-event",
+      "subjectIds": [
+        "POP-00125",
+        "POP-00005",
+        "POP-00041",
+        "POP-00042"
+      ],
+      "neighborhood": "Lake Merritt",
+      "cycle": 108,
+      "facts": {
+        "description": "Cathedral of the Living Word observes Epiphany",
+        "descriptionSource": "ledger",
+        "eventType": "misc-event",
+        "domain": "FAITH",
+        "severity": "low",
+        "lastDomainCoverageCycle": null,
+        "neighborhoodState": {
+          "crimeIndex": {
+            "value": 0.52,
+            "delta": 0.03
+          },
+          "retailVitality": {
+            "value": 7.55,
+            "delta": 0.13
+          },
+          "eventAttractiveness": {
+            "value": 7.93,
+            "delta": -16.55
+          },
+          "sentiment": {
+            "value": 0.32,
+            "delta": -0.13
+          },
+          "medianIncome": 185741,
+          "medianRent": 4644,
+          "housingPressure": "3.5",
+          "trajectory": "steady"
+        },
+        "neighborhoodResidents": [
+          {
+            "name": "Paul Skenes",
+            "popId": "POP-00125",
+            "tier": "1",
+            "occupation": "Retired former As"
+          },
+          {
+            "name": "Mags Corliss",
+            "popId": "POP-00005",
+            "tier": "2",
+            "occupation": "Editor-in-Chief"
+          },
+          {
+            "name": "Keisha Ramos",
+            "popId": "POP-00041",
+            "tier": "2",
+            "occupation": "Director, Baylight Redevelopment Authority"
+          },
+          {
+            "name": "Ramon Vega",
+            "popId": "POP-00042",
+            "tier": "2",
+            "occupation": "City Council President - D1"
+          }
+        ]
+      },
+      "threeLayerHandle": {
+        "engine": "faith domain event, impact n/a",
+        "simulation": "Lake Merritt: crime 0.52 (+0.03), retail 7.55 (+0.13), sentiment 0.32 (-0.13), median income $185,741, trajectory: steady, housing pressure: 3.5 | residents: Paul Skenes (Retired former As), Mags Corliss (Editor-in-Chief), Keisha Ramos (Director, Baylight Redevelopment Authority), Ramon Vega (City Council President - D1)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Lake Merritt has an active ailment this cycle — event contextualizes it"
+      ]
+    },
+    {
+      "id": "event-faith-6-c108",
+      "eventClass": "world-event",
+      "subjectIds": [
+        "POP-00031",
+        "POP-00143",
+        "POP-00198",
+        "POP-00231"
+      ],
+      "neighborhood": "Fruitvale",
+      "cycle": 108,
+      "facts": {
+        "description": "St. Esperanza Parish observes Epiphany",
+        "descriptionSource": "ledger",
+        "eventType": "misc-event",
+        "domain": "FAITH",
+        "severity": "low",
+        "lastDomainCoverageCycle": null,
+        "neighborhoodState": {
+          "crimeIndex": {
+            "value": 0.63,
+            "delta": 0.04
+          },
+          "retailVitality": {
+            "value": 9.67,
+            "delta": -1.32
+          },
+          "eventAttractiveness": {
+            "value": 12.73,
+            "delta": -12.16
+          },
+          "sentiment": {
+            "value": 0.44,
+            "delta": -0.03
+          },
+          "medianIncome": 98392,
+          "medianRent": 2460,
+          "housingPressure": "1.5",
+          "trajectory": "growth"
+        },
+        "neighborhoodResidents": [
+          {
+            "name": "Martin Richards",
+            "popId": "POP-00031",
+            "tier": "1",
+            "occupation": "Third Baseman, New York Mets"
+          },
+          {
+            "name": "Clarissa Dane",
+            "popId": "POP-00143",
+            "tier": "2",
+            "occupation": "DISTRICT ATTORNEY"
+          },
+          {
+            "name": "Rick Walker",
+            "popId": "POP-00198",
+            "tier": "2",
+            "occupation": "K-8 Teacher,Former Line cook"
+          },
+          {
+            "name": "Calvin Turner",
+            "popId": "POP-00231",
+            "tier": "2",
+            "occupation": "Mechanic"
+          }
+        ]
+      },
+      "threeLayerHandle": {
+        "engine": "faith domain event, impact n/a",
+        "simulation": "Fruitvale: crime 0.63 (+0.04), retail 9.67 (-1.32), sentiment 0.44 (-0.03), median income $98,392, trajectory: growth, housing pressure: 1.5 | residents: Martin Richards (Third Baseman, New York Mets), Clarissa Dane (DISTRICT ATTORNEY), Rick Walker (K-8 Teacher,Former Line cook), Calvin Turner (Mechanic)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Fruitvale has an active ailment this cycle — event contextualizes it"
+      ]
+    },
+    {
+      "id": "event-faith-7-c108",
+      "eventClass": "world-event",
+      "subjectIds": [
+        "POP-01047",
+        "POP-00119",
+        "POP-00891",
+        "POP-01055"
+      ],
+      "neighborhood": "East Oakland",
+      "cycle": 108,
+      "facts": {
+        "description": "Foothill Baptist Tabernacle: youth program graduation ceremony",
+        "descriptionSource": "ledger",
+        "eventType": "misc-event",
+        "domain": "FAITH",
+        "severity": "low",
+        "lastDomainCoverageCycle": null,
+        "neighborhoodState": {
+          "crimeIndex": {
+            "value": 0.66,
+            "delta": 0.05
+          },
+          "retailVitality": {
+            "value": 5.9,
+            "delta": -0.26
+          },
+          "eventAttractiveness": {
+            "value": 8.25,
+            "delta": -11.25
+          },
+          "sentiment": {
+            "value": 0.46,
+            "delta": -0.14
+          },
+          "medianIncome": 72144,
+          "medianRent": 1563,
+          "housingPressure": "0",
+          "trajectory": "steady"
+        },
+        "neighborhoodResidents": [
+          {
+            "name": "Maria Conteras",
+            "popId": "POP-01047",
+            "tier": "3",
+            "occupation": "High School Teacher"
+          },
+          {
+            "name": "Beverly Peterson",
+            "popId": "POP-00119",
+            "tier": "4",
+            "occupation": "Scout, Oakland A's"
+          },
+          {
+            "name": "Renée Cabrera",
+            "popId": "POP-00891",
+            "tier": "4",
+            "occupation": "Physical Therapist"
+          },
+          {
+            "name": "Jerome Pittman",
+            "popId": "POP-01055",
+            "tier": "4",
+            "occupation": "Transit Hub D5 Intake Liaison"
+          }
+        ]
+      },
+      "threeLayerHandle": {
+        "engine": "faith domain event, impact n/a",
+        "simulation": "East Oakland: crime 0.66 (+0.05), retail 5.9 (-0.26), sentiment 0.46 (-0.14), median income $72,144, trajectory: steady, housing pressure: 0 | residents: Maria Conteras (High School Teacher), Beverly Peterson (Scout, Oakland A's), Renée Cabrera (Physical Therapist), Jerome Pittman (Transit Hub D5 Intake Liaison)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "East Oakland has an active ailment this cycle — event contextualizes it"
+      ]
+    },
+    {
+      "id": "event-faith-8-c108",
+      "eventClass": "world-event",
+      "subjectIds": [
+        "POP-00125",
+        "POP-00005",
+        "POP-00041",
+        "POP-00042"
+      ],
+      "neighborhood": "Lake Merritt",
+      "cycle": 108,
+      "facts": {
+        "description": "Cathedral of the Living Word: food pantry serves neighbors in need",
+        "descriptionSource": "ledger",
+        "eventType": "misc-event",
+        "domain": "FAITH",
+        "severity": "low",
+        "lastDomainCoverageCycle": null,
+        "neighborhoodState": {
+          "crimeIndex": {
+            "value": 0.52,
+            "delta": 0.03
+          },
+          "retailVitality": {
+            "value": 7.55,
+            "delta": 0.13
+          },
+          "eventAttractiveness": {
+            "value": 7.93,
+            "delta": -16.55
+          },
+          "sentiment": {
+            "value": 0.32,
+            "delta": -0.13
+          },
+          "medianIncome": 185741,
+          "medianRent": 4644,
+          "housingPressure": "3.5",
+          "trajectory": "steady"
+        },
+        "neighborhoodResidents": [
+          {
+            "name": "Paul Skenes",
+            "popId": "POP-00125",
+            "tier": "1",
+            "occupation": "Retired former As"
+          },
+          {
+            "name": "Mags Corliss",
+            "popId": "POP-00005",
+            "tier": "2",
+            "occupation": "Editor-in-Chief"
+          },
+          {
+            "name": "Keisha Ramos",
+            "popId": "POP-00041",
+            "tier": "2",
+            "occupation": "Director, Baylight Redevelopment Authority"
+          },
+          {
+            "name": "Ramon Vega",
+            "popId": "POP-00042",
+            "tier": "2",
+            "occupation": "City Council President - D1"
+          }
+        ]
+      },
+      "threeLayerHandle": {
+        "engine": "faith domain event, impact n/a",
+        "simulation": "Lake Merritt: crime 0.52 (+0.03), retail 7.55 (+0.13), sentiment 0.32 (-0.13), median income $185,741, trajectory: steady, housing pressure: 3.5 | residents: Paul Skenes (Retired former As), Mags Corliss (Editor-in-Chief), Keisha Ramos (Director, Baylight Redevelopment Authority), Ramon Vega (City Council President - D1)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Lake Merritt has an active ailment this cycle — event contextualizes it"
+      ]
+    },
+    {
+      "id": "event-faith-9-c108",
+      "eventClass": "world-event",
+      "subjectIds": [
+        "POP-00031",
+        "POP-00143",
+        "POP-00198",
+        "POP-00231"
+      ],
+      "neighborhood": "Fruitvale",
+      "cycle": 108,
+      "facts": {
+        "description": "St. Esperanza Parish: seniors lunch program marks milestone",
+        "descriptionSource": "ledger",
+        "eventType": "misc-event",
+        "domain": "FAITH",
+        "severity": "low",
+        "lastDomainCoverageCycle": null,
+        "neighborhoodState": {
+          "crimeIndex": {
+            "value": 0.63,
+            "delta": 0.04
+          },
+          "retailVitality": {
+            "value": 9.67,
+            "delta": -1.32
+          },
+          "eventAttractiveness": {
+            "value": 12.73,
+            "delta": -12.16
+          },
+          "sentiment": {
+            "value": 0.44,
+            "delta": -0.03
+          },
+          "medianIncome": 98392,
+          "medianRent": 2460,
+          "housingPressure": "1.5",
+          "trajectory": "growth"
+        },
+        "neighborhoodResidents": [
+          {
+            "name": "Martin Richards",
+            "popId": "POP-00031",
+            "tier": "1",
+            "occupation": "Third Baseman, New York Mets"
+          },
+          {
+            "name": "Clarissa Dane",
+            "popId": "POP-00143",
+            "tier": "2",
+            "occupation": "DISTRICT ATTORNEY"
+          },
+          {
+            "name": "Rick Walker",
+            "popId": "POP-00198",
+            "tier": "2",
+            "occupation": "K-8 Teacher,Former Line cook"
+          },
+          {
+            "name": "Calvin Turner",
+            "popId": "POP-00231",
+            "tier": "2",
+            "occupation": "Mechanic"
+          }
+        ]
+      },
+      "threeLayerHandle": {
+        "engine": "faith domain event, impact n/a",
+        "simulation": "Fruitvale: crime 0.63 (+0.04), retail 9.67 (-1.32), sentiment 0.44 (-0.03), median income $98,392, trajectory: growth, housing pressure: 1.5 | residents: Martin Richards (Third Baseman, New York Mets), Clarissa Dane (DISTRICT ATTORNEY), Rick Walker (K-8 Teacher,Former Line cook), Calvin Turner (Mechanic)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Fruitvale has an active ailment this cycle — event contextualizes it"
+      ]
+    },
+    {
+      "id": "milestone-INIT-002-c108",
+      "eventClass": "initiative-milestone",
+      "subjectIds": [],
+      "neighborhood": null,
+      "cycle": 108,
+      "facts": {
+        "initiativeId": "INIT-002",
+        "initiativeName": "Oakland Alternative Response Initiative",
+        "fromPhase": "implementation-active",
+        "toPhase": "dispatch-live",
+        "policyDomain": "safety"
+      },
+      "threeLayerHandle": {
+        "engine": "phase advanced implementation-active → dispatch-live",
+        "simulation": "affects: West Oakland, Fruitvale, East Oakland",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": []
+    },
+    {
+      "id": "life-POP-01115-0-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-01115"
+      ],
+      "neighborhood": "Grand Lake",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-01115",
+        "name": "Jill Lewis",
+        "tag": "Promotion",
+        "text": "Emerged into Tier-4 in Grand Lake",
+        "cycle": "108",
+        "tier": "4",
+        "role": "Mover"
+      },
+      "threeLayerHandle": {
+        "engine": "Promotion fired in C108",
+        "simulation": "Jill Lewis (tier=4, role=Mover)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Grand Lake has active ailment — life event contextualizes it",
+        "Citizen emerged — first-named appearance candidate"
+      ]
+    },
+    {
+      "id": "life-POP-01116-1-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-01116"
+      ],
+      "neighborhood": "Ivy Hill",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-01116",
+        "name": "Darius Hill",
+        "tag": "Promotion",
+        "text": "Emerged into Tier-4 in Ivy Hill",
+        "cycle": "108",
+        "tier": "4",
+        "role": "Security guard"
+      },
+      "threeLayerHandle": {
+        "engine": "Promotion fired in C108",
+        "simulation": "Darius Hill (tier=4, role=Security guard)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Ivy Hill has active ailment — life event contextualizes it",
+        "Citizen emerged — first-named appearance candidate"
+      ]
+    },
+    {
+      "id": "life-POP-01117-2-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-01117"
+      ],
+      "neighborhood": "Uptown",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-01117",
+        "name": "Graciela Foster",
+        "tag": "Promotion",
+        "text": "Emerged into Tier-4 in Uptown",
+        "cycle": "108",
+        "tier": "4",
+        "role": "IT support technician"
+      },
+      "threeLayerHandle": {
+        "engine": "Promotion fired in C108",
+        "simulation": "Graciela Foster (tier=4, role=IT support technician)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Uptown has active ailment — life event contextualizes it",
+        "Citizen emerged — first-named appearance candidate"
+      ]
+    },
+    {
+      "id": "life-POP-01118-3-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-01118"
+      ],
+      "neighborhood": "Eastlake",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-01118",
+        "name": "Hyejin Ward",
+        "tag": "Promotion",
+        "text": "Emerged into Tier-4 in Eastlake",
+        "cycle": "108",
+        "tier": "4",
+        "role": "After-school program aide"
+      },
+      "threeLayerHandle": {
+        "engine": "Promotion fired in C108",
+        "simulation": "Hyejin Ward (tier=4, role=After-school program aide)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Eastlake has active ailment — life event contextualizes it",
+        "Citizen emerged — first-named appearance candidate"
+      ]
+    },
+    {
+      "id": "life-POP-01119-4-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-01119"
+      ],
+      "neighborhood": "Brooklyn",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-01119",
+        "name": "Wren Sasaki",
+        "tag": "Promotion",
+        "text": "Emerged into Tier-4 in Brooklyn",
+        "cycle": "108",
+        "tier": "4",
+        "role": "Plumber"
+      },
+      "threeLayerHandle": {
+        "engine": "Promotion fired in C108",
+        "simulation": "Wren Sasaki (tier=4, role=Plumber)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Brooklyn has active ailment — life event contextualizes it",
+        "Citizen emerged — first-named appearance candidate"
+      ]
+    },
+    {
+      "id": "life-POP-01120-5-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-01120"
+      ],
+      "neighborhood": "Dimond",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-01120",
+        "name": "Destiny Xu",
+        "tag": "Promotion",
+        "text": "Emerged into Tier-4 in Dimond",
+        "cycle": "108",
+        "tier": "4",
+        "role": "Warehouse worker"
+      },
+      "threeLayerHandle": {
+        "engine": "Promotion fired in C108",
+        "simulation": "Destiny Xu (tier=4, role=Warehouse worker)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Dimond has active ailment — life event contextualizes it",
+        "Citizen emerged — first-named appearance candidate"
+      ]
+    },
+    {
+      "id": "life-POP-01121-6-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-01121"
+      ],
+      "neighborhood": "Glenview",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-01121",
+        "name": "Guadalupe Holloway",
+        "tag": "Promotion",
+        "text": "Emerged into Tier-4 in Glenview",
+        "cycle": "108",
+        "tier": "4",
+        "role": "Bartender"
+      },
+      "threeLayerHandle": {
+        "engine": "Promotion fired in C108",
+        "simulation": "Guadalupe Holloway (tier=4, role=Bartender)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Glenview has active ailment — life event contextualizes it",
+        "Citizen emerged — first-named appearance candidate"
+      ]
+    },
+    {
+      "id": "life-POP-00011-7-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00011"
+      ],
+      "neighborhood": "West Oakland",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00011",
+        "name": "Carmen Delaine",
+        "tag": "Advancement",
+        "text": "Intake at Tier 2. Media usage C107 (byline-landed): a Bay Tribune civic desk piece, C106",
+        "cycle": "108",
+        "tier": "2",
+        "role": "Journalist, Civic Affairs Reporter"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Carmen Delaine (tier=2, role=Journalist, Civic Affairs Reporter)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Tier-2 citizen — feature candidate",
+        "West Oakland has active ailment — life event contextualizes it",
+        "Advanced to Tier 2 — narrative weight"
+      ]
+    },
+    {
+      "id": "life-POP-00153-8-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00153"
+      ],
+      "neighborhood": "Uptown",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00153",
+        "name": "Jordan Velez",
+        "tag": "Advancement",
+        "text": "Intake at Tier 3. Media usage C107 (byline-landed): a Bay Tribune business desk piece, C106",
+        "cycle": "108",
+        "tier": "3",
+        "role": "Journalist, Economics & Labor"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Jordan Velez (tier=3, role=Journalist, Economics & Labor)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Uptown has active ailment — life event contextualizes it"
+      ]
+    },
+    {
+      "id": "life-POP-00155-9-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00155"
+      ],
+      "neighborhood": "Laurel",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00155",
+        "name": "Trevor Shimizu",
+        "tag": "Advancement",
+        "text": "Intake at Tier 3. Media usage C107 (byline-landed): a Bay Tribune civic desk piece, C106",
+        "cycle": "108",
+        "tier": "3",
+        "role": "Journalist, Transit & Infastructure"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Trevor Shimizu (tier=3, role=Journalist, Transit & Infastructure)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Laurel has active ailment — life event contextualizes it"
+      ]
+    },
+    {
+      "id": "life-POP-00636-10-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00636"
+      ],
+      "neighborhood": "Fruitvale",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00636",
+        "name": "Luis Navarro",
+        "tag": "Advancement",
+        "text": "Intake at Tier 3. Media usage C107 (byline-landed): a Bay Tribune civic desk piece, C106",
+        "cycle": "108",
+        "tier": "3",
+        "role": "Journalist, Investigations"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Luis Navarro (tier=3, role=Journalist, Investigations)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Fruitvale has active ailment — life event contextualizes it"
+      ]
+    },
+    {
+      "id": "life-POP-00156-11-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00156"
+      ],
+      "neighborhood": "Jack London",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00156",
+        "name": "Angela Reyes",
+        "tag": "Advancement",
+        "text": "Intake at Tier 3. Media usage C107 (byline-landed): a Bay Tribune civic desk piece, C106",
+        "cycle": "108",
+        "tier": "3",
+        "role": "Journalist, Education"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Angela Reyes (tier=3, role=Journalist, Education)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Jack London has active ailment — life event contextualizes it"
+      ]
+    },
+    {
+      "id": "life-POP-01076-12-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-01076"
+      ],
+      "neighborhood": "West Oakland",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-01076",
+        "name": "Nia Rook",
+        "tag": "Advancement",
+        "text": "Intake at Tier 4. Media usage C107 (byline-landed): an UNDOCKED show segment, C106",
+        "cycle": "108",
+        "tier": "4",
+        "role": "Journalist, UNDOCKED Recap"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Nia Rook (tier=4, role=Journalist, UNDOCKED Recap)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "West Oakland has active ailment — life event contextualizes it"
+      ]
+    },
+    {
+      "id": "life-POP-00799-13-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00799"
+      ],
+      "neighborhood": "Temescal",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00799",
+        "name": "Jax Caldera",
+        "tag": "Advancement",
+        "text": "Intake at Tier 3. Media usage C107 (byline-landed): a Bay Tribune civic desk piece, C106",
+        "cycle": "108",
+        "tier": "3",
+        "role": "Journalist, freelance accountability writer"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Jax Caldera (tier=3, role=Journalist, freelance accountability writer)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Temescal has active ailment — life event contextualizes it"
+      ]
+    },
+    {
+      "id": "life-POP-00157-14-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00157"
+      ],
+      "neighborhood": "Rockridge",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00157",
+        "name": "Noah Tan",
+        "tag": "Advancement",
+        "text": "Intake at Tier 4. Media usage C107 (byline-landed): a Bay Tribune civic desk piece, C106",
+        "cycle": "108",
+        "tier": "4",
+        "role": "Journalist, Weather & Environment"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Noah Tan (tier=4, role=Journalist, Weather & Environment)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Rockridge has active ailment — life event contextualizes it"
+      ]
+    },
+    {
+      "id": "life-POP-00008-15-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00008"
+      ],
+      "neighborhood": "West Oakland",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00008",
+        "name": "P Slayer",
+        "tag": "Advancement",
+        "text": "Intake at Tier 3. Media usage C107 (byline-landed): a Bay Tribune sports desk piece, C106",
+        "cycle": "108",
+        "tier": "3",
+        "role": "Journalist, Fan Columnist - Sports"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "P Slayer (tier=3, role=Journalist, Fan Columnist - Sports)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "West Oakland has active ailment — life event contextualizes it"
+      ]
+    },
+    {
+      "id": "life-POP-00012-16-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00012"
+      ],
+      "neighborhood": "Lake Merritt",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00012",
+        "name": "Elliot Graye",
+        "tag": "Advancement",
+        "text": "Intake at Tier 3. Media usage C107 (byline-landed): a Bay Tribune culture desk piece, C106",
+        "cycle": "108",
+        "tier": "3",
+        "role": "Journalist, Ethics & Faith Journalist"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Elliot Graye (tier=3, role=Journalist, Ethics & Faith Journalist)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Lake Merritt has active ailment — life event contextualizes it"
+      ]
+    },
+    {
+      "id": "life-POP-00016-17-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00016"
+      ],
+      "neighborhood": "Rockridge",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00016",
+        "name": "Simon Leary",
+        "tag": "Advancement",
+        "text": "Intake at Tier 3. Media usage C107 (byline-landed): a Bay Tribune sports desk piece, C106",
+        "cycle": "108",
+        "tier": "3",
+        "role": "Journalist, The Long View Columnist"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Simon Leary (tier=3, role=Journalist, The Long View Columnist)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Rockridge has active ailment — life event contextualizes it"
+      ]
+    },
+    {
+      "id": "life-POP-00007-18-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00007"
+      ],
+      "neighborhood": "Chinatown",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00007",
+        "name": "Hal Richmond",
+        "tag": "Advancement",
+        "text": "Intake at Tier 1. Media usage C107 (byline-landed): a Bay Tribune sports desk piece, C106",
+        "cycle": "108",
+        "tier": "1",
+        "role": "Journalist, Senior Historian"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Hal Richmond (tier=1, role=Journalist, Senior Historian)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Tier-1 citizen — feature candidate",
+        "Chinatown has active ailment — life event contextualizes it"
+      ]
+    },
+    {
+      "id": "life-POP-00592-19-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00592"
+      ],
+      "neighborhood": "Jack London",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00592",
+        "name": "Talia Finch",
+        "tag": "Advancement",
+        "text": "Intake at Tier 4. Media usage C107 (byline-landed): a Bay Tribune sports desk piece, C106",
+        "cycle": "108",
+        "tier": "4",
+        "role": "Journalist - The Oakland Oaks Ground Reporter"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Talia Finch (tier=4, role=Journalist - The Oakland Oaks Ground Reporter)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Jack London has active ailment — life event contextualizes it"
+      ]
+    },
+    {
+      "id": "life-POP-00160-20-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00160"
+      ],
+      "neighborhood": "Uptown",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00160",
+        "name": "Mason Ortega",
+        "tag": "Advancement",
+        "text": "Intake at Tier 3. Media usage C107 (byline-landed): a Bay Tribune culture desk piece, C106",
+        "cycle": "108",
+        "tier": "3",
+        "role": "Journalist, Food & Hospitality"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Mason Ortega (tier=3, role=Journalist, Food & Hospitality)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Uptown has active ailment — life event contextualizes it"
+      ]
+    },
+    {
+      "id": "life-POP-00158-21-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00158"
+      ],
+      "neighborhood": "Rockridge",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00158",
+        "name": "Kai Marston",
+        "tag": "Advancement",
+        "text": "Intake at Tier 4. Media usage C107 (byline-landed): a Bay Tribune culture desk piece, C106",
+        "cycle": "108",
+        "tier": "4",
+        "role": "Journalist, Arts & Entertainment"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Kai Marston (tier=4, role=Journalist, Arts & Entertainment)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Rockridge has active ailment — life event contextualizes it"
+      ]
+    },
+    {
+      "id": "life-POP-00159-22-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00159"
+      ],
+      "neighborhood": "Rockridge",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00159",
+        "name": "Sharon Okafor",
+        "tag": "Advancement",
+        "text": "Intake at Tier 2. Media usage C107 (byline-landed): a Bay Tribune culture desk piece, C106",
+        "cycle": "108",
+        "tier": "2",
+        "role": "Journalist, Lifestyle"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Sharon Okafor (tier=2, role=Journalist, Lifestyle)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Tier-2 citizen — feature candidate",
+        "Rockridge has active ailment — life event contextualizes it",
+        "Advanced to Tier 2 — narrative weight"
+      ]
+    },
+    {
+      "id": "life-POP-00013-23-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00013"
+      ],
+      "neighborhood": "Lake Merritt",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00013",
+        "name": "Maria Keen",
+        "tag": "Advancement",
+        "text": "Intake at Tier 4. Media usage C107 (byline-landed): a Bay Tribune culture desk piece, C106",
+        "cycle": "108",
+        "tier": "4",
+        "role": "Journalist, Cultural Liason"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Maria Keen (tier=4, role=Journalist, Cultural Liason)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Lake Merritt has active ailment — life event contextualizes it"
+      ]
+    },
+    {
+      "id": "life-POP-00591-24-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00591"
+      ],
+      "neighborhood": "Chinatown",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00591",
+        "name": "Selena Grant",
+        "tag": "Advancement",
+        "text": "Intake at Tier 2. Media usage C107 (byline-landed): a Bay Tribune sports desk piece, C106",
+        "cycle": "108",
+        "tier": "2",
+        "role": "Journalist - The Oakland Oaks Beat Reporter"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Selena Grant (tier=2, role=Journalist - The Oakland Oaks Beat Reporter)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Tier-2 citizen — feature candidate",
+        "Chinatown has active ailment — life event contextualizes it",
+        "Advanced to Tier 2 — narrative weight"
+      ]
+    },
+    {
+      "id": "life-POP-00183-25-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00183"
+      ],
+      "neighborhood": "Fruitvale",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00183",
+        "name": "Toby Lamont",
+        "tag": "Advancement",
+        "text": "Intake at Tier 4. Media usage C107 (quoted): a Bay Tribune business desk piece, C106",
+        "cycle": "108",
+        "tier": "4",
+        "role": "Mutual Aid Network Organizer"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Toby Lamont (tier=4, role=Mutual Aid Network Organizer)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Fruitvale has active ailment — life event contextualizes it"
+      ]
+    },
+    {
+      "id": "life-POP-01036-26-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-01036"
+      ],
+      "neighborhood": "Rockridge",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-01036",
+        "name": "Mei Wong",
+        "tag": "Advancement",
+        "text": "Intake at Tier 4. Media usage C107 (mentioned): a Bay Tribune civic desk piece, C106",
+        "cycle": "108",
+        "tier": "4",
+        "role": "After-school program aide"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Mei Wong (tier=4, role=After-school program aide)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Rockridge has active ailment — life event contextualizes it"
+      ]
+    },
+    {
+      "id": "life-POP-00743-27-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00743"
+      ],
+      "neighborhood": "Rockridge",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00743",
+        "name": "Rick Dillon",
+        "tag": "Advancement",
+        "text": "Intake at Tier 3. Media usage C107 (mentioned): a Bay Tribune civic desk piece, C106",
+        "cycle": "108",
+        "tier": "3",
+        "role": "Grade Schooler"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Rick Dillon (tier=3, role=Grade Schooler)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Rockridge has active ailment — life event contextualizes it"
+      ]
+    },
+    {
+      "id": "life-POP-00287-28-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00287"
+      ],
+      "neighborhood": "Rockridge",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00287",
+        "name": "Simone Adesanya",
+        "tag": "Advancement",
+        "text": "Intake at Tier 4. Media usage C107 (quoted): a Bay Tribune civic desk piece, C106",
+        "cycle": "108",
+        "tier": "4",
+        "role": "School Principal"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Simone Adesanya (tier=4, role=School Principal)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Rockridge has active ailment — life event contextualizes it"
+      ]
+    },
+    {
+      "id": "life-POP-00201-29-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00201"
+      ],
+      "neighborhood": "Rockridge",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00201",
+        "name": "Elio Perez",
+        "tag": "Advancement",
+        "text": "Intake at Tier 1. Media usage C107 (quoted): a Bay Tribune civic desk piece, C106",
+        "cycle": "108",
+        "tier": "1",
+        "role": "Server"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Elio Perez (tier=1, role=Server)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Tier-1 citizen — feature candidate",
+        "Rockridge has active ailment — life event contextualizes it"
+      ]
+    },
+    {
+      "id": "life-POP-00722-30-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00722"
+      ],
+      "neighborhood": "West Oakland",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00722",
+        "name": "Daniel Cloak",
+        "tag": "Advancement",
+        "text": "Intake at Tier 3. Media usage C107 (quoted): a Bay Tribune civic desk piece, C106",
+        "cycle": "108",
+        "tier": "3",
+        "role": "Bakery Worker"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Daniel Cloak (tier=3, role=Bakery Worker)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "West Oakland has active ailment — life event contextualizes it"
+      ]
+    },
+    {
+      "id": "life-POP-00961-31-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00961"
+      ],
+      "neighborhood": "West Oakland",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00961",
+        "name": "Darius Clark",
+        "tag": "Advancement",
+        "text": "Intake at Tier 3. Media usage C107 (mentioned): a Bay Tribune civic desk piece, C106",
+        "cycle": "108",
+        "tier": "3",
+        "role": "Bakery Worker"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Darius Clark (tier=3, role=Bakery Worker)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "West Oakland has active ailment — life event contextualizes it"
+      ]
+    },
+    {
+      "id": "life-POP-01061-32-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-01061"
+      ],
+      "neighborhood": "KONO",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-01061",
+        "name": "Celeste Moon",
+        "tag": "Advancement",
+        "text": "Intake at Tier 3. Media usage C107 (mentioned): a Bay Tribune civic desk piece, C106",
+        "cycle": "108",
+        "tier": "3",
+        "role": "singer"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Celeste Moon (tier=3, role=singer)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "KONO has active ailment — life event contextualizes it"
+      ]
+    },
+    {
+      "id": "life-POP-00688-33-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00688"
+      ],
+      "neighborhood": "Downtown",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00688",
+        "name": "Merkin Jumper",
+        "tag": "Advancement",
+        "text": "Intake at Tier 2. Media usage C107 (quoted): a Bay Tribune civic desk piece, C106",
+        "cycle": "108",
+        "tier": "2",
+        "role": "Social Services Caseworker"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Merkin Jumper (tier=2, role=Social Services Caseworker)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Tier-2 citizen — feature candidate",
+        "Downtown has active ailment — life event contextualizes it",
+        "Advanced to Tier 2 — narrative weight"
+      ]
+    },
+    {
+      "id": "life-POP-00753-34-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00753"
+      ],
+      "neighborhood": "Downtown",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00753",
+        "name": "Eunice Marston",
+        "tag": "Advancement",
+        "text": "Intake at Tier 2. Media usage C107 (quoted): a Bay Tribune civic desk piece, C106",
+        "cycle": "108",
+        "tier": "2",
+        "role": "Senior Pastor / Faith Leader"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Eunice Marston (tier=2, role=Senior Pastor / Faith Leader)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Tier-2 citizen — feature candidate",
+        "Downtown has active ailment — life event contextualizes it",
+        "Advanced to Tier 2 — narrative weight"
+      ]
+    },
+    {
+      "id": "life-POP-00201-35-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00201"
+      ],
+      "neighborhood": "Rockridge",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00201",
+        "name": "Elio Perez",
+        "tag": "Advancement",
+        "text": "Intake at Tier 1. Media usage C107 (quoted): a Bay Tribune civic desk piece, C106",
+        "cycle": "108",
+        "tier": "1",
+        "role": "Server"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Elio Perez (tier=1, role=Server)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Tier-1 citizen — feature candidate",
+        "Rockridge has active ailment — life event contextualizes it"
+      ]
+    },
+    {
+      "id": "life-POP-00210-36-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00210"
+      ],
+      "neighborhood": "Rockridge",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00210",
+        "name": "Depak Ying",
+        "tag": "Advancement",
+        "text": "Intake at Tier 2. Media usage C107 (mentioned): a Bay Tribune civic desk piece, C106",
+        "cycle": "108",
+        "tier": "2",
+        "role": "Server"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Depak Ying (tier=2, role=Server)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Tier-2 citizen — feature candidate",
+        "Rockridge has active ailment — life event contextualizes it",
+        "Advanced to Tier 2 — narrative weight"
+      ]
+    },
+    {
+      "id": "life-POP-00183-37-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00183"
+      ],
+      "neighborhood": "Fruitvale",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00183",
+        "name": "Toby Lamont",
+        "tag": "Advancement",
+        "text": "Intake at Tier 4. Media usage C107 (quoted): a Bay Tribune civic desk piece, C106",
+        "cycle": "108",
+        "tier": "4",
+        "role": "Mutual Aid Network Organizer"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Toby Lamont (tier=4, role=Mutual Aid Network Organizer)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Fruitvale has active ailment — life event contextualizes it"
+      ]
+    },
+    {
+      "id": "life-POP-00135-38-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00135"
+      ],
+      "neighborhood": "Lake Merritt",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00135",
+        "name": "Mina Linas",
+        "tag": "Advancement",
+        "text": "Intake at Tier 3. Media usage C107 (mentioned): a Bay Tribune civic desk piece, C106",
+        "cycle": "108",
+        "tier": "3",
+        "role": "Sea Level Monitoring Technician"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Mina Linas (tier=3, role=Sea Level Monitoring Technician)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Lake Merritt has active ailment — life event contextualizes it"
+      ]
+    },
+    {
+      "id": "life-POP-00291-39-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00291"
+      ],
+      "neighborhood": "Lake Merritt",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00291",
+        "name": "Enzo Walker",
+        "tag": "Advancement",
+        "text": "Intake at Tier 4. Media usage C107 (quoted): a Bay Tribune civic desk piece, C106",
+        "cycle": "108",
+        "tier": "4",
+        "role": "Plumber"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Enzo Walker (tier=4, role=Plumber)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Lake Merritt has active ailment — life event contextualizes it"
+      ]
+    },
+    {
+      "id": "life-POP-00178-40-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00178"
+      ],
+      "neighborhood": "Lake Merritt",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00178",
+        "name": "Tobi Sobi",
+        "tag": "Advancement",
+        "text": "Intake at Tier 4. Media usage C107 (mentioned): a Bay Tribune civic desk piece, C106",
+        "cycle": "108",
+        "tier": "4",
+        "role": "Climate Modeling Scientist"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Tobi Sobi (tier=4, role=Climate Modeling Scientist)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Lake Merritt has active ailment — life event contextualizes it"
+      ]
+    },
+    {
+      "id": "life-POP-00763-41-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00763"
+      ],
+      "neighborhood": "Chinatown",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00763",
+        "name": "Kenji Tanaka",
+        "tag": "Advancement",
+        "text": "Intake at Tier 2. Media usage C107 (quoted): a Bay Tribune culture desk piece, C106",
+        "cycle": "108",
+        "tier": "2",
+        "role": "Senior Pastor / Faith Leader"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Kenji Tanaka (tier=2, role=Senior Pastor / Faith Leader)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Tier-2 citizen — feature candidate",
+        "Chinatown has active ailment — life event contextualizes it",
+        "Advanced to Tier 2 — narrative weight"
+      ]
+    },
+    {
+      "id": "life-POP-00759-42-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00759"
+      ],
+      "neighborhood": "Rockridge",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00759",
+        "name": "Naomi Sterling",
+        "tag": "Advancement",
+        "text": "Intake at Tier 2. Media usage C107 (mentioned): a Bay Tribune culture desk piece, C106",
+        "cycle": "108",
+        "tier": "2",
+        "role": "Senior Pastor / Faith Leader"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Naomi Sterling (tier=2, role=Senior Pastor / Faith Leader)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Tier-2 citizen — feature candidate",
+        "Rockridge has active ailment — life event contextualizes it",
+        "Advanced to Tier 2 — narrative weight"
+      ]
+    },
+    {
+      "id": "life-POP-00781-43-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00781"
+      ],
+      "neighborhood": "Lake Merritt",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00781",
+        "name": "Vanessa Treary",
+        "tag": "Advancement",
+        "text": "Intake at Tier 3. Media usage C107 (quoted): a Bay Tribune culture desk piece, C106",
+        "cycle": "108",
+        "tier": "3",
+        "role": "Barista"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Vanessa Treary (tier=3, role=Barista)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Lake Merritt has active ailment — life event contextualizes it"
+      ]
+    },
+    {
+      "id": "life-POP-00783-44-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00783"
+      ],
+      "neighborhood": "Lake Merritt",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00783",
+        "name": "Yuki Ji",
+        "tag": "Advancement",
+        "text": "Intake at Tier 3. Media usage C107 (quoted): a Bay Tribune culture desk piece, C106",
+        "cycle": "108",
+        "tier": "3",
+        "role": "Bartender"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Yuki Ji (tier=3, role=Bartender)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Lake Merritt has active ailment — life event contextualizes it"
+      ]
+    },
+    {
+      "id": "life-POP-01045-45-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-01045"
+      ],
+      "neighborhood": "Lake Merritt",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-01045",
+        "name": "Vanessa Ramas",
+        "tag": "Advancement",
+        "text": "Intake at Tier 4. Media usage C107 (quoted): a Bay Tribune culture desk piece, C106",
+        "cycle": "108",
+        "tier": "4",
+        "role": "Barista"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Vanessa Ramas (tier=4, role=Barista)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Lake Merritt has active ailment — life event contextualizes it"
+      ]
+    },
+    {
+      "id": "life-POP-00135-46-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00135"
+      ],
+      "neighborhood": "Lake Merritt",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00135",
+        "name": "Mina Linas",
+        "tag": "Advancement",
+        "text": "Intake at Tier 3. Media usage C107 (quoted): a Bay Tribune culture desk piece, C106",
+        "cycle": "108",
+        "tier": "3",
+        "role": "Sea Level Monitoring Technician"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Mina Linas (tier=3, role=Sea Level Monitoring Technician)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Lake Merritt has active ailment — life event contextualizes it"
+      ]
+    },
+    {
+      "id": "life-POP-00783-47-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00783"
+      ],
+      "neighborhood": "Lake Merritt",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00783",
+        "name": "Yuki Ji",
+        "tag": "Advancement",
+        "text": "Intake at Tier 3. Media usage C107 (quoted): a Bay Tribune culture desk piece, C106",
+        "cycle": "108",
+        "tier": "3",
+        "role": "Bartender"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Yuki Ji (tier=3, role=Bartender)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Lake Merritt has active ailment — life event contextualizes it"
+      ]
+    },
+    {
+      "id": "life-POP-00135-48-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00135"
+      ],
+      "neighborhood": "Lake Merritt",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00135",
+        "name": "Mina Linas",
+        "tag": "Advancement",
+        "text": "Intake at Tier 3. Media usage C107 (quoted): a Bay Tribune culture desk piece, C106",
+        "cycle": "108",
+        "tier": "3",
+        "role": "Sea Level Monitoring Technician"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Mina Linas (tier=3, role=Sea Level Monitoring Technician)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Lake Merritt has active ailment — life event contextualizes it"
+      ]
+    },
+    {
+      "id": "life-POP-00744-49-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00744"
+      ],
+      "neighborhood": "Fruitvale",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00744",
+        "name": "Tomas Renteria",
+        "tag": "Advancement",
+        "text": "Intake at Tier 2. Media usage C107 (quoted): a Bay Tribune culture desk piece, C106",
+        "cycle": "108",
+        "tier": "2",
+        "role": "Podcast Host / Line Cook"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Tomas Renteria (tier=2, role=Podcast Host / Line Cook)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Tier-2 citizen — feature candidate",
+        "Fruitvale has active ailment — life event contextualizes it",
+        "Advanced to Tier 2 — narrative weight"
+      ]
+    },
+    {
+      "id": "life-POP-00878-50-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00878"
+      ],
+      "neighborhood": "Jack London",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00878",
+        "name": "Quynh Le",
+        "tag": "Advancement",
+        "text": "Intake at Tier 4. Media usage C107 (quoted): a Bay Tribune culture desk piece, C106",
+        "cycle": "108",
+        "tier": "4",
+        "role": "Line Cook"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Quynh Le (tier=4, role=Line Cook)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Jack London has active ailment — life event contextualizes it"
+      ]
+    },
+    {
+      "id": "life-POP-00960-51-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00960"
+      ],
+      "neighborhood": "Jack London",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00960",
+        "name": "Jalen Hill",
+        "tag": "Advancement",
+        "text": "Intake at Tier 4. Media usage C107 (mentioned): a Bay Tribune culture desk piece, C106",
+        "cycle": "108",
+        "tier": "4",
+        "role": "Line Cook"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Jalen Hill (tier=4, role=Line Cook)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Jack London has active ailment — life event contextualizes it"
+      ]
+    },
+    {
+      "id": "life-POP-00781-52-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00781"
+      ],
+      "neighborhood": "Lake Merritt",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00781",
+        "name": "Vanessa Treary",
+        "tag": "Advancement",
+        "text": "Intake at Tier 3. Media usage C107 (quoted): a Bay Tribune culture desk piece, C106",
+        "cycle": "108",
+        "tier": "3",
+        "role": "Barista"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Vanessa Treary (tier=3, role=Barista)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Lake Merritt has active ailment — life event contextualizes it"
+      ]
+    },
+    {
+      "id": "life-POP-00783-53-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00783"
+      ],
+      "neighborhood": "Lake Merritt",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00783",
+        "name": "Yuki Ji",
+        "tag": "Advancement",
+        "text": "Intake at Tier 3. Media usage C107 (quoted): a Bay Tribune culture desk piece, C106",
+        "cycle": "108",
+        "tier": "3",
+        "role": "Bartender"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Yuki Ji (tier=3, role=Bartender)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Lake Merritt has active ailment — life event contextualizes it"
+      ]
+    },
+    {
+      "id": "life-POP-00135-54-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00135"
+      ],
+      "neighborhood": "Lake Merritt",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00135",
+        "name": "Mina Linas",
+        "tag": "Advancement",
+        "text": "Intake at Tier 3. Media usage C107 (quoted): a Bay Tribune culture desk piece, C106",
+        "cycle": "108",
+        "tier": "3",
+        "role": "Sea Level Monitoring Technician"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Mina Linas (tier=3, role=Sea Level Monitoring Technician)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Lake Merritt has active ailment — life event contextualizes it"
+      ]
+    },
+    {
+      "id": "life-POP-00031-55-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00031"
+      ],
+      "neighborhood": "Fruitvale",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00031",
+        "name": "Martin Richards",
+        "tag": "Advancement",
+        "text": "Intake at Tier 1. Media usage C107 (mentioned): a Bay Tribune sports desk piece, C106",
+        "cycle": "108",
+        "tier": "1",
+        "role": "Third Baseman, New York Mets"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Martin Richards (tier=1, role=Third Baseman, New York Mets)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Tier-1 citizen — feature candidate",
+        "Fruitvale has active ailment — life event contextualizes it"
+      ]
+    },
+    {
+      "id": "life-POP-00273-56-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00273"
+      ],
+      "neighborhood": "Jack London",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00273",
+        "name": "Trenton Nawan",
+        "tag": "Advancement",
+        "text": "Intake at Tier 4. Media usage C107 (quoted): a Bay Tribune sports desk piece, C106",
+        "cycle": "108",
+        "tier": "4",
+        "role": "Server"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Trenton Nawan (tier=4, role=Server)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Jack London has active ailment — life event contextualizes it"
+      ]
+    },
+    {
+      "id": "life-POP-00642-57-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00642"
+      ],
+      "neighborhood": "Jack London",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00642",
+        "name": "Ollie Campbell",
+        "tag": "Advancement",
+        "text": "Intake at Tier 3. Media usage C107 (mentioned): a Bay Tribune sports desk piece, C106",
+        "cycle": "108",
+        "tier": "3",
+        "role": "Bakery Worker"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Ollie Campbell (tier=3, role=Bakery Worker)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Jack London has active ailment — life event contextualizes it"
+      ]
+    },
+    {
+      "id": "life-POP-00643-58-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00643"
+      ],
+      "neighborhood": "Jack London",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00643",
+        "name": "Guadalupe Lupe",
+        "tag": "Advancement",
+        "text": "Intake at Tier 3. Media usage C107 (quoted): a Bay Tribune sports desk piece, C106",
+        "cycle": "108",
+        "tier": "3",
+        "role": "Bartender"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Guadalupe Lupe (tier=3, role=Bartender)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Jack London has active ailment — life event contextualizes it"
+      ]
+    },
+    {
+      "id": "life-POP-00031-59-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00031"
+      ],
+      "neighborhood": "Fruitvale",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00031",
+        "name": "Martin Richards",
+        "tag": "Advancement",
+        "text": "Intake at Tier 1. Media usage C107 (quoted): a Bay Tribune sports desk piece, C106",
+        "cycle": "108",
+        "tier": "1",
+        "role": "Third Baseman, New York Mets"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Martin Richards (tier=1, role=Third Baseman, New York Mets)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Tier-1 citizen — feature candidate",
+        "Fruitvale has active ailment — life event contextualizes it"
+      ]
+    },
+    {
+      "id": "life-POP-00273-60-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00273"
+      ],
+      "neighborhood": "Jack London",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00273",
+        "name": "Trenton Nawan",
+        "tag": "Advancement",
+        "text": "Intake at Tier 4. Media usage C107 (quoted): a Bay Tribune sports desk piece, C106",
+        "cycle": "108",
+        "tier": "4",
+        "role": "Server"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Trenton Nawan (tier=4, role=Server)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Jack London has active ailment — life event contextualizes it"
+      ]
+    },
+    {
+      "id": "life-POP-00642-61-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00642"
+      ],
+      "neighborhood": "Jack London",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00642",
+        "name": "Ollie Campbell",
+        "tag": "Advancement",
+        "text": "Intake at Tier 3. Media usage C107 (quoted): a Bay Tribune sports desk piece, C106",
+        "cycle": "108",
+        "tier": "3",
+        "role": "Bakery Worker"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Ollie Campbell (tier=3, role=Bakery Worker)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Jack London has active ailment — life event contextualizes it"
+      ]
+    },
+    {
+      "id": "life-POP-00643-62-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00643"
+      ],
+      "neighborhood": "Jack London",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00643",
+        "name": "Guadalupe Lupe",
+        "tag": "Advancement",
+        "text": "Intake at Tier 3. Media usage C107 (quoted): a Bay Tribune sports desk piece, C106",
+        "cycle": "108",
+        "tier": "3",
+        "role": "Bartender"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Guadalupe Lupe (tier=3, role=Bartender)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Jack London has active ailment — life event contextualizes it"
+      ]
+    },
+    {
+      "id": "life-POP-01024-63-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-01024"
+      ],
+      "neighborhood": "KONO",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-01024",
+        "name": "AJ Dybantsa",
+        "tag": "Advancement",
+        "text": "Intake at Tier 2. Media usage C107 (quoted): a Bay Tribune sports desk piece, C106",
+        "cycle": "108",
+        "tier": "2",
+        "role": "SF / The Oaks"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "AJ Dybantsa (tier=2, role=SF / The Oaks)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Tier-2 citizen — feature candidate",
+        "KONO has active ailment — life event contextualizes it",
+        "Advanced to Tier 2 — narrative weight"
+      ]
+    },
+    {
+      "id": "life-POP-00170-64-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00170"
+      ],
+      "neighborhood": "Temescal",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00170",
+        "name": "Melton Neilon",
+        "tag": "Advancement",
+        "text": "Intake at Tier 2. Media usage C107 (quoted): a Bay Tribune sports desk piece, C106",
+        "cycle": "108",
+        "tier": "2",
+        "role": "Sourdough Baker"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Melton Neilon (tier=2, role=Sourdough Baker)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Tier-2 citizen — feature candidate",
+        "Temescal has active ailment — life event contextualizes it",
+        "Advanced to Tier 2 — narrative weight"
+      ]
+    },
+    {
+      "id": "life-POP-00198-65-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00198"
+      ],
+      "neighborhood": "Fruitvale",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00198",
+        "name": "Rick Walker",
+        "tag": "Advancement",
+        "text": "Intake at Tier 2. Media usage C107 (quoted): a Bay Tribune sports desk piece, C106",
+        "cycle": "108",
+        "tier": "2",
+        "role": "K-8 Teacher,Former Line cook"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Rick Walker (tier=2, role=K-8 Teacher,Former Line cook)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Tier-2 citizen — feature candidate",
+        "Fruitvale has active ailment — life event contextualizes it",
+        "Advanced to Tier 2 — narrative weight"
+      ]
+    },
+    {
+      "id": "life-POP-00201-66-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00201"
+      ],
+      "neighborhood": "Rockridge",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00201",
+        "name": "Elio Perez",
+        "tag": "Advancement",
+        "text": "Intake at Tier 1. Media usage C107 (quoted): a Bay Tribune sports desk piece, C106",
+        "cycle": "108",
+        "tier": "1",
+        "role": "Server"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Elio Perez (tier=1, role=Server)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Tier-1 citizen — feature candidate",
+        "Rockridge has active ailment — life event contextualizes it"
+      ]
+    },
+    {
+      "id": "life-POP-00031-67-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00031"
+      ],
+      "neighborhood": "Fruitvale",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00031",
+        "name": "Martin Richards",
+        "tag": "Advancement",
+        "text": "Intake at Tier 1. Media usage C107 (mentioned): a Bay Tribune sports desk piece, C106",
+        "cycle": "108",
+        "tier": "1",
+        "role": "Third Baseman, New York Mets"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Martin Richards (tier=1, role=Third Baseman, New York Mets)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Tier-1 citizen — feature candidate",
+        "Fruitvale has active ailment — life event contextualizes it"
+      ]
+    },
+    {
+      "id": "life-POP-00642-68-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00642"
+      ],
+      "neighborhood": "Jack London",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00642",
+        "name": "Ollie Campbell",
+        "tag": "Advancement",
+        "text": "Intake at Tier 3. Media usage C107 (mentioned): a Bay Tribune sports desk piece, C106",
+        "cycle": "108",
+        "tier": "3",
+        "role": "Bakery Worker"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Ollie Campbell (tier=3, role=Bakery Worker)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Jack London has active ailment — life event contextualizes it"
+      ]
+    },
+    {
+      "id": "life-POP-00201-69-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00201"
+      ],
+      "neighborhood": "Rockridge",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00201",
+        "name": "Elio Perez",
+        "tag": "Advancement",
+        "text": "Intake at Tier 1. Media usage C107 (quoted): a Bay Tribune sports desk piece, C106",
+        "cycle": "108",
+        "tier": "1",
+        "role": "Server"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Elio Perez (tier=1, role=Server)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Tier-1 citizen — feature candidate",
+        "Rockridge has active ailment — life event contextualizes it"
+      ]
+    },
+    {
+      "id": "life-POP-00722-70-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00722"
+      ],
+      "neighborhood": "West Oakland",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00722",
+        "name": "Daniel Cloak",
+        "tag": "Advancement",
+        "text": "Intake at Tier 3. Media usage C107 (quoted): a Bay Tribune sports desk piece, C106",
+        "cycle": "108",
+        "tier": "3",
+        "role": "Bakery Worker"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Daniel Cloak (tier=3, role=Bakery Worker)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "West Oakland has active ailment — life event contextualizes it"
+      ]
+    },
+    {
+      "id": "life-POP-00794-71-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00794"
+      ],
+      "neighborhood": "West Oakland",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00794",
+        "name": "Irene Fay",
+        "tag": "Advancement",
+        "text": "Intake at Tier 3. Media usage C107 (quoted): a Bay Tribune sports desk piece, C106",
+        "cycle": "108",
+        "tier": "3",
+        "role": "Barista"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Irene Fay (tier=3, role=Barista)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "West Oakland has active ailment — life event contextualizes it"
+      ]
+    },
+    {
+      "id": "life-POP-00961-72-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00961"
+      ],
+      "neighborhood": "West Oakland",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00961",
+        "name": "Darius Clark",
+        "tag": "Advancement",
+        "text": "Intake at Tier 3. Media usage C107 (quoted): a Bay Tribune sports desk piece, C106",
+        "cycle": "108",
+        "tier": "3",
+        "role": "Bakery Worker"
+      },
+      "threeLayerHandle": {
+        "engine": "Advancement fired in C108",
+        "simulation": "Darius Clark (tier=3, role=Bakery Worker)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "West Oakland has active ailment — life event contextualizes it"
+      ]
+    },
+    {
+      "id": "life-POP-01122-73-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-01122"
+      ],
+      "neighborhood": "West Oakland",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-01122",
+        "name": "Joel Roberts",
+        "tag": "Promotion",
+        "text": "Added to Simulation_Ledger as Tier 4. GC emergence promotion — EmergenceCount 4, C108 (engine.58 lottery)",
+        "cycle": "108",
+        "tier": "4",
+        "role": "Plumber"
+      },
+      "threeLayerHandle": {
+        "engine": "Promotion fired in C108",
+        "simulation": "Joel Roberts (tier=4, role=Plumber)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "West Oakland has active ailment — life event contextualizes it",
+        "Citizen emerged — first-named appearance candidate"
+      ]
+    },
+    {
+      "id": "life-POP-00196-74-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00196"
+      ],
+      "neighborhood": "Uptown",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00196",
+        "name": "Inga Creator",
+        "tag": "Retirement",
+        "text": "announced their retirement after a long career",
+        "cycle": "108",
+        "tier": "4",
+        "role": "Boutique Owner"
+      },
+      "threeLayerHandle": {
+        "engine": "Retirement fired in C108",
+        "simulation": "Inga Creator (tier=4, role=Boutique Owner)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Uptown has active ailment — life event contextualizes it",
+        "Career end — narrative arc closure"
+      ]
+    },
+    {
+      "id": "life-POP-00360-75-c108",
+      "eventClass": "citizen-life-event",
+      "subjectIds": [
+        "POP-00360"
+      ],
+      "neighborhood": "Temescal",
+      "cycle": 108,
+      "facts": {
+        "popId": "POP-00360",
+        "name": "Lingo Kim",
+        "tag": "Retirement",
+        "text": "announced their retirement after a long career",
+        "cycle": "108",
+        "tier": "4",
+        "role": "Hair Stylist"
+      },
+      "threeLayerHandle": {
+        "engine": "Retirement fired in C108",
+        "simulation": "Lingo Kim (tier=4, role=Hair Stylist)",
+        "userActions": ""
+      },
+      "tier": "C",
+      "synthesized": false,
+      "promotionHints": [
+        "Temescal has active ailment — life event contextualizes it",
+        "Career end — narrative arc closure"
+      ]
+    }
+  ],
+  "summary": {
+    "total": 87,
+    "byEventClass": {
+      "world-event": 10,
+      "initiative-milestone": 1,
+      "citizen-life-event": 76
+    },
+    "withPromotionHints": 86
+  }
+}

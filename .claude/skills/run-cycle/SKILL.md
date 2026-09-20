@@ -27,6 +27,12 @@ Scan engine code for determinism violations, dependency chain breaks, sheet head
 
 **Gate:** CLEAN → proceed. CRITICAL → stop and fix.
 
+### Step 2.5: Hand writes since the last fire — capture BEFORE the fire (G-EC86, moved here C108)
+
+Any sheet cell set by hand after C{XX−1} fired is part of C{XX−1}'s closing state. The only moment that state can be read is now: after the fire, live holds C{XX} values and the correction cannot be derived. Diff `output/engine_audit_c{XX-1}.json` `snapshots.*` (Crime_Metrics, Neighborhood_Map, Civic_Office_Ledger, Initiative_Tracker) against the live tabs. Initiative_Tracker moves are the city-hall apply — a world event, leave them. Anything else that a DEPLOY_HISTORY / ROLLOUT "written to live" line explains gets rebased into the snapshot with a `snapshotNotes` entry (shape: `engine_audit_c106.json`, `engine_audit_c107.json`). C108: 143 cells from the engine.241 Civis recalibration. No script yet — G-EC53 in `production_log_run_cycle_c108_gaps.md`.
+
+**Gate:** re-diff shows 0 unexplained rows; the rebase is committed before the fire.
+
 ### Step 3: Run Cycle
 The builder fires `runWorldCycle()` on the live sheet. The engine runs in Google's cloud — nothing here triggers it, and the builder runs nothing else for this chain. Confirm the fire from the sheet, never from a message: `Neighborhood_Map` max Cycle = {XX}, `Engine_Errors` row count.
 
@@ -54,7 +60,7 @@ Read world state from sheets. Identify ailments, improvements, incoherence. Prod
 - `output/engine_anomalies_c{XX}.json` — `tierClassifier` (optional).
 - `output/engine_review_c{XX}.md` — pointer only (`buildWorldState` links it; `rheaTwoPass` / `lintCivicPackets` read it). Write it for the next engine session and the civic chain's reader, not for a front page: what is real, what is mechanism, what is routed to engine-debug.
 
-**Hand writes between fires (G-EC86):** any sheet cell the builder or this seat set by hand after C{XX−1} fired is part of C{XX−1}'s closing state. Correct the prior audit snapshot (`engine_audit_c{XX-1}.json` `snapshots.*`, add a `snapshotNotes` entry) **before** running the auditor, or the diff files the write as a world event (C107: nine approval-shift briefs and an "Ashford 45→67" anomaly that were the approval rebase). Re-run the auditor after the correction; the run is idempotent.
+**Hand writes between fires (G-EC86):** done at Step 2.5, before the fire — if it was skipped, the values are gone and the affected briefs/anomalies have to be struck by hand. The rule: any sheet cell the builder or this seat set by hand after C{XX−1} fired is part of C{XX−1}'s closing state. Correct the prior audit snapshot (`engine_audit_c{XX-1}.json` `snapshots.*`, add a `snapshotNotes` entry) **before** running the auditor, or the diff files the write as a world event (C107: nine approval-shift briefs and an "Ashford 45→67" anomaly that were the approval rebase). Re-run the auditor after the correction; the run is idempotent.
 
 **Gate:** File exists on disk; briefs and anomalies carry no hand-write artifacts.
 
@@ -113,7 +119,7 @@ node scripts/dumpLedger.js {XX} --quiet
 node scripts/dumpBeatTabs.js {XX} --quiet
 ```
 
-**Gate:** `output/beats/meta.json` shows `"cycle": {XX}` and one entry under `rows` per tab in `dumpBeatTabs.js` (16 at S456); a missing tab aborts the script (schema event, not a soft skip).
+**Gate:** `output/beats/meta.json` shows `"cycle": {XX}` and one entry under `rows` per tab in `dumpBeatTabs.js` (22 at C108); a missing tab aborts the script (schema event, not a soft skip).
 
 ### Step 5.6: Content-ledger drafter (engine.49 T4)
 
@@ -157,7 +163,7 @@ Fold the cycle's cron-consumer inputs into the single artifact the 24/7 loops re
 node scripts/buildWorldState.js {XX}
 ```
 
-**Gate:** Script prints `wrote .../world_state.json` with cycle {XX} + hood/disposition counts, and `canon current` — not `canon STALE`, not `canon absent`. Size is the tell: the correct fold is ~55KB; ~5KB means canon-less.
+**Gate:** Script prints `wrote .../world_state.json` with cycle {XX} + hood/disposition counts, and `canon current` — not `canon STALE`, not `canon absent`. Size is the tell: the correct fold was 34.6KB at C107 and C108 (keys `canon, hoods, meta, orientation, pointers`); ~5KB means canon-less.
 
 **Ordering, G-PF25 (S407) — this step was 5.57 and ran BEFORE Step 5.8.** It folds the `base_context.json` that 5.8 produces, so following the documented order exactly wrote a 5,465-byte `world_state.json` (correct: 55,684) carrying the note `canon absent: base_context.json unreadable — ENOENT`, and exited 0 while doing it. `world_state.json` is the one artifact every 24/7 loop reads, so all of them ran on a canon-less world for the rest of the cycle. Moved here, after 5.8. The script now also refuses to write on absent canon rather than exiting 0 — a missing fold makes consumers fall back correctly, a gutted one does not. Verified no reverse dependency: `buildDeskPackets` does not read `world_state.json`, and nothing between the old and new positions does either (only `lib/mags.js` and `lib/wakePerception.js` read it, both cron-side).
 

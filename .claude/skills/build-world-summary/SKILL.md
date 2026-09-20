@@ -90,6 +90,8 @@ Operator confirms file exists at expected path + has non-zero size. No deeper ed
 
 ## Where this sits
 
+**Consumer list below is historical (pre-S456).** Nothing downstream is hand-run: the summary and `desk_signal` are read by the crons listed in `/run-cycle` §What Happens After, and the Sunday civic chain keys its cycle off the newest `world_summary_c{N}.md` on disk (`lib/getCurrentCycle.js`). The cycle-time Supermemory ingest lives in `/run-cycle` Step 5, not only in `/post-publish`.
+
 Step 5 in the run-cycle chain (canonical order per `.claude/skills/run-cycle/SKILL.md`):
 
 1. `/engine-review` (Step 4) writes `output/engine_audit_c{XX}.json`

@@ -86,15 +86,30 @@ async function main() {
   out.push('---');
   out.push('');
 
+  const quotaSkips = [];
   for (const tab of tabs) {
     const escaped = tab.title.replace(/'/g, "''");
     let resp;
     try {
-      resp = await sheets.spreadsheets.values.get({
-        spreadsheetId,
-        range: `'${escaped}'`
-      });
+      // Read quota is 60/min/user and this loop reads every tab: a quota error is
+      // retried after the window rolls, never written into the truth doc as SKIPPED
+      // (2026-09-09 regen skipped 5 tabs this way and blinded the header-drift detector).
+      for (let attempt = 0; ; attempt++) {
+        try {
+          resp = await sheets.spreadsheets.values.get({
+            spreadsheetId,
+            range: `'${escaped}'`
+          });
+          break;
+        } catch (e) {
+          const quota = /quota|rate limit|429/i.test(String(e && e.message));
+          if (!quota || attempt >= 3) throw e;
+          console.error('QUOTA on ' + tab.title + ' — waiting 65s (retry ' + (attempt + 1) + '/3)');
+          await new Promise(r => setTimeout(r, 65000));
+        }
+      }
     } catch (e) {
+      if (/quota|rate limit|429/i.test(String(e && e.message))) quotaSkips.push(tab.title);
       // Gridless tabs (dashboard/chart sheets) 400 on a whole-sheet values.get;
       // skip with a visible note instead of killing the whole regen (S352).
       out.push('## ' + tab.title);
@@ -133,6 +148,11 @@ async function main() {
   }
 
   const markdown = out.join('\n');
+  if (quotaSkips.length && !dryRun) {
+    // A truth doc with holes is worse than a stale one: keep the old file, fail loud.
+    console.error('ABORT — ' + quotaSkips.length + ' tab(s) still quota-blocked after retries, SCHEMA_HEADERS.md NOT rewritten: ' + quotaSkips.join(', '));
+    process.exit(1);
+  }
   const target = dryRun
     ? '/tmp/SCHEMA_HEADERS.preview.md'
     : path.join(__dirname, '..', 'schemas', 'SCHEMA_HEADERS.md');

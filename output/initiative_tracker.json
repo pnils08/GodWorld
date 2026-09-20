@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-14",
+  "lastUpdated": "2026-09-20",
   "updatedBy": "buildInitiativePackets.js (auto)",
   "initiatives": [
     {
@@ -17,9 +17,9 @@
       "implementation": {
         "status": "disbursement-active",
         "phase": "disbursement-active",
-        "summary": "C106: Month-seven batch approved (12 households, total 69); Downtown outreach expansion authorized per storefront decline signals",
-        "nextScheduledAction": "Month-eight disbursement review and Downtown canvass deployment",
-        "nextActionCycle": 107
+        "summary": "C107: Downtown canvass deployment authorized alongside month-eight disbursement review.",
+        "nextScheduledAction": "Month-eight disbursement completion and Downtown outreach impact assessment",
+        "nextActionCycle": 108
       }
     },
     {
@@ -37,11 +37,11 @@
         "East Oakland"
       ],
       "implementation": {
-        "status": "implementation-active",
-        "phase": "implementation-active",
-        "summary": "C106: Emergency expansion to East Oakland authorized; District 1 evaluation continues, monthly reporting to Mayor's office",
-        "nextScheduledAction": "East Oakland dispatch protocol deployment",
-        "nextActionCycle": 107
+        "status": "dispatch-live",
+        "phase": "dispatch-live",
+        "summary": "C107: East Oakland dispatch protocol deployment authorized; District 1 evaluation continues.",
+        "nextScheduledAction": "District 1 evaluation completion and potential expansion decision",
+        "nextActionCycle": 108
       }
     },
     {
@@ -59,9 +59,9 @@
       "implementation": {
         "status": "design-phase",
         "phase": "design-phase",
-        "summary": "C106: Design-phase kickoff approved with binding merchant protection covenants; outreach to District 3 businesses initiated",
-        "nextScheduledAction": "Merchant covenant signing and design RFP release",
-        "nextActionCycle": 107
+        "summary": "C107: Merchant covenants executed, design RFP published with community-informed requirements",
+        "nextScheduledAction": "Design consultant selection",
+        "nextActionCycle": 108
       }
     },
     {
@@ -79,9 +79,9 @@
       "implementation": {
         "status": "construction-active",
         "phase": "construction-active",
-        "summary": "C106: Interior wall framing and utility inspections authorized; MEP rough-ins advancing with second shift",
-        "nextScheduledAction": "Utility inspections and interior systems rough-in completion",
-        "nextActionCycle": 107
+        "summary": "C107: MEP rough-ins completed, utility inspections certified ahead of schedule",
+        "nextScheduledAction": "Drywall installation and fire-rated wall inspections",
+        "nextActionCycle": 108
       }
     },
     {
@@ -100,9 +100,9 @@
       "implementation": {
         "status": "construction-planning",
         "phase": "construction-planning",
-        "summary": "C106: Final council approval received; construction planning active, contract signing in progress",
-        "nextScheduledAction": "Contract execution and site preparation mobilization",
-        "nextActionCycle": 107
+        "summary": "C107: Construction contracts executed; site preparation mobilization begins",
+        "nextScheduledAction": "Phase II site remediation",
+        "nextActionCycle": 108
       }
     },
     {
@@ -122,9 +122,9 @@
       "implementation": {
         "status": "operational",
         "phase": "operational",
-        "summary": "C106: Backlog cleared, zero applicants pending, town hall authorized for enrollment launch",
-        "nextScheduledAction": "Public town hall enrollment event",
-        "nextActionCycle": 107
+        "summary": "C107: Public town hall enrollment event convened; applicant intake operational with cohort placement targets established.",
+        "nextScheduledAction": "First training cohort placement review",
+        "nextActionCycle": 108
       }
     }
   ]

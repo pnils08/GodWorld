@@ -857,6 +857,12 @@ Counts reflect last `buildMaraReference.js` run; re-run if ledger has grown. ENG
 
 ---
 
+## Status log
+
+### infrastructure.10 — status (drained from ROLLOUT, 2026-09-20 / S477)
+
+Supermemory plugin is 0.1.8 (= upstream) but `docs/SUPERMEMORY.md` describes v0.0.12 + a project config that no longer exists (`.claude/.supermemory-claude/config.json`). With no `repoContainerTag` the plugin reads an EMPTY auto-tag `repo_godworld__4b23…` — boot + every prompt inject a no-match notice. Auto-capture still off (verified). Decide: leave, or point recall at `sl-godworld`
+
 ## Changelog
 
 - 2026-07-27 — Task 8 truth pass. Reconciled this reference with the active

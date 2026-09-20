@@ -178,6 +178,12 @@ Each keeps a documented revert: `RHEA_PROVIDER` / `MAGS_BOT_PROVIDER` / `REFLECT
 
 ---
 
+## Status log
+
+### infrastructure.11 — status (drained from ROLLOUT, 2026-09-20 / S477)
+
+claude-mem observer hung on free `nemotron-3.5-lightning`: under the 90s wall 2026-09-20 14:56–17:15 it finished 55 calls and timed out 38, including 1.8k-token single-message init calls — so payload size was not the cause and the `MAX_CONTEXT_MESSAGES` lever is dropped. Side-by-side timing of observer-shaped calls: lightning hung 2 of 3 at 60s; `nvidia/nemotron-3-super-120b-a12b:free` 9 of 9 in 2–9s with valid `<observation>` XML; qwen3.8-27b 3 of 3 in 12–20s (fallback); both gemma-4 free = 429. Model swapped in `~/.claude-mem/settings.json` 17:19 (backup `settings.json.bak.pre-model-swap-*`), worker stop/start, first call stored, `consecutiveFailures` 0. Close when a day of log shows the timeout rate near zero; if super-120b degrades, qwen3.8-27b is next. Unverified: chroma sync after the stop/start
+
 ## Changelog
 
 - 2026-08-20 — Drafted from Mike-direct at S385, with a verified script inventory rather than an assumed one. Not started.

@@ -608,6 +608,16 @@ Rollback: `git checkout 799fd841 -- <the 7 files>` in a staging dir, push, bump;
 
 ---
 
+## Status log
+
+### engine.213 — status (drained from ROLLOUT, 2026-09-20 / S477)
+
+**Approval reads the CITY (Mike-direct S455).** Council = district composite vs the city middle × gain + share of city level; Mayor = city level; press = half CIVIC + half all-desk mean; sitting cost 0. Six World_Config keys self-arm. **PROD @84 `c37d85ea`, live C107 clean** — readback in the DEPLOY_HISTORY pointer. OPEN: the mood input's sawtooth is engine.214 (ten hoods missing from the Phase-2 cluster table), and the Mon–Thu office datawakes reach no sheet, so the engine cannot grade the seat's daily work
+
+### engine.243 — status (drained from ROLLOUT, 2026-09-20 / S477)
+
+Crisis arcs carry a NAME minted at onset from the dominant detected channel; peak + resolved now emit `S.worldEvents` (`crisis-lifecycle`, skipped by the engine.212 crime gate); 6-deep city memory of ended crises cited on the next onset. Bench-proven C112–C114, **LIVE PROD @103**; open until the live C108 smoke names `CRISIS-105-WESTOAKL`
+
 ## Changelog
 
 - 2026-09-04 (S418, research-build) — Created. Relocated the full sandbox + PROD narrative out of DEPLOY.md verbatim, per Mike-direct tonight: DEPLOY.md stays protocol + current pointers, this file carries the trail.

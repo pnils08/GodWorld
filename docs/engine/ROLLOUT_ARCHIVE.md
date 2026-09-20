@@ -963,6 +963,16 @@ Prior sweep passes: §S212 Migration Pass (governance.3 + governance.5 + S203 di
 
 This pass: 4 closed (pipeline.3, engine.3, infrastructure.1, infrastructure.2) — not `done-pending-archive` sweep rows, moved by hand per rollout-rules §6 wontfix/unresolvable-stale convention.
 
+## S477 Archive Pass (2026-09-20, research-build) — post-S476 closures sweep
+
+3 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 3 engine.*.
+
+- **engine.244** [engine-sheet] — Crisis spikes describe themselves (`<Sev>-severity <noun> spike in <hood>`, no pool, 0 rng) — also ends `Notable event: "undefined"` hooks (live 11 rows). Nouns fenced against 4 description PARSERS (`crisisNaming.test` §11). Bench C115 5/5. LIVE PROD @104 `b5cb18fb`; live C108 smoke PASS (10/10 described, 0 undefined hooks of 57) **State at archive:** done-pending-archive. Pointer: [[../reference/DEPLOY_HISTORY]] §PROD @104
+- **engine.245** [engine-sheet] — Desk-packet prose yields only KNOWN names (`findKnownNamesInText_`: ledger + structured sources); TitleCase harvest + arc-prefix guard retired; priority score counts citizens, not hood names. C107 packets identical HEAD vs patched. `f6a44833` **State at archive:** done-pending-archive. Pointer: commit `f6a44833`, `crisisNaming.test` §8b
+- **engine.247** [engine-sheet] — A W-L that is a valid month-day (`4-1`, `7-2`) is stored by Sheets as a DATE; `getValues()` hands the engine a Date, the W-L parse fails, and sentiment + casino pricing fall back to the cycle's first TEXT record (live C108 priced 12 slips at the 3-0 price for a 7-2 club; C107 read 1-0 for 3-1). `sportsRecordText_` turns the Date back into `M-d` in the sheet's zone at all 3 read sites; test 47→52. Bench C116 @75 4/4 predictions (slips 1.41/2.59). LIVE PROD @105 `d5738907`. Sheet side done: column H plain text, 14 cells restored. Pre-flight now flags date-stored records and runs the engine's WeekRecord validator **State at archive:** done-pending-archive. Pointer: [[../reference/DEPLOY_HISTORY]] §PROD @105; gap log C108 G-EC61
+
+This pass: 3 rows — engine.244 + engine.245 + engine.247. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+
 ## S465 Archive Pass (2026-09-16, engine-sheet) — post-S464 closures sweep
 
 16 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 16 engine.*.

@@ -131,3 +131,13 @@ notes for the builder terminal so they are not rediscovered:
   wants `'high'` severities to hook; this doc says medium-only is fine for
   faith. Do both rows in one pass — the recommendation on the hook loop is in
   the engine.190 review section.
+
+## Status log
+
+### engine.189 — status (drained from ROLLOUT, 2026-09-20 / S477)
+
+Faith lane routing. LANDED in engine.231/232 (PROD @93/@94): `FAITH` in the storyHook desk table + angle match, and the faith signal. OPEN: FAITH row in buildContractSeeds (3 tables) + bylineEngine keyword map, and `S.faithStorySignals` persist-or-delete. Shares the hook loop with engine.190
+
+### engine.248 — status (drained from ROLLOUT, 2026-09-20 / S477)
+
+**Faith organizations get a role in the sim, not window dressing for media (builder-direct 2026-09-20). OWN SESSION — opens as review/research, not code: inventory what each faith surface does today and who reads it, then design.** Starting facts: all 16 canon leaders (POP-00753…00768) carry `EmployerBizId` BIZ-00028 West Oakland Community Center (a mint-time placeholder; 53 ledger citizens sit on that row) instead of their own org's business row — a 16-cell repair that changes who works where, so it waits for the design; several leaders live outside their org's hood (Brenner Fruitvale / org East Oakland, Karim Rockridge / org Temescal). Today the 16 orgs live in three unlinked places: `Faith_Organizations` (canon names, LeaderPOPID, congregation), `Business_Ledger` faith rows (staff counts, no ledger citizen employed at the four checked; leader POP-00762's `EmployerBizId` points at BIZ-00028, not his masjid) and `Community_Programs` (6 faith-run programs, `Founder_POPID` blank). Design needed before code: what a congregation DOES to a citizen's week and a hood's numbers (membership as a bond/dial input, programs as relief on the illness/QoL channels, leaders as employed citizens). Known debris to clear in the same pass: `utilities/ensureFaithLedger.js` seed literals still carry the 9 legacy real-world names (fresh-tab seeding only; live tab is canon); `Faith_Ledger` C78–C93 rows and seeds/hooks ≤C107 hold legacy names (history, untouched). 2026-09-20 data pass done: Business_Ledger 8 renames + 2 duplicate rows retired to Business_Archive, Community_Programs 6, Event_Content_Ledger pool line, C108 seeds, and the pool line's residue on citizens (49 `Simulation_Ledger.LifeHistory` cells + 51 `LifeHistory_Log` lines, backup `output/engine-sheet/2026-09-20-lifehistory-faith-canon-subs.backup.json`)

@@ -235,6 +235,14 @@ Cut: `driftNeighborhoodEducation_` at Phase3-NeighborhoodDemo before the batch w
 
 Bench SANDBOX 0908 @51 C113 (with 232b riding, separable outputs): 173 s ok:true, 0 Engine_Errors; the 4 keys self-armed; 22/22 hoods moved — Q Δ from −0.11 (Uptown, Rockridge) to +0.07 (Piedmont Ave), grads −0.15…+0.1, readiness −0.5…+0.3, teacher ±0.04, Funding unchanged (no education initiative is delivering); 0 blank cells; 0 education hooks (no crossing). Deck 45 rows, 0 blank names, Maria Keen 11 (24%). Expected settling: hoods whose backfilled quality sits above what their funding says (13000-funded hoods at 8 → fundingLevel 7.5) ease toward it at ≤0.02/Cycle unless a cause holds them — the table finding its causal level, not an event. Readback `output/engine-sheet/bench-192-c113-readback.json` (pre-fire snapshot inside).
 
+### pipeline.69 — status (drained from ROLLOUT, 2026-09-20 / S477)
+
+**Run-cycle packages the world to its readers (Mike-direct S456).** The chain's disk package is the only world the crons see (slices Mon 06:15, wakes 3×/day, Sunday civic chain read the package, never the sheets). C107 measured: texture read the rare layers (11 world events, 5 venues, 4 city events, 46 seeds) and skipped the 2,015 citizen life events — Laurel (63 citizens, 122 events) woke quiet; ten hoods sit outside 25 engine hood literals; six hoods hold 2–7 citizens. v1.1.0 texture (seeds in) shipped S456: quiet citizens 360→85. Tasks: T1 texture reads life events per hood; T2 wake tells a citizen their own seed event; T3 seed-builder floor (decide); T4 one hood roster — sweep 25 literals (engine.214 first); T5 Monday C108 slice readback; T6 **RULED 2026-09-14 (builder): the GC emergence gate (engine.148 `hoodCitizenFloor`/`hoodFloorPromotePerCycle`) is open and fills the thin hoods — no accelerated or authored mint.**
+
+### engine.246 — status (drained from ROLLOUT, 2026-09-20 / S477)
+
+Desk packets carry an EMPTY citizen archive (`0 citizens matched (of ~800)` every desk, C107): `parsePopIdIndex` (`buildDeskPackets.js:379`) expects `## POP — Name (35)`, the index heads are `(T1) — Role`. Do NOT just fix the regex — `ARTICLE_INDEX_BY_POPID.md` is from 2026-03-24 with junk titles; rebuild the index first
+
 ## Changelog
 - 2026-09-15 (engine-sheet S463) — engine.192 CUT `0a8013fc` (Mike's go, option a), BENCH @51 C113 (22/22 hoods moved, 0 errors), PROD @96 (v85); engine.232b `512ca101` a name on every deck row rode the same bench (45 rows, 0 blank).
 - 2026-09-15 (engine-sheet S463) — engine.190 + 233 CUT `eb289123`, BENCH @50 C112 no-throw, PROD @95 (v84): closures to the business desk + a ripple, high-severity world events hook, Serious/Grave transgressions are SAFETY hooks.

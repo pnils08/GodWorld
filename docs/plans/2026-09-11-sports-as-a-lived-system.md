@@ -496,6 +496,16 @@ Sentiment sums two franchises into one scalar; `cal.sportsSeason` resolves one c
 
 ---
 
+## Status log
+
+### engine.202 — status (drained from ROLLOUT, 2026-09-20 / S477)
+
+LIVE PROD @98 + `WeekRecord` column; dead `VideoGameDate`/`VideoGame` DELETED 2026-09-19 on Mike's go (139 cells archived, `2311bcec` accepts the 19-col layout, 0 cell mismatches) — the §0 "no new column" ruling's end state; bench C115 proof in DEPLOY_HISTORY §PROD @98; Node authoring header-aware (`a887b5da`), setup/handoff by header (`6319babf`), vocabulary single-sourced + pinned (`c4a3621c`), row-named rejection (`b2607ebe`). Column audit 2026-09-19 (plan 3d): hood dropdown = the 22 map hoods, authored EventTypes listed, notes rewritten from code. Remaining: trigger-word hooks (Mike), dashboard form `WeekRecord` input (3b), 3c contract needs, cuts 4–6 fold into Tasks 3–4. Was: reader/settlement cut landed (`34ef94ae`→`dcf92551`); NBA/Warriors retired per ruling; defect 7 closed. Next: header migration + vocabulary parity → plan Task 1 remaining cuts.
+
+### Sports update 2026-09-18 (engine-sheet, moved from ROLLOUT header 2026-09-20 / S477)
+
+engine.210 LIVE on PROD @97; engine.202 LIVE on PROD @98 with the `WeekRecord` column on the live feed (dead VideoGame columns deleted 2026-09-19 — 19 columns, `WeekRecord` at S) — bench-proven C115 (weekly settlement, bad-cell rejection, payouts). Smoke both at live C108. Research for Tasks 3/4/10: [[../research/2026-09-18-sports-intensity-and-game-day-economy]]. Population/economy effects defer to record-driven impact. Event_Content_Ledger selection/feedback remains under engine.208 Task 8.
+
 ## Changelog
 
 - 2026-09-16 (codex) — Guarded legacy draft projection against silently dropping WeekRecord; the new contract regression fails before the guard and passes afterward.

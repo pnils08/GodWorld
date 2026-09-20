@@ -310,6 +310,10 @@ Campaign double-candidacy (bench C112 readback, S417): `occupiedPopIds` is seede
 
 Not a defect, an observation gap. The office-removal threshold is confirmed **20** approval (`updateCivicApprovalRatings.js:33,42-43,653-655,889-895`, v1.4/v1.5 — Mike re-confirmed 2026-09-04 after a mid-session mix-up called it 30), and civic.31/civic.32 are both LIVE (@47-48). But per the §Changelog S417 entry directly above, only tier-1 (in-ledger) challenger races have opened on bench so far — tiers 2/3 (the civic.31 GC-route challenger and the challenger-income path) are unit-proven only, never bench-exercised. Builder wants to watch the mechanism actually run: fire N sandbox cycles with **city-hall + media both active** (not engine-only) and observe how fast seats turn over at the 20-floor. No fix implied — this is acceptance-by-observation, waiting on the next sandbox sequence that runs civic+media together.
 
+### engine.216 — status (drained from ROLLOUT, 2026-09-20 / S477)
+
+Four Tier-4 incomes doubled in one pass at C107 with no cohort — POP-00784 45,800→99,200, POP-00812 47,800→98,900, POP-00951 49,300→111,300 (three Plumbers, `employerBizId: UNTRACKED`), POP-00874 28,522→61,000 (bookstore owner, SELF_EMPLOYED); four more (POP-00867/889/899/909) +110–172% with a 19% peer share. Same shape as the C106 pair, which the @66 catalog floor CLOSED at C107 (215,100→60,800; 283,800→93,271). Find the writer (`applyTierLadderState_` 8 promoted / engine.157 climb 201 / `processGenerationalWealth_` Income 5 / `applyUntrackedJobReference_` RAISE-ONLY) and cap a re-price at the stage band.
+
 ## Changelog
 
 - 2026-09-14 (codex) — Accepted D7 local regression and C108–C109 bench smoke; natural activation unproven, all baseline CareerState POPIDs retained; live/further fires/push held.

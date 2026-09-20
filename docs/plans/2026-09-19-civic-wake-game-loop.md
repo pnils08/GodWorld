@@ -163,6 +163,19 @@ pointers:
 
 ---
 
+## Lane assignments (2026-09-20, research-build)
+
+One owner per file — `scripts/cron-civic-run.js` is touched by Tasks 1, 2, 3, 6.3, 8, 9, so a single lane edits it, in order. Everything is dry-run: no `--apply`, no crontab edits (builder installs).
+
+| Lane | Tasks | Owns (sole editor) | Hands off |
+|------|-------|--------------------|-----------|
+| kimi | 1 → 2 → 3, then 8, then 9 rota + work-wake packs, then the Task 6.3 Sunday-prep wiring | `scripts/cron-civic-run.js`, `scripts/applyTrackerUpdates.js`, `scripts/cron-work-wake.js`, `scripts/work-wake-packages.json` | Task 3.2 reads Task 6's Reflection_Intake beats tab once codex lands it |
+| codex | 6 (counter + beats tab), no cron-civic-run.js edit | `scripts/civicPetitions.js` (new), `scripts/dumpBeatTabs.js` | Tells kimi when the counter lands so the Sunday-prep wiring can follow |
+| antigravity | 9 tests, plus adversarial review of every landed task | `scripts/cron-civic-game.test.js` (new) | Findings go to `output/antigravity/`; re-read the file before every claim |
+| engine-sheet | 4, 5, 7 engine cuts on the bench, after engine.249 | `civicInitiativeEngine.js`, `initiativePhaseContract.js`, `updateCivicApprovalRatings.js`, `citizenDialMap.js` | Task 7 coordinates with engine.39 on `citizenDialMap.js`; Task 4 needs the write path (Task 2) visible on the tracker |
+| research-build | Sequencing, review against this plan, the builder-gated Open questions | this plan, ROLLOUT row civic.38 | Baylight metric blocks Task 4.4; signature bands block Task 6.3 live gating |
+| grok | none (no pane) | | |
+
 ## Out of scope (sibling pieces, their own ignitions)
 
 - Chaos-car data nodes for the 21 dark seats (design record §5) — belongs to the civic.37 work-wake registry; needs a `Chaos_Cars` beats dump entry + node builder. Mags take: staff seats' turns are operational.
@@ -182,4 +195,5 @@ pointers:
 
 ## Changelog
 
+- 2026-09-20 (research-build) — Lane assignments added; house guests booted against them.
 - 2026-09-19 (kimi) — Initial draft. Builder approved drafting in-session (research record §10/§11 is the contract). Anchors verified by two read-only exploration passes + wiring cards for civicInitiativeEngine and citizenDialMap (both attached). Corrections the verification surfaced, baked into the tasks: sitting is free post-engine.213 so the stall must carry the cost (Task 5); no per-citizen crime-victim data exists so safety signatures are hood-aggregate (Task 6); the grounding gate never covered `statement` and still doesn't (Task 1); Chaos_Cars is not in the beats dump (out of scope, named); datawake rota is 18 seats incl. project directors, not 19 (Task 9).

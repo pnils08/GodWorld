@@ -180,6 +180,16 @@ Leave engine.131 T7 and engine.136 untouched.
 
 ---
 
+## Status log
+
+### engine.239 — status (drained from ROLLOUT, 2026-09-20 / S477)
+
+**Hoods read their own canon (SIM_DOCTRINE §17).** (a) `v3NeighborhoodWriter` hood-name-keyed retail/crime/mood table (2020s Oakland: West Oakland retail 22/22, Temescal 2nd) → `hoodProfileFromCanon_` from EmployerCharacter label + income + BoomIndex + employer depth; life-line gates city-relative (`536684df`). (b) ten hoods had no `S.neighborhoodDynamics` track (city scalar, lockstep) → adopt a cluster via canon Adjacent (`2cd142a9`). (c) child-area employers fold to parent; newly tracked hood carries last cycle's Sentiment; Phase2 NeighborhoodState before CityDynamics (`a1f973a3`). Auditor incoherence reads direction (`289e897d`, Node, live on next audit). Bench: C108 control (PROD @100) vs treatment on live-synced C107, 0 errors; West Oakland retail 3.42 → 7.92, Temescal 8.07 → 4.92.
+
+### engine.249 — status (drained from ROLLOUT, 2026-09-20 / S477)
+
+**Hood demographics take the whole city's migration in 22 equal shares (RULED builder 2026-09-20: items 1–3 approved).** `updateNeighborhoodDemographics.js:161-164` lands `migration / liveHoodCount` absolute heads on every hood of a table that is ~11% of the city: table +3.2%/cycle vs city +0.32%; Lake Merritt / Uptown / KONO / Baylight +13–16% a cycle; the same false hook every cycle ("Lake Merritt seeing N% population growth", C105–C108: 18/17/15/13%); hoods the map reads as outflow (Laurel −2, KONO −1) still grow; every arrival split 15/70/15 flattens hood age mixes. Every engine reader uses RATIOS of this table, never its headcount. **Build:** (1) scale the applied migration by table-sum ÷ `World_Population.totalPopulation`, recomputed each cycle; (2) split by hood size × the hood's own `Neighborhood_Map.MigrationFlow`, so a negative-flow hood loses people in a growth week; (3) arrivals take the hood's own age mix. One function; predictions before the bench fire. **STILL OPEN — the four small hoods (Lake Merritt 532 with 102 tracked citizens, Uptown, KONO, Baylight) sit upside down against the rest, and that problem is NOT dropped. What the builder rejected is this seat's offer to fix it by a one-time rebase — rewriting the world's numbers so the code reads better is the opposite of the doctrine (SIM_DOCTRINE §1, §8, §16). Do not re-propose a rebase in any wrapper. The answer has to come through the sim: causes that move people over cycles (§16 drift over static backfill), designed with the builder**
+
 ## Changelog
 
 - 2026-09-05 (engine-sheet, S423, latest) — **Tasks 2–3 shipped with engine.131 T7 — LIVE PROD @52.** The builder ruled the T7 split option 2, which unblocked the file. Bench @48 C111/C112 (proof table in the sports plan §T7 shipped): economy blob 22 keys, business fold survives Brooklyn/Glenview rows, 0 errors both fires. Every task on this plan is now live; the row closes pending the C106 live smoke.

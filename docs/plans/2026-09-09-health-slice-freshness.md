@@ -124,6 +124,12 @@ Plus the header contract line (`:381` — "demographicDrift: string" → "demogr
 - engine.182 (burnout→health multiplier) is cut locally but unbenched (ROLLOUT_PLAN.md:111).
 - Doc drift fixed this session (kimi): `docs/index.md` beat-slices wikilink (missing `-plan` suffix), `docs/SIMULATION_LEDGER.md` 52-vs-55-column self-contradiction, `docs/SPREADSHEET.md` Health_Cause_Intake row annotated with the dead-caller finding.
 
+## Status log
+
+### engine.185 — status (drained from ROLLOUT, 2026-09-20 / S477)
+
+Sentiment had no downward range (62 dead `<= -0.3` branches / 37 files). Repriced onto severity tiers; crime/shock gates made relative (were always-on); hood 0-floor removed. Bench-proven C114–C119. HOLD from PROD until engine.188. Detail: commits `738256d0` `ce9dbc75`, plan §criterion 4
+
 ## Changelog
 
 - 2026-09-09 (kimi) — Tasks 1–3 shipped with tests (newsroom-fanout.js staleBeatRef guard; buildHealthSlice.js queue filter + HEALTH-SLICE-2 + world-summary material); C106 slice rebuilt live (4 named, 7 facts, fossils gone). Task 4 proposed with wiring card `output/agent_engine-wiring_2026-09-09T06-28-17.md`. Saved to for-claude-review for engine-sheet ruling + landing.

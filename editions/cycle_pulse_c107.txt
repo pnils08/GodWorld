@@ -1,0 +1,253 @@
+THE CYCLE PULSE — Y2C107
+The Bay Tribune — Oakland
+Narrated by Mags Corliss, Editor-in-Chief
+
+============================================================
+
+THE CYCLE PULSE — Y2C107
+
+There is a particular quality to a city holding its breath, and Oakland has been doing that all week. I don't mean it metaphorically — I mean Lonzo Jailon standing at the edge of Lake Merritt with his clipboard tucked under his arm, rubbing warmth back into his hands because three straight days of rain had given way to a marine layer thick enough to blur the numbered posts he depends on for measurement. As Noah Tan reported it, even the gulls went quiet. That image has stayed with me. A man whose job is precision, standing in the fog, waiting. That is the week's true weather report, and it applies to more than the lake.
+
+Trevor Shimizu caught the same stillness at 12th Street Station, where bus driver Coen Cartier described pulling to the curb in the early fog and watching riders linger rather than board, as if the city were pausing before committing to its own momentum. Station worker Eleanor Rivera told Shimizu that fog, holidays, big votes, big games — they all alter the human flow in ways that can't be reduced to a single cause. What I find worth sitting with is that both Cartier and Rivera are essentially describing the same thing Jailon described at the lake: the way external conditions force people to slow down, look harder, and read what's actually in front of them rather than what they expect to find. A bus driver, a monitor, a station worker — none of them in the same story, but all narrating the same week.
+
+Meanwhile Chinatown has been carrying weight that fog doesn't explain. Dr. Lila Mezran's reporting this cycle gave us Yu Zen listening from a hospital bed in Rockridge to nurses talking about neighborhood impacts — "It's not just numbers, it's families, neighbors." That sentence should be pinned above every desk in this building. Mezran also gave us two names that represent the distance between recovery and crisis: Marcus Osei, recently back on his feet, and Maurice Franklin, still hospitalized with severe symptoms. What the reporting doesn't yet answer — and what I want answered — is whether the concentration of illness in Chinatown and East Oakland reflects something structural about care access in high-density neighborhoods, or whether this is seasonal pressure landing where it always lands. That question isn't rhetorical. I'm asking Jordan Velez to look at it from the business side next cycle, because the Temescal picture he drew this week — the tight-knit rhythm of Gridiron Analytics and OakTown Social and Temescal Community Health Center all nodding to each other across three blocks — suggests that neighborhood economic health and community health are not separate ledgers. Director Bobby Chen-Ramirez's health center is downstream of everything Velez described. I want to know what that means when a neighboring district is absorbing disproportionate illness burden.
+
+The A's, of course, broke through the fog in the way only playoff baseball can. Anthony Raines put us in the visiting clubhouse in New York where John Ellis sat with a towel over his shoulders after nine innings, four hits, zero earned runs, nine strikeouts. The A's closed the ALDS with a 4-0 win, and Ellis was not modest about what it meant: "We're here to win, and that performance was a statement." Eric Taveras, whose fourth-inning home run was the offensive signature of the night, told Raines that when your pitcher brings that kind of fire, the rest of the roster has no choice but to match it. Back in Fruitvale, Rick Walker and Rafael Pilgrim heard it on the radio and said the same thing independently — this team might have the pitching depth to go somewhere real. The question Raines left open is whether Ellis was a harbinger or an outlier. The ALCS will answer it, and I expect that answer to reverberate through every neighborhood in this city.
+
+The Oakland Oaks don't yet have a game on their record — preseason zero and zero — but Talia Finch and Selena Grant both found the same energy building in Downtown, the same strangers gathered around bar televisions, the same residents using the word "buzz." Head Coach Wilson Shepard told Finch the city is going to be caught off guard. Adash Stanley, the Oaks' point guard, described the whole city waking up with the team. I'll be honest: I've heard opening-season optimism before, and it doesn't always survive contact with a real schedule. What I'm watching is whether the Oaks can hold community attention in the same week the A's are deep in an ALCS. Oakland is not a city that typically has to divide its sports loyalty in October. This is new territory, and the neighborhoods will feel the split.
+
+Elliot Graye gave us something quieter this week — folding chairs at the Lake Merritt Mindfulness Sangha, gray cushions on the floor, incense faint in the air. Cameron Wallen found something there that his schedule as a corporate accountant usually crowds out. Eunice Marston of Telegraph Presbyterian noted that Downtown's faith spaces share a purpose without necessarily sharing an address. Tao Lee's observation — that openings matter precisely when they're not compelled by crisis — is the kind of sentence I want to keep. The fog week, the illness in Chinatown, the playoff electricity: a city under pressure needs places that simply stay open without requiring anything.
+
+What I'm watching next week: whether the ALCS draws the city outward or inward, whether the illness burden in Chinatown shows any sign of abating or whether we start hearing what resources are actually available, and whether the fog finally lifts enough for Lonzo Jailon to read the lake without squinting. His clipboard is patient. I'm less so.
+
+============================================================
+
+THE WEEK'S REPORTING
+
+By Jordan Velez | Bay Tribune Business
+
+Here's the corrected business section for cycle 107:
+
+---
+
+**Temescal's Data-Driven Rhythm**  
+Ariana Reyes taps at her keyboard in Gridiron Analytics' Temescal office, where baseball statistics scroll across one screen and basketball projections fill another. "Working at Gridiron Analytics, I see how tight-knit the Temescal business community is," she says. "We've got this unspoken rhythm—the baristas at OakTown Social know our coffee orders before we walk in, and the folks at Temescal Community Health Center always nod hello when we pass by."
+
+At OakTown Social three blocks northwest, Vanessa Treary steams milk behind the counter. "I work at OakTown Social, so I see our regulars come through," she says. "The Gridiron Analytics crowd tends to come in later, usually deep in conversation about stats or games."
+
+Manager Dawson Nguyen surveys the office, where analysts track player performance metrics across multiple screens. "Working at Gridiron Analytics, I've seen how tight-knit the team is—everyone's pushing hard but also looking out for each other," he says. "It's not just about the numbers; it's about the people."
+
+Down Telegraph Avenue, Temescal Community Health Center operates with the steadiness of a public service. Director Bobby Chen-Ramirez moves between departments where staff process patient intake forms, their workflow uninterrupted by the numbers games playing out up the street.
+
+When Gridiron's analysts leave their spreadsheets for coffee breaks, when health center staff nod to familiar faces on the sidewalk—these are the moments that reveal how economic activity becomes neighborhood texture, one exchange at a time.
+
+## INTAKE
+NAMES: Ariana Reyes | quoted-source
+NAMES: Dawson Nguyen | mentioned
+NAMES: Vanessa Treary | quoted-source
+NAMES: Bobby Chen-Ramirez | subject
+STORYLINE: temescal-ariana-reyes-story-signal | opened
+HOOD: Temescal
+CLAIM: Working at Gridiron Analytics, I see how tight-knit the Temescal business community is. We've got this unspoken rhythm—the baristas at OakTown Social know our coffee orders before we walk in, and the folks at Temescal Community Health Center always nod hello when we pass by. It's not just about the work—it's about recognizing faces, knowing we're all part of the same neighborhood fabric. | citizenVoice PRESS Ariana Reyes
+<!-- SELF-SCORE: question-answered=no; affected-citizen-shown=yes; sim-state-cited=yes -->
+
+============================================================
+
+By Trevor Shimizu | Bay Tribune Civic
+
+# 12th Street Station Feels the Rhythm of Downtown
+
+At 7:40 AM, Coen Cartier pulls the AC Transit bus up to the curb outside 12th Street Oakland City Center Station. The fog is still thick enough to blur the station’s scaffolding, and Cartier can already see how this morning will go: fewer riders stepping on board, more people lingering at the curb like they’re waiting for the fog to lift before moving on.
+
+“Lately at 12th Street, I’ve noticed the crowds come and go with what’s happening around town,” Cartier says later, between shifts. “When there’s a game or some big vote at City Hall, we get that rush before and after. Other days, especially with the fog rolling in, folks seem to stay put more. It’s not just one thing — it’s how all these pieces fit together that changes who’s waiting at the curb when I pull up.”
+
+Inside the station, Eleanor Rivera watches it all unfold from her post near the fare gates. “At 12th Street, we see how everything outside the station affects what happens inside,” Rivera says. “Fog, holidays, even a big game downtown — it all changes the flow. People adjust their routines, and we adjust right along with them. It’s not just about numbers going up or down — it’s about reading the neighborhood’s rhythm and keeping things moving.”
+
+Jerald Jensen, the station janitor, sees the shifts in the patterns of trash left behind. “When the fog rolls in thick like it did last week, or when there’s some big game downtown, I see it in the trash cans,” Jensen says. “Overflowing. More coffee cups, more wrappers, more people rushing through like the place owes them money. And when the Baylight vote happened? Whole different kind of crowd — folks in suits leaving flyers everywhere, talking loud like they own the benches I just cleaned.”
+
+Joel Wren, a mechanic with AC Transit, sees the crew keeping the buses running. “Those mechanics and drivers? They’re the ones putting in the long hours to make sure everyone gets where they need to go, rain or shine, game day or not,” Wren says.
+
+The question now is how the system adapts to the fog, the holidays, the games, and the votes — all the pieces that shape who’s waiting at the curb.
+
+## INTAKE
+NAMES: Joel Wren | mentioned
+NAMES: Jerald Jensen | mentioned
+NAMES: Coen Cartier | mentioned
+NAMES: Eleanor Rivera | mentioned
+STORYLINE: city-eleanor-rivera-beat-transit | advanced
+CLAIM: You know, at 12th Street, we see how everything outside the station affects what happens inside. Fog, holidays, even a big game downtown - it all changes the flow. People adjust their routines, and we adjust right along with them. It's not just about numbers going up or down - it's about reading the neighborhood's rhythm and keeping things moving. | citizenVoice PRESS Eleanor Rivera
+<!-- SELF-SCORE: question-answered=no; affected-citizen-shown=yes; sim-state-cited=yes -->
+
+============================================================
+
+By Anthony Raines | Bay Tribune Sports
+
+John Ellis stood in the quiet of the visiting clubhouse in New York, towel draped over his shoulders, the fatigue of nine innings etched into his frame but not his voice. "That game was everything I’ve been working for—every pitch, every inning," he said, leaning against his locker. "It’s not just about shutting them out; it’s about setting the tone for what’s next. We’re here to win, and that performance was a statement. The A’s are locked in, and I’m ready to keep pushing."
+
+The statement Ellis made was unequivocal: nine innings, four hits, no earned runs, and nine strikeouts in a 4-0 victory over the Yankees to close out the ALDS. It was the kind of outing that doesn’t just win a game—it changes the calculus of a series. For Ellis, a pitcher whose season line had been steady but not spectacular, the timing couldn’t have been sharper. The A’s now ride a two-game win streak into the ALCS, their record sitting at three wins and one loss in the postseason.
+
+Eric Taveras, whose fourth-inning home run provided one of the few offensive highlights in a game dominated by pitching, summed up the mood in the dugout. "Man, what John did out there... that was next level," he said. "When your ace goes out and dominates like that in a playoff game, it changes everything. Now we've got momentum, and the whole team's feeding off that energy. You could feel it in the dugout—like, if he's bringing that kind of fire, how can the rest of us not step up?"
+
+Taveras’ home run, his second of the series, was a solo shot in the fourth inning, part of a night where he went one-for-four with one RBI. It wasn’t a barrage of offense, but it didn’t need to be. Ellis’ performance rendered every run a luxury, not a necessity.
+
+Back in Oakland, the buzz was palpable. Rick Walker, tuning in from Fruitvale, caught the game on the radio. "I heard about John Ellis' shutout on the radio this morning—what a performance!" he said. "It’s got me thinking the A’s might just have the pitching depth to make a serious playoff run this year." Rafael Pilgrim echoed the sentiment: "I heard about John Ellis' shutout—nine innings, no runs. It’s got people here in Fruitvale buzzing, thinking the A’s might just have the pitching depth to go deep in the playoffs."
+
+The question now is whether Ellis’ performance is a harbinger of things to come or a statistical outlier. His nine strikeouts against zero walks suggest command, and the four hits allowed—all singles—indicate he kept the Yankees’ power in check. But postseason baseball is a game of small samples, and one dominant outing doesn’t guarantee a repeat. The ALCS will test whether Ellis has turned a corner or simply authored a singular masterpiece.
+
+For now, the A’s will ride the momentum. Ellis set the tone, Taveras provided just enough offense, and the team heads to the ALCS with confidence. But whether this is the start of a deeper run or a fleeting peak remains to be seen. The board speaks clearly for this game, but the ledger for the series is still unwritten.
+
+## INTAKE
+NAMES: John Ellis | quoted-source
+NAMES: Eric Taveras | quoted-source
+NAMES: Rick Walker | quoted-source
+NAMES: Rafael Pilgrim | quoted-source
+STORYLINE: baylight-district-vinnie-keane-prospect-callup | advanced
+HOOD: Fruitvale
+CLAIM: That game was everything I’ve been working for—every pitch, every inning. It’s not just about shutting them out; it’s about setting the tone for what’s next. We’re here to win, and that performance was a statement. The A’s are locked in, and I’m ready to keep pushing. | citizenVoice PRESS John Ellis
+<!-- SELF-SCORE: question-answered=no; affected-citizen-shown=yes; sim-state-cited=yes -->
+
+============================================================
+
+By P Slayer | Bay Tribune Sports
+
+I stepped off the BART train at the Jack London station, the cool evening air a welcome relief after a long day of work. As I walked towards the waterfront, I couldn't help but feel a sense of excitement and pride. The A's had just taken game 1 against the Yankees, and the city was buzzing with energy. I decided to grab a drink at a nearby bar to celebrate, and that's where I ran into Desmond Morton, the A's left fielder.
+
+"I've seen the community come together, feeling a sense of pride and excitement about the team's win," Desmond said, sipping on a beer. "It's like a spark has been lit, and people are talking about it everywhere. I feel it too, it's a great feeling to be a part of something that brings people joy."
+
+As we chatted, I couldn't help but notice the sense of camaraderie in the bar. Strangers were high-fiving each other, and the atmosphere was electric. It was clear that the A's win had brought the community together, and I couldn't wait to see how the rest of the series would play out.
+
+The next day, I met up with Travis Coles, the A's starting pitcher, at a coffee shop in Downtown. "I've felt the city's energy shift with our recent wins," Travis said, his eyes lighting up with excitement. "It's like the whole community is coming together and feeding off our momentum. As a player, it's an incredible feeling to know that our performance is having a direct impact on the people around us."
+
+As I walked out of the coffee shop, I ran into Clark Saryan, the Closing Pitcher for the Las Vegas Aviators. "I've seen how a win like that can bring the community together," Clark said, smiling. "It's like a spark that ignites a sense of pride and belonging. As someone who's been around the game, I know how it feels to be part of a team that's on a roll, and I think that energy is infectious. It's not just about the game itself, but about the way it makes people feel - like they're part of something bigger than themselves."
+
+Later that day, I met up with Vladimir Gonzalez, the A's right fielder, at a park in Fruitvale. "It's been amazing to see how the community has come together after our win," Vladimir said, shaking his head in amazement. "I feel like it's brought a lot of energy and excitement to the neighborhood. As a player, it's great to see how our performance can impact the people around us."
+
+As I watched the A's take on the Yankees, I couldn't help but feel a sense of pride and excitement. The team's win had brought the community together, and it was clear that the energy was infectious. But as the series continued, I couldn't help but wonder - can the A's keep up the momentum, and what does it mean for the city's sense of identity?
+
+## INTAKE
+NAMES: Travis Coles | quoted-source
+NAMES: Clark Saryan | quoted-source
+NAMES: Vladimir Gonzalez | quoted-source
+NAMES: Desmond Morton | quoted-source
+STORYLINE: eastlake-desmond-morton-win-streak | opened
+CLAIM: I've seen the community come together, feeling a sense of pride and excitement about the team's win. It's like a spark has been lit, and people are talking about it everywhere. I feel it too, it's a great feeling to be a part of something that brings people joy. | citizenVoice PRESS Desmond Morton
+<!-- SELF-SCORE: question-answered=no; affected-citizen-shown=yes; sim-state-cited=yes -->
+
+============================================================
+
+By Talia Finch | Bay Tribune Sports
+
+## The Oaks' Groundswell in Downtown
+As I stepped off the BART train at the Downtown station, the crisp air carried the whispers of excitement about the Oakland Oaks. I made my way to a corner store on Broadway, where I found Jessie Hess, a local resident, sipping on a coffee. "I can feel the energy around Downtown, people are really excited about the Oaks' upcoming season, it's all anyone can talk about when they come in for their coffee," she said, her eyes sparkling with enthusiasm.
+
+I walked further down Broadway, taking in the sights and sounds of the bustling neighborhood. The smell of freshly brewed coffee wafted through the air, mingling with the chatter of pedestrians. As I turned a corner, I stumbled upon a small, unnamed bar, its doors open to the street. Inside, a group of strangers were gathered around the TV, watching a replay of the Oaks' preseason game. One of them, a young man with a fervent glint in his eye, turned to me and said, "I've felt the excitement building around the Oaks, it's like the whole city is waking up with the team. There's a buzz in the air, and I think people are really looking forward to seeing what they can do this season." I later found out that he was echoing the sentiments of Adash Stanley, the Oaks' point guard, who had said, "I've felt the excitement building around the Oaks, it's like the whole city is waking up with the team. There's a buzz in the air, and I think people are really looking forward to seeing what they can do this season."
+
+As I continued my stroll through Downtown, I caught up with Wilson Shepard, the Head Coach of the Oakland Oaks, who was meeting with the media to address his excitement for the season. "I've been feeling the energy around Downtown, and I think our fans are really excited for the upcoming season. As the Head Coach of the Oakland Oaks, I'm eager to show the city what we're capable of, and I feel like we're going to catch people off guard this year," he said, his voice filled with confidence. Dillon Trevor, a local resident, overheard our conversation and chimed in, "I can feel the energy around Downtown, people are really hyped about The Oaks' upcoming season. As someone who's always out in the neighborhood, I've seen how excited the fans are, and it's infectious. I'm looking forward to seeing what the season brings."
+
+As the sun began to set, casting a warm glow over the city, I found myself back at the corner store, sipping on a coffee and reflecting on the day's conversations. The Oaks may still be an unknown quantity, but one thing is certain – the people of Downtown are hungry for success, and they're eager to see what the team can do.
+
+## INTAKE
+NAMES: Wilson Shepard | quoted-source
+NAMES: Adash Stanley | quoted-source
+NAMES: Jessie Hess | quoted-source
+NAMES: Dillon Trevor | quoted-source
+STORYLINE: downtown-wilson-shepard-beat-oaks-ground | opened
+HOOD: Downtown
+CLAIM: I've been feeling the energy around Downtown, and I think our fans are really excited for the upcoming season. As the Head Coach of the Oakland Oaks, I'm eager to show the city what we're capable of, and I feel like we're going to catch people off guard this year. | citizenVoice PRESS Wilson Shepard
+<!-- SELF-SCORE: question-answered=no; affected-citizen-shown=yes; sim-state-cited=yes -->
+
+============================================================
+
+By Noah Tan | Bay Tribune Civic
+
+# The Breath Before the Step
+
+Lonzo Jailon's fingers hover over the lake markers, tentative in the fog. His usual morning routine—checking the water levels along Lake Merritt's edge—has slowed to a methodical shuffle. The numbered posts he relies on blur into the gray, forcing him to pause, squint, double-check.
+
+"That fog rolls in and suddenly the whole lake feels like it's holding its breath," Jailon says, tucking his clipboard under his arm to rub warmth back into his hands. His role as a sea level monitor means trusting measurements, but three straight days of rain followed by this thick marine layer have left even the gulls quiet. "Been keeping to myself more than usual, just... waiting for some sunlight to punch through."
+
+At a Uptown apartment window, Teri Mitchell watches the same fog pool between buildings. Recovered from a winter illness but still moving carefully, she notes how the moisture softens edges—mailboxes, fire escapes, the quick pace Oakland usually demands. "You notice things you might otherwise rush past," she says, tracing a finger along the damp glass. 
+
+Melton Neilon sees it too in the bakery's morning regulars, their coffees cupped close. "This fog’s got everyone moving slower," he observes, watching a customer linger over the steam rising from their mug. Three cycles of rain gave way to this still pause, the air heavy with bay salt and suspended decisions.
+
+What breaks first when the fog lifts? The answer waits with the next tide.
+
+## INTAKE
+NAMES: Teri Mitchell | mentioned
+NAMES: Lonzo Jailon | quoted-source
+NAMES: Melton Neilon | mentioned
+STORYLINE: temescal-sonia-parikh-anomaly | advanced
+CLAIM: The fog this winter has been heavy, especially after recovering from being sick. It makes everything feel slower, like the world is holding its breath. It’s not unpleasant, just... introspective. You notice things you might otherwise rush past. | citizenVoice PRESS Teri Mitchell
+<!-- SELF-SCORE: question-answered=no; affected-citizen-shown=yes; sim-state-cited=yes -->
+
+============================================================
+
+By Elliot Graye | Bay Tribune Culture
+
+# Faith in Practice: A Week of Opening Doors
+
+By Elliot Graye  
+
+The folding chairs were already set up when Cameron Wallen arrived at the Lake Merritt Mindfulness Sangha on Wednesday evening. Gray cushions lined the floor of the modest Downtown space, and the scent of incense lingered faintly in the air.
+
+"I've recently joined the congregation at Lake Merritt Mindfulness Sangha," Wallen said, "and I have to say, it's been a really positive experience for me. I feel like it's helped me to cultivate a sense of calm and clarity in my life, which is really important to me, especially with my busy schedule as a Corporate Accountant."  
+
+This week saw faith communities across Oakland's Downtown neighborhood responding to the quiet need for gathering spaces that do not make demands. At the Telegraph Presbyterian Fellowship, just blocks away, chairs were arranged in concentric circles for evening discussions.  
+
+Eunice Marston of Telegraph Presbyterian noted the shared purpose among Downtown's spiritual centers. "I haven't had any direct involvement with the Lake Merritt Mindfulness Sangha," she said, "but as a faith leader in Downtown, I appreciate the various initiatives and organizations that bring people together and foster a sense of community."  
+
+The Lake Merritt Mindfulness Sangha, founded in 2007, maintains its Downtown storefront as a space where residents can practice without agenda or expectation. Tao Lee, who helps coordinate the space, observed that such openings matter precisely when they're not compelled by crisis. "To be honest, I haven't really thought about the Lake Merritt Mindfulness Sangha that much," Lee said, "but I do know that our neighborhood has a strong sense of community, and it's great to see places like the Telegraph Presbyterian Fellowship opening their doors for support."  
+
+In these ordinary weeks when no one is counting chairs, the practice continues.
+
+## INTAKE
+NAMES: Tao Lee | quoted-source
+NAMES: Cameron Wallen | quoted-source
+NAMES: Eunice Marston | quoted-source
+STORYLINE: downtown-tao-lee-beat-faith | opened
+HOOD: Downtown
+CLAIM: To be honest, I haven't really thought about the Lake Merritt Mindfulness Sangha that much, but I do know that our neighborhood has a strong sense of community, and it's great to see places like the Telegraph Presbyterian Fellowship opening their doors for support. | citizenVoice PRESS Tao Lee
+<!-- SELF-SCORE: question-answered=no; affected-citizen-shown=yes; sim-state-cited=yes -->
+
+============================================================
+
+By Dr. Lila Mezran | Bay Tribune Civic
+
+# Chinatown's Illness Toll Ripples Through Tight-Knit Community
+
+From her hospital bed in Rockridge, Yu Zen listens to the nurses' hushed exchanges about neighborhood impacts. "From this hospital bed, all I hear are the nurses talking about how Chinatown's been hit hard," she shares. "It's not just numbers—it's families, neighbors. When you're lying here, you feel the weight of it."
+
+Chinatown currently shows concentrated illness activity across Oakland neighborhoods, with East Oakland also registering significant symptoms. The patterns reflect wider seasonal pressures as staff at local pharmacies prepare for typical post-holiday increases in respiratory cases. 
+
+Beyond clinical data, the human network reveals itself. Teri Mitchell, recently recovered from a winter illness in Uptown, observes: "It makes you think about how illness can ripple through a community, especially in tight-knit neighborhoods." Her sentiment mirrors the informal wellness checks and meal-sharing emerging along Chinatown's commercial corridors.
+
+As cases accumulate, two community figures illustrate the spectrum—Marcus Osei's recent recovery offers hope while Maurice Franklin remains hospitalized with severe seasonal symptoms. The contrast surfaces questions about prevention resources and care access in high-density neighborhoods bearing disproportionate impacts.
+
+## INTAKE
+NAMES: Yu Zen | quoted-source
+NAMES: Teri Mitchell | mentioned
+STORYLINE: chinatown-yu-zen-beat-health | advanced
+HOOD: Chinatown
+CLAIM: From this hospital bed, all I hear are the nurses talking about how Chinatown's been hit hard. It's not just numbers—it's families, neighbors. When you're lying here, you feel the weight of it. Chinatown's tight-knit; when one suffers, it ripples through everyone. But there's hope too—seeing someone like Marcus Osei recover? That reminds us we're not alone in this. | citizenVoice PRESS Yu Zen
+<!-- SELF-SCORE: question-answered=no; affected-citizen-shown=yes; sim-state-cited=yes -->
+
+============================================================
+
+By Selena Grant | Bay Tribune Sports
+
+## Oakland Oaks Gear Up for Opening Night
+As the Oakland Oaks prepare for their upcoming season, excitement is building in the Downtown neighborhood. Jessie Hess, a local resident, shared her enthusiasm for the team's prospects. "I feel like The Oaks are gearing up for a great season, I've heard they're a full go for opening night and their starting five has been announced, it's got me excited to see how they'll do," she said, echoing the sentiment of many fans.
+
+The Oaks' preseason record may be 0-0, but the announcement of their starting five has generated significant buzz. Dillon Trevor, another Downtown resident, noted, "I've heard The Oaks are looking strong for the upcoming season, and I'm excited to see how they do. As someone who lives and works in Downtown, I feel like the whole neighborhood is buzzing with energy whenever they play." The team's franchise stability may be uncertain, but one thing is clear: the community is eager to see how the Oaks will perform.
+
+As the team heads into the new season, questions still linger about their overall strategy and potential weaknesses. While the starting five has been announced, the front office remains tight-lipped about their plans for the future. The Oaks' record may be unblemished at the moment, but it's unclear how they will fare against tougher competition.
+
+## INTAKE
+NAMES: Jessie Hess | quoted-source
+NAMES: Dillon Trevor | quoted-source
+STORYLINE: downtown-jessie-hess-beat-oaks-beat | opened
+HOOD: Downtown
+CLAIM: I feel like The Oaks are gearing up for a great season, I've heard they're a full go for opening night and their starting five has been announced, it's got me excited to see how they'll do. | citizenVoice PRESS Jessie Hess
+<!-- SELF-SCORE: question-answered=no; affected-citizen-shown=yes; sim-state-cited=yes -->
+
+— The Bay Tribune, Y2C107

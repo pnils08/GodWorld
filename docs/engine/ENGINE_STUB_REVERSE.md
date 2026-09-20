@@ -1,6 +1,6 @@
 # Engine Stub Reverse Index
 
-**Generated:** 2026-09-19 by `scripts/stubEngine.js` (mechanical — no LLM).
+**Generated:** 2026-09-20 by `scripts/stubEngine.js` (mechanical — no LLM).
 
 **Purpose:** Cheap lookup — given an `S.*` field or sheet name, find every function that reads or writes it. Companion to `ENGINE_STUB_MAP.md` (forward: function → fields).
 
@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 184 · **Functions mapped:** 1432 · **S.* fields:** 353 · **Sheets:** 57
+**Files scanned:** 184 · **Functions mapped:** 1433 · **S.* fields:** 353 · **Sheets:** 57
 
 ## S.* / ctx.summary reverse index
 
@@ -370,7 +370,7 @@
 | `S.weatherType` | `phase07-evening-media/cityEveningSystems.js::buildCityEveningSystems_` | _(none)_ | 1 | 0 |
 | `S.worldEvents` | `phase03-population/generateCrisisBuckets.js::generateCrisisBuckets_`, `phase03-population/generateCrisisSpikes.js::generateCrisisSpikes_`, `phase04-events/faithEventsEngine.js::runFaithEventsEngine_`, `phase04-events/worldEventsEngine.js::worldEventsEngine_`, `phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_`, `phase08-v3-chicago/v3preLoader.js::v3PreloadContext_` | `phase01-config/godWorldEngine2.js::updateWorldPopulation_`, `phase01-config/godWorldEngine2.js::writeDigest_`, `phase02-world-state/applyCityDynamics.js::applyCityDynamics_`, `phase02-world-state/calendarStorySeeds.js::applySeasonalStorySeeds_`, `phase03-population/applyDemographicDrift.js::applyDemographicDrift_`, `phase03-population/deriveDemographicDrift.js::deriveDemographicDrift_`, …(+64 more) | 6 | 70 |
 | `S.worldEventsCalendarContext` | `phase04-events/worldEventsEngine.js::worldEventsEngine_` | _(none)_ | 1 | 0 |
-| `S.worldPopulation` | `phase01-config/godWorldEngine2.js::updateWorldPopulation_` | `phase07-evening-media/applyStorySeeds.js::applyStorySeeds_`, `phase10-persistence/buildCyclePacket.js::buildCyclePacket_`, `utilities/cycleModes.js::buildCycleChecksum_`, `utilities/cycleModes.js::saveCycleSeed_` | 1 | 4 |
+| `S.worldPopulation` | `phase01-config/godWorldEngine2.js::updateWorldPopulation_` | `phase06-analysis/applyShockMonitor.js::applyShockMonitor_`, `phase07-evening-media/applyStorySeeds.js::applyStorySeeds_`, `phase10-persistence/buildCyclePacket.js::buildCyclePacket_`, `utilities/cycleModes.js::buildCycleChecksum_`, `utilities/cycleModes.js::saveCycleSeed_` | 1 | 5 |
 | `S.youthEvents` | `phase05-citizens/runYouthEngine.js::runYouthEngine_` | `phase05-citizens/runYouthEngine.js::getYouthStorySignals_`, `phase05-citizens/runYouthEngine.js::pickYouthEvent_`, `phase05-citizens/runYouthEngine.js::runYouthEngine_` | 1 | 3 |
 | `S.youthTexture` | `phase05-citizens/runYouthEngine.js::runYouthEngine_` | _(none)_ | 1 | 0 |
 

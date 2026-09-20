@@ -1,8 +1,8 @@
 {
-  "generated": "2026-09-19",
+  "generated": "2026-09-20",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 184,
-  "functionsMapped": 1432,
+  "functionsMapped": 1433,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -1209,6 +1209,7 @@
         "phase01-config/godWorldEngine2.js::updateWorldPopulation_"
       ],
       "readers": [
+        "phase06-analysis/applyShockMonitor.js::applyShockMonitor_",
         "phase07-evening-media/applyStorySeeds.js::applyStorySeeds_",
         "phase10-persistence/buildCyclePacket.js::buildCyclePacket_",
         "utilities/cycleModes.js::buildCycleChecksum_",

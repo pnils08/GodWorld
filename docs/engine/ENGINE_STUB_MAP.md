@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-09-19 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-09-20 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -2331,9 +2331,11 @@
 
 ### applyShockMonitor.js
 - **applyShockMonitor_(ctx)**
-  Reads: S.absoluteCycle, S.cityDynamics, S.civicLoad, S.civicLoadScore, S.currentCycleState, S.cycle, S.cycleId, S.demographicDrift, S.economicMood, S.eventArcs, S.eventsGenerated, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.mediaEffects, S.patternFlag, S.previousCycleState, S.simMonth, S.sportsSeason, S.sportsSource, S.weather, S.weatherMood, S.worldEvents
+  Reads: S.absoluteCycle, S.cityDynamics, S.civicLoad, S.civicLoadScore, S.currentCycleState, S.cycle, S.cycleId, S.demographicDrift, S.economicMood, S.eventArcs, S.eventsGenerated, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.mediaEffects, S.patternFlag, S.previousCycleState, S.simMonth, S.sportsSeason, S.sportsSource, S.weather, S.weatherMood, S.worldEvents, S.worldPopulation
   Writes: S.currentCycleState, S.previousCycleState, S.shockCalendarContext, S.shockDuration, S.shockFlag, S.shockReasons, S.shockScore, S.shockStartCycle
   Config: ctx.config.cycleCount, ctx.config.employmentFallbackRate
+
+- **isActiveShock_(flag)**
 
 ### computeRecurringCitizens.js
 - **computeRecurringCitizens_(ctx)**
@@ -4125,4 +4127,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 184
-**Functions mapped:** 1432
+**Functions mapped:** 1433

@@ -495,7 +495,15 @@ function getCitizenNamesFromDeskData(deskEvents, deskSeeds, deskHooks, deskArcs,
   });
   // Extract from arc summaries
   (deskArcs || []).forEach(function(a) {
-    var text = a.summary || a.Summary || '';
+    // engine.243: an arc summary now leads with the crisis's NAME
+    // ("The Rockridge Housing Squeeze — ..."). The TitleCase harvest below would
+    // file "The Rockridge" and "Housing Squeeze" as citizen names and hand them
+    // to a desk as people to quote — fabricated specificity, the exact defect
+    // engine.106 was filed for. Strip the name prefix before harvesting.
+    // (Caught by the antigravity review lane, 2026-09-20.) The harvest's wider
+    // flaw — any TitleCase pair is admitted as a person, which is how line 2269
+    // ended up guarding against "POP-00168" — is filed as engine.245.
+    var text = String(a.summary || a.Summary || '').replace(/^The [^—]{0,60}— /, '');
     var nameMatches = text.match(/[A-Z][a-z]+ [A-Z][a-z]+/g);
     if (nameMatches) nameMatches.forEach(function(n) { names[n] = true; });
   });

@@ -310,6 +310,29 @@ console.log('\nengine.243 — crisis naming, the end of a crisis, and city memor
     realSpike.subdomain !== 'crisis-lifecycle' && lifecycleEnd.subdomain === 'crisis-lifecycle');
 }
 
+// ── 8b. the name must not become a fake citizen (antigravity review find) ──
+{
+  // scripts/buildDeskPackets.js harvests /[A-Z][a-z]+ [A-Z][a-z]+/g out of arc
+  // summaries and hands the matches to a desk as PEOPLE TO QUOTE. A title-cased
+  // name prefix turns "The Rockridge" and "Housing Squeeze" into citizens —
+  // fabricated specificity, the exact defect engine.106 was filed for.
+  const src = fs.readFileSync(path.join(ROOT, 'scripts/buildDeskPackets.js'), 'utf8');
+  check('buildDeskPackets strips the arc name before the TitleCase name harvest',
+    /replace\(\/\^The \[\^—\]\{0,60\}— \/, ''\)[\s\S]{0,120}\[A-Z\]\[a-z\]\+ \[A-Z\]\[a-z\]\+/.test(src));
+  const strip = t => String(t).replace(/^The [^—]{0,60}— /, '');
+  const harvest = t => (strip(t).match(/[A-Z][a-z]+ [A-Z][a-z]+/g) || []);
+  check('no fake citizen is harvested from a named resolution line',
+    harvest('The Rockridge Housing Squeeze — Rockridge crisis eased after 3 cycles back within city range').length === 0);
+  check('no fake citizen is harvested from a named domain-precision line',
+    harvest('The Rockridge Health Crisis — Rockridge easing but still strained: housing pressure 9.50 (city 0.43)').length === 0);
+  check('the name adds NO new harvest hits beyond what the body already produced',
+    JSON.stringify(harvest('The West Oakland Crime Spike — West Oakland under strain: crime index 1.18 (city 0.71)')) ===
+    JSON.stringify(('West Oakland under strain: crime index 1.18 (city 0.71)').match(/[A-Z][a-z]+ [A-Z][a-z]+/g) || []),
+    JSON.stringify(harvest('The West Oakland Crime Spike — West Oakland under strain: crime index 1.18 (city 0.71)')));
+  check('an unnamed summary is untouched by the strip',
+    strip('Rockridge under strain: 2 hospitalizations last cycle') === 'Rockridge under strain: 2 hospitalizations last cycle');
+}
+
 // ── 9. no dice were added ──────────────────────────────────────────────────
 {
   rngDraws = 0;

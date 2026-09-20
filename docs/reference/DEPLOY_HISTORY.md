@@ -129,6 +129,40 @@ pointers:
 
 ## PROD deploy log — full trail
 
+### PROD @104 — a crisis spike says what it is (2026-09-20 ~15:10 Chicago, engine-sheet)
+
+engine.244 + engine.215. Engine tree `b5cb18fb`; 3 payload files vs @103
+(`generateCrisisSpikes.js`, `generateCitizensEvents.js`, `engine94SheetContract.js`).
+
+**LANDED.** `clasp push -f` from an isolated `git archive` stage (prod script id
+diff-verified, sandbox id absent), script **version 93**, web app
+`AKfycbwUvd4...PawCW-bgQ` repointed **@92 → @93** and read back. Pull-back 169/169
+js byte-identical, 0 test files.
+
+**What it changes.** Every crisis spike now carries `<Sev>-severity <noun> spike in
+<hood>` built from its own state (no pool, zero rng draws). Before: blank in
+`WorldEvents_V3_Ledger` (live 44/387 rows) and `Notable event: "undefined"` in
+`Story_Hook_Deck` for every medium/high spike (live 11 rows, C79–C105). The nouns are
+a fence: four engines PARSE a world event's description and act on keywords
+(economic ripples, faith crisis mode, story hooks, citizen chaos reactions), so
+INFRASTRUCTURE reads `public-works` and CULTURE reads `culture`;
+`scripts/crisisNaming.test.js` §11 lifts those keyword lists from source.
+engine.215 seeds `illnessConvergenceRate` + `illnessInitiativeRelief` (0.25, the code
+defaults) through the engine.133 self-arm list — the only two of 16 `cfgNum_` keys
+absent on live.
+
+**Bench:** SANDBOX 0908 @74, C115, `ok:true` 136.9s, Engine_Errors 0, five
+pre-declared predictions all held
+(`output/engine-sheet/2026-09-20-bench-c115-engine244-predictions.md`): the C115
+spike landed as *"Medium-severity economic spike in Jack London"* and its hook quotes
+it; blank total stayed 53; undefined hooks stayed 16; World_Config 133 → 135 with both
+keys; Riley_Digest Issues empty; 0 LifeHistory lines carry "-severity".
+
+**Live smoke expectations for C108** (on top of @103's, below): every C108
+crisis-spike row non-blank; no C108 hook reads "undefined"; World_Config gains the
+two illness keys; Riley_Digest C108 Issues carries no `illnessConvergenceRate`
+notice and the "recurred N cycles" world-issue stops growing.
+
 ### PROD @103 — a crisis gets a name and an ending (2026-09-20 ~12:12 Chicago, engine-sheet)
 
 engine.243. Engine tree `c04c4caa`.

@@ -9,13 +9,17 @@ global.seedUnit_ = function (s) { var h = 2166136261; s = String(s || ''); for (
 let ranges = [], ensures = [];
 global.queueEnsureTabIntent_ = (ctx, tab, headers, reason, domain, priority) => ensures.push({ tab, headers, priority });
 global.queueRangeIntent_ = (ctx, tab, r, c, values, reason, domain, priority) => ranges.push({ tab, r, c, values, reason, domain, priority });
+// pressureBar_ lives in utilities/citizenDialMap.js (shared Apps Script scope) — engine.178 owner dial gates read it
+global.pressureBar_ = require('../utilities/citizenDialMap').pressureBar_;
 const mod = require('./applyBusinessDynamics');
 const fs = require('fs'), path = require('path');
 let passed = 0, failed = 0;
 function assert(label, cond, detail) { if (cond) { console.log(`  ok   ${label}`); passed++; } else { console.error(`  FAIL ${label}${detail ? ': ' + detail : ''}`); failed++; } }
 
 // the signed Task 3 table, as the self-arm seeds it
-const CFG = { bizDeclineStreak: 4, bizDriftMaxUp: 1.0, bizDriftMaxDown: 1.0, bizGrowthCeil: 40, bizGrowthFloor: -10, bizNoiseBound: 0.25, bizVitalityNeutral: 6.0, bizVitalityGain: 0.15, bizSuccessWindow: 3, bizSuccessVitalityHigh: 9.0, bizSuccessApprovalHigh: 85, bizSuccessPenalty: 0.3, bizDisruptBaseChance: 2, bizDisruptSuccessMult: 3, bizDisruptShock: 2.0, bizClosureStreak: 8, bizClosureRevenueFloorPct: 40, bizEventShockScale: 1.0, bizVol_faith: 0.5, bizVol_retail: 1.2, bizVol_food: 1.3, bizVol_health: 0.7, bizVol_tech: 1.5, bizVol_professional: 0.8, bizVol_construction: 1.1, bizVol_arts: 1.2, bizVol_education: 0.6, bizVol_default: 1.0 };
+const CFG = { bizDeclineStreak: 4, bizDriftMaxUp: 1.0, bizDriftMaxDown: 1.0, bizGrowthCeil: 40, bizGrowthFloor: -10, bizNoiseBound: 0.25, bizVitalityNeutral: 6.0, bizVitalityGain: 0.15, bizSuccessWindow: 3, bizSuccessVitalityHigh: 9.0, bizSuccessApprovalHigh: 85, bizSuccessPenalty: 0.3, bizDisruptBaseChance: 2, bizDisruptSuccessMult: 3, bizDisruptShock: 2.0, bizClosureStreak: 8, bizClosureRevenueFloorPct: 40, bizEventShockScale: 1.0, bizVol_faith: 0.5, bizVol_retail: 1.2, bizVol_food: 1.3, bizVol_health: 0.7, bizVol_tech: 1.5, bizVol_professional: 0.8, bizVol_construction: 1.1, bizVol_arts: 1.2, bizVol_education: 0.6, bizVol_default: 1.0,
+  // engine.178 owner dial gates, as ensureEngine178Config_ seeds them
+  dialOwnerStreakRoom: 1, dialOwnerDriveExpandMult: 1.25 };
 const BL_H = ['BIZ_ID', 'Name', 'Sector', 'Neighborhood', 'Employee_Count', 'Avg_Salary', ' Annual_Revenue ', 'Growth_Rate ', 'Key_Personnel'];
 const BL = [BL_H,
   ['BIZ-00001', 'Civis Systems', 'Civic Tech', 'West Oakland', 41, 230000, 60000000, '15%', 'Elias Varek (founder)'],

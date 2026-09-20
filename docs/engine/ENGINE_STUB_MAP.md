@@ -580,6 +580,8 @@
 ### generateCrisisBuckets.js
 - **crisisNameChannel_(evidence)**
 
+- **crisisNameFromDomain_(hood, domainTag)**
+
 - **crisisArcName_(hood, evidence)**
 
 - **crisisNamed_(arc, body)**
@@ -4145,4 +4147,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 184
-**Functions mapped:** 1439
+**Functions mapped:** 1440

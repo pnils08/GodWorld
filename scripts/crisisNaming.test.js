@@ -225,6 +225,34 @@ console.log('\nengine.243 — crisis naming, the end of a crisis, and city memor
     arc.summary.indexOf('The Rockridge Hospital Run — ') === 0, arc.summary);
 }
 
+// ── 5c. the bench case: a legacy arc whose evidence the lifecycle overwrote ─
+{
+  const sb = sandbox();
+  // EXACTLY what SANDBOX 0908 handed back at C112: CRISIS-110-ROCKRIDG had
+  // already entered decline, so its carried summary is the evidence-free
+  // recovery line and the channel backfill has nothing to read.
+  const prev = { crisisArcs: [{
+    arcId: 'CRISIS-110-ROCKRIDG', type: 'crisis', phase: 'decline', tension: 1.4,
+    neighborhood: 'Rockridge', domainTag: 'HEALTH', domain: 'HEALTH',
+    summary: 'Rockridge recovering — pressure lifting',
+    citizens: [], consecutiveBad: 0, consecutiveGood: 1, cycleCreated: 110,
+    phaseStartCycle: 111, source: 'DETECTED'
+  }], crisisMemory: [], hospitalEvents: [] };
+  const r = runCycle(sb, 113, { prev, bad: {} });
+  const arc = r.S.eventArcs[0];
+  check('a legacy arc with no recoverable evidence is named from its domain',
+    arc.name === 'The Rockridge Health Crisis', arc.name);
+  check('the coarse name is marked as domain-precision, not a channel claim',
+    arc.nameChannel === 'domain', arc.nameChannel);
+  check('the coarse name reaches the recovery line the desks render',
+    arc.summary === 'The Rockridge Health Crisis — Rockridge recovering — pressure lifting', arc.summary);
+  check('an arc with a domain the map does not cover stays unnamed rather than guessing',
+    (() => { const p2 = JSON.parse(JSON.stringify(prev)); p2.crisisArcs[0].domainTag = 'CULTURE'; p2.crisisArcs[0].domain = 'CULTURE';
+      return sb.crisisNameFromDomain_('Rockridge', 'CULTURE') === ''; })());
+  check('precise channel evidence still beats the domain fallback',
+    sb.crisisArcName_('Rockridge', ['2 hospitalizations last cycle']) === 'The Rockridge Hospital Run');
+}
+
 // ── 6. memory is capped and most-recent-first ──────────────────────────────
 {
   const sb = sandbox();

@@ -116,6 +116,31 @@ function crisisNameChannel_(evidence) {
   return null;
 }
 
+/**
+ * Coarse fallback for a LEGACY arc whose evidence is gone. The lifecycle
+ * overwrites arc.summary every cycle, and the recovery branches
+ * ("<hood> recovering — pressure lifting") carry no channel at all — so an arc
+ * that entered decline before naming shipped has nothing precise left to name
+ * from. Proven on the bench, C112: CRISIS-110-ROCKRIDG came back
+ * "Rockridge recovering — pressure lifting" and the channel backfill found
+ * nothing. domainTag DOES survive the carry, so the arc is named at the
+ * precision the surviving evidence supports and no finer. Never reached by a
+ * new arc, which is named from real channel evidence at onset.
+ */
+var CRISIS_DOMAIN_NOUNS = {
+  HEALTH: 'Health Crisis',
+  SAFETY: 'Safety Crisis',
+  ECONOMIC: 'Economic Slide',
+  INFRASTRUCTURE: 'Infrastructure Break',
+  ENVIRONMENT: 'Environmental Crisis',
+  CIVIC: 'Civic Strain'
+};
+
+function crisisNameFromDomain_(hood, domainTag) {
+  var noun = CRISIS_DOMAIN_NOUNS[String(domainTag || '').toUpperCase()];
+  return (hood && noun) ? 'The ' + hood + ' ' + noun : '';
+}
+
 function crisisArcName_(hood, evidence) {
   var ch = crisisNameChannel_(evidence);
   if (!hood || !ch) return '';
@@ -364,6 +389,10 @@ function generateCrisisBuckets_(ctx) {
       if (bfCh) {
         arc.name = crisisArcName_(arc.neighborhood, backfill);
         arc.nameChannel = bfCh.key;
+      } else {
+        // Nothing precise survived the carry — name it from the domain, which did.
+        arc.name = crisisNameFromDomain_(arc.neighborhood, arc.domainTag || arc.domain);
+        if (arc.name) arc.nameChannel = 'domain';
       }
     }
     arc.prevPhase = arc.phase;

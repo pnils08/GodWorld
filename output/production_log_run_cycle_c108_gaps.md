@@ -369,3 +369,46 @@
 - engine-review + build-world-summary: consumer prose still named `/sift` → `/write-edition`; pointed at run-cycle §What Happens After.
 - Step 3 live fire is the one hand step; bench already fires from the terminal via the trigger token. Autonomy blocker, builder's call.
 - Civic chain timing (21:00 slot decided C107 40 min after its fire, before Mon–Thu was lived; today's 14:30 decide exited on `applied:true`) — PARKED by the builder 2026-09-20, civic approach is being repurposed. No change made.
+
+## Execution-log review — `output/execution_log_c108.txt` read line by line against `execution_log_c107.txt` (engine-sheet, 2026-09-20)
+
+### G-EC61 — Sheets stores feed records like `4-1` / `7-2` as DATES; the engine reads the first text record of the cycle instead [judgment] [silent-fail] [HIGH]
+- **Source:** log :31 `Sports sentiment: A's … (record: 3-0 … streak: W1)`; feed rows 223–226 Team Record 3-0 / 4-1 / 4-1 / 7-2; phase02-world-state/applySportsSeason.js:763, :778-781, :950
+- **Evidence:** `UNFORMATTED_VALUE` read of the column — row 224 = 46113, 225 = 46113, 226 = 46205, and C107's 221 = 46054, 222 = 46082 are date serials; `3-0`, `1-0`, `0-1`, `127-35` are text (no such date). 14 of 227 cells in the column are dates. Apps Script `getValues()` returns a Date → `toString()` → the `(\d+)-(\d+)` parse returns null → the clobber guard at :778 keeps the earlier record. Same code run offline on the same rows through the Sheets API (which returns the display string) gives `record: 7-2`, A's 0.095 — so every Node reader (pre-flight, world summary, dashboard) sees the right value and nothing flags it. C107 shows the identical signature: logged `1-0` with streak `W2`, rows were 1-0 / 2-1 / 3-1.
+- **Effect:** sports sentiment and anything pricing off the A's record (casino, engine.207a) run on the first text-safe record of the cycle, not the last row. C108: 3-0 instead of 7-2. Any W-L that is a valid month-day (1-1 … 12-31) is hit; early-season and playoff records are exactly that range.
+- **Fix owed (code, engine-sheet):** in `readOaklandFeedEntries_` and `processFeedSheet_`, a Date in the record column becomes `(month)-(day)`; bench with a row holding a real date serial. **Sheet side (builder's tab):** format the Team Record column as plain text and re-enter the 14 cells. **Pre-flight:** fail on any numeric-stored Team Record cell — the script reads display strings today and cannot see it.
+
+### G-EC62 — hood demographics absorb the whole CITY's migration on a table one-tenth the city's size; four small hoods grow 13–16% a cycle [judgment] [math-anomaly] [HIGH]
+- **Source:** log :63-90 "24 significant shifts" (C107: 28, same four hoods); phase03-population/updateNeighborhoodDemographics.js:161-164 (`migration / liveHoodCount` per hood, absolute heads); output/beats/Neighborhood_Demographics.jsonl vs prev/
+- **Evidence:** table sum 40,661 → 41,962 (+3.2%) in one cycle against city 391,510 → 392,748 (+0.32%). Net city migration 1,239 ÷ 22 ≈ 56 heads lands on every hood regardless of size: the 18 hoods near 2,000 grow 2.5–2.8%; Lake Merritt 471 → 532 (+13.0%), Uptown 493 → 559 (+13.4%), KONO 399 → 463 (+16.0%), Baylight 381 → 443 (+16.3%). C107 logged 15 / 15 / 19 / 19% for the same four.
+- **Effect:** the table doubles in ~23 cycles, the four small hoods in ~5. Unemployed and Sick are counts on that base, so the log's "KONO unemployment up 17%, illness up 15%" is headcount growth, not a labour or health event — and those lines are shift events consumers can pick up. Lake Merritt at 532 people beside Temescal at 2,645 is a seeding artefact the equal split is now erasing from the wrong direction.
+- **Fix:** sim judgement, builder included — what scale the table stands at relative to the city, and whether inflow splits by hood size / canon attraction instead of equally. Not cut.
+
+### G-EC63 — engine-review C108 mis-stated the ledger growth; corrected [judgment] [writeback-drift] [LOW]
+- **Source:** log :91 (`generateGenericCitizens_` 8 → the Generic_Citizens POOL, not the ledger), :117 (`checkForPromotions_` 7 promoted, 6 by migration wave), :110 (`P6 BIRTH POP-01114`), :129 (emergence `POP-01122`)
+- **Evidence:** ledger 943 → 952 = 1 birth (Marcus Skenes, Lake Merritt, HH-0102-F014) + 7 pool promotions POP-01115…01121 (Grand Lake, Ivy Hill, Uptown, Eastlake, Brooklyn, Dimond, Glenview) + 1 emergence (Joel Roberts, West Oakland, 2 friendship bonds). `popIdHighWater` 1113 → 1122, 9 ids, matches. The review's "8 generic citizens minted into the short hoods" was read off the wrong log line. Review text fixed.
+- **Note:** the newborn's RoleType is `student` at age 0 (BirthYear 2042).
+
+### G-EC64 — honorifics parsed as first names: the same two reporters are re-filed to Intake review every cycle [judgment] [cross-cycle-debt] [MED]
+- **Source:** log :113 `processIntake_ v3: … flagged 1 for review` (C107: 2); :199 `routeCitizenUsageToIntake_ … new: 2`; Intake tab rows `Sgt. | Rachel Torres`, `Dr. | Lila Mezran` (C105, C106, C107 pieces)
+- **Evidence:** both are existing ledger citizens and Tribune reporters. The usage router splits "Dr. Lila Mezran" as First=`Dr.`, finds no match, files a new-citizen intake; the intake guard correctly refuses it as an honorific. Net: nothing is minted, but their usage never credits the real rows and the review queue grows by 1–2 a cycle with no reader.
+- **Fix owed:** strip a leading honorific before the name lookup in the usage router (the refusal message already has the list).
+
+### G-EC65 — mobility and career counters read zero two cycles running [judgment] [math-anomaly] [MED]
+- **Source:** log :144 `trackWealthMobility_ … 0 moves`, :149 `processEducationCareer_ … Education 0, MinorStages 0/41, Career 0, Stagnant 279, Income 0`; C107 :136/:142 identical zeros (Stagnant 272); C105 logged 48 mobility moves (12 up / 36 down)
+- **Effect:** 279 adults flagged stagnant and no career, education or income transition fires; wealth brackets have not moved since C105 at the latest. SIM_DOCTRINE §16 candidate — a gate whose input stopped crossing it. Not traced.
+
+### G-EC66 — four CIVIC seeds saturate the priority cap at the identical raw score [judgment] [math-anomaly] [LOW]
+- **Source:** log :162-165 `priorityEngine clamp: raw=11.70 final=10.00 domain=CIVIC severity=MED` ×4 (C107: ×8, same 11.70); utilities/priorityEngine.js:380
+- **Effect:** every CIVIC/MED seed computes the same 11.70 and clamps to 10.00 — they tie at the ceiling, so priority carries no order among them and CIVIC always outranks everything capped below 10.
+
+### G-EC67 — bond engine counts the header row as a 23rd neighborhood [judgment] [header-drift] [LOW]
+- **Source:** log :119 `Loaded 23 neighborhoods from Neighborhood_Map` (map has 22; C107 also 23); phase05-citizens/bondEngine.js:157-158 (`startRow` is forced to 0 whether or not `cached.values[0]` is the header)
+- **Effect:** the literal string `Neighborhood` sits in `ctx.neighborhoodList`. Today it is only a membership test (:1164), so nothing reads it as a place. One-line fix, rides the next deploy.
+
+### G-EC68 — smaller log observations, no action owed this cycle [judgment] [cross-cycle-debt] [INFO]
+- `compactCrimeSpikes_` logs twice per cycle (:173, :189, both "carrying 2") — called from the evening snapshot and again from the state save; same result both times. New since C107.
+- 25s gap inside Advancement between `checkEmergencePromotions_` (:128) and `seedEmergenceBonds_` (:129) for one promotion; C107 was 47s. The slowest phase (30.6s) is mostly this.
+- `buildCommuteFlows_` "1 dangling biz-id" (C107 and C108) = POP-00239 Xiu Cello `BIZ-000181`, a six-digit typo for BIZ-00181 Mayday Movers (same hood, role Mover). **Fixed on live, read back.** 205 unresolved commuters remain by design (137 city-wide, 67 off-ledger).
+- `updateCivicApprovalRatings_` logs 9 officials; D7 Warren Ashford is absent because his rating did not move (67 → 67), not because the seat was skipped.
+- engine.174 short-hood deficits are closing as built: East Oakland 7 → 5, Baylight 9 → 6, Glenview 7 → 5, Dimond 3 → 2, Brooklyn 6 → 5.

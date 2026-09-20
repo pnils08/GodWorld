@@ -30,7 +30,9 @@
 
 `ENGINE187_DIAG` is not available for this fire: it rides the web-app fire response only (`utilities/webTrigger.js:52`), and the live fire is an editor run. The flag landed on its predicted value, so nothing needed explaining.
 
-**Ledger:** 943 → 952 rows (8 generic citizens minted into the engine.174 short hoods — Baylight 2, East Oakland 2, Glenview 2, Brooklyn 1, Dimond 1 — plus 1 emergence promotion). 3 tier promotions, 67 advancements, 52 usage rows.
+**Ledger:** 943 → 952 rows = 1 birth (POP-01114 Marcus Skenes, Lake Merritt) + 7 promotions out of the generic pool (POP-01115…01121, 6 by migration wave) + 1 emergence (POP-01122 Joel Roberts, West Oakland). The 8 new generic citizens this cycle went to the pool, not the ledger. 3 tier promotions, 67 advancements, 52 usage rows. *(Corrected 2026-09-20 after the execution-log review — G-EC63.)*
+
+**Two findings from the execution log that change how this cycle reads (gap log G-EC61, G-EC62):** the engine read the A's record as 3-0, not 7-2, because Sheets stores `4-1` and `7-2` as dates; and the per-hood population table grew 3.2% in one cycle against the city's 0.32%, so the log's hood "unemployment up 17%" lines are headcount growth, not events.
 
 ---
 

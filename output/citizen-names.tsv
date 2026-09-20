@@ -8,7 +8,7 @@ POP-00007	Hal Richmond	Chinatown
 POP-00008	P Slayer	West Oakland
 POP-00009	Lena Carrow	Downtown
 POP-00010	Dana Reeve	Chinatown
-POP-00011	Carmen Delaine	Chinatown
+POP-00011	Carmen Delaine	West Oakland
 POP-00012	Elliot Graye	Lake Merritt
 POP-00013	Maria Keen	Lake Merritt
 POP-00014	Tanya Cruz	Laurel
@@ -34,7 +34,7 @@ POP-00035	Laila Cortez	Uptown
 POP-00036	Marcus Osei	Chinatown
 POP-00037	Brenda Okoro	West Oakland
 POP-00038	Theo Park	Temescal
-POP-00039	Simone Ellis	Chinatown
+POP-00039	Simone Ellis	Lake Merritt
 POP-00040	Aaron Whitfield	Rockridge
 POP-00041	Keisha Ramos	Lake Merritt
 POP-00042	Ramon Vega	Lake Merritt
@@ -261,7 +261,7 @@ POP-00307	Minka Slayton	Uptown
 POP-00308	Cathy Skeet	Chinatown
 POP-00309	Amy Cook	Lake Merritt
 POP-00310	Arnie Carter	Fruitvale
-POP-00311	Andre Lee	Temescal
+POP-00311	Andre Lee	Jack London
 POP-00312	Wiu Wiu	Rockridge
 POP-00313	Soria Herrin	Piedmont Ave
 POP-00314	Lemante Naruto	Jack London
@@ -305,7 +305,7 @@ POP-00352	Kaila Jordache	Piedmont Ave
 POP-00353	Ridley Holt	Lake Merritt
 POP-00354	Illy Jile	Chinatown
 POP-00355	Sammie Soft	West Oakland
-POP-00356	Bethany Foster	Jack London
+POP-00356	Bethany Foster	Lake Merritt
 POP-00357	Andrew Cook	West Oakland
 POP-00358	Rilen Lend	Laurel
 POP-00359	Soira Flesher	Downtown
@@ -316,7 +316,7 @@ POP-00363	Rayon Dart	Lake Merritt
 POP-00364	Kim Peru	Rockridge
 POP-00365	Dexter Patel	Downtown
 POP-00366	Alicia Hernandez	Uptown
-POP-00367	Ron Arenson	Laurel
+POP-00367	Ron Arenson	Baylight District
 POP-00368	Dom Will	West Oakland
 POP-00430	Juniper Walken	Temescal
 POP-00431	Hassan Montero	Uptown
@@ -459,7 +459,6 @@ POP-00618	Lucy Ferreira	Fruitvale
 POP-00619	Tarrance Bolden	Fruitvale
 POP-00620	Yuki Tanaka	Lake Merritt
 POP-00621	Delvon Pratt	West Oakland
-POP-00622	Marisela Rios	Fruitvale
 POP-00623	Winston Clarke	Laurel
 POP-00624	Aisha Toure	Downtown
 POP-00625	Gregory Cho	Chinatown
@@ -545,7 +544,7 @@ POP-00705	Jessie Berry	Jack London
 POP-00706	Rosa Ochoa	Laurel
 POP-00707	Markenie Tian	Lake Merritt
 POP-00708	Dyami Mitchell	Uptown
-POP-00709	Jessica Brooks	Temescal
+POP-00709	Jessica Brooks	Jack London
 POP-00710	Julie Santos	Chinatown
 POP-00711	Xavier Robinson	Lake Merritt
 POP-00712	Jeremy Wong	West Oakland
@@ -554,7 +553,7 @@ POP-00715	Nadine Beckett	Piedmont Ave
 POP-00716	Omarion Farah	Chinatown
 POP-00717	Nikolai Fuentes	Uptown
 POP-00718	Ileana Vasquez	Jack London
-POP-00719	Debbie Kaplan	Jack London
+POP-00719	Debbie Kaplan	Lake Merritt
 POP-00720	Russell Hayward	Laurel
 POP-00721	Jesus Jorden	Temescal
 POP-00722	Daniel Cloak	West Oakland
@@ -717,7 +716,7 @@ POP-00883	Daphne Zamora	Uptown
 POP-00884	Inara Nakamura	Piedmont Ave
 POP-00885	Bria Ramirez	Rockridge
 POP-00886	Keisha Mensah	Lake Merritt
-POP-00887	Erica Faulkner	Fruitvale
+POP-00887	Erica Faulkner	Lake Merritt
 POP-00888	Funmi Ghosh	Laurel
 POP-00889	Noor Ng	KONO
 POP-00890	Mireya Pinckney	Downtown
@@ -820,7 +819,7 @@ POP-00986	Omar Farah	Chinatown
 POP-00987	Tomas Beckett	Piedmont Ave
 POP-00988	Sefu Helio	Chinatown
 POP-00989	Nour Santos	Chinatown
-POP-00990	Camila Brooks	Temescal
+POP-00990	Camila Brooks	Jack London
 POP-00991	Tariq Mitchell	Uptown
 POP-00992	Sefu Tian	Lake Merritt
 POP-00993	Tomas Ochoa	Laurel
@@ -921,3 +920,25 @@ POP-01088	Joel Clark	Eastlake
 POP-01089	Jacob Perez	Glenview
 POP-01090	Elijah Walker	Dimond
 POP-01091	Mateo Nguyen	Brooklyn
+POP-01092	Desmond Achebe	Rockridge
+POP-01093	Marguerite Salcedo	Piedmont Ave
+POP-01094	Ignacio Zavala	Lake Merritt
+POP-01095	Helena Voss-Adeyemi	Rockridge
+POP-01096	Priyanka Raman	Rockridge
+POP-01097	Theodore Lindqvist	Lake Merritt
+POP-01098	Naomi Castellanos	Piedmont Ave
+POP-01099	Wendell Price	Lake Merritt
+POP-01100	Marco Davis	Brooklyn
+POP-01101	Mateo Baker	Ivy Hill
+POP-01102	Colin Perez	Glenview
+POP-01103	Ebony Mendoza	Ivy Hill
+POP-01104	Nala Okonkwo	Dimond
+POP-01105	Rashida Foster	Eastlake
+POP-01106	Priya Chandrasekaran	Lake Merritt
+POP-01107	Daniel Yoon	Temescal
+POP-01108	Christine Nakamura	Temescal
+POP-01109	Marcus Tan	West Oakland
+POP-01110	Amara Osei	Jack London
+POP-01111	Jasmine Torres	Downtown
+POP-01112	Tariq Harris	Chinatown
+POP-01113	Quinn Adeyemi	East Oakland

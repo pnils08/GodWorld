@@ -29,3 +29,5 @@
 {"CycleID":"104","Type":"rain","Temp":"48","Impact":"1.33","Advisory":"","Comfort":"0.21","Mood":"introspective","Alerts":"","Streak":"1","StreakType":"rain","Timestamp":"Y2C52"}
 {"CycleID":"105","Type":"rain","Temp":"49","Impact":"1.33","Advisory":"","Comfort":"0.21","Mood":"introspective","Alerts":"","Streak":"2","StreakType":"rain","Timestamp":"Y3C1"}
 {"CycleID":"106","Type":"overcast","Temp":"52","Impact":"1.05","Advisory":"","Comfort":"0.5","Mood":"neutral","Alerts":"","Streak":"1","StreakType":"overcast","Timestamp":"Y3C2"}
+{"CycleID":"107","Type":"fog","Temp":"44","Impact":"1.3","Advisory":"","Comfort":"0.25","Mood":"introspective","Alerts":"","Streak":"1","StreakType":"fog","Timestamp":"Y3C3"}
+{"CycleID":"108","Type":"fog","Temp":"46","Impact":"1.3","Advisory":"","Comfort":"0.4","Mood":"introspective","Alerts":"","Streak":"2","StreakType":"fog","Timestamp":"Y3C4"}

@@ -1,13 +1,13 @@
 {
-  "cycle": 107,
+  "cycle": 108,
   "generator": "buildDeskPackets v1.7",
   "packets": [
     {
       "desk": "civic",
-      "file": "civic_c107.json",
-      "sizeKB": 1493.2,
-      "summaryFile": "civic_summary_c107.json",
-      "summarySizeKB": 442.9,
+      "file": "civic_c108.json",
+      "sizeKB": 1417.9,
+      "summaryFile": "civic_summary_c108.json",
+      "summarySizeKB": 449.2,
       "reporters": [
         "Dr. Lila Mezran",
         "Luis Navarro",
@@ -15,20 +15,20 @@
         "Trevor Shimizu",
         "Sgt. Rachel Torres"
       ],
-      "events": 6,
-      "seeds": 18,
-      "hooks": 38,
+      "events": 5,
+      "seeds": 16,
+      "hooks": 12,
       "arcs": 0,
-      "storylines": 9,
+      "storylines": 11,
       "interviewCandidates": 20,
-      "interviewCandidatesPool": 786
+      "interviewCandidatesPool": 795
     },
     {
       "desk": "sports",
-      "file": "sports_c107.json",
-      "sizeKB": 1407.9,
-      "summaryFile": "sports_summary_c107.json",
-      "summarySizeKB": 455.4,
+      "file": "sports_c108.json",
+      "sizeKB": 1380.7,
+      "summaryFile": "sports_summary_c108.json",
+      "summarySizeKB": 465.4,
       "reporters": [
         "Anthony",
         "P Slayer",
@@ -42,16 +42,16 @@
       "seeds": 3,
       "hooks": 2,
       "arcs": 0,
-      "storylines": 16,
+      "storylines": 23,
       "interviewCandidates": 20,
-      "interviewCandidatesPool": 786
+      "interviewCandidatesPool": 795
     },
     {
       "desk": "culture",
-      "file": "culture_c107.json",
-      "sizeKB": 1477.7,
-      "summaryFile": "culture_summary_c107.json",
-      "summarySizeKB": 428.4,
+      "file": "culture_c108.json",
+      "sizeKB": 1453.7,
+      "summaryFile": "culture_summary_c108.json",
+      "summarySizeKB": 433.2,
       "reporters": [
         "Maria Keen",
         "Sharon Okafor",
@@ -60,37 +60,37 @@
         "Angela Reyes",
         "Noah Tan"
       ],
-      "events": 7,
+      "events": 6,
       "seeds": 22,
-      "hooks": 43,
+      "hooks": 42,
       "arcs": 0,
-      "storylines": 7,
+      "storylines": 9,
       "interviewCandidates": 20,
-      "interviewCandidatesPool": 786
+      "interviewCandidatesPool": 795
     },
     {
       "desk": "business",
-      "file": "business_c107.json",
-      "sizeKB": 1306.5,
-      "summaryFile": "business_summary_c107.json",
-      "summarySizeKB": 425.6,
+      "file": "business_c108.json",
+      "sizeKB": 1300.8,
+      "summaryFile": "business_summary_c108.json",
+      "summarySizeKB": 434,
       "reporters": [
         "Jordan Velez"
       ],
       "events": 0,
-      "seeds": 3,
-      "hooks": 0,
+      "seeds": 4,
+      "hooks": 3,
       "arcs": 0,
       "storylines": 25,
       "interviewCandidates": 20,
-      "interviewCandidatesPool": 786
+      "interviewCandidatesPool": 795
     },
     {
       "desk": "chicago",
-      "file": "chicago_c107.json",
-      "sizeKB": 1342.2,
-      "summaryFile": "chicago_summary_c107.json",
-      "summarySizeKB": 506.9,
+      "file": "chicago_c108.json",
+      "sizeKB": 1325.4,
+      "summaryFile": "chicago_summary_c108.json",
+      "summarySizeKB": 512.2,
       "reporters": [
         "Selena Grant",
         "Talia Finch"
@@ -99,24 +99,24 @@
       "seeds": 0,
       "hooks": 2,
       "arcs": 0,
-      "storylines": 0,
+      "storylines": 1,
       "interviewCandidates": 20,
-      "interviewCandidatesPool": 786
+      "interviewCandidatesPool": 795
     },
     {
       "desk": "letters",
-      "file": "letters_c107.json",
-      "sizeKB": 1769.8,
-      "summaryFile": "letters_summary_c107.json",
-      "summarySizeKB": 572.8,
+      "file": "letters_c108.json",
+      "sizeKB": 1763.8,
+      "summaryFile": "letters_summary_c108.json",
+      "summarySizeKB": 585.2,
       "reporters": [],
-      "events": 11,
-      "seeds": 46,
-      "hooks": 55,
+      "events": 10,
+      "seeds": 45,
+      "hooks": 57,
       "arcs": 0,
       "storylines": 30,
       "interviewCandidates": 20,
-      "interviewCandidatesPool": 786
+      "interviewCandidatesPool": 795
     }
   ],
   "newsroomMemoryPath": "/root/GodWorld/docs/mags-corliss/NEWSROOM_MEMORY.md",

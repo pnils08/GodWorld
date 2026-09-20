@@ -38,7 +38,9 @@ const SYSTEM_PROMPT = "You are the GodWorld Lore Writer, responsible for generat
 "   - Cycle references must strictly use Y<n>C<m> format (e.g., Y2C103). Do not invent bare cycle numbers.\n" +
 "5. FORMATTING & LENGTH:\n" +
 "   Every generated piece must end with a NAMES INDEX and CITIZEN USAGE LOG block.\n" +
-"   Unless otherwise specified, articles must be LONG-FORM (1200-1500 words). Expand deeply on scenes, sensory details, and lore to achieve this depth.";
+"   Unless otherwise specified, articles must be LONG-FORM (1200-1500 words). Expand deeply on scenes, sensory details, and lore to achieve this depth.\n" +
+"6. DELIVERY:\n" +
+"   The finished piece is delivered ONLY by calling the `write_file` tool. Never output the finished article as reply text -- prose you type instead of a write_file call is discarded. When the piece (including the NAMES INDEX and CITIZEN USAGE LOG) is ready, call write_file exactly once with the complete content as the `content` argument.";
 
 const TOOLS = [
   {
@@ -157,7 +159,13 @@ async function callGemini(messages) {
   const payload = {
     systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },
     contents: messages,
-    tools: [{ functionDeclarations: TOOLS }]
+    tools: [{ functionDeclarations: TOOLS }],
+    // S426: unset before this, so a long-form 1200-1500 word piece plus the
+    // NAMES INDEX/CITIZEN USAGE LOG blocks plus a write_file call could hit the
+    // model's default output cap mid-generation -- the 2026-09-18 Hal Richmond
+    // run cut off mid-sentence with no write_file call as a result. ~3-4k tokens
+    // is what the mandated length needs; 8192 is deliberate headroom.
+    generationConfig: { maxOutputTokens: 8192 }
   };
 
   // Transient-capacity retry. The tool loop runs many turns and every turn
@@ -172,11 +180,23 @@ async function callGemini(messages) {
       console.log("[retry] " + lastErr + " — waiting " + (waitMs / 1000) + "s (attempt " + (attempt + 1) + "/8)");
       await new Promise((r) => setTimeout(r, waitMs));
     }
-    const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/" + GEMINI_MODEL + ":generateContent?key=" + apiKey, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    });
+    // S426: fetch() itself can throw (ECONNRESET, DNS blip, TLS reset -- Node
+    // reports all of these as a bare "fetch failed") before a response ever
+    // exists. That used to escape this loop entirely and kill the run --
+    // only HTTP-status errors (429/500/502/503/504 returned WITH a response)
+    // were retried, so a transient connection failure was treated as fatal
+    // even though it's the same "try again" case as a 503.
+    let response;
+    try {
+      response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/" + GEMINI_MODEL + ":generateContent?key=" + apiKey, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+    } catch (networkErr) {
+      lastErr = "Gemini fetch error: " + networkErr.message;
+      continue;
+    }
     if (response.ok) return response.json();
     const errorText = await response.text();
     lastErr = "Gemini API Error: " + response.status;
@@ -244,9 +264,21 @@ async function main() {
       lastText = textPart.text;
     }
 
+    // S426: finishReason distinguishes "the model is done" from "the response
+    // was cut off mid-generation" -- both used to print as the same
+    // "No more tool calls" line, so a truncated turn (e.g. MAX_TOKENS) looked
+    // identical to a clean finish. Logged every iteration so the next failure
+    // is diagnosable from the log instead of inferred from where the text stops.
+    const finishReason = response.candidates?.[0]?.finishReason;
+    console.log("[finishReason] " + finishReason);
+
     const functionCalls = parts.filter(p => p.functionCall);
     if (functionCalls.length === 0) {
-      console.log("No more tool calls. Exiting loop.");
+      if (finishReason === 'MAX_TOKENS') {
+        console.log("Response truncated by the output-length limit before a write_file call. Not a clean finish -- leaving the AUTOSAVE fallback below to catch it.");
+      } else {
+        console.log("No more tool calls. Exiting loop.");
+      }
       break;
     }
 

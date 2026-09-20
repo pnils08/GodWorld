@@ -36,7 +36,9 @@ function buildPrompt(target) {
     ' themselves -- confirm role, age, neighborhood, household, and family from the ledger ' +
     'before a word of prose. Use read_canon for any place, org, or venue you name. Invent texture ' +
     'freely -- interiority, dialogue, sensory detail -- but never a fact a ledger query could contradict. ' +
-    'Cycle tags are Y<n>C<m> only, never a bare cycle number and never a calendar year.'
+    'Cycle tags are Y<n>C<m> only, never a bare cycle number and never a calendar year. ' +
+    'Deliver the finished piece by calling write_file once with the complete content -- ' +
+    'do not paste the article into a reply.'
   );
 }
 
@@ -133,4 +135,9 @@ function main() {
   if (!ok) process.exitCode = 1;
 }
 
-main();
+// S426: was unconditional -- a bare `require('./cron-lore-run.js')` (inspection,
+// a future script importing it, anything) fired a live, costed run with no
+// warning. loreWriter.js already guards this way; this file didn't.
+if (require.main === module) {
+  main();
+}

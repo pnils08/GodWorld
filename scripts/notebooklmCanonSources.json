@@ -39,7 +39,8 @@
     "defd4884-1954-4657-84af-a19e69435ba3",
     "833558a2-2829-4d84-8677-7d9a2b510a58",
     "fe335f6a-5be4-4d67-bcd9-08e496cf2d74",
-    "f5c42008-321f-4228-b0cb-6e6f24ca8ef4"
+    "f5c42008-321f-4228-b0cb-6e6f24ca8ef4",
+    "86162637-3243-4f59-b562-659cb1ee43be"
   ],
   "allowedCanonReferenceSourceIds": [
     "c31ff29f-42d5-4ed3-ba71-620c463a39a6",
@@ -79,7 +80,8 @@
   "allowedLoreSourceIds": [
     "a1722406-93b3-4ba5-afa9-61e4b82344d5",
     "05877c39-bde2-4acc-bbb2-506169187290",
-    "419fc423-8d81-4a8e-9447-aaabe18e3958"
+    "419fc423-8d81-4a8e-9447-aaabe18e3958",
+    "4a0905d4-786c-41af-a485-4387d988b858"
   ],
   "decisions": {
     "5a519026-77a2-46c6-87ea-e9dcb5c229d1": {
@@ -659,6 +661,24 @@
         "Source file: output/lore-quarantine/POP-00001-vinnie-keane-long-arc-of-the-swing.md",
         "Cycle placement: Y2C52",
         "Verdict: pass (rhea)"
+      ]
+    },
+    "86162637-3243-4f59-b562-659cb1ee43be": {
+      "title": "The Cycle Pulse — Y2C107",
+      "classification": "published",
+      "reason": "Published Cycle Pulse edition, added to the permanent notebook by the Saturday run (cron-saturday-run.js stepPublish).",
+      "evidence": [
+        "editions/cycle_pulse_c107.txt"
+      ]
+    },
+    "4a0905d4-786c-41af-a485-4387d988b858": {
+      "title": "Lore: AUTOSAVE-1788554266831-write-a-ledger-grounded-deep-dive-on-mag (Y3C1)",
+      "classification": "lore",
+      "reason": "Graded lore piece promoted out of quarantine by the claude gate (pipeline.59); ledger-grounded deep background, not a published edition.",
+      "evidence": [
+        "Source file: output/lore-quarantine/AUTOSAVE-1788554266831-write-a-ledger-grounded-deep-dive-on-mag.md",
+        "Cycle placement: Y3C1",
+        "Verdict: pass (claude)"
       ]
     }
   }

@@ -8,11 +8,11 @@
 
 The fog does not behave the same way in Lake Merritt as it does out past the rail spurs of West Oakland or over the saltwater flats by the Port. In Lake Merritt, it hesitates. It skims the dark surface of the tidal lagoon, curls through the lampposts along Bellevue Avenue, and stalls out against the eucalyptus groves before it ever touches the Victorian cornices along the rim.
 
-From the second-floor breakfast alcove of the Corliss house, Mags Corliss (POP-00005) watched that exact hesitation every morning before the sun cleared the East Bay hills. At fifty-five, with a master’s degree, sixteen and a half years at the helm of newsprint and digital copy, and a salary of $220,000, she was a woman whose presence in Oakland was neither an accident nor an overnight arrival. 
+From the second-floor breakfast alcove of the Corliss house—registered under household HH-0084-001—Mags Corliss (POP-00005) watched that exact hesitation every morning before the sun cleared the East Bay hills. At fifty-five, with a master’s degree, sixteen and a half years at the helm of newsprint and digital copy, and a salary of $220,000, she was a woman whose presence in Oakland was neither an accident nor an overnight arrival. 
 
 Across the breakfast table sat Robert Corliss (POP-00594), fifty-seven, leaning over his ceramic mug. Robert had spent forty-three years working the heavy copper and gas lines of the East Bay as a PG&E infrastructure engineer before stepping into retirement with a clean ledger: zero debt, a net worth exceeding two million dollars, and hands that still bore the calluses of substation trenches. When Robert spoke about the city, he spoke of subterranean grid loads, conduit depth, and water mains; when Mags spoke, she spoke of institutional memory, city council quorums, and who was whispering off the record in the corridors of City Hall.
 
-In Y2C51, when the Corliss name formally took root as an Oakland lineage, Robert had merely chuckled over the framed certificate and tapped his pencil against the mahogany table. But for Mags, who had absorbed a one-million-dollar family inheritance into the household estate, the certification was a formal stamp on an old truth: the Corlisses were not transient consumers of Oakland’s prosperity boom. They were its ballast.
+In Y2C51, when the municipal registry certified the Corliss name under lineage LIN-00001, Robert had merely chuckled over the official paperwork and tapped his pencil against the mahogany table. But for Mags, who had absorbed a one-million-dollar family inheritance into the household estate, the certification was a formal stamp on an old truth: the Corlisses were not transient consumers of Oakland’s prosperity boom. They were its ballast.
 
 "You're walking down Grand this morning?" Robert asked, watching her pull her tailored jacket from the back of the dining chair.
 
@@ -56,7 +56,7 @@ Then there was Michael Corliss (POP-00596), twenty-two, who had taken a very dif
 
 During a family dinner in Y3C1, sitting around the oak table in Lake Merritt, Mags had watched her two children debate the timeline of the Fruitvale Transit Hub Phase II. Sarah spoke of infrastructural throughput; Michael spoke of the muralists displaced two blocks west. Robert had sat back, pouring wine, while an old Corliss family story from the early utility days was retold and laughed over.
 
-Sitting there, Mags had let the moment land. Her family was stable, rooted in the neighborhood, secure by any measure that mattered. But the real wealth was the dinner table: the bridge between Robert’s concrete past and her children’s uncertain, vibrant future.
+Sitting there, Mags had let the moment land. Her net worth was $310,938, her household was stable, and her lineage was locked into the civic ledger. But the real wealth was the dinner table: the bridge between Robert’s concrete past and her children’s uncertain, vibrant future.
 
 ***
 

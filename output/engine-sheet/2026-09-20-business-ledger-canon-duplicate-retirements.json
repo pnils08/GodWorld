@@ -1,0 +1,62 @@
+{
+ "at": "2026-09-20T21:46:32.628Z",
+ "reason": "canon.2 duplicate — the canon org is already its own Business_Ledger row; builder word 2026-09-20 16:43",
+ "rows": [
+  {
+   "sheetRow": 83,
+   "values": [
+    "BIZ-00086",
+    "Beth Jacob Congregation",
+    "Faith Organization",
+    "Piedmont Ave",
+    "7",
+    "55000",
+    "430412",
+    "1.68"
+   ],
+   "archivedAs": [
+    "BIZ-00086",
+    "Beth Jacob Congregation",
+    "Faith Organization",
+    "Piedmont Ave",
+    "7",
+    "55000",
+    "430412",
+    "1.68",
+    "",
+    "canon-duplicate-of:BIZ-00092",
+    "108",
+    "canon.2:BIZ-00086:C108",
+    ""
+   ]
+  },
+  {
+   "sheetRow": 80,
+   "values": [
+    "BIZ-00083",
+    "Cathedral of Christ the Light",
+    "Faith Organization",
+    "Lake Merritt",
+    "30",
+    "62000",
+    "3103369",
+    "2.22"
+   ],
+   "archivedAs": [
+    "BIZ-00083",
+    "Cathedral of Christ the Light",
+    "Faith Organization",
+    "Lake Merritt",
+    "30",
+    "62000",
+    "3103369",
+    "2.22",
+    "",
+    "canon-duplicate-of:BIZ-00088",
+    "108",
+    "canon.2:BIZ-00083:C108",
+    ""
+   ]
+  }
+ ]
+}

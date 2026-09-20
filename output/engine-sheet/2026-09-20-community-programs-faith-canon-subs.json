@@ -1,0 +1,47 @@
+{
+ "at": "2026-09-20T21:48:44.992Z",
+ "edits": [
+  {
+   "tab": "Community_Programs",
+   "range": "Community_Programs!B23",
+   "id": "PRG-022",
+   "was": "Allen Temple Baptist Church Food Pantry",
+   "now": "Foothill Baptist Tabernacle Food Pantry"
+  },
+  {
+   "tab": "Community_Programs",
+   "range": "Community_Programs!B24",
+   "id": "PRG-023",
+   "was": "Allen Temple Baptist Church Seniors Lunch Program",
+   "now": "Foothill Baptist Tabernacle Seniors Lunch Program"
+  },
+  {
+   "tab": "Community_Programs",
+   "range": "Community_Programs!B25",
+   "id": "PRG-024",
+   "was": "Acts Full Gospel Church Seniors Lunch Program",
+   "now": "New Covenant Pentecostal Assembly Seniors Lunch Program"
+  },
+  {
+   "tab": "Community_Programs",
+   "range": "Community_Programs!B26",
+   "id": "PRG-025",
+   "was": "Masjid Al-Islam Emergency Assistance Fund",
+   "now": "Masjid An-Nur Oakland Emergency Assistance Fund"
+  },
+  {
+   "tab": "Community_Programs",
+   "range": "Community_Programs!B27",
+   "id": "PRG-026",
+   "was": "Islamic Center of Oakland Food Pantry",
+   "now": "Temescal Islamic Center Food Pantry"
+  },
+  {
+   "tab": "Community_Programs",
+   "range": "Community_Programs!B31",
+   "id": "PRG-030",
+   "was": "Allen Temple Academy",
+   "now": "Foothill Baptist Tabernacle Academy"
+  }
+ ]
+}

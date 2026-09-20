@@ -1,0 +1,61 @@
+{
+ "at": "2026-09-20T21:47:55.112Z",
+ "edits": [
+  {
+   "row": 238,
+   "col": "OtherEntities",
+   "colIdx": 11,
+   "was": "Islamic Center of Oakland Food Pantry (program)",
+   "now": "Temescal Islamic Center Food Pantry (program)"
+  },
+  {
+   "row": 244,
+   "col": "Businesses",
+   "colIdx": 10,
+   "was": "BIZ-00129 Eastside Family Market; BIZ-00079 Masjid Al-Islam",
+   "now": "BIZ-00129 Eastside Family Market; BIZ-00079 Masjid An-Nur Oakland"
+  },
+  {
+   "row": 248,
+   "col": "Businesses",
+   "colIdx": 10,
+   "was": "BIZ-00084 First Unitarian Church Oakland; BIZ-00088 Cathedral of the Living Word",
+   "now": "BIZ-00084 Lakeshore Unitarian Universalist Fellowship; BIZ-00088 Cathedral of the Living Word"
+  },
+  {
+   "row": 249,
+   "col": "Businesses",
+   "colIdx": 10,
+   "was": "BIZ-00082 Acts Full Gospel Church; BIZ-00072 Mendez Printing",
+   "now": "BIZ-00082 New Covenant Pentecostal Assembly; BIZ-00072 Mendez Printing"
+  },
+  {
+   "row": 260,
+   "col": "Businesses",
+   "colIdx": 10,
+   "was": "BIZ-00007 Ridgeline Ventures; BIZ-00084 First Unitarian Church Oakland",
+   "now": "BIZ-00007 Ridgeline Ventures; BIZ-00084 Lakeshore Unitarian Universalist Fellowship"
+  },
+  {
+   "row": 263,
+   "col": "Businesses",
+   "colIdx": 10,
+   "was": "BIZ-00026 Fruitvale Community Clinic; BIZ-00081 St. Columba Catholic Church",
+   "now": "BIZ-00026 Fruitvale Community Clinic; BIZ-00081 St. Esperanza Parish"
+  },
+  {
+   "row": 275,
+   "col": "Businesses",
+   "colIdx": 10,
+   "was": "BIZ-00168 Canopy Market; BIZ-00085 Temple Sinai",
+   "now": "BIZ-00168 Canopy Market; BIZ-00085 Temple Beth Or"
+  },
+  {
+   "row": 276,
+   "col": "OtherEntities",
+   "colIdx": 11,
+   "was": "Islamic Center of Oakland Food Pantry (program)",
+   "now": "Temescal Islamic Center Food Pantry (program)"
+  }
+ ]
+}

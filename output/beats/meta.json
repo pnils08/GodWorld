@@ -3,7 +3,7 @@
   "cycle": 108,
   "prevCycle": 107,
   "rows": {
-    "Business_Ledger": 177,
+    "Business_Ledger": 175,
     "Employment_Roster": 859,
     "Casino_Ledger": 51,
     "Transit_Metrics": 558,
@@ -18,7 +18,7 @@
     "Household_Ledger": 763,
     "Story_Seed_Deck": 275,
     "Story_Hook_Deck": 1828,
-    "Business_Archive": 0,
+    "Business_Archive": 2,
     "Cultural_Ledger": 52,
     "Oakland_Sports_Feed": 227,
     "Initiative_Tracker": 6,
@@ -26,7 +26,7 @@
     "Election_Log": 0,
     "Civic_Ledger": 0
   },
-  "generatedAt": "2026-09-20T21:40:55.557Z",
+  "generatedAt": "2026-09-20T21:49:34.662Z",
   "generatedBy": "scripts/dumpBeatTabs.js",
   "note": "pipeline.68 Task 1 — beat-tab dump for the slice builders. Stable filenames, overwritten each cycle; prior cycle kept in prev/."
 }

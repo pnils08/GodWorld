@@ -20,7 +20,9 @@ own rollout rows.
 
 ---
 
-## Next Session Priorities (S457 → next, engine-sheet)
+## Next Session Priorities (S476 → next, engine-sheet)
+
+**2026-09-20 (S476), current:** next session FIRES LIVE C108 through `/run-cycle`; four unsmoked deploys ride it (PROD @97/@98, @102, @103, @104) — expectations in [[../reference/DEPLOY_HISTORY]]. Then engine.227 → engine.246 → engine.216. The dated notes and numbered list below are the S457–S459 record, kept for order only.
 
 **2026-09-14 (codex), current direction:** Mike assigned Codex the simulation repair lead; engine-sheet executes directed work. Fires held. engine.217 corrects duplicate economic execution first; engine.214's current cut remains unaccepted for firing. See the owning plan Tasks 4 and 7 below. The numbered list records the preceding session's order. **REVERSED 2026-09-14 20:21 (Mike-direct): codex at 6% of its weekly budget takes a back seat; engine-sheet leads the repairs (engine.222 → 221 → 219 → 220 per codex HANDOFF), codex reviews on request. engine.217/218 accepted on the bench; PROD + push wait on Mike's word.**
 
@@ -186,6 +188,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | infrastructure.6 | Sim-health observability + ghost-tab integrity — `/api/sim-health` off engineAuditor JSON + dashboard panel; disposition 11 ghost tab refs + tab-reference integrity test | ready | engine-sheet | [[../plans/2026-07-31-engine-observability-integrity]] |
 | infrastructure.8 | Hidden-tab audit + disposition (kimi) — 16 hidden tabs classified vs live code (3 load-bearing, 6 dead); Task 1 doc truth pass, Task 2 builder keep/delete rulings, Task 3 backup-then-delete. **Builder 2026-09-14: low priority — pick up only once the engine runs clean.** | parked | engine-sheet | [[../plans/2026-09-09-hidden-tab-audit]] |
 | infrastructure.10 | Supermemory plugin is 0.1.8 (= upstream) but `docs/SUPERMEMORY.md` describes v0.0.12 + a project config that no longer exists (`.claude/.supermemory-claude/config.json`). With no `repoContainerTag` the plugin reads an EMPTY auto-tag `repo_godworld__4b23…` — boot + every prompt inject a no-match notice. Auto-capture still off (verified). Decide: leave, or point recall at `sl-godworld` | needs-info | research-build | found 2026-09-20 (engine-sheet), plugin `hooks/lib/container-tag.js` |
+| infrastructure.11 | claude-mem observer intermittent on free `nemotron-3.5-lightning`: 2026-09-20 34 stored / 112 failed; successes pile against the old 30s wall (14 of 34 in 20–30s), yet under 90s (set 14:56) first five = 7/12/38s done, 2 HUNG full 90s. Re-measure on hours of data; next lever `CLAUDE_MEM_OPENROUTER_MAX_CONTEXT_MESSAGES` 20→10. No batching knob exists (1 call per tool use, Bash 92%); boot shows 0 obs BY SETTING. Unverified: chroma sync after the stop/start | in-progress | engine-sheet | `~/.claude-mem/logs/claude-mem-2026-09-20.log`, worker `Jve=3e4` |
 
 ### research.* — Papers, external tools, evaluations
 

@@ -185,6 +185,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | infrastructure.5 | Supermemory load-bearing audit | in-progress | research-build | [[../plans/2026-05-22-supermemory-load-bearing-audit]] + [[../adr/0008-speaker-attribution-for-auto-save-writers|ADR-0008]] — detail in pointer (relocated 2026-07-02) |
 | infrastructure.6 | Sim-health observability + ghost-tab integrity — `/api/sim-health` off engineAuditor JSON + dashboard panel; disposition 11 ghost tab refs + tab-reference integrity test | ready | engine-sheet | [[../plans/2026-07-31-engine-observability-integrity]] |
 | infrastructure.8 | Hidden-tab audit + disposition (kimi) — 16 hidden tabs classified vs live code (3 load-bearing, 6 dead); Task 1 doc truth pass, Task 2 builder keep/delete rulings, Task 3 backup-then-delete. **Builder 2026-09-14: low priority — pick up only once the engine runs clean.** | parked | engine-sheet | [[../plans/2026-09-09-hidden-tab-audit]] |
+| infrastructure.10 | Supermemory plugin is 0.1.8 (= upstream) but `docs/SUPERMEMORY.md` describes v0.0.12 + a project config that no longer exists (`.claude/.supermemory-claude/config.json`). With no `repoContainerTag` the plugin reads an EMPTY auto-tag `repo_godworld__4b23…` — boot + every prompt inject a no-match notice. Auto-capture still off (verified). Decide: leave, or point recall at `sl-godworld` | needs-info | research-build | found 2026-09-20 (engine-sheet), plugin `hooks/lib/container-tag.js` |
 
 ### research.* — Papers, external tools, evaluations
 

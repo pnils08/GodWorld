@@ -129,6 +129,25 @@ pointers:
 
 ## PROD deploy log — full trail
 
+### PROD @105 — the engine reads the record that was typed (2026-09-20 ~16:50 Chicago, engine-sheet)
+
+engine.247. Engine tree `d5738907`; 2 payload files vs @104 (`applySportsSeason.js`, `compileHandoff.js`).
+
+**LANDED.** `clasp push -f` from an isolated `git archive` stage (prod `.clasp.json` diff-identical to repo, sandbox id absent), pre-push delta vs live = exactly those 2 files, script **version 94**, web app `AKfycbwUvd4...PawCW-bgQ` repointed **@93 → @94** and read back. Pull-back 169/169 js byte-identical, 0 test files.
+
+**What it changes.** Sheets stores a W-L that is also a valid month-day (`4-1`, `7-2`, `10-3`) as a DATE on any automatic-format cell (14 of 227 live `Team Record` cells). `getValues()` returns a Date; its `toString()` carries no W-L, so `parseWinPercentage_` returned null and the clobber guard kept the cycle's first text record, and the casino's backward scan skipped every date row the same way. Every Node reader uses display strings and saw the right value, so nothing flagged it. `sportsRecordText_` converts the Date back to `M-d` in the spreadsheet's zone at `readOaklandFeedEntries_`, `processFeedSheet_` and the handoff's feed loader.
+
+**Live evidence of the defect (C108, PROD @104):** execution log `record: 3-0` against a last row of 7-2; all 12 C108 `sports:as` slips priced win 1.44 / loss 2.52 (the 3-0 price; 7-2 prices 1.41 / 2.59). C107 logged `1-0` against 3-1.
+
+**Bench:** SANDBOX 0908 @75, C116, `ok:true` 109.3s, 132 phases, Engine_Errors 0. Fixture = four bench-only A's rows entered USER_ENTERED (stored `"3-0"`, 46113, 46113, 46205). Four pre-declared predictions held (`output/engine-sheet/2026-09-20-bench-c116-engine247-predictions.md`): 11 new slips priced **1.41 / 2.59**; `playoffs` 22/22; C115 A's slips settled win-side off the first game-result. **BENCH-ONLY, NEVER REPLAY:** bench feed rows 76–79 (C116, Notes `2026-09-20 BENCH-ONLY engine.247 …`; the API append inserted them at the first table break, not the foot) and everything C116 wrote.
+
+**Live sheet write, same session (no deploy):** `Oakland_Sports_Feed` column H set to Plain text for every data row; the 14 date cells rewritten as the text they displayed (rows 113, 121, 123–126, 129, 130, 134, 221, 222, 224–226). Read back: 0 numeric-stored cells of 227, 0 display values changed. Record `output/engine-sheet/2026-09-20-sports-feed-team-record-date-cells.json`. The setup menu only clears data validations, so it does not undo the format.
+
+**Bench ≠ live on date cells:** `syncSandboxFromLive.js` carries a date cell across as its bare serial (bench showed `46113` where live showed `4-1`). A number is a third shape the engine does not convert; with the live column now text there is nothing left to flatten, but any other date-typed cell on any tab arrives on the bench as a number.
+
+**Expect at live C109:** `Sports sentiment: A's … (record: <the last row's W-L>)` in the execution log; `sports:as` slips priced off that record; pre-flight line `every Team Record cell is stored as text`.
+- **Rollback:** `clasp deploy -i AKfycbwUvd4… -V 93` repoints to @104.
+
 ### PROD @104 — a crisis spike says what it is (2026-09-20 ~15:10 Chicago, engine-sheet)
 
 engine.244 + engine.215. Engine tree `b5cb18fb`; 3 payload files vs @103

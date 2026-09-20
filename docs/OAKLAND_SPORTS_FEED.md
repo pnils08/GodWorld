@@ -428,6 +428,7 @@ parsers, validators, and consumers through an approved implementation plan.
 
 ## Changelog
 
+- 2026-09-20 (engine-sheet) — `Team Record` (column H) is now Plain text on every data row; 14 cells Sheets had stored as dates (`4-1`, `7-2`, `10-3` …) were restored to text. Until PROD @105 the engine read a date-stored record as unreadable and fell back to the cycle's first text record (engine.247). The engine now converts a date back to `M-d`, and pre-flight warns on any date-stored record and runs the engine's own WeekRecord validator (a `WeekRecord` with games on a non-`game-result` row fails pre-flight).
 - 2026-09-16 (codex) — Corrected the retired off-season sentinel claim and distinguished computed neighborhood values from consumed effects; documented the interim WeekRecord draft guard and pending schema migration.
 
 - 2026-09-16 (codex) — Updated the D3 pointer to tracker-safe engine.203d; decay is ruled and remains unbuilt after engine.210.

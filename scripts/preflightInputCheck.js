@@ -189,6 +189,47 @@ async function main() {
       } else {
         lines.push(`[x] Sports Feed: ${rows.length} entries, all required + recommended columns populated`);
       }
+      // ── engine.247 / G-EC61: a W-L that is a valid month-day (4-1, 7-2) is stored as a DATE on
+      // an automatic-format cell. Display reads (this script, every Node reader) see "7-2"; the
+      // engine's getValues() sees a Date. Only an UNFORMATTED read can tell. The engine now
+      // converts it back, so this is a warning — it means the column lost its plain-text format.
+      try {
+        const client = await sheets.getClient();
+        const spreadsheetId = process.env.GODWORLD_SHEET_ID;
+        const hdr = (await client.spreadsheets.values.get({ spreadsheetId, range: `${SPORTS_SHEET}!1:1` })).data.values[0];
+        const col = hdr.indexOf('Team Record');
+        if (col >= 0) {
+          const L = sheets.columnIndexToLetter ? sheets.columnIndexToLetter(col) : String.fromCharCode(65 + col);
+          const raw = (await client.spreadsheets.values.get({
+            spreadsheetId, range: `${SPORTS_SHEET}!${L}2:${L}`, valueRenderOption: 'UNFORMATTED_VALUE',
+          })).data.values || [];
+          const dated = rows.map(r => sheetRowOf.get(r)).filter(n => raw[n - 2] && typeof raw[n - 2][0] === 'number');
+          if (dated.length > 0) {
+            lines.push(`[!] Sports Feed records: ${dated.length} Team Record cell(s) stored as a DATE, not text — ${L}${dated.join(`, ${L}`)} (set the column to Plain text and re-type)`);
+            warnings.push(`sports Team Record stored as date (${dated.length})`);
+          } else {
+            lines.push('[x] Sports Feed records: every Team Record cell is stored as text');
+          }
+        }
+      } catch (e) {
+        lines.push(`[!] Sports Feed records: storage-type check failed — ${e.message}`);
+        warnings.push('sports record storage check failed');
+      }
+      // ── G-EC57: a WeekRecord on a non game-result row is refused by the engine and logged to
+      // Engine_Errors (live C108 row 226). Knowable here.
+      // Parity by execution: the engine's own validator, not a copy of its rule.
+      const { sportsWeekForEntry_ } = require('../utilities/sportsWeekRecord.js');
+      const weekRejects = [];
+      for (const r of rows) {
+        try { sportsWeekForEntry_({ weekRecord: r.WeekRecord, eventType: r.EventType }); }
+        catch (e) { weekRejects.push(`row ${sheetRowOf.get(r)} (${r.EventType}, "${r.WeekRecord}"): ${e.message}`); }
+      }
+      if (weekRejects.length > 0) {
+        lines.push(`[ ] Sports Feed weeks: the engine will refuse ${weekRejects.length} WeekRecord cell(s) — ${weekRejects.join('; ')}`);
+        notReady = true;
+      } else {
+        lines.push('[x] Sports Feed weeks: every WeekRecord cell passes the engine validator');
+      }
       // ── G-PF26 (S407): NamesUsed resolution at pre-flight ──
       // C105 `Oakland_Sports_Feed!E212` carried two stacked defects in one cell:
       // a missing comma merging two pitchers into one token, and a misspelling

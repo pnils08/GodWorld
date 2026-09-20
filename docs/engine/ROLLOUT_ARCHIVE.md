@@ -336,6 +336,14 @@ All scripts verified correct containers. No old GodWorld org refs. No mara acces
 
 ## S142 Archive Pass (2026-04-11)
 
+### Archive Pass — S474 (2026-09-20, engine-sheet)
+
+One row, closed by a fix that shipped three sessions before anyone noticed the row was still open. engine.243 (crisis naming, PROD @103) is the continuation and stays open until the live C108 smoke.
+
+| ID | Item | State | Owner | Pointer |
+|---|---|---|---|---|
+| engine.106 | Crisis arcs fed fabricated specificity to desk packets — **CLOSED S474: the rebuild shipped as engine.71 `generateCrisisBuckets_` v3.0** ("DETECTION REPLACES INVENTION (ENGINE_REPAIR Row 28)", file header), which deleted the dice/subtype pools and the city-wide illnessRate read and made a crisis a per-hood state detected from >=2 independent real channels. The row outlived the fix. Live Event_Arc_Ledger confirms the cutover: everything C101 and earlier is pre-rebuild invention ("Positive energy bringing neighbors together"), the only v3.0 arc is CRISIS-105-WESTOAKL with real evidence. Naming + the referenced link continue as engine.243 | archived S474 | engine-sheet | `phase03-population/generateCrisisBuckets.js` v3.0 header; [[archive/ENGINE_REPAIR]] Row 28 |
+
 ### Archive Pass — S471 (2026-09-20, engine-sheet)
 
 The hood-canon + shock-chain wave, all LIVE at PROD @102 (`e1ef6465`, clasp v91, pull-back 169/169 byte-identical). engine.187 is the one worth re-reading: six gates that could not NOT fire, each masking the next, closed only after `ENGINE187_DIAG` made the detector report its own reasons. Acceptance for the wave is the unattended live C108 fire — a regression there gets a NEW row, not one of these reopened.

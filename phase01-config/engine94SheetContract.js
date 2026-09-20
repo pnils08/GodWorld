@@ -37,7 +37,12 @@ var ENGINE133_CONFIG_SEEDS = [
   ['illnessAttractorPull', 0.12, 'engine.133 fraction of the (baseline - rate) gap closed per Cycle', 0, 1, false],
   ['illnessEventStrain', 0.015, 'engine.133 city-rate bump per salient weather event that Cycle (frost/snow at half)', 0, 0.1, false],
   ['illnessHoodWeightMin', 0.5, 'engine.133 lower clamp on a hood structural illness weight before envelope normalization', 0.1, 1, false],
-  ['illnessHoodWeightMax', 2.0, 'engine.133 upper clamp on a hood structural illness weight before envelope normalization', 1, 5, false]
+  ['illnessHoodWeightMax', 2.0, 'engine.133 upper clamp on a hood structural illness weight before envelope normalization', 1, 5, false],
+  // engine.215 — both were read by updateNeighborhoodDemographics with a default
+  // and never seeded, so every Cycle filed a missing-config notice that the
+  // repeating-event detector then reported as a recurring civic issue.
+  ['illnessConvergenceRate', 0.25, 'engine.102 fraction of a hood sick-count gap closed per Cycle (floor 3 per Cycle)', 0, 1, false],
+  ['illnessInitiativeRelief', 0.25, 'engine.133 share of a hood expected sick count a health initiative relieves at full strength', 0, 1, false]
 ];
 
 // engine.96 (S413) — business lifecycle tunables, the Task 3 table signed off by the

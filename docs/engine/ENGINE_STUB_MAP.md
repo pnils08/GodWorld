@@ -607,6 +607,8 @@
 - **getResolutionConditions_(category)**
 
 ### generateCrisisSpikes.js
+- **crisisSpikeDescription_(domain, severity, neighborhood)**
+
 - **generateCrisisSpikes_(ctx)**
   Reads: S.cityDynamics, S.cycleId, S.economicMood, S.eventsGenerated, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.sportsSeason, S.sportsZones, S.weather, S.weatherMood, S.worldEvents
   Writes: S.eventsGenerated, S.worldEvents
@@ -4147,4 +4149,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 184
-**Functions mapped:** 1440
+**Functions mapped:** 1441

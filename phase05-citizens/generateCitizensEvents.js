@@ -1679,7 +1679,11 @@ function generateCitizensEvents_(ctx) {
     }
     // Fallback: worldEventsEngine texture descriptions are already citizen-scale
     // ("transformer hiccup", "3-block flicker") — light reaction wrapper.
-    var desc = String(ev.description || "").trim();
+    // engine.244: a crisis spike's description is a RECORD line ("Medium-severity
+    // public-works spike in Temescal"), never citizen-scale texture. It was blank
+    // until engine.244, so a spike with no keyword branch produced no line here —
+    // keep it that way rather than put engine language in a citizen's life.
+    var desc = (ev.subdomain === 'crisis-spike') ? "" : String(ev.description || "").trim();
     if (desc) {
       return (grain === "lived")
         ? ["swapped stories with a neighbor about the " + desc.toLowerCase()]

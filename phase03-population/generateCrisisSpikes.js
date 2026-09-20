@@ -20,6 +20,35 @@
  * ============================================================================
  */
 
+// engine.244 — a spike's description is its own state: severity, domain, hood.
+// No pool, no dice (a new rng draw would move every outcome downstream).
+//
+// The words are a FENCE, not style. Four engines parse a world event's description
+// and act on what they find: economicRippleEngine (:557-590, 'infrastructure' /
+// 'crime' / 'cultural' / 'closure' ... each CREATE a ripple), faithEventsEngine
+// (:404, 'crisis' / 'emergency' / 'fire' ... flip crisis mode), storyHook (:1050+,
+// 'outage' / 'protest' ... add hooks) and chaosReaction_ in generateCitizensEvents
+// (first keyword branch wins). A blank description triggered none of them, so
+// these nouns must trigger none either — INFRASTRUCTURE and CULTURE cannot be
+// named by their own words. scripts/crisisNaming.test.js section 11 lifts the live
+// keyword lists from those four files and fails if any string here trips one.
+var CRISIS_SPIKE_NOUN = {
+  HEALTH: 'health',
+  INFRASTRUCTURE: 'public-works',
+  CIVIC: 'civic',
+  ECONOMIC: 'economic',
+  SAFETY: 'safety',
+  ENVIRONMENT: 'environmental',
+  CULTURE: 'culture'
+};
+
+function crisisSpikeDescription_(domain, severity, neighborhood) {
+  var noun = CRISIS_SPIKE_NOUN[domain] || String(domain || 'city').toLowerCase();
+  var sev = String(severity || 'low');
+  var text = sev.charAt(0).toUpperCase() + sev.slice(1) + '-severity ' + noun + ' spike';
+  return neighborhood ? text + ' in ' + neighborhood : text;
+}
+
 function generateCrisisSpikes_(ctx) {
 
   var rng = safeRand_(ctx);
@@ -362,6 +391,7 @@ function generateCrisisSpikes_(ctx) {
     var event = {
       cycle: cycle,
       domain: domain,
+      description: crisisSpikeDescription_(domain, severity, neighborhood),  // engine.244
       subdomain: 'crisis-spike',
       neighborhood: neighborhood,
       severity: severity,

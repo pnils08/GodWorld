@@ -362,5 +362,67 @@ console.log('\nengine.243 — crisis naming, the end of a crisis, and city memor
     events === 0 && arcs === 0, events + ' events / ' + arcs + ' arcs');
 }
 
+// ── 11. engine.244: a crisis spike describes itself and trips no parser ────
+{
+  // Four engines PARSE a world event's description and act on what they find.
+  // A spike's description was blank until engine.244, so it triggered none of
+  // them. The keyword lists below are LIFTED FROM SOURCE, so a keyword added to
+  // any of the four readers re-tests every string the spike generator can emit.
+  const rd = rel => fs.readFileSync(path.join(ROOT, rel), 'utf8');
+  const lits = (src, re) => { const out = []; let m; while ((m = re.exec(src))) out.push(m[1]); return out; };
+
+  const rippleSrc = rd('phase06-analysis/economicRippleEngine.js');
+  const rippleKw = lits(rippleSrc, /evtText\.indexOf\('([^']+)'\)/g);
+  const faithSrc = rd('phase04-events/faithEventsEngine.js');
+  const faithKw = lits((faithSrc.match(/var crisisKeywords = \[([^\]]+)\]/) || [])[1] || '', /'([^']+)'/g);
+  const hookKw = lits(rd('phase07-evening-media/storyHook.js'), /desc\.indexOf\('([^']+)'\)/g);
+  const citSrc = rd('phase05-citizens/generateCitizensEvents.js');
+  const reactSrc = citSrc.slice(citSrc.indexOf('function chaosReaction_'), citSrc.indexOf('// Fallback: worldEventsEngine texture'));
+  const branches = lits(reactSrc, /if \(\/(.+?)\/\.test\(hay\)\)/g).map(r => new RegExp(r));
+  check('the four keyword lists were actually lifted (ripple/faith/hook/reaction)',
+    rippleKw.length >= 15 && faithKw.length >= 5 && hookKw.length >= 5 && branches.length >= 8,
+    [rippleKw.length, faithKw.length, hookKw.length, branches.length].join('/'));
+
+  const sb = { Math, Object, Array, Number, String, JSON, isFinite, isNaN, Error };
+  vm.createContext(sb);
+  load(sb, 'phase03-population/generateCrisisSpikes.js');
+  const DOMAINS = ['HEALTH', 'INFRASTRUCTURE', 'CIVIC', 'ECONOMIC', 'SAFETY', 'ENVIRONMENT', 'CULTURE'];
+  const firstBranch = hay => branches.findIndex(b => b.test(hay));
+  const trips = [];
+  let shape = 0, total = 0;
+  DOMAINS.forEach(d => ['low', 'medium', 'high'].forEach(sev => NM.forEach(h => {
+    const desc = sb.crisisSpikeDescription_(d, sev, h);
+    const low = desc.toLowerCase();
+    total++;
+    if (/^(Low|Medium|High)-severity [a-z-]+ spike in .+$/.test(desc)) shape++;
+    rippleKw.forEach(k => { if (low.indexOf(k) >= 0) trips.push('ripple:' + k + ' <- ' + desc); });
+    faithKw.forEach(k => { if (low.indexOf(k) >= 0) trips.push('faith:' + k + ' <- ' + desc); });
+    hookKw.forEach(k => { if (low.indexOf(k) >= 0) trips.push('hook:' + k + ' <- ' + desc); });
+    const blank = firstBranch((d + '  ').toLowerCase());
+    const filled = firstBranch((d + '  ' + desc).toLowerCase());
+    if (blank !== filled) trips.push('reaction branch ' + blank + '->' + filled + ' <- ' + desc);
+  })));
+  check('every domain x severity x hood string has the record shape', shape === total && total === 7 * 3 * NM.length, shape + '/' + total);
+  check('no spike description trips a ripple, faith, story-hook or citizen-reaction keyword', trips.length === 0, trips.slice(0, 4).join(' | '));
+  check('the description builder draws no dice', !/rng|Math\.random/.test(String(sb.crisisSpikeDescription_)));
+  check('the citizen fallback never quotes a crisis-spike record line',
+    /ev\.subdomain === 'crisis-spike'\) \? "" : String\(ev\.description/.test(citSrc));
+
+  // the real generator, end to end: same draw count as before the description
+  // existed (5 per spike + 1 for the count), every spike described.
+  let draws = 0, seed = 7;
+  sb.safeRand_ = () => () => { draws++; seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
+  sb.getCoreSimNeighborhoods_ = () => NM.slice();
+  const nbState = {}; NM.forEach(h => { nbState[h] = { incomeTier: 3, crimeIndex: 0.7 }; });
+  const ctx = { config: { cycleCount: 108 }, now: 'T', summary: { cycleId: 108, neighborhoodState: nbState, season: 'Summer' } };
+  sb.generateCrisisSpikes_(ctx);
+  const spikes = ctx.summary.worldEvents.filter(e => e.subdomain === 'crisis-spike');
+  check('the generator emits at least one spike and every spike carries its own description',
+    spikes.length >= 1 && spikes.every(e => e.description === sb.crisisSpikeDescription_(e.domain, e.severity, e.neighborhood)),
+    JSON.stringify(spikes.map(e => e.description)));
+  check('the description costs zero rng draws (1 for the count + 4 per spike, as before)',
+    draws === 1 + 4 * spikes.length, draws + ' draws / ' + spikes.length + ' spikes');
+}
+
 console.log('\n' + passed + ' passed, ' + failed + ' failed\n');
 process.exit(failed ? 1 : 0);

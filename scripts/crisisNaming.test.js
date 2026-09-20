@@ -238,14 +238,19 @@ console.log('\nengine.243 — crisis naming, the end of a crisis, and city memor
     citizens: [], consecutiveBad: 0, consecutiveGood: 1, cycleCreated: 110,
     phaseStartCycle: 111, source: 'DETECTED'
   }], crisisMemory: [], hospitalEvents: [] };
-  const r = runCycle(sb, 113, { prev, bad: {} });
+  // housing pressure is live in Rockridge this cycle but was NOT necessarily what
+  // the arc was detected on — the bench named it "Housing Squeeze" off exactly
+  // this, and got lucky. A live channel is never a naming source for a legacy arc.
+  const r = runCycle(sb, 113, { prev, bad: { 'Rockridge': { housingPressure: 9.5 } } });
   const arc = r.S.eventArcs[0];
+  check('a live channel at recovery time never names a legacy arc',
+    arc.name.indexOf('Housing Squeeze') < 0, arc.name);
   check('a legacy arc with no recoverable evidence is named from its domain',
     arc.name === 'The Rockridge Health Crisis', arc.name);
   check('the coarse name is marked as domain-precision, not a channel claim',
     arc.nameChannel === 'domain', arc.nameChannel);
   check('the coarse name reaches the recovery line the desks render',
-    arc.summary === 'The Rockridge Health Crisis — Rockridge recovering — pressure lifting', arc.summary);
+    arc.summary.indexOf('The Rockridge Health Crisis — Rockridge easing but still strained') === 0, arc.summary);
   check('an arc with a domain the map does not cover stays unnamed rather than guessing',
     (() => { const p2 = JSON.parse(JSON.stringify(prev)); p2.crisisArcs[0].domainTag = 'CULTURE'; p2.crisisArcs[0].domain = 'CULTURE';
       return sb.crisisNameFromDomain_('Rockridge', 'CULTURE') === ''; })());

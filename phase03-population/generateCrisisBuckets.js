@@ -383,14 +383,19 @@ function generateCrisisBuckets_(ctx) {
     // still holds the evidence it was detected on, so a hospital crisis in
     // recovery is not renamed after whichever channel happens to be last active.
     if (!arc.name) {
-      var nameSrc = arc.summary ? [String(arc.summary)] : ch.evidence;
-      var backfill = crisisNameChannel_(nameSrc) ? nameSrc : ch.evidence;
-      var bfCh = crisisNameChannel_(backfill);
+      // ONSET-DERIVED ONLY, in descending precision. The carried summary still
+      // holds the detected evidence unless a recovery cycle overwrote it;
+      // domainTag is written by domainFor_(onset evidence) and always survives.
+      // This cycle's live channels are deliberately NOT a source: the bench
+      // named CRISIS-110-ROCKRIDG "Housing Squeeze" off the one channel that
+      // happened to be active at resolution, which was true only because housing
+      // was also an onset channel. A legacy arc must not be named after
+      // something that arrived after it started.
+      var bfCh = crisisNameChannel_([String(arc.summary || '')]);
       if (bfCh) {
-        arc.name = crisisArcName_(arc.neighborhood, backfill);
+        arc.name = crisisArcName_(arc.neighborhood, [String(arc.summary || '')]);
         arc.nameChannel = bfCh.key;
       } else {
-        // Nothing precise survived the carry — name it from the domain, which did.
         arc.name = crisisNameFromDomain_(arc.neighborhood, arc.domainTag || arc.domain);
         if (arc.name) arc.nameChannel = 'domain';
       }

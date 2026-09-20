@@ -184,6 +184,7 @@ function readOaklandFeedEntries_(ctx, currentCycle) {
   var communityCol = findColumnIndex_(headers, ['CommunityInvestment', 'communityinvestment']);
   var mediaProfileCol = findColumnIndex_(headers, ['MediaProfile', 'mediaprofile']);
 
+  var feedTz = sportsFeedTimeZone_(ss);   // engine.247
   var entries = [];
   var weeklyTeams = {};
 
@@ -200,7 +201,7 @@ function readOaklandFeedEntries_(ctx, currentCycle) {
       namesUsed: getColVal_(row, namesCol),
       notes: getColVal_(row, notesCol),
       stats: getColVal_(row, statsCol),
-      teamRecord: getColVal_(row, recordCol),
+      teamRecord: recordCol === -1 ? '' : sportsRecordText_(row[recordCol], feedTz),
       storyAngle: getColVal_(row, storyAngleCol),
       playerMood: getColVal_(row, playerMoodCol),
       eventTrigger: getColVal_(row, triggerCol),
@@ -264,6 +265,44 @@ function readOaklandFeedEntries_(ctx, currentCycle) {
 function getColVal_(row, colIdx) {
   if (colIdx === -1) return '';
   return (row[colIdx] || '').toString().trim();
+}
+
+/**
+ * engine.247: a W-L record that is also a valid month-day (`4-1`, `7-2`,
+ * `10-3`) is stored by Sheets as a DATE on any cell left on automatic format.
+ * `getValues()` then hands the engine a Date, its `toString()` has no `W-L` in
+ * it, `parseWinPercentage_` returns null and the clobber guard keeps the
+ * cycle's FIRST text record (live C108 read 3-0 for a 7-2 club; C107 read 1-0
+ * for 3-1). 14 of 227 live cells at C108. Turn the Date back into the text that
+ * was typed. The spreadsheet's own zone is used so a midnight date never slips
+ * a day; the bare getMonth/getDate branch is the Node-harness fallback.
+ *
+ * @param {*} raw - cell value from getValues()
+ * @param {string} [tz] - spreadsheet time zone
+ * @returns {string} trimmed record text
+ */
+function sportsRecordText_(raw, tz) {
+  if (Object.prototype.toString.call(raw) !== '[object Date]') {
+    return (raw || '').toString().trim();
+  }
+  if (isNaN(raw.getTime())) return '';
+  if (typeof Utilities !== 'undefined' && Utilities && Utilities.formatDate) {
+    var zone = tz;
+    if (!zone && typeof Session !== 'undefined' && Session && Session.getScriptTimeZone) {
+      zone = Session.getScriptTimeZone();
+    }
+    if (zone) return Utilities.formatDate(raw, zone, 'M-d');
+  }
+  return (raw.getMonth() + 1) + '-' + raw.getDate();
+}
+
+/** Spreadsheet zone for sportsRecordText_, from a Spreadsheet or a Sheet. */
+function sportsFeedTimeZone_(ssOrSheet) {
+  try {
+    if (ssOrSheet && ssOrSheet.getSpreadsheetTimeZone) return ssOrSheet.getSpreadsheetTimeZone();
+    if (ssOrSheet && ssOrSheet.getParent) return ssOrSheet.getParent().getSpreadsheetTimeZone();
+  } catch (e) { /* fall through to the script zone */ }
+  return '';
 }
 
 /**
@@ -734,6 +773,7 @@ function processFeedSheet_(sheet, currentCycle) {
   var communityCol = findColumnIndex_(headers, ['CommunityInvestment', 'communityinvestment']);
   var mediaProfileCol = findColumnIndex_(headers, ['MediaProfile', 'mediaprofile']);
 
+  var feedTz2 = sportsFeedTimeZone_(sheet);   // engine.247
   // Build per-team latest state by scanning all rows
   var teamState = {};
 
@@ -760,7 +800,7 @@ function processFeedSheet_(sheet, currentCycle) {
     // Update from newer or same-cycle entries (later rows win for same cycle)
     // Convention: last entry per cycle is the "season-state" row
     if (cycle >= ts.cycle) {
-      var record = recordCol !== -1 ? (row[recordCol] || '').toString().trim() : '';
+      var record = recordCol !== -1 ? sportsRecordText_(row[recordCol], feedTz2) : '';   // engine.247
       var seasonType = seasonTypeCol !== -1 ? (row[seasonTypeCol] || '').toString().trim() : '';
       var streak = streakCol !== -1 ? (row[streakCol] || '').toString().trim() : '';
       var trigger = triggerCol !== -1 ? (row[triggerCol] || '').toString().trim() : '';

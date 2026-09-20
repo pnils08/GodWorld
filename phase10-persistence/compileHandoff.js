@@ -1713,7 +1713,10 @@ function loadSingleSportsFeed_(cache, sheetName, cycle) {
       names: String(safeColRead_(row, iNames, '')).trim(),
       notes: notes,
       stats: String(safeColRead_(row, iStats, '')).trim(),
-      record: String(safeColRead_(row, iRecord, '')).trim(),
+      // engine.247: a date-coerced W-L cell comes back as a Date (see sportsRecordText_)
+      record: (typeof sportsRecordText_ === 'function')
+        ? sportsRecordText_(safeColRead_(row, iRecord, ''))
+        : String(safeColRead_(row, iRecord, '')).trim(),
       weekRecord: String(safeColRead_(row, iWeekRecord, '')).trim(),
       storyAngle: String(safeColRead_(row, iStoryAngle, '')).trim(),
       playerMood: String(safeColRead_(row, iPlayerMood, '')).trim(),

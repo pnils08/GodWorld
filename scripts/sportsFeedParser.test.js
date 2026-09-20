@@ -125,5 +125,45 @@ test('published S fields keep their shapes and atmosphere licence stays untouche
   assert.strictEqual(ctx.summary.sportsAtmosphereEnabled, false);
 });
 
+// engine.247 — live C108 shape: Sheets stored 4-1 / 4-1 / 7-2 as DATE cells (m-d), 3-0 stayed text.
+const sheetDate = (month, day) => new Date(2026, month - 1, day);
+test('engine.247: date-coerced records are read as the W-L that was typed (live C108 rows 223-226)', () => {
+  const actual = read([
+    row({ EventType: 'game-result', SeasonType: 'playoffs', 'Team Record': '3-0', Streak: 'W5' }),
+    row({ EventType: 'game-result', SeasonType: 'playoffs', 'Team Record': sheetDate(4, 1), Streak: 'W1' }),
+    row({ EventType: 'player-feature', SeasonType: 'playoffs', 'Team Record': sheetDate(4, 1), Streak: 'W1' }),
+    row({ EventType: 'season-state', SeasonType: 'playoffs', 'Team Record': sheetDate(7, 2), Streak: 'W1' })
+  ], 106);
+  assert.strictEqual(actual.records["A's"], '7-2');
+});
+test('engine.247: control — without the fix shape, a Date toString carries no W-L', () => {
+  assert.strictEqual(sandbox.parseWinPercentage_(String(sheetDate(7, 2))), null);
+  near(sandbox.parseWinPercentage_(sandbox.sportsRecordText_(sheetDate(7, 2))), 7 / 9);
+});
+test('engine.247: two-digit month/day, text passthrough, blank, invalid date', () => {
+  assert.strictEqual(sandbox.sportsRecordText_(sheetDate(10, 3)), '10-3');
+  assert.strictEqual(sandbox.sportsRecordText_(sheetDate(12, 31)), '12-31');
+  assert.strictEqual(sandbox.sportsRecordText_('  127-35 '), '127-35');
+  assert.strictEqual(sandbox.sportsRecordText_(''), '');
+  assert.strictEqual(sandbox.sportsRecordText_(undefined), '');
+  assert.strictEqual(sandbox.sportsRecordText_(new Date(NaN)), '');
+});
+test('engine.247: spreadsheet zone wins over the host clock when Utilities is present', () => {
+  const calls = [];
+  sandbox.Utilities = { formatDate: (d, tz, fmt) => { calls.push([tz, fmt]); return '4-1'; } };
+  try {
+    assert.strictEqual(sandbox.sportsRecordText_(sheetDate(4, 1), 'America/Chicago'), '4-1');
+    assert.deepStrictEqual(calls, [['America/Chicago', 'M-d']]);
+  } finally { delete sandbox.Utilities; }
+});
+test('engine.247: feed-entry reader hands the casino the typed record', () => {
+  const H = ['Cycle', 'SeasonType', 'EventType', 'TeamsUsed', 'Team Record', 'Streak'];
+  const ss = { getSpreadsheetTimeZone: () => 'America/Chicago', getSheetByName: () => ({
+    getDataRange: () => ({ getValues: () => [H, [108, 'playoffs', 'game-result', "A's", sheetDate(4, 1), 'W1']] }) }) };
+  const entries = plain(sandbox.readOaklandFeedEntries_({ ss, summary: {} }, 108));
+  assert.strictEqual(entries.length, 1);
+  assert.strictEqual(entries[0].teamRecord, '4-1');
+});
+
 console.log(`sportsFeedParser: ${passed} passed, ${failed} failed`);
 process.exitCode = failed ? 1 : 0;

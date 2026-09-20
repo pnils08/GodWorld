@@ -312,25 +312,27 @@ console.log('\nengine.243 — crisis naming, the end of a crisis, and city memor
 
 // ── 8b. the name must not become a fake citizen (antigravity review find) ──
 {
-  // scripts/buildDeskPackets.js harvests /[A-Z][a-z]+ [A-Z][a-z]+/g out of arc
-  // summaries and hands the matches to a desk as PEOPLE TO QUOTE. A title-cased
-  // name prefix turns "The Rockridge" and "Housing Squeeze" into citizens —
-  // fabricated specificity, the exact defect engine.106 was filed for.
+  // engine.245: the desk-packet harvest used to admit every TitleCase pair in an
+  // arc summary as a PERSON TO QUOTE ("The Rockridge", "Housing Squeeze", "West
+  // Oakland"). Prose is now searched FOR known names, never mined for new ones.
   const src = fs.readFileSync(path.join(ROOT, 'scripts/buildDeskPackets.js'), 'utf8');
-  check('buildDeskPackets strips the arc name before the TitleCase name harvest',
-    /replace\(\/\^The \[\^—\]\{0,60\}— \/, ''\)[\s\S]{0,120}\[A-Z\]\[a-z\]\+ \[A-Z\]\[a-z\]\+/.test(src));
-  const strip = t => String(t).replace(/^The [^—]{0,60}— /, '');
-  const harvest = t => (strip(t).match(/[A-Z][a-z]+ [A-Z][a-z]+/g) || []);
+  check('buildDeskPackets no longer harvests TitleCase pairs from prose',
+    !/match\(\/\[A-Z\]\[a-z\]\+ \[A-Z\]\[a-z\]\+\/g\)/.test(src));
+  const fnSrc = src.slice(src.indexOf('function findKnownNamesInText_'), src.indexOf('function getCitizenNamesFromDeskData'));
+  const find = new Function(fnSrc + '; return findKnownNamesInText_;')();
+  const KNOWN = ['Brie Harris', 'Helena Voss-Adeyemi', 'Helena Voss', 'Vinnie Keane'];
   check('no fake citizen is harvested from a named resolution line',
-    harvest('The Rockridge Housing Squeeze — Rockridge crisis eased after 3 cycles back within city range').length === 0);
-  check('no fake citizen is harvested from a named domain-precision line',
-    harvest('The Rockridge Health Crisis — Rockridge easing but still strained: housing pressure 9.50 (city 0.43)').length === 0);
-  check('the name adds NO new harvest hits beyond what the body already produced',
-    JSON.stringify(harvest('The West Oakland Crime Spike — West Oakland under strain: crime index 1.18 (city 0.71)')) ===
-    JSON.stringify(('West Oakland under strain: crime index 1.18 (city 0.71)').match(/[A-Z][a-z]+ [A-Z][a-z]+/g) || []),
-    JSON.stringify(harvest('The West Oakland Crime Spike — West Oakland under strain: crime index 1.18 (city 0.71)')));
-  check('an unnamed summary is untouched by the strip',
-    strip('Rockridge under strain: 2 hospitalizations last cycle') === 'Rockridge under strain: 2 hospitalizations last cycle');
+    find('The Rockridge Housing Squeeze — Rockridge crisis eased after 3 cycles back within city range', KNOWN).length === 0);
+  check('a hood is not a person',
+    find('The West Oakland Crime Spike — West Oakland under strain: crime index 1.18 (city 0.71)', KNOWN).length === 0);
+  check('a ledger citizen named in prose IS found, possessive included',
+    JSON.stringify(find("Brie Harris's shop reopened; Vinnie Keane attended.", KNOWN)) === '["Brie Harris","Vinnie Keane"]');
+  check('a hyphenated surname lands whole and never as its shorter prefix',
+    JSON.stringify(find('Helena Voss-Adeyemi broke ground in Rockridge', KNOWN)) === '["Helena Voss-Adeyemi"]');
+  check('a name inside a longer word is not a match',
+    find('McBrie Harrison spoke', KNOWN).length === 0);
+  check('the call site hands the harvester the ledger name list',
+    /getCitizenNamesFromDeskData\([^)]*ledgerNameList\)/.test(src) && /var ledgerNameList = Object\.keys\(simLedgerByName\)/.test(src));
 }
 
 // ── 9. no dice were added ──────────────────────────────────────────────────

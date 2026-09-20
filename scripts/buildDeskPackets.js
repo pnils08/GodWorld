@@ -462,7 +462,30 @@ function normalizeStorylineLedger(rows, cycle, popidToName) {
   return out;
 }
 
-function getCitizenNamesFromDeskData(deskEvents, deskSeeds, deskHooks, deskArcs, deskStorylines, candidates, deskQuotes, deskCanon) {
+// engine.245: a name found in PROSE is a citizen only if a record already says so.
+// The old harvest admitted every TitleCase pair ("West Oakland", "The Rockridge",
+// "Housing Squeeze") as a person for a desk to quote, and grew a hand-guard per
+// leak. Prose is now searched FOR known names — whole-name match, so hyphenated
+// and three-part names land too — and never mined for new ones.
+var PROSE_KNOWN_NAMES = [];  // ledger First Last names; set once in main() after the ledger loads
+function findKnownNamesInText_(text, knownNames) {
+  var found = [];
+  text = String(text || '');
+  if (!text) return found;
+  for (var i = 0; i < knownNames.length; i++) {
+    var n = knownNames[i];
+    var at = text.indexOf(n);
+    while (at !== -1) {
+      var before = at > 0 ? text.charAt(at - 1) : '';
+      var after = text.charAt(at + n.length);
+      if (!/[A-Za-z0-9-]/.test(before) && !/[A-Za-z0-9-]/.test(after)) { found.push(n); break; }
+      at = text.indexOf(n, at + 1);
+    }
+  }
+  return found;
+}
+
+function getCitizenNamesFromDeskData(deskEvents, deskSeeds, deskHooks, deskArcs, deskStorylines, candidates, deskQuotes, deskCanon, ledgerNames) {
   var names = {};
   // Extract from storylines (RelatedCitizens field)
   // S407: this read `s.relatedCitizens` but is handed the SHEET-shaped rows,
@@ -485,27 +508,22 @@ function getCitizenNamesFromDeskData(deskEvents, deskSeeds, deskHooks, deskArcs,
     (deskCanon.council || []).forEach(function(c) { if (c.member) names[c.member] = true; });
     (deskCanon.culturalEntities || []).forEach(function(e) { if (e.name) names[e.name] = true; });
   }
-  // Extract from event/seed/hook descriptions (capitalized multi-word names)
+  // Known names = the ledger (First Last) + every structured source above
+  // (rosters and cultural entities carry no POP ids, so the ledger alone would
+  // drop a player named in an event line).
+  var known = {};
+  (ledgerNames || []).forEach(function(n) { if (n && n.indexOf(' ') > 0) known[n] = true; });
+  Object.keys(names).forEach(function(n) { known[n] = true; });
+  var knownList = Object.keys(known);
   [deskEvents, deskSeeds, deskHooks].forEach(function(list) {
     (list || []).forEach(function(item) {
-      var text = item.description || item.text || '';
-      var nameMatches = text.match(/[A-Z][a-z]+ [A-Z][a-z]+/g);
-      if (nameMatches) nameMatches.forEach(function(n) { names[n] = true; });
+      findKnownNamesInText_(item.description || item.text || '', knownList)
+        .forEach(function(n) { names[n] = true; });
     });
   });
-  // Extract from arc summaries
   (deskArcs || []).forEach(function(a) {
-    // engine.243: an arc summary now leads with the crisis's NAME
-    // ("The Rockridge Housing Squeeze — ..."). The TitleCase harvest below would
-    // file "The Rockridge" and "Housing Squeeze" as citizen names and hand them
-    // to a desk as people to quote — fabricated specificity, the exact defect
-    // engine.106 was filed for. Strip the name prefix before harvesting.
-    // (Caught by the antigravity review lane, 2026-09-20.) The harvest's wider
-    // flaw — any TitleCase pair is admitted as a person, which is how line 2269
-    // ended up guarding against "POP-00168" — is filed as engine.245.
-    var text = String(a.summary || a.Summary || '').replace(/^The [^—]{0,60}— /, '');
-    var nameMatches = text.match(/[A-Z][a-z]+ [A-Z][a-z]+/g);
-    if (nameMatches) nameMatches.forEach(function(n) { names[n] = true; });
+    findKnownNamesInText_(a.summary || a.Summary || '', knownList)
+      .forEach(function(n) { names[n] = true; });
   });
   return Object.keys(names);
 }
@@ -1064,8 +1082,9 @@ function calculatePriorityScore(signal, variance) {
   // Count citizens mentioned in description
   if (signal.description || signal.EventDescription) {
     var desc = signal.description || signal.EventDescription || '';
-    var names = desc.match(/[A-Z][a-z]+ [A-Z][a-z]+/g) || [];
-    citizenCount = names.length;
+    // engine.245: count KNOWN citizens, not TitleCase pairs — "West Oakland"
+    // scored every hood-named event as carrying a person.
+    citizenCount = findKnownNamesInText_(desc, PROSE_KNOWN_NAMES).length;
   }
 
   var neighborhood = signal.neighborhood || signal.Neighborhood || '';
@@ -2283,6 +2302,9 @@ async function main() {
     if (pid && name) simLedgerByPopid[pid] = name;
   });
 
+  var ledgerNameList = Object.keys(simLedgerByName);  // engine.245: the only names prose may yield
+  PROSE_KNOWN_NAMES = ledgerNameList.filter(function(n) { return n.indexOf(' ') > 0; });
+
   // S205 Path B: genericCitizens var dropped — was only console.log'd, never used.
   var chicagoCitizens = allToObjects(chicagoRaw);
 
@@ -2671,7 +2693,7 @@ async function main() {
       });
 
     // Build citizen archive for this desk's relevant citizens
-    var deskCitizenNames = getCitizenNamesFromDeskData(deskEvents, deskSeeds, deskHooks, deskArcs, deskStorylines, candidates, deskQuotes, deskCanon);
+    var deskCitizenNames = getCitizenNamesFromDeskData(deskEvents, deskSeeds, deskHooks, deskArcs, deskStorylines, candidates, deskQuotes, deskCanon, ledgerNameList);
     var citizenArchive = buildCitizenArchive(popIdIndex, deskCitizenNames);
 
     // Voice cards — parsed personality profiles for citizen dialogue (v1.9)

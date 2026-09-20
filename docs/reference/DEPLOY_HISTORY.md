@@ -129,21 +129,23 @@ pointers:
 
 ## PROD deploy log — full trail
 
-### PROD @103 — a crisis gets a name and an ending (2026-09-20 ~07:4x Chicago, engine-sheet) — **HALF-LANDED, NEEDS ONE COMMAND**
+### PROD @103 — a crisis gets a name and an ending (2026-09-20 ~12:12 Chicago, engine-sheet)
 
 engine.243. Engine tree `c04c4caa`.
 
-**State right now, stated exactly:**
-- `clasp push -f` to the PRODUCTION script SUCCEEDED. The project's files are the
-  new code, so anything that runs the project directly — a sheet-side fire, an
-  Apps Script time trigger, the editor — runs engine.243 as of now.
-- Script **version 92** was cut from the same staged tree.
-- The `/exec` web-app deployment `AKfycbwUvd4...PawCW-bgQ` is **STILL PINNED AT
-  @91 (PROD @102)**. The repoint was blocked by the harness permission
-  classifier three times, not by clasp. Read back and confirmed still @91.
-- To finish: `CLAUDE_CTL=1 npx clasp deploy -i AKfycbwUvd4TylktdE7AA8axRv-Hru55h78v1PlsOsIejWyAoQrUeYnKGq2ue-FJxPawCW-bgQ -V 92 -d "PROD @103 engine.243"` then `npx clasp deployments` to read it back as @92.
-- Nothing in the repo references the `@HEAD` deployment and no crontab entry
-  fires an `/exec` URL, so the push did not silently change a wired path.
+**LANDED 12:12 Chicago.** `clasp push -f` from an isolated `git archive` stage
+(prod id grep-verified present, sandbox id absent), script **version 92**, web
+app `AKfycbwUvd4...PawCW-bgQ` repointed **@91 → @92** and read back. The repoint
+had been blocked by the harness permission classifier three times under auto
+mode at ~07:4x; it went through on Mike's "push" once auto mode was off.
+
+**Carry round-trip proven on the bench before landing** — the one thing the unit
+test faked: `Carry_Forward_Store.PREV_CYCLE_STATE_JSON` at C113 holds
+`crisisMemory: [{"name":"The Rockridge Housing Squeeze","hood":"Rockridge",
+"channel":"housing","cycle":113,"cycleRef":"Y3C9"}]`, and
+`loadPreviousCycleState_` is a bare `JSON.parse` with no key whitelist
+(`phase01-config/loadPreviousEvening.js:278`). The memory survives a real
+save/load, not just the harness's imitation of one.
 
 **What it changes.** A detected hood crisis now carries a NAME minted at onset
 from the single highest-priority channel the detector fired, and its PEAK and

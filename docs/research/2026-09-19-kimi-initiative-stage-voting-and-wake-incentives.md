@@ -214,6 +214,7 @@ As said:
 
 - 2026-09-19 (kimi) — Initial draft. Builder approved filing in-session; game-loop extension to all wakes (bonds/marriage/kids/house/Heritage_Ledger/media/career) added same day, same approval.
 - 2026-09-19 (research-build, S467) — Mike's second-pass direction captured above §3; Mags takes added under §3 (board state, three-stage gate, petition), §4 and §5; sim questions in §9. Kimi's text unchanged. Same day: the advisor's independent read added as `advisor:` lines under the stage gate and the petition, each with a Mags response; the economic-effects claim tightened; Q6 extended to Baylight and the Fruitvale hub. Later the same night: Mike answered §9, recorded as §10 rulings; step 1 (the Mon–Thu civic wakes) measured as §11.
+- 2026-09-19 (kimi) — Build plan filed: [[../plans/2026-09-19-civic-wake-game-loop]] (rollout row civic.38 repointed to plan + this record).
 
 ## Review — research-build, 2026-09-19 (S467)
 

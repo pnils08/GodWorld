@@ -34,7 +34,9 @@ function measureStageMovement(row, context = {}) {
     if (!Number.isInteger(baselineCycle) || baselineCycle < 1 || baselineCycle >= cycle) throw new Error('baseline must precede observation');
     const config = context.config;
     if (!config) throw new Error(context.configIssue || 'current World_Config dump unavailable');
-    const margin = number(config.civicDeliverMargin, 'civicDeliverMargin');
+    const domainMarginKey = 'civicDeliverMargin_' + domain;
+    const marginKey = Object.hasOwn(config, domainMarginKey) ? domainMarginKey : 'civicDeliverMargin';
+    const margin = number(config[marginKey], marginKey);
     const hold = number(config.civicDeliverHoldCycles, 'civicDeliverHoldCycles');
     if (margin < 0 || !Number.isInteger(hold) || hold < 1) throw new Error('delivery dials invalid');
     if (cycle - hold + 1 <= baselineCycle) throw new Error('post-baseline hold window unavailable');

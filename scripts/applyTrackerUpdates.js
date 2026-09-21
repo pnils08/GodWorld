@@ -655,12 +655,13 @@ async function main() {
         candidateOutcome[moveId] = 'catalog-not-landed';
         continue;
       }
-      const entry = catalog[cand.intervention];
-      if (!entry || entry.playable === false) {
+      const issue = require('./civicInterventionValidation').interventionIssue(catalog, cand.intervention);
+      if (issue) {
         console.log(`  REFUSED ${moveId}: intervention "${cand.intervention}" unknown or not playable`);
-        candidateOutcome[moveId] = 'unknown-or-unplayable-intervention';
+        candidateOutcome[moveId] = issue;
         continue;
       }
+      const entry = catalog[cand.intervention];
       const hoodsFolded = [...new Set((cand.hoods || []).map(h => slice.foldHood(h, c2p)))];
       const spec = {
         name: cand.title,

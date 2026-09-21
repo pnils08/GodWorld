@@ -210,7 +210,7 @@ test('T1.4: Live validateDatawakeMoves rejects work move when initiative is off-
 test('T1.5: Live validateDatawakeMoves propose hood grounding requires EVERY hood in district (child areas fold)', () => {
   const office = { officeId: 'COUNCIL-D5', agentDir: 'civic-office-council-d5', district: 'D5' };
   const catalog = {
-    'retail_boost': { policyDomain: 'economic', playable: true }
+    'retail_boost': { ...require('../lib/initiativePhaseContract').INTERVENTION_CATALOG['economic-program'] }
   };
 
   // Coliseum is child of East Oakland (D5) -> allowed!
@@ -242,7 +242,7 @@ test('T1.5: Live validateDatawakeMoves propose hood grounding requires EVERY hoo
 test('T1.6: Live validateDatawakeMoves: Mayor may propose in any canonical hood across the city', () => {
   const office = { officeId: 'MAYOR-01', agentDir: 'civic-office-mayor', district: 'citywide' };
   const catalog = {
-    'clinic_support': { policyDomain: 'health', playable: true }
+    'clinic_support': { ...require('../lib/initiativePhaseContract').INTERVENTION_CATALOG['health-service'] }
   };
 
   const mayorMove = [{

@@ -11,6 +11,7 @@ const fs = require('fs');
 const path = require('path');
 const { getNeighborhoodsForDistricts } = require('../lib/districtMap');
 const trackerSnapshot = require('./initiativeTrackerSnapshot');
+const { interventionIssue } = require('./civicInterventionValidation');
 
 const ROOT = path.join(__dirname, '..');
 const CONSTITUENT_CAP = 8;
@@ -1012,7 +1013,7 @@ function loadInterventionMenu() {
     return { available: false, text: 'No intervention catalog on disk yet (Task 4 step 0) — propose moves cannot be validated and will be refused.' };
   }
   const playable = Object.entries(catalog)
-    .filter(([, v]) => v && v.playable !== false)
+    .filter(([key]) => !interventionIssue(catalog, key))
     .map(([k, v]) => ({ key: k, domain: v.policyDomain || null, label: v.label || null }));
   return { available: true, playable,
     text: 'Interventions you may propose (closed catalog):\n' +

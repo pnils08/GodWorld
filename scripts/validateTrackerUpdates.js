@@ -224,14 +224,9 @@ function validateCandidates(cycle) {
         detail: 'intervention catalog absent (lib/initiativePhaseContract.js INTERVENTION_CATALOG — Task 4 step 0, engine-sheet); candidates cannot be validated' });
       continue;
     }
-    const entry = catalog[cand.intervention];
-    if (!entry) {
-      violations.push({ source: src, code: 'unknown-intervention',
-        detail: `intervention "${cand.intervention}" is not a catalog key — the seat never names its own metric` });
-    } else if (entry.playable === false) {
-      violations.push({ source: src, code: 'domain-not-playable',
-        detail: `intervention "${cand.intervention}" targets domain "${entry.policyDomain || '?'}" with no deploy path to its metric (SIM_DOCTRINE §15) — not proposable until the engine row lands` });
-    }
+    const issue = require('./civicInterventionValidation').interventionIssue(catalog, cand.intervention);
+    if (issue) violations.push({ source: src, code: issue,
+      detail: `intervention "${cand.intervention}" is not an explicitly playable, complete catalog entry` });
     if (!String(cand.title || '').trim()) {
       violations.push({ source: src, code: 'candidate-no-title', detail: 'candidate carries no title' });
     }

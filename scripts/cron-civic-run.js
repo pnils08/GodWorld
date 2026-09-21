@@ -54,6 +54,7 @@ const trackerSnapshot = require('./initiativeTrackerSnapshot');
 const { buildPack, writePack, childToParentFromAudit, foldHood } = require('./buildCivicOfficeSlice');
 const { CANONICAL_HOODS } = require('../lib/canonNeighborhoods');
 const civicSeat = require('./civicSeat');
+const { interventionIssue } = require('./civicInterventionValidation');
 const cityHallLedger = require('./cityHallLedger');
 const chaosCascade = require('./dumpChaosCascade');
 
@@ -2156,8 +2157,7 @@ function validateDatawakeMoves(rawMoves, ctx) {
       else if (!Array.isArray(m.hoods) || !m.hoods.length) reason = 'propose-missing-hoods';
       else if (!String(m.intervention || '').trim()) reason = 'propose-missing-intervention';
       else if (!catalog) reason = 'catalog-not-landed(lib/initiativePhaseContract.js INTERVENTION_CATALOG — Task 4 step 0, engine-sheet)';
-      else if (!catalog[m.intervention]) reason = 'unknown-intervention(' + m.intervention + ')';
-      else if (catalog[m.intervention].playable === false) reason = 'domain-not-playable(' + m.intervention + ' → ' + (catalog[m.intervention].policyDomain || '?') + ')';
+      else if (interventionIssue(catalog, m.intervention)) reason = interventionIssue(catalog, m.intervention) + '(' + String(m.intervention) + ')';
       if (!reason) {
         for (const h of m.hoods) {
           reason = hoodAuthorityReason(office, h, c2p);

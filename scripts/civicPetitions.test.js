@@ -89,6 +89,23 @@ test('support threshold uses hood population, not tracked people; never inferred
   assert.equal(r.support.cleared, false);
   assert.equal(countPetition(proposal('health'), d).support.reason, 'support-band-unset');
 });
+test('bad care rows are printed warnings, scoped to the district and never a citywide veto', () => {
+  const d = fixture(), base = d.Hospital_Ledger[0];
+  d.Hospital_Ledger.push({ ...base, POPID: 'POP-99903', Neighborhood: 'SYNTHETIC OFF MAP' });
+  let r = countPetition(proposal('health'), d, { supportBand: 0.01 });
+  assert.equal(r.support.cleared, true, 'unlocated row must not veto valid district support');
+  assert.equal(r.quality.unlocatedConditionRows, 1);
+  d.Hospital_Ledger.push({ POPID: 'POP-99904', Neighborhood: 'Temescal' });
+  r = countPetition(proposal('health'), d, { supportBand: 0.01 });
+  assert.equal(r.support.cleared, true);
+  assert.equal(r.quality.invalidConditionRows, 0, 'other district invalid rows are not target defects');
+  d.Hospital_Ledger.push({ POPID: 'POP-99905', Neighborhood: 'Coliseum' });
+  r = countPetition(proposal('health'), d, { supportBand: 0.01 });
+  assert.equal(r.quality.invalidConditionRows, 1, 'child-area invalid row belongs to target');
+  assert.equal(r.counts.inCareCitizens, 1, 'bad rows never become signatures');
+  assert.equal(r.support.cleared, true, 'invalid target row is a warning, not a veto');
+  assert.equal(countPetition(proposal('health'), d, { supportBand: 0.02 }).support.reason, 'below-support-band');
+});
 test('safety compares the entire city median, reports hood conditions, and cannot clear', () => {
   const r = countPetition(proposal('safety'), fixture(), { supportBand: 0.001 });
   assert.equal(r.counts.cityMedianViolentLevel, 5);
@@ -131,6 +148,15 @@ test('duplicates do not inflate housing; conflicting identities and missing inpu
   assert.throws(() => countPetition(proposal('housing'), d), /Conflicting HouseholdId/);
   d.Household_Ledger = null;
   assert.throws(() => countPetition(proposal('housing'), d), /Household_Ledger/);
+});
+test('housing identity checks are local to the target hoods; unlocated households are printed', () => {
+  const d = fixture();
+  d.Household_Ledger.push({ ...d.Household_Ledger[2], HouseholdId: '' });
+  d.Household_Ledger.push({ ...d.Household_Ledger[0], HouseholdId: '', Neighborhood: 'SYNTHETIC OFF MAP' });
+  const r = countPetition(proposal('housing'), d);
+  assert.equal(r.counts.activeRentedHouseholds, 2);
+  assert.equal(r.quality.unlocatedConditionRows, 1);
+  assert.equal(r.support.cleared, false);
 });
 test('incomplete population blocks support; incomplete crime city cannot supply a median', () => {
   const d = fixture(); d.Neighborhood_Demographics[0].Adults = '';

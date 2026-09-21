@@ -170,6 +170,9 @@ function countPetition(proposal, data, options = {}) {
     source: 'Neighborhood_Demographics.Students + Adults + Seniors', missingHoods: missingPopulationHoods };
   const counts = {};
   let numerator = null, unit = null;
+  // Unlocated rows cannot be assigned to any district. Report them globally;
+  // invalidConditionRows below counts only rows in the proposal's folded hoods.
+  // Neither warning creates a signature or vetoes the observed valid count.
   const quality = { unlocatedConditionRows: 0, invalidConditionRows: 0, canonCacheMissing: resolver.cacheMissing };
   const inTarget = row => {
     const hood = resolver.resolve(row.Neighborhood);
@@ -180,8 +183,7 @@ function countPetition(proposal, data, options = {}) {
     Object.assign(counts, { activeRentedHouseholds: 0, evaluableHouseholds: 0, hardshipHouseholds: 0,
       zeroIncomeHouseholds: 0, missingIncomeHouseholds: 0, invalidIncomeHouseholds: 0, missingOrInvalidRentHouseholds: 0 });
     const active = table(data, 'Household_Ledger').filter(r => key(r.Status) === 'active' && key(r.HousingType) === 'rented');
-    for (const row of uniqueRows(active, 'HouseholdId')) {
-      if (!inTarget(row)) continue;
+    for (const row of uniqueRows(active.filter(inTarget), 'HouseholdId')) {
       counts.activeRentedHouseholds++;
       const income = numeric(row.HouseholdIncome), rent = numeric(row.MonthlyRent);
       if (blank(row.HouseholdIncome)) counts.missingIncomeHouseholds++;
@@ -198,9 +200,9 @@ function countPetition(proposal, data, options = {}) {
     const people = new Set();
     for (const row of table(data, 'Hospital_Ledger')) {
       if (!row.POPID && !row.AdmissionId && !row.Neighborhood) continue;
+      if (!inTarget(row)) continue;
       if (!Object.hasOwn(row, 'DischargeCycle') || !Object.hasOwn(row, 'StatusNow')) { quality.invalidConditionRows++; continue; }
       if (!blank(row.DischargeCycle) || !blank(row.Outcome) || !OPEN_CARE.has(key(row.StatusNow))) continue;
-      if (!inTarget(row)) continue;
       if (blank(row.POPID)) { quality.invalidConditionRows++; continue; }
       counts.openAdmissions++;
       people.add(key(row.POPID));
@@ -227,7 +229,6 @@ function countPetition(proposal, data, options = {}) {
   else if (domain !== 'health') reason = 'domain-rules-deferred';
   else if (supportBand == null) reason = 'support-band-unset';
   else if (!(population.value > 0)) reason = 'population-incomplete';
-  else if (quality.invalidConditionRows || quality.unlocatedConditionRows) reason = 'condition-data-incomplete';
   else if (numerator < requiredCount) reason = 'below-support-band';
   return { cycle, policyDomain: domain, hoods, hardshipBand, counts, population,
     support: { band: supportBand, numerator, unit, requiredCount, cleared: reason === 'eligible', reason,

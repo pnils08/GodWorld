@@ -987,7 +987,9 @@ function loadPetitionPool(root, office, hoods, officeMap, childToParent, cycle) 
     bits.push('Constructive civic participation (not complaints): ' + participation.length + '.');
   }
   if (unlocatedRows) bits.push(unlocatedRows + ' Civic rows have no located resident; district membership is unknown.');
-  return { available: true, complaints, participation, unlocatedRows, text: clip(bits.join('\n'), BLOCK_CAP) };
+  return { available: true, complaints, participation, unlocatedRows,
+    window: 'All recorded Civic reflections in the loaded dump; no recency cutoff',
+    text: clip(bits.join('\n'), BLOCK_CAP) };
 }
 
 // Task 3.3 — the working city: latest work-wake reflections from chiefs and
@@ -1070,8 +1072,65 @@ function loadInterventionMenu() {
     .filter(([key]) => !interventionIssue(catalog, key))
     .map(([k, v]) => ({ key: k, domain: v.policyDomain || null, label: v.label || null }));
   return { available: true, playable,
-    text: 'Interventions you may propose (closed catalog):\n' +
-      playable.map(p => '- ' + p.key + ' (' + (p.domain || '?') + (p.label ? ') — ' + p.label : ')')).join('\n') };
+    text: clip('Interventions you may propose (closed catalog):\n' +
+      playable.map(p => '- ' + p.key + ' (' + (p.domain || '?') + (p.label ? ') — ' + p.label : ')')).join('\n'), BLOCK_CAP) };
+}
+
+function loadConditionCounts(root, cycle, board, moves) {
+  const catalog = require('../lib/initiativePhaseContract').INTERVENTION_CATALOG || {};
+  const requests = board.filter(b => ['proposed', 'pending-vote'].includes(b.status))
+    .map(b => ({ id: b.id, policyDomain: b.domain, hoods: b.hoods }));
+  for (const m of moves) {
+    if (m.type !== 'propose' || m.status !== 'pending') continue;
+    const p = m.payload || {};
+    if (interventionIssue(catalog, p.intervention)) continue;
+    requests.push({ id: m.moveId, policyDomain: catalog[p.intervention].policyDomain, hoods: p.hoods });
+  }
+  if (!requests.length) return { available: true, proposals: [], text: 'No proposals in the available board/move evidence need condition counts.' };
+  const counter = require('./civicPetitions');
+  const data = counter.loadLocalData({ root: root || ROOT, cycle });
+  const proposals = requests.map(p => {
+    try {
+      const result = counter.countPetition(p, data);
+      // Visibility is a different window and is already presented by the pool.
+      // Do not mix the counter's current-Cycle reflections into lifetime totals.
+      const { visibility, ...condition } = result;
+      return { id: p.id, available: true, ...condition };
+    } catch (e) { return { id: p.id, available: false, error: e.message }; }
+  });
+  const lines = proposals.map(p => {
+    if (!p.available) return p.id + ': counts unavailable — ' + p.error;
+    const c = p.counts;
+    const reading = p.policyDomain === 'housing'
+      ? c.hardshipHouseholds + '/' + c.activeRentedHouseholds + ' rented households over ' + p.hardshipBand + ' annual rent burden; zero income ' + c.zeroIncomeHouseholds + ', missing income ' + c.missingIncomeHouseholds
+      : p.policyDomain === 'health' ? c.inCareCitizens + ' in care; Sick ' + (c.sickResidents == null ? 'unavailable' : c.sickResidents)
+      : p.policyDomain === 'safety' ? c.aboveMedianHoods + ' hoods above city violent-level median'
+      : 'domain condition rules deferred';
+    return p.id + ': ' + reading + '; support ' + p.support.reason +
+      '; bad rows ' + p.quality.invalidConditionRows + ', unlocated ' + p.quality.unlocatedConditionRows;
+  });
+  return { available: proposals.every(p => p.available), cycle: Number(cycle), proposals,
+    text: clip('Proposal conditions at C' + cycle + ' (observations; no support band supplied):\n' + lines.join('\n'), BLOCK_CAP) };
+}
+
+// Keep full evidence in the disk pack, but never serialize unbounded history
+// back into a model prompt. Legal IDs/keys remain complete for move selection.
+function gamePromptView(game) {
+  const block = value => value ? { available: value.available, text: clip(value.text, BLOCK_CAP) } : null;
+  return {
+    boardIds: game.boardIds || [], boardAvailable: game.boardAvailable,
+    boardText: clip(game.boardText, BLOCK_CAP), geographyIssue: game.geographyIssue,
+    lastMove: { ...block(game.lastMove), count: ((game.lastMove || {}).moves || []).length },
+    petitionPool: { ...block(game.petitionPool),
+      complaints: ((game.petitionPool || {}).complaints || []).length,
+      participation: ((game.petitionPool || {}).participation || []).length,
+      unlocatedRows: (game.petitionPool || {}).unlocatedRows,
+      window: (game.petitionPool || {}).window },
+    conditions: { ...block(game.conditions), proposals: ((game.conditions || {}).proposals || []).length },
+    workingCity: block(game.workingCity),
+    interventions: { ...block(game.interventions), keys: ((game.interventions || {}).playable || []).map(p => p.key) },
+    confrontation: game.confrontation ? { id: game.confrontation.id, demand: clip(game.confrontation.demand, BLOCK_CAP), expectsMove: 'answer' } : null,
+  };
 }
 
 function buildGameBlocks(opts) {
@@ -1117,6 +1176,11 @@ function buildGameBlocks(opts) {
   };
   const conf = loadConfrontation(root, cycle, office.agentDir);
   if (conf) game.confrontation = conf;
+  game.conditions = safely(() => {
+    if (boardIssue) throw new Error(boardIssue);
+    if (game.lastMove.available === false) throw new Error('Move evidence unavailable');
+    return loadConditionCounts(root, cycle, board, game.lastMove.moves);
+  }, {text:'Proposal condition counts unavailable',proposals:[]});
   return game;
 }
 
@@ -1259,7 +1323,7 @@ module.exports = {
   loadCabinet, loadInitRows, seatKind, pickTurn, scoreHoods, loadFactionPeers,
   clip, writePack, CONSTITUENT_CAP,
   // civic.38 Task 3 game blocks
-  buildGameBlocks, boardRowsFor, boardNeedText, childToParentFromAudit, foldHood, requireCycle, loadAudit,
+  buildGameBlocks, boardRowsFor, boardNeedText, childToParentFromAudit, foldHood, requireCycle, loadAudit, gamePromptView,
   loadMovesFolded, loadPetitionPool, loadWorkingCity, loadConfrontation,
   loadInterventionMenu, loadTrackerRows, readJsonl, NEGATIVE_AFFECTS, BLOCK_CAP,
 };

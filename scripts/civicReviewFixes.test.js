@@ -100,3 +100,30 @@ test('F7 stalled phase takes precedence over every recognized Stage', () => {
   }
   assert.match(slice.boardNeedText({Status:'proposed',VoteCycle:''}), /petition-pending/);
 });
+test('F8 prompt caps narrative blocks without dropping legal IDs or mutating full pack evidence', () => {
+  const entry = {snippet:'SYNTHETIC-RAW-HISTORY'.repeat(500)};
+  const game = {boardIds:['INIT-SYNTHETIC-1','INIT-SYNTHETIC-2'],board:[entry],boardText:'SYNTHETIC board',
+    lastMove:{text:'SYNTHETIC outcome',moves:Array(1000).fill(entry)},
+    petitionPool:{available:true,text:'SYNTHETIC summary',complaints:Array(1000).fill(entry),participation:Array(1000).fill(entry)},
+    interventions:{available:true,playable:[{key:'health-service'}],text:'X'.repeat(5000)}};
+  const pack = {game};
+  const prompt = run.datawakeUserPrompt(pack, '', office);
+  assert.equal(prompt.includes('SYNTHETIC-RAW-HISTORY'), false);
+  assert.match(prompt, /INIT-SYNTHETIC-2/);
+  assert(prompt.length < 6000);
+  assert.equal(game.petitionPool.complaints.length,1000);
+  assert.equal(game.interventions.text.length,5000);
+});
+test('F8 board proposals show measured condition counts without enabling housing support', () => workspace((root, write) => {
+  const audit = {cycle:999,snapshots:{Neighborhood_Map:[{Neighborhood:'East Oakland',ChildAreas:'Coliseum'}]}};
+  write('output/engine_audit_c999.json',JSON.stringify(audit));
+  write('output/beats/meta.json',JSON.stringify({cycle:999}));
+  write('output/beats/Initiative_Tracker.jsonl',JSON.stringify({InitiativeID:'INIT-SYNTHETIC',ProposingOffice:office.officeId,Status:'proposed',PolicyDomain:'housing',AffectedNeighborhoods:'Coliseum'}));
+  write('output/beats/Neighborhood_Demographics.jsonl',JSON.stringify({Neighborhood:'East Oakland',Students:10,Adults:20,Seniors:5,Sick:0}));
+  write('output/beats/Household_Ledger.jsonl',JSON.stringify({HouseholdId:'HH-SYNTHETIC',Neighborhood:'Coliseum',Status:'active',HousingType:'rented',MonthlyRent:1000,HouseholdIncome:20000}));
+  const game = slice.buildGameBlocks({root,cycle:999,office,officeMap:{offices:[]},hoods:['East Oakland'],audit});
+  assert.equal(game.conditions.available,true);
+  assert.equal(game.conditions.proposals[0].counts.hardshipHouseholds,1);
+  assert.equal(game.conditions.proposals[0].support.cleared,false);
+  assert.match(game.conditions.text,/domain-not-playable/);
+}));

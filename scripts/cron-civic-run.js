@@ -51,7 +51,7 @@ const { getDistrictForNeighborhood } = require('../lib/districtMap');
 const getCurrentCycle = require('../lib/getCurrentCycle');
 const officeWall = require('./officeWall');
 const trackerSnapshot = require('./initiativeTrackerSnapshot');
-const { buildPack, writePack, childToParentFromAudit, foldHood } = require('./buildCivicOfficeSlice');
+const { buildPack, writePack, childToParentFromAudit, foldHood, gamePromptView } = require('./buildCivicOfficeSlice');
 const { CANONICAL_HOODS } = require('../lib/canonNeighborhoods');
 const civicSeat = require('./civicSeat');
 const { interventionIssue } = require('./civicInterventionValidation');
@@ -2050,7 +2050,7 @@ function datawakeRota(officeMap, limit) {
 // output schema, so the model reused old stated: lines instead of this week's
 // task.goal (civic.17 Task 4 / Ashford D7, 2026-08-15).
 function datawakeUserPrompt(pack, wallInj, office) {
-  const hay = JSON.stringify(pack);
+  const hay = JSON.stringify(pack && pack.game ? { ...pack, game: gamePromptView(pack.game) } : pack);
   const lever = String(
     (pack && pack.task && pack.task.goal) ||
     (pack && pack.pulse && pack.pulse.lever) ||

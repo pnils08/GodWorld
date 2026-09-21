@@ -340,7 +340,16 @@ function bizDriftOne_(cfg, biz, prevState, inputs, cycle) {
   var ev = 0;
   if (inputs.chaosAtBusiness) ev -= scale;
   if (inputs.chaosInHood) ev -= scale;
-  if (inputs.initiativeInHood) ev += scale;
+  // engine.250: positives are EVENTS, negatives are CONDITIONS (the engine.139 rule).
+  // An initiative changing phase in the hood is news and pays once, the Cycle it
+  // happens; a standing initiative pays nothing here — its ambient lift already
+  // reaches the business through hood retail vitality (the Phase-2 fold). A
+  // stalled/blocked/defunded initiative (net-negative hood entry) drains every
+  // Cycle it stays that way. Presence alone used to pay +scale: once the bus was
+  // revived that would have pinned max-up drift on every business in an
+  // initiative hood for as long as the initiative existed.
+  if (inputs.initiativeAdvanced) ev += scale;
+  if (inputs.initiativeFailing) ev -= scale;
   if (inputs.coverageSentiment > 0) ev += 0.5 * scale;
   else if (inputs.coverageSentiment < 0) ev -= 0.5 * scale;
   ev = bizClamp_(ev, -2.0, 2.0);
@@ -462,7 +471,8 @@ function applyBusinessDynamics_(ctx) {
     var inputs = {
       chaosAtBusiness: !!chaosBizIds[id],
       chaosInHood: !!(hood && chaosHood[hood]),
-      initiativeInHood: !!(hood && initHood[hood]),
+      initiativeAdvanced: !!(hood && initHood[hood] && Number(initHood[hood].advanced) > 0),
+      initiativeFailing: !!(hood && initHood[hood] && Number(initHood[hood].sentiment) < 0),
       coverageSentiment: coverage,
       vitality: hs && hs.retailVitality !== undefined ? hs.retailVitality : null,
       mayorApproval: mayorApproval,

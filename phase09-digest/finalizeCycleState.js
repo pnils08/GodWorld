@@ -117,6 +117,13 @@ function finalizeCycleState_(ctx) {
     // ~22 short numbers, same carry class as initiativePhases.
     approvalHoodMoodEma: S.approvalHoodMoodEma || null,
 
+    // engine.250: the per-hood approval bus. updateCivicApprovalRatings_ fills
+    // S.approvalNeighborhoodEffects in Phase 5; its only reader is the Phase-2
+    // fold in applyCityDynamics_, which has already run — so without this carry
+    // the deltas died with ctx every Cycle (0 approval-fold ripples, ever). The
+    // next Cycle's fold reads it from here, gated on the blob being one Cycle old.
+    approvalNeighborhoodEffects: compactApprovalNeighborhoodEffects_(S.approvalNeighborhoodEffects),
+
     // v1.5 (engine.45 T2): migration→mood loop — economicRippleEngine reads
     // previousCycleState.migrationDrift, which was never serialized (always 0).
     migrationDrift: (typeof S.migrationDrift === 'number') ? S.migrationDrift : 0,
@@ -473,6 +480,27 @@ function savePreviousCycleState_(ctx) {
  * Compact neighborhoodDynamics to core metrics for next cycle's momentum blend.
  * Keeps sentiment, nightlife, retail, tourism per neighborhood.
  */
+
+/**
+ * engine.250 — the approval bus for the carry: {hood: {sentiment, communityEngagement}},
+ * four decimals, hoods whose deltas both round to zero dropped. null when empty
+ * so a quiet Cycle adds nothing to the blob.
+ */
+function compactApprovalNeighborhoodEffects_(bus) {
+  if (!bus || typeof bus !== 'object') return null;
+  var out = {}; var n = 0;
+  for (var hood in bus) {
+    if (!Object.prototype.hasOwnProperty.call(bus, hood)) continue;
+    var e = bus[hood] || {};
+    var s = Math.round((Number(e.sentiment) || 0) * 10000) / 10000;
+    var c = Math.round((Number(e.communityEngagement) || 0) * 10000) / 10000;
+    if (s === 0 && c === 0) continue;
+    out[hood] = { sentiment: s, communityEngagement: c };
+    n++;
+  }
+  return n ? out : null;
+}
+
 /**
  * engine.219: {hood: mood} to one decimal — the one number Phase 2 reads next
  * Cycle. Descriptor, ripple count, sectors and zone flags are recomputed by the
@@ -702,6 +730,7 @@ if (typeof module !== 'undefined' && module.exports) {
     compactFrontTracking_: compactFrontTracking_,
     compactCrisisArcs_: compactCrisisArcs_,
     compactHospitalEvents_: compactHospitalEvents_,
+    compactApprovalNeighborhoodEffects_: compactApprovalNeighborhoodEffects_,
     SNAPSHOT_ECON_RIPPLE_CAP: SNAPSHOT_ECON_RIPPLE_CAP,
     SNAPSHOT_INIT_RIPPLE_CAP: SNAPSHOT_INIT_RIPPLE_CAP
   };

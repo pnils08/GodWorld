@@ -274,7 +274,7 @@
 ### applyCityDynamics.js
 - **applyCityDynamics_(ctx)**
   Reads: S.absoluteCycle, S.activityObservations, S.approvalNeighborhoodEffects, S.cityCapacity, S.cityDynamics, S.cityDynamicsLag, S.clusterDefinitions, S.commuteInbound, S.crimeByNeighborhood, S.crimeEvents, S.crimeSpikes, S.cycleId, S.editionNeighborhoodEffects, S.editionSentimentBoost, S.eventsGenerated, S.holiday, S.holidayPriority, S.initiativeImplementationEffects, S.initiativeNeighborhoodEffects, S.isCreationDay, S.isFirstFriday, S.manualDynamicsInputs, S.mediaCount, S.mediaCoverage, S.neighborhoodDemographics, S.neighborhoodDynamics, S.neighborhoodEconomies, S.neighborhoodState, S.neighborhoodWeather, S.previousCityDynamics, S.previousCycleState, S.resetDynamicsMomentum, S.season, S.sentiment, S.shockFlag, S.sportsSeason, S.sportsSentimentBoost, S.storySeeds, S.weather, S.weatherEvents, S.worldEvents
-  Writes: S.activityObservations, S.approvalNeighborhoodEffects, S.cityDynamics, S.cityDynamicsCapacity, S.cityDynamicsLag, S.clusterDefinitions, S.clusterDynamics, S.initiativeNeighborhoodEffects, S.neighborhoodDemographics, S.neighborhoodDynamics, S.previousCityDynamics, S.previousClusterDynamics, S.previousNeighborhoodDynamics, S.resetDynamicsMomentum, S.storySeedSignals
+  Writes: S.activityObservations, S.cityDynamics, S.cityDynamicsCapacity, S.cityDynamicsLag, S.clusterDefinitions, S.clusterDynamics, S.neighborhoodDemographics, S.neighborhoodDynamics, S.previousCityDynamics, S.previousClusterDynamics, S.previousNeighborhoodDynamics, S.resetDynamicsMomentum, S.storySeedSignals
   Config: ctx.config.cityCapacity, ctx.config.cycleCount, ctx.config.manualDynamicsInputs
 
 - **buildHoodClusterAssignment_(ctx, clusters)**
@@ -305,8 +305,9 @@
   Reads: S.sportsZones
 
 - **applyInitiativeImplementationEffects_(ctx)**
-  Reads: S.initiativeImplementationTriggers, S.initiativeNeighborhoodEffects, S.sentiment, S.sportsZones
+  Reads: S.absoluteCycle, S.cycleId, S.initiativeImplementationTriggers, S.initiativeNeighborhoodEffects, S.previousCycleState, S.sentiment, S.sportsZones
   Writes: S.initiativeHealthRelief, S.initiativeImplementationEffects, S.initiativeNeighborhoodEffects, S.sentiment
+  Config: ctx.config.cycleCount
   Sheets: Initiative_Tracker
 
 - **findImplCol_(headers, possibleNames)**
@@ -326,6 +327,10 @@
   Sheets: Oakland_Sports_Feed
 
 - **getColVal_(row, colIdx)**
+
+- **sportsRecordText_(raw, tz)**
+
+- **sportsFeedTimeZone_(ssOrSheet)**
 
 - **normalizeOaklandFeedTeam_(value)**
 
@@ -976,8 +981,8 @@
 - **assert(label, cond, detail)**
 
 - **ctxWith(o)**
-  Reads: S.businessClosures, S.businessDeclines, S.businessDynamicsState, S.worldEvents
-  Sheets: Business_Ledger, Civic_Office_Ledger
+  Reads: S.businessClosures, S.businessDeclines, S.businessDynamicsState, S.initiativeNeighborhoodEffects, S.worldEvents
+  Sheets: Business_Ledger, Civic_Office_Ledger, Initiative_Tracker
 
 ### applyChaosDecay.js
 - **applyChaosDecay_(ctx)**
@@ -3009,7 +3014,7 @@
 
 ### finalizeCycleState.js
 - **finalizeCycleState_(ctx)**
-  Reads: S.activeCooldowns, S.approvalHoodMoodEma, S.bankRate, S.businessDynamicsState, S.cityDynamics, S.civicLoad, S.civicLoadScore, S.crimeByNeighborhood, S.crimeMetrics, S.crimeSpikes, S.crisisArcsActive, S.crisisMemory, S.crisisMemoryActive, S.cycle, S.cycleId, S.cycleWeight, S.cycleWeightScore, S.domainPresence, S.dominantDomain, S.economicMood, S.economicRipples, S.eventsGenerated, S.holiday, S.holidayPriority, S.hospitalEvents, S.initiativePhases, S.initiativeRipples, S.isCreationDay, S.isFirstFriday, S.mediaEffects, S.migrationDrift, S.migrationDriftFactors, S.neighborhoodDynamics, S.overloadScore, S.patternFlag, S.previousCycleState, S.recoveryLevel, S.season, S.shockFlag, S.shockStartCycle, S.sportsSeason, S.transitState, S.weather, S.weatherFrontTracking, S.weatherTracking, S.worldEvents
+  Reads: S.activeCooldowns, S.approvalHoodMoodEma, S.approvalNeighborhoodEffects, S.bankRate, S.businessDynamicsState, S.cityDynamics, S.civicLoad, S.civicLoadScore, S.crimeByNeighborhood, S.crimeMetrics, S.crimeSpikes, S.crisisArcsActive, S.crisisMemory, S.crisisMemoryActive, S.cycle, S.cycleId, S.cycleWeight, S.cycleWeightScore, S.domainPresence, S.dominantDomain, S.economicMood, S.economicRipples, S.eventsGenerated, S.holiday, S.holidayPriority, S.hospitalEvents, S.initiativePhases, S.initiativeRipples, S.isCreationDay, S.isFirstFriday, S.mediaEffects, S.migrationDrift, S.migrationDriftFactors, S.neighborhoodDynamics, S.overloadScore, S.patternFlag, S.previousCycleState, S.recoveryLevel, S.season, S.shockFlag, S.shockStartCycle, S.sportsSeason, S.transitState, S.weather, S.weatherFrontTracking, S.weatherTracking, S.worldEvents
   Writes: S.cycleFinalState, S.cycleFinalizedAt, S.previousCycleState
   Config: ctx.config.cycleCount
 
@@ -3032,6 +3037,8 @@
 
 - **savePreviousCycleState_(ctx)**
   Reads: S.neighborhoodEconomies, S.previousCycleState
+
+- **compactApprovalNeighborhoodEffects_(bus)**
 
 - **compactNeighborhoodEconomies_(ne)**
   Reads: S.mediaCount, S.mediaCoverage
@@ -3056,7 +3063,7 @@
 - **econRipple(overrides)**
 
 - **initRipple(overrides)**
-  Reads: S.economicRipples, S.previousCycleState
+  Reads: S.approvalNeighborhoodEffects, S.economicRipples, S.previousCycleState
 
 ## Phase 10: Persistence (`phase10-persistence/`)
 
@@ -4149,4 +4156,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 184
-**Functions mapped:** 1441
+**Functions mapped:** 1444

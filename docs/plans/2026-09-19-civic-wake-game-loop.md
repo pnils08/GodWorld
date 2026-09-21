@@ -160,8 +160,10 @@ Corrected 2026-09-20. No new motion. `isFailing_` (`updateCivicApprovalRatings.j
 
 ### Task 6: Petition mechanics — signatures counted, reflections seen
 
+- **Status (codex, 2026-09-20):** Counter + OPTIONAL beats entry implemented and locally validated; Task 6.3 Sunday-prep integration remains with kimi. No live dump or external write run.
 - **Files:**
   - `scripts/civicPetitions.js` — create (counter)
+  - `scripts/civicPetitions.test.js` — isolated counter + mocked optional-dump validation (codex); Task 9's shared game test remains antigravity-owned
   - `scripts/dumpBeatTabs.js` — modify (add `Reflection_Intake` as an OPTIONAL beats tab)
   - `scripts/cron-civic-run.js` — modify (Sunday prep wires the counter into vote gating)
 - **Steps:**
@@ -169,6 +171,45 @@ Corrected 2026-09-20. No new motion. `isFailing_` (`updateCivicApprovalRatings.j
   2. `Reflection_Intake` joins the beats dump as OPTIONAL (`dumpBeatTabs.js` BEAT_TABS, `scripts/dumpBeatTabs.js:44-61` shape) so seats and the counter read local files, never a fresh sheet read. Civic-tagged rows (`lib/reflectionClassifier.js:37` vocab) feed the pack's "people are talking" block — visibility, never signatures.
   3. Sunday prep: a `petition-pending` proposal whose signature count clears its band moves to `vote-scheduled` through the same gated tracker write (VoteCycle stamp, `applyTrackerUpdates.js` G-R3 path). Below band: stays pending, public, and costs the seat nothing beyond the stall clock once Funded.
 - **Verify:** Task 9 fixtures: burden ratio math, band scaling, safety aggregate path, reflections excluded from counts. Dry-run on live local beats prints a real count table.
+
+#### Task 6 counter interface and local proof (codex, 2026-09-20)
+
+`scripts/civicPetitions.js` exports `loadLocalData({root, cycle})`, `countPetition({policyDomain, hoods}, data, {hardshipBand, supportBand, sinceCycle})`, and `buildHoodResolver(rows)`. The loader uses only local files: beats `meta.json` and tab JSONL, matching-Cycle `engine_audit_cN.json` `snapshots.Neighborhood_Map` for ChildAreas, and a matching-Cycle `simulation_ledger_snapshot.jsonl` for reflection POPID-to-hood joins. It imports no env loader or network client and writes no files. A wrong Cycle, malformed JSONL, ambiguous child parent, conflicting household identity, or absent required condition table fails loudly. The sheet-sourced parent map is authoritative; missing names in the shared canon cache are reported rather than substituted with hardcoded geography.
+
+- `counts` reports domain-specific observations. Housing uses active rented households, strict `MonthlyRent * 12 / HouseholdIncome > hardshipBand` (default 0.30), and separate zero, missing, invalid-income and invalid-rent counters. Owned and dissolved households are excluded. Repeated identical household rows do not inflate counts; conflicting same-ID rows fail.
+- Health counts unique POPIDs in open care; DischargeCycle/Outcome must be blank and StatusNow one of the hospital writer's open states. `sickResidents` is reported separately and is never added to `inCareCitizens`.
+- Safety compares each requested parent hood against the median ViolentLevel over the complete mapped city. Results are hood conditions, never citizen signatures; missing city rows cannot silently change the comparison population.
+- `population.value` is Students + Adults + Seniors from Neighborhood_Demographics, never the tracked household/citizen count. Missing population fields are explicit and cannot clear support. No untracked signatures are extrapolated from the sample.
+- `support.band` is separate from hardship and defaults to null. When explicitly supplied, `requiredCount = ceil(population * supportBand)`; only health currently evaluates its observed unique-person count against that threshold. Housing and safety always return `support.cleared = false`, reason `domain-not-playable`; other deferred domains return `domain-rules-deferred`. The count does not write Status or schedule a vote. A supplied health band is a caller decision, not a new approved live threshold.
+- `visibility` includes Civic reflections whether Applied is yes or no, but never adds them to support. Default window is the snapshot Cycle; callers can pass `sinceCycle` to include earlier Cycles. Missing/stale citizen geography leaves rows explicitly unlocated. Negative-Affect complaint flags read the existing `citizenDialMap.DIAL_MAP` composure signs rather than another copied affect table. Reflections are local perceptions at their current recorded citizen neighborhood, not a claim about historical residence.
+- CLI: `node scripts/civicPetitions.js --dry-run` prints the housing/health/safety city table. Add `--domain health --hood Rockridge`, repeated `--hood` flags, `--hardship-band`, `--support-band`, `--since-cycle`, or `--json`. `--root` supports isolated local fixtures. There is no apply/write mode; unknown flags fail.
+
+Validation: `node scripts/civicPetitions.test.js` passes 13 cases, including annualized math/boundaries, child folding, duplicate identity handling, separate income-quality counts, current-care deduplication, independent support bands/population, reflections excluded from signatures, missing input/freshness failures, deterministic non-mutation, disk/CLI read-only behavior, and both absent/present Reflection_Intake through the actual dump script under mocked fs/Sheets. `node --check` passes for all three changed scripts. A first red run established that the requested counter module was absent; no claim is made that an existing implementation had this test regression.
+
+Local C108 dry run (not a new live read): housing 392 active rented households, 106 above 0.30; zero/missing/invalid income counters all 0 in that subset. Health 2 unique in-care citizens, Sick 1,929 reported separately. Safety median ViolentLevel 26.9 across 22 hoods, 7 strictly above it. No domain clears a gate by default. Reflection_Intake is not yet on local disk, reported as unavailable; the next authorized beats dump will materialize it. `--hood Coliseum` resolves to East Oakland; health `--hood Rockridge` reports 2 in-care citizens separately from Sick 108.
+
+#### Task 6 verified wiring card — Reflection_Intake
+
+Required engine-wiring run used `anthropic/claude-haiku-4.5`, target Reflection_Intake; its task-dependent pointers were checked against source. This attached card corrects two generated-report errors: all inspected appenders include Cycle at column C, and the engine DOES write Applied through an intent (the generated report incorrectly characterized all writes as external direct appends).
+
+| Edge | Verified pointer |
+|---|---|
+| Sheet headers: Timestamp, POPID, Cycle, Daypart, Tag, ReflectionExcerpt, Applied, Affect; no Neighborhood | `schemas/SCHEMA_HEADERS.md:1133` |
+| Positional A–K engine contract and column constants | `utilities/compressLifeHistory.js:125-133` |
+| Wake / exchange / press / work writers append Cycle at C and Applied=no at G | `scripts/citizen-wake.js:418`; `scripts/citizen-exchange.js:192`; `scripts/citizenVoice.js:230`; `scripts/cron-work-wake.js:230` |
+| Persona writer, same shape | `lib/personaProvider.js:200` |
+| Engine read: excludes only Applied=yes; does not filter by daypart | `utilities/compressLifeHistory.js:289-299` |
+| Phase 9 reader before Phase 10 intent execution in both entrypoints | `phase01-config/godWorldEngine2.js:543,595,2285,2330` |
+| Applied=yes queued after reflection accretion | `utilities/compressLifeHistory.js:581-590` |
+| New OPTIONAL local export; no changed Sheet writer | `scripts/dumpBeatTabs.js:66-76` |
+| New disk consumer and visibility join | `scripts/civicPetitions.js` — `loadLocalData`, `visibility` |
+
+#### Task 6 findings captured for routing (codex, 2026-09-20)
+
+1. **Population field assumption:** Neighborhood_Demographics has no Population column (`schemas/SCHEMA_HEADERS.md:1012`). This counter uses the existing engine aggregation Students + Adults + Seniors (`updateNeighborhoodDemographics.js:340-348`), and never silently converts missing fields to zero.
+2. **Geography assumption:** Reflection_Intake has no Neighborhood and the beats export has no Neighborhood_Map. `lib/canonNeighborhoods.js` caches membership only, not child-parent links. The counter closes its own read path through matching-Cycle local ledger/audit snapshots; it does not invent a second geography map or broaden the beats-tab change.
+3. **Discharged patients described as care:** Hospital_Ledger retains historical rows. `scripts/cron-work-wake.js:96` uses `/active|hospitalized/` as its no-new-admissions fallback, admitting discharged StatusNow=active and missing recovering/critical/injured states. `scripts/buildHealthSlice.js:57` labels every eligible hospital row as "in hospital care" without checking discharge. C108 has a recovered/discharged row. Counter filtering is fixed locally; changes to those other scripts remain with their owners, not included in this task.
+4. **Plan drift requiring reconciliation, not an inferred ruling:** Task 6.3 retains the old petition-pending/vote-scheduled shorthand; integration must use Mechanism decisions 3–4's actual Status=proposed plus blank VoteCycle, then proposed→pending-vote transition. Commit `9a9b02dc` describes housing 0.30 as both a rent-burden line and an unblocking signature band. The current builder dispatch explicitly keeps hardship/support separate and safety/housing non-gating. This counter follows that dispatch: 0.30 is hardship, support is unset unless supplied, housing/safety never clear. Kimi/research-build must reconcile the remaining live-gate wording and population/signature unit decision before integration enables a housing gate.
 
 ### Task 7: WITHDRAWN 2026-09-20 — the Civic dial entry is not cut
 
@@ -237,6 +278,7 @@ One owner per file — `scripts/cron-civic-run.js` is touched by Tasks 1, 2, 3, 
 
 ## Changelog
 
+- 2026-09-20 (codex) — Task 6 counter and OPTIONAL Reflection_Intake export implemented and locally validated; added its interface, C108 measurements, verified wiring card, and traced defects under Task 6; Sunday-prep wiring remains kimi-owned.
 - 2026-09-20 (research-build) — Builder ruled three open questions: Baylight metric = district retail/nightlife vs baseline; housing signature band starts at 0.30; housing lever built before safety.
 - 2026-09-20 (engine-sheet) — Codex review accepted into `docs/research/` and reconciled, builder-direct. All eight findings re-verified against the files. Task 2 rebuilt on a move ledger + Sunday fold; Task 3 retargeted at the live pack builder; Task 4 gains the intervention catalog, column-held machine state and an explicit stage↔phase mapping; Task 5 shrinks to the sponsor read and a revival guard (a stalled row already pays −2 per cycle through the existing `failed` motion); Task 6 formula annualized; Task 7 withdrawn on measured evidence (the affect tag already pays the complaint cost). New defect filed: engine.250, the initiative effects bus emptied before its phase-3 and phase-5 readers.
 - 2026-09-20 (codex) — Linked the builder-requested [[../research/2026-09-20-codex-civic38-game-loop-review]]; review proposals await reconciliation, with tasks and assignments unchanged.

@@ -222,5 +222,17 @@ function initRipple(overrides) {
   assert('live array wins over snapshot', S.economicRipples.length === 1 && S.economicRipples[0].id === 'LIVE_RIPPLE');
 })();
 
+(function() {
+  console.log('6. engine.250 — the approval bus rides the snapshot');
+  var c = fcs.compactApprovalNeighborhoodEffects_;
+  assert('empty / absent bus → null (a quiet Cycle adds nothing to the blob)', c(null) === null && c({}) === null && c({ Temescal: { sentiment: 0.00001, communityEngagement: 0 } }) === null);
+  var out = c({ Temescal: { sentiment: -0.0123456, communityEngagement: -0.0061728 }, Rockridge: { sentiment: 0, communityEngagement: 0 } });
+  assert('four decimals, zero hoods dropped', out && Object.keys(out).join() === 'Temescal' && out.Temescal.sentiment === -0.0123 && out.Temescal.communityEngagement === -0.0062);
+  var ctx = { config: { cycleCount: 106 }, summary: { cycleId: 106, approvalNeighborhoodEffects: { Fruitvale: { sentiment: 0.009, communityEngagement: 0.0045 } } } };
+  fcs.finalizeCycleState_(ctx);
+  var snap = ctx.summary.previousCycleState;
+  assert('finalizeCycleState_ carries S.approvalNeighborhoodEffects under its own key, stamped with the Cycle', snap && snap.cycle === 106 && snap.approvalNeighborhoodEffects && snap.approvalNeighborhoodEffects.Fruitvale.sentiment === 0.009);
+})();
+
 console.log(failures === 0 ? '\nALL PASS' : '\n' + failures + ' FAILURE(S)');
 process.exit(failures === 0 ? 0 : 1);

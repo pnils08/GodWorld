@@ -1289,8 +1289,19 @@ function applyCityDynamics_(ctx) {
   // deltas, not durable strength, so they carry no decay fields.
   var initiativeBus = (S.initiativeNeighborhoodEffects &&
     typeof S.initiativeNeighborhoodEffects === 'object') ? S.initiativeNeighborhoodEffects : {};
-  var approvalBus = (S.approvalNeighborhoodEffects &&
-    typeof S.approvalNeighborhoodEffects === 'object') ? S.approvalNeighborhoodEffects : {};
+  // engine.250: the approval bus is WRITTEN in Phase 5 (updateCivicApprovalRatings_),
+  // after this fold has run, and ctx.summary is a fresh literal every Cycle — so the
+  // same-Cycle read here was always empty (Ripple_Ledger: 0 approval-fold rows ever).
+  // The deltas now ride previousCycleState (finalizeCycleState_) and land one Cycle
+  // after the approval shift that caused them: the rating moves, the district feels
+  // it the next week. Gated on the blob being EXACTLY one Cycle old (same gate as
+  // initiativePhases / approvalHoodMoodEma) — a stale blob would re-apply an old
+  // shift. No prior data => empty bus, the conservative direction.
+  var foldCycle = Number(S.absoluteCycle || S.cycleId || (ctx.config && ctx.config.cycleCount) || 0);
+  var foldPrev = S.previousCycleState || {};
+  var approvalBusCycle = Number(foldPrev.cycle) || 0;
+  var approvalBus = (approvalBusCycle === foldCycle - 1 && foldPrev.approvalNeighborhoodEffects &&
+    typeof foldPrev.approvalNeighborhoodEffects === 'object') ? foldPrev.approvalNeighborhoodEffects : {};
   var foldedInitiativeHoods = [];
   var foldedApprovalHoods = [];
   var foldedInitiativeMag = 0;
@@ -1491,7 +1502,7 @@ function applyCityDynamics_(ctx) {
   }
 
   // ─────────────────────────────────────────────────────────────────────────
-  // FOLD ATTRIBUTION + CONSUME-AND-CLEAR (engine.93 Task 5)
+  // FOLD ATTRIBUTION (engine.93 Task 5; consume-and-clear removed engine.250)
   // ─────────────────────────────────────────────────────────────────────────
   // Per-initiative and per-approval cause rows already exist at the write sites
   // (engine.45 T3e 'initiative-implementation', T1 'approval-shift'). The fold
@@ -1516,7 +1527,7 @@ function applyCityDynamics_(ctx) {
     recordRipple_(ctx, {
       causeType: 'neighborhood-fold',
       causeId: 'approvalNeighborhoodEffects',
-      causeDetail: 'Shifts in how residents rate their officials reached ' +
+      causeDetail: 'Cycle ' + approvalBusCycle + ' shifts in how residents rate their officials reached ' +
         foldedApprovalHoods.length + ' neighborhood(s): ' + foldedApprovalHoods.join(', '),
       effectType: 'fold-applied/approval-shift',
       targetScope: 'neighborhood',
@@ -1527,18 +1538,15 @@ function applyCityDynamics_(ctx) {
     });
   }
 
-  // Consume-and-clear: both buses are per-cycle delta channels. Before this fold
-  // existed they accumulated forever (nothing read them); clearing here prevents
-  // a delta being applied on every subsequent cycle. The writers re-merge fresh
-  // each cycle. Deliberate failure semantics: if a later phase throws before the
-  // cycle completes, the buses are already cleared for effects that DID land —
-  // the reverse order (clear-then-apply) would silently drop them instead.
-  S.initiativeNeighborhoodEffects = {};
-  S.approvalNeighborhoodEffects = {};
-
+  // engine.250: NO clear. ctx.summary is rebuilt every Cycle (godWorldEngine2.js),
+  // so neither bus can accumulate — the old consume-and-clear guarded a state that
+  // cannot occur, and it emptied the initiative bus in Phase 2 before its Phase-3
+  // (driftNeighborhoodEducation_) and Phase-5 (applyBusinessDynamics_) readers ran.
+  // The initiative bus now lives the whole Cycle; the approval bus is filled in
+  // Phase 5 and carried to the next Cycle's fold by finalizeCycleState_.
   if (foldedInitiativeHoods.length || foldedApprovalHoods.length) {
     Logger.log('applyNeighborhoodEffectsFold_: initiative → ' + foldedInitiativeHoods.length +
-      ' hood(s), approval → ' + foldedApprovalHoods.length + ' hood(s); buses cleared');
+      ' hood(s), approval (cycle ' + approvalBusCycle + ' carry) → ' + foldedApprovalHoods.length + ' hood(s)');
   }
 
   // ─────────────────────────────────────────────────────────────────────────

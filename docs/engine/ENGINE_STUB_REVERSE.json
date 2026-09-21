@@ -2,7 +2,7 @@
   "generated": "2026-09-20",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 184,
-  "functionsMapped": 1441,
+  "functionsMapped": 1444,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -12,6 +12,7 @@
         "phase01-config/advanceSimulationCalendar.js::inWorldStamp_",
         "phase01-config/advanceSimulationCalendar.js::simYearOf_",
         "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
+        "phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_",
         "phase02-world-state/applyWeatherModel.js::applyWeatherModel_",
         "phase02-world-state/updateTransitMetrics.js::updateTransitMetrics_Phase2_",
         "phase03-population/generateCrisisBuckets.js::generateCrisisBuckets_",
@@ -670,6 +671,7 @@
         "phase01-config/godWorldEngine2.js::writeDigest_",
         "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
         "phase02-world-state/applyEditionCoverageEffects.js::applyEditionCoverageEffects_",
+        "phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_",
         "phase02-world-state/applyInitiativeImplementationEffects.js::loadCivicVoiceSentiment_",
         "phase02-world-state/applySportsSeason.js::applySportsSeason_",
         "phase02-world-state/applyWeatherModel.js::applyWeatherModel_",
@@ -1745,6 +1747,7 @@
         "phase01-config/loadPreviousEvening.js::restoreCarriedRipples_",
         "phase01-config/loadPreviousEvening.js::seedCarriedEconomicMood_",
         "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
+        "phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_",
         "phase02-world-state/applyWeatherModel.js::applyWeatherModel_",
         "phase02-world-state/updateTransitMetrics.js::updateTransitMetrics_Phase2_",
         "phase03-population/generateCrisisBuckets.js::generateCrisisBuckets_",
@@ -1914,16 +1917,6 @@
         "phase09-digest/finalizeCycleState.js::finalizeCycleState_"
       ]
     },
-    "approvalNeighborhoodEffects": {
-      "writers": [
-        "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
-        "phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_"
-      ],
-      "readers": [
-        "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
-        "phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_"
-      ]
-    },
     "cityDynamicsCapacity": {
       "writers": [
         "phase02-world-state/applyCityDynamics.js::applyCityDynamics_"
@@ -1953,18 +1946,6 @@
       ],
       "readers": [
         "phase02-world-state/applyCityDynamics.js::getClusterDynamics_"
-      ]
-    },
-    "initiativeNeighborhoodEffects": {
-      "writers": [
-        "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
-        "phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_"
-      ],
-      "readers": [
-        "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
-        "phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_",
-        "phase03-population/updateNeighborhoodDemographics.js::driftNeighborhoodEducation_",
-        "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_"
       ]
     },
     "neighborhoodDemographics": {
@@ -2033,6 +2014,17 @@
       ],
       "readers": []
     },
+    "approvalNeighborhoodEffects": {
+      "writers": [
+        "phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_"
+      ],
+      "readers": [
+        "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
+        "phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_",
+        "phase09-digest/finalizeCycleState.js::finalizeCycleState_",
+        "phase09-digest/finalizeCycleState.test.js::initRipple"
+      ]
+    },
     "cityCapacity": {
       "writers": [],
       "readers": [
@@ -2095,6 +2087,18 @@
       "readers": [
         "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
         "phase02-world-state/updateTransitMetrics.js::initiativeTransitEffects_"
+      ]
+    },
+    "initiativeNeighborhoodEffects": {
+      "writers": [
+        "phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_"
+      ],
+      "readers": [
+        "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
+        "phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_",
+        "phase03-population/updateNeighborhoodDemographics.js::driftNeighborhoodEducation_",
+        "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_",
+        "phase05-citizens/applyBusinessDynamics.test.js::ctxWith"
       ]
     },
     "manualDynamicsInputs": {
@@ -4586,6 +4590,7 @@
       ],
       "readers": [
         "phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_",
+        "phase05-citizens/applyBusinessDynamics.test.js::ctxWith",
         "phase05-citizens/civicInitiativeEngine.js::addSwingVoter2Columns",
         "phase05-citizens/civicInitiativeEngine.js::createInitiativeTrackerSheet_",
         "phase05-citizens/civicInitiativeEngine.js::createInitiative_",

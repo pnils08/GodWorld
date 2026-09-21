@@ -47,14 +47,14 @@ assert('every required key present → numeric config', mod.bizDynamicsConfig_({
 console.log('the drift, one business');
 {
   const biz = { id: 'BIZ-X', sector: 'Retail', hood: 'Temescal', growth: 2, revenue: 1000000 };
-  const quiet = { chaosAtBusiness: false, chaosInHood: false, initiativeInHood: false, coverageSentiment: 0, vitality: 6.0, mayorApproval: 60 };
+  const quiet = { chaosAtBusiness: false, chaosInHood: false, initiativeAdvanced: false, coverageSentiment: 0, vitality: 6.0, mayorApproval: 60 };
   const a = mod.bizDriftOne_(CFG, biz, { streak: 0, win: 0 }, quiet, 110);
   const b = mod.bizDriftOne_(CFG, biz, { streak: 0, win: 0 }, quiet, 110);
   assert('deterministic: same inputs, same output', JSON.stringify(a) === JSON.stringify(b));
   assert('quiet cycle at neutral vitality: only noise moves it, inside ±0.25×vol', Math.abs(a.drift) <= 0.25 * 1.2 + 1e-9 && a.parts.ev === 0 && a.parts.vit === 0 && a.parts.pressure === 0, JSON.stringify(a.parts));
   const hit = mod.bizDriftOne_(CFG, biz, { streak: 0, win: 0 }, Object.assign({}, quiet, { chaosAtBusiness: true, chaosInHood: true, coverageSentiment: -1 }), 110);
   assert('events are the signal: chaos at the business + in the hood + bad press = −2.0 capped, drift clamped at −1.0', hit.parts.ev === -2.0 && hit.drift === -1.0 && hit.growth === 1.0 && hit.streak === 0, JSON.stringify(hit));
-  const lift = mod.bizDriftOne_(CFG, biz, { streak: 0, win: 0 }, Object.assign({}, quiet, { initiativeInHood: true, coverageSentiment: 2 }), 110);
+  const lift = mod.bizDriftOne_(CFG, biz, { streak: 0, win: 0 }, Object.assign({}, quiet, { initiativeAdvanced: true, coverageSentiment: 2 }), 110);
   assert('an initiative landing + good press = +1.5 before vol, clamped +1.0', lift.parts.ev === 1.5 && lift.drift === 1.0);
   const v = mod.bizDriftOne_(CFG, biz, { streak: 0, win: 0 }, Object.assign({}, quiet, { vitality: 9.27 }), 110);
   assert('vitality term: (9.27−6)×0.15 = 0.49, clamped ±0.5; a null vitality contributes 0', Math.abs(v.parts.vit - 0.4905) < 1e-9 && mod.bizDriftOne_(CFG, biz, { streak: 0, win: 0 }, Object.assign({}, quiet, { vitality: null }), 110).parts.vit === 0);
@@ -66,7 +66,7 @@ console.log('the drift, one business');
   const neg = mod.bizDriftOne_(CFG, { id: 'BIZ-N', sector: 'Retail', hood: 'T', growth: -0.5, revenue: 500000 }, { streak: 4, win: 0 }, quiet, 110);
   assert('distress streak counts consecutive negative-growth cycles; revenue follows growth/52', (neg.growth < 0 ? neg.streak === 5 : neg.streak === 0) && neg.revenue === Math.round(500000 * (1 + neg.growth / 100 / 52)));
   const fl = mod.bizDriftOne_(CFG, { id: 'BIZ-F', sector: 'Tech', hood: 'T', growth: -9.9, revenue: 1 }, { streak: 0, win: 0 }, Object.assign({}, quiet, { chaosAtBusiness: true, chaosInHood: true }), 110);
-  const ce = mod.bizDriftOne_(CFG, { id: 'BIZ-C', sector: 'Tech', hood: 'T', growth: 39.9, revenue: 1 }, { streak: 0, win: 0 }, Object.assign({}, quiet, { initiativeInHood: true, coverageSentiment: 1 }), 110);
+  const ce = mod.bizDriftOne_(CFG, { id: 'BIZ-C', sector: 'Tech', hood: 'T', growth: 39.9, revenue: 1 }, { streak: 0, win: 0 }, Object.assign({}, quiet, { initiativeAdvanced: true, coverageSentiment: 1 }), 110);
   assert('floor −10 and ceiling 40 hold', fl.growth === -10 && ce.growth === 40);
   assert('blank revenue stays null (no signal) while growth still drifts', mod.bizDriftOne_(CFG, { id: 'BIZ-B', sector: 'Education', hood: 'T', growth: 1, revenue: null }, { streak: 0, win: 0 }, quiet, 110).revenue === null);
 }
@@ -206,6 +206,37 @@ console.log('Task 11 — the birth rule: field → class, sizes, capital cap');
   assert('no field anywhere → Small Business (default)', JSON.stringify(mod.heritageBusinessField_(ctxH, [r('', '')], null, 1, 2, 'Nowhere', 0.5).field) === '"Small Business"');
   const gw = fs.readFileSync(path.join(__dirname, '..', 'phase05-citizens', 'generationalWealthEngine.js'), 'utf8');
   assert('heritage business mint seeds Growth_Rate from the class table in whole percents (the 0.03 and the 4× stake are gone)', /birth\.emp, birth\.sal, birth\.revenue, birth\.growth/.test(gw) && !/capital \* 4/.test(gw));
+}
+console.log('engine.250 — the initiative bus chain: real writer → real reader, nothing seeded');
+{
+  const vm = require('vm');
+  const sb = { Logger: { log: () => {} } };
+  vm.createContext(sb);
+  vm.runInContext(fs.readFileSync(path.join(__dirname, '..', 'phase02-world-state', 'applyInitiativeImplementationEffects.js'), 'utf8'), sb);
+  const T_H = ['InitiativeID', 'Name', 'Status', 'PolicyDomain', 'AffectedNeighborhoods', 'ImplementationPhase', 'Budget'];
+  // the writer fills the bus on a summary; the SAME summary then goes to the business pass
+  const chain = (trackerRows, prevPhases, prevCycle) => {
+    const S = { cycleId: 110, previousCycleState: { cycle: prevCycle === undefined ? 109 : prevCycle, initiativePhases: prevPhases } };
+    sb.applyInitiativeImplementationEffects_({ summary: S, config: {}, ss: { getSheetByName: (n) => n !== 'Initiative_Tracker' ? null : { getDataRange: () => ({ getValues: () => [T_H, ...trackerRows] }) } } });
+    const bus = JSON.parse(JSON.stringify(S.initiativeNeighborhoodEffects || {}));
+    ranges = [];
+    mod.applyBusinessDynamics_(ctxWith({ S: { initiativeNeighborhoodEffects: bus } }));
+    return { bus, growth: ranges[0].values.map(v => v[1]) };   // BL order: W.Oak tech, Temescal retail, W.Oak education, Downtown default
+  };
+  const wo = (phase) => ['INIT-001', 'West Oakland Stabilization Fund', 'passed', 'economic', 'West Oakland', phase, '$28M'];
+  const none = chain([], {});
+  const standing = chain([wo('disbursement-active')], { 'INIT-001': 'disbursement-active' });
+  const moved = chain([wo('disbursement-active')], { 'INIT-001': 'vote-ready' });
+  const stale = chain([wo('disbursement-active')], { 'INIT-001': 'vote-ready' }, 107);
+  const stalled = chain([wo('stalled')], { 'INIT-001': 'stalled' });
+  assert('the writer publishes the hood with its metric deltas and advanced:0 when the phase stood still', standing.bus['West Oakland'] && standing.bus['West Oakland'].retail > 0 && standing.bus['West Oakland'].advanced === 0, JSON.stringify(standing.bus));
+  assert('a STANDING initiative pays a business nothing (state, not event) — growth identical to no initiative at all', JSON.stringify(standing.growth) === JSON.stringify(none.growth), JSON.stringify([standing.growth, none.growth]));
+  assert('a phase TRANSITION marks the hood advanced:1 and lifts its businesses that Cycle only — other hoods untouched', moved.bus['West Oakland'].advanced === 1 && moved.growth[0] > none.growth[0] && moved.growth[2] > none.growth[2] && moved.growth[1] === none.growth[1] && moved.growth[3] === none.growth[3], JSON.stringify([moved.growth, none.growth]));
+  assert('a carry blob that is not exactly one Cycle old detects no transition (conservative direction)', stale.bus['West Oakland'].advanced === 0 && JSON.stringify(stale.growth) === JSON.stringify(none.growth));
+  assert('a stalled initiative is a CONDITION: net-negative hood entry drains its businesses every Cycle it stands', stalled.bus['West Oakland'].sentiment < 0 && stalled.growth[0] < none.growth[0] && stalled.growth[1] === none.growth[1], JSON.stringify([stalled.growth, none.growth]));
+  const cd = fs.readFileSync(path.join(__dirname, '..', 'phase02-world-state', 'applyCityDynamics.js'), 'utf8');
+  assert('the Phase-2 fold no longer empties either bus (the clear starved the Phase-3 and Phase-5 readers)', !/S\.initiativeNeighborhoodEffects\s*=\s*\{\}/.test(cd) && !/S\.approvalNeighborhoodEffects\s*=\s*\{\}/.test(cd));
+  assert('the fold reads the approval bus from the one-Cycle-old carry, not the same-Cycle summary', /foldPrev\.approvalNeighborhoodEffects/.test(cd) && /approvalBusCycle === foldCycle - 1/.test(cd));
 }
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

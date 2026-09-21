@@ -72,6 +72,7 @@ const OPTIONAL_TABS = [
   'Civic_Office_Ledger',      // Carmen / Jax — office holders, approvals, Status=scandal
   'Election_Log',             // Carmen — outcomes and margins
   'Civic_Ledger',             // Luis — faction standings
+  'Reflection_Intake',        // civic.38 — Civic visibility only; never petition signatures
 ];
 
 const args = process.argv.slice(2);

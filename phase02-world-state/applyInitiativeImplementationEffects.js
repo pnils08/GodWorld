@@ -156,6 +156,17 @@ function applyInitiativeImplementationEffects_(ctx) {
   var iDomain = findImplCol_(headers, ['PolicyDomain', 'policydomain']);
   var iHoods = findImplCol_(headers, ['AffectedNeighborhoods', 'affectedneighborhoods']);
   var iBudget = findImplCol_(headers, ['Budget', 'budget']);
+  var iInitId = findImplCol_(headers, ['InitiativeID', 'initiativeid']);
+
+  // engine.250: last Cycle's phase per initiative (previousCycleState.initiativePhases,
+  // written by updateCivicApprovalRatings_ from the tracker SHEET), gated on the blob
+  // being exactly one Cycle old — same gate, same keys as engine.139. Tells a phase
+  // TRANSITION (an event) from a standing phase (a state). No prior data => nothing
+  // reads as a transition, the conservative direction.
+  var implCycle = Number(S.absoluteCycle || S.cycleId || (ctx.config && ctx.config.cycleCount) || 0);
+  var implPrev = S.previousCycleState || {};
+  var prevPhases = (Number(implPrev.cycle) === implCycle - 1 && implPrev.initiativePhases)
+    ? implPrev.initiativePhases : null;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // IMPLEMENTATION PHASE → INTENSITY MAPPING
@@ -264,6 +275,14 @@ function applyInitiativeImplementationEffects_(ctx) {
     // Skip if no implementation phase set or no name
     if (!phase || !name) continue;
 
+    // engine.250: transition test on the RAW sheet phase, before the T7 Baylight
+    // correction below — initiativePhases stores the sheet's value, and the T7
+    // write lands at Phase 10, so comparing the corrected phase would read the
+    // stadium opening as a transition on two consecutive Cycles.
+    var initKey = (iInitId !== -1 ? (row[iInitId] || '').toString().trim() : '') || name;
+    var prevPhase = prevPhases ? (prevPhases[initKey] || null) : null;
+    var phaseMoved = !!prevPhase && String(prevPhase) !== String(phase);
+
     // ─────────────────────────────────────────────────────────────────────
     // engine.131 T7 reconciliation — sports is the source of truth
     // ─────────────────────────────────────────────────────────────────────
@@ -369,9 +388,11 @@ function applyInitiativeImplementationEffects_(ctx) {
         neighborhoodEffects[hood] = {
           traffic: 0, retail: 0, nightlife: 0,
           publicSpaces: 0, communityEngagement: 0, sentiment: 0,
-          schoolQuality: 0   // engine.192
+          schoolQuality: 0,  // engine.192
+          advanced: 0        // engine.250: count of initiatives here that changed phase THIS Cycle into a positive-intensity phase — read by applyBusinessDynamics_; not a fold field
         };
       }
+      if (phaseMoved && intensity > 0) neighborhoodEffects[hood].advanced += 1;
 
       var ne = neighborhoodEffects[hood];
       for (var ek in effects) {
@@ -512,9 +533,10 @@ function applyInitiativeImplementationEffects_(ctx) {
   // The dead `S.sentiment +=` write is gone too (same class S294 deleted in
   // applySportsSeason/applyEditionCoverageEffects): sentimentBoost now reaches
   // finalCity.sentiment via the applyCityDynamics T3e fold.
-  // NOTE: S.initiativeNeighborhoodEffects (merged above) still has no per-hood
-  // consumer — same open seam as per-hood editionNeighborhoodEffects; filed in
-  // the engine.45 plan as the per-hood fold follow-up. Kept published for it.
+  // S.initiativeNeighborhoodEffects (merged above) lives the whole Cycle (engine.250):
+  // Phase 2 applyCityDynamics_ folds the six metric fields into hood state, Phase 3
+  // driftNeighborhoodEducation_ reads schoolQuality, Phase 5 applyBusinessDynamics_
+  // reads `advanced` (event) and the sign of `sentiment` (condition).
 
   Logger.log('applyInitiativeImplementationEffects_ v1.0: ' + processed + ' initiatives → ' +
     'sentiment ' + totalSentiment.toFixed(4) + ', ' +

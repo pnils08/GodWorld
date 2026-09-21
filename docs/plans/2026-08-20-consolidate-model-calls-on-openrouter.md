@@ -188,6 +188,7 @@ claude-mem observer hung on free `nemotron-3.5-lightning`: under the 90s wall 20
 
 1. `new Lt(l("API error"),{kind:"unrecoverable"` → `new Lt(l("API error"),{kind:"transient"`
 2. `={maxRetries:2,perAttemptTimeoutMs:` → `={maxRetries:5,perAttemptTimeoutMs:`
+3. `messages:t.messages,temperature:.3,max_tokens:4096,` → same string + `reasoning:{enabled:!1},` — builder's diagnosis 09-21: the observer was misconfigured, not the model weak. claude-mem sends no reasoning control and super-120b is a reasoning model; 09-20 only 34 of 535 replies were under 400 tokens and 83 ran to the 4096 cap and were discarded. With reasoning off the model returns 0 reasoning tokens and a 200–370 token observation. This supersedes the "Residual, not patched" note below.
 
 Verified 09:19–09:22: refusals log `Retrying OpenRouter … (attempt n/5) {kind=transient}`, 0 `Observer failed`, observation 66269 `STORED`, `consecutiveFailures` 0. **A plugin update overwrites the bundle** — if the banner returns, check the two strings first and re-apply; each anchor must match exactly once or upstream changed shape. Residual, not patched: ~7% of replies are discarded as non-XML when the model spills reasoning to the 4096-token cap.
 

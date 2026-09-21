@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 184 · **Functions mapped:** 1448 · **S.* fields:** 355 · **Sheets:** 57
+**Files scanned:** 184 · **Functions mapped:** 1451 · **S.* fields:** 356 · **Sheets:** 57
 
 ## S.* / ctx.summary reverse index
 
@@ -209,12 +209,13 @@
 | `S.householdEvents` | `phase05-citizens/runHouseholdEngine.js::runHouseholdEngine_` | _(none)_ | 1 | 0 |
 | `S.householdFormation` | `phase05-citizens/householdFormationEngine.js::processHouseholdFormation_` | _(none)_ | 1 | 0 |
 | `S.householdMoments` | `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_` | _(none)_ | 1 | 0 |
+| `S.initiativeEnginePhaseMoves` | `phase05-citizens/civicInitiativeEngine.js::applyCivicStageStep_` | `phase05-citizens/civicInitiativeEngine.js::applyCivicStageStep_`, `phase05-citizens/civicInitiativeEngine.js::civicStageStep_`, `phase09-digest/finalizeCycleState.js::finalizeCycleState_` | 1 | 3 |
 | `S.initiativeEvents` | `phase05-citizens/civicInitiativeEngine.js::runCivicInitiativeEngine_` | `phase05-citizens/civicInitiativeEngine.js::runCivicInitiativeEngine_`, `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_`, `phase05-citizens/generateCivicModeEvents.js::generateCivicModeEvents_`, `phase07-evening-media/storyHook.js::storyHookEngine_`, `utilities/exportCycleArtifacts.js::buildCycleContextPack_` | 1 | 5 |
 | `S.initiativeHealthRelief` | `phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_` | `phase03-population/updateNeighborhoodDemographics.js::updateNeighborhoodDemographics_` | 1 | 1 |
 | `S.initiativeImplementationEffects` | `phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_` | `phase02-world-state/applyCityDynamics.js::applyCityDynamics_`, `phase02-world-state/updateTransitMetrics.js::initiativeTransitEffects_` | 1 | 2 |
 | `S.initiativeImplementationTriggers` | _(none)_ | `phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_` | 0 | 1 |
 | `S.initiativeNeighborhoodEffects` | `phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_` | `phase02-world-state/applyCityDynamics.js::applyCityDynamics_`, `phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_`, `phase03-population/updateNeighborhoodDemographics.js::driftNeighborhoodEducation_`, `phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_`, `phase05-citizens/applyBusinessDynamics.test.js::ctxWith` | 1 | 5 |
-| `S.initiativePhases` | `phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_` | `phase09-digest/finalizeCycleState.js::finalizeCycleState_` | 1 | 1 |
+| `S.initiativePhases` | `phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_` | `phase05-citizens/civicInitiativeEngine.js::civicStageStep_`, `phase09-digest/finalizeCycleState.js::finalizeCycleState_` | 1 | 2 |
 | `S.initiativeRipples` | `phase01-config/loadPreviousEvening.js::restoreCarriedRipples_`, `phase05-citizens/civicInitiativeEngine.js::applyActiveInitiativeRipples_`, `phase05-citizens/civicInitiativeEngine.js::applyInitiativeConsequences_`, `phase05-citizens/civicInitiativeEngine.js::applyNeighborhoodRipple_` | `phase01-config/loadPreviousEvening.js::restoreCarriedRipples_`, `phase05-citizens/civicInitiativeEngine.js::applyActiveInitiativeRipples_`, `phase05-citizens/civicInitiativeEngine.js::applyInitiativeConsequences_`, `phase05-citizens/civicInitiativeEngine.js::applyNeighborhoodRipple_`, `phase07-evening-media/storyHook.js::storyHookEngine_`, `phase09-digest/finalizeCycleState.js::finalizeCycleState_` | 4 | 6 |
 | `S.intakeProcessed` | `phase01-config/godWorldEngine2.js::processIntake_`, `phase07-evening-media/mediaRoomIntake.js::processMediaIntake_` | `phase01-config/godWorldEngine2.js::processIntake_`, `phase01-config/godWorldEngine2.js::writeDigest_` | 2 | 2 |
 | `S.isCreationDay` | `phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_`, `phase08-v3-chicago/v3preLoader.js::v3PreloadContext_` | `phase01-config/godWorldEngine2.js::updateWorldPopulation_`, `phase02-world-state/applyCityDynamics.js::applyCityDynamics_`, `phase02-world-state/applySeasonWeights.js::applySeasonalWeights_`, `phase02-world-state/applyWeatherModel.js::applyWeatherModel_`, `phase02-world-state/applyWeatherModel.js::hasWeatherCondition_`, `phase02-world-state/calendarChaosWeights.js::applyChaosCategoryWeights_`, …(+56 more) | 2 | 62 |

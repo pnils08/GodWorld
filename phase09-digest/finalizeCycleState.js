@@ -111,6 +111,14 @@ function finalizeCycleState_(ctx) {
     // detected", which is the conservative direction (nothing new pays).
     initiativePhases: S.initiativePhases || null,
 
+    // civic.38 Task 4 (plan ruling 7): the phase a row LEFT when the Phase-5 stage
+    // handler moved it this Cycle. initiativePhases above already holds the NEW
+    // phase (approval snapshots the sheet after the handler wrote it), so next
+    // Cycle's Phase-2 transition detector would read old == new and the business
+    // lift would never fire for an engine-written advance. A handful of short
+    // keys, same carry class; approval never reads it, so nothing pays twice.
+    initiativeEnginePhaseMoves: S.initiativeEnginePhaseMoves || null,
+
     // engine.213 (S455): smoothed hood mood for the approval level. City
     // sentiment sawtooths ±0.5 Cycle to Cycle (engine.165); a poll built on
     // the raw read would swing a seat's target 20 points on one noisy week.

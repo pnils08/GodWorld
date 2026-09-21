@@ -312,6 +312,8 @@
 
 - **findImplCol_(headers, possibleNames)**
 
+- **initiativePrevPhaseFor_(prevPhases, enginePhaseMoves, initKey)**
+
 ### applySeasonWeights.js
 - **applySeasonalWeights_(ctx)**
   Reads: S.cycleOfYear, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.isWeekend, S.mediaEffects, S.season, S.sportsAtmosphereEnabled, S.sportsSeason, S.sportsSource, S.weatherMood
@@ -1500,6 +1502,13 @@
 - **civicStageRequirementWith_(catalogByDomain, input)**
 
 - **civicStageRequirement_(input)**
+
+- **civicStageStep_(st)**
+  Reads: S.initiativeEnginePhaseMoves, S.initiativePhases
+
+- **applyCivicStageStep_(ctx, row, ix, cycle)**
+  Reads: S.initiativeEnginePhaseMoves
+  Writes: S.initiativeEnginePhaseMoves
 
 ### educationCareerEngine.js
 - **canonicalEducationWrite_(v)**
@@ -3023,7 +3032,7 @@
 
 ### finalizeCycleState.js
 - **finalizeCycleState_(ctx)**
-  Reads: S.activeCooldowns, S.approvalHoodMoodEma, S.approvalNeighborhoodEffects, S.bankRate, S.businessDynamicsState, S.cityDynamics, S.civicLoad, S.civicLoadScore, S.crimeByNeighborhood, S.crimeMetrics, S.crimeSpikes, S.crisisArcsActive, S.crisisMemory, S.crisisMemoryActive, S.cycle, S.cycleId, S.cycleWeight, S.cycleWeightScore, S.domainPresence, S.dominantDomain, S.economicMood, S.economicRipples, S.eventsGenerated, S.holiday, S.holidayPriority, S.hospitalEvents, S.initiativePhases, S.initiativeRipples, S.isCreationDay, S.isFirstFriday, S.mediaEffects, S.migrationDrift, S.migrationDriftFactors, S.neighborhoodDynamics, S.overloadScore, S.patternFlag, S.previousCycleState, S.recoveryLevel, S.season, S.shockFlag, S.shockStartCycle, S.sportsSeason, S.transitState, S.weather, S.weatherFrontTracking, S.weatherTracking, S.worldEvents
+  Reads: S.activeCooldowns, S.approvalHoodMoodEma, S.approvalNeighborhoodEffects, S.bankRate, S.businessDynamicsState, S.cityDynamics, S.civicLoad, S.civicLoadScore, S.crimeByNeighborhood, S.crimeMetrics, S.crimeSpikes, S.crisisArcsActive, S.crisisMemory, S.crisisMemoryActive, S.cycle, S.cycleId, S.cycleWeight, S.cycleWeightScore, S.domainPresence, S.dominantDomain, S.economicMood, S.economicRipples, S.eventsGenerated, S.holiday, S.holidayPriority, S.hospitalEvents, S.initiativeEnginePhaseMoves, S.initiativePhases, S.initiativeRipples, S.isCreationDay, S.isFirstFriday, S.mediaEffects, S.migrationDrift, S.migrationDriftFactors, S.neighborhoodDynamics, S.overloadScore, S.patternFlag, S.previousCycleState, S.recoveryLevel, S.season, S.shockFlag, S.shockStartCycle, S.sportsSeason, S.transitState, S.weather, S.weatherFrontTracking, S.weatherTracking, S.worldEvents
   Writes: S.cycleFinalState, S.cycleFinalizedAt, S.previousCycleState
   Config: ctx.config.cycleCount
 
@@ -4165,4 +4174,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 184
-**Functions mapped:** 1448
+**Functions mapped:** 1451

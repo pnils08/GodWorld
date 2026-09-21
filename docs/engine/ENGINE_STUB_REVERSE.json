@@ -2,7 +2,7 @@
   "generated": "2026-09-21",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 184,
-  "functionsMapped": 1448,
+  "functionsMapped": 1451,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -3268,6 +3268,25 @@
         "phase05-citizens/civicInitiativeEngine.js::applyActiveInitiativeRipples_"
       ]
     },
+    "initiativeEnginePhaseMoves": {
+      "writers": [
+        "phase05-citizens/civicInitiativeEngine.js::applyCivicStageStep_"
+      ],
+      "readers": [
+        "phase05-citizens/civicInitiativeEngine.js::applyCivicStageStep_",
+        "phase05-citizens/civicInitiativeEngine.js::civicStageStep_",
+        "phase09-digest/finalizeCycleState.js::finalizeCycleState_"
+      ]
+    },
+    "initiativePhases": {
+      "writers": [
+        "phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_"
+      ],
+      "readers": [
+        "phase05-citizens/civicInitiativeEngine.js::civicStageStep_",
+        "phase09-digest/finalizeCycleState.js::finalizeCycleState_"
+      ]
+    },
     "heritage": {
       "writers": [
         "phase05-citizens/generationalWealthEngine.js::updateHeritage_"
@@ -3578,14 +3597,6 @@
       ],
       "readers": [
         "phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_"
-      ]
-    },
-    "initiativePhases": {
-      "writers": [
-        "phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_"
-      ],
-      "readers": [
-        "phase09-digest/finalizeCycleState.js::finalizeCycleState_"
       ]
     },
     "officeDepartures": {

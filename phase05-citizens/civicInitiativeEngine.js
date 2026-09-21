@@ -163,6 +163,12 @@ function runCivicInitiativeEngine_(ctx) {
   var iOverrideOutcome = idx('OverrideOutcome');   // v1.7
   var iImplementationPhase = idx('ImplementationPhase');  // v1.9 (S199 G-R11) — phase-transition reschedule
   var iNextActionCycle = idx('NextActionCycle');          // v1.9 (S199 G-R11) — names the future cycle for the vote
+  // civic.38 Task 4 — the stage model's columns (self-armed above; all optional here).
+  var stageIx = {
+    stage: idx('Stage'), lastStageChange: idx('LastStageChangeCycle'), lastWork: idx('LastWorkCycle'),
+    status: iStatus, mayoralAction: iMayoralAction, phase: iImplementationPhase,
+    policyDomain: iPolicyDomain, lastUpdated: iLastUpdated, id: iID, name: iName
+  };
 
   // v1.2: Required header validation to prevent silent write failures
   var required = ['InitiativeID', 'Name', 'Type', 'Status', 'VoteCycle',
@@ -213,6 +219,14 @@ function runCivicInitiativeEngine_(ctx) {
     var swingVoter2 = iSwingVoter2 >= 0 ? (row[iSwingVoter2] || '') : '';           // v1.1
     var swingVoter2Lean = iSwingVoter2Lean >= 0 ? (row[iSwingVoter2Lean] || '') : ''; // v1.1
     
+    // civic.38 Task 4: the stage handler sits above both skip gates so a signed or
+    // override-passed row from an earlier fire still reaches it (plan ruling 6).
+    // No-op on a blank Stage — every legacy row.
+    if (applyCivicStageStep_(ctx, row, stageIx, cycle)) {
+      rows[r] = row;
+      updated = true;
+    }
+
     // Skip resolved or inactive (v1.7: added veto-related statuses)
     if (status === 'resolved' || status === 'failed' || status === 'inactive' ||
         status === 'override-passed' || status === 'override-failed') {
@@ -434,6 +448,10 @@ function runCivicInitiativeEngine_(ctx) {
             // Mayor signs
             row[iMayoralAction] = 'signed';
             row[iMayoralActionCycle] = cycle;
+            // civic.38 Task 4: Proposed -> Funded lands at the fire that passed the
+            // bill, so LastStageChangeCycle is the vote Cycle and the week's work
+            // (stamped with this same Cycle by the Sunday fold) counts.
+            applyCivicStageStep_(ctx, row, stageIx, cycle);
             rows[r] = row;
 
             Logger.log('civicInitiativeEngine: ' + name + ' SIGNED by mayor');
@@ -485,6 +503,7 @@ function runCivicInitiativeEngine_(ctx) {
       // Override passed - initiative proceeds
       row[iStatus] = 'override-passed';
       row[iOutcome] = 'OVERRIDE PASSED';
+      applyCivicStageStep_(ctx, row, stageIx, cycle);   // civic.38 Task 4: an override funds it too
       row[iOverrideOutcome] = 'OVERRIDE PASSED (' + overrideResult.voteCount + ')';
 
       if (iNotes >= 0) {
@@ -3086,4 +3105,88 @@ function civicStageRequirementWith_(catalogByDomain, input) {
 
 function civicStageRequirement_(input) {
   return civicStageRequirementWith_(CIVIC_STAGE_CATALOG_, input);
+}
+
+
+/**
+ * civic.38 Task 4 — the stage step. PURE: one row's fields in, the change out (or
+ * null). At most one transition per call, and the transitions are idempotent, so
+ * the three call sites in runCivicInitiativeEngine_ cannot double-step a row.
+ *
+ *   Proposed -> Funded    a passed bill the mayor signed, or an override. Phase is
+ *                         left alone: money approved, nothing standing yet.
+ *   Funded   -> Standing  civicStageRequirement_ says the work gate cleared. The
+ *                         engine writes phase `operational` — the one phase every
+ *                         effect channel accepts (health relief, transit ridership
+ *                         lifts only on operational/complete/open, the hood fold
+ *                         at 0.9). A seat never picks its own phase.
+ *   Standing -> Delivering  not in this cut (baseline + comparator).
+ *
+ * Only a voted row steps: a vetoed, failed or still-pending row keeps its Stage.
+ */
+var CIVIC_STANDING_PHASE_ = 'operational';
+
+function civicStageStep_(st) {
+  var stage = String(st.stage == null ? '' : st.stage).trim();
+  if (!stage) return null;
+  var status = String(st.status == null ? '' : st.status).trim().toLowerCase();
+  var voted = status === 'override-passed' ||
+    (status === 'passed' && String(st.mayoralAction == null ? '' : st.mayoralAction).trim().toLowerCase() === 'signed');
+  if (!voted) return null;
+  var cycle = Number(st.cycle);
+  if (!isFinite(cycle) || cycle < 1) return null;
+
+  if (stage === 'Proposed') {
+    return { stage: 'Funded', lastStageChangeCycle: cycle, phase: null, from: 'Proposed' };
+  }
+  if (stage === 'Funded') {
+    var req = civicStageRequirement_({
+      stage: stage, phase: st.phase, policyDomain: st.policyDomain,
+      lastWorkCycle: st.lastWorkCycle, lastStageChangeCycle: st.lastStageChangeCycle
+    });
+    if (!req || req.clears !== true || req.next !== 'Standing') return null;
+    // A row funded THIS fire cannot also stand up this fire: the work that clears
+    // it lands through the Sunday gate, after the fire.
+    if (Number(st.lastStageChangeCycle) >= cycle) return null;
+    return { stage: 'Standing', lastStageChangeCycle: cycle, phase: CIVIC_STANDING_PHASE_, from: 'Funded' };
+  }
+  return null;
+}
+
+/**
+ * Apply civicStageStep_ to one tracker row IN PLACE. Returns true when the row
+ * changed. Needs Stage + LastStageChangeCycle on the header; without them the
+ * stage model is off for this fire (the self-arm restores them at the next read).
+ *
+ * Plan ruling 7: a phase this engine writes at Phase 5 is already inside
+ * S.initiativePhases by the time Phase 9 carries it, so next Cycle's Phase-2
+ * transition detector would see old == new and the business lift would never
+ * fire. The phase the row LEFT rides forward in S.initiativeEnginePhaseMoves,
+ * keyed exactly as the detector keys its own lookup (InitiativeID, else Name).
+ */
+function applyCivicStageStep_(ctx, row, ix, cycle) {
+  if (!ix || ix.stage < 0 || ix.lastStageChange < 0) return false;
+  var cell = function (i) { return i >= 0 ? row[i] : ''; };
+  var step = civicStageStep_({
+    stage: cell(ix.stage), status: cell(ix.status), mayoralAction: cell(ix.mayoralAction),
+    phase: cell(ix.phase), policyDomain: cell(ix.policyDomain),
+    lastWorkCycle: cell(ix.lastWork), lastStageChangeCycle: cell(ix.lastStageChange), cycle: cycle
+  });
+  if (!step) return false;
+  var initKey = String(cell(ix.id) || '').trim() || String(cell(ix.name) || '');
+  row[ix.stage] = step.stage;
+  row[ix.lastStageChange] = step.lastStageChangeCycle;
+  if (step.phase && ix.phase >= 0) {
+    var left = String(cell(ix.phase) || '').trim();
+    if (left !== step.phase) {
+      row[ix.phase] = step.phase;
+      var S = ctx.summary;
+      S.initiativeEnginePhaseMoves = S.initiativeEnginePhaseMoves || {};
+      if (left) S.initiativeEnginePhaseMoves[initKey] = left;
+    }
+  }
+  if (ix.lastUpdated >= 0) row[ix.lastUpdated] = ctx.now;
+  Logger.log('civicInitiativeEngine: ' + initKey + ' stage ' + step.from + ' -> ' + step.stage +
+             (step.phase ? ' (phase -> ' + step.phase + ')' : '') + ' at C' + cycle);
+  return true;
 }

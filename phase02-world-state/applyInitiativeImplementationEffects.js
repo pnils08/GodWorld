@@ -167,6 +167,11 @@ function applyInitiativeImplementationEffects_(ctx) {
   var implPrev = S.previousCycleState || {};
   var prevPhases = (Number(implPrev.cycle) === implCycle - 1 && implPrev.initiativePhases)
     ? implPrev.initiativePhases : null;
+  // civic.38 Task 4 (plan ruling 7): phases the Phase-5 stage handler moved last
+  // Cycle, by the phase each row LEFT. Same one-Cycle-old gate. Consulted ahead of
+  // initiativePhases, which already holds the new phase for those rows.
+  var enginePhaseMoves = (Number(implPrev.cycle) === implCycle - 1 && implPrev.initiativeEnginePhaseMoves)
+    ? implPrev.initiativeEnginePhaseMoves : null;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // IMPLEMENTATION PHASE → INTENSITY MAPPING
@@ -280,7 +285,7 @@ function applyInitiativeImplementationEffects_(ctx) {
     // write lands at Phase 10, so comparing the corrected phase would read the
     // stadium opening as a transition on two consecutive Cycles.
     var initKey = (iInitId !== -1 ? (row[iInitId] || '').toString().trim() : '') || name;
-    var prevPhase = prevPhases ? (prevPhases[initKey] || null) : null;
+    var prevPhase = initiativePrevPhaseFor_(prevPhases, enginePhaseMoves, initKey);
     var phaseMoved = !!prevPhase && String(prevPhase) !== String(phase);
     // civic.38 Task 5 revival guard, business side: coming back from a failing
     // phase (stalled / blocked / suspended / defunded) is getting back to where
@@ -564,4 +569,16 @@ function findImplCol_(headers, possibleNames) {
     }
   }
   return -1;
+}
+
+/**
+ * civic.38 Task 4 (plan ruling 7) — last Cycle's phase for one initiative, as the
+ * transition detector should see it. An engine-written move wins: for that row the
+ * carried phase map already shows the NEW phase. Pure.
+ */
+function initiativePrevPhaseFor_(prevPhases, enginePhaseMoves, initKey) {
+  if (enginePhaseMoves && Object.prototype.hasOwnProperty.call(enginePhaseMoves, initKey) && enginePhaseMoves[initKey]) {
+    return String(enginePhaseMoves[initKey]);
+  }
+  return prevPhases ? (prevPhases[initKey] || null) : null;
 }

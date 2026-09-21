@@ -126,7 +126,14 @@ var ENGINE213_CONFIG_SEEDS = [
   ['approvalMoodSmoothing', 0.3, 'engine.213 EMA weight of THIS Cycle\'s hood Sentiment in the smoothed mood the approval level reads (0.3 ≈ a 3-4 Cycle season; city sentiment sawtooths ±0.5/Cycle)', 0.05, 1, false],
   ['approvalStateCitySentimentUnit', 0.25, 'engine.213 mean hood Sentiment that counts as one unit of city level (live C104-C106 means ran +0.25..+0.45)', 0.01, 1, false],
   ['approvalMediaStep1', 1, 'engine.213 |press score| at which coverage moves approval +-1 (score = half CIVIC rating, half all-desk mean; live range -3..+5)', 0.1, 5, false],
-  ['approvalMediaStep2', 3, 'engine.213 |press score| at which coverage moves approval +-2', 0.1, 5, false]
+  ['approvalMediaStep2', 3, 'engine.213 |press score| at which coverage moves approval +-2', 0.1, 5, false],
+  // civic.38 Task 4 — the initiative stage model's three dials. They ride this civic
+  // group so no new ensure function or cycle-open call is needed. Seeded here ahead
+  // of their readers (the stall detector and the Delivering comparator land in later
+  // cuts); until then they are inert rows the builder can already see and tune.
+  ['civicStageStallCycles', 5, 'civic.38 Task 4: Cycles a staged initiative may sit on one stage before the losing clock sets it stalled (builder: 4-5 to start)', 1, 52, true],
+  ['civicDeliverMargin', 0.20, 'civic.38 Task 4: how far a gate metric ratio to the city median must sit above its baseline ratio for Standing -> Delivering (builder-ruled; untreated hoods cleared 0.20 held 3 Cycles 0% of the time over C103-C108)', 0, 2, false],
+  ['civicDeliverHoldCycles', 3, 'civic.38 Task 4: consecutive Cycles the margin must hold (builder-ruled; hold does more than margin)', 1, 12, true]
 ];
 
 function ensureEngine213Config_(ss) {

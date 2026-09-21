@@ -15,10 +15,14 @@
  *       Group 3: T3 pack blocks
  *       Group 4: T6 petition math
  *       Group 5: T8 directive targeting
+ *       Group 6: T9 rota split + project director work-wake packs
  *   - Directly exercises landed modules:
- *       scripts/cron-civic-run.js (validateDatawakeMoves, appendMoveLedger, moveLedgerLines)
- *       scripts/buildCivicOfficeSlice.js (boardRowsFor, loadMovesFolded, loadPetitionPool, buildGameBlocks)
+ *       scripts/cron-civic-run.js (validateDatawakeMoves, appendMoveLedger, moveLedgerLines, foldMovesIntoDecisions, slugForInitiative, petitionGateSweep)
+ *       scripts/buildCivicOfficeSlice.js (boardRowsFor, loadMovesFolded, loadPetitionPool, loadConfrontation, loadTrackerRows, buildGameBlocks)
  *       scripts/civicPetitions.js (countPetition, buildHoodResolver)
+ *       scripts/cron-work-wake.js (NODE_BUILDERS['initiative-project'])
+ *       scripts/workWakePackages.js (validatePackage)
+ *       lib/initiativePhaseContract.js (INTERVENTION_CATALOG)
  */
 
 const fs = require('fs');
@@ -32,6 +36,9 @@ const ROOT = path.join(__dirname, '..');
 const civicRun = require('./cron-civic-run');
 const civicSlice = require('./buildCivicOfficeSlice');
 const civicPetitions = require('./civicPetitions');
+const workWake = require('./cron-work-wake');
+const workWakePackages = require('./workWakePackages');
+const phaseContract = require('../lib/initiativePhaseContract');
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Test Runner Harness
@@ -148,8 +155,6 @@ const CHILD_TO_PARENT_HOOD = {
   'old oakland': 'Downtown',
   'city center': 'Downtown',
   'jack london square': 'Jack London',
-  'longfellow': 'Temescal',
-  'shafter': 'Rockridge'
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -158,7 +163,9 @@ const CHILD_TO_PARENT_HOOD = {
 group('Group 1: T1 Move Validation + Grounding');
 
 test('T1.1: Live validateDatawakeMoves rejects moves when input is not an array', () => {
-  const res = civicRun.validateDatawakeMoves({ type: 'work' }, { office: { district: 'D1' } });
+  const office = { officeId: 'COUNCIL-D1', agentDir: 'civic-office-council-d1', district: 'D1' };
+  const boardIds = new Set(['INIT-001']);
+  const res = civicRun.validateDatawakeMoves('not an array', { office, boardIds });
   assert.equal(res.accepted.length, 0);
   assert.equal(res.rejected.length, 1);
   assert.equal(res.rejected[0].reason, 'moves-not-an-array');
@@ -168,7 +175,8 @@ test('T1.2: Live validateDatawakeMoves validates closed move types & rejects unk
   const office = { officeId: 'COUNCIL-D1', agentDir: 'civic-office-council-d1', district: 'D1' };
   const boardIds = new Set(['INIT-001']);
   const rawMoves = [
-    { type: 'bribe', amount: 1000 },
+    { type: 'bribe', target: 'inspector' },
+    { type: 'spin', topic: 'crime' },
     { type: 'work', initiativeId: 'INIT-001' }
   ];
 
@@ -176,24 +184,30 @@ test('T1.2: Live validateDatawakeMoves validates closed move types & rejects unk
   assert.equal(res.accepted.length, 1);
   assert.equal(res.accepted[0].type, 'work');
   assert.equal(res.accepted[0].payload.initiativeId, 'INIT-001');
-  assert.equal(res.rejected.length, 1);
+
+  assert.equal(res.rejected.length, 2);
   assert.equal(res.rejected[0].reason, 'unknown-move-type(bribe)');
+  assert.equal(res.rejected[1].reason, 'unknown-move-type(spin)');
 });
 
 test('T1.3: Live validateDatawakeMoves enforces at most one consequential move per wake (first valid wins)', () => {
   const office = { officeId: 'COUNCIL-D1', agentDir: 'civic-office-council-d1', district: 'D1' };
   const boardIds = new Set(['INIT-001', 'INIT-002']);
+  const catalog = phaseContract.INTERVENTION_CATALOG;
+
   const rawMoves = [
     { type: 'work', initiativeId: 'INIT-001' },
-    { type: 'work', initiativeId: 'INIT-002' }
+    { type: 'propose', title: 'Second Clinic', intervention: 'health-service', hoods: ['West Oakland'], problem: 'need care' },
+    { type: 'canvass', hood: 'West Oakland' }
   ];
 
-  const res = civicRun.validateDatawakeMoves(rawMoves, { office, boardIds });
-  assert.equal(res.accepted.length, 1);
+  const res = civicRun.validateDatawakeMoves(rawMoves, { office, boardIds, catalog, childToParent: CHILD_TO_PARENT_HOOD });
+  assert.equal(res.accepted.length, 1, 'Exactly one consequential move is accepted per wake');
   assert.equal(res.accepted[0].type, 'work');
-  assert.equal(res.accepted[0].payload.initiativeId, 'INIT-001');
-  assert.equal(res.rejected.length, 1);
+
+  assert.equal(res.rejected.length, 2);
   assert.match(res.rejected[0].reason, /second-consequential-move/);
+  assert.match(res.rejected[1].reason, /second-consequential-move/);
 });
 
 test('T1.4: Live validateDatawakeMoves rejects work move when initiative is off-board', () => {
@@ -209,15 +223,13 @@ test('T1.4: Live validateDatawakeMoves rejects work move when initiative is off-
 
 test('T1.5: Live validateDatawakeMoves propose hood grounding requires EVERY hood in district (child areas fold)', () => {
   const office = { officeId: 'COUNCIL-D5', agentDir: 'civic-office-council-d5', district: 'D5' };
-  const catalog = {
-    'retail_boost': { ...require('../lib/initiativePhaseContract').INTERVENTION_CATALOG['economic-program'] }
-  };
+  const catalog = phaseContract.INTERVENTION_CATALOG;
 
   // Coliseum is child of East Oakland (D5) -> allowed!
   const validMove = [{
     type: 'propose',
     title: 'Coliseum Night Market',
-    intervention: 'retail_boost',
+    intervention: 'economic-program',
     hoods: ['Coliseum', 'East Oakland'],
     problem: 'economic revitalization'
   }];
@@ -229,7 +241,7 @@ test('T1.5: Live validateDatawakeMoves propose hood grounding requires EVERY hoo
   const invalidMove = [{
     type: 'propose',
     title: 'Cross-city market',
-    intervention: 'retail_boost',
+    intervention: 'economic-program',
     hoods: ['East Oakland', 'Temescal'],
     problem: 'overreach'
   }];
@@ -241,14 +253,12 @@ test('T1.5: Live validateDatawakeMoves propose hood grounding requires EVERY hoo
 
 test('T1.6: Live validateDatawakeMoves: Mayor may propose in any canonical hood across the city', () => {
   const office = { officeId: 'MAYOR-01', agentDir: 'civic-office-mayor', district: 'citywide' };
-  const catalog = {
-    'clinic_support': { ...require('../lib/initiativePhaseContract').INTERVENTION_CATALOG['health-service'] }
-  };
+  const catalog = phaseContract.INTERVENTION_CATALOG;
 
   const mayorMove = [{
     type: 'propose',
     title: 'Citywide Clinic Network',
-    intervention: 'clinic_support',
+    intervention: 'health-service',
     hoods: ['West Oakland', 'Temescal', 'East Oakland'],
     problem: 'healthcare access'
   }];
@@ -263,7 +273,7 @@ test('T1.7: Live validateDatawakeMoves: Catalog not landed or unplayable domain 
   const proposeMove = [{
     type: 'propose',
     title: 'Health Clinic',
-    intervention: 'health_support',
+    intervention: 'health-service',
     hoods: ['West Oakland'],
     problem: 'health access'
   }];
@@ -273,18 +283,15 @@ test('T1.7: Live validateDatawakeMoves: Catalog not landed or unplayable domain 
   assert.equal(res1.accepted.length, 0);
   assert.match(res1.rejected[0].reason, /catalog-not-landed/);
 
-  // 2. Catalog has intervention with playable: false
-  const unplayableCatalog = {
-    'rent_relief': { policyDomain: 'housing', playable: false }
-  };
+  // 2. Intervention with playable: false
   const unplayableMove = [{
     type: 'propose',
     title: 'Rent Subsidies',
-    intervention: 'rent_relief',
+    intervention: 'housing-program',
     hoods: ['West Oakland'],
     problem: 'rent burden'
   }];
-  const res2 = civicRun.validateDatawakeMoves(unplayableMove, { office, catalog: unplayableCatalog });
+  const res2 = civicRun.validateDatawakeMoves(unplayableMove, { office, catalog: phaseContract.INTERVENTION_CATALOG });
   assert.equal(res2.accepted.length, 0);
   assert.match(res2.rejected[0].reason, /domain-not-playable/);
 });
@@ -292,25 +299,28 @@ test('T1.7: Live validateDatawakeMoves: Catalog not landed or unplayable domain 
 test('T1.8: Live validateDatawakeMoves: Police Chief may work, answer, canvass, but NEVER propose', () => {
   const office = { officeId: 'CHIEF-POLICE', agentDir: 'civic-office-police-chief', district: 'citywide' };
   const boardIds = new Set(['INIT-002']);
-  const catalog = {
-    'patrol': { policyDomain: 'safety', playable: true }
-  };
+  const catalog = phaseContract.INTERVENTION_CATALOG;
 
   const chiefPropose = [{
     type: 'propose',
-    title: 'Patrol Surge',
-    intervention: 'patrol',
+    title: 'More Patrols',
+    intervention: 'health-service',
     hoods: ['West Oakland'],
     problem: 'safety'
   }];
   const res1 = civicRun.validateDatawakeMoves(chiefPropose, { office, boardIds, catalog });
   assert.equal(res1.accepted.length, 0);
+  assert.equal(res1.rejected.length, 1);
   assert.match(res1.rejected[0].reason, /seat-cannot-propose/);
 
-  const chiefWork = [{ type: 'work', initiativeId: 'INIT-002' }];
-  const res2 = civicRun.validateDatawakeMoves(chiefWork, { office, boardIds });
-  assert.equal(res2.accepted.length, 1);
-  assert.equal(res2.accepted[0].type, 'work');
+  // Legal moves tested individually
+  const resWork = civicRun.validateDatawakeMoves([{ type: 'work', initiativeId: 'INIT-002' }], { office, boardIds, catalog });
+  assert.equal(resWork.accepted.length, 1);
+  assert.equal(resWork.rejected.length, 0);
+
+  const resCanvass = civicRun.validateDatawakeMoves([{ type: 'canvass', hood: 'West Oakland' }], { office, boardIds, catalog });
+  assert.equal(resCanvass.accepted.length, 1);
+  assert.equal(resCanvass.rejected.length, 0);
 });
 
 test('T1.9: Live appendMoveLedger & moveLedgerLines write correct ledger rows to temp workspace', () => {
@@ -335,6 +345,41 @@ test('T1.9: Live appendMoveLedger & moveLedgerLines write correct ledger rows to
     assert.equal(content.length, 2);
   } finally {
     ws.cleanup();
+  }
+});
+
+test('T1.10: Live validateDatawakeMoves with full INTERVENTION_CATALOG: 6 playable pass, 2 unplayable reject', () => {
+  const office = { officeId: 'MAYOR-01', agentDir: 'civic-office-mayor', district: 'citywide' };
+  const catalog = phaseContract.INTERVENTION_CATALOG;
+  assert(catalog && Object.keys(catalog).length >= 8, 'INTERVENTION_CATALOG must have at least 8 keys');
+
+  const playableKeys = ['health-service', 'transit-project', 'school-program', 'economic-program', 'workforce-program', 'sports-district'];
+  for (const key of playableKeys) {
+    const move = [{ type: 'propose', title: `Test ${key}`, intervention: key, hoods: ['Downtown'], problem: 'test problem' }];
+    const res = civicRun.validateDatawakeMoves(move, { office, catalog });
+    assert.equal(res.accepted.length, 1, `Intervention ${key} should be accepted`);
+    assert.equal(res.rejected.length, 0);
+  }
+
+  const unplayableKeys = ['safety-program', 'housing-program'];
+  for (const key of unplayableKeys) {
+    const move = [{ type: 'propose', title: `Test ${key}`, intervention: key, hoods: ['Downtown'], problem: 'test problem' }];
+    const res = civicRun.validateDatawakeMoves(move, { office, catalog });
+    assert.equal(res.accepted.length, 0, `Intervention ${key} should be rejected`);
+    assert.equal(res.rejected.length, 1);
+    assert.match(res.rejected[0].reason, /domain-not-playable/);
+  }
+});
+
+test('T1.11: Live validateDatawakeMoves rejects inherited Object.prototype interventions', () => {
+  const office = { officeId: 'MAYOR-01', agentDir: 'civic-office-mayor', district: 'citywide' };
+  const catalog = phaseContract.INTERVENTION_CATALOG;
+
+  for (const evilKey of ['toString', 'valueOf', 'constructor']) {
+    const move = [{ type: 'propose', title: 'Prototype Attack', intervention: evilKey, hoods: ['Downtown'], problem: 'exploit' }];
+    const res = civicRun.validateDatawakeMoves(move, { office, catalog });
+    assert.equal(res.accepted.length, 0, `Inherited property ${evilKey} must not be accepted`);
+    assert.equal(res.rejected.length, 1);
   }
 });
 
@@ -441,6 +486,87 @@ test('T2.4: Status transition gate enforces exactly ONE legal edge: proposed -> 
   assert.throws(() => validateStatusTransition('proposed', 'active', '109'), /Illegal status transition/);
 });
 
+test('T2.5: Live foldMovesIntoDecisions in temp workspace: aggregates work moves, creates candidates, byte-idempotent', () => {
+  const ws = createTempWorkspace();
+  try {
+    const moves = [
+      { moveId: 'MV-108-civic-office-council-d1-2026-09-21', cycle: 108, date: '2026-09-21', agentDir: 'civic-office-council-d1', popid: SYNTH_POP.COUNCIL_D1, type: 'work', payload: { initiativeId: 'INIT-001' }, status: 'pending' },
+      { moveId: 'MV-108-civic-office-council-d3-2026-09-22', cycle: 108, date: '2026-09-22', agentDir: 'civic-office-council-d3', popid: SYNTH_POP.COUNCIL_D3, type: 'work', payload: { initiativeId: 'INIT-001' }, status: 'pending' },
+      { moveId: 'MV-108-civic-office-council-d5-2026-09-23', cycle: 108, date: '2026-09-23', agentDir: 'civic-office-council-d5', popid: SYNTH_POP.COUNCIL_D5, type: 'propose', payload: { title: 'East Oakland Clinic', intervention: 'health-service', hoods: ['East Oakland'], problem: 'Need healthcare' }, status: 'pending' }
+    ];
+    ws.writeJsonl('output/cron-civic/moves/moves_c108.jsonl', moves);
+
+    // Initial decisions file with voice note
+    ws.writeJson('output/city-civic-database/initiatives/init-001/decisions_c108.json', {
+      initiative: 'INIT-001', initiativeId: 'INIT-001', cycle: 108, primaryVoice: 'mayor',
+      trackerUpdates: { MilestoneNotes: 'Initial progress note' }
+    });
+
+    const officeMap = {
+      offices: [
+        { officeId: 'COUNCIL-D1', agentDir: 'civic-office-council-d1', popid: SYNTH_POP.COUNCIL_D1 },
+        { officeId: 'COUNCIL-D3', agentDir: 'civic-office-council-d3', popid: SYNTH_POP.COUNCIL_D3 },
+        { officeId: 'COUNCIL-D5', agentDir: 'civic-office-council-d5', popid: SYNTH_POP.COUNCIL_D5 }
+      ]
+    };
+
+    const out1 = civicRun.foldMovesIntoDecisions(ws.dir, 108, officeMap);
+    assert.equal(out1.workMoves, 2);
+    assert.equal(out1.workInitiatives, 1);
+    assert.equal(out1.candidates, 1);
+
+    const decPath = ws.path('output/city-civic-database/initiatives/init-001/decisions_c108.json');
+    const candPath = ws.path('output/city-civic-database/initiatives/_candidates/candidates_c108.json');
+    const manifestPath = ws.path('output/cron-civic/moves/fold_c108.json');
+
+    assert(fs.existsSync(decPath));
+    assert(fs.existsSync(candPath));
+    assert(fs.existsSync(manifestPath));
+
+    const dec1 = JSON.parse(fs.readFileSync(decPath, 'utf8'));
+    assert.equal(dec1.trackerUpdates.LastWorkCycle, 108);
+    assert.equal(dec1.trackerUpdates.LastWorkSeat, 'civic-office-council-d1, civic-office-council-d3');
+    assert.equal(dec1.trackerUpdates.MilestoneNotes, 'Initial progress note');
+    assert.deepEqual(dec1._moveFold.moveIds, ['MV-108-civic-office-council-d1-2026-09-21', 'MV-108-civic-office-council-d3-2026-09-22']);
+
+    const cand1 = JSON.parse(fs.readFileSync(candPath, 'utf8'));
+    const c = cand1.candidates['MV-108-civic-office-council-d5-2026-09-23'];
+    assert(c);
+    assert.equal(c.proposingOffice, 'COUNCIL-D5');
+    assert.equal(c.title, 'East Oakland Clinic');
+    assert.equal(c.intervention, 'health-service');
+    assert.equal(c.status, 'pending');
+
+    const rawDecBefore = fs.readFileSync(decPath, 'utf8');
+    const rawCandBefore = fs.readFileSync(candPath, 'utf8');
+
+    // Run fold again — must be byte-for-byte identical (byte-idempotent)
+    const out2 = civicRun.foldMovesIntoDecisions(ws.dir, 108, officeMap);
+    assert.equal(out2.workMoves, 2);
+    assert.equal(out2.candidates, 1);
+    assert.equal(fs.readFileSync(decPath, 'utf8'), rawDecBefore, 'Decisions file must be byte-identical on rerun');
+    assert.equal(fs.readFileSync(candPath, 'utf8'), rawCandBefore, 'Candidates file must be byte-identical on rerun');
+  } finally {
+    ws.cleanup();
+  }
+});
+
+test('T2.6: Live slugForInitiative derives correct slugs from existing directories and falls back cleanly', () => {
+  const ws = createTempWorkspace();
+  try {
+    const base = ws.path('initiatives');
+    ws.writeJson('initiatives/stab-fund-west-oak/decisions_c107.json', {
+      initiativeId: 'INIT-001'
+    });
+
+    assert.equal(civicRun.slugForInitiative(base, 'INIT-001'), 'stab-fund-west-oak');
+    assert.equal(civicRun.slugForInitiative(base, 'INIT-999'), 'init-999');
+    assert.equal(civicRun.slugForInitiative(base, 'Custom Initiative'), 'custom-initiative');
+  } finally {
+    ws.cleanup();
+  }
+});
+
 // ─────────────────────────────────────────────────────────────────────────────
 // Group 3: T3 Pack Blocks
 // ─────────────────────────────────────────────────────────────────────────────
@@ -448,67 +574,56 @@ group('Group 3: T3 Pack Blocks');
 
 test('T3.1: Live boardRowsFor: Mayor sees all; D1 sees overlap (INIT-001/002/007); D6 sees none', () => {
   const trackerRows = [
-    { InitiativeID: 'INIT-001', ProposingOffice: 'MAYOR-01', AffectedNeighborhoods: 'West Oakland' },
-    { InitiativeID: 'INIT-002', ProposingOffice: 'MAYOR-01', AffectedNeighborhoods: 'West Oakland, Fruitvale, East Oakland' },
-    { InitiativeID: 'INIT-006', ProposingOffice: 'MAYOR-01', AffectedNeighborhoods: 'Downtown, Jack London' },
-    { InitiativeID: 'INIT-007', ProposingOffice: 'MAYOR-01', AffectedNeighborhoods: 'West Oakland, Chinatown, Temescal' }
+    { InitiativeID: 'INIT-001', Name: 'West Oakland Stabilization', AffectedNeighborhoods: 'West Oakland', ImplementationPhase: 'active' },
+    { InitiativeID: 'INIT-002', Name: 'OARI Response', AffectedNeighborhoods: 'West Oakland, Chinatown, Fruitvale', ImplementationPhase: 'active' },
+    { InitiativeID: 'INIT-003', Name: 'Fruitvale Transit Hub', AffectedNeighborhoods: 'Fruitvale', ImplementationPhase: 'planning' },
+    { InitiativeID: 'INIT-007', Name: 'Downtown Housing', AffectedNeighborhoods: 'Downtown, West Oakland', ImplementationPhase: 'active' }
   ];
 
-  // Mayor sees all 4
-  const mayorOffice = { officeId: 'MAYOR-01', agentDir: 'civic-office-mayor', district: 'citywide' };
-  const mayorBoard = civicSlice.boardRowsFor(mayorOffice, trackerRows, {});
-  assert.equal(mayorBoard.length, 4);
+  const mayorOffice = { officeId: 'MAYOR-01', district: 'citywide' };
+  const d1Office = { officeId: 'COUNCIL-D1', district: 'D1' };
+  const d6Office = { officeId: 'COUNCIL-D6', district: 'D6' };
 
-  // D1 (West Oakland, Brooklyn) touches INIT-001, INIT-002, INIT-007
-  const d1Office = { officeId: 'COUNCIL-D1', agentDir: 'civic-office-council-d1', district: 'D1' };
-  const d1Board = civicSlice.boardRowsFor(d1Office, trackerRows, {});
-  assert.equal(d1Board.length, 3);
+  const mayorBoard = civicSlice.boardRowsFor(mayorOffice, trackerRows, CHILD_TO_PARENT_HOOD);
+  assert.equal(mayorBoard.length, 4, 'Mayor should see all active board rows');
+
+  const d1Board = civicSlice.boardRowsFor(d1Office, trackerRows, CHILD_TO_PARENT_HOOD);
   assert.deepEqual(d1Board.map(r => r.id).sort(), ['INIT-001', 'INIT-002', 'INIT-007']);
 
-  // D6 (Piedmont Ave) touches none of these
-  const d6Office = { officeId: 'COUNCIL-D6', agentDir: 'civic-office-council-d6', district: 'D6' };
-  const d6Board = civicSlice.boardRowsFor(d6Office, trackerRows, {});
-  assert.equal(d6Board.length, 0);
+  const d6Board = civicSlice.boardRowsFor(d6Office, trackerRows, CHILD_TO_PARENT_HOOD);
+  assert.equal(d6Board.length, 0, 'D6 has no matching initiatives in this fixture');
 });
 
 test('T3.2: Live loadPetitionPool in temp workspace filters Civic complaints and drops office holders', () => {
   const ws = createTempWorkspace();
   try {
-    ws.writeJson('output/beats/meta.json', {cycle:108});
-    ws.writeJson('output/simulation_ledger_snapshot.meta.json', {cycle:108});
+    ws.writeJson('output/beats/meta.json', { cycle: 108 });
+    ws.writeJson('output/simulation_ledger_snapshot.meta.json', { cycle: 108 });
+
     const reflections = [
-      // Citizen 1 complaint in D1 (West Oakland)
-      { Timestamp: '2026-09-20T10:00:00Z', POPID: SYNTH_POP.CITIZEN_WEST_OAK_1, Cycle: '108', Event: 'Civic', Affect: 'Frustrated', Snippet: 'Street repairs stalled.', Applied: 'yes' },
-      // Citizen 2 participation in D1
-      { Timestamp: '2026-09-20T11:00:00Z', POPID: SYNTH_POP.CITIZEN_WEST_OAK_2, Cycle: '108', Event: 'Civic', Affect: 'Inspired', Snippet: 'Great cleanup.', Applied: 'no' },
-      // Office holder in D1 (dropped!)
-      { Timestamp: '2026-09-20T12:00:00Z', POPID: SYNTH_POP.COUNCIL_D1, Cycle: '108', Event: 'Civic', Affect: 'Angry', Snippet: 'Budget fight.', Applied: 'yes' },
-      // Citizen in Temescal (D7) -> out of turf for D1
-      { Timestamp: '2026-09-20T13:00:00Z', POPID: SYNTH_POP.CITIZEN_TEMESCAL_1, Cycle: '108', Event: 'Civic', Affect: 'Frustrated', Snippet: 'Temescal transit issue.', Applied: 'yes' }
+      { Event: 'Civic', Cycle: 108, POPID: SYNTH_POP.CITIZEN_WEST_OAK_1, Neighborhood: 'West Oakland', Affect: 'angry', ReflectionExcerpt: 'Potholes on 7th st' },
+      { Event: 'Sports', Cycle: 108, POPID: SYNTH_POP.CITIZEN_WEST_OAK_2, Neighborhood: 'West Oakland', Affect: 'frustrated', ReflectionExcerpt: 'Game was terrible' },
+      { Event: 'Civic', Cycle: 108, POPID: SYNTH_POP.COUNCIL_D1, Neighborhood: 'West Oakland', Affect: 'worried', ReflectionExcerpt: 'Staff is overwhelmed' },
+      { Event: 'Civic', Cycle: 108, POPID: SYNTH_POP.CITIZEN_WEST_OAK_2, Neighborhood: 'West Oakland', Affect: 'excited', ReflectionExcerpt: 'Love the new park' }
     ];
     ws.writeJsonl('output/beats/Reflection_Intake.jsonl', reflections);
 
-    // Simulation ledger snapshot gives loadConstituents citizen turf membership
-    const citizens = [
-      { POPID: SYNTH_POP.CITIZEN_WEST_OAK_1, Name: 'Synth Citizen 1', Neighborhood: 'West Oakland', Status: 'active', Tier: 1 },
-      { POPID: SYNTH_POP.CITIZEN_WEST_OAK_2, Name: 'Synth Citizen 2', Neighborhood: 'West Oakland', Status: 'active', Tier: 1 },
-      { POPID: SYNTH_POP.COUNCIL_D1, Name: 'Denise Carter', Neighborhood: 'West Oakland', Status: 'active', Tier: 1 },
-      { POPID: SYNTH_POP.CITIZEN_TEMESCAL_1, Name: 'Synth Citizen 3', Neighborhood: 'Temescal', Status: 'active', Tier: 1 }
+    const constituents = [
+      { POPID: SYNTH_POP.CITIZEN_WEST_OAK_1, Name: 'Alex West', Neighborhood: 'West Oakland', Status: 'active', Tier: 3 },
+      { POPID: SYNTH_POP.CITIZEN_WEST_OAK_2, Name: 'Morgan West', Neighborhood: 'West Oakland', Status: 'active', Tier: 3 },
+      { POPID: SYNTH_POP.COUNCIL_D1, Name: 'Council D1', Neighborhood: 'West Oakland', Status: 'active', Tier: 1 }
     ];
-    ws.writeJsonl('output/simulation_ledger_snapshot.jsonl', citizens);
+    ws.writeJsonl('output/simulation_ledger_snapshot.jsonl', constituents);
 
-    const office = { officeId: 'COUNCIL-D1', agentDir: 'civic-office-council-d1', district: 'D1' };
-    const officeMap = {
-      offices: [{ officeId: 'COUNCIL-D1', popid: SYNTH_POP.COUNCIL_D1 }],
-      projects: []
-    };
+    const office = { officeId: 'COUNCIL-D1', district: 'D1' };
+    const officeMap = { offices: [{ officeId: 'COUNCIL-D1', popid: SYNTH_POP.COUNCIL_D1 }] };
 
-    const res = civicSlice.loadPetitionPool(ws.dir, office, ['West Oakland'], officeMap, {});
-    assert.equal(res.available, true);
-    assert.equal(res.complaints.length, 1);
-    assert.equal(res.complaints[0].affect, 'Frustrated');
-    assert.equal(res.participation.length, 1);
-    assert.equal(res.participation[0].affect, 'Inspired');
+    const pool = civicSlice.loadPetitionPool(ws.dir, office, ['West Oakland'], officeMap, CHILD_TO_PARENT_HOOD, 108);
+    assert.equal(pool.available, true);
+    assert.equal(pool.complaints.length, 1, 'Only non-official negative civic reflections count as complaints');
+    assert.equal(pool.complaints[0].snippet, 'Potholes on 7th st');
+    assert.equal(pool.participation.length, 1, 'Positive civic reflections go to participation');
+    assert.equal(pool.participation[0].snippet, 'Love the new park');
   } finally {
     ws.cleanup();
   }
@@ -517,17 +632,21 @@ test('T3.2: Live loadPetitionPool in temp workspace filters Civic complaints and
 test('T3.3: Live loadConfrontation extracts verbatim demand for targeted seat in temp workspace', () => {
   const ws = createTempWorkspace();
   try {
-    const directiveText = `# C108 Directives
-## Denise Carter — Council D1 Lead
-- **Agent:** .claude/agents/civic-office-council-d1/
-- **Address:** Deploy mobile clinic crews or table alternate funding before C109.
-`;
+    const directiveText = `
+## Denise Carter (District 1) — civic-office-council-d1
+**Agent:** .claude/agents/civic-office-council-d1/
+**Address:** Councilmember Carter
+**Demand:** The West Oakland stabilization fund is six weeks behind audit. Table the resolution.
+    `.trim();
+
     ws.writeText('output/mara-directives/mara_directive_c108_AUTO.txt', directiveText);
 
-    const res = civicSlice.loadConfrontation(ws.dir, 108, 'civic-office-council-d1');
-    assert.notEqual(res, null);
-    assert.equal(res.id, 'CONF-108-civic-office-council-d1');
-    assert.match(res.demand, /Deploy mobile clinic crews/);
+    const conf = civicSlice.loadConfrontation(ws.dir, 108, 'civic-office-council-d1');
+    assert(conf !== null, 'Confrontation object must be returned for targeted seat');
+    assert.equal(conf.id, 'CONF-108-civic-office-council-d1');
+    assert.match(conf.demand, /Denise Carter/);
+    assert.match(conf.demand, /Councilmember Carter/);
+    assert.match(conf.sourceText, /West Oakland stabilization fund/);
   } finally {
     ws.cleanup();
   }
@@ -536,15 +655,21 @@ test('T3.3: Live loadConfrontation extracts verbatim demand for targeted seat in
 test('T3.4: Pack blocks cap length (~600 chars) and degrade gracefully to stated absence', () => {
   const ws = createTempWorkspace();
   try {
-    const office = { officeId: 'COUNCIL-D1', agentDir: 'civic-office-council-d1', district: 'D1' };
-    const officeMap = { offices: [office], projects: [] };
+    const longAddress = 'A'.repeat(800);
+    ws.writeText('output/mara-directives/mara_directive_c108_AUTO.txt', `
+## Denise Carter (District 1) — civic-office-council-d1
+**Agent:** .claude/agents/civic-office-council-d1/
+**Address:** ${longAddress}
+**Demand:** Tabling requested.
+    `.trim());
 
-    // Empty workspace -> missing files
-    const game = civicSlice.buildGameBlocks({ root: ws.dir, cycle: 108, office, officeMap });
-    assert.notEqual(game, null);
-    assert(game.lastMove.text.length <= civicSlice.BLOCK_CAP);
-    assert.match(game.petitionPool.text, /unavailable/);
-    assert.match(game.workingCity.text, /No work-wake reflections/);
+    const conf = civicSlice.loadConfrontation(ws.dir, 108, 'civic-office-council-d1');
+    assert(conf !== null);
+    assert(conf.demand.length <= 605, `Block should be capped at ~600 chars, got ${conf.demand.length}`);
+    assert(conf.demand.endsWith('…'), 'Clipped demand should end with ellipsis');
+
+    const missingConf = civicSlice.loadConfrontation(ws.dir, 108, 'civic-office-council-d6');
+    assert.strictEqual(missingConf, null, 'Seats without a confrontation directive return null');
   } finally {
     ws.cleanup();
   }
@@ -553,25 +678,65 @@ test('T3.4: Pack blocks cap length (~600 chars) and degrade gracefully to stated
 test('T3.5: Missing citizen snapshot sets available:false with stated absence for district seat', () => {
   const ws = createTempWorkspace();
   try {
-    ws.writeJson('output/beats/meta.json', {cycle:108});
-    // Reflection intake exists on disk, but simulation_ledger_snapshot.jsonl is absent
+    ws.writeJson('output/beats/meta.json', { cycle: 108 });
+    ws.writeJsonl('output/beats/Reflection_Intake.jsonl', [
+      { Event: 'Civic', Cycle: 108, POPID: SYNTH_POP.CITIZEN_WEST_OAK_1, Neighborhood: 'West Oakland', Affect: 'angry', ReflectionExcerpt: 'Dirty streets' }
+    ]);
+    const office = { officeId: 'COUNCIL-D1', district: 'D1' };
+    const officeMap = { offices: [{ officeId: 'COUNCIL-D1', popid: SYNTH_POP.COUNCIL_D1 }] };
+
+    const pool = civicSlice.loadPetitionPool(ws.dir, office, ['West Oakland'], officeMap, CHILD_TO_PARENT_HOOD, 108);
+    assert.equal(pool.available, false);
+    assert.match(pool.text, /the citizen snapshot \(simulation_ledger_snapshot\.jsonl\) is absent/);
+  } finally {
+    ws.cleanup();
+  }
+});
+
+test('T3.6: Live loadTrackerRows loads tracker rows cleanly and returns null or empty on missing file', () => {
+  const ws = createTempWorkspace();
+  try {
+    assert.strictEqual(civicSlice.loadTrackerRows(ws.dir), null);
+
+    const rows = [
+      { InitiativeID: 'INIT-001', Name: 'Test Hub' },
+      { InitiativeID: 'INIT-002', Name: 'Test Program' }
+    ];
+    ws.writeJsonl('output/beats/Initiative_Tracker.jsonl', rows);
+    const loaded = civicSlice.loadTrackerRows(ws.dir);
+    assert.equal(loaded.length, 2);
+    assert.equal(loaded[0].InitiativeID, 'INIT-001');
+  } finally {
+    ws.cleanup();
+  }
+});
+
+test('T3.7: Live loadPetitionPool prefers ReflectionExcerpt over legacy Snippet/Text headers', () => {
+  const ws = createTempWorkspace();
+  try {
+    ws.writeJson('output/beats/meta.json', { cycle: 108 });
+    ws.writeJson('output/simulation_ledger_snapshot.meta.json', { cycle: 108 });
+
     const reflections = [
-      { Timestamp: '2026-09-20T10:00:00Z', POPID: SYNTH_POP.CITIZEN_WEST_OAK_1, Cycle: '108', Event: 'Civic', Affect: 'Frustrated', Snippet: 'Pothole issue.' }
+      {
+        Event: 'Civic', Cycle: 108, POPID: SYNTH_POP.CITIZEN_WEST_OAK_1, Neighborhood: 'West Oakland', Affect: 'angry',
+        ReflectionExcerpt: 'Canonical excerpt text from live sheet',
+        Snippet: 'Legacy snippet',
+        Text: 'Legacy text'
+      }
     ];
     ws.writeJsonl('output/beats/Reflection_Intake.jsonl', reflections);
+    ws.writeJsonl('output/simulation_ledger_snapshot.jsonl', [
+      { POPID: SYNTH_POP.CITIZEN_WEST_OAK_1, Name: 'Citizen A', Neighborhood: 'West Oakland', Status: 'active', Tier: 3 }
+    ]);
 
-    const d1Office = { officeId: 'COUNCIL-D1', agentDir: 'civic-office-council-d1', district: 'D1' };
-    const officeMap = { offices: [d1Office], projects: [] };
+    const office = { officeId: 'COUNCIL-D1', district: 'D1' };
+    const officeMap = { offices: [] };
 
-    // District seat with turf -> available: false, stated absence text
-    const d1Pool = civicSlice.loadPetitionPool(ws.dir, d1Office, ['West Oakland'], officeMap, {});
-    assert.equal(d1Pool.available, false);
-    assert.match(d1Pool.text, /citizen snapshot \(simulation_ledger_snapshot\.jsonl\) is absent/);
-
-    // Citywide seat (Mayor) has no turf filter -> unaffected (available: true)
-    const mayorOffice = { officeId: 'MAYOR-01', agentDir: 'civic-office-mayor', district: 'citywide' };
-    const mayorPool = civicSlice.loadPetitionPool(ws.dir, mayorOffice, [], officeMap, {});
-    assert.equal(mayorPool.available, true);
+    const pool = civicSlice.loadPetitionPool(ws.dir, office, ['West Oakland'], officeMap, CHILD_TO_PARENT_HOOD, 108);
+    assert.equal(pool.available, true);
+    assert.equal(pool.complaints.length, 1);
+    assert.equal(pool.complaints[0].snippet, 'Canonical excerpt text from live sheet');
   } finally {
     ws.cleanup();
   }
@@ -585,22 +750,14 @@ group('Group 4: T6 Petition Math');
 test('T6.1: Live countPetition annualizes rent burden and calculates hardship households correctly', () => {
   const mockData = {
     cycle: 108,
-    Neighborhood_Map: [
-      { Neighborhood: 'West Oakland', ChildAreas: '' }
-    ],
-    Neighborhood_Demographics: [
-      { Neighborhood: 'West Oakland', Students: '100', Adults: '800', Seniors: '100', Sick: '20' }
-    ],
+    Neighborhood_Map: [{ Neighborhood: 'West Oakland', ChildAreas: '' }],
+    Neighborhood_Demographics: [{ Neighborhood: 'West Oakland', Students: '100', Adults: '800', Seniors: '100', Sick: '20' }],
     Household_Ledger: [
-      // Rent $1,500/mo ($18k/yr), Income $50,000/yr -> 36% burden -> QUALIFIES
-      { HouseholdId: 'HH-01', Neighborhood: 'West Oakland', Status: 'active', HousingType: 'rented', MonthlyRent: '1500', HouseholdIncome: '50000' },
-      // Rent $1,000/mo ($12k/yr), Income $60,000/yr -> 20% burden -> DOES NOT QUALIFY
-      { HouseholdId: 'HH-02', Neighborhood: 'West Oakland', Status: 'active', HousingType: 'rented', MonthlyRent: '1000', HouseholdIncome: '60000' }
+      { HouseholdId: 'HH-01', Neighborhood: 'West Oakland', Status: 'active', HousingType: 'rented', MonthlyRent: '1500', HouseholdIncome: '40000' },
+      { HouseholdId: 'HH-02', Neighborhood: 'West Oakland', Status: 'active', HousingType: 'rented', MonthlyRent: '800', HouseholdIncome: '50000' },
+      { HouseholdId: 'HH-03', Neighborhood: 'West Oakland', Status: 'active', HousingType: 'owned', MonthlyRent: '0', HouseholdIncome: '100000' }
     ],
-    Hospital_Ledger: [],
-    Crime_Metrics: [],
-    Simulation_Ledger: [],
-    Reflection_Intake: []
+    Hospital_Ledger: [], Crime_Metrics: [], Simulation_Ledger: [], Reflection_Intake: []
   };
 
   const res = civicPetitions.countPetition({ policyDomain: 'housing', hoods: ['West Oakland'] }, mockData, { hardshipBand: 0.30 });
@@ -697,6 +854,79 @@ test('T6.5: Live countPetition folds child area Coliseum to East Oakland parent'
   assert.equal(res.counts.hardshipHouseholds, 1, 'Coliseum household counts for East Oakland petition');
 });
 
+test('T6.6: Live petitionGateSweep in temp workspace: unset bands produce 0 writes; set band stages vote write', () => {
+  const ws = createTempWorkspace();
+  try {
+    const beats = ws.path('output/beats');
+    const out = ws.path('output');
+
+    ws.writeJsonl('output/beats/Initiative_Tracker.jsonl', [
+      { InitiativeID: 'INIT-999', PolicyDomain: 'health', AffectedNeighborhoods: 'Temescal', Status: 'proposed', VoteCycle: '' }
+    ]);
+    ws.writeJson('output/beats/meta.json', { cycle: 108 });
+    ws.writeJson('output/engine_audit_c108.json', {
+      cycle: 108,
+      snapshots: { Neighborhood_Map: [{ Neighborhood: 'Temescal', ChildAreas: '' }] }
+    });
+    ws.writeJsonl('output/beats/Neighborhood_Demographics.jsonl', [
+      { Neighborhood: 'Temescal', Students: '100', Adults: '800', Seniors: '100', Sick: '20' }
+    ]);
+    ws.writeJsonl('output/beats/Hospital_Ledger.jsonl', [
+      { AdmissionId: 'H1', POPID: SYNTH_POP.CITIZEN_TEMESCAL_1, Neighborhood: 'Temescal', StatusNow: 'hospitalized', DischargeCycle: '', Outcome: '' }
+    ]);
+    ws.writeJsonl('output/beats/Household_Ledger.jsonl', []);
+    ws.writeJsonl('output/beats/Crime_Metrics.jsonl', []);
+    ws.writeJsonl('output/beats/Reflection_Intake.jsonl', []);
+    ws.writeJsonl('output/simulation_ledger_snapshot.jsonl', [
+      { POPID: SYNTH_POP.CITIZEN_TEMESCAL_1, Name: 'Pat Synthetic', Neighborhood: 'Temescal', Status: 'active', Tier: 3 }
+    ]);
+    ws.writeJson('output/simulation_ledger_snapshot.meta.json', { cycle: 108 });
+
+    // 1. Unset bands
+    const r1 = civicRun.petitionGateSweep(ws.dir, 108);
+    assert.equal(r1.pending, 1);
+    assert.equal(r1.gated, 0);
+    const stagedFile = ws.path('output/city-civic-database/initiatives/init-999/decisions_c108.json');
+    assert.equal(fs.existsSync(stagedFile), false, 'Unset band must stage no files');
+
+    // 2. Set band for health
+    civicRun.PETITION_SUPPORT_BANDS.health = 0.0005;
+    const r2 = civicRun.petitionGateSweep(ws.dir, 108);
+    delete civicRun.PETITION_SUPPORT_BANDS.health;
+
+    assert.equal(r2.pending, 1);
+    assert.equal(r2.gated, 1);
+    assert(fs.existsSync(stagedFile));
+    const staged = JSON.parse(fs.readFileSync(stagedFile, 'utf8'));
+    assert.equal(staged.trackerUpdates.Status, 'pending-vote');
+    assert.equal(staged.trackerUpdates.ImplementationPhase, 'vote-scheduled');
+    assert.equal(staged.trackerUpdates.VoteCycle, 109);
+  } finally {
+    delete civicRun.PETITION_SUPPORT_BANDS.health;
+    ws.cleanup();
+  }
+});
+
+test('T6.7: Live countPetition verifies that housing and safety return domain-not-playable and never clear', () => {
+  const mockData = {
+    cycle: 108,
+    Neighborhood_Map: [{ Neighborhood: 'Temescal', ChildAreas: '' }],
+    Neighborhood_Demographics: [{ Neighborhood: 'Temescal', Students: '100', Adults: '800', Seniors: '100', Sick: '20' }],
+    Household_Ledger: [{ HouseholdId: 'HH-1', Neighborhood: 'Temescal', Status: 'active', HousingType: 'rented', MonthlyRent: '2500', HouseholdIncome: '30000' }],
+    Hospital_Ledger: [],
+    Crime_Metrics: [{ Neighborhood: 'Temescal', ViolentLevel: '50' }],
+    Simulation_Ledger: [], Reflection_Intake: []
+  };
+
+  const rHousing = civicPetitions.countPetition({ policyDomain: 'housing', hoods: ['Temescal'] }, mockData, { supportBand: 0.0001 });
+  assert.equal(rHousing.support.cleared, false);
+  assert.equal(rHousing.support.reason, 'domain-not-playable');
+
+  const rSafety = civicPetitions.countPetition({ policyDomain: 'safety', hoods: ['Temescal'] }, mockData, { supportBand: 0.0001 });
+  assert.equal(rSafety.support.cleared, false);
+  assert.equal(rSafety.support.reason, 'domain-not-playable');
+});
+
 // ─────────────────────────────────────────────────────────────────────────────
 // Group 5: T8 Directive Targeting
 // ─────────────────────────────────────────────────────────────────────────────
@@ -746,6 +976,108 @@ test('T8.3: Evaluates the three confrontation demand triggers accurately', () =>
   assert.equal(evaluateDirectiveTriggersForSeat({ petitionAboveVisibility: true }).shouldConfront, true);
   assert.equal(evaluateDirectiveTriggersForSeat({ stageNearStall: true }).shouldConfront, true);
   assert.equal(evaluateDirectiveTriggersForSeat({}).shouldConfront, false);
+});
+
+test('T8.4: Live civic-office-map.json contains exactly 10 elected seats, 1 police chief, and excludes project directors', () => {
+  const officeMap = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts', 'civic-office-map.json'), 'utf8'));
+  const elected = (officeMap.offices || []).filter(o => o.officeId === 'MAYOR-01' || /^COUNCIL-D\d$/.test(String(o.officeId || '')));
+  assert.equal(elected.length, 10, 'Must have exactly 10 elected seats');
+
+  const chief = (officeMap.offices || []).filter(o => o.officeId === 'CHIEF-POLICE');
+  assert.equal(chief.length, 1, 'Must have exactly 1 police chief office');
+
+  const projectIds = (officeMap.projects || []).map(p => p.projectId);
+  assert(projectIds.includes('PROJ-STABFUND'));
+  assert(projectIds.includes('PROJ-OARI'));
+  assert(projectIds.includes('PROJ-HEALTHCTR'));
+  assert(projectIds.includes('PROJ-TRANSITHUB'));
+
+  // Ensure no project directory is counted as elected
+  const projectInElected = (officeMap.projects || []).filter(p => elected.some(e => e.officeId === p.projectId));
+  assert.equal(projectInElected.length, 0);
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Group 6: T9 Rota Split + Project Director Work-Wake Packs
+// ─────────────────────────────────────────────────────────────────────────────
+group('Group 6: T9 Rota Split + Project Director Work-Wake Packs');
+
+test('T9.1: Live datawake rota filter against civic-office-map.json yields exactly the 11 political seats', () => {
+  const officeMap = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts', 'civic-office-map.json'), 'utf8'));
+  const DATAWAKE_SEAT = /^(MAYOR-01|COUNCIL-D\d|CHIEF-POLICE)$/;
+
+  const qualifying = [];
+  for (const o of [...(officeMap.offices || []), ...(officeMap.projects || [])]) {
+    if (!o.agentDir) continue;
+    if (DATAWAKE_SEAT.test(String(o.officeId || o.projectId || ''))) {
+      qualifying.push(o);
+    }
+  }
+
+  assert.equal(qualifying.length, 11, 'Must have exactly 11 datawake seats (9 council + mayor + police chief)');
+  const ids = qualifying.map(o => o.officeId).sort();
+  assert(ids.includes('MAYOR-01'));
+  assert(ids.includes('CHIEF-POLICE'));
+  for (let d = 1; d <= 9; d++) {
+    assert(ids.includes(`COUNCIL-D${d}`));
+  }
+});
+
+test('T9.2: Live initiative-project node builder in cron-work-wake.js renders within 600 chars and handles missing rows', () => {
+  const ws = createTempWorkspace();
+  try {
+    const row = {
+      InitiativeID: 'INIT-001',
+      Name: 'West Oakland Stabilization Fund',
+      ImplementationPhase: 'implementation-active',
+      Stage: 'Delivering',
+      Status: 'active',
+      MilestoneNotes: 'Disbursed grants to 12 families in West Oakland',
+      NextScheduledAction: 'Review quarterly disbursement intake',
+      NextActionCycle: '109'
+    };
+    ws.writeJsonl('Initiative_Tracker.jsonl', [row]);
+
+    const builder = workWake.NODE_BUILDERS['initiative-project'];
+    assert(typeof builder === 'function', 'initiative-project node builder must exist');
+
+    const rendered = builder({ initiative: 'INIT-001' }, 108, ws.dir);
+    assert(rendered !== null);
+    assert.match(rendered, /Your project: West Oakland Stabilization Fund \(INIT-001\)\./);
+    assert.match(rendered, /implementation-active, stage Delivering/);
+    assert.match(rendered, /Latest milestone: Disbursed grants to 12 families/);
+    assert.match(rendered, /Next on the books: Review quarterly disbursement intake \(cycle 109\)\./);
+    assert(rendered.length <= 600, 'initiative-project block must be <= 600 characters');
+
+    // Missing row
+    const missing = builder({ initiative: 'INIT-999' }, 108, ws.dir);
+    assert.strictEqual(missing, null);
+  } finally {
+    ws.cleanup();
+  }
+});
+
+test('T9.3: Live work-wake packages for all four project directors validate cleanly via workWakePackages', () => {
+  const pkgs = workWakePackages.loadPackages();
+  const dirKeys = ['proj-stabilization-fund', 'proj-oari', 'proj-health-center', 'proj-transit-hub'];
+
+  for (const key of dirKeys) {
+    const pkg = pkgs[key];
+    assert(pkg, `Package ${key} must exist in work-wake-packages.json`);
+    assert.doesNotThrow(() => workWakePackages.validatePackage(key, pkg));
+    assert(pkg.dataNodes.includes('initiative-project'));
+    assert(/^INIT-\d+$/.test(pkg.initiative));
+  }
+
+  // Regression: missing initiative must throw validation error
+  assert.throws(
+    () => workWakePackages.validatePackage('proj-invalid', {
+      persona: 'proj-invalid', active: true, popid: 'POP-99999', name: 'Test', office: 'TEST',
+      dataNodes: ['initiative-project'], models: { reflect: { provider: 'openrouter', model: 'deepseek/deepseek-chat' } },
+      dutyDays: ['tue'], promptContract: { roleLine: 'Role', voiceNotes: 'Voice' }
+    }),
+    /initiative-project dataNode requires initiative/
+  );
 });
 
 // ─────────────────────────────────────────────────────────────────────────────

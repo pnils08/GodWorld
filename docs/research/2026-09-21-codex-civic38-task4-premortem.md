@@ -25,7 +25,7 @@ pointers:
 
 ## 1. HIGH — the per-row conversion inventory is not reliable enough to execute
 
-The live row identity contradicts Task 4.4 and the safety handoff: **OARI is INIT-002**, not INIT-007. The latter is a workforce program. Do not apply a safety exemption, safety baseline or OARI test to INIT-007. The discrepancy was reported for a ruling; no canonical identity or owning-plan row was silently rewritten.
+The live row identity contradicts the safety handoff: **OARI is INIT-002**, not INIT-007. The latter is a workforce program. Task 4.4 mentions the operational INIT-007 row and then OARI separately; it does not explicitly assign that ID to OARI. Do not apply a safety exemption, safety baseline or OARI test to INIT-007. The handoff discrepancy was reported for a ruling; no canonical identity or owning-plan row was silently rewritten.
 
 | ID | Live name / domain | Type; Status; Outcome; VoteCycle | Live phase | Conversion hazard |
 |---|---|---|---|---|
@@ -89,4 +89,5 @@ The required Haiku engine-wiring command ran read-only with the Task 4/Crime_Met
 
 ## Changelog
 
+- 2026-09-21 (codex) — Corrected finding 1 attribution: the OARI/INIT-007 mismatch is in the safety handoff, not an explicit ID assignment in Task 4.4; the six-row live inventory is unchanged.
 - 2026-09-21 (codex) — Read all six rows live, verified Type-arc mismatches, and traced baseline and stall/revival persistence hazards; engine files unchanged.

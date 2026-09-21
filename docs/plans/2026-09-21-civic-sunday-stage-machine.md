@@ -89,7 +89,7 @@ Probe and history, about $0.006 spent. Gemini and DeepSeek batches completed in 
 | A model's `:batch` route can stop working: every Claude `:batch` submit (Sonnet 5, Sonnet 4.6, Haiku 4.5) was rejected today ("does not have a :batch endpoint") although the same route ran Sonnet 5 on 2026-08-29; cause not verified | Probe each model with a one-request batch at the start of a window before sending the full one; if the probe fails, defer that seat and record it, never block the week; `tick` may fall back to the synchronous path for a seat the builder marks essential |
 | A late or failed result | Each seat has its own state; nothing shared waits on it (Task 2 rulings) |
 
-Consequence for model choice: Gemini and DeepSeek batch endpoints work today; Claude-on-batch is unproven until the route is checked, so Claude seats need the synchronous fallback until it is. The account balance is about $8.4–8.6 of $70 purchased — funding is a builder item.
+Consequence for model choice (see the model ruling in Open questions): batch is for cost and failure isolation, not for stronger models. Gemini and DeepSeek batch endpoints work today; Claude-on-batch is unproven, which no longer matters since no seat needs Claude for strength. The account balance is about $8.4–8.6 of $70 purchased — funding is a builder item.
 
 ## Open questions
 
@@ -97,13 +97,14 @@ Consequence for model choice: Gemini and DeepSeek batch endpoints work today; Cl
 - [x] **Clerk verdict — model or deterministic?** Answered by agy's review, verified: an inline model call that gates the apply, plus a model sanity-read in the gate. Handled by Task 2 rulings.
 - [x] **New batch client file** — not needed: extend `scripts/orBatch.js` (today one packet per submit; civic needs many requests per batch with a `custom_id` per seat). Fix-don't-add holds.
 - [ ] **Why the Claude `:batch` route is rejected today** — unverified; ask OpenRouter or check the models page before any Claude seat depends on batch. Direct Anthropic credits are the alternative.
-- [ ] **Which model per seat** — Sonnet 5 first to evaluate; Opus 5 if the grounding gate needs it.
+- [x] **Which model per seat** — RULED 2026-09-21 (builder): no model upgrade for civic. A stronger model buys more reasoning, not better output; the prompt (the pack and the output contract) is what matters, and the current cheap models already do the job (~$0.18 a week). Keep each seat's current model; move a seat to batch only where its model has a working `:batch` endpoint priced at or below standard, otherwise it stays synchronous. Faction variety comes from the existing model mix, not from buying strength. Related prior note: builder 2026-08-29, structured jobs do not need a high-end model, the skill is the product (sl-godworld). Fable/Opus for Mags or Elias Varek is shelved as an optional experiment, revisited only with evidence.
 - [ ] **Schedule** — tick frequency and the Sunday slot; builder installs the crontab.
 - [ ] **Coalitions** — the hearing that matters; its own plan after the loop runs (structured stances, deterministic count).
 - [ ] **Datawake timing** — the 06:15 angle wake reads the datawake lane (crontab comment); batch lag needs that dependency checked.
 
 ## Changelog
 
+- 2026-09-21 (research-build) — Builder ruled model choice: no upgrade, prompt over model strength; batch only where a cheap working `:batch` exists. Kimi picks up Tasks 1-2 first.
 - 2026-09-21 (research-build) — Failure handling table added from the measured probe: whole-batch validation failures, reasoning-eaten output, out-of-order results, Claude `:batch` rejected today; per-seat state and one-request probes.
 - 2026-09-21 (research-build) — Antigravity's review ([[../../output/antigravity/2026-09-21-review-civic39-stage-machine]]) verified: the close is not model-free today (voice-completeness halt, clerk model, gate sanity-read). Task 2 rewritten (deterministic apply gate, deferred model verdicts, missing voices pending); Task 3 gains the orBatch module refactor.
 - 2026-09-21 (research-build) — Corrected provider: OpenRouter batch via existing `orBatch.js`, not direct Anthropic; measured current cost added; batch client file no longer new.

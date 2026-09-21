@@ -25,6 +25,7 @@ Grep here before grepping the tree. Each row: file · one-line purpose · verdic
 
 | File | Purpose | Verdict |
 |------|---------|---------|
+| **[[2026-09-21-codex-civic38-stage-handler-review]]** | Review of 7268a284: call-site guards, carry-key/crash/reset defects, T7 precedence; Delivering comparator and baseline observation boundary | `adopt` — corrections and prior-cohort Phase-2 recommendation for existing civic.38 Task 4 |
 | **[[2026-09-21-codex-civic38-task4-premortem]]** | Task 4 pre-cut: live OARI identity correction, per-row stage/phase traps, baseline timing and stall/revival writer conflicts | `adopt` — reconcile before civic.38 Task 4 conversion; engine-sheet owns the cut |
 | **[[2026-09-21-batch-inference-options]]** | Batch inference for the civic wakes and the wider sim: Anthropic Message Batches (50%, 24h window, all active models incl. Fable 5.1 / Opus 5 / Sonnet 5 / Haiku 4.5) and OpenRouter's GA Batch API (per-model `:batch` availability unverified); what a submit/collect step replaces in `cron-civic-run.js`; cost estimate. | adopt (Anthropic batch); watch (OpenRouter batch) |
 | **[[2026-09-20-codex-civic38-tasks1-3-adversarial-review]]** | Strong second read of Tasks 1+3: catalog bypass, reflection loss, geography/degrade defects, continuity and caps; Task 6.1 repair | `adopt` — repairs recommended to existing civic.38 tasks; findings await owner resolution |

@@ -793,15 +793,13 @@ function loadTrackerRows(root, cycle) {
   return readJsonl(path.join(root || ROOT, 'output', 'beats', 'Initiative_Tracker.jsonl'));
 }
 
-// What a row needs next. Stage columns arrive with the Task 4 engine cut;
-// until then the text derives from phase/status and says so honestly.
+// Task 4 owns stage requirements. Until its shared requirement helper lands,
+// report the recorded Stage without inventing a local advancement rule.
 function boardNeedText(row) {
-  const stage = String(row.Stage || '');
-  if (stage === 'Funded') return 'a work move stands it up';
-  if (stage === 'Standing') return 'work keeps it standing; the domain metric decides Delivering';
-  if (stage === 'Delivering') return 'delivering — hold the metric';
   const phase = String(row.ImplementationPhase || '');
   if (phase === 'stalled') return 'stalled — one work move revives it';
+  const stage = String(row.Stage || '');
+  if (stage) return stage + ' — next-stage requirements unavailable (Task 4 shared helper pending)';
   if (String(row.Status || '') === 'proposed' && !String(row.VoteCycle || '').trim()) {
     return 'petition-pending — signatures move it to a vote';
   }

@@ -93,3 +93,10 @@ test('F6 prior terminal outcomes survive the Cycle boundary alongside current pe
   write('output/cron-civic/moves/moves_c1000.jsonl', '{broken');
   assert.equal(blocks().moves.length, 2); // future evidence is never read
 }));
+test('F7 stalled phase takes precedence over every recognized Stage', () => {
+  for (const Stage of ['Funded','Standing','Delivering']) {
+    assert.match(slice.boardNeedText({Stage,ImplementationPhase:'stalled'}), /stalled/);
+    assert.match(slice.boardNeedText({Stage,ImplementationPhase:'active'}), /requirements unavailable/);
+  }
+  assert.match(slice.boardNeedText({Status:'proposed',VoteCycle:''}), /petition-pending/);
+});

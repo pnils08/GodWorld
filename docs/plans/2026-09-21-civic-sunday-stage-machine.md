@@ -73,13 +73,30 @@ pointers:
 - **Provider (corrected 2026-09-21):** OpenRouter batch, on the key the project already holds. `scripts/orBatch.js` already ran Sonnet 5 batches on 2026-08-29; its header says the project holds no Anthropic API credits, so the direct Anthropic batch path is unavailable until credits are added. OpenRouter batch gives 50% off with a 24h window and passes Claude, Gemini, Mistral, OpenAI, DeepSeek v4 and Kimi K3 through as `:batch` endpoints; the models the civic seats use today (`deepseek-chat`, `kimi-k2`, `llama-3.3-70b`, `qwen3-235b`) have none. Four `:batch` endpoints cost MORE than standard (deepseek-v4-flash-0731 2.75x, kimi-k3, qwen3.5-9b, glm-5.2) — check the price before assigning a seat. See [[research/2026-09-21-batch-cost-and-model-variety]].
 - **Cost (measured then estimated, from [[research/2026-09-21-batch-cost-and-model-variety]]):** current civic volume costs about $0.18 a week (~$0.76 a month; only the directive and mayor calls log usage, the rest is estimated from stored file sizes). The same volume at batch price is about $0.57 a week on Sonnet 5, $1.42 on Opus 5, $2.85 on Fable 5.1 (~$12 a month). The numbers are small either way; model choice per seat is about quality and faction variety, not cost.
 - **Wake cadence under batch:** the Mon–Thu datawake and the work-wake packs can move to submit-in-the-evening, collect-in-the-morning; turn results lag up to a day, which the loop tolerates.
+- **Mags on Fable 5.1 (estimate from measured output sizes, assumes the Claude batch route works):** about $0.07 a Saturday run, roughly $0.29 a month.
 - **Build order:** Tasks 1–2 first (they fix the failure mode with no new provider); Task 3 after checking each chosen model's `:batch` price; Task 4 last.
+
+## Failure handling (measured 2026-09-21 — [[research/2026-09-21-batch-cost-and-model-variety]] §Failure evidence)
+
+Probe and history, about $0.006 spent. Gemini and DeepSeek batches completed in 6–13 minutes; the August Sonnet 5 batches ran 10–12 minutes. What actually failed, and the rule each one forces:
+
+| Failure seen | Rule for the stage machine |
+|---|---|
+| One bad request (empty messages, bad model, duplicate `custom_id`, a disallowed parameter) fails the WHOLE batch at validation, in seconds | Validate every request locally before submit; one model per batch; a `custom_id` is `{cycle}-{seat}-{attempt}`, unique by construction |
+| Huge `max_tokens` is priced up front and can 402 | Set `max_tokens` from the seat's cap, never from a default |
+| "Succeeded" but unusable: Sonnet 5 spent 31,999 of 32,000 tokens on reasoning and returned null; Gemini truncated JSON at a 300-token cap because mandatory reasoning ate the budget | Keep a per-model parameter profile (reasoning off or a floor, token headroom); treat `finish_reason: length`, null content and unparseable JSON as invalid, then resubmit next window |
+| Results come back out of submit order | Match on `custom_id` only |
+| A model's `:batch` route can stop working: every Claude `:batch` submit (Sonnet 5, Sonnet 4.6, Haiku 4.5) was rejected today ("does not have a :batch endpoint") although the same route ran Sonnet 5 on 2026-08-29; cause not verified | Probe each model with a one-request batch at the start of a window before sending the full one; if the probe fails, defer that seat and record it, never block the week; `tick` may fall back to the synchronous path for a seat the builder marks essential |
+| A late or failed result | Each seat has its own state; nothing shared waits on it (Task 2 rulings) |
+
+Consequence for model choice: Gemini and DeepSeek batch endpoints work today; Claude-on-batch is unproven until the route is checked, so Claude seats need the synchronous fallback until it is. The account balance is about $8.4–8.6 of $70 purchased — funding is a builder item.
 
 ## Open questions
 
 - [x] **API key** — settled: OpenRouter batch runs on the existing key (`scripts/orBatch.js`). Direct Anthropic batch needs credits the project does not hold; optional later.
 - [x] **Clerk verdict — model or deterministic?** Answered by agy's review, verified: an inline model call that gates the apply, plus a model sanity-read in the gate. Handled by Task 2 rulings.
 - [x] **New batch client file** — not needed: extend `scripts/orBatch.js` (today one packet per submit; civic needs many requests per batch with a `custom_id` per seat). Fix-don't-add holds.
+- [ ] **Why the Claude `:batch` route is rejected today** — unverified; ask OpenRouter or check the models page before any Claude seat depends on batch. Direct Anthropic credits are the alternative.
 - [ ] **Which model per seat** — Sonnet 5 first to evaluate; Opus 5 if the grounding gate needs it.
 - [ ] **Schedule** — tick frequency and the Sunday slot; builder installs the crontab.
 - [ ] **Coalitions** — the hearing that matters; its own plan after the loop runs (structured stances, deterministic count).
@@ -87,6 +104,7 @@ pointers:
 
 ## Changelog
 
+- 2026-09-21 (research-build) — Failure handling table added from the measured probe: whole-batch validation failures, reasoning-eaten output, out-of-order results, Claude `:batch` rejected today; per-seat state and one-request probes.
 - 2026-09-21 (research-build) — Antigravity's review ([[../../output/antigravity/2026-09-21-review-civic39-stage-machine]]) verified: the close is not model-free today (voice-completeness halt, clerk model, gate sanity-read). Task 2 rewritten (deterministic apply gate, deferred model verdicts, missing voices pending); Task 3 gains the orBatch module refactor.
 - 2026-09-21 (research-build) — Corrected provider: OpenRouter batch via existing `orBatch.js`, not direct Anthropic; measured current cost added; batch client file no longer new.
 - 2026-09-21 (research-build) — Draft filed from builder direction and the batch research.

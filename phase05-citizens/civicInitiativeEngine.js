@@ -121,6 +121,12 @@ function runCivicInitiativeEngine_(ctx) {
   
   // Read initiatives
   var data = sheet.getDataRange().getValues();
+  // civic.38 Task 4 step 1: the six stage columns self-arm here, before anything
+  // indexes the header. Deliberately NOT in `required` below — that check aborts
+  // the whole engine, and a missing stage column is this function's to fix.
+  if (data.length >= 1 && ensureInitiativeStageColumns_(sheet, data[0])) {
+    data = sheet.getDataRange().getValues();
+  }
   if (data.length < 2) {
     Logger.log('civicInitiativeEngine: No initiatives to process');
     return;
@@ -2951,4 +2957,128 @@ function engineClockHold_(notes, nextActionCycle, cycle, engineWillAct) {
     notes: stripped ? stamp + ' ' + stripped : stamp,
     grace: used + 1
   };
+}
+
+/**
+ * ============================================================================
+ * civic.38 Task 4 step 1 — THE STAGE MODEL (columns + shared rules)
+ * ============================================================================
+ * Machine state lives in columns, never in Notes (plan mechanism decision 2).
+ * Six columns on Initiative_Tracker, appended once by
+ * ensureInitiativeStageColumns_ from the cycle path:
+ *   Stage                — '' | Proposed | Funded | Standing | Delivering
+ *   StageBaseline        — versioned JSON descriptor of the stage-3 observation
+ *   LastStageChangeCycle — engine-written; the only clock a staged row runs on
+ *   LastWorkCycle / LastWorkSeat — gate-written by the Sunday fold
+ *   PriorPhase           — engine-written on first stall entry
+ * A BLANK Stage is a legacy row: nothing in the stage model reads or writes it.
+ *
+ * lib/ is claspignored, so the rules below are a MIRROR of
+ * lib/initiativePhaseContract.js (stageCatalogByDomain + stageRequirementWith),
+ * pinned by lib/initiativePhaseContract.test.js (stage parity block): the catalog deep-equals, the
+ * helper body is text-identical, and both run one fixture matrix. Change one,
+ * change both, in the same commit.
+ */
+var INITIATIVE_STAGE_COLUMNS_ = ['Stage', 'StageBaseline', 'LastStageChangeCycle', 'LastWorkCycle', 'LastWorkSeat', 'PriorPhase'];
+
+var CIVIC_STAGE_CATALOG_ = {
+  health:    { playable: true,  stage3Metric: { tab: 'Neighborhood_Demographics', column: ['Sick'], direction: 'down', scope: 'hood' } },
+  transit:   { playable: true,  stage3Metric: { tab: 'Transit_Metrics', column: ['RidershipVolume'], direction: 'up', scope: 'station-serving-hood' } },
+  education: { playable: true,  stage3Metric: { tab: 'Neighborhood_Demographics', column: ['SchoolQualityIndex'], direction: 'up', scope: 'hood' } },
+  economic:  { playable: true,  stage3Metric: { tab: 'Neighborhood_Map', column: ['RetailVitality'], direction: 'up', scope: 'hood' } },
+  workforce: { playable: true,  stage3Metric: { tab: 'Neighborhood_Map', column: ['RetailVitality'], direction: 'up', scope: 'hood' } },
+  sports:    { playable: true,  stage3Metric: { tab: 'Neighborhood_Map', column: ['RetailVitality', 'NightlifeProfile'], direction: 'up', scope: 'hood' } },
+  safety:    { playable: false, stage3Metric: { tab: 'Crime_Metrics', column: ['ViolentLevel'], direction: 'down', scope: 'hood' } },
+  housing:   { playable: false, stage3Metric: { tab: 'Household_Ledger', column: ['MonthlyRent*12/HouseholdIncome'], direction: 'down', scope: 'hood' } }
+};
+
+/** Which stage columns a header row lacks, in declared order. Pure. */
+function missingInitiativeStageColumns_(header) {
+  var have = header || [];
+  var missing = [];
+  for (var i = 0; i < INITIATIVE_STAGE_COLUMNS_.length; i++) {
+    if (have.indexOf(INITIATIVE_STAGE_COLUMNS_[i]) === -1) missing.push(INITIATIVE_STAGE_COLUMNS_[i]);
+  }
+  return missing;
+}
+
+/**
+ * Append any missing stage columns to the tracker header. Append-only, at most
+ * once per column, called from runCivicInitiativeEngine_ (a real cycle-path
+ * caller — DEPLOY.md trap 3). Returns true when the header changed, so the
+ * caller re-reads the grid. Same own-tab direct-write class as the file's
+ * full-grid write-back (SHEETS_MANIFEST §9).
+ */
+function ensureInitiativeStageColumns_(sheet, header) {
+  var missing = missingInitiativeStageColumns_(header);
+  if (!missing.length) return false;
+  var lastCol = sheet.getLastColumn();
+  // A trimmed grid has no spare columns; a range past the grid edge throws.
+  var short = (lastCol + missing.length) - sheet.getMaxColumns();
+  if (short > 0) sheet.insertColumnsAfter(sheet.getMaxColumns(), short);
+  sheet.getRange(1, lastCol + 1, 1, missing.length).setValues([missing]);
+  Logger.log('civicInitiativeEngine: appended stage columns to Initiative_Tracker — ' + missing.join(', '));
+  return true;
+}
+
+// MIRROR of lib/initiativePhaseContract.js stageRequirementWith — body text-identical.
+function civicStageRequirementWith_(catalogByDomain, input) {
+  var inp = input || {};
+  var stage = String(inp.stage == null ? '' : inp.stage).trim();
+  if (!stage) return null;
+  var phase = String(inp.phase == null ? '' : inp.phase).trim().toLowerCase();
+  var out = { stage: stage, next: null, clears: false, moveThatClears: null, blocked: null, text: '' };
+
+  if (['Proposed', 'Funded', 'Standing', 'Delivering'].indexOf(stage) < 0) {
+    out.blocked = 'unknown-stage';
+    out.text = stage + ' — not a stage this model knows';
+    return out;
+  }
+  // A negative phase wins over the stage: nothing advances while the row is down.
+  if (phase === 'stalled') {
+    out.blocked = 'stalled';
+    out.moveThatClears = 'work';
+    out.text = 'stalled — one work move revives it';
+    return out;
+  }
+  if (phase === 'blocked' || phase === 'suspended' || phase === 'defunded') {
+    out.blocked = phase;
+    out.text = phase + ' — no seat move revives it';
+    return out;
+  }
+  if (stage === 'Proposed') {
+    out.next = 'Funded';
+    out.text = 'Proposed — a passed council vote funds it';
+    return out;
+  }
+  if (stage === 'Funded') {
+    var work = Number(inp.lastWorkCycle);
+    var since = Number(inp.lastStageChangeCycle);
+    out.next = 'Standing';
+    out.moveThatClears = 'work';
+    out.clears = isFinite(work) && isFinite(since) && work > 0 && since > 0 && work > since;
+    out.text = out.clears
+      ? 'Funded — work landed; it stands up next Cycle'
+      : 'Funded — one work move stands it up';
+    return out;
+  }
+  if (stage === 'Standing') {
+    var entry = catalogByDomain[String(inp.policyDomain == null ? '' : inp.policyDomain).trim().toLowerCase()];
+    if (!entry || entry.playable !== true) {
+      out.blocked = 'no-delivering-gate';
+      out.text = 'Standing — no delivering gate exists for this domain yet';
+      return out;
+    }
+    var m = entry.stage3Metric;
+    out.next = 'Delivering';
+    out.clears = inp.metricMoved === true;
+    out.text = 'Standing — delivers when ' + m.column.join(' + ') + ' moves ' + m.direction + ' against its baseline';
+    return out;
+  }
+  out.text = 'Delivering — the service is reaching people';
+  return out;
+}
+
+function civicStageRequirement_(input) {
+  return civicStageRequirementWith_(CIVIC_STAGE_CATALOG_, input);
 }

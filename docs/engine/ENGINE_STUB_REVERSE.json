@@ -1,8 +1,8 @@
 {
-  "generated": "2026-09-20",
+  "generated": "2026-09-21",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 184,
-  "functionsMapped": 1444,
+  "functionsMapped": 1448,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -4343,6 +4343,7 @@
         "phase04-events/chaosCarsEngine.js::loadNeighborhoodNames_",
         "phase04-events/chaosCarsEngine.test.js::reset",
         "phase05-citizens/bondEngine.js::loadNeighborhoodsFromSheet_",
+        "phase05-citizens/civicInitiativeEngine.js::engineClockHold_",
         "phase05-citizens/migrationTrackingEngine.js::buildNeighborhoodPressureMap_",
         "phase05-citizens/migrationTrackingEngine.js::buildRelocationHoodState_",
         "phase05-citizens/neighborhoodTrajectoryEngine.js::updateNeighborhoodTrajectories_",
@@ -4727,6 +4728,7 @@
         "phase05-citizens/bondEngine.js::householdHousingById_",
         "phase05-citizens/bondEngine.js::marryCitizens_",
         "phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_",
+        "phase05-citizens/civicInitiativeEngine.js::engineClockHold_",
         "phase05-citizens/educationCareerEngine.js::settleAdulthood_",
         "phase05-citizens/generationalWealthEngine.js::processMoneyLoop_",
         "phase05-citizens/generationalWealthEngine.js::trackHomeOwnership_",
@@ -4852,6 +4854,7 @@
     "Neighborhood_Demographics": {
       "writers": [],
       "readers": [
+        "phase05-citizens/civicInitiativeEngine.js::engineClockHold_",
         "phase05-citizens/educationCareerEngine.js::checkSchoolQuality_",
         "phase05-citizens/educationCareerEngine.js::updateMinorSchoolQuality_",
         "utilities/cycleRollback.js::rollbackToCycle78",

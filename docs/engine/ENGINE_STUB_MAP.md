@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-09-20 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-09-21 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -1491,6 +1491,15 @@
 - **applyEngineClockHold_(ctx, row, cycle, engineWillAct, initId, iNextActionCycle, iNotes, iLastUpdated)**
 
 - **engineClockHold_(notes, nextActionCycle, cycle, engineWillAct)**
+  Sheets: Household_Ledger, Neighborhood_Demographics, Neighborhood_Map
+
+- **missingInitiativeStageColumns_(header)**
+
+- **ensureInitiativeStageColumns_(sheet, header)**
+
+- **civicStageRequirementWith_(catalogByDomain, input)**
+
+- **civicStageRequirement_(input)**
 
 ### educationCareerEngine.js
 - **canonicalEducationWrite_(v)**
@@ -4156,4 +4165,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 184
-**Functions mapped:** 1444
+**Functions mapped:** 1448

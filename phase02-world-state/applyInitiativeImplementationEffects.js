@@ -282,6 +282,10 @@ function applyInitiativeImplementationEffects_(ctx) {
     var initKey = (iInitId !== -1 ? (row[iInitId] || '').toString().trim() : '') || name;
     var prevPhase = prevPhases ? (prevPhases[initKey] || null) : null;
     var phaseMoved = !!prevPhase && String(prevPhase) !== String(phase);
+    // civic.38 Task 5 revival guard, business side: coming back from a failing
+    // phase (stalled / blocked / suspended / defunded) is getting back to where
+    // you were, not an advance — otherwise a stall/revive loop farms the lift.
+    if (phaseMoved && PHASE_INTENSITY[String(prevPhase)] < 0) phaseMoved = false;
 
     // ─────────────────────────────────────────────────────────────────────
     // engine.131 T7 reconciliation — sports is the source of truth

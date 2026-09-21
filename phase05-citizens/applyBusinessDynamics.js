@@ -483,6 +483,8 @@ function applyBusinessDynamics_(ctx) {
     var ownerRoom = ownerB ? (ownerB.composure >= 1 ? 1 : ownerB.composure <= -1 ? -1 : 0) * pressureBar_(ctx, 'dialOwnerStreakRoom') : 0;
     if (ownerRoom) { out.ownerRoom = (out.ownerRoom || 0) + 1; }
     out.rows++;
+    if (inputs.initiativeAdvanced) out.initLift = (out.initLift || 0) + 1;   // engine.250: the bench reads these off the log line
+    if (inputs.initiativeFailing) out.initDrag = (out.initDrag || 0) + 1;
     if (d.drift !== 0) out.drifted++;
     if (d.streak > 0) out.distressed++;
     if (d.disrupted) out.disrupted++;
@@ -568,7 +570,8 @@ function applyBusinessDynamics_(ctx) {
   S.businessDynamicsState = state; // finalizeCycleState carries it as businessDynamics
   Logger.log('applyBusinessDynamics_ engine.96: ' + out.rows + ' businesses, ' + out.drifted + ' drifted, ' +
     out.distressed + ' in distress, ' + out.disrupted + ' disrupted, ' + out.successWindows + ' under success pressure, ' +
-    out.shed + ' shed, ' + out.closed + ' closing now, ' + out.closing + ' winding down, mayor ' + mayorApproval);
+    out.shed + ' shed, ' + out.closed + ' closing now, ' + out.closing + ' winding down, mayor ' + mayorApproval +
+    ', initiative lift ' + (out.initLift || 0) + ' / drag ' + (out.initDrag || 0));
   return out;
 }
 

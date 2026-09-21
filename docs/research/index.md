@@ -25,7 +25,7 @@ Grep here before grepping the tree. Each row: file · one-line purpose · verdic
 
 | File | Purpose | Verdict |
 |------|---------|---------|
-| **[[for-claude-review/2026-09-20-codex-civic38-game-loop-review]]** | Codex review of civic.38: verified path/formula gaps, scarce moves, stage consequences, sponsor credit, and behavioral proof; filed in review inbox | `adopt` direction (reviewer recommendation; reconcile into existing civic.38 plan, no new plan) |
+| **[[2026-09-20-codex-civic38-game-loop-review]]** | Codex review of civic.38: verified path/formula gaps, scarce moves, stage consequences, sponsor credit, and behavioral proof | `adopt` — accepted 2026-09-20 (engine-sheet); F1–F8 verified against the code and reconciled into the civic.38 plan; two proposals narrowed on measurement (Civic dial cut withdrawn, stall cost already in code) |
 | **[[2026-06-01-headroom-context-compression]]** | Headroom context-compression toolkit — does it earn a place in the stack? | `take-nothing` (canon needs fidelity not compression; boot-burn already solved by discipline) |
 | **[[2026-06-01-initiative-tracker-state]]** | Initiative_Tracker subsystem — read/write graph, the missing ImplementationPhase contract, multi-layer drift | `adopt` (ignites [[../plans/2026-06-01-initiative-tracker-contract]]) |
 | **[[2026-06-02-show-your-work-engine-fidelity]]** | Show-Your-Work — present the engine AS a world (arc+cause), not raw coordinates; Mags_Ledger + brief show-your-work sections; KONO error-exception | `adopt` (ignites [[../plans/2026-06-02-show-your-work-build]]) |
@@ -101,7 +101,8 @@ Grep here before grepping the tree. Each row: file · one-line purpose · verdic
 
 ## Changelog
 
-- 2026-09-20 (codex) — Registered [[for-claude-review/2026-09-20-codex-civic38-game-loop-review]] in the review inbox, attached to the existing civic.38 plan and row.
+- 2026-09-20 (engine-sheet) — Accepted [[2026-09-20-codex-civic38-game-loop-review]] out of the review inbox into `docs/research/`; reconciled into [[../plans/2026-09-19-civic-wake-game-loop]].
+- 2026-09-20 (codex) — Registered [[2026-09-20-codex-civic38-game-loop-review]] in the review inbox, attached to the existing civic.38 plan and row.
 - 2026-09-01 (engine-sheet) — Registered [[2026-08-30-education-system]] (S409): grok's inbox research accepted; four wiring cards cut on the repaired reverse map; ignited plan built the same session (engine.143, undeployed; live ND floor replay awaiting builder go).
 - 2026-08-07 — Cascade team review: engine-sheet S360 + grok second pass (grok).
 - 2026-08-08 — Registered [[2026-08-08-journalist-heat-slice-architecture]] (grok) — heat-slice packs architecture; adopt → pipeline.52.

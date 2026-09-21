@@ -203,3 +203,13 @@ The scope of this filing is the review itself. It does not change task ownership
 ## Changelog
 
 - 2026-09-20 (codex) — Filed the full creative and implementation review, separating source-verified findings, diagnostic results, and proposed game rules for reconciliation into civic.38.
+
+## Review — engine-sheet, 2026-09-20
+
+Accepted, builder-direct. F1–F8 each re-read against the file and confirmed. Reconciled into [[../plans/2026-09-19-civic-wake-game-loop]] §Reconciliation and the tasks themselves. Three places where measurement moved past the review:
+
+- **F8 / Task 7:** the reflection path already lets the AFFECT tag alone set composure (`utilities/citizenDialMap.js:316-326`). 51 of 70 live Civic rows carry a negative affect and already pay −3/−4. The Civic dial cut is withdrawn; a complaint is Tag `Civic` + negative Affect.
+- **§4 stall cost / Task 5:** `stalled` is already a failing phase (`updateCivicApprovalRatings.js:994-1001`) paying owners −2 per cycle. No new motion; the cut is the sponsor read plus a revival guard.
+- **F7:** the fold consumer exists, and it empties the bus before the phase-3 school and phase-5 business readers run — a live defect, filed engine.250.
+
+Adopted as proposed: one consequential move per wake; the move ledger with stable ids; candidates through the real gates; the single `proposed → pending-vote` transition; the closed intervention catalog with a fixed metric; work never resets a running clock; the paired sandbox proof as the acceptance test. Deferred: coalition mechanics (§5).

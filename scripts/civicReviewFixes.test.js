@@ -70,3 +70,14 @@ test('F4 fallback audits must match the requested Cycle and office overrides can
   const game = slice.buildGameBlocks({root,cycle:999,office:{...office,neighborhoods:['West Oakland']},officeMap:{offices:[]},audit});
   assert.match(game.geographyIssue, /turf disagrees/);
 }));
+test('F5 new records drop legacy action before wall rendering and preserve speech and accepted moves', () => {
+  const mv = run.validateDatawakeMoves([{type:'answer',text:'SYNTHETIC answer'}], {office});
+  const rec = run.datawakeRecord({office,cycle:999,date:'SYNTHETIC-date',answeredModel:'SYNTHETIC-model',
+    j:{statement:'SYNTHETIC speech',action:'SYNTHETIC fabricated action',numberMoved:'SYNTHETIC signal'},mv});
+  assert.equal(Object.hasOwn(rec, 'action'), false);
+  assert.deepEqual(rec.moves, mv.accepted);
+  const wall = require('./officeWall');
+  assert.doesNotMatch(wall.lineFromDatawake(rec).text, /fabricated action/);
+  assert.match(wall.lineFromDatawake(rec).text, /SYNTHETIC speech/);
+  assert.match(wall.lineFromDatawake({statement:'historical synthetic',action:'legacy synthetic'}).text, /legacy synthetic/);
+});

@@ -2075,6 +2075,20 @@ function datawakeUserPrompt(pack, wallInj, office) {
   ].join('\n');
 }
 
+// Only accepted structured moves belong to new records. Historical wall
+// readers retain legacy action support, but model extras never reach them.
+function datawakeRecord({ office, cycle, date, answeredModel, j, mv }) {
+  return {
+    office: voiceSlug(office.agentDir), agentDir: office.agentDir, holder: office.holder,
+    popid: office.popid, title: office.title, date, cycle: Number(cycle),
+    model: answeredModel, statement: j.statement,
+    moves: mv.accepted,
+    movesRejected: mv.rejected.map(r => ({ type: (r.move && r.move.type) || null, reason: r.reason })),
+    numberMoved: j.numberMoved || null, ranAt: new Date().toISOString(),
+    fellBackFrom: answeredModel === (office.model || 'deepseek/deepseek-chat') ? null : office.model,
+  };
+}
+
 function datawakeStatementText(cand) {
   if (!cand) return '';
   if (typeof cand.statement === 'string') return cand.statement.trim();
@@ -2651,15 +2665,7 @@ async function runDatawake() {
       if (mv.accepted.length) {
         log('[datawake] MOVE ' + office.agentDir + ' — ' + mv.accepted[0].type + ' ' + JSON.stringify(mv.accepted[0].payload).slice(0, 120));
       }
-      const rec = {
-        office: voiceSlug(office.agentDir), agentDir: office.agentDir, holder: office.holder,
-        popid: office.popid, title: office.title, date, cycle: Number(cycle),
-        model: answeredModel, statement: j.statement, action: j.action || null,
-        moves: mv.accepted,
-        movesRejected: mv.rejected.map(r => ({ type: (r.move && r.move.type) || null, reason: r.reason })),
-        numberMoved: j.numberMoved || null, ranAt: new Date().toISOString(),
-        fellBackFrom: answeredModel === (office.model || 'deepseek/deepseek-chat') ? null : office.model,
-      };
+      const rec = datawakeRecord({ office, cycle, date, answeredModel, j, mv });
       const outPath = path.join(DATAWAKE_DIR, office.agentDir + '_' + date + '.json');
       fs.writeFileSync(outPath, JSON.stringify(rec, null, 2));
       const ledgerFile = appendMoveLedger(ROOT, cycle, moveLedgerLines(office, cycle, date, mv));
@@ -2783,7 +2789,7 @@ if (require.main === module) {
 
 module.exports = { modelChainFor, FALLBACK_MODELS, sentimentWord, crimeWord, retailWord, ailmentPerception, cleanLines, parseApprovalTable, parseHoodTable, outputContract, datawakeUserPrompt, datawakeStatementText, districtPackRef, weekCarryBlock, spliceWeekCarry, loadWeekCarry, hearingHasPhase, noPhaseCheck, prepTargetDirForHood, validateVoiceJson, ungroundedNumbers, statementNumberCheck, composeChecks,
   // civic.38 Task 1 — closed move set (exported for scripts/cron-civic-game.test.js)
-  MOVE_TYPES, validateDatawakeMoves, loadInterventionCatalog, hoodAuthorityReason, appendMoveLedger, moveLedgerLines,
+  MOVE_TYPES, validateDatawakeMoves, loadInterventionCatalog, hoodAuthorityReason, appendMoveLedger, moveLedgerLines, datawakeRecord,
   // civic.38 Task 2 — move ledger fold (Sunday close)
   loadMoveLedgerFolded, foldMovesIntoDecisions, slugForInitiative,
   // civic.38 Task 6.3 — petition sweep

@@ -6,7 +6,7 @@ type: plan
 tags: [civic, architecture, draft]
 sources:
   - Builder direction 2026-09-21 — Sunday works over feels; terse decisions; whole sim heading to batch with a ~24h window; hearing must be able to matter
-  - docs/research/2026-09-21-batch-inference-options.md — Anthropic Message Batches adopt, OpenRouter batch watch
+  - docs/research/2026-09-21-batch-inference-options.md — OpenRouter batch is the live route (corrected); Anthropic direct needs credits
   - logs/civic-cron.log — C108 Sunday chain HALT at the voice step (2026-09-20)
   - scripts/cron-civic-run.js — STAGES map, callOpenRouter, runChain / runClose
 pointers:
@@ -53,7 +53,7 @@ pointers:
 ### Task 3: Batch client and submit/collect stages
 
 - **Files:** `scripts/orBatch.js` — extend to multi-request batches; `scripts/cron-civic-run.js`; `scripts/cron-work-wake.js`.
-- **Steps:** (1) `submit`: build every seat's pack and prompt, send one Anthropic batch with a `custom_id` per seat and cycle, store the batch id in the state file. (2) `collect`: poll status with no model, stream results by `custom_id`, run the existing validation and grounding on each. (3) Resubmit only rejected or expired seats. (4) Set effort low and cap output tokens; on the strong models thinking bills as output. (5) Keep the same pack builders (`buildPack`) and move validators; only the transport changes.
+- **Steps:** (1) `submit`: build every seat's pack and prompt, send one OpenRouter batch (via `orBatch.js`) with a `custom_id` per seat and cycle, store the batch id in the state file. (2) `collect`: poll status with no model, stream results by `custom_id`, run the existing validation and grounding on each. (3) Resubmit only rejected or expired seats. (4) Set effort low and cap output tokens; on the strong models thinking bills as output. (5) Keep the same pack builders (`buildPack`) and move validators; only the transport changes.
 - **Verify:** acceptance 3 and 4 against a fake client.
 
 ### Task 4: Directive and session from close output

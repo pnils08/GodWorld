@@ -441,6 +441,8 @@ function updateCivicApprovalRatings_(ctx) {
       var tOpp = findApprCol_(tHeaders, ['OppositionFaction', 'oppositionfaction']);
       var tNext = findApprCol_(tHeaders, ['NextActionCycle', 'nextactioncycle']);
       var tId = findApprCol_(tHeaders, ['InitiativeID', 'initiativeid']);
+      // civic.38 Task 5 step 1 (review F5): the seat that authored the row.
+      var tPropOffice = findApprCol_(tHeaders, ['ProposingOffice', 'proposingoffice']);
 
       // engine.139 (G-PF34): last cycle's phase per initiative, for transition
       // detection. Gated on the carry-forward being EXACTLY one cycle old — a
@@ -476,6 +478,7 @@ function updateCivicApprovalRatings_(ctx) {
           neighborhoods: tHoods !== -1 ? (tr[tHoods] || '').toString().trim() : '',
           leadFaction: tLead !== -1 ? (tr[tLead] || '').toString().trim().toUpperCase() : '',
           oppFaction: tOpp !== -1 ? (tr[tOpp] || '').toString().trim().toUpperCase() : '',
+          proposingOffice: tPropOffice !== -1 ? (tr[tPropOffice] || '').toString().trim().toUpperCase() : '',
           motion: classifyInitiativeMotion_(phase, nextActionCycle, cycle, prevPhase)
         });
       }
@@ -568,14 +571,21 @@ function updateCivicApprovalRatings_(ctx) {
     // ─────────────────────────────────────────────────────────────────────
     var districtHoods = getDistrictHoods_(ctx, district);
     var isMayor = officeId.indexOf('MAYOR') === 0;
+    var officeIdKey = String(officeId).trim().toUpperCase();
 
     for (var ii = 0; ii < initiatives.length; ii++) {
       var init = initiatives[ii];
 
+      // civic.38 Task 5 step 1: the sponsor owns its own bill. Owner used to mean
+      // mayor-or-lead-faction only, so a seat's own row was scored to its bloc and
+      // a sponsor outside the lead faction owned nothing. Matched on OfficeId
+      // (ProposingOffice is 'MAYOR-01' / 'COUNCIL-D<n>', createInitiative AUTHOR_OFFICE).
+      var isSponsor = !!init.proposingOffice && init.proposingOffice === officeIdKey;
+
       // Check if initiative affects this official's district
       var affectsDistrict = false;
-      if (isMayor) {
-        affectsDistrict = true; // Mayor affected by all initiatives
+      if (isMayor || isSponsor) {
+        affectsDistrict = true; // Mayor affected by all initiatives; a sponsor by its own, wherever it lands
       } else {
         var initHoods = init.neighborhoods.split(/[,;]+/).map(function(h) { return h.trim().toLowerCase(); });
         for (var dhi = 0; dhi < districtHoods.length; dhi++) {
@@ -592,7 +602,7 @@ function updateCivicApprovalRatings_(ctx) {
       var supportedByFaction = (init.leadFaction === faction);
       var opposedByFaction = (init.oppFaction === faction);
 
-      var owns = isMayor || supportedByFaction;
+      var owns = isMayor || isSponsor || supportedByFaction;
       var scored = approvalDeltaForInitiative_(init.motion, owns, opposedByFaction);
       // v1.7: diminishing silence stacking. Silence on an owned initiative
       // scores -6 / -3 / -2 / -1 / 0... in portfolio order, so the per-cycle
@@ -1038,6 +1048,11 @@ function classifyInitiativeMotion_(phase, nextActionCycle, cycle, prevPhase) {
   // engine.139: did this row MOVE since last cycle? Requires prior data; without
   // it nothing counts as a transition, which is the conservative direction.
   var moved = !!prevPhase && String(prevPhase) !== String(phase);
+  // civic.38 Task 5 step 2 — revival guard. `stalled` → prior phase is a changed,
+  // non-failing phase, so it used to read as `advanced` (+2): a stall/revive loop
+  // farmed approval. Getting back to where you were is not an advance.
+  var revived = moved && isFailing_(String(prevPhase)) && !isFailing_(phase);
+  if (revived) moved = false;
 
   if (isPerforming_(phase)) {
     // Finishing is an EVENT and pays once. Parked at complete is a STATE and
@@ -1046,6 +1061,10 @@ function classifyInitiativeMotion_(phase, nextActionCycle, cycle, prevPhase) {
     return moved ? 'completed' : 'complete-held';
   }
   if (isFailing_(phase)) return 'failed';
+
+  // The revival Cycle itself costs nothing either: somebody just acted on the row,
+  // so it is not silent, whatever its clock says.
+  if (revived) return 'sitting';
 
   // A row that moved is not sitting and is not silent, whatever its clock says —
   // somebody acted on it this cycle.

@@ -220,5 +220,41 @@ console.log('═══ F. Full run on the live C106 seats — the C107 projectio
   check('F7 approval writes queued for every changed seat', intents.length === ctx.summary.approvalChanges.length);
 }
 
+console.log('═══ G. civic.38 Task 5 — the sponsor owns its bill; a revival is not an advance');
+{
+  const headers = ['OfficeId', 'Title', 'District', 'Holder', 'PopId', 'Status', 'Approval', 'Faction', 'HighApprovalStreak', 'AutoScandalUntilCycle', 'AutoScandalSource', 'VotingPower', 'Notes'];
+  const seats = [
+    ['MAYOR-01', 'Mayor', 'citywide', 'Avery Santana', 'POP-00034', 'active', 64, 'OPP', 0, '', '', 'yes', ''],
+    ['COUNCIL-D4', 'D4', 'D4', 'Ramon Vega', 'POP-00504', 'active', 51, 'IND', 0, '', '', 'yes', '']
+  ];
+  const run = (tHeaders, row, prev, vegaApproval) => {
+    seats[1][6] = vegaApproval === undefined ? 51 : vegaApproval;
+    global.queueCellIntent_ = () => {}; global.recordRipple_ = () => {}; global.recordHookRipple_ = () => {};
+    global.safeRand_ = () => () => 0.99; global.getCitizenDialBands_ = () => null;
+    const canon = { list: Object.keys(C106), set: {}, core: [], district: {}, byDistrict: DISTRICTS };
+    const ctx = { config: { ...CEILING, ...CFG_KEYS, cycleCount: 107 }, mode: {}, ledger: { headers: ['POPID', 'First', 'Last', 'DialState'], rows: [] },
+      summary: { cycleId: 107, absoluteCycle: 107, canonHoods: canon, neighborhoodState: C106, previousCycleState: { cycle: 106, initiativePhases: { 'INIT-900': prev } }, editionDomainBalance: {} },
+      ss: { getSheetByName(n) {
+        if (n === 'Civic_Office_Ledger') return { getDataRange: () => ({ getValues: () => [headers.slice(), ...seats.map(r => r.slice())] }) };
+        if (n === 'Initiative_Tracker') return { getDataRange: () => ({ getValues: () => [tHeaders.slice(), row.slice()] }) };
+        return null; } } };
+    A.updateCivicApprovalRatings_(ctx);
+    const v = ctx.summary.approvalChanges.filter(c => c.holder === 'Ramon Vega')[0];
+    return v ? v.reasons.join('; ') : '';
+  };
+  // A West Oakland row (outside D4), led by OPP — Vega (IND, D4) sponsored it.
+  const H = ['InitiativeID', 'Name', 'Status', 'ImplementationPhase', 'AffectedNeighborhoods', 'LeadFaction', 'OppositionFaction', 'NextActionCycle', 'ProposingOffice'];
+  const withSponsor = run(H, ['INIT-900', 'Vega Bill', 'passed', 'implementation-active', 'West Oakland', 'OPP', '', 107, 'COUNCIL-D4'], 'vote-ready');
+  const noSponsor = run(H, ['INIT-900', 'Vega Bill', 'passed', 'implementation-active', 'West Oakland', 'OPP', '', 107, 'MAYOR-01'], 'vote-ready');
+  const noColumn = run(H.slice(0, 8), ['INIT-900', 'Vega Bill', 'passed', 'implementation-active', 'West Oakland', 'OPP', '', 107], 'vote-ready');
+  check('G1 a sponsor outside the lead faction and outside the row\'s hoods takes the OWNER delta on its own row (+2)', /Vega Bill advanced \(\+2\)/.test(withSponsor), withSponsor);
+  check('G2 the same row sponsored by someone else never reaches that seat; a tracker without the column behaves as before', !/Vega Bill/.test(noSponsor) && !/Vega Bill/.test(noColumn), noSponsor + ' | ' + noColumn);
+  const stalledNow = run(H, ['INIT-900', 'Vega Bill', 'passed', 'stalled', 'West Oakland', 'OPP', '', 107, 'COUNCIL-D4'], 'implementation-active', 60);   // at his target (60) the level term is 0, so the −2 is the whole change
+  const heldStall = run(H, ['INIT-900', 'Vega Bill', 'passed', 'stalled', 'West Oakland', 'OPP', '', 107, 'COUNCIL-D4'], 'stalled', 60);
+  const revivedRow = run(H, ['INIT-900', 'Vega Bill', 'passed', 'implementation-active', 'West Oakland', 'OPP', '', 90, 'COUNCIL-D4'], 'stalled');
+  check('G3 stall entry and a held stall both cost the sponsor −2 (a condition, every Cycle)', /chose fail \(-2\)/.test(stalledNow) && /chose fail \(-2\)/.test(heldStall), stalledNow + ' | ' + heldStall);
+  check('G4 revival pays 0 — not advanced, and not silence even on an overdue clock', !/advanced/.test(revivedRow) && !/silence/.test(revivedRow), revivedRow);
+}
+
 console.log((failed === 0 ? 'ALL ' + passed + ' PASS' : failed + ' FAILURES / ' + passed + ' pass'));
 process.exit(failed === 0 ? 0 : 1);

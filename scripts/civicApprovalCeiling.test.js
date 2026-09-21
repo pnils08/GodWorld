@@ -272,6 +272,10 @@ console.log('═══ F. v1.3 motion physics — nothing free, silence costs mo
     A.classifyInitiativeMotion_('complete', 90, 104, 'operational') === 'completed' &&
     A.classifyInitiativeMotion_('complete', 90, 104, 'complete') === 'complete-held' &&
     A.classifyInitiativeMotion_('stalled', 90, 104, null) === 'failed');
+  check('F5b civic.38 Task 5 revival guard: stalled → live phase is sitting even on an overdue clock; live → live still advances; blocked → complete is complete-held, not a +3',
+    A.classifyInitiativeMotion_('construction-active', 90, 107, 'stalled') === 'sitting' &&
+    A.classifyInitiativeMotion_('construction-active', 107, 107, 'construction-planning') === 'advanced' &&
+    A.classifyInitiativeMotion_('complete', 107, 107, 'blocked') === 'complete-held');
   check('F6 finishing, advancing, or being right about a failure can raise',
     A.approvalDeltaForInitiative_('completed', true, false).delta === 3 &&
     A.approvalDeltaForInitiative_('complete-held', true, false).delta === 0 &&

@@ -244,6 +244,7 @@ These files live at `/root/GodWorld/` and are catalogued here for completeness. 
 
 ## `docs/reference/` — operational how-tos
 
+- **[[plans/2026-09-22-agent-model-fit-test]]** — pre-registered test of which model class an in-world agent (council seat, civic reporter, Elias Varek, Mags) benefits from: frozen prompts, reasoning on/off arms, deterministic + blind scoring, decision rule. Waits on the builder's Anthropic credit. Draft. *(plan, research, draft)*
 - **[[plans/2026-09-21-civic-sunday-stage-machine]]** — civic week boundary as an idempotent stage machine with model-free mechanical close and batch submit/collect (Anthropic Message Batches); replaces the clock-timed Sunday chain. Draft, civic.39. *(plan, civic, draft)*
 - **[[reference/CIVIC_GAME_LOOP]]** — how the civic system works now: seat weekly loop, moves, stages and losing clock, petitions, which domains move the world, and what is still open. Working draft mapped live during civic.38; labels each part live / inert / not built. *(reference, civic, active, draft)*
 - **[[reference/CROSS_LANE_MESSAGING]]** — reaching a non-Claude lane (agy/grok/kimi/codex) mid-session. `SendMessage` sees Claude sessions only; the rest are tmux panes reached with `send-keys -l` + a **separate** `C-m`. Capture-pane first — a pane at bare `bash` executes your message as shell commands. Manual until governance.47's `laneMessage.js` lands. *(reference, infrastructure, active)*

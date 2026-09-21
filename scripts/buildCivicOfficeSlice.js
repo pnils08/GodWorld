@@ -793,23 +793,41 @@ function loadTrackerRows(root, cycle) {
   return readJsonl(path.join(root || ROOT, 'output', 'beats', 'Initiative_Tracker.jsonl'));
 }
 
-// Task 4 owns stage requirements. Until its shared requirement helper lands,
-// report the recorded Stage without inventing a local advancement rule.
-function boardNeedText(row) {
-  const phase = String(row.ImplementationPhase || '');
-  if (phase === 'stalled') return 'stalled — one work move revives it';
-  const stage = String(row.Stage || '');
-  if (stage) return stage + ' — next-stage requirements unavailable (Task 4 shared helper pending)';
-  if (String(row.Status || '') === 'proposed' && !String(row.VoteCycle || '').trim()) {
-    return 'petition-pending — signatures move it to a vote';
+function boardStageView(row, context) {
+  let requirement;
+  let metricEvidence = null;
+  try {
+    const { stageRequirement } = require('../lib/initiativePhaseContract');
+    if (typeof stageRequirement !== 'function') throw new Error('Task 4 shared helper unavailable');
+    const input = { stage:row.Stage, phase:row.ImplementationPhase, policyDomain:row.PolicyDomain,
+      lastWorkCycle:row.LastWorkCycle, lastStageChangeCycle:row.LastStageChangeCycle };
+    requirement = stageRequirement(input);
+    if (requirement && requirement.next === 'Delivering' && !requirement.blocked) {
+      metricEvidence = require('./civicStageEvidence').measureStageMovement(row, context);
+      requirement = stageRequirement({...input,metricMoved:metricEvidence.available && metricEvidence.metricMoved});
+    }
+    if (requirement) return {requirement,metricEvidence,text:requirement.text +
+      (metricEvidence && !metricEvidence.available ? ' — metric evidence unavailable: '+metricEvidence.reason : '')};
+  } catch (e) {
+    if (String(row.Stage || '').trim()) return {requirement:null,metricEvidence:null,
+      text:String(row.Stage)+' — next-stage requirements unavailable: '+e.message};
   }
-  return String(row.NextScheduledAction || '').trim() || 'advance or hold';
+  // Blank Stage is explicitly legacy. Preserve its scheduling advice.
+  const phase = String(row.ImplementationPhase || '');
+  const text = phase === 'stalled' ? 'stalled — one work move revives it'
+    : String(row.Status || '') === 'proposed' && !String(row.VoteCycle || '').trim()
+      ? 'petition-pending — signatures move it to a vote'
+      : String(row.NextScheduledAction || '').trim() || 'advance or hold';
+  return {requirement:null,metricEvidence:null,text};
+}
+function boardNeedText(row, context) {
+  return boardStageView(row, context).text;
 }
 
 // My board: rows the seat sponsors (ProposingOffice) plus rows touching its
 // hoods after child→parent fold; the mayor sees all. (Plan Task 3.1 — a
 // sponsor-only board leaves nine seats empty on day one.)
-function boardRowsFor(office, rows, childToParent) {
+function boardRowsFor(office, rows, childToParent, context) {
   const isMayor = String(office.officeId || '') === 'MAYOR-01';
   const turf = new Set(turfHoods(office).map(h => foldHood(h, childToParent).toLowerCase()));
   const out = [];
@@ -819,6 +837,7 @@ function boardRowsFor(office, rows, childToParent) {
     const hoods = String(row.AffectedNeighborhoods || '').split(',').map(s => s.trim()).filter(Boolean);
     const hoodHit = hoods.some(h => turf.has(foldHood(h, childToParent).toLowerCase()));
     if (!isMayor && !sponsored && !hoodHit) continue;
+    const stageView = boardStageView(row, context);
     out.push({
       id: row.InitiativeID,
       name: row.Name,
@@ -834,7 +853,9 @@ function boardRowsFor(office, rows, childToParent) {
         ? Number(row.LastStageChangeCycle) : null,
       sponsored,
       hoods,
-      needsNext: boardNeedText(row),
+      needsNext: stageView.text,
+      requirement: stageView.requirement,
+      metricEvidence: stageView.metricEvidence,
     });
   }
   out.sort((a, b) => String(a.id).localeCompare(String(b.id)));
@@ -1206,7 +1227,24 @@ function buildGameBlocks(opts) {
     if (geographyIssue) throw new Error(geographyIssue);
     rows = loadTrackerRows(root, cycle);
     if (rows === null) throw new Error('Initiative_Tracker dump absent');
-    board = boardRowsFor(office, rows, c2p);
+    // Optional local config evidence; never use stale historical config or
+    // hard-code the builder's dials when a current export is absent.
+    let config = null, configIssue = null;
+    try {
+      const configRows = readJsonl(path.join(root || ROOT, 'output', 'beats', 'World_Config.jsonl'));
+      if (configRows) {
+        config = Object.create(null);
+        for (const r of configRows) {
+          if (!String(r.Key || '').trim() || Object.hasOwn(config,r.Key)) throw new Error('World_Config invalid/duplicate key');
+          config[r.Key] = r.Value;
+        }
+      }
+    } catch (e) { config = null; configIssue = e.message; }
+    const audits = new Map([[Number(cycle),audit]]);
+    board = boardRowsFor(office, rows, c2p, {cycle,config,configIssue,readAudit:c=>{
+      if (!audits.has(c)) audits.set(c,loadAudit(root,c));
+      return audits.get(c);
+    }});
   } catch (e) { boardIssue = e.message; }
   const safely = (fn, fallback) => {
     try { return fn(); }

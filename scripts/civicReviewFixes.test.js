@@ -126,7 +126,8 @@ test('F6 prior terminal outcomes survive the Cycle boundary alongside current pe
 test('F7 stalled phase takes precedence over every recognized Stage', () => {
   for (const Stage of ['Funded','Standing','Delivering']) {
     assert.match(slice.boardNeedText({Stage,ImplementationPhase:'stalled'}), /stalled/);
-    assert.match(slice.boardNeedText({Stage,ImplementationPhase:'active'}), /requirements unavailable/);
+    assert.equal(slice.boardNeedText({Stage,ImplementationPhase:'active'}),
+      require('../lib/initiativePhaseContract').stageRequirement({stage:Stage,phase:'active'}).text);
   }
   assert.match(slice.boardNeedText({Status:'proposed',VoteCycle:''}), /petition-pending/);
 });

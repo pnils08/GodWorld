@@ -1260,16 +1260,20 @@ test('F6: Move memory retains prior terminal outcomes across cycle boundaries al
   }
 });
 
-test('F7: boardNeedText prioritizes stalled phase over Stage and marks next-stage requirements as pending helper', () => {
+test('F7: boardNeedText uses the shared helper, preserves stalled priority and accepts closing-Cycle work', () => {
   for (const Stage of ['Funded', 'Standing', 'Delivering']) {
     const stalledRow = { Stage, ImplementationPhase: 'stalled' };
     assert.match(civicSlice.boardNeedText(stalledRow), /stalled — one work move revives it/);
 
     const activeRow = { Stage, ImplementationPhase: 'active' };
-    assert.match(civicSlice.boardNeedText(activeRow), /next-stage requirements unavailable \(Task 4 shared helper pending\)/);
+    assert.equal(civicSlice.boardNeedText(activeRow), phaseContract.stageRequirement({stage:Stage,phase:'active'}).text);
   }
   const proposedRow = { Status: 'proposed', VoteCycle: '' };
   assert.match(civicSlice.boardNeedText(proposedRow), /petition-pending — signatures move it to a vote/);
+  const fundedRow = {Stage:'Funded',ImplementationPhase:'announced',LastWorkCycle:108,LastStageChangeCycle:108};
+  assert.match(civicSlice.boardNeedText(fundedRow), /work landed/);
+  assert.match(civicSlice.boardNeedText({...fundedRow,LastWorkCycle:107}), /one work move/);
+  assert.match(civicSlice.boardNeedText({Stage:'Standing',PolicyDomain:'economic'}), /metric evidence unavailable/);
 });
 
 test('F8: Proposal condition evidence computes from countPetition and gamePromptView caps history without dropping IDs', () => {

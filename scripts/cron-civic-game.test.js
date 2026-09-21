@@ -474,6 +474,8 @@ test('T3.1: Live boardRowsFor: Mayor sees all; D1 sees overlap (INIT-001/002/007
 test('T3.2: Live loadPetitionPool in temp workspace filters Civic complaints and drops office holders', () => {
   const ws = createTempWorkspace();
   try {
+    ws.writeJson('output/beats/meta.json', {cycle:108});
+    ws.writeJson('output/simulation_ledger_snapshot.meta.json', {cycle:108});
     const reflections = [
       // Citizen 1 complaint in D1 (West Oakland)
       { Timestamp: '2026-09-20T10:00:00Z', POPID: SYNTH_POP.CITIZEN_WEST_OAK_1, Cycle: '108', Event: 'Civic', Affect: 'Frustrated', Snippet: 'Street repairs stalled.', Applied: 'yes' },
@@ -551,6 +553,7 @@ test('T3.4: Pack blocks cap length (~600 chars) and degrade gracefully to stated
 test('T3.5: Missing citizen snapshot sets available:false with stated absence for district seat', () => {
   const ws = createTempWorkspace();
   try {
+    ws.writeJson('output/beats/meta.json', {cycle:108});
     // Reflection intake exists on disk, but simulation_ledger_snapshot.jsonl is absent
     const reflections = [
       { Timestamp: '2026-09-20T10:00:00Z', POPID: SYNTH_POP.CITIZEN_WEST_OAK_1, Cycle: '108', Event: 'Civic', Affect: 'Frustrated', Snippet: 'Pothole issue.' }

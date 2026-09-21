@@ -24,12 +24,25 @@ test('F1 inherited and malformed interventions cannot consume the valid move', (
   }
 });
 test('F3 petition join folds child areas and needs no display name or active status', () => workspace((root, write) => {
+  write('output/beats/meta.json', JSON.stringify({cycle:999}));
+  write('output/simulation_ledger_snapshot.meta.json', JSON.stringify({cycle:999}));
   write('output/beats/Reflection_Intake.jsonl', JSON.stringify({POPID:'POP-99901',Cycle:999,Tag:'Civic',Affect:'Angry',ReflectionExcerpt:'SYNTHETIC'}));
   write('output/simulation_ledger_snapshot.jsonl', JSON.stringify({POPID:'POP-99901',Neighborhood:'Coliseum',Status:'hospitalized'}));
   const result = slice.loadPetitionPool(root, office, ['East Oakland'], {offices:[]}, {coliseum:'East Oakland'});
   assert.equal(result.complaints.length, 1);
   assert.equal(result.complaints[0].hood, 'East Oakland');
   assert.equal(result.complaints[0].snippet, 'SYNTHETIC');
+}));
+test('R1 petition display includes current and two prior Cycles, labels both windows and excludes invalid/future rows', () => workspace((root, write) => {
+  write('output/beats/meta.json', JSON.stringify({cycle:999}));
+  write('output/simulation_ledger_snapshot.meta.json', JSON.stringify({cycle:999}));
+  write('output/simulation_ledger_snapshot.jsonl', JSON.stringify({POPID:'POP-99901',Neighborhood:'East Oakland'}));
+  write('output/beats/Reflection_Intake.jsonl', [996,997,998,999,1000,'bad'].map(Cycle => JSON.stringify({POPID:'POP-99901',Cycle,Tag:'Civic',Affect:'Angry',ReflectionExcerpt:'SYNTHETIC'})).join('\n'));
+  const pool = slice.loadPetitionPool(root, office, ['East Oakland'], {offices:[]}, {},999);
+  assert.deepEqual(pool.complaints.map(c=>Number(c.cycle)),[999,998,997]);
+  assert.match(pool.text,/C997.*C999/);
+  assert.match(pool.text,/counter.*C999 only/i);
+  assert.equal(pool.invalidCycleRows,1);
 }));
 test('F4 corrupt rows and ambiguous geography cannot produce partial authority', () => workspace((root, write) => {
   write('broken.jsonl', '{"InitiativeID":"SYNTHETIC"}\n{broken');

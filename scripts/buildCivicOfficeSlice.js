@@ -926,10 +926,9 @@ function loadPetitionPool(root, office, hoods, officeMap, childToParent, cycle) 
     return { available: false, complaints: [], participation: [],
       text: 'Petition pool unavailable — Reflection_Intake is not in the beats dump yet (Task 6).' };
   }
-  if (cycle != null) {
-    requireSnapshotCycle(root, 'beats/meta.json', cycle);
-    if (hoods && hoods.length) requireSnapshotCycle(root, 'simulation_ledger_snapshot.meta.json', cycle);
-  }
+  if (cycle == null) cycle = JSON.parse(fs.readFileSync(path.join(root || ROOT, 'output', 'beats', 'meta.json'), 'utf8')).cycle;
+  requireSnapshotCycle(root, 'beats/meta.json', cycle);
+  const sinceCycle = Math.max(1, Number(cycle) - 2);
   const officePopids = new Set([...(officeMap.offices || []), ...(officeMap.projects || [])]
     .map(o => String(o.popid || '').toUpperCase()).filter(Boolean));
   const turf = new Set((hoods || []).map(h => foldHood(h, childToParent).toLowerCase()));
@@ -942,6 +941,7 @@ function loadPetitionPool(root, office, hoods, officeMap, childToParent, cycle) 
     return { available: false, complaints: [], participation: [],
       text: 'Petition pool unreadable — the citizen snapshot (simulation_ledger_snapshot.jsonl) is absent, so complainants cannot be located to your district. Complaints may exist that this pack cannot see.' };
   }
+  if (turf.size) requireSnapshotCycle(root, 'simulation_ledger_snapshot.meta.json', cycle);
   // Geographic membership is independent of the display-name/status filters
   // used to select featured constituents. Hospitalized residents still live here.
   const people = new Map();
@@ -952,12 +952,15 @@ function loadPetitionPool(root, office, hoods, officeMap, childToParent, cycle) 
     if (people.has(pop) && people.get(pop) !== hood) throw new Error('Conflicting citizen geography: ' + pop);
     people.set(pop, hood);
   }
-  let unlocatedRows = 0;
+  let unlocatedRows = 0, invalidCycleRows = 0;
   const complaints = [];
   const participation = [];
   for (const r of rows) {
     const tag = String(reflectionField(r, ['Event', 'Tag', 'event'])).trim();
     if (tag !== 'Civic') continue;
+    const rowCycle = Number(reflectionField(r, ['Cycle', 'cycle']));
+    if (!Number.isInteger(rowCycle) || rowCycle < 1) { invalidCycleRows++; continue; }
+    if (rowCycle < sinceCycle || rowCycle > Number(cycle)) continue;
     const pop = String(reflectionField(r, ['POPID', 'PopId', 'popid'])).toUpperCase();
     if (!pop || officePopids.has(pop)) continue;
     const hood = people.get(pop) || '';
@@ -976,19 +979,21 @@ function loadPetitionPool(root, office, hoods, officeMap, childToParent, cycle) 
     else participation.push(entry);
   }
   complaints.sort((a, b) => Number(b.cycle) - Number(a.cycle));
-  const bits = [];
+  const window = 'Complaint display C' + sinceCycle + '–C' + cycle + '; condition counter C' + cycle + ' only.';
+  const bits = [window];
   if (complaints.length) {
     bits.push('People are talking (' + complaints.length + ' complaint' + (complaints.length === 1 ? '' : 's') + '):');
     bits.push(...complaints.slice(0, 6).map(c => '- ' + c.snippet + (c.hood ? ' (' + c.hood + ', C' + c.cycle + ')' : ' (C' + c.cycle + ')')));
   } else {
-    bits.push('No Civic complaints from your turf on the record.');
+    bits.push('No Civic complaints from your turf in this window.');
   }
   if (participation.length) {
     bits.push('Constructive civic participation (not complaints): ' + participation.length + '.');
   }
   if (unlocatedRows) bits.push(unlocatedRows + ' Civic rows have no located resident; district membership is unknown.');
-  return { available: true, complaints, participation, unlocatedRows,
-    window: 'All recorded Civic reflections in the loaded dump; no recency cutoff',
+  if (invalidCycleRows) bits.push(invalidCycleRows + ' Civic rows have invalid Cycle stamps and are excluded.');
+  return { available: true, complaints, participation, unlocatedRows, invalidCycleRows,
+    sinceCycle, throughCycle: Number(cycle), window,
     text: clip(bits.join('\n'), BLOCK_CAP) };
 }
 

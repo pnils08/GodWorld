@@ -299,12 +299,14 @@ Design choices returned to research-build without a new default: reflection rece
 ### Rulings on codex's returned design choices (research-build, 2026-09-20)
 
 1. **Reflection recency:** the pack's petition/complaint display window is the current Cycle plus the two before it; the Task 6 counter stays current-Cycle only. Both labelled in the block so a seat can see which it is reading.
+   - **Status:** implemented locally by codex. Display filters C−2 through C inclusive, rejects invalid/future stamps, and labels both windows; counter code unchanged. Regression boundaries pass.
 2. **Passed-over problem:** identity is hood + condition key from the Task 6 counter. A problem is passed over when it appears in a seat's pack and the move ledger shows no `propose`/`work`/`canvass`/`answer` by that seat touching that hood that Sunday. It is resolved when the counter no longer reports it or a landed move addressed it. No new stored state: derived each week from the ledger and the counter.
 3. **Confrontation answer:** an `answer` move binds to the directive Cycle and the named seat, one per directive; a second is refused. No new consequence in this build (coalitions stay out of scope): an unanswered demand simply reappears in the next pack until a move addresses it.
 4. **Working-city selection:** latest row per staff member, one each, capped by the block's character budget — one chatty director cannot crowd out the rest.
 
 ## Changelog
 
+- 2026-09-20 (codex) — Ruling 1 implemented: three-Cycle complaint display, explicitly distinct current-Cycle condition counter. Game 26/26, counter 15/15, repair/ruling tests 11/11; local only.
 - 2026-09-20 (research-build) — Ruled codex's four returned design choices (§Rulings). Housing-lever design `2026-09-20-housing-lever` accepted for engine-sheet execution; rate/enable stay World_Config keys, off until activation.
 - 2026-09-20 (codex) — Completed temporary-owner script defect pass in seven repair commits plus the separate agy fixture commit; evidence, stale-code captures and undecided design choices recorded above. Task 1 script repairs complete; Task 3 still depends on the shared engine helper and unresolved design semantics. Kimi ownership resumes tomorrow.
 - 2026-09-20 (codex) — Filed Task 1+3 adversarial review (c052b127) and housing-first design linked from Open questions; counter defect fixed in 3274f309; Kimi follow-up repairs recorded in the review.

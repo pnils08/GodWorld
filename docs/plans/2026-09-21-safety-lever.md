@@ -218,8 +218,11 @@ The draft recommends a concrete policy; the request authorizes drafting only. Bu
 
 **RULED 2026-09-21 (builder): safety delivery margin 0.05, hold 3** — a per-domain margin for this lever only (global 0.20 unchanged). Needs ~41% of the above-median excess removed, about 5 cycles at the proposed 10% relief; bench-prove before trusting. The `civicDeliverMargin_safety` key lands with Task 1 of this plan, not earlier (no writer yet, so no dead dial).
 
+**OARI grading on the current system (research-build, 2026-09-21, from live C108 Crime_Metrics):** OARI is an unarmed crisis-response service, but only `ViolentLevel` has headroom in its three hoods (ratio to city median 1.1217). `QolLevel` sits at or below median (0.9785: West Oakland 43.1, Fruitvale 44.0, East Oakland 45.0 vs 45.0) and `ResponseTimeAvg` is at median (10.3/10.5/10.7 vs 10.65, derived, not persisted), so an above-median-only lever has nothing to relieve on either. Decision: the delivery gate stays on `ViolentLevel` (the only measurable input today), read as "violence in OARI hoods trending toward the city middle", the measured slice of OARI's work, not its whole mission. `QolLevel` and `ResponseTimeAvg` are printed as side readings on the receipt, never gated. The mission measure (crisis calls diverted from armed dispatch) has no data source; a diversion count is an engine.252-style design item, not built here.
+
 ## Changelog
 
+- 2026-09-21 (research-build) — OARI grading decision after agy review: gate stays ViolentLevel; QolLevel/ResponseTimeAvg have no headroom in its hoods (measured); diversion count deferred as a design item.
 - 2026-09-21 (research-build) — Builder ruled the endpoint/margin conflict: safety margin 0.05 / hold 3 (see Open questions).
 - 2026-09-21 (codex) — Recorded the later builder ruling 0.20/3 and measured the proposed OARI channel's static direct ceiling (0.121685 ratio improvement); flagged the endpoint/threshold mismatch for review without changing the ruling or enabling safety.
 - 2026-09-21 (codex) — Reconciled the concurrently landed Task 4 engine rulings (5694a383): OARI is INIT-002, preserve conversion/vote descriptors, and use held city-relative improvement with builder-owned margin/hold dials instead of a raw-mean gate.

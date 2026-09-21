@@ -887,6 +887,15 @@ function loadPetitionPool(root, office, hoods, officeMap, childToParent) {
   const officePopids = new Set([...(officeMap.offices || []), ...(officeMap.projects || [])]
     .map(o => String(o.popid || '').toUpperCase()).filter(Boolean));
   const turf = new Set((hoods || []).map(h => String(h).toLowerCase()));
+  // agy review 2026-09-20 finding 3.1: the turf filter locates complainants via
+  // loadConstituents → output/simulation_ledger_snapshot.jsonl. With the
+  // snapshot absent, every district complaint would drop silently and the pack
+  // would claim "no complaints" — a stated absence instead, never a silent
+  // empty. (Citywide seats have no turf filter and are unaffected.)
+  if (turf.size && !fs.existsSync(path.join(root || ROOT, 'output', 'simulation_ledger_snapshot.jsonl'))) {
+    return { available: false, complaints: [], participation: [],
+      text: 'Petition pool unreadable — the citizen snapshot (simulation_ledger_snapshot.jsonl) is absent, so complainants cannot be located to your district. Complaints may exist that this pack cannot see.' };
+  }
   const inTurf = new Set();
   if (turf.size) {
     for (const c of loadConstituents(root, hoods, 0)) {

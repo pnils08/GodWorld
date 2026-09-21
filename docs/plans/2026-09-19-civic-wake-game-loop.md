@@ -11,6 +11,7 @@ sources:
   - output/agent_engine-wiring_2026-09-19T08-05-44.md — wiring card, utilities/citizenDialMap.js
   - output/agent_engine-wiring_2026-09-16T17-17-23.md — wiring card, Reflection_Intake / citizenPage write path (civic.37)
 pointers:
+  - "[[../research/2026-09-20-codex-civic38-tasks1-3-adversarial-review]] — stronger HEAD review; eight findings for Kimi, Task 6.1 repair in 3274f309"
   - "[[../research/2026-09-20-codex-civic38-game-loop-review]] — Codex review, accepted 2026-09-20; all eight findings verified against the code and reconciled into the tasks below (§Reconciliation)"
   - "[[../engine/ROLLOUT_PLAN]] — parent rollout, row civic.38"
   - "[[../research/2026-09-19-kimi-initiative-stage-voting-and-wake-incentives]] — design record (rulings + measured gaps)"

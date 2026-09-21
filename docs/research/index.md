@@ -25,6 +25,7 @@ Grep here before grepping the tree. Each row: file · one-line purpose · verdic
 
 | File | Purpose | Verdict |
 |------|---------|---------|
+| **[[2026-09-20-codex-civic38-tasks1-3-adversarial-review]]** | Strong second read of Tasks 1+3: catalog bypass, reflection loss, geography/degrade defects, continuity and caps; Task 6.1 repair | `adopt` — repairs recommended to existing civic.38 tasks; findings await owner resolution |
 | **[[2026-09-20-codex-civic38-game-loop-review]]** | Codex review of civic.38: verified path/formula gaps, scarce moves, stage consequences, sponsor credit, and behavioral proof | `adopt` — accepted 2026-09-20 (engine-sheet); F1–F8 verified against the code and reconciled into the civic.38 plan; two proposals narrowed on measurement (Civic dial cut withdrawn, stall cost already in code) |
 | **[[2026-06-01-headroom-context-compression]]** | Headroom context-compression toolkit — does it earn a place in the stack? | `take-nothing` (canon needs fidelity not compression; boot-burn already solved by discipline) |
 | **[[2026-06-01-initiative-tracker-state]]** | Initiative_Tracker subsystem — read/write graph, the missing ImplementationPhase contract, multi-layer drift | `adopt` (ignites [[../plans/2026-06-01-initiative-tracker-contract]]) |

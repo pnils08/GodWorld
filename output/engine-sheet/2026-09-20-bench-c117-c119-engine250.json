@@ -1,0 +1,272 @@
+{
+ "what": "engine.250 bench proof, SANDBOX 0908 @76 = 2b855aaa, fires C117-C119, 2026-09-20",
+ "benchOnlyEdits": [
+  "Initiative_Tracker!Y4 INIT-003 design-phase -> construction-planning (before C118)",
+  "Initiative_Tracker!Y5 INIT-005 construction-active -> stalled (before C118)"
+ ],
+ "foldRows": [
+  "116 initiativeNeighborhoodEffects :: Initiative work landed in 6 neighborhood(s): Downtown, Jack London, West Oakland, Temescal, Fruitvale, East Oakland mag 0.136",
+  "117 initiativeNeighborhoodEffects :: Initiative work landed in 6 neighborhood(s): Downtown, Jack London, West Oakland, Temescal, Fruitvale, East Oakland mag 0.136",
+  "118 initiativeNeighborhoodEffects :: Initiative work landed in 6 neighborhood(s): Downtown, Jack London, West Oakland, Temescal, Fruitvale, East Oakland mag 0.136",
+  "118 approvalNeighborhoodEffects :: Cycle 117 shifts in how residents rate their officials reached 16 neighborhood(s): Downtown, KONO, Chinatown, Jack London, West Oakland, Brooklyn, Baylight District, Lake Merritt, Adams Point, Grand Lake, Eastlake, Rockridge, Temescal, Fruitvale, San Antonio, East Oakland mag -0.009",
+  "119 initiativeNeighborhoodEffects :: Initiative work landed in 6 neighborhood(s): Downtown, Jack London, West Oakland, Temescal, Fruitvale, East Oakland mag 0.136",
+  "119 approvalNeighborhoodEffects :: Cycle 118 shifts in how residents rate their officials reached 12 neighborhood(s): Downtown, KONO, Chinatown, Jack London, West Oakland, Brooklyn, Baylight District, Rockridge, Temescal, Fruitvale, San Antonio, East Oakland mag 0.006"
+ ],
+ "ring": [
+  {
+   "cycle": "117",
+   "len": 12178,
+   "busHoods": 16
+  },
+  {
+   "cycle": "118",
+   "len": 12483,
+   "busHoods": 12
+  },
+  {
+   "cycle": "119",
+   "len": 11633,
+   "busHoods": 9
+  }
+ ],
+ "c117Bus": {
+  "West Oakland": {
+   "sentiment": -0.009,
+   "communityEngagement": -0.0045
+  },
+  "Brooklyn": {
+   "sentiment": -0.009,
+   "communityEngagement": -0.0045
+  },
+  "Downtown": {
+   "sentiment": -0.003,
+   "communityEngagement": -0.0015
+  },
+  "Jack London": {
+   "sentiment": -0.003,
+   "communityEngagement": -0.0015
+  },
+  "Chinatown": {
+   "sentiment": -0.003,
+   "communityEngagement": -0.0015
+  },
+  "Fruitvale": {
+   "sentiment": -0.009,
+   "communityEngagement": -0.0045
+  },
+  "San Antonio": {
+   "sentiment": -0.009,
+   "communityEngagement": -0.0045
+  },
+  "Baylight District": {
+   "sentiment": -0.006,
+   "communityEngagement": -0.003
+  },
+  "East Oakland": {
+   "sentiment": -0.006,
+   "communityEngagement": -0.003
+  },
+  "Temescal": {
+   "sentiment": -0.003,
+   "communityEngagement": -0.0015
+  },
+  "Rockridge": {
+   "sentiment": -0.003,
+   "communityEngagement": -0.0015
+  },
+  "KONO": {
+   "sentiment": -0.003,
+   "communityEngagement": -0.0015
+  },
+  "Adams Point": {
+   "sentiment": -0.003,
+   "communityEngagement": -0.0015
+  },
+  "Grand Lake": {
+   "sentiment": -0.003,
+   "communityEngagement": -0.0015
+  },
+  "Eastlake": {
+   "sentiment": -0.003,
+   "communityEngagement": -0.0015
+  },
+  "Lake Merritt": {
+   "sentiment": -0.003,
+   "communityEngagement": -0.0015
+  }
+ },
+ "growthDeltaByHood": {
+  "C117": {
+   "Fruitvale": [
+    0.19,
+    0.4,
+    0.33,
+    0.64,
+    0.23,
+    0.62
+   ],
+   "Temescal": [
+    -1,
+    0.26,
+    0.22,
+    0.48,
+    0.19,
+    0.39,
+    0.12
+   ],
+   "West Oakland": [
+    0.79,
+    0.31,
+    0.4,
+    1,
+    0.49,
+    0.36,
+    0.7,
+    0.46,
+    0.4,
+    0.36,
+    0.31,
+    0.37,
+    0.9,
+    0.61
+   ],
+   "Downtown": [
+    0.7,
+    0.82,
+    0.74,
+    0.64,
+    0.58,
+    0.53,
+    0.52,
+    0.67,
+    0.73,
+    -1,
+    0.47,
+    0.39,
+    0.36,
+    0.38,
+    0.33,
+    0.57,
+    0.44,
+    0.5,
+    0.74
+   ]
+  },
+  "C118": {
+   "Fruitvale": [
+    1,
+    1,
+    1,
+    1,
+    0.8,
+    1
+   ],
+   "Temescal": [
+    -1,
+    -0.84,
+    -0.43,
+    -0.84,
+    -0.56,
+    -1,
+    -0.78
+   ],
+   "West Oakland": [
+    0.5,
+    0.35,
+    0.41,
+    0.68,
+    0.37,
+    0.58,
+    0.44,
+    0.7,
+    -1,
+    0.7,
+    0.21,
+    0.57,
+    0.43,
+    0.61
+   ],
+   "Downtown": [
+    -0.82,
+    -0.83,
+    -0.71,
+    -0.48,
+    -0.29,
+    -0.3,
+    -0.4,
+    -0.46,
+    -0.44,
+    -0.49,
+    -1,
+    -0.21,
+    -0.36,
+    -0.36,
+    -0.19,
+    -0.59,
+    -0.32,
+    -0.3,
+    -0.32
+   ]
+  },
+  "C119": {
+   "Fruitvale": [
+    0.51,
+    0.45,
+    0.42,
+    0.34,
+    0.13,
+    0.43
+   ],
+   "Temescal": [
+    -1,
+    -1,
+    -0.39,
+    -0.77,
+    -0.59,
+    -0.59,
+    -0.9
+   ],
+   "West Oakland": [
+    -0.52,
+    -0.46,
+    -0.5,
+    -0.77,
+    -0.39,
+    -0.33,
+    -0.4,
+    -0.46,
+    -0.41,
+    -0.61,
+    -0.21,
+    -0.59,
+    -0.83,
+    -0.51
+   ],
+   "Downtown": [
+    -0.95,
+    -0.43,
+    -0.32,
+    -0.45,
+    -0.35,
+    -0.29,
+    -0.44,
+    -0.83,
+    -0.42,
+    -0.33,
+    -0.65,
+    -0.3,
+    -0.19,
+    -0.5,
+    -0.3,
+    -0.55,
+    -0.72,
+    -0.66,
+    -0.46
+   ]
+  }
+ },
+ "attribution": {
+  "Downtown C118 all-negative": "fresh chaos-cars event in Downtown at C118 (CHAOS_NBHD_FOLD ring 118: new Sentiment -0.12, RetailVitality 1.44) -> chaosInHood",
+  "West Oakland C119 all-negative": "fresh chaos-cars event in West Oakland at C119 (ring 119: new Sentiment 0.06, EventAttractiveness 3.12) -> chaosInHood"
+ }
+}

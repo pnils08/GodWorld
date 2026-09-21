@@ -129,6 +129,21 @@ pointers:
 
 ## PROD deploy log — full trail
 
+### PROD @106 — both hood effect buses reach their readers (2026-09-20 ~20:15 Chicago, engine-sheet)
+
+engine.250. Engine tree `2b855aaa`; 4 payload files vs @105 (`applyCityDynamics.js`, `applyInitiativeImplementationEffects.js`, `applyBusinessDynamics.js`, `finalizeCycleState.js`).
+
+**PUSH LANDED, VERSION STEP PENDING.** `clasp push` from an isolated `git archive` stage (prod `.clasp.json`, sandbox id absent), pre-push delta vs live = exactly those 4 files, 170 files pushed, pull-back 169/169 js byte-identical, 0 test files. `clasp version` was refused by the Claude Code auto-mode classifier, so **no version 95 exists and the web app `AKfycbwUvd4...PawCW-bgQ` still reads @94 (= @105 code)**. An editor / trigger fire runs HEAD = this build; a web-app fire runs @94 until the builder runs, from a dir holding the prod `.clasp.json`: `CLAUDE_CTL=1 npx clasp version "PROD @106 engine.250 2b855aaa"` then `CLAUDE_CTL=1 npx clasp deploy -i AKfycbwUvd4TylktdE7AA8axRv-Hru55h78v1PlsOsIejWyAoQrUeYnKGq2ue-FJxPawCW-bgQ -V 95 -d "PROD @106 engine.250 2b855aaa"` and reads back `npx clasp deployments`.
+
+**What it changes.** (1) The Phase-2 fold no longer empties `S.initiativeNeighborhoodEffects`, so the Phase-3 school reader and the Phase-5 business reader see it. `ctx.summary` is a fresh literal every Cycle, so the clear guarded nothing. (2) `S.approvalNeighborhoodEffects` (written Phase 5, read Phase 2) rides `previousCycleState.approvalNeighborhoodEffects` and folds the next Cycle, gated on the blob being exactly one Cycle old; the fold's Ripple row names the origin Cycle. (3) The business event term was presence-only; revived as written it would have paid max-up drift every Cycle to 59 of 175 live businesses (the same 5–6 hoods sit on the bus every Cycle C103–C108) and paid a stalled initiative as a boost. It now follows the engine.139 rule: a phase TRANSITION in the hood pays `+scale` once; a net-negative hood entry (stalled / blocked / suspended / defunded) drains `-scale` every Cycle it stands; a standing initiative pays nothing here (its lift already arrives through folded RetailVitality).
+
+**Bench:** SANDBOX 0908 **@76**, C117–C119, all `ok:true` (137 s / 133 s / 192 s), Engine_Errors unchanged. Record `output/engine-sheet/2026-09-20-bench-c117-c119-engine250.json`. Predictions made before each fire, all held: C117 — no approval fold row, ring row carries the bus (16 hoods), initiative fold unchanged; C118 — first `approvalNeighborhoodEffects` fold row ever ("Cycle 117 shifts … 16 neighborhood(s)", mag −0.009), Fruitvale 6/6 businesses at max-up (+1.0, faith +0.8) on INIT-003's transition, Temescal 7/7 down (−0.43…−1.0) under INIT-005 `stalled`, West Oakland (three standing initiatives) no step; C119 — Fruitvale back to ambient (+0.13…+0.51), Temescal still 7/7 down, approval fold mixed-sign (mag +0.006, 12 hoods — not a one-way tax). Two hood-wide swings outside the change were read and attributed to fresh chaos-cars events (Downtown C118, West Oakland C119). Carry blob 11.6–12.2 KB — past the 9 KB prop cap before and after; the engine.223 ring carries it. **BENCH-ONLY, NEVER REPLAY:** `Initiative_Tracker!Y4` INIT-003 → `construction-planning`, `Y5` INIT-005 → `stalled`.
+
+**Open dial (builder):** the stalled drain is `-scale` = the same weight as chaos at the business, every Cycle. At `bizDriftMaxDown 1` a project stalled ten Cycles walks a hood from median growth ~5 to the −10 floor, then closures at streak 8. Inert live today (no negative phase on the tracker); civic.38 Task 4's losing clock will produce stalls.
+
+**Expect at live C109 (editor fire):** execution log `applyNeighborhoodEffectsFold_: … approval (cycle 108 carry) → 0 hood(s)` (C108's blob predates the key), `applyBusinessDynamics_ … initiative lift 0 / drag 0` unless a tracker phase moved since C108; C110 shows the first live approval fold row.
+- **Rollback:** re-push the @105 tree (`d5738907`) from a `git archive d5738907` stage.
+
 ### PROD @105 — the engine reads the record that was typed (2026-09-20 ~16:50 Chicago, engine-sheet)
 
 engine.247. Engine tree `d5738907`; 2 payload files vs @104 (`applySportsSeason.js`, `compileHandoff.js`).

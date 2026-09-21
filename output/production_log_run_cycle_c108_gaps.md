@@ -417,3 +417,8 @@
 - `buildCommuteFlows_` "1 dangling biz-id" (C107 and C108) = POP-00239 Xiu Cello `BIZ-000181`, a six-digit typo for BIZ-00181 Mayday Movers (same hood, role Mover). **Fixed on live, read back.** 205 unresolved commuters remain by design (137 city-wide, 67 off-ledger).
 - `updateCivicApprovalRatings_` logs 9 officials; D7 Warren Ashford is absent because his rating did not move (67 → 67), not because the seat was skipped.
 - engine.174 short-hood deficits are closing as built: East Oakland 7 → 5, Baylight 9 → 6, Glenview 7 → 5, Dimond 3 → 2, Brooklyn 6 → 5.
+
+### G-EC69 — school funding compounds 2 % every cycle an education initiative merely exists [judgment] [math-anomaly] [LOW — inert today]
+- **Source:** phase03-population/updateNeighborhoodDemographics.js:695 (`f = initiative > 0 ? funding × (1 + schoolFundingInitiativePct/100) : funding`); surfaced while reviving the initiative bus (engine.250, PROD @106).
+- **Evidence:** `initiative > 0` is true at any positive phase intensity, `legislation-filed` (0.05) included, and the comment says "a delivering education initiative". Thirty standing cycles = funding × 1.81. Same always-on shape engine.250 removed from the business term (DOCTRINE §15). Live tracker has no education-domain row, so nothing fires.
+- **Status:** OPEN. Fix shape when an education initiative is first proposed: pay on delivering phases only, or on the transition, per the engine.139 rule. The size is a builder call.

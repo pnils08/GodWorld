@@ -609,7 +609,7 @@ async function main() {
 
   // ═══════════════════════════════════════════════════════════════════════════
   // civic.38 Task 2 step 4 — CANDIDATE ROWS. `propose` moves folded Sunday
-  // become full tracker rows via createInitiative (Status=proposed, blank
+  // become full tracker rows via createInitiative (Status=proposed, Stage=Proposed, blank
   // VoteCycle, opening phase per the contract's lifecycle arc). Dry-run prints
   // the would-be rows; append only under --apply after the same clerk verdict
   // + gate as any other write. Retry identity: a candidate whose
@@ -681,10 +681,10 @@ async function main() {
       }
       try {
         const built = createInit.createInitiative({
-          headers: headers || createInit.TRACKER_HEADERS_31,
+          headers: headers || createInit.TRACKER_HEADERS,
           rows: trackerRows.concat(appendedRows), seats, spec,
         });
-        console.log(`  ${APPLY ? 'APPEND' : 'WOULD APPEND'} ${built.row.InitiativeID} "${built.row.Name}" [${built.row.Type}/${built.row.PolicyDomain}] ${built.row.AffectedNeighborhoods} — ${built.row.ProposingOffice}, phase ${built.row.ImplementationPhase}, Status proposed`);
+        console.log(`  ${APPLY ? 'APPEND' : 'WOULD APPEND'} ${built.row.InitiativeID} "${built.row.Name}" [${built.row.Type}/${built.row.PolicyDomain}] ${built.row.AffectedNeighborhoods} — ${built.row.ProposingOffice}, phase ${built.row.ImplementationPhase}, Status proposed, Stage ${built.row.Stage}`);
         if (APPLY && headers) {
           await sheets.appendRows(SHEET_NAME, [built.values]);
           console.log(`  APPENDED to ${SHEET_NAME}`);

@@ -14,7 +14,7 @@ const fix = JSON.parse(fs.readFileSync(
   path.join(__dirname, '__fixtures__', 'initiative-tracker-c103.json'), 'utf8'
 ));
 const seats = C.loadOfficeSeats();
-const headers31 = C.TRACKER_HEADERS_31;
+const headers31 = C.TRACKER_HEADERS_31.concat(require('../lib/initiativePhaseContract').STAGE_COLUMNS);
 
 check('fixture is 28 headers', fix.headers.length === 28);
 check('fixture has 6 rows', fix.rows.length === 6);
@@ -48,7 +48,8 @@ check('D7 proposer is Ashford', d7.row.Proposer === 'Warren Ashford');
 check('D7 office', d7.row.ProposingOffice === 'COUNCIL-D7');
 check('D7 phase announced', d7.row.ImplementationPhase === 'announced');
 check('D7 status proposed', d7.row.Status === 'proposed');
-check('D7 values length 31', d7.values.length === 31);
+check('new row has Proposed Stage in object and serialized values', d7.row.Stage === 'Proposed' && d7.values[d7.headers.indexOf('Stage')] === 'Proposed');
+check('stage-ready values preserve header width', d7.values.length === headers31.length);
 
 const d4 = C.createInitiative({
   headers: headers31,
@@ -86,6 +87,19 @@ function throws(label, fn, re) {
   try { fn(); check(label, false); }
   catch (e) { check(label, re.test(e.message), e.message); }
 }
+
+const syntheticSpec = { name: 'SYNTHETIC stage mint', type: 'vote', policyDomain: 'health',
+  affectedNeighborhoods: 'Downtown', proposingOffice: 'MAYOR-01', proposedCycle: 999, Stage: 'Delivering' };
+const defaultMint = C.createInitiative({ seats, spec: syntheticSpec });
+check('default headers serialize Proposed, never caller Stage', defaultMint.row.Stage === 'Proposed' &&
+  defaultMint.values[defaultMint.headers.indexOf('Stage')] === 'Proposed');
+const reordered = ['Stage', ...C.TRACKER_HEADERS_31];
+const reorderedMint = C.createInitiative({ headers: reordered, seats, spec: syntheticSpec });
+check('Stage follows caller header position', reorderedMint.values[0] === 'Proposed');
+check('caller header list is unchanged', reordered.length === 32 && reordered[0] === 'Stage');
+throws('legacy header cannot silently drop Stage', () => C.createInitiative({
+  headers: C.TRACKER_HEADERS_31, seats, spec: syntheticSpec,
+}), /missing Stage/);
 
 throws('DA cannot author', function () {
   C.createInitiative({

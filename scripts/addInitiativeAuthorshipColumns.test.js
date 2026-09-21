@@ -48,7 +48,7 @@ try {
   check('partial headers fail', /partial authorship/.test(e.message));
 }
 
-const minted = createInitiative({
+const mintOptions = {
   headers: plan.headersAfter,
   rows: plan.rows,
   seats: loadOfficeSeats(),
@@ -60,8 +60,17 @@ const minted = createInitiative({
     proposingOffice: 'COUNCIL-D7',
     proposedCycle: 104,
   },
-});
+};
+try {
+  createInitiative(mintOptions);
+  check('authorship migration alone cannot mint a stage-managed row', false);
+} catch (e) {
+  check('authorship migration alone cannot mint a stage-managed row', /missing Stage/.test(e.message));
+}
+const minted = createInitiative({ ...mintOptions,
+  headers: plan.headersAfter.concat(require('../lib/initiativePhaseContract').STAGE_COLUMNS) });
 check('mint on migrated copy is CRC', minted.row.LeadFaction === 'CRC');
+check('stage-ready migrated copy mints Proposed', minted.values[minted.headers.indexOf('Stage')] === 'Proposed');
 check('mint does not alter fixture LeadFaction', plan.rows[0].LeadFaction === 'OPP');
 
 if (failed) { console.error(failed + ' failed'); process.exit(1); }

@@ -2,7 +2,7 @@
 
 /**
  * civic.22 — mint an Initiative_Tracker row any seated mayor/council office can author.
- * Node mirror of createInitiative_ (engine drop-in: scripts/createInitiative_.engine.js).
+ * Node builder; the older createInitiative_.engine.js drop-in predates stage minting.
  * Does not write a sheet. LeadFaction comes from the proposing seat, never a default OPP.
  */
 
@@ -21,6 +21,8 @@ const TRACKER_HEADERS_31 = [
   'ImplementationPhase', 'MilestoneNotes', 'NextScheduledAction', 'NextActionCycle',
   'Proposer', 'ProposingOffice', 'ProposedCycle',
 ];
+// Keep the authorship migration's historical 31-column contract intact.
+const TRACKER_HEADERS = TRACKER_HEADERS_31.concat(C.STAGE_COLUMNS);
 
 const POLICY_DOMAINS = [
   'health', 'transit', 'economic', 'housing', 'safety',
@@ -79,12 +81,15 @@ function resolveSeat(seats, proposingOffice) {
 }
 
 function createInitiative(opts) {
-  const headers = (opts && opts.headers) || TRACKER_HEADERS_31;
+  const headers = (opts && opts.headers) || TRACKER_HEADERS;
   const rows = (opts && opts.rows) || [];
   const seats = (opts && opts.seats) || [];
   const spec = (opts && opts.spec) || {};
 
   requireAuthorshipHeaders(headers);
+  if (!headers.includes('Stage')) {
+    throw new Error('createInitiative: tracker missing Stage header — Task 4 schema must land before minting');
+  }
 
   const name = String(spec.name || '').trim();
   if (!name) throw new Error('createInitiative: name required');
@@ -128,6 +133,7 @@ function createInitiative(opts) {
   row.Name = name;
   row.Type = type;
   row.Status = 'proposed';
+  row.Stage = 'Proposed';
   row.Budget = spec.budget != null ? String(spec.budget) : '';
   row.LeadFaction = faction;
   row.AffectedNeighborhoods = hoods.join(', ');
@@ -166,6 +172,7 @@ function loadOfficeSeats(mapPath) {
 module.exports = {
   AUTHORSHIP_HEADERS,
   TRACKER_HEADERS_31,
+  TRACKER_HEADERS,
   POLICY_DOMAINS,
   openingPhase,
   nextInitiativeId,

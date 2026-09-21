@@ -166,6 +166,19 @@ function run(S, opts) {
   eq(r.by['Fruitvale'].ridershipVolume, Math.round(base.by['Fruitvale'].ridershipVolume * 1.2), 'open: Fruitvale ×1.20');
   eq(r.by['Fruitvale'].onTimePerformance, Math.round((base.by['Fruitvale'].onTimePerformance + 0.02) * 100) / 100, 'open: on-time +0.02');
 
+  // civic.38 ruling (g): the open lift scales with upkeep; the phase stays the gate.
+  const tended = (phase, tend) => ({ sportsFeedEntries: [], initiativeImplementationEffects: { transit: [{ name: 'Fruitvale Transit Hub Phase II', phase, intensity: 0.9 * tend, tend, domain: 'transit', hoods: ['Fruitvale'], baylight: false }] } });
+  r = run(tended('operational', 1));
+  eq(r.by['Fruitvale'].ridershipVolume, Math.round(base.by['Fruitvale'].ridershipVolume * 1.2), 'upkeep 1: a tended hub pays the full ×1.20');
+  ok(r.by['Fruitvale'].factors.indexOf('upkeep') < 0, 'upkeep 1: a tended hub carries no upkeep note');
+  r = run(tended('operational', 0.3));
+  eq(r.by['Fruitvale'].ridershipVolume, Math.round(base.by['Fruitvale'].ridershipVolume * 1.06), 'upkeep floor 0.3: the lift fades to ×1.06');
+  ok(r.by['Fruitvale'].ridershipVolume > base.by['Fruitvale'].ridershipVolume, 'a neglected hub is never below an ordinary station');
+  ok(r.by['Fruitvale'].factors.indexOf('Fruitvale Transit Hub Phase II: operational (upkeep 0.30)') >= 0, 'the Fruitvale row names the slip');
+  r = run(tended('construction-active', 0.3));
+  eq(r.by['Fruitvale'].ridershipVolume, Math.round(base.by['Fruitvale'].ridershipVolume * 0.95), 'construction stays all-or-nothing under neglect');
+  eq(T.initiativeTransitEffects_(tended('operational', 0.55)).stations[0].ridershipMult, 1 + (1.2 - 1) * 0.55, 'upkeep 0.55: ridership multiplier is 1 + 0.20 × 0.55');
+
   // Baylight under construction on the site → the station serving it + the freeways; the street does not
   const bay = (phase, hoods) => ({ sportsFeedEntries: [], initiativeImplementationEffects: { transit: [{ name: 'Baylight District — Final Council Vote', phase, intensity: 0.3, domain: 'sports', hoods, baylight: true }] } });
   r = run(bay('construction-planning', ['Baylight District']));

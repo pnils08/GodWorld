@@ -304,6 +304,10 @@
 - **sportsHasOpenedBaylight_(S)**
   Reads: S.sportsZones
 
+- **civicTendFactor_(t)**
+
+- **getCivicTendDials_(ctx)**
+
 - **applyInitiativeImplementationEffects_(ctx)**
   Reads: S.absoluteCycle, S.cycleId, S.initiativeImplementationTriggers, S.initiativeNeighborhoodEffects, S.previousCycleState, S.sentiment, S.sportsZones
   Writes: S.initiativeHealthRelief, S.initiativeImplementationEffects, S.initiativeNeighborhoodEffects, S.sentiment
@@ -4174,4 +4178,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 184
-**Functions mapped:** 1451
+**Functions mapped:** 1453

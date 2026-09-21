@@ -718,7 +718,23 @@ function initiativeTransitEffects_(S) {
       out.stations.push({ hoods: hoods, ridershipMult: TRANSIT_CAUSES.BUILD_RIDERSHIP_MULT, onTimeDelta: -TRANSIT_CAUSES.BUILD_ON_TIME_DROP, tag: tag });
       out.corridors.push({ hoods: hoods, freeway: false, traffic: TRANSIT_CAUSES.BUILD_STREET_TRAFFIC, tag: tag });
     } else if (open) {
-      out.stations.push({ hoods: hoods, ridershipMult: TRANSIT_CAUSES.OPEN_RIDERSHIP_MULT, onTimeDelta: TRANSIT_CAUSES.OPEN_ON_TIME_LIFT, tag: tag });
+      // civic.38 ruling (g): the open lift scales with upkeep. The slice carries
+      // the tend factor (1 = tended, or a row the stage model never touches);
+      // the phase stays the gate, the factor is the strength. Never below an
+      // ordinary station. Construction above stays all-or-nothing — neglect does
+      // not make a building site quieter.
+      var tend = (typeof it.tend === 'number' && isFinite(it.tend)) ? Math.max(0, Math.min(1, it.tend)) : 1;
+      if (tend >= 1) {
+        out.stations.push({ hoods: hoods, ridershipMult: TRANSIT_CAUSES.OPEN_RIDERSHIP_MULT, onTimeDelta: TRANSIT_CAUSES.OPEN_ON_TIME_LIFT, tag: tag });
+      } else {
+        tag = tag + ' (upkeep ' + tend.toFixed(2) + ')';
+        out.stations.push({
+          hoods: hoods,
+          ridershipMult: 1 + (TRANSIT_CAUSES.OPEN_RIDERSHIP_MULT - 1) * tend,
+          onTimeDelta: TRANSIT_CAUSES.OPEN_ON_TIME_LIFT * tend,
+          tag: tag
+        });
+      }
     } else {
       // planning / visioning / design: the row names it, the number holds
       out.stations.push({ hoods: hoods, ridershipMult: 1, onTimeDelta: 0, tag: tag });

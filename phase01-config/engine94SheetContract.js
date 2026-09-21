@@ -138,7 +138,13 @@ var ENGINE213_CONFIG_SEEDS = [
   // measured domain: a clinic at full strength plateaus at an edge of 0.18-0.19, so
   // 0.20 could never deliver it. Unmeasured domains fall back to the default.
   ['civicDeliverMargin_health', 0.15, 'civic.38 Task 4: Delivering margin for health rows (Sick vs city median). Measured: a clinic at full strength holds an edge of 0.18-0.19 over an untreated control; 0.15 clears at the second Cycle and holds. Overrides civicDeliverMargin for PolicyDomain health', 0, 2, false],
-  ['civicDeliverHoldCycles', 3, 'civic.38 Task 4: consecutive Cycles the margin must hold (builder-ruled; hold does more than margin)', 1, 12, true]
+  ['civicDeliverHoldCycles', 3, 'civic.38 Task 4: consecutive Cycles the margin must hold (builder-ruled; hold does more than margin)', 1, 12, true],
+  // civic.38 Task 4 upkeep (builder rulings c/e/g): delivered is not forever. Read by
+  // civicTendFactor_ in applyInitiativeImplementationEffects_, only for a row at
+  // Standing or Delivering — inert while every Stage is blank.
+  ['civicTendGraceCycles', 6, 'civic.38 Task 4 upkeep: Cycles a Standing/Delivering initiative holds full strength after its last work move or stage change (builder-ruled 6)', 0, 52, true],
+  ['civicTendDecayPerCycle', 0.15, 'civic.38 Task 4 upkeep: share of full strength lost per Cycle untended past the grace, linear (builder-ruled 0.15 — floor reached 5 Cycles past grace)', 0, 1, false],
+  ['civicTendFloor', 0.3, 'civic.38 Task 4 upkeep: the least a neglected service pays, as a share of full strength (builder-ruled 0.3); one work move restores it', 0, 1, false]
 ];
 
 function ensureEngine213Config_(ss) {

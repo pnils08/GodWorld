@@ -129,6 +129,68 @@ function sportsHasOpenedBaylight_(S) {
 }
 
 
+/**
+ * civic.38 Task 4 — upkeep (plan §Delivered is not forever, rulings c/e/g).
+ * Engine mirror of lib/initiativePhaseContract.js tendFactor — parity-tested,
+ * never edit one without the other. A row at Standing or Delivering pays phase
+ * intensity x this factor: full inside the grace, then linear decay per Cycle
+ * untended to the floor. "Untended since" = the later of LastWorkCycle and
+ * LastStageChangeCycle. No reference Cycle => no decay.
+ *
+ * @param {Object} t {stage, cycle, lastWorkCycle, lastStageChangeCycle, grace, decay, floor}
+ * @return {{factor:number, untended:number, reference:number}}
+ */
+var CIVIC_TEND_STAGES_ = ['Standing', 'Delivering'];
+function civicTendFactor_(t) {
+  t = t || {};
+  var out = { factor: 1, untended: 0, reference: 0 };
+  if (CIVIC_TEND_STAGES_.indexOf(String(t.stage == null ? '' : t.stage).replace(/^\s+|\s+$/g, '')) < 0) return out;
+  var cycle = Number(t.cycle);
+  if (!isFinite(cycle) || cycle < 1) return out;
+  var work = Number(t.lastWorkCycle);
+  var change = Number(t.lastStageChangeCycle);
+  var ref = Math.max(isFinite(work) && work >= 1 ? work : 0, isFinite(change) && change >= 1 ? change : 0);
+  if (!(ref >= 1)) return out;
+  out.reference = ref;
+  out.untended = Math.max(0, cycle - ref);
+  var grace = Number(t.grace), decay = Number(t.decay), floor = Number(t.floor);
+  if (!isFinite(grace) || !isFinite(decay) || !isFinite(floor)) return out;
+  if (out.untended <= grace) return out;
+  var f = 1 - decay * (out.untended - grace);
+  if (f < floor) f = floor;
+  if (f > 1) f = 1;
+  if (f < 0) f = 0;
+  out.factor = Math.round(f * 10000) / 10000;
+  return out;
+}
+
+/**
+ * The three upkeep dials, read once per fire and ONLY when a staged row asks —
+ * a world with every Stage blank never touches them. Fail-loud like every other
+ * self-armed key (seeded by ensureEngine213Config_ at cycle open).
+ */
+function getCivicTendDials_(ctx) {
+  if (ctx && ctx._civicTendDials) return ctx._civicTendDials;
+  var source = ctx && ctx.config;
+  if (!source) throw new Error('civic upkeep: ctx.config required');
+  var required = function(key, min, max) {
+    var raw = source[key];
+    var value = Number(raw);
+    if (raw === '' || raw === null || raw === undefined || !isFinite(value) || value < min || value > max) {
+      throw new Error('civic upkeep: invalid or missing World_Config.' + key);
+    }
+    return value;
+  };
+  var dials = {
+    grace: required('civicTendGraceCycles', 0, 52),
+    decay: required('civicTendDecayPerCycle', 0, 1),
+    floor: required('civicTendFloor', 0, 1)
+  };
+  if (ctx) ctx._civicTendDials = dials;
+  return dials;
+}
+
+
 function applyInitiativeImplementationEffects_(ctx) {
   var S = ctx.summary;
   if (!S) S = ctx.summary = {};
@@ -157,6 +219,11 @@ function applyInitiativeImplementationEffects_(ctx) {
   var iHoods = findImplCol_(headers, ['AffectedNeighborhoods', 'affectedneighborhoods']);
   var iBudget = findImplCol_(headers, ['Budget', 'budget']);
   var iInitId = findImplCol_(headers, ['InitiativeID', 'initiativeid']);
+  // civic.38 Task 4 upkeep — the three stage cells the tend factor reads. Absent
+  // columns (-1) or a blank Stage leave every row at full strength.
+  var iStage = findImplCol_(headers, ['Stage']);
+  var iLastWork = findImplCol_(headers, ['LastWorkCycle']);
+  var iLastStageChange = findImplCol_(headers, ['LastStageChangeCycle']);
 
   // engine.250: last Cycle's phase per initiative (previousCycleState.initiativePhases,
   // written by updateCivicApprovalRatings_ from the tracker SHEET), gated on the blob
@@ -340,6 +407,31 @@ function applyInitiativeImplementationEffects_(ctx) {
       }
     }
 
+    // civic.38 Task 4 upkeep (rulings c/e): a delivered service nobody tends
+    // weakens. Staged rows only (Standing / Delivering) and positive intensity
+    // only — a stall is not softened by neglect, a legacy row (blank Stage) and
+    // the sport-opened Baylight (never staged) are untouched. Every consumer
+    // below reads the EFFECTIVE intensity; the transit slice also carries the
+    // factor, because the station gates on the phase name (ruling g).
+    var tend = 1;
+    var untended = 0;
+    if (intensity > 0 && iStage !== -1) {
+      var stageCell = (row[iStage] || '').toString().trim();
+      if (stageCell === 'Standing' || stageCell === 'Delivering') {
+        var tendDials = getCivicTendDials_(ctx);
+        var tf = civicTendFactor_({
+          stage: stageCell,
+          cycle: implCycle,
+          lastWorkCycle: iLastWork !== -1 ? row[iLastWork] : '',
+          lastStageChangeCycle: iLastStageChange !== -1 ? row[iLastStageChange] : '',
+          grace: tendDials.grace, decay: tendDials.decay, floor: tendDials.floor
+        });
+        tend = tf.factor;
+        untended = tf.untended;
+        if (tend < 1) intensity = Math.round(intensity * tend * 10000) / 10000;
+      }
+    }
+
     // engine.183 — publish before the zero-intensity skip: a hub in design
     // (intensity 0.2) and one merely announced (0) both name themselves on the
     // transit rows; only construction and opening move the numbers.
@@ -354,6 +446,7 @@ function applyInitiativeImplementationEffects_(ctx) {
         name: name,
         phase: phase,
         intensity: intensity,
+        tend: tend,   // civic.38 upkeep factor, 1 = tended or not staged
         domain: domain,
         hoods: tHoods,
         baylight: isBaylightInitiative_(name)
@@ -450,7 +543,8 @@ function applyInitiativeImplementationEffects_(ctx) {
         causeType: 'initiative-implementation',
         causeId: name,
         causeDetail: name + ' is ' + phase + ' — ongoing ' + domain +
-          ' effects in ' + hoods.join(', '),
+          ' effects in ' + hoods.join(', ') +
+          (tend < 1 ? ' — untended ' + untended + ' Cycles, running at ' + Math.round(tend * 100) + '% strength' : ''),
         effectType: Object.keys(effects).join('/'),
         targetScope: 'neighborhood',
         targetIds: hoods,
@@ -462,7 +556,8 @@ function applyInitiativeImplementationEffects_(ctx) {
     }
 
     Logger.log('  ' + name + ': ' + phase + ' (' + domain + ') → intensity ' +
-      intensity.toFixed(2) + ' → ' + hoods.join(', '));
+      intensity.toFixed(2) + (tend < 1 ? ' (upkeep ' + tend.toFixed(2) + ', untended ' + untended + ')' : '') +
+      ' → ' + hoods.join(', '));
   }
 
   // Clamp total sentiment

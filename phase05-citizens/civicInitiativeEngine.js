@@ -3173,7 +3173,10 @@ function applyCivicStageStep_(ctx, row, ix, cycle) {
     lastWorkCycle: cell(ix.lastWork), lastStageChangeCycle: cell(ix.lastStageChange), cycle: cycle
   });
   if (!step) return false;
-  var initKey = String(cell(ix.id) || '').trim() || String(cell(ix.name) || '');
+  // Keyed EXACTLY as both readers key it: trimmed InitiativeID, else trimmed Name
+  // (applyInitiativeImplementationEffects.js, updateCivicApprovalRatings.js). An
+  // untrimmed Name fallback missed the carry and lost the advancement (codex F3).
+  var initKey = String(cell(ix.id) || '').trim() || String(cell(ix.name) || '').trim();
   row[ix.stage] = step.stage;
   row[ix.lastStageChange] = step.lastStageChangeCycle;
   if (step.phase && ix.phase >= 0) {
@@ -3182,7 +3185,10 @@ function applyCivicStageStep_(ctx, row, ix, cycle) {
       row[ix.phase] = step.phase;
       var S = ctx.summary;
       S.initiativeEnginePhaseMoves = S.initiativeEnginePhaseMoves || {};
-      if (left) S.initiativeEnginePhaseMoves[initKey] = left;
+      // A row that never had a phase stood up from nothing: carry `announced`
+      // (intensity 0), the arc's opening phase. The Phase-2 detector needs a truthy
+      // prior phase, so a blank here silently dropped the advancement (codex F4).
+      S.initiativeEnginePhaseMoves[initKey] = left || 'announced';
     }
   }
   if (ix.lastUpdated >= 0) row[ix.lastUpdated] = ctx.now;

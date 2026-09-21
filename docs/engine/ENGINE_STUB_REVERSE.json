@@ -2,7 +2,7 @@
   "generated": "2026-09-21",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 184,
-  "functionsMapped": 1453,
+  "functionsMapped": 1463,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -706,9 +706,11 @@
         "phase05-citizens/bondPersistence.js::saveRelationshipBonds_",
         "phase05-citizens/checkForPromotions.js::checkForPromotions_",
         "phase05-citizens/civicInitiativeEngine.js::applyActiveInitiativeRipples_",
+        "phase05-citizens/civicInitiativeEngine.js::applyCivicStageBaseline_",
         "phase05-citizens/civicInitiativeEngine.js::applyNeighborhoodRipple_",
         "phase05-citizens/civicInitiativeEngine.js::checkMayoralVeto_",
         "phase05-citizens/civicInitiativeEngine.js::createInitiative_",
+        "phase05-citizens/civicInitiativeEngine.js::freezeCivicStageCohort_",
         "phase05-citizens/civicInitiativeEngine.js::getInitiativeSummaryForMedia_",
         "phase05-citizens/civicInitiativeEngine.js::runCivicInitiativeEngine_",
         "phase05-citizens/educationCareerEngine.js::processEducationCareer_",
@@ -822,6 +824,7 @@
         "phase01-config/canonNeighborhoodLoader.js::resolveHoodOrChild_",
         "phase02-world-state/applyCityDynamics.js::buildHoodClusterAssignment_",
         "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_",
+        "phase05-citizens/civicInitiativeEngine.js::freezeCivicStageCohort_",
         "phase06-analysis/economicRippleEngine.js::sceneHoods_",
         "phase07-evening-media/applyStorySeeds.js::applyStorySeeds_",
         "phase07-evening-media/cityEveningSystems.js::buildCityEveningSystems_",
@@ -3270,10 +3273,10 @@
     },
     "initiativeEnginePhaseMoves": {
       "writers": [
-        "phase05-citizens/civicInitiativeEngine.js::applyCivicStageStep_"
+        "phase05-citizens/civicInitiativeEngine.js::applyCivicStageMove_"
       ],
       "readers": [
-        "phase05-citizens/civicInitiativeEngine.js::applyCivicStageStep_",
+        "phase05-citizens/civicInitiativeEngine.js::applyCivicStageMove_",
         "phase05-citizens/civicInitiativeEngine.js::civicStageStep_",
         "phase09-digest/finalizeCycleState.js::finalizeCycleState_"
       ]
@@ -3285,6 +3288,14 @@
       "readers": [
         "phase05-citizens/civicInitiativeEngine.js::civicStageStep_",
         "phase09-digest/finalizeCycleState.js::finalizeCycleState_"
+      ]
+    },
+    "civicStageCohort": {
+      "writers": [
+        "phase05-citizens/civicInitiativeEngine.js::freezeCivicStageCohort_"
+      ],
+      "readers": [
+        "phase05-citizens/civicInitiativeEngine.js::civicStageCohortFor_"
       ]
     },
     "heritage": {
@@ -4355,6 +4366,7 @@
         "phase04-events/chaosCarsEngine.test.js::reset",
         "phase05-citizens/bondEngine.js::loadNeighborhoodsFromSheet_",
         "phase05-citizens/civicInitiativeEngine.js::engineClockHold_",
+        "phase05-citizens/civicInitiativeEngine.js::freezeCivicStageCohort_",
         "phase05-citizens/migrationTrackingEngine.js::buildNeighborhoodPressureMap_",
         "phase05-citizens/migrationTrackingEngine.js::buildRelocationHoodState_",
         "phase05-citizens/neighborhoodTrajectoryEngine.js::updateNeighborhoodTrajectories_",
@@ -4606,6 +4618,7 @@
         "phase05-citizens/civicInitiativeEngine.js::addSwingVoter2Columns",
         "phase05-citizens/civicInitiativeEngine.js::createInitiativeTrackerSheet_",
         "phase05-citizens/civicInitiativeEngine.js::createInitiative_",
+        "phase05-citizens/civicInitiativeEngine.js::freezeCivicStageCohort_",
         "phase05-citizens/civicInitiativeEngine.js::getInitiativeSummaryForMedia_",
         "phase05-citizens/civicInitiativeEngine.js::manualRunVote",
         "phase05-citizens/civicInitiativeEngine.js::runCivicInitiativeEngine_",

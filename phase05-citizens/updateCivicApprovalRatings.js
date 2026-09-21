@@ -443,6 +443,13 @@ function updateCivicApprovalRatings_(ctx) {
       var tId = findApprCol_(tHeaders, ['InitiativeID', 'initiativeid']);
       // civic.38 Task 5 step 1 (review F5): the seat that authored the row.
       var tPropOffice = findApprCol_(tHeaders, ['ProposingOffice', 'proposingoffice']);
+      // civic.38 Task 4 (2), plan ruling 8: a staged row that delivers stays
+      // `operational`, so the phase never says `complete`. The finishing credit is
+      // read off the row's StageHold cell instead: `first` is stamped by the Phase-5
+      // stage handler in the ONE fire a row first reaches Delivering, and never
+      // again — so `completed` (+3 to the owner) pays once per row, ever. A regress
+      // and a second delivery pay nothing.
+      var tStageHold = findApprCol_(tHeaders, ['StageHold']);
 
       // engine.139 (G-PF34): last cycle's phase per initiative, for transition
       // detection. Gated on the carry-forward being EXACTLY one cycle old — a
@@ -479,7 +486,9 @@ function updateCivicApprovalRatings_(ctx) {
           leadFaction: tLead !== -1 ? (tr[tLead] || '').toString().trim().toUpperCase() : '',
           oppFaction: tOpp !== -1 ? (tr[tOpp] || '').toString().trim().toUpperCase() : '',
           proposingOffice: tPropOffice !== -1 ? (tr[tPropOffice] || '').toString().trim().toUpperCase() : '',
-          motion: classifyInitiativeMotion_(phase, nextActionCycle, cycle, prevPhase)
+          motion: (Number(cycle) > 0 && civicFirstDeliveredCycle_(tStageHold !== -1 ? tr[tStageHold] : '') === Number(cycle))
+            ? 'completed'
+            : classifyInitiativeMotion_(phase, nextActionCycle, cycle, prevPhase)
         });
       }
     }
@@ -1008,6 +1017,23 @@ function isFailing_(phase) {
     if (phase.indexOf(failing[i]) >= 0) return true;
   }
   return false;
+}
+
+/**
+ * civic.38 Task 4 (2): the Cycle a staged row FIRST reached Delivering, read off
+ * its StageHold cell ({v:1, first:<Cycle>, ...}). 0 for a blank, legacy or
+ * unreadable cell — a row that never delivered pays no finishing credit.
+ */
+function civicFirstDeliveredCycle_(cellValue) {
+  var text = String(cellValue == null ? '' : cellValue).replace(/^\s+|\s+$/g, '');
+  if (!text) return 0;
+  try {
+    var hold = JSON.parse(text);
+    var first = hold && hold.v === 1 ? Number(hold.first) : 0;
+    return isFinite(first) && first > 0 ? first : 0;
+  } catch (e) {
+    return 0;
+  }
 }
 
 /**

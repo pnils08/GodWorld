@@ -1507,12 +1507,37 @@
 
 - **civicStageRequirement_(input)**
 
+- **civicStageBaselineFrom_(input)**
+
+- **civicDeliveryEdge_(baseline, cohort)**
+
+- **civicDeliveryHoldStep_(input)**
+
 - **civicStageStep_(st)**
   Reads: S.initiativeEnginePhaseMoves, S.initiativePhases
 
-- **applyCivicStageStep_(ctx, row, ix, cycle)**
+- **applyCivicStageMove_(ctx, row, ix, cycle)**
   Reads: S.initiativeEnginePhaseMoves
   Writes: S.initiativeEnginePhaseMoves
+
+- **applyCivicStageStep_(ctx, row, ix, cycle)**
+
+- **freezeCivicStageCohort_(ctx)**
+  Reads: S.canonHoods, S.cycleId
+  Writes: S.civicStageCohort
+  Config: ctx.config.cycleCount
+  Sheets: Initiative_Tracker, Neighborhood_Map
+
+- **getCivicDeliverDials_(ctx, domain)**
+
+- **civicStageCohortFor_(ctx, tab)**
+  Reads: S.civicStageCohort
+
+- **applyCivicStageBaseline_(ctx, row, ix)**
+  Reads: S.cycleId
+  Config: ctx.config.cycleCount
+
+- **applyCivicDeliveryStep_(ctx, row, ix, cycle)**
 
 ### educationCareerEngine.js
 - **canonicalEducationWrite_(v)**
@@ -2291,6 +2316,8 @@
 - **isPerforming_(phase)**
 
 - **isFailing_(phase)**
+
+- **civicFirstDeliveredCycle_(cellValue)**
 
 - **classifyInitiativeMotion_(phase, nextActionCycle, cycle, prevPhase)**
 
@@ -4178,4 +4205,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 184
-**Functions mapped:** 1453
+**Functions mapped:** 1463

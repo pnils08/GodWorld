@@ -167,7 +167,8 @@ function runCivicInitiativeEngine_(ctx) {
   var stageIx = {
     stage: idx('Stage'), lastStageChange: idx('LastStageChangeCycle'), lastWork: idx('LastWorkCycle'),
     status: iStatus, mayoralAction: iMayoralAction, phase: iImplementationPhase,
-    policyDomain: iPolicyDomain, lastUpdated: iLastUpdated, id: iID, name: iName
+    policyDomain: iPolicyDomain, lastUpdated: iLastUpdated, id: iID, name: iName,
+    baseline: idx('StageBaseline'), hold: idx('StageHold'), hoods: iAffectedNeighborhoods
   };
 
   // v1.2: Required header validation to prevent silent write failures
@@ -2983,13 +2984,16 @@ function engineClockHold_(notes, nextActionCycle, cycle, engineWillAct) {
  * civic.38 Task 4 step 1 — THE STAGE MODEL (columns + shared rules)
  * ============================================================================
  * Machine state lives in columns, never in Notes (plan mechanism decision 2).
- * Six columns on Initiative_Tracker, appended once by
+ * Seven columns on Initiative_Tracker, appended once by
  * ensureInitiativeStageColumns_ from the cycle path:
  *   Stage                — '' | Proposed | Funded | Standing | Delivering
  *   StageBaseline        — versioned JSON descriptor of the stage-3 observation
  *   LastStageChangeCycle — engine-written; the only clock a staged row runs on
  *   LastWorkCycle / LastWorkSeat — gate-written by the Sunday fold
  *   PriorPhase           — engine-written on first stall entry
+ *   StageHold            — engine-written JSON: the Delivering streak, the first-delivered
+ *                          and last-regress Cycles. Its own cell so StageBaseline is
+ *                          written once and never rewritten (plan ruling 4)
  * A BLANK Stage is a legacy row: nothing in the stage model reads or writes it.
  *
  * lib/ is claspignored, so the rules below are a MIRROR of
@@ -2998,7 +3002,7 @@ function engineClockHold_(notes, nextActionCycle, cycle, engineWillAct) {
  * helper body is text-identical, and both run one fixture matrix. Change one,
  * change both, in the same commit.
  */
-var INITIATIVE_STAGE_COLUMNS_ = ['Stage', 'StageBaseline', 'LastStageChangeCycle', 'LastWorkCycle', 'LastWorkSeat', 'PriorPhase'];
+var INITIATIVE_STAGE_COLUMNS_ = ['Stage', 'StageBaseline', 'LastStageChangeCycle', 'LastWorkCycle', 'LastWorkSeat', 'PriorPhase', 'StageHold'];
 
 var CIVIC_STAGE_CATALOG_ = {
   health:    { playable: true,  stage3Metric: { tab: 'Neighborhood_Demographics', column: ['Sick'], direction: 'down', scope: 'hood' } },
@@ -3094,17 +3098,176 @@ function civicStageRequirementWith_(catalogByDomain, input) {
       return out;
     }
     var m = entry.stage3Metric;
+    // A gate whose metric the engine cannot read yet is not a live gate: say so,
+    // and the losing clock stays off it (ruling 3 — no clock on an unbuilt exit).
+    if (m.scope !== 'hood') {
+      out.blocked = 'no-delivering-reader';
+      out.text = 'Standing — the delivering gate for this domain cannot be read yet';
+      return out;
+    }
     out.next = 'Delivering';
     out.clears = inp.metricMoved === true;
     out.text = 'Standing — delivers when ' + m.column.join(' + ') + ' moves ' + m.direction + ' against its baseline';
     return out;
   }
-  out.text = 'Delivering — the service is reaching people';
+  out.text = 'Delivering — the service is reaching people; it slips back to Standing if the metric stops holding';
   return out;
 }
 
 function civicStageRequirement_(input) {
   return civicStageRequirementWith_(CIVIC_STAGE_CATALOG_, input);
+}
+
+// MIRROR of lib/initiativePhaseContract.js stageBaselineFrom — body text-identical (parity-tested).
+function civicStageBaselineFrom_(input) {
+  var inp = input || {};
+  var fail = function (reason) { return { ok: false, reason: reason, descriptor: null }; };
+  var metric = inp.metric || {};
+  var columns = Array.isArray(metric.column) ? metric.column.slice() : [];
+  if (metric.scope !== 'hood' || !columns.length) return fail('no-hood-reader');
+  if (metric.direction !== 'up' && metric.direction !== 'down') return fail('bad-direction');
+  if (inp.origin !== 'vote' && inp.origin !== 'conversion') return fail('bad-origin');
+  var capture = Number(inp.captureCycle);
+  if (!isFinite(capture) || capture < 1) return fail('bad-capture-cycle');
+  var cohort = inp.cohort || {};
+  var obs = Number(cohort.cycle);
+  if (cohort.available !== true || cohort.tab !== metric.tab || !cohort.rows || !isFinite(obs) || obs < 1) {
+    return fail(cohort.reason || 'cohort-unavailable');
+  }
+  if (obs > capture) return fail('cohort-from-the-future');
+  var hoods = [];
+  (inp.hoods || []).forEach(function (h) {
+    var name = String(h == null ? '' : h).trim();
+    if (name && hoods.indexOf(name) < 0) hoods.push(name);
+  });
+  hoods.sort();
+  if (!hoods.length) return fail('no-target-hoods');
+  var num = function (v) {
+    return (typeof v === 'number' || (typeof v === 'string' && v.trim() !== '')) && isFinite(Number(v)) ? Number(v) : null;
+  };
+  var all = Object.keys(cohort.rows).sort();
+  var keys = {}, middle = {};
+  for (var c = 0; c < columns.length; c++) {
+    var col = columns[c], levels = [];
+    for (var a = 0; a < all.length; a++) {
+      var lv = num((cohort.rows[all[a]] || {})[col]);
+      if (lv === null) return fail('city-reading-missing:' + all[a] + '.' + col);
+      levels.push(lv);
+    }
+    levels.sort(function (x, y) { return x - y; });
+    var mid = Math.floor(levels.length / 2);
+    var med = levels.length % 2 ? levels[mid] : (levels[mid - 1] + levels[mid]) / 2;
+    if (!(med > 0)) return fail('city-middle-not-positive:' + col);
+    middle[col] = med;
+    for (var t = 0; t < hoods.length; t++) {
+      if (!Object.prototype.hasOwnProperty.call(cohort.rows, hoods[t])) return fail('target-hood-missing:' + hoods[t]);
+      keys[hoods[t]] = keys[hoods[t]] || {};
+      keys[hoods[t]][col] = num(cohort.rows[hoods[t]][col]);
+    }
+  }
+  return { ok: true, reason: null, descriptor: {
+    v: 1, origin: inp.origin, cycle: obs, captureCycle: capture, tab: metric.tab, columns: columns,
+    scope: 'hood', direction: metric.direction, cityN: all.length, keys: keys, cityMiddle: middle
+  } };
+}
+
+// MIRROR of lib/initiativePhaseContract.js deliveryEdge — body text-identical (parity-tested).
+function civicDeliveryEdge_(baseline, cohort) {
+  var fail = function (reason) { return { available: false, reason: reason, cycle: null, edges: null, minEdge: null }; };
+  var b = baseline;
+  if (typeof b === 'string') { try { b = JSON.parse(b); } catch (e) { b = null; } }
+  if (!b || b.v !== 1 || !Array.isArray(b.columns) || !b.columns.length || !b.keys || !b.cityMiddle ||
+      (b.direction !== 'up' && b.direction !== 'down') || !isFinite(Number(b.cycle))) return fail('baseline-unavailable');
+  var co = cohort || {};
+  if (co.available !== true || !co.rows) return fail(co.reason || 'cohort-unavailable');
+  if (co.tab !== b.tab) return fail('cohort-tab-mismatch');
+  var obs = Number(co.cycle);
+  if (!isFinite(obs) || !(obs > Number(b.cycle))) return fail('observation-not-after-baseline');
+  var all = Object.keys(co.rows).sort();
+  if (isFinite(Number(b.cityN)) && all.length !== Number(b.cityN)) return fail('city-membership-changed');
+  var hoods = Object.keys(b.keys).sort();
+  if (!hoods.length) return fail('baseline-cohort-empty');
+  var num = function (v) {
+    return (typeof v === 'number' || (typeof v === 'string' && v.trim() !== '')) && isFinite(Number(v)) ? Number(v) : null;
+  };
+  var edges = {}, minEdge = null;
+  for (var c = 0; c < b.columns.length; c++) {
+    var col = b.columns[c], levels = [];
+    for (var a = 0; a < all.length; a++) {
+      var lv = num((co.rows[all[a]] || {})[col]);
+      if (lv === null) return fail('city-reading-missing:' + all[a] + '.' + col);
+      levels.push(lv);
+    }
+    levels.sort(function (x, y) { return x - y; });
+    var mid = Math.floor(levels.length / 2);
+    var med = levels.length % 2 ? levels[mid] : (levels[mid - 1] + levels[mid]) / 2;
+    var baseMed = num(b.cityMiddle[col]);
+    if (!(med > 0) || baseMed === null || !(baseMed > 0)) return fail('city-middle-not-positive:' + col);
+    var nowSum = 0, baseSum = 0;
+    for (var t = 0; t < hoods.length; t++) {
+      if (!Object.prototype.hasOwnProperty.call(co.rows, hoods[t])) return fail('target-hood-missing:' + hoods[t]);
+      var nowV = num(co.rows[hoods[t]][col]);
+      var baseV = num((b.keys[hoods[t]] || {})[col]);
+      if (nowV === null || baseV === null) return fail('target-reading-missing:' + hoods[t] + '.' + col);
+      nowSum += nowV / med;
+      baseSum += baseV / baseMed;
+    }
+    var edge = b.direction === 'down' ? (baseSum - nowSum) / hoods.length : (nowSum - baseSum) / hoods.length;
+    edges[col] = Math.round(edge * 1000000) / 1000000;
+    if (minEdge === null || edges[col] < minEdge) minEdge = edges[col];
+  }
+  return { available: true, reason: null, cycle: obs, edges: edges, minEdge: minEdge };
+}
+
+// MIRROR of lib/initiativePhaseContract.js deliveryHoldStep — body text-identical (parity-tested).
+function civicDeliveryHoldStep_(input) {
+  var inp = input || {};
+  var prev = inp.hold;
+  if (typeof prev === 'string') { try { prev = prev.trim() ? JSON.parse(prev) : null; } catch (e) { prev = null; } }
+  var cnt = function (v) { var x = Number(v); return isFinite(x) && x > 0 ? Math.floor(x) : 0; };
+  var state = { v: 1, obs: 0, up: 0, down: 0, first: 0, regressed: 0, m: null };
+  if (prev && typeof prev === 'object' && prev.v === 1) {
+    state.obs = cnt(prev.obs); state.up = cnt(prev.up); state.down = cnt(prev.down);
+    state.first = cnt(prev.first); state.regressed = cnt(prev.regressed);
+    state.m = isFinite(Number(prev.m)) && prev.m !== null && prev.m !== '' ? Number(prev.m) : null;
+  }
+  var same = function (reason) { return { changed: false, hold: state, verdict: null, firstDelivery: false, reason: reason }; };
+  var stage = String(inp.stage == null ? '' : inp.stage).trim();
+  if (stage !== 'Standing' && stage !== 'Delivering') return same('not-a-hold-stage');
+  var margin = Number(inp.margin), share = Number(inp.regressShare), need = Number(inp.holdCycles), fire = Number(inp.fireCycle);
+  if (!isFinite(margin) || margin < 0 || !isFinite(share) || share < 0 || share > 1 ||
+      !isFinite(need) || need < 1 || Math.floor(need) !== need || !isFinite(fire) || fire < 1) return same('bad-dials');
+  var obs = Number(inp.obsCycle);
+  if (!isFinite(obs) || obs < 1) return same('no-observation');
+  if (obs <= state.obs) return same('already-counted');
+  var after = Number(inp.eligibleAfter);
+  if (!isFinite(after) || after < 1) return same('no-stage-change-cycle');
+  if (!(obs > after)) return same('not-yet-eligible');
+  var next = { v: 1, obs: obs, up: state.up, down: state.down, first: state.first, regressed: state.regressed, m: margin };
+  if ((state.obs && obs !== state.obs + 1) || (state.m !== null && state.m !== margin)) { next.up = 0; next.down = 0; }
+  var edge = inp.edge || {};
+  if (edge.available !== true || Number(edge.cycle) !== obs || !isFinite(Number(edge.minEdge)) || edge.minEdge === null) {
+    next.up = 0; next.down = 0;
+    return { changed: true, hold: next, verdict: null, firstDelivery: false, reason: 'edge-unavailable' };
+  }
+  var e = Number(edge.minEdge), tol = 1e-9, verdict = null, firstDelivery = false;
+  if (stage === 'Standing') {
+    next.down = 0;
+    next.up = e + tol >= margin ? next.up + 1 : 0;
+    if (next.up >= need) verdict = 'deliver';
+  } else {
+    next.up = 0;
+    next.down = e + tol < margin * share ? next.down + 1 : 0;
+    if (next.down >= need) verdict = 'regress';
+  }
+  if (verdict === 'deliver') {
+    next.up = 0; next.down = 0;
+    if (!next.first) { next.first = fire; firstDelivery = true; }
+  } else if (verdict === 'regress') {
+    next.up = 0; next.down = 0;
+    next.regressed = fire;
+  }
+  return { changed: true, hold: next, verdict: verdict, firstDelivery: firstDelivery, reason: null };
 }
 
 
@@ -3120,7 +3283,8 @@ function civicStageRequirement_(input) {
  *                         effect channel accepts (health relief, transit ridership
  *                         lifts only on operational/complete/open, the hood fold
  *                         at 0.9). A seat never picks its own phase.
- *   Standing -> Delivering  not in this cut (baseline + comparator).
+ *   Standing <-> Delivering  NOT here — that gate is an observation, not a move:
+ *                         applyCivicDeliveryStep_ (frozen cohort + StageHold streak).
  *
  * Only a voted row steps: a vetoed, failed or still-pending row keeps its Stage.
  */
@@ -3164,7 +3328,7 @@ function civicStageStep_(st) {
  * fire. The phase the row LEFT rides forward in S.initiativeEnginePhaseMoves,
  * keyed exactly as the detector keys its own lookup (InitiativeID, else Name).
  */
-function applyCivicStageStep_(ctx, row, ix, cycle) {
+function applyCivicStageMove_(ctx, row, ix, cycle) {
   if (!ix || ix.stage < 0 || ix.lastStageChange < 0) return false;
   var cell = function (i) { return i >= 0 ? row[i] : ''; };
   var step = civicStageStep_({
@@ -3196,3 +3360,252 @@ function applyCivicStageStep_(ctx, row, ix, cycle) {
              (step.phase ? ' (phase -> ' + step.phase + ')' : '') + ' at C' + cycle);
   return true;
 }
+
+/**
+ * The ONE stage entry point for a tracker row (three call sites in
+ * runCivicInitiativeEngine_). In order: the vote/work move, the once-only
+ * baseline stamp, the Delivering hold. Each half is idempotent within a fire —
+ * a move refuses a second step in the Cycle it stepped, a filled baseline is
+ * never rewritten, and the hold counts one observation once — so calling this
+ * three times on one row is the same as calling it once. No-op on a blank Stage.
+ */
+function applyCivicStageStep_(ctx, row, ix, cycle) {
+  if (!ix || !(ix.stage >= 0) || !(ix.lastStageChange >= 0)) return false;
+  if (!String(row[ix.stage] == null ? '' : row[ix.stage]).trim()) return false;
+  var changed = applyCivicStageMove_(ctx, row, ix, cycle);
+  if (applyCivicStageBaseline_(ctx, row, ix)) changed = true;
+  if (applyCivicDeliveryStep_(ctx, row, ix, cycle)) changed = true;
+  return changed;
+}
+
+/**
+ * civic.38 Task 4 (2) — freeze the prior Cycle's observation cohort.
+ *
+ * Called FIRST in Phase 2 of fire N (its own safePhaseCall_, both entry points),
+ * before any producer of fire N has written: Phase 3 rewrites
+ * Neighborhood_Demographics in place and Phase 10 rewrites Neighborhood_Map, so
+ * this is the only point in a fire where every gate tab still holds one coherent
+ * N-1 observation (codex handler review ASK 2, option c).
+ *
+ * A tab is a cohort only if EVERY row is a canon parent hood, unique, stamped
+ * exactly N-1, and the row count matches canon. The stamp is written in the same
+ * write as the values, so full N-1 coverage is the receipt that the writer
+ * finished; a run that died mid-write leaves mixed stamps and the tab reads
+ * unavailable — never a guessed merge. Reads only; writes nothing.
+ *
+ * Inert while every Stage is blank: no staged row, no read.
+ */
+function freezeCivicStageCohort_(ctx) {
+  var S = ctx.summary;
+  if (!S) S = ctx.summary = {};
+  S.civicStageCohort = null;
+  var ss = ctx.ss;
+  if (!ss) return null;
+  var tracker = ss.getSheetByName('Initiative_Tracker');
+  if (!tracker) return null;
+  var tData = tracker.getDataRange().getValues();
+  if (tData.length < 2) return null;
+  var iStage = tData[0].indexOf('Stage');
+  var iDomain = tData[0].indexOf('PolicyDomain');
+  if (iStage < 0 || iDomain < 0) return null;
+
+  // Which tabs does a staged row actually gate on? Playable, hood-scoped only.
+  var wanted = {};
+  var anyStaged = false;
+  for (var r = 1; r < tData.length; r++) {
+    if (!String(tData[r][iStage] == null ? '' : tData[r][iStage]).trim()) continue;
+    anyStaged = true;
+    var entry = CIVIC_STAGE_CATALOG_[String(tData[r][iDomain] == null ? '' : tData[r][iDomain]).trim().toLowerCase()];
+    if (!entry || entry.playable !== true || entry.stage3Metric.scope !== 'hood') continue;
+    var m = entry.stage3Metric;
+    wanted[m.tab] = wanted[m.tab] || [];
+    for (var c = 0; c < m.column.length; c++) {
+      if (wanted[m.tab].indexOf(m.column[c]) < 0) wanted[m.tab].push(m.column[c]);
+    }
+  }
+  if (!anyStaged) return null;
+
+  var cycle = Number(S.cycleId || (ctx.config && ctx.config.cycleCount) || 0);
+  var obs = cycle - 1;
+  var canon = S.canonHoods && S.canonHoods.list ? S.canonHoods.list : null;
+  var out = { cycle: obs, tabs: {} };
+
+  Object.keys(wanted).forEach(function (tab) {
+    var co = { available: false, reason: null, cycle: obs, tab: tab, rows: {} };
+    out.tabs[tab] = co;
+    if (!(obs >= 1)) { co.reason = 'no-prior-cycle'; return; }
+    if (!canon || !canon.length || typeof resolveHoodOrChild_ !== 'function') { co.reason = 'canon-hoods-unavailable'; return; }
+    var sheet = ss.getSheetByName(tab);
+    if (!sheet) { co.reason = 'tab-missing'; return; }
+    var data = sheet.getDataRange().getValues();
+    if (data.length < 2) { co.reason = 'tab-empty'; return; }
+    var head = data[0];
+    var iHood = head.indexOf('Neighborhood');
+    var iStamp = head.indexOf(tab === 'Neighborhood_Map' ? 'Cycle' : 'LastUpdated');
+    if (iHood < 0 || iStamp < 0) { co.reason = 'hood-or-stamp-column-missing'; return; }
+    var cols = wanted[tab], iCols = [];
+    for (var k = 0; k < cols.length; k++) {
+      iCols.push(head.indexOf(cols[k]));
+      if (iCols[k] < 0) { co.reason = 'column-missing:' + cols[k]; return; }
+    }
+    var seen = 0;
+    for (var i = 1; i < data.length; i++) {
+      var raw = String(data[i][iHood] == null ? '' : data[i][iHood]).trim();
+      if (!raw) continue;
+      var hood = resolveHoodOrChild_(ctx, raw);
+      if (!hood || hood !== raw) { co.reason = 'not-a-parent-hood:' + raw; co.rows = {}; return; }
+      if (Object.prototype.hasOwnProperty.call(co.rows, hood)) { co.reason = 'duplicate-hood:' + hood; co.rows = {}; return; }
+      if (Number(data[i][iStamp]) !== obs) { co.reason = 'stamp-not-C' + obs + ':' + hood + '=' + data[i][iStamp]; co.rows = {}; return; }
+      var rec = {};
+      for (var j = 0; j < cols.length; j++) {
+        var v = data[i][iCols[j]];
+        rec[cols[j]] = (typeof v === 'number' || (typeof v === 'string' && v.trim() !== '')) && isFinite(Number(v)) ? Number(v) : null;
+      }
+      co.rows[hood] = rec;
+      seen++;
+    }
+    if (seen !== canon.length) { co.reason = 'coverage-' + seen + '-of-' + canon.length; co.rows = {}; return; }
+    co.available = true;
+  });
+
+  S.civicStageCohort = out;
+  Object.keys(out.tabs).forEach(function (tab) {
+    Logger.log('freezeCivicStageCohort_: ' + tab + ' C' + obs + ' ' +
+               (out.tabs[tab].available ? 'frozen' : 'UNAVAILABLE (' + out.tabs[tab].reason + ')'));
+  });
+  return out;
+}
+
+/**
+ * The Delivering dials, read only when a staged row asks. Fail-loud like every
+ * self-armed key (seeded by ensureEngine213Config_ at cycle open). The per-domain
+ * margin wins over the default (builder ruling a).
+ */
+function getCivicDeliverDials_(ctx, domain) {
+  var source = ctx && ctx.config;
+  if (!source) throw new Error('civic delivering: ctx.config required');
+  var required = function (key, min, max) {
+    var raw = source[key];
+    var value = Number(raw);
+    if (raw === '' || raw === null || raw === undefined || !isFinite(value) || value < min || value > max) {
+      throw new Error('civic delivering: invalid or missing World_Config.' + key);
+    }
+    return value;
+  };
+  var own = 'civicDeliverMargin_' + domain;
+  var hasOwn = domain && source[own] !== '' && source[own] !== null && source[own] !== undefined;
+  return {
+    margin: required(hasOwn ? own : 'civicDeliverMargin', 0, 2),
+    holdCycles: required('civicDeliverHoldCycles', 1, 12),
+    regressShare: required('civicDeliverRegressShare', 0, 1)
+  };
+}
+
+/** The frozen cohort for one row's gate tab, or a named-unavailable stand-in. */
+function civicStageCohortFor_(ctx, tab) {
+  var all = ctx && ctx.summary && ctx.summary.civicStageCohort;
+  if (all && all.tabs && all.tabs[tab]) return all.tabs[tab];
+  return { available: false, reason: 'cohort-not-frozen', cycle: null, tab: tab, rows: null };
+}
+
+/**
+ * Stamp StageBaseline ONCE. A Funded row takes a `vote` baseline from the cohort
+ * frozen at the top of this fire — the last committed observation before the
+ * money could do anything. A row that reaches Standing with no baseline (a
+ * converted legacy row, or a vote whose cohort was unreadable every fire until
+ * it stood up) takes a `conversion` baseline and says so. A filled cell is never
+ * rewritten: not by a re-run, a regress, or a revival (plan ruling 4).
+ */
+function applyCivicStageBaseline_(ctx, row, ix) {
+  if (!(ix.baseline >= 0) || !(ix.hoods >= 0) || !(ix.policyDomain >= 0)) return false;
+  var stage = String(row[ix.stage] == null ? '' : row[ix.stage]).trim();
+  if (stage !== 'Funded' && stage !== 'Standing') return false;
+  if (String(row[ix.baseline] == null ? '' : row[ix.baseline]).trim()) return false;
+  var entry = CIVIC_STAGE_CATALOG_[String(row[ix.policyDomain] == null ? '' : row[ix.policyDomain]).trim().toLowerCase()];
+  if (!entry || entry.playable !== true || entry.stage3Metric.scope !== 'hood') return false;
+  var initKey = String((ix.id >= 0 ? row[ix.id] : '') || '').trim() || String((ix.name >= 0 ? row[ix.name] : '') || '').trim();
+  if (typeof resolveHoodOrChild_ !== 'function') return false;
+  var parts = String(row[ix.hoods] == null ? '' : row[ix.hoods]).split(/[,;]+/);
+  var hoods = [];
+  for (var p = 0; p < parts.length; p++) {
+    var raw = parts[p].trim();
+    if (!raw) continue;
+    var hood = resolveHoodOrChild_(ctx, raw);
+    if (!hood) {
+      Logger.log('civicInitiativeEngine: ' + initKey + ' baseline NOT stamped — unknown hood "' + raw + '"');
+      return false;
+    }
+    if (hoods.indexOf(hood) < 0) hoods.push(hood);
+  }
+  var cycle = Number(ctx.summary.cycleId || (ctx.config && ctx.config.cycleCount) || 0);
+  var built = civicStageBaselineFrom_({
+    origin: stage === 'Funded' ? 'vote' : 'conversion', captureCycle: cycle,
+    metric: entry.stage3Metric, hoods: hoods, cohort: civicStageCohortFor_(ctx, entry.stage3Metric.tab)
+  });
+  if (!built.ok) {
+    Logger.log('civicInitiativeEngine: ' + initKey + ' baseline NOT stamped — ' + built.reason);
+    return false;
+  }
+  row[ix.baseline] = JSON.stringify(built.descriptor);
+  Logger.log('civicInitiativeEngine: ' + initKey + ' baseline stamped (' + built.descriptor.origin + ', observation C' + built.descriptor.cycle + ')');
+  return true;
+}
+
+/**
+ * Standing <-> Delivering. Count this fire's frozen observation into the row's
+ * StageHold streak and apply the verdict. Only a voted row whose gate is live
+ * (not stalled, blocked, unbuilt or unreadable) is judged.
+ *
+ *   deliver  Stage -> Delivering, LastStageChangeCycle = this fire (a forward
+ *            change: ruling e, it also resets tend). Phase stays `operational`
+ *            (ruling 8). The FIRST delivery stamps StageHold.first, which is what
+ *            updateCivicApprovalRatings_ pays `completed` +3 on, once per row.
+ *   regress  Stage -> Standing and NOTHING else. LastStageChangeCycle is left
+ *            alone on purpose: the tend reference is the later of it and
+ *            LastWorkCycle, so stamping it here would snap a neglected service
+ *            back to full strength for a whole grace period — the regress would
+ *            repair the neglect that caused it. Costs nothing beyond the
+ *            restarted hold (ruling f).
+ */
+function applyCivicDeliveryStep_(ctx, row, ix, cycle) {
+  if (!(ix.baseline >= 0) || !(ix.hold >= 0) || !(ix.policyDomain >= 0)) return false;
+  var cell = function (i) { return i >= 0 ? row[i] : ''; };
+  var stage = String(cell(ix.stage) == null ? '' : cell(ix.stage)).trim();
+  if (stage !== 'Standing' && stage !== 'Delivering') return false;
+  var status = String(cell(ix.status) == null ? '' : cell(ix.status)).trim().toLowerCase();
+  var voted = status === 'override-passed' ||
+    (status === 'passed' && String(cell(ix.mayoralAction) == null ? '' : cell(ix.mayoralAction)).trim().toLowerCase() === 'signed');
+  if (!voted) return false;
+  var domain = String(cell(ix.policyDomain) == null ? '' : cell(ix.policyDomain)).trim().toLowerCase();
+  var req = civicStageRequirement_({ stage: stage, phase: cell(ix.phase), policyDomain: domain });
+  if (!req || req.blocked) return false;
+  var baseline = String(cell(ix.baseline) == null ? '' : cell(ix.baseline)).trim();
+  if (!baseline) return false;
+  var entry = CIVIC_STAGE_CATALOG_[domain];
+  if (!entry) return false;
+
+  var dials = getCivicDeliverDials_(ctx, domain);
+  var edge = civicDeliveryEdge_(baseline, civicStageCohortFor_(ctx, entry.stage3Metric.tab));
+  var res = civicDeliveryHoldStep_({
+    stage: stage, hold: cell(ix.hold), obsCycle: Number(cycle) - 1, edge: edge,
+    eligibleAfter: cell(ix.lastStageChange), margin: dials.margin,
+    regressShare: dials.regressShare, holdCycles: dials.holdCycles, fireCycle: cycle
+  });
+  if (!res.changed) return false;
+
+  var initKey = String(cell(ix.id) || '').trim() || String(cell(ix.name) || '').trim();
+  row[ix.hold] = JSON.stringify(res.hold);
+  if (res.verdict === 'deliver') {
+    row[ix.stage] = 'Delivering';
+    row[ix.lastStageChange] = cycle;
+  } else if (res.verdict === 'regress') {
+    row[ix.stage] = 'Standing';
+  }
+  if (res.verdict && ix.lastUpdated >= 0) row[ix.lastUpdated] = ctx.now;
+  Logger.log('civicInitiativeEngine: ' + initKey + ' ' + stage + ' observation C' + (Number(cycle) - 1) + ' edge ' +
+             (edge.available ? edge.minEdge : 'unavailable (' + edge.reason + ')') + ' vs margin ' + dials.margin +
+             ' -> up ' + res.hold.up + ' down ' + res.hold.down +
+             (res.verdict ? ' => ' + res.verdict.toUpperCase() + (res.firstDelivery ? ' (first delivery)' : '') : ''));
+  return true;
+}
+

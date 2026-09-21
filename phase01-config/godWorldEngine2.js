@@ -290,6 +290,9 @@ function runWorldCycle() {
   safePhaseCall_(ctx, 'Phase2-SportsFeed', function() { applySportsFeedTriggers_(ctx); });  // v2.14
   safePhaseCall_(ctx, 'Phase2-CivicSentiment', function() { loadCivicVoiceSentiment_(ctx); });  // v1.0 S137b
   safePhaseCall_(ctx, 'Phase2-EditionCoverage', function() { applyEditionCoverageEffects_(ctx); });  // v2.0 S137b
+  // civic.38 Task 4 (2): freeze last Cycle's committed gate observations BEFORE any
+  // producer of this fire writes (Phase 3 demographics, Phase 10 hood map). Reads only.
+  safePhaseCall_(ctx, 'Phase2-CivicStageCohort', function() { freezeCivicStageCohort_(ctx); });
   safePhaseCall_(ctx, 'Phase2-InitiativeEffects', function() { applyInitiativeImplementationEffects_(ctx); });  // v1.0 S137b
   safePhaseCall_(ctx, 'Phase2-Weather', function() { applyWeatherModel_(ctx); });
   // engine.93 Task 9: build the home-hood -> work-hood matrix BEFORE the
@@ -2039,6 +2042,9 @@ function runCyclePhases_(ctx) {
   safePhaseCall_(ctx, 'Phase2-SportsFeed', function() { applySportsFeedTriggers_(ctx); });  // v2.14
   safePhaseCall_(ctx, 'Phase2-CivicSentiment', function() { loadCivicVoiceSentiment_(ctx); });  // v1.0 S137b
   safePhaseCall_(ctx, 'Phase2-EditionCoverage', function() { applyEditionCoverageEffects_(ctx); });  // v2.0 S137b
+  // civic.38 Task 4 (2): freeze last Cycle's committed gate observations BEFORE any
+  // producer of this fire writes (Phase 3 demographics, Phase 10 hood map). Reads only.
+  safePhaseCall_(ctx, 'Phase2-CivicStageCohort', function() { freezeCivicStageCohort_(ctx); });
   safePhaseCall_(ctx, 'Phase2-InitiativeEffects', function() { applyInitiativeImplementationEffects_(ctx); });  // v1.0 S137b
   safePhaseCall_(ctx, 'Phase2-Weather', function() { applyWeatherModel_(ctx); });
   // engine.93 Task 9: build the home-hood -> work-hood matrix BEFORE the

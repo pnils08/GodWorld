@@ -139,6 +139,12 @@ var ENGINE213_CONFIG_SEEDS = [
   // 0.20 could never deliver it. Unmeasured domains fall back to the default.
   ['civicDeliverMargin_health', 0.15, 'civic.38 Task 4: Delivering margin for health rows (Sick vs city median). Measured: a clinic at full strength holds an edge of 0.18-0.19 over an untreated control; 0.15 clears at the second Cycle and holds. Overrides civicDeliverMargin for PolicyDomain health', 0, 2, false],
   ['civicDeliverHoldCycles', 3, 'civic.38 Task 4: consecutive Cycles the margin must hold (builder-ruled; hold does more than margin)', 1, 12, true],
+  // Regress hysteresis (civic.38 Task 4 part 2). A Delivering row slips back to
+  // Standing only after the hold count of observations BELOW margin x this share —
+  // a lower bar than the one it delivered at, so noise around the margin cannot
+  // flap a row. 1 = regress the moment it stops clearing the margin; 0 = never.
+  // Engine-sheet default, seeded like the margin was before it was ruled.
+  ['civicDeliverRegressShare', 0.5, 'civic.38 Task 4: a Delivering initiative regresses to Standing after civicDeliverHoldCycles observations with its edge below margin x this share (hysteresis; SIM CALL OPEN - engine-sheet default 0.5)', 0, 1, false],
   // civic.38 Task 4 upkeep (builder rulings c/e/g): delivered is not forever. Read by
   // civicTendFactor_ in applyInitiativeImplementationEffects_, only for a row at
   // Standing or Delivering — inert while every Stage is blank.

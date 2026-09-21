@@ -57,7 +57,7 @@ Vocabulary: `Proposed → Funded → Standing → Delivering`. A blank `Stage` m
 | Proposed | Signatures clear the band and the engine votes it through | Petition sweep wired; no band set, so nothing clears |
 | Funded | The vote passes | Existing machinery |
 | Standing | A `work` move has landed on the row at or after the funding cycle (`LastWorkCycle >= LastStageChangeCycle`) | Stage columns, catalog mirror and shared helper **live on PROD, inert**: every Stage is blank |
-| Delivering | The domain's metric beats the city median by 0.20 for 3 straight cycles (`civicDeliverMargin`, `civicDeliverHoldCycles`, live World_Config keys) | **Not built** |
+| Delivering | The domain's metric beats the city median by 0.20 for 3 straight cycles (`civicDeliverMargin`, `civicDeliverHoldCycles`, live World_Config keys; health uses 0.15). Judged on last cycle's finished numbers, one cycle at a time. A delivered row slips back to Standing after 3 straight cycles under half the margin (`civicDeliverRegressShare` 0.5 — open sim call) | **Built and tested, not yet on the bench or live** (2026-09-21). Health and education only; transit waits on its own system (engine.253) |
 
 - **One clock per stage, not per lifetime.** A stage unchanged for 5 cycles (`civicStageStallCycles`) sets the row to `stalled`; the existing `failed` motion then costs its owners −2 a cycle. Work never resets a running clock, only a stage change does. A `work` move revives a stalled row once per stall, with no `advanced` credit. Clock step: **not built**.
 - **No clock on Proposed** for now (builder, 2026-09-21).
@@ -92,7 +92,7 @@ A deploy reaches the world only in some domains today: health (neighborhood `Sic
 
 **Engineering not yet built**
 - Stage handler in three benched cuts, then conversion of the six live rows. Until conversion, nothing on live changes.
-- Delivering judgement and the stall clock (Task 4 steps 3–5).
+- The stall clock and the six-row conversion (Task 4 steps 3–4). Delivering judgement and regress are coded; bench proof is next.
 - Housing lever (engine.251), safety lever.
 - The matched-control bench pair that shows a real initiative can reach the 0.20 margin.
 - First live fire on PROD @109 unblocks `LastWorkCycle` / `LastWorkSeat` writes.

@@ -129,6 +129,19 @@ pointers:
 
 ## PROD deploy log — full trail
 
+### PROD @109 — the tracker grows its six stage columns (2026-09-21 ~00:55 Chicago, engine-sheet)
+
+civic.38 Task 4 step 1, first cut. Engine tree `3500a370` (engine payload authored in `5694a383` + `0e416edd`); 1 payload file vs @108 (`phase05-citizens/civicInitiativeEngine.js`).
+
+**FILES LANDED, VERSION STEP PENDING.** Isolated `git archive` stage, pre-push delta vs live = exactly that 1 file, pull-back 170 files byte-identical to HEAD, 0 test files live. Script version **96** created. The web-app repoint was refused by the seat's permission classifier (production deploy), so the web app still serves **@95** — live fires run the @108 code until it moves. Builder, from repo root: `CLAUDE_CTL=1 npx clasp deploy -i AKfycbwUvd4TylktdE7AA8axRv-Hru55h78v1PlsOsIejWyAoQrUeYnKGq2ue-FJxPawCW-bgQ -V 96 -d "PROD @109 3500a370"`, then `npx clasp deployments` must read @96.
+
+**What it changes.** `ensureInitiativeStageColumns_` appends Stage, StageBaseline, LastStageChangeCycle, LastWorkCycle, LastWorkSeat, PriorPhase to the `Initiative_Tracker` header on the first fire, once. Adds the `CIVIC_STAGE_CATALOG_` mirror and `civicStageRequirement_`. Nothing reads `Stage` yet and every live `Stage` is blank: cycle behaviour is unchanged.
+
+**Bench:** SANDBOX 0908 re-synced from live C108 (82 tabs, 55,424 rows, read-back OK), **@79**, C109 then C110 both `ok:true`, 132 phases, 0 failed, `Engine_Errors` unchanged. Predicted before the fire and held: tracker 31 → 37 headers in declared order; all six stage cells blank on all six rows; `bizInitiativeStallDrag` self-armed at 0.5; stale bench carry state (stamped C122) ghost-skipped and recovered from the synced sheet. C110: header still 37, nothing appended twice; clock-hold grace accrued n=1 → n=2 as before the change. **BENCH-ONLY, NEVER REPLAY:** everything C109–C110 wrote.
+
+**Expect at the first live fire on @96:** tracker gains the six headers at columns 32–37, blank below; `applyTrackerUpdates.js` stops warn-skipping `LastWorkCycle` / `LastWorkSeat`. Then regenerate `schemas/SCHEMA_HEADERS.md`.
+- **Rollback:** re-push the @108 tree (`a92e84a6`); the six header cells are inert without the reader.
+
 ### PROD @108 — a stall stings at half weight (2026-09-20 ~23:20 Chicago, engine-sheet)
 
 engine.250 dial, builder-ruled 2026-09-20 22:55. Engine tree `a92e84a6`; 2 payload files vs @107 (`applyBusinessDynamics.js`, `engine94SheetContract.js`).

@@ -349,6 +349,7 @@ Pre-mortem accepted: [[../research/2026-09-21-codex-civic38-task4-premortem]] (a
 
 ## Changelog
 
+- 2026-09-21 (engine-sheet) — Task 4 step 1 first cut bench-proven on SANDBOX 0908 @79 (C109–C110, 0 failed, 31 → 37 headers, stage cells blank); PROD files pushed, version 96 created, web-app repoint pending the builder. [[../reference/DEPLOY_HISTORY]] §PROD @109.
 - 2026-09-21 (codex) — Completed the shared board-helper hand-off with the >= work boundary, caller metric evidence and explicit missing-input behavior; nine board regressions and adjacent suites green, C108 local board retains all six legacy rows.
 - 2026-09-21 (engine-sheet) — Engine ruling 7 filed (codex pre-mortem §3, verified): an engine-written Phase-5 advance loses next Cycle's business lift; the handler cut carries the prior phase and proves it through Phase 10 plus the next Phase 2.
 - 2026-09-21 (research-build) — Builder ruled two Task 4 sim calls: Delivering margin 0.20 / hold 3; no losing clock on `Proposed` for now.

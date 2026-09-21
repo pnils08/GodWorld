@@ -1,7 +1,7 @@
 ---
 title: Research Sub-Catalog
 created: 2026-06-01
-updated: 2026-09-20
+updated: 2026-09-21
 type: reference
 tags: [research, architecture, active]
 sources:
@@ -25,6 +25,7 @@ Grep here before grepping the tree. Each row: file · one-line purpose · verdic
 
 | File | Purpose | Verdict |
 |------|---------|---------|
+| **[[2026-09-21-codex-civic38-task4-premortem]]** | Task 4 pre-cut: live OARI identity correction, per-row stage/phase traps, baseline timing and stall/revival writer conflicts | `adopt` — reconcile before civic.38 Task 4 conversion; engine-sheet owns the cut |
 | **[[2026-09-20-codex-civic38-tasks1-3-adversarial-review]]** | Strong second read of Tasks 1+3: catalog bypass, reflection loss, geography/degrade defects, continuity and caps; Task 6.1 repair | `adopt` — repairs recommended to existing civic.38 tasks; findings await owner resolution |
 | **[[2026-09-20-codex-civic38-game-loop-review]]** | Codex review of civic.38: verified path/formula gaps, scarce moves, stage consequences, sponsor credit, and behavioral proof | `adopt` — accepted 2026-09-20 (engine-sheet); F1–F8 verified against the code and reconciled into the civic.38 plan; two proposals narrowed on measurement (Civic dial cut withdrawn, stall cost already in code) |
 | **[[2026-06-01-headroom-context-compression]]** | Headroom context-compression toolkit — does it earn a place in the stack? | `take-nothing` (canon needs fidelity not compression; boot-burn already solved by discipline) |

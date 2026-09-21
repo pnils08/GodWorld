@@ -216,8 +216,11 @@ Each task is a bounded edit or verification. Engine-sheet owns substrate executi
 
 The draft recommends a concrete policy; the request authorizes drafting only. Builder/engine-sheet acceptance is needed for the service endpoint versus the ruled 0.20 margin (see measured ceiling above), 10%/1-point dials, service whitelist, receipt coverage and runtime capability handling. The relative-to-city comparator, 0.20/3 delivery dials and immutable baseline follow Task 4 engine rulings. OARI's ID is resolved by ruling 3 as INIT-002. These are explicit implementation prerequisites, not permissions implied by filing this draft. Safety petition signature units and support bands remain outside this lever design.
 
+**RULED 2026-09-21 (builder): safety delivery margin 0.05, hold 3** — a per-domain margin for this lever only (global 0.20 unchanged). Needs ~41% of the above-median excess removed, about 5 cycles at the proposed 10% relief; bench-prove before trusting. The `civicDeliverMargin_safety` key lands with Task 1 of this plan, not earlier (no writer yet, so no dead dial).
+
 ## Changelog
 
+- 2026-09-21 (research-build) — Builder ruled the endpoint/margin conflict: safety margin 0.05 / hold 3 (see Open questions).
 - 2026-09-21 (codex) — Recorded the later builder ruling 0.20/3 and measured the proposed OARI channel's static direct ceiling (0.121685 ratio improvement); flagged the endpoint/threshold mismatch for review without changing the ruling or enabling safety.
 - 2026-09-21 (codex) — Reconciled the concurrently landed Task 4 engine rulings (5694a383): OARI is INIT-002, preserve conversion/vote descriptors, and use held city-relative improvement with builder-owned margin/hold dials instead of a raw-mean gate.
 - 2026-09-21 (codex) — Drafted safety-second design: live OARI identity discrepancy, C108 condition baseline, bounded persistent ViolentLevel relief, verified wiring, service attribution, stage contract and engine-sheet acceptance tasks; no engine or Sheet changes.

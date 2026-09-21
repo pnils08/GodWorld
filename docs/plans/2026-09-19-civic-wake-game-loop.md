@@ -160,7 +160,7 @@ Corrected 2026-09-20. No new motion. `isFailing_` (`updateCivicApprovalRatings.j
 
 ### Task 6: Petition mechanics — signatures counted, reflections seen
 
-- **Status (codex, 2026-09-20):** Counter + OPTIONAL beats entry implemented and locally validated; Task 6.3 Sunday-prep integration remains with kimi. No live dump or external write run.
+- **Status (codex, 2026-09-20):** Counter + OPTIONAL beats entry landed in `7291d25e` and locally validated; Task 6.3 Sunday-prep integration remains with kimi. No live dump or external write run.
 - **Files:**
   - `scripts/civicPetitions.js` — create (counter)
   - `scripts/civicPetitions.test.js` — isolated counter + mocked optional-dump validation (codex); Task 9's shared game test remains antigravity-owned
@@ -268,7 +268,7 @@ One owner per file — `scripts/cron-civic-run.js` is touched by Tasks 1, 2, 3, 
 
 - [x] **Baylight (INIT-006) stage-3 target metric.** RULED 2026-09-20 (builder): Baylight-district retail/nightlife activity vs baseline. Unblocks Task 4.4. Sports domain has no natural civic metric (DOMAIN_EFFECTS sports → retail/nightlife/traffic/sentiment scalars). Options: Baylight-district retail/nightlife activity vs baseline, or a builder-named metric. Blocks Task 4.4's conversion mapping for one row.
 - [ ] **Fruitvale transit hub (INIT-003)** has never had a council vote — convert as petition-pending (needs signatures, then a vote) rather than grandfathering a stage? Default in Task 4.4: petition-pending.
-- [x] **Signature bands per domain** RULED 2026-09-20 (builder): start housing at 0.30, tunable live; unblocks Task 6.3 gating. — the share of affected-hood condition-matched population that puts a proposal on the board (§15: the tracked ledger is a sample, never the denominator). Proposed starting band: housing 0.30 rent-burden ratio; counts scaled against hood population. Blocks Task 6.3's first live gating (not the counter itself).
+- [x] **Signature bands per domain** RULED 2026-09-20 (builder): housing band 0.30 is the counter's reading threshold only; housing/safety gate NOTHING until their engine levers exist (housing lever first), so Task 6.3 live gating stays off for both. — the share of affected-hood condition-matched population that puts a proposal on the board (§15: the tracked ledger is a sample, never the denominator). Proposed starting band: housing 0.30 rent-burden ratio; counts scaled against hood population. Blocks Task 6.3's first live gating (not the counter itself).
 - [x] **Civic dial deltas** — closed 2026-09-20: Task 7 withdrawn, the affect tag already carries the cost.
 - [x] **Safety and housing have no lever.** RULED 2026-09-20 (builder): housing lever first, safety after. The two domains citizens are most likely to petition on cannot be moved by an initiative today. Each needs an engine row (safety initiative → Crime_Metrics; housing initiative → rent or income relief) before a seat may propose in it. Housing is the larger measured condition (106 of 392 rented households over the 0.30 band) with no row on the board. Builder picks which lever is built first.
 - [ ] **Stall deltas** — default: the existing `failed` motion, owners −2 per stalled cycle (already in code, no new delta); and whether `stalled` rows still drain approval for silence on top. Blocks Task 5's cut text only.
@@ -278,8 +278,8 @@ One owner per file — `scripts/cron-civic-run.js` is touched by Tasks 1, 2, 3, 
 
 ## Changelog
 
-- 2026-09-20 (codex) — Task 6 counter and OPTIONAL Reflection_Intake export implemented and locally validated; added its interface, C108 measurements, verified wiring card, and traced defects under Task 6; Sunday-prep wiring remains kimi-owned.
-- 2026-09-20 (research-build) — Builder ruled three open questions: Baylight metric = district retail/nightlife vs baseline; housing signature band starts at 0.30; housing lever built before safety.
+- 2026-09-20 (codex) — Task 6 counter, 13 passing tests, OPTIONAL Reflection_Intake export, interface, C108 measurements, verified wiring card, and traced defects landed in `7291d25e`. The concurrent engine-sheet commit included Codex's four path-staged files before the intended Codex commit ran; attribution recorded here without rewriting history. Sunday-prep wiring remains kimi-owned.
+- 2026-09-20 (research-build) — Builder ruled three open questions: Baylight metric = district retail/nightlife vs baseline; housing band 0.30 is a counter threshold only, housing gating stays off until the lever lands; housing lever built before safety.
 - 2026-09-20 (engine-sheet) — Codex review accepted into `docs/research/` and reconciled, builder-direct. All eight findings re-verified against the files. Task 2 rebuilt on a move ledger + Sunday fold; Task 3 retargeted at the live pack builder; Task 4 gains the intervention catalog, column-held machine state and an explicit stage↔phase mapping; Task 5 shrinks to the sponsor read and a revival guard (a stalled row already pays −2 per cycle through the existing `failed` motion); Task 6 formula annualized; Task 7 withdrawn on measured evidence (the affect tag already pays the complaint cost). New defect filed: engine.250, the initiative effects bus emptied before its phase-3 and phase-5 readers.
 - 2026-09-20 (codex) — Linked the builder-requested [[../research/2026-09-20-codex-civic38-game-loop-review]]; review proposals await reconciliation, with tasks and assignments unchanged.
 - 2026-09-20 (research-build) — Lane assignments added; house guests booted against them.

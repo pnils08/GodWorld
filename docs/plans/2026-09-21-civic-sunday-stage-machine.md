@@ -52,7 +52,7 @@ pointers:
 
 ### Task 3: Batch client and submit/collect stages
 
-- **Files:** a small batch client module (genuinely new — needs builder approval per the fix-don't-add rule); `scripts/cron-civic-run.js`; `scripts/cron-work-wake.js`.
+- **Files:** `scripts/orBatch.js` — extend to multi-request batches; `scripts/cron-civic-run.js`; `scripts/cron-work-wake.js`.
 - **Steps:** (1) `submit`: build every seat's pack and prompt, send one Anthropic batch with a `custom_id` per seat and cycle, store the batch id in the state file. (2) `collect`: poll status with no model, stream results by `custom_id`, run the existing validation and grounding on each. (3) Resubmit only rejected or expired seats. (4) Set effort low and cap output tokens; on the strong models thinking bills as output. (5) Keep the same pack builders (`buildPack`) and move validators; only the transport changes.
 - **Verify:** acceptance 3 and 4 against a fake client.
 
@@ -64,16 +64,16 @@ pointers:
 
 ## Sequencing and cost
 
-- **Provider:** Anthropic Message Batches is the research verdict (50% off, ~24h max window, most batches under an hour, caching stacks, all current Claude models supported). OpenRouter's batch API exists but per-model availability for our current models is unverified; watch it.
-- **Cost estimate (from the research, estimate only):** about 44 wakes a week at ~6.5k input and 400 output tokens is roughly $1.60 a month on Sonnet 5, $4 on Opus 5, $8 on Fable 5.1 at batch prices. Model choice per seat is a builder call once outputs are compared.
+- **Provider (corrected 2026-09-21):** OpenRouter batch, on the key the project already holds. `scripts/orBatch.js` already ran Sonnet 5 batches on 2026-08-29; its header says the project holds no Anthropic API credits, so the direct Anthropic batch path is unavailable until credits are added. OpenRouter batch gives 50% off with a 24h window and passes Claude, Gemini, Mistral, OpenAI, DeepSeek v4 and Kimi K3 through as `:batch` endpoints; the models the civic seats use today (`deepseek-chat`, `kimi-k2`, `llama-3.3-70b`, `qwen3-235b`) have none. Four `:batch` endpoints cost MORE than standard (deepseek-v4-flash-0731 2.75x, kimi-k3, qwen3.5-9b, glm-5.2) — check the price before assigning a seat. See [[research/2026-09-21-batch-cost-and-model-variety]].
+- **Cost (measured then estimated, from [[research/2026-09-21-batch-cost-and-model-variety]]):** current civic volume costs about $0.18 a week (~$0.76 a month; only the directive and mayor calls log usage, the rest is estimated from stored file sizes). The same volume at batch price is about $0.57 a week on Sonnet 5, $1.42 on Opus 5, $2.85 on Fable 5.1 (~$12 a month). The numbers are small either way; model choice per seat is about quality and faction variety, not cost.
 - **Wake cadence under batch:** the Mon–Thu datawake and the work-wake packs can move to submit-in-the-evening, collect-in-the-morning; turn results lag up to a day, which the loop tolerates.
-- **Build order:** Tasks 1–2 first (they fix the failure mode with no new provider); Task 3 after the API key path is confirmed; Task 4 last.
+- **Build order:** Tasks 1–2 first (they fix the failure mode with no new provider); Task 3 after checking each chosen model's `:batch` price; Task 4 last.
 
 ## Open questions
 
-- [ ] **Anthropic API key in this environment** — other scripts reference it; not verified for the civic cron's runtime. Confirm before Task 3.
+- [x] **API key** — settled: OpenRouter batch runs on the existing key (`scripts/orBatch.js`). Direct Anthropic batch needs credits the project does not hold; optional later.
 - [ ] **Clerk verdict — model or deterministic?** Read before Task 2.
-- [ ] **New batch client file** — builder approval to add it (fix-don't-add rule).
+- [x] **New batch client file** — not needed: extend `scripts/orBatch.js` (today one packet per submit; civic needs many requests per batch with a `custom_id` per seat). Fix-don't-add holds.
 - [ ] **Which model per seat** — Sonnet 5 first to evaluate; Opus 5 if the grounding gate needs it.
 - [ ] **Schedule** — tick frequency and the Sunday slot; builder installs the crontab.
 - [ ] **Coalitions** — the hearing that matters; its own plan after the loop runs (structured stances, deterministic count).
@@ -81,4 +81,5 @@ pointers:
 
 ## Changelog
 
+- 2026-09-21 (research-build) — Corrected provider: OpenRouter batch via existing `orBatch.js`, not direct Anthropic; measured current cost added; batch client file no longer new.
 - 2026-09-21 (research-build) — Draft filed from builder direction and the batch research.

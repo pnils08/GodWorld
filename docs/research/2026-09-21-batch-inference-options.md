@@ -84,6 +84,8 @@ The current mixed OpenRouter chain cost is **not verified**: the OpenRouter page
 - Batch spend can slightly exceed the workspace spend limit.
 - OpenRouter batch coverage for our current non-Claude models is unknown; do not assume it.
 
+**Correction 2026-09-21:** OpenRouter batch already works in this repo (`scripts/orBatch.js`, ran 2026-08-29); the project holds no Anthropic API credits, so the OpenRouter route is the live one. See [[2026-09-21-batch-cost-and-model-variety]]. Original verdict below.
+
 **Verdict:** `adopt` — Anthropic's Message Batches API for the civic decision jobs, with Sonnet 5 as the first model to evaluate (Opus 5 as the step-up if the grounding gate needs it), because it is verified, native, all four current models support it, and the price gap versus standard is exactly half. OpenRouter's batch API is `watch`: it exists and is GA, but per-model batch availability for our current models is unverified. Adopt-trigger for OpenRouter: the models page lists a `:batch` endpoint for a model we want to keep.
 
 **Ignited plans:** none yet. Next: fold submit/collect into the Sunday realignment design in [[../plans/2026-09-19-civic-wake-game-loop]]; run a small accuracy eval of Sonnet 5 on last week's civic packs before any cutover.

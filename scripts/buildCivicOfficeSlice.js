@@ -905,7 +905,9 @@ function loadPetitionPool(root, office, hoods, officeMap, childToParent) {
     const entry = {
       cycle: reflectionField(r, ['Cycle', 'cycle']),
       hood: foldHood(reflectionField(r, ['Neighborhood', 'hood']), childToParent) || null,
-      snippet: clip(reflectionField(r, ['Snippet', 'Text', 'snippet']), 90),
+      // live sheet header is ReflectionExcerpt (codex's counter, written
+      // against the tab itself); Snippet/Text cover older fixtures
+      snippet: clip(reflectionField(r, ['ReflectionExcerpt', 'Reflection Excerpt', 'Snippet', 'Text', 'snippet']), 90),
       affect,
     };
     if (NEGATIVE_AFFECTS.has(affect.toLowerCase())) complaints.push(entry);
@@ -949,7 +951,7 @@ function loadWorkingCity(root, cycle, officeMap) {
   mine.sort((a, b) => Number(reflectionField(b, ['Cycle', 'cycle'])) - Number(reflectionField(a, ['Cycle', 'cycle'])));
   const lines = mine.slice(0, 4).map(r =>
     '- ' + staffPopids.get(String(reflectionField(r, ['POPID', 'PopId', 'popid'])).toUpperCase()) +
-    ': ' + clip(reflectionField(r, ['Snippet', 'Text', 'snippet']), 110) + ' (C' + reflectionField(r, ['Cycle', 'cycle']) + ')');
+    ': ' + clip(reflectionField(r, ['ReflectionExcerpt', 'Reflection Excerpt', 'Snippet', 'Text', 'snippet']), 110) + ' (C' + reflectionField(r, ['Cycle', 'cycle']) + ')');
   return { available: true, text: clip('The working city:\n' + lines.join('\n'), BLOCK_CAP) };
 }
 

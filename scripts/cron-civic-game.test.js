@@ -39,6 +39,9 @@ const civicPetitions = require('./civicPetitions');
 const workWake = require('./cron-work-wake');
 const workWakePackages = require('./workWakePackages');
 const phaseContract = require('../lib/initiativePhaseContract');
+const officeWall = require('./officeWall');
+const { deriveProblemContinuity } = require('./civicProblemContinuity');
+const { interventionIssue } = require('./civicInterventionValidation');
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Test Runner Harness
@@ -1081,7 +1084,422 @@ test('T9.3: Live work-wake packages for all four project directors validate clea
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Summary & Exit Code
+// Group 7: Repair Commits Validation (F1, F3, F4, F5, F6, F7, F8)
+// ─────────────────────────────────────────────────────────────────────────────
+
+group('Group 7: Repair Commits Validation (F1, F3, F4, F5, F6, F7, F8)');
+
+test('F1: Live catalog gate rejects malformed schema shapes and inherited prototype properties', () => {
+  const office = { officeId: 'COUNCIL-D5', agentDir: 'civic-office-council-d5', district: 'D5' };
+  const baseCatalog = phaseContract.INTERVENTION_CATALOG;
+  const malformedCatalog = {
+    ...baseCatalog,
+    'broken-no-metric': { policyDomain: 'health', playable: true },
+    'broken-bad-direction': {
+      policyDomain: 'health', type: 'vote', playable: true, effectChannel: 'channel',
+      stage3Metric: { tab: 'T', scope: 'S', direction: 'diagonal', column: 'C' }
+    }
+  };
+
+  const proposal = intervention => ({
+    type: 'propose', intervention, title: 'Synthetic Proposal', problem: 'Test problem', hoods: ['East Oakland']
+  });
+
+  const testKeys = ['constructor', 'toString', '__proto__', 'broken-no-metric', 'broken-bad-direction', 'housing-program'];
+  for (const key of testKeys) {
+    const result = civicRun.validateDatawakeMoves([proposal(key), proposal('health-service')], {
+      office, catalog: malformedCatalog
+    });
+    assert.strictEqual(result.rejected.length, 1, `Key "${key}" should be rejected`);
+    assert.strictEqual(result.accepted.length, 1, `Key "${key}" should not prevent second valid move`);
+    assert.strictEqual(result.accepted[0].payload.intervention, 'health-service');
+  }
+});
+
+test('F3: Complaint pool locates citizens through snapshot geography without requiring constituent display filters', () => {
+  const ws = createTempWorkspace();
+  try {
+    ws.writeJson('output/beats/meta.json', { cycle: 108 });
+    ws.writeJson('output/simulation_ledger_snapshot.meta.json', { cycle: 108 });
+    ws.writeJsonl('output/beats/Reflection_Intake.jsonl', [
+      { POPID: SYNTH_POP.CITIZEN_EAST_OAK_1, Cycle: 108, Tag: 'Civic', Affect: 'Angry', ReflectionExcerpt: 'Coliseum transit issue' }
+    ]);
+    // Hospitalized citizen without display name in child area Coliseum
+    ws.writeJsonl('output/simulation_ledger_snapshot.jsonl', [
+      { POPID: SYNTH_POP.CITIZEN_EAST_OAK_1, Neighborhood: 'Coliseum', Status: 'hospitalized' }
+    ]);
+
+    const office = { officeId: 'COUNCIL-D5', agentDir: 'civic-office-council-d5', district: 'D5' };
+    const result = civicSlice.loadPetitionPool(ws.dir, office, ['East Oakland'], { offices: [] }, { coliseum: 'East Oakland' }, 108);
+
+    assert.strictEqual(result.available, true);
+    assert.strictEqual(result.complaints.length, 1);
+    assert.strictEqual(result.complaints[0].hood, 'East Oakland');
+    assert.strictEqual(result.complaints[0].snippet, 'Coliseum transit issue');
+
+    // Conflicting citizen geography throws
+    ws.writeJsonl('output/simulation_ledger_snapshot.jsonl', [
+      { POPID: SYNTH_POP.CITIZEN_EAST_OAK_1, Neighborhood: 'Coliseum', Status: 'hospitalized' },
+      { POPID: SYNTH_POP.CITIZEN_EAST_OAK_1, Neighborhood: 'West Oakland', Status: 'active' }
+    ]);
+    assert.throws(
+      () => civicSlice.loadPetitionPool(ws.dir, office, ['East Oakland'], { offices: [] }, { coliseum: 'East Oakland' }, 108),
+      /Conflicting citizen geography/
+    );
+  } finally {
+    ws.cleanup();
+  }
+});
+
+test('F4: Strict JSONL parsing, snapshot cycle match, and geography gate prevent partial authority', () => {
+  const ws = createTempWorkspace();
+  try {
+    // Corrupt JSONL throws with line number
+    const badFile = ws.writeText('corrupt.jsonl', '{"InitiativeID":"INIT-999"}\n{invalid_json');
+    assert.throws(() => civicSlice.readJsonl(badFile), /:2:/);
+
+    // Missing Neighborhood_Map or multiple parents throws
+    assert.throws(() => civicSlice.childToParentFromAudit({}), /Neighborhood_Map/);
+    assert.throws(() => civicSlice.childToParentFromAudit({
+      snapshots: {
+        Neighborhood_Map: [
+          { Neighborhood: 'West Oakland', ChildAreas: 'Shared-Child' },
+          { Neighborhood: 'East Oakland', ChildAreas: 'Shared-Child' }
+        ]
+      }
+    }), /multiple parents/);
+
+    // Cycle mismatch throws in requireSnapshotCycle
+    ws.writeJson('output/beats/meta.json', { cycle: 107 });
+    assert.throws(() => civicSlice.requireCycle({ cycle: 107 }, 108, 'test audit'), /cycle mismatch/);
+
+    // Geography issue in context blocks geographic moves
+    const office = { officeId: 'COUNCIL-D5', agentDir: 'civic-office-council-d5', district: 'D5' };
+    const moves = civicRun.validateDatawakeMoves(
+      [
+        { type: 'propose', intervention: 'health-service', title: 'Clinic', problem: 'Care', hoods: ['East Oakland'] },
+        { type: 'canvass', hood: 'East Oakland' },
+        { type: 'work', initiativeId: 'INIT-001' }
+      ],
+      { office, geographyIssue: 'turf disagrees' }
+    );
+    assert.strictEqual(moves.accepted.length, 0);
+    assert.strictEqual(moves.rejected.length, 3);
+    assert.match(moves.rejected[0].reason, /geography-unavailable\(turf disagrees\)/);
+  } finally {
+    ws.cleanup();
+  }
+});
+
+test('F5: New datawake records omit legacy action field while officeWall preserves backward compatibility', () => {
+  const office = { officeId: 'COUNCIL-D5', agentDir: 'civic-office-council-d5', holder: 'Synthetic Holder', popid: SYNTH_POP.COUNCIL_D5, title: 'Councilmember' };
+  const confrontation = { id: 'CONF-108-civic-office-council-d5', cycle: 108, agentDir: office.agentDir };
+  const mv = civicRun.validateDatawakeMoves(
+    [{ type: 'answer', confrontationId: confrontation.id, text: 'Synthetic response to directive' }],
+    { office, cycle: 108, confrontations: [confrontation] }
+  );
+
+  const rec = civicRun.datawakeRecord({
+    office, cycle: 108, date: '2026-09-21', answeredModel: 'synthetic-model',
+    j: { statement: 'Synthetic speech', action: 'Fabricated rogue action', numberMoved: 'Signal' },
+    mv
+  });
+
+  assert.strictEqual(Object.hasOwn(rec, 'action'), false, 'New datawake records must omit action property');
+  assert.deepStrictEqual(rec.moves, mv.accepted);
+
+  const wallLine = officeWall.lineFromDatawake(rec);
+  assert.doesNotMatch(wallLine.text, /Fabricated rogue action/);
+  assert.match(wallLine.text, /Synthetic speech/);
+
+  // Historical record compatibility
+  const legacyLine = officeWall.lineFromDatawake({ statement: 'Historical speech', action: 'Legacy action' });
+  assert.match(legacyLine.text, /Legacy action/);
+});
+
+test('F6: Move memory retains prior terminal outcomes across cycle boundaries alongside pending moves', () => {
+  const ws = createTempWorkspace();
+  try {
+    const office = { officeId: 'COUNCIL-D5', agentDir: 'civic-office-council-d5', district: 'D5' };
+    const audit = { cycle: 108, snapshots: { Neighborhood_Map: [{ Neighborhood: 'East Oakland', ChildAreas: 'Coliseum' }] } };
+    ws.writeJson('output/engine_audit_c108.json', audit);
+    ws.writeJson('output/beats/meta.json', { cycle: 108 });
+    ws.writeJsonl('output/beats/Initiative_Tracker.jsonl', [
+      { InitiativeID: 'INIT-001', Name: 'East Oakland Health', ProposingOffice: office.officeId, AffectedNeighborhoods: 'East Oakland', Status: 'active' }
+    ]);
+
+    // C107 terminal failed move
+    const m107 = {
+      moveId: 'MV-107-civic-office-council-d5-2026-09-14', cycle: 107, date: '2026-09-14',
+      agentDir: office.agentDir, popid: office.popid, type: 'work',
+      payload: { initiativeId: 'INIT-001' }, status: 'failed', detail: 'Work move rejected by gate'
+    };
+    ws.writeJsonl('output/cron-civic/moves/moves_c107.jsonl', [m107]);
+
+    // C108 pending move
+    const m108 = {
+      moveId: 'MV-108-civic-office-council-d5-2026-09-21', cycle: 108, date: '2026-09-21',
+      agentDir: office.agentDir, popid: office.popid, type: 'canvass',
+      payload: { hood: 'East Oakland' }, status: 'pending'
+    };
+    ws.writeJsonl('output/cron-civic/moves/moves_c108.jsonl', [m108]);
+
+    // Future C109 move (must be ignored)
+    ws.writeJsonl('output/cron-civic/moves/moves_c109.jsonl', [
+      { moveId: 'MV-109-future', cycle: 109, agentDir: office.agentDir, type: 'work', status: 'pending' }
+    ]);
+
+    const blocks = civicSlice.buildGameBlocks({ root: ws.dir, cycle: 108, office, officeMap: { offices: [] }, hoods: ['East Oakland'], audit });
+    const lastMove = blocks.lastMove;
+
+    assert.strictEqual(lastMove.moves.length, 2, 'Should contain current pending and prior terminal outcome');
+    assert.match(lastMove.text, /awaiting the Sunday fold/);
+    assert.match(lastMove.text, /Work move rejected by gate/);
+  } finally {
+    ws.cleanup();
+  }
+});
+
+test('F7: boardNeedText prioritizes stalled phase over Stage and marks next-stage requirements as pending helper', () => {
+  for (const Stage of ['Funded', 'Standing', 'Delivering']) {
+    const stalledRow = { Stage, ImplementationPhase: 'stalled' };
+    assert.match(civicSlice.boardNeedText(stalledRow), /stalled — one work move revives it/);
+
+    const activeRow = { Stage, ImplementationPhase: 'active' };
+    assert.match(civicSlice.boardNeedText(activeRow), /next-stage requirements unavailable \(Task 4 shared helper pending\)/);
+  }
+  const proposedRow = { Status: 'proposed', VoteCycle: '' };
+  assert.match(civicSlice.boardNeedText(proposedRow), /petition-pending — signatures move it to a vote/);
+});
+
+test('F8: Proposal condition evidence computes from countPetition and gamePromptView caps history without dropping IDs', () => {
+  const ws = createTempWorkspace();
+  try {
+    const office = { officeId: 'COUNCIL-D5', agentDir: 'civic-office-council-d5', district: 'D5' };
+    const audit = { cycle: 108, snapshots: { Neighborhood_Map: [{ Neighborhood: 'East Oakland', ChildAreas: 'Coliseum' }] } };
+    ws.writeJson('output/engine_audit_c108.json', audit);
+    ws.writeJson('output/beats/meta.json', { cycle: 108 });
+    ws.writeJsonl('output/beats/Initiative_Tracker.jsonl', [
+      { InitiativeID: 'INIT-999', ProposingOffice: office.officeId, Status: 'proposed', PolicyDomain: 'housing', AffectedNeighborhoods: 'Coliseum' }
+    ]);
+    ws.writeJsonl('output/beats/Neighborhood_Demographics.jsonl', [
+      { Neighborhood: 'East Oakland', Students: 100, Adults: 200, Seniors: 50, Sick: 0 }
+    ]);
+    ws.writeJsonl('output/beats/Household_Ledger.jsonl', [
+      { HouseholdId: 'HH-99901', Neighborhood: 'Coliseum', Status: 'active', HousingType: 'rented', MonthlyRent: 1200, HouseholdIncome: 24000 }
+    ]);
+
+    const game = civicSlice.buildGameBlocks({ root: ws.dir, cycle: 108, office, officeMap: { offices: [] }, hoods: ['East Oakland'], audit });
+    assert.strictEqual(game.conditions.available, true);
+    assert.strictEqual(game.conditions.proposals.length, 1);
+    assert.strictEqual(game.conditions.proposals[0].counts.hardshipHouseholds, 1);
+    assert.strictEqual(game.conditions.proposals[0].support.cleared, false);
+    assert.match(game.conditions.text, /domain-not-playable/);
+
+    // Verify gamePromptView caps history while preserving ID sets
+    const rawEntry = { snippet: 'LONG_STRING_'.repeat(200) };
+    const bloatedGame = {
+      boardIds: ['INIT-001', 'INIT-002'],
+      board: [rawEntry],
+      boardText: 'Synthetic board',
+      lastMove: { text: 'Outcome', moves: Array(100).fill(rawEntry) },
+      petitionPool: { available: true, text: 'Summary', complaints: Array(100).fill(rawEntry), participation: [] },
+      interventions: { available: true, playable: [{ key: 'health-service' }], text: 'X'.repeat(2000) },
+      confrontations: { available: true, open: [{ id: 'CONF-108-test' }] }
+    };
+    const prompt = civicRun.datawakeUserPrompt({ game: bloatedGame }, '', office);
+    assert.strictEqual(prompt.includes('LONG_STRING_'), false);
+    assert.match(prompt, /INIT-002/);
+    assert.match(prompt, /CONF-108-test/);
+    assert(prompt.length < 6000, 'Prompt length must be capped');
+  } finally {
+    ws.cleanup();
+  }
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Group 8: Rulings Validation (R1, R4, R3, R2)
+// ─────────────────────────────────────────────────────────────────────────────
+
+group('Group 8: Rulings Validation (R1, R4, R3, R2)');
+
+test('R1: Petition display enforces 3-Cycle window [cycle-2, cycle], labels both windows, and excludes invalid/future cycles', () => {
+  const ws = createTempWorkspace();
+  try {
+    ws.writeJson('output/beats/meta.json', { cycle: 108 });
+    ws.writeJson('output/simulation_ledger_snapshot.meta.json', { cycle: 108 });
+    ws.writeJsonl('output/simulation_ledger_snapshot.jsonl', [
+      { POPID: SYNTH_POP.CITIZEN_EAST_OAK_1, Neighborhood: 'East Oakland' }
+    ]);
+    ws.writeJsonl('output/beats/Reflection_Intake.jsonl', [
+      { POPID: SYNTH_POP.CITIZEN_EAST_OAK_1, Cycle: 105, Tag: 'Civic', Affect: 'Angry', ReflectionExcerpt: 'C105 old complaint' },
+      { POPID: SYNTH_POP.CITIZEN_EAST_OAK_1, Cycle: 106, Tag: 'Civic', Affect: 'Angry', ReflectionExcerpt: 'C106 window complaint' },
+      { POPID: SYNTH_POP.CITIZEN_EAST_OAK_1, Cycle: 107, Tag: 'Civic', Affect: 'Angry', ReflectionExcerpt: 'C107 window complaint' },
+      { POPID: SYNTH_POP.CITIZEN_EAST_OAK_1, Cycle: 108, Tag: 'Civic', Affect: 'Angry', ReflectionExcerpt: 'C108 current complaint' },
+      { POPID: SYNTH_POP.CITIZEN_EAST_OAK_1, Cycle: 109, Tag: 'Civic', Affect: 'Angry', ReflectionExcerpt: 'C109 future complaint' },
+      { POPID: SYNTH_POP.CITIZEN_EAST_OAK_1, Cycle: 'invalid', Tag: 'Civic', Affect: 'Angry', ReflectionExcerpt: 'Bad cycle complaint' }
+    ]);
+
+    const office = { officeId: 'COUNCIL-D5', agentDir: 'civic-office-council-d5', district: 'D5' };
+    const pool = civicSlice.loadPetitionPool(ws.dir, office, ['East Oakland'], { offices: [] }, {}, 108);
+
+    assert.strictEqual(pool.available, true);
+    assert.deepStrictEqual(pool.complaints.map(c => Number(c.cycle)), [108, 107, 106]);
+    assert.strictEqual(pool.invalidCycleRows, 1);
+    assert.strictEqual(pool.sinceCycle, 106);
+    assert.strictEqual(pool.throughCycle, 108);
+    assert.match(pool.text, /Complaint display C106–C108; condition counter C108 only\./);
+  } finally {
+    ws.cleanup();
+  }
+});
+
+test('R4: Working city selects 1 latest reflection per staff member across cycles and timestamps before applying character cap', () => {
+  const ws = createTempWorkspace();
+  try {
+    ws.writeJson('output/beats/meta.json', { cycle: 108 });
+    const staffRow = (popid, cycle, timestamp, text) => ({
+      POPID: popid, Cycle: cycle, Timestamp: timestamp, Daypart: 'work', ReflectionExcerpt: text
+    });
+    ws.writeJsonl('output/beats/Reflection_Intake.jsonl', [
+      staffRow(SYNTH_POP.PROJ_DIR_STAB, 108, '2026-09-20T10:00:00Z', 'Stab fund morning review'),
+      staffRow(SYNTH_POP.PROJ_DIR_STAB, 108, '2026-09-20T18:00:00Z', 'Stab fund evening update (latest)'),
+      staffRow(SYNTH_POP.PROJ_DIR_STAB, 107, '2026-09-14T12:00:00Z', 'Stab fund prior cycle'),
+      staffRow(SYNTH_POP.PROJ_DIR_STAB, 109, '2026-09-28T12:00:00Z', 'Stab fund future cycle'),
+      staffRow(SYNTH_POP.PROJ_DIR_OARI, 108, '2026-09-20T12:00:00Z', 'OARI team deployment')
+    ]);
+
+    const officeMap = {
+      projects: [
+        { projectId: 'proj-stabilization-fund', popid: SYNTH_POP.PROJ_DIR_STAB, holder: 'Director Stabilization' },
+        { projectId: 'proj-oari', popid: SYNTH_POP.PROJ_DIR_OARI, holder: 'Director OARI' }
+      ]
+    };
+
+    const result = civicSlice.loadWorkingCity(ws.dir, 108, officeMap);
+    assert.strictEqual(result.available, true);
+    assert.strictEqual(result.totalStaff, 2);
+    assert.match(result.text, /Stab fund evening update \(latest\)/);
+    assert.doesNotMatch(result.text, /morning review/);
+    assert.doesNotMatch(result.text, /prior cycle/);
+    assert.doesNotMatch(result.text, /future cycle/);
+    assert.match(result.text, /OARI team deployment/);
+    assert(result.text.length <= civicSlice.BLOCK_CAP);
+  } finally {
+    ws.cleanup();
+  }
+});
+
+test('R3: Unanswered directives persist across cycles, bind answer moves, and reject duplicate answers', () => {
+  const ws = createTempWorkspace();
+  try {
+    const office = { officeId: 'COUNCIL-D5', agentDir: 'civic-office-council-d5', district: 'D5' };
+    const directiveText = (cycle, seat, text) =>
+      `## Demand for C${cycle}\n- **Agent:** \`.claude/agents/${seat}/\`\n- **Address:** ${text}\n`;
+
+    ws.writeText('output/mara-directives/mara_directive_c106_AUTO.txt', directiveText(106, office.agentDir, 'Prior unresolved demand'));
+    ws.writeText('output/mara-directives/mara_directive_c108_AUTO.txt', directiveText(108, office.agentDir, 'Current demand'));
+
+    // Prior unresolved demand persists as open[0]
+    const state1 = civicSlice.loadConfrontations(ws.dir, 108, office.agentDir);
+    assert.strictEqual(state1.open.length, 2);
+    assert.strictEqual(civicSlice.loadConfrontation(ws.dir, 108, office.agentDir).id, 'CONF-106-' + office.agentDir);
+
+    // Record an answer to C106 in C107
+    ws.writeJsonl('output/cron-civic/moves/moves_c107.jsonl', [{
+      moveId: 'MV-107-answer', cycle: 107, agentDir: office.agentDir, type: 'answer',
+      payload: { confrontationId: 'CONF-106-' + office.agentDir }, status: 'pending'
+    }]);
+
+    const state2 = civicSlice.loadConfrontations(ws.dir, 108, office.agentDir);
+    assert.strictEqual(state2.open.length, 1);
+    assert.strictEqual(state2.open[0].id, 'CONF-108-' + office.agentDir);
+
+    // Validate answer move binding at datawake gate
+    const answer = id => ({ type: 'answer', confrontationId: id, text: 'We addressed the directive.' });
+    const ctx = {
+      office, cycle: 108, confrontations: state2.open,
+      answeredConfrontationIds: new Set(state2.answeredIds),
+      answerEvidenceAvailable: true
+    };
+
+    const mv = civicRun.validateDatawakeMoves([answer('CONF-106-' + office.agentDir), answer('CONF-108-' + office.agentDir)], ctx);
+    assert.strictEqual(mv.rejected.length, 1);
+    assert.match(mv.rejected[0].reason, /directive-already-answered/);
+    assert.strictEqual(mv.accepted.length, 1);
+    assert.strictEqual(mv.accepted[0].payload.directiveCycle, 108);
+    assert.strictEqual(mv.accepted[0].payload.confrontationSeat, office.agentDir);
+  } finally {
+    ws.cleanup();
+  }
+});
+
+test('R2: Passed-over problems derive from prior displayed pack conditions + empty closed-cycle ledger, resolving on landed moves or relief', () => {
+  const ws = createTempWorkspace();
+  try {
+    const office = { officeId: 'COUNCIL-D5', agentDir: 'civic-office-council-d5', district: 'D5' };
+    const audit = { cycle: 108, snapshots: { Neighborhood_Map: [{ Neighborhood: 'East Oakland', ChildAreas: 'Coliseum' }] } };
+    ws.writeJson('output/engine_audit_c108.json', audit);
+    ws.writeJson('output/beats/meta.json', { cycle: 108 });
+    ws.writeJsonl('output/beats/Neighborhood_Demographics.jsonl', [
+      { Neighborhood: 'East Oakland', Students: 100, Adults: 200, Seniors: 50, Sick: 0 }
+    ]);
+    ws.writeJsonl('output/beats/Hospital_Ledger.jsonl', []);
+    ws.writeJsonl('output/beats/Crime_Metrics.jsonl', [
+      { Neighborhood: 'East Oakland', ViolentLevel: 10 }
+    ]);
+    const household = {
+      HouseholdId: 'HH-99901', Neighborhood: 'Coliseum', Status: 'active', HousingType: 'rented', MonthlyRent: 1200, HouseholdIncome: 24000
+    };
+    ws.writeJsonl('output/beats/Household_Ledger.jsonl', [household]);
+    ws.writeJsonl('output/beats/Initiative_Tracker.jsonl', [
+      { InitiativeID: 'INIT-001', ProposingOffice: office.officeId, AffectedNeighborhoods: 'Coliseum' }
+    ]);
+
+    // Initial pack in C108 has no passed over problems yet
+    const blocks1 = civicSlice.buildGameBlocks({ root: ws.dir, cycle: 108, office, officeMap: { offices: [] }, hoods: ['East Oakland'], audit });
+    assert.strictEqual(blocks1.problemContinuity.passedOver.length, 0);
+    const visibleProblem = blocks1.problemContinuity.visibleProblems[0];
+    assert.strictEqual(visibleProblem.conditionKey, 'housing.hardshipHouseholds');
+
+    // C107 pack previously displayed this exact problem
+    ws.writeJson('output/cron-civic/packs/COUNCIL-D5_c107.json', {
+      actor: { officeId: office.officeId, agentDir: office.agentDir },
+      game: {
+        board: blocks1.board,
+        problemContinuity: { cycle: 107, visibleProblems: [visibleProblem] }
+      }
+    });
+
+    // Without a closed ledger for C107, inaction is not assumed
+    const blocks2 = civicSlice.buildGameBlocks({ root: ws.dir, cycle: 108, office, officeMap: { offices: [] }, hoods: ['East Oakland'], audit });
+    assert.strictEqual(blocks2.problemContinuity.passedOver.length, 0);
+    assert.strictEqual(blocks2.problemContinuity.available, false); // missing fold ledger
+
+    // With an empty closed ledger for C107 (no moves made), problem is flagged passed over C107
+    ws.writeJsonl('output/cron-civic/moves/moves_c107.jsonl', []);
+    const blocks3 = civicSlice.buildGameBlocks({ root: ws.dir, cycle: 108, office, officeMap: { offices: [] }, hoods: ['East Oakland'], audit });
+    assert.strictEqual(blocks3.problemContinuity.passedOver.length, 1);
+    assert.match(blocks3.problemContinuity.text, /passed over C107/);
+
+    // Landed work move in C107 on Coliseum initiative resolves the passed-over problem
+    ws.writeJsonl('output/cron-civic/moves/moves_c107.jsonl', [{
+      moveId: 'MV-107-work', cycle: 107, agentDir: office.agentDir, type: 'work',
+      payload: { initiativeId: 'INIT-001' }, status: 'applied'
+    }]);
+    const blocks4 = civicSlice.buildGameBlocks({ root: ws.dir, cycle: 108, office, officeMap: { offices: [] }, hoods: ['East Oakland'], audit });
+    assert.strictEqual(blocks4.problemContinuity.passedOver.length, 0);
+
+    // Rent drop (counter condition cleared) also resolves it
+    ws.writeJsonl('output/cron-civic/moves/moves_c107.jsonl', []);
+    ws.writeJsonl('output/beats/Household_Ledger.jsonl', [{ ...household, MonthlyRent: 100 }]);
+    const blocks5 = civicSlice.buildGameBlocks({ root: ws.dir, cycle: 108, office, officeMap: { offices: [] }, hoods: ['East Oakland'], audit });
+    assert.strictEqual(blocks5.problemContinuity.passedOver.length, 0);
+    assert.strictEqual(blocks5.problemContinuity.problems.length, 0);
+  } finally {
+    ws.cleanup();
+  }
+});
 // ─────────────────────────────────────────────────────────────────────────────
 console.log('\n======================================================');
 console.log(`Test Results: ${totalPassed} passed, ${totalFailed} failed (total: ${totalPassed + totalFailed})`);

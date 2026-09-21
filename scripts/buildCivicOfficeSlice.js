@@ -1014,16 +1014,27 @@ function loadWorkingCity(root, cycle, officeMap) {
       if (pop) staffPopids.set(pop, o.holder);
     }
   }
-  const mine = rows.filter(r =>
+  const cycleOf = r => Number(reflectionField(r, ['Cycle', 'cycle']));
+  const popOf = r => String(reflectionField(r, ['POPID', 'PopId', 'popid'])).toUpperCase();
+  const mine = rows.map((row, index) => ({row,index})).filter(({row:r}) =>
     String(reflectionField(r, ['Daypart', 'daypart', 'Wake', 'wake'])).toLowerCase() === 'work' &&
-    staffPopids.has(String(reflectionField(r, ['POPID', 'PopId', 'popid'])).toUpperCase())
+    Number.isInteger(cycleOf(r)) && cycleOf(r) > 0 && cycleOf(r) <= Number(cycle) && staffPopids.has(popOf(r))
   );
   if (!mine.length) return { available: true, text: 'No work reflections from the directors or chiefs on the record.' };
-  mine.sort((a, b) => Number(reflectionField(b, ['Cycle', 'cycle'])) - Number(reflectionField(a, ['Cycle', 'cycle'])));
-  const lines = mine.slice(0, 4).map(r =>
-    '- ' + staffPopids.get(String(reflectionField(r, ['POPID', 'PopId', 'popid'])).toUpperCase()) +
-    ': ' + clip(reflectionField(r, ['ReflectionExcerpt', 'Reflection Excerpt', 'Snippet', 'Text', 'snippet']), 110) + ' (C' + reflectionField(r, ['Cycle', 'cycle']) + ')');
-  return { available: true, text: clip('The working city:\n' + lines.join('\n'), BLOCK_CAP) };
+  mine.sort((a, b) => cycleOf(b.row) - cycleOf(a.row) ||
+    String(b.row.Timestamp || '').localeCompare(String(a.row.Timestamp || '')) || b.index - a.index);
+  const latest = new Map();
+  for (const {row} of mine) if (!latest.has(popOf(row))) latest.set(popOf(row), row);
+  let text = 'The working city:', shownStaff = 0;
+  for (const [pop, r] of latest) {
+    const line = '\n- ' + clip(staffPopids.get(pop),60) + ': ' +
+      clip(reflectionField(r, ['ReflectionExcerpt', 'Reflection Excerpt', 'Snippet', 'Text', 'snippet']), 110) + ' (C' + cycleOf(r) + ')';
+    if (text.length + line.length > BLOCK_CAP - 40) break;
+    text += line;
+    shownStaff++;
+  }
+  if (shownStaff < latest.size) text += '\n' + (latest.size - shownStaff) + ' more staff beyond this block.';
+  return { available: true, totalStaff: latest.size, shownStaff, text: clip(text, BLOCK_CAP) };
 }
 
 // Task 3.4 — confrontation: when the Sunday directive named this seat, the

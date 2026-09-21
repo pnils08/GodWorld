@@ -44,6 +44,22 @@ test('R1 petition display includes current and two prior Cycles, labels both win
   assert.match(pool.text,/counter.*C999 only/i);
   assert.equal(pool.invalidCycleRows,1);
 }));
+test('R4 working city selects latest per staff member before spending its character budget', () => workspace((root, write) => {
+  write('output/beats/meta.json',JSON.stringify({cycle:999}));
+  const row = (POPID,Cycle,Timestamp,ReflectionExcerpt) => ({POPID,Cycle,Timestamp,Daypart:'work',ReflectionExcerpt});
+  write('output/beats/Reflection_Intake.jsonl', [
+    row('POP-99901',999,'01','SYNTHETIC older'), row('POP-99901',999,'02','SYNTHETIC newest'),
+    row('POP-99901',998,'99','SYNTHETIC prior'), row('POP-99901',1000,'99','SYNTHETIC future'),
+    row('POP-99902',999,'01','SYNTHETIC second'), row('POP-99903',999,'01','SYNTHETIC third'),
+    row('POP-99904',999,'01','SYNTHETIC fourth'), row('POP-99905',999,'01','SYNTHETIC fifth')
+  ].map(JSON.stringify).join('\n'));
+  const officeMap={projects:Array.from({length:5},(_,i)=>({projectId:'SYNTHETIC-'+i,popid:'POP-9990'+(i+1),holder:'SYNTHETIC staff '+i}))};
+  const result=slice.loadWorkingCity(root,999,officeMap);
+  assert.match(result.text,/SYNTHETIC newest/);
+  assert.doesNotMatch(result.text,/SYNTHETIC (older|prior|future)/);
+  assert.match(result.text,/SYNTHETIC fifth/);
+  assert(result.text.length<=slice.BLOCK_CAP);
+}));
 test('F4 corrupt rows and ambiguous geography cannot produce partial authority', () => workspace((root, write) => {
   write('broken.jsonl', '{"InitiativeID":"SYNTHETIC"}\n{broken');
   assert.throws(() => slice.readJsonl(path.join(root, 'broken.jsonl')), /:2:/);

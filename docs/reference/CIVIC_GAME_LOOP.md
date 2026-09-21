@@ -80,7 +80,7 @@ A deploy reaches the world only in some domains today: health (neighborhood `Sic
 ## 7. What is still to be determined
 
 **Builder calls open**
-- **Sunday city-hall realignment** (direction 2026-09-21: works over feels; mechanical close first with no models; terse decisions; heading to batch with a ~24h window, so an idempotent stage machine that advances when inputs exist, not one clock-timed chain). The old Sunday chain must be redesigned to the new loop's purpose (fold moves, sweep petitions, stamp votes) with a cadence that fits it, not forced into the current shape or slot. Crontab untouched until the builder installs the new schedule.
+- **Sunday city-hall realignment** (direction 2026-09-21: works over feels; mechanical close first with no models; terse decisions; heading to batch with a ~24h window, so an idempotent stage machine that advances when inputs exist, not one clock-timed chain). Plan: [[../plans/2026-09-21-civic-sunday-stage-machine]]. The old Sunday chain must be redesigned to the new loop's purpose (fold moves, sweep petitions, stamp votes) with a cadence that fits it, not forced into the current shape or slot. Crontab untouched until the builder installs the new schedule.
 - **Petition support bands.** No band is set, so no petition gates a vote.
 - **Safety endpoint versus the 0.20 margin.** A larger lever, a lower margin for safety, or another mechanism.
 - **Fruitvale transit hub (INIT-003)** has never had a vote: enter as petition-pending, or grandfather a stage?

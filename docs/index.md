@@ -244,6 +244,7 @@ These files live at `/root/GodWorld/` and are catalogued here for completeness. 
 
 ## `docs/reference/` — operational how-tos
 
+- **[[reference/CIVIC_GAME_LOOP]]** — how the civic system works now: seat weekly loop, moves, stages and losing clock, petitions, which domains move the world, and what is still open. Working draft mapped live during civic.38; labels each part live / inert / not built. *(reference, civic, active, draft)*
 - **[[reference/CROSS_LANE_MESSAGING]]** — reaching a non-Claude lane (agy/grok/kimi/codex) mid-session. `SendMessage` sees Claude sessions only; the rest are tmux panes reached with `send-keys -l` + a **separate** `C-m`. Capture-pane first — a pane at bare `bash` executes your message as shell commands. Manual until governance.47's `laneMessage.js` lands. *(reference, infrastructure, active)*
 - **[[reference/DEPLOY]]** — `clasp push` to Apps Script from Cloud Shell, plus CURRENT bench/live state. Protocol + pointers only (S418) — the full per-wave proving narrative lives in [[reference/DEPLOY_HISTORY]]. *(reference, infrastructure, active)*
 - **[[reference/DEPLOY_HISTORY]]** — full sandbox + PROD deploy ledger, relocated out of DEPLOY.md 2026-09-04 (S418) so that file stays protocol + current-state only. Not read at boot or on a normal deploy — open on demand to trace how a specific version got proven and shipped. *(reference, infrastructure, active)*

@@ -29,6 +29,7 @@ pointers:
 **Terminal:** research-build / engine-sheet (scripts-side tasks implemented by kimi, house-guest lane; engine substrate cuts — Tasks 4–5 and engine.250 — land through engine-sheet)
 
 **Pointers:**
+- Current-shape reference (how it works now, what is open): [[../reference/CIVIC_GAME_LOOP]]
 - Design record + rulings: [[../research/2026-09-19-kimi-initiative-stage-voting-and-wake-incentives]] §1–§11
 - Prior chassis: `scripts/cron-work-wake.js`, `scripts/work-wake-packages.json` (civic.37, live C107)
 - Measured baseline: design record §11 (12 wakes/week over 18 seats; no sheet write; `Civic` maps to `{}`)

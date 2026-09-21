@@ -23,3 +23,11 @@ test('F1 inherited and malformed interventions cannot consume the valid move', (
     assert.equal(result.accepted[0].payload.intervention, 'health-service');
   }
 });
+test('F3 petition join folds child areas and needs no display name or active status', () => workspace((root, write) => {
+  write('output/beats/Reflection_Intake.jsonl', JSON.stringify({POPID:'POP-99901',Cycle:999,Tag:'Civic',Affect:'Angry',ReflectionExcerpt:'SYNTHETIC'}));
+  write('output/simulation_ledger_snapshot.jsonl', JSON.stringify({POPID:'POP-99901',Neighborhood:'Coliseum',Status:'hospitalized'}));
+  const result = slice.loadPetitionPool(root, office, ['East Oakland'], {offices:[]}, {coliseum:'East Oakland'});
+  assert.equal(result.complaints.length, 1);
+  assert.equal(result.complaints[0].hood, 'East Oakland');
+  assert.equal(result.complaints[0].snippet, 'SYNTHETIC');
+}));

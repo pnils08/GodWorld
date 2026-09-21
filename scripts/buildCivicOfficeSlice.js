@@ -792,7 +792,7 @@ function boardNeedText(row) {
 // sponsor-only board leaves nine seats empty on day one.)
 function boardRowsFor(office, rows, childToParent) {
   const isMayor = String(office.officeId || '') === 'MAYOR-01';
-  const turf = new Set(turfHoods(office).map(h => String(h).toLowerCase()));
+  const turf = new Set(turfHoods(office).map(h => foldHood(h, childToParent).toLowerCase()));
   const out = [];
   for (const row of rows || []) {
     const sponsored = String(row.ProposingOffice || '') !== '' &&
@@ -887,7 +887,7 @@ function loadPetitionPool(root, office, hoods, officeMap, childToParent) {
   }
   const officePopids = new Set([...(officeMap.offices || []), ...(officeMap.projects || [])]
     .map(o => String(o.popid || '').toUpperCase()).filter(Boolean));
-  const turf = new Set((hoods || []).map(h => String(h).toLowerCase()));
+  const turf = new Set((hoods || []).map(h => foldHood(h, childToParent).toLowerCase()));
   // agy review 2026-09-20 finding 3.1: the turf filter locates complainants via
   // loadConstituents → output/simulation_ledger_snapshot.jsonl. With the
   // snapshot absent, every district complaint would drop silently and the pack
@@ -897,12 +897,17 @@ function loadPetitionPool(root, office, hoods, officeMap, childToParent) {
     return { available: false, complaints: [], participation: [],
       text: 'Petition pool unreadable — the citizen snapshot (simulation_ledger_snapshot.jsonl) is absent, so complainants cannot be located to your district. Complaints may exist that this pack cannot see.' };
   }
-  const inTurf = new Set();
-  if (turf.size) {
-    for (const c of loadConstituents(root, hoods, 0)) {
-      inTurf.add(String(c.pop || '').toUpperCase());
-    }
+  // Geographic membership is independent of the display-name/status filters
+  // used to select featured constituents. Hospitalized residents still live here.
+  const people = new Map();
+  for (const c of readJsonl(path.join(root || ROOT, 'output', 'simulation_ledger_snapshot.jsonl')) || []) {
+    const pop = String(c.POPID || '').trim().toUpperCase();
+    const hood = foldHood(c.Neighborhood, childToParent);
+    if (!pop) continue;
+    if (people.has(pop) && people.get(pop) !== hood) throw new Error('Conflicting citizen geography: ' + pop);
+    people.set(pop, hood);
   }
+  let unlocatedRows = 0;
   const complaints = [];
   const participation = [];
   for (const r of rows) {
@@ -910,11 +915,13 @@ function loadPetitionPool(root, office, hoods, officeMap, childToParent) {
     if (tag !== 'Civic') continue;
     const pop = String(reflectionField(r, ['POPID', 'PopId', 'popid'])).toUpperCase();
     if (!pop || officePopids.has(pop)) continue;
-    if (turf.size && !inTurf.has(pop)) continue;
+    const hood = people.get(pop) || '';
+    if (!hood) unlocatedRows++;
+    if (turf.size && !turf.has(hood.toLowerCase())) continue;
     const affect = String(reflectionField(r, ['Affect', 'affect'])).trim();
     const entry = {
       cycle: reflectionField(r, ['Cycle', 'cycle']),
-      hood: foldHood(reflectionField(r, ['Neighborhood', 'hood']), childToParent) || null,
+      hood: hood || null,
       // live sheet header is ReflectionExcerpt (codex's counter, written
       // against the tab itself); Snippet/Text cover older fixtures
       snippet: clip(reflectionField(r, ['ReflectionExcerpt', 'Reflection Excerpt', 'Snippet', 'Text', 'snippet']), 90),
@@ -934,7 +941,8 @@ function loadPetitionPool(root, office, hoods, officeMap, childToParent) {
   if (participation.length) {
     bits.push('Constructive civic participation (not complaints): ' + participation.length + '.');
   }
-  return { available: true, complaints, participation, text: clip(bits.join('\n'), BLOCK_CAP) };
+  if (unlocatedRows) bits.push(unlocatedRows + ' Civic rows have no located resident; district membership is unknown.');
+  return { available: true, complaints, participation, unlocatedRows, text: clip(bits.join('\n'), BLOCK_CAP) };
 }
 
 // Task 3.3 — the working city: latest work-wake reflections from chiefs and

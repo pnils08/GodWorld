@@ -1039,37 +1039,57 @@ function loadWorkingCity(root, cycle, officeMap) {
 
 // Task 3.4 — confrontation: when the Sunday directive named this seat, the
 // pack carries the demand verbatim and an `answer` move is expected.
+function cycleFiles(root, relative, pattern, throughCycle) {
+  const dir = path.join(root || ROOT, 'output', relative);
+  let names;
+  try { names = fs.readdirSync(dir); }
+  catch (e) { if (e.code === 'ENOENT') return []; throw e; }
+  return names.flatMap(name => {
+    const match = pattern.exec(name), cycle = match && Number(match[1]);
+    return cycle > 0 && cycle <= Number(throughCycle) ? [{file:path.join(dir,name),cycle}] : [];
+  }).sort((a,b) => a.cycle - b.cycle);
+}
+
+function loadSeatMoves(root, cycle, agentDir) {
+  const folded = new Map();
+  for (const input of cycleFiles(root, 'cron-civic/moves', /^moves_c(\d+)\.jsonl$/, cycle)) {
+    const rows = readJsonl(input.file);
+    if (!rows) throw new Error('Move ledger disappeared for C' + input.cycle);
+    for (const row of rows) {
+      if (row.agentDir !== agentDir) continue;
+      if (!row.moveId || Number(row.cycle) !== input.cycle) throw new Error('Invalid move identity/Cycle in ' + path.basename(input.file));
+      folded.set(row.moveId,row);
+    }
+  }
+  return [...folded.values()];
+}
+
+function loadConfrontations(root, cycle, agentDir) {
+  const all = [];
+  for (const input of cycleFiles(root, 'mara-directives', /^mara_directive_c(\d+)_AUTO\.txt$/, cycle)) {
+    const blocks = fs.readFileSync(input.file,'utf8').split(/\n(?=## )/).filter(b => /^## /.test(b));
+    const mine = blocks.filter(b => b.split('\n').some(line => /\*\*Agent:\*\*/.test(line) && line.includes('.claude/agents/' + agentDir + '/')));
+    if (!mine.length) continue;
+    const demand = mine.map(b => {
+      const address = (b.match(/\*\*Address:\*\*\s*(.+)/) || [])[1];
+      if (!address || !address.trim()) throw new Error('Directive Address unavailable: C' + input.cycle + ' ' + agentDir);
+      return b.split('\n')[0].replace(/^## /,'') + ' — ' + address.trim();
+    }).join('\n');
+    all.push({id:'CONF-' + input.cycle + '-' + agentDir,cycle:input.cycle,agentDir,
+      demand:clip(demand,BLOCK_CAP), sourceText:mine.join('\n'),
+      src:path.relative(root || ROOT,input.file).replace(/\\/g,'/'),expectsMove:'answer'});
+  }
+  const answeredIds = new Set();
+  const known = new Map(all.map(c => [c.id,c]));
+  for (const m of loadSeatMoves(root,cycle,agentDir)) {
+    const id = (m.payload || {}).confrontationId, directive = known.get(id);
+    if (m.type === 'answer' && ['pending','applied','failed'].includes(m.status) && directive && Number(m.cycle) >= directive.cycle) answeredIds.add(id);
+  }
+  return {available:true,all,open:all.filter(c => !answeredIds.has(c.id)),answeredIds:[...answeredIds]};
+}
+
 function loadConfrontation(root, cycle, agentDir) {
-  let file = null;
-  const exact = path.join(root || ROOT, 'output', 'mara-directives', 'mara_directive_c' + cycle + '_AUTO.txt');
-  if (fs.existsSync(exact)) {
-    file = exact;
-  } else {
-    try {
-      const maraDir = path.join(root || ROOT, 'output', 'mara-directives');
-      const files = fs.readdirSync(maraDir)
-        .filter(f => /^mara_directive_c\d+_AUTO\.txt$/.test(f))
-        .map(f => ({ f, c: Number((f.match(/\d+/) || [0])[0]) }))
-        .filter(x => x.c <= Number(cycle))
-        .sort((a, b) => b.c - a.c);
-      if (files.length) file = path.join(maraDir, files[0].f);
-    } catch (_) { /* no directive dir */ }
-  }
-  if (!file) return null;
-  const md = fs.readFileSync(file, 'utf8');
-  const blocks = md.split(/\n(?=## )/).filter(p => /^## /.test(p));
-  const needle = '.claude/agents/' + agentDir + '/';
-  for (const b of blocks) {
-    if (!b.includes(needle)) continue;
-    const address = (b.match(/\*\*Address:\*\*\s*(.+)/) || [])[1] || '';
-    return {
-      id: 'CONF-' + (file.match(/c(\d+)_/) || [0, cycle])[1] + '-' + agentDir,
-      demand: clip((b.split('\n')[0] || '').replace(/^## /, '') + ' — ' + address.trim(), BLOCK_CAP),
-      src: path.relative(root || ROOT, file).replace(/\\/g, '/'),
-      expectsMove: 'answer',
-    };
-  }
-  return null;
+  return loadConfrontations(root,cycle,agentDir).open[0] || null;
 }
 
 // Task 1/4 step 0 — the intervention catalog (engine-sheet's file). The pack
@@ -1146,6 +1166,8 @@ function gamePromptView(game) {
     workingCity: block(game.workingCity),
     interventions: { ...block(game.interventions), keys: ((game.interventions || {}).playable || []).map(p => p.key) },
     confrontation: game.confrontation ? { id: game.confrontation.id, demand: clip(game.confrontation.demand, BLOCK_CAP), expectsMove: 'answer' } : null,
+    confrontationIds: ((game.confrontations || {}).open || []).map(c => c.id),
+    confrontationEvidence: game.confrontations && game.confrontations.available === false ? game.confrontations.text : undefined,
   };
 }
 
@@ -1190,7 +1212,9 @@ function buildGameBlocks(opts) {
     }, {text:'Petition pool unavailable',complaints:[],participation:[]}),
     workingCity: safely(() => loadWorkingCity(root, cycle, officeMap), {text:'Working city unavailable'}),
   };
-  const conf = loadConfrontation(root, cycle, office.agentDir);
+  game.confrontations = safely(() => loadConfrontations(root,cycle,office.agentDir),
+    {text:'Confrontation evidence unavailable',all:[],open:[],answeredIds:[]});
+  const conf = game.confrontations.open[0];
   if (conf) game.confrontation = conf;
   game.conditions = safely(() => {
     if (boardIssue) throw new Error(boardIssue);
@@ -1340,7 +1364,7 @@ module.exports = {
   clip, writePack, CONSTITUENT_CAP,
   // civic.38 Task 3 game blocks
   buildGameBlocks, boardRowsFor, boardNeedText, childToParentFromAudit, foldHood, requireCycle, loadAudit, gamePromptView,
-  loadMovesFolded, loadPetitionPool, loadWorkingCity, loadConfrontation,
+  loadMovesFolded, loadPetitionPool, loadWorkingCity, loadConfrontation, loadConfrontations, loadSeatMoves,
   loadInterventionMenu, loadTrackerRows, readJsonl, NEGATIVE_AFFECTS, BLOCK_CAP,
 };
 

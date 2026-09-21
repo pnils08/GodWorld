@@ -2070,7 +2070,7 @@ function datawakeUserPrompt(pack, wallInj, office) {
       'work only names an initiative on YOUR board (game.boardIds). propose and canvass name only hoods inside your own district' +
       (/^D\d$/.test(String(office.district || '')) ? '' : ' (your seat is citywide — any real neighborhood)') +
       '. propose.intervention comes only from the intervention catalog named in your pack. A move that breaks these rules is discarded, not corrected.',
-    conf ? 'YOU WERE NAMED IN THE SUNDAY DIRECTIVE (' + conf.id + '). An {"type":"answer",...} move responding to it is expected.' : '',
+    conf ? 'YOU HAVE AN UNANSWERED DIRECTIVE (' + conf.id + '). An {"type":"answer",...} move responding to it is expected. Bind confrontationId exactly to that directive; only one answer is accepted per directive and seat. No new consequence is attached.' : 'No answer move is available unless game.confrontationIds names an unanswered directive for this seat.',
     'No headcount, percentage, or dollar figure unless that exact number appears above. Progress with no cited metric is described in words ("ahead of schedule", "significant headway") — never estimated.',
   ].join('\n');
 }
@@ -2189,6 +2189,14 @@ function validateDatawakeMoves(rawMoves, ctx) {
       else if (!boardIds.has(id)) reason = 'initiative-not-on-board(' + id + ')';
     } else if (type === 'answer') {
       if (!String(m.text || '').trim()) reason = 'answer-missing-text';
+      else if (ctx.answerEvidenceAvailable === false) reason = 'answer-evidence-unavailable';
+      else if ((ctx.answeredConfrontationIds || new Set()).has(m.confrontationId)) reason = 'directive-already-answered';
+      else {
+        const directive = (ctx.confrontations || []).find(c => c.id === m.confrontationId);
+        if (!directive || directive.agentDir !== office.agentDir ||
+            directive.id !== 'CONF-' + directive.cycle + '-' + office.agentDir ||
+            !Number.isInteger(Number(ctx.cycle)) || Number(ctx.cycle) < directive.cycle) reason = 'answer-not-bound-to-seat-directive';
+      }
     } else if (type === 'canvass') {
       if (!String(m.hood || '').trim()) reason = 'canvass-missing-hood';
       else reason = hoodAuthorityReason(office, m.hood, c2p);
@@ -2204,6 +2212,11 @@ function validateDatawakeMoves(rawMoves, ctx) {
     const payload = {};
     for (const k of Object.keys(m)) {
       if (k !== 'type') payload[k] = m[k];
+    }
+    if (type === 'answer') {
+      const directive = ctx.confrontations.find(c => c.id === m.confrontationId);
+      payload.directiveCycle = directive.cycle;
+      payload.confrontationSeat = office.agentDir;
     }
     accepted.push({ type, payload });
   }
@@ -2658,6 +2671,10 @@ async function runDatawake() {
         catalog: loadInterventionCatalog(),
         childToParent: pack.game && pack.game.geographyIssue ? {} : childToParentFromAudit(audit),
         geographyIssue: pack.game && pack.game.geographyIssue,
+        cycle: Number(cycle),
+        confrontations: ((pack.game || {}).confrontations || {}).open || [],
+        answeredConfrontationIds: new Set((((pack.game || {}).confrontations || {}).answeredIds) || []),
+        answerEvidenceAvailable: ((pack.game || {}).confrontations || {}).available === true,
       });
       for (const rj of mv.rejected) {
         log('[datawake] MOVE REJECTED ' + office.agentDir + ' — ' + rj.reason + ' :: ' + JSON.stringify(rj.move).slice(0, 160));

@@ -9,6 +9,7 @@ const run = require('./cron-civic-run');
 const slice = require('./buildCivicOfficeSlice');
 const { INTERVENTION_CATALOG: catalog } = require('../lib/initiativePhaseContract');
 const office = { officeId: 'COUNCIL-D5', agentDir: 'SYNTHETIC-seat', district: 'D5' };
+const confrontation = {id:'CONF-999-'+office.agentDir,cycle:999,agentDir:office.agentDir};
 function workspace(fn) {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'civic-review-synthetic-'));
   const write = (file, value) => { const dest = path.join(root, file); fs.mkdirSync(path.dirname(dest), { recursive: true }); fs.writeFileSync(dest, value); };
@@ -85,8 +86,8 @@ test('F4 stale board and citizen snapshots are unavailable, not empty evidence',
   assert.equal(game.boardAvailable, true);
   assert.equal(game.petitionPool.available, false);
   assert.match(game.petitionPool.text, /cycle/i);
-  const moves = run.validateDatawakeMoves([{type:'canvass',hood:'East Oakland'},{type:'answer',text:'SYNTHETIC'}],
-    {office,geographyIssue:'ambiguous-map'});
+  const moves = run.validateDatawakeMoves([{type:'canvass',hood:'East Oakland'},{type:'answer',confrontationId:confrontation.id,text:'SYNTHETIC'}],
+    {office,cycle:999,confrontations:[confrontation],geographyIssue:'ambiguous-map'});
   assert.match(moves.rejected[0].reason, /ambiguous-map/);
   assert.equal(moves.accepted[0].type, 'answer');
 }));
@@ -100,7 +101,7 @@ test('F4 fallback audits must match the requested Cycle and office overrides can
   assert.match(game.geographyIssue, /turf disagrees/);
 }));
 test('F5 new records drop legacy action before wall rendering and preserve speech and accepted moves', () => {
-  const mv = run.validateDatawakeMoves([{type:'answer',text:'SYNTHETIC answer'}], {office});
+  const mv = run.validateDatawakeMoves([{type:'answer',confrontationId:confrontation.id,text:'SYNTHETIC answer'}], {office,cycle:999,confrontations:[confrontation]});
   const rec = run.datawakeRecord({office,cycle:999,date:'SYNTHETIC-date',answeredModel:'SYNTHETIC-model',
     j:{statement:'SYNTHETIC speech',action:'SYNTHETIC fabricated action',numberMoved:'SYNTHETIC signal'},mv});
   assert.equal(Object.hasOwn(rec, 'action'), false);
@@ -155,4 +156,27 @@ test('F8 board proposals show measured condition counts without enabling housing
   assert.equal(game.conditions.proposals[0].counts.hardshipHouseholds,1);
   assert.equal(game.conditions.proposals[0].support.cleared,false);
   assert.match(game.conditions.text,/domain-not-playable/);
+}));
+test('R3 unanswered directives persist, answers bind Cycle and seat, and a second accepted answer is refused', () => workspace((root, write) => {
+  const directive = (seat, text) => '## SYNTHETIC demand\n- **Agent:** `.claude/agents/'+seat+'/`\n- **Address:** '+text+'\n';
+  write('output/mara-directives/mara_directive_c997_AUTO.txt',directive(office.agentDir,'SYNTHETIC prior'));
+  write('output/mara-directives/mara_directive_c998_AUTO.txt',directive('SYNTHETIC-other','SYNTHETIC other'));
+  write('output/mara-directives/mara_directive_c999_AUTO.txt',directive(office.agentDir,'SYNTHETIC current'));
+  const oldId='CONF-997-'+office.agentDir;
+  assert.equal(slice.loadConfrontation(root,999,office.agentDir).id,oldId);
+  const priorAnswer={moveId:'MV-SYNTHETIC-ANSWER',cycle:998,agentDir:office.agentDir,type:'answer',payload:{confrontationId:oldId},status:'pending'};
+  write('output/cron-civic/moves/moves_c998.jsonl',JSON.stringify(priorAnswer));
+  const state=slice.loadConfrontations(root,999,office.agentDir);
+  assert.deepEqual(state.open.map(c=>c.id),[confrontation.id]);
+  assert.equal(slice.loadConfrontation(root,999,office.agentDir).id,confrontation.id);
+  const answer=confrontationId=>({type:'answer',confrontationId,text:'SYNTHETIC reply'});
+  const ctx={office,cycle:999,confrontations:state.open,answeredConfrontationIds:new Set(state.answeredIds)};
+  const result=run.validateDatawakeMoves([answer(oldId),answer('CONF-999-SYNTHETIC-other'),answer(confrontation.id)],ctx);
+  assert.equal(result.rejected.length,2);
+  assert.match(result.rejected[0].reason,/already-answered/);
+  assert.equal(result.accepted[0].payload.directiveCycle,999);
+  assert.equal(result.accepted[0].payload.confrontationSeat,office.agentDir);
+  assert.equal(run.validateDatawakeMoves([answer(confrontation.id)],{office,cycle:999}).accepted.length,0);
+  write('output/cron-civic/moves/moves_c999.jsonl',JSON.stringify({...priorAnswer,cycle:999,moveId:'MV-SYNTHETIC-NEW',payload:{confrontationId:confrontation.id}}));
+  assert.equal(slice.loadConfrontation(root,999,office.agentDir),null);
 }));

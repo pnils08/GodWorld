@@ -302,11 +302,13 @@ Design choices returned to research-build without a new default: reflection rece
    - **Status:** implemented locally by codex. Display filters C−2 through C inclusive, rejects invalid/future stamps, and labels both windows; counter code unchanged. Regression boundaries pass.
 2. **Passed-over problem:** identity is hood + condition key from the Task 6 counter. A problem is passed over when it appears in a seat's pack and the move ledger shows no `propose`/`work`/`canvass`/`answer` by that seat touching that hood that Sunday. It is resolved when the counter no longer reports it or a landed move addressed it. No new stored state: derived each week from the ledger and the counter.
 3. **Confrontation answer:** an `answer` move binds to the directive Cycle and the named seat, one per directive; a second is refused. No new consequence in this build (coalitions stay out of scope): an unanswered demand simply reappears in the next pack until a move addresses it.
+   - **Status:** implemented locally by codex. All extant directives through the requested Cycle are joined to the named seat's folded move ledger; oldest unanswered demand is displayed, all open IDs remain legal choices. Accepted answers consume that directive once; rejected attempts do not. The validator stamps directive Cycle and seat from the verified directive, and unavailable evidence disables answers. No consequence added.
 4. **Working-city selection:** latest row per staff member, one each, capped by the block's character budget — one chatty director cannot crowd out the rest.
    - **Status:** implemented locally by codex. Select latest eligible Cycle, timestamp, then append order per POPID before packing whole staff lines into the character budget; future rows excluded, omitted staff counted.
 
 ## Changelog
 
+- 2026-09-20 (codex) — Ruling 3 implemented: persistent unanswered directives and one accepted answer per Cycle/seat directive identity. Cross-Cycle persistence, wrong-seat binding and repeat refusal covered; game 26/26 and repair/ruling tests 13/13.
 - 2026-09-20 (codex) — Ruling 4 implemented: latest work reflection per staff member before applying the character cap. Canonical ReflectionExcerpt, same-Cycle timestamp ordering, future exclusion and five distinct staff covered; repair/ruling tests 12/12.
 - 2026-09-20 (codex) — Ruling 1 implemented: three-Cycle complaint display, explicitly distinct current-Cycle condition counter. Game 26/26, counter 15/15, repair/ruling tests 11/11; local only.
 - 2026-09-20 (research-build) — Ruled codex's four returned design choices (§Rulings). Housing-lever design `2026-09-20-housing-lever` accepted for engine-sheet execution; rate/enable stay World_Config keys, off until activation.

@@ -28,7 +28,7 @@ function fixture(rows, personnel, declining = false) {
     bizNoiseBound: 0, bizVitalityNeutral: 50, bizVitalityGain: 0.1, bizSuccessWindow: 4,
     bizSuccessVitalityHigh: 80, bizSuccessApprovalHigh: 80, bizSuccessPenalty: 1,
     bizDisruptBaseChance: 0, bizDisruptSuccessMult: 1, bizDisruptShock: 1,
-    bizClosureStreak: 8, bizClosureRevenueFloorPct: 25, bizEventShockScale: 1,
+    bizClosureStreak: 8, bizClosureRevenueFloorPct: 25, bizEventShockScale: 1, bizInitiativeStallDrag: 0.5,
     bizDeclineStreak: 4, dialOwnerDriveExpandMult: 1.25, dialOwnerStreakRoom: 1
   };
   for (const sector of ['faith', 'retail', 'food', 'health', 'tech', 'professional', 'construction', 'arts', 'education', 'default']) config['bizVol_' + sector] = 1;

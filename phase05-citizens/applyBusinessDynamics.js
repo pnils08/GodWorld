@@ -54,6 +54,7 @@ var BIZ_DYNAMICS_REQUIRED_KEYS = [
   'bizDisruptShock', 'bizClosureStreak', 'bizClosureRevenueFloorPct', 'bizEventShockScale',
   'bizVol_faith', 'bizVol_retail', 'bizVol_food', 'bizVol_health', 'bizVol_tech',
   'bizVol_professional', 'bizVol_construction', 'bizVol_arts', 'bizVol_education', 'bizVol_default',
+  'bizInitiativeStallDrag', // engine.250: share of the event scale a failing initiative drains per Cycle (builder-ruled 0.5)
   'bizDeclineStreak' // Task 6 (S413): distress cycles before shedding starts — not in the signed table; proposed 4, half the closure streak
 ];
 
@@ -349,7 +350,7 @@ function bizDriftOne_(cfg, biz, prevState, inputs, cycle) {
   // revived that would have pinned max-up drift on every business in an
   // initiative hood for as long as the initiative existed.
   if (inputs.initiativeAdvanced) ev += scale;
-  if (inputs.initiativeFailing) ev -= scale;
+  if (inputs.initiativeFailing) ev -= scale * cfg.bizInitiativeStallDrag;   // builder-ruled half weight: a stall stings, one forgotten project does not close a block
   if (inputs.coverageSentiment > 0) ev += 0.5 * scale;
   else if (inputs.coverageSentiment < 0) ev -= 0.5 * scale;
   ev = bizClamp_(ev, -2.0, 2.0);

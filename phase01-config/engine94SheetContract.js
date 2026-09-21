@@ -77,6 +77,7 @@ var ENGINE96_CONFIG_SEEDS = [
   ['bizVol_arts', 1.2, 'engine.96 sector volatility multiplier: arts / media', 0, 5, false],
   ['bizVol_education', 0.6, 'engine.96 sector volatility multiplier: education', 0, 5, false],
   ['bizVol_default', 1.0, 'engine.96 sector volatility multiplier: small neighborhood business (fallback)', 0, 5, false],
+  ['bizInitiativeStallDrag', 0.5, 'engine.250: share of bizEventShockScale a stalled / blocked / suspended / defunded initiative drains from every business in its hoods, each Cycle it stands (builder-ruled half weight; 1 = as hard as chaos at the business, 0 = off)', 0, 2, false],
   ['bizDeclineStreak', 4, 'engine.96 Task 6: consecutive negative-growth Cycles before a business sheds headcount (proposed S413, not in the signed table)', 1, 52, false],
   // engine.96 Task 12 (S440, builder go 2026-09-08): the owner door
   ['bizOwnerMintP', 0.2, 'engine.96 Task 12: per open drip slot, the chance the owner door fires this Cycle (the family door\'s own odds)', 0, 1, false],

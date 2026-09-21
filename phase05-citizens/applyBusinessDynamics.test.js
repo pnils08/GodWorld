@@ -18,6 +18,7 @@ function assert(label, cond, detail) { if (cond) { console.log(`  ok   ${label}`
 
 // the signed Task 3 table, as the self-arm seeds it
 const CFG = { bizDeclineStreak: 4, bizDriftMaxUp: 1.0, bizDriftMaxDown: 1.0, bizGrowthCeil: 40, bizGrowthFloor: -10, bizNoiseBound: 0.25, bizVitalityNeutral: 6.0, bizVitalityGain: 0.15, bizSuccessWindow: 3, bizSuccessVitalityHigh: 9.0, bizSuccessApprovalHigh: 85, bizSuccessPenalty: 0.3, bizDisruptBaseChance: 2, bizDisruptSuccessMult: 3, bizDisruptShock: 2.0, bizClosureStreak: 8, bizClosureRevenueFloorPct: 40, bizEventShockScale: 1.0, bizVol_faith: 0.5, bizVol_retail: 1.2, bizVol_food: 1.3, bizVol_health: 0.7, bizVol_tech: 1.5, bizVol_professional: 0.8, bizVol_construction: 1.1, bizVol_arts: 1.2, bizVol_education: 0.6, bizVol_default: 1.0,
+  bizInitiativeStallDrag: 0.5,   // engine.250, builder-ruled half weight
   // engine.178 owner dial gates, as ensureEngine178Config_ seeds them
   dialOwnerStreakRoom: 1, dialOwnerDriveExpandMult: 1.25 };
 const BL_H = ['BIZ_ID', 'Name', 'Sector', 'Neighborhood', 'Employee_Count', 'Avg_Salary', ' Annual_Revenue ', 'Growth_Rate ', 'Key_Personnel'];
@@ -99,7 +100,7 @@ console.log('wiring');
   assert('ensureEngine96Config_ self-arms beside 133/135', /ensureEngine135Config_\(ss\);[^\n]*\n\s*ensureEngine96Config_\(ss\);/.test(orch));
   const contract = fs.readFileSync(path.join(__dirname, '..', 'phase01-config', 'engine94SheetContract.js'), 'utf8');
   const seeded = (contract.match(/\['biz[A-Za-z_]+',/g) || []).map(s => s.slice(2, -2));
-  assert('the 27 signed keys + bizDeclineStreak + the 4 owner-door keys (Task 12) are seeded; the dynamics pass requires exactly its 28', seeded.length === 32 && mod.BIZ_DYNAMICS_REQUIRED_KEYS.length === 28 && mod.BIZ_DYNAMICS_REQUIRED_KEYS.every(k => seeded.includes(k)), JSON.stringify(seeded));
+  assert('the 27 signed keys + bizDeclineStreak + bizInitiativeStallDrag (engine.250) + the 4 owner-door keys (Task 12) are seeded; the dynamics pass requires exactly its 29', seeded.length === 33 && mod.BIZ_DYNAMICS_REQUIRED_KEYS.length === 29 && mod.BIZ_DYNAMICS_REQUIRED_KEYS.every(k => seeded.includes(k)), JSON.stringify(seeded));
   const fin = fs.readFileSync(path.join(__dirname, '..', 'phase09-digest', 'finalizeCycleState.js'), 'utf8');
   assert('finalizeCycleState carries businessDynamics from S.businessDynamicsState', /businessDynamics: S\.businessDynamicsState \|\| \{\}/.test(fin));
   const gw = fs.readFileSync(path.join(__dirname, '..', 'phase05-citizens', 'generationalWealthEngine.js'), 'utf8');
@@ -236,6 +237,8 @@ console.log('engine.250 — the initiative bus chain: real writer → real reade
   assert('a stalled initiative is a CONDITION: net-negative hood entry drains its businesses every Cycle it stands', stalled.bus['West Oakland'].sentiment < 0 && stalled.growth[0] < none.growth[0] && stalled.growth[1] === none.growth[1], JSON.stringify([stalled.growth, none.growth]));
   const revived = chain([wo('disbursement-active')], { 'INIT-001': 'stalled' });
   assert('a REVIVAL from a failing phase is not an advance — advanced:0, no lift (a stall/revive loop cannot farm it)', revived.bus['West Oakland'].advanced === 0 && JSON.stringify(revived.growth) === JSON.stringify(none.growth), JSON.stringify(revived.bus));
+  const dragOne = mod.bizDriftOne_(CFG, { id: 'BIZ-D', sector: 'Professional Services', hood: 'T', growth: 5, revenue: 1 }, { streak: 0, win: 0 }, { chaosAtBusiness: false, chaosInHood: false, initiativeAdvanced: false, initiativeFailing: true, coverageSentiment: 0, vitality: 6.0, mayorApproval: 60 }, 110);
+  assert('the stall drain is HALF the event scale (bizInitiativeStallDrag 0.5): ev −0.5, not the −1.0 of chaos at the business', dragOne.parts.ev === -0.5, JSON.stringify(dragOne.parts));
   const cd = fs.readFileSync(path.join(__dirname, '..', 'phase02-world-state', 'applyCityDynamics.js'), 'utf8');
   assert('the Phase-2 fold no longer empties either bus (the clear starved the Phase-3 and Phase-5 readers)', !/S\.initiativeNeighborhoodEffects\s*=\s*\{\}/.test(cd) && !/S\.approvalNeighborhoodEffects\s*=\s*\{\}/.test(cd));
   assert('the fold reads the approval bus from the one-Cycle-old carry, not the same-Cycle summary', /foldPrev\.approvalNeighborhoodEffects/.test(cd) && /approvalBusCycle === foldCycle - 1/.test(cd));

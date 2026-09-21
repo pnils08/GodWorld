@@ -89,10 +89,75 @@ Reading it: putting **all** civic wakes on Fable 5.1 batch costs about $12 a mon
 ## Verdict
 
 - **`adopt` — OpenRouter Batch API as the batch rail** (proven in-repo, existing key, `:batch` list verified). Supersedes the `watch` in the first research file.
-- **`adopt` — Claude tiers on batch for the mayor, Carmen and Mags**; pick the tier by voice quality, not price.
+- **`adopt`, CONDITIONAL — Claude tiers on batch for the mayor, Carmen and Mags**; pick the tier by voice quality, not price. **Blocked today:** OpenRouter rejected every Claude `:batch` submit on 2026-09-21 (see Failure evidence, Section 3) although the same route ran Sonnet 5 on 2026-08-29. Re-verify with a 1-request batch before building on it; fallbacks are Anthropic credits or a working `:batch` model.
+- **`adopt` — Gemini 3.7 Flash and DeepSeek v4-pro `:batch` as the verified working batch families** (completed 6–13 min, schema-complete JSON at adequate `max_tokens`).
 - **`watch` — Anthropic-native batch:** needs the builder to confirm the key and credits; only worth it if OpenRouter's `:batch` route disappoints.
 - **`watch` — non-Claude families for council seats:** move only to a `:batch` sibling whose price is verified below standard; four listed `:batch` endpoints are more expensive than standard.
 - **`take-nothing` — moving every wake to Fable 5.1 by default** before usage logging exists.
+
+## Failure evidence and Mags pricing
+
+Evidence gathered 2026-09-21 by a live probe (scratch script, six tiny batches, total spend about $0.006; account balance read back at about $8.4–8.6 of $70 purchased) plus the repo's own history. Anything not observed is marked NOT VERIFIED.
+
+### 1. What the repo's own August batches show
+
+- Two Sonnet 5 batches (2026-08-29, one 121-file 347 KB packet each, `output/or-batches.jsonl`): the generation timestamp on batch 1 is 625 s after submit (~10.4 min); batch 2's output file was fetched 11.7 min after submit (upper bound). Latency was minutes, not hours, on a ~129k-token prompt.
+- **Batch 1 "succeeded" and was unusable:** HTTP 200, `finish_reason: length`, 32,000 completion tokens of which 31,999 were reasoning, `content: null`. Billed anyway (usage 128,930 in / 32,000 out; about $0.29 at the listed Sonnet 5 batch price, estimate). Fixed by disabling reasoning (`scripts/orBatch.js`, commit 1ef8e265) and resubmitting.
+- No usage/cost was stored for batch 2.
+
+### 2. Docs (https://openrouter.ai/docs/batch-quickstart)
+
+- `POST /api/v1/batches`, `GET /api/v1/batches/:id`, list, delete. Statuses: `validating`, `in_progress`, `completed`, `failed`, `expired`, `cancelled` (plus transient `finalizing`, `cancelling`). Window: `24h` only. Results come back inline on the GET, stored 30 days.
+- Per result exactly one of `response` or `error`. `request_counts` = total/completed/failed.
+- **Not stated in the docs:** whether failed requests are billed, what happens at expiry beyond the status, rate limits, max requests per batch, max batch size, result ordering.
+- `scripts/orBatch.js` still uses the older `/api/beta/batches` route; the docs only mention `/api/v1/batches`.
+
+### 3. Live probe — what actually happened
+
+| Case | Result |
+|---|---|
+| Gemini 3.7 Flash `:batch`, 2 valid requests | Completed in **365 s** (6.1 min). Cost $0.0019 for both. |
+| DeepSeek v4-pro-0813 `:batch`, 1 request | Completed in **770 s** (12.8 min). Schema-complete JSON, 100 completion tokens, cost **$0.00026**. |
+| Gemini, 3 requests incl. `max_tokens` 500,000 | Completed in **768 s**, 3 of 3 ok, cost $0.0039. The huge `max_tokens` was accepted, not rejected. |
+| Gemini with `reasoning: {enabled: false}` | **Whole batch failed in 3 s**: "Reasoning is mandatory for this endpoint and cannot be disabled." `results: null`, `usage: null`. |
+| Gemini, `max_tokens` 300 | Request "succeeded" (`finish: length`) with **truncated, unparseable JSON**: 286 of 296 tokens were mandatory reasoning. Billed. |
+| Gemini, `max_tokens` 1200 | Schema-complete JSON; reasoning 603 of 681 completion tokens (~88%). |
+| One request with empty `messages` among 4 | **All 4 failed** in 21 s at validation, `request_counts.failed = 4`, `usage: null`, one error naming the bad `custom_id`. No partial results. |
+| A request body whose `model` differs from the batch `model` | Whole submit rejected 400: "Each batch request body model must match the top-level model." One batch = one model. |
+| Duplicate `custom_id` | Whole submit rejected 422. |
+| Estimated cost above balance (`max_tokens` 10,000,000) | Submit rejected 402: "estimated to cost $18.76, which exceeds your available balance of $8.57" — the reservation is priced off `max_tokens`. |
+| **`anthropic/claude-sonnet-5`, `:batch`, `claude-haiku-4.5:batch`, `claude-sonnet-4.6:batch`, on `/api/v1/batches` and `/api/beta/batches`** | **All rejected 400: "Model ... does not have a :batch endpoint."** The public model list and its endpoints record still show an Anthropic `:batch` endpoint, and the same route ran Sonnet 5 on 2026-08-29. Cause NOT VERIFIED. |
+| Result order | Returned `good-1, overlimit, good-2` for a submit order of `good-1, good-2, overlimit`: **order is not preserved; match by `custom_id`.** |
+
+Every batch that ran took 6–13 minutes, well inside the 24 h window. Every rejection happened at submit or within about 20 s, before any generation, so nothing model-related was billed on the failed batches (`usage: null`).
+
+### 4. Mags's Saturday narration priced (ESTIMATE)
+
+`scripts/cron-saturday-run.js` `stepNarrate` sends one call per week: a ~900-character charge plus the week's curated articles, each capped at 2,400 characters (`edition_curation_c104…c107.json`: 7, 9, 9, 9 selected), and asks for 900–1,200 words at `max_tokens` 2200. Measured outputs `cycle_pulse_c104…c107.md`: 958–1,048 words (5.7–6.3k chars). Estimated size per run: **~5.8k tokens in (upper bound from 9 x 2,400 chars at ~3.9 chars/token), ~1.5k tokens out.** Prices from OpenRouter's public model list (per MTok in/out):
+
+| Model | $/run | With +4k thinking tokens | $/month (4.3 runs) |
+|---|---|---|---|
+| Sonnet 4.6 standard (current; $3 / $15) | 0.040 | 0.100 | 0.17 |
+| Sonnet 4.6 batch ($1.50 / $7.50) | 0.020 | 0.050 | 0.09 |
+| Opus 5 batch ($2.50 / $12.50) | 0.033 | 0.083 | 0.14 |
+| Fable 5.1 standard ($10 / $50) | 0.133 | 0.333 | 0.57 |
+| **Fable 5.1 batch ($5 / $25)** | **0.066** | **0.166** | **0.29** |
+
+Mags on Fable 5.1 is about **$0.07 a run, roughly $0.29 a month** at batch price; thinking tokens bill as output, so cap effort and `max_tokens`. The catch is the same as Section 3: OpenRouter's Claude `:batch` route rejected every submit today.
+
+### 5. Design implications (from the evidence only)
+
+| Failure mode | Seen? | Cheapest handling |
+|---|---|---|
+| **One malformed request kills the whole batch** (empty messages, bad model in a body, duplicate `custom_id`, unsupported parameter) | Yes, submit or ~20 s | Validate every request locally before submit (non-empty messages, unique `custom_id`, body model equals batch model, per-model parameter table). Resubmit the batch minus the offender on `failed` with all-failed counts. |
+| **Per-model parameter rules** (Gemini: reasoning mandatory) | Yes | Keep a small per-model request profile (reasoning on/off/effort, min `max_tokens`) beside the model map; never send one profile to all families. |
+| **"Succeeded" but unusable** (reasoning ate `max_tokens`: `content: null` or truncated JSON, billed) | Yes, on both Sonnet 5 and Gemini | Treat `finish_reason: length` or unparseable JSON as invalid; size `max_tokens` for reasoning + answer (Gemini needs about 1,200 for a small JSON); resubmit only those seats in the next window. |
+| **Unusable Claude route** ("does not have a :batch endpoint") | Yes, today | Probe the model with a 1-request batch at submit; on rejection fall back to a listed working `:batch` model, or add Anthropic credits and use the direct batch API. Do not build the civic machine on Claude-batch until it is re-verified. |
+| **Result order** | Yes, not preserved | Key results by `custom_id` = seat + cycle, always. |
+| **Balance reservation** | Yes, 402 | Check balance before submit; cap `max_tokens` per request so the reserved estimate stays small; top up before the week. |
+| **Latency** | 6–13 min observed | Poll every 5–10 min with no model calls; an `expired` batch at 24 h means resubmit. Expiry behavior itself NOT VERIFIED. |
+| **Late results / provider outage** | Not observed | Per-seat state (`submitted` / `collected` / `pending`) so a late batch never blocks the tracker close; NOT VERIFIED beyond that. |
+| **One batch = one model** | Yes | Group seats by model into separate batches; mixed-faction weeks mean several small batches, not one. |
 
 ## Applications (living)
 
@@ -101,3 +166,4 @@ Reading it: putting **all** civic wakes on Fable 5.1 batch costs about $12 a mon
 ## Changelog
 
 - 2026-09-21 — Filed. OpenRouter batch verdict corrected from `watch` to `adopt`.
+- 2026-09-21 — Added §Failure evidence and Mags pricing (live probe): Claude `:batch` submits rejected today; batch failures are all-or-nothing at validation; Gemini/DeepSeek batches verified; Mags on Fable 5.1 batch ~$0.07/run.

@@ -65,6 +65,7 @@ Vocabulary: `Proposed → Funded → Standing → Delivering`. A blank `Stage` m
 - **A stalled initiative** also drains its neighborhoods' businesses at half weight (`bizInitiativeStallDrag 0.5`), live on PROD.
 - **The sponsor owns its bill.** Approval effects follow the row's sponsor, not its faction. A revival from a failing phase counts as sitting, not advancing. Live on PROD.
 - **Delivering is judged against the city's own middle, held.** Retail across the whole city fell from 10.0 to 6.4 in five cycles, so a raw rise from baseline would be a coin flip. Baselines are stamped at conversion or vote, never rebased.
+- **Measured on the bench (2026-09-21):** a clinic lowers a hood's sick count (Laurel 111 to 95 against a control that rose to 116) but plateaus at about 0.18-0.19 against the city median, so the delivered margin is per metric (health 0.15, default 0.20). Economic, workforce and sports programs cannot move retail distinguishably from noise, so those domains are not playable until they have a real lever. A delivered service erodes without upkeep (grace 6 cycles, 0.15 per cycle, floor 0.3) and directors' work counts as tending. See the plan's rulings after the matched-control measurement.
 - **Effect buses:** both hood effect buses now work (engine.250, PROD). Education and business effects can reach the world.
 
 ## 5. Petitions

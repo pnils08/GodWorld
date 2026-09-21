@@ -390,8 +390,20 @@ Builder's direction: a delivered initiative must not be permanent; something ero
 
 No double-step found across the three call sites; override and delayed-retry paths correct. F3 (untrimmed Name carry key) and F4 (blank prior phase carried nothing) fixed in `82d2fac4`. Carried as known limits, not built: F1 — the tracker write, the carry and the counter share no transaction, so a run that dies between them shifts the business lift one Cycle early or re-emits it on a retry (same window every carry-class event already has; observed once tonight as an HTTP 503 abort); F2 — a bench script property stamped at or below the synced Cycle survives a re-sync and can outrank the synced ring (ahead-of-live benches, the common case, recover correctly). F5 binds the stall cut: T7's queued `operational` must yield to a stall decided in the same run, not only to one already on the sheet. ASK 2 adopted for the Delivering cut: evaluate the prior committed cohort early in Phase 2, apply in Phase 5, with codex's descriptor and hold contract.
 
+### Rulings after the matched-control measurement (2026-09-21)
+
+Measured: [[../../output/engine-sheet/2026-09-21-matched-control-c108-c112.json]] (engine-sheet, commit 5cbd8b2c). Builder rulings (a)-(d), research-build rulings (e)-(f):
+
+- **(a) Per-metric delivered margin (builder).** `civicDeliverMargin` becomes a per-metric setting; health starts at 0.15 (the measured clinic plateaus at 0.18-0.19, so a single 0.20 could never deliver it); 0.20 remains the default for domains not yet measured. Supersedes the single-dial ruling in ruling 5 for measured metrics.
+- **(b) Retail-gated domains not playable (builder).** Economic, workforce and sports cannot move retail vitality distinguishably from noise (untreated-hood median difference 0.46 between arms), so they are marked not playable in the intervention catalog until each has a stronger effect channel or a metric a program can actually move. Engine-sheet files the row. Same status as safety and housing.
+- **(c) Upkeep through work erodes a delivered service (builder).** Adopt grace 6 cycles, decay 0.15 per cycle, floor 0.3 of full strength as live dials; returning to strength needs tending again.
+- **(d) Project directors' work counts as tending (builder).** Work-wake shifts by the four project directors count, so upkeep is not concentrated on the mayor.
+- **(e) At Standing and Delivering the clock counts cycles untended (research-build).** Not cycles since the stage change: under hold 3 a row cannot deliver before four cycles after standing and the clock is five, so a stage-change clock stalls rows that are on track. Tending resets it; a stage change also does.
+- **(f) A regress costs nothing beyond the restarted clock (research-build).** No extra approval or business penalty; the restart is the cost.
+
 ## Changelog
 
+- 2026-09-21 (research-build) — Builder ruled the matched-control round: per-metric margin (health 0.15), retail-gated domains not playable, upkeep decay 6/0.15/0.3, directors' work counts as tending; research-build ruled clock-counts-untended and regress-costs-nothing.
 - 2026-09-21 (engine-sheet) — Matched-control bench pair filed: health moves its gate metric (edge ≈ 0.18–0.19, just under the ruled 0.20), retail does not move at all against noise. Decay design proposed for builder sim calls. Codex handler review accepted; F3/F4 fixed in `82d2fac4`.
 - 2026-09-21 (research-build) — Builder ruled ruling 8: Delivering stays operational + one-time completed +3; next cut is ongoing effects and decay that brings a delivered initiative back for attention.
 - 2026-09-21 (engine-sheet) — Stage handler first cut bench-proven on 0908 @80 (fixture `INIT-900`, C111 Funded → C112 Standing/`operational` with the prior phase carried → C113 no re-step) and landed PROD @110, web app read back @97. [[../reference/DEPLOY_HISTORY]] §PROD @110.

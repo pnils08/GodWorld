@@ -143,6 +143,22 @@ const NODE_BUILDERS = {
     if (row.Notes) lines.push(cap(row.Notes, 220));
     return lines.join('\n');
   },
+  'initiative-project': (pkg, cycle, beatsDir) => {
+    // civic.38 Task 9 step 2 — a project director's operational read: their
+    // initiative's row off the beats dump (phase, stage when the Task 4
+    // column exists, latest milestone, next scheduled action). ~600 chars.
+    const rows = readBeats('Initiative_Tracker', beatsDir);
+    if (!rows) return null;
+    const row = rows.find((r) => String(r.InitiativeID || '') === String(pkg.initiative || ''));
+    if (!row) return null;
+    const lines = [
+      `Your project: ${row.Name} (${row.InitiativeID}).`,
+      `It is in ${row.ImplementationPhase || '—'}${row.Stage ? ', stage ' + row.Stage : ''} (status ${row.Status || '—'}).`,
+    ];
+    if (row.MilestoneNotes) lines.push('Latest milestone: ' + cap(row.MilestoneNotes, 180));
+    if (row.NextScheduledAction) lines.push('Next on the books: ' + cap(row.NextScheduledAction, 120) + (row.NextActionCycle ? ' (cycle ' + row.NextActionCycle + ').' : '.'));
+    return cap(lines.join('\n'), 600);
+  },
 };
 
 function buildWorkPack(pkg, cycle, beatsDir, namesPath) {

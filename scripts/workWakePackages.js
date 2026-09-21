@@ -21,6 +21,7 @@ const DATA_NODES = Object.freeze([
   'civic-office',
   'cycle-weather',
   'sports-player',
+  'initiative-project',   // civic.38 Task 9 step 2 — project directors off the datawake rota
 ]);
 
 const DUTY_DAYS = Object.freeze(['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat']);
@@ -42,6 +43,9 @@ function validatePackage(key, value) {
   }
   if (value && value.dataNodes && value.dataNodes.includes('sports-player') && !value.playerName) {
     errors.push('sports-player dataNode requires playerName');
+  }
+  if (value && value.dataNodes && value.dataNodes.includes('initiative-project') && !/^INIT-\d+$/.test(String(value.initiative || ''))) {
+    errors.push('initiative-project dataNode requires initiative (INIT-XXX)');
   }
   const route = value && value.models && value.models.reflect;
   if (!route || route.provider !== 'openrouter' || !String(route.model || '').includes('/')) {

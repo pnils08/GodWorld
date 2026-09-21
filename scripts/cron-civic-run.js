@@ -1992,11 +1992,17 @@ const BLOC_SPOKESPERSON_DISTRICT = {
 };
 
 // LRU rota: least-recently-woken duty seats first (scan existing datawake files).
+// civic.38 Task 9 step 1: the datawake is the POLITICAL turn — elected seats
+// (9 council + mayor) plus the police chief (standing builder ruling,
+// civic.37). Project directors, DA, Okoro and Baylight move off this rota;
+// the directors' operational read is a work-wake pack (Task 9 step 2).
+const DATAWAKE_SEAT = /^(MAYOR-01|COUNCIL-D\d|CHIEF-POLICE)$/;
 function datawakeRota(officeMap, limit) {
   const seats = [];
   const byDir = {};
   for (const o of [...officeMap.offices, ...(officeMap.projects || [])]) {
     if (!o.agentDir) continue;
+    if (!DATAWAKE_SEAT.test(String(o.officeId || o.projectId || ''))) continue;
     (byDir[o.agentDir] = byDir[o.agentDir] || []).push(o);
   }
   for (const [dir, rows] of Object.entries(byDir)) {

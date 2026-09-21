@@ -42,12 +42,14 @@ Agy's 26-test file was committed in `c85c0100`; its two positive catalog fixture
 
 Read-only C108 game-block inspection preserves the council board memberships listed below. Reflection_Intake is absent locally and is reported unavailable. No current board/move proposals require counts in that snapshot; the synthetic housing proposal proves the counter path. Refreshed C108 city housing reading remains **106/392**, zero/missing-income counters both **0**, housing support **domain-not-playable**.
 
-Not decided by these repairs:
+Decisions originally returned by the defect pass (subsequently ruled in the owning plan):
 
 - Reflection recency remains all recorded rows for the petition display, explicitly labelled; the counter retains its configurable current-Cycle default. Counter visibility is not merged into display totals. Research-build must choose a common policy if desired.
 - Passed-over-problem identity and resolution, confrontation answer binding, and any resulting reward/penalty need a design contract.
 - Working-city selection remains the existing four latest rows; changing to one latest row per staff member is a selection-policy decision.
 - Task 4's shared next-stage requirement helper still needs engine-sheet integration. No replacement engine rules were authored here.
+
+**Ruling implementation follow-up:** research-build ruled the four returned choices in the parent plan on 2026-09-20. Codex implemented the three-Cycle display in `1c06f1c5`, latest-per-staff selection in `082985b7`, and once-per-directive Cycle/seat answer binding in `d6dd24d7`. Passed-over continuity now derives hood + condition keys from the local counter, existing displayed pack evidence, and folded prior-Cycle ledgers in `scripts/civicProblemContinuity.js`. No new registry, consequence, support band, or engine state was added. Missing evidence stays unknown. Current tests are game **26/26**, petitions **15/15**, repair/rulings **15/15**. Legacy C108 disk packs establish no earlier displayed condition keys, so the current local check makes no invented historical inaction claim. The shared engine stage helper is the remaining integration dependency.
 
 ## Findings for Kimi
 
@@ -131,6 +133,7 @@ Read-only probes evaluated the actual MOVE_TYPES/loadInterventionCatalog/hoodAut
 
 ## Changelog
 
+- 2026-09-20 (codex) — Applied the four newly ruled design choices in separate commits; current results and remaining shared-helper dependency recorded above. Captured and corrected the pack's stale `output.contract` action name while wiring derived problem continuity.
 - 2026-09-20 (codex) — Applied verified script defects during builder-assigned temporary ownership; per-finding commits, local checks and remaining design decisions recorded above. Agy fixtures committed separately; push remains held for the mixed stack.
 - 2026-09-20 (codex) — Re-probed Kimi follow-ups: F2 resolved by 41c6892c; F3 absent-file branch resolved by 58f43fe1, child fold still fails; stage advice evaluated against the actual LastWorkCycle condition.
 - 2026-09-20 (codex) — Filed stronger HEAD review with eight actionable findings and verified Task 6.1 regression repair; current task ownership preserved.

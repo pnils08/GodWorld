@@ -1163,6 +1163,7 @@ function gamePromptView(game) {
       unlocatedRows: (game.petitionPool || {}).unlocatedRows,
       window: (game.petitionPool || {}).window },
     conditions: { ...block(game.conditions), proposals: ((game.conditions || {}).proposals || []).length },
+    problemContinuity: block(game.problemContinuity),
     workingCity: block(game.workingCity),
     interventions: { ...block(game.interventions), keys: ((game.interventions || {}).playable || []).map(p => p.key) },
     confrontation: game.confrontation ? { id: game.confrontation.id, demand: clip(game.confrontation.demand, BLOCK_CAP), expectsMove: 'answer' } : null,
@@ -1171,9 +1172,27 @@ function gamePromptView(game) {
   };
 }
 
+function loadProblemContinuity(root, cycle, office, hoods, trackerRows, confrontations) {
+  const previousPacks = [];
+  const escaped = packSlug(office).replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  for (const input of cycleFiles(root,'cron-civic/packs',new RegExp('^' + escaped + '_c(\\d+)\\.json$'),Number(cycle)-1)) {
+    const pack = JSON.parse(fs.readFileSync(input.file,'utf8'));
+    if (!pack.actor || pack.actor.agentDir !== office.agentDir) throw new Error('Prior pack seat mismatch: ' + path.basename(input.file));
+    if (pack.game && pack.game.problemContinuity && Number(pack.game.problemContinuity.cycle) !== input.cycle) {
+      throw new Error('Prior pack condition Cycle mismatch: ' + path.basename(input.file));
+    }
+    previousPacks.push(pack);
+  }
+  const data = require('./civicPetitions').loadLocalData({root:root || ROOT,cycle});
+  return require('./civicProblemContinuity').deriveProblemContinuity({data,hoods:hoods || [],previousPacks,
+    moves:loadSeatMoves(root,cycle,office.agentDir),trackerRows,directives:confrontations.all,
+    closedLedgerCycles:new Set(cycleFiles(root,'cron-civic/moves',/^moves_c(\d+)\.jsonl$/,Number(cycle)-1).map(f=>f.cycle)),
+    agentDir:office.agentDir,cap:BLOCK_CAP});
+}
+
 function buildGameBlocks(opts) {
   const { root, cycle, office, officeMap, hoods, audit } = opts;
-  let c2p, geographyIssue = null, boardIssue = null, board = null;
+  let c2p, geographyIssue = null, boardIssue = null, board = null, rows = null;
   try {
     requireCycle(audit, cycle, 'engine audit');
     c2p = childToParentFromAudit(audit);
@@ -1185,7 +1204,7 @@ function buildGameBlocks(opts) {
   } catch (e) { geographyIssue = e.message; }
   try {
     if (geographyIssue) throw new Error(geographyIssue);
-    const rows = loadTrackerRows(root, cycle);
+    rows = loadTrackerRows(root, cycle);
     if (rows === null) throw new Error('Initiative_Tracker dump absent');
     board = boardRowsFor(office, rows, c2p);
   } catch (e) { boardIssue = e.message; }
@@ -1221,6 +1240,11 @@ function buildGameBlocks(opts) {
     if (game.lastMove.available === false) throw new Error('Move evidence unavailable');
     return loadConditionCounts(root, cycle, board, game.lastMove.moves);
   }, {text:'Proposal condition counts unavailable',proposals:[]});
+  game.problemContinuity = safely(() => {
+    if (boardIssue) throw new Error(boardIssue);
+    if (!game.confrontations.available) throw new Error('Confrontation evidence unavailable');
+    return loadProblemContinuity(root,cycle,office,hoods,rows,game.confrontations);
+  }, {text:'Problem continuity unavailable',problems:[],visibleProblems:[],passedOver:[]});
   return game;
 }
 
@@ -1342,17 +1366,20 @@ function buildPack(opts) {
       invent: ['no new citizens', 'no new businesses', 'no sheet numbers'],
     },
     output: {
-      contract: 'statement + action + numberMoved',
+      contract: 'statement + moves + numberMoved',
       dest: 'office wiki (civic.16) then next Sunday city-hall packet',
     },
   };
 }
 
+function packSlug(actor) {
+  return String(actor.officeId || actor.agentDir || 'office').replace(/^civic-office-|^civic-project-/, '');
+}
+
 function writePack(pack, root, cycle) {
   const dir = path.join(root, 'output', 'cron-civic', 'packs');
   fs.mkdirSync(dir, { recursive: true });
-  const slug = String(pack.actor.officeId || pack.actor.agentDir || 'office')
-    .replace(/^civic-office-|^civic-project-/, '');
+  const slug = packSlug(pack.actor);
   const file = path.join(dir, slug + '_c' + cycle + '.json');
   fs.writeFileSync(file, JSON.stringify(pack, null, 2) + '\n');
   return file;

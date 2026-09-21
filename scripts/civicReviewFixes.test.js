@@ -180,3 +180,58 @@ test('R3 unanswered directives persist, answers bind Cycle and seat, and a secon
   write('output/cron-civic/moves/moves_c999.jsonl',JSON.stringify({...priorAnswer,cycle:999,moveId:'MV-SYNTHETIC-NEW',payload:{confrontationId:confrontation.id}}));
   assert.equal(slice.loadConfrontation(root,999,office.agentDir),null);
 }));
+test('R2 passed-over problems require prior visible evidence and an empty closed-Cycle ledger; current relief or landed hood work resolves them', () => workspace((root, write) => {
+  const audit={cycle:999,snapshots:{Neighborhood_Map:[{Neighborhood:'East Oakland',ChildAreas:'Coliseum'}]}};
+  write('output/engine_audit_c999.json',JSON.stringify(audit));
+  write('output/beats/meta.json',JSON.stringify({cycle:999}));
+  write('output/beats/Neighborhood_Demographics.jsonl',JSON.stringify({Neighborhood:'East Oakland',Students:10,Adults:20,Seniors:5,Sick:0}));
+  write('output/beats/Hospital_Ledger.jsonl','');
+  write('output/beats/Crime_Metrics.jsonl',JSON.stringify({Neighborhood:'East Oakland',ViolentLevel:1}));
+  const home={HouseholdId:'HH-SYNTHETIC',Neighborhood:'Coliseum',Status:'active',HousingType:'rented',MonthlyRent:1000,HouseholdIncome:20000};
+  write('output/beats/Household_Ledger.jsonl',JSON.stringify(home));
+  write('output/beats/Initiative_Tracker.jsonl',JSON.stringify({InitiativeID:'INIT-SYNTHETIC',ProposingOffice:office.officeId,AffectedNeighborhoods:'Coliseum'}));
+  const blocks=()=>slice.buildGameBlocks({root,cycle:999,office,officeMap:{offices:[]},hoods:['East Oakland'],audit});
+  const first=blocks().problemContinuity;
+  assert.equal(first.passedOver.length,0);
+  assert.equal(first.visibleProblems[0].conditionKey,'housing.hardshipHouseholds');
+  write('output/cron-civic/packs/COUNCIL-D5_c998.json',JSON.stringify({actor:{officeId:office.officeId,agentDir:office.agentDir},game:{board:blocks().board,problemContinuity:{cycle:998,visibleProblems:first.visibleProblems}}}));
+  assert.equal(blocks().problemContinuity.passedOver.length,0); // missing ledger is not proof of inaction
+  write('output/cron-civic/moves/moves_c998.jsonl','');
+  assert.equal(blocks().problemContinuity.passedOver.length,1);
+  assert.match(blocks().problemContinuity.text,/passed over C998/);
+  const m={moveId:'MV-SYNTHETIC-WORK',cycle:998,agentDir:office.agentDir,type:'work',payload:{initiativeId:'INIT-SYNTHETIC'},status:'applied'};
+  write('output/cron-civic/moves/moves_c998.jsonl',JSON.stringify(m));
+  assert.equal(blocks().problemContinuity.passedOver.length,0);
+  write('output/cron-civic/moves/moves_c998.jsonl','');
+  write('output/beats/Household_Ledger.jsonl',JSON.stringify({...home,MonthlyRent:100}));
+  assert.equal(blocks().problemContinuity.passedOver.length,0);
+  assert.equal(blocks().problemContinuity.problems.length,0);
+}));
+test('R2 each move type addresses only evidenced hoods; pending proposals, rejected moves and missing readings cannot fabricate resolution', () => {
+  const {deriveProblemContinuity:derive}=require('./civicProblemContinuity');
+  const data={cycle:999,Neighborhood_Map:[{Neighborhood:'East Oakland',ChildAreas:'Coliseum'},{Neighborhood:'West Oakland',ChildAreas:''}],
+    Neighborhood_Demographics:['East Oakland','West Oakland'].map(Neighborhood=>({Neighborhood,Students:1,Adults:2,Seniors:1,Sick:0})),
+    Household_Ledger:[{HouseholdId:'HH-SYNTHETIC',Neighborhood:'East Oakland',Status:'active',HousingType:'rented',MonthlyRent:1000,HouseholdIncome:20000}],
+    Hospital_Ledger:[],Crime_Metrics:['East Oakland','West Oakland'].map(Neighborhood=>({Neighborhood,ViolentLevel:1}))};
+  const old={cycle:998,visibleProblems:[{hood:'East Oakland',conditionKey:'housing.hardshipHouseholds',count:1}]};
+  const args={data,hoods:['East Oakland'],previousPacks:[{game:{problemContinuity:old}}],moves:[],
+    trackerRows:[{InitiativeID:'INIT-SYNTHETIC',AffectedNeighborhoods:'Coliseum'}],
+    directives:[{...confrontation,sourceText:'SYNTHETIC demand for Coliseum'}],closedLedgerCycles:new Set([998]),agentDir:office.agentDir};
+  const m=(type,payload,status='pending',cycle=999)=>({moveId:'MV-SYNTHETIC',type,payload,status,cycle,agentDir:office.agentDir});
+  const result=move=>derive({...args,moves:[move]});
+  assert.equal(result(m('propose',{hoods:['Coliseum']},'pending',998)).passedOver.length,0);
+  assert.equal(result(m('propose',{hoods:['Coliseum']})).passedOver.length,1);
+  assert.equal(result(m('propose',{hoods:['Coliseum']},'applied')).passedOver.length,0);
+  assert.equal(result(m('propose',{hoods:['West Oakland']},'applied')).passedOver.length,1);
+  assert.equal(result(m('canvass',{hood:'Coliseum'})).passedOver.length,0);
+  assert.equal(result(m('canvass',{hood:'Coliseum'},'rejected',998)).passedOver.length,1);
+  assert.equal(result(m('work',{initiativeId:'INIT-SYNTHETIC'},'applied')).passedOver.length,0);
+  assert.equal(result(m('answer',{confrontationId:confrontation.id})).passedOver.length,0);
+  assert.equal(result(m('answer',{confrontationId:'CONF-999-SYNTHETIC-other',hoods:['Coliseum']})).passedOver.length,1);
+  const unknown=result(m('work',{initiativeId:'INIT-SYNTHETIC'},'applied',998));
+  assert.equal(unknown.available,false); // no historical board to locate this work
+  const missing=derive({...args,data:{...data,Household_Ledger:null}});
+  assert.equal(missing.available,false);
+  assert.match(missing.text,/readings unavailable/);
+  assert(missing.text.length<=600);
+});

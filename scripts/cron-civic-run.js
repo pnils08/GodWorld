@@ -1822,6 +1822,14 @@ async function runClose() {
   const officeMapForFold = readJson(path.join(ROOT, 'scripts', 'civic-office-map.json')) || { offices: [], projects: [] };
   foldMovesIntoDecisions(ROOT, cycle, officeMapForFold);
 
+  // civic.38 Task 6.3 — petition → vote. A petition-pending row (Status
+  // proposed, blank VoteCycle) whose signature count clears its support band
+  // gets the gated write through the ordinary decisions channel: a holding
+  // decisions file carrying {Status: 'pending-vote', ImplementationPhase:
+  // 'vote-scheduled', VoteCycle: cycle+1} — normalizeTrackerWrite legalizes
+  // exactly that edge, and the validator + gate see it like any other write.
+  petitionGateSweep(ROOT, cycle);
+
   let dryOut = '';
   try {
     dryOut = execFileSync('node', [path.join(ROOT, 'scripts', 'applyTrackerUpdates.js'), String(cycle)], { cwd: ROOT, encoding: 'utf8', timeout: 300000 });
@@ -2348,6 +2356,86 @@ function foldMovesIntoDecisions(root, cycle, officeMap) {
   return out;
 }
 
+// ---------------------------------------------------------------------------
+// civic.38 Task 6.3 — the petition sweep. Every petition-pending tracker row
+// (Status=proposed, blank VoteCycle — petition-pending by definition,
+// mechanism decision 3) is counted by codex's deterministic counter
+// (scripts/civicPetitions.js, no LLM) against the local beats dumps. The count
+// TABLE prints every Sunday regardless. A row only moves to a vote when its
+// count clears the domain's support band — and the band is builder-set
+// (SUPPORT_BANDS below; unset = counts print, nothing gates). Per the
+// research-build reconciliation (e1314bd7) housing and safety NEVER clear
+// here — the counter returns domain-not-playable until their engine levers
+// exist. The seat never schedules its own vote.
+// ---------------------------------------------------------------------------
+
+// Builder-tunable: share of affected-hood population that sends a proposal to
+// a vote (design record §11: the tracked ledger is a sample, never the
+// denominator — bands scale against hood population inside countPetition).
+// Empty = dry visibility only; no proposal has ever been gated live.
+const PETITION_SUPPORT_BANDS = {
+  // health: 0.05,   // example only — the builder sets the first real band
+};
+
+function petitionGateSweep(root, cycle) {
+  const rows = (function () {
+    const f = path.join(root, 'output', 'beats', 'Initiative_Tracker.jsonl');
+    if (!fs.existsSync(f)) return null;
+    return fs.readFileSync(f, 'utf8').split('\n').filter(Boolean)
+      .map(l => { try { return JSON.parse(l); } catch (_) { return null; } }).filter(Boolean);
+  })();
+  if (!rows) { log('petition sweep: no beats Initiative_Tracker dump — skipped'); return { pending: 0, gated: 0 }; }
+  const pending = rows.filter(r =>
+    String(r.Status || '').trim() === 'proposed' && !String(r.VoteCycle || '').trim());
+  if (!pending.length) { log('petition sweep: no petition-pending rows on the tracker'); return { pending: 0, gated: 0 }; }
+
+  const petitions = require('./civicPetitions');
+  let data;
+  try {
+    data = petitions.loadLocalData({ root, cycle: Number(cycle) });
+  } catch (e) {
+    log('petition sweep: local data load failed (non-fatal): ' + e.message);
+    return { pending: pending.length, gated: 0, error: e.message };
+  }
+  const decisionsDir = path.join(root, 'output', 'city-civic-database', 'initiatives');
+  let gated = 0;
+  for (const row of pending) {
+    const id = row.InitiativeID;
+    const domain = String(row.PolicyDomain || '').trim().toLowerCase();
+    const hoods = String(row.AffectedNeighborhoods || '').split(',').map(s => s.trim()).filter(Boolean);
+    let res;
+    try {
+      res = petitions.countPetition({ policyDomain: domain, hoods }, data,
+        { supportBand: PETITION_SUPPORT_BANDS[domain] != null ? PETITION_SUPPORT_BANDS[domain] : undefined });
+    } catch (e) {
+      log('petition sweep: ' + id + ' count failed (non-fatal): ' + e.message);
+      continue;
+    }
+    const s = res.support || {};
+    log('petition sweep: ' + id + ' [' + domain + '] ' +
+      'numerator=' + (s.numerator == null ? 'n/a' : s.numerator) + ' ' + (s.unit || '') +
+      ' required=' + (s.requiredCount == null ? 'unset' : s.requiredCount) +
+      ' → ' + (s.cleared ? 'CLEARS THE BAND' : s.reason));
+    if (!s.cleared) continue;
+    // The gated write, through the same fold channel a work move uses.
+    const slug = slugForInitiative(decisionsDir, id);
+    const dir = path.join(decisionsDir, slug);
+    const file = path.join(dir, 'decisions_c' + cycle + '.json');
+    const d = readJson(file) || { initiative: id, initiativeId: id, cycle: Number(cycle),
+      primaryVoice: 'petition-sweep', consolidatedFrom: [], trackerUpdates: {} };
+    d.trackerUpdates = d.trackerUpdates || {};
+    d.trackerUpdates.Status = 'pending-vote';
+    d.trackerUpdates.ImplementationPhase = 'vote-scheduled';
+    d.trackerUpdates.VoteCycle = Number(cycle) + 1;
+    d._petitionGate = { numerator: s.numerator, requiredCount: s.requiredCount, band: s.band };
+    fs.mkdirSync(dir, { recursive: true });
+    fs.writeFileSync(file, JSON.stringify(d, null, 2) + '\n');
+    gated++;
+    log('petition sweep: ' + id + ' petition CLEARED — vote-scheduled write staged in ' + path.relative(root, file) + ' (gate + clerk still apply)');
+  }
+  return { pending: pending.length, gated };
+}
+
 // Numeric grounding: every digit-token in a datawake's output must appear in
 // the office's own data slice (commas stripped). Worded quantities ("seven
 // neighborhoods") pass; invented statistics ("renewals up 8%") don't — this
@@ -2691,4 +2779,6 @@ module.exports = { modelChainFor, FALLBACK_MODELS, sentimentWord, crimeWord, ret
   // civic.38 Task 1 — closed move set (exported for scripts/cron-civic-game.test.js)
   MOVE_TYPES, validateDatawakeMoves, loadInterventionCatalog, hoodAuthorityReason, appendMoveLedger, moveLedgerLines,
   // civic.38 Task 2 — move ledger fold (Sunday close)
-  loadMoveLedgerFolded, foldMovesIntoDecisions, slugForInitiative };
+  loadMoveLedgerFolded, foldMovesIntoDecisions, slugForInitiative,
+  // civic.38 Task 6.3 — petition sweep
+  petitionGateSweep, PETITION_SUPPORT_BANDS };

@@ -42,6 +42,8 @@ const phaseContract = require('../lib/initiativePhaseContract');
 const officeWall = require('./officeWall');
 const { deriveProblemContinuity } = require('./civicProblemContinuity');
 const { interventionIssue } = require('./civicInterventionValidation');
+const createInit = require('./createInitiative');
+const civicStageEvidence = require('./civicStageEvidence');
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Test Runner Harness
@@ -1504,7 +1506,269 @@ test('R2: Passed-over problems derive from prior displayed pack conditions + emp
     ws.cleanup();
   }
 });
+
 // ─────────────────────────────────────────────────────────────────────────────
+// Group 9: Task 4 Stage Minting, Requirements & Metric Evidence
+// ─────────────────────────────────────────────────────────────────────────────
+
+group('Group 9: Task 4 Stage Minting, Requirements & Metric Evidence');
+
+test('T9.4: Live createInitiative enforces Stage=Proposed in object & serialized values and refuses headers missing Stage', () => {
+  const seats = createInit.loadOfficeSeats();
+  const syntheticSpec = {
+    name: 'Synthetic Health Clinic',
+    type: 'vote',
+    policyDomain: 'health',
+    affectedNeighborhoods: 'Downtown',
+    proposingOffice: 'MAYOR-01',
+    proposedCycle: 108,
+    Stage: 'Delivering', // Attempt to override stage must be ignored
+  };
+
+  // 1. Default headers: stamps Proposed in row object and serialized values array
+  const defaultMint = createInit.createInitiative({ seats, spec: syntheticSpec });
+  assert.strictEqual(defaultMint.row.Stage, 'Proposed');
+  assert.strictEqual(defaultMint.values[defaultMint.headers.indexOf('Stage')], 'Proposed');
+  assert.strictEqual(defaultMint.values.length, createInit.TRACKER_HEADERS.length);
+
+  // 2. Custom headers: Stage follows caller header position
+  const customHeaders = ['Stage', ...createInit.TRACKER_HEADERS_31];
+  const customMint = createInit.createInitiative({ headers: customHeaders, seats, spec: syntheticSpec });
+  assert.strictEqual(customMint.values[0], 'Proposed');
+  assert.strictEqual(customMint.row.Stage, 'Proposed');
+
+  // 3. Absent Stage header: refuses loudly
+  assert.throws(
+    () => createInit.createInitiative({ headers: createInit.TRACKER_HEADERS_31, seats, spec: syntheticSpec }),
+    /missing Stage header/
+  );
+});
+
+test('T9.5: Live stageRequirement & boardNeedText enforce closing-Cycle equality boundary on Funded stage', () => {
+  // Equality boundary: Funded clears when LastWorkCycle >= LastStageChangeCycle
+  const fundedSameCycle = {
+    Stage: 'Funded', ImplementationPhase: 'announced', PolicyDomain: 'health',
+    LastWorkCycle: 108, LastStageChangeCycle: 108
+  };
+  const reqSame = phaseContract.stageRequirement({
+    stage: fundedSameCycle.Stage, phase: fundedSameCycle.ImplementationPhase,
+    policyDomain: fundedSameCycle.PolicyDomain, lastWorkCycle: fundedSameCycle.LastWorkCycle,
+    lastStageChangeCycle: fundedSameCycle.LastStageChangeCycle
+  });
+  assert.strictEqual(reqSame.clears, true);
+  assert.strictEqual(reqSame.next, 'Standing');
+  assert.strictEqual(reqSame.text, 'Funded — work landed; it stands up next Cycle');
+  assert.strictEqual(civicSlice.boardNeedText(fundedSameCycle), reqSame.text);
+
+  // Prior cycle work does not clear Funded
+  const fundedOldWork = { ...fundedSameCycle, LastWorkCycle: 107, LastStageChangeCycle: 108 };
+  const reqOld = phaseContract.stageRequirement({
+    stage: fundedOldWork.Stage, phase: fundedOldWork.ImplementationPhase,
+    policyDomain: fundedOldWork.PolicyDomain, lastWorkCycle: fundedOldWork.LastWorkCycle,
+    lastStageChangeCycle: fundedOldWork.LastStageChangeCycle
+  });
+  assert.strictEqual(reqOld.clears, false);
+  assert.strictEqual(reqOld.text, 'Funded — one work move stands it up');
+  assert.strictEqual(civicSlice.boardNeedText(fundedOldWork), reqOld.text);
+
+  // Missing or blank work cycle does not clear Funded
+  const fundedNoWork = { ...fundedSameCycle, LastWorkCycle: '', LastStageChangeCycle: 108 };
+  const reqNoWork = phaseContract.stageRequirement({
+    stage: fundedNoWork.Stage, phase: fundedNoWork.ImplementationPhase,
+    policyDomain: fundedNoWork.PolicyDomain, lastWorkCycle: fundedNoWork.LastWorkCycle,
+    lastStageChangeCycle: fundedNoWork.LastStageChangeCycle
+  });
+  assert.strictEqual(reqNoWork.clears, false);
+  assert.strictEqual(reqNoWork.text, 'Funded — one work move stands it up');
+});
+
+test('T9.6: Live stageRequirement & boardNeedText distinguish stalled revival from unrecoverable blocked/suspended/defunded phases and unplayable domains', () => {
+  // Stalled phase allows generic revival via work move
+  const stalled = { Stage: 'Funded', ImplementationPhase: 'stalled' };
+  const reqStalled = phaseContract.stageRequirement({ stage: 'Funded', phase: 'stalled' });
+  assert.strictEqual(reqStalled.clears, false);
+  assert.strictEqual(reqStalled.blocked, 'stalled');
+  assert.strictEqual(reqStalled.moveThatClears, 'work');
+  assert.strictEqual(reqStalled.text, 'stalled — one work move revives it');
+  assert.strictEqual(civicSlice.boardNeedText(stalled), 'stalled — one work move revives it');
+
+  // Negative unrecoverable phases have no generic revival
+  for (const phase of ['blocked', 'suspended', 'defunded']) {
+    const row = { Stage: 'Funded', ImplementationPhase: phase };
+    const req = phaseContract.stageRequirement({ stage: 'Funded', phase });
+    assert.strictEqual(req.clears, false);
+    assert.strictEqual(req.blocked, phase);
+    assert.strictEqual(req.text, `${phase} — no seat move revives it`);
+    assert.strictEqual(civicSlice.boardNeedText(row), req.text);
+  }
+
+  // Unplayable domains (safety, housing) have no delivering gate from Standing
+  for (const domain of ['safety', 'housing']) {
+    const row = { Stage: 'Standing', ImplementationPhase: 'operational', PolicyDomain: domain };
+    const req = phaseContract.stageRequirement({ stage: row.Stage, phase: row.ImplementationPhase, policyDomain: domain });
+    assert.strictEqual(req.clears, false);
+    assert.strictEqual(req.blocked, 'no-delivering-gate');
+    assert.strictEqual(req.text, 'Standing — no delivering gate exists for this domain yet');
+    assert.strictEqual(civicSlice.boardNeedText(row), req.text);
+  }
+});
+
+test('T9.7: Live measureStageMovement detects incomplete hold windows and broken consecutive hold streaks', () => {
+  const hoods = ['West Oakland', 'East Oakland', 'Downtown'];
+  const audit = cycle => ({
+    cycle,
+    snapshots: {
+      Neighborhood_Map: hoods.map((Neighborhood, i) => ({
+        Neighborhood, ChildAreas: '', Cycle: cycle,
+        RetailVitality: i === 0 ? 15 : 10, NightlifeProfile: 10
+      }))
+    }
+  });
+
+  const validBaseline = {
+    v: 1, origin: 'conversion', cycle: 105, tab: 'Neighborhood_Map',
+    columns: ['RetailVitality'], scope: 'hood',
+    keys: { 'West Oakland': { RetailVitality: 10 } },
+    cityMiddle: { RetailVitality: 10 }
+  };
+
+  const row = {
+    InitiativeID: 'INIT-001', Stage: 'Standing', ImplementationPhase: 'operational',
+    PolicyDomain: 'economic', AffectedNeighborhoods: 'West Oakland',
+    StageBaseline: JSON.stringify(validBaseline)
+  };
+
+  // Baseline at 105 with hold 3: requires C106, C107, C108. At cycle 108: cycle - hold + 1 = 108 - 3 + 1 = 106 > 105 -> window available!
+  const contextPass = { cycle: 108, readAudit: audit, config: { civicDeliverMargin: 0.2, civicDeliverHoldCycles: 3 } };
+  const passRes = civicStageEvidence.measureStageMovement(row, contextPass);
+  assert.strictEqual(passRes.available, true);
+  assert.strictEqual(passRes.metricMoved, true);
+
+  // Incomplete hold window: observation at cycle 106 with hold 3 requires C104..C106, but baseline was cycle 105!
+  // 106 - 3 + 1 = 104 <= baselineCycle (105) -> post-baseline hold window unavailable
+  const contextIncomplete = { cycle: 106, readAudit: audit, config: { civicDeliverMargin: 0.2, civicDeliverHoldCycles: 3 } };
+  const incompRes = civicStageEvidence.measureStageMovement(row, contextIncomplete);
+  assert.strictEqual(incompRes.available, false);
+  assert.match(incompRes.reason, /post-baseline hold window unavailable/);
+
+  // Broken consecutive hold streak: one observation in hold window drops below margin
+  const brokenAudit = c => {
+    const a = audit(c);
+    if (c === 107) a.snapshots.Neighborhood_Map[0].RetailVitality = 10.5; // (10.5/10) - (10/10) = 0.05 < 0.20 margin
+    return a;
+  };
+  const contextBroken = { cycle: 108, readAudit: brokenAudit, config: { civicDeliverMargin: 0.2, civicDeliverHoldCycles: 3 } };
+  const brokenRes = civicStageEvidence.measureStageMovement(row, contextBroken);
+  assert.strictEqual(brokenRes.available, true);
+  assert.strictEqual(brokenRes.metricMoved, false);
+});
+
+test('T9.8: Live measureStageMovement fails closed on missing World_Config, stale audits, and corrupted baselines', () => {
+  const hoods = ['West Oakland', 'East Oakland'];
+  const audit = cycle => ({
+    cycle,
+    snapshots: {
+      Neighborhood_Map: hoods.map(Neighborhood => ({
+        Neighborhood, ChildAreas: '', Cycle: cycle, RetailVitality: 15
+      }))
+    }
+  });
+
+  const baseRow = {
+    InitiativeID: 'INIT-001', Stage: 'Standing', ImplementationPhase: 'operational',
+    PolicyDomain: 'economic', AffectedNeighborhoods: 'West Oakland',
+    StageBaseline: JSON.stringify({
+      v: 1, origin: 'conversion', cycle: 104, tab: 'Neighborhood_Map',
+      columns: ['RetailVitality'], scope: 'hood',
+      keys: { 'West Oakland': { RetailVitality: 10 } },
+      cityMiddle: { RetailVitality: 10 }
+    })
+  };
+
+  const validContext = { cycle: 108, readAudit: audit, config: { civicDeliverMargin: 0.2, civicDeliverHoldCycles: 3 } };
+
+  // 1. Missing World_Config
+  const noConfig = civicStageEvidence.measureStageMovement(baseRow, { ...validContext, config: null });
+  assert.strictEqual(noConfig.available, false);
+  assert.match(noConfig.reason, /current World_Config dump unavailable/);
+
+  // 2. Missing delivery margin
+  const noMargin = civicStageEvidence.measureStageMovement(baseRow, { ...validContext, config: { civicDeliverHoldCycles: 3 } });
+  assert.strictEqual(noMargin.available, false);
+  assert.match(noMargin.reason, /civicDeliverMargin missing\/invalid/);
+
+  // 3. Stale audit observation (cycle mismatch)
+  const staleAuditContext = {
+    ...validContext,
+    readAudit: c => ({ ...audit(c), cycle: c - 1 })
+  };
+  const staleRes = civicStageEvidence.measureStageMovement(baseRow, staleAuditContext);
+  assert.strictEqual(staleRes.available, false);
+  assert.match(staleRes.reason, /unavailable\/stale/);
+
+  // 4. Missing snapshots tab in audit (Neighborhood_Map missing vs metric tab missing vs metric column missing)
+  const missingMapContext = {
+    ...validContext,
+    readAudit: c => ({ cycle: c, snapshots: {} })
+  };
+  const noMapRes = civicStageEvidence.measureStageMovement(baseRow, missingMapContext);
+  assert.strictEqual(noMapRes.available, false);
+  assert.match(noMapRes.reason, /Neighborhood_Map snapshot is required/);
+
+  // For domain whose metric tab != Neighborhood_Map (e.g. health -> Neighborhood_Demographics)
+  const healthRow = {
+    InitiativeID: 'INIT-002', Stage: 'Standing', ImplementationPhase: 'operational',
+    PolicyDomain: 'health', AffectedNeighborhoods: 'West Oakland',
+    StageBaseline: JSON.stringify({
+      v: 1, origin: 'conversion', cycle: 104, tab: 'Neighborhood_Demographics',
+      columns: ['Sick'], scope: 'hood',
+      keys: { 'West Oakland': { Sick: 10 } },
+      cityMiddle: { Sick: 10 }
+    })
+  };
+  const missingHealthTabContext = {
+    ...validContext,
+    readAudit: c => ({
+      cycle: c,
+      snapshots: {
+        Neighborhood_Map: hoods.map(Neighborhood => ({ Neighborhood, ChildAreas: '', Cycle: c }))
+      }
+    })
+  };
+  const noHealthTabRes = civicStageEvidence.measureStageMovement(healthRow, missingHealthTabContext);
+  assert.strictEqual(noHealthTabRes.available, false);
+  assert.match(noHealthTabRes.reason, /Neighborhood_Demographics observation unavailable/);
+
+  const missingMetricColContext = {
+    ...validContext,
+    readAudit: c => ({
+      cycle: c,
+      snapshots: {
+        Neighborhood_Map: hoods.map(Neighborhood => ({ Neighborhood, ChildAreas: '', Cycle: c }))
+      }
+    })
+  };
+  const noMetricColRes = civicStageEvidence.measureStageMovement(baseRow, missingMetricColContext);
+  assert.strictEqual(noMetricColRes.available, false);
+  assert.match(noMetricColRes.reason, /RetailVitality missing\/invalid/);
+
+  // 5. Corrupted StageBaseline JSON vs unsupported schema
+  const corruptBaseRow = { ...baseRow, StageBaseline: '{corrupt json' };
+  const corruptRes = civicStageEvidence.measureStageMovement(corruptBaseRow, validContext);
+  assert.strictEqual(corruptRes.available, false);
+  assert.match(corruptRes.reason, /StageBaseline missing\/malformed/);
+
+  const badSchemaRow = { ...baseRow, StageBaseline: JSON.stringify({ v: 2 }) };
+  const badSchemaRes = civicStageEvidence.measureStageMovement(badSchemaRow, validContext);
+  assert.strictEqual(badSchemaRes.available, false);
+  assert.match(badSchemaRes.reason, /baseline descriptor unavailable\/unsupported/);
+
+  // Verify board integration carries metric evidence unavailability into needsNext text
+  const boardRow = civicSlice.boardRowsFor({ officeId: 'MAYOR-01' }, [baseRow], {}, { ...validContext, config: null })[0];
+  assert.strictEqual(boardRow.metricEvidence.available, false);
+  assert.strictEqual(boardRow.requirement.clears, false);
+  assert.match(boardRow.needsNext, /metric evidence unavailable: current World_Config dump unavailable/);
+});
 console.log('\n======================================================');
 console.log(`Test Results: ${totalPassed} passed, ${totalFailed} failed (total: ${totalPassed + totalFailed})`);
 if (totalFailed > 0) {

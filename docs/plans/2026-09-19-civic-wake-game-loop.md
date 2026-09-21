@@ -94,6 +94,7 @@ pointers:
 
 ### Task 1: Closed move set in the datawake
 
+- **Status:** scripts implemented; adversarial code repairs locally committed through `942ba8e6`, no production activation claimed. Agy follow-up fixtures remain requested.
 - **Files:**
   - `scripts/cron-civic-run.js` — modify (datawake section, ~`:1861-2180`)
 - **Steps:**
@@ -122,6 +123,7 @@ Rebuilt 2026-09-20 (review F2/F3/F4). The decisions envelope cannot carry a week
 
 ### Task 3: Seat pack upgrade — board, petition pool, working city, confrontation
 
+- **Status:** scripts repaired through `33a8f6b8`; shared Task 4 requirement helper and the design decisions below remain open. Local evidence and commit table: [[../research/2026-09-20-codex-civic38-tasks1-3-adversarial-review]] §Implementation follow-up.
 - **Files:**
   - `scripts/buildCivicOfficeSlice.js` — modify (`buildPack`, `:724` — the live OFFICE/1 pack; `domainSlice` in `cron-civic-run.js` is dead code, review F1). The pack already carries approval, selected constituents, hood facts, peers and initiative facts (`:777`, `:443`); these blocks extend it.
 - **Steps:**
@@ -265,6 +267,21 @@ One owner per file — `scripts/cron-civic-run.js` is touched by Tasks 1, 2, 3, 
 - Ladder legibility blocks (bonds/household/approval "where am I" pack sections, design §2) — accretive follow-up once the move economy is live.
 - Per-domain effect-side gaps (DOMAIN_EFFECTS sentiment-only domains; `S.initiativeNeighborhoodEffects` consumer gap) — filed as engine rows from Task 4, not built here.
 
+## Codex repair-window findings and remaining decisions
+
+Builder temporarily assigned Kimi's civic.38 scripts to Codex on 2026-09-20; Kimi resumes ownership tomorrow. Code defects from the stronger Task 1+3 review landed in separate local commits: catalog validation `7c734407`, citizen geography `266c55e6`, authority input integrity `1a284902`, retired-action removal `942ba8e6`, prior move outcomes `8d6ef0b3`, stalled-stage advice `5dd003d2`, condition evidence and model caps `33a8f6b8`. Agy's test file landed in `c85c0100`. Validation: game 26/26, petitions 15/15, repair regressions 10/10, changed-script syntax clean. Existing C108 boards remain unchanged; intake absence is explicit. No live run or external mutation. Mixed stack stays unpushed.
+
+Captured stale/spaghetti paths and their disposition:
+
+- `loadPetitionPool` reused a display-oriented constituent selector as geographic authority; repaired. Citizen status/name no longer determines whether a complaint belongs to a district.
+- `readJsonl` silently discarded corrupt rows; audit fallback lacked a Cycle check; repeated catalog predicates admitted inherited properties. Repaired with strict shared checks and explicit unavailable evidence.
+- Retired free-text `action` still fed the position wall. New records omit it; `officeWall.lineFromDatawake` intentionally retains historical compatibility.
+- Stage advice duplicated future engine rules and masked stalls. Stalled phase now wins; advancement advice is explicitly unavailable until the shared Task 4 helper lands.
+- Current-Cycle-only move memory lost Sunday outcomes, and full history arrays bypassed text caps. Repaired across Cycle files and at the model prompt boundary.
+- Task 3 step 3 still names Supermemory even though the accepted 2026-09-20 changelog specifies disk-first Reflection_Intake. This is stale task prose; no return to network readback was implemented.
+
+Design choices returned to research-build without a new default: reflection recency (display currently all recorded rows, counter current Cycle unless configured); how a passed-over problem is identified/resolved; confrontation answer binding and any consequences; working-city selection (four latest rows versus latest per staff member). The condition block labels its snapshot Cycle and does not merge counter visibility into lifetime complaint totals. Housing/safety remain non-playable and no support band was enabled.
+
 ## Open questions
 
 - [x] **Baylight (INIT-006) stage-3 target metric.** RULED 2026-09-20 (builder): Baylight-district retail/nightlife activity vs baseline. Unblocks Task 4.4. Sports domain has no natural civic metric (DOMAIN_EFFECTS sports → retail/nightlife/traffic/sentiment scalars). Options: Baylight-district retail/nightlife activity vs baseline, or a builder-named metric. Blocks Task 4.4's conversion mapping for one row.
@@ -281,6 +298,7 @@ One owner per file — `scripts/cron-civic-run.js` is touched by Tasks 1, 2, 3, 
 
 ## Changelog
 
+- 2026-09-20 (codex) — Completed temporary-owner script defect pass in seven repair commits plus the separate agy fixture commit; evidence, stale-code captures and undecided design choices recorded above. Task 1 script repairs complete; Task 3 still depends on the shared engine helper and unresolved design semantics. Kimi ownership resumes tomorrow.
 - 2026-09-20 (codex) — Filed Task 1+3 adversarial review (c052b127) and housing-first design linked from Open questions; counter defect fixed in 3274f309; Kimi follow-up repairs recorded in the review.
 - 2026-09-20 (codex) — Verified and repaired agy finding 6.1: district-scoped invalid-care counts and non-blocking unlocated-row warnings; regression failed before the fix, all 15 counter tests pass after it.
 - 2026-09-20 (engine-sheet) — Builder ruled the stall drain: half weight. `World_Config bizInitiativeStallDrag` = 0.5, self-armed, tunable live; bench C122 Temescal mean −0.17 against −1.0 at full weight; PROD @108. The losing clock's business cost is settled for Task 4 step 3.

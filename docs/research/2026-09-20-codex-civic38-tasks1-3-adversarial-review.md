@@ -21,7 +21,33 @@ pointers:
 
 **What this addresses:** Whether a seat's legal choices and its evidence actually agree with civic.38 Tasks 1 and 3. This is a second review, not an implementation acceptance based on another lane's passing suite.
 
-**Verdict: adopt the repairs below before treating Tasks 1+3 as complete.** Direct filing in docs/research is builder-authorized using the accepted-review pattern; that routing does not claim Kimi has fixed or accepted every finding. No new rollout row: findings feed the existing civic.38 tasks.
+**Verdict: code defects repaired locally; integration and design questions remain.** The original findings below preserve the pre-repair evidence. The implementation follow-up records the current result. Direct filing in docs/research is builder-authorized using the accepted-review pattern. No new rollout row: findings feed the existing civic.38 tasks.
+
+## Implementation follow-up — Codex temporary ownership, 2026-09-20
+
+Builder reassigned Kimi's listed civic.38 scripts to Codex for this window; ownership returns to Kimi tomorrow. Commits are path-specific and local, with the mixed stack held. No live cron, apply mode, Sheet write, model call, crontab edit or engine deployment was run for these repairs.
+
+| Finding | Repair and evidence | Commit |
+|---|---|---|
+| F1 | Shared own-key, playable and complete-shape catalog predicate at `scripts/civicInterventionValidation.js:6`; move gate, menu, candidate validator and writer use it. Inherited keys, array keys and incomplete entries fail; the next valid move survives. | `7c734407` |
+| F2 | Kimi's canonical ReflectionExcerpt repair remains intact. F3 regression reads that canonical column. | `41c6892c` (Kimi) |
+| F3 | Citizen POPID geography join no longer requires a display name or active status; both turf and resident child areas fold. Hospitalized child-area fixture passes. | `266c55e6` |
+| F4 / remaining F3 authority | Strict row parsing, matching-Cycle stamps, validated parent schema and conflicting-territory diagnostics. Invalid board evidence yields no legal work IDs; invalid geography rejects work/propose/canvass while answer remains valid. Candidate validator/writer check their audit Cycle too. Core readers: `scripts/buildCivicOfficeSlice.js:743,758,771`. | `1a284902` |
+| F5 | New records have no legacy action field before reaching the existing wall renderer; statement and accepted moves remain. Historical wall rendering is unchanged. Record boundary: `scripts/cron-civic-run.js:2080`. | `942ba8e6` |
+| F6 | Latest prior move and latest applied/failed outcome survive Cycle boundaries; current events sort newest first. Outcome text has reserved space. Reads existing ledger files through the requested Cycle, stopping once prior evidence and terminal outcome are found. `scripts/buildCivicOfficeSlice.js:880`. | `8d6ef0b3` |
+| F7 | Stalled phase wins over every Stage. Unavailable Task 4 advancement requirements are stated explicitly instead of replaced with local stage rules. `scripts/buildCivicOfficeSlice.js:798`. | `5dd003d2` |
+| F8 | Board proposals and pending move proposals receive local condition counts with explicit failures. No support band is supplied. Disk evidence stays complete; model game projection carries capped text, totals and complete legal IDs/keys. `scripts/buildCivicOfficeSlice.js:1079,1118`. | `33a8f6b8` |
+
+Agy's 26-test file was committed in `c85c0100`; its two positive catalog fixtures now use complete catalog entries. Final local results: `cron-civic-game.test.js` **26/26**, `civicPetitions.test.js` **15/15**, `civicReviewFixes.test.js` **10/10**. All changed scripts pass syntax checks. Synthetic regressions directly reproduced inherited-key acceptance, lost child complaints, corrupt/stale authority, lost prior outcome, Stage masking a stall, and raw-history prompt growth before their respective repairs. F5's extracted record builder is covered through the real wall renderer; this is local boundary coverage, not a live wall write.
+
+Read-only C108 game-block inspection preserves the council board memberships listed below. Reflection_Intake is absent locally and is reported unavailable. No current board/move proposals require counts in that snapshot; the synthetic housing proposal proves the counter path. Refreshed C108 city housing reading remains **106/392**, zero/missing-income counters both **0**, housing support **domain-not-playable**.
+
+Not decided by these repairs:
+
+- Reflection recency remains all recorded rows for the petition display, explicitly labelled; the counter retains its configurable current-Cycle default. Counter visibility is not merged into display totals. Research-build must choose a common policy if desired.
+- Passed-over-problem identity and resolution, confrontation answer binding, and any resulting reward/penalty need a design contract.
+- Working-city selection remains the existing four latest rows; changing to one latest row per staff member is a selection-policy decision.
+- Task 4's shared next-stage requirement helper still needs engine-sheet integration. No replacement engine rules were authored here.
 
 ## Findings for Kimi
 
@@ -105,5 +131,6 @@ Read-only probes evaluated the actual MOVE_TYPES/loadInterventionCatalog/hoodAut
 
 ## Changelog
 
+- 2026-09-20 (codex) — Applied verified script defects during builder-assigned temporary ownership; per-finding commits, local checks and remaining design decisions recorded above. Agy fixtures committed separately; push remains held for the mixed stack.
 - 2026-09-20 (codex) — Re-probed Kimi follow-ups: F2 resolved by 41c6892c; F3 absent-file branch resolved by 58f43fe1, child fold still fails; stage advice evaluated against the actual LastWorkCycle condition.
 - 2026-09-20 (codex) — Filed stronger HEAD review with eight actionable findings and verified Task 6.1 regression repair; current task ownership preserved.

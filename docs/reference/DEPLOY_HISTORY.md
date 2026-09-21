@@ -129,6 +129,19 @@ pointers:
 
 ## PROD deploy log — full trail
 
+### PROD @107 — the sponsor owns its bill; a revival is not an advance (2026-09-20 ~22:20 Chicago, engine-sheet)
+
+civic.38 Task 5 (steps 1–2) + the business-side revival guard. Engine tree `95b67423`; 2 payload files vs @106 (`updateCivicApprovalRatings.js`, `applyInitiativeImplementationEffects.js`).
+
+**PUSH LANDED, VERSION STEP STILL PENDING (one step now covers @106 + @107).** Isolated `git archive` stage, pre-push delta vs live = exactly those 2 files, 170 pushed, pull-back 169/169 js byte-identical, 0 test files. The web app still reads @94 (= @105 code). Builder, from repo root: `CLAUDE_CTL=1 npx clasp version "PROD @107 engine.250 + civic.38 Task 5 95b67423"`, then `CLAUDE_CTL=1 npx clasp deploy -i AKfycbwUvd4TylktdE7AA8axRv-Hru55h78v1PlsOsIejWyAoQrUeYnKGq2ue-FJxPawCW-bgQ -V 95 -d "PROD @107 95b67423"`, then `npx clasp deployments` must read @95.
+
+**What it changes.** (1) `owns` was mayor-or-lead-faction and the district filter ran first; the tracker's `ProposingOffice` is now read and matched on OfficeId, the sponsor passes the district filter for its own row and takes the owner ladder — gains and drains. All six live rows are `MAYOR-01`, who already owned everything: no live change until a seat-authored row exists. (2) `classifyInitiativeMotion_`: a failing phase → live phase read as `advanced` (+2), so a stall/revive loop farmed approval; it is `sitting` (0) on the revival Cycle, never `silence`; failing → `complete` is `complete-held`. (3) Same guard on the engine.250 business marker: a revival sets `advanced: 0`.
+
+**Bench:** SANDBOX 0908 **@77**, C120–C121, both `ok:true` (187 s / 140 s), Engine_Errors unchanged. Record `output/engine-sheet/2026-09-20-bench-c120-c121-civic38-task5.json`. Predictions made before each fire, all held: C120 — COUNCIL-D4 (Vega, IND, district Glenview/Dimond/Ivy Hill) sponsoring the Fruitvale hub took `advanced (+2)`; the mayor paid `chose fail (-2)` again on the held Temescal stall, COUNCIL-D7 (CRC) `opposed a fail (+1)`; Fruitvale 6/6 businesses at the lift, Temescal 7/7 at −0.95…−1.0. C121 (INIT-005 revived) — no seat shows `advanced` for it, COUNCIL-D7 reads `sitting (0, capped)`; Temescal businesses back to ambient (+0.02…+0.56), no lift step; the sponsor took the owner's `silence (-3)` on the hub's stale bench clock — the sponsor owns the drain too. **BENCH-ONLY, NEVER REPLAY:** INIT-003 `construction-active` + `ProposingOffice = COUNCIL-D4`; INIT-005 `construction-active`.
+
+**Expect at live C109:** nothing new in the approval reasons (every row is the mayor's); the @106 expectations stand.
+- **Rollback:** re-push the @106 tree (`2b855aaa`) or the @105 tree (`d5738907`) from a `git archive` stage.
+
 ### PROD @106 — both hood effect buses reach their readers (2026-09-20 ~20:15 Chicago, engine-sheet)
 
 engine.250. Engine tree `2b855aaa`; 4 payload files vs @105 (`applyCityDynamics.js`, `applyInitiativeImplementationEffects.js`, `applyBusinessDynamics.js`, `finalizeCycleState.js`).

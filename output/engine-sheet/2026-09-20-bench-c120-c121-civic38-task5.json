@@ -1,0 +1,61 @@
+{
+ "what": "civic.38 Task 5 + revival guards bench proof, SANDBOX 0908 @77 = 95b67423, fires C120-C121, 2026-09-20",
+ "benchOnlyEdits": [
+  "before C120: INIT-003 ImplementationPhase construction-planning -> construction-active; INIT-003 ProposingOffice MAYOR-01 -> COUNCIL-D4",
+  "before C121: INIT-005 ImplementationPhase stalled -> construction-active"
+ ],
+ "approvalReasonsC120": [
+  "120 | MAYOR-01 |  | mag -1 | West Oakland Stabilization Fund silence (-3); Oakland Alternative Response Initiative silence (-2); Fruitvale Transit Hub Phase II — Visioning advanced (+2); Temescal Community Health Center chose fail (-2); Baylight District — Final Council Vote silence (-1); Oakland Youth Apprenticeship Pipeline …",
+  "120 | COUNCIL-D3 | Fruitvale|San Antonio | mag 2 | Oakland Alternative Response Initiative silence (-3); Fruitvale Transit Hub Phase II — Visioning advanced (+2); Oakland Youth Apprenticeship Pipeline silence (-2); level target 60 (mood +1.31 (district 1.34, city 1.27), district -0.11 vs middle) → +5",
+  "120 | COUNCIL-D4 | Glenview|Dimond|Ivy Hill | mag 2 | Fruitvale Transit Hub Phase II — Visioning advanced (+2); level target 56 (mood +1.19 (district 1.12, city 1.27), district -0.64 vs middle) → +0",
+  "120 | COUNCIL-D7 | Temescal|Rockridge|KONO | mag 2 | Temescal Community Health Center opposed a fail (+1); level target 59 (mood +1.23 (district 1.18, city 1.27), district -0.11 vs middle) → +1; integrity band 1 scales scandal chance x0.75",
+  "120 | COUNCIL-D8 | Adams Point|Grand Lake|Eastlake|Lake Merritt | mag 1 | level target 59 (mood +1.18 (district 1.09, city 1.27), district -0.14 vs middle) → +1"
+ ],
+ "approvalReasonsC121": [
+  "121 | COUNCIL-D3 | Fruitvale|San Antonio | mag -1 | Oakland Alternative Response Initiative silence (-3); Fruitvale Transit Hub Phase II — Visioning silence (-2); Oakland Youth Apprenticeship Pipeline silence (-1); level target 62 (mood +1.53 (district 1.58, city 1.47), district -0.10 vs middle) → +5",
+  "121 | COUNCIL-D4 | Glenview|Dimond|Ivy Hill | mag -3 | Fruitvale Transit Hub Phase II — Visioning silence (-3); level target 57 (mood +1.39 (district 1.32, city 1.47), district -0.76 vs middle) → +0",
+  "121 | COUNCIL-D7 | Temescal|Rockridge|KONO | mag 1 | Temescal Community Health Center sitting (0, capped); level target 61 (mood +1.41 (district 1.34, city 1.47), district -0.06 vs middle) → +1; integrity band 1 scales scandal chance x0.75",
+  "121 | COUNCIL-D8 | Adams Point|Grand Lake|Eastlake|Lake Merritt | mag 1 | level target 60 (mood +1.38 (district 1.30, city 1.47), district -0.24 vs middle) → +1",
+  "121 | COUNCIL-D9 | Laurel|Uptown | mag 1 | level target 65 (mood +1.54 (district 1.61, city 1.47), district +0.55 vs middle) → +1"
+ ],
+ "businessGrowthDelta": {
+  "C120": {
+   "Fruitvale": [
+    1,
+    1,
+    1,
+    1,
+    0.64,
+    1
+   ],
+   "Temescal": [
+    -1,
+    -1,
+    -0.95,
+    -1,
+    -1,
+    -1,
+    -1
+   ]
+  },
+  "C121": {
+   "Fruitvale": [
+    0.2,
+    0.94,
+    0.31,
+    0.93,
+    0.17,
+    0.26
+   ],
+   "Temescal": [
+    0.21,
+    0.52,
+    0.13,
+    0.56,
+    0.02,
+    0.1,
+    0.39
+   ]
+  }
+ }
+}

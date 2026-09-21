@@ -133,6 +133,11 @@ var ENGINE213_CONFIG_SEEDS = [
   // cuts); until then they are inert rows the builder can already see and tune.
   ['civicStageStallCycles', 5, 'civic.38 Task 4: Cycles a staged initiative may sit on one stage before the losing clock sets it stalled (builder: 4-5 to start)', 1, 52, true],
   ['civicDeliverMargin', 0.20, 'civic.38 Task 4: how far a gate metric ratio to the city median must sit above its baseline ratio for Standing -> Delivering (builder-ruled; untreated hoods cleared 0.20 held 3 Cycles 0% of the time over C103-C108)', 0, 2, false],
+  // Per-metric margin (builder ruling a): civicDeliverMargin_<policyDomain> wins over
+  // the default above. Same shape as the bizVol_<sector> keys. Health is the first
+  // measured domain: a clinic at full strength plateaus at an edge of 0.18-0.19, so
+  // 0.20 could never deliver it. Unmeasured domains fall back to the default.
+  ['civicDeliverMargin_health', 0.15, 'civic.38 Task 4: Delivering margin for health rows (Sick vs city median). Measured: a clinic at full strength holds an edge of 0.18-0.19 over an untreated control; 0.15 clears at the second Cycle and holds. Overrides civicDeliverMargin for PolicyDomain health', 0, 2, false],
   ['civicDeliverHoldCycles', 3, 'civic.38 Task 4: consecutive Cycles the margin must hold (builder-ruled; hold does more than margin)', 1, 12, true]
 ];
 

@@ -3004,9 +3004,9 @@ var CIVIC_STAGE_CATALOG_ = {
   health:    { playable: true,  stage3Metric: { tab: 'Neighborhood_Demographics', column: ['Sick'], direction: 'down', scope: 'hood' } },
   transit:   { playable: true,  stage3Metric: { tab: 'Transit_Metrics', column: ['RidershipVolume'], direction: 'up', scope: 'station-serving-hood' } },
   education: { playable: true,  stage3Metric: { tab: 'Neighborhood_Demographics', column: ['SchoolQualityIndex'], direction: 'up', scope: 'hood' } },
-  economic:  { playable: true,  stage3Metric: { tab: 'Neighborhood_Map', column: ['RetailVitality'], direction: 'up', scope: 'hood' } },
-  workforce: { playable: true,  stage3Metric: { tab: 'Neighborhood_Map', column: ['RetailVitality'], direction: 'up', scope: 'hood' } },
-  sports:    { playable: true,  stage3Metric: { tab: 'Neighborhood_Map', column: ['RetailVitality', 'NightlifeProfile'], direction: 'up', scope: 'hood' } },
+  economic:  { playable: false, stage3Metric: { tab: 'Neighborhood_Map', column: ['RetailVitality'], direction: 'up', scope: 'hood' } },
+  workforce: { playable: false, stage3Metric: { tab: 'Neighborhood_Map', column: ['RetailVitality'], direction: 'up', scope: 'hood' } },
+  sports:    { playable: false, stage3Metric: { tab: 'Neighborhood_Map', column: ['RetailVitality', 'NightlifeProfile'], direction: 'up', scope: 'hood' } },
   safety:    { playable: false, stage3Metric: { tab: 'Crime_Metrics', column: ['ViolentLevel'], direction: 'down', scope: 'hood' } },
   housing:   { playable: false, stage3Metric: { tab: 'Household_Ledger', column: ['MonthlyRent*12/HouseholdIncome'], direction: 'down', scope: 'hood' } }
 };

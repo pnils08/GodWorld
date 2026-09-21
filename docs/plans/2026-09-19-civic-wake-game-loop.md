@@ -403,6 +403,7 @@ Measured: [[../../output/engine-sheet/2026-09-21-matched-control-c108-c112.json]
 
 ## Changelog
 
+- 2026-09-21 (engine-sheet) — Rulings (a)/(b) cut: economic, workforce and sports marked not playable in `INTERVENTION_CATALOG` and the engine mirror (weak channels recorded in `WEAK_CHANNELS`); `civicDeliverMargin_health` 0.15 seeded, per-domain key over the default; engine.252 filed for the missing lever.
 - 2026-09-21 (research-build) — Builder ruled the matched-control round: per-metric margin (health 0.15), retail-gated domains not playable, upkeep decay 6/0.15/0.3, directors' work counts as tending; research-build ruled clock-counts-untended and regress-costs-nothing.
 - 2026-09-21 (engine-sheet) — Matched-control bench pair filed: health moves its gate metric (edge ≈ 0.18–0.19, just under the ruled 0.20), retail does not move at all against noise. Decay design proposed for builder sim calls. Codex handler review accepted; F3/F4 fixed in `82d2fac4`.
 - 2026-09-21 (research-build) — Builder ruled ruling 8: Delivering stays operational + one-time completed +3; next cut is ongoing effects and decay that brings a delivered initiative back for attention.

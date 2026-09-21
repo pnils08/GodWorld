@@ -634,6 +634,7 @@ async function main() {
     const seats = createInit.loadOfficeSeats();
     let auditForFold = null;
     try { auditForFold = JSON.parse(fs.readFileSync(path.join(ROOT, 'output', 'engine_audit_c' + CYCLE + '.json'), 'utf8')); } catch (_) { /* no audit on disk */ }
+    slice.requireCycle(auditForFold, CYCLE, 'candidate geography audit');
     const c2p = slice.childToParentFromAudit(auditForFold);
     const normName = s => String(s || '').trim().toLowerCase().replace(/\s+/g, ' ');
     const existingKeys = new Set(trackerRows.map(r =>

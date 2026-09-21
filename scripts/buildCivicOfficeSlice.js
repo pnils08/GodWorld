@@ -278,8 +278,12 @@ function loadConstituents(root, hoods, cap) {
 }
 
 function loadAudit(root, cycle) {
-  return loadJson(path.join(root, 'output', 'engine_audit_c' + cycle + '.json')) ||
-    loadJson(path.join(root, 'output', 'engine_audit.json'));
+  const exact = path.join(root, 'output', 'engine_audit_c' + cycle + '.json');
+  const file = fs.existsSync(exact) ? exact : path.join(root, 'output', 'engine_audit.json');
+  if (!fs.existsSync(file)) return null;
+  const audit = JSON.parse(fs.readFileSync(file, 'utf8'));
+  requireCycle(audit, cycle, 'engine audit');
+  return audit;
 }
 
 function loadOfficeJob(audit, office) {
@@ -737,25 +741,41 @@ function loadCascadeVoices(root, initiativeId) {
 // ---------------------------------------------------------------------------
 
 function readJsonl(file) {
+  let raw;
   try {
-    return fs.readFileSync(file, 'utf8').split('\n').filter(Boolean)
-      .map(l => { try { return JSON.parse(l); } catch (_) { return null; } })
-      .filter(Boolean);
-  } catch (_) { return null; }   // null = not on disk (distinct from empty)
+    raw = fs.readFileSync(file, 'utf8');
+  } catch (e) { if (e.code === 'ENOENT') return null; throw e; }
+  return raw.split(/\r?\n/).flatMap((line, i) => {
+    if (!line.trim()) return [];
+    try {
+      const row = JSON.parse(line);
+      if (!row || typeof row !== 'object' || Array.isArray(row)) throw new Error('expected row object');
+      return [row];
+    } catch (e) { throw new Error(path.basename(file) + ':' + (i + 1) + ': ' + e.message); }
+  });
+}
+
+function requireCycle(data, cycle, label) {
+  if (!Number.isInteger(Number(cycle)) || Number(cycle) < 1 || Number(data && data.cycle) !== Number(cycle)) {
+    throw new Error(label + ' cycle mismatch or missing stamp (expected C' + cycle + ')');
+  }
+}
+function requireSnapshotCycle(root, relative, cycle) {
+  const data = JSON.parse(fs.readFileSync(path.join(root || ROOT, 'output', relative), 'utf8'));
+  requireCycle(data, cycle, relative);
 }
 
 // Child areas fold to parents (SIM_DOCTRINE §17). The parent links live on
 // Neighborhood_Map.ChildAreas; scripts read them off the engine-audit snapshot
 // dump, never a hard-coded copy.
 function childToParentFromAudit(audit) {
-  const map = {};
-  const rows = (audit && audit.snapshots && audit.snapshots.Neighborhood_Map) || [];
+  const map = Object.create(null);
+  const rows = audit && audit.snapshots && audit.snapshots.Neighborhood_Map;
+  const resolver = require('./civicPetitions').buildHoodResolver(rows);
   for (const r of rows) {
-    const parent = String(r.Neighborhood || '').trim();
-    if (!parent) continue;
-    for (const c of String(r.ChildAreas || '').split(',')) {
-      const t = c.trim();
-      if (t) map[t.toLowerCase()] = parent;
+    for (const name of [r.Neighborhood, ...String(r.ChildAreas || '').split(',')]) {
+      const key = String(name || '').trim().toLowerCase();
+      if (key) map[key] = resolver.resolve(name);
     }
   }
   return map;
@@ -763,12 +783,13 @@ function childToParentFromAudit(audit) {
 
 function foldHood(name, childToParent) {
   const n = String(name || '').trim();
-  return (childToParent && childToParent[n.toLowerCase()]) || n;
+  return (childToParent && Object.hasOwn(childToParent, n.toLowerCase()) && childToParent[n.toLowerCase()]) || n;
 }
 
 // Raw tracker rows from the beats dump (all header columns, incl.
 // ProposingOffice which initiative_tracker.json drops).
-function loadTrackerRows(root) {
+function loadTrackerRows(root, cycle) {
+  if (cycle != null) requireSnapshotCycle(root, 'beats/meta.json', cycle);
   return readJsonl(path.join(root || ROOT, 'output', 'beats', 'Initiative_Tracker.jsonl'));
 }
 
@@ -879,11 +900,15 @@ function reflectionField(r, names) {
   return '';
 }
 
-function loadPetitionPool(root, office, hoods, officeMap, childToParent) {
+function loadPetitionPool(root, office, hoods, officeMap, childToParent, cycle) {
   const rows = readJsonl(path.join(root || ROOT, 'output', 'beats', 'Reflection_Intake.jsonl'));
   if (rows === null) {
     return { available: false, complaints: [], participation: [],
       text: 'Petition pool unavailable — Reflection_Intake is not in the beats dump yet (Task 6).' };
+  }
+  if (cycle != null) {
+    requireSnapshotCycle(root, 'beats/meta.json', cycle);
+    if (hoods && hoods.length) requireSnapshotCycle(root, 'simulation_ledger_snapshot.meta.json', cycle);
   }
   const officePopids = new Set([...(officeMap.offices || []), ...(officeMap.projects || [])]
     .map(o => String(o.popid || '').toUpperCase()).filter(Boolean));
@@ -953,6 +978,7 @@ function loadWorkingCity(root, cycle, officeMap) {
   if (rows === null) {
     return { available: false, text: 'No work-wake reflections on disk yet (Reflection_Intake beats dump lands with Task 6).' };
   }
+  requireSnapshotCycle(root, 'beats/meta.json', cycle);
   const staffPopids = new Map();
   for (const o of [...(officeMap.projects || []), ...(officeMap.offices || [])]) {
     const id = String(o.officeId || o.projectId || '');
@@ -1030,22 +1056,44 @@ function loadInterventionMenu() {
 
 function buildGameBlocks(opts) {
   const { root, cycle, office, officeMap, hoods, audit } = opts;
-  const c2p = childToParentFromAudit(audit);
-  const rows = loadTrackerRows(root);
-  const board = rows === null ? null : boardRowsFor(office, rows, c2p);
+  let c2p, geographyIssue = null, boardIssue = null, board = null;
+  try {
+    requireCycle(audit, cycle, 'engine audit');
+    c2p = childToParentFromAudit(audit);
+    if (/^D\d$/.test(String(office.district || ''))) {
+      const mapped = getNeighborhoodsForDistricts(office.district).map(h => foldHood(h, c2p).toLowerCase()).sort();
+      const turf = turfHoods(office).map(h => foldHood(h, c2p).toLowerCase()).sort();
+      if (JSON.stringify(mapped) !== JSON.stringify(turf)) throw new Error('office turf disagrees with district authority');
+    }
+  } catch (e) { geographyIssue = e.message; }
+  try {
+    if (geographyIssue) throw new Error(geographyIssue);
+    const rows = loadTrackerRows(root, cycle);
+    if (rows === null) throw new Error('Initiative_Tracker dump absent');
+    board = boardRowsFor(office, rows, c2p);
+  } catch (e) { boardIssue = e.message; }
+  const safely = (fn, fallback) => {
+    try { return fn(); }
+    catch (e) { return { ...fallback, available: false, text: clip(fallback.text + ' — ' + e.message, BLOCK_CAP) }; }
+  };
   for (const b of board || []) {
     b.cyclesSinceStageChange = b.lastStageChangeCycle != null && cycle !== ''
       ? Math.max(0, Number(cycle) - b.lastStageChangeCycle)
       : null;
   }
   const game = {
-    lastMove: lastMoveBlock(root, cycle, office.agentDir),
+    geographyIssue,
+    lastMove: safely(() => lastMoveBlock(root, cycle, office.agentDir), {text:'Move history unavailable',moves:[]}),
     board: board || [],
+    boardAvailable: board !== null,
     boardIds: (board || []).map(b => b.id),
-    boardText: boardBlock(board),
+    boardText: boardIssue ? clip('Board unavailable — ' + boardIssue, BLOCK_CAP) : boardBlock(board),
     interventions: loadInterventionMenu(),
-    petitionPool: loadPetitionPool(root, office, hoods, officeMap, c2p),
-    workingCity: loadWorkingCity(root, cycle, officeMap),
+    petitionPool: safely(() => {
+      if (geographyIssue) throw new Error(geographyIssue);
+      return loadPetitionPool(root, office, hoods, officeMap, c2p, cycle);
+    }, {text:'Petition pool unavailable',complaints:[],participation:[]}),
+    workingCity: safely(() => loadWorkingCity(root, cycle, officeMap), {text:'Working city unavailable'}),
   };
   const conf = loadConfrontation(root, cycle, office.agentDir);
   if (conf) game.confrontation = conf;
@@ -1191,7 +1239,7 @@ module.exports = {
   loadCabinet, loadInitRows, seatKind, pickTurn, scoreHoods, loadFactionPeers,
   clip, writePack, CONSTITUENT_CAP,
   // civic.38 Task 3 game blocks
-  buildGameBlocks, boardRowsFor, boardNeedText, childToParentFromAudit, foldHood,
+  buildGameBlocks, boardRowsFor, boardNeedText, childToParentFromAudit, foldHood, requireCycle, loadAudit,
   loadMovesFolded, loadPetitionPool, loadWorkingCity, loadConfrontation,
   loadInterventionMenu, loadTrackerRows, readJsonl, NEGATIVE_AFFECTS, BLOCK_CAP,
 };

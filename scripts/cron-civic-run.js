@@ -960,7 +960,8 @@ async function runDirective() {
   // A confrontation confronts with what the seat could have seen.
   const slice = require('./buildCivicOfficeSlice');
   const c2p = slice.childToParentFromAudit(audit);
-  const trackerRows = slice.loadTrackerRows(ROOT) || [];
+  const trackerRows = slice.loadTrackerRows(ROOT, cycle);
+  if (trackerRows === null) throw new Error('Directive board unavailable: Initiative_Tracker dump absent');
   const hoodScores = slice.scoreHoods(audit);
   // Petition visibility line (default the builder may overrule): a district
   // with this many Civic complaints on the record and no answering proposal is
@@ -980,7 +981,7 @@ async function runDirective() {
     const hot = hoodScores.filter(h => turfSet.has(String(h.hood).toLowerCase()) && (h.outlier || h.traj === 'decay'));
     if (hot.length) lines.push('- district heat: ' + hot.slice(0, 3).map(h => h.hood + ' (' + h.why.join('; ') + ')').join(' | '));
     // (b) petitions above the visibility line with no proposal filed
-    const pool = slice.loadPetitionPool(ROOT, o, hoods, officeMap, c2p);
+    const pool = slice.loadPetitionPool(ROOT, o, hoods, officeMap, c2p, cycle);
     if (pool.available) {
       const answered = pendingProposals.filter(m => m.agentDir === o.agentDir).length;
       lines.push('- petition pool: ' + pool.complaints.length + ' complaint(s) on the record' +
@@ -2150,6 +2151,10 @@ function validateDatawakeMoves(rawMoves, ctx) {
       continue;
     }
     let reason = null;
+    if (ctx.geographyIssue && ['propose', 'canvass', 'work'].includes(type)) {
+      rejected.push({ move: m, reason: 'geography-unavailable(' + ctx.geographyIssue + ')' });
+      continue;
+    }
     if (type === 'propose') {
       if (isChief) reason = 'seat-cannot-propose(CHIEF-POLICE is not an elected seat)';
       else if (!String(m.title || '').trim()) reason = 'propose-missing-title';
@@ -2637,7 +2642,8 @@ async function runDatawake() {
         office,
         boardIds: new Set((pack.game && pack.game.boardIds) || []),
         catalog: loadInterventionCatalog(),
-        childToParent: childToParentFromAudit(audit),
+        childToParent: pack.game && pack.game.geographyIssue ? {} : childToParentFromAudit(audit),
+        geographyIssue: pack.game && pack.game.geographyIssue,
       });
       for (const rj of mv.rejected) {
         log('[datawake] MOVE REJECTED ' + office.agentDir + ' — ' + rj.reason + ' :: ' + JSON.stringify(rj.move).slice(0, 160));

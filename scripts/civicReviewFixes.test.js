@@ -31,3 +31,42 @@ test('F3 petition join folds child areas and needs no display name or active sta
   assert.equal(result.complaints[0].hood, 'East Oakland');
   assert.equal(result.complaints[0].snippet, 'SYNTHETIC');
 }));
+test('F4 corrupt rows and ambiguous geography cannot produce partial authority', () => workspace((root, write) => {
+  write('broken.jsonl', '{"InitiativeID":"SYNTHETIC"}\n{broken');
+  assert.throws(() => slice.readJsonl(path.join(root, 'broken.jsonl')), /:2:/);
+  assert.throws(() => slice.childToParentFromAudit({}), /Neighborhood_Map/);
+  assert.throws(() => slice.childToParentFromAudit({snapshots:{Neighborhood_Map:[
+    {Neighborhood:'West Oakland',ChildAreas:'SYNTHETIC-child'},
+    {Neighborhood:'East Oakland',ChildAreas:'SYNTHETIC-child'}
+  ]}}), /multiple parents/);
+}));
+test('F4 stale board and citizen snapshots are unavailable, not empty evidence', () => workspace((root, write) => {
+  const audit = {cycle:999,snapshots:{Neighborhood_Map:[{Neighborhood:'East Oakland',ChildAreas:'Coliseum'}]}};
+  write('output/beats/meta.json', JSON.stringify({cycle:998}));
+  write('output/beats/Initiative_Tracker.jsonl', JSON.stringify({InitiativeID:'INIT-SYNTHETIC',ProposingOffice:office.officeId}));
+  let game = slice.buildGameBlocks({root,cycle:999,office,officeMap:{offices:[]},hoods:['East Oakland'],audit});
+  assert.equal(game.boardAvailable, false);
+  assert.match(game.boardText, /cycle/i);
+  assert.deepEqual(game.boardIds, []);
+  write('output/beats/meta.json', JSON.stringify({cycle:999}));
+  write('output/beats/Reflection_Intake.jsonl', '{}');
+  write('output/simulation_ledger_snapshot.jsonl', '{}');
+  write('output/simulation_ledger_snapshot.meta.json', JSON.stringify({cycle:998}));
+  game = slice.buildGameBlocks({root,cycle:999,office,officeMap:{offices:[]},hoods:['East Oakland'],audit});
+  assert.equal(game.boardAvailable, true);
+  assert.equal(game.petitionPool.available, false);
+  assert.match(game.petitionPool.text, /cycle/i);
+  const moves = run.validateDatawakeMoves([{type:'canvass',hood:'East Oakland'},{type:'answer',text:'SYNTHETIC'}],
+    {office,geographyIssue:'ambiguous-map'});
+  assert.match(moves.rejected[0].reason, /ambiguous-map/);
+  assert.equal(moves.accepted[0].type, 'answer');
+}));
+test('F4 fallback audits must match the requested Cycle and office overrides cannot change authority', () => workspace((root, write) => {
+  write('output/engine_audit.json', JSON.stringify({cycle:998}));
+  assert.throws(() => slice.loadAudit(root, 999), /cycle mismatch/);
+  write('output/engine_audit.json', JSON.stringify({cycle:999}));
+  assert.equal(slice.loadAudit(root, 999).cycle, 999);
+  const audit = {cycle:999,snapshots:{Neighborhood_Map:[{Neighborhood:'East Oakland',ChildAreas:'Coliseum'}]}};
+  const game = slice.buildGameBlocks({root,cycle:999,office:{...office,neighborhoods:['West Oakland']},officeMap:{offices:[]},audit});
+  assert.match(game.geographyIssue, /turf disagrees/);
+}));

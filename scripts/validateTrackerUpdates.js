@@ -215,6 +215,7 @@ function validateCandidates(cycle) {
   } catch (_) { /* Task 4 step 0 not landed */ }
   let audit = null;
   try { audit = JSON.parse(fs.readFileSync(path.join(ROOT, 'output', 'engine_audit_c' + cycle + '.json'), 'utf8')); } catch (_) { /* offline */ }
+  slice.requireCycle(audit, cycle, 'candidate geography audit');
   const c2p = slice.childToParentFromAudit(audit);
 
   for (const cand of list) {

@@ -3524,7 +3524,9 @@ function applyCivicStageBaseline_(ctx, row, ix) {
   var entry = CIVIC_STAGE_CATALOG_[String(row[ix.policyDomain] == null ? '' : row[ix.policyDomain]).trim().toLowerCase()];
   if (!entry || entry.playable !== true || entry.stage3Metric.scope !== 'hood') return false;
   var initKey = String((ix.id >= 0 ? row[ix.id] : '') || '').trim() || String((ix.name >= 0 ? row[ix.name] : '') || '').trim();
-  if (typeof resolveHoodOrChild_ !== 'function') return false;
+  // resolveHoodOrChild_ THROWS on an unseeded canon set, and a throw here would
+  // take the whole civic engine down for the fire. No canon, no stamp — retried next fire.
+  if (typeof resolveHoodOrChild_ !== 'function' || !ctx.summary.canonHoods || !ctx.summary.canonHoods.set || !ctx.summary.canonHoods.children) return false;
   var parts = String(row[ix.hoods] == null ? '' : row[ix.hoods]).split(/[,;]+/);
   var hoods = [];
   for (var p = 0; p < parts.length; p++) {

@@ -824,6 +824,7 @@
         "phase01-config/canonNeighborhoodLoader.js::resolveHoodOrChild_",
         "phase02-world-state/applyCityDynamics.js::buildHoodClusterAssignment_",
         "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_",
+        "phase05-citizens/civicInitiativeEngine.js::applyCivicStageBaseline_",
         "phase05-citizens/civicInitiativeEngine.js::freezeCivicStageCohort_",
         "phase06-analysis/economicRippleEngine.js::sceneHoods_",
         "phase07-evening-media/applyStorySeeds.js::applyStorySeeds_",

@@ -1534,7 +1534,7 @@
   Reads: S.civicStageCohort
 
 - **applyCivicStageBaseline_(ctx, row, ix)**
-  Reads: S.cycleId
+  Reads: S.canonHoods, S.cycleId
   Config: ctx.config.cycleCount
 
 - **applyCivicDeliveryStep_(ctx, row, ix, cycle)**

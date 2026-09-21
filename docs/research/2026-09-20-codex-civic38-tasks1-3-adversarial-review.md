@@ -39,6 +39,8 @@ The Sheet calls its text field **ReflectionExcerpt**, column F (`schemas/SCHEMA_
 
 **Repair:** read ReflectionExcerpt first, preserving the canonical schema; retain legacy aliases only if a real input contract needs them. Cover both blocks with an actual dump-shaped fixture. Alias-only fixtures can pass while every real voice is blank.
 
+**Follow-up verified:** Kimi fixed both readers in `41c6892c` during this review. Re-running the canonical-row probes returned the excerpt in both blocks. F2 is resolved in code; canonical-schema regression coverage should remain with the repair. Other reproduced findings still held at that commit.
+
 ### F3 — HIGH: petition geography drops child residents and reports missing geography as no complaints
 
 `loadPetitionPool` obtains membership through `loadConstituents` (`scripts/buildCivicOfficeSlice.js:891-895`). That function compares the citizen's raw Neighborhood to the parent-hood set (`:247-262`), without folding child areas. A synthetic citizen in Coliseum is excluded from East Oakland despite the supplied ChildAreas map; the same citizen in East Oakland is included. The board's child fold at `:800` therefore disagrees with the petition pool.
@@ -46,6 +48,8 @@ The Sheet calls its text field **ReflectionExcerpt**, column F (`schemas/SCHEMA_
 If the citizen snapshot is absent, `loadConstituents` returns []; the pool then reports `available: true` and **No Civic complaints from your turf on the record** (`:919-925`). This is an unsupported negative claim, confirmed by a fixture containing a real-format reflection but no citizen file. Stale snapshots are also accepted without checking their meta Cycle. Missing names and non-active statuses exclude otherwise identifiable residents; those are constituent-display policies, not geographic join requirements.
 
 **Repair:** join Reflection_Intake POPID to a Cycle-qualified citizen snapshot with the same sheet-sourced child resolver as the board; do not require a display name for membership. Mark unavailable/incomplete geography explicitly and count unlocated rows. Keep official-holder exclusion. Resolve district territory once so a neighborhoods override in `turfHoods` (`:77-83`) cannot disagree with the move gate's districtMap lookup (`cron-civic-run.js:2119-2123`). Current C108 canonical parent territory matches; the override/cache-drift risk is conditional, not a claim of a current district reassignment.
+
+**Follow-up verified:** `58f43fe1` fixes the absent-file case: the same probe now returns available:false and stated absence. Child-resident exclusion still reproduces; stale/present-but-corrupt geography remains unaddressed. F3 is partially resolved, not closed.
 
 ### F4 — MEDIUM: malformed or stale evidence becomes an authoritative empty/current board
 
@@ -67,7 +71,7 @@ Removing action from the requested output shape did not remove its live reader. 
 
 ### F7 — MEDIUM: future stage advice is locally hardcoded and prioritizes Stage over stalled phase
 
-`boardNeedText` embeds stage rules (`scripts/buildCivicOfficeSlice.js:776-786`) rather than using the plan's shared stage helper. `{Stage:'Standing', ImplementationPhase:'stalled'}` returns **work keeps it standing**; the stalled branch is unreachable for every recognized Stage. Standing's two-distinct-seat work condition and losing-clock requirements are absent from this text. These are staged-contract defects: current tracker rows have not yet received the Task 4 Stage fields.
+`boardNeedText` embeds stage rules (`scripts/buildCivicOfficeSlice.js:776-786`) rather than using the plan's shared stage helper. `{Stage:'Standing', ImplementationPhase:'stalled'}` returns **work keeps it standing**; the stalled branch is unreachable for every recognized Stage. The plan requires LastWorkCycle after LastStageChangeCycle to enter Standing and says work never resets a running clock; that distinction is absent from this text. These are staged-contract defects: current tracker rows have not yet received the Task 4 Stage fields.
 
 **Repair:** keep stalled/revival state authoritative and consume the shared engine-compatible next-requirement helper when Task 4 lands. Test each Stage with normal, stalled and invalid combinations. Until the helper exists, label stage advice unavailable instead of asserting a replacement rule.
 
@@ -101,4 +105,5 @@ Read-only probes evaluated the actual MOVE_TYPES/loadInterventionCatalog/hoodAut
 
 ## Changelog
 
+- 2026-09-20 (codex) — Re-probed Kimi follow-ups: F2 resolved by 41c6892c; F3 absent-file branch resolved by 58f43fe1, child fold still fails; stage advice evaluated against the actual LastWorkCycle condition.
 - 2026-09-20 (codex) — Filed stronger HEAD review with eight actionable findings and verified Task 6.1 regression repair; current task ownership preserved.

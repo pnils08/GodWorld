@@ -51,7 +51,8 @@ const { getDistrictForNeighborhood } = require('../lib/districtMap');
 const getCurrentCycle = require('../lib/getCurrentCycle');
 const officeWall = require('./officeWall');
 const trackerSnapshot = require('./initiativeTrackerSnapshot');
-const { buildPack, writePack } = require('./buildCivicOfficeSlice');
+const { buildPack, writePack, childToParentFromAudit, foldHood } = require('./buildCivicOfficeSlice');
+const { CANONICAL_HOODS } = require('../lib/canonNeighborhoods');
 const civicSeat = require('./civicSeat');
 const cityHallLedger = require('./cityHallLedger');
 const chaosCascade = require('./dumpChaosCascade');
@@ -1960,13 +1961,21 @@ function datawakeUserPrompt(pack, wallInj, office) {
     (pack && pack.pulse && pack.pulse.lever) ||
     ''
   ).trim();
+  const game = (pack && pack.game) || {};
+  const conf = game.confrontation || null;
   return [
     wallInj || '',
     'Prior wall is continuity only. Do not reuse its wording as this week\'s statement.',
     lever ? 'THIS WEEK\'S LEVER (respond to this): ' + lever : '',
     hay,
-    'JSON only: {"office":"' + voiceSlug(office.agentDir) + '","holder":"' + office.holder + '","statement":"","action":null,"numberMoved":""}',
+    'JSON only: {"office":"' + voiceSlug(office.agentDir) + '","holder":"' + office.holder + '","statement":"","moves":[],"numberMoved":""}',
     'statement is one string that answers THIS WEEK\'S LEVER from the pack. Not a statement object. Not a prior-wall quote.',
+    // civic.38 Task 1 — the closed move set. One consequential move per wake.
+    'moves: at most ONE move from this closed set — {"type":"propose","title":"","intervention":"<catalog key>","hoods":[""],"problem":""} | {"type":"work","initiativeId":"INIT-…"} | {"type":"answer","confrontationId":"…","text":""} | {"type":"canvass","hood":"","note":""}. ' +
+      'work only names an initiative on YOUR board (game.boardIds). propose and canvass name only hoods inside your own district' +
+      (/^D\d$/.test(String(office.district || '')) ? '' : ' (your seat is citywide — any real neighborhood)') +
+      '. propose.intervention comes only from the intervention catalog named in your pack. A move that breaks these rules is discarded, not corrected.',
+    conf ? 'YOU WERE NAMED IN THE SUNDAY DIRECTIVE (' + conf.id + '). An {"type":"answer",...} move responding to it is expected.' : '',
     'No headcount, percentage, or dollar figure unless that exact number appears above. Progress with no cited metric is described in words ("ahead of schedule", "significant headway") — never estimated.',
   ].join('\n');
 }
@@ -1979,6 +1988,143 @@ function datawakeStatementText(cand) {
     return String(o.fullStatement || o.quote || o.text || '').trim();
   }
   return '';
+}
+
+// ---------------------------------------------------------------------------
+// civic.38 Task 1 — the closed move set. A datawake is a turn in a game: at
+// most ONE consequential move per wake (the scarce resource); speech
+// (statement) is free and ungrounded (standing rule — the number gate never
+// covered it, :2161-2162 pre-civic.38). The move gate below is the grounding
+// gate for moves: an initiative not on the seat's board, a hood outside its
+// district, an unknown move type — dropped with a loud line, never fatal.
+// ---------------------------------------------------------------------------
+
+const MOVE_TYPES = ['propose', 'work', 'answer', 'canvass'];
+
+// The intervention catalog lives in lib/initiativePhaseContract.js (Task 4
+// step 0, engine-sheet's file). Until it lands, propose is unvalidatable and
+// every propose is refused loudly — never validated against a local copy
+// (mechanism decision 5: one catalog, shared, so scripts and engine can't drift).
+function loadInterventionCatalog() {
+  try {
+    const c = require('../lib/initiativePhaseContract').INTERVENTION_CATALOG;
+    return c && typeof c === 'object' && Object.keys(c).length ? c : null;
+  } catch (_) { return null; }
+}
+
+// Hood authority: council seats are district-bound (child areas fold to
+// parents first — an intersect test would let one local hood carry in
+// unauthorized ones); citywide seats (mayor, police chief) may name any
+// canonical hood (ruling 2 names the mayor; the chief has no district to be
+// bound to). Returns null when OK, else the rejection reason.
+function hoodAuthorityReason(office, hoodRaw, childToParent) {
+  const folded = foldHood(hoodRaw, childToParent);
+  if (!CANONICAL_HOODS.has(String(hoodRaw).trim().toLowerCase()) &&
+      !CANONICAL_HOODS.has(folded.toLowerCase())) {
+    return 'unknown-hood("' + hoodRaw + '")';
+  }
+  const district = String(office.district || '');
+  if (/^D\d$/.test(district)) {
+    if (getDistrictForNeighborhood(folded) !== district) {
+      return 'hood-out-of-district("' + hoodRaw + '" folds to ' + folded + ', not in ' + district + ')';
+    }
+  }
+  return null;
+}
+
+// Validate one wake's moves. ctx: { office, boardIds:Set, catalog,
+// childToParent }. Returns { accepted:[{type,payload}], rejected:[{move,reason}] }.
+// Every move type is consequential — the first valid one stands, the rest are
+// rejected on their own lines (plan Task 1 step 1).
+function validateDatawakeMoves(rawMoves, ctx) {
+  const accepted = [];
+  const rejected = [];
+  if (rawMoves == null) return { accepted, rejected };
+  if (!Array.isArray(rawMoves)) {
+    return { accepted, rejected: [{ move: rawMoves, reason: 'moves-not-an-array' }] };
+  }
+  const office = ctx.office || {};
+  const boardIds = ctx.boardIds || new Set();
+  const catalog = ctx.catalog === undefined ? loadInterventionCatalog() : ctx.catalog;
+  const c2p = ctx.childToParent || {};
+  const isChief = String(office.officeId || '') === 'CHIEF-POLICE';
+
+  for (const m of rawMoves) {
+    const type = m && typeof m === 'object' ? m.type : null;
+    if (!type || MOVE_TYPES.indexOf(type) === -1) {
+      rejected.push({ move: m, reason: 'unknown-move-type(' + (type == null ? typeof m : type) + ')' });
+      continue;
+    }
+    let reason = null;
+    if (type === 'propose') {
+      if (isChief) reason = 'seat-cannot-propose(CHIEF-POLICE is not an elected seat)';
+      else if (!String(m.title || '').trim()) reason = 'propose-missing-title';
+      else if (!String(m.problem || '').trim()) reason = 'propose-missing-problem';
+      else if (!Array.isArray(m.hoods) || !m.hoods.length) reason = 'propose-missing-hoods';
+      else if (!String(m.intervention || '').trim()) reason = 'propose-missing-intervention';
+      else if (!catalog) reason = 'catalog-not-landed(lib/initiativePhaseContract.js INTERVENTION_CATALOG — Task 4 step 0, engine-sheet)';
+      else if (!catalog[m.intervention]) reason = 'unknown-intervention(' + m.intervention + ')';
+      else if (catalog[m.intervention].playable === false) reason = 'domain-not-playable(' + m.intervention + ' → ' + (catalog[m.intervention].policyDomain || '?') + ')';
+      if (!reason) {
+        for (const h of m.hoods) {
+          reason = hoodAuthorityReason(office, h, c2p);
+          if (reason) break;
+        }
+      }
+    } else if (type === 'work') {
+      const id = String(m.initiativeId || '').trim();
+      if (!id) reason = 'work-missing-initiativeId';
+      else if (!boardIds.has(id)) reason = 'initiative-not-on-board(' + id + ')';
+    } else if (type === 'answer') {
+      if (!String(m.text || '').trim()) reason = 'answer-missing-text';
+    } else if (type === 'canvass') {
+      if (!String(m.hood || '').trim()) reason = 'canvass-missing-hood';
+      else reason = hoodAuthorityReason(office, m.hood, c2p);
+    }
+    if (reason) {
+      rejected.push({ move: m, reason });
+      continue;
+    }
+    if (accepted.length) {
+      rejected.push({ move: m, reason: 'second-consequential-move(one per wake — the first valid one stands)' });
+      continue;
+    }
+    const payload = {};
+    for (const k of Object.keys(m)) {
+      if (k !== 'type') payload[k] = m[k];
+    }
+    accepted.push({ type, payload });
+  }
+  return { accepted, rejected };
+}
+
+// Append-only move ledger (Task 2 step 1): one JSON line per event, status
+// changes are new lines for the same moveId, a reader folds last-line-wins.
+// moveId = MV-{cycle}-{agentDir}-{date} — one consequential move per wake
+// makes it unique; a re-run of the same wake writes the same id.
+function appendMoveLedger(root, cycle, lines) {
+  if (!lines.length) return null;
+  const dir = path.join(root, 'output', 'cron-civic', 'moves');
+  fs.mkdirSync(dir, { recursive: true });
+  const file = path.join(dir, 'moves_c' + cycle + '.jsonl');
+  fs.appendFileSync(file, lines.map(l => JSON.stringify(l)).join('\n') + '\n');
+  return file;
+}
+
+function moveLedgerLines(office, cycle, date, mv) {
+  const moveId = 'MV-' + cycle + '-' + office.agentDir + '-' + date;
+  const at = new Date().toISOString();
+  const lines = mv.accepted.map(m => ({
+    moveId, cycle: Number(cycle), date, agentDir: office.agentDir, popid: office.popid || null,
+    type: m.type, payload: m.payload, status: 'pending', at,
+  }));
+  mv.rejected.forEach((r, i) => lines.push({
+    moveId: moveId + ':rej' + i, cycle: Number(cycle), date, agentDir: office.agentDir,
+    popid: office.popid || null, type: (r.move && r.move.type) || null,
+    payload: (r.move && typeof r.move === 'object') ? r.move : { raw: String(r.move) },
+    status: 'rejected', detail: r.reason, at,
+  }));
+  return lines;
 }
 
 // Numeric grounding: every digit-token in a datawake's output must appear in
@@ -2100,11 +2246,16 @@ async function runDatawake() {
     for (const office of rota) {
       const pack = buildPack({ cycle, agentDir: office.agentDir, root: ROOT });
       const persona = readPersonaDir(civicSeat.personaDirFor(office, ROOT) || office.agentDir);
+      const game = pack.game || {};
       log('DRY ' + office.agentDir + ' holder=' + office.holder +
         ' district=' + (office.district || '') +
         ' personaBytes=' + (persona ? persona.length : 0) +
         ' facts=' + (pack.known || []).length +
-        ' people=' + ((pack.exposure && pack.exposure.subjects) || []).length);
+        ' people=' + ((pack.exposure && pack.exposure.subjects) || []).length +
+        ' board=' + (game.boardIds || []).length +
+        ' petitions=' + (game.petitionPool && game.petitionPool.available ? (game.petitionPool.complaints || []).length : 'n/a') +
+        ' interventions=' + (game.interventions && game.interventions.available ? game.interventions.playable.length : 'no-catalog') +
+        (game.confrontation ? ' confrontation=' + game.confrontation.id : ''));
       if (!persona) throw new Error('no IDENTITY/RULES for ' + office.agentDir);
     }
     console.log('=== datawake dry-run: ' + rota.length + ' seats, no model call ===');
@@ -2158,8 +2309,10 @@ async function runDatawake() {
             continue;
           }
           cand.statement = statement;
-          // civic.35: facts only — action + numberMoved feed the office wall and desk slices; statement is speech.
-          const bad = ungroundedNumbers(hay, [cand.action, cand.numberMoved], { district: office.district, cycle });
+          // civic.35: facts only — numberMoved feeds the office wall and desk
+          // slices; statement is speech. (civic.38: the free-text action field
+          // is replaced by the closed moves array, gated below.)
+          const bad = ungroundedNumbers(hay, [cand.numberMoved], { district: office.district, cycle });
           if (!bad.length) { j = cand; answeredModel = active; break chainLoop; }
           log(office.agentDir + ' attempt ' + attempt + ': ungrounded number(s) ' + bad.join(', '));
           if (attempt === 2) throw new Error('fabricated statistic(s) after retry: ' + bad.join(', '));
@@ -2167,15 +2320,37 @@ async function runDatawake() {
         }
       }
       if (!j) throw new Error('no result after trying ' + chain.length + ' model(s): ' + chain.join(', '));
+      // civic.38 Task 1 — closed move set. The seat's pack carries its board
+      // (game.boardIds); the move gate grounds work/propose/canvass against it
+      // and the district map. Rejected moves drop with a loud line and still
+      // land on the ledger (the next pack shows the seat what it tried).
+      const mv = validateDatawakeMoves(j.moves, {
+        office,
+        boardIds: new Set((pack.game && pack.game.boardIds) || []),
+        catalog: loadInterventionCatalog(),
+        childToParent: childToParentFromAudit(audit),
+      });
+      for (const rj of mv.rejected) {
+        log('[datawake] MOVE REJECTED ' + office.agentDir + ' — ' + rj.reason + ' :: ' + JSON.stringify(rj.move).slice(0, 160));
+      }
+      if (mv.accepted.length) {
+        log('[datawake] MOVE ' + office.agentDir + ' — ' + mv.accepted[0].type + ' ' + JSON.stringify(mv.accepted[0].payload).slice(0, 120));
+      }
       const rec = {
         office: voiceSlug(office.agentDir), agentDir: office.agentDir, holder: office.holder,
         popid: office.popid, title: office.title, date, cycle: Number(cycle),
         model: answeredModel, statement: j.statement, action: j.action || null,
+        moves: mv.accepted,
+        movesRejected: mv.rejected.map(r => ({ type: (r.move && r.move.type) || null, reason: r.reason })),
         numberMoved: j.numberMoved || null, ranAt: new Date().toISOString(),
         fellBackFrom: answeredModel === (office.model || 'deepseek/deepseek-chat') ? null : office.model,
       };
       const outPath = path.join(DATAWAKE_DIR, office.agentDir + '_' + date + '.json');
       fs.writeFileSync(outPath, JSON.stringify(rec, null, 2));
+      const ledgerFile = appendMoveLedger(ROOT, cycle, moveLedgerLines(office, cycle, date, mv));
+      if (ledgerFile && (mv.accepted.length || mv.rejected.length)) {
+        log('move ledger ← ' + mv.accepted.length + ' accepted / ' + mv.rejected.length + ' rejected (' + path.relative(ROOT, ledgerFile) + ')');
+      }
       await positionWallRecordDatawake(rec);
       results.push({ office: office.agentDir, ok: true, out: path.relative(ROOT, outPath) });
       console.log('  [✓] ' + office.agentDir + ' — "' + String(j.numberMoved || j.statement).slice(0, 80) + '"');
@@ -2291,4 +2466,6 @@ if (require.main === module) {
     .catch(err => { console.error('[civic] Fatal:', err.message); process.exit(1); });
 }
 
-module.exports = { modelChainFor, FALLBACK_MODELS, sentimentWord, crimeWord, retailWord, ailmentPerception, cleanLines, parseApprovalTable, parseHoodTable, outputContract, datawakeUserPrompt, datawakeStatementText, districtPackRef, weekCarryBlock, spliceWeekCarry, loadWeekCarry, hearingHasPhase, noPhaseCheck, prepTargetDirForHood, validateVoiceJson, ungroundedNumbers, statementNumberCheck, composeChecks };
+module.exports = { modelChainFor, FALLBACK_MODELS, sentimentWord, crimeWord, retailWord, ailmentPerception, cleanLines, parseApprovalTable, parseHoodTable, outputContract, datawakeUserPrompt, datawakeStatementText, districtPackRef, weekCarryBlock, spliceWeekCarry, loadWeekCarry, hearingHasPhase, noPhaseCheck, prepTargetDirForHood, validateVoiceJson, ungroundedNumbers, statementNumberCheck, composeChecks,
+  // civic.38 Task 1 — closed move set (exported for scripts/cron-civic-game.test.js)
+  MOVE_TYPES, validateDatawakeMoves, loadInterventionCatalog, hoodAuthorityReason, appendMoveLedger, moveLedgerLines };

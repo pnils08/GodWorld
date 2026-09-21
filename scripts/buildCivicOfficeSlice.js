@@ -16,6 +16,11 @@ const ROOT = path.join(__dirname, '..');
 const CONSTITUENT_CAP = 8;
 const KNOWN_CAP = 20;
 const PLACE_CAP = 8;
+const BLOCK_CAP = 600;   // civic.38 Task 3.5 — same discipline as the civic.37 node builders
+
+// civic.38: a complaint = Tag Civic + negative Affect (plan §Reconciliation,
+// measured 2026-09-20). Same closed affect vocab as compressLifeHistory.js.
+const NEGATIVE_AFFECTS = new Set(['frustrated', 'irritable', 'anxious', 'angry', 'resentful']);
 
 function clip(s, n) {
   const t = String(s || '');
@@ -721,6 +726,312 @@ function loadCascadeVoices(root, initiativeId) {
   return voices;
 }
 
+// ---------------------------------------------------------------------------
+// civic.38 Task 3 — the game blocks. The pack stops being only a speech
+// prompt: the seat sees its board (what it can `work`), its district's
+// petition pool (what it should `answer`/`propose` on), the working city
+// (what the directors said at work), its own last move off the ledger, and
+// any Mara confrontation it owes an `answer` to. Every block degrades to a
+// stated absence — never a fabricated board.
+// ---------------------------------------------------------------------------
+
+function readJsonl(file) {
+  try {
+    return fs.readFileSync(file, 'utf8').split('\n').filter(Boolean)
+      .map(l => { try { return JSON.parse(l); } catch (_) { return null; } })
+      .filter(Boolean);
+  } catch (_) { return null; }   // null = not on disk (distinct from empty)
+}
+
+// Child areas fold to parents (SIM_DOCTRINE §17). The parent links live on
+// Neighborhood_Map.ChildAreas; scripts read them off the engine-audit snapshot
+// dump, never a hard-coded copy.
+function childToParentFromAudit(audit) {
+  const map = {};
+  const rows = (audit && audit.snapshots && audit.snapshots.Neighborhood_Map) || [];
+  for (const r of rows) {
+    const parent = String(r.Neighborhood || '').trim();
+    if (!parent) continue;
+    for (const c of String(r.ChildAreas || '').split(',')) {
+      const t = c.trim();
+      if (t) map[t.toLowerCase()] = parent;
+    }
+  }
+  return map;
+}
+
+function foldHood(name, childToParent) {
+  const n = String(name || '').trim();
+  return (childToParent && childToParent[n.toLowerCase()]) || n;
+}
+
+// Raw tracker rows from the beats dump (all header columns, incl.
+// ProposingOffice which initiative_tracker.json drops).
+function loadTrackerRows(root) {
+  return readJsonl(path.join(root || ROOT, 'output', 'beats', 'Initiative_Tracker.jsonl'));
+}
+
+// What a row needs next. Stage columns arrive with the Task 4 engine cut;
+// until then the text derives from phase/status and says so honestly.
+function boardNeedText(row) {
+  const stage = String(row.Stage || '');
+  if (stage === 'Funded') return 'a work move stands it up';
+  if (stage === 'Standing') return 'work keeps it standing; the domain metric decides Delivering';
+  if (stage === 'Delivering') return 'delivering — hold the metric';
+  const phase = String(row.ImplementationPhase || '');
+  if (phase === 'stalled') return 'stalled — one work move revives it';
+  if (String(row.Status || '') === 'proposed' && !String(row.VoteCycle || '').trim()) {
+    return 'petition-pending — signatures move it to a vote';
+  }
+  return String(row.NextScheduledAction || '').trim() || 'advance or hold';
+}
+
+// My board: rows the seat sponsors (ProposingOffice) plus rows touching its
+// hoods after child→parent fold; the mayor sees all. (Plan Task 3.1 — a
+// sponsor-only board leaves nine seats empty on day one.)
+function boardRowsFor(office, rows, childToParent) {
+  const isMayor = String(office.officeId || '') === 'MAYOR-01';
+  const turf = new Set(turfHoods(office).map(h => String(h).toLowerCase()));
+  const out = [];
+  for (const row of rows || []) {
+    const sponsored = String(row.ProposingOffice || '') !== '' &&
+      String(row.ProposingOffice) === String(office.officeId || '');
+    const hoods = String(row.AffectedNeighborhoods || '').split(',').map(s => s.trim()).filter(Boolean);
+    const hoodHit = hoods.some(h => turf.has(foldHood(h, childToParent).toLowerCase()));
+    if (!isMayor && !sponsored && !hoodHit) continue;
+    out.push({
+      id: row.InitiativeID,
+      name: row.Name,
+      domain: row.PolicyDomain || null,
+      phase: row.ImplementationPhase || null,
+      status: row.Status || null,
+      voteCycle: row.VoteCycle ? Number(row.VoteCycle) : null,
+      stage: row.Stage || null,
+      // stamped by buildGameBlocks (it owns cycle); null until the Task 4
+      // Stage/LastStageChangeCycle columns exist on the tracker.
+      cyclesSinceStageChange: null,
+      lastStageChangeCycle: row.LastStageChangeCycle != null && row.LastStageChangeCycle !== ''
+        ? Number(row.LastStageChangeCycle) : null,
+      sponsored,
+      hoods,
+      needsNext: boardNeedText(row),
+    });
+  }
+  out.sort((a, b) => String(a.id).localeCompare(String(b.id)));
+  return out;
+}
+
+function boardBlock(board) {
+  if (board === null) return 'Board unavailable — no Initiative_Tracker beats dump on disk.';
+  if (!board.length) return 'Your board is empty: no initiative sponsors you or touches your turf.';
+  const lines = board.map(b =>
+    '- ' + b.id + ' ' + b.name + ' [' + (b.phase || '—') + '] — ' + b.needsNext);
+  return clip('Your board:\n' + lines.join('\n'), BLOCK_CAP);
+}
+
+// Task 3.0 — my last move, folded from the append-only move ledger (Task 2
+// step 1): last line per moveId wins. Mechanical continuity; the position
+// wall is context, never proof.
+function loadMovesFolded(root, cycle) {
+  const rows = readJsonl(path.join(root || ROOT, 'output', 'cron-civic', 'moves', 'moves_c' + cycle + '.jsonl'));
+  if (!rows) return null;
+  const byId = new Map();
+  for (const r of rows) {
+    if (r && r.moveId) byId.set(r.moveId, r);
+  }
+  return byId;
+}
+
+function moveSummaryLine(mv) {
+  const p = mv.payload || {};
+  const what = mv.type === 'propose' ? 'propose "' + clip(p.title, 60) + '"'
+    : mv.type === 'work' ? 'work ' + p.initiativeId
+    : mv.type === 'answer' ? 'answer ' + (p.confrontationId || '')
+    : mv.type === 'canvass' ? 'canvass ' + p.hood
+    : String(mv.type || '?');
+  const state = mv.status === 'pending' ? 'awaiting the Sunday fold'
+    : mv.status === 'rejected' ? 'REJECTED — ' + (mv.detail || 'no reason recorded')
+    : mv.status === 'applied' ? 'applied to the tracker'
+    : mv.status === 'failed' ? 'FAILED at the gate — ' + (mv.detail || '')
+    : String(mv.status || '?');
+  return '- ' + what + ': ' + state;
+}
+
+function lastMoveBlock(root, cycle, agentDir) {
+  const folded = loadMovesFolded(root, cycle);
+  if (!folded) return { text: 'No moves on the ledger yet — the week starts clean.', moves: [] };
+  const mine = [...folded.values()].filter(m => m.agentDir === agentDir);
+  if (!mine.length) return { text: 'You have no move on the ledger this cycle yet.', moves: [] };
+  mine.sort((a, b) => String(a.date || '').localeCompare(String(b.date || '')));
+  return { text: clip('Your moves this cycle:\n' + mine.map(moveSummaryLine).join('\n'), BLOCK_CAP), moves: mine };
+}
+
+// Task 3.2 — my district's petition pool. Complaints = Civic-tagged
+// reflections with a negative affect from citizens living in the seat's
+// hoods; constructive Civic rows show apart as participation; office holders'
+// own rows are dropped. Reads the beats Reflection_Intake dump (Task 6 adds
+// it) — absent, the block states the absence.
+function reflectionField(r, names) {
+  for (const n of names) {
+    if (r[n] != null && r[n] !== '') return r[n];
+  }
+  return '';
+}
+
+function loadPetitionPool(root, office, hoods, officeMap, childToParent) {
+  const rows = readJsonl(path.join(root || ROOT, 'output', 'beats', 'Reflection_Intake.jsonl'));
+  if (rows === null) {
+    return { available: false, complaints: [], participation: [],
+      text: 'Petition pool unavailable — Reflection_Intake is not in the beats dump yet (Task 6).' };
+  }
+  const officePopids = new Set([...(officeMap.offices || []), ...(officeMap.projects || [])]
+    .map(o => String(o.popid || '').toUpperCase()).filter(Boolean));
+  const turf = new Set((hoods || []).map(h => String(h).toLowerCase()));
+  const inTurf = new Set();
+  if (turf.size) {
+    for (const c of loadConstituents(root, hoods, 0)) {
+      inTurf.add(String(c.pop || '').toUpperCase());
+    }
+  }
+  const complaints = [];
+  const participation = [];
+  for (const r of rows) {
+    const tag = String(reflectionField(r, ['Event', 'Tag', 'event'])).trim();
+    if (tag !== 'Civic') continue;
+    const pop = String(reflectionField(r, ['POPID', 'PopId', 'popid'])).toUpperCase();
+    if (!pop || officePopids.has(pop)) continue;
+    if (turf.size && !inTurf.has(pop)) continue;
+    const affect = String(reflectionField(r, ['Affect', 'affect'])).trim();
+    const entry = {
+      cycle: reflectionField(r, ['Cycle', 'cycle']),
+      hood: foldHood(reflectionField(r, ['Neighborhood', 'hood']), childToParent) || null,
+      snippet: clip(reflectionField(r, ['Snippet', 'Text', 'snippet']), 90),
+      affect,
+    };
+    if (NEGATIVE_AFFECTS.has(affect.toLowerCase())) complaints.push(entry);
+    else participation.push(entry);
+  }
+  complaints.sort((a, b) => Number(b.cycle) - Number(a.cycle));
+  const bits = [];
+  if (complaints.length) {
+    bits.push('People are talking (' + complaints.length + ' complaint' + (complaints.length === 1 ? '' : 's') + '):');
+    bits.push(...complaints.slice(0, 6).map(c => '- ' + c.snippet + (c.hood ? ' (' + c.hood + ', C' + c.cycle + ')' : ' (C' + c.cycle + ')')));
+  } else {
+    bits.push('No Civic complaints from your turf on the record.');
+  }
+  if (participation.length) {
+    bits.push('Constructive civic participation (not complaints): ' + participation.length + '.');
+  }
+  return { available: true, complaints, participation, text: clip(bits.join('\n'), BLOCK_CAP) };
+}
+
+// Task 3.3 — the working city: latest work-wake reflections from chiefs and
+// project directors, off the same beats dump (disk-first; the intake row IS
+// the work-wake's reflection record).
+function loadWorkingCity(root, cycle, officeMap) {
+  const rows = readJsonl(path.join(root || ROOT, 'output', 'beats', 'Reflection_Intake.jsonl'));
+  if (rows === null) {
+    return { available: false, text: 'No work-wake reflections on disk yet (Reflection_Intake beats dump lands with Task 6).' };
+  }
+  const staffPopids = new Map();
+  for (const o of [...(officeMap.projects || []), ...(officeMap.offices || [])]) {
+    const id = String(o.officeId || o.projectId || '');
+    if (o.projectId || /^CHIEF-/.test(id)) {
+      const pop = String(o.popid || '').toUpperCase();
+      if (pop) staffPopids.set(pop, o.holder);
+    }
+  }
+  const mine = rows.filter(r =>
+    String(reflectionField(r, ['Daypart', 'daypart', 'Wake', 'wake'])).toLowerCase() === 'work' &&
+    staffPopids.has(String(reflectionField(r, ['POPID', 'PopId', 'popid'])).toUpperCase())
+  );
+  if (!mine.length) return { available: true, text: 'No work reflections from the directors or chiefs on the record.' };
+  mine.sort((a, b) => Number(reflectionField(b, ['Cycle', 'cycle'])) - Number(reflectionField(a, ['Cycle', 'cycle'])));
+  const lines = mine.slice(0, 4).map(r =>
+    '- ' + staffPopids.get(String(reflectionField(r, ['POPID', 'PopId', 'popid'])).toUpperCase()) +
+    ': ' + clip(reflectionField(r, ['Snippet', 'Text', 'snippet']), 110) + ' (C' + reflectionField(r, ['Cycle', 'cycle']) + ')');
+  return { available: true, text: clip('The working city:\n' + lines.join('\n'), BLOCK_CAP) };
+}
+
+// Task 3.4 — confrontation: when the Sunday directive named this seat, the
+// pack carries the demand verbatim and an `answer` move is expected.
+function loadConfrontation(root, cycle, agentDir) {
+  let file = null;
+  const exact = path.join(root || ROOT, 'output', 'mara-directives', 'mara_directive_c' + cycle + '_AUTO.txt');
+  if (fs.existsSync(exact)) {
+    file = exact;
+  } else {
+    try {
+      const maraDir = path.join(root || ROOT, 'output', 'mara-directives');
+      const files = fs.readdirSync(maraDir)
+        .filter(f => /^mara_directive_c\d+_AUTO\.txt$/.test(f))
+        .map(f => ({ f, c: Number((f.match(/\d+/) || [0])[0]) }))
+        .filter(x => x.c <= Number(cycle))
+        .sort((a, b) => b.c - a.c);
+      if (files.length) file = path.join(maraDir, files[0].f);
+    } catch (_) { /* no directive dir */ }
+  }
+  if (!file) return null;
+  const md = fs.readFileSync(file, 'utf8');
+  const blocks = md.split(/\n(?=## )/).filter(p => /^## /.test(p));
+  const needle = '.claude/agents/' + agentDir + '/';
+  for (const b of blocks) {
+    if (!b.includes(needle)) continue;
+    const address = (b.match(/\*\*Address:\*\*\s*(.+)/) || [])[1] || '';
+    return {
+      id: 'CONF-' + (file.match(/c(\d+)_/) || [0, cycle])[1] + '-' + agentDir,
+      demand: clip((b.split('\n')[0] || '').replace(/^## /, '') + ' — ' + address.trim(), BLOCK_CAP),
+      src: path.relative(root || ROOT, file).replace(/\\/g, '/'),
+      expectsMove: 'answer',
+    };
+  }
+  return null;
+}
+
+// Task 1/4 step 0 — the intervention catalog (engine-sheet's file). The pack
+// shows playable keys so a seat can actually name one; absent, propose moves
+// are refused at the gate (catalog-not-landed) and the pack says why.
+function loadInterventionMenu() {
+  let catalog = null;
+  try {
+    const c = require('../lib/initiativePhaseContract').INTERVENTION_CATALOG;
+    if (c && typeof c === 'object' && Object.keys(c).length) catalog = c;
+  } catch (_) { /* not landed */ }
+  if (!catalog) {
+    return { available: false, text: 'No intervention catalog on disk yet (Task 4 step 0) — propose moves cannot be validated and will be refused.' };
+  }
+  const playable = Object.entries(catalog)
+    .filter(([, v]) => v && v.playable !== false)
+    .map(([k, v]) => ({ key: k, domain: v.policyDomain || null, label: v.label || null }));
+  return { available: true, playable,
+    text: 'Interventions you may propose (closed catalog):\n' +
+      playable.map(p => '- ' + p.key + ' (' + (p.domain || '?') + (p.label ? ') — ' + p.label : ')')).join('\n') };
+}
+
+function buildGameBlocks(opts) {
+  const { root, cycle, office, officeMap, hoods, audit } = opts;
+  const c2p = childToParentFromAudit(audit);
+  const rows = loadTrackerRows(root);
+  const board = rows === null ? null : boardRowsFor(office, rows, c2p);
+  for (const b of board || []) {
+    b.cyclesSinceStageChange = b.lastStageChangeCycle != null && cycle !== ''
+      ? Math.max(0, Number(cycle) - b.lastStageChangeCycle)
+      : null;
+  }
+  const game = {
+    lastMove: lastMoveBlock(root, cycle, office.agentDir),
+    board: board || [],
+    boardIds: (board || []).map(b => b.id),
+    boardText: boardBlock(board),
+    interventions: loadInterventionMenu(),
+    petitionPool: loadPetitionPool(root, office, hoods, officeMap, c2p),
+    workingCity: loadWorkingCity(root, cycle, officeMap),
+  };
+  const conf = loadConfrontation(root, cycle, office.agentDir);
+  if (conf) game.confrontation = conf;
+  return game;
+}
+
 function buildPack(opts) {
   const root = opts.root || ROOT;
   const cycle = String(opts.cycle || '');
@@ -769,6 +1080,10 @@ function buildPack(opts) {
   const taskName = kind === 'district' ? 'district-week' : kind === 'initiative' ? 'initiative-week' : 'role-week';
   const sources = kind === 'initiative' && !turn.empty ? loadCascadeVoices(root, office.initiative) : [];
 
+  // civic.38 Task 3 — board / petition pool / working city / last move /
+  // confrontation. boardIds feed the datawake move gate (Task 1 step 2).
+  const game = buildGameBlocks({ root, cycle, office, officeMap, hoods, audit });
+
   return {
     v: 'OFFICE/1',
     team: 'civic-office',
@@ -790,6 +1105,7 @@ function buildPack(opts) {
     },
     pulse: turn.pulse,
     prewrite: turn.prewrite,
+    game,
     signal: {
       kind: kind === 'district' ? 'district-heat' : kind === 'initiative' ? 'initiative-heat' : 'role-heat',
       hoods,
@@ -854,6 +1170,10 @@ module.exports = {
   buildPack, resolveOffice, turfHoods, loadConstituents, loadProjects, loadTurfLife,
   loadCabinet, loadInitRows, seatKind, pickTurn, scoreHoods, loadFactionPeers,
   clip, writePack, CONSTITUENT_CAP,
+  // civic.38 Task 3 game blocks
+  buildGameBlocks, boardRowsFor, boardNeedText, childToParentFromAudit, foldHood,
+  loadMovesFolded, loadPetitionPool, loadWorkingCity, loadConfrontation,
+  loadInterventionMenu, readJsonl, NEGATIVE_AFFECTS, BLOCK_CAP,
 };
 
 if (require.main === module) {

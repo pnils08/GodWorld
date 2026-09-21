@@ -143,6 +143,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | engine.248 | Faith orgs get a sim role (builder-direct): OWN SESSION opens as review, inventory each faith surface and its readers, then design | needs-info | engine-sheet (sim judgement — builder included) | [[../research/2026-09-10-kimi-faith-lane-routing]]; gap log C108 G-EC55; `docs/canon/INSTITUTIONS.md` §Canon substitution table |
 | engine.249 | Hood demographics take the whole migration in 22 equal shares (RULED items 1-3): fix through sim causes (§16 drift), NO rebase in any wrapper | ready | engine-sheet | [[../plans/2026-08-30-hood-identity-remainder-plan]]; gap log C108 G-EC62 |
 | engine.250 | Both hood effect buses live; stall drain ruled half weight (`bizInitiativeStallDrag` 0.5); PROD @108 = clasp v95, read back | done-pending-archive | engine-sheet | [[../reference/DEPLOY_HISTORY]] §PROD @106–@108 |
+| engine.251 | Housing lever: tenant rent relief carried on the initiative bus into the Household_Ledger writer; after civic.38 Task 4 step 1; wiring card + pre-mortem before the cut | blocked | engine-sheet | [[../plans/2026-09-20-housing-lever]] |
 | engine.236 | `Civic_Ledger` tab has no writer: SHEETS_MANIFEST names it the factions tab, but updateCivicLedgerFactions.js writes Faction/VotingPower onto Civic_Office_Ledger. Fix the manifest; keeping or removing the empty tab is the builder's go. | ready | engine-sheet | [[../research/2026-09-15-kimi-civic-lane]] |
 
 ### canon.* — World-fidelity layer

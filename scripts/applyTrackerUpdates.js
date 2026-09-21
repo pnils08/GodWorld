@@ -105,13 +105,20 @@ const APPLY = process.argv.includes('--apply');
 // Write-surface allowlist — the ONLY Initiative_Tracker columns the gate may
 // write. Enforced in normalizeTrackerWrite.setField (defense: a field outside
 // this list throws rather than silently writing). VoteCycle added S265 for the
-// G-PREP1 vote-scheduled stamp.
+// G-PREP1 vote-scheduled stamp. civic.38 Task 2 step 3: LastWorkCycle +
+// LastWorkSeat (the fold's work-move fields; columns arrive with Task 4's
+// schema cut — until then normalize warns and skips) and Status under a
+// transition table with exactly one legal edge (proposed → pending-vote,
+// refused unless the same write stamps VoteCycle).
 const WRITEBACK_FIELDS = [
   'ImplementationPhase',
   'MilestoneNotes',
   'NextScheduledAction',
   'NextActionCycle',
-  'VoteCycle'
+  'VoteCycle',
+  'LastWorkCycle',
+  'LastWorkSeat',
+  'Status'
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -206,6 +213,39 @@ function normalizeTrackerWrite(trackerUpdates, currentRow, cycle) {
     if (updates.NextActionCycle === undefined && tu.NextActionCycle === undefined) setField('NextActionCycle', cycle + 1);
   }
 
+  // civic.38 Task 2 step 3 — the fold's work-move fields. Both columns arrive
+  // with Task 4's schema cut; until the sheet carries them, warn and skip
+  // (writing a column the sheet doesn't have would fail at updateRowFields).
+  ['LastWorkCycle', 'LastWorkSeat'].forEach((field) => {
+    if (tu[field] === undefined) return;
+    if (!(field in cur)) {
+      warnings.push(field + ' emitted but the tracker has no ' + field + ' column yet (Task 4 schema cut) — NOT written.');
+      return;
+    }
+    if (field === 'LastWorkCycle') {
+      const n = parseInt(tu[field], 10);
+      if (!Number.isFinite(n) || n < 1) { warnings.push(`LastWorkCycle "${tu[field]}" not a positive cycle int — NOT written.`); return; }
+      setField(field, n);
+      return;
+    }
+    setField(field, tu[field]);
+  });
+
+  // civic.38 Task 2 step 3 — Status under a transition table with exactly one
+  // legal edge: proposed → pending-vote, and only in the same write that
+  // stamps VoteCycle (Task 2 step 5: the petition counter's gated write — the
+  // seat never schedules its own vote). Anything else is refused loudly.
+  if (tu.Status != null && String(tu.Status).trim() !== '') {
+    const from = String(cur.Status || '').trim();
+    const to = String(tu.Status).trim();
+    const stampsVote = updates.VoteCycle !== undefined;
+    if (from === 'proposed' && to === 'pending-vote' && stampsVote) {
+      setField('Status', 'pending-vote');
+    } else {
+      warnings.push(`Status transition "${from}" → "${to}" REFUSED — the only legal edge is proposed → pending-vote in the same write that stamps VoteCycle.`);
+    }
+  }
+
   // G-PREP2 — any write must leave NextActionCycle forward, never stale.
   // Same rule as above: a touched row whose clock reads THIS cycle is silence
   // at the next fire, so it advances too.
@@ -239,6 +279,7 @@ function findDecisionFiles(cycle) {
   if (!fs.existsSync(DECISIONS_DIR)) return files;
 
   const agents = fs.readdirSync(DECISIONS_DIR).filter(d =>
+    d !== '_candidates' &&   // civic.38 Task 2 — candidate rows are their own channel, never a decisions envelope
     fs.statSync(path.join(DECISIONS_DIR, d)).isDirectory()
   );
 
@@ -435,11 +476,21 @@ async function main() {
   const decisions = findDecisionFiles(CYCLE);
 
   if (decisions.length === 0) {
-    // Try previous cycle if current has none
+    // Try previous cycle if current has none. civic.38 Task 2 step 3: the
+    // fallback never replays fold-produced fields — a work move is a one-time
+    // action, not a standing decision, so LastWorkCycle/LastWorkSeat are
+    // stripped from any carried-forward file.
     const prevDecisions = findDecisionFiles(CYCLE - 1);
-    if (prevDecisions.length > 0) {
-      console.log(`No decisions for C${CYCLE}. Found ${prevDecisions.length} from C${CYCLE - 1}.`);
-      decisions.push(...prevDecisions);
+    for (const p of prevDecisions) {
+      if (p.trackerUpdates) {
+        delete p.trackerUpdates.LastWorkCycle;
+        delete p.trackerUpdates.LastWorkSeat;
+      }
+    }
+    const usable = prevDecisions.filter(p => p.trackerUpdates && Object.keys(p.trackerUpdates).length > 0);
+    if (usable.length > 0) {
+      console.log(`No decisions for C${CYCLE}. Found ${usable.length} from C${CYCLE - 1} (fold fields stripped).`);
+      decisions.push(...usable);
     } else {
       console.log('No decision files with trackerUpdates found.');
       process.exit(0);
@@ -461,6 +512,11 @@ async function main() {
 
   let updatedCount = 0;
   let skippedCount = 0;
+  // civic.38 Task 2 step 3 — per-row write outcomes feed the move ledger
+  // (applied / failed) after --apply. 'current' (no changes needed) counts as
+  // applied: the fold is idempotent and a chain re-run must not flip a move
+  // to failed.
+  const writeOutcome = {};
 
   for (const dec of decisions) {
     console.log(`--- ${dec.agent} (${dec.initiativeId}) ---`);
@@ -503,6 +559,7 @@ async function main() {
 
     if (rowIndex === -1) {
       console.log(`  SKIP: No matching row for ${dec.initiativeId} in ${SHEET_NAME}`);
+      writeOutcome[dec.initiativeId] = 'no matching tracker row';
       skippedCount++;
       continue;
     }
@@ -527,6 +584,7 @@ async function main() {
 
     if (Object.keys(updates).length === 0) {
       console.log('  No changes needed (already current)');
+      writeOutcome[dec.initiativeId] = true;
       skippedCount++;
       continue;
     }
@@ -535,20 +593,145 @@ async function main() {
       try {
         await sheets.updateRowFields(SHEET_NAME, sheetRow, updates);
         console.log(`  WRITTEN to row ${sheetRow} (${Object.keys(updates).length} fields)`);
+        writeOutcome[dec.initiativeId] = true;
         updatedCount++;
       } catch (e) {
         console.error(`  ERROR writing row ${sheetRow}: ${e.message}`);
+        writeOutcome[dec.initiativeId] = e.message;
       }
     } else {
       console.log(`  WOULD WRITE to row ${sheetRow} (${Object.keys(updates).length} fields)`);
+      writeOutcome[dec.initiativeId] = true;
       updatedCount++;
     }
     console.log('');
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
+  // civic.38 Task 2 step 4 — CANDIDATE ROWS. `propose` moves folded Sunday
+  // become full tracker rows via createInitiative (Status=proposed, blank
+  // VoteCycle, opening phase per the contract's lifecycle arc). Dry-run prints
+  // the would-be rows; append only under --apply after the same clerk verdict
+  // + gate as any other write. Retry identity: a candidate whose
+  // ProposingOffice + ProposedCycle + normalized Name already exists is
+  // skipped, so a chain re-run appends nothing.
+  // ═══════════════════════════════════════════════════════════════════════════
+  const CANDIDATES_FILE = path.join(DECISIONS_DIR, '_candidates', `candidates_c${CYCLE}.json`);
+  const candidateOutcome = {};
+  const candDoc = fs.existsSync(CANDIDATES_FILE)
+    ? JSON.parse(fs.readFileSync(CANDIDATES_FILE, 'utf8'))
+    : null;
+  const candList = candDoc && candDoc.candidates ? Object.values(candDoc.candidates) : [];
+  if (candList.length) {
+    console.log(`\n=== Candidate rows (civic.38 propose moves) — ${candList.length} on file ===\n`);
+    const createInit = require('./createInitiative');
+    const slice = require('./buildCivicOfficeSlice');
+    let catalog = null;
+    try {
+      const c = require('../lib/initiativePhaseContract').INTERVENTION_CATALOG;
+      if (c && typeof c === 'object' && Object.keys(c).length) catalog = c;
+    } catch (_) { /* Task 4 step 0 not landed */ }
+    const seats = createInit.loadOfficeSeats();
+    let auditForFold = null;
+    try { auditForFold = JSON.parse(fs.readFileSync(path.join(ROOT, 'output', 'engine_audit_c' + CYCLE + '.json'), 'utf8')); } catch (_) { /* no audit on disk */ }
+    const c2p = slice.childToParentFromAudit(auditForFold);
+    const normName = s => String(s || '').trim().toLowerCase().replace(/\s+/g, ' ');
+    const existingKeys = new Set(trackerRows.map(r =>
+      [String(r.ProposingOffice || ''), String(r.ProposedCycle || ''), normName(r.Name)].join('|')));
+    const appendedRows = [];
+    let headers = null;
+    if (APPLY) {
+      const raw = await sheets.getRawSheetData(SHEET_NAME);
+      headers = raw && raw[0] ? raw[0].map(h => String(h).trim()) : null;
+      if (!headers || !headers.length) {
+        console.error('  ERROR: could not read tracker header row — candidates NOT appended.');
+      }
+    }
+    for (const cand of candList) {
+      const moveId = cand.moveId || '?';
+      if (cand.status && cand.status !== 'pending') { console.log(`  SKIP ${moveId}: status ${cand.status}`); continue; }
+      if (!catalog) {
+        console.log(`  REFUSED ${moveId}: intervention catalog not landed (lib/initiativePhaseContract.js INTERVENTION_CATALOG — Task 4 step 0)`);
+        candidateOutcome[moveId] = 'catalog-not-landed';
+        continue;
+      }
+      const entry = catalog[cand.intervention];
+      if (!entry || entry.playable === false) {
+        console.log(`  REFUSED ${moveId}: intervention "${cand.intervention}" unknown or not playable`);
+        candidateOutcome[moveId] = 'unknown-or-unplayable-intervention';
+        continue;
+      }
+      const hoodsFolded = [...new Set((cand.hoods || []).map(h => slice.foldHood(h, c2p)))];
+      const spec = {
+        name: cand.title,
+        type: entry.type || 'vote',
+        policyDomain: entry.policyDomain,
+        affectedNeighborhoods: hoodsFolded.join(', '),
+        proposedCycle: CYCLE,
+        proposingOffice: cand.proposingOffice,
+        notes: String(cand.problem || '').slice(0, 200),
+      };
+      const key = [String(cand.proposingOffice || ''), String(CYCLE), normName(cand.title)].join('|');
+      if (existingKeys.has(key)) {
+        console.log(`  SKIP ${moveId}: "${cand.title}" already on the tracker for ${cand.proposingOffice} C${CYCLE} (retry identity — nothing appended)`);
+        candidateOutcome[moveId] = true;
+        continue;
+      }
+      try {
+        const built = createInit.createInitiative({
+          headers: headers || createInit.TRACKER_HEADERS_31,
+          rows: trackerRows.concat(appendedRows), seats, spec,
+        });
+        console.log(`  ${APPLY ? 'APPEND' : 'WOULD APPEND'} ${built.row.InitiativeID} "${built.row.Name}" [${built.row.Type}/${built.row.PolicyDomain}] ${built.row.AffectedNeighborhoods} — ${built.row.ProposingOffice}, phase ${built.row.ImplementationPhase}, Status proposed`);
+        if (APPLY && headers) {
+          await sheets.appendRows(SHEET_NAME, [built.values]);
+          console.log(`  APPENDED to ${SHEET_NAME}`);
+          appendedRows.push(built.row);
+          existingKeys.add(key);
+        }
+        candidateOutcome[moveId] = true;
+      } catch (e) {
+        console.error(`  REFUSED ${moveId}: ${e.message}`);
+        candidateOutcome[moveId] = e.message;
+      }
+    }
+  }
+
+  // civic.38 Task 2 step 3 — post-apply move-ledger outcomes. Append-only:
+  // each move's result is a NEW line for its moveId (a reader folds
+  // last-line-wins). APPLY only — a dry run posts nothing.
+  if (APPLY) {
+    const manifestPath = path.join(ROOT, 'output', 'cron-civic', 'moves', `fold_c${CYCLE}.json`);
+    if (fs.existsSync(manifestPath)) {
+      const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+      const at = new Date().toISOString();
+      const lines = [];
+      for (const [initId, moveIds] of Object.entries(manifest.work || {})) {
+        const ok = writeOutcome[initId];
+        for (const id of moveIds) {
+          lines.push({ moveId: id, cycle: CYCLE, status: ok === true ? 'applied' : 'failed',
+            detail: ok === true ? `LastWorkCycle/LastWorkSeat written for ${initId}` : 'write failed: ' + (ok || 'row not processed'), at });
+        }
+      }
+      for (const id of manifest.candidates || []) {
+        const ok = candidateOutcome[id];
+        if (ok === undefined) continue;
+        lines.push({ moveId: id, cycle: CYCLE, status: ok === true ? 'applied' : 'failed',
+          detail: ok === true ? 'candidate row appended to Initiative_Tracker' : String(ok), at });
+      }
+      if (lines.length) {
+        const ledgerFile = path.join(ROOT, 'output', 'cron-civic', 'moves', `moves_c${CYCLE}.jsonl`);
+        fs.mkdirSync(path.dirname(ledgerFile), { recursive: true });
+        fs.appendFileSync(ledgerFile, lines.map(l => JSON.stringify(l)).join('\n') + '\n');
+        console.log(`\nMove ledger: ${lines.filter(l => l.status === 'applied').length} applied / ${lines.filter(l => l.status === 'failed').length} failed → ${path.relative(ROOT, ledgerFile)}`);
+      }
+    }
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════════
   // CIVIC VOICE SENTIMENT — aggregate across the whole cascade (S137b; G-R3 S246)
   // ═══════════════════════════════════════════════════════════════════════════
+
   // G-R3 (S246 ES-5): pre-fix sentiment scored only the `decisions` that hit the
   // tracker-write path (C95: 2 of 4, because (a) it iterated decisions not the
   // cascade and (b) brittle substring matching missed phase variants like

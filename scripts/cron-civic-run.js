@@ -1694,6 +1694,12 @@ async function runClose() {
   // Clerk verification — headless call on the STAFF model (deepseek per Task 1.2).
   const clerkModel = arg('--clerk-model', 'deepseek/deepseek-chat');
   const clerkPersona = readPersonaDir('city-clerk');
+  // civic.38 Task 2 step 4 — the clerk sees this week's candidate proposals
+  // (pending `propose` moves off the move ledger) alongside the voice outputs.
+  const foldedMoves = loadMoveLedgerFolded(ROOT, cycle);
+  const clerkCandidates = foldedMoves
+    ? [...foldedMoves.values()].filter(m => m.status === 'pending' && m.type === 'propose')
+    : [];
   const clerkUser = [
     'Cycle ' + cycle + ' civic outputs for verification. For each check answer pass/fail with one line of evidence.',
     'Checks: (1) every expected office produced statements; (2) no single office contradicts ITSELF within its own statements; (3) tracker updates use only contract phases; (4) statements read as in-world civic voice (no engine/system language).',
@@ -1703,6 +1709,11 @@ async function runClose() {
       const j = voiceJsons[s];
       return '## ' + s + '\n' + (j.statements || []).map(st => '- ' + (st.decision || '') + ' | trackerUpdates: ' + JSON.stringify(st.trackerUpdates || {})).join('\n');
     }),
+    '',
+    '## Candidate initiatives proposed by council seats this week (' + clerkCandidates.length + ')',
+    ...(clerkCandidates.length
+      ? clerkCandidates.map(m => '- ' + m.moveId + ' (' + m.agentDir + '): "' + ((m.payload || {}).title || '') + '" — ' + String((m.payload || {}).problem || '').slice(0, 200) + ' | hoods: ' + (((m.payload || {}).hoods) || []).join(', ') + ' | intervention: ' + ((m.payload || {}).intervention || '?'))
+      : ['(none — no pending propose moves on the ledger)']),
     '',
     'Respond with ONLY JSON: {"cycle": ' + cycle + ', "checks": [{"check": "<name>", "pass": true|false, "evidence": "<one line>"}], "overall": "pass"|"fail", "issues": ["..."]}',
   ].join('\n');
@@ -1743,6 +1754,13 @@ async function runClose() {
     }
   }
   if (normalized) log('milestone notes normalized to primary voice: ' + normalized + ' decisions file(s)');
+
+  // civic.38 Task 2 step 2 — Sunday fold: the week's pending moves become
+  // tracker fields (work) and a candidate-row set (propose) BEFORE the
+  // dry-run, so the gate + clerk + normalizeTrackerWrite see everything.
+  const officeMapForFold = readJson(path.join(ROOT, 'scripts', 'civic-office-map.json')) || { offices: [], projects: [] };
+  foldMovesIntoDecisions(ROOT, cycle, officeMapForFold);
+
   let dryOut = '';
   try {
     dryOut = execFileSync('node', [path.join(ROOT, 'scripts', 'applyTrackerUpdates.js'), String(cycle)], { cwd: ROOT, encoding: 'utf8', timeout: 300000 });
@@ -2127,6 +2145,142 @@ function moveLedgerLines(office, cycle, date, mv) {
   return lines;
 }
 
+// ---------------------------------------------------------------------------
+// civic.38 Task 2 — the Sunday fold. The decisions envelope cannot carry a
+// week of moves (one initiative + one flat trackerUpdates per file, rewritten
+// every Sunday — review F2), so moves ride their own ledger and the fold
+// turns the closing cycle's PENDING moves into per-initiative tracker fields
+// plus a candidate-row set, handing both to the existing gate + clerk +
+// normalizeTrackerWrite path. Idempotent: values are set absolute, never
+// appended, so a chain re-run folds to byte-identical files.
+// ---------------------------------------------------------------------------
+
+function loadMoveLedgerFolded(root, cycle) {
+  const file = path.join(root, 'output', 'cron-civic', 'moves', 'moves_c' + cycle + '.jsonl');
+  if (!fs.existsSync(file)) return null;
+  const byId = new Map();
+  for (const line of fs.readFileSync(file, 'utf8').split('\n')) {
+    if (!line.trim()) continue;
+    let m; try { m = JSON.parse(line); } catch (_) { continue; }
+    if (m && m.moveId) byId.set(m.moveId, m);   // last line wins
+  }
+  return byId;
+}
+
+// initiative → decisions-dir slug. The static map lives in
+// assembleDecisions.js:52 (INIT_TO_SLUG, not exported — not my file); the
+// fold derives it from the existing decisions files themselves and falls back
+// to the same slug transform assemble uses (assembleDecisions.js:322).
+function slugForInitiative(decisionsDir, initId) {
+  if (fs.existsSync(decisionsDir)) {
+    const dirs = fs.readdirSync(decisionsDir).filter(d => {
+      try { return fs.statSync(path.join(decisionsDir, d)).isDirectory() && d !== '_candidates'; } catch (_) { return false; }
+    });
+    let best = null;
+    for (const d of dirs) {
+      const files = fs.readdirSync(path.join(decisionsDir, d))
+        .filter(f => /^decisions_c\d+\.json$/i.test(f))
+        .sort((a, b) => Number((b.match(/\d+/) || [0])[0]) - Number((a.match(/\d+/) || [0])[0]));
+      for (const f of files) {
+        const j = readJson(path.join(decisionsDir, d, f));
+        if (j && (j.initiativeId === initId || j.initiative === initId)) { best = d; break; }
+      }
+      if (best) break;
+    }
+    if (best) return best;
+  }
+  return String(initId).toLowerCase().replace(/[^a-z0-9]+/g, '-');
+}
+
+// Fold one closing cycle. Returns { workMoves, workInitiatives, candidates,
+// files } and writes: merged decisions files (work) + _candidates file
+// (propose) + a fold manifest the apply step reads to post ledger outcomes.
+function foldMovesIntoDecisions(root, cycle, officeMap) {
+  const folded = loadMoveLedgerFolded(root, cycle);
+  const manifestPath = path.join(root, 'output', 'cron-civic', 'moves', 'fold_c' + cycle + '.json');
+  if (!folded) {
+    log('move fold: no ledger for c' + cycle + ' — nothing to fold');
+    return { workMoves: 0, workInitiatives: 0, candidates: 0, files: [] };
+  }
+  const pending = [...folded.values()].filter(m => m.status === 'pending');
+  const works = pending.filter(m => m.type === 'work' && m.payload && m.payload.initiativeId);
+  const proposes = pending.filter(m => m.type === 'propose');
+  const out = { workMoves: works.length, workInitiatives: 0, candidates: proposes.length, files: [] };
+
+  const decisionsDir = path.join(root, 'output', 'city-civic-database', 'initiatives');
+  const byInit = new Map();
+  for (const w of works) {
+    const id = w.payload.initiativeId;
+    if (!byInit.has(id)) byInit.set(id, []);
+    byInit.get(id).push(w);
+  }
+  for (const [initId, list] of byInit) {
+    const seats = [...new Set(list.map(m => m.agentDir))].sort();
+    const slug = slugForInitiative(decisionsDir, initId);
+    const dir = path.join(decisionsDir, slug);
+    const file = path.join(dir, 'decisions_c' + cycle + '.json');
+    let d = readJson(file);
+    if (!d) {
+      d = { initiative: initId, initiativeId: initId, cycle: Number(cycle),
+        primaryVoice: 'move-fold', consolidatedFrom: [], trackerUpdates: {} };
+    }
+    d.trackerUpdates = d.trackerUpdates || {};
+    // The fold owns these two fields; every other field belongs to the voice
+    // that wrote the file and is left untouched (mechanism decision 1/2).
+    d.trackerUpdates.LastWorkCycle = Number(cycle);
+    d.trackerUpdates.LastWorkSeat = seats.join(', ');
+    // No timestamp here: the fold must be byte-idempotent (plan Task 2 verify:
+    // "fold twice → identical decisions + candidates files"). The ledger lines
+    // already carry their own `at`.
+    d._moveFold = { moveIds: list.map(m => m.moveId).sort() };
+    fs.mkdirSync(dir, { recursive: true });
+    fs.writeFileSync(file, JSON.stringify(d, null, 2) + '\n');
+    out.files.push(path.relative(root, file));
+    out.workInitiatives++;
+  }
+
+  if (proposes.length) {
+    const officeByDir = {};
+    for (const o of [...(officeMap.offices || []), ...(officeMap.projects || [])]) {
+      if (o.agentDir) officeByDir[o.agentDir] = o;
+    }
+    const candidates = {};
+    for (const p of proposes) {
+      const seat = officeByDir[p.agentDir] || {};
+      candidates[p.moveId] = {
+        moveId: p.moveId, cycle: Number(cycle), date: p.date,
+        agentDir: p.agentDir, popid: p.popid || seat.popid || null,
+        proposingOffice: seat.officeId || seat.projectId || null,
+        title: p.payload.title, intervention: p.payload.intervention,
+        hoods: p.payload.hoods, problem: p.payload.problem,
+        status: 'pending',
+      };
+    }
+    const candDir = path.join(decisionsDir, '_candidates');
+    fs.mkdirSync(candDir, { recursive: true });
+    const candFile = path.join(candDir, 'candidates_c' + cycle + '.json');
+    // keyed by moveId — a re-run replaces the file, never appends
+    fs.writeFileSync(candFile, JSON.stringify({ cycle: Number(cycle), candidates }, null, 2) + '\n');
+    out.files.push(path.relative(root, candFile));
+  } else {
+    // no proposals this week — a stale candidates file from a prior fold of
+    // THIS cycle must not survive a re-run
+    const candFile = path.join(decisionsDir, '_candidates', 'candidates_c' + cycle + '.json');
+    if (fs.existsSync(candFile)) { fs.unlinkSync(candFile); log('move fold: removed stale candidates file (no pending proposes)'); }
+  }
+
+  fs.writeFileSync(manifestPath, JSON.stringify({
+    cycle: Number(cycle),
+    work: Object.fromEntries([...byInit].map(([id, list]) => [id, list.map(m => m.moveId)])),
+    candidates: proposes.map(p => p.moveId),
+    foldedAt: new Date().toISOString(),
+  }, null, 2) + '\n');
+  log('move fold: ' + out.workMoves + ' work move(s) across ' + out.workInitiatives +
+    ' initiative(s), ' + out.candidates + ' candidate(s)' +
+    (out.files.length ? ' → ' + out.files.join(', ') : ''));
+  return out;
+}
+
 // Numeric grounding: every digit-token in a datawake's output must appear in
 // the office's own data slice (commas stripped). Worded quantities ("seven
 // neighborhoods") pass; invented statistics ("renewals up 8%") don't — this
@@ -2468,4 +2622,6 @@ if (require.main === module) {
 
 module.exports = { modelChainFor, FALLBACK_MODELS, sentimentWord, crimeWord, retailWord, ailmentPerception, cleanLines, parseApprovalTable, parseHoodTable, outputContract, datawakeUserPrompt, datawakeStatementText, districtPackRef, weekCarryBlock, spliceWeekCarry, loadWeekCarry, hearingHasPhase, noPhaseCheck, prepTargetDirForHood, validateVoiceJson, ungroundedNumbers, statementNumberCheck, composeChecks,
   // civic.38 Task 1 — closed move set (exported for scripts/cron-civic-game.test.js)
-  MOVE_TYPES, validateDatawakeMoves, loadInterventionCatalog, hoodAuthorityReason, appendMoveLedger, moveLedgerLines };
+  MOVE_TYPES, validateDatawakeMoves, loadInterventionCatalog, hoodAuthorityReason, appendMoveLedger, moveLedgerLines,
+  // civic.38 Task 2 — move ledger fold (Sunday close)
+  loadMoveLedgerFolded, foldMovesIntoDecisions, slugForInitiative };

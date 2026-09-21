@@ -194,6 +194,9 @@ function stageDecisions(cycle) {
     const f = path.join(src, slug, 'decisions_c' + cycle + '.json');
     if (fs.existsSync(f)) { fs.copyFileSync(f, path.join(dst, slug + '_decisions_c' + cycle + '.json')); n++; }
   }
+  // civic.38 — the candidate set is part of the cycle's write intent; stage it too.
+  const cand = path.join(src, '_candidates', 'candidates_c' + cycle + '.json');
+  if (fs.existsSync(cand)) { fs.copyFileSync(cand, path.join(dst, 'candidates_c' + cycle + '.json')); n++; }
   return n ? path.relative(ROOT, dst) : null;
 }
 
@@ -250,6 +253,15 @@ if (require.main === module) (async () => {
     }
   }
   log('phase vocab: strict check over ' + touched.size + ' touched initiative(s)');
+  // civic.38 Task 2 step 4 — a candidate-only week is still a write-set: the
+  // gate digest and the diff-size check both see propose-move candidates.
+  const CANDIDATES_FILE = path.join(ROOT, 'output', 'city-civic-database', 'initiatives', '_candidates', 'candidates_c' + cycle + '.json');
+  const candDoc = readJson(CANDIDATES_FILE);
+  const candidates = candDoc && candDoc.candidates
+    ? Object.values(candDoc.candidates).filter(c => !c.status || c.status === 'pending')
+    : [];
+  for (const c of candidates) touched.add('candidate:' + (c.moveId || c.title || '?'));
+  if (candidates.length) log('candidates: ' + candidates.length + ' propose-move candidate(s) join the write-set digest');
   if (touched.size > MAX_ROWS) {
     failures.push({ check: 'diff-size', detail: touched.size + ' initiatives touched > max ' + MAX_ROWS + ' — implausibly large decision cycle' });
   }
@@ -293,9 +305,9 @@ if (require.main === module) (async () => {
       try { trackerRows = await require('../lib/sheets').getSheetAsObjects('Initiative_Tracker'); }
       catch (e) { failures.push({ check: 'sanity-read', detail: 'Initiative_Tracker read failed (fail-closed): ' + e.message }); }
     }
-    if (!writeSet.length) {
-      failures.push({ check: 'sanity-read', detail: 'no assembled decisions_c' + cycle + '.json files — run assembleDecisions before the gate (fail-closed)' });
-    } else if (trackerRows) {
+    if (!writeSet.length && !candidates.length) {
+      failures.push({ check: 'sanity-read', detail: 'no assembled decisions_c' + cycle + '.json files and no candidates — run assembleDecisions before the gate (fail-closed)' });
+    } else if (trackerRows || (!writeSet.length && candidates.length)) {
       const digest = writeSet.map(({ slug, d }) => {
         const tu = d.trackerUpdates || {};
         const initId = d.initiativeId || tu.InitiativeID || slug;
@@ -306,7 +318,11 @@ if (require.main === module) (async () => {
         return '## ' + initId + ' (primary voice: ' + (d.primaryVoice || d.primary || '?') + ')\n' +
           'prior row: ' + JSON.stringify(prior) + '\n' +
           'write: ' + JSON.stringify(updates);
-      }).join('\n\n');
+      }).concat(candidates.map(c =>
+        '## NEW CANDIDATE ' + (c.moveId || '?') + ' (proposed by ' + (c.proposingOffice || c.agentDir || '?') + ', C' + cycle + ')\n' +
+        'prior row: none — this APPENDS a row to the tracker\n' +
+        'write: ' + JSON.stringify({ Name: c.title, Status: 'proposed', VoteCycle: '', AffectedNeighborhoods: (c.hoods || []).join(', '), intervention: c.intervention, problem: c.problem })
+      )).join('\n\n');
       const sys = 'You are a neutral records auditor for a city government. You check the cycle\'s FINAL tracker write-set — each entry shows the row as it stands (prior row) and the fields about to be written (write) — for internal contradictions and fabrications before it is committed to the record. The prior row IS the city\'s record: a write that extends it (a later month, a running total, the next phase, a next action scheduled for a later cycle) is grounded and needs no outside verification. Political disagreement between offices is out of scope — you audit only what is about to be written.';
       const user = 'Final write-set for cycle ' + cycle + ' (one entry per initiative, already resolved by voice priority; NextActionCycle is the cycle the row is next acted on, always after ' + cycle + '):\n\n' + digest +
         '\n\nChecks: (a) does any single write contradict itself (phase vs milestone notes telling different stories)? (b) does a write contradict its own prior row — a phase moving backwards, a figure that cannot follow from the prior figure, a milestone the prior row says already happened? (c) does any write look fabricated — a vote result, dollar figure, or program that no city record could plausibly contain? Do not flag a figure merely because you cannot verify it from outside.\n\nRespond ONLY with JSON: {"pass": true|false, "issues": ["<one line each>"]}';

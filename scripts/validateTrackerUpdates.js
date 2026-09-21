@@ -51,8 +51,9 @@ function hasTrackerWork(tu) {
 }
 
 // Mirror of applyTrackerUpdates WRITEBACK_FIELDS — the only columns that reach
-// the sheet. Keep in sync (S304 G-INIT1).
-const WRITEBACK_FIELDS = ['ImplementationPhase', 'MilestoneNotes', 'NextScheduledAction', 'NextActionCycle', 'VoteCycle'];
+// the sheet. Keep in sync (S304 G-INIT1). civic.38 Task 2 step 3 added
+// LastWorkCycle/LastWorkSeat (fold fields) and Status (one legal edge).
+const WRITEBACK_FIELDS = ['ImplementationPhase', 'MilestoneNotes', 'NextScheduledAction', 'NextActionCycle', 'VoteCycle', 'LastWorkCycle', 'LastWorkSeat', 'Status'];
 
 function hasWritableField(tu) {
   return WRITEBACK_FIELDS.some(f => tu && tu[f] != null && String(tu[f]).trim() !== '');
@@ -175,7 +176,92 @@ function loadRecords(cycle) {
 function validateCycle(cycle) {
   const records = loadRecords(cycle);
   const res = validateRecords(records);
-  return Object.assign({ cycle, recordCount: records.length }, res);
+  const cand = validateCandidates(cycle);
+  return Object.assign({ cycle, recordCount: records.length, candidateCount: cand.candidateCount }, {
+    violations: res.violations.concat(cand.violations),
+    warnings: res.warnings.concat(cand.warnings),
+    stamps: res.stamps,
+  });
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// civic.38 Task 2 step 4 — candidate validation. `propose` moves folded into
+// output/city-civic-database/initiatives/_candidates/candidates_c<cycle>.json
+// are checked BEFORE applyTrackerUpdates builds rows from them: catalog
+// intervention (playable), canonical hoods (child areas fold to parents), and
+// seat authority (the proposing seat may name only its own district's hoods;
+// the mayor any hood). Any failure is HARD — a bad candidate must never reach
+// the sheet. No candidates file → no checks (a legal week).
+// ─────────────────────────────────────────────────────────────────────────────
+function validateCandidates(cycle) {
+  const violations = [], warnings = [];
+  const file = path.join(DECISIONS_DIR, '_candidates', `candidates_c${cycle}.json`);
+  if (!fs.existsSync(file)) return { violations, warnings, candidateCount: 0 };
+  let doc;
+  try { doc = JSON.parse(fs.readFileSync(file, 'utf8')); } catch (e) {
+    violations.push({ source: 'candidates', code: 'candidates-unparseable', detail: file + ': ' + e.message });
+    return { violations, warnings, candidateCount: 0 };
+  }
+  const list = Object.values((doc && doc.candidates) || {}).filter(c => !c.status || c.status === 'pending');
+  if (!list.length) return { violations, warnings, candidateCount: 0 };
+
+  const { CANONICAL_HOODS } = require('../lib/canonNeighborhoods');
+  const slice = require('./buildCivicOfficeSlice');   // require.main-guarded
+  const officeMap = (function () { try { return require('./civic-office-map.json'); } catch (_) { return null; } })();
+  let catalog = null;
+  try {
+    const c = require('../lib/initiativePhaseContract').INTERVENTION_CATALOG;
+    if (c && typeof c === 'object' && Object.keys(c).length) catalog = c;
+  } catch (_) { /* Task 4 step 0 not landed */ }
+  let audit = null;
+  try { audit = JSON.parse(fs.readFileSync(path.join(ROOT, 'output', 'engine_audit_c' + cycle + '.json'), 'utf8')); } catch (_) { /* offline */ }
+  const c2p = slice.childToParentFromAudit(audit);
+
+  for (const cand of list) {
+    const src = 'candidate:' + (cand.moveId || '?');
+    if (!catalog) {
+      violations.push({ source: src, code: 'catalog-not-landed',
+        detail: 'intervention catalog absent (lib/initiativePhaseContract.js INTERVENTION_CATALOG — Task 4 step 0, engine-sheet); candidates cannot be validated' });
+      continue;
+    }
+    const entry = catalog[cand.intervention];
+    if (!entry) {
+      violations.push({ source: src, code: 'unknown-intervention',
+        detail: `intervention "${cand.intervention}" is not a catalog key — the seat never names its own metric` });
+    } else if (entry.playable === false) {
+      violations.push({ source: src, code: 'domain-not-playable',
+        detail: `intervention "${cand.intervention}" targets domain "${entry.policyDomain || '?'}" with no deploy path to its metric (SIM_DOCTRINE §15) — not proposable until the engine row lands` });
+    }
+    if (!String(cand.title || '').trim()) {
+      violations.push({ source: src, code: 'candidate-no-title', detail: 'candidate carries no title' });
+    }
+    const hoods = Array.isArray(cand.hoods) ? cand.hoods : [];
+    if (!hoods.length) {
+      violations.push({ source: src, code: 'candidate-no-hoods', detail: 'candidate names no hoods' });
+    }
+    const seat = officeMap
+      ? [...(officeMap.offices || []), ...(officeMap.projects || [])].find(o => (o.officeId || o.projectId) === cand.proposingOffice)
+      : null;
+    if (!seat) {
+      violations.push({ source: src, code: 'unknown-proposing-office',
+        detail: `proposingOffice "${cand.proposingOffice}" is not on the civic office map` });
+    }
+    for (const h of hoods) {
+      const folded = slice.foldHood(h, c2p);
+      if (!CANONICAL_HOODS.has(String(h).toLowerCase()) && !CANONICAL_HOODS.has(folded.toLowerCase())) {
+        violations.push({ source: src, code: 'non-canon-hood', detail: `"${h}" is not a canonical hood or child area` });
+        continue;
+      }
+      if (seat && /^D\d$/.test(String(seat.district || ''))) {
+        const { getDistrictForNeighborhood } = require('../lib/districtMap');
+        if (getDistrictForNeighborhood(folded) !== seat.district) {
+          violations.push({ source: src, code: 'hood-out-of-district',
+            detail: `"${h}" folds to ${folded} (${getDistrictForNeighborhood(folded) || 'no district'}), outside ${seat.district} — seats author only for their own district (ruling 2)` });
+        }
+      }
+    }
+  }
+  return { violations, warnings, candidateCount: list.length };
 }
 
 function printReport(r) {
@@ -208,4 +294,4 @@ if (require.main === module) {
   process.exit(r.violations.length > 0 ? 1 : 0);
 }
 
-module.exports = { validateRecords, validateCycle, loadRecords, resolveInitiativeId };
+module.exports = { validateRecords, validateCycle, loadRecords, resolveInitiativeId, validateCandidates };

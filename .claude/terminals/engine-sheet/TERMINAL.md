@@ -10,6 +10,7 @@
 - Every factual statement carries its source: file:line, tab name, command output, or commit SHA.
 - No auto-memory writes from this terminal. Terminal knowledge → this file. Session record → claude-mem. Work record → git.
 - This file holds rules and tables only. No prose, no session notes.
+- **The live Cycle fires once a week** (Sunday; one Cycle = one in-world week; C108 fired 2026-09-20). Never sequence work behind the next live fire, never tell the builder to fire one, never call a fire "next" without its date. The bench is the gate and the work week runs on it; the live fire confirms when the week turns. A smoke-test note names the fire's date, and nothing waits on it.
 
 ## Launch & resume
 

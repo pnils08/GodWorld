@@ -129,6 +129,19 @@ pointers:
 
 ## PROD deploy log — full trail
 
+### PROD @108 — a stall stings at half weight (2026-09-20 ~23:20 Chicago, engine-sheet)
+
+engine.250 dial, builder-ruled 2026-09-20 22:55. Engine tree `a92e84a6`; 2 payload files vs @107 (`applyBusinessDynamics.js`, `engine94SheetContract.js`).
+
+**PUSH LANDED, VERSION STEP STILL PENDING (one step covers @106–@108).** Isolated `git archive` stage, pre-push delta vs live = exactly those 2 files, 170 pushed, pull-back 169/169 js byte-identical, 0 test files. Builder, from repo root: `CLAUDE_CTL=1 npx clasp version "PROD @108 engine.250 + civic.38 Task 5 a92e84a6"`, then `CLAUDE_CTL=1 npx clasp deploy -i AKfycbwUvd4TylktdE7AA8axRv-Hru55h78v1PlsOsIejWyAoQrUeYnKGq2ue-FJxPawCW-bgQ -V 95 -d "PROD @108 a92e84a6"`, then `npx clasp deployments` must read @95.
+
+**What it changes.** The stalled-initiative business drain is `bizEventShockScale × bizInitiativeStallDrag`; new World_Config key `bizInitiativeStallDrag` = **0.5**, range 0–2, self-armed by `ensureEngine96Config_` at cycle open, on the business pass's fail-loud key list (28 → 29). Tunable on the sheet with no deploy. Closes the open dial recorded under §PROD @106.
+
+**Bench:** SANDBOX 0908 **@78**, C122 `ok:true` 138 s, Engine_Errors unchanged. Predicted before the fire: the row arms itself at 0.5 and the pass does not throw on its first Cycle (held — bench `World_Config` reads `bizInitiativeStallDrag | 0.5`); Temescal under a re-stalled INIT-005 dips about half a point, not to −1.0 (held — 7 businesses −0.41…+0.03, mean −0.17, against ambient +0.28 at C121 and −0.95…−1.0 at full weight at C120). **BENCH-ONLY, NEVER REPLAY:** INIT-005 → `stalled` again.
+
+**Expect at live C109:** `World_Config` gains the `bizInitiativeStallDrag` row at 0.5; nothing drains (no failing phase on the live tracker).
+- **Rollback:** re-push the @107 tree (`95b67423`); the config row is inert without the reader.
+
 ### PROD @107 — the sponsor owns its bill; a revival is not an advance (2026-09-20 ~22:20 Chicago, engine-sheet)
 
 civic.38 Task 5 (steps 1–2) + the business-side revival guard. Engine tree `95b67423`; 2 payload files vs @106 (`updateCivicApprovalRatings.js`, `applyInitiativeImplementationEffects.js`).

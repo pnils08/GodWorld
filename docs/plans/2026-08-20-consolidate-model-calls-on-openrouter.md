@@ -184,6 +184,13 @@ Each keeps a documented revert: `RHEA_PROVIDER` / `MAGS_BOT_PROVIDER` / `REFLECT
 
 claude-mem observer hung on free `nemotron-3.5-lightning`: under the 90s wall 2026-09-20 14:56–17:15 it finished 55 calls and timed out 38, including 1.8k-token single-message init calls — so payload size was not the cause and the `MAX_CONTEXT_MESSAGES` lever is dropped. Side-by-side timing of observer-shaped calls: lightning hung 2 of 3 at 60s; `nvidia/nemotron-3-super-120b-a12b:free` 9 of 9 in 2–9s with valid `<observation>` XML; qwen3.8-27b 3 of 3 in 12–20s (fallback); both gemma-4 free = 429. Model swapped in `~/.claude-mem/settings.json` 17:19 (backup `settings.json.bak.pre-model-swap-*`), worker stop/start, first call stored, `consecutiveFailures` 0. Close when a day of log shows the timeout rate near zero; if super-120b degrades, qwen3.8-27b is next. Unverified: chroma sync after the stop/start
 
+**2026-09-21 — root cause found and patched (engine-sheet).** The daily "memory observer has failed 5 times" banner was never the model choice. OpenRouter relays an upstream refusal (`Upstream error from Nvidia: Service temporarily overloaded`) inside an HTTP **200** body; claude-mem 13.24.23's OpenRouter classifier (`y4` in `worker-service.cjs`) retries 5xx as `transient` but its final fallback files a 200-with-error as `unrecoverable`, so the observation is dropped with no retry. Measured: 09-20 267 saved / 182 dropped; a 10-call probe 09-21 got 4 of 10 through on super-120b, 6 of 10 on `openrouter/free` (small models fail the XML format). qwen3.8-27b:free returned 429 on its first call and armed a 30-minute provider-wide lock in `~/.claude-mem/quota-cooldown.json` — reverted, lock file reset to `[]`. **Builder ruling: claude-mem never goes on a paid model.** Patch, two exact string swaps in `/root/.claude/plugins/marketplaces/thedotmack/plugin/scripts/worker-service.cjs` (backup `worker-service.cjs.pre-retry-patch`), then `npx claude-mem stop` + `start`:
+
+1. `new Lt(l("API error"),{kind:"unrecoverable"` → `new Lt(l("API error"),{kind:"transient"`
+2. `={maxRetries:2,perAttemptTimeoutMs:` → `={maxRetries:5,perAttemptTimeoutMs:`
+
+Verified 09:19–09:22: refusals log `Retrying OpenRouter … (attempt n/5) {kind=transient}`, 0 `Observer failed`, observation 66269 `STORED`, `consecutiveFailures` 0. **A plugin update overwrites the bundle** — if the banner returns, check the two strings first and re-apply; each anchor must match exactly once or upstream changed shape. Residual, not patched: ~7% of replies are discarded as non-XML when the model spills reasoning to the 4096-token cap.
+
 ## Changelog
 
 - 2026-08-20 — Drafted from Mike-direct at S385, with a verified script inventory rather than an assumed one. Not started.
@@ -192,3 +199,4 @@ claude-mem observer hung on free `nemotron-3.5-lightning`: under the 90s wall 20
 - 2026-08-20 — Tasks 2-5 DONE (`664de075`). OpenRouter serves an Anthropic-compatible /v1/messages endpoint, so migration was a rail change, not a rewrite. Key kept.
 - 2026-08-20 — Mike-direct: photo QA off Anthropic onto google/gemini-3.7-flash (`c57b1352`); Anthropic account left unfunded, nothing live calls it now.
 - 2026-08-20 — Mike-direct: day-behind batch cadence PARKED as the agreed next move, after the pipelines finish being tuned. Not scoped here.
+- 2026-09-21 — infrastructure.11 root cause: claude-mem drops 200-body upstream refusals unretried; worker bundle patched (transient + 5 retries), verified stored. Builder ruling: never a paid observer model.

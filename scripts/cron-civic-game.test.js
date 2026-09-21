@@ -233,20 +233,20 @@ test('T1.5: Live validateDatawakeMoves propose hood grounding requires EVERY hoo
   // Coliseum is child of East Oakland (D5) -> allowed!
   const validMove = [{
     type: 'propose',
-    title: 'Coliseum Night Market',
-    intervention: 'economic-program',
+    title: 'Synthetic clinic service',
+    intervention: 'health-service',
     hoods: ['Coliseum', 'East Oakland'],
-    problem: 'economic revitalization'
+    problem: 'synthetic health need'
   }];
   const res1 = civicRun.validateDatawakeMoves(validMove, { office, catalog, childToParent: CHILD_TO_PARENT_HOOD });
   assert.equal(res1.accepted.length, 1);
-  assert.equal(res1.accepted[0].payload.title, 'Coliseum Night Market');
+  assert.equal(res1.accepted[0].payload.title, 'Synthetic clinic service');
 
   // Cross-district hood (Temescal in D7) -> entire move rejected (no intersect loophole)
   const invalidMove = [{
     type: 'propose',
-    title: 'Cross-city market',
-    intervention: 'economic-program',
+    title: 'Synthetic cross-city clinic',
+    intervention: 'health-service',
     hoods: ['East Oakland', 'Temescal'],
     problem: 'overreach'
   }];
@@ -353,12 +353,13 @@ test('T1.9: Live appendMoveLedger & moveLedgerLines write correct ledger rows to
   }
 });
 
-test('T1.10: Live validateDatawakeMoves with full INTERVENTION_CATALOG: 6 playable pass, 2 unplayable reject', () => {
+test('T1.10: Live validateDatawakeMoves with full INTERVENTION_CATALOG: 3 playable pass, 5 unplayable reject', () => {
   const office = { officeId: 'MAYOR-01', agentDir: 'civic-office-mayor', district: 'citywide' };
   const catalog = phaseContract.INTERVENTION_CATALOG;
-  assert(catalog && Object.keys(catalog).length >= 8, 'INTERVENTION_CATALOG must have at least 8 keys');
-
-  const playableKeys = ['health-service', 'transit-project', 'school-program', 'economic-program', 'workforce-program', 'sports-district'];
+  const playableKeys = ['health-service', 'transit-project', 'school-program'];
+  const unplayableKeys = ['safety-program', 'housing-program', 'economic-program', 'workforce-program', 'sports-district'];
+  assert.deepStrictEqual(Object.keys(catalog).filter(k => catalog[k].playable).sort(), [...playableKeys].sort());
+  assert.deepStrictEqual(Object.keys(catalog).filter(k => !catalog[k].playable).sort(), [...unplayableKeys].sort());
   for (const key of playableKeys) {
     const move = [{ type: 'propose', title: `Test ${key}`, intervention: key, hoods: ['Downtown'], problem: 'test problem' }];
     const res = civicRun.validateDatawakeMoves(move, { office, catalog });
@@ -366,7 +367,6 @@ test('T1.10: Live validateDatawakeMoves with full INTERVENTION_CATALOG: 6 playab
     assert.equal(res.rejected.length, 0);
   }
 
-  const unplayableKeys = ['safety-program', 'housing-program'];
   for (const key of unplayableKeys) {
     const move = [{ type: 'propose', title: `Test ${key}`, intervention: key, hoods: ['Downtown'], problem: 'test problem' }];
     const res = civicRun.validateDatawakeMoves(move, { office, catalog });
@@ -1275,7 +1275,7 @@ test('F7: boardNeedText uses the shared helper, preserves stalled priority and a
   const fundedRow = {Stage:'Funded',ImplementationPhase:'announced',LastWorkCycle:108,LastStageChangeCycle:108};
   assert.match(civicSlice.boardNeedText(fundedRow), /work landed/);
   assert.match(civicSlice.boardNeedText({...fundedRow,LastWorkCycle:107}), /one work move/);
-  assert.match(civicSlice.boardNeedText({Stage:'Standing',PolicyDomain:'economic'}), /metric evidence unavailable/);
+  assert.match(civicSlice.boardNeedText({Stage:'Standing',PolicyDomain:'health'}), /metric evidence unavailable/);
 });
 
 test('F8: Proposal condition evidence computes from countPetition and gamePromptView caps history without dropping IDs', () => {
@@ -1602,8 +1602,8 @@ test('T9.6: Live stageRequirement & boardNeedText distinguish stalled revival fr
     assert.strictEqual(civicSlice.boardNeedText(row), req.text);
   }
 
-  // Unplayable domains (safety, housing) have no delivering gate from Standing
-  for (const domain of ['safety', 'housing']) {
+  // All five refused domains have no delivering gate from Standing.
+  for (const domain of ['safety', 'housing', 'economic', 'workforce', 'sports']) {
     const row = { Stage: 'Standing', ImplementationPhase: 'operational', PolicyDomain: domain };
     const req = phaseContract.stageRequirement({ stage: row.Stage, phase: row.ImplementationPhase, policyDomain: domain });
     assert.strictEqual(req.clears, false);
@@ -1618,23 +1618,23 @@ test('T9.7: Live measureStageMovement detects incomplete hold windows and broken
   const audit = cycle => ({
     cycle,
     snapshots: {
-      Neighborhood_Map: hoods.map((Neighborhood, i) => ({
-        Neighborhood, ChildAreas: '', Cycle: cycle,
-        RetailVitality: i === 0 ? 15 : 10, NightlifeProfile: 10
+      Neighborhood_Map: hoods.map(Neighborhood => ({ Neighborhood, ChildAreas: '', Cycle: cycle })),
+      Neighborhood_Demographics: hoods.map((Neighborhood, i) => ({
+        Neighborhood, LastUpdated: cycle, Sick: i === 0 ? 5 : 10
       }))
     }
   });
 
   const validBaseline = {
-    v: 1, origin: 'conversion', cycle: 105, tab: 'Neighborhood_Map',
-    columns: ['RetailVitality'], scope: 'hood',
-    keys: { 'West Oakland': { RetailVitality: 10 } },
-    cityMiddle: { RetailVitality: 10 }
+    v: 1, origin: 'conversion', cycle: 105, tab: 'Neighborhood_Demographics',
+    columns: ['Sick'], scope: 'hood',
+    keys: { 'West Oakland': { Sick: 10 } },
+    cityMiddle: { Sick: 10 }
   };
 
   const row = {
     InitiativeID: 'INIT-001', Stage: 'Standing', ImplementationPhase: 'operational',
-    PolicyDomain: 'economic', AffectedNeighborhoods: 'West Oakland',
+    PolicyDomain: 'health', AffectedNeighborhoods: 'West Oakland',
     StageBaseline: JSON.stringify(validBaseline)
   };
 
@@ -1654,7 +1654,7 @@ test('T9.7: Live measureStageMovement detects incomplete hold windows and broken
   // Broken consecutive hold streak: one observation in hold window drops below margin
   const brokenAudit = c => {
     const a = audit(c);
-    if (c === 107) a.snapshots.Neighborhood_Map[0].RetailVitality = 10.5; // (10.5/10) - (10/10) = 0.05 < 0.20 margin
+    if (c === 107) a.snapshots.Neighborhood_Demographics[0].Sick = 9.5; // (10/10) - (9.5/10) = 0.05 < 0.20 margin
     return a;
   };
   const contextBroken = { cycle: 108, readAudit: brokenAudit, config: { civicDeliverMargin: 0.2, civicDeliverHoldCycles: 3 } };
@@ -1669,19 +1669,20 @@ test('T9.8: Live measureStageMovement fails closed on missing World_Config, stal
     cycle,
     snapshots: {
       Neighborhood_Map: hoods.map(Neighborhood => ({
-        Neighborhood, ChildAreas: '', Cycle: cycle, RetailVitality: 15
-      }))
+        Neighborhood, ChildAreas: '', Cycle: cycle
+      })),
+      Neighborhood_Demographics: hoods.map(Neighborhood => ({ Neighborhood, LastUpdated: cycle, Sick: 5 }))
     }
   });
 
   const baseRow = {
     InitiativeID: 'INIT-001', Stage: 'Standing', ImplementationPhase: 'operational',
-    PolicyDomain: 'economic', AffectedNeighborhoods: 'West Oakland',
+    PolicyDomain: 'health', AffectedNeighborhoods: 'West Oakland',
     StageBaseline: JSON.stringify({
-      v: 1, origin: 'conversion', cycle: 104, tab: 'Neighborhood_Map',
-      columns: ['RetailVitality'], scope: 'hood',
-      keys: { 'West Oakland': { RetailVitality: 10 } },
-      cityMiddle: { RetailVitality: 10 }
+      v: 1, origin: 'conversion', cycle: 104, tab: 'Neighborhood_Demographics',
+      columns: ['Sick'], scope: 'hood',
+      keys: { 'West Oakland': { Sick: 10 } },
+      cityMiddle: { Sick: 10 }
     })
   };
 
@@ -1744,13 +1745,14 @@ test('T9.8: Live measureStageMovement fails closed on missing World_Config, stal
     readAudit: c => ({
       cycle: c,
       snapshots: {
-        Neighborhood_Map: hoods.map(Neighborhood => ({ Neighborhood, ChildAreas: '', Cycle: c }))
+        Neighborhood_Map: hoods.map(Neighborhood => ({ Neighborhood, ChildAreas: '', Cycle: c })),
+        Neighborhood_Demographics: hoods.map(Neighborhood => ({ Neighborhood, LastUpdated: c }))
       }
     })
   };
   const noMetricColRes = civicStageEvidence.measureStageMovement(baseRow, missingMetricColContext);
   assert.strictEqual(noMetricColRes.available, false);
-  assert.match(noMetricColRes.reason, /RetailVitality missing\/invalid/);
+  assert.match(noMetricColRes.reason, /Sick missing\/invalid/);
 
   // 5. Corrupted StageBaseline JSON vs unsupported schema
   const corruptBaseRow = { ...baseRow, StageBaseline: '{corrupt json' };

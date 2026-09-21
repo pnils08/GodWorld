@@ -133,7 +133,7 @@ pointers:
 
 engine.250 dial, builder-ruled 2026-09-20 22:55. Engine tree `a92e84a6`; 2 payload files vs @107 (`applyBusinessDynamics.js`, `engine94SheetContract.js`).
 
-**PUSH LANDED, VERSION STEP STILL PENDING (one step covers @106–@108).** Isolated `git archive` stage, pre-push delta vs live = exactly those 2 files, 170 pushed, pull-back 169/169 js byte-identical, 0 test files. Builder, from repo root: `CLAUDE_CTL=1 npx clasp version "PROD @108 engine.250 + civic.38 Task 5 a92e84a6"`, then `CLAUDE_CTL=1 npx clasp deploy -i AKfycbwUvd4TylktdE7AA8axRv-Hru55h78v1PlsOsIejWyAoQrUeYnKGq2ue-FJxPawCW-bgQ -V 95 -d "PROD @108 a92e84a6"`, then `npx clasp deployments` must read @95.
+**LANDED. Version step done 2026-09-20 ~23:08 Chicago once the seat left auto mode: script version 95, web app repointed @94 → @95 and read back (`clasp deployments`); one step covered @106–@108, so the two entries below are closed by it too.** Originally: Isolated `git archive` stage, pre-push delta vs live = exactly those 2 files, 170 pushed, pull-back 169/169 js byte-identical, 0 test files. Builder, from repo root: `CLAUDE_CTL=1 npx clasp version "PROD @108 engine.250 + civic.38 Task 5 a92e84a6"`, then `CLAUDE_CTL=1 npx clasp deploy -i AKfycbwUvd4TylktdE7AA8axRv-Hru55h78v1PlsOsIejWyAoQrUeYnKGq2ue-FJxPawCW-bgQ -V 95 -d "PROD @108 a92e84a6"`, then `npx clasp deployments` must read @95.
 
 **What it changes.** The stalled-initiative business drain is `bizEventShockScale × bizInitiativeStallDrag`; new World_Config key `bizInitiativeStallDrag` = **0.5**, range 0–2, self-armed by `ensureEngine96Config_` at cycle open, on the business pass's fail-loud key list (28 → 29). Tunable on the sheet with no deploy. Closes the open dial recorded under §PROD @106.
 

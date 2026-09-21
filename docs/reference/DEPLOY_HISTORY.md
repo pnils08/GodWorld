@@ -129,6 +129,20 @@ pointers:
 
 ## PROD deploy log — full trail
 
+### PROD @110 — a funded bill stands up when the work lands (2026-09-21 ~01:57 Chicago, engine-sheet)
+
+civic.38 Task 4 stage handler, first cut. Engine tree `9da4d5cc` (engine payload authored in `7268a284`); 4 payload files vs @109 (`civicInitiativeEngine.js`, `applyInitiativeImplementationEffects.js`, `finalizeCycleState.js`, `engine94SheetContract.js`).
+
+**LANDED.** Isolated `git archive` stage, pre-push delta vs live = exactly those 4 files, pull-back 170 files byte-identical to HEAD, 0 test files live. Script version **97**, web app repointed @96 → @97 and read back (`clasp deployments`).
+
+**What it changes.** `civicStageStep_` — Proposed → Funded on a signed pass or an override, Funded → Standing when `LastWorkCycle ≥ LastStageChangeCycle` (never in the fire that funded it), written as phase `operational`. Three call sites, idempotent. `S.initiativeEnginePhaseMoves` carries the phase each engine-moved row LEFT so next Cycle's Phase-2 transition detector still sees the move (plan ruling 7). `World_Config` gains `civicStageStallCycles` 5, `civicDeliverMargin` 0.2, `civicDeliverHoldCycles` 3 in the engine.213 seed group — inert until their readers land. **Inert on live: the step returns null on a blank `Stage`, and every live `Stage` is blank.**
+
+**Bench:** SANDBOX 0908 **@80**, on the @79 state plus one labelled fixture row `INIT-900` (health, Temescal, passed + signed, `Stage` Proposed). Predicted before each fire, all held. C111: fixture → Funded, `LastStageChangeCycle` 111, phase unchanged; six legacy rows untouched; three keys seeded; nothing carried. Work stamped 111 as the Sunday fold would. C112: → Standing, `operational`, stamped 112; carry ring C112 holds `initiativeEnginePhaseMoves {"INIT-900":"vote-ready"}` beside `initiativePhases` = `operational`. C113: no second step, carried move back to null; Temescal ranked 1st of 23 hoods for Business_Ledger growth movement (+0.866 mean, 4 of 7 at the +1.0 per-Cycle ceiling; Uptown +0.807 — consistent with the lift, not proof alone; the lift count itself is only on the execution log). All three fires `ok:true`, 132 phases, 0 failed, `Engine_Errors` unchanged.
+- **One aborted run, not the cut's:** the first C112 fire returned HTTP 503 at 18 s; the run wrote Phase-5 direct tabs and died before Phase 10 (counter stayed 111, no error row). Fixture reset, re-fired, clean. A 503 on the fire is NOT proof the run did not start — read the sheet before re-firing. Left behind: a duplicate set of C112 `LifeHistory_Log` rows. **BENCH-ONLY, NEVER REPLAY:** `INIT-900` and everything C111–C113 wrote. Re-sync from live before the next cut.
+
+**Expect at the first live fire on @97:** `World_Config` gains the three `civic*` rows; tracker and every initiative behave exactly as on @96.
+- **Rollback:** re-push the @109 tree (`3500a370`); the three config rows and the carried field are inert without their readers.
+
 ### PROD @109 — the tracker grows its six stage columns (2026-09-21 ~00:55 Chicago, engine-sheet)
 
 civic.38 Task 4 step 1, first cut. Engine tree `3500a370` (engine payload authored in `5694a383` + `0e416edd`); 1 payload file vs @108 (`phase05-citizens/civicInitiativeEngine.js`).

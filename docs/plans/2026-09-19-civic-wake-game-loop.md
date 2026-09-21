@@ -362,6 +362,7 @@ Pre-mortem accepted: [[../research/2026-09-21-codex-civic38-task4-premortem]] (a
 
 ## Changelog
 
+- 2026-09-21 (engine-sheet) — Stage handler first cut bench-proven on 0908 @80 (fixture `INIT-900`, C111 Funded → C112 Standing/`operational` with the prior phase carried → C113 no re-step) and landed PROD @110, web app read back @97. [[../reference/DEPLOY_HISTORY]] §PROD @110.
 - 2026-09-21 (engine-sheet) — Stage handler, first cut: `civicStageStep_` (Proposed → Funded on a signed pass or override, Funded → Standing on the work gate, written as `operational`), ruling-7 prior-phase carry, three World_Config dials seeded in the engine.213 group. Rulings 8–9 filed; Delivering's phase is an open sim call.
 - 2026-09-21 (engine-sheet) — Task 4 step 1 first cut bench-proven on SANDBOX 0908 @79 (C109–C110, 0 failed, 31 → 37 headers, stage cells blank); PROD @109 landed, web app read back @96; smoke pending at the live C109 fire. [[../reference/DEPLOY_HISTORY]] §PROD @109.
 - 2026-09-21 (codex) — Completed the shared board-helper hand-off with the >= work boundary, caller metric evidence and explicit missing-input behavior; nine board regressions and adjacent suites green, C108 local board retains all six legacy rows.

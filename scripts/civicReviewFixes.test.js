@@ -81,3 +81,15 @@ test('F5 new records drop legacy action before wall rendering and preserve speec
   assert.match(wall.lineFromDatawake(rec).text, /SYNTHETIC speech/);
   assert.match(wall.lineFromDatawake({statement:'historical synthetic',action:'legacy synthetic'}).text, /legacy synthetic/);
 });
+test('F6 prior terminal outcomes survive the Cycle boundary alongside current pending moves', () => workspace((root, write) => {
+  const move = {moveId:'MV-SYNTHETIC',cycle:998,agentDir:office.agentDir,type:'work',payload:{initiativeId:'INIT-SYNTHETIC'},status:'pending',date:'SYNTHETIC'};
+  write('output/cron-civic/moves/moves_c998.jsonl', [move,{...move,status:'failed',detail:'SYNTHETIC refusal'}].map(JSON.stringify).join('\n'));
+  const blocks = () => slice.buildGameBlocks({root,cycle:999,office,officeMap:{offices:[]}}).lastMove;
+  assert.match(blocks().text, /SYNTHETIC refusal/);
+  write('output/cron-civic/moves/moves_c999.jsonl', JSON.stringify({...move,cycle:999,moveId:'MV-SYNTHETIC-NEW'}));
+  assert.equal(blocks().moves.length, 2);
+  assert.match(blocks().text, /awaiting the Sunday fold/);
+  assert.match(blocks().text, /SYNTHETIC refusal/);
+  write('output/cron-civic/moves/moves_c1000.jsonl', '{broken');
+  assert.equal(blocks().moves.length, 2); // future evidence is never read
+}));

@@ -880,12 +880,34 @@ function moveSummaryLine(mv) {
 }
 
 function lastMoveBlock(root, cycle, agentDir) {
-  const folded = loadMovesFolded(root, cycle);
-  if (!folded) return { text: 'No moves on the ledger yet — the week starts clean.', moves: [] };
-  const mine = [...folded.values()].filter(m => m.agentDir === agentDir);
-  if (!mine.length) return { text: 'You have no move on the ledger this cycle yet.', moves: [] };
-  mine.sort((a, b) => String(a.date || '').localeCompare(String(b.date || '')));
-  return { text: clip('Your moves this cycle:\n' + mine.map(moveSummaryLine).join('\n'), BLOCK_CAP), moves: mine };
+  const dir = path.join(root || ROOT, 'output', 'cron-civic', 'moves');
+  let files;
+  try { files = fs.readdirSync(dir); }
+  catch (e) {
+    if (e.code !== 'ENOENT') throw e;
+    return { text: 'Move history unavailable — no move-ledger directory on disk.', moves: [] };
+  }
+  const cycles = files.map(f => /^moves_c(\d+)\.jsonl$/.exec(f)).filter(Boolean)
+    .map(m => Number(m[1])).filter(c => c <= Number(cycle)).sort((a, b) => b - a);
+  const current = [];
+  let prior = null, outcome = null;
+  for (const c of cycles) {
+    const folded = loadMovesFolded(root, c);
+    if (!folded) throw new Error('Move ledger disappeared for C' + c);
+    const mine = [...folded.values()].filter(m => m.agentDir === agentDir)
+      .sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')));
+    if (c === Number(cycle)) current.push(...mine);
+    else if (!prior && mine.length) prior = mine[0];
+    if (!outcome) outcome = mine.find(m => ['applied', 'failed'].includes(m.status)) || null;
+    if (prior && outcome) break;
+  }
+  const moves = [...new Map([...current, prior, outcome].filter(Boolean).map(m => [m.moveId, m])).values()];
+  if (!moves.length) return { text: 'No move for this seat in the available ledgers through C' + cycle + '.', moves: [] };
+  const recent = current.length ? current : [prior].filter(Boolean);
+  const text = clip('Latest moves:\n' + recent.map(m => 'C' + m.cycle + ' ' + moveSummaryLine(m)).join('\n'), 300) +
+    '\n' + (outcome ? clip('Latest terminal outcome (C' + outcome.cycle + '):\n' + moveSummaryLine(outcome), 280)
+      : 'No applied or failed outcome in the available ledgers.');
+  return { text: clip(text, BLOCK_CAP), moves };
 }
 
 // Task 3.2 — my district's petition pool. Complaints = Civic-tagged

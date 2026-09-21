@@ -129,11 +129,11 @@ pointers:
 
 ## PROD deploy log — full trail
 
-### PROD @111 — a delivered service nobody tends weakens (bench-proven 2026-09-21 ~04:00 Chicago, engine-sheet) — **PUSH PENDING**
+### PROD @111 — a delivered service nobody tends weakens (2026-09-21 ~08:40 Chicago, engine-sheet; bench-proven ~04:00)
 
 civic.38 Task 4 upkeep + the two waiting commits. Engine tree `f78561d0`; 4 payload files vs @110, confirmed by live pull-diff before the push (`applyInitiativeImplementationEffects.js`, `updateTransitMetrics.js`, `civicInitiativeEngine.js`, `engine94SheetContract.js`); 170 live files, 0 test files.
 
-**NOT LANDED.** The seat's permission classifier refused the production `clasp push` (auto mode). Builder, from the isolated stage (never repo root — other lanes commit on the tree): `git archive f78561d0 | tar -x -C <fresh dir>`, confirm `.clasp.json` carries the PROD script id, `CLAUDE_CTL=1 npx clasp push`, `CLAUDE_CTL=1 npx clasp version "PROD @111 civic.38 Task 4 upkeep f78561d0"`, `CLAUDE_CTL=1 npx clasp deploy -i AKfycbwUvd4TylktdE7AA8axRv-Hru55h78v1PlsOsIejWyAoQrUeYnKGq2ue-FJxPawCW-bgQ -V <the number `clasp version` just printed — 98 only if nothing else minted one; check `npx clasp versions`> -d "PROD @111 f78561d0"`, then `npx clasp deployments` must read that number. Or re-run this seat outside auto mode.
+**LANDED 2026-09-21 ~08:40 Chicago.** Isolated `git archive f78561d0` stage; pre-push delta vs live re-checked at push time = exactly those 4 files, no engine commit since the bench; 170 pushed, pull-back 169/169 js byte-identical to `f78561d0`, 0 test files live. Script version **98**, web app repointed @97 → @98 and read back (`clasp deployments`). The first attempt at ~04:00 was refused by the seat's permission classifier in auto mode; the builder lifted auto mode and the same stage pushed.
 
 **What it changes.** `civicTendFactor_` (mirror of lib `tendFactor`): a row at Standing or Delivering pays phase intensity x a tend factor — full for `civicTendGraceCycles` (6) after the later of `LastWorkCycle` / `LastStageChangeCycle`, then down `civicTendDecayPerCycle` (0.15) a Cycle to `civicTendFloor` (0.3). Health relief, the hood fold, sentiment and the ripple record read the effective value; the transit slice carries `tend` and the open station lift scales by it (builder ruling g). Rides along: `82d2fac4` (codex F3/F4 carry fixes), `67fe9e8b` (economic / workforce / sports not playable; `civicDeliverMargin_health` 0.15). **Inert on live: every live `Stage` is blank, and the dials are read only when a staged row asks.**
 

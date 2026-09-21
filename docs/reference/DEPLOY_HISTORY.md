@@ -129,6 +129,19 @@ pointers:
 
 ## PROD deploy log — full trail
 
+### PROD @111 — a delivered service nobody tends weakens (bench-proven 2026-09-21 ~04:00 Chicago, engine-sheet) — **PUSH PENDING**
+
+civic.38 Task 4 upkeep + the two waiting commits. Engine tree `f78561d0`; 4 payload files vs @110, confirmed by live pull-diff before the push (`applyInitiativeImplementationEffects.js`, `updateTransitMetrics.js`, `civicInitiativeEngine.js`, `engine94SheetContract.js`); 170 live files, 0 test files.
+
+**NOT LANDED.** The seat's permission classifier refused the production `clasp push` (auto mode). Builder, from the isolated stage (never repo root — other lanes commit on the tree): `git archive f78561d0 | tar -x -C <fresh dir>`, confirm `.clasp.json` carries the PROD script id, `CLAUDE_CTL=1 npx clasp push`, `CLAUDE_CTL=1 npx clasp version "PROD @111 civic.38 Task 4 upkeep f78561d0"`, `CLAUDE_CTL=1 npx clasp deploy -i AKfycbwUvd4TylktdE7AA8axRv-Hru55h78v1PlsOsIejWyAoQrUeYnKGq2ue-FJxPawCW-bgQ -V 98 -d "PROD @111 f78561d0"`, then `npx clasp deployments` must read @98. Or re-run this seat outside auto mode.
+
+**What it changes.** `civicTendFactor_` (mirror of lib `tendFactor`): a row at Standing or Delivering pays phase intensity x a tend factor — full for `civicTendGraceCycles` (6) after the later of `LastWorkCycle` / `LastStageChangeCycle`, then down `civicTendDecayPerCycle` (0.15) a Cycle to `civicTendFloor` (0.3). Health relief, the hood fold, sentiment and the ripple record read the effective value; the transit slice carries `tend` and the open station lift scales by it (builder ruling g). Rides along: `82d2fac4` (codex F3/F4 carry fixes), `67fe9e8b` (economic / workforce / sports not playable; `civicDeliverMargin_health` 0.15). **Inert on live: every live `Stage` is blank, and the dials are read only when a staged row asks.**
+
+**Bench:** SANDBOX 0908. **@81** (`f30a6063` = the two waiting commits) C109 `ok:true`, 132 phases, 0 failed: tracker 31 → 37 headers, six stage cells blank on six rows, five keys self-armed (`bizInitiativeStallDrag` 0.5, `civicStageStallCycles` 5, `civicDeliverMargin` 0.2, `civicDeliverMargin_health` 0.15, `civicDeliverHoldCycles` 3), `Engine_Errors` unchanged. **@82** (`f78561d0`) on two labelled fixtures, `INIT-900` Laurel clinic and `INIT-901` Fruitvale hub, both Standing / `operational` / `LastStageChangeCycle` 100, no work. Predicted before each fire, all held. C110: three `civicTend*` keys self-armed; both ripple rows magnitude 0.36, "untended 10 Cycles, running at 40% strength"; Fruitvale `Factors` reads `… operational (upkeep 0.40)`. C111: 0.27, 30%, `(upkeep 0.30)` — the floor. `LastWorkCycle` 111 stamped as the Sunday fold would. C112: both back to 0.9, no upkeep note. Six legacy rows untouched across all four fires; all `ok:true`, 132 phases, 0 failed, `Engine_Errors` unchanged at 1. Laurel `Sick` 111 → 109 → 104 across C110–C112, in step with strength (not a controlled pair). **BENCH-ONLY, NEVER REPLAY:** `INIT-900`, `INIT-901` and everything C109–C112 wrote. Re-sync from live before the next cut.
+
+**Expect at the first live fire on @98:** `World_Config` gains `civicDeliverMargin_health` and the three `civicTend*` rows (plus the @110 keys if that fire has not happened yet); tracker and every initiative behave exactly as on @97.
+- **Rollback:** re-push the @110 tree (`9da4d5cc`); the config rows are inert without the reader.
+
 ### PROD @110 — a funded bill stands up when the work lands (2026-09-21 ~01:57 Chicago, engine-sheet)
 
 civic.38 Task 4 stage handler, first cut. Engine tree `9da4d5cc` (engine payload authored in `7268a284`); 4 payload files vs @109 (`civicInitiativeEngine.js`, `applyInitiativeImplementationEffects.js`, `finalizeCycleState.js`, `engine94SheetContract.js`).

@@ -1,7 +1,7 @@
 ---
 title: Civic Wake Game Loop Plan — seat moves, three-stage initiatives, petitions, confrontation
 created: 2026-09-19
-updated: 2026-09-19
+updated: 2026-09-20
 type: plan
 tags: [civic, citizens, engine, cron, active]
 sources:
@@ -11,6 +11,7 @@ sources:
   - output/agent_engine-wiring_2026-09-19T08-05-44.md — wiring card, utilities/citizenDialMap.js
   - output/agent_engine-wiring_2026-09-16T17-17-23.md — wiring card, Reflection_Intake / citizenPage write path (civic.37)
 pointers:
+  - "[[for-claude-review/2026-09-20-codex-civic38-game-loop-review]] — Codex review for group reconciliation; findings and proposals, not a second build plan"
   - "[[../engine/ROLLOUT_PLAN]] — parent rollout, row civic.38"
   - "[[../research/2026-09-19-kimi-initiative-stage-voting-and-wake-incentives]] — design record (rulings + measured gaps)"
   - "[[2026-09-16-work-wake-packs]] — civic.37, the wake chassis this plan's packs ride"
@@ -195,5 +196,6 @@ One owner per file — `scripts/cron-civic-run.js` is touched by Tasks 1, 2, 3, 
 
 ## Changelog
 
+- 2026-09-20 (codex) — Linked the builder-requested [[for-claude-review/2026-09-20-codex-civic38-game-loop-review]]; review proposals await reconciliation, with tasks and assignments unchanged.
 - 2026-09-20 (research-build) — Lane assignments added; house guests booted against them.
 - 2026-09-19 (kimi) — Initial draft. Builder approved drafting in-session (research record §10/§11 is the contract). Anchors verified by two read-only exploration passes + wiring cards for civicInitiativeEngine and citizenDialMap (both attached). Corrections the verification surfaced, baked into the tasks: sitting is free post-engine.213 so the stall must carry the cost (Task 5); no per-citizen crime-victim data exists so safety signatures are hood-aggregate (Task 6); the grounding gate never covered `statement` and still doesn't (Task 1); Chaos_Cars is not in the beats dump (out of scope, named); datawake rota is 18 seats incl. project directors, not 19 (Task 9).

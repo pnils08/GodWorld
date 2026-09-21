@@ -164,7 +164,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | civic.22 | Initiative authorship — S406 'hand-fed' ruling SUPERSEDED 2026-09-19 (Mike: seats author); folds into civic.38. Grok's §12 draft is prior art | blocked | research-build | [[../plans/2026-08-15-civic-edge-truth-migration]] §12 |
 | civic.33 | Recall/challenger fall-rate — threshold-20 confirmed live; tiers 2/3 of the door not yet bench-exercised. Needs N sandbox cycles with city-hall + media active | ready | engine-sheet | [[../plans/2026-08-29-employment-system-cascade]] §Status log |
 | civic.37 | Work-wake packs — ME/EMS on civic beats, A's players on the sports feed; live 2026-09-19, crontab Tue/Thu 20:18. Acceptance: first unattended run (Tue 2026-09-22), read back | in-progress | engine-sheet | [[../plans/2026-09-16-work-wake-packs]] |
-| civic.38 | Civic game board — build plan filed: closed move set + Sunday-gated write path, 3-stage initiatives with losing clock, petitions from condition data, Mara confrontation, rota split | ready | research-build / engine-sheet | [[../plans/2026-09-19-civic-wake-game-loop]] + [[../research/2026-09-19-kimi-initiative-stage-voting-and-wake-incentives]] |
+| civic.38 | Civic game board — build plan filed: closed move set + Sunday-gated write path, 3-stage initiatives with losing clock, petitions from condition data, Mara confrontation, rota split | ready | research-build / engine-sheet | [[../plans/2026-09-19-civic-wake-game-loop]] + [[../research/2026-09-19-kimi-initiative-stage-voting-and-wake-incentives]] + [[for-claude-review/2026-09-20-codex-civic38-game-loop-review]] (Codex review) |
 
 ### infrastructure.* — Supermemory, services, ingest
 

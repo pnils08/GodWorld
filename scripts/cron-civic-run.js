@@ -905,13 +905,17 @@ async function runDirective() {
   // VOICE_DIRECTIVE_TEMPLATE is an apparatus doc (.claude paths, audit paths,
   // owner sign-off) — feeding it whole put out-of-sim framing in her context.
   // The directive craft is distilled into the in-world brief below instead.
+  // civic.38 Task 8: the directive is a CONFRONTATION aimed at the elected
+  // seats — what the seat could have seen (its own district data, its
+  // petition pool, its board) and must now answer.
   const DIRECTIVE_BRIEF = [
     '## Your cycle directive — how you work this desk',
     '',
-    'Each cycle you review the city\'s live record and issue directives to the offices and',
-    'program directors who owe the public an answer. You are the city\'s institutional',
-    'memory: you catch the unresolved thread, the number nobody published, the office gone',
-    'quiet while a decision depends on them.',
+    'Each cycle you review the city\'s live record and confront the elected seats that owe',
+    'the public an answer. You are the city\'s institutional memory: you catch the unresolved',
+    'thread, the number nobody published, the seat gone quiet while its district moves the',
+    'wrong way. Project directors and staff are not your addressees — their work is',
+    'operational. You confront the people the city can vote out.',
     '',
     'Issue one block per addressee, exactly this shape:',
     '',
@@ -928,20 +932,74 @@ async function runDirective() {
     'unanswered. Maximum 12 blocks. If you cannot write a clean Acceptance line, the',
     'directive is not ready — cut it. Thin directives are noise; issuing fewer, sharper',
     'directives is always the better cycle.',
+    '',
+    'A demand must be traceable to something the seat could see: a district hood moving the',
+    'wrong way, constituents complaining on the record with no proposal filed in answer, or an',
+    'initiative on the seat\'s board about to hit its stall clock. Name the evidence.',
   ].join('\n');
   const persona = [
     mustRead(path.join(ROOT, 'docs', 'mara-vance', 'IN_WORLD_CHARACTER.md'), 'Mara persona'),
     DIRECTIVE_BRIEF,
   ].join('\n\n---\n\n');
 
-  // Valid addressees = the chain's live seats (office map, agented only).
+  // civic.38 Task 8 step 1: valid addressees = the 10 ELECTED seats (mayor +
+  // 9 council). Project directors, DA, Okoro, Baylight leave the pool — their
+  // operational read moves to work-wake (Task 9).
   const seats = [];
-  const seen = new Set();
-  for (const o of [...officeMap.offices, ...(officeMap.projects || [])]) {
-    if (!o.agentDir || seen.has(o.agentDir)) continue;
-    seen.add(o.agentDir);
-    seats.push({ agentDir: o.agentDir, holder: o.holder, title: o.title });
+  for (const o of officeMap.offices || []) {
+    if (!o.agentDir) continue;
+    const id = String(o.officeId || '');
+    if (id !== 'MAYOR-01' && !/^COUNCIL-D\d$/.test(id)) continue;
+    seats.push({ agentDir: o.agentDir, holder: o.holder, title: o.title, office: o });
   }
+
+  // Task 8 step 2 — per-seat material built from the SAME inputs the seats
+  // get: district hood movement (engine audit), the petition pool (beats
+  // Reflection_Intake once dumped), the seat's board (beats tracker dump).
+  // A confrontation confronts with what the seat could have seen.
+  const slice = require('./buildCivicOfficeSlice');
+  const c2p = slice.childToParentFromAudit(audit);
+  const trackerRows = slice.loadTrackerRows(ROOT) || [];
+  const hoodScores = slice.scoreHoods(audit);
+  // Petition visibility line (default the builder may overrule): a district
+  // with this many Civic complaints on the record and no answering proposal is
+  // confrontable.
+  const PETITION_VISIBILITY_LINE = 3;
+  const pendingProposals = (function () {
+    const folded = loadMoveLedgerFolded(ROOT, cycle);
+    if (!folded) return [];
+    return [...folded.values()].filter(m => m.status === 'pending' && m.type === 'propose');
+  })();
+  const seatMaterial = seats.map(s => {
+    const o = s.office;
+    const hoods = slice.turfHoods(o);
+    const turfSet = new Set(hoods.map(h => String(h).toLowerCase()));
+    const lines = ['### ' + s.holder + ' (' + s.title + (o.district ? ', ' + o.district : '') + ') — ' + s.agentDir];
+    // (a) hood data moving the wrong way
+    const hot = hoodScores.filter(h => turfSet.has(String(h.hood).toLowerCase()) && (h.outlier || h.traj === 'decay'));
+    if (hot.length) lines.push('- district heat: ' + hot.slice(0, 3).map(h => h.hood + ' (' + h.why.join('; ') + ')').join(' | '));
+    // (b) petitions above the visibility line with no proposal filed
+    const pool = slice.loadPetitionPool(ROOT, o, hoods, officeMap, c2p);
+    if (pool.available) {
+      const answered = pendingProposals.filter(m => m.agentDir === o.agentDir).length;
+      lines.push('- petition pool: ' + pool.complaints.length + ' complaint(s) on the record' +
+        (pool.complaints.length >= PETITION_VISIBILITY_LINE && !answered
+          ? ' — ABOVE the visibility line (' + PETITION_VISIBILITY_LINE + ') with NO proposal filed by this seat'
+          : answered ? ' — ' + answered + ' proposal(s) pending from this seat' : ''));
+    }
+    // (c) board rows inside one cycle of the stall clock. Stage columns land
+    // with Task 4; until then the honest proxy is a tracker row whose
+    // NextActionCycle is due now or next cycle.
+    const board = slice.boardRowsFor(o, trackerRows, c2p);
+    const dueSoon = board.filter(b => {
+      const row = trackerRows.find(r => r.InitiativeID === b.id) || {};
+      const nac = Number(row.NextActionCycle);
+      return Number.isFinite(nac) && nac <= Number(cycle) + 1;
+    });
+    if (board.length) lines.push('- board: ' + board.map(b => b.id + ' [' + (b.phase || '—') + ']').join(', '));
+    if (dueSoon.length) lines.push('- stall-clock proximity (NextActionCycle ≤ C' + (Number(cycle) + 1) + '): ' + dueSoon.map(b => b.id).join(', '));
+    return lines.join('\n');
+  });
 
   // Cycle material: summary slices + HIGH patterns + tracker + last cycle's
   // voice record + prior directive (escalation detection). Mara sits at the
@@ -981,6 +1039,9 @@ async function runDirective() {
     '- Only issue a directive where the cycle material below gives you a real unresolved thread, gap, or dependency. Thin directives are noise.',
     '- Do not limit directives to initiative process. Press offices on the crisis and the success in their neighborhoods, their programs, and the city — they argue the initiatives, but they must fight for their constituents.',
     '- Cite cycles by number (C' + prev + ', C' + cycle + '). Never invent citizens, numbers, or events not present below.',
+    '',
+    '=== PER-SEAT MATERIAL (the same data each seat was given — confront them with what they could have seen) ===',
+    ...seatMaterial,
     '',
     '=== CYCLE ' + cycle + ' MATERIAL ===',
     '',

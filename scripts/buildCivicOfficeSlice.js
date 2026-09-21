@@ -1173,7 +1173,7 @@ module.exports = {
   // civic.38 Task 3 game blocks
   buildGameBlocks, boardRowsFor, boardNeedText, childToParentFromAudit, foldHood,
   loadMovesFolded, loadPetitionPool, loadWorkingCity, loadConfrontation,
-  loadInterventionMenu, readJsonl, NEGATIVE_AFFECTS, BLOCK_CAP,
+  loadInterventionMenu, loadTrackerRows, readJsonl, NEGATIVE_AFFECTS, BLOCK_CAP,
 };
 
 if (require.main === module) {

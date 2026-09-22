@@ -19,7 +19,9 @@ test('board preserves legacy advice, negative-phase priority and unplayable gate
     const row = {Stage:'Funded',ImplementationPhase:phase};
     assert.equal(slice.boardNeedText(row),contract.stageRequirement({stage:'Funded',phase}).text);
   }
-  for (const PolicyDomain of ['safety','housing','economic','workforce','sports']) {
+  // housing dropped — flipped playable:true engine.251 (2026-09-22), has a real
+  // delivering gate now.
+  for (const PolicyDomain of ['safety','economic','workforce','sports']) {
     assert.match(slice.boardNeedText({Stage:'Standing',PolicyDomain}), /no delivering gate/);
   }
   assert.match(slice.boardNeedText({Stage:'Standing',PolicyDomain:'health'}), /metric evidence unavailable/);

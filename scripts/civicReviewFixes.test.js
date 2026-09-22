@@ -18,7 +18,10 @@ function workspace(fn) {
 test('F1 inherited and malformed interventions cannot consume the valid move', () => {
   const proposal = intervention => ({ type: 'propose', intervention, title: 'SYNTHETIC', problem: 'SYNTHETIC', hoods: ['East Oakland'] });
   const malformed = { ...catalog, broken: { policyDomain: 'health' }, shape: { playable: true, policyDomain: 'health' } };
-  for (const key of ['constructor', 'toString', '__proto__', ['health-service'], 'broken', 'shape', 'housing-program']) {
+  // housing-program dropped from this list — it flipped playable:true (engine.251,
+  // builder-ruled rate 0.20/margin 0.15, 2026-09-22), so it's no longer an
+  // unplayable-intervention rejection case; safety-program stays a live example.
+  for (const key of ['constructor', 'toString', '__proto__', ['health-service'], 'broken', 'shape', 'safety-program']) {
     const result = run.validateDatawakeMoves([proposal(key), proposal('health-service')], { office, catalog: malformed });
     assert.equal(result.rejected.length, 1);
     assert.equal(result.accepted[0].payload.intervention, 'health-service');

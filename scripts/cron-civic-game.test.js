@@ -288,13 +288,15 @@ test('T1.7: Live validateDatawakeMoves: Catalog not landed or unplayable domain 
   assert.equal(res1.accepted.length, 0);
   assert.match(res1.rejected[0].reason, /catalog-not-landed/);
 
-  // 2. Intervention with playable: false
+  // 2. Intervention with playable: false — housing-program flipped playable:true
+  // engine.251 (builder-ruled rate 0.20/margin 0.15, 2026-09-22); safety-program
+  // is now the live example with no lever.
   const unplayableMove = [{
     type: 'propose',
-    title: 'Rent Subsidies',
-    intervention: 'housing-program',
+    title: 'More Patrols',
+    intervention: 'safety-program',
     hoods: ['West Oakland'],
-    problem: 'rent burden'
+    problem: 'crime'
   }];
   const res2 = civicRun.validateDatawakeMoves(unplayableMove, { office, catalog: phaseContract.INTERVENTION_CATALOG });
   assert.equal(res2.accepted.length, 0);
@@ -353,11 +355,13 @@ test('T1.9: Live appendMoveLedger & moveLedgerLines write correct ledger rows to
   }
 });
 
-test('T1.10: Live validateDatawakeMoves with full INTERVENTION_CATALOG: 3 playable pass, 5 unplayable reject', () => {
+test('T1.10: Live validateDatawakeMoves with full INTERVENTION_CATALOG: 4 playable pass, 4 unplayable reject', () => {
   const office = { officeId: 'MAYOR-01', agentDir: 'civic-office-mayor', district: 'citywide' };
   const catalog = phaseContract.INTERVENTION_CATALOG;
-  const playableKeys = ['health-service', 'transit-project', 'school-program'];
-  const unplayableKeys = ['safety-program', 'housing-program', 'economic-program', 'workforce-program', 'sports-district'];
+  // housing-program flipped playable:true engine.251 (builder-ruled rate 0.20/
+  // margin 0.15, 2026-09-22).
+  const playableKeys = ['health-service', 'transit-project', 'school-program', 'housing-program'];
+  const unplayableKeys = ['safety-program', 'economic-program', 'workforce-program', 'sports-district'];
   assert.deepStrictEqual(Object.keys(catalog).filter(k => catalog[k].playable).sort(), [...playableKeys].sort());
   assert.deepStrictEqual(Object.keys(catalog).filter(k => !catalog[k].playable).sort(), [...unplayableKeys].sort());
   for (const key of playableKeys) {
@@ -1107,7 +1111,9 @@ test('F1: Live catalog gate rejects malformed schema shapes and inherited protot
     type: 'propose', intervention, title: 'Synthetic Proposal', problem: 'Test problem', hoods: ['East Oakland']
   });
 
-  const testKeys = ['constructor', 'toString', '__proto__', 'broken-no-metric', 'broken-bad-direction', 'housing-program'];
+  // housing-program flipped playable:true engine.251 (2026-09-22); safety-program
+  // is now the live unplayable example.
+  const testKeys = ['constructor', 'toString', '__proto__', 'broken-no-metric', 'broken-bad-direction', 'safety-program'];
   for (const key of testKeys) {
     const result = civicRun.validateDatawakeMoves([proposal(key), proposal('health-service')], {
       office, catalog: malformedCatalog
@@ -1607,8 +1613,9 @@ test('T9.6: Live stageRequirement & boardNeedText distinguish stalled revival fr
     assert.strictEqual(civicSlice.boardNeedText(row), req.text);
   }
 
-  // All five refused domains have no delivering gate from Standing.
-  for (const domain of ['safety', 'housing', 'economic', 'workforce', 'sports']) {
+  // Refused domains have no delivering gate from Standing. housing dropped
+  // (flipped playable:true, engine.251, 2026-09-22) — it has a real gate now.
+  for (const domain of ['safety', 'economic', 'workforce', 'sports']) {
     const row = { Stage: 'Standing', ImplementationPhase: 'operational', PolicyDomain: domain };
     const req = phaseContract.stageRequirement({ stage: row.Stage, phase: row.ImplementationPhase, policyDomain: domain });
     assert.strictEqual(req.clears, false);

@@ -129,6 +129,14 @@ pointers:
 
 ## PROD deploy log — full trail
 
+### PROD @121 — engine.255 Task 1: budget columns self-arm + back-fill (2026-09-22 ~18:30 Chicago, engine-sheet; bench-proven C110 on 0908 @94)
+
+Engine tree `55d1fe1f`; 1 payload file vs @120 (`civicInitiativeEngine.js`: `INITIATIVE_BUDGET_COLUMNS_`, `parseBudgetMoney_`, `ensureInitiativeBudgetColumns_`, `planInitiativeBudgetBackfill_` / `backfillInitiativeBudgets_`, called right after the stage-column arm in `runCivicInitiativeEngine_`). Lib mirror `parseBudgetMoney` + `BUDGET_COLUMNS`, parity on 17 fixtures; contract 275/275, sweep 260/260 files. 170 live files, 0 test files. Isolated stage, sandbox id grep-absent; pull-back 169/169 js byte-identical. Script version **108**, web app read back **@108**.
+
+**What it changes on live at the C109 fire (Sun 2026-09-27):** Initiative_Tracker 38 → 41 columns (`BudgetTotal`, `BudgetRemaining`, `LastDisburseCycle` at AM–AO); every row with a parseable `Budget` gets `BudgetTotal` and `BudgetRemaining` stamped once (INIT-001 28,000,000 / 28,000,000; INIT-002 12,500,000; INIT-003 230,000,000; INIT-005 45,000,000; INIT-006 2,100,000,000; INIT-007 12,500,000); `LastDisburseCycle` blank. Nothing reads the numbers yet (Tasks 2–4). INIT-001 already reads `PolicyDomain housing` on live (hand-retagged 18:16, builder call 1) — housing is `playable:false`, so its stage handling is unchanged from economic. Then `node scripts/dumpBeatTabs.js` + `node scripts/regenSchemaHeaders.js`.
+
+**Bench:** 0908 @94 (`55d1fe1f`), INIT-001 retagged on the bench to mirror live, fire C110 `ok` 116s: tracker 38 → 41 cols, all six budgets parsed and seeded exactly as above, `LastDisburseCycle` blank, Engine_Errors only the synced C108 sports-feed row, cycleCount 110.
+
 ### PROD @120 — engine.255: housing lever off (2026-09-22 ~15:55 Chicago, engine-sheet; bench-proven C109 on live-synced state)
 
 Engine tree `0342ed03`; 2 payload files vs @119 (`civicInitiativeEngine.js` `CIVIC_STAGE_CATALOG_.housing.playable` true → false; `householdFormationEngine.js` `applyHousingReliefBody_` returns `disabled` before arming when `civicHousingReliefEnabled` is 0 and the tab has no `GrossMonthlyRent`). Lib side (`housing-program` `playable:false`, `effectChannel null`, label widened) and five test files rode the same commit. 170 live files, 0 test files. Isolated stage, sandbox id grep-absent; pull-back 169/169 js byte-identical. Script version **107**, web app read back **@107**.

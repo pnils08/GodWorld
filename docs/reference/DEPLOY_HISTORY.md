@@ -129,6 +129,14 @@ pointers:
 
 ## PROD deploy log — full trail
 
+### PROD @114 — the builder's three Delivering rulings, seeded (2026-09-21 ~21:58 Chicago, engine-sheet)
+
+Engine tree `981d8355`; 1 payload file vs @113 (`engine94SheetContract.js`, seeds only); 170 live files, 0 test files. Isolated stage, sandbox id grep-absent; pull-back 169/169 js byte-identical. Script version **101**, web app @100 → @101, read back.
+
+**What it changes.** Seeds only, no reader change: `civicDeliverMargin_health` 0.15 → **0.10**; new `civicStageUntendedStallCycles` **12** (Standing/Delivering untended clock; reader lands with the stall detector); `civicDeliverRegressShare` 0.5 confirmed. Live never armed the health key (no fire since @109), so all three self-arm at Sunday's fire with the ruled values — no live cell write. Bench 0908 carried 0.15 from its fires and was written explicitly (margin updated, clock appended, share kept), read back 0.1 / 0.5 / 12. Not re-fired: a seed table has no behaviour to bench.
+
+**Expect at the first live fire on @101:** `World_Config` gains `civicDeliverMargin_health` 0.1, `civicDeliverRegressShare` 0.5, `civicStageUntendedStallCycles` 12 (plus every earlier @109–@113 key). **Rollback:** re-push `a342400d`.
+
 ### PROD @113 — codex review fix-ups: no observation holiday after delivery (2026-09-21 ~21:20 Chicago, engine-sheet; bench-proven ~21:10)
 
 civic.38 Task 4 part 2 fix-ups from the codex delivering review. Engine tree `a342400d`; 1 payload file vs @112 (`civicInitiativeEngine.js` — the three regenerated lib mirrors); 170 live files, 0 test files.

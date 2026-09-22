@@ -1178,6 +1178,13 @@ function applyHousingReliefBody_(ctx, cycle, out) {
   var sheet = ss.getSheetByName('Household_Ledger');
   if (!sheet) { out.reason = 'no-sheet'; return out; }
   var header = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+  var dials = getCivicHousingDials_(ctx);
+  out.enabled = dials.enabled;
+  // engine.255 (builder 2026-09-22): a disabled lever arms nothing. The four
+  // relief columns land on Household_Ledger only when the dial is 1 — a column
+  // that never moves is scenery (SIM_DOCTRINE §16), and the lever's shape is
+  // being redesigned as a budgeted disbursement.
+  if (!dials.enabled && header.indexOf('GrossMonthlyRent') === -1) { out.reason = 'disabled'; return out; }
   if (ensureHousingReliefColumns_(sheet, header)) {
     out.armed = true;
     header = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
@@ -1188,8 +1195,6 @@ function applyHousingReliefBody_(ctx, cycle, out) {
   var iType = idx('HousingType'), iRent = idx('MonthlyRent'), iStatus = idx('Status'), iHood = idx('Neighborhood'),
       iGross = idx('GrossMonthlyRent'), iRelief = idx('HousingReliefMonthly'), iRCycle = idx('HousingReliefCycle'), iRInit = idx('HousingReliefInitiativeID');
   if (iType < 0 || iRent < 0 || iGross < 0 || iRelief < 0 || iRCycle < 0 || iRInit < 0) { out.reason = 'columns-missing'; return out; }
-  var dials = getCivicHousingDials_(ctx);
-  out.enabled = dials.enabled;
   var slice = ctx.summary ? ctx.summary.initiativeHousingRelief : null;
   out.available = !!(slice && slice.available === true);
   out.reason = slice ? (slice.reason || null) : 'slice-missing';

@@ -460,6 +460,13 @@ Measured: [[../../output/engine-sheet/2026-09-21-matched-control-c108-c112.json]
 
 Civic game board — Task 4 steps 0–3 live PROD @116 (stages, upkeep, Delivering, losing clock; inert on blank Stage); director shifts file `work` moves; step 4 six-row conversion LIVE 2026-09-22 (bench-proven C123–C124); engine cuts complete — INIT-005 baseline stamps at the C109 fire; remaining work scripts-lane (petition band, coalitions plan)
 
+## Builder direction 2026-09-22 15:10 (engine-sheet, captured as said — not yet a build)
+
+- The engine raising rent-burden flags on its own is fine; the world may have a housing crisis. What was wrong with engine.251 was the response shape: a flat hood-wide discount no seat proposed, duplicating the initiative the world already has.
+- The West Oakland Stabilization Fund (INIT-001) is that initiative — canon: 295 families, tenants behind on rent, small owners — and it is tagged `economic`, so the engine wires it to retail and it reaches no household. Read on live: `Budget` is a display string on every row; `Number('$28M')` is 0, so the one engine reader (the veto's controversy term) has never seen a budget.
+- Direction: the crons take responsibility for the sim and play the game of advancing their districts; the original initiatives get wired, not window dressing; a budget inside the mechanism makes an initiative trackable. Initiatives with no city budget "get tricky" — the builder does not want a treasury system designed around that yet.
+- Engine-sheet's proposed shape (for the builder's calls, below in chat 2026-09-22 15:20): Budget becomes a number that depletes; a Standing row's director work disburses a tranche each Cycle onto specific flagged rows in its hoods (a household's savings, a business row, a citizen's job); the row's own engine reacts; when the budget is spent the service ends unless re-voted. Tranche and budget are the rate/severity dials. The Fund is the first wire and the template; housing's measurable is the household engine's existing stressed-household count per hood, not a hood-median-vs-city judge.
+
 ## Changelog
 
 - 2026-09-22 09:55 (engine-sheet) — **Builder ruled director wake cadence:** workers wake as their jobs need — the new civic system is not forced into the old one-wake rota. `cron-work-wake.js` default is now every due pack per run (`--limit=N` still caps); Tuesday dry-run woke all 7 due packs. Suite 39/39. First unattended run tonight 20:18.

@@ -129,14 +129,22 @@ function hhFixture() {
   ];
 }
 const slice = (hoods) => ({ available: true, reason: null, rate: 0.10, hoods: hoods, sources: [], unknownHoods: [] });
-{ // arm + copy while DISABLED — nothing discounted
+{ // DISABLED on a bare 13-column tab — arms nothing, touches nothing (engine.255)
   const ctx = ctxWith([], hhFixture(), { civicHousingReliefEnabled: 0 }, 110);
+  ctx.summary.initiativeHousingRelief = slice({ 'West Oakland': { rate: 0.10, initiativeId: 'INIT-901' } });
+  const before = JSON.stringify(ctx._tabs.Household_Ledger._values);
+  const out = E.applyHousingRelief_(ctx, 110);
+  const v = ctx._tabs.Household_Ledger._values;
+  ok(out.armed === false && out.reason === 'disabled' && v[0].length === 13 && JSON.stringify(v) === before, 'disabled: the four relief columns are NOT armed and no cell changes');
+}
+{ // DISABLED on a tab that already carries the columns — gross copied, nothing discounted (the bench path)
+  const ctx = ctxWith([], hhFixture(), { civicHousingReliefEnabled: 0 }, 110);
+  ctx._tabs.Household_Ledger._values[0] = ctx._tabs.Household_Ledger._values[0].concat(E.HOUSING_RELIEF_COLUMNS_);
   ctx.summary.initiativeHousingRelief = slice({ 'West Oakland': { rate: 0.10, initiativeId: 'INIT-901' } });
   const out = E.applyHousingRelief_(ctx, 110);
   const v = ctx._tabs.Household_Ledger._values;
-  ok(out.armed === true && v[0].slice(13).join(',') === E.HOUSING_RELIEF_COLUMNS_.join(','), 'four relief columns armed after the live 13');
   const col = (name) => v[0].indexOf(name);
-  ok(v[1][col('GrossMonthlyRent')] === 1500 && v[1][col('MonthlyRent')] === 1500 && out.grossCopied === 2 && out.relieved === 0, 'disabled: gross copied from MonthlyRent, obligation unchanged');
+  ok(out.armed === false && v[1][col('GrossMonthlyRent')] === 1500 && v[1][col('MonthlyRent')] === 1500 && out.grossCopied === 2 && out.relieved === 0, 'disabled with columns present: gross copied from MonthlyRent, obligation unchanged');
   ok(v[3][col('GrossMonthlyRent')] === '' && v[4][col('GrossMonthlyRent')] === '' && v[5][col('GrossMonthlyRent')] === '' && out.invalid === 1, 'owned, dissolved and invalid rows untouched (invalid counted)');
   const before = JSON.stringify(v);
   const out2 = E.applyHousingRelief_(ctx, 110);

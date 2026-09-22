@@ -3019,7 +3019,7 @@ var CIVIC_STAGE_CATALOG_ = {
   workforce: { playable: false, stage3Metric: { tab: 'Neighborhood_Map', column: ['RetailVitality'], direction: 'up', scope: 'hood' } },
   sports:    { playable: false, stage3Metric: { tab: 'Neighborhood_Map', column: ['RetailVitality', 'NightlifeProfile'], direction: 'up', scope: 'hood' } },
   safety:    { playable: false, stage3Metric: { tab: 'Crime_Metrics', column: ['ViolentLevel'], direction: 'down', scope: 'hood' } },
-  housing:   { playable: true,  stage3Metric: { tab: 'Household_Ledger', column: ['MonthlyRent*12/HouseholdIncome'], direction: 'down', scope: 'hood' } }
+  housing:   { playable: false, stage3Metric: { tab: 'Household_Ledger', column: ['MonthlyRent*12/HouseholdIncome'], direction: 'down', scope: 'hood' } }  // engine.255: off until the budgeted-disbursement lever lands
 };
 
 /** Which stage columns a header row lacks, in declared order. Pure. */

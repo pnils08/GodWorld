@@ -36,10 +36,10 @@ pointers:
 
 **Acceptance criteria:**
 1. On a bench pair from live-synced C108 (treatment: INIT-001 retagged housing with `BudgetTotal` 28,000,000; control: untouched), the treatment arm writes grants onto named West Oakland households each tended Cycle, `BudgetRemaining` falls by exactly the sum of grants, and every granted head of household carries a LifeHistory line naming the initiative and the Cycle.
-2. A granted household's stress severity is lower than its control-arm twin's from the grant on (savings do not spend down on live — see §Data reality — so the aftermath comes from the cooldown, the budget end and newly flagged rows, not from re-flagging the same household). No grant is ever paid to an owned, dissolved or unflagged row, and no household is granted twice inside the cooldown.
+2. A granted household's stress severity is lower than its control-arm twin's from the grant on (savings do not spend down on live — see §Data reality — so the aftermath comes from the cooldown, the budget end and newly flagged rows, not from re-flagging the same household). No grant is ever paid to an owned, dissolved or unflagged row, and no household is granted twice inside the cooldown by any initiative (the cooldown is per household, not per initiative — two Standing housing rows over one hood would otherwise both pay the same worst-off row in one Cycle).
 3. Of the households flagged in the target hoods at the vote baseline (cohort by HouseholdId), the treatment arm relieves or keeps more of them than the control arm by the measured margin within the hold window, and the row reaches Delivering; the control arm — where crisis rows dissolve at 10% a Cycle and leave the tab — does not. A hood where flagged households lose their homes does not count as improved (§3, §8).
 4. An untended row (tend factor below 1) pays a proportionally smaller tranche; at the floor it still pays, so a neglected fund drips rather than stops — and `BudgetRemaining` reaching 0 ends the service (phase `complete`, no further grants, the row's Delivering can regress) with no code path that refills it.
-5. `Number(Budget)` is read nowhere. A row whose `Budget` string cannot be parsed to money is `blocked: no-budget` on the board, pays nothing and runs no clock, exactly like an unplayable domain.
+5. `Number(Budget)` is read nowhere — `checkMayoralVeto_` (`civicInitiativeEngine.js:2388`, the `> 50,000,000` scrutiny term at `:2432`, dead since it was written because `Number('$28M')` is 0) reads `BudgetTotal` instead (builder call 9). A row whose `Budget` string cannot be parsed to money is `blocked: no-budget` on the board, pays nothing and runs no clock, exactly like an unplayable domain.
 6. After Task 8 no engine.251 relief column, dial or writer remains on main or on live; `civicHousingRelief.test.js` is retired; G-EC70 (owned households anchored) stays.
 
 ---
@@ -51,19 +51,31 @@ Phase 2  applyInitiativeImplementationEffects_
          ├─ reads tracker: Stage, phase, BudgetRemaining, tend (already computed)
          └─ S.initiativeDisbursement[initId] = { domain, hoods[], tranche, remaining, tend }
                 tranche = min(remaining, civicDisburseTranche_<domain> × tend)
-Phase 5  processHouseholdFormation_  (after updateHouseholdIncomes_, before detectHouseholdStress_)
+Phase 5  runCivicInitiativeEngine_ (Phase5-Initiatives, godWorldEngine2.js:358 — runs 31 slots BEFORE the household engine)
+         └─ stage step as today; reads BudgetRemaining for the board; writes nothing about spend
+Phase 5  processHouseholdFormation_  (Phase5-HouseholdFormation, :389; after updateHouseholdIncomes_, before detectHouseholdStress_)
          ├─ applyHousingDisbursement_: for each housing slice
-         │    eligible = active rented households in folded hoods, flagged by the engine's own stress
-         │               formula, not granted by this initiative within civicGrantCooldownCycles
+         │    eligible = ACTIVE + RENTED households (explicit filter — the stress detector has none, owned
+         │               buyers are flagged on mortgage burden by design) in the slice's folded hoods
+         │               (fold through resolveHoodOrChild_ only when canonHoods is seeded, else refuse),
+         │               flagged warning/crisis by the engine's own formula, LastGrantCycle older than
+         │               civicGrantCooldownCycles (per HOUSEHOLD, any initiative)
          │    order    = rentBurden desc, tie-break HouseholdId
          │    grant    = min(GrantMonths × MonthlyRent, tranche left)   until tranche is spent
-         │    writes   = HouseholdSavings += grant; LastGrantCycle; LastGrantInitiativeID   (own-tab, same class as casinoLedgerEngine)
-         │               ctx.ledger LifeHistory line on the head of household (Phase 10 commits)
-         │               S.initiativeDisbursement[initId].paid += grant; .grants.push({hh, amount})
+         │    writes   = (durable) head of household NetWorth += grant via ctx.ledger — Phase 10 commits;
+         │                         HouseholdSavings is DERIVED from member NetWorth every Cycle
+         │                         (updateHouseholdIncomes_ :1013/:1043/:1047), so a direct savings write is wiped next fire
+         │               (same-Cycle) HouseholdSavings += grant on the row object + column vector so THIS
+         │                         Cycle's stress read and dissolution roll see it
+         │               LastGrantCycle; LastGrantInitiativeID; LastGrantAmount  (receipt columns, own-tab)
+         │               ctx.ledger LifeHistory line on the head (tag Relief)
+         │               Initiative_Tracker.BudgetRemaining -= paid, SAME function, one write per slice
+         │                         (the household engine already owns a cross-tab tracker cell? — no: this is
+         │                         a NEW direct write class, filed in SHEETS_MANIFEST §9 as engine.255;
+         │                         idempotent: paid is recomputed from receipt rows stamped this Cycle, so a
+         │                         re-run after a crash between the two writes debits once)
+         │               remaining <= 0 → ImplementationPhase 'complete', MilestoneNotes 'budget exhausted C<n>'
          └─ detectHouseholdStress_ reads savings against dialSavingsBufferMonths (was 12, hardcoded twice)
-Phase 5  civicInitiativeEngine (stage step, later in the phase)
-         ├─ BudgetRemaining -= paid  (tracker write, same class as the stage columns)
-         └─ remaining <= 0 → ImplementationPhase 'complete', MilestoneNotes 'budget exhausted C<n>'
 Phase 2 (next fire)  stage-3 observation: flagged-at-vote cohort — relieved / kept / lost per hood vs the city's flagged rows
 ```
 
@@ -123,12 +135,13 @@ Live seed for INIT-001: `BudgetTotal` 28,000,000; `BudgetRemaining` 28,000,000 (
 4. **Cooldown.** `civicGrantCooldownCycles` — Cycles before the same initiative can grant the same household again. Recommendation: 26 (half a year).
 5. **Budget exhausted = service ends.** Phase → `complete`; the seat re-proposes a new row for more money. No refill path. Recommendation: yes.
 6. **Seat proposals carry a budget.** The `propose` move gets a `budget` field the seat must fill from a closed band per domain (pack lists the band); missing → the row stands as `blocked: no-budget`. Recommendation: yes, bands per domain seeded in World_Config (`civicBudgetBand_housing` etc.), builder sets the numbers.
+9. **The mayoral veto reads the real budget.** Today `> $50M` adds veto probability and has never fired (`Number('$28M')` = 0). Rewired to `BudgetTotal`, INIT-006's $2.1B and INIT-003's $230M would draw scrutiny at their next vote. Recommendation: rewire; it was always meant to.
 7. **Fold vs remove the engine.251 discount code.** Recommendation: remove (Task 8); nothing of the flat discount survives into the disbursement shape except the C108 measurements.
 
 ## Tasks
 
 ### Task 1: Budget parse + the two tracker columns
-- **Files:** `phase05-citizens/civicInitiativeEngine.js` (modify: `INITIATIVE_STAGE_COLUMNS_` gains `BudgetTotal`, `BudgetRemaining`; `parseBudgetMoney_` pure; `ensureInitiativeStageColumns_` arms and back-fills `BudgetTotal`/`BudgetRemaining` from `Budget` once — never re-parses a row that already carries `BudgetTotal`); `lib/initiativePhaseContract.js` (mirror `parseBudgetMoney`, parity test); `scripts/regenSchemaHeaders.js` run after the live arm.
+- **Files:** `phase05-citizens/civicInitiativeEngine.js` (modify: `INITIATIVE_STAGE_COLUMNS_` gains `BudgetTotal`, `BudgetRemaining`; `parseBudgetMoney_` pure; `ensureInitiativeStageColumns_` arms and back-fills `BudgetTotal`/`BudgetRemaining` from `Budget`; re-parses whenever `BudgetTotal` is blank and `Budget` is non-blank, so an amended no-budget row recovers — never clobbers a row that already carries a parsed number); `lib/initiativePhaseContract.js` (mirror `parseBudgetMoney`, parity test); `scripts/regenSchemaHeaders.js` run after the live arm.
 - **Steps:** parse `$`, `M`, `B`, `K`, commas; blank/NaN → blank; test the six live strings; arm on the cycle path like the stage columns.
 - **Verify:** `node lib/initiativePhaseContract.test.js` parity ≥ 6 fixtures; bench fire arms two columns, INIT-001 28000000 / 28000000, INIT-006 2100000000, INIT-007 12500000.
 
@@ -143,22 +156,22 @@ Live seed for INIT-001: `BudgetTotal` 28,000,000; `BudgetRemaining` 28,000,000 (
 
 ### Task 4: The housing grant writer (Phase 5)
 - **Files:** `phase05-citizens/householdFormationEngine.js` (modify: `applyHousingDisbursement_` called from `processHouseholdFormation_` after the income pass and before stress, replacing the `applyHousingRelief_` call site; arms `LastGrantCycle`, `LastGrantInitiativeID` on Household_Ledger the first time a grant is paid — not before); `docs/engine/SHEETS_MANIFEST.md` §9 row.
-- **Steps:** eligible/order/grant as in §The shape; write `HouseholdSavings` + the two receipt columns as column vectors (the `casinoLedgerEngine` class); LifeHistory line on the head via `ctx.ledger` (`"received a $<amount> stabilization grant from <Name> (<InitiativeID>)"`, tag `Relief`); `S.initiativeDisbursement[id].paid` / `.grants`; reload household objects so stress reads the new savings. Loud-not-fatal like the relief writer was.
+- **Steps:** eligible/order/grant as in §The shape (explicit `Status active` + `HousingType rented` filter; cooldown per household). Durable money: head of household `NetWorth += grant` through `ctx.ledger` (Phase 10 commits; `HouseholdSavings` derives from it next Cycle). Same-Cycle visibility: `HouseholdSavings += grant` on the row object and the column vector (the `casinoLedgerEngine` class) so this fire's stress read and dissolution roll see it. Receipts `LastGrantCycle` / `LastGrantInitiativeID` / `LastGrantAmount` in the same vector batch. LifeHistory line on the head via `ctx.ledger` (`"received a $<amount> stabilization grant from <Name> (<InitiativeID>)"`, tag `Relief`). Then, in the same function, `Initiative_Tracker.BudgetRemaining -= paid` per slice (paid recomputed from this Cycle's receipts — idempotent) and `remaining <= 0` → phase `complete` + MilestoneNotes. Loud-not-fatal like the relief writer was.
 - **Verify:** `scripts/civicDisbursement.test.js` (new): eligibility matrix (owned, dissolved, unflagged, off-hood, cooldown), order, tranche exhaustion mid-list, receipt columns, ledger line, idempotent rerun pays nothing twice in one Cycle.
 
-### Task 5: Spend and end (Phase 5, stage step)
-- **Files:** `phase05-citizens/civicInitiativeEngine.js` (modify: after the stage step, `BudgetRemaining -= paid` for every slice with `paid > 0`; `remaining <= 0` → `ImplementationPhase = 'complete'`, MilestoneNotes `budget exhausted C<n>`; the existing stall/regress logic then applies).
-- **Carried limit (F1 class, same as the stage carry):** the Phase-5 grant write and this decrement share no transaction; a run that dies between them pays once and does not debit. Recorded, not fixed — the next fire's `paid` is recomputed from the receipt columns, so it cannot pay twice.
-- **Verify:** contract test: remaining 100, paid 100 → complete; paid 0 → unchanged. Bench: `BudgetRemaining` falls by the exact grant sum each Cycle.
+### Task 5: (folded into Task 4 — kimi F1)
+The stage step runs 31 slots before the household engine (`godWorldEngine2.js:358` vs `:389`), so a decrement there would always read `paid` = 0 and `BudgetRemaining` would never move (§16 scenery). Spend and end live in the grant writer. `civicInitiativeEngine.js` only reads `BudgetRemaining` for the board and refuses to stage a row with blank `BudgetTotal` (`blocked: no-budget`).
+- **Carried limit (F1 class):** the household-tab grant vectors and the tracker decrement are two writes; a crash between them pays once and does not debit. The next fire recomputes `paid` from receipts stamped that Cycle and debits once — never twice.
 
 ### Task 6: Stage-3 measurable = flagged-at-vote cohort, relieved-or-kept
 - **Files:** `phase05-citizens/civicInitiativeEngine.js` `freezeCivicStageCohort_` Household_Ledger branch (modify); `lib/initiativePhaseContract.js` `housingBurdenCohort` → `housingFlaggedCohort` (mirror, parity); `CIVIC_STAGE_CATALOG_.housing` + catalog `stage3Metric` → `{ tab: 'Household_Ledger', column: 'flaggedRelievedShare', direction: 'up', scope: 'hood' }`.
 - **Why not a hood share:** a hood share counts warning-or-crisis, a grant leaves a household at warning (Task 3), and the control arm's crisis rows dissolve out of both numerator and denominator — the share would open for the control and not the treatment (§15 in mirror image; the superseded plan already named the dissolution confound). With 7 flagged rows citywide a hood-vs-city median is noise anyway.
 - **Steps:** at the vote baseline, freeze the set of flagged active rented HouseholdIds per target hood (the engine's own stress formula). Each observation: `relieved` = cohort rows now active and unflagged; `kept` = cohort rows still active (flagged or not); `lost` = cohort rows dissolved or moved out; metric per hood = `(relieved + kept − lost) / cohortSize` (a dissolved household is a loss, not an improvement); city reference = the same over the flagged rows in every member hood. The comparator consumes it unchanged as `direction: 'up'`. A target hood with zero flagged rows at the vote is `blocked: no-flagged-rows` — reported, no clock, like thin-cohort.
+- **F3 (kimi), recorded:** a 6-month grant never lifts a household past the 12-month skip and never changes its burden, so `relieved` stays near zero at the recommended dials; the signal is `kept` vs `lost` (treatment keeps crisis rows from the 10% dissolution roll, control does not). Builder call 8 decides whether the buffer moves; if it does not, the margin is measured on kept-vs-lost and the pack says so.
 - **Verify:** parity over 7 fixtures including a dissolved cohort row and a moved-out row; the comparator consumes it unchanged.
 
 ### Task 7: Bench pair, margin, playable
-- **Steps:** re-sync 0908 from live; treatment arm: INIT-001 retagged housing + `BudgetTotal` seeded; control arm: untouched; four fires each from C109. Nothing files `work` moves on the bench, so INIT-001's tend factor decays past grace 6 — four fires fit inside grace; a longer run hand-stamps `LastWorkCycle` before each fire and says so in the log. Measure West Oakland stressed share vs city middle per Cycle on both arms; the untreated wobble from the ten other member hoods is the noise floor; seed `civicDeliverMargin_housing` at ~60% of the treated effect above the worst luck, as health and the superseded lever were. Flip `housing` `playable:true` both sides only after the treated arm reaches Delivering and the control does not. Re-pin the five test files.
+- **Steps:** re-sync 0908 from live; treatment arm: INIT-001 retagged housing + `BudgetTotal` seeded; control arm: untouched; four fires each from C109. Nothing files `work` moves on the bench, so INIT-001's tend factor decays past grace 6 — four fires fit inside grace; a longer run hand-stamps `LastWorkCycle` before each fire and says so in the log. Measure the flagged-at-vote cohort per Cycle on both arms (relieved / kept / lost); record which bound the spend each Cycle — the tranche or the eligible pool (kimi F7: with tens of tracked renters per hood the pool binds, so $400k/Cycle and "~70 Cycles" are upper bounds, not forecasts); note grants paid in a folded hood under `civicHousingCohortMinRenters` (money the board cannot score); the untreated wobble from the ten other member hoods is the noise floor; seed `civicDeliverMargin_housing` at ~60% of the treated effect above the worst luck, as health and the superseded lever were. Flip `housing` `playable:true` both sides only after the treated arm reaches Delivering and the control does not. Re-pin the five test files.
 - **Verify:** `output/engine-sheet/2026-09-2X-disbursement-pair-c108-c112.json`; DEPLOY_HISTORY entry.
 
 ### Task 8: Remove the engine.251 discount lever
@@ -182,5 +195,6 @@ None invented. The seven builder calls above are the open items; each has a reco
 
 ## Changelog
 
+- 2026-09-22 17:00 (engine-sheet) — **kimi review folded** (`output/kimi/2026-09-22-review-engine255-disbursement.md`, verified F1/F2/F5 against the files): F1 the stage step runs before the household engine, so spend + end move into the grant writer (Task 5 folded into Task 4); F2 `HouseholdSavings` is derived from member NetWorth every Cycle, so the durable grant is the head's NetWorth via `ctx.ledger` with a same-Cycle savings write for this fire's stress read; F3 recorded under Task 6 (kept-vs-lost is the signal at 6-month grants); F4 cooldown per household; F5 veto term → `BudgetTotal` (builder call 9); F6 re-parse blank `BudgetTotal`; F7 bench records the binding constraint; F8 explicit rented+active filter and seeded-only hood fold. kimi reviewed the 16:20 draft; the 16:45 measurable rewrite already addressed the share-vs-control inversion.
 - 2026-09-22 16:45 (engine-sheet, advisor pass + live data) — §Data reality added (7 flagged renters citywide, savings = net worth, nothing debits it, Beverly Hayes NetWorth $939,915 with no household row) and builder call 8 opened with recommendation (c). Task 6 measurable rewritten to the flagged-at-vote cohort (the hood share would have opened for the control arm); criteria 2–3 rewritten; Task 2 keys on a `disburses` catalog flag; Task 5 carries the F1-class limit; Task 7 names the bench tend trap.
 - 2026-09-22 16:20 (engine-sheet) — Drafted from the builder's direction (15:10–15:27) after engine.255 step 1 (lever off) went live at PROD @120. Sent to kimi and agy for adversarial review before the first cut.

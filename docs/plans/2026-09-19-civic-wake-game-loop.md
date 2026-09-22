@@ -454,6 +454,12 @@ Measured: [[../../output/engine-sheet/2026-09-21-matched-control-c108-c112.json]
 - **(f) A regress costs nothing beyond the restarted clock (research-build).** No extra approval or business penalty; the restart is the cost.
 - **(g) The station lift scales with upkeep strength (builder, 2026-09-21).** The transit consumer read the phase name only (`updateTransitMetrics.js` `initiativeTransitEffects_`), so an open hub paid its full lift tended or not. Ruled: the open lift (ridership and on-time) scales by the tend factor the slice now carries (`tend`, 1 = tended or not staged) — full when tended, fading to the floor, never below an ordinary station. The phase stays the gate and the factor is the strength: scaling by intensity over `operational` would have cut a `complete` hub to 56% and an `open` one to zero with full tending. Construction disruption stays all-or-nothing (neglect does not make a building site quieter); a stalled hub pays no lift. Measured C89–C108: Fruitvale against the city's middle station wobbles about 10% a Cycle; the full lift is 20%, the floor lift 6% — a tended hub clears the noise, a neglected one sinks into it and the row regresses. The wider transit system — stations true to hood canon, businesses in hoods, where citizens live and work — is its own session: engine.253.
 
+## Status log
+
+### civic.38 — status (drained from ROLLOUT, 2026-09-22 / S274)
+
+Civic game board — Task 4 steps 0–3 live PROD @116 (stages, upkeep, Delivering, losing clock; inert on blank Stage); director shifts file `work` moves; step 4 six-row conversion LIVE 2026-09-22 (bench-proven C123–C124); engine cuts complete — INIT-005 baseline stamps at the C109 fire; remaining work scripts-lane (petition band, coalitions plan)
+
 ## Changelog
 
 - 2026-09-22 09:55 (engine-sheet) — **Builder ruled director wake cadence:** workers wake as their jobs need — the new civic system is not forced into the old one-wake rota. `cron-work-wake.js` default is now every due pack per run (`--limit=N` still caps); Tuesday dry-run woke all 7 due packs. Suite 39/39. First unattended run tonight 20:18.

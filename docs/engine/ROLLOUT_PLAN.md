@@ -2,7 +2,7 @@
 
 **This file is canonical for open/closed work** (S207). Pointer-only: one line per job, detail lives in the pointer doc — never here (S286 hard rule, Mike-direct).
 
-**Status:** ACTIVE (building) | **Last Updated:** 2026-09-20 (S477, research-build sweep). This file is the ONLY open-work tracker; [[archive/ENGINE_REPAIR]] retired to history.
+**Status:** ACTIVE (building) | **Last Updated:** 2026-09-22 (S485, research-build sweep — civic.38 Task 9 landed, engine.251 housing lever complete and live). This file is the ONLY open-work tracker; [[archive/ENGINE_REPAIR]] retired to history.
 **Filing protocol (S212):** semantic groups + pointer-only entries — see [[rollout-rules]] §3–§5 (taxonomy, add, close). Full design: [[../adr/0005-rollout-plan-structure]].
 **North star:** `docs/ARCHITECTURE_VISION.md` — Jarvis + persistent sessions. Everything we build points there.
 **The lens (S441, Mike-direct):** [[SIM_DOCTRINE]] §15 — a gate that can't fire is a trick. Check every threshold against its column's live range; the chain to test is start → peak → end → aftermath → referenced. Read before touching any mechanic.
@@ -167,8 +167,8 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | civic.22 | Initiative authorship — S406 'hand-fed' ruling SUPERSEDED 2026-09-19 (Mike: seats author); folds into civic.38. Grok's §12 draft is prior art | blocked | research-build | [[../plans/2026-08-15-civic-edge-truth-migration]] §12 |
 | civic.33 | Recall/challenger fall-rate — threshold-20 confirmed live; tiers 2/3 of the door not yet bench-exercised. Needs N sandbox cycles with city-hall + media active | ready | engine-sheet | [[../plans/2026-08-29-employment-system-cascade]] §Status log |
 | civic.37 | Work-wake packs — ME/EMS on civic beats, A's players on the sports feed; live 2026-09-19, crontab Tue/Thu 20:18. Acceptance: first unattended run (Tue 2026-09-22), read back | in-progress | engine-sheet | [[../plans/2026-09-16-work-wake-packs]] |
-| civic.38 | Civic game board — Task 4 steps 0–3 live PROD @116 (stages, upkeep, Delivering, losing clock; inert on blank Stage); director shifts file `work` moves; step 4 six-row conversion LIVE 2026-09-22 (bench-proven C123–C124); engine cuts complete — INIT-005 baseline stamps at the C109 fire; remaining work scripts-lane (petition band, coalitions plan) | in-progress | research-build / engine-sheet | [[../plans/2026-09-19-civic-wake-game-loop]] + [[../research/2026-09-19-kimi-initiative-stage-voting-and-wake-incentives]] + [[../research/2026-09-20-codex-civic38-game-loop-review]] (Codex review — accepted + reconciled into the plan 2026-09-20; Task 7 withdrawn, Task 2 rebuilt, engine.250 filed) |
-| civic.39 | Civic week boundary — Sunday chain becomes an idempotent stage machine: model-free mechanical close, structured terse decisions, batch submit/collect with a ~24h window (builder direction 2026-09-21). Acceptance: one seat's failed output no longer stops the tracker write; `tick` is idempotent | draft | research-build (scripts: kimi lane) | [[../plans/2026-09-21-civic-sunday-stage-machine]] + [[../research/2026-09-21-batch-inference-options]] |
+| civic.38 | Task 9 landed (housing playable, 51b2817f); remaining: petition support bands, coalitions plan | in-progress | research-build / engine-sheet | [[../plans/2026-09-19-civic-wake-game-loop]] + [[../research/2026-09-19-kimi-initiative-stage-voting-and-wake-incentives]] + [[../research/2026-09-20-codex-civic38-game-loop-review]] (Codex review — accepted + reconciled into the plan 2026-09-20; Task 7 withdrawn, Task 2 rebuilt, engine.250 filed) |
+| civic.39 | All 4 tasks landed + tested; schedule install is the builder's op decision (SESSION_CONTEXT) | done-pending-archive | research-build (scripts: kimi lane) | [[../plans/2026-09-21-civic-sunday-stage-machine]] + [[../research/2026-09-21-batch-inference-options]] |
 
 ### infrastructure.* — Supermemory, services, ingest
 

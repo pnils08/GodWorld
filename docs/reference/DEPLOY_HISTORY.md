@@ -129,6 +129,10 @@ pointers:
 
 ## PROD deploy log — full trail
 
+### PROD @118 — engine.251 rate seed 0.20; the four housing dials hand-written on live (2026-09-22 ~13:40 Chicago, engine-sheet)
+
+Engine tree `7d849c57`; 1 payload file vs @117 (`engine94SheetContract.js`, `civicHousingReliefRate` seed 0.10 → 0.20 after the builder's direct ruling; `civicDeliverMargin_housing` seed 0.15 from the bench measurement at that rate). 170 live files, 0 test files. Isolated stage, sandbox id grep-absent; pull-back 169/169 js byte-identical. Script version **105**, web app read back **@105**. Live World_Config appended by hand and read back: `civicHousingReliefEnabled` 0, `civicHousingReliefRate` 0.2, `civicHousingCohortMinRenters` 10, `civicDeliverMargin_housing` 0.15 — the C109 seed pass finds them present. Nothing on live moves until `civicHousingReliefEnabled` 1 (the builder's switch) and the Task 9 catalog flip (research-build sequencing with agy/codex).
+
 ### PROD @117 — engine.251 housing lever Tasks 1–8 (inert: dial 0, not playable) + G-EC70 owned units anchored (2026-09-22 ~12:33 Chicago, engine-sheet; bench-proven C110–C126)
 
 Engine tree `a7a9c79b`; 6 payload files vs @116 (`engine94SheetContract.js`, `applyInitiativeImplementationEffects.js`, `householdFormationEngine.js`, `migrationTrackingEngine.js`, `generationalWealthEngine.js`, `civicInitiativeEngine.js`); 170 live files, 0 test files. Isolated stage, sandbox id grep-absent; pull-back 169/169 js byte-identical. Script version **104** (minted with `clasp version` — a push alone re-pins the old number, caught on read-back @103), web app read back **@104**.

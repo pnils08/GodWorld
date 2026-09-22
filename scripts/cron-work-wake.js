@@ -163,18 +163,45 @@ const NODE_BUILDERS = {
 
 function buildWorkPack(pkg, cycle, beatsDir, namesPath) {
   const blocks = [];
+  const nodes = [];
   for (const node of pkg.dataNodes) {
     const builder = NODE_BUILDERS[node];
     if (!builder) continue;
     let block = null;
     try { block = builder(pkg, cycle, beatsDir); } catch (e) { block = null; }
-    if (block) blocks.push(block);
+    if (block) { blocks.push(block); nodes.push(node); }
   }
   if (!blocks.length) return null;
   const idBits = [`You are ${pkg.name}`];
   const known = lookupNameTsv(pkg.popid, namesPath);
   if (known && known.neighborhood) idBits.push(`you live in ${known.neighborhood}`);
-  return { identity: idBits.join(', ') + '.', blocks };
+  return { identity: idBits.join(', ') + '.', blocks, nodes };
+}
+
+// ---- the director's shift is a work move (civic.38 ruling (d), 2026-09-21) -------------------
+// A project director's work-wake shift counts as tending their initiative. The
+// engine reads `LastWorkCycle` (Standing clears on it, the untended clock runs
+// from it, upkeep decays without it) and only the Sunday fold writes that
+// column — from `work` moves in the week's move ledger. Datawake seats file
+// theirs through validateDatawakeMoves; a director has no datawake seat, so
+// the shift itself files the move: one line, same ledger, same shape the fold
+// groups on (type 'work', payload.initiativeId, status 'pending'). moveId
+// carries the date, so a same-day rerun dedups under the fold's last-line-wins
+// read. Returns null when the pack has no initiative or the initiative-project
+// node produced nothing (the row was not on the beats dump — no row, no work).
+function workMoveLine(pkg, pack, cycle, date) {
+  const initiativeId = String((pkg && pkg.initiative) || '').trim();
+  if (!initiativeId) return null;
+  if (!pack || !Array.isArray(pack.nodes) || pack.nodes.indexOf('initiative-project') === -1) return null;
+  const c = Number(cycle);
+  if (!Number.isInteger(c) || c < 1) return null;
+  const d = String(date || new Date().toISOString().slice(0, 10));
+  return {
+    moveId: 'MV-' + c + '-' + pkg.persona + '-' + d,
+    cycle: c, date: d, agentDir: pkg.persona, popid: pkg.popid || null,
+    type: 'work', payload: { initiativeId, source: 'work-wake' }, status: 'pending',
+    at: new Date().toISOString(),
+  };
 }
 
 // ---- selection -------------------------------------------------------------------------------
@@ -242,6 +269,16 @@ async function wakeOne(pkg, cycle, state) {
   if (appended.error) { logLine('appendReflection_ ERROR: ' + appended.error); return false; }
   logLine(`page ${ptr.tag} (${ptr.created ? 'created' : 'existing'}) <- reflection doc ${appended.id || '?'}`);
 
+  const mv = workMoveLine(pkg, pack, cycle, new Date().toISOString().slice(0, 10));
+  if (mv) {
+    try {
+      // Lazy: cron-civic-run.js is guarded (require.main) but is 3k lines; only a director's shift pays for it.
+      const { appendMoveLedger } = require('./cron-civic-run');
+      const ledgerFile = appendMoveLedger(path.join(__dirname, '..'), cycle, [mv]);
+      logLine(`move ledger <- work ${mv.payload.initiativeId} by ${mv.agentDir} (${ledgerFile ? path.relative(path.join(__dirname, '..'), ledgerFile) : 'no file'})`);
+    } catch (e) { logLine('move ledger append ERROR: ' + e.message); }
+  }
+
   if (cls.event || cls.affect) {
     await sheets.appendRows('Reflection_Intake', [[
       new Date().toISOString(), pkg.popid, cycle, DAYPART, cls.event || '', reflection.slice(0, 180).replace(/\n/g, ' '), 'no', cls.affect || '',
@@ -276,6 +313,6 @@ if (require.main === module) {
 }
 
 module.exports = {
-  readBeats, lookupNameTsv, NODE_BUILDERS, buildWorkPack, buildWorkPrompts,
+  readBeats, lookupNameTsv, NODE_BUILDERS, buildWorkPack, buildWorkPrompts, workMoveLine,
   selectDue, dayAbbrev, DAYPART,
 };

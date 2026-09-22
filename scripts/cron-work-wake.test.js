@@ -118,5 +118,40 @@ console.log('=== selection ===');
   ok(missing.picks.length === 0, '--pack with unknown key wakes nothing');
 })();
 
+console.log('=== workMoveLine — a director shift is a work move (civic.38 ruling (d)) ===');
+(function () {
+  var civicRun = require('./cron-civic-run');
+  var dir2 = fixtureBeats({
+    Initiative_Tracker: [{ InitiativeID: 'INIT-901', Name: 'Synthetic Clinic', ImplementationPhase: 'construction-active', Stage: 'Standing', Status: 'passed' }],
+  });
+  var DIR_PKG = Object.assign({}, SYNTH_PKG, { persona: 'proj-synth', popid: 'POP-99904', office: 'PROJ-SYNTH', initiative: 'INIT-901', dataNodes: ['initiative-project'] });
+  var pack = wake.buildWorkPack(DIR_PKG, 108, dir2, path.join(dir2, 'no-names.tsv'));
+  ok(pack && pack.nodes && pack.nodes.indexOf('initiative-project') >= 0, 'pack records the nodes that produced a block');
+
+  var mv = wake.workMoveLine(DIR_PKG, pack, 108, '2026-09-22');
+  ok(mv && mv.type === 'work' && mv.status === 'pending', 'director shift -> pending work move');
+  ok(mv && mv.payload.initiativeId === 'INIT-901' && mv.cycle === 108 && mv.agentDir === 'proj-synth' && mv.popid === 'POP-99904', 'move carries the fold fields (initiativeId, cycle, agentDir, popid)');
+  ok(mv && mv.moveId === 'MV-108-proj-synth-2026-09-22', 'moveId is per director per date (same-day rerun dedups under last-line-wins)');
+
+  ok(wake.workMoveLine(Object.assign({}, DIR_PKG, { initiative: '' }), pack, 108, '2026-09-22') === null, 'no initiative on the pack -> no move');
+  ok(wake.workMoveLine(DIR_PKG, { identity: 'x', blocks: ['y'], nodes: ['civic-office'] }, 108, '2026-09-22') === null, 'initiative-project node produced nothing (row not on the beats dump) -> no move');
+  ok(wake.workMoveLine(DIR_PKG, pack, 'abc', '2026-09-22') === null, 'unresolved cycle -> no move');
+
+  // The line folds exactly like a datawake seat's work move: the Sunday fold stamps LastWorkCycle/LastWorkSeat.
+  var ws = fs.mkdtempSync(path.join(os.tmpdir(), 'work-wake-fold-'));
+  civicRun.appendMoveLedger(ws, 108, [mv]);
+  civicRun.appendMoveLedger(ws, 108, [Object.assign({}, mv, { at: '2026-09-22T21:00:00.000Z' })]); // same-day rerun
+  var folded = civicRun.loadMoveLedgerFolded(ws, 108);
+  ok(folded && folded.size === 1, 'same-day rerun collapses to one move in the ledger read');
+  var out = civicRun.foldMovesIntoDecisions(ws, 108, { offices: [] });
+  ok(out.workMoves === 1 && out.workInitiatives === 1, 'fold counts the director move as work on one initiative');
+  var decFiles = [];
+  (function walk(d) { fs.readdirSync(d).forEach(function (f) { var q = path.join(d, f); if (fs.statSync(q).isDirectory()) walk(q); else if (/decisions_c108\.json$/.test(f)) decFiles.push(q); }); })(path.join(ws, 'output', 'city-civic-database', 'initiatives'));
+  var dec = decFiles.length ? JSON.parse(fs.readFileSync(decFiles[0], 'utf8')) : null;
+  ok(dec && dec.trackerUpdates.LastWorkCycle === 108 && dec.trackerUpdates.LastWorkSeat === 'proj-synth', 'fold stamps LastWorkCycle=108, LastWorkSeat=proj-synth from the director move');
+  fs.rmSync(ws, { recursive: true, force: true });
+  fs.rmSync(dir2, { recursive: true, force: true });
+})();
+
 console.log('\n' + pass + ' passed, ' + fail + ' failed');
 process.exit(fail ? 1 : 0);

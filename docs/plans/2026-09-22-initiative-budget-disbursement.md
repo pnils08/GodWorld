@@ -25,7 +25,7 @@ pointers:
 
 **Goal:** A voted initiative spends a real, depleting budget onto specific flagged rows in its hoods, one director's work-week at a time, so that a citizen's row changes because a seat played the game — and the service ends when the money is gone.
 
-**Architecture:** `Budget` on Initiative_Tracker becomes a number the engine spends (`BudgetTotal` / `BudgetRemaining`, self-armed). Each Cycle a tended Standing/Delivering row pays a tranche onto the worst-flagged eligible rows in its folded hoods; for housing the grant lands in `Household_Ledger.HouseholdSavings`, the household engine's own stress logic reacts (a buffer dial replaces two hardcoded 12s), and the head of household gets a LifeHistory line. The stage-3 measurable is the household engine's existing stressed-renter share per hood against the city middle. The West Oakland Stabilization Fund (INIT-001, $28M, 295 applicants, $0 disbursed) is the first wire and the template; economic and workforce follow the same shape onto business and citizen rows under engine.252.
+**Architecture:** `Budget` on Initiative_Tracker becomes a number the engine spends (`BudgetTotal` / `BudgetRemaining`, self-armed). Each Cycle a tended Standing/Delivering row pays a tranche onto the worst-flagged eligible rows in its folded hoods; for housing the grant lands in `Household_Ledger.HouseholdSavings`, the household engine's own stress logic reacts (a buffer dial replaces two hardcoded 12s), and the head of household gets a LifeHistory line. The stage-3 measurable is the flagged-at-vote household cohort, relieved-or-kept against the city's flagged rows (Task 6 — a hood share would open for the control arm). The West Oakland Stabilization Fund (INIT-001, $28M, 295 applicants, $0 disbursed) is the first wire and the template; economic and workforce follow the same shape onto business and citizen rows under engine.252.
 
 **Terminal:** engine-sheet designs and cuts; sim calls → builder (listed under §Builder calls). kimi + agy adversarial review before the first cut.
 
@@ -64,10 +64,10 @@ Phase 5  processHouseholdFormation_  (after updateHouseholdIncomes_, before dete
 Phase 5  civicInitiativeEngine (stage step, later in the phase)
          ├─ BudgetRemaining -= paid  (tracker write, same class as the stage columns)
          └─ remaining <= 0 → ImplementationPhase 'complete', MilestoneNotes 'budget exhausted C<n>'
-Phase 2 (next fire)  stage-3 observation: stressed-renter share per hood vs city middle
+Phase 2 (next fire)  stage-3 observation: flagged-at-vote cohort — relieved / kept / lost per hood vs the city's flagged rows
 ```
 
-The §15 chain: **start** (vote → Funded → work → Standing, first grants) → **peak** (hood share drops, Delivering) → **end** (budget out, phase complete; or untended, tranche fades) → **aftermath** (savings spend down through the money loop, households re-flag, the row regresses, the seat's clock runs) → **referenced** (LifeHistory lines, `BudgetRemaining` 0, MilestoneNotes, the board). Both directions.
+The §15 chain: **start** (vote → Funded → work → Standing, first grants) → **peak** (hood share drops, Delivering) → **end** (budget out, phase complete; or untended, tranche fades) → **aftermath** (the cooldown expires and new rows flag while the budget is gone, the cohort's losses mount, the row regresses, the seat's clock runs — savings do not spend down on live, see §Data reality) → **referenced** (LifeHistory lines, `BudgetRemaining` 0, MilestoneNotes, the board). Both directions.
 
 ## What is a flag (housing)
 

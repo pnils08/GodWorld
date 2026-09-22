@@ -3476,6 +3476,60 @@ function applyCivicStageStep_(ctx, row, ix, cycle) {
  *
  * Inert while every Stage is blank: no staged row, no read.
  */
+// ---------------------------------------------------------------------------
+// engine.251 — housing stage-3 cohort, mirrored verbatim from
+// lib/initiativePhaseContract.js housingBurdenCohort (parity block in the
+// contract test). Per hood, the MEDIAN of MonthlyRent*12/HouseholdIncome over
+// active rented households with positive finite rent and income; a hood joins
+// the city only with >= minRenters such households (a median over one tracked
+// household is a trick, SIM_DOCTRINE §15); thin hoods are named; every exclusion
+// is counted. Built at read time inside freezeCivicStageCohort_ — nothing stored.
+// ---------------------------------------------------------------------------
+var CIVIC_HOUSING_BURDEN_COLUMN_ = 'MonthlyRent*12/HouseholdIncome';
+
+function civicHousingBurdenCohort_(input) {
+  var inp = input || {};
+  var out = { available: false, reason: null, tab: 'Household_Ledger', cycle: null, rows: {}, counts: {}, thin: [], skipped: { notRented: 0, notActive: 0, invalidRent: 0, invalidIncome: 0, noHood: 0 } };
+  var cycle = Number(inp.cycle);
+  if (!isFinite(cycle) || cycle < 1) { out.reason = 'bad-cycle'; return out; }
+  out.cycle = cycle;
+  var min = Number(inp.minRenters);
+  if (!isFinite(min) || min < 1) { out.reason = 'bad-min-renters'; return out; }
+  var rows = Array.isArray(inp.rows) ? inp.rows : null;
+  if (!rows) { out.reason = 'no-rows'; return out; }
+  var fold = typeof inp.resolveHood === 'function' ? inp.resolveHood : function (h) { return h; };
+  var num = function (v) {
+    return (typeof v === 'number' || (typeof v === 'string' && v.trim() !== '')) && isFinite(Number(v)) ? Number(v) : null;
+  };
+  var byHood = {};
+  for (var i = 0; i < rows.length; i++) {
+    var r = rows[i] || {};
+    if (String(r.HousingType == null ? '' : r.HousingType).trim().toLowerCase() !== 'rented') { out.skipped.notRented++; continue; }
+    if (String(r.Status == null ? 'active' : r.Status).trim().toLowerCase() !== 'active') { out.skipped.notActive++; continue; }
+    var rent = num(r.MonthlyRent), inc = num(r.HouseholdIncome);
+    if (rent === null || !(rent > 0)) { out.skipped.invalidRent++; continue; }
+    if (inc === null || !(inc > 0)) { out.skipped.invalidIncome++; continue; }
+    var raw = String(r.Neighborhood == null ? '' : r.Neighborhood).trim();
+    var hood = raw ? fold(raw) : null;
+    if (!hood) { out.skipped.noHood++; continue; }
+    (byHood[hood] = byHood[hood] || []).push(rent * 12 / inc);
+  }
+  var hoods = Object.keys(byHood).sort();
+  for (var h = 0; h < hoods.length; h++) {
+    var list = byHood[hoods[h]];
+    out.counts[hoods[h]] = list.length;
+    if (list.length < min) { out.thin.push(hoods[h]); continue; }
+    list.sort(function (a, b) { return a - b; });
+    var mid = Math.floor(list.length / 2);
+    var med = list.length % 2 ? list[mid] : (list[mid - 1] + list[mid]) / 2;
+    var rec = {}; rec[CIVIC_HOUSING_BURDEN_COLUMN_] = Math.round(med * 10000) / 10000;
+    out.rows[hoods[h]] = rec;
+  }
+  if (!Object.keys(out.rows).length) { out.reason = 'no-hood-clears-min-renters'; return out; }
+  out.available = true;
+  return out;
+}
+
 function freezeCivicStageCohort_(ctx) {
   var S = ctx.summary;
   if (!S) S = ctx.summary = {};
@@ -3516,6 +3570,32 @@ function freezeCivicStageCohort_(ctx) {
     out.tabs[tab] = co;
     if (!(obs >= 1)) { co.reason = 'no-prior-cycle'; return; }
     if (!canon || !canon.length || typeof resolveHoodOrChild_ !== 'function') { co.reason = 'canon-hoods-unavailable'; return; }
+    if (tab === 'Household_Ledger') {
+      // engine.251: the household rows at fire N are Phase-5-of-N−1 state (this runs
+      // at Phase 2), so the observation is N−1 by phase order — no stamp column.
+      // City = hoods with >= civicHousingCohortMinRenters tracked renters; the
+      // baseline freezes that membership and deliveryEdge refuses a changed city.
+      var hSheet = ss.getSheetByName(tab);
+      if (!hSheet) { co.reason = 'tab-missing'; return; }
+      var hData = hSheet.getDataRange().getValues();
+      if (hData.length < 2) { co.reason = 'tab-empty'; return; }
+      var minRaw = ctx.config ? ctx.config.civicHousingCohortMinRenters : undefined;
+      var minRenters = Number(minRaw);
+      if (minRaw === '' || minRaw === null || minRaw === undefined || !isFinite(minRenters) || minRenters < 1) { co.reason = 'min-renters-dial-missing'; return; }
+      var hHead = hData[0], hRows = [];
+      for (var hr = 1; hr < hData.length; hr++) {
+        var rec = {};
+        for (var hc = 0; hc < hHead.length; hc++) rec[hHead[hc]] = hData[hr][hc];
+        hRows.push(rec);
+      }
+      var built = civicHousingBurdenCohort_({
+        rows: hRows, cycle: obs, minRenters: minRenters,
+        resolveHood: function (name) { return resolveHoodOrChild_(ctx, name); }
+      });
+      co.available = built.available; co.reason = built.reason; co.rows = built.rows;
+      co.counts = built.counts; co.thin = built.thin; co.skipped = built.skipped;
+      return;
+    }
     var sheet = ss.getSheetByName(tab);
     if (!sheet) { co.reason = 'tab-missing'; return; }
     var data = sheet.getDataRange().getValues();

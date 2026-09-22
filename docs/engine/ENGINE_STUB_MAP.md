@@ -1531,11 +1531,14 @@
 
 - **applyCivicStageStep_(ctx, row, ix, cycle)**
 
+- **civicHousingBurdenCohort_(input)**
+  Sheets: Household_Ledger
+
 - **freezeCivicStageCohort_(ctx)**
   Reads: S.canonHoods, S.cycleId
   Writes: S.civicStageCohort
-  Config: ctx.config.cycleCount
-  Sheets: Initiative_Tracker, Neighborhood_Map
+  Config: ctx.config.civicHousingCohortMinRenters, ctx.config.cycleCount
+  Sheets: Household_Ledger, Initiative_Tracker, Neighborhood_Map
 
 - **getCivicDeliverDials_(ctx, domain)**
 
@@ -4235,4 +4238,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 184
-**Functions mapped:** 1476
+**Functions mapped:** 1477

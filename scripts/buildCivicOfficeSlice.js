@@ -814,10 +814,20 @@ function boardStageView(row, context) {
   }
   // Blank Stage is explicitly legacy. Preserve its scheduling advice.
   const phase = String(row.ImplementationPhase || '');
-  const text = phase === 'stalled' ? 'stalled — one work move revives it'
-    : String(row.Status || '') === 'proposed' && !String(row.VoteCycle || '').trim()
+  const petitionPending = String(row.Status || '') === 'proposed' && !String(row.VoteCycle || '').trim();
+  let text;
+  if (phase === 'stalled') text = 'stalled — one work move revives it';
+  else if (petitionPending) {
+    // Mirrors civicPetitions.js's countPetition reason logic exactly (housing/
+    // safety -> domain-not-playable, health -> band-gated, else -> domain-rules-
+    // deferred) without calling it — the board must not tell an agent "signatures
+    // move it" for a domain call-vote considers open (found in adversarial
+    // review of 51fdee28, 2026-09-22; keep this in sync if that logic changes).
+    const domain = String(row.PolicyDomain || '').trim().toLowerCase();
+    text = ['health', 'housing', 'safety'].includes(domain)
       ? 'petition-pending — signatures move it to a vote'
-      : String(row.NextScheduledAction || '').trim() || 'advance or hold';
+      : 'petition-pending — no signature rule; eligible for call-vote';
+  } else text = String(row.NextScheduledAction || '').trim() || 'advance or hold';
   return {requirement:null,metricEvidence:null,text};
 }
 function boardNeedText(row, context) {

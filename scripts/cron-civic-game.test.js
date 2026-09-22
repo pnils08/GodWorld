@@ -1270,8 +1270,13 @@ test('F7: boardNeedText uses the shared helper, preserves stalled priority and a
     const activeRow = { Stage, ImplementationPhase: 'active' };
     assert.equal(civicSlice.boardNeedText(activeRow), phaseContract.stageRequirement({stage:Stage,phase:'active'}).text);
   }
-  const proposedRow = { Status: 'proposed', VoteCycle: '' };
+  const proposedRow = { Status: 'proposed', VoteCycle: '', PolicyDomain: 'health' };
   assert.match(civicSlice.boardNeedText(proposedRow), /petition-pending — signatures move it to a vote/);
+  // A domain with no petition rule (not health/housing/safety) must not tell
+  // the agent signatures move it — call-vote is the only path (adversarial
+  // review of 51fdee28, Finding 5, fixed 2026-09-22).
+  const deferredDomainRow = { Status: 'proposed', VoteCycle: '', PolicyDomain: 'transit' };
+  assert.match(civicSlice.boardNeedText(deferredDomainRow), /petition-pending — no signature rule; eligible for call-vote/);
   const fundedRow = {Stage:'Funded',ImplementationPhase:'announced',LastWorkCycle:108,LastStageChangeCycle:108};
   assert.match(civicSlice.boardNeedText(fundedRow), /work landed/);
   assert.match(civicSlice.boardNeedText({...fundedRow,LastWorkCycle:107}), /one work move/);

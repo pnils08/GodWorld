@@ -66,11 +66,13 @@ pointers:
 
 ## First moves (research-build, read-only)
 
-1. DONE 2026-09-21: chaos cars reviewed (above). Still open: pull the live `Chaos_Cars` rows (dump to beats) and count `oari_van` outcomes per hood per cycle from real data to replace the weight-based estimate.
+1. DONE 2026-09-21: chaos cars reviewed (above) and the live `Chaos_Cars` tab pulled read-only (91 rows, C100-C108; saved `output/engine-sheet/2026-09-21-chaos-cars-live-pull.json`, not committed to canon — a working pull). Measured: `oari_van` is 15 of 91 events (16.5%) — 10 `welfare_check`, 5 `substance_intervention`, zero `deescalated`. Citizen-scope targets resolved against the live ledger for neighborhood. **Zero of 15 OARI-van events, across all 9 cycles, landed in OARI's own target hoods** (West Oakland, Fruitvale, East Oakland — the INIT-002 deployment hoods). The 8 neighborhood-scope events hit Rockridge(2), Laurel(2), Lake Merritt, Ivy Hill, Uptown, Glenview; the 7 citizen-scope events resolved to Piedmont Ave, Lake Merritt(2), Temescal, Chinatown, Jack London, Downtown. This sharpens finding 4 from an estimate ("thin, 0 or 1 a cycle") to a measured fact: the chaos van has never once fired where OARI operates, over the full C100-C108 window. It cannot be OARI's grading data source in its current form — a random citywide roll only reaches a 3-hood target by chance, and 0/15 is that chance realized.
 2. Trace how a `medical_emergency` and an `arrested` outcome could reach the Hospital_Ledger writer and a judicial record, with the wiring card before any cut.
 3. Bring the builder the sim calls: what a judicial ledger tracks, what mental-health states exist, and whether OARI is graded on diversion.
 
 ## Changelog
+
+- 2026-09-21 (research-build) — Live Chaos_Cars pull (91 rows, C100-108): confirmed zero OARI-van events in OARI's own target hoods across the full window; sharpens the chaos-review finding from estimate to measured fact.
 
 - 2026-09-21 (research-build) — Chaos cars reviewed: ten-vehicle table, ambulance already igniting the hospital lifecycle, arrests and OARI outcomes dead-end at story hooks, van moves a different crime number than OARI is graded on, volume too thin to grade with; earlier hospital claim corrected.
 - 2026-09-21 (research-build) — Filed from builder direction after the OARI grading review; data-first map of chaos cars, Hospital_Ledger and the missing judicial and mental-health records.

@@ -350,7 +350,8 @@ These exist in the codebase but are NOT in the engine call chain:
 - 87 A's players expanded from bare position abbreviations to "Position, Team" format
 - 62 T3 minor leaguers assigned to farm teams (AAA/AA/A affiliates)
 
-**Current ClockMode breakdown (S105 audit):** ENGINE 509, GAME 91, CIVIC 46, MEDIA 29, LIFE 0
+**Current (S484):** 2026-09-22, S484 (engine-sheet /session-end audit — PROD @116→@119 = `51b2817f`. **Functions added** (engine.251 housing lever): `getCivicHousingDials_`, `buildHousingReliefSlice_` (`applyInitiativeImplementationEffects.js`, publish `S.initiativeHousingRelief`); `ensureHousingReliefColumns_`, `netRentFromGross_`, `housingReliefForHood_`, `applyHousingRelief_`, `applyHousingReliefBody_` (`householdFormationEngine.js`, relief pass before stress, four self-armed Household_Ledger columns); `civicHousingBurdenCohort_`, `civicCohortForBaseline_` (`civicInitiativeEngine.js`, housing stage-3 cohort at read time + judge narrowed to the baseline city). **Changed:** `freezeCivicStageCohort_` Household_Ledger branch; `updateHouseholdLedgerMove_` lease invariant + refuses owned rows; `processRelocations_` anchors non-rented units (G-EC70); `trackHomeOwnership_` prices on gross, clears relief on purchase; `CIVIC_STAGE_CATALOG_.housing.playable` true (Task 9). Seeds: `civicHousingReliefEnabled` 0, `civicHousingReliefRate` 0.20, `civicHousingCohortMinRenters` 10, `civicDeliverMargin_housing` 0.15. STUB_MAP regenerated.)
+**Prior ClockMode breakdown (S105 audit):** ENGINE 509, GAME 91, CIVIC 46, MEDIA 29, LIFE 0
 
 ---
 

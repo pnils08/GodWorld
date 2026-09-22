@@ -1,7 +1,7 @@
 ---
 title: Model Division of Labor & Hierarchy
 created: 2026-06-26
-updated: 2026-08-17
+updated: 2026-09-22
 type: reference
 tags: [architecture, models, orchestration, isolation, active]
 pointers:
@@ -68,7 +68,8 @@ _History — 2026-07-28 interim order (superseded):_ Claude lead (Opus 4.8) / Ki
 * **Comms:** reach all four via `tmux send-keys -l` + separate `C-m` into their pane — `docs/reference/CROSS_LANE_MESSAGING.md`. `SendMessage` reaches Claude sessions (es) only, not the house guests.
 * **Why here:** Claude usage runs out before the week does; the house guests exist to spread that load, not because more hands were wanted. Model-tiering across them is the *smallest* lever — session discipline and boot burn matter more (`project_weekly-claude-budget-and-house-guests` memory). "Guests run wild without supervision" is a supervision problem, not a budget one — mechanical gates (ROLLOUT lint, canon-leak-guard, gapLogGate, pre-commit hooks) are what actually holds unattended.
 
-_Retired from disk (S332, still retired):_ **Aider** ("the hands" — code-diff scalpel, little use once Opus (es) and Fable write the codebase directly).
+**Aider — UN-RETIRED 2026-09-22 (Mike-direct), new role.** S332 retired it as "the hands" competing with Opus/Fable for core sim-code writing — that reasoning still stands, unchanged. The role it's un-retired for is different: a cheap OpenRouter-model dispatch lane for **research-build's own bounded mechanical jobs** (lint cleanup, single-file fixes, dead-code removal) — Aider now saves Claude usage rather than displacing it, and the orchestrator (rb) is the one drawing jobs from `AIDER_PLAN.md` and reviewing diffs, not Mike. Standing config unchanged and correct: `.aider.conf.yml` (`auto-commits: false`, real test gate via `npm test`, `read: CONVENTIONS.md`), `.aiderignore` (control plane locked out). One fix on revival: `env-file` pointed at `.env` (never existed at repo root) — corrected to `/root/.config/godworld/.env`, the same file every Node script already loads via `lib/env.js`.
+  - **Model bake-off, 2026-09-22 (research-build), two comparably-bounded dead-code-removal jobs:** `deepseek/deepseek-chat` (diff edit format) landed correctly on the first attempt, $0.02, no side effects. `xiaomi/mimo-v2.6-pro` (defaults to Aider's "whole" edit format — reproduces the entire file to make any edit) got the reasoning right but its first attempt never actually applied to disk — it output diff-style hunks in chat, which "whole" format's parser doesn't accept, a silent no-op that cost $0.07 and looked complete in the transcript. It also triggered a cascade of unrelated "add file to chat?" prompts from files it merely mentioned in its own reasoning, needing a manual skip-all to clear. A second attempt after that landed correctly, full suite green. **Default stays `deepseek/deepseek-chat`** — first-try-correct and cheap beats a stronger-branded model that needs supervision to catch a silent failure, the same reliability-over-capability lesson already logged for agy above. Worth a fairer retest later with an explicit diff-format override for mimo before writing it off entirely; not done this session.
 
 ## 5. Claude Haiku — the civic voices & short-form generators
 **Primary Personas:** `civic-office-mayor`, `city-clerk`, `civic-project-*` directors, desk reporters' mechanical fan-out
@@ -80,7 +81,7 @@ _Retired from disk (S332, still retired):_ **Aider** ("the hands" — code-diff 
 
 ## 6. File Boundaries & Isolation (S274; still governs under the two-seat model)
 
-The out-of-band CLIs (**Kimi + Codex + Grok** as house guests; **Antigravity/Gemini** reviewed-before-ships; Aider retired S332) and the Claude orchestration layer (rb, es) share the same repo and run as the same OS user (root). `AGENTS.md` is the binding authorization source:
+The out-of-band CLIs (**Kimi + Codex + Grok** as house guests; **Antigravity/Gemini** reviewed-before-ships; **Aider** un-retired 2026-09-22 as rb's own dispatch tool, no independent authority — rb draws the job, reviews the diff, commits or rejects) and the Claude orchestration layer (rb, es) share the same repo and run as the same OS user (root). `AGENTS.md` is the binding authorization source:
 
 | Zone | Paths | Kimi / Codex / Grok | Antigravity / Gemini |
 |------|-------|--------------|----------------------|
@@ -90,7 +91,7 @@ The out-of-band CLIs (**Kimi + Codex + Grok** as house guests; **Antigravity/Gem
 | **Protected documentation history** | `docs/archive/**`, `docs/research/papers/**`, `docs/drive-files/**` | immutable unless the builder explicitly names the scope | read-only; proposed diffs only |
 
 **Enforcement — soft tier (Mike's call, S274, under quota pressure):**
-- `.aiderignore` excludes the control plane from the editable map (legacy from the Aider era; kept as defense-in-depth after Aider's S332 retirement).
+- `.aiderignore` excludes the control plane from Aider's editable map — active enforcement again now that Aider is un-retired (§4), not legacy defense-in-depth.
 - `.githooks/pre-commit` (activate once: `git config core.hooksPath .githooks`) default-denies any commit touching the control plane unless a Claude session prefixes `CLAUDE_CTL=1`; the only external-agent carve-out is a commit whose sole control-plane change is that agent's own `NEXT[...]` line.
 - The CLIs run as root with bash, so these boundaries remain policy-enforced; Antigravity/Gemini have no project write or commit authority.
 
@@ -105,7 +106,7 @@ The out-of-band CLIs (**Kimi + Codex + Grok** as house guests; **Antigravity/Gem
 - **Premium Claude (Anthropic API / workbench) is reserved for judgment + gate work** that genuinely needs it: the **Rhea canon gate**, Mags EIC crons, deep review. NOT for grunt or bulk generation.
 - **Grunt / writing / bulk → OpenRouter + DeepSeek.** Proven cheap and canon-capable (DeepSeek ~500× cheaper than Sonnet at compose parity). Move API usage **off the Anthropic workbench** except the reserved judgment/gate cases.
 - **Check OpenRouter for best-model-per-task** rather than defaulting to one model — pick the cheapest model that clears the bar for each job.
-- **House guests:** Kimi, Codex, Grok (different-eyes secondaries); Antigravity/Gemini (reviewed-before-ships). Aider retired from disk (S332).
+- **House guests:** Kimi, Codex, Grok (different-eyes secondaries); Antigravity/Gemini (reviewed-before-ships). Aider (§4) is not a house guest — no independent authority, rb-dispatched only.
 - **Friction is an agent/stance property, not a model or tool property (S332):** Jax-caliber accountability writing comes from running the `freelance-firebrand` agent skill (adversarial stance), not from any particular CLI or premium model. The gold is reproducible on cheap models once the writer runs the right persona.
 
 ---

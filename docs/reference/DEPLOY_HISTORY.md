@@ -129,6 +129,16 @@ pointers:
 
 ## PROD deploy log — full trail
 
+### PROD @116 — step-3 review fix-ups: the neglect clock runs in every domain, a stalled Delivering row falls, revival needs eligibility (2026-09-21 ~23:05 Chicago, engine-sheet; bench-proven ~22:55)
+
+civic.38 Task 4 step 3 fix-ups from two adversarial reviews (agy F1/F2, codex F1/F2/F3). Engine tree `78eb6935`; 1 payload file vs @115 (`civicInitiativeEngine.js`); 170 live files, 0 test files. Isolated stage, sandbox id grep-absent; pull-back 169/169 js byte-identical. Script version **103**, web app @102 → @103, read back.
+
+**What it changes.** (agy F1) `stallClock` no longer exempts a Standing row whose delivering gate is unbuilt or unreadable — six of eight domains were immune to neglect. (agy F2) a Delivering row that stalls falls to Standing (Stage + `StageHold.regressed`, never `LastStageChangeCycle` or the baseline; `first` survives) so its revival must re-prove delivery. (codex F1) revival requires passed+signed / override-passed and only Funded/Standing/Delivering revive. (codex F2) a `PriorPhase` that is itself a down phase takes the stage fallback. (codex F3) work stamped past the current fire is refused. Inert on live: every `Stage` blank.
+
+**Bench:** SANDBOX 0908 **@86** (`43fc16b9`) on the @85 state (C120) plus two labelled fixtures — `INIT-905` safety / Eastlake, Standing, `dispatch-live`, untended since 100; `INIT-906` health / Brooklyn, Delivering, `operational`, untended since 100, `first` 100. Predicted, then C121 `ok:true`, 133 phases, 0 failed: `INIT-905` `stalled`, `PriorPhase` `dispatch-live`, `st` 121 (a safety row now stalls); `INIT-906` `stalled`, **Stage Delivering → Standing**, `regressed` 121, `first` 100 kept, `LastStageChangeCycle` 100 untouched; 902/903/904 unchanged. Then **@87** (`78eb6935`) with `LastWorkCycle` 121 stamped on both: C122 `ok:true`: `INIT-905` revived to `dispatch-live`, `INIT-906` revived at Standing / `operational` with `first` 100 and `st` 0 — revival works under the new guards. `Engine_Errors` unchanged throughout. **BENCH-ONLY, NEVER REPLAY:** `INIT-901`–`INIT-906` and everything C109–C122 wrote. Re-sync from live before the next cut.
+
+**Expect at the first live fire on @103:** identical to @102's. **Rollback:** re-push `7ba27e95`.
+
 ### PROD @115 — the losing clock: a neglected initiative stalls, one work move revives it (2026-09-21 ~22:40 Chicago, engine-sheet; bench-proven ~22:30)
 
 civic.38 Task 4 step 3. Engine tree `7ba27e95`; 3 payload files vs @114 (`civicInitiativeEngine.js`, `updateCivicApprovalRatings.js`, `applyInitiativeImplementationEffects.js`); 170 live files, 0 test files. Isolated stage, sandbox id grep-absent; pull-back 169/169 js byte-identical. Script version **102**, web app @101 → @102, read back.

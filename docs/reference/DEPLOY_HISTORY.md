@@ -129,6 +129,12 @@ pointers:
 
 ## PROD deploy log — full trail
 
+### PROD @119 — civic.38 Task 9: housing-program playable (2026-09-22 ~13:55 Chicago, engine-sheet deploying research-build's `51b2817f`)
+
+Engine tree `51b2817f`; 1 payload file vs @118 (`civicInitiativeEngine.js`, `CIVIC_STAGE_CATALOG_.housing.playable` false → true; the lib side and six test files rode the same commit, parity pinned 267/267). 170 live files, 0 test files. Isolated stage, sandbox id grep-absent; pull-back 169/169 js byte-identical. Script version **106**, web app read back **@106**.
+
+**What it changes on live:** a datawake seat may now propose a `housing-program` ('Tenant rent discount') row; a voted housing row takes a vote baseline from the household cohort (hood median rent burden, ≥10 tracked renters) and is judged for Delivering at margin 0.15; the relief writer stays OFF (`civicHousingReliefEnabled` 0 — the builder's switch), so no tenant's rent moves yet. No housing row exists on live today.
+
 ### PROD @118 — engine.251 rate seed 0.20; the four housing dials hand-written on live (2026-09-22 ~13:40 Chicago, engine-sheet)
 
 Engine tree `7d849c57`; 1 payload file vs @117 (`engine94SheetContract.js`, `civicHousingReliefRate` seed 0.10 → 0.20 after the builder's direct ruling; `civicDeliverMargin_housing` seed 0.15 from the bench measurement at that rate). 170 live files, 0 test files. Isolated stage, sandbox id grep-absent; pull-back 169/169 js byte-identical. Script version **105**, web app read back **@105**. Live World_Config appended by hand and read back: `civicHousingReliefEnabled` 0, `civicHousingReliefRate` 0.2, `civicHousingCohortMinRenters` 10, `civicDeliverMargin_housing` 0.15 — the C109 seed pass finds them present. Nothing on live moves until `civicHousingReliefEnabled` 1 (the builder's switch) and the Task 9 catalog flip (research-build sequencing with agy/codex).

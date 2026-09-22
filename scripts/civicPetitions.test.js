@@ -69,17 +69,51 @@ test('missing, zero, malformed income and rent are counted explicitly; no owned/
   assert.equal(r.support.cleared, false);
   assert.equal(r.support.reason, 'domain-not-playable');
 });
-test('health counts open people once, excludes discharges, keeps Sick separate', () => {
+test('health support uses Sick, counts open people once, and excludes discharges', () => {
   const d = fixture();
   d.Hospital_Ledger.push({ ...d.Hospital_Ledger[0], AdmissionId: 'SYNTHETIC-A3' });
   const r = countPetition(proposal('health'), d, { supportBand: 0.01 });
   assert.equal(r.counts.inCareCitizens, 1);
   assert.equal(r.counts.openAdmissions, 2);
   assert.equal(r.counts.sickResidents, 7);
-  assert.equal(r.support.numerator, 1);
+  assert.equal(r.support.numerator, 7);
+  assert.equal(r.support.unit, 'sick-residents');
   assert.equal(r.support.requiredCount, 1);
   assert.equal(r.support.cleared, true);
-  assert.equal(countPetition(proposal('health'), d, { supportBand: 0.02 }).support.cleared, false);
+  assert.equal(countPetition(proposal('health'), d, { supportBand: 0.0625 }).support.cleared, true);
+  assert.equal(countPetition(proposal('health'), d, { supportBand: 0.071 }).support.cleared, false);
+});
+test('health Sick support folds and deduplicates target hoods, independent of hospital coverage', () => {
+  const d = fixture();
+  d.Hospital_Ledger = [];
+  const r = countPetition({ policyDomain: 'health', hoods: ['Coliseum', 'East Oakland', 'Longfellow'] }, d,
+    { supportBand: 0.05 });
+  assert.equal(r.support.numerator, 10);
+  assert.equal(r.population.value, 200);
+  assert.equal(r.support.requiredCount, 10);
+  assert.equal(r.support.cleared, true);
+  assert.equal(r.counts.inCareCitizens, 0);
+});
+test('missing or invalid Sick in any target hood blocks support; zero is a valid count', () => {
+  for (const sick of [undefined, '', 'bad', '-1']) {
+    const d = fixture();
+    d.Neighborhood_Demographics[1].Sick = sick;
+    const r = countPetition({ policyDomain: 'health', hoods: ['East Oakland', 'Temescal'] }, d,
+      { supportBand: 0.01 });
+    assert.equal(r.counts.sickResidents, null);
+    assert.equal(r.support.numerator, null);
+    assert.equal(r.support.cleared, false);
+    assert.equal(r.support.reason, 'condition-incomplete');
+    assert.equal(countPetition(proposal('health'), d, { supportBand: 0.01 }).support.cleared, true,
+      'a missing count outside the target must not block support');
+  }
+  const d = fixture();
+  d.Neighborhood_Demographics[0].Sick = '0';
+  const r = countPetition(proposal('health'), d, { supportBand: 0.01 });
+  assert.equal(r.support.numerator, 0);
+  assert.equal(r.counts.inCareCitizens, 1);
+  assert.equal(r.support.reason, 'below-support-band');
+  assert.equal(r.support.cleared, false);
 });
 test('support threshold uses hood population, not tracked people; never inferred from hardship band', () => {
   const d = fixture();
@@ -104,7 +138,7 @@ test('bad care rows are printed warnings, scoped to the district and never a cit
   assert.equal(r.quality.invalidConditionRows, 1, 'child-area invalid row belongs to target');
   assert.equal(r.counts.inCareCitizens, 1, 'bad rows never become signatures');
   assert.equal(r.support.cleared, true, 'invalid target row is a warning, not a veto');
-  assert.equal(countPetition(proposal('health'), d, { supportBand: 0.02 }).support.reason, 'below-support-band');
+  assert.equal(countPetition(proposal('health'), d, { supportBand: 0.08 }).support.reason, 'below-support-band');
 });
 test('safety compares the entire city median, reports hood conditions, and cannot clear', () => {
   const r = countPetition(proposal('safety'), fixture(), { supportBand: 0.001 });
@@ -119,7 +153,7 @@ test('reflections are visibility only, include applied and unapplied, filter cyc
   assert.equal(r.visibility.civicRows, 2);
   assert.equal(r.visibility.complaintRows, 1);
   assert.equal(r.visibility.uniqueCitizens, 1);
-  assert.equal(r.support.numerator, 1);
+  assert.equal(r.support.numerator, 7);
   assert.equal(countPetition(proposal('health'), d, { sinceCycle: 998 }).visibility.civicRows, 3);
   d.Reflection_Intake.push({ POPID: 'POP-99999', Cycle: '999', Tag: 'Civic' });
   assert.equal(countPetition(proposal('health'), d).visibility.unlocatedRows, 1);

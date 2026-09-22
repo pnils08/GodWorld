@@ -208,7 +208,7 @@ function countPetition(proposal, data, options = {}) {
       people.add(key(row.POPID));
     }
     counts.inCareCitizens = people.size;
-    numerator = people.size; unit = 'tracked-citizens-in-care';
+    numerator = counts.sickResidents; unit = 'sick-residents';
   } else if (domain === 'safety') {
     const city = hoodRows(table(data, 'Crime_Metrics'), resolver, 'Crime_Metrics');
     const levels = resolver.hoods.map(hood => {
@@ -229,6 +229,7 @@ function countPetition(proposal, data, options = {}) {
   else if (domain !== 'health') reason = 'domain-rules-deferred';
   else if (supportBand == null) reason = 'support-band-unset';
   else if (!(population.value > 0)) reason = 'population-incomplete';
+  else if (numerator == null) reason = 'condition-incomplete';
   else if (numerator < requiredCount) reason = 'below-support-band';
   return { cycle, policyDomain: domain, hoods, hardshipBand, counts, population,
     support: { band: supportBand, numerator, unit, requiredCount, cleared: reason === 'eligible', reason,

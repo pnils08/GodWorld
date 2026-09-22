@@ -3179,6 +3179,35 @@ function civicStageBaselineFrom_(input) {
 }
 
 // MIRROR of lib/initiativePhaseContract.js deliveryEdge — body text-identical (parity-tested).
+// engine.251 — mirrored verbatim from lib cohortForBaseline (parity in the contract test).
+// A cohort narrowed to the baseline's own city. The housing cohort's membership
+// is by tracked-renter count, so a hood can cross the bar between fires; the
+// baseline froze its city at stamp time and deliveryEdge refuses a changed
+// city. Newcomers are dropped here (they were never in the comparison); a
+// baseline hood that has since thinned out stays missing, so deliveryEdge
+// still reports city-membership-changed for it. Fixed-canon tabs are unchanged
+// (their coverage is exact). Pure; never mutates the frozen cohort.
+function civicCohortForBaseline_(cohort, baseline) {
+  var co = cohort;
+  if (!co || co.available !== true || !co.rows) return co;
+  var b = baseline;
+  if (typeof b === 'string') { try { b = JSON.parse(b); } catch (e) { b = null; } }
+  if (!b || !Array.isArray(b.city) || !b.city.length) return co;
+  var keep = {};
+  for (var i = 0; i < b.city.length; i++) keep[b.city[i]] = true;
+  var rows = {}, dropped = [];
+  var all = Object.keys(co.rows);
+  for (var j = 0; j < all.length; j++) {
+    if (keep[all[j]]) rows[all[j]] = co.rows[all[j]]; else dropped.push(all[j]);
+  }
+  if (!dropped.length) return co;
+  var out = {};
+  for (var k in co) if (Object.prototype.hasOwnProperty.call(co, k)) out[k] = co[k];
+  out.rows = rows;
+  out.droppedNewcomers = dropped.sort();
+  return out;
+}
+
 function civicDeliveryEdge_(baseline, cohort) {
   var fail = function (reason) { return { available: false, reason: reason, cycle: null, edges: null, minEdge: null }; };
   var b = baseline;
@@ -3748,7 +3777,7 @@ function applyCivicDeliveryStep_(ctx, row, ix, cycle) {
   if (!entry) return false;
 
   var dials = getCivicDeliverDials_(ctx, domain);
-  var edge = civicDeliveryEdge_(baseline, civicStageCohortFor_(ctx, entry.stage3Metric.tab));
+  var edge = civicDeliveryEdge_(baseline, civicCohortForBaseline_(civicStageCohortFor_(ctx, entry.stage3Metric.tab), baseline));
   var res = civicDeliveryHoldStep_({
     stage: stage, hold: cell(ix.hold), obsCycle: Number(cycle) - 1, edge: edge,
     eligibleAfter: cell(ix.lastStageChange), margin: dials.margin,

@@ -1514,6 +1514,8 @@
 
 - **civicStageBaselineFrom_(input)**
 
+- **civicCohortForBaseline_(cohort, baseline)**
+
 - **civicDeliveryEdge_(baseline, cohort)**
 
 - **civicDeliveryHoldStep_(input)**
@@ -4238,4 +4240,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 184
-**Functions mapped:** 1477
+**Functions mapped:** 1478

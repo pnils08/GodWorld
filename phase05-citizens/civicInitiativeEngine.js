@@ -3190,6 +3190,7 @@ function civicStageBaselineFrom_(input) {
 function civicCohortForBaseline_(cohort, baseline) {
   var co = cohort;
   if (!co || co.available !== true || !co.rows) return co;
+  if (co.tab !== 'Household_Ledger') return co; // fixed-canon tabs keep the exact-coverage contract (health/education/transit untouched)
   var b = baseline;
   if (typeof b === 'string') { try { b = JSON.parse(b); } catch (e) { b = null; } }
   if (!b || !Array.isArray(b.city) || !b.city.length) return co;

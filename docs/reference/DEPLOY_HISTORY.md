@@ -129,6 +129,14 @@ pointers:
 
 ## PROD deploy log — full trail
 
+### PROD @117 — engine.251 housing lever Tasks 1–8 (inert: dial 0, not playable) + G-EC70 owned units anchored (2026-09-22 ~12:33 Chicago, engine-sheet; bench-proven C110–C126)
+
+Engine tree `a7a9c79b`; 6 payload files vs @116 (`engine94SheetContract.js`, `applyInitiativeImplementationEffects.js`, `householdFormationEngine.js`, `migrationTrackingEngine.js`, `generationalWealthEngine.js`, `civicInitiativeEngine.js`); 170 live files, 0 test files. Isolated stage, sandbox id grep-absent; pull-back 169/169 js byte-identical. Script version **104** (minted with `clasp version` — a push alone re-pins the old number, caught on read-back @103), web app read back **@104**.
+
+**What it changes on live at the C109 fire (Sun 2026-09-27):** World_Config self-arms `civicHousingReliefEnabled` 0, `civicHousingReliefRate` 0.10, `civicHousingCohortMinRenters` 10, `civicDeliverMargin_housing` 0.20; Household_Ledger gains `GrossMonthlyRent` / `HousingReliefMonthly` / `HousingReliefCycle` / `HousingReliefInitiativeID` (13 → 17 cols) with gross copied from MonthlyRent on every active rented row — `MonthlyRent` unchanged (dial 0); `S.initiativeHousingRelief` published empty (no housing row); the housing stage-3 reader is inert (`playable:false`); owned households are no longer relocated by migration (G-EC70) and the move writer refuses owned rows. Then `node scripts/regenSchemaHeaders.js`.
+
+**Bench:** SANDBOX 0908 @89 C110 (disabled path: dials seeded, 17 cols, 416/416 gross copied, 0 errors), @90 C111 (enabled path: 37/37 West Oakland renters discounted to the cent, 383 others at gross), control run C112–C116, then experiment builds @91/@92 (staged playable flip, never on main) C117–C126: vote baseline → Standing → relief → hold streak → Delivering; one defect found and fixed on the way (`c257ebf1`, cohort narrowed to the baseline city). Full trail: `docs/plans/2026-09-20-housing-lever.md` changelog 2026-09-22.
+
 ### PROD @116 — step-3 review fix-ups: the neglect clock runs in every domain, a stalled Delivering row falls, revival needs eligibility (2026-09-21 ~23:05 Chicago, engine-sheet; bench-proven ~22:55)
 
 civic.38 Task 4 step 3 fix-ups from two adversarial reviews (agy F1/F2, codex F1/F2/F3). Engine tree `78eb6935`; 1 payload file vs @115 (`civicInitiativeEngine.js`); 170 live files, 0 test files. Isolated stage, sandbox id grep-absent; pull-back 169/169 js byte-identical. Script version **103**, web app @102 → @103, read back.

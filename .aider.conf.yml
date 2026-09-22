@@ -1,5 +1,7 @@
 model: openrouter/deepseek/deepseek-chat
-env-file: .env
+# The project's real env file lives outside the repo (lib/env.js loads it the
+# same way for every Node script); .env at repo root never existed.
+env-file: /root/.config/godworld/.env
 
 # engine.9 (S274): propose-then-review. Aider edits the working tree but does NOT
 # commit — you (or a reviewing model) check the diff before anything lands. This is
@@ -18,3 +20,11 @@ auto-test: true
 # engine.9 (S274): always load the rules file so Aider sees the engine landmines
 # + canon rules every run (was authored but never wired — Aider never read it).
 read: CONVENTIONS.md
+
+# Un-retired 2026-09-22: this repo's full repo-map (5,448 files) pushed
+# openrouter/deepseek/deepseek-chat's DeepInfra route over its 32k-token cap on
+# the first real dispatch (litellm.BadRequestError). Aider's own scope here is
+# single-file bounded jobs (CONVENTIONS.md §6) — no cross-file awareness is
+# needed, so the map costs tokens for nothing. Off by default; a job that
+# genuinely needs repo context can override with --map-tokens on that call.
+map-tokens: 0

@@ -3295,7 +3295,6 @@ function civicStallClock_(input) {
   if (['Funded', 'Standing', 'Delivering'].indexOf(stage) < 0) { out.reason = 'unknown-stage'; return out; }
   var phase = String(inp.phase == null ? '' : inp.phase).trim().toLowerCase();
   if (phase === 'stalled' || phase === 'blocked' || phase === 'suspended' || phase === 'defunded') { out.reason = 'already-down:' + phase; return out; }
-  if (inp.blocked) { out.reason = 'gate-' + String(inp.blocked); return out; }
   var cycle = Number(inp.cycle);
   if (!isFinite(cycle) || cycle < 1) { out.reason = 'no-cycle'; return out; }
   var change = Number(inp.lastStageChangeCycle);
@@ -3695,8 +3694,9 @@ function applyCivicDeliveryStep_(ctx, row, ix, cycle) {
  * Stall entry: phase -> `stalled` (PHASE_INTENSITY -0.5, the service stops
  * paying; approval reads `failed`, owners -2 per held Cycle — Task 5), the phase
  * left is stamped into PriorPhase (only when blank), and StageHold.st records
- * the entry Cycle so a revival can tell new work from old. Stage is untouched:
- * `stalled` wins over it in stageRequirement. No business lift, no carry.
+ * the entry Cycle so a revival can tell new work from old. A Delivering row
+ * falls to Standing (it stopped delivering); Funded and Standing keep their
+ * Stage — `stalled` wins over it in stageRequirement. No business lift, no carry.
  */
 function applyCivicStallEntry_(ctx, row, ix, cycle) {
   if (!(ix.phase >= 0) || !(ix.hold >= 0)) return false;
@@ -3707,13 +3707,9 @@ function applyCivicStallEntry_(ctx, row, ix, cycle) {
   var voted = status === 'override-passed' ||
     (status === 'passed' && String(cell(ix.mayoralAction) == null ? '' : cell(ix.mayoralAction)).trim().toLowerCase() === 'signed');
   if (!voted) return false;
-  var req = civicStageRequirement_({
-    stage: stage, phase: cell(ix.phase), policyDomain: cell(ix.policyDomain),
-    lastWorkCycle: cell(ix.lastWork), lastStageChangeCycle: cell(ix.lastStageChange)
-  });
   var dials = getCivicStallDials_(ctx);
   var clock = civicStallClock_({
-    stage: stage, phase: cell(ix.phase), blocked: req ? req.blocked : null, cycle: cycle,
+    stage: stage, phase: cell(ix.phase), cycle: cycle,
     lastWorkCycle: cell(ix.lastWork), lastStageChangeCycle: cell(ix.lastStageChange),
     stallCycles: dials.stallCycles, untendedStallCycles: dials.untendedStallCycles
   });
@@ -3724,9 +3720,21 @@ function applyCivicStallEntry_(ctx, row, ix, cycle) {
   if (ix.priorPhase >= 0 && !String(cell(ix.priorPhase) || '').trim()) row[ix.priorPhase] = left;
   var hold = civicStageHoldRead_(cell(ix.hold));
   hold.st = cycle;
+  // A Delivering row that stalls has stopped delivering (agy review F2): it
+  // falls to Standing here — same shape as a regress (Stage + hold only, never
+  // LastStageChangeCycle, never the baseline) — so a revival lands at Standing
+  // and has to re-prove delivery over a fresh hold. `first` survives: the
+  // finishing credit is paid once, ever.
+  var fell = false;
+  if (stage === 'Delivering') {
+    row[ix.stage] = 'Standing';
+    hold.regressed = cycle;
+    hold.up = 0; hold.down = 0;
+    fell = true;
+  }
   row[ix.hold] = JSON.stringify(hold);
   if (ix.lastUpdated >= 0) row[ix.lastUpdated] = ctx.now;
-  Logger.log('civicInitiativeEngine: ' + initKey + ' STALLED at C' + cycle + ' — ' + stage + ' ' + clock.clock +
+  Logger.log('civicInitiativeEngine: ' + initKey + ' STALLED at C' + cycle + (fell ? ' (Delivering -> Standing)' : '') + ' — ' + stage + ' ' + clock.clock +
              ' clock ran ' + clock.elapsed + ' > ' + clock.limit + ' Cycles (reference C' + clock.reference + '); phase ' +
              (left || '(blank)') + ' -> stalled');
   return true;

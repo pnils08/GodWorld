@@ -167,15 +167,21 @@ test('empty root: every stage waiting, no engine fire', () => {
   for (const name of WEEK_STAGES) assert.strictEqual(s.stages[name].status, 'waiting', name);
 });
 
-test('engine artifacts flip prep/directive to ready and stamp engineFiredAt', () => {
+test('engine artifacts flip prep to ready and stamp engineFiredAt (directive waits for the close — Task 4)', () => {
   const root = mkRoot();
   fireEngine(root);
   const s = refreshWeekState(blankWeekState(CYCLE), root);
   assert.ok(s.engineFiredAt, 'engineFiredAt stamped');
   assert.strictEqual(s.stages.prep.status, 'ready');
-  assert.strictEqual(s.stages.directive.status, 'ready');
+  assert.strictEqual(s.stages.directive.status, 'waiting', 'directive is a post-close stage — not ready on the fire alone');
   assert.strictEqual(s.stages['mayor-open'].status, 'waiting');
   assert.strictEqual(s.stages['close-det'].status, 'waiting');
+  writeJson(root, 'output/cron-civic/close_c' + CYCLE + '.json', { stage: 'close', cycle: CYCLE, applied: false });
+  const s2 = refreshWeekState(blankWeekState(CYCLE), root);
+  assert.strictEqual(s2.stages.directive.status, 'ready', 'directive ready once the close record exists');
+  writeJson(root, 'output/cron-civic/directive_c' + CYCLE + '.json', { stage: 'directive', cycle: CYCLE, blocks: [] });
+  const s3 = refreshWeekState(blankWeekState(CYCLE), root);
+  assert.strictEqual(s3.stages.directive.status, 'done');
 });
 
 test('acceptance 1: a killed seat is pending — hearing done, close-det ready on the arrived voices', () => {
@@ -760,6 +766,73 @@ test('orBatch is importable with no API key and validates batches locally', () =
   assert.throws(() => v('m', [{ custom_id: 'a', body: { messages: [], max_tokens: 1 } }]), /empty messages/);
   assert.throws(() => v('m', [{ custom_id: 'a', body: { model: 'other', messages: [{ role: 'user', content: 'x' }], max_tokens: 1 } }]), /must match/);
   assert.throws(() => v('m', [{ custom_id: 'a', body: { messages: [{ role: 'user', content: 'x' }] } }]), /max_tokens/);
+});
+
+// ────────────────────────────────────────────────────────────────────────────
+console.log('\ncivic.39 Task 4 — directive from close output');
+// ────────────────────────────────────────────────────────────────────────────
+
+const { directiveTargetSeats, filterDirectiveBlocks } = civicRun;
+
+const T4_OFFICEMAP = {
+  offices: [
+    { agentDir: 'civic-office-mayor', officeId: 'MAYOR-01', model: 'moonshotai/kimi-k2', holder: 'Synthetic Mayor', title: 'Mayor' },
+    { agentDir: 'civic-office-council-d2', officeId: 'COUNCIL-D2', district: 'D2', model: 'meta-llama/llama-3.3-70b-instruct', holder: 'Synthetic D2', title: 'Council D2' },
+    { agentDir: 'civic-office-council-d6', officeId: 'COUNCIL-D6', district: 'D6', model: 'google/gemini-3.7-flash', holder: 'Synthetic D6', title: 'Council D6' },
+    { agentDir: 'civic-office-council-d7', officeId: 'COUNCIL-D7', district: 'D7', model: 'google/gemini-3.7-flash', holder: 'Synthetic D7', title: 'Council D7' },
+    { agentDir: 'civic-office-police-chief', officeId: 'COP-01', model: 'deepseek/deepseek-chat', holder: 'Synthetic Chief', title: 'Chief' },
+  ],
+  projects: [],
+};
+function t4Deps(overrides) {
+  return Object.assign({
+    cycle: CYCLE,
+    pendingProposals: [],
+    trackerRows: [{ InitiativeID: 'INIT-001', NextActionCycle: CYCLE + 1 }, { InitiativeID: 'INIT-002', NextActionCycle: CYCLE + 9 }],
+    petitionPoolFor: o => ({ available: true, complaints: o.agentDir === 'civic-office-council-d7' ? [1, 2, 3] : [] }),
+    boardFor: o => (o.agentDir === 'civic-office-council-d2' ? [{ id: 'INIT-001' }] : [{ id: 'INIT-002' }]),
+  }, overrides || {});
+}
+
+test('the directive names only seats the close left passed-over or unanswered (Task 4 verify)', () => {
+  const closeRec = { pendingVoices: ['council_d6', 'mayor_gavel', 'police_chief'] };
+  const targets = directiveTargetSeats(CYCLE, { officeMap: T4_OFFICEMAP, closeRec, deps: t4Deps() });
+  const byDir = new Map(targets.map(t => [t.agentDir, t.reasons.join(' | ')]));
+  assert.deepStrictEqual(targets.map(t => t.agentDir),
+    ['civic-office-mayor', 'civic-office-council-d2', 'civic-office-council-d6', 'civic-office-council-d7']);
+  assert.ok(byDir.get('civic-office-mayor').includes('passed over'), 'mayor named via mayor_gavel pending');
+  assert.ok(byDir.get('civic-office-council-d6').includes('passed over'));
+  assert.ok(byDir.get('civic-office-council-d7').includes('petition pool'), 'd7 named via unanswered petitions');
+  assert.ok(byDir.get('civic-office-council-d2').includes('stall clock'), 'd2 named via the stall clock');
+  assert.ok(!byDir.has('civic-office-police-chief'), 'a pending non-elected seat never becomes an addressee');
+});
+
+test('an answered proposal or a distant stall clock keeps the seat out of the directive', () => {
+  const closeRec = { pendingVoices: [] };
+  const deps = t4Deps({
+    pendingProposals: [{ agentDir: 'civic-office-council-d7', status: 'pending', type: 'propose' }],
+    boardFor: () => [{ id: 'INIT-002' }],  // NextActionCycle C+9 — nowhere near the clock
+  });
+  const targets = directiveTargetSeats(CYCLE, { officeMap: T4_OFFICEMAP, closeRec, deps });
+  assert.deepStrictEqual(targets, []);
+});
+
+test('filterDirectiveBlocks rejects any addressee outside the close-derived target set', () => {
+  const goodBlock = '## Synthetic D6 — Council D6\n\n- **Agent:** `.claude/agents/civic-office-council-d6/`\n- **Address:** say it\n- **Why:** the thread\n- **Acceptance:** a number\n- **Silence consequence:** it breaks\n';
+  const outside = goodBlock.replace(/council-d6/g, 'council-d9').replace('Synthetic D6', 'Synthetic D9');
+  const missing = goodBlock.replace('- **Acceptance:** a number\n', '');
+  const out = filterDirectiveBlocks(goodBlock + outside + missing, new Set(['civic-office-council-d6']));
+  assert.strictEqual(out.blocks.length, 1);
+  assert.strictEqual(out.rejected.length, 2);
+  assert.ok(out.rejected[0].why.includes('outside the close-derived target set'));
+  assert.ok(out.rejected[1].why.includes('missing fields'));
+});
+
+test('filterDirectiveBlocks caps at the template maximum of 12 blocks', () => {
+  const block = '## Synthetic D6 — Council D6\n\n- **Agent:** `.claude/agents/civic-office-council-d6/`\n- **Address:** say it\n- **Why:** the thread\n- **Acceptance:** a number\n- **Silence consequence:** it breaks\n';
+  const out = filterDirectiveBlocks(block.repeat(13), new Set(['civic-office-council-d6']));
+  assert.strictEqual(out.blocks.length, 12);
+  assert.strictEqual(out.truncated, 1);
 });
 
 // ────────────────────────────────────────────────────────────────────────────

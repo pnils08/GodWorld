@@ -31,9 +31,9 @@
  *                          rejected/expired seats resubmit next window. tick
  *                          runs this — it costs no model tokens.
  *
- * Stage order in the chain: directive -> prep -> decide -> voices -> projects
- * -> close. The directive runs FIRST so prep consumes a real directive file
- * (plan Task 2.2 verify: "prep consumes it without falling back").
+ * Stage order in the chain: prep -> decide -> voices -> projects -> close ->
+ * directive. civic.39 Task 4: the directive runs LAST — it is a post-close
+ * artifact built from close_c{XX}.json, and week N+1's prep consumes it.
  *
  * State between stages lives under output/cron-civic/ (mirror of
  * output/cron-compare/). Packets: output/cron-civic/packets/. This chain never
@@ -490,14 +490,16 @@ async function runPrep() {
   const officeMap = mustJson(path.join(ROOT, 'scripts', 'civic-office-map.json'), 'civic.15 Task 0.2 office map');
   const truesource = { council: loadCouncilRoster(officeMap) };
 
-  // Mara directive: manual beats AUTO (the directive stage writes the AUTO file
-  // before prep in the chain). Absent both -> warn; the packet ships without a
-  // Mara cross-check block (SKILL treats the directive as optional input).
+  // Mara directive: manual beats AUTO. civic.39 Task 4 — the AUTO file is a
+  // POST-CLOSE artifact: the directive for week N is written after week N's
+  // close and consumed by week N+1's prep, so the AUTO lookup is the PRIOR
+  // cycle's file. A builder-dropped manual file for THIS cycle still wins.
+  // Absent both -> warn; the packet ships without a Mara cross-check block.
   const dirDir = path.join(ROOT, 'output', 'mara-directives');
-  const directivePath = ['mara_directive_c' + cycle + '.txt', 'mara_directive_c' + cycle + '.md', 'mara_directive_c' + cycle + '_AUTO.txt']
+  const directivePath = ['mara_directive_c' + cycle + '.txt', 'mara_directive_c' + cycle + '.md', 'mara_directive_c' + prev + '_AUTO.txt']
     .map(f => path.join(dirDir, f)).find(p => fs.existsSync(p)) || null;
   const directive = directivePath ? fs.readFileSync(directivePath, 'utf8') : null;
-  log(directive ? 'directive: ' + path.relative(ROOT, directivePath) : 'directive: NONE (run --stage=directive first in the chain) — packets ship without Mara cross-check');
+  log(directive ? 'directive: ' + path.relative(ROOT, directivePath) : 'directive: NONE (no manual c' + cycle + ' file and no post-close AUTO from c' + prev + ') — packets ship without Mara cross-check');
 
   // Prior-cycle voice JSONs (continuity)
   const voiceDir = path.join(ROOT, 'output', 'civic-voice');
@@ -890,6 +892,88 @@ function callOpenRouter(model, system, user, maxTokens) {
 }
 const modelFamily = slug => String(slug).split('/')[0];
 
+// ---------------------------------------------------------------------------
+// civic.39 Task 4 — the directive is a POST-CLOSE artifact. It is built from
+// close_c{N}.json and aims only at seats the close left PASSED OVER (their
+// voice never landed — pendingVoices) or carrying an UNANSWERED DEMAND
+// (petition pool at/above the visibility line with no proposal filed by the
+// seat, or a board row inside one cycle of its stall clock). The AUTO file
+// for week N is written after week N's close and consumed by week N+1's prep.
+// ---------------------------------------------------------------------------
+
+// Petition visibility line (default the builder may overrule): a district with
+// this many Civic complaints on the record and no answering proposal is
+// confrontable.
+const PETITION_VISIBILITY_LINE = 3;
+
+function seatUnansweredDemands(o, deps) {
+  const reasons = [];
+  const pool = deps.petitionPoolFor ? deps.petitionPoolFor(o) : null;
+  if (pool && pool.available) {
+    const answered = (deps.pendingProposals || []).filter(m => m.agentDir === o.agentDir).length;
+    if (pool.complaints.length >= PETITION_VISIBILITY_LINE && !answered) {
+      reasons.push('petition pool: ' + pool.complaints.length + ' complaint(s) ≥ the visibility line (' + PETITION_VISIBILITY_LINE + ') with NO proposal filed by this seat');
+    }
+  }
+  const dueSoon = (deps.boardFor ? deps.boardFor(o) : []).filter(b => {
+    const row = (deps.trackerRows || []).find(r => r.InitiativeID === b.id) || {};
+    const nac = Number(row.NextActionCycle);
+    return Number.isFinite(nac) && nac <= Number(deps.cycle) + 1;
+  });
+  if (dueSoon.length) reasons.push('stall clock: ' + dueSoon.map(b => b.id).join(', ') + ' (NextActionCycle ≤ C' + (Number(deps.cycle) + 1) + ')');
+  return reasons;
+}
+
+// The close-derived addressee set. deps is injectable for tests; runDirective
+// assembles the real one from the slice builders.
+function directiveTargetSeats(cycle, opts) {
+  opts = opts || {};
+  const root = opts.root || ROOT;
+  const officeMap = opts.officeMap || mustJson(path.join(ROOT, 'scripts', 'civic-office-map.json'), 'office map');
+  const closeRec = opts.closeRec !== undefined ? opts.closeRec
+    : readJson(path.join(root, 'output', 'cron-civic', 'close_c' + cycle + '.json'));
+  // Valid addressees = the 10 ELECTED seats (mayor + 9 council, civic.38
+  // Task 8). A pending voice from a non-elected seat never becomes an addressee.
+  const pool = (officeMap.offices || []).filter(o => {
+    if (!o.agentDir) return false;
+    const id = String(o.officeId || '');
+    return id === 'MAYOR-01' || /^COUNCIL-D\d$/.test(id);
+  });
+  const dirForSlug = slug => String(slug).indexOf('mayor') === 0
+    ? 'civic-office-mayor'
+    : 'civic-office-' + String(slug).replace(/_/g, '-');
+  const passedOver = new Set((((closeRec || {}).pendingVoices) || []).map(dirForSlug));
+  const targets = [];
+  for (const o of pool) {
+    const reasons = [];
+    if (passedOver.has(o.agentDir)) reasons.push('passed over — no voice from this seat landed in the C' + cycle + ' close');
+    if (opts.deps) reasons.push.apply(reasons, seatUnansweredDemands(o, opts.deps));
+    if (reasons.length) targets.push({ agentDir: o.agentDir, holder: o.holder, title: o.title, office: o, reasons });
+  }
+  return targets;
+}
+
+// Block validation against the close-derived target set: a block addressed to
+// ANY other seat — even a real elected one — is rejected. The five template
+// fields are mandatory (a truncated tail block fails the field check).
+function filterDirectiveBlocks(text, targetDirs) {
+  const known = targetDirs instanceof Set ? targetDirs : new Set(targetDirs);
+  let blocks = String(text).replace(/^```(?:markdown)?\s*/i, '').replace(/\s*```\s*$/, '')
+    .split(/\n(?=## )/).filter(p => /^## /.test(p));
+  const FIELDS = ['**Agent', '**Address', '**Why', '**Acceptance', '**Silence consequence'];
+  const rejected = [];
+  blocks = blocks.filter(b => {
+    const m = b.match(/\.claude\/agents\/([a-z0-9-]+)\/?/i);
+    if (!m || !known.has(m[1])) { rejected.push({ head: (b.split('\n')[0] || '').slice(0, 80), why: 'addressee outside the close-derived target set' }); return false; }
+    const missing = FIELDS.filter(f => !b.includes(f));
+    if (missing.length) { rejected.push({ head: (b.split('\n')[0] || '').slice(0, 80), why: 'missing fields: ' + missing.join(', ') }); return false; }
+    return true;
+  });
+  let truncated = 0;
+  if (blocks.length > 12) { truncated = blocks.length - 12; blocks = blocks.slice(0, 12); }
+  return { blocks, rejected, truncated };
+}
+
 async function runDirective() {
   const cycle = arg('--cycle', null) || detectCycle();
   const prev = String(Number(cycle) - 1);
@@ -951,40 +1035,81 @@ async function runDirective() {
     DIRECTIVE_BRIEF,
   ].join('\n\n---\n\n');
 
-  // civic.38 Task 8 step 1: valid addressees = the 10 ELECTED seats (mayor +
-  // 9 council). Project directors, DA, Okoro, Baylight leave the pool — their
-  // operational read moves to work-wake (Task 9).
-  const seats = [];
-  for (const o of officeMap.offices || []) {
-    if (!o.agentDir) continue;
-    const id = String(o.officeId || '');
-    if (id !== 'MAYOR-01' && !/^COUNCIL-D\d$/.test(id)) continue;
-    seats.push({ agentDir: o.agentDir, holder: o.holder, title: o.title, office: o });
+  // civic.39 Task 4: the directive is built AFTER the close and names only
+  // seats the close left passed-over or carrying an unanswered demand. The
+  // close record is the required input; without it the stage fails loud.
+  const closeRec = readJson(path.join(CIVIC, 'close_c' + cycle + '.json'));
+  if (!closeRec) {
+    console.error('HALT: no close_c' + cycle + '.json — the directive is a post-close stage (civic.39 Task 4). Run --stage=close first.');
+    process.exit(1);
   }
 
-  // Task 8 step 2 — per-seat material built from the SAME inputs the seats
-  // get: district hood movement (engine audit), the petition pool (beats
-  // Reflection_Intake once dumped), the seat's board (beats tracker dump).
-  // A confrontation confronts with what the seat could have seen.
+  // Per-seat material is built from the SAME inputs the seats get: district
+  // hood movement (engine audit), the petition pool (beats Reflection_Intake),
+  // the seat's board (beats tracker dump). A confrontation confronts with what
+  // the seat could have seen.
   const slice = require('./buildCivicOfficeSlice');
   const c2p = slice.childToParentFromAudit(audit);
   const trackerRows = slice.loadTrackerRows(ROOT, cycle);
   if (trackerRows === null) throw new Error('Directive board unavailable: Initiative_Tracker dump absent');
   const hoodScores = slice.scoreHoods(audit);
-  // Petition visibility line (default the builder may overrule): a district
-  // with this many Civic complaints on the record and no answering proposal is
-  // confrontable.
-  const PETITION_VISIBILITY_LINE = 3;
   const pendingProposals = (function () {
     const folded = loadMoveLedgerFolded(ROOT, cycle);
     if (!folded) return [];
     return [...folded.values()].filter(m => m.status === 'pending' && m.type === 'propose');
   })();
+
+  // The close-derived target set: passed-over seats ∪ unanswered demands.
+  const seats = directiveTargetSeats(cycle, {
+    officeMap, closeRec,
+    deps: {
+      cycle, pendingProposals, trackerRows,
+      petitionPoolFor: o => slice.loadPetitionPool(ROOT, o, slice.turfHoods(o), officeMap, c2p, cycle),
+      boardFor: o => slice.boardRowsFor(o, trackerRows, c2p),
+    },
+  });
+
+  const writeDirectiveOutputs = (blocks, rejected, usage, note) => {
+    // Canonical header is OURS, never the model's — no Gregorian dates in
+    // sim-facing content (no-real-world-clock rule); sim clock only.
+    const outDir = path.join(ROOT, 'output', 'mara-directives');
+    fs.mkdirSync(outDir, { recursive: true });
+    const outPath = path.join(outDir, 'mara_directive_c' + cycle + '_AUTO.txt');
+    const canonHeader = [
+      '# C' + cycle + ' Voice Directives — Mara Vance (AUTO)',
+      '',
+      '**Cycle:** ' + cycle,
+      '**Issued:** C' + cycle + ' (auto-derived, cron-civic-run.js --stage=directive, post-close)',
+      '**Source:** close_c' + cycle + ' + world_summary_c' + cycle + ' + engine review HIGHs + tracker + C' + prev + ' voice record',
+      '',
+      '---',
+      '',
+    ].join('\n');
+    fs.writeFileSync(outPath, canonHeader + (blocks.length ? blocks.join('\n') + '\n'
+      : 'Mara issued no directives after the C' + cycle + ' close — no seat was passed over and no demand went unanswered.\n'));
+    fs.mkdirSync(CIVIC, { recursive: true });
+    fs.writeFileSync(path.join(CIVIC, 'directive_c' + cycle + '.json'), JSON.stringify({
+      stage: 'directive', cycle: Number(cycle), model: blocks.length ? MODEL : null, mayorModel, closeDerived: true,
+      targets: seats.map(s => ({ agentDir: s.agentDir, reasons: s.reasons })),
+      blocks: blocks.map(b => (b.split('\n')[0] || '').replace(/^## /, '').slice(0, 100)),
+      rejectedBlocks: rejected, usage: usage || null, note: note || null,
+      directive: path.relative(ROOT, outPath), ranAt: new Date().toISOString(),
+    }, null, 2));
+    console.log('\n=== directive complete: ' + blocks.length + ' block(s)' + (rejected.length ? ' (' + rejected.length + ' rejected)' : '') + (note ? ' — ' + note : '') + ' → ' + path.relative(ROOT, outPath) + ' ===');
+  };
+
+  if (!seats.length) {
+    log('close left no passed-over seat and no unanswered demand — no directive issued, no model call made');
+    writeDirectiveOutputs([], [], null, 'nothing owed after the close');
+    return;
+  }
+
   const seatMaterial = seats.map(s => {
     const o = s.office;
     const hoods = slice.turfHoods(o);
     const turfSet = new Set(hoods.map(h => String(h).toLowerCase()));
     const lines = ['### ' + s.holder + ' (' + s.title + (o.district ? ', ' + o.district : '') + ') — ' + s.agentDir];
+    lines.push('- why named: ' + s.reasons.join(' | '));
     // (a) hood data moving the wrong way
     const hot = hoodScores.filter(h => turfSet.has(String(h.hood).toLowerCase()) && (h.outlier || h.traj === 'decay'));
     if (hot.length) lines.push('- district heat: ' + hot.slice(0, 3).map(h => h.hood + ' (' + h.why.join('; ') + ')').join(' | '));
@@ -997,9 +1122,7 @@ async function runDirective() {
           ? ' — ABOVE the visibility line (' + PETITION_VISIBILITY_LINE + ') with NO proposal filed by this seat'
           : answered ? ' — ' + answered + ' proposal(s) pending from this seat' : ''));
     }
-    // (c) board rows inside one cycle of the stall clock. Stage columns land
-    // with Task 4; until then the honest proxy is a tracker row whose
-    // NextActionCycle is due now or next cycle.
+    // (c) board rows inside one cycle of the stall clock.
     const board = slice.boardRowsFor(o, trackerRows, c2p);
     const dueSoon = board.filter(b => {
       const row = trackerRows.find(r => r.InitiativeID === b.id) || {};
@@ -1043,14 +1166,14 @@ async function runDirective() {
     'Produce your voice directive for cycle ' + cycle + ' as output text only — the structured block-per-addressee format from your template, with the cycle header. No prose outside the format.',
     '',
     'HARD RULES:',
-    '- Addressees MUST come from this seat list only (use the agentDir in the Agent field, formatted as `.claude/agents/<agentDir>/`):',
-    ...seats.map(s => '  - ' + s.agentDir + ' — ' + s.holder + ' (' + s.title + ')'),
+    '- Addressees MUST come from this close-derived target list only — seats the C' + cycle + ' close left passed-over or carrying an unanswered demand (use the agentDir in the Agent field, formatted as `.claude/agents/<agentDir>/`):',
+    ...seats.map(s => '  - ' + s.agentDir + ' — ' + s.holder + ' (' + s.title + '): ' + s.reasons.join('; ')),
     '- Maximum 12 blocks. Every block carries all five fields (Agent, Address, Why, Acceptance, Silence consequence).',
     '- Only issue a directive where the cycle material below gives you a real unresolved thread, gap, or dependency. Thin directives are noise.',
     '- Do not limit directives to initiative process. Press offices on the crisis and the success in their neighborhoods, their programs, and the city — they argue the initiatives, but they must fight for their constituents.',
     '- Cite cycles by number (C' + prev + ', C' + cycle + '). Never invent citizens, numbers, or events not present below.',
     '',
-    '=== PER-SEAT MATERIAL (the same data each seat was given — confront them with what they could have seen) ===',
+    '=== PER-SEAT MATERIAL (target seats only — the same data each seat was given; confront them with what they could have seen) ===',
     ...seatMaterial,
     '',
     '=== CYCLE ' + cycle + ' MATERIAL ===',
@@ -1084,53 +1207,19 @@ async function runDirective() {
     log('WARNING: output hit the ' + MAX_TOKENS + '-token cap — tail block(s) may be truncated (field validation below drops them)');
   }
 
-  // Validate: keep only blocks addressed to real seats AND carrying all five
-  // mandatory template fields (a truncated tail block fails the field check).
-  const text = r.text.replace(/^```(?:markdown)?\s*/i, '').replace(/\s*```\s*$/, '');
-  let blocks = text.split(/\n(?=## )/).filter(p => /^## /.test(p));
-  const known = new Set(seats.map(s => s.agentDir));
-  const FIELDS = ['**Agent', '**Address', '**Why', '**Acceptance', '**Silence consequence'];
-  const rejected = [];
-  blocks = blocks.filter(b => {
-    const m = b.match(/\.claude\/agents\/([a-z0-9-]+)\/?/i);
-    if (!m || !known.has(m[1])) { rejected.push({ head: (b.split('\n')[0] || '').slice(0, 80), why: 'unknown addressee' }); return false; }
-    const missing = FIELDS.filter(f => !b.includes(f));
-    if (missing.length) { rejected.push({ head: (b.split('\n')[0] || '').slice(0, 80), why: 'missing fields: ' + missing.join(', ') }); return false; }
-    return true;
-  });
-  if (blocks.length > 12) { log('truncating ' + blocks.length + ' blocks to the template max of 12'); blocks = blocks.slice(0, 12); }
+  // Validate against the close-derived target set: keep only blocks addressed
+  // to a named seat AND carrying all five mandatory template fields (a
+  // truncated tail block fails the field check).
+  const { blocks, rejected, truncated } = filterDirectiveBlocks(r.text, new Set(seats.map(s => s.agentDir)));
+  if (truncated) log('truncating ' + (blocks.length + truncated) + ' blocks to the template max of 12');
   if (!blocks.length) {
-    console.error('HALT: directive model produced no block addressed to a known seat (' + rejected.length + ' rejected). Raw output kept at output/cron-civic/directive_c' + cycle + '.raw.txt');
+    console.error('HALT: directive model produced no block addressed to a close-derived target seat (' + rejected.length + ' rejected). Raw output kept at output/cron-civic/directive_c' + cycle + '.raw.txt');
     fs.mkdirSync(CIVIC, { recursive: true });
     fs.writeFileSync(path.join(CIVIC, 'directive_c' + cycle + '.raw.txt'), r.text);
     process.exit(1);
   }
 
-  // Canonical header is OURS, never the model's — no Gregorian dates in
-  // sim-facing content (no-real-world-clock rule); sim clock only.
-  const outDir = path.join(ROOT, 'output', 'mara-directives');
-  fs.mkdirSync(outDir, { recursive: true });
-  const outPath = path.join(outDir, 'mara_directive_c' + cycle + '_AUTO.txt');
-  const canonHeader = [
-    '# C' + cycle + ' Voice Directives — Mara Vance (AUTO)',
-    '',
-    '**Cycle:** ' + cycle,
-    '**Issued:** C' + cycle + ' (auto-derived, cron-civic-run.js --stage=directive)',
-    '**Source:** world_summary_c' + cycle + ' + engine review HIGHs + tracker + C' + prev + ' voice record',
-    '',
-    '---',
-    '',
-  ].join('\n');
-  fs.writeFileSync(outPath, canonHeader + blocks.join('\n') + '\n');
-
-  fs.mkdirSync(CIVIC, { recursive: true });
-  fs.writeFileSync(path.join(CIVIC, 'directive_c' + cycle + '.json'), JSON.stringify({
-    stage: 'directive', cycle: Number(cycle), model: MODEL, mayorModel,
-    blocks: blocks.map(b => (b.split('\n')[0] || '').replace(/^## /, '').slice(0, 100)),
-    rejectedBlocks: rejected, usage: r.usage,
-    directive: path.relative(ROOT, outPath), ranAt: new Date().toISOString(),
-  }, null, 2));
-  console.log('\n=== directive complete: ' + blocks.length + ' block(s)' + (rejected.length ? ' (' + rejected.length + ' rejected — unknown addressee)' : '') + ' → ' + path.relative(ROOT, outPath) + ' ===');
+  writeDirectiveOutputs(blocks, rejected, r.usage);
 }
 
 // ---------------------------------------------------------------------------
@@ -3119,7 +3208,11 @@ async function runChain() {
     console.log('[chain] engine has not fired for c' + cycle + ' yet (missing: ' + missing.join(', ') + '). Exiting clean.');
     return;
   }
-  for (const stage of [runDirective, runPrep, runMayorOpen, runHearing, runMayorGavel, runProjects, runClose]) {
+  // Stage order in the chain (civic.39 Task 4): the directive moved LAST — it
+  // is a post-close artifact built from close_c{XX}.json, naming only seats
+  // the close left passed-over or unanswered. Prep consumes the PRIOR cycle's
+  // post-close AUTO file (a same-cycle manual file still wins).
+  for (const stage of [runPrep, runMayorOpen, runHearing, runMayorGavel, runProjects, runClose, runDirective]) {
     await stage();   // mayor stages + prep still fail loud (process.exit) and halt the chain; hearing/projects
                      // record pending seats and continue (civic.39 ruling 2); runClose exits 1 only on a real block
   }
@@ -3259,7 +3352,10 @@ function refreshWeekState(state, root) {
   set('prep', prepDone ? 'done' : (fire.fired ? 'ready' : 'waiting'));
 
   const directiveDone = fs.existsSync(path.join(civic, 'directive_c' + cycle + '.json'));
-  set('directive', directiveDone ? 'done' : (fire.fired ? 'ready' : 'waiting'));
+  const closeRecExists = fs.existsSync(path.join(civic, 'close_c' + cycle + '.json'));
+  // civic.39 Task 4: the directive is a post-close stage — ready once the
+  // close record exists, never on the engine fire alone.
+  set('directive', directiveDone ? 'done' : (closeRecExists ? 'ready' : 'waiting'));
 
   const mayorOpenRaw = fs.existsSync(path.join(civic, 'mayor_open_c' + cycle + '.raw.txt'));
   set('mayor-open', voiceExists('mayor_open') ? 'done' : (mayorOpenRaw ? 'failed' : (prepDone ? 'ready' : 'waiting')));
@@ -3566,4 +3662,6 @@ module.exports = { modelChainFor, FALLBACK_MODELS, sentimentWord, crimeWord, ret
   engineFireInfo, refreshWeekState, decideApply, closeDeterministic, runGate, maybeApply, runTick,
   // civic.39 Task 3 — batch transport (hearing seats on :batch-eligible models)
   BATCH_PROFILES, batchEligible, batchManifestPath, loadBatchManifest, batchInFlightSlugs,
-  hearingSeatPrompt, batchSubmitHearing, batchCollectHearing };
+  hearingSeatPrompt, batchSubmitHearing, batchCollectHearing,
+  // civic.39 Task 4 — directive from close output
+  PETITION_VISIBILITY_LINE, seatUnansweredDemands, directiveTargetSeats, filterDirectiveBlocks };

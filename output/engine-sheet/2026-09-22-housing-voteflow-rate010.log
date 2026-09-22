@@ -1,0 +1,51 @@
+== step A: blank Stage (legacy row: no relief, gross restored this fire) ==
+set INIT-951 {"Stage":"","LastStageChangeCycle":"","LastWorkCycle":"","StageBaseline":"","StageHold":"","PriorPhase":""} | readback Stage  LSC  LWC  BL  Hold 
+FIRE HTTP 200 in 162s ok=true cycle=117
+READ C117 | INIT-951 Stage  phase operational LSC  LWC "" Prior ""
+   BL 
+   Hold 
+   West Oakland renters 58 relieved 0
+C117 city median 0.2442 | members 11 | relieved rows 0 | West Oakland ratio 1.1261 median 0.275 n 58
+== step B: Proposed (vote passes this fire → Funded, VOTE baseline from obs N-1 undiscounted) ==
+set INIT-951 {"Stage":"Proposed","LastStageChangeCycle":117} | readback Stage Proposed LSC 117 LWC  BL  Hold 
+FIRE HTTP 200 in 200s ok=true cycle=118
+READ C118 | INIT-951 Stage Funded phase operational LSC 118 LWC "" Prior ""
+   BL {"v":1,"origin":"vote","cycle":117,"captureCycle":118,"tab":"Household_Ledger","columns":["MonthlyRent*12/HouseholdIncome"],"scope":"hood","direction"
+   Hold 
+   West Oakland renters 58 relieved 0
+C118 city median 0.2372 | members 12 | relieved rows 0 | West Oakland ratio 1.1691 median 0.2773 n 58
+== step C: a work move landed (LastWorkCycle = closing Cycle) → Funded→Standing this fire ==
+set INIT-951 {"LastWorkCycle":118} | readback Stage Funded LSC 118 LWC 118 BL {"v":1,"origin":"vote","cycle":117,"capt Hold 
+FIRE HTTP 200 in 181s ok=true cycle=119
+READ C119 | INIT-951 Stage Standing phase operational LSC 119 LWC "118" Prior ""
+   BL {"v":1,"origin":"vote","cycle":117,"captureCycle":118,"tab":"Household_Ledger","columns":["MonthlyRent*12/HouseholdIncome"],"scope":"hood","direction"
+   Hold 
+   West Oakland renters 58 relieved 0
+C119 city median 0.23554999999999998 | members 12 | relieved rows 0 | West Oakland ratio 1.1772 median 0.2773 n 58
+== step D: Standing seen by the producer → relief this fire; obs = stand-up Cycle earns nothing ==
+FIRE HTTP 200 in 150s ok=true cycle=120
+READ C120 | INIT-951 Stage Standing phase operational LSC 119 LWC "118" Prior ""
+   BL {"v":1,"origin":"vote","cycle":117,"captureCycle":118,"tab":"Household_Ledger","columns":["MonthlyRent*12/HouseholdIncome"],"scope":"hood","direction"
+   Hold 
+   West Oakland renters 63 relieved 63
+C120 city median 0.23565 | members 12 | relieved rows 63 | West Oakland ratio 1.1118 median 0.262 n 63
+== step E/F/G: hold streak (obs discounted vs vote baseline) ==
+FIRE HTTP 200 in 142s ok=true cycle=121
+READ C121 | INIT-951 Stage Standing phase operational LSC 119 LWC "118" Prior ""
+   BL {"v":1,"origin":"vote","cycle":117,"captureCycle":118,"tab":"Household_Ledger","columns":["MonthlyRent*12/HouseholdIncome"],"scope":"hood","direction"
+   Hold {"v":1,"obs":120,"up":0,"down":0,"first":0,"regressed":0,"m":0.06,"r":0.5,"st":0}
+   West Oakland renters 63 relieved 63
+C121 city median 0.23645 | members 12 | relieved rows 63 | West Oakland ratio 1.1081 median 0.262 n 63
+FIRE HTTP 200 in 178s ok=true cycle=122
+READ C122 | INIT-951 Stage Standing phase operational LSC 119 LWC "118" Prior ""
+   BL {"v":1,"origin":"vote","cycle":117,"captureCycle":118,"tab":"Household_Ledger","columns":["MonthlyRent*12/HouseholdIncome"],"scope":"hood","direction"
+   Hold {"v":1,"obs":121,"up":0,"down":0,"first":0,"regressed":0,"m":0.06,"r":0.5,"st":0}
+   West Oakland renters 62 relieved 62
+C122 city median 0.23804999999999998 | members 12 | relieved rows 62 | West Oakland ratio 1.1006 median 0.262 n 62
+FIRE HTTP 200 in 175s ok=true cycle=123
+READ C123 | INIT-951 Stage Standing phase operational LSC 119 LWC "118" Prior ""
+   BL {"v":1,"origin":"vote","cycle":117,"captureCycle":118,"tab":"Household_Ledger","columns":["MonthlyRent*12/HouseholdIncome"],"scope":"hood","direction"
+   Hold {"v":1,"obs":122,"up":0,"down":0,"first":0,"regressed":0,"m":0.06,"r":0.5,"st":0}
+   West Oakland renters 62 relieved 62
+C123 city median 0.2385 | members 12 | relieved rows 62 | West Oakland ratio 1.0985 median 0.262 n 62
+done

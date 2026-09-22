@@ -156,7 +156,7 @@ var ENGINE213_CONFIG_SEEDS = [
   // Standing or Delivering — inert while every Stage is blank.
   ['civicTendGraceCycles', 6, 'civic.38 Task 4 upkeep: Cycles a Standing/Delivering initiative holds full strength after its last work move or stage change (builder-ruled 6)', 0, 52, true],
   ['civicTendDecayPerCycle', 0.15, 'civic.38 Task 4 upkeep: share of full strength lost per Cycle untended past the grace, linear (builder-ruled 0.15 — floor reached 5 Cycles past grace)', 0, 1, false],
-  ['civicTendFloor', 0.3, 'civic.38 Task 4 upkeep: the least a neglected service pays, as a share of full strength (builder-ruled 0.3); one work move restores it', 0, 1, false]
+  ['civicTendFloor', 0.3, 'civic.38 Task 4 upkeep: the least a neglected service pays, as a share of full strength (builder-ruled 0.3); one work move restores it', 0, 1, false],
   // engine.251 housing lever (builder ruled 2026-09-22: tenant rent discount, flat 10%, off
   // until bench acceptance). Same group, no new ensure function. Readers throw on a
   // missing/invalid dial (getCivicHousingDials_).

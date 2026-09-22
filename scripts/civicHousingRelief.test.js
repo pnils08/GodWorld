@@ -192,6 +192,9 @@ const slice = (hoods) => ({ available: true, reason: null, rate: 0.10, hoods: ho
 // ---- config seeds present, off by default ----
 {
   const seeds = read('../phase01-config/engine94SheetContract.js');
+  const m = seeds.match(/var ENGINE213_CONFIG_SEEDS = (\[[\s\S]*?\n\]);/);
+  const arr = new Function('return ' + m[1])();
+  ok(arr.every(x => Array.isArray(x) && x.length === 6), 'ENGINE213_CONFIG_SEEDS has no hole and every seed is a 6-tuple (a missing comma once indexed one seed by the next — bench C109 fatal, 2026-09-22)');
   ok(/\['civicHousingReliefEnabled', 0,/.test(seeds) && /\['civicHousingReliefRate', 0\.10,/.test(seeds) && /\['civicHousingCohortMinRenters', 10,/.test(seeds) && /\['civicDeliverMargin_housing', 0\.20,/.test(seeds), 'four dials seeded: enabled 0, rate 0.10, min renters 10, margin 0.20');
 }
 console.log('civicHousingRelief.test.js: ' + n + ' assertions passed');

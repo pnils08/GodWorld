@@ -671,10 +671,22 @@ function processRelocations_(ctx, cycle) {
 
   // ── Eligibility + roll + cap ──────────────────────────────────────────────
   var moved = 0;
+  // G-EC70 (builder ruling 2026-09-22): owning and renting are separate progression
+  // vehicles — a home is a gate on family formation, and ownership never flips
+  // silently. An owned household is anchored by the home it owns: this pass never
+  // relocates it, so its mortgage is never rebased to a destination rent. A change
+  // of home is the wealth engine's sale/purchase, not a migration.
+  var housingByHH = {};
+  try { housingByHH = buildHouseholdHousingMap_(ctx.ss) || {}; } catch (eOwn) { housingByHH = {}; Logger.log('processRelocations_: household housing map unavailable (' + eOwn + ') — owned units cannot be told apart this Cycle, so NO household unit relocates'); }
+  var ownedSkipped = 0;
   var cap = relocationCap_(ctx, units.length); // engine.161: a share of the movable units
   for (var u2 = 0; u2 < units.length && moved < cap; u2++) {
     var unit = units[u2];
     if (unit.income <= 0 || !unit.rowIdxs.length) continue;
+    if (unit.key.indexOf('POP:') !== 0) {
+      var hType = housingByHH[unit.key] ? String(housingByHH[unit.key].housingType || '').toLowerCase() : '';
+      if (hType !== 'rented') { ownedSkipped++; continue; } // owned, or unknown to the ledger: anchored
+    }
 
     var current = hoods[unit.hood];
     // engine.178 (S438): the unit head's OPENNESS band closes or opens the misfit door —
@@ -794,7 +806,7 @@ function processRelocations_(ctx, cycle) {
     moved++;
   }
 
-  if (moved > 0) Logger.log('processRelocations_: ' + moved + ' unit(s) relocated');
+  if (moved > 0 || ownedSkipped > 0) Logger.log('processRelocations_: ' + moved + ' unit(s) relocated; ' + ownedSkipped + ' owned/unknown household unit(s) anchored (G-EC70)');
   return { moved: moved };
 }
 
@@ -808,6 +820,18 @@ function updateHouseholdLedgerMove_(ctx, householdId, destHood, destRent) {
     if (values.length < 2) return;
     var header = values[0];
     var idx = function(n) { return header.indexOf(n); };
+    // G-EC70 belt: whoever calls this, an owned row is never moved or rebased here.
+    var iTypeGuard = idx('HousingType'), iHHGuard = idx('HouseholdId');
+    if (iTypeGuard >= 0 && iHHGuard >= 0) {
+      for (var g = 1; g < values.length; g++) {
+        if (values[g][iHHGuard] !== householdId) continue;
+        if (String(values[g][iTypeGuard] == null ? '' : values[g][iTypeGuard]).trim().toLowerCase() === 'owned') {
+          Logger.log('updateHouseholdLedgerMove_: ' + householdId + ' is OWNED — ownership survives migration as a first-class fact (G-EC70); no move written');
+          return;
+        }
+        break;
+      }
+    }
     var iHH = idx('HouseholdId'), iHood = idx('Neighborhood'),
         iRent = idx('MonthlyRent'), iStatus = idx('Status'), iUpdated = idx('LastUpdated'),
         iGross = idx('GrossMonthlyRent'), iRelief = idx('HousingReliefMonthly'), iRInit = idx('HousingReliefInitiativeID'); // engine.251

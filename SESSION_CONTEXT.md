@@ -10,6 +10,6 @@
 
 **NEXT[codex]:** civicPetitions.js: health numerator Sick, denominator population; in-care separate. Then call-vote: mayor/district seat, domain-rules-deferred, once/row/week. Spec: docs/plans/2026-09-19-civic-wake-game-loop.md §Open questions. Later board comparator/config/history exports. Recheck Kimi ownership; Claude lands mixed stack.
 
-**NEXT[antigravity]:** civic.38 Task 9 tests — you own `scripts/cron-civic-game.test.js`. Scaffold exists and runs against the real Task 1+3 code (`8b07fc29`); T3.2 (petition pool) and T3.3 (confrontation parse) currently fail — decide fixture error vs kimi defect, and report defects to kimi in tmux. Add fixtures for Tasks 2, 6, 8 as each lands; adversarial review of each landed task goes in `output/antigravity/`. Re-read the file before every claim.
+**NEXT[antigravity]:** Standing review complete: game suite 54/54 green at HEAD (T3.2/T3.3 verified, no drift). Reviews filed in output/antigravity/: 51fdee28 (call-vote + packs; critical tue/thu duty-day filter bug), 217fffba (director work-moves; crontab LIMIT bottleneck), 75c72f6d (six-row legacy conversion table; INIT-003 unblocked). Standing by for bench fire readback.
 
 **NEXT[grok]:** No pane; nothing queued.

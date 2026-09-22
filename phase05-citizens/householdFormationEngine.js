@@ -213,10 +213,12 @@ function processHouseholdFormation_(ctx) {
     // Update household incomes
     updateHouseholdIncomes_(ctx, households, citizens);
 
-    // engine.251: a standing housing program discounts gross rent BEFORE stress
-    // reads the obligation. Then reload: relief-adjusted rents, this Cycle's
-    // formed rows and the income pass all land in the objects stress consumes.
-    results.housingRelief = applyHousingRelief_(ctx, cycle);
+    // engine.255 Task 4: a standing, budgeted housing initiative pays grants onto
+    // this Cycle's flagged households BEFORE stress reads their savings. Then
+    // reload: granted savings, this Cycle's formed rows and the income pass all
+    // land in the objects stress and the dissolution roll consume. (engine.251's
+    // discount writer is no longer called; its removal is Task 8.)
+    results.housingDisbursement = applyHousingDisbursement_(ctx, cycle);
     households = loadHouseholds_(ss);
 
     // Detect household stress
@@ -1241,6 +1243,205 @@ function applyHousingReliefBody_(ctx, cycle, out) {
     (out.available ? 'available' : 'UNAVAILABLE (' + out.reason + ')') + ', renters ' + out.renters +
     ', gross copied ' + out.grossCopied + ', relieved ' + out.relieved + ', restored ' + out.restored +
     ', invalid ' + out.invalid + (touched ? ' — written' : ' — nothing to write'));
+  return out;
+}
+
+// ============================================================================
+// engine.255 Task 4 — the housing grant writer (plan
+// docs/plans/2026-09-22-initiative-budget-disbursement.md §The shape).
+//
+// For each program on S.initiativeDisbursement (Phase 2, one per Standing/
+// Delivering housing row with money left): the flagged active rented households
+// in its folded hoods — the engine's own stress rule, burden ≥ RENT_BURDEN_WARNING
+// and savings under the 12-month buffer — not granted by ANY initiative inside
+// the cooldown, ordered worst burden first, get a grant that fills savings to the
+// buffer within the cap, until the tranche is spent. Durable money is the head of
+// household's NetWorth on ctx.ledger (Phase 10 commits; HouseholdSavings derives
+// from member NetWorth every Cycle in updateHouseholdIncomes_), with a same-Cycle
+// HouseholdSavings write so THIS fire's stress read and dissolution roll see it.
+// The whole tranche leaves the fund (BudgetRemaining -= tranche, a Phase-10 cell
+// intent): tracked grants are the on-camera part, the rest is the director's
+// off-camera disbursement. Budget at zero → phase `complete`.
+//
+// Idempotency: a household granted this Cycle (LastGrantCycle == cycle) is never
+// paid again this Cycle; a program whose tracker LastDisburseCycle == cycle, or
+// whose pool already carries this Cycle's receipts, is not debited again.
+// Direct own-tab column-vector write, same class as updateHouseholdIncomes_
+// (SHEETS_MANIFEST §9). Fail loud, never fatal.
+// ============================================================================
+var HOUSING_GRANT_COLUMNS_ = ['LastGrantCycle', 'LastGrantInitiativeID', 'LastGrantAmount'];
+
+function ensureHousingGrantColumns_(sheet, header) {
+  var missing = [];
+  for (var i = 0; i < HOUSING_GRANT_COLUMNS_.length; i++) {
+    if (header.indexOf(HOUSING_GRANT_COLUMNS_[i]) === -1) missing.push(HOUSING_GRANT_COLUMNS_[i]);
+  }
+  if (!missing.length) return false;
+  var lastCol = sheet.getLastColumn();
+  var short = (lastCol + missing.length) - sheet.getMaxColumns();
+  if (short > 0) sheet.insertColumnsAfter(sheet.getMaxColumns(), short);
+  sheet.getRange(1, lastCol + 1, 1, missing.length).setValues([missing]);
+  Logger.log('householdFormationEngine: engine.255 appended grant receipt columns to Household_Ledger — ' + missing.join(', '));
+  return true;
+}
+
+// Pure planner. header/rows are the Household_Ledger grid (rows = body, index 0 =
+// sheet row 2); program is one S.initiativeDisbursement entry; hoodOf folds a raw
+// hood string. Returns the ordered grants and every exclusion counted.
+function planHousingDisbursement_(header, rows, program, cycle, hoodOf) {
+  var idx = function (n) { return header.indexOf(n); };
+  var iId = idx('HouseholdId'), iHead = idx('HeadOfHousehold'), iHood = idx('Neighborhood'), iType = idx('HousingType'),
+      iRent = idx('MonthlyRent'), iInc = idx('HouseholdIncome'), iStatus = idx('Status'), iSav = idx('HouseholdSavings'), iLG = idx('LastGrantCycle');
+  var out = { eligible: 0, grants: [], paid: 0, trancheLeft: Number(program.tranche) || 0,
+              skipped: { inactive: 0, owned: 0, offHood: 0, invalid: 0, unflagged: 0, cooldown: 0, alreadyThisCycle: 0 } };
+  if (iId < 0 || iHood < 0 || iType < 0 || iRent < 0 || iInc < 0 || iSav < 0) { out.reason = 'columns-missing'; return out; }
+  var hoods = program.hoods || [];
+  var cap = Number(program.grantCapMonths); if (!isFinite(cap) || cap < 0) cap = 0;
+  var cooldown = Number(program.cooldownCycles); if (!isFinite(cooldown) || cooldown < 0) cooldown = 0;
+  var cands = [];
+  for (var r = 0; r < rows.length; r++) {
+    var row = rows[r];
+    var status = iStatus >= 0 ? String(row[iStatus] == null ? '' : row[iStatus]).trim().toLowerCase() : 'active';
+    if (status !== 'active') { out.skipped.inactive++; continue; }
+    if (String(row[iType] == null ? '' : row[iType]).trim().toLowerCase() !== 'rented') { out.skipped.owned++; continue; }
+    var hood = hoodOf(String(row[iHood] == null ? '' : row[iHood]).trim());
+    if (!hood || hoods.indexOf(hood) < 0) { out.skipped.offHood++; continue; }
+    var rent = Number(row[iRent]), income = Number(row[iInc]);
+    if (!(rent > 0) || !(income > 0)) { out.skipped.invalid++; continue; }
+    var savings = Number(row[iSav]); if (!isFinite(savings) || savings < 0) savings = 0;
+    var burden = rent * 12 / income;
+    if (savings >= rent * SAVINGS_BUFFER_MONTHS || burden < RENT_BURDEN_WARNING) { out.skipped.unflagged++; continue; }
+    var last = iLG >= 0 ? Number(row[iLG]) : 0;
+    if (isFinite(last) && last > 0) {
+      if (last === Number(cycle)) { out.skipped.alreadyThisCycle++; continue; }
+      if (Number(cycle) - last < cooldown) { out.skipped.cooldown++; continue; }
+    }
+    cands.push({ bodyIndex: r, householdId: String(row[iId]), head: iHead >= 0 ? String(row[iHead] == null ? '' : row[iHead]).trim() : '', hood: hood, rent: rent, savings: savings, burden: burden });
+  }
+  cands.sort(function (a, b) { return b.burden - a.burden || (a.householdId < b.householdId ? -1 : a.householdId > b.householdId ? 1 : 0); });
+  out.eligible = cands.length;
+  for (var c = 0; c < cands.length && out.trancheLeft > 0; c++) {
+    var h = cands[c];
+    var need = Math.max(0, h.rent * SAVINGS_BUFFER_MONTHS - h.savings);
+    var grant = Math.min(need, cap * h.rent, out.trancheLeft);
+    grant = Math.round(grant * 100) / 100;
+    if (!(grant > 0)) continue;
+    out.grants.push({ bodyIndex: h.bodyIndex, householdId: h.householdId, head: h.head, hood: h.hood, rent: h.rent, burden: h.burden,
+                      savingsBefore: h.savings, amount: grant, savingsAfter: Math.round((h.savings + grant) * 100) / 100, clearsBuffer: h.savings + grant >= h.rent * SAVINGS_BUFFER_MONTHS });
+    out.trancheLeft = Math.round((out.trancheLeft - grant) * 100) / 100;
+    out.paid = Math.round((out.paid + grant) * 100) / 100;
+  }
+  return out;
+}
+
+function applyHousingDisbursement_(ctx, cycle) {
+  var out = { available: false, reason: null, programs: 0, grants: 0, paid: 0, debited: 0, armed: false, error: null, detail: [] };
+  try {
+    return applyHousingDisbursementBody_(ctx, cycle, out);
+  } catch (e) {
+    out.error = String(e && e.message ? e.message : e);
+    out.reason = 'error';
+    Logger.log('householdFormationEngine: engine.255 housing disbursement ERROR — ' + out.error);
+    if (typeof logEngineError_ === 'function') {
+      try { logEngineError_(ctx, 'Phase5-HousingDisbursement', e); } catch (e2) { /* the log itself must not throw */ }
+    }
+    return out;
+  }
+}
+
+function applyHousingDisbursementBody_(ctx, cycle, out) {
+  var S = ctx.summary || {};
+  var slice = S.initiativeDisbursement;
+  out.available = !!(slice && slice.available === true);
+  if (!out.available) { out.reason = slice ? (slice.reason || 'slice-unavailable') : 'slice-missing'; return out; }
+  var programs = (slice.programs || []).filter(function (p) { return p && p.domain === 'housing'; });
+  if (!programs.length) { out.reason = 'no-program'; return out; }
+  var ss = ctx.ss;
+  var sheet = ss.getSheetByName('Household_Ledger');
+  if (!sheet) { out.reason = 'no-sheet'; return out; }
+  var header = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+  var data = sheet.getDataRange().getValues();
+  if (data.length < 2) { out.reason = 'no-households'; return out; }
+  var body = data.slice(1);
+  var canFold = typeof resolveHoodOrChild_ === 'function' && S.canonHoods && S.canonHoods.set;
+  var hoodOf = function (raw) { if (!raw) return ''; if (!canFold) return raw; var f = resolveHoodOrChild_(ctx, raw); return f || ''; };
+  var tracker = ss.getSheetByName('Initiative_Tracker');
+  var tHeader = tracker ? tracker.getRange(1, 1, 1, tracker.getLastColumn()).getValues()[0] : [];
+  var tRemain = tHeader.indexOf('BudgetRemaining'), tLast = tHeader.indexOf('LastDisburseCycle'), tPhase = tHeader.indexOf('ImplementationPhase'), tNotes = tHeader.indexOf('MilestoneNotes');
+  var lHeaders = ctx.ledger && ctx.ledger.headers ? ctx.ledger.headers : [];
+  var lPop = lHeaders.indexOf('POPID'), lNW = lHeaders.indexOf('NetWorth'), lLastUpd = lHeaders.indexOf('LastUpdated');
+  var touched = false;
+  for (var pi = 0; pi < programs.length; pi++) {
+    var program = programs[pi];
+    out.programs++;
+    if (Number(program.lastDisburseCycle) === Number(cycle)) { program.status = 'already-disbursed'; out.detail.push(program.initiativeId + ': already disbursed C' + cycle); continue; }
+    if (!(program.tranche > 0)) { program.status = 'no-tranche'; continue; }
+    // arm the receipt columns only when a grant is about to be written
+    var plan = planHousingDisbursement_(header, body, program, cycle, hoodOf);
+    if (plan.skipped && plan.skipped.alreadyThisCycle > 0) { program.status = 'already-disbursed'; out.detail.push(program.initiativeId + ': receipts already stamped C' + cycle); continue; }
+    if (plan.grants.length && ensureHousingGrantColumns_(sheet, header)) {
+      out.armed = true;
+      header = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+      data = sheet.getDataRange().getValues(); body = data.slice(1);
+      plan = planHousingDisbursement_(header, body, program, cycle, hoodOf);
+    }
+    var iSav = header.indexOf('HouseholdSavings'), iLG = header.indexOf('LastGrantCycle'), iLI = header.indexOf('LastGrantInitiativeID'), iLA = header.indexOf('LastGrantAmount');
+    for (var g = 0; g < plan.grants.length; g++) {
+      var gr = plan.grants[g];
+      var brow = body[gr.bodyIndex];
+      brow[iSav] = gr.savingsAfter; brow[iLG] = Number(cycle); brow[iLI] = program.initiativeId; brow[iLA] = gr.amount;
+      touched = true;
+      // durable money: the head's NetWorth on ctx.ledger (HouseholdSavings re-derives from it next Cycle)
+      if (lPop >= 0 && lNW >= 0 && gr.head && ctx.ledger.rows) {
+        for (var lr = 0; lr < ctx.ledger.rows.length; lr++) {
+          if (String(ctx.ledger.rows[lr][lPop]).trim() === gr.head) {
+            var nw0 = Number(String(ctx.ledger.rows[lr][lNW]).replace(/[$,\s]/g, '')) || 0;
+            ctx.ledger.rows[lr][lNW] = Math.round((nw0 + gr.amount) * 100) / 100;
+            if (lLastUpd >= 0) ctx.ledger.rows[lr][lLastUpd] = ctx.now;
+            ctx.ledger.dirty = true;
+            break;
+          }
+        }
+      }
+      if (typeof queueAppendIntent_ === 'function' && gr.head) {
+        queueAppendIntent_(ctx, 'LifeHistory_Log', [ctx.now, gr.head, '', 'Relief',
+          'received a $' + Math.round(gr.amount) + ' stabilization grant from ' + program.name + ' (' + program.initiativeId + ')' + (gr.clearsBuffer ? ' — the rent is covered for the year' : ' — a partial, the rent is still heavy'), '', cycle],
+          'engine.255 housing grant', 'civic', 5);
+      }
+    }
+    program.paid = plan.paid; program.grants = plan.grants.length; program.eligible = plan.eligible; program.skipped = plan.skipped;
+    out.grants += plan.grants.length; out.paid = Math.round((out.paid + plan.paid) * 100) / 100;
+    // the whole tranche leaves the fund
+    var debit = Math.round(Number(program.tranche) * 100) / 100;
+    var newRemaining = Math.round((Number(program.remaining) - debit) * 100) / 100;
+    if (newRemaining < 0) newRemaining = 0;
+    program.debited = debit; program.newRemaining = newRemaining; program.status = newRemaining <= 0 ? 'exhausted' : 'disbursed';
+    out.debited = Math.round((out.debited + debit) * 100) / 100;
+    if (tracker && typeof queueCellIntent_ === 'function' && program.sheetRow > 1) {
+      if (tRemain >= 0) queueCellIntent_(ctx, 'Initiative_Tracker', program.sheetRow, tRemain + 1, newRemaining, 'engine.255 tranche C' + cycle + ' ' + program.initiativeId, 'civic', 5);
+      if (tLast >= 0) queueCellIntent_(ctx, 'Initiative_Tracker', program.sheetRow, tLast + 1, Number(cycle), 'engine.255 disburse receipt C' + cycle + ' ' + program.initiativeId, 'civic', 5);
+      if (newRemaining <= 0 && tPhase >= 0) {
+        queueCellIntent_(ctx, 'Initiative_Tracker', program.sheetRow, tPhase + 1, 'complete', 'engine.255 budget exhausted C' + cycle + ' ' + program.initiativeId, 'civic', 5);
+        if (tNotes >= 0) {
+          var prior = String(tracker.getRange(program.sheetRow, tNotes + 1).getValue() || '');
+          queueCellIntent_(ctx, 'Initiative_Tracker', program.sheetRow, tNotes + 1, (prior ? prior + '\n' : '') + 'C' + cycle + ': budget exhausted — $' + Math.round(Number(program.remaining)) + ' spent this Cycle closes the fund; service ends', 'engine.255 budget exhausted note', 'civic', 5);
+        }
+      }
+    }
+    out.detail.push(program.initiativeId + ': ' + plan.grants.length + ' grant(s) $' + plan.paid + ' of tranche $' + debit + ', remaining ' + newRemaining +
+      ' (eligible ' + plan.eligible + '; skipped unflagged ' + plan.skipped.unflagged + ', cooldown ' + plan.skipped.cooldown + ', off-hood ' + plan.skipped.offHood + ')');
+  }
+  if (touched) {
+    var n = body.length;
+    var iSav2 = header.indexOf('HouseholdSavings'), iLG2 = header.indexOf('LastGrantCycle'), iLI2 = header.indexOf('LastGrantInitiativeID'), iLA2 = header.indexOf('LastGrantAmount');
+    var col = function (i) { var v = []; for (var r = 0; r < n; r++) v.push([body[r][i] === undefined ? '' : body[r][i]]); return v; };
+    sheet.getRange(2, iSav2 + 1, n, 1).setValues(col(iSav2));
+    sheet.getRange(2, iLG2 + 1, n, 1).setValues(col(iLG2));
+    sheet.getRange(2, iLI2 + 1, n, 1).setValues(col(iLI2));
+    sheet.getRange(2, iLA2 + 1, n, 1).setValues(col(iLA2));
+  }
+  out.reason = touched ? 'written' : (out.programs ? 'nothing-to-write' : 'no-program');
+  Logger.log('householdFormationEngine: engine.255 housing disbursement — ' + out.programs + ' program(s), ' + out.grants + ' grant(s) $' + out.paid + ', debited $' + out.debited + (out.detail.length ? ' | ' + out.detail.join(' | ') : ''));
   return out;
 }
 

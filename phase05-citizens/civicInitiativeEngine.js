@@ -2393,7 +2393,9 @@ function checkMayoralVeto_(ctx, row, header, voteResult, rng) {
 
   var name = row[idx('Name')] || 'Unknown Initiative';
   var leadFaction = (row[idx('LeadFaction')] || '').toString().trim().toUpperCase();
-  var budget = Number(row[idx('Budget')]) || 0;
+  // engine.255 (builder call 9): the scrutiny term reads the parsed BudgetTotal.
+  // Number('$28M') was 0, so `budget > 50000000` had never fired since it was written.
+  var budget = idx('BudgetTotal') >= 0 ? (Number(row[idx('BudgetTotal')]) || 0) : 0;
   var projection = (row[idx('Projection')] || '').toLowerCase();
 
   // Get mayor from council state
@@ -3020,14 +3022,14 @@ function engineClockHold_(notes, nextActionCycle, cycle, engineWillAct) {
 var INITIATIVE_STAGE_COLUMNS_ = ['Stage', 'StageBaseline', 'LastStageChangeCycle', 'LastWorkCycle', 'LastWorkSeat', 'PriorPhase', 'StageHold'];
 
 var CIVIC_STAGE_CATALOG_ = {
-  health:    { playable: true,  stage3Metric: { tab: 'Neighborhood_Demographics', column: ['Sick'], direction: 'down', scope: 'hood' } },
-  transit:   { playable: true,  stage3Metric: { tab: 'Transit_Metrics', column: ['RidershipVolume'], direction: 'up', scope: 'station-serving-hood' } },
-  education: { playable: true,  stage3Metric: { tab: 'Neighborhood_Demographics', column: ['SchoolQualityIndex'], direction: 'up', scope: 'hood' } },
-  economic:  { playable: false, stage3Metric: { tab: 'Neighborhood_Map', column: ['RetailVitality'], direction: 'up', scope: 'hood' } },
-  workforce: { playable: false, stage3Metric: { tab: 'Neighborhood_Map', column: ['RetailVitality'], direction: 'up', scope: 'hood' } },
-  sports:    { playable: false, stage3Metric: { tab: 'Neighborhood_Map', column: ['RetailVitality', 'NightlifeProfile'], direction: 'up', scope: 'hood' } },
-  safety:    { playable: false, stage3Metric: { tab: 'Crime_Metrics', column: ['ViolentLevel'], direction: 'down', scope: 'hood' } },
-  housing:   { playable: false, stage3Metric: { tab: 'Household_Ledger', column: ['MonthlyRent*12/HouseholdIncome'], direction: 'down', scope: 'hood' } }  // engine.255: off until the budgeted-disbursement lever lands
+  health:    { playable: true,  stage3Metric: { tab: 'Neighborhood_Demographics', column: ['Sick'], direction: 'down', scope: 'hood' }, disburses: false },
+  transit:   { playable: true,  stage3Metric: { tab: 'Transit_Metrics', column: ['RidershipVolume'], direction: 'up', scope: 'station-serving-hood' }, disburses: false },
+  education: { playable: true,  stage3Metric: { tab: 'Neighborhood_Demographics', column: ['SchoolQualityIndex'], direction: 'up', scope: 'hood' }, disburses: false },
+  economic:  { playable: false, stage3Metric: { tab: 'Neighborhood_Map', column: ['RetailVitality'], direction: 'up', scope: 'hood' }, disburses: false },
+  workforce: { playable: false, stage3Metric: { tab: 'Neighborhood_Map', column: ['RetailVitality'], direction: 'up', scope: 'hood' }, disburses: false },
+  sports:    { playable: false, stage3Metric: { tab: 'Neighborhood_Map', column: ['RetailVitality', 'NightlifeProfile'], direction: 'up', scope: 'hood' }, disburses: false },
+  safety:    { playable: false, stage3Metric: { tab: 'Crime_Metrics', column: ['ViolentLevel'], direction: 'down', scope: 'hood' }, disburses: false },
+  housing:   { playable: false, stage3Metric: { tab: 'Household_Ledger', column: ['MonthlyRent*12/HouseholdIncome'], direction: 'down', scope: 'hood' }, disburses: true }  // engine.255: spends its budget (Task 4); Delivering gate off until Task 6/7
 };
 
 /** Which stage columns a header row lacks, in declared order. Pure. */

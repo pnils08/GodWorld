@@ -309,12 +309,19 @@
 - **getCivicTendDials_(ctx)**
 
 - **applyInitiativeImplementationEffects_(ctx)**
-  Reads: S.absoluteCycle, S.cycleId, S.initiativeHousingRelief, S.initiativeImplementationTriggers, S.initiativeNeighborhoodEffects, S.previousCycleState, S.sentiment, S.sportsZones
-  Writes: S.initiativeHealthRelief, S.initiativeHousingRelief, S.initiativeImplementationEffects, S.initiativeNeighborhoodEffects, S.sentiment
+  Reads: S.absoluteCycle, S.cycleId, S.initiativeDisbursement, S.initiativeHousingRelief, S.initiativeImplementationTriggers, S.initiativeNeighborhoodEffects, S.previousCycleState, S.sentiment, S.sportsZones
+  Writes: S.initiativeDisbursement, S.initiativeHealthRelief, S.initiativeHousingRelief, S.initiativeImplementationEffects, S.initiativeNeighborhoodEffects, S.sentiment
   Config: ctx.config.cycleCount
   Sheets: Initiative_Tracker
 
 - **getCivicHousingDials_(ctx)**
+
+- **civicDomainDisburses_(domain)**
+
+- **getCivicDisburseDials_(ctx, domain)**
+
+- **buildDisbursementSlice_(ctx, pending)**
+  Reads: S.canonHoods
 
 - **buildHousingReliefSlice_(ctx, pending)**
   Reads: S.canonHoods
@@ -1900,8 +1907,19 @@
 - **applyHousingRelief_(ctx, cycle)**
 
 - **applyHousingReliefBody_(ctx, cycle, out)**
-  Reads: S.initiativeHousingRelief
+  Reads: S.initiativeDisbursement, S.initiativeHousingRelief
   Sheets: Household_Ledger
+
+- **ensureHousingGrantColumns_(sheet, header)**
+  Reads: S.initiativeDisbursement
+
+- **planHousingDisbursement_(header, rows, program, cycle, hoodOf)**
+
+- **applyHousingDisbursement_(ctx, cycle)**
+
+- **applyHousingDisbursementBody_(ctx, cycle, out)**
+  Reads: S.canonHoods, S.initiativeDisbursement
+  Sheets: Household_Ledger, Initiative_Tracker, LifeHistory_Log
 
 - **detectHouseholdStress_(ss, households)**
 
@@ -4251,4 +4269,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 184
-**Functions mapped:** 1483
+**Functions mapped:** 1490

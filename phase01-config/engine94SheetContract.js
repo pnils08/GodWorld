@@ -164,7 +164,16 @@ var ENGINE213_CONFIG_SEEDS = [
   ['civicHousingReliefRate', 0.20, 'engine.251: share of GrossMonthlyRent a standing housing program takes off an active rented household in its folded target hoods (builder-ruled 0.20, 2026-09-22 — 0.10 measured unjudgeable against the city reference wobble); scaled by the upkeep tend factor like every Standing service (ruling c)', 0, 1, false],
   ['civicHousingCohortMinRenters', 10, 'engine.251: least active rented households a hood needs to join the housing stage-3 cohort (median rent burden vs the city middle). Live C108: 11 hoods clear 10, four have none — a median over one tracked household is a trick (SIM_DOCTRINE §15)', 1, 500, true],
   ['civicDeliverMargin_housing', 0.15, 'engine.251: Delivering margin for housing rows (hood median MonthlyRent*12/HouseholdIncome vs city median, direction down). MEASURED 2026-09-22 on bench 0908 at the builder-ruled 0.20 rate: a 20% tenant discount moves the treated hood ratio 0.24-0.25 (vote baseline 1.253 -> 1.010/1.004) against untreated per-step wobble 0.04-0.06 and a five-Cycle luck maximum of 0.126 (composition); 0.15 sits at ~60% of the effect and above the worst luck, as health\'s 0.10 sits under the clinic\'s 0.18. A live sheet armed earlier at 0.20 keeps that value (the seed only adds missing keys) — hand-set 0.15 when the rate goes live', 0, 2, false],
-];
+
+  // engine.255 (builder-ruled 2026-09-22, all ten calls as recommended): the budget
+  // disbursement lever. Tranche = the money that leaves a fund per tended Cycle, on
+  // and off camera; grants fill a flagged household's savings to the engine's own
+  // 12-month buffer within the cap; cooldown is per household; the cohort floor
+  // gates the Delivering judge (a two-row cohort moves 50% per event).
+  ['civicDisburseTranche_housing', 400000, 'engine.255: dollars a Standing/Delivering housing initiative spends per Cycle at full tend (× the upkeep tend factor); BudgetRemaining falls by this whether or not tracked rows qualify — $28M lasts ~70 tended Cycles, ~230 at the tend floor', 0, 1000000000, false],
+  ['civicHousingGrantCapMonths', 12, 'engine.255: most months of a household\'s own rent one grant may pay; the grant fills savings to the engine\'s 12-month buffer within this cap (live C108: the two flagged West Oakland rows need $30.7k and $43.5k)', 0, 60, false],
+  ['civicGrantCooldownCycles', 26, 'engine.255: Cycles before ANY initiative may grant the same household again (per household, not per initiative — two funds over one hood would otherwise both pay the same worst-off row)', 0, 520, true],
+  ['civicHousingCohortMinFlagged', 5, 'engine.255: least flagged (warning/crisis) active rented households a target hood needs at the vote for its housing Delivering gate to run; below it the row is blocked: thin-cohort, the fund still pays. Live C108: West Oakland 2, city 7 — no hood clears it until the buffer question (builder call 8) is ruled', 1, 500, true],];
 
 function ensureEngine213Config_(ss) {
   if (!ss) throw new Error('engine.213 config: spreadsheet required');

@@ -180,37 +180,37 @@ Each edit below is a bounded function/contract change; engine-sheet sequences th
 - **Files:** `phase01-config/engine94SheetContract.js`, `phase01-config/godWorldEngine2.js`, `phase05-citizens/householdFormationEngine.js`, `scripts/migrations/civic38_housing_relief.js` (new, proposed), `docs/SPREADSHEET.md`, `schemas/SCHEMA_HEADERS.md`.
 - **Steps:** Add reviewed enable/rate keys using the config seed pattern (`engine94SheetContract.js:95-109`) and loadConfig_ (`godWorldEngine2.js:661-677`); parse the enable flag explicitly, never rely on truthiness of the string false. Implement explicit dry-run-first migration of the four proposed columns with gross copied only from valid rental amounts. No automatic live backfill.
 - **Verify:** isolated migration fixture twice → identical columns/values, MonthlyRent unchanged; owned/invalid rows printed and preserved.
-- **Status:** Not started — design only.
+- **Status:** Cut 2026-09-22 (engine-sheet), off by default; bench proof pending.
 
 ### Task 2: Implement the net-rent calculation and lease invariant
 - **Files:** `phase05-citizens/householdFormationEngine.js`; `scripts/civicHousingRelief.test.js` (new, proposed).
 - **Steps:** Add pure gross/rate→net helper and header-resolved lease initialization/update helper; reject invalid money, preserve owned mortgage, carry relief source/Cycle. Use deterministic cent rounding.
 - **Verify:** rates 0/0.10/1; duplicate application; missing/negative gross; missing income; owner exclusion; no caller-input mutation.
-- **Status:** Not started — design only.
+- **Status:** Cut 2026-09-22 (engine-sheet), off by default; bench proof pending.
 
 ### Task 3: Publish qualified housing programs on the initiative bus
 - **Files:** `phase02-world-state/applyInitiativeImplementationEffects.js`; proposed test above.
 - **Steps:** Read Task-4 passage/Stage fields; canonicalize both sides; populate housing source slice and max rentReliefRate with stable winner. Keep generic sentiment and other fields intact. Missing source is distinct from a valid empty list.
 - **Verify:** all pre-deployment/failing phases pay zero; Standing/Delivering pay constant configured rate; duplicate child/parent and overlapping initiatives never double it; Phase-2 city fold preserves the field.
-- **Status:** Not started — depends on parent Task 4 schema.
+- **Status:** Cut 2026-09-22 (engine-sheet), off by default; bench proof pending.
 
 ### Task 4: Apply rent relief before household stress
 - **Files:** `phase05-citizens/householdFormationEngine.js`.
 - **Steps:** Refresh households after criteria formation and income update; apply qualified relief in one owned-column write; refresh objects for detectHouseholdStress_; publish refresh result. Do not queue a late stale rent write.
 - **Verify:** same synthetic household has reduced Sheet and in-memory obligation before stress; off-hood household unchanged; no sources restores gross; unavailable source preserves state and reports unavailable.
-- **Status:** Not started.
+- **Status:** Cut 2026-09-22 (engine-sheet), off by default; bench proof pending.
 
 ### Task 5: Preserve the lease invariant at all formation writers
 - **Files:** `phase05-citizens/householdFormationEngine.js`, `phase05-citizens/bondEngine.js`, `phase05-citizens/processAdvancementIntake.js`.
 - **Steps:** Route the identified rented-household initializations through the shared helper; estimated rent is gross, service uses destination hood. Do not change family formation rules.
 - **Verify:** existing formation tests plus new synthetic rows enter with consistent gross/net/relief fields; subsequent income/stress pass sees the new household.
-- **Status:** Not started.
+- **Status:** Cut 2026-09-22 (engine-sheet), off by default; bench proof pending.
 
 ### Task 6: Handle relocation and purchase
 - **Files:** `phase05-citizens/migrationTrackingEngine.js`, `phase05-citizens/generationalWealthEngine.js`.
 - **Steps:** In updateHouseholdLedgerMove_, replace gross lease with destRent and compute destination discount in the same write. In trackHomeOwnership_, use gross lease for the positive-rent eligibility check as well as market pricing (100% relief must not disable purchasing), then clear rental relief fields when mortgage replaces rent. Preserve any added columns through the conditional full-row wealth write.
 - **Verify:** moves into/out of relief hoods, same-Cycle move after discount, purchase after discount, and two-Cycle rerun; mortgage and inferred market price match no-discount controls where gross/market values are identical.
-- **Status:** Not started.
+- **Status:** Cut 2026-09-22 (engine-sheet), off by default; bench proof pending.
 
 ### Task 7: Add the derived metric and immutable baseline
 - **Files:** `phase05-citizens/civicInitiativeEngine.js`, `lib/initiativePhaseContract.js`, `lib/initiativePhaseContract.test.js`, proposed housing test.
@@ -230,11 +230,23 @@ Each edit below is a bounded function/contract change; engine-sheet sequences th
 - **Verify:** catalog mirror parity, targeted suites, syntax checks, doc-loop lint, and exact proposed deployment diff; activation recorded separately from installed code and bench evidence.
 - **Status:** Not started — final implementation gate.
 
+## Engine-sheet rulings before the first cut (2026-09-22)
+
+Measured on live C108, active rented households per canon hood: 11 hoods carry 26–47 (Lake Merritt 47, Uptown 45, Fruitvale 41, Chinatown 39, Downtown 34, Rockridge 33, West Oakland 31, Temescal 29, Laurel 27, Jack London 27, Piedmont Ave 26); KONO 5; Adams Point, Brooklyn, Baylight District and East Oakland 1 each; Grand Lake and San Antonio 2; Eastlake, Glenview, Dimond and Ivy Hill 0. Every renter carries a positive rent and a positive income (0 invalid, 0 missing). City median of hood medians 0.215; West Oakland 0.311, Lake Merritt 0.342 sit highest. The tracked ledger is the sample, never the denominator (SIM_DOCTRINE, ~0.25% tracked).
+
+1. **Stage-3 reader = the built hood comparator, aggregated at read time, nothing stored.** `stageBaselineFrom` / `deliveryEdge` consume only `{available, tab, cycle, rows}`; a branch in `freezeCivicStageCohort_` for `tab: Household_Ledger` reads the household rows at Phase 2 (fire N sees Phase-5-of-N−1 rents, so the observation is N−1 by phase order — no stamp column), computes per-hood **median of MonthlyRent×12/HouseholdIncome over active rented households**, and returns the same cohort shape. No second comparator, no mutable RentBurden cell (codex's objection honoured), baseline/hold/regress/margin/`StageHold` retry-safety all reused. The lib mirrors the aggregation for the pack's display evidence, parity-tested like `tendFactor`. This supersedes Task 7's frozen-HouseholdId cohort. **Carried confound, recorded:** `dissolveStressedHouseholds_` removes the highest-burden renters each Cycle, lowering a hood median by itself; relief keeps them, so the bias runs against treatment (can hide delivery, cannot manufacture it). The bench control pair sizes it.
+2. **City membership by minimum tracked renters.** A hood joins the housing cohort only with ≥ `civicHousingCohortMinRenters` (seed 10) active rented households; the freezer emits rows for members only, so the baseline's `city` list freezes at 11 hoods today and `deliveryEdge` reports `city-membership-changed` (hold restarts, per ruling 11) if a member thins out. A housing initiative whose target hood is not a member is `blocked: thin-cohort` — reported, no clock, like an unplayable domain. Thin hoods are a sample-size fact, not a world fact.
+3. **Margin:** seed `civicDeliverMargin_housing` 0.20 (the unmeasured default, ruling (a)) until the bench control pair measures the noise floor of hood-median burden ÷ city median; re-rule after, as health was.
+4. **Upkeep applies.** Ruling (c) landed after this plan: `rentReliefRate` scales by the tend factor like every Standing service (an untended program's discount fades to the floor, tending restores it). The plan's "do not scale by PHASE_INTENSITY" stands — that is a different multiplier.
+5. **Columns self-arm, no migration script.** The house pattern for the stage columns: the household engine arms `GrossMonthlyRent`, `HousingReliefMonthly`, `HousingReliefCycle`, `HousingReliefInitiativeID` on the cycle path and, on first sight of a rented row with a blank gross, copies its current `MonthlyRent` (a valid positive amount only; owned rows stay blank). Idempotent, one fewer artifact to keep true. The builder approved a script; this keeps the approval's intent with the smaller footprint.
+6. **Order:** Tasks 1–6 first, off by default (`civicHousingReliefEnabled` false), benched; the reader (ruling 1) after the control pair; catalog flips playable only on a bench pair (Task 9).
+
 ## Open questions
 
 **RULED 2026-09-22 (builder):** tenant rent discount (not income), flat 10% (`civicHousingReliefRate` 0.10, `civicHousingReliefEnabled` false until bench acceptance), the four Household_Ledger columns and the migration script — build as designed; engine-sheet executes. The design offers concrete recommendations above. ~~Builder/engine-sheet acceptance of the tenant-discount semantics and proposed 10% rate is required before changing simulation behavior; the current request authorizes this design only.~~ The existing parent question about a housing **support** band and signature units remains open and does not block deterministic relief or causal bench development. No numeric support threshold is proposed by this document.
 
 ## Changelog
 
+- 2026-09-22 (engine-sheet) — **Tasks 1–6 cut, off by default, bench next.** Four dials seeded in `engine94SheetContract.js` (`civicHousingReliefEnabled` 0, `civicHousingReliefRate` 0.10, `civicHousingCohortMinRenters` 10, `civicDeliverMargin_housing` 0.20). Producer (`applyInitiativeImplementationEffects.js`): `S.initiativeHousingRelief` published every fire — `available:false` on an unreadable tracker, a valid empty slice when no program stands; a housing row qualifies only voted (passed+signed / override-passed), Stage Standing or Delivering, phase `operational` / `disbursement-active` / `implementation-active`; rate × upkeep tend factor; max per folded hood, tie-break by InitiativeID; all programs kept in `sources`. Household engine: `HOUSING_RELIEF_COLUMNS_` self-arm (ruling 5), `netRentFromGross_` (cents, clamped rate, null on invalid money), `housingReliefForHood_` (folds the household hood), `applyHousingRelief_` after the income pass and before stress with a reload so stress reads net rents and this Cycle's formed rows — loud-not-fatal (a bad dial reaches `Engine_Errors` as `Phase5-HousingRelief`, households still live). Move writer: destination lease is the new gross, destination discount in the same write. Purchase: gross prices and gates, relief cleared under the mortgage. Test `scripts/civicHousingRelief.test.js` 31/31 (producer qualification matrix, tie-break, upkeep, unavailable-vs-empty, helper boundaries, arm+copy idempotent, disabled/enabled/restore/unavailable paths, move in/out, purchase pins, seeds). Existing suites green (reconcile 105, maneuver 47, illness, transit, business, contract 247, game 54). Tasks 1–6 done; Task 7 = the freezer branch (ruling 1) after the control pair; Task 8 bench; Task 9 flip.
 - 2026-09-22 (engine-sheet) — Builder accepted the design's sim calls as recommended; engine.251 moves blocked → in-progress. Wiring card + pre-mortem before the first cut.
 - 2026-09-20 (codex) — Authored design only: preserved gross lease plus net rent relief, verified engine.250 bus/order card, C108 baseline and static sensitivity, stage metric, failure inventory and engine-sheet acceptance tasks.

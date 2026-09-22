@@ -213,6 +213,12 @@ function processHouseholdFormation_(ctx) {
     // Update household incomes
     updateHouseholdIncomes_(ctx, households, citizens);
 
+    // engine.251: a standing housing program discounts gross rent BEFORE stress
+    // reads the obligation. Then reload: relief-adjusted rents, this Cycle's
+    // formed rows and the income pass all land in the objects stress consumes.
+    results.housingRelief = applyHousingRelief_(ctx, cycle);
+    households = loadHouseholds_(ss);
+
     // Detect household stress
     var stressedHouseholds = detectHouseholdStress_(ss, households);
     results.rentBurdenCrisis = stressedHouseholds.filter(h => h.rentBurden >= RENT_BURDEN_CRISIS).length;
@@ -547,7 +553,12 @@ function loadHouseholds_(ss) {
       householdIncome: parseFloat(row[headers.indexOf('HouseholdIncome')] || 0),
       householdSavings: headers.indexOf('HouseholdSavings') >= 0 ? parseFloat(row[headers.indexOf('HouseholdSavings')] || 0) : 0,
       formedCycle: row[headers.indexOf('FormedCycle')] || '',
-      status: row[headers.indexOf('Status')] || 'active'
+      status: row[headers.indexOf('Status')] || 'active',
+      // engine.251 housing relief columns (blank until the engine arms them)
+      grossMonthlyRent: headers.indexOf('GrossMonthlyRent') >= 0 ? parseFloat(row[headers.indexOf('GrossMonthlyRent')] || 0) : 0,
+      housingReliefMonthly: headers.indexOf('HousingReliefMonthly') >= 0 ? parseFloat(row[headers.indexOf('HousingReliefMonthly')] || 0) : 0,
+      housingReliefCycle: headers.indexOf('HousingReliefCycle') >= 0 ? (row[headers.indexOf('HousingReliefCycle')] || '') : '',
+      housingReliefInitiativeId: headers.indexOf('HousingReliefInitiativeID') >= 0 ? (row[headers.indexOf('HousingReliefInitiativeID')] || '') : ''
     };
 
     // Only process active households
@@ -1078,6 +1089,154 @@ function buildCitizenMoneyLookup_(ctx) {
   }
 
   return lookup;
+}
+
+// ============================================================================
+// engine.251 — housing relief (plan docs/plans/2026-09-20-housing-lever.md,
+// builder ruled 2026-09-22: tenant rent discount, flat rate, off by default).
+//
+// Contract: MonthlyRent stays the tenant's EFFECTIVE monthly obligation (the
+// mortgage on an owned row). GrossMonthlyRent is the undiscounted lease, armed
+// by this engine and copied from MonthlyRent the first time a rented row is
+// seen with a blank gross — so the gross is in place before activation and the
+// copy is idempotent. Relief is always recomputed from gross, never from last
+// Cycle's discounted net. Owned and dissolved rows are never touched. An
+// unavailable relief slice keeps the persisted rents (a failed read is not a
+// policy change); a valid empty slice restores gross and clears the discount.
+// Direct own-tab write, same class as updateHouseholdIncomes_ (SHEETS_MANIFEST §9).
+// ============================================================================
+var HOUSING_RELIEF_COLUMNS_ = ['GrossMonthlyRent', 'HousingReliefMonthly', 'HousingReliefCycle', 'HousingReliefInitiativeID'];
+
+function ensureHousingReliefColumns_(sheet, header) {
+  var missing = [];
+  for (var i = 0; i < HOUSING_RELIEF_COLUMNS_.length; i++) {
+    if (header.indexOf(HOUSING_RELIEF_COLUMNS_[i]) === -1) missing.push(HOUSING_RELIEF_COLUMNS_[i]);
+  }
+  if (!missing.length) return false;
+  var lastCol = sheet.getLastColumn();
+  var short = (lastCol + missing.length) - sheet.getMaxColumns();
+  if (short > 0) sheet.insertColumnsAfter(sheet.getMaxColumns(), short);
+  sheet.getRange(1, lastCol + 1, 1, missing.length).setValues([missing]);
+  Logger.log('householdFormationEngine: engine.251 appended relief columns to Household_Ledger — ' + missing.join(', '));
+  return true;
+}
+
+// Pure. gross → { gross, relief, net } at cent precision, or null on invalid money.
+// rate outside [0,1] is clamped; 0 and 1 are valid boundaries (net 0 is a real obligation of zero).
+function netRentFromGross_(gross, rate) {
+  var g = Number(gross);
+  if (!isFinite(g) || g <= 0) return null;
+  var r = Number(rate);
+  if (!isFinite(r) || r < 0) r = 0;
+  if (r > 1) r = 1;
+  g = Math.round(g * 100) / 100;
+  var relief = Math.round(g * r * 100) / 100;
+  var net = Math.round((g - relief) * 100) / 100;
+  if (net < 0) net = 0;
+  return { gross: g, relief: relief, net: net };
+}
+
+// The winning program for one household's hood off the Phase-2 slice, or null.
+// The household hood folds to its canon parent when the canon set is seeded.
+function housingReliefForHood_(ctx, hood, slice) {
+  var sl = slice || (ctx && ctx.summary ? ctx.summary.initiativeHousingRelief : null);
+  if (!sl || sl.available !== true || !sl.hoods) return null;
+  var raw = String(hood == null ? '' : hood).trim();
+  if (!raw) return null;
+  var key = raw;
+  if (typeof resolveHoodOrChild_ === 'function' && ctx && ctx.summary && ctx.summary.canonHoods && ctx.summary.canonHoods.set) {
+    var folded = resolveHoodOrChild_(ctx, raw);
+    if (folded) key = folded;
+  }
+  var hit = sl.hoods[key];
+  if (!hit || !(Number(hit.rate) > 0)) return null;
+  return { rate: Number(hit.rate), initiativeId: String(hit.initiativeId || ''), name: hit.name || '' };
+}
+
+function applyHousingRelief_(ctx, cycle) {
+  var out = { armed: false, enabled: false, available: false, reason: null, rows: 0, renters: 0,
+              grossCopied: 0, relieved: 0, restored: 0, unchanged: 0, invalid: 0, error: null };
+  // Fail loud, never fatal: a broken relief pass reaches Engine_Errors and the
+  // persisted rents stand, but households still form, stress and dissolve this
+  // Cycle. Relief is a service on top of their lives, not a gate in front of them.
+  try {
+    return applyHousingReliefBody_(ctx, cycle, out);
+  } catch (e) {
+    out.error = String(e && e.message ? e.message : e);
+    out.reason = 'error';
+    Logger.log('householdFormationEngine: engine.251 housing relief ERROR — ' + out.error);
+    if (typeof logEngineError_ === 'function') {
+      try { logEngineError_(ctx, 'Phase5-HousingRelief', e); } catch (e2) { /* the log itself must not throw */ }
+    }
+    return out;
+  }
+}
+
+function applyHousingReliefBody_(ctx, cycle, out) {
+  if (typeof getCivicHousingDials_ !== 'function') throw new Error('getCivicHousingDials_ unavailable (applyInitiativeImplementationEffects.js not loaded)');
+  var ss = ctx.ss;
+  var sheet = ss.getSheetByName('Household_Ledger');
+  if (!sheet) { out.reason = 'no-sheet'; return out; }
+  var header = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+  if (ensureHousingReliefColumns_(sheet, header)) {
+    out.armed = true;
+    header = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+  }
+  var data = sheet.getDataRange().getValues();
+  if (data.length < 2) return out;
+  var idx = function (n) { return header.indexOf(n); };
+  var iType = idx('HousingType'), iRent = idx('MonthlyRent'), iStatus = idx('Status'), iHood = idx('Neighborhood'),
+      iGross = idx('GrossMonthlyRent'), iRelief = idx('HousingReliefMonthly'), iRCycle = idx('HousingReliefCycle'), iRInit = idx('HousingReliefInitiativeID');
+  if (iType < 0 || iRent < 0 || iGross < 0 || iRelief < 0 || iRCycle < 0 || iRInit < 0) { out.reason = 'columns-missing'; return out; }
+  var dials = getCivicHousingDials_(ctx);
+  out.enabled = dials.enabled;
+  var slice = ctx.summary ? ctx.summary.initiativeHousingRelief : null;
+  out.available = !!(slice && slice.available === true);
+  out.reason = slice ? (slice.reason || null) : 'slice-missing';
+  var n = data.length - 1;
+  var rentVec = [], grossVec = [], reliefVec = [], cycVec = [], initVec = [];
+  var touched = false;
+  for (var r = 1; r < data.length; r++) {
+    var row = data[r];
+    var curRent = row[iRent], curGross = row[iGross], curRelief = row[iRelief], curCyc = row[iRCycle], curInit = row[iRInit];
+    var type = String(row[iType] == null ? '' : row[iType]).trim().toLowerCase();
+    var status = iStatus >= 0 ? String(row[iStatus] == null ? '' : row[iStatus]).trim().toLowerCase() : 'active';
+    out.rows++;
+    var keep = function () { rentVec.push([curRent]); grossVec.push([curGross]); reliefVec.push([curRelief]); cycVec.push([curCyc]); initVec.push([curInit]); };
+    if (type !== 'rented' || status !== 'active') { keep(); continue; }
+    out.renters++;
+    var gross = Number(curGross);
+    if (!(gross > 0)) {
+      var seed = Number(curRent);
+      if (!(seed > 0)) { out.invalid++; keep(); continue; }
+      gross = Math.round(seed * 100) / 100;
+      curGross = gross;
+      out.grossCopied++;
+      touched = true;
+    }
+    if (!dials.enabled || !out.available) { out.unchanged++; keep(); continue; }
+    var src = housingReliefForHood_(ctx, iHood >= 0 ? row[iHood] : '', slice);
+    var calc = netRentFromGross_(gross, src ? src.rate : 0);
+    if (!calc) { out.invalid++; keep(); continue; }
+    var hadRelief = Number(curRelief) > 0;
+    if (src && calc.relief > 0) out.relieved++;
+    else if (hadRelief) out.restored++;
+    else out.unchanged++;
+    if (Number(curRent) !== calc.net || Number(curRelief) !== calc.relief || String(curInit || '') !== (src ? src.initiativeId : '') || Number(curCyc) !== Number(cycle)) touched = true;
+    rentVec.push([calc.net]); grossVec.push([gross]); reliefVec.push([calc.relief]); cycVec.push([Number(cycle)]); initVec.push([src ? src.initiativeId : '']);
+  }
+  if (touched) {
+    sheet.getRange(2, iRent + 1, n, 1).setValues(rentVec);
+    sheet.getRange(2, iGross + 1, n, 1).setValues(grossVec);
+    sheet.getRange(2, iRelief + 1, n, 1).setValues(reliefVec);
+    sheet.getRange(2, iRCycle + 1, n, 1).setValues(cycVec);
+    sheet.getRange(2, iRInit + 1, n, 1).setValues(initVec);
+  }
+  Logger.log('householdFormationEngine: engine.251 housing relief — enabled ' + out.enabled + ', slice ' +
+    (out.available ? 'available' : 'UNAVAILABLE (' + out.reason + ')') + ', renters ' + out.renters +
+    ', gross copied ' + out.grossCopied + ', relieved ' + out.relieved + ', restored ' + out.restored +
+    ', invalid ' + out.invalid + (touched ? ' — written' : ' — nothing to write'));
+  return out;
 }
 
 function detectHouseholdStress_(ss, households) {

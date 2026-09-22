@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-09-21 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-09-22 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -309,10 +309,15 @@
 - **getCivicTendDials_(ctx)**
 
 - **applyInitiativeImplementationEffects_(ctx)**
-  Reads: S.absoluteCycle, S.cycleId, S.initiativeImplementationTriggers, S.initiativeNeighborhoodEffects, S.previousCycleState, S.sentiment, S.sportsZones
-  Writes: S.initiativeHealthRelief, S.initiativeImplementationEffects, S.initiativeNeighborhoodEffects, S.sentiment
+  Reads: S.absoluteCycle, S.cycleId, S.initiativeHousingRelief, S.initiativeImplementationTriggers, S.initiativeNeighborhoodEffects, S.previousCycleState, S.sentiment, S.sportsZones
+  Writes: S.initiativeHealthRelief, S.initiativeHousingRelief, S.initiativeImplementationEffects, S.initiativeNeighborhoodEffects, S.sentiment
   Config: ctx.config.cycleCount
   Sheets: Initiative_Tracker
+
+- **getCivicHousingDials_(ctx)**
+
+- **buildHousingReliefSlice_(ctx, pending)**
+  Reads: S.canonHoods
 
 - **findImplCol_(headers, possibleNames)**
 
@@ -1868,6 +1873,19 @@
 - **buildCitizenMoneyLookup_(ctx)**
   Reads: S.cycleId
   Config: ctx.config.cycleCount
+
+- **ensureHousingReliefColumns_(sheet, header)**
+
+- **netRentFromGross_(gross, rate)**
+
+- **housingReliefForHood_(ctx, hood, slice)**
+  Reads: S.canonHoods, S.initiativeHousingRelief
+
+- **applyHousingRelief_(ctx, cycle)**
+
+- **applyHousingReliefBody_(ctx, cycle, out)**
+  Reads: S.initiativeHousingRelief
+  Sheets: Household_Ledger
 
 - **detectHouseholdStress_(ss, households)**
 
@@ -4217,4 +4235,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 184
-**Functions mapped:** 1469
+**Functions mapped:** 1476

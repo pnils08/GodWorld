@@ -200,14 +200,20 @@ function applyInitiativeImplementationEffects_(ctx) {
   var ss = ctx.ss;
   if (!ss) return;
 
+  // engine.251: the housing relief slice is published every fire. Unavailable
+  // (tracker unreadable) is not the same as empty (no standing program): the
+  // household engine keeps last Cycle's persisted rents on unavailable and
+  // restores gross on empty.
+  S.initiativeHousingRelief = { available: false, reason: 'tracker-unread', rate: null, hoods: {}, sources: [], unknownHoods: [] };
   var sheet = ss.getSheetByName('Initiative_Tracker');
   if (!sheet) {
     Logger.log('applyInitiativeImplementationEffects_ v1.0: Initiative_Tracker not found (skipping)');
+    S.initiativeHousingRelief.reason = 'tracker-missing';
     return;
   }
 
   var data = sheet.getDataRange().getValues();
-  if (data.length < 2) return;
+  if (data.length < 2) { S.initiativeHousingRelief = { available: true, reason: null, rate: null, hoods: {}, sources: [], unknownHoods: [] }; return; }
 
   var headers = data[0];
 
@@ -224,6 +230,13 @@ function applyInitiativeImplementationEffects_(ctx) {
   var iStage = findImplCol_(headers, ['Stage']);
   var iLastWork = findImplCol_(headers, ['LastWorkCycle']);
   var iLastStageChange = findImplCol_(headers, ['LastStageChangeCycle']);
+  var iMayoral = findImplCol_(headers, ['MayoralAction', 'mayoralaction']);
+  // engine.251: phases in which a standing housing program is serving tenants.
+  // A row stands up as `operational` (ruling 8); a legacy row keeps its live
+  // service phase. Construction, pre-vote, `complete` and every failing phase
+  // pay nothing — closed service restores gross rent.
+  var HOUSING_SERVICE_PHASES = { 'operational': true, 'disbursement-active': true, 'implementation-active': true };
+  var pendingHousingRelief = [];
 
   // engine.250: last Cycle's phase per initiative (previousCycleState.initiativePhases,
   // written by updateCivicApprovalRatings_ from the tracker SHEET), gated on the blob
@@ -466,6 +479,14 @@ function applyInitiativeImplementationEffects_(ctx) {
     // cycle, and how strongly. Collected after the T7 phase correction above so a
     // reconciled phase counts, and before the domain-effect fan-out so it is not
     // entangled with the sentiment path.
+    if (domain === 'housing' && HOUSING_SERVICE_PHASES[phase] === true && iStage !== -1 && iInitId !== -1) {
+      var hStage = String(row[iStage] == null ? '' : row[iStage]).trim();
+      var hVoted = status === 'override-passed' ||
+        (status === 'passed' && iMayoral !== -1 && String(row[iMayoral] == null ? '' : row[iMayoral]).trim().toLowerCase() === 'signed');
+      if ((hStage === 'Standing' || hStage === 'Delivering') && hVoted) {
+        pendingHousingRelief.push({ initiativeId: String(row[iInitId] || '').trim(), name: name, hoodsStr: hoodsStr, phase: phase, stage: hStage, tend: tend });
+      }
+    }
     if (domain === 'health' && HEALTH_DELIVERING_PHASES[phase] === true) {
       pendingHealthRelief.push({ hoodsStr: hoodsStr, intensity: intensity, name: name });
     }
@@ -611,6 +632,7 @@ function applyInitiativeImplementationEffects_(ctx) {
   // DELIVERING phases only. A building site treats nobody, so construction and
   // planning publish nothing; relief starts when care starts.
   S.initiativeHealthRelief = healthRelief;
+  S.initiativeHousingRelief = buildHousingReliefSlice_(ctx, pendingHousingRelief);
 
   S.initiativeImplementationEffects = {
     processed: processed,
@@ -660,6 +682,73 @@ function applyInitiativeImplementationEffects_(ctx) {
 /**
  * Find column index by possible header names (case-insensitive).
  */
+/**
+ * engine.251 — the housing relief slice: one winning standing housing program per
+ * folded parent hood, at the configured rate scaled by its upkeep tend factor.
+ * Max qualified rate wins; equal rates tie-break by InitiativeID ascending, so a
+ * second identical program never earns credit for a discount another supplies.
+ * Every qualifying program stays in `sources`, so a withdrawn winner reveals the
+ * next. Hood names fold through resolveHoodOrChild_ when the canon set is seeded;
+ * an unknown hood is skipped and named in `unknownHoods`, never guessed.
+ * Rate comes from World_Config (getCivicHousingDials_); a missing dial throws.
+ */
+function getCivicHousingDials_(ctx) {
+  if (ctx && ctx._civicHousingDials) return ctx._civicHousingDials;
+  var source = ctx && ctx.config;
+  if (!source) throw new Error('civic housing: ctx.config required');
+  var required = function(key, min, max) {
+    var raw = source[key];
+    var value = Number(raw);
+    if (raw === '' || raw === null || raw === undefined || !isFinite(value) || value < min || value > max) {
+      throw new Error('civic housing: invalid or missing World_Config.' + key);
+    }
+    return value;
+  };
+  var dials = {
+    enabled: required('civicHousingReliefEnabled', 0, 1) === 1,
+    rate: required('civicHousingReliefRate', 0, 1),
+    minRenters: required('civicHousingCohortMinRenters', 1, 500)
+  };
+  if (ctx) ctx._civicHousingDials = dials;
+  return dials;
+}
+
+function buildHousingReliefSlice_(ctx, pending) {
+  var out = { available: true, reason: null, rate: null, hoods: {}, sources: [], unknownHoods: [] };
+  var list = pending || [];
+  if (!list.length) return out;
+  var dials = getCivicHousingDials_(ctx);
+  out.rate = dials.rate;
+  var canFold = typeof resolveHoodOrChild_ === 'function' && ctx && ctx.summary && ctx.summary.canonHoods && ctx.summary.canonHoods.set;
+  list.sort(function (a, b) { return a.initiativeId < b.initiativeId ? -1 : a.initiativeId > b.initiativeId ? 1 : 0; });
+  for (var i = 0; i < list.length; i++) {
+    var item = list[i];
+    var tend = Number(item.tend);
+    if (!isFinite(tend) || tend < 0) tend = 1;
+    var effective = Math.round(dials.rate * tend * 10000) / 10000;
+    var folded = [];
+    var parts = String(item.hoodsStr || '').split(/[,;]+/);
+    for (var p = 0; p < parts.length; p++) {
+      var raw = parts[p].replace(/^\s+|\s+$/g, '');
+      if (!raw) continue;
+      var hood = canFold ? resolveHoodOrChild_(ctx, raw) : raw;
+      if (!hood) { if (out.unknownHoods.indexOf(raw) < 0) out.unknownHoods.push(raw); continue; }
+      if (folded.indexOf(hood) < 0) folded.push(hood);
+    }
+    out.sources.push({ initiativeId: item.initiativeId, name: item.name, phase: item.phase, stage: item.stage, tend: tend, rate: effective, hoods: folded });
+    for (var f = 0; f < folded.length; f++) {
+      var cur = out.hoods[folded[f]];
+      if (!cur || effective > cur.rate) {
+        out.hoods[folded[f]] = { rate: effective, initiativeId: item.initiativeId, name: item.name, tend: tend };
+      }
+    }
+  }
+  Logger.log('applyInitiativeImplementationEffects_: engine.251 housing relief — ' + out.sources.length +
+    ' program(s), ' + Object.keys(out.hoods).length + ' hood(s) at rate ' + dials.rate +
+    (out.unknownHoods.length ? ', unknown hoods ' + out.unknownHoods.join('/') : ''));
+  return out;
+}
+
 function findImplCol_(headers, possibleNames) {
   for (var i = 0; i < headers.length; i++) {
     var h = (headers[i] || '').toString().toLowerCase().trim();

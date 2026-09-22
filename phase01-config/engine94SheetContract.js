@@ -157,6 +157,13 @@ var ENGINE213_CONFIG_SEEDS = [
   ['civicTendGraceCycles', 6, 'civic.38 Task 4 upkeep: Cycles a Standing/Delivering initiative holds full strength after its last work move or stage change (builder-ruled 6)', 0, 52, true],
   ['civicTendDecayPerCycle', 0.15, 'civic.38 Task 4 upkeep: share of full strength lost per Cycle untended past the grace, linear (builder-ruled 0.15 — floor reached 5 Cycles past grace)', 0, 1, false],
   ['civicTendFloor', 0.3, 'civic.38 Task 4 upkeep: the least a neglected service pays, as a share of full strength (builder-ruled 0.3); one work move restores it', 0, 1, false]
+  // engine.251 housing lever (builder ruled 2026-09-22: tenant rent discount, flat 10%, off
+  // until bench acceptance). Same group, no new ensure function. Readers throw on a
+  // missing/invalid dial (getCivicHousingDials_).
+  ['civicHousingReliefEnabled', 0, 'engine.251: 1 = a Standing/Delivering housing initiative discounts gross rent in its hoods (Household_Ledger.MonthlyRent = GrossMonthlyRent - relief); 0 = the household engine only arms the four relief columns and copies gross, never discounts. Flip only after the bench pair (plan 2026-09-20-housing-lever)', 0, 1, true],
+  ['civicHousingReliefRate', 0.10, 'engine.251: share of GrossMonthlyRent a standing housing program takes off an active rented household in its folded target hoods (builder-ruled 0.10, 2026-09-22); scaled by the upkeep tend factor like every Standing service (ruling c)', 0, 1, false],
+  ['civicHousingCohortMinRenters', 10, 'engine.251: least active rented households a hood needs to join the housing stage-3 cohort (median rent burden vs the city middle). Live C108: 11 hoods clear 10, four have none — a median over one tracked household is a trick (SIM_DOCTRINE §15)', 1, 500, true],
+  ['civicDeliverMargin_housing', 0.20, 'engine.251: Delivering margin for housing rows (hood median MonthlyRent*12/HouseholdIncome vs city median, direction down). Unmeasured default per ruling (a); re-rule from the bench control pair', 0, 2, false],
 ];
 
 function ensureEngine213Config_(ss) {

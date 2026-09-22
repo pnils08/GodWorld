@@ -129,6 +129,18 @@ pointers:
 
 ## PROD deploy log — full trail
 
+### PROD @113 — codex review fix-ups: no observation holiday after delivery (2026-09-21 ~21:20 Chicago, engine-sheet; bench-proven ~21:10)
+
+civic.38 Task 4 part 2 fix-ups from the codex delivering review. Engine tree `a342400d`; 1 payload file vs @112 (`civicInitiativeEngine.js` — the three regenerated lib mirrors); 170 live files, 0 test files.
+
+**LANDED 2026-09-21 ~21:20 Chicago.** Isolated `git archive a342400d` stage, sandbox id grep-absent; 170 pushed, pull-back 169/169 js byte-identical, 0 test files live. Script version **100**, web app repointed @99 → @100 and read back.
+
+**What it changes.** (F3) The first-service gate — an observation must postdate `LastStageChangeCycle` — applies only to a row whose streak has never counted an observation; a delivery no longer skips its own Cycle's reading, so three low observations straight after delivery regress at D+3 not D+4. (F4) `StageHold` carries `r` (regress share) beside `m`; a change to either restarts the streak; an older cell without `r` reads as before. (F5) the baseline descriptor freezes the sorted city reference in `city`; a same-size membership swap is refused. Inert on live: every `Stage` blank.
+
+**Bench:** SANDBOX 0908 **@84** (`a342400d`) on the @83 state (C116, `INIT-902` Delivering, hold obs 114). Predicted, then C117 `ok:true`, 133 phases, 0 failed: hold → `obs 116` (counted past the delivery stamp 115 — the F3 shape; 115 itself was skipped by @83 and reads as a gap, streak 0), `r: 0.5` present, Stage Delivering, `sitting` in the ripple (no second credit), `Engine_Errors` unchanged. **BENCH-ONLY, NEVER REPLAY:** everything C109–C117 wrote. Re-sync from live before the next cut.
+
+**Expect at the first live fire on @100:** identical to @99's expectations. **Rollback:** re-push `411b9e69`.
+
 ### PROD @112 — a standing service delivers when the numbers say so, and slips when they stop (2026-09-21 ~20:50 Chicago, engine-sheet; bench-proven ~20:20)
 
 civic.38 Task 4 part 2. Engine tree `411b9e69`; 4 payload files vs @111 (`civicInitiativeEngine.js`, `updateCivicApprovalRatings.js`, `godWorldEngine2.js`, `engine94SheetContract.js`); 170 live files, 0 test files.

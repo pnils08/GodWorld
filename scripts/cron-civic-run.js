@@ -1945,9 +1945,6 @@ async function runMayorGavel() {
   console.log('\n=== mayor-gavel complete: ' + r.json.statements.length + ' statement(s) → ' + outPath + ' ===');
 }
 
-const runDecide = runMayorOpen;
-const runVoices = runHearing;
-
 // --- stage: projects (Layer 3 — only where a decision touched their initiative) ---
 async function runProjects() {
   const cycle = arg('--cycle', null) || detectCycle();

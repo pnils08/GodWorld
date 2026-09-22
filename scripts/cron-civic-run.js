@@ -166,13 +166,6 @@ function loadCouncilRoster(officeMap) {
   return council;
 }
 
-// Faction -> bloc agent dir (agent topology G-10: 3 bloc agents speak for 9 seats)
-const FACTION_AGENT = {
-  OPP: 'civic-office-opp-faction',
-  CRC: 'civic-office-crc-faction',
-  IND: 'civic-office-ind-swing',
-};
-
 // Initiative name -> owning project/office agent dir. Unmatched initiatives
 // route to the Mayor only (no project seat exists for them yet).
 const INITIATIVE_AGENT = [

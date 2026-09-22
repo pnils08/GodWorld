@@ -14,6 +14,11 @@
  *     fold, sweep and stamping running; only that seat is pending.
  *   Acceptance 2 — tick twice: the second run does nothing (no state rewrite).
  *   Acceptance 7 — an unreachable clerk/sanity model defers; a real FAIL blocks.
+ *   Task 3 (batch transport) — acceptance 3 (day-N submit → later collect,
+ *     validation+grounding per seat, invalid/expired resubmitted next window,
+ *     never inline) and 4 (outputs structured, validator-checked), against a
+ *     fake batch client; orBatch's importable-module contract and local
+ *     whole-batch validation.
  *
  * Also covers the game-loop plan's call-vote escape hatch (builder amendment
  * 2026-09-21, docs/plans/2026-09-19-civic-wake-game-loop.md §Open questions):
@@ -470,5 +475,253 @@ test('callVoteSweep skips when the counter no longer says domain-rules-deferred'
 });
 
 // ────────────────────────────────────────────────────────────────────────────
-console.log('\n' + passed + ' passed, ' + failed + ' failed');
-process.exit(failed ? 1 : 0);
+console.log('\ncivic.39 Task 3 — batch submit/collect (fake client, acceptance 3+4)');
+// ────────────────────────────────────────────────────────────────────────────
+
+const {
+  batchSubmitHearing, batchCollectHearing, batchInFlightSlugs, loadBatchManifest,
+} = civicRun;
+const orBatchModule = require('./orBatch');
+
+const BATCH_OFFICEMAP = {
+  offices: [
+    { agentDir: 'civic-office-council-d6', officeId: 'COUNCIL-D6', district: 'D6', model: 'google/gemini-3.7-flash', holder: 'Synthetic D6' },
+    { agentDir: 'civic-office-council-d7', officeId: 'COUNCIL-D7', district: 'D7', model: 'google/gemini-3.7-flash', holder: 'Synthetic D7' },
+    { agentDir: 'civic-office-council-d2', officeId: 'COUNCIL-D2', district: 'D2', model: 'meta-llama/llama-3.3-70b-instruct', holder: 'Synthetic D2' },
+  ],
+  projects: [],
+};
+
+function mkBatchRoot() {
+  const root = mkRoot();
+  const packets = path.join(root, 'output', 'cron-civic', 'packets');
+  fs.mkdirSync(packets, { recursive: true });
+  for (const d of ['d2', 'd6', 'd7']) {
+    fs.writeFileSync(path.join(packets, 'civic-office-council-' + d + '_pending_decisions_c' + CYCLE + '.md'),
+      '# packet ' + d + '\nThe district has 12 open cases.\n');
+  }
+  writeJson(root, 'output/civic-voice/mayor_open_c' + CYCLE + '.json', {
+    office: 'mayor_open', speaker: 'Synthetic Mayor',
+    statements: [{ decision: 'd', quote: 'q', fullStatement: 'f', trackerUpdates: {} }],
+  });
+  return root;
+}
+function batchOpts(root, client) {
+  return {
+    client, root, officeMap: BATCH_OFFICEMAP, initiatives: [],
+    wallInject: async () => '', personaFor: () => 'SYNTHETIC PERSONA — not canon',
+    wallRecord: async () => ({ recorded: false }),
+  };
+}
+function fakeBatchClient(handlers) {
+  const calls = { submit: [], get: [] };
+  return {
+    calls,
+    async submitBatch(model, requests, opts) { calls.submit.push({ model, requests, opts }); return handlers.submit(model, requests, opts); },
+    async getBatch(id) { calls.get.push(id); return handlers.get(id); },
+  };
+}
+function voiceText(slug) {
+  return JSON.stringify({
+    office: slug, cycle: CYCLE, speaker: 'Synthetic ' + slug, cascadeSummary: 'summary',
+    statements: [{
+      statementId: 'STMT-' + CYCLE + '-' + slug + '-001', type: 'position', topic: 'cases',
+      initiative: null, decision: 'We take up the 12 open cases.', quote: 'twelve is enough',
+      fullStatement: 'We take up the 12 open cases this cycle.',
+      trackerUpdates: { MilestoneNotes: 'C' + CYCLE + ': took up the 12 open cases' },
+    }],
+  });
+}
+// A root where d6+d7 were submitted in batch b1 (d2 is a sync-model seat).
+async function submittedBatchRoot() {
+  const root = mkBatchRoot();
+  const client = fakeBatchClient({ submit: async () => ({ id: 'b1', status: 'validating', record: {}, raw: {} }), get: async () => ({ status: 'in_progress' }) });
+  const r = await batchSubmitHearing(CYCLE, batchOpts(root, client));
+  return { root, client, submitResult: r };
+}
+
+const asyncTests = [];
+function testAsync(name, fn) { asyncTests.push([name, fn]); }
+
+testAsync('submit batches only the :batch-eligible seats, one batch per model', async () => {
+  const { client, submitResult: r } = await submittedBatchRoot();
+  assert.deepStrictEqual(r.submitted, ['council_d6', 'council_d7']);
+  assert.ok(r.skipped.some(s => s.startsWith('council_d2 (sync model')));
+  assert.strictEqual(client.calls.submit.length, 1);
+  const call = client.calls.submit[0];
+  assert.strictEqual(call.model, 'google/gemini-3.7-flash');
+  assert.deepStrictEqual(call.requests.map(q => q.custom_id), ['c' + CYCLE + '-council_d6-a1', 'c' + CYCLE + '-council_d7-a1']);
+  for (const q of call.requests) {
+    assert.strictEqual(q.body.max_tokens, 4000);
+    assert.strictEqual(q.body.messages[0].role, 'system');
+    assert.ok(q.body.messages[1].content.includes('12 open cases'));
+    assert.ok(!('reasoning' in q.body), 'gemini profile sends no reasoning field (it is mandatory there)');
+  }
+});
+
+testAsync('submit writes the manifest with per-seat state', async () => {
+  const { root } = await submittedBatchRoot();
+  const m = loadBatchManifest(CYCLE, root);
+  assert.strictEqual(m.seats.council_d6.status, 'submitted');
+  assert.strictEqual(m.seats.council_d6.batchId, 'b1');
+  assert.strictEqual(m.seats.council_d6.attempt, 1);
+  assert.strictEqual(m.seats.council_d6.dir, 'civic-office-council-d6');
+  assert.strictEqual(m.batches.length, 1);
+  assert.deepStrictEqual([...batchInFlightSlugs(CYCLE, root)].sort(), ['council_d6', 'council_d7']);
+});
+
+testAsync('a second submit while the batch is in flight sends nothing (acceptance 2 spirit)', async () => {
+  const { root } = await submittedBatchRoot();
+  const client2 = fakeBatchClient({ submit: async () => { throw new Error('must not be called'); }, get: async () => ({}) });
+  const r = await batchSubmitHearing(CYCLE, batchOpts(root, client2));
+  assert.deepStrictEqual(r.submitted, []);
+  assert.strictEqual(client2.calls.submit.length, 0);
+  assert.ok(r.skipped.some(s => s.includes('batch in flight')));
+});
+
+testAsync('collect lands valid voices out of order, rejects the invalid seat, never retries inline (acceptance 3)', async () => {
+  const { root } = await submittedBatchRoot();
+  const client = fakeBatchClient({
+    submit: async () => { throw new Error('no resubmit inside collect'); },
+    get: async () => ({
+      status: 'completed',
+      results: [  // reversed submit order, on purpose — match on custom_id only
+        { custom_id: 'c' + CYCLE + '-council_d7-a1', response: { body: { choices: [{ message: { content: 'not json at all' }, finish_reason: 'stop' }] } } },
+        { custom_id: 'c' + CYCLE + '-council_d6-a1', response: { body: { choices: [{ message: { content: voiceText('council_d6') }, finish_reason: 'stop' }], usage: { total_tokens: 900 } } } },
+      ],
+    }),
+  });
+  const r = await batchCollectHearing(CYCLE, batchOpts(root, client));
+  assert.deepStrictEqual(r.collected, ['council_d6']);
+  assert.deepStrictEqual(r.rejected, ['council_d7']);
+  assert.strictEqual(client.calls.submit.length, 0);
+  const voice = JSON.parse(fs.readFileSync(path.join(root, 'output', 'civic-voice', 'council_d6_c' + CYCLE + '.json'), 'utf8'));
+  assert.strictEqual(civicRun.validateVoiceJson(JSON.stringify(voice)).ok, true);
+  assert.ok(!fs.existsSync(path.join(root, 'output', 'civic-voice', 'council_d7_c' + CYCLE + '.json')));
+  const m = loadBatchManifest(CYCLE, root);
+  assert.strictEqual(m.seats.council_d6.status, 'collected');
+  assert.strictEqual(m.seats.council_d6.usage.total_tokens, 900);
+  assert.strictEqual(m.seats.council_d7.status, 'rejected');
+  assert.ok(m.seats.council_d7.error);
+  assert.ok(!batchInFlightSlugs(CYCLE, root).has('council_d6'));
+});
+
+testAsync('the next submit window resubmits only the rejected seat, attempt 2', async () => {
+  const { root } = await submittedBatchRoot();
+  const collectClient = fakeBatchClient({
+    submit: async () => ({}),
+    get: async () => ({
+      status: 'completed',
+      results: [
+        { custom_id: 'c' + CYCLE + '-council_d6-a1', response: { body: { choices: [{ message: { content: voiceText('council_d6') }, finish_reason: 'stop' }] } } },
+        { custom_id: 'c' + CYCLE + '-council_d7-a1', response: { body: { choices: [{ message: { content: '{"broken":' }, finish_reason: 'length' }], usage: {} } } },
+      ],
+    }),
+  });
+  await batchCollectHearing(CYCLE, batchOpts(root, collectClient));
+  const client2 = fakeBatchClient({ submit: async () => ({ id: 'b2', status: 'validating', record: {}, raw: {} }), get: async () => ({}) });
+  const r = await batchSubmitHearing(CYCLE, batchOpts(root, client2));
+  assert.deepStrictEqual(r.submitted, ['council_d7']);
+  assert.strictEqual(client2.calls.submit.length, 1);
+  assert.deepStrictEqual(client2.calls.submit[0].requests.map(q => q.custom_id), ['c' + CYCLE + '-council_d7-a2']);
+  assert.ok(r.skipped.some(s => s.includes('council_d6') && s.includes('voice landed')));
+});
+
+testAsync('a batch still in progress changes nothing', async () => {
+  const { root } = await submittedBatchRoot();
+  const client = fakeBatchClient({ submit: async () => ({}), get: async () => ({ status: 'in_progress' }) });
+  const r = await batchCollectHearing(CYCLE, batchOpts(root, client));
+  assert.deepStrictEqual(r.collected, []);
+  assert.deepStrictEqual(r.pending.sort(), ['council_d6', 'council_d7']);
+  const m = loadBatchManifest(CYCLE, root);
+  assert.strictEqual(m.seats.council_d6.status, 'submitted');
+  assert.ok(!fs.existsSync(path.join(root, 'output', 'civic-voice', 'council_d6_c' + CYCLE + '.json')));
+});
+
+testAsync('an expired batch marks its seats, and the next window resubmits them', async () => {
+  const { root } = await submittedBatchRoot();
+  const client = fakeBatchClient({ submit: async () => ({}), get: async () => ({ status: 'expired' }) });
+  const r = await batchCollectHearing(CYCLE, batchOpts(root, client));
+  assert.deepStrictEqual(r.expired.sort(), ['council_d6', 'council_d7']);
+  assert.strictEqual(loadBatchManifest(CYCLE, root).seats.council_d6.status, 'expired');
+  const client2 = fakeBatchClient({ submit: async () => ({ id: 'b3', status: 'validating', record: {}, raw: {} }), get: async () => ({}) });
+  const r2 = await batchSubmitHearing(CYCLE, batchOpts(root, client2));
+  assert.deepStrictEqual(r2.submitted.sort(), ['council_d6', 'council_d7']);
+  assert.deepStrictEqual(client2.calls.submit[0].requests.map(q => q.custom_id),
+    ['c' + CYCLE + '-council_d6-a2', 'c' + CYCLE + '-council_d7-a2']);
+});
+
+testAsync('collected output is structured and passes the same validators as the sync path (acceptance 4)', async () => {
+  const { root } = await submittedBatchRoot();
+  const client = fakeBatchClient({
+    submit: async () => ({}),
+    get: async () => ({
+      status: 'completed',
+      results: [
+        { custom_id: 'c' + CYCLE + '-council_d6-a1', response: { body: { choices: [{ message: { content: voiceText('council_d6') }, finish_reason: 'stop' }] } } },
+        { custom_id: 'c' + CYCLE + '-council_d7-a1', response: { body: { choices: [{ message: { content: voiceText('council_d7') }, finish_reason: 'stop' }] } } },
+      ],
+    }),
+  });
+  const r = await batchCollectHearing(CYCLE, batchOpts(root, client));
+  assert.strictEqual(r.collected.length, 2);
+  for (const slug of r.collected) {
+    const raw = fs.readFileSync(path.join(root, 'output', 'civic-voice', slug + '_c' + CYCLE + '.json'), 'utf8');
+    const v = civicRun.validateVoiceJson(raw);
+    assert.ok(v.ok, slug + ': ' + v.why);
+    // Grounding: passes against the real packet hay (12 is in it), and the
+    // same voice is caught when the number is absent from the material.
+    const grounded = civicRun.composeChecks(civicRun.noPhaseCheck,
+      civicRun.statementNumberCheck('The district has 12 open cases.', { district: 'D6', cycle: CYCLE }))(v.json);
+    assert.strictEqual(grounded, null);
+    const caught = civicRun.composeChecks(civicRun.noPhaseCheck,
+      civicRun.statementNumberCheck('# nothing numbered here', { district: 'D6', cycle: CYCLE }))(v.json);
+    assert.ok(typeof caught === 'string' && caught.includes('not in your packet'));
+  }
+});
+
+testAsync('a voice citing an ungrounded tracker number is rejected at collect', async () => {
+  const { root } = await submittedBatchRoot();
+  const bad = JSON.parse(voiceText('council_d6'));
+  bad.statements[0].trackerUpdates.MilestoneNotes = 'C' + CYCLE + ': cleared 999 cases'; // 999 is not in the packet
+  const client = fakeBatchClient({
+    submit: async () => ({}),
+    get: async () => ({
+      status: 'completed',
+      results: [
+        { custom_id: 'c' + CYCLE + '-council_d6-a1', response: { body: { choices: [{ message: { content: JSON.stringify(bad) }, finish_reason: 'stop' }] } } },
+        { custom_id: 'c' + CYCLE + '-council_d7-a1', response: { body: { choices: [{ message: { content: voiceText('council_d7') }, finish_reason: 'stop' }] } } },
+      ],
+    }),
+  });
+  const r = await batchCollectHearing(CYCLE, batchOpts(root, client));
+  assert.deepStrictEqual(r.collected, ['council_d7']);
+  assert.deepStrictEqual(r.rejected, ['council_d6']);
+  assert.ok(loadBatchManifest(CYCLE, root).seats.council_d6.error.includes('not in your packet'));
+});
+
+test('orBatch is importable with no API key and validates batches locally', () => {
+  const env = Object.assign({}, process.env);
+  delete env.OPENROUTER_API_KEY;
+  const out = require('child_process').execFileSync('node', ['-e',
+    "require('./scripts/orBatch.js'); console.log('import-ok');"], { cwd: path.resolve(__dirname, '..'), env, encoding: 'utf8' });
+  assert.ok(out.includes('import-ok'));
+  const v = orBatchModule.validateBatchRequests;
+  const good = [{ custom_id: 'a', body: { messages: [{ role: 'user', content: 'x' }], max_tokens: 100 } }];
+  assert.strictEqual(v('google/gemini-3.7-flash', good), true);
+  assert.throws(() => v('m', []), /non-empty/);
+  assert.throws(() => v('m', [good[0], good[0]]), /duplicate custom_id/);
+  assert.throws(() => v('m', [{ custom_id: 'a', body: { messages: [], max_tokens: 1 } }]), /empty messages/);
+  assert.throws(() => v('m', [{ custom_id: 'a', body: { model: 'other', messages: [{ role: 'user', content: 'x' }], max_tokens: 1 } }]), /must match/);
+  assert.throws(() => v('m', [{ custom_id: 'a', body: { messages: [{ role: 'user', content: 'x' }] } }]), /max_tokens/);
+});
+
+// ────────────────────────────────────────────────────────────────────────────
+(async () => {
+  for (const [name, fn] of asyncTests) {
+    try { await fn(); passed++; console.log('  ✓ ' + name); }
+    catch (e) { failed++; console.error('  ✗ ' + name + '\n    ' + (e && e.stack || e)); }
+  }
+  console.log('\n' + passed + ' passed, ' + failed + ' failed');
+  process.exit(failed ? 1 : 0);
+})();

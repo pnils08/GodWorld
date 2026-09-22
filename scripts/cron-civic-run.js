@@ -20,6 +20,16 @@
  *                      output/cron-civic/week_state_c{XX}.json, advances the
  *                      deterministic close half and the apply when their inputs
  *                      exist, tracks (never calls) the model stages. Idempotent.
+ *   --stage=batch-submit   civic.39 Task 3 — one OpenRouter batch per
+ *                          :batch-eligible hearing-seat model (today: only
+ *                          google/gemini-3.7-flash, 0.50x standard). custom_id
+ *                          per seat+cycle+attempt; manifest
+ *                          output/cron-civic/batch_c{XX}_hearing.json.
+ *   --stage=batch-collect  polls submitted batches (GET, no model spend),
+ *                          validates + grounds each result like runHearing,
+ *                          lands passing seats as ordinary voice JSONs;
+ *                          rejected/expired seats resubmit next window. tick
+ *                          runs this — it costs no model tokens.
  *
  * Stage order in the chain: directive -> prep -> decide -> voices -> projects
  * -> close. The directive runs FIRST so prep consumes a real directive file
@@ -61,6 +71,7 @@ const civicSeat = require('./civicSeat');
 const { interventionIssue } = require('./civicInterventionValidation');
 const cityHallLedger = require('./cityHallLedger');
 const chaosCascade = require('./dumpChaosCascade');
+const orBatch = require('./orBatch');   // civic.39 Task 3 — batch transport (importable since the require.main guard; key read is lazy)
 
 /** Non-fatal: prior CIVIC positions for holder of agentDir. */
 async function positionWallInject(officeMap, agentDir) {
@@ -1549,6 +1560,7 @@ async function runHearing() {
     return Object.assign({}, m, { officeId: row ? row.officeId : ('COUNCIL-' + m.district) });
   });
   const results = [];
+  const batchInFlight = batchInFlightSlugs(cycle);
   await Promise.all(dirs.map(async dir => {
     const slug = voiceSlug(dir);
     try {
@@ -1563,18 +1575,16 @@ async function runHearing() {
         });
         return;
       }
-      const packet = fs.readFileSync(packetPathFor(dir, cycle), 'utf8');
-      const wallInj = await positionWallInject(officeMap, dir);
-      const user = [
-        'YOUR PENDING DECISIONS PACKET (cycle ' + cycle + ') — the Mayor\'s AGENDA is in the packet; react as yourself.',
-        '', packet, wallInj || '',
-        'Do NOT emit trackerUpdates.ImplementationPhase. That is the Mayor\'s gavel after you speak.',
-        outputContract(slug, cycle, initiatives, { forbidPhase: true }),
-      ].join('\n');
-      const hearingSeat = civicSeat.resolveOfficeRow(officeMap, dir);
-      const hay = packet + '\n' + (wallInj || '');
-      const r = await callVoice(dir, model, user, 4000, officeMap,
-        composeChecks(noPhaseCheck, statementNumberCheck(hay, { district: hearingSeat && hearingSeat.district, cycle })));
+      // civic.39 Task 3: a seat with a live batch in flight is pending, not a
+      // synchronous call — no double spend. It lands via batch-collect (tick
+      // polls it) or is resubmitted next window.
+      if (batchInFlight.has(slug)) {
+        results.push({ dir, slug, model, ok: false, pending: true, error: 'batch in flight — lands via --stage=batch-collect or resubmits next window' });
+        return;
+      }
+      const hp = await hearingSeatPrompt(dir, cycle, officeMap, initiatives);
+      const r = await callVoice(dir, model, hp.user, 4000, officeMap,
+        composeChecks(noPhaseCheck, statementNumberCheck(hp.hay, { district: hp.seat && hp.seat.district, cycle })));
       if (!r || r.error) { results.push({ dir, slug, model, ok: false, error: r ? r.error : 'no result' }); return; }
       if (hearingHasPhase(r.json)) {
         results.push({ dir, slug, model, ok: false, error: 'hearing emitted ImplementationPhase' });
@@ -1614,6 +1624,232 @@ async function runHearing() {
     console.log('\n[civic] ' + failed.length + ' voice(s) pending this window: ' + failed.map(x => x.slug).join(', ') + ' — the close proceeds on the arrived voices.');
   }
   console.log('\n=== hearing complete: ' + (results.length - failed.length) + '/' + results.length + ' ok' + (failed.length ? ' (' + failed.length + ' pending)' : '') + ' ===');
+}
+
+// ---------------------------------------------------------------------------
+// civic.39 Task 3 — batch transport for the hearing seats (OpenRouter Batch
+// API, 50% off, 24h window). A seat goes by batch only where its model has a
+// working :batch endpoint priced at or below standard (builder ruling
+// 2026-09-21); every other seat stays on the synchronous callVoice path.
+// Measured against the OpenRouter model list 2026-09-22: of the seat models
+// in civic-office-map.json, only google/gemini-3.7-flash qualifies
+// ($0.375/$1.875 per MTok, exactly half of standard). kimi-k2, llama-3.3-70b,
+// deepseek-chat and qwen3-235b have no :batch variant; deepseek-v4-pro's is
+// priced ABOVE standard. anthropic/claude-haiku-4.5 is listed at half price
+// but its :batch route rejected every submit on 2026-09-21 (research
+// 2026-09-21-batch-cost-and-model-variety §3) — it joins BATCH_PROFILES only
+// after a live one-request probe passes.
+// ---------------------------------------------------------------------------
+
+const BATCH_PROFILES = {
+  'google/gemini-3.7-flash': {
+    // Reasoning is MANDATORY on this endpoint (2026-09-21 probe: a
+    // reasoning:{enabled:false} request failed the whole batch) — send no
+    // reasoning field, and keep max_tokens sized for reasoning + answer
+    // (measured: ~88% of completion tokens were reasoning on a small JSON).
+    reasoning: null,
+    minMaxTokens: 1200,
+  },
+};
+
+const batchEligible = model => Object.prototype.hasOwnProperty.call(BATCH_PROFILES, model);
+
+function batchManifestPath(cycle, root) {
+  return path.join(root || ROOT, 'output', 'cron-civic', 'batch_c' + cycle + '_hearing.json');
+}
+function loadBatchManifest(cycle, root) {
+  const m = readJson(batchManifestPath(cycle, root));
+  return (m && m.seats) ? m : null;
+}
+// Slugs with a live batch in flight — runHearing must not double-spend a
+// synchronous call on them; they land via batch-collect or are resubmitted.
+function batchInFlightSlugs(cycle, root) {
+  const m = loadBatchManifest(cycle, root);
+  if (!m) return new Set();
+  return new Set(Object.keys(m.seats).filter(s => m.seats[s].status === 'submitted'));
+}
+
+// The seat's hearing prompt — shared by runHearing (synchronous) and
+// batchSubmitHearing (batch). Same packet, same wall inject, same output
+// contract: only the transport changes.
+async function hearingSeatPrompt(dir, cycle, officeMap, initiatives, opts) {
+  opts = opts || {};
+  const root = opts.root || ROOT;
+  const slug = voiceSlug(dir);
+  const packet = fs.readFileSync(path.join(root, 'output', 'cron-civic', 'packets', dir + '_pending_decisions_c' + cycle + '.md'), 'utf8');
+  const wallInj = await (opts.wallInject || positionWallInject)(officeMap, dir);
+  const user = [
+    'YOUR PENDING DECISIONS PACKET (cycle ' + cycle + ') — the Mayor\'s AGENDA is in the packet; react as yourself.',
+    '', packet, wallInj || '',
+    'Do NOT emit trackerUpdates.ImplementationPhase. That is the Mayor\'s gavel after you speak.',
+    outputContract(slug, cycle, initiatives, { forbidPhase: true }),
+  ].join('\n');
+  return {
+    dir, slug, model: officeModel(officeMap, dir), user,
+    hay: packet + '\n' + (wallInj || ''),
+    seat: civicSeat.resolveOfficeRow(officeMap, dir),
+  };
+}
+
+// --stage=batch-submit — one batch per batch-eligible model among the hearing
+// seats still missing a voice. custom_id = c<cycle>-<slug>-a<attempt> (unique
+// by construction). Seats already submitted, already landed, or on a
+// non-batching model are skipped; seats previously rejected/expired are
+// resubmitted with attempt+1 — never inline.
+async function batchSubmitHearing(cycle, opts) {
+  opts = opts || {};
+  const root = opts.root || ROOT;
+  const client = opts.client || require('./orBatch');
+  const officeMap = opts.officeMap || mustJson(path.join(ROOT, 'scripts', 'civic-office-map.json'), 'office map');
+  const initiatives = opts.initiatives || (trackerSnapshot.loadOrRebuild(cycle).initiatives || []);
+  if (!fs.existsSync(path.join(root, 'output', 'civic-voice', 'mayor_open_c' + cycle + '.json'))) {
+    throw new Error('no mayor_open_c' + cycle + '.json — run --stage=mayor-open first');
+  }
+  const packetsDir = path.join(root, 'output', 'cron-civic', 'packets');
+  const dirs = !fs.existsSync(packetsDir) ? [] : fs.readdirSync(packetsDir)
+    .filter(f => f.endsWith('_c' + cycle + '.md'))
+    .map(f => f.replace('_pending_decisions_c' + cycle + '.md', ''))
+    .filter(d => d !== 'civic-office-mayor' && !LAYER3_DIRS.has(d));
+  const manifest = loadBatchManifest(cycle, root)
+    || { version: 1, stage: 'hearing', cycle: Number(cycle), batches: [], seats: {} };
+
+  const byModel = new Map(); // one batch = one model (measured: mixed-model submit is rejected)
+  const skipped = [];
+  for (const dir of dirs) {
+    const slug = voiceSlug(dir);
+    const model = officeModel(officeMap, dir);
+    if (!batchEligible(model)) { skipped.push(slug + ' (sync model ' + model + ')'); continue; }
+    if (fs.existsSync(path.join(root, 'output', 'civic-voice', slug + '_c' + cycle + '.json'))) { skipped.push(slug + ' (voice landed)'); continue; }
+    const prev = manifest.seats[slug];
+    if (prev && prev.status === 'submitted') { skipped.push(slug + ' (batch in flight ' + prev.batchId + ')'); continue; }
+    const attempt = ((prev && prev.attempt) || 0) + 1;
+    const hp = await hearingSeatPrompt(dir, cycle, officeMap, initiatives, opts);
+    const persona = (opts.personaFor || readPersonaDir)(dir);
+    const profile = BATCH_PROFILES[model];
+    const body = {
+      messages: [{ role: 'system', content: persona }, { role: 'user', content: hp.user }],
+      max_tokens: Math.max(4000, profile.minMaxTokens || 0),
+    };
+    if (profile.reasoning) body.reasoning = profile.reasoning;
+    const customId = 'c' + cycle + '-' + slug + '-a' + attempt;
+    if (!byModel.has(model)) byModel.set(model, []);
+    byModel.get(model).push({ dir, slug, attempt, customId, body });
+  }
+
+  const submitted = [], failures = [];
+  for (const [model, seats] of byModel) {
+    try {
+      const res = await client.submitBatch(model, seats.map(s => ({ custom_id: s.customId, body: s.body })),
+        { label: 'civic-hearing-c' + cycle, extra: { stage: 'hearing', cycle: Number(cycle) } });
+      manifest.batches.push({ id: res.id, model, customIds: seats.map(s => s.customId), submittedAt: new Date().toISOString() });
+      for (const s of seats) {
+        manifest.seats[s.slug] = { dir: s.dir, customId: s.customId, batchId: res.id, model, attempt: s.attempt, status: 'submitted', updated: new Date().toISOString() };
+        submitted.push(s.slug);
+      }
+      log('batch submitted: ' + res.id + ' (' + model + ', ' + seats.length + ' seat(s): ' + seats.map(s => s.slug).join(', ') + ')');
+    } catch (e) {
+      // Whole-batch submit failure (validation, balance, a dead :batch route):
+      // these seats keep no voice file, so runHearing picks them up
+      // synchronously — the batch path defers, it never blocks the week.
+      for (const s of seats) {
+        manifest.seats[s.slug] = { dir: s.dir, customId: s.customId, batchId: null, model, attempt: s.attempt, status: 'submit-failed', error: e.message, updated: new Date().toISOString() };
+      }
+      failures.push(model + ': ' + e.message);
+      console.error('[civic] batch submit failed for ' + model + ' — its seat(s) stay on the sync path: ' + e.message);
+    }
+  }
+  fs.mkdirSync(path.dirname(batchManifestPath(cycle, root)), { recursive: true });
+  fs.writeFileSync(batchManifestPath(cycle, root), JSON.stringify(manifest, null, 2) + '\n');
+  return { submitted, failed: failures, skipped, manifest };
+}
+
+// --stage=batch-collect — polls submitted batches (GET only, no model spend),
+// matches results by custom_id (order is not preserved), runs the SAME
+// validation + grounding runHearing runs, and lands passing seats as ordinary
+// voice JSONs (existingVoice reuses them from then on). Invalid, errored,
+// truncated or expired seats are marked rejected and wait for the next submit
+// window — collect never retries inline.
+async function batchCollectHearing(cycle, opts) {
+  opts = opts || {};
+  const root = opts.root || ROOT;
+  const client = opts.client || require('./orBatch');
+  const officeMap = opts.officeMap || mustJson(path.join(ROOT, 'scripts', 'civic-office-map.json'), 'office map');
+  const initiatives = opts.initiatives || (trackerSnapshot.loadOrRebuild(cycle).initiatives || []);
+  const manifest = loadBatchManifest(cycle, root);
+  if (!manifest) return { collected: [], rejected: [], pending: [], expired: [], note: 'no batch manifest for c' + cycle };
+
+  const byBatch = new Map();
+  for (const [slug, s] of Object.entries(manifest.seats)) {
+    if (s.status !== 'submitted') continue;
+    if (!byBatch.has(s.batchId)) byBatch.set(s.batchId, []);
+    byBatch.get(s.batchId).push(slug);
+  }
+  const collected = [], rejected = [], pending = [], expired = [];
+  for (const [batchId, slugs] of byBatch) {
+    const b = await client.getBatch(batchId);
+    if (b.status !== 'completed') {
+      if (b.status === 'failed' || b.status === 'expired' || b.status === 'cancelled') {
+        for (const slug of slugs) {
+          manifest.seats[slug].status = b.status;
+          manifest.seats[slug].error = 'batch ' + b.status;
+          manifest.seats[slug].updated = new Date().toISOString();
+          expired.push(slug);
+        }
+      } else {
+        pending.push.apply(pending, slugs); // validating / in_progress / finalizing
+      }
+      continue;
+    }
+    const results = b.results || [];
+    for (const slug of slugs) {
+      const seat = manifest.seats[slug];
+      const fail = why => {
+        seat.status = 'rejected'; seat.error = why; seat.updated = new Date().toISOString();
+        rejected.push(slug);
+      };
+      const r = results.find(x => x && x.custom_id === seat.customId);
+      if (!r) { fail('no result for ' + seat.customId + ' in batch ' + batchId); continue; }
+      const ex = orBatch.resultText(r);
+      if (ex.error) { fail(ex.error); continue; }
+      const hp = await hearingSeatPrompt(seat.dir, cycle, officeMap, initiatives, opts);
+      const v = validateVoiceJson(ex.text);
+      if (v.ok) {
+        const why = composeChecks(noPhaseCheck,
+          statementNumberCheck(hp.hay, { district: hp.seat && hp.seat.district, cycle }))(v.json);
+        if (why) { v.ok = false; v.why = why; }
+      }
+      if (!v.ok) { fail(v.why); continue; }
+      const voicePath = path.join(root, 'output', 'civic-voice', slug + '_c' + cycle + '.json');
+      fs.mkdirSync(path.dirname(voicePath), { recursive: true });
+      fs.writeFileSync(voicePath, JSON.stringify(v.json, null, 2));
+      seat.status = 'collected'; seat.usage = ex.usage || null; seat.error = null; seat.updated = new Date().toISOString();
+      collected.push(slug);
+      await (opts.wallRecord || positionWallRecordCascade)(officeMap, seat.dir, v.json, cycle);
+      log('collected ' + slug + ' (' + seat.model + ', batch ' + batchId + ', attempt ' + seat.attempt + ')');
+    }
+  }
+  fs.writeFileSync(batchManifestPath(cycle, root), JSON.stringify(manifest, null, 2) + '\n');
+  return { collected, rejected, pending, expired, manifest };
+}
+
+async function runBatchSubmit() {
+  const cycle = arg('--cycle', null) || detectCycle();
+  console.log('Civic BATCH-SUBMIT — c' + cycle);
+  console.log('===================================');
+  const r = await batchSubmitHearing(cycle, {});
+  console.log('submitted: ' + (r.submitted.join(', ') || 'none'));
+  if (r.skipped.length) console.log('skipped: ' + r.skipped.join(', '));
+  if (r.failed.length) { console.error('submit failure(s): ' + r.failed.join(' | ')); process.exit(1); }
+}
+
+async function runBatchCollect() {
+  const cycle = arg('--cycle', null) || detectCycle();
+  console.log('Civic BATCH-COLLECT — c' + cycle);
+  console.log('===================================');
+  const r = await batchCollectHearing(cycle, {});
+  console.log('collected: ' + r.collected.length + ', rejected: ' + r.rejected.length +
+    ', in flight: ' + r.pending.length + ', expired/failed: ' + r.expired.length);
+  if (r.rejected.length) console.log('rejected (resubmitted next window): ' + r.rejected.join(', '));
 }
 
 async function runMayorGavel() {
@@ -3045,8 +3281,10 @@ function refreshWeekState(state, root) {
 
   const hearingMan = readJson(path.join(civic, 'hearing_c' + cycle + '.json')) || readJson(path.join(civic, 'voices_c' + cycle + '.json'));
   const hearingPending = hearingMan ? (hearingMan.results || []).filter(x => !x.ok || !voiceExists(x.slug)).map(x => x.slug) : [];
+  const batchMan = loadBatchManifest(cycle, root);
+  const batchPending = batchMan ? Object.keys(batchMan.seats).filter(s => batchMan.seats[s].status === 'submitted') : [];
   set('hearing', hearingMan ? 'done' : (voiceExists('mayor_open') ? 'ready' : 'waiting'),
-    hearingMan ? { pending: hearingPending } : {});
+    hearingMan ? { pending: hearingPending } : (batchPending.length ? { batchPending } : {}));
 
   const gavelRaw = fs.existsSync(path.join(civic, 'mayor_gavel_c' + cycle + '.raw.txt'));
   set('mayor-gavel', voiceExists('mayor_gavel') ? 'done' : (gavelRaw ? 'failed' : (hearingMan ? 'ready' : 'waiting')));
@@ -3241,6 +3479,22 @@ async function runTick() {
     return;
   }
 
+  // 0. Batch collect — polling a submitted batch is an HTTP GET, not a model
+  //    call, so tick may run it. Finished batches land voice JSONs; rejected
+  //    or expired seats wait for the next submit window (never inline retry).
+  const batchMan = loadBatchManifest(cycle);
+  if (batchMan && Object.keys(batchMan.seats).some(s => batchMan.seats[s].status === 'submitted')) {
+    try {
+      const bc = await batchCollectHearing(cycle, {});
+      if (bc.collected.length || bc.rejected.length || bc.expired.length) {
+        console.log('[tick] batch-collect: ' + bc.collected.length + ' collected, ' + bc.rejected.length +
+          ' rejected, ' + bc.expired.length + ' expired/failed, ' + bc.pending.length + ' still in flight');
+      }
+    } catch (e) {
+      console.error('[tick] batch-collect failed: ' + e.message + ' — retried on a later tick');
+    }
+  }
+
   // 1. The deterministic close half (fold, petition sweep, vote stamping, the
   //    deterministic gate checks) — never waits on a model or a missing voice.
   const cd = state.stages['close-det'];
@@ -3301,6 +3555,7 @@ const STAGES = {
   voices: runHearing, hearing: runHearing,
   'mayor-gavel': runMayorGavel,
   projects: runProjects, close: runClose, datawake: runDatawake, chain: runChain, status: runStatus,
+  'batch-submit': runBatchSubmit, 'batch-collect': runBatchCollect,
   tick: runTick,
 };
 if (require.main === module) {
@@ -3323,4 +3578,7 @@ module.exports = { modelChainFor, FALLBACK_MODELS, sentimentWord, crimeWord, ret
   callVoteEligibility, callVoteSweep, trackerBeatRows,
   // civic.39 — week-boundary stage machine (exported for scripts/cron-civic-tick.test.js)
   WEEK_STAGES, VERDICT_CUTOFF_MS, weekStatePath, blankWeekState, loadWeekState, saveWeekState,
-  engineFireInfo, refreshWeekState, decideApply, closeDeterministic, runGate, maybeApply, runTick };
+  engineFireInfo, refreshWeekState, decideApply, closeDeterministic, runGate, maybeApply, runTick,
+  // civic.39 Task 3 — batch transport (hearing seats on :batch-eligible models)
+  BATCH_PROFILES, batchEligible, batchManifestPath, loadBatchManifest, batchInFlightSlugs,
+  hearingSeatPrompt, batchSubmitHearing, batchCollectHearing };

@@ -68,9 +68,27 @@ pointers:
 
 1. DONE 2026-09-21: chaos cars reviewed (above) and the live `Chaos_Cars` tab pulled read-only (91 rows, C100-C108; saved `output/engine-sheet/2026-09-21-chaos-cars-live-pull.json`, not committed to canon — a working pull). Measured: `oari_van` is 15 of 91 events (16.5%) — 10 `welfare_check`, 5 `substance_intervention`, zero `deescalated`. Citizen-scope targets resolved against the live ledger for neighborhood. **Zero of 15 OARI-van events, across all 9 cycles, landed in OARI's own target hoods** (West Oakland, Fruitvale, East Oakland — the INIT-002 deployment hoods). The 8 neighborhood-scope events hit Rockridge(2), Laurel(2), Lake Merritt, Ivy Hill, Uptown, Glenview; the 7 citizen-scope events resolved to Piedmont Ave, Lake Merritt(2), Temescal, Chinatown, Jack London, Downtown. This sharpens finding 4 from an estimate ("thin, 0 or 1 a cycle") to a measured fact: the chaos van has never once fired where OARI operates, over the full C100-C108 window. It cannot be OARI's grading data source in its current form — a random citywide roll only reaches a 3-hood target by chance, and 0/15 is that chance realized.
 2. Trace how a `medical_emergency` and an `arrested` outcome could reach the Hospital_Ledger writer and a judicial record, with the wiring card before any cut.
-3. Bring the builder the sim calls: what a judicial ledger tracks, what mental-health states exist, and whether OARI is graded on diversion.
+3. **RULED 2026-09-21 (builder): build the condition-driven service layer** — the existing safety-lever plan (`docs/plans/2026-09-21-safety-lever.md`) already depends on it for OARI's real grading, and the chaos-van path is now measured as unreachable (0/15 in OARI's own hoods, above). Judicial ledger and mental-health state rulings are still open; the service layer is scoped starting now, in parallel.
+
+## Service layer scoping (research-build, 2026-09-21 — design only, no build)
+
+**Relationship to the safety lever (does not duplicate it):** the safety-lever plan already designs a passive, always-on bounded relief on `ViolentLevel` for a deployed initiative — no discrete calls, no citizen, no judicial or hospital link. That mechanism ships or doesn't on its own Tasks 1-7 and is unaffected by this. The service layer below is a different, event-based mechanism: individual crisis calls that resolve to a citizen-level outcome, feeding the judicial ledger, mental-health states and OARI's real diversion count. Both can exist; they read different inputs and write different things. Do not let one implementation absorb the other's job.
+
+**Shape, following the ambulance/heat-wave igniter pattern already proven in `generationalEventsEngine.js` and `chaosCarsEngine.js:324-350` (flip real Status, let existing lifecycle take over):**
+
+- **Call volume, per hood per cycle:** driven by the hood's own condition — live `Crime_Metrics.ViolentLevel` and health levels (`Sick` count, Hospital_Ledger admissions), not a flat dice roll. A hood with worse conditions generates more calls. This is the missing link chaos cars don't have (finding 5 in the review above): conditions, not chance, should set volume.
+- **OARI capacity, per hood per cycle:** derived from INIT-002's deployment state (Stage, ImplementationPhase) and target hoods — a call in a hood OARI doesn't serve cannot be answered by OARI. This reuses Task 3's eligibility whitelist from the safety-lever plan (`implementation-active`, `dispatch-live`, `pilot-active`, `operational`).
+- **Call resolution:** each call draws from a fixed outcome set — de-escalated (OARI), treated/admitted (hospital), arrested (judicial) — gated by capacity: if OARI has no capacity in that hood/cycle, the call defaults to the non-OARI path (arrest or admission), the same way an ambulance call resolves today regardless of what else exists.
+- **Writes:** de-escalated → a life-history tag, no ledger row (the citizen was fine). Treated/admitted → the existing Hospital_Ledger writer, Cause = a mental-health or crisis string (ruling 2 needed first). Arrested → the new judicial ledger (ruling 1 needed first).
+- **OARI's diversion count:** de-escalated + OARI-attributed substance interventions in OARI's own hoods, against the arrest/admission count that would otherwise have occurred in the same hoods. This is the real measure the safety-lever plan deferred; it supersedes grading OARI on `ViolentLevel` alone once it exists, but does not require removing that lever — the two can run side by side and be reconciled later.
+
+**Open before any build (this is scoping, not a ruling to proceed to code):** rulings 1 and 2 above (judicial ledger shape, mental-health states) gate the write side. The call-volume formula (how conditions map to a count) needs its own bounded design and bench pair, same discipline as the safety lever. No engine, config or schema change is proposed here.
 
 ## Changelog
+
+- 2026-09-21 (research-build) — Service layer scoped (design only): shape, relationship to the safety lever, write targets, OARI diversion measure; rulings 1-2 still gate the build.
+
+- 2026-09-21 (research-build) — Builder ruled: build the condition-driven service layer now (existing safety-lever system depends on it); scoping starts.
 
 - 2026-09-21 (research-build) — Live Chaos_Cars pull (91 rows, C100-108): confirmed zero OARI-van events in OARI's own target hoods across the full window; sharpens the chaos-review finding from estimate to measured fact.
 

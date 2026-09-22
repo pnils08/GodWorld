@@ -108,7 +108,7 @@ pointers:
 ### Task 9: W5 media half — no bare rate leads (research-build → media)
 
 - **Files:** sift/desk guidance (scoped ban: illness/employment/crisis rates until supported; migration flows allowed with label)
-- **Status:** [~] cron half done (2026-08-09, kimi) — `cascadeRateRule` block in `scripts/cron-desk-writer.js` shared system prompt (static ban until support lands, then flip off). **/sift skill half: exact diff drafted 2026-08-10 (kimi) at `output/kimi/engine102/sift-rate-guidance-proposal.md`** — `.claude/skills/` is control-plane; landing + rollout flip ride whoever owns it post-Claude.
+- **Status:** [x] done (2026-08-09 cron half, kimi; 2026-09-22 skill half, research-build S487) — `cascadeRateRule` block in `scripts/cron-desk-writer.js` shared system prompt (static ban until support lands, then flip off). `/sift` skill half landed verbatim per kimi's drafted diff (`output/kimi/engine102/sift-rate-guidance-proposal.md`) into `.claude/skills/sift/SKILL.md` §Step 3 neighborhood-state block (S245), version bumped 2.7 → 2.8 with a v2.8 changelog entry citing this task. Both halves share the same flip-off condition: engine.102 Tasks 6-7 ground support landing per metric. engine.102 now fully closed — row moved to `done-pending-archive`.
 
 ---
 

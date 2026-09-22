@@ -34,7 +34,14 @@ given model can silently no-op and still look complete in chat; measured
 2026-09-22 model bake-off in `docs/MODEL_HIERARCHY.md` §4).
 
 ## Queue (next jobs)
-*(empty — add bounded jobs here)*
+- Dead `checkDatawakeMove()`, `scripts/civicMustDecide.js:184` — no live caller
+  (grep confirmed: only its own test file + the module.exports list). Reads
+  `rec.action`, a field civic.38 Task 1 retired (every datawake rec now
+  carries `action: null`) — kimi flagged it 2026-09-20 as rot, re-point-or-
+  delete. Delete the function, its `module.exports` entry, and the two
+  `checkDatawakeMove` assertions in `scripts/civicMustDecide.test.js` (the
+  `nothing is happening`/`no-action` case and the `mobilization request`
+  case). Leave every other export and test line untouched.
 
 ## Recently closed (trim periodically; full record in git)
 - Dead `FACTION_AGENT` constant, `cron-civic-run.js` — **ACCEPTED**, `1fac1cd1`

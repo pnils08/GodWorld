@@ -1,8 +1,8 @@
 ---
 name: sift
 description: Editorial planning for the edition. Reads sheet-primary canon (Oakland_Sports_Feed, Riley_Digest, Initiative_Tracker, Simulation_Ledger) + canon archive + NEWSROOM_MEMORY + city-hall production log. Proposes stories under cadence caps, locks slate via Mike approval gate, emits one brief per article slot + dispatch.json + letters candidate pool. The game moment.
-version: "2.7"
-updated: 2026-09-05
+version: "2.8"
+updated: 2026-09-22
 tags: [media, active]
 effort: high
 disable-model-invocation: true
@@ -32,6 +32,8 @@ v1.x companion files: [[../../../docs/media/brief_template|brief_template]] (v1)
 **v2.3 (S305, pipeline.42):** the v4 deck's rich content (`What/Why/Citizens/CitizenEvents/Businesses/Magnitude/Trend`) flagged-but-unused in v2.2 is now consumed by candidate generation as an **enrichment layer** (Step 1 reads it; Step 3 §3d applies it). It deepens feed-derived candidates with engine-authored cause + citizen anchors (three-layer threading for free); it is **NOT** a parallel candidate stream — a deck row only becomes a standalone candidate for a genuine feed-missed event that clears the S257 citizen-protagonist lens + narrative-weight test, so the known-noisy deck can't flood the slate with engine-civic initiative-theater. **Dual-schema / degrade-safe:** if the running deck lacks the v4 content columns (prod still on legacy schema, whichever cycle the seed system deploys — C101 or C102), enrichment is a no-op and candidate-gen runs feed-only exactly as before. Sandbox (on v4) gets enrichment; legacy prod degrades silently. Deck `Citizens` stays a hint — MCP `lookup_citizen` verification at Step 4 is still mandatory (provenance fence, RB-1). `Magnitude`/`Trend` are a labeled content signal, never a priority proxy (Engine-A `PriorityScore` remains the only ranking authority, Step 6).
 
 **v2.7 (S424, pipeline.41 Task 8):** Step 3 gains a sixth bucket, **TENSION-REGISTER**, sourced by new **§3e** — reads `logs/citizen-tension-state.json` (the open-question register citizen wakes leave behind) and emits one candidate per OPEN entry (`{POPID} | "{q}" | opened c{cy}`, flagged `source: "tension-register"`). Subjective, never fact: a reporter can door-knock the question (interview/dispatch), but the tension text itself never anchors a brief as an established claim, and any citizen it names still clears the standard Step 4 `lookup_citizen` verification (same subjective→canon wall as loop-bot reflections, Step 4 provenance fence). Empty register (no OPEN entries) → no TENSION-REGISTER candidates, section absent.
+
+**v2.8 (S487, engine.102 W5 Task 9 skill half):** Step 3 neighborhood-state block (S245) gains the cascade rate grounding rule — bare citywide illness/employment/crisis rates can't anchor a candidate, only ledger/hospital/demographic-supported figures can; migration flows carry a "city model estimate" label. Mirrors the cron half (`cascadeRateRule`, `a65497b6`) landed 2026-08-09; static until engine.102 Tasks 6–7 ground support lands per metric, then both halves flip off together. Kimi drafted the diff 2026-08-10 (`output/kimi/engine102/sift-rate-guidance-proposal.md`); landed here by research-build.
 
 ---
 
@@ -331,6 +333,8 @@ Texture pieces may have empty strings on the unused layer (e.g., pure atmospheri
 **Neighborhood state (S245 — when the piece is set in a neighborhood):**
 - The baseline brief (`output/baseline_briefs_c{XX}.json`) carries `neighborhoodState` (crime / retail / sentiment with cycle-over-cycle deltas, median income + rent, displacement pressure, gentrification phase) and `neighborhoodResidents` (bounded, notable-first), built from `lib/neighborhoodSlice`. Carry these into the enriched candidate. If a slot has no matching baseline brief, call `get_neighborhood_state(neighborhood)` for the same figures.
 - **The engine is the source of truth for what a neighborhood is.** A condition it did not report — displacement, blight, decline, struggle, recovery — does not exist for that neighborhood this cycle. Ground the simulation layer in the figures; do not narrate against them. (This is data-fidelity, not a tone rule: the C95 West Oakland "displacement" front page was written against a literally-empty `HousingPressure` field (pre-S315: `DisplacementPressure`).)
+
+  - **Cascade rate grounding (engine.102 W5 — hard rule, static until cascade support lands).** Never propose or frame a candidate around a bare citywide illness/employment/crisis rate as if it were census fact — the citywide dial is a model face, not ground support. Rate figures enter a brief only attributed to the layer that supports them (ledger counts, hospital census, neighborhood demographics). Migration flows may be cited with the label "city model estimate". This mirrors the `cascadeRateRule` block in `scripts/cron-desk-writer.js` (cron half, `a65497b6`); when engine.102 Tasks 6–7 ground support lands for a metric, this rule relaxes for that metric and both halves flip off together.
 
 **Enriched candidate shape (additions to Step 3 candidate):**
 

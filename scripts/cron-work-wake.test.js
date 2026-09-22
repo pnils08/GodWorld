@@ -110,12 +110,26 @@ console.log('=== selection ===');
   ok(due.picks.length === 2, 'duty-day filter excludes wed-only pack');
   var lru = wake.selectDue(pkgs, 107, { recent: ['POP-99901'], wokenCycle: {} }, { day: 'tue', limit: 1 });
   ok(lru.picks[0] && lru.picks[0].key === 'b', 'LRU: least-recently-woken first');
-  var guard = wake.selectDue(pkgs, 107, { recent: [], wokenCycle: { 'POP-99901': 107 } }, { day: 'tue', limit: 5 });
-  ok(guard.picks.length === 1 && guard.picks[0].key === 'b', 'once-per-cycle guard excludes already-woken popid');
-  var forced = wake.selectDue(pkgs, 107, { recent: [], wokenCycle: { 'POP-99903': 107 } }, { forceKey: 'c', day: 'mon', limit: 1 });
+  var guard = wake.selectDue(pkgs, 107, { recent: [], wokenCycle: { 'POP-99901:tue': 107 } }, { day: 'tue', limit: 5 });
+  ok(guard.picks.length === 1 && guard.picks[0].key === 'b', 'once-per-cycle guard excludes already-woken popid:day');
+  var forced = wake.selectDue(pkgs, 107, { recent: [], wokenCycle: { 'POP-99903:mon': 107 } }, { forceKey: 'c', day: 'mon', limit: 1 });
   ok(forced.picks.length === 1 && forced.picks[0].key === 'c', '--pack forces past duty-day and cycle guard');
   var missing = wake.selectDue(pkgs, 107, { recent: [], wokenCycle: {} }, { forceKey: 'nope' });
   ok(missing.picks.length === 0, '--pack with unknown key wakes nothing');
+
+  // Regression, adversarial review 2026-09-22: a multi-day dutyDays pack
+  // (e.g. ["tue","thu"]) shares one cycle number across both days. A bare-popid
+  // wokenCycle key wrongly nulled out the second day; the key must be popid:day.
+  var multiDay = {
+    d: Object.assign({}, SYNTH_PKG, { persona: 'd', popid: 'POP-99904', dutyDays: ['tue', 'thu'] }),
+  };
+  var tueWake = wake.selectDue(multiDay, 108, { recent: [], wokenCycle: {} }, { day: 'tue', limit: 1 });
+  ok(tueWake.picks.length === 1 && tueWake.day === 'tue', 'tue/thu pack wakes on Tuesday');
+  var afterTue = { recent: ['POP-99904'], wokenCycle: { 'POP-99904:tue': 108 } };
+  var thuStillDue = wake.selectDue(multiDay, 108, afterTue, { day: 'thu', limit: 1 });
+  ok(thuStillDue.picks.length === 1, 'same cycle, same popid, Thursday still wakes it (bug: bare-popid key suppressed this)');
+  var tueAgainSameCycle = wake.selectDue(multiDay, 108, afterTue, { day: 'tue', limit: 1 });
+  ok(tueAgainSameCycle.picks.length === 0, 'same cycle, same day, already woken — guard still holds per-day');
 })();
 
 console.log('=== workMoveLine — a director shift is a work move (civic.38 ruling (d)) ===');

@@ -2164,8 +2164,17 @@ function callVoteEligibility(initId, office, ctx) {
   const domain = String(row.PolicyDomain || '').trim().toLowerCase();
   if (ctx.petitionData === undefined && typeof ctx.loadPetitionData === 'function') ctx.petitionData = ctx.loadPetitionData();
   if (!ctx.petitionData) return 'call-vote-counter-unavailable';
-  const res = require('./civicPetitions').countPetition({ policyDomain: domain, hoods }, ctx.petitionData,
-    { supportBand: PETITION_SUPPORT_BANDS[domain] != null ? PETITION_SUPPORT_BANDS[domain] : undefined });
+  let res;
+  try {
+    res = require('./civicPetitions').countPetition({ policyDomain: domain, hoods }, ctx.petitionData,
+      { supportBand: PETITION_SUPPORT_BANDS[domain] != null ? PETITION_SUPPORT_BANDS[domain] : undefined });
+  } catch (e) {
+    // Datawakes run synchronously inside runDatawake() — an uncaught throw here
+    // would abort the whole seat's turn, not just this move. Fail the move, not
+    // the run (found in adversarial review, 2026-09-22; callVoteSweep already
+    // guards the same call this way).
+    return 'call-vote-counter-error(' + e.message + ')';
+  }
   const why = res && res.support && res.support.reason;
   if (why !== 'domain-rules-deferred') return 'call-vote-not-a-deferred-domain(' + initId + ' — counter says ' + (why || 'unknown') + ')';
   return null;

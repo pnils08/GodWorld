@@ -209,15 +209,19 @@ function dayAbbrev(d) { return ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat']
 
 function selectDue(packages, cycle, state, opts) {
   opts = opts || {};
+  const day = opts.day || dayAbbrev();
   if (opts.forceKey) {
     const v = packages[opts.forceKey];
-    if (!v) return { picks: [], note: '--pack ' + opts.forceKey + ' not in registry' };
-    return { picks: [{ key: opts.forceKey, value: v }], note: 'forced' };
+    if (!v) return { picks: [], note: '--pack ' + opts.forceKey + ' not in registry', day };
+    return { picks: [{ key: opts.forceKey, value: v }], note: 'forced', day };
   }
   const woken = (state && state.wokenCycle) || {};
-  const due = registry.duePackages(packages, opts.day || dayAbbrev(), (state && state.recent) || [])
-    .filter(({ value }) => Number(woken[value.popid]) !== Number(cycle));
-  return { picks: due.slice(0, opts.limit || 1), note: due.length ? 'rota' : 'nothing due' };
+  // Keyed by popid:day, not bare popid — a multi-day dutyDays pack (e.g. ["tue","thu"])
+  // shares one cycle number across both days, so a bare-popid key would wrongly
+  // suppress the second day's wake (found in adversarial review, 2026-09-22).
+  const due = registry.duePackages(packages, day, (state && state.recent) || [])
+    .filter(({ value }) => Number(woken[value.popid + ':' + day]) !== Number(cycle));
+  return { picks: due.slice(0, opts.limit || 1), note: due.length ? 'rota' : 'nothing due', day };
 }
 
 // ---- voice -----------------------------------------------------------------------------------
@@ -295,14 +299,14 @@ async function main() {
   const cycle = Number(arg('cycle', null)) || (() => { try { return getCurrentCycle(); } catch (e) { return null; } })();
   const packages = registry.loadPackages();
   const state = loadState();
-  const { picks, note } = selectDue(packages, cycle, state, { forceKey: FORCE_PACK, limit: LIMIT });
+  const { picks, note, day } = selectDue(packages, cycle, state, { forceKey: FORCE_PACK, limit: LIMIT });
   if (!picks.length) { logLine(`nothing to wake (${note}, cycle=${cycle}, dry=${DRY})`); return; }
   logLine(`work-wake: ${picks.length} pack(s) due (${note}, cycle=${cycle}, dry=${DRY})`);
   for (const { value: pkg } of picks) {
     const okWake = await wakeOne(pkg, cycle, state);
     if (okWake && !DRY) {
       state.recent = [pkg.popid, ...(state.recent || []).filter((p) => p !== pkg.popid)].slice(0, RECENT_MEMORY);
-      state.wokenCycle = Object.assign({}, state.wokenCycle, { [pkg.popid]: cycle });
+      state.wokenCycle = Object.assign({}, state.wokenCycle, { [pkg.popid + ':' + day]: cycle });
       saveState(state);
     }
   }

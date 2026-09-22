@@ -2074,9 +2074,10 @@ function datawakeUserPrompt(pack, wallInj, office) {
     'JSON only: {"office":"' + voiceSlug(office.agentDir) + '","holder":"' + office.holder + '","statement":"","moves":[],"numberMoved":""}',
     'statement is one string that answers THIS WEEK\'S LEVER from the pack. Not a statement object. Not a prior-wall quote.',
     // civic.38 Task 1 — the closed move set. One consequential move per wake.
-    'moves: at most ONE move from this closed set — {"type":"propose","title":"","intervention":"<catalog key>","hoods":[""],"problem":""} | {"type":"work","initiativeId":"INIT-…"} | {"type":"answer","confrontationId":"…","text":""} | {"type":"canvass","hood":"","note":""}. ' +
+    'moves: at most ONE move from this closed set — {"type":"propose","title":"","intervention":"<catalog key>","hoods":[""],"problem":""} | {"type":"work","initiativeId":"INIT-…"} | {"type":"answer","confrontationId":"…","text":""} | {"type":"canvass","hood":"","note":""} | {"type":"call-vote","initiativeId":"INIT-…"}. ' +
       'work only names an initiative on YOUR board (game.boardIds). propose and canvass name only hoods inside your own district' +
       (/^D\d$/.test(String(office.district || '')) ? '' : ' (your seat is citywide — any real neighborhood)') +
+      '. call-vote names a petition-pending row (proposed, no vote scheduled) whose domain has no petition rule — the mayor may call any such row, a district seat only one whose hoods sit in their district, once per row per week' +
       '. propose.intervention comes only from the intervention catalog named in your pack. A move that breaks these rules is discarded, not corrected.',
     conf ? 'YOU HAVE AN UNANSWERED DIRECTIVE (' + conf.id + '). An {"type":"answer",...} move responding to it is expected. Bind confrontationId exactly to that directive; only one answer is accepted per directive and seat. No new consequence is attached.' : 'No answer move is available unless game.confrontationIds names an unanswered directive for this seat.',
     'No headcount, percentage, or dollar figure unless that exact number appears above. Progress with no cited metric is described in words ("ahead of schedule", "significant headway") — never estimated.',
@@ -2116,7 +2117,59 @@ function datawakeStatementText(cand) {
 // district, an unknown move type — dropped with a loud line, never fatal.
 // ---------------------------------------------------------------------------
 
-const MOVE_TYPES = ['propose', 'work', 'answer', 'canvass'];
+const MOVE_TYPES = ['propose', 'work', 'answer', 'canvass', 'call-vote'];
+
+// The beats dump of the tracker — the same rows petitionGateSweep counts
+// against. Shared by the call-vote validator (datawake) and sweep (Sunday).
+function trackerBeatRows(root) {
+  const f = path.join(root || ROOT, 'output', 'beats', 'Initiative_Tracker.jsonl');
+  if (!fs.existsSync(f)) return null;
+  return fs.readFileSync(f, 'utf8').split('\n').filter(Boolean)
+    .map(l => { try { return JSON.parse(l); } catch (_) { return null; } }).filter(Boolean);
+}
+
+// game-loop plan amendment (builder 2026-09-21): the call-vote escape hatch.
+// A petition-pending row (Status proposed, blank VoteCycle) whose domain has
+// NO petition rule — the counter reports domain-rules-deferred — can be sent
+// to next cycle's vote by the mayor, or by the district seat whose district
+// holds one of the row's hoods. One per row per week. It can never bypass a
+// real band (a banded domain reports cleared/blocked, not deferred) and never
+// touches an unplayable one (housing/safety report domain-not-playable).
+// Returns null when eligible, else the rejection reason.
+function callVoteEligibility(initId, office, ctx) {
+  const row = (ctx.trackerRows || []).find(r => String(r.InitiativeID || '') === initId);
+  if (!row) return 'call-vote-row-not-found(' + initId + ')';
+  if (String(row.Status || '').trim() !== 'proposed' || String(row.VoteCycle || '').trim()) {
+    return 'call-vote-row-not-petition-pending(' + initId + ' — Status=' + (row.Status || '?') + ', VoteCycle=' + (row.VoteCycle || 'blank') + ')';
+  }
+  const ledger = ctx.moveLedger;
+  if (ledger) {
+    for (const mv of ledger.values()) {
+      if (mv && mv.type === 'call-vote' && mv.status === 'pending' && mv.payload && mv.payload.initiativeId === initId) {
+        return 'call-vote-already-filed-this-week(' + initId + ' by ' + mv.agentDir + ')';
+      }
+    }
+  }
+  const hoods = String(row.AffectedNeighborhoods || '').split(',').map(s => s.trim()).filter(Boolean);
+  const isMayor = /^MAYOR/.test(String(office.officeId || '')) || String(office.agentDir || '') === 'civic-office-mayor';
+  if (!isMayor) {
+    const district = String(office.district || '');
+    if (!/^D\d$/.test(district)) return 'call-vote-seat-not-eligible(' + (office.officeId || office.agentDir || '?') + ' — only the mayor or a district seat holding the row\'s hoods)';
+    if (ctx.geographyIssue) return 'geography-unavailable(' + ctx.geographyIssue + ')';
+    const c2p = ctx.childToParent || {};
+    if (!hoods.some(h => getDistrictForNeighborhood(foldHood(h, c2p)) === district)) {
+      return 'call-vote-district-mismatch(' + initId + ' hoods ' + (hoods.join('/') || 'none') + ' — none in ' + district + ')';
+    }
+  }
+  const domain = String(row.PolicyDomain || '').trim().toLowerCase();
+  if (ctx.petitionData === undefined && typeof ctx.loadPetitionData === 'function') ctx.petitionData = ctx.loadPetitionData();
+  if (!ctx.petitionData) return 'call-vote-counter-unavailable';
+  const res = require('./civicPetitions').countPetition({ policyDomain: domain, hoods }, ctx.petitionData,
+    { supportBand: PETITION_SUPPORT_BANDS[domain] != null ? PETITION_SUPPORT_BANDS[domain] : undefined });
+  const why = res && res.support && res.support.reason;
+  if (why !== 'domain-rules-deferred') return 'call-vote-not-a-deferred-domain(' + initId + ' — counter says ' + (why || 'unknown') + ')';
+  return null;
+}
 
 // The intervention catalog lives in lib/initiativePhaseContract.js (Task 4
 // step 0, engine-sheet's file). Until it lands, propose is unvalidatable and
@@ -2208,6 +2261,11 @@ function validateDatawakeMoves(rawMoves, ctx) {
     } else if (type === 'canvass') {
       if (!String(m.hood || '').trim()) reason = 'canvass-missing-hood';
       else reason = hoodAuthorityReason(office, m.hood, c2p);
+    } else if (type === 'call-vote') {
+      const id = String(m.initiativeId || '').trim();
+      if (!id) reason = 'call-vote-missing-initiativeId';
+      else if (!boardIds.has(id)) reason = 'initiative-not-on-board(' + id + ')';
+      else reason = callVoteEligibility(id, office, ctx);
     }
     if (reason) {
       rejected.push({ move: m, reason });
@@ -2476,6 +2534,88 @@ function petitionGateSweep(root, cycle) {
   return { pending: pending.length, gated };
 }
 
+// ---------------------------------------------------------------------------
+// game-loop plan amendment (builder 2026-09-21): the call-vote fold. Pending
+// call-vote moves on the week's ledger schedule a vote for a petition-pending
+// row whose domain has no petition rule — the escape hatch for rows like
+// INIT-003 that no band will ever clear. The seat was validated at file time
+// (mayor or the district seat holding the row's hoods; one per row per week);
+// the sweep re-checks the world at fold time: the row must still be
+// petition-pending and the counter must still say domain-rules-deferred (a
+// band landing mid-week closes the hatch). The write rides the petition
+// sweep's gated channel — same holding decisions file, same legal Status
+// transition, same validator + gate + normalizeTrackerWrite path.
+// ---------------------------------------------------------------------------
+function callVoteSweep(root, cycle) {
+  const folded = loadMoveLedgerFolded(root, cycle);
+  if (!folded) return { filed: 0, scheduled: 0 };
+  const calls = [...folded.values()].filter(m => m.status === 'pending' && m.type === 'call-vote' && m.payload && m.payload.initiativeId);
+  if (!calls.length) return { filed: 0, scheduled: 0 };
+  // One per row per week — enforced at filing; first ledger line wins here too.
+  const byInit = new Map();
+  for (const m of calls) if (!byInit.has(m.payload.initiativeId)) byInit.set(m.payload.initiativeId, m);
+
+  const rows = trackerBeatRows(root);
+  if (!rows) { log('call-vote: no beats Initiative_Tracker dump — skipped'); return { filed: byInit.size, scheduled: 0 }; }
+  const petitions = require('./civicPetitions');
+  let data;
+  try {
+    data = petitions.loadLocalData({ root, cycle: Number(cycle) });
+  } catch (e) {
+    log('call-vote: local data load failed (non-fatal): ' + e.message);
+    return { filed: byInit.size, scheduled: 0, error: e.message };
+  }
+  const decisionsDir = path.join(root, 'output', 'city-civic-database', 'initiatives');
+  const scheduledMoves = {};
+  for (const [initId, m] of byInit) {
+    const row = rows.find(r => String(r.InitiativeID || '') === initId);
+    if (!row) { log('call-vote: ' + initId + ' not on the tracker dump — skipped (' + m.moveId + ')'); continue; }
+    if (String(row.Status || '').trim() !== 'proposed' || String(row.VoteCycle || '').trim()) {
+      log('call-vote: ' + initId + ' no longer petition-pending (Status=' + row.Status + ', VoteCycle=' + (row.VoteCycle || 'blank') + ') — skipped');
+      continue;
+    }
+    const domain = String(row.PolicyDomain || '').trim().toLowerCase();
+    const hoods = String(row.AffectedNeighborhoods || '').split(',').map(s => s.trim()).filter(Boolean);
+    let res;
+    try {
+      res = petitions.countPetition({ policyDomain: domain, hoods }, data,
+        { supportBand: PETITION_SUPPORT_BANDS[domain] != null ? PETITION_SUPPORT_BANDS[domain] : undefined });
+    } catch (e) {
+      log('call-vote: ' + initId + ' recount failed (non-fatal): ' + e.message);
+      continue;
+    }
+    const why = res && res.support && res.support.reason;
+    if (why !== 'domain-rules-deferred') {
+      log('call-vote: ' + initId + ' counter now says ' + (why || 'unknown') + ' — escape hatch closed, skipped (' + m.moveId + ')');
+      continue;
+    }
+    const slug = slugForInitiative(decisionsDir, initId);
+    const dir = path.join(decisionsDir, slug);
+    const file = path.join(dir, 'decisions_c' + cycle + '.json');
+    const d = readJson(file) || { initiative: initId, initiativeId: initId, cycle: Number(cycle),
+      primaryVoice: 'call-vote', consolidatedFrom: [], trackerUpdates: {} };
+    d.trackerUpdates = d.trackerUpdates || {};
+    d.trackerUpdates.Status = 'pending-vote';
+    d.trackerUpdates.ImplementationPhase = 'vote-scheduled';
+    d.trackerUpdates.VoteCycle = Number(cycle) + 1;
+    d._callVote = { moveId: m.moveId, agentDir: m.agentDir };
+    fs.mkdirSync(dir, { recursive: true });
+    fs.writeFileSync(file, JSON.stringify(d, null, 2) + '\n');
+    scheduledMoves[initId] = m.moveId;
+    log('call-vote: ' + initId + ' vote called by ' + m.agentDir + ' (' + m.moveId + ') — vote-scheduled write staged in ' + path.relative(root, file) + ' (gate + clerk still apply)');
+  }
+  const scheduled = Object.keys(scheduledMoves).length;
+  if (scheduled) {
+    // Join the fold manifest so the apply posts each move's outcome line.
+    const manifestPath = path.join(root, 'output', 'cron-civic', 'moves', 'fold_c' + cycle + '.json');
+    const manifest = readJson(manifestPath) || { cycle: Number(cycle) };
+    manifest.callVotes = scheduledMoves;
+    fs.mkdirSync(path.dirname(manifestPath), { recursive: true });
+    fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
+  }
+  return { filed: byInit.size, scheduled };
+}
+
 // Numeric grounding: every digit-token in a datawake's output must appear in
 // the office's own data slice (commas stripped). Worded quantities ("seven
 // neighborhoods") pass; invented statistics ("renewals up 8%") don't — this
@@ -2683,6 +2823,12 @@ async function runDatawake() {
         confrontations: ((pack.game || {}).confrontations || {}).open || [],
         answeredConfrontationIds: new Set((((pack.game || {}).confrontations || {}).answeredIds) || []),
         answerEvidenceAvailable: ((pack.game || {}).confrontations || {}).available === true,
+        // call-vote (game-loop amendment 2026-09-21): the petition-pending rows
+        // off the beats dump, the week's ledger re-read per seat (a move filed
+        // by an earlier seat THIS run is already visible), and a lazy counter.
+        trackerRows: trackerBeatRows(ROOT) || [],
+        moveLedger: loadMoveLedgerFolded(ROOT, cycle),
+        loadPetitionData: () => require('./civicPetitions').loadLocalData({ root: ROOT, cycle: Number(cycle) }),
       });
       for (const rj of mv.rejected) {
         log('[datawake] MOVE REJECTED ' + office.agentDir + ' — ' + rj.reason + ' :: ' + JSON.stringify(rj.move).slice(0, 160));
@@ -3008,6 +3154,12 @@ function closeDeterministic(cycle) {
     // VoteCycle cycle+1 — the one legal Status transition).
     petitionGateSweep(ROOT, cycle);
 
+    // game-loop amendment (builder 2026-09-21): the call-vote escape hatch
+    // rides the same gated channel, after the sweep — a band that cleared
+    // already scheduled the row, and a deferred domain is the hatch's
+    // precondition, so the two never write the same row.
+    callVoteSweep(ROOT, cycle);
+
     execFileSync('node', [path.join(ROOT, 'scripts', 'applyTrackerUpdates.js'), String(cycle)], { cwd: ROOT, stdio: 'inherit', timeout: 300000 });
     return { ok: true, dryOk: true };
   } catch (e) {
@@ -3158,6 +3310,8 @@ module.exports = { modelChainFor, FALLBACK_MODELS, sentimentWord, crimeWord, ret
   loadMoveLedgerFolded, foldMovesIntoDecisions, slugForInitiative,
   // civic.38 Task 6.3 — petition sweep
   petitionGateSweep, PETITION_SUPPORT_BANDS,
+  // game-loop amendment 2026-09-21 — the call-vote escape hatch
+  callVoteEligibility, callVoteSweep, trackerBeatRows,
   // civic.39 — week-boundary stage machine (exported for scripts/cron-civic-tick.test.js)
   WEEK_STAGES, VERDICT_CUTOFF_MS, weekStatePath, blankWeekState, loadWeekState, saveWeekState,
   engineFireInfo, refreshWeekState, decideApply, closeDeterministic, runGate, maybeApply, runTick };

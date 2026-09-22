@@ -721,6 +721,13 @@ async function main() {
         lines.push({ moveId: id, cycle: CYCLE, status: ok === true ? 'applied' : 'failed',
           detail: ok === true ? 'candidate row appended to Initiative_Tracker' : String(ok), at });
       }
+      // game-loop amendment 2026-09-21 — call-vote moves scheduled by the
+      // Sunday sweep get their outcome from the row write like a work move.
+      for (const [initId, id] of Object.entries(manifest.callVotes || {})) {
+        const ok = writeOutcome[initId];
+        lines.push({ moveId: id, cycle: CYCLE, status: ok === true ? 'applied' : 'failed',
+          detail: ok === true ? `vote scheduled for ${initId} (VoteCycle ${CYCLE + 1})` : 'write failed: ' + (ok || 'row not processed'), at });
+      }
       if (lines.length) {
         const ledgerFile = path.join(ROOT, 'output', 'cron-civic', 'moves', `moves_c${CYCLE}.jsonl`);
         fs.mkdirSync(path.dirname(ledgerFile), { recursive: true });

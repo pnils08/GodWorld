@@ -15,6 +15,10 @@
  *   Acceptance 2 — tick twice: the second run does nothing (no state rewrite).
  *   Acceptance 7 — an unreachable clerk/sanity model defers; a real FAIL blocks.
  *
+ * Also covers the game-loop plan's call-vote escape hatch (builder amendment
+ * 2026-09-21, docs/plans/2026-09-19-civic-wake-game-loop.md §Open questions):
+ * callVoteEligibility (validator side) and callVoteSweep (Sunday fold side).
+ *
  * Run: node scripts/cron-civic-tick.test.js
  */
 
@@ -27,7 +31,9 @@ const civicRun = require('./cron-civic-run');
 const {
   WEEK_STAGES, VERDICT_CUTOFF_MS,
   blankWeekState, refreshWeekState, saveWeekState, weekStatePath, decideApply,
+  callVoteEligibility, callVoteSweep, validateDatawakeMoves,
 } = civicRun;
+const { getDistrictForNeighborhood } = require('../lib/districtMap');
 
 let passed = 0;
 let failed = 0;
@@ -307,6 +313,160 @@ test('every WEEK_STAGE has a record in a blank state', () => {
     assert.strictEqual(s.stages[name].status, 'waiting');
     assert.strictEqual(s.stages[name].attempts, 0);
   }
+});
+
+// ────────────────────────────────────────────────────────────────────────────
+console.log('\ncall-vote — the escape hatch (game-loop amendment 2026-09-21)');
+// ────────────────────────────────────────────────────────────────────────────
+
+// Minimal local-data fixture for the real counter: two mapped hoods, complete
+// demographics, an empty hospital ledger, crime rows for the safety case.
+const CV_HOOD = 'Fruitvale';       // D3
+const CV_OTHER = 'Jack London';    // D2
+const CV_DATA = {
+  cycle: 108,
+  Neighborhood_Map: [{ Neighborhood: CV_HOOD, ChildAreas: '' }, { Neighborhood: CV_OTHER, ChildAreas: '' }],
+  Neighborhood_Demographics: [
+    { Neighborhood: CV_HOOD, Students: 100, Adults: 200, Seniors: 50, Sick: 10 },
+    { Neighborhood: CV_OTHER, Students: 100, Adults: 100, Seniors: 100, Sick: 5 },
+  ],
+  Hospital_Ledger: [],
+  Crime_Metrics: [
+    { Neighborhood: CV_HOOD, ViolentLevel: 2 },
+    { Neighborhood: CV_OTHER, ViolentLevel: 1 },
+  ],
+};
+const CV_ROWS = [
+  { InitiativeID: 'INIT-003', Status: 'proposed', VoteCycle: '', PolicyDomain: 'transit', AffectedNeighborhoods: CV_HOOD },
+  { InitiativeID: 'INIT-006', Status: 'passed', VoteCycle: '94', PolicyDomain: 'sports', AffectedNeighborhoods: CV_OTHER },
+  { InitiativeID: 'INIT-009', Status: 'proposed', VoteCycle: '', PolicyDomain: 'safety', AffectedNeighborhoods: CV_HOOD },
+  { InitiativeID: 'INIT-010', Status: 'proposed', VoteCycle: '', PolicyDomain: 'health', AffectedNeighborhoods: CV_HOOD },
+];
+const MAYOR = { officeId: 'MAYOR-01', agentDir: 'civic-office-mayor', district: 'citywide' };
+const D3_SEAT = { officeId: 'COUNCIL-D3', agentDir: 'civic-office-council-d3', district: 'D3' };
+const D9_SEAT = { officeId: 'COUNCIL-D9', agentDir: 'civic-office-council-d9', district: 'D9' };
+const CHIEF = { officeId: 'CHIEF-POLICE', agentDir: 'civic-office-police-chief', district: 'citywide' };
+assert.strictEqual(getDistrictForNeighborhood(CV_HOOD), 'D3', 'fixture premise: Fruitvale is D3');
+
+function cvCtx(office, over) {
+  return Object.assign({
+    office, cycle: 108, childToParent: {},
+    trackerRows: CV_ROWS, moveLedger: null, petitionData: CV_DATA,
+  }, over || {});
+}
+
+test('the mayor may call a vote on a petition-pending deferred-domain row', () => {
+  assert.strictEqual(callVoteEligibility('INIT-003', MAYOR, cvCtx(MAYOR)), null);
+});
+
+test('the district seat holding the row\'s hoods may call it', () => {
+  assert.strictEqual(callVoteEligibility('INIT-003', D3_SEAT, cvCtx(D3_SEAT)), null);
+});
+
+test('a district seat whose district does not hold the row is refused', () => {
+  const r = callVoteEligibility('INIT-003', D9_SEAT, cvCtx(D9_SEAT));
+  assert.ok(/^call-vote-district-mismatch/.test(r), r);
+});
+
+test('a citywide non-mayor seat is refused', () => {
+  const r = callVoteEligibility('INIT-003', CHIEF, cvCtx(CHIEF));
+  assert.ok(/^call-vote-seat-not-eligible/.test(r), r);
+});
+
+test('a row that is not petition-pending is refused', () => {
+  const r = callVoteEligibility('INIT-006', MAYOR, cvCtx(MAYOR));
+  assert.ok(/^call-vote-row-not-petition-pending/.test(r), r);
+});
+
+test('one per row per week — a second filing is refused', () => {
+  const ledger = new Map([['MV-108-civic-office-mayor-2026-09-22', {
+    moveId: 'MV-108-civic-office-mayor-2026-09-22', type: 'call-vote', status: 'pending',
+    agentDir: 'civic-office-mayor', payload: { initiativeId: 'INIT-003' },
+  }]]);
+  const r = callVoteEligibility('INIT-003', D3_SEAT, cvCtx(D3_SEAT, { moveLedger: ledger }));
+  assert.ok(/^call-vote-already-filed-this-week/.test(r), r);
+});
+
+test('the hatch never opens on a not-playable domain (safety)', () => {
+  const r = callVoteEligibility('INIT-009', MAYOR, cvCtx(MAYOR));
+  assert.ok(/^call-vote-not-a-deferred-domain/.test(r) && /domain-not-playable/.test(r), r);
+});
+
+test('the hatch never opens where the band mechanism exists (health, band unset)', () => {
+  const r = callVoteEligibility('INIT-010', MAYOR, cvCtx(MAYOR));
+  assert.ok(/^call-vote-not-a-deferred-domain/.test(r) && /support-band-unset/.test(r), r);
+});
+
+test('validator integration: call-vote accepts a legal move, rejects an off-board row', () => {
+  const ok = validateDatawakeMoves([{ type: 'call-vote', initiativeId: 'INIT-003' }],
+    cvCtx(D3_SEAT, { boardIds: new Set(['INIT-003']) }));
+  assert.strictEqual(ok.accepted.length, 1);
+  assert.strictEqual(ok.accepted[0].payload.initiativeId, 'INIT-003');
+  const bad = validateDatawakeMoves([{ type: 'call-vote', initiativeId: 'INIT-099' }],
+    cvCtx(MAYOR, { boardIds: new Set(['INIT-003']) }));
+  assert.strictEqual(bad.accepted.length, 0);
+  assert.ok(/initiative-not-on-board/.test(bad.rejected[0].reason), bad.rejected[0].reason);
+});
+
+// Sunday fold side — temp-root fixtures, no network.
+function mkCallVoteRoot(rows) {
+  const root = mkRoot();
+  writeJson(root, 'output/beats/meta.json', { cycle: CYCLE });
+  writeJson(root, 'output/engine_audit_c' + CYCLE + '.json', {
+    cycle: CYCLE, snapshots: { Neighborhood_Map: CV_DATA.Neighborhood_Map },
+  });
+  const beats = (name, arr) => fs.writeFileSync(path.join(root, 'output', 'beats', name + '.jsonl'), arr.map(r => JSON.stringify(r)).join('\n') + '\n');
+  fs.mkdirSync(path.join(root, 'output', 'beats'), { recursive: true });
+  beats('Initiative_Tracker', rows);
+  beats('Neighborhood_Demographics', CV_DATA.Neighborhood_Demographics);
+  beats('Crime_Metrics', CV_DATA.Crime_Metrics);
+  return root;
+}
+const CV_MOVE = { moveId: 'MV-500-civic-office-council-d3-2026-09-22', cycle: CYCLE, date: '2026-09-22',
+  agentDir: 'civic-office-council-d3', type: 'call-vote', payload: { initiativeId: 'INIT-003' }, status: 'pending', at: '2026-09-22T00:00:00Z' };
+
+test('callVoteSweep stages the vote-scheduled write and joins the fold manifest', () => {
+  const root = mkCallVoteRoot([CV_ROWS[0]]);
+  fs.mkdirSync(path.join(root, 'output', 'cron-civic', 'moves'), { recursive: true });
+  fs.writeFileSync(path.join(root, 'output', 'cron-civic', 'moves', 'moves_c' + CYCLE + '.jsonl'), JSON.stringify(CV_MOVE) + '\n');
+  const out = callVoteSweep(root, CYCLE);
+  assert.deepStrictEqual(out, { filed: 1, scheduled: 1 });
+  const d = JSON.parse(fs.readFileSync(path.join(root, 'output', 'city-civic-database', 'initiatives', 'init-003', 'decisions_c' + CYCLE + '.json'), 'utf8'));
+  assert.strictEqual(d.trackerUpdates.Status, 'pending-vote');
+  assert.strictEqual(d.trackerUpdates.ImplementationPhase, 'vote-scheduled');
+  assert.strictEqual(d.trackerUpdates.VoteCycle, CYCLE + 1);
+  assert.strictEqual(d._callVote.moveId, CV_MOVE.moveId);
+  const manifest = JSON.parse(fs.readFileSync(path.join(root, 'output', 'cron-civic', 'moves', 'fold_c' + CYCLE + '.json'), 'utf8'));
+  assert.deepStrictEqual(manifest.callVotes, { 'INIT-003': CV_MOVE.moveId });
+});
+
+test('callVoteSweep is byte-idempotent on a re-run', () => {
+  const root = mkCallVoteRoot([CV_ROWS[0]]);
+  fs.mkdirSync(path.join(root, 'output', 'cron-civic', 'moves'), { recursive: true });
+  fs.writeFileSync(path.join(root, 'output', 'cron-civic', 'moves', 'moves_c' + CYCLE + '.jsonl'), JSON.stringify(CV_MOVE) + '\n');
+  callVoteSweep(root, CYCLE);
+  const f = path.join(root, 'output', 'city-civic-database', 'initiatives', 'init-003', 'decisions_c' + CYCLE + '.json');
+  const first = fs.readFileSync(f, 'utf8');
+  callVoteSweep(root, CYCLE);
+  assert.strictEqual(fs.readFileSync(f, 'utf8'), first);
+});
+
+test('callVoteSweep skips a row the world already moved past', () => {
+  const root = mkCallVoteRoot([{ ...CV_ROWS[0], VoteCycle: String(CYCLE + 1) }]);
+  fs.mkdirSync(path.join(root, 'output', 'cron-civic', 'moves'), { recursive: true });
+  fs.writeFileSync(path.join(root, 'output', 'cron-civic', 'moves', 'moves_c' + CYCLE + '.jsonl'), JSON.stringify(CV_MOVE) + '\n');
+  const out = callVoteSweep(root, CYCLE);
+  assert.deepStrictEqual(out, { filed: 1, scheduled: 0 });
+  assert.ok(!fs.existsSync(path.join(root, 'output', 'city-civic-database', 'initiatives', 'init-003')));
+});
+
+test('callVoteSweep skips when the counter no longer says domain-rules-deferred', () => {
+  const root = mkCallVoteRoot([CV_ROWS[2]]); // INIT-009 safety → domain-not-playable
+  const move = { ...CV_MOVE, payload: { initiativeId: 'INIT-009' } };
+  fs.mkdirSync(path.join(root, 'output', 'cron-civic', 'moves'), { recursive: true });
+  fs.writeFileSync(path.join(root, 'output', 'cron-civic', 'moves', 'moves_c' + CYCLE + '.jsonl'), JSON.stringify(move) + '\n');
+  const out = callVoteSweep(root, CYCLE);
+  assert.deepStrictEqual(out, { filed: 1, scheduled: 0 });
 });
 
 // ────────────────────────────────────────────────────────────────────────────

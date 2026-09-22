@@ -129,6 +129,16 @@ pointers:
 
 ## PROD deploy log — full trail
 
+### PROD @120 — engine.255: housing lever off (2026-09-22 ~15:55 Chicago, engine-sheet; bench-proven C109 on live-synced state)
+
+Engine tree `0342ed03`; 2 payload files vs @119 (`civicInitiativeEngine.js` `CIVIC_STAGE_CATALOG_.housing.playable` true → false; `householdFormationEngine.js` `applyHousingReliefBody_` returns `disabled` before arming when `civicHousingReliefEnabled` is 0 and the tab has no `GrossMonthlyRent`). Lib side (`housing-program` `playable:false`, `effectChannel null`, label widened) and five test files rode the same commit. 170 live files, 0 test files. Isolated stage, sandbox id grep-absent; pull-back 169/169 js byte-identical. Script version **107**, web app read back **@107**.
+
+**Why (builder 2026-09-22):** the flat hood-wide rent discount was the wrong shape — a subsidy no seat proposed, duplicating the initiative the world already has (INIT-001 Stabilization Fund, canon a household anti-displacement fund, tagged `economic`, wired to retail). Direction: crons play the game of advancing their districts; original initiatives wired, not window dressing; a budget inside the mechanism. Housing's lever becomes a budgeted disbursement onto flagged households, the Fund as template — design under engine.255.
+
+**What it changes on live at the C109 fire (Sun 2026-09-27):** Household_Ledger stays 13 columns (the four relief columns no longer self-arm while the dial is 0); no seat can propose a `housing-program` row; the petition counter keeps reporting housing `domain-not-playable`. The four housing dials stay on live World_Config as inert keys (enabled 0). Nothing else about the fire changes.
+
+**Bench:** SANDBOX 0908 re-pushed to HEAD `0342ed03` (@93), re-synced from live C108 (82 tabs, 55,489 rows, read-back OK), fire C109 `ok` 114s: Household_Ledger 13 cols / 781 rows, cycleCount 109, Engine_Errors only the synced C108 sports-feed row, INIT-005 took its `conversion` baseline as predicted.
+
 ### PROD @119 — civic.38 Task 9: housing-program playable (2026-09-22 ~13:55 Chicago, engine-sheet deploying research-build's `51b2817f`)
 
 Engine tree `51b2817f`; 1 payload file vs @118 (`civicInitiativeEngine.js`, `CIVIC_STAGE_CATALOG_.housing.playable` false → true; the lib side and six test files rode the same commit, parity pinned 267/267). 170 live files, 0 test files. Isolated stage, sandbox id grep-absent; pull-back 169/169 js byte-identical. Script version **106**, web app read back **@106**.

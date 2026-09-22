@@ -823,7 +823,7 @@ function updateHouseholdLedgerMove_(ctx, householdId, destHood, destRent) {
         var netRent = destRent, relief = 0, initId = '';
         // Rented rows only carry a lease: an owned row that the migration engine
         // moves keeps blank relief columns (its MonthlyRent is a mortgage — the
-        // owner-move rewrite itself is a pre-existing gap, G-EC87).
+        // owner-move rewrite itself is a pre-existing gap, G-EC70).
         var iTypeMv = idx('HousingType');
         var rentedMv = iTypeMv < 0 || String(values[r][iTypeMv] == null ? '' : values[r][iTypeMv]).trim().toLowerCase() === 'rented';
         if (rentedMv && iGross >= 0 && typeof netRentFromGross_ === 'function' && typeof housingReliefForHood_ === 'function' &&

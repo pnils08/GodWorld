@@ -423,7 +423,7 @@
 - **Evidence:** `initiative > 0` is true at any positive phase intensity, `legislation-filed` (0.05) included, and the comment says "a delivering education initiative". Thirty standing cycles = funding × 1.81. Same always-on shape engine.250 removed from the business term (DOCTRINE §15). Live tracker has no education-domain row, so nothing fires.
 - **Status:** OPEN. Fix shape when an education initiative is first proposed: pay on delivering phases only, or on the transition, per the engine.139 rule. The size is a builder call.
 
-### G-EC87 — migration moves an OWNED household and overwrites its mortgage with the destination hood's rent
+### G-EC70 — migration moves an OWNED household and overwrites its mortgage with the destination hood's rent
 
 - **Source:** phase05-citizens/migrationTrackingEngine.js `updateHouseholdLedgerMove_` writes `Neighborhood` + `MonthlyRent = destRent` for any non-dissolved row; it never reads `HousingType`.
 - **Evidence:** bench 0908 C110 (2026-09-22): HH-0084-043 `owned/active` before and after, `MonthlyRent` 4134 → 3625 (West Oakland's median rent), `HousingCost` 0. The wealth engine treats an owned row's `MonthlyRent` as the mortgage payment (engine.159), so the household now "carries" a rent it does not pay, and its purchase price is gone.

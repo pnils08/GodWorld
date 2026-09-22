@@ -182,7 +182,7 @@ const slice = (hoods) => ({ available: true, reason: null, rate: 0.10, hoods: ho
   E.updateHouseholdLedgerMove_(ctx, 'HH-901', 'Laurel', 1300);        // West Oakland → Laurel
   ok(v[1][col('GrossMonthlyRent')] === 1300 && v[1][col('MonthlyRent')] === 1300 && v[1][col('HousingReliefMonthly')] === 0 && v[1][col('HousingReliefInitiativeID')] === '', 'move OUT: gross restored at the new lease, discount cleared');
   E.updateHouseholdLedgerMove_(ctx, 'HH-903', 'Laurel', 1300);        // OWNED row moved by the migration engine
-  ok(v[3][col('MonthlyRent')] === 1300 && v[3][col('GrossMonthlyRent')] === '' && v[3][col('HousingReliefMonthly')] === '' && v[3][col('HousingReliefInitiativeID')] === '', 'an owned mover gets no gross/relief cells (bench C110 HH-0084-043; the mortgage rewrite itself is G-EC87)');
+  ok(v[3][col('MonthlyRent')] === 1300 && v[3][col('GrossMonthlyRent')] === '' && v[3][col('HousingReliefMonthly')] === '' && v[3][col('HousingReliefInitiativeID')] === '', 'an owned mover gets no gross/relief cells (bench C110 HH-0084-043; the mortgage rewrite itself is G-EC70)');
 }
 
 // ---- purchase reads gross, clears relief (source pins) ----

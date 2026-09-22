@@ -29,7 +29,7 @@ pointers:
 
 **Terminal:** engine-sheet executes; codex authored this design only. No engine, schema, config, cron or Sheet change is authorized by this document's existence. Track under the existing civic.38 row through its parent plan, not a duplicate work item.
 
-**Status:** Design complete for builder/engine-sheet review. Implementation tasks below are not started. Numeric policy recommendations are proposals, not recorded builder rulings. Housing remains unplayable and petition support remains disabled in current code.
+**Status:** Builder ruled 2026-09-22 (tenant discount, 10%, four columns, migration) — engine-sheet executing. Implementation tasks below are in progress. Numeric policy recommendations are proposals, not recorded builder rulings. Housing remains unplayable and petition support remains disabled in current code.
 
 **Pointers:**
 - Parent stage and sponsor work: [[plans/2026-09-19-civic-wake-game-loop]] Tasks 4–6.
@@ -232,8 +232,9 @@ Each edit below is a bounded function/contract change; engine-sheet sequences th
 
 ## Open questions
 
-The design offers concrete recommendations above. Builder/engine-sheet acceptance of the tenant-discount semantics and proposed 10% rate is required before changing simulation behavior; the current request authorizes this design only. The existing parent question about a housing **support** band and signature units remains open and does not block deterministic relief or causal bench development. No numeric support threshold is proposed by this document.
+**RULED 2026-09-22 (builder):** tenant rent discount (not income), flat 10% (`civicHousingReliefRate` 0.10, `civicHousingReliefEnabled` false until bench acceptance), the four Household_Ledger columns and the migration script — build as designed; engine-sheet executes. The design offers concrete recommendations above. ~~Builder/engine-sheet acceptance of the tenant-discount semantics and proposed 10% rate is required before changing simulation behavior; the current request authorizes this design only.~~ The existing parent question about a housing **support** band and signature units remains open and does not block deterministic relief or causal bench development. No numeric support threshold is proposed by this document.
 
 ## Changelog
 
+- 2026-09-22 (engine-sheet) — Builder accepted the design's sim calls as recommended; engine.251 moves blocked → in-progress. Wiring card + pre-mortem before the first cut.
 - 2026-09-20 (codex) — Authored design only: preserved gross lease plus net rent relief, verified engine.250 bus/order card, C108 baseline and static sensitivity, stage metric, failure inventory and engine-sheet acceptance tasks.

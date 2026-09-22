@@ -116,6 +116,10 @@ console.log('=== selection ===');
   ok(forced.picks.length === 1 && forced.picks[0].key === 'c', '--pack forces past duty-day and cycle guard');
   var missing = wake.selectDue(pkgs, 107, { recent: [], wokenCycle: {} }, { forceKey: 'nope' });
   ok(missing.picks.length === 0, '--pack with unknown key wakes nothing');
+  var all = wake.selectDue(pkgs, 107, { recent: [], wokenCycle: {} }, { day: 'tue' });
+  ok(all.picks.length === 2, 'no limit -> every due pack wakes (builder ruling 2026-09-22)');
+  var inf = wake.selectDue(pkgs, 107, { recent: [], wokenCycle: {} }, { day: 'tue', limit: Infinity });
+  ok(inf.picks.length === 2, 'limit Infinity -> every due pack wakes');
 
   // Regression, adversarial review 2026-09-22: a multi-day dutyDays pack
   // (e.g. ["tue","thu"]) shares one cycle number across both days. A bare-popid

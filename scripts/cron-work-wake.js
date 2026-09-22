@@ -34,7 +34,11 @@ const ARGV = process.argv.slice(2);
 const DRY = ARGV.includes('--dry-run');
 const arg = (k, d) => { const m = ARGV.find((a) => a.startsWith(`--${k}=`)); return m ? m.split('=')[1] : d; };
 const FORCE_PACK = arg('pack', null);
-const LIMIT = Math.max(1, Number(arg('limit', 1)) || 1);
+// Builder ruling 2026-09-22: workers wake as their jobs need — every due pack
+// wakes each run unless --limit=N caps it. The old default of 1 left the
+// Tuesday-only directors on a ~7-cycle rotation, past the 6-cycle upkeep grace
+// (civic.38 ruling (c)), so a tended service decayed between shifts.
+const LIMIT = arg('limit', null) == null ? Infinity : Math.max(1, Number(arg('limit', null)) || 1);
 
 const BEATS_DIR = path.join(__dirname, '..', 'output', 'beats');
 const NAMES_TSV = path.join(__dirname, '..', 'output', 'citizen-names.tsv');
@@ -221,7 +225,8 @@ function selectDue(packages, cycle, state, opts) {
   // suppress the second day's wake (found in adversarial review, 2026-09-22).
   const due = registry.duePackages(packages, day, (state && state.recent) || [])
     .filter(({ value }) => Number(woken[value.popid + ':' + day]) !== Number(cycle));
-  return { picks: due.slice(0, opts.limit || 1), note: due.length ? 'rota' : 'nothing due', day };
+  const cap = Number.isFinite(opts.limit) && opts.limit > 0 ? opts.limit : due.length; // no limit → every due pack
+  return { picks: due.slice(0, cap), note: due.length ? 'rota' : 'nothing due', day };
 }
 
 // ---- voice -----------------------------------------------------------------------------------

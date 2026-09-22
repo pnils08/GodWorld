@@ -438,6 +438,7 @@ Measured: [[../../output/engine-sheet/2026-09-21-matched-control-c108-c112.json]
 
 ## Changelog
 
+- 2026-09-21 (engine-sheet) — Task 4 step 3 bench-proven on 0908 @85 (C118 both fixtures stalled with PriorPhase + st; C119 one work stamp revived both, the Funded one stood up in the same fire; C120 nothing re-stalled; staged rows never `silence`, no ENGINE-CLOCK marker) and landed **PROD @115** (`7ba27e95`, version 102, read back @102). [[../reference/DEPLOY_HISTORY]] §PROD @115. Codex adversarial review dispatched (read-only) → `docs/research/2026-09-21-codex-civic38-stall-clock-review.md`.
 - 2026-09-21 (engine-sheet) — Task 4 step 3 coded + Node-proven (224/224, three mutations caught), NOT benched: the losing clock (two clocks), stall entry, once-per-stall revival, ruling 2 (staged rows never `silence`, ENGINE-CLOCK hold and v1.9 reschedule legacy-only), T7 yields on staged rows. Rulings 20–24.
 - 2026-09-21 (engine-sheet) — Builder ruled 14/17/18: regress share 0.5; untended clock 12 (new key, Standing/Delivering only); health margin 0.10. Seeds updated, bench World_Config written and read back, live self-arms Sunday.
 - 2026-09-21 (engine-sheet) — Codex delivering review: F3/F4/F5 fixed, bench C117 on 0908 @84 (hold counted past the delivery stamp, `r` present), **PROD @113** (`a342400d`, version 100, read back @100). F1/F2 carried as the engine-wide run-boundary limit. [[../reference/DEPLOY_HISTORY]] §PROD @113.

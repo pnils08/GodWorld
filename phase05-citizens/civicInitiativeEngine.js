@@ -127,6 +127,14 @@ function runCivicInitiativeEngine_(ctx) {
   if (data.length >= 1 && ensureInitiativeStageColumns_(sheet, data[0])) {
     data = sheet.getDataRange().getValues();
   }
+  // engine.255 Task 1: budget columns self-arm the same way, then back-fill once
+  // from the Budget string (only blank cells are ever written).
+  if (data.length >= 1 && ensureInitiativeBudgetColumns_(sheet, data[0])) {
+    data = sheet.getDataRange().getValues();
+  }
+  if (data.length >= 2 && backfillInitiativeBudgets_(sheet, data[0], data.slice(1)).changed > 0) {
+    data = sheet.getDataRange().getValues();
+  }
   if (data.length < 2) {
     Logger.log('civicInitiativeEngine: No initiatives to process');
     return;
@@ -3049,6 +3057,98 @@ function ensureInitiativeStageColumns_(sheet, header) {
   sheet.getRange(1, lastCol + 1, 1, missing.length).setValues([missing]);
   Logger.log('civicInitiativeEngine: appended stage columns to Initiative_Tracker — ' + missing.join(', '));
   return true;
+}
+
+// engine.255 Task 1 — the budget columns. `Budget` is a display string ("$28M");
+// Number() of it is 0, so no engine reader has ever seen a budget. These three
+// self-arm beside the stage columns (same caller, same class) and back-fill once
+// from `Budget`. A row already carrying a parsed BudgetTotal is never re-parsed;
+// a row whose BudgetTotal is blank re-parses whenever Budget is non-blank, so an
+// amended no-budget row recovers (kimi F6). LastDisburseCycle is the writer's
+// idempotency receipt (Task 4).
+var INITIATIVE_BUDGET_COLUMNS_ = ['BudgetTotal', 'BudgetRemaining', 'LastDisburseCycle'];
+
+// MIRROR of lib/initiativePhaseContract.js parseBudgetMoney — body text-identical.
+// "$28M" → 28000000, "$12.5M" → 12500000, "$2.1B" → 2100000000, "$450K" → 450000,
+// "28,000,000" → 28000000. Blank, negative, NaN or unknown suffix → null (never 0).
+function parseBudgetMoney_(raw) {
+  if (raw === null || raw === undefined) return null;
+  var t = String(raw).trim().replace(/[\s,$]/g, '').toUpperCase();
+  if (!t) return null;
+  var m = /^(\d+(?:\.\d+)?)([KMB])?$/.exec(t);
+  if (!m) return null;
+  var n = Number(m[1]);
+  if (!isFinite(n) || n < 0) return null;
+  var mult = m[2] === 'K' ? 1e3 : m[2] === 'M' ? 1e6 : m[2] === 'B' ? 1e9 : 1;
+  var v = Math.round(n * mult);
+  return v > 0 ? v : null;
+}
+
+/** Which budget columns a header row lacks, in declared order. Pure. */
+function missingInitiativeBudgetColumns_(header) {
+  var have = header || [];
+  var missing = [];
+  for (var i = 0; i < INITIATIVE_BUDGET_COLUMNS_.length; i++) {
+    if (have.indexOf(INITIATIVE_BUDGET_COLUMNS_[i]) === -1) missing.push(INITIATIVE_BUDGET_COLUMNS_[i]);
+  }
+  return missing;
+}
+
+/** Append any missing budget columns. Same contract as ensureInitiativeStageColumns_. */
+function ensureInitiativeBudgetColumns_(sheet, header) {
+  var missing = missingInitiativeBudgetColumns_(header);
+  if (!missing.length) return false;
+  var lastCol = sheet.getLastColumn();
+  var short = (lastCol + missing.length) - sheet.getMaxColumns();
+  if (short > 0) sheet.insertColumnsAfter(sheet.getMaxColumns(), short);
+  sheet.getRange(1, lastCol + 1, 1, missing.length).setValues([missing]);
+  Logger.log('civicInitiativeEngine: engine.255 appended budget columns to Initiative_Tracker — ' + missing.join(', '));
+  return true;
+}
+
+/**
+ * Pure planner for the back-fill: given the header and the data rows, return
+ * the BudgetTotal / BudgetRemaining vectors to write and how many rows changed.
+ * Rules: BudgetTotal blank + Budget parses → BudgetTotal = parsed; BudgetRemaining
+ * blank + BudgetTotal present (old or new) → BudgetRemaining = BudgetTotal. A
+ * parsed BudgetTotal is never overwritten; a non-blank BudgetRemaining never is.
+ */
+function planInitiativeBudgetBackfill_(header, rows) {
+  var iB = header.indexOf('Budget'), iT = header.indexOf('BudgetTotal'), iR = header.indexOf('BudgetRemaining');
+  var out = { total: [], remaining: [], changed: 0, unparsed: [] };
+  if (iB < 0 || iT < 0 || iR < 0) return out;
+  for (var r = 0; r < rows.length; r++) {
+    var row = rows[r];
+    var curT = row[iT], curR = row[iR];
+    var tBlank = curT === '' || curT === null || curT === undefined;
+    var rBlank = curR === '' || curR === null || curR === undefined;
+    var newT = curT, newR = curR, touched = false;
+    if (tBlank) {
+      var raw = row[iB];
+      var rawBlank = raw === '' || raw === null || raw === undefined;
+      if (!rawBlank) {
+        var parsed = parseBudgetMoney_(raw);
+        if (parsed !== null) { newT = parsed; touched = true; }
+        else out.unparsed.push(String(row[header.indexOf('InitiativeID')] || ('row' + (r + 2))) + ':' + String(raw));
+      }
+    }
+    var haveT = !(newT === '' || newT === null || newT === undefined) && isFinite(Number(newT));
+    if (rBlank && haveT) { newR = Number(newT); touched = true; }
+    if (touched) out.changed++;
+    out.total.push([newT]); out.remaining.push([newR]);
+  }
+  return out;
+}
+
+/** Execute the back-fill as two column-vector writes; returns the plan. */
+function backfillInitiativeBudgets_(sheet, header, rows) {
+  var plan = planInitiativeBudgetBackfill_(header, rows);
+  if (!plan.changed) return plan;
+  var iT = header.indexOf('BudgetTotal'), iR = header.indexOf('BudgetRemaining');
+  sheet.getRange(2, iT + 1, rows.length, 1).setValues(plan.total);
+  sheet.getRange(2, iR + 1, rows.length, 1).setValues(plan.remaining);
+  Logger.log('civicInitiativeEngine: engine.255 budget back-fill — ' + plan.changed + ' row(s) stamped' + (plan.unparsed.length ? ', unparsed: ' + plan.unparsed.join(' ') : ''));
+  return plan;
 }
 
 // MIRROR of lib/initiativePhaseContract.js stageRequirementWith — body text-identical.

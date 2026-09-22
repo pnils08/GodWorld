@@ -2,7 +2,7 @@
   "generated": "2026-09-22",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 184,
-  "functionsMapped": 1478,
+  "functionsMapped": 1483,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -4765,6 +4765,7 @@
         "phase05-citizens/bondEngine.js::householdHousingById_",
         "phase05-citizens/bondEngine.js::marryCitizens_",
         "phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_",
+        "phase05-citizens/civicInitiativeEngine.js::civicCohortForBaseline_",
         "phase05-citizens/civicInitiativeEngine.js::civicHousingBurdenCohort_",
         "phase05-citizens/civicInitiativeEngine.js::engineClockHold_",
         "phase05-citizens/civicInitiativeEngine.js::freezeCivicStageCohort_",

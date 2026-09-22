@@ -1508,6 +1508,16 @@
 
 - **ensureInitiativeStageColumns_(sheet, header)**
 
+- **parseBudgetMoney_(raw)**
+
+- **missingInitiativeBudgetColumns_(header)**
+
+- **ensureInitiativeBudgetColumns_(sheet, header)**
+
+- **planInitiativeBudgetBackfill_(header, rows)**
+
+- **backfillInitiativeBudgets_(sheet, header, rows)**
+
 - **civicStageRequirementWith_(catalogByDomain, input)**
 
 - **civicStageRequirement_(input)**
@@ -1515,6 +1525,7 @@
 - **civicStageBaselineFrom_(input)**
 
 - **civicCohortForBaseline_(cohort, baseline)**
+  Sheets: Household_Ledger
 
 - **civicDeliveryEdge_(baseline, cohort)**
 
@@ -4240,4 +4251,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 184
-**Functions mapped:** 1478
+**Functions mapped:** 1483

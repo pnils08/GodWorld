@@ -132,19 +132,25 @@ var ENGINE213_CONFIG_SEEDS = [
   // of their readers (the stall detector and the Delivering comparator land in later
   // cuts); until then they are inert rows the builder can already see and tune.
   ['civicStageStallCycles', 5, 'civic.38 Task 4: Cycles a staged initiative may sit on one stage before the losing clock sets it stalled (builder: 4-5 to start)', 1, 52, true],
+  // Builder-ruled 2026-09-21 (plan ruling 17): at Standing and Delivering the clock counts
+  // Cycles UNTENDED (ruling e) and must outlast the upkeep decay curve (grace 6 + 5 to the
+  // floor = 11), or a neglected service fails before it is ever seen to weaken. Funded keeps
+  // civicStageStallCycles: there work IS the gate and waiting is the failure. Reader lands
+  // with the stall detector (Task 4 step 3).
+  ['civicStageUntendedStallCycles', 12, 'civic.38 Task 4: Cycles UNTENDED a Standing/Delivering initiative may run before the losing clock sets it stalled (builder-ruled 12: longer than the upkeep decay curve, so a service visibly rots before it fails)', 1, 52, true],
   ['civicDeliverMargin', 0.20, 'civic.38 Task 4: how far a gate metric ratio to the city median must sit above its baseline ratio for Standing -> Delivering (builder-ruled; untreated hoods cleared 0.20 held 3 Cycles 0% of the time over C103-C108)', 0, 2, false],
   // Per-metric margin (builder ruling a): civicDeliverMargin_<policyDomain> wins over
   // the default above. Same shape as the bizVol_<sector> keys. Health is the first
   // measured domain: a clinic at full strength plateaus at an edge of 0.18-0.19, so
   // 0.20 could never deliver it. Unmeasured domains fall back to the default.
-  ['civicDeliverMargin_health', 0.15, 'civic.38 Task 4: Delivering margin for health rows (Sick vs city median). Measured: a clinic at full strength holds an edge of 0.18-0.19 over an untreated control; 0.15 clears at the second Cycle and holds. Overrides civicDeliverMargin for PolicyDomain health', 0, 2, false],
+  ['civicDeliverMargin_health', 0.10, 'civic.38 Task 4: Delivering margin for health rows (Sick vs city median). Builder-ruled 0.10 (2026-09-21) off the own-baseline edge the gate measures — a clinic ran 0.06/0.12/0.14/0.17 over its first four Cycles, an untreated hood never above 0; 0.10 delivers five Cycles after standing under hold 3, 0.15 would take seven. Overrides civicDeliverMargin for PolicyDomain health', 0, 2, false],
   ['civicDeliverHoldCycles', 3, 'civic.38 Task 4: consecutive Cycles the margin must hold (builder-ruled; hold does more than margin)', 1, 12, true],
   // Regress hysteresis (civic.38 Task 4 part 2). A Delivering row slips back to
   // Standing only after the hold count of observations BELOW margin x this share —
   // a lower bar than the one it delivered at, so noise around the margin cannot
   // flap a row. 1 = regress the moment it stops clearing the margin; 0 = never.
   // Engine-sheet default, seeded like the margin was before it was ruled.
-  ['civicDeliverRegressShare', 0.5, 'civic.38 Task 4: a Delivering initiative regresses to Standing after civicDeliverHoldCycles observations with its edge below margin x this share (hysteresis; SIM CALL OPEN - engine-sheet default 0.5)', 0, 1, false],
+  ['civicDeliverRegressShare', 0.5, 'civic.38 Task 4: a Delivering initiative regresses to Standing after civicDeliverHoldCycles observations with its edge below margin x this share (hysteresis; builder-ruled 0.5, 2026-09-21)', 0, 1, false],
   // civic.38 Task 4 upkeep (builder rulings c/e/g): delivered is not forever. Read by
   // civicTendFactor_ in applyInitiativeImplementationEffects_, only for a row at
   // Standing or Delivering — inert while every Stage is blank.

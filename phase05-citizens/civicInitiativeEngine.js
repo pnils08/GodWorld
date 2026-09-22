@@ -3327,6 +3327,7 @@ function civicReviveDecision_(input) {
   var stage = String(inp.stage == null ? '' : inp.stage).trim();
   var phase = String(inp.phase == null ? '' : inp.phase).trim().toLowerCase();
   if (!stage) return { revive: false, phase: null, reason: 'legacy-row' };
+  if (['Funded', 'Standing', 'Delivering'].indexOf(stage) < 0) return { revive: false, phase: null, reason: 'not-a-stall-stage' };
   if (phase !== 'stalled') return { revive: false, phase: null, reason: 'not-stalled' };
   var st = Number(inp.stallCycle);
   if (!isFinite(st) || st < 1) return { revive: false, phase: null, reason: 'no-stall-cycle' };
@@ -3336,7 +3337,10 @@ function civicReviveDecision_(input) {
   // that week's work stamped N — it DID land after the stall (same rule as the
   // Funded work gate).
   if (!(work >= st)) return { revive: false, phase: null, reason: 'work-predates-stall' };
+  var cycle = Number(inp.cycle);
+  if (isFinite(cycle) && cycle >= 1 && work > cycle) return { revive: false, phase: null, reason: 'work-from-the-future' };
   var prior = String(inp.priorPhase == null ? '' : inp.priorPhase).trim();
+  if (['stalled', 'blocked', 'suspended', 'defunded'].indexOf(prior.toLowerCase()) >= 0) prior = '';
   if (!prior) prior = stage === 'Funded' ? 'vote-ready' : 'operational';
   return { revive: true, phase: prior, reason: null };
 }
@@ -3752,10 +3756,16 @@ function applyCivicRevival_(ctx, row, ix, cycle) {
   var cell = function (i) { return i >= 0 ? row[i] : ''; };
   var stage = String(cell(ix.stage) == null ? '' : cell(ix.stage)).trim();
   if (!stage) return false;
+  // Same eligibility as every other stage operation (ruling 6; codex stall
+  // review F1): a vetoed, failed or retired row gets no generic revival.
+  var status = String(cell(ix.status) == null ? '' : cell(ix.status)).trim().toLowerCase();
+  var voted = status === 'override-passed' ||
+    (status === 'passed' && String(cell(ix.mayoralAction) == null ? '' : cell(ix.mayoralAction)).trim().toLowerCase() === 'signed');
+  if (!voted) return false;
   var hold = civicStageHoldRead_(cell(ix.hold));
   var d = civicReviveDecision_({
     stage: stage, phase: cell(ix.phase), priorPhase: ix.priorPhase >= 0 ? cell(ix.priorPhase) : '',
-    stallCycle: hold.st, lastWorkCycle: cell(ix.lastWork)
+    stallCycle: hold.st, lastWorkCycle: cell(ix.lastWork), cycle: cycle
   });
   if (!d.revive) return false;
   var initKey = String(cell(ix.id) || '').trim() || String(cell(ix.name) || '').trim();

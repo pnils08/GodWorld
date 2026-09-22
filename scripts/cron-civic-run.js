@@ -16,6 +16,10 @@
  *   --stage=voices     Task 2.3 — Layer-2 office calls (later commit)
  *   --stage=projects   Task 2.3 — Layer-3 project calls (later commit)
  *   --stage=close      Task 2.3 — Clerk + assemble + gated apply (later commit)
+ *   --stage=tick       civic.39 — no-model week-boundary stage machine: reads
+ *                      output/cron-civic/week_state_c{XX}.json, advances the
+ *                      deterministic close half and the apply when their inputs
+ *                      exist, tracks (never calls) the model stages. Idempotent.
  *
  * Stage order in the chain: directive -> prep -> decide -> voices -> projects
  * -> close. The directive runs FIRST so prep consumes a real directive file
@@ -1602,11 +1606,14 @@ async function runHearing() {
   }, null, 2));
   const failed = results.filter(x => !x.ok);
   for (const x of results) console.log('  [' + (x.ok ? '✓' : '✗') + '] ' + x.slug + (x.ok ? ' — ' + x.statements + ' statement(s) (' + x.model + ')' : ' — ' + x.error));
+  // civic.39 Task 2 (ruling 2): a failed or missing voice is PENDING, never a
+  // halt — the C108 chain died here on two bad seat outputs and the mechanical
+  // close sat behind them. Pending seats are resubmitted next window (the
+  // Sunday retry re-enters this stage; existingVoice reuses what arrived).
   if (failed.length) {
-    console.error('\nHALT: ' + failed.length + ' voice(s) failed — fix or rerun before projects (Step 5.5 completeness).');
-    process.exit(1);
+    console.log('\n[civic] ' + failed.length + ' voice(s) pending this window: ' + failed.map(x => x.slug).join(', ') + ' — the close proceeds on the arrived voices.');
   }
-  console.log('\n=== hearing complete: ' + results.length + '/' + results.length + ' ok ===');
+  console.log('\n=== hearing complete: ' + (results.length - failed.length) + '/' + results.length + ' ok' + (failed.length ? ' (' + failed.length + ' pending)' : '') + ' ===');
 }
 
 async function runMayorGavel() {
@@ -1731,30 +1738,40 @@ async function runProjects() {
   }, null, 2));
   const failed = results.filter(x => !x.ok);
   for (const x of results) console.log('  [' + (x.ok ? '✓' : '✗') + '] ' + x.slug + (x.ok ? ' — ' + x.statements + ' statement(s), triggered by ' + x.triggeredBy.join('/') : ' — ' + x.error));
-  if (failed.length) { console.error('\nHALT: ' + failed.length + ' project(s) failed.'); process.exit(1); }
+  // civic.39 Task 2 (ruling 2): pending, never a halt — same rule as the hearing.
+  if (failed.length) console.log('\n[civic] ' + failed.length + ' project seat(s) pending this window: ' + failed.map(x => x.slug).join(', '));
   console.log('\n=== projects complete: ' + results.length + ' ran ===');
 }
 
-// --- stage: close (Clerk -> assemble -> dry-run -> gate -> [--apply] -> log) ---
+// --- stage: close (clerk verdict -> deterministic close -> gate -> [apply] -> log) ---
 async function runClose() {
   const cycle = arg('--cycle', null) || detectCycle();
   const APPLY = process.argv.includes('--apply');
   console.log('Civic CLOSE — c' + cycle + (APPLY ? ' (APPLY)' : ' (dry — decisions staged, no sheet write)'));
   console.log('===================================');
+  const state = refreshWeekState(loadWeekState(cycle));
   const voiceJsons = loadVoiceJsons(cycle);
 
-  // Step 5.5 completeness: everything decide/voices/projects reported as ok.
+  // civic.39 Task 2, ruling 2: missing voices are PENDING, never a halt (the
+  // C108 failure). Only voices that arrived flow into the fold; a missing seat
+  // is listed in the run record and resubmitted next window (the Sunday retry
+  // re-enters the voice stages; existingVoice reuses whatever landed).
   const expected = ['mayor_gavel'];
   const vMan = readJson(path.join(CIVIC, 'hearing_c' + cycle + '.json')) || readJson(path.join(CIVIC, 'voices_c' + cycle + '.json'));
   const pMan = readJson(path.join(CIVIC, 'projects_c' + cycle + '.json'));
-  if (!vMan || !pMan) throw new Error('missing voices/projects manifest under output/cron-civic/ — run the earlier stages first');
-  expected.push(...vMan.results.filter(x => x.ok).map(x => x.slug));
-  expected.push(...pMan.results.filter(x => x.ok).map(x => x.slug));
-  const missing = expected.filter(s => !voiceJsons[s]);
-  if (missing.length) { console.error('HALT: expected voice JSON(s) missing: ' + missing.join(', ')); process.exit(1); }
-  log('completeness: ' + expected.length + ' voice JSONs present (' + expected.join(', ') + ')');
+  if (!vMan && !pMan) log('no hearing/projects manifests — closing on the arrived voice files + the move ledger only');
+  const seatResults = [...(vMan ? vMan.results || [] : []), ...(pMan ? pMan.results || [] : [])];
+  const pendingVoices = seatResults.filter(x => !x.ok || !voiceJsons[x.slug]).map(x => x.slug);
+  if (!voiceJsons.mayor_gavel && (vMan || pMan)) pendingVoices.unshift('mayor_gavel');
+  const arrived = expected.concat(seatResults.filter(x => x.ok).map(x => x.slug)).filter(s => voiceJsons[s]);
+  if (pendingVoices.length) log('pending voices (resubmit next window): ' + pendingVoices.join(', '));
+  log('completeness: ' + arrived.length + ' voice JSON(s) arrived' + (pendingVoices.length ? ', ' + pendingVoices.length + ' pending' : '') + ' (' + arrived.join(', ') + ')');
 
-  // Clerk verification — headless call on the STAFF model (deepseek per Task 1.2).
+  // Clerk — a deferred verdict stage (civic.39 ruling 3): an unreachable or
+  // unparseable clerk is DEFERRED (retried next window; the apply holds until
+  // the 6h verdict cutoff), never treated as a FAIL. Only overall === 'fail'
+  // blocks. Check 1 (every office produced statements) is a report line now —
+  // a missing voice is pending, not a failed check.
   const clerkModel = arg('--clerk-model', 'deepseek/deepseek-chat');
   const clerkPersona = readPersonaDir('city-clerk');
   // civic.38 Task 2 step 4 — the clerk sees this week's candidate proposals
@@ -1763,110 +1780,91 @@ async function runClose() {
   const clerkCandidates = foldedMoves
     ? [...foldedMoves.values()].filter(m => m.status === 'pending' && m.type === 'propose')
     : [];
-  const clerkUser = [
-    'Cycle ' + cycle + ' civic outputs for verification. For each check answer pass/fail with one line of evidence.',
-    'Checks: (1) every expected office produced statements; (2) no single office contradicts ITSELF within its own statements; (3) tracker updates use only contract phases; (4) statements read as in-world civic voice (no engine/system language).',
-    'Cross-office disagreement (two offices naming different figures or phases) is EXPECTED POLITICS, not a failure — list any you see under "observations", never under failed checks; the apply gate separately audits the final write-set.',
-    '',
-    ...expected.map(s => {
-      const j = voiceJsons[s];
-      return '## ' + s + '\n' + (j.statements || []).map(st => '- ' + (st.decision || '') + ' | trackerUpdates: ' + JSON.stringify(st.trackerUpdates || {})).join('\n');
-    }),
-    '',
-    '## Candidate initiatives proposed by council seats this week (' + clerkCandidates.length + ')',
-    ...(clerkCandidates.length
-      ? clerkCandidates.map(m => '- ' + m.moveId + ' (' + m.agentDir + '): "' + ((m.payload || {}).title || '') + '" — ' + String((m.payload || {}).problem || '').slice(0, 200) + ' | hoods: ' + (((m.payload || {}).hoods) || []).join(', ') + ' | intervention: ' + ((m.payload || {}).intervention || '?'))
-      : ['(none — no pending propose moves on the ledger)']),
-    '',
-    'Respond with ONLY JSON: {"cycle": ' + cycle + ', "checks": [{"check": "<name>", "pass": true|false, "evidence": "<one line>"}], "overall": "pass"|"fail", "issues": ["..."]}',
-  ].join('\n');
-  let clerk = null;
-  try {
-    const cr = await callOpenRouter(clerkModel, clerkPersona, clerkUser, 3000);
-    clerk = JSON.parse(stripFences(cr.text));
-  } catch (e) {
-    clerk = { overall: 'fail', issues: ['clerk call/parse failed: ' + e.message] };
+  let clerk;
+  if (!arrived.length) {
+    clerk = { overall: 'skipped-empty', issues: [], missingVoices: pendingVoices, note: 'no voice outputs arrived this cycle — nothing to verify' };
+  } else {
+    const clerkUser = [
+      'Cycle ' + cycle + ' civic outputs for verification. For each check answer pass/fail with one line of evidence.',
+      'Checks: (1) no single office contradicts ITSELF within its own statements; (2) tracker updates use only contract phases; (3) statements read as in-world civic voice (no engine/system language).',
+      'Voice completeness is NOT a check: seats whose voice JSON never arrived are PENDING (listed below) and will be resubmitted next window — report them under "missingVoices", never as a failed check.',
+      'Cross-office disagreement (two offices naming different figures or phases) is EXPECTED POLITICS, not a failure — list any you see under "observations", never under failed checks; the apply gate separately audits the final write-set.',
+      '',
+      'Pending (missing) seats this cycle: ' + (pendingVoices.join(', ') || 'none'),
+      '',
+      ...arrived.map(s => {
+        const j = voiceJsons[s];
+        return '## ' + s + '\n' + (j.statements || []).map(st => '- ' + (st.decision || '') + ' | trackerUpdates: ' + JSON.stringify(st.trackerUpdates || {})).join('\n');
+      }),
+      '',
+      '## Candidate initiatives proposed by council seats this week (' + clerkCandidates.length + ')',
+      ...(clerkCandidates.length
+        ? clerkCandidates.map(m => '- ' + m.moveId + ' (' + m.agentDir + '): "' + ((m.payload || {}).title || '') + '" — ' + String((m.payload || {}).problem || '').slice(0, 200) + ' | hoods: ' + (((m.payload || {}).hoods) || []).join(', ') + ' | intervention: ' + ((m.payload || {}).intervention || '?'))
+        : ['(none — no pending propose moves on the ledger)']),
+      '',
+      'Respond with ONLY JSON: {"cycle": ' + cycle + ', "checks": [{"check": "<name>", "pass": true|false, "evidence": "<one line>"}], "overall": "pass"|"fail", "issues": ["..."], "missingVoices": ["..."]}',
+    ].join('\n');
+    try {
+      const cr = await callOpenRouter(clerkModel, clerkPersona, clerkUser, 3000);
+      clerk = JSON.parse(stripFences(cr.text));
+    } catch (e) {
+      clerk = { overall: 'deferred', issues: ['clerk call/parse failed (deferred — retried next window, never a FAIL): ' + e.message] };
+    }
   }
   const clerkDir = path.join(ROOT, 'output', 'city-civic-database');
   fs.mkdirSync(clerkDir, { recursive: true });
   fs.writeFileSync(path.join(clerkDir, 'clerk_audit_c' + cycle + '.json'), JSON.stringify(clerk, null, 2));
   log('clerk: ' + (clerk.overall || 'unknown') + ((clerk.issues || []).length ? ' — ' + clerk.issues.join('; ').slice(0, 300) : ''));
 
-  // Assemble decisions files, then tracker dry-run (both existing scripts).
-  execFileSync('node', [path.join(ROOT, 'scripts', 'assembleDecisions.js'), String(cycle), '--apply'], { cwd: ROOT, stdio: 'inherit', timeout: 120000 });
-
-  // Headless-only normalization (S344, post-Mike write-set ruling): the assembly
-  // concatenates every voice's MilestoneNotes ("primary / others…"), which in a
-  // multi-model cascade re-imports cross-voice disagreement into the tracker's
-  // official record (C102 first run: 45-vs-47 figures, submitted-vs-stalled in
-  // one note). The tracker note becomes the PRIMARY voice's note only; the other
-  // voices' full statements stay in civic-voice JSONs + the production log for
-  // media. Interactive runs (operator-curated) are untouched — this rewrites
-  // only what this chain is about to apply.
-  const decisionsDir = path.join(ROOT, 'output', 'city-civic-database', 'initiatives');
-  let normalized = 0;
-  for (const slug of fs.existsSync(decisionsDir) ? fs.readdirSync(decisionsDir) : []) {
-    const p = path.join(decisionsDir, slug, 'decisions_c' + cycle + '.json');
-    const d = readJson(p);
-    if (!d || !d.trackerUpdates || typeof d.trackerUpdates.MilestoneNotes !== 'string') continue;
-    if (d.trackerUpdates.MilestoneNotes.includes(' / ')) {
-      d.trackerUpdates.MilestoneNotes = d.trackerUpdates.MilestoneNotes.split(' / ')[0].trim();
-      d._notesNormalized = 'primary-only (cron-civic-run close, S344)';
-      fs.writeFileSync(p, JSON.stringify(d, null, 2));
-      normalized++;
-    }
-  }
-  if (normalized) log('milestone notes normalized to primary voice: ' + normalized + ' decisions file(s)');
-
-  // civic.38 Task 2 step 2 — Sunday fold: the week's pending moves become
-  // tracker fields (work) and a candidate-row set (propose) BEFORE the
-  // dry-run, so the gate + clerk + normalizeTrackerWrite see everything.
-  const officeMapForFold = readJson(path.join(ROOT, 'scripts', 'civic-office-map.json')) || { offices: [], projects: [] };
-  foldMovesIntoDecisions(ROOT, cycle, officeMapForFold);
-
-  // civic.38 Task 6.3 — petition → vote. A petition-pending row (Status
-  // proposed, blank VoteCycle) whose signature count clears its support band
-  // gets the gated write through the ordinary decisions channel: a holding
-  // decisions file carrying {Status: 'pending-vote', ImplementationPhase:
-  // 'vote-scheduled', VoteCycle: cycle+1} — normalizeTrackerWrite legalizes
-  // exactly that edge, and the validator + gate see it like any other write.
-  petitionGateSweep(ROOT, cycle);
-
-  let dryOut = '';
-  try {
-    dryOut = execFileSync('node', [path.join(ROOT, 'scripts', 'applyTrackerUpdates.js'), String(cycle)], { cwd: ROOT, encoding: 'utf8', timeout: 300000 });
-    process.stdout.write(dryOut);
-  } catch (e) {
-    console.error('HALT: applyTrackerUpdates dry-run failed: ' + e.message);
+  // Deterministic half (assemble → milestone-note normalize → Sunday fold →
+  // petition sweep → tracker dry-run). No model calls — `tick` runs the same
+  // path. A failure here is a REAL block: these are the checks that cannot be
+  // wrong about the sheet (civic.39 ruling 1).
+  const det = closeDeterministic(cycle);
+  if (!det.ok) {
+    console.error('BLOCKED: deterministic close failed: ' + det.error);
+    fs.writeFileSync(path.join(CIVIC, 'close_c' + cycle + '.json'), JSON.stringify({
+      stage: 'close', cycle: Number(cycle), arrived, pendingVoices,
+      clerk: clerk.overall || 'unknown', clerkModel,
+      error: 'deterministic close failed: ' + det.error,
+      gatePass: false, applied: false, ranAt: new Date().toISOString(),
+    }, null, 2));
+    refreshWeekState(state); state._dirty = true; saveWeekState(state);
     process.exit(1);
   }
 
-  // Mechanical gate (Task 2.4) — fail-closed: gate exit != 0 means staged, no apply.
-  let gatePass = false;
-  try {
-    execFileSync('node', [path.join(ROOT, 'scripts', 'cron-civic-gate.js'), '--cycle', String(cycle)], { cwd: ROOT, stdio: 'inherit', timeout: 300000 });
-    gatePass = true;
-  } catch (e) {
-    console.error('[civic] gate BLOCKED (exit ' + (e.status == null ? '?' : e.status) + ') — decisions remain staged, no sheet write.');
-  }
+  // Mechanical gate (Task 2.4 + civic.39 ruling 3): deterministic prechecks
+  // are the block; the model sanity-read is a deferred verdict — an
+  // unreachable sanity model never blocks, a real FAIL verdict always does.
+  const gate = runGate(cycle, { sanity: true });
+  const gatePass = gate.deterministicPass;
+  if (!gatePass) console.error('[civic] gate deterministic checks BLOCKED (exit ' + gate.exitCode + ') — decisions remain staged, no sheet write.');
 
+  // The apply decision (civic.39 rulings 1+3+4): deterministic checks must
+  // pass, no verdict may be a FAIL, and either both verdicts are in or the
+  // 6h-after-engine-fire cutoff has expired (flagged, never silent).
+  const decision = decideApply({
+    dryOk: det.dryOk, deterministicPass: gate.deterministicPass,
+    clerkStatus: clerk.overall || 'unknown', sanityStatus: gate.sanityStatus,
+    firedAt: state.engineFiredAt,
+  });
   let applied = false;
-  if (gatePass && APPLY && clerk.overall === 'pass') {
-    execFileSync('node', [path.join(ROOT, 'scripts', 'applyTrackerUpdates.js'), String(cycle), '--apply'], { cwd: ROOT, stdio: 'inherit', timeout: 300000 });
-    applied = true;
-  } else if (APPLY) {
-    console.error('[civic] --apply requested but ' + (gatePass ? 'clerk verdict is not pass' : 'gate blocked') + ' — NOT applying.');
+  if (decision.apply && APPLY) {
+    applied = maybeApply(cycle, decision, APPLY, 'close');
+  } else if (APPLY && !decision.apply) {
+    console.error('[civic] --apply requested but ' + decision.reason +
+      (decision.waitingOn ? ' (waiting on: ' + decision.waitingOn.join(', ') + ')' : '') + ' — NOT applying.');
   }
 
   // Production log: ## /city-hall section (idempotent replace) + media handoff.
   const plog = path.join(ROOT, 'output', 'production_log_c' + cycle + '.md');
-  const rows = expected.map(s => {
+  const rows = arrived.map(s => {
     const j = voiceJsons[s];
     const st = (j.statements || [])[0] || {};
     return '| ' + (j.speaker || s) + ' | ' + cleanInline(st.decision || '—') + ' | "' + cleanInline(st.quote || '') + '" |';
   });
   const trackerRows = [];
-  for (const s of expected) {
+  for (const s of arrived) {
     for (const st of (voiceJsons[s].statements || [])) {
       for (const [name, u] of Object.entries(st.trackerUpdates || {})) {
         if (u && u.ImplementationPhase) trackerRows.push('| ' + name + ' | ' + u.ImplementationPhase + ' | ' + cleanInline(u.MilestoneNotes || '') + ' |');
@@ -1877,7 +1875,7 @@ async function runClose() {
     '', '## /city-hall (AUTO — cron-civic-run.js)',
     '**Cycle:** ' + cycle,
     '**Mode:** ' + (applied ? 'APPLIED to tracker' : 'DRY — decisions staged, tracker untouched'),
-    '**Clerk:** ' + (clerk.overall || 'unknown'),
+    '**Clerk:** ' + (clerk.overall || 'unknown') + ' | **Gate (deterministic):** ' + (gatePass ? 'pass' : 'BLOCKED') + ' | **Sanity-read:** ' + gate.sanityStatus + (pendingVoices.length ? ' | **Pending voices:** ' + pendingVoices.join(', ') : ''),
     '', '### Voice Decisions', '| Voice | Decision | Key Quote |', '|---|---|---|', ...rows,
     '', '### Tracker Updates ' + (applied ? '(applied)' : '(staged)'), '| Initiative | Phase | Milestone |', '|---|---|---|',
     ...(trackerRows.length ? trackerRows : ['| — | — | no phase moves this cycle |']),
@@ -1902,8 +1900,11 @@ async function runClose() {
   const gapBody = fs.existsSync(gapLog) ? fs.readFileSync(gapLog, 'utf8') : '# Cycle ' + cycle + ' gap log\n';
   if (!gapBody.includes(LEG)) {
     const legLines = [LEG, ''];
-    if (!gatePass) legLines.push('- G-R (AUTO): apply gate blocked — see output/cron-civic/gate_c' + cycle + '.json');
-    if (clerk.overall !== 'pass') legLines.push('- G-R (AUTO): clerk verdict ' + (clerk.overall || 'unknown') + ' — see clerk_audit_c' + cycle + '.json');
+    if (!gatePass) legLines.push('- G-R (AUTO): apply gate deterministic checks failed — see output/cron-civic/gate_c' + cycle + '.json');
+    if (gate.sanityStatus === 'fail') legLines.push('- G-R (AUTO): sanity-read verdict FAIL — see output/cron-civic/gate_c' + cycle + '.json');
+    if (clerk.overall === 'fail') legLines.push('- G-R (AUTO): clerk verdict fail — see clerk_audit_c' + cycle + '.json');
+    if (applied && decision.via === 'cutoff') legLines.push('- G-R (AUTO): applied under the 6h verdict cutoff — missing verdicts: ' + (decision.missingVerdicts || []).join(', '));
+    if (pendingVoices.length) legLines.push('- G-R (AUTO): ' + pendingVoices.length + ' voice(s) pending this window: ' + pendingVoices.join(', '));
     if (legLines.length === 2) legLines.push('No gaps this run.');
     fs.writeFileSync(gapLog, gapBody.replace(/\n+$/, '\n') + '\n' + legLines.join('\n') + '\n');
   }
@@ -1918,7 +1919,7 @@ async function runClose() {
     if (o.agentDir) popidBySlug[voiceSlug(o.agentDir)] = popidBySlug[voiceSlug(o.agentDir)] || o.popid;
   }
   const laneEntries = [];
-  for (const s of expected) {
+  for (const s of arrived) {
     for (const st of (voiceJsons[s].statements || [])) {
       const label = cleanInline((voiceJsons[s].speaker || s) + ' (' + s.replace(/_/g, ' ') + '): ' + (st.decision || st.topic || '') + (st.quote ? ' — "' + st.quote + '"' : ''));
       if (label) laneEntries.push({
@@ -1932,11 +1933,18 @@ async function runClose() {
   log('media lane handoff: ' + laneEntries.length + ' civic-decision entries → decisions_lane_c' + cycle + '.json');
 
   fs.writeFileSync(path.join(CIVIC, 'close_c' + cycle + '.json'), JSON.stringify({
-    stage: 'close', cycle: Number(cycle), expected, clerk: clerk.overall || 'unknown',
-    gatePass, applied, clerkModel, laneEntries: laneEntries.length, ranAt: new Date().toISOString(),
+    stage: 'close', cycle: Number(cycle), expected: arrived, pendingVoices,
+    clerk: clerk.overall || 'unknown', clerkModel,
+    gatePass, deterministicPass: gate.deterministicPass, sanityStatus: gate.sanityStatus,
+    applyDecision: { apply: decision.apply, via: decision.via || null, reason: decision.reason || null, missingVerdicts: decision.missingVerdicts || [] },
+    applied, laneEntries: laneEntries.length, ranAt: new Date().toISOString(),
   }, null, 2));
-  console.log('\n=== close complete: clerk=' + (clerk.overall || 'unknown') + ' gate=' + (gatePass ? 'PASS' : 'BLOCKED') + ' applied=' + applied + ' ===');
-  if (!gatePass || clerk.overall !== 'pass') process.exit(1);
+  refreshWeekState(state); state._dirty = true; saveWeekState(state);
+  console.log('\n=== close complete: clerk=' + (clerk.overall || 'unknown') + ' gate(det)=' + (gatePass ? 'PASS' : 'BLOCKED') + ' sanity=' + gate.sanityStatus + ' applied=' + applied + (pendingVoices.length ? ' pending=' + pendingVoices.length : '') + ' ===');
+  // Blocked = a REAL failure (deterministic checks or a FAIL verdict). A
+  // deferred verdict is the week WAITING, not failing — exit 0 so the cron row
+  // stays quiet and the next window (chain retry / tick) re-enters.
+  if (decision.blocked) process.exit(1);
 }
 
 // ---------------------------------------------------------------------------
@@ -2736,7 +2744,8 @@ async function runChain() {
     return;
   }
   for (const stage of [runDirective, runPrep, runMayorOpen, runHearing, runMayorGavel, runProjects, runClose]) {
-    await stage();   // each stage fails loud (process.exit) — a failure halts the chain with state staged
+    await stage();   // mayor stages + prep still fail loud (process.exit) and halt the chain; hearing/projects
+                     // record pending seats and continue (civic.39 ruling 2); runClose exits 1 only on a real block
   }
 }
 
@@ -2788,12 +2797,350 @@ async function runStatus() {
   if (!process.argv.includes('--no-post')) await postDiscord(line);
 }
 
+// ---------------------------------------------------------------------------
+// civic.39 — week-boundary stage machine (plan:
+// docs/plans/2026-09-21-civic-sunday-stage-machine.md). A per-cycle state file
+// tracks every stage; a cheap no-model `tick` advances the stages whose inputs
+// exist. The fold, petition sweep, vote stamping and the deterministic checks
+// never wait on a model or a missing voice; the model audits (clerk, gate
+// sanity-read) are deferred verdicts that gate the apply without being able to
+// halt the week. Until Task 3's batch submit/collect lands, the model stages
+// themselves are still executed by the Sunday chain — tick only TRACKS them.
+// ---------------------------------------------------------------------------
+
+const WEEK_STATE_VERSION = 1;
+const WEEK_STAGES = ['prep', 'directive', 'mayor-open', 'hearing', 'mayor-gavel', 'projects', 'close-det', 'verdict-clerk', 'verdict-sanity', 'apply'];
+// Ruling 4 (research-build, builder-delegated 2026-09-21): a verdict still
+// missing 6 hours after the engine fires no longer holds the apply. Lands
+// before the Monday 05:45 datawake for a Sunday 21:00 fire.
+const VERDICT_CUTOFF_MS = 6 * 60 * 60 * 1000;
+
+function weekStatePath(cycle, root) {
+  return path.join(root || ROOT, 'output', 'cron-civic', 'week_state_c' + cycle + '.json');
+}
+
+function blankWeekState(cycle) {
+  const stages = {};
+  for (const s of WEEK_STAGES) stages[s] = { stage: s, status: 'waiting', inputs: {}, attempts: 0, updated: null };
+  return { version: WEEK_STATE_VERSION, cycle: Number(cycle), engineFiredAt: null, stages };
+}
+
+function loadWeekState(cycle, root) {
+  const s = readJson(weekStatePath(cycle, root));
+  if (!s || !s.stages) return blankWeekState(cycle);
+  const blank = blankWeekState(cycle);
+  for (const name of WEEK_STAGES) if (!s.stages[name]) s.stages[name] = blank.stages[name];
+  return s;
+}
+
+// Writes only when something actually changed (or the file is absent) — a
+// second tick on an unchanged week does nothing, including no file rewrite.
+function saveWeekState(state, root) {
+  const p = weekStatePath(state.cycle, root);
+  if (!state._dirty && fs.existsSync(p)) return false;
+  delete state._dirty;
+  state.updated = new Date().toISOString();
+  fs.mkdirSync(path.dirname(p), { recursive: true });
+  fs.writeFileSync(p, JSON.stringify(state, null, 2) + '\n');
+  return true;
+}
+
+// The engine fire is a manual event; its on-disk witness is the pair of
+// compile artifacts every fire produces. firedAt = the later of the two
+// mtimes (the moment the pair was complete). Never wall-clock-facing — this
+// only feeds the verdict cutoff clock.
+function engineFireInfo(cycle, root) {
+  root = root || ROOT;
+  const files = ['world_summary_c' + cycle + '.md', 'engine_audit_c' + cycle + '.json']
+    .map(f => path.join(root, 'output', f));
+  if (!files.every(f => fs.existsSync(f))) return { fired: false, firedAt: null };
+  const mtimes = files.map(f => fs.statSync(f).mtimeMs);
+  return { fired: true, firedAt: new Date(Math.max.apply(null, mtimes)).toISOString() };
+}
+
+// Stage statuses: waiting | ready | done | failed | deferred (deferred is the
+// verdict stages' "no verdict yet — apply holds until the cutoff"). Every
+// status is DERIVED from on-disk artifacts on each pass — the state file is a
+// cache of the derivation, never the source of truth.
+function refreshWeekState(state, root) {
+  root = root || ROOT;
+  const cycle = state.cycle;
+  const civic = path.join(root, 'output', 'cron-civic');
+  const voiceDir = path.join(root, 'output', 'civic-voice');
+  const nowIso = new Date().toISOString();
+  const set = (name, status, inputs) => {
+    const s = state.stages[name];
+    if (s.status === status && JSON.stringify(s.inputs) === JSON.stringify(inputs || {})) return;
+    s.status = status; s.inputs = inputs || {}; s.updated = nowIso; state._dirty = true;
+  };
+  const voiceExists = slug => fs.existsSync(path.join(voiceDir, slug + '_c' + cycle + '.json'));
+
+  const fire = engineFireInfo(cycle, root);
+  if (state.engineFiredAt !== fire.firedAt) { state.engineFiredAt = fire.firedAt; state._dirty = true; }
+  const cutoffExpired = !!(fire.fired && (Date.now() - new Date(fire.firedAt).getTime() > VERDICT_CUTOFF_MS));
+
+  const prepDone = fs.existsSync(path.join(civic, 'prep_c' + cycle + '.json'));
+  set('prep', prepDone ? 'done' : (fire.fired ? 'ready' : 'waiting'));
+
+  const directiveDone = fs.existsSync(path.join(civic, 'directive_c' + cycle + '.json'));
+  set('directive', directiveDone ? 'done' : (fire.fired ? 'ready' : 'waiting'));
+
+  const mayorOpenRaw = fs.existsSync(path.join(civic, 'mayor_open_c' + cycle + '.raw.txt'));
+  set('mayor-open', voiceExists('mayor_open') ? 'done' : (mayorOpenRaw ? 'failed' : (prepDone ? 'ready' : 'waiting')));
+
+  const hearingMan = readJson(path.join(civic, 'hearing_c' + cycle + '.json')) || readJson(path.join(civic, 'voices_c' + cycle + '.json'));
+  const hearingPending = hearingMan ? (hearingMan.results || []).filter(x => !x.ok || !voiceExists(x.slug)).map(x => x.slug) : [];
+  set('hearing', hearingMan ? 'done' : (voiceExists('mayor_open') ? 'ready' : 'waiting'),
+    hearingMan ? { pending: hearingPending } : {});
+
+  const gavelRaw = fs.existsSync(path.join(civic, 'mayor_gavel_c' + cycle + '.raw.txt'));
+  set('mayor-gavel', voiceExists('mayor_gavel') ? 'done' : (gavelRaw ? 'failed' : (hearingMan ? 'ready' : 'waiting')));
+
+  const projectsMan = readJson(path.join(civic, 'projects_c' + cycle + '.json'));
+  const projectsPending = projectsMan ? (projectsMan.results || []).filter(x => !x.ok || !voiceExists(x.slug)).map(x => x.slug) : [];
+  set('projects', projectsMan ? 'done' : (voiceExists('mayor_gavel') ? 'ready' : 'waiting'),
+    projectsMan ? { pending: projectsPending } : {});
+
+  // close-det: the gate record is the last artifact the deterministic half
+  // writes (a dry-run failure stops before the gate, so its presence means the
+  // dry-run passed). Ready once the voices had their window (hearing manifest)
+  // or the verdict cutoff expired — the fold/sweep/stamping run even if every
+  // model stage failed (ruling 2).
+  const gateRec = readJson(path.join(civic, 'gate_c' + cycle + '.json'));
+  const detPass = gateRec ? (gateRec.deterministicPass !== undefined ? gateRec.deterministicPass
+    : (gateRec.pass || (gateRec.failures || []).every(f => f.check === 'sanity-read'))) : null;
+  set('close-det', gateRec ? 'done' : ((hearingMan || cutoffExpired) ? 'ready' : 'waiting'),
+    gateRec ? { deterministicPass: detPass } : { cutoffExpired });
+
+  const clerkRec = readJson(path.join(root, 'output', 'city-civic-database', 'clerk_audit_c' + cycle + '.json'));
+  const clerkStatus = clerkRec ? (clerkRec.overall || 'unknown') : 'missing';
+  set('verdict-clerk', !clerkRec ? (gateRec ? 'ready' : 'waiting')
+    : clerkStatus === 'fail' ? 'failed'
+    : clerkStatus === 'deferred' ? 'deferred'
+    : 'done', { verdict: clerkStatus });
+
+  const sanityStatus = gateRec
+    ? (gateRec.sanityStatus || (gateRec.sanity ? (gateRec.sanity.pass ? 'pass' : 'fail') : 'missing'))
+    : 'missing';
+  set('verdict-sanity', !gateRec ? 'waiting'
+    : sanityStatus === 'fail' ? 'failed'
+    : (sanityStatus === 'pass' || sanityStatus === 'skipped-empty') ? 'done'
+    : 'deferred', { verdict: sanityStatus });
+
+  const closeRec = readJson(path.join(civic, 'close_c' + cycle + '.json'));
+  const applied = !!(closeRec && closeRec.applied === true);
+  const decision = detPass === null ? null : decideApply({
+    dryOk: true, deterministicPass: detPass, clerkStatus, sanityStatus, firedAt: fire.firedAt,
+  });
+  set('apply', applied ? 'done'
+    : (decision && decision.apply) ? 'ready'
+    : (decision && decision.blocked) ? 'failed'
+    : 'waiting',
+    { decision: decision ? { apply: decision.apply, blocked: !!decision.blocked, via: decision.via || null, reason: decision.reason || null, missingVerdicts: decision.missingVerdicts || [] } : null });
+  return state;
+}
+
+// The single apply rule (civic.39 rulings 1+3+4): the deterministic checks are
+// the gate that cannot be wrong about the sheet; a FAIL verdict blocks at any
+// time; an unreachable or late model verdict is deferred and stops holding the
+// apply 6h after the engine fire — flagged in the decision, never silent.
+function decideApply(opts) {
+  const clerkStatus = opts.clerkStatus || 'missing';
+  const sanityStatus = opts.sanityStatus || 'missing';
+  if (opts.dryOk === false) return { apply: false, blocked: true, reason: 'applyTrackerUpdates dry-run failed' };
+  if (!opts.deterministicPass) return { apply: false, blocked: true, reason: 'deterministic gate checks failed' };
+  if (clerkStatus === 'fail') return { apply: false, blocked: true, reason: 'clerk verdict FAIL' };
+  if (sanityStatus === 'fail') return { apply: false, blocked: true, reason: 'sanity-read verdict FAIL' };
+  const clerkSettled = clerkStatus === 'pass' || clerkStatus === 'skipped-empty';
+  const sanitySettled = sanityStatus === 'pass' || sanityStatus === 'skipped-empty';
+  if (clerkSettled && sanitySettled) return { apply: true, via: 'verdicts' };
+  const t = opts.firedAt ? new Date(opts.firedAt).getTime() : NaN;
+  const now = opts.now || Date.now();
+  const waitingOn = [];
+  if (!clerkSettled) waitingOn.push('clerk:' + clerkStatus);
+  if (!sanitySettled) waitingOn.push('sanity-read:' + sanityStatus);
+  if (isFinite(t) && now - t > VERDICT_CUTOFF_MS) {
+    return { apply: true, via: 'cutoff', missingVerdicts: waitingOn };
+  }
+  return { apply: false, blocked: false, reason: 'model verdicts not in yet — the apply holds until they pass or the 6h cutoff', waitingOn };
+}
+
+// The deterministic half of the close: assemble → milestone-note normalize →
+// Sunday fold → petition sweep → tracker dry-run. No model calls, no sheet
+// writes — the same path `tick` runs. Returns {ok, dryOk, error}; a failure is
+// a real block, never a deferral.
+function closeDeterministic(cycle) {
+  try {
+    execFileSync('node', [path.join(ROOT, 'scripts', 'assembleDecisions.js'), String(cycle), '--apply'], { cwd: ROOT, stdio: 'inherit', timeout: 120000 });
+
+    // Headless-only normalization (S344, post-Mike write-set ruling): the assembly
+    // concatenates every voice's MilestoneNotes ("primary / others…"), which in a
+    // multi-model cascade re-imports cross-voice disagreement into the tracker's
+    // official record (C102 first run: 45-vs-47 figures, submitted-vs-stalled in
+    // one note). The tracker note becomes the PRIMARY voice's note only; the other
+    // voices' full statements stay in civic-voice JSONs + the production log for
+    // media. Interactive runs (operator-curated) are untouched — this rewrites
+    // only what this chain is about to apply.
+    const decisionsDir = path.join(ROOT, 'output', 'city-civic-database', 'initiatives');
+    let normalized = 0;
+    for (const slug of fs.existsSync(decisionsDir) ? fs.readdirSync(decisionsDir) : []) {
+      const p = path.join(decisionsDir, slug, 'decisions_c' + cycle + '.json');
+      const d = readJson(p);
+      if (!d || !d.trackerUpdates || typeof d.trackerUpdates.MilestoneNotes !== 'string') continue;
+      if (d.trackerUpdates.MilestoneNotes.includes(' / ')) {
+        d.trackerUpdates.MilestoneNotes = d.trackerUpdates.MilestoneNotes.split(' / ')[0].trim();
+        d._notesNormalized = 'primary-only (cron-civic-run close, S344)';
+        fs.writeFileSync(p, JSON.stringify(d, null, 2));
+        normalized++;
+      }
+    }
+    if (normalized) log('milestone notes normalized to primary voice: ' + normalized + ' decisions file(s)');
+
+    // civic.38 Task 2 step 2 — Sunday fold: the week's pending moves become
+    // tracker fields (work) and a candidate-row set (propose) BEFORE the
+    // dry-run, so the gate + clerk + normalizeTrackerWrite see everything.
+    const officeMapForFold = readJson(path.join(ROOT, 'scripts', 'civic-office-map.json')) || { offices: [], projects: [] };
+    foldMovesIntoDecisions(ROOT, cycle, officeMapForFold);
+
+    // civic.38 Task 6.3 — petition → vote: a petition-pending row whose count
+    // clears its support band gets the gated write through the ordinary
+    // decisions channel (Status pending-vote, phase vote-scheduled,
+    // VoteCycle cycle+1 — the one legal Status transition).
+    petitionGateSweep(ROOT, cycle);
+
+    execFileSync('node', [path.join(ROOT, 'scripts', 'applyTrackerUpdates.js'), String(cycle)], { cwd: ROOT, stdio: 'inherit', timeout: 300000 });
+    return { ok: true, dryOk: true };
+  } catch (e) {
+    return { ok: false, dryOk: false, error: e.message };
+  }
+}
+
+// The apply gate as a verdict source: the deterministic prechecks always run;
+// the model sanity-read runs only with sanity:true — a `tick` never spends.
+function runGate(cycle, opts) {
+  const sanity = !opts || opts.sanity !== false;
+  const args = [path.join(ROOT, 'scripts', 'cron-civic-gate.js'), '--cycle', String(cycle)];
+  if (!sanity) args.push('--no-sanity');
+  let exitCode = 0;
+  try {
+    execFileSync('node', args, { cwd: ROOT, stdio: 'inherit', timeout: 300000 });
+  } catch (e) {
+    exitCode = e.status == null ? 1 : e.status;
+  }
+  const rec = readJson(path.join(CIVIC, 'gate_c' + cycle + '.json'));
+  if (exitCode === 1) {
+    // FATAL — the gate died before writing a fresh record; anything on disk is
+    // from an earlier pass and must not stand in for this run's checks.
+    return { exitCode, deterministicPass: false, sanityStatus: 'missing', record: null, fatal: true };
+  }
+  return {
+    exitCode,
+    deterministicPass: rec ? (rec.deterministicPass !== undefined ? rec.deterministicPass
+      : (rec.pass || (rec.failures || []).every(f => f.check === 'sanity-read'))) : false,
+    sanityStatus: rec ? (rec.sanityStatus || (rec.sanity ? (rec.sanity.pass ? 'pass' : 'fail') : 'missing')) : 'missing',
+    record: rec,
+  };
+}
+
+// The single executor for the tracker write. Callers write their own close
+// record. Only reached when decideApply said apply — the write itself stays
+// exactly what applyTrackerUpdates has always done.
+function maybeApply(cycle, decision, APPLY, source) {
+  if (!decision || !decision.apply) return false;
+  if (!APPLY) { log('apply decision is APPLY but this run is dry — re-run with --apply'); return false; }
+  if (decision.via === 'cutoff') {
+    log('APPLYING UNDER THE VERDICT CUTOFF — missing verdicts: ' + (decision.missingVerdicts || []).join(', ') +
+      ' (flagged in the run record; a late FAIL is still a real finding and still blocks any later write)');
+  }
+  execFileSync('node', [path.join(ROOT, 'scripts', 'applyTrackerUpdates.js'), String(cycle), '--apply'], { cwd: ROOT, stdio: 'inherit', timeout: 300000 });
+  log('tracker write applied (' + source + ', via ' + (decision.via || 'verdicts') + ')');
+  return true;
+}
+
+// --stage=tick — the cheap no-model heartbeat (builder-ruled schedule shape:
+// hourly all week). Reads the week state, advances the stages whose inputs
+// exist WITHOUT spending on a model: the deterministic close half and the
+// apply. Idempotent — a second tick on an unchanged week advances nothing and
+// does not even rewrite the state file (acceptance 2).
+async function runTick() {
+  const cycle = arg('--cycle', null) || detectCycle();
+  const APPLY = process.argv.includes('--apply');
+  console.log('Civic TICK — c' + cycle + (APPLY ? ' (APPLY)' : ' (dry)'));
+  console.log('===================================');
+  const state = refreshWeekState(loadWeekState(cycle));
+  if (!state.engineFiredAt) {
+    console.log('[tick] engine has not fired for c' + cycle + ' — nothing to do.');
+    // Don't materialize a state file for a week that hasn't opened.
+    if (fs.existsSync(weekStatePath(cycle))) saveWeekState(state);
+    return;
+  }
+  if (state.stages.apply.status === 'done') {
+    console.log('[tick] c' + cycle + ' already applied — week closed. Nothing to do.');
+    saveWeekState(state);
+    return;
+  }
+
+  // 1. The deterministic close half (fold, petition sweep, vote stamping, the
+  //    deterministic gate checks) — never waits on a model or a missing voice.
+  const cd = state.stages['close-det'];
+  if (cd.status === 'ready') {
+    cd.attempts++; state._dirty = true;
+    console.log('[tick] advancing close-det (attempt ' + cd.attempts + ')');
+    const det = closeDeterministic(cycle);
+    if (!det.ok) {
+      console.error('[tick] close-det failed: ' + det.error + ' — stays ready, retried on a later tick');
+    } else {
+      runGate(cycle, { sanity: false });
+    }
+    refreshWeekState(state);
+  }
+
+  // 2. The apply — itself a no-model write. Fires when decideApply says so:
+  //    deterministic pass, no FAIL verdict, verdicts in or cutoff expired.
+  const ap = state.stages.apply;
+  if (ap.status === 'ready' && ap.inputs.decision && ap.inputs.decision.apply) {
+    const decision = ap.inputs.decision;
+    if (APPLY) {
+      ap.attempts++; state._dirty = true;
+      const applied = maybeApply(cycle, decision, true, 'tick');
+      if (applied) {
+        const p = path.join(CIVIC, 'close_c' + cycle + '.json');
+        const prev = readJson(p) || { stage: 'close', cycle: Number(cycle) };
+        fs.writeFileSync(p, JSON.stringify(Object.assign(prev, {
+          applied: true,
+          appliedVia: 'tick:' + (decision.via || 'verdicts'),
+          missingVerdicts: decision.missingVerdicts || [],
+          clerk: prev.clerk || state.stages['verdict-clerk'].inputs.verdict || 'unknown',
+          gatePass: prev.gatePass !== undefined ? prev.gatePass : !!state.stages['close-det'].inputs.deterministicPass,
+          sanityStatus: state.stages['verdict-sanity'].inputs.verdict || 'missing',
+          laneEntries: prev.laneEntries || 0,
+          ranAt: new Date().toISOString(),
+        }), null, 2));
+      }
+      refreshWeekState(state);
+    } else {
+      console.log('[tick] apply is READY (' + (decision.via || 'verdicts') + (decision.missingVerdicts && decision.missingVerdicts.length ? ', missing: ' + decision.missingVerdicts.join(', ') : '') + ') — dry tick, re-run with --apply to write.');
+    }
+  }
+
+  saveWeekState(state);
+  console.log('[tick] stage board:');
+  for (const name of WEEK_STAGES) {
+    const s = state.stages[name];
+    console.log('  ' + name + ': ' + s.status +
+      (s.inputs && s.inputs.pending && s.inputs.pending.length ? ' (pending: ' + s.inputs.pending.join(', ') + ')' : '') +
+      (s.inputs && s.inputs.verdict ? ' [' + s.inputs.verdict + ']' : '') +
+      (s.inputs && s.inputs.decision && s.inputs.decision.reason ? ' — ' + s.inputs.decision.reason : ''));
+  }
+}
+
 const STAGES = {
   prep: runPrep, directive: runDirective,
   decide: runMayorOpen, 'mayor-open': runMayorOpen,
   voices: runHearing, hearing: runHearing,
   'mayor-gavel': runMayorGavel,
   projects: runProjects, close: runClose, datawake: runDatawake, chain: runChain, status: runStatus,
+  tick: runTick,
 };
 if (require.main === module) {
   if (!STAGE || !STAGES[STAGE]) {
@@ -2810,4 +3157,7 @@ module.exports = { modelChainFor, FALLBACK_MODELS, sentimentWord, crimeWord, ret
   // civic.38 Task 2 — move ledger fold (Sunday close)
   loadMoveLedgerFolded, foldMovesIntoDecisions, slugForInitiative,
   // civic.38 Task 6.3 — petition sweep
-  petitionGateSweep, PETITION_SUPPORT_BANDS };
+  petitionGateSweep, PETITION_SUPPORT_BANDS,
+  // civic.39 — week-boundary stage machine (exported for scripts/cron-civic-tick.test.js)
+  WEEK_STAGES, VERDICT_CUTOFF_MS, weekStatePath, blankWeekState, loadWeekState, saveWeekState,
+  engineFireInfo, refreshWeekState, decideApply, closeDeterministic, runGate, maybeApply, runTick };

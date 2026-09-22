@@ -18,18 +18,26 @@
  *
  * Then ONE cheap model sanity-read (independence rule: family must differ from
  * every writer family recorded in the run manifests) for contradictions /
- * fabrications across the decision set.
+ * fabrications across the decision set. civic.39 (ruling 3): the sanity-read is
+ * a DEFERRED VERDICT, not a fail-closed block — an unreachable or unparseable
+ * sanity model records sanityStatus 'deferred' (retried next window; the apply
+ * holds until the 6h-after-engine-fire cutoff), and only a real FAIL verdict
+ * blocks. `--no-sanity` skips the model call entirely (the civic.39 `tick`
+ * path — no model spend) and carries any prior recorded verdict forward.
  *
- * Any failure: decisions stay staged (copied to output/cron-civic/staged/c{XX}/),
- * Discord webhook alert (DISCORD_WEBHOOK_URL), gate record written, exit 2.
- * Pass: exit 0 — the caller (cron-civic-run.js --stage=close) may then --apply.
+ * Any deterministic failure (or a sanity FAIL): decisions stay staged (copied
+ * to output/cron-civic/staged/c{XX}/), Discord webhook alert
+ * (DISCORD_WEBHOOK_URL), gate record written, exit 2.
+ * Pass: exit 0 — the caller (cron-civic-run.js --stage=close / --stage=tick)
+ * decides the apply from the record's deterministicPass + sanityStatus.
  *
  * UNDO PATH if a bad apply ever lands: utilities/cycleRollback.js restores the
  * Initiative_Tracker from the pre-cycle snapshot.
  *
  * Usage:
- *   node scripts/cron-civic-gate.js --cycle <XX> [--max-rows 5] [--model <slug>]
- * Exit codes: 0 = pass, 2 = blocked, 1 = fatal (missing inputs / config error)
+ *   node scripts/cron-civic-gate.js --cycle <XX> [--max-rows 5] [--model <slug>] [--no-sanity]
+ * Exit codes: 0 = deterministic pass (sanity may be pass/deferred/skipped),
+ *             2 = deterministic failure or sanity FAIL verdict, 1 = fatal
  */
 
 require('/root/GodWorld/lib/env');
@@ -210,16 +218,27 @@ if (require.main === module) (async () => {
   const MAX_ROWS = parseInt(arg('--max-rows', String((trackerSnap && trackerSnap.initiatives || []).length || 6)), 10);
   console.log('Civic Apply Gate — c' + cycle);
   console.log('===================================');
-  // Independence rule, resolved up front (no spend): the sanity reader's family
-  // must differ from every family that wrote this cycle.
-  const writerFamilies = collectWriterFamilies(cycle);
-  const picked = pickGateModel(writerFamilies, arg('--model', null));
-  if (picked.error) { console.error('FATAL: ' + picked.error); process.exit(1); }
-  const MODEL = picked.model;
-  log('gate model ' + MODEL + ' (writer families: ' + [...writerFamilies].join(', ') + ')');
+  // civic.39: --no-sanity is the tick path — deterministic prechecks only, no
+  // model spend, no family pick. A prior recorded sanity verdict is carried
+  // forward below (a FAIL verdict blocks at any time; a pass is not downgraded).
+  const NO_SANITY = process.argv.includes('--no-sanity');
+  let MODEL = null;
+  if (!NO_SANITY) {
+    // Independence rule, resolved up front (no spend): the sanity reader's family
+    // must differ from every family that wrote this cycle.
+    const writerFamilies = collectWriterFamilies(cycle);
+    const picked = pickGateModel(writerFamilies, arg('--model', null));
+    if (picked.error) { console.error('FATAL: ' + picked.error); process.exit(1); }
+    MODEL = picked.model;
+    log('gate model ' + MODEL + ' (writer families: ' + [...writerFamilies].join(', ') + ')');
+  } else {
+    log('--no-sanity: deterministic prechecks only (no model spend)');
+  }
 
+  // civic.39 ruling 2: missing voices are pending, never fatal — the
+  // deterministic checks run over whatever arrived (possibly the empty set).
   const voiceJsons = loadVoiceJsons(cycle);
-  if (!Object.keys(voiceJsons).length) { console.error('FATAL: no voice JSONs for c' + cycle); process.exit(1); }
+  if (!Object.keys(voiceJsons).length) log('no voice JSONs for c' + cycle + ' — voices pending; deterministic checks run over the empty set');
 
   const failures = [];
 
@@ -284,8 +303,24 @@ if (require.main === module) (async () => {
   // Audits the ASSEMBLED write-set (decisions_c{XX}.json — what actually reaches
   // the tracker), NOT the raw statements: cross-voice disagreement is designed
   // political friction (Mike-direct S344); the gate protects the sheet.
+  // civic.39 ruling 3: a deferred verdict, never fail-closed — call/parse/
+  // sheet-read failures record sanityStatus 'deferred' and the apply holds
+  // until the verdict lands or the 6h cutoff expires; only a returned
+  // pass:false is a FAIL and blocks.
   let sanity = null;
-  if (!failures.length) {
+  let sanityStatus = 'missing';
+  if (NO_SANITY) {
+    const prior = readJson(path.join(CIVIC, 'gate_c' + cycle + '.json'));
+    if (prior && (prior.sanityStatus === 'pass' || prior.sanityStatus === 'fail' || prior.sanityStatus === 'skipped-empty')) {
+      sanityStatus = prior.sanityStatus;
+      sanity = prior.sanity || null;
+      if (sanityStatus === 'fail') failures.push({ check: 'sanity-read', detail: 'prior sanity-read FAIL verdict stands (carried forward)' });
+      log('--no-sanity: carried prior sanity verdict forward (' + sanityStatus + ')');
+    } else {
+      sanityStatus = 'skipped';
+      log('--no-sanity: sanity-read not run this pass (deferred to a model window)');
+    }
+  } else if (!failures.length) {
     const decisionsDir = path.join(ROOT, 'output', 'city-civic-database', 'initiatives');
     const writeSet = [];
     if (fs.existsSync(decisionsDir)) {
@@ -294,49 +329,62 @@ if (require.main === module) (async () => {
         if (d) writeSet.push({ slug, d });
       }
     }
-    // The auditor reads the NORMALIZED write (what applyTrackerUpdates will
-    // actually put in the row — clock advanced, phase canonicalized, notes
-    // trimmed) next to the row as it stands. The raw assembled updates were
-    // audited before 2026-09-13: mistral flagged INIT-007's clock at 106 (which
-    // the writer advances to 107) and a running total it had no prior row to
-    // check against. The record is the diff, so the auditor gets the diff.
-    let trackerRows = null;
-    if (writeSet.length) {
-      try { trackerRows = await require('../lib/sheets').getSheetAsObjects('Initiative_Tracker'); }
-      catch (e) { failures.push({ check: 'sanity-read', detail: 'Initiative_Tracker read failed (fail-closed): ' + e.message }); }
-    }
     if (!writeSet.length && !candidates.length) {
-      failures.push({ check: 'sanity-read', detail: 'no assembled decisions_c' + cycle + '.json files and no candidates — run assembleDecisions before the gate (fail-closed)' });
-    } else if (trackerRows || (!writeSet.length && candidates.length)) {
-      const digest = writeSet.map(({ slug, d }) => {
-        const tu = d.trackerUpdates || {};
-        const initId = d.initiativeId || tu.InitiativeID || slug;
-        const cur = trackerRows.find(r => r.InitiativeID === initId || r.ID === initId || r.id === initId) || {};
-        const prior = {};
-        for (const f of TRACKER_AUDIT_FIELDS) if (cur[f] !== undefined && cur[f] !== '') prior[f] = cur[f];
-        const { updates } = normalizeTrackerWrite(tu, cur, Number(cycle));
-        return '## ' + initId + ' (primary voice: ' + (d.primaryVoice || d.primary || '?') + ')\n' +
-          'prior row: ' + JSON.stringify(prior) + '\n' +
-          'write: ' + JSON.stringify(updates);
-      }).concat(candidates.map(c =>
-        '## NEW CANDIDATE ' + (c.moveId || '?') + ' (proposed by ' + (c.proposingOffice || c.agentDir || '?') + ', C' + cycle + ')\n' +
-        'prior row: none — this APPENDS a row to the tracker\n' +
-        'write: ' + JSON.stringify({ Name: c.title, Status: 'proposed', VoteCycle: '', AffectedNeighborhoods: (c.hoods || []).join(', '), intervention: c.intervention, problem: c.problem })
-      )).join('\n\n');
-      const sys = 'You are a neutral records auditor for a city government. You check the cycle\'s FINAL tracker write-set — each entry shows the row as it stands (prior row) and the fields about to be written (write) — for internal contradictions and fabrications before it is committed to the record. The prior row IS the city\'s record: a write that extends it (a later month, a running total, the next phase, a next action scheduled for a later cycle) is grounded and needs no outside verification. Political disagreement between offices is out of scope — you audit only what is about to be written.';
-      const user = 'Final write-set for cycle ' + cycle + ' (one entry per initiative, already resolved by voice priority; NextActionCycle is the cycle the row is next acted on, always after ' + cycle + '):\n\n' + digest +
-        '\n\nChecks: (a) does any single write contradict itself (phase vs milestone notes telling different stories)? (b) does a write contradict its own prior row — a phase moving backwards, a figure that cannot follow from the prior figure, a milestone the prior row says already happened? (c) does any write look fabricated — a vote result, dollar figure, or program that no city record could plausibly contain? Do not flag a figure merely because you cannot verify it from outside.\n\nRespond ONLY with JSON: {"pass": true|false, "issues": ["<one line each>"]}';
-      try {
-        // 8000: gemini-flash spends reasoning tokens from the same budget — at
-        // 2000 the verdict JSON truncated mid-string (same trap cron-rhea-gate hit)
-        const raw = await callOpenRouter(MODEL, sys, user, 8000);
-        const s = raw.replace(/^\s*```(?:json)?\s*/i, '').replace(/\s*```\s*$/, '');
-        sanity = JSON.parse(s.slice(s.indexOf('{'), s.lastIndexOf('}') + 1));
-        log('sanity-read (' + MODEL + '): ' + (sanity.pass ? 'pass' : 'FAIL') + ((sanity.issues || []).length ? ' — ' + sanity.issues.join('; ').slice(0, 300) : ''));
-        if (!sanity.pass) for (const i of sanity.issues || []) failures.push({ check: 'sanity-read', detail: i });
-      } catch (e) {
-        // fail-closed: an unreachable/unparseable sanity model blocks the apply
-        failures.push({ check: 'sanity-read', detail: 'call/parse failed (fail-closed): ' + e.message });
+      if (Object.keys(voiceJsons).length) {
+        // Voices on disk but nothing assembled — the assemble step was skipped
+        // (operator error), not an empty week. Fail-closed as before.
+        failures.push({ check: 'sanity-read', detail: 'voice JSONs on disk but no assembled decisions_c' + cycle + '.json files and no candidates — run assembleDecisions before the gate (fail-closed)' });
+      } else {
+        // A genuinely empty write-set (no voices, no decisions, no candidates):
+        // nothing reaches the tracker, so there is nothing to audit.
+        sanityStatus = 'skipped-empty';
+        log('sanity-read: empty write-set (no voices, no decisions, no candidates) — nothing to audit');
+      }
+    } else {
+      // The auditor reads the NORMALIZED write (what applyTrackerUpdates will
+      // actually put in the row — clock advanced, phase canonicalized, notes
+      // trimmed) next to the row as it stands. The raw assembled updates were
+      // audited before 2026-09-13: mistral flagged INIT-007's clock at 106 (which
+      // the writer advances to 107) and a running total it had no prior row to
+      // check against. The record is the diff, so the auditor gets the diff.
+      let trackerRows = null;
+      if (writeSet.length) {
+        try { trackerRows = await require('../lib/sheets').getSheetAsObjects('Initiative_Tracker'); }
+        catch (e) { sanityStatus = 'deferred'; log('sanity-read DEFERRED: Initiative_Tracker read failed — ' + e.message); }
+      }
+      if (trackerRows || (!writeSet.length && candidates.length)) {
+        const digest = writeSet.map(({ slug, d }) => {
+          const tu = d.trackerUpdates || {};
+          const initId = d.initiativeId || tu.InitiativeID || slug;
+          const cur = trackerRows.find(r => r.InitiativeID === initId || r.ID === initId || r.id === initId) || {};
+          const prior = {};
+          for (const f of TRACKER_AUDIT_FIELDS) if (cur[f] !== undefined && cur[f] !== '') prior[f] = cur[f];
+          const { updates } = normalizeTrackerWrite(tu, cur, Number(cycle));
+          return '## ' + initId + ' (primary voice: ' + (d.primaryVoice || d.primary || '?') + ')\n' +
+            'prior row: ' + JSON.stringify(prior) + '\n' +
+            'write: ' + JSON.stringify(updates);
+        }).concat(candidates.map(c =>
+          '## NEW CANDIDATE ' + (c.moveId || '?') + ' (proposed by ' + (c.proposingOffice || c.agentDir || '?') + ', C' + cycle + ')\n' +
+          'prior row: none — this APPENDS a row to the tracker\n' +
+          'write: ' + JSON.stringify({ Name: c.title, Status: 'proposed', VoteCycle: '', AffectedNeighborhoods: (c.hoods || []).join(', '), intervention: c.intervention, problem: c.problem })
+        )).join('\n\n');
+        const sys = 'You are a neutral records auditor for a city government. You check the cycle\'s FINAL tracker write-set — each entry shows the row as it stands (prior row) and the fields about to be written (write) — for internal contradictions and fabrications before it is committed to the record. The prior row IS the city\'s record: a write that extends it (a later month, a running total, the next phase, a next action scheduled for a later cycle) is grounded and needs no outside verification. Political disagreement between offices is out of scope — you audit only what is about to be written.';
+        const user = 'Final write-set for cycle ' + cycle + ' (one entry per initiative, already resolved by voice priority; NextActionCycle is the cycle the row is next acted on, always after ' + cycle + '):\n\n' + digest +
+          '\n\nChecks: (a) does any single write contradict itself (phase vs milestone notes telling different stories)? (b) does a write contradict its own prior row — a phase moving backwards, a figure that cannot follow from the prior figure, a milestone the prior row says already happened? (c) does any write look fabricated — a vote result, dollar figure, or program that no city record could plausibly contain? Do not flag a figure merely because you cannot verify it from outside.\n\nRespond ONLY with JSON: {"pass": true|false, "issues": ["<one line each>"]}';
+        try {
+          // 8000: gemini-flash spends reasoning tokens from the same budget — at
+          // 2000 the verdict JSON truncated mid-string (same trap cron-rhea-gate hit)
+          const raw = await callOpenRouter(MODEL, sys, user, 8000);
+          const s = raw.replace(/^\s*```(?:json)?\s*/i, '').replace(/\s*```\s*$/, '');
+          sanity = JSON.parse(s.slice(s.indexOf('{'), s.lastIndexOf('}') + 1));
+          sanityStatus = sanity.pass ? 'pass' : 'fail';
+          log('sanity-read (' + MODEL + '): ' + (sanity.pass ? 'pass' : 'FAIL') + ((sanity.issues || []).length ? ' — ' + sanity.issues.join('; ').slice(0, 300) : ''));
+          if (!sanity.pass) for (const i of sanity.issues || []) failures.push({ check: 'sanity-read', detail: i });
+        } catch (e) {
+          // deferred, never fail-closed (civic.39 ruling 3)
+          sanityStatus = 'deferred';
+          log('sanity-read DEFERRED (call/parse failed — retried next window, never a FAIL): ' + e.message);
+        }
       }
     }
   } else {
@@ -344,7 +392,10 @@ if (require.main === module) (async () => {
   }
 
   const record = {
-    cycle: Number(cycle), pass: failures.length === 0, failures,
+    cycle: Number(cycle), pass: failures.length === 0,
+    deterministicPass: !failures.some(f => f.check !== 'sanity-read'),
+    sanityStatus,
+    failures,
     touchedInitiatives: [...touched], maxRows: MAX_ROWS,
     sanity, model: MODEL, ranAt: new Date().toISOString(),
   };

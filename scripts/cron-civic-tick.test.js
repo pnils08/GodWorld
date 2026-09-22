@@ -482,6 +482,7 @@ const {
   batchSubmitHearing, batchCollectHearing, batchInFlightSlugs, loadBatchManifest,
 } = civicRun;
 const orBatchModule = require('./orBatch');
+const cityHallLedger = require('./cityHallLedger');
 
 const BATCH_OFFICEMAP = {
   offices: [
@@ -604,6 +605,51 @@ testAsync('collect lands valid voices out of order, rejects the invalid seat, ne
   assert.strictEqual(m.seats.council_d7.status, 'rejected');
   assert.ok(m.seats.council_d7.error);
   assert.ok(!batchInFlightSlugs(CYCLE, root).has('council_d6'));
+});
+
+// Adversarial review of 9e076842, Finding 2: runHearing already wrote
+// hearing_c/voices_c with ok:false,pending:true for a batch-in-flight seat
+// (and never touched cityHallLedger for it). Without batchCollectHearing
+// healing those records, the seat's voice lands on disk but stays invisible
+// forever to runMayorGavel's `.filter(r => r.ok)`, runClose's arrived/pending
+// split, and refreshWeekState's hearingPending.
+testAsync('collect heals the seat back into hearing_c/voices_c and the city hall ledger (Finding 2)', async () => {
+  const { root } = await submittedBatchRoot();
+  const pendingResults = [
+    { dir: 'civic-office-council-d2', slug: 'council_d2', model: 'meta-llama/llama-3.3-70b-instruct', ok: true, output: 'x', statements: 1 },
+    { dir: 'civic-office-council-d6', slug: 'council_d6', model: 'google/gemini-3.7-flash', ok: false, pending: true, error: 'batch in flight' },
+    { dir: 'civic-office-council-d7', slug: 'council_d7', model: 'google/gemini-3.7-flash', ok: false, pending: true, error: 'batch in flight' },
+  ];
+  for (const f of ['hearing_c' + CYCLE + '.json', 'voices_c' + CYCLE + '.json']) {
+    writeJson(root, 'output/cron-civic/' + f, { stage: 'hearing', cycle: CYCLE, results: pendingResults });
+  }
+  const client = fakeBatchClient({
+    submit: async () => { throw new Error('no resubmit inside collect'); },
+    get: async () => ({
+      status: 'completed',
+      results: [
+        { custom_id: 'c' + CYCLE + '-council_d6-a1', response: { body: { choices: [{ message: { content: voiceText('council_d6') }, finish_reason: 'stop' }] } } },
+        { custom_id: 'c' + CYCLE + '-council_d7-a1', response: { body: { choices: [{ message: { content: 'not json at all' }, finish_reason: 'stop' }] } } },
+      ],
+    }),
+  });
+  const r = await batchCollectHearing(CYCLE, batchOpts(root, client));
+  assert.deepStrictEqual(r.collected, ['council_d6']);
+  assert.deepStrictEqual(r.rejected, ['council_d7']);
+
+  for (const f of ['hearing_c' + CYCLE + '.json', 'voices_c' + CYCLE + '.json']) {
+    const man = JSON.parse(fs.readFileSync(path.join(root, 'output', 'cron-civic', f), 'utf8'));
+    const d6 = man.results.find(x => x.slug === 'council_d6');
+    const d7 = man.results.find(x => x.slug === 'council_d7');
+    const d2 = man.results.find(x => x.slug === 'council_d2');
+    assert.strictEqual(d6.ok, true, f + ': collected seat healed to ok:true');
+    assert.ok(d6.voiceJson, f + ': healed entry carries the voice for runMayorGavel to quote');
+    assert.strictEqual(d7.ok, false, f + ': rejected seat stays pending, not falsely healed');
+    assert.strictEqual(d2.ok, true, f + ': untouched sync seat is unaffected');
+  }
+  const ledger = cityHallLedger.loadOrCreate(CYCLE, root);
+  assert.ok(ledger.hearing.some(h => h.officeId === 'COUNCIL-D6'), 'collected seat reaches the city hall ledger');
+  assert.ok(!ledger.hearing.some(h => h.officeId === 'COUNCIL-D7'), 'rejected seat does not appear in the ledger');
 });
 
 testAsync('the next submit window resubmits only the rejected seat, attempt 2', async () => {

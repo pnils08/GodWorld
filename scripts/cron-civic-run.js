@@ -1807,25 +1807,67 @@ async function batchCollectHearing(cycle, opts) {
         seat.status = 'rejected'; seat.error = why; seat.updated = new Date().toISOString();
         rejected.push(slug);
       };
-      const r = results.find(x => x && x.custom_id === seat.customId);
-      if (!r) { fail('no result for ' + seat.customId + ' in batch ' + batchId); continue; }
-      const ex = orBatch.resultText(r);
-      if (ex.error) { fail(ex.error); continue; }
-      const hp = await hearingSeatPrompt(seat.dir, cycle, officeMap, initiatives, opts);
-      const v = validateVoiceJson(ex.text);
-      if (v.ok) {
-        const why = composeChecks(noPhaseCheck,
-          statementNumberCheck(hp.hay, { district: hp.seat && hp.seat.district, cycle }))(v.json);
-        if (why) { v.ok = false; v.why = why; }
+      // Per-seat isolation, matching runHearing's per-dir try/catch: one bad
+      // seat (a missing packet, a read failure) must reject that seat only,
+      // not abort the sibling seats in the same batch or skip the manifest
+      // write below (found in adversarial review of 9e076842, Finding 3).
+      try {
+        const r = results.find(x => x && x.custom_id === seat.customId);
+        if (!r) { fail('no result for ' + seat.customId + ' in batch ' + batchId); continue; }
+        const ex = orBatch.resultText(r);
+        if (ex.error) { fail(ex.error); continue; }
+        const hp = await hearingSeatPrompt(seat.dir, cycle, officeMap, initiatives, opts);
+        const v = validateVoiceJson(ex.text);
+        if (v.ok) {
+          const why = composeChecks(noPhaseCheck,
+            statementNumberCheck(hp.hay, { district: hp.seat && hp.seat.district, cycle }))(v.json);
+          if (why) { v.ok = false; v.why = why; }
+        }
+        if (!v.ok) { fail(v.why); continue; }
+        const voicePath = path.join(root, 'output', 'civic-voice', slug + '_c' + cycle + '.json');
+        fs.mkdirSync(path.dirname(voicePath), { recursive: true });
+        fs.writeFileSync(voicePath, JSON.stringify(v.json, null, 2));
+        seat.status = 'collected'; seat.usage = ex.usage || null; seat.error = null; seat.updated = new Date().toISOString();
+        collected.push(slug);
+        await (opts.wallRecord || positionWallRecordCascade)(officeMap, seat.dir, v.json, cycle);
+
+        // Heal the seat back into the synchronous hearing stage's own records.
+        // runHearing already wrote hearing_c/voices_c with ok:false,pending:true
+        // for this seat (it went by batch, not synchronously) and never
+        // appended it to cityHallLedger. Without this, the seat's voice sits
+        // on disk but stays permanently invisible to runMayorGavel's
+        // `.filter(r => r.ok)`, runClose's arrived/pending split, and
+        // refreshWeekState's hearingPending — the seat is silenced from the
+        // gavel transcript and the ledger forever (adversarial review of
+        // 9e076842, Finding 2).
+        const seatRow = civicSeat.resolveOfficeRow(officeMap, seat.dir);
+        const packRef = districtPackRef(seat.dir, cycle, officeMap, root);
+        if (seatRow) {
+          let ledger = cityHallLedger.loadOrCreate(cycle, root);
+          ledger = cityHallLedger.appendHearing(ledger, cityHallLedger.hearingRow(seatRow, v.json, voicePath, {
+            seatStatus: civicSeat.seatStatus(seatRow),
+            lever: (packRef && packRef.lever) || '',
+          }));
+          cityHallLedger.save(ledger, root);
+        }
+        for (const manName of ['hearing_c' + cycle + '.json', 'voices_c' + cycle + '.json']) {
+          const manPath = path.join(root, 'output', 'cron-civic', manName);
+          const man = readJson(manPath);
+          if (man && Array.isArray(man.results)) {
+            const idx = man.results.findIndex(x => x.slug === slug);
+            const entry = {
+              dir: seat.dir, slug, model: seat.model, ok: true, output: voicePath,
+              statements: v.json.statements.length, attempts: seat.attempt || 0,
+              seat: seatRow, voiceJson: v.json, lever: (packRef && packRef.lever) || '',
+            };
+            if (idx >= 0) man.results[idx] = entry; else man.results.push(entry);
+            fs.writeFileSync(manPath, JSON.stringify(man, null, 2) + '\n');
+          }
+        }
+        log('collected ' + slug + ' (' + seat.model + ', batch ' + batchId + ', attempt ' + seat.attempt + ')');
+      } catch (e) {
+        fail('collect threw: ' + e.message);
       }
-      if (!v.ok) { fail(v.why); continue; }
-      const voicePath = path.join(root, 'output', 'civic-voice', slug + '_c' + cycle + '.json');
-      fs.mkdirSync(path.dirname(voicePath), { recursive: true });
-      fs.writeFileSync(voicePath, JSON.stringify(v.json, null, 2));
-      seat.status = 'collected'; seat.usage = ex.usage || null; seat.error = null; seat.updated = new Date().toISOString();
-      collected.push(slug);
-      await (opts.wallRecord || positionWallRecordCascade)(officeMap, seat.dir, v.json, cycle);
-      log('collected ' + slug + ' (' + seat.model + ', batch ' + batchId + ', attempt ' + seat.attempt + ')');
     }
   }
   fs.writeFileSync(batchManifestPath(cycle, root), JSON.stringify(manifest, null, 2) + '\n');

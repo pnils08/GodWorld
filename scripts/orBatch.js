@@ -49,7 +49,7 @@ function request(method, p, body) {
   return new Promise((resolve, reject) => {
     const data = body ? JSON.stringify(body) : null;
     const req = https.request({
-      hostname: 'openrouter.ai', path: p, method,
+      hostname: 'openrouter.ai', path: p, method, timeout: 60000,
       headers: Object.assign({ Authorization: 'Bearer ' + apiKey() },
         data ? { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(data) } : {}),
     }, res => {
@@ -62,6 +62,9 @@ function request(method, p, body) {
       });
     });
     req.on('error', reject);
+    // A stalled socket to OpenRouter would otherwise hang runTick indefinitely
+    // while polling batch status (adversarial review of 9e076842, Finding 4).
+    req.on('timeout', () => { req.destroy(); reject(new Error('OpenRouter request timed out')); });
     if (data) req.write(data);
     req.end();
   });
@@ -103,8 +106,12 @@ async function submitBatch(model, requests, opts) {
     id: res.id, label: opts.label || null, model, requests: requests.length,
     created: new Date().toISOString(), status: res.status,
   }, opts.extra || {});
-  fs.mkdirSync(path.dirname(REGISTRY), { recursive: true });
-  fs.appendFileSync(REGISTRY, JSON.stringify(rec) + '\n');
+  // opts.root lets a sandbox/test caller keep its registry inside its own
+  // workspace instead of appending to the live ROOT/output registry
+  // (adversarial review of 9e076842, Finding 5).
+  const registry = opts.registry || path.join(opts.root || ROOT, 'output', 'or-batches.jsonl');
+  fs.mkdirSync(path.dirname(registry), { recursive: true });
+  fs.appendFileSync(registry, JSON.stringify(rec) + '\n');
   return { id: res.id, status: res.status, record: rec, raw: res };
 }
 

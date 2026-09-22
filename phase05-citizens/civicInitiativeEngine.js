@@ -168,7 +168,8 @@ function runCivicInitiativeEngine_(ctx) {
     stage: idx('Stage'), lastStageChange: idx('LastStageChangeCycle'), lastWork: idx('LastWorkCycle'),
     status: iStatus, mayoralAction: iMayoralAction, phase: iImplementationPhase,
     policyDomain: iPolicyDomain, lastUpdated: iLastUpdated, id: iID, name: iName,
-    baseline: idx('StageBaseline'), hold: idx('StageHold'), hoods: iAffectedNeighborhoods
+    baseline: idx('StageBaseline'), hold: idx('StageHold'), hoods: iAffectedNeighborhoods,
+    priorPhase: idx('PriorPhase')
   };
 
   // v1.2: Required header validation to prevent silent write failures
@@ -227,6 +228,7 @@ function runCivicInitiativeEngine_(ctx) {
       rows[r] = row;
       updated = true;
     }
+    var isStagedRow = stageIx.stage >= 0 && !!String(row[stageIx.stage] == null ? '' : row[stageIx.stage]).trim();
 
     // Skip resolved or inactive (v1.7: added veto-related statuses)
     if (status === 'resolved' || status === 'failed' || status === 'inactive' ||
@@ -242,7 +244,10 @@ function runCivicInitiativeEngine_(ctx) {
     // has no path to move". Skipped un-held, INIT-002/INIT-006 sat at 105 and
     // scored the Mayor silence every cycle (−6 −3) until the chain re-armed them.
     if (status === 'passed' && row[iMayoralAction] === 'signed') {
-      if (applyEngineClockHold_(ctx, row, cycle, false, initId, iNextActionCycle, iNotes, iLastUpdated)) {
+      // civic.38 ruling 2: a staged row has one clock (the stage model's) — the
+      // ENGINE-CLOCK hold has nothing to detect there and writes machine state
+      // into Notes. Legacy rows keep it.
+      if (!isStagedRow && applyEngineClockHold_(ctx, row, cycle, false, initId, iNextActionCycle, iNotes, iLastUpdated)) {
         rows[r] = row;
         updated = true;
       }
@@ -283,7 +288,9 @@ function runCivicInitiativeEngine_(ctx) {
     // complete, failed→re-vote, conditional→ratification). Engine currently
     // wires only the visioning-complete case; failed→re-vote and ratification
     // can be added when those flows surface a real schedule signal.
-    if (status === 'visioning-complete' &&
+    // civic.38 step 2: a staged row's vote is scheduled by the petition / call-vote
+    // path, never by NextActionCycle — the v1.9 reschedule is legacy-only.
+    if (!isStagedRow && status === 'visioning-complete' &&
         iImplementationPhase >= 0 && iNextActionCycle >= 0) {
       var implPhase = (row[iImplementationPhase] || '').toString().toLowerCase();
       var nextCycle = Number(row[iNextActionCycle]) || 0;
@@ -320,7 +327,7 @@ function runCivicInitiativeEngine_(ctx) {
     // is left alone. (v2.1: body lives in applyEngineClockHold_ so the signed
     // skip above can share it.)
     var engineWillAct = (voteCycle === cycle && (status === 'active' || status === 'pending-vote'));
-    if (applyEngineClockHold_(ctx, row, cycle, engineWillAct, initId, iNextActionCycle, iNotes, iLastUpdated)) {
+    if (!isStagedRow && applyEngineClockHold_(ctx, row, cycle, engineWillAct, initId, iNextActionCycle, iNotes, iLastUpdated)) {
       rows[r] = row;
       updated = true;
     }
@@ -3226,12 +3233,13 @@ function civicDeliveryHoldStep_(input) {
   var prev = inp.hold;
   if (typeof prev === 'string') { try { prev = prev.trim() ? JSON.parse(prev) : null; } catch (e) { prev = null; } }
   var cnt = function (v) { var x = Number(v); return isFinite(x) && x > 0 ? Math.floor(x) : 0; };
-  var state = { v: 1, obs: 0, up: 0, down: 0, first: 0, regressed: 0, m: null, r: null };
+  var state = { v: 1, obs: 0, up: 0, down: 0, first: 0, regressed: 0, m: null, r: null, st: 0 };
   if (prev && typeof prev === 'object' && prev.v === 1) {
     state.obs = cnt(prev.obs); state.up = cnt(prev.up); state.down = cnt(prev.down);
     state.first = cnt(prev.first); state.regressed = cnt(prev.regressed);
     state.m = isFinite(Number(prev.m)) && prev.m !== null && prev.m !== '' ? Number(prev.m) : null;
     state.r = isFinite(Number(prev.r)) && prev.r !== null && prev.r !== '' ? Number(prev.r) : null;
+    state.st = cnt(prev.st);   // stall-entry Cycle (stallClock's field) — carried, never judged here
   }
   var same = function (reason) { return { changed: false, hold: state, verdict: null, firstDelivery: false, reason: reason }; };
   var stage = String(inp.stage == null ? '' : inp.stage).trim();
@@ -3250,7 +3258,7 @@ function civicDeliveryHoldStep_(input) {
   var after = Number(inp.eligibleAfter);
   if (!isFinite(after) || after < 1) return same('no-stage-change-cycle');
   if (!state.obs && !(obs > after)) return same('not-yet-eligible');
-  var next = { v: 1, obs: obs, up: state.up, down: state.down, first: state.first, regressed: state.regressed, m: margin, r: share };
+  var next = { v: 1, obs: obs, up: state.up, down: state.down, first: state.first, regressed: state.regressed, m: margin, r: share, st: state.st };
   if ((state.obs && obs !== state.obs + 1) || (state.m !== null && state.m !== margin) || (state.r !== null && state.r !== share)) { next.up = 0; next.down = 0; }
   var edge = inp.edge || {};
   if (edge.available !== true || Number(edge.cycle) !== obs || !isFinite(Number(edge.minEdge)) || edge.minEdge === null) {
@@ -3275,6 +3283,63 @@ function civicDeliveryHoldStep_(input) {
     next.regressed = fire;
   }
   return { changed: true, hold: next, verdict: verdict, firstDelivery: firstDelivery, reason: null };
+}
+
+// MIRROR of lib/initiativePhaseContract.js stallClock — body text-identical (parity-tested).
+function civicStallClock_(input) {
+  var inp = input || {};
+  var out = { clock: null, reference: 0, elapsed: 0, limit: 0, stalled: false, reason: null };
+  var stage = String(inp.stage == null ? '' : inp.stage).trim();
+  if (!stage) { out.reason = 'legacy-row'; return out; }
+  if (stage === 'Proposed') { out.reason = 'no-clock-on-proposed'; return out; }
+  if (['Funded', 'Standing', 'Delivering'].indexOf(stage) < 0) { out.reason = 'unknown-stage'; return out; }
+  var phase = String(inp.phase == null ? '' : inp.phase).trim().toLowerCase();
+  if (phase === 'stalled' || phase === 'blocked' || phase === 'suspended' || phase === 'defunded') { out.reason = 'already-down:' + phase; return out; }
+  if (inp.blocked) { out.reason = 'gate-' + String(inp.blocked); return out; }
+  var cycle = Number(inp.cycle);
+  if (!isFinite(cycle) || cycle < 1) { out.reason = 'no-cycle'; return out; }
+  var change = Number(inp.lastStageChangeCycle);
+  var work = Number(inp.lastWorkCycle);
+  var changeOk = isFinite(change) && change >= 1;
+  var workOk = isFinite(work) && work >= 1;
+  var limit;
+  if (stage === 'Funded') {
+    if (!changeOk) { out.reason = 'no-stage-change-cycle'; return out; }
+    out.clock = 'funded';
+    out.reference = change;
+    limit = Number(inp.stallCycles);
+  } else {
+    var ref = Math.max(changeOk ? change : 0, workOk ? work : 0);
+    if (!(ref >= 1)) { out.reason = 'no-reference-cycle'; return out; }
+    out.clock = 'untended';
+    out.reference = ref;
+    limit = Number(inp.untendedStallCycles);
+  }
+  if (!isFinite(limit) || limit < 1) { out.clock = null; out.reason = 'bad-dial'; return out; }
+  out.limit = limit;
+  out.elapsed = Math.max(0, cycle - out.reference);
+  out.stalled = out.elapsed > limit;
+  return out;
+}
+
+// MIRROR of lib/initiativePhaseContract.js reviveDecision — body text-identical (parity-tested).
+function civicReviveDecision_(input) {
+  var inp = input || {};
+  var stage = String(inp.stage == null ? '' : inp.stage).trim();
+  var phase = String(inp.phase == null ? '' : inp.phase).trim().toLowerCase();
+  if (!stage) return { revive: false, phase: null, reason: 'legacy-row' };
+  if (phase !== 'stalled') return { revive: false, phase: null, reason: 'not-stalled' };
+  var st = Number(inp.stallCycle);
+  if (!isFinite(st) || st < 1) return { revive: false, phase: null, reason: 'no-stall-cycle' };
+  var work = Number(inp.lastWorkCycle);
+  if (!isFinite(work) || work < 1) return { revive: false, phase: null, reason: 'no-work' };
+  // >= : the fold stamps the closing Cycle, and a stall decided at fire N leaves
+  // that week's work stamped N — it DID land after the stall (same rule as the
+  // Funded work gate).
+  if (!(work >= st)) return { revive: false, phase: null, reason: 'work-predates-stall' };
+  var prior = String(inp.priorPhase == null ? '' : inp.priorPhase).trim();
+  if (!prior) prior = stage === 'Funded' ? 'vote-ready' : 'operational';
+  return { revive: true, phase: prior, reason: null };
 }
 
 
@@ -3370,8 +3435,8 @@ function applyCivicStageMove_(ctx, row, ix, cycle) {
 
 /**
  * The ONE stage entry point for a tracker row (three call sites in
- * runCivicInitiativeEngine_). In order: the vote/work move, the once-only
- * baseline stamp, the Delivering hold. Each half is idempotent within a fire —
+ * runCivicInitiativeEngine_). In order: revival, the vote/work move, the
+ * once-only baseline stamp, the Delivering hold, the losing clock. Each half is idempotent within a fire —
  * a move refuses a second step in the Cycle it stepped, a filled baseline is
  * never rewritten, and the hold counts one observation once — so calling this
  * three times on one row is the same as calling it once. No-op on a blank Stage.
@@ -3379,9 +3444,15 @@ function applyCivicStageMove_(ctx, row, ix, cycle) {
 function applyCivicStageStep_(ctx, row, ix, cycle) {
   if (!ix || !(ix.stage >= 0) || !(ix.lastStageChange >= 0)) return false;
   if (!String(row[ix.stage] == null ? '' : row[ix.stage]).trim()) return false;
-  var changed = applyCivicStageMove_(ctx, row, ix, cycle);
+  // Order matters (step 3): a revival runs first so a revived Funded row can
+  // stand up in the same call; the move next, because a stage change beats the
+  // clock; the delivery step may stamp a forward change too; the losing clock
+  // last, on the post-move row — a row never stalls the fire it changed stage.
+  var changed = applyCivicRevival_(ctx, row, ix, cycle);
+  if (applyCivicStageMove_(ctx, row, ix, cycle)) changed = true;
   if (applyCivicStageBaseline_(ctx, row, ix)) changed = true;
   if (applyCivicDeliveryStep_(ctx, row, ix, cycle)) changed = true;
+  if (applyCivicStallEntry_(ctx, row, ix, cycle)) changed = true;
   return changed;
 }
 
@@ -3618,3 +3689,108 @@ function applyCivicDeliveryStep_(ctx, row, ix, cycle) {
   return true;
 }
 
+/**
+ * civic.38 Task 4 step 3 — the losing clock, applied to one row IN PLACE.
+ *
+ * Stall entry: phase -> `stalled` (PHASE_INTENSITY -0.5, the service stops
+ * paying; approval reads `failed`, owners -2 per held Cycle — Task 5), the phase
+ * left is stamped into PriorPhase (only when blank), and StageHold.st records
+ * the entry Cycle so a revival can tell new work from old. Stage is untouched:
+ * `stalled` wins over it in stageRequirement. No business lift, no carry.
+ */
+function applyCivicStallEntry_(ctx, row, ix, cycle) {
+  if (!(ix.phase >= 0) || !(ix.hold >= 0)) return false;
+  var cell = function (i) { return i >= 0 ? row[i] : ''; };
+  var stage = String(cell(ix.stage) == null ? '' : cell(ix.stage)).trim();
+  if (!stage) return false;
+  var status = String(cell(ix.status) == null ? '' : cell(ix.status)).trim().toLowerCase();
+  var voted = status === 'override-passed' ||
+    (status === 'passed' && String(cell(ix.mayoralAction) == null ? '' : cell(ix.mayoralAction)).trim().toLowerCase() === 'signed');
+  if (!voted) return false;
+  var req = civicStageRequirement_({
+    stage: stage, phase: cell(ix.phase), policyDomain: cell(ix.policyDomain),
+    lastWorkCycle: cell(ix.lastWork), lastStageChangeCycle: cell(ix.lastStageChange)
+  });
+  var dials = getCivicStallDials_(ctx);
+  var clock = civicStallClock_({
+    stage: stage, phase: cell(ix.phase), blocked: req ? req.blocked : null, cycle: cycle,
+    lastWorkCycle: cell(ix.lastWork), lastStageChangeCycle: cell(ix.lastStageChange),
+    stallCycles: dials.stallCycles, untendedStallCycles: dials.untendedStallCycles
+  });
+  if (!clock.stalled) return false;
+  var initKey = String(cell(ix.id) || '').trim() || String(cell(ix.name) || '').trim();
+  var left = String(cell(ix.phase) || '').trim();
+  row[ix.phase] = 'stalled';
+  if (ix.priorPhase >= 0 && !String(cell(ix.priorPhase) || '').trim()) row[ix.priorPhase] = left;
+  var hold = civicStageHoldRead_(cell(ix.hold));
+  hold.st = cycle;
+  row[ix.hold] = JSON.stringify(hold);
+  if (ix.lastUpdated >= 0) row[ix.lastUpdated] = ctx.now;
+  Logger.log('civicInitiativeEngine: ' + initKey + ' STALLED at C' + cycle + ' — ' + stage + ' ' + clock.clock +
+             ' clock ran ' + clock.elapsed + ' > ' + clock.limit + ' Cycles (reference C' + clock.reference + '); phase ' +
+             (left || '(blank)') + ' -> stalled');
+  return true;
+}
+
+/**
+ * Revival: one work move landed after the stall entry restores PriorPhase and
+ * clears PriorPhase + StageHold.st — once per stall. The untended clock resets
+ * by itself (its reference includes LastWorkCycle); a revived Funded row whose
+ * work also clears the stand-up gate stands up in the same call (the move runs
+ * after this). Not an advance (approval's revival guard), no business lift.
+ */
+function applyCivicRevival_(ctx, row, ix, cycle) {
+  if (!(ix.phase >= 0) || !(ix.hold >= 0)) return false;
+  var cell = function (i) { return i >= 0 ? row[i] : ''; };
+  var stage = String(cell(ix.stage) == null ? '' : cell(ix.stage)).trim();
+  if (!stage) return false;
+  var hold = civicStageHoldRead_(cell(ix.hold));
+  var d = civicReviveDecision_({
+    stage: stage, phase: cell(ix.phase), priorPhase: ix.priorPhase >= 0 ? cell(ix.priorPhase) : '',
+    stallCycle: hold.st, lastWorkCycle: cell(ix.lastWork)
+  });
+  if (!d.revive) return false;
+  var initKey = String(cell(ix.id) || '').trim() || String(cell(ix.name) || '').trim();
+  row[ix.phase] = d.phase;
+  if (ix.priorPhase >= 0) row[ix.priorPhase] = '';
+  hold.st = 0;
+  row[ix.hold] = JSON.stringify(hold);
+  if (ix.lastUpdated >= 0) row[ix.lastUpdated] = ctx.now;
+  Logger.log('civicInitiativeEngine: ' + initKey + ' REVIVED at C' + cycle + ' — work C' + cell(ix.lastWork) +
+             ' landed after the stall; phase stalled -> ' + d.phase);
+  return true;
+}
+
+/** StageHold cell -> object with the known fields, tolerant of a blank or broken cell. */
+function civicStageHoldRead_(cellValue) {
+  var text = String(cellValue == null ? '' : cellValue).replace(/^\s+|\s+$/g, '');
+  var out = { v: 1, obs: 0, up: 0, down: 0, first: 0, regressed: 0, m: null, r: null, st: 0 };
+  if (!text) return out;
+  var prev = null;
+  try { prev = JSON.parse(text); } catch (e) { prev = null; }
+  if (!prev || typeof prev !== 'object' || prev.v !== 1) return out;
+  var cnt = function (v) { var x = Number(v); return isFinite(x) && x > 0 ? Math.floor(x) : 0; };
+  out.obs = cnt(prev.obs); out.up = cnt(prev.up); out.down = cnt(prev.down);
+  out.first = cnt(prev.first); out.regressed = cnt(prev.regressed); out.st = cnt(prev.st);
+  out.m = isFinite(Number(prev.m)) && prev.m !== null && prev.m !== '' ? Number(prev.m) : null;
+  out.r = isFinite(Number(prev.r)) && prev.r !== null && prev.r !== '' ? Number(prev.r) : null;
+  return out;
+}
+
+/** The two clock dials, fail-loud (seeded by ensureEngine213Config_). */
+function getCivicStallDials_(ctx) {
+  if (ctx && ctx._civicStallDials) return ctx._civicStallDials;
+  var source = ctx && ctx.config;
+  if (!source) throw new Error('civic stall clock: ctx.config required');
+  var required = function (key, min, max) {
+    var raw = source[key];
+    var value = Number(raw);
+    if (raw === '' || raw === null || raw === undefined || !isFinite(value) || value < min || value > max) {
+      throw new Error('civic stall clock: invalid or missing World_Config.' + key);
+    }
+    return value;
+  };
+  var dials = { stallCycles: required('civicStageStallCycles', 1, 52), untendedStallCycles: required('civicStageUntendedStallCycles', 1, 52) };
+  if (ctx) ctx._civicStallDials = dials;
+  return dials;
+}

@@ -1513,6 +1513,10 @@
 
 - **civicDeliveryHoldStep_(input)**
 
+- **civicStallClock_(input)**
+
+- **civicReviveDecision_(input)**
+
 - **civicStageStep_(st)**
   Reads: S.initiativeEnginePhaseMoves, S.initiativePhases
 
@@ -1538,6 +1542,14 @@
   Config: ctx.config.cycleCount
 
 - **applyCivicDeliveryStep_(ctx, row, ix, cycle)**
+
+- **applyCivicStallEntry_(ctx, row, ix, cycle)**
+
+- **applyCivicRevival_(ctx, row, ix, cycle)**
+
+- **civicStageHoldRead_(cellValue)**
+
+- **getCivicStallDials_(ctx)**
 
 ### educationCareerEngine.js
 - **canonicalEducationWrite_(v)**
@@ -2319,7 +2331,7 @@
 
 - **civicFirstDeliveredCycle_(cellValue)**
 
-- **classifyInitiativeMotion_(phase, nextActionCycle, cycle, prevPhase)**
+- **classifyInitiativeMotion_(phase, nextActionCycle, cycle, prevPhase, staged)**
 
 - **approvalDeltaForInitiative_(motion, owns, opposed)**
 
@@ -4205,4 +4217,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 184
-**Functions mapped:** 1463
+**Functions mapped:** 1469

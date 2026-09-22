@@ -59,7 +59,7 @@ Vocabulary: `Proposed → Funded → Standing → Delivering`. A blank `Stage` m
 | Standing | A `work` move has landed on the row at or after the funding cycle (`LastWorkCycle >= LastStageChangeCycle`) | Stage columns, catalog mirror and shared helper **live on PROD, inert**: every Stage is blank |
 | Delivering | The domain's metric beats the city median by 0.20 for 3 straight cycles (`civicDeliverMargin`, `civicDeliverHoldCycles`, live World_Config keys; health uses 0.10). Judged on last cycle's finished numbers, one cycle at a time. A delivered row slips back to Standing after 3 straight cycles under half the margin (`civicDeliverRegressShare` 0.5 — open sim call) | **Live on PROD (2026-09-21), inert while every Stage is blank.** Bench-proven: a Laurel clinic delivered seven cycles after standing and was paid once. Health and education only; transit waits on its own system (engine.253) |
 
-- **One clock per stage, not per lifetime.** Funded: unchanged for 5 cycles (`civicStageStallCycles`). Standing and Delivering: 12 cycles untended (`civicStageUntendedStallCycles`, ruled 2026-09-21), long enough that a neglected service visibly weakens before it fails. A stage past its clock sets the row to `stalled`; the existing `failed` motion then costs its owners −2 a cycle. At Funded, work never resets the clock, only the stage change does; at Standing and Delivering, tending is exactly what resets it. A `work` move revives a stalled row once per stall, with no `advanced` credit. Clock step: **not built**.
+- **One clock per stage, not per lifetime.** Funded: unchanged for 5 cycles (`civicStageStallCycles`). Standing and Delivering: 12 cycles untended (`civicStageUntendedStallCycles`, ruled 2026-09-21), long enough that a neglected service visibly weakens before it fails. A stage past its clock sets the row to `stalled` (**built 2026-09-21, Task 4 step 3**); the existing `failed` motion then costs its owners −2 a cycle. No clock on Proposed, on a legacy row, or on a Standing row whose delivering gate is unbuilt or unreadable. A staged row never reads `silence`: its only drain is the stall. At Funded, work never resets the clock, only the stage change does; at Standing and Delivering, tending is exactly what resets it. A `work` move revives a stalled row once per stall, with no `advanced` credit. Clock step: **not built**.
 - **No clock on Proposed** for now (builder, 2026-09-21).
 - **No clock on a stage whose exit is unbuilt.** Safety and housing initiatives cannot reach Delivering yet, so they run no clock there.
 - **A stalled initiative** also drains its neighborhoods' businesses at half weight (`bizInitiativeStallDrag 0.5`), live on PROD.
@@ -92,7 +92,7 @@ A deploy reaches the world only in some domains today: health (neighborhood `Sic
 
 **Engineering not yet built**
 - Stage handler in three benched cuts, then conversion of the six live rows. Until conversion, nothing on live changes.
-- The stall clock and the six-row conversion (Task 4 steps 3–4). Delivering judgement and regress are live.
+- The six-row conversion (Task 4 step 4). The stall clock, revival, Delivering judgement and regress are live.
 - Housing lever (engine.251), safety lever.
 - The matched-control bench pair that shows a real initiative can reach the 0.20 margin.
 - First live fire on PROD @109 unblocks `LastWorkCycle` / `LastWorkSeat` writes.

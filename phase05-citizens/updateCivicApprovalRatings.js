@@ -450,6 +450,9 @@ function updateCivicApprovalRatings_(ctx) {
       // again — so `completed` (+3 to the owner) pays once per row, ever. A regress
       // and a second delivery pay nothing.
       var tStageHold = findApprCol_(tHeaders, ['StageHold']);
+      // civic.38 ruling 2: a staged row never reads `silence` off NextActionCycle —
+      // its only drain is the losing clock's `stalled` -> `failed`.
+      var tStage = findApprCol_(tHeaders, ['Stage']);
 
       // engine.139 (G-PF34): last cycle's phase per initiative, for transition
       // detection. Gated on the carry-forward being EXACTLY one cycle old — a
@@ -488,7 +491,8 @@ function updateCivicApprovalRatings_(ctx) {
           proposingOffice: tPropOffice !== -1 ? (tr[tPropOffice] || '').toString().trim().toUpperCase() : '',
           motion: (Number(cycle) > 0 && civicFirstDeliveredCycle_(tStageHold !== -1 ? tr[tStageHold] : '') === Number(cycle))
             ? 'completed'
-            : classifyInitiativeMotion_(phase, nextActionCycle, cycle, prevPhase)
+            : classifyInitiativeMotion_(phase, nextActionCycle, cycle, prevPhase,
+                tStage !== -1 && !!(tr[tStage] || '').toString().trim())
         });
       }
     }
@@ -1070,7 +1074,7 @@ function civicFirstDeliveredCycle_(cellValue) {
  * blob being exactly one cycle old. Absent it, nothing reads as a transition —
  * the conservative direction.
  */
-function classifyInitiativeMotion_(phase, nextActionCycle, cycle, prevPhase) {
+function classifyInitiativeMotion_(phase, nextActionCycle, cycle, prevPhase, staged) {
   // engine.139: did this row MOVE since last cycle? Requires prior data; without
   // it nothing counts as a transition, which is the conservative direction.
   var moved = !!prevPhase && String(prevPhase) !== String(phase);
@@ -1095,6 +1099,11 @@ function classifyInitiativeMotion_(phase, nextActionCycle, cycle, prevPhase) {
   // A row that moved is not sitting and is not silent, whatever its clock says —
   // somebody acted on it this cycle.
   if (moved) return 'advanced';
+
+  // civic.38 ruling 2: a staged row has ONE clock — the stage model's losing
+  // clock, which ends in `stalled` (read as `failed` above). NextActionCycle is
+  // not its clock, so it is never `silence`; inside the clock it is `sitting`.
+  if (staged) return 'sitting';
 
   if (nextActionCycle === null || nextActionCycle === undefined || nextActionCycle === '') {
     return 'silence';

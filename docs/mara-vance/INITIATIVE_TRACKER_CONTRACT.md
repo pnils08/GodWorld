@@ -67,8 +67,8 @@ The live sheet is 28 columns until civic.22's column add lands (engine-sheet dry
 | 34 | `LastStageChangeCycle` | Cycle the row last changed Stage. The only clock a staged row runs on. Engine-written. |
 | 35 | `LastWorkCycle` | Cycle of the last `work` move landed through the Sunday gate. Gate-written (`applyTrackerUpdates.js` WRITEBACK_FIELDS). |
 | 36 | `LastWorkSeat` | Office that landed it. Gate-written. |
-| 37 | `PriorPhase` | The phase a row left on FIRST stall entry, so a revival can restore it. Engine-written; cleared on revival. |
-| 38 | `StageHold` | JSON, the Delivering streak: `{v, obs (last observation Cycle counted), up (consecutive at/above margin), down (consecutive under the regress bar), first (Cycle first delivered — pays `completed` +3 once), regressed (last regress Cycle), m (margin the streak was counted under)}`. Engine-written every fire a staged row is judged; kept out of `StageBaseline` so that cell stays write-once. |
+| 37 | `PriorPhase` | The phase a row left on stall entry (stamped only when blank), so a revival can restore it. Engine-written; cleared on revival. Live since Task 4 step 3. |
+| 38 | `StageHold` | JSON, the Delivering streak: `{v, obs (last observation Cycle counted), up (consecutive at/above margin), down (consecutive under the regress bar), first (Cycle first delivered — pays `completed` +3 once), regressed (last regress Cycle), m (margin the streak was counted under), r (regress share), st (Cycle the row entered `stalled`, 0 = not stalled — the revival key)}`. Engine-written every fire a staged row is judged; kept out of `StageBaseline` so that cell stays write-once. |
 
 Cols 32–38 are appended by the engine itself — `ensureInitiativeStageColumns_`, called from `runCivicInitiativeEngine_` on the cycle path — on the first fire after the deploy that carries them. No hand column-add, no replay step. Stage rules: `lib/initiativePhaseContract.js` `stageRequirement` (Node) mirrored as `civicStageRequirement_` (engine), pinned by the stage parity block in `lib/initiativePhaseContract.test.js`.
 
@@ -175,6 +175,7 @@ The engine map (`PHASE_INTENSITY`) and this §2 table are **one source of truth 
 
 ## Changelog
 
+- 2026-09-21 (engine-sheet) — civic.38 Task 4 step 3: `StageHold.st` (stall entry) and `PriorPhase` live; a staged row never reads `silence` and never takes the ENGINE-CLOCK hold.
 - 2026-09-21 (engine-sheet) — civic.38 Task 4 part 2: col 38 `StageHold`, engine self-armed (live stays 37 until the first fire after the deploy); `Stage` redefined as the CURRENT stage now that a row can regress; `StageBaseline` descriptor fields pinned.
 - 2026-09-21 (engine-sheet) — civic.38 Task 4 step 1: cols 32–37 Stage / StageBaseline / LastStageChangeCycle / LastWorkCycle / LastWorkSeat / PriorPhase, engine self-armed. Live sheet stays 31 until the first fire after the deploy. Plan: [[../plans/2026-09-19-civic-wake-game-loop]] Task 4.
 - 2026-08-16 (grok) — civic.22 authorship: cols 29–31 Proposer / ProposingOffice / ProposedCycle. §4 step 10. Live sheet stays 28 until engine-sheet apply. Plan: [[../plans/2026-08-15-civic-edge-truth-migration]] §7 + §10 + §12.

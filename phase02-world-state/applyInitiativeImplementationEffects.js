@@ -374,7 +374,13 @@ function applyInitiativeImplementationEffects_(ctx) {
     // wait for a civic phase to be hand-advanced, and no construction schedule
     // is modelled — this is a game, not a civic simulation. The tracker gets
     // corrected to match the world, once, when the world changes.
-    if (isBaylightInitiative_(name) && sportsHasOpenedBaylight_(S)) {
+    // civic.38 ruling 6 (codex F5): a STAGED row's phase has one owner — the
+    // Phase-5 stage handler. T7's queued `operational` would land at Phase 10 on
+    // top of a stall decided in the same run and silently undo the losing clock,
+    // so T7 yields on any row with a Stage. Baylight (INIT-006) converts unstaged
+    // and keeps this path.
+    var t7Staged = iStage !== -1 && !!String(row[iStage] == null ? '' : row[iStage]).trim();
+    if (!t7Staged && isBaylightInitiative_(name) && sportsHasOpenedBaylight_(S)) {
       if (phase !== 'operational' && phase !== 'complete') {
         // Write it back so the tracker stops asserting a building site, and so
         // the silence/nag machinery stops charging officials for not narrating

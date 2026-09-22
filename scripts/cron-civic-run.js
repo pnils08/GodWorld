@@ -2221,53 +2221,6 @@ async function runClose() {
 
 const DATAWAKE_DIR = path.join(CIVIC, 'datawake');
 
-// Deterministic domain-data slice per office — perception-translated, bounded.
-// Keyed on the map's dataDomain (the dataSources strings are loose candidates;
-// the structured world_summary parse is the reliable substrate).
-function domainSlice(office, sections, hoods, briefs, tracker, audit) {
-  const L = [];
-  const domain = String(office.dataDomain || '');
-  const initLines = (ids) => (tracker.initiatives || [])
-    .filter(i => ids.includes(i.id))
-    .map(i => cleanInline('- ' + i.name + ': ' + (i.implementation || {}).summary))
-    .filter(Boolean);
-  if (office.district && /^D\d$/.test(office.district)) {
-    for (const h of Object.keys(hoods)) {
-      if (getDistrictForNeighborhood(h) === office.district) {
-        const line = hoodPulseLine(h, hoods[h], briefs);
-        if (line) L.push(line);
-      }
-    }
-  } else if (office.neighborhoods) {
-    for (const h of office.neighborhoods) {
-      const line = hoodPulseLine(h, hoods[h], briefs);
-      if (line) L.push(line);
-    }
-    if (office.initiative) L.push(...initLines([office.initiative]));
-  } else if (/justice|crime|safety|police|emergency/i.test(domain)) {
-    for (const [h, s] of Object.entries(hoods)) {
-      if (s.crime >= 2.5) L.push('- ' + h + ': crime running ' + crimeWord(s.crime) + '.');
-    }
-    L.push(...initLines(['INIT-002']));
-    const ev = cleanLines(findSection(sections, 'World Events')).split('\n').filter(l => /SAFETY|CRIME/i.test(l));
-    L.push(...ev.slice(0, 4));
-  } else if (/econom|business|development/i.test(domain)) {
-    for (const [h, s] of Object.entries(hoods)) {
-      if (s.retail < 5 || s.retail >= 10) L.push('- ' + h + ': street trade ' + retailWord(s.retail) + '.');
-    }
-    L.push(...initLines(['INIT-001', 'INIT-006', 'INIT-007']));
-  } else if (/health/i.test(domain)) {
-    const cs = findSection(sections, 'City State');
-    const ill = (cs.match(/Illness rate ([\d.]+)%/) || [])[1];
-    if (ill) L.push('- Roughly ' + (parseFloat(ill) >= 9 ? 'one in ten' : 'fewer than one in ten') + ' residents are sick this cycle.');
-    L.push(...initLines(['INIT-005']));
-  } else {
-    // citywide-governance and everything else: the translated city digest
-    L.push(citywideDigest(sections, audit).split('\n').slice(0, 8).join('\n'));
-  }
-  return L.filter(Boolean).join('\n').slice(0, 2200);
-}
-
 // A bloc agent's datawake speaks through the bloc SPOKESPERSON (civic.md
 // faction table: OPP=Rivers D5, CRC=Ashford D7; IND datawakes go to Vega D4 as
 // Council President), not whichever member row happens to sort first.

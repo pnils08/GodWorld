@@ -1794,6 +1794,85 @@ function trackHomeOwnership_(ss, ctx, cycle) {
 }
 
 
+// ── the sale (2026-09-23, kimi — Mike-direct) ──────────────────────────────
+// Ownership was write-only: every exit destroyed the home's value silently.
+// The sale mirrors the purchase: the hood's CURRENT market prices the house
+// (the same rule the purchase reads; geography the ledger does not price →
+// the house is worth what was paid), the financed share (1 − HOME_DOWN) is
+// still owed — no principal paydown is modeled — and the members keep what
+// is left, split by NetWorth share like the closing debit. A falling market
+// can take the equity to zero (doctrine §3). Adults carry the [Home] line;
+// minors share the money, not the sentence (engine.144 loop 3). Publishes
+// S.homesSoldByLine so Step 7 decrements HomesOwned the same cycle. Called
+// today by the stress dissolution in householdFormationEngine; a voluntary
+// sale is a policy door of its own and is not built here.
+function sellHouseholdHome_(ctx, household, memberPopIds, cycle) {
+  var hood = String(household.neighborhood || '').trim();
+  var st = ctx && ctx.summary && ctx.summary.neighborhoodState ? ctx.summary.neighborhoodState[hood] : null;
+  var med = st ? (Number(st.medianRent) || 0) : 0;
+  var cost = Number(household.housingCost) || 0;
+  var price = med > 0 ? Math.round(med * 12 * HOME_PRICE_TO_RENT) : cost;
+  var proceeds = Math.max(0, Math.round(price - cost * (1 - HOME_DOWN)));
+  var header = ctx.ledger && ctx.ledger.headers ? ctx.ledger.headers : [];
+  var rows = ctx.ledger && ctx.ledger.rows ? ctx.ledger.rows : [];
+  var iPop = header.indexOf('POPID'), iNW = header.indexOf('NetWorth'), iStat = header.indexOf('Status'),
+      iLife = header.indexOf('LifeHistory'), iBirth = header.indexOf('BirthYear'),
+      iLin = header.indexOf('LineageId'), iFirst = header.indexOf('First'), iLast = header.indexOf('Last');
+  var ids = Array.isArray(memberPopIds) ? memberPopIds : [];
+  var members = [], nw0 = [], combined = 0;
+  if (iPop >= 0 && iNW >= 0) {
+    for (var m = 0; m < ids.length; m++) {
+      var want = String(ids[m]).trim();
+      if (!want) continue;
+      for (var r = 0; r < rows.length; r++) {
+        if (String(rows[r][iPop] || '').trim() !== want) continue;
+        if (iStat >= 0 && String(rows[r][iStat] || 'active').toLowerCase() === 'deceased') break;
+        var nw = Number(String(rows[r][iNW]).replace(/[$,\s]/g, '')) || 0;
+        members.push(rows[r]); nw0.push(nw); combined += nw;
+        break;
+      }
+    }
+  }
+  if (proceeds > 0) {
+    for (var m2 = 0; m2 < members.length; m2++) {
+      var share = combined > 0 ? nw0[m2] / combined : 1 / members.length;
+      members[m2][iNW] = Math.round((nw0[m2] + proceeds * share) * 100) / 100;
+    }
+  }
+  if (members.length) ctx.ledger.dirty = true;
+  var stamp = 'Y' + (Math.floor((cycle - 1) / 52) + 1) + 'C' + (((cycle - 1) % 52) + 1);
+  var simYearS = (typeof simYearOf_ === 'function') ? simYearOf_(ctx, cycle) : 0;
+  for (var m3 = 0; m3 < members.length; m3++) {
+    var by = iBirth >= 0 ? (Number(members[m3][iBirth]) || 0) : 0;
+    if (by > 1900 && simYearS && (simYearS - by) < 18) continue; // minors share the money, not the sentence
+    if (iLife < 0) break;
+    var life = String(members[m3][iLife] || '');
+    var shareM = combined > 0 ? nw0[m3] / combined : 1 / members.length;
+    members[m3][iLife] = (life ? life + '\n' : '') + stamp + ' — [Home] sold the place in ' + (hood || 'the neighborhood') +
+      (proceeds > 0 ? ' — $' + Math.round(proceeds * shareM) + ' back from the sale' : ' — the sale only cleared the mortgage');
+  }
+  var soldByLine = {};
+  for (var m4 = 0; m4 < members.length; m4++) {
+    var lin = iLin >= 0 ? String(members[m4][iLin] || '').trim() : '';
+    if (lin) soldByLine[lin] = true;
+  }
+  ctx.summary.homesSoldByLine = ctx.summary.homesSoldByLine || {};
+  for (var lk in soldByLine) ctx.summary.homesSoldByLine[lk] = (Number(ctx.summary.homesSoldByLine[lk]) || 0) + 1;
+  ctx.summary.storyHooks = ctx.summary.storyHooks || [];
+  var who = members.length ? ((members[0][iFirst] || '') + ' ' + (members[0][iLast] || '')).trim() : 'A household';
+  var saleHook = {
+    hookType: 'HOME_SALE', severity: 4, priority: 3, domain: 'COMMUNITY',
+    description: who + (members.length > 1 ? ' and family' : '') + ' sold their home in ' + (hood || 'Oakland') +
+      ' as the household broke up — $' + price + (proceeds > 0 ? ', $' + proceeds + ' back' : ', the mortgage took it all'),
+    cycleGenerated: cycle, neighborhood: hood,
+    text: 'A family home was sold in ' + (hood || 'Oakland')
+  };
+  ctx.summary.storyHooks.push(saleHook);
+  if (typeof recordHookRipple_ === 'function') recordHookRipple_(ctx, 'household', saleHook, 'generationalWealthEngine');
+  return { price: price, proceeds: proceeds };
+}
+
+
 // ════════════════════════════════════════════════════════════════════════════
 // engine.65 (S323) — HERITAGE: THE ROCKAFELLAS LAYER
 // The summit of the society and the entitlement engine in one (Mike-direct
@@ -2378,9 +2457,13 @@ function updateHeritage_(ss, ctx, cycle) {
     }
 
     // engine.65 T2: HomesOwned accrues from this cycle's purchases (Step 6
-    // publishes S.homesPurchasedByLine before Step 7 runs).
+    // publishes S.homesPurchasedByLine before Step 7 runs). A sale takes the
+    // home back off the line the same cycle (2026-09-23, kimi — the accrual
+    // was a one-way ratchet: homes lost to dissolution counted forever).
     var homes = (Number(hl[hHomes]) || 0) +
-      ((ctx.summary.homesPurchasedByLine && ctx.summary.homesPurchasedByLine[linId]) || 0);
+      ((ctx.summary.homesPurchasedByLine && ctx.summary.homesPurchasedByLine[linId]) || 0) -
+      ((ctx.summary.homesSoldByLine && ctx.summary.homesSoldByLine[linId]) || 0);
+    if (homes < 0) homes = 0;
     hl[hHomes] = homes;
     var bizList = [];
     try { bizList = JSON.parse(String(hl[hBiz] || '[]')); } catch (e) { bizList = []; }

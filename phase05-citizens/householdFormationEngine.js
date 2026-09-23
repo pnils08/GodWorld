@@ -1404,6 +1404,15 @@ function dissolveStressedHouseholds_(ctx, stressedHouseholds, cycle, rng) {
           }
         }
       }
+
+      // An OWNED home is sold, not evaporated (2026-09-23, kimi — Mike-direct):
+      // until now the down payment was debited at purchase and the rest of the
+      // home's value ceased to exist anywhere. The sale mirrors the purchase
+      // economics back to the members' NetWorth (generationalWealthEngine).
+      if (String(stressed.household.housingType || '').trim().toLowerCase() === 'owned' &&
+          typeof sellHouseholdHome_ === 'function') {
+        sellHouseholdHome_(ctx, stressed.household, mem, cycle);
+      }
     }
   }
 

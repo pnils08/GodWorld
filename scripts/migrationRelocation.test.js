@@ -43,6 +43,10 @@ let cellIntents = [];
 global.queueCellIntent_ = (ctx, sheet, row, col, value, why, domain) => {
   cellIntents.push({ sheet, row, col, value, why, domain });
 };
+let appendIntents = [];
+global.queueAppendIntent_ = (ctx, tab, row, why, domain, sev) => {
+  appendIntents.push({ tab, row, why, domain, sev });
+};
 
 function mulberry32(seed) {
   return function () {
@@ -282,7 +286,7 @@ console.log('A10 MASS_EXODUS threshold on planning intent');
 // ═══ A3: pressure lane — household moves as a unit ═══════════════════════════
 console.log('A3 pressure lane household move');
 {
-  rippleCalls = []; cellIntents = [];
+  rippleCalls = []; cellIntents = []; appendIntents = [];
   // Family of 3 in expensive Highgate on 48k combined: burden 4500/(4000/mo)
   // >50% -> risk 8+ -> planning -> move roll 0.0 passes -> best fit Lowmarket.
   const hh = [['HH-M1', 'POP-10', 'family', '["POP-10","POP-11","POP-12"]', 'Highgate', 'rented', 4500, 0, 48000, 100, '', 'active', '', '']];
@@ -314,6 +318,12 @@ console.log('A3 pressure lane household move');
   assert('hook eventType moved-within', moveHooks[0] && moveHooks[0].eventType === 'moved-within');
   assert('hook reached ripple recorder', rippleCalls.some(c => c.hook.hookType === 'CITIZEN_RELOCATED' && c.src === 'migrationTrackingEngine'));
   assert('bystander did not move', sl[3][col('Neighborhood')] === 'Middleton');
+  // 2026-09-23 (kimi): every member's own record notes the move — citizens no
+  // longer teleport between the roll and the settled-in verdict.
+  const moveLines = appendIntents.filter(a => a.tab === 'LifeHistory_Log' && a.row[3] === 'Neighborhood');
+  assert('LifeHistory line per moved member', moveLines.length === 3, String(moveLines.length));
+  assert('line names both hoods and the why', moveLines.every(a => /moved from Highgate to Lowmarket — /.test(a.row[4])), moveLines[0] && moveLines[0].row[4]);
+  assert('no LifeHistory line for the bystander', !appendIntents.some(a => a.row[1] === 'POP-13'));
 }
 
 // ═══ A4: misfit lane — wealthy citizen sorts up ══════════════════════════════
@@ -432,10 +442,42 @@ console.log('A9 split household untouched');
   ];
   const ctx = buildCtx(sl, hh, () => 0.0);
   runBoth(ctx);
-  // Unit anchors to first-seen hood; the stray member row is excluded from the
-  // move set, so both stay put OR only the anchored contingent moves — the
-  // stray must never be re-hooded by a unit it doesn't co-reside with.
+  // 2026-09-23 (kimi): the whole unit stays — a partial move would strand the
+  // out-of-hood member with their household row pointing at the new hood.
   assert('stray member not dragged', sl[1][col('Neighborhood')] === 'Middleton', sl[1][col('Neighborhood')]);
+  assert('co-hooded member also stays', sl[0][col('Neighborhood')] === 'Highgate', sl[0][col('Neighborhood')]);
+  assert('split household ledger row stays put', ctx._sheets.Household_Ledger._values[1][HH_HEADER.indexOf('Neighborhood')] === 'Highgate');
+  assert('no relocation hook for a split unit', !ctx.summary.storyHooks.some(h => h.hookType === 'CITIZEN_RELOCATED'));
+}
+
+// ═══ A11: canon faith-leader anchor (2026-09-23, kimi — Mike-direct) ══════════
+console.log('A11 canon faith-leader anchor');
+{
+  rippleCalls = []; cellIntents = []; appendIntents = [];
+  // Two identical pressured households; one's head leads an active faith org.
+  const hh = [
+    ['HH-F1', 'POP-F1', 'family', '["POP-F1"]', 'Highgate', 'rented', 4500, 0, 48000, 100, '', 'active', '', ''],
+    ['HH-G1', 'POP-G1', 'family', '["POP-G1"]', 'Highgate', 'rented', 4500, 0, 48000, 100, '', 'active', '', ''],
+    ['HH-X1', 'POP-XX', 'family', '["POP-XX"]', 'Highgate', 'rented', 4500, 0, 48000, 100, '', 'active', '', '']
+  ];
+  const sl = [
+    citizen('POP-F1', 'Imam', 'Anchor', 'Highgate', 48000, { hh: 'HH-F1', edu: 'hs-diploma' }),
+    citizen('POP-G1', 'Gus', 'Free', 'Highgate', 48000, { hh: 'HH-G1', edu: 'hs-diploma' }),
+    citizen('POP-XX', 'Old', 'Rev', 'Highgate', 48000, { hh: 'HH-X1', edu: 'hs-diploma' })
+  ];
+  const ctx = buildCtx(sl, hh, () => 0.0);
+  ctx.config.relocationMaxShare = 1; // lift the cap so only the anchor guard distinguishes the units
+  ctx._sheets.Faith_Organizations = mockSheet([
+    ['Organization', 'FaithTradition', 'Neighborhood', 'Founded', 'Congregation', 'Leader', 'Character', 'ActiveStatus', 'LeaderPOPID', 'MembersList'],
+    ['Test Mosque', 'Islam', 'Middleton', '1990', 300, 'Imam Anchor', 'x', 'active', 'POP-F1', '[]'],
+    ['Closed Chapel', 'None', 'Fadeside', '1900', 10, 'Old Rev', 'x', 'closed', 'POP-XX', '[]']
+  ]);
+  runBoth(ctx);
+  assert('anchored faith leader did not move', sl[0][col('Neighborhood')] === 'Highgate', sl[0][col('Neighborhood')]);
+  assert('anchored household ledger row untouched', ctx._sheets.Household_Ledger._values[1][HH_HEADER.indexOf('Neighborhood')] === 'Highgate');
+  assert('unanchored twin moved (the guard is targeted)', sl[1][col('Neighborhood')] === 'Lowmarket', sl[1][col('Neighborhood')]);
+  assert('closed-org leader moved too (only active orgs anchor)', sl[2][col('Neighborhood')] === 'Lowmarket', sl[2][col('Neighborhood')]);
+  assert('exactly two move hooks (the unanchored units)', ctx.summary.storyHooks.filter(h => h.hookType === 'CITIZEN_RELOCATED').length === 2);
 }
 
 console.log(`\n${passed} passed, ${failed} failed`);

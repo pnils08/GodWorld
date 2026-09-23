@@ -658,7 +658,7 @@ function processRelocations_(ctx, cycle) {
         byHousehold[hhId] = u;
         units.push(u);
       }
-      if (u.hood !== hood) continue; // split household across hoods — leave alone
+      if (u.hood !== hood) { u.split = true; continue; } // split household across hoods — the WHOLE unit stays: a partial move strands the out-of-hood member with their household row pointing at the new hood
       u.rowIdxs.push(r);
       u.income += income; // unit income = summed member income
       u.planning = u.planning || planning;
@@ -678,15 +678,40 @@ function processRelocations_(ctx, cycle) {
   // of home is the wealth engine's sale/purchase, not a migration.
   var housingByHH = {};
   try { housingByHH = buildHouseholdHousingMap_(ctx.ss) || {}; } catch (eOwn) { housingByHH = {}; Logger.log('processRelocations_: household housing map unavailable (' + eOwn + ') — owned units cannot be told apart this Cycle, so NO household unit relocates'); }
+  // Canon anchors (2026-09-23, kimi — Mike-direct): a faith organization's
+  // leader is institution-bound (INSTITUTIONS.md tracks FO/SL residence
+  // drift; live case: the Temescal Islamic Center's imam moved to Rockridge
+  // at C108). The set comes from the sheet itself — never a hardcoded list.
+  var anchoredPopids = {};
+  try {
+    var foSheet = ctx.ss ? ctx.ss.getSheetByName('Faith_Organizations') : null;
+    var foData = foSheet ? foSheet.getDataRange().getValues() : [];
+    if (foData.length > 1) {
+      var foHead = foData[0];
+      var iFoPop = foHead.indexOf('LeaderPOPID'), iFoAct = foHead.indexOf('ActiveStatus');
+      for (var fr = 1; fr < foData.length; fr++) {
+        if (iFoAct >= 0 && String(foData[fr][iFoAct] || '').trim().toLowerCase() !== 'active') continue;
+        var fp = iFoPop >= 0 ? String(foData[fr][iFoPop] || '').trim() : '';
+        if (fp) anchoredPopids[fp] = true;
+      }
+    }
+  } catch (eFo) { anchoredPopids = {}; Logger.log('processRelocations_: Faith_Organizations anchor map unavailable (' + eFo + ') — canon faith leaders are NOT anchored this Cycle'); }
   var ownedSkipped = 0;
+  var anchoredSkipped = 0;
   var cap = relocationCap_(ctx, units.length); // engine.161: a share of the movable units
   for (var u2 = 0; u2 < units.length && moved < cap; u2++) {
     var unit = units[u2];
     if (unit.income <= 0 || !unit.rowIdxs.length) continue;
+    if (unit.split) continue; // a member sits in another hood — move nobody
     if (unit.key.indexOf('POP:') !== 0) {
       var hType = housingByHH[unit.key] ? String(housingByHH[unit.key].housingType || '').toLowerCase() : '';
       if (hType !== 'rented') { ownedSkipped++; continue; } // owned, or unknown to the ledger: anchored
     }
+    var anchored = false;
+    for (var am = 0; am < unit.rowIdxs.length; am++) {
+      if (anchoredPopids[String(rows[unit.rowIdxs[am]][iPOPID] || '').trim()]) { anchored = true; break; }
+    }
+    if (anchored) { anchoredSkipped++; continue; } // canon faith leader — institution-bound, never relocated here
 
     var current = hoods[unit.hood];
     // engine.178 (S438): the unit head's OPENNESS band closes or opens the misfit door —
@@ -758,6 +783,19 @@ function processRelocations_(ctx, cycle) {
     }
     ctx.ledger.dirty = true;
 
+    // Every member's own record notes the move (2026-09-23, kimi): until now
+    // the first trace on the citizen was the settled-in verdict 10 Cycles
+    // later — from the cron-wake point of view citizens teleported.
+    if (typeof queueAppendIntent_ === 'function') {
+      for (var lh = 0; lh < unit.rowIdxs.length; lh++) {
+        var lhPop = String(rows[unit.rowIdxs[lh]][iPOPID] || '').trim();
+        if (!lhPop) continue;
+        queueAppendIntent_(ctx, 'LifeHistory_Log', [ctx.now, lhPop, '', 'Neighborhood',
+          'moved from ' + unit.hood + ' to ' + bestName + ' — ' + phrase, '', cycle],
+          'migration relocation', 'citizens', 5);
+      }
+    }
+
     // Household_Ledger: move + re-price (own-tracking sheet, documented exception)
     if (unit.key.indexOf('POP:') !== 0) {
       updateHouseholdLedgerMove_(ctx, unit.key, bestName, hoods[bestName].rent);
@@ -806,7 +844,7 @@ function processRelocations_(ctx, cycle) {
     moved++;
   }
 
-  if (moved > 0 || ownedSkipped > 0) Logger.log('processRelocations_: ' + moved + ' unit(s) relocated; ' + ownedSkipped + ' owned/unknown household unit(s) anchored (G-EC70)');
+  if (moved > 0 || ownedSkipped > 0 || anchoredSkipped > 0) Logger.log('processRelocations_: ' + moved + ' unit(s) relocated; ' + ownedSkipped + ' owned/unknown household unit(s) anchored (G-EC70); ' + anchoredSkipped + ' canon faith-leader unit(s) anchored');
   return { moved: moved };
 }
 

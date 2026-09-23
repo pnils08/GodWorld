@@ -712,16 +712,22 @@ function processRelocations_(ctx, cycle) {
     var unit = units[u2];
     if (unit.income <= 0 || !unit.rowIdxs.length) continue;
     if (unit.split) continue; // a member sits in another hood — move nobody
+    // Canon anchor (2026-09-23): a unit with any member off the ENGINE clock
+    // (GAME / CIVIC / MEDIA — authored seats) lives where canon puts it; dice
+    // never re-home it. Live before this: Vinnie Keane → Grand Lake (C104),
+    // Brenda Okoro → Rockridge (C108), Carmen Delaine → West Oakland (C107).
+    // A blank ClockMode reads as ENGINE (educationCareerEngine convention).
+    var authored = false;
+    for (var ck = 0; ck < unit.rowIdxs.length && iClock >= 0; ck++) {
+      var cm = String(rows[unit.rowIdxs[ck]][iClock] || '').trim().toUpperCase();
+      if (cm && cm !== 'ENGINE') { authored = true; break; }
+    }
+    if (authored) { anchoredSkipped++; continue; }
     var ownedUnit = false;
     if (unit.key.indexOf('POP:') !== 0) {
       var hType = housingByHH[unit.key] ? String(housingByHH[unit.key].housingType || '').toLowerCase() : '';
       if (hType === 'owned') {
-        var authored = false;
-        for (var ck = 0; ck < unit.rowIdxs.length && iClock >= 0; ck++) {
-          var cm = String(rows[unit.rowIdxs[ck]][iClock] || '').trim().toUpperCase();
-          if (cm && cm !== 'ENGINE') { authored = true; break; }
-        }
-        if (authored || unit.planning) { ownedSkipped++; continue; } // authored home, or no rent to be priced out of
+        if (unit.planning) { ownedSkipped++; continue; } // no rent to be priced out of — distress sales are the stress dissolution's
         ownedUnit = true;
       } else if (hType !== 'rented') { ownedSkipped++; continue; } // unknown to the ledger: anchored
     }
@@ -798,7 +804,9 @@ function processRelocations_(ctx, cycle) {
       phrase = 'priced out of ' + unit.hood;
     } else {
       reason = MIGRATION_REASONS.OPPORTUNITY;
-      phrase = 'moving up from ' + unit.hood + (ownerReceipt ? ' — ' + ownerReceipt.phrase : '');
+      // the misfit lane sorts to the best FIT, which is not always a richer hood
+      var upward = hoods[bestName].income > current.income;
+      phrase = (upward ? 'moving up from ' + unit.hood : 'leaving ' + unit.hood + ' for a better fit') + (ownerReceipt ? ' — ' + ownerReceipt.phrase : '');
     }
 
     // ── Execute: mutate every member row in ctx.ledger (Phase 10 commits) ──
@@ -874,7 +882,7 @@ function processRelocations_(ctx, cycle) {
     moved++;
   }
 
-  if (moved > 0 || ownedSkipped > 0 || anchoredSkipped > 0) Logger.log('processRelocations_: ' + moved + ' unit(s) relocated; ' + ownedSkipped + ' owned/unknown household unit(s) anchored (G-EC70); ' + anchoredSkipped + ' canon faith-leader unit(s) anchored');
+  if (moved > 0 || ownedSkipped > 0 || anchoredSkipped > 0) Logger.log('processRelocations_: ' + moved + ' unit(s) relocated; ' + ownedSkipped + ' owned/unknown household unit(s) anchored (G-EC70); ' + anchoredSkipped + ' canon unit(s) anchored (faith leaders + authored clocks)');
   return { moved: moved };
 }
 

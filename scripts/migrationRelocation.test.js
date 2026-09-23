@@ -521,6 +521,20 @@ console.log('A12 owner move — sell up, buy or rent there; authored homes stay'
   // Authored home: a GAME-clock owner is canon and never sold by dice.
   const a = run(400000, 200000, 'GAME', true);
   assert('authored owner stays put, row untouched', a.hood === 'Lowmarket' && a.type === 'owned' && a.cost === 297000, [a.hood, a.type, a.cost].join(','));
+  // Authored renter: the canon anchor covers every unit, not only owners.
+  {
+    rippleCalls = []; cellIntents = []; appendIntents = [];
+    const XR = SL_HEADER.concat(['ClockMode']);
+    const sl = [citizen('POP-C1', 'Canon', 'Renter', 'Lowmarket', 200000, { edu: 'masters' }).concat(['GAME']),
+                citizen('POP-C2', 'Engine', 'Renter', 'Lowmarket', 200000, { edu: 'masters' }).concat(['ENGINE'])];
+    const ctx = buildCtx(sl, [], () => 0.0);
+    ctx.ledger.headers = XR.slice(); ctx.config.relocationMaxShare = 1;
+    runBoth(ctx);
+    assert('authored (GAME-clock) renter stays put', sl[0][col('Neighborhood')] === 'Lowmarket', sl[0][col('Neighborhood')]);
+    assert('ENGINE-clock twin moves (the anchor is targeted)', sl[1][col('Neighborhood')] !== 'Lowmarket', sl[1][col('Neighborhood')]);
+    const hk = ctx.summary.storyHooks.find(k => k.hookType === 'CITIZEN_RELOCATED');
+    assert('a move into a richer hood (Lowmarket → Highgate) reads moving up', hk && hk.neighborhood === 'Highgate' && /moving up from Lowmarket/.test(hk.description), hk && hk.description);
+  }
   // Without the wealth engine loaded the mover must fail loudly, never skip the sale.
   delete global.planOwnerMove_;
   let threw = false; try { run(400000, 200000, 'ENGINE', true); } catch (e) { threw = /planOwnerMove_/.test(e.message); }

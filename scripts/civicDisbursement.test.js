@@ -57,7 +57,7 @@ function mockSheet(values) {
 const HH_HEAD = ['HouseholdId', 'HeadOfHousehold', 'HouseholdType', 'Members', 'Neighborhood', 'HousingType', 'MonthlyRent', 'HousingCost', 'HouseholdIncome', 'FormedCycle', 'DissolvedCycle', 'Status', 'HouseholdSavings'];
 const TR_HEAD = ['InitiativeID', 'Name', 'Status', 'PolicyDomain', 'AffectedNeighborhoods', 'ImplementationPhase', 'Budget', 'MayoralAction', 'Stage', 'LastWorkCycle', 'LastStageChangeCycle', 'BudgetTotal', 'BudgetRemaining', 'LastDisburseCycle', 'MilestoneNotes'];
 const CONFIG = { civicHousingReliefEnabled: 0, civicHousingReliefRate: 0.20, civicHousingCohortMinRenters: 10, civicTendGraceCycles: 6, civicTendDecayPerCycle: 0.15, civicTendFloor: 0.3,
-  civicDisburseTranche_housing: 400000, civicHousingGrantCapMonths: 12, civicGrantCooldownCycles: 26, civicHousingCohortMinFlagged: 5 };
+  civicDisburseTranche_housing: 400000, civicHousingGrantCapMonths: 12, civicHousingGrantHeadroomMonths: 1, civicGrantCooldownCycles: 26, civicHousingCohortMinFlagged: 5 };
 function ctxWith(trackerRows, hhRows, cfg, cycle, ledgerRows) {
   const tabs = { Initiative_Tracker: mockSheet([TR_HEAD.slice(), ...trackerRows]), Household_Ledger: mockSheet([HH_HEAD.slice(), ...hhRows]) };
   return { summary: { cycleId: cycle || 110, previousCycleState: {} }, config: Object.assign({}, CONFIG, cfg || {}), persist: {}, now: 't',
@@ -84,7 +84,7 @@ ok(E.civicDomainDisburses_('housing') === true && E.civicDomainDisburses_('healt
   ok(sl.available === true && sl.programs.length === 1, 'one program on the slice');
   const p = sl.programs[0];
   ok(p.initiativeId === 'INIT-001' && p.domain === 'housing' && p.tranche === 400000 && p.remaining === 28000000 && p.tend === 1 && p.hoods.join() === 'West Oakland' && p.sheetRow === 2, 'tended standing signed program: tranche = dial, hoods folded, sheet row carried');
-  ok(p.grantCapMonths === 12 && p.cooldownCycles === 26, 'dials ride the program');
+  ok(p.grantCapMonths === 12 && p.grantHeadroomMonths === 1 && p.cooldownCycles === 26, 'dials ride the program');
 }
 {
   const rows = [
@@ -140,19 +140,19 @@ function pool() {
   const rows = pool().map(r => r.concat(['', '', '']));
   rows.push(HH('HH-909', 'West Oakland', 'rented', 3625, 50000, 0, 'active', 100)); // cooldown: granted C100, 10 < 26
   rows.push(HH('HH-910', 'West Oakland', 'rented', 3625, 50000, 0, 'active', 110)); // already this Cycle
-  const program = { initiativeId: 'INIT-001', tranche: 50000, remaining: 28000000, hoods: ['West Oakland'], grantCapMonths: 12, cooldownCycles: 26 };
+  const program = { initiativeId: 'INIT-001', tranche: 50000, remaining: 28000000, hoods: ['West Oakland'], grantCapMonths: 12, grantHeadroomMonths: 1, cooldownCycles: 26 };
   const plan = E.planHousingDisbursement_(hdr, rows, program, 110, h => h);
   ok(plan.eligible === 3 && plan.skipped.owned === 1 && plan.skipped.inactive === 1 && plan.skipped.offHood === 1 && plan.skipped.unflagged === 2 && plan.skipped.cooldown === 1 && plan.skipped.alreadyThisCycle === 1, 'eligibility matrix: owned, dissolved, off-hood, buffered, low-burden, cooldown and same-Cycle rows all excluded and counted');
   ok(plan.grants.map(g => g.householdId).join() === 'HH-907,HH-901,HH-902', 'order: worst burden first (0.60, 0.534, 0.415)');
-  ok(plan.grants[0].amount === 12000 && plan.grants[0].clearsBuffer === true, 'grant fills to the 12-month buffer: 12 × 1000 − 0');
-  ok(plan.grants[1].amount === 30724 && plan.grants[1].savingsAfter === 43500 && plan.grants[1].clearsBuffer === true, 'HH-901: 43500 − 12776 = 30724, buffer cleared');
-  ok(plan.grants[2].amount === 7276 && plan.grants[2].clearsBuffer === false && plan.paid === 50000 && plan.trancheLeft === 0, 'tranche exhausted mid-list: HH-902 gets the honest partial 7276, paid == tranche');
+  ok(plan.grants[0].amount === 13000 && plan.grants[0].clearsBuffer === true, 'grant fills to the buffer plus one month of headroom: 13 × 1000 − 0');
+  ok(plan.grants[1].amount === 34349 && plan.grants[1].savingsAfter === 47125 && plan.grants[1].clearsBuffer === true, 'HH-901: 13 × 3625 − 12776 = 34349, buffer cleared with headroom');
+  ok(plan.grants[2].amount === 2651 && plan.grants[2].clearsBuffer === false && plan.paid === 50000 && plan.trancheLeft === 0, 'tranche exhausted mid-list: HH-902 gets the honest partial 2651, paid == tranche');
 }
 {
   const hdr = HH_HEAD.concat(E.HOUSING_GRANT_COLUMNS_);
   const rows = [HH('HH-920', 'West Oakland', 'rented', 3625, 50000, 0).concat(['', '', ''])];
-  const plan = E.planHousingDisbursement_(hdr, rows, { initiativeId: 'X', tranche: 400000, remaining: 1e6, hoods: ['West Oakland'], grantCapMonths: 6, cooldownCycles: 26 }, 110, h => h);
-  ok(plan.grants[0].amount === 21750 && plan.grants[0].clearsBuffer === false, 'cap binds: 6 months × 3625 = 21750, still under the buffer (stays flagged, eligible again after cooldown)');
+  const plan = E.planHousingDisbursement_(hdr, rows, { initiativeId: 'X', tranche: 400000, remaining: 1e6, hoods: ['West Oakland'], grantCapMonths: 6, grantHeadroomMonths: 1, cooldownCycles: 26 }, 110, h => h);
+  ok(plan.grants[0].amount === 25375 && plan.grants[0].clearsBuffer === false, 'cap binds the buffer fill: 6 months × 3625 + 1 month headroom = 25375, still under the buffer (stays flagged, eligible again after cooldown)');
 }
 
 // ---- apply: household vectors + ledger + intents + tracker debit ----
@@ -165,10 +165,10 @@ function pool() {
   const v = ctx._tabs.Household_Ledger._values; const col = (name) => v[0].indexOf(name);
   ok(out.available && out.programs === 1 && out.grants === 3 && out.paid === 50000 && out.debited === 50000 && out.armed === true && errors.length === 0, 'applied: 3 grants, $50,000 paid, $50,000 debited, receipt columns armed, no engine error');
   ok(v[0].slice(13).join(',') === E.HOUSING_GRANT_COLUMNS_.join(','), 'receipt columns armed after the live 13');
-  ok(v[1][col('HouseholdSavings')] === 43500 && v[1][col('LastGrantCycle')] === 110 && v[1][col('LastGrantInitiativeID')] === 'INIT-001' && v[1][col('LastGrantAmount')] === 30724, 'HH-901 row: savings 43500, receipts stamped');
-  ok(v[7][col('HouseholdSavings')] === 12000 && v[2][col('HouseholdSavings')] === 7276, 'HH-907 12000, HH-902 partial 7276');
+  ok(v[1][col('HouseholdSavings')] === 47125 && v[1][col('LastGrantCycle')] === 110 && v[1][col('LastGrantInitiativeID')] === 'INIT-001' && v[1][col('LastGrantAmount')] === 34349, 'HH-901 row: savings 47125, receipts stamped');
+  ok(v[7][col('HouseholdSavings')] === 13000 && v[2][col('HouseholdSavings')] === 2651, 'HH-907 13000, HH-902 partial 2651');
   ok(v[3][col('HouseholdSavings')] === 500000 && v[4][col('LastGrantCycle')] === '' && v[6][col('LastGrantCycle')] === '', 'buffered, owned and off-hood rows untouched');
-  ok(ctx.ledger.rows[0][2] === 130724 && ctx.ledger.rows[1][2] === 12276 && ctx.ledger.rows[2][2] === 12000 && ctx.ledger.dirty === true, 'durable: head NetWorth += grant on ctx.ledger (a "$5,000" string parses)');
+  ok(ctx.ledger.rows[0][2] === 134349 && ctx.ledger.rows[1][2] === 7651 && ctx.ledger.rows[2][2] === 13000 && ctx.ledger.dirty === true, 'durable: head NetWorth += grant on ctx.ledger (a "$5,000" string parses)');
   ok(appends.length === 3 && appends.every(a => a.tab === 'LifeHistory_Log' && a.row[3] === 'Relief' && /stabilization grant from Fund INIT-001 \(INIT-001\)/.test(a.row[4])) && /covered for the year/.test(appends.find(a => a.row[1] === 'POP-99901').row[4]) && /partial/.test(appends.find(a => a.row[1] === 'POP-99902').row[4]), 'three LifeHistory lines, tag Relief, naming the fund; full vs partial worded');
   const tr = cells.filter(c => c.tab === 'Initiative_Tracker');
   const remainCol = TR_HEAD.indexOf('BudgetRemaining') + 1, lastCol = TR_HEAD.indexOf('LastDisburseCycle') + 1;
@@ -178,7 +178,7 @@ function pool() {
   // same-Cycle rerun pays nothing twice and debits nothing twice
   appends.length = 0; cells.length = 0;
   const out2 = E.applyHousingDisbursement_(ctx, 110);
-  ok(out2.grants === 0 && out2.debited === 0 && appends.length === 0 && cells.length === 0 && v[1][col('HouseholdSavings')] === 43500, 'rerun in the same Cycle: receipts already stamped → no grant, no debit, no intent');
+  ok(out2.grants === 0 && out2.debited === 0 && appends.length === 0 && cells.length === 0 && v[1][col('HouseholdSavings')] === 47125, 'rerun in the same Cycle: receipts already stamped → no grant, no debit, no intent');
 }
 { // tracker already stamped this Cycle → skip program
   appends.length = 0; cells.length = 0;
@@ -196,7 +196,7 @@ function pool() {
   ok(p.tranche === 30000 && out.debited === 30000 && p.newRemaining === 0 && p.status === 'exhausted', 'last tranche = what is left; remaining 0');
   const phaseCol = TR_HEAD.indexOf('ImplementationPhase') + 1, notesCol = TR_HEAD.indexOf('MilestoneNotes') + 1;
   ok(cells.some(c => c.col === phaseCol && c.value === 'complete') && cells.some(c => c.col === notesCol && /budget exhausted/.test(c.value) && /^notes\n/.test(c.value)), 'budget at zero → phase complete + MilestoneNotes appended (prior notes kept)');
-  ok(out.paid === 30000 && out.grants === 2, 'the final 30,000 still pays what it can (12000 + 18000 partial)');
+  ok(out.paid === 30000 && out.grants === 2, 'the final 30,000 still pays what it can (13000 + 17000 partial)');
 }
 { // empty pool still drains the fund (off-camera disbursement is the fact)
   appends.length = 0; cells.length = 0;
@@ -217,9 +217,9 @@ function pool() {
   const m = seeds.match(/var ENGINE213_CONFIG_SEEDS = (\[[\s\S]*?\n\]);/);
   const arr = new Function('return ' + m[1])();
   const keys = arr.map(x => x[0]);
-  ok(['civicDisburseTranche_housing', 'civicHousingGrantCapMonths', 'civicGrantCooldownCycles', 'civicHousingCohortMinFlagged'].every(k => keys.includes(k)) && arr.every(x => Array.isArray(x) && x.length === 6), 'four disbursement dials seeded as 6-tuples');
+  ok(['civicDisburseTranche_housing', 'civicHousingGrantCapMonths', 'civicHousingGrantHeadroomMonths', 'civicGrantCooldownCycles', 'civicHousingCohortMinFlagged'].every(k => keys.includes(k)) && arr.every(x => Array.isArray(x) && x.length === 6), 'five disbursement dials seeded as 6-tuples');
   const by = Object.fromEntries(arr.map(x => [x[0], x[1]]));
-  ok(by.civicDisburseTranche_housing === 400000 && by.civicHousingGrantCapMonths === 12 && by.civicGrantCooldownCycles === 26 && by.civicHousingCohortMinFlagged === 5, 'seed values as the builder ruled (400k / 12 / 26 / 5)');
+  ok(by.civicDisburseTranche_housing === 400000 && by.civicHousingGrantCapMonths === 12 && by.civicHousingGrantHeadroomMonths === 1 && by.civicGrantCooldownCycles === 26 && by.civicHousingCohortMinFlagged === 5, 'seed values as the builder ruled (400k / 12 / +1 / 26 / 5)');
 }
 // ---- catalog parity ----
 {

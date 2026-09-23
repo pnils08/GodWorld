@@ -763,6 +763,7 @@ function getCivicDisburseDials_(ctx, domain) {
   return {
     tranche: required('civicDisburseTranche_' + d, 0, 1e12),
     grantCapMonths: required('civicHousingGrantCapMonths', 0, 60),
+    grantHeadroomMonths: required('civicHousingGrantHeadroomMonths', 0, 12),
     cooldownCycles: required('civicGrantCooldownCycles', 0, 520),
     minFlagged: required('civicHousingCohortMinFlagged', 1, 500)
   };
@@ -795,7 +796,7 @@ function buildDisbursementSlice_(ctx, pending) {
     }
     out.programs.push({ initiativeId: item.initiativeId, name: item.name, domain: item.domain, phase: item.phase, stage: item.stage, tend: tend,
       remaining: item.remaining, tranche: tranche, hoods: folded, unknownHoods: unknown, lastDisburseCycle: item.lastDisburseCycle, sheetRow: item.sheetRow,
-      grantCapMonths: dials.grantCapMonths, cooldownCycles: dials.cooldownCycles,
+      grantCapMonths: dials.grantCapMonths, grantHeadroomMonths: dials.grantHeadroomMonths, cooldownCycles: dials.cooldownCycles,
       paid: 0, grants: 0, debited: 0, newRemaining: item.remaining, status: 'pending' });
   }
   Logger.log('applyInitiativeImplementationEffects_: engine.255 disbursement — ' + out.programs.length + ' program(s): ' +

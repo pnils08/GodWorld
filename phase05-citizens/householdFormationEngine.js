@@ -1297,6 +1297,9 @@ function planHousingDisbursement_(header, rows, program, cycle, hoodOf) {
   if (iId < 0 || iHood < 0 || iType < 0 || iRent < 0 || iInc < 0 || iSav < 0) { out.reason = 'columns-missing'; return out; }
   var hoods = program.hoods || [];
   var cap = Number(program.grantCapMonths); if (!isFinite(cap) || cap < 0) cap = 0;
+  // headroom above the buffer: the money loop moves NetWorth a few hundred a week, so a grant
+  // that lands exactly on the 12-month line re-flags next Cycle (bench C112: 248 short)
+  var headroom = Number(program.grantHeadroomMonths); if (!isFinite(headroom) || headroom < 0) headroom = 0;
   var cooldown = Number(program.cooldownCycles); if (!isFinite(cooldown) || cooldown < 0) cooldown = 0;
   var cands = [];
   for (var r = 0; r < rows.length; r++) {
@@ -1323,7 +1326,7 @@ function planHousingDisbursement_(header, rows, program, cycle, hoodOf) {
   for (var c = 0; c < cands.length && out.trancheLeft > 0; c++) {
     var h = cands[c];
     var need = Math.max(0, h.rent * SAVINGS_BUFFER_MONTHS - h.savings);
-    var grant = Math.min(need, cap * h.rent, out.trancheLeft);
+    var grant = Math.min(Math.min(need, cap * h.rent) + headroom * h.rent, out.trancheLeft);
     grant = Math.round(grant * 100) / 100;
     if (!(grant > 0)) continue;
     out.grants.push({ bodyIndex: h.bodyIndex, householdId: h.householdId, head: h.head, hood: h.hood, rent: h.rent, burden: h.burden,

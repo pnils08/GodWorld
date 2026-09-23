@@ -172,6 +172,7 @@ var ENGINE213_CONFIG_SEEDS = [
   // gates the Delivering judge (a two-row cohort moves 50% per event).
   ['civicDisburseTranche_housing', 400000, 'engine.255: dollars a Standing/Delivering housing initiative spends per Cycle at full tend (× the upkeep tend factor); BudgetRemaining falls by this whether or not tracked rows qualify — $28M lasts ~70 tended Cycles, ~230 at the tend floor', 0, 1000000000, false],
   ['civicHousingGrantCapMonths', 12, 'engine.255: most months of a household\'s own rent one grant may pay; the grant fills savings to the engine\'s 12-month buffer within this cap (live C108: the two flagged West Oakland rows need $30.7k and $43.5k)', 0, 60, false],
+  ['civicHousingGrantHeadroomMonths', 1, 'engine.255: months of rent a grant fills ABOVE the 12-month buffer (target = 13 months); bench C112: a grant landing exactly on the line re-flagged 248 dollars short the next Cycle as the money loop moved NetWorth', 0, 12, false],
   ['civicGrantCooldownCycles', 26, 'engine.255: Cycles before ANY initiative may grant the same household again (per household, not per initiative — two funds over one hood would otherwise both pay the same worst-off row)', 0, 520, true],
   ['civicHousingCohortMinFlagged', 5, 'engine.255: least flagged (warning/crisis) active rented households a target hood needs at the vote for its housing Delivering gate to run; below it the row is blocked: thin-cohort, the fund still pays. Live C108: West Oakland 2, city 7 — no hood clears it until the buffer question (builder call 8) is ruled', 1, 500, true],];
 

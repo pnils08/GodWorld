@@ -3770,9 +3770,25 @@ function freezeCivicStageCohort_(ctx) {
       var minFlagged = Number(minRaw);
       if (minRaw === '' || minRaw === null || minRaw === undefined || !isFinite(minFlagged) || minFlagged < 1) { co.reason = 'min-flagged-dial-missing'; return; }
       var hHead = hData[0], hRows = [];
+      // engine.255: HouseholdSavings is derived from member NetWorth by the income pass, so a
+      // household formed last Cycle still reads 0 here while its head may hold six figures
+      // (bench C109–C112: every 'luck relief' was a fresh row filling in). The ledger is the
+      // truth — overlay the greater of the cell and the members' NetWorth before judging.
+      var lH = ctx.ledger && ctx.ledger.headers ? ctx.ledger.headers : [], lP = lH.indexOf('POPID'), lN = lH.indexOf('NetWorth'), nwBy = {};
+      if (lP >= 0 && lN >= 0 && ctx.ledger.rows) for (var lr = 0; lr < ctx.ledger.rows.length; lr++) nwBy[String(ctx.ledger.rows[lr][lP]).trim()] = Number(String(ctx.ledger.rows[lr][lN]).replace(/[$,\s]/g, '')) || 0;
+      var iMem = hHead.indexOf('Members'), iHeadCol = hHead.indexOf('HeadOfHousehold'), iSavCol = hHead.indexOf('HouseholdSavings');
       for (var hr = 1; hr < hData.length; hr++) {
         var rec = {};
         for (var hc = 0; hc < hHead.length; hc++) rec[hHead[hc]] = hData[hr][hc];
+        if (iSavCol >= 0 && lP >= 0) {
+          var ids = [];
+          try { var pm = iMem >= 0 ? JSON.parse(hData[hr][iMem] || '[]') : []; if (Array.isArray(pm)) ids = pm; } catch (e) { ids = []; }
+          if (!ids.length && iHeadCol >= 0 && hData[hr][iHeadCol]) ids = [hData[hr][iHeadCol]];
+          var sum = 0, seen = false;
+          for (var mi = 0; mi < ids.length; mi++) { var mk = String(ids[mi]).trim(); if (Object.prototype.hasOwnProperty.call(nwBy, mk)) { sum += nwBy[mk]; seen = true; } }
+          var cellSav = Number(rec.HouseholdSavings); if (!isFinite(cellSav)) cellSav = 0;
+          if (seen && sum > cellSav) rec.HouseholdSavings = sum;
+        }
         hRows.push(rec);
       }
       var fold = function (name) { return resolveHoodOrChild_(ctx, name); };

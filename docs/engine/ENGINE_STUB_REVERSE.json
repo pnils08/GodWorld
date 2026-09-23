@@ -1,8 +1,8 @@
 {
-  "generated": "2026-09-22",
+  "generated": "2026-09-23",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 184,
-  "functionsMapped": 1484,
+  "functionsMapped": 1488,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -878,8 +878,10 @@
         "phase05-citizens/generationalWealthEngine.js::homeBuyChance_",
         "phase05-citizens/generationalWealthEngine.js::homeHoodFloorAdmits_",
         "phase05-citizens/generationalWealthEngine.js::homeMarketRent_",
+        "phase05-citizens/generationalWealthEngine.js::planOwnerMove_",
         "phase05-citizens/generationalWealthEngine.js::processBankRate_",
         "phase05-citizens/generationalWealthEngine.js::processMoneyLoop_",
+        "phase05-citizens/generationalWealthEngine.js::sellHouseholdHome_",
         "phase05-citizens/generationalWealthEngine.js::trackWealthMobility_",
         "phase05-citizens/householdFormationEngine.js::estimateRent_",
         "phase05-citizens/migrationTrackingEngine.js::processMigrationEvents_",
@@ -1137,6 +1139,7 @@
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
         "phase05-citizens/generationalWealthEngine.js::processInheritance_",
         "phase05-citizens/generationalWealthEngine.js::processMoneyLoop_",
+        "phase05-citizens/generationalWealthEngine.js::sellHouseholdHome_",
         "phase05-citizens/generationalWealthEngine.js::trackHomeOwnership_",
         "phase05-citizens/generationalWealthEngine.js::trackWealthMobility_",
         "phase05-citizens/generationalWealthEngine.js::updateHeritage_",
@@ -1168,6 +1171,7 @@
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
         "phase05-citizens/generationalWealthEngine.js::processInheritance_",
         "phase05-citizens/generationalWealthEngine.js::processMoneyLoop_",
+        "phase05-citizens/generationalWealthEngine.js::sellHouseholdHome_",
         "phase05-citizens/generationalWealthEngine.js::trackHomeOwnership_",
         "phase05-citizens/generationalWealthEngine.js::trackWealthMobility_",
         "phase05-citizens/generationalWealthEngine.js::updateHeritage_",
@@ -3317,7 +3321,8 @@
         "phase05-citizens/generationalWealthEngine.js::updateHeritage_"
       ],
       "readers": [
-        "phase05-citizens/educationCareerEngine.js::updateMinorSchoolQuality_"
+        "phase05-citizens/educationCareerEngine.js::updateMinorSchoolQuality_",
+        "phase05-citizens/generationalWealthEngine.js::sellHouseholdHome_"
       ]
     },
     "careerSignals": {
@@ -3460,6 +3465,16 @@
       ],
       "readers": [
         "phase05-citizens/generationalWealthEngine.js::trackWealthMobility_",
+        "phase05-citizens/generationalWealthEngine.js::updateHeritage_"
+      ]
+    },
+    "homesSoldByLine": {
+      "writers": [
+        "phase05-citizens/generationalWealthEngine.js::sellHouseholdHome_"
+      ],
+      "readers": [
+        "phase05-citizens/generationalWealthEngine.js::sellHouseholdHome_",
+        "phase05-citizens/generationalWealthEngine.js::trackHomeOwnership_",
         "phase05-citizens/generationalWealthEngine.js::updateHeritage_"
       ]
     },
@@ -4517,6 +4532,7 @@
         "phase05-citizens/generationalWealthEngine.js::applyOwnerDraw_",
         "phase05-citizens/householdFormationEngine.js::applyHousingDisbursementBody_",
         "phase05-citizens/maneuverEngine.js::runManeuverEngine_",
+        "phase05-citizens/migrationTrackingEngine.js::processRelocations_",
         "phase05-citizens/processAdvancementIntake.js::applyTierLadderState_",
         "phase05-citizens/processAdvancementIntake.js::decayMediaAttention_",
         "phase05-citizens/processAdvancementIntake.js::processMediaUsage_",
@@ -4548,6 +4564,7 @@
         "phase05-citizens/generationalWealthEngine.js::applyOwnerDraw_",
         "phase05-citizens/householdFormationEngine.js::applyHousingDisbursementBody_",
         "phase05-citizens/maneuverEngine.js::runManeuverEngine_",
+        "phase05-citizens/migrationTrackingEngine.js::processRelocations_",
         "phase05-citizens/processAdvancementIntake.js::applyTierLadderState_",
         "phase05-citizens/processAdvancementIntake.js::decayMediaAttention_",
         "phase05-citizens/processAdvancementIntake.js::processAdvancementRows_",
@@ -4749,6 +4766,7 @@
       "readers": [
         "phase04-events/buildCityEvents.js::buildCityEvents_",
         "phase05-citizens/generationalWealthEngine.js::applyOwnerDraw_",
+        "phase05-citizens/generationalWealthEngine.js::decrementHeritageHomesLate_",
         "phase05-citizens/generationalWealthEngine.js::heritageTierByPop_",
         "phase05-citizens/generationalWealthEngine.js::updateHeritage_",
         "phase05-citizens/maneuverEngine.js::maneuverLines_"
@@ -4837,9 +4855,12 @@
       ]
     },
     "Faith_Organizations": {
-      "writers": [],
+      "writers": [
+        "phase05-citizens/migrationTrackingEngine.js::processRelocations_"
+      ],
       "readers": [
         "phase05-citizens/bondEngine.js::processFaithJoins_",
+        "phase05-citizens/migrationTrackingEngine.js::processRelocations_",
         "phase07-evening-media/buildContractSeeds.js::contractSeedBackdropIndex_"
       ]
     },

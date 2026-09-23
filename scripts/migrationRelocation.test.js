@@ -480,5 +480,53 @@ console.log('A11 canon faith-leader anchor');
   assert('exactly two move hooks (the unanchored units)', ctx.summary.storyHooks.filter(h => h.hookType === 'CITIZEN_RELOCATED').length === 2);
 }
 
+// ═══ A12: the owner move (2026-09-23, builder ruling — a home is a rung, not a cage) ═══
+console.log('A12 owner move — sell up, buy or rent there; authored homes stay');
+{
+  // The wealth engine's sale/purchase rules, loaded as the flat Apps Script namespace would see them.
+  const WE_SRC = fs.readFileSync(path.resolve(__dirname, '../phase05-citizens/generationalWealthEngine.js'), 'utf8');
+  const WE = new Function(CAL_SRC + '\n' + NS_SRC + '\n' + WE_SRC + '\nreturn { planOwnerMove_, executeOwnerMove_ };')();
+  global.planOwnerMove_ = WE.planOwnerMove_; global.executeOwnerMove_ = WE.executeOwnerMove_;
+  const XH = SL_HEADER.concat(['NetWorth', 'LifeHistory', 'ClockMode', 'LineageId']);
+  const run = (nw, income, clock, heritageRan) => {
+    rippleCalls = []; cellIntents = []; appendIntents = [];
+    const hh = [['HH-O1', 'POP-O1', 'single', '["POP-O1"]', 'Lowmarket', 'owned', 1386, 297000, income, 100, '', 'active', '', '']];
+    const sl = [citizen('POP-O1', 'Owen', 'Upward', 'Lowmarket', income, { hh: 'HH-O1', edu: 'masters', birthYear: 1990 }).concat([nw, '', clock, 'LIN-1'])];
+    const ctx = buildCtx(sl, hh, () => 0.0);
+    ctx.ledger.headers = XH.slice();
+    ctx.summary.neighborhoodState = { Lowmarket: { medianRent: 1125 }, Highgate: { medianRent: 3750 }, Middleton: { medianRent: 1875 }, Fadeside: { medianRent: 1500 } };
+    ctx._sheets.Heritage_Ledger = mockSheet([['LineageId', 'HomesOwned'], ['LIN-1', 2]]);
+    if (heritageRan) ctx.summary.heritage = {}; // Step 7 already ran this Cycle (the mover runs after the wealth engine)
+    runBoth(ctx);
+    const h = ctx._sheets.Household_Ledger._values[1], hx = (n) => h[HH_HEADER.indexOf(n)];
+    return { sl, ctx, hood: sl[0][col('Neighborhood')], type: hx('HousingType'), rent: hx('MonthlyRent'), cost: hx('HousingCost'), hhHood: hx('Neighborhood'),
+      nw: sl[0][XH.indexOf('NetWorth')], life: String(sl[0][XH.indexOf('LifeHistory')]), homes: ctx._sheets.Heritage_Ledger._values[1][1] };
+  };
+  // Trade-up: sale 297,000 − 0.8 × 297,000 owed = 59,400 back; Highgate 3750 × 264 = 990,000,
+  // 198,000 down, mortgage 4,620/mo (55,440/yr ≤ 0.30 × 200,000); NW 400,000 + 59,400 ≥ 0.35 × price.
+  const t = run(400000, 200000, 'ENGINE', true);
+  assert('trade-up: household moved up to Highgate', t.hood === 'Highgate' && t.hhHood === 'Highgate', t.hood + '/' + t.hhHood);
+  assert('trade-up: still owned, mortgage on the new price', t.type === 'owned' && t.rent === 4620 && t.cost === 990000, [t.type, t.rent, t.cost].join(','));
+  assert('trade-up: NetWorth = 400,000 + 59,400 − 198,000', t.nw === 261400, String(t.nw));
+  assert('trade-up: one [Home] line names both hoods', /\[Home\] sold the place in Lowmarket and bought in Highgate/.test(t.life), t.life);
+  assert('trade-up: HomesOwned unchanged (sell one, buy one)', t.homes === 2, String(t.homes));
+  assert('trade-up: the move hook says so', t.ctx.summary.storyHooks.some(k => k.hookType === 'CITIZEN_RELOCATED' && /bought in Highgate/.test(k.description)));
+  assert('trade-up: no separate HOME_SALE hook (one event, one hook)', !t.ctx.summary.storyHooks.some(k => k.hookType === 'HOME_SALE'));
+  // Sell and rent up: NW 100,000 + 59,400 < 0.35 × 990,000 → rents at the destination level, keeps the equity.
+  const r = run(100000, 200000, 'ENGINE', true);
+  assert('rent-up: moved, now renting at the destination level', r.hood === 'Highgate' && r.type === 'rented' && r.cost === 0 && r.rent > 0, [r.hood, r.type, r.rent, r.cost].join(','));
+  assert('rent-up: equity banked (100,000 + 59,400)', r.nw === 159400, String(r.nw));
+  assert('rent-up: [Home] line says renting until buying is in reach', /sold the place in Lowmarket — \$59400 in the bank, renting in Highgate/.test(r.life), r.life);
+  assert('rent-up: a sale after Step 7 comes off HomesOwned on the sheet', r.homes === 1, String(r.homes));
+  // Authored home: a GAME-clock owner is canon and never sold by dice.
+  const a = run(400000, 200000, 'GAME', true);
+  assert('authored owner stays put, row untouched', a.hood === 'Lowmarket' && a.type === 'owned' && a.cost === 297000, [a.hood, a.type, a.cost].join(','));
+  // Without the wealth engine loaded the mover must fail loudly, never skip the sale.
+  delete global.planOwnerMove_;
+  let threw = false; try { run(400000, 200000, 'ENGINE', true); } catch (e) { threw = /planOwnerMove_/.test(e.message); }
+  assert('owner move with no wealth engine throws (no silent skip)', threw);
+  global.planOwnerMove_ = WE.planOwnerMove_;
+}
+
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

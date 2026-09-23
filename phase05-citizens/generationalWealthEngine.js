@@ -1806,7 +1806,8 @@ function trackHomeOwnership_(ss, ctx, cycle) {
 // S.homesSoldByLine so Step 7 decrements HomesOwned the same cycle. Called
 // today by the stress dissolution in householdFormationEngine; a voluntary
 // sale is a policy door of its own and is not built here.
-function sellHouseholdHome_(ctx, household, memberPopIds, cycle) {
+function sellHouseholdHome_(ctx, household, memberPopIds, cycle, opts) {
+  opts = opts || {};
   var hood = String(household.neighborhood || '').trim();
   var st = ctx && ctx.summary && ctx.summary.neighborhoodState ? ctx.summary.neighborhoodState[hood] : null;
   var med = st ? (Number(st.medianRent) || 0) : 0;
@@ -1843,6 +1844,7 @@ function sellHouseholdHome_(ctx, household, memberPopIds, cycle) {
   var stamp = 'Y' + (Math.floor((cycle - 1) / 52) + 1) + 'C' + (((cycle - 1) % 52) + 1);
   var simYearS = (typeof simYearOf_ === 'function') ? simYearOf_(ctx, cycle) : 0;
   for (var m3 = 0; m3 < members.length; m3++) {
+    if (opts.quiet) break; // the caller (owner move) writes the one combined [Home] line
     var by = iBirth >= 0 ? (Number(members[m3][iBirth]) || 0) : 0;
     if (by > 1900 && simYearS && (simYearS - by) < 18) continue; // minors share the money, not the sentence
     if (iLife < 0) break;
@@ -1856,8 +1858,19 @@ function sellHouseholdHome_(ctx, household, memberPopIds, cycle) {
     var lin = iLin >= 0 ? String(members[m4][iLin] || '').trim() : '';
     if (lin) soldByLine[lin] = true;
   }
-  ctx.summary.homesSoldByLine = ctx.summary.homesSoldByLine || {};
-  for (var lk in soldByLine) ctx.summary.homesSoldByLine[lk] = (Number(ctx.summary.homesSoldByLine[lk]) || 0) + 1;
+  // A trade-up (sell here, buy there) leaves every line's HomesOwned where it
+  // was — no accounting. Otherwise the home comes off the line: before Step 7
+  // runs it rides S.homesSoldByLine; a sale after Step 7 this Cycle (the
+  // Phase-5 mover runs after the wealth engine) decrements Heritage_Ledger
+  // directly, or the home would count toward standing forever.
+  if (!opts.netZero) {
+    if (ctx.summary.heritage) decrementHeritageHomesLate_(ctx, soldByLine);
+    else {
+      ctx.summary.homesSoldByLine = ctx.summary.homesSoldByLine || {};
+      for (var lk in soldByLine) ctx.summary.homesSoldByLine[lk] = (Number(ctx.summary.homesSoldByLine[lk]) || 0) + 1;
+    }
+  }
+  if (opts.quiet) return { price: price, proceeds: proceeds };
   ctx.summary.storyHooks = ctx.summary.storyHooks || [];
   var who = members.length ? ((members[0][iFirst] || '') + ' ' + (members[0][iLast] || '')).trim() : 'A household';
   var saleHook = {
@@ -1870,6 +1883,101 @@ function sellHouseholdHome_(ctx, household, memberPopIds, cycle) {
   ctx.summary.storyHooks.push(saleHook);
   if (typeof recordHookRipple_ === 'function') recordHookRipple_(ctx, 'household', saleHook, 'generationalWealthEngine');
   return { price: price, proceeds: proceeds };
+}
+
+// Heritage_Ledger is this engine's own tracking sheet (Phase 5 class): a sale
+// that lands after Step 7 takes its home off each line here, one cell per line.
+function decrementHeritageHomesLate_(ctx, soldByLine) {
+  var lins = Object.keys(soldByLine || {});
+  if (!lins.length) return 0;
+  var sheet = ctx.ss ? ctx.ss.getSheetByName('Heritage_Ledger') : null;
+  if (!sheet) throw new Error('decrementHeritageHomesLate_: Heritage_Ledger missing after Step 7 ran this Cycle');
+  var v = sheet.getDataRange().getValues();
+  var hLin = v[0].indexOf('LineageId'), hHomes = v[0].indexOf('HomesOwned');
+  if (hLin < 0 || hHomes < 0) throw new Error('decrementHeritageHomesLate_: Heritage_Ledger LineageId/HomesOwned column missing');
+  var n = 0;
+  for (var r = 1; r < v.length; r++) {
+    var lid = String(v[r][hLin] || '').trim();
+    if (!soldByLine[lid]) continue;
+    sheet.getRange(r + 1, hHomes + 1).setValue(Math.max(0, (Number(v[r][hHomes]) || 0) - 1));
+    n++;
+  }
+  return n;
+}
+
+// ── the owner move (2026-09-23, builder ruling) ────────────────────────────
+// A home is a rung, not a cage: an owned household the mover sorts UP sells
+// at its hood's current market (sellHouseholdHome_) and, at the destination,
+// buys if the proceeds-plus-savings clear the same three gates a first
+// purchase clears (NetWorth ≥ HOME_ELIGIBLE_NW of price, the hood's WealthMin
+// floor, the mortgage ≤ HOME_CARRY_MAX of income) — no 1 % roll, the move is
+// the decision. If it cannot buy there yet it rents there and keeps the
+// equity (builder: "sell and rent up"); it can buy again from the new hood.
+// planOwnerMove_ is pure; executeOwnerMove_ does the money and the line.
+function planOwnerMove_(ctx, household, memberRows, unitIncome, destHood) {
+  var header = ctx.ledger.headers;
+  var iNW = header.indexOf('NetWorth');
+  var nw = 0;
+  for (var m = 0; m < memberRows.length; m++) nw += Number(String(memberRows[m][iNW]).replace(/[$,\s]/g, '')) || 0;
+  var st = ctx.summary && ctx.summary.neighborhoodState ? ctx.summary.neighborhoodState[String(household.neighborhood || '').trim()] : null;
+  var med = st ? (Number(st.medianRent) || 0) : 0;
+  var cost = Number(household.housingCost) || 0;
+  var salePrice = med > 0 ? Math.round(med * 12 * HOME_PRICE_TO_RENT) : cost;
+  var proceeds = Math.max(0, Math.round(salePrice - cost * (1 - HOME_DOWN)));
+  var destRent = homeMarketRent_(ctx, destHood, 0);
+  if (!(destRent > 0)) return null; // unpriced destination: no market to buy or rent in
+  var price = Math.round(destRent * 12 * HOME_PRICE_TO_RENT);
+  var mortgage = Math.round(price * HOME_MORTGAGE_MONTHLY);
+  var nwAfter = nw + proceeds;
+  var buys = nwAfter >= price * HOME_ELIGIBLE_NW &&
+    homeHoodFloorAdmits_(ctx, destHood, nwAfter) &&
+    homeCarries_(mortgage, unitIncome);
+  return {
+    mode: buys ? 'trade-up' : 'rent', salePrice: salePrice, proceeds: proceeds,
+    price: price, down: Math.round(price * HOME_DOWN), mortgage: mortgage,
+    destRent: Math.round(destRent), nwBefore: nw
+  };
+}
+
+function executeOwnerMove_(ctx, plan, household, memberRows, destHood, cycle) {
+  var header = ctx.ledger.headers;
+  var iPop = header.indexOf('POPID'), iNW = header.indexOf('NetWorth'),
+      iLife = header.indexOf('LifeHistory'), iBirth = header.indexOf('BirthYear');
+  var ids = [];
+  for (var m = 0; m < memberRows.length; m++) ids.push(String(memberRows[m][iPop] || '').trim());
+  var fromHood = String(household.neighborhood || '').trim();
+  var tradeUp = plan.mode === 'trade-up';
+  sellHouseholdHome_(ctx, household, ids, cycle, { quiet: true, netZero: tradeUp });
+  if (tradeUp) {
+    var nw0 = [], combined = 0;
+    for (var a = 0; a < memberRows.length; a++) {
+      var v = Number(String(memberRows[a][iNW]).replace(/[$,\s]/g, '')) || 0;
+      nw0.push(v); combined += v;
+    }
+    for (var b = 0; b < memberRows.length; b++) {
+      var share = combined > 0 ? nw0[b] / combined : 1 / memberRows.length;
+      memberRows[b][iNW] = Math.max(0, Math.round(nw0[b] - plan.down * share));
+    }
+  }
+  ctx.ledger.dirty = true;
+  var stamp = 'Y' + (Math.floor((cycle - 1) / 52) + 1) + 'C' + (((cycle - 1) % 52) + 1);
+  var simY = (typeof simYearOf_ === 'function') ? simYearOf_(ctx, cycle) : 0;
+  var line = tradeUp
+    ? '[Home] sold the place in ' + fromHood + ' and bought in ' + destHood + ' — $' + plan.down + ' down on $' + plan.price
+    : '[Home] sold the place in ' + fromHood + (plan.proceeds > 0 ? ' — $' + plan.proceeds + ' in the bank' : '') + ', renting in ' + destHood + ' until buying there is in reach';
+  for (var c = 0; c < memberRows.length; c++) {
+    if (iLife < 0) break;
+    var by = iBirth >= 0 ? (Number(memberRows[c][iBirth]) || 0) : 0;
+    if (by > 1900 && simY && (simY - by) < 18) continue; // minors share the house, not the sentence
+    var life = String(memberRows[c][iLife] || '');
+    memberRows[c][iLife] = (life ? life + '\n' : '') + stamp + ' — ' + line;
+  }
+  return {
+    housingType: tradeUp ? 'owned' : 'rented',
+    monthly: tradeUp ? plan.mortgage : plan.destRent,
+    housingCost: tradeUp ? plan.price : 0,
+    phrase: tradeUp ? 'sold up and bought in ' + destHood : 'sold the house in ' + fromHood + ' to rent up'
+  };
 }
 
 

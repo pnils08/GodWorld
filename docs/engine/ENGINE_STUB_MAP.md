@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-09-22 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-09-23 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -1830,10 +1830,22 @@
 - **homeCarries_(mortgageMonthly, householdIncome)**
 
 - **trackHomeOwnership_(ss, ctx, cycle)**
-  Reads: S.storyHooks
+  Reads: S.homesSoldByLine, S.storyHooks
   Writes: S.homesPurchasedByLine, S.storyHooks
   Sheets: Household_Ledger
   RNG: ctx.rng / safeRand_(ctx)
+
+- **sellHouseholdHome_(ctx, household, memberPopIds, cycle, opts)**
+  Reads: S.heritage, S.homesSoldByLine, S.neighborhoodState, S.storyHooks
+  Writes: S.homesSoldByLine, S.storyHooks
+
+- **decrementHeritageHomesLate_(ctx, soldByLine)**
+  Sheets: Heritage_Ledger
+
+- **planOwnerMove_(ctx, household, memberRows, unitIncome, destHood)**
+  Reads: S.neighborhoodState
+
+- **executeOwnerMove_(ctx, plan, household, memberRows, destHood, cycle)**
 
 - **heritageStanding_(totalNW, generations, civ, fame, businesses, homes, scandal)**
 
@@ -1850,7 +1862,7 @@
   Sheets: Simulation_Ledger
 
 - **updateHeritage_(ss, ctx, cycle)**
-  Reads: S.homesPurchasedByLine, S.storyHooks
+  Reads: S.homesPurchasedByLine, S.homesSoldByLine, S.storyHooks
   Writes: S.heritage, S.storyHooks
   Config: ctx.config.bizIdHighWater
   Sheets: Business_Ledger, Civic_Office_Ledger, Cultural_Ledger, Family_Relationships, Heritage_Ledger, Household_Ledger
@@ -1997,9 +2009,10 @@
 - **processRelocations_(ctx, cycle)**
   Reads: S.neighborhoodState, S.storyHooks
   Writes: S.storyHooks
+  Sheets: Faith_Organizations, LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)
 
-- **updateHouseholdLedgerMove_(ctx, householdId, destHood, destRent)**
+- **updateHouseholdLedgerMove_(ctx, householdId, destHood, destRent, ownerReceipt)**
   Sheets: Household_Ledger
 
 - **checkForDisplacedCitizens_(ctx, cycle)**
@@ -4254,4 +4267,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 184
-**Functions mapped:** 1484
+**Functions mapped:** 1488

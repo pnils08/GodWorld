@@ -352,6 +352,7 @@ function buildHouseholdHousingMap_(ss) {
     var iType = idx('HousingType');
     var iStatus = idx('Status');
     var iSavings = idx('HouseholdSavings');
+    var iCost = idx('HousingCost'), iHoodH = idx('Neighborhood');
 
     if (iHouseholdId < 0 || iRent < 0) return {};
 
@@ -365,7 +366,9 @@ function buildHouseholdHousingMap_(ss) {
         rent: Number(row[iRent]) || 0,
         housingType: iType >= 0 ? String(row[iType] || '').toLowerCase() : '',
         ledgerIncome: iIncome >= 0 ? (Number(row[iIncome]) || 0) : 0,
-        savings: iSavings >= 0 ? (Number(row[iSavings]) || 0) : 0
+        savings: iSavings >= 0 ? (Number(row[iSavings]) || 0) : 0,
+        housingCost: iCost >= 0 ? (Number(row[iCost]) || 0) : 0, // the owner move prices the sale off the purchase
+        neighborhood: iHoodH >= 0 ? String(row[iHoodH] || '').trim() : ''
       };
     }
 
@@ -633,6 +636,7 @@ function processRelocations_(ctx, cycle) {
       iMigReason = idx('MigrationReason'), iMigDest = idx('MigrationDestination'),
       iMigCycle = idx('MigratedCycle'),
       iWealthLevel = idx('WealthLevel'), // engine.135 F — admission band
+      iClock = idx('ClockMode'),          // owner move: an authored (non-ENGINE) home is canon, never sold by dice
       iDialStateR = idx('DialState');   // engine.178 — openness gates the misfit lane
   if (iNeighborhood < 0 || iIncome < 0 || iMigIntent < 0) return { moved: 0 };
   // engine.135 F (S399): the B1 hood profile (S.neighborhoodState, Phase 2)
@@ -672,10 +676,15 @@ function processRelocations_(ctx, cycle) {
   // ── Eligibility + roll + cap ──────────────────────────────────────────────
   var moved = 0;
   // G-EC70 (builder ruling 2026-09-22): owning and renting are separate progression
-  // vehicles — a home is a gate on family formation, and ownership never flips
-  // silently. An owned household is anchored by the home it owns: this pass never
-  // relocates it, so its mortgage is never rebased to a destination rent. A change
-  // of home is the wealth engine's sale/purchase, not a migration.
+  // vehicles — ownership never flips silently, and a mortgage is never rebased to a
+  // destination rent. Owner move (builder ruling 2026-09-23 — a home that locks a
+  // household into its hood defeats advancement): an owned household may take the
+  // MISFIT lane (moving up) — it sells, then buys or rents at the destination through
+  // the wealth engine (planOwnerMove_ / executeOwnerMove_), loud on the record either
+  // way. Owners never take the pressure lane here: owned rows carry no rent burden,
+  // and distress sales are the stress dissolution's. A household with any member not
+  // on the ENGINE clock lives in an authored home and stays anchored; a household
+  // unknown to the ledger stays anchored.
   var housingByHH = {};
   try { housingByHH = buildHouseholdHousingMap_(ctx.ss) || {}; } catch (eOwn) { housingByHH = {}; Logger.log('processRelocations_: household housing map unavailable (' + eOwn + ') — owned units cannot be told apart this Cycle, so NO household unit relocates'); }
   // Canon anchors (2026-09-23, kimi — Mike-direct): a faith organization's
@@ -703,9 +712,18 @@ function processRelocations_(ctx, cycle) {
     var unit = units[u2];
     if (unit.income <= 0 || !unit.rowIdxs.length) continue;
     if (unit.split) continue; // a member sits in another hood — move nobody
+    var ownedUnit = false;
     if (unit.key.indexOf('POP:') !== 0) {
       var hType = housingByHH[unit.key] ? String(housingByHH[unit.key].housingType || '').toLowerCase() : '';
-      if (hType !== 'rented') { ownedSkipped++; continue; } // owned, or unknown to the ledger: anchored
+      if (hType === 'owned') {
+        var authored = false;
+        for (var ck = 0; ck < unit.rowIdxs.length && iClock >= 0; ck++) {
+          var cm = String(rows[unit.rowIdxs[ck]][iClock] || '').trim().toUpperCase();
+          if (cm && cm !== 'ENGINE') { authored = true; break; }
+        }
+        if (authored || unit.planning) { ownedSkipped++; continue; } // authored home, or no rent to be priced out of
+        ownedUnit = true;
+      } else if (hType !== 'rented') { ownedSkipped++; continue; } // unknown to the ledger: anchored
     }
     var anchored = false;
     for (var am = 0; am < unit.rowIdxs.length; am++) {
@@ -759,6 +777,17 @@ function processRelocations_(ctx, cycle) {
     }
     if (!best || best.score < currentFit.score + RELOCATION.MIN_SCORE_GAIN) continue;
 
+    // ── Owner move: sell here, then buy or rent there (wealth engine) ──────
+    var ownerReceipt = null;
+    if (ownedUnit) {
+      var memberRows = [];
+      for (var om = 0; om < unit.rowIdxs.length; om++) memberRows.push(rows[unit.rowIdxs[om]]);
+      var hhInfo = housingByHH[unit.key];
+      var ownerPlan = planOwnerMove_(ctx, hhInfo, memberRows, unit.income, bestName);
+      if (!ownerPlan) continue; // destination has no market price: nothing to buy or rent
+      ownerReceipt = executeOwnerMove_(ctx, ownerPlan, hhInfo, memberRows, bestName, cycle);
+    }
+
     // ── Reason (enum) + narrative phrase ──────────────────────────────────
     var reason, phrase;
     if (unit.maxRisk >= 9) {
@@ -769,7 +798,7 @@ function processRelocations_(ctx, cycle) {
       phrase = 'priced out of ' + unit.hood;
     } else {
       reason = MIGRATION_REASONS.OPPORTUNITY;
-      phrase = 'moving up from ' + unit.hood;
+      phrase = 'moving up from ' + unit.hood + (ownerReceipt ? ' — ' + ownerReceipt.phrase : '');
     }
 
     // ── Execute: mutate every member row in ctx.ledger (Phase 10 commits) ──
@@ -798,7 +827,8 @@ function processRelocations_(ctx, cycle) {
 
     // Household_Ledger: move + re-price (own-tracking sheet, documented exception)
     if (unit.key.indexOf('POP:') !== 0) {
-      updateHouseholdLedgerMove_(ctx, unit.key, bestName, hoods[bestName].rent);
+      if (ownerReceipt) updateHouseholdLedgerMove_(ctx, unit.key, bestName, ownerReceipt.monthly, ownerReceipt);
+      else updateHouseholdLedgerMove_(ctx, unit.key, bestName, hoods[bestName].rent);
     }
 
     // ── Hook: the newsroom sees every move with its why ────────────────────
@@ -848,7 +878,7 @@ function processRelocations_(ctx, cycle) {
   return { moved: moved };
 }
 
-function updateHouseholdLedgerMove_(ctx, householdId, destHood, destRent) {
+function updateHouseholdLedgerMove_(ctx, householdId, destHood, destRent, ownerReceipt) {
   // Direct write to own-tracking sheet — documented exception class
   // (engine.md Phase 5 citizen life engines: migrationTrackingEngine).
   try {
@@ -858,9 +888,10 @@ function updateHouseholdLedgerMove_(ctx, householdId, destHood, destRent) {
     if (values.length < 2) return;
     var header = values[0];
     var idx = function(n) { return header.indexOf(n); };
-    // G-EC70 belt: whoever calls this, an owned row is never moved or rebased here.
+    // G-EC70 belt: an owned row is never moved or rebased here — unless the caller
+    // hands the owner-move receipt (the sale already happened in the wealth engine).
     var iTypeGuard = idx('HousingType'), iHHGuard = idx('HouseholdId');
-    if (iTypeGuard >= 0 && iHHGuard >= 0) {
+    if (iTypeGuard >= 0 && iHHGuard >= 0 && !ownerReceipt) {
       for (var g = 1; g < values.length; g++) {
         if (values[g][iHHGuard] !== householdId) continue;
         if (String(values[g][iTypeGuard] == null ? '' : values[g][iTypeGuard]).trim().toLowerCase() === 'owned') {
@@ -878,8 +909,13 @@ function updateHouseholdLedgerMove_(ctx, householdId, destHood, destRent) {
       if (iStatus >= 0 && String(values[r][iStatus]).toLowerCase() === 'dissolved') continue;
       if (iHood >= 0) sheet.getRange(r + 1, iHood + 1).setValue(destHood);
       // the destination hood's lease is the new obligation (engine.160 one hood rent rule;
-      // owned rows never reach here — G-EC70 refuses them above)
+      // owned rows reach here only with the owner-move receipt — G-EC70 refuses them otherwise)
       if (iRent >= 0 && destRent > 0) sheet.getRange(r + 1, iRent + 1).setValue(destRent);
+      if (ownerReceipt) {
+        var iCostW = idx('HousingCost');
+        if (iTypeGuard >= 0) sheet.getRange(r + 1, iTypeGuard + 1).setValue(ownerReceipt.housingType);
+        if (iCostW >= 0) sheet.getRange(r + 1, iCostW + 1).setValue(ownerReceipt.housingCost);
+      }
       if (iUpdated >= 0 && ctx.now) sheet.getRange(r + 1, iUpdated + 1).setValue(ctx.now);
       return;
     }

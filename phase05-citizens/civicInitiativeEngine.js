@@ -3029,7 +3029,7 @@ var CIVIC_STAGE_CATALOG_ = {
   workforce: { playable: false, stage3Metric: { tab: 'Neighborhood_Map', column: ['RetailVitality'], direction: 'up', scope: 'hood' }, disburses: false },
   sports:    { playable: false, stage3Metric: { tab: 'Neighborhood_Map', column: ['RetailVitality', 'NightlifeProfile'], direction: 'up', scope: 'hood' }, disburses: false },
   safety:    { playable: false, stage3Metric: { tab: 'Crime_Metrics', column: ['ViolentLevel'], direction: 'down', scope: 'hood' }, disburses: false },
-  housing:   { playable: false, stage3Metric: { tab: 'Household_Ledger', column: ['flagged/cohort'], direction: 'down', scope: 'hood' }, disburses: true }  // engine.255: spends its budget (Task 4); Delivering gate off until Task 6/7
+  housing:   { playable: true,  stage3Metric: { tab: 'Household_Ledger', column: ['flagged/cohort'], direction: 'down', scope: 'hood' }, disburses: true }  // engine.255: spends its budget (Task 4); Delivering on the flagged-at-vote cohort (Tasks 6–7, bench pair C109–C113)
 };
 
 /** Which stage columns a header row lacks, in declared order. Pure. */

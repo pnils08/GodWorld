@@ -19,9 +19,9 @@ test('board preserves legacy advice, negative-phase priority and unplayable gate
     const row = {Stage:'Funded',ImplementationPhase:phase};
     assert.equal(slice.boardNeedText(row),contract.stageRequirement({stage:'Funded',phase}).text);
   }
-  // housing back on the list — engine.255 (2026-09-22) turned the discount lever
-  // off; its delivering gate returns with the budgeted-disbursement lever.
-  for (const PolicyDomain of ['safety','economic','workforce','sports','housing']) {
+  // housing off the list again — engine.255 budgeted disbursement has a real
+  // delivering gate (flagged-at-vote cohort, Task 7 pair 2026-09-22).
+  for (const PolicyDomain of ['safety','economic','workforce','sports']) {
     assert.match(slice.boardNeedText({Stage:'Standing',PolicyDomain}), /no delivering gate/);
   }
   assert.match(slice.boardNeedText({Stage:'Standing',PolicyDomain:'health'}), /metric evidence unavailable/);

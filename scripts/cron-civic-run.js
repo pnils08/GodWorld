@@ -2384,11 +2384,12 @@ function datawakeUserPrompt(pack, wallInj, office) {
     'JSON only: {"office":"' + voiceSlug(office.agentDir) + '","holder":"' + office.holder + '","statement":"","moves":[],"numberMoved":""}',
     'statement is one string that answers THIS WEEK\'S LEVER from the pack. Not a statement object. Not a prior-wall quote.',
     // civic.38 Task 1 — the closed move set. One consequential move per wake.
-    'moves: at most ONE move from this closed set — {"type":"propose","title":"","intervention":"<catalog key>","hoods":[""],"problem":""} | {"type":"work","initiativeId":"INIT-…"} | {"type":"answer","confrontationId":"…","text":""} | {"type":"canvass","hood":"","note":""} | {"type":"call-vote","initiativeId":"INIT-…"}. ' +
+    'moves: at most ONE move from this closed set — {"type":"propose","title":"","intervention":"<catalog key>","hoods":[""],"problem":"","budget":"$12.5M"} | {"type":"work","initiativeId":"INIT-…"} | {"type":"answer","confrontationId":"…","text":""} | {"type":"canvass","hood":"","note":""} | {"type":"call-vote","initiativeId":"INIT-…"}. ' +
       'work only names an initiative on YOUR board (game.boardIds). propose and canvass name only hoods inside your own district' +
       (/^D\d$/.test(String(office.district || '')) ? '' : ' (your seat is citywide — any real neighborhood)') +
       '. call-vote names a petition-pending row (proposed, no vote scheduled) whose domain has no petition rule — the mayor may call any such row, a district seat only one whose hoods sit in their district, once per row per week' +
-      '. propose.intervention comes only from the intervention catalog named in your pack. A move that breaks these rules is discarded, not corrected.',
+      '. propose.intervention comes only from the intervention catalog named in your pack, and propose.budget is a money string the engine can parse ($12.5M style) inside its domain\'s band — your pack lists the band next to each intervention' +
+      '. A move that breaks these rules is discarded, not corrected.',
     conf ? 'YOU HAVE AN UNANSWERED DIRECTIVE (' + conf.id + '). An {"type":"answer",...} move responding to it is expected. Bind confrontationId exactly to that directive; only one answer is accepted per directive and seat. No new consequence is attached.' : 'No answer move is available unless game.confrontationIds names an unanswered directive for this seat.',
     'No headcount, percentage, or dollar figure unless that exact number appears above. Progress with no cited metric is described in words ("ahead of schedule", "significant headway") — never estimated.',
   ].join('\n');
@@ -2501,6 +2502,41 @@ function loadInterventionCatalog() {
   } catch (_) { return null; }
 }
 
+// engine.255 Task 9 (builder call 6): the budget parser + per-domain bands,
+// same lib as the catalog. Absent, propose budgets are unvalidatable and every
+// propose is refused loudly — never validated against a local copy.
+function loadBudgetContract() {
+  try {
+    const c = require('../lib/initiativePhaseContract');
+    if (typeof c.parseBudgetMoney === 'function' && c.BUDGET_BANDS && typeof c.BUDGET_BANDS === 'object') {
+      return { parse: c.parseBudgetMoney, bands: c.BUDGET_BANDS };
+    }
+  } catch (_) { /* not landed */ }
+  return null;
+}
+
+// engine.255 Task 9 (builder call 6, 2026-09-22): a propose carries a `budget`
+// string the engine's own parser accepts (parseBudgetMoney — never Number())
+// inside the closed per-domain band (lib BUDGET_BANDS). Missing, unparseable
+// or out-of-band budgets are refused, not corrected — a minted row whose
+// Budget cannot be parsed would stand as blocked: no-budget. Returns null
+// when the budget is valid. Caller has already cleared interventionIssue, so
+// the catalog entry and its policyDomain are known-good.
+function proposeBudgetReason(catalog, m) {
+  if (m.budget === null || m.budget === undefined || String(m.budget).trim() === '') return 'budget-missing';
+  const contract = loadBudgetContract();
+  if (!contract) return 'budget-contract-not-landed(lib/initiativePhaseContract.js parseBudgetMoney/BUDGET_BANDS — engine.255 Task 1, engine-sheet)';
+  const amount = contract.parse(m.budget);
+  if (amount === null) return 'budget-unparseable(' + String(m.budget).slice(0, 40) + ')';
+  const domain = String((catalog[m.intervention] || {}).policyDomain || '').trim().toLowerCase();
+  const band = Object.hasOwn(contract.bands, domain) ? contract.bands[domain] : null;
+  if (!band) return 'budget-outside-band(no band for domain ' + (domain || '?') + ')';
+  if (amount < band.min || amount > band.max) {
+    return 'budget-outside-band(' + domain + ' band ' + band.min + '-' + band.max + ', got ' + amount + ')';
+  }
+  return null;
+}
+
 // Hood authority: council seats are district-bound (child areas fold to
 // parents first — an intersect test would let one local hood carry in
 // unauthorized ones); citywide seats (mayor, police chief) may name any
@@ -2557,6 +2593,7 @@ function validateDatawakeMoves(rawMoves, ctx) {
       else if (!String(m.intervention || '').trim()) reason = 'propose-missing-intervention';
       else if (!catalog) reason = 'catalog-not-landed(lib/initiativePhaseContract.js INTERVENTION_CATALOG — Task 4 step 0, engine-sheet)';
       else if (interventionIssue(catalog, m.intervention)) reason = interventionIssue(catalog, m.intervention) + '(' + String(m.intervention) + ')';
+      else reason = proposeBudgetReason(catalog, m);
       if (!reason) {
         for (const h of m.hoods) {
           reason = hoodAuthorityReason(office, h, c2p);
@@ -2745,6 +2782,7 @@ function foldMovesIntoDecisions(root, cycle, officeMap) {
         proposingOffice: seat.officeId || seat.projectId || null,
         title: p.payload.title, intervention: p.payload.intervention,
         hoods: p.payload.hoods, problem: p.payload.problem,
+        budget: p.payload.budget != null ? String(p.payload.budget) : null,
         status: 'pending',
       };
     }

@@ -22,7 +22,11 @@ const TRACKER_HEADERS_31 = [
   'Proposer', 'ProposingOffice', 'ProposedCycle',
 ];
 // Keep the authorship migration's historical 31-column contract intact.
-const TRACKER_HEADERS = TRACKER_HEADERS_31.concat(C.STAGE_COLUMNS);
+// engine.255 Task 9: BUDGET_COLUMNS ride after STAGE_COLUMNS so a mint on the
+// 41-column live tracker resolves by header; BudgetTotal/BudgetRemaining/
+// LastDisburseCycle stay blank at mint — the engine back-fills them at the
+// next fire, never this script.
+const TRACKER_HEADERS = TRACKER_HEADERS_31.concat(C.STAGE_COLUMNS, C.BUDGET_COLUMNS);
 
 const POLICY_DOMAINS = [
   'health', 'transit', 'economic', 'housing', 'safety',
@@ -37,6 +41,35 @@ function openingPhase(type) {
   if (!arc) throw new Error('createInitiative: unknown Type "' + type + '"');
   const first = arc[0];
   return Array.isArray(first) ? first[0] : first;
+}
+
+// engine.255 Task 9 — canonical budget display string ($12.5M style). The
+// decimals search guarantees parseBudgetMoney reads the string back to the
+// exact cent-less dollar amount; anything that cannot be expressed in K/M/B
+// falls back to plain dollars, which always round-trips.
+function formatBudgetMoney(n) {
+  const units = [[1e9, 'B'], [1e6, 'M'], [1e3, 'K']];
+  for (let u = 0; u < units.length; u++) {
+    const mult = units[u][0], suffix = units[u][1];
+    if (n < mult) continue;
+    for (let d = 0; d <= 3; d++) {
+      const s = (n / mult).toFixed(d);
+      if (Math.round(Number(s) * mult) === n) return '$' + s + suffix;
+    }
+  }
+  return '$' + n;
+}
+
+// spec.budget → the Budget cell: blank stays blank (a valid no-budget row —
+// blocked: no-budget once staged), anything present must parse through the
+// shared engine parser (never Number()) and is stored in canonical form.
+function canonBudgetString(raw) {
+  if (raw === null || raw === undefined || String(raw).trim() === '') return '';
+  const n = C.parseBudgetMoney(raw);
+  if (n === null) {
+    throw new Error('createInitiative: budget "' + String(raw).slice(0, 40) + '" is not parseable money (use $12.5M style)');
+  }
+  return formatBudgetMoney(n);
 }
 
 function nextInitiativeId(rows) {
@@ -134,7 +167,7 @@ function createInitiative(opts) {
   row.Type = type;
   row.Status = 'proposed';
   row.Stage = 'Proposed';
-  row.Budget = spec.budget != null ? String(spec.budget) : '';
+  row.Budget = canonBudgetString(spec.budget);
   row.LeadFaction = faction;
   row.AffectedNeighborhoods = hoods.join(', ');
   row.PolicyDomain = domain;
@@ -175,6 +208,8 @@ module.exports = {
   TRACKER_HEADERS,
   POLICY_DOMAINS,
   openingPhase,
+  formatBudgetMoney,
+  canonBudgetString,
   nextInitiativeId,
   requireAuthorshipHeaders,
   createInitiative,

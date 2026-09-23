@@ -672,6 +672,9 @@ async function main() {
         proposedCycle: CYCLE,
         proposingOffice: cand.proposingOffice,
         notes: String(cand.problem || '').slice(0, 200),
+        // engine.255 Task 9: the seat's validated budget rides the fold into
+        // the mint; createInitiative stores it canonically or refuses loudly.
+        budget: cand.budget,
       };
       const key = [String(cand.proposingOffice || ''), String(CYCLE), normName(cand.title)].join('|');
       if (existingKeys.has(key)) {

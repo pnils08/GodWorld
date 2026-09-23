@@ -202,7 +202,7 @@ test('T1.3: Live validateDatawakeMoves enforces at most one consequential move p
 
   const rawMoves = [
     { type: 'work', initiativeId: 'INIT-001' },
-    { type: 'propose', title: 'Second Clinic', intervention: 'health-service', hoods: ['West Oakland'], problem: 'need care' },
+    { type: 'propose', title: 'Second Clinic', intervention: 'health-service', hoods: ['West Oakland'], problem: 'need care', budget: '$20M' },
     { type: 'canvass', hood: 'West Oakland' }
   ];
 
@@ -236,7 +236,8 @@ test('T1.5: Live validateDatawakeMoves propose hood grounding requires EVERY hoo
     title: 'Synthetic clinic service',
     intervention: 'health-service',
     hoods: ['Coliseum', 'East Oakland'],
-    problem: 'synthetic health need'
+    problem: 'synthetic health need',
+    budget: '$20M'
   }];
   const res1 = civicRun.validateDatawakeMoves(validMove, { office, catalog, childToParent: CHILD_TO_PARENT_HOOD });
   assert.equal(res1.accepted.length, 1);
@@ -248,7 +249,8 @@ test('T1.5: Live validateDatawakeMoves propose hood grounding requires EVERY hoo
     title: 'Synthetic cross-city clinic',
     intervention: 'health-service',
     hoods: ['East Oakland', 'Temescal'],
-    problem: 'overreach'
+    problem: 'overreach',
+    budget: '$20M'
   }];
   const res2 = civicRun.validateDatawakeMoves(invalidMove, { office, catalog, childToParent: CHILD_TO_PARENT_HOOD });
   assert.equal(res2.accepted.length, 0);
@@ -265,7 +267,8 @@ test('T1.6: Live validateDatawakeMoves: Mayor may propose in any canonical hood 
     title: 'Citywide Clinic Network',
     intervention: 'health-service',
     hoods: ['West Oakland', 'Temescal', 'East Oakland'],
-    problem: 'healthcare access'
+    problem: 'healthcare access',
+    budget: '$20M'
   }];
 
   const res = civicRun.validateDatawakeMoves(mayorMove, { office, catalog, childToParent: CHILD_TO_PARENT_HOOD });
@@ -364,8 +367,10 @@ test('T1.10: Live validateDatawakeMoves with full INTERVENTION_CATALOG: 3 playab
   const unplayableKeys = ['safety-program', 'economic-program', 'workforce-program', 'sports-district', 'housing-program'];
   assert.deepStrictEqual(Object.keys(catalog).filter(k => catalog[k].playable).sort(), [...playableKeys].sort());
   assert.deepStrictEqual(Object.keys(catalog).filter(k => !catalog[k].playable).sort(), [...unplayableKeys].sort());
+  // engine.255 Task 9: playable proposes need a budget inside the domain band.
+  const budgetFor = { 'health-service': '$20M', 'transit-project': '$100M', 'school-program': '$10M' };
   for (const key of playableKeys) {
-    const move = [{ type: 'propose', title: `Test ${key}`, intervention: key, hoods: ['Downtown'], problem: 'test problem' }];
+    const move = [{ type: 'propose', title: `Test ${key}`, intervention: key, hoods: ['Downtown'], problem: 'test problem', budget: budgetFor[key] }];
     const res = civicRun.validateDatawakeMoves(move, { office, catalog });
     assert.equal(res.accepted.length, 1, `Intervention ${key} should be accepted`);
     assert.equal(res.rejected.length, 0);
@@ -390,6 +395,41 @@ test('T1.11: Live validateDatawakeMoves rejects inherited Object.prototype inter
     assert.equal(res.accepted.length, 0, `Inherited property ${evilKey} must not be accepted`);
     assert.equal(res.rejected.length, 1);
   }
+});
+
+test('T1.12: engine.255 Task 9 — propose requires a budget inside the domain band', () => {
+  const office = { officeId: 'MAYOR-01', agentDir: 'civic-office-mayor', district: 'citywide' };
+  const catalog = phaseContract.INTERVENTION_CATALOG;
+  const base = { type: 'propose', title: 'Synthetic Clinic', intervention: 'health-service', hoods: ['Downtown'], problem: 'synthetic need' };
+  const run1 = m => civicRun.validateDatawakeMoves([m], { office, catalog });
+
+  // Missing / blank
+  assert.match(run1(base).rejected[0].reason, /^budget-missing/);
+  assert.match(run1({ ...base, budget: '  ' }).rejected[0].reason, /^budget-missing/);
+
+  // Unparseable — never Number() ('a lot' would be NaN, '28' parses as dollars)
+  assert.match(run1({ ...base, budget: 'a lot of money' }).rejected[0].reason, /^budget-unparseable/);
+  assert.match(run1({ ...base, budget: 'soon' }).rejected[0].reason, /^budget-unparseable/);
+
+  // Outside the health band ($5M-$100M), both directions
+  assert.match(run1({ ...base, budget: '$1M' }).rejected[0].reason, /^budget-outside-band/);
+  assert.match(run1({ ...base, budget: '$200M' }).rejected[0].reason, /^budget-outside-band/);
+
+  // Band edges are inclusive; numeric and plain-dollar forms parse
+  assert.equal(run1({ ...base, budget: '$5M' }).accepted.length, 1);
+  assert.equal(run1({ ...base, budget: '$100M' }).accepted.length, 1);
+  assert.equal(run1({ ...base, budget: 20000000 }).accepted.length, 1);
+  assert.equal(run1({ ...base, budget: '$20,000,000' }).accepted.length, 1);
+  assert.equal(run1({ ...base, budget: '$12.5M' }).accepted[0].payload.budget, '$12.5M');
+
+  // The band keys on the domain, not the string: $10M is fine for health, thin for transit
+  const transit = { ...base, intervention: 'transit-project', budget: '$10M' };
+  assert.match(run1(transit).rejected[0].reason, /^budget-outside-band\(transit/);
+  assert.equal(run1({ ...transit, budget: '$100M' }).accepted.length, 1);
+
+  // Budget checks fire only after the catalog gate — unplayable still reports its own reason
+  const unplayable = { ...base, intervention: 'safety-program' };
+  assert.match(run1(unplayable).rejected[0].reason, /domain-not-playable/);
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -501,7 +541,7 @@ test('T2.5: Live foldMovesIntoDecisions in temp workspace: aggregates work moves
     const moves = [
       { moveId: 'MV-108-civic-office-council-d1-2026-09-21', cycle: 108, date: '2026-09-21', agentDir: 'civic-office-council-d1', popid: SYNTH_POP.COUNCIL_D1, type: 'work', payload: { initiativeId: 'INIT-001' }, status: 'pending' },
       { moveId: 'MV-108-civic-office-council-d3-2026-09-22', cycle: 108, date: '2026-09-22', agentDir: 'civic-office-council-d3', popid: SYNTH_POP.COUNCIL_D3, type: 'work', payload: { initiativeId: 'INIT-001' }, status: 'pending' },
-      { moveId: 'MV-108-civic-office-council-d5-2026-09-23', cycle: 108, date: '2026-09-23', agentDir: 'civic-office-council-d5', popid: SYNTH_POP.COUNCIL_D5, type: 'propose', payload: { title: 'East Oakland Clinic', intervention: 'health-service', hoods: ['East Oakland'], problem: 'Need healthcare' }, status: 'pending' }
+      { moveId: 'MV-108-civic-office-council-d5-2026-09-23', cycle: 108, date: '2026-09-23', agentDir: 'civic-office-council-d5', popid: SYNTH_POP.COUNCIL_D5, type: 'propose', payload: { title: 'East Oakland Clinic', intervention: 'health-service', hoods: ['East Oakland'], problem: 'Need healthcare', budget: '$20M' }, status: 'pending' }
     ];
     ws.writeJsonl('output/cron-civic/moves/moves_c108.jsonl', moves);
 
@@ -544,6 +584,7 @@ test('T2.5: Live foldMovesIntoDecisions in temp workspace: aggregates work moves
     assert.equal(c.proposingOffice, 'COUNCIL-D5');
     assert.equal(c.title, 'East Oakland Clinic');
     assert.equal(c.intervention, 'health-service');
+    assert.equal(c.budget, '$20M', 'engine.255 Task 9: the seat\'s budget rides the fold into the candidate');
     assert.equal(c.status, 'pending');
 
     const rawDecBefore = fs.readFileSync(decPath, 'utf8');
@@ -1108,7 +1149,7 @@ test('F1: Live catalog gate rejects malformed schema shapes and inherited protot
   };
 
   const proposal = intervention => ({
-    type: 'propose', intervention, title: 'Synthetic Proposal', problem: 'Test problem', hoods: ['East Oakland']
+    type: 'propose', intervention, title: 'Synthetic Proposal', problem: 'Test problem', hoods: ['East Oakland'], budget: '$20M'
   });
 
   // housing-program flipped playable:true engine.251 (2026-09-22); safety-program
@@ -1287,6 +1328,37 @@ test('F7: boardNeedText uses the shared helper, preserves stalled priority and a
   assert.match(civicSlice.boardNeedText(fundedRow), /work landed/);
   assert.match(civicSlice.boardNeedText({...fundedRow,LastWorkCycle:107}), /one work move/);
   assert.match(civicSlice.boardNeedText({Stage:'Standing',PolicyDomain:'health'}), /metric evidence unavailable/);
+});
+
+test('T9.255: board shows BudgetRemaining/LastDisburseCycle when the dump carries them, not-yet-stamped when it does not', () => {
+  const office = { officeId: 'MAYOR-01', agentDir: 'civic-office-mayor', district: 'citywide' };
+  // Pre-C109 dump shape: no budget keys at all.
+  const legacyRow = { InitiativeID: 'INIT-991', Name: 'Synthetic Legacy', Status: 'proposed', VoteCycle: '', PolicyDomain: 'health' };
+  // Post-arm dump shape: budget keys present.
+  const stampedRow = { InitiativeID: 'INIT-992', Name: 'Synthetic Stamped', Status: 'active', VoteCycle: '100',
+    PolicyDomain: 'housing', Stage: 'Standing', ImplementationPhase: 'operational',
+    BudgetTotal: 28000000, BudgetRemaining: 27600000, LastDisburseCycle: 111 };
+  const blankRow = { InitiativeID: 'INIT-993', Name: 'Synthetic Blank', Status: 'proposed', VoteCycle: '',
+    PolicyDomain: 'economic', BudgetTotal: '', BudgetRemaining: '', LastDisburseCycle: '' };
+
+  const board = civicSlice.boardRowsFor(office, [legacyRow, stampedRow, blankRow], {}, { cycle: 108, config: {} });
+  const byId = {};
+  board.forEach(b => { byId[b.id] = b; });
+  assert.equal(byId['INIT-991'].budget, 'budget: not yet stamped');
+  assert.match(byId['INIT-992'].budget, /budget \$27,600,000 left/);
+  assert.match(byId['INIT-992'].budget, /last disbursed C111/);
+  assert.match(byId['INIT-993'].budget, /no parsed budget/);
+
+  const text = civicSlice.boardBlock(board);
+  assert.match(text, /INIT-992 Synthetic Stamped .*budget \$27,600,000 left, last disbursed C111/);
+  assert.match(text, /INIT-991 Synthetic Legacy .*budget: not yet stamped/);
+
+  // The pack lists the domain band next to each proposable intervention.
+  const menu = civicSlice.loadInterventionMenu();
+  assert.equal(menu.available, true);
+  assert.match(menu.text, /health-service \(health\).*budget band \$5M-\$100M/);
+  assert.match(menu.text, /transit-project \(transit\).*budget band \$20M-\$500M/);
+  assert.match(menu.text, /school-program \(education\).*budget band \$1M-\$50M/);
 });
 
 test('F8: Proposal condition evidence computes from countPetition and gamePromptView caps history without dropping IDs', () => {

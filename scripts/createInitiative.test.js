@@ -159,5 +159,52 @@ throws('bad domain', function () {
 const existingFactions = fix.rows.map(function (r) { return r.LeadFaction; });
 check('existing six stay OPP in fixture', existingFactions.every(function (f) { return f === 'OPP'; }));
 
+// engine.255 Task 9 — budget minting. TRACKER_HEADERS carries BUDGET_COLUMNS
+// after STAGE_COLUMNS (41 wide), the Budget cell is a canonical parser-safe
+// string, and the engine's three columns stay blank at mint.
+check('default headers are 41 (31 + 7 stage + 3 budget)', C.TRACKER_HEADERS.length === 41 &&
+  C.TRACKER_HEADERS.indexOf('BudgetTotal') === 38 && C.TRACKER_HEADERS.indexOf('LastDisburseCycle') === 40);
+
+check('formatBudgetMoney canonical cases', C.formatBudgetMoney(28000000) === '$28M' &&
+  C.formatBudgetMoney(12500000) === '$12.5M' && C.formatBudgetMoney(2100000000) === '$2.1B' &&
+  C.formatBudgetMoney(400000) === '$400K' && C.formatBudgetMoney(5000000) === '$5M' &&
+  C.formatBudgetMoney(999) === '$999');
+
+const parseBack = require('../lib/initiativePhaseContract').parseBudgetMoney;
+check('formatted strings round-trip the parser', [28000000, 12500000, 2100000000, 400000, 5000000, 999, 1500, 230000000]
+  .every(function (n) { return parseBack(C.formatBudgetMoney(n)) === n; }));
+
+const budgetMint = C.createInitiative({
+  seats: seats,
+  spec: { name: 'SYNTHETIC budgeted clinic', type: 'vote', policyDomain: 'health',
+    affectedNeighborhoods: 'Downtown', proposingOffice: 'MAYOR-01', proposedCycle: 999, budget: '$12.5M' },
+});
+check('mint stores canonical Budget string', budgetMint.row.Budget === '$12.5M' &&
+  budgetMint.values[budgetMint.headers.indexOf('Budget')] === '$12.5M');
+check('engine budget columns blank at mint', ['BudgetTotal', 'BudgetRemaining', 'LastDisburseCycle']
+  .every(function (h) { return budgetMint.row[h] === '' && budgetMint.values[budgetMint.headers.indexOf(h)] === ''; }));
+
+const numericMint = C.createInitiative({
+  seats: seats,
+  spec: { name: 'SYNTHETIC numeric budget', type: 'vote', policyDomain: 'housing',
+    affectedNeighborhoods: 'West Oakland', proposingOffice: 'MAYOR-01', proposedCycle: 999, budget: 28000000 },
+});
+check('numeric budget canonicalized', numericMint.row.Budget === '$28M');
+
+const noBudgetMint = C.createInitiative({
+  seats: seats,
+  spec: { name: 'SYNTHETIC no budget', type: 'vote', policyDomain: 'health',
+    affectedNeighborhoods: 'Downtown', proposingOffice: 'MAYOR-01', proposedCycle: 999 },
+});
+check('absent budget stays blank (blocked: no-budget is the engine\'s call)', noBudgetMint.row.Budget === '');
+
+throws('unparseable budget refuses loudly', function () {
+  C.createInitiative({
+    seats: seats,
+    spec: { name: 'x', type: 'vote', policyDomain: 'health', affectedNeighborhoods: 'Downtown',
+      proposingOffice: 'MAYOR-01', proposedCycle: 999, budget: 'a lot of money' },
+  });
+}, /not parseable money/);
+
 if (failed) { console.error(failed + ' failed'); process.exit(1); }
 console.log('createInitiative: ok');

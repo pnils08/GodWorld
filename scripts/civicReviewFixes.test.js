@@ -16,7 +16,7 @@ function workspace(fn) {
   try { fn(root, write); } finally { fs.rmSync(root, { recursive: true, force: true }); }
 }
 test('F1 inherited and malformed interventions cannot consume the valid move', () => {
-  const proposal = intervention => ({ type: 'propose', intervention, title: 'SYNTHETIC', problem: 'SYNTHETIC', hoods: ['East Oakland'] });
+  const proposal = intervention => ({ type: 'propose', intervention, title: 'SYNTHETIC', problem: 'SYNTHETIC', hoods: ['East Oakland'], budget: '$20M' });
   const malformed = { ...catalog, broken: { policyDomain: 'health' }, shape: { playable: true, policyDomain: 'health' } };
   // housing-program dropped from this list — it flipped playable:true (engine.251,
   // builder-ruled rate 0.20/margin 0.15, 2026-09-22), so it's no longer an

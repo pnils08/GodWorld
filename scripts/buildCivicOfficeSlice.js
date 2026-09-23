@@ -834,6 +834,27 @@ function boardNeedText(row, context) {
   return boardStageView(row, context).text;
 }
 
+// engine.255 Task 9 — the board's budget line. The live tracker arms
+// BudgetTotal/BudgetRemaining/LastDisburseCycle at the C109 fire and the
+// beats dump is refreshed after; a dump from before that does not carry the
+// keys at all, and the board says so instead of inventing a zero.
+function budgetStampText(row) {
+  const carries = Object.hasOwn(row, 'BudgetRemaining') || Object.hasOwn(row, 'BudgetTotal') ||
+    Object.hasOwn(row, 'LastDisburseCycle');
+  if (!carries) return 'budget: not yet stamped';
+  const rem = row.BudgetRemaining;
+  const parts = [
+    rem !== null && rem !== undefined && String(rem).trim() !== '' && isFinite(Number(rem))
+      ? 'budget $' + Number(rem).toLocaleString('en-US') + ' left'
+      : 'budget: no parsed budget',
+  ];
+  const ld = row.LastDisburseCycle;
+  if (ld !== null && ld !== undefined && String(ld).trim() !== '' && isFinite(Number(ld))) {
+    parts.push('last disbursed C' + Number(ld));
+  }
+  return parts.join(', ');
+}
+
 // My board: rows the seat sponsors (ProposingOffice) plus rows touching its
 // hoods after child→parent fold; the mayor sees all. (Plan Task 3.1 — a
 // sponsor-only board leaves nine seats empty on day one.)
@@ -864,6 +885,7 @@ function boardRowsFor(office, rows, childToParent, context) {
       sponsored,
       hoods,
       needsNext: stageView.text,
+      budget: budgetStampText(row),
       requirement: stageView.requirement,
       metricEvidence: stageView.metricEvidence,
     });
@@ -876,7 +898,7 @@ function boardBlock(board) {
   if (board === null) return 'Board unavailable — no Initiative_Tracker beats dump on disk.';
   if (!board.length) return 'Your board is empty: no initiative sponsors you or touches your turf.';
   const lines = board.map(b =>
-    '- ' + b.id + ' ' + b.name + ' [' + (b.phase || '—') + '] — ' + b.needsNext);
+    '- ' + b.id + ' ' + b.name + ' [' + (b.phase || '—') + '] — ' + b.needsNext + ' — ' + b.budget);
   return clip('Your board:\n' + lines.join('\n'), BLOCK_CAP);
 }
 
@@ -1126,6 +1148,21 @@ function loadConfrontation(root, cycle, agentDir) {
 // Task 1/4 step 0 — the intervention catalog (engine-sheet's file). The pack
 // shows playable keys so a seat can actually name one; absent, propose moves
 // are refused at the gate (catalog-not-landed) and the pack says why.
+// engine.255 Task 9 (builder call 6) — the per-domain budget band, listed in
+// the pack next to each proposable intervention so a seat can fill the
+// propose move's required budget field inside it. Formatted with the mint's
+// own canonical money string. Null when the domain has no band (not
+// proposable) or the lib contract is absent.
+function budgetBandText(domain) {
+  try {
+    const c = require('../lib/initiativePhaseContract');
+    const band = c.BUDGET_BANDS && Object.hasOwn(c.BUDGET_BANDS, domain) ? c.BUDGET_BANDS[domain] : null;
+    if (!band) return null;
+    const fmt = require('./createInitiative').formatBudgetMoney;
+    return fmt(band.min) + '-' + fmt(band.max);
+  } catch (_) { return null; }
+}
+
 function loadInterventionMenu() {
   let catalog = null;
   try {
@@ -1139,8 +1176,12 @@ function loadInterventionMenu() {
     .filter(([key]) => !interventionIssue(catalog, key))
     .map(([k, v]) => ({ key: k, domain: v.policyDomain || null, label: v.label || null }));
   return { available: true, playable,
-    text: clip('Interventions you may propose (closed catalog):\n' +
-      playable.map(p => '- ' + p.key + ' (' + (p.domain || '?') + (p.label ? ') — ' + p.label : ')')).join('\n'), BLOCK_CAP) };
+    text: clip('Interventions you may propose (closed catalog; propose requires a budget inside the domain band):\n' +
+      playable.map(p => {
+        const band = p.domain ? budgetBandText(p.domain) : null;
+        return '- ' + p.key + ' (' + (p.domain || '?') + (p.label ? ') — ' + p.label : ')') +
+          (band ? ' — budget band ' + band : ' — no budget band; propose will be refused');
+      }).join('\n'), BLOCK_CAP) };
 }
 
 function loadConditionCounts(root, cycle, board, moves) {
@@ -1438,7 +1479,7 @@ module.exports = {
   loadCabinet, loadInitRows, seatKind, pickTurn, scoreHoods, loadFactionPeers,
   clip, writePack, CONSTITUENT_CAP,
   // civic.38 Task 3 game blocks
-  buildGameBlocks, boardRowsFor, boardNeedText, childToParentFromAudit, foldHood, requireCycle, loadAudit, gamePromptView,
+  buildGameBlocks, boardRowsFor, boardNeedText, boardBlock, budgetStampText, budgetBandText, childToParentFromAudit, foldHood, requireCycle, loadAudit, gamePromptView,
   loadMovesFolded, loadPetitionPool, loadWorkingCity, loadConfrontation, loadConfrontations, loadSeatMoves,
   loadInterventionMenu, loadTrackerRows, readJsonl, NEGATIVE_AFFECTS, BLOCK_CAP,
 };

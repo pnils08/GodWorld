@@ -1359,6 +1359,28 @@ test('T9.255: board shows BudgetRemaining/LastDisburseCycle when the dump carrie
   assert.match(menu.text, /health-service \(health\).*budget band \$5M-\$100M/);
   assert.match(menu.text, /transit-project \(transit\).*budget band \$20M-\$500M/);
   assert.match(menu.text, /school-program \(education\).*budget band \$1M-\$50M/);
+
+  // D3 (2026-09-23): the board reports last Cycle's tracked grants vs the
+  // off-ledger rest of the tranche (the plan's "$paid to N tracked households"
+  // promise), never presenting tracked grants as the whole disbursement.
+  assert.match(civicSlice.budgetStampText(stampedRow, { 'INIT-992|111': { n: 1, sum: 31454 } }),
+    /last disbursed C111 — \$31,454 to 1 tracked household; the rest disbursed off the tracked ledger/);
+  assert.match(civicSlice.budgetStampText(stampedRow, {}),
+    /last disbursed C111 — no tracked households qualified; the tranche disbursed off the tracked ledger/);
+
+  const ws = createTempWorkspace();
+  try {
+    ws.writeJsonl('output/beats/Household_Ledger.jsonl', [
+      { HouseholdId: 'HH-S1', LastGrantCycle: 111, LastGrantInitiativeID: 'INIT-992', LastGrantAmount: 31454 },
+      { HouseholdId: 'HH-S2', LastGrantCycle: 111, LastGrantInitiativeID: 'INIT-992', LastGrantAmount: 10000 },
+      { HouseholdId: 'HH-S3', LastGrantCycle: 108, LastGrantInitiativeID: 'INIT-992', LastGrantAmount: 999 },
+      { HouseholdId: 'HH-S4', LastGrantCycle: '', LastGrantInitiativeID: '', LastGrantAmount: '' },
+    ]);
+    const roll = civicSlice.loadGrantRollup(ws.dir);
+    assert.deepEqual(roll, { 'INIT-992|111': { n: 2, sum: 41454 }, 'INIT-992|108': { n: 1, sum: 999 } });
+  } finally {
+    ws.cleanup();
+  }
 });
 
 test('F8: Proposal condition evidence computes from countPetition and gamePromptView caps history without dropping IDs', () => {

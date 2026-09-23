@@ -186,10 +186,53 @@ function pool() {
   ok(tr.length === 2 && tr.find(c => c.col === remainCol).value === 27950000 && tr.find(c => c.col === remainCol).row === 2 && tr.find(c => c.col === lastCol).value === 110, 'tracker intents: BudgetRemaining 28,000,000 − 50,000 and LastDisburseCycle 110 on the program row; no phase change');
   const p = ctx.summary.initiativeDisbursement.programs[0];
   ok(p.paid === 50000 && p.grants === 3 && p.debited === 50000 && p.newRemaining === 27950000 && p.status === 'disbursed', 'slice carries paid / grants / debited / newRemaining');
-  // same-Cycle rerun pays nothing twice and debits nothing twice
+  // same-Cycle rerun (same ctx): receipts honored per-row — no second grant;
+  // the debit re-queues the same ABSOLUTE values (idempotent at the Phase-10
+  // commit), because the crash-retry path must be able to land the debit.
   appends.length = 0; cells.length = 0;
   const out2 = E.applyHousingDisbursement_(ctx, 110);
-  ok(out2.grants === 0 && out2.debited === 0 && appends.length === 0 && cells.length === 0 && v[1][col('HouseholdSavings')] === 47125, 'rerun in the same Cycle: receipts already stamped → no grant, no debit, no intent');
+  ok(out2.grants === 0 && out2.paid === 0 && appends.length === 0 && v[1][col('HouseholdSavings')] === 47125, 'rerun in the same Cycle: receipts already stamped → no grant, no LifeHistory');
+  ok(out2.debited === 50000 && cells.length === 2 && cells.every(c => c.tab === 'Initiative_Tracker') &&
+    cells.find(c => c.col === remainCol).value === 27950000 && cells.find(c => c.col === lastCol).value === 110,
+    'rerun re-queues the same absolute debit (remaining 27,950,000, LastDisburseCycle 110) — one effective write at commit');
+}
+{ // crash recovery (2026-09-23, kimi): household vectors committed, Phase-10
+  // intents lost (tracker debit + NetWorth credits never landed). A fresh fire
+  // re-reads the stale tracker (no LastDisburseCycle, old remaining) over the
+  // receipt-stamped households: no second grant, no NetWorth credit, and the
+  // tranche debit lands exactly once.
+  appends.length = 0; cells.length = 0;
+  const hhRows = pool().map(r => r.concat(['', '', '']));
+  const receipts = { 0: [47125, 34349], 1: [7651, 2651], 6: [13000, 13000] }; // body idx → [savingsAfter, amount] from the crashed attempt
+  for (const idx of Object.keys(receipts)) {
+    hhRows[idx][12] = receipts[idx][0]; hhRows[idx][13] = 110; hhRows[idx][14] = 'INIT-001'; hhRows[idx][15] = receipts[idx][1];
+  }
+  const ledger = [['POP-99901', 'A', 10000, ''], ['POP-99902', 'B', '$5,000', ''], ['POP-99907', 'C', 0, '']]; // pre-grant truth — the credits died with the crashed fire
+  const ctx = ctxWith([TR('INIT-001', 'passed', 'disbursement-active', 'Standing', 'West Oakland', 'signed')], hhRows, { civicDisburseTranche_housing: 50000 }, 110, ledger);
+  E.applyInitiativeImplementationEffects_(ctx); // Phase 2 rebuilds the slice from the stale tracker
+  const out = E.applyHousingDisbursement_(ctx, 110);
+  ok(out.grants === 0 && out.paid === 0 && appends.length === 0, 'crash retry: every receipt-stamped row honored — pays no one twice');
+  ok(ctx.ledger.rows[0][2] === 10000 && ctx.ledger.dirty === false, 'crash retry: no second NetWorth credit');
+  ok(out.debited === 50000 && cells.filter(c => c.tab === 'Initiative_Tracker').length === 2 &&
+    cells.find(c => c.col === TR_HEAD.indexOf('BudgetRemaining') + 1).value === 27950000,
+    'crash retry: the tranche debit lands exactly once (remaining 27,950,000)');
+}
+{ // two housing funds over the same hood in one fire: neither suppresses the
+  // other (the per-row receipt skip, not a whole-program kill)
+  appends.length = 0; cells.length = 0;
+  const rows = [
+    TR('INIT-001', 'passed', 'disbursement-active', 'Standing', 'West Oakland', 'signed', 108, 28000000),
+    TR('INIT-950', 'passed', 'operational', 'Standing', 'West Oakland', 'signed', 108, 500000),
+  ];
+  const ctx = ctxWith(rows, pool(), { civicDisburseTranche_housing: 50000 }, 110, []);
+  E.applyInitiativeImplementationEffects_(ctx);
+  const out = E.applyHousingDisbursement_(ctx, 110);
+  const progs = ctx.summary.initiativeDisbursement.programs;
+  ok(progs.length === 2 && out.programs === 2, 'both funds on the slice');
+  ok(progs.every(p => p.status === 'disbursed'), 'both funds disbursed — no already-disbursed suppression');
+  ok(out.debited === 100000 && cells.filter(c => c.tab === 'Initiative_Tracker' && c.col === TR_HEAD.indexOf('BudgetRemaining') + 1).length === 2, 'each fund drains its own tranche (50,000 × 2) onto its own row');
+  const paidIds = progs.map(p => (p.grants > 0 ? p.paid : 0));
+  ok(out.grants === 3 && progs[0].grants === 3 && progs[1].grants === 0 && paidIds[1] === 0, 'fund B finds fund A\'s grantees receipt-stamped and pays no one twice (tranche 50,000 covered the 3 flagged rows)');
 }
 { // tracker already stamped this Cycle → skip program
   appends.length = 0; cells.length = 0;

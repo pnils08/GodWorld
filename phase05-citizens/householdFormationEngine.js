@@ -1245,7 +1245,16 @@ function applyHousingDisbursementBody_(ctx, cycle, out) {
     if (!(program.tranche > 0)) { program.status = 'no-tranche'; continue; }
     // arm the receipt columns only when a grant is about to be written
     var plan = planHousingDisbursement_(header, body, program, cycle, hoodOf, savingsOf);
-    if (plan.skipped && plan.skipped.alreadyThisCycle > 0) { program.status = 'already-disbursed'; out.detail.push(program.initiativeId + ': receipts already stamped C' + cycle); continue; }
+    // Receipts stamped this Cycle (a crashed earlier attempt of THIS fire, or
+    // another fund's grants over overlapping hoods) exclude those rows per-row
+    // in the planner — they must NOT skip the program (2026-09-23, kimi): the
+    // tranche debit is absolute (remaining − tranche) and re-queues the same
+    // value, so a retry after a crash between the household vectors and the
+    // Phase-10 commit debits exactly once, and a second fund over the same
+    // hood still pays its own rows and drains its own tranche.
+    if (plan.skipped && plan.skipped.alreadyThisCycle > 0) {
+      out.detail.push(program.initiativeId + ': ' + plan.skipped.alreadyThisCycle + ' receipt(s) already stamped C' + cycle + ' — those rows skipped, program continues');
+    }
     if (plan.grants.length && ensureHousingGrantColumns_(sheet, header)) {
       out.armed = true;
       header = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];

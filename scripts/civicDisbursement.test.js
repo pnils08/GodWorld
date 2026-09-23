@@ -155,10 +155,21 @@ function pool() {
   ok(plan.grants[0].amount === 25375 && plan.grants[0].clearsBuffer === false, 'cap binds the buffer fill: 6 months × 3625 + 1 month headroom = 25375, still under the buffer (stays flagged, eligible again after cooldown)');
 }
 
+{ // fresh-row trap (bench C110/C111): cell savings 0, head holds 400k on the ledger → unflagged
+  const hdr = HH_HEAD.concat(E.HOUSING_GRANT_COLUMNS_);
+  const rows = [HH('HH-930', 'West Oakland', 'rented', 3625, 50000, 0).concat(['', '', '']), HH('HH-931', 'West Oakland', 'rented', 3625, 50000, 0).concat(['', '', ''])];
+  const nw = { 'POP-99930': 400000, 'POP-99931': 100 };
+  const savingsOf = (members) => { const ids = JSON.parse(members || '[]'); let sum = 0, seen = false; for (const id of ids) if (id in nw) { sum += nw[id]; seen = true; } return seen ? sum : NaN; };
+  const plan = E.planHousingDisbursement_(hdr, rows, { initiativeId: 'X', tranche: 400000, remaining: 1e6, hoods: ['West Oakland'], grantCapMonths: 12, grantHeadroomMonths: 1, cooldownCycles: 26 }, 110, h => h, savingsOf);
+  ok(plan.grants.length === 1 && plan.grants[0].householdId === 'HH-931' && plan.skipped.unflagged === 1 && plan.grants[0].savingsBefore === 100, 'the ledger is the truth for a fresh row: HH-930 (head 400k) unflagged, HH-931 (head 100) paid from its real savings');
+  const noLedger = E.planHousingDisbursement_(hdr, rows, { initiativeId: 'X', tranche: 400000, remaining: 1e6, hoods: ['West Oakland'], grantCapMonths: 12, grantHeadroomMonths: 1, cooldownCycles: 26 }, 110, h => h, () => NaN);
+  ok(noLedger.grants.length === 2, 'no ledger reading → the cell stands (never blocks)');
+}
+
 // ---- apply: household vectors + ledger + intents + tracker debit ----
 {
   appends.length = 0; cells.length = 0;
-  const ledger = [['POP-99901', 'A', 100000, ''], ['POP-99902', 'B', '$5,000', ''], ['POP-99907', 'C', 0, '']];
+  const ledger = [['POP-99901', 'A', 10000, ''], ['POP-99902', 'B', '$5,000', ''], ['POP-99907', 'C', 0, '']];   // heads under the buffer: the cell is the greater for HH-901 (12776), the ledger for HH-902 (5000)
   const ctx = ctxWith([TR('INIT-001', 'passed', 'disbursement-active', 'Standing', 'West Oakland', 'signed')], pool(), { civicDisburseTranche_housing: 50000 }, 110, ledger);
   E.applyInitiativeImplementationEffects_(ctx);
   const out = E.applyHousingDisbursement_(ctx, 110);
@@ -166,9 +177,9 @@ function pool() {
   ok(out.available && out.programs === 1 && out.grants === 3 && out.paid === 50000 && out.debited === 50000 && out.armed === true && errors.length === 0, 'applied: 3 grants, $50,000 paid, $50,000 debited, receipt columns armed, no engine error');
   ok(v[0].slice(13).join(',') === E.HOUSING_GRANT_COLUMNS_.join(','), 'receipt columns armed after the live 13');
   ok(v[1][col('HouseholdSavings')] === 47125 && v[1][col('LastGrantCycle')] === 110 && v[1][col('LastGrantInitiativeID')] === 'INIT-001' && v[1][col('LastGrantAmount')] === 34349, 'HH-901 row: savings 47125, receipts stamped');
-  ok(v[7][col('HouseholdSavings')] === 13000 && v[2][col('HouseholdSavings')] === 2651, 'HH-907 13000, HH-902 partial 2651');
+  ok(v[7][col('HouseholdSavings')] === 13000 && v[2][col('HouseholdSavings')] === 7651, 'HH-907 13000, HH-902 partial 2651 on top of the ledger-read 5000');
   ok(v[3][col('HouseholdSavings')] === 500000 && v[4][col('LastGrantCycle')] === '' && v[6][col('LastGrantCycle')] === '', 'buffered, owned and off-hood rows untouched');
-  ok(ctx.ledger.rows[0][2] === 134349 && ctx.ledger.rows[1][2] === 7651 && ctx.ledger.rows[2][2] === 13000 && ctx.ledger.dirty === true, 'durable: head NetWorth += grant on ctx.ledger (a "$5,000" string parses)');
+  ok(ctx.ledger.rows[0][2] === 44349 && ctx.ledger.rows[1][2] === 7651 && ctx.ledger.rows[2][2] === 13000 && ctx.ledger.dirty === true, 'durable: head NetWorth += grant on ctx.ledger (a "$5,000" string parses)');
   ok(appends.length === 3 && appends.every(a => a.tab === 'LifeHistory_Log' && a.row[3] === 'Relief' && /stabilization grant from Fund INIT-001 \(INIT-001\)/.test(a.row[4])) && /covered for the year/.test(appends.find(a => a.row[1] === 'POP-99901').row[4]) && /partial/.test(appends.find(a => a.row[1] === 'POP-99902').row[4]), 'three LifeHistory lines, tag Relief, naming the fund; full vs partial worded');
   const tr = cells.filter(c => c.tab === 'Initiative_Tracker');
   const remainCol = TR_HEAD.indexOf('BudgetRemaining') + 1, lastCol = TR_HEAD.indexOf('LastDisburseCycle') + 1;

@@ -1288,10 +1288,10 @@ function ensureHousingGrantColumns_(sheet, header) {
 // Pure planner. header/rows are the Household_Ledger grid (rows = body, index 0 =
 // sheet row 2); program is one S.initiativeDisbursement entry; hoodOf folds a raw
 // hood string. Returns the ordered grants and every exclusion counted.
-function planHousingDisbursement_(header, rows, program, cycle, hoodOf) {
+function planHousingDisbursement_(header, rows, program, cycle, hoodOf, savingsOf) {
   var idx = function (n) { return header.indexOf(n); };
   var iId = idx('HouseholdId'), iHead = idx('HeadOfHousehold'), iHood = idx('Neighborhood'), iType = idx('HousingType'),
-      iRent = idx('MonthlyRent'), iInc = idx('HouseholdIncome'), iStatus = idx('Status'), iSav = idx('HouseholdSavings'), iLG = idx('LastGrantCycle');
+      iRent = idx('MonthlyRent'), iInc = idx('HouseholdIncome'), iStatus = idx('Status'), iSav = idx('HouseholdSavings'), iLG = idx('LastGrantCycle'), iMem = idx('Members');
   var out = { eligible: 0, grants: [], paid: 0, trancheLeft: Number(program.tranche) || 0,
               skipped: { inactive: 0, owned: 0, offHood: 0, invalid: 0, unflagged: 0, cooldown: 0, alreadyThisCycle: 0 } };
   if (iId < 0 || iHood < 0 || iType < 0 || iRent < 0 || iInc < 0 || iSav < 0) { out.reason = 'columns-missing'; return out; }
@@ -1312,6 +1312,14 @@ function planHousingDisbursement_(header, rows, program, cycle, hoodOf) {
     var rent = Number(row[iRent]), income = Number(row[iInc]);
     if (!(rent > 0) || !(income > 0)) { out.skipped.invalid++; continue; }
     var savings = Number(row[iSav]); if (!isFinite(savings) || savings < 0) savings = 0;
+    // bench C110/C111: a household formed THIS Cycle carries HouseholdSavings 0 until the
+    // income pass derives it from member NetWorth, while its head may hold six figures —
+    // the durable truth is the ledger, so the flag reads the greater of the cell and the
+    // members' NetWorth (the same sum updateHouseholdIncomes_ writes next Cycle)
+    if (typeof savingsOf === 'function') {
+      var led = savingsOf(iMem >= 0 ? row[iMem] : '', iHead >= 0 ? row[iHead] : '');
+      if (isFinite(led) && led > savings) savings = led;
+    }
     var burden = rent * 12 / income;
     if (savings >= rent * SAVINGS_BUFFER_MONTHS || burden < RENT_BURDEN_WARNING) { out.skipped.unflagged++; continue; }
     var last = iLG >= 0 ? Number(row[iLG]) : 0;
@@ -1373,6 +1381,21 @@ function applyHousingDisbursementBody_(ctx, cycle, out) {
   var tRemain = tHeader.indexOf('BudgetRemaining'), tLast = tHeader.indexOf('LastDisburseCycle'), tPhase = tHeader.indexOf('ImplementationPhase'), tNotes = tHeader.indexOf('MilestoneNotes');
   var lHeaders = ctx.ledger && ctx.ledger.headers ? ctx.ledger.headers : [];
   var lPop = lHeaders.indexOf('POPID'), lNW = lHeaders.indexOf('NetWorth'), lLastUpd = lHeaders.indexOf('LastUpdated');
+  var nwByPop = {};
+  if (lPop >= 0 && lNW >= 0 && ctx.ledger.rows) {
+    for (var li = 0; li < ctx.ledger.rows.length; li++) {
+      var lrow = ctx.ledger.rows[li];
+      nwByPop[String(lrow[lPop]).trim()] = Number(String(lrow[lNW]).replace(/[$,\s]/g, '')) || 0;
+    }
+  }
+  var savingsOf = function (membersRaw, head) {
+    var ids = [];
+    try { var parsed = typeof membersRaw === 'string' ? JSON.parse(membersRaw || '[]') : membersRaw; if (Array.isArray(parsed)) ids = parsed; } catch (e) { ids = []; }
+    if (!ids.length && head) ids = [head];
+    var sum = 0, seen = false;
+    for (var mi = 0; mi < ids.length; mi++) { var k = String(ids[mi]).trim(); if (Object.prototype.hasOwnProperty.call(nwByPop, k)) { sum += nwByPop[k]; seen = true; } }
+    return seen ? sum : NaN;
+  };
   var touched = false;
   for (var pi = 0; pi < programs.length; pi++) {
     var program = programs[pi];
@@ -1380,13 +1403,13 @@ function applyHousingDisbursementBody_(ctx, cycle, out) {
     if (Number(program.lastDisburseCycle) === Number(cycle)) { program.status = 'already-disbursed'; out.detail.push(program.initiativeId + ': already disbursed C' + cycle); continue; }
     if (!(program.tranche > 0)) { program.status = 'no-tranche'; continue; }
     // arm the receipt columns only when a grant is about to be written
-    var plan = planHousingDisbursement_(header, body, program, cycle, hoodOf);
+    var plan = planHousingDisbursement_(header, body, program, cycle, hoodOf, savingsOf);
     if (plan.skipped && plan.skipped.alreadyThisCycle > 0) { program.status = 'already-disbursed'; out.detail.push(program.initiativeId + ': receipts already stamped C' + cycle); continue; }
     if (plan.grants.length && ensureHousingGrantColumns_(sheet, header)) {
       out.armed = true;
       header = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
       data = sheet.getDataRange().getValues(); body = data.slice(1);
-      plan = planHousingDisbursement_(header, body, program, cycle, hoodOf);
+      plan = planHousingDisbursement_(header, body, program, cycle, hoodOf, savingsOf);
     }
     var iSav = header.indexOf('HouseholdSavings'), iLG = header.indexOf('LastGrantCycle'), iLI = header.indexOf('LastGrantInitiativeID'), iLA = header.indexOf('LastGrantAmount');
     for (var g = 0; g < plan.grants.length; g++) {

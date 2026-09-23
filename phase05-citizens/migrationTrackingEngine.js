@@ -833,35 +833,15 @@ function updateHouseholdLedgerMove_(ctx, householdId, destHood, destRent) {
       }
     }
     var iHH = idx('HouseholdId'), iHood = idx('Neighborhood'),
-        iRent = idx('MonthlyRent'), iStatus = idx('Status'), iUpdated = idx('LastUpdated'),
-        iGross = idx('GrossMonthlyRent'), iRelief = idx('HousingReliefMonthly'), iRInit = idx('HousingReliefInitiativeID'); // engine.251
+        iRent = idx('MonthlyRent'), iStatus = idx('Status'), iUpdated = idx('LastUpdated');
     if (iHH < 0) return;
     for (var r = 1; r < values.length; r++) {
       if (values[r][iHH] !== householdId) continue;
       if (iStatus >= 0 && String(values[r][iStatus]).toLowerCase() === 'dissolved') continue;
       if (iHood >= 0) sheet.getRange(r + 1, iHood + 1).setValue(destHood);
-      if (iRent >= 0 && destRent > 0) {
-        // engine.251 lease invariant: the destination lease is the new GROSS; the
-        // effective obligation is recomputed for the destination hood in the same
-        // write (a standing program there discounts it; none restores gross).
-        var netRent = destRent, relief = 0, initId = '';
-        // Rented rows only carry a lease: an owned row that the migration engine
-        // moves keeps blank relief columns (its MonthlyRent is a mortgage — the
-        // owner-move rewrite itself is a pre-existing gap, G-EC70).
-        var iTypeMv = idx('HousingType');
-        var rentedMv = iTypeMv < 0 || String(values[r][iTypeMv] == null ? '' : values[r][iTypeMv]).trim().toLowerCase() === 'rented';
-        if (rentedMv && iGross >= 0 && typeof netRentFromGross_ === 'function' && typeof housingReliefForHood_ === 'function' &&
-            typeof getCivicHousingDials_ === 'function') {
-          var dials = getCivicHousingDials_(ctx);
-          var src = dials.enabled ? housingReliefForHood_(ctx, destHood, null) : null;
-          var calc = netRentFromGross_(destRent, src ? src.rate : 0);
-          if (calc) { netRent = calc.net; relief = calc.relief; initId = src ? src.initiativeId : ''; }
-        }
-        sheet.getRange(r + 1, iRent + 1).setValue(netRent);
-        if (rentedMv && iGross >= 0) sheet.getRange(r + 1, iGross + 1).setValue(destRent);
-        if (rentedMv && iRelief >= 0) sheet.getRange(r + 1, iRelief + 1).setValue(relief);
-        if (rentedMv && iRInit >= 0) sheet.getRange(r + 1, iRInit + 1).setValue(initId);
-      }
+      // the destination hood's lease is the new obligation (engine.160 one hood rent rule;
+      // owned rows never reach here — G-EC70 refuses them above)
+      if (iRent >= 0 && destRent > 0) sheet.getRange(r + 1, iRent + 1).setValue(destRent);
       if (iUpdated >= 0 && ctx.now) sheet.getRange(r + 1, iUpdated + 1).setValue(ctx.now);
       return;
     }

@@ -2,7 +2,7 @@
   "generated": "2026-09-22",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 184,
-  "functionsMapped": 1491,
+  "functionsMapped": 1484,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -824,12 +824,10 @@
         "phase01-config/canonNeighborhoodLoader.js::resolveHoodOrChild_",
         "phase02-world-state/applyCityDynamics.js::buildHoodClusterAssignment_",
         "phase02-world-state/applyInitiativeImplementationEffects.js::buildDisbursementSlice_",
-        "phase02-world-state/applyInitiativeImplementationEffects.js::buildHousingReliefSlice_",
         "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_",
         "phase05-citizens/civicInitiativeEngine.js::applyCivicStageBaseline_",
         "phase05-citizens/civicInitiativeEngine.js::freezeCivicStageCohort_",
         "phase05-citizens/householdFormationEngine.js::applyHousingDisbursementBody_",
-        "phase05-citizens/householdFormationEngine.js::housingReliefForHood_",
         "phase06-analysis/economicRippleEngine.js::sceneHoods_",
         "phase07-evening-media/applyStorySeeds.js::applyStorySeeds_",
         "phase07-evening-media/cityEveningSystems.js::buildCityEveningSystems_",
@@ -2253,7 +2251,7 @@
       "readers": [
         "phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_",
         "phase05-citizens/householdFormationEngine.js::applyHousingDisbursementBody_",
-        "phase05-citizens/householdFormationEngine.js::applyHousingReliefBody_",
+        "phase05-citizens/householdFormationEngine.js::buildCitizenMoneyLookup_",
         "phase05-citizens/householdFormationEngine.js::ensureHousingGrantColumns_"
       ]
     },
@@ -2263,16 +2261,6 @@
       ],
       "readers": [
         "phase03-population/updateNeighborhoodDemographics.js::updateNeighborhoodDemographics_"
-      ]
-    },
-    "initiativeHousingRelief": {
-      "writers": [
-        "phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_"
-      ],
-      "readers": [
-        "phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_",
-        "phase05-citizens/householdFormationEngine.js::applyHousingReliefBody_",
-        "phase05-citizens/householdFormationEngine.js::housingReliefForHood_"
       ]
     },
     "initiativeImplementationTriggers": {
@@ -4794,7 +4782,6 @@
         "phase05-citizens/generationalWealthEngine.js::updateHeritage_",
         "phase05-citizens/generationalWealthEngine.js::updateHouseholdWealth_",
         "phase05-citizens/householdFormationEngine.js::applyHousingDisbursementBody_",
-        "phase05-citizens/householdFormationEngine.js::applyHousingReliefBody_",
         "phase05-citizens/householdFormationEngine.js::dissolveStressedHouseholds_",
         "phase05-citizens/householdFormationEngine.js::formCriteriaHouseholds_",
         "phase05-citizens/householdFormationEngine.js::formNewHouseholds_",

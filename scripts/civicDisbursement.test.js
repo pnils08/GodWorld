@@ -56,7 +56,7 @@ function mockSheet(values) {
 }
 const HH_HEAD = ['HouseholdId', 'HeadOfHousehold', 'HouseholdType', 'Members', 'Neighborhood', 'HousingType', 'MonthlyRent', 'HousingCost', 'HouseholdIncome', 'FormedCycle', 'DissolvedCycle', 'Status', 'HouseholdSavings'];
 const TR_HEAD = ['InitiativeID', 'Name', 'Status', 'PolicyDomain', 'AffectedNeighborhoods', 'ImplementationPhase', 'Budget', 'MayoralAction', 'Stage', 'LastWorkCycle', 'LastStageChangeCycle', 'BudgetTotal', 'BudgetRemaining', 'LastDisburseCycle', 'MilestoneNotes'];
-const CONFIG = { civicHousingReliefEnabled: 0, civicHousingReliefRate: 0.20, civicHousingCohortMinRenters: 10, civicTendGraceCycles: 6, civicTendDecayPerCycle: 0.15, civicTendFloor: 0.3,
+const CONFIG = { civicTendGraceCycles: 6, civicTendDecayPerCycle: 0.15, civicTendFloor: 0.3,
   civicDisburseTranche_housing: 400000, civicHousingGrantCapMonths: 12, civicHousingGrantHeadroomMonths: 1, civicGrantCooldownCycles: 26, civicHousingCohortMinFlagged: 5 };
 function ctxWith(trackerRows, hhRows, cfg, cycle, ledgerRows) {
   const tabs = { Initiative_Tracker: mockSheet([TR_HEAD.slice(), ...trackerRows]), Household_Ledger: mockSheet([HH_HEAD.slice(), ...hhRows]) };

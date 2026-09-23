@@ -3756,8 +3756,7 @@ function freezeCivicStageCohort_(ctx) {
     if (tab === 'Household_Ledger') {
       // engine.251: the household rows at fire N are Phase-5-of-N−1 state (this runs
       // at Phase 2), so the observation is N−1 by phase order — no stamp column.
-      // City = hoods with >= civicHousingCohortMinRenters tracked renters; the
-      // baseline freezes that membership and deliveryEdge refuses a changed city.
+      // The baseline freezes its city membership and deliveryEdge refuses a changed city.
       var hSheet = ss.getSheetByName(tab);
       if (!hSheet) { co.reason = 'tab-missing'; return; }
       var hData = hSheet.getDataRange().getValues();

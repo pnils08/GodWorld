@@ -1699,8 +1699,7 @@ function trackHomeOwnership_(ss, ctx, cycle) {
   var cId = hj('HouseholdId'), cMem = hj('Members'), cHood = hj('Neighborhood'),
       cType = hj('HousingType'), cRent = hj('MonthlyRent'), cCost = hj('HousingCost'),
       cStat = hj('Status'), cInc = hj('HouseholdIncome'), // engine.158: the carry test reads the burden column
-      cHead = hj('HeadOfHousehold'), // engine.157: the head's posture multiplies the roll
-      cGross = hj('GrossMonthlyRent'), cRelief = hj('HousingReliefMonthly'), cRInit = hj('HousingReliefInitiativeID'); // engine.251
+      cHead = hj('HeadOfHousehold'); // engine.157: the head's posture multiplies the roll
   if (cId < 0 || cMem < 0 || cType < 0 || cRent < 0) return results;
   if (cInc < 0) Logger.log('trackHomeOwnership_ engine.158: HouseholdIncome column missing — no household can carry a loan this cycle');
 
@@ -1712,10 +1711,6 @@ function trackHomeOwnership_(ss, ctx, cycle) {
     if (cStat >= 0 && String(hv[q][cStat] || '').toLowerCase() !== 'active') continue;
     if (String(hv[q][cType] || '').toLowerCase() !== 'rented') continue;
     var rent = Number(hv[q][cRent]) || 0;
-    // engine.251: the GROSS lease prices the house and gates eligibility — a
-    // discounted obligation (even 100% relief, net 0) neither disables buying
-    // nor lowers the inferred price.
-    if (cGross >= 0 && Number(hv[q][cGross]) > 0) rent = Number(hv[q][cGross]);
     if (rent <= 0) continue;
 
     var memIds = [];
@@ -1775,11 +1770,6 @@ function trackHomeOwnership_(ss, ctx, cycle) {
     ctx.ledger.dirty = true;
     hhSheet.getRange(q + 1, cType + 1).setValue('owned');
     hhSheet.getRange(q + 1, cRent + 1).setValue(mortgage);
-    // engine.251: a mortgage replaces the lease — rental relief state is cleared,
-    // never restored over the mortgage.
-    if (cGross >= 0) hhSheet.getRange(q + 1, cGross + 1).setValue('');
-    if (cRelief >= 0) hhSheet.getRange(q + 1, cRelief + 1).setValue(0);
-    if (cRInit >= 0) hhSheet.getRange(q + 1, cRInit + 1).setValue('');
     if (cCost >= 0) hhSheet.getRange(q + 1, cCost + 1).setValue(price);
 
     ctx.summary.storyHooks = ctx.summary.storyHooks || [];

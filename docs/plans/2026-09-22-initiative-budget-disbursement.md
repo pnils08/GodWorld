@@ -131,7 +131,7 @@ Recommendation: **(c)** — and (b) is now the plan's mechanism (tranche drains 
 
 No city treasury. A row's own number is a fix to an existing column; a treasury is a new system and the builder called it tricky — it waits until two or three funds are spending and the question is real.
 
-Live seed for INIT-001: `BudgetTotal` 28,000,000; `BudgetRemaining` 28,000,000 (canon: $0 disbursed as of C86 — Webb's arc). The seat-proposed mint (`createInitiative`) sets `Budget` from `spec.budget`; a proposal without one is a valid row that cannot stand up (`blocked: no-budget`) until a `work` move with a budget or an amended proposal supplies it — ruling below.
+Live seed for INIT-001: `BudgetTotal` 28,000,000; `BudgetRemaining` **23,800,000 — corrected 2026-09-23 (Mike-direct, kimi)**: the "$0 disbursed" read was Webb's arc only; Editions 84–90 published 47 checks ≈ $4.2M paid under Okoro's authority (Hayes' letter, C90). The arm back-fills 28M from `Budget`; correct `BudgetRemaining` + stamp `LastDisburseCycle` 90 after the C109 arm, before the C110 tranche. The seat-proposed mint (`createInitiative`) sets `Budget` from `spec.budget`; a proposal without one is a valid row that cannot stand up (`blocked: no-budget`) until a `work` move with a budget or an amended proposal supplies it — ruling below.
 
 ## Builder calls (sim — decide before Task 1)
 
@@ -199,6 +199,8 @@ The stage step runs 31 slots before the household engine (`godWorldEngine2.js:35
 None invented. The seven builder calls above are the open items; each has a recommendation.
 
 ## Changelog
+
+- 2026-09-23 (kimi, Mike-direct) — **Framing ruled: rewrite the Fund, hood canon stands.** The San Antonio re-seat was rejected on evidence found after the ruling: Editions 84/90 publish the 47 approved families as West Oakland (Hayes' letter — "I am staying in West Oakland"; Clark, the bakery worker; 342 applicants), so a re-seat orphans printed canon. The Fund keeps its name, hood and vote history; the framing is the long-tenure remnant priced out of a hood that got rich — the story the editions already tell, and the mechanism the per-row grant writer already is. Live INIT-001 MilestoneNotes line written and read back (`output/kimi/2026-09-23-wosof-framing-fix.js`); beats dump refreshed. Seed correction recorded in §Money. The `.claude/agents/civic-project-stabilization-fund/` canon files still carry the old framing — control-plane, a Claude seat's edit. HOLD lift is engine-sheet's to record.
 
 - 2026-09-22 21:35 (engine-sheet) — **Task 8 LIVE PROD @124** (`bb15f9c9`, v111): engine.251 discount code removed from five engine files, three seeds retired and the live keys deleted, `civicHousingRelief.test.js` retired; bench C114 clean. **Plan COMPLETE.**
 - 2026-09-22 20:50 (engine-sheet) — **Tasks 6 + 7 LIVE PROD @123** (`48920aa9`, v110). Clean bench pair on 0908 @98 (live-synced C108, floor hand-set 1): baseline with members, one grant C110, hold 1/2/3, **Delivering at C113**, three control hoods flat at 1.000 — margin 0.15 kept. Two fixes found by the pair: grant headroom (+1 month above the buffer — a grant landing on the line re-flagged 248 short) and the fresh-row trap (a household formed this Cycle reads savings 0; the writer and the freezer now overlay member NetWorth off the ledger). One-Cycle latency recorded: the first fire after the schema arm cannot disburse. Task 9 by kimi (`e1809d9c`) reviewed and green.

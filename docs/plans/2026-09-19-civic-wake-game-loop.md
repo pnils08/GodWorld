@@ -479,6 +479,8 @@ Verbatim:
 - "You want everything to happen in a way you can predict, I want a world that I can't predict."
 - "Nothing is gated from the crons to choose a initiative, I can see having categories for these like the inactive for example could be home renovation or something so that's a housing iniative, another category or hood or district or all, and that way housing affects would be the result of that iniative, but we don't really know what the crons will add so it's hard to say. But no that's stupid to say hey want to have an iniative? Here are the 8 they can be, that's stupid."
 
+- "Stop making the engine tell the crons what to do." — the crons decide (what to propose, how to vote, what to work on); the engine only carries out consequences. The engine's rolled swing votes (`civicInitiativeEngine.js` ~:1005–1075, pre-cron code) are a violation to remove.
+
 What this means for the build (engine-sheet reading, for the builder to correct):
 - No menu. A seat proposes any initiative in its own words; nothing on the proposal side rejects it for its content (SIM_DOCTRINE §13: a gate that rejects invented color is scope creep).
 - Each initiative carries a **category** (the part of life it touches — e.g. home renovation → housing) and a **reach** (hood / district / all). The category is how the engine knows what the initiative moves; the effect is the result of the initiative, never a program designed in advance.

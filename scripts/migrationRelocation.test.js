@@ -518,10 +518,10 @@ console.log('A12 owner move — sell up, buy or rent there; authored homes stay'
   assert('rent-up: equity banked (100,000 + 59,400)', r.nw === 159400, String(r.nw));
   assert('rent-up: [Home] line says renting until buying is in reach', /sold the place in Lowmarket — \$59400 in the bank, renting in Highgate/.test(r.life), r.life);
   assert('rent-up: a sale after Step 7 comes off HomesOwned on the sheet', r.homes === 1, String(r.homes));
-  // Authored home: a GAME-clock owner is canon and never sold by dice.
+  // No clock or tier is protected: a GAME-clock owner moves on the same rules.
   const a = run(400000, 200000, 'GAME', true);
-  assert('authored owner stays put, row untouched', a.hood === 'Lowmarket' && a.type === 'owned' && a.cost === 297000, [a.hood, a.type, a.cost].join(','));
-  // Authored renter: the canon anchor covers every unit, not only owners.
+  assert('GAME-clock owner moves up like anyone', a.hood === 'Highgate' && a.type === 'owned', [a.hood, a.type].join(','));
+  // No clock is anchored (builder 2026-09-23).
   {
     rippleCalls = []; cellIntents = []; appendIntents = [];
     const XR = SL_HEADER.concat(['ClockMode']);
@@ -530,8 +530,8 @@ console.log('A12 owner move — sell up, buy or rent there; authored homes stay'
     const ctx = buildCtx(sl, [], () => 0.0);
     ctx.ledger.headers = XR.slice(); ctx.config.relocationMaxShare = 1;
     runBoth(ctx);
-    assert('authored (GAME-clock) renter stays put', sl[0][col('Neighborhood')] === 'Lowmarket', sl[0][col('Neighborhood')]);
-    assert('ENGINE-clock twin moves (the anchor is targeted)', sl[1][col('Neighborhood')] !== 'Lowmarket', sl[1][col('Neighborhood')]);
+    assert('GAME-clock renter moves like anyone', sl[0][col('Neighborhood')] !== 'Lowmarket', sl[0][col('Neighborhood')]);
+    assert('ENGINE-clock twin moves too', sl[1][col('Neighborhood')] !== 'Lowmarket', sl[1][col('Neighborhood')]);
     const hk = ctx.summary.storyHooks.find(k => k.hookType === 'CITIZEN_RELOCATED');
     assert('a move into a richer hood (Lowmarket → Highgate) reads moving up', hk && hk.neighborhood === 'Highgate' && /moving up from Lowmarket/.test(hk.description), hk && hk.description);
   }

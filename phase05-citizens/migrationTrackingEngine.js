@@ -636,7 +636,6 @@ function processRelocations_(ctx, cycle) {
       iMigReason = idx('MigrationReason'), iMigDest = idx('MigrationDestination'),
       iMigCycle = idx('MigratedCycle'),
       iWealthLevel = idx('WealthLevel'), // engine.135 F — admission band
-      iClock = idx('ClockMode'),          // owner move: an authored (non-ENGINE) home is canon, never sold by dice
       iDialStateR = idx('DialState');   // engine.178 — openness gates the misfit lane
   if (iNeighborhood < 0 || iIncome < 0 || iMigIntent < 0) return { moved: 0 };
   // engine.135 F (S399): the B1 hood profile (S.neighborhoodState, Phase 2)
@@ -682,9 +681,9 @@ function processRelocations_(ctx, cycle) {
   // MISFIT lane (moving up) — it sells, then buys or rents at the destination through
   // the wealth engine (planOwnerMove_ / executeOwnerMove_), loud on the record either
   // way. Owners never take the pressure lane here: owned rows carry no rent burden,
-  // and distress sales are the stress dissolution's. A household with any member not
-  // on the ENGINE clock lives in an authored home and stays anchored; a household
-  // unknown to the ledger stays anchored.
+  // and distress sales are the stress dissolution's. Every citizen moves on the same
+  // rules whatever their tier or clock (builder 2026-09-23: nobody is protected from
+  // their own life); a household unknown to the ledger stays anchored.
   var housingByHH = {};
   try { housingByHH = buildHouseholdHousingMap_(ctx.ss) || {}; } catch (eOwn) { housingByHH = {}; Logger.log('processRelocations_: household housing map unavailable (' + eOwn + ') — owned units cannot be told apart this Cycle, so NO household unit relocates'); }
   // Canon anchors (2026-09-23, kimi — Mike-direct): a faith organization's
@@ -712,17 +711,6 @@ function processRelocations_(ctx, cycle) {
     var unit = units[u2];
     if (unit.income <= 0 || !unit.rowIdxs.length) continue;
     if (unit.split) continue; // a member sits in another hood — move nobody
-    // Canon anchor (2026-09-23): a unit with any member off the ENGINE clock
-    // (GAME / CIVIC / MEDIA — authored seats) lives where canon puts it; dice
-    // never re-home it. Live before this: Vinnie Keane → Grand Lake (C104),
-    // Brenda Okoro → Rockridge (C108), Carmen Delaine → West Oakland (C107).
-    // A blank ClockMode reads as ENGINE (educationCareerEngine convention).
-    var authored = false;
-    for (var ck = 0; ck < unit.rowIdxs.length && iClock >= 0; ck++) {
-      var cm = String(rows[unit.rowIdxs[ck]][iClock] || '').trim().toUpperCase();
-      if (cm && cm !== 'ENGINE') { authored = true; break; }
-    }
-    if (authored) { anchoredSkipped++; continue; }
     var ownedUnit = false;
     if (unit.key.indexOf('POP:') !== 0) {
       var hType = housingByHH[unit.key] ? String(housingByHH[unit.key].housingType || '').toLowerCase() : '';
@@ -882,7 +870,7 @@ function processRelocations_(ctx, cycle) {
     moved++;
   }
 
-  if (moved > 0 || ownedSkipped > 0 || anchoredSkipped > 0) Logger.log('processRelocations_: ' + moved + ' unit(s) relocated; ' + ownedSkipped + ' owned/unknown household unit(s) anchored (G-EC70); ' + anchoredSkipped + ' canon unit(s) anchored (faith leaders + authored clocks)');
+  if (moved > 0 || ownedSkipped > 0 || anchoredSkipped > 0) Logger.log('processRelocations_: ' + moved + ' unit(s) relocated; ' + ownedSkipped + ' owned/unknown household unit(s) anchored (G-EC70); ' + anchoredSkipped + ' canon faith-leader unit(s) anchored');
   return { moved: moved };
 }
 

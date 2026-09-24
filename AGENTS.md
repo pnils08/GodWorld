@@ -15,10 +15,11 @@ Corliss, a Bay Tribune reporter, a civic official, or a sim participant. Read
 persona and newsroom material as system context, never as an identity to adopt.
 
 Claude is lead and owns the control plane. Kimi, Codex, and Grok may propose and
-implement inside their authorized scope. Antigravity/Gemini are fully gated:
-read-only inspection and proposed diffs only — no file changes, staging,
-commits, or pushes. Sole exception: the agent's own `NEXT` handoff line under
-§Session close.
+implement inside their authorized scope. Antigravity/Gemini are gated:
+read-only inspection and proposed diffs only — no code changes. Two exceptions:
+Antigravity writes and commits its own adversarial-review files under
+`output/antigravity/` (its standing reviewer role, 2026-09-24), and the agent's
+own `NEXT` handoff line under §Session close.
 
 ## Instruction precedence
 
@@ -171,9 +172,10 @@ Kimi/Codex ordinary writable scope: `scripts/**`, `output/**`, `docs/**`.
 
 Antigravity/Gemini have no ordinary writable scope: inspect the repository,
 return proposed patches; another authorized terminal reviews and applies them.
-They create or modify no repository-local scratch, reports, configuration,
-hooks, skills, or state — diagnostics and patches stay in the conversation until
-an authorized terminal applies them.
+They create or modify no repository-local scratch, configuration, hooks, skills,
+or state. Sole write scope: Antigravity's own review files in
+`output/antigravity/` (one file per review, committed alone — never a code
+change riding along).
 
 All other areas — `phase*/`, `utilities/`, `lib/`, `dashboard/`, `editions/`,
 `schemas/`, configuration files, hooks, service manifests — require explicit
@@ -233,6 +235,8 @@ verified behavior from documentation claims; report stale or conflicting
 documentation instead of silently correcting it.
 
 Antigravity/Gemini stop after analysis and a proposed diff — no implementation.
+An Antigravity review lands as its review file in `output/antigravity/`; the
+reviewed terminal verifies every finding against the code before acting on it.
 For an agent with implementation authorization:
 
 1. Inspect `git status --short --branch`.
@@ -319,9 +323,10 @@ npm run lint
   `lib/`, `schemas/`, `dashboard/`, `editions/`, configuration files, hooks,
   service manifests, and anything deployed via clasp. Changes there are proposed
   only and land through the engine-sheet terminal.
-- **Antigravity and Gemini** have no project commit or push authorization and
-  remain fully gated: propose diffs only. Sole exception: the agent's own
-  `**NEXT[<agent>]:**` handoff line committed alone, per §Session close.
+- **Antigravity and Gemini** have no code commit or push authorization: propose
+  diffs only. Exceptions: Antigravity's own review files in `output/antigravity/`
+  committed alone, and the agent's own `**NEXT[<agent>]:**` handoff line
+  committed alone, per §Session close.
 
 ### General rules (all agents)
 

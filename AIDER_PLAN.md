@@ -18,7 +18,7 @@ next scoped task from, and to keep it short.
 - Aider proposes (auto-commits off); a reviewer checks the diff before commit.
 - When a job is committed or rejected, delete its line — git holds the record.
 
-**Dispatch (2026-09-22, un-retired — orchestrator draws and reviews, not Mike):**
+**Dispatch (2026-09-24 — Aider is the default cheap code-fix lane; rb or es draws and reviews, not Mike; engine-substrate edits es-only + benched):**
 non-interactive one-shot, not the old interactive tmux pane:
 ```
 cd /root/GodWorld && /root/.local/bin/aider --no-auto-commits --yes-always --no-stream \

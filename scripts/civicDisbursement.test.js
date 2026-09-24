@@ -31,7 +31,11 @@ const SRC = [
   '../phase05-citizens/householdFormationEngine.js',
   '../phase05-citizens/civicInitiativeEngine.js',
 ].map(read).join('\n');
-const E = new Function(SRC + '\nreturn { applyInitiativeImplementationEffects_, buildDisbursementSlice_, getCivicDisburseDials_, civicDomainDisburses_, planHousingDisbursement_, applyHousingDisbursement_, HOUSING_GRANT_COLUMNS_, CIVIC_STAGE_CATALOG_ };')();
+// Housing is off in the live catalog (builder 2026-09-23: no housing program in the
+// sim) — asserted first below against the REAL catalog. The mechanism checks after
+// that run on a test-only re-enable so the dormant writer stays pinned until removal.
+const E_LIVE = new Function(SRC + '\nreturn { civicDomainDisburses_, CIVIC_STAGE_CATALOG_ };')();
+const E = new Function(SRC + '\nCIVIC_STAGE_CATALOG_.housing.disburses = true; // TEST-ONLY re-enable of the dormant mechanism\nreturn { applyInitiativeImplementationEffects_, buildDisbursementSlice_, getCivicDisburseDials_, civicDomainDisburses_, planHousingDisbursement_, applyHousingDisbursement_, HOUSING_GRANT_COLUMNS_, CIVIC_STAGE_CATALOG_ };')();
 
 function mockSheet(values) {
   const pad = (r, n) => { while (r.length < n) r.push(''); return r; };
@@ -74,7 +78,7 @@ const HH = (id, hood, type, rent, income, savings, status, lastGrant) => {
 let n = 0; const ok = (c, l) => { assert(c, l); n++; };
 
 // ---- catalog flag ----
-ok(E.civicDomainDisburses_('housing') === true && E.civicDomainDisburses_('health') === false && E.civicDomainDisburses_('economic') === false && E.civicDomainDisburses_('') === false, 'only housing disburses (catalog flag, not playable)');
+ok(['housing', 'health', 'economic', ''].every(d => E_LIVE.civicDomainDisburses_(d) === false), 'live catalog: no domain disburses — no housing program in the sim (builder 2026-09-23)');
 
 // ---- producer → slice ----
 {
@@ -278,8 +282,8 @@ function pool() {
 // ---- catalog parity ----
 {
   const C = require('../lib/initiativePhaseContract');
-  ok(JSON.stringify(E.CIVIC_STAGE_CATALOG_) === JSON.stringify(C.stageCatalogByDomain()), 'engine stage catalog (with disburses) deep-equals the lib projection');
-  ok(C.INTERVENTION_CATALOG['housing-program'].disburses === true && Object.keys(C.INTERVENTION_CATALOG).filter(k => C.INTERVENTION_CATALOG[k].disburses).length === 1, 'only housing-program carries disburses:true');
+  ok(JSON.stringify(E_LIVE.CIVIC_STAGE_CATALOG_) === JSON.stringify(C.stageCatalogByDomain()), 'engine stage catalog (with disburses) deep-equals the lib projection');
+  ok(Object.keys(C.INTERVENTION_CATALOG).filter(k => C.INTERVENTION_CATALOG[k].disburses).length === 0, 'no intervention carries disburses:true (builder 2026-09-23)');
 }
 
 console.log('civicDisbursement.test.js: ' + n + ' assertions passed');

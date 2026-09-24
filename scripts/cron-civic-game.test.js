@@ -358,13 +358,12 @@ test('T1.9: Live appendMoveLedger & moveLedgerLines write correct ledger rows to
   }
 });
 
-test('T1.10: Live validateDatawakeMoves with full INTERVENTION_CATALOG: 4 playable pass, 4 unplayable reject', () => {
+test('T1.10: Live validateDatawakeMoves with full INTERVENTION_CATALOG: 3 playable pass, 5 unplayable reject', () => {
   const office = { officeId: 'MAYOR-01', agentDir: 'civic-office-mayor', district: 'citywide' };
   const catalog = phaseContract.INTERVENTION_CATALOG;
-  // housing-program playable under engine.255 (budgeted disbursement; Task 7
-  // bench pair 2026-09-22).
-  const playableKeys = ['health-service', 'transit-project', 'school-program', 'housing-program'];
-  const unplayableKeys = ['safety-program', 'economic-program', 'workforce-program', 'sports-district'];
+  // housing-program off: no housing program in the sim (builder 2026-09-23).
+  const playableKeys = ['health-service', 'transit-project', 'school-program'];
+  const unplayableKeys = ['safety-program', 'economic-program', 'workforce-program', 'sports-district', 'housing-program'];
   assert.deepStrictEqual(Object.keys(catalog).filter(k => catalog[k].playable).sort(), [...playableKeys].sort());
   assert.deepStrictEqual(Object.keys(catalog).filter(k => !catalog[k].playable).sort(), [...unplayableKeys].sort());
   // engine.255 Task 9: playable proposes need a budget inside the domain band.

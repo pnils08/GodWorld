@@ -14,7 +14,7 @@
  * node scripts/civicPetitions.js --dry-run
  * node scripts/civicPetitions.js --domain health --hood Temescal --support-band 0.01 --json
  * Optional: --root PATH --cycle N --hardship-band 0.30 --since-cycle N
- * Default CLI: all mapped hoods, housing/health/safety, current beats Cycle.
+ * Default CLI: all mapped hoods, health/safety, current beats Cycle.
  */
 const fs = require('node:fs');
 const path = require('node:path');
@@ -179,23 +179,7 @@ function countPetition(proposal, data, options = {}) {
     if (!hood) { quality.unlocatedConditionRows++; return false; }
     return target.has(hood);
   };
-  if (domain === 'housing') {
-    Object.assign(counts, { activeRentedHouseholds: 0, evaluableHouseholds: 0, hardshipHouseholds: 0,
-      zeroIncomeHouseholds: 0, missingIncomeHouseholds: 0, invalidIncomeHouseholds: 0, missingOrInvalidRentHouseholds: 0 });
-    const active = table(data, 'Household_Ledger').filter(r => key(r.Status) === 'active' && key(r.HousingType) === 'rented');
-    for (const row of uniqueRows(active.filter(inTarget), 'HouseholdId')) {
-      counts.activeRentedHouseholds++;
-      const income = numeric(row.HouseholdIncome), rent = numeric(row.MonthlyRent);
-      if (blank(row.HouseholdIncome)) counts.missingIncomeHouseholds++;
-      else if (income === 0) counts.zeroIncomeHouseholds++;
-      else if (income == null || income < 0) counts.invalidIncomeHouseholds++;
-      if (rent == null || rent < 0) counts.missingOrInvalidRentHouseholds++;
-      if (income == null || income <= 0 || rent == null || rent < 0) continue;
-      counts.evaluableHouseholds++;
-      if (rent * 12 / income > hardshipBand) counts.hardshipHouseholds++;
-    }
-    numerator = counts.hardshipHouseholds; unit = 'tracked-households';
-  } else if (domain === 'health') {
+  if (domain === 'health') {
     Object.assign(counts, { openAdmissions: 0, inCareCitizens: 0, sickResidents: sickComplete ? sickResidents : null });
     const people = new Set();
     for (const row of table(data, 'Hospital_Ledger')) {
@@ -225,7 +209,7 @@ function countPetition(proposal, data, options = {}) {
   }
   const requiredCount = supportBand != null && population.value > 0 ? Math.ceil(population.value * supportBand) : null;
   let reason = 'eligible';
-  if (['housing', 'safety'].includes(domain)) reason = 'domain-not-playable';
+  if (domain === 'safety') reason = 'domain-not-playable';
   else if (domain !== 'health') reason = 'domain-rules-deferred';
   else if (supportBand == null) reason = 'support-band-unset';
   else if (!(population.value > 0)) reason = 'population-incomplete';
@@ -288,7 +272,7 @@ function main(argv = process.argv.slice(2)) {
   }
   const data = loadLocalData({ root: args.root || ROOT, cycle: args.cycle });
   const hoods = args.hood || buildHoodResolver(data.Neighborhood_Map).hoods;
-  const domains = args.domain ? [args.domain] : ['housing', 'health', 'safety'];
+  const domains = args.domain ? [args.domain] : ['health', 'safety'];
   const results = domains.map(policyDomain => countPetition({ policyDomain, hoods }, data, {
     hardshipBand: args['hardship-band'], supportBand: args['support-band'], sinceCycle: args['since-cycle'],
   }));

@@ -44,30 +44,11 @@ function fixture() {
 }
 const proposal = domain => ({ policyDomain: domain, hoods: ['East Oakland'] });
 
-test('annual burden, exact boundary, child fold, and duplicate target hoods', () => {
-  const r = countPetition({ policyDomain: 'housing', hoods: ['East Oakland', 'Coliseum'] }, fixture());
-  assert.deepEqual(r.hoods, ['East Oakland']);
-  assert.equal(r.counts.activeRentedHouseholds, 2);
-  assert.equal(r.counts.hardshipHouseholds, 1);
-  assert.equal(r.population.value, 100);
-  assert.equal(r.support.band, null);
+test('housing domain explicitly defers', () => {
+  const r = countPetition({ policyDomain: 'housing', hoods: ['East Oakland'] }, fixture());
+  assert.deepEqual(r.counts, {});
+  assert.equal(r.support.reason, 'domain-rules-deferred');
   assert.equal(r.support.cleared, false);
-});
-test('missing, zero, malformed income and rent are counted explicitly; no owned/dissolved signatures', () => {
-  const d = fixture(), base = d.Household_Ledger[0];
-  for (const [n, income] of ['0', '', 'bad', '-1'].entries()) d.Household_Ledger.push({ ...base, HouseholdId: 'SYNTHETIC-I' + n, HouseholdIncome: income });
-  d.Household_Ledger.push({ ...base, HouseholdId: 'SYNTHETIC-RENT', MonthlyRent: '' });
-  d.Household_Ledger.push({ ...base, HouseholdId: 'SYNTHETIC-OWN', HousingType: 'owned' });
-  d.Household_Ledger.push({ ...base, HouseholdId: 'SYNTHETIC-OLD', Status: 'dissolved' });
-  const r = countPetition(proposal('housing'), d, { supportBand: 0.001 });
-  assert.equal(r.counts.zeroIncomeHouseholds, 1);
-  assert.equal(r.counts.missingIncomeHouseholds, 1);
-  assert.equal(r.counts.invalidIncomeHouseholds, 2);
-  assert.equal(r.counts.missingOrInvalidRentHouseholds, 1);
-  assert.equal(r.counts.hardshipHouseholds, 1);
-  assert.equal(r.support.requiredCount, 1);
-  assert.equal(r.support.cleared, false);
-  assert.equal(r.support.reason, 'domain-not-playable');
 });
 test('health support uses Sick, counts open people once, and excludes discharges', () => {
   const d = fixture();
@@ -163,34 +144,18 @@ test('reflections are visibility only, include applied and unapplied, filter cyc
 test('sheet parent map wins over cached membership, and ambiguous parents fail loudly', () => {
   const d = fixture();
   d.Neighborhood_Map[0].ChildAreas = 'SYNTHETIC CHILD';
-  d.Household_Ledger[0].Neighborhood = 'SYNTHETIC CHILD';
-  assert.equal(countPetition({ policyDomain: 'housing', hoods: ['SYNTHETIC CHILD'] }, d).counts.hardshipHouseholds, 1);
+  d.Hospital_Ledger[0].Neighborhood = 'SYNTHETIC CHILD';
+  assert.equal(countPetition({ policyDomain: 'health', hoods: ['SYNTHETIC CHILD'] }, d).counts.inCareCitizens, 1);
   d.Neighborhood_Map[1].ChildAreas = 'SYNTHETIC CHILD';
-  assert.throws(() => countPetition(proposal('housing'), d), /multiple parents/);
+  assert.throws(() => countPetition(proposal('health'), d), /multiple parents/);
 });
+
 test('unknown targets and missing schema fail; unsupported domains explicitly defer', () => {
   assert.throws(() => countPetition({ policyDomain: 'health', hoods: ['SYNTHETIC UNKNOWN'] }, fixture()), /Unknown neighborhood/);
   const d = fixture(); delete d.Neighborhood_Map[0].ChildAreas;
   assert.throws(() => countPetition(proposal('health'), d), /ChildAreas/);
   assert.equal(countPetition(proposal('education'), fixture()).support.reason, 'domain-rules-deferred');
   assert.throws(() => countPetition(proposal('health'), fixture(), { supportBand: 0 }), /supportBand/);
-});
-test('duplicates do not inflate housing; conflicting identities and missing input fail', () => {
-  const d = fixture(); d.Household_Ledger.push({ ...d.Household_Ledger[0] });
-  assert.equal(countPetition(proposal('housing'), d).counts.hardshipHouseholds, 1);
-  d.Household_Ledger.push({ ...d.Household_Ledger[0], HouseholdIncome: '100' });
-  assert.throws(() => countPetition(proposal('housing'), d), /Conflicting HouseholdId/);
-  d.Household_Ledger = null;
-  assert.throws(() => countPetition(proposal('housing'), d), /Household_Ledger/);
-});
-test('housing identity checks are local to the target hoods; unlocated households are printed', () => {
-  const d = fixture();
-  d.Household_Ledger.push({ ...d.Household_Ledger[2], HouseholdId: '' });
-  d.Household_Ledger.push({ ...d.Household_Ledger[0], HouseholdId: '', Neighborhood: 'SYNTHETIC OFF MAP' });
-  const r = countPetition(proposal('housing'), d);
-  assert.equal(r.counts.activeRentedHouseholds, 2);
-  assert.equal(r.quality.unlocatedConditionRows, 1);
-  assert.equal(r.support.cleared, false);
 });
 test('incomplete population blocks support; incomplete crime city cannot supply a median', () => {
   const d = fixture(); d.Neighborhood_Demographics[0].Adults = '';
@@ -200,8 +165,8 @@ test('incomplete population blocks support; incomplete crime city cannot supply 
 });
 test('counter is deterministic and does not mutate caller data', () => {
   const d = fixture(), before = JSON.stringify(d);
-  const a = countPetition(proposal('housing'), d);
-  assert.deepEqual(a, countPetition(proposal('housing'), d));
+  const a = countPetition(proposal('health'), d);
+  assert.deepEqual(a, countPetition(proposal('health'), d));
   assert.equal(JSON.stringify(d), before);
 });
 test('disk loader and CLI are local-only, read-only, cycle checked and fail loudly on corrupt JSONL', () => {
@@ -220,9 +185,15 @@ test('disk loader and CLI are local-only, read-only, cycle checked and fail loud
     const printed = [], log = console.log;
     try {
       console.log = line => printed.push(line);
-      main(['--dry-run', '--root', root, '--domain', 'housing', '--hood', 'Coliseum', '--json']);
+      // Ensure we have at least one open hospital case to count
+      if (!fs.existsSync(path.join(beats, 'Hospital_Ledger.jsonl'))) {
+        fs.writeFileSync(path.join(beats, 'Hospital_Ledger.jsonl'), 
+          JSON.stringify({ AdmissionId: 'SYNTHETIC-CLI', POPID: 'POP-99901', Neighborhood: 'Coliseum', StatusNow: 'recovering', DischargeCycle: '', Outcome: '' }));
+      }
+      main(['--dry-run', '--root', root, '--domain', 'health', '--hood', 'Coliseum', '--json']);
     } finally { console.log = log; }
-    assert.equal(JSON.parse(printed.join('\n')).results[0].counts.hardshipHouseholds, 1);
+    const results = JSON.parse(printed.join('\n')).results[0];
+    assert.equal(results.counts.inCareCitizens, 1);
     assert.deepEqual(fs.readdirSync(beats).map(f => [f, fs.readFileSync(path.join(beats, f), 'utf8')]), before);
     assert.throws(() => loadLocalData({ root, cycle: 998 }), /cycle/i);
     assert.throws(() => main(['--apply']), /Unknown or missing option/);

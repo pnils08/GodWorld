@@ -818,13 +818,13 @@ function boardStageView(row, context) {
   let text;
   if (phase === 'stalled') text = 'stalled — one work move revives it';
   else if (petitionPending) {
-    // Mirrors civicPetitions.js's countPetition reason logic exactly (housing/
-    // safety -> domain-not-playable, health -> band-gated, else -> domain-rules-
+    // Mirrors civicPetitions.js's countPetition reason logic exactly (safety ->
+    // domain-not-playable, health -> band-gated, else -> domain-rules-
     // deferred) without calling it — the board must not tell an agent "signatures
     // move it" for a domain call-vote considers open (found in adversarial
     // review of 51fdee28, 2026-09-22; keep this in sync if that logic changes).
     const domain = String(row.PolicyDomain || '').trim().toLowerCase();
-    text = ['health', 'housing', 'safety'].includes(domain)
+    text = ['health', 'safety'].includes(domain)
       ? 'petition-pending — signatures move it to a vote'
       : 'petition-pending — no signature rule; eligible for call-vote';
   } else text = String(row.NextScheduledAction || '').trim() || 'advance or hold';
@@ -834,32 +834,11 @@ function boardNeedText(row, context) {
   return boardStageView(row, context).text;
 }
 
-// engine.255 Task 9 (D3, 2026-09-23) — the split the plan promised the pack:
-// last Cycle's tracked grants vs the off-ledger rest of the tranche. Built
-// from the Household_Ledger beats dump receipt columns. A re-granted row
-// carries only its latest receipt, so old cycles undercount — the current
-// LastDisburseCycle is always exact, and that is the only one the board shows.
-function loadGrantRollup(root) {
-  const rows = readJsonl(path.join(root || ROOT, 'output', 'beats', 'Household_Ledger.jsonl'));
-  if (!rows) return null;
-  const by = {};
-  for (const r of rows) {
-    const init = String(r.LastGrantInitiativeID || '').trim();
-    const cyc = Number(r.LastGrantCycle);
-    const amt = Number(r.LastGrantAmount);
-    if (!init || !isFinite(cyc) || cyc < 1 || !isFinite(amt) || amt <= 0) continue;
-    const k = init + '|' + cyc;
-    by[k] = by[k] || { n: 0, sum: 0 };
-    by[k].n++; by[k].sum += amt;
-  }
-  return by;
-}
-
 // engine.255 Task 9 — the board's budget line. The live tracker arms
 // BudgetTotal/BudgetRemaining/LastDisburseCycle at the C109 fire and the
 // beats dump is refreshed after; a dump from before that does not carry the
 // keys at all, and the board says so instead of inventing a zero.
-function budgetStampText(row, grantRollup) {
+function budgetStampText(row) {
   const carries = Object.hasOwn(row, 'BudgetRemaining') || Object.hasOwn(row, 'BudgetTotal') ||
     Object.hasOwn(row, 'LastDisburseCycle');
   if (!carries) return 'budget: not yet stamped';
@@ -869,17 +848,6 @@ function budgetStampText(row, grantRollup) {
       ? 'budget $' + Number(rem).toLocaleString('en-US') + ' left'
       : 'budget: no parsed budget',
   ];
-  const ld = row.LastDisburseCycle;
-  if (ld !== null && ld !== undefined && String(ld).trim() !== '' && isFinite(Number(ld))) {
-    let s = 'last disbursed C' + Number(ld);
-    if (grantRollup) {
-      const hit = grantRollup[String(row.InitiativeID || '').trim() + '|' + Number(ld)];
-      s += hit
-        ? ' — $' + Math.round(hit.sum).toLocaleString('en-US') + ' to ' + hit.n + ' tracked household' + (hit.n === 1 ? '' : 's') + '; the rest disbursed off the tracked ledger'
-        : ' — no tracked households qualified; the tranche disbursed off the tracked ledger';
-    }
-    parts.push(s);
-  }
   return parts.join(', ');
 }
 
@@ -913,7 +881,7 @@ function boardRowsFor(office, rows, childToParent, context) {
       sponsored,
       hoods,
       needsNext: stageView.text,
-      budget: budgetStampText(row, context && context.grantRollup),
+      budget: budgetStampText(row),
       requirement: stageView.requirement,
       metricEvidence: stageView.metricEvidence,
     });
@@ -1237,9 +1205,7 @@ function loadConditionCounts(root, cycle, board, moves) {
   const lines = proposals.map(p => {
     if (!p.available) return p.id + ': counts unavailable — ' + p.error;
     const c = p.counts;
-    const reading = p.policyDomain === 'housing'
-      ? c.hardshipHouseholds + '/' + c.activeRentedHouseholds + ' rented households over ' + p.hardshipBand + ' annual rent burden; zero income ' + c.zeroIncomeHouseholds + ', missing income ' + c.missingIncomeHouseholds
-      : p.policyDomain === 'health' ? c.inCareCitizens + ' in care; Sick ' + (c.sickResidents == null ? 'unavailable' : c.sickResidents)
+    const reading = p.policyDomain === 'health' ? c.inCareCitizens + ' in care; Sick ' + (c.sickResidents == null ? 'unavailable' : c.sickResidents)
       : p.policyDomain === 'safety' ? c.aboveMedianHoods + ' hoods above city violent-level median'
       : 'domain condition rules deferred';
     return p.id + ': ' + reading + '; support ' + p.support.reason +
@@ -1320,7 +1286,7 @@ function buildGameBlocks(opts) {
       }
     } catch (e) { config = null; configIssue = e.message; }
     const audits = new Map([[Number(cycle),audit]]);
-    board = boardRowsFor(office, rows, c2p, {cycle,config,configIssue,grantRollup:loadGrantRollup(root),readAudit:c=>{
+    board = boardRowsFor(office, rows, c2p, {cycle,config,configIssue,readAudit:c=>{
       if (!audits.has(c)) audits.set(c,loadAudit(root,c));
       return audits.get(c);
     }});
@@ -1507,7 +1473,7 @@ module.exports = {
   loadCabinet, loadInitRows, seatKind, pickTurn, scoreHoods, loadFactionPeers,
   clip, writePack, CONSTITUENT_CAP,
   // civic.38 Task 3 game blocks
-  buildGameBlocks, boardRowsFor, boardNeedText, boardBlock, budgetStampText, budgetBandText, loadGrantRollup, childToParentFromAudit, foldHood, requireCycle, loadAudit, gamePromptView,
+  buildGameBlocks, boardRowsFor, boardNeedText, boardBlock, budgetStampText, budgetBandText, childToParentFromAudit, foldHood, requireCycle, loadAudit, gamePromptView,
   loadMovesFolded, loadPetitionPool, loadWorkingCity, loadConfrontation, loadConfrontations, loadSeatMoves,
   loadInterventionMenu, loadTrackerRows, readJsonl, NEGATIVE_AFFECTS, BLOCK_CAP,
 };

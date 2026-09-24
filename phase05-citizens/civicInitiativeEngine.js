@@ -3022,14 +3022,13 @@ function engineClockHold_(notes, nextActionCycle, cycle, engineWillAct) {
 var INITIATIVE_STAGE_COLUMNS_ = ['Stage', 'StageBaseline', 'LastStageChangeCycle', 'LastWorkCycle', 'LastWorkSeat', 'PriorPhase', 'StageHold'];
 
 var CIVIC_STAGE_CATALOG_ = {
-  health:    { playable: true,  stage3Metric: { tab: 'Neighborhood_Demographics', column: ['Sick'], direction: 'down', scope: 'hood' }, disburses: false },
-  transit:   { playable: true,  stage3Metric: { tab: 'Transit_Metrics', column: ['RidershipVolume'], direction: 'up', scope: 'station-serving-hood' }, disburses: false },
-  education: { playable: true,  stage3Metric: { tab: 'Neighborhood_Demographics', column: ['SchoolQualityIndex'], direction: 'up', scope: 'hood' }, disburses: false },
-  economic:  { playable: false, stage3Metric: { tab: 'Neighborhood_Map', column: ['RetailVitality'], direction: 'up', scope: 'hood' }, disburses: false },
-  workforce: { playable: false, stage3Metric: { tab: 'Neighborhood_Map', column: ['RetailVitality'], direction: 'up', scope: 'hood' }, disburses: false },
-  sports:    { playable: false, stage3Metric: { tab: 'Neighborhood_Map', column: ['RetailVitality', 'NightlifeProfile'], direction: 'up', scope: 'hood' }, disburses: false },
-  safety:    { playable: false, stage3Metric: { tab: 'Crime_Metrics', column: ['ViolentLevel'], direction: 'down', scope: 'hood' }, disburses: false },
-  housing:   { playable: false,  stage3Metric: { tab: 'Household_Ledger', column: ['flagged/cohort'], direction: 'down', scope: 'hood' }, disburses: false }  // builder 2026-09-23: no housing program in the sim — off; was engine.255: spends its budget (Task 4); Delivering on the flagged-at-vote cohort (Tasks 6–7, bench pair C109–C113)
+  health:    { playable: true,  stage3Metric: { tab: 'Neighborhood_Demographics', column: ['Sick'], direction: 'down', scope: 'hood' }},
+  transit:   { playable: true,  stage3Metric: { tab: 'Transit_Metrics', column: ['RidershipVolume'], direction: 'up', scope: 'station-serving-hood' }},
+  education: { playable: true,  stage3Metric: { tab: 'Neighborhood_Demographics', column: ['SchoolQualityIndex'], direction: 'up', scope: 'hood' }},
+  economic:  { playable: false, stage3Metric: { tab: 'Neighborhood_Map', column: ['RetailVitality'], direction: 'up', scope: 'hood' }},
+  workforce: { playable: false, stage3Metric: { tab: 'Neighborhood_Map', column: ['RetailVitality'], direction: 'up', scope: 'hood' }},
+  sports:    { playable: false, stage3Metric: { tab: 'Neighborhood_Map', column: ['RetailVitality', 'NightlifeProfile'], direction: 'up', scope: 'hood' }},
+  safety:    { playable: false, stage3Metric: { tab: 'Crime_Metrics', column: ['ViolentLevel'], direction: 'down', scope: 'hood' }}
 };
 
 /** Which stage columns a header row lacks, in declared order. Pure. */
@@ -3281,42 +3280,6 @@ function civicStageBaselineFrom_(input) {
 }
 
 // MIRROR of lib/initiativePhaseContract.js deliveryEdge — body text-identical (parity-tested).
-// engine.251 — mirrored verbatim from lib cohortForBaseline (parity in the contract test).
-// A cohort narrowed to the baseline's own city. The housing cohort's membership
-// is by tracked-renter count, so a hood can cross the bar between fires; the
-// baseline froze its city at stamp time and deliveryEdge refuses a changed
-// city. Newcomers are dropped here (they were never in the comparison); a
-// baseline hood that has since thinned out stays missing, so deliveryEdge
-// still reports city-membership-changed for it. Fixed-canon tabs are unchanged
-// (their coverage is exact). Pure; never mutates the frozen cohort.
-function civicCohortForBaseline_(cohort, baseline) {
-  var co = cohort;
-  if (!co || co.available !== true || !co.rows) return co;
-  if (co.tab !== 'Household_Ledger') return co; // fixed-canon tabs keep the exact-coverage contract (health/education/transit untouched)
-  var b = baseline;
-  if (typeof b === 'string') { try { b = JSON.parse(b); } catch (e) { b = null; } }
-  if (!b || !Array.isArray(b.city) || !b.city.length) return co;
-  // engine.255 Task 6: a baseline that froze its members is judged over THOSE households
-  if (b.members && typeof b.members === 'object' && Array.isArray(co.households)) {
-    var judged = civicHousingFlaggedCohort_({ rows: co.households, cycle: co.cycle, minFlagged: 1, resolveHood: co.resolveHood, members: b.members });
-    if (judged.available !== true) { var f = {}; for (var fk in co) if (Object.prototype.hasOwnProperty.call(co, fk)) f[fk] = co[fk]; f.available = false; f.reason = judged.reason; f.rows = {}; return f; }
-    var re = {}; for (var rk in co) if (Object.prototype.hasOwnProperty.call(co, rk)) re[rk] = co[rk];
-    re.rows = judged.rows; re.counts = judged.counts; re.members = judged.members; co = re;
-  }
-  var keep = {};
-  for (var i = 0; i < b.city.length; i++) keep[b.city[i]] = true;
-  var rows = {}, dropped = [];
-  var all = Object.keys(co.rows);
-  for (var j = 0; j < all.length; j++) {
-    if (keep[all[j]]) rows[all[j]] = co.rows[all[j]]; else dropped.push(all[j]);
-  }
-  if (!dropped.length) return co;
-  var out = {};
-  for (var k in co) if (Object.prototype.hasOwnProperty.call(co, k)) out[k] = co[k];
-  out.rows = rows;
-  out.droppedNewcomers = dropped.sort();
-  return out;
-}
 
 function civicDeliveryEdge_(baseline, cohort) {
   var fail = function (reason) { return { available: false, reason: reason, cycle: null, edges: null, minEdge: null }; };
@@ -3615,104 +3578,6 @@ function applyCivicStageStep_(ctx, row, ix, cycle) {
  *
  * Inert while every Stage is blank: no staged row, no read.
  */
-// ---------------------------------------------------------------------------
-// engine.251 — housing stage-3 cohort, mirrored verbatim from
-// lib/initiativePhaseContract.js housingBurdenCohort (parity block in the
-// contract test). Per hood, the MEDIAN of MonthlyRent*12/HouseholdIncome over
-// active rented households with positive finite rent and income; a hood joins
-// the city only with >= minRenters such households (a median over one tracked
-// household is a trick, SIM_DOCTRINE §15); thin hoods are named; every exclusion
-// is counted. Built at read time inside freezeCivicStageCohort_ — nothing stored.
-// ---------------------------------------------------------------------------
-// engine.255 Task 6 — MIRROR of lib/initiativePhaseContract.js housingFlaggedCohort
-// (body text-identical; parity-tested) and baselineWithMembers.
-var CIVIC_HOUSING_FLAGGED_COLUMN_ = 'flagged/cohort';
-
-function civicHousingFlaggedCohort_(input) {
-  var inp = input || {};
-  var out = { available: false, reason: null, tab: 'Household_Ledger', cycle: null, rows: {}, counts: {}, members: {}, thin: [], skipped: { notRented: 0, notActive: 0, invalidRent: 0, invalidIncome: 0, noHood: 0 } };
-  var cycle = Number(inp.cycle);
-  if (!isFinite(cycle) || cycle < 1) { out.reason = 'bad-cycle'; return out; }
-  out.cycle = cycle;
-  var min = Number(inp.minFlagged);
-  if (!isFinite(min) || min < 1) { out.reason = 'bad-min-flagged'; return out; }
-  var rows = Array.isArray(inp.rows) ? inp.rows : null;
-  if (!rows) { out.reason = 'no-rows'; return out; }
-  var fold = typeof inp.resolveHood === 'function' ? inp.resolveHood : function (h) { return h; };
-  var num = function (v) {
-    return (typeof v === 'number' || (typeof v === 'string' && v.trim() !== '')) && isFinite(Number(v)) ? Number(v) : null;
-  };
-  // the engine's own flag (detectHouseholdStress_): active rented, burden >= 0.40, savings under 12 months of rent
-  var byId = {}, flaggedByHood = {};
-  for (var i = 0; i < rows.length; i++) {
-    var r = rows[i] || {};
-    var id = String(r.HouseholdId == null ? '' : r.HouseholdId).trim();
-    var rec = { id: id, hood: null, flagged: false, active: false };
-    if (id) byId[id] = rec;
-    if (String(r.Status == null ? 'active' : r.Status).trim().toLowerCase() !== 'active') { out.skipped.notActive++; continue; }
-    if (String(r.HousingType == null ? '' : r.HousingType).trim().toLowerCase() !== 'rented') { out.skipped.notRented++; continue; }
-    var rent = num(r.MonthlyRent), inc = num(r.HouseholdIncome);
-    if (rent === null || !(rent > 0)) { out.skipped.invalidRent++; continue; }
-    if (inc === null || !(inc > 0)) { out.skipped.invalidIncome++; continue; }
-    var raw = String(r.Neighborhood == null ? '' : r.Neighborhood).trim();
-    var hood = raw ? fold(raw) : null;
-    if (!hood) { out.skipped.noHood++; continue; }
-    rec.hood = hood; rec.active = true;
-    var sav = num(r.HouseholdSavings); if (sav === null || sav < 0) sav = 0;
-    rec.flagged = (rent * 12 / inc >= 0.40) && (sav < rent * 12);
-    if (rec.flagged && id) (flaggedByHood[hood] = flaggedByHood[hood] || []).push(id);
-  }
-  var members = inp.members && typeof inp.members === 'object' ? inp.members : null;
-  if (!members) {
-    // baseline: freeze the flagged households per hood; every member hood reads 1 (all still flagged)
-    var hoods = Object.keys(flaggedByHood).sort();
-    for (var h = 0; h < hoods.length; h++) {
-      var ids = flaggedByHood[hoods[h]].slice().sort();
-      out.counts[hoods[h]] = { flagged: ids.length, relieved: 0, lost: 0, members: ids.length };
-      if (ids.length < min) { out.thin.push(hoods[h]); continue; }
-      out.members[hoods[h]] = ids;
-      var rec1 = {}; rec1['flagged/cohort'] = 1;
-      out.rows[hoods[h]] = rec1;
-    }
-    if (!Object.keys(out.rows).length) { out.reason = 'no-hood-clears-min-flagged'; return out; }
-    // a one-hood city judges itself against itself (ratio 1 both sides, edge 0 forever — a §15 trick)
-    if (Object.keys(out.rows).length < 2) { out.reason = 'city-under-two-hoods'; out.rows = {}; out.members = {}; return out; }
-    out.available = true;
-    return out;
-  }
-  // observation: judge the frozen members — relieved = active, rented, in the hood, no longer flagged;
-  // lost = dissolved, moved out, or gone from the tab (a loss is never an improvement)
-  var mHoods = Object.keys(members).sort();
-  for (var m = 0; m < mHoods.length; m++) {
-    var list = Array.isArray(members[mHoods[m]]) ? members[mHoods[m]] : [];
-    if (!list.length) continue;
-    var flagged = 0, relieved = 0, lost = 0;
-    for (var k = 0; k < list.length; k++) {
-      var cur = byId[String(list[k])];
-      if (!cur || !cur.active || cur.hood !== mHoods[m]) { lost++; continue; }
-      if (cur.flagged) flagged++; else relieved++;
-    }
-    out.counts[mHoods[m]] = { flagged: flagged, relieved: relieved, lost: lost, members: list.length };
-    out.members[mHoods[m]] = list.slice();
-    var rec2 = {}; rec2['flagged/cohort'] = Math.round(((flagged + lost) / list.length) * 10000) / 10000;
-    out.rows[mHoods[m]] = rec2;
-  }
-  if (!Object.keys(out.rows).length) { out.reason = 'no-member-hoods'; return out; }
-  out.available = true;
-  return out;
-}
-
-function civicBaselineWithMembers_(descriptor, cohort) {
-  if (!descriptor || !cohort || cohort.tab !== 'Household_Ledger' || !cohort.members) return descriptor;
-  var keep = {};
-  var city = Array.isArray(descriptor.city) ? descriptor.city : [];
-  for (var i = 0; i < city.length; i++) {
-    if (Array.isArray(cohort.members[city[i]])) keep[city[i]] = cohort.members[city[i]].slice();
-  }
-  descriptor.members = keep;
-  return descriptor;
-}
-
 function freezeCivicStageCohort_(ctx) {
   var S = ctx.summary;
   if (!S) S = ctx.summary = {};
@@ -3753,51 +3618,6 @@ function freezeCivicStageCohort_(ctx) {
     out.tabs[tab] = co;
     if (!(obs >= 1)) { co.reason = 'no-prior-cycle'; return; }
     if (!canon || !canon.length || typeof resolveHoodOrChild_ !== 'function') { co.reason = 'canon-hoods-unavailable'; return; }
-    if (tab === 'Household_Ledger') {
-      // engine.251: the household rows at fire N are Phase-5-of-N−1 state (this runs
-      // at Phase 2), so the observation is N−1 by phase order — no stamp column.
-      // The baseline freezes its city membership and deliveryEdge refuses a changed city.
-      var hSheet = ss.getSheetByName(tab);
-      if (!hSheet) { co.reason = 'tab-missing'; return; }
-      var hData = hSheet.getDataRange().getValues();
-      if (hData.length < 2) { co.reason = 'tab-empty'; return; }
-      // engine.255 Task 6: the flagged-at-vote cohort. City = hoods with >=
-      // civicHousingCohortMinFlagged flagged households at the stamp; the rows the
-      // freezer carries are re-judged per baseline's own members by
-      // civicCohortForBaseline_ (households + resolveHood ride the cohort).
-      var minRaw = ctx.config ? ctx.config.civicHousingCohortMinFlagged : undefined;
-      var minFlagged = Number(minRaw);
-      if (minRaw === '' || minRaw === null || minRaw === undefined || !isFinite(minFlagged) || minFlagged < 1) { co.reason = 'min-flagged-dial-missing'; return; }
-      var hHead = hData[0], hRows = [];
-      // engine.255: HouseholdSavings is derived from member NetWorth by the income pass, so a
-      // household formed last Cycle still reads 0 here while its head may hold six figures
-      // (bench C109–C112: every 'luck relief' was a fresh row filling in). The ledger is the
-      // truth — overlay the greater of the cell and the members' NetWorth before judging.
-      var lH = ctx.ledger && ctx.ledger.headers ? ctx.ledger.headers : [], lP = lH.indexOf('POPID'), lN = lH.indexOf('NetWorth'), nwBy = {};
-      if (lP >= 0 && lN >= 0 && ctx.ledger.rows) for (var lr = 0; lr < ctx.ledger.rows.length; lr++) nwBy[String(ctx.ledger.rows[lr][lP]).trim()] = Number(String(ctx.ledger.rows[lr][lN]).replace(/[$,\s]/g, '')) || 0;
-      var iMem = hHead.indexOf('Members'), iHeadCol = hHead.indexOf('HeadOfHousehold'), iSavCol = hHead.indexOf('HouseholdSavings');
-      for (var hr = 1; hr < hData.length; hr++) {
-        var rec = {};
-        for (var hc = 0; hc < hHead.length; hc++) rec[hHead[hc]] = hData[hr][hc];
-        if (iSavCol >= 0 && lP >= 0) {
-          var ids = [];
-          try { var pm = iMem >= 0 ? JSON.parse(hData[hr][iMem] || '[]') : []; if (Array.isArray(pm)) ids = pm; } catch (e) { ids = []; }
-          if (!ids.length && iHeadCol >= 0 && hData[hr][iHeadCol]) ids = [hData[hr][iHeadCol]];
-          var sum = 0, seen = false;
-          for (var mi = 0; mi < ids.length; mi++) { var mk = String(ids[mi]).trim(); if (Object.prototype.hasOwnProperty.call(nwBy, mk)) { sum += nwBy[mk]; seen = true; } }
-          var cellSav = Number(rec.HouseholdSavings); if (!isFinite(cellSav)) cellSav = 0;
-          if (seen && sum > cellSav) rec.HouseholdSavings = sum;
-        }
-        hRows.push(rec);
-      }
-      var fold = function (name) { return resolveHoodOrChild_(ctx, name); };
-      var built = civicHousingFlaggedCohort_({ rows: hRows, cycle: obs, minFlagged: minFlagged, resolveHood: fold });
-      co.available = built.available; co.reason = built.reason; co.rows = built.rows;
-      co.counts = built.counts; co.members = built.members; co.thin = built.thin; co.skipped = built.skipped;
-      co.households = hRows; co.resolveHood = fold;
-      if (built.thin.length) Logger.log('civicInitiativeEngine: engine.255 housing cohort — thin hoods (under ' + minFlagged + ' flagged): ' + built.thin.join(', '));
-      return;
-    }
     var sheet = ss.getSheetByName(tab);
     if (!sheet) { co.reason = 'tab-missing'; return; }
     var data = sheet.getDataRange().getValues();
@@ -3911,7 +3731,6 @@ function applyCivicStageBaseline_(ctx, row, ix) {
     Logger.log('civicInitiativeEngine: ' + initKey + ' baseline NOT stamped — ' + built.reason);
     return false;
   }
-  civicBaselineWithMembers_(built.descriptor, civicStageCohortFor_(ctx, entry.stage3Metric.tab));   // engine.255 Task 6
   row[ix.baseline] = JSON.stringify(built.descriptor);
   Logger.log('civicInitiativeEngine: ' + initKey + ' baseline stamped (' + built.descriptor.origin + ', observation C' + built.descriptor.cycle + ')');
   return true;
@@ -3951,7 +3770,7 @@ function applyCivicDeliveryStep_(ctx, row, ix, cycle) {
   if (!entry) return false;
 
   var dials = getCivicDeliverDials_(ctx, domain);
-  var edge = civicDeliveryEdge_(baseline, civicCohortForBaseline_(civicStageCohortFor_(ctx, entry.stage3Metric.tab), baseline));
+  var edge = civicDeliveryEdge_(baseline, civicStageCohortFor_(ctx, entry.stage3Metric.tab));
   var res = civicDeliveryHoldStep_({
     stage: stage, hold: cell(ix.hold), obsCycle: Number(cycle) - 1, edge: edge,
     eligibleAfter: cell(ix.lastStageChange), margin: dials.margin,

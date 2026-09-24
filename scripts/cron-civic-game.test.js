@@ -358,12 +358,12 @@ test('T1.9: Live appendMoveLedger & moveLedgerLines write correct ledger rows to
   }
 });
 
-test('T1.10: Live validateDatawakeMoves with full INTERVENTION_CATALOG: 3 playable pass, 5 unplayable reject', () => {
+test('T1.10: Live validateDatawakeMoves with full INTERVENTION_CATALOG: 3 playable pass, 4 unplayable reject', () => {
   const office = { officeId: 'MAYOR-01', agentDir: 'civic-office-mayor', district: 'citywide' };
   const catalog = phaseContract.INTERVENTION_CATALOG;
   // housing-program off: no housing program in the sim (builder 2026-09-23).
   const playableKeys = ['health-service', 'transit-project', 'school-program'];
-  const unplayableKeys = ['safety-program', 'economic-program', 'workforce-program', 'sports-district', 'housing-program'];
+  const unplayableKeys = ['safety-program', 'economic-program', 'workforce-program', 'sports-district'];
   assert.deepStrictEqual(Object.keys(catalog).filter(k => catalog[k].playable).sort(), [...playableKeys].sort());
   assert.deepStrictEqual(Object.keys(catalog).filter(k => !catalog[k].playable).sort(), [...unplayableKeys].sort());
   // engine.255 Task 9: playable proposes need a budget inside the domain band.
@@ -796,46 +796,6 @@ test('T3.7: Live loadPetitionPool prefers ReflectionExcerpt over legacy Snippet/
 // ─────────────────────────────────────────────────────────────────────────────
 group('Group 4: T6 Petition Math');
 
-test('T6.1: Live countPetition annualizes rent burden and calculates hardship households correctly', () => {
-  const mockData = {
-    cycle: 108,
-    Neighborhood_Map: [{ Neighborhood: 'West Oakland', ChildAreas: '' }],
-    Neighborhood_Demographics: [{ Neighborhood: 'West Oakland', Students: '100', Adults: '800', Seniors: '100', Sick: '20' }],
-    Household_Ledger: [
-      { HouseholdId: 'HH-01', Neighborhood: 'West Oakland', Status: 'active', HousingType: 'rented', MonthlyRent: '1500', HouseholdIncome: '40000' },
-      { HouseholdId: 'HH-02', Neighborhood: 'West Oakland', Status: 'active', HousingType: 'rented', MonthlyRent: '800', HouseholdIncome: '50000' },
-      { HouseholdId: 'HH-03', Neighborhood: 'West Oakland', Status: 'active', HousingType: 'owned', MonthlyRent: '0', HouseholdIncome: '100000' }
-    ],
-    Hospital_Ledger: [], Crime_Metrics: [], Simulation_Ledger: [], Reflection_Intake: []
-  };
-
-  const res = civicPetitions.countPetition({ policyDomain: 'housing', hoods: ['West Oakland'] }, mockData, { hardshipBand: 0.30 });
-  assert.equal(res.counts.activeRentedHouseholds, 2);
-  assert.equal(res.counts.evaluableHouseholds, 2);
-  assert.equal(res.counts.hardshipHouseholds, 1);
-  assert.equal(res.support.cleared, false);
-  assert.equal(res.support.reason, 'domain-not-playable');
-});
-
-test('T6.2: Live countPetition tracks missing and zero income explicitly without silent drops', () => {
-  const mockData = {
-    cycle: 108,
-    Neighborhood_Map: [{ Neighborhood: 'West Oakland', ChildAreas: '' }],
-    Neighborhood_Demographics: [{ Neighborhood: 'West Oakland', Students: '100', Adults: '800', Seniors: '100', Sick: '20' }],
-    Household_Ledger: [
-      { HouseholdId: 'HH-01', Neighborhood: 'West Oakland', Status: 'active', HousingType: 'rented', MonthlyRent: '1500', HouseholdIncome: '0' },
-      { HouseholdId: 'HH-02', Neighborhood: 'West Oakland', Status: 'active', HousingType: 'rented', MonthlyRent: '1200', HouseholdIncome: '' },
-      { HouseholdId: 'HH-03', Neighborhood: 'West Oakland', Status: 'active', HousingType: 'rented', MonthlyRent: '1500', HouseholdIncome: '40000' }
-    ],
-    Hospital_Ledger: [], Crime_Metrics: [], Simulation_Ledger: [], Reflection_Intake: []
-  };
-
-  const res = civicPetitions.countPetition({ policyDomain: 'housing', hoods: ['West Oakland'] }, mockData, { hardshipBand: 0.30 });
-  assert.equal(res.counts.zeroIncomeHouseholds, 1);
-  assert.equal(res.counts.missingIncomeHouseholds, 1);
-  assert.equal(res.counts.hardshipHouseholds, 1);
-});
-
 test('T6.3: Live countPetition for health reports in-care hospital count and sick residents distinctly', () => {
   const mockData = {
     cycle: 108,
@@ -893,14 +853,15 @@ test('T6.5: Live countPetition folds child area Coliseum to East Oakland parent'
     Neighborhood_Demographics: [
       { Neighborhood: 'East Oakland', Students: '100', Adults: '800', Seniors: '100', Sick: '20' }
     ],
-    Household_Ledger: [
-      { HouseholdId: 'HH-COL-1', Neighborhood: 'Coliseum', Status: 'active', HousingType: 'rented', MonthlyRent: '1800', HouseholdIncome: '40000' }
+    Household_Ledger: [],
+    Hospital_Ledger: [
+      { POPID: 'POP-COL-1', Neighborhood: 'Coliseum', StatusNow: 'hospitalized', DischargeCycle: '', Outcome: '' }
     ],
-    Hospital_Ledger: [], Crime_Metrics: [], Simulation_Ledger: [], Reflection_Intake: []
+    Crime_Metrics: [], Simulation_Ledger: [], Reflection_Intake: []
   };
 
-  const res = civicPetitions.countPetition({ policyDomain: 'housing', hoods: ['East Oakland'] }, mockData, { hardshipBand: 0.30 });
-  assert.equal(res.counts.hardshipHouseholds, 1, 'Coliseum household counts for East Oakland petition');
+  const res = civicPetitions.countPetition({ policyDomain: 'health', hoods: ['East Oakland'] }, mockData, {});
+  assert.equal(res.counts.inCareCitizens, 1, 'Coliseum patient counts for East Oakland petition');
 });
 
 test('T6.6: Live petitionGateSweep in temp workspace: unset bands produce 0 writes; set band stages vote write', () => {
@@ -956,7 +917,7 @@ test('T6.6: Live petitionGateSweep in temp workspace: unset bands produce 0 writ
   }
 });
 
-test('T6.7: Live countPetition verifies that housing and safety return domain-not-playable and never clear', () => {
+test('T6.7: Live countPetition: safety returns domain-not-playable, housing is no domain rule, neither clears', () => {
   const mockData = {
     cycle: 108,
     Neighborhood_Map: [{ Neighborhood: 'Temescal', ChildAreas: '' }],
@@ -969,7 +930,7 @@ test('T6.7: Live countPetition verifies that housing and safety return domain-no
 
   const rHousing = civicPetitions.countPetition({ policyDomain: 'housing', hoods: ['Temescal'] }, mockData, { supportBand: 0.0001 });
   assert.equal(rHousing.support.cleared, false);
-  assert.equal(rHousing.support.reason, 'domain-not-playable');
+  assert.equal(rHousing.support.reason, 'domain-rules-deferred');
 
   const rSafety = civicPetitions.countPetition({ policyDomain: 'safety', hoods: ['Temescal'] }, mockData, { supportBand: 0.0001 });
   assert.equal(rSafety.support.cleared, false);
@@ -1329,13 +1290,13 @@ test('F7: boardNeedText uses the shared helper, preserves stalled priority and a
   assert.match(civicSlice.boardNeedText({Stage:'Standing',PolicyDomain:'health'}), /metric evidence unavailable/);
 });
 
-test('T9.255: board shows BudgetRemaining/LastDisburseCycle when the dump carries them, not-yet-stamped when it does not', () => {
+test('T9.255: board shows BudgetRemaining when the dump carries it, not-yet-stamped when it does not', () => {
   const office = { officeId: 'MAYOR-01', agentDir: 'civic-office-mayor', district: 'citywide' };
   // Pre-C109 dump shape: no budget keys at all.
   const legacyRow = { InitiativeID: 'INIT-991', Name: 'Synthetic Legacy', Status: 'proposed', VoteCycle: '', PolicyDomain: 'health' };
   // Post-arm dump shape: budget keys present.
   const stampedRow = { InitiativeID: 'INIT-992', Name: 'Synthetic Stamped', Status: 'active', VoteCycle: '100',
-    PolicyDomain: 'housing', Stage: 'Standing', ImplementationPhase: 'operational',
+    PolicyDomain: 'health', Stage: 'Standing', ImplementationPhase: 'operational',
     BudgetTotal: 28000000, BudgetRemaining: 27600000, LastDisburseCycle: 111 };
   const blankRow = { InitiativeID: 'INIT-993', Name: 'Synthetic Blank', Status: 'proposed', VoteCycle: '',
     PolicyDomain: 'economic', BudgetTotal: '', BudgetRemaining: '', LastDisburseCycle: '' };
@@ -1345,11 +1306,10 @@ test('T9.255: board shows BudgetRemaining/LastDisburseCycle when the dump carrie
   board.forEach(b => { byId[b.id] = b; });
   assert.equal(byId['INIT-991'].budget, 'budget: not yet stamped');
   assert.match(byId['INIT-992'].budget, /budget \$27,600,000 left/);
-  assert.match(byId['INIT-992'].budget, /last disbursed C111/);
   assert.match(byId['INIT-993'].budget, /no parsed budget/);
 
   const text = civicSlice.boardBlock(board);
-  assert.match(text, /INIT-992 Synthetic Stamped .*budget \$27,600,000 left, last disbursed C111/);
+  assert.match(text, /INIT-992 Synthetic Stamped .*budget \$27,600,000 left/);
   assert.match(text, /INIT-991 Synthetic Legacy .*budget: not yet stamped/);
 
   // The pack lists the domain band next to each proposable intervention.
@@ -1359,27 +1319,6 @@ test('T9.255: board shows BudgetRemaining/LastDisburseCycle when the dump carrie
   assert.match(menu.text, /transit-project \(transit\).*budget band \$20M-\$500M/);
   assert.match(menu.text, /school-program \(education\).*budget band \$1M-\$50M/);
 
-  // D3 (2026-09-23): the board reports last Cycle's tracked grants vs the
-  // off-ledger rest of the tranche (the plan's "$paid to N tracked households"
-  // promise), never presenting tracked grants as the whole disbursement.
-  assert.match(civicSlice.budgetStampText(stampedRow, { 'INIT-992|111': { n: 1, sum: 31454 } }),
-    /last disbursed C111 — \$31,454 to 1 tracked household; the rest disbursed off the tracked ledger/);
-  assert.match(civicSlice.budgetStampText(stampedRow, {}),
-    /last disbursed C111 — no tracked households qualified; the tranche disbursed off the tracked ledger/);
-
-  const ws = createTempWorkspace();
-  try {
-    ws.writeJsonl('output/beats/Household_Ledger.jsonl', [
-      { HouseholdId: 'HH-S1', LastGrantCycle: 111, LastGrantInitiativeID: 'INIT-992', LastGrantAmount: 31454 },
-      { HouseholdId: 'HH-S2', LastGrantCycle: 111, LastGrantInitiativeID: 'INIT-992', LastGrantAmount: 10000 },
-      { HouseholdId: 'HH-S3', LastGrantCycle: 108, LastGrantInitiativeID: 'INIT-992', LastGrantAmount: 999 },
-      { HouseholdId: 'HH-S4', LastGrantCycle: '', LastGrantInitiativeID: '', LastGrantAmount: '' },
-    ]);
-    const roll = civicSlice.loadGrantRollup(ws.dir);
-    assert.deepEqual(roll, { 'INIT-992|111': { n: 2, sum: 41454 }, 'INIT-992|108': { n: 1, sum: 999 } });
-  } finally {
-    ws.cleanup();
-  }
 });
 
 test('F8: Proposal condition evidence computes from countPetition and gamePromptView caps history without dropping IDs', () => {
@@ -1390,21 +1329,21 @@ test('F8: Proposal condition evidence computes from countPetition and gamePrompt
     ws.writeJson('output/engine_audit_c108.json', audit);
     ws.writeJson('output/beats/meta.json', { cycle: 108 });
     ws.writeJsonl('output/beats/Initiative_Tracker.jsonl', [
-      { InitiativeID: 'INIT-999', ProposingOffice: office.officeId, Status: 'proposed', PolicyDomain: 'housing', AffectedNeighborhoods: 'Coliseum' }
+      { InitiativeID: 'INIT-999', ProposingOffice: office.officeId, Status: 'proposed', PolicyDomain: 'health', AffectedNeighborhoods: 'Coliseum' }
     ]);
     ws.writeJsonl('output/beats/Neighborhood_Demographics.jsonl', [
       { Neighborhood: 'East Oakland', Students: 100, Adults: 200, Seniors: 50, Sick: 0 }
     ]);
-    ws.writeJsonl('output/beats/Household_Ledger.jsonl', [
-      { HouseholdId: 'HH-99901', Neighborhood: 'Coliseum', Status: 'active', HousingType: 'rented', MonthlyRent: 1200, HouseholdIncome: 24000 }
+    ws.writeJsonl('output/beats/Hospital_Ledger.jsonl', [
+      { POPID: 'POP-99901', Neighborhood: 'Coliseum', StatusNow: 'hospitalized', DischargeCycle: '', Outcome: '' }
     ]);
 
     const game = civicSlice.buildGameBlocks({ root: ws.dir, cycle: 108, office, officeMap: { offices: [] }, hoods: ['East Oakland'], audit });
     assert.strictEqual(game.conditions.available, true);
     assert.strictEqual(game.conditions.proposals.length, 1);
-    assert.strictEqual(game.conditions.proposals[0].counts.hardshipHouseholds, 1);
+    assert.strictEqual(game.conditions.proposals[0].counts.inCareCitizens, 1);
     assert.strictEqual(game.conditions.proposals[0].support.cleared, false);
-    assert.match(game.conditions.text, /domain-not-playable/);
+    assert.match(game.conditions.text, /support-band-unset/);
 
     // Verify gamePromptView caps history while preserving ID sets
     const rawEntry = { snippet: 'LONG_STRING_'.repeat(200) };
@@ -1554,14 +1493,11 @@ test('R2: Passed-over problems derive from prior displayed pack conditions + emp
     ws.writeJsonl('output/beats/Neighborhood_Demographics.jsonl', [
       { Neighborhood: 'East Oakland', Students: 100, Adults: 200, Seniors: 50, Sick: 0 }
     ]);
-    ws.writeJsonl('output/beats/Hospital_Ledger.jsonl', []);
+    const patient = { POPID: 'POP-99901', Neighborhood: 'Coliseum', StatusNow: 'hospitalized', DischargeCycle: '', Outcome: '' };
+    ws.writeJsonl('output/beats/Hospital_Ledger.jsonl', [patient]);
     ws.writeJsonl('output/beats/Crime_Metrics.jsonl', [
       { Neighborhood: 'East Oakland', ViolentLevel: 10 }
     ]);
-    const household = {
-      HouseholdId: 'HH-99901', Neighborhood: 'Coliseum', Status: 'active', HousingType: 'rented', MonthlyRent: 1200, HouseholdIncome: 24000
-    };
-    ws.writeJsonl('output/beats/Household_Ledger.jsonl', [household]);
     ws.writeJsonl('output/beats/Initiative_Tracker.jsonl', [
       { InitiativeID: 'INIT-001', ProposingOffice: office.officeId, AffectedNeighborhoods: 'Coliseum' }
     ]);
@@ -1570,7 +1506,7 @@ test('R2: Passed-over problems derive from prior displayed pack conditions + emp
     const blocks1 = civicSlice.buildGameBlocks({ root: ws.dir, cycle: 108, office, officeMap: { offices: [] }, hoods: ['East Oakland'], audit });
     assert.strictEqual(blocks1.problemContinuity.passedOver.length, 0);
     const visibleProblem = blocks1.problemContinuity.visibleProblems[0];
-    assert.strictEqual(visibleProblem.conditionKey, 'housing.hardshipHouseholds');
+    assert.strictEqual(visibleProblem.conditionKey, 'health.inCareCitizens');
 
     // C107 pack previously displayed this exact problem
     ws.writeJson('output/cron-civic/packs/COUNCIL-D5_c107.json', {
@@ -1600,9 +1536,9 @@ test('R2: Passed-over problems derive from prior displayed pack conditions + emp
     const blocks4 = civicSlice.buildGameBlocks({ root: ws.dir, cycle: 108, office, officeMap: { offices: [] }, hoods: ['East Oakland'], audit });
     assert.strictEqual(blocks4.problemContinuity.passedOver.length, 0);
 
-    // Rent drop (counter condition cleared) also resolves it
+    // Discharge (counter condition cleared) also resolves it
     ws.writeJsonl('output/cron-civic/moves/moves_c107.jsonl', []);
-    ws.writeJsonl('output/beats/Household_Ledger.jsonl', [{ ...household, MonthlyRent: 100 }]);
+    ws.writeJsonl('output/beats/Hospital_Ledger.jsonl', [{ ...patient, DischargeCycle: 107, StatusNow: 'discharged' }]);
     const blocks5 = civicSlice.buildGameBlocks({ root: ws.dir, cycle: 108, office, officeMap: { offices: [] }, hoods: ['East Oakland'], audit });
     assert.strictEqual(blocks5.problemContinuity.passedOver.length, 0);
     assert.strictEqual(blocks5.problemContinuity.problems.length, 0);

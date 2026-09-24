@@ -4,7 +4,6 @@
 // reflection-to-signature conversion. Counter field names own problem identity.
 const { countPetition, buildHoodResolver } = require('./civicPetitions');
 const CONDITIONS = {
-  housing: { hardshipHouseholds: 'rent-burden households', zeroIncomeHouseholds: 'zero-income rented households' },
   health: { inCareCitizens: 'citizens in care', sickResidents: 'sick residents' },
   safety: { aboveMedianHoods: 'hoods above city violent-level median' },
 };

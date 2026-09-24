@@ -148,18 +148,18 @@ test('F8 prompt caps narrative blocks without dropping legal IDs or mutating ful
   assert.equal(game.petitionPool.complaints.length,1000);
   assert.equal(game.interventions.text.length,5000);
 });
-test('F8 board proposals show measured condition counts without enabling housing support', () => workspace((root, write) => {
+test('F8 board proposals show measured condition counts (health)', () => workspace((root, write) => {
   const audit = {cycle:999,snapshots:{Neighborhood_Map:[{Neighborhood:'East Oakland',ChildAreas:'Coliseum'}]}};
   write('output/engine_audit_c999.json',JSON.stringify(audit));
   write('output/beats/meta.json',JSON.stringify({cycle:999}));
-  write('output/beats/Initiative_Tracker.jsonl',JSON.stringify({InitiativeID:'INIT-SYNTHETIC',ProposingOffice:office.officeId,Status:'proposed',PolicyDomain:'housing',AffectedNeighborhoods:'Coliseum'}));
+  write('output/beats/Initiative_Tracker.jsonl',JSON.stringify({InitiativeID:'INIT-SYNTHETIC',ProposingOffice:office.officeId,Status:'proposed',PolicyDomain:'health',AffectedNeighborhoods:'Coliseum'}));
   write('output/beats/Neighborhood_Demographics.jsonl',JSON.stringify({Neighborhood:'East Oakland',Students:10,Adults:20,Seniors:5,Sick:0}));
-  write('output/beats/Household_Ledger.jsonl',JSON.stringify({HouseholdId:'HH-SYNTHETIC',Neighborhood:'Coliseum',Status:'active',HousingType:'rented',MonthlyRent:1000,HouseholdIncome:20000}));
+  write('output/beats/Hospital_Ledger.jsonl', JSON.stringify({AdmissionId:'SYNTHETIC-A1',POPID:'POP-SYNTHETIC',Neighborhood:'Coliseum',StatusNow:'recovering',DischargeCycle:'',Outcome:''}));
   const game = slice.buildGameBlocks({root,cycle:999,office,officeMap:{offices:[]},hoods:['East Oakland'],audit});
   assert.equal(game.conditions.available,true);
-  assert.equal(game.conditions.proposals[0].counts.hardshipHouseholds,1);
+  assert.equal(game.conditions.proposals[0].counts.inCareCitizens,1);
   assert.equal(game.conditions.proposals[0].support.cleared,false);
-  assert.match(game.conditions.text,/domain-not-playable/);
+  assert.match(game.conditions.text,/support-band-unset/);
 }));
 test('R3 unanswered directives persist, answers bind Cycle and seat, and a second accepted answer is refused', () => workspace((root, write) => {
   const directive = (seat, text) => '## SYNTHETIC demand\n- **Agent:** `.claude/agents/'+seat+'/`\n- **Address:** '+text+'\n';
@@ -191,13 +191,13 @@ test('R2 passed-over problems require prior visible evidence and an empty closed
   write('output/beats/Neighborhood_Demographics.jsonl',JSON.stringify({Neighborhood:'East Oakland',Students:10,Adults:20,Seniors:5,Sick:0}));
   write('output/beats/Hospital_Ledger.jsonl','');
   write('output/beats/Crime_Metrics.jsonl',JSON.stringify({Neighborhood:'East Oakland',ViolentLevel:1}));
-  const home={HouseholdId:'HH-SYNTHETIC',Neighborhood:'Coliseum',Status:'active',HousingType:'rented',MonthlyRent:1000,HouseholdIncome:20000};
-  write('output/beats/Household_Ledger.jsonl',JSON.stringify(home));
+  const patient={AdmissionId:'ADM-SYNTHETIC',POPID:'POP-SYNTHETIC',Neighborhood:'Coliseum',StatusNow:'recovering',DischargeCycle:'',Outcome:''};
+  write('output/beats/Hospital_Ledger.jsonl',JSON.stringify(patient));
   write('output/beats/Initiative_Tracker.jsonl',JSON.stringify({InitiativeID:'INIT-SYNTHETIC',ProposingOffice:office.officeId,AffectedNeighborhoods:'Coliseum'}));
   const blocks=()=>slice.buildGameBlocks({root,cycle:999,office,officeMap:{offices:[]},hoods:['East Oakland'],audit});
   const first=blocks().problemContinuity;
   assert.equal(first.passedOver.length,0);
-  assert.equal(first.visibleProblems[0].conditionKey,'housing.hardshipHouseholds');
+  assert.equal(first.visibleProblems[0].conditionKey,'health.inCareCitizens');
   write('output/cron-civic/packs/COUNCIL-D5_c998.json',JSON.stringify({actor:{officeId:office.officeId,agentDir:office.agentDir},game:{board:blocks().board,problemContinuity:{cycle:998,visibleProblems:first.visibleProblems}}}));
   assert.equal(blocks().problemContinuity.passedOver.length,0); // missing ledger is not proof of inaction
   write('output/cron-civic/moves/moves_c998.jsonl','');
@@ -207,7 +207,7 @@ test('R2 passed-over problems require prior visible evidence and an empty closed
   write('output/cron-civic/moves/moves_c998.jsonl',JSON.stringify(m));
   assert.equal(blocks().problemContinuity.passedOver.length,0);
   write('output/cron-civic/moves/moves_c998.jsonl','');
-  write('output/beats/Household_Ledger.jsonl',JSON.stringify({...home,MonthlyRent:100}));
+  write('output/beats/Hospital_Ledger.jsonl',JSON.stringify({...patient,DischargeCycle:'998',StatusNow:'discharged'}));
   assert.equal(blocks().problemContinuity.passedOver.length,0);
   assert.equal(blocks().problemContinuity.problems.length,0);
 }));
@@ -215,9 +215,9 @@ test('R2 each move type addresses only evidenced hoods; pending proposals, rejec
   const {deriveProblemContinuity:derive}=require('./civicProblemContinuity');
   const data={cycle:999,Neighborhood_Map:[{Neighborhood:'East Oakland',ChildAreas:'Coliseum'},{Neighborhood:'West Oakland',ChildAreas:''}],
     Neighborhood_Demographics:['East Oakland','West Oakland'].map(Neighborhood=>({Neighborhood,Students:1,Adults:2,Seniors:1,Sick:0})),
-    Household_Ledger:[{HouseholdId:'HH-SYNTHETIC',Neighborhood:'East Oakland',Status:'active',HousingType:'rented',MonthlyRent:1000,HouseholdIncome:20000}],
-    Hospital_Ledger:[],Crime_Metrics:['East Oakland','West Oakland'].map(Neighborhood=>({Neighborhood,ViolentLevel:1}))};
-  const old={cycle:998,visibleProblems:[{hood:'East Oakland',conditionKey:'housing.hardshipHouseholds',count:1}]};
+    Hospital_Ledger:[{AdmissionId:'ADM-SYNTHETIC',POPID:'POP-SYNTHETIC',Neighborhood:'East Oakland',StatusNow:'recovering',DischargeCycle:'',Outcome:''}],
+    Crime_Metrics:['East Oakland','West Oakland'].map(Neighborhood=>({Neighborhood,ViolentLevel:1}))};
+  const old={cycle:998,visibleProblems:[{hood:'East Oakland',conditionKey:'health.inCareCitizens',count:1}]};
   const args={data,hoods:['East Oakland'],previousPacks:[{game:{problemContinuity:old}}],moves:[],
     trackerRows:[{InitiativeID:'INIT-SYNTHETIC',AffectedNeighborhoods:'Coliseum'}],
     directives:[{...confrontation,sourceText:'SYNTHETIC demand for Coliseum'}],closedLedgerCycles:new Set([998]),agentDir:office.agentDir};
@@ -234,7 +234,7 @@ test('R2 each move type addresses only evidenced hoods; pending proposals, rejec
   assert.equal(result(m('answer',{confrontationId:'CONF-999-SYNTHETIC-other',hoods:['Coliseum']})).passedOver.length,1);
   const unknown=result(m('work',{initiativeId:'INIT-SYNTHETIC'},'applied',998));
   assert.equal(unknown.available,false); // no historical board to locate this work
-  const missing=derive({...args,data:{...data,Household_Ledger:null}});
+  const missing=derive({...args,data:{...data,Hospital_Ledger:null}});
   assert.equal(missing.available,false);
   assert.match(missing.text,/readings unavailable/);
   assert(missing.text.length<=600);

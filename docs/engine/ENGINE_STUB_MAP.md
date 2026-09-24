@@ -309,17 +309,10 @@
 - **getCivicTendDials_(ctx)**
 
 - **applyInitiativeImplementationEffects_(ctx)**
-  Reads: S.absoluteCycle, S.cycleId, S.initiativeDisbursement, S.initiativeImplementationTriggers, S.initiativeNeighborhoodEffects, S.previousCycleState, S.sentiment, S.sportsZones
-  Writes: S.initiativeDisbursement, S.initiativeHealthRelief, S.initiativeImplementationEffects, S.initiativeNeighborhoodEffects, S.sentiment
+  Reads: S.absoluteCycle, S.cycleId, S.initiativeImplementationTriggers, S.initiativeNeighborhoodEffects, S.previousCycleState, S.sentiment, S.sportsZones
+  Writes: S.initiativeHealthRelief, S.initiativeImplementationEffects, S.initiativeNeighborhoodEffects, S.sentiment
   Config: ctx.config.cycleCount
   Sheets: Initiative_Tracker
-
-- **civicDomainDisburses_(domain)**
-
-- **getCivicDisburseDials_(ctx, domain)**
-
-- **buildDisbursementSlice_(ctx, pending)**
-  Reads: S.canonHoods
 
 - **findImplCol_(headers, possibleNames)**
 
@@ -1504,7 +1497,7 @@
 - **applyEngineClockHold_(ctx, row, cycle, engineWillAct, initId, iNextActionCycle, iNotes, iLastUpdated)**
 
 - **engineClockHold_(notes, nextActionCycle, cycle, engineWillAct)**
-  Sheets: Household_Ledger, Neighborhood_Demographics, Neighborhood_Map
+  Sheets: Neighborhood_Demographics, Neighborhood_Map
 
 - **missingInitiativeStageColumns_(header)**
 
@@ -1526,9 +1519,6 @@
 
 - **civicStageBaselineFrom_(input)**
 
-- **civicCohortForBaseline_(cohort, baseline)**
-  Sheets: Household_Ledger
-
 - **civicDeliveryEdge_(baseline, cohort)**
 
 - **civicDeliveryHoldStep_(input)**
@@ -1546,17 +1536,11 @@
 
 - **applyCivicStageStep_(ctx, row, ix, cycle)**
 
-- **civicHousingFlaggedCohort_(input)**
-  Sheets: Household_Ledger
-
-- **civicBaselineWithMembers_(descriptor, cohort)**
-  Sheets: Household_Ledger
-
 - **freezeCivicStageCohort_(ctx)**
   Reads: S.canonHoods, S.cycleId
   Writes: S.civicStageCohort
-  Config: ctx.config.civicHousingCohortMinFlagged, ctx.config.cycleCount
-  Sheets: Household_Ledger, Initiative_Tracker, Neighborhood_Map
+  Config: ctx.config.cycleCount
+  Sheets: Initiative_Tracker, Neighborhood_Map
 
 - **getCivicDeliverDials_(ctx, domain)**
 
@@ -1904,19 +1888,8 @@
   Sheets: Household_Ledger
 
 - **buildCitizenMoneyLookup_(ctx)**
-  Reads: S.cycleId, S.initiativeDisbursement
+  Reads: S.cycleId
   Config: ctx.config.cycleCount
-
-- **ensureHousingGrantColumns_(sheet, header)**
-  Reads: S.initiativeDisbursement
-
-- **planHousingDisbursement_(header, rows, program, cycle, hoodOf, savingsOf)**
-
-- **applyHousingDisbursement_(ctx, cycle)**
-
-- **applyHousingDisbursementBody_(ctx, cycle, out)**
-  Reads: S.canonHoods, S.initiativeDisbursement
-  Sheets: Household_Ledger, Initiative_Tracker, LifeHistory_Log
 
 - **detectHouseholdStress_(ss, households)**
 
@@ -4267,4 +4240,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 184
-**Functions mapped:** 1488
+**Functions mapped:** 1478

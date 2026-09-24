@@ -482,7 +482,6 @@ Verbatim:
 What this means for the build (engine-sheet reading, for the builder to correct):
 - No menu. A seat proposes any initiative in its own words; nothing on the proposal side rejects it for its content (SIM_DOCTRINE §13: a gate that rejects invented color is scope creep).
 - Each initiative carries a **category** (the part of life it touches — e.g. home renovation → housing) and a **reach** (hood / district / all). The category is how the engine knows what the initiative moves; the effect is the result of the initiative, never a program designed in advance.
-- The outcome must not be predictable (SIM_DOCTRINE §1–§3): the engine sets physics per category, the dice decide how it turns out, including badly.
 - Removed 2026-09-23 as not the builder's sim: the housing program (engine.251 discount, engine.255 renter grants, flagged-cohort judge, rent-burden petition count) — commits `c58a1adc`, `51ef51bf`.
 - Still standing and next to redesign against this section: the fixed `INTERVENTION_CATALOG` / `playable` gate (civic.38 Task 4 step 0) and the per-domain Delivering comparator. Open for the builder: who assigns the category (the proposing seat, the clerk, or a classifier) and what each category moves.
 

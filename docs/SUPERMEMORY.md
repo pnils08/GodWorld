@@ -865,6 +865,21 @@ Supermemory plugin is 0.1.8 (= upstream) but `docs/SUPERMEMORY.md` describes v0.
 
 ## Changelog
 
+- 2026-09-24 — Builder-direct memory plumbing restore. (1) `sl-rules` container
+  added: a MIRROR of the current rule text — `~/.claude/projects/-root-GodWorld/memory/*.md`
+  (not MEMORY.md), `docs/SIM_DOCTRINE.md` per `## ` section, `docs/adr/*.md` — one
+  doc per file/section, customId `rules-<sha1(path)>` so re-sync upserts in place;
+  deleted sources are removed. Writer: `node scripts/brainSearch.js --sync`
+  (incremental via `~/.cache/godworld/sl-rules-manifest.json`), cron 04:15 daily,
+  log `logs/sl-rules-sync.log`. Searched in `--mode hybrid` (chunks), because
+  memory-only extraction dropped rule text. Never hand-write to sl-rules.
+  (2) Plugin recall hook (`supermemory/0.1.8/hooks/recall-directive.js`, patched,
+  backup `.pre-slgodworld`) now reads sl-rules (hybrid, top 2, `[rule]`) +
+  sl-godworld + the auto repo container. (3) Stop-hook auto-save re-enabled —
+  `~/.supermemory-claude/settings.json` empty `signalKeywords` override removed;
+  saves signal turns to the auto repo container, never sl-godworld. A plugin
+  update overwrites (2): re-apply if recall stops showing `[rule]` hits.
+
 - 2026-07-27 — Task 8 truth pass. Reconciled this reference with the active
   `supermemory` v0.0.12 plugin, its four-hook posture, the neutralized Stop
   writer, and the current `super-memory`/legacy-`mags` plugin routing. Replaced

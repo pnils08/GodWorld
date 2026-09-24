@@ -460,12 +460,31 @@ Measured: [[../../output/engine-sheet/2026-09-21-matched-control-c108-c112.json]
 
 Civic game board — Task 4 steps 0–3 live PROD @116 (stages, upkeep, Delivering, losing clock; inert on blank Stage); director shifts file `work` moves; step 4 six-row conversion LIVE 2026-09-22 (bench-proven C123–C124); engine cuts complete — INIT-005 baseline stamps at the C109 fire; remaining work scripts-lane (petition band, coalitions plan)
 
-## Builder direction 2026-09-22 15:10 (engine-sheet, captured as said — not yet a build)
+## Builder direction 2026-09-22 15:10 — SUPERSEDED 2026-09-23 (engine-sheet paraphrase; the housing reading below is withdrawn — see the next section)
 
 - The engine raising rent-burden flags on its own is fine; the world may have a housing crisis. What was wrong with engine.251 was the response shape: a flat hood-wide discount no seat proposed, duplicating the initiative the world already has.
 - The West Oakland Stabilization Fund (INIT-001) is that initiative — canon: 295 families, tenants behind on rent, small owners — and it is tagged `economic`, so the engine wires it to retail and it reaches no household. Read on live: `Budget` is a display string on every row; `Number('$28M')` is 0, so the one engine reader (the veto's controversy term) has never seen a budget.
 - Direction: the crons take responsibility for the sim and play the game of advancing their districts; the original initiatives get wired, not window dressing; a budget inside the mechanism makes an initiative trackable. Initiatives with no city budget "get tricky" — the builder does not want a treasury system designed around that yet.
 - Engine-sheet's proposed shape (for the builder's calls, below in chat 2026-09-22 15:20): Budget becomes a number that depletes; a Standing row's director work disburses a tranche each Cycle onto specific flagged rows in its hoods (a household's savings, a business row, a citizen's job); the row's own engine reacts; when the budget is spent the service ends unless re-voted. Tranche and budget are the rate/severity dials. The Fund is the first wire and the template; housing's measurable is the household engine's existing stressed-household count per hood, not a hood-median-vs-city judge.
+
+## Builder direction 2026-09-23 (as said — supersedes the 2026-09-22 section; not yet a build)
+
+Verbatim:
+- "There is no housing problem in the sim and there is zero program in my sim for it."
+- "West Oaklands stabalizaton is not a housing program."
+- "Crons look at data on their slice and choose and iniative that want, it can be free cotton candy on Fridays for all I care."
+- "The core point is 'let the crons take responsibility and let them make choices'."
+- "It's a game not a sad depression story, I have a health center, and As stadium on the iniative tracker, those aren't 'iniatives' but that's the point, who fucking cares this is a sim game not a civic experiment."
+- "The tracker won't know how to apply the fix to the sim on its own, so you tried to create a menu for it … 8 templates that drive a certain effect but the specificity of it aligned with the real world Oakland lost all sense of the project."
+- "You want everything to happen in a way you can predict, I want a world that I can't predict."
+- "Nothing is gated from the crons to choose a initiative, I can see having categories for these like the inactive for example could be home renovation or something so that's a housing iniative, another category or hood or district or all, and that way housing affects would be the result of that iniative, but we don't really know what the crons will add so it's hard to say. But no that's stupid to say hey want to have an iniative? Here are the 8 they can be, that's stupid."
+
+What this means for the build (engine-sheet reading, for the builder to correct):
+- No menu. A seat proposes any initiative in its own words; nothing on the proposal side rejects it for its content (SIM_DOCTRINE §13: a gate that rejects invented color is scope creep).
+- Each initiative carries a **category** (the part of life it touches — e.g. home renovation → housing) and a **reach** (hood / district / all). The category is how the engine knows what the initiative moves; the effect is the result of the initiative, never a program designed in advance.
+- The outcome must not be predictable (SIM_DOCTRINE §1–§3): the engine sets physics per category, the dice decide how it turns out, including badly.
+- Removed 2026-09-23 as not the builder's sim: the housing program (engine.251 discount, engine.255 renter grants, flagged-cohort judge, rent-burden petition count) — commits `c58a1adc`, `51ef51bf`.
+- Still standing and next to redesign against this section: the fixed `INTERVENTION_CATALOG` / `playable` gate (civic.38 Task 4 step 0) and the per-domain Delivering comparator. Open for the builder: who assigns the category (the proposing seat, the clerk, or a classifier) and what each category moves.
 
 ## Changelog
 

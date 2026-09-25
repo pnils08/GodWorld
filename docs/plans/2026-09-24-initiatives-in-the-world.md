@@ -84,6 +84,7 @@ pointers:
 ### Job 4: A delivered initiative becomes a lasting thing — the clinic as a business
 
 - **Status:** open, design; depends on Job 3 (the clinic has to open first).
+- **Inputs from Job 3 (2026-09-25):** (a) the open is silent on the row — `applyCivicBuildOpen_` writes phase + a log line only; INIT-005 will read `operational` beside `NextScheduledAction: Drywall installation`, and `civic-project-health-center/LENS.md:115,120` still says 18–24 months / opening-2042. Job 4's on-open hook leaves one legible line (MilestoneNotes) and the office canon gets trued. (b) "and it is tended" (acceptance 3) does not bind under the ruled dials: every build (≤12) is ≤ the untended stall (12), so an unworked site opens before it can stall; tending only sets its strength at open (tend factor). Only a site stalled for another reason is held.
 - **Steps:** (1) Wiring cards: the business mint path (`applyBusinessDynamics`, Business_Ledger writers, BIZ_ID allocator) and the employment path (Employment_Roster, how citizens get hired). (2) Design the one impact shape: on open, the initiative mints its durable row (authored, not pool-drawn — top-tier seats are authored) and the existing engines take it from there (hiring, drift). Health relief stays keyed to the open phase. (3) Sim calls: the clinic's name/size/staff as a business, whether other delivered initiatives mint rows too. (4) Cut, bench, review, deploy.
 - **Verify:** acceptance 4.
 

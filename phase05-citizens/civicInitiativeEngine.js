@@ -182,7 +182,8 @@ function runCivicInitiativeEngine_(ctx) {
     policyDomain: iPolicyDomain, lastUpdated: iLastUpdated, id: iID, name: iName,
     baseline: idx('StageBaseline'), hold: idx('StageHold'), hoods: iAffectedNeighborhoods,
     priorPhase: idx('PriorPhase'),
-    opens: idx('OpensCycle'), voteCycle: iVoteCycle   // Job 3 — the build clock
+    opens: idx('OpensCycle'), voteCycle: iVoteCycle,  // Job 3 — the build clock
+    milestone: idx('MilestoneNotes')                  // Job 3 — the open is written, not silent
   };
 
   // v1.2: Required header validation to prevent silent write failures
@@ -3612,6 +3613,12 @@ function applyCivicBuildOpen_(ctx, row, ix, cycle) {
     var S = ctx.summary;
     S.initiativeEnginePhaseMoves = S.initiativeEnginePhaseMoves || {};
     S.initiativeEnginePhaseMoves[initKey] = left;
+    // The row says so in the world's words: desks, the office and the MCP read
+    // MilestoneNotes, not the phase column (engine.259 writes this cell for the fund too).
+    if (ix.milestone >= 0) {
+      var prior = String(cell(ix.milestone) == null ? '' : cell(ix.milestone)).trim();
+      row[ix.milestone] = (prior ? prior + '\n' : '') + 'C' + cycle + ': opened — construction complete, open to the public.';
+    }
     Logger.log('civicInitiativeEngine: ' + initKey + ' OPENED at C' + cycle + ' — build ran to C' + res.opensCycle + '; phase ' + left + ' -> ' + CIVIC_STANDING_PHASE_);
   }
   if (ix.lastUpdated >= 0) row[ix.lastUpdated] = ctx.now;

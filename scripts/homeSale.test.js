@@ -136,5 +136,16 @@ const ownedRow = ['HH-S1', 'POP-A', 'family', '["POP-A","POP-B"]', 'Testhood', '
   ok('HomesOwned decrements with the sale (2 − 1 = 1)', Number(hl[HL_HDR.indexOf('HomesOwned')]) === 1, String(hl[HL_HDR.indexOf('HomesOwned')]));
 }
 
+// ---- a seeded home (no purchase price): status rung, not a windfall (builder 2026-09-24) ----
+{
+  const seeded = ownedRow.map(x => x); seeded[col(HH_HEAD, 'HousingCost')] = 0;
+  const ctx = mkCtx([seeded], [person('POP-A', 100000)], 2000);
+  const price = 2000 * 12 * E.HOME_PRICE_TO_RENT;              // 528,000
+  const stressed = [{ household: { rowIndex: 2, householdId: 'HH-S1', housingType: 'owned', housingCost: 0, neighborhood: 'Testhood', members: ['POP-A'], monthlyRent: 1867, householdIncome: 100000, householdSavings: 0 }, severity: 'crisis', rentBurden: 0.6 }];
+  E.dissolveStressedHouseholds_(ctx, stressed, 109, () => 0.0);
+  const nw = ctx.ledger.rows[0][col(SL_HEAD, 'NetWorth')];
+  ok('seeded home returns the down share only (100,000 + 105,600), never the full price', nw === 100000 + Math.round(price * E.HOME_DOWN), String(nw));
+}
+
 console.log('homeSale.test.js: ' + passed + ' passed, ' + failed + ' failed');
 process.exit(failed ? 1 : 0);

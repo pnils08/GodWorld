@@ -1,6 +1,6 @@
 # Engine Stub Reverse Index
 
-**Generated:** 2026-09-23 by `scripts/stubEngine.js` (mechanical — no LLM).
+**Generated:** 2026-09-24 by `scripts/stubEngine.js` (mechanical — no LLM).
 
 **Purpose:** Cheap lookup — given an `S.*` field or sheet name, find every function that reads or writes it. Companion to `ENGINE_STUB_MAP.md` (forward: function → fields).
 
@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 184 · **Functions mapped:** 1478 · **S.* fields:** 358 · **Sheets:** 57
+**Files scanned:** 184 · **Functions mapped:** 1479 · **S.* fields:** 358 · **Sheets:** 57
 
 ## S.* / ctx.summary reverse index
 
@@ -199,7 +199,7 @@
 | `S.holidayNeighborhood` | `phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_` | `phase02-world-state/calendarStorySeeds.js::applySeasonalStorySeeds_`, `phase05-citizens/applyNamedCitizenSpotlight.js::applyNamedCitizenSpotlights_`, `phase05-citizens/runNeighborhoodEngine.js::runNeighborhoodEngine_`, `phase05-citizens/runRelationshipEngine.js::runRelationshipEngine_`, `phase06-analysis/filterNoiseEvents.js::filterNoiseEvents_`, `phase06-analysis/prioritizeEvents.js::prioritizeEvents_`, …(+2 more) | 1 | 8 |
 | `S.holidayPriority` | `phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_`, `phase08-v3-chicago/v3preLoader.js::v3PreloadContext_` | `phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_`, `phase01-config/godWorldEngine2.js::updateWorldPopulation_`, `phase02-world-state/applyCityDynamics.js::applyCityDynamics_`, `phase02-world-state/applySeasonWeights.js::applySeasonalWeights_`, `phase02-world-state/applyWeatherModel.js::applyWeatherModel_`, `phase02-world-state/calendarChaosWeights.js::applyChaosCategoryWeights_`, …(+56 more) | 2 | 62 |
 | `S.homesPurchasedByLine` | `phase05-citizens/generationalWealthEngine.js::trackHomeOwnership_` | `phase05-citizens/generationalWealthEngine.js::trackWealthMobility_`, `phase05-citizens/generationalWealthEngine.js::updateHeritage_` | 1 | 2 |
-| `S.homesSoldByLine` | `phase05-citizens/generationalWealthEngine.js::sellHouseholdHome_` | `phase05-citizens/generationalWealthEngine.js::sellHouseholdHome_`, `phase05-citizens/generationalWealthEngine.js::trackHomeOwnership_`, `phase05-citizens/generationalWealthEngine.js::updateHeritage_` | 1 | 3 |
+| `S.homesSoldByLine` | `phase05-citizens/generationalWealthEngine.js::sellHouseholdHome_` | `phase05-citizens/generationalWealthEngine.js::homeSaleProceeds_`, `phase05-citizens/generationalWealthEngine.js::sellHouseholdHome_`, `phase05-citizens/generationalWealthEngine.js::updateHeritage_` | 1 | 3 |
 | `S.hoodBusinessMomentum` | `phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_` | `phase08-v3-chicago/v3NeighborhoodWriter.js::hoodBusinessCity_`, `phase08-v3-chicago/v3NeighborhoodWriter.js::hoodBusinessFactor_`, `phase08-v3-chicago/v3NeighborhoodWriter.js::hoodCharacterCity_` | 1 | 3 |
 | `S.hoodEmployerDepth` | `phase02-world-state/commuteFlowEngine.js::buildCommuteFlows_` | `phase03-population/updateNeighborhoodDemographics.js::buildHoodEmploymentWeights_`, `phase08-v3-chicago/v3NeighborhoodWriter.js::hoodCharacterCity_`, `phase08-v3-chicago/v3NeighborhoodWriter.js::hoodRetailRaw_` | 1 | 3 |
 | `S.hoodFloorWaveCount` | `phase05-citizens/checkForPromotions.js::checkForPromotions_` | _(none)_ | 1 | 0 |
@@ -259,7 +259,7 @@
 | `S.neighborhoodMigration` | `phase06-analysis/applyMigrationDrift.js::applyMigrationDrift_` | `phase06-analysis/applyMigrationDrift.js::renderMigrationBrief_`, `phase07-evening-media/applyStorySeeds.js::applyStorySeeds_`, `phase08-v3-chicago/v3NeighborhoodWriter.js::saveV3NeighborhoodMap_`, `phase10-persistence/buildCyclePacket.js::buildCyclePacket_` | 1 | 4 |
 | `S.neighborhoodPresence` | `phase08-v3-chicago/v3preLoader.js::v3PreloadContext_` | `phase08-v3-chicago/v3preLoader.js::v3PreloadContext_` | 1 | 1 |
 | `S.neighborhoodPulse` | `utilities/neighborhoodPulseMap.js::recordPulse_` | `phase04-events/chaosCarsEngine.js::flushBusinessFold_`, `phase07-evening-media/applyStorySeeds.js::applyStorySeeds_`, `phase08-v3-chicago/v3NeighborhoodWriter.js::saveV3NeighborhoodMap_`, `utilities/neighborhoodPulseMap.js::pulseForEvent_`, `utilities/neighborhoodPulseMap.js::recordPulse_`, `utilities/neighborhoodPulseMap.test.js::check` | 1 | 6 |
-| `S.neighborhoodState` | `phase02-world-state/loadNeighborhoodState.js::loadNeighborhoodState_` | `phase01-config/engine94SheetContract.js::ensureEngine221Config_`, `phase02-world-state/applyCityDynamics.js::applyCityDynamics_`, `phase02-world-state/loadNeighborhoodState.js::loadNeighborhoodState_`, `phase03-population/generateCrisisBuckets.js::generateCrisisBuckets_`, `phase03-population/generateCrisisSpikes.js::crisisHoodWeight_`, `phase03-population/updateCrimeMetrics.js::updateCrimeMetrics_Phase3_`, …(+40 more) | 1 | 46 |
+| `S.neighborhoodState` | `phase02-world-state/loadNeighborhoodState.js::loadNeighborhoodState_` | `phase01-config/engine94SheetContract.js::ensureEngine221Config_`, `phase02-world-state/applyCityDynamics.js::applyCityDynamics_`, `phase02-world-state/loadNeighborhoodState.js::loadNeighborhoodState_`, `phase03-population/generateCrisisBuckets.js::generateCrisisBuckets_`, `phase03-population/generateCrisisSpikes.js::crisisHoodWeight_`, `phase03-population/updateCrimeMetrics.js::updateCrimeMetrics_Phase3_`, …(+41 more) | 1 | 47 |
 | `S.neighborhoodStateCount` | `phase02-world-state/loadNeighborhoodState.js::loadNeighborhoodState_` | _(none)_ | 1 | 0 |
 | `S.neighborhoodTrajectory` | `phase05-citizens/neighborhoodTrajectoryEngine.js::updateNeighborhoodTrajectories_` | `phase05-citizens/migrationTrackingEngine.js::buildRelocationHoodState_`, `phase05-citizens/neighborhoodTrajectoryEngine.js::updateNeighborhoodTrajectories_` | 1 | 2 |
 | `S.neighborhoodWeather` | `phase02-world-state/applyWeatherModel.js::applyWeatherModel_` | `phase02-world-state/applyCityDynamics.js::applyCityDynamics_`, `phase02-world-state/applyWeatherModel.js::applyWeatherModel_`, `phase02-world-state/applyWeatherModel.js::getNeighborhoodTemp_`, `phase04-events/generateGenericCitizenMicroEvent.js::generateGenericCitizenMicroEvents_`, `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_` | 1 | 5 |

@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-09-23 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-09-24 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -1814,10 +1814,13 @@
 - **homeCarries_(mortgageMonthly, householdIncome)**
 
 - **trackHomeOwnership_(ss, ctx, cycle)**
-  Reads: S.homesSoldByLine, S.storyHooks
+  Reads: S.neighborhoodState, S.storyHooks
   Writes: S.homesPurchasedByLine, S.storyHooks
   Sheets: Household_Ledger
   RNG: ctx.rng / safeRand_(ctx)
+
+- **homeSaleProceeds_(st, household)**
+  Reads: S.homesSoldByLine
 
 - **sellHouseholdHome_(ctx, household, memberPopIds, cycle, opts)**
   Reads: S.heritage, S.homesSoldByLine, S.neighborhoodState, S.storyHooks
@@ -4240,4 +4243,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 184
-**Functions mapped:** 1478
+**Functions mapped:** 1479

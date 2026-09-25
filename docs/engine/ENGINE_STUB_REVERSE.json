@@ -1,8 +1,8 @@
 {
-  "generated": "2026-09-23",
+  "generated": "2026-09-24",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 184,
-  "functionsMapped": 1478,
+  "functionsMapped": 1479,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -880,6 +880,7 @@
         "phase05-citizens/generationalWealthEngine.js::processBankRate_",
         "phase05-citizens/generationalWealthEngine.js::processMoneyLoop_",
         "phase05-citizens/generationalWealthEngine.js::sellHouseholdHome_",
+        "phase05-citizens/generationalWealthEngine.js::trackHomeOwnership_",
         "phase05-citizens/generationalWealthEngine.js::trackWealthMobility_",
         "phase05-citizens/householdFormationEngine.js::estimateRent_",
         "phase05-citizens/migrationTrackingEngine.js::processMigrationEvents_",
@@ -3460,8 +3461,8 @@
         "phase05-citizens/generationalWealthEngine.js::sellHouseholdHome_"
       ],
       "readers": [
+        "phase05-citizens/generationalWealthEngine.js::homeSaleProceeds_",
         "phase05-citizens/generationalWealthEngine.js::sellHouseholdHome_",
-        "phase05-citizens/generationalWealthEngine.js::trackHomeOwnership_",
         "phase05-citizens/generationalWealthEngine.js::updateHeritage_"
       ]
     },

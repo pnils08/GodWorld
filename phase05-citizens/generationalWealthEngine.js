@@ -1794,6 +1794,26 @@ function trackHomeOwnership_(ss, ctx, cycle) {
 }
 
 
+// ── the sale price and what the members keep (builder 2026-09-24) ─────────
+// A house is a status rung, not a wealth store: the sim keeps no home value,
+// no loan balance, and never deducts a payment. So a sale returns only what
+// the sim itself put in — the market price less the financed share of the
+// purchase price. A home the sim never paid for (seeded 'owned', no
+// HousingCost) returns the same HOME_DOWN share a purchase would have staked,
+// never the full price. Real mortgages are a later build (the debt ratio).
+// st: the hood's S.neighborhoodState entry (or null). Shared by the sale and
+// the owner-move plan so the two can never price a house differently.
+function homeSaleProceeds_(st, household) {
+  var med = st ? (Number(st.medianRent) || 0) : 0;
+  var cost = Number(household.housingCost) || 0;
+  var price = med > 0 ? Math.round(med * 12 * HOME_PRICE_TO_RENT) : cost;
+  var proceeds = cost > 0
+    ? Math.max(0, Math.round(price - cost * (1 - HOME_DOWN)))
+    : Math.round(price * HOME_DOWN);
+  return { price: price, proceeds: proceeds };
+}
+
+
 // ── the sale (2026-09-23, kimi — Mike-direct) ──────────────────────────────
 // Ownership was write-only: every exit destroyed the home's value silently.
 // The sale mirrors the purchase: the hood's CURRENT market prices the house
@@ -1804,16 +1824,14 @@ function trackHomeOwnership_(ss, ctx, cycle) {
 // can take the equity to zero (doctrine §3). Adults carry the [Home] line;
 // minors share the money, not the sentence (engine.144 loop 3). Publishes
 // S.homesSoldByLine so Step 7 decrements HomesOwned the same cycle. Called
-// today by the stress dissolution in householdFormationEngine; a voluntary
-// sale is a policy door of its own and is not built here.
+// by the stress dissolution in householdFormationEngine and by the owner
+// move (executeOwnerMove_). Price and proceeds: homeSaleProceeds_.
 function sellHouseholdHome_(ctx, household, memberPopIds, cycle, opts) {
   opts = opts || {};
   var hood = String(household.neighborhood || '').trim();
   var st = ctx && ctx.summary && ctx.summary.neighborhoodState ? ctx.summary.neighborhoodState[hood] : null;
-  var med = st ? (Number(st.medianRent) || 0) : 0;
-  var cost = Number(household.housingCost) || 0;
-  var price = med > 0 ? Math.round(med * 12 * HOME_PRICE_TO_RENT) : cost;
-  var proceeds = Math.max(0, Math.round(price - cost * (1 - HOME_DOWN)));
+  var sale = homeSaleProceeds_(st, household);
+  var price = sale.price, proceeds = sale.proceeds;
   var header = ctx.ledger && ctx.ledger.headers ? ctx.ledger.headers : [];
   var rows = ctx.ledger && ctx.ledger.rows ? ctx.ledger.rows : [];
   var iPop = header.indexOf('POPID'), iNW = header.indexOf('NetWorth'), iStat = header.indexOf('Status'),
@@ -1920,10 +1938,8 @@ function planOwnerMove_(ctx, household, memberRows, unitIncome, destHood) {
   var nw = 0;
   for (var m = 0; m < memberRows.length; m++) nw += Number(String(memberRows[m][iNW]).replace(/[$,\s]/g, '')) || 0;
   var st = ctx.summary && ctx.summary.neighborhoodState ? ctx.summary.neighborhoodState[String(household.neighborhood || '').trim()] : null;
-  var med = st ? (Number(st.medianRent) || 0) : 0;
-  var cost = Number(household.housingCost) || 0;
-  var salePrice = med > 0 ? Math.round(med * 12 * HOME_PRICE_TO_RENT) : cost;
-  var proceeds = Math.max(0, Math.round(salePrice - cost * (1 - HOME_DOWN)));
+  var sale = homeSaleProceeds_(st, household);
+  var salePrice = sale.price, proceeds = sale.proceeds;
   var destRent = homeMarketRent_(ctx, destHood, 0);
   if (!(destRent > 0)) return null; // unpriced destination: no market to buy or rent in
   var price = Math.round(destRent * 12 * HOME_PRICE_TO_RENT);

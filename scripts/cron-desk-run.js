@@ -2706,7 +2706,22 @@ async function runWrite(assign) {
   } else if (pass) {
     const bylineUsage = await recordBylineUsage(cycle, byline, base);   // engine.88: author earns byline-landed
     log('byline-landed: ' + (bylineUsage.recorded ? 'recorded for ' + byline.name : 'skipped — ' + bylineUsage.reason));
-    fs.writeFileSync(path.join(STAGED, base + '.staged.json'), JSON.stringify({
+    // S492 fix: the sidecar used to sit at a FIXED base+'.staged.json' path
+    // while its own .md got a uniqueDest suffix on collision — so a desk
+    // that files more than once per cycle (Nia draining her UNDOCKED backlog
+    // one pilot per day is the confirmed case) had every earlier day's
+    // sidecar overwritten in place. The .md survived under a suffixed name;
+    // its Citizen_Media_Usage credit did not, because cron-saturday-run's
+    // stepSheets reads sidecars, not markdown. Naming the sidecar off
+    // destPath's own (possibly suffixed) basename keeps the two files paired
+    // 1:1, so every gate-passed filing survives to Saturday, not just
+    // whichever one last held the plain name. Confirmed empirically: c105's
+    // Marcus Walker (POP-00962) filing staged clean and correctly-attributed
+    // (undocked_..._staged-2321.md) but left no sidecar once Sep 4's Dane
+    // re-filing overwrote undocked_..._staged.json; his UsageCount stayed
+    // blank despite the interview and draft both being real.
+    const sidecarPath = path.join(STAGED, path.basename(destPath).replace(/\.md$/, '.json'));
+    fs.writeFileSync(sidecarPath, JSON.stringify({
       status: 'staged', desk, cycle, persona: personaSlug, byline: byline ? byline.name : null, bylinePopid: byline ? byline.popid : null,
       article: path.relative(ROOT, destPath),
       bylineUsage,
@@ -2891,7 +2906,9 @@ async function runWake() {
   } else if (pass) {
     const bylineUsage = await recordBylineUsage(cycle, byline, base);   // engine.88: author earns byline-landed
     log('byline-landed: ' + (bylineUsage.recorded ? 'recorded for ' + byline.name : 'skipped — ' + bylineUsage.reason));
-    fs.writeFileSync(path.join(STAGED, base + '.staged.json'), JSON.stringify({
+    // S492 fix — same sidecar/destPath pairing bug as runWrite above.
+    const sidecarPath = path.join(STAGED, path.basename(destPath).replace(/\.md$/, '.json'));
+    fs.writeFileSync(sidecarPath, JSON.stringify({
       status: 'staged', desk: DESK, cycle, byline: byline ? byline.name : null, bylinePopid: byline ? byline.popid : null,
       article: path.relative(ROOT, destPath),
       bylineUsage,

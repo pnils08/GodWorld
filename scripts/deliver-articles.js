@@ -49,8 +49,10 @@ function parseStem(base) {
 }
 
 function bylineFor(file, fallbackPersona) {
-  // staged sidecar carries the byline; flagged drafts fall back to the persona slug
-  const sidecar = file.replace(/\.staged(-\d{3,4})?\.md$/, '.staged.json');
+  // staged sidecar carries the byline; flagged drafts fall back to the persona slug.
+  // S492: the sidecar is now suffix-paired with its .md (was a fixed name that
+  // got overwritten by a desk's later same-cycle filing) — swap extension only.
+  const sidecar = file.replace(/\.md$/, '.json');
   try {
     const side = JSON.parse(fs.readFileSync(sidecar, 'utf8'));
     if (side.byline) return side.byline;

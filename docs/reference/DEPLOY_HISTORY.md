@@ -129,6 +129,10 @@ pointers:
 
 ## PROD deploy log — full trail
 
+### PROD @127 — housing program removed + engine.258d status-rung sale (2026-09-24 ~22:45 Chicago, engine-sheet; bench 0908 @104 C113 + @105 C114)
+
+**LANDED.** Isolated `git archive 02a50b75` stage; 3 engine commits vs @126 (`c58a1adc`, `51ef51bf`, `02a50b75`); 170 pushed, pull-back 169/169 js byte-identical, 0 test files live. Web app `AKfycbwUvd4…` @113 → **@114**. agy review of the removal: CLEAN PASS. 258d: a home the sim never paid for (seeded owned, HousingCost 0 — 126 of 189 live) returns HOME_DOWN × price on sale, not full price; shared `homeSaleProceeds_`. **Bench C114:** `ok` 161s, 0 new Engine_Errors, owned 131→135 (cost-0 62→60), 4 trade-ups to Piedmont Ave incl. HH-KEANE (seeded) — bought on own NetWorth.
+
 ### PROD @124 — engine.255 Task 8: the engine.251 discount code removed (2026-09-22 ~21:35 Chicago, engine-sheet; bench C114 on 0908 @99)
 
 Engine tree `bb15f9c9`; 6 payload files vs @123 (`householdFormationEngine.js`: relief writer, four relief columns, net-rent helpers and the `loadHouseholds_` relief fields gone; `migrationTrackingEngine.js`: the move writer stamps the destination lease plainly, G-EC70's owned-row refusal stays; `generationalWealthEngine.js`: gross-lease pricing and the purchase-time relief clear gone; `applyInitiativeImplementationEffects.js`: `S.initiativeHousingRelief`, `buildHousingReliefSlice_`, `getCivicHousingDials_` gone; `civicInitiativeEngine.js`: one stale comment; `engine94SheetContract.js`: the three discount seeds retired, the margin note re-worded). `scripts/civicHousingRelief.test.js` retired; sweep 260/260. 170 live files, 0 test files. Isolated stage, sandbox id grep-absent; pull-back 169/169 js byte-identical. Script version **111**, web app read back **@111**. **Live World_Config rows 136–138 (`civicHousingReliefEnabled`, `civicHousingReliefRate`, `civicHousingCohortMinRenters`) deleted the same minute and read back (136 rows; `civicDeliverMargin_housing` 0.15 kept).**

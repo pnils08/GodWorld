@@ -34,6 +34,13 @@ given model can silently no-op and still look complete in chat; measured
 2026-09-22 model bake-off in `docs/MODEL_HIERARCHY.md` §4).
 
 ## Queue (next jobs)
+- Dead `interventionIssue()`, `scripts/civicInterventionValidation.js:6` — no live
+  caller since Job 2 (`7bd7e7d6`; grep: only its own module.exports and an
+  unused import at `scripts/cron-civic-game.test.js:44`). Delete the function and
+  drop it from `module.exports` (keep categoryIssue/budgetIssue/reachHoods), and
+  delete the import line in the test. Keep the `POLICY_DOMAINS`/`LIFECYCLE`
+  requires only if still referenced after the delete. Two files — run as two
+  one-shots or name both files on one command line.
 - Dead `checkDatawakeMove()`, `scripts/civicMustDecide.js:184` — no live caller
   (grep confirmed: only its own test file + the module.exports list). Reads
   `rec.action`, a field civic.38 Task 1 retired (every datawake rec now

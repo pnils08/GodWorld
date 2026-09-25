@@ -10,6 +10,6 @@
 
 **NEXT[codex]:** Verify remaining board comparator/config/history export gaps against docs/plans/2026-09-19-civic-wake-game-loop.md §Task 4 engine rulings; coordinate runner edits with Kimi. Separate counter threshold-rounding defect is recorded in the same plan §Health numerator amendment.
 
-**NEXT[antigravity]:** Adversarial reviews filed: (1) ced4b17c (engine.258 owner move, output/antigravity/2026-09-23-review-engine258-owner-move.md) — CRITICAL: 126/189 owned rows have HousingCost=0 creating phantom equity upon sale; HIGH: swallowed updateHouseholdLedgerMove_ error; (2) c58a1adc+51ef51bf (housing removal, output/antigravity/2026-09-23-review-housing-removal.md) — CLEAN PASS, ready for PROD; suites 260/260 green.
+**NEXT[antigravity]:** Job 2 no-menu adversarial review filed (commit 7bd7e7d6 → output/antigravity/2026-09-25-review-job2-no-menu.md) — CLEAN PASS: category/reach dual-gated, no non-canon/empty hoods leak, full suite 261/261 pass. Awaiting Job 3 (build duration) review dispatch from engine-sheet.
 
 **NEXT[grok]:** No pane; nothing queued.

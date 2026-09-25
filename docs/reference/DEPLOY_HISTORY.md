@@ -129,6 +129,10 @@ pointers:
 
 ## PROD deploy log — full trail
 
+### PROD @128 — engine.259: the fund moves (2026-09-24 ~23:45 Chicago, engine-sheet; bench 0908 @106 C115)
+
+**LANDED.** Isolated `git archive 578c2237` stage; 1 engine commit vs @127; 170 pushed, pull-back 169/169 js byte-identical, 0 test files live. Web app `AKfycbwUvd4…` @114 → **@115**. **Bench C115:** `ok` 152s, 0 new Engine_Errors; dials `civicDisburseTranche` / `civicGrantCapMonths` / `civicGrantHeadroomMonths` self-armed; INIT-001 (economic, disbursement-active, tend 0.85) 28,000,000 → **27,660,000**, `LastDisburseCycle` 115 — as predicted; one grant $36,262 to HH-0113-F008 (Habiba Ward, West Oakland, rented), LifeHistory `Relief` line, receipt columns armed. **Live seed pending:** INIT-001 `BudgetRemaining` 23,800,000 + `LastDisburseCycle` 90 (kimi, Mike-direct 2026-09-23) — the live write was refused by the auto-mode classifier; builder's hand, before the C110 fire.
+
 ### PROD @127 — housing program removed + engine.258d status-rung sale (2026-09-24 ~22:45 Chicago, engine-sheet; bench 0908 @104 C113 + @105 C114)
 
 **LANDED.** Isolated `git archive 02a50b75` stage; 3 engine commits vs @126 (`c58a1adc`, `51ef51bf`, `02a50b75`); 170 pushed, pull-back 169/169 js byte-identical, 0 test files live. Web app `AKfycbwUvd4…` @113 → **@114**. agy review of the removal: CLEAN PASS. 258d: a home the sim never paid for (seeded owned, HousingCost 0 — 126 of 189 live) returns HOME_DOWN × price on sale, not full price; shared `homeSaleProceeds_`. **Bench C114:** `ok` 161s, 0 new Engine_Errors, owned 131→135 (cost-0 62→60), 4 trade-ups to Piedmont Ave incl. HH-KEANE (seeded) — bought on own NetWorth.

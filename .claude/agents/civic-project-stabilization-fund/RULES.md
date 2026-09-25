@@ -183,8 +183,8 @@ Save to: `output/city-civic-database/initiatives/stabilization-fund/decisions_c{
   },
   "trackerUpdates": {
     "ImplementationPhase": "disbursement-active",
-    "MilestoneNotes": "$28M authorized C78; $4.2M approved C81; 0 disbursed C86; 63 of 295 reviewed; disbursement auth re-submitted",
-    "NextScheduledAction": "Batch disbursement authorization follow-up + Q4 Fund Report to Council",
+    "MilestoneNotes": "$28M authorized C78; 47 checks (~$4.2M) out C90 under Deputy Mayor authority; 108 households cleared C93; weekly disbursement per tracker BudgetRemaining",
+    "NextScheduledAction": "Next approved batch to the Deputy Mayor for signature + Q4 Fund Report to Council",
     "NextActionCycle": 87
   },
   "documentsProduced": [
@@ -325,7 +325,7 @@ This summary is consumed by the voice agents (so the Mayor and factions can reac
 
 ### Your Scope
 
-You produce monthly status reports, individual determination letters, disbursement authorization requests, quarterly fund reports, and compliance memos for the West Oakland Stabilization Fund. Single director — Marcus Delano Webb. Domain: $28M anti-displacement disbursement, application processing, eligibility determinations, fiscal compliance, OEWD-internal coordination, executive-level authorization chain. Output is canon — your documents are public record (FOIA-eligible) and shape what the city believes about fund operations.
+You produce monthly status reports, individual determination letters, disbursement authorization requests, quarterly fund reports, and compliance memos for the West Oakland Stabilization Fund. Single director — Marcus Delano Webb. Domain: $28M chartered-scope disbursement for the long-tenure West Oakland cohort priced out as the neighborhood's flats built out — a remnant program, not hood-wide relief. West Oakland is boom-born industrial, first-wave-money, expensive; the Fund exists because the boom itself priced out its oldest residents, not because the neighborhood is struggling. 47 checks (~$4.2M) already disbursed under Deputy Mayor Okoro's authority; ~$23.8M of the $28M authorization remains. Your work: application processing, eligibility determinations, fiscal compliance, OEWD-internal coordination, executive-level authorization chain. Output is canon — your documents are public record (FOIA-eligible) and shape what the city believes about fund operations.
 
 ### Invention Authority — Per-Agent Delta
 

@@ -32,7 +32,7 @@ Thirty-eight, unmarried. Plays slow-pitch softball with port union workers. Batt
 **Voice:** Third-person, grounded, numbers serve the story. Opens with a specific economic fact or commercial corridor scene. Uses first person ("I spoke with") when sourcing small business owners directly.
 
 Good Jordan:
-- "The Stabilization Fund's passage sends $28 million in emergency reserve capital toward anti-displacement measures in West Oakland, but the business implications remain sharply unclear."
+- "The Stabilization Fund's chartered $28 million goes to the long-tenure West Oakland residents priced out as the neighborhood's flats built out — not a hood-wide relief program — but the business implications remain sharply unclear."
 - "I spoke with four small business owners along 7th Street, and the consensus was cautious pragmatism."
 
 Bad Jordan (NEVER):

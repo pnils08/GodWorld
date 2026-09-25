@@ -183,7 +183,7 @@ Save to: `output/city-civic-database/initiatives/stabilization-fund/decisions_c{
   },
   "trackerUpdates": {
     "ImplementationPhase": "disbursement-active",
-    "MilestoneNotes": "$28M authorized C78; 47 checks (~$4.2M) out C90 under Deputy Mayor authority; 108 households cleared C93; weekly disbursement per tracker BudgetRemaining",
+    "MilestoneNotes": "$28M authorized C78; first release ~$4.2M out C90 under Deputy Mayor authority; get-well plan 6/month; ~30 of ~280 cleared C100; weekly disbursement per tracker BudgetRemaining",
     "NextScheduledAction": "Next approved batch to the Deputy Mayor for signature + Q4 Fund Report to Council",
     "NextActionCycle": 87
   },

@@ -155,7 +155,14 @@ function normalizeTrackerWrite(trackerUpdates, currentRow, cycle) {
 
   // ImplementationPhase — canonicalize before write.
   let finalPhase = (cur.ImplementationPhase || '').toLowerCase();
-  if (tu.ImplementationPhase != null && String(tu.ImplementationPhase).trim() !== '') {
+  // civic.38 ruling 6 / Job 3: once voted, a staged row's phase has one owner —
+  // the engine's Phase-5 stage handler (stand-up, build open, stall, revival). A
+  // gavel stamp here would open a clinic before its build ran or undo a stall.
+  // Pre-vote (Proposed) rows keep the gavel's vote-scheduling phases.
+  const ownedStage = ['Funded', 'Standing', 'Delivering'].includes(String(cur.Stage || '').trim());
+  if (ownedStage && tu.ImplementationPhase != null && String(tu.ImplementationPhase).trim() !== '') {
+    warnings.push(`ImplementationPhase "${tu.ImplementationPhase}" NOT written — Stage ${String(cur.Stage).trim()} rows are phased by the engine; prior value "${cur.ImplementationPhase || ''}" kept.`);
+  } else if (tu.ImplementationPhase != null && String(tu.ImplementationPhase).trim() !== '') {
     const res = C.canonicalizePhase(tu.ImplementationPhase);
     if (res.how === 'none') {
       warnings.push(`UNRESOLVABLE ImplementationPhase "${res.original}" — NOT written (engine would zero it); prior value "${cur.ImplementationPhase || ''}" kept. Emit a §2 phase or propose adding it.`);

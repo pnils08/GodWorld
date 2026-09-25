@@ -132,6 +132,10 @@ function runCivicInitiativeEngine_(ctx) {
   if (data.length >= 1 && ensureInitiativeBudgetColumns_(sheet, data[0])) {
     data = sheet.getDataRange().getValues();
   }
+  // Initiatives in the World Job 3: the build clock column, same self-arm class.
+  if (data.length >= 1 && ensureInitiativeBuildColumns_(sheet, data[0])) {
+    data = sheet.getDataRange().getValues();
+  }
   if (data.length >= 2 && backfillInitiativeBudgets_(sheet, data[0], data.slice(1)).changed > 0) {
     data = sheet.getDataRange().getValues();
   }
@@ -177,7 +181,8 @@ function runCivicInitiativeEngine_(ctx) {
     status: iStatus, mayoralAction: iMayoralAction, phase: iImplementationPhase,
     policyDomain: iPolicyDomain, lastUpdated: iLastUpdated, id: iID, name: iName,
     baseline: idx('StageBaseline'), hold: idx('StageHold'), hoods: iAffectedNeighborhoods,
-    priorPhase: idx('PriorPhase')
+    priorPhase: idx('PriorPhase'),
+    opens: idx('OpensCycle'), voteCycle: iVoteCycle   // Job 3 — the build clock
   };
 
   // v1.2: Required header validation to prevent silent write failures
@@ -3107,6 +3112,24 @@ function ensureInitiativeBudgetColumns_(sheet, header) {
   return true;
 }
 
+// Initiatives in the World Job 3 — OpensCycle: the Cycle a construction row opens.
+// Engine-written at stand-up (or stamped once on a legacy build); a hand edit moves
+// the opening. Mirror: lib BUILD_COLUMNS.
+var INITIATIVE_BUILD_COLUMNS_ = ['OpensCycle'];
+
+/** Append a missing OpensCycle column. Same contract as ensureInitiativeStageColumns_. */
+function ensureInitiativeBuildColumns_(sheet, header) {
+  var have = header || [];
+  var missing = INITIATIVE_BUILD_COLUMNS_.filter(function (c) { return have.indexOf(c) === -1; });
+  if (!missing.length) return false;
+  var lastCol = sheet.getLastColumn();
+  var short = (lastCol + missing.length) - sheet.getMaxColumns();
+  if (short > 0) sheet.insertColumnsAfter(sheet.getMaxColumns(), short);
+  sheet.getRange(1, lastCol + 1, 1, missing.length).setValues([missing]);
+  Logger.log('civicInitiativeEngine: Job 3 appended build columns to Initiative_Tracker — ' + missing.join(', '));
+  return true;
+}
+
 /**
  * Pure planner for the back-fill: given the header and the data rows, return
  * the BudgetTotal / BudgetRemaining vectors to write and how many rows changed.
@@ -3199,6 +3222,17 @@ function civicStageRequirementWith_(catalogByDomain, input) {
     return out;
   }
   if (stage === 'Standing') {
+    // Job 3: a site under construction treats nobody and is judged on nothing
+    // until it opens; the untended clock still runs on it.
+    if (phase === 'construction-planning' || phase === 'construction-active') {
+      var opens = Number(inp.opensCycle);
+      out.blocked = 'building';
+      out.moveThatClears = 'work';
+      out.text = isFinite(opens) && opens >= 1
+        ? 'Standing — under construction; opens at C' + opens + ' if work keeps landing'
+        : 'Standing — under construction; the engine sets its opening at the next Cycle';
+      return out;
+    }
     var entry = catalogByDomain[String(inp.policyDomain == null ? '' : inp.policyDomain).trim().toLowerCase()];
     if (!entry || entry.playable !== true) {
       out.blocked = 'no-delivering-gate';
@@ -3467,6 +3501,27 @@ function civicReviveDecision_(input) {
  */
 var CIVIC_STANDING_PHASE_ = 'operational';
 
+// Initiatives in the World Job 3 (builder 2026-09-25): a built thing takes time.
+// A build category stands up as a construction site and opens on the calendar;
+// every other category opens at stand-up, as before. Weeks per category are the
+// World_Config dials civicBuildCycles_<domain> (seeded by ensureEngine213Config_).
+var CIVIC_BUILD_PHASE_ = 'construction-active';
+var CIVIC_BUILD_DOMAINS_ = ['health', 'education', 'transit', 'sports', 'environment'];
+var CIVIC_CONSTRUCTION_PHASES_ = ['construction-planning', 'construction-active'];
+
+/** Weeks a domain takes to build; 0 for a no-build domain. Fail-loud on a missing dial. */
+function getCivicBuildCycles_(ctx, domain) {
+  var d = String(domain == null ? '' : domain).trim().toLowerCase();
+  if (CIVIC_BUILD_DOMAINS_.indexOf(d) < 0) return 0;
+  var key = 'civicBuildCycles_' + d;
+  var raw = ctx && ctx.config ? ctx.config[key] : undefined;
+  var value = Number(raw);
+  if (raw === '' || raw === null || raw === undefined || !isFinite(value) || value < 0 || value > 52) {
+    throw new Error('civic build clock: invalid or missing World_Config.' + key);
+  }
+  return Math.floor(value);
+}
+
 function civicStageStep_(st) {
   var stage = String(st.stage == null ? '' : st.stage).trim();
   if (!stage) return null;
@@ -3489,9 +3544,78 @@ function civicStageStep_(st) {
     // A row funded THIS fire cannot also stand up this fire: the work that clears
     // it lands through the Sunday gate, after the fire.
     if (Number(st.lastStageChangeCycle) >= cycle) return null;
+    // Job 3: a build category stands up as a site and opens `build` Cycles later.
+    var build = Number(st.buildCycles);
+    if (isFinite(build) && build > 0) {
+      return { stage: 'Standing', lastStageChangeCycle: cycle, phase: CIVIC_BUILD_PHASE_, opensCycle: cycle + Math.floor(build), from: 'Funded' };
+    }
     return { stage: 'Standing', lastStageChangeCycle: cycle, phase: CIVIC_STANDING_PHASE_, from: 'Funded' };
   }
   return null;
+}
+
+/**
+ * Job 3 — the build clock on a Standing construction row. Pure.
+ *   st { stage, status, mayoralAction, phase, opensCycle, voteCycle, lastStageChangeCycle, buildCycles, cycle }
+ * Returns null (nothing to do) or { opensCycle, stamp, open }:
+ *   stamp — OpensCycle was blank and is written now. A legacy row that was already
+ *           building (INIT-005, construction-active since its C80 vote) counts its
+ *           build from VoteCycle (builder 2026-09-25), else from LastStageChangeCycle.
+ *   open  — the build has run its time: phase -> operational. A stalled row is not
+ *           in a construction phase, so an untended build never opens; its revival
+ *           restores the construction phase and the clock it already had.
+ */
+function civicBuildOpenStep_(st) {
+  if (String(st.stage == null ? '' : st.stage).trim() !== 'Standing') return null;
+  var status = String(st.status == null ? '' : st.status).trim().toLowerCase();
+  var voted = status === 'override-passed' ||
+    (status === 'passed' && String(st.mayoralAction == null ? '' : st.mayoralAction).trim().toLowerCase() === 'signed');
+  if (!voted) return null;
+  var phase = String(st.phase == null ? '' : st.phase).trim().toLowerCase();
+  if (CIVIC_CONSTRUCTION_PHASES_.indexOf(phase) < 0) return null;
+  var cycle = Number(st.cycle);
+  if (!isFinite(cycle) || cycle < 1) return null;
+  var opens = Number(st.opensCycle);
+  var stamp = false;
+  if (String(st.opensCycle == null ? '' : st.opensCycle).trim() === '' || !isFinite(opens) || opens < 1) {
+    var start = Number(st.voteCycle);
+    if (!isFinite(start) || start < 1) start = Number(st.lastStageChangeCycle);
+    if (!isFinite(start) || start < 1) return null;
+    var build = Number(st.buildCycles);
+    opens = start + (isFinite(build) && build > 0 ? Math.floor(build) : 0);
+    stamp = true;
+  }
+  return { opensCycle: opens, stamp: stamp, open: cycle >= opens };
+}
+
+/** Apply civicBuildOpenStep_ to one tracker row IN PLACE; carries the left phase like a stand-up. */
+function applyCivicBuildOpen_(ctx, row, ix, cycle) {
+  if (!(ix.opens >= 0) || !(ix.phase >= 0)) return false;
+  var cell = function (i) { return i >= 0 ? row[i] : ''; };
+  var phase = String(cell(ix.phase) || '').trim().toLowerCase();
+  if (CIVIC_CONSTRUCTION_PHASES_.indexOf(phase) < 0) return false;
+  var res = civicBuildOpenStep_({
+    stage: cell(ix.stage), status: cell(ix.status), mayoralAction: cell(ix.mayoralAction),
+    phase: phase, opensCycle: cell(ix.opens), voteCycle: cell(ix.voteCycle),
+    lastStageChangeCycle: cell(ix.lastStageChange),
+    buildCycles: getCivicBuildCycles_(ctx, cell(ix.policyDomain)), cycle: cycle
+  });
+  if (!res || (!res.stamp && !res.open)) return false;
+  var initKey = String(cell(ix.id) || '').trim() || String(cell(ix.name) || '').trim();
+  if (res.stamp) {
+    row[ix.opens] = res.opensCycle;
+    Logger.log('civicInitiativeEngine: ' + initKey + ' build clock stamped — opens at C' + res.opensCycle);
+  }
+  if (res.open) {
+    var left = String(cell(ix.phase) || '').trim();
+    row[ix.phase] = CIVIC_STANDING_PHASE_;
+    var S = ctx.summary;
+    S.initiativeEnginePhaseMoves = S.initiativeEnginePhaseMoves || {};
+    S.initiativeEnginePhaseMoves[initKey] = left;
+    Logger.log('civicInitiativeEngine: ' + initKey + ' OPENED at C' + cycle + ' — build ran to C' + res.opensCycle + '; phase ' + left + ' -> ' + CIVIC_STANDING_PHASE_);
+  }
+  if (ix.lastUpdated >= 0) row[ix.lastUpdated] = ctx.now;
+  return true;
 }
 
 /**
@@ -3508,12 +3632,16 @@ function civicStageStep_(st) {
 function applyCivicStageMove_(ctx, row, ix, cycle) {
   if (!ix || ix.stage < 0 || ix.lastStageChange < 0) return false;
   var cell = function (i) { return i >= 0 ? row[i] : ''; };
+  var funded = String(cell(ix.stage) == null ? '' : cell(ix.stage)).trim() === 'Funded';
   var step = civicStageStep_({
     stage: cell(ix.stage), status: cell(ix.status), mayoralAction: cell(ix.mayoralAction),
     phase: cell(ix.phase), policyDomain: cell(ix.policyDomain),
-    lastWorkCycle: cell(ix.lastWork), lastStageChangeCycle: cell(ix.lastStageChange), cycle: cycle
+    lastWorkCycle: cell(ix.lastWork), lastStageChangeCycle: cell(ix.lastStageChange), cycle: cycle,
+    // Job 3: without the OpensCycle column a build could never open — stand up open.
+    buildCycles: funded && ix.opens >= 0 ? getCivicBuildCycles_(ctx, cell(ix.policyDomain)) : 0
   });
   if (!step) return false;
+  if (step.opensCycle && ix.opens >= 0) row[ix.opens] = step.opensCycle;
   // Keyed EXACTLY as both readers key it: trimmed InitiativeID, else trimmed Name
   // (applyInitiativeImplementationEffects.js, updateCivicApprovalRatings.js). An
   // untrimmed Name fallback missed the carry and lost the advancement (codex F3).
@@ -3534,7 +3662,7 @@ function applyCivicStageMove_(ctx, row, ix, cycle) {
   }
   if (ix.lastUpdated >= 0) row[ix.lastUpdated] = ctx.now;
   Logger.log('civicInitiativeEngine: ' + initKey + ' stage ' + step.from + ' -> ' + step.stage +
-             (step.phase ? ' (phase -> ' + step.phase + ')' : '') + ' at C' + cycle);
+             (step.phase ? ' (phase -> ' + step.phase + ')' : '') + (step.opensCycle ? ', opens at C' + step.opensCycle : '') + ' at C' + cycle);
   return true;
 }
 
@@ -3555,6 +3683,7 @@ function applyCivicStageStep_(ctx, row, ix, cycle) {
   // last, on the post-move row — a row never stalls the fire it changed stage.
   var changed = applyCivicRevival_(ctx, row, ix, cycle);
   if (applyCivicStageMove_(ctx, row, ix, cycle)) changed = true;
+  if (applyCivicBuildOpen_(ctx, row, ix, cycle)) changed = true;
   if (applyCivicStageBaseline_(ctx, row, ix)) changed = true;
   if (applyCivicDeliveryStep_(ctx, row, ix, cycle)) changed = true;
   if (applyCivicStallEntry_(ctx, row, ix, cycle)) changed = true;

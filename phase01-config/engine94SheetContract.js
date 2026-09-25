@@ -156,6 +156,14 @@ var ENGINE213_CONFIG_SEEDS = [
   // Standing or Delivering — inert while every Stage is blank.
   ['civicTendGraceCycles', 6, 'civic.38 Task 4 upkeep: Cycles a Standing/Delivering initiative holds full strength after its last work move or stage change (builder-ruled 6)', 0, 52, true],
   ['civicTendDecayPerCycle', 0.15, 'civic.38 Task 4 upkeep: share of full strength lost per Cycle untended past the grace, linear (builder-ruled 0.15 — floor reached 5 Cycles past grace)', 0, 1, false],
+  // Initiatives in the World Job 3 (builder-ruled 2026-09-25): weeks a built thing
+  // takes from stand-up to open, by PolicyDomain. Economic, workforce and safety have
+  // no key — they open at stand-up. 0 opens at stand-up too. Read by getCivicBuildCycles_.
+  ['civicBuildCycles_health', 8, 'Job 3: weeks a health initiative (clinic) builds before it opens and starts treating people (builder-ruled 8)', 0, 52, true],
+  ['civicBuildCycles_education', 8, 'Job 3: weeks a school initiative builds before it opens (builder-ruled 8)', 0, 52, true],
+  ['civicBuildCycles_transit', 10, 'Job 3: weeks a transit initiative (station, line) builds before it opens (builder-ruled 10)', 0, 52, true],
+  ['civicBuildCycles_sports', 12, 'Job 3: weeks a sports initiative (stadium, rec) builds before it opens (builder-ruled 12)', 0, 52, true],
+  ['civicBuildCycles_environment', 6, 'Job 3: weeks a parks/environment initiative builds before it opens (builder-ruled 6)', 0, 52, true],
   ['civicTendFloor', 0.3, 'civic.38 Task 4 upkeep: the least a neglected service pays, as a share of full strength (builder-ruled 0.3); one work move restores it', 0, 1, false],
   // engine.259 (builder 2026-09-24: "the fund should move"): a Standing/Delivering
   // fund in `disbursement-active` spends a tranche every Cycle — mostly off-ledger

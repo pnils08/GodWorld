@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-09-24 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-09-25 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -1514,6 +1514,8 @@
 
 - **ensureInitiativeBudgetColumns_(sheet, header)**
 
+- **ensureInitiativeBuildColumns_(sheet, header)**
+
 - **planInitiativeBudgetBackfill_(header, rows)**
 
 - **backfillInitiativeBudgets_(sheet, header, rows)**
@@ -1532,8 +1534,15 @@
 
 - **civicReviveDecision_(input)**
 
+- **getCivicBuildCycles_(ctx, domain)**
+
 - **civicStageStep_(st)**
+
+- **civicBuildOpenStep_(st)**
+
+- **applyCivicBuildOpen_(ctx, row, ix, cycle)**
   Reads: S.initiativeEnginePhaseMoves, S.initiativePhases
+  Writes: S.initiativeEnginePhaseMoves
 
 - **applyCivicStageMove_(ctx, row, ix, cycle)**
   Reads: S.initiativeEnginePhaseMoves
@@ -4259,4 +4268,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 184
-**Functions mapped:** 1485
+**Functions mapped:** 1489

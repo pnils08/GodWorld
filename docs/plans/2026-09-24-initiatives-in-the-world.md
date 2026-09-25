@@ -73,7 +73,10 @@ pointers:
 
 ### Job 3: Time on the tracker — build duration
 
-- **Status:** open, design.
+- **Status:** in progress 2026-09-25 (engine-sheet).
+- **Found (2026-09-25):** Funded → Standing writes phase `operational` (`civicStageStep_`), so a funded clinic opens the week after its first work — zero build. INIT-005 is Standing at `construction-active` since C80 and nothing can move a staged row out of construction (T7 yields on staged rows; relief is gated off construction phases) — the clinic can never open (§15). Its Standing gate would still judge Sick against baseline during the build (noise can flip Delivering). The Sunday gavel (`normalizeTrackerWrite`) stamps `ImplementationPhase` on any row, bypassing civic.38 ruling 6 (a staged row's phase has one owner — the Phase-5 handler).
+- **Builder rulings (2026-09-25):** (a) build time by category — health 8, education 8, transit 10, sports 12, environment 6 weeks; economic, workforce, safety open right away; each a World_Config dial. (b) INIT-005 counts its build from C80 — already past its build time, opens at the next fire while tended.
+- **Mechanism (engine-sheet):** column `OpensCycle`. Funded → Standing on a build category writes `construction-active` + `OpensCycle = cycle + build`; a no-build category writes `operational` as today. Standing + construction phase + `cycle ≥ OpensCycle` + not stalled → `operational` (left phase carried in `S.initiativeEnginePhaseMoves`). A Standing construction row with blank `OpensCycle` (legacy) stamps it from `VoteCycle`. The Standing gate reads `blocked: 'building'` ("opens at C{N}") so no delivery is judged during a build. The gavel may no longer stamp a phase on a Funded/Standing/Delivering row.
 - **What exists (do not rebuild):** Funded clock 5, untended clock 12, upkeep decay 6/0.15/0.3, Delivering hold 3 — all count neglect or proof. Nothing says how long a thing takes to build.
 - **Steps:** (1) Design a duration on the row (e.g. a Cycles-to-open count set when the row stands up in a construction phase) and the transition construction → open when it elapses and the row is tended. (2) Sim calls: the health center's build time; whether durations come from the seat, the budget size, or the category. (3) Cut, bench (INIT-005 fixture), review, deploy.
 - **Verify:** acceptance 3.

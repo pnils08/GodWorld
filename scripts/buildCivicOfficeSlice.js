@@ -800,7 +800,7 @@ function boardStageView(row, context) {
     const { stageRequirement } = require('../lib/initiativePhaseContract');
     if (typeof stageRequirement !== 'function') throw new Error('Task 4 shared helper unavailable');
     const input = { stage:row.Stage, phase:row.ImplementationPhase, policyDomain:row.PolicyDomain,
-      lastWorkCycle:row.LastWorkCycle, lastStageChangeCycle:row.LastStageChangeCycle };
+      lastWorkCycle:row.LastWorkCycle, lastStageChangeCycle:row.LastStageChangeCycle, opensCycle:row.OpensCycle };
     requirement = stageRequirement(input);
     if (requirement && requirement.next === 'Delivering' && !requirement.blocked) {
       metricEvidence = require('./civicStageEvidence').measureStageMovement(row, context);

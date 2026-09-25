@@ -1,8 +1,8 @@
 {
-  "generated": "2026-09-24",
+  "generated": "2026-09-25",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 184,
-  "functionsMapped": 1485,
+  "functionsMapped": 1489,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -3292,11 +3292,12 @@
     },
     "initiativeEnginePhaseMoves": {
       "writers": [
+        "phase05-citizens/civicInitiativeEngine.js::applyCivicBuildOpen_",
         "phase05-citizens/civicInitiativeEngine.js::applyCivicStageMove_"
       ],
       "readers": [
+        "phase05-citizens/civicInitiativeEngine.js::applyCivicBuildOpen_",
         "phase05-citizens/civicInitiativeEngine.js::applyCivicStageMove_",
-        "phase05-citizens/civicInitiativeEngine.js::civicStageStep_",
         "phase09-digest/finalizeCycleState.js::finalizeCycleState_"
       ]
     },
@@ -3305,7 +3306,7 @@
         "phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_"
       ],
       "readers": [
-        "phase05-citizens/civicInitiativeEngine.js::civicStageStep_",
+        "phase05-citizens/civicInitiativeEngine.js::applyCivicBuildOpen_",
         "phase09-digest/finalizeCycleState.js::finalizeCycleState_"
       ]
     },

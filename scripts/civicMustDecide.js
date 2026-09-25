@@ -181,17 +181,6 @@ function isVagueCivicReply(text) {
   return VAGUE_CIVIC.test(String(text || ''));
 }
 
-function checkDatawakeMove(rec, demandInSlice) {
-  const statement = rec && rec.statement;
-  const action = rec && rec.action;
-  if (!statement || !String(statement).trim()) return { ok: false, reason: 'empty-statement' };
-  if (isVagueCivicReply(statement) || isVagueCivicReply(action)) return { ok: false, reason: 'vague-nothing' };
-  if (demandInSlice && (!action || String(action).trim().toLowerCase() === 'null')) {
-    return { ok: false, reason: 'no-action' };
-  }
-  return { ok: true };
-}
-
 function contractAddendum(demands) {
   if (!demands || !demands.length) return '';
   const lines = demands.map(d =>
@@ -221,6 +210,5 @@ module.exports = {
   contractAddendum,
   vacantOfficesFromApprovals,
   isMayorVacant,
-  isVagueCivicReply,
-  checkDatawakeMove
+  isVagueCivicReply
 };

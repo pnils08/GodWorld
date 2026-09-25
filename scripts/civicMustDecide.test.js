@@ -81,13 +81,5 @@ assert.strictEqual(require('./civicMustDecide').vacantOfficesFromApprovals(appro
 
 assert.strictEqual(require('./civicMustDecide').isVagueCivicReply('nothing is happening on the hub this week'), true);
 assert.strictEqual(require('./civicMustDecide').isVagueCivicReply('I pulled the TIF packet and told Ashford we vote or we stall it'), false);
-assert.strictEqual(require('./civicMustDecide').checkDatawakeMove({
-  statement: 'We continue to monitor the situation.',
-  action: null
-}, true).ok, false);
-assert.strictEqual(require('./civicMustDecide').checkDatawakeMove({
-  statement: 'I sent the mobilization request to the clerk this morning.',
-  action: 'file the mobilization request'
-}, true).ok, true);
 
 console.log('civicMustDecide.test.js PASS');

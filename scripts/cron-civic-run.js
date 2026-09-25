@@ -2491,17 +2491,6 @@ function callVoteEligibility(initId, office, ctx) {
   return null;
 }
 
-// The intervention catalog lives in lib/initiativePhaseContract.js (Task 4
-// step 0, engine-sheet's file). Until it lands, propose is unvalidatable and
-// every propose is refused loudly — never validated against a local copy
-// (mechanism decision 5: one catalog, shared, so scripts and engine can't drift).
-function loadInterventionCatalog() {
-  try {
-    const c = require('../lib/initiativePhaseContract').INTERVENTION_CATALOG;
-    return c && typeof c === 'object' && Object.keys(c).length ? c : null;
-  } catch (_) { return null; }
-}
-
 // Hood authority: council seats are district-bound (child areas fold to
 // parents first — an intersect test would let one local hood carry in
 // unauthorized ones); citywide seats (mayor, police chief) may name any
@@ -2522,7 +2511,7 @@ function hoodAuthorityReason(office, hoodRaw, childToParent) {
   return null;
 }
 
-// Validate one wake's moves. ctx: { office, boardIds:Set, catalog,
+// Validate one wake's moves. ctx: { office, boardIds:Set,
 // childToParent }. Returns { accepted:[{type,payload}], rejected:[{move,reason}] }.
 // Every move type is consequential — the first valid one stands, the rest are
 // rejected on their own lines (plan Task 1 step 1).
@@ -3147,7 +3136,6 @@ async function runDatawake() {
       const mv = validateDatawakeMoves(j.moves, {
         office,
         boardIds: new Set((pack.game && pack.game.boardIds) || []),
-        catalog: loadInterventionCatalog(),
         childToParent: pack.game && pack.game.geographyIssue ? {} : childToParentFromAudit(audit),
         geographyIssue: pack.game && pack.game.geographyIssue,
         cycle: Number(cycle),
@@ -3662,7 +3650,7 @@ if (require.main === module) {
 
 module.exports = { modelChainFor, FALLBACK_MODELS, sentimentWord, crimeWord, retailWord, ailmentPerception, cleanLines, parseApprovalTable, parseHoodTable, outputContract, datawakeUserPrompt, datawakeStatementText, districtPackRef, weekCarryBlock, spliceWeekCarry, loadWeekCarry, hearingHasPhase, noPhaseCheck, prepTargetDirForHood, validateVoiceJson, ungroundedNumbers, statementNumberCheck, composeChecks,
   // civic.38 Task 1 — closed move set (exported for scripts/cron-civic-game.test.js)
-  MOVE_TYPES, validateDatawakeMoves, loadInterventionCatalog, hoodAuthorityReason, appendMoveLedger, moveLedgerLines, datawakeRecord,
+  MOVE_TYPES, validateDatawakeMoves, hoodAuthorityReason, appendMoveLedger, moveLedgerLines, datawakeRecord,
   // civic.38 Task 2 — move ledger fold (Sunday close)
   loadMoveLedgerFolded, foldMovesIntoDecisions, slugForInitiative,
   // civic.38 Task 6.3 — petition sweep

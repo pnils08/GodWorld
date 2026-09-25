@@ -398,9 +398,9 @@ test('one per row per week — a second filing is refused', () => {
   assert.ok(/^call-vote-already-filed-this-week/.test(r), r);
 });
 
-test('the hatch never opens on a not-playable domain (safety)', () => {
+test('Job 2: a safety row (no Delivering lever) is callable to a vote — never stuck at Proposed', () => {
   const r = callVoteEligibility('INIT-009', MAYOR, cvCtx(MAYOR));
-  assert.ok(/^call-vote-not-a-deferred-domain/.test(r) && /domain-not-playable/.test(r), r);
+  assert.strictEqual(r, null, r);
 });
 
 test('the hatch never opens where the band mechanism exists (health, band unset)', () => {
@@ -472,8 +472,8 @@ test('callVoteSweep skips a row the world already moved past', () => {
 });
 
 test('callVoteSweep skips when the counter no longer says domain-rules-deferred', () => {
-  const root = mkCallVoteRoot([CV_ROWS[2]]); // INIT-009 safety → domain-not-playable
-  const move = { ...CV_MOVE, payload: { initiativeId: 'INIT-009' } };
+  const root = mkCallVoteRoot([CV_ROWS[3]]); // INIT-010 health, band unset → support-band-unset, not deferred
+  const move = { ...CV_MOVE, payload: { initiativeId: 'INIT-010' } };
   fs.mkdirSync(path.join(root, 'output', 'cron-civic', 'moves'), { recursive: true });
   fs.writeFileSync(path.join(root, 'output', 'cron-civic', 'moves', 'moves_c' + CYCLE + '.jsonl'), JSON.stringify(move) + '\n');
   const out = callVoteSweep(root, CYCLE);

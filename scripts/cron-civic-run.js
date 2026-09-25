@@ -2444,8 +2444,8 @@ function trackerBeatRows(root) {
 // NO petition rule — the counter reports domain-rules-deferred — can be sent
 // to next cycle's vote by the mayor, or by the district seat whose district
 // holds one of the row's hoods. One per row per week. It can never bypass a
-// real band (a banded domain reports cleared/blocked, not deferred) and never
-// touches an unplayable one (housing/safety report domain-not-playable).
+// real band (a banded domain reports cleared/blocked, not deferred). Since
+// Job 2 every non-health domain, safety included, is deferred.
 // Returns null when eligible, else the rejection reason.
 function callVoteEligibility(initId, office, ctx) {
   const row = (ctx.trackerRows || []).find(r => String(r.InitiativeID || '') === initId);
@@ -2793,9 +2793,9 @@ function foldMovesIntoDecisions(root, cycle, officeMap) {
 // TABLE prints every Sunday regardless. A row only moves to a vote when its
 // count clears the domain's support band — and the band is builder-set
 // (SUPPORT_BANDS below; unset = counts print, nothing gates). Per the
-// research-build reconciliation (e1314bd7) housing and safety NEVER clear
-// here — the counter returns domain-not-playable until their engine levers
-// exist. The seat never schedules its own vote.
+// research-build reconciliation (e1314bd7) only health clears by count;
+// every other domain (safety included, since Job 2) is domain-rules-deferred
+// and reaches a vote by call-vote. The seat never schedules its own vote.
 // ---------------------------------------------------------------------------
 
 // Builder-tunable: share of affected-hood population that sends a proposal to

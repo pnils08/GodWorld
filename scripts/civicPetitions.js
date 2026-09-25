@@ -8,7 +8,8 @@
  * countPetition({ policyDomain, hoods }, data, { hardshipBand, supportBand, sinceCycle })
  * data: cycle + tab-named row arrays; Neighborhood_Map is sheet-sourced.
  * support.cleared is an observation for the Sunday gate, NEVER a vote/write.
- * Housing/safety cannot clear; health requires an explicit population-share band.
+ * Only health clears by count (explicit population-share band); every other
+ * domain is domain-rules-deferred — no signature rule, callable to a vote.
  * No extrapolation from tracked households/citizens to untracked signatures.
  *
  * node scripts/civicPetitions.js --dry-run
@@ -209,8 +210,12 @@ function countPetition(proposal, data, options = {}) {
   }
   const requiredCount = supportBand != null && population.value > 0 ? Math.ceil(population.value * supportBand) : null;
   let reason = 'eligible';
-  if (domain === 'safety') reason = 'domain-not-playable';
-  else if (domain !== 'health') reason = 'domain-rules-deferred';
+  // Job 2 (builder 2026-09-25): a category with no Delivering lever still runs.
+  // Safety has no signature rule, so like every non-health domain it is
+  // deferred — callable to a vote — and its Crime_Metrics hood conditions stay
+  // on the record as evidence. `domain-not-playable` here left a seat-proposed
+  // safety row with no path to a vote (a gate that could never open, §15).
+  if (domain !== 'health') reason = 'domain-rules-deferred';
   else if (supportBand == null) reason = 'support-band-unset';
   else if (!(population.value > 0)) reason = 'population-incomplete';
   else if (numerator == null) reason = 'condition-incomplete';

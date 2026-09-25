@@ -853,7 +853,7 @@ test('T6.4: Live countPetition for safety reports hood-aggregate condition and c
   assert.equal(res.counts.aboveMedianHoods, 1);
   assert.equal(res.support.unit, 'hood-condition-not-signatures');
   assert.equal(res.support.cleared, false);
-  assert.equal(res.support.reason, 'domain-not-playable');
+  assert.equal(res.support.reason, 'domain-rules-deferred', 'Job 2: safety has no signature rule — deferred, callable to a vote');
 });
 
 test('T6.5: Live countPetition folds child area Coliseum to East Oakland parent', () => {
@@ -929,7 +929,7 @@ test('T6.6: Live petitionGateSweep in temp workspace: unset bands produce 0 writ
   }
 });
 
-test('T6.7: Live countPetition: safety returns domain-not-playable, housing is no domain rule, neither clears', () => {
+test('T6.7: Live countPetition: safety and housing have no signature rule (deferred), neither clears by count', () => {
   const mockData = {
     cycle: 108,
     Neighborhood_Map: [{ Neighborhood: 'Temescal', ChildAreas: '' }],
@@ -946,7 +946,7 @@ test('T6.7: Live countPetition: safety returns domain-not-playable, housing is n
 
   const rSafety = civicPetitions.countPetition({ policyDomain: 'safety', hoods: ['Temescal'] }, mockData, { supportBand: 0.0001 });
   assert.equal(rSafety.support.cleared, false);
-  assert.equal(rSafety.support.reason, 'domain-not-playable');
+  assert.equal(rSafety.support.reason, 'domain-rules-deferred');
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -1276,11 +1276,14 @@ test('F7: boardNeedText uses the shared helper, preserves stalled priority and a
   }
   const proposedRow = { Status: 'proposed', VoteCycle: '', PolicyDomain: 'health' };
   assert.match(civicSlice.boardNeedText(proposedRow), /petition-pending — signatures move it to a vote/);
-  // A domain with no petition rule (not health/housing/safety) must not tell
+  // A domain with no petition rule (anything but health) must not tell
   // the agent signatures move it — call-vote is the only path (adversarial
   // review of 51fdee28, Finding 5, fixed 2026-09-22).
   const deferredDomainRow = { Status: 'proposed', VoteCycle: '', PolicyDomain: 'transit' };
   assert.match(civicSlice.boardNeedText(deferredDomainRow), /petition-pending — no signature rule; eligible for call-vote/);
+  // Job 2: safety joined deferred — the board must send seats to call-vote, not signatures
+  // (safety never cleared by count; the old text promised a path that did not exist).
+  assert.match(civicSlice.boardNeedText({ Status: 'proposed', VoteCycle: '', PolicyDomain: 'safety' }), /petition-pending — no signature rule; eligible for call-vote/);
   const fundedRow = {Stage:'Funded',ImplementationPhase:'announced',LastWorkCycle:108,LastStageChangeCycle:108};
   assert.match(civicSlice.boardNeedText(fundedRow), /work landed/);
   assert.match(civicSlice.boardNeedText({...fundedRow,LastWorkCycle:107}), /one work move/);

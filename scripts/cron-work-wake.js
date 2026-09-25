@@ -159,6 +159,11 @@ const NODE_BUILDERS = {
       `Your project: ${row.Name} (${row.InitiativeID}).`,
       `It is in ${row.ImplementationPhase || '—'}${row.Stage ? ', stage ' + row.Stage : ''} (status ${row.Status || '—'}).`,
     ];
+    // Job 3 — the same state line the seat board shows (lib stageRequirement):
+    // a site says when it opens, an open service says what it has to move. The
+    // director's own schedule notes below are theirs; this line is the city's.
+    const state = require('./initiativeTrackerSnapshot').stageState(row);
+    if (state) lines.push('Where it stands: ' + state + '.');
     if (row.MilestoneNotes) lines.push('Latest milestone: ' + cap(row.MilestoneNotes, 180));
     if (row.NextScheduledAction) lines.push('Next on the books: ' + cap(row.NextScheduledAction, 120) + (row.NextActionCycle ? ' (cycle ' + row.NextActionCycle + ').' : '.'));
     return cap(lines.join('\n'), 600);

@@ -1070,11 +1070,58 @@ test('T9.2: Live initiative-project node builder in cron-work-wake.js renders wi
     assert.match(rendered, /Next on the books: Review quarterly disbursement intake \(cycle 109\)\./);
     assert(rendered.length <= 600, 'initiative-project block must be <= 600 characters');
 
+    // Job 3: a director reads the board's state line — a site says when it opens
+    ws.writeJsonl('Initiative_Tracker.jsonl', [{ InitiativeID: 'INIT-005', Name: 'Temescal Community Health Center',
+      ImplementationPhase: 'construction-active', Stage: 'Standing', Status: 'passed', PolicyDomain: 'health', OpensCycle: '119',
+      MilestoneNotes: 'MEP rough-ins completed', NextScheduledAction: 'Drywall installation', NextActionCycle: '109' }]);
+    const site = builder({ initiative: 'INIT-005' }, 110, ws.dir);
+    assert.match(site, /Where it stands: Standing — under construction; opens at C119/);
+    assert(site.indexOf('Where it stands') < site.indexOf('Latest milestone'), 'the city\'s state line comes before the office notes, so the 600-char cap never cuts it');
+    ws.writeJsonl('Initiative_Tracker.jsonl', [{ InitiativeID: 'INIT-005', Name: 'Temescal Community Health Center',
+      ImplementationPhase: 'operational', Stage: 'Standing', Status: 'passed', PolicyDomain: 'health', OpensCycle: '88' }]);
+    assert.match(builder({ initiative: 'INIT-005' }, 110, ws.dir), /Where it stands: Standing — delivers when Sick moves down/);
+
     // Missing row
     const missing = builder({ initiative: 'INIT-999' }, 108, ws.dir);
     assert.strictEqual(missing, null);
   } finally {
     ws.cleanup();
+  }
+});
+
+// Async checks: the harness is synchronous, so an async body is collected here and
+// awaited before the summary — never counted until it has actually settled.
+const asyncChecks = [];
+function testAsync(name, fn) {
+  asyncChecks.push(Promise.resolve().then(fn).then(
+    () => { console.log(`  ok   ${name}`); totalPassed++; },
+    (err) => { console.error(`  FAIL ${name}`); console.error(`       ${err.message}`); totalFailed++; failures.push({ name, error: err }); }));
+}
+
+testAsync('Tracker refresh: the hourly tick rewrites both tracker copies from the live tab, never ahead of the cycle dump', async () => {
+  const snap = require('./initiativeTrackerSnapshot');
+  const os = require('os');
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'trk-'));
+  try {
+    fs.mkdirSync(path.join(root, 'output', 'beats'), { recursive: true });
+    fs.writeFileSync(path.join(root, 'output', 'beats', 'meta.json'), JSON.stringify({ cycle: 109 }));
+    fs.writeFileSync(path.join(root, 'output', 'beats', 'Initiative_Tracker.jsonl'), '{"InitiativeID":"OLD"}\n');
+    const live = [{ InitiativeID: 'INIT-005', Name: 'Temescal Community Health Center', Status: 'passed', PolicyDomain: 'health',
+      ImplementationPhase: 'operational', Stage: 'Standing', OpensCycle: 88, LastWorkCycle: 109, BudgetRemaining: '' }];
+    const sheets = { getSheetAsObjects: async (tab) => { assert.strictEqual(tab, 'Initiative_Tracker'); return live; } };
+    const held = await snap.refreshFromLive({ cycle: 110, root, sheets });
+    assert.strictEqual(held.refreshed, false, 'post-fire, pre-dump: left alone');
+    assert.match(fs.readFileSync(path.join(root, 'output', 'beats', 'Initiative_Tracker.jsonl'), 'utf8'), /OLD/);
+    const r = await snap.refreshFromLive({ cycle: 109, root, sheets });
+    assert.strictEqual(r.refreshed, true);
+    assert.strictEqual(JSON.parse(fs.readFileSync(path.join(root, 'output', 'beats', 'Initiative_Tracker.jsonl'), 'utf8').trim()).OpensCycle, 88);
+    const j = JSON.parse(fs.readFileSync(path.join(root, 'output', 'initiative_tracker.json'), 'utf8'));
+    const i5 = j.initiatives[0];
+    assert(i5.stage === 'Standing' && i5.opensCycle === 88 && i5.lastWorkCycle === 109 && i5.budgetRemaining === null, 'initiative_tracker.json carries the stage fields');
+    assert.match(i5.state, /delivers when Sick moves down/);
+    assert.strictEqual(JSON.parse(fs.readFileSync(path.join(root, 'output', 'beats', 'meta.json'), 'utf8')).cycle, 109, 'meta is the cycle dump\'s — the refresh never restamps it');
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
   }
 });
 
@@ -1817,6 +1864,7 @@ test('T9.8: Live measureStageMovement fails closed on missing World_Config, stal
   assert.strictEqual(boardRow.requirement.clears, false);
   assert.match(boardRow.needsNext, /metric evidence unavailable: current World_Config dump unavailable/);
 });
+Promise.all(asyncChecks).then(() => {
 console.log('\n======================================================');
 console.log(`Test Results: ${totalPassed} passed, ${totalFailed} failed (total: ${totalPassed + totalFailed})`);
 if (totalFailed > 0) {
@@ -1828,3 +1876,4 @@ if (totalFailed > 0) {
 console.log('======================================================\n');
 
 process.exit(totalFailed === 0 ? 0 : 1);
+});

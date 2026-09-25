@@ -3630,6 +3630,26 @@ async function runTick() {
   }
 }
 
+// The tracker copies every weekday pack reads (beats dump + initiative_tracker.json)
+// were written only at cycle time; civic runs daily. Every hourly tick re-reads the
+// live tab after its own work, whatever the week state (an engine fire, a fold, a
+// hand edit all land here within the hour). A failed refresh never fails the tick.
+async function runTickAndRefresh() {
+  try {
+    await runTick();
+  } finally {
+    if (process.argv.includes('--apply')) {
+      const cycle = arg('--cycle', null) || detectCycle();
+      try {
+        const r = await trackerSnapshot.refreshFromLive({ cycle });
+        console.log('[tick] tracker copies ' + (r.refreshed ? 'refreshed from the live tab (' + r.rows + ' rows)' : 'left alone — ' + r.reason));
+      } catch (e) {
+        console.error('[tick] TRACKER REFRESH FAILED — weekday packs read the prior copy: ' + e.message);
+      }
+    }
+  }
+}
+
 const STAGES = {
   prep: runPrep, directive: runDirective,
   decide: runMayorOpen, 'mayor-open': runMayorOpen,
@@ -3637,7 +3657,7 @@ const STAGES = {
   'mayor-gavel': runMayorGavel,
   projects: runProjects, close: runClose, datawake: runDatawake, chain: runChain, status: runStatus,
   'batch-submit': runBatchSubmit, 'batch-collect': runBatchCollect,
-  tick: runTick,
+  tick: runTickAndRefresh,
 };
 if (require.main === module) {
   if (!STAGE || !STAGES[STAGE]) {
@@ -3650,7 +3670,7 @@ if (require.main === module) {
 
 module.exports = { modelChainFor, FALLBACK_MODELS, sentimentWord, crimeWord, retailWord, ailmentPerception, cleanLines, parseApprovalTable, parseHoodTable, outputContract, datawakeUserPrompt, datawakeStatementText, districtPackRef, weekCarryBlock, spliceWeekCarry, loadWeekCarry, hearingHasPhase, noPhaseCheck, prepTargetDirForHood, validateVoiceJson, ungroundedNumbers, statementNumberCheck, composeChecks,
   // civic.38 Task 1 — closed move set (exported for scripts/cron-civic-game.test.js)
-  MOVE_TYPES, validateDatawakeMoves, hoodAuthorityReason, appendMoveLedger, moveLedgerLines, datawakeRecord,
+  MOVE_TYPES, validateDatawakeMoves, runTickAndRefresh, hoodAuthorityReason, appendMoveLedger, moveLedgerLines, datawakeRecord,
   // civic.38 Task 2 — move ledger fold (Sunday close)
   loadMoveLedgerFolded, foldMovesIntoDecisions, slugForInitiative,
   // civic.38 Task 6.3 — petition sweep

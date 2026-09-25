@@ -642,32 +642,8 @@ async function main() {
   // ── Auto-refresh initiative_tracker.json ──
   // Keeps dashboard Tracker tab current from live sheet data
   try {
-    const trackerData = {
-      lastUpdated: new Date().toISOString().split('T')[0],
-      updatedBy: 'buildInitiativePackets.js (auto)',
-      initiatives: initiatives.map(init => ({
-        id: init.InitiativeID,
-        name: init.Name || init.InitiativeName || '',
-        keywords: (init.Keywords || '').split(',').map(k => k.trim()).filter(Boolean),
-        status: init.Status || 'UNKNOWN',
-        voteCycle: init.VoteCycle ? parseInt(init.VoteCycle) : null,
-        // S259 ES-4 step 2 (G-S4): key-name fixes — these keyed off non-existent
-        // sheet columns so domain/neighborhoods/vote were always null/[], starving
-        // the MCP lookup_initiative Layer-2 read. Live Initiative_Tracker headers are
-        // Outcome / PolicyDomain / AffectedNeighborhoods (toObj keys by exact header).
-        vote: init.Outcome || null,
-        budget: init.Budget || null,
-        domain: init.PolicyDomain || null,
-        neighborhoods: (init.AffectedNeighborhoods || '').split(',').map(n => n.trim()).filter(Boolean),
-        implementation: {
-          status: (init.ImplementationPhase || 'untracked').toLowerCase(),
-          phase: (init.ImplementationPhase || 'untracked').toLowerCase(),
-          summary: init.MilestoneNotes || '',
-          nextScheduledAction: init.NextScheduledAction || null,
-          nextActionCycle: init.NextActionCycle ? parseInt(init.NextActionCycle) : null,
-        },
-      })),
-    };
+    // One field map for every tracker copy (initiativeTrackerSnapshot) — stage fields included.
+    const trackerData = require('./initiativeTrackerSnapshot').fromAuditRows(initiatives, 'buildInitiativePackets.js (auto)');
 
     const trackerPath = path.join(path.resolve(__dirname, '..'), 'output', 'initiative_tracker.json');
     fs.writeFileSync(trackerPath, JSON.stringify(trackerData, null, 2));

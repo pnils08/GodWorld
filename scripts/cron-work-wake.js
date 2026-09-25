@@ -164,7 +164,9 @@ const NODE_BUILDERS = {
     // director's own schedule notes below are theirs; this line is the city's.
     const state = require('./initiativeTrackerSnapshot').stageState(row);
     if (state) lines.push('Where it stands: ' + state + '.');
-    if (row.MilestoneNotes) lines.push('Latest milestone: ' + cap(row.MilestoneNotes, 180));
+    // MilestoneNotes appends — the newest line is the LAST one (agy 2026-09-25).
+    const latest = String(row.MilestoneNotes || '').split('\n').map(l => l.trim()).filter(Boolean).pop();
+    if (latest) lines.push('Latest milestone: ' + cap(latest, 180));
     if (row.NextScheduledAction) lines.push('Next on the books: ' + cap(row.NextScheduledAction, 120) + (row.NextActionCycle ? ' (cycle ' + row.NextActionCycle + ').' : '.'));
     return cap(lines.join('\n'), 600);
   },

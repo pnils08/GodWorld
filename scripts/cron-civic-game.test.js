@@ -1079,7 +1079,12 @@ test('T9.2: Live initiative-project node builder in cron-work-wake.js renders wi
     assert(site.indexOf('Where it stands') < site.indexOf('Latest milestone'), 'the city\'s state line comes before the office notes, so the 600-char cap never cuts it');
     ws.writeJsonl('Initiative_Tracker.jsonl', [{ InitiativeID: 'INIT-005', Name: 'Temescal Community Health Center',
       ImplementationPhase: 'operational', Stage: 'Standing', Status: 'passed', PolicyDomain: 'health', OpensCycle: '88' }]);
-    assert.match(builder({ initiative: 'INIT-005' }, 110, ws.dir), /Where it stands: Standing — delivers when Sick moves down/);
+    ws.writeJsonl('Initiative_Tracker.jsonl', [{ InitiativeID: 'INIT-005', Name: 'Temescal Community Health Center',
+      ImplementationPhase: 'operational', Stage: 'Standing', Status: 'passed', PolicyDomain: 'health', OpensCycle: '88',
+      MilestoneNotes: 'C107: MEP rough-ins completed\nC108 conversion: Stage Standing\nC109: opened — construction complete, open to the public.' }]);
+    const open = builder({ initiative: 'INIT-005' }, 110, ws.dir);
+    assert.match(open, /Where it stands: Standing — delivers when Sick moves down/);
+    assert.match(open, /Latest milestone: C109: opened — construction complete/, 'the newest (last) milestone line, not the oldest');
 
     // Missing row
     const missing = builder({ initiative: 'INIT-999' }, 108, ws.dir);

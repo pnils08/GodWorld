@@ -16,6 +16,7 @@ next scoped task from, and to keep it short.
 - Hand Aider **one** job at a time from this queue — don't let it pick its own.
   Unscoped work is what caused the blast-radius mess; the queue is the scoping.
 - Aider proposes (auto-commits off); a reviewer checks the diff before commit.
+- After every run, grep the log for `Only 3 reflections allowed` / `SEARCH section must exactly match` — aider can land SOME edits and stop, leaving a half-applied change that still looks done (2026-09-25: an export kept naming a deleted function; the module threw on load). Then `node -e "require('./<file>')"` before any commit.
 - When a job is committed or rejected, delete its line — git holds the record.
 
 **Dispatch (2026-09-24 — Aider is the default cheap code-fix lane; rb or es draws and reviews, not Mike; engine-substrate edits es-only + benched):**

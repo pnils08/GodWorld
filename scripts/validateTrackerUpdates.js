@@ -204,8 +204,8 @@ function validateCycle(cycle) {
 // ─────────────────────────────────────────────────────────────────────────────
 // civic.38 Task 2 step 4 — candidate validation. `propose` moves folded into
 // output/city-civic-database/initiatives/_candidates/candidates_c<cycle>.json
-// are checked BEFORE applyTrackerUpdates builds rows from them: catalog
-// intervention (playable), canonical hoods (child areas fold to parents), and
+// are checked BEFORE applyTrackerUpdates builds rows from them: category +
+// budget band (Job 2), canonical hoods (child areas fold to parents), and
 // seat authority (the proposing seat may name only its own district's hoods;
 // the mayor any hood). Any failure is HARD — a bad candidate must never reach
 // the sheet. No candidates file → no checks (a legal week).
@@ -225,11 +225,7 @@ function validateCandidates(cycle) {
   const { CANONICAL_HOODS } = require('../lib/canonNeighborhoods');
   const slice = require('./buildCivicOfficeSlice');   // require.main-guarded
   const officeMap = (function () { try { return require('./civic-office-map.json'); } catch (_) { return null; } })();
-  let catalog = null;
-  try {
-    const c = require('../lib/initiativePhaseContract').INTERVENTION_CATALOG;
-    if (c && typeof c === 'object' && Object.keys(c).length) catalog = c;
-  } catch (_) { /* Task 4 step 0 not landed */ }
+  const { categoryIssue, budgetIssue } = require('./civicInterventionValidation');
   let audit = null;
   try { audit = JSON.parse(fs.readFileSync(path.join(ROOT, 'output', 'engine_audit_c' + cycle + '.json'), 'utf8')); } catch (_) { /* offline */ }
   slice.requireCycle(audit, cycle, 'candidate geography audit');
@@ -237,14 +233,16 @@ function validateCandidates(cycle) {
 
   for (const cand of list) {
     const src = 'candidate:' + (cand.moveId || '?');
-    if (!catalog) {
-      violations.push({ source: src, code: 'catalog-not-landed',
-        detail: 'intervention catalog absent (lib/initiativePhaseContract.js INTERVENTION_CATALOG — Task 4 step 0, engine-sheet); candidates cannot be validated' });
-      continue;
+    // Job 2: a candidate files under a category (no menu). The budget is
+    // re-checked here, not only at the wake — a move written before a rule
+    // landed must not mint around it (INIT-008, C108).
+    const catIssue = categoryIssue(cand.category);
+    if (catIssue) violations.push({ source: src, code: catIssue,
+      detail: `category "${cand.category}" is not one of lib PROPOSAL_CATEGORIES` });
+    else {
+      const bIssue = budgetIssue(cand.category, cand.budget);
+      if (bIssue) violations.push({ source: src, code: bIssue.replace(/\(.*$/, ''), detail: bIssue });
     }
-    const issue = require('./civicInterventionValidation').interventionIssue(catalog, cand.intervention);
-    if (issue) violations.push({ source: src, code: issue,
-      detail: `intervention "${cand.intervention}" is not an explicitly playable, complete catalog entry` });
     if (!String(cand.title || '').trim()) {
       violations.push({ source: src, code: 'candidate-no-title', detail: 'candidate carries no title' });
     }

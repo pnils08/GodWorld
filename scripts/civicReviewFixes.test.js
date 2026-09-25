@@ -7,7 +7,6 @@ const os = require('node:os');
 const path = require('node:path');
 const run = require('./cron-civic-run');
 const slice = require('./buildCivicOfficeSlice');
-const { INTERVENTION_CATALOG: catalog } = require('../lib/initiativePhaseContract');
 const office = { officeId: 'COUNCIL-D5', agentDir: 'SYNTHETIC-seat', district: 'D5' };
 const confrontation = {id:'CONF-999-'+office.agentDir,cycle:999,agentDir:office.agentDir};
 function workspace(fn) {
@@ -15,16 +14,13 @@ function workspace(fn) {
   const write = (file, value) => { const dest = path.join(root, file); fs.mkdirSync(path.dirname(dest), { recursive: true }); fs.writeFileSync(dest, value); };
   try { fn(root, write); } finally { fs.rmSync(root, { recursive: true, force: true }); }
 }
-test('F1 inherited and malformed interventions cannot consume the valid move', () => {
-  const proposal = intervention => ({ type: 'propose', intervention, title: 'SYNTHETIC', problem: 'SYNTHETIC', hoods: ['East Oakland'], budget: '$20M' });
-  const malformed = { ...catalog, broken: { policyDomain: 'health' }, shape: { playable: true, policyDomain: 'health' } };
-  // housing-program dropped from this list — it flipped playable:true (engine.251,
-  // builder-ruled rate 0.20/margin 0.15, 2026-09-22), so it's no longer an
-  // unplayable-intervention rejection case; safety-program stays a live example.
-  for (const key of ['constructor', 'toString', '__proto__', ['health-service'], 'broken', 'shape', 'safety-program']) {
-    const result = run.validateDatawakeMoves([proposal(key), proposal('health-service')], { office, catalog: malformed });
+test('F1 inherited and malformed categories cannot consume the valid move', () => {
+  const proposal = category => ({ type: 'propose', category, reach: 'hood', title: 'SYNTHETIC', problem: 'SYNTHETIC', hoods: ['East Oakland'], budget: '$20M' });
+  // Job 2: no menu — the category gate replaces the intervention catalog on the proposal path.
+  for (const key of ['constructor', 'toString', '__proto__', ['health'], 'health-service', 'housing', { health: 1 }]) {
+    const result = run.validateDatawakeMoves([proposal(key), proposal('health')], { office });
     assert.equal(result.rejected.length, 1);
-    assert.equal(result.accepted[0].payload.intervention, 'health-service');
+    assert.equal(result.accepted[0].payload.category, 'health');
   }
 });
 test('F3 petition join folds child areas and needs no display name or active status', () => workspace((root, write) => {
@@ -139,14 +135,14 @@ test('F8 prompt caps narrative blocks without dropping legal IDs or mutating ful
   const game = {boardIds:['INIT-SYNTHETIC-1','INIT-SYNTHETIC-2'],board:[entry],boardText:'SYNTHETIC board',
     lastMove:{text:'SYNTHETIC outcome',moves:Array(1000).fill(entry)},
     petitionPool:{available:true,text:'SYNTHETIC summary',complaints:Array(1000).fill(entry),participation:Array(1000).fill(entry)},
-    interventions:{available:true,playable:[{key:'health-service'}],text:'X'.repeat(5000)}};
+    categories:{available:true,list:[{key:'health'}],text:'X'.repeat(5000)}};
   const pack = {game};
   const prompt = run.datawakeUserPrompt(pack, '', office);
   assert.equal(prompt.includes('SYNTHETIC-RAW-HISTORY'), false);
   assert.match(prompt, /INIT-SYNTHETIC-2/);
   assert(prompt.length < 6000);
   assert.equal(game.petitionPool.complaints.length,1000);
-  assert.equal(game.interventions.text.length,5000);
+  assert.equal(game.categories.text.length,5000);
 });
 test('F8 board proposals show measured condition counts (health)', () => workspace((root, write) => {
   const audit = {cycle:999,snapshots:{Neighborhood_Map:[{Neighborhood:'East Oakland',ChildAreas:'Coliseum'}]}};

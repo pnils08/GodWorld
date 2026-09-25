@@ -202,7 +202,7 @@ test('T1.3: Live validateDatawakeMoves enforces at most one consequential move p
 
   const rawMoves = [
     { type: 'work', initiativeId: 'INIT-001' },
-    { type: 'propose', title: 'Second Clinic', intervention: 'health-service', hoods: ['West Oakland'], problem: 'need care', budget: '$20M' },
+    { type: 'propose', title: 'Second Clinic', category: 'health', reach: 'hood', hoods: ['West Oakland'], problem: 'need care', budget: '$20M' },
     { type: 'canvass', hood: 'West Oakland' }
   ];
 
@@ -234,7 +234,7 @@ test('T1.5: Live validateDatawakeMoves propose hood grounding requires EVERY hoo
   const validMove = [{
     type: 'propose',
     title: 'Synthetic clinic service',
-    intervention: 'health-service',
+    category: 'health', reach: 'hood',
     hoods: ['Coliseum', 'East Oakland'],
     problem: 'synthetic health need',
     budget: '$20M'
@@ -247,7 +247,7 @@ test('T1.5: Live validateDatawakeMoves propose hood grounding requires EVERY hoo
   const invalidMove = [{
     type: 'propose',
     title: 'Synthetic cross-city clinic',
-    intervention: 'health-service',
+    category: 'health', reach: 'hood',
     hoods: ['East Oakland', 'Temescal'],
     problem: 'overreach',
     budget: '$20M'
@@ -256,6 +256,24 @@ test('T1.5: Live validateDatawakeMoves propose hood grounding requires EVERY hoo
   assert.equal(res2.accepted.length, 0);
   assert.equal(res2.rejected.length, 1);
   assert.match(res2.rejected[0].reason, /hood-out-of-district/);
+
+  // Job 2 reach: district expands to every hood in the seat's district, by name
+  // (never blank — an empty list fails the engine baseline, no-target-hoods).
+  const res3 = civicRun.validateDatawakeMoves([{ type: 'propose', title: 'District clinic', category: 'health', reach: 'district', problem: 'care', budget: '$20M' }],
+    { office, catalog, childToParent: CHILD_TO_PARENT_HOOD });
+  assert.equal(res3.accepted.length, 1);
+  assert.deepStrictEqual(res3.accepted[0].payload.hoods, require('../lib/districtMap').getNeighborhoodsForDistricts('D5'));
+  assert.ok(res3.accepted[0].payload.hoods.length > 0);
+  // a district seat cannot go citywide
+  const res4 = civicRun.validateDatawakeMoves([{ type: 'propose', title: 'Citywide overreach', category: 'health', reach: 'all', problem: 'care', budget: '$20M' }],
+    { office, catalog, childToParent: CHILD_TO_PARENT_HOOD });
+  assert.equal(res4.accepted.length, 0);
+  assert.match(res4.rejected[0].reason, /^reach-all-is-citywide-seats-only/);
+  // no reach, unknown reach → refused, never defaulted
+  const noReach = civicRun.validateDatawakeMoves([{ type: 'propose', title: 'X', category: 'health', hoods: ['East Oakland'], problem: 'p', budget: '$20M' }], { office, catalog, childToParent: CHILD_TO_PARENT_HOOD });
+  assert.match(noReach.rejected[0].reason, /^propose-missing-reach/);
+  const badReach = civicRun.validateDatawakeMoves([{ type: 'propose', title: 'X', category: 'health', reach: 'region', hoods: ['East Oakland'], problem: 'p', budget: '$20M' }], { office, catalog, childToParent: CHILD_TO_PARENT_HOOD });
+  assert.match(badReach.rejected[0].reason, /^unknown-reach/);
 });
 
 test('T1.6: Live validateDatawakeMoves: Mayor may propose in any canonical hood across the city', () => {
@@ -265,7 +283,7 @@ test('T1.6: Live validateDatawakeMoves: Mayor may propose in any canonical hood 
   const mayorMove = [{
     type: 'propose',
     title: 'Citywide Clinic Network',
-    intervention: 'health-service',
+    category: 'health', reach: 'hood',
     hoods: ['West Oakland', 'Temescal', 'East Oakland'],
     problem: 'healthcare access',
     budget: '$20M'
@@ -274,36 +292,34 @@ test('T1.6: Live validateDatawakeMoves: Mayor may propose in any canonical hood 
   const res = civicRun.validateDatawakeMoves(mayorMove, { office, catalog, childToParent: CHILD_TO_PARENT_HOOD });
   assert.equal(res.accepted.length, 1);
   assert.equal(res.accepted[0].payload.title, 'Citywide Clinic Network');
+
+  // Job 2 reach: all → every canonical hood by name; the mayor has no district reach
+  const all = civicRun.validateDatawakeMoves([{ ...mayorMove[0], reach: 'all', hoods: undefined }], { office, catalog, childToParent: CHILD_TO_PARENT_HOOD });
+  assert.equal(all.accepted.length, 1);
+  assert.deepStrictEqual(all.accepted[0].payload.hoods, require('../lib/districtMap').getAllNeighborhoods());
+  assert.equal(all.accepted[0].payload.hoods.length, 22);
+  const dist = civicRun.validateDatawakeMoves([{ ...mayorMove[0], reach: 'district' }], { office, catalog, childToParent: CHILD_TO_PARENT_HOOD });
+  assert.match(dist.rejected[0].reason, /^reach-district-needs-a-district-seat/);
 });
 
-test('T1.7: Live validateDatawakeMoves: Catalog not landed or unplayable domain rejected', () => {
+test('T1.7: Job 2 no menu — unknown or housing category refused; a category that cannot deliver yet is ACCEPTED', () => {
   const office = { officeId: 'COUNCIL-D1', agentDir: 'civic-office-council-d1', district: 'D1' };
-  const proposeMove = [{
-    type: 'propose',
-    title: 'Health Clinic',
-    intervention: 'health-service',
-    hoods: ['West Oakland'],
-    problem: 'health access'
-  }];
+  const base = { type: 'propose', title: 'Something new', reach: 'hood', hoods: ['West Oakland'], problem: 'a need', budget: '$10M' };
+  const run1 = m => civicRun.validateDatawakeMoves([m], { office, childToParent: CHILD_TO_PARENT_HOOD });
 
-  // 1. Catalog is null/unlanded -> catalog-not-landed
-  const res1 = civicRun.validateDatawakeMoves(proposeMove, { office, catalog: null });
-  assert.equal(res1.accepted.length, 0);
-  assert.match(res1.rejected[0].reason, /catalog-not-landed/);
+  assert.match(run1(base).rejected[0].reason, /^propose-missing-category/);
+  assert.match(run1({ ...base, category: 'health-service' }).rejected[0].reason, /^unknown-category/);   // old menu keys are gone
+  // housing is a result, not a category (builder ruling 2026-09-25)
+  assert.match(run1({ ...base, category: 'housing' }).rejected[0].reason, /^unknown-category\(housing\)/);
 
-  // 2. Intervention with playable: false — housing-program flipped playable:true
-  // engine.251 (builder-ruled rate 0.20/margin 0.15, 2026-09-22); safety-program
-  // is now the live example with no lever.
-  const unplayableMove = [{
-    type: 'propose',
-    title: 'More Patrols',
-    intervention: 'safety-program',
-    hoods: ['West Oakland'],
-    problem: 'crime'
-  }];
-  const res2 = civicRun.validateDatawakeMoves(unplayableMove, { office, catalog: phaseContract.INTERVENTION_CATALOG });
-  assert.equal(res2.accepted.length, 0);
-  assert.match(res2.rejected[0].reason, /domain-not-playable/);
+  // safety has no Delivering lever — it still mints, votes, funds and stands
+  // (stops at no-delivering-gate). Not refused for its content (§13).
+  const safety = run1({ ...base, category: 'safety' });
+  assert.equal(safety.accepted.length, 1);
+  assert.equal(safety.accepted[0].payload.category, 'safety');
+  assert.equal(phaseContract.stageRequirement({ stage: 'Standing', policyDomain: 'safety' }).blocked, 'no-delivering-gate');
+  // category is case-normalized to the PolicyDomain it files as
+  assert.equal(run1({ ...base, category: 'Economic' }).accepted[0].payload.category, 'economic');
 });
 
 test('T1.8: Live validateDatawakeMoves: Police Chief may work, answer, canvass, but NEVER propose', () => {
@@ -314,7 +330,7 @@ test('T1.8: Live validateDatawakeMoves: Police Chief may work, answer, canvass, 
   const chiefPropose = [{
     type: 'propose',
     title: 'More Patrols',
-    intervention: 'health-service',
+    category: 'safety', reach: 'hood',
     hoods: ['West Oakland'],
     problem: 'safety'
   }];
@@ -358,29 +374,22 @@ test('T1.9: Live appendMoveLedger & moveLedgerLines write correct ledger rows to
   }
 });
 
-test('T1.10: Live validateDatawakeMoves with full INTERVENTION_CATALOG: 3 playable pass, 4 unplayable reject', () => {
+test('T1.10: Job 2 — every ruled category is proposable with an in-band budget; the list is exactly the ruling', () => {
   const office = { officeId: 'MAYOR-01', agentDir: 'civic-office-mayor', district: 'citywide' };
-  const catalog = phaseContract.INTERVENTION_CATALOG;
-  // housing-program off: no housing program in the sim (builder 2026-09-23).
-  const playableKeys = ['health-service', 'transit-project', 'school-program'];
-  const unplayableKeys = ['safety-program', 'economic-program', 'workforce-program', 'sports-district'];
-  assert.deepStrictEqual(Object.keys(catalog).filter(k => catalog[k].playable).sort(), [...playableKeys].sort());
-  assert.deepStrictEqual(Object.keys(catalog).filter(k => !catalog[k].playable).sort(), [...unplayableKeys].sort());
-  // engine.255 Task 9: playable proposes need a budget inside the domain band.
-  const budgetFor = { 'health-service': '$20M', 'transit-project': '$100M', 'school-program': '$10M', 'housing-program': '$28M' };
-  for (const key of playableKeys) {
-    const move = [{ type: 'propose', title: `Test ${key}`, intervention: key, hoods: ['Downtown'], problem: 'test problem', budget: budgetFor[key] }];
-    const res = civicRun.validateDatawakeMoves(move, { office, catalog });
-    assert.equal(res.accepted.length, 1, `Intervention ${key} should be accepted`);
+  const cats = Object.keys(phaseContract.PROPOSAL_CATEGORIES);
+  // builder ruling 2026-09-25: eight areas of life, no housing
+  assert.deepStrictEqual([...cats].sort(), ['economic', 'education', 'environment', 'health', 'safety', 'sports', 'transit', 'workforce']);
+  // every category has a band (a category without one is a hidden second menu)
+  assert.deepStrictEqual(Object.keys(phaseContract.BUDGET_BANDS).sort(), [...cats].sort());
+  // every category is a createInitiative policy domain (the mint would throw otherwise)
+  const { POLICY_DOMAINS } = require('./createInitiative');
+  assert.ok(cats.every(c => POLICY_DOMAINS.includes(c)));
+  for (const c of cats) {
+    const band = phaseContract.BUDGET_BANDS[c];
+    const move = [{ type: 'propose', title: `Test ${c}`, category: c, reach: 'hood', hoods: ['Downtown'], problem: 'test problem', budget: String(band.min) }];
+    const res = civicRun.validateDatawakeMoves(move, { office });
+    assert.equal(res.accepted.length, 1, `category ${c} should be accepted`);
     assert.equal(res.rejected.length, 0);
-  }
-
-  for (const key of unplayableKeys) {
-    const move = [{ type: 'propose', title: `Test ${key}`, intervention: key, hoods: ['Downtown'], problem: 'test problem' }];
-    const res = civicRun.validateDatawakeMoves(move, { office, catalog });
-    assert.equal(res.accepted.length, 0, `Intervention ${key} should be rejected`);
-    assert.equal(res.rejected.length, 1);
-    assert.match(res.rejected[0].reason, /domain-not-playable/);
   }
 });
 
@@ -389,7 +398,7 @@ test('T1.11: Live validateDatawakeMoves rejects inherited Object.prototype inter
   const catalog = phaseContract.INTERVENTION_CATALOG;
 
   for (const evilKey of ['toString', 'valueOf', 'constructor']) {
-    const move = [{ type: 'propose', title: 'Prototype Attack', intervention: evilKey, hoods: ['Downtown'], problem: 'exploit' }];
+    const move = [{ type: 'propose', title: 'Prototype Attack', category: evilKey, reach: 'hood', hoods: ['Downtown'], problem: 'exploit', budget: '$10M' }];
     const res = civicRun.validateDatawakeMoves(move, { office, catalog });
     assert.equal(res.accepted.length, 0, `Inherited property ${evilKey} must not be accepted`);
     assert.equal(res.rejected.length, 1);
@@ -399,7 +408,7 @@ test('T1.11: Live validateDatawakeMoves rejects inherited Object.prototype inter
 test('T1.12: engine.255 Task 9 — propose requires a budget inside the domain band', () => {
   const office = { officeId: 'MAYOR-01', agentDir: 'civic-office-mayor', district: 'citywide' };
   const catalog = phaseContract.INTERVENTION_CATALOG;
-  const base = { type: 'propose', title: 'Synthetic Clinic', intervention: 'health-service', hoods: ['Downtown'], problem: 'synthetic need' };
+  const base = { type: 'propose', title: 'Synthetic Clinic', category: 'health', reach: 'hood', hoods: ['Downtown'], problem: 'synthetic need' };
   const run1 = m => civicRun.validateDatawakeMoves([m], { office, catalog });
 
   // Missing / blank
@@ -422,13 +431,15 @@ test('T1.12: engine.255 Task 9 — propose requires a budget inside the domain b
   assert.equal(run1({ ...base, budget: '$12.5M' }).accepted[0].payload.budget, '$12.5M');
 
   // The band keys on the domain, not the string: $10M is fine for health, thin for transit
-  const transit = { ...base, intervention: 'transit-project', budget: '$10M' };
+  const transit = { ...base, category: 'transit', budget: '$10M' };
   assert.match(run1(transit).rejected[0].reason, /^budget-outside-band\(transit/);
   assert.equal(run1({ ...transit, budget: '$100M' }).accepted.length, 1);
 
-  // Budget checks fire only after the catalog gate — unplayable still reports its own reason
-  const unplayable = { ...base, intervention: 'safety-program' };
-  assert.match(run1(unplayable).rejected[0].reason, /domain-not-playable/);
+  // Budget checks fire only after the category gate — an unknown category reports its own reason
+  assert.match(run1({ ...base, category: 'housing', budget: '$10M' }).rejected[0].reason, /^unknown-category/);
+  // Job 2: the newly opened categories carry bands too — safety $2M-$30M
+  assert.equal(run1({ ...base, category: 'safety', budget: '$10M' }).accepted.length, 1);
+  assert.match(run1({ ...base, category: 'safety', budget: '$50M' }).rejected[0].reason, /^budget-outside-band\(safety/);
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -540,7 +551,7 @@ test('T2.5: Live foldMovesIntoDecisions in temp workspace: aggregates work moves
     const moves = [
       { moveId: 'MV-108-civic-office-council-d1-2026-09-21', cycle: 108, date: '2026-09-21', agentDir: 'civic-office-council-d1', popid: SYNTH_POP.COUNCIL_D1, type: 'work', payload: { initiativeId: 'INIT-001' }, status: 'pending' },
       { moveId: 'MV-108-civic-office-council-d3-2026-09-22', cycle: 108, date: '2026-09-22', agentDir: 'civic-office-council-d3', popid: SYNTH_POP.COUNCIL_D3, type: 'work', payload: { initiativeId: 'INIT-001' }, status: 'pending' },
-      { moveId: 'MV-108-civic-office-council-d5-2026-09-23', cycle: 108, date: '2026-09-23', agentDir: 'civic-office-council-d5', popid: SYNTH_POP.COUNCIL_D5, type: 'propose', payload: { title: 'East Oakland Clinic', intervention: 'health-service', hoods: ['East Oakland'], problem: 'Need healthcare', budget: '$20M' }, status: 'pending' }
+      { moveId: 'MV-108-civic-office-council-d5-2026-09-23', cycle: 108, date: '2026-09-23', agentDir: 'civic-office-council-d5', popid: SYNTH_POP.COUNCIL_D5, type: 'propose', payload: { title: 'East Oakland Clinic', category: 'health', reach: 'hood', hoods: ['East Oakland'], problem: 'Need healthcare', budget: '$20M' }, status: 'pending' }
     ];
     ws.writeJsonl('output/cron-civic/moves/moves_c108.jsonl', moves);
 
@@ -582,7 +593,8 @@ test('T2.5: Live foldMovesIntoDecisions in temp workspace: aggregates work moves
     assert(c);
     assert.equal(c.proposingOffice, 'COUNCIL-D5');
     assert.equal(c.title, 'East Oakland Clinic');
-    assert.equal(c.intervention, 'health-service');
+    assert.equal(c.category, 'health');
+    assert.equal(c.reach, 'hood');
     assert.equal(c.budget, '$20M', 'engine.255 Task 9: the seat\'s budget rides the fold into the candidate');
     assert.equal(c.status, 'pending');
 
@@ -1096,32 +1108,17 @@ test('T9.3: Live work-wake packages for all four project directors validate clea
 
 group('Group 7: Repair Commits Validation (F1, F3, F4, F5, F6, F7, F8)');
 
-test('F1: Live catalog gate rejects malformed schema shapes and inherited prototype properties', () => {
+test('F1: Live category gate rejects inherited prototype properties and non-category values without consuming the valid move', () => {
   const office = { officeId: 'COUNCIL-D5', agentDir: 'civic-office-council-d5', district: 'D5' };
-  const baseCatalog = phaseContract.INTERVENTION_CATALOG;
-  const malformedCatalog = {
-    ...baseCatalog,
-    'broken-no-metric': { policyDomain: 'health', playable: true },
-    'broken-bad-direction': {
-      policyDomain: 'health', type: 'vote', playable: true, effectChannel: 'channel',
-      stage3Metric: { tab: 'T', scope: 'S', direction: 'diagonal', column: 'C' }
-    }
-  };
-
-  const proposal = intervention => ({
-    type: 'propose', intervention, title: 'Synthetic Proposal', problem: 'Test problem', hoods: ['East Oakland'], budget: '$20M'
+  const proposal = category => ({
+    type: 'propose', category, reach: 'hood', title: 'Synthetic Proposal', problem: 'Test problem', hoods: ['East Oakland'], budget: '$20M'
   });
-
-  // housing-program flipped playable:true engine.251 (2026-09-22); safety-program
-  // is now the live unplayable example.
-  const testKeys = ['constructor', 'toString', '__proto__', 'broken-no-metric', 'broken-bad-direction', 'safety-program'];
+  const testKeys = ['constructor', 'toString', '__proto__', 'hasOwnProperty', 'housing', 'health-service', '', 42, null];
   for (const key of testKeys) {
-    const result = civicRun.validateDatawakeMoves([proposal(key), proposal('health-service')], {
-      office, catalog: malformedCatalog
-    });
+    const result = civicRun.validateDatawakeMoves([proposal(key), proposal('health')], { office });
     assert.strictEqual(result.rejected.length, 1, `Key "${key}" should be rejected`);
     assert.strictEqual(result.accepted.length, 1, `Key "${key}" should not prevent second valid move`);
-    assert.strictEqual(result.accepted[0].payload.intervention, 'health-service');
+    assert.strictEqual(result.accepted[0].payload.category, 'health');
   }
 });
 
@@ -1312,12 +1309,18 @@ test('T9.255: board shows BudgetRemaining when the dump carries it, not-yet-stam
   assert.match(text, /INIT-992 Synthetic Stamped .*budget \$27,600,000 left/);
   assert.match(text, /INIT-991 Synthetic Legacy .*budget: not yet stamped/);
 
-  // The pack lists the domain band next to each proposable intervention.
-  const menu = civicSlice.loadInterventionMenu();
+  // The pack lists every category with its band, and says which cannot deliver yet (Job 2).
+  const menu = civicSlice.loadCategoryMenu();
   assert.equal(menu.available, true);
-  assert.match(menu.text, /health-service \(health\).*budget band \$5M-\$100M/);
-  assert.match(menu.text, /transit-project \(transit\).*budget band \$20M-\$500M/);
-  assert.match(menu.text, /school-program \(education\).*budget band \$1M-\$50M/);
+  assert.equal(menu.list.length, Object.keys(phaseContract.PROPOSAL_CATEGORIES).length);
+  assert.ok(menu.text.length <= 600 && !menu.text.endsWith('…'), 'the whole menu fits the block cap — no category is clipped off');
+  for (const c of Object.keys(phaseContract.PROPOSAL_CATEGORIES)) assert.match(menu.text, new RegExp('^- ' + c + '\\*?: ', 'm'), c + ' is listed');
+  assert.match(menu.text, /^- health: .* \$5M-\$100M$/m);
+  assert.match(menu.text, /^- transit: .* \$20M-\$500M$/m);
+  assert.match(menu.text, /^- education: .* \$1M-\$50M$/m);
+  assert.match(menu.text, /^- safety\*: .* \$2M-\$30M$/m);
+  assert.match(menu.text, /^- environment\*: /m);
+  assert.doesNotMatch(menu.text, /housing|NO BAND/);
 
 });
 

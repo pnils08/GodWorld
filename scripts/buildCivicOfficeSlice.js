@@ -11,7 +11,7 @@ const fs = require('fs');
 const path = require('path');
 const { getNeighborhoodsForDistricts } = require('../lib/districtMap');
 const trackerSnapshot = require('./initiativeTrackerSnapshot');
-const { interventionIssue } = require('./civicInterventionValidation');
+const { categoryIssue } = require('./civicInterventionValidation');
 
 const ROOT = path.join(__dirname, '..');
 const CONSTITUENT_CAP = 8;
@@ -1141,14 +1141,11 @@ function loadConfrontation(root, cycle, agentDir) {
   return loadConfrontations(root,cycle,agentDir).open[0] || null;
 }
 
-// Task 1/4 step 0 — the intervention catalog (engine-sheet's file). The pack
-// shows playable keys so a seat can actually name one; absent, propose moves
-// are refused at the gate (catalog-not-landed) and the pack says why.
-// engine.255 Task 9 (builder call 6) — the per-domain budget band, listed in
-// the pack next to each proposable intervention so a seat can fill the
-// propose move's required budget field inside it. Formatted with the mint's
-// own canonical money string. Null when the domain has no band (not
-// proposable) or the lib contract is absent.
+// Initiatives in the World Job 2 (builder rulings 2026-09-25) — no menu. The
+// pack lists the categories a seat may file a proposal under (lib
+// PROPOSAL_CATEGORIES), each with its budget band (engine.255 Task 9) and
+// whether a row in it can reach Delivering yet (the lib delivering catalog).
+// A category that cannot deliver is still proposable; the seat is told so.
 function budgetBandText(domain) {
   try {
     const c = require('../lib/initiativePhaseContract');
@@ -1159,36 +1156,31 @@ function budgetBandText(domain) {
   } catch (_) { return null; }
 }
 
-function loadInterventionMenu() {
-  let catalog = null;
-  try {
-    const c = require('../lib/initiativePhaseContract').INTERVENTION_CATALOG;
-    if (c && typeof c === 'object' && Object.keys(c).length) catalog = c;
-  } catch (_) { /* not landed */ }
-  if (!catalog) {
-    return { available: false, text: 'No intervention catalog on disk yet (Task 4 step 0) — propose moves cannot be validated and will be refused.' };
+function loadCategoryMenu() {
+  let c = null;
+  try { c = require('../lib/initiativePhaseContract'); } catch (_) { /* not landed */ }
+  if (!c || !c.PROPOSAL_CATEGORIES || !Object.keys(c.PROPOSAL_CATEGORIES).length) {
+    return { available: false, list: [], text: 'No proposal categories on disk (lib/initiativePhaseContract.js PROPOSAL_CATEGORIES) — propose moves will be refused.' };
   }
-  const playable = Object.entries(catalog)
-    .filter(([key]) => !interventionIssue(catalog, key))
-    .map(([k, v]) => ({ key: k, domain: v.policyDomain || null, label: v.label || null }));
-  return { available: true, playable,
-    text: clip('Interventions you may propose (closed catalog; propose requires a budget inside the domain band):\n' +
-      playable.map(p => {
-        const band = p.domain ? budgetBandText(p.domain) : null;
-        return '- ' + p.key + ' (' + (p.domain || '?') + (p.label ? ') — ' + p.label : ')') +
-          (band ? ' — budget band ' + band : ' — no budget band; propose will be refused');
-      }).join('\n'), BLOCK_CAP) };
+  const gates = c.stageCatalogByDomain();
+  const list = Object.entries(c.PROPOSAL_CATEGORIES).map(([key, label]) => ({
+    key, label, band: budgetBandText(key),
+    canDeliver: !!(gates[key] && gates[key].playable === true),
+  }));
+  return { available: true, list,
+    text: clip('Propose in your own words under one category; reach is hood, district, or all (citywide seats only). ' +
+      'Budget must sit in the band. * = runs, but cannot reach Delivering yet.\n' +
+      list.map(p => '- ' + p.key + (p.canDeliver ? '' : '*') + ': ' + p.label + ' ' + (p.band || 'NO BAND, refused')).join('\n'), BLOCK_CAP) };
 }
 
 function loadConditionCounts(root, cycle, board, moves) {
-  const catalog = require('../lib/initiativePhaseContract').INTERVENTION_CATALOG || {};
   const requests = board.filter(b => ['proposed', 'pending-vote'].includes(b.status))
     .map(b => ({ id: b.id, policyDomain: b.domain, hoods: b.hoods }));
   for (const m of moves) {
     if (m.type !== 'propose' || m.status !== 'pending') continue;
     const p = m.payload || {};
-    if (interventionIssue(catalog, p.intervention)) continue;
-    requests.push({ id: m.moveId, policyDomain: catalog[p.intervention].policyDomain, hoods: p.hoods });
+    if (categoryIssue(p.category)) continue;
+    requests.push({ id: m.moveId, policyDomain: String(p.category).trim().toLowerCase(), hoods: p.hoods });
   }
   if (!requests.length) return { available: true, proposals: [], text: 'No proposals in the available board/move evidence need condition counts.' };
   const counter = require('./civicPetitions');
@@ -1231,7 +1223,7 @@ function gamePromptView(game) {
     conditions: { ...block(game.conditions), proposals: ((game.conditions || {}).proposals || []).length },
     problemContinuity: block(game.problemContinuity),
     workingCity: block(game.workingCity),
-    interventions: { ...block(game.interventions), keys: ((game.interventions || {}).playable || []).map(p => p.key) },
+    categories: { ...block(game.categories), keys: ((game.categories || {}).list || []).map(p => p.key) },
     confrontation: game.confrontation ? { id: game.confrontation.id, demand: clip(game.confrontation.demand, BLOCK_CAP), expectsMove: 'answer' } : null,
     confrontationIds: ((game.confrontations || {}).open || []).map(c => c.id),
     confrontationEvidence: game.confrontations && game.confrontations.available === false ? game.confrontations.text : undefined,
@@ -1307,7 +1299,7 @@ function buildGameBlocks(opts) {
     boardAvailable: board !== null,
     boardIds: (board || []).map(b => b.id),
     boardText: boardIssue ? clip('Board unavailable — ' + boardIssue, BLOCK_CAP) : boardBlock(board),
-    interventions: loadInterventionMenu(),
+    categories: loadCategoryMenu(),
     petitionPool: safely(() => {
       if (geographyIssue) throw new Error(geographyIssue);
       return loadPetitionPool(root, office, hoods, officeMap, c2p, cycle);
@@ -1475,7 +1467,7 @@ module.exports = {
   // civic.38 Task 3 game blocks
   buildGameBlocks, boardRowsFor, boardNeedText, boardBlock, budgetStampText, budgetBandText, childToParentFromAudit, foldHood, requireCycle, loadAudit, gamePromptView,
   loadMovesFolded, loadPetitionPool, loadWorkingCity, loadConfrontation, loadConfrontations, loadSeatMoves,
-  loadInterventionMenu, loadTrackerRows, readJsonl, NEGATIVE_AFFECTS, BLOCK_CAP,
+  loadCategoryMenu, loadTrackerRows, readJsonl, NEGATIVE_AFFECTS, BLOCK_CAP,
 };
 
 if (require.main === module) {

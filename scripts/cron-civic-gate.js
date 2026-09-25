@@ -366,7 +366,7 @@ if (require.main === module) (async () => {
         }).concat(candidates.map(c =>
           '## NEW CANDIDATE ' + (c.moveId || '?') + ' (proposed by ' + (c.proposingOffice || c.agentDir || '?') + ', C' + cycle + ')\n' +
           'prior row: none — this APPENDS a row to the tracker\n' +
-          'write: ' + JSON.stringify({ Name: c.title, Status: 'proposed', VoteCycle: '', AffectedNeighborhoods: (c.hoods || []).join(', '), intervention: c.intervention, problem: c.problem })
+          'write: ' + JSON.stringify({ Name: c.title, Status: 'proposed', VoteCycle: '', AffectedNeighborhoods: (c.hoods || []).join(', '), category: c.category, reach: c.reach, problem: c.problem, budget: c.budget })
         )).join('\n\n');
         const sys = 'You are a neutral records auditor for a city government. You check the cycle\'s FINAL tracker write-set — each entry shows the row as it stands (prior row) and the fields about to be written (write) — for internal contradictions and fabrications before it is committed to the record. The prior row IS the city\'s record: a write that extends it (a later month, a running total, the next phase, a next action scheduled for a later cycle) is grounded and needs no outside verification. Political disagreement between offices is out of scope — you audit only what is about to be written.';
         const user = 'Final write-set for cycle ' + cycle + ' (one entry per initiative, already resolved by voice priority; NextActionCycle is the cycle the row is next acted on, always after ' + cycle + '):\n\n' + digest +

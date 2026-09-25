@@ -626,11 +626,7 @@ async function main() {
     console.log(`\n=== Candidate rows (civic.38 propose moves) — ${candList.length} on file ===\n`);
     const createInit = require('./createInitiative');
     const slice = require('./buildCivicOfficeSlice');
-    let catalog = null;
-    try {
-      const c = require('../lib/initiativePhaseContract').INTERVENTION_CATALOG;
-      if (c && typeof c === 'object' && Object.keys(c).length) catalog = c;
-    } catch (_) { /* Task 4 step 0 not landed */ }
+    const { categoryIssue, budgetIssue } = require('./civicInterventionValidation');
     const seats = createInit.loadOfficeSeats();
     let auditForFold = null;
     try { auditForFold = JSON.parse(fs.readFileSync(path.join(ROOT, 'output', 'engine_audit_c' + CYCLE + '.json'), 'utf8')); } catch (_) { /* no audit on disk */ }
@@ -651,23 +647,20 @@ async function main() {
     for (const cand of candList) {
       const moveId = cand.moveId || '?';
       if (cand.status && cand.status !== 'pending') { console.log(`  SKIP ${moveId}: status ${cand.status}`); continue; }
-      if (!catalog) {
-        console.log(`  REFUSED ${moveId}: intervention catalog not landed (lib/initiativePhaseContract.js INTERVENTION_CATALOG — Task 4 step 0)`);
-        candidateOutcome[moveId] = 'catalog-not-landed';
-        continue;
-      }
-      const issue = require('./civicInterventionValidation').interventionIssue(catalog, cand.intervention);
+      // Job 2: category (no menu) + budget band, re-checked at the mint.
+      const issue = categoryIssue(cand.category) || budgetIssue(cand.category, cand.budget);
       if (issue) {
-        console.log(`  REFUSED ${moveId}: intervention "${cand.intervention}" unknown or not playable`);
+        console.log(`  REFUSED ${moveId}: ${issue} (category "${cand.category}", budget "${cand.budget}")`);
         candidateOutcome[moveId] = issue;
         continue;
       }
-      const entry = catalog[cand.intervention];
       const hoodsFolded = [...new Set((cand.hoods || []).map(h => slice.foldHood(h, c2p)))];
       const spec = {
         name: cand.title,
-        type: entry.type || 'vote',
-        policyDomain: entry.policyDomain,
+        // Every seat-proposed row mints as `vote` (lib catalog note: the stage
+        // model's Funded clears on a passed vote).
+        type: 'vote',
+        policyDomain: String(cand.category).trim().toLowerCase(),
         affectedNeighborhoods: hoodsFolded.join(', '),
         proposedCycle: CYCLE,
         proposingOffice: cand.proposingOffice,

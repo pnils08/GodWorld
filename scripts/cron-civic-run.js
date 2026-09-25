@@ -68,7 +68,7 @@ const trackerSnapshot = require('./initiativeTrackerSnapshot');
 const { buildPack, writePack, childToParentFromAudit, foldHood, gamePromptView } = require('./buildCivicOfficeSlice');
 const { CANONICAL_HOODS } = require('../lib/canonNeighborhoods');
 const civicSeat = require('./civicSeat');
-const { interventionIssue } = require('./civicInterventionValidation');
+const { categoryIssue, budgetIssue, reachHoods } = require('./civicInterventionValidation');
 const cityHallLedger = require('./cityHallLedger');
 const chaosCascade = require('./dumpChaosCascade');
 const orBatch = require('./orBatch');   // civic.39 Task 3 — batch transport (importable since the require.main guard; key read is lazy)
@@ -2156,7 +2156,7 @@ async function runClose() {
       '',
       '## Candidate initiatives proposed by council seats this week (' + clerkCandidates.length + ')',
       ...(clerkCandidates.length
-        ? clerkCandidates.map(m => '- ' + m.moveId + ' (' + m.agentDir + '): "' + ((m.payload || {}).title || '') + '" — ' + String((m.payload || {}).problem || '').slice(0, 200) + ' | hoods: ' + (((m.payload || {}).hoods) || []).join(', ') + ' | intervention: ' + ((m.payload || {}).intervention || '?'))
+        ? clerkCandidates.map(m => '- ' + m.moveId + ' (' + m.agentDir + '): "' + ((m.payload || {}).title || '') + '" — ' + String((m.payload || {}).problem || '').slice(0, 200) + ' | hoods: ' + (((m.payload || {}).hoods) || []).join(', ') + ' | category: ' + ((m.payload || {}).category || '?') + ' | reach: ' + ((m.payload || {}).reach || '?') + ' | budget: ' + ((m.payload || {}).budget || '?'))
         : ['(none — no pending propose moves on the ledger)']),
       '',
       'Respond with ONLY JSON: {"cycle": ' + cycle + ', "checks": [{"check": "<name>", "pass": true|false, "evidence": "<one line>"}], "overall": "pass"|"fail", "issues": ["..."], "missingVoices": ["..."]}',
@@ -2384,11 +2384,11 @@ function datawakeUserPrompt(pack, wallInj, office) {
     'JSON only: {"office":"' + voiceSlug(office.agentDir) + '","holder":"' + office.holder + '","statement":"","moves":[],"numberMoved":""}',
     'statement is one string that answers THIS WEEK\'S LEVER from the pack. Not a statement object. Not a prior-wall quote.',
     // civic.38 Task 1 — the closed move set. One consequential move per wake.
-    'moves: at most ONE move from this closed set — {"type":"propose","title":"","intervention":"<catalog key>","hoods":[""],"problem":"","budget":"$12.5M"} | {"type":"work","initiativeId":"INIT-…"} | {"type":"answer","confrontationId":"…","text":""} | {"type":"canvass","hood":"","note":""} | {"type":"call-vote","initiativeId":"INIT-…"}. ' +
+    'moves: at most ONE move from this closed set — {"type":"propose","title":"","problem":"","category":"<one category from your pack>","reach":"hood|district|all","hoods":[""],"budget":"$12.5M"} | {"type":"work","initiativeId":"INIT-…"} | {"type":"answer","confrontationId":"…","text":""} | {"type":"canvass","hood":"","note":""} | {"type":"call-vote","initiativeId":"INIT-…"}. ' +
       'work only names an initiative on YOUR board (game.boardIds). propose and canvass name only hoods inside your own district' +
       (/^D\d$/.test(String(office.district || '')) ? '' : ' (your seat is citywide — any real neighborhood)') +
       '. call-vote names a petition-pending row (proposed, no vote scheduled) whose domain has no petition rule — the mayor may call any such row, a district seat only one whose hoods sit in their district, once per row per week' +
-      '. propose.intervention comes only from the intervention catalog named in your pack, and propose.budget is a money string the engine can parse ($12.5M style) inside its domain\'s band — your pack lists the band next to each intervention' +
+      '. propose is yours to write: name it and the problem in your own words, file it under the category of life it touches (the categories in your pack), and pick its reach — hood (list the hoods), district (your whole district) or all (citywide seats only). propose.budget is a money string the engine can parse ($12.5M style) inside the category\'s band — your pack lists the band next to each category' +
       '. A move that breaks these rules is discarded, not corrected.',
     conf ? 'YOU HAVE AN UNANSWERED DIRECTIVE (' + conf.id + '). An {"type":"answer",...} move responding to it is expected. Bind confrontationId exactly to that directive; only one answer is accepted per directive and seat. No new consequence is attached.' : 'No answer move is available unless game.confrontationIds names an unanswered directive for this seat.',
     'No headcount, percentage, or dollar figure unless that exact number appears above. Progress with no cited metric is described in words ("ahead of schedule", "significant headway") — never estimated.',
@@ -2502,41 +2502,6 @@ function loadInterventionCatalog() {
   } catch (_) { return null; }
 }
 
-// engine.255 Task 9 (builder call 6): the budget parser + per-domain bands,
-// same lib as the catalog. Absent, propose budgets are unvalidatable and every
-// propose is refused loudly — never validated against a local copy.
-function loadBudgetContract() {
-  try {
-    const c = require('../lib/initiativePhaseContract');
-    if (typeof c.parseBudgetMoney === 'function' && c.BUDGET_BANDS && typeof c.BUDGET_BANDS === 'object') {
-      return { parse: c.parseBudgetMoney, bands: c.BUDGET_BANDS };
-    }
-  } catch (_) { /* not landed */ }
-  return null;
-}
-
-// engine.255 Task 9 (builder call 6, 2026-09-22): a propose carries a `budget`
-// string the engine's own parser accepts (parseBudgetMoney — never Number())
-// inside the closed per-domain band (lib BUDGET_BANDS). Missing, unparseable
-// or out-of-band budgets are refused, not corrected — a minted row whose
-// Budget cannot be parsed would stand as blocked: no-budget. Returns null
-// when the budget is valid. Caller has already cleared interventionIssue, so
-// the catalog entry and its policyDomain are known-good.
-function proposeBudgetReason(catalog, m) {
-  if (m.budget === null || m.budget === undefined || String(m.budget).trim() === '') return 'budget-missing';
-  const contract = loadBudgetContract();
-  if (!contract) return 'budget-contract-not-landed(lib/initiativePhaseContract.js parseBudgetMoney/BUDGET_BANDS — engine.255 Task 1, engine-sheet)';
-  const amount = contract.parse(m.budget);
-  if (amount === null) return 'budget-unparseable(' + String(m.budget).slice(0, 40) + ')';
-  const domain = String((catalog[m.intervention] || {}).policyDomain || '').trim().toLowerCase();
-  const band = Object.hasOwn(contract.bands, domain) ? contract.bands[domain] : null;
-  if (!band) return 'budget-outside-band(no band for domain ' + (domain || '?') + ')';
-  if (amount < band.min || amount > band.max) {
-    return 'budget-outside-band(' + domain + ' band ' + band.min + '-' + band.max + ', got ' + amount + ')';
-  }
-  return null;
-}
-
 // Hood authority: council seats are district-bound (child areas fold to
 // parents first — an intersect test would let one local hood carry in
 // unauthorized ones); citywide seats (mayor, police chief) may name any
@@ -2570,7 +2535,6 @@ function validateDatawakeMoves(rawMoves, ctx) {
   }
   const office = ctx.office || {};
   const boardIds = ctx.boardIds || new Set();
-  const catalog = ctx.catalog === undefined ? loadInterventionCatalog() : ctx.catalog;
   const c2p = ctx.childToParent || {};
   const isChief = String(office.officeId || '') === 'CHIEF-POLICE';
 
@@ -2581,6 +2545,7 @@ function validateDatawakeMoves(rawMoves, ctx) {
       continue;
     }
     let reason = null;
+    let proposeHoods = null;
     if (ctx.geographyIssue && ['propose', 'canvass', 'work'].includes(type)) {
       rejected.push({ move: m, reason: 'geography-unavailable(' + ctx.geographyIssue + ')' });
       continue;
@@ -2589,15 +2554,17 @@ function validateDatawakeMoves(rawMoves, ctx) {
       if (isChief) reason = 'seat-cannot-propose(CHIEF-POLICE is not an elected seat)';
       else if (!String(m.title || '').trim()) reason = 'propose-missing-title';
       else if (!String(m.problem || '').trim()) reason = 'propose-missing-problem';
-      else if (!Array.isArray(m.hoods) || !m.hoods.length) reason = 'propose-missing-hoods';
-      else if (!String(m.intervention || '').trim()) reason = 'propose-missing-intervention';
-      else if (!catalog) reason = 'catalog-not-landed(lib/initiativePhaseContract.js INTERVENTION_CATALOG — Task 4 step 0, engine-sheet)';
-      else if (interventionIssue(catalog, m.intervention)) reason = interventionIssue(catalog, m.intervention) + '(' + String(m.intervention) + ')';
-      else reason = proposeBudgetReason(catalog, m);
+      else if (categoryIssue(m.category)) reason = categoryIssue(m.category) + '(' + String(m.category == null ? '' : m.category) + ')';
+      else reason = budgetIssue(m.category, m.budget);
       if (!reason) {
-        for (const h of m.hoods) {
-          reason = hoodAuthorityReason(office, h, c2p);
-          if (reason) break;
+        const r = reachHoods(office, m.reach, m.hoods);
+        if (r.issue) reason = r.issue;
+        else {
+          for (const h of r.hoods) {
+            reason = hoodAuthorityReason(office, h, c2p);
+            if (reason) break;
+          }
+          if (!reason) proposeHoods = r.hoods;
         }
       }
     } else if (type === 'work') {
@@ -2634,6 +2601,13 @@ function validateDatawakeMoves(rawMoves, ctx) {
     const payload = {};
     for (const k of Object.keys(m)) {
       if (k !== 'type') payload[k] = m[k];
+    }
+    if (type === 'propose') {
+      // Job 2: category lowercased to the PolicyDomain it files as; reach
+      // expanded to the explicit hood list the row mints with.
+      payload.category = String(m.category).trim().toLowerCase();
+      payload.reach = String(m.reach).trim().toLowerCase();
+      payload.hoods = proposeHoods;
     }
     if (type === 'answer') {
       const directive = ctx.confrontations.find(c => c.id === m.confrontationId);
@@ -2780,7 +2754,7 @@ function foldMovesIntoDecisions(root, cycle, officeMap) {
         moveId: p.moveId, cycle: Number(cycle), date: p.date,
         agentDir: p.agentDir, popid: p.popid || seat.popid || null,
         proposingOffice: seat.officeId || seat.projectId || null,
-        title: p.payload.title, intervention: p.payload.intervention,
+        title: p.payload.title, category: p.payload.category, reach: p.payload.reach,
         hoods: p.payload.hoods, problem: p.payload.problem,
         budget: p.payload.budget != null ? String(p.payload.budget) : null,
         status: 'pending',
@@ -3100,7 +3074,7 @@ async function runDatawake() {
         ' people=' + ((pack.exposure && pack.exposure.subjects) || []).length +
         ' board=' + (game.boardIds || []).length +
         ' petitions=' + (game.petitionPool && game.petitionPool.available ? (game.petitionPool.complaints || []).length : 'n/a') +
-        ' interventions=' + (game.interventions && game.interventions.available ? game.interventions.playable.length : 'no-catalog') +
+        ' categories=' + (game.categories && game.categories.available ? game.categories.list.length : 'none') +
         (game.confrontation ? ' confrontation=' + game.confrontation.id : ''));
       if (!persona) throw new Error('no IDENTITY/RULES for ' + office.agentDir);
     }

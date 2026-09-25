@@ -362,7 +362,7 @@ function buildDecisions(init, group, cycle) {
 // S246 ES-5 — export the pure assembly functions so the trackerOwner-dispatch
 // logic is unit-testable without running the CLI / reading the voice dir.
 module.exports = {
-  loadVoiceFiles, attributeInitiative, voiceFor, priorityFor, buildGroups,
+  loadVoiceFiles, attributeInitiative, voiceFor, priorityFor, buildGroups, PROJECT_FILE_TO_INIT,
   pickPrimary, concatMilestoneNotes, buildDecisions, isGavelVoice, isHearingVoice,
 };
 

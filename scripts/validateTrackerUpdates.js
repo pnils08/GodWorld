@@ -30,7 +30,7 @@ const C = require('../lib/initiativePhaseContract');
 // 2-signal local resolver false-flagged 26 real C94-C98 statements the pipeline's
 // 4-signal attributeInitiative resolves cleanly — topic-keyword + project-file
 // fallbacks). assembleDecisions is require.main-guarded; importing is side-effect-free.
-const { attributeInitiative } = require('./assembleDecisions');
+const { attributeInitiative, PROJECT_FILE_TO_INIT } = require('./assembleDecisions');
 
 const ROOT = path.resolve(__dirname, '..');
 const DECISIONS_DIR = path.join(ROOT, 'output/city-civic-database/initiatives');
@@ -119,6 +119,11 @@ function validateRecords(records) {
   // condition is the whole initiative going dark. Empirical grain check:
   // C97-C99 post-conformance cycles produce zero hits; C100 flags exactly
   // INIT-001.
+  // civic.39 (2026-09-24): HARD only when the initiative's OWNING project
+  // director spoke and lost its fields (the C100 case). An initiative only
+  // council/mayor statements touched, with no writable field and no move, is
+  // silence — a warning, and the close proceeds for every other initiative
+  // (C108: INIT-007, three council statements, no director, blocked the week).
   const byInitiative = {};
   for (const rec of records) {
     if (!rec.initiativeId || !hasTrackerWork(rec.trackerUpdates)) continue;
@@ -126,11 +131,23 @@ function validateRecords(records) {
   }
   for (const [initId, recs] of Object.entries(byInitiative)) {
     if (recs.some(r => hasWritableField(r.trackerUpdates))) continue;
-    violations.push({ source: recs.map(r => r.source).join(' + '), code: 'initiative-dark',
-      detail: `${initId}: ${recs.length} trackerUpdates-bearing record(s) but zero writable fields (${WRITEBACK_FIELDS.join(', ')}) across all of them — the initiative would receive NO tracker write this cycle and go dark on stale data` });
+    const ownerSpoke = recs.some(r => isOwnerVoiceRecord(r, initId));
+    (ownerSpoke ? violations : warnings).push({ source: recs.map(r => r.source).join(' + '), code: ownerSpoke ? 'initiative-dark' : 'initiative-silent',
+      detail: `${initId}: ${recs.length} trackerUpdates-bearing record(s) but zero writable fields (${WRITEBACK_FIELDS.join(', ')}) across all of them — ` +
+        (ownerSpoke ? 'the owning director\'s own record carries nothing writable; the initiative would go dark on stale data'
+                    : 'no owning director spoke and no move landed; no tracker write for it this cycle, the close proceeds for the rest') });
   }
 
   return { violations, warnings, stamps };
+}
+
+// A record is the owning director's voice when it comes from that initiative's
+// project voice file (assembleDecisions PROJECT_FILE_TO_INIT — the pipeline's own
+// map). Decision files are assemblies, never an owner by themselves.
+function isOwnerVoiceRecord(rec, initId) {
+  const m = /^voice:([^#]+?)(?:_c\d+\.json)?(?:#|$)/.exec(String(rec.source || ''));
+  if (!m) return false;
+  return PROJECT_FILE_TO_INIT[m[1]] === initId;
 }
 
 // Disk loader: gather records from decision files + voice files for a cycle.

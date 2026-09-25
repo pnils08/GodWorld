@@ -80,6 +80,22 @@ var r8 = validateRecords([
 ok(has(r8.violations, 'nested-fields-schema'), 'G-INIT1: nested trackerUpdates.fields{} → HARD (payload would silently drop)');
 ok(has(r8.violations, 'initiative-dark'), 'G-INIT1: nested-fields statement as only record → initiative also flagged dark');
 
+// civic.39 (2026-09-24): an initiative only council/mayor statements touched,
+// no director, no move → silence, a WARNING; the close proceeds (C108 INIT-007).
+var r7b = validateRecords([
+  { source: 'decision:youth-apprenticeship', shape: 'object', initiativeId: 'INIT-007', trackerUpdates: { InitiativeID: 'INIT-007' } },
+]);
+ok(!has(r7b.violations, 'initiative-dark') && has(r7b.warnings, 'initiative-silent'), 'civic.39: council-only zero-writable initiative (C108 INIT-007) → initiative-silent warning, not HARD');
+var r7c = validateRecords([
+  { source: 'voice:council_d6_c108.json#s1', shape: 'object', initiativeId: 'INIT-002', trackerUpdates: { InitiativeID: 'INIT-002' } },
+  { source: 'decision:oari', shape: 'object', initiativeId: 'INIT-002', trackerUpdates: { InitiativeID: 'INIT-002' } },
+]);
+ok(!has(r7c.violations, 'initiative-dark'), 'civic.39: a council voice + decision assembly with no director voice → not HARD');
+var r7d = validateRecords([
+  { source: 'voice:oari_c108.json#OARI-1', shape: 'object', initiativeId: 'INIT-002', trackerUpdates: { InitiativeID: 'INIT-002' } },
+]);
+ok(has(r7d.violations, 'initiative-dark'), 'civic.39: the owning director\'s own voice file (real _cN.json name) with nothing writable → still HARD');
+
 // Advisory statement with zero writable fields is fine when ANOTHER statement
 // for the same initiative carries writable fields → no dark flag.
 var r9 = validateRecords([

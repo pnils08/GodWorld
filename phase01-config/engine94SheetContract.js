@@ -157,6 +157,15 @@ var ENGINE213_CONFIG_SEEDS = [
   ['civicTendGraceCycles', 6, 'civic.38 Task 4 upkeep: Cycles a Standing/Delivering initiative holds full strength after its last work move or stage change (builder-ruled 6)', 0, 52, true],
   ['civicTendDecayPerCycle', 0.15, 'civic.38 Task 4 upkeep: share of full strength lost per Cycle untended past the grace, linear (builder-ruled 0.15 — floor reached 5 Cycles past grace)', 0, 1, false],
   ['civicTendFloor', 0.3, 'civic.38 Task 4 upkeep: the least a neglected service pays, as a share of full strength (builder-ruled 0.3); one work move restores it', 0, 1, false],
+  // engine.259 (builder 2026-09-24: "the fund should move"): a Standing/Delivering
+  // fund in `disbursement-active` spends a tranche every Cycle — mostly off-ledger
+  // (the tracked ledger is ~1:448), and onto the few tracked households in its
+  // hoods that need it. Values are engine.255's builder-approved dials, renamed off
+  // housing: this is a fund, not a housing program.
+  ['civicDisburseTranche', 400000, 'engine.259: dollars a fund in disbursement-active spends per Cycle at full tend (x the upkeep tend factor); BudgetRemaining falls by this whether or not tracked rows qualify — the untracked city is the rest of the spend', 0, 1000000000, false],
+  ['civicGrantCapMonths', 12, 'engine.259: most months of a household\'s own monthly housing payment one grant may pay; the grant fills savings to the engine\'s 12-month buffer within this cap', 0, 60, false],
+  ['civicGrantHeadroomMonths', 1, 'engine.259: months of payment a grant fills ABOVE the 12-month buffer, so the weekly money loop does not re-flag the row the next Cycle', 0, 12, false],
+  ['civicGrantCooldownCycles', 26, 'engine.259: Cycles before ANY fund may grant the same household again (per household, not per fund)', 0, 520, true],
 ];
 
 function ensureEngine213Config_(ss) {

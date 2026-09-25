@@ -309,10 +309,15 @@
 - **getCivicTendDials_(ctx)**
 
 - **applyInitiativeImplementationEffects_(ctx)**
-  Reads: S.absoluteCycle, S.cycleId, S.initiativeImplementationTriggers, S.initiativeNeighborhoodEffects, S.previousCycleState, S.sentiment, S.sportsZones
-  Writes: S.initiativeHealthRelief, S.initiativeImplementationEffects, S.initiativeNeighborhoodEffects, S.sentiment
+  Reads: S.absoluteCycle, S.cycleId, S.initiativeDisbursement, S.initiativeImplementationTriggers, S.initiativeNeighborhoodEffects, S.previousCycleState, S.sentiment, S.sportsZones
+  Writes: S.initiativeDisbursement, S.initiativeHealthRelief, S.initiativeImplementationEffects, S.initiativeNeighborhoodEffects, S.sentiment
   Config: ctx.config.cycleCount
   Sheets: Initiative_Tracker
+
+- **getCivicDisburseDials_(ctx)**
+
+- **buildDisbursementSlice_(ctx, pending)**
+  Reads: S.canonHoods
 
 - **findImplCol_(headers, possibleNames)**
 
@@ -1891,8 +1896,19 @@
   Sheets: Household_Ledger
 
 - **buildCitizenMoneyLookup_(ctx)**
-  Reads: S.cycleId
+  Reads: S.cycleId, S.initiativeDisbursement
   Config: ctx.config.cycleCount
+
+- **ensureFundGrantColumns_(sheet, header)**
+  Reads: S.initiativeDisbursement
+
+- **planFundDisbursement_(header, rows, program, cycle, hoodOf, savingsOf)**
+
+- **applyFundDisbursement_(ctx, cycle)**
+
+- **applyFundDisbursementBody_(ctx, cycle, out)**
+  Reads: S.canonHoods, S.initiativeDisbursement
+  Sheets: Household_Ledger, Initiative_Tracker, LifeHistory_Log
 
 - **detectHouseholdStress_(ss, households)**
 
@@ -4243,4 +4259,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 184
-**Functions mapped:** 1479
+**Functions mapped:** 1485

@@ -200,14 +200,19 @@ function applyInitiativeImplementationEffects_(ctx) {
   var ss = ctx.ss;
   if (!ss) return;
 
+  // engine.259: the disbursement slice — one program per Standing/Delivering fund
+  // in `disbursement-active` with money left; published every fire, same
+  // unavailable-vs-empty contract as the relief slice.
+  S.initiativeDisbursement = { available: false, reason: 'tracker-unread', programs: [] };
   var sheet = ss.getSheetByName('Initiative_Tracker');
   if (!sheet) {
     Logger.log('applyInitiativeImplementationEffects_ v1.0: Initiative_Tracker not found (skipping)');
+    S.initiativeDisbursement.reason = 'tracker-missing';
     return;
   }
 
   var data = sheet.getDataRange().getValues();
-  if (data.length < 2) return;
+  if (data.length < 2) { S.initiativeDisbursement = { available: true, reason: null, programs: [] }; return; }
 
   var headers = data[0];
 
@@ -225,6 +230,15 @@ function applyInitiativeImplementationEffects_(ctx) {
   var iLastWork = findImplCol_(headers, ['LastWorkCycle']);
   var iLastStageChange = findImplCol_(headers, ['LastStageChangeCycle']);
   var iMayoral = findImplCol_(headers, ['MayoralAction', 'mayoralaction']);
+  // engine.259 (builder 2026-09-24: "the fund should move"): the phase says the
+  // money is flowing — keyed on phase, never domain (no housing program; any
+  // fund a seat stands up in this phase spends). Which other phases spend a
+  // budget (construction, dispatch, operational) is the builder's call; only
+  // `disbursement-active` does today.
+  var FUND_DISBURSE_PHASES = { 'disbursement-active': true };
+  var iBudgetRemaining = findImplCol_(headers, ['BudgetRemaining']);
+  var iLastDisburse = findImplCol_(headers, ['LastDisburseCycle']);
+  var pendingDisbursement = [];
 
   // engine.250: last Cycle's phase per initiative (previousCycleState.initiativePhases,
   // written by updateCivicApprovalRatings_ from the tracker SHEET), gated on the blob
@@ -470,6 +484,19 @@ function applyInitiativeImplementationEffects_(ctx) {
     if (domain === 'health' && HEALTH_DELIVERING_PHASES[phase] === true) {
       pendingHealthRelief.push({ hoodsStr: hoodsStr, intensity: intensity, name: name });
     }
+    // engine.259: a voted, Standing/Delivering fund in a disbursing phase with
+    // money left spends a tranche this Cycle.
+    if (FUND_DISBURSE_PHASES[phase] === true && iStage !== -1 && iInitId !== -1 && iBudgetRemaining !== -1) {
+      var dStage = String(row[iStage] == null ? '' : row[iStage]).trim();
+      var dVoted = status === 'override-passed' ||
+        (status === 'passed' && iMayoral !== -1 && String(row[iMayoral] == null ? '' : row[iMayoral]).trim().toLowerCase() === 'signed');
+      var dRemaining = Number(row[iBudgetRemaining]);
+      if ((dStage === 'Standing' || dStage === 'Delivering') && dVoted && isFinite(dRemaining) && dRemaining > 0) {
+        pendingDisbursement.push({ initiativeId: String(row[iInitId] || '').trim(), name: name, domain: domain, hoodsStr: hoodsStr, phase: phase, stage: dStage, tend: tend,
+          remaining: dRemaining, lastDisburseCycle: iLastDisburse !== -1 ? Number(row[iLastDisburse]) || 0 : 0, sheetRow: i + 1 });
+      }
+    }
+
     // Get domain effects
     var effects = DOMAIN_EFFECTS[domain] || DEFAULT_EFFECTS;
 
@@ -611,6 +638,7 @@ function applyInitiativeImplementationEffects_(ctx) {
   // DELIVERING phases only. A building site treats nobody, so construction and
   // planning publish nothing; relief starts when care starts.
   S.initiativeHealthRelief = healthRelief;
+  S.initiativeDisbursement = buildDisbursementSlice_(ctx, pendingDisbursement);
 
   S.initiativeImplementationEffects = {
     processed: processed,
@@ -656,6 +684,61 @@ function applyInitiativeImplementationEffects_(ctx) {
   ctx.summary = S;
 }
 
+
+// engine.259 — the fund dials (engine94SheetContract seeds). Fail loud on a missing key.
+function getCivicDisburseDials_(ctx) {
+  var source = ctx && ctx.config;
+  if (!source) throw new Error('civic disbursement: ctx.config required');
+  var required = function(key, min, max) {
+    var raw = source[key];
+    var value = Number(raw);
+    if (raw === '' || raw === null || raw === undefined || !isFinite(value) || value < min || value > max) {
+      throw new Error('civic disbursement: invalid or missing World_Config.' + key);
+    }
+    return value;
+  };
+  return {
+    tranche: required('civicDisburseTranche', 0, 1e12),
+    grantCapMonths: required('civicGrantCapMonths', 0, 60),
+    grantHeadroomMonths: required('civicGrantHeadroomMonths', 0, 12),
+    cooldownCycles: required('civicGrantCooldownCycles', 0, 520)
+  };
+}
+
+// engine.259 — one program per qualifying row. tranche = min(remaining,
+// dial × tend): the money that leaves the fund this Cycle, on and off camera.
+// Hoods fold through resolveHoodOrChild_ when the canon set is seeded.
+function buildDisbursementSlice_(ctx, pending) {
+  var out = { available: true, reason: null, programs: [] };
+  var list = pending || [];
+  if (!list.length) return out;
+  var canFold = typeof resolveHoodOrChild_ === 'function' && ctx && ctx.summary && ctx.summary.canonHoods && ctx.summary.canonHoods.set;
+  list.sort(function (a, b) { return a.initiativeId < b.initiativeId ? -1 : a.initiativeId > b.initiativeId ? 1 : 0; });
+  for (var i = 0; i < list.length; i++) {
+    var item = list[i];
+    var dials = getCivicDisburseDials_(ctx);
+    var tend = Number(item.tend);
+    if (!isFinite(tend) || tend < 0) tend = 1;
+    if (tend > 1) tend = 1;
+    var tranche = Math.min(item.remaining, Math.round(dials.tranche * tend * 100) / 100);
+    var folded = [], unknown = [];
+    var parts = String(item.hoodsStr || '').split(/[,;]+/);
+    for (var p = 0; p < parts.length; p++) {
+      var raw = parts[p].replace(/^\s+|\s+$/g, '');
+      if (!raw) continue;
+      var hood = canFold ? resolveHoodOrChild_(ctx, raw) : raw;
+      if (!hood) { if (unknown.indexOf(raw) < 0) unknown.push(raw); continue; }
+      if (folded.indexOf(hood) < 0) folded.push(hood);
+    }
+    out.programs.push({ initiativeId: item.initiativeId, name: item.name, domain: item.domain, phase: item.phase, stage: item.stage, tend: tend,
+      remaining: item.remaining, tranche: tranche, hoods: folded, unknownHoods: unknown, lastDisburseCycle: item.lastDisburseCycle, sheetRow: item.sheetRow,
+      grantCapMonths: dials.grantCapMonths, grantHeadroomMonths: dials.grantHeadroomMonths, cooldownCycles: dials.cooldownCycles,
+      paid: 0, grants: 0, debited: 0, newRemaining: item.remaining, status: 'pending' });
+  }
+  Logger.log('applyInitiativeImplementationEffects_: engine.259 fund disbursement — ' + out.programs.length + ' program(s): ' +
+    out.programs.map(function (pr) { return pr.initiativeId + ' ' + pr.domain + ' tranche ' + pr.tranche + ' of ' + pr.remaining; }).join('; '));
+  return out;
+}
 
 /**
  * Find column index by possible header names (case-insensitive).

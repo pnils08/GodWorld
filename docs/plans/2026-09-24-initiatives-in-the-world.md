@@ -46,7 +46,7 @@ pointers:
 
 ### Job 1: The Sunday that folds the moves (civic.39 schedule)
 
-- **Status:** open — started 2026-09-24 (engine-sheet).
+- **Status:** in progress (engine-sheet, 2026-09-24). Found + fixed: G-INIT1 `initiative-dark` let one council-only silent initiative (INIT-007) block the whole close — now warning `initiative-silent` (`38e11ecd`, agy review dispatched → `output/antigravity/2026-09-24-review-civic39-initiative-silent.md`). Dry tick C108 now: close-det PASS, apply ready (verdict cutoff) — `LastWorkCycle` 108 on INIT-001/002/003/005/006 and candidate INIT-008 "Downtown Economic Revitalization" (filed `health` — the menu defect Job 2 fixes; inert at Proposed, no clock, health band unset). **Waiting on the builder:** (a) one-time `node scripts/cron-civic-run.js --stage=tick --cycle=108 --apply` (tick only reads the current cycle, so C108 is never applied once C109 fires); (b) crontab: add `17 * * * * /usr/bin/node /root/GodWorld/scripts/cron-civic-run.js --stage=tick --apply >> /root/GodWorld/logs/civic-cron.log 2>&1  # civic.39 hourly tick (no model, idempotent)` — the Sunday chain lines stay (they still produce voices; the close is idempotent, a done week is skipped). Rollback: delete that one line.
 - **Why first:** 17 C108 moves sit `pending` in `output/cron-civic/moves/moves_c108.jsonl`; nothing has folded a move onto the tracker since the loop went live. Every later job depends on moves landing.
 - **Steps:** (1) Dry-run `node scripts/cron-civic-run.js --stage=tick` for the current cycle and read what it would fold (the 5 `work`, 11 `answer`, 1 `propose`). (2) Read the live crontab civic lines and civic.39's ruled schedule shape (hourly no-model `tick`; model verdicts inside ~24h; apply gates on verdicts). (3) Write the exact crontab swap (old Sunday chain lines out, hourly tick + batch collect in) into this job for the builder, with the rollback lines. (4) Builder installs (crontab is builder-installed per civic.39). (5) After the first unattended Sunday, read the move ledger: moves `applied`/`rejected`, tracker `LastWorkCycle` stamped.
 - **Owner:** engine-sheet (read + schedule text); kimi if a script defect surfaces (sole editor of `cron-civic-run.js`); agy reviews the swap.
@@ -77,4 +77,5 @@ pointers:
 
 ## Changelog
 
+- 2026-09-24 (engine-sheet) — Job 1: dry tick C108 found the initiative-dark block, fixed `38e11ecd`; C108 apply + hourly tick line wait on the builder.
 - 2026-09-24 (engine-sheet) — Plan filed from builder direction 2026-09-23/24 and §Where we sit. Job 1 started.

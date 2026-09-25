@@ -1,7 +1,7 @@
 ---
 title: Initiatives in the World Plan — moves land, no menu, build time, a finished initiative becomes a lasting thing
 created: 2026-09-24
-updated: 2026-09-24
+updated: 2026-09-25
 type: plan
 tags: [civic, engine, citizens, active]
 sources:
@@ -54,7 +54,18 @@ pointers:
 
 ### Job 2: No menu — category and reach
 
-- **Status:** open, design.
+- **Status:** step 1 done 2026-09-25 (inventory below); step 2 designed; step 3 sim calls with the builder.
+- **Inventory (step 1, read 2026-09-25):**
+  - The intervention-key layer (`health-service`, `economic-program`, …) lives ONLY Node-side on the proposal path. The engine already keys everything by `PolicyDomain`: `CIVIC_STAGE_CATALOG_` (`civicInitiativeEngine.js:3024`, readers `:3203` stage gate, `:3602` baseline tabs, `:3708` baseline stamp), `DOMAIN_EFFECTS` (`applyInitiativeImplementationEffects.js:305` — a row for every `POLICY_DOMAINS` entry), `updateCivicApprovalRatings.js:438`. **Category needs no engine cut:** a non-playable domain already mints, votes, funds, stands, and stops at `no-delivering-gate` (`lib/initiativePhaseContract.js:454`) — exactly "stands and runs, cannot deliver".
+  - Node readers of the menu: `validateDatawakeMoves` (`cron-civic-run.js:2593-2595`, refuses `domain-not-playable`), move contract text (`:2387-2391`), `proposeBudgetReason` (`:2531`, needs a band per domain), `buildCivicOfficeSlice.js` `loadInterventionMenu` (`:1159`, the pack's menu) + `loadConditionCounts` (`:1184`), `validateTrackerUpdates.js:230-247`, `applyTrackerUpdates.js:631-668` (mint: key → `entry.policyDomain`), `civicInterventionValidation.js` (the shared refusal), `cron-civic-gate.js:369`.
+  - `BUDGET_BANDS` (`initiativePhaseContract.js:275`) is a second menu: bands only for health/transit/education/housing, so economic/workforce/sports/safety/environment are refused on budget even if the catalog opens.
+  - Tests that encode the menu (rewrite to the new rule, never loosen): `initiativePhaseContract.test.js:47-55`, `cron-civic-tick.test.js:401,475`.
+  - Reach: engine splits `AffectedNeighborhoods` on `,;` and resolves each (`civicInitiativeEngine.js:3714`); an EMPTY list fails baseline `no-target-hoods` (`:3252`) — so `reach: all` must write every canonical hood by name, never blank (blank would be a silent §15 gate).
+- **Design (step 2, mechanism — engine-sheet's):** propose move = `{title, problem, category, reach, hoods?, budget}`. `category` ∈ the ruled list (step 3), written straight to `PolicyDomain`; the intervention key and `playable`-at-proposal refusal go away (`playable` stays, read only at Standing). `reach`: `hood` → the named hoods (district-bound as today); `district` → every canonical hood in the seat's district; `all` → every canonical hood (mayor only; a district seat's `all` is refused). The pack lists categories with their band and, per category, whether it can reach Delivering yet. Parity + tests rewritten to assert: any ruled category is accepted at proposal, non-playable stops at `no-delivering-gate`.
+- **Found broken/stale along the way:**
+  - INIT-008 is live with `PolicyDomain=health`, `Budget` blank, problem "economic imbalance". Its move (09-21) predates the budget rule (`e1809d9c`, 09-22), and the fold path (`applyTrackerUpdates.js:660`) never re-checks budget — only the wake gate does. Fold-time budget re-check is a bounded fix (kimi/aider). Correcting the row is canon → builder call.
+  - Stale housing after the removal: `BUDGET_BANDS.housing` (`initiativePhaseContract.js:279`), `POLICY_DOMAINS` still lists housing (`createInitiative.js:32`), `DOMAIN_EFFECTS.housing`, comments `cron-civic-run.js:2448,2822`, `civicPetitions.js:11`, `initiativePhaseContract.js:189-190`.
+  - Job 1 review: agy CLEAN PASS on `38e11ecd` (`output/antigravity/2026-09-24-review-civic39-initiative-silent.md`), owner check verified at `validateTrackerUpdates.js:134`, suite green.
 - **Steps:** (1) Inventory every reader of `INTERVENTION_CATALOG` / `stageCatalogByDomain` / `playable` (engine-wiring card) — proposal validator, stage handler, Delivering comparator, board text. (2) Design: the proposal carries `title`, `problem`, `category` (the part of life it touches), `reach` (hood | district | all); category maps to the effect channel and the Delivering measurable engine-side; a category with no lever yet still stands and runs, it just cannot deliver (board says so). (3) Sim calls for the builder, plain words: the category list, and who assigns it (the proposing seat, the clerk, or a classifier). (4) Cut scripts side (kimi) + engine mirror (engine-sheet), bench, agy review, deploy.
 - **Verify:** acceptance 2; the C108 "Downtown Economic Revitalization" filed as `health-service` would file as its own title under an economic category.
 
@@ -77,6 +88,7 @@ pointers:
 
 ## Changelog
 
+- 2026-09-25 (engine-sheet) — Job 2 step 1 inventory + step 2 design; broken/stale list; agy Job 1 review verified. Sim calls to the builder.
 - 2026-09-24 (engine-sheet) — Job 1 done: C108 applied live, hourly tick installed; unattended C109 close is the proof.
 - 2026-09-24 (engine-sheet) — Job 1: dry tick C108 found the initiative-dark block, fixed `38e11ecd`; C108 apply + hourly tick line wait on the builder.
 - 2026-09-24 (engine-sheet) — Plan filed from builder direction 2026-09-23/24 and §Where we sit. Job 1 started.

@@ -41,7 +41,6 @@ const workWakePackages = require('./workWakePackages');
 const phaseContract = require('../lib/initiativePhaseContract');
 const officeWall = require('./officeWall');
 const { deriveProblemContinuity } = require('./civicProblemContinuity');
-const { interventionIssue } = require('./civicInterventionValidation');
 const createInit = require('./createInitiative');
 const civicStageEvidence = require('./civicStageEvidence');
 

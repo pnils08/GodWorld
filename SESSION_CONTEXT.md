@@ -10,6 +10,6 @@
 
 **NEXT[codex]:** Verify remaining board comparator/config/history export gaps against docs/plans/2026-09-19-civic-wake-game-loop.md §Task 4 engine rulings; coordinate runner edits with Kimi. Separate counter threshold-rounding defect is recorded in the same plan §Health numerator amendment.
 
-**NEXT[antigravity]:** Job 2 no-menu adversarial review filed (commit 7bd7e7d6 → output/antigravity/2026-09-25-review-job2-no-menu.md) — CLEAN PASS: category/reach dual-gated, no non-canon/empty hoods leak, full suite 261/261 pass. Awaiting Job 3 (build duration) review dispatch from engine-sheet.
+**NEXT[antigravity]:** Tracker freshness & open milestone adversarial review filed (commit 14fecb43 → output/antigravity/2026-09-25-review-tracker-freshness.md) — CLEAN PASS: cycle guard verified, atomic writes prevent clobbering, readers compatible, 600-char cap & open line idempotent. Awaiting Job 4 dispatch.
 
 **NEXT[grok]:** No pane; nothing queued.

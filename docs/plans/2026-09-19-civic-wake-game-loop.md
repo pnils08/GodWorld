@@ -487,6 +487,18 @@ What this means for the build (engine-sheet reading, for the builder to correct)
 - Removed 2026-09-23 as not the builder's sim: the housing program (engine.251 discount, engine.255 renter grants, flagged-cohort judge, rent-burden petition count) — commits `c58a1adc`, `51ef51bf`.
 - Still standing and next to redesign against this section: the fixed `INTERVENTION_CATALOG` / `playable` gate (civic.38 Task 4 step 0) and the per-domain Delivering comparator. Open for the builder: who assigns the category (the proposing seat, the clerk, or a classifier) and what each category moves.
 
+## Builder direction 2026-09-24 (as said — direction, not yet a build)
+
+Verbatim:
+- On the Fund: "The fund should move or the story will always be it's stuck." The mechanism was accurate: "tick drain per cycle for untracked usage and used for the few in sim they may need it, citizen or business." "The worry there was only 5 citizens that could qualify but that's about right in the 1:448 ratio." → built as engine.259 (LIVE PROD @128): any Standing fund in `disbursement-active` drains and grants.
+- On the removal: "it was impossible to revert this cleanly cause it's hard to tell what worked and what didn't."
+- On the health center: "the health center, being a business, should run in the new phase system, it's 3 or 5. Once deployed helps the health in Temescal, mints as a business, can start to hire citizens."
+- On the tracker: "the tracker is messy in that each initiative has its unique impact so it's a system that needs better design."
+
+State today (engine-sheet, facts only): INIT-005 Temescal Community Health Center is `health`, Stage `Standing`, phase `construction-active`, $45M, Temescal. Health relief to the hood (engine.132) pays only in the delivering phases; construction pays nothing. No path exists for a delivered initiative to become a Business_Ledger row or an employer. Each initiative's effect is wired separately (health relief, transit station lift, fund disbursement), which is the mess the builder names.
+
+Open (design, not built): the per-initiative impact model — how a delivered initiative becomes a lasting thing in the world (a clinic that is a business with staff, a fund that runs dry), instead of one hand-wired effect per domain. Health center is the first case.
+
 ## Changelog
 
 - 2026-09-22 09:55 (engine-sheet) — **Builder ruled director wake cadence:** workers wake as their jobs need — the new civic system is not forced into the old one-wake rota. `cron-work-wake.js` default is now every due pack per run (`--limit=N` still caps); Tuesday dry-run woke all 7 due packs. Suite 39/39. First unattended run tonight 20:18.

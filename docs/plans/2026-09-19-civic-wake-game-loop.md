@@ -1,7 +1,7 @@
 ---
 title: Civic Wake Game Loop Plan — seat moves, three-stage initiatives, petitions, confrontation
 created: 2026-09-19
-updated: 2026-09-21
+updated: 2026-09-24
 type: plan
 tags: [civic, citizens, engine, cron, active]
 sources:
@@ -459,6 +459,29 @@ Measured: [[../../output/engine-sheet/2026-09-21-matched-control-c108-c112.json]
 ### civic.38 — status (drained from ROLLOUT, 2026-09-22 / S274)
 
 Civic game board — Task 4 steps 0–3 live PROD @116 (stages, upkeep, Delivering, losing clock; inert on blank Stage); director shifts file `work` moves; step 4 six-row conversion LIVE 2026-09-22 (bench-proven C123–C124); engine cuts complete — INIT-005 baseline stamps at the C109 fire; remaining work scripts-lane (petition band, coalitions plan)
+
+### Where we sit — 2026-09-24 (engine-sheet, read against live + the move ledger)
+
+**Live and running (engine, PROD @128):**
+- Stage machine on the tracker: `Proposed → Funded → Standing → Delivering`, seven stage columns + three budget columns (`BudgetTotal` / `BudgetRemaining` / `LastDisburseCycle`, AM–AO). Converted rows: INIT-001 Fund, INIT-002 OARI, INIT-005 health center at `Standing`; INIT-003 transit hub `Proposed`; INIT-006 Baylight and INIT-007 apprenticeship unstaged (legacy).
+- Time already on the tracker: the Funded clock (`civicStageStallCycles` 5), the untended clock at Standing/Delivering (`civicStageUntendedStallCycles` 12), upkeep decay (grace 6, −0.15/Cycle, floor 0.3), Delivering needs 3 consecutive observations over the margin (health 0.10). Every one of them counts *neglect* or *proof*. None of them says how long a thing takes to build.
+- Money: engine.259, the fund moves. INIT-001 seeded live at $23.8M remaining (canon: the $4.2M first release, E95) and drains from the C109 fire.
+- Health relief to a hood pays only in delivering phases; INIT-005 is `construction-active`, so Temescal gets nothing from it yet.
+
+**Built, not yet doing anything in the world:**
+- Seat moves (Tasks 1–3): seats are playing. `moves_c108.jsonl` holds 17 moves (5 `work`, 11 `answer`, 1 `propose`), **all still `pending`** — the Sunday fold that turns them into tracker writes has not run: C108's old Sunday chain halted at the voice step, and the civic.39 stage machine that replaces it is built and tested but not scheduled (crontab still runs the old chain; install is the builder's op call).
+- Petition counter (Task 6): runs dry, gates nothing — no support band set.
+- The one proposal shows the menu problem: "Downtown Economic Revitalization" filed under intervention `health-service`, because the seat had to pick one of the catalog's fixed templates (the builder's 2026-09-23 ruling: no menu).
+
+**Removed:** the housing program (engine.251 discount, engine.255 renter grants, flagged-cohort judge, rent-burden petition count), 2026-09-23. The drain it carried came back as engine.259, keyed on phase, not housing.
+
+**Open — design, in order (builder direction 2026-09-23/24):**
+1. **The Sunday that folds the moves** — schedule civic.39's stage machine so the 17 pending moves (and every week after) reach the tracker. Without it the seats play into a void. (Builder op decision: crontab install.)
+2. **No menu** — replace the fixed `INTERVENTION_CATALOG` with a seat-written initiative that carries a *category* (what part of life it touches) and a *reach* (hood / district / all); the engine maps category → what it moves. Who assigns the category is open.
+3. **Per-initiative impact model** — one shape for how a delivered initiative becomes a lasting thing in the world, replacing one hand-wired effect per domain. First case: the health center — reaches its delivering stage, helps Temescal's health, mints as a business, starts hiring citizens.
+4. **Time on the tracker** — a build duration: how many Cycles construction takes before a thing opens (the health center's build), so a stage can end on the calendar as well as on work and proof. Today nothing says when the clinic opens.
+5. **Which other phases spend a budget** (construction, dispatch, operational) — builder's call; only `disbursement-active` spends today.
+6. Coalitions — its own plan once the loop runs.
 
 ## Builder direction 2026-09-22 15:10 — SUPERSEDED 2026-09-23 (engine-sheet paraphrase; the housing reading below is withdrawn — see the next section)
 

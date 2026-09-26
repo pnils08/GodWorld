@@ -211,6 +211,25 @@ Touched tests pass 100% (42/42 spend assertions, 62/62 tick tests, 34/34 gate te
 
 ---
 
+### 8. Consequence Routing on Failed Renewals
+**Finding: VERIFIED RESILIENT (CIVIC REALITY REFLECTS DEFEAT).**
+
+- **Code Path:** [`phase05-citizens/civicInitiativeEngine.js:656-662`](file:///root/GodWorld/phase05-citizens/civicInitiativeEngine.js#L656-L662)
+- **Mechanism:**
+  Per builder direction (2026-09-26), the rejection of a running program's renewal must register real emotional and civic weight across Oakland:
+  ```javascript
+  if (!rPassed) {
+    applyInitiativeConsequences_(ctx, { outcome: 'FAILED', affectedNeighborhoods: rHoods,
+      policyDomain: iPolicyDomain >= 0 ? String(rRow[iPolicyDomain] || '').trim() : '' }, rName + ' renewal', 'vote');
+  }
+  ```
+- **Verification:**
+  - When a renewal fails at council, `applyInitiativeConsequences_` applies the canonical failed vote penalty: citywide sentiment dips (`dynamics.sentiment -= 0.05`), and a negative ripple is registered across the program's target neighborhoods by policy domain.
+  - A successful renewal (`rPassed === true`) bypasses this call, correctly treating continuity as maintenance rather than net-new expansion.
+  - Aligns with SIM_DOCTRINE §15 / civic consequence parity without mutating initiative status or outcome columns.
+
+---
+
 ## Local Validation Results
 
 1. **Targeted Unit Tests:**

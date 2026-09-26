@@ -545,6 +545,82 @@ function buildFeedAnchorFacts(row, cycle) {
   return facts.slice(0, 8);
 }
 
+// ---------------------------------------------------------------------------
+// TrueSource dossier — disk mirror written by ingestPlayerTrueSource.js
+// ---------------------------------------------------------------------------
+
+/** POPID-keyed map, or {} if the mirror hasn't been generated yet. */
+function loadTrueSourceMirror(root) {
+  return loadJson(path.join(root || ROOT, 'output', 'player_truesource_mirror.json')) || {};
+}
+
+/**
+ * Pull one compact dossier line per player from their mirrored TrueSource
+ * card: the season block (any year — never hardcode one), WAR, and awards.
+ * Falls back to a plain truncated snippet if the card doesn't match the
+ * known template shape (older-vintage cards). Returns [] when a player has
+ * no card — callers should treat that as "NONE", not an error.
+ */
+// Mirror content concatenates every file the player has (Tier 1 season card
+// + Tier 2 cumulative card, in whatever order Drive listed them). Season
+// stats, WAR, and awards all appear in BOTH files at different scopes (this
+// season vs. career-to-date) — extracting from the whole blob risks pairing
+// a 2041 season line with a career WAR. Split into per-file segments first
+// and scope every field to the single-season (Tier 1, "<Name>_YYYY.txt")
+// segment specifically, so a season line is never paired with a career number.
+function splitFileSegments(content) {
+  const parts = content.split(/\n-{10,}\nFILE: /).slice(1);
+  return parts.map(part => {
+    const nameEnd = part.indexOf('\n');
+    return { name: part.slice(0, nameEnd), body: part.slice(nameEnd) };
+  });
+}
+
+function dossierFactsFor(players, mirror) {
+  const facts = [];
+  const seen = new Set();
+  for (const player of players || []) {
+    if (!player.popid || seen.has(player.popid)) continue;
+    const card = mirror && mirror[player.popid];
+    if (!card || !card.content) continue;
+    seen.add(player.popid);
+
+    const segments = splitFileSegments(card.content);
+    // Tier 1 single-season file: "<Name>_YYYY.txt", never the Tier 2
+    // "FULL STAT TRUE SOURCE" cumulative card — that one holds career totals.
+    const seasonSegment = segments.find(s => /_\d{4}\.txt$/.test(s.name.trim()));
+    const text = seasonSegment ? seasonSegment.body : card.content;
+
+    // Fixed-length slices from the match index, not a bounded lookahead —
+    // pitcher cards separate subsections with single em-dashes ("— RATE
+    // METRICS —"), not the 5+-hyphen divider batter cards use, so a
+    // lookahead requiring that divider within N chars can fail to anchor
+    // and silently drop the whole match.
+    const seasonIdx = text.search(/\d{4} REGULAR SEASON/);
+    const seasonMatch = seasonIdx >= 0 ? text.slice(seasonIdx, seasonIdx + 400) : null;
+    const warMatch = seasonMatch ? seasonMatch.match(/WAR:\s*[\d.]+/) : text.match(/WAR:\s*[\d.]+/);
+    const awardsIdx = text.search(/AWARDS/i);
+    const awardsMatch = awardsIdx >= 0 ? text.slice(awardsIdx, awardsIdx + 200) : null;
+
+    let snippet;
+    if (seasonMatch) {
+      // Cap the counting-stat line hardest — WAR and awards are the facts
+      // an analytic arc piece actually needs, and a full stat dump would
+      // otherwise crowd them out of the tail of a length-capped fact.
+      const seasonLine = seasonMatch.replace(/\s+/g, ' ').trim().slice(0, 150);
+      const war = warMatch ? warMatch[0] : '';
+      const awards = awardsMatch ? awardsMatch.replace(/\s+/g, ' ').trim().slice(0, 90) : '';
+      snippet = [seasonLine, war, awards].filter(Boolean).join(' | ');
+    } else {
+      // No season block (e.g. a zero-stat/lightweight card) — strip the
+      // file-header boilerplate this segment starts with and use the rest.
+      snippet = text.replace(/^\s*Modified:[^\n]*\n-{5,}\n*/, '').replace(/\s+/g, ' ').trim().slice(0, 280);
+    }
+    facts.push((player.name + ' TrueSource: ' + snippet).slice(0, 340));
+  }
+  return facts.slice(0, 4);
+}
+
 module.exports = {
   ROOT,
   feedRowDelivery,
@@ -565,6 +641,8 @@ module.exports = {
   sportsHooks,
   sportsSeeds,
   loadRawFeedRows,
+  loadTrueSourceMirror,
+  dossierFactsFor,
   NAME_ALIASES,
   NON_NAME_FIRST
 };

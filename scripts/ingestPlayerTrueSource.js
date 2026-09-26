@@ -63,6 +63,13 @@ const WIPE_OLD = process.argv.includes('--wipe-old');                   // S183 
 const ALLOW_PARTIAL_WIPE = process.argv.includes('--allow-partial-wipe'); // engine.112 — deliberate override
 const WIPE_ONLY = process.argv.includes('--wipe-only');                 // S183 R2 — wipe and exit (no Drive walk, no writes)
 
+// Local disk mirror of every resolved player's card content, keyed by POPID.
+// Written on every run (dry-run and apply) so downstream disk-first readers
+// (buildAnthonySlice.js) never need a live Supermemory call for this data —
+// this script is the sole writer of wd-player-truesource, so the mirror is
+// exactly as fresh as Supermemory itself.
+const mirror = {};
+
 // W1 hardening constants (S183 R2)
 const WRITE_MAX_RETRIES = 3;
 const WRITE_RETRY_SLEEP_MS = 8000;
@@ -591,6 +598,26 @@ async function processPlayerGroup(playerName, fileContents, opts, results) {
   ).join('');
 
   const fullContent = header + body;
+
+  // Mirror every resolved player's content regardless of dry-run/apply or
+  // downstream POST outcome — the content itself is valid either way, and a
+  // failed/unattempted POST shouldn't leave a reader thinking there's no card.
+  // A player can resolve to the same POPID twice in one run (e.g. a primary
+  // flat card plus a legacy supplementary file) — primary always wins so a
+  // later-processed supplementary entry never overwrites the richer card.
+  if (!mirror[popId] || finalType === 'player_truesource') {
+    mirror[popId] = {
+      player: playerName,
+      popId,
+      legacyPopId: legacyPopId || null,
+      files: fileContents.map(f => f.pathFromPlayer || f.name),
+      content: fullContent,
+      sourcePass,
+      finalType,
+      ingestedAt: new Date().toISOString(),
+    };
+  }
+
   const titlePrefix = finalType === 'player_truesource_supplementary' ? 'Player TrueSource (supplementary)'
     : finalType === 'player_truesource_prospect' ? 'Player TrueSource (prospect)'
     : 'Player TrueSource';
@@ -898,9 +925,22 @@ async function main() {
     results,
   };
   fs.writeFileSync(outPath, JSON.stringify(report, null, 2));
+
+  // Merge this run's mirror entries onto whatever is already on disk — a
+  // filtered run (--player, --skip-subfolder) only touches a subset of
+  // players, and a full overwrite here would erase everyone else's card.
+  const mirrorPath = path.join(PROJECT_ROOT, 'output', 'player_truesource_mirror.json');
+  let existingMirror = {};
+  try {
+    existingMirror = JSON.parse(fs.readFileSync(mirrorPath, 'utf8'));
+  } catch (_) { /* first run or corrupt file — start fresh */ }
+  const mergedMirror = Object.assign({}, existingMirror, mirror);
+  fs.writeFileSync(mirrorPath, JSON.stringify(mergedMirror, null, 2));
+
   console.log('---');
   console.log('Summary: ' + JSON.stringify(report.totals));
   console.log('Report: ' + outPath);
+  console.log('Mirror: ' + mirrorPath + ' (' + Object.keys(mirror).length + ' updated, ' + Object.keys(mergedMirror).length + ' total)');
 }
 
 main().catch(err => {

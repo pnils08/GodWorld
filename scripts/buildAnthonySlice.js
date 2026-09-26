@@ -10,6 +10,11 @@
  *   output/desk_signal_c{N}.json  lanes.sports (fallback)
  *   output/simulation_ledger_snapshot.jsonl  name → POPID (optional)
  *   Feed Stats lines only for numbers — no invented x-stats / As_Roster sheet required offline
+ *   output/player_truesource_mirror.json — POPID-keyed local mirror of
+ *     wd-player-truesource, written by ingestPlayerTrueSource.js on every run
+ *     (dry-run and apply). Disk-first like everything else here — no network
+ *     call, no async. Missing mirror or missing POPID → dossierFacts NONE,
+ *     same as before this was wired (2026-09-26).
  *
  * Artifacts:
  *   output/slices/c{N}/anthony.md
@@ -259,15 +264,15 @@ function buildClaim(row, cls, foil) {
   return 'One board claim from the feed only — no invented receipts: ' + angle;
 }
 
-function buildMissingList(row, cls, players) {
+function buildMissingList(cls, players, dossierFacts) {
   const missing = [
     'x-stats / barrel% / launch angle / OAA not on feed',
     'contracts or salaries not printed on this feed row',
     'As_Roster sheet cells (offline pack uses feed Stats only — do not invent WAR/ERA beyond feed)'
   ];
   if (!cls.hasStats) missing.push('no usable Stats line on this pulse — do not invent box numbers');
-  if (!/TrueSource|dossier/i.test(row.notes || '')) {
-    missing.push('TrueSource dossier lines not loaded offline — DossierFacts: NONE unless packet supplies');
+  if (!dossierFacts || !dossierFacts.length) {
+    missing.push('No TrueSource card on file for these players — DossierFacts: NONE, do not invent career/arc claims');
   }
   for (const player of players || []) {
     if (!player.popid) {
@@ -361,7 +366,9 @@ function buildAnthonySlice(cycle, opts) {
   const players = sports.resolveFeedPlayers(row, ledger, 10);
   const lineFacts = buildLineFacts(row, players);
   const claim = buildClaim(row, cls, foil);
-  const missing = buildMissingList(row, cls, players);
+  const trueSourceMirror = sports.loadTrueSourceMirror(root);
+  const dossierFacts = sports.dossierFactsFor(players, trueSourceMirror);
+  const missing = buildMissingList(cls, players, dossierFacts);
 
   // Engine beat decks — COLOUR/POINTERS only, never facts (no merge into lineFacts/feedFacts)
   const decks = sports.loadBeatDecks(root, cyc);
@@ -388,7 +395,7 @@ function buildAnthonySlice(cycle, opts) {
     reporter: 'Anthony Raines',
     bagTools: bagTools.map(id => ({ id, name: BAG_TOOLS[id] })),
     lineFacts: lineFacts.slice(0, 6),
-    dossierFacts: ['NONE — offline slice; use packet TrueSource only if wake supplies'],
+    dossierFacts: dossierFacts.length ? dossierFacts : ['NONE — no TrueSource card on file for these players'],
     feedFacts: [
       row.storyAngle ? 'StoryAngle: ' + row.storyAngle : null,
       row.notes ? 'Notes: ' + String(row.notes).slice(0, 200) : null,

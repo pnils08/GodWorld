@@ -369,7 +369,8 @@ var ENGINE135_CONFIG_SEEDS = [
   ['employmentAttractorPull', 0.12, 'engine.135 fraction of the (attractor - rate) gap the city employment dial closes per Cycle', 0, 1, false],
   ['employmentHoodWeightMin', 0.5, 'engine.135 lower clamp on a hood structural employment weight before envelope normalization', 0.1, 1, false],
   ['employmentHoodWeightMax', 2.0, 'engine.135 upper clamp on a hood structural employment weight before envelope normalization', 1, 5, false],
-  ['employmentConvergenceRate', 0.25, 'engine.135 fraction of a hood Unemployed gap closed per Cycle (floor 3)', 0.05, 1, false]
+  ['employmentConvergenceRate', 0.25, 'engine.135 fraction of a hood Unemployed gap closed per Cycle (floor 3)', 0.05, 1, false],
+  ['employmentDistressGain', 0.3, 'engine.193 employment target drop per unit share of stated jobs at businesses with negative growth last week (target = attractor - gain x share)', 0, 1, false]
 ];
 
 var ENGINE94_CIVIC_STATE_COLUMNS = [

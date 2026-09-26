@@ -87,7 +87,6 @@ function applyDemographicDrift_(ctx) {
   // Employment physics
   var employmentFloor = cfgNum_(ctx, cfg, 'employmentFloor', 0.88);   // engine.135 A
   var employmentAttractor = cfgNum_(ctx, cfg, 'employmentAttractor', 0.96);  // engine.135 A
-  var employmentStep = cfgNum_(ctx, cfg, 'employmentStep', 0.0003);
   var prosperityEarnedOnly = String(cfg.prosperityEarnedOnly || '').toUpperCase() === 'TRUE';
 
   // Migration clamps (read for downstream consistency; not applied here because
@@ -270,18 +269,29 @@ function applyDemographicDrift_(ctx) {
   // back the same way. The attractor is the plan's realistic-with-boom-kick
   // number (docs/plans/2026-08-29-employment-system-cascade.md §Phase A,
   // approved 2026-08-29): World_Config employmentAttractor 0.96, floor 0.88.
+  //
+  // engine.193 cut 3 (2026-09-26): the TARGET reads the business ledger. Last week's
+  // distress — stated Employee_Count at businesses whose Growth_Rate went negative
+  // (Phase-5 streak ≥ 1, carried in previousCycleState.businessDynamics) as a share
+  // of all stated jobs — lowers the target for as long as it lasts and releases it
+  // when those businesses recover: target = attractor − employmentDistressGain × share.
+  // World-scale (stated headcount, never tracked-citizen counts), both directions,
+  // nothing standing at a healthy ledger. It replaces four gates that never pushed
+  // down on live (sentiment ≤ −0.3, econMood ≤ 35) and one that pushed up most weeks
+  // (sentiment ≥ 0.3); econMood already carries business ripples — reading it here
+  // too would count one recession twice.
+  var distress193 = businessDistressShare_(ctx, S);
+  var employmentDistressGain = cfgNum_(ctx, cfg, 'employmentDistressGain', 0.3);
+  var employmentTarget = employmentAttractor - employmentDistressGain * distress193.share;
+  S.employmentDistress = { share: round4(distress193.share), distressedJobs: distress193.distressed,
+    statedJobs: distress193.stated, target: round4(employmentTarget) };
   if (!prosperityEarnedOnly) {
     var employmentAttractorPull = cfgNum_(ctx, cfg, 'employmentAttractorPull', 0.12);
-    emp += (employmentAttractor - emp) * employmentAttractorPull;
+    emp += (employmentTarget - emp) * employmentAttractorPull;
+  } else if (distress193.share > 0) {
+    // no free-prosperity attractor, but a shrinking ledger still costs jobs
+    emp -= employmentDistressGain * distress193.share * cfgNum_(ctx, cfg, 'employmentAttractorPull', 0.12);
   }
-
-  // Sentiment influences small shifts
-  if (dynamics.sentiment <= -0.3) emp -= illnessStepUp;
-  if (dynamics.sentiment >= 0.3) emp += illnessStepUp;
-
-  // Economic mood integration
-  if (econMood >= 65) emp += employmentStep;
-  if (econMood <= 35) emp -= employmentStep;
 
   // Perfect weather slightly boosts productivity
   if (weatherMood.perfectWeather) emp += illnessStepUp * 0.5;
@@ -432,6 +442,35 @@ function applyDemographicDrift_(ctx) {
  * 0 in the sheet is a legitimate tuned value (freeze a step, disable a gain),
  * so absence is detected before coercion, never via falsiness.
  */
+// engine.193 cut 3 — share of stated Business_Ledger jobs sitting at a business whose
+// growth went negative last week (or that is closing). Distress state is Phase 5's
+// carried [streak, win, closed] per BIZ_ID; the weight is the committed Employee_Count.
+// Phase 3 runs before this week's Phase-5 drift, so this is last week, by construction.
+function businessDistressShare_(ctx, S) {
+  var out = { share: 0, distressed: 0, stated: 0 };
+  var dyn = (S && S.previousCycleState && S.previousCycleState.businessDynamics) || null;
+  var sheet = ctx.ss ? ctx.ss.getSheetByName('Business_Ledger') : null;
+  if (!dyn || !sheet) return out;
+  var vals = sheet.getDataRange().getValues();
+  if (!vals || vals.length < 2) return out;
+  var h = vals[0], iId = -1, iCnt = -1;
+  for (var c = 0; c < h.length; c++) {
+    var hn = String(h[c]).trim();
+    if (hn === 'BIZ_ID') iId = c; else if (hn === 'Employee_Count') iCnt = c;
+  }
+  if (iId < 0 || iCnt < 0) return out;
+  for (var r = 1; r < vals.length; r++) {
+    var id = String(vals[r][iId] || '').trim();
+    var n = Number(vals[r][iCnt]);
+    if (!id || !(n > 0)) continue;
+    out.stated += n;
+    var st = dyn[id];
+    if (st && ((Number(st[0]) || 0) >= 1 || Number(st[2]) > 0)) out.distressed += n;
+  }
+  out.share = out.stated > 0 ? out.distressed / out.stated : 0;
+  return out;
+}
+
 function cfgNum_(ctx, cfg, key, defaultValue) {
   var raw = cfg ? cfg[key] : undefined;
   if (raw === undefined || raw === null || raw === '') {
@@ -491,11 +530,11 @@ function pushMissingConfigWarning_(ctx, key, defaultValue) {
  * - Cap: illnessCap (default 0.15)
  *
  * EMPLOYMENT RATE:
- * - prosperityEarnedOnly=FALSE: pulled toward employmentAttractor (0.96) by
- *   employmentAttractorPull (0.12) of the gap per Cycle (engine.135 A)
- *   (defaults 0.90-0.93, step 0.0003)
- * - Negative sentiment: -illnessStepUp / Positive sentiment: +illnessStepUp
- * - High economic mood: +employmentStep / Low: -employmentStep
+ * - prosperityEarnedOnly=FALSE: pulled toward a TARGET by employmentAttractorPull
+ *   (0.12) of the gap per Cycle (engine.135 A). engine.193: target =
+ *   employmentAttractor (0.96) − employmentDistressGain (0.3) × share of stated
+ *   Business_Ledger jobs at businesses with negative growth last week. Floor
+ *   employmentFloor (World_Config). Sentiment/econMood gates removed (engine.193).
  * - Perfect weather: +illnessStepUp x0.5
  *
  * CALENDAR EMPLOYMENT (v2.2):

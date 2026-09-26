@@ -74,7 +74,7 @@ const CONFIG = {
   illnessInitiativeRelief: 0.25, illnessConvergenceRate: 0.25,
   migrationClampLow: -5000, migrationClampHigh: 5000, hospitalBaseCapacity: 100, hospitalLoadPerSick: 1, hospitalTalkbackGain: 0.001,
   // engine.135 A — the realistic-with-boom-kick dial (plan §Phase A)
-  employmentFloor: 0.88, employmentAttractor: 0.96, employmentStep: 0.0003, employmentFallbackRate: 0.96, employmentAttractorPull: 0.12,
+  employmentFloor: 0.88, employmentAttractor: 0.96, employmentFallbackRate: 0.96, employmentAttractorPull: 0.12, employmentDistressGain: 0.3,
   // engine.135 B2
   employmentHoodWeightMin: 0.5, employmentHoodWeightMax: 2.0, employmentConvergenceRate: 0.25,
 };
@@ -102,6 +102,41 @@ function driftCycle(emp, S) {
   assert('A2 the pull is symmetric: an over-boom dial comes back to the attractor', Math.abs(hi - CONFIG.employmentAttractor) <= 0.005, 'c25=' + r4(hi));
   let fl = 0.80; for (let c = 0; c < 1; c++) fl = driftCycle(fl, QUIET);
   assert('A3 floor 0.88 binds', fl >= CONFIG.employmentFloor, r4(fl));
+}
+
+// ── A2. engine.193 cut 3 — the target reads the business ledger ─────────────
+function bizSheet(rows) {
+  const v = [['BIZ_ID', 'Name', 'Employee_Count']].concat(rows);
+  return { getDataRange: () => ({ getValues: () => v.map(r => r.slice()) }) };
+}
+// 10 businesses × 1,000 stated jobs; `bad` of them went negative last week
+function distressCycle(emp, bad, cfgOver, dynOver) {
+  const wp = makeWP(emp);
+  const rows = [], dyn = {};
+  for (let i = 0; i < 10; i++) { rows.push(['BIZ-' + i, 'B' + i, 1000]); dyn['BIZ-' + i] = [i < bad ? 3 : 0, 0, 0]; }
+  const ctx = { ss: { getSheetByName: n => (n === 'World_Population' ? wp : n === 'Business_Ledger' ? bizSheet(rows) : null) },
+    config: Object.assign({}, CONFIG, cfgOver || {}),
+    summary: Object.assign({ cycleId: 200, previousCycleState: { businessDynamics: dynOver === undefined ? dyn : dynOver } }, QUIET), rng: () => 0.6 };
+  applyDemographicDrift_(ctx);
+  return { emp: Number(wp.read()), d: ctx.summary.employmentDistress };
+}
+{
+  const healthy = distressCycle(0.96, 0);
+  assert('A2 healthy ledger: target = attractor, nothing standing', healthy.d.share === 0 && Math.abs(healthy.d.target - 0.96) < 1e-9, JSON.stringify(healthy.d));
+  const two = distressCycle(0.96, 2);
+  assert('A2 20% of stated jobs distressed: target 0.96 − 0.3×0.2 = 0.90', Math.abs(two.d.target - 0.90) < 1e-9 && two.d.distressedJobs === 2000 && two.d.statedJobs === 10000, JSON.stringify(two.d));
+  let e = 0.96; for (let c = 0; c < 20; c++) e = distressCycle(e, 3).emp;
+  assert('A2 sustained 30% distress holds employment down past the 8% tier (target 0.87)', e < 0.92 && e >= 0.87 - 0.005, r4(e));
+  let held = e; for (let c = 0; c < 5; c++) held = distressCycle(held, 3).emp;
+  assert('A2 the attractor does not pull it back while businesses are still shedding', held <= e + 0.002, r4(e) + '→' + r4(held));
+  let rec = held; const recTrace = []; for (let c = 0; c < 25; c++) { rec = distressCycle(rec, 0).emp; recTrace.push(rec); }
+  assert('A2 recovery releases it: climbs back toward 0.96 once the ledger heals', recTrace.every((v, i) => i === 0 || v >= recTrace[i - 1]) && rec > 0.95, r4(rec));
+  let deep = 0.96; for (let c = 0; c < 60; c++) deep = distressCycle(deep, 10, { employmentFloor: 0.85 }).emp;
+  assert('A2 a whole-ledger collapse stops at the floor (0.85 → 15% unemployed max)', Math.abs(deep - 0.85) < 1e-9, r4(deep));
+  const cold = distressCycle(0.96, 5, null, null);
+  assert('A2 no carried business state (cold start) → share 0, no invented distress', cold.d.share === 0);
+  const closing = distressCycle(0.96, 0, null, { 'BIZ-0': [0, 0, 118] });
+  assert('A2 a closing business counts as distressed', Math.abs(closing.d.share - 0.1) < 1e-9, JSON.stringify(closing.d));
 }
 
 // ── B. the envelope ─────────────────────────────────────────────────────────

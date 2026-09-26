@@ -539,6 +539,9 @@ function compactNeighborhoodEconomies_(ne) {
 function compactActivityObservations_(S) {
   if (!S) return null;
   var keys = ['cycle', 'events', 'storySeedCount', 'media', 'crime', 'shockCount'];
+  // engine.193: `coverage` (the edition coverage score) rides the same history as the
+  // business-drift baseline. Kept ABSENT on entries that predate it — a 0 would fake a
+  // flat baseline and hand the first carried weeks a free lift.
   var cycle = Number(S.cycleId || S.cycle || 0);
   var worldEvents = S.worldEvents || [];
   var crime = S.crimeSpikes || S.crimeEvents || ((S.crimeMetrics && typeof compactCrimeSpikes_ === 'function') ? compactCrimeSpikes_(S.crimeMetrics) : []);
@@ -548,7 +551,8 @@ function compactActivityObservations_(S) {
     storySeedCount: (S.storySeeds || []).length,
     media: Number(S.mediaCoverage || S.mediaCount || 0),
     crime: Array.isArray(crime) ? crime.length : Number(crime || 0),
-    shockCount: worldEvents.length
+    shockCount: worldEvents.length,
+    coverage: isFinite(Number(S.editionSentimentBoost)) ? Number(S.editionSentimentBoost) : 0
   };
   var prior = (S.activityObservations && Array.isArray(S.activityObservations.history)) ? S.activityObservations.history : [];
   var out = [];
@@ -557,6 +561,7 @@ function compactActivityObservations_(S) {
     if (!h || Number(h.cycle) === cycle) continue;   // never two entries for one Cycle
     var o = {};
     for (var k = 0; k < keys.length; k++) { var v = Number(h[keys[k]]); o[keys[k]] = isFinite(v) ? v : 0; }
+    if (h.coverage !== undefined && h.coverage !== null && isFinite(Number(h.coverage))) o.coverage = Number(h.coverage);
     out.push(o);
   }
   out.push(entry);

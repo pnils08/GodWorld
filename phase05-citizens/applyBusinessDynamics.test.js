@@ -17,7 +17,7 @@ let passed = 0, failed = 0;
 function assert(label, cond, detail) { if (cond) { console.log(`  ok   ${label}`); passed++; } else { console.error(`  FAIL ${label}${detail ? ': ' + detail : ''}`); failed++; } }
 
 // the signed Task 3 table, as the self-arm seeds it
-const CFG = { bizDeclineStreak: 4, bizDriftMaxUp: 1.0, bizDriftMaxDown: 1.0, bizGrowthCeil: 40, bizGrowthFloor: -10, bizNoiseBound: 0.25, bizVitalityNeutral: 6.0, bizVitalityGain: 0.15, bizSuccessWindow: 3, bizSuccessVitalityHigh: 9.0, bizSuccessApprovalHigh: 85, bizSuccessPenalty: 0.3, bizDisruptBaseChance: 2, bizDisruptSuccessMult: 3, bizDisruptShock: 2.0, bizClosureStreak: 8, bizClosureRevenueFloorPct: 40, bizEventShockScale: 1.0, bizVol_faith: 0.5, bizVol_retail: 1.2, bizVol_food: 1.3, bizVol_health: 0.7, bizVol_tech: 1.5, bizVol_professional: 0.8, bizVol_construction: 1.1, bizVol_arts: 1.2, bizVol_education: 0.6, bizVol_default: 1.0,
+const CFG = { bizDeclineStreak: 4, bizDriftMaxUp: 1.0, bizDriftMaxDown: 1.0, bizGrowthCeil: 40, bizGrowthFloor: -10, bizNoiseBound: 0.25, bizCoverageUnit: 0.1, bizVitalityGain: 0.15, bizSuccessWindow: 3, bizSuccessVitalityHigh: 9.0, bizSuccessApprovalHigh: 85, bizSuccessPenalty: 0.3, bizDisruptBaseChance: 2, bizDisruptSuccessMult: 3, bizDisruptShock: 2.0, bizClosureStreak: 8, bizClosureRevenueFloorPct: 40, bizEventShockScale: 1.0, bizVol_faith: 0.5, bizVol_retail: 1.2, bizVol_food: 1.3, bizVol_health: 0.7, bizVol_tech: 1.5, bizVol_professional: 0.8, bizVol_construction: 1.1, bizVol_arts: 1.2, bizVol_education: 0.6, bizVol_default: 1.0,
   bizInitiativeStallDrag: 0.5,   // engine.250, builder-ruled half weight
   // engine.178 owner dial gates, as ensureEngine178Config_ seeds them
   dialOwnerStreakRoom: 1, dialOwnerDriveExpandMult: 1.25 };
@@ -48,14 +48,14 @@ assert('every required key present → numeric config', mod.bizDynamicsConfig_({
 console.log('the drift, one business');
 {
   const biz = { id: 'BIZ-X', sector: 'Retail', hood: 'Temescal', growth: 2, revenue: 1000000 };
-  const quiet = { chaosAtBusiness: false, chaosInHood: false, initiativeAdvanced: false, coverageSentiment: 0, vitality: 6.0, mayorApproval: 60 };
+  const quiet = { chaosAtBusiness: false, chaosInHood: false, initiativeAdvanced: false, coverageDeviation: null, vitality: 6.0, vitalityMedian: 6.0, mayorApproval: 60 };
   const a = mod.bizDriftOne_(CFG, biz, { streak: 0, win: 0 }, quiet, 110);
   const b = mod.bizDriftOne_(CFG, biz, { streak: 0, win: 0 }, quiet, 110);
   assert('deterministic: same inputs, same output', JSON.stringify(a) === JSON.stringify(b));
   assert('quiet cycle at neutral vitality: only noise moves it, inside ±0.25×vol', Math.abs(a.drift) <= 0.25 * 1.2 + 1e-9 && a.parts.ev === 0 && a.parts.vit === 0 && a.parts.pressure === 0, JSON.stringify(a.parts));
-  const hit = mod.bizDriftOne_(CFG, biz, { streak: 0, win: 0 }, Object.assign({}, quiet, { chaosAtBusiness: true, chaosInHood: true, coverageSentiment: -1 }), 110);
+  const hit = mod.bizDriftOne_(CFG, biz, { streak: 0, win: 0 }, Object.assign({}, quiet, { chaosAtBusiness: true, chaosInHood: true, coverageDeviation: -0.1 }), 110);
   assert('events are the signal: chaos at the business + in the hood + bad press = −2.0 capped, drift clamped at −1.0', hit.parts.ev === -2.0 && hit.drift === -1.0 && hit.growth === 1.0 && hit.streak === 0, JSON.stringify(hit));
-  const lift = mod.bizDriftOne_(CFG, biz, { streak: 0, win: 0 }, Object.assign({}, quiet, { initiativeAdvanced: true, coverageSentiment: 2 }), 110);
+  const lift = mod.bizDriftOne_(CFG, biz, { streak: 0, win: 0 }, Object.assign({}, quiet, { initiativeAdvanced: true, coverageDeviation: 0.2 }), 110);
   assert('an initiative landing + good press = +1.5 before vol, clamped +1.0', lift.parts.ev === 1.5 && lift.drift === 1.0);
   const v = mod.bizDriftOne_(CFG, biz, { streak: 0, win: 0 }, Object.assign({}, quiet, { vitality: 9.27 }), 110);
   assert('vitality term: (9.27−6)×0.15 = 0.49, clamped ±0.5; a null vitality contributes 0', Math.abs(v.parts.vit - 0.4905) < 1e-9 && mod.bizDriftOne_(CFG, biz, { streak: 0, win: 0 }, Object.assign({}, quiet, { vitality: null }), 110).parts.vit === 0);
@@ -67,7 +67,7 @@ console.log('the drift, one business');
   const neg = mod.bizDriftOne_(CFG, { id: 'BIZ-N', sector: 'Retail', hood: 'T', growth: -0.5, revenue: 500000 }, { streak: 4, win: 0 }, quiet, 110);
   assert('distress streak counts consecutive negative-growth cycles; revenue follows growth/52', (neg.growth < 0 ? neg.streak === 5 : neg.streak === 0) && neg.revenue === Math.round(500000 * (1 + neg.growth / 100 / 52)));
   const fl = mod.bizDriftOne_(CFG, { id: 'BIZ-F', sector: 'Tech', hood: 'T', growth: -9.9, revenue: 1 }, { streak: 0, win: 0 }, Object.assign({}, quiet, { chaosAtBusiness: true, chaosInHood: true }), 110);
-  const ce = mod.bizDriftOne_(CFG, { id: 'BIZ-C', sector: 'Tech', hood: 'T', growth: 39.9, revenue: 1 }, { streak: 0, win: 0 }, Object.assign({}, quiet, { initiativeAdvanced: true, coverageSentiment: 1 }), 110);
+  const ce = mod.bizDriftOne_(CFG, { id: 'BIZ-C', sector: 'Tech', hood: 'T', growth: 39.9, revenue: 1 }, { streak: 0, win: 0 }, Object.assign({}, quiet, { initiativeAdvanced: true, coverageDeviation: 0.1 }), 110);
   assert('floor −10 and ceiling 40 hold', fl.growth === -10 && ce.growth === 40);
   assert('blank revenue stays null (no signal) while growth still drifts', mod.bizDriftOne_(CFG, { id: 'BIZ-B', sector: 'Education', hood: 'T', growth: 1, revenue: null }, { streak: 0, win: 0 }, quiet, 110).revenue === null);
 }
@@ -237,11 +237,38 @@ console.log('engine.250 — the initiative bus chain: real writer → real reade
   assert('a stalled initiative is a CONDITION: net-negative hood entry drains its businesses every Cycle it stands', stalled.bus['West Oakland'].sentiment < 0 && stalled.growth[0] < none.growth[0] && stalled.growth[1] === none.growth[1], JSON.stringify([stalled.growth, none.growth]));
   const revived = chain([wo('disbursement-active')], { 'INIT-001': 'stalled' });
   assert('a REVIVAL from a failing phase is not an advance — advanced:0, no lift (a stall/revive loop cannot farm it)', revived.bus['West Oakland'].advanced === 0 && JSON.stringify(revived.growth) === JSON.stringify(none.growth), JSON.stringify(revived.bus));
-  const dragOne = mod.bizDriftOne_(CFG, { id: 'BIZ-D', sector: 'Professional Services', hood: 'T', growth: 5, revenue: 1 }, { streak: 0, win: 0 }, { chaosAtBusiness: false, chaosInHood: false, initiativeAdvanced: false, initiativeFailing: true, coverageSentiment: 0, vitality: 6.0, mayorApproval: 60 }, 110);
+  const dragOne = mod.bizDriftOne_(CFG, { id: 'BIZ-D', sector: 'Professional Services', hood: 'T', growth: 5, revenue: 1 }, { streak: 0, win: 0 }, { chaosAtBusiness: false, chaosInHood: false, initiativeAdvanced: false, initiativeFailing: true, coverageDeviation: null, vitality: 6.0, vitalityMedian: 6.0, mayorApproval: 60 }, 110);
   assert('the stall drain is HALF the event scale (bizInitiativeStallDrag 0.5): ev −0.5, not the −1.0 of chaos at the business', dragOne.parts.ev === -0.5, JSON.stringify(dragOne.parts));
   const cd = fs.readFileSync(path.join(__dirname, '..', 'phase02-world-state', 'applyCityDynamics.js'), 'utf8');
   assert('the Phase-2 fold no longer empties either bus (the clear starved the Phase-3 and Phase-5 readers)', !/S\.initiativeNeighborhoodEffects\s*=\s*\{\}/.test(cd) && !/S\.approvalNeighborhoodEffects\s*=\s*\{\}/.test(cd));
   assert('the fold reads the approval bus from the one-Cycle-old carry, not the same-Cycle summary', /foldPrev\.approvalNeighborhoodEffects/.test(cd) && /approvalBusCycle === foldCycle - 1/.test(cd));
+}
+
+console.log('engine.193 cut 2 — coverage against its own weeks, vitality against the city median');
+{
+  const H = (xs) => ({ cycleId: 121, editionSentimentBoost: xs.now, activityObservations: { history: xs.hist } });
+  assert('no carried coverage → null (no term), even with older entries lacking the key',
+    mod.bizCoverageDeviation_(H({ now: 0.2, hist: [{ cycle: 118, events: 9 }, { cycle: 119, events: 8 }] })) === null);
+  const dev = mod.bizCoverageDeviation_(H({ now: 0.1, hist: [{ cycle: 119, coverage: 0.2 }, { cycle: 120, coverage: 0.1 }, { cycle: 121, coverage: 9 }] }));
+  assert('deviation = now − mean(carried), this Cycle\'s own entry ignored: 0.1 − 0.15', Math.abs(dev - (-0.05)) < 1e-9, dev);
+  const seven = [0, 0, 0, 0, 0, 0, 0].map((_, i) => ({ cycle: 110 + i, coverage: i === 0 ? 5 : 0.1 }));
+  assert('only the last six carried weeks count', Math.abs(mod.bizCoverageDeviation_(H({ now: 0.1, hist: seven }))) < 1e-9);
+  const biz = { id: 'BIZ-X', sector: 'Retail', hood: 'T', growth: 5, revenue: 1 };
+  const base = { chaosAtBusiness: false, chaosInHood: false, initiativeAdvanced: false, coverageDeviation: null, vitality: 7, vitalityMedian: 7, mayorApproval: 60 };
+  const up = mod.bizDriftOne_(CFG, biz, { streak: 0, win: 0 }, Object.assign({}, base, { coverageDeviation: 0.05 }), 121);
+  const dn = mod.bizDriftOne_(CFG, biz, { streak: 0, win: 0 }, Object.assign({}, base, { coverageDeviation: -0.05 }), 121);
+  const flat = mod.bizDriftOne_(CFG, biz, { streak: 0, win: 0 }, Object.assign({}, base, { coverageDeviation: 0 }), 121);
+  assert('a week at its own average pays nothing; above lifts, below drags, symmetric (±0.25 at half a unit)',
+    flat.parts.ev === 0 && Math.abs(up.parts.ev - 0.25) < 1e-9 && Math.abs(dn.parts.ev + 0.25) < 1e-9, [up.parts.ev, dn.parts.ev]);
+  const big = mod.bizDriftOne_(CFG, biz, { streak: 0, win: 0 }, Object.assign({}, base, { coverageDeviation: 0.9 }), 121);
+  assert('coverage term capped at ±0.5', Math.abs(big.parts.ev - 0.5) < 1e-9);
+  assert('vitality median: odd, even, empty', mod.bizVitalityMedian_({ a: { retailVitality: 4 }, b: { retailVitality: 9 }, c: { retailVitality: 6 } }) === 6 &&
+    mod.bizVitalityMedian_({ a: { retailVitality: 4 }, b: { retailVitality: 6 } }) === 5 && mod.bizVitalityMedian_({ a: {} }) === null);
+  const hi = mod.bizDriftOne_(CFG, biz, { streak: 0, win: 0 }, Object.assign({}, base, { vitality: 9, vitalityMedian: 7 }), 121);
+  const lo = mod.bizDriftOne_(CFG, biz, { streak: 0, win: 0 }, Object.assign({}, base, { vitality: 5, vitalityMedian: 7 }), 121);
+  const noMid = mod.bizDriftOne_(CFG, biz, { streak: 0, win: 0 }, Object.assign({}, base, { vitality: 9, vitalityMedian: null }), 121);
+  assert('vitality reads against the median, both ways; no median → no term',
+    Math.abs(hi.parts.vit - 0.3) < 1e-9 && Math.abs(lo.parts.vit + 0.3) < 1e-9 && noMid.parts.vit === 0, [hi.parts.vit, lo.parts.vit]);
 }
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

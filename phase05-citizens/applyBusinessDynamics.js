@@ -49,7 +49,7 @@
 
 var BIZ_DYNAMICS_REQUIRED_KEYS = [
   'bizDriftMaxUp', 'bizDriftMaxDown', 'bizGrowthCeil', 'bizGrowthFloor', 'bizNoiseBound',
-  'bizVitalityNeutral', 'bizVitalityGain', 'bizSuccessWindow', 'bizSuccessVitalityHigh',
+  'bizCoverageUnit', 'bizVitalityGain', 'bizSuccessWindow', 'bizSuccessVitalityHigh',
   'bizSuccessApprovalHigh', 'bizSuccessPenalty', 'bizDisruptBaseChance', 'bizDisruptSuccessMult',
   'bizDisruptShock', 'bizClosureStreak', 'bizClosureRevenueFloorPct', 'bizEventShockScale',
   'bizVol_faith', 'bizVol_retail', 'bizVol_food', 'bizVol_health', 'bizVol_tech',
@@ -223,6 +223,42 @@ function bizDynamicsConfig_(ctx) {
   return out;
 }
 
+// engine.193 — this Cycle's edition coverage score minus the mean of the last six
+// carried weeks (S.activityObservations.history `coverage`, written by Phase 9's
+// compactActivityObservations_). null until at least one week is carried.
+function bizCoverageDeviation_(S) {
+  var now = Number(S && S.editionSentimentBoost);
+  if (!isFinite(now)) now = 0;
+  var hist = (S && S.activityObservations && Array.isArray(S.activityObservations.history)) ? S.activityObservations.history : [];
+  var cyc = Number(S && (S.cycleId || S.cycle));
+  var vals = [];
+  for (var i = 0; i < hist.length; i++) {
+    var h = hist[i];
+    if (!h || h.coverage === undefined || h.coverage === null || Number(h.cycle) === cyc) continue;
+    var v = Number(h.coverage);
+    if (isFinite(v)) vals.push(v);
+  }
+  vals = vals.slice(-6);
+  if (!vals.length) return null;
+  var sum = 0;
+  for (var j = 0; j < vals.length; j++) sum += vals[j];
+  return now - sum / vals.length;
+}
+
+// engine.193 — the median RetailVitality across hoods carrying one this Cycle; null when none do.
+function bizVitalityMedian_(ns) {
+  var v = [];
+  for (var h in (ns || {})) {
+    if (!ns.hasOwnProperty(h) || !ns[h]) continue;
+    var x = Number(ns[h].retailVitality);
+    if (ns[h].retailVitality !== undefined && ns[h].retailVitality !== null && ns[h].retailVitality !== '' && isFinite(x)) v.push(x);
+  }
+  if (!v.length) return null;
+  v.sort(function(a, b) { return a - b; });
+  var m = Math.floor(v.length / 2);
+  return v.length % 2 ? v[m] : (v[m - 1] + v[m]) / 2;
+}
+
 // The mayor's standing approval — Civic_Office_Ledger, first MAYOR* office. null when unreadable.
 function bizMayorApproval_(ctx) {
   try {
@@ -351,14 +387,25 @@ function bizDriftOne_(cfg, biz, prevState, inputs, cycle) {
   // initiative hood for as long as the initiative existed.
   if (inputs.initiativeAdvanced) ev += scale;
   if (inputs.initiativeFailing) ev -= scale * cfg.bizInitiativeStallDrag;   // builder-ruled half weight: a stall stings, one forgotten project does not close a block
-  if (inputs.coverageSentiment > 0) ev += 0.5 * scale;
-  else if (inputs.coverageSentiment < 0) ev -= 0.5 * scale;
+  // engine.193: coverage is read against its own recent weeks, not its sign. The
+  // city-level score was positive ~7 of 8 weeks, so `> 0 → +0.5` paid every business
+  // every week and Growth_Rate ratcheted (173 of 174 positive on live C108). Now a
+  // week the paper rates above its 6-week mean lifts, below it drags, continuous
+  // (±0.5 at ±bizCoverageUnit). No carried baseline yet → no term.
+  var covDev = inputs.coverageDeviation;
+  if (covDev !== null && covDev !== undefined && isFinite(covDev)) {
+    ev += bizClamp_(covDev / cfg.bizCoverageUnit, -1, 1) * 0.5 * scale;
+  }
   ev = bizClamp_(ev, -2.0, 2.0);
 
   // 2. ambient — hood retail vitality (null = no profile, no term)
-  var vit = inputs.vitality;
-  var vitMod = (vit === null || vit === undefined || isNaN(vit)) ? 0 :
-    bizClamp_((vit - cfg.bizVitalityNeutral) * cfg.bizVitalityGain, -0.5, 0.5);
+  // engine.193: centred on the city's own median hood vitality this Cycle, not a
+  // fixed 6 — live hoods average 7.15, so the fixed neutral paid most businesses a
+  // standing +0.17 (SIM_DOCTRINE §15: a band relative to the city's middle).
+  var vit = inputs.vitality, vitMid = inputs.vitalityMedian;
+  var vitMod = (vit === null || vit === undefined || isNaN(vit) ||
+                vitMid === null || vitMid === undefined || isNaN(vitMid)) ? 0 :
+    bizClamp_((vit - vitMid) * cfg.bizVitalityGain, -0.5, 0.5);
 
   // 3. success pressure — sustained prosperity + golden-era approval (27.10)
   var prosperous = vit !== null && vit !== undefined && !isNaN(vit) && vit >= cfg.bizSuccessVitalityHigh &&
@@ -409,7 +456,8 @@ function applyBusinessDynamics_(ctx) {
   var chaosBiz = S.chaosBusinessFold || {};
   var chaosHood = S.chaosNeighborhoodFold || {};
   var initHood = S.initiativeNeighborhoodEffects || {};
-  var coverage = Number(S.editionSentimentBoost) || 0; // city-level until per-business coverage has a reader
+  var coverageDev = bizCoverageDeviation_(S);   // engine.193 — city-level until per-business coverage has a reader
+  var vitalityMedian = bizVitalityMedian_(ns);  // engine.193
 
   var chaosBizIds = {};
   for (var ck in chaosBiz) { if (chaosBiz.hasOwnProperty(ck)) chaosBizIds[String(ck).split('::')[0]] = true; }
@@ -474,8 +522,9 @@ function applyBusinessDynamics_(ctx) {
       chaosInHood: !!(hood && chaosHood[hood]),
       initiativeAdvanced: !!(hood && initHood[hood] && Number(initHood[hood].advanced) > 0),
       initiativeFailing: !!(hood && initHood[hood] && Number(initHood[hood].sentiment) < 0),
-      coverageSentiment: coverage,
+      coverageDeviation: coverageDev,
       vitality: hs && hs.retailVitality !== undefined ? hs.retailVitality : null,
+      vitalityMedian: vitalityMedian,
       mayorApproval: mayorApproval,
       ownerDriveBand: ownerB ? ownerB.drive : 0,
       ownerExpandMult: pressureBar_(ctx, 'dialOwnerDriveExpandMult')
@@ -649,6 +698,8 @@ if (typeof module !== 'undefined' && module.exports) {
     bizParseRevenue_: bizParseRevenue_,
     bizDynamicsConfig_: bizDynamicsConfig_,
     bizDriftOne_: bizDriftOne_,
+    bizCoverageDeviation_: bizCoverageDeviation_,
+    bizVitalityMedian_: bizVitalityMedian_,
     applyBusinessDynamics_: applyBusinessDynamics_,
     archiveClosedBusinesses_: archiveClosedBusinesses_,
     BIZ_ARCHIVE_HEADERS: BIZ_ARCHIVE_HEADERS,

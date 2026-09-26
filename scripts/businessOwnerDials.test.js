@@ -25,7 +25,7 @@ function person(id, last = 'Alpha', drive = 90, composure = 90) {
 function fixture(rows, personnel, declining = false) {
   const config = {
     cycleCount: 200, bizDriftMaxUp: 2, bizDriftMaxDown: 2, bizGrowthCeil: 20, bizGrowthFloor: -30,
-    bizNoiseBound: 0, bizVitalityNeutral: 50, bizVitalityGain: 0.1, bizSuccessWindow: 4,
+    bizNoiseBound: 0, bizCoverageUnit: 0.1, bizVitalityGain: 0.1, bizSuccessWindow: 4,
     bizSuccessVitalityHigh: 80, bizSuccessApprovalHigh: 80, bizSuccessPenalty: 1,
     bizDisruptBaseChance: 0, bizDisruptSuccessMult: 1, bizDisruptShock: 1,
     bizClosureStreak: 8, bizClosureRevenueFloorPct: 25, bizEventShockScale: 1, bizInitiativeStallDrag: 0.5,
@@ -36,7 +36,7 @@ function fixture(rows, personnel, declining = false) {
     ['BIZ-SYNTHETIC-OWNER', 'Synthetic Owner Venture', 'Retail', 'Synthetic Hood', 6, declining ? 100 : 100000, declining ? -20 : 1, personnel]];
   return { config, now: 'C200', writes: [], rng() { throw new Error('Owner resolution must not draw from shared RNG'); },
     ledger: { headers: H.slice(), rows: rows.map(r => r.slice()), dirty: false },
-    summary: { cycleId: 200, neighborhoodState: { 'Synthetic Hood': { retailVitality: declining ? 50 : 60 } },
+    summary: { cycleId: 200, neighborhoodState: { 'Synthetic Hood': { retailVitality: declining ? 50 : 60 }, 'Median Hood': { retailVitality: declining ? 50 : 40 } }, // engine.193: vitality centres on the hood median (50)
       previousCycleState: { businessDynamics: { 'BIZ-SYNTHETIC-OWNER': [declining ? 7 : 0, 0, 0] } } },
     ss: { getSheetByName: tab => tab === 'Business_Ledger' ? { getDataRange: () => ({ getValues: () => data.map(r => r.slice()) }) } : null }
   };

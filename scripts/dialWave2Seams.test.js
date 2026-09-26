@@ -98,7 +98,7 @@ function closeVenture(personnel, rows) {
   // distress 7->8, revenue below 25% of the retail mint median.
   ctx.config = Object.assign(ctx.config, {
     bizDriftMaxUp: 2, bizDriftMaxDown: 2, bizGrowthCeil: 20, bizGrowthFloor: -30, bizNoiseBound: 0,
-    bizVitalityNeutral: 50, bizVitalityGain: 0.1, bizSuccessWindow: 4, bizSuccessVitalityHigh: 80,
+    bizCoverageUnit: 0.1, bizVitalityGain: 0.1, bizSuccessWindow: 4, bizSuccessVitalityHigh: 80,
     bizSuccessApprovalHigh: 80, bizSuccessPenalty: 1, bizDisruptBaseChance: 0, bizDisruptSuccessMult: 1,
     bizDisruptShock: 1, bizClosureStreak: 8, bizClosureRevenueFloorPct: 25, bizEventShockScale: 1, bizInitiativeStallDrag: 0.5,
     bizVol_faith: 1, bizVol_retail: 1, bizVol_food: 1, bizVol_health: 1, bizVol_tech: 1,

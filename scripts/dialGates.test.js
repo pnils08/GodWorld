@@ -66,15 +66,15 @@ function ledgerCtx(rows) { return { summary: {}, config: { dialOwnerStreakRoom: 
   const GW = pick(calSrc + src('../phase05-citizens/generationalWealthEngine.js'), ['parseKeyPersonnelOwners_']);
   global.parseKeyPersonnelOwners_ = GW.parseKeyPersonnelOwners_;
   const BD = pick(src('../phase05-citizens/applyBusinessDynamics.js'), ['bizDriftOne_', 'bizOwnerBands_', 'bizClamp_']);
-  const cfg = { bizVol_default: 1, bizEventShockScale: 1, bizVitalityNeutral: 5, bizVitalityGain: 0.1, bizSuccessVitalityHigh: 9, bizSuccessApprovalHigh: 90,
+  const cfg = { bizVol_default: 1, bizEventShockScale: 1, bizCoverageUnit: 0.1, bizVitalityGain: 0.1, bizSuccessVitalityHigh: 9, bizSuccessApprovalHigh: 90,
     bizSuccessWindow: 99, bizSuccessPenalty: 0, bizDisruptBaseChance: 0, bizDisruptSuccessMult: 1, bizDisruptShock: 0, bizNoiseBound: 0,
     bizDriftMaxDown: 2, bizDriftMaxUp: 2, bizGrowthFloor: -5, bizGrowthCeil: 20 };
   const biz = { id: 'BIZ-1', sector: 'Retail', growth: 2, revenue: 100000 };
-  const inputsBase = { chaosAtBusiness: false, chaosInHood: false, initiativeAdvanced: true, coverageSentiment: 1, vitality: 5, mayorApproval: 50 };
+  const inputsBase = { chaosAtBusiness: false, chaosInHood: false, initiativeAdvanced: true, coverageDeviation: 0.1, vitality: 5, vitalityMedian: 5, mayorApproval: 50 };
   const plain = BD.bizDriftOne_(cfg, biz, { streak: 0, win: 0 }, Object.assign({ ownerDriveBand: 0, ownerExpandMult: 1.25 }, inputsBase), 106);
   const driven = BD.bizDriftOne_(cfg, biz, { streak: 0, win: 0 }, Object.assign({ ownerDriveBand: 2, ownerExpandMult: 1.25 }, inputsBase), 106);
   assert('business: positive drift x1.25 for a driven owner', Math.abs(driven.drift - plain.drift * 1.25) < 1e-9, `${plain.drift} ${driven.drift}`);
-  const bad = { chaosAtBusiness: true, chaosInHood: true, initiativeAdvanced: false, coverageSentiment: -1, vitality: 5, mayorApproval: 50 };
+  const bad = { chaosAtBusiness: true, chaosInHood: true, initiativeAdvanced: false, coverageDeviation: -0.1, vitality: 5, vitalityMedian: 5, mayorApproval: 50 };
   const badPlain = BD.bizDriftOne_(cfg, biz, { streak: 0, win: 0 }, Object.assign({ ownerDriveBand: 0, ownerExpandMult: 1.25 }, bad), 106);
   const badDriven = BD.bizDriftOne_(cfg, biz, { streak: 0, win: 0 }, Object.assign({ ownerDriveBand: 2, ownerExpandMult: 1.25 }, bad), 106);
   assert('business: a bad week is never multiplied', badDriven.drift === badPlain.drift && badPlain.drift < 0);

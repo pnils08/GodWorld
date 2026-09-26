@@ -146,7 +146,11 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | engine.259 | The fund moves: per-Cycle drain + grants to stressed households, keyed on `disbursement-active` (builder 2026-09-24). LIVE PROD @128 `578c2237`; INIT-001 seeded 23.8M live; first live drain C109. → [[../reference/DEPLOY_HISTORY]] §PROD @128 | in-progress | engine-sheet | `scripts/fundDisbursement.test.js` |
 | engine.260 | Civic-initiative-as-business employer path — `BizID` link cut, bench pending; tracked-hiring mechanism needs a builder call | needs-info | engine-sheet (sim call — builder included) | [[../plans/2026-09-24-initiatives-in-the-world]] Job 4 |
 | engine.256 | Leases are one hood-median stamp that never moves (G-EC71) — draw around hood level, drift on renewal. kimi WIP in stash@{0} inert; reroute its direct write via intents before landing | ready | engine-sheet (sim calls — builder included) | gap log `output/production_log_run_cycle_c108_gaps.md` G-EC71; [[../plans/2026-09-22-initiative-budget-disbursement]] §Data reality |
-| engine.254 | Care and justice as one system (builder 2026-09-21): judicial ledger, mental health in the health systems, chaos cars + OARI + hospital stays aligned so OARI can be graded on diversion; data-first map filed, no build | in-progress | research-build | [[../plans/2026-09-21-care-and-justice-system]] |
+| engine.254 | Care and justice as one system: judicial ledger + mental-health states; drafting the two gating rulings now (2026-09-26) | in-progress | research-build | [[../plans/2026-09-21-care-and-justice-system]]; folded ideas [[../plans/2026-09-26-future-build-ideas]] §1 |
+| engine.261 | Firm agents — LLM strategy agents vs. engine.96's dial-driven design; determinism-trade builder call | needs-info | engine-sheet (sim judgement — builder included) | [[../plans/2026-09-26-future-build-ideas]] §2 |
+| engine.262 | Conservation laws — extend engineAuditor to catch money-conservation violations | ready | engine-sheet | [[../plans/2026-09-26-future-build-ideas]] §3 |
+| engine.263 | Credit/default cascades — loans/defaults rippling through households/businesses | needs-info | engine-sheet — gated on engine.193 economy-complete | [[../plans/2026-09-26-future-build-ideas]] §4 |
+| engine.264 | God-whisper seam — nudges routed as in-world pressure, provenance-logged; how visible is the builder's hand | needs-info | research-build (sim judgement — builder call) | [[../plans/2026-09-26-future-build-ideas]] §6 |
 | engine.236 | `Civic_Ledger` tab has no writer: SHEETS_MANIFEST names it the factions tab, but updateCivicLedgerFactions.js writes Faction/VotingPower onto Civic_Office_Ledger. Fix the manifest; keeping or removing the empty tab is the builder's go. | ready | engine-sheet | [[../research/2026-09-15-kimi-civic-lane]] |
 
 ### canon.* — World-fidelity layer
@@ -232,6 +236,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | governance.33 | C96 gap-log triage | in-progress | research-build / engine-sheet | [[../plans/2026-06-07-c96-gap-log-triage]] — detail in pointer (relocated 2026-07-02) |
 | governance.35 | REDUCED S260 by governance.36 §loop-tightening to the PIN-self-derive remnant | ready | engine-sheet (design: research-build DONE) | [[../plans/2026-06-14-session-context-mechanization]] — detail in pointer (relocated 2026-07-02) |
 | governance.47 | Cross-lane message bus — Tasks 1-4 shipped (file-mailbox transport, lane registry, transcript log, hop limit), live-verified against real lane states; open: Task 5 routing table | in-progress | research-build | [[../plans/2026-08-15-cross-lane-message-bus]] |
+| governance.52 | Wider AI autonomy — agentic loops/cross-cycle objectives for civic roles; scope against civic.38's shipped game loop first | needs-info | research-build | [[../plans/2026-09-26-future-build-ideas]] §5 |
 
 ---
 

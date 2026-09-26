@@ -169,6 +169,12 @@ var ENGINE213_CONFIG_SEEDS = [
   // leave a couple open"): tracked-hire openings seeded on a minted civic
   // establishment (Initiative_Tracker.OpenTrackedSlots) — the rest of its stated
   // Employee_Count is the untracked majority. Read by getCivicOpenSlots_.
+  // Initiatives in the World Job 5 (builder-ruled 2026-09-26: "build + running both
+  // spend"): a build spends this share of its budget across its build weeks; the rest
+  // is operating runway spent over civicOperatingWeeks, closing at zero. Read by
+  // getCivicSpendDials_.
+  ['civicCapitalShare', 0.6, 'Job 5: share of a build initiative\'s budget spent across its build weeks; the rest is operating runway (engine-set first value, builder adjusts)', 0, 1, false],
+  ['civicOperatingWeeks', 52, 'Job 5: weeks a running initiative\'s operating runway lasts before it closes unless renewed (engine-set first value, builder adjusts)', 1, 520, true],
   ['civicOpenSlots', 2, 'engine.260: tracked-hire openings a civic establishment starts with at mint (builder-ruled "a couple" = 2); the untracked city fills the rest of its stated headcount', 0, 10, true],
   // engine.259 (builder 2026-09-24: "the fund should move"): a Standing/Delivering
   // fund in `disbursement-active` spends a tranche every Cycle — mostly off-ledger

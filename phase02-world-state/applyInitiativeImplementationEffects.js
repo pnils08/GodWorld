@@ -239,6 +239,15 @@ function applyInitiativeImplementationEffects_(ctx) {
   var iBudgetRemaining = findImplCol_(headers, ['BudgetRemaining']);
   var iLastDisburse = findImplCol_(headers, ['LastDisburseCycle']);
   var pendingDisbursement = [];
+  // Initiatives in the World Job 5 (builder 2026-09-26: "build + running both
+  // spend"): a build spends its capital share across its build weeks, a running
+  // program burns its operating runway and closes at zero like the fund. The
+  // fund's own phase stays on the grants path above.
+  var BUILD_SPEND_PHASES = { 'construction-planning': true, 'construction-active': true };
+  var RUN_SPEND_PHASES = { 'implementation-active': true, 'dispatch-live': true, 'pilot-active': true, 'pilot_evaluation': true, 'operational': true };
+  var iBudgetTotal = findImplCol_(headers, ['BudgetTotal']);
+  var iNotesImpl = findImplCol_(headers, ['MilestoneNotes']);
+  var spendSlice = [];
 
   // engine.250: last Cycle's phase per initiative (previousCycleState.initiativePhases,
   // written by updateCivicApprovalRatings_ from the tracker SHEET), gated on the blob
@@ -496,6 +505,42 @@ function applyInitiativeImplementationEffects_(ctx) {
           remaining: dRemaining, lastDisburseCycle: iLastDisburse !== -1 ? Number(row[iLastDisburse]) || 0 : 0, sheetRow: i + 1 });
       }
     }
+    // Job 5: builds and running programs spend. Same voted + Standing/Delivering
+    // gate as the fund; same LastDisburseCycle receipt so a re-fire never debits twice.
+    if ((BUILD_SPEND_PHASES[phase] === true || RUN_SPEND_PHASES[phase] === true) &&
+        iStage !== -1 && iInitId !== -1 && iBudgetRemaining !== -1 && iBudgetTotal !== -1) {
+      var sStage = String(row[iStage] == null ? '' : row[iStage]).trim();
+      var sVoted = status === 'override-passed' ||
+        (status === 'passed' && iMayoral !== -1 && String(row[iMayoral] == null ? '' : row[iMayoral]).trim().toLowerCase() === 'signed');
+      var sRemRaw = row[iBudgetRemaining], sTotRaw = row[iBudgetTotal];
+      var sLast = iLastDisburse !== -1 ? Number(row[iLastDisburse]) || 0 : 0;
+      if ((sStage === 'Standing' || sStage === 'Delivering') && sVoted && sLast !== implCycle &&
+          sRemRaw !== '' && sRemRaw !== null && sTotRaw !== '' && sTotRaw !== null) {
+        var sPlan = planInitiativeSpend_({
+          phase: phase, build: BUILD_SPEND_PHASES[phase] === true, total: Number(sTotRaw), remaining: Number(sRemRaw), tend: tend,
+          buildCycles: getCivicBuildCycles_(ctx, domain), dials: getCivicSpendDials_(ctx)
+        });
+        if (sPlan && sPlan.debit > 0) {
+          var sId = String(row[iInitId] || '').trim();
+          queueCellIntent_(ctx, 'Initiative_Tracker', i + 1, iBudgetRemaining + 1, sPlan.newRemaining,
+            'Job 5 ' + (sPlan.build ? 'build' : 'operating') + ' spend C' + implCycle + ' ' + sId, 'civic', 5);
+          if (iLastDisburse !== -1) queueCellIntent_(ctx, 'Initiative_Tracker', i + 1, iLastDisburse + 1, implCycle,
+            'Job 5 spend receipt C' + implCycle + ' ' + sId, 'civic', 5);
+          if (sPlan.exhausted && iPhase !== -1) {
+            queueCellIntent_(ctx, 'Initiative_Tracker', i + 1, iPhase + 1, 'complete',
+              'Job 5 operating budget exhausted C' + implCycle + ' ' + sId, 'civic', 5);
+            if (iNotesImpl !== -1) {
+              var sPrior = String(row[iNotesImpl] == null ? '' : row[iNotesImpl]);
+              queueCellIntent_(ctx, 'Initiative_Tracker', i + 1, iNotesImpl + 1,
+                (sPrior ? sPrior + '\n' : '') + 'C' + implCycle + ': operating budget exhausted — service ends unless the council renews it',
+                'Job 5 budget exhausted note', 'civic', 5);
+            }
+          }
+          spendSlice.push({ initiativeId: sId, name: name, phase: phase, build: sPlan.build, debit: sPlan.debit,
+            newRemaining: sPlan.newRemaining, weeksLeft: sPlan.weeksLeft, exhausted: sPlan.exhausted });
+        }
+      }
+    }
 
     // Get domain effects
     var effects = DOMAIN_EFFECTS[domain] || DEFAULT_EFFECTS;
@@ -639,6 +684,13 @@ function applyInitiativeImplementationEffects_(ctx) {
   // planning publish nothing; relief starts when care starts.
   S.initiativeHealthRelief = healthRelief;
   S.initiativeDisbursement = buildDisbursementSlice_(ctx, pendingDisbursement);
+  S.initiativeSpend = spendSlice;
+  if (spendSlice.length) {
+    Logger.log('applyInitiativeImplementationEffects_: Job 5 spend — ' + spendSlice.map(function (sp) {
+      return sp.initiativeId + ' ' + (sp.build ? 'build' : 'operating') + ' -' + sp.debit + ' -> ' + sp.newRemaining +
+        (sp.exhausted ? ' EXHAUSTED' : (sp.weeksLeft !== null ? ' (' + sp.weeksLeft + ' wk left)' : ''));
+    }).join('; '));
+  }
 
   S.initiativeImplementationEffects = {
     processed: processed,
@@ -686,6 +738,59 @@ function applyInitiativeImplementationEffects_(ctx) {
 
 
 // engine.259 — the fund dials (engine94SheetContract seeds). Fail loud on a missing key.
+/** Job 5 dials, fail-loud (seeded by ensureEngine213Config_). */
+function getCivicSpendDials_(ctx) {
+  var source = ctx && ctx.config;
+  if (!source) throw new Error('civic spend: ctx.config required');
+  var required = function (key, min, max) {
+    var raw = source[key];
+    var value = Number(raw);
+    if (raw === '' || raw === null || raw === undefined || !isFinite(value) || value < min || value > max) {
+      throw new Error('civic spend: invalid or missing World_Config.' + key);
+    }
+    return value;
+  };
+  return { capitalShare: required('civicCapitalShare', 0, 1), operatingWeeks: required('civicOperatingWeeks', 1, 520) };
+}
+
+/**
+ * Job 5 — one Cycle of a build's or a running program's spend. Pure.
+ * A build category (buildCycles > 0) splits its budget: capitalShare is spent
+ * evenly across the build weeks (scaled by tend — an untended site does less
+ * work and spends less), never below the operating floor; the rest is runway.
+ * A running row spends runway evenly over operatingWeeks; a no-build category's
+ * whole budget is runway. A running row still holding capital (a site that
+ * opened before this rule, or one that under-spent its build) is trued down to
+ * the floor first. Returns null when nothing moves.
+ */
+function planInitiativeSpend_(input) {
+  var total = Number(input.total), remaining = Number(input.remaining);
+  if (!isFinite(total) || total <= 0 || !isFinite(remaining) || remaining <= 0) return null;
+  var d = input.dials || {};
+  var buildCycles = Math.max(0, Math.floor(Number(input.buildCycles) || 0));
+  var opShare = buildCycles > 0 ? (1 - Number(d.capitalShare)) : 1;
+  var floor = Math.round(total * opShare * 100) / 100;
+  var newRemaining;
+  if (input.build) {
+    if (buildCycles <= 0) return null;
+    var tend = Number(input.tend); if (!isFinite(tend) || tend < 0) tend = 1; if (tend > 1) tend = 1;
+    var weekly = total * Number(d.capitalShare) / buildCycles * tend;
+    newRemaining = Math.max(floor, remaining - weekly);
+  } else {
+    var base = Math.min(remaining, floor);
+    newRemaining = Math.max(0, base - floor / Number(d.operatingWeeks));
+  }
+  newRemaining = Math.round(newRemaining * 100) / 100;
+  var debit = Math.round((remaining - newRemaining) * 100) / 100;
+  if (!(debit > 0)) return null;
+  var perWeek = floor / Number(d.operatingWeeks);
+  return {
+    build: !!input.build, debit: debit, newRemaining: newRemaining,
+    exhausted: !input.build && newRemaining <= 0,
+    weeksLeft: input.build ? null : (perWeek > 0 ? Math.ceil(newRemaining / perWeek) : null)
+  };
+}
+
 function getCivicDisburseDials_(ctx) {
   var source = ctx && ctx.config;
   if (!source) throw new Error('civic disbursement: ctx.config required');

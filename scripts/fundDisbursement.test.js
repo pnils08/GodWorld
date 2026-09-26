@@ -58,7 +58,8 @@ function mockSheet(values) {
 const HH_HEAD = ['HouseholdId', 'HeadOfHousehold', 'HouseholdType', 'Members', 'Neighborhood', 'HousingType', 'MonthlyRent', 'HousingCost', 'HouseholdIncome', 'FormedCycle', 'DissolvedCycle', 'Status', 'HouseholdSavings'];
 const TR_HEAD = ['InitiativeID', 'Name', 'Status', 'PolicyDomain', 'AffectedNeighborhoods', 'ImplementationPhase', 'Budget', 'MayoralAction', 'Stage', 'LastWorkCycle', 'LastStageChangeCycle', 'BudgetTotal', 'BudgetRemaining', 'LastDisburseCycle', 'MilestoneNotes'];
 const CONFIG = { civicTendGraceCycles: 6, civicTendDecayPerCycle: 0.15, civicTendFloor: 0.3,
-  civicDisburseTranche: 400000, civicGrantCapMonths: 12, civicGrantHeadroomMonths: 1, civicGrantCooldownCycles: 26 };
+  civicDisburseTranche: 400000, civicGrantCapMonths: 12, civicGrantHeadroomMonths: 1, civicGrantCooldownCycles: 26,
+  civicCapitalShare: 0.6, civicOperatingWeeks: 52 };
 function ctxWith(trackerRows, hhRows, cfg, cycle, ledgerRows) {
   const tabs = { Initiative_Tracker: mockSheet([TR_HEAD.slice(), ...trackerRows]), Household_Ledger: mockSheet([HH_HEAD.slice(), ...hhRows]) };
   return { summary: { cycleId: cycle || 110, previousCycleState: {} }, config: Object.assign({}, CONFIG, cfg || {}), persist: {}, now: 't',
@@ -95,17 +96,17 @@ let n = 0; const ok = (c, l) => { assert(c, l); n++; };
 {
   const rows = [
     TR('INIT-902', 'passed', 'disbursement-active', 'Funded', 'Laurel', 'signed'),                 // Funded pays nothing
-    TR('INIT-903', 'passed', 'construction-active', 'Standing', 'Laurel', 'signed'),               // construction pays nothing
+    TR('INIT-903', 'passed', 'construction-active', 'Standing', 'Laurel', 'signed'),               // construction pays no grants (Job 5 spends it on the build, not on households)
     TR('INIT-904', 'passed', 'complete', 'Delivering', 'Laurel', 'signed'),                        // closed
     TR('INIT-905', 'passed', 'stalled', 'Standing', 'Laurel', 'signed'),                           // failing phase
     TR('INIT-906', 'passed', 'disbursement-active', 'Standing', 'Laurel', 'none'),                 // unsigned
     TR('INIT-907', 'passed', 'disbursement-active', 'Standing', 'Laurel', 'signed', 108, 0),       // budget exhausted
-    TR('INIT-908', 'passed', 'operational', 'Standing', 'Laurel', 'signed', 108, 5000),            // a service phase that is not disbursement (builder names any more)
+    TR('INIT-908', 'passed', 'operational', 'Standing', 'Laurel', 'signed', 108, 5000),            // a running phase spends operating runway (Job 5), never grants
     TR('INIT-909', 'passed', 'disbursement-active', 'Standing', 'Laurel', 'signed', 108, ''),      // BudgetRemaining blank (no budget)
   ];
   const ctx = ctxWith(rows, [], {}, 110);
   E.applyInitiativeImplementationEffects_(ctx);
-  ok(ctx.summary.initiativeDisbursement.available === true && ctx.summary.initiativeDisbursement.programs.length === 0, 'Funded/construction/complete/stalled/unsigned/exhausted/operational/no-budget all pay zero (valid EMPTY slice)');
+  ok(ctx.summary.initiativeDisbursement.available === true && ctx.summary.initiativeDisbursement.programs.length === 0, 'Funded/construction/complete/stalled/unsigned/exhausted/operational/no-budget all pay zero grants (valid EMPTY slice)');
 }
 {
   const ctx = ctxWith([TR('INIT-910', 'passed', 'disbursement-active', 'Standing', 'Laurel', 'signed', 100)], [], {}, 110); // untended 10 > grace 6 → 0.4 (both clocks at 100 — the tend clock counts from the later of the two)

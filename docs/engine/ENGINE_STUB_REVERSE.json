@@ -1,8 +1,8 @@
 {
-  "generated": "2026-09-25",
+  "generated": "2026-09-26",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 184,
-  "functionsMapped": 1489,
+  "functionsMapped": 1498,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -2268,6 +2268,12 @@
         "phase03-population/updateNeighborhoodDemographics.js::updateNeighborhoodDemographics_"
       ]
     },
+    "initiativeSpend": {
+      "writers": [
+        "phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_"
+      ],
+      "readers": []
+    },
     "initiativeImplementationTriggers": {
       "writers": [],
       "readers": [
@@ -3288,6 +3294,16 @@
       ],
       "readers": [
         "phase05-citizens/civicInitiativeEngine.js::applyActiveInitiativeRipples_"
+      ]
+    },
+    "civicOpenSlots": {
+      "writers": [
+        "phase05-citizens/civicInitiativeEngine.js::publishCivicOpenSlots_"
+      ],
+      "readers": [
+        "phase05-citizens/civicInitiativeEngine.js::getCivicOpenSlots_",
+        "phase05-citizens/civicInitiativeEngine.js::publishCivicOpenSlots_",
+        "phase05-citizens/runCareerEngine.js::runCareerEngine_"
       ]
     },
     "initiativeEnginePhaseMoves": {
@@ -4646,6 +4662,7 @@
         "phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_",
         "phase05-citizens/civicInitiativeEngine.js::createInitiative_",
         "phase05-citizens/householdFormationEngine.js::applyFundDisbursementBody_",
+        "phase05-citizens/runCareerEngine.js::runCareerEngine_",
         "phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_"
       ],
       "readers": [
@@ -4660,6 +4677,7 @@
         "phase05-citizens/civicInitiativeEngine.js::runCivicInitiativeEngine_",
         "phase05-citizens/civicInitiativeEngine.js::seedInitiativeTracker_",
         "phase05-citizens/householdFormationEngine.js::applyFundDisbursementBody_",
+        "phase05-citizens/runCareerEngine.js::runCareerEngine_",
         "phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_",
         "phase10-persistence/compileHandoff.js::loadInitiatives_",
         "utilities/cycleRollback.js::previewRollbackToCycle78",

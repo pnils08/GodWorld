@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-09-25 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-09-26 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -310,9 +310,13 @@
 
 - **applyInitiativeImplementationEffects_(ctx)**
   Reads: S.absoluteCycle, S.cycleId, S.initiativeDisbursement, S.initiativeImplementationTriggers, S.initiativeNeighborhoodEffects, S.previousCycleState, S.sentiment, S.sportsZones
-  Writes: S.initiativeDisbursement, S.initiativeHealthRelief, S.initiativeImplementationEffects, S.initiativeNeighborhoodEffects, S.sentiment
+  Writes: S.initiativeDisbursement, S.initiativeHealthRelief, S.initiativeImplementationEffects, S.initiativeNeighborhoodEffects, S.initiativeSpend, S.sentiment
   Config: ctx.config.cycleCount
   Sheets: Initiative_Tracker
+
+- **getCivicSpendDials_(ctx)**
+
+- **planInitiativeSpend_(input)**
 
 - **getCivicDisburseDials_(ctx)**
 
@@ -1516,6 +1520,24 @@
 
 - **ensureInitiativeBuildColumns_(sheet, header)**
 
+- **ensureInitiativeLinkColumns_(sheet, header)**
+
+- **planInitiativeBizLinkBackfill_(header, rows)**
+
+- **backfillInitiativeBizLinks_(sheet, header, rows)**
+
+- **planInitiativeOpenSlotsBackfill_(header, rows, startingSlots)**
+
+- **backfillInitiativeOpenSlots_(ctx, sheet, header, rows)**
+
+- **getCivicOpenSlots_(ctx)**
+  Reads: S.civicOpenSlots
+  Config: ctx.config.civicOpenSlots
+
+- **publishCivicOpenSlots_(ctx, header, rows)**
+  Reads: S.civicOpenSlots
+  Writes: S.civicOpenSlots
+
 - **planInitiativeBudgetBackfill_(header, rows)**
 
 - **backfillInitiativeBudgets_(sheet, header, rows)**
@@ -2190,10 +2212,10 @@
   Sheets: Business_Ledger
 
 - **runCareerEngine_(ctx)**
-  Reads: S.absoluteCycle, S.businessDeclines, S.careerSignals, S.cityDynamics, S.cycleId, S.demographicDrift, S.economicMood, S.eventsGenerated, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.weather, S.weatherMood, S.worldEvents
+  Reads: S.absoluteCycle, S.businessDeclines, S.careerSignals, S.cityDynamics, S.civicOpenSlots, S.cycleId, S.demographicDrift, S.economicMood, S.eventsGenerated, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.weather, S.weatherMood, S.worldEvents
   Writes: S.careerEvents, S.careerSignals, S.eventsGenerated
   Config: ctx.config.cycleCount, ctx.config.rngSeed
-  Sheets: Business_Ledger, LifeHistory_Log
+  Sheets: Business_Ledger, Initiative_Tracker, LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)
 
 ### runCivicElectionsv1.js
@@ -4268,4 +4290,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 184
-**Functions mapped:** 1489
+**Functions mapped:** 1498

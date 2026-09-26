@@ -483,6 +483,10 @@ Civic game board — Task 4 steps 0–3 live PROD @116 (stages, upkeep, Deliveri
 5. **Which other phases spend a budget** (construction, dispatch, operational) — builder's call; only `disbursement-active` spends today.
 6. Coalitions — its own plan once the loop runs.
 
+### civic.38 — status (drained from ROLLOUT, 2026-09-26 / S274)
+
+Stage machine + budgets + fund drain live (PROD @128). Executing [[../plans/2026-09-24-initiatives-in-the-world]] — Jobs 1-2 done (moves fold + hourly tick; no menu — category + reach), Job 3 live PROD @130 (build duration `812d04d3` + open milestone line `12289fdb`; tracker copies refreshed hourly `3e2cf3cf`), Job 4 next (clinic as a business)
+
 ## Builder direction 2026-09-22 15:10 — SUPERSEDED 2026-09-23 (engine-sheet paraphrase; the housing reading below is withdrawn — see the next section)
 
 - The engine raising rent-burden flags on its own is fine; the world may have a housing crisis. What was wrong with engine.251 was the response shape: a flat hood-wide discount no seat proposed, duplicating the initiative the world already has.

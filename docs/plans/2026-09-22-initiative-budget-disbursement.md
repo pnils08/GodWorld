@@ -198,6 +198,16 @@ The stage step runs 31 slots before the household engine (`godWorldEngine2.js:35
 
 None invented. The seven builder calls above are the open items; each has a recommendation.
 
+## Status log
+
+### engine.257 — status (drained from ROLLOUT, 2026-09-26 / S274)
+
+Builder call 8 — the household stress flag is near-silent because the 12-month savings buffer counts whole net worth (gap log G-EC72: 5 real flagged renters citywide; Beverly Hayes NetWorth $939,915): rule a liquid-savings share (or another number) so the flag fires for a world-sized share and a housing row can reach Delivering on live. Sim call → builder; wealth engine is the owner
+
+### engine.256 — status (drained from ROLLOUT, 2026-09-26 / S274)
+
+Leases are one hood-median stamp per row and never move (gap log G-EC71): draw each lease around its hood level at formation/move (unit size × spread), drift toward the hood level on renewal, prices inherit the lease; dials spread / cadence / drift share — no price table, the hood level stays the S414 income rule. Design after engine.255 Tasks 1–4 land; sim calls → builder. **kimi WIP in `stash@{0}` (2026-09-26 review): helpers only (`leaseForUnit_`, `driftLeases_`), zero callers, dials not seeded — inert, nothing to do before a live fire. Before landing: `driftLeasesBody_` writes Household_Ledger direct from Phase 5 + inserts a column (breaks the Phase-10 intent rule, SHEETS_MANIFEST §9) → reroute via `queueCellIntent_` + self-arm the column/dials (ADR-0015); stash base `c58a1adc`, file moved 3 commits since**
+
 ## Changelog
 
 - 2026-09-23 (kimi, Mike-direct) — **Framing ruled: rewrite the Fund, hood canon stands.** The San Antonio re-seat was rejected on evidence found after the ruling: Editions 84/90 publish the 47 approved families as West Oakland (Hayes' letter — "I am staying in West Oakland"; Clark, the bakery worker; 342 applicants), so a re-seat orphans printed canon. The Fund keeps its name, hood and vote history; the framing is the long-tenure remnant priced out of a hood that got rich — the story the editions already tell, and the mechanism the per-row grant writer already is. Live INIT-001 MilestoneNotes line written and read back (`output/kimi/2026-09-23-wosof-framing-fix.js`); beats dump refreshed. Seed correction recorded in §Money. The `.claude/agents/civic-project-stabilization-fund/` canon files still carry the old framing — control-plane, a Claude seat's edit. HOLD lift is engine-sheet's to record.

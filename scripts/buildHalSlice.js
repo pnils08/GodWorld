@@ -12,6 +12,9 @@
  *   output/desk_signal_c{N}.json  lanes.sports (fallback)
  *   output/simulation_ledger_snapshot.jsonl  name → POPID (optional)
  *   output/reporters/hal-richmond/articles  prior filings (optional)
+ *   output/player_truesource_mirror.json  POPID-keyed TrueSource dossier
+ *     (season line + awards), written by ingestPlayerTrueSource.js. Missing
+ *     mirror or missing POPID → dossierFacts NONE (wired 2026-09-26).
  *
  * Artifacts:
  *   output/slices/c{N}/hal.md
@@ -437,6 +440,8 @@ function buildHalSlice(cycle, opts) {
   const players = sports.resolveFeedPlayers(row, ledger, 10);
   const presentFacts = buildPublishablePresentFacts(row, players, cyc);
   const claim = buildHistorianClaim(row, cls, foil, closing);
+  const trueSourceMirror = sports.loadTrueSourceMirror(root);
+  const dossierFacts = sports.dossierFactsFor(players, trueSourceMirror);
 
   // Engine beat decks — COLOUR/POINTERS only, never facts (no merge into presentFacts)
   const decks = sports.loadBeatDecks(root, cyc);
@@ -465,7 +470,7 @@ function buildHalSlice(cycle, opts) {
     bagModes: bagModes.map(id => ({ id, name: BAG_MODES[id] })),
     historicalAnchor,
     presentFacts,
-    dossierFacts: ['NONE — offline slice; use packet TrueSource only if wake supplies'],
+    dossierFacts: dossierFacts.length ? dossierFacts : ['NONE — no TrueSource card on file for these players'],
     closingNote: closing,
     priorFiling: priors.length
       ? priors[0].headline + ' (' + priors[0].file + ')'

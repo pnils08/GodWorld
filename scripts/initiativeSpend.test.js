@@ -127,10 +127,10 @@ let n = 0; const ok = (c, l) => { assert(c, l); n++; };
 const RHEAD = HEAD.concat(['RenewalAmount', 'RenewalOutcome', 'RenewalCreditCycle']);
 const rcol = (nm) => RHEAD.indexOf(nm) + 1;
 const RROW = (o) => { const r = ROW(o); r[HEAD.indexOf('MilestoneNotes')] = o.notes || 'notes'; return r.concat([o.amt, o.out || '', o.credit == null ? '' : o.credit]); };
-function fireR(rows, cycle) {
+function fireR(rows, cycle, prev) {
   cells.length = 0;
   const tabs = { Initiative_Tracker: mockSheet([RHEAD.slice(), ...rows.map(RROW)]) };
-  const ctx = { summary: { cycleId: cycle || 110, previousCycleState: {} }, config: Object.assign({}, CONFIG), now: 't',
+  const ctx = { summary: { cycleId: cycle || 110, previousCycleState: prev || {} }, config: Object.assign({}, CONFIG), now: 't',
     ss: { getSheetByName: (n) => tabs[n] || null } };
   E.applyInitiativeImplementationEffects_(ctx);
   return ctx;
@@ -165,6 +165,20 @@ const DRY = 'notes\nC109: operating budget exhausted — service ends unless the
 {
   fireR([{ id: 'INIT-975', domain: 'safety', phase: 'complete', total: 12500000, remaining: 12500000, amt: '$4M', out: 'RENEWED 6-3 C109' }]);
   ok(!cells.some(x => x.col === rcol('ImplementationPhase')), 'a complete row with no dry-close marker never reopens');
+}
+{
+  // The reopen is news, counted once: not at the credit fire (the in-memory
+  // phase), once at the next fire against the recorded `complete`, never again.
+  const adv = (ctx) => (ctx.summary.initiativeNeighborhoodEffects.Temescal || {}).advanced;
+  const credit = fireR([{ id: 'INIT-976', domain: 'safety', phase: 'complete', total: 12500000, remaining: 0, amt: '$4M', out: 'RENEWED 6-3 C117', notes: DRY, lastDisb: 116 }],
+    118, { cycle: 117, initiativePhases: { 'INIT-976': 'complete' } });
+  ok(adv(credit) === 0, 'credit fire: the in-memory reopen is not counted');
+  const next = fireR([{ id: 'INIT-976', domain: 'safety', phase: 'dispatch-live', total: 12500000, remaining: 3759615.38, amt: '$4M', out: 'RENEWED 6-3 C117', credit: 118, notes: DRY, lastDisb: 118 }],
+    119, { cycle: 118, initiativePhases: { 'INIT-976': 'complete' } });
+  ok(adv(next) === 1, 'next fire: the reopen registers once against the recorded complete');
+  const after = fireR([{ id: 'INIT-976', domain: 'safety', phase: 'dispatch-live', total: 12500000, remaining: 3519230.76, amt: '$4M', out: 'RENEWED 6-3 C117', credit: 118, notes: DRY, lastDisb: 119 }],
+    120, { cycle: 119, initiativePhases: { 'INIT-976': 'dispatch-live' } });
+  ok(adv(after) === 0, 'and never again');
 }
 {
   const el = (o) => E.renewalEligibility_(Object.assign({ status: 'passed', mayoral: 'signed', stage: 'Standing', phase: 'dispatch-live', milestoneNotes: '', amount: '$4M' }, o));

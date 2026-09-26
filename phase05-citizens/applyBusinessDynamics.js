@@ -461,7 +461,7 @@ function chaosHoodSign_(fold) {
 // engine.193 cut 3b — the ship's target offset for one business this Cycle (pp).
 function bizShipOffset_(ship, sector, echoShare) {
   if (!ship || !(Number(ship.factor) > 0)) return 0;
-  var portRe = (typeof CHAOS_SHIP_PORT_SECTORS !== 'undefined') ? CHAOS_SHIP_PORT_SECTORS : /port|logistic|retail|food|grocery|wholesale|manufactur|construction/i;
+  var portRe = (typeof CHAOS_SHIP_PORT_SECTORS !== 'undefined') ? CHAOS_SHIP_PORT_SECTORS : /\bport\b|logistic|retail|\bfood\b|grocery|wholesale|manufactur|construction/i;
   var share = portRe.test(String(sector || '')) ? 1 : (Number(echoShare) || 0);
   return Math.round(Number(ship.factor) * (Number(ship.peakPp) || 0) * share * 100) / 100;
 }

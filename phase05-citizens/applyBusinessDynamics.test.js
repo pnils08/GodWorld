@@ -287,6 +287,8 @@ console.log('engine.193 cut 3b — chaos reads signed; the ship steps around the
   assert('ship offset: port-dependent full, everyone else the echo, none when idle',
     mod.bizShipOffset_(ship, 'Port & Logistics', 0.15) === -15 && mod.bizShipOffset_(ship, 'Retail', 0.15) === -15 &&
     mod.bizShipOffset_(ship, 'Construction', 0.15) === -15 && mod.bizShipOffset_(ship, 'Education', 0.15) === -2.25 &&
+    mod.bizShipOffset_(ship, 'Sports Franchise', 0.15) === -2.25 && mod.bizShipOffset_(ship, 'Sports Bar & Dining', 0.15) === -2.25 &&
+    mod.bizShipOffset_(ship, 'Food & Beverage', 0.15) === -15 &&
     mod.bizShipOffset_(null, 'Retail', 0.15) === 0 && mod.bizShipOffset_({ factor: 0, peakPp: -15 }, 'Retail', 0.15) === 0);
   // An 8-week reroute on a port business at +10.69, quiet weeks: start 0.5, peak 1 ×6, end 0.5, aftermath 0.
   const port = { id: 'BIZ-P', sector: 'Port & Logistics', hood: 'Jack London', growth: 10.69, revenue: null };

@@ -343,8 +343,9 @@ var VEHICLE_CONFIGS = [
 
 // engine.193 cut 3b — who takes the ship at full strength (builder ruling S496: the Port,
 // retail, food & beverage, construction). Matched on Business_Ledger Sector; the Port of
-// Oakland is matched by sector 'Port & Logistics'. Everyone else takes the echo.
-var CHAOS_SHIP_PORT_SECTORS = /port|logistic|retail|food|grocery|wholesale|manufactur|construction/i;
+// Oakland is matched by sector 'Port & Logistics'. Everyone else takes the echo. Word-anchored:
+// a bare /port/ matched 'Sports' and sent the sports franchises the full reroute.
+var CHAOS_SHIP_PORT_SECTORS = /\bport\b|logistic|retail|\bfood\b|grocery|wholesale|manufactur|construction/i;
 
 /**
  * Return the full vehicle config array. NAMED loadChaosCarsConfig_ (NOT loadConfig_ —

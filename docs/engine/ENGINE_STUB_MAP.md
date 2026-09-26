@@ -310,11 +310,13 @@
 
 - **applyInitiativeImplementationEffects_(ctx)**
   Reads: S.absoluteCycle, S.cycleId, S.initiativeDisbursement, S.initiativeImplementationTriggers, S.initiativeNeighborhoodEffects, S.previousCycleState, S.sentiment, S.sportsZones
-  Writes: S.initiativeDisbursement, S.initiativeHealthRelief, S.initiativeImplementationEffects, S.initiativeNeighborhoodEffects, S.initiativeSpend, S.sentiment
+  Writes: S.initiativeDisbursement, S.initiativeHealthRelief, S.initiativeImplementationEffects, S.initiativeNeighborhoodEffects, S.initiativeRenewalCredits, S.initiativeSpend, S.sentiment
   Config: ctx.config.cycleCount
   Sheets: Initiative_Tracker
 
 - **getCivicSpendDials_(ctx)**
+
+- **planRenewalCredit_(input)**
 
 - **planInitiativeSpend_(input)**
 
@@ -1423,8 +1425,8 @@
 
 ### civicInitiativeEngine.js
 - **runCivicInitiativeEngine_(ctx)**
-  Reads: S.cityDynamics, S.cycleId, S.grantsThisCycle, S.initiativeEvents, S.votesThisCycle
-  Writes: S.civicDemographicContext, S.grantsThisCycle, S.initiativeEvents, S.votesThisCycle
+  Reads: S.cityDynamics, S.cycleId, S.grantsThisCycle, S.initiativeEvents, S.storyHooks, S.votesThisCycle
+  Writes: S.civicDemographicContext, S.grantsThisCycle, S.initiativeEvents, S.storyHooks, S.votesThisCycle
   Config: ctx.config.cycleCount
   Sheets: Initiative_Tracker
   RNG: ctx.rng / safeRand_(ctx)
@@ -1519,6 +1521,14 @@
 - **ensureInitiativeBudgetColumns_(sheet, header)**
 
 - **ensureInitiativeBuildColumns_(sheet, header)**
+
+- **ensureInitiativeRenewalColumns_(sheet, header)**
+
+- **renewalDryClosePhase_(notes)**
+
+- **renewalMoneyText_(n)**
+
+- **renewalEligibility_(r)**
 
 - **ensureInitiativeLinkColumns_(sheet, header)**
 
@@ -4290,4 +4300,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 184
-**Functions mapped:** 1498
+**Functions mapped:** 1503

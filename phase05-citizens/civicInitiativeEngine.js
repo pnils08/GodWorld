@@ -140,6 +140,10 @@ function runCivicInitiativeEngine_(ctx) {
   if (data.length >= 1 && ensureInitiativeLinkColumns_(sheet, data[0])) {
     data = sheet.getDataRange().getValues();
   }
+  // Initiatives in the World Job 6: the renewal vote's own columns, same self-arm class.
+  if (data.length >= 1 && ensureInitiativeRenewalColumns_(sheet, data[0])) {
+    data = sheet.getDataRange().getValues();
+  }
   if (data.length >= 2 && backfillInitiativeBudgets_(sheet, data[0], data.slice(1)).changed > 0) {
     data = sheet.getDataRange().getValues();
   }
@@ -580,6 +584,81 @@ function runCivicInitiativeEngine_(ctx) {
     row[iLastUpdated] = ctx.now;
     rows[r] = row;
     updated = true;
+  }
+
+  // ========================================================================
+  // Initiatives in the World Job 6: RENEWAL VOTES
+  // ========================================================================
+  // A seat's `renew` move stages RenewalVoteCycle/RenewalAmount at the Sunday fold.
+  // The council votes on a row it already passed with its own machinery —
+  // factions, sentiment, swing voters, hood demographics — at the row's own
+  // VoteRequirement. Only pass/fail and the count are taken: Status/Outcome keep
+  // the original vote. The money lands at the next fire's Phase 2, so each fire
+  // has one writer of BudgetRemaining. A non-blank RenewalOutcome is the re-fire
+  // receipt; an ineligible row is written VOID, never skipped silently.
+  var iRenewVote = idx('RenewalVoteCycle'), iRenewAmt = idx('RenewalAmount'), iRenewOut = idx('RenewalOutcome');
+  if (iRenewVote >= 0 && iRenewAmt >= 0 && iRenewOut >= 0) {
+    for (var rr = 0; rr < rows.length; rr++) {
+      var rRow = rows[rr];
+      if ((Number(rRow[iRenewVote]) || 0) !== cycle) continue;
+      if (String(rRow[iRenewOut] == null ? '' : rRow[iRenewOut]).trim() !== '') continue;
+      var rName = String(rRow[iName] || 'Unknown Initiative');
+      var rId = String(rRow[iID] || '').trim();
+      var rElig = renewalEligibility_({
+        status: rRow[iStatus], mayoral: iMayoralAction >= 0 ? rRow[iMayoralAction] : '',
+        stage: stageIx.stage >= 0 ? rRow[stageIx.stage] : '',
+        phase: iImplementationPhase >= 0 ? rRow[iImplementationPhase] : '',
+        milestoneNotes: stageIx.milestone >= 0 ? rRow[stageIx.milestone] : '',
+        amount: rRow[iRenewAmt]
+      });
+      var rNote;
+      if (!rElig.ok) {
+        rRow[iRenewOut] = 'RENEWAL VOID C' + cycle + ': ' + rElig.reason;
+        rNote = 'Cycle ' + cycle + ': renewal vote void — ' + rElig.reason;
+        Logger.log('civicInitiativeEngine: Job 6 renewal VOID ' + rId + ' — ' + rElig.reason);
+      } else {
+        var rHoods = iAffectedNeighborhoods >= 0 && rRow[iAffectedNeighborhoods]
+          ? String(rRow[iAffectedNeighborhoods]).split(',').map(function(n) { return n.trim(); }).filter(function(n) { return n !== ''; })
+          : [];
+        var rResult = resolveCouncilVote_(ctx, rRow, header, councilState, sentiment,
+          { primary: rRow[iSwingVoter] || '',
+            secondary: iSwingVoter2 >= 0 ? (rRow[iSwingVoter2] || '') : '',
+            secondaryLean: iSwingVoter2Lean >= 0 ? (rRow[iSwingVoter2Lean] || '') : '' },
+          { demographics: neighborhoodDemographics, affectedNeighborhoods: rHoods,
+            initiativeType: String(rRow[iType] || 'vote').toLowerCase(), initiativeName: rName,
+            policyDomain: iPolicyDomain >= 0 ? String(rRow[iPolicyDomain] || '').trim() : '' },
+          rng);
+        var rPassed = rResult.status === 'passed';
+        var rMoney = renewalMoneyText_(rElig.amount);
+        rRow[iRenewOut] = (rPassed ? 'RENEWED ' : 'RENEWAL FAILED ') + rResult.voteCount + ' C' + cycle;
+        rNote = 'Cycle ' + cycle + ': council ' + (rPassed ? 'renews ' : 'declines to renew ') + rName + ' for ' +
+          rMoney + ' (' + rResult.voteCount + ')' +
+          (rPassed ? ' — the money lands next week'
+                   : (rElig.revivePhase ? ' — the program stays closed' : ' — the program runs out its runway'));
+        // Citizens hear "<program> renewal passed / went down at council".
+        S.initiativeEvents.push({ id: rId, name: rName + ' renewal', type: 'renewal',
+          outcome: rPassed ? 'passed' : 'failed', voteCount: rResult.voteCount, cycle: cycle });
+        S.votesThisCycle.push({ name: rName + ' renewal', outcome: rPassed ? 'RENEWED' : 'RENEWAL FAILED',
+          voteCount: rResult.voteCount, swingVoters: rResult.swingVoters || [], swingVoted: rResult.swingVoted });
+        S.storyHooks = S.storyHooks || [];
+        S.storyHooks.push({
+          hookType: rPassed ? 'RENEWAL_PASSED' : 'RENEWAL_FAILED', theme: 'CIVIC', domain: 'CIVIC',
+          severity: rPassed ? 6 : 7, initiative: rName,
+          description: 'Council ' + (rPassed ? 'renews ' : 'declines to renew ') + rName + ' for ' + rMoney + ' (' + rResult.voteCount + ')',
+          suggestedAngle: rPassed ? 'A program that was running low keeps its staff and its name'
+                                  : (rElig.revivePhase ? 'A closed program stays closed — who it served, and what fills the gap'
+                                                       : 'A program on its last weeks of money — the people it serves, and what comes after')
+        });
+        Logger.log('civicInitiativeEngine: Job 6 renewal ' + rId + ' ' + rRow[iRenewOut] + ' ' + rMoney);
+      }
+      if (iNotes >= 0) {
+        var rPrior = String(rRow[iNotes] || '');
+        rRow[iNotes] = rPrior + (rPrior ? '\n' : '') + rNote;
+      }
+      if (iLastUpdated >= 0) rRow[iLastUpdated] = ctx.now;
+      rows[rr] = rRow;
+      updated = true;
+    }
   }
 
   // Write back
@@ -3155,6 +3234,80 @@ function ensureInitiativeBuildColumns_(sheet, header) {
 // rides the same column class — a minted establishment's authored count of
 // tracked-hire openings, read by getCivicOpenSlots_. Self-arms together with BizID.
 var INITIATIVE_LINK_COLUMNS_ = ['BizID', 'OpenTrackedSlots'];
+
+// Initiatives in the World Job 6 — a renewal vote on a passed row rides its own
+// columns (the OverrideVoteCycle pattern), so VoteCycle/Outcome/Status keep the
+// original vote. The seat move + Sunday fold stage RenewalVoteCycle/RenewalAmount
+// and blank the other two; Phase 5 writes RenewalOutcome, the next fire's Phase 2
+// credits the money and stamps RenewalCreditCycle. Mirror: lib RENEWAL_COLUMNS.
+var INITIATIVE_RENEWAL_COLUMNS_ = ['RenewalVoteCycle', 'RenewalAmount', 'RenewalOutcome', 'RenewalCreditCycle'];
+
+// Phases a program runs or disburses in — the ones a renewal can top up. Builds
+// are absent: a build spends toward its operating floor and cannot run dry.
+// Mirrors applyInitiativeImplementationEffects_'s RUN_SPEND_PHASES + the fund phase.
+var INITIATIVE_RENEWABLE_PHASES_ = {
+  'implementation-active': true, 'dispatch-live': true, 'pilot-active': true,
+  'pilot_evaluation': true, 'operational': true, 'disbursement-active': true
+};
+
+/** Append missing renewal columns. Same contract as ensureInitiativeStageColumns_. */
+function ensureInitiativeRenewalColumns_(sheet, header) {
+  var have = header || [];
+  var missing = [];
+  for (var i = 0; i < INITIATIVE_RENEWAL_COLUMNS_.length; i++) {
+    if (have.indexOf(INITIATIVE_RENEWAL_COLUMNS_[i]) === -1) missing.push(INITIATIVE_RENEWAL_COLUMNS_[i]);
+  }
+  if (!missing.length) return false;
+  var lastCol = sheet.getLastColumn();
+  var short = (lastCol + missing.length) - sheet.getMaxColumns();
+  if (short > 0) sheet.insertColumnsAfter(sheet.getMaxColumns(), short);
+  sheet.getRange(1, lastCol + 1, 1, missing.length).setValues([missing]);
+  Logger.log('civicInitiativeEngine: Job 6 appended renewal columns to Initiative_Tracker — ' + missing.join(', '));
+  return true;
+}
+
+/**
+ * The phase a dry-closed program was running in, read from the `(was <phase>)`
+ * marker the Job 5 and engine.259 exhaustion notes carry. Last marker wins. Null
+ * when the row never ran dry — a `complete` row without it is not renewable. Pure.
+ */
+function renewalDryClosePhase_(notes) {
+  var re = /\(was ([a-z_-]+)\)/g, m, last = null;
+  var t = String(notes == null ? '' : notes);
+  while ((m = re.exec(t)) !== null) last = m[1];
+  return last && INITIATIVE_RENEWABLE_PHASES_[last] === true ? last : null;
+}
+
+/** "$4M" / "$750K" — the renewal amount in the tracker's own money style. Pure. */
+function renewalMoneyText_(n) {
+  n = Number(n) || 0;
+  if (n >= 1e6) return '$' + (Math.round(n / 1e5) / 10) + 'M';
+  if (n >= 1e3) return '$' + Math.round(n / 1e3) + 'K';
+  return '$' + Math.round(n);
+}
+
+/**
+ * Is this row a program the council can renew? Input: the row's own cells as
+ * strings/values. Returns {ok, amount, revivePhase} or {ok:false, reason}. Pure.
+ */
+function renewalEligibility_(r) {
+  var status = String(r.status == null ? '' : r.status).trim().toLowerCase();
+  var mayoral = String(r.mayoral == null ? '' : r.mayoral).trim().toLowerCase();
+  var stage = String(r.stage == null ? '' : r.stage).trim();
+  var phase = String(r.phase == null ? '' : r.phase).trim().toLowerCase();
+  if (!(status === 'override-passed' || (status === 'passed' && mayoral === 'signed'))) return { ok: false, reason: 'not a voted program' };
+  if (stage !== 'Standing' && stage !== 'Delivering') return { ok: false, reason: 'stage ' + (stage || 'blank') };
+  var revivePhase = null;
+  if (phase === 'complete') {
+    revivePhase = renewalDryClosePhase_(r.milestoneNotes);
+    if (!revivePhase) return { ok: false, reason: 'complete, never ran dry' };
+  } else if (INITIATIVE_RENEWABLE_PHASES_[phase] !== true) {
+    return { ok: false, reason: 'phase ' + (phase || 'blank') + ' is not running' };
+  }
+  var amount = typeof r.amount === 'number' ? (r.amount > 0 ? Math.round(r.amount) : null) : parseBudgetMoney_(r.amount);
+  if (!amount) return { ok: false, reason: 'no amount' };
+  return { ok: true, amount: amount, revivePhase: revivePhase };
+}
 
 // Stages that count as "approved" for slot-seeding (civicStageStep_'s own list,
 // mirrored — a row must have cleared Proposed to draw tracked-hire openings).

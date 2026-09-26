@@ -26,7 +26,7 @@ const SRC = [
   '../phase02-world-state/applyInitiativeImplementationEffects.js',
   '../phase05-citizens/civicInitiativeEngine.js',
 ].map(read).join('\n');
-const E = new Function(SRC + '\nreturn { applyInitiativeImplementationEffects_, planInitiativeSpend_, getCivicSpendDials_ };')();
+const E = new Function(SRC + '\nreturn { applyInitiativeImplementationEffects_, planInitiativeSpend_, getCivicSpendDials_, planRenewalCredit_, renewalEligibility_, renewalDryClosePhase_ };')();
 
 function mockSheet(values) {
   return {
@@ -95,7 +95,7 @@ let n = 0; const ok = (c, l) => { assert(c, l); n++; };
   const ctx = fire([{ id: 'INIT-956', domain: 'safety', phase: 'dispatch-live', total: 12500000, remaining: 100 }]);
   ok(valueAt(col('BudgetRemaining')) === 0, 'last dollars spent');
   ok(valueAt(col('ImplementationPhase')) === 'complete', 'runway at zero → phase complete');
-  ok(/^notes\nC110: operating budget exhausted/.test(valueAt(col('MilestoneNotes'))), 'exhaustion line appended, prior notes kept');
+  ok(/^notes\nC110: operating budget exhausted.*\(was dispatch-live\)$/.test(valueAt(col('MilestoneNotes'))), 'exhaustion line appended with the dry-close marker, prior notes kept');
   ok(ctx.summary.initiativeSpend[0].exhausted === true, 'slice flags exhaustion');
 }
 
@@ -121,6 +121,62 @@ let n = 0; const ok = (c, l) => { assert(c, l); n++; };
   try { fire([{ id: 'INIT-965', domain: 'safety', phase: 'dispatch-live', total: 12500000, remaining: 12500000 }], { civicOperatingWeeks: '' }); }
   catch (e) { threw = /civicOperatingWeeks/.test(e.message); }
   ok(threw, 'a missing spend dial throws by name (no silent default)');
+}
+
+// ---- Job 6: renewal ----
+const RHEAD = HEAD.concat(['RenewalAmount', 'RenewalOutcome', 'RenewalCreditCycle']);
+const rcol = (nm) => RHEAD.indexOf(nm) + 1;
+const RROW = (o) => { const r = ROW(o); r[HEAD.indexOf('MilestoneNotes')] = o.notes || 'notes'; return r.concat([o.amt, o.out || '', o.credit == null ? '' : o.credit]); };
+function fireR(rows, cycle) {
+  cells.length = 0;
+  const tabs = { Initiative_Tracker: mockSheet([RHEAD.slice(), ...rows.map(RROW)]) };
+  const ctx = { summary: { cycleId: cycle || 110, previousCycleState: {} }, config: Object.assign({}, CONFIG), now: 't',
+    ss: { getSheetByName: (n) => tabs[n] || null } };
+  E.applyInitiativeImplementationEffects_(ctx);
+  return ctx;
+}
+const lastAt = (c) => { const hits = cells.filter(x => x.col === c); return hits.length ? hits[hits.length - 1].value : undefined; };
+const DRY = 'notes\nC109: operating budget exhausted — service ends unless the council renews it (was dispatch-live)';
+{
+  const ctx = fireR([{ id: 'INIT-970', domain: 'safety', phase: 'dispatch-live', total: 12500000, remaining: 1000000, amt: '$4M', out: 'RENEWED 6-3 C109' }]);
+  const rem = cells.filter(x => x.col === rcol('BudgetRemaining'));
+  ok(rem.length === 2 && rem[0].value === 5000000, 'credit lands first: 1M + 4M = 5,000,000');
+  ok(rem[1].value === 4759615.38, 'then this fire spends at the unchanged weekly cost: 5M − 12.5M/52 = 4,759,615.38 (no true-down on a renewed row)');
+  ok(!cells.some(x => x.col === rcol('BudgetTotal')), 'BudgetTotal untouched — the program keeps its size and its weekly cost');
+  ok(lastAt(rcol('RenewalCreditCycle')) === 110, 'credit receipt stamped');
+  ok(ctx.summary.initiativeSpend[0].weeksLeft === 20, '$4M buys ~16.6 more weeks: 20 left');
+  ok(ctx.summary.initiativeRenewalCredits.length === 1 && ctx.summary.initiativeRenewalCredits[0].revivedTo === null, 'renewal slice names the credit');
+}
+{
+  const ctx = fireR([{ id: 'INIT-971', domain: 'safety', phase: 'complete', total: 12500000, remaining: 0, amt: '$4M', out: 'RENEWED 5-4 C109', notes: DRY, lastDisb: 109 }]);
+  ok(lastAt(rcol('ImplementationPhase')) === 'dispatch-live', 'a dry-closed program reopens in the phase its marker names');
+  ok(lastAt(rcol('BudgetRemaining')) === 3759615.38, 'reopened and spends its first week back: 4M − 240,384.62');
+  ok(/renewal money lands — \$4M added to the budget, the program reopens$/.test(lastAt(rcol('MilestoneNotes'))), 'reopen line written');
+  ok(ctx.summary.initiativeRenewalCredits[0].revivedTo === 'dispatch-live', 'slice names the reopen');
+}
+{
+  fireR([
+    { id: 'INIT-972', domain: 'safety', phase: 'dispatch-live', total: 12500000, remaining: 1000000, amt: '$4M', out: 'RENEWAL FAILED 4-5 C109', lastDisb: 110 },
+    { id: 'INIT-973', domain: 'safety', phase: 'dispatch-live', total: 12500000, remaining: 5000000, amt: '$4M', out: 'RENEWED 6-3 C109', credit: 110, lastDisb: 110 },
+    { id: 'INIT-974', domain: 'safety', phase: 'dispatch-live', total: 12500000, remaining: 1000000, amt: '$4M', out: '', lastDisb: 110 },
+  ]);
+  ok(cells.length === 0, 'failed vote / already credited (re-fire) / no vote yet: no credit');
+}
+{
+  fireR([{ id: 'INIT-975', domain: 'safety', phase: 'complete', total: 12500000, remaining: 12500000, amt: '$4M', out: 'RENEWED 6-3 C109' }]);
+  ok(!cells.some(x => x.col === rcol('ImplementationPhase')), 'a complete row with no dry-close marker never reopens');
+}
+{
+  const el = (o) => E.renewalEligibility_(Object.assign({ status: 'passed', mayoral: 'signed', stage: 'Standing', phase: 'dispatch-live', milestoneNotes: '', amount: '$4M' }, o));
+  ok(el({}).ok && el({}).amount === 4000000 && el({}).revivePhase === null, 'a running signed Standing program is renewable');
+  ok(el({ status: 'override-passed', mayoral: '' }).ok, 'an override-passed program is renewable');
+  ok(el({ phase: 'disbursement-active' }).ok, 'the fund is renewable');
+  ok(el({ phase: 'complete', milestoneNotes: DRY }).revivePhase === 'dispatch-live', 'a dry-closed program is renewable and names its phase');
+  ok(!el({ phase: 'complete' }).ok, 'complete without the marker is not');
+  ok(!el({ phase: 'construction-active' }).ok, 'a build is not renewable');
+  ok(!el({ mayoral: 'none' }).ok && !el({ stage: 'Funded' }).ok && !el({ amount: '' }).ok, 'unsigned / Funded / no amount are not');
+  ok(E.renewalDryClosePhase_('(was operational) x (was dispatch-live)') === 'dispatch-live', 'last marker wins');
+  ok(E.renewalDryClosePhase_('(was construction-active)') === null, 'a non-running phase marker is not a dry close');
 }
 
 console.log('initiativeSpend.test.js: ' + n + ' assertions passed');

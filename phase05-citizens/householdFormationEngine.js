@@ -1313,7 +1313,7 @@ function applyFundDisbursementBody_(ctx, cycle, out) {
         queueCellIntent_(ctx, 'Initiative_Tracker', program.sheetRow, tPhase + 1, 'complete', 'engine.259 budget exhausted C' + cycle + ' ' + program.initiativeId, 'civic', 5);
         if (tNotes >= 0) {
           var prior = String(tracker.getRange(program.sheetRow, tNotes + 1).getValue() || '');
-          queueCellIntent_(ctx, 'Initiative_Tracker', program.sheetRow, tNotes + 1, (prior ? prior + '\n' : '') + 'C' + cycle + ': budget exhausted — $' + Math.round(Number(program.remaining)) + ' spent this Cycle closes the fund; service ends', 'engine.259 budget exhausted note', 'civic', 5);
+          queueCellIntent_(ctx, 'Initiative_Tracker', program.sheetRow, tNotes + 1, (prior ? prior + '\n' : '') + 'C' + cycle + ': budget exhausted — $' + Math.round(Number(program.remaining)) + ' spent this Cycle closes the fund; service ends (was ' + program.phase + ')', 'engine.259 budget exhausted note', 'civic', 5);
         }
       }
     }

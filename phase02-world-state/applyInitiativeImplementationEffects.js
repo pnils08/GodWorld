@@ -248,6 +248,12 @@ function applyInitiativeImplementationEffects_(ctx) {
   var iBudgetTotal = findImplCol_(headers, ['BudgetTotal']);
   var iNotesImpl = findImplCol_(headers, ['MilestoneNotes']);
   var spendSlice = [];
+  // Initiatives in the World Job 6: the renewal columns (self-armed by the Phase-5
+  // engine). A renewal passed at last fire's Phase 5 is credited here, first.
+  var iRenewAmt = findImplCol_(headers, ['RenewalAmount']);
+  var iRenewOut = findImplCol_(headers, ['RenewalOutcome']);
+  var iRenewCredit = findImplCol_(headers, ['RenewalCreditCycle']);
+  var renewalSlice = [];
 
   // engine.250: last Cycle's phase per initiative (previousCycleState.initiativePhases,
   // written by updateCivicApprovalRatings_ from the tracker SHEET), gated on the blob
@@ -371,6 +377,41 @@ function applyInitiativeImplementationEffects_(ctx) {
     // Skip if no implementation phase set or no name
     if (!phase || !name) continue;
 
+    // Job 6: a renewal the council passed at the last fire lands its money now,
+    // on BudgetRemaining only — BudgetTotal stays the program's size, which sets
+    // its weekly cost, so the renewal buys amount ÷ weekly cost more weeks,
+    // before this fire spends, so each fire has one writer of BudgetRemaining and
+    // the fund's Phase-5 tranche reads the credited balance. Priority 4 lands ahead
+    // of this fire's own spend writes (5). A dry-closed program goes back to the
+    // phase it was running in — a return, not an advance (revival guard below).
+    var renewalRevived = false;
+    if (iRenewOut !== -1 && iRenewCredit !== -1 && iRenewAmt !== -1 && iBudgetRemaining !== -1) {
+      var rc = planRenewalCredit_({ outcome: row[iRenewOut], creditCycle: row[iRenewCredit], amount: row[iRenewAmt],
+        remaining: row[iBudgetRemaining], phase: phase,
+        notes: iNotesImpl !== -1 ? row[iNotesImpl] : '' });
+      if (rc) {
+        var rcId = iInitId !== -1 ? String(row[iInitId] || '').trim() : name;
+        queueCellIntent_(ctx, 'Initiative_Tracker', i + 1, iBudgetRemaining + 1, rc.newRemaining, 'Job 6 renewal credit C' + implCycle + ' ' + rcId, 'civic', 4);
+        queueCellIntent_(ctx, 'Initiative_Tracker', i + 1, iRenewCredit + 1, implCycle, 'Job 6 renewal credit receipt C' + implCycle + ' ' + rcId, 'civic', 4);
+        row[iBudgetRemaining] = rc.newRemaining;
+        row[iRenewCredit] = implCycle;
+        if (iNotesImpl !== -1) {
+          var rcPrior = String(row[iNotesImpl] == null ? '' : row[iNotesImpl]);
+          row[iNotesImpl] = (rcPrior ? rcPrior + '\n' : '') + 'C' + implCycle + ': renewal money lands — ' + rc.money +
+            ' added to the budget' + (rc.revivePhase ? ', the program reopens' : '');
+          queueCellIntent_(ctx, 'Initiative_Tracker', i + 1, iNotesImpl + 1, row[iNotesImpl], 'Job 6 renewal credit note', 'civic', 4);
+        }
+        if (rc.revivePhase && iPhase !== -1) {
+          queueCellIntent_(ctx, 'Initiative_Tracker', i + 1, iPhase + 1, rc.revivePhase, 'Job 6 renewal reopens C' + implCycle + ' ' + rcId, 'civic', 4);
+          row[iPhase] = rc.revivePhase;
+          phase = rc.revivePhase;
+          renewalRevived = true;
+        }
+        renewalSlice.push({ initiativeId: rcId, name: name, credit: rc.amount,
+          newRemaining: rc.newRemaining, revivedTo: rc.revivePhase });
+      }
+    }
+
     // engine.250: transition test on the RAW sheet phase, before the T7 Baylight
     // correction below — initiativePhases stores the sheet's value, and the T7
     // write lands at Phase 10, so comparing the corrected phase would read the
@@ -382,6 +423,8 @@ function applyInitiativeImplementationEffects_(ctx) {
     // phase (stalled / blocked / suspended / defunded) is getting back to where
     // you were, not an advance — otherwise a stall/revive loop farms the lift.
     if (phaseMoved && PHASE_INTENSITY[String(prevPhase)] < 0) phaseMoved = false;
+    // Job 6: a renewal reopening a dry-closed program is the same kind of return.
+    if (renewalRevived) phaseMoved = false;
 
     // ─────────────────────────────────────────────────────────────────────
     // engine.131 T7 reconciliation — sports is the source of truth
@@ -518,6 +561,7 @@ function applyInitiativeImplementationEffects_(ctx) {
           sRemRaw !== '' && sRemRaw !== null && sTotRaw !== '' && sTotRaw !== null) {
         var sPlan = planInitiativeSpend_({
           phase: phase, build: BUILD_SPEND_PHASES[phase] === true, total: Number(sTotRaw), remaining: Number(sRemRaw), tend: tend,
+          renewed: iRenewCredit !== -1 && String(row[iRenewCredit] == null ? '' : row[iRenewCredit]).trim() !== '',
           buildCycles: getCivicBuildCycles_(ctx, domain), dials: getCivicSpendDials_(ctx)
         });
         if (sPlan && sPlan.debit > 0) {
@@ -532,7 +576,7 @@ function applyInitiativeImplementationEffects_(ctx) {
             if (iNotesImpl !== -1) {
               var sPrior = String(row[iNotesImpl] == null ? '' : row[iNotesImpl]);
               queueCellIntent_(ctx, 'Initiative_Tracker', i + 1, iNotesImpl + 1,
-                (sPrior ? sPrior + '\n' : '') + 'C' + implCycle + ': operating budget exhausted — service ends unless the council renews it',
+                (sPrior ? sPrior + '\n' : '') + 'C' + implCycle + ': operating budget exhausted — service ends unless the council renews it (was ' + phase + ')',
                 'Job 5 budget exhausted note', 'civic', 5);
             }
           }
@@ -685,10 +729,16 @@ function applyInitiativeImplementationEffects_(ctx) {
   S.initiativeHealthRelief = healthRelief;
   S.initiativeDisbursement = buildDisbursementSlice_(ctx, pendingDisbursement);
   S.initiativeSpend = spendSlice;
+  S.initiativeRenewalCredits = renewalSlice;
   if (spendSlice.length) {
     Logger.log('applyInitiativeImplementationEffects_: Job 5 spend — ' + spendSlice.map(function (sp) {
       return sp.initiativeId + ' ' + (sp.build ? 'build' : 'operating') + ' -' + sp.debit + ' -> ' + sp.newRemaining +
         (sp.exhausted ? ' EXHAUSTED' : (sp.weeksLeft !== null ? ' (' + sp.weeksLeft + ' wk left)' : ''));
+    }).join('; '));
+  }
+  if (renewalSlice.length) {
+    Logger.log('applyInitiativeImplementationEffects_: Job 6 renewal credit — ' + renewalSlice.map(function (rc) {
+      return rc.initiativeId + ' +' + rc.credit + ' -> ' + rc.newRemaining + (rc.revivedTo ? ' REOPENED ' + rc.revivedTo : '');
     }).join('; '));
   }
 
@@ -754,6 +804,28 @@ function getCivicSpendDials_(ctx) {
 }
 
 /**
+ * Initiatives in the World Job 6 — the credit for a renewal the council passed.
+ * Due when RenewalOutcome reads RENEWED and RenewalCreditCycle is blank.
+ * BudgetRemaining rises by the amount; BudgetTotal is untouched (it is the
+ * program's size and sets its weekly cost). A `complete` row reopens in the phase its
+ * dry-close marker names (renewalDryClosePhase_). Returns null when nothing is due.
+ * Pure.
+ */
+function planRenewalCredit_(input) {
+  if (String(input.outcome == null ? '' : input.outcome).trim().indexOf('RENEWED') !== 0) return null;
+  if (String(input.creditCycle == null ? '' : input.creditCycle).trim() !== '') return null;
+  var amount = typeof input.amount === 'number' ? (input.amount > 0 ? Math.round(input.amount) : null) : parseBudgetMoney_(input.amount);
+  if (!amount) return null;
+  var remaining = Number(input.remaining);
+  if (!isFinite(remaining)) return null;
+  var revivePhase = String(input.phase || '').toLowerCase() === 'complete' ? renewalDryClosePhase_(input.notes) : null;
+  return {
+    amount: amount, money: renewalMoneyText_(amount), revivePhase: revivePhase,
+    newRemaining: Math.round((Math.max(0, remaining) + amount) * 100) / 100
+  };
+}
+
+/**
  * Job 5 — one Cycle of a build's or a running program's spend. Pure.
  * A build category (buildCycles > 0) splits its budget: capitalShare is spent
  * evenly across the build weeks (scaled by tend — an untended site does less
@@ -761,7 +833,8 @@ function getCivicSpendDials_(ctx) {
  * A running row spends runway evenly over operatingWeeks; a no-build category's
  * whole budget is runway. A running row still holding capital (a site that
  * opened before this rule, or one that under-spent its build) is trued down to
- * the floor first. Returns null when nothing moves.
+ * the floor first — except a renewed row (input.renewed, Job 6), whose renewal
+ * money sits above the floor by design. Returns null when nothing moves.
  */
 function planInitiativeSpend_(input) {
   var total = Number(input.total), remaining = Number(input.remaining);
@@ -777,7 +850,9 @@ function planInitiativeSpend_(input) {
     var weekly = total * Number(d.capitalShare) / buildCycles * tend;
     newRemaining = Math.max(floor, remaining - weekly);
   } else {
-    var base = Math.min(remaining, floor);
+    // Job 6: a renewed program holds renewal money above its floor by design;
+    // the true-down is only for a site that opened still holding capital.
+    var base = input.renewed ? remaining : Math.min(remaining, floor);
     newRemaining = Math.max(0, base - floor / Number(d.operatingWeeks));
   }
   newRemaining = Math.round(newRemaining * 100) / 100;

@@ -2,7 +2,7 @@
   "generated": "2026-09-26",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 184,
-  "functionsMapped": 1498,
+  "functionsMapped": 1503,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -1135,6 +1135,7 @@
         "phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_",
         "phase05-citizens/civicInitiativeEngine.js::generateOverrideStoryHook_",
         "phase05-citizens/civicInitiativeEngine.js::generateVetoStoryHook_",
+        "phase05-citizens/civicInitiativeEngine.js::runCivicInitiativeEngine_",
         "phase05-citizens/educationCareerEngine.js::checkSchoolQuality_",
         "phase05-citizens/educationCareerEngine.js::detectCareerMobility_",
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
@@ -1167,6 +1168,7 @@
         "phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_",
         "phase05-citizens/civicInitiativeEngine.js::generateOverrideStoryHook_",
         "phase05-citizens/civicInitiativeEngine.js::generateVetoStoryHook_",
+        "phase05-citizens/civicInitiativeEngine.js::runCivicInitiativeEngine_",
         "phase05-citizens/educationCareerEngine.js::checkSchoolQuality_",
         "phase05-citizens/educationCareerEngine.js::detectCareerMobility_",
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
@@ -2267,6 +2269,12 @@
       "readers": [
         "phase03-population/updateNeighborhoodDemographics.js::updateNeighborhoodDemographics_"
       ]
+    },
+    "initiativeRenewalCredits": {
+      "writers": [
+        "phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_"
+      ],
+      "readers": []
     },
     "initiativeSpend": {
       "writers": [

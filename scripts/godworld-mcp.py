@@ -383,17 +383,23 @@ def disk_search(query: str, max_files: int = 12) -> str:
 
 @mcp.tool()
 def lookup_citizen(name: str) -> str:
-    """Look up a citizen by name. Returns a current domain card plus published history.
-    Use this instead of reading truesource or searching Supermemory manually."""
+    """Look up a citizen by name. Returns a current domain card, TrueSource
+    dossier if one exists (elite A's players), and published history."""
     # S197 BUNDLE-B (G-S7/G-S12): citizen cards are short structured records
     # — the default memories-mode threshold of 0.6 misses them. Use hybrid
     # mode + 0.3 threshold (same pattern as wd-* domain tools shipped S183).
     citizen_card = supermemory_search(name, 'wd-citizens', 3, mode='hybrid', threshold=0.3)
+    # 2026-09-26: this tool's own docstring claimed truesource coverage that
+    # the code never delivered — wd-player-truesource was never queried here,
+    # only in search_world's fan-out. sort='recency' matters: similarity alone
+    # ranked an April historical-bootstrap card above a same-day 2041 update.
+    truesource = supermemory_search(name, 'wd-player-truesource', 2, mode='hybrid', threshold=0.3, sort='recency')
     # Supermemory is not the current-state authority. Recency helps order a
     # citizen's paper-of-record appearances, while provenance filtering keeps
     # mixed drive/archive directives out of the canon lane.
     canon = published_canon_search(name, 3, sort='recency')
     return (f"=== WD-CITIZENS (structured card) ===\n{citizen_card}\n\n"
+            f"=== WD-PLAYER-TRUESOURCE (elite A's dossier, if any) ===\n{truesource}\n\n"
             f"=== BAY-TRIBUNE (published history, newest first) ===\n{canon}")
 
 

@@ -595,12 +595,16 @@ function runCivicInitiativeEngine_(ctx) {
   // VoteRequirement. Only pass/fail and the count are taken: Status/Outcome keep
   // the original vote. The money lands at the next fire's Phase 2, so each fire
   // has one writer of BudgetRemaining. A non-blank RenewalOutcome is the re-fire
-  // receipt; an ineligible row is written VOID, never skipped silently.
+  // receipt; an ineligible row is written VOID, never skipped silently. A vote
+  // staged for a cycle that was skipped is held at the next fire.
   var iRenewVote = idx('RenewalVoteCycle'), iRenewAmt = idx('RenewalAmount'), iRenewOut = idx('RenewalOutcome');
   if (iRenewVote >= 0 && iRenewAmt >= 0 && iRenewOut >= 0) {
     for (var rr = 0; rr < rows.length; rr++) {
       var rRow = rows[rr];
-      if ((Number(rRow[iRenewVote]) || 0) !== cycle) continue;
+      // Due or overdue: a missed fire must not strand a staged vote (the Node
+      // gate refuses a non-forward stage, so a past cycle can only be a skip).
+      var rVoteCycle = Number(rRow[iRenewVote]) || 0;
+      if (!rVoteCycle || rVoteCycle > cycle) continue;
       if (String(rRow[iRenewOut] == null ? '' : rRow[iRenewOut]).trim() !== '') continue;
       var rName = String(rRow[iName] || 'Unknown Initiative');
       var rId = String(rRow[iID] || '').trim();

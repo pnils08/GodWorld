@@ -383,7 +383,9 @@ function applyInitiativeImplementationEffects_(ctx) {
     // before this fire spends, so each fire has one writer of BudgetRemaining and
     // the fund's Phase-5 tranche reads the credited balance. Priority 4 lands ahead
     // of this fire's own spend writes (5). A dry-closed program goes back to the
-    // phase it was running in — a return, not an advance (revival guard below).
+    // phase it was running in. The reopen registers once, at the NEXT fire (the
+    // sheet still reads `complete` when this fire's phase record is taken — the
+    // same one-fire lag as T7); the guard below stops this fire counting it too.
     var renewalRevived = false;
     if (iRenewOut !== -1 && iRenewCredit !== -1 && iRenewAmt !== -1 && iBudgetRemaining !== -1) {
       var rc = planRenewalCredit_({ outcome: row[iRenewOut], creditCycle: row[iRenewCredit], amount: row[iRenewAmt],
@@ -423,7 +425,8 @@ function applyInitiativeImplementationEffects_(ctx) {
     // phase (stalled / blocked / suspended / defunded) is getting back to where
     // you were, not an advance — otherwise a stall/revive loop farms the lift.
     if (phaseMoved && PHASE_INTENSITY[String(prevPhase)] < 0) phaseMoved = false;
-    // Job 6: a renewal reopening a dry-closed program is the same kind of return.
+    // Job 6: the in-memory reopen is not this fire's transition — it counts once,
+    // next fire, against the recorded `complete` (a reopen is news: §15 aftermath).
     if (renewalRevived) phaseMoved = false;
 
     // ─────────────────────────────────────────────────────────────────────

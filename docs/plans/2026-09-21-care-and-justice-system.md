@@ -104,6 +104,16 @@ pointers:
 
 **Builder's call:** is OARI's "ride to treatment" a bed (a real `Hospital_Ledger` row, `CyclesInCare` ticking like any admission) or a referral with no bed (a life-history tag only)? **My default:** a bed for `substance_intervention`-class outcomes — matches the "ride to treatment instead of a cell" framing, it should look like care, not paperwork — and a life-history tag only for `deescalated`/`welfare_check`-class outcomes, where nobody was admitted. This is the one fork that changes what the service layer writes; everything in §Service layer scoping above follows once it's answered.
 
+### Rulings CLOSED (builder-direct 2026-09-26)
+
+All three open calls ruled — the recommended defaults above, as stated:
+
+1. **Arrest flips Status.** A new `detained` Status value pulls the citizen from work/household participation for the ledger's `CyclesHeld` duration, read at the same 10+ call sites `hospitalized`/`critical` already gate (`runCareerEngine.js`, `runHouseholdEngine.js`, `civicInitiativeEngine.js`, `updateCivicLedgerFactions.js`, `generateCivicModeEvents.js`/`generateMediaModeEvents.js`, `generationalWealthEngine.js`, `prePublicationValidation.js`).
+2. **Outcome rate table (World_Config):** released 40% / diverted-to-OARI-or-treatment 25% / held 35%.
+3. **OARI's "ride to treatment":** a real `Hospital_Ledger` bed (`CyclesInCare` ticking) for `substance_intervention`-class outcomes; a life-history tag only for `deescalated`/`welfare_check`-class outcomes.
+
+**Ready for engine-sheet:** build `Judicial_Ledger` (`CaseId, POPID, ChargeCause, ArrestCycle, StatusNow, ResolveCycle, Outcome, CyclesHeld, SourceEvent`) + `persistJudicialLedger_` (Phase10-CyclePacket, before ExecuteIntents, modeled 1:1 on `persistHospitalLedger_` at `phase10-persistence/buildCyclePacket.js:844`, direct writes, row-ID prefix `J-C`, event source `S.judicialEvents`, census `S.judicialCensus` snapshot-only); wire `detained` into the 10+ Status read sites listed above; add the three World_Config rate keys; land the mental-health `Cause` strings on the existing Hospital_Ledger path (no schema change there). Wiring card for the read-site touch list: `engine-wiring` on `Status` / the specific functions above, before the cut.
+
 ### Later (folded in from the 2026-09-26 builder proposal, not part of this build)
 
 - Judges as authored personas (civic-office pattern — canon philosophy files, not dials), once a case flow exists to judge.
@@ -112,6 +122,10 @@ pointers:
 - Phase 37 (Arc State Machines, `docs/plans/BACKLOG.md:447`, still NOT STARTED) is the natural home for a case that runs multi-cycle; referenced for later, not a prerequisite here.
 
 ## Changelog
+
+- 2026-09-26 (research-build) — Builder ruled all three open calls (§Rulings CLOSED). Build spec written, ready for engine-sheet.
+
+- 2026-09-26 (research-build) — Rulings 1-2 drafted: judicial ledger is an ADD not a fold (Hospital_Ledger advancer confirmed hardcoded); mental health folds into existing Cause column. §Later ideas folded from the 2026-09-26 builder proposal.
 
 - 2026-09-21 (research-build) — Service layer scoped (design only): shape, relationship to the safety lever, write targets, OARI diversion measure; rulings 1-2 still gate the build.
 

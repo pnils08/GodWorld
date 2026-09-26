@@ -347,26 +347,72 @@ function smSleep(ms) { return new Promise((r) => setTimeout(r, ms)); }
 // ---------------------------------------------------------------------------
 // Supermemory POST — dual-tagged write with retry-on-401/429
 // ---------------------------------------------------------------------------
-async function addDocument(title, content, metadata) {
+async function addDocument(title, content, metadata, existingId) {
   const body = {
     content,
     containerTags: [CONTAINER_TAG, DOMAIN_TAG],
     metadata: Object.assign({ title, source: 'player-truesource-ingest' }, metadata),
   };
+  // infrastructure.12: PATCH-if-exists / POST-if-new — same shape as
+  // buildFaithCards.js writeMemory (engine.111). Without this, every
+  // --apply POSTs a fresh doc regardless of whether one already exists
+  // for this popId+type, so a re-run duplicates the whole roster.
+  const method = existingId ? 'PATCH' : 'POST';
+  const apiPath = existingId ? '/v3/documents/' + existingId : '/v3/documents';
   for (let attempt = 0; attempt <= WRITE_MAX_RETRIES; attempt++) {
-    const r = await smRequest('POST', '/v3/documents', body);
+    const r = await smRequest(method, apiPath, body);
     if (r.status >= 200 && r.status < 300) {
       const responseBody = typeof r.body === 'string' ? r.body : JSON.stringify(r.body);
-      return { status: r.status, body: responseBody };
+      return { status: r.status, body: responseBody, op: method };
     }
     if ((r.status === 401 || r.status === 429) && attempt < WRITE_MAX_RETRIES) {
-      console.log('  [retry] write got ' + r.status + ' (rate-limit?); sleeping ' + (WRITE_RETRY_SLEEP_MS / 1000) + 's, attempt ' + (attempt + 2) + '/' + (WRITE_MAX_RETRIES + 1));
+      console.log('  [retry] ' + method + ' got ' + r.status + ' (rate-limit?); sleeping ' + (WRITE_RETRY_SLEEP_MS / 1000) + 's, attempt ' + (attempt + 2) + '/' + (WRITE_MAX_RETRIES + 1));
       await smSleep(WRITE_RETRY_SLEEP_MS);
       continue;
     }
-    throw new Error('HTTP ' + r.status + ': ' + (typeof r.body === 'string' ? r.body : JSON.stringify(r.body)));
+    throw new Error('HTTP ' + r.status + ' on ' + method + ' ' + apiPath + ': ' + (typeof r.body === 'string' ? r.body : JSON.stringify(r.body)));
   }
   throw new Error('addDocument exhausted ' + (WRITE_MAX_RETRIES + 1) + ' attempts');
+}
+
+// ---------------------------------------------------------------------------
+// popId+type → doc id map (infrastructure.12 — mirrors buildFaithCards.js
+// buildOrgMap). Built once per run from the live DOMAIN_TAG set so every
+// write in this run can PATCH the existing doc instead of adding another.
+// Keyed on popId+type, not popId alone, because one player can legitimately
+// carry two docs in one run (e.g. primary + a later supplementary hit).
+// ---------------------------------------------------------------------------
+async function buildPopIdMap() {
+  console.log('[ingestPlayerTrueSource] enumerating ' + DOMAIN_TAG + ' for popId+type→id map…');
+  const map = new Map();
+  const dupes = [];
+  let total = 0;
+  let page = 1;
+  while (true) {
+    const r = await smRequest('POST', '/v3/documents/list', {
+      containerTags: [DOMAIN_TAG], limit: 200, page,
+    });
+    if (r.status !== 200) throw new Error('popId-map list failed at page ' + page + ': ' + r.status);
+    const mems = (r.body && r.body.memories) || [];
+    for (const m of mems) {
+      const popId = m.metadata && m.metadata.popId;
+      const type = m.metadata && m.metadata.type;
+      total++;
+      if (!popId || !type) continue;
+      const key = popId + '::' + type;
+      const rec = { id: m.id, createdAt: m.createdAt };
+      const prev = map.get(key);
+      if (!prev) { map.set(key, rec); continue; }
+      if (new Date(rec.createdAt) > new Date(prev.createdAt)) { map.set(key, rec); dupes.push(prev); }
+      else { dupes.push(rec); }
+    }
+    if (mems.length < 200) break;
+    page++;
+    if (page > 20) throw new Error('popId-map pagination overflow (>20 pages)');
+  }
+  console.log('[ingestPlayerTrueSource] popId+type→id map: ' + map.size + ' unique key(s) across ' +
+    total + ' existing doc(s) (' + dupes.length + ' surplus from before this fix, not touched)');
+  return map;
 }
 
 // ---------------------------------------------------------------------------
@@ -532,8 +578,8 @@ async function wipeOldTruesourceCards() {
 // Per-player ingest helper — used by all three passes
 // ---------------------------------------------------------------------------
 async function processPlayerGroup(playerName, fileContents, opts, results) {
-  // opts: { sourceLabel, recordType, sourceFolder, sourcePass, alreadyResolvedPopIds }
-  const { sourceLabel, recordType, sourceFolder, sourcePass, alreadyResolvedPopIds } = opts;
+  // opts: { sourceLabel, recordType, sourceFolder, sourcePass, alreadyResolvedPopIds, popIdMap }
+  const { sourceLabel, recordType, sourceFolder, sourcePass, alreadyResolvedPopIds, popIdMap } = opts;
 
   // Resolve POPID — DataPage content first, then filename, then ledger lookup
   let popId = null;
@@ -632,8 +678,10 @@ async function processPlayerGroup(playerName, fileContents, opts, results) {
   };
   if (legacyPopId) metadata.legacyPopId = legacyPopId;
 
+  const existing = popIdMap && popIdMap.get(popId + '::' + finalType);
+
   if (DRY_RUN) {
-    console.log(`  [DRY] Would POST ${fullContent.length} chars to world-data`);
+    console.log(`  [DRY] Would ${existing ? 'PATCH ' + existing.id : 'POST'} ${fullContent.length} chars to world-data`);
     console.log(`        title: "${docTitle}"`);
     console.log(`        metadata: ${JSON.stringify(metadata)}`);
     results.push({
@@ -651,10 +699,11 @@ async function processPlayerGroup(playerName, fileContents, opts, results) {
   }
 
   try {
-    const resp = await addDocument(docTitle, fullContent, metadata);
-    let docId = null;
-    try { const j = JSON.parse(resp.body); docId = j.id || j.documentId || null; } catch {}
-    console.log(`  [OK] Ingested — HTTP ${resp.status}${docId ? ', doc ' + docId : ''}`);
+    const resp = await addDocument(docTitle, fullContent, metadata, existing && existing.id);
+    let docId = existing ? existing.id : null;
+    try { const j = JSON.parse(resp.body); docId = j.id || j.documentId || docId; } catch {}
+    console.log(`  [OK] ${resp.op === 'PATCH' ? 'Updated' : 'Ingested'} — HTTP ${resp.status}${docId ? ', doc ' + docId : ''}`);
+    if (popIdMap && docId) popIdMap.set(popId + '::' + finalType, { id: docId, createdAt: new Date().toISOString() });
     results.push({
       player: playerName,
       popId,
@@ -663,6 +712,7 @@ async function processPlayerGroup(playerName, fileContents, opts, results) {
       sourcePass,
       finalType,
       status: 'ingested',
+      op: resp.op,
       filesIngested: fileContents.length,
       contentSize: fullContent.length,
       docId,
@@ -690,7 +740,7 @@ async function processPlayerGroup(playerName, fileContents, opts, results) {
 // ---------------------------------------------------------------------------
 // Pass A — subfolder walk (existing behavior)
 // ---------------------------------------------------------------------------
-async function runPassSubfolders(drive, results, resolvedPopIds) {
+async function runPassSubfolders(drive, results, resolvedPopIds, popIdMap) {
   const rootChildren = await listFolderChildren(drive, FOLDER_OVERRIDE);
   const playerFolders = rootChildren.filter(f =>
     f.mimeType === 'application/vnd.google-apps.folder' &&
@@ -726,6 +776,7 @@ async function runPassSubfolders(drive, results, resolvedPopIds) {
       sourceFolder: playerFolder.name,
       sourcePass: 'subfolder',
       alreadyResolvedPopIds: null,
+      popIdMap,
     }, results);
     if (popId) resolvedPopIds.add(popId);
     console.log('');
@@ -735,7 +786,7 @@ async function runPassSubfolders(drive, results, resolvedPopIds) {
 // ---------------------------------------------------------------------------
 // Pass B — flat-file walk in MLB_Roster_Data_Cards (top-level files)
 // ---------------------------------------------------------------------------
-async function runPassFlatMLB(drive, results, resolvedPopIds) {
+async function runPassFlatMLB(drive, results, resolvedPopIds, popIdMap) {
   const rootChildren = await listFolderChildren(drive, FOLDER_OVERRIDE);
   const flatFiles = rootChildren.filter(f =>
     f.mimeType !== 'application/vnd.google-apps.folder' &&
@@ -770,6 +821,7 @@ async function runPassFlatMLB(drive, results, resolvedPopIds) {
       sourceFolder: '(flat)',
       sourcePass: 'flat_mlb',
       alreadyResolvedPopIds: resolvedPopIds,
+      popIdMap,
     }, results);
     if (popId) resolvedPopIds.add(popId);
     console.log('');
@@ -779,7 +831,7 @@ async function runPassFlatMLB(drive, results, resolvedPopIds) {
 // ---------------------------------------------------------------------------
 // Pass C — flat-file walk in Top_Prospects_Data_Cards
 // ---------------------------------------------------------------------------
-async function runPassProspects(drive, results, resolvedPopIds) {
+async function runPassProspects(drive, results, resolvedPopIds, popIdMap) {
   const rootChildren = await listFolderChildren(drive, DRIVE_ROOT_PROSPECTS);
   const flatFiles = rootChildren.filter(f =>
     f.mimeType !== 'application/vnd.google-apps.folder' &&
@@ -814,6 +866,7 @@ async function runPassProspects(drive, results, resolvedPopIds) {
       sourceFolder: 'Top_Prospects_Data_Cards',
       sourcePass: 'prospects',
       alreadyResolvedPopIds: resolvedPopIds,
+      popIdMap,
     }, results);
     if (popId) resolvedPopIds.add(popId);
     console.log('');
@@ -861,8 +914,13 @@ async function main() {
     console.log('[ingestPlayerTrueSource] --wipe-old not set — writes will land alongside any existing un-tagged truesource docs.');
   }
 
+  // infrastructure.12: popId+type→doc id map, built once per run so every
+  // write below can PATCH the existing doc instead of always POSTing a new
+  // one. APPLY-only — dry-run doesn't require SUPERMEMORY_CC_API_KEY at all.
+  const popIdMap = APPLY ? await buildPopIdMap() : null;
+
   if (!SKIP_SUBFOLDER) {
-    await runPassSubfolders(drive, results, resolvedPopIds);
+    await runPassSubfolders(drive, results, resolvedPopIds, popIdMap);
   } else {
     // Pre-seed resolvedPopIds from the prior report (if present) so
     // supplementary detection still works in flat/prospects passes.
@@ -886,8 +944,8 @@ async function main() {
       console.log('');
     }
   }
-  if (INCLUDE_FLAT) await runPassFlatMLB(drive, results, resolvedPopIds);
-  if (INCLUDE_PROSPECTS) await runPassProspects(drive, results, resolvedPopIds);
+  if (INCLUDE_FLAT) await runPassFlatMLB(drive, results, resolvedPopIds, popIdMap);
+  if (INCLUDE_PROSPECTS) await runPassProspects(drive, results, resolvedPopIds, popIdMap);
 
   // Write report
   const outDir = path.join(PROJECT_ROOT, 'output');

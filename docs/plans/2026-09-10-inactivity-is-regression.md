@@ -354,6 +354,32 @@ Hood groups at bench C118 (openness / outabout / all-neutral): crime-bar 51.82 /
 
 The tagging = the engine.201b hood-rank retags (`ActivityExpanded` / `ActivityContracted` / `StreetsGuarded`). Already cut S451 PROD @79; verified absent in code this session — `generateCitizensEvents.js:3151` and `citizenDialMap.js:173` carry the REMOVED markers, and no live call to `hoodOverCrimeBar_` / `activityTopHoods_` remains. The rest stays: Wave 1 plumbing, the cause-carrying pressure seams, conduct @80, owner-reader @81, feud rest, neglect fade. Review is engine-sheet's; no further sim ruling is owed. What remains open under engine.201 is the fixed-cohort causal proof, read off the next live fires (held under codex's lead).
 
+## engine.193 — the downturn generators (engine-sheet S495, 2026-09-26)
+
+Ruling stands (S443): fix the generators, never the tiers. Tiers: `applyCityDynamics.js` `applyDemographicModifiers_` unemployment `> 0.08` / `> 0.12`, sickness `> 0.06` / `> 0.10`; hood `sick0 >= 0.10`.
+
+**Measured (live, C101–C108):**
+
+| Input | Live | Why nothing fires |
+|---|---|---|
+| WP illnessRate | 10.2% C104 → 4.7% C108, monotone | attractor 0.035 × pull 0.12; weekly pushes 0.0002–0.0003 (≤ 0.25pp equilibrium); winter rain/fog every week and it still fell |
+| WP employmentRate | 90.1% → 94.4%, monotone | attractor 0.96 × pull 0.12; every downward push is behind a dead gate (below) |
+| econMood | 58.0–59.5 (carry_forward_c105–108) | `<= 35` down / `>= 65` up — neither fires |
+| city sentiment | +0.25..+0.84 | `>= 0.3` up fires most weeks, `<= −0.3` down never |
+| Business_Ledger Growth_Rate | 173/174 positive, median +5.3 | `applyBusinessDynamics.js:354` `coverageSentiment > 0 → +0.5 × scale` every business every week; the input is city-level `S.editionSentimentBoost`, positive ~7 of 8 weeks (raw rating mean, Edition_Coverage_Ratings C100–107). A standing push — growth ratchets up, nothing sheds, no layoffs to feed employment |
+| Hospital talk-back | 2–3 open vs capacity 100 | `hospitalBaseCapacity` sized for a population the tracked ledger never holds — dead gate on illness |
+| `employmentFloor` 0.88 | — | caps adult unemployment at exactly 12%; the `> 0.12` tier is strict → unreachable by any generator |
+| tier denominator | unemp/pop 2.0–6.5%, unemp/adults 2.5–8.3% | `aggregateDemographics_` divides hood `unemployed` (an adults share, `updateNeighborhoodDemographics.js:233`) by students+adults+seniors — tier reads the rate shrunk ×0.68–0.83. Tier authored v2.6 (`40627f8f`) before the hood writer went per-adult |
+
+**Cuts (one unbenched at a time, in this order):**
+
+1. **Measurement** — `aggregateDemographics_` unemployment over adults (sickness stays over total pop). Not a threshold move: the tier now reads the rate `World_Population` defines.
+2. **Business drift, two-way** — the coverage term reads this week's coverage against its own rolling baseline (engine.185/188 relative band), not its sign. Growth can fall, distress streaks and closures fire through the existing Task 6/7 machine.
+3. **Employment generator** — Phase 3 reads LAST week's business contraction (stated headcount shed vs added, Business_Ledger — world-scale, never tracked-citizen counts) carried via `finalizeCycleState` → `loadPreviousEvening`, as an impulse in points that the existing attractor pulls back over ~4–5 weeks. econMood and sentiment gates become bands relative to their own baseline, both directions. `employmentFloor` 0.88 → **0.85** so the 12% tier is reachable (engine-sheet's number per employment-cascade plan §Phase A line 145; depth is the builder's to override).
+4. **Illness generator** — hospital capacity scaled to the tracked sample (or dropped, named); salient-weather frequency measured first (`S.weatherEvents` is not persisted — needs a bench readback), then outbreak impulse sized in points.
+
+Dials self-arm in World_Config (ADR-0015); `ctx.rng` only. Proof: offline replay harness (`scripts/sentimentRestingLevel.test.js` pattern) on C101–C108 inputs → bench SANDBOX 0908 → PROD after the C109 fire. Blast radius to read back on the bench (untouched per ruling, first-time fire): `civicInitiativeEngine.js:1467–1485`, `updateCrimeMetrics` `UNEMPLOYMENT_THRESHOLD` 0.10, `illnessSupportThreshold` 0.08, hood `sick0 >= 0.10`.
+
 ## Status log
 
 ### engine.197 — status (drained from ROLLOUT, 2026-09-20 / S477)
@@ -382,3 +408,4 @@ Holiday peaks still flatten the city: engine.188 fixed the RESTING level but the
 - 2026-09-13 (engine-sheet S449) — Builder: 1–3 broken code, 4 plain-days cut wrong. engine.201b built + benched (§engine.201b): openness/sociability down, pins 0, feud rest; all-neutral share unmoved — stays open.
 - 2026-09-13 (engine-sheet S449 close) — Builder verdict: engine.201/201b unapproved, broke the sim (StreetsGuarded read the real-Oakland crime ranking; dials moved by retagging texture, not events). Live @78 not fired. HOLD pending builder decision.
 - 2026-09-14 (engine-sheet S459) — Builder ruled: tagging out (already S451), the rest stays, engine-sheet reviews — §Builder ruling 2026-09-14. Hold lifted; open item is the fixed-cohort causal proof.
+- 2026-09-26 (engine-sheet S495) — engine.193 triage: measured all downward inputs dead on live C101–C108; root generator = standing +0.5 coverage push in business drift; four cuts sequenced (§engine.193).

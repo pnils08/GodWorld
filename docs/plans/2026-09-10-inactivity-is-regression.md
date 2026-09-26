@@ -409,3 +409,4 @@ Holiday peaks still flatten the city: engine.188 fixed the RESTING level but the
 - 2026-09-13 (engine-sheet S449 close) — Builder verdict: engine.201/201b unapproved, broke the sim (StreetsGuarded read the real-Oakland crime ranking; dials moved by retagging texture, not events). Live @78 not fired. HOLD pending builder decision.
 - 2026-09-14 (engine-sheet S459) — Builder ruled: tagging out (already S451), the rest stays, engine-sheet reviews — §Builder ruling 2026-09-14. Hold lifted; open item is the fixed-cohort causal proof.
 - 2026-09-26 (engine-sheet S495) — engine.193 triage: measured all downward inputs dead on live C101–C108; root generator = standing +0.5 coverage push in business drift; four cuts sequenced (§engine.193).
+- 2026-09-26 (engine-sheet S495) — cut 1 committed `e4c0e040`, bench SANDBOX 0908 @114 C121 clean (0 new errors). Cut 2 (business drift two-way) next.

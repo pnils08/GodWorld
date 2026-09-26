@@ -30,6 +30,8 @@
  *   node scripts/ingestPlayerTrueSource.js --apply --include-prospects        # add Top_Prospects passes
  *   node scripts/ingestPlayerTrueSource.js --player "Danny Horn"              # one player only
  *   node scripts/ingestPlayerTrueSource.js --folder <ID> --apply              # override Drive root
+ *   node scripts/ingestPlayerTrueSource.js --reconcile                        # dry-run: list pre-fix duplicate surplus (infrastructure.12)
+ *   node scripts/ingestPlayerTrueSource.js --reconcile --apply                # delete the surplus (keeps newest per popId+type)
  *
  * Output: output/intake_player_truesource.json (per-player results +
  * POPID resolution + Drive file inventory).
@@ -62,6 +64,7 @@ const SKIP_SUBFOLDER = process.argv.includes('--skip-subfolder');       // skip 
 const WIPE_OLD = process.argv.includes('--wipe-old');                   // S183 R2 — pre-pass wipe of prior truesource docs
 const ALLOW_PARTIAL_WIPE = process.argv.includes('--allow-partial-wipe'); // engine.112 — deliberate override
 const WIPE_ONLY = process.argv.includes('--wipe-only');                 // S183 R2 — wipe and exit (no Drive walk, no writes)
+const RECONCILE = process.argv.includes('--reconcile');                 // infrastructure.12 — delete pre-fix duplicate surplus, no Drive walk
 
 // Local disk mirror of every resolved player's card content, keyed by POPID.
 // Written on every run (dry-run and apply) so downstream disk-first readers
@@ -90,8 +93,8 @@ const PLAYER_FILTER = parseFlag('player');
 const FOLDER_OVERRIDE = parseFlag('folder') || DRIVE_ROOT_MLB;
 
 const API_KEY = process.env.SUPERMEMORY_CC_API_KEY;
-if (APPLY && !API_KEY) {
-  console.error('[ERROR] SUPERMEMORY_CC_API_KEY not set — cannot apply.');
+if ((APPLY || RECONCILE) && !API_KEY) {
+  console.error('[ERROR] SUPERMEMORY_CC_API_KEY not set — cannot ' + (RECONCILE ? 'reconcile' : 'apply') + '.');
   process.exit(1);
 }
 
@@ -400,7 +403,7 @@ async function buildPopIdMap() {
       total++;
       if (!popId || !type) continue;
       const key = popId + '::' + type;
-      const rec = { id: m.id, createdAt: m.createdAt };
+      const rec = { id: m.id, createdAt: m.createdAt, key };
       const prev = map.get(key);
       if (!prev) { map.set(key, rec); continue; }
       if (new Date(rec.createdAt) > new Date(prev.createdAt)) { map.set(key, rec); dupes.push(prev); }
@@ -412,7 +415,90 @@ async function buildPopIdMap() {
   }
   console.log('[ingestPlayerTrueSource] popId+type→id map: ' + map.size + ' unique key(s) across ' +
     total + ' existing doc(s) (' + dupes.length + ' surplus from before this fix, not touched)');
-  return map;
+  return { map, dupes, total };
+}
+
+// ---------------------------------------------------------------------------
+// engine.111: single DELETE with status classification. 404 = already absent,
+// which satisfies the caller's intent, so it is not a failure.
+// ---------------------------------------------------------------------------
+async function deleteDoc(id) {
+  const del = await smRequest('DELETE', '/v3/documents/' + id, null);
+  if (del.status === 204 || del.status === 200) return { outcome: 'deleted', status: del.status };
+  if (del.status === 404) return { outcome: 'already-gone', status: 404 };
+  if (del.status === 409) {
+    await smSleep(20000);
+    const del2 = await smRequest('DELETE', '/v3/documents/' + id, null);
+    if (del2.status === 204 || del2.status === 200) return { outcome: 'deleted', status: del2.status };
+    if (del2.status === 404) return { outcome: 'already-gone', status: 404 };
+    return { outcome: 'failed', status: del2.status };
+  }
+  return { outcome: 'failed', status: del.status };
+}
+
+// ---------------------------------------------------------------------------
+// Reconcile — delete the pre-fix duplicate surplus (infrastructure.12).
+// Keeps the newest doc per popId+type key (same rule buildPopIdMap already
+// applies when building the map), deletes every older sibling. Mirrors
+// buildFaithCards.js reconcileFaithCards() (engine.111): dry-run by default,
+// writes a delete manifest before any --apply DELETE, gate-fails loudly on
+// any DELETE that isn't a clean 200/204/404.
+// ---------------------------------------------------------------------------
+async function reconcileTrueSourceCards() {
+  const built = await buildPopIdMap();
+  const dupes = built.dupes;
+
+  console.log('\n[reconcile] mode: ' + (APPLY ? 'APPLY' : 'DRY-RUN'));
+  console.log('[reconcile] docs: ' + built.total + ' | popId+type keys: ' + built.map.size +
+    ' | surplus to delete: ' + dupes.length);
+
+  if (dupes.length === 0) {
+    console.log('[reconcile] one-doc-per-popId+type invariant already holds — nothing to do.');
+    return;
+  }
+
+  const manifest = dupes.map((d) => ({
+    id: d.id,
+    key: d.key,
+    createdAt: d.createdAt,
+    keepId: (built.map.get(d.key) || {}).id,
+  }));
+  manifest.slice(0, 10).forEach((m) => {
+    console.log('  ' + m.key + ' — delete ' + String(m.createdAt).slice(0, 10) + ' (' + m.id + ')' +
+      ' | keep ' + m.keepId);
+  });
+  if (manifest.length > 10) console.log('  … +' + (manifest.length - 10) + ' more (full list in manifest)');
+
+  const stamp = new Date().toISOString().replace(/[:.]/g, '-');
+  const logPath = path.join(PROJECT_ROOT, 'output', 'wd-truesource-reconcile-' + stamp + '.log');
+  fs.writeFileSync(logPath, manifest.map((m) =>
+    [m.key, m.id, m.createdAt, 'keep=' + m.keepId].join('\t')
+  ).join('\n') + '\n', 'utf8');
+  console.log('[reconcile] delete manifest written: ' + logPath);
+
+  if (!APPLY) {
+    console.log('\n[reconcile] DRY-RUN — no deletes issued. Re-run with --reconcile --apply to execute.');
+    return;
+  }
+
+  let deleted = 0;
+  let alreadyGone = 0;
+  const failures = [];
+  for (const m of manifest) {
+    const res = await deleteDoc(m.id);
+    if (res.outcome === 'deleted') deleted++;
+    else if (res.outcome === 'already-gone') alreadyGone++;
+    else failures.push({ id: m.id, key: m.key, status: res.status });
+    await smSleep(250);
+  }
+  console.log('\n[reconcile] deleted: ' + deleted + ' | already-gone: ' + alreadyGone +
+    ' | failed: ' + failures.length);
+  if (failures.length > 0) {
+    failures.forEach((f) => console.error('  [FAIL] ' + f.key + ' ' + f.id + ' → HTTP ' + f.status));
+    console.error('[GATE-FAIL] reconcile left ' + failures.length + ' surplus doc(s) in place; manifest: ' + logPath);
+    process.exit(1);
+  }
+  console.log('[reconcile] one-doc-per-popId+type invariant restored.');
 }
 
 // ---------------------------------------------------------------------------
@@ -878,6 +964,12 @@ async function runPassProspects(drive, results, resolvedPopIds, popIdMap) {
 // ---------------------------------------------------------------------------
 async function main() {
   console.log('=== ingestPlayerTrueSource ===');
+  if (RECONCILE) {
+    console.log('[METADATA] ' + JSON.stringify({ mode: DRY_RUN ? 'DRY-RUN' : 'APPLY', reconcile: true }, null, 2));
+    console.log('---');
+    await reconcileTrueSourceCards();
+    return;
+  }
   console.log('[METADATA] ' + JSON.stringify({
     driveRoot: FOLDER_OVERRIDE,
     container: CONTAINER_TAG,

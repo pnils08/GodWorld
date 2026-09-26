@@ -146,13 +146,20 @@ function runCivicInitiativeEngine_(ctx) {
   if (data.length >= 2 && backfillInitiativeBizLinks_(sheet, data[0], data.slice(1)).changed > 0) {
     data = sheet.getDataRange().getValues();
   }
+  // engine.260: authored tracked-hire openings, seeded once per approved+linked row.
+  if (data.length >= 2 && backfillInitiativeOpenSlots_(ctx, sheet, data[0], data.slice(1)).changed > 0) {
+    data = sheet.getDataRange().getValues();
+  }
   if (data.length < 2) {
     Logger.log('civicInitiativeEngine: No initiatives to process');
     return;
   }
-  
+
   var header = data[0];
   var rows = data.slice(1);
+  // engine.260: publish this cycle's open civic-hire slots for runCareerEngine_
+  // (Phase5-Career runs after Phase5-Initiatives, same cycle — godWorldEngine2.js).
+  publishCivicOpenSlots_(ctx, header, rows);
   
   var idx = function(name) { return header.indexOf(name); };
   
@@ -3144,7 +3151,14 @@ function ensureInitiativeBuildColumns_(sheet, header) {
 // OpensCycle. Backfill below is a five-row authored map (S334 legacy mints,
 // `d37bb7cf`) — not a name matcher; future mints write BizID themselves at the
 // mint site (builder call pending, see plan Job 4).
-var INITIATIVE_LINK_COLUMNS_ = ['BizID'];
+// engine.260 (builder-ruled 2026-09-25, "if we leave a couple open"): OpenTrackedSlots
+// rides the same column class — a minted establishment's authored count of
+// tracked-hire openings, read by getCivicOpenSlots_. Self-arms together with BizID.
+var INITIATIVE_LINK_COLUMNS_ = ['BizID', 'OpenTrackedSlots'];
+
+// Stages that count as "approved" for slot-seeding (civicStageStep_'s own list,
+// mirrored — a row must have cleared Proposed to draw tracked-hire openings).
+var INITIATIVE_APPROVED_STAGES_ = ['Funded', 'Standing', 'Delivering'];
 
 /** Append a missing BizID column. Same contract as ensureInitiativeStageColumns_. */
 function ensureInitiativeLinkColumns_(sheet, header) {
@@ -3199,6 +3213,76 @@ function backfillInitiativeBizLinks_(sheet, header, rows) {
   sheet.getRange(2, iBiz + 1, plan.bizId.length, 1).setValues(plan.bizId);
   Logger.log('civicInitiativeEngine: Job 4 backfilled ' + plan.changed + ' BizID link(s) from the S334 legacy map');
   return plan;
+}
+
+/**
+ * One-time seed: a linked (`BizID` non-blank), approved (`Stage` ∈
+ * INITIATIVE_APPROVED_STAGES_) row with a blank OpenTrackedSlots gets the
+ * `civicOpenSlots` dial's value. Never overwrites a non-blank OpenTrackedSlots —
+ * a hand edit or the engine's own later decrement wins.
+ */
+function planInitiativeOpenSlotsBackfill_(header, rows, startingSlots) {
+  var iBiz = header.indexOf('BizID'), iSlots = header.indexOf('OpenTrackedSlots'), iStage = header.indexOf('Stage');
+  var out = { slots: [], changed: 0 };
+  if (iBiz < 0 || iSlots < 0 || iStage < 0) return out;
+  for (var r = 0; r < rows.length; r++) {
+    var current = rows[r][iSlots];
+    var bizId = String(rows[r][iBiz] || '').trim();
+    var stage = String(rows[r][iStage] || '').trim();
+    var blank = current === '' || current === null || current === undefined;
+    if (bizId && blank && INITIATIVE_APPROVED_STAGES_.indexOf(stage) >= 0) {
+      out.slots.push([startingSlots]);
+      out.changed++;
+    } else {
+      out.slots.push([current]);
+    }
+  }
+  return out;
+}
+
+/** Apply planInitiativeOpenSlotsBackfill_'s plan via a single-column range write. */
+function backfillInitiativeOpenSlots_(ctx, sheet, header, rows) {
+  var startingSlots = getCivicOpenSlots_(ctx);
+  var plan = planInitiativeOpenSlotsBackfill_(header, rows, startingSlots);
+  if (!plan.changed) return plan;
+  var iSlots = header.indexOf('OpenTrackedSlots');
+  sheet.getRange(2, iSlots + 1, plan.slots.length, 1).setValues(plan.slots);
+  Logger.log('civicInitiativeEngine: engine.260 seeded ' + plan.changed + ' OpenTrackedSlots row(s) at ' + startingSlots);
+  return plan;
+}
+
+/** Tracked-hire openings a newly-minted civic establishment starts with. Fail-loud on a missing dial. */
+function getCivicOpenSlots_(ctx) {
+  var raw = ctx && ctx.config ? ctx.config.civicOpenSlots : undefined;
+  var value = Number(raw);
+  if (raw === '' || raw === null || raw === undefined || !isFinite(value) || value < 0 || value > 10) {
+    throw new Error('civic open slots: invalid or missing World_Config.civicOpenSlots');
+  }
+  return Math.floor(value);
+}
+
+/**
+ * Publish S.civicOpenSlots for runCareerEngine_'s rehire matcher: every row
+ * with a positive OpenTrackedSlots keyed by BizID. Deliberately carries no
+ * sheet row/column — the Node-side hourly civic tick (cron-civic-run.js,
+ * civic.39) writes this same tab independently of the weekly engine fire and
+ * can append a row (INIT-008 landed that way) between this publish and Phase
+ * 10. A coordinate captured here would risk decrementing the wrong row if a
+ * row landed above it in that window. runCareerEngine_ resolves the row fresh,
+ * by BizID, at the moment it actually queues a decrement — the only point a
+ * coordinate is safe to use.
+ */
+function publishCivicOpenSlots_(ctx, header, rows) {
+  var iBiz = header.indexOf('BizID'), iSlots = header.indexOf('OpenTrackedSlots');
+  var S = ctx.summary || (ctx.summary = {});
+  S.civicOpenSlots = {};
+  if (iBiz < 0 || iSlots < 0) return;
+  for (var r = 0; r < rows.length; r++) {
+    var bizId = String(rows[r][iBiz] || '').trim();
+    var slots = Number(rows[r][iSlots]);
+    if (!bizId || !isFinite(slots) || slots <= 0) continue;
+    S.civicOpenSlots[bizId] = { slots: Math.floor(slots) };
+  }
 }
 
 /**

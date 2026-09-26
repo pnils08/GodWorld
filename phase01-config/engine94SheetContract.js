@@ -165,6 +165,11 @@ var ENGINE213_CONFIG_SEEDS = [
   ['civicBuildCycles_sports', 12, 'Job 3: weeks a sports initiative (stadium, rec) builds before it opens (builder-ruled 12)', 0, 52, true],
   ['civicBuildCycles_environment', 6, 'Job 3: weeks a parks/environment initiative builds before it opens (builder-ruled 6)', 0, 52, true],
   ['civicTendFloor', 0.3, 'civic.38 Task 4 upkeep: the least a neglected service pays, as a share of full strength (builder-ruled 0.3); one work move restores it', 0, 1, false],
+  // Initiatives in the World Job 4 / engine.260 (builder-ruled 2026-09-25: "if we
+  // leave a couple open"): tracked-hire openings seeded on a minted civic
+  // establishment (Initiative_Tracker.OpenTrackedSlots) — the rest of its stated
+  // Employee_Count is the untracked majority. Read by getCivicOpenSlots_.
+  ['civicOpenSlots', 2, 'engine.260: tracked-hire openings a civic establishment starts with at mint (builder-ruled "a couple" = 2); the untracked city fills the rest of its stated headcount', 0, 10, true],
   // engine.259 (builder 2026-09-24: "the fund should move"): a Standing/Delivering
   // fund in `disbursement-active` spends a tranche every Cycle — mostly off-ledger
   // (the tracked ledger is ~1:448), and onto the few tracked households in its

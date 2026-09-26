@@ -1243,24 +1243,97 @@ function runCareerEngine_(ctx) {
     }
     if (!pool.length) return;
 
+    // engine.260 (builder-ruled 2026-09-25, "if we leave a couple open"): a
+    // civic establishment's authored openings (Initiative_Tracker.OpenTrackedSlots,
+    // published as S.civicOpenSlots by civicInitiativeEngine_ earlier this same
+    // Phase 5) can pull an ALREADY-EMPLOYED citizen — "citizens with jobs can move
+    // to new jobs". Scoped strictly to businesses in S.civicOpenSlots; every other
+    // business keeps the engine.135 E3 unemployed-only rule untouched. Pool =
+    // Active, tagged, working-age, ambition posture 'climb' (maneuverPostureOf_ —
+    // openness to a jump; NOT maneuverWillingCrossField_, which tests willingness
+    // to change fields and is the wrong question for a same-field mover). Any
+    // current employer counts, including UNTRACKED/SELF_EMPLOYED sentinels (no
+    // Business_Ledger row to reconcile for those — the depart side is a no-op).
+    var civicOpenSlots = (S.civicOpenSlots && Object.keys(S.civicOpenSlots).length) ? S.civicOpenSlots : null;
+    var civicMovers = [], bizNameById_ = {};
+    if (civicOpenSlots) {
+      for (var cb = 1; cb < bizData.length; cb++) {
+        var cbId = String(bizData[cb][bId] || '').trim();
+        if (cbId) bizNameById_[cbId] = String(bNm >= 0 ? (bizData[cb][bNm] || cbId) : cbId);
+      }
+      for (var mr = 0; mr < rows.length; mr++) {
+        var mRow = rows[mr];
+        if (safeStr(mRow[iStatus]).trim() !== 'Active') continue;
+        if (safeStr(mRow[iClock]).trim() === 'GAME') continue;
+        if (iEconKey >= 0 && safeStr(mRow[iEconKey]).trim() === 'SPORTS_OVERRIDE') continue;
+        var mEmp = safeStr(mRow[iEmployerBizId]).trim();
+        if (!mEmp) continue; // the unemployed pool above already covers no-employer citizens
+        var mBy = Number(mRow[iBirthYear]) || 0;
+        if (mBy > 0) { var mAge = simYear - mBy; if (mAge < 18 || mAge >= 65) continue; }
+        var mTags = safeStr(mRow[iTags]).trim();
+        if (!mTags) continue;
+        if (typeof maneuverPostureOf_ !== 'function') continue;
+        var mPosture = maneuverPostureOf_(ctx, safeStr(mRow[iPopID]));
+        if (!mPosture || mPosture.posture !== 'climb') continue;
+        civicMovers.push({ r: mr, tags: mTags.split('|'), income: Number(mRow[iIncome]) || 0, pop: safeStr(mRow[iPopID]),
+          edu: iEduLevel >= 0 ? credentialRankOf_(mRow, iEduLevel) : 0, eduLabel: iEduLevel >= 0 ? safeStr(mRow[iEduLevel]).trim() : '',
+          tier: Math.round(Number(mRow[iTier])) || 4, oldBizId: mEmp });
+      }
+    }
+    var civicTaken = {}; // civicMovers index → true
+
+    // A fresh, single read of Initiative_Tracker, resolved by BizID at the
+    // moment this cycle's fills are about to be queued — not the coordinates
+    // civicInitiativeEngine_ captured minutes earlier this same cycle. The
+    // Node-side hourly civic tick (cron-civic-run.js) writes this same tab on
+    // its own cadence, independent of the weekly engine fire, and can append a
+    // row (INIT-008 landed that way) between that publish and now. Reading it
+    // fresh here — synchronously, with nothing able to write between this read
+    // and the intent this function queues moments later — is the only safe
+    // point to capture a row number.
+    var civicTrackerRowByBiz = {}, civicTrackerSlotsCol = -1;
+    if (civicOpenSlots) {
+      var civicTrackerSheet = ctx.ss ? ctx.ss.getSheetByName('Initiative_Tracker') : null;
+      if (civicTrackerSheet) {
+        var civicTrackerData = civicTrackerSheet.getDataRange().getValues();
+        if (civicTrackerData.length >= 2) {
+          var ctHeader = civicTrackerData[0];
+          var ctBizCol = ctHeader.indexOf('BizID'), ctSlotsCol = ctHeader.indexOf('OpenTrackedSlots');
+          civicTrackerSlotsCol = ctSlotsCol + 1;
+          if (ctBizCol >= 0 && ctSlotsCol >= 0) {
+            for (var ctr = 1; ctr < civicTrackerData.length; ctr++) {
+              var ctBizId = String(civicTrackerData[ctr][ctBizCol] || '').trim();
+              if (ctBizId) civicTrackerRowByBiz[ctBizId] = ctr + 1;
+            }
+          }
+        }
+      }
+    }
+
     // ── hiring windows, deterministic business order (sheet order) ──
     var hired = 0, crossField = 0;
     var taken = {}; // pool index → true
     for (var br3 = 1; br3 < bizData.length; br3++) {
+      var bizId2 = String(bizData[br3][bId] || '').trim();
+      var civicSlot = civicOpenSlots && bizId2 ? civicOpenSlots[bizId2] : null;
       var stated = Number(bizData[br3][bCount]);
       var growth = Number(bizData[br3][bGrow]);
-      if (isNaN(stated) || isNaN(growth) || growth <= 0 || stated <= 0) continue;
-      var bizId2 = String(bizData[br3][bId] || '').trim();
+      if ((isNaN(stated) || isNaN(growth) || growth <= 0 || stated <= 0) && !civicSlot) continue;
       if (!bizId2) continue;
       var cat = sectorCategory_(bSec >= 0 ? bizData[br3][bSec] : '');
       if (!cat) continue; // sports orgs opted out
 
-      var perCycle = (stated * growth / 100) / 52 * gapFactor; // engine.135 E2: dial-steered
+      // engine.135 E2: dial-steered, unless the business also carries a civic
+      // opening. A civic window bypasses gapFactor (a req, not attractor odds)
+      // and never adds to the growth count — Math.max, not +, keeps this at
+      // one fill per cycle total, growth or civic, whichever asked.
+      var perCycle = (!isNaN(stated) && !isNaN(growth) && growth > 0 && stated > 0) ? (stated * growth / 100) / 52 * gapFactor : 0;
       var openings = Math.floor(perCycle);
       if (openings < 1 && perCycle > 0) {
         var cadence = Math.max(1, Math.min(52, Math.round(1 / perCycle)));
         if ((Number(cycle) + br3) % cadence === 0) openings = 1;
       }
+      if (civicSlot && civicSlot.slots > 0) openings = Math.max(openings, 1);
       if (openings < 1) continue;
 
       // same-field candidates first: SkillTags carry the business's category
@@ -1357,6 +1430,88 @@ function runCareerEngine_(ctx) {
         taken[hIdx] = true;
         hired++;
         if (isCross) crossField++;
+      }
+
+      // engine.260: the civic window's own remaining count — the unemployed fill
+      // above already took its share of `openings` for THIS business; only the
+      // shortfall (typically 0 or 1, since a civic opening only ever bumps
+      // openings to 1) may pull a mover. One employer, one job change per fill.
+      if (civicSlot && civicSlot.slots > 0) {
+        var civicRemaining = openings - slots.length;
+        if (civicRemaining > 0) {
+          var civicCandidates = [];
+          for (var cm = 0; cm < civicMovers.length; cm++) {
+            if (civicTaken[cm]) continue;
+            if (civicMovers[cm].oldBizId === bizId2) continue; // already works here
+            if (tagsInCategory_(civicMovers[cm].tags, cat)) civicCandidates.push(cm);
+          }
+          civicCandidates.sort(function (a, b6) { return hireSlotOrder_(civicMovers[a], civicMovers[b6]); });
+          var civicSlotsFilled = Math.min(civicRemaining, civicSlot.slots, civicCandidates.length);
+          for (var cf = 0; cf < civicSlotsFilled; cf++) {
+            var cIdx = civicCandidates[cf];
+            var cMover = civicMovers[cIdx];
+            var cRow = rows[cMover.r];
+            var oldBizName = bizNameById_[cMover.oldBizId] || cMover.oldBizId;
+            var newBizName = String(bNm >= 0 ? (bizData[br3][bNm] || bizId2) : bizId2);
+            var cIsCross = !tagsInCategory_(cMover.tags, cat);
+            cRow[iEmployerBizId] = bizId2;
+            // engine.170/engine.146 two truths, same as the unemployed hire path
+            // above: carrying the tag isn't the same as CURRENT field — a mover
+            // whose RoleType isn't in `cat` takes the entry job IN that field.
+            if (iRoleM >= 0 && typeof roleFieldOf_ === 'function' && typeof SETTLE_ROLES_BY_FIELD !== 'undefined' && SETTLE_ROLES_BY_FIELD[cat]) {
+              var cCurField = roleFieldOf_(cRow[iRoleM]);
+              if (cCurField !== cat) {
+                var cEduRank = Number(cMover.edu) || 0;
+                var cNewRole = SETTLE_ROLES_BY_FIELD[cat][cEduRank >= 4 ? 'rich' : cEduRank >= 1 ? 'solid' : 'rough'];
+                cRow[iRoleM] = cNewRole;
+                if (typeof setCurrentField_ === 'function') cRow[iTags] = setCurrentField_(cRow[iTags], cat);
+                if (typeof jobReferencePay_ === 'function') {
+                  var cNp = jobReferencePay_(cNewRole, cRow[iTags], cRow[idx('CareerStage')], cRow[iPopID],
+                    (typeof payProfileFromRow_ === 'function') ? payProfileFromRow_(ctx.ledger.headers, cRow, bGrow >= 0 ? Number(bizData[br3][bGrow]) : null) : null);
+                  if (cNp !== null) cRow[iIncome] = cNp;
+                }
+                cIsCross = true;
+              }
+            }
+            // same two-step pattern as the unemployed hire path: a field change
+            // may have just set a fresh reference wage above; the chosen-move
+            // multiplier below applies to whatever's in iIncome now, exactly as
+            // the unemployed path does.
+            var cInc = Number(cRow[iIncome]) || 0;
+            if (cInc > 0) {
+              cRow[iIncome] = Math.round(cInc * (cIsCross ? (0.95 + roll() * 0.10) : (1.05 + roll() * 0.05)));
+            }
+            cRow[iLastUpd] = ctx.now;
+            var civicTag = cIsCross ? 'Career-FieldChange' : 'Career-Hired';
+            var civicText = cIsCross
+              ? 'Changed fields — left ' + oldBizName + ' for an opening at ' + newBizName + ' (' + cat + ')'
+              : 'Left ' + oldBizName + ' for an opening at ' + newBizName;
+            appendCareerLifeLine_(ctx, cRow, iLife, cycle, civicTag, civicText);
+            logRows.push([ctx.now, cRow[iPopID], '', civicTag, civicText, '', cycle]);
+            if (/^BIZ-/.test(cMover.oldBizId)) {
+              if (!S.careerSignals.businessDeltas[cMover.oldBizId]) S.careerSignals.businessDeltas[cMover.oldBizId] = { gained: 0, lost: 0 };
+              S.careerSignals.businessDeltas[cMover.oldBizId].lost += 1; // a real departure, not a layoff — no Career-Layoff line
+            }
+            if (!S.careerSignals.businessDeltas[bizId2]) S.careerSignals.businessDeltas[bizId2] = { gained: 0, lost: 0 };
+            S.careerSignals.businessDeltas[bizId2].gained += 1;
+            S.careerSignals.transitions += 1;
+            S.eventsGenerated = (S.eventsGenerated || 0) + 1;
+            civicTaken[cIdx] = true;
+            civicSlot.slots -= 1;
+            hired++;
+            if (cIsCross) crossField++;
+            // Resolved fresh (civicTrackerRowByBiz), not from a coordinate
+            // civicInitiativeEngine_ captured earlier this cycle — see the
+            // comment above civicTrackerRowByBiz's build.
+            var civicTrackerRow = civicTrackerRowByBiz[bizId2];
+            if (civicTrackerRow && civicTrackerSlotsCol > 0) {
+              queueCellIntent_(ctx, 'Initiative_Tracker', civicTrackerRow, civicTrackerSlotsCol, civicSlot.slots,
+                'engine.260 open-slot filled (' + cMover.pop + ' -> ' + bizId2 + ')', 'citizens');
+            } else {
+              Logger.log('engine.260: could not resolve Initiative_Tracker row for ' + bizId2 + ' — OpenTrackedSlots decrement skipped this fill');
+            }
+          }
+        }
       }
     }
 

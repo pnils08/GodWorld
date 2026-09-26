@@ -97,17 +97,33 @@ test('malformed weekly input rejects the cell, keeps the row, never the cycle', 
   assert.strictEqual(entries[0].streak, 'L1');
   assert.strictEqual('weekRecord' in entries[0], false, 'no weekly facts survive a bad cell');
 });
-test('duplicate weekly summaries: first stands, later rejected, never silently merged', () => {
-  const entries = readRejecting([row({ WeekRecord: 'H:W' }), row({ WeekRecord: 'A:L' })], /duplicate.*WeekRecord/i);
-  assert.strictEqual(entries.length, 2);
-  assert.strictEqual(entries[0].weekRecord, 'H:W');
+test('per-game weekly rows fold in row order into the first row (builder 2026-09-26)', () => {
+  // The C109 World Series shape: one token per game row.
+  const entries = read([row({ WeekRecord: 'H:W' }), row({ WeekRecord: 'H:L' }), row({ WeekRecord: 'A:W' })]);
+  assert.deepStrictEqual(rejected(), [], 'folding is not an error');
+  assert.strictEqual(entries.length, 3);
+  assert.strictEqual(entries[0].weekRecord, 'H:W H:L A:W');
+  assert.strictEqual('weekRecord' in entries[1], false);
+  assert.strictEqual('weekRecord' in entries[2], false);
+  assert.strictEqual(parse(entries[0].weekRecord).record, '2-1');
+  assert.strictEqual(resolve(entries).status, 'settled-win', 'casino still settles on the first game');
+});
+test('a no-games week never folds with games: later row rejected, first stands', () => {
+  const entries = readRejecting([row({ WeekRecord: 'none', EventType: 'season-state' }), row({ WeekRecord: 'A:L' })], /duplicate.*WeekRecord/i);
+  assert.strictEqual(entries[0].weekRecord, 'none');
   assert.strictEqual('weekRecord' in entries[1], false);
 });
-test('team aliases cannot bypass duplicate protection', () => {
+test('team aliases fold into one week, never two', () => {
   // 'as' and "A's" both normalize to the A's, so a spelling change must not buy a second week.
-  const entries = readRejecting([row({ TeamsUsed: 'as', WeekRecord: 'H:W' }), row({ TeamsUsed: "A's", WeekRecord: 'A:L' })], /duplicate.*WeekRecord/i);
-  assert.strictEqual(entries[0].weekRecord, 'H:W');
+  const entries = read([row({ TeamsUsed: 'as', WeekRecord: 'H:W' }), row({ TeamsUsed: "A's", WeekRecord: 'A:L' })]);
+  assert.deepStrictEqual(rejected(), []);
+  assert.strictEqual(entries[0].weekRecord, 'H:W A:L');
   assert.strictEqual('weekRecord' in entries[1], false);
+});
+test('a season-state row carrying a game token is still refused (C108 row 226 / C109 row 235)', () => {
+  const entries = readRejecting([row({ WeekRecord: 'H:W' }), row({ WeekRecord: 'H:W', EventType: 'season-state', SeasonType: 'championship' })], /games require game-result/);
+  assert.strictEqual(entries[0].weekRecord, 'H:W');
+  assert.strictEqual(plain(box.deriveSeasonByTeamFromFeed_(entries))["A's"], 'championship', 'the season lens still reads the last row');
 });
 test('two franchises may each report a week', () => {
   assert.strictEqual(read([row({ WeekRecord: 'H:W' }), row({ TeamsUsed: 'Oaks', WeekRecord: 'A:L' })]).length, 2);
@@ -153,9 +169,11 @@ test('explicit weekly summary supplies settlement ahead of supplemental rows', (
 test('explicit no-games week carries despite a stale streak or supplemental game row', () => {
   assert.strictEqual(resolve([entry({ streak: 'W3' }), entry({ weekRecord: 'none', eventType: 'season-state' })]).status, 'carry');
 });
-test('casino independently rejects malformed or duplicate weekly input', () => {
+test('casino independently rejects malformed input and no-games duplicates, folds game rows', () => {
   assert.throws(() => resolve([entry({ weekRecord: 'H:W bad' })]), /WeekRecord/);
-  assert.throws(() => resolve([entry({ weekRecord: 'H:W' }), entry({ weekRecord: 'H:L' })]), /duplicate.*WeekRecord/i);
+  assert.throws(() => resolve([entry({ weekRecord: 'none', eventType: 'season-state' }), entry({ weekRecord: 'H:L' })]), /duplicate.*WeekRecord/i);
+  // Raw per-game rows (the Node casino path reads the sheet unfolded) fold the same way.
+  assert.strictEqual(resolve([entry({ weekRecord: 'H:L' }), entry({ weekRecord: 'H:W' })]).status, 'settled-loss');
 });
 test('legacy first-result rule and empty-feed carry remain unchanged', () => {
   assert.strictEqual(resolve([entry({}), entry({ streak: 'W1' })]).status, 'settled-loss');

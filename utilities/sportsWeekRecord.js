@@ -42,6 +42,13 @@ function sportsWeekForEntry_(entry) {
   return week;
 }
 
+// Two weekly reports for one franchise in one Cycle: game rows fold in played
+// (row) order; anything involving an explicit no-games week is a duplicate.
+function foldSportsWeeks_(first, next, label) {
+  if (!first.gamesPlayed || !next.gamesPlayed) throw new Error('duplicate WeekRecord: ' + label);
+  return parseSportsWeekRecord_(first.value + ' ' + next.value);
+}
+
 // Null means no weekly report: callers may use their historical reader.
 // An explicit no-games week returns carry and forbids stale-result fallback.
 function sportsWeeklyResult_(entries, matchesTeam) {
@@ -50,7 +57,13 @@ function sportsWeeklyResult_(entries, matchesTeam) {
     var entry = entries[i];
     if (!matchesTeam(entry.teamsUsed) || !String(entry.weekRecord || '').trim()) continue;
     var candidate = sportsWeekForEntry_(entry);
-    if (weekly) throw new Error('duplicate WeekRecord: casino franchise');
+    if (weekly) {
+      // One token per game row is how the builder types a series (2026-09-26):
+      // game rows fold in row order into one week; the first row stays the
+      // week's anchor. A no-games week never folds with games.
+      weekly = foldSportsWeeks_(weekly, candidate, 'casino franchise');
+      continue;
+    }
     weekly = candidate;
     selected = entry;
   }
@@ -68,6 +81,7 @@ if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
     parseSportsWeekRecord_: parseSportsWeekRecord_,
     sportsWeekForEntry_: sportsWeekForEntry_,
-    sportsWeeklyResult_: sportsWeeklyResult_
+    sportsWeeklyResult_: sportsWeeklyResult_,
+    foldSportsWeeks_: foldSportsWeeks_
   };
 }

@@ -223,8 +223,10 @@ function readOaklandFeedEntries_(ctx, currentCycle) {
     // one authored typo would blank the city's sports for the cycle. So the
     // row stays (its SeasonType / Streak / Team Record are still recorded
     // facts), only its weekly facts are dropped, and the rejection goes to
-    // Engine_Errors where the author can see it. First summary per franchise
-    // stands; later duplicates are the ones rejected.
+    // Engine_Errors where the author can see it. Several game rows for one
+    // franchise fold in row order into the first row's week (the builder types
+    // one token per game, 2026-09-26); a no-games week never folds with games,
+    // so that pairing is the rejected duplicate.
     var weeklyText = getColVal_(row, weekRecordCol);
     if (weeklyText) {
       entry.weekRecord = weeklyText;
@@ -234,11 +236,16 @@ function readOaklandFeedEntries_(ctx, currentCycle) {
         if (weeklyTeam !== "A's" && weeklyTeam !== 'Oaks') {
           throw new Error('WeekRecord: row ' + (i + 1) + ' requires an Oakland franchise');
         }
-        if (weeklyTeams[weeklyTeam]) {
-          throw new Error('duplicate WeekRecord: ' + weeklyTeam + ' at Cycle ' + currentCycle + ' (row ' + (i + 1) + ' rejected; first summary stands)');
+        var anchor = weeklyTeams[weeklyTeam];
+        if (anchor) {
+          var folded = foldSportsWeeks_(parseSportsWeekRecord_(anchor.weekRecord), week,
+            weeklyTeam + ' at Cycle ' + currentCycle + ' (row ' + (i + 1) + ' rejected; first summary stands)');
+          anchor.weekRecord = folded.value;
+          delete entry.weekRecord;
+        } else {
+          weeklyTeams[weeklyTeam] = entry;
+          entry.weekRecord = week.value;
         }
-        weeklyTeams[weeklyTeam] = true;
-        entry.weekRecord = week.value;
       } catch (weekErr) {
         delete entry.weekRecord;
         // Name the sheet row so the author can find the cell — the grammar

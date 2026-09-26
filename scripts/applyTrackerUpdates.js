@@ -118,7 +118,13 @@ const WRITEBACK_FIELDS = [
   'VoteCycle',
   'LastWorkCycle',
   'LastWorkSeat',
-  'Status'
+  'Status',
+  // Initiatives in the World Job 6 — the renew sweep stages the vote; the
+  // engine self-arms these columns and writes the outcome + credit itself.
+  'RenewalVoteCycle',
+  'RenewalAmount',
+  'RenewalOutcome',
+  'RenewalCreditCycle'
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -237,6 +243,28 @@ function normalizeTrackerWrite(trackerUpdates, currentRow, cycle) {
     }
     setField(field, tu[field]);
   });
+
+  // Initiatives in the World Job 6 — the renew sweep's four fields. The columns
+  // self-arm at the engine's next fire; until the sheet carries them, warn and
+  // skip (same defense as LastWorkCycle). The vote cycle must be forward; a
+  // blank outcome/credit is a real write (it clears last renewal's receipts so
+  // the engine's re-fire gate reads clean).
+  if (tu.RenewalVoteCycle !== undefined) {
+    const missing = ['RenewalVoteCycle', 'RenewalAmount', 'RenewalOutcome', 'RenewalCreditCycle'].filter(f => !(f in cur));
+    const n = parseInt(tu.RenewalVoteCycle, 10);
+    if (missing.length) {
+      warnings.push('renewal staged but the tracker has no ' + missing.join('/') + ' column yet (engine self-arms at its next fire) — NOT written.');
+    } else if (!Number.isFinite(n) || n <= cycle) {
+      warnings.push(`RenewalVoteCycle "${tu.RenewalVoteCycle}" not a forward cycle — renewal NOT written.`);
+    } else if (tu.RenewalAmount == null || String(tu.RenewalAmount).trim() === '') {
+      warnings.push('RenewalVoteCycle staged with no RenewalAmount — renewal NOT written.');
+    } else {
+      setField('RenewalVoteCycle', n);
+      setField('RenewalAmount', String(tu.RenewalAmount).trim());
+      setField('RenewalOutcome', '');
+      setField('RenewalCreditCycle', '');
+    }
+  }
 
   // civic.38 Task 2 step 3 — Status under a transition table with exactly one
   // legal edge: proposed → pending-vote, and only in the same write that
@@ -524,6 +552,8 @@ async function main() {
   // applied: the fold is idempotent and a chain re-run must not flip a move
   // to failed.
   const writeOutcome = {};
+  // Job 6: did the renew sweep's staging actually land (the gate can skip it)?
+  const renewOutcome = {};
 
   for (const dec of decisions) {
     console.log(`--- ${dec.agent} (${dec.initiativeId}) ---`);
@@ -582,6 +612,11 @@ async function main() {
     const { updates, warnings: gateWarnings, changes } = normalizeTrackerWrite(dec.trackerUpdates, currentRow, CYCLE);
     changes.forEach(ch => console.log(`  ${ch.field}: "${ch.old}" → "${ch.new}"`));
     gateWarnings.forEach(w => console.log(`  ⚠ ${w}`));
+    if (dec.trackerUpdates && dec.trackerUpdates.RenewalVoteCycle !== undefined) {
+      const staged = updates.RenewalVoteCycle !== undefined ||
+        String(currentRow.RenewalVoteCycle == null ? '' : currentRow.RenewalVoteCycle) === String(dec.trackerUpdates.RenewalVoteCycle);
+      renewOutcome[dec.initiativeId] = staged ? true : (gateWarnings.find(w => /renewal|Renewal/.test(w)) || 'renewal not written');
+    }
 
     // Always update LastUpdated
     const today = new Date().toLocaleDateString('en-US');
@@ -730,6 +765,12 @@ async function main() {
         const ok = writeOutcome[initId];
         lines.push({ moveId: id, cycle: CYCLE, status: ok === true ? 'applied' : 'failed',
           detail: ok === true ? `vote scheduled for ${initId} (VoteCycle ${CYCLE + 1})` : 'write failed: ' + (ok || 'row not processed'), at });
+      }
+      // Initiatives in the World Job 6 — renew moves staged by the Sunday sweep.
+      for (const [initId, id] of Object.entries(manifest.renewals || {})) {
+        const ok = writeOutcome[initId] === true ? renewOutcome[initId] : writeOutcome[initId];
+        lines.push({ moveId: id, cycle: CYCLE, status: ok === true ? 'applied' : 'failed',
+          detail: ok === true ? `renewal vote staged for ${initId} (RenewalVoteCycle ${CYCLE + 1})` : 'write failed: ' + (ok || 'row not processed'), at });
       }
       if (lines.length) {
         const ledgerFile = path.join(ROOT, 'output', 'cron-civic', 'moves', `moves_c${CYCLE}.jsonl`);

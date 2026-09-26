@@ -11,7 +11,7 @@ const fs = require('fs');
 const path = require('path');
 const { getNeighborhoodsForDistricts } = require('../lib/districtMap');
 const trackerSnapshot = require('./initiativeTrackerSnapshot');
-const { categoryIssue } = require('./civicInterventionValidation');
+const { categoryIssue, renewRowIssue } = require('./civicInterventionValidation');
 
 const ROOT = path.join(__dirname, '..');
 const CONSTITUENT_CAP = 8;
@@ -847,7 +847,27 @@ function budgetStampText(row) {
       ? 'budget $' + Number(rem).toLocaleString('en-US') + ' left'
       : 'budget: no parsed budget',
   ];
+  const renewal = renewalStampText(row);
+  if (renewal) parts.push(renewal);
   return parts.join(', ');
+}
+
+// Initiatives in the World Job 6 — the renew move's board flag. Silent until
+// the dump carries the renewal columns (the engine self-arms them). A pending
+// vote or a pass whose money has not landed says so; a row the council could
+// renew says `renewable` (the amount is the seat's to name, so only the row's
+// own state decides the flag). A failed renewal stays on the line so the next
+// seat knows the council already said no once.
+function renewalStampText(row) {
+  if (!Object.hasOwn(row, 'RenewalVoteCycle')) return null;
+  const vote = String(row.RenewalVoteCycle == null ? '' : row.RenewalVoteCycle).trim();
+  const outcome = String(row.RenewalOutcome == null ? '' : row.RenewalOutcome).trim();
+  const credit = String(row.RenewalCreditCycle == null ? '' : row.RenewalCreditCycle).trim();
+  if (vote && !outcome) return 'renewal vote C' + vote + ' ($' + String(row.RenewalAmount || '?').replace(/^\$/, '') + ')';
+  if (outcome.indexOf('RENEWED') === 0 && !credit) return 'renewal passed, money lands next week';
+  const issue = renewRowIssue(row, null);
+  if (issue && issue.indexOf('renew-amount-') !== 0) return null;
+  return 'renewable' + (outcome.indexOf('RENEWAL FAILED') === 0 ? ' (last renewal: ' + outcome.toLowerCase() + ')' : '');
 }
 
 // My board: rows the seat sponsors (ProposingOffice) plus rows touching its

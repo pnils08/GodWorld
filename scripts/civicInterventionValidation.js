@@ -56,6 +56,46 @@ function reachHoods(office, reach, namedHoods) {
   return { hoods: getAllNeighborhoods() };
 }
 
+// Initiatives in the World Job 6 — can the council be asked to renew this row?
+// Node mirror of the engine's renewalEligibility_ (civicInitiativeEngine.js),
+// plus the seat-side rules the engine never sees: one pending renewal per row
+// (a vote staged and not yet held, or a pass whose money has not landed), and
+// the amount inside the row's category band (budgetIssue). Checked at the wake
+// and again at the Sunday fold. `row` is a beats-dump Initiative_Tracker row.
+// Returns null when renewable, else the reason.
+const RENEWABLE_PHASES = ['implementation-active', 'dispatch-live', 'pilot-active', 'pilot_evaluation', 'operational', 'disbursement-active'];
+function renewDryClosePhase(notes) {
+  const re = /\(was ([a-z_-]+)\)/g;
+  let m, last = null;
+  while ((m = re.exec(String(notes == null ? '' : notes))) !== null) last = m[1];
+  return last && RENEWABLE_PHASES.includes(last) ? last : null;
+}
+function renewRowIssue(row, amount) {
+  if (!row) return 'renew-row-not-found';
+  const id = String(row.InitiativeID || '?');
+  const status = String(row.Status || '').trim().toLowerCase();
+  const mayoral = String(row.MayoralAction || '').trim().toLowerCase();
+  if (!(status === 'override-passed' || (status === 'passed' && mayoral === 'signed'))) return 'renew-not-a-voted-program(' + id + ')';
+  const stage = String(row.Stage || '').trim();
+  if (stage !== 'Standing' && stage !== 'Delivering') return 'renew-stage-not-running(' + id + ' — Stage ' + (stage || 'blank') + ')';
+  const phase = String(row.ImplementationPhase || '').trim().toLowerCase();
+  if (phase === 'complete') {
+    if (!renewDryClosePhase(row.MilestoneNotes)) return 'renew-complete-never-ran-dry(' + id + ')';
+  } else if (!RENEWABLE_PHASES.includes(phase)) {
+    return 'renew-phase-not-running(' + id + ' — ' + (phase || 'blank') + ')';
+  }
+  const voteCycle = String(row.RenewalVoteCycle == null ? '' : row.RenewalVoteCycle).trim();
+  const outcome = String(row.RenewalOutcome == null ? '' : row.RenewalOutcome).trim();
+  const credit = String(row.RenewalCreditCycle == null ? '' : row.RenewalCreditCycle).trim();
+  if (voteCycle && !outcome) return 'renew-vote-already-pending(' + id + ' — C' + voteCycle + ')';
+  if (outcome.indexOf('RENEWED') === 0 && !credit) return 'renew-money-not-landed-yet(' + id + ')';
+  const band = budgetIssue(row.PolicyDomain, amount);
+  return band ? band.replace(/^budget-/, 'renew-amount-') : null;
+}
+
+module.exports.renewRowIssue = renewRowIssue;
+module.exports.renewDryClosePhase = renewDryClosePhase;
+module.exports.RENEWABLE_PHASES = RENEWABLE_PHASES;
 module.exports.categoryIssue = categoryIssue;
 module.exports.budgetIssue = budgetIssue;
 module.exports.reachHoods = reachHoods;

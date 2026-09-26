@@ -133,5 +133,22 @@ console.log('\n=== loadCivicVoiceSentiment_ v2.0 (engine.138 / G-PF18) ===');
 })();
 
 
+console.log('=== Job 6 renewal staging ===');
+(function () {
+  var R_COLS = { RenewalVoteCycle: '', RenewalAmount: '', RenewalOutcome: 'RENEWAL FAILED 4-5 C117', RenewalCreditCycle: '' };
+  var cur = Object.assign({ Stage: 'Standing', ImplementationPhase: 'dispatch-live', NextActionCycle: '200' }, R_COLS);
+  var r = normalizeTrackerWrite({ RenewalVoteCycle: 120, RenewalAmount: '$4M', RenewalOutcome: '', RenewalCreditCycle: '' }, cur, 119);
+  ok(r.updates.RenewalVoteCycle === '120' && r.updates.RenewalAmount === '$4M', 'renewal vote staged for the next fire with its amount');
+  ok(r.updates.RenewalOutcome === '', 'last renewal\'s outcome is cleared so the engine re-fire gate reads clean');
+  ok(r.updates.ImplementationPhase === undefined && r.updates.Status === undefined && r.updates.VoteCycle === undefined, 'a renewal never touches phase / Status / VoteCycle');
+  var noCols = normalizeTrackerWrite({ RenewalVoteCycle: 120, RenewalAmount: '$4M', RenewalOutcome: '', RenewalCreditCycle: '' },
+    { Stage: 'Standing', ImplementationPhase: 'dispatch-live', NextActionCycle: '200' }, 119);
+  ok(Object.keys(noCols.updates).length === 0 && /no RenewalVoteCycle\/RenewalAmount\/RenewalOutcome\/RenewalCreditCycle column yet/.test(noCols.warnings.join(' ')), 'before the engine self-arms the columns: warn, write nothing');
+  var stale = normalizeTrackerWrite({ RenewalVoteCycle: 119, RenewalAmount: '$4M' }, cur, 119);
+  ok(stale.updates.RenewalVoteCycle === undefined && /not a forward cycle/.test(stale.warnings.join(' ')), 'a vote cycle that is not forward is refused');
+  var noAmt = normalizeTrackerWrite({ RenewalVoteCycle: 120 }, cur, 119);
+  ok(noAmt.updates.RenewalVoteCycle === undefined && /no RenewalAmount/.test(noAmt.warnings.join(' ')), 'a vote with no amount is refused');
+})();
+
 console.log((fail === 0 ? 'ALL ' + pass + ' PASS' : fail + ' FAILURES / ' + pass + ' pass'));
 process.exit(fail === 0 ? 0 : 1);

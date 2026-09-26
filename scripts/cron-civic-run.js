@@ -68,7 +68,7 @@ const trackerSnapshot = require('./initiativeTrackerSnapshot');
 const { buildPack, writePack, childToParentFromAudit, foldHood, gamePromptView } = require('./buildCivicOfficeSlice');
 const { CANONICAL_HOODS } = require('../lib/canonNeighborhoods');
 const civicSeat = require('./civicSeat');
-const { categoryIssue, budgetIssue, reachHoods } = require('./civicInterventionValidation');
+const { categoryIssue, budgetIssue, reachHoods, renewRowIssue } = require('./civicInterventionValidation');
 const cityHallLedger = require('./cityHallLedger');
 const chaosCascade = require('./dumpChaosCascade');
 const orBatch = require('./orBatch');   // civic.39 Task 3 — batch transport (importable since the require.main guard; key read is lazy)
@@ -2384,10 +2384,11 @@ function datawakeUserPrompt(pack, wallInj, office) {
     'JSON only: {"office":"' + voiceSlug(office.agentDir) + '","holder":"' + office.holder + '","statement":"","moves":[],"numberMoved":""}',
     'statement is one string that answers THIS WEEK\'S LEVER from the pack. Not a statement object. Not a prior-wall quote.',
     // civic.38 Task 1 — the closed move set. One consequential move per wake.
-    'moves: at most ONE move from this closed set — {"type":"propose","title":"","problem":"","category":"<one category from your pack>","reach":"hood|district|all","hoods":[""],"budget":"$12.5M"} | {"type":"work","initiativeId":"INIT-…"} | {"type":"answer","confrontationId":"…","text":""} | {"type":"canvass","hood":"","note":""} | {"type":"call-vote","initiativeId":"INIT-…"}. ' +
+    'moves: at most ONE move from this closed set — {"type":"propose","title":"","problem":"","category":"<one category from your pack>","reach":"hood|district|all","hoods":[""],"budget":"$12.5M"} | {"type":"work","initiativeId":"INIT-…"} | {"type":"answer","confrontationId":"…","text":""} | {"type":"canvass","hood":"","note":""} | {"type":"call-vote","initiativeId":"INIT-…"} | {"type":"renew","initiativeId":"INIT-…","amount":"$4M"}. ' +
       'work only names an initiative on YOUR board (game.boardIds). propose and canvass name only hoods inside your own district' +
       (/^D\d$/.test(String(office.district || '')) ? '' : ' (your seat is citywide — any real neighborhood)') +
       '. call-vote names a petition-pending row (proposed, no vote scheduled) whose domain has no petition rule — the mayor may call any such row, a district seat only one whose hoods sit in their district, once per row per week' +
+      '. renew asks the council to re-fund a running program on your board that is running low (or one that ran dry) — same seat rule as call-vote, one pending renewal per row, the amount a money string inside the category\'s band; the council votes next week and the money lands the week after' +
       '. propose is yours to write: name it and the problem in your own words, file it under the category of life it touches (the categories in your pack), and pick its reach — hood (list the hoods), district (your whole district) or all (citywide seats only). propose.budget is a money string the engine can parse ($12.5M style) inside the category\'s band — your pack lists the band next to each category' +
       '. A move that breaks these rules is discarded, not corrected.',
     conf ? 'YOU HAVE AN UNANSWERED DIRECTIVE (' + conf.id + '). An {"type":"answer",...} move responding to it is expected. Bind confrontationId exactly to that directive; only one answer is accepted per directive and seat. No new consequence is attached.' : 'No answer move is available unless game.confrontationIds names an unanswered directive for this seat.',
@@ -2428,7 +2429,7 @@ function datawakeStatementText(cand) {
 // district, an unknown move type — dropped with a loud line, never fatal.
 // ---------------------------------------------------------------------------
 
-const MOVE_TYPES = ['propose', 'work', 'answer', 'canvass', 'call-vote'];
+const MOVE_TYPES = ['propose', 'work', 'answer', 'canvass', 'call-vote', 'renew'];
 
 // The beats dump of the tracker — the same rows petitionGateSweep counts
 // against. Shared by the call-vote validator (datawake) and sweep (Sunday).
@@ -2488,6 +2489,39 @@ function callVoteEligibility(initId, office, ctx) {
   }
   const why = res && res.support && res.support.reason;
   if (why !== 'domain-rules-deferred') return 'call-vote-not-a-deferred-domain(' + initId + ' — counter says ' + (why || 'unknown') + ')';
+  return null;
+}
+
+// Initiatives in the World Job 6 — renew. A running program (or one that ran
+// dry) is re-funded on its own row: the seat files, the Sunday fold stages the
+// renewal vote for next week's fire, the engine holds it with the council's own
+// machinery and credits the money a fire later. Seat rule = call-vote's (the
+// mayor any row, a district seat a row whose hoods sit in its district); the
+// row rule is shared with the fold (civicInterventionValidation.renewRowIssue).
+// One per row per week. Returns null when eligible, else the rejection reason.
+function renewEligibility(initId, amount, office, ctx) {
+  const row = (ctx.trackerRows || []).find(r => String(r.InitiativeID || '') === initId);
+  if (!row) return 'renew-row-not-found(' + initId + ')';
+  const rowIssue = renewRowIssue(row, amount);
+  if (rowIssue) return rowIssue;
+  const ledger = ctx.moveLedger;
+  if (ledger) {
+    for (const mv of ledger.values()) {
+      if (mv && mv.type === 'renew' && mv.status === 'pending' && mv.payload && mv.payload.initiativeId === initId) {
+        return 'renew-already-filed-this-week(' + initId + ' by ' + mv.agentDir + ')';
+      }
+    }
+  }
+  const isMayor = /^MAYOR/.test(String(office.officeId || '')) || String(office.agentDir || '') === 'civic-office-mayor';
+  if (isMayor) return null;
+  const district = String(office.district || '');
+  if (!/^D\d$/.test(district)) return 'renew-seat-not-eligible(' + (office.officeId || office.agentDir || '?') + ' — only the mayor or a district seat holding the row\'s hoods)';
+  if (ctx.geographyIssue) return 'geography-unavailable(' + ctx.geographyIssue + ')';
+  const c2p = ctx.childToParent || {};
+  const hoods = String(row.AffectedNeighborhoods || '').split(',').map(x => x.trim()).filter(Boolean);
+  if (!hoods.some(h => getDistrictForNeighborhood(foldHood(h, c2p)) === district)) {
+    return 'renew-district-mismatch(' + initId + ' hoods ' + (hoods.join('/') || 'none') + ' — none in ' + district + ')';
+  }
   return null;
 }
 
@@ -2578,6 +2612,11 @@ function validateDatawakeMoves(rawMoves, ctx) {
       if (!id) reason = 'call-vote-missing-initiativeId';
       else if (!boardIds.has(id)) reason = 'initiative-not-on-board(' + id + ')';
       else reason = callVoteEligibility(id, office, ctx);
+    } else if (type === 'renew') {
+      const id = String(m.initiativeId || '').trim();
+      if (!id) reason = 'renew-missing-initiativeId';
+      else if (!boardIds.has(id)) reason = 'initiative-not-on-board(' + id + ')';
+      else reason = renewEligibility(id, m.amount, office, ctx);
     }
     if (reason) {
       rejected.push({ move: m, reason });
@@ -2930,6 +2969,56 @@ function callVoteSweep(root, cycle) {
     const manifestPath = path.join(root, 'output', 'cron-civic', 'moves', 'fold_c' + cycle + '.json');
     const manifest = readJson(manifestPath) || { cycle: Number(cycle) };
     manifest.callVotes = scheduledMoves;
+    fs.mkdirSync(path.dirname(manifestPath), { recursive: true });
+    fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
+  }
+  return { filed: byInit.size, scheduled };
+}
+
+// Initiatives in the World Job 6 — the renew sweep. Same gated channel as
+// call-vote: the seat was validated at file time; the fold re-checks the row
+// and the amount's band against the world as it stands (a vote that already
+// got staged, a band that moved mid-week). Stages the renewal vote for next
+// week's fire — RenewalVoteCycle cycle+1, RenewalAmount — and blanks the prior
+// outcome + credit receipt so the engine's re-fire gate reads clean. Never
+// touches Status/VoteCycle/phase/budget: the engine holds the vote and moves
+// the money.
+function renewSweep(root, cycle) {
+  const folded = loadMoveLedgerFolded(root, cycle);
+  if (!folded) return { filed: 0, scheduled: 0 };
+  const moves = [...folded.values()].filter(m => m.status === 'pending' && m.type === 'renew' && m.payload && m.payload.initiativeId);
+  if (!moves.length) return { filed: 0, scheduled: 0 };
+  const byInit = new Map();
+  for (const m of moves) if (!byInit.has(m.payload.initiativeId)) byInit.set(m.payload.initiativeId, m);
+  const rows = trackerBeatRows(root);
+  if (!rows) { log('renew: no beats Initiative_Tracker dump — skipped'); return { filed: byInit.size, scheduled: 0 }; }
+  const decisionsDir = path.join(root, 'output', 'city-civic-database', 'initiatives');
+  const scheduledMoves = {};
+  for (const [initId, m] of byInit) {
+    const row = rows.find(r => String(r.InitiativeID || '') === initId);
+    const why = renewRowIssue(row, m.payload.amount);
+    if (why) { log('renew: ' + initId + ' ' + why + ' — skipped (' + m.moveId + ')'); continue; }
+    const slug = slugForInitiative(decisionsDir, initId);
+    const dir = path.join(decisionsDir, slug);
+    const file = path.join(dir, 'decisions_c' + cycle + '.json');
+    const d = readJson(file) || { initiative: initId, initiativeId: initId, cycle: Number(cycle),
+      primaryVoice: 'renew', consolidatedFrom: [], trackerUpdates: {} };
+    d.trackerUpdates = d.trackerUpdates || {};
+    d.trackerUpdates.RenewalVoteCycle = Number(cycle) + 1;
+    d.trackerUpdates.RenewalAmount = String(m.payload.amount).trim();
+    d.trackerUpdates.RenewalOutcome = '';
+    d.trackerUpdates.RenewalCreditCycle = '';
+    d._renew = { moveId: m.moveId, agentDir: m.agentDir };
+    fs.mkdirSync(dir, { recursive: true });
+    fs.writeFileSync(file, JSON.stringify(d, null, 2) + '\n');
+    scheduledMoves[initId] = m.moveId;
+    log('renew: ' + initId + ' ' + d.trackerUpdates.RenewalAmount + ' filed by ' + m.agentDir + ' (' + m.moveId + ') — renewal vote C' + (Number(cycle) + 1) + ' staged in ' + path.relative(root, file));
+  }
+  const scheduled = Object.keys(scheduledMoves).length;
+  if (scheduled) {
+    const manifestPath = path.join(root, 'output', 'cron-civic', 'moves', 'fold_c' + cycle + '.json');
+    const manifest = readJson(manifestPath) || { cycle: Number(cycle) };
+    manifest.renewals = scheduledMoves;
     fs.mkdirSync(path.dirname(manifestPath), { recursive: true });
     fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
   }
@@ -3488,6 +3577,9 @@ function closeDeterministic(cycle) {
     // precondition, so the two never write the same row.
     callVoteSweep(ROOT, cycle);
 
+    // Initiatives in the World Job 6 — renew rides the same gated channel.
+    renewSweep(ROOT, cycle);
+
     execFileSync('node', [path.join(ROOT, 'scripts', 'applyTrackerUpdates.js'), String(cycle)], { cwd: ROOT, stdio: 'inherit', timeout: 300000 });
     return { ok: true, dryOk: true };
   } catch (e) {
@@ -3677,6 +3769,8 @@ module.exports = { modelChainFor, FALLBACK_MODELS, sentimentWord, crimeWord, ret
   petitionGateSweep, PETITION_SUPPORT_BANDS,
   // game-loop amendment 2026-09-21 — the call-vote escape hatch
   callVoteEligibility, callVoteSweep, trackerBeatRows,
+  // Initiatives in the World Job 6 — renew
+  renewEligibility, renewSweep,
   // civic.39 — week-boundary stage machine (exported for scripts/cron-civic-tick.test.js)
   WEEK_STAGES, VERDICT_CUTOFF_MS, weekStatePath, blankWeekState, loadWeekState, saveWeekState,
   engineFireInfo, refreshWeekState, decideApply, closeDeterministic, runGate, maybeApply, runTick,

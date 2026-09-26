@@ -53,7 +53,9 @@ function hasTrackerWork(tu) {
 // Mirror of applyTrackerUpdates WRITEBACK_FIELDS — the only columns that reach
 // the sheet. Keep in sync (S304 G-INIT1). civic.38 Task 2 step 3 added
 // LastWorkCycle/LastWorkSeat (fold fields) and Status (one legal edge).
-const WRITEBACK_FIELDS = ['ImplementationPhase', 'MilestoneNotes', 'NextScheduledAction', 'NextActionCycle', 'VoteCycle', 'LastWorkCycle', 'LastWorkSeat', 'Status'];
+// Initiatives in the World Job 6 added the four renewal fields (renew sweep).
+const WRITEBACK_FIELDS = ['ImplementationPhase', 'MilestoneNotes', 'NextScheduledAction', 'NextActionCycle', 'VoteCycle', 'LastWorkCycle', 'LastWorkSeat', 'Status',
+  'RenewalVoteCycle', 'RenewalAmount', 'RenewalOutcome', 'RenewalCreditCycle'];
 
 function hasWritableField(tu) {
   return WRITEBACK_FIELDS.some(f => tu && tu[f] != null && String(tu[f]).trim() !== '');

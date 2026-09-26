@@ -37,6 +37,7 @@ const {
   WEEK_STAGES, VERDICT_CUTOFF_MS,
   blankWeekState, refreshWeekState, saveWeekState, weekStatePath, decideApply,
   callVoteEligibility, callVoteSweep, validateDatawakeMoves,
+  renewEligibility, renewSweep,
 } = civicRun;
 const { getDistrictForNeighborhood } = require('../lib/districtMap');
 
@@ -478,6 +479,109 @@ test('callVoteSweep skips when the counter no longer says domain-rules-deferred'
   fs.writeFileSync(path.join(root, 'output', 'cron-civic', 'moves', 'moves_c' + CYCLE + '.jsonl'), JSON.stringify(move) + '\n');
   const out = callVoteSweep(root, CYCLE);
   assert.deepStrictEqual(out, { filed: 1, scheduled: 0 });
+});
+
+// ────────────────────────────────────────────────────────────────────────────
+console.log('\nrenew — Initiatives in the World Job 6');
+// ────────────────────────────────────────────────────────────────────────────
+
+const RN_BASE = { Status: 'passed', MayoralAction: 'signed', Stage: 'Standing', PolicyDomain: 'safety',
+  AffectedNeighborhoods: CV_HOOD, RenewalVoteCycle: '', RenewalAmount: '', RenewalOutcome: '', RenewalCreditCycle: '' };
+const RN_ROWS = [
+  { ...RN_BASE, InitiativeID: 'INIT-002', ImplementationPhase: 'dispatch-live' },
+  { ...RN_BASE, InitiativeID: 'INIT-005', PolicyDomain: 'health', ImplementationPhase: 'complete',
+    MilestoneNotes: 'C116: operating budget exhausted — service ends unless the council renews it (was operational)' },
+  { ...RN_BASE, InitiativeID: 'INIT-006', PolicyDomain: 'sports', Stage: '', ImplementationPhase: 'construction-planning' },
+  { ...RN_BASE, InitiativeID: 'INIT-003', Status: 'proposed', MayoralAction: 'none', Stage: 'Proposed', ImplementationPhase: 'design-phase' },
+  { ...RN_BASE, InitiativeID: 'INIT-011', ImplementationPhase: 'complete', MilestoneNotes: 'C100: program concluded' },
+  { ...RN_BASE, InitiativeID: 'INIT-012', ImplementationPhase: 'dispatch-live', RenewalVoteCycle: '109' },
+  { ...RN_BASE, InitiativeID: 'INIT-013', ImplementationPhase: 'dispatch-live', RenewalVoteCycle: '109', RenewalOutcome: 'RENEWED 6-3 C109' },
+  { ...RN_BASE, InitiativeID: 'INIT-014', ImplementationPhase: 'dispatch-live', RenewalVoteCycle: '109', RenewalOutcome: 'RENEWAL FAILED 4-5 C109' },
+];
+const rnCtx = (office, over) => cvCtx(office, Object.assign({ trackerRows: RN_ROWS }, over || {}));
+const rnWhy = (id, amt, office, over) => renewEligibility(id, amt, office || MAYOR, rnCtx(office || MAYOR, over));
+
+test('renew: a running signed program, amount in band — mayor and the district seat may file', () => {
+  assert.strictEqual(rnWhy('INIT-002', '$4M'), null);
+  assert.strictEqual(rnWhy('INIT-002', '$4M', D3_SEAT), null);
+});
+test('renew: a dry-closed program (complete + (was <phase>) marker) is renewable', () => {
+  assert.strictEqual(rnWhy('INIT-005', '$9M'), null);
+});
+test('renew: a failed renewal can be tried again', () => {
+  assert.strictEqual(rnWhy('INIT-014', '$4M'), null);
+});
+test('renew: refused — off-turf seat, citywide non-mayor, build, unvoted, never ran dry', () => {
+  assert.ok(/^renew-district-mismatch/.test(rnWhy('INIT-002', '$4M', D9_SEAT)));
+  assert.ok(/^renew-seat-not-eligible/.test(rnWhy('INIT-002', '$4M', CHIEF)));
+  assert.ok(/^renew-stage-not-running/.test(rnWhy('INIT-006', '$4M')));
+  assert.ok(/^renew-not-a-voted-program/.test(rnWhy('INIT-003', '$4M')));
+  assert.ok(/^renew-complete-never-ran-dry/.test(rnWhy('INIT-011', '$4M')));
+});
+test('renew: refused — a vote already pending, a pass whose money has not landed', () => {
+  assert.ok(/^renew-vote-already-pending/.test(rnWhy('INIT-012', '$4M')));
+  assert.ok(/^renew-money-not-landed-yet/.test(rnWhy('INIT-013', '$4M')));
+});
+test('renew: refused — amount missing or outside the category band', () => {
+  assert.ok(/^renew-amount-missing/.test(rnWhy('INIT-002', '')));
+  assert.ok(/^renew-amount-outside-band/.test(rnWhy('INIT-002', '$900M')));
+});
+test('renew: one per row per week', () => {
+  const ledger = new Map([['MV-108-civic-office-mayor-2026-09-22', { moveId: 'MV-108-civic-office-mayor-2026-09-22', type: 'renew',
+    status: 'pending', agentDir: 'civic-office-mayor', payload: { initiativeId: 'INIT-002', amount: '$4M' } }]]);
+  assert.ok(/^renew-already-filed-this-week/.test(rnWhy('INIT-002', '$4M', D3_SEAT, { moveLedger: ledger })));
+});
+test('renew: validator integration — accepted with its amount, off-board refused', () => {
+  const okMv = validateDatawakeMoves([{ type: 'renew', initiativeId: 'INIT-002', amount: '$4M' }], rnCtx(D3_SEAT, { boardIds: new Set(['INIT-002']) }));
+  assert.strictEqual(okMv.accepted.length, 1);
+  assert.deepStrictEqual(okMv.accepted[0], { type: 'renew', payload: { initiativeId: 'INIT-002', amount: '$4M' } });
+  const bad = validateDatawakeMoves([{ type: 'renew', initiativeId: 'INIT-002', amount: '$4M' }], rnCtx(MAYOR, { boardIds: new Set(['INIT-005']) }));
+  assert.ok(/initiative-not-on-board/.test(bad.rejected[0].reason));
+});
+
+const RN_MOVE = { moveId: 'MV-500-civic-office-council-d3-2026-09-22', cycle: CYCLE, date: '2026-09-22',
+  agentDir: 'civic-office-council-d3', type: 'renew', payload: { initiativeId: 'INIT-002', amount: '$4M' }, status: 'pending', at: '2026-09-22T00:00:00Z' };
+function rnRoot(rows, move) {
+  const root = mkCallVoteRoot(rows);
+  fs.mkdirSync(path.join(root, 'output', 'cron-civic', 'moves'), { recursive: true });
+  fs.writeFileSync(path.join(root, 'output', 'cron-civic', 'moves', 'moves_c' + CYCLE + '.jsonl'), JSON.stringify(move || RN_MOVE) + '\n');
+  return root;
+}
+const rnDecision = root => path.join(root, 'output', 'city-civic-database', 'initiatives', 'init-002', 'decisions_c' + CYCLE + '.json');
+
+test('renewSweep stages the renewal vote for next week and joins the fold manifest', () => {
+  const root = rnRoot([RN_ROWS[0]]);
+  assert.deepStrictEqual(renewSweep(root, CYCLE), { filed: 1, scheduled: 1 });
+  const d = JSON.parse(fs.readFileSync(rnDecision(root), 'utf8'));
+  assert.deepStrictEqual(d.trackerUpdates, { RenewalVoteCycle: CYCLE + 1, RenewalAmount: '$4M', RenewalOutcome: '', RenewalCreditCycle: '' });
+  assert.strictEqual(d._renew.moveId, RN_MOVE.moveId);
+  const manifest = JSON.parse(fs.readFileSync(path.join(root, 'output', 'cron-civic', 'moves', 'fold_c' + CYCLE + '.json'), 'utf8'));
+  assert.deepStrictEqual(manifest.renewals, { 'INIT-002': RN_MOVE.moveId });
+});
+test('renewSweep is byte-idempotent on a re-run', () => {
+  const root = rnRoot([RN_ROWS[0]]);
+  renewSweep(root, CYCLE);
+  const first = fs.readFileSync(rnDecision(root), 'utf8');
+  renewSweep(root, CYCLE);
+  assert.strictEqual(fs.readFileSync(rnDecision(root), 'utf8'), first);
+});
+test('renewSweep re-checks the world at fold time — a vote already staged is skipped', () => {
+  const root = rnRoot([{ ...RN_ROWS[0], RenewalVoteCycle: String(CYCLE + 1) }]);
+  assert.deepStrictEqual(renewSweep(root, CYCLE), { filed: 1, scheduled: 0 });
+  assert.ok(!fs.existsSync(rnDecision(root)));
+});
+
+test('board flag: renewable / vote pending / passed awaiting money / silent before the columns exist', () => {
+  const slice = require('./buildCivicOfficeSlice');
+  const b = r => slice.budgetStampText({ BudgetRemaining: 1000000, ...r });
+  assert.match(b(RN_ROWS[0]), /budget \$1,000,000 left, renewable$/);
+  assert.match(b(RN_ROWS[7]), /renewable \(last renewal: renewal failed 4-5 c109\)$/);
+  assert.match(b(RN_ROWS[5]), /renewal vote C109 \(\$\?\)$/);
+  assert.match(b({ ...RN_ROWS[5], RenewalAmount: '$4M' }), /renewal vote C109 \(\$4M\)$/);
+  assert.match(b(RN_ROWS[6]), /renewal passed, money lands next week$/);
+  assert.strictEqual(b(RN_ROWS[2]), 'budget $1,000,000 left');
+  const { RenewalVoteCycle, RenewalAmount, RenewalOutcome, RenewalCreditCycle, ...preArm } = RN_ROWS[0];
+  assert.strictEqual(b(preArm), 'budget $1,000,000 left');
 });
 
 // ────────────────────────────────────────────────────────────────────────────

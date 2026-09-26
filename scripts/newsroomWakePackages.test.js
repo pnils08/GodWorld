@@ -6,7 +6,7 @@ const packagesApi = require('./newsroomWakePackages');
 const packages = packagesApi.loadPackages();
 const active = packagesApi.activePackages(packages);
 assert.deepStrictEqual(active.map(row => row.key),
-  ['freelance-firebrand', 'carmen-delaine', 'luis-navarro', 'trevor-shimizu', 'p-slayer', 'anthony-raines', 'hal-richmond', 'tanya-cruz', 'simon-leary', 'maria-keen', 'elliot-graye', 'mason-ortega', 'sharon-okafor', 'business-desk', 'kai-marston', 'rachel-torres', 'lila-mezran', 'angela-reyes', 'noah-tan', 'nia-rook', 'selena-grant', 'talia-finch', 'celeste-tran']);
+  ['freelance-firebrand', 'carmen-delaine', 'luis-navarro', 'trevor-shimizu', 'p-slayer', 'anthony-raines', 'hal-richmond', 'tanya-cruz', 'simon-leary', 'maria-keen', 'elliot-graye', 'mason-ortega', 'sharon-okafor', 'business-desk', 'kai-marston', 'rachel-torres', 'lila-mezran', 'angela-reyes', 'noah-tan', 'nia-rook', 'nia-rook-weekly', 'selena-grant', 'talia-finch', 'celeste-tran']);
 
 // pipeline.60 — Nia Rook's UNDOCKED show seat (own desk key, feed-built lane)
 const nia = packages['nia-rook'];
@@ -18,6 +18,20 @@ assert.equal(nia.assignment.popid, 'POP-01076');
 assert.equal(nia.packetContract, 'v2');
 assert.equal(packagesApi.routeFor(nia, 'write').model, 'meta-llama/llama-3.3-70b-instruct');
 assert.equal(nia.reviewProfile.canonPolicy, 'load-bearing');
+
+// (e) NEXT BUILD (2026-09-25) — Nia's weekly leaderboard/digest: own desk key
+// (undocked-digest), NOT in the daily rota (requiredDaily false keeps it out
+// of activeRotaCandidates() / rotaPool below), dispatched by direct
+// --persona invocation on its own Saturday-morning crontab triple.
+const niaWeekly = packages['nia-rook-weekly'];
+assert.equal(niaWeekly.version, 'NIAROOK-UNDOCKED-WEEKLY-1');
+assert.equal(niaWeekly.active, true);
+assert.equal(niaWeekly.requiredDaily, false);
+assert.equal(niaWeekly.assignment.desk, 'undocked-digest');
+assert.equal(niaWeekly.assignment.popid, 'POP-01076');
+assert.equal(niaWeekly.packetContract, 'v2');
+assert.equal(packagesApi.routeFor(niaWeekly, 'write').model, 'meta-llama/llama-3.3-70b-instruct');
+assert.equal(niaWeekly.reviewProfile.canonPolicy, 'load-bearing');
 assert.ok(nia.reviewProfile.canonBlockers.some(b => /video game/.test(b)));
 
 const jax = packages['freelance-firebrand'];

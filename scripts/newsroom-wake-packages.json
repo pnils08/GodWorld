@@ -1140,6 +1140,75 @@
       ]
     }
   },
+  "nia-rook-weekly": {
+    "version": "NIAROOK-UNDOCKED-WEEKLY-1",
+    "active": true,
+    "requiredDaily": false,
+    "persona": "nia-rook-weekly",
+    "assignment": {
+      "desk": "undocked-digest",
+      "name": "Nia Rook",
+      "popid": "POP-01076",
+      "beatDomain": "CULTURE"
+    },
+    "packetContract": "v2",
+    "models": {
+      "angle": {
+        "provider": "openrouter",
+        "model": "meta-llama/llama-3.3-70b-instruct"
+      },
+      "report": {
+        "provider": "openrouter",
+        "model": "meta-llama/llama-3.3-70b-instruct"
+      },
+      "write": {
+        "provider": "openrouter",
+        "model": "meta-llama/llama-3.3-70b-instruct"
+      }
+    },
+    "reviewProfile": {
+      "id": "nia-rook-undocked-weekly-digest-v1",
+      "canonPolicy": "load-bearing",
+      "purpose": "Turn the week's UNDOCKED episodes into one leaderboard/digest naming every pilot who flew — not a single-episode recap. Standings-forward: rank, streaks, who's climbing, who's fading, what the whole cast looked like this week.",
+      "articleContract": {
+        "renderMode": "SOURCE_BRIEF",
+        "voice": "third-person leaderboard recap — entertainment-beat energy, ranking-and-recap format",
+        "targetWords": "350-650",
+        "opening": "a scoreboard, standings post, or watch-party moment framing the whole week at once",
+        "closing": "the one line that sets up who the city watches next"
+      },
+      "authorizedTexture": [
+        "an unnamed bar, watch-party, break-room, bus, or sidewalk setting where the city watches or argues — no invented named venue, entity, or event",
+        "the reporter's own recap persona and who's-up-who's-down framing, now across the full week's cast rather than one episode",
+        "unnamed audience argument and aspiration lines used as city color, never as attributed quotes or measured sentiment",
+        "metaphor and emotional inference grounded in a supplied typed fact from the week's feed or standings"
+      ],
+      "textureConditions": [
+        "every named person, cast pilot, venue, business, and institution must come from the Packet",
+        "episode facts only from the typed feed fields (CreditsDelta, Systems, CombatEvents, MishapCount, Magnitude, Flags) — a blank CreditsDelta is unsettled, never zero and never invented",
+        "pilot speech only from the wake-2 packet interviews — no other quote source exists for this lane",
+        "standings/leaderboard facts (Rank, CyclesLed, CurrentStreak) come only from the supplied Standings block — never invented math",
+        "unnamed audience reaction stays rhetorical — it must not become a count, a poll, or a named person",
+        "every pilot named in the supplied week's roster should appear at least once, even briefly, so the article actually prints their name"
+      ],
+      "canonBlockers": [
+        "video game",
+        "videogame",
+        "simulation",
+        "engine",
+        "MCP",
+        "server",
+        "commander",
+        "tool",
+        "API",
+        "spacemolt-lib",
+        "openrouter",
+        "real-world calendar dates (YYYY-MM-DD)",
+        "captains_log",
+        "leaderboard math beyond the supplied Standings/pilot facts"
+      ]
+    }
+  },
   "selena-grant": {
     "version": "SELENA-OAKS-1",
     "active": true,

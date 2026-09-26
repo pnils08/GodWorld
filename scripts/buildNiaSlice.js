@@ -126,6 +126,90 @@ function laneEntryFor(e, info, leader) {
   return entry;
 }
 
+// --- Weekly leaderboard/digest (Mike-direct 2026-09-25, plan §(e) NEXT BUILD) ---
+// Daily recaps tag their pilot 'quoted-source' — identical to any same-hood
+// color citizen, never the credit path. This is the reliable one: one extra
+// filing per cycle naming EVERY pilot who flew that week, deterministically
+// tagged 'subject' at write time (see cron-desk-run.js runWrite injection) so
+// UsageCount lands regardless of which daily solo piece makes print or how the
+// model tags its own INTAKE. Independent recap key ('weekly-c<N>') — never
+// touches a real EpisodeId, so it cannot suppress or re-litigate a daily recap.
+function weeklyKey(cycle) { return 'weekly-c' + cycle; }
+
+function pilotRosterFor(events) {
+  const byPop = new Map();
+  for (const e of events || []) {
+    if (!e || !e.POPID) continue;
+    const key = String(e.POPID).toUpperCase();
+    if (!byPop.has(key)) {
+      byPop.set(key, { POPID: e.POPID, episodes: 0, creditsDelta: 0, combatEvents: 0, mishapCount: 0, hasWindowed: false });
+    }
+    const row = byPop.get(key);
+    row.episodes += 1;
+    if (e.CreditsDelta == null) row.hasWindowed = true;
+    else row.creditsDelta += Number(e.CreditsDelta) || 0;
+    row.combatEvents += Number(e.CombatEvents) || 0;
+    row.mishapCount += Number(e.MishapCount) || 0;
+  }
+  return Array.from(byPop.values());
+}
+
+function buildNiaWeeklySlice(cycle) {
+  const c = Number(cycle);
+  const empty = { v: V, cycle: c, empty: true, pilots: [], story: null };
+  if (!Number.isFinite(c)) return empty;
+  const recaps = loadRecaps();
+  if (recaps[weeklyKey(c)]) return empty;   // already filed this cycle's digest
+  const pack = loadJson(path.join(SHOW, 'feed', 'c' + c + '.json'), null);
+  if (!pack || !Array.isArray(pack.events) || !pack.events.length) return empty;
+  const roster = pilotRosterFor(pack.events);
+  if (!roster.length) return empty;
+  const citizenInfo = citizenInfoFor(roster.map(r => r.POPID));
+  const standings = loadStandings();
+  const leader = standingsLeader(standings);
+  const pilots = roster.map(r => {
+    const info = citizenInfo[String(r.POPID).toUpperCase()] || {};
+    return Object.assign({}, r, { name: info.name || r.POPID, hood: info.hood || null });
+  });
+  const angle = 'Week-in-UNDOCKED leaderboard digest — every pilot who flew this cycle (' +
+    pilots.map(p => p.name).join(', ') + '), who is climbing and who is fading.' +
+    standingsNote(leader) + ' Per-pilot facts: ' + pilots.map(p =>
+      p.name + ' — ' + p.episodes + ' episode(s), ' + (p.hasWindowed ? 'partial ' : '') +
+      'credits ' + p.creditsDelta + ', combat ' + p.combatEvents + ', mishaps ' + p.mishapCount
+    ).join('; ') + '.';
+  return {
+    v: V,
+    cycle: c,
+    empty: false,
+    pilots,
+    standings: leader ? { asOf: standings.computedAt, leader } : null,
+    story: {
+      ref: 'undocked-week:' + weeklyKey(c),
+      label: 'UNDOCKED week-in-review c' + c,
+      kind: 'undocked-digest',
+      angle,
+      citizens: pilots.map(p => p.name + ' — UNDOCKED cast pilot'),
+      popids: pilots.map(p => p.POPID),
+    },
+    generatedAt: new Date().toISOString(),
+  };
+}
+
+function weeklySlicePath(cycle, root) {
+  return path.join(root || ROOT, 'output', 'cron-compare', 'nia_weekly_slice_c' + cycle + '.json');
+}
+
+function writeNiaWeeklySlice(cycle, slice, root) {
+  const p = weeklySlicePath(cycle, root);
+  fs.mkdirSync(path.dirname(p), { recursive: true });
+  fs.writeFileSync(p, JSON.stringify(slice, null, 2) + '\n');
+  return p;
+}
+
+function loadNiaWeeklySlice(cycle, root) {
+  return loadJson(weeklySlicePath(cycle, root), null);
+}
+
 function buildNiaSlice(cycle) {
   const c = Number(cycle);
   const empty = { v: V, cycle: c, empty: true, events: [], laneEntries: [] };
@@ -179,4 +263,7 @@ function markRecapped(episodeIds, meta) {
   return recaps;
 }
 
-module.exports = { V, buildNiaSlice, writeNiaSlice, loadNiaSlice, markRecapped, slicePath, standingsLeader, standingsNote };
+module.exports = {
+  V, buildNiaSlice, writeNiaSlice, loadNiaSlice, markRecapped, slicePath, standingsLeader, standingsNote,
+  weeklyKey, buildNiaWeeklySlice, writeNiaWeeklySlice, loadNiaWeeklySlice, weeklySlicePath,
+};

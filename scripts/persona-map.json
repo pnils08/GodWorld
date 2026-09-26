@@ -138,6 +138,12 @@
     "beatDomain": "CULTURE",
     "note": "Solo UNDOCKED recap — who's up, who's down, who the city is watching. Heat register, same band as p-slayer. NOT culture-desk generalist, NOT sports. Wall cp-POP-01076. Scheduled routing and Rhea authority come from newsroom-wake-packages.json; desk-model-map is legacy/manual fallback."
   },
+  "nia-rook-weekly": {
+    "name": "Nia Rook",
+    "popid": "POP-01076",
+    "beatDomain": "CULTURE",
+    "note": "Weekly UNDOCKED leaderboard/digest — same citizen and byline as nia-rook, second desk slot (plan §(e) NEXT BUILD, 2026-09-25): one filing per cycle naming every pilot who flew that week, the reliable Citizen_Media_Usage credit path (daily solo recaps stay flavor/color, unchanged). Own wake package (undocked-digest desk), own Saturday-morning cron triple, never fanout/WEEK_GRID."
+  },
   "selena-grant": {
     "name": "Selena Grant",
     "popid": "POP-00591",

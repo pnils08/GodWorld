@@ -1205,6 +1205,16 @@ function loadLane(cycle, desk, beatDomain) {
     return (niaSlice && !niaSlice.empty && (niaSlice.laneEntries || []).length)
       ? niaSlice.laneEntries : null;
   }
+  // (e) NEXT BUILD (2026-09-25): the weekly leaderboard/digest — its own desk
+  // key, dispatched by direct --persona invocation (own Saturday-morning
+  // crontab triple, no --fanout), never in daily rota. buildNiaWeeklySlice is
+  // the source of truth; this truthy sentinel just satisfies the "no lane, no
+  // wake" guard shared by every stage — runAngle re-derives the real story.
+  if ((desk || DESK) === 'undocked-digest') {
+    const { buildNiaWeeklySlice } = require(path.join(__dirname, 'buildNiaSlice'));
+    const weekly = buildNiaWeeklySlice(cycle);
+    return (weekly && !weekly.empty) ? [weekly] : null;
+  }
   const signalPath = path.join(ROOT, 'output', 'desk_signal_c' + cycle + '.json');
   const signal = readJson(signalPath);
   if (!signal || !signal.lanes) throw new Error('no desk_signal at ' + path.relative(ROOT, signalPath) + ' — run buildWorldSummary first');
@@ -1481,6 +1491,22 @@ async function runAngle(assign) {
       }
     } catch (e) {
       log('tanya slice load failed (non-fatal): ' + e.message);
+    }
+  } else if (personaSlug === 'nia-rook-weekly') {
+    // (e) NEXT BUILD: direct --persona invocation, never fanout — no assign.story
+    // to inherit, so this branch is the ONLY place the weekly digest's story is
+    // built. Frozen to disk so wake-2/wake-3 read the same roster wake-1 saw.
+    try {
+      const { buildNiaWeeklySlice, writeNiaWeeklySlice } = require(path.join(__dirname, 'buildNiaSlice'));
+      const weeklySlice = buildNiaWeeklySlice(cycle);
+      if (weeklySlice && !weeklySlice.empty) {
+        writeNiaWeeklySlice(cycle, weeklySlice);
+        story = weeklySlice.story || story;
+        log('nia weekly slice loaded — pilots ' + weeklySlice.pilots.length + ' (' +
+          weeklySlice.pilots.map(p => p.name).join(', ') + ')');
+      }
+    } catch (e) {
+      log('nia weekly slice load failed (non-fatal): ' + e.message);
     }
   } else if (personaSlug === 'simon-leary') {
     try {
@@ -2443,6 +2469,35 @@ async function runReport(assign) {
 // wake-2 packet (exact records), the rest resolve against the ledger snapshot.
 // bizId stays null until a business snapshot exists (Saturday sheets
 // bind-point). Downstream consumers read THIS object, never the prose.
+// (e) NEXT BUILD (2026-09-25, plan §(e)): the whole reason this piece exists is
+// that model-tagged INTAKE roles are unreliable — c108 proves the model tags
+// its own profiled pilot 'quoted-source', identical to any color citizen, even
+// when the article is plainly about them (renderPacketIntake's subject/source
+// map collapses to 'quoted-source' the moment a person has both a tag and a
+// landed quote — a separate defect, out of scope here). So credit for the
+// weekly digest is asserted here, deterministically, after the model/renderer
+// have already run — never left to what either of them wrote. Every week's
+// pilot whose name the article actually prints gets upserted as 'subject'
+// (ROLE_TO_USAGE maps that to 'featured' at the Saturday canon door, no
+// Saturday-side change needed). "Index only what the article prints" is
+// honored by the name-in-text guard.
+function injectWeeklyPilotCredit(intake, draftText, pilots) {
+  if (!intake || !Array.isArray(intake.names) || !Array.isArray(pilots)) return intake;
+  const body = String(draftText || '');
+  for (const p of pilots) {
+    if (!p || !p.name || !p.POPID || !body.includes(p.name)) continue;
+    const existing = intake.names.find(n => n.popid === p.POPID ||
+      String(n.name).toLowerCase() === String(p.name).toLowerCase());
+    if (existing) {
+      existing.role = 'subject';
+      if (!existing.popid) existing.popid = p.POPID;
+    } else {
+      intake.names.push({ name: p.name, role: 'subject', popid: p.POPID });
+    }
+  }
+  return intake;
+}
+
 function buildIntakeSidecar(draftText, quotes) {
   const parsed = require('../lib/articleIntake').parse(draftText);
   if (!parsed.found) return null;
@@ -2721,13 +2776,22 @@ async function runWrite(assign) {
     // re-filing overwrote undocked_..._staged.json; his UsageCount stayed
     // blank despite the interview and draft both being real.
     const sidecarPath = path.join(STAGED, path.basename(destPath).replace(/\.md$/, '.json'));
+    const draftBody = fs.readFileSync(draftPath, 'utf8');
+    let intake = buildIntakeSidecar(draftBody, quotes);
+    if (desk === 'undocked-digest') {
+      try {
+        const { loadNiaWeeklySlice } = require(path.join(__dirname, 'buildNiaSlice'));
+        const weekly = loadNiaWeeklySlice(cycle);
+        intake = injectWeeklyPilotCredit(intake, draftBody, weekly && weekly.pilots);
+      } catch (e) { log('weekly credit injection skipped (non-fatal): ' + e.message); }
+    }
     fs.writeFileSync(sidecarPath, JSON.stringify({
       status: 'staged', desk, cycle, persona: personaSlug, byline: byline ? byline.name : null, bylinePopid: byline ? byline.popid : null,
       article: path.relative(ROOT, destPath),
       bylineUsage,
       // pipeline.45 Phase 1: the id-enriched INTAKE — the one surface the
       // Saturday run (sheets, Supermemory tags, EIC audit) reads.
-      intake: buildIntakeSidecar(fs.readFileSync(draftPath, 'utf8'), quotes),
+      intake,
       rhea: stagedRheaProof(rhea, rheaProof.articleSha256,
         path.join(COMPARE, base + '.rhea.json')),
       note: 'M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.',
@@ -2749,13 +2813,18 @@ async function runWrite(assign) {
   // the recap ledger so tomorrow's slice doesn't re-litigate them. Staged AND
   // flagged both count as filed (a flagged draft is a human recovery step, not
   // an automatic re-run). EpisodeIds ride the lane refs ('undocked:<id>').
-  if (personaSlug === 'nia-rook' && !NO_GATE) {
+  // (e) NEXT BUILD: the weekly digest marks its OWN idempotency key
+  // ('weekly-c<N>', from buildNiaSlice's weeklyKey) — never a real EpisodeId —
+  // so it can never suppress or re-litigate a daily recap; it only stops
+  // itself from re-filing the same cycle's digest on a cron re-run.
+  if ((personaSlug === 'nia-rook' || personaSlug === 'nia-rook-weekly') && !NO_GATE) {
     try {
-      const { markRecapped } = require(path.join(__dirname, 'buildNiaSlice'));
-      const ids = lane.map(e => e && e.ref).filter(r => /^undocked:/.test(r || ''))
-        .map(r => r.slice('undocked:'.length));
+      const { markRecapped, weeklyKey } = require(path.join(__dirname, 'buildNiaSlice'));
+      const ids = personaSlug === 'nia-rook-weekly'
+        ? [weeklyKey(cycle)]
+        : lane.map(e => e && e.ref).filter(r => /^undocked:/.test(r || '')).map(r => r.slice('undocked:'.length));
       markRecapped(ids, { cycle, stem: base, disposition: pass ? 'staged' : 'flagged' });
-      log('recap ledger: marked ' + ids.length + ' episode(s) filed');
+      log('recap ledger: marked ' + ids.length + ' episode(s)/digest filed');
     } catch (e) {
       log('recap ledger mark failed (non-fatal): ' + e.message);
     }
@@ -3184,6 +3253,7 @@ module.exports = {
   loadLane,
   yesterdaysFilings,
   buildIntakeSidecar,
+  injectWeeklyPilotCredit,
   writeCitizenArc,
   citizenArcSlug,
   validateWakeHandoff,

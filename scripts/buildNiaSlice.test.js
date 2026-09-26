@@ -47,5 +47,74 @@ check('no raw POPID leaks into a lane label when the ledger has a name',
 check('no raw POPID leaks into a lane angle', slice.laneEntries.every(e => !POPID_RE.test(e.handle.angle)));
 check('no raw POPID leaks into lane citizens', slice.laneEntries.every(e => e.handle.citizens.every(c => !POPID_RE.test(c))));
 
+// --- Weekly digest (2026-09-25, plan §(e) NEXT BUILD) ---
+const path = require('path');
+const os = require('os');
+const tmpRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'nia-weekly-'));
+const showDir = path.join(tmpRoot, 'output', 'spacemolt-show');
+fs.mkdirSync(path.join(showDir, 'feed'), { recursive: true });
+fs.writeFileSync(path.join(showDir, 'feed', 'c999.json'), JSON.stringify({ events: [
+  { EpisodeId: 'undocked-pop00962-a', POPID: 'POP-00962', CreditsDelta: 40, CombatEvents: 0, MishapCount: 1 },
+  { EpisodeId: 'undocked-pop00962-b', POPID: 'POP-00962', CreditsDelta: -100, CombatEvents: 1, MishapCount: 0 },
+  { EpisodeId: 'undocked-pop00143-a', POPID: 'POP-00143', CreditsDelta: null, CombatEvents: 0, MishapCount: 0 },
+] }));
+fs.writeFileSync(path.join(tmpRoot, 'output', 'simulation_ledger_snapshot.jsonl'),
+  [{ POPID: 'POP-00962', Name: 'Marcus Walker', Neighborhood: 'Jack London' },
+   { POPID: 'POP-00143', Name: 'Clarissa Dane', Neighborhood: 'Fruitvale' }]
+    .map(r => JSON.stringify(r)).join('\n') + '\n');
+
+// buildNiaSlice.js resolves ROOT from __dirname, not cwd — so a tmp-root test
+// needs its own copy of the module loaded FROM the tmp tree. Simplest: copy
+// the module source in and require it from there.
+const tmpScriptsDir = path.join(tmpRoot, 'scripts');
+fs.mkdirSync(tmpScriptsDir, { recursive: true });
+fs.copyFileSync(path.join(__dirname, 'buildNiaSlice.js'), path.join(tmpScriptsDir, 'buildNiaSlice.js'));
+delete require.cache[require.resolve(path.join(tmpScriptsDir, 'buildNiaSlice.js'))];
+const NW = require(path.join(tmpScriptsDir, 'buildNiaSlice.js'));
+
+const weekly = NW.buildNiaWeeklySlice(999);
+check('weekly slice not empty when feed has events', weekly.empty === false, JSON.stringify(weekly));
+check('weekly slice rosters both pilots', weekly.pilots.length === 2, JSON.stringify(weekly.pilots));
+const walker = weekly.pilots.find(p => p.POPID === 'POP-00962');
+check('weekly slice resolves pilot name from ledger', walker && walker.name === 'Marcus Walker');
+check('weekly slice aggregates credits across episodes (40 + -100 = -60)', walker && walker.creditsDelta === -60);
+check('weekly slice counts episodes per pilot', walker && walker.episodes === 2);
+const dane = weekly.pilots.find(p => p.POPID === 'POP-00143');
+check('weekly slice marks a null-credits episode as windowed, not zero', dane && dane.hasWindowed === true && dane.creditsDelta === 0);
+check('weekly story carries every pilot popid', weekly.story && weekly.story.popids.sort().join(',') === 'POP-00143,POP-00962');
+check('weekly story ref is namespaced away from real EpisodeIds', weekly.story.ref === 'undocked-week:weekly-c999');
+
+const emptySlice = NW.buildNiaWeeklySlice(998);
+check('no feed pack -> empty weekly slice', emptySlice.empty === true);
+
+// Idempotency: marking the week filed makes a second build return empty.
+NW.markRecapped([NW.weeklyKey(999)], { note: 'test' });
+const refetch = NW.buildNiaWeeklySlice(999);
+check('a filed weekly digest does not rebuild for the same cycle', refetch.empty === true);
+
+fs.rmSync(tmpRoot, { recursive: true, force: true });
+
+// injectWeeklyPilotCredit lives in cron-desk-run.js — exercised via its own
+// small fixture here since that file has no dedicated unit test file; a
+// require of the whole module is safe (no top-level side effects on require).
+const { injectWeeklyPilotCredit } = require('./cron-desk-run');
+const intake = { names: [{ name: 'Marcus Walker', role: 'quoted-source', popid: 'POP-00962' }] };
+const pilots = [
+  { name: 'Marcus Walker', POPID: 'POP-00962' },
+  { name: 'Clarissa Dane', POPID: 'POP-00143' },
+];
+const draft = 'Marcus Walker had a rough week out there. The rest of the cast sat it out this cycle.';
+const injected = injectWeeklyPilotCredit(intake, draft, pilots);
+check('existing quoted-source role upgraded to subject for a printed pilot',
+  injected.names.find(n => n.popid === 'POP-00962').role === 'subject');
+check('a pilot never named in the article body is NOT added (index only what prints)',
+  !injected.names.some(n => n.popid === 'POP-00143'));
+
+const intake2 = { names: [] };
+const draft2 = 'Clarissa Dane sat quiet this week while the leaderboard shuffled under her.';
+const injected2 = injectWeeklyPilotCredit(intake2, draft2, pilots);
+check('a printed pilot absent from the model INTAKE is still added as subject',
+  injected2.names.length === 1 && injected2.names[0].popid === 'POP-00143' && injected2.names[0].role === 'subject');
+
 if (failed) { console.error('buildNiaSlice: ' + failed + ' FAIL'); process.exit(1); }
 console.log('buildNiaSlice: ok');

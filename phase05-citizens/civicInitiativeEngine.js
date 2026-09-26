@@ -136,7 +136,14 @@ function runCivicInitiativeEngine_(ctx) {
   if (data.length >= 1 && ensureInitiativeBuildColumns_(sheet, data[0])) {
     data = sheet.getDataRange().getValues();
   }
+  // Initiatives in the World Job 4: the Business_Ledger link column, same self-arm class.
+  if (data.length >= 1 && ensureInitiativeLinkColumns_(sheet, data[0])) {
+    data = sheet.getDataRange().getValues();
+  }
   if (data.length >= 2 && backfillInitiativeBudgets_(sheet, data[0], data.slice(1)).changed > 0) {
+    data = sheet.getDataRange().getValues();
+  }
+  if (data.length >= 2 && backfillInitiativeBizLinks_(sheet, data[0], data.slice(1)).changed > 0) {
     data = sheet.getDataRange().getValues();
   }
   if (data.length < 2) {
@@ -3129,6 +3136,69 @@ function ensureInitiativeBuildColumns_(sheet, header) {
   sheet.getRange(1, lastCol + 1, 1, missing.length).setValues([missing]);
   Logger.log('civicInitiativeEngine: Job 3 appended build columns to Initiative_Tracker — ' + missing.join(', '));
   return true;
+}
+
+// Initiatives in the World Job 4 — BizID: the Business_Ledger row this initiative
+// became once approved, so "traceable to the initiative row" (acceptance 4) is a
+// column, not a human reading two sheets side by side. Same self-arm class as
+// OpensCycle. Backfill below is a five-row authored map (S334 legacy mints,
+// `d37bb7cf`) — not a name matcher; future mints write BizID themselves at the
+// mint site (builder call pending, see plan Job 4).
+var INITIATIVE_LINK_COLUMNS_ = ['BizID'];
+
+/** Append a missing BizID column. Same contract as ensureInitiativeStageColumns_. */
+function ensureInitiativeLinkColumns_(sheet, header) {
+  var have = header || [];
+  var missing = INITIATIVE_LINK_COLUMNS_.filter(function (c) { return have.indexOf(c) === -1; });
+  if (!missing.length) return false;
+  var lastCol = sheet.getLastColumn();
+  var short = (lastCol + missing.length) - sheet.getMaxColumns();
+  if (short > 0) sheet.insertColumnsAfter(sheet.getMaxColumns(), short);
+  sheet.getRange(1, lastCol + 1, 1, missing.length).setValues([missing]);
+  Logger.log('civicInitiativeEngine: Job 4 appended link columns to Initiative_Tracker — ' + missing.join(', '));
+  return true;
+}
+
+// The five S334 legacy mints (d37bb7cf, 2026-07-27) — matched by InitiativeID,
+// confirmed against Business_Ledger by both Name and Budget/Annual_Revenue
+// (INIT-003's name has since diverged to "...Phase II — Visioning" under the
+// 2026-09-21 stage-machine ruling, but its $230M Budget still ties it to
+// BIZ-00096). A hand-authored map, not a fuzzy match — never trust a guess here.
+var INITIATIVE_BIZ_LEGACY_MAP_ = {
+  'INIT-001': 'BIZ-00094', 'INIT-002': 'BIZ-00095', 'INIT-003': 'BIZ-00096',
+  'INIT-005': 'BIZ-00097', 'INIT-007': 'BIZ-00098'
+};
+
+/**
+ * One-time backfill: blank BizID + a known legacy InitiativeID → the mapped
+ * BIZ_ID. Never overwrites a non-blank BizID (a hand edit or a future mint
+ * wins). Mirrors planInitiativeBudgetBackfill_'s contract.
+ */
+function planInitiativeBizLinkBackfill_(header, rows) {
+  var iId = header.indexOf('InitiativeID'), iBiz = header.indexOf('BizID');
+  var out = { bizId: [], changed: 0 };
+  if (iId < 0 || iBiz < 0) return out;
+  for (var r = 0; r < rows.length; r++) {
+    var current = rows[r][iBiz];
+    var mapped = INITIATIVE_BIZ_LEGACY_MAP_[String(rows[r][iId] || '').trim()];
+    if (mapped && (current === '' || current === null || current === undefined)) {
+      out.bizId.push([mapped]);
+      out.changed++;
+    } else {
+      out.bizId.push([current]);
+    }
+  }
+  return out;
+}
+
+/** Apply planInitiativeBizLinkBackfill_'s plan via a single-column range write. */
+function backfillInitiativeBizLinks_(sheet, header, rows) {
+  var plan = planInitiativeBizLinkBackfill_(header, rows);
+  if (!plan.changed) return plan;
+  var iBiz = header.indexOf('BizID');
+  sheet.getRange(2, iBiz + 1, plan.bizId.length, 1).setValues(plan.bizId);
+  Logger.log('civicInitiativeEngine: Job 4 backfilled ' + plan.changed + ' BizID link(s) from the S334 legacy map');
+  return plan;
 }
 
 /**

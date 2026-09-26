@@ -31,7 +31,7 @@ function grab(name) {
   return SRC.slice(i, j);
 }
 const NAMES = ['applySeasonModifiers_', 'applyWeatherModifiers_', 'applyHolidayModifiers_',
-  'applySportsModifiers_', 'normalizeSportsPhase_', 'applyDemographicModifiers_',
+  'applySportsModifiers_', 'normalizeSportsPhase_', 'applyDemographicModifiers_', 'aggregateDemographics_',
   'applyEconomyLocal_', 'applyObservedFeedback_', 'applySeedLocalBoost_',
   'medianOf_', 'seedClusterMedian_', 'seedDomainMedian_', 'makeMetrics_',
   'getMomentumFactor', 'blend'];
@@ -213,6 +213,19 @@ console.log('7. weather is a shade; a catastrophe is a crisis (2026-09-19 ruling
   ok('a catastrophe costs more than a playoff run can lift (0.10 cap)', storm <= -0.2, 'storm=' + storm.toFixed(3));
   const w = M.makeMetrics_(); const b = w.sentiment; M.applySeasonModifiers_(w, 'Winter');
   ok('winter is a shade under the playoffs, not over them', Math.abs(w.sentiment - b) < 0.1, 'winter=' + (w.sentiment - b).toFixed(3));
+}
+
+console.log('8. engine.193 cut 1 — unemployment is a share of adults, sickness of everyone');
+{
+  // live C108 Temescal: 574 students+seniors, 2055 adults, 171 unemployed, 111 sick
+  const nd = { Temescal: { students: 300, adults: 2055, seniors: 290, unemployed: 171, sick: 111 },
+               Eastlake: { students: 300, adults: 1582, seniors: 279, unemployed: 107, sick: 90 } };
+  const a = M.aggregateDemographics_(['Temescal', 'Eastlake'], nd);
+  ok('unemployment divides by adults (278 / 3637)', near(a.unemploymentRate, 278 / 3637));
+  ok('sickness divides by the whole population (201 / 4806)', near(a.sicknessRate, 201 / 4806));
+  ok('a hood set with no adults reads 0 unemployment, not NaN',
+    M.aggregateDemographics_(['X'], { X: { students: 5, adults: 0, seniors: 5, unemployed: 0, sick: 1 } }).unemploymentRate === 0);
+  ok('no demographics still falls back', M.aggregateDemographics_(['Y'], {}).totalPopulation === 0);
 }
 
 console.log('\n' + pass + ' passed, ' + fail + ' failed\n');

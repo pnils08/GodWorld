@@ -478,14 +478,20 @@ function applyCityDynamics_(ctx) {
     }
   }
 
+  // engine.193 cut 1: unemployment is a share of ADULTS — the hood writer fills
+  // `unemployed` as adults × rate (updateNeighborhoodDemographics.js, engine.135 B2)
+  // and World_Population.employmentRate is adult-based. Dividing by the whole
+  // population read the rate shrunk ×0.68–0.83 against tiers authored for the
+  // rate itself (v2.6). Sickness stays over the whole population.
   function aggregateDemographics_(hoods, neighborhoodDemographics) {
-    var totalPop = 0, totalUnemp = 0, totalSick = 0, totalStudents = 0, totalSeniors = 0;
+    var totalPop = 0, totalAdults = 0, totalUnemp = 0, totalSick = 0, totalStudents = 0, totalSeniors = 0;
     for (var i = 0; i < hoods.length; i++) {
       var nh = hoods[i];
       var d = neighborhoodDemographics[nh];
       if (!d) continue;
       var pop = (d.students || 0) + (d.adults || 0) + (d.seniors || 0);
       totalPop += pop;
+      totalAdults += (d.adults || 0);
       totalUnemp += (d.unemployed || 0);
       totalSick += (d.sick || 0);
       totalStudents += (d.students || 0);
@@ -495,7 +501,7 @@ function applyCityDynamics_(ctx) {
       return { unemploymentRate: 0.08, sicknessRate: 0.05, studentRatio: 0.15, seniorRatio: 0.12, totalPopulation: 0 };
     }
     return {
-      unemploymentRate: totalUnemp / totalPop,
+      unemploymentRate: totalAdults > 0 ? totalUnemp / totalAdults : 0,
       sicknessRate: totalSick / totalPop,
       studentRatio: totalStudents / totalPop,
       seniorRatio: totalSeniors / totalPop,

@@ -259,7 +259,7 @@ function extractPlayerNameFromFlatFilename(filename) {
     /\s+TrueSource$/i,
     /\s+DataPage(\s+v[\d.]+)?$/i,
     /\s+Data\s+Card(\s+v[\d.]+)?$/i,
-    /\s+2040$/,
+    /\s+20\d{2}$/,
     /\s+[—–-]\s+Player\s+Profile.*$/i,
     /\s+[—–-]\s+Prospect\s+Profile.*$/i,
   ];

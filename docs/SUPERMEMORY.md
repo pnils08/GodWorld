@@ -63,10 +63,16 @@ cache their environment; an explicitly approved credential rotation requires
   confirmed a clean 1.00 doc-per-entity ratio across every `wd-*` tag
   2026-09-26 (940 citizens, 94 business, 46 cultural, 16 faith, 6 initiative,
   17 neighborhood, 45 player-truesource).
-- The card builders and `buildWorldSummary.js` are manual-trigger only — no
-  cron, no daemon currently running (`wdCardsDaemon.js` exists but isn't
-  scheduled). A ledger edit doesn't reach Supermemory until someone reruns the
-  relevant builder.
+- `wdCardsDaemon.js` (engine.27 Phase A) is **live again as of 2026-09-26**
+  under pm2 (`wd-cards-daemon`, 300s poll) — it had gone quiet sometime after
+  its S242 launch, gated by the same POST-only-writer bug that caused the
+  card-layer surplus this session cleaned up. Now that every builder it
+  dispatches to (citizens/business/cultural/faith) PATCHes in place, a ledger
+  edit reaches Supermemory within ~5 minutes automatically — no manual rebuild
+  needed for those four. `buildWorldSummary.js`, `buildInitiativeCards.js`,
+  `buildNeighborhoodCards.js`, and `ingestPlayerTrueSource.js` remain
+  manual-trigger only (engine-cycle-written or out-of-daemon-scope by design —
+  see the daemon's own header comment for the exclusion list).
 - The older load-bearing audit completed its container dispositions and
   speaker-attribution rule. Its `mags` + `super-memory` test-off and final
   retirement verdict remain open.

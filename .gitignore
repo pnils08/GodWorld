@@ -88,3 +88,4 @@ output/audio/*.m4a
 
 # Runtime cache under output/ — regenerated, never canon (S404)
 output/cache/
+output/.wdcards-state.json

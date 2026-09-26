@@ -1,7 +1,7 @@
 ---
 title: engine.27 — wd-* Card Auto-Invalidation Hook Plan
 created: 2026-05-26
-updated: 2026-05-26
+updated: 2026-09-26
 type: plan
 tags: [engine, substrate, automation, ready]
 sources:
@@ -390,6 +390,23 @@ wd-card auto-invalidation hook — upstream sheet writes (Sim_Ledger/Business/Cu
 
 ## Changelog
 
+- 2026-09-26 — **Phase A re-enabled (research-build).** Daemon had gone quiet
+  sometime after the S270 readiness check — not running when checked today,
+  `ecosystem.config.js` still carried its "NOT auto-started" gate comment.
+  Root cause of the gate: the daemon dispatches to `build*Cards.js` writers,
+  and until `infrastructure.12`'s PATCH-if-exists fix (2026-09-26, following
+  the same pattern `engine.110`/`engine.111` already landed for cultural/faith
+  cards on 2026-08-16), every dispatched rebuild was a bare POST — a daemon
+  retry storm on POST-only writers is the documented root cause of the
+  card-layer surplus this session also cleaned up (see infrastructure.12).
+  Reverified before restart: all four daemon-covered projections (citizens,
+  business, cultural, faith) confirmed PATCH-if-exists via `git grep`, and
+  `auditCardLayerCensus.js` showed a clean 1.00 doc-per-entity ratio across
+  every `wd-*` tag. Dry-run cold-start ticked clean (0 rebuilds, 0 failures).
+  Started live via `pm2 start ecosystem.config.js --only wd-cards-daemon`
+  (Mike-approved), `pm2 save` run so it survives a reboot. Phase B (cycle-end
+  marker hook) is still open per the S270 disposition below — unaffected by
+  this restart.
 - 2026-05-26 — Plan written (S238 engine-sheet). Hybrid option (d) recommended; 3-phase rollout. Filed for engine.27 row state transition `needs-info` → `ready`.
 - 2026-05-28 — **Phase A COMPLETE + LIVE (S242 engine-sheet).** Tasks A1–A8 DONE. Daemon running under pm2 (id 4, poll 300s); live success path proven end-to-end (synthetic flip → rebuild → MCP fresh read). Two trailing non-blockers: pm2-save reboot-persistence (deferred — stopped services) + one-time backlog rebuild for stale T12/T13 cards. Measure-twice corrections to the plan's projection map (advisor-reviewed before build): (1) cultural keys on **CUL-ID col B**, not POPID — `--cul` already existed; (2) **Faith_Organizations has no ID column** — key is Organization name, `--name` already existed; A1 became comma-list support (one targeted rebuild vs N per-ID spawns) not new flags; (3) **Chicago_Citizens EXCLUDED** — no `build*Cards.js` consumes it (DISABLED/frozen); (4) **neighborhood + initiative EXCLUDED from Phase A** — engine-cycle-written, belong on Phase B's marker (neighborhood also aggregates 3 sheets, no 1:1 map); (5) hash excludes volatile bookkeeping cols (Sim LastUpdated; Cultural Timestamp+LastSeenCycle) to protect the A8 "0 false positives" criterion. Pattern: feedback_measure-twice-cascading-effects. Files: `scripts/wdCardsDaemon.js` (new), `scripts/buildCitizenCards.js` + `buildBusinessCards.js` + `buildCulturalCards.js` (comma-list flags), `ecosystem.config.js` (stopped pm2 entry). No clasp push (pure Node). One diagnostic test row left in Engine_Errors from the A4 live failure test.
 

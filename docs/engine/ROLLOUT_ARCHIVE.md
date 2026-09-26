@@ -963,6 +963,20 @@ Prior sweep passes: §S212 Migration Pass (governance.3 + governance.5 + S203 di
 
 This pass: 4 closed (pipeline.3, engine.3, infrastructure.1, infrastructure.2) — not `done-pending-archive` sweep rows, moved by hand per rollout-rules §6 wontfix/unresolvable-stale convention.
 
+## S496 Archive Pass (2026-09-26, research-build) — post-S495 closures sweep
+
+7 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 4 engine.* + 1 civic.* + 2 infrastructure.*.
+
+- **engine.139** [engine-sheet] — civic scoring re-wire — positives are events, negatives are conditions; symmetric media; width ladders. **Bench-proven C108–C109 (advanced path hand-staged: mayor 21 vs 12 counterfactual), LIVE PROD @13 2026-09-01. FOLDED into engine.213 (`35a087a7`, PROD @84): sitting/media halves rewritten there; the transition-pays ladder (`advanced`/`completed`) is still the live code (`updateCivicApprovalRatings.js` MOTION_LADDERS_) and rides engine.213's row — reasons are Logger-only, proof is the first live phase move** **State at archive:** done-pending-archive. Pointer: [[../plans/2026-08-31-c105-chase-sessions]] §G-PF34
+- **engine.102** [kimi / research-build] — City/hood cascade integrity — T1–T9 all done (T9 /sift half landed S487, v2.8) **State at archive:** done-pending-archive. Pointer: [[../plans/2026-08-08-engine-102-cascade-consistency]] + [[../research/2026-08-07-city-neighborhood-cascade-team-review]]
+- **engine.255** [engine-sheet] — Housing lever redesigned as a budgeted disbursement (builder 2026-09-22, all ten calls as recommended): COMPLETE, live PROD @124 `bb15f9c9` — Budget parsed and spent, tranche onto flagged households, flagged-at-vote cohort Delivering gate (bench pair Delivering at C113), housing playable, seat proposals carry a budget (kimi Task 9), engine.251 code removed. Smoke rides C109 (Sun 2026-09-27) **State at archive:** done-pending-archive. Pointer: [[../plans/2026-09-22-initiative-budget-disbursement]]; [[../reference/DEPLOY_HISTORY]] §PROD @120–@124
+- **engine.258** [engine-sheet] — Owner move — a home is a rung (builder 2026-09-23); 258d a seeded home sells for the 20% down share (2026-09-24). LIVE PROD @127. Smoke Sun 2026-09-27 → [[../reference/DEPLOY_HISTORY]] §PROD @125/@127 **State at archive:** done-pending-archive. Pointer: live read 2026-09-23: 27 of 123 owned units ≥1.5× hood median, ~17 ENGINE-only
+- **civic.39** [research-build (scripts: kimi lane)] — All 4 tasks landed + tested; schedule install is the builder's op decision (SESSION_CONTEXT) **State at archive:** done-pending-archive. Pointer: [[../plans/2026-09-21-civic-sunday-stage-machine]] + [[../research/2026-09-21-batch-inference-options]]
+- **infrastructure.10** [research-build] — Supermemory recall wired to sl-rules+sl-godworld 09-24, doc currency pass 09-26 **State at archive:** done-pending-archive. Pointer: [[../SUPERMEMORY]]
+- **infrastructure.12** [research-build] — TrueSource ingest dedup — PATCH-if-exists, verified live **State at archive:** done-pending-archive. Pointer: inline-fix, commit `f780fc25`
+
+This pass: 7 rows — engine.139 + engine.102 + engine.255 + engine.258 + civic.39 + infrastructure.10 + infrastructure.12. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+
 ## S477 Archive Pass (2026-09-20, research-build) — post-S476 closures sweep
 
 3 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 3 engine.*.

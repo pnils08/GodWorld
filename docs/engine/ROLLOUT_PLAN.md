@@ -185,9 +185,9 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | infrastructure.5 | Supermemory load-bearing audit | in-progress | research-build | [[../plans/2026-05-22-supermemory-load-bearing-audit]] + [[../adr/0008-speaker-attribution-for-auto-save-writers|ADR-0008]] — detail in pointer (relocated 2026-07-02) |
 | infrastructure.6 | Sim-health observability + ghost-tab integrity — `/api/sim-health` off engineAuditor JSON + dashboard panel; disposition 11 ghost tab refs + tab-reference integrity test | ready | engine-sheet | [[../plans/2026-07-31-engine-observability-integrity]] |
 | infrastructure.8 | Hidden-tab audit + disposition (kimi) — 16 hidden tabs classified vs live code (3 load-bearing, 6 dead); Task 1 doc truth pass, Task 2 builder keep/delete rulings, Task 3 backup-then-delete. **Builder 2026-09-14: low priority — pick up only once the engine runs clean.** | parked | engine-sheet | [[../plans/2026-09-09-hidden-tab-audit]] |
-| infrastructure.10 | Supermemory plugin recall reads an empty auto-tag and docs/SUPERMEMORY.md is stale: decide leave, or point recall at sl-godworld | needs-info | research-build | [[../SUPERMEMORY]]; plugin `hooks/lib/container-tag.js` |
+| infrastructure.10 | Supermemory recall wired to sl-rules+sl-godworld 09-24, doc currency pass 09-26 | done-pending-archive | research-build | [[../SUPERMEMORY]] |
 | infrastructure.11 | claude-mem observer refused-call retries patched 09-21 (2→5, stays free); close after a day near-zero `Observer failed` | in-progress | engine-sheet | [[../plans/2026-08-20-consolidate-model-calls-on-openrouter]] |
-| infrastructure.12 | TrueSource ingest dedup — PATCH-if-exists, verified live | closed | research-build | inline-fix, commit `f780fc25` |
+| infrastructure.12 | TrueSource ingest dedup — PATCH-if-exists, verified live | done-pending-archive | research-build | inline-fix, commit `f780fc25` |
 
 ### research.* — Papers, external tools, evaluations
 

@@ -1,7 +1,7 @@
 ---
 title: Supermemory Operations and Retrieval
 created: 2026-03-20
-updated: 2026-07-27
+updated: 2026-09-26
 type: reference
 tags: [infrastructure, memory, supermemory, active]
 sources:
@@ -28,16 +28,25 @@ The old GodWorld organization is retired and must not be queried. PM2 processes
 cache their environment; an explicitly approved credential rotation requires
 `--update-env` when the affected process is restarted.
 
-## Current truth snapshot — 2026-07-27
+## Current truth snapshot — 2026-09-26
 
-- The active Claude plugin is the renamed `supermemory` v0.0.12 package. The
-  old `claude-supermemory` plugin entry is disabled.
-- Project configuration maps repository/project memory to `super-memory` and
-  retains `mags` as a legacy personal read lane. Neither mapping grants the
-  plugin automatic access to `bay-tribune` or `world-data`.
-- SessionStart context and reasoned recall are active. The Stop hook is loaded
-  but writes nothing: effective global settings are
-  `signalExtraction=true` and `signalKeywords=[]`.
+- The active Claude plugin is `supermemory` v0.1.8. `.claude/.supermemory-claude/config.json`
+  (the old container-mapping file this doc used to describe) **no longer
+  exists** — confirmed on disk 2026-09-26. With no `repoContainerTag` override,
+  the plugin falls back to an auto-derived per-repo tag
+  (`repo_godworld__4b23…`), which stays effectively empty since nothing writes
+  to it deliberately.
+- Builder-direct memory plumbing restore (2026-09-24, see Changelog) answered
+  the open "leave, or point recall at `sl-godworld`" question this snapshot
+  used to carry: the plugin's recall hook (`hooks/recall-directive.js`,
+  patched, verified still applied 2026-09-26) now searches `sl-rules` (hybrid,
+  top 2, labeled `[rule]`) + `sl-godworld` + the auto repo container together,
+  merged by similarity. Stop-hook auto-save is back on, but scoped — it saves
+  to the auto repo container only, never `sl-godworld` (that stays hand-write,
+  `npx supermemory remember ... --tag sl-godworld`).
+- `sl-rules` (mirror of memory files + `SIM_DOCTRINE.md` + ADRs) syncs nightly
+  at 04:15 via `node scripts/brainSearch.js --sync` — cron confirmed live,
+  `logs/sl-rules-sync.log` shows clean recent runs (138 docs, 0 failed).
 - Supermemory is a derived retrieval layer. Sheets remain authority for city
   state; published Bay Tribune material is the paper-of-record. No Supermemory
   container independently creates canon.
@@ -45,9 +54,19 @@ cache their environment; an explicitly approved credential rotation requires
   `drive-archive` slice contains both genuine publications and engineering,
   directive, audit, and simulation-revealing documents. Published-canon
   retrieval must filter provenance.
-- Broad `world-data` semantic search currently returns no useful hits for
-  measured queries. The data lives under the `wd-*` domain tags; consumers must
-  search those tags directly or fan out across them.
+- Broad `world-data` semantic search still returns weak hits for measured
+  queries. The data lives under the `wd-*` domain tags; consumers must search
+  those tags directly or fan out across them. Card-layer duplication is now
+  actively guarded: `buildCitizenCards.js`, `buildFaithCards.js`,
+  `buildCulturalCards.js`, and `ingestPlayerTrueSource.js` all PATCH-if-exists
+  (engine.110/111/infrastructure.12) — `node scripts/auditCardLayerCensus.js`
+  confirmed a clean 1.00 doc-per-entity ratio across every `wd-*` tag
+  2026-09-26 (940 citizens, 94 business, 46 cultural, 16 faith, 6 initiative,
+  17 neighborhood, 45 player-truesource).
+- The card builders and `buildWorldSummary.js` are manual-trigger only — no
+  cron, no daemon currently running (`wdCardsDaemon.js` exists but isn't
+  scheduled). A ledger edit doesn't reach Supermemory until someone reruns the
+  relevant builder.
 - The older load-bearing audit completed its container dispositions and
   speaker-attribution rule. Its `mags` + `super-memory` test-off and final
   retirement verdict remain open.
@@ -545,25 +564,23 @@ const briefing = wrap(recalledCanon, 'bay-tribune');
 
 ## Plugin Config
 
-File: `.claude/.supermemory-claude/config.json` (gitignored)
+**File `.claude/.supermemory-claude/config.json` no longer exists (confirmed
+2026-09-26, infrastructure.10 close).** This doc used to describe it as the
+live container mapping (`personalContainerTag: mags`, `repoContainerTag:
+super-memory`) — that mapping is gone. With no override, the plugin's
+repo-container recall falls back to an auto-derived empty tag
+(`repo_godworld__4b23…`). Deliberate writes still work exactly as documented
+elsewhere in this file — `/save-to-mags` → `mags`, `/supermemory-save` →
+`super-memory`, publication pipeline → `bay-tribune` — none of those routes
+depend on the deleted config file.
 
-```json
-{
-  "personalContainerTag": "mags",
-  "repoContainerTag": "super-memory"
-}
-```
+What replaced the config-file mapping for *recall* (not deliberate save) is
+the patched hook described in the 2026-09-24 Changelog entry: `sl-rules` +
+`sl-godworld` + the auto repo container, searched together on every
+UserPromptSubmit.
 
-`repoContainerTag` → `super-memory`, the canonical plugin write destination.
-`personalContainerTag` → `mags`, retained as a legacy personal read lane. Use
-`/supermemory-save` for deliberate project memory, `/save-to-mags` for
-deliberate Mags/editorial memory, and the publication pipeline—not a generic
-memory skill—for Bay Tribune canon.
-
-**Plugin version: `supermemory` v0.0.12.** The renamed plugin is active; the old
-`claude-supermemory` plugin entry is disabled. Upstream's unified
-repository-container behavior is available, while the explicit
-`repoContainerTag` override remains the canonical write destination.
+**Plugin version: `supermemory` v0.1.8** (upstream). The old
+`claude-supermemory` plugin entry is disabled.
 
 **Source attribution (new in 0.0.4):** the writer scripts (`add-memory.cjs`, `save-project-memory.cjs`) now stamp `sm_source: "claude-code"` metadata on every memory they write. This distinguishes plugin-written memories from records written by other paths (Mara's connector, the curl `/v4` API used for multi-tag `world-data` writes). Useful for provenance filtering; no action required — additive, doesn't change read/search behavior.
 
@@ -571,11 +588,18 @@ repository-container behavior is available, while the explicit
 
 | Hook | When | Container |
 |------|------|-----------|
-| **SessionStart** | Every boot | Loads configured repository/profile context via `context-hook.cjs`; current read set includes `super-memory` and legacy `mags`, not `bay-tribune` |
-| **UserPromptSubmit** | Before user-turn handling | `recall-hook.cjs` performs reasoned recall only when useful |
+| **SessionStart** | Every boot | Loads context via `context-hook.cjs` off the auto repo container (no more config-file override — see §Plugin Config) |
+| **UserPromptSubmit** | Before user-turn handling | `recall-directive.js` (patched 2026-09-24, verified still applied 2026-09-26) — searches `sl-rules` (hybrid, top 2, `[rule]`-labeled) + `sl-godworld` + the auto repo container, merged by similarity. **A plugin update overwrites this patch** — re-apply if recall stops surfacing `[rule]` hits |
 | **PreToolUse** | Before `Skill` or `Bash` recall/search | `recall-approve.cjs` handles plugin recall approval |
-| **Stop** | ~~**Every assistant turn**~~ — **NEUTRALIZED 2026-05-22 (S221+)** | Writer hook is loaded by Claude Code but exits silently every fire. Mechanism: `~/.supermemory-claude/settings.json` sets `signalExtraction:true` + `signalKeywords:[]` → `formatSignalEntries` finds zero matches → returns null → `summary-hook.cjs` returns without writing. Reverse: delete `~/.supermemory-claude/settings.json` or set `signalExtraction:false` to restore auto-save-every-turn behavior. Final disposition (full disable / extraction-filter rewrite / speaker-routed rebuild) decided by `infrastructure.5` Pass 3 verdict + `governance.12` leverage design. See §User Profile Pipeline. |
+| **Stop** | Every assistant turn | **Re-enabled 2026-09-24** (reversing the 2026-05-22 neutralization below) — saves signal turns to the auto repo container only, never `sl-godworld` or `mags`. The S221 contamination risk this neutralization originally guarded against was speaker-collapse into `mags`; the auto repo container isn't a personal-identity read lane, so that specific risk doesn't apply here. |
 | **PostToolUse** | Not defined | No active PostToolUse capture path |
+
+**Historical: 2026-05-22 → 2026-09-24 neutralization.** Writer hook was loaded
+but exited silently every fire (`~/.supermemory-claude/settings.json` set
+`signalExtraction:true` + `signalKeywords:[]` → `formatSignalEntries` found
+zero matches → returned null → `summary-hook.cjs` returned without writing).
+See §User Profile Pipeline for the full S221 incident this was guarding
+against.
 
 ### Skills
 
@@ -865,6 +889,20 @@ Supermemory plugin is 0.1.8 (= upstream) but `docs/SUPERMEMORY.md` describes v0.
 
 ## Changelog
 
+- 2026-09-26 — infrastructure.10 closed. Currency pass triggered by a wire-health
+  audit that found the top-of-doc "Current truth snapshot" and §Plugin Config
+  still describing the deleted `.claude/.supermemory-claude/config.json` and
+  plugin v0.0.12, two months after the 2026-09-24 changelog entry below had
+  already answered the open "leave, or point recall at sl-godworld" question
+  and implemented it. Confirmed on disk: config file gone, plugin is 0.1.8,
+  `recall-directive.js` patch still applied, `sl-rules` cron live (04:15,
+  clean recent runs). Also confirmed card-layer health directly: 0 duplicate
+  surplus across every `wd-*` tag via `auditCardLayerCensus.js` (940 citizens
+  / 94 business / 46 cultural / 16 faith / 6 initiative / 17 neighborhood / 45
+  player-truesource) — `infrastructure.12`'s PATCH-if-exists fix is the newest
+  of four card builders now carrying this invariant. Rewrote §Current truth
+  snapshot, §Plugin Config, §Hooks to match; left the rest of the doc as-is
+  (still substantively current, just not restated in the top snapshot).
 - 2026-09-24 — Builder-direct memory plumbing restore. (1) `sl-rules` container
   added: a MIRROR of the current rule text — `~/.claude/projects/-root-GodWorld/memory/*.md`
   (not MEMORY.md), `docs/SIM_DOCTRINE.md` per `## ` section, `docs/adr/*.md` — one

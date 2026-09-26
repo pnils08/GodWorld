@@ -578,9 +578,13 @@
 ### applyDemographicDrift.js
 - **applyDemographicDrift_(ctx)**
   Reads: S.cityDynamics, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.sportsAtmosphereEnabled, S.sportsSeason, S.weather, S.weatherEvents, S.weatherMood, S.worldEvents
-  Writes: S.demographicDrift, S.hospitalTalkback, S.migrationClamps
+  Writes: S.demographicDrift, S.employmentDistress, S.hospitalTalkback, S.migrationClamps
   Sheets: Hospital_Ledger, World_Population
   RNG: ctx.rng / safeRand_(ctx)
+
+- **businessDistressShare_(ctx, S)**
+  Reads: S.previousCycleState
+  Sheets: Business_Ledger
 
 - **cfgNum_(ctx, cfg, key, defaultValue)**
   Reads: S.auditIssues
@@ -971,6 +975,12 @@
 - **bizParseRevenue_(v)**
 
 - **bizDynamicsConfig_(ctx)**
+  Reads: S.activityObservations
+
+- **bizCoverageDeviation_(S)**
+  Reads: S.activityObservations, S.cycle, S.cycleId, S.editionSentimentBoost
+
+- **bizVitalityMedian_(ns)**
 
 - **bizMayorApproval_(ctx)**
   Sheets: Civic_Office_Ledger
@@ -984,7 +994,7 @@
 - **bizDriftOne_(cfg, biz, prevState, inputs, cycle)**
 
 - **applyBusinessDynamics_(ctx)**
-  Reads: S.canonHoods, S.chaosBusinessFold, S.chaosNeighborhoodFold, S.cycleId, S.editionSentimentBoost, S.initiativeNeighborhoodEffects, S.neighborhoodState, S.previousCycleState, S.worldEvents
+  Reads: S.canonHoods, S.chaosBusinessFold, S.chaosNeighborhoodFold, S.cycleId, S.initiativeNeighborhoodEffects, S.neighborhoodState, S.previousCycleState, S.worldEvents
   Writes: S.businessClosures, S.businessDeclines, S.businessDynamicsState, S.hoodBusinessMomentum, S.worldEvents
   Config: ctx.config.cycleCount
   Sheets: Business_Ledger
@@ -3188,7 +3198,7 @@
   Reads: S.mediaCount, S.mediaCoverage
 
 - **compactActivityObservations_(S)**
-  Reads: S.activityObservations, S.crimeEvents, S.crimeMetrics, S.crimeSpikes, S.cycle, S.cycleId, S.eventsGenerated, S.mediaCount, S.mediaCoverage, S.storySeeds, S.worldEvents
+  Reads: S.activityObservations, S.crimeEvents, S.crimeMetrics, S.crimeSpikes, S.cycle, S.cycleId, S.editionSentimentBoost, S.eventsGenerated, S.mediaCount, S.mediaCoverage, S.storySeeds, S.worldEvents
 
 - **compactNeighborhoodDynamics_(nd)**
 
@@ -4300,4 +4310,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 184
-**Functions mapped:** 1503
+**Functions mapped:** 1506

@@ -2,7 +2,7 @@
   "generated": "2026-09-26",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 184,
-  "functionsMapped": 1503,
+  "functionsMapped": 1506,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -688,6 +688,7 @@
         "phase04-events/worldEventsEngine.js::worldEventsEngine_",
         "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_",
         "phase05-citizens/applyBusinessDynamics.js::archiveClosedBusinesses_",
+        "phase05-citizens/applyBusinessDynamics.js::bizCoverageDeviation_",
         "phase05-citizens/applyGameNightMoments.js::applyGameNightMoments_",
         "phase05-citizens/bondEngine.js::checkConfrontationTriggers_",
         "phase05-citizens/bondEngine.js::createBond_",
@@ -787,6 +788,7 @@
         "phase02-world-state/applySportsSeason.js::applySportsSeason_",
         "phase02-world-state/loadEventContentLedger.js::loadUndockedFeed_",
         "phase04-events/chaosCarsEngine.js::runChaosCarsEngine_",
+        "phase05-citizens/applyBusinessDynamics.js::bizCoverageDeviation_",
         "phase05-citizens/applyChaosDecay.js::applyChaosDecay_",
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
         "phase06-analysis/applyShockMonitor.js::applyShockMonitor_",
@@ -1763,6 +1765,7 @@
         "phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_",
         "phase02-world-state/applyWeatherModel.js::applyWeatherModel_",
         "phase02-world-state/updateTransitMetrics.js::updateTransitMetrics_Phase2_",
+        "phase03-population/applyDemographicDrift.js::businessDistressShare_",
         "phase03-population/generateCrisisBuckets.js::generateCrisisBuckets_",
         "phase04-events/worldEventsEngine.js::worldEventsEngine_",
         "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_",
@@ -1885,6 +1888,8 @@
         "phase01-config/loadPreviousEvening.js::seedCarriedActivityObservations_",
         "phase01-config/loadPreviousEvening.js::seedCarriedNeighborhoodEconomies_",
         "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
+        "phase05-citizens/applyBusinessDynamics.js::bizCoverageDeviation_",
+        "phase05-citizens/applyBusinessDynamics.js::bizDynamicsConfig_",
         "phase09-digest/finalizeCycleState.js::compactActivityObservations_"
       ]
     },
@@ -2090,7 +2095,8 @@
       "readers": [
         "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
         "phase02-world-state/applyEditionCoverageEffects.js::applyEditionCoverageEffects_",
-        "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_"
+        "phase05-citizens/applyBusinessDynamics.js::bizCoverageDeviation_",
+        "phase09-digest/finalizeCycleState.js::compactActivityObservations_"
       ]
     },
     "initiativeImplementationEffects": {
@@ -2564,6 +2570,12 @@
         "phase10-persistence/buildCyclePacket.js::buildCyclePacket_",
         "phase10-persistence/buildCyclePacket.js::hospitalCapacity_"
       ]
+    },
+    "employmentDistress": {
+      "writers": [
+        "phase03-population/applyDemographicDrift.js::applyDemographicDrift_"
+      ],
+      "readers": []
     },
     "hospitalTalkback": {
       "writers": [
@@ -4718,6 +4730,7 @@
       ],
       "readers": [
         "phase02-world-state/commuteFlowEngine.js::buildCommuteFlows_",
+        "phase03-population/applyDemographicDrift.js::businessDistressShare_",
         "phase04-events/chaosCarsEngine.js::flushBusinessFold_",
         "phase04-events/chaosCarsEngine.js::loadBusinessRows_",
         "phase04-events/chaosCarsEngine.test.js::makeCtx",

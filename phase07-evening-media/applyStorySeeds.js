@@ -1633,7 +1633,7 @@ function applyStorySeeds_(ctx) {
   // prose; same discipline that retired the arc generator). Plan:
   // docs/plans/2026-06-24-engine-output-canon-coverage.md
   function chaosSeedDomain_(scope, metric) {
-    if (scope === 'business') return 'BUSINESS';
+    if (scope === 'business' || scope === 'port') return 'BUSINESS'; // engine.193 cut 3b: the ship
     var m = String(metric || '');
     if (m === 'CrimeIndex') return 'CRIME';
     if (m === 'Health') return 'HEALTH';

@@ -123,12 +123,23 @@ function isArrayChaos_(x) {
  *                       Documentation of intent; the actual dial is the lifeHistoryTag→DIAL_MAP delta.
  *    coverageContribution  (OARI only) true = evidence for the C95 D2 expansion coverage anchor
  *    narrativeSeed      one-line desk-packet seed (Chaos_Cars col K); present on high-severity
+ *    scopes             (optional) restrict the outcome to these of the vehicle's scopes;
+ *                       absent = every scope the vehicle has (citizen still needs a tag)
+ *    bizEvent           (business-eligible outcomes, required) signed Growth_Rate event in
+ *                       units of bizEventShockScale, read by applyBusinessDynamics_ as the
+ *                       chaos-at-business term (engine.193 cut 3b). 0 = nothing happened
+ *                       (passed inspection, false alarm, power restored). Summed per business
+ *                       per Cycle; the drift clamps the event term at +-2.
+ *    peakPp / weeks     (port scope — the ship) the episode's Growth_Rate offset at peak (pp)
+ *                       and its length in Cycles; start and end weeks run at half strength,
+ *                       the week after releases it (start -> peak -> end -> aftermath).
  *  }
  *  metricImpacts[] {     SCOPE-KEYED (§S265) — applied by scope, not "pick one"
- *    scope              'business' | 'neighborhood'  (citizen scope has no metric impact; the
- *                       writeback is the col-O dial)
- *    column             REAL ledger column name (Business_Ledger: Annual_Revenue/Employee_Count;
- *                       Neighborhood_Map: Sentiment/CrimeIndex/RetailVitality/EventAttractiveness)
+ *    scope              'neighborhood' only (citizen scope writes the col-O dial; business
+ *                       scope carries its effect on the outcome's bizEvent — engine.193 cut 3b
+ *                       retired the Annual_Revenue/Employee_Count cells, which overwrote the
+ *                       dynamics revenue range and applied the same sign to every outcome)
+ *    column             Neighborhood_Map: Sentiment/CrimeIndex/RetailVitality/EventAttractiveness
  *    direction          'up' | 'down'  (sign of the swing; decay rates keyed to direction in DECAY_RULES)
  *    magnitudeRange     [min,max] integer sample (signed by direction at sample time)
  *    onOutcome          (optional) string|string[] — apply only when this outcome was rolled
@@ -180,13 +191,12 @@ var VEHICLE_CONFIGS = [
     name: 'fire_engine', displayName: 'Fire engine',
     scopes: ['business', 'neighborhood'], baseFrequencyWeight: 0.8,
     textureOutcomes: [
-      { outcome: 'false_alarm',           weight: 0.45, severity: 'low'  },
-      { outcome: 'minor_fire',            weight: 0.40, severity: 'low'  },
-      { outcome: 'major_blaze_contained', weight: 0.15, severity: 'high',
+      { outcome: 'false_alarm',           weight: 0.45, severity: 'low',  bizEvent: 0    },
+      { outcome: 'minor_fire',            weight: 0.40, severity: 'low',  bizEvent: -0.5 },
+      { outcome: 'major_blaze_contained', weight: 0.15, severity: 'high', bizEvent: -2,
         narrativeSeed: 'Smoke over the rooftops — a blaze contained, but the block smells it for days.' }
     ],
     metricImpacts: [
-      { scope: 'business',     column: 'Annual_Revenue', direction: 'down', magnitudeRange: [10, 25]    },
       { scope: 'neighborhood', column: 'Sentiment',      direction: 'down', magnitudeRange: [0.04, 0.12] }
     ]
   },
@@ -223,44 +233,49 @@ var VEHICLE_CONFIGS = [
     name: 'building_inspector', displayName: 'Building inspector',
     scopes: ['business'], baseFrequencyWeight: 0.7,
     textureOutcomes: [
-      { outcome: 'passed',                  weight: 0.50, severity: 'low'  },
-      { outcome: 'code_violation_cited',    weight: 0.30, severity: 'high',
+      { outcome: 'passed',                  weight: 0.50, severity: 'low',  bizEvent: 0     },
+      { outcome: 'code_violation_cited',    weight: 0.30, severity: 'high', bizEvent: -0.75,
         narrativeSeed: 'A citation taped to the door — fines now, repairs the owner did not budget for.' },
-      { outcome: 'forced_temporary_closure', weight: 0.20, severity: 'high',
+      { outcome: 'forced_temporary_closure', weight: 0.20, severity: 'high', bizEvent: -2,
         narrativeSeed: 'Shuttered pending compliance — staff sent home, regulars turned away at the door.' }
     ],
-    metricImpacts: [
-      { scope: 'business', column: 'Annual_Revenue', direction: 'down', magnitudeRange: [5, 15] },
-      { scope: 'business', column: 'Employee_Count', direction: 'down', magnitudeRange: [0, 2], onOutcome: 'forced_temporary_closure' }
-    ]
+    metricImpacts: []
   },
   {
     name: 'garbage_truck', displayName: 'Garbage truck',
     scopes: ['neighborhood', 'business'], baseFrequencyWeight: 1.1,
     textureOutcomes: [
-      { outcome: 'dumping_cleared',        weight: 0.40, severity: 'low'  },
-      { outcome: 'missed_pickup',          weight: 0.40, severity: 'low'  },
-      { outcome: 'sanitation_strike_delay', weight: 0.20, severity: 'high',
+      { outcome: 'dumping_cleared',        weight: 0.40, severity: 'low',  bizEvent: 0.25  },
+      { outcome: 'missed_pickup',          weight: 0.40, severity: 'low',  bizEvent: -0.25 },
+      { outcome: 'sanitation_strike_delay', weight: 0.20, severity: 'high', bizEvent: -0.75,
         narrativeSeed: 'Bags piling at the curb — a sanitation delay the whole block can smell.' }
     ],
     metricImpacts: [
       { scope: 'neighborhood', column: 'Sentiment',      direction: 'down', magnitudeRange: [0.04, 0.12] },
-      { scope: 'neighborhood', column: 'RetailVitality', direction: 'down', magnitudeRange: [1, 3]      },
-      { scope: 'business',     column: 'Annual_Revenue', direction: 'down', magnitudeRange: [3, 8]      }
+      { scope: 'neighborhood', column: 'RetailVitality', direction: 'down', magnitudeRange: [1, 3]      }
     ]
   },
   {
     name: 'mail_truck', displayName: 'Mail truck',
     scopes: ['citizen', 'business'], baseFrequencyWeight: 1.0,
     textureOutcomes: [
-      { outcome: 'vital_document_delivered', weight: 0.50, severity: 'low',  lifeHistoryTag: 'Friction',   role: 'subject' }, // engine.201 ruling 5: paperwork that demands a response
-      { outcome: 'lost_package',             weight: 0.35, severity: 'low',  lifeHistoryTag: 'Setback',    role: 'victim'  },
-      { outcome: 'mail_theft_reported',      weight: 0.15, severity: 'high', lifeHistoryTag: 'Setback',    role: 'victim',
-        narrativeSeed: 'Mailboxes pried open on the block — a theft reported, trust dented.' }
+      { outcome: 'vital_document_delivered', weight: 0.50, severity: 'low',  lifeHistoryTag: 'Friction',   role: 'subject', scopes: ['citizen'] }, // engine.201 ruling 5: paperwork that demands a response
+      { outcome: 'lost_package',             weight: 0.35, severity: 'low',  lifeHistoryTag: 'Setback',    role: 'victim',  scopes: ['citizen'] },
+      { outcome: 'mail_theft_reported',      weight: 0.15, severity: 'high', lifeHistoryTag: 'Setback',    role: 'victim',  scopes: ['citizen'],
+        narrativeSeed: 'Mailboxes pried open on the block — a theft reported, trust dented.' },
+      // engine.193 cut 3b (builder 2026-09-26: "a business can get bad news from the mail") —
+      // the business side, both ways. Lean negative like the fleet (bad 0.55 / good 0.45).
+      { outcome: 'new_contract_letter',      weight: 0.25, severity: 'low',  scopes: ['business'], bizEvent: 1    },
+      { outcome: 'overdue_payment_arrives',  weight: 0.20, severity: 'low',  scopes: ['business'], bizEvent: 0.5  },
+      { outcome: 'insurance_premium_hike',   weight: 0.20, severity: 'low',  scopes: ['business'], bizEvent: -0.5 },
+      { outcome: 'tax_audit_notice',         weight: 0.15, severity: 'high', scopes: ['business'], bizEvent: -0.75,
+        narrativeSeed: 'An audit notice in the morning mail — the books come out, and the owner stops sleeping.' },
+      { outcome: 'lawsuit_served',           weight: 0.10, severity: 'high', scopes: ['business'], bizEvent: -1,
+        narrativeSeed: 'Papers served at the counter — a lawsuit, and lawyers the shop never budgeted for.' },
+      { outcome: 'lost_contract_notice',     weight: 0.10, severity: 'high', scopes: ['business'], bizEvent: -1.25,
+        narrativeSeed: 'A letter ends the biggest account on the books — the owner reads it twice before telling the staff.' }
     ],
-    metricImpacts: [
-      { scope: 'business', column: 'Annual_Revenue', direction: 'up', magnitudeRange: [1, 3] }
-    ]
+    metricImpacts: []
   },
   {
     name: 'ice_cream_truck', displayName: 'Ice cream truck',
@@ -292,18 +307,44 @@ var VEHICLE_CONFIGS = [
     name: 'pge_truck', displayName: 'PG&E truck',
     scopes: ['neighborhood', 'business'], baseFrequencyWeight: 0.7,
     textureOutcomes: [
-      { outcome: 'planned_shutoff',        weight: 0.45, severity: 'low'  },
-      { outcome: 'power_outage_restored',  weight: 0.30, severity: 'high',
+      { outcome: 'planned_shutoff',        weight: 0.45, severity: 'low',  bizEvent: -0.25 },
+      { outcome: 'power_outage_restored',  weight: 0.30, severity: 'high', bizEvent: 0,
         narrativeSeed: 'Lights flicker back after hours dark — relief, and the question of why it went out.' },
-      { outcome: 'transformer_blowout',    weight: 0.25, severity: 'high',
+      { outcome: 'transformer_blowout',    weight: 0.25, severity: 'high', bizEvent: -1.25,
         narrativeSeed: 'A transformer blows — a block goes dark, freezers thaw, registers go cold.' }
     ],
     metricImpacts: [
-      { scope: 'neighborhood', column: 'Sentiment',      direction: 'down', magnitudeRange: [0.05, 0.15] },
-      { scope: 'business',     column: 'Annual_Revenue', direction: 'down', magnitudeRange: [5, 15]       }
+      { scope: 'neighborhood', column: 'Sentiment',      direction: 'down', magnitudeRange: [0.05, 0.15] }
     ]
+  },
+  // engine.193 cut 3b (builder 2026-09-26): the ship — the one vehicle that reaches many
+  // businesses at once, and the only one that lasts. EPISODIC: never drawn by the per-event
+  // picker (weight 0); runChaosShip_ rolls it once a Cycle, only when no episode is running.
+  // An episode moves Growth_Rate by peakPp at the Port + port-dependent sectors
+  // (CHAOS_SHIP_PORT_SECTORS) and by chaosShipEchoShare of it everywhere else, and hands
+  // every point back the week after it ends. Builder ruling S496: one ship is a felt,
+  // bounded blow (~7% unemployment at the deepest); citywide hard times need bad luck to stack.
+  {
+    name: 'cargo_ship', displayName: 'Container ship',
+    scopes: ['port'], baseFrequencyWeight: 0, episodic: true,
+    textureOutcomes: [
+      { outcome: 'cargo_surge',       weight: 0.30, severity: 'low',  peakPp: 4,   weeks: 3,
+        narrativeSeed: 'The cranes run all night — a cargo surge, overtime at the terminals, trucks stacked down Maritime Street.' },
+      { outcome: 'berth_delay',       weight: 0.30, severity: 'low',  peakPp: -3,  weeks: 1,
+        narrativeSeed: 'Ships idle off the breakwater — a berth delay, and shelves across town wait on what is still at sea.' },
+      { outcome: 'shipping_slowdown', weight: 0.25, severity: 'high', peakPp: -7,  weeks: 4,
+        narrativeSeed: 'Fewer ships every week — a shipping slowdown the Port feels first and the corner stores feel next.' },
+      { outcome: 'carrier_reroute',   weight: 0.15, severity: 'high', peakPp: -15, weeks: 8,
+        narrativeSeed: 'A major carrier moves its calls to another port — the berths go quiet, and the whole waterfront economy holds its breath.' }
+    ],
+    metricImpacts: []
   }
 ];
+
+// engine.193 cut 3b — who takes the ship at full strength (builder ruling S496: the Port,
+// retail, food & beverage, construction). Matched on Business_Ledger Sector; the Port of
+// Oakland is matched by sector 'Port & Logistics'. Everyone else takes the echo.
+var CHAOS_SHIP_PORT_SECTORS = /port|logistic|retail|food|grocery|wholesale|manufactur|construction/i;
 
 /**
  * Return the full vehicle config array. NAMED loadChaosCarsConfig_ (NOT loadConfig_ —
@@ -312,6 +353,21 @@ var VEHICLE_CONFIGS = [
  */
 function loadChaosCarsConfig_() {
   return VEHICLE_CONFIGS;
+}
+
+/**
+ * engine.193 cut 3b — the outcomes a vehicle can roll for a scope: every outcome with no
+ * scopes[] of its own, plus those that name this scope. (Citizen additionally needs a
+ * lifeHistoryTag — rollOutcome_ applies that.)
+ */
+function chaosOutcomePool_(vehicle, scope) {
+  var out = [];
+  var all = vehicle.textureOutcomes || [];
+  for (var i = 0; i < all.length; i++) {
+    if (all[i].scopes && all[i].scopes.indexOf(scope) < 0) continue;
+    out.push(all[i]);
+  }
+  return out;
 }
 
 /**
@@ -324,8 +380,7 @@ function loadChaosCarsConfig_() {
  */
 function validateAllChaosConfigs_() {
   var KNOWN_COLUMNS = {
-    'Sentiment': true, 'CrimeIndex': true, 'RetailVitality': true, 'EventAttractiveness': true,
-    'Annual_Revenue': true, 'Employee_Count': true
+    'Sentiment': true, 'CrimeIndex': true, 'RetailVitality': true, 'EventAttractiveness': true
   };
   for (var v = 0; v < VEHICLE_CONFIGS.length; v++) {
     var cfg = VEHICLE_CONFIGS[v];
@@ -336,15 +391,40 @@ function validateAllChaosConfigs_() {
     if (!isArrayChaos_(cfg.textureOutcomes) || cfg.textureOutcomes.length === 0) {
       throw new Error('chaos_cars: vehicle "' + cfg.name + '" has no textureOutcomes');
     }
-    var sum = 0;
-    for (var o = 0; o < cfg.textureOutcomes.length; o++) {
-      sum += Number(cfg.textureOutcomes[o].weight) || 0;
+    // engine.193 cut 3b: weights sum to 1 per non-citizen scope POOL (an outcome's own
+    // scopes[] restricts it). The citizen pool is gated by tag + life state and renormalized
+    // at roll time, so it is not sum-checked (street_sweeper's is 0.6 by design).
+    for (var o0 = 0; o0 < cfg.textureOutcomes.length; o0++) {
+      var osc = cfg.textureOutcomes[o0].scopes;
+      if (osc) for (var q = 0; q < osc.length; q++) {
+        if (cfg.scopes.indexOf(osc[q]) < 0) {
+          throw new Error('chaos_cars: vehicle "' + cfg.name + '" outcome "' + cfg.textureOutcomes[o0].outcome + '" scope "' + osc[q] + '" is not a vehicle scope');
+        }
+      }
     }
-    if (Math.abs(sum - 1) > 0.001) {
-      throw new Error('chaos_cars: vehicle "' + cfg.name + '" texture weights sum to ' + sum + ' (expected 1.0)');
+    for (var s = 0; s < cfg.scopes.length; s++) {
+      var scope = cfg.scopes[s];
+      if (scope === 'citizen') continue;
+      var pool = chaosOutcomePool_(cfg, scope);
+      var sum = 0;
+      for (var o = 0; o < pool.length; o++) {
+        sum += Number(pool[o].weight) || 0;
+        if (scope === 'business' && !isFinite(Number(pool[o].bizEvent))) {
+          throw new Error('chaos_cars: vehicle "' + cfg.name + '" business outcome "' + pool[o].outcome + '" has no numeric bizEvent');
+        }
+        if (scope === 'port' && (!isFinite(Number(pool[o].peakPp)) || !(Number(pool[o].weeks) >= 1))) {
+          throw new Error('chaos_cars: vehicle "' + cfg.name + '" port outcome "' + pool[o].outcome + '" needs peakPp and weeks >= 1');
+        }
+      }
+      if (Math.abs(sum - 1) > 0.001) {
+        throw new Error('chaos_cars: vehicle "' + cfg.name + '" ' + scope + ' outcome weights sum to ' + sum + ' (expected 1.0)');
+      }
     }
     var impacts = isArrayChaos_(cfg.metricImpacts) ? cfg.metricImpacts : [];
     for (var m = 0; m < impacts.length; m++) {
+      if (impacts[m].scope !== 'neighborhood') {
+        throw new Error('chaos_cars: vehicle "' + cfg.name + '" metricImpact scope "' + impacts[m].scope + '" — only neighborhood impacts write columns (business = bizEvent, engine.193)');
+      }
       if (!KNOWN_COLUMNS[impacts[m].column]) {
         throw new Error('chaos_cars: vehicle "' + cfg.name + '" metricImpact unknown column "' + impacts[m].column + '"');
       }
@@ -376,6 +456,8 @@ if (typeof module !== 'undefined' && module.exports) {
     validateOutcome: validateOutcome,
     validateVehicleConfig: validateVehicleConfig,
     VEHICLE_CONFIGS: VEHICLE_CONFIGS,
+    CHAOS_SHIP_PORT_SECTORS: CHAOS_SHIP_PORT_SECTORS,
+    chaosOutcomePool_: chaosOutcomePool_,
     loadChaosCarsConfig_: loadChaosCarsConfig_,
     validateAllChaosConfigs_: validateAllChaosConfigs_
   };

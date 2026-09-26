@@ -189,6 +189,8 @@ function finalizeCycleState_(ctx) {
     // ({ BIZ_ID: [streak, win] }, nonzero entries only) — applyBusinessDynamics_
     // reads it back next Cycle; a blob reset rebuilds from zero. ~20 bytes/row.
     businessDynamics: S.businessDynamicsState || {},
+    // engine.193 cut 3b: the running ship episode (runChaosShip_) — ~120 bytes, null when none.
+    chaosShip: S.chaosShip || null,
 
   };
 

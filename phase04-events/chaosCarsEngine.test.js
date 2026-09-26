@@ -11,6 +11,8 @@ const decay = require('../utilities/chaosCarsDecay');
 global.validateOutcome = cfg.validateOutcome;
 global.loadChaosCarsConfig_ = cfg.loadChaosCarsConfig_;
 global.validateAllChaosConfigs_ = cfg.validateAllChaosConfigs_;
+global.chaosOutcomePool_ = cfg.chaosOutcomePool_;
+global.CHAOS_SHIP_PORT_SECTORS = cfg.CHAOS_SHIP_PORT_SECTORS;
 global.chaosDecayResidualOneCycle_ = decay.chaosDecayResidualOneCycle_;
 
 // PropertiesService stub (in-memory key/value) for the neighborhood residual store.
@@ -152,24 +154,72 @@ console.log('\nTest 3: citizen scope writeback');
   }
 }
 
-// ── Test 4: business writeback — trimmed-col cell intents, empty→0 base ──
-console.log('\nTest 4: business scope writeback');
+// ── Test 4: business scope — a signed Growth_Rate event, NO Business_Ledger cells (engine.193 cut 3b) ──
+console.log('\nTest 4: business scope → signed event fold, no cells');
 {
   let found = null;
   for (let s = 1; s <= 120 && !found; s++) {
     reset();
     const ctx = makeCtx(s);
     eng.runChaosCarsEngine_(ctx);
-    if (cellIntents.some(c => c.tab === 'Business_Ledger')) found = s;
+    if (chaosRows.some(r => r.targetScope === 'business')) found = ctx;
   }
-  assert('a business cell intent was produced', !!found);
+  assert('a business event was produced', !!found);
   if (found) {
-    const bc = cellIntents.filter(c => c.tab === 'Business_Ledger');
-    // Annual_Revenue is col index 6 (0-based) → col 7 (1-based); Employee_Count idx 4 → col 5
-    assert('business cell targets Annual_Revenue(7) or Employee_Count(5)',
-      bc.every(c => c.c === 7 || c.c === 5));
-    assert('business cell value is finite', bc.every(c => typeof c.v === 'number' && isFinite(c.v)));
+    const fold = found.summary.chaosBusinessFold || {};
+    const bizRows = chaosRows.filter(r => r.targetScope === 'business');
+    assert('fold is { BIZ_ID: number }', Object.keys(fold).length > 0 && Object.keys(fold).every(k => /^BIZ-/.test(k) && typeof fold[k] === 'number'));
+    assert('each business row records Growth_Rate + its outcome bizEvent', bizRows.every(r => r.primaryMetric === 'Growth_Rate' && typeof r.metricMagnitude === 'number'));
+    assert('NO Business_Ledger cell intent (dynamics owns the columns)', !cellIntents.some(c => c.tab === 'Business_Ledger'));
   }
+  // mail truck: the business pool is business-only outcomes, the citizen pool citizen-only
+  const mail = cfg.VEHICLE_CONFIGS.find(v => v.name === 'mail_truck');
+  const bizPool = cfg.chaosOutcomePool_(mail, 'business').map(o => o.outcome);
+  const citPool = cfg.chaosOutcomePool_(mail, 'citizen').map(o => o.outcome);
+  assert('mail truck carries business news both ways', bizPool.includes('lost_contract_notice') && bizPool.includes('new_contract_letter') && !bizPool.includes('lost_package'));
+  assert('mail truck citizen pool unchanged', citPool.length === 3 && citPool.includes('lost_package'));
+  let good = 0, bad = 0;
+  for (let s = 1; s <= 400; s++) { const o = eng.rollOutcome_(rngFrom(s), mail, 'business', null); if (o.bizEvent > 0) good++; else if (o.bizEvent < 0) bad++; }
+  assert('mail to a business: both signs roll, lean negative', good > 100 && bad > good, good + '/' + bad);
+  const insp = cfg.VEHICLE_CONFIGS.find(v => v.name === 'building_inspector');
+  assert('a passed inspection is 0; a forced closure is the heavy end', insp.textureOutcomes.find(o => o.outcome === 'passed').bizEvent === 0 &&
+    insp.textureOutcomes.find(o => o.outcome === 'forced_temporary_closure').bizEvent === -2);
+}
+
+// ── Test 4b: the ship — episodic, never picked per event, start → peak → end → aftermath ──
+console.log('\nTest 4b: the ship');
+{
+  const configs = cfg.VEHICLE_CONFIGS;
+  let shipPicked = 0;
+  for (let s = 1; s <= 3000; s++) if (eng.pickVehicle_(rngFrom(s), configs).name === 'cargo_ship') shipPicked++;
+  assert('the per-event picker never draws the ship', shipPicked === 0);
+  // draw count constant: two draws whether an episode starts, runs, or nothing happens
+  const counting = (vals) => { let i = 0; const f = () => vals[i++ % vals.length]; f.count = () => i; return f; };
+  const quiet = counting([0.99, 0.5]); const qctx = { summary: { chaosCarsEvents: [] }, config: {} };
+  eng.runChaosShip_(qctx, quiet, 200, configs);
+  assert('no roll under the chance → no episode, two draws', qctx.summary.chaosShip === null && quiet.count() === 2);
+  // start a reroute: roll 0.01 < 0.18; pick 0.99 → last outcome (carrier_reroute, weight .15 at the top)
+  reset();
+  const r0 = counting([0.01, 0.99]); const c0 = { summary: { chaosCarsEvents: [] }, config: { chaosShipChancePerCycle: 0.18 } };
+  const ep0 = eng.runChaosShip_(c0, r0, 200, configs);
+  assert('episode starts: carrier_reroute, 8 weeks, −15pp, half strength', ep0.outcome === 'carrier_reroute' && ep0.weeks === 8 && ep0.peakPp === -15 && ep0.factor === 0.5 && ep0.phase === 'start' && r0.count() === 2);
+  assert('start writes one Chaos_Cars row (port) + a BUSINESS world event with a desk seed', chaosRows.length === 1 && chaosRows[0].targetScope === 'port' && !!chaosRows[0].narrativeSeed &&
+    c0.summary.worldEvents.length === 1 && c0.summary.worldEvents[0].domain === 'BUSINESS' && c0.summary.worldEvents[0].severity === 'high');
+  const phases = [], factors = [];
+  let prev = ep0;
+  for (let c = 201; c <= 210; c++) {
+    const r = counting([0.0, 0.0]); // would start a ship if the slot were free
+    const cx = { summary: { chaosCarsEvents: [], previousCycleState: { chaosShip: prev } }, config: { chaosShipChancePerCycle: 0.18 } };
+    const ep = eng.runChaosShip_(cx, r, c, configs);
+    assert('two draws at cycle ' + c, r.count() === 2);
+    phases.push(ep ? ep.phase : 'none'); factors.push(ep ? ep.factor : null);
+    prev = cx.summary.chaosShip;
+  }
+  assert('lifecycle: peak ×6, end, aftermath, then the slot is free (next roll starts a new one)',
+    JSON.stringify(phases.slice(0, 8)) === JSON.stringify(['peak', 'peak', 'peak', 'peak', 'peak', 'peak', 'end', 'aftermath']) && phases[8] === 'start',
+    JSON.stringify(phases));
+  assert('factors: 1 through the peak, 0.5 at the end, 0 in the aftermath', JSON.stringify(factors.slice(0, 8)) === JSON.stringify([1, 1, 1, 1, 1, 1, 0.5, 0]));
+  assert('one-week berth delay is full strength its one week', eng.chaosShipFactor_(0, 1) === 1 && eng.chaosShipFactor_(1, 1) === 0);
 }
 
 // ── Test 5: neighborhood scope — residual fold only, NO Neighborhood_Map write ──

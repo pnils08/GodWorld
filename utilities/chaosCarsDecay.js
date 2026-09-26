@@ -3,7 +3,7 @@
  *
  * [engine/sheet] engine.11 chaos-cars T4.1 (plan §S265 + §Hard Constraints).
  * Clasped dual-use (utilities/, not lib/): read by BOTH the Phase-10 neighborhood
- * writer fold (residual decay) AND Phase-5 applyChaosDecay_ (business rows) — both
+ * writer fold (residual decay); Phase-5 applyChaosDecay_ (business rows) retired engine.193 — both
  * Apps Script. Module-guard tail for Node (dry-run/report scripts). var+global style
  * required for cross-file global visibility under Apps Script V8.
  *

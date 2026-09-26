@@ -14,9 +14,10 @@
  * Writes: ONE range intent over the Annual_Revenue..Growth_Rate columns (adjacent
  * G:H on the live tab; two column intents if a copy ever separates them). A
  * per-cell intent would cost one setValue per cell (persistenceExecutor.js:347).
- * applyChaosDecay_'s same-cycle Annual_Revenue cell intents execute after this
- * range (priority 100 vs 90) and win on the few rows they touch — chaos decay is
- * a small revert; the drift resumes from the sheet value next cycle.
+ * This is the only Annual_Revenue writer in the engine: engine.193 (0848f7d3)
+ * retired the chaos revenue cells that executed after this range (priority 100
+ * vs 90) and replaced the week's revenue. Chaos reaches a business as a signed
+ * event in the drift (chaosAtBusiness) and the ship as a carried offset.
  *
  * State: the distress streak and the success window ride the carry-forward
  * (S.businessDynamicsState → PREV_CYCLE_STATE_JSON.businessDynamics, engine.122
@@ -55,7 +56,8 @@ var BIZ_DYNAMICS_REQUIRED_KEYS = [
   'bizVol_faith', 'bizVol_retail', 'bizVol_food', 'bizVol_health', 'bizVol_tech',
   'bizVol_professional', 'bizVol_construction', 'bizVol_arts', 'bizVol_education', 'bizVol_default',
   'bizInitiativeStallDrag', // engine.250: share of the event scale a failing initiative drains per Cycle (builder-ruled 0.5)
-  'bizDeclineStreak' // Task 6 (S413): distress cycles before shedding starts — not in the signed table; proposed 4, half the closure streak
+  'bizDeclineStreak', // Task 6 (S413): distress cycles before shedding starts — not in the signed table; proposed 4, half the closure streak
+  'bizShipEchoShare'  // engine.193 cut 3b: share of a ship episode's Growth_Rate offset felt by businesses off the port (builder default: small)
 ];
 
 // The class mint table — the engine copy of scripts/ingestPublishedEntities.js
@@ -374,9 +376,13 @@ function bizDriftOne_(cfg, biz, prevState, inputs, cycle) {
   var scale = cfg.bizEventShockScale;
 
   // 1. events — the signal
+  // engine.193 cut 3b: chaos reads SIGNED. Was −scale for any hit — an inspection passed,
+  // a false alarm and a revenue-raising mail drop all cut growth, and a hood the ice-cream
+  // truck cheered up dragged every shop in it. chaosAtBusiness = the outcomes' summed
+  // bizEvent; chaosInHood = the hood's fresh chaos swing, signed (chaosHoodSign_, ±1).
   var ev = 0;
-  if (inputs.chaosAtBusiness) ev -= scale;
-  if (inputs.chaosInHood) ev -= scale;
+  ev += (Number(inputs.chaosAtBusiness) || 0) * scale;
+  ev += (Number(inputs.chaosInHood) || 0) * scale;
   // engine.250: positives are EVENTS, negatives are CONDITIONS (the engine.139 rule).
   // An initiative changing phase in the hood is news and pays once, the Cycle it
   // happens; a standing initiative pays nothing here — its ambient lift already
@@ -425,11 +431,39 @@ function bizDriftOne_(cfg, biz, prevState, inputs, cycle) {
   var drift = bizClamp_((ev + vitMod + pressure + shock + noise) * vol, -cfg.bizDriftMaxDown, cfg.bizDriftMaxUp);
   // engine.178: a driven owner (drive +2) turns a good week into a bigger one; never a bad one into a good one
   if (drift > 0 && inputs.ownerDriveBand >= 2 && inputs.ownerExpandMult > 1) drift = bizClamp_(drift * inputs.ownerExpandMult, 0, cfg.bizDriftMaxUp);
-  var growth = Math.round(bizClamp_(biz.growth + drift, cfg.bizGrowthFloor, cfg.bizGrowthCeil) * 100) / 100;
+  // engine.193 cut 3b: the ship's offset steps AROUND the weekly drift cap (a port shock is
+  // not a slow week). The business keeps a shock-free track underneath (growth minus the
+  // offset carried from last week) that drifts exactly as it would with no ship; the
+  // offset sits on top, clamped. The aftermath (offset 0) lands back on that track — no
+  // ratchet either way, including weeks the floor swallowed.
+  var shipPrev = Number(prevState.ship) || 0;
+  var g0 = bizClamp_(biz.growth - shipPrev + drift, cfg.bizGrowthFloor, cfg.bizGrowthCeil);
+  var g1 = bizClamp_(g0 + (Number(inputs.shipOffset) || 0), cfg.bizGrowthFloor, cfg.bizGrowthCeil);
+  var growth = Math.round(g1 * 100) / 100;
+  var shipApplied = Math.round((growth - Math.round(g0 * 100) / 100) * 100) / 100;
   var revenue = biz.revenue === null ? null : Math.round(biz.revenue * (1 + growth / 100 / 52));
   var streak = growth < 0 ? (Number(prevState.streak) || 0) + 1 : 0;
-  return { growth: growth, revenue: revenue, drift: drift, streak: streak, win: win, disrupted: disrupted, cls: cls,
-    parts: { ev: ev, vit: vitMod, pressure: pressure, shock: shock, noise: noise } };
+  return { growth: growth, revenue: revenue, drift: drift, streak: streak, win: win, disrupted: disrupted, cls: cls, ship: shipApplied,
+    parts: { ev: ev, vit: vitMod, pressure: pressure, shock: shock, noise: noise, ship: shipApplied - shipPrev } };
+}
+
+// engine.193 cut 3b — a hood's fresh chaos swing this Cycle as a sign for its businesses
+// (±1): mood, retail and event pull up with their sign; crime counts against. Each column
+// is scaled by its typical single-event size in chaosCarsConfig (Sentiment ~0.08, Retail
+// ~2, Events ~2.5, Crime ~0.08), so one ordinary hit reads about ±1.
+function chaosHoodSign_(fold) {
+  if (!fold) return 0;
+  var sc = (Number(fold.Sentiment) || 0) / 0.08 + (Number(fold.RetailVitality) || 0) / 2 +
+    (Number(fold.EventAttractiveness) || 0) / 2.5 - (Number(fold.CrimeIndex) || 0) / 0.08;
+  return bizClamp_(Math.round(sc * 100) / 100, -1, 1);
+}
+
+// engine.193 cut 3b — the ship's target offset for one business this Cycle (pp).
+function bizShipOffset_(ship, sector, echoShare) {
+  if (!ship || !(Number(ship.factor) > 0)) return 0;
+  var portRe = (typeof CHAOS_SHIP_PORT_SECTORS !== 'undefined') ? CHAOS_SHIP_PORT_SECTORS : /port|logistic|retail|food|grocery|wholesale|manufactur|construction/i;
+  var share = portRe.test(String(sector || '')) ? 1 : (Number(echoShare) || 0);
+  return Math.round(Number(ship.factor) * (Number(ship.peakPp) || 0) * share * 100) / 100;
 }
 
 function applyBusinessDynamics_(ctx) {
@@ -459,8 +493,7 @@ function applyBusinessDynamics_(ctx) {
   var coverageDev = bizCoverageDeviation_(S);   // engine.193 — city-level until per-business coverage has a reader
   var vitalityMedian = bizVitalityMedian_(ns);  // engine.193
 
-  var chaosBizIds = {};
-  for (var ck in chaosBiz) { if (chaosBiz.hasOwnProperty(ck)) chaosBizIds[String(ck).split('::')[0]] = true; }
+  var ship = S.chaosShip || null;               // engine.193 cut 3b — runChaosShip_ (Phase 4)
 
   var state = {};
   var declines = {}, closures = [];
@@ -500,7 +533,7 @@ function applyBusinessDynamics_(ctx) {
     var hood = String(row[iHood] || '').trim();
     var biz = { id: id, sector: row[iSec], hood: hood, growth: bizParseGrowth_(row[iGrow]), revenue: bizParseRevenue_(row[iRev]) };
     if (!id) { revCol.push([row[iRev]]); growCol.push([row[iGrow]]); continue; } // untouched
-    var ps = prev[id] ? { streak: prev[id][0], win: prev[id][1], closed: prev[id][2] || 0 } : { streak: 0, win: 0, closed: 0 };
+    var ps = prev[id] ? { streak: prev[id][0], win: prev[id][1], closed: prev[id][2] || 0, ship: prev[id][3] || 0 } : { streak: 0, win: 0, closed: 0, ship: 0 };
     var stated = iCnt >= 0 ? (Number(row[iCnt]) || 0) : 0;
     if (ps.closed) {
       // Task 7: the wind-down — pinned at the floor, shedding everyone left, never reopening
@@ -518,8 +551,9 @@ function applyBusinessDynamics_(ctx) {
     // (owner/founder tag, POPID-carrying) resolved to the ledger row's DialState.
     var ownerB = bizOwnerBands_(ctx, iKP >= 0 ? row[iKP] : '');
     var inputs = {
-      chaosAtBusiness: !!chaosBizIds[id],
-      chaosInHood: !!(hood && chaosHood[hood]),
+      chaosAtBusiness: Number(chaosBiz[id]) || 0,
+      chaosInHood: hood ? chaosHoodSign_(chaosHood[hood]) : 0,
+      shipOffset: bizShipOffset_(ship, row[iSec], cfg.bizShipEchoShare),
       initiativeAdvanced: !!(hood && initHood[hood] && Number(initHood[hood].advanced) > 0),
       initiativeFailing: !!(hood && initHood[hood] && Number(initHood[hood].sentiment) < 0),
       coverageDeviation: coverageDev,
@@ -588,7 +622,8 @@ function applyBusinessDynamics_(ctx) {
       var shed = Math.min(stated, d.streak - cfg.bizDeclineStreak);
       if (shed > 0) { declines[id] = shed; out.shed += shed; }
     }
-    if (d.streak || d.win) state[id] = [d.streak, d.win, 0];
+    if (d.streak || d.win || d.ship) state[id] = [d.streak, d.win, 0, d.ship];
+    if (d.parts.ship) out.shipMoved = (out.shipMoved || 0) + 1;
     revCol.push([d.revenue === null ? row[iRev] : d.revenue]);
     growCol.push([d.growth]);
     tallyBiz(hood, d.revenue, d.growth, false);
@@ -621,7 +656,8 @@ function applyBusinessDynamics_(ctx) {
   Logger.log('applyBusinessDynamics_ engine.96: ' + out.rows + ' businesses, ' + out.drifted + ' drifted, ' +
     out.distressed + ' in distress, ' + out.disrupted + ' disrupted, ' + out.successWindows + ' under success pressure, ' +
     out.shed + ' shed, ' + out.closed + ' closing now, ' + out.closing + ' winding down, mayor ' + mayorApproval +
-    ', initiative lift ' + (out.initLift || 0) + ' / drag ' + (out.initDrag || 0));
+    ', initiative lift ' + (out.initLift || 0) + ' / drag ' + (out.initDrag || 0) +
+    ', ship ' + (ship ? ship.outcome + ' ' + ship.phase + ' on ' + (out.shipMoved || 0) : 'none'));
   return out;
 }
 
@@ -698,6 +734,8 @@ if (typeof module !== 'undefined' && module.exports) {
     bizParseRevenue_: bizParseRevenue_,
     bizDynamicsConfig_: bizDynamicsConfig_,
     bizDriftOne_: bizDriftOne_,
+    chaosHoodSign_: chaosHoodSign_,
+    bizShipOffset_: bizShipOffset_,
     bizCoverageDeviation_: bizCoverageDeviation_,
     bizVitalityMedian_: bizVitalityMedian_,
     applyBusinessDynamics_: applyBusinessDynamics_,

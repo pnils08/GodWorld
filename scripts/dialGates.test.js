@@ -74,7 +74,7 @@ function ledgerCtx(rows) { return { summary: {}, config: { dialOwnerStreakRoom: 
   const plain = BD.bizDriftOne_(cfg, biz, { streak: 0, win: 0 }, Object.assign({ ownerDriveBand: 0, ownerExpandMult: 1.25 }, inputsBase), 106);
   const driven = BD.bizDriftOne_(cfg, biz, { streak: 0, win: 0 }, Object.assign({ ownerDriveBand: 2, ownerExpandMult: 1.25 }, inputsBase), 106);
   assert('business: positive drift x1.25 for a driven owner', Math.abs(driven.drift - plain.drift * 1.25) < 1e-9, `${plain.drift} ${driven.drift}`);
-  const bad = { chaosAtBusiness: true, chaosInHood: true, initiativeAdvanced: false, coverageDeviation: -0.1, vitality: 5, vitalityMedian: 5, mayorApproval: 50 };
+  const bad = { chaosAtBusiness: -1, chaosInHood: -1, initiativeAdvanced: false, coverageDeviation: -0.1, vitality: 5, vitalityMedian: 5, mayorApproval: 50 };
   const badPlain = BD.bizDriftOne_(cfg, biz, { streak: 0, win: 0 }, Object.assign({ ownerDriveBand: 0, ownerExpandMult: 1.25 }, bad), 106);
   const badDriven = BD.bizDriftOne_(cfg, biz, { streak: 0, win: 0 }, Object.assign({ ownerDriveBand: 2, ownerExpandMult: 1.25 }, bad), 106);
   assert('business: a bad week is never multiplied', badDriven.drift === badPlain.drift && badPlain.drift < 0);

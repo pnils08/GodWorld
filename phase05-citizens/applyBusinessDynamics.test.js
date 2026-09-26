@@ -17,7 +17,7 @@ let passed = 0, failed = 0;
 function assert(label, cond, detail) { if (cond) { console.log(`  ok   ${label}`); passed++; } else { console.error(`  FAIL ${label}${detail ? ': ' + detail : ''}`); failed++; } }
 
 // the signed Task 3 table, as the self-arm seeds it
-const CFG = { bizDeclineStreak: 4, bizDriftMaxUp: 1.0, bizDriftMaxDown: 1.0, bizGrowthCeil: 40, bizGrowthFloor: -10, bizNoiseBound: 0.25, bizCoverageUnit: 0.1, bizVitalityGain: 0.15, bizSuccessWindow: 3, bizSuccessVitalityHigh: 9.0, bizSuccessApprovalHigh: 85, bizSuccessPenalty: 0.3, bizDisruptBaseChance: 2, bizDisruptSuccessMult: 3, bizDisruptShock: 2.0, bizClosureStreak: 8, bizClosureRevenueFloorPct: 40, bizEventShockScale: 1.0, bizVol_faith: 0.5, bizVol_retail: 1.2, bizVol_food: 1.3, bizVol_health: 0.7, bizVol_tech: 1.5, bizVol_professional: 0.8, bizVol_construction: 1.1, bizVol_arts: 1.2, bizVol_education: 0.6, bizVol_default: 1.0,
+const CFG = { bizShipEchoShare: 0.15, bizDeclineStreak: 4, bizDriftMaxUp: 1.0, bizDriftMaxDown: 1.0, bizGrowthCeil: 40, bizGrowthFloor: -10, bizNoiseBound: 0.25, bizCoverageUnit: 0.1, bizVitalityGain: 0.15, bizSuccessWindow: 3, bizSuccessVitalityHigh: 9.0, bizSuccessApprovalHigh: 85, bizSuccessPenalty: 0.3, bizDisruptBaseChance: 2, bizDisruptSuccessMult: 3, bizDisruptShock: 2.0, bizClosureStreak: 8, bizClosureRevenueFloorPct: 40, bizEventShockScale: 1.0, bizVol_faith: 0.5, bizVol_retail: 1.2, bizVol_food: 1.3, bizVol_health: 0.7, bizVol_tech: 1.5, bizVol_professional: 0.8, bizVol_construction: 1.1, bizVol_arts: 1.2, bizVol_education: 0.6, bizVol_default: 1.0,
   bizInitiativeStallDrag: 0.5,   // engine.250, builder-ruled half weight
   // engine.178 owner dial gates, as ensureEngine178Config_ seeds them
   dialOwnerStreakRoom: 1, dialOwnerDriveExpandMult: 1.25 };
@@ -53,7 +53,7 @@ console.log('the drift, one business');
   const b = mod.bizDriftOne_(CFG, biz, { streak: 0, win: 0 }, quiet, 110);
   assert('deterministic: same inputs, same output', JSON.stringify(a) === JSON.stringify(b));
   assert('quiet cycle at neutral vitality: only noise moves it, inside ±0.25×vol', Math.abs(a.drift) <= 0.25 * 1.2 + 1e-9 && a.parts.ev === 0 && a.parts.vit === 0 && a.parts.pressure === 0, JSON.stringify(a.parts));
-  const hit = mod.bizDriftOne_(CFG, biz, { streak: 0, win: 0 }, Object.assign({}, quiet, { chaosAtBusiness: true, chaosInHood: true, coverageDeviation: -0.1 }), 110);
+  const hit = mod.bizDriftOne_(CFG, biz, { streak: 0, win: 0 }, Object.assign({}, quiet, { chaosAtBusiness: -1, chaosInHood: -1, coverageDeviation: -0.1 }), 110);
   assert('events are the signal: chaos at the business + in the hood + bad press = −2.0 capped, drift clamped at −1.0', hit.parts.ev === -2.0 && hit.drift === -1.0 && hit.growth === 1.0 && hit.streak === 0, JSON.stringify(hit));
   const lift = mod.bizDriftOne_(CFG, biz, { streak: 0, win: 0 }, Object.assign({}, quiet, { initiativeAdvanced: true, coverageDeviation: 0.2 }), 110);
   assert('an initiative landing + good press = +1.5 before vol, clamped +1.0', lift.parts.ev === 1.5 && lift.drift === 1.0);
@@ -66,7 +66,7 @@ console.log('the drift, one business');
   assert('disruption is a seeded 2 % draw (≈40/2000), ×3 under the success window (≈120/2000)', hits > 20 && hits < 70 && hitsWin > 80 && hitsWin < 170, hits + ' / ' + hitsWin);
   const neg = mod.bizDriftOne_(CFG, { id: 'BIZ-N', sector: 'Retail', hood: 'T', growth: -0.5, revenue: 500000 }, { streak: 4, win: 0 }, quiet, 110);
   assert('distress streak counts consecutive negative-growth cycles; revenue follows growth/52', (neg.growth < 0 ? neg.streak === 5 : neg.streak === 0) && neg.revenue === Math.round(500000 * (1 + neg.growth / 100 / 52)));
-  const fl = mod.bizDriftOne_(CFG, { id: 'BIZ-F', sector: 'Tech', hood: 'T', growth: -9.9, revenue: 1 }, { streak: 0, win: 0 }, Object.assign({}, quiet, { chaosAtBusiness: true, chaosInHood: true }), 110);
+  const fl = mod.bizDriftOne_(CFG, { id: 'BIZ-F', sector: 'Tech', hood: 'T', growth: -9.9, revenue: 1 }, { streak: 0, win: 0 }, Object.assign({}, quiet, { chaosAtBusiness: -1, chaosInHood: -1 }), 110);
   const ce = mod.bizDriftOne_(CFG, { id: 'BIZ-C', sector: 'Tech', hood: 'T', growth: 39.9, revenue: 1 }, { streak: 0, win: 0 }, Object.assign({}, quiet, { initiativeAdvanced: true, coverageDeviation: 0.1 }), 110);
   assert('floor −10 and ceiling 40 hold', fl.growth === -10 && ce.growth === 40);
   assert('blank revenue stays null (no signal) while growth still drifts', mod.bizDriftOne_(CFG, { id: 'BIZ-B', sector: 'Education', hood: 'T', growth: 1, revenue: null }, { streak: 0, win: 0 }, quiet, 110).revenue === null);
@@ -75,7 +75,7 @@ console.log('the drift, one business');
 console.log('the pass over a ledger');
 {
   ranges = [];
-  const ctx = ctxWith({ S: { neighborhoodState: { Temescal: { retailVitality: 7.2 }, 'West Oakland': { retailVitality: 5.1 } }, chaosBusinessFold: { 'BIZ-00002::Annual_Revenue': { base: 370000, delta: -5000 } }, initiativeNeighborhoodEffects: { Downtown: { traffic: 0.1 } }, editionSentimentBoost: 0.3, previousCycleState: { businessDynamics: { 'BIZ-00004': [2, 0] } } } });
+  const ctx = ctxWith({ S: { neighborhoodState: { Temescal: { retailVitality: 7.2 }, 'West Oakland': { retailVitality: 5.1 } }, chaosBusinessFold: { 'BIZ-00002': -1 }, initiativeNeighborhoodEffects: { Downtown: { traffic: 0.1 } }, editionSentimentBoost: 0.3, previousCycleState: { businessDynamics: { 'BIZ-00004': [2, 0] } } } });
   const out = mod.applyBusinessDynamics_(ctx);
   assert('4 rows walked; one range intent over Annual_Revenue..Growth_Rate (adjacent, trimmed headers), priority 90', out.rows === 4 && ranges.length === 1 && ranges[0].tab === 'Business_Ledger' && ranges[0].r === 2 && ranges[0].c === 7 && ranges[0].values.length === 4 && ranges[0].values[0].length === 2 && ranges[0].priority === 90, JSON.stringify(ranges.map(x => [x.r, x.c, x.values.length])));
   const vals = ranges[0].values;
@@ -100,7 +100,7 @@ console.log('wiring');
   assert('ensureEngine96Config_ self-arms beside 133/135', /ensureEngine135Config_\(ss\);[^\n]*\n\s*ensureEngine96Config_\(ss\);/.test(orch));
   const contract = fs.readFileSync(path.join(__dirname, '..', 'phase01-config', 'engine94SheetContract.js'), 'utf8');
   const seeded = (contract.match(/\['biz[A-Za-z_]+',/g) || []).map(s => s.slice(2, -2));
-  assert('the 27 signed keys + bizDeclineStreak + bizInitiativeStallDrag (engine.250) + the 4 owner-door keys (Task 12) are seeded; the dynamics pass requires exactly its 29', seeded.length === 33 && mod.BIZ_DYNAMICS_REQUIRED_KEYS.length === 29 && mod.BIZ_DYNAMICS_REQUIRED_KEYS.every(k => seeded.includes(k)), JSON.stringify(seeded));
+  assert('the 27 signed keys + bizDeclineStreak + bizInitiativeStallDrag (engine.250) + bizShipEchoShare (engine.193 3b) + the 4 owner-door keys (Task 12) are seeded; the dynamics pass requires exactly its 30', seeded.length === 34 && mod.BIZ_DYNAMICS_REQUIRED_KEYS.length === 30 && mod.BIZ_DYNAMICS_REQUIRED_KEYS.every(k => seeded.includes(k)), JSON.stringify(seeded));
   const fin = fs.readFileSync(path.join(__dirname, '..', 'phase09-digest', 'finalizeCycleState.js'), 'utf8');
   assert('finalizeCycleState carries businessDynamics from S.businessDynamicsState', /businessDynamics: S\.businessDynamicsState \|\| \{\}/.test(fin));
   const gw = fs.readFileSync(path.join(__dirname, '..', 'phase05-citizens', 'generationalWealthEngine.js'), 'utf8');
@@ -269,6 +269,51 @@ console.log('engine.193 cut 2 — coverage against its own weeks, vitality again
   const noMid = mod.bizDriftOne_(CFG, biz, { streak: 0, win: 0 }, Object.assign({}, base, { vitality: 9, vitalityMedian: null }), 121);
   assert('vitality reads against the median, both ways; no median → no term',
     Math.abs(hi.parts.vit - 0.3) < 1e-9 && Math.abs(lo.parts.vit + 0.3) < 1e-9 && noMid.parts.vit === 0, [hi.parts.vit, lo.parts.vit]);
+}
+console.log('engine.193 cut 3b — chaos reads signed; the ship steps around the cap and releases');
+{
+  const biz = { id: 'BIZ-S', sector: 'Professional Services', hood: 'T', growth: 5, revenue: 1 };
+  const base = { chaosAtBusiness: 0, chaosInHood: 0, initiativeAdvanced: false, coverageDeviation: null, vitality: 7, vitalityMedian: 7, mayorApproval: 60 };
+  const good = mod.bizDriftOne_(CFG, biz, { streak: 0, win: 0 }, Object.assign({}, base, { chaosAtBusiness: 1 }), 121);
+  const zero = mod.bizDriftOne_(CFG, biz, { streak: 0, win: 0 }, Object.assign({}, base, { chaosAtBusiness: 0 }), 121);
+  const bad = mod.bizDriftOne_(CFG, biz, { streak: 0, win: 0 }, Object.assign({}, base, { chaosAtBusiness: -2 }), 121);
+  assert('a good letter lifts, a passed inspection is nothing, a blaze drags — the event term carries the sign',
+    good.parts.ev === 1 && zero.parts.ev === 0 && bad.parts.ev === -2, [good.parts.ev, zero.parts.ev, bad.parts.ev]);
+  assert('hood sign: cheer up +, crime down +, gloom −, nothing 0, capped ±1',
+    mod.chaosHoodSign_({ Sentiment: 0.08 }) === 1 && mod.chaosHoodSign_({ CrimeIndex: -0.08 }) === 1 &&
+    mod.chaosHoodSign_({ Sentiment: -0.04 }) === -0.5 && mod.chaosHoodSign_(undefined) === 0 &&
+    mod.chaosHoodSign_({ Sentiment: -0.5 }) === -1 && mod.chaosHoodSign_({ Sentiment: 0.04, RetailVitality: -1 }) === 0);
+  const ship = { factor: 1, peakPp: -15 };
+  assert('ship offset: port-dependent full, everyone else the echo, none when idle',
+    mod.bizShipOffset_(ship, 'Port & Logistics', 0.15) === -15 && mod.bizShipOffset_(ship, 'Retail', 0.15) === -15 &&
+    mod.bizShipOffset_(ship, 'Construction', 0.15) === -15 && mod.bizShipOffset_(ship, 'Education', 0.15) === -2.25 &&
+    mod.bizShipOffset_(null, 'Retail', 0.15) === 0 && mod.bizShipOffset_({ factor: 0, peakPp: -15 }, 'Retail', 0.15) === 0);
+  // An 8-week reroute on a port business at +10.69, quiet weeks: start 0.5, peak 1 ×6, end 0.5, aftermath 0.
+  const port = { id: 'BIZ-P', sector: 'Port & Logistics', hood: 'Jack London', growth: 10.69, revenue: null };
+  const quietPort = { id: 'BIZ-P', sector: 'Port & Logistics', hood: 'Jack London', growth: 10.69, revenue: null };
+  const factors = [0.5, 1, 1, 1, 1, 1, 1, 0.5, 0];
+  let st = { streak: 0, win: 0, ship: 0 }, qst = { streak: 0, win: 0 }, minG = 99, trace = [];
+  for (let w = 0; w < factors.length; w++) {
+    const d = mod.bizDriftOne_(CFG, port, st, Object.assign({}, base, { shipOffset: factors[w] * -15 }), 300 + w);
+    const q = mod.bizDriftOne_(CFG, quietPort, qst, base, 300 + w);
+    port.growth = d.growth; quietPort.growth = q.growth; st = { streak: d.streak, win: d.win, ship: d.ship }; qst = { streak: q.streak, win: q.win };
+    minG = Math.min(minG, d.growth); trace.push(d.growth);
+  }
+  assert('the reroute takes the Port negative (a weekly cap could not: max −1pp/week)', minG < 0, trace);
+  assert('aftermath hands back exactly what was applied: same growth as the quiet twin, nothing carried',
+    Math.abs(port.growth - quietPort.growth) < 1e-9 && st.ship === 0, [port.growth, quietPort.growth, st.ship]);
+  // Near the floor: the clamp eats part of the offset; release returns only what landed — no ratchet up.
+  const low = { id: 'BIZ-L', sector: 'Retail', hood: 'T', growth: -8, revenue: null };
+  const lowQ = { id: 'BIZ-L', sector: 'Retail', hood: 'T', growth: -8, revenue: null };
+  let ls = { streak: 0, win: 0, ship: 0 }, lq = { streak: 0, win: 0 };
+  [1, 1, 0].forEach((f, w) => {
+    const d = mod.bizDriftOne_(CFG, low, ls, Object.assign({}, base, { shipOffset: f * -15 }), 400 + w);
+    const q = mod.bizDriftOne_(CFG, lowQ, lq, base, 400 + w);
+    low.growth = d.growth; lowQ.growth = q.growth; ls = { streak: d.streak, win: d.win, ship: d.ship }; lq = { streak: q.streak, win: q.win };
+  });
+  assert('floor weeks: the release lands on the quiet twin exactly (no windfall, no loss)', Math.abs(low.growth - lowQ.growth) < 1e-9 && ls.ship === 0, [low.growth, lowQ.growth]);
+  const fin = fs.readFileSync(path.join(__dirname, '..', 'phase09-digest', 'finalizeCycleState.js'), 'utf8');
+  assert('finalizeCycleState carries the ship episode', /chaosShip: S\.chaosShip \|\| null/.test(fin));
 }
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

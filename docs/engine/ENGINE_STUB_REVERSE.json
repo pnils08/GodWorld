@@ -2,7 +2,7 @@
   "generated": "2026-09-26",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 182,
-  "functionsMapped": 1503,
+  "functionsMapped": 1508,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -1379,6 +1379,7 @@
         "phase03-population/generateCrisisBuckets.js::generateCrisisBuckets_",
         "phase03-population/generateCrisisBuckets.js::pushCrisisLifecycleEvent_",
         "phase03-population/generateCrisisSpikes.js::generateCrisisSpikes_",
+        "phase04-events/chaosCarsEngine.js::chaosShipWorldEvent_",
         "phase04-events/faithEventsEngine.js::runFaithEventsEngine_",
         "phase04-events/worldEventsEngine.js::worldEventsEngine_",
         "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_",
@@ -1398,6 +1399,7 @@
         "phase03-population/generateCrisisSpikes.js::generateCrisisSpikes_",
         "phase03-population/updateCrimeMetrics.js::updateCrimeMetrics_Phase3_",
         "phase04-events/buildCityEvents.js::buildCityEvents_",
+        "phase04-events/chaosCarsEngine.js::chaosShipWorldEvent_",
         "phase04-events/faithEventsEngine.js::runFaithEventsEngine_",
         "phase04-events/generateGameModeMicroEvents.js::generateGameModeMicroEvents_",
         "phase04-events/generateGenericCitizenMicroEvent.js::generateGenericCitizenMicroEvents_",
@@ -1766,6 +1768,7 @@
         "phase02-world-state/updateTransitMetrics.js::updateTransitMetrics_Phase2_",
         "phase03-population/applyDemographicDrift.js::businessDistressShare_",
         "phase03-population/generateCrisisBuckets.js::generateCrisisBuckets_",
+        "phase04-events/chaosCarsEngine.js::runChaosShip_",
         "phase04-events/worldEventsEngine.js::worldEventsEngine_",
         "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_",
         "phase05-citizens/bondEngine.js::updateExistingBonds_",
@@ -2826,7 +2829,7 @@
       ],
       "readers": [
         "phase04-events/chaosCarsEngine.js::accumulateBusinessEvent_",
-        "phase04-events/chaosCarsEngine.js::flushBusinessFold_",
+        "phase04-events/chaosCarsEngine.js::runChaosCarsEngine_",
         "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_"
       ]
     },
@@ -2836,8 +2839,8 @@
         "phase04-events/chaosCarsEngine.js::resolveChaosNeighborhoodFold_"
       ],
       "readers": [
+        "phase04-events/chaosCarsEngine.js::accumulateBusinessEvent_",
         "phase04-events/chaosCarsEngine.js::accumulateNeighborhoodFold_",
-        "phase04-events/chaosCarsEngine.js::flushBusinessFold_",
         "phase04-events/chaosCarsEngine.js::resolveChaosNeighborhoodFold_",
         "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_",
         "phase08-v3-chicago/v3NeighborhoodWriter.js::saveV3NeighborhoodMap_"
@@ -2848,7 +2851,7 @@
         "utilities/neighborhoodPulseMap.js::recordPulse_"
       ],
       "readers": [
-        "phase04-events/chaosCarsEngine.js::flushBusinessFold_",
+        "phase04-events/chaosCarsEngine.js::accumulateBusinessEvent_",
         "phase07-evening-media/applyStorySeeds.js::applyStorySeeds_",
         "phase08-v3-chicago/v3NeighborhoodWriter.js::saveV3NeighborhoodMap_",
         "utilities/neighborhoodPulseMap.js::pulseForEvent_",
@@ -2858,10 +2861,12 @@
     },
     "chaosCarsEvents": {
       "writers": [
-        "phase04-events/chaosCarsEngine.js::runChaosCarsEngine_"
+        "phase04-events/chaosCarsEngine.js::runChaosCarsEngine_",
+        "phase04-events/chaosCarsEngine.js::runChaosShip_"
       ],
       "readers": [
         "phase04-events/chaosCarsEngine.js::runChaosCarsEngine_",
+        "phase04-events/chaosCarsEngine.js::runChaosShip_",
         "phase07-evening-media/applyStorySeeds.js::applyStorySeeds_"
       ]
     },
@@ -2874,6 +2879,15 @@
         "phase07-evening-media/applyStorySeeds.js::applyStorySeeds_",
         "phase07-evening-media/storylineWeavingEngine.js::createChaosArcs_",
         "phase07-evening-media/storylineWeavingEngine.js::weaveStorylines_"
+      ]
+    },
+    "chaosShip": {
+      "writers": [
+        "phase04-events/chaosCarsEngine.js::runChaosShip_"
+      ],
+      "readers": [
+        "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_",
+        "phase09-digest/finalizeCycleState.js::finalizeCycleState_"
       ]
     },
     "chaosFriction": {
@@ -4719,7 +4733,6 @@
     },
     "Business_Ledger": {
       "writers": [
-        "phase04-events/chaosCarsEngine.js::flushBusinessFold_",
         "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_",
         "phase05-citizens/generationalWealthEngine.js::applyOwnerDraw_",
         "phase05-citizens/generationalWealthEngine.js::updateHeritage_",
@@ -4729,7 +4742,6 @@
       "readers": [
         "phase02-world-state/commuteFlowEngine.js::buildCommuteFlows_",
         "phase03-population/applyDemographicDrift.js::businessDistressShare_",
-        "phase04-events/chaosCarsEngine.js::flushBusinessFold_",
         "phase04-events/chaosCarsEngine.js::loadBusinessRows_",
         "phase04-events/chaosCarsEngine.test.js::makeCtx",
         "phase04-events/chaosCarsEngine.test.js::reset",

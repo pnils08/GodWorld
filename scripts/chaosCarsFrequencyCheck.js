@@ -27,7 +27,8 @@ async function main() {
   }
 
   const counts = {};
-  for (const r of rows) counts[r.CycleId] = (counts[r.CycleId] || 0) + 1;
+  // engine.193 cut 3b: the ship (TargetScope 'port') is episodic, outside the 3-15 vehicle draw
+  for (const r of rows) if (r.TargetScope !== 'port') counts[r.CycleId] = (counts[r.CycleId] || 0) + 1;
 
   const cycles = Object.keys(counts).sort((a, b) => Number(a) - Number(b));
   const violations = cycles.filter((c) => counts[c] < MIN_EVENTS || counts[c] > MAX_EVENTS);

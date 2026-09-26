@@ -15,7 +15,10 @@
  *
  * Per-scope writeback (§S265):
  *   citizen      → col-O mutate (DIAL_MAP tag) + LifeHistory_Log append + ctx.ledger.dirty
- *   business     → accumulate ctx.summary.chaosBusinessFold → one queueCellIntent_ per biz/col
+ *   business     → ctx.summary.chaosBusinessFold { BIZ_ID: signed event } → applyBusinessDynamics_
+ *                  reads it as the chaos-at-business Growth_Rate term (engine.193 cut 3b; no cells)
+ *   port (ship)  → runChaosShip_: one episodic roll a Cycle → ctx.summary.chaosShip, carried in
+ *                  previousCycleState; applyBusinessDynamics_ applies/releases the offset
  *   neighborhood → accumulate ctx.summary.chaosNeighborhoodFold residual → Phase-10 writer fold
  *                  consumes + decays it (NO column write — that is clobber-certain; see T1.5).
  */
@@ -68,9 +71,10 @@ function pickEventCount_(rng) {
   return CHAOS_MIN_EVENTS + Math.floor(rng() * (CHAOS_MAX_EVENTS - CHAOS_MIN_EVENTS + 1));
 }
 
-// T3.2 — vehicle weighted by baseFrequencyWeight.
+// T3.2 — vehicle weighted by baseFrequencyWeight. Episodic vehicles (the ship) are never
+// drawn here — runChaosShip_ rolls them once a Cycle.
 function pickVehicle_(rng, configs) {
-  return weightedPickChaos_(rng, configs, function (v) { return v.baseFrequencyWeight; });
+  return weightedPickChaos_(rng, configs, function (v) { return v.episodic ? 0 : v.baseFrequencyWeight; });
 }
 
 // T3.6 — outcome weighted by outcome.weight; re-validate no-death at roll time.
@@ -96,12 +100,13 @@ var CHAOS_OUTCOME_GATES = {
 };
 
 function rollOutcome_(rng, vehicle, scope, target) {
-  var pool = vehicle.textureOutcomes;
+  var pool = chaosOutcomePool_(vehicle, scope); // engine.193 cut 3b: an outcome's own scopes[]
   if (scope === 'citizen') {
+    var scoped = pool;
     pool = [];
     var tls = target && target.lifeState;
-    for (var i = 0; i < vehicle.textureOutcomes.length; i++) {
-      var oc = vehicle.textureOutcomes[i];
+    for (var i = 0; i < scoped.length; i++) {
+      var oc = scoped[i];
       if (!oc.lifeHistoryTag) continue;
       if (tls && CHAOS_OUTCOME_GATES[oc.outcome] && !CHAOS_OUTCOME_GATES[oc.outcome](tls)) continue; // engine.67 step 8
       pool.push(oc);
@@ -384,49 +389,17 @@ function writeCitizenEvent_(ctx, target, vehicle, outcome, cycle, text) {
     'chaos_cars citizen event', 'chaos');
 }
 
-// T3.9 — business: accumulate per (bizId,column) so multiple same-cycle hits on one business
-// sum into ONE cell intent (avoids within-cycle cell-intent collision / last-write-wins).
-// Flushed by flushBusinessFold_. Cross-cycle decay is applyChaosDecay_'s job (Phase 5).
-function accumulateBusinessEvent_(ctx, target, impacts, magnitudesByColumn) {
+// T3.9 — business: engine.193 cut 3b. A hit is a signed Growth_Rate EVENT on the business
+// (outcome.bizEvent, units of bizEventShockScale), summed per BIZ_ID for the Cycle and read by
+// applyBusinessDynamics_ (Phase 5) as its chaos-at-business term. No cells: Annual_Revenue is
+// the dynamics column (the old revenue cells overwrote its range — 0848f7d3), and a closure
+// sheds jobs through the Task-6 distress streak, not a direct Employee_Count cut.
+function accumulateBusinessEvent_(ctx, bizId, bizEvent) {
   if (!ctx.summary.chaosBusinessFold) ctx.summary.chaosBusinessFold = {};
-  var biz = loadBusinessRows_(ctx);
+  var id = String(bizId || '').trim();
+  if (!id) return;
   var fold = ctx.summary.chaosBusinessFold;
-  for (var i = 0; i < impacts.length; i++) {
-    var m = impacts[i];
-    var colIdx = (m.column === 'Annual_Revenue') ? biz.iRevenue
-      : (m.column === 'Employee_Count') ? biz.iEmployees : -1;
-    if (colIdx < 0) {
-      throw new Error('chaos_cars: Business_Ledger trimmed header lookup missed "' + m.column +
-        '" — write would silently drop. Check header whitespace.');
-    }
-    var key = target.bizId + '::' + m.column;
-    if (!fold[key]) {
-      // Base from current cell; Number('  ') === 0 handles the empty/whitespace cells.
-      var cur = Number(biz.rows[target.rowIndex][colIdx]) || 0;
-      fold[key] = { sheetRow: target.sheetRow, col1: colIdx + 1, base: cur, delta: 0, column: m.column };
-    }
-    fold[key].delta += (magnitudesByColumn[m.column] || 0);
-  }
-}
-
-function flushBusinessFold_(ctx) {
-  var fold = ctx.summary.chaosBusinessFold;
-  if (!fold) return 0;
-  var n = 0;
-  for (var key in fold) {
-    if (!fold.hasOwnProperty(key)) continue;
-    var f = fold[key];
-    // engine.193 (S496): Annual_Revenue is applyBusinessDynamics_'s column (engine.96). A
-    // chaos cell here (priority 100) landed after the dynamics range (90) and replaced the
-    // week's revenue with base + a $1-25 swing — and wrote −15 into blank cells. The hit
-    // still reaches the business: the fold entry is the chaosAtBusiness input to drift.
-    if (f.column === 'Annual_Revenue') continue;
-    var val = Math.round((f.base + f.delta) * 100) / 100;
-    if (f.column === 'Employee_Count') val = Math.max(0, Math.round(val)); // headcount is a non-negative int
-    queueCellIntent_(ctx, 'Business_Ledger', f.sheetRow, f.col1, val, 'chaos_cars business event', 'chaos');
-    n++;
-  }
-  return n;
+  fold[id] = Math.round(((fold[id] || 0) + (Number(bizEvent) || 0)) * 100) / 100;
 }
 
 // T3.10 — neighborhood: accumulate the swing into the off-sheet residual. The Phase-10
@@ -573,6 +546,7 @@ function runChaosCarsEngine_(ctx) {
       magnitudesByColumn[impacts[k].column] = mag;
       if (k === 0) { primaryMetric = impacts[k].column; primaryMagnitude = mag; }
     }
+    if (scope === 'business') { primaryMetric = 'Growth_Rate'; primaryMagnitude = Number(outcome.bizEvent) || 0; }
 
     var text = chaosEventText_(vehicle, outcome, target, scope);
 
@@ -588,7 +562,7 @@ function runChaosCarsEngine_(ctx) {
       primaryMetric = outcome.lifeHistoryTag; // citizen "metric" = the dial tag (provenance)
       primaryMagnitude = 0;
     } else if (scope === 'business') {
-      accumulateBusinessEvent_(ctx, target, impacts, magnitudesByColumn);
+      accumulateBusinessEvent_(ctx, target.bizId, outcome.bizEvent);
     } else if (scope === 'neighborhood') {
       accumulateNeighborhoodFold_(ctx, target.neighborhood, impacts, magnitudesByColumn);
     }
@@ -635,11 +609,10 @@ function runChaosCarsEngine_(ctx) {
 
   // ── engine.70 W-3 (S327): salient weather hits businesses ────────────────
   // A storm/flood cycle (applyWeatherModel PART 13, Phase 2) dents 1-3
-  // businesses in the event's exposed hoods through the SAME fold this engine
-  // flushes below — weather rides the chaos business plumbing instead of
-  // growing its own (accumulate → one cell intent per biz/col → decay via
-  // applyChaosDecay_, all existing). Magnitude [8,20] down, inside the chaos
-  // Annual_Revenue family ([3,25] across vehicles). One business-scope ripple
+  // businesses in the event's exposed hoods through the SAME fold the vehicles
+  // use — a −1 Growth_Rate event each (engine.193 cut 3b: was a $8-20 revenue
+  // cell). The draw count is unchanged (the magnitude draw is kept and unused)
+  // so every later ctx.rng draw lands where it did. One business-scope ripple
   // per event carries the named businesses to the story surface.
   var wxEvts = (ctx.summary && ctx.summary.weatherEvents) || [];
   for (var wxi = 0; wxi < wxEvts.length; wxi++) {
@@ -666,9 +639,8 @@ function runChaosCarsEngine_(ctx) {
         bizId: wxBiz.rows[wxRowIdx][wxBiz.iId],
         neighborhood: wxBiz.iNb >= 0 ? wxBiz.rows[wxRowIdx][wxBiz.iNb] : ''
       };
-      var wxMag = -(8 + Math.round(ctx.rng() * 12)); // [-8,-20]
-      accumulateBusinessEvent_(ctx, wxTarget,
-        [{ column: 'Annual_Revenue' }], { 'Annual_Revenue': wxMag });
+      ctx.rng(); // was the [-8,-20] revenue magnitude — kept so the draw sequence is unchanged
+      accumulateBusinessEvent_(ctx, wxTarget.bizId, -1);
       wxHitNames.push(String(wxTarget.bizId));
     }
     if (wxHitNames.length && typeof recordRipple_ === 'function') {
@@ -690,20 +662,113 @@ function runChaosCarsEngine_(ctx) {
   }
   // ── end engine.70 W-3 business block ─────────────────────────────────────
 
-  var bizWrites = flushBusinessFold_(ctx);
+  var bizHit = 0;
+  for (var bk in (ctx.summary.chaosBusinessFold || {})) if (ctx.summary.chaosBusinessFold.hasOwnProperty(bk)) bizHit++;
+
+  var ship = runChaosShip_(ctx, rng, cycle, configs);
 
   // T6.4 — friction log (ADR-0003). Empty file = clean run.
   writeChaosFrictionLog_(ctx, cycle, friction);
 
   Logger.log('runChaosCarsEngine_: ' + ctx.summary.chaosCarsEvents.length + ' events | ' +
-    ctx.summary.tier1ChaosEvents.length + ' tier-1 | ' + bizWrites + ' business cell writes | ' +
+    ctx.summary.tier1ChaosEvents.length + ' tier-1 | ' + bizHit + ' businesses hit | ship ' +
+    (ship ? ship.outcome + ' ' + ship.phase + ' x' + ship.factor : 'none') + ' | ' +
     friction.length + ' friction');
   return {
     events: ctx.summary.chaosCarsEvents.length,
     tier1: ctx.summary.tier1ChaosEvents.length,
-    businessWrites: bizWrites,
+    businessesHit: bizHit,
+    ship: ship,
     friction: friction.length
   };
+}
+
+// ── engine.193 cut 3b: the ship (episodic, port scope) ─────────────────────
+// One episode at a time, carried in previousCycleState.chaosShip. Each Cycle this draws
+// exactly two ctx.rng values (the start roll and the outcome pick) whether or not an
+// episode is running, so the ship never shifts later draws by its own state.
+// Strength by week t of an episode `weeks` long: one-week episode 1; otherwise start
+// (t=0) 0.5, peak 1, end (t=weeks-1) 0.5; t=weeks is the aftermath — factor 0, which
+// releases every point applyBusinessDynamics_ applied — then the slot is free again.
+var CHAOS_SHIP_DEFAULT_CHANCE = 0.18; // ~1 episode per 5-6 quiet weeks (builder: 1 per 4-8)
+
+function chaosShipFactor_(t, weeks) {
+  if (t < 0 || t >= weeks) return 0;
+  if (weeks === 1) return 1;
+  return (t === 0 || t === weeks - 1) ? 0.5 : 1;
+}
+
+function runChaosShip_(ctx, rng, cycle, configs) {
+  var S = ctx.summary;
+  var rollStart = rng();
+  var rollPick = rng();
+  var vehicle = null;
+  for (var v = 0; v < configs.length; v++) if (configs[v].scopes.indexOf('port') >= 0) { vehicle = configs[v]; break; }
+  if (!vehicle) { S.chaosShip = null; return null; }
+
+  var prev = (S.previousCycleState && S.previousCycleState.chaosShip) || null;
+  var ep = null;
+  if (prev && prev.phase !== 'aftermath' && Number(prev.startCycle) > 0) {
+    var t = cycle - Number(prev.startCycle);
+    var weeks = Number(prev.weeks) || 1;
+    ep = {
+      eventId: prev.eventId, outcome: prev.outcome, startCycle: Number(prev.startCycle),
+      weeks: weeks, peakPp: Number(prev.peakPp) || 0,
+      factor: chaosShipFactor_(t, weeks),
+      phase: t >= weeks ? 'aftermath' : (t === weeks - 1 && weeks > 1 ? 'end' : (t === 0 ? 'start' : 'peak'))
+    };
+    if (ep.phase === 'aftermath') chaosShipWorldEvent_(ctx, cycle, ep, vehicle, false);
+    S.chaosShip = ep;
+    return ep;
+  }
+
+  var chance = Number(ctx.config && ctx.config.chaosShipChancePerCycle);
+  if (!isFinite(chance) || chance < 0) chance = CHAOS_SHIP_DEFAULT_CHANCE;
+  if (rollStart >= chance) { S.chaosShip = null; return null; }
+
+  var pool = vehicle.textureOutcomes, total = 0, acc = 0, oc = pool[pool.length - 1];
+  for (var i = 0; i < pool.length; i++) total += Number(pool[i].weight) || 0;
+  for (var j = 0; j < pool.length; j++) {
+    acc += Number(pool[j].weight) || 0;
+    if (rollPick * total < acc) { oc = pool[j]; break; }
+  }
+  validateOutcome(oc.outcome);
+  var w = Math.max(1, Math.round(Number(oc.weeks) || 1));
+  ep = {
+    eventId: 'ship-c' + cycle, outcome: oc.outcome, startCycle: cycle, weeks: w,
+    peakPp: Number(oc.peakPp) || 0, factor: chaosShipFactor_(0, w), phase: 'start'
+  };
+  S.chaosShip = ep;
+
+  var payload = {
+    cycleId: cycle, eventId: ep.eventId, vehicleType: vehicle.name, targetScope: 'port',
+    targetId: 'Port of Oakland', targetTier: null, diceOutcome: oc.outcome,
+    primaryMetric: 'Growth_Rate', metricMagnitude: ep.peakPp,
+    consequenceFloorFired: false, narrativeSeed: oc.narrativeSeed || '', coverageContribution: false
+  };
+  if (typeof writeChaosCarsRow_ === 'function') writeChaosCarsRow_(ctx, payload);
+  S.chaosCarsEvents.push(payload);
+  chaosShipWorldEvent_(ctx, cycle, ep, vehicle, true);
+  return ep;
+}
+
+// The ship is the BUSINESS desk's story at both ends: the week it arrives and the week it
+// lets go (engine.190 pattern — a closure is a BUSINESS world event).
+function chaosShipWorldEvent_(ctx, cycle, ep, vehicle, starting) {
+  var S = ctx.summary;
+  S.worldEvents = S.worldEvents || [];
+  var readable = ep.outcome.replace(/_/g, ' ');
+  var down = ep.peakPp < 0;
+  var desc = starting
+    ? 'Port of Oakland: ' + readable + ' — ' + (down ? 'the waterfront, the shops and the builders who run on its cargo take the hit' : 'the waterfront and the businesses that run on its cargo pick up') + (ep.weeks > 1 ? ', expected to run ' + ep.weeks + ' weeks' : '')
+    : 'Port of Oakland: the ' + readable + ' is over — ' + (down ? 'the berths are filling again, and the businesses that waited it out take stock' : 'the rush settles back to an ordinary week at the terminals');
+  S.worldEvents.push({
+    cycle: cycle, domain: 'BUSINESS', subdomain: 'port-' + (starting ? 'episode' : 'aftermath'),
+    neighborhood: 'Jack London',
+    severity: (starting && ep.peakPp <= -7) ? 'high' : 'medium',
+    description: desc, impactScore: Math.min(40, Math.round(Math.abs(ep.peakPp) * 2.5)),
+    source: 'ENGINE', timestamp: ctx.now, vehicle: vehicle.name, shipEventId: ep.eventId
+  });
 }
 
 // Human-facing event text for col O / LifeHistory_Log / desk packets.
@@ -734,6 +799,9 @@ if (typeof module !== 'undefined' && module.exports) {
     pickFromArrayChaos_: pickFromArrayChaos_,
     chaosEventId_: chaosEventId_,
     resolveChaosNeighborhoodFold_: resolveChaosNeighborhoodFold_,
+    accumulateBusinessEvent_: accumulateBusinessEvent_,
+    runChaosShip_: runChaosShip_,
+    chaosShipFactor_: chaosShipFactor_,
     writeCitizenEvent_: writeCitizenEvent_,
     runChaosCarsEngine_: runChaosCarsEngine_
   };

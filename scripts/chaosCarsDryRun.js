@@ -37,6 +37,7 @@ const decay = require('../utilities/chaosCarsDecay');
 global.validateOutcome = cfg.validateOutcome;
 global.loadChaosCarsConfig_ = cfg.loadChaosCarsConfig_;
 global.validateAllChaosConfigs_ = cfg.validateAllChaosConfigs_;
+global.chaosOutcomePool_ = cfg.chaosOutcomePool_;
 global.chaosDecayResidualOneCycle_ = decay.chaosDecayResidualOneCycle_;
 
 let _props = {};
@@ -176,7 +177,7 @@ REPORT_SEEDS.forEach((seed, i) => {
     cycleScope[r.TargetScope] = (cycleScope[r.TargetScope] || 0) + 1;
     outcomeTotals[r.DiceOutcome] = (outcomeTotals[r.DiceOutcome] || 0) + 1;
   }
-  perCycle.push({ cycleId, seed, events: result.events, tier1: result.tier1, businessWrites: result.businessWrites, friction: result.friction, vehicle: cycleVehicle, scope: cycleScope });
+  perCycle.push({ cycleId, seed, events: result.events, tier1: result.tier1, businessesHit: result.businessesHit, friction: result.friction, vehicle: cycleVehicle, scope: cycleScope });
 });
 
 // ── Part 2: synthetic Tier-1 fixture — seed-sweep (mirrors Test 6, single-cycle attempts) ──
@@ -212,7 +213,7 @@ lines.push('');
 lines.push('| Cycle | Seed | Events | Tier-1 hits | Business writes | Friction |');
 lines.push('|---|---|---|---|---|---|');
 for (const c of perCycle) {
-  lines.push(`| ${c.cycleId} | ${c.seed} | ${c.events} | ${c.tier1} | ${c.businessWrites} | ${c.friction} |`);
+  lines.push(`| ${c.cycleId} | ${c.seed} | ${c.events} | ${c.tier1} | ${c.businessesHit} | ${c.friction} |`);
 }
 lines.push('');
 lines.push(`**Frequency bound:** min ${minEvents}, max ${maxEvents} — within [3,15]: ${minEvents >= 3 && maxEvents <= 15 ? 'YES' : 'NO'}.`);

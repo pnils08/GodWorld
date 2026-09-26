@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 184 · **Functions mapped:** 1506 · **S.* fields:** 363 · **Sheets:** 57
+**Files scanned:** 182 · **Functions mapped:** 1503 · **S.* fields:** 363 · **Sheets:** 56
 
 ## S.* / ctx.summary reverse index
 
@@ -119,7 +119,7 @@
 | `S.culturalEntityUpdates` | `phase07-evening-media/culturalLedger.js::registerCulturalEntity_` | `phase07-evening-media/culturalLedger.js::registerCulturalEntity_` | 1 | 1 |
 | `S.culturalRegistry` | `phase07-evening-media/culturalLedger.js::registerCulturalEntity_` | `phase07-evening-media/culturalLedger.js::registerCulturalEntity_`, `phase07-evening-media/culturalLedger.js::resolveLedgerPopId_` | 1 | 2 |
 | `S.currentCycleState` | `phase06-analysis/applyShockMonitor.js::applyShockMonitor_` | `phase06-analysis/applyShockMonitor.js::applyShockMonitor_` | 1 | 1 |
-| `S.cycle` | _(none)_ | `phase01-config/advanceSimulationCalendar.js::inWorldStamp_`, `phase01-config/godWorldEngine2.js::processIntake_`, `phase02-world-state/applyEditionCoverageEffects.js::applyEditionCoverageEffects_`, `phase02-world-state/applyInitiativeImplementationEffects.js::loadCivicVoiceSentiment_`, `phase02-world-state/applySportsSeason.js::applySportsFeedTriggers_`, `phase02-world-state/applySportsSeason.js::applySportsSeason_`, …(+12 more) | 0 | 18 |
+| `S.cycle` | _(none)_ | `phase01-config/advanceSimulationCalendar.js::inWorldStamp_`, `phase01-config/godWorldEngine2.js::processIntake_`, `phase02-world-state/applyEditionCoverageEffects.js::applyEditionCoverageEffects_`, `phase02-world-state/applyInitiativeImplementationEffects.js::loadCivicVoiceSentiment_`, `phase02-world-state/applySportsSeason.js::applySportsFeedTriggers_`, `phase02-world-state/applySportsSeason.js::applySportsSeason_`, …(+11 more) | 0 | 17 |
 | `S.cycleActiveCitizens` | `phase05-citizens/bondEngine.js::ensureBondEngineData_`, `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_`, `phase05-citizens/runRelationshipEngine.js::runRelationshipEngine_` | `phase05-citizens/bondEngine.js::detectNewBonds_`, `phase05-citizens/bondEngine.js::ensureBondEngineData_`, `phase05-citizens/bondEngine.js::updateExistingBonds_`, `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_`, `phase05-citizens/runRelationshipEngine.js::runRelationshipEngine_`, `phase06-analysis/computeRecurringCitizens.js::computeRecurringCitizens_`, …(+1 more) | 3 | 7 |
 | `S.cycleAuditIssues` | `phase06-analysis/applyCivicLoadIndicator.js::resetCycleAuditIssues_` | `phase06-analysis/applyCivicLoadIndicator.js::applyCivicLoadIndicator_` | 1 | 1 |
 | `S.cycleFinalizedAt` | `phase09-digest/finalizeCycleState.js::finalizeCycleState_` | `phase09-digest/finalizeCycleState.js::compactInitiativeRipples_` | 1 | 1 |
@@ -400,8 +400,7 @@ Sheet detection: `getSheetByName`, `queue*Intent_`, known sheet-name string + wr
 |---|---|---|---:|---:|
 | `Advancement_Intake1` | _(none)_ | `phase05-citizens/processAdvancementIntake.js::processAdvancementRows_`, `phase07-evening-media/mediaRoomIntake.js::flagCitizenForTierReview_`, `phase07-evening-media/mediaRoomIntake.js::processCategoryEntries_`, `phase07-evening-media/mediaRoomIntake.js::processQuotedCitizens_` | 0 | 4 |
 | `Business_Archive` | _(none)_ | `phase05-citizens/applyBusinessDynamics.js::archiveClosedBusinesses_` | 0 | 1 |
-| `Business_Ledger` | `phase04-events/chaosCarsEngine.js::flushBusinessFold_`, `phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_`, `phase05-citizens/applyChaosDecay.js::applyChaosDecay_`, `phase05-citizens/generationalWealthEngine.js::applyOwnerDraw_`, `phase05-citizens/generationalWealthEngine.js::updateHeritage_`, …(+2 more) | `phase02-world-state/commuteFlowEngine.js::buildCommuteFlows_`, `phase03-population/applyDemographicDrift.js::businessDistressShare_`, `phase04-events/chaosCarsEngine.js::flushBusinessFold_`, `phase04-events/chaosCarsEngine.js::loadBusinessRows_`, `phase04-events/chaosCarsEngine.test.js::makeCtx`, …(+20 more) | 7 | 25 |
-| `Chaos_Cars` | _(none)_ | `phase05-citizens/applyChaosDecay.js::applyChaosDecay_` | 0 | 1 |
+| `Business_Ledger` | `phase04-events/chaosCarsEngine.js::flushBusinessFold_`, `phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_`, `phase05-citizens/generationalWealthEngine.js::applyOwnerDraw_`, `phase05-citizens/generationalWealthEngine.js::updateHeritage_`, `phase05-citizens/processAdvancementIntake.js::wireBusinessOwners_`, …(+1 more) | `phase02-world-state/commuteFlowEngine.js::buildCommuteFlows_`, `phase03-population/applyDemographicDrift.js::businessDistressShare_`, `phase04-events/chaosCarsEngine.js::flushBusinessFold_`, `phase04-events/chaosCarsEngine.js::loadBusinessRows_`, `phase04-events/chaosCarsEngine.test.js::makeCtx`, …(+18 more) | 6 | 23 |
 | `Chicago_Citizens` | _(none)_ | `phase05-citizens/generateChicagoCitizensv1.js::generateChicagoCitizens_` | 0 | 1 |
 | `Chicago_Feed` | _(none)_ | `phase08-v3-chicago/v3ChicagoWriter.js::saveV3Chicago_`, `utilities/diagnoseDashboardData.js::diagnoseDashboardData` | 0 | 2 |
 | `Chicago_Sports_Feed` | _(none)_ | `utilities/setupSportsFeedValidation.js::setupChicagoFeedOnly`, `utilities/setupSportsFeedValidation.js::setupSportsFeedValidation` | 0 | 2 |

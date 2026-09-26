@@ -1,8 +1,8 @@
 {
   "generated": "2026-09-26",
   "generator": "scripts/stubEngine.js",
-  "filesScanned": 184,
-  "functionsMapped": 1506,
+  "filesScanned": 182,
+  "functionsMapped": 1503,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -789,7 +789,6 @@
         "phase02-world-state/loadEventContentLedger.js::loadUndockedFeed_",
         "phase04-events/chaosCarsEngine.js::runChaosCarsEngine_",
         "phase05-citizens/applyBusinessDynamics.js::bizCoverageDeviation_",
-        "phase05-citizens/applyChaosDecay.js::applyChaosDecay_",
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
         "phase06-analysis/applyShockMonitor.js::applyShockMonitor_",
         "phase07-evening-media/buildContractSeeds.js::buildContractSeeds_",
@@ -4722,7 +4721,6 @@
       "writers": [
         "phase04-events/chaosCarsEngine.js::flushBusinessFold_",
         "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_",
-        "phase05-citizens/applyChaosDecay.js::applyChaosDecay_",
         "phase05-citizens/generationalWealthEngine.js::applyOwnerDraw_",
         "phase05-citizens/generationalWealthEngine.js::updateHeritage_",
         "phase05-citizens/processAdvancementIntake.js::wireBusinessOwners_",
@@ -4739,8 +4737,6 @@
         "phase05-citizens/applyBusinessDynamics.js::archiveClosedBusinesses_",
         "phase05-citizens/applyBusinessDynamics.js::bizHoodMix_",
         "phase05-citizens/applyBusinessDynamics.test.js::ctxWith",
-        "phase05-citizens/applyChaosDecay.js::applyChaosDecay_",
-        "phase05-citizens/applyChaosDecay.test.js::ctxWith",
         "phase05-citizens/educationCareerEngine.js::buildSettleBizPool_",
         "phase05-citizens/generationalWealthEngine.js::applyOwnerDraw_",
         "phase05-citizens/generationalWealthEngine.js::applyTrackedEmployerFloor_",
@@ -4882,12 +4878,6 @@
       "writers": [],
       "readers": [
         "phase05-citizens/applyBusinessDynamics.js::archiveClosedBusinesses_"
-      ]
-    },
-    "Chaos_Cars": {
-      "writers": [],
-      "readers": [
-        "phase05-citizens/applyChaosDecay.js::applyChaosDecay_"
       ]
     },
     "Faith_Organizations": {

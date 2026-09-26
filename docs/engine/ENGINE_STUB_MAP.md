@@ -1011,17 +1011,6 @@
   Reads: S.businessClosures, S.businessDeclines, S.businessDynamicsState, S.initiativeNeighborhoodEffects, S.worldEvents
   Sheets: Business_Ledger, Civic_Office_Ledger, Initiative_Tracker
 
-### applyChaosDecay.js
-- **applyChaosDecay_(ctx)**
-  Reads: S.cycle
-  Sheets: Business_Ledger, Chaos_Cars
-
-### applyChaosDecay.test.js
-- **assert(label, cond, detail)**
-
-- **ctxWith(cycle, cc, bl)**
-  Sheets: Business_Ledger
-
 ### applyGameNightMoments.js
 - **gameNightBucket_(entry)**
 
@@ -4309,5 +4298,5 @@ _No top-level function declarations found (helper/constants file)._
 
 ---
 
-**Files scanned:** 184
-**Functions mapped:** 1506
+**Files scanned:** 182
+**Functions mapped:** 1503

@@ -404,10 +404,9 @@ function runWorldCycle() {
   // ed25ea8, 7f95521, 93cd3a4). See PHASE_42_PATTERNS.md §5.6 + per-engine
   // file headers. Phase 6 engines below have their own write semantics —
   // not audited as part of S200 cohort-C work.
-  // engine.11 chaos-cars (T4.3) — business Annual_Revenue decay. End of Phase 5 (post
-  // citizen-life, pre-Phase-6). Reads PAST-cycle Chaos_Cars rows only (this cycle's are still
-  // queued append-intents, not yet committed → naturally cyclesSince>=1). Business scope only.
-  safePhaseCall_(ctx, 'Phase5-ChaosDecay', function() { applyChaosDecay_(ctx); });
+  // engine.193 (S496): Phase5-ChaosDecay retired — Annual_Revenue is owned by
+  // applyBusinessDynamics_ (engine.96); the decay's cell intents (priority 100) landed
+  // after the dynamics range (90) and overwrote the week's revenue with $1-25 residuals.
   safePhaseCall_(ctx, 'Phase6-FilterNoise', function() { filterNoiseEvents_(ctx); });
   safePhaseCall_(ctx, 'Phase6-Prioritize', function() { prioritizeEvents_(ctx); });
 
@@ -2156,10 +2155,9 @@ function runCyclePhases_(ctx) {
   // ed25ea8, 7f95521, 93cd3a4). See PHASE_42_PATTERNS.md §5.6 + per-engine
   // file headers. Phase 6 engines below have their own write semantics —
   // not audited as part of S200 cohort-C work.
-  // engine.11 chaos-cars (T4.3) — business Annual_Revenue decay. End of Phase 5 (post
-  // citizen-life, pre-Phase-6). Reads PAST-cycle Chaos_Cars rows only (this cycle's are still
-  // queued append-intents, not yet committed → naturally cyclesSince>=1). Business scope only.
-  safePhaseCall_(ctx, 'Phase5-ChaosDecay', function() { applyChaosDecay_(ctx); });
+  // engine.193 (S496): Phase5-ChaosDecay retired — Annual_Revenue is owned by
+  // applyBusinessDynamics_ (engine.96); the decay's cell intents (priority 100) landed
+  // after the dynamics range (90) and overwrote the week's revenue with $1-25 residuals.
   safePhaseCall_(ctx, 'Phase6-FilterNoise', function() { filterNoiseEvents_(ctx); });
   safePhaseCall_(ctx, 'Phase6-Prioritize', function() { prioritizeEvents_(ctx); });
   safePhaseCall_(ctx, 'Phase6-Spotlights', function() { applyNamedCitizenSpotlights_(ctx); });

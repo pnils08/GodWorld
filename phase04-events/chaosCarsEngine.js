@@ -416,6 +416,11 @@ function flushBusinessFold_(ctx) {
   for (var key in fold) {
     if (!fold.hasOwnProperty(key)) continue;
     var f = fold[key];
+    // engine.193 (S496): Annual_Revenue is applyBusinessDynamics_'s column (engine.96). A
+    // chaos cell here (priority 100) landed after the dynamics range (90) and replaced the
+    // week's revenue with base + a $1-25 swing — and wrote −15 into blank cells. The hit
+    // still reaches the business: the fold entry is the chaosAtBusiness input to drift.
+    if (f.column === 'Annual_Revenue') continue;
     var val = Math.round((f.base + f.delta) * 100) / 100;
     if (f.column === 'Employee_Count') val = Math.max(0, Math.round(val)); // headcount is a non-negative int
     queueCellIntent_(ctx, 'Business_Ledger', f.sheetRow, f.col1, val, 'chaos_cars business event', 'chaos');

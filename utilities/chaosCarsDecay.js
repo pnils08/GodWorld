@@ -23,10 +23,9 @@
  * Decay OWNERSHIP is tri-partite (resolves the double-count, §S265):
  *   - neighborhood (Sentiment/CrimeIndex/RetailVitality/EventAttractiveness)
  *       → decayed in the Phase-10 writer fold residual (ctx.summary.chaosNeighborhoodFold)
- *   - business (Annual_Revenue/Employee_Count) → decayed in Phase-5 applyChaosDecay_
+ *   - business → no decay (engine.193 S496: applyChaosDecay_ retired; a business hit is a
+ *       Growth_Rate event in applyBusinessDynamics_, which owns Annual_Revenue)
  *   - citizen → NO decay row (the col-O compressLifeHistory fold is one-time)
- *   applyChaosDecay_ MUST filter to business-scope rows, else it double-counts the
- *   neighborhood residual that the writer already decays.
  */
 
 /**

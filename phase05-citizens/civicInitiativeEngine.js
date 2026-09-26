@@ -653,6 +653,13 @@ function runCivicInitiativeEngine_(ctx) {
                                   : (rElig.revivePhase ? 'A closed program stays closed — who it served, and what fills the gap'
                                                        : 'A program on its last weeks of money — the people it serves, and what comes after')
         });
+        // Builder 2026-09-26: a failed renewal is felt — the same consequence path
+        // as a failed council vote (city sentiment −0.05, a negative ripple on the
+        // program's hoods by domain). A pass is continuity, not new benefit: neutral.
+        if (!rPassed) {
+          applyInitiativeConsequences_(ctx, { outcome: 'FAILED', affectedNeighborhoods: rHoods,
+            policyDomain: iPolicyDomain >= 0 ? String(rRow[iPolicyDomain] || '').trim() : '' }, rName + ' renewal', 'vote');
+        }
         Logger.log('civicInitiativeEngine: Job 6 renewal ' + rId + ' ' + rRow[iRenewOut] + ' ' + rMoney);
       }
       if (iNotes >= 0) {

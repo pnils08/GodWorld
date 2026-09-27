@@ -66,7 +66,7 @@ pointers:
 
 ### Task 5: Sports-desk legacy note (media)
 
-- **Status:** [ ] media terminal: headless path = personas; multi-voice sports-desk edition-only until migrated
+- **Status:** [x] resolved-by-fact 2026-09-26 (research-build) — media terminal retired 2026-08-20; engine.246 confirmed the live solo-cron pipeline never reads multi-voice desk output. Nothing to build.
 
 ### Task 6: Oaks beat — open decision (pipeline.67, Mike-direct 2026-09-06)
 
@@ -85,6 +85,7 @@ pointers:
 
 ## Changelog
 
+- 2026-09-26 (research-build) — Task 5 resolved-by-fact (media terminal retired); Task 4 live-observe stays open. ROLLOUT pipeline.48 stays in-progress.
 - 2026-08-07 (grok) — Initial plan; Tasks 1–2 shipped in scripts; Task 3 agent packages on disk.
 - 2026-08-07 (grok) — Anthony go-to analysis bag (As_Roster/TrueSource/feed-aligned).
 - 2026-08-07 (grok) — Hal archive bag + P Slayer charge bag.

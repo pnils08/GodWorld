@@ -52,7 +52,7 @@ pointers:
 - **Status:** [x] done (grok 2026-08-07)
 
 ### Task 2: Solo agent packages on disk
-- **Status:** [x] on disk; [ ] Claude land commit
+- **Status:** [x] on disk; [x] landed, commit `2af16dcd`
 
 ### Task 3: Live observe
 - Fanout assigns civic POPIDs with `[persona: …]` + single-voice draft
@@ -60,7 +60,7 @@ pointers:
 
 ### Task 4: civic-desk legacy note (media)
 - Headless path = personas; multi-voice edition-only until migrated
-- **Status:** [ ] media terminal
+- **Status:** [x] resolved-by-fact 2026-09-26 (research-build) — media terminal retired 2026-08-20; engine.246 confirmed the live solo-cron pipeline never reads multi-voice desk output. Nothing to build.
 
 ---
 
@@ -70,4 +70,5 @@ pointers:
 
 ## Changelog
 
+- 2026-09-26 (research-build) — Task 2 landed confirmed (commit `2af16dcd`); Task 4 resolved-by-fact (media terminal retired). Task 3 live-observe stays open. ROLLOUT pipeline.49 stays in-progress.
 - 2026-08-07 (grok) — Initial plan; Tasks 1–2 scripts/docs shipped.

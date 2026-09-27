@@ -56,7 +56,7 @@ pointers:
 
 ### Task 5: Sports-desk legacy
 
-- **Status:** [ ] media terminal: mark multi-voice sports-desk as legacy for headless; point crons at personas (p-slayer, later anthony if needed)
+- **Status:** [x] resolved-by-fact 2026-09-26 (research-build) — media terminal retired 2026-08-20, no actor left to do this as a task; engine.246 confirmed the live solo-cron pipeline never reads multi-voice desk output, so the note is already true. Nothing to build.
 
 ---
 
@@ -73,6 +73,7 @@ pointers:
 
 ## Changelog
 
+- 2026-09-26 (research-build) — Task 5 resolved-by-fact (media terminal retired); plan closed. ROLLOUT pipeline.47 → done-pending-archive.
 - 2026-08-07 (grok) — Initial plan + Tasks 1–2 shipped in scripts; agent package on disk.
 - 2026-08-07 (grok) — Pointed sibling plan for anthony-raines + halsolo seats.
 - 2026-08-07 (grok) — P Slayer charge bag hard-injected.

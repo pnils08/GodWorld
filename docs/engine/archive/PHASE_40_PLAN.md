@@ -133,3 +133,4 @@ Each item can be its own session. When one is ready to build, fork a dated plan 
 - 2026-04-16 — §40.5 Plan Mode gate shipped in [[WORKFLOWS]] §Plan Mode Gate (S156, research-build). Five-item checklist + four anti-patterns. S140 `/dispatch` drift named as canonical anti-example.
 - 2026-04-16 — §40.3 credential audit plan drafted at [[archive/plans/2026-04-16-phase-40-3-credential-audit]] (S156, research-build). Inventory + reachability + 8-task execution plan. Engine-sheet terminal picks up when priority rises.
 - 2026-04-17 — §40.3 EXECUTED end-to-end (S156, engine-sheet). All 9 tasks closed. Two commits: `056eae0` (safe tasks) + `91d8649` (live-infra in one restart window). Credentials relocated to `/root/.config/godworld/` outside repo working dir. Phase 40 now at 5/6: only 40.2 cattle refactor remains.
+- 2026-09-27 (research-build) — engine.1 wontfix: 5+ months with no plan ever filed for §40.2, no urgency signal. Phase 40 stands at 5/6 done, stable.

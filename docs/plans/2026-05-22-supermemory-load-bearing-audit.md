@@ -288,6 +288,18 @@ If Phase 3 shows the SessionStart context-hook injection is the contamination, n
 
 ## Status log
 
+### 2026-09-27 (research-build) — Closed, Phase 3 never run
+
+infrastructure.4 + infrastructure.5 → done-pending-archive. Phase 3's dedicated
+test-off session never happened, but the container-disposition question it
+existed to answer got settled anyway by later production reality: the
+2026-09-23 hand-write container redesign (lanes hand-write `sl-godworld`,
+per-prompt recall reads `sl-godworld` + auto repo container) is a live,
+working disposition for exactly the containers this audit was auditing.
+infrastructure.4's writer-hook stays disabled — its S221 default — with no
+incident in 4+ months. Phase 4 (SUPERMEMORY.md rewrite) folds into ordinary
+doc maintenance rather than staying a tracked row.
+
 ### 2026-07-27 Task 8 refresh
 
 The separate read-only Supermemory setup/corpus/retrieval refresh is complete

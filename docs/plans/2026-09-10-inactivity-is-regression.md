@@ -466,3 +466,10 @@ Ships after the current stack's live fire (second ship), not inside it.
 - 2026-09-26 (engine-sheet S495) — Cut 3b designed (chaos cars carry the downturn: outcome-level impacts, two-way mail truck, ship vehicle); builder approved the framing. Not built.
 - 2026-09-26 (engine-sheet S496) — cut 3b `e8c70a4e` bench SANDBOX 0908 @117 C127–C129 clean (0 new errors); ship start → aftermath proven with the bench chance forced to 1 for two cycles (port-dependent −2.82 / +2.95pp, echo −0.22 / +0.47, carried state released), chance restored 0.18. The 51 'port-dependent' on the bench included ~6 sports rows (bare `/port/`); regex anchored after the bench — the stacked pre-PROD fire covers it. Undeployed — ships with cuts 1–3 after the C109 fire.
 - 2026-09-26 (engine-sheet S496) — chaos revenue clobber fixed `0848f7d3`; builder ruled stacking + port reach; cut 3b built. Replay: ship peaks 6.7%, stacking also stops at 6.7% — institutions have no downward cause (open, builder).
+
+### engine.195 — builder ruling 2026-09-27: mood inertia, yes
+
+Verbatim: "Yes week to week, this way articles serve as persistence." **Read:** city/hood mood carries week to week —
+persist the momentum carrier (`S.previousCityDynamics` / cluster / neighborhood) across executions through
+Carry_Forward_Store, the way engine.221 carries economic mood, so what the paper wrote about last week still
+describes a city that remembers it. The S499 carrier fix (pre-boost values) is what gets persisted. Next build.

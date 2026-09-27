@@ -524,3 +524,10 @@ engine.210 LIVE on PROD @97; engine.202 LIVE on PROD @98 with the `WeekRecord` c
 - 2026-09-12 — Third ruling block (S446): fandom is DIAL 9 with a negative pole fed by cron tone; franchise weight is a drifting number (A's dynasty vs Oaks expansion); same-ledger question answered in §7 (one tab, stop collapsing). F6 added — DialState is ledger col 48, JSON, so dial 9 costs no schema change; sports' entire dial footprint today is `Sports: {outabout:+1}`. engine.208/.209 filed; §4 rewritten from sketch to ruled design.
 - 2026-09-12 — Second ruling block folded in (S446): one row per team per week; `VideoGame`/`VideoGameDate` repurposed to the week record (Casino input); `HomeNeighborhood` deleted; record supplies magnitude, season state only scales it; record/trade-news/injuries carry the negative drift; acceptance criterion set to the NotebookLM data-vs-lived-experience test. F1 corrected (static zones are right, intensity is what is missing), F5 added (casino stuck since it shipped). engine.204 rescoped, engine.207 filed.
 - 2026-09-11 — Initial draft (S446). Direction captured verbatim from Mike in §0, including the mid-session crossover ruling (sports is a horizontal, every desk can carry an A's seed) which added F4 and Task 5. Measured state in §1 from the research file plus four new traces: `deriveSportsZones_` is Baylight-only (F1), economic ripple is championship-gated and team-blind (F2), no fandom concept exists in 55 ledger columns or anywhere in `phase*/` (F3).
+
+- 2026-09-27 (engine-sheet, builder ruling on engine.203d + engine.208) — Verbatim: "sports is a heavy driver in the
+  sim so a fade should be slow, being upset should happen first. The 'fandom' dial needs to be built still to control
+  the level a citizen is impacted." **Read:** D3 decay is slow (sports stays a heavy driver across weeks); when a team
+  goes quiet or falls, the first response is the city/fans getting upset, then a slow fade toward baseline — not a
+  quiet taper. How hard any one citizen feels it is the fandom dial's job (engine.208), which is still unbuilt, so
+  engine.208 comes first or with it.

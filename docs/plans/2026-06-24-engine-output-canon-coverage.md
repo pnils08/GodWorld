@@ -137,3 +137,7 @@ Verbatim rows moved out of ROLLOUT_PLAN.md when it collapsed to pointer-only. Th
   builder's go. Routing note for the newsroom: business chaos (tax audit, lawsuit) lands on SAFETY via the
   `chaos-event` domain map; whether it belongs on the business desk is a newsroom call.
 - Wire 3 (Riley → desk packets) was not re-verified this pass.
+
+**Builder ruling 2026-09-27 — Wire 1b column cleared.** Verbatim: "Yes cleared to add the column." Story_Seed_Deck
+gains `SuggestedCitizenVoices` (POPID list); chaos-hit citizens attach as voices on the co-located business/hood seed.
+Schema widen goes with SIMULATION_LEDGER/SCHEMA docs in the same commit, live replay at ship.

@@ -104,3 +104,8 @@ from nothing. Live C106–C108: 34 settled wagers, citizens **+$5,224**; settled
 ledger's Payout cell keeps the gross ticket. Engine + Node twin + tests. Bench SANDBOX 0908 @130 C144: ok, 0 new
 errors — no wager can settle on the bench (no sports feed rows past C108), so the settlement math is proven by
 the unit tests (incl. a house-edge assertion). **Held for the builder's go before PROD** — winners gain less.
+
+**Builder ruling 2026-09-27 — treasury, yes.** Verbatim: "Yes treasury needs to be realized within this sim for the
+economy." A city treasury becomes the ledger initiative spend, renewals and (later) taxes flow through, so civic money
+conserves instead of appearing and vanishing. engine.262 moves from needs-info to a design task; the casino/grant
+conservation checks ride with it.

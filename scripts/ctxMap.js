@@ -293,7 +293,7 @@ for (let li = 0; li < orchLines.length; li++) {
   if (m) { slots.push({ label: m[1], fns: [m[2]] }); continue; }
   // Multi-line closure: `safePhaseCall_(ctx, 'Label', function() {` with the callee on a
   // later line, usually behind a `typeof fn_ === 'function'` guard (Phase6-InitiativeRipple,
-  // Phase6-TransitSignals, Phase6-FaithSignals, Phase6.5-Validation). The one-line regex
+  // Phase6-TransitSignals, Phase6.5-Validation). The one-line regex
   // dropped these four slots and everything reachable only through them read as DEAD —
   // prePublicationValidation.js was reported dead while live at both entry points (S408).
   const open = line.match(/safePhaseCall_\(\s*ctx\s*,\s*'([^']+)'\s*,\s*function\s*\(\)\s*\{\s*$/);

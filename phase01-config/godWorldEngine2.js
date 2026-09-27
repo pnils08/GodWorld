@@ -435,15 +435,6 @@ function runWorldCycle() {
       }
     }
   });
-  safePhaseCall_(ctx, 'Phase6-FaithSignals', function() {
-    if (typeof getFaithStorySignals_ === 'function') {
-      var signals = getFaithStorySignals_(ctx);
-      if (signals.length > 0) {
-        var S = ctx.summary || {};
-        S.faithStorySignals = signals;
-      }
-    }
-  });
 
   // ═══════════════════════════════════════════════════════════
   // PHASE 6.5: PRE-PUBLICATION VALIDATION
@@ -2154,15 +2145,6 @@ function runCyclePhases_(ctx) {
       if (signals.length > 0) {
         var S = ctx.summary || {};
         S.transitStorySignals = signals;
-      }
-    }
-  });
-  safePhaseCall_(ctx, 'Phase6-FaithSignals', function() {
-    if (typeof getFaithStorySignals_ === 'function') {
-      var signals = getFaithStorySignals_(ctx);
-      if (signals.length > 0) {
-        var S = ctx.summary || {};
-        S.faithStorySignals = signals;
       }
     }
   });

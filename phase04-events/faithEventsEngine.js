@@ -26,7 +26,7 @@
  * v1.1 Changes:
  * - FIX: Use S.simMonth from Phase 1 calendar for holy day lookup (was using real wall clock)
  * - FIX: Rename shuffleFaithOrgs_ to shuffleFaithOrgs_ to prevent flat namespace collision
- * - WIRED: getFaithStorySignals_ consumed in Phase 6 orchestrator
+ * - (getFaithStorySignals_ removed engine.189 — its output was never read)
  */
 
 // ============================================================================
@@ -486,84 +486,5 @@ function shuffleFaithOrgs_(arr, rng) {
 // STORY SIGNALS FOR PHASE 6
 // ============================================================================
 
-/**
- * Get story signals from faith events.
- *
- * @param {Object} ctx - Engine context
- * @return {Array}
- */
-/**
- * Helper: Create signal chain entry for Faith & Ethics Correspondent
- */
-function createFaithSignalChain_(detected, value, context) {
-  return [{
-    agent: 'Faith & Ethics Correspondent',
-    engine: 'faithEventsEngine_',
-    detected: detected,
-    value: value,
-    context: context || '',
-    timestamp: 'Phase4'
-  }];
-}
-
-function getFaithStorySignals_(ctx) {
-  var S = ctx.summary || {};
-  var faithData = S.faithEvents || {};
-  var byType = faithData.byType || {};
-
-  var signals = [];
-
-  // Holy day coverage opportunities
-  if (byType.holy_day > 0) {
-    signals.push({
-      type: 'faith_holy_day',
-      priority: 2,
-      headline: 'Religious communities observe holy days',
-      desk: 'faith',
-      reporter: 'Elliot Graye',
-      data: { count: byType.holy_day },
-      signalChain: createFaithSignalChain_('holy_day_observance', byType.holy_day, 'Religious calendar event')
-    });
-  }
-
-  // Interfaith dialogue (always newsworthy)
-  if (byType.interfaith_dialogue > 0) {
-    signals.push({
-      type: 'faith_interfaith',
-      priority: 3,
-      headline: 'Interfaith leaders gather for dialogue',
-      desk: 'faith',
-      reporter: 'Elliot Graye',
-      data: { count: byType.interfaith_dialogue },
-      signalChain: createFaithSignalChain_('interfaith_dialogue', byType.interfaith_dialogue, 'Cross-community engagement')
-    });
-  }
-
-  // Crisis response (high priority)
-  if (byType.crisis_response > 0) {
-    signals.push({
-      type: 'faith_crisis',
-      priority: 4,
-      headline: 'Faith communities respond to community crisis',
-      desk: 'faith',
-      reporter: 'Elliot Graye',
-      data: { count: byType.crisis_response },
-      signalChain: createFaithSignalChain_('crisis_response', byType.crisis_response, 'Faith community mobilization')
-    });
-  }
-
-  // Community programs (feature potential)
-  if (byType.community_program >= 3) {
-    signals.push({
-      type: 'faith_community',
-      priority: 2,
-      headline: 'Faith-based programs serve Oakland neighbors',
-      desk: 'faith',
-      reporter: 'Elliot Graye',
-      data: { count: byType.community_program },
-      signalChain: createFaithSignalChain_('community_programs', byType.community_program, 'Multiple programs active')
-    });
-  }
-
-  return signals;
-}
+// engine.189: getFaithStorySignals_ (and its createFaithSignalChain_ helper) removed — S.faithStorySignals had no reader; FAITH
+// story hooks route to Elliot Graye through storyHook (engine.231) instead.

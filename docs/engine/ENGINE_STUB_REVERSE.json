@@ -2,7 +2,7 @@
   "generated": "2026-09-27",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 179,
-  "functionsMapped": 1483,
+  "functionsMapped": 1481,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -871,13 +871,6 @@
         "phase01-config/godWorldEngine2.js::recordPhaseTiming_"
       ]
     },
-    "faithStorySignals": {
-      "writers": [
-        "phase01-config/godWorldEngine2.js::runCyclePhases_",
-        "phase01-config/godWorldEngine2.js::runWorldCycle"
-      ],
-      "readers": []
-    },
     "transitStorySignals": {
       "writers": [
         "phase01-config/godWorldEngine2.js::runCyclePhases_",
@@ -1143,6 +1136,7 @@
         "phase01-config/godWorldEngine2.js::updateWorldPopulation_"
       ],
       "readers": [
+        "phase03-population/updateNeighborhoodDemographics.js::updateNeighborhoodDemographics_",
         "phase06-analysis/applyShockMonitor.js::applyShockMonitor_",
         "phase07-evening-media/applyStorySeeds.js::applyStorySeeds_",
         "phase10-persistence/buildCyclePacket.js::buildCyclePacket_",
@@ -2812,7 +2806,6 @@
         "phase04-events/faithEventsEngine.js::runFaithEventsEngine_"
       ],
       "readers": [
-        "phase04-events/faithEventsEngine.js::getFaithStorySignals_",
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_"
       ]
     },

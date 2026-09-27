@@ -165,7 +165,7 @@
 
 - **runWorldCycle()**
   Reads: S.auditIssues, S.citizenEvents, S.cityEvents, S.contractSeeds, S.domainPresence, S.engineErrorCount, S.eveningSports, S.mediaEffects, S.mediaIntake, S.nightlife, S.nightlifeVolume, S.rippleEvents, S.storyHooks, S.storylineHealth, S.undockedFeedEntries
-  Writes: S.faithStorySignals, S.transitStorySignals, S.validationReport
+  Writes: S.transitStorySignals, S.validationReport
   RNG: ctx.rng / safeRand_(ctx)
 
 - **loadConfig_(ctx)**
@@ -219,7 +219,7 @@
 
 - **runCyclePhases_(ctx)**
   Reads: S.citizenEvents, S.cityEvents, S.compressedLine, S.contractSeeds, S.cycleSummary, S.domainPresence, S.eveningSports, S.mediaEffects, S.nightlife, S.nightlifeVolume, S.rippleEvents, S.storyHooks, S.storylineHealth, S.storylineWeaving, S.undockedFeedEntries
-  Writes: S.faithStorySignals, S.transitStorySignals, S.validationReport
+  Writes: S.transitStorySignals, S.validationReport
 
 ### initSimulationLedger.js
 - **initSimulationLedger_(ctx)**
@@ -705,7 +705,7 @@
 
 ### updateNeighborhoodDemographics.js
 - **updateNeighborhoodDemographics_(ctx)**
-  Reads: S.cycleId, S.demographicDrift, S.demographicDriftFactors, S.holiday, S.initiativeHealthRelief, S.isCreationDay, S.isFirstFriday, S.neighborhoodEmploymentWeights, S.neighborhoodIllnessWeights, S.sportsAtmosphereEnabled, S.sportsSeason
+  Reads: S.cycleId, S.demographicDrift, S.demographicDriftFactors, S.holiday, S.initiativeHealthRelief, S.isCreationDay, S.isFirstFriday, S.neighborhoodEmploymentWeights, S.neighborhoodIllnessWeights, S.sportsAtmosphereEnabled, S.sportsSeason, S.worldPopulation
   Writes: S.demographicShifts, S.demographicShiftsCount, S.neighborhoodDemographics
   Config: ctx.config.cycleCount, ctx.config.employmentFallbackRate, ctx.config.illnessFallbackRate
   RNG: ctx.rng / safeRand_(ctx)
@@ -838,11 +838,6 @@
 - **countEventsByType_(events)**
 
 - **shuffleFaithOrgs_(arr, rng)**
-
-- **createFaithSignalChain_(detected, value, context)**
-
-- **getFaithStorySignals_(ctx)**
-  Reads: S.faithEvents
 
 ### generateGameModeMicroEvents.js
 - **mulberry32GameMode_(seed)**
@@ -4214,4 +4209,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 179
-**Functions mapped:** 1483
+**Functions mapped:** 1481

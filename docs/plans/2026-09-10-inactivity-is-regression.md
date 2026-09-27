@@ -419,6 +419,17 @@ The engine.188 carrier fix, for the other four metrics: `publicSpaces` / `commun
 
 Holiday peaks still flatten the city: engine.188 fixed the RESTING level but the biggest holidays saturate. **Bench 0908 @13, Summer run cy23-cy27:** PrideMonth 0.76, Juneteenth 0.86 (11/22 hoods at ceiling), FathersDay 0.54, SummerSolstice 0.47, **Independence 1.00 with 20 of 22 hoods at exactly 1.00** — on that cycle per-hood sentiment carries no information, the same defect 188 fixed for ordinary days. OaklandPride (cy22, Spring) did the same. Cause: the holiday table's top values (+0.4/+0.5 specific, +0.1 'major' priority stacked on top) were tuned against the -0.48/cycle tax that engine.185 removed. Proposed: top holiday ~+0.25-0.30 so the biggest day of the year peaks near 0.85 with hood spread intact. NOTE the offline harness under-predicts peaks — it called 0 clamps across 13 Summer cycles and the bench clamped twice; it is calibrated for resting level only, bench any holiday change
 
+### engine.196 — built + bench-proven 2026-09-27 (S499, engine-sheet)
+
+`78f5727b`: `HOLIDAY_MOOD_SCALE = 0.6` on the holiday-driven sentiment delta in `applyHolidayModifiers_`
+(priority baseline + Creation Day + named table + seasonal markers; First Friday untouched), the
+WEATHER_MOOD_SCALE shape. Top days land ~+0.30 (Independence 0.1+0.4 → 0.30); rank order kept;
+non-sentiment effects unchanged. **Bench SANDBOX 0908 @125, C138 = cycleOfYear 34 ArtSoulFestival
+(+0.4 table value):** ok, 0 new Engine_Errors; 22 hoods from mean −0.157 (C137, all negative) to
+mean 0.341, range 0.21–0.46, **0 at 1.00**, spread 0.25; city 0.52. The bench base was negative, so
+the old 20/22 pin could not recur here regardless — the proof is the lift size and intact spread.
+Ships after the current stack's live fire (second ship), not inside it.
+
 ## Changelog
 
 - 2026-09-13 (codex) — Linked the completed engine.201 source review and proposed repair sequence for Claude approval; no implementation or live-state changes.

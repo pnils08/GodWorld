@@ -590,15 +590,40 @@ function runChaosCarsEngine_(ctx) {
     // magnitude (0.05) — a hospitalization or arrest IS a story. Event-level,
     // not conditional on the status flip (a retiree's medical emergency is
     // still the neighborhood's news even though their Status stays 'retired').
+    // engine.41 Wire 1 (S499): the story line is the outcome's authored narrativeSeed
+    // when it has one ("Lights and sirens at the curb — a medical emergency…"), the
+    // mechanical event text only when it doesn't.
     if (scope === 'citizen' && CHAOS_RIPPLE_OUTCOMES[outcome.outcome] &&
         typeof recordRipple_ === 'function') {
       recordRipple_(ctx, {
         causeType: 'chaos-event',
         causeId: payload.eventId,
-        causeDetail: text,
+        causeDetail: payload.narrativeSeed || text,
         effectType: outcome.outcome,
         targetScope: 'citizen',
         targetIds: [target.popId],
+        neighborhood: target.neighborhood || '',
+        magnitude: 0.05,
+        duration: 1,
+        sourceEngine: 'chaosCarsEngine'
+      });
+    }
+
+    // engine.41 Wire 1 (S499): a high-severity hit on a business or a neighborhood
+    // is a public event — its own story seed (builder S275). Wire 1 seeded these
+    // through applyStorySeeds' S.storySeeds, which Phase 10 no longer persists
+    // (saveV3Seeds writes S.contractSeeds, built from ripples), so none of the 22
+    // narrative-seeded hits C101–C108 ever reached Story_Seed_Deck. The authored
+    // narrativeSeed is the gate, as Wire 1 specified: low-severity blips stay silent.
+    if ((scope === 'business' || scope === 'neighborhood') && payload.narrativeSeed &&
+        typeof recordRipple_ === 'function') {
+      recordRipple_(ctx, {
+        causeType: 'chaos-event',
+        causeId: payload.eventId,
+        causeDetail: payload.narrativeSeed,
+        effectType: outcome.outcome,
+        targetScope: scope,
+        targetIds: scope === 'business' ? [target.bizId] : [],
         neighborhood: target.neighborhood || '',
         magnitude: 0.05,
         duration: 1,

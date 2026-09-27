@@ -43,7 +43,7 @@ var CONTRACT_SEED_DOMAIN = {
   'lifestyle-sighting': 'COMMUNITY', // T5 (research.24) — buildEveningFamous venue ripples
   'city-event': 'COMMUNITY',         // S329 R1 — buildCityEvents evening/festival ripples
   // V2-5 (S326) — the S325 physics enter the story surface:
-  'chaos-event': 'SAFETY',           // chaosCarsEngine consequence-class citizen hits
+  'chaos-event': 'SAFETY',           // chaosCarsEngine: consequence-class citizen hits + narrative-seeded business/hood hits (engine.41)
   'fame-event': 'COMMUNITY',         // FAME_WATCH rise + engine.69 tier decay
   'bond-event': 'COMMUNITY',         // weddings (all three paths via marryCitizens_)
   'faith-join': 'COMMUNITY',         // bondEngine congregation growth (per-org aggregate)

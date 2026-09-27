@@ -789,7 +789,7 @@
 - **pickTargetByScope_(rng, ctx, scope)**
 
 - **runChaosCarsEngine_(ctx)**
-  Reads: S.absoluteCycle, S.chaosBusinessFold, S.chaosCarsEvents, S.cycle, S.cycleId, S.tier1ChaosEvents, S.weatherEvents
+  Reads: S.absoluteCycle, S.chaosBusinessFold, S.chaosCarsEvents, S.contractSeeds, S.cycle, S.cycleId, S.storySeeds, S.tier1ChaosEvents, S.weatherEvents
   Writes: S.chaosCarsEvents, S.tier1ChaosEvents
   Config: ctx.config.cycleCount
   RNG: ctx.rng / safeRand_(ctx)

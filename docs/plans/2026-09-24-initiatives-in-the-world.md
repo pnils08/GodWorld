@@ -154,12 +154,13 @@ pointers:
 
 ## Stacked ship after the C109 smoke (engine-sheet S499 — one stack, ordering is this seat's call)
 
-**Stage from `a5b03e96`, NOT HEAD** — HEAD carries the casino fix `0b3e796d`, held for the builder's go
-(it ships alone, from HEAD, only after a yes). `a5b03e96` is the exact tree bench C143 ran clean; every
+**Stage from `0b3e796d`** — builder approved the casino net-win fix 2026-09-27 ("Yes"), so it rides the
+stack; `0b3e796d` is the last payload commit (bench C144 clean on top of the C143 tree). Every
 change in it was benched on its own first (SANDBOX 0908 @114–@129, one unbenched change at a time):
 engine.193 cuts 1–3 + 3b, engine.202 WeekRecord fold, engine.227 media coverage, engine.199 catalog from the
 tab (+ hardening), Chicago retired (cycle path + menu tools), engine.196 holiday scale, engine.249 migration by
-size, engine.195 media gates, engine.189 faith-signal delete, engine.41 chaos seeds.
+size, engine.195 media gates, engine.189 faith-signal delete, engine.41 chaos seeds, engine.262 casino net win.
+agy review of Chicago / 196 / 249: CLEAN PASS ×2 + PASS (output/antigravity/2026-09-27-review-chicago-196-249.md).
 
 **Before the fire:** check ledger col 47 DialState; `node scripts/syncEconomicParameters.js --check` (live);
 resync bench from live C109. **After PROD:** replay World_Config `employmentFloor` 0.88→0.85; re-blank
@@ -173,6 +174,8 @@ Phase 8, so specific economic numbers will not reproduce):
 - Neighborhood_Demographics: every hood grows at ~the city's migration rate (≈0.3–0.5%), none above 1.5%.
 - A narrative-seeded business/neighborhood chaos hit, if one fires, lands a SAFETY seed carrying its authored line.
 - Execution log: one `Economic_Parameters: loaded 306 roles`.
+- Casino: each settled win moves the citizen's NetWorth by Payout − Stake (the ledger's Payout cell stays gross);
+  the house float falls by the same net amount.
 
 ## Changelog
 

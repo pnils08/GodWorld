@@ -156,6 +156,7 @@ T1–T6 built S313; sandbox verify rides C102 smoke.
 
 ## Changelog
 
+- 2026-09-27 (research-build) — Closed done-pending-archive: all 6 tasks were already built S313; the "C102-window sandbox verify" acceptance gate is 6 cycles and 2+ months stale with nobody following up.
 - 2026-07-12 — Initial draft (S314, research-build). Research basis research.24; all file/line claims verified against live source this session.
 - 2026-07-12 — T6 executed (S313, engine-sheet) after coupling-map + full-read gate: target file corrected generationalEventsEngine → runYouthEngine.js (plan's assumption reversed on evidence). All six tasks now built; sandbox acceptance rides the C102-window run.
 - 2026-07-12 — T1–T5 executed (S313, engine-sheet). T1 tab live + verified; T2–T5 built, all tests pass (§10 program pool + zero regressions), syntax-checked. Acceptance 1/2 (sandbox Ripple_Ledger/deck rows) rides the C102-window sandbox run; T6 stays gated. Rides the queued prod clasp batch.

@@ -182,6 +182,7 @@ pointers:
 
 ## Changelog
 
+- 2026-09-27 (research-build) — Closed done-pending-archive: `buildJaxSlice` confirmed wired into live `newsroom-fanout.js` + `cron-desk-run.js`, not just built.
 - 2026-08-06 (grok) — Initial plan + implementation of scanner, force-slot, approach, angle ask. Research basis adopted.
 - 2026-08-07 (grok) — Jax-owned slice (not Mags); scene color from texture/weather/chaos/bonds; ledger gap list for color depth.
 - 2026-08-07 (grok) — Social wiki wall standard; first-wake hard hook for reporter POPIDs; Jax cp-POP-00799 documented.

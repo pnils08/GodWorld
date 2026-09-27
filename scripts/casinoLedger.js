@@ -291,11 +291,19 @@ function resolveOutcome(wager, feeds) {
   return { status: STATUS.VOID_GATE };
 }
 
+// engine.262 (S499): decimal odds include the returned stake; the stake is never
+// debited at placement, so a win moves only payout − stake. KEEP IN SYNC with
+// casinoNetWin_ in phase05-citizens/casinoLedgerEngine.js.
+function netWin(stake, payout) {
+  return Math.max(0, (Number(payout) || 0) - (Number(stake) || 0));
+}
+
 function applyCitizenMoney(citizen, stake, payout, won) {
   var nw = Number(citizen.netWorth) || 0;
   var debt = Number(citizen.debtLevel) || 0;
   if (won) {
-    return { netWorth: nw + payout, debtLevel: debt, delta: payout };
+    var net = netWin(stake, payout);
+    return { netWorth: nw + net, debtLevel: debt, delta: net };
   }
   var next = nw - stake;
   if (next < 0) {
@@ -310,9 +318,10 @@ function householdSavingsDelta(opts) {
   var stake = Number(opts.stake) || 0;
   var payout = Number(opts.payout) || 0;
   var savings = Number(opts.householdSavings) || 0;
-  var amount = opts.won ? payout : stake;
+  var net = netWin(stake, payout);
+  var amount = opts.won ? net : stake;
   if (!(amount >= weekly) || weekly <= 0) return { householdSavings: savings, applied: 0 };
-  if (opts.won) return { householdSavings: savings + payout, applied: payout };
+  if (opts.won) return { householdSavings: savings + net, applied: net };
   var cut = Math.min(savings, stake);
   return { householdSavings: savings - cut, applied: -cut };
 }
@@ -410,7 +419,7 @@ function settleBatch(openWagers, feeds, houseFloat, cycle) {
     }
     if (st === STATUS.WIN) {
       var pay = payoutFor(item.wager.stake, item.wager.odds);
-      if (pay > floatAmt) {
+      if (netWin(item.wager.stake, pay) > floatAmt) {
         results.push({
           wager: item.wager,
           status: STATUS.VOID_HOUSE,
@@ -420,7 +429,7 @@ function settleBatch(openWagers, feeds, houseFloat, cycle) {
         });
         continue;
       }
-      floatAmt -= pay;
+      floatAmt -= netWin(item.wager.stake, pay);
       var won = applyCitizenMoney(
         { netWorth: item.wager.netWorth, debtLevel: item.wager.debtLevel },
         item.wager.stake, pay, true

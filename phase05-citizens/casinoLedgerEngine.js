@@ -313,10 +313,19 @@ function casinoResolve_(wager, feeds, cycle) {
   return { status: CASINO_ST.VOID_GATE };
 }
 
+// engine.262 (S499): odds are decimal prices — `payout = stake × odds` INCLUDES the
+// returned stake (CASINO_JUICE 1.83 on an even game is the house edge). The stake is
+// never debited at placement, so a win moves only the net winnings, payout − stake.
+// Crediting the gross payout paid every winner one stake from nothing: live C106–C108,
+// 34 settled wagers, citizens +$5,224 against a designed house edge of −$457.
+function casinoNetWin_(stake, payout) {
+  return Math.max(0, (Number(payout) || 0) - (Number(stake) || 0));
+}
+
 function casinoApplyMoney_(nw, debt, stake, payout, won) {
   nw = Number(nw) || 0;
   debt = Number(debt) || 0;
-  if (won) return { netWorth: nw + payout, debtLevel: debt, delta: payout };
+  if (won) { var net = casinoNetWin_(stake, payout); return { netWorth: nw + net, debtLevel: debt, delta: net }; }
   var next = nw - stake;
   if (next < 0) {
     next = 0;
@@ -328,9 +337,10 @@ function casinoApplyMoney_(nw, debt, stake, payout, won) {
 function casinoHouseholdDelta_(weekly, stake, payout, won, savings) {
   weekly = Number(weekly) || 0;
   savings = Number(savings) || 0;
-  var amount = won ? payout : stake;
+  var net = casinoNetWin_(stake, payout);
+  var amount = won ? net : stake;
   if (!(amount >= weekly) || weekly <= 0) return { householdSavings: savings, applied: 0 };
-  if (won) return { householdSavings: savings + payout, applied: payout };
+  if (won) return { householdSavings: savings + net, applied: net };
   var cut = Math.min(savings, stake);
   return { householdSavings: savings - cut, applied: -cut };
 }
@@ -763,7 +773,7 @@ function processCasinoLedger_(ctx, cycle) {
     var won = st === CASINO_ST.WIN;
     if (won) {
       pay = casinoPayout_(w.stake, w.odds);
-      if (pay > houseFloat) {
+      if (casinoNetWin_(w.stake, pay) > houseFloat) {
         writeWagerCells_(w.sheetRow, {
           CycleSettled: cycle, Status: CASINO_ST.VOID_HOUSE, Payout: 0,
           HouseFloatAfter: houseFloat, EventId: outcome.eventId || w.eventId
@@ -776,7 +786,7 @@ function processCasinoLedger_(ctx, cycle) {
         results.voided++;
         continue;
       }
-      houseFloat -= pay;
+      houseFloat -= casinoNetWin_(w.stake, pay);
     }
 
     if (citizen && iNW >= 0) {

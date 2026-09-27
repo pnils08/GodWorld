@@ -102,7 +102,16 @@ check('loss that zeros NetWorth bumps DebtLevel', broke.netWorth === 0 && broke.
 const capped = C.applyCitizenMoney({ netWorth: 0, debtLevel: 6 }, 100, 0, false);
 check('debt does not exceed 6', capped.debtLevel === 6);
 const won = C.applyCitizenMoney({ netWorth: 1000, debtLevel: 1 }, 40, 73, true);
-check('win adds payout not stake', won.netWorth === 1073 && won.debtLevel === 1);
+check('win adds the net winnings — payout less the stake it returns (engine.262)', won.netWorth === 1033 && won.debtLevel === 1);
+{
+  // engine.262: the house edge is real. An even game at the posted 1.83 must cost the
+  // bettor on average — before the fix a win paid stake×odds on top of the kept stake,
+  // so an even game returned +41% of stake per bet.
+  const pay = C.payoutFor(40, 1.83);
+  const w = C.applyCitizenMoney({ netWorth: 1000, debtLevel: 0 }, 40, pay, true).netWorth - 1000;
+  const l = C.applyCitizenMoney({ netWorth: 1000, debtLevel: 0 }, 40, 0, false).netWorth - 1000;
+  check('even game at 1.83: expected bettor result is negative (house edge holds)', (w + l) / 2 < 0, 'win ' + w + ' loss ' + l);
+}
 
 const hhSkip = C.householdSavingsDelta({ weekly: 1000, stake: 40, payout: 73, won: true, householdSavings: 12000 });
 check('small win skips household', hhSkip.applied === 0);

@@ -214,7 +214,7 @@ test('weekly win reaches issued-odds payout, CycleSettled, NetWorth and LifeHist
   assert.strictEqual(written('Status'), 'settled-win');
   assert.strictEqual(written('CycleSettled'), 404);
   assert.strictEqual(written('Payout'), 73);
-  assert.strictEqual(ctx.ledger.rows[0][4], 1073);
+  assert.strictEqual(ctx.ledger.rows[0][4], 1033); // engine.262: net win (73 payout − 40 stake), the ticket records the gross
   assert.match(ctx.ledger.rows[0][6], /\[Casino\]/);
 });
 test('weekly loss deducts the stake and records the citizen consequence', () => {

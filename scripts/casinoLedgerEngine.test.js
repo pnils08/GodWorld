@@ -128,7 +128,7 @@ const ctxLive = {
 
 const ran = E.processCasinoLedger_(ctxLive, 105);
 check('armed tab settled', ran.settled === 1);
-check('NetWorth moved by payout', ctxLive.ledger.rows[0][4] === 1000 + Math.round(40 * 1.83));
+check('NetWorth moved by the net win — payout less stake (engine.262)', ctxLive.ledger.rows[0][4] === 1000 + Math.round(40 * 1.83) - 40);
 check('LifeHistory got [Casino]', String(ctxLive.ledger.rows[0][6]).indexOf('[Casino]') >= 0);
 check('Tier untouched', ctxLive.ledger.rows[0][15] === '4');
 check('RoleType untouched', ctxLive.ledger.rows[0][16] === 'Clerk');
@@ -359,7 +359,7 @@ check('issued slip settles at posted odds, not new market odds', settledPricing.
     return c.tab === 'Casino_Ledger' && c.r === 3 && c.c === headers.indexOf('Payout') + 1 && c.v === 101;
   }) && !(settledPricingCtx._cells || []).some(function (c) {
     return c.tab === 'Casino_Ledger' && c.r === 3 && c.c === headers.indexOf('Odds') + 1;
-  }) && settledPricingCtx.ledger.rows[0][slHeaders.indexOf('NetWorth')] === slRow[slHeaders.indexOf('NetWorth')] + 101);
+  }) && settledPricingCtx.ledger.rows[0][slHeaders.indexOf('NetWorth')] === slRow[slHeaders.indexOf('NetWorth')] + 101 - 40); // engine.262: the ledger records the gross ticket, NetWorth moves by the net win
 
 if (failed) { console.error(failed + ' failed'); process.exit(1); }
 console.log('casinoLedgerEngine: ok');

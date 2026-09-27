@@ -1689,6 +1689,12 @@ function applyCityDynamics_(ctx) {
   // engine.188: the blended sentiment BEFORE the four one-cycle boosts below.
   // This is what carries to the next cycle — see the note at the persist site.
   var preBoostSentiment = finalCity.sentiment;
+  // engine.195: the same carrier fix for every metric. The media block (crisis
+  // saturation → publicSpaces / communityEngagement, celebrity buzz → tourism /
+  // nightlife) and the edition-coverage block add to the blended values below;
+  // with those adds in the carrier they compounded through momentum 0.60–0.78 —
+  // 2.5x to 4.5x a one-cycle nudge. Every metric now carries its pre-boost blend.
+  var preBoostCity = copyObj_(finalCity);
 
   // ─────────────────────────────────────────────────────────────────────────
   // MEDIA FEEDBACK (v3.0 — previous cycle's media coverage affects today)
@@ -1702,19 +1708,19 @@ function applyCityDynamics_(ctx) {
     var mediaSentiment = (prevMedia.hopeFactor || 0) - (prevMedia.anxietyFactor || 0);
     finalCity.sentiment += mediaSentiment * 0.04;
 
-    // Crisis saturation: sustained crisis coverage → public spaces empty, engagement drops
+    // Crisis saturation: sustained crisis coverage → public spaces empty, engagement drops.
+    // Celebrity buzz: spotlight on the city → tourism and nightlife tick up.
+    // engine.195 live-range check (live C106–C108, bench C137–C139): crisisSaturation
+    // 0–0.3 against a `> 0.5` gate that never opened; celebrityBuzz 0.36–0.75 against a
+    // `> 0.3` gate that never closed (SIM_DOCTRINE §15, both directions). Both now act in
+    // proportion — small, one-cycle nudges now that the carrier no longer echoes them.
     var crisisSat = prevMedia.crisisSaturation || 0;
-    if (crisisSat > 0.5) {
-      finalCity.publicSpaces -= crisisSat * 0.03;
-      finalCity.communityEngagement -= crisisSat * 0.02;
-    }
+    finalCity.publicSpaces -= crisisSat * 0.03;
+    finalCity.communityEngagement -= crisisSat * 0.02;
 
-    // Celebrity buzz: spotlight on the city → tourism and nightlife tick up
     var celebBuzz = prevMedia.celebrityBuzz || 0;
-    if (celebBuzz > 0.3) {
-      finalCity.tourism += celebBuzz * 0.02;
-      finalCity.nightlife += celebBuzz * 0.02;
-    }
+    finalCity.tourism += celebBuzz * 0.02;
+    finalCity.nightlife += celebBuzz * 0.02;
 
     // Neighborhood-specific effects from media coverage
     // (Applied to neighborhood dynamics separately if needed — city-level is aggregate)
@@ -1885,6 +1891,11 @@ function applyCityDynamics_(ctx) {
   // the momentum blend above) — nothing downstream reads it.
   S.previousCityDynamics = copyObj_(S.cityDynamics);
   S.previousCityDynamics.sentiment = round2(clampSent(preBoostSentiment));
+  for (var pbk in preBoostCity) {
+    if (!preBoostCity.hasOwnProperty(pbk) || pbk === 'sentiment') continue;
+    if (typeof preBoostCity[pbk] !== 'number') continue;
+    S.previousCityDynamics[pbk] = round2(clampMult(preBoostCity[pbk]));
+  }
 
   // Additive outputs
   S.clusterDynamics = clusterDynamics;

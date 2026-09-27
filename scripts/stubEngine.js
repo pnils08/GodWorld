@@ -52,7 +52,13 @@ function extractFunctions(source) {
 
   for (let k = 0; k < funcLines.length; k++) {
     const startIdx = funcLines[k];
-    const endIdx = k + 1 < funcLines.length ? funcLines[k + 1] : lines.length;
+    let endIdx = k + 1 < funcLines.length ? funcLines[k + 1] : lines.length;
+    // engine.234: the body ends at the function's own column-0 close, not at the
+    // next declaration — the span between carries the next function's JSDoc (or
+    // a file's trailing block comment), and an `S.x` written there invented edges.
+    for (let j = endIdx - 1; j > startIdx; j--) {
+      if (/^}\s*;?\s*$/.test(lines[j])) { endIdx = j + 1; break; }
+    }
     const header = lines[startIdx];
     const m = header.match(/^function\s+([A-Za-z_][A-Za-z0-9_]*)\s*\(([^)]*)\)/);
     if (!m) continue;

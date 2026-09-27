@@ -26,7 +26,6 @@
   Reads: S.absoluteCycle, S.cycle, S.cycleRef
 
 - **simYearFromCycle_(cycle)**
-  Reads: S.simYear
 
 - **simYearOf_(ctx, cycle)**
   Reads: S.absoluteCycle, S.cycleId, S.simYear
@@ -106,7 +105,6 @@
   Sheets: World_Config
 
 - **ensureEngine221Config_(ss)**
-  Reads: S.neighborhoodState
   Sheets: World_Config
 
 - **ensureEngine176Config_(ss)**
@@ -157,7 +155,6 @@
 - **computeShortHash_(input)**
 
 - **safePhaseCall_(ctx, phaseName, fn)**
-  Reads: S.phaseTimings
 
 - **recordPhaseTiming_(ctx, phaseName, ms, ok)**
   Reads: S.phaseTimings
@@ -236,7 +233,6 @@
 - **saveCarryForwardBlob_(ctx, key, json, cycle)**
 
 - **loadCarryForwardBlob_(ctx, key, cycleId)**
-  Config: ctx.config.cycleCount
 
 - **assertCarryForwardPresent_(ctx)**
   Config: ctx.config.cycleCount
@@ -245,19 +241,19 @@
   Config: ctx.config.cycleCount
 
 - **loadPreviousEvening_(ctx)**
-  Reads: S.previousCycleState, S.previousEvening
+  Reads: S.previousEvening
   Writes: S.previousEvening
 
 - **loadPreviousCycleState_(ctx)**
-  Reads: S.economicMood, S.previousCycleState
+  Reads: S.previousCycleState
   Writes: S.previousCycleState
 
 - **seedCarriedEconomicMood_(S)**
-  Reads: S.economicMood, S.neighborhoodEconomies, S.previousCycleState
+  Reads: S.economicMood, S.previousCycleState
   Writes: S.economicMood, S.economicMoodDesc
 
 - **seedCarriedNeighborhoodEconomies_(ctx, S)**
-  Reads: S.activityObservations, S.neighborhoodEconomies
+  Reads: S.neighborhoodEconomies
   Writes: S.neighborhoodEconomies
 
 - **seedCarriedActivityObservations_(ctx, S)**
@@ -283,7 +279,7 @@
   Reads: S.cityDynamics, S.neighborhoodDynamics
 
 - **getClusterDynamics_(ctx, clusterName)**
-  Reads: S.cityDynamics, S.clusterDefinitions, S.clusterDynamics
+  Reads: S.cityDynamics, S.clusterDynamics
 
 ### applyEditionCoverageEffects.js
 - **applyEditionCoverageEffects_(ctx)**
@@ -492,7 +488,7 @@
 - **contentLedgerHashStep_(h, s)**
 
 - **loadEventContentLedger_(ctx)**
-  Reads: S.contentLedger, S.undockedFeedEntries
+  Reads: S.contentLedger
   Writes: S.contentLedger
   Sheets: Event_Content_Ledger
 
@@ -546,7 +542,6 @@
   Reads: S.initiativeImplementationEffects
 
 - **countMajorEvents_(worldEvents)**
-  Reads: S.sportsFeedEntries
 
 - **isGameDay_(ctx)**
   Reads: S.sportsFeedEntries
@@ -586,7 +581,6 @@
   Sheets: Business_Ledger
 
 - **cfgNum_(ctx, cfg, key, defaultValue)**
-  Reads: S.auditIssues
 
 - **pushMissingConfigWarning_(ctx, key, defaultValue)**
   Reads: S._configMissingWarnings, S.auditIssues
@@ -610,7 +604,6 @@
 - **crisisArcName_(hood, evidence)**
 
 - **crisisNamed_(arc, body)**
-  Reads: S.worldEvents
 
 - **pushCrisisLifecycleEvent_(ctx, arc, stage, description, severity, cycle)**
   Reads: S.eventsGenerated, S.worldEvents
@@ -693,7 +686,6 @@
 - **calculateCrimeHotspots_(metricsMap, adjacency)**
 
 - **deriveReportingSignal_(input)**
-  Reads: S.crimeMetrics
 
 - **buildCrimeReaderContext_(metricsMap, hotspots, cityWide, categoryCityWide, prevIncidents, policingCapacity, patrolStrategy, shifts)**
 
@@ -708,11 +700,10 @@
 
 - **getNeighborhoodLag_(S, neighborhood)**
   Reads: S.crimeLag
-  Config: ctx.config.patrolStrategy
 
 ### updateNeighborhoodDemographics.js
 - **updateNeighborhoodDemographics_(ctx)**
-  Reads: S.cycleId, S.demographicDrift, S.demographicDriftFactors, S.holiday, S.initiativeHealthRelief, S.isCreationDay, S.isFirstFriday, S.neighborhoodEmploymentWeights, S.neighborhoodIllnessWeights, S.neighborhoodState, S.sportsAtmosphereEnabled, S.sportsSeason
+  Reads: S.cycleId, S.demographicDrift, S.demographicDriftFactors, S.holiday, S.initiativeHealthRelief, S.isCreationDay, S.isFirstFriday, S.neighborhoodEmploymentWeights, S.neighborhoodIllnessWeights, S.sportsAtmosphereEnabled, S.sportsSeason
   Writes: S.demographicShifts, S.demographicShiftsCount, S.neighborhoodDemographics
   Config: ctx.config.cycleCount, ctx.config.employmentFallbackRate, ctx.config.illnessFallbackRate
   RNG: ctx.rng / safeRand_(ctx)
@@ -724,7 +715,6 @@
   Reads: S.hoodEmployerDepth, S.neighborhoodState
 
 - **buildNeighborhoodDemographicModifiers_(holiday, isFirstFriday, isCreationDay, sportsSeason)**
-  Reads: S.demographicShifts, S.demographicShiftsCount, S.neighborhoodDemographics, S.neighborhoodIllnessWeights, S.schoolDrift
 
 - **schoolDriftMedian_(arr)**
 
@@ -777,7 +767,7 @@
   Sheets: LifeHistory_Log
 
 - **accumulateBusinessEvent_(ctx, bizId, bizEvent)**
-  Reads: S.chaosBusinessFold, S.chaosNeighborhoodFold, S.neighborhoodPulse
+  Reads: S.chaosBusinessFold
   Writes: S.chaosBusinessFold
 
 - **accumulateNeighborhoodFold_(ctx, hood, impacts, magnitudesByColumn)**
@@ -814,7 +804,6 @@
   Writes: S.worldEvents
 
 - **chaosEventText_(vehicle, outcome, target, scope)**
-  Reads: S.chaosFriction
 
 - **writeChaosFrictionLog_(ctx, cycle, friction)**
   Writes: S.chaosFriction
@@ -981,7 +970,6 @@
 - **bizParseRevenue_(v)**
 
 - **bizDynamicsConfig_(ctx)**
-  Reads: S.activityObservations
 
 - **bizCoverageDeviation_(S)**
   Reads: S.activityObservations, S.cycle, S.cycleId, S.editionSentimentBoost
@@ -1071,10 +1059,9 @@
 - **bondSpouseQuality_(dataA, dataB, ctx)**
 
 - **bondWealthTerm_(wlA, wlB)**
-  Reads: S.neighborhoodState
 
 - **bondProsperityTerm_(ctx, hoodA, hoodB)**
-  Reads: S.faithExposures, S.neighborhoodState
+  Reads: S.neighborhoodState
 
 - **processFaithJoins_(ctx)**
   Reads: S._faithJoinRipple, S.cycleId, S.faithExposures
@@ -1208,13 +1195,11 @@
 
 - **diagnoseBondEngine()**
   Sheets: Relationship_Bonds
-  RNG: ctx.rng / safeRand_(ctx)
 
 ### bondPersistence.js
 - **asBool_(v)**
 
 - **isLedgerSchema_(headers)**
-  Reads: S.relationshipBonds
 
 - **loadRelationshipBonds_(ctx)**
   Reads: S.relationshipBonds
@@ -1468,7 +1453,7 @@
   Writes: S.cityDynamics, S.initiativeRipples
 
 - **applyActiveInitiativeRipples_(ctx)**
-  Reads: S.absoluteCycle, S.activeRipples, S.cityDynamics, S.cycleId, S.initiativeRipples
+  Reads: S.absoluteCycle, S.cityDynamics, S.cycleId, S.initiativeRipples
   Writes: S.activeRippleCount, S.activeRipples, S.cityDynamics, S.initiativeRipples
 
 - **createInitiativeTrackerSheet_(ss)**
@@ -1550,7 +1535,6 @@
 - **backfillInitiativeOpenSlots_(ctx, sheet, header, rows)**
 
 - **getCivicOpenSlots_(ctx)**
-  Reads: S.civicOpenSlots
   Config: ctx.config.civicOpenSlots
 
 - **publishCivicOpenSlots_(ctx, header, rows)**
@@ -1582,7 +1566,7 @@
 - **civicBuildOpenStep_(st)**
 
 - **applyCivicBuildOpen_(ctx, row, ix, cycle)**
-  Reads: S.initiativeEnginePhaseMoves, S.initiativePhases
+  Reads: S.initiativeEnginePhaseMoves
   Writes: S.initiativeEnginePhaseMoves
 
 - **applyCivicStageMove_(ctx, row, ix, cycle)**
@@ -1717,7 +1701,7 @@
 
 - **generateCitizensEvents_(ctx)**
   Reads: S.biasIntents, S.citizenEventMemory, S.citizenEvents, S.cityDynamics, S.contentLedger, S.crimeByNeighborhood, S.crimeMetrics, S.cycle, S.cycleActiveCitizens, S.cycleId, S.economicMood, S.eventsGenerated, S.faithEvents, S.faithExposures, S.holiday, S.holidayPriority, S.initiativeEvents, S.isCreationDay, S.isFirstFriday, S.localEntities, S.neighborhoodDynamics, S.neighborhoodState, S.neighborhoodWeather, S.previousEvening, S.season, S.sportsFeedEntries, S.sportsSeason, S.sportsSentimentBoost, S.storyHooks, S.templateCooldowns, S.transitState, S.undockedFeedEntries, S.undockedPilots, S.weather, S.worldEvents
-  Writes: S.biasIntents, S.citizenEventMemory, S.citizenEvents, S.crimeMetrics, S.cycleActiveCitizens, S.eventsGenerated, S.faithExposures, S.householdMoments, S.minorsSkippedTexture, S.storyHooks, S.templateCooldowns
+  Writes: S.biasIntents, S.citizenEventMemory, S.citizenEvents, S.cycleActiveCitizens, S.eventsGenerated, S.faithExposures, S.householdMoments, S.minorsSkippedTexture, S.storyHooks, S.templateCooldowns
   Config: ctx.config.cycleCount, ctx.config.eclExclusiveMinLines, ctx.config.eclExclusivePools, ctx.config.gcSurfaceChance, ctx.config.hoodFloorSurfaceQuota, ctx.config.rngSeed
   Sheets: Content_Telemetry, Generic_Citizens, LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)
@@ -1743,9 +1727,9 @@
 - **inferSexFromFirstName_(first)**
 
 - **generateGenericCitizens_(ctx)**
-  Reads: S.cityDynamics, S.cycleId, S.economicMood, S.eventsGenerated, S.genericCitizensDistribution, S.genericCitizensHoodShortfall, S.holiday, S.isCreationDay, S.isFirstFriday, S.season, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
+  Reads: S.cityDynamics, S.cycleId, S.economicMood, S.eventsGenerated, S.genericCitizensHoodShortfall, S.holiday, S.isCreationDay, S.isFirstFriday, S.season, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
   Writes: S.eventsGenerated, S.genericCitizensDistribution, S.genericCitizensGenerated, S.genericCitizensHoodShortfall, S.newGenericCitizens
-  Config: ctx.config.gcPoolFloorFemale, ctx.config.gcPoolFloorMale, ctx.config.rngSeed
+  Config: ctx.config.gcPoolFloorFemale, ctx.config.gcPoolFloorMale
   Sheets: Generic_Citizens
   RNG: ctx.rng / safeRand_(ctx)
 
@@ -1774,7 +1758,7 @@
   Config: ctx.config.cycleCount
 
 - **processBankRate_(ctx, cycle)**
-  Reads: S.bankRateDesc, S.neighborhoodState, S.previousCycleState
+  Reads: S.bankRateDesc, S.previousCycleState
   Writes: S.bankRate, S.bankRateDesc
   RNG: ctx.rng / safeRand_(ctx)
 
@@ -1854,11 +1838,10 @@
 - **captureWealthLevels_(ctx)**
 
 - **trackWealthMobility_(ctx, cycle, prevLevels)**
-  Reads: S.homesPurchasedByLine, S.neighborhoodState, S.storyHooks
+  Reads: S.storyHooks
   Writes: S.storyHooks
 
 - **homeBuyChance_(bestTier)**
-  Reads: S.neighborhoodState
 
 - **homeMarketRent_(ctx, hood, ownRent)**
   Reads: S.neighborhoodState
@@ -1869,13 +1852,12 @@
 - **homeCarries_(mortgageMonthly, householdIncome)**
 
 - **trackHomeOwnership_(ss, ctx, cycle)**
-  Reads: S.neighborhoodState, S.storyHooks
+  Reads: S.storyHooks
   Writes: S.homesPurchasedByLine, S.storyHooks
   Sheets: Household_Ledger
   RNG: ctx.rng / safeRand_(ctx)
 
 - **homeSaleProceeds_(st, household)**
-  Reads: S.homesSoldByLine
 
 - **sellHouseholdHome_(ctx, household, memberPopIds, cycle, opts)**
   Reads: S.heritage, S.homesSoldByLine, S.neighborhoodState, S.storyHooks
@@ -1946,11 +1928,10 @@
   Sheets: Household_Ledger
 
 - **buildCitizenMoneyLookup_(ctx)**
-  Reads: S.cycleId, S.initiativeDisbursement
+  Reads: S.cycleId
   Config: ctx.config.cycleCount
 
 - **ensureFundGrantColumns_(sheet, header)**
-  Reads: S.initiativeDisbursement
 
 - **planFundDisbursement_(header, rows, program, cycle, hoodOf, savingsOf)**
 
@@ -2000,7 +1981,6 @@
   Sheets: Household_Ledger
 
 - **maneuverLines_(ctx)**
-  Writes: S.maneuver
   Sheets: Heritage_Ledger
 
 - **runManeuverEngine_(ctx)**
@@ -2033,11 +2013,9 @@
 - **updateMigrationIntent_(ctx, cycle)**
 
 - **processMigrationEvents_(ctx, cycle)**
-  Reads: S.neighborhoodState
 
 - **processSettledInCheck_(ctx, cycle)**
   Reads: S.neighborhoodState
-  RNG: ctx.rng / safeRand_(ctx)
 
 - **buildRelocationHoodState_(ctx)**
   Reads: S.neighborhoodTrajectory
@@ -2315,7 +2293,6 @@
 - **selectYouthEventType_(age, month, rng)**
 
 - **pickYouthEvent_(type, rng, ageOrStage)**
-  Reads: S.youthEvents
 
 - **generateYouthOutcome_(eventType, rng)**
 
@@ -2499,9 +2476,9 @@
   RNG: ctx.rng / safeRand_(ctx)
 
 - **renderMigrationBrief_(ctx)**
-  Reads: S.migrationBrief, S.migrationDrift, S.migrationDriftFactors, S.migrationEconomicLink, S.neighborhoodEconomyFeedback, S.neighborhoodMigration
+  Reads: S.migrationDrift, S.migrationDriftFactors, S.migrationEconomicLink, S.neighborhoodEconomyFeedback, S.neighborhoodMigration
   Writes: S.migrationBrief
-  Config: ctx.config.enableMigrationEconomicFeedback, ctx.config.enableMigrationNeighborhoodEconomicFeedback, ctx.config.manualMigrationInputs, ctx.config.migrationBriefIncludeEconDeltas, ctx.config.migrationBriefIncludeNeighborhoods, ctx.config.migrationBriefNeighborhoodCount, ctx.config.migrationEconomicFeedbackMaxDelta, ctx.config.migrationEconomicFeedbackScale, ctx.config.migrationNeighborhoodEconomicFeedbackMaxDelta, ctx.config.migrationNeighborhoodEconomicFeedbackScale, ctx.config.rngSeed
+  Config: ctx.config.migrationBriefIncludeEconDeltas, ctx.config.migrationBriefIncludeNeighborhoods, ctx.config.migrationBriefNeighborhoodCount
 
 ### applyPatternDetection.js
 - **applyPatternDetection_(ctx)**
@@ -2606,7 +2583,6 @@
 
 - **checkSensitivity_(ctx)**
   Reads: S.civicLoad, S.economicMood, S.healthCrisis, S.worldEvents
-  Writes: S.validationReport
 
 ### prioritizeEvents.js
 - **prioritizeEvents_(ctx)**
@@ -2619,7 +2595,7 @@
 
 ### applyStorySeeds.js
 - **applyStorySeeds_(ctx)**
-  Reads: S.canonHoods, S.chaosCarsEvents, S.cityDynamics, S.cityEvents, S.civicLoad, S.crimeMetrics, S.cycleId, S.cycleWeight, S.cycleWeightReason, S.demographicDrift, S.domainPresence, S.editionCoverageTriggers, S.eveningMedia, S.eventArcs, S.famousPeople, S.generationalEvents, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.manualStoryInputs, S.migrationDrift, S.namedSpotlights, S.neighborhoodDemographics, S.neighborhoodDynamics, S.neighborhoodEconomies, S.neighborhoodMigration, S.neighborhoodPulse, S.patternFlag, S.season, S.seasonalStorySeeds, S.shockFlag, S.sportsSeason, S.sportsZones, S.storySeeds, S.storySeedsUI, S.textureTriggers, S.tier1ChaosEvents, S.weather, S.worldEvents, S.worldPopulation
+  Reads: S.canonHoods, S.chaosCarsEvents, S.cityDynamics, S.cityEvents, S.civicLoad, S.crimeMetrics, S.cycleId, S.cycleWeight, S.cycleWeightReason, S.demographicDrift, S.domainPresence, S.editionCoverageTriggers, S.eveningMedia, S.eventArcs, S.famousPeople, S.generationalEvents, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.manualStoryInputs, S.migrationDrift, S.namedSpotlights, S.neighborhoodDemographics, S.neighborhoodDynamics, S.neighborhoodEconomies, S.neighborhoodMigration, S.neighborhoodPulse, S.patternFlag, S.season, S.seasonalStorySeeds, S.shockFlag, S.sportsSeason, S.sportsZones, S.storySeeds, S.textureTriggers, S.tier1ChaosEvents, S.weather, S.worldEvents, S.worldPopulation
   Writes: S.activeStorylineCount, S.storySeeds
   Config: ctx.config.cycleCount, ctx.config.manualStoryInputs
   Sheets: Edition_Coverage_Ratings, Storyline_Tracker
@@ -2631,9 +2607,6 @@
 - **generateHeadline_(text, domain)**
 
 - **generateAngle_(seed)**
-  Reads: S.activeStorylineCount
-  Writes: S.crimeMetrics
-  Config: ctx.config.manualStoryInputs
 
 ### buildContractSeeds.js
 - **contractSeedHash_(input)**
@@ -2650,7 +2623,6 @@
 - **contractSeedCitizenIndex_(events)**
 
 - **contractSeedPickEvent_(citizen, causeType)**
-  RNG: ctx.rng / safeRand_(ctx)
 
 - **contractSeedPickCitizens_(index, targetPops, hood, causeType, usedPop, max, roll)**
 
@@ -2661,10 +2633,8 @@
 
 - **contractSeedBackdropIndex_(ctx)**
   Sheets: Business_Ledger, Community_Programs, Faith_Organizations
-  RNG: ctx.rng / safeRand_(ctx)
 
 - **contractSeedBackdropDraw_(pool, excludeKeys, used, fillN, roll)**
-  Reads: S.contractSeeds, S.rippleEvents
 
 - **buildContractSeeds_(ctx)**
   Reads: S.cycle, S.cycleId, S.rippleEvents
@@ -2676,8 +2646,6 @@
 - **assert(name, cond)**
 
 - **fakeSS(rows, extraSheets)**
-  Reads: S.contractSeeds
-  RNG: ctx.rng / safeRand_(ctx)
 
 ### buildEveningFamous.js
 - **buildEveningFamous_(ctx)**
@@ -2701,7 +2669,6 @@
 
 - **eveningFoodHoodsByCharacter_(S, labels)**
   Reads: S.neighborhoodState
-  RNG: ctx.rng / safeRand_(ctx)
 
 - **weightedDrawWithoutReplacement_(items, weight, count, rng)**
 
@@ -2715,7 +2682,6 @@
 
 ### buildMediaPacket.js
 - **buildMediaPacket_(ctx)**
-  Reads: S.mediaIntake
   Writes: S.mediaPacket
 
 - **populateMediaIntake_(ctx)**
@@ -2784,7 +2750,7 @@
   Reads: S.eventArcs, S.famousPeople, S.mediaEffects, S.namedSpotlights
 
 - **calculateCoverageIntensity_(ctx)**
-  Reads: S.activityObservations, S.eventArcs, S.mediaEffects, S.patternFlag, S.worldEvents
+  Reads: S.eventArcs, S.mediaEffects, S.patternFlag, S.worldEvents
 
 - **coverageBaseline_(S)**
   Reads: S.activityObservations, S.cycle, S.cycleId
@@ -2817,7 +2783,6 @@
 
 - **isMediaSaturated_(ctx, topic)**
   Reads: S.mediaEffects
-  RNG: ctx.rng / safeRand_(ctx)
 
 ### mediaRoomIntake.js
 - **processMediaIntake_(ctx)**
@@ -2827,7 +2792,6 @@
 - **processMediaIntakeV2()**
 
 - **processAllIntakeSheets_(ctx, ss, cycle, cal)**
-  Reads: S.season, S.sportsSeason
 
 - **getCurrentCalendarContext_(ctx)**
   Reads: S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.month, S.season, S.simMonth, S.simYear, S.sportsSeason
@@ -2949,7 +2913,7 @@
 
 ### storylineWeavingEngine.js
 - **weaveStorylines_(ctx)**
-  Reads: S.storyHooks, S.tier1ChaosEvents
+  Reads: S.storyHooks
   Writes: S.storyHooks, S.storylineWeaving
   Config: ctx.config.cycleCount
 
@@ -3090,7 +3054,7 @@
 - **bondEngine_(ctx)**
 
 - **v3Integration_(ctx)**
-  Reads: S.cycleId, S.domainPresence, S.economicRipples, S.eventArcs, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.relationshipBonds, S.season, S.sportsSeason, S.textureTriggers, S.v3ModulesRan
+  Reads: S.cycleId, S.domainPresence, S.economicRipples, S.eventArcs, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.relationshipBonds, S.season, S.sportsSeason, S.textureTriggers
   Writes: S.cycleId, S.eventArcs, S.v3CalendarContext, S.v3IntegrationComplete, S.v3ModulesRan
   Config: ctx.config.cycleCount
 
@@ -3106,10 +3070,10 @@
   Reads: S.neighborhoodState
 
 - **hoodLabelMods_(name, S, label)**
-  Reads: S.cityDynamics, S.sportsZones
+  Reads: S.sportsZones
 
 - **hoodCharacterCity_(S, hoods)**
-  Reads: S.hoodBusinessMomentum, S.hoodEmployerDepth, S.neighborhoodState
+  Reads: S.hoodEmployerDepth, S.neighborhoodState
 
 - **hoodBusinessCity_(S)**
   Reads: S.hoodBusinessMomentum
@@ -3150,7 +3114,6 @@
   Writes: S.activeBonds, S.auditIssues, S.chicagoFeed, S.chicagoSnapshot, S.cityEventDetails, S.civicLoadFactors, S.crowdHotspots, S.crowdMap, S.domainPresence, S.domains, S.economicMood, S.economicRipples, S.eventArcs, S.famousSightings, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.mediaEffects, S.namedSpotlights, S.neighborhoodPresence, S.newBonds, S.newCitizens, S.promotions, S.season, S.shockReasons, S.sportsSeason, S.storyHooks, S.storySeeds, S.textureTriggers, S.textures, S.weatherMood, S.worldEvents
 
 - **loadActiveArcsFromLedger_(ctx)**
-  Reads: S.eventArcs
   Writes: S.eventArcs
   Sheets: Event_Arc_Ledger
 
@@ -3189,7 +3152,7 @@
   Writes: S.eveningSnapshot
 
 - **saveEveningSnapshot_(ctx)**
-  Reads: S.eveningSnapshot, S.previousCycleState
+  Reads: S.eveningSnapshot
 
 - **savePreviousCycleState_(ctx)**
   Reads: S.neighborhoodEconomies, S.previousCycleState
@@ -3197,7 +3160,6 @@
 - **compactApprovalNeighborhoodEffects_(bus)**
 
 - **compactNeighborhoodEconomies_(ne)**
-  Reads: S.mediaCount, S.mediaCoverage
 
 - **compactActivityObservations_(S)**
   Reads: S.activityObservations, S.crimeEvents, S.crimeMetrics, S.crimeSpikes, S.cycle, S.cycleId, S.editionSentimentBoost, S.eventsGenerated, S.mediaCount, S.mediaCoverage, S.mediaEffects, S.storySeeds, S.worldEvents
@@ -3209,7 +3171,6 @@
 - **compactEconomicRipples_(ripples, cycle)**
 
 - **compactInitiativeRipples_(ripples, cycle)**
-  Reads: S.cycleFinalState, S.cycleFinalizedAt, S.previousCycleState
 
 ### finalizeCycleState.test.js
 - **assert(name, cond)**
@@ -3219,7 +3180,6 @@
 - **econRipple(overrides)**
 
 - **initRipple(overrides)**
-  Reads: S.approvalNeighborhoodEffects, S.economicRipples, S.previousCycleState
 
 ## Phase 10: Persistence (`phase10-persistence/`)
 
@@ -3229,7 +3189,7 @@
   Writes: S.cyclePacket
 
 - **hospitalCapacity_(ctx)**
-  Reads: S.demographicDrift, S.hospitalEvents
+  Reads: S.demographicDrift
 
 - **persistHospitalLedger_(ctx)**
   Reads: S.absoluteCycle, S.cycleId, S.hospitalEvents
@@ -3448,7 +3408,6 @@
 
 ### archiveCitizenExits.js
 - **citizenArchiveHeaders_(slHeader)**
-  Config: ctx.config.citizenArchiveEnabled
 
 - **citizenArchiveEnabled_(ctx)**
   Config: ctx.config.citizenArchiveEnabled
@@ -3610,7 +3569,6 @@
 - **nudgesForReflection_(eventTag, affectTag, severityMult, text)**
 
 - **hasTag_(tag, text)**
-  Reads: S.pressureTagged
 
 - **pressureAbsCycle_(line)**
 
@@ -3810,11 +3768,9 @@
   Reads: S.holiday, S.weather, S.worldEvents
 
 - **initializeProfileMode_(ctx)**
-  RNG: ctx.rng / safeRand_(ctx)
 
 ### cycleModes.rng.test.js
 - **check(name, fn)**
-  RNG: ctx.rng / safeRand_(ctx)
 
 ### cycleRollback.js
 - **rollbackToCycle78()**
@@ -3842,7 +3798,7 @@
 
 ### ensureCrimeMetrics.js
 - **crimeIterationHoods_(S)**
-  Reads: S.canonHoods, S.neighborhoodState
+  Reads: S.canonHoods
 
 - **crimeProfileFor_(hood, S)**
   Reads: S.neighborhoodState
@@ -4038,7 +3994,6 @@
 - **mergeFx_(acc, fx)**
 
 - **pulseForEvent_(tag, tags, text)**
-  Reads: S.neighborhoodPulse
 
 - **recordPulse_(S, neighborhood, tag, tags, text)**
   Reads: S.neighborhoodPulse
@@ -4046,7 +4001,6 @@
 
 ### neighborhoodPulseMap.test.js
 - **check(name, cond)**
-  Reads: S.neighborhoodPulse
 
 ### popIdAllocator.js
 - **popIdActiveMax_(rows, iPop)**
@@ -4106,8 +4060,6 @@
 
 ### rippleLedger.test.js
 - **assert(name, cond)**
-  Reads: S.cycleId
-  Sheets: Ripple_Ledger
 
 ### rosterLookup.js
 - **loadRoster_()**
@@ -4223,7 +4175,6 @@
 - **check(name, cond)**
 
 - **mkSS(opts)**
-  Sheets: LifeHistory_Log, World_Population
 
 ### sheetNames.js
 - **getSheet_(ss, sheetNameConstant)**
@@ -4265,7 +4216,6 @@ _No top-level function declarations found (helper/constants file)._
 - **normalizeIdentity_(name)**
 
 - **identityMatch_(name1, name2)**
-  Reads: S.suppressDomains
 
 - **domainAllowed_(ctx, domain)**
   Reads: S.suppressDomains

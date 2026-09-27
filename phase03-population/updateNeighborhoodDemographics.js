@@ -115,6 +115,26 @@ function updateNeighborhoodDemographics_(ctx) {
     inflowModSum += Number(hModifier.inflowMod) || 0;
   }
   var liveHoodCount = liveHoodNames.length;
+  // engine.249 (builder ruling 2026-09-20, items 1 and 3; size half of item 2): this
+  // table tracks ~11% of the city, but it took the WHOLE city's migration in equal
+  // shares — table +3.2%/cycle against the city's +0.32%, the smallest hoods +13–16%.
+  // (1) the applied migration is the city's scaled by table ÷ city, recomputed each
+  // cycle; (2) each hood's share is its own size × inflowMod; (3) people arrive and
+  // leave in the hood's own age mix. The flow-signed split (a negative-MigrationFlow
+  // hood losing people in a growth week) needs an intra-city churn rate — open.
+  var tableSum249 = 0, sizeWeightSum249 = 0;
+  for (var h249 = 0; h249 < liveHoodNames.length; h249++) {
+    var d249 = demographics[liveHoodNames[h249]];
+    var pop249 = (Number(d249.students) || 0) + (Number(d249.adults) || 0) + (Number(d249.seniors) || 0);
+    tableSum249 += pop249;
+    var mod249 = neighborhoodModifiers[liveHoodNames[h249]] || { inflowMod: 1 };
+    sizeWeightSum249 += pop249 * (Number(mod249.inflowMod) || 0);
+  }
+  var cityPop249 = Number(S.worldPopulation && S.worldPopulation.totalPopulation);
+  if (!(cityPop249 > 0)) throw new Error('updateNeighborhoodDemographics_: S.worldPopulation.totalPopulation missing — cannot scale migration to the tracked table (engine.249)');
+  var appliedMigration249 = migration * (tableSum249 / cityPop249);
+  Logger.log('updateNeighborhoodDemographics_: city migration ' + migration + ' → table ' +
+             Math.round(appliedMigration249) + ' (table ' + tableSum249 + ' / city ' + cityPop249 + ')');
   if (liveHoodCount === 0) {
     Logger.log('updateNeighborhoodDemographics_: no live neighborhoods, defaulting to 1');
     liveHoodCount = 1;
@@ -143,7 +163,6 @@ function updateNeighborhoodDemographics_(ctx) {
     if (!demographics.hasOwnProperty(neighborhood)) continue;
 
     var demo = demographics[neighborhood];
-    var profile = NEIGHBORHOOD_PROFILES[neighborhood] || { studentMod: 1, adultMod: 1, seniorMod: 1 };
     var modifier = neighborhoodModifiers[neighborhood] || { inflowMod: 1, outflowMod: 1 };
 
     var totalPop = demo.students + demo.adults + demo.seniors;
@@ -158,22 +177,25 @@ function updateNeighborhoodDemographics_(ctx) {
     // Σ hood deltas ≈ city migration (exact modulo rounding); with all mods at
     // 1.0 this collapses to migration / liveHoodCount, and holiday mods
     // self-temper the denominator.
-    var meanInflowMod = inflowModSum / liveHoodCount;
-    var neighborhoodMigration = Math.round(
-      (migration / liveHoodCount) * (modifier.inflowMod / meanInflowMod)
-    );
+    var hoodPop249 = demo.students + demo.adults + demo.seniors;
+    var neighborhoodMigration = sizeWeightSum249 > 0 ? Math.round(
+      appliedMigration249 * (hoodPop249 * (Number(modifier.inflowMod) || 0)) / sizeWeightSum249
+    ) : 0;
+    var mixS = hoodPop249 > 0 ? demo.students / hoodPop249 : 0.15;
+    var mixA = hoodPop249 > 0 ? demo.adults / hoodPop249 : 0.70;
+    var mixSr = hoodPop249 > 0 ? demo.seniors / hoodPop249 : 0.15;
 
     if (neighborhoodMigration > 0) {
-      // Inflow: distribute by age profile
-      demo.students += Math.round(neighborhoodMigration * 0.15 * profile.studentMod);
-      demo.adults += Math.round(neighborhoodMigration * 0.70 * profile.adultMod);
-      demo.seniors += Math.round(neighborhoodMigration * 0.15 * profile.seniorMod);
+      // Inflow: arrivals take the hood's own age mix (engine.249 item 3)
+      demo.students += Math.round(neighborhoodMigration * mixS);
+      demo.adults += Math.round(neighborhoodMigration * mixA);
+      demo.seniors += Math.round(neighborhoodMigration * mixSr);
     } else if (neighborhoodMigration < 0) {
-      // Outflow: proportional reduction with modifier
+      // Outflow: leavers in the same mix, with the calendar outflow modifier
       var outflow = Math.abs(neighborhoodMigration) * modifier.outflowMod;
-      demo.students = Math.max(0, demo.students - Math.round(outflow * 0.2));
-      demo.adults = Math.max(0, demo.adults - Math.round(outflow * 0.6));
-      demo.seniors = Math.max(0, demo.seniors - Math.round(outflow * 0.2));
+      demo.students = Math.max(0, demo.students - Math.round(outflow * mixS));
+      demo.adults = Math.max(0, demo.adults - Math.round(outflow * mixA));
+      demo.seniors = Math.max(0, demo.seniors - Math.round(outflow * mixSr));
     }
 
     // ─────────────────────────────────────────────────────────────────────────

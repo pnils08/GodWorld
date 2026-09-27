@@ -194,7 +194,7 @@ function runHoods(cycles, cityRate, extraS) {
     const ctx = {
       ss: {}, config: Object.assign({}, CONFIG), rng: () => 0.6,
       summary: Object.assign({
-        cycleId: 200 + c, demographicDrift: { illnessRate: cityRate, employmentRate: 0.9015, migration: 0 },
+        cycleId: 200 + c, demographicDrift: { illnessRate: cityRate, employmentRate: 0.9015, migration: 0 }, worldPopulation: { totalPopulation: 450000 },
         neighborhoodState: hoodState(), weatherEvents: [], holiday: 'none', isFirstFriday: false, isCreationDay: false,
       }, extraS || {}),
     };
@@ -239,7 +239,7 @@ assert('B2 the richest hood (Rockridge/Jack London) runs below the poorest (KONO
   let demo = cloneDemo(); let written = null;
   sandbox.getNeighborhoodDemographics_ = () => demo;
   sandbox.batchUpdateNeighborhoodDemographics_ = (ss, map) => { written = map; };
-  const ctx = { ss: {}, config: Object.assign({}, CONFIG), rng: () => 0.6, summary: { cycleId: 200, demographicDrift: { illnessRate: CITY, employmentRate: 0.9015, migration: 0 }, neighborhoodState: hoodState(), weatherEvents: [] } };
+  const ctx = { ss: {}, config: Object.assign({}, CONFIG), rng: () => 0.6, summary: { cycleId: 200, worldPopulation: { totalPopulation: 450000 }, demographicDrift: { illnessRate: CITY, employmentRate: 0.9015, migration: 0 }, worldPopulation: { totalPopulation: 450000 }, neighborhoodState: hoodState(), weatherEvents: [] } };
   updateNeighborhoodDemographics_(ctx);
   let ok = true, worst = '';
   for (const h of HOODS) { const step = Math.abs(written[h].sick - FIXTURE[h].sick); const gap = Math.abs(popOf(FIXTURE[h]) * CITY - FIXTURE[h].sick); if (step > Math.max(3, Math.ceil(gap * 0.25 * 2.2)) ) { ok = false; worst += h + ':' + step + ' '; } }

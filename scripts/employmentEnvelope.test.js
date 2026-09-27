@@ -155,7 +155,7 @@ function runHoods(cycles, cityEmp, opts) {
   sandbox.batchUpdateNeighborhoodDemographics_ = (ss, map) => { written = map; };
   for (let c = 0; c < cycles; c++) {
     const ctx = { ss: {}, config: Object.assign({}, CONFIG), rng: () => 0.6, summary: Object.assign({
-      cycleId: 200 + c, demographicDrift: { illnessRate: 0.04, employmentRate: cityEmp, migration: 0 },
+      cycleId: 200 + c, demographicDrift: { illnessRate: 0.04, employmentRate: cityEmp, migration: 0 }, worldPopulation: { totalPopulation: 450000 },
       neighborhoodState: hoodState(opts.profile !== false), hoodEmployerDepth: opts.depth === false ? undefined : depth(),
       weatherEvents: [], holiday: 'none', isFirstFriday: false, isCreationDay: false }, opts.S || {}) };
     updateNeighborhoodDemographics_(ctx); demo = written;
@@ -185,7 +185,7 @@ assert('B2 employer depth matters: Downtown below Adams Point at the same tier b
 {
   let demo = cloneDemo(); let written = null;
   sandbox.getNeighborhoodDemographics_ = () => demo; sandbox.batchUpdateNeighborhoodDemographics_ = (ss, map) => { written = map; };
-  const ctx = { ss: {}, config: Object.assign({}, CONFIG), rng: () => 0.6, summary: { cycleId: 200, demographicDrift: { illnessRate: 0.04, employmentRate: CITY_EMP, migration: 0 }, neighborhoodState: hoodState(true), hoodEmployerDepth: depth(), weatherEvents: [] } };
+  const ctx = { ss: {}, config: Object.assign({}, CONFIG), rng: () => 0.6, summary: { cycleId: 200, worldPopulation: { totalPopulation: 450000 }, demographicDrift: { illnessRate: 0.04, employmentRate: CITY_EMP, migration: 0 }, worldPopulation: { totalPopulation: 450000 }, neighborhoodState: hoodState(true), hoodEmployerDepth: depth(), weatherEvents: [] } };
   // engine.134 Task 7: the ctx publication was an orphaned write and is gone;
   // the target weights are recomputed from the same inputs the engine reads.
   const W = sandbox.buildHoodEmploymentWeights_(ctx, ctx.summary, cloneDemo()).byHood;

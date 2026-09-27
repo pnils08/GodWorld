@@ -335,3 +335,10 @@ Measured first: the wake pack already rendered posture + goal through the engine
 - 2026-09-08 — engine.180 cut locally (builder go, S438). Cron side; proves on the next scheduled wakes after deploy, not on the bench. See §Status log.
 - 2026-09-08 02:37 — engine.182 filed READY (builder go): ambition costs — overwork as a pressure cause, burnout opens the health and conduct paths, consequence-shaped words. Desk temperament label reverted (builder: the writer hears a person, not a dial).
 - 2026-09-08 02:45 — engine.182 cut locally, unbenched (builder: 'work, your call').
+
+### engine.181 — checked 2026-09-27 (S499, engine-sheet): floor NOT needed, closed
+Live ledger read (952 citizens with DialState, base+mood, BAND_CUTS 20/40/60/80): negative share of
+signed moods **18.6%** (440 of 2,368) — under the 35% trigger; lowest hood mean composure band **0.00**
+(East Oakland, KONO, Adams Point, Dimond) — no hood at −1. The trigger never fired. The live reading
+points the other way: only **0.1%** of all dial readings sit below 40, so the dark end is still near-empty —
+that is engine.193 / engine.197's problem (adversity unreachable, all-neutral share), not a floor's.

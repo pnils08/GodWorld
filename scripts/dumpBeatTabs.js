@@ -71,7 +71,6 @@ const OPTIONAL_TABS = [
   'Initiative_Tracker',       // Carmen / Luis — votes, phases, budgets (the civic record raw)
   'Civic_Office_Ledger',      // Carmen / Jax — office holders, approvals, Status=scandal
   'Election_Log',             // Carmen — outcomes and margins
-  'Civic_Ledger',             // Luis — faction standings
   'Reflection_Intake',        // civic.38 — Civic visibility only; never petition signatures
 ];
 

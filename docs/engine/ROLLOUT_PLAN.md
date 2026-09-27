@@ -151,7 +151,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | engine.262 | Conservation laws — extend engineAuditor to catch money-conservation violations | ready | engine-sheet | [[../plans/2026-09-26-future-build-ideas]] §3 |
 | engine.263 | Credit/default cascades — loans/defaults rippling through households/businesses | needs-info | engine-sheet — gated on engine.193 economy-complete | [[../plans/2026-09-26-future-build-ideas]] §4 |
 | engine.264 | God-whisper seam — nudges routed as in-world pressure, provenance-logged; how visible is the builder's hand | needs-info | research-build (sim judgement — builder call) | [[../plans/2026-09-26-future-build-ideas]] §6 |
-| engine.236 | `Civic_Ledger` tab has no writer: SHEETS_MANIFEST names it the factions tab, but updateCivicLedgerFactions.js writes Faction/VotingPower onto Civic_Office_Ledger. Fix the manifest; keeping or removing the empty tab is the builder's go. | ready | engine-sheet | [[../research/2026-09-15-kimi-civic-lane]] |
+| engine.236 | `Civic_Ledger` never existed as a live tab — factions live on Civic_Office_Ledger (menu-set). Fixed S499: manifest §9 row corrected, dead tab dropped from dumpBeatTabs; the builder's keep/remove call is moot | done-pending-archive | engine-sheet | [[../research/2026-09-15-kimi-civic-lane]] |
 
 ### canon.* — World-fidelity layer
 

@@ -347,9 +347,8 @@ function applyCityDynamics_(ctx) {
   // Creation Day and the named-holiday table, not First Friday — keeps every holiday's rank
   // and brings the top (major +0.1 stacked on +0.4/+0.5) to ~+0.30. Same shape as
   // WEATHER_MOOD_SCALE above.
-  var HOLIDAY_MOOD_SCALE = 0.6;
-
   function applyHolidayModifiers_(m, holiday, holidayPriority, flags, seasonName, clusterName) {
+    var HOLIDAY_MOOD_SCALE = 0.6;
     var isFF = !!flags.isFirstFriday;
     var isCD = !!flags.isCreationDay;
     var moodStart = m.sentiment, ffMood = 0;

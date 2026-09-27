@@ -122,3 +122,18 @@ Verbatim rows moved out of ROLLOUT_PLAN.md when it collapsed to pointer-only. Th
 
 | engine.41 | **Engine-output → canon coverage** (Mike-direct S271, "half the engine makes it to canon — unacceptable"). C100 scan: ~20 of the per-cycle story-signal outputs reach a canon consumer, ~18 die in-tab (world_summary reads 6 tabs / desk_packets 21, hand-picked + drifted, no contract). **4 wires BUILT + CLASP-DEPLOYED S271** (route story-worthy signal into the seed deck — "routed not dumped"): (1) **broad chaos field → seeds** — existing path seeded ONLY `consequenceFloorFired`; at C100 all 6 chaos events had floor=FALSE → 0 chaos seeds (the real reason chaos missed desks, not the stamp); now every `chaosCarsEvents` w/ non-empty `narrativeSeed` → seed @prio 3 (engine's own desk-worthy signal; empty=skip, no fabrication). (2) **`Texture_Trigger_Log` → seeds** @prio 2 (cap 8, FAITH sub-cap 2 — don't amplify the flood). (3a) **`Riley_Digest` evening layer → desk packets** — Node (`buildDeskPackets` `eveningContext.riley`), LIVE, end-to-end verified C100 (TV/famous/cityEvents/streaming/nightlife). (3b) **Riley story-worthy → seeds** (cityEvents/streaming/famous-consolidated) @prio 2 CULTURE. Commits `4b94bda3`/`09af10ac`/`b387ec8d`, pushed `3263c5bf..b387ec8d`; CLASP-DEPLOYED via isolated worktree (engine.41 `applyStorySeeds.js` + chaos-stamp `f2c96348` LIVE; gated riders processAdvancementIntake/citizenDialMap/citizenMemory/compressLifeHistory/tier1EssenceEvents held at baseline, confirmed absent from manifest, `.test.js` excluded). **SMOKE @C101** (additive seeds.push + safePhaseCall_-wrapped — NOT engine-breaking; feature-verify not regression-gate): chaos/texture/Riley seeds in `Story_Seed_Deck` @Priority≥2 + appearing in desk packets; faith share DOWN not up. **Separate lanes (do NOT fold in):** faith generation skew (9 events/5 faith = phase04 generation pass), `Event_Arc_Ledger` re-enable (Row 28 rebuild), coverage registry/contract (optional anti-drift). | wip (built + clasp-deployed; smoke @C101) | engine-sheet | [[../plans/2026-06-24-engine-output-canon-coverage]] |
 
+## Status — 2026-09-27 (S499, engine-sheet): Wire 1 found dead, fixed; Wire 2 live; Wire 1b untouched
+
+- **Wire 2 (texture) — LIVE:** 86 `Class=texture` rows in Story_Seed_Deck C101–C108.
+- **Wire 1 (chaos) — was dead, fixed `a5b03e96`:** 22 narrative-seeded Chaos_Cars hits C101–C108, **0** in
+  Story_Seed_Deck. Wire 1 seeded through applyStorySeeds' `S.storySeeds`; Phase 10 persists only
+  `S.contractSeeds` (saveV3Seeds v4, built from ripples), and chaos recorded ripples only for the four citizen
+  consequence outcomes. Now a business/neighborhood hit with a `narrativeSeed` records a `chaos-event` ripple, and
+  citizen ripples carry the narrative line instead of "Cop car: arrested.". **Bench SANDBOX 0908 @129 C143:** three
+  narrative hits (Chinatown sanitation delay, Temescal outage restored, Eastlake tax audit) → three ripples → three
+  SAFETY seeds whose Why is the authored line; 0 new Engine_Errors. (C142 ran in the post-bump propagation window on
+  the prior version — no fingerprint, not counted.)
+- **Wire 1b (citizens as voices + a `SuggestedCitizenVoices` column)** — not built; the column widen needs the
+  builder's go. Routing note for the newsroom: business chaos (tax audit, lawsuit) lands on SAFETY via the
+  `chaos-event` domain map; whether it belongs on the business desk is a newsroom call.
+- Wire 3 (Riley → desk packets) was not re-verified this pass.

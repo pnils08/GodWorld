@@ -406,7 +406,9 @@ function applySeasonalWeights_(ctx) {
   // MEDIA WEIGHT (based on context)
   // ═══════════════════════════════════════════════════════════════════════════
 
-  var mediaEffects = S.mediaEffects || {};
+  // engine.227: S.mediaEffects is written in Phase 8 — at Phase 2 it is always empty.
+  // Last night's coverage level, carried in previousCycleState.
+  var mediaEffects = (S.previousCycleState && S.previousCycleState.mediaEffects) || {};
   if (mediaEffects.coverageIntensity === 'saturated') {
     w.mediaWeight *= 1.5;
   } else if (mediaEffects.coverageIntensity === 'heavy') {

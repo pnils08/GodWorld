@@ -315,6 +315,7 @@ function compactMediaEffects_(mediaEffects) {
     hopeFactor: mediaEffects.hopeFactor || 0,
     crisisSaturation: mediaEffects.crisisSaturation || 0,
     celebrityBuzz: mediaEffects.celebrityBuzz || 0,
+    coverageIntensity: mediaEffects.coverageIntensity || '',   // engine.227: last night's paper for Phase 2/6
     neighborhoodEffects: mediaEffects.neighborhoodEffects || {}
   };
 }
@@ -556,6 +557,10 @@ function compactActivityObservations_(S) {
     shockCount: worldEvents.length,
     coverage: isFinite(Number(S.editionSentimentBoost)) ? Number(S.editionSentimentBoost) : 0
   };
+  // engine.227: the media coverage score is the baseline for next Cycle's coverage level.
+  // Absent when Phase 8 wrote none — never a fake 0.
+  var covScore = S.mediaEffects ? Number(S.mediaEffects.coverageIntensityScore) : NaN;
+  if (isFinite(covScore)) entry.coverageScore = covScore;
   var prior = (S.activityObservations && Array.isArray(S.activityObservations.history)) ? S.activityObservations.history : [];
   var out = [];
   for (var i = 0; i < prior.length; i++) {
@@ -564,6 +569,7 @@ function compactActivityObservations_(S) {
     var o = {};
     for (var k = 0; k < keys.length; k++) { var v = Number(h[keys[k]]); o[keys[k]] = isFinite(v) ? v : 0; }
     if (h.coverage !== undefined && h.coverage !== null && isFinite(Number(h.coverage))) o.coverage = Number(h.coverage);
+    if (h.coverageScore !== undefined && h.coverageScore !== null && isFinite(Number(h.coverageScore))) o.coverageScore = Number(h.coverageScore);
     out.push(o);
   }
   out.push(entry);

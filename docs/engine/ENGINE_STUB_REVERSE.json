@@ -2,7 +2,7 @@
   "generated": "2026-09-26",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 182,
-  "functionsMapped": 1508,
+  "functionsMapped": 1510,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -743,6 +743,7 @@
         "phase07-evening-media/buildEveningFamous.js::buildEveningFamous_",
         "phase07-evening-media/culturalLedger.js::decayCulturalFame_",
         "phase07-evening-media/culturalLedger.js::registerCulturalEntity_",
+        "phase07-evening-media/mediaFeedbackEngine.js::coverageBaseline_",
         "phase07-evening-media/mediaFeedbackEngine.js::runMediaFeedbackEngine_",
         "phase07-evening-media/storyHook.js::storyHookEngine_",
         "phase08-v3-chicago/applyCycleRecovery.js::applyCycleRecovery_",
@@ -792,6 +793,7 @@
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
         "phase06-analysis/applyShockMonitor.js::applyShockMonitor_",
         "phase07-evening-media/buildContractSeeds.js::buildContractSeeds_",
+        "phase07-evening-media/mediaFeedbackEngine.js::coverageBaseline_",
         "phase09-digest/applyCompressionDigestSummary.js::applyCompressedDigestSummary_",
         "phase09-digest/applyCycleWeight.js::applyCycleWeight_",
         "phase09-digest/finalizeCycleState.js::compactActivityObservations_",
@@ -1074,6 +1076,7 @@
         "phase08-v3-chicago/v3preLoader.js::v3PreloadContext_",
         "phase09-digest/applyCompressionDigestSummary.js::applyCompressedDigestSummary_",
         "phase09-digest/applyCycleWeight.js::applyCycleWeight_",
+        "phase09-digest/finalizeCycleState.js::compactActivityObservations_",
         "phase09-digest/finalizeCycleState.js::finalizeCycleState_",
         "phase10-persistence/recordMediaLedger.js::recordMediaLedger_"
       ]
@@ -1671,7 +1674,6 @@
         "phase06-analysis/prioritizeEvents.js::prioritizeEvents_",
         "phase07-evening-media/applyStorySeeds.js::applyStorySeeds_",
         "phase07-evening-media/cityEveningSystems.js::buildCityEveningSystems_",
-        "phase07-evening-media/mediaFeedbackEngine.js::calculateCoverageIntensity_",
         "phase07-evening-media/storyHook.js::storyHookEngine_",
         "phase08-v3-chicago/applyCycleRecovery.js::applyCycleRecovery_",
         "phase09-digest/applyCompressionDigestSummary.js::applyCompressedDigestSummary_",
@@ -1764,6 +1766,7 @@
         "phase01-config/loadPreviousEvening.js::seedCarriedEconomicMood_",
         "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
         "phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_",
+        "phase02-world-state/applySeasonWeights.js::applySeasonalWeights_",
         "phase02-world-state/applyWeatherModel.js::applyWeatherModel_",
         "phase02-world-state/updateTransitMetrics.js::updateTransitMetrics_Phase2_",
         "phase03-population/applyDemographicDrift.js::businessDistressShare_",
@@ -1778,6 +1781,7 @@
         "phase06-analysis/applyCivicLoadIndicator.js::applyCivicLoadIndicator_",
         "phase06-analysis/applyShockMonitor.js::applyShockMonitor_",
         "phase06-analysis/economicRippleEngine.js::runEconomicRippleEngine_",
+        "phase06-analysis/prioritizeEvents.js::prioritizeEvents_",
         "phase07-evening-media/domainTracker.js::domainTracker_",
         "phase08-v3-chicago/applyCycleRecovery.js::applyCycleRecovery_",
         "phase09-digest/finalizeCycleState.js::compactInitiativeRipples_",
@@ -1892,6 +1896,8 @@
         "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
         "phase05-citizens/applyBusinessDynamics.js::bizCoverageDeviation_",
         "phase05-citizens/applyBusinessDynamics.js::bizDynamicsConfig_",
+        "phase07-evening-media/mediaFeedbackEngine.js::calculateCoverageIntensity_",
+        "phase07-evening-media/mediaFeedbackEngine.js::coverageBaseline_",
         "phase09-digest/finalizeCycleState.js::compactActivityObservations_"
       ]
     },

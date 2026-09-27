@@ -331,7 +331,7 @@
 
 ### applySeasonWeights.js
 - **applySeasonalWeights_(ctx)**
-  Reads: S.cycleOfYear, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.isWeekend, S.mediaEffects, S.season, S.sportsAtmosphereEnabled, S.sportsSeason, S.sportsSource, S.weatherMood
+  Reads: S.cycleOfYear, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.isWeekend, S.mediaEffects, S.previousCycleState, S.season, S.sportsAtmosphereEnabled, S.sportsSeason, S.sportsSource, S.weatherMood
   Writes: S.creationDayActive, S.seasonal
 
 ### applySportsSeason.js
@@ -2611,7 +2611,7 @@
 
 ### prioritizeEvents.js
 - **prioritizeEvents_(ctx)**
-  Reads: S.cityDynamics, S.civicLoad, S.demographicShifts, S.economicMood, S.engineEvents, S.holiday, S.holidayNeighborhood, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.mediaEffects, S.neighborhoodDemographics, S.patternFlag, S.season, S.shockFlag, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
+  Reads: S.cityDynamics, S.civicLoad, S.demographicShifts, S.economicMood, S.engineEvents, S.holiday, S.holidayNeighborhood, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.mediaEffects, S.neighborhoodDemographics, S.patternFlag, S.previousCycleState, S.season, S.shockFlag, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
   Writes: S.eventPrioritization
 
 - **eventHoodWeight_(ctx, hood)**
@@ -2785,7 +2785,10 @@
   Reads: S.eventArcs, S.famousPeople, S.mediaEffects, S.namedSpotlights
 
 - **calculateCoverageIntensity_(ctx)**
-  Reads: S.eventArcs, S.mediaEffects, S.patternFlag, S.shockFlag, S.worldEvents
+  Reads: S.activityObservations, S.eventArcs, S.mediaEffects, S.patternFlag, S.worldEvents
+
+- **coverageBaseline_(S)**
+  Reads: S.activityObservations, S.cycle, S.cycleId
 
 - **calculateSentimentPressure_(ctx)**
   Reads: S.mediaEffects
@@ -3198,7 +3201,7 @@
   Reads: S.mediaCount, S.mediaCoverage
 
 - **compactActivityObservations_(S)**
-  Reads: S.activityObservations, S.crimeEvents, S.crimeMetrics, S.crimeSpikes, S.cycle, S.cycleId, S.editionSentimentBoost, S.eventsGenerated, S.mediaCount, S.mediaCoverage, S.storySeeds, S.worldEvents
+  Reads: S.activityObservations, S.crimeEvents, S.crimeMetrics, S.crimeSpikes, S.cycle, S.cycleId, S.editionSentimentBoost, S.eventsGenerated, S.mediaCount, S.mediaCoverage, S.mediaEffects, S.storySeeds, S.worldEvents
 
 - **compactNeighborhoodDynamics_(nd)**
 
@@ -4228,6 +4231,8 @@
 
 - **sportsWeekForEntry_(entry)**
 
+- **foldSportsWeeks_(first, next, label)**
+
 - **sportsWeeklyResult_(entries, matchesTeam)**
 
 ### textCrawler.js
@@ -4312,4 +4317,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 182
-**Functions mapped:** 1508
+**Functions mapped:** 1510

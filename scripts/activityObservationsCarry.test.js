@@ -50,12 +50,15 @@ console.log('engine.228 — activity observations carry');
   const w = world();
   const S = { cycleId: 108, eventsGenerated: 12, storySeeds: new Array(31), worldEvents: new Array(9), crimeSpikes: [1, 2], activityObservations: { history: [] } };
   const c = w.sb.compactActivityObservations_(S);
-  check('compact: one entry from this Cycle\'s real counts', c && c.history.length === 1 && JSON.stringify(c.history[0]) === JSON.stringify({ cycle: 108, events: 12, storySeedCount: 31, media: 0, crime: 2, shockCount: 9 }), JSON.stringify(c));
+  check('compact: one entry from this Cycle\'s real counts', c && c.history.length === 1 && JSON.stringify(c.history[0]) === JSON.stringify({ cycle: 108, events: 12, storySeedCount: 31, media: 0, crime: 2, shockCount: 9, coverage: 0 }), JSON.stringify(c));
   const hist = []; for (let cy = 90; cy < 108; cy++) hist.push(Object.assign(obs(cy, 10, 30), { extra: 'dropped' }));
   const c2 = w.sb.compactActivityObservations_(Object.assign({}, S, { activityObservations: { history: hist } }));
   check('compact: appends to the carried history, keeps the last 12', c2.history.length === 12 && c2.history[11].cycle === 108 && c2.history[0].cycle === 97, c2.history.length);
-  check('compact: six numbers per entry, nothing else', c2.history.every(o => Object.keys(o).length === 6 && o.extra === undefined));
-  check('compact: 12 entries fit well under 1 KB (' + JSON.stringify(c2).length + ' chars)', JSON.stringify(c2).length < 1000);
+  // engine.193 `coverage` and engine.227 `coverageScore` are absent on entries that predate them, never a fake 0.
+  check('compact: six numbers per carried entry, nothing else; the new entry adds coverage', c2.history.slice(0, 11).every(o => Object.keys(o).length === 6 && o.extra === undefined) && Object.keys(c2.history[11]).length === 7);
+  const full = []; for (let cy = 97; cy < 108; cy++) full.push(Object.assign(obs(cy, 10, 30), { coverage: 1.25, coverageScore: 1.04 }));
+  const c2f = w.sb.compactActivityObservations_(Object.assign({}, S, { mediaEffects: { coverageIntensityScore: 1.04 }, activityObservations: { history: full } }));
+  check('compact: 12 full entries fit well under 2 KB of the own 9 KB key (' + JSON.stringify(c2f).length + ' chars)', JSON.stringify(c2f).length < 2000);
   const c3 = w.sb.compactActivityObservations_(Object.assign({}, S, { activityObservations: { history: [obs(108, 0, 0)] } }));
   check('compact: never two entries for one Cycle (a stale same-Cycle entry is replaced)', c3.history.length === 1 && c3.history[0].events === 12);
 }
@@ -118,6 +121,34 @@ console.log('engine.228 — activity observations carry');
   w.sb.applyCityDynamics_(B);
   const aoB = B.summary.activityObservations;
   check('next Cycle: latest = Cycle 108\'s real observation (12 events), rolling over the four nights before it (11.25)', aoB.latest.events === 12 && aoB.rolling.events === 11.25, JSON.stringify(aoB.latest) + ' ' + JSON.stringify(aoB.rolling));
+}
+
+// ── engine.227: coverage level is relative to the city's own last six Cycles ─────
+{
+  const sb = { Logger: { log: () => {} }, Math, Object, Array, Number, String, JSON, Date, isFinite, isNaN, parseFloat };
+  vm.createContext(sb);
+  load(sb, 'phase07-evening-media/mediaFeedbackEngine.js');
+  load(sb, 'phase09-digest/finalizeCycleState.js');
+  const hist = scores => scores.map((s, i) => ({ cycle: 100 + i, events: 10, storySeedCount: 30, media: 0, crime: 2, shockCount: 10, coverageScore: s }));
+  const level = (events, scores, extra) => {
+    const S = Object.assign({ cycleId: 108, worldEvents: new Array(events), eventArcs: [], shockFlag: 'shock-flag', patternFlag: 'none',
+      mediaEffects: { crisisSaturation: 0, celebrityBuzz: 0 }, activityObservations: { history: scores ? hist(scores) : [] } }, extra || {});
+    sb.calculateCoverageIntensity_({ summary: S, mediaCalendarContext: { holiday: 'none', sportsSeason: 'off-season' } });
+    return S.mediaEffects;
+  };
+  // Live shape: 8–13 events every Cycle scored 0.64–1.04 on the event term alone — saturated 100% under the old bar.
+  const ordinary = level(10, [0.8, 0.88, 0.8, 0.72, 0.8, 0.8]);
+  check('227: an ordinary 10-event week against a 10-event baseline reads moderate, not saturated', ordinary.coverageIntensity === 'moderate' && ordinary.coverageIntensityRatio === 1, JSON.stringify(ordinary));
+  check('227: a week half again as loud reads saturated', level(15, [0.8, 0.8, 0.8, 0.8, 0.8, 0.8]).coverageIntensity === 'saturated');
+  check('227: a week a quarter louder reads heavy', level(13, [0.8, 0.8, 0.8, 0.8, 0.8, 0.8]).coverageIntensity === 'heavy');
+  check('227: a quiet week reads minimal (the gate fires downward too)', level(5, [0.8, 0.8, 0.8, 0.8, 0.8, 0.8]).coverageIntensity === 'minimal');
+  check('227: first fire with nothing carried reads moderate', level(13, null).coverageIntensity === 'moderate');
+  check('227: an active shock no longer raises the score (the ratchet is cut)', level(10, [0.8]).coverageIntensityScore === 0.8, String(level(10, [0.8]).coverageIntensityScore));
+  check('227: this Cycle\'s own stale entry is not its own baseline', level(15, [0.8]).coverageIntensity === 'saturated' && level(15, [], { activityObservations: { history: [{ cycle: 108, coverageScore: 1.2 }] } }).coverageIntensity === 'moderate');
+  const S9 = { cycleId: 108, eventsGenerated: 10, worldEvents: [], storySeeds: [], mediaEffects: { coverageIntensityScore: 0.96, coverageIntensity: 'heavy' }, activityObservations: { history: [] } };
+  check('227: Phase 9 carries the score as next Cycle\'s baseline', sb.compactActivityObservations_(S9).history[0].coverageScore === 0.96);
+  check('227: no score written → no key (never a fake 0)', sb.compactActivityObservations_(Object.assign({}, S9, { mediaEffects: {} })).history[0].coverageScore === undefined);
+  check('227: previousCycleState carries last night\'s level for Phase 2/6', sb.compactMediaEffects_({ coverageIntensity: 'heavy', crisisSaturation: 0.3 }).coverageIntensity === 'heavy');
 }
 
 console.log('\n' + passed + ' passed, ' + failed + ' failed');

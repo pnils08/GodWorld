@@ -244,6 +244,8 @@ Bench SANDBOX 0908 @51 C113 (with 232b riding, separable outputs): 173 s ok:true
 Desk packets carry an EMPTY citizen archive (`0 citizens matched (of ~800)` every desk, C107): `parsePopIdIndex` (`buildDeskPackets.js:379`) expects `## POP — Name (35)`, the index heads are `(T1) — Role`. Do NOT just fix the regex — `ARTICLE_INDEX_BY_POPID.md` is from 2026-03-24 with junk titles; rebuild the index first
 
 ## Changelog
+
+- 2026-09-26 (engine-sheet) — engine.227 CUT per §Status log 227 cut order (steps 1–3); ratio also bands downward (≤ 1/1.5 minimal); unbenched, rides the engine.193 stacked fire.
 - 2026-09-15 (engine-sheet S463) — engine.192 CUT `0a8013fc` (Mike's go, option a), BENCH @51 C113 (22/22 hoods moved, 0 errors), PROD @96 (v85); engine.232b `512ca101` a name on every deck row rode the same bench (45 rows, 0 blank).
 - 2026-09-15 (engine-sheet S463) — engine.190 + 233 CUT `eb289123`, BENCH @50 C112 no-throw, PROD @95 (v84): closures to the business desk + a ripple, high-severity world events hook, Serious/Grave transgressions are SAFETY hooks.
 - 2026-09-15 (engine-sheet S463) — engine.232 filed, CUT `ecf6d5ce`+`fbb4af97`, BENCH @48/@49 C110–C111, PROD @94 (v83): one desk table, desk-scoped scorer, domain seat first, 25% in-Cycle cap — Hal off the arcs, Angela on EDUCATION, P Slayer under the cap.

@@ -64,7 +64,9 @@ function prioritizeEvents_(ctx) {
   var pattern = S.patternFlag || "";
   var shock = S.shockFlag || "";
   var econMood = S.economicMood || 50;
-  var mediaEffects = S.mediaEffects || {};
+  // engine.227: S.mediaEffects is written in Phase 8 — at Phase 6 it is always empty.
+  // The honest grain is last night's paper, carried in previousCycleState.
+  var mediaEffects = (S.previousCycleState && S.previousCycleState.mediaEffects) || {};
 
   // Calendar context (v2.2)
   var holiday = S.holiday || "none";

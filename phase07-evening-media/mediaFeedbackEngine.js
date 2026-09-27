@@ -709,10 +709,10 @@ function calculateCoverageIntensity_(ctx) {
   intensity += effects.crisisSaturation * 0.3;
   intensity += effects.celebrityBuzz * 0.2;
 
-  // engine.187 part 3: an ACTIVE shock raises coverage intensity; the all-clear cycle does not.
-  if (isActiveShock_(S.shockFlag)) {
-    intensity += 0.3;
-  }
+  // engine.227: the shock term is OUT (S462 ruling). The shock monitor reads
+  // coverageIntensity === 'saturated', so a shock bonus here closes a
+  // cross-Cycle ratchet the moment those reads carry (saturated → shock →
+  // +0.3 → saturated). The shock detector is engine.185's own follow-up.
 
   if (S.patternFlag && S.patternFlag !== 'none') {
     intensity += 0.15;
@@ -743,19 +743,47 @@ function calculateCoverageIntensity_(ctx) {
     intensity += 0.15;
   }
 
-  intensity = Math.min(1, intensity);
-
-  if (intensity >= 0.8) {
+  // engine.227: the level is this Cycle's score against the city's own last six
+  // carried Cycles (the engine.188 shape), not an absolute bar. 8–13 world
+  // events a Cycle scored 0.64–1.04 on the event term alone, so the old
+  // `>= 0.8 saturated` bar held 90 of 103 Media_Ledger rows (all of C99–C108).
+  // A busy week is loud against an ordinary one; a quiet week reads minimal.
+  // First fire with nothing carried: no baseline, moderate.
+  var baseline = coverageBaseline_(S);
+  var ratio = (baseline !== null && baseline > 0) ? Math.round(intensity / baseline * 100) / 100 : 1;   // rounded first: the recorded ratio and the level always agree
+  if (ratio >= 1.5) {
     effects.coverageIntensity = COVERAGE_INTENSITY.SATURATED;
-  } else if (intensity >= 0.5) {
+  } else if (ratio >= 1.25) {
     effects.coverageIntensity = COVERAGE_INTENSITY.HEAVY;
-  } else if (intensity >= 0.25) {
+  } else if (ratio > 1 / 1.5) {
     effects.coverageIntensity = COVERAGE_INTENSITY.MODERATE;
   } else {
     effects.coverageIntensity = COVERAGE_INTENSITY.MINIMAL;
   }
 
   effects.coverageIntensityScore = Math.round(intensity * 100) / 100;
+  effects.coverageIntensityRatio = ratio;
+}
+
+// engine.227 — mean coverage score of the last six carried Cycles
+// (S.activityObservations.history `coverageScore`, written by Phase 9's
+// compactActivityObservations_). null until one Cycle carries a score; entries
+// that predate the key are absent, never a fake 0.
+function coverageBaseline_(S) {
+  var hist = (S && S.activityObservations && Array.isArray(S.activityObservations.history)) ? S.activityObservations.history : [];
+  var cyc = Number(S && (S.cycleId || S.cycle));
+  var vals = [];
+  for (var i = 0; i < hist.length; i++) {
+    var h = hist[i];
+    if (!h || h.coverageScore === undefined || h.coverageScore === null || Number(h.cycle) === cyc) continue;
+    var v = Number(h.coverageScore);
+    if (isFinite(v)) vals.push(v);
+  }
+  vals = vals.slice(-6);
+  if (!vals.length) return null;
+  var sum = 0;
+  for (var j = 0; j < vals.length; j++) sum += vals[j];
+  return sum / vals.length;
 }
 
 

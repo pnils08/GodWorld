@@ -96,3 +96,11 @@ So "every dollar credited somewhere is debited somewhere" does not hold for this
 is no city treasury, no payroll. The build that makes sense without a ruling is the two real checks
 (casino balance, grant inequality) + the deceased-exclusion assertion. **Builder question:** should the city
 have a treasury that initiative spend, renewals, and taxes flow through — making the civic economy conserve?
+
+**Casino money fountain — found by this inventory, fixed `0b3e796d` (S499).** Decimal odds include the returned
+stake, the stake is only debited on a loss, and a win credited the gross payout — every winner got one stake
+from nothing. Live C106–C108: 34 settled wagers, citizens **+$5,224**; settled correctly **−$457** (the designed
+1.83 edge). Now wins move payout − stake (NetWorth, household-savings rule, house float, cover guard); the
+ledger's Payout cell keeps the gross ticket. Engine + Node twin + tests. Bench SANDBOX 0908 @130 C144: ok, 0 new
+errors — no wager can settle on the bench (no sports feed rows past C108), so the settlement math is proven by
+the unit tests (incl. a house-edge assertion). **Held for the builder's go before PROD** — winners gain less.

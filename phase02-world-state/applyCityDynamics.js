@@ -340,9 +340,19 @@ function applyCityDynamics_(ctx) {
     m.sentiment = moodBefore + (catastrophe ? weatherMood - WEATHER_CAT_MOOD : weatherMood * WEATHER_MOOD_SCALE);
   }
 
+  // engine.196: the holiday table's sentiment lifts were tuned against the −0.48/cycle
+  // tax engine.185 removed; the biggest days pinned 20 of 22 hoods at 1.00 (bench 0908
+  // @13: Independence, OaklandPride), erasing hood spread the way engine.188 fixed for
+  // ordinary days. One scale on the holiday-driven sentiment delta — the priority baseline,
+  // Creation Day and the named-holiday table, not First Friday — keeps every holiday's rank
+  // and brings the top (major +0.1 stacked on +0.4/+0.5) to ~+0.30. Same shape as
+  // WEATHER_MOOD_SCALE above.
+  var HOLIDAY_MOOD_SCALE = 0.6;
+
   function applyHolidayModifiers_(m, holiday, holidayPriority, flags, seasonName, clusterName) {
     var isFF = !!flags.isFirstFriday;
     var isCD = !!flags.isCreationDay;
+    var moodStart = m.sentiment, ffMood = 0;
 
     // Holiday priority baseline
     if (holidayPriority === 'major') {
@@ -357,6 +367,7 @@ function applyCityDynamics_(ctx) {
     }
 
     // First Friday (cluster-sensitive - arts corridor boost)
+    var moodPreFF = m.sentiment;
     if (isFF) {
       if (clusterName === 'DOWNTOWN_CORE') {
         // KONO/Uptown arts walk epicenter
@@ -382,6 +393,8 @@ function applyCityDynamics_(ctx) {
         m.sentiment += 0.1;
       }
     }
+
+    ffMood = m.sentiment - moodPreFF;
 
     // Creation Day (citywide, East Oakland special)
     if (isCD || holiday === 'CreationDay') {
@@ -437,6 +450,9 @@ function applyCityDynamics_(ctx) {
 
     // Winter dampening
     if (seasonName === 'Winter') m.publicSpaces *= 0.97;
+
+    var holidayMood = (m.sentiment - moodStart) - ffMood;
+    m.sentiment = moodStart + ffMood + holidayMood * HOLIDAY_MOOD_SCALE;
   }
 
   function applySportsModifiers_(m, sportsSeasonRaw, clusterName) {

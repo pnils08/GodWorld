@@ -107,3 +107,22 @@ a new parity check, JSON vs. live sheet instead of JSON vs. embedded block).
   phases, Engine_Errors unchanged (1 pre-existing C108 WeekRecord row), employment 0.963 → 0.963,
   998 citizens with positive Income (median $95,204). Bench tab parity via `--check --sheet-id`.
   Rides the stacked PROD ship after the C109 smoke; close to done-pending-archive once live fires.
+
+## engine.200 — the four job fields, adjudicated (S499, engine-sheet, 2026-09-27)
+
+Live read (952 rows): RoleType 952 filled · EconomicProfileKey 798 · SkillTags 878 · EmployerBizId 869.
+**Verdict: keep all four — they are four different facts, not one fact stored four times.**
+
+| Field | What it is | Authority |
+|---|---|---|
+| `RoleType` | the job title the citizen holds | **pay** — `jobReferencePay_` bands by RoleType's catalog role (engine.172), falling back to its field; the catalog is now the `Economic_Parameters` tab (engine.199) |
+| `SkillTags` | current field `|` trained field (engine.146) | field matching, rehiring, heritage |
+| `EmployerBizId` | who employs them | Business_Ledger link, employer growth |
+| `EconomicProfileKey` | legacy: a catalog label + a gate | **not pay any more.** Live uses: non-empty = "income settled" gate (calculateCitizenIncomes_ / settlement), `SPORTS_OVERRIDE` sentinel for the sports layer (61 sentinel rows) |
+
+The overlap engine.87 left undecided is RoleType vs EconomicProfileKey: 715 EPK values are catalog roles,
+and on 214 rows both are catalog roles but differ (Photographer → Graphic Designer, Middle School Teacher →
+Midwife). Since engine.172 that disagreement cannot move pay — EPK's text is stale labelling, not a second
+job. **Open:** audit the ~15 files that read EPK and confirm each uses only its emptiness or the sentinel, never
+its text as a job; any that reads the text as a job is a defect to repoint to RoleType. No ledger rewrite
+(the 214 labels are harmless once no reader trusts them; a sweep is not the fix).

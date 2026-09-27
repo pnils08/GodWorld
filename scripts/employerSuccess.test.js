@@ -310,7 +310,8 @@ const bl = rows => [BLH].concat(rows);
     inWorldStamp_: ctx => 'C' + ctx.summary.absoluteCycle,
     queueAppendIntent_: (ctx, tab, row) => writes.push({ tab, row: row.slice() }),
     queueBatchAppendIntent_: (ctx, tab, rows) => rows.forEach(row => writes.push({ tab, row: row.slice() })),
-    queueCellIntent_: () => {} // capture boundary only; never open a Sheet
+    queueCellIntent_: () => {}, // capture boundary only; never open a Sheet
+    ECONOMIC_PARAMETERS: JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'economic_parameters.json'), 'utf8')) // engine.199: live reads the Economic_Parameters tab
   };
   vm.createContext(w);
   for (const rel of [

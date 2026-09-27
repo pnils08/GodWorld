@@ -1,6 +1,6 @@
 # Engine Stub Reverse Index
 
-**Generated:** 2026-09-26 by `scripts/stubEngine.js` (mechanical — no LLM).
+**Generated:** 2026-09-27 by `scripts/stubEngine.js` (mechanical — no LLM).
 
 **Purpose:** Cheap lookup — given an `S.*` field or sheet name, find every function that reads or writes it. Companion to `ENGINE_STUB_MAP.md` (forward: function → fields).
 
@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 182 · **Functions mapped:** 1510 · **S.* fields:** 364 · **Sheets:** 56
+**Files scanned:** 182 · **Functions mapped:** 1511 · **S.* fields:** 364 · **Sheets:** 56
 
 ## S.* / ctx.summary reverse index
 
@@ -417,7 +417,7 @@ Sheet detection: `getSheetByName`, `queue*Intent_`, known sheet-name string + wr
 | `Cycle_Weather` | `phase10-persistence/recordCycleWeather.js::recordCycleWeather_` | `phase10-persistence/recordCycleWeather.js::getWeatherForCycle_`, `phase10-persistence/recordCycleWeather.js::getWeatherHistory_`, `phase10-persistence/recordCycleWeather.js::recordCycleWeather_` | 1 | 3 |
 | `Dashboard` | _(none)_ | `utilities/godWorldDashboard.js::createGodWorldDashboard`, `utilities/godWorldDashboard.js::refreshDashboard` | 0 | 2 |
 | `Domain_Tracker` | `phase08-v3-chicago/v3DomainWriter.js::saveV3Domains_` | `phase08-v3-chicago/v3DomainWriter.js::cleanupDomainTrackerV34`, `phase08-v3-chicago/v3DomainWriter.js::saveV3Domains_` | 1 | 2 |
-| `Economic_Parameters` | _(none)_ | `phase01-config/godWorldEngine2.js::buildIntakeSalaryPools_` | 0 | 1 |
+| `Economic_Parameters` | _(none)_ | `utilities/citizenDerivation.js::economicParameters_` | 0 | 1 |
 | `Edition_Coverage_Ratings` | `phase02-world-state/applyEditionCoverageEffects.js::applyEditionCoverageEffects_` | `phase02-world-state/applyEditionCoverageEffects.js::applyEditionCoverageEffects_`, `phase07-evening-media/applyStorySeeds.js::applyStorySeeds_` | 1 | 2 |
 | `Election_Log` | `phase05-citizens/runCivicElectionsv1.js::runCivicElections_` | `phase05-citizens/runCivicElectionsv1.js::runCivicElections_`, `phase10-persistence/buildCyclePacket.js::getCivicContextForPacket_`, `utilities/cycleRollback.js::previewRollbackToCycle78`, `utilities/cycleRollback.js::rollbackToCycle78` | 1 | 4 |
 | `Engine_Errors` | _(none)_ | `phase01-config/godWorldEngine2.cycleCount.test.js::mkCtx`, `phase01-config/godWorldEngine2.js::logEngineError_` | 0 | 2 |

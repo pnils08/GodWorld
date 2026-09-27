@@ -11,6 +11,7 @@ const R = (p) => fs.readFileSync(path.resolve(__dirname, '..', p), 'utf8');
 
 const intents = [], logs = [];
 const sandbox = {
+  ECONOMIC_PARAMETERS: JSON.parse(R('data/economic_parameters.json')), // engine.199: live reads the Economic_Parameters tab
   Logger: { log(m) { logs.push(String(m)); } },
   queueAppendIntent_: (ctx, tab, row) => intents.push({ tab, row }),
   queueCellIntent_: () => {},

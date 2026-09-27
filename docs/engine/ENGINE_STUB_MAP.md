@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-09-26 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-09-27 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -200,7 +200,6 @@
 - **normalizeIntakeCategory_(raw)**
 
 - **buildIntakeSalaryPools_(ctx)**
-  Sheets: Economic_Parameters
 
 - **drawIntakeProfile_(pools, category, givenRole, rng)**
 
@@ -3554,6 +3553,9 @@
 - **assert(label, cond, detail)**
 
 ### citizenDerivation.js
+- **economicParameters_()**
+  Sheets: Economic_Parameters
+
 - **canonicalRolesSet_()**
 
 - **hashSeed_(s)**
@@ -4317,4 +4319,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 182
-**Functions mapped:** 1510
+**Functions mapped:** 1511

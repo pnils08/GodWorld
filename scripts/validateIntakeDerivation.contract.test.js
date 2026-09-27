@@ -7,7 +7,7 @@
  *
  * Section A: source-level — env + lib/citizenDerivation + lib/sheets deps,
  *   5 acceptance gates referenced, fixture array shape, 200-citizen sweep,
- *   ECONOMIC_PARAMETERS embedding parity marker check.
+ *   Gate 5 no-embedded-catalog check + the engine.199 sheet-read round trip.
  * Section B: subprocess smoke when sheets creds available — runs the full
  *   validator on the live ledger; asserts exit 0 or 1 (either is a valid
  *   real-state outcome) + presence of the load-bearing report sections.
@@ -121,19 +121,45 @@ console.log('\nTest 9: Gate 4 — distribution non-uniformity');
     /distinctRoles\s*<\s*15/.test(source));
 }
 
-console.log('\nTest 10: Gate 5 — Apps Script ECONOMIC_PARAMETERS parity');
+console.log('\nTest 10: Gate 5 + engine.199 — the job catalog has one runtime source');
 {
-  // Markers in utilities/citizenDerivation.js
-  assert("ECONOMIC_PARAMETERS_START marker",
-    source.includes('ECONOMIC_PARAMETERS_START'));
-  assert("ECONOMIC_PARAMETERS_END marker",
-    source.includes('ECONOMIC_PARAMETERS_END'));
-  // Counts "role": entries inside the marker block
-  assert("entry count via 'role': regex",
-    /["']"role":["']/.test(source) || /"role":/.test(source));
-  // Sync script reference for fix path
-  assert("syncEconomicParameters.js fix-path reference",
-    source.includes('syncEconomicParameters.js'));
+  const vm = require('vm');
+  const sync = require('./syncEconomicParameters.js');
+  const json = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'economic_parameters.json'), 'utf8'));
+  const cdSrc = fs.readFileSync(path.join(ROOT, 'utilities', 'citizenDerivation.js'), 'utf8');
+  // The Gate 5 scan fires on this tree: no Apps Script file embeds the catalog.
+  assert('Gate 5 scans utilities/ + phase*/ for an embedded catalog',
+    /ECONOMIC_PARAMETERS_START/.test(source) && /phase\\d/.test(source));
+  assert('utilities/citizenDerivation.js embeds no catalog',
+    !cdSrc.includes('ECONOMIC_PARAMETERS_START') && !/\{\s*"role"\s*:/.test(cdSrc));
+  // Round trip: JSON → the rows the sync script pushes → economicParameters_ → the same catalog.
+  const load = (values, seed) => {
+    const logs = [];
+    let opens = 0;
+    const sb = { Logger: { log: m => logs.push(String(m)) },
+      openSimSpreadsheet_: () => { opens++; return { getSheetByName: n => (n === sync.SHEET_NAME && values) ? { getDataRange: () => ({ getValues: () => values }) } : null }; } };
+    if (seed !== undefined) sb.ECONOMIC_PARAMETERS = seed;
+    vm.createContext(sb);
+    vm.runInContext(cdSrc, sb);
+    return { sb, logs, opens: () => opens };
+  };
+  const tab = [sync.SHEET_COLUMNS.map(c => c[0])].concat(json.map(sync.toSheetRow));
+  const L = load(tab);
+  const got = L.sb.economicParameters_();
+  L.sb.economicParameters_(); L.sb.lookupIncome_('Plumber'); L.sb.canonicalRolesSet_();
+  const pick = p => JSON.stringify([p.role, p.category, p.incomeRange, p.medianIncome, p.effectiveTaxRate, p.economicOutputCategory, p.housingBurdenPct, p.consumerProfile, p.notes || '']);
+  assert('sheet read reproduces every JSON role, field for field',
+    got.length === json.length && got.every((p, i) => pick(p) === pick(json[i])),
+    `got ${got.length} of ${json.length}`);
+  assert('one sheet open per execution, logged once', L.opens() === 1 && L.logs.filter(m => /Economic_Parameters: loaded 306 roles/.test(m)).length === 1,
+    `opens=${L.opens()} logs=${JSON.stringify(L.logs)}`);
+  assert('lookupIncome_ reads the sheet catalog', L.sb.lookupIncome_('Longshoreman') === 138000);
+  const throws = (values, seed) => { try { load(values, seed).sb.economicParameters_(); return null; } catch (e) { return e.message; } };
+  assert('missing tab throws', /tab missing/.test(throws(null) || ''));
+  assert('header without MedianIncome throws', /needs Role/.test(throws([['Role', 'Category', 'IncomeMin', 'IncomeMax']]) || ''));
+  assert('header-only tab throws', /no roles/.test(throws([tab[0]]) || ''));
+  assert('a seeded empty catalog is not "loaded" — it reads the tab', load(tab, []).sb.economicParameters_().length === json.length);
+  assert('a seeded catalog is kept (harness path) — no tab behind it, so a read would throw', throws(null, json) === null);
 }
 
 console.log('\nTest 11: verdict + exit-code contract');

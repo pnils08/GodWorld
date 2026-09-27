@@ -496,9 +496,9 @@ console.log('engine.96 T11 the heritage roll mints in the family\'s field at the
 {
   const R2 = (rel) => fs.readFileSync(path.resolve(__dirname, rel), 'utf8');
   const appended = [];
-  const updateHeritageT11 = new Function('Logger', 'queueAppendIntent_', 'safeRand_', 'inWorldStamp_', 'recordHookRipple_', 'parseJSON', 'ECONOMIC_PARAMETERS',
+  const updateHeritageT11 = new Function('Logger', 'queueAppendIntent_', 'safeRand_', 'inWorldStamp_', 'recordHookRipple_', 'parseJSON', 'economicParameters_',
     CAL_SRC + '\n' + R2('../phase05-citizens/educationCareerEngine.js') + '\n' + R2('../phase05-citizens/runCareerEngine.js') + '\n' + R2('../phase05-citizens/applyBusinessDynamics.js') + '\n' + R2('../phase05-citizens/generationalWealthEngine.js') + '\nreturn updateHeritage_;')(
-    { log() {} }, (ctx, tab, row, reason) => appended.push({ tab, row, reason }), (ctx) => ctx.rng, () => 'Y3C110', () => {}, (v, f) => { try { return JSON.parse(v); } catch (e) { return f; } }, []);
+    { log() {} }, (ctx, tab, row, reason) => appended.push({ tab, row, reason }), (ctx) => ctx.rng, () => 'Y3C110', () => {}, (v, f) => { try { return JSON.parse(v); } catch (e) { return f; } }, () => JSON.parse(R2('../data/economic_parameters.json')));
   const HDR = SL_HEADER.concat(['Tier', 'LineageId', 'SpouseId', 'UsageCount', 'CIV (y/n)', 'LifeHistory', 'SkillTags', 'RoleType']);
   const hi = (n) => HDR.indexOf(n);
   const person = (popid, first, last, hood, nw, line, tags, role) => cit(popid, first, last, hood, 90000, { netWorth: nw }).concat([1, line, '', 0, '', 'Y2C1 — born', tags, role]);

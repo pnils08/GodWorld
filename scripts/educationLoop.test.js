@@ -219,6 +219,7 @@ console.log('\n8. engine.144 loops 1+2 — field-first settlement (S411):');
   check('a Trades parent now weighs: kid follows Lu into Construction & Baylight', pk.field === 'Construction & Baylight' && pk.cause === 'parent' && E.settleFieldClause_(pk) === ' (following Lu into Construction & Baylight)');
   // engine.146: two truths — setCurrentField_ / roleFieldOf_
   global.ECONOMIC_PARAMETERS = JSON.parse(R('data/economic_parameters.json'));
+  global.economicParameters_ = () => global.ECONOMIC_PARAMETERS; // engine.199: live reads the Economic_Parameters tab
   check('setCurrentField_: blank → the new field', E.setCurrentField_('', 'Healthcare') === 'Healthcare');
   check('setCurrentField_: role change writes current|trained', E.setCurrentField_('Education', 'Trades') === 'Trades|Education');
   check('setCurrentField_: same field again → unchanged', E.setCurrentField_('Trades|Education', 'Trades') === 'Trades|Education' && E.setCurrentField_('Healthcare', 'Healthcare') === 'Healthcare');
@@ -229,6 +230,7 @@ console.log('\n8. engine.144 loops 1+2 — field-first settlement (S411):');
   const eng2 = R('phase01-config/godWorldEngine2.js'), adv = R('phase05-citizens/processAdvancementIntake.js');
   check('both role-change intake sites write the current field', /setCurrentField_\(oldTags146, roleFieldOf_\(givenRole\)\)/.test(eng2) && /setCurrentField_\(ledgerRows\[existingRow\]\[lTags146\], roleFieldOf_\(roleType\)\)/.test(adv));
   delete global.ECONOMIC_PARAMETERS;
+  delete global.economicParameters_;
   // no source at all → null, legacy path
   pk = E.settleField_('', [{ name: 'Cy', tags: 'athlete' }], {}, {}, {}, one(0.3));
   check('no source → field null', pk.field === null && pk.cause === null);

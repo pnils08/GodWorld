@@ -1,23 +1,20 @@
 #!/usr/bin/env node
 /**
  * syncEconomicParameters.js — push data/economic_parameters.json (the canonical
- * edit point) to its two copies: the Apps Script ECONOMIC_PARAMETERS constant
- * and the live Economic_Parameters sheet tab. One direction only: JSON → copies.
+ * edit point) to the Economic_Parameters sheet tab, the engine's one runtime
+ * source (engine.199: economicParameters_ in utilities/citizenDerivation.js reads
+ * the tab once per run). One direction only: JSON → tab.
  *
  * Plans: docs/archive/plans/2026-04-28-intake-side-citizen-derivation.md §Task 4.3
  *        docs/plans/2026-09-10-economic-parameters-one-source.md (engine.198/199)
  *
- * Apps Script can't require() JSON, so utilities/citizenDerivation.js carries the
- * catalog embedded as a JS array literal (default mode). The sheet tab is read by
- * buildIntakeSalaryPools_ (--sheet mode). Run both after editing the JSON.
- *
  * Usage:
- *   node scripts/syncEconomicParameters.js                  # write embedded block
- *   node scripts/syncEconomicParameters.js --check          # exit 1 if block out of sync
- *   node scripts/syncEconomicParameters.js --sheet          # append missing roles to the tab
- *   node scripts/syncEconomicParameters.js --sheet --check  # exit 1 if tab != JSON
+ *   node scripts/syncEconomicParameters.js           # append missing roles to the tab
+ *   node scripts/syncEconomicParameters.js --check   # exit 1 if tab != JSON (pre-deploy)
+ *   node scripts/syncEconomicParameters.js --check --sheet-id <id>   # a bench sheet
+ *   (--sheet is accepted and ignored — the tab is the only target now)
  *
- * --sheet appends roles the tab lacks, in JSON order. It never rewrites or deletes:
+ * Appends roles the tab lacks, in JSON order. It never rewrites or deletes:
  * field drift, sheet-only roles, or an order mismatch mean someone edited the tab
  * by hand — it reports them and exits 1 so a person decides.
  */
@@ -26,28 +23,6 @@ const fs = require('fs');
 const path = require('path');
 
 const SRC_JSON = path.resolve(__dirname, '..', 'data', 'economic_parameters.json');
-const DST_GS = path.resolve(__dirname, '..', 'utilities', 'citizenDerivation.js');
-
-const START_MARKER = '// ═══ ECONOMIC_PARAMETERS_START ═══ DO NOT EDIT MANUALLY ═══';
-const END_MARKER = '// ═══ ECONOMIC_PARAMETERS_END ═══';
-
-function buildBlock(parameters) {
-  // One entry per line, two-space indent inside the array, sorted by category
-  // for stable diffs (entries within a category preserve JSON order).
-  const lines = [];
-  lines.push(START_MARKER);
-  lines.push('// Re-generate via: node scripts/syncEconomicParameters.js');
-  lines.push('// Source: data/economic_parameters.json (' + parameters.length + ' entries)');
-  lines.push('var ECONOMIC_PARAMETERS = [');
-  for (let i = 0; i < parameters.length; i++) {
-    const p = parameters[i];
-    const trailing = i < parameters.length - 1 ? ',' : '';
-    lines.push('  ' + JSON.stringify(p) + trailing);
-  }
-  lines.push('];');
-  lines.push(END_MARKER);
-  return lines.join('\n');
-}
 
 const SHEET_NAME = 'Economic_Parameters';
 const SHEET_COLUMNS = [
@@ -107,8 +82,9 @@ function reportDiff(d, jsonCount) {
   if (d.drift.length > 20) console.log('  ...' + (d.drift.length - 20) + ' more drift cells');
 }
 
-async function syncSheet(parameters, checkOnly) {
+async function syncSheet(parameters, checkOnly, sheetId) {
   require('../lib/env');
+  if (sheetId) process.env.GODWORLD_SHEET_ID = sheetId; // after lib/env, which would override it
   const sheets = require('../lib/sheets');
 
   let d = diffSheet(await sheets.getRawSheetData(SHEET_NAME), parameters);
@@ -144,47 +120,16 @@ async function syncSheet(parameters, checkOnly) {
 function main() {
   const args = process.argv.slice(2);
   const checkOnly = args.includes('--check');
-
+  const idAt = args.indexOf('--sheet-id');
+  const sheetId = idAt >= 0 ? args[idAt + 1] : null;
+  if (idAt >= 0 && !sheetId) { console.error('ERROR: --sheet-id needs an id'); process.exit(1); }
   const parameters = JSON.parse(fs.readFileSync(SRC_JSON, 'utf-8'));
-
-  if (args.includes('--sheet')) {
-    return syncSheet(parameters, checkOnly).catch(e => {
-      console.error('ERROR: ' + e.message);
-      process.exit(1);
-    });
-  }
-  const newBlock = buildBlock(parameters);
-
-  const existing = fs.readFileSync(DST_GS, 'utf-8');
-  const startIdx = existing.indexOf(START_MARKER);
-  const endIdx = existing.indexOf(END_MARKER);
-
-  if (startIdx < 0 || endIdx < 0) {
-    console.error('ERROR: marker block not found in ' + DST_GS);
-    console.error('  Expected START: ' + START_MARKER);
-    console.error('  Expected END:   ' + END_MARKER);
+  return syncSheet(parameters, checkOnly, sheetId).catch(e => {
+    console.error('ERROR: ' + e.message);
     process.exit(1);
-  }
-
-  const before = existing.slice(0, startIdx);
-  const after = existing.slice(endIdx + END_MARKER.length);
-  const replaced = before + newBlock + after;
-
-  if (replaced === existing) {
-    console.log('ECONOMIC_PARAMETERS already in sync (' + parameters.length + ' entries).');
-    return;
-  }
-
-  if (checkOnly) {
-    console.error('OUT OF SYNC: utilities/citizenDerivation.js ECONOMIC_PARAMETERS block does not match data/economic_parameters.json.');
-    console.error('Run: node scripts/syncEconomicParameters.js');
-    process.exit(1);
-  }
-
-  fs.writeFileSync(DST_GS, replaced);
-  console.log('Wrote ECONOMIC_PARAMETERS block: ' + parameters.length + ' entries.');
-  console.log('  Source: ' + SRC_JSON);
-  console.log('  Target: ' + DST_GS);
+  });
 }
 
-main();
+module.exports = { SHEET_NAME, SHEET_COLUMNS, toSheetRow, diffSheet };
+
+if (require.main === module) main();

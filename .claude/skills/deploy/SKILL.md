@@ -53,6 +53,8 @@ CLAUDE_CTL=1 npx clasp push
 
 5. **File count sanity** — `find phase*/ utilities/ -name "*.js" ! -name "*.test.js" | wc -l` ≈ 164. A big swing means something structural moved; investigate before pushing.
 
+6. **Job-catalog parity (engine.199)** — the engine reads the job catalog from the target sheet's `Economic_Parameters` tab, not from code. `node scripts/syncEconomicParameters.js --check` must print "Tab already matches JSON row-for-row." Bench push: add `--sheet-id <sandbox id>` so the check reads the bench tab. Out of sync → `node scripts/syncEconomicParameters.js` (appends missing roles; refuses on hand-edits).
+
 ## Deploy
 
 ```bash

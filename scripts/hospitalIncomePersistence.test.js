@@ -21,7 +21,8 @@ const sb = { Logger: { log() {} }, safeRand_: ctx => ctx.rng,
   queueBatchAppendIntent_: (ctx, tab, rows) => { ctx.logRows.push(...rows); },
   queueCellIntent_: () => { throw new Error('Unexpected external write in isolated income test'); },
   queueAppendIntent_: (ctx, tab, row) => { ctx.logRows.push(row); },
-  inWorldStamp_: ctx => 'C' + ctx.summary.cycleId };
+  inWorldStamp_: ctx => 'C' + ctx.summary.cycleId,
+  ECONOMIC_PARAMETERS: JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'economic_parameters.json'), 'utf8')) }; // engine.199: live reads the Economic_Parameters tab
 vm.createContext(sb);
 for (const file of ['phase01-config/advanceSimulationCalendar.js', 'utilities/citizenDerivation.js',
   'phase05-citizens/educationCareerEngine.js', 'phase05-citizens/runCareerEngine.js',

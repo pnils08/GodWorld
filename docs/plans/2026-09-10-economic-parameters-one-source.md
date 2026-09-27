@@ -1,7 +1,7 @@
 ---
 title: Economic_Parameters — collapse to one runtime source
 created: 2026-09-10
-updated: 2026-09-10
+updated: 2026-09-27
 type: plan
 tags: [plan, engine, economy, active]
 sources:
@@ -91,3 +91,15 @@ a new parity check, JSON vs. live sheet instead of JSON vs. embedded block).
   stripped from all 108 working-jobs notes (the sim tracks cycles); embedded block regenerated,
   notes-only, rides the next clasp push. Bench gets the rows on the next live→sandbox resync. `--sheet --check` is the JSON-vs-sheet parity check
   engine.199's Gate 5 rework can call instead of building a new one.
+- S499 (engine-sheet) — Built. `economicParameters_()` (`utilities/citizenDerivation.js`) reads
+  the tab once per execution into `ECONOMIC_PARAMETERS` (declared without an initializer, so a
+  test harness can seed it); throws on a missing tab, missing required header, or zero roles.
+  Readers moved onto it: `jobPayTable_`, `roleFieldOf_`, `lookupIncome_`, `canonicalRolesSet_`,
+  and `buildIntakeSalaryPools_` (now consumes the same read, so one tab read per run instead of
+  two). The two degrade-to-empty `typeof ECONOMIC_PARAMETERS` guards are gone. Embedded
+  306-row block deleted; `syncEconomicParameters.js` is JSON→tab only (`--check`,
+  `--sheet-id` for a bench); Gate 5 is structural (fails on any embedded copy under
+  `utilities/`/`phase*/`); drift enforcement = `--check` as /deploy pre-flight step 6. Round-trip
+  test in `validateIntakeDerivation.contract.test.js` Test 10. Live and bench tabs both 306/306
+  at build. Next: bench fire (predicted zero economic delta; one "Economic_Parameters: loaded
+  306 roles" log line), then it rides the stacked PROD ship.

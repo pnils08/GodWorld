@@ -37,6 +37,7 @@ const sandbox = {
   Logger: { log: () => {} }, Math, JSON, Object, Array, String, Number, Date, isNaN, isFinite, parseInt, parseFloat, console, RegExp,
   safeRand_: ctx => (ctx && typeof ctx.rng === 'function') ? ctx.rng : (() => 0.6),
   queueAppendIntent_: (ctx, tab, row) => { (global.__intents = global.__intents || []).push({ tab, row }); },
+  ECONOMIC_PARAMETERS: JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'economic_parameters.json'), 'utf8')), // engine.199: live reads the Economic_Parameters tab
 };
 vm.createContext(sandbox);
 for (const rel of [

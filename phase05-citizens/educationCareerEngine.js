@@ -960,10 +960,9 @@ function roleFieldOf_(roleText) {
   var t = String(roleText || '').trim();
   if (!t) return null;
   var cat = null, lc = t.toLowerCase();
-  if (typeof ECONOMIC_PARAMETERS !== 'undefined' && ECONOMIC_PARAMETERS && ECONOMIC_PARAMETERS.length) {
-    for (var i = 0; i < ECONOMIC_PARAMETERS.length; i++) {
-      if (String(ECONOMIC_PARAMETERS[i].role || '').toLowerCase() === lc) { cat = ECONOMIC_PARAMETERS[i].category; break; }
-    }
+  var E = economicParameters_();
+  for (var i = 0; i < E.length; i++) {
+    if (String(E[i].role || '').toLowerCase() === lc) { cat = E[i].category; break; }
   }
   if (!cat && typeof roleSectorCategory_ === 'function') cat = roleSectorCategory_(t);
   return (cat && skillTagField_(cat)) ? cat : null; // the catalog label stays (Trades is Trades); non-field → null

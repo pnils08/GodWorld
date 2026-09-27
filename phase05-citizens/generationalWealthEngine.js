@@ -745,7 +745,7 @@ function roleSectorCategory_(roleText) {
 function median_(a) { if (!a || !a.length) return 0; var b = a.slice().sort(function(x, y) { return x - y; }); return b[Math.floor(b.length / 2)]; }
 function seedUnit_(s) { var h = 2166136261; s = String(s || ''); for (var i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; } return (h % 10000) / 10000; }
 
-// The economic catalog (utilities/citizenDerivation.js ECONOMIC_PARAMETERS) by
+// The economic catalog (economicParameters_, the Economic_Parameters tab) by
 // role and by category — a citizen's job is what pays them. Each entry is a
 // BAND {min, max, med}; a category's band is the median of its roles' mins /
 // maxes / medians. Built once.
@@ -753,7 +753,7 @@ var JOB_PAY_CACHE_ = null;
 function jobPayTable_() {
   if (JOB_PAY_CACHE_) return JOB_PAY_CACHE_;
   var byRole = {}, cat = {};
-  var E = (typeof ECONOMIC_PARAMETERS !== 'undefined' && ECONOMIC_PARAMETERS) ? ECONOMIC_PARAMETERS : [];
+  var E = economicParameters_();
   for (var i = 0; i < E.length; i++) {
     var med = Number(E[i].medianIncome) || 0; if (!(med > 0)) continue;
     var rng = E[i].incomeRange || [];

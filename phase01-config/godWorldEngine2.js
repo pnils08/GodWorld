@@ -1533,36 +1533,18 @@ function normalizeIntakeCategory_(raw) {
   return null;
 }
 
-/** Read Economic_Parameters once; return intake-category → [{role, min, max}] pools. */
+/** engine.199: intake-category → [{role, min, max}] pools off the one catalog read (economicParameters_). */
 function buildIntakeSalaryPools_(ctx) {
   var pools = {};
   for (var k in INTAKE_CATEGORY_ECON_MAP) pools[k] = [];
-  try {
-    var sheet = ctx.ss.getSheetByName('Economic_Parameters');
-    if (!sheet) return pools;
-    var data = sheet.getDataRange().getValues();
-    if (data.length < 2) return pools;
-    var h = data[0];
-    var iRole = -1, iCatE = -1, iMin = -1, iMax = -1;
-    for (var c = 0; c < h.length; c++) {
-      var hd = String(h[c]).trim();
-      if (hd === 'Role') iRole = c;
-      if (hd === 'Category') iCatE = c;
-      if (hd === 'IncomeMin') iMin = c;
-      if (hd === 'IncomeMax') iMax = c;
+  var E = economicParameters_(); // outside any catch — a missing catalog stops the run here, not three phases later
+  for (var r = 0; r < E.length; r++) {
+    var econCat = E[r].category;
+    if (!E[r].role || !econCat) continue;
+    var entry = { role: E[r].role, min: Number(E[r].incomeRange[0]) || 0, max: Number(E[r].incomeRange[1]) || 0 };
+    for (var ic in INTAKE_CATEGORY_ECON_MAP) {
+      if (INTAKE_CATEGORY_ECON_MAP[ic].indexOf(econCat) !== -1) pools[ic].push(entry);
     }
-    if (iRole < 0 || iCatE < 0 || iMin < 0 || iMax < 0) return pools;
-    for (var r = 1; r < data.length; r++) {
-      var role = String(data[r][iRole] || '').trim();
-      var econCat = String(data[r][iCatE] || '').trim();
-      if (!role || !econCat) continue;
-      var entry = { role: role, min: Number(data[r][iMin]) || 0, max: Number(data[r][iMax]) || 0 };
-      for (var ic in INTAKE_CATEGORY_ECON_MAP) {
-        if (INTAKE_CATEGORY_ECON_MAP[ic].indexOf(econCat) !== -1) pools[ic].push(entry);
-      }
-    }
-  } catch (e) {
-    Logger.log('buildIntakeSalaryPools_: ' + e.message);
   }
   return pools;
 }

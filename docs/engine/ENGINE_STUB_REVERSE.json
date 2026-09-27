@@ -1,8 +1,8 @@
 {
-  "generated": "2026-09-26",
+  "generated": "2026-09-27",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 182,
-  "functionsMapped": 1510,
+  "functionsMapped": 1511,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -4647,12 +4647,6 @@
         "utilities/sheetCache.test.js::mkSS"
       ]
     },
-    "Economic_Parameters": {
-      "writers": [],
-      "readers": [
-        "phase01-config/godWorldEngine2.js::buildIntakeSalaryPools_"
-      ]
-    },
     "Riley_Digest": {
       "writers": [
         "phase01-config/godWorldEngine2.js::writeDigest_"
@@ -5118,6 +5112,12 @@
       "writers": [],
       "readers": [
         "utilities/archiveCitizenExits.js::citizenArchiveLatestByPop_"
+      ]
+    },
+    "Economic_Parameters": {
+      "writers": [],
+      "readers": [
+        "utilities/citizenDerivation.js::economicParameters_"
       ]
     },
     "Reflection_Intake": {

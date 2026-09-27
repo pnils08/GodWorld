@@ -107,22 +107,19 @@ async function main() {
   console.log('  Gender:        ' + JSON.stringify(gn));
   console.log('  Distinct RoleTypes: ' + distinctRoles + ' / 200');
 
-  // Gate 5: ECONOMIC_PARAMETERS embedding parity (Apps Script side).
+  // Gate 5 (engine.199): no Apps Script file carries an embedded copy of the job
+  // catalog — the engine reads the Economic_Parameters tab. Tab-vs-JSON parity is
+  // `node scripts/syncEconomicParameters.js --check` (needs the sheet).
   const fs = require('fs');
   const path = require('path');
-  const appsScript = fs.readFileSync(path.resolve(__dirname, '..', 'utilities', 'citizenDerivation.js'), 'utf-8');
-  const startMarker = 'ECONOMIC_PARAMETERS_START';
-  const endMarker = 'ECONOMIC_PARAMETERS_END';
-  const startIdx = appsScript.indexOf(startMarker);
-  const endIdx = appsScript.indexOf(endMarker);
-  if (startIdx < 0 || endIdx < 0) {
-    failures.push('[Gate 5] Apps Script ECONOMIC_PARAMETERS block markers missing');
-  } else {
-    const block = appsScript.slice(startIdx, endIdx);
-    const entryCount = (block.match(/"role":/g) || []).length;
-    const expected = cd.ECONOMIC_PARAMETERS.length;
-    if (entryCount !== expected) {
-      failures.push('[Gate 5] Apps Script embedded ' + entryCount + ' entries; expected ' + expected + ' — run `node scripts/syncEconomicParameters.js`');
+  const root = path.resolve(__dirname, '..');
+  const gsDirs = fs.readdirSync(root).filter(d => d === 'utilities' || /^phase\d/.test(d));
+  for (const dir of gsDirs) {
+    for (const f of fs.readdirSync(path.join(root, dir)).filter(n => n.endsWith('.js'))) {
+      const src = fs.readFileSync(path.join(root, dir, f), 'utf-8');
+      if (src.includes('ECONOMIC_PARAMETERS_START') || /\{\s*"role"\s*:/.test(src)) {
+        failures.push('[Gate 5] ' + dir + '/' + f + ' embeds a job-catalog copy — the engine reads the Economic_Parameters tab (engine.199); edit data/economic_parameters.json and run `node scripts/syncEconomicParameters.js`');
+      }
     }
   }
 

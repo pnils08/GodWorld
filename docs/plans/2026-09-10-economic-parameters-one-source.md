@@ -126,3 +126,10 @@ Midwife). Since engine.172 that disagreement cannot move pay — EPK's text is s
 job. **Open:** audit the ~15 files that read EPK and confirm each uses only its emptiness or the sentinel, never
 its text as a job; any that reads the text as a job is a defect to repoint to RoleType. No ledger rewrite
 (the 214 labels are harmless once no reader trusts them; a sweep is not the fix).
+
+**engine.200 reader audit — done the same session.** Every engine read of the EPK value: `educationCareerEngine.js`
+:406 / `runCareerEngine.js` :266, :945-946, :1235, :1268 compare to `SPORTS_OVERRIDE`; `generationalWealthEngine.js`
+:514 and `educationCareerEngine.js` :1156 test emptiness (the settled gate); `educationCareerEngine.js` :1244 writes it
+at settlement; :1315 logs it. The one text-as-job read is `generationalWealthEngine.js:888`, a fallback used only when
+`RoleType` is blank — RoleType is filled on 952/952 live rows, so it cannot fire. (`godWorldEngine2.js:857` and
+`applyDemographicDrift.js:64` read World_Population `economy`, not EPK.) No defect; engine.200 closed.

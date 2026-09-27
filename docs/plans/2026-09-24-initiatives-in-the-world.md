@@ -152,6 +152,28 @@ pointers:
 - Job 1 proof (`week_state_c109.json` apply `done`).
 - Sports (engine.210, engine-sheet 2026-09-26): Neighborhood_Map SportsSeason `championship` 22/22 (last A's C109 feed row 235 is `championship`). Expect exactly 5 `Phase2-SportsSeason:WeekRecord` Engine_Errors, all authoring, none a defect: feed rows 230–233 are duplicate A's WeekRecords (one per game; the contract is one summary per franchise), row 235 carries `H:W` on a season-state row. Casino settles the A's on row 229 `H:W` (win), the Oaks on row 234 `A:L`. A manual `/pre-flight` before the fire reports NOT READY on the same cells — not a stop (preflight is not in the fire path); clearing row 235's WeekRecord cell silences it.
 
+## Stacked ship after the C109 smoke (engine-sheet S499 — one stack, ordering is this seat's call)
+
+**Stage from `a5b03e96`, NOT HEAD** — HEAD carries the casino fix `0b3e796d`, held for the builder's go
+(it ships alone, from HEAD, only after a yes). `a5b03e96` is the exact tree bench C143 ran clean; every
+change in it was benched on its own first (SANDBOX 0908 @114–@129, one unbenched change at a time):
+engine.193 cuts 1–3 + 3b, engine.202 WeekRecord fold, engine.227 media coverage, engine.199 catalog from the
+tab (+ hardening), Chicago retired (cycle path + menu tools), engine.196 holiday scale, engine.249 migration by
+size, engine.195 media gates, engine.189 faith-signal delete, engine.41 chaos seeds.
+
+**Before the fire:** check ledger col 47 DialState; `node scripts/syncEconomicParameters.js --check` (live);
+resync bench from live C109. **After PROD:** replay World_Config `employmentFloor` 0.88→0.85; re-blank
+Business_Ledger Annual_Revenue on BIZ-00016/00055/00058. engine.199 and the S499 changes add no sheet replays.
+
+**Predictions for the stacked fire — invariants, not values** (the Chicago cut shifts the RNG stream after
+Phase 8, so specific economic numbers will not reproduce):
+- 131 phases; no `Phase6-FaithSignals`; Engine_Errors gains only the known WeekRecord authoring rejections.
+- Media_Ledger `Sentiment` == Riley_Digest `CitySentiment` (no Chicago blend).
+- CycleWeight loses the permanent 'Media saturation' +2 (engine.227).
+- Neighborhood_Demographics: every hood grows at ~the city's migration rate (≈0.3–0.5%), none above 1.5%.
+- A narrative-seeded business/neighborhood chaos hit, if one fires, lands a SAFETY seed carrying its authored line.
+- Execution log: one `Economic_Parameters: loaded 306 roles`.
+
 ## Changelog
 
 - 2026-09-26 (engine-sheet) — Job 6 LIVE: PROD @132 (web app @119, `a0f158d3`) on agy CLEAN PASS; pull-back byte-identical.

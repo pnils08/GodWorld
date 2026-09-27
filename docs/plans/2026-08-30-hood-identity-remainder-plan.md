@@ -190,6 +190,19 @@ Leave engine.131 T7 and engine.136 untouched.
 
 **Hood demographics take the whole city's migration in 22 equal shares (RULED builder 2026-09-20: items 1–3 approved).** `updateNeighborhoodDemographics.js:161-164` lands `migration / liveHoodCount` absolute heads on every hood of a table that is ~11% of the city: table +3.2%/cycle vs city +0.32%; Lake Merritt / Uptown / KONO / Baylight +13–16% a cycle; the same false hook every cycle ("Lake Merritt seeing N% population growth", C105–C108: 18/17/15/13%); hoods the map reads as outflow (Laurel −2, KONO −1) still grow; every arrival split 15/70/15 flattens hood age mixes. Every engine reader uses RATIOS of this table, never its headcount. **Build:** (1) scale the applied migration by table-sum ÷ `World_Population.totalPopulation`, recomputed each cycle; (2) split by hood size × the hood's own `Neighborhood_Map.MigrationFlow`, so a negative-flow hood loses people in a growth week; (3) arrivals take the hood's own age mix. One function; predictions before the bench fire. **STILL OPEN — the four small hoods (Lake Merritt 532 with 102 tracked citizens, Uptown, KONO, Baylight) sit upside down against the rest, and that problem is NOT dropped. What the builder rejected is this seat's offer to fix it by a one-time rebase — rewriting the world's numbers so the code reads better is the opposite of the doctrine (SIM_DOCTRINE §1, §8, §16). Do not re-propose a rebase in any wrapper. The answer has to come through the sim: causes that move people over cycles (§16 drift over static backfill), designed with the builder**
 
+### engine.249 — items 1, 3 + size half of 2 built, bench-proven 2026-09-27 (S499, engine-sheet)
+
+`c15e4d3e`: applied migration = city migration × table ÷ city (recomputed per cycle, loud if
+`S.worldPopulation.totalPopulation` is missing); each hood's share ∝ its own size × calendar inflowMod;
+arrivals and leavers in the hood's own age mix. **Predicted before the fire:** table ≈ +0.4%, every hood
+near that rate, none above ~1.5% (bench table 89,907 = 19.1% of city 470,107; migration ~1,860).
+**Bench SANDBOX 0908 @126 C139:** table 89,907 → 90,252 (**+0.38%**); every hood **+0.36% to +0.41%**
+(Baylight 0.41, Lake Merritt 0.40, KONO 0.40 … Jack London 0.36) — was +3–16% for the small hoods;
+0 new Engine_Errors. **Still open:** the flow-signed half of item 2 — a negative-`MigrationFlow` hood
+losing people in a growth week needs an intra-city churn rate (how many people move between hoods per
+flow unit): a builder call. The four small hoods stay upside down against the rest until a sim cause
+moves people — no rebase (standing ruling).
+
 ## Changelog
 
 - 2026-09-05 (engine-sheet, S423, latest) — **Tasks 2–3 shipped with engine.131 T7 — LIVE PROD @52.** The builder ruled the T7 split option 2, which unblocked the file. Bench @48 C111/C112 (proof table in the sports plan §T7 shipped): economy blob 22 keys, business fold survives Brooklyn/Glenview rows, 0 errors both fires. Every task on this plan is now live; the row closes pending the C106 live smoke.

@@ -134,6 +134,8 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | engine.109 | New-life intake — Villanueva family (4, San Antonio) bench-proven C145 and written to live Intake 2026-09-27; C109 is the live test | in-progress | engine-sheet | [[../plans/2026-08-16-new-life-intake]] §4 + §Changelog S419 |
 | civic.33 | Recall/challenger fall-rate — pointer is wrong: its cited §Status log has zero recall/challenger-tier content. Needs the real source doc found before anyone can act on this row | needs-info | engine-sheet | [[../plans/2026-08-29-employment-system-cascade]] §Status log (unverified) |
 | civic.38 | Stage machine + budgets + fund drain live; Initiatives in the World Jobs 1–6 LIVE PROD @132; C109 smoke Sun 2026-09-27 | in-progress | research-build / engine-sheet | [[../plans/2026-09-19-civic-wake-game-loop]] + [[../plans/2026-09-24-initiatives-in-the-world]] |
+| civic.40 | Close folds the week before its moves exist — fix before the C110 close | ready | engine-sheet | [[../plans/2026-09-24-initiatives-in-the-world]] §Job 1 Found 2026-09-27 civic.40 |
+| civic.41 | Clerk + sanity-read never run outside the Sunday chain | ready | engine-sheet | [[../plans/2026-09-24-initiatives-in-the-world]] §Job 1 Found 2026-09-27 civic.41 |
 
 ### infrastructure.* — Supermemory, services, ingest
 

@@ -103,3 +103,7 @@ a new parity check, JSON vs. live sheet instead of JSON vs. embedded block).
   test in `validateIntakeDerivation.contract.test.js` Test 10. Live and bench tabs both 306/306
   at build. Next: bench fire (predicted zero economic delta; one "Economic_Parameters: loaded
   306 roles" log line), then it rides the stacked PROD ship.
+- S499 (engine-sheet) — Bench-proven: SANDBOX 0908 @120 = `a63ed660`, C134 `ok:true`, 132
+  phases, Engine_Errors unchanged (1 pre-existing C108 WeekRecord row), employment 0.963 → 0.963,
+  998 citizens with positive Income (median $95,204). Bench tab parity via `--check --sheet-id`.
+  Rides the stacked PROD ship after the C109 smoke; close to done-pending-archive once live fires.

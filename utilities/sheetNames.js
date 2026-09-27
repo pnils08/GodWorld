@@ -17,7 +17,6 @@ var SHEET_NAMES = {
   // === Core Simulation ===
   SIMULATION_LEDGER: 'Simulation_Ledger',
   GENERIC_CITIZENS: 'Generic_Citizens',
-  CHICAGO_CITIZENS: 'Chicago_Citizens',
   WORLD_POPULATION: 'World_Population',
   WORLD_CONFIG: 'World_Config',
 
@@ -67,14 +66,8 @@ var SHEET_NAMES = {
 
   // === Dashboard/Feeds ===
   DASHBOARD: 'Dashboard',
-  // CHICAGO_FEED stays: Chicago_Feed is a LIVE tab, not a ghost —
-  // phase08-v3-chicago/v3ChicagoWriter.js ensures/writes it every cycle, and
-  // cycleExportAutomation + cycleRollback + auditSheetHeaders all reference it.
-  // It was never on the infrastructure.6 ghost list. (SPORTS_FEED above WAS a
-  // ghost — no such tab, no consumers — and is correctly gone.)
-  CHICAGO_FEED: 'Chicago_Feed',
+  // Chicago_* tabs: frozen history, Chicago retired from the sim — no engine reader or writer.
   OAKLAND_SPORTS_FEED: 'Oakland_Sports_Feed',
-  CHICAGO_SPORTS_FEED: 'Chicago_Sports_Feed',
 
   // === Engine Errors (created by error handler) ===
   ENGINE_ERRORS: 'Engine_Errors'

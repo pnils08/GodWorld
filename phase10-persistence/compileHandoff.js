@@ -147,11 +147,11 @@ function loadHandoffData_(cache, cycle) {
     storySeeds: [],
     civicOfficers: [],
     initiatives: [],
-    playerRosters: { as: [], bulls: [] },
+    playerRosters: { as: [] },
     continuityNotes: [],
     culturalEntities: [],
     councilMembers: [],
-    sportsFeeds: { oakland: [], chicago: [] },
+    sportsFeeds: { oakland: [] },
     roster: null
   };
 
@@ -295,7 +295,7 @@ function loadActiveStorylinesFromCache_(cache, cycle) {
   // share the arc root "stabilization fund" — keep the latest/highest-status one.
   var ARC_ROOTS = [
     'stabilization fund', 'baylight', 'oari', 'health center', 'temescal health',
-    'lake merritt', 'bulls', 'paulson', 'keane', 'seymour', 'davis acl',
+    'lake merritt', 'paulson', 'keane', 'seymour', 'davis acl',
     'horn', 'aitken', 'warriors', 'elliott crane', 'crane', 'marcus osei', 'osei',
     'walkout', 'dynasty', 'civic load', 'spring training', 'playoff'
   ];
@@ -587,16 +587,14 @@ function loadInitiatives_(cache) {
 
 
 /**
- * Loads A's and Bulls rosters from Simulation_Ledger + Chicago_Citizens.
+ * Loads the A's roster from Simulation_Ledger (Chicago and its Bulls are retired from the sim).
  * Caps to Tier 1-2 for A's (key named players only) and deduplicates.
  */
 function loadPlayerRosters_(cache) {
   var asRoster = [];
-  var bullsRoster = [];
   var seenAs = {};
-  var seenBulls = {};
 
-  // Scan Simulation_Ledger for A's and Bulls players
+  // Scan Simulation_Ledger for A's players
   var values = cache.getValues(SHEET_NAMES.SIMULATION_LEDGER);
   if (values.length >= 2) {
     var header = values[0];
@@ -634,59 +632,10 @@ function loadPlayerRosters_(cache) {
           asRoster.push({ name: name, tier: String(tier), popId: popId });
         }
       }
-
-      // Bulls / NBA players from Simulation_Ledger
-      if (origin.indexOf('nba') >= 0 || origin.indexOf('bulls') >= 0 ||
-          roleType.indexOf('nba') >= 0 || roleType.indexOf('basketball') >= 0) {
-        if (!seenBulls[name]) {
-          seenBulls[name] = true;
-          bullsRoster.push({ name: name, tier: String(tier), popId: popId });
-        }
-      }
     }
   }
 
-  // Also scan Chicago_Citizens for Bulls players
-  var chiValues = cache.getValues(SHEET_NAMES.CHICAGO_CITIZENS);
-  if (chiValues.length >= 2) {
-    var chiHeader = chiValues[0];
-    var chiIdx = createColIndex_(chiHeader);
-    var ciFirst = chiIdx('First');
-    var ciLast = chiIdx('Last');
-    var ciTier = chiIdx('Tier');
-    var ciRoleType = chiIdx('RoleType');
-    var ciStatus = chiIdx('Status');
-    var ciPopId = chiIdx('POPID');
-    var ciOrigin = chiIdx('OriginGame');
-
-    for (var cr = 1; cr < chiValues.length; cr++) {
-      var crow = chiValues[cr];
-      var cStatus = String(safeColRead_(crow, ciStatus, '')).toLowerCase();
-      var cFirst = String(safeColRead_(crow, ciFirst, ''));
-      var cLast = String(safeColRead_(crow, ciLast, ''));
-      var cOrigin = String(safeColRead_(crow, ciOrigin, '')).toLowerCase();
-      var cRole = String(safeColRead_(crow, ciRoleType, '')).toLowerCase();
-
-      if (!cFirst && !cLast) continue;
-      if (cStatus === 'inactive' || cStatus === 'removed') continue;
-
-      var cName = cFirst;
-      if (cLast) cName = cFirst + ' ' + cLast;
-
-      // Include NBA/basketball/Bulls players
-      if (cOrigin.indexOf('nba') >= 0 || cOrigin.indexOf('bulls') >= 0 ||
-          cRole.indexOf('nba') >= 0 || cRole.indexOf('basketball') >= 0) {
-        if (!seenBulls[cName]) {
-          seenBulls[cName] = true;
-          var cTier = String(safeColRead_(crow, ciTier, ''));
-          var cPopId = String(safeColRead_(crow, ciPopId, ''));
-          bullsRoster.push({ name: cName, tier: cTier, popId: cPopId });
-        }
-      }
-    }
-  }
-
-  return { as: asRoster, bulls: bullsRoster };
+  return { as: asRoster };
 }
 
 
@@ -1355,9 +1304,6 @@ function buildSection13_ReturnsExpected_() {
   lines.push('SPORTS — A\'S:');
   lines.push('— Name (Position — note)');
   lines.push('');
-  lines.push('SPORTS — BULLS:');
-  lines.push('— Name (Position — note)');
-  lines.push('');
   lines.push('SPORTS — WARRIORS:');
   lines.push('— Name (Position — note)');
   lines.push('');
@@ -1418,17 +1364,6 @@ function buildSection14_CanonReference_(data) {
   }
   lines.push('');
 
-  // Bulls Roster
-  lines.push('BULLS ROSTER:');
-  if (data.playerRosters.bulls.length > 0) {
-    for (var b = 0; b < data.playerRosters.bulls.length; b++) {
-      var bp = data.playerRosters.bulls[b];
-      lines.push('- ' + bp.name + (bp.tier ? ' (Tier ' + bp.tier + ')' : ''));
-    }
-  } else {
-    lines.push('(No Bulls players found in Simulation_Ledger)');
-  }
-  lines.push('');
 
   // Council and vote positions are in Section 3 — not duplicated here.
   lines.push('COUNCIL & VOTES: See Section 3 (Civic Status)');
@@ -1631,20 +1566,18 @@ function extractHandoffCitizenNames_(data) {
 // ════════════════════════════════════════════════════════════════════════════
 
 /**
- * Loads exact-Cycle entries from Oakland_Sports_Feed and Chicago_Sports_Feed.
+ * Loads exact-Cycle entries from Oakland_Sports_Feed.
  *
  * @param {Object} cache - SheetCache instance
  * @param {number} cycle - Target cycle number
- * @returns {Object} { oakland: [], chicago: [] }
+ * @returns {Object} { oakland: [] }
  */
 function loadSportsFeeds_(cache, cycle) {
-  var result = { oakland: [], chicago: [] };
+  var result = { oakland: [] };
 
   result.oakland = loadSingleSportsFeed_(cache, SHEET_NAMES.OAKLAND_SPORTS_FEED, cycle);
-  result.chicago = loadSingleSportsFeed_(cache, SHEET_NAMES.CHICAGO_SPORTS_FEED, cycle);
 
-  Logger.log('loadSportsFeeds_: Oakland=' + result.oakland.length +
-    ', Chicago=' + result.chicago.length);
+  Logger.log('loadSportsFeeds_: Oakland=' + result.oakland.length);
   return result;
 }
 
@@ -1737,7 +1670,7 @@ function loadSingleSportsFeed_(cache, sheetName, cycle) {
 
 /**
  * Section 15: SPORTS FEEDS
- * Sources: Oakland_Sports_Feed, Chicago_Sports_Feed
+ * Source: Oakland_Sports_Feed
  * Shows recent game results, trades, rumors, and records for the media room.
  */
 function buildSection15_SportsFeeds_(data) {
@@ -1758,19 +1691,6 @@ function buildSection15_SportsFeeds_(data) {
     }
   } else {
     lines.push('(No recent Oakland sports feed entries)');
-  }
-  lines.push('');
-
-  // Chicago feed
-  lines.push('--- CHICAGO (Bulls) ---');
-  if (feeds.chicago.length > 0) {
-    for (var c = 0; c < feeds.chicago.length; c++) {
-      var ce = feeds.chicago[c];
-      var cLine = formatSportsFeedEntry_(ce);
-      lines.push(cLine);
-    }
-  } else {
-    lines.push('(No recent Chicago sports feed entries)');
   }
 
   return lines;

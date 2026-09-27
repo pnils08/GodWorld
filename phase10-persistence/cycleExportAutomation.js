@@ -65,7 +65,6 @@ var CONFIG = {
     'LifeHistory_Log',
     'Generic_Citizens',
     'Cultural_Ledger',
-    'Chicago_Citizens',
     'Event_Arc_Ledger',
     'Texture_Trigger_Log',
     'Simulation_Calendar',
@@ -76,9 +75,7 @@ var CONFIG = {
     'Simulation_Ledger',
     'Civic_Office_Ledger',
     'Relationship_Bonds',
-    'Chicago_Feed',
     'Oakland_Sports_Feed',
-    'Chicago_Sports_Feed',
     'Neighborhood_Map',
     'Domain_Tracker',
     'Continuity_Log'

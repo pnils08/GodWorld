@@ -2,7 +2,7 @@
   "generated": "2026-09-27",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 179,
-  "functionsMapped": 1484,
+  "functionsMapped": 1483,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -5010,12 +5010,6 @@
         "utilities/cycleModes.js::saveCycleSeed_"
       ]
     },
-    "Chicago_Feed": {
-      "writers": [],
-      "readers": [
-        "utilities/diagnoseDashboardData.js::diagnoseDashboardData"
-      ]
-    },
     "Crime_Metrics": {
       "writers": [
         "utilities/ensureCrimeMetrics.js::batchUpdateCrimeMetrics_",
@@ -5058,13 +5052,6 @@
       ],
       "readers": [
         "utilities/rippleLedger.js::recordRipple_"
-      ]
-    },
-    "Chicago_Sports_Feed": {
-      "writers": [],
-      "readers": [
-        "utilities/setupSportsFeedValidation.js::setupChicagoFeedOnly",
-        "utilities/setupSportsFeedValidation.js::setupSportsFeedValidation"
       ]
     }
   }

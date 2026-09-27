@@ -7,10 +7,9 @@
  * v3.0 (engine.202): every step finds its column by HEADER NAME. The feed
  * grew (WeekRecord appended) and shrank (VideoGameDate / VideoGame deleted
  * 2026-09-19), so nothing past the K–O bootstrap assumes a position.
- * A header the sheet does not carry is skipped, which is how Chicago (no
- * WeekRecord) keeps its own contract.
+ * A header the sheet does not carry is skipped.
  *
- * Sets up Oakland_Sports_Feed and Chicago_Sports_Feed with:
+ * Sets up Oakland_Sports_Feed with:
  *   - Dropdown validation on key columns (EventType, SeasonType, TeamsUsed,
  *     PlayerMood, EventTrigger, HomeNeighborhood)
  *   - New columns: StoryAngle, PlayerMood, EventTrigger, HomeNeighborhood
@@ -41,10 +40,9 @@
  * Positions above describe today's sheets; the code reads names, not letters.
  *
  * Run from Apps Script editor:
- *   setupSportsFeedValidation()    — sets up both sheets
+ *   setupSportsFeedValidation()    — sets up the feed sheet
  *   setupOaklandFeedOnly()         — Oakland only
- *   setupChicagoFeedOnly()         — Chicago only
- *   clearSportsFeedValidation()    — removes all validation from both
+ *   clearSportsFeedValidation()    — removes all validation from the feed
  *
  * Safe to run multiple times — updates existing validations.
  *
@@ -160,28 +158,12 @@ var MEDIA_PROFILE_VALUES = ['', 'local', 'regional', 'national', 'international'
 
 var OAKLAND_TEAMS = ["A's", 'Oaks'];
 
-var CHICAGO_TEAMS = ['Bulls'];
-
 // Oakland's HomeNeighborhood dropdown is read from Neighborhood_Map (the hood
 // truth source, ADR-0016) at setup time — see mapNeighborhoods_. The old
 // hardcoded list carried Montclair and Old Oakland (child areas of Piedmont Ave
 // and Downtown, which transit never matches) and missed 8 of the 22 hoods,
 // Baylight District among them. Node reads lib/canonNeighborhoods.js, the
 // reconciled cache of the same sheet.
-
-var CHICAGO_NEIGHBORHOODS = [
-  '',
-  'Bridgeport',
-  'Bronzeville',
-  'South Loop',
-  'West Loop',
-  'Pilsen',
-  'Hyde Park',
-  'Wicker Park',
-  'Logan Square',
-  'Lincoln Park',
-  'United Center Area'
-];
 
 // ─────────────────────────────────────────────────────────────────────────────
 // HEADER NOTES (shown when you hover over column headers)
@@ -263,7 +245,7 @@ var FEED_COLUMN_WIDTHS = {
 // ─────────────────────────────────────────────────────────────────────────────
 
 /**
- * Sets up BOTH Oakland_Sports_Feed and Chicago_Sports_Feed.
+ * Sets up Oakland_Sports_Feed (Chicago is retired from the sim; its frozen tab is left alone).
  * Run this from the Apps Script editor.
  */
 function setupSportsFeedValidation() {
@@ -276,14 +258,6 @@ function setupSportsFeedValidation() {
     results.push('Oakland_Sports_Feed: OK');
   } else {
     results.push('Oakland_Sports_Feed: NOT FOUND (skipped)');
-  }
-
-  var chiSheet = ss.getSheetByName('Chicago_Sports_Feed');
-  if (chiSheet) {
-    setupFeedSheet_(chiSheet, 'Chicago', CHICAGO_TEAMS, CHICAGO_NEIGHBORHOODS);
-    results.push('Chicago_Sports_Feed: OK');
-  } else {
-    results.push('Chicago_Sports_Feed: NOT FOUND (skipped)');
   }
 
   Logger.log('setupSportsFeedValidation v3.0: Complete');
@@ -305,18 +279,6 @@ function setupOaklandFeedOnly() {
   }
   setupFeedSheet_(sheet, 'Oakland', OAKLAND_TEAMS, mapNeighborhoods_(ss));
   SpreadsheetApp.getUi().alert('Oakland_Sports_Feed setup complete!');
-}
-
-/** Chicago only */
-function setupChicagoFeedOnly() {
-  var ss = openSimSpreadsheet_();
-  var sheet = ss.getSheetByName('Chicago_Sports_Feed');
-  if (!sheet) {
-    SpreadsheetApp.getUi().alert('Chicago_Sports_Feed not found.');
-    return;
-  }
-  setupFeedSheet_(sheet, 'Chicago', CHICAGO_TEAMS, CHICAGO_NEIGHBORHOODS);
-  SpreadsheetApp.getUi().alert('Chicago_Sports_Feed setup complete!');
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -486,7 +448,7 @@ function applyDropdownValidation_(sheet, startRow, col, numRows, values, name) {
  */
 function clearSportsFeedValidation() {
   var ss = openSimSpreadsheet_();
-  var sheetNames = ['Oakland_Sports_Feed', 'Chicago_Sports_Feed'];
+  var sheetNames = ['Oakland_Sports_Feed'];
 
   for (var s = 0; s < sheetNames.length; s++) {
     var sheet = ss.getSheetByName(sheetNames[s]);

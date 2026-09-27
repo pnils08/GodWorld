@@ -3729,7 +3729,7 @@
 
 ### diagnoseDashboardData.js
 - **diagnoseDashboardData()**
-  Sheets: Chicago_Feed, Oakland_Sports_Feed
+  Sheets: Oakland_Sports_Feed
 
 ### ensureCrimeMetrics.js
 - **crimeIterationHoods_(S)**
@@ -4093,13 +4093,10 @@
 
 ### setupSportsFeedValidation.js
 - **setupSportsFeedValidation()**
-  Sheets: Chicago_Sports_Feed, Oakland_Sports_Feed
+  Sheets: Oakland_Sports_Feed
 
 - **setupOaklandFeedOnly()**
   Sheets: Oakland_Sports_Feed
-
-- **setupChicagoFeedOnly()**
-  Sheets: Chicago_Sports_Feed
 
 - **setupFeedSheet_(sheet, city, teamValues, neighborhoodValues)**
 
@@ -4217,4 +4214,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 179
-**Functions mapped:** 1484
+**Functions mapped:** 1483

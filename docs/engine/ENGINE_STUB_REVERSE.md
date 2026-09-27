@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 179 · **Functions mapped:** 1484 · **S.* fields:** 358 · **Sheets:** 62
+**Files scanned:** 179 · **Functions mapped:** 1483 · **S.* fields:** 358 · **Sheets:** 60
 
 ## S.* / ctx.summary reverse index
 
@@ -399,8 +399,6 @@ Sheet detection: `getSheetByName`, `queue*Intent_`, known sheet-name string + wr
 | `Carry_Forward_Store` | _(none)_ | `phase01-config/loadPreviousEvening.js::mirrorCarryForwardToSheet_`, `phase01-config/loadPreviousEvening.js::readCarryForwardFromSheet_` | 0 | 2 |
 | `Casino_Ledger` | `phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_` | `phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_` | 1 | 1 |
 | `Chaos_Cars` | `phase10-persistence/saveChaosCars.js::writeChaosCarsRow_` | `phase10-persistence/saveChaosCars.js::writeChaosCarsRow_` | 1 | 1 |
-| `Chicago_Feed` | _(none)_ | `utilities/diagnoseDashboardData.js::diagnoseDashboardData` | 0 | 1 |
-| `Chicago_Sports_Feed` | _(none)_ | `utilities/setupSportsFeedValidation.js::setupChicagoFeedOnly`, `utilities/setupSportsFeedValidation.js::setupSportsFeedValidation` | 0 | 2 |
 | `Citizen_Archive` | _(none)_ | `utilities/archiveCitizenExits.js::citizenArchiveLatestByPop_` | 0 | 1 |
 | `Citizen_Media_Usage` | `phase05-citizens/processAdvancementIntake.js::markUsageProcessed_` | `phase05-citizens/citizenContextBuilder.js::getMediaAppearances_`, `phase05-citizens/citizenContextBuilder.js::getReturningCitizens`, `phase05-citizens/processAdvancementIntake.js::decayMediaAttention_`, `phase05-citizens/processAdvancementIntake.js::earnedCitationsByKey_`, `phase05-citizens/processAdvancementIntake.js::markUsageProcessed_`, …(+2 more) | 1 | 7 |
 | `Citizen_Usage_Intake` | _(none)_ | `phase07-evening-media/mediaRoomIntake.js::processCitizenUsageIntake_`, `phase07-evening-media/parseMediaRoomMarkdown.js::ensureCitizenUsageIntakeSheet_` | 0 | 2 |

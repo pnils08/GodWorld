@@ -9,8 +9,7 @@
  *   (uses 2:2 / 1:1 for full-row INDEX/MATCH)
  * - Employment formatted as percentage (90.1%)
  * - Dynamics values rounded to 1 decimal
- * - Oakland and Chicago cards now show parallel data
- *   (Weather, Sentiment, Mood, Team, Streak)
+ * - Oakland card: Weather, Sentiment, Mood, Team, Streak
  * - Uniform font sizes: labels=10, values=12, big numbers=20
  * - Consistent card title size (12pt bold)
  *
@@ -23,9 +22,6 @@
  * Data sources (all formula-driven, no engine changes):
  * - World_Population (single-row state sheet)
  * - Oakland_Sports_Feed (team records)
- * - Chicago_Feed (Chicago weather/sentiment) — live tab, NOT a ghost:
- *   v3ChicagoWriter.js ensures/writes it each cycle. Only Sports_Feed was a
- *   ghost (infrastructure.6 Track B); Chicago_Feed was never on that list.
  * - Initiative_Tracker (civic initiative lifecycle)
  * - Relationship_Bonds (social bond state)
  *
@@ -169,30 +165,7 @@ function createGodWorldDashboard() {
   styleLabel(dash.getRange('B18').setValue('Streak'));
   styleData(dash.getRange('C18').setFormula('=IFERROR(IF(INDEX(Sports_Feed!I:I,MATCH("As",Sports_Feed!A:A,0))="","—",INDEX(Sports_Feed!I:I,MATCH("As",Sports_Feed!A:A,0))),"—")'), C.oak);
 
-  // ═══════════════════════════════════════════════════════════
-  // CHICAGO CARD (Rows 11-18) — now parallel with Oakland
-  // ═══════════════════════════════════════════════════════════
-  dash.getRange('E11:F18').setBackground(C.cardChi);
-  addBorder(dash.getRange('E11:F18'));
-
-  dash.getRange('E11:F11').merge();
-  styleTitle(dash.getRange('E11').setValue('  CHICAGO'), C.chi);
-
-  styleLabel(dash.getRange('E13').setValue('Weather'));
-  styleValue(dash.getRange('F13').setFormula('=IFERROR(INDEX(Chicago_Feed!F:F,2),"--")'));
-
-  styleLabel(dash.getRange('E14').setValue('Sentiment'));
-  styleData(dash.getRange('F14').setFormula('=IFERROR(ROUND(INDEX(Chicago_Feed!H:H,2),2),"--")'));
-
-  styleLabel(dash.getRange('E15').setValue('Mood'));
-  var chiMoodFormula = '=IFERROR(IF(INDEX(Chicago_Feed!H:H,2)>=0.3,"Thriving",IF(INDEX(Chicago_Feed!H:H,2)>=0.15,"Optimistic",IF(INDEX(Chicago_Feed!H:H,2)>=0,"Content",IF(INDEX(Chicago_Feed!H:H,2)>=-0.15,"Uneasy","Troubled")))),"--")';
-  styleData(dash.getRange('F15').setFormula(chiMoodFormula), C.label);
-
-  styleLabel(dash.getRange('E17').setValue('Bulls'));
-  styleValue(dash.getRange('F17').setFormula('=IFERROR(INDEX(Sports_Feed!D:D,MATCH("Bulls",Sports_Feed!A:A,0)) & "-" & INDEX(Sports_Feed!E:E,MATCH("Bulls",Sports_Feed!A:A,0)) & " | " & INDEX(Sports_Feed!F:F,MATCH("Bulls",Sports_Feed!A:A,0)),"--")'), C.red);
-
-  styleLabel(dash.getRange('E18').setValue('Streak'));
-  styleData(dash.getRange('F18').setFormula('=IFERROR(IF(INDEX(Sports_Feed!I:I,MATCH("Bulls",Sports_Feed!A:A,0))="","—",INDEX(Sports_Feed!I:I,MATCH("Bulls",Sports_Feed!A:A,0))),"—")'), C.red);
+  // (The Chicago card at E11:F18 is gone — Chicago is retired from the sim.)
 
   // ═══════════════════════════════════════════════════════════
   // CALENDAR CARD (Rows 20-24)

@@ -157,3 +157,10 @@ now unblocked — the S378 wave is deployed and bench-proven. Tasks 3–5 ready.
   named).
 - 2026-09-06 (S428, research-build) — §Task 4 gains the dashboard + newsroom remainder (Mike-direct): ChicagoTab still rendered, chicago-desk agent never re-beat to the Oaks (verified: no persona-map entry, no lane). Filed pipeline.66 (retire page) + pipeline.67 (Oaks beat decision).
 - 2026-09-06 (S429, research-build) — pipeline.66 shipped: dashboard Chicago page retired (ChicagoTab, tab, loader, `chicago` packet filters, legacy `/api/sports`). `buildDeskPackets.js` still emits `chicago_c{N}.json` — that is the §Task 4 consumer-retirement remainder.
+- 2026-09-27 (S499, engine-sheet) — Task 4 engine half (builder re-confirmed "Chicago was retired"): the
+  Chicago satellite still ran every cycle in Phase8-V3Integration and `recordMediaLedger` averaged
+  Oakland's city sentiment with its generated Chicago sentiment. Cut `baa304a7` (+ file deletions that
+  landed in `d54b57ac`): satellite, blend, packet emitter, preloader/sports-season fields, and the files
+  `chicagoSatellite.js` / `v3ChicagoWriter.js` / `generateChicagoCitizensv1.js`. Bench SANDBOX 0908 @123
+  C136: ok, 0 new errors, Media_Ledger Sentiment −0.24 = Riley_Digest CitySentiment −0.24 (C134/C135 had
+  diverged: blended). Newsroom-script remainder (buildDeskPackets Chicago Bureau etc.) → research-build.

@@ -78,3 +78,21 @@ Genuinely novel — nothing like it exists in ROLLOUT or the codebase. Not prima
 ## Changelog
 
 - 2026-09-26 (research-build) — Filed from builder-direct 2026-09-26 proposal. Reviewed against actual repo state: judicial-system half already open at engine.254 (folded, no new row); business-agent proposal checked against engine.96 (dial-driven, not agentic — flagged as a determinism-reversal call, not a slot-in); conservation laws, credit cascades, AI-autonomy widening, and god-whisper seam filed at their real gates. ROLLOUT rows: engine.261 (firm agents), engine.262 (conservation laws), engine.263 (credit cascades), engine.264 (god-whisper), governance.52 (AI autonomy scoping).
+
+## engine.262 inventory — 2026-09-27 (S499, engine-sheet)
+
+Read-only inventory of every engine money movement (file:line evidence in the S499 session record):
+- **True double-entry:** casino wagers — citizen `NetWorth` ↔ `Casino_Ledger.HouseFloatAfter`, both written
+  every settlement (`casinoLedgerEngine.js`). Checkable per cycle: Σ citizen deltas = −Δ house float.
+- **Inequality by design:** engine.259 fund grants — `BudgetRemaining` falls by the full tranche, tracked
+  households receive `plan.paid` ≤ tranche ("the untracked city is the rest of the spend"). Check `debit ≥ Σ grants`.
+- **Source / sink, no counterparty:** Job 5 initiative spend (sink), Job 6 renewal credit (source), home
+  purchase down payment (sink), home sale proceeds (source, market formula), inheritance 10–20% (sink),
+  off-camera spouse income (source), citizen income (source — no payroll), business revenue (floating KPI).
+- **Gap to check:** inheritance never zeroes the deceased's own `NetWorth` — any citywide NetWorth sum must
+  exclude deceased rows or it double-counts.
+
+So "every dollar credited somewhere is debited somewhere" does not hold for this sim by construction: there
+is no city treasury, no payroll. The build that makes sense without a ruling is the two real checks
+(casino balance, grant inequality) + the deceased-exclusion assertion. **Builder question:** should the city
+have a treasury that initiative spend, renewals, and taxes flow through — making the civic economy conserve?

@@ -196,6 +196,7 @@ Mike's doctrine test case: *a. not built yet, b. doesn't change the math, c. the
 
 ## Changelog
 
+- 2026-09-27 (research-build) — Closed done-pending-archive: live-cycle proof confirmed. `buildCommuteFlows_` (Task 9) is wired into every fire (`godWorldEngine2.js` Phase2-CommuteFlows); C108 gap log shows it running with a since-fixed dangling-biz-id bug caught on live data.
 - 2026-07-31 — Initial draft (Kimi CLI, builder-directed external-audit remediation batch). Audit gaps #1+#2 combined; audit's headline claims verified stale/refuted (engine.45 T1–T3b shipped before the audit's pinned commit), surviving kernel scoped into Tracks A–C.
 - 2026-08-01 (Kimi) — Audit pointer added: build-order step 3 of [[../research/2026-08-01-simulation-realism-audit]]; the two zero-reader buses re-verified there at file:line.
 - 2026-08-02 (kimi) — Tasks 1–4 complete (research-build half): both bus shapes extracted, zero readers reconfirmed, fold design + ordering resolution in Build notes. Delta math awaiting Mike sign-off; Task 7 recommendation is DELETE (needs Mike OK, touches `phase*/`). Open: Task 8 Track C one-pager (kimi), Tasks 5–7 engine-sheet after sign-off.

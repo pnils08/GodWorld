@@ -419,6 +419,25 @@ The engine.188 carrier fix, for the other four metrics: `publicSpaces` / `commun
 
 Holiday peaks still flatten the city: engine.188 fixed the RESTING level but the biggest holidays saturate. **Bench 0908 @13, Summer run cy23-cy27:** PrideMonth 0.76, Juneteenth 0.86 (11/22 hoods at ceiling), FathersDay 0.54, SummerSolstice 0.47, **Independence 1.00 with 20 of 22 hoods at exactly 1.00** — on that cycle per-hood sentiment carries no information, the same defect 188 fixed for ordinary days. OaklandPride (cy22, Spring) did the same. Cause: the holiday table's top values (+0.4/+0.5 specific, +0.1 'major' priority stacked on top) were tuned against the -0.48/cycle tax that engine.185 removed. Proposed: top holiday ~+0.25-0.30 so the biggest day of the year peaks near 0.85 with hood spread intact. NOTE the offline harness under-predicts peaks — it called 0 clamps across 13 Summer cycles and the bench clamped twice; it is calibrated for resting level only, bench any holiday change
 
+### engine.195 — built + benched 2026-09-27 (S499, engine-sheet) — and a finding that reframes 188
+
+`cf710418`: every city metric's carrier is its pre-boost blend (sentiment already was, engine.188); the two
+media gates act in proportion after a live-range check (crisisSaturation 0–0.3 vs a `> 0.5` gate that never
+opened; celebrityBuzz 0.36–0.75 vs a `> 0.3` gate that never closed). Bench SANDBOX 0908 @127 C140: ok, 0 new
+Engine_Errors.
+
+**Finding (measured, not inferred):** `S.previousCityDynamics` (and `previousClusterDynamics` /
+`previousNeighborhoodDynamics`) is written and read only inside `applyCityDynamics.js` and is never persisted or
+reloaded — no reference in `loadPreviousEvening.js`, `finalizeCycleState.js`, Carry_Forward_Store or any other
+file. Each Cycle is a fresh Apps Script execution, so at the momentum blend `prev` is always null and
+`blend()` returns the raw value: **city and hood momentum smoothing has never run in production.** The
+"boost echo" engine.188 fixed was reproduced in `sentimentRestingLevel.test.js`, an offline harness that keeps
+`S` across simulated cycles; live never had a carrier to echo through. 188's vocabulary retune was real; its
+carrier half, and this commit's carrier half, are correct-if-wired but inert today. Bench readings fit: city
+sentiment −0.23 → 0.52 (festival) → 0.16 → 0.04, no inertia. The live effect of engine.195 is the ungated media
+nudges only. **Builder question:** should city/hood mood have week-to-week inertia (persist the carrier through
+Carry_Forward_Store, like engine.221's econMoodInertia), or is a city that resets to its causes each week right?
+
 ### engine.196 — built + bench-proven 2026-09-27 (S499, engine-sheet)
 
 `78f5727b`: `HOLIDAY_MOOD_SCALE = 0.6` on the holiday-driven sentiment delta in `applyHolidayModifiers_`

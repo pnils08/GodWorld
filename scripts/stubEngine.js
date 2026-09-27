@@ -73,8 +73,28 @@ function extractFunctions(source) {
   return funcs;
 }
 
+// Top-level tab-name constants (`var CASINO_TAB = 'Casino_Ledger';`), collected
+// across every scanned file — Apps Script shares one global scope. A tab named
+// through a constant was invisible to the literal-only sheet regexes (the real
+// Ripple_Ledger writer never showed; only its test did).
+const SHEET_CONSTS = {};
+function collectSheetConsts() {
+  const re = /^var ([A-Z][A-Z0-9_]*(?:TAB|SHEET|SHEET_NAME)) *= *['"]([A-Za-z_][A-Za-z0-9_]*)['"];/gm;
+  for (const phase of PHASES) {
+    const dir = path.join(REPO_ROOT, phase.dir);
+    if (!fs.existsSync(dir)) continue;
+    for (const f of fs.readdirSync(dir).filter(n => n.endsWith('.js') && !n.endsWith('.test.js'))) {
+      const src = fs.readFileSync(path.join(dir, f), 'utf8');
+      let m;
+      while ((m = re.exec(src)) !== null) SHEET_CONSTS[m[1]] = m[2];
+    }
+  }
+}
+
 function analyzeFunction(fn) {
-  const body = fn.body.join('\n');
+  const body = fn.body.join('\n').replace(
+    /(getSheetByName\(\s*|requireTab_\(\s*[A-Za-z_.]+\s*,\s*|queue(?:Cell|Append|Range|BatchAppend)Intent_\s*\(\s*ctx\s*,\s*)([A-Z][A-Z0-9_]*)\b/g,
+    (whole, pre, name) => (SHEET_CONSTS[name] ? pre + "'" + SHEET_CONSTS[name] + "'" : whole));
   const readsS = new Set();
   const writesS = new Set();
   const readsConfig = new Set();
@@ -356,6 +376,7 @@ function writeReverseMd(reverse, meta) {
 }
 
 function main() {
+  collectSheetConsts();
   const date = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 10);
   const forward = [];
   forward.push('# Engine Stub Map');

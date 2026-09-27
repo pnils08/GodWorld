@@ -4595,6 +4595,13 @@
         "utilities/exportCitizensSnapshot.js::exportCitizensSnapshot_"
       ]
     },
+    "Carry_Forward_Store": {
+      "writers": [],
+      "readers": [
+        "phase01-config/loadPreviousEvening.js::mirrorCarryForwardToSheet_",
+        "phase01-config/loadPreviousEvening.js::readCarryForwardFromSheet_"
+      ]
+    },
     "Edition_Coverage_Ratings": {
       "writers": [
         "phase02-world-state/applyEditionCoverageEffects.js::applyEditionCoverageEffects_"
@@ -4813,17 +4820,24 @@
       "readers": [
         "phase05-citizens/bondEngine.js::processFaithJoins_",
         "phase05-citizens/migrationTrackingEngine.js::processRelocations_",
-        "phase07-evening-media/buildContractSeeds.js::contractSeedBackdropIndex_"
+        "phase07-evening-media/buildContractSeeds.js::contractSeedBackdropIndex_",
+        "utilities/ensureFaithLedger.js::ensureFaithOrgsSchema_",
+        "utilities/ensureFaithLedger.js::getFaithOrganizations_"
       ]
     },
     "Relationship_Bond_Ledger": {
-      "writers": [],
+      "writers": [
+        "utilities/ensureRelationshipBonds.js::ensureRelationshipBondLedgerSchema_"
+      ],
       "readers": [
-        "phase05-citizens/bondEngine.js::saveV3BondsToLedger_"
+        "phase05-citizens/bondEngine.js::saveV3BondsToLedger_",
+        "utilities/ensureRelationshipBonds.js::ensureRelationshipBondLedgerSchema_"
       ]
     },
     "Relationship_Bonds": {
-      "writers": [],
+      "writers": [
+        "utilities/ensureRelationshipBonds.js::ensureRelationshipBondsSchema_"
+      ],
       "readers": [
         "phase05-citizens/bondEngine.js::diagnoseBondEngine",
         "phase05-citizens/bondPersistence.js::loadRelationshipBonds_",
@@ -4834,7 +4848,25 @@
         "phase05-citizens/seedRelationBondsv1.js::createRelationshipBondsSheet_",
         "phase05-citizens/seedRelationBondsv1.js::seedRelationshipBonds_",
         "utilities/cycleRollback.js::previewRollbackToCycle78",
-        "utilities/cycleRollback.js::rollbackToCycle78"
+        "utilities/cycleRollback.js::rollbackToCycle78",
+        "utilities/ensureRelationshipBonds.js::ensureRelationshipBondsSchema_",
+        "utilities/ensureRelationshipBonds.js::validateRelationshipBondsSchema_"
+      ]
+    },
+    "Undocked_Draw": {
+      "writers": [
+        "phase05-citizens/casinoLedgerEngine.js::undockedDrawCast_"
+      ],
+      "readers": [
+        "phase05-citizens/casinoLedgerEngine.js::undockedDrawCast_"
+      ]
+    },
+    "Casino_Ledger": {
+      "writers": [
+        "phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_"
+      ],
+      "readers": [
+        "phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_"
       ]
     },
     "Citizen_Media_Usage": {
@@ -5022,6 +5054,14 @@
         "phase10-persistence/recordCycleWeather.js::recordCycleWeather_"
       ]
     },
+    "Chaos_Cars": {
+      "writers": [
+        "phase10-persistence/saveChaosCars.js::writeChaosCarsRow_"
+      ],
+      "readers": [
+        "phase10-persistence/saveChaosCars.js::writeChaosCarsRow_"
+      ]
+    },
     "Citizen_Archive": {
       "writers": [],
       "readers": [
@@ -5035,9 +5075,13 @@
       ]
     },
     "Reflection_Intake": {
-      "writers": [],
+      "writers": [
+        "utilities/compressLifeHistory.js::compressLifeHistory_"
+      ],
       "readers": [
-        "utilities/compressLifeHistory.js::getGriefConfig_"
+        "utilities/compressLifeHistory.js::compressLifeHistory_",
+        "utilities/compressLifeHistory.js::getGriefConfig_",
+        "utilities/compressLifeHistory.js::readPendingReflections_"
       ]
     },
     "Cycle_Seeds": {
@@ -5049,11 +5093,48 @@
         "utilities/cycleModes.js::saveCycleSeed_"
       ]
     },
+    "Crime_Metrics": {
+      "writers": [
+        "utilities/ensureCrimeMetrics.js::batchUpdateCrimeMetrics_",
+        "utilities/ensureCrimeMetrics.js::updateCrimeMetrics_"
+      ],
+      "readers": [
+        "utilities/ensureCrimeMetrics.js::batchUpdateCrimeMetrics_",
+        "utilities/ensureCrimeMetrics.js::getCrimeMetrics_",
+        "utilities/ensureCrimeMetrics.js::updateCrimeMetrics_"
+      ]
+    },
+    "Faith_Ledger": {
+      "writers": [
+        "utilities/ensureFaithLedger.js::recordFaithEvent_"
+      ],
+      "readers": [
+        "utilities/ensureFaithLedger.js::getRecentFaithEvents_",
+        "utilities/ensureFaithLedger.js::recordFaithEvent_"
+      ]
+    },
+    "Transit_Metrics": {
+      "writers": [
+        "utilities/ensureTransitMetrics.js::recordTransitMetrics_"
+      ],
+      "readers": [
+        "utilities/ensureTransitMetrics.js::getTransitMetrics_",
+        "utilities/ensureTransitMetrics.js::recordTransitMetrics_"
+      ]
+    },
     "Dashboard": {
       "writers": [],
       "readers": [
         "utilities/godWorldDashboard.js::createGodWorldDashboard",
         "utilities/godWorldDashboard.js::refreshDashboard"
+      ]
+    },
+    "Ripple_Ledger": {
+      "writers": [
+        "utilities/rippleLedger.js::recordRipple_"
+      ],
+      "readers": [
+        "utilities/rippleLedger.js::recordRipple_"
       ]
     },
     "Chicago_Sports_Feed": {

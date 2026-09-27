@@ -227,8 +227,10 @@
 
 ### loadPreviousEvening.js
 - **mirrorCarryForwardToSheet_(ctx, key, json, cycle)**
+  Sheets: Carry_Forward_Store
 
 - **readCarryForwardFromSheet_(ctx, key, beforeCycle)**
+  Sheets: Carry_Forward_Store
 
 - **saveCarryForwardBlob_(ctx, key, json, cycle)**
 
@@ -1330,6 +1332,7 @@
 - **undockedDrawCast_(ctx, cycle)**
   Reads: S.undockedNextCast
   Writes: S.undockedNextCast
+  Sheets: Undocked_Draw
   RNG: ctx.rng / safeRand_(ctx)
 
 - **casinoUpcoming_(S, cycle)**
@@ -1340,7 +1343,7 @@
 - **processCasinoLedger_(ctx, cycle)**
   Reads: S.casinoGates, S.casinoSettlements, S.simYear, S.sportsFeedEntries, S.storyHooks, S.undockedFeedEntries, S.undockedPilots
   Writes: S.casinoGates, S.casinoSettlements, S.storyHooks
-  Sheets: Household_Ledger
+  Sheets: Casino_Ledger, Household_Ledger
   RNG: ctx.rng / safeRand_(ctx)
 
 ### checkForPromotions.js
@@ -3391,6 +3394,7 @@
   Reads: S.cycleRef
 
 - **writeChaosCarsRow_(ctx, payload)**
+  Sheets: Chaos_Cars
 
 ### saveChaosCars.test.js
 - **assert(label, cond, detail)**
@@ -3650,12 +3654,14 @@
   Sheets: Reflection_Intake
 
 - **readPendingReflections_(ctx)**
+  Sheets: Reflection_Intake
 
 - **nudgeBondIntensity_(bonds, totals, fromPop, toPop, delta, cycle)**
 
 - **compressLifeHistory_(ctx, options)**
   Reads: S.absoluteCycle, S.biasIntents, S.contests, S.cycleId, S.pendingCascades, S.pressureCounts, S.relationshipBonds
   Writes: S.lifeHistoryCompression
+  Sheets: Reflection_Intake
 
 - **parseLifeHistoryEntries_(historyStr)**
 
@@ -3806,6 +3812,7 @@
 - **ensureCrimeMetricsSchema_(ss)**
 
 - **getCrimeMetrics_(ss)**
+  Sheets: Crime_Metrics
 
 - **crimeMetricsRowData_(neighborhood, m, cycle)**
 
@@ -3815,9 +3822,11 @@
 
 - **updateCrimeMetrics_(ctx, neighborhood, metrics)**
   Reads: S.absoluteCycle
+  Sheets: Crime_Metrics
 
 - **batchUpdateCrimeMetrics_(ctx, metricsMap)**
   Reads: S.absoluteCycle
+  Sheets: Crime_Metrics
 
 - **seedCrimeMetricsFromProfiles_(ctx, demographicsOpt)**
 
@@ -3837,17 +3846,21 @@
 - **ensureFaithLedgerSchema_(ss)**
 
 - **ensureFaithOrgsSchema_(ss)**
+  Sheets: Faith_Organizations
 
 - **getFaithOrganizations_(ss)**
+  Sheets: Faith_Organizations
 
 - **getFaithOrgsByNeighborhood_(ss, neighborhood)**
 
 - **getFaithOrgsByTradition_(ss, tradition)**
 
 - **getRecentFaithEvents_(ss, cyclesBack)**
+  Sheets: Faith_Ledger
 
 - **recordFaithEvent_(ctx, event)**
   Reads: S.absoluteCycle
+  Sheets: Faith_Ledger
 
 - **batchRecordFaithEvents_(ctx, events)**
   Reads: S.absoluteCycle
@@ -3885,12 +3898,15 @@
 
 ### ensureRelationshipBonds.js
 - **ensureRelationshipBondsSchema_(ss)**
+  Sheets: Relationship_Bonds
 
 - **ensureRelationshipBondLedgerSchema_(ss)**
+  Sheets: Relationship_Bond_Ledger
 
 - **ensureRelationshipBondSchemas_(ctx)**
 
 - **validateRelationshipBondsSchema_(ss)**
+  Sheets: Relationship_Bonds
 
 ### ensureTransitMetrics.js
 - **ensureTransitMetricsSchema_(ss)**
@@ -3904,11 +3920,13 @@
 - **getTrafficCorridors_()**
 
 - **getTransitMetrics_(ss, cycle)**
+  Sheets: Transit_Metrics
 
 - **getTransitSummary_(ss, cycle)**
 
 - **recordTransitMetrics_(ctx, metrics)**
   Reads: S.absoluteCycle
+  Sheets: Transit_Metrics
 
 - **batchRecordTransitMetrics_(ctx, metricsArray)**
   Reads: S.absoluteCycle
@@ -4055,6 +4073,7 @@
 - **recordRipple_(ctx, e)**
   Reads: S.cycle, S.cycleId, S.rippleEvents
   Writes: S.rippleEvents
+  Sheets: Ripple_Ledger
 
 - **recordHookRipple_(ctx, causeType, hook, sourceEngine)**
 

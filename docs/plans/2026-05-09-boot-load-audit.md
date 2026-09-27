@@ -549,6 +549,7 @@ Plugin gating per terminal — investigation: does Claude Code support per-termi
 
 ## Changelog
 
+- 2026-09-27 (research-build) — governance.8's premise (per-terminal Stripped/Full plugin gating) is obsolete since the 2026-08-20 two-seat retirement. Flagged needs-info, not closed — a 2-seat version may still be worth asking.
 - 2026-05-09 (S210, research-build) — Initial audit. Pre-redesign data dump only; restructure proposal awaits joint review of these findings.
 - 2026-05-09 (S210, research-build) — Added §9 Anthropic spec findings (progressive disclosure principle, frontmatter conventions, fit-check against Mike's "couple edits" intuition). Sharpened §8 with spec-informed answers per question. Q2/Q3/Q4/Q5/Q7 now have direction; Q1/Q6/Q8 stay genuinely open.
 - 2026-05-09 (S210, research-build) — Added §10 Other MIT-licensed source findings (mattpocock/skills, affaan-m/everything-claude-code). Confirms static-vs-dynamic split, progressive disclosure pattern, anti-patterns we've inherited. §8 answers unchanged after broader review — convergent across sources.

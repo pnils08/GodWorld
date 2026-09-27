@@ -115,6 +115,7 @@ One cron, six steps, in order:
 
 ## Changelog
 
+- 2026-09-27 (research-build) — Closed done-pending-archive: `--apply` confirmed live in crontab weekly since 2026-08-08. Graduation already happened; row described a stale pre-graduation state.
 - 2026-08-13 (codex) — Hardened the Saturday staged-set reader: status, path containment, Rhea pass, and reviewed Article hash are now rechecked before audit, curation, sweep, Sheets, or storyline consumers. The C103 dry sweep resolved all 18 exact-proved Articles, including Noah's weather Article and Anthony's legacy sidecar, with no external write.
 - 2026-08-13 (codex) — Made new weekday staging self-contained: `cron-desk-run` now accepts a pass only when the verdict hash matches the exact Article and embeds the Rhea model, manifest, hash, verdict pointer, and review time in the staged sidecar. Saturday's adjacent-verdict lookup remains only for legacy staged rows.
 - 2026-08-10 (codex) — Upstream scheduled fanout is now ADR-0017 package-only with Jax as the first active cohort. This downstream Saturday canon door is unchanged; only Rhea-passed staged Articles can enter its candidate set.

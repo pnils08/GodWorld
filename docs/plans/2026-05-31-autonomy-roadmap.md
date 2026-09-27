@@ -116,6 +116,7 @@ Autonomy roadmap (umbrella) — continuous sim + autonomous agents. Three sequen
 
 ## Changelog
 
+- 2026-09-27 (research-build) — research.9's blocker (engine.1, Phase 40.2 cattle refactor) just wontfixed after 5+ months with no plan ever filed — it will never clear as stated. Flipped to needs-info; needs re-scoping, not a passive wait.
 - 2026-05-31 (S248) — Initial draft. Consolidates research.9, Emergence World eval, engine.5/.29, city-for-bots pivot, ARCHITECTURE_VISION, GPU-gate, spacemolt-miner. Filed as research.12. Not a build schedule — sequencing + gate-tracking only.
 - 2026-08-15 (S372, Mike-direct) — New Layer 0 opened: fleet/spend self-governance, doctrine-bible accuracy named as prerequisite. See §Layer 0 below.
 

@@ -71,5 +71,6 @@ Operator approval — Task 1 creates a new `.js`, which is a standing approval g
 
 ## Changelog
 
+- 2026-09-27 (research-build) — governance.47 flagged needs-info: mailbox dirs exist but both inboxes are empty, zero real traffic. Actual practice is tmux send-keys + the native SendMessage tool instead. Task 5 likely moot — decide finish-or-retire.
 - 2026-08-15 — Initial design, tmux-keystroke transport.
 - 2026-09-17 — Task 1 redesigned to a file-mailbox transport (research: [[../research/2026-09-17-munder-difflin-multi-agent-harness]]); still gated on §5.

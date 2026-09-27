@@ -94,4 +94,5 @@ pointers:
 
 ## Changelog
 
+- 2026-09-27 (research-build) — Closed done-pending-archive: Tasks 4-6 never ran as specced, but the goal landed by attrition — the doc is already pointer-only/grouped v2 shape, no separate legacy file ever existed to drain, rename, or gate.
 - 2026-06-01 (S250) — Initial draft. Captures the fresh-start v2.0 decision Mike set across the S250 conversation after the in-place-salvage attempt was rejected. Drain-down (not wholesale rewrite), manual migration + coded maintenance split, by-terminal grouping (D1, recommended), rename-at-retirement for link safety (D3). Supersedes the S250 in-place slimming approach entirely.

@@ -197,3 +197,10 @@ Citizen memory and approval ceiling — Track A code-only self-arm plus grief an
 - 2026-08-09 — Codex: Task 5 sandbox proof closed from the shared C114–C115 fires. All four ≥80 offices persisted streak 2, the other six remained 0, no premature scandal fired, config/schema remained exact, and both Cycles had zero engine errors. Track A is complete; Track B remains gated on research.17.
 - 2026-08-09 — Codex: Mike identified a release-blocking deployment flaw: the engine.94 commits required Sheet state that a code-only production deploy would not carry. Added a pre-Cycle, code-carried, idempotent self-arm for all 14 config rows and 3 headers; 24/24 first-live-Cycle assertions and the 141/141-file suite pass. Sandbox redeploy proof remains before Track A can close again.
 - 2026-08-09 — Codex: Deployment-safety correction `d3b70f3c` sandbox-proven @41/C116. Exact 172/172 pull-back, 128 phases `ok:true`, config 14/14 and headers 3/3 retained, qualifying streaks advanced to 3, one naturally active grief register carried one machine source, and zero engine errors. The commit is now independently safe under the code-only production deployment model; Track A closes again.
+
+## Builder ruling 2026-09-27 — grudge / folk memory
+Verbatim: "may require all or some of these, event_content_ledger may be a place for folk memory to comeback as
+events, but the folk memory would have to serve the sim rather than add another level of stored memory." **Read:**
+no new memory store for its own sake. Folk memory returns as EVENTS (Event_Content_Ledger conditions that fire
+because of what happened before); grudges may use bonds and/or dial tags as needed. Test: does it make something
+happen in the sim, not does it remember more.

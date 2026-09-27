@@ -215,3 +215,8 @@ producing but never removes.
   S205/S320 collision identified as a structurally dead media-promotion path;
   fallback-read and household-mint specced as separate fixes with
   presence-before-voice as the governing doctrine.
+
+## Builder ruling 2026-09-27 — family test
+"we can test this on the next run, you can add a family to move in an undertracked hood." Engine-sheet authors one
+family on the Intake tab, arriving in an under-tracked hood, before the next live fire; that fire is the test of
+the household door.

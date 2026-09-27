@@ -49,3 +49,7 @@ Re-run the S345 container audit (documents/list diff = zero missing for in-scope
 
 - 2026-07-31 — created (S345, engine-sheet) after the editions/ backfill shipped inline.
 - 2026-08-03 — T7 added (S353, research-build): single-artifact ingest path for deep-dispatch fork artifacts, from kimi P5.
+
+## Builder ruling 2026-09-27 — T5 scope
+"drive files are canon, all pre cycle articles and articles saved pre cron runs are established canon." T5 is
+decided: Drive files IN; the backfill (T6) and cron wiring (T4) are unblocked.

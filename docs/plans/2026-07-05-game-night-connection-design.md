@@ -163,3 +163,7 @@ All tasks gated on Mike's approval of this design (S296 build moratorium — no 
 ## Changelog
 
 - 2026-07-05 — Initial draft (S297, engine-sheet). Written to satisfy the S296 build moratorium: connection design tracing one moment end-to-end before any build. Awaiting Mike's approval.
+
+## Builder ruling 2026-09-27
+"approved to extend." The household → economy → city-mood hops (1/5/6) are approved; the S296 moratorium gate on
+this plan is lifted. Build per the plan's Tasks.

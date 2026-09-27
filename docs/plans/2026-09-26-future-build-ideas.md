@@ -109,3 +109,19 @@ the unit tests (incl. a house-edge assertion). **Held for the builder's go befor
 economy." A city treasury becomes the ledger initiative spend, renewals and (later) taxes flow through, so civic money
 conserves instead of appearing and vanishing. engine.262 moves from needs-info to a design task; the casino/grant
 conservation checks ride with it.
+
+## Builder ruling 2026-09-27s on the remaining needs-info rows (S499)
+
+- **engine.10 Phase 43 expansion:** order the five domains **most complex to least complex**; builder wants more
+  context on what the five are before ruling further.
+- **engine.261 firm agents:** "a good idea on a test basis" — give **3 business owners** a wake slice that has them
+  go to work and run their business. Test, not a replacement of engine.96.
+- **engine.264 the maker's hand:** the sim runs on "whoever is in charge" and an undertow; deities exist and the crons
+  sense someone is building this — an unspoken "the maker". Build an intake like any other (a ledger/tab with menu
+  dropdowns): a written seed ("West Oakland Food Poisoning Outbreak") + type, hood, positive/negative, effect level,
+  systems affected. The sim never sees this ledger or knows why things happen; citizens and offices only ask
+  themselves "is this the sim or the maker" — subtle, in how they act in wakes and quotes. Never names the builder.
+- **engine.238 patrol strategy:** the **Police Chief** sets it as part of the office's work-week wakes, so the
+  district seats work with that cron to solve.
+- **engine.98 pets:** yes, track pets; pets trigger pet events; acquisition gated on dials (e.g. a level of kindness
+  or isolation); personality decides cat / dog / none.

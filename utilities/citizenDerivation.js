@@ -37,6 +37,17 @@ function economicParameters_() {
     throw new Error('economicParameters_: Economic_Parameters header is [' + h.join(', ') + '] — needs Role, Category, IncomeMin, IncomeMax, MedianIncome.');
   }
   var iTax = col('EffectiveTaxRate'), iOut = col('EconomicOutputCategory'), iBurden = col('HousingBurdenPct'), iCons = col('ConsumerProfile'), iNotes = col('Notes');
+  // A hand-typed "56,000" or "$56K" is a number the tab can't vouch for — fail loud
+  // naming the cell, never strip-and-guess. Optional columns: blank reads null.
+  var num = function (r, c, name, optional) {
+    var v = data[r][c];
+    if (optional && (v === '' || v == null)) return null;
+    var n = typeof v === 'number' ? v : Number(v);
+    if (v === '' || v == null || !isFinite(n)) {
+      throw new Error('economicParameters_: Economic_Parameters row ' + (r + 1) + ' ' + name + ' is ' + JSON.stringify(v) + ', not a number.');
+    }
+    return n;
+  };
   var out = [];
   for (var r = 1; r < data.length; r++) {
     var row = data[r], role = String(row[iRole] || '').trim();
@@ -44,11 +55,11 @@ function economicParameters_() {
     out.push({
       role: role,
       category: String(row[iCat] || '').trim(),
-      incomeRange: [Number(row[iMin]), Number(row[iMax])],
-      medianIncome: Number(row[iMed]),
-      effectiveTaxRate: iTax >= 0 ? Number(row[iTax]) : null,
+      incomeRange: [num(r, iMin, 'IncomeMin'), num(r, iMax, 'IncomeMax')],
+      medianIncome: num(r, iMed, 'MedianIncome'),
+      effectiveTaxRate: iTax >= 0 ? num(r, iTax, 'EffectiveTaxRate', true) : null,
       economicOutputCategory: iOut >= 0 ? String(row[iOut] || '') : '',
-      housingBurdenPct: iBurden >= 0 ? Number(row[iBurden]) : null,
+      housingBurdenPct: iBurden >= 0 ? num(r, iBurden, 'HousingBurdenPct', true) : null,
       consumerProfile: iCons >= 0 ? String(row[iCons] || '') : '',
       notes: iNotes >= 0 ? String(row[iNotes] || '') : ''
     });

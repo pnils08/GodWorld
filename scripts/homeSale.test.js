@@ -21,7 +21,7 @@ global.queueAppendIntent_ = () => {};
 global.queueCellIntent_ = () => {};
 global.requireTab_ = (ss, n) => ss.getSheetByName(n);
 global.logEngineError_ = () => {};
-global.ECONOMIC_PARAMETERS = [];
+global.ECONOMIC_PARAMETERS = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../data/economic_parameters.json'), 'utf8')); // engine.199: live reads the tab
 
 const read = (rel) => fs.readFileSync(path.resolve(__dirname, rel), 'utf8');
 const CAL = read('../phase01-config/advanceSimulationCalendar.js');

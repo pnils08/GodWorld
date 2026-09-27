@@ -130,8 +130,19 @@ console.log('\nTest 10: Gate 5 + engine.199 — the job catalog has one runtime 
   // The Gate 5 scan fires on this tree: no Apps Script file embeds the catalog.
   assert('Gate 5 scans utilities/ + phase*/ for an embedded catalog',
     /ECONOMIC_PARAMETERS_START/.test(source) && /phase\\d/.test(source));
-  assert('utilities/citizenDerivation.js embeds no catalog',
-    !cdSrc.includes('ECONOMIC_PARAMETERS_START') && !/\{\s*"role"\s*:/.test(cdSrc));
+  const { scanEmbeddedCatalogs } = require('./validateIntakeDerivation.js');
+  assert('Gate 5 scan (offline): no utilities/ or phase*/ file embeds the catalog', scanEmbeddedCatalogs().length === 0,
+    JSON.stringify(scanEmbeddedCatalogs()));
+  {
+    const os = require('os');
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'gate5-'));
+    fs.mkdirSync(path.join(tmp, 'utilities'));
+    const unquoted = Array.from({ length: 12 }, (_, i) => `  { role: 'R${i}', category: 'C', medianIncome: 1 },`).join('\n');
+    fs.writeFileSync(path.join(tmp, 'utilities', 'x.js'), 'var CAT = [\n' + unquoted + '\n];\n');
+    fs.writeFileSync(path.join(tmp, 'utilities', 'y.js'), "var a = { role: 'Plumber' };\n");
+    const hits = scanEmbeddedCatalogs(tmp);
+    assert('Gate 5 catches an unquoted-key catalog and ignores a lone role field', hits.length === 1 && hits[0] === 'utilities/x.js', JSON.stringify(hits));
+  }
   // Round trip: JSON → the rows the sync script pushes → economicParameters_ → the same catalog.
   const load = (values, seed) => {
     const logs = [];
@@ -158,6 +169,10 @@ console.log('\nTest 10: Gate 5 + engine.199 — the job catalog has one runtime 
   assert('missing tab throws', /tab missing/.test(throws(null) || ''));
   assert('header without MedianIncome throws', /needs Role/.test(throws([['Role', 'Category', 'IncomeMin', 'IncomeMax']]) || ''));
   assert('header-only tab throws', /no roles/.test(throws([tab[0]]) || ''));
+  const bad = tab.map(r => r.slice()); bad[3][4] = '56,000';
+  assert('a text-formatted MedianIncome throws, naming row and column', /row 4 MedianIncome is "56,000"/.test(throws(bad) || ''));
+  const blankOpt = tab.map(r => r.slice()); blankOpt[2][5] = '';
+  assert('a blank optional EffectiveTaxRate reads null, not 0', load(blankOpt).sb.economicParameters_()[1].effectiveTaxRate === null);
   assert('a seeded empty catalog is not "loaded" — it reads the tab', load(tab, []).sb.economicParameters_().length === json.length);
   assert('a seeded catalog is kept (harness path) — no tab behind it, so a read would throw', throws(null, json) === null);
 }

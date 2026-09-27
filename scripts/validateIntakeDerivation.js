@@ -25,6 +25,24 @@ require('../lib/env');
 const sheets = require('../lib/sheets');
 const cd = require('../lib/citizenDerivation');
 
+// engine.199 Gate 5 scan, offline: any utilities/ or phase*/ file carrying the
+// catalog marker, or 10+ catalog-shaped entries (a role key beside medianIncome,
+// quoted or not), is an embedded copy.
+function scanEmbeddedCatalogs(root) {
+  const fs = require('fs');
+  const path = require('path');
+  root = root || path.resolve(__dirname, '..');
+  const hits = [];
+  for (const dir of fs.readdirSync(root).filter(d => d === 'utilities' || /^phase\d/.test(d))) {
+    for (const f of fs.readdirSync(path.join(root, dir)).filter(n => n.endsWith('.js'))) {
+      const src = fs.readFileSync(path.join(root, dir, f), 'utf-8');
+      const entries = (src.match(/['"]?role['"]?\s*:[^\n]{0,200}?['"]?medianIncome['"]?\s*:/g) || []).length;
+      if (src.includes('ECONOMIC_PARAMETERS_START') || entries >= 10) hits.push(dir + '/' + f);
+    }
+  }
+  return hits;
+}
+
 async function main() {
   const wantJson = process.argv.includes('--json');
 
@@ -109,18 +127,12 @@ async function main() {
 
   // Gate 5 (engine.199): no Apps Script file carries an embedded copy of the job
   // catalog — the engine reads the Economic_Parameters tab. Tab-vs-JSON parity is
-  // `node scripts/syncEconomicParameters.js --check` (needs the sheet).
+  // `node scripts/syncEconomicParameters.js --check` (needs the sheet). The same
+  // scan runs offline in validateIntakeDerivation.contract.test.js.
   const fs = require('fs');
   const path = require('path');
-  const root = path.resolve(__dirname, '..');
-  const gsDirs = fs.readdirSync(root).filter(d => d === 'utilities' || /^phase\d/.test(d));
-  for (const dir of gsDirs) {
-    for (const f of fs.readdirSync(path.join(root, dir)).filter(n => n.endsWith('.js'))) {
-      const src = fs.readFileSync(path.join(root, dir, f), 'utf-8');
-      if (src.includes('ECONOMIC_PARAMETERS_START') || /\{\s*"role"\s*:/.test(src)) {
-        failures.push('[Gate 5] ' + dir + '/' + f + ' embeds a job-catalog copy — the engine reads the Economic_Parameters tab (engine.199); edit data/economic_parameters.json and run `node scripts/syncEconomicParameters.js`');
-      }
-    }
+  for (const hit of scanEmbeddedCatalogs()) {
+    failures.push('[Gate 5] ' + hit + ' embeds a job-catalog copy — the engine reads the Economic_Parameters tab (engine.199); edit data/economic_parameters.json and run `node scripts/syncEconomicParameters.js`');
   }
 
   // ── Verdict ──────────────────────────────────────────────────────────────
@@ -149,7 +161,9 @@ async function main() {
   process.exit(failures.length === 0 ? 0 : 1);
 }
 
-main().catch(err => {
+module.exports = { scanEmbeddedCatalogs };
+
+if (require.main === module) main().catch(err => {
   console.error(err);
   process.exit(2);
 });

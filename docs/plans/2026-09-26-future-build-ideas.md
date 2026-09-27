@@ -125,3 +125,7 @@ conservation checks ride with it.
   district seats work with that cron to solve.
 - **engine.98 pets:** yes, track pets; pets trigger pet events; acquisition gated on dials (e.g. a level of kindness
   or isolation); personality decides cat / dog / none.
+
+- **engine.10 order agreed (2026-09-27):** most → least complex = legal/justice, public health, port/logistics,
+  environmental, tech sector, parks + food. The top two are engine.254's care-and-justice build, so Phase 43
+  continues through engine.254; the rest follow in that order.

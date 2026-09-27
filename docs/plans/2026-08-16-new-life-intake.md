@@ -220,3 +220,10 @@ producing but never removes.
 "we can test this on the next run, you can add a family to move in an undertracked hood." Engine-sheet authors one
 family on the Intake tab, arriving in an under-tracked hood, before the next live fire; that fire is the test of
 the household door.
+
+- 2026-09-27 (S499, engine-sheet) — **Family test authored and bench-proven; written to live for C109.** The
+  Villanueva household (key `VILLANUEVA`): Tomás 41 head / Electrician, Renata 39 spouse / ER Nurse, Sofía 14 and
+  Mateo 9 children, all San Antonio (least-tracked hood, 3 active; canon MedianRent 1632). Bench SANDBOX 0908 C145:
+  POP-01313–01316, one `HH-0145-I001`, symmetric SpouseIds, NumChildren 2 on both parents, children `student`,
+  Household_Ledger `family` / `rented` / $1,577 / income $251,100, Family_Relationships row with both children,
+  0 new Engine_Errors. Same four rows appended to the live Intake tab (read back) — C109 is the live test.

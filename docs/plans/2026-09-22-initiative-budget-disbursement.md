@@ -228,3 +228,6 @@ on the economy or what you make vs what you spend." **Read:** not a liquid-savin
 (what a household makes vs spends) so stress comes from real outflows. engine.256 (leases): "if a hood starts to
 change the citizens would as well" — leases follow the hood's own movement; the spread/speed numbers need a plain
 explanation before a ruling.
+
+**engine.256 numbers ruled 2026-09-27 ("yes on both"):** a lease draws within **±15%** of its hood's typical rent,
+and each renewal closes **25%** of the gap to where the hood's rent is now. Ready to build.

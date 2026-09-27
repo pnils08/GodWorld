@@ -150,6 +150,9 @@ pointers:
 - Job 6 — four `Renewal*` columns self-arm on Initiative_Tracker, no vote and no credit this fire (nothing staged), the Job 5 exhaustion note (if any row runs dry) ends `(was <phase>)`; a `renew` filed during the week before the columns exist posts `failed` on the move ledger at the Sunday fold (designed loud skip) — from the week after C109 it stages
 - tick refresh resumes once `dumpBeatTabs` stamps C109
 - Job 1 proof (`week_state_c109.json` apply `done`).
+- engine.109 family (written to live Intake 2026-09-27): four Villanueva POPIDs in San Antonio, one `HH-0109-I…`
+  household, symmetric SpouseIds, NumChildren 2 on both parents, children `student`, a Household_Ledger `family`
+  row and a Family_Relationships row (bench C145 landed exactly this).
 - Sports (engine.210, engine-sheet 2026-09-26): Neighborhood_Map SportsSeason `championship` 22/22 (last A's C109 feed row 235 is `championship`). Expect exactly 5 `Phase2-SportsSeason:WeekRecord` Engine_Errors, all authoring, none a defect: feed rows 230–233 are duplicate A's WeekRecords (one per game; the contract is one summary per franchise), row 235 carries `H:W` on a season-state row. Casino settles the A's on row 229 `H:W` (win), the Oaks on row 234 `A:L`. A manual `/pre-flight` before the fire reports NOT READY on the same cells — not a stop (preflight is not in the fire path); clearing row 235's WeekRecord cell silences it.
 
 ## Stacked ship after the C109 smoke (engine-sheet S499 — one stack, ordering is this seat's call)

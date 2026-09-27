@@ -224,3 +224,7 @@ Practical consequence for every re-run: **`--fill-blanks-only`.** Fill what is e
 ## Builder ruling 2026-09-27
 The two pending org-name ties are CONFIRMED by the builder (Hayes → WOCC; the BART tie). Apply as a targeted
 two-row write, read back.
+
+**Checked 2026-09-27 (S499): both ties were already live** — POP-00772 Beverly Hayes `EmployerBizId` BIZ-00028
+(West Oakland Community Center) and POP-01039 Ximena Mehta BIZ-00014 (BART Oakland Division), mirrored on
+Employment_Roster. No write needed; the confirmation closes engine.83.

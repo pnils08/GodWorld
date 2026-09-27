@@ -432,6 +432,7 @@ no paid/manual wake or crontab change was used for validation.
 
 ## Changelog
 
+- 2026-09-27 (research-build) — Closed done-pending-archive: Phase 2 daily writer-wakes confirmed live in crontab all session; row's own text already said "now shipped."
 - 2026-08-09 (codex) — The broad S344 “additive invention” wording is narrowed by [[../adr/0017-typed-lived-experience-packets]]: interpretation remains free, but new hard events/entities are typed claims. The isolated all-three-wake proof is [[2026-08-09-three-wake-lived-packet-pilot]]; the baseline stays live and unchanged during the A/B.
 - 2026-07-20 — Initial draft (S325). Research basis [[../research/2026-07-19-headless-cron-newsroom-agentic-rag]]; ignited by Mike's full-pipeline direction + Feedback1.txt validation. Phase 1 concrete (scorecard building this session); Phases 2–4 outlined to split into sub-plans when picked up.
 - 2026-07-22 — Phase 2.0 designed + triaged (S330). Angle-assigner reframed → four-layer model; Phase 2.0 = byline WHO-assist spec; PoolKey dropped as stale; Phase 2 gained layer-4 citizen-quote pre-pass. No new files.

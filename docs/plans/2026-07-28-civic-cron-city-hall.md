@@ -159,6 +159,7 @@ Per Mike S343: build the basic core, dry-run, then tune. These live in the resea
 
 ## Changelog
 
+- 2026-09-27 (research-build) — Closed done-pending-archive: `--apply` confirmed live on the Sunday chain in crontab, past the dry-probation stage the row described.
 - 2026-08-13 (grok) — Approval v1.6: never default to an empty seat. In-ledger bar = Drive≥60, Integrity≥40, Composure≥40, adult 25–70, not T1, not already CIV. Generic_Citizens is a feeder. Else mint an out-of-town arrival (pumped Drive/Integrity/Composure, dumped Family). Vacant only if the ledger cannot be written — that delay is the designed crisis.
 - 2026-08-13 (grok) — Approval v1.5: demotion campaign, not election. `<40` picks a deterministic citizen challenger; `<20` seats them. The drop is the vote. Election window stays unused for this path.
 - 2026-08-13 (grok) — Approval v1.4: crossing `<20` (or already-unfit + still silent) removes the holder from office. In-world they failed the city; out-of-world the cron would not push. Civic decide skips a vacant mayor. Clasp still required.

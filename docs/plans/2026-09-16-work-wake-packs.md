@@ -134,5 +134,6 @@ pointers:
 
 ## Changelog
 
+- 2026-09-27 (research-build) — Closed done-pending-archive: acceptance (first unattended run) confirmed, multiple real firings since (rotated log dated 2026-09-24).
 - 2026-09-16 (kimi) — Initial draft. Map + wiring card verified same day; builder approved architecture (new work-wake path; ME + others first, police chief stays datawake-only) and this filing.
 - 2026-09-19 (research-build, S467) — Accepted from the review inbox and moved to docs/plans. Row ID renumbered civic.34 → **civic.37**, because civic.34 is archived. State at filing: built (`8eb58b9a`), crontab installed (Tue/Thu 20:18), first live runs 2026-09-19 05:44 UTC for POP-00142 Jonas Patel and POP-00533 Travis Coles, each giving a page reflection plus a Reflection_Intake row with `applied=no`. Acceptance is the first unattended scheduled run (Tue 2026-09-22), read back.

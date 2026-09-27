@@ -115,6 +115,7 @@ pointers:
 
 ## Changelog
 
+- 2026-09-27 (research-build) — Closed done-pending-archive: all T1-5 built. Row's C101 acceptance clause is 7+ weeks stale, since superseded by the ADR-0017 typed-packet architecture.
 - 2026-08-10 (codex) — Supersedes the baseline note for scheduled Jax: JAX-LEP2-1 uses candidate-specific evidence-bound Wake 2 on Llama, code-rendered quote IDs, and no PRESS write. Other scheduled journalists remain stopped at the ADR-0017 package gate until upgraded.
 - 2026-08-09 (codex) — Wake 2's press-evidence application moves to [[../adr/0017-typed-lived-experience-packets]] + [[2026-08-09-three-wake-lived-packet-pilot]]: candidate-specific exposure, typed observation/interpretation/lead, and explicit abstention replace the generic “what have you seen?” treatment path. Existing quote supply remains baseline until the A/B clears.
 - 2026-07-11 — Initial draft (S312, research-build). Mike-direct: priority citizen-usage avenue + record-at-speak-time (page + gated intake; dials stay behind the cycle drain). Closes the S296 curation diagnosis.

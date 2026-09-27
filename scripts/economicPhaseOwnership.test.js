@@ -68,7 +68,7 @@ function world(scenario) {
   for (const rel of ['phase06-analysis/economicRippleEngine.js', 'phase06-analysis/applyMigrationDrift.js', 'phase08-v3-chicago/v3Integration.js']) {
     vm.runInContext(read(rel), sb, { filename: rel });
   }
-  for (const name of ['domainTracker_', 'storyHookEngine_', 'textureTriggerEngine_', 'chicagoSatelliteEngine_', 'runMediaFeedbackEngine_']) {
+  for (const name of ['domainTracker_', 'storyHookEngine_', 'textureTriggerEngine_', 'runMediaFeedbackEngine_']) {
     sb[name] = () => { counts.modules[name] = (counts.modules[name] || 0) + 1; };
   }
   return { sb, counts };
@@ -104,7 +104,7 @@ for (const schedule of schedules) {
         assert.strictEqual(actual.counts.draws, expected.counts.draws, 'no second economy RNG consumption');
         assert.strictEqual(actual.counts.ledger, expected.counts.ledger, 'no duplicate ripple attribution');
         for (const count of Object.values(actual.counts.modules)) assert.strictEqual(count, cycle - 7999);
-        assert.strictEqual(Object.keys(actual.counts.modules).length, 5, 'all unrelated integration modules still run');
+        assert.strictEqual(Object.keys(actual.counts.modules).length, 4, 'all unrelated integration modules still run (the Chicago satellite retired with Chicago)');
       }
       passed++;
       console.log('PASS ' + schedule.name + ': ' + scenario.name + ', two Cycles');

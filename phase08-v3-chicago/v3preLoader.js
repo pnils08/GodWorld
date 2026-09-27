@@ -61,8 +61,6 @@ function v3PreloadContext_(ctx) {
   if (!S.textureTriggers) S.textureTriggers = [];
   if (!S.domains) S.domains = [];
   if (!S.domainPresence) S.domainPresence = {};
-  if (!S.chicagoSnapshot) S.chicagoSnapshot = {};
-  if (!S.chicagoFeed) S.chicagoFeed = [];
 
   // ═══════════════════════════════════════════════════════════════════════════
   // ECONOMIC SYSTEM
@@ -265,7 +263,6 @@ function loadActiveArcsFromLedger_(ctx) {
  * CONTAINERS INITIALIZED:
  * - Core: eventArcs (loaded from ledger), storyHooks, storySeeds, textures, textureTriggers
  * - Domain: domains, domainPresence
- * - Chicago: chicagoSnapshot, chicagoFeed
  * - Economic: economicRipples, economicMood
  * - Media: mediaEffects
  * - Bonds: newBonds, activeBonds

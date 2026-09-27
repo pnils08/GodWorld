@@ -93,7 +93,7 @@ function v3Integration_(ctx) {
     'domainTracker_': typeof domainTracker_ === 'function' ? domainTracker_ : null,
     'storyHookEngine_': typeof storyHookEngine_ === 'function' ? storyHookEngine_ : null,
     'textureTriggerEngine_': typeof textureTriggerEngine_ === 'function' ? textureTriggerEngine_ : null,
-    'chicagoSatelliteEngine_': typeof chicagoSatelliteEngine_ === 'function' ? chicagoSatelliteEngine_ : null,
+    // Chicago retired from the sim (builder 2026-09-27): chicagoSatelliteEngine_ removed with its file.
     // engine.217 (2026-09-14, codex-directed): economicRippleEngine_ REMOVED —
     // the economy is owned by Phase6-EconomicRipple (godWorldEngine2 L412 /
     // L2156). This second run recalculated economicMood from the already-
@@ -137,9 +137,6 @@ function v3Integration_(ctx) {
 
   // 4. Texture triggers
   if (safeCall('textureTriggerEngine_')) modulesRan.push('textureTriggerEngine');
-
-  // 5. Chicago snapshot
-  if (safeCall('chicagoSatelliteEngine_')) modulesRan.push('chicagoSatelliteEngine');
 
   // 6. Economic ripple effects — engine.217: no longer runs here. Phase6-EconomicRipple
   // is the single owner (see the registry note); the v3.4 wrapper is retained for callers.
@@ -201,7 +198,7 @@ function v3Integration_(ctx) {
  * 2. domainTracker_ - Domain presence mapping
  * 3. storyHookEngine_ - Story hook generation
  * 4. textureTriggerEngine_ - Environmental texture triggers
- * 5. chicagoSatelliteEngine_ - Chicago satellite data
+ * 5. chicagoSatelliteEngine_ - REMOVED (Chicago retired from the sim, 2026-09-27)
  * 6. economicRippleEngine_ - REMOVED from this scheduler (engine.217): Phase6-EconomicRipple
  *    owns the economy; the wrapper (→ runEconomicRippleEngine_) remains callable
  * 7. mediaFeedbackEngine_ - Media feedback loop (→ runMediaFeedbackEngine_)

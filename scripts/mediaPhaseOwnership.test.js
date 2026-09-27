@@ -61,7 +61,7 @@ function world() {
   for (const rel of ['phase06-analysis/applyShockMonitor.js', 'phase07-evening-media/mediaFeedbackEngine.js', 'phase08-v3-chicago/v3Integration.js']) vm.runInContext(read(rel), sb, { filename: rel });
   // Phase7-ChaosArcs: this Cycle's new arc appears AFTER the Phase-7 media slot.
   sb.createChaosArcs_ = ctx => { ctx.summary.eventArcs.push({ arcId: 'SYNTHETIC_ARC', type: 'sports-run', domainTag: 'sports', phase: 'active', tension: 5 }); };
-  for (const name of ['domainTracker_', 'storyHookEngine_', 'textureTriggerEngine_', 'chicagoSatelliteEngine_']) {
+  for (const name of ['domainTracker_', 'storyHookEngine_', 'textureTriggerEngine_']) {
     sb[name] = () => { counts.modules[name] = (counts.modules[name] || 0) + 1; };
   }
   return { sb, counts };
@@ -84,7 +84,7 @@ for (const schedule of schedules) {
     const solo = world(); solo.sb.createChaosArcs_(solo.sb.ctx); solo.sb.runMediaFeedbackEngine_(solo.sb.ctx);
     assert.strictEqual(S.cityDynamics.sentiment, solo.sb.ctx.summary.cityDynamics.sentiment, 'city sentiment shifted once (' + S.cityDynamics.sentiment + ' vs one run ' + solo.sb.ctx.summary.cityDynamics.sentiment + ')');
     assert(S.mediaEffects && S.mediaEffects.arcAmplification.length === 1, 'the persisted media effects carry the arc amplification');
-    assert.strictEqual(Object.keys(w.counts.modules).length, 4, 'the four unrelated integration modules still run (economy left the registry in engine.217)');
+    assert.strictEqual(Object.keys(w.counts.modules).length, 3, 'the three unrelated integration modules still run (economy left in engine.217, the Chicago satellite with Chicago)');
     passed++;
     console.log('PASS ' + schedule.name);
   } catch (error) {

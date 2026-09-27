@@ -55,7 +55,7 @@ function world() {
   sb.domainTracker_ = ctx => { ctx.summary.domainPresence = { CIVIC: 4, BUSINESS: 1, SPORTS: 1, SAFETY: 1, HEALTH: 1, WEATHER: 1 }; };
   sb.storyHookEngine_ = ctx => { ctx.summary.storyHooks = [{ priority: 3 }, { priority: 3 }, { priority: 4 }]; };
   sb.runMediaFeedbackEngine_ = ctx => { ctx.summary.mediaEffects = { coverageIntensity: 'saturated', crisisSaturation: 0.7 }; };
-  sb.textureTriggerEngine_ = () => {}; sb.chicagoSatelliteEngine_ = () => {};
+  sb.textureTriggerEngine_ = () => {};
   return sb;
 }
 

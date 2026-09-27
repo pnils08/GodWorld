@@ -56,7 +56,6 @@ function buildCyclePacket_(ctx) {
   var events = S.worldEvents || [];
   var textures = S.textureTriggers || [];
   var domains = S.domainPresence || {};
-  var chicago = S.chicagoFeed || [];
 
   var round2 = function(n) { return Math.round(n * 100) / 100; };
 
@@ -737,30 +736,6 @@ function buildCyclePacket_(ctx) {
       var ceNh = ce.neighborhood ? ' @' + ce.neighborhood : '';
       lines.push('- ' + (ce.name || 'unnamed') + ceNh);
     }
-    lines.push('');
-  }
-
-  // ═══════════════════════════════════════════════════════════
-  // CHICAGO SATELLITE (v3.7: moved to end of packet)
-  // ═══════════════════════════════════════════════════════════
-  if (chicago.length > 0) {
-    var C = chicago[0];
-    lines.push('--- CHICAGO SATELLITE ---');
-    lines.push('CycleRef: Y' + (C.godWorldYear || cal.godWorldYear) + 'C' + (C.cycleOfYear || cal.cycleOfYear));
-    lines.push('Season: ' + (C.season || cal.season));
-    lines.push('Month: ' + (C.month || C.simMonth || cal.month));
-
-    if (C.holiday && C.holiday !== 'none') {
-      lines.push('Holiday: ' + C.holiday + ' [' + (C.holidayPriority || 'unknown') + ']');
-    } else if (cal.holiday !== 'none') {
-      lines.push('Holiday: ' + cal.holiday + ' (national)');
-    }
-
-    lines.push('Weather: ' + (C.weatherType || 'clear') + ' (impact=' + (C.weatherImpact || 1) + ', temp=' + (C.temp || 'n/a') + '°F)');
-    lines.push('Sentiment: ' + round2(C.sentiment || 0));
-
-    if (C.events) lines.push('Events: ' + C.events);
-    if (C.travelNotes) lines.push('Travel: ' + C.travelNotes);
     lines.push('');
   }
 

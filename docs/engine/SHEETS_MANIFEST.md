@@ -103,9 +103,7 @@ This manifest is the registry of all active Google Sheets tabs hooked into the P
   struck-through tombstones rather than deleted so the next reader learns they
   are gone instead of re-adding them. Same S139 pass also removed `Sports_Calendar`,
   `Arc_Ledger`, and `Sports_Feed` (a duplicate of `Oakland_Sports_Feed`).
-- **`Chicago_Feed`**: Satellite world state reference.
-- **`Chicago_Sports_Feed`**: Satellite sports reference.
-- **`Chicago_Citizens`**: Satellite citizen roster.
+- **`Chicago_Feed`**, **`Chicago_Sports_Feed`**, **`Chicago_Citizens`**: frozen history — Chicago is retired from the sim (2026-09-27). No engine reader or writer; the satellite, writer and citizen generator files are deleted. Tabs kept, never written.
 
 ## Open security action (carried from S156 — do not drop in condensations)
 
@@ -169,7 +167,6 @@ Rule (engine rules): sheet writes go through `ctx.writeIntents`; only `phase10-p
 | `phase05-citizens/seedRelationBondsv1.js` | Relationship_Bonds, Citizen_Directory, Neighborhood_Map | own-tab | |
 | `phase05-citizens/bondPersistence.js` | Relationship_Bonds, Citizen_Directory, Neighborhood_Map | own-tab | |
 | `phase05-citizens/migrationTrackingEngine.js` | Household_Ledger, Neighborhood_Map, Simulation_Ledger | own-tab | `updateHouseholdLedgerMove_` writes Neighborhood / MonthlyRent / LastUpdated on a move; with the owner-move receipt (2026-09-23) also HousingType + HousingCost — the sale and the buy-or-rent money run in `executeOwnerMove_` (generationalWealthEngine) through `ctx.ledger` |
-| `phase05-citizens/generateChicagoCitizensv1.js` | Chicago_Citizens | DISABLED | both `safePhaseCall_` sites commented out at both entry points; pool frozen ~124 rows; `createChicagoCitizensSheet_` is schema-setup, unreachable while disabled; retained for reversibility |
 | `phase05-citizens/generateGenericCitizens.js` | Generic_Citizens | own-tab | ACTIVE v2.8 — Tier-5 feeder pool, sex-tagged, pool-floor gate F60/M40, max 8/cycle |
 | `phase05-citizens/processAdvancementIntake.js` | Advancement_Intake*, Generic_Citizens, Simulation_Ledger, LifeHistory_Log, **Household_Ledger + Family_Relationships (engine.109 `formIntakeHouseholds_` — header-resolved appends, the wedding writer's class)** | own-tab | ACTIVE at `Phase5-Advancement`, both entry points; `checkEmergencePromotions_` promotes GC rows at EmergenceCount ≥ 3; **engine.96 Task 12 (S440): `checkBusinessOwnerPromotions_` — the owner door, third drip writer to `Advancement_Intake1` (`OwnerOfBizId` + `Gender` self-arm, the drip queue's class); `wireBusinessOwners_` writes `Business_Ledger.Key_Personnel` by `queueCellIntent_` only (Phase 10, economy/90)**; `processIntake_` routes unknown intake names to Generic_Citizens, never mints SL rows |
 | `phase05-citizens/generateMediaModeEvents.js` | LifeHistory_Log, Simulation_Ledger | own-tab | |
@@ -180,7 +177,7 @@ Rule (engine rules): sheet writes go through `ctx.writeIntents`; only `phase10-p
 | `phase07-evening-media/storylineWeavingEngine.js` | Storyline_Tracker | own-tab | |
 | `phase07-evening-media/updateTrendTrajectory.js` | (caller-passed) | caller-sheet | |
 | `phase07-evening-media/updateMediaSpread.js` | (caller-passed) | caller-sheet | |
-| `phase08-v3-chicago/v3NeighborhoodWriter.js`, `v3DomainWriter.js`, `v3ChicagoWriter.js` | tracking tabs | own-tab | |
+| `phase08-v3-chicago/v3NeighborhoodWriter.js`, `v3DomainWriter.js` | tracking tabs | own-tab | |
 | `phase09-digest/applyCycleWeight.js` | Cycle_Weight | own-tab | signal-only on the cycle path; the digest row is written by `writeDigest_` at Phase 10 via intent |
 | `phase11-media-intake/healthCauseIntake.js` | Health_Cause_Intake, Health_Cause_Queue, Simulation_Ledger | operator | `runProcessHealthCauseIntake` manual trigger with stub ctx |
 | `utilities/archiveLifeHistory.js` `maintainLifeHistoryLog_` | LifeHistory_Log, LifeHistory_Archive | phase11 + rmd | final Phase-11 call, row-count gated; appends old rows to the archive then rewrites the active tab |

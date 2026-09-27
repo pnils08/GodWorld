@@ -116,12 +116,9 @@ function recordMediaLedger_(ctx) {
     // Texture triggers
     var textureCount = S.textureTriggers ? S.textureTriggers.length : 0;
 
-    // City sentiment (with Chicago blend if available)
+    // City sentiment — Oakland's own. The Chicago blend (averaged with a
+    // generated Chicago sentiment every cycle) is gone with Chicago (2026-09-27).
     var citySentiment = S.cityDynamics ? S.cityDynamics.sentiment : 0;
-    if (S.chicagoFeed && S.chicagoFeed.length > 0) {
-      var c = S.chicagoFeed[0];
-      citySentiment = (citySentiment + (c.sentiment || 0)) / 2;
-    }
 
     var chaosCount = S.worldEvents ? S.worldEvents.length : 0;
     var nightlifeVol = S.nightlifeVolume || 0;

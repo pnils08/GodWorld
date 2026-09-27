@@ -361,8 +361,8 @@ for (const relFile of phaseFiles) {
     while ((m = re.exec(ls[i])) !== null) spanCalls[key].add(m[1]);
     // `typeof fn_ === 'function'` is how the engine guards a call it is about to make,
     // and how v3Integration_'s V3_FUNCTIONS registry names the modules it dispatches by
-    // string (domainTracker_, storyHookEngine_, chicagoSatelliteEngine_). Without this
-    // edge those three read as DEAD while running at Phase8-V3Integration (S408).
+    // string (domainTracker_, storyHookEngine_, textureTriggerEngine_). Without this
+    // edge those read as DEAD while running at Phase8-V3Integration (S408).
     const tre = /typeof\s+([A-Za-z_][A-Za-z0-9_]*)\s*===\s*['"]function['"]/g;
     while ((m = tre.exec(ls[i])) !== null) spanCalls[key].add(m[1]);
   }

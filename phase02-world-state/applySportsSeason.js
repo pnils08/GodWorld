@@ -34,7 +34,6 @@ function applySportsSeason_(ctx) {
   if (oaklandOverride) {
     S.sportsSeason = oaklandOverride;
     S.sportsSeasonOakland = oaklandOverride;
-    S.sportsSeasonChicago = "";
     S.sportsSource = "config-override";
     // Maker-declared state is the ONLY source that licenses invented sports
     // atmosphere (watch parties, playoff texture, drift nudges). Feed-driven
@@ -137,8 +136,6 @@ function applySportsSeason_(ctx) {
 
     Logger.log("applySportsSeason_ v3.1: No feed entries for cycle " + currentCycle);
   }
-
-  S.sportsSeasonChicago = "";
 
   ctx.summary = S;
 }

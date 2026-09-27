@@ -334,7 +334,7 @@
 ### applySportsSeason.js
 - **applySportsSeason_(ctx)**
   Reads: S.activeSports, S.baylightOpenings, S.cycle, S.cycleId, S.sportsSeason, S.sportsSeasonByTeam
-  Writes: S.activeSports, S.baylightOpenings, S.sportsAtmosphereEnabled, S.sportsFeedEntries, S.sportsFeedSeasonType, S.sportsSeason, S.sportsSeasonByTeam, S.sportsSeasonChicago, S.sportsSeasonOakland, S.sportsSource, S.sportsZones
+  Writes: S.activeSports, S.baylightOpenings, S.sportsAtmosphereEnabled, S.sportsFeedEntries, S.sportsFeedSeasonType, S.sportsSeason, S.sportsSeasonByTeam, S.sportsSeasonOakland, S.sportsSource, S.sportsZones
   Config: ctx.config.sportsStateOakland, ctx.config.sportsState_Oakland
 
 - **readOaklandFeedEntries_(ctx, currentCycle)**
@@ -1674,29 +1674,6 @@
   Writes: S.storyHooks
   Sheets: Neighborhood_Demographics
 
-### generateChicagoCitizensv1.js
-- **generateChicagoCitizens_(ctx)**
-  Writes: S.chicagoCitizens
-  Config: ctx.config.cycleCount
-  Sheets: Chicago_Citizens
-  RNG: ctx.rng / safeRand_(ctx)
-
-- **createChicagoCitizensSheet_(ss)**
-
-- **generateChicagoCitizen_(cycle, rng)**
-
-- **generateAge_(rng)**
-
-- **generateTier_(rng)**
-
-- **getChicagoOccupation_(neighborhood, rng)**
-
-- **pickWeightedRandom_(weightedObj, rng)**
-
-- **generateId_(rng)**
-
-- **testChicagoCitizenGeneration_()**
-
 ### generateCitizensEvents.js
 - **balanceContentLedgerPoolWeights_(pool)**
 
@@ -2985,54 +2962,6 @@
   Writes: S.activeCooldowns, S.cooldownCalendarContext, S.domainCooldowns, S.suppressDomains
   Config: ctx.config.cycleCount
 
-### chicagoSatellite.js
-- **chicagoSatelliteEngine_(ctx)**
-  Reads: S.absoluteCycle, S.cycleId, S.cycleInMonth, S.cycleOfYear, S.godWorldYear, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.month, S.season, S.simMonth, S.sportsSeason, S.sportsState_Chicago
-  Writes: S.chicagoFeed
-  Config: ctx.config.sportsState_Chicago
-  RNG: ctx.rng / safeRand_(ctx)
-
-- **generateChicagoWeather_(month, season, holiday, rng)**
-
-- **calculateChicagoSentiment_(ctx, weather, holiday, holidayPriority, bullsSeason, rng)**
-
-- **generateChicagoEvents_(weather, sentiment, month, holiday, isFirstFriday, cycleOfYear, rng)**
-
-- **generateChicagoTravel_(weather, holiday)**
-
-### v3ChicagoWriter.js
-- **saveV3Chicago_(ctx)**
-  Reads: S.absoluteCycle, S.chicagoCitizens, S.chicagoFeed, S.cycleId, S.cycleInMonth, S.cycleOfYear, S.economicMood, S.godWorldYear, S.holiday, S.season, S.simMonth, S.weatherMood
-  Config: ctx.config.cycleCount
-  Sheets: Chicago_Feed
-  RNG: ctx.rng / safeRand_(ctx)
-
-- **deriveChicagoFeedV24_(ctx, godWorldYear, cycleOfYear, simMonth, cycleInMonth, season, holiday, rng)**
-  Reads: S.chicago, S.economicMood
-
-- **getBullsSeasonV24_(ctx)**
-  Config: ctx.config.sportsState_Chicago
-
-- **getMonthFromCycleInternal_(cycleOfYear)**
-
-- **deriveChicagoWeatherTypeV24_(simMonth, rng)**
-
-- **deriveChicagoTempV24_(simMonth, weatherType, rng)**
-
-- **deriveWeatherImpactV24_(weatherType)**
-
-- **deriveWeatherMoodV24_(weatherType)**
-
-- **deriveComfortIndexV24_(temperature, weatherType)**
-
-- **deriveChicagoSentimentV24_(summary, rng)**
-
-- **deriveChicagoEventsV24_(weatherType, simMonth, holiday)**
-
-- **deriveChicagoTravelV24_(weatherType, weatherImpact, holiday)**
-
-- **round2V24_(n)**
-
 ### v3DomainWriter.js
 - **saveV3Domains_(ctx)**
   Reads: S.cycleId, S.domainPresence, S.dominantDomain, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.sportsSeason
@@ -3113,8 +3042,8 @@
 
 ### v3preLoader.js
 - **v3PreloadContext_(ctx)**
-  Reads: S.activeBonds, S.auditIssues, S.chicagoFeed, S.chicagoSnapshot, S.cityEventDetails, S.civicLoadFactors, S.crowdHotspots, S.crowdMap, S.domainPresence, S.domains, S.economicMood, S.economicRipples, S.eventArcs, S.famousSightings, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.mediaEffects, S.namedSpotlights, S.neighborhoodPresence, S.newBonds, S.newCitizens, S.promotions, S.season, S.shockReasons, S.sportsSeason, S.storyHooks, S.storySeeds, S.textureTriggers, S.textures, S.weatherMood, S.worldEvents
-  Writes: S.activeBonds, S.auditIssues, S.chicagoFeed, S.chicagoSnapshot, S.cityEventDetails, S.civicLoadFactors, S.crowdHotspots, S.crowdMap, S.domainPresence, S.domains, S.economicMood, S.economicRipples, S.eventArcs, S.famousSightings, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.mediaEffects, S.namedSpotlights, S.neighborhoodPresence, S.newBonds, S.newCitizens, S.promotions, S.season, S.shockReasons, S.sportsSeason, S.storyHooks, S.storySeeds, S.textureTriggers, S.textures, S.weatherMood, S.worldEvents
+  Reads: S.activeBonds, S.auditIssues, S.cityEventDetails, S.civicLoadFactors, S.crowdHotspots, S.crowdMap, S.domainPresence, S.domains, S.economicMood, S.economicRipples, S.eventArcs, S.famousSightings, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.mediaEffects, S.namedSpotlights, S.neighborhoodPresence, S.newBonds, S.newCitizens, S.promotions, S.season, S.shockReasons, S.sportsSeason, S.storyHooks, S.storySeeds, S.textureTriggers, S.textures, S.weatherMood, S.worldEvents
+  Writes: S.activeBonds, S.auditIssues, S.cityEventDetails, S.civicLoadFactors, S.crowdHotspots, S.crowdMap, S.domainPresence, S.domains, S.economicMood, S.economicRipples, S.eventArcs, S.famousSightings, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.mediaEffects, S.namedSpotlights, S.neighborhoodPresence, S.newBonds, S.newCitizens, S.promotions, S.season, S.shockReasons, S.sportsSeason, S.storyHooks, S.storySeeds, S.textureTriggers, S.textures, S.weatherMood, S.worldEvents
 
 - **loadActiveArcsFromLedger_(ctx)**
   Writes: S.eventArcs
@@ -3188,7 +3117,7 @@
 
 ### buildCyclePacket.js
 - **buildCyclePacket_(ctx)**
-  Reads: S.absoluteCycle, S.bondSummary, S.chicagoFeed, S.cityDynamics, S.cityEventDetails, S.civicLoad, S.civicLoadFactors, S.civicLoadScore, S.compressedLine, S.creationDayAnniversary, S.crimeMetrics, S.crowdHotspots, S.crowdMap, S.cycleId, S.cycleInMonth, S.cycleOfYear, S.cycleRef, S.cycleSummary, S.cycleWeight, S.cycleWeightReason, S.demographicDrift, S.demographicShifts, S.domainPresence, S.dominantDomain, S.economicSummary, S.eveningFood, S.eveningSafety, S.eveningTraffic, S.eventArcs, S.generationalEvents, S.generationalSummary, S.godWorldYear, S.holiday, S.holidayNeighborhood, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.mediaSummary, S.migrationBrief, S.migrationDrift, S.month, S.namedSpotlights, S.neighborhoodDynamics, S.neighborhoodEconomies, S.neighborhoodMigration, S.nightlife, S.patternFlag, S.season, S.shockDuration, S.shockFlag, S.shockReasons, S.shockScore, S.simMonth, S.storyHooks, S.textureTriggers, S.transitMetrics, S.weather, S.weatherSummary, S.worldEvents, S.worldPopulation
+  Reads: S.absoluteCycle, S.bondSummary, S.cityDynamics, S.cityEventDetails, S.civicLoad, S.civicLoadFactors, S.civicLoadScore, S.compressedLine, S.creationDayAnniversary, S.crimeMetrics, S.crowdHotspots, S.crowdMap, S.cycleId, S.cycleInMonth, S.cycleOfYear, S.cycleRef, S.cycleSummary, S.cycleWeight, S.cycleWeightReason, S.demographicDrift, S.demographicShifts, S.domainPresence, S.dominantDomain, S.economicSummary, S.eveningFood, S.eveningSafety, S.eveningTraffic, S.eventArcs, S.generationalEvents, S.generationalSummary, S.godWorldYear, S.holiday, S.holidayNeighborhood, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.mediaSummary, S.migrationBrief, S.migrationDrift, S.month, S.namedSpotlights, S.neighborhoodDynamics, S.neighborhoodEconomies, S.neighborhoodMigration, S.nightlife, S.patternFlag, S.season, S.shockDuration, S.shockFlag, S.shockReasons, S.shockScore, S.simMonth, S.storyHooks, S.textureTriggers, S.transitMetrics, S.weather, S.weatherSummary, S.worldEvents, S.worldPopulation
   Writes: S.cyclePacket
 
 - **hospitalCapacity_(ctx)**
@@ -3367,7 +3296,7 @@
 
 ### recordMediaLedger.js
 - **recordMediaLedger_(ctx)**
-  Reads: S.chicagoFeed, S.cityDynamics, S.civicLoad, S.cycleId, S.cycleWeight, S.cycleWeightReason, S.domainPresence, S.economicMood, S.eventArcs, S.mediaEffects, S.mediaIntake, S.nightlifeVolume, S.patternFlag, S.shockFlag, S.storyHooks, S.storySeeds, S.textureTriggers, S.weather, S.weatherMood, S.worldEvents
+  Reads: S.cityDynamics, S.civicLoad, S.cycleId, S.cycleWeight, S.cycleWeightReason, S.domainPresence, S.economicMood, S.eventArcs, S.mediaEffects, S.mediaIntake, S.nightlifeVolume, S.patternFlag, S.shockFlag, S.storyHooks, S.storySeeds, S.textureTriggers, S.weather, S.weatherMood, S.worldEvents
   Config: ctx.config.cycleCount
   Sheets: Cultural_Ledger, Media_Ledger
 
@@ -4287,5 +4216,5 @@ _No top-level function declarations found (helper/constants file)._
 
 ---
 
-**Files scanned:** 182
-**Functions mapped:** 1511
+**Files scanned:** 179
+**Functions mapped:** 1484

@@ -926,6 +926,12 @@ function processAdvancementRows_(ctx, now, cycle) {
       ledgerRows.push(newRow);
       advNameIndex[advKey] = [ledgerRows.length - 1]; // same-batch repeats route to bump/edit
       ctx.ledger.dirty = true;
+      // A citizen minted this Cycle lives where the mint put them for at least the week:
+      // processRelocations_ (Phase5-MigrationTracking, later this Phase) skips any unit
+      // holding one (bench C110: a household arrived in Fruitvale and "moved up" to West
+      // Oakland the same week, overwriting the neighborhood its intake row chose).
+      if (!ctx.mintedThisCycle || Number(ctx.mintedThisCycle.cycle) !== Number(cycle)) ctx.mintedThisCycle = { cycle: Number(cycle), pops: {} };
+      ctx.mintedThisCycle.pops[newPopId] = true;
       if (logSheet) {
         logSheet.appendRow([now, newPopId, (first + ' ' + last).trim(), 'Promotion',
           'Added to Simulation_Ledger as Tier ' + tier + '. ' + notes, '', cycle]);

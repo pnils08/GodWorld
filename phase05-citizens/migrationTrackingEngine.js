@@ -724,6 +724,15 @@ function processRelocations_(ctx, cycle) {
       if (anchoredPopids[String(rows[unit.rowIdxs[am]][iPOPID] || '').trim()]) { anchored = true; break; }
     }
     if (anchored) { anchoredSkipped++; continue; } // canon faith leader — institution-bound, never relocated here
+    // A unit holding a citizen minted this Cycle stays where the mint put it for the
+    // week (set by processAdvancementRows_, Phase5-Advancement, which runs first).
+    var arrived = false;
+    if (ctx.mintedThisCycle && ctx.mintedThisCycle.cycle === Number(cycle)) {
+      for (var ar = 0; ar < unit.rowIdxs.length; ar++) {
+        if (ctx.mintedThisCycle.pops[String(rows[unit.rowIdxs[ar]][iPOPID] || '').trim()]) { arrived = true; break; }
+      }
+    }
+    if (arrived) continue;
 
     var current = hoods[unit.hood];
     // engine.178 (S438): the unit head's OPENNESS band closes or opens the misfit door —

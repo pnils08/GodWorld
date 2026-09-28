@@ -416,3 +416,11 @@ No gaps this run.
 - **Source:** logs/civic-cron.log — chain mayor-gavel 06:16Z, tick close-det 06:17Z
 - **Evidence:** no lock between `runChain` and `runTick`. Harmless at C109 (0 initiatives touched, no apply). With verdicts in, a tick could apply a half-built week.
 - **Open:** civic.42.
+
+## LEG: engine.265 bench (SANDBOX 0908 @131, C110, 2026-09-28)
+
+### G-EC70 — a household minted this Cycle relocated the same week [judgment] [phase-ordering] [MED]
+Bench C110: the Quintana test household arrived in Fruitvale (Phase5-Advancement) and Phase5-MigrationTracking moved all three to West Oakland ("moving up from Fruitvale") in the same fire — the intake row's neighborhood lived zero weeks. Fix (engine.267): processAdvancementRows_ records each mint in `ctx.mintedThisCycle`; processRelocations_ skips any unit holding one. Unbenched.
+
+### G-EC71 — LifeHistory_Log Timestamp column carries three formats [judgment] [data-contract] [LOW]
+Live last 3000 rows: Gregorian dates from `ctx.now` (Strain, CIVIC/MEDIA-Event, Career, Neighborhood, Household …), `C<n>` stamps (Advancement, Promotion, Media), and `Y3C4` stamps (Micro-Event, youth texture). The `Cycle` column carries the sim clock on every row; 265 of 3000 rows have a blank Name (relocation writes `''`). Not fixed — a reader audit of the Timestamp column comes first (compressLifeHistory and page tooling may parse it). Filed under engine.266.

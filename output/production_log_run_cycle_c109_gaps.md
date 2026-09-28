@@ -424,3 +424,6 @@ Bench C110: the Quintana test household arrived in Fruitvale (Phase5-Advancement
 
 ### G-EC71 — LifeHistory_Log Timestamp column carries three formats [judgment] [data-contract] [LOW]
 Live last 3000 rows: Gregorian dates from `ctx.now` (Strain, CIVIC/MEDIA-Event, Career, Neighborhood, Household …), `C<n>` stamps (Advancement, Promotion, Media), and `Y3C4` stamps (Micro-Event, youth texture). The `Cycle` column carries the sim clock on every row; 265 of 3000 rows have a blank Name (relocation writes `''`). Not fixed — a reader audit of the Timestamp column comes first (compressLifeHistory and page tooling may parse it). Filed under engine.266.
+
+### G-EC72 — relocations funnel into West Oakland from C110 [sim] [observation] [MED]
+Bench C110: 20 of 23 relocations landed in West Oakland; C111: 13 of 20. Live C109 spread 9 moves over 4 hoods. Not the stack: the trajectory is deterministic on last Cycle's Neighborhood_Map, and live C109's map already scores West Oakland +2 (Sentiment 0.45 vs city 0.29, MigrationFlow 4) → `growth` (+1.5 fit, pressure 0→1) at the C110 fire on any code. The self-limit is HousingPressure (−pressure/4) rising under sustained growth. Sim call for the builder: a one-hood boom week after the Stabilization Fund's West Oakland scope correction — ride it (start/peak/end is the doctrine) or damp the fit bonus.

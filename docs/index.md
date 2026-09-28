@@ -1,7 +1,7 @@
 ---
 title: GodWorld Documentation Index
 created: 2026-04-14
-updated: 2026-09-21
+updated: 2026-09-28
 type: reference
 tags: [architecture, infrastructure, active]
 sources:
@@ -247,6 +247,7 @@ These files live at `/root/GodWorld/` and are catalogued here for completeness. 
 - **[[plans/2026-09-22-agent-model-fit-test]]** — pre-registered test of which model class an in-world agent (council seat, civic reporter, Elias Varek, Mags) benefits from: frozen prompts, reasoning on/off arms, deterministic + blind scoring, decision rule. Waits on the builder's Anthropic credit. Draft. *(plan, research, draft)*
 - **[[plans/2026-09-21-civic-sunday-stage-machine]]** — civic week boundary as an idempotent stage machine with model-free mechanical close and batch submit/collect (Anthropic Message Batches); replaces the clock-timed Sunday chain. Draft, civic.39. *(plan, civic, draft)*
 - **[[plans/2026-09-21-care-and-justice-system]]** — care and justice as one system: OARI, chaos cars, hospital stays, mental health and a judicial ledger aligned so OARI can be graded on diversion; data-first map, service layer scoped, two gating rulings drafted 2026-09-26 (judicial ledger shape, mental-health care states — three open builder calls) (engine.254). *(plan, engine, civic, active)*
+- **[[for-claude-review/2026-09-28-codex-care-justice-intake-plan]]** — engine.254 amendment awaiting Claude review: citywide judicial/hospital intake, tracked-citizen inclusion, typed census and transfer accounting, verified wiring cards, decision gates, and hospital counting defects. *(plan, engine, civic, draft)*
 - **[[plans/2026-09-26-future-build-ideas]]** — builder's 2026-09-26 architecture proposal (firm agents, conservation laws, credit cascades, wider AI autonomy, god-whisper seam) filed against actual repo state — half of it was already engine.254; the rest gated at engine.261-264 / governance.52. *(plan, engine, governance, draft)*
 - **[[reference/CIVIC_GAME_LOOP]]** — how the civic system works now: seat weekly loop, moves, stages and losing clock, petitions, which domains move the world, and what is still open. Working draft mapped live during civic.38; labels each part live / inert / not built. *(reference, civic, active, draft)*
 - **[[reference/CROSS_LANE_MESSAGING]]** — reaching a non-Claude lane (agy/grok/kimi/codex) mid-session. `SendMessage` sees Claude sessions only; the rest are tmux panes reached with `send-keys -l` + a **separate** `C-m`. Capture-pane first — a pane at bare `bash` executes your message as shell commands. Manual until governance.47's `laneMessage.js` lands. *(reference, infrastructure, active)*
@@ -548,6 +549,7 @@ Small, dated decision records. Created only when a choice is (a) hard to reverse
 
 ## Changelog
 
+- 2026-09-28 (codex) — Registered the care/justice intake review amendment under engine.254; pending Claude review in the inbox.
 - 2026-09-21 (codex) — Registered [[plans/2026-09-21-safety-lever]], the safety-second design under civic.38.
 - 2026-09-19 (kimi) — Registered [[plans/2026-09-19-civic-wake-game-loop]] (row civic.38; the wake-as-turn build plan).
 - 2026-09-19 (research-build, S467) — Registered [[plans/2026-09-16-work-wake-packs]] (kimi, accepted from the review inbox; row civic.37). Five kimi lane/design reports accepted into docs/research — catalogued in [[research/index]].

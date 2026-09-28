@@ -2,7 +2,7 @@
 
 **This file is canonical for open/closed work** (S207). Pointer-only: one line per job, detail lives in the pointer doc — never here (S286 hard rule, Mike-direct).
 
-**Status:** ACTIVE (building) | **Last Updated:** 2026-09-22 (S487, engine-sheet — engine.255 housing lever off live @120, redesign as budgeted disbursement opened). This file is the ONLY open-work tracker; [[archive/ENGINE_REPAIR]] retired to history.
+**Status:** ACTIVE (building) | **Last Updated:** 2026-09-28 (codex — engine.254 intake review pointer). This file is the ONLY open-work tracker; [[archive/ENGINE_REPAIR]] retired to history.
 **Filing protocol (S212):** semantic groups + pointer-only entries — see [[rollout-rules]] §3–§5 (taxonomy, add, close). Full design: [[../adr/0005-rollout-plan-structure]].
 **North star:** `docs/ARCHITECTURE_VISION.md` — Jarvis + persistent sessions. Everything we build points there.
 **The lens (S441, Mike-direct):** [[SIM_DOCTRINE]] §15 — a gate that can't fire is a trick. Check every threshold against its column's live range; the chain to test is start → peak → end → aftermath → referenced. Read before touching any mechanic.
@@ -113,7 +113,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | engine.259 | The fund moves: per-Cycle drain + grants to stressed households, keyed on `disbursement-active` (builder 2026-09-24). LIVE PROD @128 `578c2237`; INIT-001 seeded 23.8M live; first live drain C109. → [[../reference/DEPLOY_HISTORY]] §PROD @128 | in-progress | engine-sheet | `scripts/fundDisbursement.test.js` |
 | engine.260 | Civic-initiative employer path — BizID link + tracked-hire slots (builder-ruled 2026-09-25) LIVE PROD @131; C109 is the first live fire that can land a civic hire | in-progress | engine-sheet | [[../plans/2026-09-24-initiatives-in-the-world]] Job 4 |
 | engine.256 | Leases one hood-median stamp — ruled 2026-09-27: draw within ±15% of the hood's rent, each renewal closes 25% of the gap to the hood's current rent. kimi WIP in stash@{0} (reroute writes via intents) | ready | engine-sheet (sim calls — builder included) | gap log `output/production_log_run_cycle_c108_gaps.md` G-EC71; [[../plans/2026-09-22-initiative-budget-disbursement]] §Data reality |
-| engine.254 | Care and justice as one system: judicial ledger + mental-health states. Rulings CLOSED 2026-09-26 (builder), build spec written | ready | engine-sheet | [[../plans/2026-09-21-care-and-justice-system]] §Rulings CLOSED |
+| engine.254 | Care and justice: approved scope plus citywide intake amendment for review | ready | engine-sheet | [[../plans/2026-09-21-care-and-justice-system]] + [[../for-claude-review/2026-09-28-codex-care-justice-intake-plan]] |
 | engine.261 | Firm agents — ruled 2026-09-27: test basis, 3 business owners get a wake slice to go to work and run their business | ready | engine-sheet (sim judgement — builder included) | [[../plans/2026-09-26-future-build-ideas]] §Builder rulings |
 | engine.262 | Money conservation — ruled 2026-09-27: build a city treasury (initiative spend, renewals, taxes flow through it). Casino net-win fix `0b3e796d` held for go; grant/casino checks ride with the treasury | ready | engine-sheet | [[../plans/2026-09-26-future-build-ideas]] §3 |
 | engine.263 | Credit/default cascades — loans/defaults rippling through households/businesses | needs-info | engine-sheet — gated on engine.193 economy-complete | [[../plans/2026-09-26-future-build-ideas]] §4 |

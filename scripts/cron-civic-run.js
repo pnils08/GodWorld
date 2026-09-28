@@ -128,6 +128,13 @@ function arg(flag, def) {
   return eq ? eq.slice(flag.length + 1) : def;
 }
 const STAGE = arg('--stage', null);
+// civic.41: inside a chain, a pre-close stage's HALT throws to runChain (which
+// skips to the close); run as its own --stage it still exits the process.
+let CHAIN_ACTIVE = false;
+function haltStage(code) {
+  if (CHAIN_ACTIVE) { const e = new Error('chain halt'); e.chainHalt = true; e.exitCode = code; throw e; }
+  process.exit(code);
+}
 const log = (...a) => console.log('[civic]', new Date().toISOString(), ...a);
 
 function detectCycle() {
@@ -522,7 +529,7 @@ async function runPrep() {
   if (mismatches.length) {
     console.error('HALT: council roster reconciliation failed (truesource wins — fix the static map):');
     for (const x of mismatches) console.error('  ✗ ' + x);
-    process.exit(2);
+    haltStage(2);
   }
   log('roster reconciliation: 9/9 districts match truesource');
 
@@ -782,7 +789,7 @@ async function runPrep() {
   const missingSeats = civicSeat.councilAgentDirs(officeMap).filter(d => !written.some(w => w.dir === d));
   if (missingSeats.length) {
     console.error('HALT: civic.24 Sunday needs all 9 district packets; missing: ' + missingSeats.join(', '));
-    process.exit(2);
+    haltStage(2);
   }
 
   // Vote-ready routing check (G-R11)
@@ -835,7 +842,7 @@ async function runPrep() {
 
   if (leaks) {
     console.error('\nHALT: prep produced ' + leaks + ' telemetry leak(s)/routing failure(s) — packets staged but chain must not proceed.');
-    process.exit(1);
+    haltStage(1);
   }
   console.log('\n=== prep complete: ' + written.length + ' packets, lint clean → ' + path.relative(ROOT, PACKETS) + ' ===');
 }
@@ -1594,11 +1601,11 @@ async function runMayorOpen() {
     if (!r || r.error) {
       console.error('HALT: Mayor open failed — ' + (r ? r.error : 'no result') + '. Hearing must not start.');
       if (r && r.raw) { fs.mkdirSync(CIVIC, { recursive: true }); fs.writeFileSync(path.join(CIVIC, 'mayor_open_c' + cycle + '.raw.txt'), r.raw); }
-      process.exit(1);
+      haltStage(1);
     }
     if (hearingHasPhase(r.json)) {
       console.error('HALT: Mayor open emitted ImplementationPhase — agenda cannot stamp the tracker.');
-      process.exit(1);
+      haltStage(1);
     }
     outPath = writeVoiceJson('mayor_open', cycle, r.json);
     await positionWallRecordCascade(officeMap, 'civic-office-mayor', r.json, cycle);
@@ -2017,7 +2024,7 @@ async function runMayorGavel() {
     if (!r || r.error) {
       console.error('HALT: Mayor gavel failed — ' + (r ? r.error : 'no result'));
       if (r && r.raw) fs.writeFileSync(path.join(CIVIC, 'mayor_gavel_c' + cycle + '.raw.txt'), r.raw);
-      process.exit(1);
+      haltStage(1);
     }
     outPath = writeVoiceJson('mayor_gavel', cycle, r.json);
     await positionWallRecordCascade(officeMap, 'civic-office-mayor', r.json, cycle);
@@ -3331,10 +3338,29 @@ async function runChain() {
   // is a post-close artifact built from close_c{XX}.json, naming only seats
   // the close left passed-over or unanswered. Prep consumes the PRIOR cycle's
   // post-close AUTO file (a same-cycle manual file still wins).
-  for (const stage of [runPrep, runMayorOpen, runHearing, runMayorGavel, runProjects, runClose, runDirective]) {
-    await stage();   // mayor stages + prep still fail loud (process.exit) and halt the chain; hearing/projects
-                     // record pending seats and continue (civic.39 ruling 2); runClose exits 1 only on a real block
+  // civic.41: prep and the mayor stages still HALT loud (hearing never starts
+  // without the mayor's open) — but a halt stops the voices, not the week. The
+  // close runs anyway: the week's moves fold, the clerk audits what arrived, and
+  // the gate + tick decide the apply. Before this, a halted chain left the week
+  // to the 6h cutoff with no clerk and no sanity-read ever attempted (C108).
+  CHAIN_ACTIVE = true;
+  let halted = null;
+  for (const stage of [runPrep, runMayorOpen, runHearing, runMayorGavel, runProjects]) {
+    try {
+      await stage();   // hearing/projects record pending seats and continue (civic.39 ruling 2)
+    } catch (e) {
+      halted = { stage: stage.name, error: e.chainHalt ? 'halted (reason logged above)' : e.message };
+      console.error('[chain] ' + stage.name + ' ' + halted.error + ' — remaining voice stages skipped; running the close so the week still folds and the clerk audits (civic.41).');
+      break;
+    }
   }
+  CHAIN_ACTIVE = false;
+  if (halted) {
+    fs.mkdirSync(CIVIC, { recursive: true });
+    fs.writeFileSync(path.join(CIVIC, 'chain_halt_c' + cycle + '.json'), JSON.stringify(Object.assign({ cycle: Number(cycle), at: new Date().toISOString() }, halted), null, 2) + '\n');
+  }
+  await runClose();      // exits 1 only on a real block
+  await runDirective();
 }
 
 // ---------------------------------------------------------------------------

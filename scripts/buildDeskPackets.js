@@ -469,7 +469,7 @@ function getCitizenNamesFromDeskData(deskEvents, deskSeeds, deskHooks, deskArcs,
   // Extract from interview candidates
   (candidates || []).forEach(function(c) { if (c.name) names[c.name] = true; });
   // Extract from recent quotes
-  (deskQuotes || []).forEach(function(q) { if (q.name) names[q.name] = true; });
+  (deskQuotes || []).forEach(function(q) { if (q.CitizenName) names[q.CitizenName] = true; });
   // Extract from canon roster data (A's, Bulls, council, cultural entities)
   if (deskCanon) {
     (deskCanon.asRoster || []).forEach(function(p) { if (p.name) names[p.name] = true; });
@@ -2119,7 +2119,7 @@ async function main() {
     storylineRaw, packetRaw, historyRaw,
     householdRaw, bondsRaw, worldPopRaw, simCalRaw,
     neighborhoodMapRaw, businessLedgerRaw, mediaLedgerRaw,
-    rileyRaw, hospitalRaw
+    rileyRaw, hospitalRaw, mediaUsageRaw
   ] = await Promise.all([
     safeGet('Story_Seed_Deck'),
     safeGet('Story_Hook_Deck'),
@@ -2142,7 +2142,8 @@ async function main() {
     safeGet('Business_Ledger'),
     safeGet('Media_Ledger'),
     safeGet('Riley_Digest'),
-    safeGet('Hospital_Ledger') // engine.52 D1 — lazy-created tab, safeGet degrades to []
+    safeGet('Hospital_Ledger'), // engine.52 D1 — lazy-created tab, safeGet degrades to []
+    safeGet('Citizen_Media_Usage')
   ]);
 
   console.log('Sheets pulled in ' + (Date.now() - startTime) + 'ms');
@@ -2247,11 +2248,20 @@ async function main() {
   // The adapter is the only place that knows both shapes.
   var storylines = normalizeStorylineLedger(allToObjects(storylineRaw), CYCLE, simLedgerByPopid);
 
-  // Recent quotes from LifeHistory
   var allHistory = allToObjects(historyRaw);
-  var recentQuotes = allHistory.filter(function(h) {
-    return (h.EventTag || '').toLowerCase() === 'quoted' &&
-           String(h.Cycle) === String(CYCLE);
+
+  // Recent quotes — WAS LifeHistory_Log EventTag 'quoted', a write path the
+  // old media-room intake (phase07-evening-media/mediaRoomIntake.js) owned
+  // and nothing schedules anymore (confirmed: no cron entry, no live caller
+  // outside its own test). Zero live rows result. Live quote credit lands in
+  // Citizen_Media_Usage (cron-saturday-run.js stepSheets, UsageType 'quoted')
+  // instead — found + verified 2026-09-28 (engine-sheet handoff + rb trace).
+  // That tab tracks WHO was quoted and WHEN, not the quote text itself —
+  // usageRowsFor() computes a snippet only to feed the sentiment classifier,
+  // never persists it to a column. Downstream fields reflect that honestly.
+  var recentQuotes = allToObjects(mediaUsageRaw).filter(function(u) {
+    return (u.UsageType || '').toLowerCase() === 'quoted' &&
+           String(u.Cycle) === String(CYCLE);
   });
 
   // Households: active + recently formed/dissolved this cycle
@@ -2594,11 +2604,14 @@ async function main() {
       deskCanon[section] = canon[section];
     }
 
-    // Recent quotes for this desk (must precede citizen name extraction)
+    // Recent quotes for this desk (must precede citizen name extraction).
+    // No quote-text field exists on Citizen_Media_Usage (see the source
+    // comment above) — match on CitizenName + Context (the source article's
+    // stem, which carries the desk slug) instead of the old EventNote/Name.
     var deskQuotes = desk.domains.indexOf('ALL') !== -1 ? recentQuotes :
       recentQuotes.filter(function(q) {
         return matchesStorylineKeywords(
-          (q.EventNote || '') + ' ' + (q.Name || ''),
+          (q.CitizenName || '') + ' ' + (q.Context || ''),
           desk.storylineKeywords
         );
       });
@@ -2752,8 +2765,12 @@ async function main() {
       citizenArchive: citizenArchive,
       // v1.9: Voice cards — personality profiles for citizen dialogue
       voiceCards: voiceCards,
+      // No verbatim quote text is stored anywhere on Citizen_Media_Usage —
+      // this is a who-was-quoted-when rotation signal (so a desk doesn't
+      // lean on the same three voices every cycle), not a quote archive.
+      // Reporters get actual quotable material from citizenArchive/voiceCards.
       recentQuotes: deskQuotes.map(function(q) {
-        return { name: q.Name || q.CitizenName || '', text: q.EventNote || q.Quote || '', cycle: q.Cycle || '' };
+        return { name: q.CitizenName || '', reporter: q.Reporter || '', cycle: q.Cycle || '' };
       }),
       // Task 1: Household data
       households: formatHouseholdsForPacket(
@@ -2825,14 +2842,12 @@ async function main() {
     if (sportsFeedDigest) {
       var digestParts = sportsFeedDigest.teamLabel
         ? [sportsFeedDigest.digestNote]
-        : ['as', 'oaks', 'chicago'].filter(function(key) {
+        : ['as', 'oaks'].filter(function(key) {
           return sportsFeedDigest[key];
         }).map(function(key) {
           return sportsFeedDigest[key].digestNote;
         });
-      var digestLabel = sportsFeedDigest.teamLabel || (
-        sportsFeedDigest.chicago ? 'Oakland + Chicago' : 'Oakland'
-      );
+      var digestLabel = sportsFeedDigest.teamLabel || 'Oakland';
       var digestNote = digestParts.filter(Boolean).join(' | ') || 'No exact-Cycle entries';
       console.log('  Sports digest (' + digestLabel + '):', digestNote);
     }

@@ -164,7 +164,7 @@ Note: `output/` is in `.gitignore` — packets are generated locally, not commit
   "storylines": [ { "type", "description", "status", "relatedCitizens" } ],
   "culturalEntities": [ { "name", "roleType", "domain", "fameScore" } ],
   "interviewCandidates": [ { "name", "age", "neighborhood", "occupation" } ],
-  "canonReference": { "reporters", "council?", "pendingVotes?", "asRoster?", "bullsRoster?" },
+  "canonReference": { "reporters", "council?", "pendingVotes?", "asRoster?" },
   "sportsFeeds": [ ... ],
   "maraDirective": "...",
   "previousCoverage": [ ... ],

@@ -53,3 +53,17 @@ Re-run the S345 container audit (documents/list diff = zero missing for in-scope
 ## Builder ruling 2026-09-27 — T5 scope
 "drive files are canon, all pre cycle articles and articles saved pre cron runs are established canon." T5 is
 decided: Drive files IN; the backfill (T6) and cron wiring (T4) are unblocked.
+
+## S502 (engine-sheet, 2026-09-28) — T2 rewritten, T6 done; T4 held for the builder's go
+Re-survey: the plan's `output/drive-files/` and `output/reporters/` no longer exist; editions and the Saturday
+per-article sweep already land with deterministic customIds; the real gap was the two Drive canon folders (none of
+their pieces existed as documents — spot-checked by title). **T2:** `scripts/sweepCanonIngest.js` rewritten —
+lists every text/Doc file under the Tribune Media Archive (`10Y-X48H…`) and Deep Canon (`1qC0tJKC…`) folders,
+diffs `drive-<fileId>-1` against one org-wide `/v3/documents/list` pull, dry-run by default, `--apply` ingests
+missing files chunked on paragraph breaks (customId `drive-<fileId>-<n>`, metadata source `drive-canon`), exits 1
+on any partial ingest. **T6:** `--apply` ran: 125 files (98 archive + 27 deep canon), 129 chunks, 0 failed; the
+re-run reports present 125 / missing 0 (idempotent); a probe search returns the archive piece. **T4 (held):** add
+`sweepCanonIngest.js --apply` as a weekly cron so new files dropped in those Drive folders become canon without a
+session — needs the builder's go (the plan's own gate). Known follow-ups outside T2: `ingestEditionWiki.js` and
+`ingestCivicWiki.js` write bay-tribune with no customId (reruns duplicate).
+

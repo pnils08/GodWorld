@@ -24,10 +24,8 @@
  * Reads from Google Sheets:
  *   WorldEvents_V3_Ledger, Civic_Office_Ledger, Initiative_Tracker,
  *   Simulation_Ledger, Household_Ledger, Relationship_Bonds,
- *   World_Population, Simulation_Calendar, Neighborhood_Map, Business_Ledger
- *
- * Reads locally:
- *   docs/media/ARTICLE_INDEX_BY_POPID.md (POPID index → citizen_archive.json)
+ *   World_Population, Simulation_Calendar, Neighborhood_Map, Business_Ledger,
+ *   Citizen_Media_Usage (coverage index → citizen_archive.json)
  *
  * Writes:
  *   output/desk-packets/base_context.json
@@ -65,7 +63,6 @@ function writeAndScanPacket(filepath, content) {
   }
 }
 const OUTPUT_DIR = path.join(PROJECT_ROOT, 'output/desk-packets');
-const POPID_INDEX_PATH = path.join(PROJECT_ROOT, 'docs/media/ARTICLE_INDEX_BY_POPID.md');
 
 // ─── SHEETS API SETUP ──────────────────────────────────────
 require('/root/GodWorld/lib/env');
@@ -108,30 +105,30 @@ function allToObjects(data) {
   return results;
 }
 
-function parsePopIdIndex(filePath) {
-  if (!fs.existsSync(filePath)) return {};
-  var text = fs.readFileSync(filePath, 'utf-8');
-  var lines = text.split('\n');
-  var archive = {};
-  var current = null;
+var ARCHIVE_APPEARANCE_TYPES = { mentioned: 1, quoted: 1, referenced: 1, featured: 1 };
+var ARCHIVE_ARTICLE_CAP = 25;
 
-  for (var i = 0; i < lines.length; i++) {
-    var line = lines[i].trim();
-    // Match: ## POP-00001 — Vinnie Keane (35)  or  ## CUL-6D596907 — Lena Cross (26)
-    var match = line.match(/^## (.+?) — (.+?) \((\d+)\)/);
-    if (match) {
-      current = { popId: match[1], name: match[2], totalRefs: parseInt(match[3]), articles: [] };
-      archive[match[2]] = current; // key by name for easy lookup
-      continue;
-    }
-    // Match article lines: - [Source] Title
-    if (current && line.startsWith('- [')) {
-      var artMatch = line.match(/^- \[(.+?)\] (.+)/);
-      if (artMatch) {
-        current.articles.push({ source: artMatch[1], title: artMatch[2] });
-      }
-    }
-  }
+// Live coverage index from Citizen_Media_Usage, keyed by name; POPID resolved by
+// name against Simulation_Ledger (never taken from the usage row).
+function buildCitizenArchive(usageRaw, simLedgerRaw) {
+  var popByName = {};
+  allToObjects(simLedgerRaw).forEach(function(c) {
+    var nm = ((c.First || '') + ' ' + (c.Last || '')).trim();
+    if (c.POPID && nm) popByName[nm.toLowerCase()] = String(c.POPID);
+  });
+  var archive = {};
+  allToObjects(usageRaw).forEach(function(u) {
+    var name = String(u.CitizenName || '').trim();
+    if (!name || !ARCHIVE_APPEARANCE_TYPES[String(u.UsageType || '').toLowerCase()]) return;
+    var popId = popByName[name.toLowerCase()];
+    if (!popId) return;
+    var entry = archive[name] || (archive[name] = { popId: popId, name: name, totalRefs: 0, articles: [] });
+    entry.totalRefs++;
+    entry.articles.push({ source: u.Reporter || '', title: u.Context || '', cycle: u.Cycle || '' });
+  });
+  Object.keys(archive).forEach(function(n) {
+    archive[n].articles = archive[n].articles.slice(-ARCHIVE_ARTICLE_CAP);
+  });
   return archive;
 }
 
@@ -402,7 +399,7 @@ async function main() {
   var [
     eventsRaw, civicRaw, initiativeRaw, simRaw,
     householdRaw, bondsRaw, worldPopRaw, simCalRaw,
-    neighborhoodMapRaw, businessLedgerRaw
+    neighborhoodMapRaw, businessLedgerRaw, mediaUsageRaw
   ] = await Promise.all([
     safeGet('WorldEvents_V3_Ledger'),
     safeGet('Civic_Office_Ledger'),
@@ -413,7 +410,8 @@ async function main() {
     safeGet('World_Population'),
     safeGet('Simulation_Calendar'),
     safeGet('Neighborhood_Map'),
-    safeGet('Business_Ledger')
+    safeGet('Business_Ledger'),
+    safeGet('Citizen_Media_Usage')
   ]);
 
   console.log('Sheets pulled in ' + (Date.now() - startTime) + 'ms');
@@ -506,8 +504,8 @@ async function main() {
               '| Businesses:', (economicContext.businessSnapshot || []).length);
 
   // ── Read local files ──
-  var popIdIndex = parsePopIdIndex(POPID_INDEX_PATH);
-  console.log('  POPID index: ' + Object.keys(popIdIndex).length + ' citizens loaded');
+  var popIdIndex = buildCitizenArchive(mediaUsageRaw, simRaw);
+  console.log('  Citizen archive: ' + Object.keys(popIdIndex).length + ' citizens with coverage');
 
   // ── Build base context ──
   // Calendar from Simulation_Calendar sheet — the simulation's own timeline.

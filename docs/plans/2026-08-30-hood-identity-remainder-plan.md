@@ -219,3 +219,17 @@ citizens moving on their own level — today the financial gates (pay/net worth)
 hood table's flow-signed share should derive from the tracked citizens' own relocations (the relocation/migration
 engine's moves, weighted by the level that gates them), not from a dial on the hood table. Next build: wire
 demographics' inter-hood movement to the citizens' actual moves; tiers/fame as gate inputs are a later extension.
+
+### engine.249 — flow-from-moves sized before building (engine-sheet S502, 2026-09-28)
+Measured on the bench (SANDBOX 0908, live-synced C109, fires C110–C118, 108 tracked relocations, 1,044 tracked
+citizens, hood table 44,591 → **42.7 table people per tracked citizen** — the natural scale if each tracked mover
+stands for the same share of the table). Net weekly tracked flow × 42.7 ÷ hood size: **West Oakland +14.9%/week**
+(net +8 tracked/week — the G-EC72 funnel), Rockridge −3.4%, Uptown −6.6% (small hood), Downtown −2.0%, the rest
+within ±2%. Wired at that scale, one boom week compounds into a runaway on the table and its growth hooks.
+**Held for the builder, two calls:** (1) the scale — full representation (42.7), or damped (e.g. the table follows the
+tracked moves at a fraction, or only the net *direction* signs each hood's share of the city's migration, which
+keeps the engine.249 size split and adds no new magnitude); (2) whether the West Oakland funnel (G-EC72) is ridden or
+damped first, since it is most of the flow. Recommendation: sign-only — each hood's share of city migration is scaled
+by the sign and relative size of its tracked net flow, so a hood the citizens are leaving loses people in a growth
+week (the ruling's point) without a new magnitude to tune.
+

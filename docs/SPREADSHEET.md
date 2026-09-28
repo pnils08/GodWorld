@@ -53,6 +53,7 @@ Hospital income persistence (engine.218, landed 2026-09-14, codex-led) uses exis
 | **Edition_Coverage_Ratings** | 9 | ENGINE | SCRIPT | Per-domain media ratings (-5 to +5). Cols: Cycle, Domain, Rating, ArticleCount, Reporter, Tone, Processed. Written by rateEditionCoverage.js post-publish, read by applyEditionCoverageEffects_ Phase 2 (S137b) |
 | **Civic_Office_Ledger** | 999* | ENGINE, SCRIPT, DASHBOARD | ENGINE | Council members, civic officials, factions |
 | **Initiative_Tracker** | 994* | ENGINE, SCRIPT, DASHBOARD | ENGINE | 5 civic initiatives with votes, status, timeline |
+| **City_Treasury** | 1 | ENGINE | ENGINE | engine.262 (S502) general-fund ledger, Baylight apart — OPENING / PREFUNDED / REVENUE / APPROPRIATION / RENEWAL rows, BalanceAfter |
 | **Civic_Sweep_Report** | 8 | ENGINE | ENGINE | Civic sweep results |
 | **WorldEvents_Ledger** | 239 | ENGINE, SCRIPT | ENGINE | Legacy world events |
 | **WorldEvents_V3_Ledger** | 183 | ENGINE, SCRIPT | ENGINE | V3 world events |

@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-09-27 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-09-28 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -262,6 +262,14 @@
   Reads: S.activityObservations
   Writes: S.activityObservations
 
+- **seedCarriedRelocationFlow_(ctx, S)**
+  Reads: S.previousRelocationFlow
+  Writes: S.previousRelocationFlow
+
+- **seedCarriedCityDynamics_(ctx, S)**
+  Reads: S.previousCityDynamics
+  Writes: S.previousCityDynamics
+
 - **restoreCarriedRipples_(S)**
   Reads: S.economicRipples, S.initiativeRipples, S.previousCycleState
   Writes: S.economicRipples, S.initiativeRipples
@@ -307,9 +315,9 @@
 
 - **applyInitiativeImplementationEffects_(ctx)**
   Reads: S.absoluteCycle, S.cycleId, S.initiativeDisbursement, S.initiativeImplementationTriggers, S.initiativeNeighborhoodEffects, S.previousCycleState, S.sentiment, S.sportsZones
-  Writes: S.initiativeDisbursement, S.initiativeHealthRelief, S.initiativeImplementationEffects, S.initiativeNeighborhoodEffects, S.initiativeRenewalCredits, S.initiativeSpend, S.sentiment
-  Config: ctx.config.cycleCount
-  Sheets: Initiative_Tracker
+  Writes: S.initiativeDisbursement, S.initiativeHealthRelief, S.initiativeImplementationEffects, S.initiativeNeighborhoodEffects, S.initiativeRenewalCredits, S.initiativeSpend, S.sentiment, S.treasury
+  Config: ctx.config.cycleCount, ctx.config.treasuryOpeningBalance, ctx.config.treasuryWeeklyAllocation
+  Sheets: City_Treasury, Initiative_Tracker
 
 - **getCivicSpendDials_(ctx)**
 
@@ -321,6 +329,14 @@
 
 - **buildDisbursementSlice_(ctx, pending)**
   Reads: S.canonHoods
+
+- **readTreasuryLedger_(rows)**
+
+- **treasuryDraw_(balance, amount)**
+
+- **treasuryMoney_(n)**
+
+- **treasuryIsVotedProgram_(status, mayoral)**
 
 - **findImplCol_(headers, possibleNames)**
 
@@ -705,10 +721,12 @@
 
 ### updateNeighborhoodDemographics.js
 - **updateNeighborhoodDemographics_(ctx)**
-  Reads: S.cycleId, S.demographicDrift, S.demographicDriftFactors, S.holiday, S.initiativeHealthRelief, S.isCreationDay, S.isFirstFriday, S.neighborhoodEmploymentWeights, S.neighborhoodIllnessWeights, S.sportsAtmosphereEnabled, S.sportsSeason, S.worldPopulation
+  Reads: S.cycleId, S.demographicDrift, S.demographicDriftFactors, S.holiday, S.initiativeHealthRelief, S.isCreationDay, S.isFirstFriday, S.neighborhoodEmploymentWeights, S.neighborhoodIllnessWeights, S.previousRelocationFlow, S.sportsAtmosphereEnabled, S.sportsSeason, S.worldPopulation
   Writes: S.demographicShifts, S.demographicShiftsCount, S.neighborhoodDemographics
   Config: ctx.config.cycleCount, ctx.config.employmentFallbackRate, ctx.config.illnessFallbackRate
   RNG: ctx.rng / safeRand_(ctx)
+
+- **relocationTransfer249_(prevFlow, appliedMigration, shareWeights)**
 
 - **buildHoodIllnessWeights_(ctx, S, demographics)**
   Reads: S.crimeMetrics, S.neighborhoodState, S.weatherEvents
@@ -1299,6 +1317,8 @@
 - **casinoResolveSports_(wager, feed)**
 
 - **casinoResolve_(wager, feeds, cycle)**
+
+- **casinoNetWin_(stake, payout)**
 
 - **casinoApplyMoney_(nw, debt, stake, payout, won)**
 
@@ -2224,7 +2244,7 @@
 
 ### runHouseholdEngine.js
 - **runHouseholdEngine_(ctx)**
-  Reads: S.absoluteCycle, S.cityDynamics, S.cycleId, S.economicMood, S.eventsGenerated, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
+  Reads: S.absoluteCycle, S.cityDynamics, S.cycleId, S.economicMood, S.eventsGenerated, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.sportsFeedEntries, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
   Writes: S.eventsGenerated, S.householdEvents
   Config: ctx.config.cycleCount
   Sheets: LifeHistory_Log
@@ -2246,7 +2266,7 @@
 
 ### runRelationshipEngine.js
 - **runRelationshipEngine_(ctx)**
-  Reads: S.absoluteCycle, S.cityDynamics, S.cycleActiveCitizens, S.cycleId, S.eventsGenerated, S.holiday, S.holidayNeighborhood, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.mediaEffects, S.season, S.weather, S.weatherEventPools, S.worldEvents
+  Reads: S.absoluteCycle, S.carriedMediaEffects, S.cityDynamics, S.cycleActiveCitizens, S.cycleId, S.eventsGenerated, S.holiday, S.holidayNeighborhood, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.mediaEffects, S.season, S.weather, S.weatherEventPools, S.worldEvents
   Writes: S.cycleActiveCitizens, S.eventsGenerated
   Sheets: LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)
@@ -2739,6 +2759,10 @@
 - **amplifyArcsFromCoverage_(ctx, cycle)**
   Reads: S.eventArcs, S.mediaEffects
 
+- **seedCarriedMediaEffects_(ctx, S)**
+  Reads: S.previousCycleState
+  Writes: S.carriedMediaEffects
+
 - **generateMediaEventPools_(ctx)**
   Reads: S.mediaEffects
 
@@ -2750,11 +2774,11 @@
   Writes: S.mediaSummary
 
 - **getMediaInfluencedEvent_(ctx)**
-  Reads: S.mediaEffects
+  Reads: S.carriedMediaEffects, S.mediaEffects
   RNG: ctx.rng / safeRand_(ctx)
 
 - **getMediaEventModifier_(ctx, eventCategory)**
-  Reads: S.mediaEffects
+  Reads: S.carriedMediaEffects, S.mediaEffects
 
 - **isMediaSaturated_(ctx, topic)**
   Reads: S.mediaEffects
@@ -3081,6 +3105,12 @@
 - **saveEveningSnapshot_(ctx)**
   Reads: S.eveningSnapshot
 
+- **compactRelocationFlow_(S)**
+  Reads: S.relocationNetFlow
+
+- **compactCityDynamicsCarrier_(S)**
+  Reads: S.previousCityDynamics
+
 - **savePreviousCycleState_(ctx)**
   Reads: S.neighborhoodEconomies, S.previousCycleState
 
@@ -3257,6 +3287,8 @@
 - **removeAutoExportTrigger()**
 
 ### persistenceExecutor.js
+- **isWallClockStamp_(v)**
+
 - **executePersistIntents_(ctx)**
 
 - **persistWithRetry_(fn, label)**
@@ -3268,6 +3300,7 @@
 - **executeReplaceIntent_(ctx, intent)**
 
 - **executeSheetIntents_(ctx, sheetName, intents)**
+  Sheets: LifeHistory_Log
 
 - **groupIntentsBySheet_(intents)**
 
@@ -3369,6 +3402,10 @@
 
 - **maintainLifeHistoryLog_(ctx)**
   Sheets: LifeHistory_Log
+
+- **stampLifeHistorySimClock_(ctx, logSheet)**
+  Reads: S.cycleId
+  Config: ctx.config.cycleCount
 
 - **runArchive_(dryRun, opts)**
   Sheets: LifeHistory_Log
@@ -4209,4 +4246,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 179
-**Functions mapped:** 1481
+**Functions mapped:** 1494

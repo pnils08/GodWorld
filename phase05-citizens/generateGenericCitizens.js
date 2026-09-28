@@ -157,13 +157,16 @@ function gcInitNamePools_() {
  */
 function inferSexFromFirstName_(first) {
   if (!GC_FEMALE_FIRST_NAMES) gcInitNamePools_();
-  var f = String(first || '').trim().toLowerCase();
+  // Accents folded on both sides: "Tomás" is "Tomas" in the pool (live C109 — the
+  // Villanueva head missed the pool on the accent and took his sex from the dice).
+  var fold = function(n) { return String(n || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim().toLowerCase(); };
+  var f = fold(first);
   if (!f) return '';
   for (var i = 0; i < GC_FEMALE_FIRST_NAMES.length; i++) {
-    if (GC_FEMALE_FIRST_NAMES[i].toLowerCase() === f) return 'female';
+    if (fold(GC_FEMALE_FIRST_NAMES[i]) === f) return 'female';
   }
   for (var j = 0; j < GC_MALE_FIRST_NAMES.length; j++) {
-    if (GC_MALE_FIRST_NAMES[j].toLowerCase() === f) return 'male';
+    if (fold(GC_MALE_FIRST_NAMES[j]) === f) return 'male';
   }
   return '';
 }

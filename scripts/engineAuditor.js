@@ -302,6 +302,79 @@ async function runEngineAudit(ctx) {
   };
 }
 
+// ─── Pre-fire hand-write check (run-cycle Step 2.5, G-EC53/G-EC86) ──────────
+// A cell set by hand after the last fire is part of that cycle's closing state, and
+// the only moment it can be read is before the next fire. Diffs the last audit's
+// persisted snapshots against the live tabs. Initiative_Tracker moves are the civic
+// apply — a world event, reported and never rebased. Anything else is a hand write:
+//   --hand-write-check                      report; exit 1 when unexplained cells exist
+//   --hand-write-check --rebase --why "…"   fold them into the snapshot + snapshotNotes
+const SNAPSHOT_KEYS = {
+  Initiative_Tracker: 'InitiativeID', Neighborhood_Map: 'Neighborhood',
+  Crime_Metrics: 'Neighborhood', Civic_Office_Ledger: 'OfficeId',
+};
+const CIVIC_OFFICE_FIELDS = ['OfficeId', 'PopId', 'Holder', 'District', 'Approval'];
+
+async function handWriteCheck(outputDir) {
+  const argv = process.argv;
+  const live = await getCurrentCycle();
+  const p = path.join(outputDir, `engine_audit_c${live}.json`);
+  if (!fs.existsSync(p)) {
+    console.error(`hand-write-check: ${path.basename(p)} missing — live reads C${live} and its audit was never written; run the auditor first`);
+    return 2;
+  }
+  const audit = JSON.parse(fs.readFileSync(p, 'utf8'));
+  const snaps = audit.snapshots || {};
+  const handWrites = [];
+  let civicMoves = 0;
+  const rebased = {};
+  for (const tab of Object.keys(SNAPSHOT_KEYS)) {
+    const key = SNAPSHOT_KEYS[tab];
+    let rows = await sheets.getSheetAsObjects(tab);
+    if (tab === 'Civic_Office_Ledger') rows = rows.map(r => Object.fromEntries(CIVIC_OFFICE_FIELDS.map(c => [c, r[c]])));
+    const has = r => String(r[key] || '').trim();
+    const liveMap = new Map(rows.filter(has).map(r => [r[key], r]));
+    const snapMap = new Map((snaps[tab] || []).filter(has).map(r => [r[key], r]));
+    const changes = [];
+    for (const [id, s] of snapMap) {
+      const l = liveMap.get(id);
+      if (!l) { changes.push(`${id}: row gone from live`); continue; }
+      for (const f of new Set([...Object.keys(s), ...Object.keys(l)])) {
+        const a = String(s[f] == null ? '' : s[f]), b = String(l[f] == null ? '' : l[f]);
+        if (a !== b) changes.push(`${id}.${f} ${a.slice(0, 60)}→${b.slice(0, 60)}`);
+      }
+    }
+    for (const id of liveMap.keys()) if (!snapMap.has(id)) changes.push(`${id}: new row on live`);
+    if (tab === 'Initiative_Tracker') { civicMoves = changes.length; continue; }
+    console.log(`  ${tab}: ${changes.length} cell(s) differ from the C${live} close`);
+    if (changes.length) {
+      for (const c of changes) handWrites.push(`${tab}.${c}`);
+      rebased[tab] = rows;
+    }
+  }
+  console.log(`  Initiative_Tracker: ${civicMoves} cell(s) moved — civic apply, left as the world event`);
+  if (!handWrites.length) { console.log(`hand-write-check C${live}: CLEAN`); return 0; }
+  for (const c of handWrites.slice(0, 40)) console.log('    ' + c);
+  if (handWrites.length > 40) console.log(`    … ${handWrites.length - 40} more`);
+  if (!argv.includes('--rebase')) {
+    console.log(`hand-write-check C${live}: ${handWrites.length} UNEXPLAINED cell(s) — explain each, then re-run with --rebase --why "<reason>"`);
+    return 1;
+  }
+  const why = argv[argv.indexOf('--why') + 1];
+  if (!argv.includes('--why') || !why || /^--/.test(why)) { console.error('hand-write-check: --rebase needs --why "<reason>"'); return 2; }
+  for (const tab of Object.keys(rebased)) snaps[tab] = rebased[tab];
+  audit.snapshots = snaps;
+  audit.snapshotNotes = (audit.snapshotNotes || []).concat([{
+    at: `pre-fire C${live + 1}`,
+    field: Object.keys(rebased).join(', '),
+    why,
+    changes: handWrites,
+  }]);
+  fs.writeFileSync(p, JSON.stringify(audit, null, 2));
+  console.log(`hand-write-check C${live}: rebased ${handWrites.length} cell(s) into ${path.basename(p)} — commit it before the fire`);
+  return 0;
+}
+
 async function main() {
   const t0 = Date.now();
   console.log('=== Engine Auditor (Phase 38.1 + 38.7 + 38.8) ===\n');
@@ -398,11 +471,15 @@ async function main() {
   }
 }
 
-if (require.main === module) {
+if (require.main === module && process.argv.includes('--hand-write-check')) {
+  handWriteCheck(path.join(__dirname, '..', 'output'))
+    .then(code => process.exit(code))
+    .catch(err => { console.error('FATAL:', err); process.exit(2); });
+} else if (require.main === module) {
   main().catch(err => {
     console.error('FATAL:', err);
     process.exit(1);
   });
 }
 
-module.exports = { main, runEngineAudit };
+module.exports = { main, runEngineAudit, handWriteCheck };

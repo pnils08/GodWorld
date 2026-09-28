@@ -18,7 +18,7 @@ Runs the full engine cycle pipeline by calling individual skills in order. Each 
 ## The Chain
 
 ### Step 1: /pre-flight
-Verify manual inputs are ready — sports feed entries, initiative tracker structure, coverage ratings from last edition. Citizen/business/storyline intake not wired yet (placeholder).
+Verify manual inputs are ready — sports feed entries, citizen `Intake` rows (what the fire will do with each pending row: household, single, headed for review), initiative tracker structure, coverage ratings. Business/storyline intake not wired. Pre-flight validates against the repo's engine code, not the deployed version — between a commit and its ship the two can disagree (C109: three duplicate WeekRecords passed here and were refused by PROD @132).
 
 **Gate:** READY → proceed. NOT READY → stop and fix.
 
@@ -27,11 +27,18 @@ Scan engine code for determinism violations, dependency chain breaks, sheet head
 
 **Gate:** CLEAN → proceed. CRITICAL → stop and fix.
 
-### Step 2.5: Hand writes since the last fire — capture BEFORE the fire (G-EC86, moved here C108)
+### Step 2.5: Hand writes since the last fire — capture BEFORE the fire (G-EC86)
 
-Any sheet cell set by hand after C{XX−1} fired is part of C{XX−1}'s closing state. The only moment that state can be read is now: after the fire, live holds C{XX} values and the correction cannot be derived. Diff `output/engine_audit_c{XX-1}.json` `snapshots.*` (Crime_Metrics, Neighborhood_Map, Civic_Office_Ledger, Initiative_Tracker) against the live tabs. Initiative_Tracker moves are the city-hall apply — a world event, leave them. Anything else that a DEPLOY_HISTORY / ROLLOUT "written to live" line explains gets rebased into the snapshot with a `snapshotNotes` entry (shape: `engine_audit_c106.json`, `engine_audit_c107.json`). C108: 143 cells from the engine.241 Civis recalibration. No script yet — G-EC53 in `production_log_run_cycle_c108_gaps.md`.
+Any sheet cell set by hand after C{XX−1} fired is part of C{XX−1}'s closing state. The only moment that state can be read is now: after the fire, live holds C{XX} values and the correction cannot be derived.
 
-**Gate:** re-diff shows 0 unexplained rows; the rebase is committed before the fire.
+```bash
+node scripts/engineAuditor.js --hand-write-check                        # exit 0 CLEAN · 1 unexplained cells · 2 no audit for the live cycle
+node scripts/engineAuditor.js --hand-write-check --rebase --why "<what wrote them, builder go, backup path>"
+```
+
+Diffs `output/engine_audit_c{XX-1}.json` `snapshots.*` against the live tabs (Neighborhood_Map, Crime_Metrics, Civic_Office_Ledger by key). Initiative_Tracker moves are the civic apply — a world event, counted and never rebased. `--rebase` folds the live values into the snapshot and appends a `snapshotNotes` entry; every cell it lists must be explained by a DEPLOY_HISTORY / ROLLOUT "written to live" line first. C108: 143 cells (engine.241 Civis recalibration). C109: 0.
+
+**Gate:** exit 0; a rebase is committed before the fire.
 
 ### Step 3: Run Cycle
 The builder fires `runWorldCycle()` on the live sheet. The engine runs in Google's cloud — nothing here triggers it, and the builder runs nothing else for this chain. Confirm the fire from the sheet, never from a message: `Neighborhood_Map` max Cycle = {XX}, `Engine_Errors` row count.
@@ -205,6 +212,8 @@ Nothing downstream is hand-run. The artifacts this chain leaves on disk are read
 | `output/simulation_ledger_snapshot.jsonl` | `lib/mags.searchDisk`, MCP `search_everything`, `canon-name-check` |
 | `output/initiative_tracker.json`, `output/desk-packets/*` | civic office datawakes, desk agents |
 | `output/voice-disposition-cache/*.md` | citizen-voice agents, `citizen-wake` |
+
+**The civic chain is Sunday-only (14:30, retry 21:00) and exits clean when the engine has not fired.** A fire after 21:00 Sunday has no chain slot: the hourly tick runs only the no-model stages and applies the close at the 6h cutoff with no directive and no hearing (C109, fired Mon 00:50). Until the chain keys off the fire instead of the clock (civic.42), fire before 14:30 Sunday or accept a week with no hearing.
 
 **The acceptance test is the next unattended cron run, not a hand-driven demo.** If a step above fails, the cron that reads its artifact runs on the prior cycle — say which one in SESSION_CONTEXT.
 

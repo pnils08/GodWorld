@@ -185,6 +185,22 @@ console.log('\n2b. an operator Sex column wins over name inference:');
   check('a female head is the wife, her husband beside her, in the register', J[col('Gender')] === 'female' && Sm[col('Gender')] === 'male' && /Sam Okafor/.test(fr[1]) && /Jordan Okafor/.test(fr[2]));
 }
 
+console.log('\n2c. a spouse the name pool does not know takes the opposite of a known head (live C109):');
+{
+  const w = world([
+    ['Marcus','Vidal',41,'Temescal','Electrician','','Vidal','','','head'],
+    ['Zoraida','Vidal',39,'','ER Nurse','','Vidal','','','spouse'],
+  ]);
+  runPlan(w);
+  const q = w.sheets.Advancement_Intake1; const qh = q.rows[0]; const qc = (n) => qh.indexOf(n);
+  check('known head male, unknown spouse female — no dice', q.appended[0][qc('Gender')] === 'male' && q.appended[1][qc('Gender')] === 'female');
+  const before = w.ctx.ledger.rows.length;
+  E.processAdvancementRows_(w.ctx, 'C' + CYCLE, CYCLE);
+  const nu = w.ctx.ledger.rows.slice(before);
+  const fr = w.sheets.Family_Relationships.appended[0];
+  check('he is the husband, she is the wife, in the register', nu[0][col('Gender')] === 'male' && nu[1][col('Gender')] === 'female' && /Marcus Vidal/.test(fr[1]) && /Zoraida Vidal/.test(fr[2]));
+}
+
 console.log('\n3. the drip path is untouched, and collisions are refused:');
 {
   const w = world([]);

@@ -577,6 +577,14 @@ function routeCitizenUsageToIntake_(ctx, ss, cycle, cal) {
     var context = contextCol >= 0 ? String(row[contextCol] || '').trim() : '';
 
     var nameParts = splitName_(citizenName);
+    // Live C106–C109: "Dr. Lila Mezran" split to First "Dr." / Last "Lila Mezran", missed
+    // the ledger, and filed a new-citizen Intake row the processor parks in review — every
+    // cycle. One leading honorific comes off when a first and last remain behind it; a
+    // two-token name is left alone ("Deacon Seymour" is a first name, not a title).
+    if (citizenName.split(/\s+/).length >= 3 && typeof splitUsageName_ === 'function') {
+      var strippedParts = splitUsageName_(citizenName);
+      if (strippedParts) nameParts = strippedParts;
+    }
     var exists = citizenExistsInLedger_(ledgerData, nameParts.first, nameParts.last);
 
     var landed = false;

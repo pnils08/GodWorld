@@ -1469,7 +1469,9 @@ function processIntake_(ctx) {
   for (var w = 0; w < statusWrites.length; w++) {
     intake.getRange(statusWrites[w][0], iStat + 1).setValue(statusWrites[w][1]);
   }
-  ctx.summary.intakeProcessed = (ctx.summary.intakeProcessed || 0) + minted;
+  // Household-door members count as processed intake (live C109: a family of four
+  // arrived and Riley_Digest IntakeProcessed read 0).
+  ctx.summary.intakeProcessed = (ctx.summary.intakeProcessed || 0) + minted + (Number(hhPlan.members) || 0);
   if (minted || updated || statusWrites.length) {
     Logger.log('processIntake_ v3: minted ' + minted + ', updated ' + updated +
       ', flagged ' + (statusWrites.length - minted - updated) + ' for review');

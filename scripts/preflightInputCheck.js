@@ -272,8 +272,41 @@ async function main() {
     }
   }
 
-  // ── Steps 2-4: intakes (NOT WIRED) ──
-  lines.push('[ ] Citizen Intake: NOT WIRED');
+  // ── Step 2: Citizen Intake (G-EC56, C109) ──
+  // processIntake_ (engine.51 v3) reads the `Intake` tab every fire: a row with a blank
+  // IntakeStatus is pending, a Family key + Relation is a household (engine.109), an
+  // honorific in First goes to review and stays there. Report what the fire will do with
+  // each pending row so a dead row is seen before the fire, not after.
+  const intake = await loadSheet('Intake');
+  if (intake.__error) {
+    lines.push(`[!] Citizen Intake: READ FAILED — ${intake.__error}`);
+    warnings.push('Intake read failed');
+  } else {
+    // Same pattern as USAGE_HONORIFIC_RE (phase05-citizens/processAdvancementIntake.js) — an Apps Script global, not requirable.
+    const HONORIFIC = /^(?:dr|rev|revd|fr|prof|professor|mr|mrs|ms|mx|bishop|rabbi|imam|pastor|deacon|sister|father|mother|elder|hon|sen|rep|gov|mayor|councilmember|councilman|councilwoman|capt|lt|sgt|ofc|det|chief)\.?$/i;
+    const pending = intake.filter(r => !blank(r.First) || !blank(r.Last)).filter(r => blank(r.IntakeStatus));
+    const stuck = intake.filter(r => /^review/i.test(String(r.IntakeStatus || ''))).length;
+    const households = {};
+    const dead = [];
+    let singles = 0;
+    for (const r of pending) {
+      const name = `${String(r.First || '').trim()} ${String(r.Last || '').trim()}`.trim();
+      if (blank(r.First) || blank(r.Last)) dead.push(`"${name}" needs both First and Last`);
+      else if (HONORIFIC.test(String(r.First).trim())) dead.push(`"${name}" — "${String(r.First).trim()}" is an honorific, not a first name`);
+      else if (!blank(r.Family) && !blank(r.Relation)) (households[String(r.Family).trim()] = households[String(r.Family).trim()] || []).push(String(r.Relation).trim().toLowerCase());
+      else singles++;
+    }
+    const hhKeys = Object.keys(households);
+    const headless = hhKeys.filter(k => households[k].filter(x => x === 'head').length !== 1);
+    lines.push(`[${dead.length || headless.length ? '!' : 'x'}] Citizen Intake: ${pending.length} pending — ${hhKeys.length} household(s) (${hhKeys.reduce((n, k) => n + households[k].length, 0)} members), ${singles} single row(s), ${dead.length} the engine will send to review; ${stuck} already in review`);
+    for (const d of dead) lines.push(`      - ${d}`);
+    for (const k of headless) lines.push(`      - household "${k}" needs exactly one head`);
+    if (dead.length) warnings.push(`intake rows headed for review (${dead.length})`);
+    if (headless.length) warnings.push(`intake household without one head (${headless.length})`);
+    if (stuck) warnings.push(`intake rows parked in review (${stuck}) — nothing clears them`);
+  }
+
+  // ── Steps 3-4: intakes (NOT WIRED) ──
   lines.push('[ ] Business Intake: NOT WIRED');
   lines.push('[ ] Storyline Intake: NOT WIRED');
 

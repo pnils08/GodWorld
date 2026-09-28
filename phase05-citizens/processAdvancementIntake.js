@@ -2117,6 +2117,21 @@ function queueHouseholdIntake_(ctx, intakeSheet, intakeVals, intakeHeader, nameI
     members.sort(function(a, b) { return (rank[a.rel] - rank[b.rel]) || (a.row1 - b.row1); });
     var adv = ensureHouseholdQueueSheet_(ctx.ss);
     var headName = head.first + ' ' + head.last;
+    // Resolve each member's sex once: the operator's Sex cell, else the name pool. A head
+    // and spouse where only one resolves give the other the opposite — never the dice
+    // (live C109: Tomás/Renata Villanueva minted female/male, Husband and Wife swapped).
+    var spouseMem = null;
+    for (var sx = 0; sx < members.length; sx++) {
+      var sm = members[sx];
+      if (sm.sex !== 'male' && sm.sex !== 'female') {
+        sm.sex = (typeof inferSexFromFirstName_ === 'function') ? (inferSexFromFirstName_(sm.first) || '') : '';
+      }
+      if (sm.rel === 'spouse' && !spouseMem) spouseMem = sm;
+    }
+    if (spouseMem) {
+      if (head.sex && !spouseMem.sex) spouseMem.sex = head.sex === 'male' ? 'female' : 'male';
+      else if (spouseMem.sex && !head.sex) head.sex = spouseMem.sex === 'male' ? 'female' : 'male';
+    }
     for (var q = 0; q < members.length; q++) {
       var mm = members[q];
       var age = mm.age;
@@ -2129,8 +2144,7 @@ function queueHouseholdIntake_(ctx, intakeSheet, intakeVals, intakeHeader, nameI
         MatchType: mm.rel === 'head' ? '' : mm.rel,
         MatchName: mm.rel === 'head' ? '' : headName,
         HouseholdKey: order[g],
-        Gender: (mm.sex === 'male' || mm.sex === 'female') ? mm.sex
-          : ((typeof inferSexFromFirstName_ === 'function') ? (inferSexFromFirstName_(mm.first) || '') : '')
+        Gender: (mm.sex === 'male' || mm.sex === 'female') ? mm.sex : ''
       };
       var qrow = new Array(adv.headers.length).fill('');
       for (var h = 0; h < adv.headers.length; h++) if (vals.hasOwnProperty(adv.headers[h])) qrow[h] = vals[adv.headers[h]];

@@ -118,6 +118,8 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | engine.262 | Money conservation — ruled 2026-09-27: build a city treasury (initiative spend, renewals, taxes flow through it). Casino net-win fix `0b3e796d` held for go; grant/casino checks ride with the treasury | ready | engine-sheet | [[../plans/2026-09-26-future-build-ideas]] §3 |
 | engine.263 | Credit/default cascades — loans/defaults rippling through households/businesses | needs-info | engine-sheet — gated on engine.193 economy-complete | [[../plans/2026-09-26-future-build-ideas]] §4 |
 | engine.264 | The maker's hand — ruled 2026-09-27: an intake tab with dropdowns (seed, type, hood, +/−, level, systems); the sim never sees it, citizens only wonder 'sim or maker' | ready | research-build (sim judgement — builder call) | [[../plans/2026-09-26-future-build-ideas]] §Builder rulings |
+| engine.265 | C109 intake fixes — household sex never from the dice, media room strips a leading honorific, IntakeProcessed counts household arrivals. Code + tests done; rides the stacked ship, bench proof owed | in-progress | engine-sheet | `output/production_log_run_cycle_c109_gaps.md` G-EC56–58 |
+| engine.266 | C109 dead paths — mediaEffects read before written, storyline columns never migrated (23 header-drift rows), anomaly detector bands (migration flow, approval level model), dead packet inputs | ready | engine-sheet | `output/production_log_run_cycle_c109_gaps.md` G-EC59–61, 66 |
 
 ### canon.* — World-fidelity layer
 
@@ -136,6 +138,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | civic.38 | Stage machine + budgets + fund drain live; Initiatives in the World Jobs 1–6 LIVE PROD @132; C109 smoke Sun 2026-09-27 | in-progress | research-build / engine-sheet | [[../plans/2026-09-19-civic-wake-game-loop]] + [[../plans/2026-09-24-initiatives-in-the-world]] |
 | civic.40 | Close folds the week before its moves exist — fix before the C110 close | ready | engine-sheet | [[../plans/2026-09-24-initiatives-in-the-world]] §Job 1 Found 2026-09-27 civic.40 |
 | civic.41 | Clerk + sanity-read never run outside the Sunday chain | ready | engine-sheet | [[../plans/2026-09-24-initiatives-in-the-world]] §Job 1 Found 2026-09-27 civic.41 |
+| civic.42 | Civic chain keys off the fire, not the weekday — a fire after Sunday 21:00 has no chain slot and the week closes at the 6h cutoff with no hearing (C109) | ready | engine-sheet | `output/production_log_run_cycle_c109_gaps.md` G-EC62 |
 
 ### infrastructure.* — Supermemory, services, ingest
 

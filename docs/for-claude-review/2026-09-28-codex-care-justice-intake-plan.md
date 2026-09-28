@@ -116,14 +116,14 @@ Hospital feedback must read a count and capacity expressed in the same units and
 
 This is a completed review submission, not a claim that these behavior choices have been decided. Claude should return concrete recommendations for builder judgment, then incorporate the rulings into the owning plan.
 
-| Gate | Decision needed | Recommended direction / boundary |
-|---|---|---|
-| R1 — coverage | Confirm full-city accounting and how World_Population and represented neighborhood population reconcile | Named citizens are included once; allocate other-resident exposure explicitly, without inventing neighborhood population values |
-| R2 — intake and occupancy | Approve type taxonomy, illness-to-admission model, other-resident rates, and meaning of a hospital bed | Separate care/encounter from inpatient occupancy; do not silently reclassify existing injured/recovering records |
-| R3 — judicial progression | Decision timing, held duration, release/transfer progression, repeated cases, and applicable population | Keep the approved 40/25/35 outcome split; it does not specify any of these durations or procedures |
-| R4 — overlapping states | A citizen can need care while detained; release must restore an appropriate prior life-state | Preserve independent custody/care records and explicit Status precedence; no blanket release-to-active that erases retirement/illness |
-| R5 — pathways and initiative proof | Which typed events can create calls, admissions, or cases; OARI eligibility and diversion denominator | Direct arrest is the first judicial entry; other misconduct needs an explicit investigation/response rule, never narrative keyword matching |
-| R6 — feedback and compatibility | Scope-matched capacity, growth/rounding behavior, historical classification, failure/replay behavior | No citywide feedback switch until same-scale numerators/denominators and persistence receipts are bench-proven |
+| Gate | Decision needed | Recommended direction / boundary | Status |
+|---|---|---|---|
+| R1 — coverage | Confirm full-city accounting and how World_Population and represented neighborhood population reconcile | Named citizens are included once; allocate other-resident exposure explicitly, without inventing neighborhood population values | **RULED (rb, 2026-09-28) — architectural, consistent with the ledger-is-tracked-subset doctrine.** Contract adopted as proposed. Also confirms the "citywide intake" interpretation in §Existing authority and scope — that reading is correct, no separate answer needed from the builder. |
+| R2 — intake and occupancy | Approve type taxonomy, illness-to-admission model, other-resident rates, and meaning of a hospital bed | Separate care/encounter from inpatient occupancy; do not silently reclassify existing injured/recovering records | **Pending builder — sim texture (what "the hospitals are full" means to the city this cycle).** rb recommendation forwarded 2026-09-28. |
+| R3 — judicial progression | Decision timing, held duration, release/transfer progression, repeated cases, and applicable population | Keep the approved 40/25/35 outcome split; it does not specify any of these durations or procedures | **Pending builder — sim texture (how an arrest plays out over cycles for the citizen).** rb recommendation forwarded 2026-09-28. |
+| R4 — overlapping states | A citizen can need care while detained; release must restore an appropriate prior life-state | Preserve independent custody/care records and explicit Status precedence; no blanket release-to-active that erases retirement/illness | **RULED (rb, 2026-09-28) — correctness requirement, not a taste call.** Contract adopted as proposed; Task 6 implements the explicit precedence order. |
+| R5 — pathways and initiative proof | Which typed events can create calls, admissions, or cases; OARI eligibility and diversion denominator | Direct arrest is the first judicial entry; other misconduct needs an explicit investigation/response rule, never narrative keyword matching | **Pending builder — sim texture (what conduct actually gets someone arrested).** rb recommendation forwarded 2026-09-28. |
+| R6 — feedback and compatibility | Scope-matched capacity, growth/rounding behavior, historical classification, failure/replay behavior | No citywide feedback switch until same-scale numerators/denominators and persistence receipts are bench-proven | **RULED (rb, 2026-09-28) — engineering gate.** Contract adopted as proposed; Task 11 bench-proof is the enforcement point, not a separate ruling. |
 
 ## Acceptance criteria
 
@@ -145,7 +145,7 @@ Each item is a bounded review or implementation cut. Implementation tasks requir
 - **Files:** owning care-and-justice plan; this review; `docs/engine/ROLLOUT_PLAN.md`; `docs/index.md`.
 - **Steps:** Check the drift inventory below; resolve R1-R6 with the builder; merge accepted decisions into the owning plan and keep one specification. Repoint this review when Claude moves it.
 - **Verify:** Each gate has an explicit decision and owner; `node scripts/docLoopStatus.js --lint` is clean.
-- **Status:** [ ] awaiting Claude review.
+- **Status:** [~] Claude review done 2026-09-28 — R1/R4/R6 ruled (architectural/correctness, rb authority, see gate table); R2/R3/R5 forwarded to the builder (sim texture) same day, awaiting answer. Do not merge into the owning plan or start Task 2 until R2/R3/R5 return.
 
 ### Task 2 — define receipt and census schema
 

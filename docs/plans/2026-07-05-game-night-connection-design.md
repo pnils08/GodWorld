@@ -93,6 +93,8 @@ All tasks gated on Mike's approval of this design (S296 build moratorium — no 
 
 ### Task 2: Households bend around the score (Hop 5)
 
+**Built S502 (engine-sheet):** `runHouseholdEngine.js` — on a Cycle whose feed carries a game entry, a pool bucketed by `gameNightBucket_` joins the draw (winStreak / win / loss / neutral lines); picked lines tag `Household-GameNight`; one Ripple row names the touched households. Draw chance unchanged (texture volume flat). Test: `scripts/householdEngine.t4.test.js` §5 (6 cases).
+
 - **Files:**
   - `phase05-citizens/runHouseholdEngine.js` — modify
 - **Steps:**

@@ -144,5 +144,35 @@ console.log('═══ T4 Section 3 — missing-column guard (live SL without th
     evs.filter(ev => isPartneredLine(ev) || isParentLine(ev)).length === 0, String(evs.length));
 }
 
+console.log('\nengine.47 Hop 5 — households bend around tonight\'s result');
+{
+  const gnSrc = fs.readFileSync(path.resolve(__dirname, '../phase05-citizens/applyGameNightMoments.js'), 'utf8');
+  global.gameNightBucket_ = new Function(gnSrc + '\nreturn gameNightBucket_;')();
+  const ripples = [];
+  global.recordRipple_ = (ctx, r) => { ripples.push(r); return true; };
+  const runWithFeed = (n, feed) => {
+    const events = [];
+    for (let i = 0; i < n; i++) {
+      rngImpl = mulberry32(i + 7);
+      const ctx = makeCtx([makeRow('POP-G' + i)]);
+      ctx.summary.sportsFeedEntries = feed;
+      runHouseholdEngine_(ctx);
+      for (const ev of (ctx.summary.householdEvents || [])) events.push(ev);
+    }
+    return events;
+  };
+  const winStreak = runWithFeed(3000, [{ eventType: 'game-result', streak: 'W5', playerMood: 'confident' }]);
+  const gn = winStreak.filter(ev => ev.tag === 'Household-GameNight');
+  assert('5.1 a game week puts game-night lines on some households', gn.length > 0, String(gn.length));
+  assert('5.2 a W5 streak draws the streak lines', gn.every(ev => /streak|lineup/.test(ev.event)), gn.map(e => e.event).slice(0, 3).join(' | '));
+  assert('5.3 each touched household is named in a game-night Ripple row',
+    ripples.filter(r => r.effectType === 'game-night-household').reduce((a, r) => a + r.targetIds.length, 0) === gn.length);
+  const loss = runWithFeed(3000, [{ eventType: 'game-result', streak: 'L2', playerMood: 'frustrated' }]).filter(ev => ev.tag === 'Household-GameNight');
+  assert('5.4 a loss draws the quiet-house lines', loss.length > 0 && loss.every(ev => /quiet|early|loss/.test(ev.event)), loss.map(e => e.event).slice(0, 3).join(' | '));
+  const quiet = runWithFeed(3000, []);
+  assert('5.5 no game in the feed — no game-night line (no invented games)', quiet.filter(ev => ev.tag === 'Household-GameNight').length === 0);
+  assert('5.6 the draw chance is unchanged — same event count with or without a game', quiet.length === winStreak.length, quiet.length + ' vs ' + winStreak.length);
+}
+
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

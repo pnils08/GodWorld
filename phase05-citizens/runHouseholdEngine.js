@@ -438,7 +438,31 @@ function runHouseholdEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // MERGE INTO FINAL POOL
   // ═══════════════════════════════════════════════════════════════════════════
+  // engine.47 Hop 5 (builder 2026-09-27): households bend around tonight's
+  // result, not just the season label. Fires only when the feed carries a game
+  // this Cycle (the quiet case is load-bearing — no invented games); the bucket
+  // is the players' own (gameNightBucket_, applyGameNightMoments.js). Adds lines
+  // to the draw; it does not raise the draw chance.
+  var gameNightPool = [];
+  var gameEntry = null;
+  var feed = S.sportsFeedEntries || [];
+  for (var ge = 0; ge < feed.length; ge++) {
+    if (String(feed[ge].eventType || '').toLowerCase().indexOf('game') >= 0) { gameEntry = feed[ge]; break; }
+  }
+  if (gameEntry && typeof gameNightBucket_ === 'function') {
+    var gnBucket = gameNightBucket_(gameEntry);
+    var GAME_NIGHT_HOUSEHOLD_ = {
+      winStreak: ["left the game on through dinner, the streak still running", "let the kids stay up to watch the streak go on", "argued happily about the lineup at the kitchen table"],
+      win: ["moved dinner to the couch for the broadcast", "cheered the last out from the living room", "kept the radio on the porch through the late innings"],
+      loss: ["turned the broadcast off early after the loss", "went quiet as a house after the final score", "skipped the postgame and went to bed early"],
+      neutral: ["had the game on in the background through dinner"]
+    };
+    gameNightPool = (GAME_NIGHT_HOUSEHOLD_[gnBucket] || GAME_NIGHT_HOUSEHOLD_.neutral).slice();
+  }
+  var gameNightTouched = [];
+
   var pool = [].concat(
+    gameNightPool,
     baseHousehold,
     seasonal,
     weatherPool,
@@ -582,6 +606,9 @@ function runHouseholdEngine_(ctx) {
       eventTag = "Health";
     } else if (wellnessPool.indexOf(pick) >= 0) {
       eventTag = "Recovering";
+    } else if (gameNightPool.indexOf(pick) >= 0) {
+      eventTag = "Household-GameNight";
+      gameNightTouched.push(String(row[iPopID] || ''));
     }
 
     var line = stamp + " — [" + eventTag + "] " + pick;
@@ -628,6 +655,23 @@ function runHouseholdEngine_(ctx) {
   // SUMMARY
   // ═══════════════════════════════════════════════════════════════════════════
   S.householdEvents = householdEvents;
+
+  // engine.47 Hop 10 — the game touched THESE households (proof-of-why).
+  if (gameNightTouched.length && typeof recordRipple_ === 'function') {
+    recordRipple_(ctx, {
+      causeType: 'sports',
+      causeId: 'Oakland_Sports_Feed.gameNight',
+      causeDetail: 'Game night reached ' + gameNightTouched.length + ' household(s) — ' +
+        (gameEntry.streak ? 'streak ' + gameEntry.streak : 'regular night'),
+      effectType: 'game-night-household',
+      targetScope: 'citizen',
+      targetIds: gameNightTouched,
+      neighborhood: '',
+      magnitude: gameNightTouched.length,
+      duration: 1,
+      sourceEngine: 'runHouseholdEngine_'
+    });
+  }
   ctx.summary = S;
 }
 

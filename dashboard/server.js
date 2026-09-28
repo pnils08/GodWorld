@@ -275,6 +275,18 @@ function readJSON(path) {
   } catch { return null; }
 }
 
+// S502: beat dump reader — output/beats/*.jsonl, one object per line,
+// header keys verbatim (dumpBeatTabs.js, run-cycle Step 5.56). Used by
+// endpoints that used to read the now-retired per-desk packet cache.
+function readJSONL(path) {
+  try {
+    if (!existsSync(path)) return [];
+    return readFileSync(path, 'utf-8').split('\n').filter(l => l.trim())
+      .map(l => { try { return JSON.parse(l); } catch { return null; } })
+      .filter(Boolean);
+  } catch { return []; }
+}
+
 function readText(path) {
   try {
     if (!existsSync(path)) return null;
@@ -1360,21 +1372,14 @@ function matchArticlesToInitiatives(editions, initiatives) {
 
 // Civic Initiatives — engine outcomes + editorial tracking + related articles
 app.get('/api/initiatives', (req, res) => {
-  // Layer 1: Engine data (recentOutcomes from civic desk packet)
-  const civicPackets = readdirSync(join(ROOT, 'output/desk-packets'))
-    .filter(f => f.match(/^civic_c\d+\.json$/))
-    .sort((a, b) => {
-      const na = parseInt(a.match(/\d+/)[0]);
-      const nb = parseInt(b.match(/\d+/)[0]);
-      return nb - na;
-    });
+  // Layer 1: Engine data (recentOutcomes from base_context.json's canon —
+  // S502: the civic desk packet this used to read is no longer generated,
+  // the per-desk pipeline it fed is retired. Same underlying data.)
+  const baseCtxForOutcomes = readJSON(join(ROOT, 'output/desk-packets/base_context.json'));
 
   let engineOutcomes = [];
-  if (civicPackets[0]) {
-    const packet = readJSON(join(ROOT, 'output/desk-packets', civicPackets[0]));
-    if (packet?.canonReference?.recentOutcomes) {
-      engineOutcomes = packet.canonReference.recentOutcomes;
-    }
+  if (baseCtxForOutcomes?.canon?.recentOutcomes) {
+    engineOutcomes = baseCtxForOutcomes.canon.recentOutcomes;
   }
 
   // Layer 2: Editorial tracker (manually maintained implementation status)
@@ -2035,21 +2040,17 @@ app.get('/api/citizens/:popId', async (req, res) => {
     }
   }
 
-  // Layer 2: Citizen archive (from desk packets — article appearances)
+  // Layer 2: Citizen archive — article appearances. S502: was the civic desk
+  // packet's desk-filtered citizenArchive subset (no longer generated, that
+  // pipeline is retired); citizen_archive.json is the same underlying index,
+  // unfiltered, and is also what Layer 4 below already reads.
   let archiveData = null;
   const packetDir = join(ROOT, 'output/desk-packets');
-  const latestCivic = readdirSync(packetDir)
-    .filter(f => f.match(/^civic_c\d+\.json$/))
-    .sort((a, b) => parseInt(b.match(/\d+/)[0]) - parseInt(a.match(/\d+/)[0]))[0];
-
-  if (latestCivic) {
-    const packet = readJSON(join(packetDir, latestCivic));
-    const ca = packet?.citizenArchive || {};
-    for (const [name, data] of Object.entries(ca)) {
-      if (data.popId?.toLowerCase() === popId.toLowerCase()) {
-        archiveData = { name, ...data };
-        break;
-      }
+  const citizenArchiveForLookup = readJSON(join(packetDir, 'citizen_archive.json')) || {};
+  for (const [name, data] of Object.entries(citizenArchiveForLookup)) {
+    if (data.popId?.toLowerCase() === popId.toLowerCase()) {
+      archiveData = { name, ...data };
+      break;
     }
   }
 
@@ -2215,116 +2216,75 @@ app.get('/api/citizen-coverage/:nameOrId', (req, res) => {
 });
 
 // --- Story Hooks ---
-// Active hooks from the latest desk packet
+// S502: was gathered from all 5 per-desk packets (that pipeline is retired).
+// Story_Hook_Deck is dumped fresh every cycle regardless (run-cycle Step
+// 5.56, engine-sheet's dumpBeatTabs.js) — read it directly instead.
 app.get('/api/hooks', (req, res) => {
   const { desk, domain, priority } = req.query;
-  const packetDir = join(ROOT, 'output/desk-packets');
-  const allHooks = [];
-
-  // Gather hooks from all desk packets for the latest cycle
-  const packets = readdirSync(packetDir)
-    .filter(f => f.match(/^(civic|sports|culture|business|letters)_c\d+\.json$/))
-    .sort((a, b) => parseInt(b.match(/\d+/)[0]) - parseInt(a.match(/\d+/)[0]));
-
-  // Group by cycle — only latest
-  const latestCycle = packets[0] ? parseInt(packets[0].match(/\d+/)[0]) : null;
+  const beatsDir = join(ROOT, 'output/beats');
+  const meta = readJSON(join(beatsDir, 'meta.json'));
+  const latestCycle = meta?.cycle ?? null;
   if (!latestCycle) return res.json({ hooks: [], cycle: null });
 
-  const latestPackets = packets.filter(f => parseInt(f.match(/\d+/)[0]) === latestCycle);
+  const rows = readJSONL(join(beatsDir, 'Story_Hook_Deck.jsonl'))
+    .filter(h => parseInt(h.Cycle) === latestCycle);
 
-  for (const pFile of latestPackets) {
-    const deskName = pFile.replace(/_c\d+\.json$/, '');
-    const packet = readJSON(join(packetDir, pFile));
-    const hooks = packet?.hooks || [];
-    for (const hook of hooks) {
-      allHooks.push({ ...hook, sourceDesk: deskName });
-    }
-  }
-
-  let filtered = allHooks;
-  if (desk) filtered = filtered.filter(h => h.sourceDesk === desk || h.suggestedDesks?.toLowerCase().includes(desk.toLowerCase()));
+  let filtered = rows.map(h => ({
+    hookId: h.HookId, hookType: h.HookType, domain: h.Domain,
+    neighborhood: h.Neighborhood, priority: parseInt(h.Priority || '1'),
+    text: h.HookText, suggestedDesks: h.SuggestedDesks,
+    suggestedJournalist: h.SuggestedJournalist, suggestedAngle: h.SuggestedAngle,
+  }));
+  if (desk) filtered = filtered.filter(h => h.suggestedDesks?.toLowerCase().includes(desk.toLowerCase()));
   if (domain) filtered = filtered.filter(h => h.domain?.toLowerCase() === domain.toLowerCase());
   if (priority) filtered = filtered.filter(h => h.priority >= parseInt(priority));
 
-  // Sort by priority score descending
-  filtered.sort((a, b) => (b.priorityScore || 0) - (a.priorityScore || 0));
+  filtered.sort((a, b) => b.priority - a.priority);
 
   res.json({ cycle: latestCycle, total: filtered.length, hooks: filtered });
 });
 
 // --- Arcs ---
-// Multi-cycle storylines from desk packets
+// S256 (Mike-direct): the crisis-arc generator was retired for fabricating
+// specificity off a single city-wide illnessRate — desk packets have hard-
+// coded arcs=[] ever since, so this endpoint was already always empty. S502:
+// the per-desk-packet read it used is gone too (that pipeline retired); kept
+// as a stable empty route rather than a broken one, same observable result.
 app.get('/api/arcs', (req, res) => {
-  const { domain, phase } = req.query;
-  const packetDir = join(ROOT, 'output/desk-packets');
-  const arcMap = new Map();
-
-  // Gather arcs from all desk packets for latest cycle
-  const packets = readdirSync(packetDir)
-    .filter(f => f.match(/^(civic|sports|culture|business|letters)_c\d+\.json$/))
-    .sort((a, b) => parseInt(b.match(/\d+/)[0]) - parseInt(a.match(/\d+/)[0]));
-
-  const latestCycle = packets[0] ? parseInt(packets[0].match(/\d+/)[0]) : null;
-  if (!latestCycle) return res.json({ arcs: [], cycle: null });
-
-  const latestPackets = packets.filter(f => parseInt(f.match(/\d+/)[0]) === latestCycle);
-
-  for (const pFile of latestPackets) {
-    const packet = readJSON(join(packetDir, pFile));
-    const arcs = packet?.arcs || [];
-    for (const arc of arcs) {
-      if (!arcMap.has(arc.arcId)) {
-        arcMap.set(arc.arcId, arc);
-      }
-    }
-  }
-
-  let arcs = Array.from(arcMap.values());
-  if (domain) arcs = arcs.filter(a => a.domain?.toLowerCase() === domain.toLowerCase());
-  if (phase) arcs = arcs.filter(a => a.phase?.toLowerCase() === phase.toLowerCase());
-
-  // Sort by tension descending
-  arcs.sort((a, b) => parseFloat(b.tension || 0) - parseFloat(a.tension || 0));
-
-  res.json({ cycle: latestCycle, total: arcs.length, arcs });
+  const meta = readJSON(join(ROOT, 'output/beats/meta.json'));
+  res.json({ cycle: meta?.cycle ?? null, total: 0, arcs: [] });
 });
 
 // --- Storylines ---
-// Active storylines from desk packets
-app.get('/api/storylines', (req, res) => {
-  const { status, priority, neighborhood } = req.query;
-  const packetDir = join(ROOT, 'output/desk-packets');
-  const storylineMap = new Map();
+// S502: was gathered from all 5 per-desk packets' Tracker-shaped adapter
+// output (that pipeline is retired along with the adapter). dashboard.md's
+// own contract already says storylines come from Storyline_Ledger directly
+// (Storyline_Tracker discontinued 2026-08-05) — read it live, same pattern
+// /api/world-state already uses for weather/config/population.
+app.get('/api/storylines', async (req, res) => {
+  const { status, neighborhood } = req.query;
+  const rows = await getLiveSheetData('Storyline_Ledger');
+  if (!rows) return res.json({ storylines: [], cycle: null });
 
-  const packets = readdirSync(packetDir)
-    .filter(f => f.match(/^(civic|sports|culture|business|letters)_c\d+\.json$/))
-    .sort((a, b) => parseInt(b.match(/\d+/)[0]) - parseInt(a.match(/\d+/)[0]));
-
-  const latestCycle = packets[0] ? parseInt(packets[0].match(/\d+/)[0]) : null;
-  if (!latestCycle) return res.json({ storylines: [], cycle: null });
-
-  const latestPackets = packets.filter(f => parseInt(f.match(/\d+/)[0]) === latestCycle);
-
-  for (const pFile of latestPackets) {
-    const deskName = pFile.replace(/_c\d+\.json$/, '');
-    const packet = readJSON(join(packetDir, pFile));
-    const storylines = packet?.storylines || [];
-    for (const sl of storylines) {
-      const key = sl.description?.slice(0, 50) || JSON.stringify(sl);
-      if (!storylineMap.has(key)) {
-        storylineMap.set(key, { ...sl, desks: [deskName] });
-      } else {
-        storylineMap.get(key).desks.push(deskName);
-      }
-    }
-  }
-
-  let storylines = Array.from(storylineMap.values());
+  let storylines = rows.filter(r => r.StorylineId).map(r => ({
+    storylineId: r.StorylineId,
+    description: String(r.StorylineId || '').replace(/-/g, ' '),
+    status: r.Status || '',
+    firstCycle: parseInt(r.FirstCycle) || null,
+    lastCycle: parseInt(r.LastCycle) || null,
+    advanced: parseInt(r.Advanced) || 0,
+    opened: parseInt(r.Opened) || 0,
+    closed: parseInt(r.Closed) || 0,
+    referenced: parseInt(r.Referenced) || 0,
+    articles: parseInt(r.Articles) || 0,
+    relatedCitizens: r.Citizens || '',
+    neighborhood: r.Hoods || '',
+    desks: (r.Desks || '').split(',').map(d => d.trim()).filter(Boolean),
+  }));
   if (status) storylines = storylines.filter(s => s.status?.toLowerCase() === status.toLowerCase());
-  if (priority) storylines = storylines.filter(s => s.priority?.toLowerCase() === priority.toLowerCase());
   if (neighborhood) storylines = storylines.filter(s => s.neighborhood?.toLowerCase().includes(neighborhood.toLowerCase()));
 
-  res.json({ cycle: latestCycle, total: storylines.length, storylines });
+  res.json({ total: storylines.length, storylines });
 });
 
 // --- Edition Score History ---
@@ -2416,26 +2376,18 @@ app.get('/api/newsroom', (req, res) => {
     }
   }
 
-  // 2. Desk status — latest packet cycle per desk, article counts from latest edition
+  // 2. Desk status — article counts from latest edition.
+  // S502: this used to report latestCycle/packetCount/hookCount/arcCount per
+  // desk from the 5 per-desk packet files, which stopped generating when
+  // that pipeline retired (superseded by the per-journalist beat-slice
+  // fanout, cron-desk-run.js WEEK_GRID — no 1:1 per-desk equivalent exists
+  // there). Reporting the old fields as 0 would misread as a dead pipeline;
+  // dropped them rather than leave a misleading health signal. latestArticles
+  // (below, from the actual latest edition) is the part of this that's real.
   const deskNames = ['civic', 'sports', 'culture', 'business', 'letters'];
   const deskStatus = {};
   for (const desk of deskNames) {
-    const packets = readdirSync(packetDir)
-      .filter(f => f.match(new RegExp(`^${desk}_c\\d+\\.json$`)))
-      .sort((a, b) => parseInt(b.match(/\d+/)[0]) - parseInt(a.match(/\d+/)[0]));
-    const latestCycle = packets[0] ? parseInt(packets[0].match(/\d+/)[0]) : null;
-    const packetCount = packets.length;
-
-    // Get hook count from latest packet
-    let hookCount = 0;
-    let arcCount = 0;
-    if (packets[0]) {
-      const pkt = readJSON(join(packetDir, packets[0]));
-      hookCount = (pkt?.hooks || []).length;
-      arcCount = (pkt?.arcs || []).length;
-    }
-
-    deskStatus[desk] = { latestCycle, packetCount, hookCount, arcCount };
+    deskStatus[desk] = {};
   }
 
   // Count articles per desk in latest edition

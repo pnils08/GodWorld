@@ -281,6 +281,7 @@ function loadPreviousCycleState_(ctx) {
       seedCarriedEconomicMood_(S);
       seedCarriedNeighborhoodEconomies_(ctx, S);
       seedCarriedActivityObservations_(ctx, S);   // engine.228
+      seedCarriedCityDynamics_(ctx, S);           // engine.195
     } else {
       S.previousCycleState = null;
       Logger.log('loadPreviousCycleState_: No previous cycle state found (first cycle or cleared)');
@@ -375,6 +376,34 @@ function seedCarriedActivityObservations_(ctx, S) {
     S.activityObservations = { history: hist.slice(-12), carried: true };
     Logger.log('seedCarriedActivityObservations_: ' + hist.length + ' Cycle(s) of activity history opened (baseline for the relative gates)');
   }
+}
+
+
+/**
+ * seedCarriedCityDynamics_ (engine.195)
+ *
+ * The Cycle opens on last Cycle's city mood carrier, so applyCityDynamics_'s
+ * momentum blend has a prev to lean on (builder 2026-09-27: "Yes week to week,
+ * this way articles serve as persistence"). Own key PREV_CITY_DYN_JSON; a
+ * missing blob (first fire on this code, or a reset) is a graceful no-op — the
+ * blend falls back to the raw level exactly as before.
+ */
+function seedCarriedCityDynamics_(ctx, S) {
+  if (S.previousCityDynamics) return;
+  var json = null;
+  try { json = loadCarryForwardBlob_(ctx, 'PREV_CITY_DYN_JSON', carryForwardCycleId_(ctx)); } catch (e) { json = null; }
+  if (!json) return;
+  var carried;
+  try { carried = JSON.parse(json); } catch (e) { return; }
+  if (!carried || typeof carried !== 'object') return;
+  var out = {}, n = 0;
+  for (var k in carried) {
+    if (!carried.hasOwnProperty(k)) continue;
+    if (typeof carried[k] === 'number' && isFinite(carried[k])) { out[k] = carried[k]; n++; }
+  }
+  if (!n) return;
+  S.previousCityDynamics = out;
+  Logger.log('seedCarriedCityDynamics_: city mood carrier opened (' + n + ' metrics, sentiment ' + out.sentiment + ')');
 }
 
 

@@ -429,6 +429,28 @@ function saveEveningSnapshot_(ctx) {
 }
 
 
+
+/**
+ * compactCityDynamicsCarrier_ (engine.195)
+ *
+ * S.previousCityDynamics — the pre-boost blended city metrics applyCityDynamics_
+ * leaves for the next Cycle's momentum blend — reduced to its finite numbers,
+ * two decimals. Null when there is nothing to carry.
+ */
+function compactCityDynamicsCarrier_(S) {
+  var src = S && S.previousCityDynamics;
+  if (!src || typeof src !== 'object') return null;
+  var out = {}, n = 0;
+  for (var k in src) {
+    if (!src.hasOwnProperty(k)) continue;
+    var v = src[k];
+    if (typeof v !== 'number' || !isFinite(v)) continue;
+    out[k] = Math.round(v * 100) / 100;
+    n++;
+  }
+  return n ? out : null;
+}
+
 /**
  * ============================================================================
  * savePreviousCycleState_ v1.0
@@ -480,6 +502,15 @@ function savePreviousCycleState_(ctx) {
       var actJson = JSON.stringify(actObs);
       saveCarryForwardBlob_(ctx, 'PREV_ACTIVITY_OBS_JSON', actJson, snapshot.cycle);
       Logger.log('savePreviousCycleState_: Saved ' + actJson.length + ' bytes of activity history for cycle ' + snapshot.cycle);
+    }
+    // engine.195 (builder 2026-09-27, mood inertia): the city dynamics momentum carrier rides its
+    // OWN key (~10 numbers, ~200 chars). Without it the Phase-2 momentum blend always saw prev =
+    // null — each Cycle opened on a city with no memory of last week's mood.
+    var cityDyn = compactCityDynamicsCarrier_(S);
+    if (cityDyn) {
+      var cityDynJson = JSON.stringify(cityDyn);
+      saveCarryForwardBlob_(ctx, 'PREV_CITY_DYN_JSON', cityDynJson, snapshot.cycle);
+      Logger.log('savePreviousCycleState_: Saved ' + cityDynJson.length + ' bytes of city dynamics carrier for cycle ' + snapshot.cycle);
     }
   } catch (e) {
     Logger.log('savePreviousCycleState_: Failed - ' + e.message);

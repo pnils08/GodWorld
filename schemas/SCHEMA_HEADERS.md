@@ -280,6 +280,22 @@ pointers:
 
 ---
 
+## City_Treasury
+
+- **Rows:** 1
+- **Columns:** 6
+
+| Col | Header |
+|-----|--------|
+| A | Cycle |
+| B | Entry |
+| C | Amount |
+| D | Counterparty |
+| E | BalanceAfter |
+| F | Note |
+
+---
+
 ## Civic_Office_Ledger
 
 - **Rows:** 1000
@@ -1154,7 +1170,7 @@ pointers:
 
 ## Reflection_Intake
 
-- **Rows:** 1565
+- **Rows:** 1586
 - **Columns:** 11
 
 | Col | Header |

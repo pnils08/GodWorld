@@ -575,11 +575,24 @@ function registerCulturalEntity_(ctx, name, roleType, journalistName, neighborho
     journalistName || "",     // 13 FirstRefSource
     1,                        // 14 MediaSpread
     "Local",                  // 15 CityTier
-    validNeighborhood,        // 16 Neighborhood
-    initialLastHoliday,       // 17 FirstSeenHoliday (v2.2)
-    initialLastHoliday,       // 18 LastSeenHoliday  (v2.2, mutable on repeat)
-    initialCalCtx             // 19 CalendarContext  (v2.2, mutable on repeat)
+    validNeighborhood         // 16 Neighborhood
   ];
+  // engine.266 / G-EC23–24: the live tab's last three columns are Holiday /
+  // HolidayPriority / SportsSeason (schemas/SCHEMA_HEADERS.md), not the v2.2
+  // FirstSeenHoliday / LastSeenHoliday / CalendarContext this row used to write
+  // positionally — so HolidayPriority held a holiday name and SportsSeason held
+  // "SummerFestival, mid-season" (39 of 53 live rows). Written by header name now.
+  var calCells = {
+    Holiday: initialLastHoliday,
+    HolidayPriority: holiday !== "none" ? String(holidayPriority || "") : "",
+    SportsSeason: sportsSeason || ""
+  };
+  for (var cc in calCells) {
+    var ci = col(cc);
+    if (ci < 0) continue;
+    while (newRow.length < ci) newRow.push("");
+    newRow[ci] = calCells[cc];
+  }
 
   var appendIntent = queueAppendIntent_(ctx, 'Cultural_Ledger', newRow, 'registerCulturalEntity_: CREATE', 'media');
 

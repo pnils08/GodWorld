@@ -283,6 +283,7 @@ function loadPreviousCycleState_(ctx) {
       seedCarriedActivityObservations_(ctx, S);   // engine.228
       seedCarriedCityDynamics_(ctx, S);           // engine.195
       seedCarriedRelocationFlow_(ctx, S);         // engine.249
+      if (typeof seedCarriedMediaEffects_ === 'function') seedCarriedMediaEffects_(ctx, S); // G-EC59
     } else {
       S.previousCycleState = null;
       Logger.log('loadPreviousCycleState_: No previous cycle state found (first cycle or cleared)');

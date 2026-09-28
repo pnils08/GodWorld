@@ -1027,6 +1027,36 @@ function amplifyArcsFromCoverage_(ctx, cycle) {
 /**
  * Generates media-influenced event pools for citizen generators.
  */
+/**
+ * seedCarriedMediaEffects_ (engine.266 / G-EC59, builder 2026-09-28)
+ *
+ * Citizen events (Phase 5) were built to react to the media climate, but the
+ * climate is computed at Phase 8 — so the paper never changed how a citizen felt.
+ * Builder: carry last week's climate. The factors already ride
+ * previousCycleState.mediaEffects (compactMediaEffects_, engine.227); this rebuilds
+ * last week's climate event pools from them (generateMediaEventPools_, no calendar
+ * pools — those belong to this week) onto S.carriedMediaEffects. Readers fall back
+ * to it only while this Cycle's S.mediaEffects does not exist yet.
+ */
+function seedCarriedMediaEffects_(ctx, S) {
+  var prev = S && S.previousCycleState && S.previousCycleState.mediaEffects;
+  if (!prev || typeof prev !== 'object') return;
+  var eff = {
+    sentimentPressure: Number(prev.sentimentPressure) || 0,
+    anxietyFactor: Number(prev.anxietyFactor) || 0,
+    hopeFactor: Number(prev.hopeFactor) || 0,
+    crisisSaturation: Number(prev.crisisSaturation) || 0,
+    celebrityBuzz: Number(prev.celebrityBuzz) || 0,
+    coverageIntensity: prev.coverageIntensity || '',
+    neighborhoodEffects: prev.neighborhoodEffects || {},
+    eventPools: { anxious: [], hopeful: [], celebrity: [], crisis: [], sports: [], holiday: [], festival: [], oakland_pride: [] },
+    carried: true,
+    carriedFromCycle: S.previousCycleState.cycle || null
+  };
+  generateMediaEventPools_({ summary: { mediaEffects: eff }, mediaCalendarContext: {} });
+  S.carriedMediaEffects = eff;
+}
+
 function generateMediaEventPools_(ctx) {
   var S = ctx.summary;
   var effects = S.mediaEffects;
@@ -1254,8 +1284,9 @@ function generateMediaSummary_(ctx) {
  * Gets a media-influenced event for a citizen.
  */
 function getMediaInfluencedEvent_(ctx) {
-  // Defensive check for optional chaining replacement
-  var mediaEffects = ctx.summary ? ctx.summary.mediaEffects : null;
+  // Defensive check for optional chaining replacement. engine.266 / G-EC59: at Phase 5
+  // this Cycle's climate does not exist yet — last week's paper (carried) stands in.
+  var mediaEffects = ctx.summary ? (ctx.summary.mediaEffects || ctx.summary.carriedMediaEffects) : null;
   var pools = mediaEffects ? mediaEffects.eventPools : null;
   if (!pools) return null;
 
@@ -1355,7 +1386,7 @@ function getMediaInfluencedEvent_(ctx) {
  */
 function getMediaEventModifier_(ctx, eventCategory) {
   // Defensive check for optional chaining replacement
-  var effects = (ctx.summary && ctx.summary.mediaEffects) ? ctx.summary.mediaEffects : null;
+  var effects = ctx.summary ? (ctx.summary.mediaEffects || ctx.summary.carriedMediaEffects || null) : null; // G-EC59
   var cal = ctx.mediaCalendarContext || {};
   if (!effects) return 1.0;
 

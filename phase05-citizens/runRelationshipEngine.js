@@ -555,7 +555,7 @@ function runRelationshipEngine_(ctx) {
       }
 
       // Check for Media Event Tag
-      var mediaEffects = ctx.summary.mediaEffects;
+      var mediaEffects = ctx.summary.mediaEffects || ctx.summary.carriedMediaEffects; // G-EC59: last week's paper at Phase 5
       if (mediaEffects && mediaEffects.eventPools) {
         var allMediaEvents = [].concat(
           mediaEffects.eventPools.anxious || [],

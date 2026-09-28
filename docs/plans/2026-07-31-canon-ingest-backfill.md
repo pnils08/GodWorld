@@ -66,4 +66,4 @@ re-run reports present 125 / missing 0 (idempotent); a probe search returns the 
 `sweepCanonIngest.js --apply` as a weekly cron so new files dropped in those Drive folders become canon without a
 session — needs the builder's go (the plan's own gate). Known follow-ups outside T2: `ingestEditionWiki.js` and
 `ingestCivicWiki.js` write bay-tribune with no customId (reruns duplicate).
-
+- 2026-09-28 (engine-sheet S502) — T4 live on the builder's go: crontab `30 17 * * 6 … sweepCanonIngest.js --apply >> logs/canon-sweep.log`, after the 16:00 Saturday run.

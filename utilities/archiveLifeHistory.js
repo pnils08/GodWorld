@@ -77,9 +77,44 @@ function maintainLifeHistoryLog_(ctx) {
   if (!ctx || !ctx.ss) return;
   var logSheet = ctx.ss.getSheetByName('LifeHistory_Log');
   if (!logSheet) return;
+  stampLifeHistorySimClock_(ctx, logSheet);
   // Cheap gate — one getLastRow call most cycles, then return.
   if (logSheet.getLastRow() - 1 <= CYCLE_TRIGGER_ROWS) return;
   runArchive_(false, { ss: ctx.ss, retainCycles: CYCLE_RETAIN_CYCLES });
+}
+
+/**
+ * G-EC71 (builder 2026-09-28, all sim clock): this Cycle's life lines carry the
+ * in-world stamp in Timestamp, never a real date. Many writers append direct in
+ * Phase 5 with ctx.now; this Phase-11 pass (after every writer) rewrites column A
+ * of this Cycle's rows whose Timestamp is a Date or date-shaped string. Reads only
+ * the tail (this Cycle's rows are the newest); one column write when anything changes.
+ */
+var LIFE_STAMP_TAIL_ROWS = 8000;
+function stampLifeHistorySimClock_(ctx, logSheet) {
+  var S = ctx.summary || {};
+  var cycle = Number(S.cycleId || (ctx.config && ctx.config.cycleCount) || 0);
+  if (!(cycle > 0) || typeof inWorldStamp_ !== 'function') return 0;
+  var last = logSheet.getLastRow();
+  if (last < 2) return 0;
+  var head = logSheet.getRange(1, 1, 1, logSheet.getLastColumn()).getValues()[0];
+  var iCycle = head.indexOf('Cycle');
+  if (iCycle < 0) return 0;
+  var n = Math.min(LIFE_STAMP_TAIL_ROWS, last - 1);
+  var start = last - n + 1;
+  var tsCol = logSheet.getRange(start, 1, n, 1).getValues();
+  var cyCol = logSheet.getRange(start, iCycle + 1, n, 1).getValues();
+  var stamp = inWorldStamp_(ctx), changed = 0;
+  for (var r = 0; r < n; r++) {
+    if (Number(cyCol[r][0]) !== cycle) continue;
+    var v = tsCol[r][0];
+    var t = String(v == null ? '' : v).trim();
+    var wall = (v instanceof Date) || Object.prototype.toString.call(v) === '[object Date]' ||
+      /^\d{1,2}\/\d{1,2}\/\d{2,4}/.test(t) || /^\d{4}-\d{2}-\d{2}/.test(t);
+    if (wall) { tsCol[r][0] = stamp; changed++; }
+  }
+  if (changed) logSheet.getRange(start, 1, n, 1).setValues(tsCol); // Phase-11 direct write (same carve-out as the trim)
+  return changed;
 }
 
 // ============================================================================

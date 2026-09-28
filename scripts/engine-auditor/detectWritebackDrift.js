@@ -4,15 +4,8 @@
  * not firing.
  */
 
-const VERSION = '1.1.0';
+const VERSION = '1.2.0';
 
-// S216 engine.13 — Civic_Office_Ledger contains 999 rows including DA-01,
-// PD-01, STAFF-COS, STAFF-DM-* etc. updateCivicApprovalRatings.js only
-// processes officeIds matching ^COUNCIL or ^MAYOR (see phase05-citizens
-// approval-engine filter). Counting flat approvals across the full 999-row
-// universe over-flags 990+ "unchanged" rows that the engine never touches by
-// design. Filter the detector to the same universe the engine writes.
-const APPROVAL_OFFICE_PATTERN = /^(COUNCIL|MAYOR)/i;
 
 function num(v) {
   if (v == null || v === '') return null;
@@ -24,14 +17,12 @@ function detect(ctx) {
   const { cycle, snapshot, prior } = ctx;
   const coverage = snapshot.Edition_Coverage_Ratings || [];
   const nbhd = snapshot.Neighborhood_Map || [];
-  const council = snapshot.Civic_Office_Ledger || [];
 
   const lastCovered = coverage.filter(c => parseInt(c.Cycle, 10) === cycle - 1);
   if (lastCovered.length === 0) return [];
 
   const priorAudit = prior.find(p => p.cycle === cycle - 1);
   const priorNbhdSnap = priorAudit && priorAudit.snapshots && priorAudit.snapshots.Neighborhood_Map;
-  const priorCouncil = priorAudit && priorAudit.snapshots && priorAudit.snapshots.Civic_Office_Ledger;
 
   const out = [];
 
@@ -65,37 +56,10 @@ function detect(ctx) {
     }
   }
 
-  if (priorCouncil && priorCouncil.length > 0) {
-    const priorById = new Map(priorCouncil.map(r => [r.OfficeId || r.PopId, r]));
-    const flat = [];
-    for (const c of council) {
-      const key = c.OfficeId || c.PopId;
-      if (!key) continue;
-      // S216 engine.13: skip non-elected rows (DA, PD, STAFF) — engine doesn't
-      // recompute their approval, so "flat" is correct expected behavior, not
-      // writeback drift.
-      if (!APPROVAL_OFFICE_PATTERN.test(key)) continue;
-      const prev = priorById.get(key);
-      if (!prev) continue;
-      const a1 = num(c.Approval), a0 = num(prev.Approval);
-      if (a1 != null && a0 != null && a1 === a0) flat.push(key);
-    }
-    if (flat.length >= 7) {
-      out.push({
-        type: 'writeback-drift',
-        severity: 'medium',
-        cyclesInState: 1,
-        affectedEntities: { citizens: [], neighborhoods: [], initiatives: [], councilSeats: flat },
-        evidence: {
-          sheet: 'Civic_Office_Ledger',
-          rows: [],
-          fields: { flatApprovalCount: flat.length },
-        },
-        description: `${flat.length} council approvals unchanged from last cycle despite edition coverage`,
-        detectorVersion: VERSION,
-      });
-    }
-  }
+  // engine.266 / G-EC61: the flat-council-approval check is retired. It predates
+  // the engine.213 approval level model, where a seat holds its district level
+  // and moves only on events — a flat approval week is the model working, and
+  // the check read that as writeback drift every cycle (C109: 8 seats).
 
   return out;
 }

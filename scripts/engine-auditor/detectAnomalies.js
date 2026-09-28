@@ -7,13 +7,23 @@
  *   - citizen income Δ > 50% (from prior audit's citizenIncomes map)
  *   - crime metric > 3σ from rolling mean (needs ≥3 prior audit snapshots)
  *   - council approval Δ > 20pts
- *   - neighborhood migration shift > 30pts (proxy for population shift —
+ *   - neighborhood migration shift: |Δ| an outlier vs the city's hood deltas (engine.266) (proxy for population shift —
  *     Neighborhood_Map has no Population column)
  *
  * Emits type: 'anomaly' patterns with historicalContext, triagePath, confidence.
  */
 
-const VERSION = '1.0.0';
+const VERSION = '1.1.0';
+
+const MIGRATION_SHIFT_MIN_STEPS = 3; // a 3-step swing on the −5..+5 scale is the floor for "sudden"
+
+// Outlier band over this cycle's hood |Δ MigrationFlow| — mean + 2σ, never below the floor.
+function migrationShiftBand(deltas) {
+  if (!deltas.length) return Infinity;
+  const mean = deltas.reduce((a, b) => a + b, 0) / deltas.length;
+  const sd = Math.sqrt(deltas.reduce((a, b) => a + (b - mean) * (b - mean), 0) / deltas.length);
+  return Math.max(MIGRATION_SHIFT_MIN_STEPS, mean + 2 * sd);
+}
 
 function num(v) {
   if (v == null || v === '') return null;
@@ -213,16 +223,26 @@ function detect(ctx) {
     });
   }
 
-  // --- Migration shift > 30pts (population-shift proxy) ---
+  // --- Migration shift (population-shift proxy) ---
+  // engine.266 / G-EC61: MigrationFlow is a small integer (−5..+5) that moves
+  // 1–5 a week; the old absolute ">= 0.3" fired on 19 of 22 hoods every cycle
+  // (C109). SIM_DOCTRINE §15: band relative to the city's own middle — a hood
+  // flags only when its |Δ| is an outlier against this cycle's hood deltas
+  // (mean + 2σ) AND spans at least MIGRATION_SHIFT_MIN_STEPS of the scale.
   if (priorAudit && priorAudit.snapshots && priorAudit.snapshots.Neighborhood_Map) {
     const priorNbhd = new Map(priorAudit.snapshots.Neighborhood_Map.map(r => [r.Neighborhood, r]));
     const nbhd = snapshot.Neighborhood_Map || [];
+    const pairs = [];
     for (const n of nbhd) {
       const prev = priorNbhd.get(n.Neighborhood);
       if (!prev) continue;
       const m1 = num(n.MigrationFlow), m0 = num(prev.MigrationFlow);
       if (m1 == null || m0 == null) continue;
-      if (Math.abs(m1 - m0) >= 0.3) {
+      pairs.push({ n, m0, m1, d: Math.abs(m1 - m0) });
+    }
+    const band = migrationShiftBand(pairs.map(p => p.d));
+    for (const { n, m0, m1, d } of pairs) {
+      if (d >= band) {
         out.push({
           type: 'anomaly',
           severity: 'medium',
@@ -237,6 +257,7 @@ function detect(ctx) {
               currentMigrationFlow: m1,
               delta: (m1 - m0).toFixed(2),
               subCheck: 'migration-shift',
+              band: Number(band.toFixed(2)),
             },
           },
           description: `${n.Neighborhood} migration flow shifted ${m0} → ${m1}`,
@@ -252,4 +273,4 @@ function detect(ctx) {
   return out;
 }
 
-module.exports = { detect, version: VERSION };
+module.exports = { detect, version: VERSION, migrationShiftBand };

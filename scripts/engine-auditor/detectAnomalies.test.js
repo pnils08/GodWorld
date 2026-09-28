@@ -97,20 +97,30 @@ console.log('\nTest 4: crime outlier 3σ from 6-cycle mean');
   assert('severity high (|z| >= 4)', crime && crime.severity === 'high', crime && crime.severity);
 }
 
-console.log('\nTest 5: migration shift > 0.3');
+console.log('\nTest 5: migration shift — outlier vs the city\'s own hood deltas (engine.266)');
 {
+  // 22 hoods drifting 0–2 steps (the weekly norm), one swinging 5 steps.
+  const names = Array.from({ length: 22 }, (_, i) => 'H' + i);
+  const prevFlow = names.map((_, i) => i % 3);
+  const curFlow = names.map((_, i) => (i === 7 ? prevFlow[i] - 5 : (i % 3) + (i % 2)));
   const ctx = {
     cycle: 93,
     snapshot: {
       Simulation_Ledger: [], Civic_Office_Ledger: [], Crime_Metrics: [],
-      Neighborhood_Map: [{ Neighborhood: 'Fruitvale', MigrationFlow: -0.4 }],
+      Neighborhood_Map: names.map((n, i) => ({ Neighborhood: n, MigrationFlow: curFlow[i] })),
     },
-    prior: [{ cycle: 92, snapshots: { Neighborhood_Map: [{ Neighborhood: 'Fruitvale', MigrationFlow: 0.05 }] } }],
+    prior: [{ cycle: 92, snapshots: { Neighborhood_Map: names.map((n, i) => ({ Neighborhood: n, MigrationFlow: prevFlow[i] })) } }],
   };
-  const found = detector.detect(ctx);
-  const mig = found.find(f => f.evidence.fields.subCheck === 'migration-shift');
-  assert('migration shift emitted', !!mig);
-  assert('delta = -0.45', mig && parseFloat(mig.evidence.fields.delta) === -0.45);
+  const mig = detector.detect(ctx).filter(f => f.evidence.fields.subCheck === 'migration-shift');
+  assert('only the outlier hood flags', mig.length === 1 && mig[0].evidence.fields.Neighborhood === 'H7');
+  assert('delta = -5', mig[0] && parseFloat(mig[0].evidence.fields.delta) === -5);
+  assert('band never below the 3-step floor', detector.migrationShiftBand([0, 0, 0, 1]) === 3);
+  // the C109 shape: a sub-step move on a quiet city is not "sudden"
+  const quiet = detector.detect(Object.assign({}, ctx, {
+    snapshot: Object.assign({}, ctx.snapshot, { Neighborhood_Map: [{ Neighborhood: 'Fruitvale', MigrationFlow: -0.4 }] }),
+    prior: [{ cycle: 92, snapshots: { Neighborhood_Map: [{ Neighborhood: 'Fruitvale', MigrationFlow: 0.05 }] } }],
+  })).filter(f => f.evidence.fields.subCheck === 'migration-shift');
+  assert('a 0.45 move no longer flags', quiet.length === 0);
 }
 
 console.log('\nTest 6: crime outlier with < 3 priors → skipped');

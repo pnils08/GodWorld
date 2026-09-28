@@ -1,85 +1,38 @@
 #!/usr/bin/env node
 /**
- * buildDeskPackets.js v2.3
+ * buildDeskPackets.js v3.0 (S502, research-build)
  *
- * Pulls live data from Google Sheets and splits into per-desk JSON packets
- * for independent agent processing in the Media Room.
+ * Pulls the handful of live sheets that still feed base_context.json /
+ * truesource_reference.json / citizen_archive.json — the only three of this
+ * script's outputs anything still reads (buildWorldState.js's canon fold,
+ * the citizen-loop via lib/mags.js + lib/wakePerception.js, the dashboard,
+ * cron-civic-run.js). Run as run-cycle Step 5.8 and post-publish Step 5b.
  *
- * v2.3 Changes:
- * - Extended evening context parser to read 4 new Cycle_Packet sections:
- *   EVENING CITY (nightlife spots, restaurants, crowds, safety, vibe)
- *   CRIME SNAPSHOT (city-wide crime rates, hotspots, patrol strategy)
- *   TRANSIT (BART ridership, on-time, traffic index, alerts)
- *   CIVIC LOAD (load level, factors, story hooks)
- * - These give desk agents access to the living city, not just policy numbers
- *
- * v2.2 Changes:
- * - Evening Context — pulls Media_Ledger + Cycle_Packet data into desk packets.
- *   Culture and business desks get nightlife, food scene, media climate, weather mood.
- * - Civic Events — parses civic mode events from LifeHistory_Log for civic desk.
- * - Arc enrichment — adds involved citizens from LifeHistory_Log arc-tagged entries.
- *
- * v1.9 Changes:
- * - Voice Cards — parses TraitProfile from Simulation_Ledger into agent-friendly
- *   personality objects (archetype, modifiers, traits, topTags, motifs).
- *   Added to both full packets and summary files as voiceCards field.
- *
- * v1.8 Changes:
- * - Auto-runs buildArchiveContext.js after packet generation — queries Supermemory
- *   for past coverage and writes per-desk archive files. Skips gracefully if
- *   SUPERMEMORY_CC_API_KEY is not configured. Eliminates forgotten-step pipeline gap.
- *
- * v1.7 Changes:
- * - Executive Branch canon — pulls mayor and deputy mayor from Civic_Office_Ledger
- *   into canon.executiveBranch. Agents and Rhea now have canonical mayor name.
- * - TrueSource Reference — generates truesource_reference.json alongside base_context.
- *   Compact verification file with roster positions, council factions, mayor, initiatives.
- *   Used by Rhea Morgan for cross-checking article claims.
- *
- * v1.5 Changes:
- * - Sports Feed Digest — parses raw feed entries into structured intelligence:
- *   game results, roster moves, player features, front office, fan/civic, editorial notes
- * - Supports both new EventType taxonomy and legacy freeform entries (auto-inferred)
- * - Cross-references feed entries with active storylines for related arcs
- * - Derives team momentum from record + streak + player moods
- * - sportsFeedDigest object added to desk packets and summaries
- *
- * v1.4 Changes:
- * - Story Connections enrichment layer — cross-references data silos at read time:
- *   1. Event-Citizen Links: world events → named citizens in that neighborhood
- *   2. Civic Consequences: initiative outcomes → affected neighborhoods → citizens
- *   3. Citizen Bond Map: per-citizen relationship bonds for story depth
- *   4. Coverage Echo: citizens from previous edition flagged as recently covered
- *   5. Citizen Life Context: last 3 LifeHistory entries per desk citizen
- * - Neighborhood Citizen Index: one-time build maps neighborhoods → named citizens
- * - Fixed variable ordering bug: deskCanon + deskQuotes now defined before
- *   getCitizenNamesFromDeskData (were previously undefined at call site)
- * - storyConnections object added to each desk packet and summary
- *
- * v1.3 Changes:
- * - Household data (Household_Ledger), relationship bonds (Relationship_Bonds),
- *   economic context (World_Population) wired into desk packets
+ * v3.0 — the per-desk packet generator (9 desk JSONs, up to ~1.3MB each,
+ * every cycle) was cut. It fed 6 autonomous desk agents through /write-edition,
+ * a pipeline frozen since S313 and archived since — not in the live skill set,
+ * confirmed no live caller anywhere (crontab, cron-desk-run.js's beat-slice
+ * fanout, or any current skill). Traced every remaining base_context/
+ * truesource/citizen_archive consumer before cutting; full trace in
+ * docs/plans/2026-09-07-beat-slices-from-sheets-plan.md and the S502 commits.
+ * Prior version history (v1.3-v2.3) is in git log, not repeated here — it
+ * described features of the removed per-desk generator.
  *
  * Usage: node scripts/buildDeskPackets.js [cycleNumber]
  *   e.g. node scripts/buildDeskPackets.js 79
  *
  * Reads from Google Sheets:
- *   Story_Seed_Deck, Story_Hook_Deck, WorldEvents_V3_Ledger, Event_Arc_Ledger,
- *   Civic_Office_Ledger, Initiative_Tracker, Simulation_Ledger,
- *   Cultural_Ledger, Oakland_Sports_Feed,
- *   Storyline_Tracker, Cycle_Packet, LifeHistory_Log,
- *   Household_Ledger, Relationship_Bonds, World_Population, Media_Ledger
+ *   WorldEvents_V3_Ledger, Civic_Office_Ledger, Initiative_Tracker,
+ *   Simulation_Ledger, Household_Ledger, Relationship_Bonds,
+ *   World_Population, Simulation_Calendar, Neighborhood_Map, Business_Ledger
  *
  * Reads locally:
- *   /tmp/mara_directive_c{XX}.txt
- *   schemas/bay_tribune_roster.json
- *   editions/cycle_pulse_edition_{XX-1}.txt
+ *   docs/media/ARTICLE_INDEX_BY_POPID.md (POPID index → citizen_archive.json)
  *
  * Writes:
- *   /tmp/desk_packets/{desk}_c{XX}.json  (one per desk)
- *   /tmp/desk_packets/base_context.json
- *   /tmp/desk_packets/truesource_reference.json
- *   /tmp/desk_packets/manifest.json
+ *   output/desk-packets/base_context.json
+ *   output/desk-packets/truesource_reference.json
+ *   output/desk-packets/citizen_archive.json
  */
 
 const fs = require('fs');
@@ -2096,112 +2049,40 @@ async function main() {
       return [];
     });
   }
-  // engine.108 — Generic_Citizens read RESTORED, as a bounded fallback.
-  //
-  // S205 dropped this read ("SL is single source"), and at the time that was
-  // correct: GC was no-grow legacy and the read fed nothing but a console.log.
-  // S320 then reactivated GC as the Tier-5 waiting room AND the intake entry —
-  // but restored only the entry, never the read. The two rulings are each right
-  // alone and together they closed a loop: a Tier-5 could not be surfaced in a
-  // packet, so could not be covered, so coverage could never tick EmergenceCount.
-  // Of the two documented promotion routes (marriage / media coverage), MEDIA
-  // COVERAGE COULD NOT FIRE AT ALL. Verified: all 88 non-zero EmergenceCounts in
-  // the live pool trace to processIntake_ bumping an operator-mentioned name; no
-  // promotion in the sim's history has been autonomous.
-  //
-  // This is NOT a blanket restore. S205's "SL is primary" still holds — generics
-  // surface ONLY in neighborhoods where no tracked citizen exists. See
-  // buildNeighborhoodCitizenIndex.
+  // S502 (research-build) — trimmed to the reads base_context.json/
+  // truesource_reference.json/citizen_archive.json actually need. The full
+  // per-desk packet generation (events/seeds/hooks routing, canon culturalEntities/
+  // reporters, sports/evening/storyline/hospital enrichment) was cut in the same
+  // change: traced every consumer first (dashboard, lib/mags.js, buildWorldState.js,
+  // cron-civic-run.js) and confirmed none of it had a live reader left — the
+  // pipeline that consumed it (6 desk agents -> /write-edition) is frozen/archived.
+  // See docs/plans/2026-09-07-beat-slices-from-sheets-plan.md for what replaced it.
   var [
-    seedsRaw, hooksRaw, eventsRaw, arcsRaw,
-    civicRaw, initiativeRaw, simRaw, genericRaw,
-    culturalRaw, oakSportsRaw,
-    storylineRaw, packetRaw, historyRaw,
+    eventsRaw, civicRaw, initiativeRaw, simRaw,
     householdRaw, bondsRaw, worldPopRaw, simCalRaw,
-    neighborhoodMapRaw, businessLedgerRaw, mediaLedgerRaw,
-    rileyRaw, hospitalRaw, mediaUsageRaw
+    neighborhoodMapRaw, businessLedgerRaw
   ] = await Promise.all([
-    safeGet('Story_Seed_Deck'),
-    safeGet('Story_Hook_Deck'),
     safeGet('WorldEvents_V3_Ledger'),
-    safeGet('Event_Arc_Ledger'),
     safeGet('Civic_Office_Ledger'),
     safeGet('Initiative_Tracker'),
     safeGet('Simulation_Ledger'),
-    safeGet('Generic_Citizens'),
-    safeGet('Cultural_Ledger'),
-    safeGet('Oakland_Sports_Feed'),
-    safeGet('Storyline_Ledger'),
-    safeGet('Cycle_Packet'),
-    safeGet('LifeHistory_Log'),
     safeGet('Household_Ledger'),
     safeGet('Relationship_Bonds'),
     safeGet('World_Population'),
     safeGet('Simulation_Calendar'),
     safeGet('Neighborhood_Map'),
-    safeGet('Business_Ledger'),
-    safeGet('Media_Ledger'),
-    safeGet('Riley_Digest'),
-    safeGet('Hospital_Ledger'), // engine.52 D1 — lazy-created tab, safeGet degrades to []
-    safeGet('Citizen_Media_Usage')
+    safeGet('Business_Ledger')
   ]);
 
   console.log('Sheets pulled in ' + (Date.now() - startTime) + 'ms');
 
   // ── Filter to current cycle where applicable ──
-  var seeds = filterByCycle(seedsRaw, CYCLE).filter(function(s) {
-    // Contract v4 rows (saveV3Seeds v4 / buildContractSeeds, S299-S301) carry
-    // What/Why/Desk instead of SeedText/Priority — no filler concept, keep all.
-    // Without this branch the old Priority>1 filter dropped EVERY contract row
-    // (no Priority column → parseInt('1')>1 false).
-    if (s.What !== undefined && s.Desk !== undefined) return true;
-    return parseInt(s.Priority || '1') > 1;  // Drop Priority 1 filler seeds (legacy schema)
-  });
-  var hooks = filterByCycle(hooksRaw, CYCLE);
+  // S502 (research-build): seeds/hooks/historicalEvents/arcs/hospitalBlock and
+  // the whole per-desk packet loop below them were cut — confirmed zero live
+  // readers left (the 6-desk-agent/write-edition pipeline they fed is frozen/
+  // archived; beat-slices replaced it). See docs/plans/2026-09-07-beat-slices-
+  // from-sheets-plan.md.
   var events = filterByCycle(eventsRaw, CYCLE);
-  // Press_Drafts removed S98 — draftsRaw no longer fetched
-  var prevDrafts = [];
-  var allDrafts = [];
-
-  // ── Pull historical events for anomaly detection baseline (last 10 cycles) ──
-  var historicalEvents = [];
-  var allEvents = allToObjects(eventsRaw);
-  for (var i = Math.max(1, CYCLE - 10); i < CYCLE; i++) {
-    var cycleEvents = allEvents.filter(function(e) {
-      return parseInt(e.Cycle || e.CycleId) === i;
-    });
-    historicalEvents = historicalEvents.concat(cycleEvents);
-  }
-  console.log('  Historical events (baseline):', historicalEvents.length);
-
-  // Arcs: get active (not resolved)
-  var allArcs = allToObjects(arcsRaw);
-  var arcs = allArcs.filter(function(a) {
-    return (a.Phase || '').toLowerCase() !== 'resolved' && a.ArcId;
-  });
-
-  // S256 — ARC FEED PULLED FROM DESK PACKETS (C97). The crisis-arc generator
-  // (generateCrisisBuckets) is not wired to the data it names: it reads ONE
-  // city-wide illnessRate, then picks the neighborhood by weighted dice and the
-  // subtype from a fixed pool — "HEALTH crisis: Flu Season Strain in Fruitvale"
-  // is fabricated specificity, not a measured signal. Feeding that to desks lets
-  // journalists write fiction off a real neighborhood's name. Three engine breaks
-  // compound it (spawner generateNewArcs_ deleted S185, phase03 spawn clobbered by
-  // phase08 ledger-reload, age dropped on load → 36 arcs frozen at peak since C81).
-  // Decision (Mike): remove now, do NOT restore the broken system — rebuild as a
-  // connected per-hood story signal (Neighborhood_Demographics Sick/Unemployed +
-  // Neighborhood_Map sentiment/crime + citizen linkage) as a deliberate post-C97
-  // build. RESTORE = delete the next line once the connected generator ships.
-  arcs = [];
-
-  // engine.52 D1 — the connected rebuild the S256 note above ordered, first
-  // half: hospital census measured from Hospital_Ledger (engine-written, real
-  // admissions with real protagonists), not fabricated crisis buckets. Emitted
-  // to civic + culture packets below. Arc system stays retired.
-  var hospitalBlock = buildHospitalBlock(allToObjects(hospitalRaw), CYCLE);
-  console.log('  Hospital block:', hospitalBlock
-    ? (hospitalBlock.census.inCare + ' in care, ' + hospitalBlock.recentOutcomes.length + ' recent outcomes')
-    : 'none (no Hospital_Ledger rows)');
 
   // Civic and initiatives (filter empty rows — sheet has 1000 rows, ~35 filled)
   var civicOfficers = allToObjects(civicRaw).filter(function(o) { return o.Title; });
@@ -2209,60 +2090,6 @@ async function main() {
 
   // Citizens
   var simLedger = allToObjects(simRaw);
-  // v2.0: Index simLedger by name for fast citizen lookups
-  var simLedgerByName = {};
-  // S407: the ledger adapter needs the reverse index — Storyline_Ledger keys
-  // citizens by POPID, and RelatedCitizens downstream is read as printable names
-  // (getCitizenNamesFromDeskData would otherwise harvest "POP-00168" as a person).
-  var simLedgerByPopid = {};
-  simLedger.forEach(function(c) {
-    var name = ((c.First || '') + ' ' + (c.Last || '')).trim();
-    if (name) simLedgerByName[name] = c;
-    var pid = String(c.POPID || '').trim();
-    if (pid && name) simLedgerByPopid[pid] = name;
-  });
-
-  var ledgerNameList = Object.keys(simLedgerByName);  // engine.245: the only names prose may yield
-  PROSE_KNOWN_NAMES = ledgerNameList.filter(function(n) { return n.indexOf(' ') > 0; });
-
-  // S205 Path B: genericCitizens var dropped — was only console.log'd, never used.
-
-  // Cultural
-  var culturalLedger = allToObjects(culturalRaw);
-
-  // Sports feeds: exact current Cycle for Oakland desk packets. Do not substitute
-  // historical events when the selected Cycle is empty.
-  var oakSports = sportsFeedContract.filterFeedRowsForCycle(allToObjects(oakSportsRaw), CYCLE);
-
-  // Storylines: open threads from Storyline_Ledger (S407).
-  //
-  // This read used to point at Storyline_Tracker, DISCONTINUED 2026-08-05 and
-  // superseded by the slim ledger the Saturday cron actually writes. Two things
-  // followed from that: the packets fed reporters from a tab nothing maintains,
-  // and Phase-8's `updateStorylineStatus_` had aged its last 9 open rows to
-  // `abandoned` — so the packets were about to carry no storylines at all.
-  //
-  // The ledger's shape is different by design (slug key, verb counts, derived
-  // dormancy, no Description column), so it is adapted here into the
-  // Tracker-shaped fields the three consumption sites downstream already read.
-  // The adapter is the only place that knows both shapes.
-  var storylines = normalizeStorylineLedger(allToObjects(storylineRaw), CYCLE, simLedgerByPopid);
-
-  var allHistory = allToObjects(historyRaw);
-
-  // Recent quotes — WAS LifeHistory_Log EventTag 'quoted', a write path the
-  // old media-room intake (phase07-evening-media/mediaRoomIntake.js) owned
-  // and nothing schedules anymore (confirmed: no cron entry, no live caller
-  // outside its own test). Zero live rows result. Live quote credit lands in
-  // Citizen_Media_Usage (cron-saturday-run.js stepSheets, UsageType 'quoted')
-  // instead — found + verified 2026-09-28 (engine-sheet handoff + rb trace).
-  // That tab tracks WHO was quoted and WHEN, not the quote text itself —
-  // usageRowsFor() computes a snippet only to feed the sentiment classifier,
-  // never persists it to a column. Downstream fields reflect that honestly.
-  var recentQuotes = allToObjects(mediaUsageRaw).filter(function(u) {
-    return (u.UsageType || '').toLowerCase() === 'quoted' &&
-           String(u.Cycle) === String(CYCLE);
-  });
 
   // Households: active + recently formed/dissolved this cycle
   var allHouseholds = allToObjects(householdRaw);
@@ -2302,66 +2129,6 @@ async function main() {
 
   // Business Ledger
   var businesses = allToObjects(businessLedgerRaw);
-  // v2.1: Index businesses by BIZ_ID for citizen employer lookups
-  var bizByIdMap = {};
-  businesses.forEach(function(b) {
-    var bid = (b.BIZ_ID || '').trim();
-    if (bid) bizByIdMap[bid] = b;
-  });
-
-  // v2.2: Media Ledger — evening media, nightlife, cultural activity
-  var allMedia = allToObjects(mediaLedgerRaw);
-  var cycleMedia = allMedia.filter(function(m) {
-    return String(m.Cycle) === String(CYCLE);
-  });
-  console.log('  Media Ledger entries (C' + CYCLE + '):', cycleMedia.length);
-
-  // v2.2: Parse Cycle_Packet for evening context (city dynamics, media climate)
-  var cyclePacketText = '';
-  var allPackets = allToObjects(packetRaw);
-  var currentPacket = allPackets.filter(function(p) {
-    return String(p.Cycle) === String(CYCLE);
-  });
-  if (currentPacket.length > 0) {
-    cyclePacketText = currentPacket[0].PacketText || '';
-  }
-  // engine.41 (S271) — Riley_Digest carries the full evening layer (TV lineup,
-  // famous people, city events, streaming, food, nightlife detail) that world_summary
-  // surfaces but desk packets never read. Pull the current-cycle row into eveningContext
-  // as ambient context. Plan: docs/plans/2026-06-24-engine-output-canon-coverage.md
-  var rileyRow = null;
-  var allRiley = allToObjects(rileyRaw);
-  var curRiley = allRiley.filter(function(r) { return String(r.Cycle) === String(CYCLE); });
-  if (curRiley.length > 0) rileyRow = curRiley[curRiley.length - 1];
-  var eveningContext = buildEveningContext(cycleMedia, cyclePacketText, rileyRow);
-  console.log('  Evening context:', eveningContext.nightlife ? 'populated' : 'empty',
-              '| Media entries:', (eveningContext.mediaEntries || []).length,
-              '| Dynamics:', eveningContext.cityDynamics ? 'yes' : 'no',
-              '| v3.9: hooks=' + (eveningContext.storyHooks || []).length,
-              'hoods=' + Object.keys(eveningContext.neighborhoodDynamics || {}).length,
-              'nhEcon=' + Object.keys(eveningContext.neighborhoodEconomies || {}).length,
-              'shock=' + (eveningContext.shockContext ? 'yes' : 'no'),
-              'migration=' + (eveningContext.migration ? 'yes' : 'no'),
-              'summary=' + (eveningContext.cycleSummary ? 'yes' : 'no'));
-
-  // v2.2: Civic events from LifeHistory_Log — CIVIC clock mode events this cycle
-  var civicEvents = allHistory.filter(function(h) {
-    return String(h.Cycle) === String(CYCLE) &&
-           ((h.Category || '').toUpperCase() === 'CIVIC' ||
-            (h.EventTag || '').toUpperCase() === 'CIVIC_MODE' ||
-            (h.NeighborhoodOrEngine || '').toUpperCase() === 'CIVIC_ENGINE');
-  });
-  console.log('  Civic events (C' + CYCLE + '):', civicEvents.length);
-
-  // v2.2: Arc-citizen links from LifeHistory_Log — find citizens mentioned in arc events
-  var arcCitizenMap = {};
-  allHistory.forEach(function(h) {
-    if (String(h.Cycle) === String(CYCLE) && h.Category === 'ARC' && h.POPID) {
-      var arcId = (h.EventTag || '').replace('ARC_', '');
-      if (!arcCitizenMap[arcId]) arcCitizenMap[arcId] = [];
-      arcCitizenMap[arcId].push({ popId: h.POPID, name: h.Name || '' });
-    }
-  });
 
   // Economic context from World_Population + Simulation_Ledger + Neighborhood_Map
   var economicContext = buildEconomicContext(worldPopRaw, simLedger, activeHouseholds, neighborhoodMap);
@@ -2383,18 +2150,10 @@ async function main() {
     .sort(function(a, b) { return b.employeeCount - a.employeeCount; });
 
   console.log('\nData counts:');
-  console.log('  Seeds (C' + CYCLE + '):', seeds.length);
-  console.log('  Hooks (C' + CYCLE + '):', hooks.length);
   console.log('  Events (C' + CYCLE + '):', events.length);
-  console.log('  Active Arcs:', arcs.length);
   console.log('  Civic Officers:', civicOfficers.length);
   console.log('  Initiatives:', initiatives.length);
   console.log('  Sim Ledger:', simLedger.length);
-  console.log('  Cultural Entities:', culturalLedger.length);
-  console.log('  Oakland Sports:', oakSports.length);
-  console.log('  Active Storylines:', storylines.length);
-  console.log('  Previous Drafts (C' + (CYCLE - 1) + '):', prevDrafts.length);
-  console.log('  Recent Quotes:', recentQuotes.length);
   console.log('  Active Households:', activeHouseholds.length);
   console.log('  Household Events (C' + CYCLE + '):', cycleHouseholdEvents.length);
   console.log('  Active Bonds (intensity>=3):', activeBonds.length);
@@ -2405,36 +2164,8 @@ async function main() {
               '| Businesses:', (economicContext.businessSnapshot || []).length);
 
   // ── Read local files ──
-  var maraText = '';
-  if (fs.existsSync(MARA_PATH)) {
-    maraText = fs.readFileSync(MARA_PATH, 'utf-8');
-    console.log('  Mara directive: loaded (' + maraText.length + ' chars)');
-  } else {
-    console.log('  Mara directive: not found at ' + MARA_PATH);
-  }
-
-  var roster = JSON.parse(fs.readFileSync(ROSTER_PATH, 'utf-8'));
-  console.log('  Roster: loaded');
-
-  var prevEdition = '';
-  if (fs.existsSync(PREV_EDITION_PATH)) {
-    prevEdition = fs.readFileSync(PREV_EDITION_PATH, 'utf-8');
-    console.log('  Previous edition: loaded (' + prevEdition.length + ' chars)');
-  }
-
   var popIdIndex = parsePopIdIndex(POPID_INDEX_PATH);
   console.log('  POPID index: ' + Object.keys(popIdIndex).length + ' citizens loaded');
-
-  // ── Build enrichment indexes (one-time, reused per desk) ──
-  var genericCitizens = allToObjects(genericRaw);
-  var neighborhoodCitizenIndex = buildNeighborhoodCitizenIndex(simLedger, genericCitizens);
-  var coverageEchoMap = buildCoverageEchoMap(prevEdition, simLedger);
-  var t5Hoods = Object.keys(neighborhoodCitizenIndex)
-    .filter(function(h) { return neighborhoodCitizenIndex[h].some(function(c) { return c.tier5; }); });
-  console.log('  Neighborhood citizen index:', Object.keys(neighborhoodCitizenIndex).length, 'neighborhoods mapped');
-  console.log('  Tier-5 fallback (engine.108): ' + t5Hoods.length + ' hood(s) with no tracked citizen surfaced generics' +
-    (t5Hoods.length ? ' — ' + t5Hoods.join(', ') : '') + ' [presence only, never quotable]');
-  console.log('  Coverage echo:', Object.keys(coverageEchoMap).length, 'citizens from previous edition');
 
   // ── Build base context ──
   // Calendar from Simulation_Calendar sheet — the simulation's own timeline.
@@ -2492,15 +2223,16 @@ async function main() {
   };
 
   // ── Build canon sections (shared data) ──
+  // S502: culturalEntities/reporters dropped — confirmed unread by
+  // buildWorldState.js's canon fold or any live base_context/truesource
+  // consumer (dashboard, lib/mags.js, cron-civic-run.js).
   var canon = {
     council: buildCouncil(civicOfficers),
     pendingVotes: buildPendingVotes(initiatives),
     statusAlerts: buildStatusAlerts(civicOfficers),
     recentOutcomes: buildRecentOutcomes(initiatives),
     executiveBranch: buildExecutiveBranch(civicOfficers),
-    asRoster: buildAsRoster(simLedger),
-    culturalEntities: buildCulturalEntitiesCanon(culturalLedger),
-    reporters: buildReporterList(roster)
+    asRoster: buildAsRoster(simLedger)
   };
 
   console.log('\nCanon built:');
@@ -2509,359 +2241,9 @@ async function main() {
   console.log('  Status alerts:', canon.statusAlerts.length);
   console.log('  Executive branch — Mayor:', canon.executiveBranch.mayor || '(not found)');
   console.log('  A\'s roster:', canon.asRoster.length);
-  console.log('  Cultural entities:', canon.culturalEntities.length);
-  console.log('  Reporters:', canon.reporters.length);
 
-  // ── Build per-desk packets ──
   fs.mkdirSync(OUTPUT_DIR, { recursive: true });
-  fs.mkdirSync(path.join(PROJECT_ROOT, 'output/desk-briefings'), { recursive: true });
 
-  var manifest = {
-    cycle: CYCLE,
-    generator: 'buildDeskPackets v1.7',
-    packets: []
-  };
-
-  for (var deskId in DESKS) {
-    var desk = DESKS[deskId];
-    console.log('\n--- Building ' + desk.name + ' ---');
-
-    // Filter events by domain
-    var deskEvents = desk.domains.indexOf('ALL') !== -1 ? events :
-      events.filter(function(e) {
-        var targetDesks = getDesksForDomain(e.Domain, e.EventDescription);
-        return targetDesks.indexOf(deskId) !== -1;
-      });
-
-    // Apply anomaly detection and priority scoring to events
-    deskEvents = detectAnomalies(deskEvents, historicalEvents);
-    deskEvents = flagTopPriority(deskEvents, 3);
-
-    // Filter seeds by domain
-    var deskSeeds = desk.domains.indexOf('ALL') !== -1 ? seeds :
-      seeds.filter(function(s) {
-        // Contract v4 rows carry their own desk routing in-sheet (T4 purpose)
-        // — the row says which desk it belongs to; no domain inference needed.
-        if (s.Desk !== undefined && s.What !== undefined) return s.Desk === deskId;
-        var targetDesks = getDesksForDomain(s.Domain, s.SeedText);
-        return targetDesks.indexOf(deskId) !== -1;
-      });
-
-    // Add priority scores to seeds
-    deskSeeds = addPriorityScores(deskSeeds, 0);
-    deskSeeds = flagTopPriority(deskSeeds, 3);
-
-    // Filter hooks by domain
-    var deskHooks = desk.domains.indexOf('ALL') !== -1 ? hooks :
-      hooks.filter(function(h) {
-        var targetDesks = getDesksForDomain(h.Domain, h.HookText);
-        return targetDesks.indexOf(deskId) !== -1;
-      });
-
-    // Add priority scores to hooks
-    deskHooks = addPriorityScores(deskHooks, 0);
-    deskHooks = flagTopPriority(deskHooks, 3);
-
-    // Filter arcs by domain
-    var deskArcs = desk.domains.indexOf('ALL') !== -1 ? arcs :
-      arcs.filter(function(a) {
-        var targetDesks = getDesksForDomain(a.DomainTag, a.Summary);
-        return targetDesks.indexOf(deskId) !== -1;
-      });
-
-    // Filter storylines by keywords, cap at 25 per desk (letters gets 30)
-    var maxStorylines = deskId === 'letters' ? 30 : 25;
-    var seenDescriptions = {};
-    var deskStorylines = storylines.filter(function(s) {
-      var desc = (s.Description || '').trim();
-      if (!desc || seenDescriptions[desc]) return false;
-      seenDescriptions[desc] = true;
-      return matchesStorylineKeywords(
-        desc + ' ' + (s.StorylineType || '') + ' ' + (s.Neighborhood || '') + ' ' + (s.RelatedCitizens || ''),
-        desk.storylineKeywords
-      );
-    }).slice(0, maxStorylines);
-
-    // Filter cultural entities
-    var deskCultural = filterCulturalByDomain(culturalLedger, desk.domains);
-
-    // Get reporters for this desk
-    var reporters = extractReportersForDesk(roster, desk.rosterDeskKeys);
-    var reporterNames = reporters.map(function(r) { return r.name; });
-
-    // Get interview candidates from neighborhoods in this desk's data
-    var neighborhoods = getDeskNeighborhoods(deskEvents, deskSeeds, deskArcs);
-    var candidates = getInterviewCandidates(simLedger, neighborhoods, bizByIdMap);
-
-    // Get previous coverage + full reporter history
-    var prevCoverage = extractPreviousCoverage(prevEdition, reporterNames);
-    var reporterHistory = buildReporterHistory(allDrafts, reporterNames);
-
-    // Build canon reference for this desk (must precede citizen name extraction)
-    var deskCanon = { reporters: canon.reporters };
-    for (var ci = 0; ci < desk.canonSections.length; ci++) {
-      var section = desk.canonSections[ci];
-      deskCanon[section] = canon[section];
-    }
-
-    // Recent quotes for this desk (must precede citizen name extraction).
-    // No quote-text field exists on Citizen_Media_Usage (see the source
-    // comment above) — match on CitizenName + Context (the source article's
-    // stem, which carries the desk slug) instead of the old EventNote/Name.
-    var deskQuotes = desk.domains.indexOf('ALL') !== -1 ? recentQuotes :
-      recentQuotes.filter(function(q) {
-        return matchesStorylineKeywords(
-          (q.CitizenName || '') + ' ' + (q.Context || ''),
-          desk.storylineKeywords
-        );
-      });
-
-    // Build citizen archive for this desk's relevant citizens
-    var deskCitizenNames = getCitizenNamesFromDeskData(deskEvents, deskSeeds, deskHooks, deskArcs, deskStorylines, candidates, deskQuotes, deskCanon, ledgerNameList);
-    var citizenArchive = buildCitizenArchive(popIdIndex, deskCitizenNames);
-
-    // Voice cards — parsed personality profiles for citizen dialogue (v1.9)
-    var voiceCards = buildVoiceCards(simLedger, deskCitizenNames);
-
-    // Build story connections enrichment (v1.4)
-    var storyConnections = buildStoryConnections(
-      deskEvents, deskCitizenNames, initiatives, activeBonds,
-      allHistory, neighborhoodCitizenIndex, coverageEchoMap, deskId
-    );
-
-    // Sports feeds
-    var deskSportsFeeds = null;
-    if (desk.getsSportsFeeds === 'oakland') deskSportsFeeds = oakSports;
-
-    // Sports feed digest (v1.6) — structured intelligence from raw feed, team-separated
-    var sportsFeedDigest = null;
-    if (desk.getsSportsFeeds === 'oakland') {
-      var oaklandTeams = sportsFeedContract.splitOaklandFeedEntries(oakSports);
-      sportsFeedDigest = {
-        as: buildSportsFeedDigest(oaklandTeams.as, deskStorylines, "A's"),
-        oaks: buildSportsFeedDigest(oaklandTeams.oaks, deskStorylines, 'Oaks'),
-        warnings: oaklandTeams.warnings
-      };
-    }
-
-    // Mara directive
-    var deskMara = desk.getsMara ? maraText : null;
-
-    // Assemble packet
-    var packet = {
-      meta: {
-        desk: deskId,
-        deskName: desk.name,
-        cycle: CYCLE,
-        generator: 'buildDeskPackets v2.2'
-      },
-      baseContext: baseContext,
-      deskBrief: {
-        name: desk.name,
-        coverageDomains: desk.domains,
-        articleBudget: desk.articleBudget,
-        note: 'You decide what to cover. No stories are pre-assigned.'
-      },
-      reporters: reporters,
-      events: deskEvents.map(function(e) {
-        return {
-          domain: e.Domain, severity: e.Severity, neighborhood: e.Neighborhood,
-          description: e.EventDescription, type: e.EventType,
-          healthFlag: e.HealthFlag, civicFlag: e.CivicFlag,
-          shockFlag: e.ShockFlag, sentimentShift: e.SentimentShift,
-          variance: e.variance || 0,
-          anomalyFlag: e.anomalyFlag || 'NORMAL',
-          priorityScore: e.priorityScore || 0,
-          priority: e.priority || false
-        };
-      }),
-      seeds: deskSeeds.map(function(s) {
-        // Contract v4 seed → packet shape. The contract row directs nothing
-        // (no voice/angle/byline by design) — it says what happened, to whom,
-        // and why; the desk searches canon and writes. Class major/texture
-        // maps onto the numeric priority scale so downstream sorts hold.
-        if (s.What !== undefined && s.Desk !== undefined) {
-          return {
-            seedType: 'contract-' + (s.Class || 'texture'),
-            domain: s.Domain, neighborhood: s.Neighborhood,
-            priority: (s.Class === 'major') ? 5 : 2,
-            text: s.What,
-            why: s.Why || '',
-            citizens: s.Citizens || '',
-            citizenEvents: s.CitizenEvents || '',
-            businesses: s.Businesses || '',
-            otherEntities: s.OtherEntities || '',
-            magnitude: (s.Magnitude === '' || s.Magnitude === undefined) ? null : s.Magnitude,
-            trend: s.Trend || '',
-            priorityScore: s.priorityScore || 0,
-            autoPriority: s.priority || false
-          };
-        }
-        return {
-          seedType: s.SeedType, domain: s.Domain, neighborhood: s.Neighborhood,
-          priority: parseInt(s.Priority || '1'), text: s.SeedText,
-          themes: s.themes || '',
-          suggestedJournalist: s.SuggestedJournalist || s.suggestedJournalist || '',
-          suggestedAngle: s.SuggestedAngle || s.suggestedAngle || '',
-          voiceGuidance: s.VoiceGuidance || s.voiceGuidance || '',
-          matchConfidence: s.MatchConfidence || s.matchConfidence || '',
-          priorityScore: s.priorityScore || 0,
-          autoPriority: s.priority || false
-        };
-      }),
-      hooks: deskHooks.map(function(h) {
-        return {
-          hookType: h.HookType, domain: h.Domain, neighborhood: h.Neighborhood,
-          priority: parseInt(h.Priority || '1'), text: h.HookText,
-          suggestedDesks: h.SuggestedDesks || '',
-          themes: h.themes || '',
-          suggestedJournalist: h.SuggestedJournalist || h.suggestedJournalist || '',
-          suggestedAngle: h.SuggestedAngle || h.suggestedAngle || '',
-          voiceGuidance: h.VoiceGuidance || h.voiceGuidance || '',
-          matchConfidence: h.MatchConfidence || h.matchConfidence || '',
-          priorityScore: h.priorityScore || 0,
-          autoPriority: h.priority || false
-        };
-      }),
-      arcs: deskArcs.map(function(a) {
-        var citizens = arcCitizenMap[a.ArcId] || [];
-        return {
-          arcId: a.ArcId, domain: a.DomainTag, phase: a.Phase,
-          tension: a.Tension, neighborhood: a.Neighborhood,
-          summary: a.Summary, arcAge: a.ArcAge,
-          involvedCitizens: citizens
-        };
-      }),
-      // engine.52 D1 — measured hospital census with linked citizen rows,
-      // civic + culture desks only (the S256 connected-signal rebuild).
-      hospital: (deskId === 'civic' || deskId === 'culture') ? hospitalBlock : null,
-      storylines: deskStorylines.map(function(s) {
-        return {
-          type: s.StorylineType || '', description: s.Description || '',
-          status: s.Status || '', neighborhood: s.Neighborhood || '',
-          relatedCitizens: s.RelatedCitizens || '',
-          cycleAdded: s.CycleAdded || '', priority: s.Priority || '',
-          // S407 ledger-native: what the thread has actually done, verbatim.
-          slug: s.StorylineId || '', lastMentionedCycle: s.LastMentionedCycle || '',
-          advanced: s.advanced || 0, opened: s.opened || 0,
-          referenced: s.referenced || 0, articles: s.articles || 0
-        };
-      }),
-      culturalEntities: deskCultural.map(function(e) {
-        return {
-          name: e.Name, roleType: e.RoleType, domain: e.CulturalDomain,
-          fameScore: parseInt(e.FameScore || '0'), neighborhood: e.Neighborhood || '',
-          status: e.Status
-        };
-      }),
-      interviewCandidates: candidates.slice(0, INTERVIEW_CANDIDATE_CAP),
-      interviewCandidatesFullCount: candidates.length,
-      canonReference: deskCanon,
-      sportsFeeds: deskSportsFeeds,
-      sportsFeedDigest: sportsFeedDigest,
-      maraDirective: deskMara,
-      previousCoverage: prevCoverage,
-      reporterHistory: reporterHistory,
-      citizenArchive: citizenArchive,
-      // v1.9: Voice cards — personality profiles for citizen dialogue
-      voiceCards: voiceCards,
-      // No verbatim quote text is stored anywhere on Citizen_Media_Usage —
-      // this is a who-was-quoted-when rotation signal (so a desk doesn't
-      // lean on the same three voices every cycle), not a quote archive.
-      // Reporters get actual quotable material from citizenArchive/voiceCards.
-      recentQuotes: deskQuotes.map(function(q) {
-        return { name: q.CitizenName || '', reporter: q.Reporter || '', cycle: q.Cycle || '' };
-      }),
-      // Task 1: Household data
-      households: formatHouseholdsForPacket(
-        filterHouseholdsForDesk(activeHouseholds, neighborhoods, desk.domains)
-      ),
-      householdEvents: formatHouseholdsForPacket(
-        filterHouseholdsForDesk(cycleHouseholdEvents, neighborhoods, desk.domains)
-      ),
-      // Task 2: Economic context
-      economicContext: economicContext,
-      // Task 3: Relationship bonds
-      bonds: formatBondsForPacket(
-        filterBondsForDesk(activeBonds, deskCitizenNames, neighborhoods, desk.domains)
-      ),
-      // v1.4: Story connections enrichment — cross-referenced data for editorial coherence
-      storyConnections: storyConnections,
-      // v2.2: Evening context — nightlife, food, media climate, weather mood
-      eveningContext: eveningContext,
-      // v2.2: Civic events — CIVIC clock mode actions from LifeHistory_Log
-      civicEvents: (deskId === 'civic' || deskId === 'letters') ? civicEvents.map(function(h) {
-        return {
-          popId: h.POPID || '', name: h.Name || '',
-          category: h.Category || '', tag: h.EventTag || '',
-          text: h.EventNote || h.Text || '',
-          neighborhood: h.NeighborhoodOrEngine || ''
-        };
-      }) : undefined
-    };
-
-    // Write packet
-    var filename = deskId + '_c' + CYCLE + '.json';
-    var filepath = path.join(OUTPUT_DIR, filename);
-    var jsonStr = JSON.stringify(packet, null, 2);
-    writeAndScanPacket(filepath, jsonStr);
-
-    // Generate desk summary (compact version for agent consumption)
-    var summary = generateDeskSummary(packet, deskId, CYCLE);
-    var summaryFilename = deskId + '_summary_c' + CYCLE + '.json';
-    var summaryFilepath = path.join(OUTPUT_DIR, summaryFilename);
-    var summaryStr = JSON.stringify(summary, null, 2);
-    writeAndScanPacket(summaryFilepath, summaryStr);
-
-    var packetSizeKB = Math.round(jsonStr.length / 1024 * 10) / 10;
-    var summarySizeKB = Math.round(summaryStr.length / 1024 * 10) / 10;
-
-    var stats = {
-      desk: deskId,
-      file: filename,
-      sizeKB: packetSizeKB,
-      summaryFile: summaryFilename,
-      summarySizeKB: summarySizeKB,
-      reporters: reporterNames,
-      events: deskEvents.length,
-      seeds: deskSeeds.length,
-      hooks: deskHooks.length,
-      arcs: deskArcs.length,
-      storylines: deskStorylines.length,
-      interviewCandidates: Math.min(candidates.length, INTERVIEW_CANDIDATE_CAP),
-      interviewCandidatesPool: candidates.length
-    };
-    manifest.packets.push(stats);
-
-    console.log('  Events:', deskEvents.length, '| Seeds:', deskSeeds.length,
-                '| Hooks:', deskHooks.length, '| Arcs:', deskArcs.length,
-                '| Storylines:', deskStorylines.length,
-                '| Households:', (packet.households || []).length,
-                '| Bonds:', (packet.bonds || []).length);
-    console.log('  Story connections:', storyConnections.enrichmentNote);
-    if (sportsFeedDigest) {
-      var digestParts = sportsFeedDigest.teamLabel
-        ? [sportsFeedDigest.digestNote]
-        : ['as', 'oaks'].filter(function(key) {
-          return sportsFeedDigest[key];
-        }).map(function(key) {
-          return sportsFeedDigest[key].digestNote;
-        });
-      var digestLabel = sportsFeedDigest.teamLabel || 'Oakland';
-      var digestNote = digestParts.filter(Boolean).join(' | ') || 'No exact-Cycle entries';
-      console.log('  Sports digest (' + digestLabel + '):', digestNote);
-    }
-    console.log('  Reporters:', reporterNames.join(', ') || '(citizen voices)');
-    var historyCount = Object.keys(reporterHistory).reduce(function(sum, k) { return sum + reporterHistory[k].length; }, 0);
-    console.log('  Reporter history:', Object.keys(reporterHistory).length, 'reporters,', historyCount, 'articles');
-    console.log('  Citizen archive:', Object.keys(citizenArchive).length, 'citizens matched (of', deskCitizenNames.length, 'extracted)');
-    console.log('  Voice cards:', Object.keys(voiceCards).length, 'citizens with personality profiles');
-    console.log('  Full packet:', packetSizeKB, 'KB →', filepath);
-    console.log('  Summary:', summarySizeKB, 'KB →', summaryFilepath);
-    if (packetSizeKB > 200) {
-      console.log('  WARNING: Packet exceeds 200KB — agents should use summary file.');
-    }
-  }
 
   // Write base context
   var baseFile = path.join(OUTPUT_DIR, 'base_context.json');
@@ -2922,59 +2304,6 @@ async function main() {
   var archiveFile = path.join(OUTPUT_DIR, 'citizen_archive.json');
   writeAndScanPacket(archiveFile, JSON.stringify(popIdIndex, null, 2));
   console.log('Citizen archive: ' + Object.keys(popIdIndex).length + ' citizens → ' + archiveFile);
-
-  // Add newsroom memory path to manifest
-  manifest.newsroomMemoryPath = path.join(PROJECT_ROOT, 'docs/mags-corliss/NEWSROOM_MEMORY.md');
-  manifest.deskBriefingsDir = path.join(PROJECT_ROOT, 'output/desk-briefings');
-
-  // Write manifest
-  var manifestFile = path.join(OUTPUT_DIR, 'manifest.json');
-  writeAndScanPacket(manifestFile, JSON.stringify(manifest, null, 2));
-
-  console.log('\n=== DESK PACKETS COMPLETE ===');
-  console.log('Output directory:', OUTPUT_DIR);
-  console.log('Packets generated:', manifest.packets.length);
-  console.log('\nManifest summary:');
-  manifest.packets.forEach(function(p) {
-    console.log('  ' + p.desk + ': ' + p.sizeKB + 'KB | ' +
-                p.events + ' events, ' + p.seeds + ' seeds, ' +
-                p.hooks + ' hooks, ' + p.storylines + ' storylines');
-  });
-
-  // ── Auto-run buildArchiveContext.js ──────────────────────────
-  // Queries Supermemory for past coverage relevant to this cycle's
-  // desk packets. Writes per-desk archive context files that Mags
-  // weaves into briefings. Skips gracefully if API key is missing.
-  var archiveScript = path.join(__dirname, 'buildArchiveContext.js');
-  if (fs.existsSync(archiveScript)) {
-    var hasApiKey = !!(process.env.SUPERMEMORY_CC_API_KEY);
-    if (!hasApiKey) {
-      // Check .env file directly
-      var envPath = process.env.GODWORLD_ENV_FILE || '/root/.config/godworld/.env';
-      if (fs.existsSync(envPath)) {
-        var envContent = fs.readFileSync(envPath, 'utf-8');
-        hasApiKey = /SUPERMEMORY_CC_API_KEY\s*=\s*.+/.test(envContent);
-      }
-    }
-
-    if (hasApiKey) {
-      console.log('\n=== BUILDING ARCHIVE CONTEXT ===');
-      console.log('Running buildArchiveContext.js for Cycle ' + CYCLE + '...');
-      try {
-        var { execSync } = require('child_process');
-        execSync('node ' + archiveScript + ' ' + CYCLE, {
-          stdio: 'inherit',
-          cwd: path.join(__dirname, '..')
-        });
-      } catch (archiveErr) {
-        console.warn('[WARN] Archive context build failed (non-fatal): ' + archiveErr.message);
-        console.warn('Run manually: node scripts/buildArchiveContext.js ' + CYCLE);
-      }
-    } else {
-      console.log('\n[INFO] Skipping archive context — SUPERMEMORY_CC_API_KEY not configured');
-      console.log('Run manually: node scripts/buildArchiveContext.js ' + CYCLE);
-    }
-  }
 
   console.log('\n=== ALL DONE ===');
 }

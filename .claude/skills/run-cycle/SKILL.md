@@ -154,7 +154,7 @@ node scripts/buildInitiativePackets.js {XX}
 
 ### Step 5.8: Desk packets + base_context refresh (S311)
 
-Rebuild `output/desk-packets/base_context.json` + the 9 desk packets at cycle time. Before S311 this only fired at post-publish Step 5b, so every cycle-run left base_context stale (Discord bot's `lib/mags.js loadWorldState()` reported the prior cycle, and /write-edition desks read prior-cycle packets) until the next edition published. Same gap-shape G-PREP1 closed for initiative packets at Step 5.7.
+Rebuild `output/desk-packets/base_context.json` + `truesource_reference.json` + `citizen_archive.json` at cycle time. Before S311 this only fired at post-publish Step 5b, so every cycle-run left base_context stale (Discord bot's `lib/mags.js loadWorldState()` reported the prior cycle) until the next edition published. Same gap-shape G-PREP1 closed for initiative packets at Step 5.7. **S502 (research-build):** the script no longer generates the 9 per-desk packet JSONs (`{desk}_c{XX}.json`) — that fed the 6-desk-agent `/write-edition` pipeline, frozen since S313 and archived; confirmed no live reader anywhere. These three files are the only outputs anything still reads (buildWorldState.js's canon fold, the citizen-loop, the dashboard, cron-civic-run.js).
 
 ```bash
 node scripts/buildDeskPackets.js {XX}

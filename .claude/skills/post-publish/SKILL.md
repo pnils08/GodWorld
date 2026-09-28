@@ -314,11 +314,11 @@ Where `XXXXX:YYYYY` is the min/max of appended POPIDs. The `--popid-range` flag 
 
 **Pre-T6 caveat (canon.3 plan):** until engine-sheet T6 ships the Errors-gate non-zero exit on `buildCitizenCards.js`, this substep can silent-partial-fail the same way Step 2a can. Production log Step 12 must log the appended POPID list + the substep's stdout summary so operator can manually inspect.
 
-### Step 5b: Refresh `base_context.json` + desk packets (all types)
+### Step 5b: Refresh `base_context.json` + truesource + citizen archive (all types)
 ```bash
 node scripts/buildDeskPackets.js <XX>
 ```
-Rebuilds `output/desk-packets/base_context.json` (the cycle source-of-truth that `lib/mags.js loadWorldState()` reads for the Discord bot's hourly system-prompt rebuild) plus the 9 desk packets. Without this step, the Discord bot reports a stale cycle until the next manual cycle run.
+Rebuilds `output/desk-packets/base_context.json` (the cycle source-of-truth that `lib/mags.js loadWorldState()` reads for the Discord bot's hourly system-prompt rebuild), `truesource_reference.json`, and `citizen_archive.json`. Without this step, the Discord bot reports a stale cycle until the next manual cycle run. **S502 (research-build):** the script no longer generates the 9 per-desk packet JSONs — that fed the archived 6-desk-agent `/write-edition` pipeline, confirmed no live reader.
 
 Side effect: takes ~60 seconds. Harmless — desk packets get rebuilt anyway pre-cycle, and the bot's worldview catches up on its next hourly tick.
 

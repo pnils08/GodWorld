@@ -111,7 +111,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | engine.261 | Firm agents — ruled 2026-09-27: test basis, 3 business owners get a wake slice to go to work and run their business | ready | engine-sheet (sim judgement — builder included) | [[../plans/2026-09-26-future-build-ideas]] §Builder rulings |
 | engine.263 | Credit/default cascades — loans/defaults rippling through households/businesses | needs-info | engine-sheet — gated on engine.193 economy-complete | [[../plans/2026-09-26-future-build-ideas]] §4 |
 | engine.264 | The maker's hand — ruled 2026-09-27: an intake tab with dropdowns (seed, type, hood, +/−, level, systems); the sim never sees it, citizens only wonder 'sim or maker' | ready | research-build (sim judgement — builder call) | [[../plans/2026-09-26-future-build-ideas]] §Builder rulings |
-| engine.266 | C109 dead paths — LIVE PROD @121: anomaly bands, initiative packet inputs, Cultural_Ledger cells + 28-row repair, RoleType reads, media carry, sim-clock life lines. Open: Storyline_Tracker writer retirement (waits on research-build's redirect ruling) | in-progress | engine-sheet | `output/production_log_run_cycle_c109_gaps.md` G-EC59–61, 66, 71 |
+| engine.266 | C109 dead paths — LIVE PROD @121. Storyline_Tracker retirement ruled 2026-09-28, ready to implement | in-progress | engine-sheet | `output/production_log_run_cycle_c109_gaps.md` G-EC59–61, 66, 71; ruling: `docs/plans/2026-09-28-storyline-tracker-retirement-ruling.md` |
 
 ### canon.* — World-fidelity layer
 

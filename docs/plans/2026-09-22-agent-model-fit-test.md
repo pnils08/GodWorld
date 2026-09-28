@@ -47,7 +47,7 @@ pointers:
 
 ## Tasks
 
-1. **Freeze inputs** — pick and store 9 packs/prompts under `output/model-fit/inputs/` (kimi lane or codex). Verify: each replays through its existing validators.
+1. **Freeze inputs** — pick and store 9 packs/prompts under `output/model-fit/inputs/` (kimi lane or codex). Verify: each replays through its existing validators. **6/9 staged 2026-09-28 (kimi quota-dead for the week, rb picked it up directly) — see [[../../output/model-fit/inputs/MANIFEST]]. Open-character tier (Elias/Mags) not staged — no real stored C104-C108 material found; stays on the Open Questions list below, not solved solo.**
 2. **Runner** — a scratch script that calls a model with a frozen input, records every measure above to `output/model-fit/runs.jsonl`. Reuses existing call shapes; not a production script. Verify: dry-run with one input and the current model.
 3. **Run** — after credit lands; cap $10; log every call.
 4. **Score** — deterministic first, then blind scoring by agy and codex (no model names).
@@ -62,3 +62,9 @@ pointers:
 ## Changelog
 
 - 2026-09-21 (research-build) — Draft filed from builder direction; waiting on credit.
+- 2026-09-28 (S501, research-build) — Task 1 partially unblocked: freezing inputs doesn't need the
+  Anthropic credit, only the Task 3 run does. Staged 6/9 (structured-seat ×3 council datawake packs,
+  semi-open-voice ×3 Carmen Delaine report packets, all real C104-C108 production material). Open-
+  character tier (Elias/Mags) left unstaged — no real stored interview/narration material found for
+  either, and the plan's own Open Questions already park exactly this choice. Task 2 (runner) not
+  started. Still waiting on credit for Task 3.

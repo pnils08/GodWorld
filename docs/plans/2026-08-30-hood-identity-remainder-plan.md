@@ -233,3 +233,10 @@ damped first, since it is most of the flow. Recommendation: sign-only — each h
 by the sign and relative size of its tracked net flow, so a hood the citizens are leaving loses people in a growth
 week (the ruling's point) without a new magnitude to tune.
 
+### engine.249 — builder took sign-only 2026-09-28 ("I'll take your advice"); built S502
+`relocationTransfer249_` (updateNeighborhoodDemographics.js): last Cycle's per-hood net tracked movers
+(`S.relocationNetFlow` in processRelocations_, carried on PREV_RELOC_FLOW_JSON because Phase 3 runs before Phase 5)
+point a between-hood transfer. Each hood's transfer is capped at 2 × its own share of the city's migration ×
+|f|/max|f|; the smaller of the losing and gaining sides sets the total, so the table total is untouched. Applied
+after the base migration in the hood's own age mix, no calendar modifier. Test `scripts/relocationTransfer249.test.js`.
+

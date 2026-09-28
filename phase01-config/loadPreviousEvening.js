@@ -282,6 +282,7 @@ function loadPreviousCycleState_(ctx) {
       seedCarriedNeighborhoodEconomies_(ctx, S);
       seedCarriedActivityObservations_(ctx, S);   // engine.228
       seedCarriedCityDynamics_(ctx, S);           // engine.195
+      seedCarriedRelocationFlow_(ctx, S);         // engine.249
     } else {
       S.previousCycleState = null;
       Logger.log('loadPreviousCycleState_: No previous cycle state found (first cycle or cleared)');
@@ -376,6 +377,31 @@ function seedCarriedActivityObservations_(ctx, S) {
     S.activityObservations = { history: hist.slice(-12), carried: true };
     Logger.log('seedCarriedActivityObservations_: ' + hist.length + ' Cycle(s) of activity history opened (baseline for the relative gates)');
   }
+}
+
+
+/**
+ * seedCarriedRelocationFlow_ (engine.249, builder 2026-09-28 sign-only)
+ *
+ * Last Cycle's per-hood net tracked movers (processRelocations_) onto
+ * S.previousRelocationFlow for Phase-3 demographics. Missing blob = no
+ * transfer this Cycle (graceful).
+ */
+function seedCarriedRelocationFlow_(ctx, S) {
+  if (S.previousRelocationFlow) return;
+  var json = null;
+  try { json = loadCarryForwardBlob_(ctx, 'PREV_RELOC_FLOW_JSON', carryForwardCycleId_(ctx)); } catch (e) { json = null; }
+  if (!json) return;
+  var carried;
+  try { carried = JSON.parse(json); } catch (e) { return; }
+  if (!carried || typeof carried !== 'object') return;
+  var out = {}, n = 0;
+  for (var k in carried) {
+    if (!carried.hasOwnProperty(k)) continue;
+    var v = Number(carried[k]);
+    if (isFinite(v) && v) { out[k] = v; n++; }
+  }
+  if (n) S.previousRelocationFlow = out;
 }
 
 

@@ -431,6 +431,22 @@ function saveEveningSnapshot_(ctx) {
 
 
 /**
+ * compactRelocationFlow_ (engine.249) — S.relocationNetFlow reduced to its
+ * nonzero integer entries. Null when no tracked unit moved.
+ */
+function compactRelocationFlow_(S) {
+  var src = S && S.relocationNetFlow;
+  if (!src || typeof src !== 'object') return null;
+  var out = {}, n = 0;
+  for (var k in src) {
+    if (!src.hasOwnProperty(k)) continue;
+    var v = Math.round(Number(src[k]) || 0);
+    if (v) { out[k] = v; n++; }
+  }
+  return n ? out : null;
+}
+
+/**
  * compactCityDynamicsCarrier_ (engine.195)
  *
  * S.previousCityDynamics — the pre-boost blended city metrics applyCityDynamics_
@@ -506,6 +522,12 @@ function savePreviousCycleState_(ctx) {
     // engine.195 (builder 2026-09-27, mood inertia): the city dynamics momentum carrier rides its
     // OWN key (~10 numbers, ~200 chars). Without it the Phase-2 momentum blend always saw prev =
     // null — each Cycle opened on a city with no memory of last week's mood.
+    // engine.249 (sign-only): last Cycle's per-hood net tracked movers, for next Cycle's
+    // Phase-3 demographics (which runs before this Cycle's relocations). ~22 small ints.
+    var relocFlow = compactRelocationFlow_(S);
+    if (relocFlow) {
+      saveCarryForwardBlob_(ctx, 'PREV_RELOC_FLOW_JSON', JSON.stringify(relocFlow), snapshot.cycle);
+    }
     var cityDyn = compactCityDynamicsCarrier_(S);
     if (cityDyn) {
       var cityDynJson = JSON.stringify(cityDyn);

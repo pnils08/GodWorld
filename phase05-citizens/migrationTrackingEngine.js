@@ -876,6 +876,14 @@ function processRelocations_(ctx, cycle) {
     S10.relocationPressureDeltas[unit.hood] =
       (S10.relocationPressureDeltas[unit.hood] || 0) + RELOCATION_PRESSURE_OUT;
 
+    // engine.249 (builder 2026-09-28, sign-only): each hood's net tracked movers this
+    // Cycle, members not units — carried to next Cycle's Phase-3 demographics
+    // (PREV_RELOC_FLOW_JSON), which moves the hood table's people the same direction.
+    if (!S10.relocationNetFlow) S10.relocationNetFlow = {};
+    var nMembers = unit.rowIdxs.length;
+    S10.relocationNetFlow[bestName] = (S10.relocationNetFlow[bestName] || 0) + nMembers;
+    S10.relocationNetFlow[unit.hood] = (S10.relocationNetFlow[unit.hood] || 0) - nMembers;
+
     moved++;
   }
 

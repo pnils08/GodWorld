@@ -120,8 +120,8 @@ function updateNeighborhoodDemographics_(ctx) {
   // shares — table +3.2%/cycle against the city's +0.32%, the smallest hoods +13–16%.
   // (1) the applied migration is the city's scaled by table ÷ city, recomputed each
   // cycle; (2) each hood's share is its own size × inflowMod; (3) people arrive and
-  // leave in the hood's own age mix. The flow-signed split (a negative-MigrationFlow
-  // hood losing people in a growth week) needs an intra-city churn rate — open.
+  // leave in the hood's own age mix. The flow-signed split rides last Cycle's
+  // tracked relocations (relocationTransfer249_ below, builder 2026-09-28).
   var tableSum249 = 0, sizeWeightSum249 = 0;
   for (var h249 = 0; h249 < liveHoodNames.length; h249++) {
     var d249 = demographics[liveHoodNames[h249]];
@@ -133,6 +133,17 @@ function updateNeighborhoodDemographics_(ctx) {
   var cityPop249 = Number(S.worldPopulation && S.worldPopulation.totalPopulation);
   if (!(cityPop249 > 0)) throw new Error('updateNeighborhoodDemographics_: S.worldPopulation.totalPopulation missing — cannot scale migration to the tracked table (engine.249)');
   var appliedMigration249 = migration * (tableSum249 / cityPop249);
+  // engine.249 flow half (builder 2026-09-28, sign-only): last Cycle's tracked
+  // relocations point this Cycle's transfer between hoods. Bounded by each hood's
+  // own share of city migration; conserves the table total.
+  var shareWeights249 = {};
+  for (var sw = 0; sw < liveHoodNames.length; sw++) {
+    var dsw = demographics[liveHoodNames[sw]];
+    var psw = (Number(dsw.students) || 0) + (Number(dsw.adults) || 0) + (Number(dsw.seniors) || 0);
+    var msw = neighborhoodModifiers[liveHoodNames[sw]] || { inflowMod: 1 };
+    shareWeights249[liveHoodNames[sw]] = sizeWeightSum249 > 0 ? psw * (Number(msw.inflowMod) || 0) / sizeWeightSum249 : 0;
+  }
+  var transfer249 = relocationTransfer249_(S.previousRelocationFlow, appliedMigration249, shareWeights249);
   Logger.log('updateNeighborhoodDemographics_: city migration ' + migration + ' → table ' +
              Math.round(appliedMigration249) + ' (table ' + tableSum249 + ' / city ' + cityPop249 + ')');
   if (liveHoodCount === 0) {
@@ -196,6 +207,18 @@ function updateNeighborhoodDemographics_(ctx) {
       demo.students = Math.max(0, demo.students - Math.round(outflow * mixS));
       demo.adults = Math.max(0, demo.adults - Math.round(outflow * mixA));
       demo.seniors = Math.max(0, demo.seniors - Math.round(outflow * mixSr));
+    }
+    // engine.249 flow half: the between-hood transfer, in the hood's own age mix, no
+    // calendar modifier (it is people moving within the table, not arriving/leaving).
+    var t249 = Math.round(transfer249[neighborhood] || 0);
+    if (t249 > 0) {
+      demo.students += Math.round(t249 * mixS);
+      demo.adults += Math.round(t249 * mixA);
+      demo.seniors += Math.round(t249 * mixSr);
+    } else if (t249 < 0) {
+      demo.students = Math.max(0, demo.students - Math.round(-t249 * mixS));
+      demo.adults = Math.max(0, demo.adults - Math.round(-t249 * mixA));
+      demo.seniors = Math.max(0, demo.seniors - Math.round(-t249 * mixSr));
     }
 
     // ─────────────────────────────────────────────────────────────────────────
@@ -352,6 +375,45 @@ function updateNeighborhoodDemographics_(ctx) {
  * Σ(weight × pop) / Σ pop over the LOADED hood set (W2a rule — the loaded
  * demographics object is the canonical hood set, never a hand list).
  */
+/**
+ * relocationTransfer249_ — engine.249 flow half, sign-only (builder 2026-09-28).
+ *
+ * prevFlow: { hood: net tracked movers last Cycle } (processRelocations_).
+ * appliedMigration: this Cycle's city migration scaled to the table.
+ * shareWeights: { hood: that hood's share of appliedMigration } (size × inflowMod, Σ = 1).
+ *
+ * Each hood's transfer is capped at 2 × its own share × |f| / max|f| — the hood the
+ * tracked citizens leave hardest ends the week losing about what it would have
+ * gained; no hood moves by more than twice its own share. Losers give, gainers
+ * receive, the smaller side sets the total, so Σ transfer = 0 (the table total is
+ * the city's migration, untouched). No tracked moves → {} (no transfer).
+ */
+function relocationTransfer249_(prevFlow, appliedMigration, shareWeights) {
+  var out = {};
+  if (!prevFlow || typeof prevFlow !== 'object') return out;
+  var mag = Math.abs(Number(appliedMigration) || 0);
+  if (!(mag > 0)) return out;
+  var maxAbs = 0, h;
+  for (h in prevFlow) if (prevFlow.hasOwnProperty(h) && shareWeights[h] !== undefined) maxAbs = Math.max(maxAbs, Math.abs(Number(prevFlow[h]) || 0));
+  if (!(maxAbs > 0)) return out;
+  var caps = {}, lose = 0, gain = 0;
+  for (h in prevFlow) {
+    if (!prevFlow.hasOwnProperty(h) || shareWeights[h] === undefined) continue;
+    var f = Number(prevFlow[h]) || 0;
+    if (!f) continue;
+    var cap = 2 * mag * shareWeights[h] * Math.abs(f) / maxAbs;
+    caps[h] = f < 0 ? -cap : cap;
+    if (f < 0) lose += cap; else gain += cap;
+  }
+  var total = Math.min(lose, gain);
+  if (!(total > 0)) return out;
+  for (h in caps) {
+    if (!caps.hasOwnProperty(h)) continue;
+    out[h] = caps[h] < 0 ? -total * (-caps[h]) / lose : total * caps[h] / gain;
+  }
+  return out;
+}
+
 function buildHoodIllnessWeights_(ctx, S, demographics) {
   var wMin = cfgNum_(ctx, ctx.config, 'illnessHoodWeightMin', 0.5);
   var wMax = cfgNum_(ctx, ctx.config, 'illnessHoodWeightMax', 2.0);

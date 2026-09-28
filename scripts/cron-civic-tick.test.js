@@ -940,6 +940,36 @@ test('filterDirectiveBlocks caps at the template maximum of 12 blocks', () => {
 });
 
 // ────────────────────────────────────────────────────────────────────────────
+// civic.42 — the chain keys off the fire; one lock serialises chain and tick.
+{
+  const { chainLockPath, chainLockHeld, shouldLaunchChain, CHAIN_LOCK_STALE_MS, CHAIN_LAUNCH_MAX } = civicRun;
+  test('civic.42: a fired week with no prep record launches the chain', () => {
+    assert.deepStrictEqual(shouldLaunchChain({ engineFiredAt: '2026-09-28T05:50:00Z' }, { applied: false, prepDone: false, lockHeld: false }), { launch: true });
+  });
+  test('civic.42: no launch before the fire, after prep, while a chain runs, or once applied', () => {
+    assert.strictEqual(shouldLaunchChain({ engineFiredAt: null }, { prepDone: false }).launch, false);
+    assert.strictEqual(shouldLaunchChain({ engineFiredAt: 'x' }, { prepDone: true }).launch, false);
+    assert.strictEqual(shouldLaunchChain({ engineFiredAt: 'x' }, { lockHeld: true }).launch, false);
+    assert.strictEqual(shouldLaunchChain({ engineFiredAt: 'x' }, { applied: true }).launch, false);
+  });
+  test('civic.42: launches cap per week — a chain failing before prep does not respend hourly', () => {
+    const r = shouldLaunchChain({ engineFiredAt: 'x', chainLaunches: CHAIN_LAUNCH_MAX }, { prepDone: false });
+    assert.strictEqual(r.launch, false);
+    assert(/left for a hand run/.test(r.reason));
+  });
+  test('civic.42: a lock holds only while its pid lives and it is younger than the stale window', () => {
+    const root = mkRoot();
+    const now = Date.parse('2026-09-28T12:00:00Z');
+    fs.writeFileSync(chainLockPath(CYCLE, root), JSON.stringify({ pid: 4242, startedAt: '2026-09-28T11:00:00Z', cycle: CYCLE }));
+    assert(chainLockHeld(CYCLE, root, { now, pidAlive: () => true }), 'live pid, 1h old -> held');
+    assert.strictEqual(chainLockHeld(CYCLE, root, { now, pidAlive: () => false }), null, 'dead pid -> free');
+    assert.strictEqual(chainLockHeld(CYCLE, root, { now: now + CHAIN_LOCK_STALE_MS, pidAlive: () => true }), null, 'stale -> free');
+    fs.unlinkSync(chainLockPath(CYCLE, root));
+    assert.strictEqual(chainLockHeld(CYCLE, root, { now, pidAlive: () => true }), null, 'absent -> free');
+    fs.rmSync(root, { recursive: true, force: true });
+  });
+}
+
 (async () => {
   for (const [name, fn] of asyncTests) {
     try { await fn(); passed++; console.log('  ✓ ' + name); }

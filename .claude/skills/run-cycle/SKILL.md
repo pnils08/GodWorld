@@ -213,7 +213,7 @@ Nothing downstream is hand-run. The artifacts this chain leaves on disk are read
 | `output/initiative_tracker.json`, `output/desk-packets/*` | civic office datawakes, desk agents |
 | `output/voice-disposition-cache/*.md` | citizen-voice agents, `citizen-wake` |
 
-**The civic chain is Sunday-only (14:30, retry 21:00) and exits clean when the engine has not fired.** A fire after 21:00 Sunday has no chain slot: the hourly tick runs only the no-model stages and applies the close at the 6h cutoff with no directive and no hearing (C109, fired Mon 00:50). Until the chain keys off the fire instead of the clock (civic.42), fire before 14:30 Sunday or accept a week with no hearing.
+**The civic chain keys off the fire (civic.42).** Besides the Sunday slots (14:30, retry 21:00), the hourly tick starts the chain the first hour `world_summary_c{XX}.md` + `engine_audit_c{XX}.json` are both on disk and no prep record exists, so a fire at any hour gets its hearing before the 6h cutoff apply. A chain holds `output/cron-civic/chain_c{XX}.lock`; the tick yields and a second chain exits clean while it lives. Do not hand-run the chain after writing those two files — the tick will; check `logs/civic-cron.log` for `launched the chain`.
 
 **The acceptance test is the next unattended cron run, not a hand-driven demo.** If a step above fails, the cron that reads its artifact runs on the prior cycle — say which one in SESSION_CONTEXT.
 

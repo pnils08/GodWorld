@@ -3303,6 +3303,14 @@ async function runChain() {
     console.log('[chain] close_c' + cycle + '.json shows applied:true — chain already wrote this cycle. Exiting clean.');
     return;
   }
+  // civic.42: a close that passed its deterministic gate and is only waiting on
+  // verdicts belongs to the hourly tick (apply on verdicts or the cutoff). Re-
+  // running the whole chain there respends every model stage for nothing — the
+  // case a tick-launched chain followed by a Sunday slot would hit weekly.
+  if (priorClose && priorClose.gatePass === true && priorClose.clerk !== 'fail') {
+    console.log('[chain] close_c' + cycle + '.json passed the gate and waits on verdicts/cutoff — the hourly tick applies it. Exiting clean.');
+    return;
+  }
   if (priorClose) {
     console.log('[chain] close_c' + cycle + '.json exists but applied:' + priorClose.applied + ' — prior run staged without writing. Re-running chain.');
   }
@@ -3312,6 +3320,13 @@ async function runChain() {
     console.log('[chain] engine has not fired for c' + cycle + ' yet (missing: ' + missing.join(', ') + '). Exiting clean.');
     return;
   }
+  // civic.42: one chain at a time — the Sunday slot and a tick launch can overlap.
+  const held = chainLockHeld(cycle);
+  if (held) {
+    console.log('[chain] a chain for c' + cycle + ' is already running (pid ' + held.pid + ', since ' + held.startedAt + '). Exiting clean.');
+    return;
+  }
+  if (process.argv.includes('--apply')) takeChainLock(cycle);
   // Stage order in the chain (civic.39 Task 4): the directive moved LAST — it
   // is a post-close artifact built from close_c{XX}.json, naming only seats
   // the close left passed-over or unanswered. Prep consumes the PRIOR cycle's
@@ -3416,6 +3431,66 @@ function saveWeekState(state, root) {
   fs.mkdirSync(path.dirname(p), { recursive: true });
   fs.writeFileSync(p, JSON.stringify(state, null, 2) + '\n');
   return true;
+}
+
+// civic.42 — the chain keys off the fire, not the weekday. The Sunday cron
+// slots (14:30, 21:00) stay; the hourly tick also starts the chain the first
+// hour the fire's inputs are on disk and no chain has begun (no prep record),
+// so a fire that misses the Sunday slots still gets its hearing before the
+// cutoff apply. One lock file serialises chain and tick: a tick yields while
+// a chain runs (G-EC69 — no tick applies a half-built week), and a second
+// chain (cron slot + tick launch) exits clean. A lock whose pid is dead or
+// older than CHAIN_LOCK_STALE_MS is ignored.
+const CHAIN_LOCK_STALE_MS = 4 * 60 * 60 * 1000;
+const CHAIN_LAUNCH_MAX = 3; // per week — a chain that keeps failing at prep must not respend hourly
+
+function chainLockPath(cycle, root) {
+  return path.join(root || ROOT, 'output', 'cron-civic', 'chain_c' + cycle + '.lock');
+}
+
+function pidAlive(pid) {
+  if (!(Number(pid) > 0)) return false;
+  try { process.kill(Number(pid), 0); return true; }
+  catch (e) { return e.code === 'EPERM'; }
+}
+
+// Returns the live lock record, or null when there is none (absent, dead pid, stale).
+function chainLockHeld(cycle, root, opts) {
+  const lock = readJson(chainLockPath(cycle, root));
+  if (!lock) return null;
+  const alive = (opts && opts.pidAlive ? opts.pidAlive : pidAlive)(lock.pid);
+  const age = ((opts && opts.now) || Date.now()) - new Date(lock.startedAt).getTime();
+  return (alive && isFinite(age) && age < CHAIN_LOCK_STALE_MS) ? lock : null;
+}
+
+function takeChainLock(cycle, root) {
+  const p = chainLockPath(cycle, root);
+  fs.mkdirSync(path.dirname(p), { recursive: true });
+  fs.writeFileSync(p, JSON.stringify({ pid: process.pid, startedAt: new Date().toISOString(), cycle: Number(cycle) }) + '\n');
+  process.on('exit', () => {
+    try { const l = readJson(p); if (l && l.pid === process.pid) fs.unlinkSync(p); } catch (_) { /* lock is advisory; stale rule covers a leftover */ }
+  });
+}
+
+// The tick's launch decision — pure, so the test drives it without a spawn.
+function shouldLaunchChain(state, opts) {
+  if (!state.engineFiredAt) return { launch: false, reason: 'engine not fired' };
+  if (opts.applied) return { launch: false, reason: 'week already applied' };
+  if (opts.prepDone) return { launch: false, reason: 'chain already started (prep record on disk)' };
+  if (opts.lockHeld) return { launch: false, reason: 'chain running' };
+  if ((state.chainLaunches || 0) >= CHAIN_LAUNCH_MAX) return { launch: false, reason: 'chain launched ' + state.chainLaunches + 'x this week without a prep record — left for a hand run' };
+  return { launch: true };
+}
+
+function launchChainDetached(cycle) {
+  const { spawn } = require('child_process');
+  const logPath = path.join(ROOT, 'logs', 'civic-cron.log');
+  fs.mkdirSync(path.dirname(logPath), { recursive: true });
+  const out = fs.openSync(logPath, 'a');
+  const child = spawn(process.execPath, [path.join(__dirname, 'cron-civic-run.js'), '--stage=chain', '--apply', '--cycle=' + cycle],
+    { cwd: ROOT, detached: true, stdio: ['ignore', out, out] });
+  child.unref();
+  return child.pid;
 }
 
 // The engine fire is a manual event; its on-disk witness is the pair of
@@ -3667,6 +3742,32 @@ async function runTick() {
     return;
   }
 
+  // civic.42: a running chain owns the week — the tick yields this hour.
+  const lockHeld = chainLockHeld(cycle);
+  if (lockHeld) {
+    console.log('[tick] chain for c' + cycle + ' is running (pid ' + lockHeld.pid + ', since ' + lockHeld.startedAt + ') — tick yields this hour.');
+    saveWeekState(state);
+    return;
+  }
+  // civic.42: the fire's inputs are on disk and no chain has started — start it
+  // now rather than waiting for a Sunday slot the fire may already have missed.
+  const launch = shouldLaunchChain(state, {
+    applied: false, prepDone: state.stages.prep.status === 'done', lockHeld: false,
+  });
+  if (launch.launch) {
+    if (APPLY) {
+      state.chainLaunches = (state.chainLaunches || 0) + 1; state._dirty = true;
+      const pid = launchChainDetached(cycle);
+      console.log('[tick] no chain has started for c' + cycle + ' — launched the chain (pid ' + pid + ', launch ' + state.chainLaunches + '/' + CHAIN_LAUNCH_MAX + '); tick yields this hour.');
+    } else {
+      console.log('[tick] no chain has started for c' + cycle + ' — an --apply tick would launch it now.');
+    }
+    saveWeekState(state);
+    return;
+  } else if (state.stages.prep.status !== 'done') {
+    console.log('[tick] chain not launched: ' + launch.reason);
+  }
+
   // 0. Batch collect — polling a submitted batch is an HTTP GET, not a model
   //    call, so tick may run it. Finished batches land voice JSONs; rejected
   //    or expired seats wait for the next submit window (never inline retry).
@@ -3788,6 +3889,7 @@ module.exports = { modelChainFor, FALLBACK_MODELS, sentimentWord, crimeWord, ret
   renewEligibility, renewSweep,
   // civic.39 — week-boundary stage machine (exported for scripts/cron-civic-tick.test.js)
   WEEK_STAGES, VERDICT_CUTOFF_MS, weekStatePath, blankWeekState, loadWeekState, saveWeekState,
+  chainLockPath, chainLockHeld, takeChainLock, shouldLaunchChain, CHAIN_LOCK_STALE_MS, CHAIN_LAUNCH_MAX,
   engineFireInfo, refreshWeekState, decideApply, closeDeterministic, runGate, maybeApply, runTick,
   // civic.39 Task 3 — batch transport (hearing seats on :batch-eligible models)
   BATCH_PROFILES, batchEligible, batchManifestPath, loadBatchManifest, batchInFlightSlugs,

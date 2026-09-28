@@ -129,3 +129,32 @@ conservation checks ride with it.
 - **engine.10 order agreed (2026-09-27):** most → least complex = legal/justice, public health, port/logistics,
   environmental, tech sector, parks + food. The top two are engine.254's care-and-justice build, so Phase 43
   continues through engine.254; the rest follow in that order.
+
+## engine.262 treasury — design (engine-sheet S502, 2026-09-28) — three sim calls open
+
+**Today:** initiative money has no source. A passed row's `BudgetTotal` is parsed from its `Budget` string
+(civicInitiativeEngine.js `INITIATIVE_BUDGET_COLUMNS_`), `BudgetRemaining` is drained by Job 5 spend and the
+engine.259 fund tranches (applyInitiativeImplementationEffects.js :544–572), and a passed renewal credits
+`BudgetRemaining` from nowhere (:381–398). Money appears at passage and at renewal, and leaves as spend.
+
+**Mechanism (engine-sheet's, no ruling needed):**
+- One append-only tab `City_Treasury`: Cycle · Entry (APPROPRIATION / RENEWAL / REVENUE / RETURN) · Amount ·
+  Counterparty (INIT-xxx, TAX-<kind>, …) · BalanceAfter · Note. The balance is the last row's BalanceAfter; the
+  engine reads it at Phase 1 into `S.treasury` (carry through Carry_Forward_Store like engine.221 — one number).
+- Appropriation: when a row passes its vote, `BudgetTotal` leaves the treasury (debit) in the same Phase-5 write
+  that sets it; renewal credit (Job 6) debits the treasury by the renewal amount. Initiative `BudgetRemaining`
+  stays the program's own purse — spend out of it is the program paying the city (unchanged).
+- A closed/void program's unspent `BudgetRemaining` returns (credit, RETURN).
+- Conservation check (engineAuditor): Σ treasury debits = Σ appropriations + renewals on the tracker; plus the two
+  S499 checks (casino Σ citizen deltas = −Δ house float; fund debit ≥ Σ household grants) and the deceased-NetWorth
+  exclusion.
+
+**Sim calls for the builder (the numbers the world runs on):**
+1. **Opening balance** — the treasury's starting figure at the first fire on this code (e.g. the sum of every live
+   row's `BudgetTotal` plus a reserve, or an authored figure for the city's budget).
+2. **Revenue** — does money come in now (a weekly tax take from business revenue and citizen income, a fixed city
+   budget allocation per Cycle), or does the treasury only drain until taxes are built?
+3. **Scarcity** — what happens when an appropriation exceeds the balance: the vote still passes but the program
+   opens underfunded, the council defers it, or it fails. (SIM_DOCTRINE §15: this is where the city can have a
+   bad budget year — the door has to be able to open.)
+

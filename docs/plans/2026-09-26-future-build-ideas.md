@@ -166,3 +166,6 @@ engine.259 fund tranches (applyInitiativeImplementationEffects.js :544–572), a
 3. **Scarcity:** a program the treasury can't cover **opens underfunded** — the vote stands, it opens with what's
    there, the shortfall is visible and delivery is slower until a renewal tops it up.
 
+### engine.262 — built S502 `24a0e04c`, bench-proven SANDBOX 0908 @142 C125
+C125 ledger exactly as predicted: OPENING $100M · PREFUNDED INIT-001/002/005 (Baylight INIT-006 absent) · REVENUE $5M → $105M; World_Config keys self-armed; 0 errors. Unit test `scripts/cityTreasury.test.js` 17/17 covers underfunded appropriation, once-only charge, once-per-Cycle revenue, renewal short. Live needs the City_Treasury tab created before the first fire on this code.
+

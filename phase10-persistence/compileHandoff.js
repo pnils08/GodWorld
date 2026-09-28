@@ -161,7 +161,7 @@ function loadHandoffData_(cache, cycle) {
   }
 
   data.packetText = loadCyclePacketText_(cache, cycle);
-  data.storylines = loadActiveStorylinesFromCache_(cache, cycle);
+  data.storylines = []; // engine.266: Storyline_Tracker discontinued
   data.worldEvents = loadWorldEvents_(cache, cycle);
   data.storySeeds = loadStorySeeds_(cache, cycle);
   data.civicOfficers = loadCivicOfficers_(cache);
@@ -242,122 +242,8 @@ function loadCyclePacketText_(cache, cycle) {
 }
 
 
-/**
- * Loads active/recent storylines from Storyline_Tracker.
- * Deduplicates by description — latest cycle wins for matching entries.
- */
-function loadActiveStorylinesFromCache_(cache, cycle) {
-  var values = cache.getValues(SHEET_NAMES.STORYLINE_TRACKER);
-  if (values.length < 2) return [];
-
-  var header = values[0];
-  var idx = createColIndex_(header);
-  var iCycleAdded = idx('CycleAdded');
-  var iType = idx('StorylineType');
-  var iDesc = idx('Description');
-  var iNeighborhood = idx('Neighborhood');
-  var iCitizens = idx('RelatedCitizens');
-  var iPriority = idx('Priority');
-  var iStatus = idx('Status');
-
-  // First pass: collect all qualifying entries
-  var raw = [];
-  for (var r = 1; r < values.length; r++) {
-    var row = values[r];
-    var cycleAdded = Number(safeColRead_(row, iCycleAdded, 0));
-    var status = String(safeColRead_(row, iStatus, '')).toLowerCase();
-
-    // Skip abandoned entries entirely
-    if (status === 'abandoned') continue;
-
-    // Include: active, new this cycle, recently resolved (last 2 cycles), recent dormant
-    var include = false;
-    if (status === 'active') include = true;
-    if (status === 'new' && cycleAdded === cycle) include = true;
-    if (status === 'resolved' && cycleAdded >= cycle - 2) include = true;
-    if (status === 'dormant' && cycleAdded >= cycle - 5) include = true;
-
-    if (include) {
-      raw.push({
-        cycleAdded: cycleAdded,
-        type: String(safeColRead_(row, iType, '')),
-        description: String(safeColRead_(row, iDesc, '')),
-        neighborhood: String(safeColRead_(row, iNeighborhood, '')),
-        citizens: String(safeColRead_(row, iCitizens, '')),
-        priority: String(safeColRead_(row, iPriority, '')),
-        status: status
-      });
-    }
-  }
-
-  // Second pass: deduplicate by arc root.
-  // "Stabilization Fund passes 6-3" and "Stabilization Fund implementation"
-  // share the arc root "stabilization fund" — keep the latest/highest-status one.
-  var ARC_ROOTS = [
-    'stabilization fund', 'baylight', 'oari', 'health center', 'temescal health',
-    'lake merritt', 'paulson', 'keane', 'seymour', 'davis acl',
-    'horn', 'aitken', 'warriors', 'elliott crane', 'crane', 'marcus osei', 'osei',
-    'walkout', 'dynasty', 'civic load', 'spring training', 'playoff'
-  ];
-
-  function getArcRoot_(desc) {
-    var d = desc.toLowerCase();
-    for (var ar = 0; ar < ARC_ROOTS.length; ar++) {
-      if (d.indexOf(ARC_ROOTS[ar]) >= 0) return ARC_ROOTS[ar];
-    }
-    return null;
-  }
-
-  var rank = { resolved: 3, active: 2, 'new': 1, dormant: 0 };
-
-  // Group by arc root — keep best entry per root
-  var arcGroups = {};
-  var noArc = [];
-  for (var i = 0; i < raw.length; i++) {
-    var entry = raw[i];
-    var desc = entry.description.toLowerCase().replace(/\s+/g, ' ').trim();
-    if (!desc) continue;
-
-    var root = getArcRoot_(desc);
-    if (root) {
-      // Per-status: keep one entry per arc root per status category
-      var arcKey = root + '|' + entry.status;
-      if (!arcGroups[arcKey] || arcGroups[arcKey].cycleAdded < entry.cycleAdded) {
-        arcGroups[arcKey] = entry;
-      } else if (arcGroups[arcKey].cycleAdded === entry.cycleAdded) {
-        // Same cycle+root+status: prefer longer description (more detail)
-        if (entry.description.length > arcGroups[arcKey].description.length) {
-          arcGroups[arcKey] = entry;
-        }
-      }
-    } else {
-      // No arc root match — dedup by first 50 chars
-      var textKey = desc.substring(0, 50);
-      var found = false;
-      for (var n = 0; n < noArc.length; n++) {
-        var existKey = noArc[n].description.toLowerCase().replace(/\s+/g, ' ').trim().substring(0, 50);
-        if (existKey === textKey) {
-          found = true;
-          if (entry.cycleAdded > noArc[n].cycleAdded ||
-              (entry.cycleAdded === noArc[n].cycleAdded && (rank[entry.status] || 0) > (rank[noArc[n].status] || 0))) {
-            noArc[n] = entry;
-          }
-          break;
-        }
-      }
-      if (!found) noArc.push(entry);
-    }
-  }
-
-  var results = [];
-  for (var ak in arcGroups) {
-    if (arcGroups.hasOwnProperty(ak)) results.push(arcGroups[ak]);
-  }
-  for (var na = 0; na < noArc.length; na++) results.push(noArc[na]);
-
-  Logger.log('loadActiveStorylinesFromCache_: ' + raw.length + ' raw → ' + results.length + ' deduplicated');
-  return results;
-}
+// loadActiveStorylinesFromCache_ retired engine.266 — it read the discontinued
+// Storyline_Tracker. Section 4 reports no active storylines.
 
 
 /**
@@ -979,7 +865,7 @@ function buildSection03_CivicStatus_(data) {
 
 /**
  * Section 4: ACTIVE STORYLINES
- * Source: Storyline_Tracker
+ * Source: none (Storyline_Tracker discontinued, engine.266)
  */
 function buildSection04_Storylines_(data) {
   var lines = [];

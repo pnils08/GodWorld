@@ -130,10 +130,10 @@ Read/written by Node.js scripts during edition production.
 |-----|------|---------|----------|---------|
 | **Intake** | 1 | ENGINE | MIKE, ENGINE | Lean engine.51 citizen front door (First/Last/Age/Neighborhood/RoleType/Category/Family/Notes/IntakeStatus) — created on prod S305; processed by `processIntake_` Phase 5, fed by `mediaRoomIntake.js` |
 | **Media_Intake** | 222 | SCRIPT | SCRIPT | Citizen intake from editions |
-| **Storyline_Intake** | 346 | SCRIPT | SCRIPT | Storyline intake from editions |
+| **Storyline_Intake** | 363 | — | — (unwired scripts only) | FROZEN engine.266 — engine processor removed. Deletion = engine.268 |
 | **Citizen_Usage_Intake** | 852 | SCRIPT | SCRIPT | Citizen usage tracking with POPID |
 | **Citizen_Media_Usage** | 500 | ENGINE, SCRIPT | ENGINE, SCRIPT | Citizen media appearances (cleaned S99) |
-| **Storyline_Tracker** | 239 | — (no engine reader since engine.141 S419; 239/239 rows abandoned) | ENGINE, SCRIPT | DISCONTINUED 2026-08-05 (Mike-direct) — superseded by Storyline_Ledger. S407: last script reader repointed, Phase-8 ager disabled (engine.140); only `monitorStorylineHealth_` still reads it |
+| **Storyline_Tracker** | 240 | — | — | DISCONTINUED 2026-08-05 — superseded by Storyline_Ledger. FROZEN engine.266: zero writers, zero readers. Deletion = engine.268 |
 | **Storyline_Ledger** | 23 | SCRIPT (buildWorldSummary desk_signal, buildDeskPackets, curation) | SCRIPT (cron-saturday-run.js step 6b) | INTAKE-fed storyline threads (pipeline.45) — reporter slugs, verb-driven status; read back to the desks S407 |
 | **Employment_Roster** | 658 | SCRIPT | SCRIPT | Citizen-employer linkage |
 | **Health_Cause_Queue** | 3 | ENGINE | ENGINE | Phase 11 health cause assignments |

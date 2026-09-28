@@ -26,7 +26,6 @@ var SHEET_NAMES = {
   EVENT_ARC_LEDGER: 'Event_Arc_Ledger',
   STORY_SEED_DECK: 'Story_Seed_Deck',
   STORY_HOOK_DECK: 'Story_Hook_Deck',
-  STORYLINE_TRACKER: 'Storyline_Tracker',
 
   // === Relationships ===
   RELATIONSHIP_BONDS: 'Relationship_Bonds',
@@ -44,7 +43,6 @@ var SHEET_NAMES = {
 
   // === Media Intake ===
   MEDIA_INTAKE: 'Media_Intake',
-  STORYLINE_INTAKE: 'Storyline_Intake',
   CITIZEN_USAGE_INTAKE: 'Citizen_Usage_Intake',
   // CONTINUITY_INTAKE: removed — pipeline eliminated
   MEDIAROOM_PASTE: 'MediaRoom_Paste',

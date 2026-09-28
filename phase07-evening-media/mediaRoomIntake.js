@@ -55,7 +55,7 @@
  *
  * Handles four intake streams from Media Room:
  * 1. Article Table → cultural mentions to Media_Ledger (Press_Drafts removed S98)
- * 2. Storylines Carried Forward → Storyline_Tracker (14 columns)
+ * 2. Storylines Carried Forward — RETIRED engine.266 (Storyline_Tracker discontinued)
  * 3. Citizen Usage Log → Citizen_Media_Usage (12 columns)
  * 4. Continuity Notes → LifeHistory_Log (direct quotes only; everything else is audit-only in edition)
  *
@@ -92,7 +92,6 @@ function processMediaIntake_(ctx) {
   var fame = results.fameTracking || {};
   Logger.log('processMediaIntake_ v2.6: Complete. ' +
     'Articles: ' + results.articles +
-    ', Storylines: ' + results.storylines +
     ', Citizens: ' + results.citizenUsage +
     ', Routed: ' + (routing.routed || 0) +
     ' (new: ' + (routing.newCitizens || 0) + ', existing: ' + (routing.existingCitizens || 0) + ')' +
@@ -122,7 +121,6 @@ function processMediaIntakeV2() {
 
   var summary = 'Media Intake v2.6 Complete:\n' +
     '- Articles: ' + results.articles + '\n' +
-    '- Storylines: ' + results.storylines + '\n' +
     '- Citizen Usage: ' + results.citizenUsage + '\n' +
     '- Routed: ' + (routing.routed || 0) + ' (new: ' + (routing.newCitizens || 0) + ', existing: ' + (routing.existingCitizens || 0) + ')\n' +
     '- Fame Tracking: ' + (fame.processed || 0) + ' mentions → ' + (fame.simulationUpdates || 0) + ' updates, ' + (fame.genericPromotions || 0) + ' promotions\n' +
@@ -143,12 +141,10 @@ function processMediaIntakeV2() {
 function processAllIntakeSheets_(ctx, ss, cycle, cal) {
   var results = {
     articles: 0,
-    storylines: 0,
     citizenUsage: 0
   };
 
   results.articles = processArticleIntake_(ss, cycle, cal);
-  results.storylines = processStorylineIntake_(ss, cycle, cal);
   results.citizenUsage = processCitizenUsageIntake_(ss, cycle, cal);
   results.citizenRouting = routeCitizenUsageToIntake_(ctx, ss, cycle, cal);
 
@@ -269,155 +265,11 @@ function processArticleIntake_(ss, cycle, cal) {
 
 
 // ════════════════════════════════════════════════════════════════════════════
-// 2. STORYLINES CARRIED FORWARD
+// 2. STORYLINES CARRIED FORWARD — RETIRED (engine.266)
 // ════════════════════════════════════════════════════════════════════════════
-
-function processStorylineIntake_(ss, cycle, cal) {
-
-  var intakeSheet = ss.getSheetByName('Storyline_Intake');
-  if (!intakeSheet) return 0;
-
-  var data = intakeSheet.getDataRange().getValues();
-  var newStorylines = [];
-  var resolveDescriptions = [];
-
-  for (var i = 1; i < data.length; i++) {
-    var row = data[i];
-
-    // Skip empty or processed
-    if (!row[0] && !row[1]) continue;
-    if (row[5] === 'processed') continue;
-
-    var type, description, neighborhood, citizens, priority;
-
-    // Check if pipe-separated data was pasted entirely in column A
-    var colA = String(row[0] || '').trim();
-    if (colA.indexOf('|') >= 0 && !row[1]) {
-      var parts = colA.replace(/^[—–-]\s*/, '').split('|');
-      type = (parts[0] || '').trim().toLowerCase();
-      description = (parts[1] || '').trim();
-      neighborhood = (parts[2] || '').trim();
-      citizens = (parts[3] || '').trim();
-      priority = (parts[4] || '').trim();
-    } else {
-      type = colA.toLowerCase();
-      description = String(row[1] || '').trim();
-      neighborhood = String(row[2] || '').trim();
-      citizens = String(row[3] || '').trim();
-      priority = String(row[4] || '').trim();
-    }
-
-    if (type === 'resolved') {
-      // This entry closes a matching storyline in the tracker
-      resolveDescriptions.push(description);
-    } else {
-      // New storyline to add
-      newStorylines.push({
-        storylineType: type || 'arc',
-        description: description,
-        neighborhood: neighborhood,
-        relatedCitizens: citizens,
-        priority: priority || 'normal'
-      });
-    }
-
-    intakeSheet.getRange(i + 1, 6).setValue('processed');
-  }
-
-  var trackerSheet = ensureStorylineTracker_(ss);
-  var totalProcessed = 0;
-
-  // --- Resolve matching storylines in tracker ---
-  if (resolveDescriptions.length > 0) {
-    var trackerData = trackerSheet.getDataRange().getValues();
-    var headers = trackerData[0];
-    var descCol = headers.indexOf('Description');
-    var statusCol = headers.indexOf('Status');
-
-    if (descCol >= 0 && statusCol >= 0) {
-      for (var r = 1; r < trackerData.length; r++) {
-        var trackerDesc = String(trackerData[r][descCol] || '').trim().toLowerCase();
-        var trackerStatus = String(trackerData[r][statusCol] || '').trim().toLowerCase();
-
-        // Only resolve active storylines
-        if (trackerStatus !== 'active') continue;
-
-        for (var d = 0; d < resolveDescriptions.length; d++) {
-          var resolveKey = resolveDescriptions[d].toLowerCase();
-          // Match if tracker description contains the resolve key or vice versa
-          if (trackerDesc.indexOf(resolveKey) >= 0 || resolveKey.indexOf(trackerDesc) >= 0) {
-            trackerSheet.getRange(r + 1, statusCol + 1).setValue('resolved');
-            Logger.log('processStorylineIntake_: Resolved storyline row ' + (r + 1) + ': ' + trackerData[r][descCol]);
-            totalProcessed++;
-            break;
-          }
-        }
-      }
-    }
-  }
-
-  // --- Dedup: filter out storylines already active in tracker (v2.6) ---
-  if (newStorylines.length > 0) {
-    var trackerData = trackerSheet.getDataRange().getValues();
-    var tHeaders = trackerData[0];
-    var tDescCol = tHeaders.indexOf('Description');
-    var tStatusCol = tHeaders.indexOf('Status');
-    if (tDescCol >= 0 && tStatusCol >= 0) {
-      var activeDescs = {};
-      for (var ad = 1; ad < trackerData.length; ad++) {
-        if (String(trackerData[ad][tStatusCol] || '').trim().toLowerCase() === 'active') {
-          activeDescs[String(trackerData[ad][tDescCol] || '').trim().toLowerCase()] = true;
-        }
-      }
-      var filtered = [];
-      for (var fd = 0; fd < newStorylines.length; fd++) {
-        var desc = String(newStorylines[fd].description || '').trim().toLowerCase();
-        if (!activeDescs[desc]) {
-          filtered.push(newStorylines[fd]);
-        } else {
-          Logger.log('processStorylineIntake_: Skipping duplicate: ' + newStorylines[fd].description);
-        }
-      }
-      Logger.log('processStorylineIntake_: Dedup filtered ' + (newStorylines.length - filtered.length) + ' duplicates');
-      newStorylines = filtered;
-    }
-  }
-
-  // --- Add new storylines ---
-  if (newStorylines.length > 0) {
-    var now = 'C' + cycle; // S290 in-world, not wall-clock (engine.44)
-    var rows = [];
-    for (var j = 0; j < newStorylines.length; j++) {
-      var s = newStorylines[j];
-      rows.push([
-        now,                    // A  Timestamp
-        cycle,                  // B  CycleAdded
-        s.storylineType,        // C  StorylineType
-        s.description,          // D  Description
-        s.neighborhood,         // E  Neighborhood
-        s.relatedCitizens,      // F  RelatedCitizens
-        s.priority,             // G  Priority
-        'active',               // H  Status
-        // v2.1: Calendar columns
-        cal.season,             // I  Season
-        cal.holiday,            // J  Holiday
-        cal.holidayPriority,    // K  HolidayPriority
-        cal.isFirstFriday,      // L  IsFirstFriday
-        cal.isCreationDay,      // M  IsCreationDay
-        cal.sportsSeason        // N  SportsSeason
-      ]);
-    }
-
-    var startRow = trackerSheet.getLastRow() + 1;
-    trackerSheet.getRange(startRow, 1, rows.length, 14).setValues(rows);
-    totalProcessed += newStorylines.length;
-  }
-
-  Logger.log('processStorylineIntake_: ' + newStorylines.length + ' new, ' +
-    resolveDescriptions.length + ' resolved');
-
-  return totalProcessed;
-}
+// processStorylineIntake_ moved Storyline_Intake rows into Storyline_Tracker.
+// Both tabs belong to the discontinued storyline system; Storyline_Ledger is
+// fed from article sidecars by scripts/cron-saturday-run.js step 6b.
 
 
 // ════════════════════════════════════════════════════════════════════════════
@@ -700,7 +552,6 @@ function setupMediaIntakeV2() {
 
   // Ensure output sheets exist too (v2.1 versions with calendar columns)
   // Press_Drafts removed S98 — no longer created
-  ensureStorylineTracker_(ss);
   ensureCitizenMediaUsage_(ss);
 
   var msg = created.length > 0
@@ -767,11 +618,6 @@ function setupUsageValidation_(sheet) {
 // ════════════════════════════════════════════════════════════════════════════
 // OUTPUT SHEET CREATION (v2.1: with calendar columns)
 // ════════════════════════════════════════════════════════════════════════════
-
-function ensureStorylineTracker_(ss) {
-  var sheet = requireTab_(ss, 'Storyline_Tracker'); // engine.119: no runtime create (v2.1 header lives on the tab)
-  return sheet;
-}
 
 function ensureCitizenMediaUsage_(ss) {
   var sheet = requireTab_(ss, 'Citizen_Media_Usage'); // engine.119: no runtime create (v2.5 header lives on the tab)
@@ -875,11 +721,6 @@ function upgradeMediaIntakeSheets() {
   var upgraded = [];
 
   // Press_Drafts removed S98 — no upgrade needed
-
-  // Upgrade Storyline_Tracker
-  if (upgradeSheetWithCalendarColumns_(ss, 'Storyline_Tracker', 8)) {
-    upgraded.push('Storyline_Tracker');
-  }
 
   // Upgrade Citizen_Media_Usage
   if (upgradeSheetWithCalendarColumns_(ss, 'Citizen_Media_Usage', 6)) {

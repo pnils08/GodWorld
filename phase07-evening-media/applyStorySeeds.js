@@ -198,10 +198,9 @@ function applyStorySeeds_(ctx) {
   var storylineRawData = [];
   var coverageRawData = [];
   if (ctx.ss) {
-    var stSheet = ctx.ss.getSheetByName('Storyline_Tracker');
-    if (stSheet && stSheet.getLastRow() > 0) {
-      storylineRawData = stSheet.getDataRange().getValues();
-    }
+    // engine.266: the Storyline_Tracker read is retired (tab discontinued).
+    // storylineRawData stays empty, so the storyline-state and arc-binding
+    // lookups below return null for every seed.
     var ecrSheet = ctx.ss.getSheetByName('Edition_Coverage_Ratings');
     if (ecrSheet && ecrSheet.getLastRow() > 0) {
       coverageRawData = ecrSheet.getDataRange().getValues();
@@ -564,199 +563,11 @@ function applyStorySeeds_(ctx) {
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // v3.8: STORYLINE TRACKER INTEGRATION
+  // v3.8 STORYLINE TRACKER SEEDS — RETIRED engine.266
   // ═══════════════════════════════════════════════════════════════════════════
-
-  /**
-   * Load active storylines from Storyline_Tracker sheet
-   */
-  function loadActiveStorylines_() {
-    var storylines = [];
-    var ss = ctx.ss;
-    if (!ss) return storylines;
-
-    var sheet = ss.getSheetByName('Storyline_Tracker');
-    if (!sheet) return storylines;
-
-    var data = sheet.getDataRange().getValues();
-    if (data.length < 2) return storylines;
-
-    var headers = data[0];
-    var col = function(name) {
-      return headers.indexOf(name);
-    };
-
-    // Column indices
-    var cycleAddedIdx = col('CycleAdded');
-    var typeIdx = col('StorylineType');
-    var descIdx = col('Description');
-    var nhIdx = col('Neighborhood');
-    var citizensIdx = col('RelatedCitizens');
-    var priorityIdx = col('Priority');
-    var statusIdx = col('Status');
-    // v3.11 (S206 — T2.6 step 4): expand record with cols needed by priorityEngine
-    // (StorylineId / LastCoverageCycle / MentionCount). parseStorylineRow_ in
-    // utilities/priorityEngine.js reads LastCoverageCycle when present; surfacing
-    // it here closes the column-set gap surfaced by T2.2 status note.
-    var storylineIdIdx = col('StorylineId');
-    var lastCoverageCycleIdx = col('LastCoverageCycle');
-    var mentionCountIdx = col('MentionCount');
-
-    for (var i = 1; i < data.length; i++) {
-      var row = data[i];
-      var status = statusIdx >= 0 ? row[statusIdx] : '';
-
-      // Only include active and dormant storylines
-      if (status !== 'active' && status !== 'dormant') continue;
-
-      storylines.push({
-        rowNumber: i + 1,
-        cycleAdded: cycleAddedIdx >= 0 ? row[cycleAddedIdx] : 0,
-        type: typeIdx >= 0 ? row[typeIdx] : '',
-        description: descIdx >= 0 ? row[descIdx] : '',
-        neighborhood: nhIdx >= 0 ? row[nhIdx] : '',
-        relatedCitizens: citizensIdx >= 0 ? row[citizensIdx] : '',
-        priority: priorityIdx >= 0 ? row[priorityIdx] : 'normal',
-        status: status,
-        cyclesSinceAdded: cycle - (cycleAddedIdx >= 0 ? (row[cycleAddedIdx] || 0) : 0),
-        // v3.11 additions:
-        storylineId: storylineIdIdx >= 0 ? row[storylineIdIdx] : '',
-        lastCoverageCycle: lastCoverageCycleIdx >= 0 ? row[lastCoverageCycleIdx] : null,
-        mentionCount: mentionCountIdx >= 0 ? row[mentionCountIdx] : 0
-      });
-    }
-
-    return storylines;
-  }
-
-  /**
-   * Map storyline type to domain.
-   *
-   * 'thread' was 'COMMUNITY' through v3.13 — empirical audit S226 (engine.23)
-   * found StorylineType is overloaded: 'sports' / 'question' / 'mystery' /
-   * 'seasonal' / 'festival' carry content-domain semantics, but 'thread' /
-   * 'arc' / 'developing' label narrative shape and span heterogeneous content.
-   * Of 30 live thread-typed rows: 23 sports/civic/culture/business/health/
-   * infrastructure, 4 legitimately community/faith, 3 partial fits. Forcing
-   * threads to COMMUNITY hit Maria Keen's signature themes for theme:8 on
-   * every dormant thread regardless of content; threads now route GENERAL
-   * (themeAxis_ short-circuits to 0 on GENERAL per bylineEngine.js:106) and
-   * format axis decides byline. See scripts/auditStorylineDomainRouting.js
-   * for the regression check.
-   */
-  var STORYLINE_TYPE_DOMAINS = {
-    'arc': 'GENERAL',
-    'question': 'CIVIC',
-    'thread': 'GENERAL',
-    'mystery': 'CIVIC',
-    'developing': 'GENERAL',
-    'seasonal': 'CULTURE',
-    'festival': 'CULTURE',
-    'sports': 'SPORTS'
-  };
-
-  /**
-   * Generate seeds from active storylines
-   */
-  function generateStorylineSeeds_(storylines) {
-    var storylineSeeds = [];
-
-    // engine.35 Phase 1 (S259) — gate the storyline-followup recycler. A followup
-    // is the engine re-nudging a quiet thread; per the division of labor (engine
-    // EMERGES, Supermemory MAINTAINS) continuity for quiet threads belongs to
-    // Supermemory (articles+grades), not a recycled engine seed. Two gates:
-    //  (1) dormant SUBJECT — a thread anchored to a non-Oakland locale (Chicago is
-    //      canonically disabled S229; Chase Center = SF) has no live anchor → no followup.
-    //  (2) age-out — stop re-nudging a thread after FOLLOWUP_AGE_CAP cycles since added.
-    // Live Oakland threads with genuine fresh activity resurface via engine_audit
-    // patterns (Phase 2 routes patterns→seeds), not a blind dormant re-nudge.
-    // FOLLOWUP_AGE_CAP is the tuning knob (Mike S259); raise/lower to trade
-    // continuity-recall against noise. Plan: 2026-06-15-story-seed-deck-engine-emergence.
-    var FOLLOWUP_AGE_CAP = 12;
-    var NON_OAKLAND_LOCALE_RE = /chicago|bridgeport|united center|chase center|\bbulls\b/i;
-
-    for (var si = 0; si < storylines.length; si++) {
-      var sl = storylines[si];
-
-      // Determine domain from storyline type
-      var domain = STORYLINE_TYPE_DOMAINS[sl.type] || 'GENERAL';
-
-      // Parse related citizens for interview suggestions
-      var citizenSuggestions = [];
-      if (sl.relatedCitizens) {
-        var parts = String(sl.relatedCitizens).split(',');
-        for (var pi = 0; pi < Math.min(parts.length, 2); pi++) {
-          citizenSuggestions.push(parts[pi].trim());
-        }
-      }
-
-      // Calculate priority based on storyline priority
-      var basePriority = 1;
-      if (sl.priority === 'urgent') basePriority = 3;
-      else if (sl.priority === 'high') basePriority = 2;
-      else if (sl.priority === 'low' || sl.priority === 'background') basePriority = 0;
-
-      // Generate follow-up seed for dormant storylines (not mentioned in 3+ cycles),
-      // gated by engine.35 Phase 1: skip non-Oakland-locale (dormant-subject) threads
-      // and threads aged past FOLLOWUP_AGE_CAP (continuity beyond that = Supermemory's).
-      var followupLocaleBlob = String(sl.neighborhood || '') + ' ' +
-        String(sl.relatedCitizens || '') + ' ' + String(sl.description || '');
-      var dormantSubject = NON_OAKLAND_LOCALE_RE.test(followupLocaleBlob);
-      var withinAgeCap = sl.cyclesSinceAdded <= FOLLOWUP_AGE_CAP;
-      if (!dormantSubject && withinAgeCap &&
-          (sl.status === 'dormant' || sl.cyclesSinceAdded >= 3)) {
-        storylineSeeds.push(makeSeed(
-          'FOLLOW-UP: ' + sl.description + ' — Last coverage was ' + sl.cyclesSinceAdded + ' cycles ago.',
-          domain,
-          sl.neighborhood,
-          Math.max(basePriority, 2),
-          'storyline-followup',
-          citizenSuggestions,
-          sl.rowNumber
-        ));
-      }
-
-      // Generate active storyline seeds for high/urgent priority
-      if (sl.status === 'active' && (sl.priority === 'high' || sl.priority === 'urgent')) {
-        storylineSeeds.push(makeSeed(
-          'CONTINUING: ' + sl.description,
-          domain,
-          sl.neighborhood,
-          basePriority,
-          'storyline-active',
-          citizenSuggestions,
-          sl.rowNumber
-        ));
-      }
-
-      // Generate mystery/question seeds
-      if (sl.type === 'mystery' || sl.type === 'question') {
-        storylineSeeds.push(makeSeed(
-          'OPEN QUESTION: ' + sl.description + ' — Still unresolved.',
-          'CIVIC',
-          sl.neighborhood,
-          Math.max(basePriority, 2),
-          'storyline-question',
-          citizenSuggestions,
-          sl.rowNumber
-        ));
-      }
-    }
-
-    return storylineSeeds;
-  }
-
-  // Load storylines and generate seeds
-  var activeStorylines = loadActiveStorylines_();
-  var storylineSeedsList = generateStorylineSeeds_(activeStorylines);
-
-  // Add storyline seeds to main seeds array
-  for (var ssi = 0; ssi < storylineSeedsList.length; ssi++) {
-    seeds.push(storylineSeedsList[ssi]);
-  }
-
-  // Store storyline count in summary for briefing
-  S.activeStorylineCount = activeStorylines.length;
+  // Follow-up / continuing / open-question seeds were generated from
+  // Storyline_Tracker rows. The tab is discontinued; desks get open threads
+  // from Storyline_Ledger via scripts/buildWorldSummary.js openThreadEntries.
 
   // ═══════════════════════════════════════════════════════════════════════════
   // v3.4: SPORTS PHASE NORMALIZATION

@@ -218,7 +218,7 @@
 - **replayCycle(cycleId)**
 
 - **runCyclePhases_(ctx)**
-  Reads: S.citizenEvents, S.cityEvents, S.compressedLine, S.contractSeeds, S.cycleSummary, S.domainPresence, S.eveningSports, S.mediaEffects, S.nightlife, S.nightlifeVolume, S.rippleEvents, S.storyHooks, S.storylineHealth, S.storylineWeaving, S.undockedFeedEntries
+  Reads: S.citizenEvents, S.cityEvents, S.compressedLine, S.contractSeeds, S.cycleSummary, S.domainPresence, S.eveningSports, S.mediaEffects, S.nightlife, S.nightlifeVolume, S.rippleEvents, S.storyHooks, S.storylineHealth, S.undockedFeedEntries
   Writes: S.transitStorySignals, S.validationReport
 
 ### initSimulationLedger.js
@@ -1888,6 +1888,8 @@
   RNG: ctx.rng / safeRand_(ctx)
 
 ### householdFormationEngine.js
+- **parseJSON(value, defaultValue)**
+
 - **processHouseholdFormation_(ctx)**
   Reads: S.storyHooks
   Writes: S.householdFormation, S.storyHooks
@@ -2591,9 +2593,9 @@
 ### applyStorySeeds.js
 - **applyStorySeeds_(ctx)**
   Reads: S.canonHoods, S.chaosCarsEvents, S.cityDynamics, S.cityEvents, S.civicLoad, S.crimeMetrics, S.cycleId, S.cycleWeight, S.cycleWeightReason, S.demographicDrift, S.domainPresence, S.editionCoverageTriggers, S.eveningMedia, S.eventArcs, S.famousPeople, S.generationalEvents, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.manualStoryInputs, S.migrationDrift, S.namedSpotlights, S.neighborhoodDemographics, S.neighborhoodDynamics, S.neighborhoodEconomies, S.neighborhoodMigration, S.neighborhoodPulse, S.patternFlag, S.season, S.seasonalStorySeeds, S.shockFlag, S.sportsSeason, S.sportsZones, S.storySeeds, S.textureTriggers, S.tier1ChaosEvents, S.weather, S.worldEvents, S.worldPopulation
-  Writes: S.activeStorylineCount, S.storySeeds
+  Writes: S.storySeeds
   Config: ctx.config.cycleCount, ctx.config.manualStoryInputs
-  Sheets: Edition_Coverage_Ratings, Storyline_Tracker
+  Sheets: Edition_Coverage_Ratings
 
 - **renderStorySeedsForUI_(ctx, maxSeeds)**
   Reads: S.storySeeds
@@ -2798,9 +2800,6 @@
 - **processArticleIntake_(ss, cycle, cal)**
   Sheets: Media_Intake
 
-- **processStorylineIntake_(ss, cycle, cal)**
-  Sheets: Storyline_Intake
-
 - **processCitizenUsageIntake_(ss, cycle, cal)**
   Sheets: Citizen_Usage_Intake
 
@@ -2818,8 +2817,6 @@
 - **setupStorylineValidation_(sheet)**
 
 - **setupUsageValidation_(sheet)**
-
-- **ensureStorylineTracker_(ss)**
 
 - **ensureCitizenMediaUsage_(ss)**
 
@@ -2906,51 +2903,6 @@
   Reads: S.absoluteCycle, S.citizenBonds, S.cityDynamics, S.creationDayAnniversary, S.cycleId, S.cycleOfYear, S.demographicShifts, S.domainPresence, S.eventArcs, S.failedInitiatives, S.holiday, S.holidayNeighborhood, S.holidayPriority, S.initiativeEvents, S.initiativeRipples, S.isCreationDay, S.isFirstFriday, S.migrationDrift, S.neighborhoodDemographics, S.patternFlag, S.positiveInitiatives, S.relationshipBonds, S.season, S.shockFlag, S.sportsEventTriggers, S.sportsSeason, S.storyHooks, S.votesThisCycle, S.weather, S.weatherEvents, S.weatherMood, S.worldEvents
   Writes: S.storyHooks
   Config: ctx.config.cycleCount
-
-### storylineWeavingEngine.chaos.test.js
-- **assert(label, cond, detail)**
-
-### storylineWeavingEngine.js
-- **weaveStorylines_(ctx)**
-  Reads: S.storyHooks
-  Writes: S.storyHooks, S.storylineWeaving
-  Config: ctx.config.cycleCount
-
-- **createChaosArcs_(ctx)**
-  Reads: S.tier1ChaosEvents
-  Config: ctx.config.cycleCount
-  Sheets: Storyline_Tracker
-
-- **loadActiveStorylinesForWeaving_(ss)**
-  Sheets: Storyline_Tracker
-
-- **parseJSON(value, defaultValue)**
-
-- **buildCitizenStorylineMap_(storylines)**
-
-- **parseCitizenList_(citizenString)**
-
-- **findMultiStorylineCitizens_(citizenMap)**
-
-- **assignCitizenRoles_(ss, storylines, cycle)**
-  Sheets: Storyline_Tracker
-
-- **autoAssignRoles_(citizens, storyline)**
-
-- **inferConflictType_(storyline, roles)**
-
-- **detectCrossStorylineConflicts_(ss, storylines, multiCitizens, cycle)**
-
-- **findStorylineById_(storylines, storylineId)**
-
-- **detectRelationshipClashes_(ss, storylines, cycle)**
-
-- **detectAllianceOpportunities_(ss, storylines, cycle)**
-
-- **getCitizensByRole_(storyline, role)**
-
-- **updateCrossStorylineLinks_(ss, storylines, multiCitizens)**
-  Sheets: Storyline_Tracker
 
 ### textureTriggers.js
 - **mulberry32_(seed)**
@@ -3171,8 +3123,6 @@
 - **loadMediaBriefingRow_(cache, cycle)**
 
 - **loadCyclePacketText_(cache, cycle)**
-
-- **loadActiveStorylinesFromCache_(cache, cycle)**
 
 - **loadWorldEvents_(cache, cycle)**
 
@@ -4245,5 +4195,5 @@ _No top-level function declarations found (helper/constants file)._
 
 ---
 
-**Files scanned:** 179
-**Functions mapped:** 1494
+**Files scanned:** 177
+**Functions mapped:** 1475

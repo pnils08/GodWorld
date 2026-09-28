@@ -44,7 +44,6 @@ var CONFIG = {
   // Sheets to export (add/remove as needed)
   EXPORT_SHEETS: [
     'Riley_Digest',
-    'Storyline_Intake',
     'Citizen_Media_Usage',
     'Citizen_Usage_Intake',
     // Continuity_Intake/Loop removed — pipeline eliminated
@@ -58,7 +57,7 @@ var CONFIG = {
     // Dead tabs removed S139: NBA_Game_Intake, MLB_Game_Intake, Sports_Calendar, Arc_Ledger
     // Ghost tabs removed S139: Intake, Advancement_Intake1 (renamed to Citizen_Usage_Intake S106)
     // Duplicate removed S139: Sports_Feed (duplicate of Oakland_Sports_Feed)
-    'Storyline_Tracker',
+    // Storyline_Tracker / Storyline_Intake removed engine.266 (discontinued system)
     'Story_Hook_Deck',
     'Story_Seed_Deck',
     'Initiative_Tracker',

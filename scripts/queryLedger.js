@@ -643,7 +643,7 @@ async function queryVerify(term) {
     'Civic_Office_Ledger',
     'Business_Ledger',
     'WorldEvents_V3_Ledger',
-    'Storyline_Tracker',
+    'Storyline_Ledger',
   ];
 
   const results = {};

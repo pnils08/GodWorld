@@ -1,8 +1,8 @@
 {
   "generated": "2026-09-28",
   "generator": "scripts/stubEngine.js",
-  "filesScanned": 179,
-  "functionsMapped": 1494,
+  "filesScanned": 177,
+  "functionsMapped": 1475,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -1069,7 +1069,6 @@
         "phase05-citizens/runConductEngine.js::runConductEngine_",
         "phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_",
         "phase07-evening-media/storyHook.js::storyHookEngine_",
-        "phase07-evening-media/storylineWeavingEngine.js::weaveStorylines_",
         "phase08-v3-chicago/v3preLoader.js::v3PreloadContext_"
       ],
       "readers": [
@@ -1102,7 +1101,6 @@
         "phase05-citizens/runConductEngine.js::runConductEngine_",
         "phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_",
         "phase07-evening-media/storyHook.js::storyHookEngine_",
-        "phase07-evening-media/storylineWeavingEngine.js::weaveStorylines_",
         "phase08-v3-chicago/applyCycleRecovery.js::applyCycleRecovery_",
         "phase08-v3-chicago/v3DomainWriter.js::deriveDomainPresenceV34_",
         "phase08-v3-chicago/v3NeighborhoodWriter.js::saveV3NeighborhoodMap_",
@@ -1640,14 +1638,6 @@
       "readers": [
         "phase01-config/godWorldEngine2.js::runCyclePhases_",
         "phase10-persistence/buildCyclePacket.js::buildCyclePacket_"
-      ]
-    },
-    "storylineWeaving": {
-      "writers": [
-        "phase07-evening-media/storylineWeavingEngine.js::weaveStorylines_"
-      ],
-      "readers": [
-        "phase01-config/godWorldEngine2.js::runCyclePhases_"
       ]
     },
     "previousEvening": {
@@ -2805,8 +2795,7 @@
       ],
       "readers": [
         "phase04-events/chaosCarsEngine.js::runChaosCarsEngine_",
-        "phase07-evening-media/applyStorySeeds.js::applyStorySeeds_",
-        "phase07-evening-media/storylineWeavingEngine.js::createChaosArcs_"
+        "phase07-evening-media/applyStorySeeds.js::applyStorySeeds_"
       ]
     },
     "chaosShip": {
@@ -3835,12 +3824,6 @@
     "eventPrioritization": {
       "writers": [
         "phase06-analysis/prioritizeEvents.js::prioritizeEvents_"
-      ],
-      "readers": []
-    },
-    "activeStorylineCount": {
-      "writers": [
-        "phase07-evening-media/applyStorySeeds.js::applyStorySeeds_"
       ],
       "readers": []
     },
@@ -4927,18 +4910,6 @@
         "phase07-evening-media/buildContractSeeds.js::contractSeedBackdropIndex_"
       ]
     },
-    "Storyline_Tracker": {
-      "writers": [
-        "phase07-evening-media/storylineWeavingEngine.js::createChaosArcs_"
-      ],
-      "readers": [
-        "phase07-evening-media/applyStorySeeds.js::applyStorySeeds_",
-        "phase07-evening-media/storylineWeavingEngine.js::assignCitizenRoles_",
-        "phase07-evening-media/storylineWeavingEngine.js::createChaosArcs_",
-        "phase07-evening-media/storylineWeavingEngine.js::loadActiveStorylinesForWeaving_",
-        "phase07-evening-media/storylineWeavingEngine.js::updateCrossStorylineLinks_"
-      ]
-    },
     "Story_Seed_Deck": {
       "writers": [],
       "readers": [
@@ -4954,13 +4925,6 @@
       "readers": [
         "phase07-evening-media/mediaRoomIntake.js::processArticleIntake_",
         "phase07-evening-media/parseMediaRoomMarkdown.js::ensureMediaIntakeSheet_"
-      ]
-    },
-    "Storyline_Intake": {
-      "writers": [],
-      "readers": [
-        "phase07-evening-media/mediaRoomIntake.js::processStorylineIntake_",
-        "phase07-evening-media/parseMediaRoomMarkdown.js::ensureStorylineIntakeSheet_"
       ]
     },
     "Citizen_Usage_Intake": {
@@ -4983,6 +4947,12 @@
         "phase07-evening-media/mediaRoomIntake.js::processRawCitizenUsageLogManual",
         "phase07-evening-media/parseMediaRoomMarkdown.js::diagnosePasteSheet",
         "phase07-evening-media/parseMediaRoomMarkdown.js::parseMediaRoomMarkdown"
+      ]
+    },
+    "Storyline_Intake": {
+      "writers": [],
+      "readers": [
+        "phase07-evening-media/parseMediaRoomMarkdown.js::ensureStorylineIntakeSheet_"
       ]
     },
     "Domain_Tracker": {

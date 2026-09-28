@@ -76,7 +76,6 @@ const SHEETS_TO_READ = [
   // Event_Arc_Ledger REMOVED (engine.72 G-EC55): arc loop retired S313
   // (Ripple_Ledger is the successor surface) — expecting rows here filed a
   // false MED ledger-completeness gap every cycle.
-  'Storyline_Tracker',
   'Simulation_Ledger',
   'LifeHistory_Log',  // S184 (Row 6): citizen life events for baseline-brief subject attribution
   // G-ER9 (S246 ES-3): consumed by detectLedgerCompleteness for current-cycle

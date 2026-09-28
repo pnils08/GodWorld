@@ -462,17 +462,14 @@ function runWorldCycle() {
   safePhaseCall_(ctx, 'Phase7-EveningMedia', function() { buildEveningMedia_(ctx); });
   safePhaseCall_(ctx, 'Phase7-CitySystems', function() { buildCityEveningSystems_(ctx); });
   safePhaseCall_(ctx, 'Phase7-MediaPacket', function() { buildMediaPacket_(ctx); });
-  // engine.220 (S461): media feedback runs ONCE per Cycle, inside Phase8-V3Integration
-  // (after this Cycle's arcs exist at Phase7-ChaosArcs). The Phase-7 slot that used to
-  // sit here doubled arc.tension and the media sentiment shift every Cycle.
-  safePhaseCall_(ctx, 'Phase7-StorylineWeaving', function() { weaveStorylines_(ctx); });
+  // engine.220 (S461): media feedback runs ONCE per Cycle, inside Phase8-V3Integration.
+  // The Phase-7 slot that used to sit here doubled arc.tension and the media
+  // sentiment shift every Cycle.
+  // engine.266: Phase7-StorylineWeaving and Phase7-ChaosArcs retired with the
+  // discontinued Storyline_Tracker (their only input and output).
 
   safePhaseCall_(ctx, 'Phase7-SeasonalSeeds', function() { applySeasonalStorySeeds_(ctx); });
   safePhaseCall_(ctx, 'Phase7-ChaosWeights', function() { applyChaosCategoryWeights_(ctx); });
-  // engine.11 chaos-cars (T5.4) — create a Storyline_Tracker arc per Tier-1 chaos hit.
-  // Standalone (NOT inside weaveStorylines_, which is wired only in the production block) so it
-  // runs in BOTH entry blocks alongside applyStorySeeds_.
-  safePhaseCall_(ctx, 'Phase7-ChaosArcs', function() { createChaosArcs_(ctx); });
   safePhaseCall_(ctx, 'Phase7-StorySeeds', function() { applyStorySeeds_(ctx); });
   // Seed contract v2 (Mike-direct 2026-07-05): joins S.rippleEvents causes with
   // this cycle's LifeHistory citizen events into S.contractSeeds → deck at Phase 10.
@@ -2177,20 +2174,13 @@ function runCyclePhases_(ctx) {
   safePhaseCall_(ctx, 'Phase7-EveningMedia', function() { buildEveningMedia_(ctx); });
   safePhaseCall_(ctx, 'Phase7-CitySystems', function() { buildCityEveningSystems_(ctx); });
   safePhaseCall_(ctx, 'Phase7-MediaPacket', function() { buildMediaPacket_(ctx); });
-  // engine.220 (S461): media feedback runs ONCE per Cycle, inside Phase8-V3Integration
-  // (after this Cycle's arcs exist at Phase7-ChaosArcs). The Phase-7 slot that used to
-  // sit here doubled arc.tension and the media sentiment shift every Cycle.
-  // S409 (G-PF30): was missing from this list only — production runs it.
-  // Publishes S.storyHooks / S.storylineWeaving; its Storyline_Tracker direct
-  // writes are an existing §9 carve-out (same class dry-run already carries
-  // from Phase 3 own-tab writers).
-  safePhaseCall_(ctx, 'Phase7-StorylineWeaving', function() { weaveStorylines_(ctx); });
+  // engine.220 (S461): media feedback runs ONCE per Cycle, inside Phase8-V3Integration.
+  // The Phase-7 slot that used to sit here doubled arc.tension and the media
+  // sentiment shift every Cycle.
+  // engine.266: Phase7-StorylineWeaving and Phase7-ChaosArcs retired with the
+  // discontinued Storyline_Tracker (their only input and output).
   safePhaseCall_(ctx, 'Phase7-SeasonalSeeds', function() { applySeasonalStorySeeds_(ctx); });
   safePhaseCall_(ctx, 'Phase7-ChaosWeights', function() { applyChaosCategoryWeights_(ctx); });
-  // engine.11 chaos-cars (T5.4) — create a Storyline_Tracker arc per Tier-1 chaos hit.
-  // Standalone (NOT inside weaveStorylines_, which is wired only in the production block) so it
-  // runs in BOTH entry blocks alongside applyStorySeeds_.
-  safePhaseCall_(ctx, 'Phase7-ChaosArcs', function() { createChaosArcs_(ctx); });
   safePhaseCall_(ctx, 'Phase7-StorySeeds', function() { applyStorySeeds_(ctx); });
   // Seed contract v2 (Mike-direct 2026-07-05): joins S.rippleEvents causes with
   // this cycle's LifeHistory citizen events into S.contractSeeds → deck at Phase 10.

@@ -88,14 +88,16 @@ async function run() {
   var hookI = shH.indexOf('Hook') >= 0 ? shH.indexOf('Hook') : shH.indexOf('Description');
   cHooks.slice(0, 12).forEach(function(r) { console.log('  -', (r[hookI] || '').substring(0, 120)); });
 
-  // Active storylines
-  var st = await get('Storyline_Tracker!A1:Z');
+  // Open storylines (Storyline_Ledger; Storyline_Tracker discontinued)
+  var st = await get('Storyline_Ledger!A1:L');
   var stH = st[0];
   var stSI = stH.indexOf('Status');
-  var actv = st.filter(function(r) { return r[stSI] === 'active'; });
-  console.log('\n=== ACTIVE STORYLINES: ' + actv.length + ' ===');
-  var hlI = stH.indexOf('Headline') >= 0 ? stH.indexOf('Headline') : stH.indexOf('Description');
-  actv.slice(0, 10).forEach(function(r) { console.log('  -', (r[hlI] || '').substring(0, 120)); });
+  var stLC = stH.indexOf('LastCycle');
+  var stID = stH.indexOf('StorylineId');
+  var actv = st.slice(1).filter(function(r) { return String(r[stSI] || '').toLowerCase() !== 'closed'; });
+  actv.sort(function(a, b) { return (Number(b[stLC]) || 0) - (Number(a[stLC]) || 0); });
+  console.log('\n=== OPEN STORYLINES: ' + actv.length + ' ===');
+  actv.slice(0, 10).forEach(function(r) { console.log('  -', r[stID], '(last C' + r[stLC] + ')'); });
 
   // Sports feeds
   var oak = await get('Oakland_Sports_Feed!A1:Z');

@@ -94,7 +94,6 @@ function buildFixtureCtx() {
       Crime_Metrics: [],
       Transit_Metrics: [],
       Event_Arc_Ledger: [],
-      Storyline_Tracker: [],
       LifeHistory_Log: [],
     },
     prior: [priorCycle(92), priorCycle(91), priorCycle(90)],

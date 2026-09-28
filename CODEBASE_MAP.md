@@ -208,8 +208,6 @@ The largest and most complex phase; simulates individual citizen lifecycles each
 | `parseMediaRoomMarkdown.js` (~30 KB) | Parses structured media room Markdown. **(S290)** Timestamp column now stamps C+cycle. |
 | `sportsStreaming.js` (~18 KB) | Sports streaming / play-by-play events |
 | `storyHook.js` (~55 KB) | Generates story-hook suggestions for upcoming cycles |
-| `storylineWeavingEngine.js` (~23 KB) | Weaves multiple storylines into coherent narrative arcs. **(S290)** Timestamp column now uses `inWorldStamp_(ctx)`. |
-| `storylineWeavingEngine.chaos.test.js` | Chaos-mode weaving test |
 | `textureTriggers.js` (~25 KB) | Atmospheric texture triggers (ambient events) |
 | `updateMediaSpread.js` | Updates media spread metrics |
 | `updateTrendTrajectory.js` | Updates trending topic trajectories |
@@ -408,7 +406,6 @@ The largest and most complex phase; simulates individual citizen lifecycles each
 | File | Purpose |
 |---|---|
 | `assembleDecisions.js` (~20 KB) | Assembles pending decisions for player |
-| `bindStorylineReporters.js` (~16 KB) | Binds reporters to storylines |
 | `buildDecisionQueue.js` | Decision queue document |
 | `cascadeMayorDecisions.js` (~14 KB) | Cascades mayor decisions to initiative tracker |
 | `checkSupplementalTriggers.js` | Checks supplemental event triggers |
@@ -752,7 +749,6 @@ Tests run via `node scripts/run-tests.js` (custom Jest-like runner).
 | `phase04-events/chaosCarsEngine.test.js` | ChaosCars engine | ~11 |
 | `phase05-citizens/applyChaosDecay.test.js` | Chaos decay | ~4 |
 | `phase10-persistence/saveChaosCars.test.js` | Save ChaosCars | ~3 |
-| `phase07-evening-media/storylineWeavingEngine.chaos.test.js` | Storyline weaving chaos | ~2 |
 | `utilities/chaosCarsConfig.test.js` | ChaosCars config | ~17 |
 | `utilities/chaosCarsDecay.test.js` | ChaosCars decay | ~3 |
 | `utilities/neighborhoodPulseMap.test.js` | Neighbourhood pulse map | ~4 |

@@ -91,6 +91,17 @@ var RELATIONSHIP_TYPES = {
   GRANDPARENT_GRANDCHILD: 'grandparent-grandchild'
 };
 
+// Moved here from the retired storylineWeavingEngine.js (engine.266) — this
+// file is its only engine consumer.
+function parseJSON(value, defaultValue) {
+  if (!value || value === '') return defaultValue;
+  try {
+    return JSON.parse(value);
+  } catch (err) {
+    return defaultValue;
+  }
+}
+
 // Income thresholds for household formation
 var MIN_INCOME_SINGLE_HOUSEHOLD = 30000;  // $30k to afford own place
 var MIN_INCOME_COUPLE_HOUSEHOLD = 40000;  // $40k combined
@@ -566,9 +577,8 @@ function loadHouseholds_(ss) {
   return households;
 }
 
-// parseJSON_ helper deleted S199 (Phase B.4 collision dedup) — identical impl
-// lives in phase07-evening-media/storylineWeavingEngine.js, resolved via flat
-// namespace. Internal callers in this file use the global def.
+// parseJSON_ helper deleted S199 (Phase B.4 collision dedup) — callers use
+// parseJSON, defined at the top of this file.
 
 
 // ════════════════════════════════════════════════════════════════════════════

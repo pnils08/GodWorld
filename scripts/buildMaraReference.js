@@ -2,7 +2,7 @@
 /**
  * buildMaraReference.js — Generate clean reference files for Mara audits
  *
- * Pulls from 6 spreadsheet tabs and outputs readable text files
+ * Pulls from 5 spreadsheet tabs and outputs readable text files
  * that Mara can ctrl+F during edition audits.
  *
  * Usage:
@@ -12,7 +12,6 @@
  *   - citizen_roster.txt      (ENGINE-mode citizens)
  *   - as_roster.txt           (A's players from As_Roster tab)
  *   - tribune_roster.txt      (Bay Tribune staff)
- *   - chicago_roster.txt      (Chicago Citizens — Bulls + city)
  *   - business_registry.txt   (Business_Ledger)
  *   - faith_registry.txt      (Faith_Organizations)
  */
@@ -31,11 +30,10 @@ async function main() {
 
   fs.mkdirSync(OUT_DIR, { recursive: true });
 
-  const [slData, asData, btData, chiData, bizData, faithData] = await Promise.all([
+  const [slData, asData, btData, bizData, faithData] = await Promise.all([
     sheets.getSheetData('Simulation_Ledger'),
     sheets.getSheetData('As_Roster'),
     sheets.getSheetData('Bay_Tribune_Oakland'),
-    sheets.getSheetData('Chicago_Citizens'),
     sheets.getSheetData('Business_Ledger'),
     sheets.getSheetData('Faith_Organizations'),
   ]);
@@ -43,7 +41,6 @@ async function main() {
   buildCitizenRoster(slData);
   buildAsRoster(asData);
   buildTribuneRoster(btData);
-  buildChicagoRoster(chiData);
   buildBusinessRegistry(bizData);
   buildFaithRegistry(faithData);
 
@@ -225,73 +222,6 @@ function buildTribuneRoster(data) {
   const filePath = path.join(OUT_DIR, 'tribune_roster.txt');
   fs.writeFileSync(filePath, lines.join('\n'));
   console.log('  tribune_roster.txt — ' + staff.length + ' Tribune staff');
-}
-
-// --- Chicago Roster (from Chicago_Citizens tab) ---
-
-function buildChicagoRoster(data) {
-  const header = data[0];
-  const rows = data.slice(1);
-
-  const col = (name) => header.indexOf(name);
-  const iId = col('CitizenId');
-  const iName = col('Name');
-  const iAge = col('Age');
-  const iNeighborhood = col('Neighborhood');
-  const iOccupation = col('Occupation');
-  const iTier = col('Tier');
-  const iStatus = col('Status');
-
-  const citizens = [];
-  for (const row of rows) {
-    const status = (row[iStatus] || '').toString().trim();
-    citizens.push({
-      id: (row[iId] || '').toString().trim(),
-      name: (row[iName] || '').toString().trim(),
-      age: (row[iAge] || '').toString().trim(),
-      neighborhood: (row[iNeighborhood] || '').toString().trim(),
-      occupation: (row[iOccupation] || '').toString().trim(),
-      tier: (row[iTier] || '').toString().trim(),
-      status: status,
-    });
-  }
-
-  citizens.sort((a, b) => {
-    const ta = parseInt(a.tier) || 99;
-    const tb = parseInt(b.tier) || 99;
-    if (ta !== tb) return ta - tb;
-    return a.name.localeCompare(b.name);
-  });
-
-  const active = citizens.filter(c => c.status.toLowerCase() === 'active');
-  const inactive = citizens.filter(c => c.status.toLowerCase() !== 'active');
-
-  const lines = [
-    'CHICAGO CITIZENS ROSTER',
-    'Includes Bulls players and Chicago residents',
-    'Generated: ' + new Date().toISOString().split('T')[0],
-    'Total: ' + citizens.length + ' (' + active.length + ' active, ' + inactive.length + ' inactive)',
-    'Bulls GM: Mike Paulson',
-    '',
-    pad('ID', 16) + pad('Name', 25) + pad('Age', 5) + pad('Neighborhood', 18) + pad('Occupation', 30) + pad('Tier', 5) + 'Status',
-    '-'.repeat(105),
-  ];
-
-  for (const c of citizens) {
-    lines.push(
-      pad(c.id, 16) +
-      pad(c.name, 25) +
-      pad(c.age, 5) +
-      pad(c.neighborhood, 18) +
-      pad(c.occupation, 30) +
-      pad(c.tier, 5) +
-      c.status
-    );
-  }
-
-  const filePath = path.join(OUT_DIR, 'chicago_roster.txt');
-  fs.writeFileSync(filePath, lines.join('\n'));
-  console.log('  chicago_roster.txt — ' + citizens.length + ' Chicago citizens');
 }
 
 // --- Business Registry (from Business_Ledger tab) ---

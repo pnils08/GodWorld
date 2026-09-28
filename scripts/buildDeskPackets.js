@@ -66,7 +66,7 @@
  * Reads from Google Sheets:
  *   Story_Seed_Deck, Story_Hook_Deck, WorldEvents_V3_Ledger, Event_Arc_Ledger,
  *   Civic_Office_Ledger, Initiative_Tracker, Simulation_Ledger,
- *   Chicago_Citizens, Cultural_Ledger, Oakland_Sports_Feed, Chicago_Sports_Feed,
+ *   Cultural_Ledger, Oakland_Sports_Feed,
  *   Storyline_Tracker, Cycle_Packet, LifeHistory_Log,
  *   Household_Ledger, Relationship_Bonds, World_Population, Media_Ledger
  *
@@ -198,29 +198,14 @@ const DESKS = {
     getsSportsFeeds: false,
     getsMara: false
   },
-  chicago: {
-    name: 'Chicago Bureau',
-    domains: ['SPORTS', 'CHICAGO'],
-    rosterDeskKeys: ['chicago'],
-    articleBudget: { min: 2, max: 3, recommended: 2 },
-    storylineKeywords: [
-      'bulls', 'trepagnier', 'chicago', 'paulson', 'giddey', 'simmons',
-      'holiday', 'united center', 'bridgeport', 'bronzeville', 'stanley',
-      'buzelis', 'huerter', 'kessler', 'romano', 'okafor', 'polk',
-      'expansion', 'nba', 'dosunmu'
-    ],
-    canonSections: ['bullsRoster'],
-    getsSportsFeeds: 'chicago',
-    getsMara: false
-  },
   letters: {
     name: 'Letters Desk',
     domains: ['ALL'],
     rosterDeskKeys: [],
     articleBudget: { min: 2, max: 4, recommended: 3 },
     storylineKeywords: [],
-    canonSections: ['council', 'pendingVotes', 'asRoster', 'bullsRoster'],
-    getsSportsFeeds: 'both',
+    canonSections: ['council', 'pendingVotes', 'asRoster'],
+    getsSportsFeeds: 'oakland',
     getsMara: false
   }
 };
@@ -234,7 +219,7 @@ const DOMAIN_TO_DESKS = {
   'SAFETY': ['civic'],
   'GOVERNMENT': ['civic'],
   'TRANSIT': ['civic'],
-  'SPORTS': ['sports', 'chicago'],
+  'SPORTS': ['sports'],
   'CULTURE': ['culture'],
   'FAITH': ['culture'],
   'COMMUNITY': ['culture'],
@@ -252,13 +237,8 @@ const DOMAIN_TO_DESKS = {
   'CELEBRITY': ['culture'],
   'TRAFFIC': ['civic'],
   'HOLIDAY': ['culture'],
-  'CHICAGO': ['chicago'],
   'GENERAL': ['civic', 'culture']
 };
-
-// Chicago-specific filtering for SPORTS domain
-const CHICAGO_TEAM_KEYWORDS = ['bulls', 'chicago', 'trepagnier', 'giddey', 'simmons', 'holiday', 'buzelis', 'huerter', 'kessler', 'stanley'];
-const OAKLAND_TEAM_KEYWORDS = ['a\'s', 'oaks', 'warriors', 'keane', 'aitken', 'horn', 'seymour', 'giannis', 'antetokounmpo', 'green', 'moody', 'dillon', 'ramos', 'coles', 'taveras', 'quintero', 'rosales', 'richards', 'rivas', 'kelley', 'davis'];
 
 // ─── SHEETS API SETUP ──────────────────────────────────────
 require('/root/GodWorld/lib/env');
@@ -305,18 +285,7 @@ function allToObjects(data) {
 
 function getDesksForDomain(domain, description) {
   var d = (domain || '').toUpperCase().trim();
-  var desks = DOMAIN_TO_DESKS[d] || ['civic', 'culture'];
-
-  // For SPORTS domain, further filter by team keywords
-  if (d === 'SPORTS' && description) {
-    var descLower = description.toLowerCase();
-    var isChicago = CHICAGO_TEAM_KEYWORDS.some(function(kw) { return descLower.indexOf(kw) !== -1; });
-    var isOakland = OAKLAND_TEAM_KEYWORDS.some(function(kw) { return descLower.indexOf(kw) !== -1; });
-    if (isChicago && !isOakland) return ['chicago'];
-    if (isOakland && !isChicago) return ['sports'];
-    // If both or neither, send to both
-  }
-  return desks;
+  return DOMAIN_TO_DESKS[d] || ['civic', 'culture'];
 }
 
 function matchesStorylineKeywords(description, keywords) {
@@ -504,7 +473,6 @@ function getCitizenNamesFromDeskData(deskEvents, deskSeeds, deskHooks, deskArcs,
   // Extract from canon roster data (A's, Bulls, council, cultural entities)
   if (deskCanon) {
     (deskCanon.asRoster || []).forEach(function(p) { if (p.name) names[p.name] = true; });
-    (deskCanon.bullsRoster || []).forEach(function(p) { if (p.name) names[p.name] = true; });
     (deskCanon.council || []).forEach(function(c) { if (c.member) names[c.member] = true; });
     (deskCanon.culturalEntities || []).forEach(function(e) { if (e.name) names[e.name] = true; });
   }
@@ -921,53 +889,6 @@ function buildAsRoster(simLedger) {
       playerStatus: pi.playerStatus || null
     };
   });
-}
-
-function buildBullsRoster(simLedger, chiSports) {
-  var nameSet = {};
-
-  // 1. Check Simulation_Ledger for any Bulls-related citizens
-  simLedger.forEach(function(c) {
-    var role = (c.RoleType || '').toLowerCase();
-    if (role.indexOf('bull') !== -1) {
-      var name = (c.First + ' ' + (c.Last || '')).trim();
-      if (name) nameSet[name] = { name: name, popId: c.POPID || '', source: 'Simulation_Ledger' };
-    }
-  });
-
-  // 2. Parse full roster from Season/Roster entries (roster is in Notes field)
-  (chiSports || []).forEach(function(entry) {
-    var evType = (entry.EventType || '').trim().toLowerCase();
-    if (evType === 'season' || evType === 'roster') {
-      // Notes field contains: "(PG) Josh Giddey, Tre Jones, Adash Stanley-rookie (SG) ..."
-      var notes = entry.Notes || '';
-      var cleaned = notes.replace(/\((?:PG|SG|SF|PF|C)\)/gi, ',')
-                         .replace(/-rookie/gi, '').replace(/-veteran/gi, '');
-      var parts = cleaned.split(',').map(function(p) { return p.trim(); })
-                         .filter(function(p) {
-                           return p.length > 3 && /[A-Z]/.test(p[0]) && p.indexOf(' ') !== -1;
-                         });
-      parts.forEach(function(name) {
-        if (!nameSet[name]) nameSet[name] = { name: name, source: 'Chicago_Sports_Feed_Roster' };
-      });
-    }
-  });
-
-  // 3. Add C79 acquisitions and other known current players from feed text
-  var knownCurrent = [
-    'Hank Trepagnier', 'Josh Giddey', 'Adash Stanley', 'Matas Buzelis',
-    'Walker Kessler', 'Kevin Huerter', 'Ayo Dosunmu', 'Isaac Okoro',
-    'Patrick Williams', 'Jrue Holiday', 'Ben Simmons', 'Noa Essengue',
-    'Jalen Smith', 'Keshad Johnson', 'Tyrese Martin', 'Simon Fontecchio'
-  ];
-  var allText = JSON.stringify(chiSports || []);
-  knownCurrent.forEach(function(name) {
-    if (!nameSet[name] && allText.indexOf(name) !== -1) {
-      nameSet[name] = { name: name, source: 'Chicago_Sports_Feed' };
-    }
-  });
-
-  return Object.values(nameSet);
 }
 
 function buildReporterList(roster) {
@@ -2194,7 +2115,7 @@ async function main() {
   var [
     seedsRaw, hooksRaw, eventsRaw, arcsRaw,
     civicRaw, initiativeRaw, simRaw, genericRaw,
-    chicagoRaw, culturalRaw, oakSportsRaw, chiSportsRaw,
+    culturalRaw, oakSportsRaw,
     storylineRaw, packetRaw, historyRaw,
     householdRaw, bondsRaw, worldPopRaw, simCalRaw,
     neighborhoodMapRaw, businessLedgerRaw, mediaLedgerRaw,
@@ -2208,10 +2129,8 @@ async function main() {
     safeGet('Initiative_Tracker'),
     safeGet('Simulation_Ledger'),
     safeGet('Generic_Citizens'),
-    safeGet('Chicago_Citizens'),
     safeGet('Cultural_Ledger'),
     safeGet('Oakland_Sports_Feed'),
-    safeGet('Chicago_Sports_Feed'),
     safeGet('Storyline_Ledger'),
     safeGet('Cycle_Packet'),
     safeGet('LifeHistory_Log'),
@@ -2306,17 +2225,13 @@ async function main() {
   PROSE_KNOWN_NAMES = ledgerNameList.filter(function(n) { return n.indexOf(' ') > 0; });
 
   // S205 Path B: genericCitizens var dropped — was only console.log'd, never used.
-  var chicagoCitizens = allToObjects(chicagoRaw);
 
   // Cultural
   var culturalLedger = allToObjects(culturalRaw);
 
   // Sports feeds: exact current Cycle for Oakland desk packets. Do not substitute
   // historical events when the selected Cycle is empty.
-  var allChiSports = allToObjects(chiSportsRaw);
   var oakSports = sportsFeedContract.filterFeedRowsForCycle(allToObjects(oakSportsRaw), CYCLE);
-  var chiSports = filterByCycle(chiSportsRaw, CYCLE);
-  if (chiSports.length === 0) chiSports = allChiSports;
 
   // Storylines: open threads from Storyline_Ledger (S407).
   //
@@ -2465,10 +2380,8 @@ async function main() {
   console.log('  Civic Officers:', civicOfficers.length);
   console.log('  Initiatives:', initiatives.length);
   console.log('  Sim Ledger:', simLedger.length);
-  console.log('  Chicago Citizens:', chicagoCitizens.length);
   console.log('  Cultural Entities:', culturalLedger.length);
   console.log('  Oakland Sports:', oakSports.length);
-  console.log('  Chicago Sports:', chiSports.length);
   console.log('  Active Storylines:', storylines.length);
   console.log('  Previous Drafts (C' + (CYCLE - 1) + '):', prevDrafts.length);
   console.log('  Recent Quotes:', recentQuotes.length);
@@ -2576,7 +2489,6 @@ async function main() {
     recentOutcomes: buildRecentOutcomes(initiatives),
     executiveBranch: buildExecutiveBranch(civicOfficers),
     asRoster: buildAsRoster(simLedger),
-    bullsRoster: buildBullsRoster(simLedger, allChiSports),
     culturalEntities: buildCulturalEntitiesCanon(culturalLedger),
     reporters: buildReporterList(roster)
   };
@@ -2587,7 +2499,6 @@ async function main() {
   console.log('  Status alerts:', canon.statusAlerts.length);
   console.log('  Executive branch — Mayor:', canon.executiveBranch.mayor || '(not found)');
   console.log('  A\'s roster:', canon.asRoster.length);
-  console.log('  Bulls roster:', canon.bullsRoster.length);
   console.log('  Cultural entities:', canon.culturalEntities.length);
   console.log('  Reporters:', canon.reporters.length);
 
@@ -2708,8 +2619,6 @@ async function main() {
     // Sports feeds
     var deskSportsFeeds = null;
     if (desk.getsSportsFeeds === 'oakland') deskSportsFeeds = oakSports;
-    else if (desk.getsSportsFeeds === 'chicago') deskSportsFeeds = chiSports;
-    else if (desk.getsSportsFeeds === 'both') deskSportsFeeds = { oakland: oakSports, chicago: chiSports };
 
     // Sports feed digest (v1.6) — structured intelligence from raw feed, team-separated
     var sportsFeedDigest = null;
@@ -2719,16 +2628,6 @@ async function main() {
         as: buildSportsFeedDigest(oaklandTeams.as, deskStorylines, "A's"),
         oaks: buildSportsFeedDigest(oaklandTeams.oaks, deskStorylines, 'Oaks'),
         warnings: oaklandTeams.warnings
-      };
-    } else if (desk.getsSportsFeeds === 'chicago') {
-      sportsFeedDigest = buildSportsFeedDigest(chiSports, deskStorylines, 'Bulls');
-    } else if (desk.getsSportsFeeds === 'both') {
-      var allOaklandTeams = sportsFeedContract.splitOaklandFeedEntries(oakSports);
-      sportsFeedDigest = {
-        as: buildSportsFeedDigest(allOaklandTeams.as, deskStorylines, "A's"),
-        oaks: buildSportsFeedDigest(allOaklandTeams.oaks, deskStorylines, 'Oaks'),
-        chicago: buildSportsFeedDigest(chiSports, deskStorylines, 'Bulls'),
-        warnings: allOaklandTeams.warnings
       };
     }
 

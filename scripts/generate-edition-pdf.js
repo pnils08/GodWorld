@@ -427,16 +427,6 @@ function buildSectionHtml(section, photoDataUri, options) {
     return '';
   }
 
-  // Chicago section
-  if (beat === 'chicago') {
-    html.push('<div class="chicago-header">SKYLINE TRIBUNE &mdash; CHICAGO BUREAU</div>');
-    // Extract weather if present in section name
-    var chicagoWeather = section.name.match(/Weather:\s*(.+)/);
-    if (chicagoWeather) {
-      html.push('<div class="chicago-weather">' + escapeHtml(chicagoWeather[1]) + '</div>');
-    }
-  }
-
   // Photo placement (before articles, after section label). Renders EVERY live
   // photo the manifest assigns to this section (G-PR-NEW4), not just the first.
   // options.sectionPhotos = [{ dataUri, credit }]; falls back to the single
@@ -445,7 +435,7 @@ function buildSectionHtml(section, photoDataUri, options) {
 
   // Determine column count
   var colClass = 'columns-3';
-  if (beat === 'chicago' || beat === 'sports') colClass = 'columns-2';
+  if (beat === 'sports') colClass = 'columns-2';
   if (section.articles.length === 1 && (section.text || '').length < 2000) colClass = 'columns-2';
 
   html.push('<div class="' + colClass + '">');

@@ -164,3 +164,13 @@ now unblocked — the S378 wave is deployed and bench-proven. Tasks 3–5 ready.
   `chicagoSatellite.js` / `v3ChicagoWriter.js` / `generateChicagoCitizensv1.js`. Bench SANDBOX 0908 @123
   C136: ok, 0 new errors, Media_Ledger Sentiment −0.24 = Riley_Digest CitySentiment −0.24 (C134/C135 had
   diverged: blended). Newsroom-script remainder (buildDeskPackets Chicago Bureau etc.) → research-build.
+- 2026-09-28 (S501, research-build) — Task 4 newsroom-script remainder cut. `buildDeskPackets.js`: removed
+  the `chicago` desk (dead — no persona-map entry, no cron lane per S428/S429), `bullsRoster` canon
+  section, the CHICAGO/SPORTS-splitting keyword routing, and the `Chicago_Citizens`/`Chicago_Sports_Feed`
+  reads (letters desk's sports-feed union collapsed from `'both'` to `'oakland'`, its own dead
+  `bullsRoster` canonSections entry dropped). `generate-edition-pdf.js`: removed the dead `beat ===
+  'chicago'` render branch (unreachable once no packet ever carries that beat). `buildMaraReference.js`:
+  removed `buildChicagoRoster` / `chicago_roster.txt` (verified zero downstream readers — Mara audits
+  editions that no longer carry Chicago content). `docs/SUPERMEMORY.md` reference-file table trued up;
+  `docs/plans/mara-reference-files.md` left as-is (completed historical plan, not live doc). Task 4
+  CLOSED — Task 2 code half, Task 3 archives-out, Task 5 dead-tab pruning remain (engine-sheet).

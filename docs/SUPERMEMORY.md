@@ -870,7 +870,6 @@ underlying Sheet/local structured export is available.
 | `citizen_roster.txt` | Simulation_Ledger (ENGINE) | `mara` | 509+ |
 | `as_roster.txt` | As_Roster | `bay-tribune` | 89 |
 | `tribune_roster.txt` | Bay_Tribune_Oakland | `mara` | 29 |
-| `chicago_roster.txt` | Chicago_Citizens | `mara` | 125 |
 | `business_registry.txt` | Business_Ledger | `mara` | 53 |
 | `faith_registry.txt` | Faith_Organizations | `mara` | 17 |
 

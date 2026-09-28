@@ -1,7 +1,7 @@
 ---
 name: session-end
 description: End-of-session handshake — update project state, run mechanical orchestrator, commit and push. Per S229 governance.7, the 13-step ritual collapsed to model steps + 1 script invocation.
-version: "2.7"
+version: "2.8"
 updated: 2026-08-17
 tags: [infrastructure, active]
 effort: low
@@ -64,7 +64,7 @@ Three sub-actions:
 **Optional model sub-actions:**
 
 - **`/save-to-mags`** — model judgment whether the session has anything architectural worth canonizing. Tag with terminal name (`[research/build]`, `[media]`, etc.). There is NO Stop-hook auto-save (neutralized S221, verified S283) — deliberate saves are the only Supermemory writes; claude-mem carries the automatic session record.
-- **sl-godworld shared fact** — separate question from the one above: not "is this worth canonizing for me" but "did this session learn something the OTHER three lanes/house guests would hit blind otherwise" (a design decision, a landmine, a container/schema change, a frozen-vs-live distinction). If yes: `npx supermemory remember "<fact>" --tag sl-godworld` (one fact, hand-written — never pipe a session log/diff in, S372). If no, skip it; most sessions have nothing that clears this bar. `/save-to-mags` writes to Mags' own `mags` container and does NOT reach sl-godworld — don't treat one as covering the other.
+- **sl-godworld session save — REQUIRED, one per session (CLAUDE.md §Search before you guess; this skill called it optional until S500).** What this session did that another lane would hit blind otherwise: rulings, landmines, a container/schema change, a frozen-vs-live distinction. Write it BEFORE Step 3: `npx supermemory remember "<fact>" --tag sl-godworld` (one fact, hand-written — never pipe a session log/diff in, S372). A session with nothing to say still leaves one line on what it did. `/save-to-mags` writes to Mags' own `mags` container and does NOT reach sl-godworld — don't treat one as covering the other.
 - **`/batch`** — submit heavy analysis work that wasn't urgent enough to run live. Results wait at 50% cost for next session.
 
 **Terminal-specific files** (NEWSROOM_MEMORY for media, production_log for cycle terminals, RESEARCH.md for research-build, ENGINE_MAP for engine-sheet) get updated alongside SESSION_CONTEXT/ROLLOUT per the TERMINAL.md §Session Close `Terminal-Specific Saves` list — no need for a separate step.
@@ -72,8 +72,10 @@ Three sub-actions:
 ### Step 3: Run Mechanical Orchestrator
 
 ```bash
-node scripts/sessionEndMechanical.js --terminal=<name> [--rotate-history]
+node scripts/sessionEndMechanical.js --terminal=<name> > output/session_end_run.txt 2>&1; echo "exit=$?"
 ```
+
+Redirect it — the run prints ~45 lines; read the file for the lint and stack-check lines only. A ROLLOUT lint row is fixed in this close, not carried (item cell ≤ 280 chars).
 
 Wraps: **session summary → Supermemory (best-effort S283 — mirrors claude-mem's session summary to `session-logs` ONLY (S341 — `sl-*` is hand-write; the shared hand-write container is `sl-godworld` as of S372); zero LLM calls, idempotent, never blocks a close)** → `auditPlanTagDrift` (informational — drift never fails close) → ROLLOUT conformance lint (informational) → cross-terminal git stack check (read-only report) → `pm2 restart`.
 
@@ -190,7 +192,7 @@ Pulled out of the boot-loaded TERMINAL.md files (2026-08-15, HOUSE-PROCESS GATE)
 | Step 3 `auditPlanTagDrift` reports drift | Informational — does not fail close. Surface as next-session priority signal. |
 | Step 3 `--rotate-history` finds nothing | Expected — STATUS blocks no longer exist. The flag is vestigial; leave it off. |
 | Step 4 stack check shows other-terminal commits | Hold push. "Committed locally; push pending coordination" note in SESSION_CONTEXT. |
-| An external lane's NEXT goes stale | Only that CLI can rewrite it. A Claude terminal reaching in is blocked by the ownership guard — raise it with Mike instead. |
+| An external lane's NEXT goes stale | That lane fixes it at its next close. A Claude terminal may correct a verifiable stale fact in it (the ownership guard is unwired, 2026-08-20); leave the content. |
 | All terminals | Run Step 0 + 2 + 3 + 4. There is no Step 1. |
 
 ---
@@ -198,6 +200,8 @@ Pulled out of the boot-loaded TERMINAL.md files (2026-08-15, HOUSE-PROCESS GATE)
 ---
 
 ## Changelog
+
+- 2026-09-28 (S500, engine-sheet) — v2.8. Three doc-vs-reality fixes found closing the C109 session: the sl-godworld save was listed optional while CLAUDE.md requires one per session; the Failure Modes table still said the ownership guard blocks a cross-lane NEXT correction (unwired 2026-08-20, §External Lanes already said so); Step 3's command carried the vestigial `--rotate-history` flag and printed the whole run into the transcript. Lint findings are now fixed in the close that surfaces them.
 
 - 2026-08-17 (S377, research-build) — v2.7 sl-godworld accuracy pass. Fixed a real attribution bug in `sessionSummaryToSupermemory.js`: it resolved "the session to mirror" as the globally newest `session_summaries` row for `project='GodWorld'`, not the invoking session's own — with multiple lanes writing to the same claude-mem DB, whichever lane's row landed most recently won the mirror, tagged under the closing terminal's `--terminal=` metadata regardless of who actually produced it (found live by Mike at S376, root-caused but not fixed that session). Now resolves via `sdk_sessions.content_session_id = $CLAUDE_CODE_SESSION_ID` → that session's own `memory_session_id`, verified against the live DB. Also added the **sl-godworld shared fact** sub-action above — the close ritual previously only offered `/save-to-mags` (Mags' personal container) as an optional deliberate save, with nothing prompting a write to the actual shared all-lane container at the moment a session has one worth leaving.
 - 2026-08-15 (S373, research-build) — v2.6 house-process gate pass (identity.md HOUSE-PROCESS GATE, Mike-direct: process/tracking scaffolding is not canon, changes it on Mags's own judgment, git is the safety net). Moved the full Session Close sections out of `research-build/TERMINAL.md` (~47 lines) and `engine-sheet/TERMINAL.md` (~130 lines) — both were boot-loaded every session via the Always Load table for content that only matters at actual close time. Consolidated into new §Terminal-Specific Detail here (this file is NOT boot-loaded — read on demand). Caught and fixed a real staleness bug in the process: engine-sheet's copy still described a FATAL char-limit close gate (NEXT ≤350/PIN ≤450) that S298 had already retired — the two files had drifted apart because the same content was duplicated in two places. TERMINAL.md files now carry a one-line pointer instead of a re-statement. This file is the sole canonical source going forward.

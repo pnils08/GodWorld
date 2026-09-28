@@ -496,7 +496,7 @@ function checkForPromotions_(ctx) {
     // ═══════════════════════════════════════════════════════════════════════
     if (logSheet) {
       logSheet.appendRow([
-        ctx.now,
+        (typeof inWorldStamp_ === 'function' ? inWorldStamp_(ctx) : ctx.now), // G-EC71: sim clock
         popId,
         (first + ' ' + last).trim(),
         "Promotion",

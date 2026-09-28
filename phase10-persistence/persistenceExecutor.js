@@ -30,6 +30,13 @@
  * @param {Object} ctx - Engine context with persist and mode
  * @returns {Object} Execution statistics
  */
+// G-EC71: a Date, or a string shaped like a real date/time (M/D/YYYY, YYYY-MM-DD…).
+function isWallClockStamp_(v) {
+  if (v instanceof Date || Object.prototype.toString.call(v) === '[object Date]') return true;
+  var t = String(v == null ? '' : v).trim();
+  return /^\d{1,2}\/\d{1,2}\/\d{2,4}/.test(t) || /^\d{4}-\d{2}-\d{2}/.test(t);
+}
+
 function executePersistIntents_(ctx) {
   var stats = {
     executed: 0,
@@ -416,6 +423,12 @@ function executeSheetIntents_(ctx, sheetName, intents) {
             var padded = (allRows[i] || []).slice();
             while (padded.length < maxCols) {
               padded.push('');
+            }
+            // G-EC71 (builder 2026-09-28, all sim clock): a life line's Timestamp is the
+            // in-world stamp, never a real date. Writers that queued ctx.now are normalized
+            // here, the one place every queued LifeHistory_Log row passes through.
+            if (sheetName === 'LifeHistory_Log' && isWallClockStamp_(padded[0]) && typeof inWorldStamp_ === 'function') {
+              padded[0] = inWorldStamp_(ctx);
             }
             paddedRows.push(padded);
           }

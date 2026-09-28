@@ -161,9 +161,27 @@ async function buildDigest(options) {
   };
   const lifeEvents = [];
   const texture = new Map(); // popid -> [daily lines]
+  // G-EC71 (builder 2026-09-28, all sim clock): LifeHistory_Log Timestamp is the in-world
+  // stamp (Y3C13), not a date, from this change on. A row whose Timestamp still parses as a
+  // wall-clock date keeps the old window; a sim-stamped row is in when its Cycle is the log's
+  // latest Cycle (a Cycle is the sim's week). Order: Cycle, then log order.
+  li.cycle = idx(lH, 'Cycle');
+  let latestLifeCycle = 0;
   for (const r of lifeRows.slice(1)) {
-    const ts = new Date(r[li.ts]);
-    if (!Number.isFinite(+ts) || ts < since) continue;
+    const c = li.cycle >= 0 ? Number(r[li.cycle]) : NaN;
+    if (Number.isFinite(c) && c > latestLifeCycle) latestLifeCycle = c;
+  }
+  let rowOrder = 0;
+  for (const r of lifeRows.slice(1)) {
+    rowOrder++;
+    let ts = new Date(r[li.ts]);
+    if (Number.isFinite(+ts)) {
+      if (ts < since) continue;
+    } else {
+      const c = li.cycle >= 0 ? Number(r[li.cycle]) : NaN;
+      if (!Number.isFinite(c) || c < latestLifeCycle) continue;
+      ts = c * 1e7 + rowOrder; // sortable: Cycle first, then log order
+    }
     const popid = String(r[li.popid] || '').trim();
     const text = clip(r[li.text], 220);
     if (!popid || !text) continue;

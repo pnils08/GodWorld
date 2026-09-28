@@ -443,7 +443,12 @@ function undockedEligible_(row, li, ageYear) {
   var by = Number(row[iB]) || 0;
   if (!(by > 0) || by > ageYear - UNDOCKED_MIN_AGE) return false;
   if (!String(row[iH] || '').trim()) return false;
-  if (iDest >= 0 && String(row[iDest] || '').trim()) {
+  // A within-city move stamps MigrationDestination with the hood the citizen now
+  // lives in (processRelocations_, engine.55/249) — that is not "away". Only a
+  // destination other than the citizen's own neighborhood reads as having left
+  // (engine.34 blast-radius map S502: 50 live movers were barred from the draw).
+  var destV = iDest >= 0 ? String(row[iDest] || '').trim() : '';
+  if (destV && destV !== String(row[iH] || '').trim()) {
     var mig = iMig >= 0 ? Number(row[iMig]) : NaN;
     var ret = iRet >= 0 ? Number(row[iRet]) : NaN;
     if (!(ret >= 0) || !(mig >= 0) || ret < mig) return false;

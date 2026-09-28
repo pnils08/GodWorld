@@ -144,3 +144,16 @@ Verbatim rows moved out of ROLLOUT_PLAN.md when it collapsed to pointer-only. Th
 ## Builder ruling 2026-09-27
 D1 (remove the representative-sample columns) "approved to remove". Blast-radius map first per this plan, then the
 live removal with one plain confirmation line in the session before the write.
+
+## Blast-radius map 2026-09-28 (engine-sheet S502) — D1's premise no longer holds
+Read-only map of all six columns (writers, readers, file:line) done before any removal, per the ruling. Finding:
+**none of the six asserts a node leaving Oakland any more.** engine.55/.61/.249 rewired them into the within-city
+relocation the builder ruled to keep on 2026-09-27: MigrationIntent `planning` is the relocation trigger
+(`processRelocations_`), MigrationReason/Destination/MigratedCycle feed the +10-Cycle settled-in verdict
+(`processSettledInCheck_`), DisplacementRisk feeds intent + citizen texture + civic/initiative packets, ReturnedCycle
+is the Citizen Archive restore stamp read by the UNDOCKED draw gate. Removing them now would delete the kept mechanism.
+Also found: the civic-challenger mint (`updateCivicApprovalRatings.js` `mintChallengerOnLedger_`) stamps an arrival
+into MigrationReason/MigratedCycle; the UNDOCKED gate read any MigrationDestination as "left Oakland" and barred 50 live
+within-city movers (fixed S502). **Held for the builder:** keep the six columns as the relocation system's own fields
+(recommended — D1's harm is already gone), or rename them for naming hygiene; nothing is removed until that answer.
+

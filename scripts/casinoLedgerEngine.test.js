@@ -208,6 +208,11 @@ check('draw excludes minor/traded/away/no-hood', ['POP-00008', 'POP-00009', 'POP
 check('draw no duplicate', new Set(drawnIds).size === 6);
 check('draw name from First Last', /^F\d\d L$/.test(drawAppends[0].row[5]));
 check('draw carries role + employer', drawAppends[0].row[8] === 'Clerk' && drawAppends[0].row[9] === 'BIZ-00018');
+const drawLi = function (n) { return drawHeaders.indexOf(n); };
+check('within-city mover (destination = own hood) stays eligible (engine.34 map S502)',
+  E.undockedEligible_(drawRow('POP-00013', { MigrationDestination: 'Temescal', MigratedCycle: 100 }), drawLi, 2042) === true);
+check('destination elsewhere without a return still reads away',
+  E.undockedEligible_(drawRow('POP-00014', { MigrationDestination: 'Reno', MigratedCycle: 100 }), drawLi, 2042) === false);
 
 const drawCtx2 = {
   ledger: drawCtx.ledger, rng: seq([0.11, 0.5, 0.25, 0.9, 0.1, 0.3, 0.7]), summary: {},

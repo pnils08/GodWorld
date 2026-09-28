@@ -161,7 +161,7 @@ Tribune journalist events:
 - **MaidenName (C)** — was `Middle ` (DEAD, 3 stray values preserved into CitizenBio). Repurposed S321 Mike-direct: GC-spouse promotion (`bondEngine.js` `setC('MaidenName', pick.last)`) keeps the spouse's birth surname so heritage survives marriage. RECORD-by-design until heritage scoring consumes it. Header renamed on sandbox AND live (S321 deploy window); SCHEMA_HEADERS regen'd from live same window.
 - **CareerMobility (AJ)** — CAUSAL. First reader: `runCareerEngine.js` `maybeTransition_` — stagnant citizens roll shift/lateral at 1.25× (declining 1.4×), applied before the physics clamps. One-cycle lag by phase order.
 - **MigrationReason/Destination/MigratedCycle (AN–AP)** — CAUSAL. First reader: `processSettledInCheck_` (`migrationTrackingEngine.js`) — 10 cycles after a move, the verdict line ("the move worked" / "same problems, new address") is decided by reason-appropriate physics (cost moves judged on landing-hood housingPressure, opportunity moves on trajectory). Proven C119: Eric Taveras, exactly the predicted citizen.
-- **ReturnedCycle (AQ)** — still DEAD. No cycle-path writer or reader (legacy — no writer since exit states removed S313). Kill candidate at next schema cleanup (explicit-go).
+- **ReturnedCycle (AQ)** — LIVE (corrected S502). Writer: Citizen Archive restore (`utilities/archiveCitizenExits.js` `restoreCitizenPlan_`, operator via `scripts/restoreCitizen.js`). Cycle-path reader: `undockedEligible_` (`casinoLedgerEngine.js`, called every fire from `generationalWealthEngine.js`) + `scripts/undockedDraw.js`. Not a kill candidate.
 
 **Correction to the raw audit:** the A–O auditor block classified LifeHistory (O) as RECORD ("never parsed to gate behavior") — that's wrong. `educationCareerEngine.js` `settleAdulthood_` gates the fire-once 18th-birthday settlement on `indexOf('[Adulthood]')`; `generationalWealthEngine.js` `processMoneyLoop_` checks for `'crossed six figures'` as a once-only milestone; `deriveEducationLevels_` checks `indexOf('Graduation')`; `calculateCitizenIncomes_` extracts an income band via `extractIncomeBand_`. Reclassified CAUSAL here and in §Column Reference below.
 
@@ -267,7 +267,7 @@ Neighborhood only ever changes to another canonical Neighborhood_Map node.
 | AN | 40 | MigrationReason | job / family / cost / crime / opportunity / displaced | migrationTrackingEngine (relocation, engine.55) | `processSettledInCheck_` (S321 wire) | **CAUSAL** — picks the settled-in verdict physics (cost→pressure test, opportunity→trajectory test) |
 | AO | 41 | MigrationDestination | Canonical neighborhood name | migrationTrackingEngine (relocation, engine.55) | `processSettledInCheck_` (S321 wire) | **CAUSAL** — verdict skipped if the citizen drifted off the recorded destination |
 | AP | 42 | MigratedCycle | Cycle number of last intra-city move | migrationTrackingEngine (relocation, engine.55) | `processSettledInCheck_` (S321 wire) | **CAUSAL** — fires the once-only verdict at +10 cycles |
-| AQ | 43 | ReturnedCycle | Cycle number (legacy — no writer since exit states removed S313) | — | — | **DEAD** — no cycle-path writer or reader |
+| AQ | 43 | ReturnedCycle | Cycle number — set when an archived citizen is restored | `restoreCitizenPlan_` (operator) | `undockedEligible_`, `undockedDraw.js` | LIVE (corrected S502) |
 
 ### Economic Links (AR–AT)
 

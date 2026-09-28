@@ -94,7 +94,8 @@ function eligible(rows, params) {
     if (!Number.isFinite(by)) continue;
     if (by > params.currentYear - params.minAge) continue;
     const dest = String(r.MigrationDestination || '').trim();
-    if (dest) {
+    // within-city movers carry their own hood as destination — not "away" (engine.34 map S502)
+    if (dest && dest !== String(r.Neighborhood || '').trim()) {
       const mig = parseInt(r.MigratedCycle, 10);
       const ret = parseInt(r.ReturnedCycle, 10);
       if (!(Number.isFinite(ret) && Number.isFinite(mig) && ret >= mig)) continue;

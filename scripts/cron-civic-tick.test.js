@@ -970,6 +970,40 @@ test('filterDirectiveBlocks caps at the template maximum of 12 blocks', () => {
   });
 }
 
+// engine.238 — the Police Chief's patrol move.
+{
+  const { validateDatawakeMoves, patrolSweep, normalizePatrolStrategy } = civicRun;
+  const chief = { officeId: 'CHIEF-POLICE', agentDir: 'civic-office-police-chief' };
+  const seat = { officeId: 'COUNCIL-D3', agentDir: 'civic-office-council-d3', district: 'D3' };
+  test('engine.238: the chief files a patrol move; the strategy is normalized', () => {
+    const r = validateDatawakeMoves([{ type: 'patrol', strategy: 'Community presence', note: 'walk the corridor' }], { office: chief, cycle: CYCLE });
+    assert.strictEqual(r.accepted.length, 1);
+    assert.strictEqual(r.accepted[0].payload.strategy, 'community_presence');
+  });
+  test('engine.238: a council seat cannot set patrol; an unknown strategy is refused', () => {
+    assert(/seat-cannot-set-patrol/.test(validateDatawakeMoves([{ type: 'patrol', strategy: 'balanced' }], { office: seat, cycle: CYCLE }).rejected[0].reason));
+    assert(/patrol-unknown-strategy/.test(validateDatawakeMoves([{ type: 'patrol', strategy: 'martial_law' }], { office: chief, cycle: CYCLE }).rejected[0].reason));
+    assert.strictEqual(normalizePatrolStrategy('suppress'), 'suppress_hotspots');
+  });
+  test('engine.238: the close stages the chief\'s latest patrol move of the week; earlier ones are superseded', () => {
+    const root = mkRoot();
+    const dir = path.join(root, 'output', 'cron-civic', 'moves');
+    fs.mkdirSync(dir, { recursive: true });
+    const mv = (d, strat) => ({ moveId: 'MV-' + (CYCLE - 1) + '-civic-office-police-chief-' + d, cycle: CYCLE - 1, date: d,
+      agentDir: 'civic-office-police-chief', type: 'patrol', payload: { strategy: strat }, status: 'pending', at: d + 'T10:45:00Z' });
+    fs.writeFileSync(path.join(dir, 'moves_c' + (CYCLE - 1) + '.jsonl'),
+      [mv('2026-09-29', 'suppress_hotspots'), mv('2026-10-01', 'community_presence')].map(x => JSON.stringify(x)).join('\n') + '\n');
+    const out = patrolSweep(root, CYCLE);
+    assert.strictEqual(out.staged, 'community_presence');
+    const man = JSON.parse(fs.readFileSync(path.join(dir, 'fold_c' + CYCLE + '.json'), 'utf8'));
+    assert.strictEqual(man.patrol.moveId, 'MV-' + (CYCLE - 1) + '-civic-office-police-chief-2026-10-01');
+    assert.deepStrictEqual(man.patrolSuperseded, ['MV-' + (CYCLE - 1) + '-civic-office-police-chief-2026-09-29']);
+    const again = patrolSweep(root, CYCLE);
+    assert.strictEqual(again.staged, 'community_presence', 'idempotent re-run');
+    fs.rmSync(root, { recursive: true, force: true });
+  });
+}
+
 (async () => {
   for (const [name, fn] of asyncTests) {
     try { await fn(); passed++; console.log('  ✓ ' + name); }

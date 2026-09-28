@@ -2397,6 +2397,9 @@ function datawakeUserPrompt(pack, wallInj, office) {
       '. call-vote names a petition-pending row (proposed, no vote scheduled) whose domain has no petition rule — the mayor may call any such row, a district seat only one whose hoods sit in their district, once per row per week' +
       '. renew asks the council to re-fund a running program on your board that is running low (or one that ran dry) — same seat rule as call-vote, one pending renewal per row, the amount a money string inside the category\'s band; the council votes next week and the money lands the week after' +
       '. propose is yours to write: name it and the problem in your own words, file it under the category of life it touches (the categories in your pack), and pick its reach — hood (list the hoods), district (your whole district) or all (citywide seats only). propose.budget is a money string the engine can parse ($12.5M style) inside the category\'s band — your pack lists the band next to each category' +
+      (String(office.officeId || '') === 'CHIEF-POLICE'
+        ? '. You also hold the patrol move, yours alone: {"type":"patrol","strategy":"balanced|suppress_hotspots|community_presence","note":""} — the city\'s patrol posture from next week on. suppress_hotspots clears more cases but pushes activity into the next neighborhood over; community_presence displaces far less and lifts quality of life, clearing fewer cases; balanced sits between. Your latest patrol move of the week is the one that stands; the district seats work with it'
+        : '') +
       '. A move that breaks these rules is discarded, not corrected.',
     conf ? 'YOU HAVE AN UNANSWERED DIRECTIVE (' + conf.id + '). An {"type":"answer",...} move responding to it is expected. Bind confrontationId exactly to that directive; only one answer is accepted per directive and seat. No new consequence is attached.' : 'No answer move is available unless game.confrontationIds names an unanswered directive for this seat.',
     'No headcount, percentage, or dollar figure unless that exact number appears above. Progress with no cited metric is described in words ("ahead of schedule", "significant headway") — never estimated.',
@@ -2436,7 +2439,19 @@ function datawakeStatementText(cand) {
 // district, an unknown move type — dropped with a loud line, never fatal.
 // ---------------------------------------------------------------------------
 
-const MOVE_TYPES = ['propose', 'work', 'answer', 'canvass', 'call-vote', 'renew'];
+const MOVE_TYPES = ['propose', 'work', 'answer', 'canvass', 'call-vote', 'renew', 'patrol'];
+
+// engine.238 (builder 2026-09-27): the Police Chief sets the city's patrol
+// strategy in the office's work-week wakes; the week's close carries it to
+// World_Config.patrolStrategy, which derivePatrolStrategy_ (updateCrimeMetrics.js)
+// reads at the next fire. The three names are the engine's own.
+const PATROL_STRATEGIES = ['balanced', 'suppress_hotspots', 'community_presence'];
+function normalizePatrolStrategy(v) {
+  const n = String(v == null ? '' : v).trim().toLowerCase().replace(/[\s-]+/g, '_').replace(/[^a-z_]/g, '');
+  if (n === 'suppress') return 'suppress_hotspots';
+  if (n === 'community') return 'community_presence';
+  return PATROL_STRATEGIES.includes(n) ? n : null;
+}
 
 // The beats dump of the tracker — the same rows petitionGateSweep counts
 // against. Shared by the call-vote validator (datawake) and sweep (Sunday).
@@ -2619,6 +2634,9 @@ function validateDatawakeMoves(rawMoves, ctx) {
       if (!id) reason = 'call-vote-missing-initiativeId';
       else if (!boardIds.has(id)) reason = 'initiative-not-on-board(' + id + ')';
       else reason = callVoteEligibility(id, office, ctx);
+    } else if (type === 'patrol') {
+      if (!isChief) reason = 'seat-cannot-set-patrol(only CHIEF-POLICE sets patrol strategy)';
+      else if (!normalizePatrolStrategy(m.strategy)) reason = 'patrol-unknown-strategy(' + String(m.strategy == null ? '' : m.strategy) + ')';
     } else if (type === 'renew') {
       const id = String(m.initiativeId || '').trim();
       if (!id) reason = 'renew-missing-initiativeId';
@@ -2644,6 +2662,7 @@ function validateDatawakeMoves(rawMoves, ctx) {
       payload.reach = String(m.reach).trim().toLowerCase();
       payload.hoods = proposeHoods;
     }
+    if (type === 'patrol') payload.strategy = normalizePatrolStrategy(m.strategy);
     if (type === 'answer') {
       const directive = ctx.confrontations.find(c => c.id === m.confrontationId);
       payload.directiveCycle = directive.cycle;
@@ -3005,6 +3024,36 @@ function callVoteSweep(root, cycle) {
 // outcome + credit receipt so the engine's re-fire gate reads clean. Never
 // touches Status/VoteCycle/phase/budget: the engine holds the vote and moves
 // the money.
+// engine.238 — the week's patrol strategy. The chief's LATEST pending patrol
+// move in the folded week stands (by date, then filing time); earlier ones are
+// superseded. Staged on the fold manifest; applyTrackerUpdates writes
+// World_Config.patrolStrategy + patrol_state.json and posts the outcomes.
+// Idempotent: re-running rewrites the same manifest keys.
+function patrolSweep(root, cycle) {
+  const folded = loadMoveLedgerFolded(root, moveWeekForClose(cycle));
+  const manifestPath = path.join(root, 'output', 'cron-civic', 'moves', 'fold_c' + cycle + '.json');
+  const moves = folded ? [...folded.values()].filter(m => m.status === 'pending' && m.type === 'patrol' &&
+    m.payload && normalizePatrolStrategy(m.payload.strategy)) : [];
+  const manifest = readJson(manifestPath) || { cycle: Number(cycle), moveCycle: moveWeekForClose(cycle) };
+  if (!moves.length) {
+    if (manifest.patrol || manifest.patrolSuperseded) {
+      delete manifest.patrol; delete manifest.patrolSuperseded;
+      fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
+    }
+    return { filed: 0, staged: null };
+  }
+  moves.sort((a, b) => String(a.date || '').localeCompare(String(b.date || '')) || String(a.at || '').localeCompare(String(b.at || '')));
+  const pick = moves[moves.length - 1];
+  manifest.patrol = { moveId: pick.moveId, strategy: normalizePatrolStrategy(pick.payload.strategy),
+    note: pick.payload.note ? String(pick.payload.note).slice(0, 280) : '', agentDir: pick.agentDir, date: pick.date || null };
+  manifest.patrolSuperseded = moves.slice(0, -1).map(m => m.moveId);
+  fs.mkdirSync(path.dirname(manifestPath), { recursive: true });
+  fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
+  log('patrol: ' + manifest.patrol.strategy + ' staged from ' + pick.moveId +
+    (manifest.patrolSuperseded.length ? ' (' + manifest.patrolSuperseded.length + ' earlier superseded)' : ''));
+  return { filed: moves.length, staged: manifest.patrol.strategy };
+}
+
 function renewSweep(root, cycle) {
   const folded = loadMoveLedgerFolded(root, moveWeekForClose(cycle));
   if (!folded) return { filed: 0, scheduled: 0 };
@@ -3696,6 +3745,9 @@ function closeDeterministic(cycle) {
     // Initiatives in the World Job 6 — renew rides the same gated channel.
     renewSweep(ROOT, cycle);
 
+    // engine.238 — the chief's patrol strategy rides the same manifest to the apply.
+    patrolSweep(ROOT, cycle);
+
     execFileSync('node', [path.join(ROOT, 'scripts', 'applyTrackerUpdates.js'), String(cycle)], { cwd: ROOT, stdio: 'inherit', timeout: 300000 });
     return { ok: true, dryOk: true };
   } catch (e) {
@@ -3906,7 +3958,7 @@ module.exports = { modelChainFor, FALLBACK_MODELS, sentimentWord, crimeWord, ret
   // civic.38 Task 1 — closed move set (exported for scripts/cron-civic-game.test.js)
   MOVE_TYPES, validateDatawakeMoves, runTickAndRefresh, hoodAuthorityReason, appendMoveLedger, moveLedgerLines, datawakeRecord,
   // civic.38 Task 2 — move ledger fold (Sunday close)
-  loadMoveLedgerFolded, moveWeekForClose, foldMovesIntoDecisions, slugForInitiative,
+  loadMoveLedgerFolded, moveWeekForClose, foldMovesIntoDecisions, patrolSweep, normalizePatrolStrategy, PATROL_STRATEGIES, slugForInitiative,
   // civic.38 Task 6.3 — petition sweep
   petitionGateSweep, PETITION_SUPPORT_BANDS,
   // game-loop amendment 2026-09-21 — the call-vote escape hatch

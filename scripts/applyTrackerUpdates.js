@@ -97,6 +97,39 @@ async function writeCivicSentimentToConfig(score, cycle) {
   console.log(`  World_Config: ${KEY_SCORE}=${values[KEY_SCORE]}, ${KEY_CYCLE}=${cycle} — carried to the engine.`);
 }
 
+/**
+ * engine.238 — the Police Chief's patrol strategy, carried to the engine.
+ * derivePatrolStrategy_ (updateCrimeMetrics.js) reads ctx.config.patrolStrategy
+ * from World_Config at the next fire. Same upsert shape as the civic sentiment
+ * carry above. Returns true on a written (or unchanged) value, else a reason.
+ */
+async function writePatrolStrategyToConfig(strategy, cycle) {
+  const TAB = 'World_Config';
+  const values = { patrolStrategy: strategy, patrolStrategyCycle: cycle };
+  const DESCRIPTIONS = {
+    patrolStrategy: 'Police patrol posture set by the Police Chief\'s patrol move (engine.238; written by applyTrackerUpdates.js at the close; read by derivePatrolStrategy_)',
+    patrolStrategyCycle: 'Close cycle that set patrolStrategy',
+  };
+  const rows = await sheets.getRawSheetData(TAB);
+  if (!rows || rows.length < 2) return TAB + ' unreadable';
+  const header = rows[0].map(h => String(h).trim());
+  const iKey = header.indexOf('Key'), iVal = header.indexOf('Value'), iDesc = header.indexOf('Description');
+  if (iKey < 0 || iVal < 0) return TAB + ' has no Key/Value columns';
+  for (const key of Object.keys(values)) {
+    let sheetRow = -1;
+    for (let r = 1; r < rows.length; r++) if (String(rows[r][iKey] || '').trim() === key) { sheetRow = r + 1; break; }
+    if (sheetRow > 0) await sheets.updateCell(TAB, sheetRow, 'Value', values[key]);
+    else {
+      const row = new Array(header.length).fill('');
+      row[iKey] = key; row[iVal] = values[key];
+      if (iDesc >= 0) row[iDesc] = DESCRIPTIONS[key];
+      await sheets.appendRows(TAB, [row]);
+    }
+  }
+  console.log(`  World_Config: patrolStrategy=${strategy} (set at the C${cycle} close) — carried to the engine.`);
+  return true;
+}
+
 const DECISIONS_DIR = path.join(ROOT, 'output/city-civic-database/initiatives');
 const VOICE_DIR = path.join(ROOT, 'output/civic-voice');
 const SHEET_NAME = 'Initiative_Tracker';
@@ -782,6 +815,22 @@ async function main() {
         const ok = writeOutcome[initId] === true ? renewOutcome[initId] : writeOutcome[initId];
         lines.push({ moveId: id, cycle: MOVE_CYCLE, closeCycle: CYCLE, status: ok === true ? 'applied' : 'failed',
           detail: ok === true ? `renewal vote staged for ${initId} (RenewalVoteCycle ${CYCLE + 1})` : 'write failed: ' + (ok || 'row not processed'), at });
+      }
+      // engine.238 — the chief's patrol strategy.
+      if (manifest.patrol && manifest.patrol.moveId && manifest.patrol.strategy) {
+        let ok;
+        try { ok = await writePatrolStrategyToConfig(manifest.patrol.strategy, CYCLE); }
+        catch (e) { ok = 'write threw: ' + e.message; }
+        if (ok === true) {
+          const statePath = path.join(ROOT, 'output', 'cron-civic', 'patrol_state.json');
+          fs.writeFileSync(statePath, JSON.stringify({ strategy: manifest.patrol.strategy, setAtClose: CYCLE,
+            moveId: manifest.patrol.moveId, note: manifest.patrol.note || '', agentDir: manifest.patrol.agentDir || null }, null, 2) + '\n');
+        }
+        lines.push({ moveId: manifest.patrol.moveId, cycle: MOVE_CYCLE, closeCycle: CYCLE, status: ok === true ? 'applied' : 'failed',
+          detail: ok === true ? `patrol strategy ${manifest.patrol.strategy} from the next fire` : 'write failed: ' + ok, at });
+        for (const id of manifest.patrolSuperseded || []) {
+          lines.push({ moveId: id, cycle: MOVE_CYCLE, closeCycle: CYCLE, status: 'superseded', detail: 'a later patrol move the same week stands', at });
+        }
       }
       if (lines.length) {
         const ledgerFile = path.join(ROOT, 'output', 'cron-civic', 'moves', `moves_c${MOVE_CYCLE}.jsonl`);

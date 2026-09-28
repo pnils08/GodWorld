@@ -1245,11 +1245,31 @@ function gamePromptView(game) {
     conditions: { ...block(game.conditions), proposals: ((game.conditions || {}).proposals || []).length },
     problemContinuity: block(game.problemContinuity),
     workingCity: block(game.workingCity),
+    patrol: block(game.patrol),
     categories: { ...block(game.categories), keys: ((game.categories || {}).list || []).map(p => p.key) },
     confrontation: game.confrontation ? { id: game.confrontation.id, demand: clip(game.confrontation.demand, BLOCK_CAP), expectsMove: 'answer' } : null,
     confrontationIds: ((game.confrontations || {}).open || []).map(c => c.id),
     confrontationEvidence: game.confrontations && game.confrontations.available === false ? game.confrontations.text : undefined,
   };
+}
+
+// engine.238 — the Police Chief's standing patrol strategy (patrol_state.json,
+// written by applyTrackerUpdates at the close that applied the chief's move).
+const PATROL_MEANING = {
+  balanced: 'patrols spread evenly — the default posture',
+  suppress_hotspots: 'patrols concentrate on hotspots — more cases cleared, more activity pushed into neighboring hoods',
+  community_presence: 'officers walk beats and know the block — far less displacement, better quality of life, fewer cases cleared',
+};
+function loadPatrolState(root) {
+  let st = null;
+  try { st = JSON.parse(fs.readFileSync(path.join(root || ROOT, 'output', 'cron-civic', 'patrol_state.json'), 'utf8')); }
+  catch (e) { if (e.code !== 'ENOENT') throw e; }
+  if (!st || !PATROL_MEANING[st.strategy]) {
+    return { available: true, strategy: 'balanced', text: 'City patrol strategy: balanced (' + PATROL_MEANING.balanced + '). The Police Chief has not set one.' };
+  }
+  return { available: true, strategy: st.strategy, setAtClose: st.setAtClose,
+    text: clip('City patrol strategy, set by the Police Chief at the C' + st.setAtClose + ' close: ' + st.strategy.replace(/_/g, ' ') +
+      ' (' + PATROL_MEANING[st.strategy] + ').' + (st.note ? ' Chief\'s note: ' + st.note : ''), BLOCK_CAP) };
 }
 
 function loadProblemContinuity(root, cycle, office, hoods, trackerRows, confrontations) {
@@ -1327,6 +1347,7 @@ function buildGameBlocks(opts) {
       return loadPetitionPool(root, office, hoods, officeMap, c2p, cycle);
     }, {text:'Petition pool unavailable',complaints:[],participation:[]}),
     workingCity: safely(() => loadWorkingCity(root, cycle, officeMap), {text:'Working city unavailable'}),
+    patrol: safely(() => loadPatrolState(root), {text:'Patrol strategy unavailable'}),
   };
   game.confrontations = safely(() => loadConfrontations(root,cycle,office.agentDir),
     {text:'Confrontation evidence unavailable',all:[],open:[],answeredIds:[]});
@@ -1488,7 +1509,7 @@ module.exports = {
   clip, writePack, CONSTITUENT_CAP,
   // civic.38 Task 3 game blocks
   buildGameBlocks, boardRowsFor, boardNeedText, boardBlock, budgetStampText, budgetBandText, childToParentFromAudit, foldHood, requireCycle, loadAudit, gamePromptView,
-  loadMovesFolded, loadPetitionPool, loadWorkingCity, loadConfrontation, loadConfrontations, loadSeatMoves,
+  loadMovesFolded, loadPatrolState, loadPetitionPool, loadWorkingCity, loadConfrontation, loadConfrontations, loadSeatMoves,
   loadCategoryMenu, loadTrackerRows, readJsonl, NEGATIVE_AFFECTS, BLOCK_CAP,
 };
 

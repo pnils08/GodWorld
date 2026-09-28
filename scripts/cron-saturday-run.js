@@ -403,7 +403,13 @@ function aggregateStorylineSignals(set) {
       });
       if (agg[s.verb] !== undefined) agg[s.verb]++;
       agg.articles.push(entry.stem);
-      for (const h of (intake.hoods || [])) if (!agg.hoods.includes(h)) agg.hoods.push(h);
+      // A sidecar hood entry can itself be a comma list ("West Oakland, Fruitvale").
+      // Stored whole, the next merge re-split it and the row carried each hood twice.
+      for (const raw of (intake.hoods || [])) {
+        for (const h of String(raw).split(',').map(x => x.trim()).filter(Boolean)) {
+          if (!agg.hoods.includes(h)) agg.hoods.push(h);
+        }
+      }
       for (const n of (intake.names || [])) if (n.popid && !agg.citizens.includes(n.popid)) agg.citizens.push(n.popid);
       const desk = entry.sidecar.desk;
       if (desk && !agg.desks.includes(desk)) agg.desks.push(desk);
@@ -428,7 +434,7 @@ function mergeStorylineLedger(existing, signals, cycle) {
   });
   const num = v => { const n = parseInt(v, 10); return Number.isFinite(n) ? n : 0; };
   const mergeList = (curStr, add) => {
-    const list = String(curStr || '').split(',').map(x => x.trim()).filter(Boolean);
+    const list = Array.from(new Set(String(curStr || '').split(',').map(x => x.trim()).filter(Boolean)));
     for (const a of (add || [])) if (!list.includes(a) && list.length < LEDGER_LIST_CAP) list.push(a);
     return list.join(',');
   };

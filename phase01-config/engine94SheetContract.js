@@ -78,6 +78,8 @@ var ENGINE96_CONFIG_SEEDS = [
   ['bizVol_education', 0.6, 'engine.96 sector volatility multiplier: education', 0, 5, false],
   ['bizVol_default', 1.0, 'engine.96 sector volatility multiplier: small neighborhood business (fallback)', 0, 5, false],
   ['bizInitiativeStallDrag', 0.5, 'engine.250: share of bizEventShockScale a stalled / blocked / suspended / defunded initiative drains from every business in its hoods, each Cycle it stands (builder-ruled half weight; 1 = as hard as chaos at the business, 0 = off)', 0, 2, false],
+  ['treasuryOpeningBalance', 100000000, 'engine.262 city treasury opening balance — general fund, Baylight apart (builder 2026-09-28); read once, when City_Treasury is empty', 0, 100000000000, false],
+  ['treasuryWeeklyAllocation', 5000000, 'engine.262 weekly budget allocation credited to the city treasury every fire (builder 2026-09-28)', 0, 1000000000, false],
   ['bizShipEchoShare', 0.15, 'engine.193 cut 3b: share of a ship episode Growth_Rate offset felt by businesses off the port (port, retail, food, construction take it at full strength; builder default: small citywide echo)', 0, 1, false],
   ['chaosShipChancePerCycle', 0.18, 'engine.193 cut 3b: chance a ship episode starts in a Cycle with none running (~1 per 5-6 quiet weeks; builder: 1 per 4-8)', 0, 1, false],
   ['bizDeclineStreak', 4, 'engine.96 Task 6: consecutive negative-growth Cycles before a business sheds headcount (proposed S413, not in the signed table)', 1, 52, false],

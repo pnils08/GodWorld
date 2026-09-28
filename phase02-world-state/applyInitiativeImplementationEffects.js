@@ -255,6 +255,44 @@ function applyInitiativeImplementationEffects_(ctx) {
   var iRenewCredit = findImplCol_(headers, ['RenewalCreditCycle']);
   var renewalSlice = [];
 
+  // engine.262 — the treasury opens before any money moves this fire.
+  var treasury = null;
+  var trSheet = ss.getSheetByName('City_Treasury');
+  if (trSheet) {
+    var trCycle = S.cycleId || (ctx.config && ctx.config.cycleCount) || 0;
+    var trRows = trSheet.getLastRow() >= 1 ? trSheet.getDataRange().getValues() : [];
+    treasury = readTreasuryLedger_(trRows);
+    treasury.cycle = trCycle;
+    treasury.entries = [];
+    treasury.underfunded = [];
+    var trPost = function(entry, amount, counterparty, note) {
+      treasury.entries.push([trCycle, entry, Math.round(amount), counterparty, Math.round(treasury.balance), note || '']);
+    };
+    treasury.post = trPost;
+    if (treasury.empty) {
+      var opening = Number(ctx.config && ctx.config.treasuryOpeningBalance);
+      if (!(opening >= 0)) opening = 100000000;
+      treasury.balance = opening;
+      trPost('OPENING', opening, 'GENERAL-FUND', 'general fund opens (Baylight apart — its own tax-increment district)');
+      // Programs the council funded before the treasury existed keep their money: recorded, not charged.
+      for (var tp = 1; tp < data.length; tp++) {
+        var tpName = iName !== -1 ? String(data[tp][iName] || '') : '';
+        var tpId = iInitId !== -1 ? String(data[tp][iInitId] || '').trim() : '';
+        if (!tpId || isBaylightInitiative_(tpName)) continue;
+        if (!treasuryIsVotedProgram_(iStatus !== -1 ? data[tp][iStatus] : '', iMayoral !== -1 ? data[tp][iMayoral] : '')) continue;
+        treasury.appropriated[tpId] = true;
+        trPost('PREFUNDED', 0, tpId, 'funded before the treasury');
+      }
+    }
+    if (!treasury.revenueCycles[String(trCycle)]) {
+      var weekly = Number(ctx.config && ctx.config.treasuryWeeklyAllocation);
+      if (!(weekly >= 0)) weekly = 5000000;
+      treasury.balance += weekly;
+      treasury.revenueCycles[String(trCycle)] = true;
+      trPost('REVENUE', weekly, 'WEEKLY-ALLOCATION', 'weekly budget allocation');
+    }
+  }
+
   // engine.250: last Cycle's phase per initiative (previousCycleState.initiativePhases,
   // written by updateCivicApprovalRatings_ from the tracker SHEET), gated on the blob
   // being exactly one Cycle old — same gate, same keys as engine.139. Tells a phase
@@ -374,6 +412,33 @@ function applyInitiativeImplementationEffects_(ctx) {
     var domain = iDomain !== -1 ? (row[iDomain] || '').toString().trim().toLowerCase() : '';
     var hoodsStr = iHoods !== -1 ? (row[iHoods] || '').toString().trim() : '';
 
+    // engine.262 — a newly voted program is charged once; one the treasury can't
+    // cover opens underfunded (BudgetRemaining capped at what was paid).
+    if (treasury && iInitId !== -1 && iBudgetTotal !== -1 && iBudgetRemaining !== -1 && !isBaylightInitiative_(name)) {
+      var apId = String(row[iInitId] || '').trim();
+      if (apId && !treasury.appropriated[apId] && treasuryIsVotedProgram_(status, iMayoral !== -1 ? row[iMayoral] : '')) {
+        var apWant = Number(row[iBudgetTotal]) || 0;
+        var ap = treasuryDraw_(treasury.balance, apWant);
+        treasury.balance = ap.balance;
+        treasury.appropriated[apId] = true;
+        treasury.post('APPROPRIATION', -ap.paid, apId, ap.short > 0
+          ? 'opens underfunded: ' + treasuryMoney_(ap.paid) + ' of ' + treasuryMoney_(apWant)
+          : 'funded in full');
+        if (ap.short > 0) {
+          var apRem = Math.min(Number(row[iBudgetRemaining]) || 0, ap.paid);
+          queueCellIntent_(ctx, 'Initiative_Tracker', i + 1, iBudgetRemaining + 1, apRem, 'engine.262 underfunded appropriation ' + apId, 'civic', 3);
+          row[iBudgetRemaining] = apRem;
+          treasury.underfunded.push({ id: apId, name: name, paid: ap.paid, budget: apWant });
+          if (iNotesImpl !== -1) {
+            var apPrior = String(row[iNotesImpl] == null ? '' : row[iNotesImpl]);
+            var apNote = 'C' + treasury.cycle + ': opens underfunded — the treasury covered ' + treasuryMoney_(ap.paid) + ' of ' + treasuryMoney_(apWant) + '.';
+            queueCellIntent_(ctx, 'Initiative_Tracker', i + 1, iNotesImpl + 1, (apPrior ? apPrior + '\n' : '') + apNote, 'engine.262 underfunded note ' + apId, 'civic', 3);
+            row[iNotesImpl] = (apPrior ? apPrior + '\n' : '') + apNote;
+          }
+        }
+      }
+    }
+
     // Skip if no implementation phase set or no name
     if (!phase || !name) continue;
 
@@ -391,6 +456,18 @@ function applyInitiativeImplementationEffects_(ctx) {
       var rc = planRenewalCredit_({ outcome: row[iRenewOut], creditCycle: row[iRenewCredit], amount: row[iRenewAmt],
         remaining: row[iBudgetRemaining], phase: phase,
         notes: iNotesImpl !== -1 ? row[iNotesImpl] : '' });
+      if (rc && treasury && !isBaylightInitiative_(name)) {
+        // engine.262 — the renewal is paid from the treasury; short money renews short.
+        var rcWant = rc.newRemaining - (Number(row[iBudgetRemaining]) || 0);
+        var rd = treasuryDraw_(treasury.balance, rcWant);
+        treasury.balance = rd.balance;
+        treasury.post('RENEWAL', -rd.paid, iInitId !== -1 ? String(row[iInitId] || '').trim() : name,
+          rd.short > 0 ? 'renewed short: ' + treasuryMoney_(rd.paid) + ' of ' + treasuryMoney_(rcWant) : 'renewal paid');
+        if (rd.short > 0) {
+          rc.newRemaining = (Number(row[iBudgetRemaining]) || 0) + rd.paid;
+          rc.money = treasuryMoney_(rd.paid) + ' of ' + treasuryMoney_(rcWant) + ' (the treasury ran short)';
+        }
+      }
       if (rc) {
         var rcId = iInitId !== -1 ? String(row[iInitId] || '').trim() : name;
         queueCellIntent_(ctx, 'Initiative_Tracker', i + 1, iBudgetRemaining + 1, rc.newRemaining, 'Job 6 renewal credit C' + implCycle + ' ' + rcId, 'civic', 4);
@@ -731,6 +808,15 @@ function applyInitiativeImplementationEffects_(ctx) {
   // planning publish nothing; relief starts when care starts.
   S.initiativeHealthRelief = healthRelief;
   S.initiativeDisbursement = buildDisbursementSlice_(ctx, pendingDisbursement);
+
+  // engine.262 — this fire's treasury entries (Phase 10 appends) + the balance for readers.
+  if (treasury) {
+    for (var te = 0; te < treasury.entries.length; te++) {
+      queueAppendIntent_(ctx, 'City_Treasury', treasury.entries[te], 'engine.262 treasury ' + treasury.entries[te][1], 'civic', 5);
+    }
+    S.treasury = { balance: Math.round(treasury.balance), cycle: treasury.cycle,
+      entries: treasury.entries.length, underfunded: treasury.underfunded };
+  }
   S.initiativeSpend = spendSlice;
   S.initiativeRenewalCredits = renewalSlice;
   if (spendSlice.length) {
@@ -926,6 +1012,60 @@ function buildDisbursementSlice_(ctx, pending) {
 /**
  * Find column index by possible header names (case-insensitive).
  */
+// ============================================================================
+// engine.262 — the city treasury (builder rulings 2026-09-28)
+// ============================================================================
+// General fund (Baylight apart — its own tax-increment district), opening at
+// World_Config.treasuryOpeningBalance; a weekly budget allocation
+// (treasuryWeeklyAllocation) credits it every fire; a voted program is charged its
+// BudgetTotal once, and one the treasury can't cover OPENS UNDERFUNDED — it gets what
+// is there, the shortfall is on the record; renewals draw the same way. Ledger tab
+// City_Treasury (append-only): Cycle · Entry · Amount · Counterparty · BalanceAfter · Note.
+// A missing tab leaves the old behaviour untouched (money appears at passage).
+var TREASURY_HEADERS_ = ['Cycle', 'Entry', 'Amount', 'Counterparty', 'BalanceAfter', 'Note'];
+
+/** Read the ledger: balance, and which counterparties were ever appropriated. Pure over rows. */
+function readTreasuryLedger_(rows) {
+  var out = { balance: 0, empty: true, appropriated: {}, revenueCycles: {} };
+  if (!rows || rows.length < 2) return out;
+  var h = rows[0];
+  var iC = h.indexOf('Cycle'), iE = h.indexOf('Entry'), iP = h.indexOf('Counterparty'), iB = h.indexOf('BalanceAfter');
+  for (var r = 1; r < rows.length; r++) {
+    var e = String(rows[r][iE] || '').trim();
+    if (!e) continue;
+    out.empty = false;
+    var bal = Number(rows[r][iB]);
+    if (isFinite(bal)) out.balance = bal;
+    var cp = String(rows[r][iP] || '').trim();
+    if ((e === 'APPROPRIATION' || e === 'PREFUNDED') && cp) out.appropriated[cp] = true;
+    if (e === 'REVENUE') out.revenueCycles[String(rows[r][iC])] = true;
+  }
+  return out;
+}
+
+/** Draw up to `amount` from `balance`. Pure. */
+function treasuryDraw_(balance, amount) {
+  var want = Math.max(0, Number(amount) || 0);
+  var have = Math.max(0, Number(balance) || 0);
+  var paid = Math.min(want, have);
+  return { paid: paid, short: want - paid, balance: have - paid };
+}
+
+function treasuryMoney_(n) {
+  n = Number(n) || 0;
+  if (n >= 1e9) return '$' + (Math.round(n / 1e8) / 10) + 'B';
+  if (n >= 1e6) return '$' + (Math.round(n / 1e5) / 10) + 'M';
+  if (n >= 1e3) return '$' + Math.round(n / 1e3) + 'K';
+  return '$' + Math.round(n);
+}
+
+/** A program the council funded: passed + signed, or passed over a veto. */
+function treasuryIsVotedProgram_(status, mayoral) {
+  var st = String(status || '').trim().toLowerCase();
+  var m = String(mayoral || '').trim().toLowerCase();
+  return st === 'override-passed' || (st === 'passed' && m === 'signed');
+}
+
 function findImplCol_(headers, possibleNames) {
   for (var i = 0; i < headers.length; i++) {
     var h = (headers[i] || '').toString().toLowerCase().trim();

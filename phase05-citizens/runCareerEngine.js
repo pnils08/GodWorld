@@ -450,7 +450,8 @@ function runCareerEngine_(ctx) {
   var iLife = idx('LifeHistory');
   var iLastUpd = idx('LastUpdated');
   var iNeighborhood = idx('Neighborhood');
-  var iTierRole = idx('TierRole'); // read-only; do not write
+  // engine.266 (builder 2026-09-28): TierRole never existed — RoleType picks the initial industry. Read-only.
+  var iTierRole = idx('TierRole') >= 0 ? idx('TierRole') : idx('RoleType');
   var iIncome = idx('Income');
   var iEconKey = idx('EconomicProfileKey');
   var iEmployerBizId = idx('EmployerBizId'); // v2.4: employer tracking

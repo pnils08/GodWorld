@@ -196,7 +196,9 @@ function runGenerationalEngine_(ctx) {
   var iStatus = idx("Status");
   var iLife = idx("LifeHistory");
   var iLastU = idx("LastUpdated");
-  var iTierRole = idx("TierRole");
+  // engine.266 (builder 2026-09-28): TierRole never existed on the ledger — read RoleType (job title) so
+  // role-specific retirement/death framing fires; a real TierRole column would win if added.
+  var iTierRole = idx("TierRole") >= 0 ? idx("TierRole") : idx("RoleType");
   var iCIV = idx("CIV (y/n)");
   var iNeighborhood = idx("Neighborhood");
 
@@ -357,7 +359,7 @@ function runGenerationalEngine_(ctx) {
     var birthYear = Number(row[iBirthYear]) || 0;
     var tier = Number(row[iTier]) || 0;
     var mode = row[iClock] || "ENGINE";
-    var tierRole = row[iTierRole] || "";
+    var tierRole = iTierRole >= 0 ? (row[iTierRole] || "") : "";
     var civFlag = iCIV >= 0 ? (row[iCIV] || "").toString().toLowerCase().trim() : "";
     var lifeHistory = row[iLife] ? row[iLife].toString() : "";
     var neighborhood = iNeighborhood >= 0 ? (row[iNeighborhood] || "") : "";

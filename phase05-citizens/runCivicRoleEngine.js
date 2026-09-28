@@ -136,7 +136,8 @@ function runCivicRoleEngine_(ctx) {
   var iLife = idx('LifeHistory');
   var iLastUpd = idx('LastUpdated');
   var iNeighborhood = idx('Neighborhood');
-  var iTierRole = idx('TierRole');
+  // engine.266 (builder 2026-09-28): TierRole never existed — RoleType drives the role-specific civic notes.
+  var iTierRole = idx('TierRole') >= 0 ? idx('TierRole') : idx('RoleType');
 
   // ═══════════════════════════════════════════════════════════════════════════
   // PULL WORLD CONDITIONS

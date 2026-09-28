@@ -427,3 +427,11 @@ Live last 3000 rows: Gregorian dates from `ctx.now` (Strain, CIVIC/MEDIA-Event, 
 
 ### G-EC72 — relocations funnel into West Oakland from C110 [sim] [observation] [MED]
 Bench C110: 20 of 23 relocations landed in West Oakland; C111: 13 of 20. Live C109 spread 9 moves over 4 hoods. Not the stack: the trajectory is deterministic on last Cycle's Neighborhood_Map, and live C109's map already scores West Oakland +2 (Sentiment 0.45 vs city 0.29, MigrationFlow 4) → `growth` (+1.5 fit, pressure 0→1) at the C110 fire on any code. The self-limit is HousingPressure (−pressure/4) rising under sustained growth. Sim call for the builder: a one-hood boom week after the Stabilization Fund's West Oakland scope correction — ride it (start/peak/end is the doctrine) or damp the fit bonus.
+
+### Builder rulings 2026-09-28 (S502)
+- **G-EC72 West Oakland funnel:** ride the boom — change nothing; watch two or three live weeks; step in only if it never turns (engine.249's cap already bounds the hood table).
+- **G-EC59 media climate:** carry last week's media climate into this week's citizen events (one-week lag).
+- **G-EC71 LifeHistory timestamps:** all sim clock — Timestamp becomes `C<n>` everywhere; the day digest orders by Cycle.
+- **engine.266 role branches:** read RoleType instead of the never-existing TierRole (bench first).
+- **Cultural_Ledger:** repair the 39 existing rows (HolidayPriority from the calendar table, SportsSeason from the season word).
+

@@ -169,3 +169,8 @@ All tasks gated on Mike's approval of this design (S296 build moratorium — no 
 ## Builder ruling 2026-09-27
 "approved to extend." The household → economy → city-mood hops (1/5/6) are approved; the S296 moratorium gate on
 this plan is lifted. Build per the plan's Tasks.
+
+## Builder ruling 2026-09-28 — Hops 6 and 9
+Hop 6 (bars fill) folds into engine.205 (weekly game economy, both directions) — built once there. Hop 9 (morning
+after) dropped: engine.195's mood carrier plus the engine.203d slow fade already carry a game's afterglow.
+

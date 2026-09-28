@@ -158,3 +158,11 @@ engine.259 fund tranches (applyInitiativeImplementationEffects.js :544–572), a
    opens underfunded, the council defers it, or it fails. (SIM_DOCTRINE §15: this is where the city can have a
    bad budget year — the door has to be able to open.)
 
+### engine.262 — builder rulings 2026-09-28 (all three recommended options)
+1. **Opening balance:** general fund, Baylight apart — Baylight's $2.1B is its own tax-increment district and stays
+   off the treasury; the treasury opens at ~$100M for civic programs (covers the two small pending programs, not the
+   $230M Transit Hub alone).
+2. **Revenue:** a weekly budget allocation — one World_Config number (e.g. $5M/week); taxes can replace it later.
+3. **Scarcity:** a program the treasury can't cover **opens underfunded** — the vote stands, it opens with what's
+   there, the shortfall is visible and delivery is slower until a renewal tops it up.
+

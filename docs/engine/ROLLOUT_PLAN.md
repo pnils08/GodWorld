@@ -138,7 +138,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | civic.38 | Stage machine + budgets + fund drain live; Initiatives in the World Jobs 1–6 LIVE PROD @132; C109 smoke Sun 2026-09-27 | in-progress | research-build / engine-sheet | [[../plans/2026-09-19-civic-wake-game-loop]] + [[../plans/2026-09-24-initiatives-in-the-world]] |
 | civic.40 | Close folds the week before its moves exist — fix before the C110 close | ready | engine-sheet | [[../plans/2026-09-24-initiatives-in-the-world]] §Job 1 Found 2026-09-27 civic.40 |
 | civic.41 | Clerk + sanity-read never run outside the Sunday chain | ready | engine-sheet | [[../plans/2026-09-24-initiatives-in-the-world]] §Job 1 Found 2026-09-27 civic.41 |
-| civic.42 | Civic chain keys off the fire, not the weekday — a fire after Sunday 21:00 has no chain slot and the week closes at the 6h cutoff with no hearing (C109) | ready | engine-sheet | `output/production_log_run_cycle_c109_gaps.md` G-EC62 |
+| civic.42 | Civic chain keys off the fire, not the weekday — a fire after Sunday 21:00 has no chain slot and the week closes at the 6h cutoff with no hearing (C109); chain and tick share no lock | ready | engine-sheet | `output/production_log_run_cycle_c109_gaps.md` G-EC62, G-EC69 |
 
 ### infrastructure.* — Supermemory, services, ingest
 

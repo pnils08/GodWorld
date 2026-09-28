@@ -1,0 +1,17 @@
+{
+  "initiative": "INIT-001",
+  "initiativeId": "INIT-001",
+  "cycle": 109,
+  "primaryVoice": "Mayor gavel (mayor_gavel-003)",
+  "consolidatedFrom": [
+    "STMT-109-mayor_gavel-003 (Mayor gavel — West Oakland Stabilization Fund Disbursement)",
+    "STMT-109-stabilization_fund-001 (Webb — Month-eight disbursement)",
+    "STMT-109-stabilization_fund-002 (Webb — West Oakland stability)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-001",
+    "MilestoneNotes": "C109: month-eight tranche $400,000 released in West Oakland (2 household grants, $81,188). Downtown is outside the Fund's area — that is INIT-008, proposed, not voted.",
+    "NextScheduledAction": "Month-nine disbursement review",
+    "NextActionCycle": 110
+  }
+}

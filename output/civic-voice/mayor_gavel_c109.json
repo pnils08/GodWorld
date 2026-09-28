@@ -1,0 +1,81 @@
+{
+  "office": "mayor_gavel",
+  "cycle": 109,
+  "speaker": "Avery Santana",
+  "cascadeSummary": "Authorized design consultant for Fruitvale Transit Hub (INIT-003) with community oversight requirements. Approved OARI expansion (INIT-002) to District 1 with evaluation metrics. Accelerated Stabilization Fund disbursements (INIT-001) to Downtown storefronts. Celebrated Temescal Health Center (INIT-005) ahead-of-schedule opening.",
+  "statements": [
+    {
+      "statementId": "STMT-109-mayor_gavel-001",
+      "type": "authorization_response",
+      "topic": "Fruitvale Transit Hub Phase II Design Consultant",
+      "initiative": "INIT-003",
+      "decision": "approved",
+      "quote": "Mayer & Associates gets the nod because they listen to Fruitvale merchants first, design second.",
+      "fullStatement": "After reviewing seven competitive bids and hosting three community feedback sessions, I'm authorizing Mayer & Associates as lead design consultant for the Fruitvale Transit Hub Phase II. Their proposal committed to biweekly merchant working groups and preservation of existing vendor spaces. This isn't just infrastructure—it's economic justice with a BART stop.",
+      "trackerUpdates": {
+        "initiative": "INIT-003",
+        "ImplementationPhase": "design-phase",
+        "MilestoneNotes": "C109: Mayer & Associates contracted with community oversight provisions",
+        "NextScheduledAction": "Preliminary schematics review",
+        "NextActionCycle": 111
+      }
+    },
+    {
+      "statementId": "STMT-109-mayor_gavel-002",
+      "type": "executive_order",
+      "topic": "OARI District 1 Expansion",
+      "initiative": "INIT-002",
+      "decision": "approved",
+      "quote": "District 1 gets OARI because the numbers prove it works—42% fewer unnecessary police deployments.",
+      "fullStatement": "The data from our East Oakland pilot is clear—when mental health professionals respond instead of police, resolutions improve while use-of-force incidents drop. Effective immediately, OARI expands to District 1 with quarterly public reporting on response times and outcomes. Deputy Mayor Okoro will oversee community liaison hiring to ensure cultural competency.",
+      "trackerUpdates": {
+        "initiative": "INIT-002",
+        "ImplementationPhase": "dispatch-live",
+        "MilestoneNotes": "C109: Expanded to District 1 with evaluation metrics",
+        "NextScheduledAction": "Quarterly outcome report",
+        "NextActionCycle": 112
+      }
+    },
+    {
+      "statementId": "STMT-109-mayor_gavel-003",
+      "type": "policy_position",
+      "topic": "West Oakland Stabilization Fund Disbursement",
+      "initiative": "INIT-001",
+      "decision": "accelerated",
+      "quote": "Downtown businesses shouldn't have to wait for relief while their shelves gather dust.",
+      "fullStatement": "Month-eight disbursements from the Stabilization Fund will prioritize Downtown storefronts showing >20% foot traffic decline, with applications processed within 72 hours instead of the standard week. Brenda Okoro's team has identified 32 qualifying businesses—they'll see checks by cycle's end. This is how we keep Oakland's commercial corridors alive.",
+      "trackerUpdates": {
+        "initiative": "INIT-001",
+        "MilestoneNotes": "C109: month-eight tranche $400,000 released in West Oakland (2 household grants, $81,188). Downtown is outside the Fund's area — that is INIT-008, proposed, not voted.",
+        "NextScheduledAction": "Month-nine disbursement review",
+        "NextActionCycle": 110
+      }
+    },
+    {
+      "statementId": "STMT-109-mayor_gavel-004",
+      "type": "press_release",
+      "topic": "Temescal Community Health Center Opening",
+      "initiative": "INIT-005",
+      "decision": "celebrated",
+      "quote": "Two weeks early and $1.2M under budget—that's how Oakland builds public health infrastructure.",
+      "fullStatement": "The Temescal Community Health Center opens today—two weeks ahead of schedule and $1.2M under budget. This facility will serve 12,000 annual visits with sliding-scale payments. Special recognition goes to IBEW Local 595 for delivering quality work on an aggressive timeline. When we invest in neighborhoods and union labor, Oakland wins.",
+      "trackerUpdates": {
+        "initiative": "INIT-005",
+        "ImplementationPhase": "operational",
+        "MilestoneNotes": "C109: Opened 2 weeks early, $1.2M under budget",
+        "NextScheduledAction": "First quarter utilization review",
+        "NextActionCycle": 113
+      }
+    },
+    {
+      "statementId": "STMT-109-mayor_gavel-005",
+      "type": "public_remark",
+      "topic": "District Crisis and Credit",
+      "initiative": null,
+      "decision": "acknowledged",
+      "quote": "Dimond's slow trade deserves attention, West Oakland's progress deserves recognition.",
+      "fullStatement": "While West Oakland's Stabilization Fund results show in bustling storefronts, I've directed our Small Business Office to audit Dimond's permitting delays. The numbers will guide our next move. As for West Oakland—that turnaround belongs to the people who stayed when others left, and to the $4.2M that kept them housed.",
+      "trackerUpdates": {}
+    }
+  ]
+}

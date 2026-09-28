@@ -200,6 +200,14 @@ function normalizeTrackerWrite(trackerUpdates, currentRow, cycle) {
       warnings.push(`MilestoneNotes over cap (${val.length}c > ${MILESTONE_NOTES_CAP}c) → trimmed to ${trimmed.length}c.`);
       val = trimmed;
     }
+    // MilestoneNotes is the row's running record: the week's line is ADDED under what
+    // is there, never written over it (C109: the apply would have replaced the C108
+    // conversion rulings and the charter scope on INIT-001/002/003 with one sentence).
+    // A re-run with the same line is a no-op.
+    if (field === 'MilestoneNotes' && typeof val === 'string') {
+      const have = cur.MilestoneNotes != null ? String(cur.MilestoneNotes).replace(/\s+$/, '') : '';
+      if (have) val = have.split('\n').some(l => l.trim() === val.trim()) ? have : have + '\n' + val;
+    }
     setField(field, val);
   });
   // NextActionCycle — validate it's a forward cycle int; a garbage/stale emitted

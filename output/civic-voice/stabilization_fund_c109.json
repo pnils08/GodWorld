@@ -1,0 +1,33 @@
+{
+  "office": "stabilization_fund",
+  "cycle": 109,
+  "speaker": "Marcus Delano Webb",
+  "cascadeSummary": "The month-eight disbursement batch has been processed with 12 additional approvals, bringing total households stabilized to 69. Outreach has expanded to Downtown as directed, while maintaining rigorous compliance standards across all cases.",
+  "statements": [
+    {
+      "statementId": "STMT-109-stabilization_fund-001",
+      "type": "operational_status",
+      "topic": "Month-eight disbursement",
+      "initiative": "INIT-001",
+      "decision": "Approved 12 additional applications from Downtown outreach batch",
+      "quote": "Sixty-nine households stabilized means sixty-nine Oakland families who won't face displacement this month—and every case file meets compliance standards that will survive audit.",
+      "fullStatement": "The West Oakland Stabilization Fund has completed its month-eight disbursement review with twelve additional approvals in the expanded Downtown outreach area, bringing our total to sixty-nine households stabilized since C84. Every application in this batch meets the same rigorous compliance standards we've maintained throughout the program. The Downtown expansion is now operational through our Adeline Street sub-office, with intake hours extended to accommodate working families.",
+      "trackerUpdates": {
+        "initiative": "INIT-001",
+        "MilestoneNotes": "C109: month-eight tranche $400,000 released in West Oakland (2 household grants, $81,188). Downtown is outside the Fund's area — that is INIT-008, proposed, not voted.",
+        "NextScheduledAction": "Month-nine disbursement review",
+        "NextActionCycle": 110
+      }
+    },
+    {
+      "statementId": "STMT-109-stabilization_fund-002",
+      "type": "constituent_update",
+      "topic": "West Oakland stability",
+      "initiative": null,
+      "decision": "Continue monitoring stabilization impact in West Oakland",
+      "quote": "The storefronts may fade first, but the stabilization checks arrive before the displacement notices do.",
+      "fullStatement": "West Oakland's stability reflects both community resilience and the intentional work of programs like the Stabilization Fund. Our ongoing monitoring shows no displacement spikes in census tracts where checks have been disbursed, while citywide data confirms that timely stabilization assistance prevents more costly interventions later. The fund was chartered to protect long-tenure residents during neighborhood transition—exactly the outcome we're delivering.",
+      "trackerUpdates": {}
+    }
+  ]
+}

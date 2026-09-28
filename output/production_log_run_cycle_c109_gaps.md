@@ -396,3 +396,23 @@
 - **Source:** output/run_cycle_c109_steps.log
 - **Evidence:** buildDeskPackets: Chicago Citizens 124 / Chicago Sports 87 still pulled; Active Arcs 0, Previous Drafts 0, Recent Quotes 0. buildInitiativePackets: "Mara directive (C108): not found", "Voice decisions (C108): none found" — reads for files nothing writes any more.
 - **Open:** research-build's Chicago remnant cut covers the first; the rest engine.266.
+
+## LEG: /city-hall (G-R)
+
+No gaps this run.
+
+### G-EC67 — tracker apply replaced MilestoneNotes; one weekly sentence would have erased the standing rulings [judgment] [silent-fail] [HIGH]
+- **Source:** scripts/applyTrackerUpdates.js `normalizeTrackerWrite` plain-writeback block
+- **Evidence:** C109 dry run: INIT-001/002/003 cells holding the C108 conversion rulings → one "C109: …" line each.
+- **Fix:** DONE — the week's line is appended; a re-run with the same line is a no-op. contract 17/17, gate 34/34; C109 dry run shows history kept.
+
+### G-EC68 — four offices moved the Stabilization Fund to Downtown; the tracker row taught them to [judgment] [silent-fail] [HIGH]
+- **Source:** Initiative_Tracker INIT-001 MilestoneNotes "C107: Downtown canvass deployment authorized…", NextScheduledAction "…Downtown outreach impact assessment"; output/civic-voice/{mayor_gavel,okoro,council_d1,stabilization_fund}_c109.json
+- **Evidence:** gavel wrote "C109: Accelerated disbursement to 32 Downtown businesses". Engine fact C109: tranche $400,000, 2 household grants $81,188, West Oakland. Builder 2026-09-28: the Fund is West Oakland, businesses and residents; Downtown is INIT-008 (Tran, D2, proposed C108, not voted). Sanity-read — the check that reads for this — deferred on a provider error and nothing retries it (civic.41).
+- **Fix:** DONE — record fields only, speech untouched: `trackerUpdates` on decisions_c109.json + the gavel and Fund-office statements carry the engine's figures; live row NextScheduledAction → "Month-nine disbursement review", scope correction line appended and read back. The C108 "residents only" scope line was also wrong and is superseded on the row.
+- **Open:** the four statements stand as said and feed "what you did last cycle" in the C110 packs. The Downtown overreach is a world event; INIT-008 is its lawful vehicle.
+
+### G-EC69 — hourly tick ran inside the chain [judgment] [phase-ordering] [MED]
+- **Source:** logs/civic-cron.log — chain mayor-gavel 06:16Z, tick close-det 06:17Z
+- **Evidence:** no lock between `runChain` and `runTick`. Harmless at C109 (0 initiatives touched, no apply). With verdicts in, a tick could apply a half-built week.
+- **Open:** civic.42.

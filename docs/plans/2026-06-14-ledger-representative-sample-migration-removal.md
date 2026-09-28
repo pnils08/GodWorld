@@ -157,3 +157,7 @@ into MigrationReason/MigratedCycle; the UNDOCKED gate read any MigrationDestinat
 within-city movers (fixed S502). **Held for the builder:** keep the six columns as the relocation system's own fields
 (recommended — D1's harm is already gone), or rename them for naming hygiene; nothing is removed until that answer.
 
+## Builder ruling 2026-09-28 — keep the columns
+"keep the columns, update record." D1 is closed: the six columns stay in place as the within-city relocation
+system's fields. `docs/SIMULATION_LEDGER.md` trued (writers incl. the challenger mint, readers incl. the UNDOCKED gate).
+D2–D4 remain as filed.

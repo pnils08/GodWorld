@@ -138,12 +138,18 @@ function parseNum(val, def) {
  * Returns the full text or null if not found.
  */
 function readMaraDirective(prevCycle) {
-  const filePath = path.join(PROJECT_ROOT, `output/mara_directive_c${prevCycle}.txt`);
-  try {
-    return fs.readFileSync(filePath, 'utf-8');
-  } catch {
-    return null;
+  // engine.266 / G-EC66: the chain writes the post-close directive to
+  // output/mara-directives/mara_directive_c{XX}_AUTO.txt (civic.39 Task 4); the
+  // flat output/ path is the pre-chain hand file, still read first when present.
+  const candidates = [
+    path.join(PROJECT_ROOT, `output/mara_directive_c${prevCycle}.txt`),
+    path.join(PROJECT_ROOT, `output/mara-directives/mara_directive_c${prevCycle}.txt`),
+    path.join(PROJECT_ROOT, `output/mara-directives/mara_directive_c${prevCycle}_AUTO.txt`),
+  ];
+  for (const filePath of candidates) {
+    try { return fs.readFileSync(filePath, 'utf-8'); } catch { /* next */ }
   }
+  return null;
 }
 
 /**
@@ -170,12 +176,16 @@ function readVoiceDecisions(prevCycle) {
   const results = { mayorDecisions: [], factionReactions: [] };
   let found = false;
 
-  // Mayor decisions
-  const mayorPath = path.join(voiceDir, `mayor_c${prevCycle}.json`);
+  // Mayor decisions — engine.266 / G-EC66: the chain splits the mayor into an
+  // opening and a gavel (mayor_open_c/mayor_gavel_c); mayor_c is the pre-chain file.
+  const seenMayor = new Set();
+  for (const mayorFile of [`mayor_gavel_c${prevCycle}.json`, `mayor_open_c${prevCycle}.json`, `mayor_c${prevCycle}.json`]) {
   try {
-    const mayorData = JSON.parse(fs.readFileSync(mayorPath, 'utf-8'));
+    const mayorData = JSON.parse(fs.readFileSync(path.join(voiceDir, mayorFile), 'utf-8'));
     const stmts = Array.isArray(mayorData) ? mayorData : (mayorData.statements || []);
     for (const s of stmts) {
+      if (s.statementId && seenMayor.has(s.statementId)) continue;
+      if (s.statementId) seenMayor.add(s.statementId);
       if (['authorization_response', 'executive_order', 'appointment'].includes(s.type)) {
         results.mayorDecisions.push({
           statementId: s.statementId,
@@ -191,8 +201,32 @@ function readVoiceDecisions(prevCycle) {
       }
     }
   } catch { /* no mayor file */ }
+  }
 
-  // Faction reactions (OPP, CRC, IND)
+  // District seats (the chain's hearing: council_d1..d9_c{XX}) — any statement
+  // naming an initiative is that seat's reaction to it.
+  for (let d = 1; d <= 9; d++) {
+    try {
+      const data = JSON.parse(fs.readFileSync(path.join(voiceDir, `council_d${d}_c${prevCycle}.json`), 'utf-8'));
+      const stmts = Array.isArray(data) ? data : (data.statements || []);
+      for (const s of stmts) {
+        if (!s.initiative) continue;
+        results.factionReactions.push({
+          statementId: s.statementId,
+          faction: 'D' + d,
+          speaker: data.speaker || '',
+          type: s.type,
+          topic: s.topic,
+          position: s.decision || null,
+          quote: s.quote || '',
+          relatedInitiatives: [s.initiative]
+        });
+        found = true;
+      }
+    } catch { /* no seat file */ }
+  }
+
+  // Faction reactions (OPP, CRC, IND) — pre-chain files
   const factionFiles = [
     { file: `opp_faction_c${prevCycle}.json`, faction: 'OPP' },
     { file: `crc_faction_c${prevCycle}.json`, faction: 'CRC' },

@@ -440,7 +440,7 @@ const CV_MOVE = { moveId: 'MV-500-civic-office-council-d3-2026-09-22', cycle: CY
 test('callVoteSweep stages the vote-scheduled write and joins the fold manifest', () => {
   const root = mkCallVoteRoot([CV_ROWS[0]]);
   fs.mkdirSync(path.join(root, 'output', 'cron-civic', 'moves'), { recursive: true });
-  fs.writeFileSync(path.join(root, 'output', 'cron-civic', 'moves', 'moves_c' + CYCLE + '.jsonl'), JSON.stringify(CV_MOVE) + '\n');
+  fs.writeFileSync(path.join(root, 'output', 'cron-civic', 'moves', 'moves_c' + (CYCLE - 1) + '.jsonl'), JSON.stringify(CV_MOVE) + '\n');
   const out = callVoteSweep(root, CYCLE);
   assert.deepStrictEqual(out, { filed: 1, scheduled: 1 });
   const d = JSON.parse(fs.readFileSync(path.join(root, 'output', 'city-civic-database', 'initiatives', 'init-003', 'decisions_c' + CYCLE + '.json'), 'utf8'));
@@ -455,7 +455,7 @@ test('callVoteSweep stages the vote-scheduled write and joins the fold manifest'
 test('callVoteSweep is byte-idempotent on a re-run', () => {
   const root = mkCallVoteRoot([CV_ROWS[0]]);
   fs.mkdirSync(path.join(root, 'output', 'cron-civic', 'moves'), { recursive: true });
-  fs.writeFileSync(path.join(root, 'output', 'cron-civic', 'moves', 'moves_c' + CYCLE + '.jsonl'), JSON.stringify(CV_MOVE) + '\n');
+  fs.writeFileSync(path.join(root, 'output', 'cron-civic', 'moves', 'moves_c' + (CYCLE - 1) + '.jsonl'), JSON.stringify(CV_MOVE) + '\n');
   callVoteSweep(root, CYCLE);
   const f = path.join(root, 'output', 'city-civic-database', 'initiatives', 'init-003', 'decisions_c' + CYCLE + '.json');
   const first = fs.readFileSync(f, 'utf8');
@@ -466,7 +466,7 @@ test('callVoteSweep is byte-idempotent on a re-run', () => {
 test('callVoteSweep skips a row the world already moved past', () => {
   const root = mkCallVoteRoot([{ ...CV_ROWS[0], VoteCycle: String(CYCLE + 1) }]);
   fs.mkdirSync(path.join(root, 'output', 'cron-civic', 'moves'), { recursive: true });
-  fs.writeFileSync(path.join(root, 'output', 'cron-civic', 'moves', 'moves_c' + CYCLE + '.jsonl'), JSON.stringify(CV_MOVE) + '\n');
+  fs.writeFileSync(path.join(root, 'output', 'cron-civic', 'moves', 'moves_c' + (CYCLE - 1) + '.jsonl'), JSON.stringify(CV_MOVE) + '\n');
   const out = callVoteSweep(root, CYCLE);
   assert.deepStrictEqual(out, { filed: 1, scheduled: 0 });
   assert.ok(!fs.existsSync(path.join(root, 'output', 'city-civic-database', 'initiatives', 'init-003')));
@@ -476,7 +476,7 @@ test('callVoteSweep skips when the counter no longer says domain-rules-deferred'
   const root = mkCallVoteRoot([CV_ROWS[3]]); // INIT-010 health, band unset → support-band-unset, not deferred
   const move = { ...CV_MOVE, payload: { initiativeId: 'INIT-010' } };
   fs.mkdirSync(path.join(root, 'output', 'cron-civic', 'moves'), { recursive: true });
-  fs.writeFileSync(path.join(root, 'output', 'cron-civic', 'moves', 'moves_c' + CYCLE + '.jsonl'), JSON.stringify(move) + '\n');
+  fs.writeFileSync(path.join(root, 'output', 'cron-civic', 'moves', 'moves_c' + (CYCLE - 1) + '.jsonl'), JSON.stringify(move) + '\n');
   const out = callVoteSweep(root, CYCLE);
   assert.deepStrictEqual(out, { filed: 1, scheduled: 0 });
 });
@@ -544,7 +544,7 @@ const RN_MOVE = { moveId: 'MV-500-civic-office-council-d3-2026-09-22', cycle: CY
 function rnRoot(rows, move) {
   const root = mkCallVoteRoot(rows);
   fs.mkdirSync(path.join(root, 'output', 'cron-civic', 'moves'), { recursive: true });
-  fs.writeFileSync(path.join(root, 'output', 'cron-civic', 'moves', 'moves_c' + CYCLE + '.jsonl'), JSON.stringify(move || RN_MOVE) + '\n');
+  fs.writeFileSync(path.join(root, 'output', 'cron-civic', 'moves', 'moves_c' + (CYCLE - 1) + '.jsonl'), JSON.stringify(move || RN_MOVE) + '\n');
   return root;
 }
 const rnDecision = root => path.join(root, 'output', 'city-civic-database', 'initiatives', 'init-002', 'decisions_c' + CYCLE + '.json');

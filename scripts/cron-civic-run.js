@@ -1054,7 +1054,7 @@ async function runDirective() {
   if (trackerRows === null) throw new Error('Directive board unavailable: Initiative_Tracker dump absent');
   const hoodScores = slice.scoreHoods(audit);
   const pendingProposals = (function () {
-    const folded = loadMoveLedgerFolded(ROOT, cycle);
+    const folded = loadMoveLedgerFolded(ROOT, moveWeekForClose(cycle));
     if (!folded) return [];
     return [...folded.values()].filter(m => m.status === 'pending' && m.type === 'propose');
   })();
@@ -2133,7 +2133,7 @@ async function runClose() {
   const clerkPersona = readPersonaDir('city-clerk');
   // civic.38 Task 2 step 4 — the clerk sees this week's candidate proposals
   // (pending `propose` moves off the move ledger) alongside the voice outputs.
-  const foldedMoves = loadMoveLedgerFolded(ROOT, cycle);
+  const foldedMoves = loadMoveLedgerFolded(ROOT, moveWeekForClose(cycle));
   const clerkCandidates = foldedMoves
     ? [...foldedMoves.values()].filter(m => m.status === 'pending' && m.type === 'propose')
     : [];
@@ -2686,6 +2686,17 @@ function moveLedgerLines(office, cycle, date, mv) {
 // appended, so a chain re-run folds to byte-identical files.
 // ---------------------------------------------------------------------------
 
+// civic.40 — which move ledger a close folds. A datawake files under the cycle
+// current at filing (detectCycle = the last fire), so the week between fire N
+// and fire N+1 files moves_c{N}. The close for N runs right after fire N,
+// before that week exists; the week it closes is the one filed under N−1.
+// Every close-side reader (fold, clerk candidates, call-vote + renew sweeps,
+// the post-close directive, the apply's status lines) goes through this.
+// Weekday readers (datawake, seat packs) keep reading the week being filed.
+function moveWeekForClose(closingCycle) {
+  return Number(closingCycle) - 1;
+}
+
 function loadMoveLedgerFolded(root, cycle) {
   const file = path.join(root, 'output', 'cron-civic', 'moves', 'moves_c' + cycle + '.jsonl');
   if (!fs.existsSync(file)) return null;
@@ -2693,7 +2704,10 @@ function loadMoveLedgerFolded(root, cycle) {
   for (const line of fs.readFileSync(file, 'utf8').split('\n')) {
     if (!line.trim()) continue;
     let m; try { m = JSON.parse(line); } catch (_) { continue; }
-    if (m && m.moveId) byId.set(m.moveId, m);   // last line wins
+    // Last line wins per field: a status line (apply outcome: moveId, status,
+    // detail) carries no type/agentDir/payload, and replacing the whole move
+    // with it dropped the seat and type from every applied move.
+    if (m && m.moveId) byId.set(m.moveId, Object.assign({}, byId.get(m.moveId), m));
   }
   return byId;
 }
@@ -2727,10 +2741,10 @@ function slugForInitiative(decisionsDir, initId) {
 // files } and writes: merged decisions files (work) + _candidates file
 // (propose) + a fold manifest the apply step reads to post ledger outcomes.
 function foldMovesIntoDecisions(root, cycle, officeMap) {
-  const folded = loadMoveLedgerFolded(root, cycle);
+  const folded = loadMoveLedgerFolded(root, moveWeekForClose(cycle));
   const manifestPath = path.join(root, 'output', 'cron-civic', 'moves', 'fold_c' + cycle + '.json');
   if (!folded) {
-    log('move fold: no ledger for c' + cycle + ' — nothing to fold');
+    log('move fold: no ledger for the week closing at c' + cycle + ' (moves_c' + moveWeekForClose(cycle) + ') — nothing to fold');
     return { workMoves: 0, workInitiatives: 0, candidates: 0, files: [] };
   }
   const pending = [...folded.values()].filter(m => m.status === 'pending');
@@ -2803,6 +2817,7 @@ function foldMovesIntoDecisions(root, cycle, officeMap) {
 
   fs.writeFileSync(manifestPath, JSON.stringify({
     cycle: Number(cycle),
+    moveCycle: moveWeekForClose(cycle), // civic.40: the ledger file the apply posts outcomes to
     work: Object.fromEntries([...byInit].map(([id, list]) => [id, list.map(m => m.moveId)])),
     candidates: proposes.map(p => p.moveId),
     foldedAt: new Date().toISOString(),
@@ -2906,7 +2921,7 @@ function petitionGateSweep(root, cycle) {
 // transition, same validator + gate + normalizeTrackerWrite path.
 // ---------------------------------------------------------------------------
 function callVoteSweep(root, cycle) {
-  const folded = loadMoveLedgerFolded(root, cycle);
+  const folded = loadMoveLedgerFolded(root, moveWeekForClose(cycle));
   if (!folded) return { filed: 0, scheduled: 0 };
   const calls = [...folded.values()].filter(m => m.status === 'pending' && m.type === 'call-vote' && m.payload && m.payload.initiativeId);
   if (!calls.length) return { filed: 0, scheduled: 0 };
@@ -2984,7 +2999,7 @@ function callVoteSweep(root, cycle) {
 // touches Status/VoteCycle/phase/budget: the engine holds the vote and moves
 // the money.
 function renewSweep(root, cycle) {
-  const folded = loadMoveLedgerFolded(root, cycle);
+  const folded = loadMoveLedgerFolded(root, moveWeekForClose(cycle));
   if (!folded) return { filed: 0, scheduled: 0 };
   const moves = [...folded.values()].filter(m => m.status === 'pending' && m.type === 'renew' && m.payload && m.payload.initiativeId);
   if (!moves.length) return { filed: 0, scheduled: 0 };
@@ -3764,7 +3779,7 @@ module.exports = { modelChainFor, FALLBACK_MODELS, sentimentWord, crimeWord, ret
   // civic.38 Task 1 — closed move set (exported for scripts/cron-civic-game.test.js)
   MOVE_TYPES, validateDatawakeMoves, runTickAndRefresh, hoodAuthorityReason, appendMoveLedger, moveLedgerLines, datawakeRecord,
   // civic.38 Task 2 — move ledger fold (Sunday close)
-  loadMoveLedgerFolded, foldMovesIntoDecisions, slugForInitiative,
+  loadMoveLedgerFolded, moveWeekForClose, foldMovesIntoDecisions, slugForInitiative,
   // civic.38 Task 6.3 — petition sweep
   petitionGateSweep, PETITION_SUPPORT_BANDS,
   // game-loop amendment 2026-09-21 — the call-vote escape hatch

@@ -752,36 +752,39 @@ async function main() {
     const manifestPath = path.join(ROOT, 'output', 'cron-civic', 'moves', `fold_c${CYCLE}.json`);
     if (fs.existsSync(manifestPath)) {
       const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+      // civic.40: the close for CYCLE folds the week filed under CYCLE−1; outcomes go
+      // back to that week's ledger file. A pre-civic.40 manifest has no moveCycle.
+      const MOVE_CYCLE = manifest.moveCycle != null ? Number(manifest.moveCycle) : CYCLE;
       const at = new Date().toISOString();
       const lines = [];
       for (const [initId, moveIds] of Object.entries(manifest.work || {})) {
         const ok = writeOutcome[initId];
         for (const id of moveIds) {
-          lines.push({ moveId: id, cycle: CYCLE, status: ok === true ? 'applied' : 'failed',
+          lines.push({ moveId: id, cycle: MOVE_CYCLE, closeCycle: CYCLE, status: ok === true ? 'applied' : 'failed',
             detail: ok === true ? `LastWorkCycle/LastWorkSeat written for ${initId}` : 'write failed: ' + (ok || 'row not processed'), at });
         }
       }
       for (const id of manifest.candidates || []) {
         const ok = candidateOutcome[id];
         if (ok === undefined) continue;
-        lines.push({ moveId: id, cycle: CYCLE, status: ok === true ? 'applied' : 'failed',
+        lines.push({ moveId: id, cycle: MOVE_CYCLE, closeCycle: CYCLE, status: ok === true ? 'applied' : 'failed',
           detail: ok === true ? 'candidate row appended to Initiative_Tracker' : String(ok), at });
       }
       // game-loop amendment 2026-09-21 — call-vote moves scheduled by the
       // Sunday sweep get their outcome from the row write like a work move.
       for (const [initId, id] of Object.entries(manifest.callVotes || {})) {
         const ok = writeOutcome[initId];
-        lines.push({ moveId: id, cycle: CYCLE, status: ok === true ? 'applied' : 'failed',
+        lines.push({ moveId: id, cycle: MOVE_CYCLE, closeCycle: CYCLE, status: ok === true ? 'applied' : 'failed',
           detail: ok === true ? `vote scheduled for ${initId} (VoteCycle ${CYCLE + 1})` : 'write failed: ' + (ok || 'row not processed'), at });
       }
       // Initiatives in the World Job 6 — renew moves staged by the Sunday sweep.
       for (const [initId, id] of Object.entries(manifest.renewals || {})) {
         const ok = writeOutcome[initId] === true ? renewOutcome[initId] : writeOutcome[initId];
-        lines.push({ moveId: id, cycle: CYCLE, status: ok === true ? 'applied' : 'failed',
+        lines.push({ moveId: id, cycle: MOVE_CYCLE, closeCycle: CYCLE, status: ok === true ? 'applied' : 'failed',
           detail: ok === true ? `renewal vote staged for ${initId} (RenewalVoteCycle ${CYCLE + 1})` : 'write failed: ' + (ok || 'row not processed'), at });
       }
       if (lines.length) {
-        const ledgerFile = path.join(ROOT, 'output', 'cron-civic', 'moves', `moves_c${CYCLE}.jsonl`);
+        const ledgerFile = path.join(ROOT, 'output', 'cron-civic', 'moves', `moves_c${MOVE_CYCLE}.jsonl`);
         fs.mkdirSync(path.dirname(ledgerFile), { recursive: true });
         fs.appendFileSync(ledgerFile, lines.map(l => JSON.stringify(l)).join('\n') + '\n');
         console.log(`\nMove ledger: ${lines.filter(l => l.status === 'applied').length} applied / ${lines.filter(l => l.status === 'failed').length} failed → ${path.relative(ROOT, ledgerFile)}`);

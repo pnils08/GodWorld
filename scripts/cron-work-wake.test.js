@@ -161,12 +161,12 @@ console.log('=== workMoveLine — a director shift is a work move (civic.38 ruli
   civicRun.appendMoveLedger(ws, 108, [Object.assign({}, mv, { at: '2026-09-22T21:00:00.000Z' })]); // same-day rerun
   var folded = civicRun.loadMoveLedgerFolded(ws, 108);
   ok(folded && folded.size === 1, 'same-day rerun collapses to one move in the ledger read');
-  var out = civicRun.foldMovesIntoDecisions(ws, 108, { offices: [] });
+  var out = civicRun.foldMovesIntoDecisions(ws, 109, { offices: [] }); // civic.40: the close after fire C109 folds the week filed under C108
   ok(out.workMoves === 1 && out.workInitiatives === 1, 'fold counts the director move as work on one initiative');
   var decFiles = [];
-  (function walk(d) { fs.readdirSync(d).forEach(function (f) { var q = path.join(d, f); if (fs.statSync(q).isDirectory()) walk(q); else if (/decisions_c108\.json$/.test(f)) decFiles.push(q); }); })(path.join(ws, 'output', 'city-civic-database', 'initiatives'));
+  (function walk(d) { fs.readdirSync(d).forEach(function (f) { var q = path.join(d, f); if (fs.statSync(q).isDirectory()) walk(q); else if (/decisions_c109\.json$/.test(f)) decFiles.push(q); }); })(path.join(ws, 'output', 'city-civic-database', 'initiatives'));
   var dec = decFiles.length ? JSON.parse(fs.readFileSync(decFiles[0], 'utf8')) : null;
-  ok(dec && dec.trackerUpdates.LastWorkCycle === 108 && dec.trackerUpdates.LastWorkSeat === 'proj-synth', 'fold stamps LastWorkCycle=108, LastWorkSeat=proj-synth from the director move');
+  ok(dec && dec.trackerUpdates.LastWorkCycle === 109 && dec.trackerUpdates.LastWorkSeat === 'proj-synth', 'fold stamps LastWorkCycle=109 (the closing cycle), LastWorkSeat=proj-synth from the director move');
   fs.rmSync(ws, { recursive: true, force: true });
   fs.rmSync(dir2, { recursive: true, force: true });
 })();

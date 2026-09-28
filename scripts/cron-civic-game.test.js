@@ -544,7 +544,7 @@ test('T2.4: Status transition gate enforces exactly ONE legal edge: proposed -> 
   assert.throws(() => validateStatusTransition('proposed', 'active', '109'), /Illegal status transition/);
 });
 
-test('T2.5: Live foldMovesIntoDecisions in temp workspace: aggregates work moves, creates candidates, byte-idempotent', () => {
+test('T2.5: Live foldMovesIntoDecisions in temp workspace: the close for C109 folds the week filed under C108 (civic.40), aggregates work moves, creates candidates, byte-idempotent', () => {
   const ws = createTempWorkspace();
   try {
     const moves = [
@@ -554,9 +554,9 @@ test('T2.5: Live foldMovesIntoDecisions in temp workspace: aggregates work moves
     ];
     ws.writeJsonl('output/cron-civic/moves/moves_c108.jsonl', moves);
 
-    // Initial decisions file with voice note
-    ws.writeJson('output/city-civic-database/initiatives/init-001/decisions_c108.json', {
-      initiative: 'INIT-001', initiativeId: 'INIT-001', cycle: 108, primaryVoice: 'mayor',
+    // Initial decisions file with voice note — written by the closing cycle's voice
+    ws.writeJson('output/city-civic-database/initiatives/init-001/decisions_c109.json', {
+      initiative: 'INIT-001', initiativeId: 'INIT-001', cycle: 109, primaryVoice: 'mayor',
       trackerUpdates: { MilestoneNotes: 'Initial progress note' }
     });
 
@@ -568,21 +568,22 @@ test('T2.5: Live foldMovesIntoDecisions in temp workspace: aggregates work moves
       ]
     };
 
-    const out1 = civicRun.foldMovesIntoDecisions(ws.dir, 108, officeMap);
+    const out1 = civicRun.foldMovesIntoDecisions(ws.dir, 109, officeMap);
     assert.equal(out1.workMoves, 2);
     assert.equal(out1.workInitiatives, 1);
     assert.equal(out1.candidates, 1);
 
-    const decPath = ws.path('output/city-civic-database/initiatives/init-001/decisions_c108.json');
-    const candPath = ws.path('output/city-civic-database/initiatives/_candidates/candidates_c108.json');
-    const manifestPath = ws.path('output/cron-civic/moves/fold_c108.json');
+    const decPath = ws.path('output/city-civic-database/initiatives/init-001/decisions_c109.json');
+    const candPath = ws.path('output/city-civic-database/initiatives/_candidates/candidates_c109.json');
+    const manifestPath = ws.path('output/cron-civic/moves/fold_c109.json');
 
     assert(fs.existsSync(decPath));
     assert(fs.existsSync(candPath));
     assert(fs.existsSync(manifestPath));
 
     const dec1 = JSON.parse(fs.readFileSync(decPath, 'utf8'));
-    assert.equal(dec1.trackerUpdates.LastWorkCycle, 108);
+    assert.equal(dec1.trackerUpdates.LastWorkCycle, 109, 'LastWorkCycle stamps the closing cycle');
+    assert.equal(JSON.parse(fs.readFileSync(manifestPath, 'utf8')).moveCycle, 108, 'the manifest names the folded week for the apply');
     assert.equal(dec1.trackerUpdates.LastWorkSeat, 'civic-office-council-d1, civic-office-council-d3');
     assert.equal(dec1.trackerUpdates.MilestoneNotes, 'Initial progress note');
     assert.deepEqual(dec1._moveFold.moveIds, ['MV-108-civic-office-council-d1-2026-09-21', 'MV-108-civic-office-council-d3-2026-09-22']);
@@ -597,11 +598,14 @@ test('T2.5: Live foldMovesIntoDecisions in temp workspace: aggregates work moves
     assert.equal(c.budget, '$20M', 'engine.255 Task 9: the seat\'s budget rides the fold into the candidate');
     assert.equal(c.status, 'pending');
 
+    // The closing cycle's own ledger (the week now being filed) is never folded
+    ws.writeJsonl('output/cron-civic/moves/moves_c109.jsonl', [{ moveId: 'MV-109-civic-office-council-d1-2026-09-28', cycle: 109, date: '2026-09-28', agentDir: 'civic-office-council-d1', type: 'work', payload: { initiativeId: 'INIT-001' }, status: 'pending' }]);
+
     const rawDecBefore = fs.readFileSync(decPath, 'utf8');
     const rawCandBefore = fs.readFileSync(candPath, 'utf8');
 
     // Run fold again — must be byte-for-byte identical (byte-idempotent)
-    const out2 = civicRun.foldMovesIntoDecisions(ws.dir, 108, officeMap);
+    const out2 = civicRun.foldMovesIntoDecisions(ws.dir, 109, officeMap);
     assert.equal(out2.workMoves, 2);
     assert.equal(out2.candidates, 1);
     assert.equal(fs.readFileSync(decPath, 'utf8'), rawDecBefore, 'Decisions file must be byte-identical on rerun');

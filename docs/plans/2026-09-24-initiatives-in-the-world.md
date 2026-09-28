@@ -184,6 +184,7 @@ Phase 8, so specific economic numbers will not reproduce):
 
 ## Changelog
 
+- 2026-09-28 (engine-sheet S502) — civic.40 fixed: the close after fire N folds `moves_c{N-1}` (`moveWeekForClose`); apply posts outcomes to that week's file (`moveCycle` in the fold manifest); readers merge status lines onto their move. C109 datawake already filed 3 moves; the C110 close is the proof.
 - 2026-09-27 (research-build) — Job 1: found civic.40 (close folds before the week's moves are filed; proof moves to the C110 close) and civic.41 (no clerk/sanity-read outside the chain).
 - 2026-09-26 (engine-sheet) — Job 6 LIVE: PROD @132 (web app @119, `a0f158d3`) on agy CLEAN PASS; pull-back byte-identical.
 - 2026-09-26 (engine-sheet) — Job 6 moves side built `9efb1c5e`: `renew` move, renew sweep, allowlists, board flag. Job 6 complete pending agy review.

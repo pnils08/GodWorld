@@ -925,7 +925,8 @@ function loadMovesFolded(root, cycle) {
   if (!rows) return null;
   const byId = new Map();
   for (const r of rows) {
-    if (r && r.moveId) byId.set(r.moveId, r);
+    // a status line (apply outcome) carries no seat/type — merge it onto the move
+    if (r && r.moveId) byId.set(r.moveId, Object.assign({}, byId.get(r.moveId), r));
   }
   return byId;
 }
@@ -1124,6 +1125,8 @@ function loadSeatMoves(root, cycle, agentDir) {
     const rows = readJsonl(input.file);
     if (!rows) throw new Error('Move ledger disappeared for C' + input.cycle);
     for (const row of rows) {
+      // a status line (apply outcome: moveId + status, no seat) lands on a move already read
+      if (!row.agentDir && row.moveId && folded.has(row.moveId)) { folded.set(row.moveId, Object.assign({}, folded.get(row.moveId), row)); continue; }
       if (row.agentDir !== agentDir) continue;
       if (!row.moveId || Number(row.cycle) !== input.cycle) throw new Error('Invalid move identity/Cycle in ' + path.basename(input.file));
       folded.set(row.moveId,row);

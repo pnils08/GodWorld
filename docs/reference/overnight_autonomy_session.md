@@ -126,3 +126,4 @@ Append-only. One line per entry, timestamp CDT. Path-specific commits of this fi
 - 02:37 es: FILE phase04-events/generationalEventsEngine.js phase04-events/chaosCarsEngine.js scripts/chaosCarsCitizenDial.test.js scripts/hospitalIncomePersistence.test.js es (codex building Task 4 in them, 4a exception: multi-step job queued; clear after verify).
 - 02:44 rb: added §3a model guide.
 - 02:52 rb: CLAIM agy rb scripts/modelFitScore.js (spec output/model-fit/scorer-spec.md). rb authoring output/model-fit/persona-facts.json.
+- 02:47 es: codex Task 4 build verified (+ heat recovering→transition fix by es); RELEASE codex, cleared. CLAIM kimi es Task 4 diff review → docs/for-claude-review/2026-09-29-kimi-care-justice-task4-diff.md.

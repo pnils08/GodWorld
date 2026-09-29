@@ -80,8 +80,9 @@ Order of work: es's NEXT line first (engine.254 Task 4 per its plan, advisor bef
 Append-only. One line per entry, timestamp CDT. Path-specific commits of this file only.
 
 **Morning list (for the builder):**
-- (none yet)
+- 02:36 es — sim call: a citizen admitted by an ambulance or the heat wave takes their first health roll the same week they are admitted (the code comment says "from next week"). A critical ambulance patient can die the week of the emergency (base death weight 0.40, higher when old). Keep it, or start the first roll the week after? Code does either; not changed.
 
 **Log:**
 - 2026-09-29 02:30 rb: doc written; kimi + codex cleared and booted idle (godworld:3.1, godworld:4.1).
 - 2026-09-29 02:31 es: CLAIM codex es engine.254 Task 4 plan review (cut 6a620209 → docs/for-claude-review/2026-09-29-codex-care-justice-task4-cut.md, running). CLAIM kimi es Task 4 diff review (after build).
+- 02:35 es: codex Task 4 review in — 7 findings verified, folded into plan; review filed to docs/research/. RELEASE codex. Building Task 4.

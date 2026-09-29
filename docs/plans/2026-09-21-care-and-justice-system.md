@@ -271,7 +271,7 @@ Row key: `Cycle + System + GeographicScope + Neighborhood + IntakeType`.
 | Sparse typed rows safe? | No → dense rows adopted |
 | `-2` suffix vs the POPID-keyed open index | Index unaffected; suffix generation is a writer change (Task 8) |
 
-### Task 4 cut — typed admission receipts (engine-sheet, 2026-09-29 — reviewed, ready to build)
+### Task 4 cut — typed admission receipts (engine-sheet, 2026-09-29 — BUILT, bench pending)
 
 Outside review: `docs/research/2026-09-29-codex-care-justice-task4-cut.md` — 7 findings, all verified against code and folded below. Task 4 produces typed receipts **in memory** (`S.hospitalEvents`); the ledger writer ignores the new fields until Task 8 stamps L–O.
 
@@ -307,7 +307,8 @@ Outside review: `docs/research/2026-09-29-codex-care-justice-task4-cut.md` — 7
 
 | Site | kind | intakeType | sourceSystem | sourceEventId |
 |---|---|---|---|---|
-| heat wave `:318` | intake | `heat` | `heat-wave` | `heat-wave:C<cycle>:heat:<POPID>` |
+| heat wave `:318`, prior Status blank/`active` | intake | `heat` | `heat-wave` | `heat-wave:C<cycle>:heat:<POPID>` |
+| heat wave `:318`, prior Status `recovering` (the heat guard admits it, `:286`) | transition | — | — | — |
 | lifecycle `:406` | transition | — | — | — |
 | ordinary health `:643` | intake | `injury` if `injured`, else `illness` | `health-engine` | `health-engine:C<cycle>:<intakeType>:<POPID>` |
 | chaos ambulance, prior Status blank/`active` (new push) | intake | `illness` (`medical_emergency`) · `injury` (`workplace_accident`) | `ambulance` | `ambulance:<chaos eventId>:<POPID>` |
@@ -335,9 +336,13 @@ Outside review: `docs/research/2026-09-29-codex-care-justice-task4-cut.md` — 7
 11. receipts fold through `careJusticeAccounting` with no throw (kind contract).
 12. fixed seed: chaos rng draw sequence identical before and after.
 
+**Built 2026-09-29.** Code by codex against this spec, heat `recovering` transition + two cause fixes by engine-sheet; kimi diff review SHIP (`docs/research/2026-09-29-kimi-care-justice-task4-diff.md`). Tests: hospitalIncomePersistence 48, chaosCarsCitizenDial 27, careJusticeAccounting 55, griefPeriod 38, educationLoop 120, hospitalTalkback 24; collisions 0. **Interim until Task 8:** the writer ignores `kind` — an intake against a ghost open row books as a transition, a transition with no open row appends and counts an admit. Bench fire still owed.
+
 **Verify after build.** Test green; existing `chaosCarsCitizenDial`, `hospitalIncomePersistence`, `hospitalTalkback`, `careJusticeAccounting` tests green; `auditFunctionCollisions` 0; kimi adversarial diff review; bench fire, `Hospital_Ledger` read back, every new row matched to a receipt.
 
 ## Changelog
+
+- 2026-09-29 (engine-sheet) — Task 4 built: typed receipts at 4 sites, kimi review SHIP; bench pending.
 
 - 2026-09-29 (engine-sheet) — Task 4 cut reviewed by codex (7 findings verified, folded; review in docs/research/); ready to build.
 - 2026-09-29 (engine-sheet) — Task 4 cut drafted (§Task 4 cut): typed receipts on the 3 hospital-event sites + a new chaos-ambulance receipt that closes the lost-admission path; advisor-checked, out for codex review, nothing built.

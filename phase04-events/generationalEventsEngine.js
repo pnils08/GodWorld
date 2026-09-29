@@ -299,6 +299,10 @@ function runGenerationalEngine_(ctx) {
       var vName = ((vRow[iFirst] || '') + ' ' + (vRow[iLast] || '')).toString().trim();
       var vHood = iNeighborhood >= 0 ? (vRow[iNeighborhood] || '') : '';
       var vAge = simYear - Number(vRow[iBirthYear]);
+      // A recovering victim is re-escalated inside an open care episode —
+      // a transition, not a fresh intake (engine.254 invariant E).
+      var vPrior = String(vRow[iStatus] || '').trim().toLowerCase();
+      var vIntake = vPrior !== 'recovering';
       vRow[iStatus] = 'hospitalized';
       if (iStatusStart >= 0) vRow[iStatusStart] = cycle;
       // Human prose, never the machine tag — HealthCause feeds death prose
@@ -317,8 +321,12 @@ function runGenerationalEngine_(ctx) {
       ctx.summary.hospitalEvents = ctx.summary.hospitalEvents || [];
       ctx.summary.hospitalEvents.push({
         popId: vPop, name: vName, neighborhood: vHood,
-        cause: 'heat exhaustion during the heat wave',
-        from: 'active', to: 'hospitalized', cycle: cycle
+        cause: iHealthCause >= 0 ? (vRow[iHealthCause] || '') :
+          (vIntake ? 'heat exhaustion during the heat wave' : ''),
+        from: vPrior || 'active', to: 'hospitalized', cycle: cycle,
+        kind: vIntake ? 'intake' : 'transition',
+        intakeType: vIntake ? 'heat' : '', sourceSystem: vIntake ? 'heat-wave' : '',
+        sourceEventId: vIntake ? 'heat-wave:C' + cycle + ':heat:' + vPop : ''
       });
       if (!ctx.summary.storyHooks) ctx.summary.storyHooks = [];
       ctx.summary.storyHooks.push({
@@ -405,7 +413,9 @@ function runGenerationalEngine_(ctx) {
         ctx.summary.hospitalEvents = ctx.summary.hospitalEvents || [];
         ctx.summary.hospitalEvents.push({
           popId: popId, name: name, neighborhood: neighborhood,
-          cause: healthCause, from: status, to: healthResult.newStatus, cycle: cycle
+          cause: healthCause,
+          from: status, to: healthResult.newStatus, cycle: cycle,
+          kind: 'transition', intakeType: '', sourceSystem: '', sourceEventId: ''
         });
 
         if (healthResult.newStatus !== status) {
@@ -646,7 +656,11 @@ function runGenerationalEngine_(ctx) {
         ctx.summary.hospitalEvents = ctx.summary.hospitalEvents || [];
         ctx.summary.hospitalEvents.push({
           popId: popId, name: name, neighborhood: neighborhood,
-          cause: cause102, from: "active", to: admitStatus, cycle: cycle
+          cause: iHealthCause >= 0 ? (row[iHealthCause] || cause102) : cause102,
+          from: "active", to: admitStatus, cycle: cycle,
+          kind: 'intake', intakeType: admitStatus === 'injured' ? 'injury' : 'illness',
+          sourceSystem: 'health-engine',
+          sourceEventId: 'health-engine:C' + cycle + ':' + (admitStatus === 'injured' ? 'injury' : 'illness') + ':' + popId
         });
       }
 

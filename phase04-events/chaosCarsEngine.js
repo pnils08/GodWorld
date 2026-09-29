@@ -346,6 +346,7 @@ function writeCitizenEvent_(ctx, target, vehicle, outcome, cycle, text) {
   if (!S8.storyHooks) S8.storyHooks = [];
   var hookName8 = ((iFirst >= 0 ? row[iFirst] : '') + ' ' + (iLast >= 0 ? row[iLast] : '')).toString().trim();
   var hookHood8 = iNb >= 0 ? (row[iNb] || '') : (target.neighborhood || '');
+  var hospitalReceipt = null;
   if (newStatusW && iStatusW >= 0 && (curStatusW === '' || curStatusW === 'active' || curStatusW === 'recovering')) {
     row[iStatusW] = newStatusW;
     if (iStatusStartW >= 0) row[iStatusStartW] = cycle;
@@ -357,6 +358,16 @@ function writeCitizenEvent_(ctx, target, vehicle, outcome, cycle, text) {
       row[iHealthCauseW] = (outcome.outcome === 'workplace_accident') ? 'a workplace accident' : 'a sudden medical emergency';
     }
     rows[target.rowIndex] = row;
+    var isIntake = curStatusW !== 'recovering';
+    hospitalReceipt = {
+      popId: iPop >= 0 ? row[iPop] : target.popId,
+      name: hookName8, neighborhood: hookHood8,
+      cause: iHealthCauseW >= 0 ? (row[iHealthCauseW] || '') : '',
+      from: curStatusW || 'active', to: newStatusW, cycle: cycle,
+      kind: isIntake ? 'intake' : 'transition',
+      intakeType: isIntake ? (outcome.outcome === 'workplace_accident' ? 'injury' : 'illness') : '',
+      sourceSystem: isIntake ? 'ambulance' : '', sourceEventId: ''
+    };
     S8.storyHooks.push({
       hookType: 'CITIZEN_HOSPITALIZED', severity: 6, priority: 5,
       description: hookName8 + ' — ' + text,
@@ -387,6 +398,7 @@ function writeCitizenEvent_(ctx, target, vehicle, outcome, cycle, text) {
     [inWorldStamp_(ctx), (iPop >= 0 ? row[iPop] : target.popId), name, eventTag, text,
       (iNb >= 0 ? (row[iNb] || '') : target.neighborhood), cycle],
     'chaos_cars citizen event', 'chaos');
+  return hospitalReceipt;
 }
 
 // T3.9 — business: engine.193 cut 3b. A hit is a signed Growth_Rate EVENT on the business
@@ -557,8 +569,9 @@ function runChaosCarsEngine_(ctx) {
     }
 
     // Writeback by scope.
+    var hospitalReceipt = null;
     if (scope === 'citizen') {
-      writeCitizenEvent_(ctx, target, vehicle, outcome, cycle, text);
+      hospitalReceipt = writeCitizenEvent_(ctx, target, vehicle, outcome, cycle, text);
       primaryMetric = outcome.lifeHistoryTag; // citizen "metric" = the dial tag (provenance)
       primaryMagnitude = 0;
     } else if (scope === 'business') {
@@ -585,6 +598,13 @@ function runChaosCarsEngine_(ctx) {
     if (typeof writeChaosCarsRow_ === 'function') writeChaosCarsRow_(ctx, payload);
     ctx.summary.chaosCarsEvents.push(payload);
     if (consequenceFloorFired) ctx.summary.tier1ChaosEvents.push(payload);
+    if (hospitalReceipt) {
+      if (hospitalReceipt.kind === 'intake') {
+        hospitalReceipt.sourceEventId = 'ambulance:' + payload.eventId + ':' + hospitalReceipt.popId;
+      }
+      ctx.summary.hospitalEvents = ctx.summary.hospitalEvents || [];
+      ctx.summary.hospitalEvents.push(hospitalReceipt);
+    }
 
     // V2-5 (S326): consequence-class chaos hit → story surface. Solo-major
     // magnitude (0.05) — a hospitalization or arrest IS a story. Event-level,

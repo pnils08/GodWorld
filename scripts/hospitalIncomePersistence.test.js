@@ -243,5 +243,164 @@ check('cleared employer keeps a layoff cut', () => {
   floors(ctx);
   assert.strictEqual(row[ix('Income')], 12345);
 });
+
+// Task 4: typed in-memory receipts and the existing Phase-10 hospital writer.
+// The mock has no external Sheet; its rows live only in this process.
+vm.runInContext(fs.readFileSync(path.join(ROOT, 'phase04-events/chaosCarsEngine.js'), 'utf8'), sb,
+  { filename: 'phase04-events/chaosCarsEngine.js' });
+sb.persistWithRetry_ = fn => fn();
+sb.appendRowWithRetry_ = (sheet, row) => sheet.appendRow(row);
+sb.requireTab_ = (ss, name) => ss.getSheetByName(name);
+vm.runInContext(fs.readFileSync(path.join(ROOT, 'phase10-persistence/buildCyclePacket.js'), 'utf8'), sb,
+  { filename: 'phase10-persistence/buildCyclePacket.js' });
+function hospitalSheet(open) {
+  const rows = [['AdmissionId', 'POPID', 'Name', 'Neighborhood', 'Cause', 'AdmitCycle',
+    'StatusNow', 'LastTransitionCycle', 'DischargeCycle', 'Outcome', 'CyclesInCare']];
+  if (open) rows.push(open.slice());
+  return { rows, getDataRange: () => ({ getValues: () => rows.map(row => row.slice()) }),
+    appendRow: row => rows.push(row.slice()),
+    getRange: (r, c) => ({
+      setValues: values => values[0].forEach((value, offset) => { rows[r - 1][c - 1 + offset] = value; }),
+      setValue: value => { rows[r - 1][c - 1] = value; }
+    }) };
+}
+function persistOnMock(ctx, open) {
+  const sheet = hospitalSheet(open);
+  ctx.ss = { getSheetByName: name => name === 'Hospital_Ledger' ? sheet : null };
+  return { sheet, census: sb.persistHospitalLedger_(ctx) };
+}
+function syntheticAmbulance(ctx, status, cause) {
+  const row = ctx.ledger.rows[0];
+  row[ix('Status')] = status;
+  row[ix('HealthCause')] = cause;
+  const receipt = sb.writeCitizenEvent_(ctx,
+    { rowIndex: 0, popId: row[ix('POPID')], neighborhood: row[ix('Neighborhood')], tier: 4 },
+    { name: 'ambulance' },
+    { outcome: 'medical_emergency', severity: 'high', lifeHistoryTag: 'Setback' },
+    ctx.summary.cycleId, 'synthetic medical emergency');
+  ctx.summary.hospitalEvents = [receipt];
+  return receipt;
+}
+function withEngineStubs(stubs, fn) {
+  const prior = {};
+  for (const key of Object.keys(stubs)) { prior[key] = sb[key]; sb[key] = stubs[key]; }
+  try { return fn(); } finally { for (const key of Object.keys(stubs)) sb[key] = prior[key]; }
+}
+check('T4-2 ambulance then same-Cycle death opens and closes one row', () => {
+  const ctx = make('UNTRACKED');
+  ctx.ledger.rows[0][ix('HealthCause')] = '';
+  const receipt = syntheticAmbulance(ctx, 'active', '');
+  assert.strictEqual(receipt.kind, 'intake');
+  withEngineStubs({ processHealthLifecycle_: () => ({
+    type: 'health', tag: 'Death', description: 'synthetic lifecycle death', newStatus: 'deceased'
+  }), triggerDeathCascade_: () => {} }, () => sb.runGenerationalEngine_(ctx));
+  const result = persistOnMock(ctx);
+  assert.strictEqual(ctx.summary.hospitalEvents.length, 2);
+  assert.strictEqual(ctx.summary.hospitalEvents[1].kind, 'transition');
+  assert.strictEqual(result.sheet.rows.length, 2);
+  assert.strictEqual(result.sheet.rows[1][9], 'deceased');
+  assert.strictEqual(result.census.deathsThisCycle, 1);
+});
+check('T4-3 recovering re-escalation updates its open row without intake', () => {
+  const ctx = make('UNTRACKED');
+  const receipt = syntheticAmbulance(ctx, 'recovering', 'synthetic prior illness');
+  const open = ['H-C7999-SYNTHETIC', receipt.popId, receipt.name, receipt.neighborhood,
+    receipt.cause, 7999, 'recovering', 8001, '', '', ''];
+  const result = persistOnMock(ctx, open);
+  assert.strictEqual(receipt.kind, 'transition');
+  assert.strictEqual(receipt.sourceEventId, '');
+  assert.strictEqual(result.sheet.rows.length, 2);
+  assert.strictEqual(result.sheet.rows[1][6], 'critical');
+  assert.strictEqual(result.census.admitsThisCycle, 0);
+});
+check('T4-4 ordinary injury has a typed health-engine intake', () => {
+  const ctx = make('UNTRACKED');
+  ctx.ledger.rows[0][ix('HealthCause')] = '';
+  withEngineStubs({
+    checkHealthEvent_: () => ({ type: 'health', tag: 'Injury', severity: 'moderate', description: 'synthetic injury' }),
+    chance_: (_ctx, p) => p !== 0.35
+  }, () => sb.runGenerationalEngine_(ctx));
+  const receipt = ctx.summary.hospitalEvents[0];
+  assert.strictEqual(ctx.ledger.rows[0][ix('Status')], 'injured');
+  assert.strictEqual(receipt.kind, 'intake');
+  assert.strictEqual(receipt.intakeType, 'injury');
+  assert.strictEqual(receipt.sourceSystem, 'health-engine');
+  assert.strictEqual(receipt.sourceEventId, 'health-engine:C8002:injury:SYNTHETIC_HOSPITAL_TEST');
+  assert.strictEqual(receipt.cause, ctx.ledger.rows[0][ix('HealthCause')]);
+});
+check('T4-5 lifecycle step has blank intake and source fields', () => {
+  const ctx = make('UNTRACKED');
+  ctx.ledger.rows[0][ix('Status')] = 'hospitalized';
+  withEngineStubs({ processHealthLifecycle_: () => ({
+    type: 'health', tag: 'Critical', description: 'synthetic deterioration', newStatus: 'critical'
+  }) }, () => sb.runGenerationalEngine_(ctx));
+  const receipt = ctx.summary.hospitalEvents[0];
+  assert.strictEqual(receipt.kind, 'transition');
+  assert.strictEqual(receipt.intakeType, '');
+  assert.strictEqual(receipt.sourceSystem, '');
+  assert.strictEqual(receipt.sourceEventId, '');
+});
+check('T4-7 heat-wave victim has typed heat intake and row cause', () => {
+  const ctx = make('UNTRACKED');
+  ctx.ledger.rows[0][ix('BirthYear')] = sb.simYearOf_(ctx, 8002) - 75;
+  ctx.ledger.rows[0][ix('HealthCause')] = '';
+  ctx.summary.weatherEvents = [{ type: 'heat_wave', salient: true, hoods: ['SYNTHETIC_TEST_HOOD'] }];
+  withEngineStubs({ processHealthLifecycle_: () => null, checkDeath_: () => null,
+    checkBirth_: () => null, checkRetirement_: () => null, checkGraduation_: () => null,
+    checkHealthEvent_: () => null }, () => sb.runGenerationalEngine_(ctx));
+  const receipt = ctx.summary.hospitalEvents[0];
+  assert.strictEqual(receipt.kind, 'intake');
+  assert.strictEqual(receipt.intakeType, 'heat');
+  assert.strictEqual(receipt.sourceSystem, 'heat-wave');
+  assert.strictEqual(receipt.sourceEventId, 'heat-wave:C8002:heat:SYNTHETIC_HOSPITAL_TEST');
+  assert.strictEqual(receipt.cause, ctx.ledger.rows[0][ix('HealthCause')]);
+});
+check('T4-7b recovering heat-wave victim is a transition that keeps its prior cause', () => {
+  const ctx = make('UNTRACKED');
+  ctx.ledger.rows[0][ix('BirthYear')] = sb.simYearOf_(ctx, 8002) - 75;
+  ctx.ledger.rows[0][ix('Status')] = 'recovering';
+  ctx.ledger.rows[0][ix('HealthCause')] = 'a prior synthetic illness';
+  ctx.summary.weatherEvents = [{ type: 'heat_wave', salient: true, hoods: ['SYNTHETIC_TEST_HOOD'] }];
+  withEngineStubs({ processHealthLifecycle_: () => null, checkDeath_: () => null,
+    checkBirth_: () => null, checkRetirement_: () => null, checkGraduation_: () => null,
+    checkHealthEvent_: () => null }, () => sb.runGenerationalEngine_(ctx));
+  const receipt = ctx.summary.hospitalEvents[0];
+  assert.strictEqual(receipt.kind, 'transition');
+  assert.strictEqual(receipt.from, 'recovering');
+  assert.strictEqual(receipt.intakeType, '');
+  assert.strictEqual(receipt.sourceEventId, '');
+  assert.strictEqual(receipt.cause, 'a prior synthetic illness');
+});
+check('T4-9 missing receipt is visibly reconciled from patient Status', () => {
+  const ctx = make('UNTRACKED');
+  ctx.ledger.rows[0][ix('Status')] = 'critical';
+  ctx.summary.hospitalEvents = [];
+  const result = persistOnMock(ctx);
+  assert.strictEqual(result.sheet.rows.length, 2);
+  assert.strictEqual(result.census.missedAdmitsReconciled, 1);
+});
+check('T4-10 same-row death stops before ordinary health draw', () => {
+  const ctx = make('UNTRACKED');
+  ctx.ledger.rows[0][ix('BirthYear')] = sb.simYearOf_(ctx, 8002) - 30;
+  let healthDraws = 0;
+  withEngineStubs({ getSeasonalLimits_: () => ({ graduations: 0, births: 0, retirements: 0, deaths: 1 }),
+    checkDeath_: () => ({ type: 'death', tag: 'Death', description: 'synthetic death' }),
+    triggerDeathCascade_: () => {}, checkHealthEvent_: () => { healthDraws++; return null; }
+  }, () => sb.runGenerationalEngine_(ctx));
+  assert.strictEqual(ctx.ledger.rows[0][ix('Status')], 'deceased');
+  assert.strictEqual(healthDraws, 0);
+  assert.strictEqual((ctx.summary.hospitalEvents || []).length, 0);
+});
+check('T4-11 receipt kinds fold through care-justice accounting', () => {
+  const fold = require('../utilities/careJusticeAccounting.js').foldCareJusticeReceipts_;
+  const ctx = make('UNTRACKED');
+  ctx.ledger.rows[0][ix('HealthCause')] = '';
+  const intake = syntheticAmbulance(ctx, 'active', '');
+  intake.sourceEventId = 'ambulance:synthetic-event:SYNTHETIC_HOSPITAL_TEST';
+  const transition = { ...intake, kind: 'transition', intakeType: '', sourceSystem: '', sourceEventId: '' };
+  const result = fold([{ ...intake, system: 'hospital' }, { ...transition, system: 'hospital' }]);
+  assert.strictEqual(result.receipts.length, 1);
+  assert.strictEqual(result.transitions, 1);
+});
 console.log(passed + ' passed, ' + failed + ' failed');
 process.exitCode = failed ? 1 : 0;

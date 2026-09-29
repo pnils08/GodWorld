@@ -111,5 +111,91 @@ assert('streak preserved through all writes', dialOf(ctx).streak !== undefined);
     background.map(o => `${o.vehicle}/${o.outcome}`).join(', '));
 }
 
+// Task 4: isolated synthetic ambulance receipts; no intent is sent to a Sheet.
+function medicalCtx(status, cause) {
+  const ctx = makeCtx();
+  ctx.ledger.headers.push('Status', 'StatusStartCycle', 'HealthCause');
+  ctx.ledger.rows[0].push(status, '', cause || '');
+  ctx.ledger.rows[0][0] = 'SYNTHETIC-CHAOS-CARE';
+  return ctx;
+}
+const medicalTarget = { ...target, popId: 'SYNTHETIC-CHAOS-CARE' };
+const ambulance = { name: 'ambulance', displayName: 'Synthetic ambulance' };
+const emergency = { outcome: 'medical_emergency', severity: 'high', lifeHistoryTag: 'Setback', weight: 1 };
+const accident = { outcome: 'workplace_accident', severity: 'high', lifeHistoryTag: 'Setback', weight: 1 };
+
+{
+  const ctx = medicalCtx('active');
+  const receipt = eng.writeCitizenEvent_(ctx, medicalTarget, ambulance, emergency, 100, 'synthetic emergency');
+  assert('T4-1 active ambulance returns an unpushed intake with row cause',
+    receipt.kind === 'intake' && receipt.intakeType === 'illness' && receipt.sourceSystem === 'ambulance' &&
+    receipt.sourceEventId === '' && receipt.cause === 'a sudden medical emergency' &&
+    !ctx.summary.hospitalEvents);
+  const injury = eng.writeCitizenEvent_(medicalCtx('active'), medicalTarget, ambulance, accident, 100, 'synthetic accident');
+  assert('T4-1 workplace accident is injury with written prose',
+    injury.kind === 'intake' && injury.intakeType === 'injury' && injury.cause === 'a workplace accident');
+}
+{
+  const ctx = medicalCtx('recovering', 'synthetic prior cause');
+  const receipt = eng.writeCitizenEvent_(ctx, medicalTarget, ambulance, emergency, 100, 'synthetic re-escalation');
+  assert('T4-3 recovering returns transition with prior row cause and blank source fields',
+    receipt.kind === 'transition' && receipt.cause === 'synthetic prior cause' &&
+    receipt.intakeType === '' && receipt.sourceSystem === '' && receipt.sourceEventId === '' &&
+    ctx.ledger.rows[0][7] === 'critical');
+}
+{
+  const ctx = medicalCtx('retired');
+  const receipt = eng.writeCitizenEvent_(ctx, medicalTarget, ambulance, emergency, 100, 'synthetic retiree hit');
+  assert('T4-6 retiree retains Status and has no receipt', receipt === null && ctx.ledger.rows[0][7] === 'retired');
+}
+{
+  const ctx = medicalCtx('active');
+  const receipt = eng.writeCitizenEvent_(ctx, medicalTarget, { name: 'oari_van' },
+    { outcome: 'deescalated', severity: 'low', lifeHistoryTag: 'Setback' }, 100, 'synthetic diversion');
+  assert('T4-8 de-escalation emits no hospital receipt', receipt === null && !ctx.summary.hospitalEvents);
+}
+
+// The real caller draws eventId after the citizen write, queues the Chaos_Cars
+// payload, then publishes the receipt. Fixed draws prove this ordering.
+global.validateAllChaosConfigs_ = () => {};
+global.validateOutcome = () => {};
+global.chaosOutcomePool_ = vehicle => vehicle.textureOutcomes;
+global.loadChaosCarsConfig_ = () => [{ ...ambulance, episodic: false, baseFrequencyWeight: 1,
+  scopes: ['citizen'], textureOutcomes: [emergency], metricImpacts: [] }];
+function fixedMedicalRun(failPayload) {
+  const ctx = medicalCtx('active');
+  ctx.summary.cycleId = 100;
+  let draws = 0;
+  ctx.rng = () => { draws++; return draws === 1 ? 0 : ((draws * 17) % 97) / 97; };
+  const recorded = [];
+  global.writeChaosCarsRow_ = (_ctx, payload) => {
+    if (failPayload) throw new Error('synthetic payload failure');
+    recorded.push(payload.eventId);
+  };
+  let error = null;
+  try { eng.runChaosCarsEngine_(ctx); } catch (e) { error = e; }
+  return { ctx, draws, recorded, error };
+}
+{
+  const run = fixedMedicalRun(false);
+  const receipts = run.ctx.summary.hospitalEvents || [];
+  assert('T4-1 caller publishes intake after source row with matching eventId',
+    !run.error && run.recorded.length === 3 && receipts.length === 1 &&
+    receipts[0].sourceEventId === 'ambulance:' + run.recorded[0] + ':SYNTHETIC-CHAOS-CARE',
+    run.error && run.error.message);
+  const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+  const expectedIds = [6, 18, 30].map(start => Array.from({ length: 8 }, (_, offset) =>
+    chars.charAt(Math.floor(((((start + offset) * 17) % 97) / 97) * chars.length))).join(''));
+  assert('T4-12 fixed RNG keeps payload IDs and draw count',
+    run.draws === 39 && JSON.stringify(run.recorded) === JSON.stringify(expectedIds),
+    JSON.stringify({ draws: run.draws, recorded: run.recorded, expectedIds }));
+}
+{
+  const run = fixedMedicalRun(true);
+  assert('T4-9 payload failure leaves Status flipped but no receipt',
+    !!run.error && run.ctx.ledger.rows[0][7] === 'critical' && !run.ctx.summary.hospitalEvents,
+    run.error && run.error.message);
+}
+
 console.log(`\nchaosCarsCitizenDial: ${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

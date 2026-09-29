@@ -166,7 +166,7 @@ Each item is a bounded review or implementation cut. Implementation tasks requir
 - **Files:** `phase04-events/generationalEventsEngine.js`, `phase04-events/chaosCarsEngine.js`, proposed `scripts/careJusticeIntake.test.js`.
 - **Steps:** Emit the approved typed admission/transition receipts with immutable source keys; preserve existing illness and eligibility behavior unless separately ruled. Add OARI treatment entry only under the approved responder/initiative contract.
 - **Verify:** Direct ambulance and ordinary-health entry each count once; recovery/internal transition count zero new intake; welfare/de-escalation do not create beds; retirees/minors follow the recorded ruling.
-- **Status:** [ ] gated on R2, R4, R5 and receipt schema.
+- **Status:** [x] built 2026-09-29 — receipts in memory at 4 sites (owning plan §Task 4 cut); OARI entry not added (no ruling); bench pending.
 
 ### Task 5 — implement judicial entry and outcome decision
 

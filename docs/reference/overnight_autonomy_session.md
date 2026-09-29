@@ -125,3 +125,4 @@ Append-only. One line per entry, timestamp CDT. Path-specific commits of this fi
 - 02:40 rb: added §4a guest clear-after-review, §4b one-shot pings while waiting, §4c shared-tree commit rules.
 - 02:37 es: FILE phase04-events/generationalEventsEngine.js phase04-events/chaosCarsEngine.js scripts/chaosCarsCitizenDial.test.js scripts/hospitalIncomePersistence.test.js es (codex building Task 4 in them, 4a exception: multi-step job queued; clear after verify).
 - 02:44 rb: added §3a model guide.
+- 02:52 rb: CLAIM agy rb scripts/modelFitScore.js (spec output/model-fit/scorer-spec.md). rb authoring output/model-fit/persona-facts.json.

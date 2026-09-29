@@ -342,6 +342,8 @@ Outside review: `docs/research/2026-09-29-codex-care-justice-task4-cut.md` — 7
 
 ## Changelog
 
+- 2026-09-29 (engine-sheet) — Builder approved the new file `phase05-citizens/judicialLifecycle.js` for Task 5; Task 4 live PROD @123.
+
 - 2026-09-29 (engine-sheet) — Task 4 bench-proven on SANDBOX 0908 @144 C128–C133; PROD push waits for the builder (overnight rail).
 
 - 2026-09-29 (engine-sheet) — Task 4 built: typed receipts at 4 sites, kimi review SHIP; bench pending.

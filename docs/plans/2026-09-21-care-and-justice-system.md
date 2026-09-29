@@ -117,6 +117,7 @@ All three open calls ruled — the recommended defaults above, as stated:
 ### Later (folded in from the 2026-09-26 builder proposal, not part of this build)
 
 - **The judicial system is a civil system too, not only crime (builder direction 2026-09-29).** Build-on vehicles once the case flow proves: divorce goes through the court; lawsuits; court fees and fines as a new way to tax. Schema room already exists: a civil case is a new `EntryType` on `Judicial_Ledger` (e.g. `divorce`, `lawsuit`) with no arrest and no custody — the census counts custody only for `pending`/`held`, so civil cases never inflate it. **Why (builder 2026-09-29):** the sim mostly raises citizens' pay and has few ways to take money back out — the court is the money sink, the system used to tax. **Where it lands (builder, tentative — "maybe"):** court revenue goes into the city budget (live `City_Treasury` tab). Rates, who pays and the treasury path are still sim calls — confirm with the builder before designing. Not part of this build.
+- **City revenue, wider than the court (builder direction 2026-09-29):** three feeds into the city treasury — judicial (fees, fines), business tax, housing tax — and the treasury "could even" break out by council district. This is its own build (ROLLOUT engine.271), not part of care and justice; the court is one of its three feeds.
 - Judges as authored personas (civic-office pattern — canon philosophy files, not dials), once a case flow exists to judge.
 - Jury duty as a Tier-4→named promotion vehicle (universal-protagonism doctrine).
 - Precedent ledger as the folk-memory/institutional-memory answer — a consequence of the case ledger existing, not a separate build.
@@ -270,6 +271,8 @@ Row key: `Cycle + System + GeographicScope + Neighborhood + IntakeType`.
 | `-2` suffix vs the POPID-keyed open index | Index unaffected; suffix generation is a writer change (Task 8) |
 
 ## Changelog
+
+- 2026-09-29 (engine-sheet) — Builder direction: city revenue has three feeds (judicial, business tax, housing tax) into the treasury, possibly split by district; filed as engine.271.
 
 - 2026-09-29 (engine-sheet) — Builder direction: the court is the sim's money sink (pay mostly rises); court revenue tentatively feeds the city budget.
 

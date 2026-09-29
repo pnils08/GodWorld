@@ -20,3 +20,7 @@ engine.266 open item. Traced every live writer of the discontinued `Storyline_Tr
 
 - `Storyline_Tracker` and `Storyline_Intake` have zero writers left → drop the `STORYLINE_TRACKER` / `STORYLINE_INTAKE` constants in `utilities/sheetNames.js`, delete the tabs, close the `docs/engine/SHEETS_MANIFEST.md` entry.
 - Regenerate `ENGINE_STUB_MAP` in the same commit (engine structure changed).
+
+## Status log
+
+- 2026-09-29 (rb, ROLLOUT drain): engine.268 row narrative moved here verbatim from ROLLOUT_PLAN. Row text: Delete the frozen `Storyline_Tracker` (240 rows) + `Storyline_Intake` (363 rows) tabs — needs builder go (schema deletion). Same cut: drop the unwired Intake writers (`processEditionIntake.js`, `editionIntakeV3.js`, `editionIntake.js`, `parseMediaRoomMarkdown.js` runtime `insertSheet`), the four Tracker migration scripts (`add/rollbackStorylineWeavingColumns`, `cleanup_storyline_tracker`, `cleanupStorylineTracker`), `auditStorylineDomainRouting.js`, the `tabReferenceIntegrity.test.js` allowlist entries, and the now-null storyline-state / arc-binding plumbing in `applyStorySeeds` → `priorityEngine` / `bylineEngine`

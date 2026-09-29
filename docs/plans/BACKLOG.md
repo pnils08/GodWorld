@@ -497,6 +497,19 @@ The economic layer tracks formal businesses and employment. It doesn't track the
 
 ---
 
+## Parked ideas and external watches (moved from ROLLOUT 2026-09-29, rb)
+
+Five research rows had no owning doc (pointer was inline text or an external watch). Kept here so the ROLLOUT tracker stays pointer-only; revisit on the trigger named in each entry. Row text verbatim.
+
+- **research.3** — Document processing pipeline evaluation (Qianfan-OCR for civic-doc ingest). Was `needs-info`, owner research-build. Original pointer cell: inline-eval (trigger: civic pipeline needs real-world doc input)
+- **research.5** — Instant compaction — Strategic compact PreToolUse hook port (`affaan-m/everything-claude-code`). Was `blocked`, owner research-build. Original pointer cell: upstream not locally available (S212 check); pre-task: clone `affaan-m/everything-claude-code` to a workspace OR fetch the hook file via `gh` / curl before porting. ROLLOUT entry says "port directly" — invent-from-concept risks divergence. inline-pattern
+- **research.7** — KAIROS background daemon monitoring (Anthropic future feature). Was `needs-info`, owner research-build. Original pointer cell: external-watch
+- **research.8** — Hermes Agent (NousResearch) reference architecture monitoring. Was `needs-info`, owner research-build. Original pointer cell: external-watch
+- **research.10** — Arc engine grafts + Patterns A/B/D in idea-park (chaos-cars sibling, deferred). Was `blocked`, owner research-build / engine-sheet. Original pointer cell: inline-park (S190 grilling artifacts)
+
+---
+
 ## Changelog
 
 - 2026-04-16 — Initial consolidation (S152). Content extracted verbatim from [[engine/ROLLOUT_PLAN]] §Open Phases + research patterns. When any phase here becomes active work, extract to its own [[plans/PLAN_TEMPLATE]]-shaped plan file and replace the section here with a pointer.
+- 2026-09-29 — Added §Parked ideas and external watches (research.3/5/7/8/10 moved from ROLLOUT_PLAN, which had no owning doc for them).

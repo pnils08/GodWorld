@@ -14,6 +14,7 @@
 // Usage:
 //   node scripts/rolloutSweep.js --session=264           # dry-run: show what would move
 //   node scripts/rolloutSweep.js --session=264 --apply   # execute the move + print deltas
+//   add --include-wontfix to also sweep `wontfix` rows (archive bullet records the state)
 // Header is self-tightening (S263): --session=<N> REQUIRED; date auto = today (--date=YYYY-MM-DD
 // to override); label auto = "post-S<N-1> closures sweep" (--label="..." to override); insert anchor
 // auto-detected as the highest-session "## S<N> Archive Pass" header — no hand-maintained anchor/recap.
@@ -27,6 +28,9 @@ const ROOT = path.join(__dirname, '..');
 const ROLLOUT = path.join(ROOT, 'docs', 'engine', 'ROLLOUT_PLAN.md');
 const ARCHIVE = path.join(ROOT, 'docs', 'engine', 'ROLLOUT_ARCHIVE.md');
 const STATE_TOKEN = ' | done-pending-archive | ';
+// --include-wontfix (S506): also sweep `wontfix` rows — decided-not-to-do work is closed work and
+// does not belong in Open Work. Opt-in so the default sweep is unchanged.
+const WONTFIX_TOKEN = ' | wontfix | ';
 const ROW_ID = /^\|\s*([a-z][a-z-]*\.\d+[a-z]?)\s*\|/;
 const PASS_HEADER = /^## S(\d+) Archive Pass\b.*$/gm;
 
@@ -59,16 +63,19 @@ function parseRows(rolloutText) {
   for (const line of rolloutText.split('\n')) {
     const idM = line.match(ROW_ID);
     if (!idM) continue;
-    if (!line.includes(STATE_TOKEN)) continue;
+    const wf = process.argv.includes('--include-wontfix');
+    const tok = line.includes(STATE_TOKEN) ? STATE_TOKEN : (wf && line.includes(WONTFIX_TOKEN) ? WONTFIX_TOKEN : null);
+    if (!tok) continue;
+    const state = tok === STATE_TOKEN ? 'done-pending-archive' : 'wontfix';
     const id = idM[1];
     // Split on the state token: left = "| id | desc", right = "terminal | pointer |"
-    const parts = line.split(STATE_TOKEN);
+    const parts = line.split(tok);
     if (parts.length !== 2) { console.error(`SKIP ${id}: ambiguous state token`); continue; }
     const desc = parts[0].replace(ROW_ID, '').replace(/^\s*\|?\s*/, '').trim();
     const right = parts[1].split('|').map(c => c.trim()).filter(Boolean);
     const terminal = right[0] || '(unspecified)';
     const pointer = right[1] || '';
-    rows.push({ id, terminal, pointer, desc, raw: line });
+    rows.push({ id, terminal, pointer, desc, raw: line, state });
   }
   return rows;
 }
@@ -88,7 +95,7 @@ function buildPassSection(rows, session, date, label) {
   lines.push(`${rows.length} \`done-pending-archive\` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: ${countStr}.`);
   lines.push('');
   for (const r of rows) {
-    lines.push(`- **${r.id}** [${r.terminal}] — ${r.desc} **State at archive:** done-pending-archive. Pointer: ${r.pointer}`);
+    lines.push(`- **${r.id}** [${r.terminal}] — ${r.desc} **State at archive:** ${r.state}. Pointer: ${r.pointer}`);
   }
   lines.push('');
   lines.push(`This pass: ${rows.length} rows — ${idStr}. (Prior passes are the dated \`## S<N> Archive Pass\` headers above — no hand-maintained recap.)`);

@@ -234,6 +234,11 @@ Row key: `Cycle + System + GeographicScope + Neighborhood + IntakeType`.
 | 8 | Hospital writers build 15-wide rows and stamp L–O; missed-admission rows stamp `SourceSystem = reconcile`, `IntakeType = unclassified`. | `buildCyclePacket.js:893-895`, `:980-981` |
 | 8 | New writes address columns by header name. The existing range writes at columns 7–11 stay valid only because L–O are appended, never inserted. | `buildCyclePacket.js:886`, `:906`, `:950` |
 | 8 | Ghost-release outcome is `recovered-reconciled` for any non-deceased Status. With care ranked above `detained` this path is not reached by a custody case; the judicial writer's own reconcile uses `<outcome>-reconciled`. | `buildCyclePacket.js:948-952` |
+| 8 | **First-census bootstrap.** Opening occupancy comes from last Cycle's closing; on the first census Cycle there is none. Each ledger row already open (POP-00801 today) enters as one `correction` receipt — a correction, not an arrival. | test F |
+| 8 | **Order inside Phase 10.** The census reads the ledgers' open rows after `persistHospitalLedger_` (and the judicial writer) finish their reconciles in the same pass. | `buildCyclePacket.js:917-988` |
+| 8 | **Replay keys have one carrier:** rebuilt each run from the ledgers' `SourceEventId` columns (hospital N, judicial S). No separate key store. | `foldCareJusticeReceipts_` |
+| 8 | Judicial open rows are passed with `StatusNow`; only `pending`/`held` count in custody (enforced in the arithmetic). | `careJusticeAccounting.js` |
+| deploy | `utilities/careJusticeAccounting.js` is clasp-pushed and rides the next PROD push as uncalled code — no runtime effect; named in that push's smoke-test note. | `.claspignore` |
 | 10 | Talk-back numerator moves from every open row to a scope-matched measure — already scheduled; unchanged until then. | `applyDemographicDrift.js:225-235` |
 
 ### Invariants the tests assert
@@ -251,7 +256,7 @@ Row key: `Cycle + System + GeographicScope + Neighborhood + IntakeType`.
 | I | Zero named events with nonzero other-resident demand still produces rows |
 | J | `BedsOccupied` counts only `hospitalized` + `critical`; an `injured` admission is an intake with no bed |
 
-**Test file:** `scripts/careJusticeAccounting.test.js`, synthetic rows only, no sheet access — 53 assertions, landed green with the arithmetic in one commit. Six deliberate breaks of the arithmetic (no dedup, transition as intake, five states as beds, unavailable as zero, lost write undetected, transfer as intake) each fail it.
+**Test file:** `scripts/careJusticeAccounting.test.js`, synthetic rows only, no sheet access — 55 assertions, landed green with the arithmetic in one commit. Six deliberate breaks of the arithmetic (no dedup, transition as intake, five states as beds, unavailable as zero, lost write undetected, transfer as intake) each fail it.
 
 ### Review outcome (2026-09-29)
 

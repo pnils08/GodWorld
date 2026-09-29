@@ -29,6 +29,9 @@ var CARE_JUSTICE_MEASURE = { hospital: 'in-care', judicial: 'in-custody' };
 // Gate R2: only these two states occupy an inpatient bed.
 var CARE_JUSTICE_BED_STATES = ['hospitalized', 'critical'];
 
+// In custody = arrested and not yet resolved. An investigation is not custody.
+var CARE_JUSTICE_CUSTODY_STATES = ['pending', 'held'];
+
 var CARE_JUSTICE_BASIS = {
   neighborhood: 'hood-table', unallocated: 'city-remainder', city: 'city-total'
 };
@@ -179,11 +182,13 @@ function buildCareJusticeCensus_(input) {
   var open = input.trackedOpen || [];
   for (var o = 0; o < open.length; o++) {
     var op = open[o];
+    var opState = String(op.statusNow || '').toLowerCase();
+    if (op.system === 'judicial' && CARE_JUSTICE_CUSTODY_STATES.indexOf(opState) < 0) continue;
     var oat = placeOf(op.neighborhood);
     var oc = cell(op.system, oat.scope, oat.neighborhood, careJusticeIntakeType_(op.system, op.intakeType));
     oc.trackedOpen++;
     if (op.system === 'hospital' &&
-        CARE_JUSTICE_BED_STATES.indexOf(String(op.statusNow || '').toLowerCase()) >= 0) oc.trackedBeds++;
+        CARE_JUSTICE_BED_STATES.indexOf(opState) >= 0) oc.trackedBeds++;
   }
 
   var other = input.otherResident || [];
@@ -378,6 +383,7 @@ if (typeof module !== 'undefined' && module.exports) {
     CARE_JUSTICE_CENSUS_HEADERS: CARE_JUSTICE_CENSUS_HEADERS,
     CARE_JUSTICE_TYPES: CARE_JUSTICE_TYPES,
     CARE_JUSTICE_BED_STATES: CARE_JUSTICE_BED_STATES,
+    CARE_JUSTICE_CUSTODY_STATES: CARE_JUSTICE_CUSTODY_STATES,
     careJusticeCellKey_: careJusticeCellKey_,
     foldCareJusticeReceipts_: foldCareJusticeReceipts_,
     buildCareJusticeCensus_: buildCareJusticeCensus_,

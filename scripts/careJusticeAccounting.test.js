@@ -231,6 +231,17 @@ function clean(label, rows) {
   clean('transfer to treatment', tr.rows);
 }
 
+// ── An investigation is not custody ────────────────────────────────────────
+{
+  const { rows } = build({
+    trackedOpen: [{ system: 'judicial', popId: 'POP-9', neighborhood: 'Rockridge', intakeType: 'arrest', statusNow: 'investigating' }],
+  });
+  const row = find(rows, 'judicial', 'neighborhood', 'Rockridge', 'arrest');
+  assert('an open investigation counts zero in custody and leaves the scope complete',
+    row.ClosingOccupancy === 0 && row.Completeness === 'complete');
+  clean('investigation only', rows);
+}
+
 // ── I: zero named events, nonzero other-resident demand ─────────────────────
 {
   const { rows } = build({

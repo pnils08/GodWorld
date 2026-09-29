@@ -43,7 +43,7 @@ pointers:
 5. No new `hood-name-kind` slugs are minted. The 97 legacy rows stay on the tab as record and are no longer shown to writers.
 6. The `THREAD-CLOSED:` model marker and its packet rule are removed.
 7. Every registry entry has a ledger row whether or not anyone covered it; an uncovered storyline reads `Articles 0`.
-8. An initiative stage storyline closes the cycle the initiative's stage changes, and the new stage opens as its own row.
+8. An initiative stage storyline closes at the first Saturday run after the initiative's stage changes, and the new stage opens as its own row.
 9. First unattended proof: the weekday 06:15 desk run reads a `desk_signal_c109.json` rebuilt with the registry, and the Saturday run writes engine-keyed rows.
 
 ---
@@ -136,6 +136,22 @@ pointers:
 - **Verify:** run steps 1–2 over the staged C105–C108 West Oakland articles; report attach counts and step-2 verdicts before enabling on `--apply`.
 - **Status:** [ ] not started — after Tasks 1–6
 
+## Review resolutions (2026-09-28)
+
+Advisor review and codex review (`docs/for-claude-review/2026-09-28-codex-storylines-plan-review.md`, 7 findings, each verified against code). These OVERRIDE the task text above where they differ.
+
+| # | Finding | Resolution |
+|---|---|---|
+| C1 | `storylineId` field dies in `newsroom-fanout.js storyFromSeed` and in every beat-slice story replacement | No field is propagated. The ID rides inside the `ref` STRING, which every path already carries (`story.ref`). Task 2 writes it into the ref text (`CauseId CRISIS-105-WESTOAKL`, `InitiativeID INIT-005`). One resolver, `resolveStoryline(story, registry)` in `scripts/storylineRegistry` logic inside `buildWorldSummary.js` exports, is called at ONE place — the wake-3 packet build in `cron-desk-run.js` — and matches `story.ref` against registry IDs and initiative IDs. A beat-slice story whose ref names no engine ID stays untagged; Task 7 is its path |
+| C2 | initiative stage `startCycle` has no source on first build | One fire and one Saturday run per cycle, so the ledger is observed once per cycle. `FirstCycle` = the cycle the stage was first OBSERVED; rows created at rollout are first-seen, not true starts, and the registry marks them `firstSeen: true`. Close cycle = the first cycle the tracker's stage differs from the open row. AC 8 reads "closes at the first Saturday run after the stage changes" |
+| C3 | Saturday attach in `stepSignals` runs after publish and sweep | Task 7 becomes its own step `stepAttach`, run BEFORE `stepPublish`; it writes the storyline into the staged sidecar's `intake.storylines`, so publish, sweep and signals all see it. It never touches article text |
+| C4 | writer cannot know `opened` / `advanced` / `closed` | The registry entry carries `status` and `hasLedgerRow`; the resolver returns the whole entry and the packet carries it as `packet.signal.storyline`. Verb: `closed` if `status` is closed, else `opened` if `!hasLedgerRow`, else `advanced` |
+| C5 | registry-only upsert would refresh `LastCycle` forever | `LastCycle` means last COVERAGE cycle. A registry upsert with no articles leaves it untouched; a new uncovered row writes it blank |
+| C6 | `buildDeskPackets.js normalizeStorylineLedger` no longer exists | Task 6 file list is `scripts/post-cycle-review.js`, `scripts/queryLedger.js`, `docs/engine/SHEETS_MANIFEST.md` (stale adapter pointer at :74), `docs/SPREADSHEET.md` |
+| C7 | `citizenArcSeed.test.js` asserts the old `storyline` field | Test updated in Task 4: a quote pass alone no longer counts as storyline coverage, and the test asserts that |
+| A2 | uncovered storylines never reach the ledger | every registry entry is upserted (AC 7) |
+| A3 | two lists shown to writers | `openThreads` removed (Task 1.6) |
+
 ## Weakest assumptions (attack these first)
 
 1. **The assignment's lane entry survives to the writer with `storylineId` intact.** The angle stage rewrites stories; if it drops unknown fields, Task 3.4 tags nothing. Trace one story object from `loadLane` to `packet` before writing Task 3.
@@ -150,3 +166,4 @@ pointers:
 ## Changelog
 
 - 2026-09-28 — created (engine-sheet, S503).
+- 2026-09-28 — advisor + codex review folded in (§Review resolutions).

@@ -107,3 +107,4 @@ Append-only. One line per entry, timestamp CDT. Path-specific commits of this fi
 - 02:35 es: codex Task 4 review in — 7 findings verified, folded into plan; review filed to docs/research/. RELEASE codex. Building Task 4.
 - 02:36 es: 4c9bf010 dead-citizen admission guard committed (tests green). CLAIM codex es Task 4 receipt build per plan §Task 4 cut.
 - 02:40 rb: added §4a guest clear-after-review, §4b one-shot pings while waiting, §4c shared-tree commit rules.
+- 02:37 es: FILE phase04-events/generationalEventsEngine.js phase04-events/chaosCarsEngine.js scripts/chaosCarsCitizenDial.test.js scripts/hospitalIncomePersistence.test.js es (codex building Task 4 in them, 4a exception: multi-step job queued; clear after verify).

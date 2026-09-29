@@ -15,7 +15,9 @@
  *                       production path) with --state-file <frozen packet> --packet-only and
  *                       the test --provider/--model. Reasoning arm is not controllable there;
  *                       the row records reasoning:"writer-default".
- *   open-character-*    NOT wired yet — waits on Task 1 (Mags charge + Elias input frozen).
+ *   open-character-*    frozen {system,user} pair sent to the test model directly (Mags narration =
+ *                       cron-saturday-run anthropicChat shape; Elias = constructed pack, see MANIFEST).
+ *                       max tokens = the input's own call.maxTokens, else --max-tokens.
  *
  * Costs are recorded only when --rate-in/--rate-out (USD per 1M tokens) are given — no built-in
  * price table, so a stale price can never pass as a measurement.
@@ -84,10 +86,11 @@ function postJson(hostname, pathname, headers, bodyObj, timeoutMs) {
 }
 
 // Returns { text, finish, tokensIn, tokensOut, tokensReasoning }
-async function complete(system, user) {
+async function complete(system, user, maxTok) {
+  const MAXT = maxTok || MAX_TOKENS;
   if (PROVIDER === 'anthropic') {
     if (!process.env.ANTHROPIC_API_KEY) throw new Error('ANTHROPIC_API_KEY missing');
-    const body = { model: MODEL, max_tokens: MAX_TOKENS + (REASONING === 'on' ? THINK_BUDGET : 0), system,
+    const body = { model: MODEL, max_tokens: MAXT + (REASONING === 'on' ? THINK_BUDGET : 0), system,
       messages: [{ role: 'user', content: user }] };
     if (REASONING === 'on') body.thinking = { type: 'enabled', budget_tokens: THINK_BUDGET };
     const j = await postJson('api.anthropic.com', '/v1/messages',
@@ -99,7 +102,7 @@ async function complete(system, user) {
       tokensOut: (j.usage || {}).output_tokens || 0, tokensReasoning: null };
   }
   if (!process.env.OPENROUTER_API_KEY) throw new Error('OPENROUTER_API_KEY missing');
-  const body = { model: MODEL, max_tokens: MAX_TOKENS + (REASONING === 'on' ? THINK_BUDGET : 0),
+  const body = { model: MODEL, max_tokens: MAXT + (REASONING === 'on' ? THINK_BUDGET : 0),
     messages: [{ role: 'system', content: system }, { role: 'user', content: user }],
     reasoning: REASONING === 'on' ? { enabled: true } : { enabled: false } };
   const j = await postJson('openrouter.ai', '/api/v1/chat/completions',
@@ -142,6 +145,18 @@ async function runStructured(abs, base) {
     costUsd: cost(r.tokensIn, r.tokensOut), ...textMeasures(r.text), output: r.text };
 }
 
+async function runOpen(abs) {
+  const d = JSON.parse(fs.readFileSync(abs, 'utf8'));
+  if (!d.system || !d.user) throw new Error('open-character input lacks system/user');
+  const maxTok = (d.call && d.call.maxTokens) || MAX_TOKENS;
+  if (DRY) return { dry: true, tier: 'open-character', systemChars: d.system.length, userChars: d.user.length, maxTokens: maxTok };
+  const t0 = Date.now();
+  const r = await complete(d.system, d.user, maxTok);
+  return { tier: 'open-character', reasoning: REASONING, latencyMs: Date.now() - t0,
+    finish: r.finish, tokensIn: r.tokensIn, tokensOut: r.tokensOut, tokensReasoning: r.tokensReasoning,
+    costUsd: cost(r.tokensIn, r.tokensOut), ...textMeasures(r.text), output: r.text };
+}
+
 function runSemiOpen(abs, base) {
   const tag = ('mf-' + base.replace(/\.json$/, '').replace(/[^a-z0-9]+/gi, '-').slice(0, 20) + '-' +
     MODEL.replace(/[^a-z0-9]+/gi, '-').slice(0, 14) + '-' + Date.now().toString(36)).toLowerCase().slice(0, 48);
@@ -174,7 +189,7 @@ function runSemiOpen(abs, base) {
     let res;
     if (base.startsWith('structured-seat')) res = await runStructured(abs, base);
     else if (base.startsWith('semi-open-voice')) res = runSemiOpen(abs, base);
-    else if (base.startsWith('open-character')) throw new Error('open-character tier not wired — Task 1 inputs not frozen yet');
+    else if (base.startsWith('open-character')) res = await runOpen(abs);
     else throw new Error('unknown tier for ' + base);
     Object.assign(row, res);
   } catch (e) { row.error = e.message; }

@@ -1185,7 +1185,9 @@ function storylineLines(entries) {
       return e.name + where + ' — ENDED this week after ' + e.age + ' week(s)' +
         (e.movedTo ? '; now ' + e.movedTo : '');
     }
-    return e.name + where + ' — ' + (e.stage || 'running') + ', week ' + e.age +
+    // An initiative stage's name already ends in its stage.
+    const stage = e.type === 'initiative-stage' ? '' : (e.stage || 'running') + ', ';
+    return e.name + where + ' — ' + stage + 'week ' + e.age +
       (e.firstSeen ? ' (newly tracked)' : '');
   });
 }

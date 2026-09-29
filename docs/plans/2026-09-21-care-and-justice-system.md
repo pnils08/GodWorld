@@ -270,7 +270,55 @@ Row key: `Cycle + System + GeographicScope + Neighborhood + IntakeType`.
 | Sparse typed rows safe? | No → dense rows adopted |
 | `-2` suffix vs the POPID-keyed open index | Index unaffected; suffix generation is a writer change (Task 8) |
 
+### Task 4 cut — typed admission receipts (engine-sheet, 2026-09-29 — DRAFT, under review, nothing built)
+
+**Read before drafting.**
+
+| Fact | Source |
+|---|---|
+| `S.hospitalEvents` has 3 push sites, all in `runGenerationalEngine_`; readers are `finalizeCycleState_` (Phase 9, carry) and `persistHospitalLedger_` (Phase 10) | wiring card; `generationalEventsEngine.js:317`, `:405`, `:642`; `finalizeCycleState.js:186`; `buildCyclePacket.js:821` |
+| Chaos ambulance sets `critical` (`medical_emergency`) / `hospitalized` (`workplace_accident`) and pushes **no** hospital event | `chaosCarsEngine.js:343-352` |
+| Chaos runs Phase 4, before `Phase5-Generational`; the victim's `StatusStartCycle = cycle`, so the lifecycle advances it the **same Cycle** at duration 0 (`short` bracket) | `godWorldEngine2.js:329`, `:369`; `generationalEventsEngine.js:367-386`, `:680` |
+| Lifecycle returns null on an early `stay` (no event) in every branch — hospitalized/injured/serious-condition under duration 5, critical/recovering under 3 | `generationalEventsEngine.js:727`, `:752`, `:776`, `:800`, `:824` |
+| A citizen in a health state never reaches the new-health check the same Cycle — the lifecycle block ends in `continue` — so no second admission receipt for one POPID in one Cycle | `generationalEventsEngine.js:442` |
+| Heat wave flips Status then the per-row loop advances the same victim the same Cycle, despite the comment "takes over from next cycle" | `generationalEventsEngine.js:266-302` vs `:382` |
+| The chaos `eventId` is drawn from rng **after** `writeCitizenEvent_` returns | `chaosCarsEngine.js:562-573` |
+| Sports roster injuries set health Status directly and emit nothing — caught only by the missed-admission reconcile | `buildCyclePacket.js:964-988` |
+
+**Defect this cut repairs.** A chaos ambulance admission reaches the ledger three ways depending on the same-Cycle lifecycle draw: `stay` → missed-admission reconcile (booked as a correction, not an intake); step to another health state → a "transition with no open row" admits it (an intake, by accident); step to `deceased`/`active` → no open row, Status no longer a health state, **no hospital record at all**. Critical at duration 0 carries a 40% death branch (`:112`).
+
+**Receipt shape.** Each `S.hospitalEvents` entry gains four fields; existing fields unchanged:
+
+| Field | Admission | Transition |
+|---|---|---|
+| `kind` | `admission` | `transition` |
+| `intakeType` | enum per §Hospital_Ledger L | blank |
+| `sourceSystem` | enum per §Hospital_Ledger M | blank |
+| `sourceEventId` | §Shared receipt identity | blank — the persist resolves a transition to the open row |
+
+**Sites.**
+
+| Site | kind | intakeType | sourceSystem | sourceEventId |
+|---|---|---|---|---|
+| heat wave `:318` | admission | `heat` | `heat-wave` | `heat-wave:C<cycle>:heat:<POPID>` |
+| lifecycle `:406` | transition | — | — | — |
+| ordinary health `:643` | admission | `injury` if `injured`, else `illness` | `health-engine` | `health-engine:C<cycle>:<intakeType>:<POPID>` |
+| chaos ambulance (new push) | admission | `illness` (`medical_emergency`) · `injury` (`workplace_accident`) | `ambulance` | `ambulance:<chaos eventId>:<POPID>` |
+
+- **Chaos receipt `cause`** = the same human prose the site writes to HealthCause (`a sudden medical emergency` / `a workplace accident`, S325 rule), never the outcome tag — the persist copies `cause` into column E.
+- **Chaos key without an rng reorder.** `writeCitizenEvent_` pushes the receipt and returns it; after the payload's `eventId` is drawn, the caller stamps `sourceEventId` on the returned object. Drawing the id earlier would shift every later rng draw in the Cycle.
+- **Order fixes the lost admission.** The ambulance receipt is pushed at Phase 4, ahead of any Phase-5 transition for that citizen, so the persist opens the row first; a same-Cycle step lands as a transition and a same-Cycle death closes it `deceased`. No persist code changes in this task — the existing branch at `buildCyclePacket.js:873-915` already handles that order.
+- **Eligibility unchanged.** The ambulance guard (blank/active/recovering; retirees keep `retired`) and the heat guard stay as they are; the receipt is pushed only inside the branch that flips Status. Minors are already excluded from arrest, not from ambulance — unchanged.
+- **Not in this cut.** OARI admissions (no ruling makes an OARI intervention a care admission — R5 makes de-escalation a diversion); the same-Cycle lifecycle advance on heat/chaos victims (behaviour, flagged for the builder, not changed here); sports-injury receipts (stay on the reconcile path, `unclassified`); any persist, census or cluster change (Tasks 8/9).
+- **Side effect named.** The new chaos push also reaches `compactHospitalEvents_` → `generateCrisisBuckets.js:265`, so an ambulance admission now counts toward next Cycle's hood hospitalization cluster. It already did whenever the same-Cycle step emitted a transition; this makes it every time. Accepted: it is a real admission. Task 9 owns the cluster measure.
+
+**Test — `scripts/careJusticeIntake.test.js`** (Task 4 names it; synthetic ledger, no sheet): (1) ambulance `medical_emergency` on an active citizen → exactly one `admission` receipt, `ambulance`, key carries the chaos `eventId`; (2) same citizen, forced same-Cycle death through Phase 5, fed through `persistHospitalLedger_` with a mock sheet → one row, closed `deceased`; (3) ordinary-health `injured` → one `admission`, `injury`; (4) lifecycle step → `transition`, no key, no intake; (5) retiree hit by ambulance → no receipt, Status unchanged; (6) heat victim → one `admission`, `heat`; (7) de-escalation / substance intervention → no receipt; (8) fixed seed: chaos rng draw sequence identical before and after the change. Loader and stubs reuse `scripts/chaosCarsCitizenDial.test.js` (it already `require`s `chaosCarsEngine.js`).
+
+**Verify after build.** Test green; the existing `chaosCarsCitizenDial`, `hospitalIncomePersistence`, `hospitalTalkback` tests green; `auditFunctionCollisions` 0; bench fire, read `Hospital_Ledger` back and match every new row to a receipt.
+
 ## Changelog
+
+- 2026-09-29 (engine-sheet) — Task 4 cut drafted (§Task 4 cut): typed receipts on the 3 hospital-event sites + a new chaos-ambulance receipt that closes the lost-admission path; advisor-checked, out for codex review, nothing built.
 
 - 2026-09-29 (engine-sheet) — Builder direction: city revenue has three feeds (judicial, business tax, housing tax) into the treasury, possibly split by district; filed as engine.271.
 

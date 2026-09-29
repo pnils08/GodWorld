@@ -318,21 +318,11 @@ console.log('\nengine.243 — crisis naming, the end of a crisis, and city memor
   const src = fs.readFileSync(path.join(ROOT, 'scripts/buildDeskPackets.js'), 'utf8');
   check('buildDeskPackets no longer harvests TitleCase pairs from prose',
     !/match\(\/\[A-Z\]\[a-z\]\+ \[A-Z\]\[a-z\]\+\/g\)/.test(src));
-  const fnSrc = src.slice(src.indexOf('function findKnownNamesInText_'), src.indexOf('function getCitizenNamesFromDeskData'));
-  const find = new Function(fnSrc + '; return findKnownNamesInText_;')();
-  const KNOWN = ['Brie Harris', 'Helena Voss-Adeyemi', 'Helena Voss', 'Vinnie Keane'];
-  check('no fake citizen is harvested from a named resolution line',
-    find('The Rockridge Housing Squeeze — Rockridge crisis eased after 3 cycles back within city range', KNOWN).length === 0);
-  check('a hood is not a person',
-    find('The West Oakland Crime Spike — West Oakland under strain: crime index 1.18 (city 0.71)', KNOWN).length === 0);
-  check('a ledger citizen named in prose IS found, possessive included',
-    JSON.stringify(find("Brie Harris's shop reopened; Vinnie Keane attended.", KNOWN)) === '["Brie Harris","Vinnie Keane"]');
-  check('a hyphenated surname lands whole and never as its shorter prefix',
-    JSON.stringify(find('Helena Voss-Adeyemi broke ground in Rockridge', KNOWN)) === '["Helena Voss-Adeyemi"]');
-  check('a name inside a longer word is not a match',
-    find('McBrie Harrison spoke', KNOWN).length === 0);
-  check('the call site hands the harvester the ledger name list',
-    /getCitizenNamesFromDeskData\([^)]*ledgerNameList\)/.test(src) && /var ledgerNameList = Object\.keys\(simLedgerByName\)/.test(src));
+  // engine.269: the S502 desk-packet cut (f1f4dde0) removed the per-desk prose
+  // harvest entirely, findKnownNamesInText_ and its call site with it — there is
+  // no prose-to-person path left to fake a citizen. Guard that none returns.
+  check('buildDeskPackets carries no prose name harvester',
+    src.indexOf('function findKnownNamesInText_') < 0 && src.indexOf('getCitizenNamesFromDeskData') < 0);
 }
 
 // ── 9. no dice were added ──────────────────────────────────────────────────

@@ -56,7 +56,7 @@ Traced how each tier is actually invoked in production before writing any runner
 
 ## Tasks
 
-1. **Freeze inputs** — pick and store 9 packs/prompts under `output/model-fit/inputs/` (kimi lane or codex). Verify: each replays through its existing validators. **6/9 staged 2026-09-28 (kimi quota-dead for the week, rb picked it up directly) — see [[../../output/model-fit/inputs/MANIFEST]]. Open-character tier: Mags's real charge-building function found (§Reusable call shapes) but not yet frozen to a file; Elias Varek's call shape still untraced. Stays on Open Questions, not solved solo.**
+1. **Freeze inputs** — pick and store 9 packs/prompts under `output/model-fit/inputs/` (kimi lane or codex). Verify: each replays through its existing validators. **9/9 DONE (6 staged 2026-09-28 S501 research-build; open-character tier finished 2026-09-29 kimi) — see [[../../output/model-fit/inputs/MANIFEST]]. Mags packs replay byte-identical from stored C105/C108 material (`scripts/freezeModelFitInputs.js --verify`, local-only); Elias's call shape traced to the `citizen-voice-elias-varek` subagent (NOT citizenVoice.js) and his pack is constructed from persona files + a brief on real C108 canon — flagged `constructed: true` in the pack.**
 2. **Runner** — a scratch script that calls a model with a frozen input, records every measure above to `output/model-fit/runs.jsonl`. Reuses existing call shapes (§Reusable call shapes, traced 2026-09-28 — semi-open-voice tier needs no custom runner at all, just `cron-desk-writer.js --state-file <frozen> --provider/--model <test>`; structured-seat needs ~40 lines replicated from `cron-civic-run.js`; open-character needs Elias's shape traced first); not a production script. Not started — real lift, deferred past the design pass. Verify: dry-run with one input and the current model.
 3. **Run** — after credit lands; cap $10; log every call.
 4. **Score** — deterministic first, then blind scoring by agy and codex (no model names).
@@ -86,3 +86,16 @@ Traced how each tier is actually invoked in production before writing any runner
   cron-newsroom-agentic-rag.md`) with a recommended scorecard this test should reconcile with, not
   duplicate. Chose to bank this as a design finding rather than force half-built runner code at 4am —
   Task 2 write-up is next, still gated on nothing but time.
+- 2026-09-29 (kimi) — Task 1 complete (9/9). Open-character tier frozen:
+  Mags narration inputs at C108 + C105 rebuilt from stored curation + staged sets via new
+  `scripts/freezeModelFitInputs.js` (uses cron-saturday-run.js's own exported `loadStagedSet`, so
+  production proof gates apply; all 9 stems per cycle passed, nothing dropped); `--verify` replays
+  all packs byte-identical, local-only. Elias interview path traced: the authored surface is the
+  `citizen-voice-elias-varek` subagent via `/interview` Mode 1 Step 3 (Sonnet, per-turn dispatch),
+  NOT `scripts/citizenVoice.js` (that's the generic-citizen DeepSeek quote path). No stored Elias
+  interview exists in C104-C108, so his pack is constructed — persona boot assembly verbatim off
+  disk (disposition cache, refreshed c109, superseding IDENTITY per SKILL boot step 2) + a dispatch
+  prompt themed on the real stored exchange_c108 Varek–Paulson conversation; flagged
+  `constructed: true` in the pack for the report. Third input is a second Mags cycle, not an
+  Elias follow-up — a follow-up would need invented Elias quotes in the transcript, which canon
+  rules forbid. Task 2 (runner) not started.

@@ -1186,9 +1186,11 @@ function storylineLines(entries) {
         (e.movedTo ? '; now ' + e.movedTo : '');
     }
     // An initiative stage's name already ends in its stage.
+    // firstSeen = tracking began this cycle, NOT the stage's first week: a stage
+    // running since C82 must not reach a writer as "week 1".
+    if (e.firstSeen) return e.name + where + ' — under way';
     const stage = e.type === 'initiative-stage' ? '' : (e.stage || 'running') + ', ';
-    return e.name + where + ' — ' + stage + 'week ' + e.age +
-      (e.firstSeen ? ' (newly tracked)' : '');
+    return e.name + where + ' — ' + stage + 'week ' + e.age;
   });
 }
 

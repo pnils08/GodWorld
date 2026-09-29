@@ -69,7 +69,7 @@ pointers:
   5. In `loadCycleData`, read `Event_Arc_Ledger`, `Carry_Forward_Store`, and reuse the existing `Initiative_Tracker` snapshot.
   6. In `emitDeskSignal`, attach `storylines` as a sibling of `lanes` (lanes are assignable cycle signals). Route each entry to desks by type: crisis → civic + the desk of its `DomainTag`; initiative stage → civic. `openThreads` and `openThreadEntries` are REMOVED — after Task 4 nothing consumes them, and showing writers two lists is worse than either. Bump `DESK_SIGNAL_VERSION` (no consumer checks it — grepped 2026-09-28).
 - **Verify:** new test `scripts/storylineRegistry.test.js` with fixtures cut from live C105–C109 rows; AC 1 and 2 asserted.
-- **Status:** [ ] not started
+- **Status:** [x] built 2026-09-28 (`f7249710`)
 
 ### Task 2: Lane entries carry the engine ID
 
@@ -79,7 +79,7 @@ pointers:
   2. `rippleEntry` gets `storylineId` when `CauseId` equals a crisis arc ID (live: `crisis-event :: CRISIS-105-WESTOAKL`), or when `CauseType` is `initiative-implementation` and `CauseId` equals an initiative's full `Name` (live ripples carry the name, not the ID — verified untruncated 2026-09-28).
   3. Anomaly entries get `storylineId` when the pattern's `affectedEntities` or evidence names a registry arc ID.
 - **Verify:** test asserts a C105 crisis ripple and an `initiative-implementation` ripple each resolve to the right ID; an unrelated `faith-event` ripple carries none.
-- **Status:** [ ] not started
+- **Status:** [x] built 2026-09-28 (`f7249710`)
 
 ### Task 3: Packet shows running stories
 
@@ -90,7 +90,7 @@ pointers:
   3. Remove the `threadRule` text and the "put ITS SLUG on your INTAKE STORYLINE line" instructions. The writer is told what is running; it is asked for nothing.
   4. `packet.signal.storylineId` is set from the assignment's lane entry (`story.storylineId`).
 - **Verify:** `scripts/livedExperiencePacketV2.test.js` updated; packet for a fixture story with `storylineId` carries the ID and no marker rule.
-- **Status:** [ ] not started
+- **Status:** [x] built 2026-09-28 (`f7249710`)
 
 ### Task 4: Tag by evidence, stop minting slugs
 
@@ -101,7 +101,7 @@ pointers:
   3. `writeCitizenArc` stops writing `storyline` into `arc.json`; `citizenArcSlug` removed. `loadArcSeeds` already tolerates a missing `storyline`.
   4. `stripModelMetadataTail` keeps stripping a stray `THREAD-CLOSED:` line so an old-habit model output cannot leak into an article.
 - **Verify:** `scripts/cron-desk-writer.test.js` updated — evidence-tagged article carries the ID; untagged article carries no STORYLINE line; a body quoting POP-00170 attaches to nothing on that basis.
-- **Status:** [ ] not started
+- **Status:** [x] built 2026-09-28 (`f7249710`)
 
 ### Task 5: Ledger status follows the engine
 
@@ -114,7 +114,7 @@ pointers:
   5. An open ledger row keyed `<InitiativeID>:<stage>` whose stage differs from the tracker's current stage is set `closed`; the current stage is upserted as a new row.
   6. Storyline IDs are uppercase with a colon. `lib/articleIntake.js` STORYLINE parsing checks field count and verb only — no case or charset rule (read 2026-09-28).
 - **Verify:** `scripts/cronSaturdayRun.test.js` — a closed registry entry closes its row with no `closed` verb present; a non-engine legacy row is left unchanged.
-- **Status:** [ ] not started
+- **Status:** [x] built 2026-09-28 (`f7249710`)
 
 ### Task 6: Readers and docs
 
@@ -123,7 +123,7 @@ pointers:
   1. Readers surface engine-keyed rows; legacy rows are reported as a count only.
   2. Manifest and spreadsheet entries restate the contract: engine-keyed, status engine-owned, dormancy derived.
 - **Verify:** `node scripts/run-tests.js`; `node scripts/buildWorldSummary.js` dry build for C109 produces a registry with seven initiatives and the C109-closed crisis.
-- **Status:** [ ] not started
+- **Status:** [x] built 2026-09-28 (`f7249710`)
 
 ### Task 7: Attach pass on Saturday (builder suggestion 2026-09-28: "a cron that runs like Rhea that filters")
 
@@ -138,7 +138,7 @@ pointers:
 
 ## Review resolutions (2026-09-28)
 
-Advisor review and codex review (`docs/for-claude-review/2026-09-28-codex-storylines-plan-review.md`, 7 findings, each verified against code). These OVERRIDE the task text above where they differ.
+Advisor review and codex review (`docs/research/2026-09-28-codex-storylines-plan-review.md`, 7 findings, each verified against code). These OVERRIDE the task text above where they differ.
 
 | # | Finding | Resolution |
 |---|---|---|
@@ -167,3 +167,5 @@ Advisor review and codex review (`docs/for-claude-review/2026-09-28-codex-storyl
 
 - 2026-09-28 — created (engine-sheet, S503).
 - 2026-09-28 — advisor + codex review folded in (§Review resolutions).
+- 2026-09-28 — Tasks 1–6 built (`f7249710`). Real generator path run against live C109: registry 8 entries, 104/104 lane entries unchanged apart from the storyline tag, 20 refs tagged. C109 signal activated with the registry only (lanes and refs left as assigned this week). Registry stage source is the fire-time `engine_audit` snapshot; a stage civic moves mid-week is seen at the next cycle's build.
+- 2026-09-28 — **post-fire check for C110 (2026-10-04):** fire-time snapshot held `INIT-006 construction-planning` while the live tracker read `construction-active`, and carry-forward `initiativeEnginePhaseMoves` named `INIT-005 → construction-active` while the tracker reads `operational`. Confirm which writer owns `ImplementationPhase` before trusting a stage close; a backward stage move would reach writers as a story ending.

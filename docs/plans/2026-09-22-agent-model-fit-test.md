@@ -65,7 +65,7 @@ Traced how each tier is actually invoked in production before writing any runner
 ## Open questions
 
 - [ ] Builder: do you want to do a blind read too, and on which agents (Elias and Mags are the ones your judgement matters most for).
-- [ ] Which real Elias Varek and Mags prompts to freeze (persona facts must come from the ledger, never from memory).
+- [x] Which real Elias Varek and Mags prompts to freeze — answered 2026-09-29 (kimi): Mags = stored C108 + C105 curated digests; Elias = constructed pack on real C108 canon (`constructed: true` — no stored Elias interview exists).
 - [ ] Whether to include DeepSeek v4 and Kimi K3 as extra rows once their `:batch` prices are known.
 
 ## Changelog

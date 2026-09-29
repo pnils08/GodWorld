@@ -657,7 +657,9 @@ function runGenerationalEngine_(ctx) {
         ctx.summary.hospitalEvents.push({
           popId: popId, name: name, neighborhood: neighborhood,
           cause: iHealthCause >= 0 ? (row[iHealthCause] || cause102) : cause102,
-          from: "active", to: admitStatus, cycle: cycle,
+          // Pre-admit life-state (retired stays retired) — the carrier the
+          // Task 6 care-exit restore reads until Task 8 persists one.
+          from: status, to: admitStatus, cycle: cycle,
           kind: 'intake', intakeType: admitStatus === 'injured' ? 'injury' : 'illness',
           sourceSystem: 'health-engine',
           sourceEventId: 'health-engine:C' + cycle + ':' + (admitStatus === 'injured' ? 'injury' : 'illness') + ':' + popId

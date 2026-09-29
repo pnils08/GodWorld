@@ -2789,6 +2789,18 @@
         "phase07-evening-media/applyStorySeeds.js::applyStorySeeds_"
       ]
     },
+    "hospitalEvents": {
+      "writers": [
+        "phase04-events/chaosCarsEngine.js::runChaosCarsEngine_",
+        "phase04-events/generationalEventsEngine.js::runGenerationalEngine_"
+      ],
+      "readers": [
+        "phase04-events/chaosCarsEngine.js::runChaosCarsEngine_",
+        "phase04-events/generationalEventsEngine.js::runGenerationalEngine_",
+        "phase09-digest/finalizeCycleState.js::finalizeCycleState_",
+        "phase10-persistence/buildCyclePacket.js::persistHospitalLedger_"
+      ]
+    },
     "tier1ChaosEvents": {
       "writers": [
         "phase04-events/chaosCarsEngine.js::runChaosCarsEngine_"
@@ -2850,16 +2862,6 @@
         "phase05-citizens/generationalWealthEngine.js::processInheritance_",
         "phase07-evening-media/applyStorySeeds.js::applyStorySeeds_",
         "phase10-persistence/buildCyclePacket.js::buildCyclePacket_"
-      ]
-    },
-    "hospitalEvents": {
-      "writers": [
-        "phase04-events/generationalEventsEngine.js::runGenerationalEngine_"
-      ],
-      "readers": [
-        "phase04-events/generationalEventsEngine.js::runGenerationalEngine_",
-        "phase09-digest/finalizeCycleState.js::finalizeCycleState_",
-        "phase10-persistence/buildCyclePacket.js::persistHospitalLedger_"
       ]
     },
     "pendingCascades": {

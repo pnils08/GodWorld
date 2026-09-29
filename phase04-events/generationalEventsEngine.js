@@ -592,6 +592,10 @@ function runGenerationalEngine_(ctx) {
       }
     }
 
+    // engine.254 Task 4 review: a citizen who died above is not admitted below —
+    // the admission would overwrite 'deceased' after the death cascade fired.
+    if (row[iStatus] === "deceased") continue;
+
     var healthResult2 = checkHealthEvent_(ctx, popId, age, lifeHistory, calendarContext, neighborhood);
     if (healthResult2) {
       var admitStatus = null;

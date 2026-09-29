@@ -1,7 +1,7 @@
 ---
 title: Care and justice citywide intake amendment — Claude review plan
 created: 2026-09-28
-updated: 2026-09-28
+updated: 2026-09-29
 type: plan
 tags: [engine, civic, citizens, draft]
 sources:
@@ -15,7 +15,7 @@ pointers:
   - "[[plans/2026-09-21-care-and-justice-system]] — owning engine.254 plan; this is a proposed amendment"
   - "[[plans/2026-09-21-safety-lever]] — existing safety grading and deferred diversion measure"
   - "[[engine/ROLLOUT_PLAN]] — existing engine.254 row, review pointer only"
-  - "[[for-claude-review/README]] — review inbox contract"
+  - "[[for-claude-review/README]] — review inbox contract (accepted 2026-09-29, filed to research)"
   - "[[index]] — registration"
 ---
 
@@ -152,7 +152,7 @@ Each item is a bounded review or implementation cut. Implementation tasks requir
 - **Files:** `schemas/SCHEMA_HEADERS.md`, `docs/SPREADSHEET.md`, `docs/SIMULATION_LEDGER.md`, owning plan; proposed `scripts/careJusticeAccounting.test.js`.
 - **Steps:** Specify exact headers, row keys, enums, scope units, custody/care overlap, and correction semantics. Write synthetic conservation, deduplication, and unknown-versus-zero cases before implementation.
 - **Verify:** Tests fail for the missing behavior, without external writes. Engine-sheet approves schemas; a cheap subagent performs the correlating documentation propagation under AGENTS.md, with lead review.
-- **Status:** [ ] gated on R1-R6.
+- **Status:** [x] schema specified and reviewed 2026-09-29 — owning plan §Schema is the specification. Test file lands with Task 3, pending builder yes on the new file and the census tab.
 
 ### Task 3 — implement pure census arithmetic
 

@@ -121,9 +121,9 @@ All three open calls ruled — the recommended defaults above, as stated:
 - Precedent ledger as the folk-memory/institutional-memory answer — a consequence of the case ledger existing, not a separate build.
 - Phase 37 (Arc State Machines, `docs/plans/BACKLOG.md:447`, still NOT STARTED) is the natural home for a case that runs multi-cycle; referenced for later, not a prerequisite here.
 
-## Schema — receipt and census (engine-sheet, DRAFT 2026-09-29, under review — nothing built)
+## Schema — receipt and census (engine-sheet, 2026-09-29 — reviewed, nothing built)
 
-Task 2 of [[../for-claude-review/2026-09-28-codex-care-justice-intake-plan]]. This section is the one specification; the amendment's tasks 3–11 build against it. Status of each new thing: **PROPOSED — awaiting builder yes** for the new tab `Care_Justice_Census` and the new test file; `Judicial_Ledger` is already ruled (§Rulings CLOSED).
+Task 2 of [[../research/2026-09-28-codex-care-justice-intake-plan]] (accepted 2026-09-29, filed to research). Outside review: `output/antigravity/2026-09-29-review-care-justice-schema.md`, findings verified against code and folded in below. This section is the one specification; the amendment's tasks 3–11 build against it. Status of each new thing: **PROPOSED — awaiting builder yes** for the new tab `Care_Justice_Census` and the new test file; `Judicial_Ledger` is already ruled (§Rulings CLOSED).
 
 ### Read before drafting (2026-09-29)
 
@@ -154,7 +154,7 @@ Task 2 of [[../for-claude-review/2026-09-28-codex-care-justice-intake-plan]]. Th
 `SourceEventId` = `<SourceSystem>:<source event key>:<POPID>`. Chaos sources use the existing chaos `eventId`; engine sources with no event id use `C<cycle>:<type>`. It is independent of the row id. Rules:
 
 - Same `SourceEventId` seen twice → one row, one intake. Replay-safe.
-- Same POPID, later distinct `SourceEventId` → a new row. Row ids stay `H-C<cycle>-<POPID>` / `J-C<cycle>-<POPID>`; a second row for the same citizen in the same Cycle takes suffix `-2`.
+- Same POPID, later distinct `SourceEventId` → a new row. Row ids stay `H-C<cycle>-<POPID>` / `J-C<cycle>-<POPID>`; a second row for the same citizen in the same Cycle takes suffix `-2` — the writers build ids without a collision check today (`buildCyclePacket.js:893`, `:980`), so the suffix is a Task 8 writer change.
 - A transfer reuses the originating `SourceEventId` on the receiving row and links the sending row's id; it is a movement, not a second intake.
 
 ### `Hospital_Ledger` — 4 columns appended (L–O); A–K untouched
@@ -219,9 +219,19 @@ Row key: `Cycle + System + GeographicScope + Neighborhood + IntakeType`.
 - **OccupancyMeasure:** hospital `beds`; judicial `in-custody` = open cases with `StatusNow` `pending` or `held` (an arrest enters custody the Cycle it happens, so intake and occupancy move together). `in-care` and open-case counts are read from the ledgers, not the census.
 - **Judicial IntakeType** uses the ledger's `EntryType`: `arrest` · `all`. An intake is an arrest. An investigation is not an intake and not custody; it appears in the census only when it becomes an arrest, in that Cycle. Investigations that close `no-arrest` stay in the ledger alone.
 - **Exit vs transfer:** a `diverted` outcome with `TransferToId` set is a `TransfersOut` (and a `TransfersIn` on the hospital side); `diverted` without a bed, `released`, `held-served` and `deceased` are `Exits`. Never both.
-- **IntakeType:** the ledger enums plus `all`. One `all` row per System and scope is always written, zero included. A typed row is written only when any of its counts is nonzero; in a scope marked `complete`, an absent typed row means zero.
+- **IntakeType:** the ledger enums plus `all`. **Every typed row is written every Cycle for every scope, zero included** (review finding: sparse rows let a reader that filters by type read a failed or missing scope as zero). Every row carries its own `Completeness`. About 216 rows a Cycle, one batched write.
 - **Completeness:** `complete` · `incomplete` (a write in the set failed; reconciled next Cycle) · `unavailable` (source missing — counts blank, never 0).
 - Tracked citizens are counted inside the hood they live in, once. Other residents are numbers only: no POPID, no name.
+
+### Requirements the review put on later tasks
+
+| Task | Requirement | Evidence |
+|---|---|---|
+| 6 | **Custody re-assert.** When care ends the health lifecycle writes `active` with no knowledge of the case. The judicial lifecycle runs after it in the same Cycle, before the career and household engines, and sets `detained` on any citizen with an open `pending`/`held` case whose Status is not a health state or `deceased`. Self-healing every Cycle, same pattern as the ghost-bed reconcile. | `generationalEventsEngine.js:390`, `:417` |
+| 8 | Hospital writers build 15-wide rows and stamp L–O; missed-admission rows stamp `SourceSystem = reconcile`, `IntakeType = unclassified`. | `buildCyclePacket.js:893-895`, `:980-981` |
+| 8 | New writes address columns by header name. The existing range writes at columns 7–11 stay valid only because L–O are appended, never inserted. | `buildCyclePacket.js:886`, `:906`, `:950` |
+| 8 | Ghost-release outcome is `recovered-reconciled` for any non-deceased Status. With care ranked above `detained` this path is not reached by a custody case; the judicial writer's own reconcile uses `<outcome>-reconciled`. | `buildCyclePacket.js:948-952` |
+| 10 | Talk-back numerator moves from every open row to a scope-matched measure — already scheduled; unchanged until then. | `applyDemographicDrift.js:225-235` |
 
 ### Invariants the tests assert
 
@@ -233,21 +243,26 @@ Row key: `Cycle + System + GeographicScope + Neighborhood + IntakeType`.
 | D | Same `SourceEventId` folded twice = folded once |
 | E | Same POPID, second distinct receipt **after the first row closed** = second row, second intake. A second receipt while a row is open is a transition on that row, not an intake (the writer holds one open row per POPID, `buildCyclePacket.js:868-873`) |
 | F | `reconcile` receipt raises `Corrections` and occupancy, never `TotalIntakes` |
-| G | Missing source → `unavailable`, counts blank; known none → `0` |
+| G | Missing source → `unavailable`, counts blank; known none → `0`, written explicitly on the typed row |
 | H | Hospital→judicial or judicial→hospital transfer: one person, `TransfersOut` on one side, `TransfersIn` on the other, no intake on the receiving side |
 | I | Zero named events with nonzero other-resident demand still produces rows |
 | J | `beds` counts only `hospitalized` + `critical`; an `injured` admission is an intake with no bed |
 
 **Test file (PROPOSED):** `scripts/careJusticeAccounting.test.js`, synthetic rows only, no sheet access. `scripts/run-tests.js` runs every `*.test.js`, and two files already fail on HEAD (engine.269), so the Task 2 file lands with the Task 3 arithmetic in one commit and is green on arrival — the red run is shown in the commit message, not left in the suite.
 
-### Weakest points — for the reviewer
+### Review outcome (2026-09-29)
 
-1. Sparse typed rows plus an always-written `all` row: is "absent = zero when complete" safe for every reader, or does it invite a reader to treat `incomplete` as zero?
-2. `unallocated` scope: does any invariant above force neighbourhood population to be invented?
-3. Status precedence: with care above `detained`, does the ghost-bed reconcile or the health lifecycle ever drop a bed or stall a recovery for a citizen with an open case?
-4. Row-id suffix `-2`: does `persistHospitalLedger_`'s POPID-keyed open index survive it unchanged?
+| Question | Result |
+|---|---|
+| Care above `detained`: bed dropped or recovery stalled? | No. Found instead: recovery erases custody → custody re-assert added (Task 6) |
+| Invariant B under `in-custody` | Holds across arrest, decision, held, release, transfer |
+| `unallocated` scope invents a neighbourhood population? | No |
+| Sparse typed rows safe? | No → dense rows adopted |
+| `-2` suffix vs the POPID-keyed open index | Index unaffected; suffix generation is a writer change (Task 8) |
 
 ## Changelog
+
+- 2026-09-29 (engine-sheet) — Outside review folded in: dense typed census rows, custody re-assert after care ends, writer requirements for Tasks 6/8/10. Amendment accepted and filed to research.
 
 - 2026-09-29 (engine-sheet) — §Schema first-review fixes: care outranks `detained` in Status (ghost-bed reconcile would release the bed otherwise); judicial occupancy is `in-custody` not `held`; diverted is a transfer or an exit, never both; investigations are not intake.
 

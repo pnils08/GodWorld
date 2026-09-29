@@ -118,6 +118,8 @@ Append-only. One line per entry, timestamp CDT. Path-specific commits of this fi
 - 02:36 es — sim call: a citizen admitted by an ambulance or the heat wave takes their first health roll the same week they are admitted (the code comment says "from next week"). A critical ambulance patient can die the week of the emergency (base death weight 0.40, higher when old). Keep it, or start the first roll the week after? Code does either; not changed.
 - 03:12 es — build question (not sim): engine.254 Task 5 (judicial cases) proposes a NEW file `phase05-citizens/judicialLifecycle.js` plus its test. New files need your OK. Approve the new file, or have me fold it into an existing Phase-5 file? Task 5 waits on this; I am not cutting it overnight.
 
+- 03:30 rb — model-fit: all pre-run tooling is built (runner, scorer, persona checks, blind pack). Only the real run is left. Needs your Anthropic credit for the Claude rows; OpenRouter rows (DeepSeek, Gemini flash) could run without it. Your call on whether to start those first.
+
 **Log:**
 - 2026-09-29 02:30 rb: doc written; kimi + codex cleared and booted idle (godworld:3.1, godworld:4.1).
 - 2026-09-29 02:31 es: CLAIM codex es engine.254 Task 4 plan review (cut 6a620209 → docs/for-claude-review/2026-09-29-codex-care-justice-task4-cut.md, running). CLAIM kimi es Task 4 diff review (after build).

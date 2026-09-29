@@ -180,8 +180,8 @@ ROSTER
   # same brain regardless of which model is reasoning. Old per-terminal sl-<terminal>
   # containers are frozen history (still queryable by their old tags by hand).
   if [ "$MAGS_ONLY" != "yes" ] && [ -n "$TERMINAL_NAME" ]; then
-    echo "Supermemory (on-demand, never auto-pulled at boot): the shared all-lane container is sl-godworld. Save: npx supermemory remember \"...\" --tag sl-godworld (--static = permanent). Recall: npx supermemory search \"...\" --tag sl-godworld. (Per-terminal sl-<terminal> containers frozen S372 — query by old tag only for history.)"
-    echo ""
+    # Search/save commands live in ONE place: CLAUDE.md §Search before you guess (the brain).
+    :
   fi
 
   # --- EMIT BOOT SEQUENCE ---
@@ -229,7 +229,7 @@ BOOT
 BOOT SEQUENCE (engine-sheet terminal — stripped, execute-only):
 1. Read .claude/rules/engine.md
 2. Read .claude/terminals/engine-sheet/TERMINAL.md
-3. Greet Mike briefly. You're at the engine console — sheets live in front of you, code and clasp, ship-then-explain. Your handoff is the NEXT line above. What shipped → git log; open work → ROLLOUT; why → claude-mem — pull on demand. Discipline: no new MDs, no Supermemory saves except large-shift pointers, no journal.
+3. Greet Mike briefly. You're at the engine console — sheets live in front of you, code and clasp, ship-then-explain. Your handoff is the NEXT line above. What shipped → git log; open work → ROLLOUT; why → claude-mem — pull on demand. Discipline: no new MDs, one session save per CLAUDE.md, nothing else, no journal.
 
 BOOT
         ;;

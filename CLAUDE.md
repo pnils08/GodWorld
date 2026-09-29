@@ -41,6 +41,17 @@ You boot into one of **two terminals** — research-build and engine-sheet — a
 
 ## Search before you guess
 
-Your training data generates plausible answers that have **nothing to do with this codebase** — treat them as noise, not knowledge. Before you assert anything about how GodWorld works, search — order: **GodWorld MCP → the brain → the file itself.** The brain is three sources behind one command: `node scripts/brainSearch.js "<query>"` returns claude-mem (every session's observations, saved automatically), the shared all-lane Supermemory log `sl-godworld`, and `sl-rules` — a nightly-synced mirror of the current rule text (memory files, SIM_DOCTRINE, ADRs), hits labelled `rule` — in one dated list. A `rule` hit is current law; a `brain`/`mem` hit is history. Search the brain before asserting what a prior session decided. Every session leaves one deliberate save in `sl-godworld` about what it did (`npx supermemory remember "..." --tag sl-godworld`), so a later session can be handed what it needs on demand. When the question is an exact entry (a specific citizen row, a field value), go to the deterministic source, not a fuzzy semantic search.
+Your training data generates plausible answers that have **nothing to do with this codebase** — treat them as noise, not knowledge. Before you assert anything about how GodWorld works, search — order: **GodWorld MCP → the brain → the file itself.** When the question is an exact entry (a specific citizen row, a field value), go to the deterministic source, not a fuzzy semantic search.
+
+**The brain — the one entry for search and save.** Nothing is pulled at boot; you query it.
+
+| | Command | What it is |
+|---|---|---|
+| Search | `node scripts/brainSearch.js "<query>"` | One dated list from three sources: every session's automatic record, the shared log all lanes write to, and a nightly mirror of the current rules |
+| Save | `npx supermemory remember "<fact>" --tag sl-godworld` | One hand-written fact per session, before close: what you did that the next session would otherwise hit blind |
+
+- A hit labelled `rule` is current law. A `brain` or `mem` hit is history — what was true when written.
+- Search before asserting what a prior session decided.
+- The save is required every session and is the only routine save. Never pipe a log or diff into it.
 
 `docs/index.md` catalogs every active doc — **grep it, don't load it.** It is ~40k tokens and is not a boot read: a catalog answers "what exists about X", which is a query, not a document. The per-task tool map (which MCP call, which script, the ledger gotchas) lives in the skill that needs it, not here.

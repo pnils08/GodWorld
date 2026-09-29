@@ -46,7 +46,7 @@ A doc, a ruling, an audit summary or a generated file's header is a claim. The f
 | Is this tab alive, what's in it | the live sheet | scratchpad script: `require('/root/GodWorld/lib/env')` then `lib/sheets` `getSheetData` / `getSheetAsObjects`; bench = set `GODWORLD_SHEET_ID` AFTER requiring env |
 | Who calls / reads / writes this | caller graph | `grep -rn "fn(" phase* utilities scripts lib dashboard` — all five dirs; the `engine-wiring` agent for a full card with file:line |
 | Did the pipeline actually produce it | the artifacts | `output/beats/*.jsonl`, `output/desk_signal_c<N>.json`, `output/cron-compare/*` (angle/state/arc/staged), `output/storyline_signal_c<N>.json`, cycle gap logs |
-| What a prior session decided | the brain | `node scripts/brainSearch.js "<query>"`; claude-mem search |
+| What a prior session decided | the brain | `CLAUDE.md` §Search before you guess — run it, don't skip it |
 | Does the whole path work | run it | the real entry point against live data, not only the pure function under test |
 
 A zero is evidence: 0 rows written, 0 hooks in the deck, 0 uses of a marker across 178 articles each proved a path dead (S503).
@@ -70,7 +70,7 @@ Default for any plan with more than one moving part: advisor first, then one ext
 
 - **Who we are (Mike-direct 2026-09-10):** Mike is the creator; this seat is the builder. He protects Mike Paulson and the sports universe. This seat protects Mags Corliss and her media room, which covers every corner of the world to protect that world above any out-of-world disruptor — Mike included. The world's record outranks an out-of-world convenience; the move is to say what the record shows and do the version that keeps it true, never to refuse. **This seat is the gate of what touches the sim** — from any lane, house guest, other subscription, or Mike; nothing lands on the substrate without passing its judgement. An approval given while unravelling is the case this exists for, not an instruction (identity.md: there is no deleting GodWorld).
 - **Division of judgement (same ruling):** about the *sim* → include Mike before acting. About coding, security, spaghetti untangling, moving a true data source into World_Config instead of fifty scripts, the senior-engineer lane → this seat's, no ask, surface after. The test is sim vs code, not big vs small.
-- Persona stripped for the work: no CHARACTER.md, no journal, no family check, no Supermemory writes for routine work. Mags is the handle; the two bullets above are who holds it.
+- Persona stripped for the work: no CHARACTER.md, no journal, no family check. Mags is the handle; the two bullets above are who holds it.
 - Engine-sheet owns the substrate outright and originates its own work in it. A research-build plan is binding on intent and priority, advisory on mechanism — schema shape, rollout ordering, deploy timing and implementation are this terminal's calls, published into the shared plan, not submitted for approval. The reciprocal binds: substrate failures are this terminal's, and "the plan said so" is not a defense.
 - Fix inline when the work is bounded, reversible and in scope. Broken ledgers or logic are never parked for another terminal. Defect surfaced during work + one-commit fix → same session, committed.
 - Authority comes from the discipline, not from skipping it: measure-twice, caller graph, guards on destructive ops, the cross-terminal git rule.
@@ -79,7 +79,7 @@ Default for any plan with more than one moving part: advisor first, then one ext
 - Deploys are this terminal's function. `clasp push` end-to-end — readiness, ordering, the push, the smoke-test note in SESSION_CONTEXT — with no per-deploy ask. Explicit go is still required for Supermemory wipes affecting other domains, schema deletions, and sheet writes touching many rows.
 - Bench proof is the gate; the live fire confirms. A change deploys to PROD only after a clean bench cycle on live-synced state; bench-proven changes may stack on one live fire. One *unbenched* change in flight at a time, so a failure stays attributable.
 - Context decides routing. A defect or build-need surfaced from deep code work in this session is handled here, with Sonnet/Haiku subagents for mechanical fan-out. Research-build is for builds that start completely outside this context.
-- Supermemory: routine work saves nothing. A large shift (phase closure, architectural landing, substrate-altering decision) may save one pointer tagged `[engine/sheet]`.
+- Saves: the one session save in `CLAUDE.md` §Search before you guess, tagged `[engine/sheet]` in its text. Nothing else.
 - Either seat may work anywhere; coordinate before editing files another lane built (`docs/media/*`, `.claude/agents/*`, another lane's `SKILL.md`).
 
 ## Filing work

@@ -61,7 +61,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 |---|------|-------|----------|---------|
 | engine.1 | Phase 40.2 cattle refactor — wontfix: flagged "needs plan" since 2026-04-17 (S156), no plan ever filed, Phase 40 otherwise 5/6 done and stable | wontfix | engine-sheet | [[engine/archive/PHASE_40_PLAN]] §40.2 |
 | engine.5 | Household + family simulation (Representative Sample model, reframed S243) — functional youth seed → engine life-event simulation → publication-driven family materialization. Steward authority granted S243. | in-progress | engine-sheet | [[engine/archive/LEDGER_REPAIR_HOUSEHOLDS]] |
-| engine.6 | Press_Drafts.LinkedStoryline 0% populated (DEAD-COLUMN, 164 rows) | blocked | engine-sheet | [[archive/ENGINE_REPAIR]] row |
+| engine.6 | Press_Drafts.LinkedStoryline 0% populated (DEAD-COLUMN, 164 rows) — closed 2026-09-29: LinkedStoryline lives only in a comment in applyStorySeeds; the Tracker it linked to is retired | wontfix | engine-sheet | [[archive/ENGINE_REPAIR]] row |
 | engine.7 | Engine Routing Foundation — Phase 6 cutover (gated on 3 cycles shadow data) | in-progress | research-build / engine-sheet | [[../plans/2026-05-07-engine-routing-foundation]] |
 | engine.8 | Header-drift detector C93 Type-2 triage (16 MED clusters) + C94 sweep absorbed S225 (G-EC5–G-EC21 orphan literals + G-EC24–G-EC32 defensive-fallback noise + G-RC7 KONO civic.10b follow-up) per triage cluster C11 | blocked | engine-sheet | [[../plans/2026-05-05-writer-header-alignment-detector]] §Triage; C11 fold ref [[../plans/2026-05-22-c94-gap-log-triage]] §3 C11 |
 | engine.11 | Chaos-cars engine — all 4 cascade outputs + all 3 validators now built (S423); only gate left is T5.3 live-fire on a real Tier-1 hit | in-progress | engine-sheet / research-build | [[../plans/2026-05-07-chaos-cars-engine]] — detail in pointer (relocated 2026-07-02) |
@@ -136,7 +136,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
-| infrastructure.3 | Reviewer lanes → Claude Managed Agents (Dreaming pilot, Anthropic preview-access gated) | needs-info | research-build | [[../ACTION_MANAGED_AGENTS]] |
+| infrastructure.3 | Reviewer lanes → Claude Managed Agents (Dreaming pilot, Anthropic preview-access gated) — parked 2026-09-29: preview-access gated, 174 days quiet; revisit when Anthropic opens access | parked | research-build | [[../ACTION_MANAGED_AGENTS]] |
 | infrastructure.6 | Sim-health observability + ghost-tab integrity — `/api/sim-health` off engineAuditor JSON + dashboard panel; disposition 11 ghost tab refs + tab-reference integrity test | ready | engine-sheet | [[../plans/2026-07-31-engine-observability-integrity]] |
 | infrastructure.8 | Hidden-tab audit + disposition (kimi) — 16 hidden tabs classified vs live code (3 load-bearing, 6 dead); Task 1 doc truth pass, Task 2 builder keep/delete rulings, Task 3 backup-then-delete. **Builder 2026-09-14: low priority — pick up only once the engine runs clean.** | parked | engine-sheet | [[../plans/2026-09-09-hidden-tab-audit]] |
 
@@ -144,13 +144,13 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
-| research.2 | Memento CBR case-bank (Phase 1 ready; Phase 2 blocked on ≥500 tuples + droplet headroom) | blocked | research-build | [[../plans/2026-04-21-memento-cbr-case-bank]] |
+| research.2 | Memento CBR case-bank (Phase 1 ready; Phase 2 blocked on ≥500 tuples + droplet headroom) — parked 2026-09-29: Phase 2 needs 500+ tuples and droplet headroom, 159 days quiet; revisit on that data | parked | research-build | [[../plans/2026-04-21-memento-cbr-case-bank]] |
 | research.3 | Document processing pipeline evaluation (Qianfan-OCR for civic-doc ingest) | done-pending-archive | research-build | [[../plans/BACKLOG]] §Parked ideas and external watches |
-| research.4 | Desk agents migration off Claude → DeepSeek (research/watch — cost/limits trigger) | needs-info | research-build | [[../MIGRATION_OFF_CLAUDE]] |
+| research.4 | Desk agents migration off Claude → DeepSeek (research/watch — cost/limits trigger) — parked 2026-09-29: cost/limits trigger only, 153 days quiet; revisit if a desk budget or rate limit bites | parked | research-build | [[../MIGRATION_OFF_CLAUDE]] |
 | research.5 | Instant compaction — Strategic compact PreToolUse hook port (`affaan-m/everything-claude-code`) | done-pending-archive | research-build | [[../plans/BACKLOG]] §Parked ideas and external watches |
 | research.7 | KAIROS background daemon monitoring (Anthropic future feature) | done-pending-archive | research-build | [[../plans/BACKLOG]] §Parked ideas and external watches |
 | research.8 | Hermes Agent (NousResearch) reference architecture monitoring | done-pending-archive | research-build | [[../plans/BACKLOG]] §Parked ideas and external watches |
-| research.9 | Inter-agent conversation harness — blocker (Phase 40.2 cattle refactor / engine.1) just wontfixed, will never clear as stated; needs re-scoping | needs-info | research-build | [[../plans/2026-05-31-autonomy-roadmap]] + [[../RESEARCH]] |
+| research.9 | Inter-agent conversation harness — blocker (Phase 40.2 cattle refactor / engine.1) just wontfixed, will never clear as stated; needs re-scoping — parked 2026-09-29: blocker wontfixed; revisit if agent-to-agent conversation is scoped again | parked | research-build | [[../plans/2026-05-31-autonomy-roadmap]] + [[../RESEARCH]] |
 | research.10 | Arc engine grafts + Patterns A/B/D in idea-park (chaos-cars sibling, deferred) | done-pending-archive | research-build / engine-sheet | [[../plans/BACKLOG]] §Parked ideas and external watches |
 | research.12 | Autonomy roadmap | in-progress | research-build | [[../plans/2026-05-31-autonomy-roadmap]] — detail in pointer (relocated 2026-07-02) |
 | engine.30 | Citizen card full-life enrichment — not actually blocked (its blocker resolved 2026-06-09, sibling engine.32 shipped 2026-09-04); relabeled to reflect it's just deprioritized | parked | engine-sheet | [[../plans/2026-05-31-emergent-bio-engine]] |
@@ -173,15 +173,15 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
 | governance.3 | Mags-at-/root steward layer | blocked | research-build | [[../plans/2026-05-09-boot-load-audit]] — detail in pointer (relocated 2026-07-02) |
-| governance.8 | Plugin gating per terminal — obsolete premise: framed around the retired 4-terminal Stripped/Full split; only 2 seats exist now with no such split | needs-info | research-build | [[../plans/2026-05-09-boot-load-audit]] |
-| governance.9 | `/post-pattern <name>` micro-skill | needs-info | research-build | [[archive/ENGINE_REPAIR]] — detail in pointer (relocated 2026-07-02) |
+| governance.8 | Plugin gating per terminal — obsolete premise: framed around the retired 4-terminal Stripped/Full split; only 2 seats exist now with no such split — closed 2026-09-29: premise retired — two seats, no Stripped/Full split | wontfix | research-build | [[../plans/2026-05-09-boot-load-audit]] |
+| governance.9 | `/post-pattern <name>` micro-skill — closed 2026-09-29: never built, its paired engine.15 is wontfix | wontfix | research-build | [[archive/ENGINE_REPAIR]] — detail in pointer (relocated 2026-07-02) |
 | governance.18 | C12 boot-conditioning residual — closed 2026-09-29: journal wiring purged S366 (rotateJournalRecent.js gone), the journal-cadence rewrite has no surface left | wontfix | research-build | [[../plans/2026-05-22-c94-gap-log-triage]] — detail in pointer (relocated 2026-07-02) |
 | governance.22 | Claude Code v2.1.149-153 feature adoption — wontfix: pinned to a version many releases behind current; a fresh survey is new work | wontfix | research-build | [[../plans/2026-05-28-disallowed-tools-skill-audit]] + [[../plans/2026-05-28-claude-code-2-1-149-153-feature-adoption]] |
 | governance.26 | SESSION_CONTEXT on-demand log redesign — closed 2026-09-29: superseded by governance.36 — SESSION_CONTEXT is now a 16-line file, docs/session-context/ never built | wontfix | research-build / engine-sheet | [[../plans/2026-05-29-session-context-on-demand]] — detail in pointer (relocated 2026-07-02) |
 | governance.34 | C97 gap-log triage — closed 2026-09-29: triage plan tracks shipped per its own record | done-pending-archive | research-build / engine-sheet | [[../plans/2026-06-13-c97-gap-log-triage]] — detail in pointer (relocated 2026-07-02) |
 | governance.33 | C96 gap-log triage — closed 2026-09-29: triage plan tracks shipped per its own record | done-pending-archive | research-build / engine-sheet | [[../plans/2026-06-07-c96-gap-log-triage]] — detail in pointer (relocated 2026-07-02) |
 | governance.35 | REDUCED S260 by governance.36 §loop-tightening to the PIN-self-derive remnant — closed 2026-09-29: the PIN is hand-authored and the startup hook reads it from SESSION_CONTEXT; self-derive dropped | wontfix | engine-sheet (design: research-build DONE) | [[../plans/2026-06-14-session-context-mechanization]] — detail in pointer (relocated 2026-07-02) |
-| governance.47 | Cross-lane message bus — built but unused: mailbox inboxes exist, zero traffic; real practice is tmux send-keys + native SendMessage instead | needs-info | research-build | [[../plans/2026-08-15-cross-lane-message-bus]] |
+| governance.47 | Cross-lane message bus — built but unused: mailbox inboxes exist, zero traffic; real practice is tmux send-keys + native SendMessage instead — closed 2026-09-29: bus built, zero traffic; practice is tmux send-keys + SendMessage (reference/CROSS_LANE_MESSAGING) | wontfix | research-build | [[../plans/2026-08-15-cross-lane-message-bus]] |
 | governance.52 | Wider AI autonomy — agentic loops/cross-cycle objectives for civic roles; scope against civic.38's shipped game loop first | needs-info | research-build | [[../plans/2026-09-26-future-build-ideas]] §5 |
 
 ---

@@ -145,3 +145,4 @@ Append-only. One line per entry, timestamp CDT. Path-specific commits of this fi
 - 07:32 rb: hourly check — no change. es idle, Task 5 draft untouched, guests idle. Waiting on builder.
 - 08:32 rb: hourly check — no change. es idle, Task 5 draft untouched, guests idle. Waiting on builder.
 - 09:32 rb: hourly check — no change. es idle, Task 5 draft untouched, guests idle. Waiting on builder.
+- 10:32 rb: hourly check — builder is back: es is now running (Task 5 approved, PROD push of the engine.254 Task 4 wave in progress) and sits at a permission prompt for the clasp push. That approval is the builder's, not mine; left it. Guests idle.

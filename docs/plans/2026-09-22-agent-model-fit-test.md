@@ -110,3 +110,4 @@ One call: `node scripts/modelFitRun.js --input <frozen file> --model <id> --prov
   `constructed: true` in the pack for the report. Third input is a second Mags cycle, not an
   Elias follow-up — a follow-up would need invented Elias quotes in the transcript, which canon
   rules forbid. Task 2 (runner) not started.
+- 2026-09-29 (rb, overnight): Task 4 deterministic side built — `scripts/modelFitScore.js` (schema, grounding, milestone cap, persona-fact contradictions from `output/model-fit/persona-facts.json`, word range, distinctiveness, seeded blind pack + separate key; `--self-test` passes on `output/model-fit/score-fixture.jsonl`). Built by agy from a spec, verified by rb. Still open: Task 3 real run (needs builder's Anthropic credit), blind scoring by agy + codex, report.

@@ -1,7 +1,7 @@
 ---
 title: Care and justice as one system — OARI, chaos cars, hospital stays, mental health, courts
 created: 2026-09-21
-updated: 2026-09-21
+updated: 2026-09-29
 type: plan
 tags: [civic, engine, draft]
 sources:
@@ -121,7 +121,133 @@ All three open calls ruled — the recommended defaults above, as stated:
 - Precedent ledger as the folk-memory/institutional-memory answer — a consequence of the case ledger existing, not a separate build.
 - Phase 37 (Arc State Machines, `docs/plans/BACKLOG.md:447`, still NOT STARTED) is the natural home for a case that runs multi-cycle; referenced for later, not a prerequisite here.
 
+## Schema — receipt and census (engine-sheet, DRAFT 2026-09-29, under review — nothing built)
+
+Task 2 of [[../for-claude-review/2026-09-28-codex-care-justice-intake-plan]]. This section is the one specification; the amendment's tasks 3–11 build against it. Status of each new thing: **PROPOSED — awaiting builder yes** for the new tab `Care_Justice_Census` and the new test file; `Judicial_Ledger` is already ruled (§Rulings CLOSED).
+
+### Read before drafting (2026-09-29)
+
+| Fact | Source |
+|---|---|
+| Live `Hospital_Ledger` = 11 columns, 3 admissions, 1 open (POP-00801, hospitalized since C106); the open row is 8 cells long, trailing cells absent | live sheet read |
+| `Judicial_Ledger`, `Care_Justice_Census` do not exist live | live sheet read |
+| Writer counts five states as open | `phase10-persistence/buildCyclePacket.js:811` |
+| Open rows indexed by POPID alone — one open admission per citizen | `buildCyclePacket.js:868-873` |
+| Missed-admission reconcile appends a row and counts `missedAdmitsReconciled`, not `admitsThisCycle` | `buildCyclePacket.js:974-988`, `:993-1001` |
+| `CyclesInCare` written only on close | `buildCyclePacket.js:906-908`, `:950-952` |
+| Illness talk-back counts every blank-`DischargeCycle` row in the tab | `phase03-population/applyDemographicDrift.js:225-235` |
+| `S.hospitalCensus` has no reader; the world summary builds its own from the tab export with other field names | `buildCyclePacket.js:1002`, `scripts/buildWorldSummary.js:1476` |
+| Tracked hood table ÷ city population ratio already computed each Cycle | `phase03-population/updateNeighborhoodDemographics.js:124-134` |
+| Chaos events already carry an `eventId` | `phase04-events/chaosCarsEngine.js:44`, `:573` |
+| `schemas/SCHEMA_HEADERS.md` is generated from the live sheet | its own header; `utilities/exportSchemaHeaders.js`, `scripts/regenSchemaHeaders.js` |
+| Status read sites: two line numbers in §Rulings drifted — `runHouseholdEngine.js:587`, `runCareerEngine.js:936`; the rest hold | grep 2026-09-29 |
+
+### Reconciling the two specs
+
+1. **Ruling 2's "no schema change on Hospital_Ledger" is superseded by gate R1** (contract adopted). Mental-health and substance causes still ride the existing `Cause` text; the four typed columns below are added beside it. `Cause` is never the counting key.
+2. **`S.judicialCensus` / `S.hospitalCensus` as snapshot objects are retired as the census carrier.** Nothing reads them. The persisted census tab is the readable path. `S.hospitalCensus` stays as-is until Task 8 so no current log line changes.
+3. **Two occupancy measures, both named.** `in-care` = the five open states (today's behaviour). `beds` = `hospitalized` + `critical` only (gate R2). The Phase-3 talk-back keeps its current numerator until Task 10 moves it to a scope-matched measure; this schema does not change the feedback loop.
+4. **`SCHEMA_HEADERS.md` is not hand-edited.** It regenerates after the tabs exist (Task 8 deploy setup). Until then this section is the schema of record; `SIMULATION_LEDGER.md` gains the `detained` Status value at Task 6.
+
+### Shared receipt identity
+
+`SourceEventId` = `<SourceSystem>:<source event key>:<POPID>`. Chaos sources use the existing chaos `eventId`; engine sources with no event id use `C<cycle>:<type>`. It is independent of the row id. Rules:
+
+- Same `SourceEventId` seen twice → one row, one intake. Replay-safe.
+- Same POPID, later distinct `SourceEventId` → a new row. Row ids stay `H-C<cycle>-<POPID>` / `J-C<cycle>-<POPID>`; a second row for the same citizen in the same Cycle takes suffix `-2`.
+- A transfer reuses the originating `SourceEventId` on the receiving row and links the sending row's id; it is a movement, not a second intake.
+
+### `Hospital_Ledger` — 4 columns appended (L–O); A–K untouched
+
+| Col | Header | Values |
+|---|---|---|
+| L | IntakeType | `injury` · `illness` · `heat` · `mental-health-crisis` · `substance-treatment` · `unclassified` |
+| M | SourceSystem | `ambulance` · `oari` · `health-engine` · `heat-wave` · `judicial-transfer` · `reconcile` |
+| N | SourceEventId | receipt key above |
+| O | TransferFromId | `CaseId` of the judicial row, else blank |
+
+- The 3 existing rows stay blank in L–O and count as `unclassified`. No type is inferred from `Cause` prose.
+- `SourceSystem = reconcile` marks a missed-admission repair: a **correction**, never a same-Cycle intake.
+- Bed vs care visit is derived from `StatusNow`, not stored.
+- Open-row duration = current Cycle − `AdmitCycle`, derived by readers; `CyclesInCare` remains the closed-row value.
+
+### `Judicial_Ledger` — new tab, 20 columns (A–T)
+
+Extends the 9 ruled columns (all kept) for gates R3–R5.
+
+| Col | Header | Values / note |
+|---|---|---|
+| A | CaseId | `J-C<OpenCycle>-<POPID>` |
+| B | POPID | |
+| C | Name | hospital parity |
+| D | Neighborhood | needed for hood-scope census |
+| E | ChargeCause | descriptive text, never a counting key |
+| F | ChargeGravity | `minor` · `serious` · `grave` — scales held length 1–4 (R3) |
+| G | EntryType | `arrest` (patrol) · `investigation` (grave conduct, R5) |
+| H | OpenCycle | Cycle the row opened |
+| I | ArrestCycle | blank while an investigation has not become an arrest |
+| J | DecisionCycle | `ArrestCycle + 1` (R3) |
+| K | StatusNow | `investigating` · `pending` · `held` · `diverted` · `released` · `closed` |
+| L | LastTransitionCycle | |
+| M | HeldUntilCycle | set at decision when outcome is held |
+| N | ResolveCycle | blank = open case |
+| O | Outcome | `released` · `diverted` · `held-served` · `no-arrest` · `deceased` · `<x>-reconciled` |
+| P | CyclesHeld | written on close; derived while open |
+| Q | PriorStatus | the citizen's Status at arrest — what release restores (R4) |
+| R | SourceSystem | `patrol` · `conduct` · `reconcile` |
+| S | SourceEventId | receipt key above |
+| T | TransferToId | `AdmissionId` when diverted to a treatment bed |
+
+`investigating` does not change the citizen's Status; only an arrest sets `detained`. One open case per POPID. A second arrest inside a sim year is found by counting this citizen's prior rows, no column needed.
+
+**Custody and care overlap (R4).** Custody and care are separate records; Status holds one value by precedence: `deceased` > `critical` > `hospitalized` > `detained` > `serious-condition` / `injured` / `recovering` > prior life-state. Release restores `PriorStatus` unless a higher-precedence state is live. A detained citizen who is hospitalized keeps the open case; the case clock keeps running.
+
+### `Care_Justice_Census` — new tab (PROPOSED), 21 columns
+
+Row key: `Cycle + System + GeographicScope + Neighborhood + IntakeType`.
+
+| Group | Headers |
+|---|---|
+| Identity | Cycle · System (`hospital` / `judicial`) · GeographicScope · Neighborhood · IntakeType |
+| Coverage | PopulationBasis · CoveredPopulation · MethodVersion · Completeness |
+| Intake | TotalIntakes · TrackedIntakes · OtherResidentIntakes |
+| Load | OccupancyMeasure · OpeningOccupancy · ClosingOccupancy · TrackedOccupancy · OtherResidentOccupancy |
+| Movement | TransfersIn · TransfersOut · Exits · Corrections |
+
+- **GeographicScope:** `neighborhood` (one of the table's hoods) · `unallocated` (city population minus the hood table's sum; Neighborhood blank; never a named place) · `city` (derived sum of the other two). The disjoint scopes are the hoods plus `unallocated`; a consumer picks one scope and never adds `city` to the others.
+- **PopulationBasis:** `hood-table` · `city-remainder` · `city-total`. `CoveredPopulation` is read each Cycle, never stored as a constant.
+- **OccupancyMeasure:** hospital `beds`; judicial `held`. `in-care` and open-case counts are read from the ledgers, not the census.
+- **IntakeType:** the ledger enums plus `all`. One `all` row per System and scope is always written, zero included. A typed row is written only when any of its counts is nonzero; in a scope marked `complete`, an absent typed row means zero.
+- **Completeness:** `complete` · `incomplete` (a write in the set failed; reconciled next Cycle) · `unavailable` (source missing — counts blank, never 0).
+- Tracked citizens are counted inside the hood they live in, once. Other residents are numbers only: no POPID, no name.
+
+### Invariants the tests assert
+
+| # | Invariant |
+|---|---|
+| A | `TotalIntakes = TrackedIntakes + OtherResidentIntakes`, every row |
+| B | `ClosingOccupancy = OpeningOccupancy + TotalIntakes + TransfersIn − Exits − TransfersOut + Corrections` |
+| C | `city` row = sum of hood rows + `unallocated`, per System and IntakeType |
+| D | Same `SourceEventId` folded twice = folded once |
+| E | Same POPID, second distinct receipt = second row, second intake |
+| F | `reconcile` receipt raises `Corrections` and occupancy, never `TotalIntakes` |
+| G | Missing source → `unavailable`, counts blank; known none → `0` |
+| H | Hospital→judicial or judicial→hospital transfer: one person, `TransfersOut` on one side, `TransfersIn` on the other, no intake on the receiving side |
+| I | Zero named events with nonzero other-resident demand still produces rows |
+| J | `beds` counts only `hospitalized` + `critical`; an `injured` admission is an intake with no bed |
+
+**Test file (PROPOSED):** `scripts/careJusticeAccounting.test.js`, synthetic rows only, no sheet access. `scripts/run-tests.js` runs every `*.test.js`, and two files already fail on HEAD (engine.269), so the Task 2 file lands with the Task 3 arithmetic in one commit and is green on arrival — the red run is shown in the commit message, not left in the suite.
+
+### Weakest points — for the reviewer
+
+1. Sparse typed rows plus an always-written `all` row: is "absent = zero when complete" safe for every reader, or does it invite a reader to treat `incomplete` as zero?
+2. `unallocated` scope: does any invariant above force neighbourhood population to be invented?
+3. Status precedence: does any of the Status read sites break when `detained` sits below `hospitalized`?
+4. Row-id suffix `-2`: does `persistHospitalLedger_`'s POPID-keyed open index survive it unchanged?
+
 ## Changelog
+
+- 2026-09-29 (engine-sheet) — §Schema drafted from live sheet + code reads; reconciles Ruling 2 with gate R1, retires the `S.*Census` snapshot carrier, names two occupancy measures. DRAFT: advisor then one outside review before any build; new tab and test file await the builder.
 
 - 2026-09-26 (research-build) — Builder ruled all three open calls (§Rulings CLOSED). Build spec written, ready for engine-sheet.
 

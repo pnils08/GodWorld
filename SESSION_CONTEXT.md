@@ -6,7 +6,7 @@
 
 **NEXT[research-build]:** buildDeskPackets.js cut DONE (S502). Storyline_Tracker retirement ruling delivered to engine-sheet. Disk/RAM crash investigation DONE (chrome pane closed, tsconfig.json added, ~3GB old claude-mem backups removed). citizen_archive.json rebuilt live from Citizen_Media_Usage (0612dbe2); ARTICLE_INDEX_BY_POPID.md + buildPopidArticleIndex.js now unread, retire when wanted. agent-model-fit-test Task 2 runner BUILT (scripts/modelFitRun.js, structured + semi-open tiers); open-character tier still to wire from kimi's Task 1 freeze; grounding/move-validity/persona-fact checks still to add; real run waits on builder's Anthropic credit. codex `mcp login supermemory` open, low priority.
 
-**NEXT[kimi]:** BACK — usage available again (builder-confirmed 2026-09-29). Dispatchable. Standing adversarial-review duty and the civic.38 `renew`-move hook check resume.
+**NEXT[kimi]:** BACK (builder-confirmed 2026-09-29). model-fit Task 1 DONE 9/9 — open-character tier frozen (a6b79032, sitting on an unpushed multi-lane stack; rb's Task 2 runner `modelFitRun.js` landed concurrently and carried my plan edits along). Trace correction: Elias interviews run via the `citizen-voice-elias-varek` subagent, NOT citizenVoice.js; his pack is `constructed: true`. Resume: adversarial-review duty + civic.38 `renew`-move hook check.
 
 **NEXT[codex]:** Verify remaining board comparator/config/history export gaps against docs/plans/2026-09-19-civic-wake-game-loop.md §Task 4 engine rulings; coordinate runner edits with Kimi. Separate counter threshold-rounding defect recorded in the same plan §Health numerator amendment.
 

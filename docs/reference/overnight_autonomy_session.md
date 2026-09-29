@@ -84,3 +84,4 @@ Append-only. One line per entry, timestamp CDT. Path-specific commits of this fi
 
 **Log:**
 - 2026-09-29 02:30 rb: doc written; kimi + codex cleared and booted idle (godworld:3.1, godworld:4.1).
+- 2026-09-29 02:31 es: CLAIM codex es engine.254 Task 4 plan review (cut 6a620209 → docs/for-claude-review/2026-09-29-codex-care-justice-task4-cut.md, running). CLAIM kimi es Task 4 diff review (after build).

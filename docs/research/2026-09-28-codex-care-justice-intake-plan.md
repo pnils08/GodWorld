@@ -152,14 +152,14 @@ Each item is a bounded review or implementation cut. Implementation tasks requir
 - **Files:** `schemas/SCHEMA_HEADERS.md`, `docs/SPREADSHEET.md`, `docs/SIMULATION_LEDGER.md`, owning plan; proposed `scripts/careJusticeAccounting.test.js`.
 - **Steps:** Specify exact headers, row keys, enums, scope units, custody/care overlap, and correction semantics. Write synthetic conservation, deduplication, and unknown-versus-zero cases before implementation.
 - **Verify:** Tests fail for the missing behavior, without external writes. Engine-sheet approves schemas; a cheap subagent performs the correlating documentation propagation under AGENTS.md, with lead review.
-- **Status:** [x] schema specified and reviewed 2026-09-29 — owning plan §Schema is the specification. Test file lands with Task 3, pending builder yes on the new file and the census tab.
+- **Status:** [x] schema specified and reviewed 2026-09-29 — owning plan §Schema is the specification. Builder approved the census tab and test file 2026-09-29.
 
 ### Task 3 — implement pure census arithmetic
 
 - **Files:** proposed `utilities/careJusticeAccounting.js`; proposed `scripts/careJusticeAccounting.test.js`.
 - **Steps:** Implement keyed receipt folding and occupancy reconciliation using the approved contract; keep input generation and persistence outside this function.
 - **Verify:** The Task 2 tests pass, including zero named events, historical correction, duplicate receipt, transfer, and incomplete-source cases.
-- **Status:** [ ] gated on Task 2; engine-sheet cut.
+- **Status:** [x] built 2026-09-29 — `utilities/careJusticeAccounting.js`, 53 assertions green; called by nothing yet.
 
 ### Task 4 — make hospital admission classification explicit
 

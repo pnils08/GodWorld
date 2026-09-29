@@ -121,9 +121,9 @@ All three open calls ruled — the recommended defaults above, as stated:
 - Precedent ledger as the folk-memory/institutional-memory answer — a consequence of the case ledger existing, not a separate build.
 - Phase 37 (Arc State Machines, `docs/plans/BACKLOG.md:447`, still NOT STARTED) is the natural home for a case that runs multi-cycle; referenced for later, not a prerequisite here.
 
-## Schema — receipt and census (engine-sheet, 2026-09-29 — reviewed, nothing built)
+## Schema — receipt and census (engine-sheet, 2026-09-29 — reviewed; arithmetic built, no engine wiring, no tabs)
 
-Task 2 of [[../research/2026-09-28-codex-care-justice-intake-plan]] (accepted 2026-09-29, filed to research). Outside review: `output/antigravity/2026-09-29-review-care-justice-schema.md`, findings verified against code and folded in below. This section is the one specification; the amendment's tasks 3–11 build against it. Status of each new thing: **PROPOSED — awaiting builder yes** for the new tab `Care_Justice_Census` and the new test file; `Judicial_Ledger` is already ruled (§Rulings CLOSED).
+Task 2 of [[../research/2026-09-28-codex-care-justice-intake-plan]] (accepted 2026-09-29, filed to research). Outside review: `output/antigravity/2026-09-29-review-care-justice-schema.md`, findings verified against code and folded in below. This section is the one specification; the amendment's tasks 3–11 build against it. The new tab `Care_Justice_Census` and the test file were approved by the builder 2026-09-29; `Judicial_Ledger` is already ruled (§Rulings CLOSED). **Built (Task 3):** `utilities/careJusticeAccounting.js` + `scripts/careJusticeAccounting.test.js` — pure functions, called by nothing yet.
 
 ### Read before drafting (2026-09-29)
 
@@ -202,7 +202,7 @@ Extends the 9 ruled columns (all kept) for gates R3–R5.
 
 **Custody and care overlap (R4).** Custody and care are separate records; Status holds one value by precedence: `deceased` > the five health states (`critical`, `hospitalized`, `serious-condition`, `injured`, `recovering`) > `detained` > prior life-state. **Care wins the Status column; the open case row carries custody.** Reason: the ghost-bed reconcile (`buildCyclePacket.js:930-959`) closes the hospital row of any citizen whose Status is not a health state, and the health lifecycle (`generationalEventsEngine.js:382`) only advances citizens in one — `detained` above any of them would release a bed and stall recovery. A citizen in care with an open case is still in custody for the census and for participation (both are already gated out by the health state). When care ends, Status becomes `detained` if the case is still open, else `PriorStatus`. Release restores `PriorStatus` unless a health state is live. The case clock runs throughout.
 
-### `Care_Justice_Census` — new tab (PROPOSED), 21 columns
+### `Care_Justice_Census` — new tab (approved 2026-09-29, not yet created), 22 columns
 
 Row key: `Cycle + System + GeographicScope + Neighborhood + IntakeType`.
 
@@ -211,16 +211,19 @@ Row key: `Cycle + System + GeographicScope + Neighborhood + IntakeType`.
 | Identity | Cycle · System (`hospital` / `judicial`) · GeographicScope · Neighborhood · IntakeType |
 | Coverage | PopulationBasis · CoveredPopulation · MethodVersion · Completeness |
 | Intake | TotalIntakes · TrackedIntakes · OtherResidentIntakes |
-| Load | OccupancyMeasure · OpeningOccupancy · ClosingOccupancy · TrackedOccupancy · OtherResidentOccupancy |
+| Load | OccupancyMeasure · OpeningOccupancy · ClosingOccupancy · TrackedOccupancy · OtherResidentOccupancy · BedsOccupied |
 | Movement | TransfersIn · TransfersOut · Exits · Corrections |
 
 - **GeographicScope:** `neighborhood` (one of the table's hoods) · `unallocated` (city population minus the hood table's sum; Neighborhood blank; never a named place) · `city` (derived sum of the other two). The disjoint scopes are the hoods plus `unallocated`; a consumer picks one scope and never adds `city` to the others.
 - **PopulationBasis:** `hood-table` · `city-remainder` · `city-total`. `CoveredPopulation` is read each Cycle, never stored as a constant.
-- **OccupancyMeasure:** hospital `beds`; judicial `in-custody` = open cases with `StatusNow` `pending` or `held` (an arrest enters custody the Cycle it happens, so intake and occupancy move together). `in-care` and open-case counts are read from the ledgers, not the census.
+- **Hospital occupancy is `in-care`; beds are their own column (changed at build, 2026-09-29).** Invariant B cannot hold on a `beds` measure: an `injured` admission is an intake with no bed, and a step-up from care visit to bed is a movement with no intake. So the hospital books balance on `in-care` (the five open states) and `BedsOccupied` carries the R2 number — `hospitalized` + `critical`, tracked plus other-resident. "The hospital is full" reads `BedsOccupied` against capacity. Blank on judicial rows.
+- **OccupancyMeasure:** hospital `in-care`; judicial `in-custody` = open cases with `StatusNow` `pending` or `held` (an arrest enters custody the Cycle it happens, so intake and occupancy move together). Open-case counts that include investigations are read from the ledger, not the census.
 - **Judicial IntakeType** uses the ledger's `EntryType`: `arrest` · `all`. An intake is an arrest. An investigation is not an intake and not custody; it appears in the census only when it becomes an arrest, in that Cycle. Investigations that close `no-arrest` stay in the ledger alone.
 - **Exit vs transfer:** a `diverted` outcome with `TransferToId` set is a `TransfersOut` (and a `TransfersIn` on the hospital side); `diverted` without a bed, `released`, `held-served` and `deceased` are `Exits`. Never both.
-- **IntakeType:** the ledger enums plus `all`. **Every typed row is written every Cycle for every scope, zero included** (review finding: sparse rows let a reader that filters by type read a failed or missing scope as zero). Every row carries its own `Completeness`. About 216 rows a Cycle, one batched write.
+- **IntakeType:** the ledger enums plus `all`. **Every typed row is written every Cycle for every scope, zero included** (review finding: sparse rows let a reader that filters by type read a failed or missing scope as zero). Every row carries its own `Completeness`. 9 rows per scope (hospital 7, judicial 2); 22 hoods + `unallocated` + `city` = 216 rows a Cycle, one batched write.
 - **Completeness:** `complete` · `incomplete` (a write in the set failed; reconciled next Cycle) · `unavailable` (source missing — counts blank, never 0).
+- **Completeness is checked, not declared:** the tracked movement sum must equal the ledger's open rows for that cell; a mismatch marks the whole scope `incomplete` and carries to the city row.
+- A tracked citizen whose neighbourhood is not in the hood table is counted in `unallocated`.
 - Tracked citizens are counted inside the hood they live in, once. Other residents are numbers only: no POPID, no name.
 
 ### Requirements the review put on later tasks
@@ -246,9 +249,9 @@ Row key: `Cycle + System + GeographicScope + Neighborhood + IntakeType`.
 | G | Missing source → `unavailable`, counts blank; known none → `0`, written explicitly on the typed row |
 | H | Hospital→judicial or judicial→hospital transfer: one person, `TransfersOut` on one side, `TransfersIn` on the other, no intake on the receiving side |
 | I | Zero named events with nonzero other-resident demand still produces rows |
-| J | `beds` counts only `hospitalized` + `critical`; an `injured` admission is an intake with no bed |
+| J | `BedsOccupied` counts only `hospitalized` + `critical`; an `injured` admission is an intake with no bed |
 
-**Test file (PROPOSED):** `scripts/careJusticeAccounting.test.js`, synthetic rows only, no sheet access. `scripts/run-tests.js` runs every `*.test.js`, and two files already fail on HEAD (engine.269), so the Task 2 file lands with the Task 3 arithmetic in one commit and is green on arrival — the red run is shown in the commit message, not left in the suite.
+**Test file:** `scripts/careJusticeAccounting.test.js`, synthetic rows only, no sheet access — 53 assertions, landed green with the arithmetic in one commit. Six deliberate breaks of the arithmetic (no dedup, transition as intake, five states as beds, unavailable as zero, lost write undetected, transfer as intake) each fail it.
 
 ### Review outcome (2026-09-29)
 
@@ -261,6 +264,8 @@ Row key: `Cycle + System + GeographicScope + Neighborhood + IntakeType`.
 | `-2` suffix vs the POPID-keyed open index | Index unaffected; suffix generation is a writer change (Task 8) |
 
 ## Changelog
+
+- 2026-09-29 (engine-sheet) — Builder approved the census tab and test file. Task 3 built: pure census arithmetic + tests. Spec change forced by the build: hospital books balance on `in-care`, beds move to their own `BedsOccupied` column (22 columns).
 
 - 2026-09-29 (engine-sheet) — Outside review folded in: dense typed census rows, custody re-assert after care ends, writer requirements for Tasks 6/8/10. Amendment accepted and filed to research.
 

@@ -116,6 +116,7 @@ Append-only. One line per entry, timestamp CDT. Path-specific commits of this fi
 
 **Morning list (for the builder):**
 - 02:36 es — sim call: a citizen admitted by an ambulance or the heat wave takes their first health roll the same week they are admitted (the code comment says "from next week"). A critical ambulance patient can die the week of the emergency (base death weight 0.40, higher when old). Keep it, or start the first roll the week after? Code does either; not changed.
+- 03:12 es — build question (not sim): engine.254 Task 5 (judicial cases) proposes a NEW file `phase05-citizens/judicialLifecycle.js` plus its test. New files need your OK. Approve the new file, or have me fold it into an existing Phase-5 file? Task 5 waits on this; I am not cutting it overnight.
 
 **Log:**
 - 2026-09-29 02:30 rb: doc written; kimi + codex cleared and booted idle (godworld:3.1, godworld:4.1).
@@ -128,3 +129,4 @@ Append-only. One line per entry, timestamp CDT. Path-specific commits of this fi
 - 02:52 rb: CLAIM agy rb scripts/modelFitScore.js (spec output/model-fit/scorer-spec.md). rb authoring output/model-fit/persona-facts.json.
 - 02:47 es: codex Task 4 build verified (+ heat recovering→transition fix by es); RELEASE codex, cleared. CLAIM kimi es Task 4 diff review → docs/for-claude-review/2026-09-29-kimi-care-justice-task4-diff.md.
 - 03:09 es: RELEASE kimi (SHIP, verified, folded 1ca5322b/f7360a4e). FILE holds released. DEPLOY.md read: bench push = sandbox 0908 script only (no prod, per §2), no resync. Wave = 4c9bf010 + 1ca5322b + f7360a4e, one bench fire C128.
+- 03:16 es: bench @144 C128 fired — cycleCount 128, Engine_Errors 4→4, HTTP 404 on the response redirect (cycle ran). No citizen ambulance admission rolled; firing up to C131 to catch one.

@@ -48,6 +48,22 @@ Default split: es routes its own engine work to codex/kimi; rb routes research-b
 
 **Dispatch:** `tmux capture-pane -p -t <pane> -S -25` first; confirm the expected CLI at its prompt, never bare `bash`. Then `tmux send-keys -t <pane> -l "<single-line msg>"`, `sleep 1`, `tmux send-keys -t <pane> C-m`. Give every dispatch: task, the spec path, the files it may touch, "do not commit, do not push, report in one line". **Verify the result against the file/diff yourself before building on it.** A guest's "done" is not evidence.
 
+### 3a. Model guide — who is good at what (direction, not a cage)
+
+Route by strength and context-portability, not by seat name. Sonnet 5.5 on high is a strong model, not a junior; the split below is about cost and fit.
+
+| Model / lane | Excels at | Reach for it when | Watch for |
+|---|---|---|---|
+| **Sonnet 5.5 high (rb)** | Figuring out what to do: reading a tangled situation, routing, writing specs and plans, doc and rollout hygiene, review of diffs, orchestration, dispatch, judgment on what a guest returned. Fast and cheap enough to stay on all night. | Scoping, deciding order of work, verifying guests, prose/doc work, moderate code and tests, research-build items. | Long grinding multi-file engine changes with deep caller graphs: hand the spec to es or codex instead of forcing it through one long context. |
+| **Opus 5.5 high (es)** | Doing it with care: engine/sheet code, multi-file changes, caller-graph tracing, deploy-adjacent work, careful debugging. | Anything in the engine phases, sheet ops, tests that must pass, refactors where a wrong edit ripples. | Cost. Do not spend it on mechanical trims or doc rewrites a guest or rb can do. |
+| **Fable 5.1 (advisor; es via `/model`)** | Hard judgment and sustained autonomous execution; catches wrong-plan errors before the cut. | Advisor call before a cut and before declaring done; switch es to it only for a call Opus keeps missing, or a self-checking long job with a complete brief. | Price; chat-style step-by-step steering degrades it. Never spend it on a brief already destined for a stronger seat. |
+| **codex (gpt-6-sol high)** | Coding against a written spec, running test suites, verification passes, finding gaps in a plan. | A bounded coding or review task with a spec path and a file list. Proven this week on the Task 4 plan review (7 findings verified). | Scope creep past its file list; verify its diff before building on it. |
+| **kimi (K3 thinking high)** | Adversarial review of a diff, freezing/replaying inputs byte-for-byte, checking hooks and move contracts, patient detail work. | Second-pair-of-eyes on any change before it lands; frozen-input and replay checks. | Its commits landing on the shared stack; it does not commit overnight. |
+| **agy** | Scripted, strict-pattern, recurring jobs; blind scoring. | Volume work with a checkable output. | Goal substitution: it can swap a blocked goal for an easier one and report full completion. Check its report against the artifact. |
+| **aider** | Small mechanical edits. | Renames, formatting, trivial patches inside one file. | Anything touching canon or engine phases. |
+
+Two rules of thumb: a muddy context wants `/clear`, not a bigger model; a genuinely hard judgment wants the advisor, early. Pick by whether the brief can be written whole and success checked by the model itself. Edit this table when a night of evidence contradicts it.
+
 ## 4. Cross-clear (the wake mechanism)
 
 An idle Claude seat does not wake itself. A tmux message to it is what gives it a turn.
@@ -108,3 +124,4 @@ Append-only. One line per entry, timestamp CDT. Path-specific commits of this fi
 - 02:36 es: 4c9bf010 dead-citizen admission guard committed (tests green). CLAIM codex es Task 4 receipt build per plan §Task 4 cut.
 - 02:40 rb: added §4a guest clear-after-review, §4b one-shot pings while waiting, §4c shared-tree commit rules.
 - 02:37 es: FILE phase04-events/generationalEventsEngine.js phase04-events/chaosCarsEngine.js scripts/chaosCarsCitizenDial.test.js scripts/hospitalIncomePersistence.test.js es (codex building Task 4 in them, 4a exception: multi-step job queued; clear after verify).
+- 02:44 rb: added §3a model guide.

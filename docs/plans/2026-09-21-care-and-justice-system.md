@@ -319,7 +319,7 @@ Outside review: `docs/research/2026-09-29-codex-care-justice-task4-cut.md` — 7
 - **Order fixes the lost admission.** The ambulance receipt lands at Phase 4, ahead of any Phase-5 transition for that citizen, so the persist opens the row first; a same-Cycle step lands as a transition and a same-Cycle death closes it `deceased`. No persist code changes in this task — `buildCyclePacket.js:873-915` already handles that order.
 - **Eligibility unchanged.** The ambulance guard (blank/active/recovering; retirees keep `retired`) and the heat guard stay as they are; the receipt is built only inside the branch that flips Status.
 - **Separate defect, separate commit: dead citizens admitted.** The ordinary-health check skips a row whose Status became `deceased` earlier in the same pass. One-line guard; no receipt for a death. Correctness, not sim behaviour — the death cascade has already fired.
-- **Not in this cut.** OARI admissions (R5 makes de-escalation a diversion, not a care admission); the same-Cycle lifecycle advance on heat/chaos victims (behaviour — morning list); sports-injury receipts (reconcile path, `unclassified`); retirees reaching `active` on recovery through the ordinary-health path (Task 6 requirement below); any persist, census or cluster change (Tasks 8/9).
+- **Not in this cut.** OARI admissions (R5 makes de-escalation a diversion, not a care admission); the same-Cycle lifecycle advance on heat/chaos victims (ruled 2026-09-29: first roll the week after — built `7b7c17af`, live PROD @124); sports-injury receipts (reconcile path, `unclassified`); retirees reaching `active` on recovery through the ordinary-health path (Task 6 requirement below); any persist, census or cluster change (Tasks 8/9).
 - **Interim cluster behaviour (Task 9 owns the measure).** The Phase-9 carry keeps the first 12 events with a hood and drops `kind`/`from`/`to` (`finalizeCycleState.js:295-303`); Phase 3 counts each object with no POPID dedup (`generateCrisisBuckets.js:263-271`). The new chaos push therefore (a) counts every ambulance admission toward next Cycle's hood cluster, (b) double-counts a victim who also steps same-Cycle — as the heat path already does — and (c) can take one of the 12 slots from a later event. Expected until Task 9; not repaired here.
 
 **Test — `scripts/careJusticeIntake.test.js`** (synthetic ledger, no sheet; loader and stubs reuse `scripts/chaosCarsCitizenDial.test.js`):
@@ -341,6 +341,8 @@ Outside review: `docs/research/2026-09-29-codex-care-justice-task4-cut.md` — 7
 **Verify after build.** Test green; existing `chaosCarsCitizenDial`, `hospitalIncomePersistence`, `hospitalTalkback`, `careJusticeAccounting` tests green; `auditFunctionCollisions` 0; kimi adversarial diff review; bench fire, `Hospital_Ledger` read back, every new row matched to a receipt.
 
 ## Changelog
+
+- 2026-09-29 (engine-sheet) — Builder ruling: an admitted citizen's first health roll is the week after admission; built 7b7c17af, bench @145, live PROD @124.
 
 - 2026-09-29 (engine-sheet) — Builder approved the new file `phase05-citizens/judicialLifecycle.js` for Task 5; Task 4 live PROD @123.
 

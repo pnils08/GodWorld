@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": false,
+    "target": "es2020",
+    "module": "commonjs",
+    "noEmit": true
+  },
+  "exclude": [
+    "node_modules",
+    "output",
+    "logs",
+    "legacy"
+  ]
+}

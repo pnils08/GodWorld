@@ -200,7 +200,7 @@ Extends the 9 ruled columns (all kept) for gates R3–R5.
 
 `investigating` does not change the citizen's Status; only an arrest sets `detained`. One open case per POPID. A second arrest inside a sim year is found by counting this citizen's prior rows, no column needed.
 
-**Custody and care overlap (R4).** Custody and care are separate records; Status holds one value by precedence: `deceased` > `critical` > `hospitalized` > `detained` > `serious-condition` / `injured` / `recovering` > prior life-state. Release restores `PriorStatus` unless a higher-precedence state is live. A detained citizen who is hospitalized keeps the open case; the case clock keeps running.
+**Custody and care overlap (R4).** Custody and care are separate records; Status holds one value by precedence: `deceased` > the five health states (`critical`, `hospitalized`, `serious-condition`, `injured`, `recovering`) > `detained` > prior life-state. **Care wins the Status column; the open case row carries custody.** Reason: the ghost-bed reconcile (`buildCyclePacket.js:930-959`) closes the hospital row of any citizen whose Status is not a health state, and the health lifecycle (`generationalEventsEngine.js:382`) only advances citizens in one — `detained` above any of them would release a bed and stall recovery. A citizen in care with an open case is still in custody for the census and for participation (both are already gated out by the health state). When care ends, Status becomes `detained` if the case is still open, else `PriorStatus`. Release restores `PriorStatus` unless a health state is live. The case clock runs throughout.
 
 ### `Care_Justice_Census` — new tab (PROPOSED), 21 columns
 
@@ -216,7 +216,9 @@ Row key: `Cycle + System + GeographicScope + Neighborhood + IntakeType`.
 
 - **GeographicScope:** `neighborhood` (one of the table's hoods) · `unallocated` (city population minus the hood table's sum; Neighborhood blank; never a named place) · `city` (derived sum of the other two). The disjoint scopes are the hoods plus `unallocated`; a consumer picks one scope and never adds `city` to the others.
 - **PopulationBasis:** `hood-table` · `city-remainder` · `city-total`. `CoveredPopulation` is read each Cycle, never stored as a constant.
-- **OccupancyMeasure:** hospital `beds`; judicial `held`. `in-care` and open-case counts are read from the ledgers, not the census.
+- **OccupancyMeasure:** hospital `beds`; judicial `in-custody` = open cases with `StatusNow` `pending` or `held` (an arrest enters custody the Cycle it happens, so intake and occupancy move together). `in-care` and open-case counts are read from the ledgers, not the census.
+- **Judicial IntakeType** uses the ledger's `EntryType`: `arrest` · `all`. An intake is an arrest. An investigation is not an intake and not custody; it appears in the census only when it becomes an arrest, in that Cycle. Investigations that close `no-arrest` stay in the ledger alone.
+- **Exit vs transfer:** a `diverted` outcome with `TransferToId` set is a `TransfersOut` (and a `TransfersIn` on the hospital side); `diverted` without a bed, `released`, `held-served` and `deceased` are `Exits`. Never both.
 - **IntakeType:** the ledger enums plus `all`. One `all` row per System and scope is always written, zero included. A typed row is written only when any of its counts is nonzero; in a scope marked `complete`, an absent typed row means zero.
 - **Completeness:** `complete` · `incomplete` (a write in the set failed; reconciled next Cycle) · `unavailable` (source missing — counts blank, never 0).
 - Tracked citizens are counted inside the hood they live in, once. Other residents are numbers only: no POPID, no name.
@@ -229,7 +231,7 @@ Row key: `Cycle + System + GeographicScope + Neighborhood + IntakeType`.
 | B | `ClosingOccupancy = OpeningOccupancy + TotalIntakes + TransfersIn − Exits − TransfersOut + Corrections` |
 | C | `city` row = sum of hood rows + `unallocated`, per System and IntakeType |
 | D | Same `SourceEventId` folded twice = folded once |
-| E | Same POPID, second distinct receipt = second row, second intake |
+| E | Same POPID, second distinct receipt **after the first row closed** = second row, second intake. A second receipt while a row is open is a transition on that row, not an intake (the writer holds one open row per POPID, `buildCyclePacket.js:868-873`) |
 | F | `reconcile` receipt raises `Corrections` and occupancy, never `TotalIntakes` |
 | G | Missing source → `unavailable`, counts blank; known none → `0` |
 | H | Hospital→judicial or judicial→hospital transfer: one person, `TransfersOut` on one side, `TransfersIn` on the other, no intake on the receiving side |
@@ -242,10 +244,12 @@ Row key: `Cycle + System + GeographicScope + Neighborhood + IntakeType`.
 
 1. Sparse typed rows plus an always-written `all` row: is "absent = zero when complete" safe for every reader, or does it invite a reader to treat `incomplete` as zero?
 2. `unallocated` scope: does any invariant above force neighbourhood population to be invented?
-3. Status precedence: does any of the Status read sites break when `detained` sits below `hospitalized`?
+3. Status precedence: with care above `detained`, does the ghost-bed reconcile or the health lifecycle ever drop a bed or stall a recovery for a citizen with an open case?
 4. Row-id suffix `-2`: does `persistHospitalLedger_`'s POPID-keyed open index survive it unchanged?
 
 ## Changelog
+
+- 2026-09-29 (engine-sheet) — §Schema first-review fixes: care outranks `detained` in Status (ghost-bed reconcile would release the bed otherwise); judicial occupancy is `in-custody` not `held`; diverted is a transfer or an exit, never both; investigations are not intake.
 
 - 2026-09-29 (engine-sheet) — §Schema drafted from live sheet + code reads; reconciles Ruling 2 with gate R1, retires the `S.*Census` snapshot carrier, names two occupancy measures. DRAFT: advisor then one outside review before any build; new tab and test file await the builder.
 

@@ -146,3 +146,4 @@ Append-only. One line per entry, timestamp CDT. Path-specific commits of this fi
 - 08:32 rb: hourly check — no change. es idle, Task 5 draft untouched, guests idle. Waiting on builder.
 - 09:32 rb: hourly check — no change. es idle, Task 5 draft untouched, guests idle. Waiting on builder.
 - 10:32 rb: hourly check — builder is back: es is now running (Task 5 approved, PROD push of the engine.254 Task 4 wave in progress) and sits at a permission prompt for the clasp push. That approval is the builder's, not mine; left it. Guests idle.
+- 11:32 rb: hourly check — es is at a permission prompt for its post-push pull-back verify (read-only PROD pull into scratch + byte compare, flagged by the classifier for brace-quote syntax). The push itself went through with builder approval. I do not approve es's permission prompts; it needs the builder's Enter, or the wave is unverified. Guests idle.

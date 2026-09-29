@@ -6,7 +6,7 @@
 
 **NEXT[research-build]:** buildDeskPackets.js cut DONE (S502). Storyline_Tracker retirement ruling delivered to engine-sheet. Disk/RAM crash investigation DONE (chrome pane closed, tsconfig.json added, ~3GB old claude-mem backups removed). citizen_archive.json rebuilt live from Citizen_Media_Usage (0612dbe2); ARTICLE_INDEX_BY_POPID.md + buildPopidArticleIndex.js now unread, retire when wanted. agent-model-fit-test Task 2 (runner script) not started. codex `mcp login supermemory` open, low priority.
 
-**NEXT[kimi]:** OUT FOR THE WEEK — 403 weekly usage-limit error confirmed 2026-09-28 ~02:50 CDT, resets on its own 7-day window. Do not dispatch until confirmed back. Standing adversarial-review duty and the civic.38 `renew`-move hook check resume once it's back.
+**NEXT[kimi]:** BACK — usage available again (builder-confirmed 2026-09-29). Dispatchable. Standing adversarial-review duty and the civic.38 `renew`-move hook check resume.
 
 **NEXT[codex]:** Verify remaining board comparator/config/history export gaps against docs/plans/2026-09-19-civic-wake-game-loop.md §Task 4 engine rulings; coordinate runner edits with Kimi. Separate counter threshold-rounding defect recorded in the same plan §Health numerator amendment.
 

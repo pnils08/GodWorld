@@ -271,7 +271,7 @@ Row key: `Cycle + System + GeographicScope + Neighborhood + IntakeType`.
 | Sparse typed rows safe? | No → dense rows adopted |
 | `-2` suffix vs the POPID-keyed open index | Index unaffected; suffix generation is a writer change (Task 8) |
 
-### Task 4 cut — typed admission receipts (engine-sheet, 2026-09-29 — BUILT, bench pending)
+### Task 4 cut — typed admission receipts (engine-sheet, 2026-09-29 — BENCH-PROVEN, PROD push pending)
 
 Outside review: `docs/research/2026-09-29-codex-care-justice-task4-cut.md` — 7 findings, all verified against code and folded below. Task 4 produces typed receipts **in memory** (`S.hospitalEvents`); the ledger writer ignores the new fields until Task 8 stamps L–O.
 
@@ -336,11 +336,13 @@ Outside review: `docs/research/2026-09-29-codex-care-justice-task4-cut.md` — 7
 11. receipts fold through `careJusticeAccounting` with no throw (kind contract).
 12. fixed seed: chaos rng draw sequence identical before and after.
 
-**Built 2026-09-29.** Code by codex against this spec, heat `recovering` transition + two cause fixes by engine-sheet; kimi diff review SHIP (`docs/research/2026-09-29-kimi-care-justice-task4-diff.md`). Tests: hospitalIncomePersistence 48, chaosCarsCitizenDial 27, careJusticeAccounting 55, griefPeriod 38, educationLoop 120, hospitalTalkback 24; collisions 0. **Interim until Task 8:** the writer ignores `kind` — an intake against a ghost open row books as a transition, a transition with no open row appends and counts an admit. Bench fire still owed.
+**Built 2026-09-29.** Code by codex against this spec, heat `recovering` transition + two cause fixes by engine-sheet; kimi diff review SHIP (`docs/research/2026-09-29-kimi-care-justice-task4-diff.md`). Tests: hospitalIncomePersistence 48, chaosCarsCitizenDial 27, careJusticeAccounting 55, griefPeriod 38, educationLoop 120, hospitalTalkback 24; collisions 0. **Interim until Task 8:** the writer ignores `kind` — an intake against a ghost open row books as a transition, a transition with no open row appends and counts an admit. **Bench (SANDBOX 0908 @144 = `f7360a4e`, C128–C133, 0 new Engine_Errors):** C131 ambulance hit a `Retired` citizen (POP-00735) → no flip, no row (guard held); C133 ambulance `medical_emergency` on POP-01187 died the same Cycle → row `H-C133-POP-01187` opened and closed `deceased` — the lost-admission path, repaired. No ordinary-health or heat admission rolled in six Cycles; those sites are covered by tests only.
 
 **Verify after build.** Test green; existing `chaosCarsCitizenDial`, `hospitalIncomePersistence`, `hospitalTalkback`, `careJusticeAccounting` tests green; `auditFunctionCollisions` 0; kimi adversarial diff review; bench fire, `Hospital_Ledger` read back, every new row matched to a receipt.
 
 ## Changelog
+
+- 2026-09-29 (engine-sheet) — Task 4 bench-proven on SANDBOX 0908 @144 C128–C133; PROD push waits for the builder (overnight rail).
 
 - 2026-09-29 (engine-sheet) — Task 4 built: typed receipts at 4 sites, kimi review SHIP; bench pending.
 

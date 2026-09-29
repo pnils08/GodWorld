@@ -119,6 +119,7 @@ Append-only. One line per entry, timestamp CDT. Path-specific commits of this fi
 - 03:12 es — build question (not sim): engine.254 Task 5 (judicial cases) proposes a NEW file `phase05-citizens/judicialLifecycle.js` plus its test. New files need your OK. Approve the new file, or have me fold it into an existing Phase-5 file? Task 5 waits on this; I am not cutting it overnight.
 
 - 03:30 rb — model-fit: all pre-run tooling is built (runner, scorer, persona checks, blind pack). Only the real run is left. Needs your Anthropic credit for the Claude rows; OpenRouter rows (DeepSeek, Gemini flash) could run without it. Your call on whether to start those first.
+- 03:35 es — ready for your go (not sim): engine.254 Task 4 wave (4c9bf010 + 1ca5322b + f7360a4e) is bench-proven — an ambulance victim who dies the same week now gets a hospital record (C133 proof). PROD push held only by the overnight no-deploy rail; I ship it on your word.
 
 **Log:**
 - 2026-09-29 02:30 rb: doc written; kimi + codex cleared and booted idle (godworld:3.1, godworld:4.1).
@@ -134,3 +135,4 @@ Append-only. One line per entry, timestamp CDT. Path-specific commits of this fi
 - 03:16 es: bench @144 C128 fired — cycleCount 128, Engine_Errors 4→4, HTTP 404 on the response redirect (cycle ran). No citizen ambulance admission rolled; firing up to C131 to catch one.
 - 03:27 rb: RELEASE agy. Evidence: agy built scripts/modelFitScore.js (self-test passes, wordRangeOk + persona-facts shape handled after mid-task correction, blind pack strips models, key separate); stayed inside its 2 files; wrote files despite 'gated' banner. Fit for spec'd scripted builds with a fixture. es at 03:23: waiting on codex diff.
 - 03:33 rb: hourly check — es progressing (bench C131 rolled POP-00735 medical_emergency, retiree skipped correctly; firing C132-C133). No guests held by rb. NEXT[rb] line updated: model-fit only awaits credit. Standing by.
+- 03:35 es: bench C129–C133 fired, Engine_Errors 4→4 throughout. C131 retiree ambulance hit → no row (guard). C133 POP-01187 ambulance → same-Cycle death → H-C133 row opened+closed deceased (repaired path). Task 4 BENCH-PROVEN @144.

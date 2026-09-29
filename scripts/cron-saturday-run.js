@@ -410,7 +410,12 @@ function aggregateStorylineSignals(set) {
           if (!agg.hoods.includes(h)) agg.hoods.push(h);
         }
       }
-      for (const n of (intake.names || [])) if (n.popid && !agg.citizens.includes(n.popid)) agg.citizens.push(n.popid);
+      // The people the piece is ABOUT or QUOTES. `mentioned` names used to ride
+      // along too, which put four much-quoted citizens on 11-24 threads each.
+      for (const n of (intake.names || [])) {
+        if (!n.popid || n.role === 'mentioned') continue;
+        if (!agg.citizens.includes(n.popid)) agg.citizens.push(n.popid);
+      }
       const desk = entry.sidecar.desk;
       if (desk && !agg.desks.includes(desk)) agg.desks.push(desk);
     }
@@ -421,10 +426,22 @@ function aggregateStorylineSignals(set) {
     b.articles.length - a.articles.length);
 }
 
-// Pure merge: existing sheet data (headers + rows) × week's signals → row ops.
-// Update rows keep their sheet position; new slugs append. Counts accumulate;
-// list columns dedupe under LEDGER_LIST_CAP.
-function mergeStorylineLedger(existing, signals, cycle) {
+// engine.270 — a storyline ID is an ENGINE ID: a crisis arc or an initiative
+// stage. Anything else is the retired `hood-citizen-kind` slug.
+const ENGINE_STORYLINE_ID = /^(CRISIS-\d+-[A-Z0-9]+|[A-Z]+-\d+:.+)$/;
+function isEngineStorylineId(id) { return ENGINE_STORYLINE_ID.test(String(id || '')); }
+
+// Pure merge: existing sheet data (headers + rows) × week's coverage signals ×
+// the engine's storyline registry → row ops. Update rows keep their sheet
+// position; new IDs append. Counts accumulate; list columns dedupe under
+// LEDGER_LIST_CAP.
+//
+// Status belongs to the ENGINE. For a registry entry it is the registry's
+// status, covered or not. LastCycle means last COVERAGE cycle: a registry
+// upsert with no article leaves it alone, and a storyline nobody has covered
+// yet carries it blank with Articles 0 — the "did we miss it" reading.
+function mergeStorylineLedger(existing, signals, cycle, registry) {
+  const reg = new Map((Array.isArray(registry) ? registry : []).filter(e => e && e.id).map(e => [e.id, e]));
   const h = (existing[0] && existing[0].length ? existing[0] : STORYLINE_LEDGER_HEADERS).map(c => String(c).trim());
   const idx = {}; h.forEach((c, i) => { idx[c] = i; });
   const byId = new Map();
@@ -439,12 +456,16 @@ function mergeStorylineLedger(existing, signals, cycle) {
     return list.join(',');
   };
   const statusFor = (s, prev) => {
+    const e = reg.get(s.slug);
+    if (e) return e.status === 'closed' ? 'closed' : 'open';
     if (s.advanced + s.opened > 0) return 'open';
     if (s.closed > 0) return 'closed';
     return prev || 'open';   // reference-only weeks never flip status
   };
   const updates = [], appends = [];
+  const covered = new Set();
   for (const s of signals) {
+    covered.add(s.slug);
     const cur = byId.get(s.slug);
     if (cur) {
       const row = cur.r.slice();
@@ -464,7 +485,7 @@ function mergeStorylineLedger(existing, signals, cycle) {
       appends.push(h.map(col => {
         switch (col) {
           case 'StorylineId': return s.slug;
-          case 'FirstCycle':  return String(cycle);
+          case 'FirstCycle':  return String((reg.get(s.slug) && reg.get(s.slug).startCycle) || cycle);
           case 'LastCycle':   return String(cycle);
           case 'Status':      return statusFor(s, null);
           case 'Advanced':    return s.advanced;
@@ -480,27 +501,69 @@ function mergeStorylineLedger(existing, signals, cycle) {
       }));
     }
   }
+  // Registry entries nobody covered this week: the row still exists and its
+  // status still follows the engine.
+  for (const e of reg.values()) {
+    if (covered.has(e.id)) continue;
+    const status = e.status === 'closed' ? 'closed' : 'open';
+    const cur = byId.get(e.id);
+    if (cur) {
+      if (String(cur.r[idx.Status] || '').trim() === status) continue;
+      const row = cur.r.slice();
+      while (row.length < h.length) row.push('');
+      row[idx.Status] = status;
+      updates.push({ sheetRow: cur.sheetRow, row });
+    } else {
+      appends.push(h.map(col => {
+        switch (col) {
+          case 'StorylineId': return e.id;
+          case 'FirstCycle':  return String(e.startCycle || cycle);
+          case 'LastCycle':   return '';
+          case 'Status':      return status;
+          case 'Advanced': case 'Opened': case 'Closed': case 'Referenced': case 'Articles': return 0;
+          case 'Hoods':       return (e.hoods || []).slice(0, LEDGER_LIST_CAP).join(',');
+          case 'Desks':       return (e.desks || []).slice(0, LEDGER_LIST_CAP).join(',');
+          default:            return '';
+        }
+      }));
+    }
+  }
   return { updates, appends };
+}
+
+function loadStorylineRegistry(cycle) {
+  try {
+    const signal = JSON.parse(fs.readFileSync(path.join(ROOT, 'output', 'desk_signal_c' + cycle + '.json'), 'utf8'));
+    return Array.isArray(signal.storylineRegistry) ? signal.storylineRegistry : [];
+  } catch (_) { return []; }
 }
 
 async function stepSignals(cycle) {
   console.log('--- step 6b: storyline signals → Storyline_Ledger ---');
-  const signals = aggregateStorylineSignals(loadStagedSetExcludingCanonViolations(cycle).concat(loadArcSeeds(cycle)));
+  const registry = loadStorylineRegistry(cycle);
+  const all = aggregateStorylineSignals(loadStagedSetExcludingCanonViolations(cycle).concat(loadArcSeeds(cycle)));
+  // Sidecars staged before engine.270 still carry `hood-citizen-kind` slugs.
+  // They are not storylines; they stay in the signal file as a count only.
+  const signals = all.filter(s => isEngineStorylineId(s.slug));
+  const retired = all.length - signals.length;
+  if (retired) console.log(retired + ' retired-format slug(s) ignored (not engine storylines)');
+  if (!registry.length) console.log('WARNING: no storyline registry in desk_signal_c' + cycle + '.json — status cannot follow the engine this run');
   const outPath = path.join(ROOT, 'output', 'storyline_signal_c' + cycle + '.json');
-  fs.writeFileSync(outPath, JSON.stringify({ cycle: String(cycle), signals }, null, 2));
+  fs.writeFileSync(outPath, JSON.stringify({ cycle: String(cycle), signals, registry: registry.map(e => ({ id: e.id, status: e.status, stage: e.stage })), retiredSlugsIgnored: retired }, null, 2));
   console.log(signals.length + ' storyline(s) → ' + path.relative(ROOT, outPath));
   for (const s of signals.slice(0, 8)) {
     console.log('  ' + s.slug + ': ' + s.advanced + ' advanced / ' + s.opened + ' opened / ' +
       s.closed + ' closed / ' + s.referenced + ' referenced (' + s.articles.length + ' article(s))');
   }
-  if (!signals.length) return { signals: 0, written: 0 };
+  if (!signals.length && !registry.length) return { signals: 0, written: 0 };
   if (!APPLY) {
-    console.log('(dry-run) would upsert ' + signals.length + ' row(s) into ' + STORYLINE_LEDGER_TAB);
+    console.log('(dry-run) would merge ' + signals.length + ' coverage signal(s) and ' + registry.length +
+      ' registry entr(ies) into ' + STORYLINE_LEDGER_TAB);
     return { signals: signals.length, written: 0 };
   }
   const sheets = require(path.join(ROOT, 'lib', 'sheets'));
   const data = await sheets.getRawSheetData(STORYLINE_LEDGER_TAB);
-  const { updates, appends } = mergeStorylineLedger(data, signals, cycle);
+  const { updates, appends } = mergeStorylineLedger(data, signals, cycle, registry);
   // startCol is 0-INDEXED (lib/sheets.columnIndexToLetter): 0 = col A. Passing 1
   // here wrote the 12-value row at B..M and left the stale slug in A, so every
   // cross-week update shifted the row one column right (5 rows corrupted on the

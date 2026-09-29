@@ -156,8 +156,12 @@ function reconcileVerdict({ root = ROOT, verdictPath, apply = false, now = new D
     actions.push('stage ' + draftAbs + ' -> ' + stagedArticle);
     if (apply) fs.copyFileSync(draftAbs, stagedArticle);
 
-    const { buildIntakeSidecar } = require('./cron-desk-run');
-    const intake = buildIntakeSidecar(fs.readFileSync(draftAbs, 'utf8'), quotesFromState(state));
+    const { buildIntakeSidecar, storylineTagFor } = require('./cron-desk-run');
+    // engine.270: the storyline is resolved from the assignment's ref, which the
+    // wake-3 state carries as signal.src.
+    const storyRef = state && state.signal && state.signal.src;
+    const intake = buildIntakeSidecar(fs.readFileSync(draftAbs, 'utf8'), quotesFromState(state),
+      storyRef ? storylineTagFor({ ref: storyRef }, cycle) : null);
     if (!intake) throw new Error('reviewed Article has no parseable INTAKE block');
     let priorSidecar = null;
     if (fs.existsSync(stagedSidecar)) {

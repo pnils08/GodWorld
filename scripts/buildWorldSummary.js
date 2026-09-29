@@ -752,27 +752,166 @@ const RIPPLE_LANE_MAP = {
   'edition-coverage': 'business'
 };
 const RIPPLE_DEFAULT_LANE = 'business';
-const DESK_SIGNAL_VERSION = '1.2';
+const DESK_SIGNAL_VERSION = '1.3';
 
-// ── Open-thread lane (S407) ────────────────────────────────────────────────
-// The reporter's INTAKE tail asks for a storyline slug and one of
-// advanced/opened/closed/referenced (cron-desk-run.js), and the Saturday cron
-// accumulates those slugs into Storyline_Ledger. Nothing ever read that tab
-// back, so every writer met the cycle blind: a fresh slug each week, `closed`
-// never used once across 23 threads, and no story with a way to end. This lane
-// is the return path — the desk sees what is already running on its beat.
+// ── Storyline registry (engine.270) ────────────────────────────────────────
+// A storyline is an ENGINE EVENT with its own ID and its own ending. Two
+// sources today: crisis arcs (generateCrisisBuckets_, CRISIS-<cycle>-<hood>)
+// and initiative STAGES (<InitiativeID>:<ImplementationPhase>). An initiative
+// itself never ends — no Initiative_Tracker row holds a terminal status — so
+// the stage is the unit that starts and stops.
 //
-// SHOWING IS NOT VALIDATING. The 2026-08-05 anti-pigeonhole contract holds:
-// slugs stay reporter-authored free-form kebab, checked against no list. A
-// thread here is a continuation CANDIDATE, never a required key.
+// This replaces the S407 open-thread lane. Those threads were keyed
+// `hood + first quoted citizen + signal kind`: 79 of 97 lived one cycle, none
+// ever closed, and the newsroom filed 11 West Oakland threads during
+// CRISIS-105-WESTOAKL without one of them carrying its ID.
 //
-// Dormancy is derived here, never stored — the ledger tab deliberately carries
-// no IsStale column (that is what rotted the retired Storyline_Tracker). The
-// windows match the tracker's tuning so the semantics carry over: live under 5
-// cycles since coverage, dormant 5–14, dropped at 15+.
-const THREAD_DORMANT_AFTER = 5;
-const THREAD_STALE_AFTER = 15;
-const THREAD_LANE_CAP = 12;
+// The engine opens and closes a storyline. The newsroom covers it. Status is
+// never a writer's call and never a model marker.
+const STORYLINE_CRISIS_FLOOR = 103;   // first cycle of the Storyline_Ledger era
+const STORYLINE_CLOSED_LINGER = 1;    // a closed arc stays listed this many cycles past its end
+const CRISIS_DOMAIN_DESK = {
+  SAFETY: 'civic', HEALTH: 'civic', CIVIC: 'civic', INFRASTRUCTURE: 'civic',
+  ECONOMIC: 'business', BUSINESS: 'business',
+  CULTURE: 'culture', COMMUNITY: 'culture', SPORTS: 'sports'
+};
+const STORYLINE_DESKS = ['civic', 'sports', 'culture', 'business'];
+
+function storylineRefTag(id) { return '; storyline ' + id; }
+
+// Pure: engine state -> registry entries. `ledgerRows` is Storyline_Ledger as
+// objects; it supplies the first-observed cycle of an initiative stage and the
+// open stage rows the tracker has since moved past.
+function buildStorylineRegistry(input) {
+  const { arcRows = [], liveArcs = [], initiatives = [], ledgerRows = [], cycle } = input || {};
+  const num = v => { const n = parseInt(v, 10); return Number.isFinite(n) ? n : 0; };
+  const ledgerById = new Map();
+  for (const r of (Array.isArray(ledgerRows) ? ledgerRows : [])) {
+    const id = String(r.StorylineId || '').trim();
+    if (id) ledgerById.set(id, r);
+  }
+  const out = [];
+
+  // ── crisis arcs ──
+  const byArc = new Map();
+  for (const r of (Array.isArray(arcRows) ? arcRows : [])) {
+    const id = String(r.ArcId || '').trim();
+    if (!/^CRISIS-/.test(id)) continue;
+    if (num(r.CycleCreated) < STORYLINE_CRISIS_FLOOR) continue;
+    if (num(r.Cycle) > cycle) continue;          // replay-safe: a past cycle never sees its future
+    if (!byArc.has(id)) byArc.set(id, []);
+    byArc.get(id).push(r);
+  }
+  for (const [id, rows] of byArc) {
+    rows.sort((a, b) => num(a.Cycle) - num(b.Cycle));
+    const latest = rows[rows.length - 1];
+    const live = (Array.isArray(liveArcs) ? liveArcs : []).find(a => a && a.arcId === id) || null;
+    const ended = rows.find(r => num(r.CycleResolved) > 0 || String(r.Phase || '').toLowerCase() === 'resolved');
+    const endCycle = ended ? (num(ended.CycleResolved) || num(ended.Cycle)) : null;
+    if (endCycle && cycle - endCycle > STORYLINE_CLOSED_LINGER) continue;
+    const hood = String(latest.Neighborhood || '').trim();
+    const named = rows.slice().reverse().map(r => String(r.Summary || ''))
+      .map(t => t.indexOf(' \u2014 ') > 0 ? t.slice(0, t.indexOf(' \u2014 ')).trim() : '')
+      .find(t => t && t.length <= 60);
+    const startCycle = num(latest.CycleCreated);
+    const desk = CRISIS_DOMAIN_DESK[String(latest.DomainTag || '').toUpperCase()];
+    out.push({
+      id,
+      type: 'crisis',
+      name: (live && live.name) || named || ((hood || 'City') + ' crisis'),
+      stage: endCycle ? 'resolved' : String((live && live.phase) || latest.Phase || '').toLowerCase(),
+      status: endCycle ? 'closed' : 'open',
+      startCycle,
+      endCycle,
+      age: (endCycle || cycle) - startCycle + 1,
+      hoods: hood ? [hood] : [],
+      desks: Array.from(new Set(['civic', desk].filter(Boolean))),
+      ref: `Event_Arc_Ledger (ArcId ${id})`,
+      hasLedgerRow: ledgerById.has(id)
+    });
+  }
+
+  // ── initiative stages ──
+  const currentStage = new Map();
+  for (const it of (Array.isArray(initiatives) ? initiatives : [])) {
+    const initId = String(it.InitiativeID || '').trim();
+    const stage = String(it.ImplementationPhase || it.Status || '').trim();
+    if (!initId || !stage) continue;
+    currentStage.set(initId, { stage, it });
+    const id = initId + ':' + stage;
+    const row = ledgerById.get(id);
+    const startCycle = row && num(row.FirstCycle) ? num(row.FirstCycle) : cycle;
+    out.push({
+      id,
+      type: 'initiative-stage',
+      initiativeId: initId,
+      name: String(it.Name || initId).trim() + ' \u2014 ' + stage,
+      stage,
+      status: 'open',
+      startCycle,
+      endCycle: null,
+      age: cycle - startCycle + 1,
+      firstSeen: !row,
+      hoods: String(it.AffectedNeighborhoods || '').split(',').map(h => h.trim()).filter(Boolean),
+      desks: ['civic'],
+      ref: `Initiative_Tracker (InitiativeID ${initId})`,
+      hasLedgerRow: Boolean(row)
+    });
+  }
+  // A stage row still open on the ledger that the tracker has moved past: the
+  // stage ENDED. Listed closed for this cycle so its ending gets covered; the
+  // Saturday run closes the row and it drops out of the next build.
+  for (const [id, row] of ledgerById) {
+    const m = id.match(/^([A-Z]+-\d+):(.+)$/);
+    if (!m) continue;
+    if (String(row.Status || '').trim().toLowerCase() === 'closed') continue;
+    const cur = currentStage.get(m[1]);
+    if (!cur || cur.stage === m[2]) continue;
+    const startCycle = num(row.FirstCycle) || cycle;
+    out.push({
+      id,
+      type: 'initiative-stage',
+      initiativeId: m[1],
+      name: String(cur.it.Name || m[1]).trim() + ' \u2014 ' + m[2],
+      stage: m[2],
+      movedTo: cur.stage,
+      status: 'closed',
+      startCycle,
+      endCycle: cycle,
+      age: cycle - startCycle + 1,
+      hoods: String(cur.it.AffectedNeighborhoods || '').split(',').map(h => h.trim()).filter(Boolean),
+      desks: ['civic'],
+      ref: `Initiative_Tracker (InitiativeID ${m[1]})`,
+      hasLedgerRow: true
+    });
+  }
+  return out;
+}
+
+// Pure: which registry entry is this story ABOUT? Evidence only — the story's
+// own `ref` string, which every assignment path already carries. Never who was
+// quoted, never the hood alone. null = cycle reaction, no storyline.
+function resolveStoryline(story, registry) {
+  const ref = String((story && story.ref) || '');
+  const list = Array.isArray(registry) ? registry : [];
+  if (!ref || !list.length) return null;
+  const tag = ref.match(/;\s*storyline\s+(\S+)/);
+  if (tag) {
+    const hit = list.find(e => e.id === tag[1]);
+    if (hit) return hit;
+  }
+  const arc = ref.match(/\bCRISIS-\d+-[A-Z0-9]+\b/);
+  if (arc) {
+    const hit = list.find(e => e.id === arc[0]);
+    if (hit) return hit;
+  }
+  const init = ref.match(/InitiativeID\s+([A-Z]+-\d+)/);
+  if (init) {
+    const hit = list.find(e => e.type === 'initiative-stage' && e.initiativeId === init[1] && e.status === 'open');
+    if (hit) return hit;
+  }
+  return null;
+}
 
 // One-line label hygiene: single line, no table-breaking pipes doubled up.
 function signalLabel(...bits) {
@@ -877,12 +1016,19 @@ function extractPopids(...sources) {
   return [...ids].sort();
 }
 
-function rippleEntry(r, cycle) {
+function rippleEntry(r, cycle, stageByName) {
   const t = r.CauseType || 'untyped';
+  // engine.270: a ripple caused by a crisis arc or an initiative names its
+  // storyline in the ref. Live CauseId is the arc ID for crisis-event and the
+  // initiative's full Name for initiative-implementation.
+  const causeId = String(r.CauseId || '').trim();
+  let tag = '';
+  if (/^CRISIS-\d+-[A-Z0-9]+$/.test(causeId)) tag = storylineRefTag(causeId);
+  else if (t === 'initiative-implementation' && stageByName && stageByName.has(causeId)) tag = stageByName.get(causeId);
   const e = {
     kind: 'ripple',
     causeType: t,
-    ref: `Ripple_Ledger cycle ${cycle} (CauseType ${t}); rendered: world_summary_c${cycle}.md "## What Moved" > "### ${t}"`,
+    ref: `Ripple_Ledger cycle ${cycle} (CauseType ${t}); rendered: world_summary_c${cycle}.md "## What Moved" > "### ${t}"` + tag,
     label: signalLabel(r.EffectType, r.CauseDetail)
   };
   if (r.Neighborhood) e.hood = String(r.Neighborhood).trim();
@@ -973,73 +1119,10 @@ function handleEntry(h) {
 
 // Pure: builds the desk-signal object from the same loaded cycle data the
 // summary emitters consume. No sheet reads of its own.
-// Pure: Storyline_Ledger rows -> per-lane open-thread entries. Rows carry the
-// desk that filed them (`Desks`, a comma list written from the article sidecar),
-// so routing is a direct lane match; an unrouted thread falls to civic rather
-// than being dropped, on the same bug-is-event reachability rule the anomaly
-// lane uses above. Closed threads and threads stale past THREAD_STALE_AFTER are
-// omitted — a closed story is finished, and a 15-cycle silence is the honest
-// reading that the retired tracker called `abandoned`.
-function openThreadEntries(ledgerRows, cycle, threads, notes) {
-  const rows = Array.isArray(ledgerRows) ? ledgerRows : [];
-  if (!rows.length) {
-    notes.push('no Storyline_Ledger rows — open-thread entries omitted from every lane');
-    return;
-  }
-  const num = v => { const n = parseInt(v, 10); return Number.isFinite(n) ? n : 0; };
-  const staged = [];
-  let unrouted = 0;
-  for (const r of rows) {
-    const slug = String(r.StorylineId || '').trim();
-    if (!slug) continue;
-    if (String(r.Status || '').trim().toLowerCase() === 'closed') continue;
-    const last = num(r.LastCycle);
-    const age = cycle - last;
-    if (age >= THREAD_STALE_AFTER) continue;
-    const desks = String(r.Desks || '').split(',').map(d => d.trim().toLowerCase()).filter(Boolean);
-    let targets = desks.filter(d => Object.prototype.hasOwnProperty.call(threads, d));
-    if (!targets.length) { targets = ['civic']; unrouted++; }
-    const hood = String(r.Hoods || '').trim();
-    const popids = String(r.Citizens || '').split(',').map(x => x.trim()).filter(Boolean);
-    const moves = signalLabel(
-      num(r.Advanced) ? `advanced ${num(r.Advanced)}` : null,
-      num(r.Opened) ? `opened ${num(r.Opened)}` : null,
-      num(r.Referenced) ? `referenced ${num(r.Referenced)}` : null
-    ).replace(/ \| /g, ', ');
-    const entry = {
-      kind: 'thread',
-      slug,
-      ref: `Storyline_Ledger (StorylineId ${slug})`,
-      label: signalLabel(
-        slug,
-        `C${num(r.FirstCycle)}\u2192C${last}`,
-        `${num(r.Articles)} article(s)`,
-        moves || null,
-        age >= THREAD_DORMANT_AFTER ? `DORMANT — ${age} cycle(s) since coverage` : null
-      ),
-      lastCycle: last,
-      articles: num(r.Articles)
-    };
-    if (hood) entry.hood = hood;
-    if (popids.length) entry.popids = popids;
-    for (const t of targets) staged.push({ lane: t, entry, age });
-  }
-  // Freshest first, then most-covered — a thread the desk touched last cycle
-  // outranks one it left three cycles ago.
-  staged.sort((a, b) => a.age - b.age || b.entry.articles - a.entry.articles);
-  const perLane = {};
-  for (const s of staged) {
-    perLane[s.lane] = (perLane[s.lane] || 0) + 1;
-    if (perLane[s.lane] > THREAD_LANE_CAP) continue;
-    threads[s.lane].push(s.entry);
-  }
-  if (unrouted) notes.push(`${unrouted} Storyline_Ledger thread(s) carried no known desk — routed to civic`);
-}
-
 function emitDeskSignal(cycle, data) {
   // Degraded-input guards: never throw on missing pieces — emit what exists.
   const { auditJson = {}, rippleAll, sportsAll = [], neighborhoodsC = [], rileyCurr = {},
-    storylineLedger = [] } = data;
+    storylineLedger = [], arcRows = [], liveArcs = [] } = data;
   const notes = [];
   const lanes = { civic: [], sports: [], culture: [], business: [] };
 
@@ -1090,10 +1173,22 @@ function emitDeskSignal(cycle, data) {
   const snapIT = auditJson.snapshots && auditJson.snapshots.Initiative_Tracker;
   const initiatives = Array.isArray(snapIT) ? snapIT : [];
   if (!initiatives.length) notes.push('no Initiative_Tracker snapshot in engine_audit — initiative/vote entries omitted');
+  // engine.270: the assignment's ref names the storyline it belongs to. The ref
+  // string is the one field every downstream path carries intact.
+  const stageTag = it => {
+    const stage = String(it.ImplementationPhase || it.Status || '').trim();
+    return (it.InitiativeID && stage) ? storylineRefTag(it.InitiativeID + ':' + stage) : '';
+  };
+  const stageByName = new Map();
+  for (const it of initiatives) {
+    const tag = stageTag(it);
+    if (tag && it.Name) stageByName.set(String(it.Name).trim(), tag);
+  }
   for (const it of initiatives) {
     lanes.civic.push({
       kind: 'initiative',
-      ref: `Initiative_Tracker (InitiativeID ${it.InitiativeID}); snapshot: engine_audit_c${cycle}.json snapshots.Initiative_Tracker`,
+      ref: `Initiative_Tracker (InitiativeID ${it.InitiativeID}); snapshot: engine_audit_c${cycle}.json snapshots.Initiative_Tracker`
+        + stageTag(it),
       label: signalLabel(it.Name, `Status ${it.Status || '—'}`, it.ImplementationPhase ? `phase ${it.ImplementationPhase}` : null),
       hood: it.AffectedNeighborhoods || undefined
     });
@@ -1109,7 +1204,7 @@ function emitDeskSignal(cycle, data) {
     if (pending.length) {
       lanes.civic.push({
         kind: 'vote',
-        ref: `Initiative_Tracker (InitiativeID ${it.InitiativeID})`,
+        ref: `Initiative_Tracker (InitiativeID ${it.InitiativeID})` + stageTag(it),
         label: signalLabel(it.Name, pending.join('; '))
       });
     }
@@ -1188,19 +1283,20 @@ function emitDeskSignal(cycle, data) {
     const lane = Object.prototype.hasOwnProperty.call(RIPPLE_LANE_MAP, r.CauseType)
       ? RIPPLE_LANE_MAP[r.CauseType]
       : RIPPLE_DEFAULT_LANE;
-    lanes[lane].push(rippleEntry(r, cycle));
+    lanes[lane].push(rippleEntry(r, cycle, stageByName));
   }
   if (!cycleRipples.length) notes.push('no Ripple_Ledger rows this cycle — ripple entries empty across lanes');
 
-  // ── open threads: what is already running on this desk's beat ──
-  // Deliberately NOT in `lanes`. Six scripts consume desk_signal lanes and treat
-  // every entry as an assignable cycle signal (newsroom-fanout seeds, the safety
-  // / civic-domain / Jax slices, stink-scanner, sportsSubstrate) — a thread is a
-  // summary of past coverage, not an event that happened this cycle, and handing
-  // one to a slice as its story ref would invent a beat out of a ledger row.
-  // It rides as its own top-level key so exactly one reader sees it.
-  const threads = { civic: [], sports: [], culture: [], business: [] };
-  openThreadEntries(storylineLedger, cycle, threads, notes);
+  // ── storylines: engine events with a start and an end (engine.270) ──
+  // Deliberately NOT in `lanes`. Six scripts consume the lanes and treat every
+  // entry as an assignable cycle signal; a storyline is a running state, not
+  // something that happened this cycle. It rides as its own top-level key.
+  const registry = buildStorylineRegistry({ arcRows, liveArcs, initiatives, ledgerRows: storylineLedger, cycle });
+  const storylines = { civic: [], sports: [], culture: [], business: [] };
+  for (const e of registry) {
+    for (const d of e.desks) if (Object.prototype.hasOwnProperty.call(storylines, d)) storylines[d].push(e);
+  }
+  if (!registry.length) notes.push('storyline registry empty — no crisis arc and no initiative stage on record');
 
   // Drop undefined optional fields for a clean artifact.
   for (const lane of Object.keys(lanes)) {
@@ -1226,8 +1322,8 @@ function emitDeskSignal(cycle, data) {
       cycle,
       script: `buildWorldSummary.js v${SCRIPT_VERSION} (deskSignal v${DESK_SIGNAL_VERSION})`,
       builtAt: new Date().toISOString(),
-      laneRule: 'civic=anomalies/votes/initiatives, sports=feed, culture=hoods/faith, business=ripples-default; ripples route by CauseType (rippleLaneMap); threads route by Storyline_Ledger.Desks',
-      threadContract: 'openThreads (a SIBLING of lanes, never inside one) are OPEN STORYLINES from Storyline_Ledger — continuation CANDIDATES, not a controlled vocabulary. Reuse the slug verbatim to advance or close a thread; mint a new one freely when the piece is new. Counts are verbatim ledger columns; dormancy is derived from LastCycle age and never stored.',
+      laneRule: 'civic=anomalies/votes/initiatives, sports=feed, culture=hoods/faith, business=ripples-default; ripples route by CauseType (rippleLaneMap); storylines route by engine type (crisis: civic + its domain desk; initiative stage: civic)',
+      storylineContract: 'storylines (a SIBLING of lanes, never inside one) are ENGINE EVENTS with their own ID, stage and ending: crisis arcs and initiative stages. The engine opens and closes them; a desk covers them. An assignment belongs to a storyline only when its ref names it (`; storyline <ID>`).',
       rippleLaneMap: RIPPLE_LANE_MAP,
       counts: Object.fromEntries(Object.entries(lanes).map(([k, v]) => [k, v.length])),
       contract: 'POINTERS ONLY — labels are verbatim source strings (they may embed source-native deltas); no derived stats, no career numbers, no angles. The desk reaches the raw material itself.',
@@ -1235,7 +1331,8 @@ function emitDeskSignal(cycle, data) {
       notes
     },
     lanes,
-    openThreads: threads,
+    storylines,
+    storylineRegistry: registry,
     ...(bylineCandidates ? { bylineCandidates } : {})
   };
 }
@@ -1280,7 +1377,9 @@ async function loadCycleData(cycle) {
     lhlAll,
     householdAll,
     storylineLedger,
-    worldConfigAll
+    worldConfigAll,
+    arcRows,
+    carryForward
   ] = await Promise.all([
     sheets.getSheetAsObjects('Riley_Digest'),
     sheets.getSheetAsObjects('Oakland_Sports_Feed'),
@@ -1301,8 +1400,13 @@ async function loadCycleData(cycle) {
     sheets.getSheetAsObjects('Storyline_Ledger').catch(() => []),
     // 2026-09-09: hospital capacity is a World_Config key, not a constant —
     // the engine binds at it too (applyDemographicDrift_ W2b hospitalConfig).
-    sheets.getSheetAsObjects('World_Config').catch(() => [])
+    sheets.getSheetAsObjects('World_Config').catch(() => []),
+    // engine.270: storyline registry sources — crisis arc milestones and the
+    // engine's carried live arcs (their stage between milestones).
+    sheets.getSheetAsObjects('Event_Arc_Ledger').catch(() => []),
+    sheets.getSheetAsObjects('Carry_Forward_Store').catch(() => [])
   ]);
+  const liveArcs = liveCrisisArcs(carryForward, cycle);
 
   const rileyCurr = rileyAll.find(r => String(r.Cycle) === String(cycle));
   if (!rileyCurr) {
@@ -1330,10 +1434,24 @@ async function loadCycleData(cycle) {
     rileyCurr, rileyPrev1, rileyPrev2,
     sportsAll, calendarAll, chaosAll, hospitalAll,
     rippleAll, lhlAll, householdAll, storylineLedger,
+    arcRows, liveArcs,
     worldPopCurr, neighborhoodsC, approvalRows, priorApprovals,
     bylinePools, bylineUsage,
     worldConfigAll
   };
+}
+
+// Carry_Forward_Store is a 3-slot ring per key. Take the newest
+// PREV_CYCLE_STATE_JSON row at or before this cycle; its crisisArcs are the
+// arcs still live after that cycle ran. Fail-soft [] — a bench without the tab
+// still ships a registry from the milestone rows.
+function liveCrisisArcs(rows, cycle) {
+  const hits = (Array.isArray(rows) ? rows : [])
+    .filter(r => r.Key === 'PREV_CYCLE_STATE_JSON' && parseInt(r.Cycle, 10) <= cycle)
+    .sort((a, b) => parseInt(b.Cycle, 10) - parseInt(a.Cycle, 10));
+  if (!hits.length) return [];
+  const state = parseJsonField(hits[0].JSON, {});
+  return Array.isArray(state && state.crisisArcs) ? state.crisisArcs : [];
 }
 
 async function buildWorldSummary(cycle, preloaded) {
@@ -1427,7 +1545,8 @@ module.exports = {
   loadCycleData,
   // W5 desk-signal partition (pure — testable without sheet access)
   emitDeskSignal,
-  openThreadEntries,
+  buildStorylineRegistry,
+  resolveStoryline,
   rippleEntry,
   signalLabel,
   extractPopids,

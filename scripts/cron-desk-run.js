@@ -559,28 +559,20 @@ function assertPublishableQuotes(quotes, stage) {
   assertPublishableQuotesStrict(quotes, stage);
 }
 
-function citizenArcSlug(story, quote) {
-  const hood = String((story && story.hood) || 'city').toLowerCase();
-  const name = String((quote && quote.name) || 'citizen').toLowerCase();
-  const kind = String((story && (story.kind || story.pulseClass)) || 'arc').toLowerCase();
-  return (hood + '-' + name + '-' + kind).replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 80);
-}
-
 function writeCitizenArc(stem, args) {
   const quotes = (args.quotes || []).filter(q => q && q.quote && q.pop);
   if (!quotes.length) return null;
   const story = args.story || {};
   const first = quotes[0];
-  const slug = citizenArcSlug(story, first);
   const dest = path.join(COMPARE, stem + 'arc.json');
-  const prior = readJson(dest);
-  const verb = prior && prior.storyline && prior.storyline.slug === slug ? 'advanced' : 'opened';
+  // engine.270: a quote pass mints no storyline. It used to open a thread
+  // named `hood + first quoted citizen + kind`, which tracked who was asked,
+  // not what happened. The arc seed still carries the citizen's words.
   const arc = {
     status: 'arc-seed',
     cycle: String(args.cycle),
     desk: args.desk || null,
     persona: args.persona || null,
-    storyline: { slug, verb },
     hood: story.hood || null,
     quotes: quotes.map(q => ({
       pop: q.pop, name: q.name, quote: String(q.quote).replace(/\s+/g, ' ').trim()
@@ -590,7 +582,7 @@ function writeCitizenArc(stem, args) {
     ranAt: new Date().toISOString()
   };
   fs.writeFileSync(dest, JSON.stringify(arc, null, 2));
-  log('citizen arc ' + verb + ': ' + slug + ' → ' + path.relative(ROOT, dest));
+  log('citizen arc seed (' + quotes.length + ' quote(s)) → ' + path.relative(ROOT, dest));
   return dest;
 }
 
@@ -1035,8 +1027,8 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
   // in the assignment. Same profilesFor already used for quotes — it simply never
   // reached this block.
   const laneProfiles = new Map();
-  const laneThreads = loadOpenThreads(cycle, desk);
-  const lanePops = [...new Set(lane.concat(laneThreads).flatMap(e => e.popids || []))];
+  const running = loadStorylines(cycle, desk);
+  const lanePops = [...new Set(lane.flatMap(e => e.popids || []))];
   if (lanePops.length) {
     try {
       for (const line of require('./canon-name-check').profilesForPopids(lanePops)) {
@@ -1062,24 +1054,15 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
     for (const p of known) L.push('    who: ' + p.replace(/; popid: POP-\d+/, ''));
   }
   L.push('');
-  // S407 — the return path. Until now the ledger of open storylines was
-  // write-only: every writer met the cycle blind, minted a fresh slug, and
-  // `closed` was never once used across 23 threads. A story could not end
-  // because nobody was ever shown one still running.
-  if (laneThreads.length) {
-    L.push('### Open threads on your beat (Storyline_Ledger)');
-    L.push('Stories your desk already has running. If your piece moves one of these, put ITS SLUG,');
-    L.push('character for character, on your INTAKE STORYLINE line with `advanced` — or with `closed`');
-    L.push('when your piece is the one that ends it. That is how a story in this city finishes.');
-    L.push('These are CANDIDATES, not a list you must pick from: if your piece is genuinely new,');
-    L.push('mint your own slug and open it. Never claim a thread your article does not actually move.');
+  // engine.270 — what is already running on this beat. These are ENGINE events
+  // with their own start and end; the writer is told, and asked for nothing.
+  const runningLines = storylineLines(running);
+  if (runningLines.length) {
+    L.push('### Running stories on your beat');
+    L.push('Events the city is already living through, and where each one stands. Background for');
+    L.push('your piece — you do not label, open or close them.');
     L.push('');
-    for (const e of laneThreads) {
-      const tags = [e.hood].filter(Boolean).join(' · ');
-      L.push('- ' + (e.label || e.slug) + (tags ? '  [' + tags + ']' : ''));
-      const known = (e.popids || []).map(p => laneProfiles.get(p)).filter(Boolean);
-      for (const p of known) L.push('    who: ' + p.replace(/; popid: POP-\d+/, ''));
-    }
+    for (const line of runningLines) L.push('- ' + line);
     L.push('');
   }
   if (laneProfiles.size) {
@@ -1158,7 +1141,6 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
   L.push('## INTAKE');
   L.push('NAMES: <citizen name as printed> | <quoted-source OR subject OR mentioned>');
   L.push('BIZ: <business/org name as printed> | <quoted-source OR subject OR mentioned>');
-  L.push('STORYLINE: <short-kebab-case-slug for the storyline this piece moves> | <advanced OR opened OR closed OR referenced>');
   L.push('HOOD: <one neighborhood the story lives in>');
   L.push('CLAIM: <one load-bearing fact or number from your article> | <the source ref backing it, from your state above>');
   L.push('One NAMES line per named citizen, one BIZ line per named business/org, one HOOD line');
@@ -1185,13 +1167,38 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
 // the day (06:00 / 13:00 / 18:00) and the morning digest reviews the results.
 // ---------------------------------------------------------------------------
 
-// S407 — open threads ride desk_signal as a SIBLING of lanes, never inside one:
-// six scripts consume the lanes and treat every entry as an assignable cycle
-// signal. Absent key (a pre-v1.2 signal, or the undocked feed-built lane) => [].
-function loadOpenThreads(cycle, desk) {
+// engine.270 — storylines ride desk_signal as a SIBLING of lanes, never inside
+// one: six scripts consume the lanes and treat every entry as an assignable
+// cycle signal. Absent key (a pre-v1.3 signal, or the feed-built undocked lane) => [].
+function loadStorylines(cycle, desk) {
   const signal = readJson(path.join(ROOT, 'output', 'desk_signal_c' + cycle + '.json'));
-  const all = signal && signal.openThreads;
+  const all = signal && signal.storylines;
   return (all && Array.isArray(all[desk || DESK])) ? all[desk || DESK] : [];
+}
+
+// One plain line per running story: what it is, where it stands, how long.
+// No engine ID — an ID in the writer's state ends up printed in the article.
+function storylineLines(entries) {
+  return (entries || []).filter(e => e && e.name).map(e => {
+    const where = (e.hoods || []).length ? ' [' + e.hoods.join(', ') + ']' : '';
+    if (e.status === 'closed') {
+      return e.name + where + ' — ENDED this week after ' + e.age + ' week(s)' +
+        (e.movedTo ? '; now ' + e.movedTo : '');
+    }
+    return e.name + where + ' — ' + (e.stage || 'running') + ', week ' + e.age +
+      (e.firstSeen ? ' (newly tracked)' : '');
+  });
+}
+
+// Which storyline is this assignment ABOUT? Evidence only: the assignment's
+// ref against the engine's registry. null => cycle reaction, no storyline.
+function storylineTagFor(story, cycle) {
+  const signal = readJson(path.join(ROOT, 'output', 'desk_signal_c' + cycle + '.json'));
+  const registry = signal && signal.storylineRegistry;
+  if (!story || !Array.isArray(registry)) return null;
+  const hit = require(path.join(__dirname, 'buildWorldSummary')).resolveStoryline(story, registry);
+  if (!hit) return null;
+  return { slug: hit.id, verb: hit.status === 'closed' ? 'closed' : (hit.hasLedgerRow ? 'advanced' : 'opened') };
 }
 
 function loadLane(cycle, desk, beatDomain) {
@@ -2498,7 +2505,10 @@ function injectWeeklyPilotCredit(intake, draftText, pilots) {
   return intake;
 }
 
-function buildIntakeSidecar(draftText, quotes) {
+// engine.270: `storylineTag` is the assignment's evidence-resolved storyline
+// ({slug, verb} or null). A STORYLINE line in the draft is ignored — the model
+// does not decide what story it is in.
+function buildIntakeSidecar(draftText, quotes, storylineTag) {
   const parsed = require('../lib/articleIntake').parse(draftText);
   if (!parsed.found) return null;
   const byQuote = new Map((quotes || []).filter(q => q.pop).map(q => [String(q.name).toLowerCase(), q.pop]));
@@ -2513,7 +2523,7 @@ function buildIntakeSidecar(draftText, quotes) {
         ...(r && r.ambiguous ? { ambiguous: true } : {}) };
     }),
     businesses: parsed.businesses.map(b => ({ name: b.name, bizId: b.bizId, role: b.role })),
-    storylines: parsed.storylines.map(s => ({ slug: s.slug, verb: s.verb })),
+    storylines: storylineTag && storylineTag.slug ? [{ slug: storylineTag.slug, verb: storylineTag.verb }] : [],
     hoods: parsed.hoods.map(h => h.name),
     claims: parsed.claims.map(c => ({ claim: c.claim, sourceRef: c.sourceRef }))
   };
@@ -2629,10 +2639,8 @@ async function runWrite(assign) {
       anglePlan: angle && angle.angleRead && angle.angleRead.plan,
       interviews: packet && packet.interviews || [],
       lane,
-      // S408: the S407 open-threads block lived in buildLaneState, the legacy lane
-      // path — the live wake writes a typed Packet and never rendered it (0/7 state
-      // files on 2026-09-01 carried the block). Threads ride the Packet instead.
-      openThreads: loadOpenThreads(cycle, desk),
+      // engine.270: running stories ride the Packet as plain lines.
+      runningStories: storylineLines(loadStorylines(cycle, desk)),
       reviewProfile: ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.reviewProfile,
     });
     fs.writeFileSync(stateFile, JSON.stringify(writePacket, null, 2));
@@ -2777,7 +2785,8 @@ async function runWrite(assign) {
     // blank despite the interview and draft both being real.
     const sidecarPath = path.join(STAGED, path.basename(destPath).replace(/\.md$/, '.json'));
     const draftBody = fs.readFileSync(draftPath, 'utf8');
-    let intake = buildIntakeSidecar(draftBody, quotes);
+    let intake = buildIntakeSidecar(draftBody, quotes,
+      storylineTagFor(assignment && assignment.story, cycle));
     if (desk === 'undocked-digest') {
       try {
         const { loadNiaWeeklySlice } = require(path.join(__dirname, 'buildNiaSlice'));
@@ -3255,7 +3264,8 @@ module.exports = {
   buildIntakeSidecar,
   injectWeeklyPilotCredit,
   writeCitizenArc,
-  citizenArcSlug,
+  storylineLines,
+  storylineTagFor,
   validateWakeHandoff,
   exactRheaProof,
   stagedRheaProof,

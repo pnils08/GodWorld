@@ -94,10 +94,18 @@ async function run() {
   var stSI = stH.indexOf('Status');
   var stLC = stH.indexOf('LastCycle');
   var stID = stH.indexOf('StorylineId');
-  var actv = st.slice(1).filter(function(r) { return String(r[stSI] || '').toLowerCase() !== 'closed'; });
-  actv.sort(function(a, b) { return (Number(b[stLC]) || 0) - (Number(a[stLC]) || 0); });
-  console.log('\n=== OPEN STORYLINES: ' + actv.length + ' ===');
-  actv.slice(0, 10).forEach(function(r) { console.log('  -', r[stID], '(last C' + r[stLC] + ')'); });
+  // engine.270: a storyline is keyed by an engine ID (crisis arc or initiative
+  // stage). Rows in the retired hood-citizen-kind format are counted, not listed.
+  var engineId = /^(CRISIS-\d+-[A-Z0-9]+|[A-Z]+-\d+:.+)$/;
+  var stAI = stH.indexOf('Articles');
+  var body = st.slice(1);
+  var engineRows = body.filter(function(r) { return engineId.test(String(r[stID] || '')); });
+  var actv = engineRows.filter(function(r) { return String(r[stSI] || '').toLowerCase() !== 'closed'; });
+  console.log('\n=== OPEN STORYLINES: ' + actv.length + ' (closed ' + (engineRows.length - actv.length) +
+    ', retired-format rows ' + (body.length - engineRows.length) + ') ===');
+  actv.forEach(function(r) {
+    console.log('  -', r[stID], '| articles ' + (r[stAI] || 0) + (r[stLC] ? ' | last covered C' + r[stLC] : ' | NOT YET COVERED'));
+  });
 
   // Sports feeds
   var oak = await get('Oakland_Sports_Feed!A1:Z');

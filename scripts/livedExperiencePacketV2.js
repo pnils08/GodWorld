@@ -280,22 +280,15 @@ function buildWritePacket(args) {
         'evidence-bounded; length follows supplied public facts and exact quotes',
     });
   }
-  // S408 — open threads on this desk's beat (Storyline_Ledger). ADR-0017: the
-  // STORYLINE verb is canon metadata and stays deterministic — the writer script
-  // matches a printed, interviewed person to a thread's popids and emits
-  // `advanced`. The model owns exactly one bit: a closing line `THREAD-CLOSED: <slug>`
-  // when its piece is the one that ends the matched thread. Invalid slugs are ignored.
-  const openThreads = (args.openThreads || []).filter(e => e && e.slug).map(e => ({
-    slug: e.slug, label: e.label || e.slug, hood: e.hood || null,
-    popids: Array.isArray(e.popids) ? e.popids.slice() : [], lastCycle: e.lastCycle || null,
-  }));
+  // engine.270 — running stories on this desk's beat: engine events with their
+  // own start and end, as plain lines. Context only. The writer labels nothing;
+  // which storyline an article belongs to is resolved from its assignment's ref.
+  const runningStories = (args.runningStories || []).filter(x => typeof x === 'string' && x.trim());
   packet.signal = packet.signal || {};
-  packet.signal.openThreads = openThreads;
-  if (openThreads.length) {
-    packet.task.threadRule = 'signal.openThreads are stories your desk already has running. Your ' +
-      'article advances one automatically when it prints a person from that thread. If your piece ' +
-      'is the one that ENDS a thread, put `THREAD-CLOSED: <its slug, character for character>` as ' +
-      'the very last line. Otherwise write nothing about threads.';
+  packet.signal.runningStories = runningStories;
+  if (runningStories.length) {
+    packet.task.runningStoriesNote = 'signal.runningStories are events the city is already living ' +
+      'through and where each one stands. Background only — write nothing about tracking them.';
   }
   if (reviewProfile) packet.reviewProfile = reviewProfile;
   attachFactIds(packet);

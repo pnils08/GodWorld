@@ -671,79 +671,97 @@ console.log('\nTest 11f: byline candidates (W5h2)');
 }
 
 // ────────────────────────────────────────────────────────────────────────────
-// Test 11g: S407 open-thread lane — Storyline_Ledger read back into desk_signal
+// Test 11g: engine.270 storyline registry — engine events with an ID and an ending
+// Fixtures are the live CRISIS-105-WESTOAKL rows and live initiative stages (2026-09-28).
 // ────────────────────────────────────────────────────────────────────────────
-console.log('\nTest 11g: open threads (S407)');
+console.log('\nTest 11g: storyline registry (engine.270)');
 {
-  const row = (over) => Object.assign({
-    StorylineId: 'west-oakland-elio-perez-initiative', FirstCycle: '100', LastCycle: '104',
-    Status: 'open', Advanced: '1', Opened: '1', Closed: '0', Referenced: '0',
-    Articles: '2', Citizens: 'POP-00201,POP-00722', Hoods: 'West Oakland', Desks: 'civic'
-  }, over || {});
-  const run = (rows, cycle) => {
-    const lanes = { civic: [], sports: [], culture: [], business: [] };
-    const notes = [];
-    helper.openThreadEntries(rows, cycle, lanes, notes);
-    return { lanes, notes };
-  };
-  // Threads must NEVER land in `lanes` — six scripts read those and treat every
-  // entry as an assignable cycle signal. This is the guard on that separation.
-  const signalOf = (rows, cycle) => helper.emitDeskSignal(cycle, {
-    auditJson: {}, rippleAll: [], sportsAll: [], neighborhoodsC: [], rileyCurr: {},
-    storylineLedger: rows
+  const arcRows = [
+    { Cycle: '101', ArcId: 'CRISIS-78-LRR155', Phase: 'peak', Neighborhood: 'Downtown', DomainTag: 'SAFETY', Summary: 'old arc', CycleCreated: '78', CycleResolved: '' },
+    { Cycle: '105', ArcId: 'CRISIS-105-WESTOAKL', Phase: 'early', Neighborhood: 'West Oakland', DomainTag: 'SAFETY',
+      Summary: 'West Oakland under strain: retail vitality 3.5 (city 6.4); crime index 1.18', CycleCreated: '105', CycleResolved: '' },
+    { Cycle: '109', ArcId: 'CRISIS-105-WESTOAKL', Phase: 'resolved', Neighborhood: 'West Oakland', DomainTag: 'SAFETY',
+      Summary: 'The West Oakland Crime Spike — West Oakland crisis eased after 3 cycles back within city range', CycleCreated: '105', CycleResolved: '109' }
+  ];
+  const initiatives = [
+    { InitiativeID: 'INIT-005', Name: 'Temescal Community Health Center', Status: 'passed', ImplementationPhase: 'construction-active', AffectedNeighborhoods: 'Temescal' },
+    { InitiativeID: 'INIT-002', Name: 'Oakland Alternative Response Initiative', Status: 'passed', ImplementationPhase: 'dispatch-live', AffectedNeighborhoods: 'West Oakland, Fruitvale, East Oakland' }
+  ];
+  const reg = (cycle, extra) => helper.buildStorylineRegistry(Object.assign({ arcRows, initiatives: [], cycle }, extra || {}));
+  const crisis = (cycle, extra) => reg(cycle, extra).find(e => e.id === 'CRISIS-105-WESTOAKL');
+
+  for (const c of [105, 106, 107, 108]) {
+    const e = crisis(c, c === 107 ? { liveArcs: [{ arcId: 'CRISIS-105-WESTOAKL', phase: 'rising', name: 'The West Oakland Crime Spike' }] } : {});
+    assert('C' + c + ': crisis is open', e && e.status === 'open' && e.endCycle === null);
+    assert('C' + c + ': age counts from the start cycle', e.age === c - 105 + 1 && e.startCycle === 105);
+  }
+  assert('stage comes from the carried live arc between milestones',
+    crisis(107, { liveArcs: [{ arcId: 'CRISIS-105-WESTOAKL', phase: 'rising', name: 'The West Oakland Crime Spike' }] }).stage === 'rising');
+  assert('name comes from the live arc when the onset row has none',
+    crisis(107, { liveArcs: [{ arcId: 'CRISIS-105-WESTOAKL', phase: 'rising', name: 'The West Oakland Crime Spike' }] }).name === 'The West Oakland Crime Spike');
+  assert('no name anywhere → hood fallback, never a slug', crisis(106).name === 'West Oakland crisis');
+  assert('a past cycle never sees its own future', crisis(108).status === 'open');
+  const closed = crisis(109);
+  assert('C109: crisis is closed by the engine', closed.status === 'closed' && closed.endCycle === 109 && closed.stage === 'resolved');
+  assert('C109: name recovered from the resolution row', closed.name === 'The West Oakland Crime Spike');
+  assert('closed arc lingers one cycle', Boolean(crisis(110)));
+  assert('closed arc drops after the linger', !crisis(111));
+  assert('pre-ledger-era arcs excluded', !reg(109).some(e => e.id === 'CRISIS-78-LRR155'));
+  assert('crisis routes to civic', crisis(106).desks.includes('civic'));
+  assert('crisis carries its hood', crisis(106).hoods[0] === 'West Oakland');
+
+  const stages = helper.buildStorylineRegistry({ initiatives, cycle: 109, ledgerRows: [
+    { StorylineId: 'INIT-002:dispatch-live', FirstCycle: '104', Status: 'open' },
+    { StorylineId: 'INIT-005:construction-planning', FirstCycle: '106', Status: 'open' }
+  ] });
+  const byId = id => stages.find(e => e.id === id);
+  assert('stage id is <InitiativeID>:<stage>', Boolean(byId('INIT-002:dispatch-live')));
+  assert('known stage keeps its first-observed cycle', byId('INIT-002:dispatch-live').startCycle === 104
+    && byId('INIT-002:dispatch-live').age === 6 && !byId('INIT-002:dispatch-live').firstSeen);
+  assert('new stage is first-seen at this cycle', byId('INIT-005:construction-active').firstSeen === true
+    && byId('INIT-005:construction-active').startCycle === 109 && !byId('INIT-005:construction-active').hasLedgerRow);
+  const ended = byId('INIT-005:construction-planning');
+  assert('a stage the tracker moved past is closed', ended && ended.status === 'closed' && ended.endCycle === 109);
+  assert('closed stage names where it moved', ended.movedTo === 'construction-active');
+  assert('an already-closed stage row is not listed again', !helper.buildStorylineRegistry({ initiatives, cycle: 110, ledgerRows: [
+    { StorylineId: 'INIT-005:construction-planning', FirstCycle: '106', Status: 'closed' }] })
+    .some(e => e.id === 'INIT-005:construction-planning'));
+  assert('stage hoods split on commas', byId('INIT-002:dispatch-live').hoods.length === 3);
+
+  // The resolver works on the ref string alone — the one field every path carries.
+  const R = helper.buildStorylineRegistry({ arcRows, initiatives, cycle: 106 });
+  const sig = helper.emitDeskSignal(106, {
+    auditJson: { snapshots: { Initiative_Tracker: initiatives } },
+    rippleAll: [
+      { Cycle: '106', CauseType: 'crisis-event', CauseId: 'CRISIS-105-WESTOAKL', CauseDetail: 'crisis', EffectType: 'sentiment', Neighborhood: 'West Oakland' },
+      { Cycle: '106', CauseType: 'initiative-implementation', CauseId: 'Temescal Community Health Center', CauseDetail: 'x', EffectType: 'health' },
+      { Cycle: '106', CauseType: 'faith-event', CauseId: 'St. Esperanza Parish', CauseDetail: 'x', EffectType: 'community' }
+    ],
+    sportsAll: [], neighborhoodsC: [], rileyCurr: {}, storylineLedger: [], arcRows, liveArcs: []
   });
+  const allEntries = Object.values(sig.lanes).flat();
+  const crisisRipple = allEntries.find(e => e.kind === 'ripple' && e.causeType === 'crisis-event');
+  const initRipple = allEntries.find(e => e.kind === 'ripple' && e.causeType === 'initiative-implementation');
+  const faithRipple = allEntries.find(e => e.kind === 'ripple' && e.causeType === 'faith-event');
+  const initEntry = allEntries.find(e => e.kind === 'initiative' && e.ref.includes('INIT-005'));
+  assert('crisis ripple resolves to the arc', helper.resolveStoryline(crisisRipple, R).id === 'CRISIS-105-WESTOAKL');
+  assert('initiative ripple (named by Name) resolves to its stage',
+    helper.resolveStoryline(initRipple, R).id === 'INIT-005:construction-active');
+  assert('initiative lane entry resolves to its stage', helper.resolveStoryline(initEntry, R).id === 'INIT-005:construction-active');
+  assert('unrelated ripple resolves to nothing', helper.resolveStoryline(faithRipple, R) === null);
+  assert('a story with only ref/label/kind still resolves (fanout storyFromSeed shape)',
+    helper.resolveStoryline({ ref: crisisRipple.ref, label: crisisRipple.label, kind: 'ripple' }, R).id === 'CRISIS-105-WESTOAKL');
+  assert('hood alone never attaches', helper.resolveStoryline({ ref: 'output/neighborhood_texture_c106.md "### West Oakland"', hood: 'West Oakland' }, R) === null);
+  assert('ref file head is unchanged by the tag', crisisRipple.ref.split(/[\s;]/)[0] === 'Ripple_Ledger');
 
-  const live = run([row()], 105);
-  assert('open thread lands on its Desks lane', live.lanes.civic.length === 1 && live.lanes.sports.length === 0);
-  const e = live.lanes.civic[0];
-  assert('entry is kind:thread', e.kind === 'thread');
-  assert('slug carried verbatim for reuse', e.slug === 'west-oakland-elio-perez-initiative');
-  assert('label spans first→last cycle', e.label.includes('C100') && e.label.includes('C104'));
-  assert('label carries verbatim verb counts', e.label.includes('advanced 1') && e.label.includes('opened 1'));
-  assert('ref points at the ledger row', e.ref.includes('Storyline_Ledger'));
-  assert('popids carried for profile resolution', (e.popids || []).length === 2);
-  assert('hood carried', e.hood === 'West Oakland');
-  assert('fresh thread not marked dormant', !e.label.includes('DORMANT'));
-
-  // Dormancy is DERIVED from LastCycle age, never stored (the ledger has no
-  // IsStale column on purpose). 5-14 shows marked; 15+ drops.
-  const dorm = run([row()], 109);
-  assert('age 5 → shown, marked DORMANT', dorm.lanes.civic.length === 1
-    && dorm.lanes.civic[0].label.includes('DORMANT'));
-  assert('age 14 → still shown', run([row()], 118).lanes.civic.length === 1);
-  assert('age 15 → dropped as stale', run([row()], 119).lanes.civic.length === 0);
-
-  assert('closed thread omitted', run([row({ Status: 'closed' })], 105).lanes.civic.length === 0);
-  assert('blank slug skipped', run([row({ StorylineId: '' })], 105).lanes.civic.length === 0);
-
-  const multi = run([row({ Desks: 'civic, sports' })], 105);
-  assert('multi-desk thread reaches both lanes',
-    multi.lanes.civic.length === 1 && multi.lanes.sports.length === 1);
-
-  const orphan = run([row({ Desks: '' })], 105);
-  assert('unrouted thread falls to civic, never dropped', orphan.lanes.civic.length === 1);
-  assert('unrouted thread is noted', orphan.notes.some(n => n.includes('no known desk')));
-
-  const many = [];
-  for (let i = 0; i < 20; i++) many.push(row({ StorylineId: 'thread-' + i, Articles: String(20 - i) }));
-  assert('lane capped at 12', run(many, 105).lanes.civic.length === 12);
-  assert('cap keeps the most-covered threads',
-    run(many, 105).lanes.civic[0].slug === 'thread-0');
-
-  assert('empty ledger is noted, not thrown', run([], 105).notes.some(n => n.includes('no Storyline_Ledger rows')));
-
-  const wired = signalOf([row()], 105);
-  assert('threads ride openThreads, a sibling of lanes',
-    wired.openThreads.civic.length === 1 && wired.openThreads.civic[0].kind === 'thread');
-  assert('NO thread leaks into any lane',
-    !Object.values(wired.lanes).some(l => l.some(x => x.kind === 'thread')));
-  assert('lane counts exclude threads',
-    wired.meta.counts.civic === wired.lanes.civic.length);
-  assert('openThreads present even when empty', Boolean(signalOf([], 105).openThreads.sports));
-  assert('meta carries the thread contract',
-    String(wired.meta.threadContract).includes('continuation CANDIDATES'));
-  assert('thread contract states the sibling rule',
-    String(wired.meta.threadContract).includes('SIBLING of lanes'));
+  assert('storylines ride their own key, a sibling of lanes', sig.storylines.civic.some(e => e.id === 'CRISIS-105-WESTOAKL'));
+  assert('NO storyline leaks into any lane', !allEntries.some(e => e.type === 'crisis' || e.type === 'initiative-stage'));
+  assert('openThreads is gone', sig.openThreads === undefined);
+  assert('lane counts unchanged by storylines', sig.meta.counts.civic === sig.lanes.civic.length);
+  assert('meta carries the storyline contract', String(sig.meta.storylineContract).includes('ENGINE EVENTS'));
+  assert('empty engine state is noted, not thrown', helper.emitDeskSignal(106, {
+    auditJson: {}, rippleAll: [], sportsAll: [], neighborhoodsC: [], rileyCurr: {} })
+    .meta.notes.some(n => n.includes('storyline registry empty')));
 }
 
 // ────────────────────────────────────────────────────────────────────────────

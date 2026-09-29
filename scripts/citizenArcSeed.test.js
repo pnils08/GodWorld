@@ -15,12 +15,14 @@ const dest = run.writeCitizenArc('TEST-ONLY_arcseed_', {
 assert.ok(dest && fs.existsSync(dest));
 const arc = JSON.parse(fs.readFileSync(dest, 'utf8'));
 assert.equal(arc.status, 'arc-seed');
-assert.equal(arc.storyline.verb, 'opened');
-assert.match(arc.storyline.slug, /fruitvale-test-civic-anomaly/);
+// engine.270: a quote pass alone is not storyline coverage and mints nothing.
+assert.equal(arc.storyline, undefined);
 assert.equal(arc.claim, 'TEST-ONLY the 1 at 6am still does not wait.');
 const seeds = sat.loadArcSeeds(999);
-assert.ok(seeds.some(s => s.sidecar.intake.storylines[0].slug === arc.storyline.slug));
-const signals = sat.aggregateStorylineSignals(seeds);
-assert.ok(signals.some(s => s.opened >= 1 && s.slug === arc.storyline.slug));
+const mine = seeds.filter(s => s.sidecar.cycle === '999');
+assert.ok(mine.length >= 1, 'the arc seed still reaches Saturday with its quotes');
+assert.ok(mine.every(s => s.sidecar.intake.storylines.length === 0));
+assert.ok(mine.some(s => s.sidecar.intake.names.some(n => n.popid === 'POP-90001')));
+assert.equal(sat.aggregateStorylineSignals(mine).length, 0);
 fs.unlinkSync(dest);
 console.log('citizenArcSeed.test.js ok');

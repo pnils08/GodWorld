@@ -118,6 +118,11 @@ console.log('Test 5: aggregateStorylineSignals');
   assert('hoods deduped across articles', JSON.stringify(sig[0].hoods) === JSON.stringify(['Fruitvale', 'Uptown']));
   assert('citizens: resolved popids only', JSON.stringify(sig[0].citizens) === JSON.stringify(['POP-00001']));
   assert('free-form slug accepted (no registry check)', sig.some(s => s.slug === 'new-thread'));
+  const roles = aggregateStorylineSignals([mk('r1', [{ slug: 'CRISIS-105-WESTOAKL', verb: 'advanced' }], [], [
+    { name: 'Q', popid: 'POP-00010', role: 'quoted-source' }, { name: 'S', popid: 'POP-00011', role: 'subject' },
+    { name: 'M', popid: 'POP-00170', role: 'mentioned' }])]);
+  assert('a merely mentioned citizen does not join the storyline',
+    JSON.stringify(roles[0].citizens) === JSON.stringify(['POP-00010', 'POP-00011']));
 }
 
 console.log('Test 6: mergeStorylineLedger');
@@ -155,6 +160,41 @@ console.log('Test 6: mergeStorylineLedger');
   const refOnly = mergeStorylineLedger([H, ['done-arc', '99', '100', 'closed', 1, 0, 1, 0, 1, '', '', '']],
     [sig('done-arc', { referenced: 1 })], '104');
   assert('reference never flips status', refOnly.updates[0].row[3] === 'closed');
+
+  // engine.270 — status follows the ENGINE registry, covered or not.
+  const crisis = { id: 'CRISIS-105-WESTOAKL', status: 'open', startCycle: 105, hoods: ['West Oakland'], desks: ['civic'] };
+  const uncovered = mergeStorylineLedger([H], [], '106', [crisis]);
+  assert('uncovered storyline still gets a row', uncovered.appends.length === 1 && uncovered.appends[0][0] === 'CRISIS-105-WESTOAKL');
+  assert('uncovered: FirstCycle is the engine start, not the run cycle', uncovered.appends[0][1] === '105');
+  assert('uncovered: LastCycle blank and Articles 0', uncovered.appends[0][2] === '' && uncovered.appends[0][8] === 0);
+  assert('uncovered: hood and desk come from the registry', uncovered.appends[0][10] === 'West Oakland' && uncovered.appends[0][11] === 'civic');
+
+  const openRow = [H, ['CRISIS-105-WESTOAKL', '105', '107', 'open', 2, 1, 0, 0, 3, 'POP-00001', 'West Oakland', 'civic']];
+  const engineCloses = mergeStorylineLedger(openRow, [], '109', [Object.assign({}, crisis, { status: 'closed' })]);
+  assert('engine closes the row with no closed verb and no article',
+    engineCloses.updates.length === 1 && engineCloses.updates[0].row[3] === 'closed');
+  assert('an uncovered close leaves LastCycle (last coverage) alone', engineCloses.updates[0].row[2] === '107');
+  assert('an uncovered close leaves counts alone', engineCloses.updates[0].row[8] === 3);
+  assert('no change, no write', mergeStorylineLedger(openRow, [], '108', [crisis]).updates.length === 0);
+
+  const coveredOpen = mergeStorylineLedger(openRow, [sig('CRISIS-105-WESTOAKL', { closed: 1 })], '108', [crisis]);
+  assert('a writer cannot close what the engine holds open', coveredOpen.updates[0].row[3] === 'open');
+  assert('coverage still moves LastCycle and counts', coveredOpen.updates[0].row[2] === '108' && coveredOpen.updates[0].row[8] === 4);
+  const coveredClosed = mergeStorylineLedger(openRow, [sig('CRISIS-105-WESTOAKL', { advanced: 1 })], '109',
+    [Object.assign({}, crisis, { status: 'closed' })]);
+  assert('a writer cannot hold open what the engine closed', coveredClosed.updates[0].row[3] === 'closed');
+  assert('one row per storyline when covered AND in the registry', coveredClosed.updates.length === 1 && coveredClosed.appends.length === 0);
+
+  const stage = mergeStorylineLedger([H, ['INIT-005:construction-planning', '106', '', 'open', 0, 0, 0, 0, 0, '', 'Temescal', 'civic']], [], '109', [
+    { id: 'INIT-005:construction-planning', status: 'closed', startCycle: 106, hoods: ['Temescal'], desks: ['civic'] },
+    { id: 'INIT-005:construction-active', status: 'open', startCycle: 109, hoods: ['Temescal'], desks: ['civic'] }
+  ]);
+  assert('stage change closes the old stage row', stage.updates.length === 1 && stage.updates[0].row[3] === 'closed');
+  assert('and opens the new stage as its own row', stage.appends.length === 1 && stage.appends[0][0] === 'INIT-005:construction-active' && stage.appends[0][1] === '109');
+
+  const legacy = [H, ['west-oakland-elio-perez-initiative', '104', '108', 'open', 5, 4, 0, 0, 9, 'POP-00201', 'West Oakland', 'civic']];
+  const untouched = mergeStorylineLedger(legacy, [], '109', [crisis]);
+  assert('a legacy row is left exactly as it is', untouched.updates.length === 0);
 }
 
 // engine.152 (S412) — coverage runs both ways: the snippet the light classifier reads

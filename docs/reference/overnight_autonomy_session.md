@@ -58,6 +58,25 @@ An idle Claude seat does not wake itself. A tmux message to it is what gives it 
 - `/model` switch (es → Fable 5.1 for a hard call): send `/model`, capture the picker, choose Fable 5.1, verify in the footer, switch back after. Untested overnight — if the picker does not behave, escape out and use the advisor tool instead.
 - Never clear a peer that is mid-deploy, mid-commit, or holding a running background shell it launched for a task. Check `1 shell still running` in the footer.
 
+### 4a. Guest hygiene — clear after every review
+
+When a guest finishes a task and its output is verified and folded in: log `RELEASE`, then clear it (`/clear` + `C-m` via the §3 dispatch procedure, capture to confirm an empty prompt). The next dispatch boots it fresh with the task, spec path, file list. Clean context per task; no guest carries yesterday's assumptions. Exception: a guest mid-multi-step job the owner queued.
+
+### 4b. Waiting on another terminal — get pinged, don't poll
+
+When you hand work to a peer or guest and have nothing else to do, do not sit and re-check. Set a one-shot `CronCreate` (`recurring: false`, pinned minute/hour/dom/month, off the :00/:30 marks) for when you expect the result, with a prompt saying what to check and what to do next. Session-only, so re-set after any clear. The hourly :17 check is the backstop, not the plan. If you have your own work, do that and let the ping interrupt it.
+
+### 4c. Shared tree and commits (two Claude seats plus guests, one working tree)
+
+- **Path-specific only:** `git add <paths>` then `git commit -m ... -- <paths>`. Never `git add -A`/`.`, `git commit -a`, `--amend`, `reset`, `stash`, `rebase`, `checkout .`, `clean`, or force anything.
+- **Before committing a file, `git diff <file>`.** If it holds hunks that are not yours (another lane mid-edit), do not sweep them in. Commit only if that work is complete and log whose it is; otherwise message the owner and commit your other files first. (This is how rb's runner commit swept up kimi's plan edits.)
+- **One writer per file at a time.** Before editing a file another lane might touch (plans, ROLLOUT_PLAN, SESSION_CONTEXT, docs/index.md), check `git status` and the §7 log; log `FILE <path> <owner>` for anything you will hold across more than a few minutes, and `RELEASE` after commit. SESSION_CONTEXT: each seat edits only its own NEXT line; PIN is rb's.
+- **`.git/index.lock` present:** wait 10s and retry, up to 3 times. Never delete it while a git process is alive (`pgrep -a git`).
+- **Guests do not commit.** Every dispatch says "do not commit". The owning seat reviews the diff and commits the guest's files, path-specifically, under its own name.
+- **Cron churn:** `output/**` is dirtied by crons constantly. Never add it to a commit unless the task is about that file.
+- **No push.** Local commits stack; the builder lands them.
+- Commit trailer on every commit: `Co-Authored-By: Claude <model> <noreply@anthropic.com>`.
+
 ## 5. What to do, what to leave for the builder
 
 Do without asking: engine/sheet mechanism work in the engine-sheet lane, doc and tooling repair, verification, test runs, bench proofs, rollout hygiene, reading the C110 smoke-test checklist so it is ready, model-fit prep (rb), reviewing guest output.
@@ -86,3 +105,5 @@ Append-only. One line per entry, timestamp CDT. Path-specific commits of this fi
 - 2026-09-29 02:30 rb: doc written; kimi + codex cleared and booted idle (godworld:3.1, godworld:4.1).
 - 2026-09-29 02:31 es: CLAIM codex es engine.254 Task 4 plan review (cut 6a620209 → docs/for-claude-review/2026-09-29-codex-care-justice-task4-cut.md, running). CLAIM kimi es Task 4 diff review (after build).
 - 02:35 es: codex Task 4 review in — 7 findings verified, folded into plan; review filed to docs/research/. RELEASE codex. Building Task 4.
+- 02:36 es: 4c9bf010 dead-citizen admission guard committed (tests green). CLAIM codex es Task 4 receipt build per plan §Task 4 cut.
+- 02:40 rb: added §4a guest clear-after-review, §4b one-shot pings while waiting, §4c shared-tree commit rules.

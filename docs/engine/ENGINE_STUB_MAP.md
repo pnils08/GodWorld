@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-09-28 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-09-29 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -3396,6 +3396,27 @@
 
 - **_runBylineSelfTests_()**
 
+### careJusticeAccounting.js
+- **careJusticeIntakeType_(system, raw)**
+
+- **foldCareJusticeReceipts_(receipts, seen)**
+
+- **careJusticeCellKey_(system, scope, neighborhood, intakeType)**
+
+- **careJusticeBlankCell_()**
+
+- **buildCareJusticeCensus_(input)**
+
+- **careJusticeRow_(cycle, system, scope, neighborhood, type, coveredPopulation)**
+
+- **careJusticeAdd_(into, from)**
+
+- **careJusticeBlank_(row)**
+
+- **validateCareJusticeCensus_(rows)**
+
+- **careJusticeCensusRowValues_(row)**
+
 ### chaosCarsConfig.js
 - **validateOutcome(outcomeText)**
 
@@ -4195,5 +4216,5 @@ _No top-level function declarations found (helper/constants file)._
 
 ---
 
-**Files scanned:** 177
-**Functions mapped:** 1475
+**Files scanned:** 178
+**Functions mapped:** 1485

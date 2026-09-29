@@ -1,6 +1,6 @@
 # Engine Stub Reverse Index
 
-**Generated:** 2026-09-28 by `scripts/stubEngine.js` (mechanical — no LLM).
+**Generated:** 2026-09-29 by `scripts/stubEngine.js` (mechanical — no LLM).
 
 **Purpose:** Cheap lookup — given an `S.*` field or sheet name, find every function that reads or writes it. Companion to `ENGINE_STUB_MAP.md` (forward: function → fields).
 
@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 177 · **Functions mapped:** 1475 · **S.* fields:** 359 · **Sheets:** 60
+**Files scanned:** 178 · **Functions mapped:** 1485 · **S.* fields:** 359 · **Sheets:** 60
 
 ## S.* / ctx.summary reverse index
 

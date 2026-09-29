@@ -389,6 +389,11 @@ function runGenerationalEngine_(ctx) {
     // gate below only guards new-milestone generation.
     if (status === "hospitalized" || status === "critical" || status === "recovering" ||
         status === "injured" || status === "serious-condition") {
+      // Admitted this Cycle (chaos ambulance at Phase 4, heat wave above): the
+      // first health roll is next week, same as an ordinary-health admission —
+      // the emergency is this week's event, the outcome lands after it
+      // (builder ruling 2026-09-29, engine.254).
+      if (statusStartCycle === cycle) continue;
       var healthResult = processHealthLifecycle_(
         ctx, popId, name, status, statusDuration, age, tier,
         healthCause, neighborhood, cycle, calendarContext

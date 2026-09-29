@@ -286,20 +286,29 @@ function withEngineStubs(stubs, fn) {
   for (const key of Object.keys(stubs)) { prior[key] = sb[key]; sb[key] = stubs[key]; }
   try { return fn(); } finally { for (const key of Object.keys(stubs)) sb[key] = prior[key]; }
 }
-check('T4-2 ambulance then same-Cycle death opens and closes one row', () => {
+check('T4-2 ambulance admit rolls first next week; a next-week death closes its row', () => {
   const ctx = make('UNTRACKED');
   ctx.ledger.rows[0][ix('HealthCause')] = '';
   const receipt = syntheticAmbulance(ctx, 'active', '');
   assert.strictEqual(receipt.kind, 'intake');
-  withEngineStubs({ processHealthLifecycle_: () => ({
-    type: 'health', tag: 'Death', description: 'synthetic lifecycle death', newStatus: 'deceased'
-  }), triggerDeathCascade_: () => {} }, () => sb.runGenerationalEngine_(ctx));
-  const result = persistOnMock(ctx);
-  assert.strictEqual(ctx.summary.hospitalEvents.length, 2);
-  assert.strictEqual(ctx.summary.hospitalEvents[1].kind, 'transition');
-  assert.strictEqual(result.sheet.rows.length, 2);
-  assert.strictEqual(result.sheet.rows[1][9], 'deceased');
-  assert.strictEqual(result.census.deathsThisCycle, 1);
+  let rolls = 0;
+  const death = () => { rolls++; return { type: 'health', tag: 'Death', description: 'synthetic lifecycle death', newStatus: 'deceased' }; };
+  withEngineStubs({ processHealthLifecycle_: death, triggerDeathCascade_: () => {} }, () => sb.runGenerationalEngine_(ctx));
+  assert.strictEqual(rolls, 0, 'no health roll the week of admission');
+  assert.strictEqual(ctx.ledger.rows[0][ix('Status')], 'critical');
+  const week1 = persistOnMock(ctx);
+  assert.strictEqual(week1.sheet.rows.length, 2);
+  assert.strictEqual(week1.sheet.rows[1][8], '');
+  assert.strictEqual(week1.census.admitsThisCycle, 1);
+  ctx.summary = { cycleId: 8003 };
+  withEngineStubs({ processHealthLifecycle_: death, triggerDeathCascade_: () => {} }, () => sb.runGenerationalEngine_(ctx));
+  assert.strictEqual(rolls, 1, 'first roll the week after');
+  const sheet = week1.sheet;
+  ctx.ss = { getSheetByName: name => name === 'Hospital_Ledger' ? sheet : null };
+  const census2 = sb.persistHospitalLedger_(ctx);
+  assert.strictEqual(sheet.rows.length, 2);
+  assert.strictEqual(sheet.rows[1][9], 'deceased');
+  assert.strictEqual(census2.deathsThisCycle, 1);
 });
 check('T4-3 recovering re-escalation updates its open row without intake', () => {
   const ctx = make('UNTRACKED');

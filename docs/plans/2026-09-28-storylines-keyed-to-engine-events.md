@@ -1,7 +1,7 @@
 ---
 title: Storylines Keyed To Engine Events Plan
 created: 2026-09-28
-updated: 2026-09-28
+updated: 2026-09-29
 type: plan
 tags: [engine, media, active]
 sources:
@@ -15,6 +15,8 @@ pointers:
 ---
 
 # Storylines Keyed To Engine Events Plan
+
+**STATUS (2026-09-29): BUILT, RUNNING, UNDER OBSERVATION — review due the week of 2026-10-05.** Tasks 1–6 are live. Nothing more is built until the review. Builder ruling: "the smart move is to see how this helps, and it does keep a history of engine events." See §Observation and review.
 
 **Goal:** A storyline is an engine event that has its own ID and its own life span; the newsroom sees it with its stage, articles attach to its ID, and it closes when the engine ends it.
 
@@ -137,6 +139,53 @@ pointers:
 - **Verify:** run steps 1–2 over the staged C105–C108 West Oakland articles; report attach counts and step-2 verdicts before enabling on `--apply`.
 - **Status:** [ ] not started — after Tasks 1–6
 
+## Observation and review
+
+**Hold:** no new storyline source, no Task 7, no reporter-chased storylines until the review below is done.
+
+| When | Check | Reads |
+|---|---|---|
+| 2026-09-29 06:15 desk run (and each weekday after) | staged sidecars carry an engine ID in `intake.storylines`; none carries a `hood-citizen-kind` slug | `output/cron-compare/staged/*.json` |
+| 2026-10-03 Saturday run | 8 engine-keyed rows land in `Storyline_Ledger`; `CRISIS-105-WESTOAKL` reads `closed`; 97 legacy rows unchanged | the tab; `output/storyline_signal_c109.json` |
+| after the C110 fire 2026-10-04 | `Initiative_Tracker.ImplementationPhase` vs carry-forward `initiativePhases` — they disagreed at C109 on INIT-005 and INIT-006. Find which writer owns the column before a stage close is trusted | tracker tab; `Carry_Forward_Store` |
+| week of 2026-10-05 — **REVIEW** | first read with the builder: did IDs attach, did rows land, did any stage close falsely, did the running-story lines show up in what writers wrote | all of the above |
+| after four cycles (C113) | how many storylines went uncovered (`Articles 0`), how many articles attached, whether writers used the running-story lines. Decides Task 7 and reporter-chased storylines | `Storyline_Ledger` |
+
+**What the ledger now is:** a history of engine events — one row per crisis arc and per initiative stage, with the cycle it started, the status the engine gave it, and the coverage it got.
+
+## What was found (audit 2026-09-28, the reason for this plan)
+
+Live `Storyline_Ledger`, 97 rows, C103–C108:
+
+- `Closed` = 0 and `Referenced` = 0 across 178 articles. Writers were shown open threads (18 of 21 C108 packets) and the close rule; no draft ever carried a `THREAD-CLOSED:` line.
+- The slug was `hood + first quoted citizen + signal kind` — who was quoted, not what happened.
+- 79 of 97 threads lived one cycle; 58 were a single article; 18 spanned more than one cycle.
+- 43 distinct kinds, nearly all signal classes: `anomaly` 12, `story-signal` 9, the `beat-*` family 20.
+- 19 citizens anchored more than one thread (Melton Neilon 6, Martin Richards 6, Vinnie Keane 5). 6 groups were the same person + same kind under different hood prefixes; 5 groups were the same hood + kind opened the same cycle by different quoted citizens.
+- `Citizens` collected every name in every article: POP-00170 sat on 24 threads, POP-00198 on 17, POP-00201 on 13, POP-00210 on 11.
+- No thread carried the ID of the engine event it was about. The five `initiative` threads were named after the citizen quoted.
+- Desks `undocked`, `wire`, `undocked-digest` fell to the civic lane.
+- Of the 104 C109 lane signals, 13 belong to a storyline; 91 are cycle reaction.
+
+## Builder direction, in order given
+
+1. 2026-09-28 — "I would be curious how many of these stories are the same story just a different headline."
+2. 2026-09-28 — "A lot of the reporting is reaction to a cycle, so when is [it] a genuine storyline and what's just a citizen's own tracked persistence? The idea is sound; what we are trying to track likely is not defined or tracked with an ID."
+3. 2026-09-28 — engine arcs serve as the placeholder journalists write about; "for this to be useful a cron would need to know what it is and how to use it." Tool calls for crons: a place to visit, discussed separately.
+4. 2026-09-28 — "Maybe a cron that runs like Rhea that filters stuff like this, unless there is a better way." → Task 7.
+5. 2026-09-28 — "Use the advisor and codex for reviews and let's build a system that works."
+6. 2026-09-29 — sports considered, then: "Maybe this is more for crisis and civic stuff." → sports out (§Scope decisions).
+7. 2026-09-29 — "The smart move is to see how this helps, and it does keep a history of engine events." → hold and observe.
+
+## Deferred, not dropped
+
+| Item | Waits on |
+|---|---|
+| Task 7 — Saturday attach pass before publish | the four-cycle read |
+| Reporter-chased storylines | the four-cycle read |
+| Tool calls for crons (background lookups through the GodWorld MCP tools) | its own plan; not part of this one |
+| Deleting the frozen `Storyline_Tracker` / `Storyline_Intake` tabs | engine.268, builder go |
+
 ## Review resolutions (2026-09-28)
 
 Advisor review and codex review (`docs/research/2026-09-28-codex-storylines-plan-review.md`, 7 findings, each verified against code). These OVERRIDE the task text above where they differ.
@@ -170,3 +219,5 @@ Advisor review and codex review (`docs/research/2026-09-28-codex-storylines-plan
 - 2026-09-28 — advisor + codex review folded in (§Review resolutions).
 - 2026-09-28 — Tasks 1–6 built (`f7249710`). Real generator path run against live C109: registry 8 entries, 104/104 lane entries unchanged apart from the storyline tag, 20 refs tagged. C109 signal activated with the registry only (lanes and refs left as assigned this week). Registry stage source is the fire-time `engine_audit` snapshot; a stage civic moves mid-week is seen at the next cycle's build.
 - 2026-09-28 — **post-fire check for C110 (2026-10-04):** fire-time snapshot held `INIT-006 construction-planning` while the live tracker read `construction-active`, and carry-forward `initiativeEnginePhaseMoves` named `INIT-005 → construction-active` while the tracker reads `operational`. Confirm which writer owns `ImplementationPhase` before trusting a stage close; a backward stage move would reach writers as a story ending.
+- 2026-09-29 — sports storylines built, measured and pulled uncommitted on builder ruling; storylines are crisis and civic.
+- 2026-09-29 — status set to under observation, review due the week of 2026-10-05; audit findings and builder direction moved here from the ROLLOUT row.

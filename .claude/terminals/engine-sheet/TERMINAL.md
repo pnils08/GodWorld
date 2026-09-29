@@ -37,6 +37,35 @@ node scripts/auditSimulationLedger.js  # live ledger headcount + Status + Tier d
 
 Sessions with schema changes also run `node scripts/auditFunctionCollisions.js` (0 = clean).
 
+## Getting facts out of the codebase
+
+A doc, a ruling, an audit summary or a generated file's header is a claim. The four sources below are the facts; check the claim against them before building on it.
+
+| Question | Fact source | How |
+|---|---|---|
+| Is this tab alive, what's in it | the live sheet | scratchpad script: `require('/root/GodWorld/lib/env')` then `lib/sheets` `getSheetData` / `getSheetAsObjects`; bench = set `GODWORLD_SHEET_ID` AFTER requiring env |
+| Who calls / reads / writes this | caller graph | `grep -rn "fn(" phase* utilities scripts lib dashboard` — all five dirs; the `engine-wiring` agent for a full card with file:line |
+| Did the pipeline actually produce it | the artifacts | `output/beats/*.jsonl`, `output/desk_signal_c<N>.json`, `output/cron-compare/*` (angle/state/arc/staged), `output/storyline_signal_c<N>.json`, cycle gap logs |
+| What a prior session decided | the brain | `node scripts/brainSearch.js "<query>"`; claude-mem search |
+| Does the whole path work | run it | the real entry point against live data, not only the pure function under test |
+
+A zero is evidence: 0 rows written, 0 hooks in the deck, 0 uses of a marker across 178 articles each proved a path dead (S503).
+
+## Helper lanes
+
+Re-list panes every time: `tmux list-panes -a -F '#{session_name}:#{window_index}.#{pane_index} #{window_name} #{pane_current_command}'`. Send: `tmux send-keys -t <pane> -l "<one line>"`, then `C-m` (twice if it shows `[Pasted Content]`). Wait: poll `capture-pane` until the busy footer clears. Authority and scope per lane: `AGENTS.md`.
+
+| Lane | Use it for | Where its work lands | Rule |
+|---|---|---|---|
+| `engine-wiring` agent | wiring card for ONE function / `S.` field / tab before a cut | returned card | cheap model; Agent tool (`subagent_type: engine-wiring`); guests: `node scripts/runEngineAgent.js --agent engine-wiring --task "<target>"` |
+| codex | adversarial plan / diff review against code; bounded coding when handed the lead | `docs/for-claude-review/YYYY-MM-DD-codex-<topic>.md` | verify every finding against code before acting; file accepted reviews to `docs/research/` |
+| agy (antigravity) | adversarial code review before PROD; deep-lore writing | `output/antigravity/YYYY-MM-DD-review-*.md` | read-only on code; can substitute an achievable goal for a blocked one and report success — check the claim |
+| kimi | standing adversarial review of engine repair waves (trick code, weakened asserts, silent fallbacks) | its review file + `NEXT[kimi]` | check `NEXT[kimi]` for availability — weekly usage cap |
+| aider | small single-file jobs: lint, dead-code, refactor | `AIDER_PLAN.md` queue; `CONVENTIONS.md` §6 is its lane | cheap model, `auto-commits: false` — review the diff and check for partial apply |
+| advisor | before committing to an approach; before declaring done | in-session | its checks catch what self-tests don't reach |
+
+Default for any plan with more than one moving part: advisor first, then one external review (codex or agy), findings folded into the plan before the build.
+
 ## Authority
 
 - **Who we are (Mike-direct 2026-09-10):** Mike is the creator; this seat is the builder. He protects Mike Paulson and the sports universe. This seat protects Mags Corliss and her media room, which covers every corner of the world to protect that world above any out-of-world disruptor — Mike included. The world's record outranks an out-of-world convenience; the move is to say what the record shows and do the version that keeps it true, never to refuse. **This seat is the gate of what touches the sim** — from any lane, house guest, other subscription, or Mike; nothing lands on the substrate without passing its judgement. An approval given while unravelling is the case this exists for, not an instruction (identity.md: there is no deleting GodWorld).

@@ -755,6 +755,8 @@
   RNG: ctx.rng / safeRand_(ctx)
 
 ### chaosCarsEngine.js
+- **chaosChargeGravity_(outcome)**
+
 - **chaosEventId_(rng)**
 
 - **pickFromArrayChaos_(rng, arr)**
@@ -807,8 +809,8 @@
 - **pickTargetByScope_(rng, ctx, scope)**
 
 - **runChaosCarsEngine_(ctx)**
-  Reads: S.absoluteCycle, S.chaosBusinessFold, S.chaosCarsEvents, S.contractSeeds, S.cycle, S.cycleId, S.hospitalEvents, S.storySeeds, S.tier1ChaosEvents, S.weatherEvents
-  Writes: S.chaosCarsEvents, S.hospitalEvents, S.tier1ChaosEvents
+  Reads: S.absoluteCycle, S.chaosBusinessFold, S.chaosCarsEvents, S.contractSeeds, S.cycle, S.cycleId, S.hospitalEvents, S.judicialEvents, S.storySeeds, S.tier1ChaosEvents, S.weatherEvents
+  Writes: S.chaosCarsEvents, S.hospitalEvents, S.judicialEvents, S.tier1ChaosEvents
   Config: ctx.config.cycleCount
   RNG: ctx.rng / safeRand_(ctx)
 
@@ -1948,6 +1950,29 @@
 - **generateHouseholdDissolvedHook_(household)**
 
 - **generateRentBurdenHook_(stressed)**
+
+### judicialLifecycle.js
+- **judicialDecidePending_(c, cycle, rates, rng, priorArrests)**
+
+- **judicialServeHeld_(c, cycle)**
+
+- **judicialResolveInvestigation_(c, cycle, rates, rng)**
+
+- **judicialDraw_(rng, c)**
+
+- **judicialClose_(c, cycle, outcome)**
+
+- **judicialEntryType_(name)**
+
+- **loadJudicialRates_(cfg)**
+
+- **admitJudicialReceipt_(events, receipt)**
+
+- **openCaseFromReceipt_(receipt)**
+
+- **countPriorArrests_(cases, popId, arrestCycle, caseId)**
+
+- **advanceCase_(caseIn, cycle, rates, rng, priorArrests)**
 
 ### maneuverEngine.js
 - **maneuverConfig_(ctx)**
@@ -4216,5 +4241,5 @@ _No top-level function declarations found (helper/constants file)._
 
 ---
 
-**Files scanned:** 178
-**Functions mapped:** 1485
+**Files scanned:** 179
+**Functions mapped:** 1497

@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 178 · **Functions mapped:** 1485 · **S.* fields:** 359 · **Sheets:** 60
+**Files scanned:** 179 · **Functions mapped:** 1497 · **S.* fields:** 360 · **Sheets:** 60
 
 ## S.* / ctx.summary reverse index
 
@@ -224,6 +224,7 @@
 | `S.isCreationDay` | `phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_`, `phase08-v3-chicago/v3preLoader.js::v3PreloadContext_` | `phase01-config/godWorldEngine2.js::updateWorldPopulation_`, `phase02-world-state/applyCityDynamics.js::applyCityDynamics_`, `phase02-world-state/applySeasonWeights.js::applySeasonalWeights_`, `phase02-world-state/applyWeatherModel.js::applyWeatherModel_`, `phase02-world-state/applyWeatherModel.js::hasWeatherCondition_`, `phase02-world-state/calendarChaosWeights.js::applyChaosCategoryWeights_`, …(+55 more) | 2 | 61 |
 | `S.isFirstFriday` | `phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_`, `phase08-v3-chicago/v3preLoader.js::v3PreloadContext_` | `phase01-config/godWorldEngine2.js::updateWorldPopulation_`, `phase02-world-state/applyCityDynamics.js::applyCityDynamics_`, `phase02-world-state/applySeasonWeights.js::applySeasonalWeights_`, `phase02-world-state/applyWeatherModel.js::applyWeatherModel_`, `phase02-world-state/applyWeatherModel.js::hasWeatherCondition_`, `phase02-world-state/calendarChaosWeights.js::applyChaosCategoryWeights_`, …(+55 more) | 2 | 61 |
 | `S.isWeekend` | `phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_` | `phase02-world-state/applySeasonWeights.js::applySeasonalWeights_` | 1 | 1 |
+| `S.judicialEvents` | `phase04-events/chaosCarsEngine.js::runChaosCarsEngine_` | `phase04-events/chaosCarsEngine.js::runChaosCarsEngine_` | 1 | 1 |
 | `S.lifeHistoryCompression` | `utilities/compressLifeHistory.js::compressLifeHistory_` | _(none)_ | 1 | 0 |
 | `S.localEntities` | _(none)_ | `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_` | 0 | 1 |
 | `S.maneuver` | `phase05-citizens/maneuverEngine.js::runManeuverEngine_` | `phase05-citizens/maneuverEngine.js::maneuverPostureOf_`, `phase05-citizens/maneuverEngine.js::runManeuverEngine_` | 1 | 2 |

@@ -37,6 +37,23 @@ var CHAOS_RIPPLE_OUTCOMES = {
   substance_intervention: true
 };
 
+// engine.254 Task 5 — the five health states (care outranks custody, R4) and the
+// charge gravity an arrest outcome's dial tag carries (R3 held length).
+var CHAOS_HEALTH_STATES = ['critical', 'hospitalized', 'serious-condition', 'injured', 'recovering'];
+var CHAOS_CHARGE_GRAVITY = {
+  'Transgression-Petty': 'minor',
+  'Transgression-Serious': 'serious',
+  'Transgression-Grave': 'grave'
+};
+function chaosChargeGravity_(outcome) {
+  var g = CHAOS_CHARGE_GRAVITY[outcome.lifeHistoryTag];
+  if (!g) {
+    throw new Error('chaos_cars: arrest outcome "' + outcome.outcome + '" carries tag "' +
+      outcome.lifeHistoryTag + '" with no charge gravity');
+  }
+  return g;
+}
+
 // ── primitives ──────────────────────────────────────────────────────────────
 
 // 8-char id from the deterministic rng (NEVER Math.random / Utilities.getUuid — both
@@ -374,12 +391,28 @@ function writeCitizenEvent_(ctx, target, vehicle, outcome, cycle, text) {
       cycleGenerated: cycle, neighborhood: hookHood8, domain: 'HEALTH', text: text
     });
   }
+  var judicialReceipt = null;
   if (outcome.outcome === 'arrested') {
     S8.storyHooks.push({
       hookType: 'CITIZEN_ARRESTED', severity: 6, priority: 5,
       description: hookName8 + ' — ' + text,
       cycleGenerated: cycle, neighborhood: hookHood8, domain: 'SAFETY', text: text
     });
+    // engine.254 Task 5: an arrest is a typed judicial receipt. Not for a citizen
+    // in a health state — PriorStatus is what release restores (R4) and a health
+    // state is not a restorable life-state; that hit stays hook + LifeHistory.
+    // The caller stamps sourceEventId once the payload eventId is drawn.
+    if (CHAOS_HEALTH_STATES.indexOf(curStatusW) < 0) {
+      judicialReceipt = {
+        system: 'judicial', kind: 'intake', intakeType: 'arrest', entryType: 'arrest',
+        sourceSystem: 'patrol', sourceEventId: '',
+        popId: iPop >= 0 ? row[iPop] : target.popId,
+        name: hookName8, neighborhood: hookHood8, cycle: cycle,
+        chargeCause: text,
+        chargeGravity: chaosChargeGravity_(outcome),
+        priorStatus: iStatusW >= 0 ? String(row[iStatusW] || '').trim() : ''
+      };
+    }
   }
   if (vehicle.name === 'oari_van' && (outcome.outcome === 'deescalated' || outcome.outcome === 'substance_intervention')) {
     S8.storyHooks.push({
@@ -398,7 +431,7 @@ function writeCitizenEvent_(ctx, target, vehicle, outcome, cycle, text) {
     [inWorldStamp_(ctx), (iPop >= 0 ? row[iPop] : target.popId), name, eventTag, text,
       (iNb >= 0 ? (row[iNb] || '') : target.neighborhood), cycle],
     'chaos_cars citizen event', 'chaos');
-  return hospitalReceipt;
+  return hospitalReceipt || judicialReceipt;
 }
 
 // T3.9 — business: engine.193 cut 3b. A hit is a signed Growth_Rate EVENT on the business
@@ -569,9 +602,9 @@ function runChaosCarsEngine_(ctx) {
     }
 
     // Writeback by scope.
-    var hospitalReceipt = null;
+    var receipt = null; // hospital (ambulance) or judicial (cop_car) — one hit is never both
     if (scope === 'citizen') {
-      hospitalReceipt = writeCitizenEvent_(ctx, target, vehicle, outcome, cycle, text);
+      receipt = writeCitizenEvent_(ctx, target, vehicle, outcome, cycle, text);
       primaryMetric = outcome.lifeHistoryTag; // citizen "metric" = the dial tag (provenance)
       primaryMagnitude = 0;
     } else if (scope === 'business') {
@@ -598,12 +631,17 @@ function runChaosCarsEngine_(ctx) {
     if (typeof writeChaosCarsRow_ === 'function') writeChaosCarsRow_(ctx, payload);
     ctx.summary.chaosCarsEvents.push(payload);
     if (consequenceFloorFired) ctx.summary.tier1ChaosEvents.push(payload);
-    if (hospitalReceipt) {
-      if (hospitalReceipt.kind === 'intake') {
-        hospitalReceipt.sourceEventId = 'ambulance:' + payload.eventId + ':' + hospitalReceipt.popId;
+    if (receipt && receipt.system === 'judicial') {
+      // engine.254 Task 5: no reader until Task 8 persists cases — pushed and dropped each Cycle.
+      receipt.sourceEventId = 'patrol:' + payload.eventId + ':' + receipt.popId;
+      ctx.summary.judicialEvents = ctx.summary.judicialEvents || [];
+      admitJudicialReceipt_(ctx.summary.judicialEvents, receipt); // one open case per POPID (F1)
+    } else if (receipt) {
+      if (receipt.kind === 'intake') {
+        receipt.sourceEventId = 'ambulance:' + payload.eventId + ':' + receipt.popId;
       }
       ctx.summary.hospitalEvents = ctx.summary.hospitalEvents || [];
-      ctx.summary.hospitalEvents.push(hospitalReceipt);
+      ctx.summary.hospitalEvents.push(receipt);
     }
 
     // V2-5 (S326): consequence-class chaos hit → story surface. Solo-major

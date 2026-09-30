@@ -417,6 +417,8 @@ Pushed to `S.judicialEvents`. **Eligibility:** adult (existing gate) **and** pri
 
 **Not in this cut.** Status flip to `detained`, custody re-assert, participation gates (Task 6); persistence, the `-2` suffix, one-open-case-per-POPID enforcement and the replay key fold (Task 8); other-resident demand (Task 7); civil entry types (builder design first); the conduct crime-reachable defect.
 
+**Built 2026-09-29 (engine-sheet).** `phase05-citizens/judicialLifecycle.js` (new, builder-approved) + arrest receipt in `chaosCarsEngine.js` + `scripts/judicialLifecycle.test.js` 52/52. Regression: chaosCarsCitizenDial 27, hospitalIncomePersistence 48, careJusticeAccounting 55, hospitalTalkback 24, griefPeriod 38, educationLoop 120; collisions 0; STUB_MAP regenerated. Pending: kimi diff review, bench fire.
+
 **Test — `scripts/judicialLifecycle.test.js`** (synthetic, no sheet):
 1. forced draws → each of released / diverted / held; held closes `held-served` at `HeldUntilCycle`, not before.
 2. held length stays inside its gravity range across 1000 seeds; repeat-arrest raises the held share.
@@ -437,6 +439,8 @@ Pushed to `S.judicialEvents`. **Eligibility:** adult (existing gate) **and** pri
 17. kind-aware seen set: investigation open → conversion → replay books one intake; arrest → exit → replay books none (F2 — spec'd here, run against the Task 8 fold).
 
 ## Changelog
+
+- 2026-09-29 (engine-sheet) — Task 5 built: judicialLifecycle.js + arrest receipt, 52/52 tests; kimi review and bench pending.
 
 - 2026-09-29 (engine-sheet) — codex review of §Task 5 cut: 8 findings verified and folded; review filed to docs/research; cut ready to build.
 

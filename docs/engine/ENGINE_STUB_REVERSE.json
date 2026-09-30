@@ -1,8 +1,8 @@
 {
   "generated": "2026-09-29",
   "generator": "scripts/stubEngine.js",
-  "filesScanned": 178,
-  "functionsMapped": 1485,
+  "filesScanned": 179,
+  "functionsMapped": 1497,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -2799,6 +2799,14 @@
         "phase04-events/generationalEventsEngine.js::runGenerationalEngine_",
         "phase09-digest/finalizeCycleState.js::finalizeCycleState_",
         "phase10-persistence/buildCyclePacket.js::persistHospitalLedger_"
+      ]
+    },
+    "judicialEvents": {
+      "writers": [
+        "phase04-events/chaosCarsEngine.js::runChaosCarsEngine_"
+      ],
+      "readers": [
+        "phase04-events/chaosCarsEngine.js::runChaosCarsEngine_"
       ]
     },
     "tier1ChaosEvents": {

@@ -419,7 +419,7 @@ Pushed to `S.judicialEvents`. **Eligibility:** adult (existing gate) **and** pri
 
 **Not in this cut.** Status flip to `detained`, custody re-assert, participation gates (Task 6); persistence, the `-2` suffix, one-open-case-per-POPID enforcement and the replay key fold (Task 8); other-resident demand (Task 7); civil entry types (builder design first); the conduct crime-reachable defect.
 
-**Built 2026-09-29 (engine-sheet).** `phase05-citizens/judicialLifecycle.js` (new, builder-approved) + arrest receipt in `chaosCarsEngine.js` + `scripts/judicialLifecycle.test.js` 52/52. Regression: chaosCarsCitizenDial 27, hospitalIncomePersistence 48, careJusticeAccounting 55, hospitalTalkback 24, griefPeriod 38, educationLoop 120; collisions 0; STUB_MAP regenerated. kimi diff review SHIP (`docs/research/2026-09-29-kimi-care-justice-task5-diff.md`); three of its findings fixed in the follow-up commit (blank clocks throw, a re-arrest receipt cannot open a case, conversion uses the type's `decisionOffset`), 56/56. Pending: bench fire.
+**Built 2026-09-29 (engine-sheet).** `phase05-citizens/judicialLifecycle.js` (new, builder-approved) + arrest receipt in `chaosCarsEngine.js` + `scripts/judicialLifecycle.test.js` 52/52. Regression: chaosCarsCitizenDial 27, hospitalIncomePersistence 48, careJusticeAccounting 55, hospitalTalkback 24, griefPeriod 38, educationLoop 120; collisions 0; STUB_MAP regenerated. kimi diff review SHIP (`docs/research/2026-09-29-kimi-care-justice-task5-diff.md`); three of its findings fixed in the follow-up commit (blank clocks throw, a re-arrest receipt cannot open a case, conversion uses the type's `decisionOffset`), 56/56. **Bench** SANDBOX 0908 @146 C136–C140 ok, no arrest drawn; @147 bench-only forced-arrest probe C141 → 3 receipts in GAS (`intake`, `patrol:<eventId>:<POPID>`, `Active`, `serious`), Phase4-ChaosCars ok, Engine_Errors 4→4; reverted @148. **Live PROD @125** 2026-09-29, pull-back 166/166.
 
 **Test — `scripts/judicialLifecycle.test.js`** (synthetic, no sheet):
 1. forced draws → each of released / diverted / held; held closes `held-served` at `HeldUntilCycle`, not before.
@@ -441,6 +441,8 @@ Pushed to `S.judicialEvents`. **Eligibility:** adult (existing gate) **and** pri
 17. kind-aware seen set: investigation open → conversion → replay books one intake; arrest → exit → replay books none (F2 — spec'd here, run against the Task 8 fold).
 
 ## Changelog
+
+- 2026-09-29 (engine-sheet) — Task 5 bench-proven (C136–C141, forced-arrest probe) and live PROD @125.
 
 - 2026-09-29 (engine-sheet) — kimi Task 5 diff review SHIP; 3 findings fixed, 1 deferred to Task 6/8; tests 56/56.
 

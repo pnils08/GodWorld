@@ -117,6 +117,7 @@ All three open calls ruled — the recommended defaults above, as stated:
 ### Later (folded in from the 2026-09-26 builder proposal, not part of this build)
 
 - **The judicial system is a civil system too, not only crime (builder direction 2026-09-29).** Build-on vehicles once the case flow proves: divorce goes through the court; lawsuits; court fees and fines as a new way to tax. Schema room already exists: a civil case is a new `EntryType` on `Judicial_Ledger` (e.g. `divorce`, `lawsuit`) with no arrest and no custody — the census counts custody only for `pending`/`held`, so civil cases never inflate it. **Why (builder 2026-09-29):** the sim mostly raises citizens' pay and has few ways to take money back out — the court is the money sink, the system used to tax. **Where it lands (builder, tentative — "maybe"):** court revenue goes into the city budget (live `City_Treasury` tab). Rates, who pays and the treasury path are still sim calls — confirm with the builder before designing. Not part of this build. **Weight (builder 2026-09-29, Task 5 kickoff):** "more for taxing, settling citizen disputes, and the occasional arrests and crime" — civil cases (fees, disputes between citizens) are the court's main load; crime is the occasional case. Task 5's lifecycle is built generic over `EntryType` so civil types drop in without a rewrite.
+- **The court is the city's revenue engine; crime data becomes money (builder direction 2026-09-29, Task 5 kickoff).** "This is what pulls in the city's money for its budget, property taxes as well; where a crooked civic member could end up, and trial on a Tier-1 citizen scandal. Crime is an element because we track crime data, so this is where that crime data can become money for the sim." Read for mechanism: court revenue from crime is driven by the tracked crime aggregates (`Crime_Metrics`, hood-scope) at city scale — the same other-resident pattern as Task 7, never by the ~1-per-7-Cycles named arrests; aggregates still never name a defendant (R5). Named cases are the stories: a crooked civic official, a Tier-1 scandal trial — authored entry types, not dice (top-tier-is-authored doctrine). Property tax sits with engine.271. **Tracked citizens pay from `NetWorth` (builder 2026-09-29):** a named defendant's fine or fee is taken from their own net worth — the money sink on the citizen side; the aggregate crime revenue is the city side. Rates and the treasury path stay sim calls — design with the builder.
 - **City revenue, wider than the court (builder direction 2026-09-29):** three feeds into the city treasury — judicial (fees, fines), business tax, housing tax — and the treasury "could even" break out by council district. This is its own build (ROLLOUT engine.271), not part of care and justice; the court is one of its three feeds.
 - Judges as authored personas (civic-office pattern — canon philosophy files, not dials), once a case flow exists to judge.
 - Jury duty as a Tier-4→named promotion vehicle (universal-protagonism doctrine).
@@ -173,7 +174,7 @@ Task 2 of [[../research/2026-09-28-codex-care-justice-intake-plan]] (accepted 20
 - Bed vs care visit is derived from `StatusNow`, not stored.
 - Open-row duration = current Cycle − `AdmitCycle`, derived by readers; `CyclesInCare` remains the closed-row value.
 
-### `Judicial_Ledger` — new tab, 20 columns (A–T)
+### `Judicial_Ledger` — new tab, 21 columns (A–U)
 
 Extends the 9 ruled columns (all kept) for gates R3–R5.
 
@@ -199,6 +200,7 @@ Extends the 9 ruled columns (all kept) for gates R3–R5.
 | R | SourceSystem | `patrol` · `conduct` · `reconcile` |
 | S | SourceEventId | receipt key above |
 | T | TransferToId | `AdmissionId` when diverted to a treatment bed |
+| U | Counterparty | blank for crime; the other party of a civil case (POPID, `BIZ-` or civic office id) — reserved so civil entry types need no schema change |
 
 `investigating` does not change the citizen's Status; only an arrest sets `detained`. One open case per POPID. A second arrest inside a sim year is found by counting this citizen's prior rows, no column needed.
 
@@ -345,7 +347,7 @@ Outside review: `docs/research/2026-09-29-codex-care-justice-task4-cut.md` — 7
 | Entry path | Measured | Source |
 |---|---|---|
 | Patrol `arrested` (R5 direct) | live 3 in C101–C109, none since C104; bench 2 in C110–C135 (~1 per 7 Cycles) | LifeHistory_Log `Transgression-Serious\|chaos_cars\|cop_car` |
-| Grave conduct → investigation (R5) | 0 `Transgression-*` ever, live or bench. Since engine.201 Wave 2 every moral test lands `BoundaryKept`/`BoundaryCompromised` (live 9, bench 36 in C124–C135) — no citizen reads `crimeReachable` (`compressLifeHistory.js:1185`), so the commit branch (`runConductEngine.js:233`) never runs | LifeHistory_Log conduct tags |
+| Grave conduct → investigation (R5) | 0 `Transgression-*` ever, live or bench. Since engine.201 Wave 2 every moral test lands `BoundaryKept`/`BoundaryCompromised` (live 9, bench 36 in C124–C135) — no citizen reads `crimeReachable` (`compressLifeHistory.js:1185`), so the commit branch (`runConductEngine.js:233`) never runs. DialState parse: **0 of 963 live / 0 of 1114 bench crime-reachable**; integrity band live 934 at 0, 29 at +1, none below neutral | LifeHistory_Log conduct tags; `getCitizenDialBands_` over every ledger row |
 
 Crime entry is rare by design and the investigation path has no input (§15). Per the builder's weight above, the court's volume comes from civil cases; the conduct gate is its own defect, not fixed inside Task 5.
 
@@ -365,7 +367,7 @@ Same shape as Task 4: typed receipts **in memory** plus pure lifecycle functions
 | Conduct Grave (the R5 investigation input) never fires today | §Task 5 read-before above |
 | `mulberry32_` exists for seeded sub-streams | `utilities/safeRand.js:33` |
 
-**1. Arrest receipt (the only engine edit).** `writeCitizenEvent_` builds, the caller stamps and pushes, exactly the hospital pattern:
+**1. Arrest receipt (the only engine edit).** `writeCitizenEvent_` builds, the caller stamps and pushes, exactly the hospital pattern. **One return channel:** `writeCitizenEvent_` still returns one receipt or null (`chaosCarsEngine.js:401`); the caller branches on `receipt.system` — `judicial` → key `patrol:<eventId>:<POPID>`, push `S.judicialEvents`; absent or `hospital` → today's ambulance path at `:601-606`, unchanged. A hit is ambulance or cop_car, never both, so one channel is enough.
 
 | Field | Value |
 |---|---|
@@ -379,12 +381,12 @@ Same shape as Task 4: typed receipts **in memory** plus pure lifecycle functions
 | `chargeGravity` | `serious` (the outcome's own tag, `Transgression-Serious`) |
 | `priorStatus` | the row's Status at arrest, original casing (Task 6 restores it) |
 
-Pushed to `S.judicialEvents`. **Eligibility:** adult (existing gate) **and** prior Status not a health state — a cop car does not arrest a citizen in a hospital bed; that hit stays a hook and a LifeHistory line. No change to target selection or outcome weights, so the chaos rng sequence is untouched.
+Pushed to `S.judicialEvents`. **Eligibility:** adult (existing gate) **and** prior Status not a health state. This is a correctness guard, not a fate call: `PriorStatus` is what release restores (R4), and a health state is not a restorable life-state — an arrest stored with `hospitalized` would re-admit the citizen on release with no hospital row behind it. The hit stays a hook and a LifeHistory line. No change to target selection or outcome weights, so the chaos rng sequence is untouched.
 
 **2. `phase05-citizens/judicialLifecycle.js` — pure functions, generic over `EntryType`.** Each entry type is a row in one transition table (`JUDICIAL_ENTRY_TYPES_`): its states, its decision step and its outcome set. `arrest` and `investigation` ship now; a civil type (dispute, divorce, lawsuit) is a new table row later, not a rewrite.
 
-- `openCaseFromReceipt_(receipt)` → a case object with the 20 `Judicial_Ledger` fields. `arrest`: `pending`, `ArrestCycle = OpenCycle`, `DecisionCycle = ArrestCycle + 1`. `investigation`: `investigating`, `ArrestCycle` blank. Rejects any receipt without `sourceEventId`/`popId`/known `entryType` with a throw.
-- `advanceCase_(case, cycle, rates, priorCaseCount)` → one step per Cycle, returns `{case, event}` (event kinds = the census fold's). `pending` at `DecisionCycle` draws released / diverted / held from the rates. `held` sets `HeldUntilCycle = decision + length`, closes `held-served` at that Cycle. `released`/`diverted` close the Cycle they're decided. `investigating` converts to `pending` (arrest, same Cycle) at `investigationArrestRate`, else closes `no-arrest`.
+- `openCaseFromReceipt_(receipt)` → a case object with the 21 `Judicial_Ledger` fields. `arrest`: `pending`, `ArrestCycle = OpenCycle`, `DecisionCycle = ArrestCycle + 1`. `investigation`: `investigating`, `ArrestCycle` blank. Rejects any receipt without `sourceEventId`/`popId`/known `entryType` with a throw.
+- `advanceCase_(case, cycle, rates, priorCaseCount)` → one step per Cycle, returns `{case, event}`. Event kinds, fixed: arrest opened (receipt) = `intake` · `pending→held` = `transition` · decided `released` / `diverted` = `exit` · `held→held-served` = `exit` · `investigating→pending` = `intake` (same `SourceEventId` as the investigation) · `investigating→no-arrest` = no event · no step this Cycle = no event. `pending` at `DecisionCycle` draws released / diverted / held from the rates. `held` sets `HeldUntilCycle = decision + length`, closes `held-served` at that Cycle. `released`/`diverted` close the Cycle they're decided. `investigating` converts to `pending` (arrest, same Cycle) at `investigationArrestRate`, else closes `no-arrest`.
 - **Held length (R3, 1–4 by gravity):** `minor` 1 · `serious` 1–3 · `grave` 3–4, uniform in range.
 - **Repeat arrest (R3):** a prior case for this POPID with `ArrestCycle` within the last 52 Cycles multiplies the held weight by `judicialRepeatHeldMultiplier`, then renormalises.
 - **Diverted = exit** (to OARI / program, no bed) for every charge today. Transfer to a treatment bed is left for a substance-class charge, which no entry path produces yet.
@@ -401,7 +403,9 @@ Pushed to `S.judicialEvents`. **Eligibility:** adult (existing gate) **and** pri
 | `investigationArrestRate` | 0.30 | R5 "set chance" — number is a tunable default |
 | `judicialRepeatHeldMultiplier` | 1.5 | R3 "raises the held odds" — number is a tunable default |
 
-**4. Grave conduct → investigation receipt.** `runConductEngine.js` `Transgression-Grave` branch pushes an `investigation` receipt (`kind` `transition` — an investigation is not an intake and moves no census count; `sourceSystem` `conduct`, key `conduct:C<cycle>:grave:<POPID>`, gravity `grave`). Its conversion to an arrest emits the `intake`, keyed on the same `SourceEventId`. Petty and Serious conduct open nothing (R5: never narrative matching). Inert until the conduct gate defect is fixed — filed separately.
+**4. Grave conduct → investigation receipt — spec only, NOT wired in this cut.** `investigation` stays in the entry-type table with its tests; the `runConductEngine.js` push lands in the commit that fixes the crime-reachable defect, where it can be seen on bench. When wired, the `Transgression-Grave` branch pushes an `investigation` receipt (`kind` `transition` — an investigation is not an intake and moves no census count; `sourceSystem` `conduct`, key `conduct:C<cycle>:grave:<POPID>`, gravity `grave`). Its conversion to an arrest emits the `intake`, keyed on the same `SourceEventId`. Petty and Serious conduct open nothing (R5: never narrative matching). Inert until the conduct gate defect is fixed — filed separately.
+
+**Build notes.** `S.judicialEvents` has no reader until Task 8 — pushed and dropped each Cycle. New ctx field + new file → `/stub-engine` regen in the build commit; `auditFunctionCollisions` 0.
 
 **Not in this cut.** Status flip to `detained`, custody re-assert, participation gates (Task 6); persistence, the `-2` suffix, one-open-case-per-POPID enforcement and the replay key fold (Task 8); other-resident demand (Task 7); civil entry types (builder design first); the conduct crime-reachable defect.
 
@@ -418,6 +422,10 @@ Pushed to `S.judicialEvents`. **Eligibility:** adult (existing gate) **and** pri
 10. fixed seed: chaos rng draw sequence identical before and after.
 
 ## Changelog
+
+- 2026-09-29 (engine-sheet) — Crime-reachable counted (0 live/bench) and filed engine.272; builder: tracked defendants pay fines from NetWorth.
+
+- 2026-09-29 (engine-sheet) — Advisor fixes folded into §Task 5 cut (return channel, PriorStatus guard, event kinds, conduct wire deferred, Counterparty column U); builder direction: court is the revenue engine.
 
 - 2026-09-29 (engine-sheet) — §Task 5 cut drafted (pre-review): arrest receipt, generic-over-EntryType lifecycle, rate keys, tests.
 

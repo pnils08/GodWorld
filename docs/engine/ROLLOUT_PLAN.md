@@ -116,6 +116,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | engine.269 | Two failing test files fixed 2026-09-29: crisisNaming 8b now guards that no prose name harvester returns (the tested function left with the S502 cut); businessOwnerDials fixture gains bizShipEchoShare | done-pending-archive | engine-sheet | `node scripts/run-tests.js` 2026-09-29: 266/266 |
 | engine.270 | Storylines keyed to engine events (crisis arcs, initiative stages) — BUILT and running; OPEN pending builder review the week of 2026-10-05, no further build until then | needs-info | engine-sheet — gated on the review | [[../plans/2026-09-28-storylines-keyed-to-engine-events]] §Observation and review |
 | engine.271 | City revenue — builder direction 2026-09-29: judicial fees/fines, business tax and housing tax feed City_Treasury, possibly broken out by district; pay mostly rises, this is the sink. Needs builder design calls (who pays, rates) before a plan | blocked | engine-sheet (sim call — builder in) | [[../plans/2026-09-21-care-and-justice-system]] §Later |
+| engine.272 | Conduct crime gate can't fire (§15): 0 of 963 live / 0 of 1114 bench citizens crime-reachable — no integrity band below neutral; 0 `Transgression-*` ever. Blocks R5 investigations (engine.254). Needs a trace of why integrity never falls | open | engine-sheet | [[../plans/2026-09-21-care-and-justice-system]] §Task 5 read-before |
 
 ### canon.* — World-fidelity layer
 

@@ -522,7 +522,9 @@ Outside review: `docs/research/2026-09-29-codex-task7-demand-first-cut.md` — 1
 
 **Not in this cut.** Named-hit frequency derived from demand (event count stays 3–15 — builder call below); the census call itself and the `otherResident` rows (Task 8); hospital-full feedback and capacity-scoped talk-back (Tasks 10/11); OARI eligible-call receipts and grading (Task 8/10, R5); court revenue from the 29 intakes (engine.271); civil entry types; the conduct crime-reachable trace (engine.272); care visits at city scale.
 
-**Builder questions (sim calls, not blocking the build — defaults above ship if unanswered, tunable live).**
+**Builder rulings (2026-09-29, 23:05).** (1) Both starting dials confirmed as proposed. (2) Task 7b confirmed: named-hit frequency follows demand next — "the rarity is accurate, so we don't end up arresting everyone in the sim"; build it after one bench read of this cut's placement. (3) Thin-hood concentration accepted: "as hoods balance tracked citizens the % stays" — the tracked share is the honest weight, intake fills the thin hoods over time, and "none tracked" is the packet's line until then.
+
+**Builder questions as put (sim calls, not blocking the build — defaults above ship if unanswered, tunable live).**
 1. `careJusticeAdmitPerSick` 0.02 and `careJusticeOariEligibleShare` 0.25 as the starting dials.
 2. Should the named-hit frequency follow demand next (Task 7b): the three demand vehicles leave the 3–15 draw and each hood's calls hit a tracked resident with probability `trackedShare_h` × one exposure dial. At dial 1.0 that is 0.44 cop-car contacts a Cycle (from 0.62) and one arrest per ~15 Cycles. Recommendation: yes, after one bench read of this cut's placement.
 3. The concentration reading above — accept "none tracked" for the thin hoods, or queue intake there.
@@ -594,3 +596,4 @@ Outside review: `docs/research/2026-09-29-codex-task7-demand-first-cut.md` — 1
 - 2026-09-21 (research-build) — Filed from builder direction after the OARI grading review; data-first map of chaos cars, Hospital_Ledger and the missing judicial and mental-health records.
 - 2026-09-29 (engine-sheet) — Task 7 cut drafted (§Task 7 cut): demand-first per-hood numbers before chaos, vehicle-aware picker, other-resident helper; advisor + codex review pending.
 - 2026-09-29 (engine-sheet) — codex review of the Task 7 cut: 14 findings verified, 4 contradictions corrected (pre-loop guard, rate framing, rng stream, demographics tab state), census contracts for Task 8 named. Cut READY.
+- 2026-09-29 (engine-sheet) — Builder rulings on the Task 7 cut: dials confirmed, Task 7b (frequency follows demand) confirmed for after the placement bench, thin-hood concentration accepted. Build dispatched to codex.

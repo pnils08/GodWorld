@@ -33,7 +33,7 @@ const ROOT = path.join(__dirname, '..');
 const ROLLOUT = path.join(ROOT, 'docs', 'engine', 'ROLLOUT_PLAN.md');
 const DOCS = path.join(ROOT, 'docs');
 const STATES = new Set([
-  'ready', 'in-progress', 'done-pending-archive', 'blocked', 'needs-info', 'wontfix', 'parked',
+  'ready', 'in-progress', 'live-observing', 'done-pending-archive', 'blocked', 'needs-info', 'wontfix', 'parked',
 ]);
 
 function arg(name, def) {

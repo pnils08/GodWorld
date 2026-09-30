@@ -1,44 +1,36 @@
 # GodWorld — Rollout Plan
 
-**This file is canonical for open/closed work** (S207). Pointer-only: one line per job, detail lives in the pointer doc — never here (S286 hard rule, Mike-direct).
+**Open work only, pointer-only:** one line per job, detail lives in the plan the row names. Closed work → [[ROLLOUT_ARCHIVE]]. Adding, closing and states → [[rollout-rules]]. Unscheduled designs → [[../plans/BACKLOG]]. Sim lens before touching any mechanic → [[SIM_DOCTRINE]] §15. Last updated 2026-09-29.
 
-**Status:** ACTIVE (building) | **Last Updated:** 2026-09-28 (codex — engine.254 intake review pointer). This file is the ONLY open-work tracker; [[archive/ENGINE_REPAIR]] retired to history.
-**Filing protocol (S212):** semantic groups + pointer-only entries — see [[rollout-rules]] §3–§5 (taxonomy, add, close). Full design: [[../adr/0005-rollout-plan-structure]].
-**North star:** `docs/ARCHITECTURE_VISION.md` — Jarvis + persistent sessions. Everything we build points there.
-**The lens (S441, Mike-direct):** [[SIM_DOCTRINE]] §15 — a gate that can't fire is a trick. Check every threshold against its column's live range; the chain to test is start → peak → end → aftermath → referenced. Read before touching any mechanic.
-**Completed phase details:** [[engine/ROLLOUT_ARCHIVE]] — read on demand, not at boot.
-**Research context:** `docs/RESEARCH.md` — findings log, evaluations, sources.
-**Wiki layer:** [[SCHEMA]] (conventions) + [[index]] (catalog) — read at boot. (Phase 41.1 + 41.2, S146.)
-**Plan-file contract:** [[plans/PLAN_TEMPLATE]] — every new plan copies this shape (S152). Also referenced from [[rollout-rules]] §4.
-**Phase backlog:** [[plans/BACKLOG]] — designs catalogued but not yet scheduled. Promote to its own plan file when a session picks one up.
-**Terminal owners:** `engine-sheet` / `research-build` (only two seats since 2026-08-20; media/civic terminals retired). Research-build owns this
-doc; engine-sheet executes substrate work. Media and civic are pipelines/crons
-research-build runs, not seats: they run skills and record findings in production gap logs, but never
-own rollout rows.
+**Reading this file:** read only down to the lookup table (first 32 lines) — that is the front door; pick a workstream, open its plan. Do not read the row table top to bottom; grep an id (`grep "^| engine.254 " docs/engine/ROLLOUT_PLAN.md`). Owners: engine-sheet (es) executes substrate, research-build (rb) keeps this file; media and civic are crons, not seats, and log to per-cycle gap logs, not here.
 
----
+## Pull order (builder, 2026-09-29)
 
-## Next work
+1. **engine.254** care and justice — the active build (es). Current assignments ride `SESSION_CONTEXT.md` `NEXT[<lane>]`.
+2. **Sports as a lived system** — HIGH priority, mid-build (engine.202 WeekRecord and engine.210 sports phase already live).
+3. **engine.94** citizen memory, then **engine.98** pets and **engine.264** the maker's hand (ruled, not started).
+4. Everything else by state. `ready` rows carry their own builder rulings.
 
-Current assignments ride `SESSION_CONTEXT.md` `NEXT[<lane>]` lines; the open rows are below.
+## Workstreams
 
-**Pull order (builder, 2026-09-29) — what a fresh session picks next:**
-1. **engine.254** care and justice — the active build (engine-sheet).
-2. **Sports as a lived system** — HIGH priority, mid-build: engine.204, 205, 206, 208, 209, 211, 194 (WeekRecord engine.202 and sports phase engine.210 already live). Plan: [[../plans/2026-09-11-sports-as-a-lived-system]].
-3. **engine.94** citizen memory, then **engine.98** pets and **engine.264** the maker's hand (newer, ruled, not started).
-4. Everything else by row state; `ready` rows carry their own builder rulings.
+| Workstream | Rows | Plan |
+|---|---|---|
+| Care and justice | engine.254 271 272 273 | [[../plans/2026-09-21-care-and-justice-system]] |
+| Sports as a lived system | engine.194 202 204 205 206 208 209 210 211 | [[../plans/2026-09-11-sports-as-a-lived-system]] |
+| Dials, adversity, approval | engine.193 197 201 213 214 | [[../plans/2026-09-10-inactivity-is-regression]] |
+| Civic game loop and initiatives | civic.24 33 38, engine.238 252 253 259 260 | [[../plans/2026-09-19-civic-wake-game-loop]] |
+| Household and citizen economy | engine.5 96 104 248 256 257 261 | [[../plans/2026-09-22-initiative-budget-disbursement]] + [[../plans/2026-08-10-economy-native-rebuild]] |
+| Citizen life and memory | engine.38 48 51 53 90 94 98 99 108 264, research.19 21 | [[../plans/2026-09-26-future-build-ideas]] + [[../plans/2026-07-06-citizen-loop-deepening]] |
+| Storylines and chaos | engine.11 266 268 270 | [[../plans/2026-09-28-storylines-keyed-to-engine-events]] |
+| Newsroom and daily news | pipeline.2 48 49 51 53 54 60 64 68 69, engine.41 76 91, research.27 | [[../plans/2026-09-13-run-cycle-packages-the-world]] |
+| Model use and autonomy | research.2 4 9 12 28, engine.7 | [[../plans/2026-09-22-agent-model-fit-test]] |
+| Engine health, boot, infra | engine.27 95 116, governance.51, infrastructure.3 6 8, canon.5 | [[../plans/2026-07-31-platform-ceiling-resilience]] |
 
-## Rules & conventions → [[rollout-rules]]
-
-**The operating doctrine for this tracker lives in [[rollout-rules]].** State labels, group taxonomy, how to add/close work, filing, archiving, and the sweep code — one doctrine, every terminal follows it. Read it before adding or closing a row.
-
-**Before you log an issue here:** rollout is the clean shared map. Skill pipelines (civic/media) log issues in their per-cycle production gap log (that's the research layer) — **not** as raw rollout rows. A row only appears here when work is *promoted* to tracked, and it points at the gap log rather than reproducing it. Full rule: [[rollout-rules]] §2.
-
-Rationale + alternatives: [[../adr/0005-rollout-plan-structure]]. The completed S145 10-step **Spine** roadmap is archived in [[ROLLOUT_ARCHIVE]].
+**States:** `in-progress` being built now · `live-observing` shipped, waiting on a fire or smoke test · `ready` pickable · `needs-info` waits on the builder or another lane · `blocked` waits on a named dependency · `parked` shelved, trigger in the row. Log cycle-level issues in the production gap logs, not as rows here.
 
 ---
 
-## Open Work — by group
+## Open Work — lookup table (grep an id; do not read top to bottom)
 
 Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3. Description lives in pointer doc, NOT in the row. Heavy-skill gap logs (civic + media pipelines) follow [[../plans/GAP_LOG_TEMPLATE]].
 
@@ -47,12 +39,12 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
 | pipeline.2 | Non-edition publishing pipeline (interview/dispatch/supplemental format contract) | in-progress | research-build / engine-sheet | [[../plans/2026-04-26-non-edition-publishing-pipeline]] |
-| pipeline.48 | Anthony + Hal solo sports seats (grok) — agents landed; open: Task 4 live-observe only (Task 5 media-terminal note is moot per engine.246) | in-progress | research-build | [[../plans/2026-08-07-anthony-hal-solo-sports-seats]] |
-| pipeline.49 | Civic solo seats (grok) — agents landed (on disk, confirmed); open: Task 3 live-observe only (Task 4 media-terminal note is moot per engine.246) | in-progress | research-build | [[../plans/2026-08-07-civic-solo-seats]] |
+| pipeline.48 | Anthony + Hal solo sports seats (grok) — agents landed; open: Task 4 live-observe only (Task 5 media-terminal note is moot per engine.246) | live-observing | research-build | [[../plans/2026-08-07-anthony-hal-solo-sports-seats]] |
+| pipeline.49 | Civic solo seats (grok) — agents landed (on disk, confirmed); open: Task 3 live-observe only (Task 4 media-terminal note is moot per engine.246) | live-observing | research-build | [[../plans/2026-08-07-civic-solo-seats]] |
 | pipeline.51 | NotebookLM Daily News — direction/archive hook landed; Phase 6 approved: deterministic Cycle/wake/article-state branch router, five-run shadow proof, then separately gated format activation | in-progress | engine-sheet | [[../plans/2026-07-10-notebooklm-bridge-deploy]] §Phase 6 + [[../research/2026-08-20-notebooklm-daily-branching]] |
 | pipeline.53 | Citizen day digest (kimi) — 24h people-slice folded into the 8am notebooklmDailyNews bounded source, written + audio per Mike 2026-08-09; engine-sheet lands config rebalance | in-progress | engine-sheet | [[../plans/2026-08-09-citizen-day-digest]] |
 | pipeline.54 | Restore S344 human story slots; pressure-test Article voice, Packet entity walls, and assignment coherence while scheduled wakes continue | in-progress | engine-sheet | [[../plans/2026-08-20-s344-human-story-template-pressure-test]] + [[../research/2026-08-20-s344-human-story-template]] |
-| pipeline.64 | Pre-Saturday coverage sweep (Sat 12:00) — reconciles unfiled Rhea verdicts, retries any stuck-uncompiled reporter before the 16:00 compile. Acceptance = next unattended Saturday firing | in-progress | research-build | [[../plans/2026-09-04-pre-saturday-coverage-sweep]] |
+| pipeline.64 | Pre-Saturday coverage sweep (Sat 12:00) — reconciles unfiled Rhea verdicts, retries any stuck-uncompiled reporter before the 16:00 compile. Acceptance = next unattended Saturday firing | live-observing | research-build | [[../plans/2026-09-04-pre-saturday-coverage-sweep]] |
 | pipeline.68 | Beat slices from sheets — T5 approach strings, T6 gate audit, T7b latency, T8 docs | in-progress | engine-sheet | [[../plans/2026-09-07-beat-slices-from-sheets-plan]] |
 | pipeline.69 | Run-cycle packages the world to its readers: T1 texture reads life events per hood; T2 wake tells a citizen their own seed; T3 seed floor (decide); T4 one hood roster (engine.214 first); T5 C108 slice readback | in-progress | engine-sheet | [[../plans/2026-09-13-run-cycle-packages-the-world]] |
 | governance.51 | Boot-doc consolidation — rule-only boot docs under a confirmed size ceiling, no stacked change-logs; 121 memory files deduped via /batch, builder-reviewed deletes. | in-progress | engine-sheet | [[../plans/2026-08-29-boot-doc-consolidation]] |
@@ -63,7 +55,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 |---|------|-------|----------|---------|
 | engine.5 | Household + family simulation (Representative Sample model, reframed S243) — functional youth seed → engine life-event simulation → publication-driven family materialization. Steward authority granted S243. | in-progress | engine-sheet | [[engine/archive/LEDGER_REPAIR_HOUSEHOLDS]] |
 | engine.7 | Engine Routing Foundation — Phase 6 cutover (gated on 3 cycles shadow data) | in-progress | research-build / engine-sheet | [[../plans/2026-05-07-engine-routing-foundation]] |
-| engine.11 | Chaos-cars engine — all 4 cascade outputs + all 3 validators now built (S423); only gate left is T5.3 live-fire on a real Tier-1 hit | in-progress | engine-sheet / research-build | [[../plans/2026-05-07-chaos-cars-engine]] — detail in pointer (relocated 2026-07-02) |
+| engine.11 | Chaos-cars engine — all 4 cascade outputs + all 3 validators now built (S423); only gate left is T5.3 live-fire on a real Tier-1 hit | live-observing | engine-sheet / research-build | [[../plans/2026-05-07-chaos-cars-engine]] — detail in pointer (relocated 2026-07-02) |
 | engine.20d | Sift Step 5 `covered-by-feature` triage handle (shipped) — cadence cap still open: 1 dedicated article/cycle/initiative, movement-only | ready | research-build | [[../plans/2026-05-22-engine-regulatory-friction]] §Task 5 |
 | engine.27 | Phase A re-enabled 09-26 post infra.12 PATCH fix; Phase B (B1-B4 not started, Apps Script + cycle-critical-path — retagged S501, was stale) | in-progress | engine-sheet | [[../plans/2026-05-26-engine-27-wd-card-auto-invalidation]] |
 | engine.41 | Engine-output → canon coverage — Wire 1 fixed `a5b03e96` (bench C143); Wire 1b column CLEARED 2026-09-27 (`SuggestedCitizenVoices` on Story_Seed_Deck) — build; Wire 3 re-verify | ready | engine-sheet | [[../plans/2026-06-24-engine-output-canon-coverage]] — detail in pointer (relocated 2026-07-02) |
@@ -77,12 +69,12 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | engine.104 | Citizen mint economy — arrivals born with role-consistent salary, education, career stage; builder 2026-09-29: an untracked employer is written UNTRACKED, never blank; plan revision before code (kimi/codex vet first) | ready | research-build → kimi/codex | [[../plans/2026-08-10-economy-native-rebuild]] + [[../research/2026-08-27-cascade-loop-closure-design]] |
 | engine.94 | Citizen memory — ruled 2026-09-27: folk memory returns as Event_Content_Ledger events, grudges via bonds/dials as needed; serve the sim, no new memory store — builder priority 2026-09-29: first of the newer three | ready | research-build / engine-sheet | [[../plans/2026-07-31-citizen-memory-perception]] |
 | engine.95 | Platform ceiling resilience — instrumentation live + wall baselined at 34–38% of 6-min wall (Tasks 1–3, 5–7 complete); remaining build: Task 4 checkpoint/resume + Task 5 append-dedup, Mike decisions locked, design + constraints in plan | in-progress | engine-sheet | [[../plans/2026-07-31-platform-ceiling-resilience]] |
-| engine.96 | Business lifecycle generator — Tasks 5–12 live (Task 12 owner door `68dc5a66` in PROD, Tasks 8/9 trued done S440); open: nothing named in the plan beyond watching the live mint | in-progress | engine-sheet | [[../plans/2026-08-01-business-lifecycle-generator]] |
+| engine.96 | Business lifecycle generator — Tasks 5–12 live (Task 12 owner door `68dc5a66` in PROD, Tasks 8/9 trued done S440); open: nothing named in the plan beyond watching the live mint | live-observing | engine-sheet | [[../plans/2026-08-01-business-lifecycle-generator]] |
 | engine.98 | Pets — ruled 2026-09-27: track pets; pet events; acquisition gated on dials (kindness/isolation), personality picks cat/dog/none — after engine.94 (builder 2026-09-29) | ready | research-build | [[../plans/2026-09-26-future-build-ideas]] §Builder rulings |
 | engine.193 | Adversity tiers — cuts 1–3 + 3b LIVE PROD @120; employmentFloor 0.85 on live. Open: citywide contraction generator (builder call, plan §engine.193) | in-progress | engine-sheet | [[../plans/2026-09-10-inactivity-is-regression]] §engine.193 |
 | engine.194 | Record-driven sentiment and game-night intensity; codex authors under Task 7, engine-sheet lands after Tasks 1–4. | blocked | engine-sheet | [[../plans/2026-09-11-sports-as-a-lived-system]] Task 7 |
 | engine.197 | 5 pins at 100 ruled seeder saturation, not chased; open: openness-down volume (engine.201) and ~60% all-neutral share via event-engine reach | in-progress | engine-sheet | [[../plans/2026-09-10-inactivity-is-regression]] §Acceptance results |
-| engine.201 | **RULED 2026-09-14 (builder): tagging out (cut S451 @79, verified absent), the rest stays, engine-sheet reviews — no further sim ruling.** Open: fixed-cohort causal proof on the next live fires | in-progress | engine-sheet | [[../plans/2026-09-10-inactivity-is-regression]] §BUILD SPEC + [[../plans/2026-09-13-codex-dial-drift-review]] |
+| engine.201 | **RULED 2026-09-14 (builder): tagging out (cut S451 @79, verified absent), the rest stays, engine-sheet reviews — no further sim ruling.** Open: fixed-cohort causal proof on the next live fires | live-observing | engine-sheet | [[../plans/2026-09-10-inactivity-is-regression]] §BUILD SPEC + [[../plans/2026-09-13-codex-dial-drift-review]] |
 | engine.202 | Sports WeekRecord — per-game fold LIVE PROD @120. Next: trigger-word hooks, dashboard input (3b), 3c | in-progress | engine-sheet | [[../plans/2026-09-11-sports-as-a-lived-system]] Task 1 |
 | engine.204 | Record × phase drives city-wide impact, concentrated in canonical stadium zones; replace authored geography. | ready | engine-sheet | [[../plans/2026-09-11-sports-as-a-lived-system]] Task 3 |
 | engine.205 | Weekly game economy in both directions; retain per-franchise effects, record-driven magnitude and downside. — absorbs engine.47 Hop 6 (bars fill on game nights, builder 2026-09-28) | ready | engine-sheet | [[../plans/2026-09-11-sports-as-a-lived-system]] Tasks 4, 10 |
@@ -93,20 +85,20 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | engine.209 | Derived franchise weight drifts on results, tenure and attendance; one feed tab, per-team downstream state. | ready | engine-sheet | [[../plans/2026-09-11-sports-as-a-lived-system]] Tasks 9–10 |
 | engine.213 | Approval reads the CITY, LIVE PROD @84; open: mood sawtooth (engine.214) and Mon-Thu office datawakes reaching no sheet | in-progress | engine-sheet | `phase05-citizens/updateCivicApprovalRatings.js`, [[../reference/DEPLOY_HISTORY]] §PROD @84 |
 | engine.214 | Hood-name `CLUSTERS` literal in Phase 2 — the lockstep symptom is fixed (engine.239b adjacency adoption, LIVE @101); left: rebuild cluster membership from ledger truth + World_Config, no hood names in the engine | ready | engine-sheet | [[../plans/2026-09-13-run-cycle-packages-the-world]] Task 4 |
-| engine.210 | Sports phase from the feed — LIVE PROD @97. Live C108 = `playoffs` 22/22, correct (last A's C108 row is playoffs; the championship row was typed for C109). Closes on the C109 smoke: `championship` 22/22 | in-progress | engine-sheet | [[../plans/2026-09-11-sports-as-a-lived-system]] Task 0 |
+| engine.210 | Sports phase from the feed — LIVE PROD @97. Live C108 = `playoffs` 22/22, correct (last A's C108 row is playoffs; the championship row was typed for C109). Closes on the C109 smoke: `championship` 22/22 | live-observing | engine-sheet | [[../plans/2026-09-11-sports-as-a-lived-system]] Task 0 |
 | engine.211 | Replace extreme phase-only gates and downstream team collapse with relative, record-driven effects. | ready | engine-sheet | [[../plans/2026-09-11-sports-as-a-lived-system]] §1 F8–F9 |
-| engine.238 | Patrol strategy — chief's `patrol` move → World_Config patrolStrategy LIVE (runner scripts); engine read bench-proven C117. Proof: first live chief patrol move at a close | in-progress | engine-sheet | [[../plans/2026-09-26-future-build-ideas]] §Builder rulings |
+| engine.238 | Patrol strategy — chief's `patrol` move → World_Config patrolStrategy LIVE (runner scripts); engine read bench-proven C117. Proof: first live chief patrol move at a close | live-observing | engine-sheet | [[../plans/2026-09-26-future-build-ideas]] §Builder rulings |
 | engine.248 | Faith orgs get a sim role — ruled 2026-09-27: trackable membership, slight dial nudge + faith-life events (giving, volunteering), consider a faith chaos car; copy from the sim, not real-world Oakland | ready | engine-sheet (sim judgement — builder included) | [[../research/2026-09-10-kimi-faith-lane-routing]]; gap log C108 G-EC55; `docs/canon/INSTITUTIONS.md` §Canon substitution table |
 | engine.252 | Retail-gated initiative domains have no lever (economic, workforce, sports marked not playable after the matched-control pair): design a provable measurable per domain, bring to the builder, flip only on a bench pair | ready | engine-sheet | [[../plans/2026-09-19-civic-wake-game-loop]] §Matched-control measurement; data `output/engine-sheet/2026-09-21-matched-control-c108-c112.json` |
 | engine.253 | Transit made true as its own system (builder 2026-09-21, own session): ridership and station load driven by hood canon: businesses in each served hood, where citizens live and work; initiatives are one input, not the frame. Design against SIM_DOCTRINE first; sim calls → builder | ready | engine-sheet | [[../plans/2026-09-19-civic-wake-game-loop]] §Rulings (g); prior work engine.183 [[../plans/2026-09-09-transit-hood-alignment-plan]] |
 | engine.257 | Household stress — ruled 2026-09-27: build spending (makes vs spends) so stress comes from real outflows, not a savings-share tweak | ready | engine-sheet (sim call — builder included) | gap log `output/production_log_run_cycle_c108_gaps.md` G-EC72; [[../plans/2026-09-22-initiative-budget-disbursement]] §Data reality, call 8 |
-| engine.259 | The fund moves: per-Cycle drain + grants to stressed households, keyed on `disbursement-active` (builder 2026-09-24). LIVE PROD @128 `578c2237`; INIT-001 seeded 23.8M live; first live drain C109. → [[../reference/DEPLOY_HISTORY]] §PROD @128 | in-progress | engine-sheet | `scripts/fundDisbursement.test.js` |
-| engine.260 | Civic-initiative employer path — BizID link + tracked-hire slots (builder-ruled 2026-09-25) LIVE PROD @131; C109 is the first live fire that can land a civic hire | in-progress | engine-sheet | [[../plans/2026-09-24-initiatives-in-the-world]] Job 4 |
+| engine.259 | The fund moves: per-Cycle drain + grants to stressed households, keyed on `disbursement-active` (builder 2026-09-24). LIVE PROD @128 `578c2237`; INIT-001 seeded 23.8M live; first live drain C109. → [[../reference/DEPLOY_HISTORY]] §PROD @128 | live-observing | engine-sheet | `scripts/fundDisbursement.test.js` |
+| engine.260 | Civic-initiative employer path — BizID link + tracked-hire slots (builder-ruled 2026-09-25) LIVE PROD @131; C109 is the first live fire that can land a civic hire | live-observing | engine-sheet | [[../plans/2026-09-24-initiatives-in-the-world]] Job 4 |
 | engine.256 | Leases one hood-median stamp — ruled 2026-09-27: draw within ±15% of the hood's rent, each renewal closes 25% of the gap to the hood's current rent. kimi WIP in stash@{0} (reroute writes via intents) | ready | engine-sheet (sim calls — builder included) | gap log `output/production_log_run_cycle_c108_gaps.md` G-EC71; [[../plans/2026-09-22-initiative-budget-disbursement]] §Data reality |
 | engine.254 | Care and justice — Tasks 1–5 done; Task 5 judicial receipts LIVE PROD @125 2026-09-29 (over @124 Task 4), smoke at C110. Next: Task 7 demand-first (per-hood city numbers drive chaos calls), then Task 6 | ready | engine-sheet | [[../plans/2026-09-21-care-and-justice-system]] + [[../research/2026-09-28-codex-care-justice-intake-plan]] |
 | engine.261 | Firm agents — ruled 2026-09-27: test basis, 3 business owners get a wake slice to go to work and run their business | ready | engine-sheet (sim judgement — builder included) | [[../plans/2026-09-26-future-build-ideas]] §Builder rulings |
 | engine.264 | The maker's hand — ruled 2026-09-27: an intake tab with dropdowns (seed, type, hood, +/−, level, systems); the sim never sees it, citizens only wonder 'sim or maker' — after engine.94 (builder 2026-09-29) | ready | research-build (sim judgement — builder call) | [[../plans/2026-09-26-future-build-ideas]] §Builder rulings |
-| engine.266 | C109 dead paths + Storyline_Tracker retirement — LIVE PROD @122; hold until the C110 smoke 2026-10-04 confirms live, then flip to done-pending-archive | in-progress | engine-sheet | `output/production_log_run_cycle_c109_gaps.md` G-EC59–61, 66, 71; ruling: `docs/plans/2026-09-28-storyline-tracker-retirement-ruling.md` |
+| engine.266 | C109 dead paths + Storyline_Tracker retirement — LIVE PROD @122; hold until the C110 smoke 2026-10-04 confirms live, then flip to done-pending-archive | live-observing | engine-sheet | `output/production_log_run_cycle_c109_gaps.md` G-EC59–61, 66, 71; ruling: `docs/plans/2026-09-28-storyline-tracker-retirement-ruling.md` |
 | engine.268 | Delete the frozen Storyline_Tracker + Storyline_Intake tabs and their dead writers, migration scripts and plumbing — builder go given 2026-09-29, es to export then delete | ready | engine-sheet | [[../plans/2026-09-28-storyline-tracker-retirement-ruling]] §Status log |
 | engine.270 | Storylines keyed to engine events (crisis arcs, initiative stages) — BUILT and running; OPEN pending builder review the week of 2026-10-05, no further build until then | needs-info | engine-sheet — gated on the review | [[../plans/2026-09-28-storylines-keyed-to-engine-events]] §Observation and review |
 | engine.271 | City revenue — ruled 2026-09-29: fines % of salary by charge level with caps, property tax per hood from the purchase price, yearly tax day, per-hood multiplier (hood population ÷ tracked). Starting dials in plan; plan + review before build, after engine.254 Task 7 | ready | engine-sheet | [[../plans/2026-09-21-care-and-justice-system]] §Later |
@@ -148,9 +140,9 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | research.21 | Citizen-signal story emergence — parked: detector build tasks never started (last touched 2026-07-28), es holds nothing; revisit with engine.270's storyline review | parked | research-build | [[../plans/2026-06-26-citizen-signal-story-emergence]] + [[../plans/2026-06-29-citizen-signal-detector-build]] |
 | engine.116 | Spreadsheet weight — T1 + T2-data SHIPPED, T4 Chicago retirement CLOSED S501; open: T2 code half, T3 archives out, T5 dead-tab pruning | in-progress | engine-sheet | [[../plans/2026-08-17-sheet-weight-reduction]] |
 | canon.5 | OUSD + Peralta CCD ruled contaminants (S368 Mike-direct); Oakland City Schools + Oakland CCD minted, repo text swapped. OPEN sheet renames: BIZ-00016, Peralta row, INIT-007 Notes; then Employer-column sweep | ready | engine-sheet | [[canon/INSTITUTIONS]] §Education |
-| research.27 | UNDOCKED/SpaceMolt — reseed + standings/coverage live; fame loop root cause found + weekly-digest credit fix SHIPPED, awaiting Sat acceptance | in-progress | research-build | [[../plans/2026-08-07-spacemolt-game-show]] §Post-ship (e) |
+| research.27 | UNDOCKED/SpaceMolt — reseed + standings/coverage live; fame loop root cause found + weekly-digest credit fix SHIPPED, awaiting Sat acceptance | live-observing | research-build | [[../plans/2026-08-07-spacemolt-game-show]] §Post-ship (e) |
 | research.28 | Agent model-fit test — does any in-world agent benefit from a stronger model; inputs 9/9 frozen, runner built (`scripts/modelFitRun.js`); next: grounding/move/persona checks, then the run when builder's Anthropic credit lands | in-progress | research-build (kimi froze inputs; agy/codex blind-score) | [[../plans/2026-09-22-agent-model-fit-test]] §Running the test |
-| pipeline.60 | Nia Rook newsroom dispatch — BUILT S379 (undocked desk quota, feed-built lane via buildNiaSlice, recap ledger, NIAROOK-UNDOCKED-1 package, roster row + beat rule); acceptance = next unattended 06:15 wake chain | in-progress | engine-sheet | [[../plans/2026-08-07-spacemolt-game-show]] §2.5 |
+| pipeline.60 | Nia Rook newsroom dispatch — BUILT S379 (undocked desk quota, feed-built lane via buildNiaSlice, recap ledger, NIAROOK-UNDOCKED-1 package, roster row + beat rule); acceptance = next unattended 06:15 wake chain | live-observing | engine-sheet | [[../plans/2026-08-07-spacemolt-game-show]] §2.5 |
 
 ### governance.* — Skills, MDs, ADRs, project hygiene
 

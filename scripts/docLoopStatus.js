@@ -35,7 +35,7 @@ const RESEARCH_DIR = path.join(ROOT, 'docs', 'research');
 const RESEARCH_SKIP = new Set(['RESEARCH_TEMPLATE.md', 'index.md']);
 
 const STATES = new Set([
-  'ready', 'in-progress', 'done-pending-archive', 'blocked', 'needs-info', 'wontfix', 'parked',
+  'ready', 'in-progress', 'live-observing', 'done-pending-archive', 'blocked', 'needs-info', 'wontfix', 'parked',
 ]);
 // Conformance budget for a row's item cell (the title between the id and state
 // cells). A ROLLOUT row is a POINTER: one actionable line + a → plan-pointer.

@@ -131,6 +131,7 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 06:52 es CLAIM codex es engine.273 wave 2 commit-B build
 07:20 es RELEASE codex (wave 2 B committed cbc9e638)
 07:20 es CLAIM agy es engine.273 wave 2 A+B diff review
+07:55 es CLAIM codex es engine.254 Task 8 cut review
 04:31 rb DONE engine.273 wave 3 directive fixes 9d90b140 (7 text swaps, no code path); plan §3 updated
 04:26 rb CHECK es active (1 shell), codex on wave 2 commit A, agy on Task 6 review; kimi idle. rb no open item
 05:27 rb CHECK es active (commit 05:18, wave 2 A+B built, agy claimed for its review), codex ended session. rb no open item

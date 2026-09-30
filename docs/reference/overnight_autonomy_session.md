@@ -85,6 +85,7 @@ Builder-owned items only, one line each: `HH:MM seat — the question, with enou
 02:05 es — engine.254 Task 6: should a detained citizen's salary keep accruing while held (1–4 Cycles)? Today nothing stops it. Options: keep paying; stop for the held weeks; or stop only when held, not while the case is pending.
 02:20 es — engine.273: the keep list never named these, so they stay in the table until you say. Spring Equinox, Summer Solstice, Fall Equinox, the Back-to-School week, and Hanukkah (the faith question above). Drop all five, keep some?
 02:20 es — engine.273: month names leave everything the newsroom sees. Internally the engine still counts a 1–12 month to time weather, school, the economy's year-end, births and weddings. Values don't change either way. Is that fine as a hidden rhythm, or do you want those curves re-pinned to the 52 weeks so no month exists anywhere?
+03:20 es — engine.254 Task 6: custody currently removes only what illness removes (work, household, civic/media, chaos targeting), per your 2026-09-26 ruling. A detained citizen can still have a baby, graduate, date, commute, get promoted in education, or migrate. So can a hospitalized one. Should custody block more of those, and which?
 
 ## 7. Working ledger
 
@@ -99,6 +100,7 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 02:58 es RELEASE codex (7b built f79bbe20, bench-proven @151 00bed6ad)
 02:58 es CLAIM agy es engine.254 Task 7b diff review (agy-review-7b403b5c.md in the inbox is rb's, untouched)
 03:05 es CLAIM codex es engine.273 wave 1 build (774ccf67)
+03:20 es RELEASE kimi (Task 6 review folded)
 
 ## 8. Stop rule and usage
 

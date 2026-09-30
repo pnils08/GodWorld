@@ -965,6 +965,15 @@ This pass: 4 closed (pipeline.3, engine.3, infrastructure.1, infrastructure.2) �
 
 ## S506 Archive Pass (2026-09-29, research-build) — post-S505 closures sweep
 
+2 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 pipeline.* + 1 civic.*.
+
+- **pipeline.2** [research-build / engine-sheet] — Non-edition publishing pipeline (interview/dispatch/supplemental format contract) — closed 2026-09-29: mechanism live; open tasks 8 and 10 were C92/C93-specific checks that cannot be replayed **State at archive:** done-pending-archive. Pointer: [[../plans/2026-04-26-non-edition-publishing-pipeline]]
+- **civic.38** [research-build / engine-sheet] — Stage machine + budgets + fund drain live; Initiatives in the World Jobs 1–6 LIVE PROD @132; C109 smoke Sun 2026-09-27 — closed 2026-09-29: Jobs 1–6 live, C109 smoke passed (week_state_c109 + moves_c109 filed); later design ideas live in the plan **State at archive:** done-pending-archive. Pointer: [[../plans/2026-09-19-civic-wake-game-loop]] + [[../plans/2026-09-24-initiatives-in-the-world]]
+
+This pass: 2 rows — pipeline.2 + civic.38. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+
+## S506 Archive Pass (2026-09-29, research-build) — post-S505 closures sweep
+
 1 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 pipeline.*.
 
 - **pipeline.35** [research-build / engine-sheet] — Cycle-init "admin" skill + one-true-cycle-source — closed 2026-09-29: cron-civic-run --stage=prep opens the one production_log_c{XX}.md; the per-cycle folder was never built and is dropped **State at archive:** done-pending-archive. Pointer: [[../plans/2026-05-31-cycle-init-admin-skill]] + [[../plans/2026-05-24-governance-14-edition-pipeline-rewrite]] — detail in pointer (relocated 2026-07-02)

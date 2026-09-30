@@ -81,6 +81,8 @@ Builder-owned items only, one line each: `HH:MM seat — the question, with enou
 01:40 es — engine.273 holidays: name the world-born holidays and confirm their weeks. Cycle 79 falls at year position 27 (C79 = Y2C27). For "the week the court opened" and "the week the world began running on its own", which Cycle did each happen? Names are told in-world, by what the world gained. Until named, the table ships with the ten kept holidays only.
 01:40 es — engine.273 faith: `HOLY_DAYS` gives 13 traditions month-timed real-world observances (Epiphany, Lent, Pentecost, Assumption, All Saints, Purim, Passover, Shavuot, Rosh Hashanah, Yom Kippur, Sukkot, Hanukkah, Ramadan, the Eids, Losar, Vesak, Obon, Holi, Janmashtami, Diwali, Vaisakhi, Gurpurab, Winter Solstice, General Assembly). Easter and Christmas stay. Keep, drop, or replace each with a sim storyline? The table is untouched until ruled.
 01:45 es — engine.272 (no citizen can reach crime): traced. Integrity never falls because nothing in ordinary life wears it down. Only crimes lower it much, and only already-reachable citizens commit them. Live: 926 of 963 sit at exactly 50, and the gate is under 20. Which hardships should wear on a citizen's scruples, and how fast? Candidates already in the engine: debt, rent, unemployment, a rough hood, a run of setbacks. Trace: care-and-justice plan §engine.272 trace.
+02:05 es — engine.254 Task 6 (detained): when a cop car arrests an athlete, the case opens but the athlete's Status would stay unchanged. The sports feed rejects any player not active or recovering, and sports isn't the engine's to gate. Keep that default, or should athletes be arrest-proof entirely?
+02:05 es — engine.254 Task 6: should a detained citizen's salary keep accruing while held (1–4 Cycles)? Today nothing stops it. Options: keep paying; stop for the held weeks; or stop only when held, not while the case is pending.
 
 ## 7. Working ledger
 
@@ -99,3 +101,4 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 - Self-loop → `/self-debug`.
 01:14 rb COMMIT 7b403b5c undocked fixes (brief schema, holder, weekly voiceDir). rb CLAIM kimi QUEUED review of 7b403b5c after es RELEASE; hourly rb check on es pane
 01:20 rb DONE dup-trace: daily flights, no defect. waiting es RELEASE kimi; hourly cron 17
+01:24 rb CLAIM agy rb undocked 7b403b5c adversarial review (kimi stays es's)

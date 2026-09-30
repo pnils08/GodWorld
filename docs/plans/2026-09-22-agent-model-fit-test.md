@@ -111,3 +111,4 @@ One call: `node scripts/modelFitRun.js --input <frozen file> --model <id> --prov
   Elias follow-up — a follow-up would need invented Elias quotes in the transcript, which canon
   rules forbid. Task 2 (runner) not started.
 - 2026-09-29 (rb, overnight): Task 4 deterministic side built — `scripts/modelFitScore.js` (schema, grounding, milestone cap, persona-fact contradictions from `output/model-fit/persona-facts.json`, word range, distinctiveness, seeded blind pack + separate key; `--self-test` passes on `output/model-fit/score-fixture.jsonl`). Built by agy from a spec, verified by rb. Still open: Task 3 real run (needs builder's Anthropic credit), blind scoring by agy + codex, report.
+- 2026-09-29 (rb) — infrastructure.7 (consolidate model calls on OpenRouter) folded into this test by the builder: same question (which agent needs which model), and current model alignment is running well; the test now also looks for deeper writing.

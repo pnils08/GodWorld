@@ -965,6 +965,15 @@ This pass: 4 closed (pipeline.3, engine.3, infrastructure.1, infrastructure.2) �
 
 ## S506 Archive Pass (2026-09-29, research-build) — post-S505 closures sweep
 
+2 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 pipeline.* + 1 infrastructure.*.
+
+- **pipeline.44** [research-build (pilot, media absorbed)] — Desk-slice fork (FLAGSHIP, Mike-direct S313) — T1–T5 done (3 skills live, T5 verified clean); open: T6 pilot only — closed 2026-09-29 (builder): became what the crons run **State at archive:** done-pending-archive. Pointer: [[../research/2026-07-11-desk-slice-fork]]
+- **infrastructure.7** [engine-sheet] — Consolidate model calls on OpenRouter — Rhea, Saturday run, Discord pair. Price the models FIRST; OpenRouter margin may beat "cheaper". Vision/image paths need separate proof. — folded 2026-09-29 (builder) into the model-fit test (research.28) **State at archive:** done-pending-archive. Pointer: [[../plans/2026-08-20-consolidate-model-calls-on-openrouter]]
+
+This pass: 2 rows — pipeline.44 + infrastructure.7. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+
+## S506 Archive Pass (2026-09-29, research-build) — post-S505 closures sweep
+
 4 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 2 engine.* + 2 governance.*.
 
 - **engine.8** [engine-sheet] — Header-drift detector C93 Type-2 triage (16 MED clusters) + C94 sweep absorbed S225 (G-EC5–G-EC21 orphan literals + G-EC24–G-EC32 defensive-fallback noise + G-RC7 KONO civic.10b follow-up) per triage cluster C11 — closed 2026-09-29 (builder): detector shipped in engineCycleAudit.js header-drift class (S202), triage clusters folded **State at archive:** done-pending-archive. Pointer: [[../plans/2026-05-05-writer-header-alignment-detector]] §Triage; C11 fold ref [[../plans/2026-05-22-c94-gap-log-triage]] §3 C11

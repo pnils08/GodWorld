@@ -271,7 +271,7 @@ function fixedCopRun(failPayload, status) {
   let foldOk = true, folded;
   try { folded = acct.foldCareJusticeReceipts_(ev.concat(life.events), {}); } catch (e) { foldOk = false; }
   assert('8 receipts + lifecycle events fold with no throw; one intake counted',
-    foldOk && folded.receipts.filter(r => r.kind === 'intake').length === 1 && folded.transitions >= 0,
+    foldOk && folded.receipts.filter(r => r.kind === 'intake').length === 1 && folded.transitions === life.events.filter(e => e.kind === 'transition').length,
     foldOk ? JSON.stringify(folded.receipts.map(r => r.kind)) : 'threw');
 }
 

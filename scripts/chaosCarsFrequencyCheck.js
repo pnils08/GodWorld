@@ -7,7 +7,11 @@
  * the loop). Counts live Chaos_Cars rows per CycleId and fails loud on any
  * loop count outside [3,15] after excluding demand-named citizen hits.
  *
- * Run: node scripts/chaosCarsFrequencyCheck.js
+ * Run: node scripts/chaosCarsFrequencyCheck.js --named-since <cycle> [--sheet-id <id>]
+ *   --named-since: the first Cycle this sheet fired with demand-named vehicles
+ *   (engine.254 Task 7b). Before it, a mapped vehicle's citizen rows were loop
+ *   draws and still count. Required once any vehicle is mapped — each sheet has
+ *   its own cutover (SANDBOX 0908: 111).
  * Exits 0 with a one-line summary if every cycle is in bounds, 1 (with the offending
  * cycles named) otherwise.
  */
@@ -20,25 +24,38 @@ const { loadChaosCarsConfig_ } = require('../utilities/chaosCarsConfig');
 const MIN_EVENTS = 3;
 const MAX_EVENTS = 15;
 
-function loopCounts(rows, configs) {
+function loopCounts(rows, configs, namedSince) {
   const mapped = new Set(configs.filter(v => v.namedCallsField).map(v => v.name));
+  if (mapped.size && !(Number.isInteger(namedSince) && namedSince > 0)) {
+    throw new Error('chaosCarsFrequencyCheck: --named-since <cycle> required while vehicles are demand-named');
+  }
   const counts = {};
   for (const r of rows) {
     if (!Object.prototype.hasOwnProperty.call(counts, r.CycleId)) counts[r.CycleId] = 0;
-    if (r.TargetScope === 'port' || (r.TargetScope === 'citizen' && mapped.has(r.VehicleType))) continue;
+    const passHit = r.TargetScope === 'citizen' && mapped.has(r.VehicleType) &&
+      Number(r.CycleId) >= namedSince;
+    if (r.TargetScope === 'port' || passHit) continue;
     counts[r.CycleId]++;
   }
   return counts;
 }
 
+function argValue(name) {
+  const i = process.argv.indexOf(name);
+  return i >= 0 ? process.argv[i + 1] : undefined;
+}
+
 async function main() {
+  const sheetId = argValue('--sheet-id');
+  if (sheetId) process.env.GODWORLD_SHEET_ID = sheetId; // after lib/env (DEPLOY.md trap 1)
+  const namedSince = argValue('--named-since') === undefined ? undefined : Number(argValue('--named-since'));
   const rows = await sheets.getSheetAsObjects('Chaos_Cars');
   if (!rows.length) {
     console.log('chaosCarsFrequencyCheck: 0 live Chaos_Cars rows — nothing to validate yet.');
     return;
   }
 
-  const counts = loopCounts(rows, loadChaosCarsConfig_());
+  const counts = loopCounts(rows, loadChaosCarsConfig_(), namedSince);
 
   const cycles = Object.keys(counts).sort((a, b) => Number(a) - Number(b));
   const violations = cycles.filter((c) => counts[c] < MIN_EVENTS || counts[c] > MAX_EVENTS);

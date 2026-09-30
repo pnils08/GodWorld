@@ -742,6 +742,10 @@ function chaosLog1p_(x) {
 
 function chaosBinomial_(rng, n, p, vehicle, hood) {
   var draw = rng(); // exactly one draw, including n=0 and p=0/1
+  if (typeof n !== 'number' || !isFinite(n) || n < 0 || n !== Math.floor(n) ||
+      typeof p !== 'number' || !isFinite(p) || p < 0 || p > 1) {
+    throw new Error('chaos_cars: invalid binomial parameters for ' + vehicle + ' ' + hood);
+  }
   if (!n || p === 0) return 0;
   if (p === 1) return n;
   var logP = Math.log(p);

@@ -107,6 +107,24 @@ console.log('Test 1: count bounds + determinism');
   assert('same seed → identical event count', ra.events === rb.events);
   assert('same seed → identical chaos rows (determinism)', rowsA === rowsB);
 
+  // 7b (10): same seed with a dial high enough that the pass names citizens —
+  // identical named set, judicial receipts and Chaos_Cars rows.
+  reset();
+  const na = makeCtx(777); na.summary.careJusticeDemand.exposureDial = 12;
+  eng.runChaosCarsEngine_(na);
+  const namedRowsA = JSON.stringify(chaosRows);
+  const namedA = chaosRows.filter(r => r.vehicleType === 'cop_car' && r.targetScope === 'citizen').map(r => r.targetId);
+  const judA = JSON.stringify(na.summary.judicialEvents || []);
+  reset();
+  const nb = makeCtx(777); nb.summary.careJusticeDemand.exposureDial = 12;
+  eng.runChaosCarsEngine_(nb);
+  const namedRowsB = JSON.stringify(chaosRows);
+  const namedB = chaosRows.filter(r => r.vehicleType === 'cop_car' && r.targetScope === 'citizen').map(r => r.targetId);
+  assert('7b (10) same seed → identical named set, receipts and Chaos_Cars rows, with named hits present',
+    namedA.length > 0 && JSON.stringify(namedA) === JSON.stringify(namedB) &&
+    namedRowsA === namedRowsB && judA === JSON.stringify(nb.summary.judicialEvents || []),
+    'named ' + namedA.length + '/' + namedB.length);
+
   reset();
   const c2 = makeCtx(99999); eng.runChaosCarsEngine_(c2);
   assert('different seed → (usually) different output', JSON.stringify(chaosRows) !== rowsA);
@@ -457,11 +475,14 @@ console.log('\nTask 7b: named calls and loop reweight');
   capRows.push({ CycleId: 99, VehicleType: 'cop_car', TargetScope: 'citizen' });
   capRows.push({ CycleId: 99, VehicleType: 'container_ship', TargetScope: 'port' });
   capRows.push({ CycleId: 100, VehicleType: 'cop_car', TargetScope: 'citizen' });
-  const counted = validator.loopCounts(capRows, cfg.loadChaosCarsConfig_());
+  capRows.push({ CycleId: 50, VehicleType: 'cop_car', TargetScope: 'citizen' });
+  const counted = validator.loopCounts(capRows, cfg.loadChaosCarsConfig_(), 99);
+  let cutoverRequired = false;
+  try { validator.loopCounts(capRows, cfg.loadChaosCarsConfig_()); } catch (e) { cutoverRequired = /named-since/.test(e.message); }
   assert('7b forced 3 and 15 attempts produce 3 and 15 non-port loop rows',
     low.rows.length === 3 && high.rows.length === 15);
-  assert('7b validator excludes mapped citizen and port rows from 15-attempt Cycle',
-    counted[99] === 15 && counted[100] === 0 &&
+  assert('7b validator excludes mapped citizen and port rows from 15-attempt Cycle; pre-cutover cop citizen rows still count; cutover required',
+    counted[99] === 15 && counted[100] === 0 && counted[50] === 1 && cutoverRequired &&
     validator.MIN_EVENTS === 3 && validator.MAX_EVENTS === 15);
   assert('7b pass and loop payload shapes match; fixture tracked counts match ledger',
     JSON.stringify(Object.keys(row).sort()) === JSON.stringify(Object.keys(low.rows[0]).sort()) &&

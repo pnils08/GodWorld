@@ -88,6 +88,8 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 
 01:10 es CLAIM codex es engine.254 Task 7b cut review
 01:08 es CLAIM kimi es engine.273 Task 2 design review
+01:55 es RELEASE codex (7b cut review folded 893fef52)
+01:55 es CLAIM codex es engine.254 Task 7b build
 
 ## 8. Stop rule and usage
 
@@ -95,3 +97,5 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 - No subagent fan-out for coding. Advisor once before a cut and once before declaring done; not on mechanical trims.
 - Systemic blocker (unexplained test failure, guest rewriting outside scope, weekly budget warning): stop that thread, log `BLOCKED <what>`, take the next item. Two consecutive blocked threads → stand down and wait for morning; do not thrash.
 - Self-loop → `/self-debug`.
+01:14 rb COMMIT 7b403b5c undocked fixes (brief schema, holder, weekly voiceDir). rb CLAIM kimi QUEUED review of 7b403b5c after es RELEASE; hourly rb check on es pane
+01:20 rb DONE dup-trace: daily flights, no defect. waiting es RELEASE kimi; hourly cron 17

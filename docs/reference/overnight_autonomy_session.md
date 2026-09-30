@@ -86,6 +86,7 @@ Builder-owned items only, one line each: `HH:MM seat — the question, with enou
 02:20 es — engine.273: the keep list never named these, so they stay in the table until you say. Spring Equinox, Summer Solstice, Fall Equinox, the Back-to-School week, and Hanukkah (the faith question above). Drop all five, keep some?
 02:20 es — engine.273: month names leave everything the newsroom sees. Internally the engine still counts a 1–12 month to time weather, school, the economy's year-end, births and weddings. Values don't change either way. Is that fine as a hidden rhythm, or do you want those curves re-pinned to the 52 weeks so no month exists anywhere?
 03:20 es — engine.254 Task 6: custody currently removes only what illness removes (work, household, civic/media, chaos targeting), per your 2026-09-26 ruling. A detained citizen can still have a baby, graduate, date, commute, get promoted in education, or migrate. So can a hospitalized one. Should custody block more of those, and which?
+07:45 es — engine.254 Task 8: other residents (the untracked city) leave hospital beds and custody on a stay model. Default 2 Cycles average stay for both. Is 2 right, and should hospital and custody have separate dials? (Tunable live either way; the census draft ships the default.)
 
 ## 7. Working ledger
 
@@ -132,3 +133,4 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 07:20 es CLAIM agy es engine.273 wave 2 A+B diff review
 04:31 rb DONE engine.273 wave 3 directive fixes 9d90b140 (7 text swaps, no code path); plan §3 updated
 04:26 rb CHECK es active (1 shell), codex on wave 2 commit A, agy on Task 6 review; kimi idle. rb no open item
+05:27 rb CHECK es active (commit 05:18, wave 2 A+B built, agy claimed for its review), codex ended session. rb no open item

@@ -349,7 +349,77 @@ Outside review: `docs/research/2026-09-29-codex-care-justice-task4-cut.md` — 7
 
 Crime entry is rare by design and the investigation path has no input (§15). Per the builder's weight above, the court's volume comes from civil cases; the conduct gate is its own defect, not fixed inside Task 5.
 
+### Task 5 cut — judicial entry and outcome decision (engine-sheet, 2026-09-29 — DRAFT, pre-review)
+
+Same shape as Task 4: typed receipts **in memory** plus pure lifecycle functions. Nothing persists a case, flips Status or reads World_Config inside a Cycle until Tasks 6/8 wire it — so this cut cannot change a live Cycle except by one new in-memory push.
+
+**Read before drafting.**
+
+| Fact | Source |
+|---|---|
+| `arrested` is a config outcome (cop_car, weight 0.15, tag `Transgression-Serious`); gate `!ls.isMinor` | `utilities/chaosCarsConfig.js:183`; `chaosCarsEngine.js:93` |
+| The arrest branch writes a `CITIZEN_ARRESTED` hook and a LifeHistory line; no receipt, no ctx field | `chaosCarsEngine.js:377-383`, `:397-400` |
+| Chaos targets skip only `deceased`/`inactive`/`traded`/`pending` — a hospitalized citizen can draw `arrested` | `chaosCarsEngine.js:156-168` |
+| The payload `eventId` is drawn after `writeCitizenEvent_` returns; the hospital receipt is stamped and pushed by the caller | `chaosCarsEngine.js:598-606` |
+| `S.judicialEvents` does not exist anywhere | wiring card, `ENGINE_STUB_REVERSE.json` |
+| Conduct Grave (the R5 investigation input) never fires today | §Task 5 read-before above |
+| `mulberry32_` exists for seeded sub-streams | `utilities/safeRand.js:33` |
+
+**1. Arrest receipt (the only engine edit).** `writeCitizenEvent_` builds, the caller stamps and pushes, exactly the hospital pattern:
+
+| Field | Value |
+|---|---|
+| `system` | `judicial` |
+| `kind` | `intake` |
+| `intakeType` / `entryType` | `arrest` |
+| `sourceSystem` | `patrol` |
+| `sourceEventId` | `patrol:<chaos eventId>:<POPID>` |
+| `popId`, `name`, `neighborhood`, `cycle` | as the hospital receipt |
+| `chargeCause` | the outcome's LifeHistory text (descriptive, never a key) |
+| `chargeGravity` | `serious` (the outcome's own tag, `Transgression-Serious`) |
+| `priorStatus` | the row's Status at arrest, original casing (Task 6 restores it) |
+
+Pushed to `S.judicialEvents`. **Eligibility:** adult (existing gate) **and** prior Status not a health state — a cop car does not arrest a citizen in a hospital bed; that hit stays a hook and a LifeHistory line. No change to target selection or outcome weights, so the chaos rng sequence is untouched.
+
+**2. `phase05-citizens/judicialLifecycle.js` — pure functions, generic over `EntryType`.** Each entry type is a row in one transition table (`JUDICIAL_ENTRY_TYPES_`): its states, its decision step and its outcome set. `arrest` and `investigation` ship now; a civil type (dispute, divorce, lawsuit) is a new table row later, not a rewrite.
+
+- `openCaseFromReceipt_(receipt)` → a case object with the 20 `Judicial_Ledger` fields. `arrest`: `pending`, `ArrestCycle = OpenCycle`, `DecisionCycle = ArrestCycle + 1`. `investigation`: `investigating`, `ArrestCycle` blank. Rejects any receipt without `sourceEventId`/`popId`/known `entryType` with a throw.
+- `advanceCase_(case, cycle, rates, priorCaseCount)` → one step per Cycle, returns `{case, event}` (event kinds = the census fold's). `pending` at `DecisionCycle` draws released / diverted / held from the rates. `held` sets `HeldUntilCycle = decision + length`, closes `held-served` at that Cycle. `released`/`diverted` close the Cycle they're decided. `investigating` converts to `pending` (arrest, same Cycle) at `investigationArrestRate`, else closes `no-arrest`.
+- **Held length (R3, 1–4 by gravity):** `minor` 1 · `serious` 1–3 · `grave` 3–4, uniform in range.
+- **Repeat arrest (R3):** a prior case for this POPID with `ArrestCycle` within the last 52 Cycles multiplies the held weight by `judicialRepeatHeldMultiplier`, then renormalises.
+- **Diverted = exit** (to OARI / program, no bed) for every charge today. Transfer to a treatment bed is left for a substance-class charge, which no entry path produces yet.
+- **Randomness:** the rng is injected; the Task 6 caller passes `seededRngFor_(cycle, 'judicial:' + SourceEventId)` (`utilities/cycleModes.js:82`), never `ctx.rng` — decisions are replay-stable per case and cannot shift any other engine's draws. (`mulberry32_` is not used: it is defined twice as a global, `applyWeatherModel.js:50` and `textureTriggers.js:25`.)
+- `loadJudicialRates_(worldConfig)` → validated object; throws (visible) on a missing key, a non-number, a negative, or an outcome split not summing to 1 ± 0.001.
+
+**3. World_Config keys (defaults; added live only when Task 6 wires the reader).**
+
+| Key | Default | Source |
+|---|---|---|
+| `judicialReleasedRate` | 0.40 | ruling 2 |
+| `judicialDivertedRate` | 0.25 | ruling 2 |
+| `judicialHeldRate` | 0.35 | ruling 2 |
+| `investigationArrestRate` | 0.30 | R5 "set chance" — number is a tunable default |
+| `judicialRepeatHeldMultiplier` | 1.5 | R3 "raises the held odds" — number is a tunable default |
+
+**4. Grave conduct → investigation receipt.** `runConductEngine.js` `Transgression-Grave` branch pushes an `investigation` receipt (`kind` `transition` — an investigation is not an intake and moves no census count; `sourceSystem` `conduct`, key `conduct:C<cycle>:grave:<POPID>`, gravity `grave`). Its conversion to an arrest emits the `intake`, keyed on the same `SourceEventId`. Petty and Serious conduct open nothing (R5: never narrative matching). Inert until the conduct gate defect is fixed — filed separately.
+
+**Not in this cut.** Status flip to `detained`, custody re-assert, participation gates (Task 6); persistence, the `-2` suffix, one-open-case-per-POPID enforcement and the replay key fold (Task 8); other-resident demand (Task 7); civil entry types (builder design first); the conduct crime-reachable defect.
+
+**Test — `scripts/judicialLifecycle.test.js`** (synthetic, no sheet):
+1. forced draws → each of released / diverted / held; held closes `held-served` at `HeldUntilCycle`, not before.
+2. held length stays inside its gravity range across 1000 seeds; repeat-arrest raises the held share.
+3. same case, same Cycle, run twice → identical outcome (replay).
+4. `ctx.rng` draw count identical with and without a decision.
+5. invalid rates (missing, NaN, negative, sum ≠ 1) → throw naming the key.
+6. investigation → arrest at the rate, else `no-arrest`; Petty/Serious conduct → no receipt.
+7. chaos arrest on active / retired adult → one receipt, `priorStatus` casing preserved; on a minor → no arrest drawn; on a hospitalized citizen → no receipt, hook still written.
+8. every lifecycle event folds through `careJusticeAccounting` with no throw.
+9. unknown `entryType` → throw.
+10. fixed seed: chaos rng draw sequence identical before and after.
+
 ## Changelog
+
+- 2026-09-29 (engine-sheet) — §Task 5 cut drafted (pre-review): arrest receipt, generic-over-EntryType lifecycle, rate keys, tests.
 
 - 2026-09-29 (engine-sheet) — Task 5 read-before table added; builder weight: court is mainly civil (taxing, disputes), crime occasional.
 

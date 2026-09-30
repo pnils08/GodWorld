@@ -27,7 +27,8 @@ pointers:
 - **Real-world storylines as little as possible.** Drop the real-world political and heritage observances (the table carries e.g. MLK Day, Black History Month, Presidents Day, Pride Month, Memorial Day, Cinco de Mayo). Keep basic shared ones: New Year, Valentine's, Easter, Halloween, Thanksgiving, Christmas, New Year's Eve.
 - **Add world-born holidays that celebrate the world and its accomplishments.** Creation Day already is one (cycle-of-year 48, the world's founding anniversary — `advanceSimulationCalendar.js:164`). Candidates from the builder: the week the world began running on its own, the week the court system opened, the week at Cycle 79.
 - **Tax day** (engine.271) is a cycle with no holiday and low engine activity.
-- **Scope is what the engine hardcodes** (clarified 2026-09-29). Loose mentions of months or holidays in desk/agent prose are not the problem; the target is engine code that keys behaviour off a hardcoded holiday or month.
+- **The contamination test (clarified 2026-09-29).** Loosely mentioning a month is not contamination. Contamination is a month or holiday that *directs* something (an engine branch, a cron, an agent or skill instruction), or any use of a holiday the world doesn't honor. Scope covers engine, crons, agents and skills under that test.
+- **Keep list extended (2026-09-29):** Mother's Day, Father's Day, First Friday are kept. St Patrick's, Earth Day, Summer Festival drop. Faith: Easter (and Christmas) are on the keep list; the rest of the automatic real-world holy-day calendar needs decisions, under the rule *more sim storylines, less real-world influence*.
 
 **Canon guard (engine-sheet):** a world-born holiday is named and told in-world only. The builder, the assistant, crons and the build are never named or implied in a holiday's name, text or story — they are marked by what the world gained that week (e.g. "the week the court opened"), per the never-reveal-the-builder rule and canon-leak-guard.
 
@@ -72,10 +73,32 @@ pointers:
 - Keep one priority table. The live table is `getSimHoliday.js:137-191`; `:351-375` is dead.
 - `OpeningDay`: every branch, now including `filterNoiseEvents`, either reads the sports feed (`S.sportsFeedEntries`) or is deleted. No fixed cycle.
 
-**Builder calls (sim):**
-- (a) Mother's Day, Father's Day, St Patrick's, Earth Day and Summer Festival are not political or heritage days, but they are not on the keep list either. The inventory drops them. Confirm.
-- (b) First Friday is a monthly cadence built on the 12-month structure. Keep it as a world rhythm on a cycle cadence, or drop it?
-- (c) Faith holy days are month-timed. Drop the automatic observances, or keep faith life on cycle timing?
+**Builder calls — resolved 2026-09-29:**
+- Mother's Day, Father's Day and First Friday are kept. St Patrick's, Earth Day and Summer Festival are dropped.
+- First Friday moves from "first cycle of each old month" to a cycle cadence (engine-sheet sets the cadence).
+- Faith: Easter and Christmas stay. For the rest of `HOLY_DAYS`, Task 2 brings the list to the builder for decisions, under *more sim storylines, less real-world influence*.
+- Dropped holidays' content pools are **deleted**, not left dormant. The inventory notes that a reused pool could still expose dormant text.
+
+#### Task 1 review — the contamination test applied beyond the engine (research-build, 2026-09-29)
+
+The test: a month or holiday that *directs* a cron, agent or skill, or any use of a holiday the world doesn't honor. Loose mentions pass.
+
+**Directive contamination found (fix in Task 2's build, engine-sheet executes):**
+1. `.claude/agents/culture-desk/IDENTITY.md:28` and `LENS.md:184`: the desk's editorial-stance example is "a Fourth of July that feels different". Swap it for an honored or world-born moment.
+2. "Summer Festival" is the model holiday label in `letters-desk/RULES.md:53`, `sports-desk/RULES.md:43` and `culture-desk/RULES.md:42`. It is now dropped, so swap the example for an honored holiday.
+3. `.claude/skills/write-supplemental/SKILL.md:58`: "If Rosh Hashanah is happening across three neighborhoods, a culture piece acknowledges it" directs a real-world observance. Swap it for a sim storyline; this follows the faith ruling.
+4. `scripts/buildInitiativePackets.js:103`: "5 deliverables due September 15" is a hard calendar deadline in a packet that `run-cycle/SKILL.md:150` still builds. Convert it to a cycle or drop the date.
+5. The engine's month reaches agents through `scripts/buildWorldSummary.js:198` ("Month N"), the month name in `buildDeskPackets.js:511-558`, and the workspace headers in `buildVoiceWorkspaces.js:406` and `buildInitiativeWorkspaces.js:72` (both legacy per `city-hall/SKILL.md:365-368`). These carry whatever the engine emits: they drop the month when `monthName`/`simMonth` leave output, and season stays.
+
+**Checked and passing (loose or guard):**
+- Martin Luther King Jr. Way is a street (`freelance-firebrand`).
+- The mayor's "Oakland pride" is a word, not the holiday.
+- The script hits for "independence rule" and "quiet pride" are not holidays.
+- The April, "January Tuesday" and October voice examples are loose mentions.
+- First Friday appears across the culture desk and skills; it is now honored.
+- `dispatch/SKILL.md:228` "First Friday in October" is loose.
+- Forbidden-date examples and `validateEdition.js` month checks are guards, so keep them.
+- Codex's script coverage held: the six extra script files a sweep flagged are all false positives.
 
 ### Task 2 — design (engine-sheet, after the inventory)
 
@@ -85,3 +108,5 @@ pointers:
 
 - 2026-09-29 (engine-sheet) — Plan filed from builder direction; Task 1 dispatched to codex.
 - 2026-09-29 (research-build) — Task 1 verified and ruled (§Task 1 outcome): 4 missed engine readers added, scope set to engine hardcoding, 3 builder calls raised.
+- 2026-09-29 (kimi) — Adversarial review of the ruling (§Task 1 review — kimi): agree; all sampled claims verified, 4 small same-class additions in `utilities/`.
+- 2026-09-29 (research-build) — builder calls resolved (Mother's/Father's Day + First Friday kept; faith list to builder in Task 2); contamination test applied to agents/skills/crons: 4 directive fixes + month-carrier note.

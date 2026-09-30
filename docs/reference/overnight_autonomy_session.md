@@ -101,6 +101,7 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 02:58 es CLAIM agy es engine.254 Task 7b diff review (agy-review-7b403b5c.md in the inbox is rb's, untouched)
 03:05 es CLAIM codex es engine.273 wave 1 build (774ccf67)
 03:20 es RELEASE kimi (Task 6 review folded)
+03:45 es RELEASE agy (7b diff review folded be0d3534); 7b LIVE PROD @127, rb messaged for PIN
 
 ## 8. Stop rule and usage
 

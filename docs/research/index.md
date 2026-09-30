@@ -1,7 +1,7 @@
 ---
 title: Research Sub-Catalog
 created: 2026-06-01
-updated: 2026-09-21
+updated: 2026-09-29
 type: reference
 tags: [research, architecture, active]
 sources:
@@ -25,6 +25,9 @@ Grep here before grepping the tree. Each row: file · one-line purpose · verdic
 
 | File | Purpose | Verdict |
 |------|---------|---------|
+| **[[2026-09-29-codex-holiday-calendar-inventory]]** | engine.273 Task 1: hardcoded holidays, months and real-world observances across engine, agents, skills and crons | `adopt` — verified by research-build 2026-09-29; 8 missed readers added in the plan |
+| **[[2026-09-29-codex-task7-demand-first-cut]]** | Adversarial review of the engine.254 Task 7 cut: guard placement, rate framing, rng stream, demographics tab state, census contracts, OARI read | `adopt` — 14 findings verified and folded before build |
+| **[[2026-09-29-kimi-care-justice-task7-diff]]** | Adversarial diff review of `58d06aa0` (engine.254 Task 7 demand-first): fallback/clamp/gate/rng/ES5 hunts vs §Task 7 cut; F1–F4 low notes | `SHIP` |
 | **[[2026-09-21-codex-civic38-stall-clock-review]]** | Review of 7ba27e95: ineligible revival, recovery-state deadlock, work boundaries, shared hold writes, loop rewards, T7 precedence and blocked-gate clock policy | `adopt` — bounded corrections to existing civic.38 Task 4; clean loop and ordering verified |
 | **[[2026-09-21-codex-civic38-delivering-review]]** | Review of 9b81a08a + 411b9e69: completion payout retries, mixed-attempt cohorts, regression eligibility, dial and membership boundaries; bench evidence limits | `adopt` — corrections to existing civic.38 Task 4; normal-path arithmetic and call-site guards verified |
 | **[[2026-09-21-codex-civic38-stage-handler-review]]** | Review of 7268a284: call-site guards, carry-key/crash/reset defects, T7 precedence; Delivering comparator and baseline observation boundary | `adopt` — corrections and prior-cohort Phase-2 recommendation for existing civic.38 Task 4 |

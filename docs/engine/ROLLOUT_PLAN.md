@@ -41,7 +41,6 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
 | pipeline.2 | Non-edition publishing pipeline (interview/dispatch/supplemental format contract) | in-progress | research-build / engine-sheet | [[../plans/2026-04-26-non-edition-publishing-pipeline]] |
-| pipeline.35 | Cycle-init "admin" skill + one-true-cycle-source | ready | research-build / engine-sheet | [[../plans/2026-05-31-cycle-init-admin-skill]] + [[../plans/2026-05-24-governance-14-edition-pipeline-rewrite]] — detail in pointer (relocated 2026-07-02) |
 | pipeline.48 | Anthony + Hal solo sports seats (grok) — agents landed; open: Task 4 live-observe only (Task 5 media-terminal note is moot per engine.246) | in-progress | research-build | [[../plans/2026-08-07-anthony-hal-solo-sports-seats]] |
 | pipeline.49 | Civic solo seats (grok) — agents landed (on disk, confirmed); open: Task 3 live-observe only (Task 4 media-terminal note is moot per engine.246) | in-progress | research-build | [[../plans/2026-08-07-civic-solo-seats]] |
 | pipeline.51 | NotebookLM Daily News — direction/archive hook landed; Phase 6 approved: deterministic Cycle/wake/article-state branch router, five-run shadow proof, then separately gated format activation | in-progress | engine-sheet | [[../plans/2026-07-10-notebooklm-bridge-deploy]] §Phase 6 + [[../research/2026-08-20-notebooklm-daily-branching]] |

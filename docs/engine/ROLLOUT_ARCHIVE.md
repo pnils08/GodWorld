@@ -965,6 +965,14 @@ This pass: 4 closed (pipeline.3, engine.3, infrastructure.1, infrastructure.2) �
 
 ## S506 Archive Pass (2026-09-29, research-build) — post-S505 closures sweep
 
+1 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 pipeline.*.
+
+- **pipeline.35** [research-build / engine-sheet] — Cycle-init "admin" skill + one-true-cycle-source — closed 2026-09-29: cron-civic-run --stage=prep opens the one production_log_c{XX}.md; the per-cycle folder was never built and is dropped **State at archive:** done-pending-archive. Pointer: [[../plans/2026-05-31-cycle-init-admin-skill]] + [[../plans/2026-05-24-governance-14-edition-pipeline-rewrite]] — detail in pointer (relocated 2026-07-02)
+
+This pass: 1 rows — pipeline.35. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+
+## S506 Archive Pass (2026-09-29, research-build) — post-S505 closures sweep
+
 2 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 pipeline.* + 1 infrastructure.*.
 
 - **pipeline.44** [research-build (pilot, media absorbed)] — Desk-slice fork (FLAGSHIP, Mike-direct S313) — T1–T5 done (3 skills live, T5 verified clean); open: T6 pilot only — closed 2026-09-29 (builder): became what the crons run **State at archive:** done-pending-archive. Pointer: [[../research/2026-07-11-desk-slice-fork]]

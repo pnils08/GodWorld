@@ -116,7 +116,7 @@ All three open calls ruled — the recommended defaults above, as stated:
 
 ### Later (folded in from the 2026-09-26 builder proposal, not part of this build)
 
-- **The judicial system is a civil system too, not only crime (builder direction 2026-09-29).** Build-on vehicles once the case flow proves: divorce goes through the court; lawsuits; court fees and fines as a new way to tax. Schema room already exists: a civil case is a new `EntryType` on `Judicial_Ledger` (e.g. `divorce`, `lawsuit`) with no arrest and no custody — the census counts custody only for `pending`/`held`, so civil cases never inflate it. **Why (builder 2026-09-29):** the sim mostly raises citizens' pay and has few ways to take money back out — the court is the money sink, the system used to tax. **Where it lands (builder, tentative — "maybe"):** court revenue goes into the city budget (live `City_Treasury` tab). Rates, who pays and the treasury path are still sim calls — confirm with the builder before designing. Not part of this build.
+- **The judicial system is a civil system too, not only crime (builder direction 2026-09-29).** Build-on vehicles once the case flow proves: divorce goes through the court; lawsuits; court fees and fines as a new way to tax. Schema room already exists: a civil case is a new `EntryType` on `Judicial_Ledger` (e.g. `divorce`, `lawsuit`) with no arrest and no custody — the census counts custody only for `pending`/`held`, so civil cases never inflate it. **Why (builder 2026-09-29):** the sim mostly raises citizens' pay and has few ways to take money back out — the court is the money sink, the system used to tax. **Where it lands (builder, tentative — "maybe"):** court revenue goes into the city budget (live `City_Treasury` tab). Rates, who pays and the treasury path are still sim calls — confirm with the builder before designing. Not part of this build. **Weight (builder 2026-09-29, Task 5 kickoff):** "more for taxing, settling citizen disputes, and the occasional arrests and crime" — civil cases (fees, disputes between citizens) are the court's main load; crime is the occasional case. Task 5's lifecycle is built generic over `EntryType` so civil types drop in without a rewrite.
 - **City revenue, wider than the court (builder direction 2026-09-29):** three feeds into the city treasury — judicial (fees, fines), business tax, housing tax — and the treasury "could even" break out by council district. This is its own build (ROLLOUT engine.271), not part of care and justice; the court is one of its three feeds.
 - Judges as authored personas (civic-office pattern — canon philosophy files, not dials), once a case flow exists to judge.
 - Jury duty as a Tier-4→named promotion vehicle (universal-protagonism doctrine).
@@ -340,7 +340,18 @@ Outside review: `docs/research/2026-09-29-codex-care-justice-task4-cut.md` — 7
 
 **Verify after build.** Test green; existing `chaosCarsCitizenDial`, `hospitalIncomePersistence`, `hospitalTalkback`, `careJusticeAccounting` tests green; `auditFunctionCollisions` 0; kimi adversarial diff review; bench fire, `Hospital_Ledger` read back, every new row matched to a receipt.
 
+### Task 5 read-before — do cases have inputs (engine-sheet, 2026-09-29)
+
+| Entry path | Measured | Source |
+|---|---|---|
+| Patrol `arrested` (R5 direct) | live 3 in C101–C109, none since C104; bench 2 in C110–C135 (~1 per 7 Cycles) | LifeHistory_Log `Transgression-Serious\|chaos_cars\|cop_car` |
+| Grave conduct → investigation (R5) | 0 `Transgression-*` ever, live or bench. Since engine.201 Wave 2 every moral test lands `BoundaryKept`/`BoundaryCompromised` (live 9, bench 36 in C124–C135) — no citizen reads `crimeReachable` (`compressLifeHistory.js:1185`), so the commit branch (`runConductEngine.js:233`) never runs | LifeHistory_Log conduct tags |
+
+Crime entry is rare by design and the investigation path has no input (§15). Per the builder's weight above, the court's volume comes from civil cases; the conduct gate is its own defect, not fixed inside Task 5.
+
 ## Changelog
+
+- 2026-09-29 (engine-sheet) — Task 5 read-before table added; builder weight: court is mainly civil (taxing, disputes), crime occasional.
 
 - 2026-09-29 (engine-sheet) — Builder ruling: an admitted citizen's first health roll is the week after admission; built 7b7c17af, bench @145, live PROD @124.
 

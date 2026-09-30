@@ -86,6 +86,7 @@ Builder-owned items only, one line each: `HH:MM seat — the question, with enou
 Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman register, results first. Purge at the start of each night (git keeps history); do not write narrative here.
 
 01:10 es CLAIM codex es engine.254 Task 7b cut review
+01:08 es CLAIM kimi es engine.273 Task 2 design review
 
 ## 8. Stop rule and usage
 

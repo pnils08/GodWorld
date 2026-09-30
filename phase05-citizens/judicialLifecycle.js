@@ -67,7 +67,7 @@ function judicialDecidePending_(c, cycle, rates, rng, priorArrests) {
 
 // held → closed held-served at HeldUntilCycle (or later, if a Cycle was missed).
 function judicialServeHeld_(c, cycle) {
-  if (cycle < Number(c.HeldUntilCycle)) return null;
+  if (cycle < judicialClock_(c, 'HeldUntilCycle')) return null;
   judicialClose_(c, cycle, 'held-served');
   c.StatusNow = 'closed';
   return 'exit';
@@ -78,7 +78,7 @@ function judicialResolveInvestigation_(c, cycle, rates, rng) {
   if (judicialDraw_(rng, c) < rates.investigationArrestRate) {
     c.StatusNow = 'pending';
     c.ArrestCycle = cycle;
-    c.DecisionCycle = cycle + 1;
+    c.DecisionCycle = cycle + judicialEntryType_(c.EntryType).decisionOffset;
     return 'intake';
   }
   judicialClose_(c, cycle, 'no-arrest');
@@ -91,7 +91,7 @@ var JUDICIAL_ENTRY_TYPES_ = {
     custodial: true, openState: 'pending', decisionOffset: 1, census: 'arrest', arrestOnOpen: true,
     steps: {
       pending: function (c, cycle, rates, rng, prior) {
-        return cycle >= Number(c.DecisionCycle) ? judicialDecidePending_(c, cycle, rates, rng, prior) : null;
+        return cycle >= judicialClock_(c, 'DecisionCycle') ? judicialDecidePending_(c, cycle, rates, rng, prior) : null;
       },
       held: function (c, cycle) { return judicialServeHeld_(c, cycle); }
     }
@@ -100,10 +100,10 @@ var JUDICIAL_ENTRY_TYPES_ = {
     custodial: true, openState: 'investigating', decisionOffset: 1, census: 'arrest', arrestOnOpen: false,
     steps: {
       investigating: function (c, cycle, rates, rng) {
-        return cycle >= Number(c.DecisionCycle) ? judicialResolveInvestigation_(c, cycle, rates, rng) : null;
+        return cycle >= judicialClock_(c, 'DecisionCycle') ? judicialResolveInvestigation_(c, cycle, rates, rng) : null;
       },
       pending: function (c, cycle, rates, rng, prior) {
-        return cycle >= Number(c.DecisionCycle) ? judicialDecidePending_(c, cycle, rates, rng, prior) : null;
+        return cycle >= judicialClock_(c, 'DecisionCycle') ? judicialDecidePending_(c, cycle, rates, rng, prior) : null;
       },
       held: function (c, cycle) { return judicialServeHeld_(c, cycle); }
     }
@@ -111,6 +111,16 @@ var JUDICIAL_ENTRY_TYPES_ = {
 };
 
 // ── helpers ─────────────────────────────────────────────────────────────────
+
+// A clock read from a case must be a real Cycle: Number('') is 0, and a blank
+// clock would decide or release at once (kimi Task 5 review). Fail loud.
+function judicialClock_(c, field) {
+  var v = Number(c[field]);
+  if (c[field] === '' || c[field] === null || c[field] === undefined || !(v > 0)) {
+    throw new Error('judicialLifecycle: ' + field + ' is blank or not a Cycle on ' + c.StatusNow + ' case ' + c.CaseId);
+  }
+  return v;
+}
 
 function judicialDraw_(rng, c) {
   if (typeof rng !== 'function') {
@@ -195,6 +205,11 @@ function openCaseFromReceipt_(receipt) {
     throw new Error('judicialLifecycle: cannot open a case from a receipt without SourceEventId or POPID');
   }
   var type = judicialEntryType_(receipt.entryType);
+  // A re-arrest is a transition on an open case, never a new one (kimi Task 5 review).
+  if (type.arrestOnOpen && receipt.kind !== 'intake') {
+    throw new Error('judicialLifecycle: ' + receipt.entryType + ' case opens only from an intake receipt, got "' +
+      receipt.kind + '" (' + receipt.sourceEventId + ')');
+  }
   var cycle = Number(receipt.cycle);
   if (!(cycle > 0)) throw new Error('judicialLifecycle: receipt ' + receipt.sourceEventId + ' has no Cycle');
 

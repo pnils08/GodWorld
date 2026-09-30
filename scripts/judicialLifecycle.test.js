@@ -76,7 +76,7 @@ function runToClose(c, fromCycle, rngAt, prior, cap) {
     c0.StatusNow === 'pending' && c0.ArrestCycle === 100 && c0.DecisionCycle === 101 &&
     Object.keys(c0).length === 21 && c0.CaseId === 'J-C100-SYN-1' && c0.PriorStatus === 'Active');
   const early = jl.advanceCase_(c0, 100, rates, fixed(0.99), 0);
-  assert('1 no decision in the arrest Cycle', early.event === null && early.case.StatusNow === 'pending');
+  assert('1 no step in the arrest Cycle (LastTransitionCycle guard)', early.event === null && early.case.StatusNow === 'pending');
 
   // weights order: held [0,.35) released [.35,.75) diverted [.75,1)
   const rel = jl.advanceCase_(c0, 101, rates, fixed(0.5), 0);
@@ -311,6 +311,20 @@ function fixedCopRun(failPayload, status) {
   assert('13 a non-custodial type reaching custody throws', throwsNaming(() =>
     jl.advanceCase_(civ, 102, rates, fixed(0), 0), 'non-custodial'));
   delete jl.JUDICIAL_ENTRY_TYPES_.synthetic_civil;
+}
+
+// ── kimi Task 5 review: blank clocks fail loud; a re-arrest never opens a case ──
+{
+  const base = jl.openCaseFromReceipt_(arrestReceipt('SYN-K', 100));
+  assert('K blank HeldUntilCycle on a held case throws', throwsNaming(() =>
+    jl.advanceCase_({ ...base, StatusNow: 'held', HeldUntilCycle: '', LastTransitionCycle: 101 }, 105, rates, fixed(0), 0), 'HeldUntilCycle'));
+  assert('K blank DecisionCycle on a pending case throws', throwsNaming(() =>
+    jl.advanceCase_({ ...base, DecisionCycle: '' }, 105, rates, fixed(0), 0), 'DecisionCycle'));
+  assert('K re-arrest transition receipt cannot open a case', throwsNaming(() =>
+    jl.openCaseFromReceipt_({ ...arrestReceipt('SYN-K', 100), kind: 'transition', reArrestEventId: 'patrol:x:SYN-K' }), 'intake receipt'));
+  const inv = jl.openCaseFromReceipt_({ ...arrestReceipt('SYN-K2', 100, 'grave'), entryType: 'investigation',
+    sourceSystem: 'conduct', sourceEventId: 'conduct:C100:grave:SYN-K2', kind: 'transition' });
+  assert('K investigation still opens from its transition receipt', inv.StatusNow === 'investigating');
 }
 
 // ── 9. unknown entry type / missing key throw ───────────────────────────────

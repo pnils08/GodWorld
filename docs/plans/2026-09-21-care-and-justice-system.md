@@ -413,11 +413,13 @@ Pushed to `S.judicialEvents`. **Eligibility:** adult (existing gate) **and** pri
 
 **Task 8 requirements this cut sets.** Replay keys are rebuilt kind-aware, not from `SourceEventId` alone (F2): a row with `ArrestCycle` set seeds `judicial|intake|<id>`; a closed row with an exit outcome seeds `judicial|exit|<id>`; an `investigating` row seeds nothing, so its later conversion still books its one intake. Lost receipt (F7): `writeChaosCarsRow_` throwing after `writeCitizenEvent_` leaves the arrest's LifeHistory line with no receipt and no case — the throw reaches Engine_Errors, so the loss is visible, never counted as a known zero; no judicial reconcile is built (no Status flip exists to reconcile from until Task 6, which revisits it).
 
+**Deferred from kimi's review (Task 6/8, when the conduct wire lands).** `admitJudicialReceipt_` dedups against same-Cycle `intake` receipts only; an investigation receipt and an arrest for one POPID in one Cycle would open two cases with one `CaseId`. Rule to build then: an arrest on a POPID with an open investigation converts that investigation (no second case). Cross-Cycle re-arrest dedup stays the Task 8 persist's job.
+
 **Build notes.** `S.judicialEvents` has no reader until Task 8 — pushed and dropped each Cycle. New ctx field + new file → `/stub-engine` regen in the build commit; `auditFunctionCollisions` 0.
 
 **Not in this cut.** Status flip to `detained`, custody re-assert, participation gates (Task 6); persistence, the `-2` suffix, one-open-case-per-POPID enforcement and the replay key fold (Task 8); other-resident demand (Task 7); civil entry types (builder design first); the conduct crime-reachable defect.
 
-**Built 2026-09-29 (engine-sheet).** `phase05-citizens/judicialLifecycle.js` (new, builder-approved) + arrest receipt in `chaosCarsEngine.js` + `scripts/judicialLifecycle.test.js` 52/52. Regression: chaosCarsCitizenDial 27, hospitalIncomePersistence 48, careJusticeAccounting 55, hospitalTalkback 24, griefPeriod 38, educationLoop 120; collisions 0; STUB_MAP regenerated. Pending: kimi diff review, bench fire.
+**Built 2026-09-29 (engine-sheet).** `phase05-citizens/judicialLifecycle.js` (new, builder-approved) + arrest receipt in `chaosCarsEngine.js` + `scripts/judicialLifecycle.test.js` 52/52. Regression: chaosCarsCitizenDial 27, hospitalIncomePersistence 48, careJusticeAccounting 55, hospitalTalkback 24, griefPeriod 38, educationLoop 120; collisions 0; STUB_MAP regenerated. kimi diff review SHIP (`docs/research/2026-09-29-kimi-care-justice-task5-diff.md`); three of its findings fixed in the follow-up commit (blank clocks throw, a re-arrest receipt cannot open a case, conversion uses the type's `decisionOffset`), 56/56. Pending: bench fire.
 
 **Test — `scripts/judicialLifecycle.test.js`** (synthetic, no sheet):
 1. forced draws → each of released / diverted / held; held closes `held-served` at `HeldUntilCycle`, not before.
@@ -439,6 +441,8 @@ Pushed to `S.judicialEvents`. **Eligibility:** adult (existing gate) **and** pri
 17. kind-aware seen set: investigation open → conversion → replay books one intake; arrest → exit → replay books none (F2 — spec'd here, run against the Task 8 fold).
 
 ## Changelog
+
+- 2026-09-29 (engine-sheet) — kimi Task 5 diff review SHIP; 3 findings fixed, 1 deferred to Task 6/8; tests 56/56.
 
 - 2026-09-29 (engine-sheet) — Task 5 built: judicialLifecycle.js + arrest receipt, 52/52 tests; kimi review and bench pending.
 

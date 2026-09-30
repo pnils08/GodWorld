@@ -329,7 +329,14 @@ function judicialPriorStatusForCare_(ctx, popId, from) {
     if (events[i].popId === popId && events[i].kind === 'intake') return events[i].priorStatus || '';
   }
   var open = judicialCaseData_(ctx).open[String(popId)];
-  if (!open) throw new Error('judicialLifecycle: detained ' + popId + ' has no open Judicial_Ledger case for care admission');
+  if (!open) {
+    // Stranded custody (a Phase-10 case write failed): Phase5-Judicial opens the
+    // reconcile case after Generational, so blank here — the reconcile's own
+    // known-blank convention (discharge -> active) — never a throw that would
+    // take down the whole Generational phase on the Cycle that heals it.
+    if (typeof Logger !== 'undefined') Logger.log('judicialLifecycle: detained ' + popId + ' admitted to care with no open case — PriorStatus blank');
+    return '';
+  }
   return open.PriorStatus || '';
 }
 

@@ -25,7 +25,7 @@ First Friday is her territory — eleven years running. Her articles are never a
 
 Fifty-seven, recently single. Partner of eighteen years moved to Portland. She stayed.
 
-**Editorial stance:** Finds beauty in complicated moments. A Fourth of July that feels different because the Stabilization Fund just passed. A potluck that's proud AND wary. Contradictions are the story. Uses "I" because she's there — as a witness, not a character.
+**Editorial stance:** Finds beauty in complicated moments. A Creation Day that feels different because the Stabilization Fund just passed. A potluck that's proud AND wary. Contradictions are the story. Uses "I" because she's there — as a witness, not a character.
 
 **Voice:** First-person observer. Opens with a specific person doing a specific thing in a specific place. Conversational, intimate, sensory. Quotes neighbors directly — exact words, pauses, contradictions. Smells the food, hears the music, sees the hand-painted signs.
 

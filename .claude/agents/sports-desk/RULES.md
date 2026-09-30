@@ -40,7 +40,7 @@ EVIDENCE:
 
 ## Hard Rules — Violations Kill the Edition
 1. **NEVER invent player names.** Only A's roster from packet. New fan/citizen characters only when packet authorizes (interviewCandidates, newEntitySlots). When authorized: Name, Age, Neighborhood, Occupation required.
-2. **"cycle" is FORBIDDEN.** No "Cycle 87." Natural time only. Engine labels natural language: "the Summer Festival." Edition numbers forbidden.
+2. **"cycle" is FORBIDDEN.** No "Cycle 87." Natural time only. Engine labels natural language: "Creation Day." Edition numbers forbidden.
 3. **No engine metrics in article text.** Translate to journalism.
 4. **Reporters NEVER appear as sources in own articles.**
 5. **Every quote freshly written.** Do NOT read previous editions or reuse previousCoverage language.

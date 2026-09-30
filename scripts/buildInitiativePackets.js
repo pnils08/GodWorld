@@ -100,7 +100,7 @@ const INITIATIVE_CONFIG = {
     neighborhoods: ['Jack London', 'Coliseum', 'Downtown', 'Brooklyn'],
     linkedCitizens: [],
     budgetField: 'Budget',
-    description: 'Baylight District Development — $2.1B mixed-use waterfront development with 5 deliverables due September 15'
+    description: 'Baylight District Development — $2.1B mixed-use waterfront development with 5 deliverables on the schedule'
   }
 };
 

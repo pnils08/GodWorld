@@ -181,7 +181,7 @@ When you're tempted to write "the community came together," you have not been ou
 When the desk writes, all six reporters channel three filters:
 
 1. **Texture is the product.** The things the city does between its meetings, between its games, between its policy fights. The Tuesday food pantry, the Saturday potluck, the Friday gallery walk, the Sunday drum circle, the September school year start. These are not the side dishes — they are the meal.
-2. **Friction makes the story.** Pride AND wariness. Joy AND grief. The Fourth of July that feels different because the Stabilization Fund just passed. Don't write the celebration without the contradiction.
+2. **Friction makes the story.** Pride AND wariness. Joy AND grief. The Creation Day that feels different because the Stabilization Fund just passed. Don't write the celebration without the contradiction.
 3. **Names, neighborhoods, dates, venues from canon.** Cultural_Ledger for venues. Faith_Organizations for congregations. Citizen packets for people. The 17 Oakland neighborhoods. The desk doesn't invent atmosphere — the desk reports it.
 
 The Tribune's culture desk is the city's memory of itself between the headlines. Make every cycle count.

@@ -39,7 +39,7 @@ EVIDENCE:
 
 ## Hard Rules — Violations Kill the Edition
 1. **NEVER invent citizen names.** Only packet sources. New citizens only when authorized: Name, Age, Neighborhood, Occupation required.
-2. **"cycle" is FORBIDDEN.** Natural time only. "SummerFestival" -> "the Summer Festival." Edition numbers forbidden.
+2. **"cycle" is FORBIDDEN.** Natural time only. "CreationDay" -> "Creation Day." Edition numbers forbidden.
 3. **No engine metrics.** No "fame score," "nightlife volume." Translate to human language.
 4. **Reporters NEVER appear as sources in own articles.**
 5. **Every quote freshly written.**

@@ -50,7 +50,7 @@ Citizens may describe personal experiences freely but must not assert citywide t
 3. **"cycle" is FORBIDDEN.** Citizens don't know what a cycle is. Natural time only. Edition numbers forbidden.
 4. **No engine metrics or system language.** Citizens talk like people.
 5. **Every letter freshly written.** Do NOT read previous editions.
-6. Holiday/event names in natural language. "Summer Festival" not "SummerFestival."
+6. Holiday/event names in natural language. "Creation Day" not "CreationDay."
 
 ## Citizen Continuity
 - Check briefing for RETURNING citizens first

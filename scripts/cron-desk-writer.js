@@ -241,7 +241,14 @@ const BYLINE_POPID = PACKET_ONLY ? null : (arg('--byline-popid', null) || (() =>
   try { return (JSON.parse(fs.readFileSync(path.join(__dirname, 'persona-map.json'), 'utf8'))[PERSONA] || {}).popid || null; }
   catch (_) { return null; }
 })());
-const AGENT_DIR = path.join(ROOT, '.claude', 'agents', PERSONA || (DESK + '-desk'));
+// A second desk slot for the same reporter (nia-rook-weekly) shares her voice
+// files via persona-map voiceDir instead of a copied agent folder.
+const VOICE_DIR = (() => {
+  if (!PERSONA) return null;
+  try { return (JSON.parse(fs.readFileSync(path.join(__dirname, 'persona-map.json'), 'utf8'))[PERSONA] || {}).voiceDir || null; }
+  catch (_) { return null; }
+})();
+const AGENT_DIR = path.join(ROOT, '.claude', 'agents', VOICE_DIR || PERSONA || (DESK + '-desk'));
 const SKILL_PATH = path.join(AGENT_DIR, PERSONA ? 'IDENTITY.md' : 'SKILL.md');
 // Optional filename namespace. Roster fan-out uses the reporter slug so two
 // same-desk writers cannot overwrite each other; isolated evaluations use

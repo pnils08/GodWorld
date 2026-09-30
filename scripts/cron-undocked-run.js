@@ -283,7 +283,7 @@ async function main() {
 
   // 4. adapter — deterministic fact extraction, writes staged/
   execFileSync('node', [path.join(ROOT, 'scripts', 'undockedEpisodeAdapter.js'),
-    '--episode', sidecar], { cwd: ROOT, stdio: 'inherit', timeout: 300000 });
+    '--episode', sidecar, '--holder', pilot.name], { cwd: ROOT, stdio: 'inherit', timeout: 300000 });
 
   // 5. gate — sweep staged/ into intake at the flown cycle, then auto-decide.
   const G = require('./undockedShowGate');

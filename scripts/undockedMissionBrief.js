@@ -41,8 +41,8 @@ Ship console reference — use these EXACT command names; guessing variants wast
 - spacemolt/travel target_poi=<poi_id> — in-system travel (never destination=)
 - spacemolt/jump target_system=<system> — between systems
 - spacemolt/mine — at a belt/ring POI
-- spacemolt/sell item=<ore name> quantity=<n> — sell cargo while docked
-- spacemolt/refuel quantity=all, spacemolt/repair — while docked
+- spacemolt/sell item_id=<ore name lowercased, spaces to underscores: Iron Ore = iron_ore> quantity=<whole number> — sell cargo while docked (item= fails)
+- spacemolt/refuel (no arguments; if fuel is still low, refuel quantity=<whole number>; quantity=all fails), spacemolt/repair — while docked
 - spacemolt_market/view_market — market browsing (this namespace, NOT spacemolt/view_market)
 - spacemolt_social/captains_log_add entry=<text> — your flight log (this namespace, NOT spacemolt/captains_log_add)
 

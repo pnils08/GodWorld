@@ -141,6 +141,7 @@
   "nia-rook-weekly": {
     "name": "Nia Rook",
     "popid": "POP-01076",
+    "voiceDir": "nia-rook",
     "beatDomain": "CULTURE",
     "note": "Weekly UNDOCKED leaderboard/digest — same citizen and byline as nia-rook, second desk slot (plan §(e) NEXT BUILD, 2026-09-25): one filing per cycle naming every pilot who flew that week, the reliable Citizen_Media_Usage credit path (daily solo recaps stay flavor/color, unchanged). Own wake package (undocked-digest desk), own Saturday-morning cron triple, never fanout/WEEK_GRID."
   },

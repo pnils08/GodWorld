@@ -126,6 +126,18 @@ async function main() {
   const feed = await sheets.getSheetData(FEED_TAB);
   if (!feed || !feed.length) throw new Error(FEED_TAB + ' unreadable — refusing to compute');
   const rows = compute(feed);
+  // Feed rows pushed before the holder fix carry a blank Holder; resolve by POPID
+  // against the ledger (the world's record) so the board never shows a bare ID.
+  if (rows.some(r => !r[2])) {
+    const led = await sheets.getSheetData('Simulation_Ledger');
+    const h = led[0], iP = h.indexOf('POPID'), iF = h.indexOf('First'), iL = h.indexOf('Last');
+    const byPop = {};
+    for (let i = 1; i < led.length; i++) {
+      const id = String(led[i][iP] || '').trim().toUpperCase();
+      if (id) byPop[id] = (String(led[i][iF] || '').trim() + ' ' + String(led[i][iL] || '').trim()).trim();
+    }
+    rows.forEach(r => { if (!r[2] && byPop[r[1]]) r[2] = byPop[r[1]]; });
+  }
   console.log('[standings] ' + rows.length + ' pilot(s):');
   rows.forEach(r => console.log('  #' + r[0] + ' ' + r[2] + ' (' + r[1] + ') — ' +
     r[3] + ' ep, credits ' + r[4] + ', led ' + r[9] + ', streak ' + r[10]));

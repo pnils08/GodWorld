@@ -254,7 +254,7 @@ function assemble(episode, byCategory, captains) {
     show: episode.show,
     episode_id: episode.episode_id,
     popid: episode.popid,
-    holder: castName(episode.popid),
+    holder: episode.holder || castName(episode.popid),
     session: episode.session,
     window: { startedAt: episode.startedAt, endedAt: episode.endedAt },
     runner: episode.runner,
@@ -389,8 +389,9 @@ async function fetchCaptains(sessionId) {
   return out;
 }
 
-async function adaptEpisode(jsonPath) {
+async function adaptEpisode(jsonPath, holder) {
   const episode = loadEpisode(jsonPath);
+  if (holder) episode.holder = holder;
   const creds = loadCredentials(episode.session);
   let sid = await createSession();
   sid = await login(sid, creds);
@@ -444,8 +445,10 @@ module.exports = {
 if (require.main === module) {
   const argv = process.argv.slice(2);
   let paths = [];
+  let holder = null;
   for (let i = 0; i < argv.length; i++) {
     if (argv[i] === '--episode') paths.push(argv[++i]);
+    else if (argv[i] === '--holder') holder = argv[++i];
     else if (argv[i] === '--all-three') paths = paths.concat(threeEpisodePaths());
     else {
       console.error('unknown arg ' + argv[i]);
@@ -458,7 +461,7 @@ if (require.main === module) {
   }
   (async function () {
     for (let i = 0; i < paths.length; i++) {
-      const staged = await adaptEpisode(paths[i]);
+      const staged = await adaptEpisode(paths[i], holder);
       const out = writeStaged(staged);
       console.log(summarize(staged));
       console.log('  wrote ' + path.relative(ROOT, out));

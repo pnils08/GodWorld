@@ -117,6 +117,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | engine.270 | Storylines keyed to engine events (crisis arcs, initiative stages) — BUILT and running; OPEN pending builder review the week of 2026-10-05, no further build until then | needs-info | engine-sheet — gated on the review | [[../plans/2026-09-28-storylines-keyed-to-engine-events]] §Observation and review |
 | engine.271 | City revenue — ruled 2026-09-29: fines % of salary by charge level with caps, property tax per hood from the purchase price, yearly tax day, per-hood multiplier (hood population ÷ tracked). Starting dials in plan; plan + review before build, after engine.254 Task 7 | ready | engine-sheet | [[../plans/2026-09-21-care-and-justice-system]] §Later |
 | engine.272 | Conduct crime gate can't fire (§15): 0 of 963 live / 0 of 1114 bench citizens crime-reachable — no integrity band below neutral; 0 `Transgression-*` ever. Blocks R5 investigations (engine.254). Needs a trace of why integrity never falls | ready | engine-sheet | [[../plans/2026-09-21-care-and-justice-system]] §Task 5 read-before |
+| engine.273 | Sim holiday calendar — cycles not months; drop real-world political/heritage and sports-driven days; add world-born holidays (in-world names only); tax-day week. Task 1 codex inventory dispatched 2026-09-29 | ready | engine-sheet (codex Task 1) | [[../plans/2026-09-29-sim-holiday-calendar]] |
 
 ### canon.* — World-fidelity layer
 

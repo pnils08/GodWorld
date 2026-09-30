@@ -199,7 +199,7 @@ function pickCitizenTarget_(rng, ctx) {
   for (var ei = 0; ei < rows.length; ei++) {
     if (iStatus >= 0) {
       var st = String(rows[ei][iStatus] || '').trim().toLowerCase();
-      if (st === 'deceased' || st === 'inactive' || st === 'traded' || st === 'pending') continue;
+      if (st === 'deceased' || st === 'inactive' || st === 'traded' || st === 'pending' || st === 'detained') continue;
     }
     eligible.push(ei);
   }
@@ -413,7 +413,8 @@ function writeCitizenEvent_(ctx, target, vehicle, outcome, cycle, text) {
   var iStatusW = ctx.ledger.headers.indexOf('Status');
   var iStatusStartW = ctx.ledger.headers.indexOf('StatusStartCycle');
   var iHealthCauseW = ctx.ledger.headers.indexOf('HealthCause');
-  var curStatusW = iStatusW >= 0 ? String(row[iStatusW] || '').trim().toLowerCase() : '';
+  var priorStatusW = iStatusW >= 0 ? String(row[iStatusW] || '').trim() : '';
+  var curStatusW = priorStatusW.toLowerCase();
   var newStatusW = '';
   if (vehicle.name === 'ambulance' && outcome.outcome === 'medical_emergency') newStatusW = 'critical';
   else if (vehicle.name === 'ambulance' && outcome.outcome === 'workplace_accident') newStatusW = 'hospitalized';
@@ -438,7 +439,7 @@ function writeCitizenEvent_(ctx, target, vehicle, outcome, cycle, text) {
       popId: iPop >= 0 ? row[iPop] : target.popId,
       name: hookName8, neighborhood: hookHood8,
       cause: iHealthCauseW >= 0 ? (row[iHealthCauseW] || '') : '',
-      from: curStatusW || 'active', to: newStatusW, cycle: cycle,
+      from: priorStatusW, to: newStatusW, cycle: cycle,
       kind: isIntake ? 'intake' : 'transition',
       intakeType: isIntake ? (outcome.outcome === 'workplace_accident' ? 'injury' : 'illness') : '',
       sourceSystem: isIntake ? 'ambulance' : '', sourceEventId: ''
@@ -671,10 +672,19 @@ function runChaosEvent_(ctx, rng, cycle, vehicle, scope, target, friction, label
   ctx.summary.chaosCarsEvents.push(payload);
   if (consequenceFloorFired) ctx.summary.tier1ChaosEvents.push(payload);
   if (receipt && receipt.system === 'judicial') {
-    // engine.254 Task 5: no reader until Task 8 persists cases — pushed and dropped each Cycle.
     receipt.sourceEventId = 'patrol:' + payload.eventId + ':' + receipt.popId;
     ctx.summary.judicialEvents = ctx.summary.judicialEvents || [];
     admitJudicialReceipt_(ctx.summary.judicialEvents, receipt); // one open case per POPID (F1)
+    var jh = ctx.ledger.headers, jr = ctx.ledger.rows[target.rowIndex];
+    var js = jh.indexOf('Status'), jc = jh.indexOf('StatusStartCycle'), jm = jh.indexOf('ClockMode');
+    if (js < 0 || jc < 0 || jm < 0) throw new Error('chaos_cars: Simulation_Ledger custody columns missing');
+    var state = String(jr[js] || '').trim().toLowerCase();
+    if (String(jr[jm] || '').trim().toUpperCase() !== 'GAME' &&
+        CHAOS_HEALTH_STATES.indexOf(state) < 0 && state !== 'deceased') {
+      jr[js] = 'detained';
+      jr[jc] = cycle;
+      ctx.ledger.dirty = true;
+    }
   } else if (receipt) {
     if (receipt.kind === 'intake') {
       receipt.sourceEventId = 'ambulance:' + payload.eventId + ':' + receipt.popId;

@@ -26,6 +26,7 @@ const sb = { Logger: { log() {} }, safeRand_: ctx => ctx.rng,
 vm.createContext(sb);
 for (const file of ['phase01-config/advanceSimulationCalendar.js', 'utilities/citizenDerivation.js',
   'phase05-citizens/educationCareerEngine.js', 'phase05-citizens/runCareerEngine.js',
+  'phase05-citizens/runHouseholdEngine.js',
   'phase05-citizens/generationalWealthEngine.js', 'phase04-events/generationalEventsEngine.js',
   'utilities/citizenMemory.js', 'utilities/citizenDialMap.js', 'utilities/compressLifeHistory.js']) {
   const candidate = path.join(ENGINE_ROOT, file);
@@ -45,6 +46,11 @@ function make(employer) {
     ledger: { headers: H.slice(), rows: [H.map(name => values[name])], dirty: false }, logRows: [],
     ss: { getSheetByName: name => name === 'Business_Ledger' ?
       { getDataRange: () => ({ getValues: () => BIZ.map(row => row.slice()) }) } : null } };
+  ctx.cache = { getData: name => name === 'Hospital_Ledger' ? {
+    exists: true, values: [['AdmissionId', 'POPID', 'Name', 'Neighborhood', 'Cause', 'AdmitCycle',
+      'StatusNow', 'LastTransitionCycle', 'DischargeCycle', 'Outcome', 'CyclesInCare',
+      'Kind', 'IntakeType', 'SourceEventId', 'SourceSystem', 'PriorStatus']]
+  } : { exists: false, values: [] } };
   floors(ctx);
   return ctx;
 }
@@ -253,9 +259,12 @@ sb.appendRowWithRetry_ = (sheet, row) => sheet.appendRow(row);
 sb.requireTab_ = (ss, name) => ss.getSheetByName(name);
 vm.runInContext(fs.readFileSync(path.join(ROOT, 'phase10-persistence/buildCyclePacket.js'), 'utf8'), sb,
   { filename: 'phase10-persistence/buildCyclePacket.js' });
+vm.runInContext(fs.readFileSync(path.join(ROOT, 'phase05-citizens/judicialLifecycle.js'), 'utf8'), sb,
+  { filename: 'phase05-citizens/judicialLifecycle.js' });
 function hospitalSheet(open) {
   const rows = [['AdmissionId', 'POPID', 'Name', 'Neighborhood', 'Cause', 'AdmitCycle',
-    'StatusNow', 'LastTransitionCycle', 'DischargeCycle', 'Outcome', 'CyclesInCare']];
+    'StatusNow', 'LastTransitionCycle', 'DischargeCycle', 'Outcome', 'CyclesInCare',
+    'Kind', 'IntakeType', 'SourceEventId', 'SourceSystem', 'PriorStatus']];
   if (open) rows.push(open.slice());
   return { rows, getDataRange: () => ({ getValues: () => rows.map(row => row.slice()) }),
     appendRow: row => rows.push(row.slice()),
@@ -320,6 +329,7 @@ check('T4-3 recovering re-escalation updates its open row without intake', () =>
   assert.strictEqual(receipt.sourceEventId, '');
   assert.strictEqual(result.sheet.rows.length, 2);
   assert.strictEqual(result.sheet.rows[1][6], 'critical');
+  assert.strictEqual(result.sheet.rows[1][15] || '', '');
   assert.strictEqual(result.census.admitsThisCycle, 0);
 });
 check('T4-4 ordinary injury has a typed health-engine intake', () => {
@@ -410,6 +420,100 @@ check('T4-11 receipt kinds fold through care-justice accounting', () => {
   const result = fold([{ ...intake, system: 'hospital' }, { ...transition, system: 'hospital' }]);
   assert.strictEqual(result.receipts.length, 1);
   assert.strictEqual(result.transitions, 1);
+});
+check('T6 detained ordinary admission stores case PriorStatus in hospital P', () => {
+  const ctx = make('UNTRACKED');
+  const pop = ctx.ledger.rows[0][ix('POPID')];
+  ctx.ledger.rows[0][ix('Status')] = 'detained';
+  const fields = Array.from(sb.JUDICIAL_CASE_FIELDS_);
+  const open = sb.openCaseFromReceipt_({ popId: pop, cycle: 8001, kind: 'intake', entryType: 'arrest',
+    sourceEventId: 'patrol:synthetic:' + pop, sourceSystem: 'patrol', priorStatus: 'Retired' });
+  const oldCache = ctx.cache.getData;
+  ctx.cache.getData = name => name === 'Judicial_Ledger' ?
+    { exists: true, values: [fields, fields.map(field => open[field])] } : oldCache(name);
+  withEngineStubs({
+    checkHealthEvent_: () => ({ type: 'health', tag: 'Injury', severity: 'moderate', description: 'synthetic injury' }),
+    chance_: (_ctx, p) => p !== 0.35
+  }, () => sb.runGenerationalEngine_(ctx));
+  const receipt = ctx.summary.hospitalEvents[0];
+  const result = persistOnMock(ctx);
+  assert.strictEqual(receipt.from, 'detained');
+  assert.strictEqual(receipt.priorStatus, 'Retired');
+  assert.strictEqual(result.sheet.rows[1][15], 'Retired');
+});
+check('T6 discharge restores hospital P casing and closes its row', () => {
+  const ctx = make('UNTRACKED');
+  const pop = ctx.ledger.rows[0][ix('POPID')];
+  const open = ['H-C8000-' + pop, pop, 'Synthetic Fixture', 'SYNTHETIC_TEST_HOOD',
+    'synthetic condition', 8000, 'recovering', 8001, '', '', '', '', '', '', '', 'Retired'];
+  ctx.ledger.rows[0][ix('Status')] = 'recovering';
+  ctx.ledger.rows[0][ix('StatusStartCycle')] = 8000;
+  const hospital = hospitalSheet(open);
+  ctx.cache.getData = name => name === 'Hospital_Ledger' ?
+    { exists: true, values: hospital.rows.map(row => row.slice()) } : { exists: false, values: [] };
+  withEngineStubs({ processHealthLifecycle_: () => ({ type: 'health', tag: 'Recovery',
+    description: 'synthetic recovery', newStatus: 'active' }) }, () => sb.runGenerationalEngine_(ctx));
+  const receipt = ctx.summary.hospitalEvents[0];
+  ctx.ss = { getSheetByName: name => name === 'Hospital_Ledger' ? hospital : null };
+  sb.persistHospitalLedger_(ctx);
+  assert.strictEqual(ctx.ledger.rows[0][ix('Status')], 'Retired');
+  assert.strictEqual(receipt.to, 'Retired');
+  assert.strictEqual(hospital.rows[1][8], 8002);
+  assert.strictEqual(hospital.rows[1][9], 'recovered');
+});
+check('T6 pre-P blank discharge restores active', () => {
+  const ctx = make('UNTRACKED');
+  const pop = ctx.ledger.rows[0][ix('POPID')];
+  const hospital = hospitalSheet(['H-C8000-' + pop, pop, '', '', '', 8000,
+    'recovering', 8001, '', '', '', '', '', '', '', '']);
+  ctx.ledger.rows[0][ix('Status')] = 'recovering';
+  ctx.ledger.rows[0][ix('StatusStartCycle')] = 8000;
+  ctx.cache.getData = () => ({ exists: true, values: hospital.rows.map(row => row.slice()) });
+  withEngineStubs({ processHealthLifecycle_: () => ({ type: 'health', tag: 'Recovery',
+    description: 'synthetic recovery', newStatus: 'active' }) }, () => sb.runGenerationalEngine_(ctx));
+  assert.strictEqual(ctx.ledger.rows[0][ix('Status')], 'active');
+});
+check('T6 missing-bed lifecycle transition admits with blank P, never a health state', () => {
+  const ctx = make('UNTRACKED');
+  const pop = ctx.ledger.rows[0][ix('POPID')];
+  ctx.ledger.rows[0][ix('Status')] = 'critical';
+  ctx.summary.hospitalEvents = [{ popId: pop, cycle: 8002, from: 'hospitalized',
+    to: 'critical', kind: 'transition', cause: 'synthetic illness' }];
+  const result = persistOnMock(ctx);
+  assert.strictEqual(result.sheet.rows[1][15], '');
+});
+check('T6 ordinary, heat, and ambulance admission receipts preserve Status casing', () => {
+  const ordinary = make('UNTRACKED');
+  ordinary.ledger.rows[0][ix('Status')] = 'Active';
+  withEngineStubs({
+    checkHealthEvent_: () => ({ type: 'health', tag: 'Injury', severity: 'moderate', description: 'synthetic injury' }),
+    chance_: (_ctx, p) => p !== 0.35
+  }, () => sb.runGenerationalEngine_(ordinary));
+  assert.strictEqual(ordinary.summary.hospitalEvents[0].from, 'Active');
+  const heat = make('UNTRACKED');
+  heat.ledger.rows[0][ix('Status')] = 'Active';
+  heat.ledger.rows[0][ix('BirthYear')] = sb.simYearOf_(heat, 8002) - 75;
+  heat.summary.weatherEvents = [{ type: 'heat_wave', salient: true, hoods: ['SYNTHETIC_TEST_HOOD'] }];
+  withEngineStubs({ processHealthLifecycle_: () => null, checkDeath_: () => null,
+    checkBirth_: () => null, checkRetirement_: () => null, checkGraduation_: () => null,
+    checkHealthEvent_: () => null }, () => sb.runGenerationalEngine_(heat));
+  assert.strictEqual(heat.summary.hospitalEvents[0].from, 'Active');
+  const ambulance = make('UNTRACKED');
+  const receipt = syntheticAmbulance(ambulance, 'Active', '');
+  assert.strictEqual(receipt.from, 'Active');
+});
+check('T6 detained citizen is gated from career and household events', () => {
+  const ctx = make('UNTRACKED');
+  const row = ctx.ledger.rows[0];
+  row[ix('Status')] = 'detained';
+  const before = JSON.stringify(row);
+  let draws = 0;
+  ctx.rng = () => { draws++; return 0; };
+  sb.runCareerEngine_(ctx);
+  sb.runHouseholdEngine_(ctx);
+  assert.strictEqual(JSON.stringify(row), before);
+  assert.strictEqual(draws, 0);
+  assert.strictEqual(ctx.logRows.length, 0);
 });
 console.log(passed + ' passed, ' + failed + ' failed');
 process.exitCode = failed ? 1 : 0;

@@ -76,6 +76,7 @@ function buildCyclePacket_(ctx) {
   // engine.52 B2 — persist hospital admissions/discharges collected in Phase 4
   // and compute the census before packet lines are built.
   var hospital = persistHospitalLedger_(ctx);
+  persistJudicialLedger_(ctx);
 
   var lines = [];
 
@@ -862,6 +863,9 @@ function persistHospitalLedger_(ctx) {
   if (!sheet) sheet = requireTab_(ctx.ss, 'Hospital_Ledger');
 
   var data = sheet.getDataRange().getValues();
+  if (!data.length || data[0].indexOf('PriorStatus') !== 15) {
+    throw new Error('Hospital_Ledger.PriorStatus header missing at column P');
+  }
 
   // Index open rows (DischargeCycle empty) by POPID — sheet row = index + 1.
   var openByPopId = {};
@@ -889,15 +893,20 @@ function persistHospitalLedger_(ctx) {
       } else {
         // New admission. (A lifecycle transition with no open row — citizen
         // hospitalized before this ledger existed — admits at event cycle.)
+        var priorStatus = ev.kind === 'intake' ?
+          (ev.priorStatus !== undefined ? ev.priorStatus : (ev.from || '')) : '';
+        if (String(priorStatus).trim().toLowerCase() === 'detained') {
+          throw new Error('Hospital_Ledger.PriorStatus cannot be detained for ' + key);
+        }
         var newRow = ['H-C' + ev.cycle + '-' + key, ev.popId, ev.name || '',
                       ev.neighborhood || '', ev.cause || '', ev.cycle, ev.to,
-                      ev.cycle, '', '', ''];
+                      ev.cycle, '', '', '', '', '', '', '', priorStatus];
         appendRowWithRetry_(sheet, newRow, 'Hospital_Ledger admit');
         openByPopId[key] = data.length;
         data.push(newRow);
         admits++;
       }
-    } else if (ev.to === 'active' || ev.to === 'deceased') {
+    } else if (ev.to !== undefined && ev.to !== null && ev.to !== '') {
       if (openRow >= 0) {
         var admitCycle = Number(data[openRow][5]) || ev.cycle;
         var outcome = (ev.to === 'deceased') ? 'deceased' : 'recovered';
@@ -977,7 +986,7 @@ function persistHospitalLedger_(ctx) {
     var mp = patients[mPop];
     var mAdmit = mp.startCycle > 0 ? mp.startCycle : cycle;
     var mRow = ['H-C' + mAdmit + '-' + mPop, mPop, mp.name, mp.neighborhood,
-                mp.cause, mAdmit, mp.status, cycle, '', '', ''];
+                mp.cause, mAdmit, mp.status, cycle, '', '', '', '', '', '', '', ''];
     appendRowWithRetry_(sheet, mRow, 'Hospital_Ledger missed-admit');
     openByPopId[mPop] = data.length;
     data.push(mRow);
@@ -1004,6 +1013,100 @@ function persistHospitalLedger_(ctx) {
     ' | admits ' + admits + ' | discharges ' + discharges + ' | deaths ' + deaths +
     ' | ghost beds released ' + ghostsClosed + ' | missed admits reconciled ' + missedAdmits);
 
+  return census;
+}
+
+// Phase-10 direct writer: the pre-created 21-column case tab carries open
+// custody between Cycles. No Phase-5 sheet intents are used.
+function persistJudicialLedger_(ctx) {
+  var sheet = requireTab_(ctx.ss, 'Judicial_Ledger');
+  var data = sheet.getDataRange().getValues();
+  var fields = [
+    'CaseId', 'POPID', 'Name', 'Neighborhood', 'ChargeCause', 'ChargeGravity', 'EntryType',
+    'OpenCycle', 'ArrestCycle', 'DecisionCycle', 'StatusNow', 'LastTransitionCycle',
+    'HeldUntilCycle', 'ResolveCycle', 'Outcome', 'CyclesHeld', 'PriorStatus',
+    'SourceSystem', 'SourceEventId', 'TransferToId', 'Counterparty'
+  ];
+  if (!data.length) throw new Error('Judicial_Ledger header row missing');
+  var cols = {};
+  for (var f = 0; f < fields.length; f++) {
+    cols[fields[f]] = data[0].indexOf(fields[f]);
+    if (cols[fields[f]] < 0) throw new Error('Judicial_Ledger.' + fields[f] + ' header missing');
+  }
+  if (data[0].length !== 21) throw new Error('Judicial_Ledger must have 21 columns');
+  var open = {};
+  for (var r = 1; r < data.length; r++) {
+    var existing = data[r];
+    if (!String(existing[cols.CaseId] || '').trim()) continue;
+    if (existing[cols.ResolveCycle] === '' || existing[cols.ResolveCycle] === null) {
+      var pop = String(existing[cols.POPID]);
+      if (open.hasOwnProperty(pop)) throw new Error('Judicial_Ledger has two open rows for ' + pop);
+      open[pop] = r;
+    }
+  }
+  var events = (ctx.summary && ctx.summary.judicialEvents) || [];
+  if (!Array.isArray(events)) throw new Error('Judicial_Ledger: S.judicialEvents must be an array');
+  for (var e = 0; e < events.length; e++) {
+    var ev = events[e];
+    if (!ev || ev.system !== 'judicial') continue;
+    var key = String(ev.popId || '');
+    if (!key || !ev.sourceEventId) throw new Error('Judicial_Ledger receipt missing POPID or SourceEventId');
+    var rowIndex = open.hasOwnProperty(key) ? open[key] : -1;
+    if (ev.kind === 'intake' && rowIndex < 0) {
+      var c = openCaseFromReceipt_(ev);
+      var newRow = [];
+      for (var n = 0; n < 21; n++) newRow[n] = '';
+      for (var j = 0; j < fields.length; j++) newRow[cols[fields[j]]] = c[fields[j]];
+      appendRowWithRetry_(sheet, newRow, 'Judicial_Ledger intake');
+      rowIndex = data.length;
+      data.push(newRow);
+      open[key] = rowIndex;
+      continue;
+    }
+    if (rowIndex < 0) throw new Error('Judicial_Ledger ' + ev.kind + ' without open case for ' + key);
+    var row = data[rowIndex].slice();
+    if (ev.kind === 'intake' || ev.kind === 'transition') {
+      // A same-Cycle re-arrest has no statusNow; custody state remains intact.
+      if (ev.statusNow !== undefined) row[cols.StatusNow] = ev.statusNow;
+      row[cols.LastTransitionCycle] = ev.lastTransitionCycle || ev.cycle;
+      if (ev.heldUntilCycle !== undefined) row[cols.HeldUntilCycle] = ev.heldUntilCycle;
+      if (ev.resolveCycle !== undefined && ev.resolveCycle !== '') {
+        if (ev.outcome === undefined || ev.cyclesHeld === undefined) {
+          throw new Error('Judicial_Ledger transition closure missing disposition for ' + key);
+        }
+        row[cols.ResolveCycle] = ev.resolveCycle;
+        row[cols.Outcome] = ev.outcome;
+        row[cols.CyclesHeld] = ev.cyclesHeld;
+        delete open[key];
+      }
+    } else if (ev.kind === 'exit') {
+      if (ev.statusNow === undefined || ev.resolveCycle === undefined ||
+          ev.outcome === undefined || ev.cyclesHeld === undefined) {
+        throw new Error('Judicial_Ledger exit missing case disposition for ' + key);
+      }
+      row[cols.StatusNow] = ev.statusNow;
+      row[cols.LastTransitionCycle] = ev.lastTransitionCycle || ev.cycle;
+      row[cols.HeldUntilCycle] = ev.heldUntilCycle || '';
+      row[cols.ResolveCycle] = ev.resolveCycle;
+      row[cols.Outcome] = ev.outcome;
+      row[cols.CyclesHeld] = ev.cyclesHeld;
+      delete open[key];
+    } else {
+      throw new Error('Judicial_Ledger unknown receipt kind ' + ev.kind);
+    }
+    (function(sheetRow, values) {
+      persistWithRetry_(function() { sheet.getRange(sheetRow, 1, 1, 21).setValues([values]); },
+        'Judicial_Ledger ' + ev.kind);
+    })(rowIndex + 1, row);
+    data[rowIndex] = row;
+  }
+  var census = { pending: 0, held: 0 };
+  for (var id in open) {
+    if (!open.hasOwnProperty(id)) continue;
+    var state = data[open[id]][cols.StatusNow];
+    if (state === 'pending' || state === 'held') census[state]++;
+  }
+  ctx.summary.judicialCensus = census;
   return census;
 }
 

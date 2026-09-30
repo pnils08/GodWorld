@@ -1,6 +1,6 @@
 # GodWorld Sheets Manifest
 
-**Last Updated:** 2026-08-29
+**Last Updated:** 2026-09-30
 
 This manifest is the registry of all active Google Sheets tabs hooked into the Phase 1–11 engine loop, verified against `ENGINE_COUPLING_MAP.md` and `schemas/SCHEMA_HEADERS.md`.
 
@@ -124,6 +124,7 @@ Rule (engine rules): sheet writes go through `ctx.writeIntents`; only `phase10-p
 | `phase01-config/godWorldEngine2.js` | Intake | operator-clear | clearContent paired with `processIntake_` stage-then-clear; IntakeStatus write-back |
 | `phase01-config/godWorldEngine2.js` → `queueHouseholdIntake_` (processAdvancementIntake.js) | Intake, Advancement_Intake1 | schema-setup + own-tab | engine.109 (S419): `Relation` header self-arm on Intake; household rows appended to the promotion queue at `Phase5-Intake` — same class as the drip queue writers; read back by `processAdvancementRows_` at `Phase5-Advancement` the same cycle |
 | `phase01-config/godWorldEngine2.js` `repairCycleCount_` | World_Config (cycleCount cell) | error-path | engine.136 (2026-08-30): the cache channel that carries this cell is exactly what failed when the guard fires, so a queued repair would be swallowed by the same fault. One cell, written only when the read-back shows the stall signature (sheet at `expected - 1`); any other value is reported and left alone. Logs a row either way |
+| `phase10-persistence/buildCyclePacket.js` `persistJudicialLedger_` | Judicial_Ledger | phase10-loc | Task 6: writes `S.judicialEvents` directly at `Phase10-CyclePacket`, resolving the 21 columns by header name; intake opens, transition updates (or closes a no-arrest investigation), and exit closes the case row, enforcing one open row per POPID. `requireTab_` throws when the pre-created tab is missing; no mid-run tab creation |
 | `phase01-config/initSimulationLedger.js` | Simulation_Ledger | (read) | single-cycle read into shared `ctx.ledger`; all SL touchers push to `ctx.ledger.rows`, never the sheet |
 | `phase01-config/loadPreviousEvening.js` `mirrorCarryForwardToSheet_` | Carry_Forward_Store | phase10-loc | upserts from `saveEveningSnapshot_` / `savePreviousCycleState_` / `writeChaosNeighborhoodStore_`; writes run under `persistWithRetry_` / `appendRowWithRetry_` (engine.119 T2); a missing tab skips the mirror with a log line, never creates (the prop layer still holds the blob); Phase-1 loaders read it as fallback |
 | `phase01-config/engine94SheetContract.js` `ensureEngine94SheetContract_` / `ensureEngine133Config_` / `ensureEngine135Config_` / `ensureEngine96Config_` / `ensureEngine213Config_` | World_Config, Civic_Office_Ledger (header) | schema-setup | code-carried self-arm before any Cycle write: appends missing config rows (engine.94 fourteen; engine.133 five) + missing civic header columns, ≤1× per spreadsheet lifetime, verified by re-inspect; validates when present. Row was missing here since engine.94 landed — added engine.133 (2026-08-29) |

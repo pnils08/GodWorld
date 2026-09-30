@@ -61,11 +61,11 @@ function rngFrom(seed) {
 }
 
 function makeCtx(seed) {
-  const headers = ['POPID', 'First', 'Last', 'Tier', 'Neighborhood', 'LifeHistory', 'LastUpdated', 'Status'];
+  const headers = ['POPID', 'First', 'Last', 'Tier', 'Neighborhood', 'LifeHistory', 'LastUpdated', 'Status', 'StatusStartCycle', 'ClockMode'];
   const rows = [];
   for (let i = 1; i <= 40; i++) {
     rows.push(['POP-' + String(i).padStart(5, '0'), 'First' + i, 'Last' + i,
-      (i === 1 ? 1 : (i % 4) + 1), 'Fruitvale', '', '', 'active']);
+      (i === 1 ? 1 : (i % 4) + 1), 'Fruitvale', '', '', 'active', '', 'ENGINE']);
   }
   const bizData = [
     ['BIZ_ID', 'Name', 'Sector', 'Neighborhood', 'Employee_Count', ' Avg_Salary ', ' Annual_Revenue ', 'Growth_Rate', 'Key_Personnel'],
@@ -88,6 +88,14 @@ function makeCtx(seed) {
 }
 
 function reset() { appendIntents = []; cellIntents = []; chaosRows = []; _props = {}; }
+
+{
+  const custody = makeCtx(7);
+  const status = custody.ledger.headers.indexOf('Status');
+  custody.ledger.rows.forEach(row => { row[status] = 'detained'; });
+  assert('T6 detained citizens cannot be selected as street chaos targets',
+    eng.pickTargetByScope_(() => 0, custody, 'citizen', { name: 'synthetic_unmapped' }) === null);
+}
 
 // ── Test 1: event count bounds + determinism ──
 console.log('Test 1: count bounds + determinism');
@@ -484,11 +492,12 @@ console.log('\nTask 7b: named calls and loop reweight');
   assert('7b validator excludes mapped citizen and port rows from 15-attempt Cycle; pre-cutover cop citizen rows still count; cutover required',
     counted[99] === 15 && counted[100] === 0 && counted[50] === 1 && cutoverRequired &&
     validator.MIN_EVENTS === 3 && validator.MAX_EVENTS === 15);
-  assert('7b pass and loop payload shapes match; fixture tracked counts match ledger',
+  const freshCounts = passCtx(2);
+  assert('7b pass and loop payload shapes match; initial tracked counts match ledger',
     JSON.stringify(Object.keys(row).sort()) === JSON.stringify(Object.keys(low.rows[0]).sort()) &&
-    Object.keys(pOne.summary.careJusticeDemand.hoods).every(hood =>
-      pOne.summary.careJusticeDemand.hoods[hood].trackedResidents ===
-      (global.careJusticeResidentIndex_(pOne)[hood] || []).length));
+    Object.keys(freshCounts.summary.careJusticeDemand.hoods).every(hood =>
+      freshCounts.summary.careJusticeDemand.hoods[hood].trackedResidents ===
+      (global.careJusticeResidentIndex_(freshCounts)[hood] || []).length));
   assert('7b unmapped loop preserves one scope draw per attempt',
     low.count > 3 && high.count > low.count);
 

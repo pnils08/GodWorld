@@ -126,7 +126,7 @@ function careJusticeResidentIndex_(ctx) {
   for (var i = 0; i < ctx.ledger.rows.length; i++) {
     var row = ctx.ledger.rows[i];
     var status = String(row[iStatus] || '').trim().toLowerCase();
-    if (status === 'deceased' || status === 'inactive' || status === 'traded' || status === 'pending') continue;
+    if (status === 'deceased' || status === 'inactive' || status === 'traded' || status === 'pending' || status === 'detained') continue;
     if (!String(row[iPop] || '').trim()) throw new Error('careJusticeDemand: Simulation_Ledger.POPID empty at row ' + (i + 2));
     var hood = String(row[iHood] || '').trim();
     if (!index[hood]) index[hood] = [];

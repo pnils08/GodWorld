@@ -931,7 +931,7 @@ function runCareerEngine_(ctx) {
     // engine.64c (S323): traded/pending hold no Oakland career — no rolls.
     // engine.67 step 4 (S325): Status=retired joins the skip — same gate as
     // CareerStage=retired above (either signal ends the career path).
-    if (healthStatus === "traded" || healthStatus === "pending" ||
+    if (healthStatus === "traded" || healthStatus === "pending" || healthStatus === "detained" ||
         healthStatus === "deceased" || healthStatus === "retired") continue;
     if (healthStatus === "hospitalized" || healthStatus === "critical") {
       var admitC = iStatusStart >= 0 ? (Number(row[iStatusStart]) || 0) : 0;

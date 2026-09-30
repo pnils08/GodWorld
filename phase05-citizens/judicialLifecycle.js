@@ -1,9 +1,8 @@
 /**
  * judicialLifecycle.js — engine.254 Task 5: judicial entry and outcome decision.
  *
- * Pure functions, called by nothing inside a Cycle yet. Task 6 wires the
- * advance into both scheduler entrypoints; Task 8 persists cases to
- * Judicial_Ledger. Spec: docs/plans/2026-09-21-care-and-justice-system.md
+ * Task 6 wires the advance into both scheduler entrypoints and persists cases
+ * to Judicial_Ledger. Spec: docs/plans/2026-09-21-care-and-justice-system.md
  * §Task 5 cut (reviewed: docs/research/2026-09-29-codex-care-justice-task5-cut.md).
  *
  * A case is one object with the 21 Judicial_Ledger fields. Each entry type is
@@ -282,6 +281,170 @@ function advanceCase_(caseIn, cycle, rates, rng, priorArrests) {
   };
 }
 
+// Phase-5 reads the previous Cycle's close through the sheet cache. A missing
+// tab or header is a deployment error, even on a Cycle with no arrests.
+function judicialCaseData_(ctx) {
+  if (!ctx.cache || typeof ctx.cache.getData !== 'function') {
+    throw new Error('judicialLifecycle: Judicial_Ledger cache missing');
+  }
+  var cached = ctx.cache.getData('Judicial_Ledger');
+  if (!cached || !cached.exists || !cached.values || !cached.values.length) {
+    throw new Error('judicialLifecycle: Judicial_Ledger tab missing');
+  }
+  var header = cached.values[0];
+  var cols = {};
+  for (var f = 0; f < JUDICIAL_CASE_FIELDS_.length; f++) {
+    var field = JUDICIAL_CASE_FIELDS_[f];
+    cols[field] = header.indexOf(field);
+    if (cols[field] < 0) throw new Error('judicialLifecycle: Judicial_Ledger.' + field + ' header missing');
+  }
+  var cases = [], open = {};
+  for (var r = 1; r < cached.values.length; r++) {
+    var row = cached.values[r], c = {};
+    if (!String(row[cols.CaseId] || '').trim()) continue;
+    for (var k = 0; k < JUDICIAL_CASE_FIELDS_.length; k++) {
+      var name = JUDICIAL_CASE_FIELDS_[k];
+      c[name] = row[cols[name]] === undefined ? '' : row[cols[name]];
+    }
+    cases.push(c);
+    if (c.ResolveCycle === '' || c.ResolveCycle === null) {
+      var pop = String(c.POPID);
+      if (open.hasOwnProperty(pop)) throw new Error('judicialLifecycle: Judicial_Ledger has two open rows for ' + pop);
+      open[pop] = c;
+    }
+  }
+  return { cases: cases, open: open };
+}
+
+function judicialHealthStatus_(status) {
+  return ['hospitalized', 'critical', 'serious-condition', 'injured', 'recovering']
+    .indexOf(String(status || '').trim().toLowerCase()) >= 0;
+}
+
+// Hospital P is the life-state underneath custody, never the custody marker.
+function judicialPriorStatusForCare_(ctx, popId, from) {
+  if (String(from || '').trim().toLowerCase() !== 'detained') return from || '';
+  var events = (ctx.summary && ctx.summary.judicialEvents) || [];
+  for (var i = 0; i < events.length; i++) {
+    if (events[i].popId === popId && events[i].kind === 'intake') return events[i].priorStatus || '';
+  }
+  var open = judicialCaseData_(ctx).open[String(popId)];
+  if (!open) throw new Error('judicialLifecycle: detained ' + popId + ' has no open Judicial_Ledger case for care admission');
+  return open.PriorStatus || '';
+}
+
+function judicialSetStatus_(ctx, row, status, cycle, iStatus, iStart) {
+  row[iStatus] = status;
+  // Custody stamps its start; a restored life-state clears it, as a care discharge does.
+  row[iStart] = String(status).toLowerCase() === 'detained' ? cycle : '';
+  ctx.ledger.dirty = true;
+}
+
+function judicialLifecycleReceipt_(c, kind, cycle) {
+  return {
+    system: 'judicial', kind: kind, intakeType: kind === 'intake' ? 'arrest' : '',
+    sourceEventId: c.SourceEventId, popId: c.POPID, name: c.Name,
+    neighborhood: c.Neighborhood, cycle: cycle, statusNow: c.StatusNow,
+    lastTransitionCycle: c.LastTransitionCycle, heldUntilCycle: c.HeldUntilCycle,
+    resolveCycle: c.ResolveCycle, outcome: c.Outcome, cyclesHeld: c.CyclesHeld
+  };
+}
+
+function runJudicialLifecycle_(ctx) {
+  var S = ctx.summary || (ctx.summary = {});
+  var cycle = Number(S.absoluteCycle || S.cycleId || (ctx.config && ctx.config.cycleCount));
+  if (!(cycle > 0)) throw new Error('judicialLifecycle: current Cycle missing');
+  var rates = loadJudicialRates_(ctx.config);
+  var data = judicialCaseData_(ctx);
+  var events = S.judicialEvents || [];
+  if (!Array.isArray(events)) throw new Error('judicialLifecycle: S.judicialEvents must be an array');
+  S.judicialEvents = events;
+  var header = ctx.ledger && ctx.ledger.headers, rows = ctx.ledger && ctx.ledger.rows;
+  if (!header || !rows) throw new Error('judicialLifecycle: Simulation_Ledger missing');
+  var iPop = header.indexOf('POPID'), iStatus = header.indexOf('Status');
+  var iStart = header.indexOf('StatusStartCycle'), iClock = header.indexOf('ClockMode');
+  if (iPop < 0 || iStatus < 0 || iStart < 0 || iClock < 0) {
+    throw new Error('judicialLifecycle: Simulation_Ledger custody columns missing');
+  }
+  var citizen = {};
+  for (var r = 0; r < rows.length; r++) citizen[String(rows[r][iPop])] = rows[r];
+
+  // New arrests are already visible in S and in the in-memory citizen row.
+  var intakes = {};
+  var processed = {};
+  for (var e = 0, originalLength = events.length; e < originalLength; e++) {
+    var receipt = events[e];
+    if (!receipt || typeof receipt !== 'object') throw new Error('judicialLifecycle: invalid S.judicialEvents receipt');
+    if (receipt.system === 'judicial' && receipt.statusNow !== undefined &&
+        Number(receipt.cycle) === cycle) processed[receipt.popId] = true;
+    if (receipt.kind !== 'intake' || receipt.system !== 'judicial') continue;
+    if (intakes[receipt.popId]) throw new Error('judicialLifecycle: duplicate intake for ' + receipt.popId);
+    intakes[receipt.popId] = true;
+    if (!data.open[receipt.popId]) {
+      var opened = openCaseFromReceipt_(receipt);
+      data.open[receipt.popId] = opened;
+      data.cases.push(opened);
+    }
+  }
+
+  // A failed Phase-10 case write can leave Status detained without its row.
+  for (var pop in citizen) {
+    if (!citizen.hasOwnProperty(pop) || data.open[pop]) continue;
+    if (String(citizen[pop][iStatus] || '').trim().toLowerCase() !== 'detained') continue;
+    var reconcile = {
+      system: 'judicial', kind: 'intake', intakeType: 'arrest', entryType: 'arrest',
+      sourceSystem: 'reconcile', sourceEventId: 'reconcile:C' + cycle + ':' + pop,
+      popId: pop, cycle: cycle, priorStatus: '', chargeGravity: 'minor',
+      chargeCause: 'custody persistence reconciliation'
+    };
+    var recCase = openCaseFromReceipt_(reconcile);
+    data.open[pop] = recCase;
+    data.cases.push(recCase);
+    events.push(reconcile);
+  }
+
+  for (var id in data.open) {
+    if (!data.open.hasOwnProperty(id)) continue;
+    if (processed[id]) continue;
+    var c = data.open[id], row = citizen[id];
+    if (!row) throw new Error('judicialLifecycle: open case citizen ' + id + ' missing from Simulation_Ledger');
+    var status = String(row[iStatus] || '').trim(), lower = status.toLowerCase();
+    var kind = '';
+    if (lower === 'deceased' || lower === 'traded' || lower === 'inactive') {
+      c.Outcome = lower === 'deceased' ? 'deceased' : lower + '-reconciled';
+      c.StatusNow = 'closed';
+      c.ResolveCycle = cycle;
+      c.CyclesHeld = c.ArrestCycle === '' ? 0 : Math.max(0, cycle - Number(c.ArrestCycle));
+      c.LastTransitionCycle = cycle;
+      kind = 'exit';
+    } else {
+      var rng = seededRngFor_(Number(c.DecisionCycle), 'judicial:' + c.SourceEventId);
+      var prior = countPriorArrests_(data.cases, id, c.ArrestCycle, c.CaseId);
+      var step = advanceCase_(c, cycle, rates, rng, prior);
+      c = step.case;
+      if (step.event) kind = step.event.kind;
+      else if (c.ResolveCycle !== '' && c.LastTransitionCycle === cycle) {
+        // Investigation no-arrest has no census movement; a transition receipt
+        // still carries the case closure to the Phase-10 writer.
+        kind = c.Outcome === 'no-arrest' ? 'transition' : 'exit';
+      }
+      if (c.ResolveCycle !== '') {
+        if (c.Outcome !== 'no-arrest' && !judicialHealthStatus_(lower) && lower !== 'deceased' &&
+            lower !== 'traded' && lower !== 'inactive' && lower !== 'pending' &&
+            String(row[iClock] || '').trim().toUpperCase() !== 'GAME') {
+          judicialSetStatus_(ctx, row, c.PriorStatus || 'active', cycle, iStatus, iStart);
+        }
+      } else if ((c.StatusNow === 'pending' || c.StatusNow === 'held') &&
+                 !judicialHealthStatus_(lower) && lower !== 'detained' &&
+                 lower !== 'traded' && lower !== 'inactive' && lower !== 'pending' &&
+                 String(row[iClock] || '').trim().toUpperCase() !== 'GAME') {
+        judicialSetStatus_(ctx, row, 'detained', cycle, iStatus, iStart);
+      }
+    }
+    if (kind) events.push(judicialLifecycleReceipt_(c, kind, cycle));
+  }
+}
+
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
     JUDICIAL_ENTRY_TYPES_: JUDICIAL_ENTRY_TYPES_,
@@ -291,6 +454,8 @@ if (typeof module !== 'undefined' && module.exports) {
     admitJudicialReceipt_: admitJudicialReceipt_,
     openCaseFromReceipt_: openCaseFromReceipt_,
     countPriorArrests_: countPriorArrests_,
-    advanceCase_: advanceCase_
+    advanceCase_: advanceCase_,
+    judicialCaseData_: judicialCaseData_, judicialPriorStatusForCare_: judicialPriorStatusForCare_,
+    runJudicialLifecycle_: runJudicialLifecycle_
   };
 }

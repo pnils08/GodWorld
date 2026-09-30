@@ -173,6 +173,35 @@ function pick_(ctx, arr) {
 // MAIN ENGINE
 // ============================================================
 
+function hospitalPriorStatusForDischarge_(ctx, popId) {
+  if (!ctx.cache || typeof ctx.cache.getData !== 'function') {
+    throw new Error('generationalEvents: Hospital_Ledger cache missing');
+  }
+  var cached = ctx.cache.getData('Hospital_Ledger');
+  if (!cached || !cached.exists || !cached.values || !cached.values.length) {
+    throw new Error('generationalEvents: Hospital_Ledger tab missing');
+  }
+  var header = cached.values[0];
+  var iPop = header.indexOf('POPID'), iClose = header.indexOf('DischargeCycle');
+  var iPrior = header.indexOf('PriorStatus');
+  if (iPop < 0 || iClose < 0 || iPrior < 0) {
+    throw new Error('generationalEvents: Hospital_Ledger POPID, DischargeCycle or PriorStatus header missing');
+  }
+  var prior = '', found = false;
+  for (var i = 1; i < cached.values.length; i++) {
+    var row = cached.values[i];
+    if (String(row[iPop]) !== String(popId) || (row[iClose] !== '' && row[iClose] !== null)) continue;
+    if (found) throw new Error('generationalEvents: two open Hospital_Ledger rows for ' + popId);
+    prior = row[iPrior] || '';
+    if (String(prior).trim().toLowerCase() === 'detained') {
+      throw new Error('generationalEvents: Hospital_Ledger.PriorStatus cannot be detained for ' + popId);
+    }
+    found = true;
+  }
+  // Pre-P rows and citizens admitted by direct status writers have no carrier.
+  return prior;
+}
+
 function runGenerationalEngine_(ctx) {
   // Phase 42 §5.6: SL read/mutate via shared ctx.ledger; commit at Phase 10.
   if (!ctx.ledger) {
@@ -301,8 +330,8 @@ function runGenerationalEngine_(ctx) {
       var vAge = simYear - Number(vRow[iBirthYear]);
       // A recovering victim is re-escalated inside an open care episode —
       // a transition, not a fresh intake (engine.254 invariant E).
-      var vPrior = String(vRow[iStatus] || '').trim().toLowerCase();
-      var vIntake = vPrior !== 'recovering';
+      var vPrior = String(vRow[iStatus] || '').trim();
+      var vIntake = vPrior.toLowerCase() !== 'recovering';
       vRow[iStatus] = 'hospitalized';
       if (iStatusStart >= 0) vRow[iStatusStart] = cycle;
       // Human prose, never the machine tag — HealthCause feeds death prose
@@ -323,7 +352,8 @@ function runGenerationalEngine_(ctx) {
         popId: vPop, name: vName, neighborhood: vHood,
         cause: iHealthCause >= 0 ? (vRow[iHealthCause] || '') :
           (vIntake ? 'heat exhaustion during the heat wave' : ''),
-        from: vPrior || 'active', to: 'hospitalized', cycle: cycle,
+        from: vPrior, to: 'hospitalized', cycle: cycle,
+        priorStatus: vIntake ? vPrior : '',
         kind: vIntake ? 'intake' : 'transition',
         intakeType: vIntake ? 'heat' : '', sourceSystem: vIntake ? 'heat-wave' : '',
         sourceEventId: vIntake ? 'heat-wave:C' + cycle + ':heat:' + vPop : ''
@@ -363,7 +393,8 @@ function runGenerationalEngine_(ctx) {
     var row = rows[r];
 
     var popId = row[iPopID];
-    var status = (row[iStatus] || "active").toString().toLowerCase().trim();
+    var ledgerStatus = String(row[iStatus] || '').trim();
+    var status = (ledgerStatus || "active").toLowerCase();
     var birthYear = Number(row[iBirthYear]) || 0;
     var tier = Number(row[iTier]) || 0;
     var mode = row[iClock] || "ENGINE";
@@ -400,6 +431,9 @@ function runGenerationalEngine_(ctx) {
       );
 
       if (healthResult) {
+        if (healthResult.newStatus === 'active') {
+          healthResult.newStatus = hospitalPriorStatusForDischarge_(ctx, popId) || 'active';
+        }
         row[iStatus] = healthResult.newStatus;
 
         // engine.102 W4 — legacy tracked citizens with a blank HealthCause
@@ -429,7 +463,9 @@ function runGenerationalEngine_(ctx) {
           row[iLife] = setHospitalIncomeState_(row[iLife], continuesHospital ? cycle : 0,
             continuesHospital ? carriedIncomeHit : 0);
           if (iStatusStart >= 0) {
-            row[iStatusStart] = (healthResult.newStatus === "active") ? "" : cycle;
+            row[iStatusStart] = (healthResult.newStatus === "active" ||
+              !(['hospitalized', 'critical', 'recovering', 'injured', 'serious-condition'].indexOf(
+                String(healthResult.newStatus).toLowerCase()) >= 0)) ? "" : cycle;
           }
         }
 
@@ -641,6 +677,8 @@ function runGenerationalEngine_(ctx) {
         ]);
       }
 
+      var carePriorStatus = admitStatus ?
+        (status === 'detained' ? judicialPriorStatusForCare_(ctx, popId, ledgerStatus) : ledgerStatus) : '';
       ctx.summary.generationalEvents.push(applyMilestone_(
         ctx, row, iLife, iLastU, healthResult2, name, popId, neighborhood, cycle, calendarContext
       ));
@@ -664,7 +702,8 @@ function runGenerationalEngine_(ctx) {
           cause: iHealthCause >= 0 ? (row[iHealthCause] || cause102) : cause102,
           // Pre-admit life-state (retired stays retired) — the carrier the
           // Task 6 care-exit restore reads until Task 8 persists one.
-          from: status, to: admitStatus, cycle: cycle,
+          from: ledgerStatus, to: admitStatus, cycle: cycle,
+          priorStatus: carePriorStatus,
           kind: 'intake', intakeType: admitStatus === 'injured' ? 'injury' : 'illness',
           sourceSystem: 'health-engine',
           sourceEventId: 'health-engine:C' + cycle + ':' + (admitStatus === 'injured' ? 'injury' : 'illness') + ':' + popId

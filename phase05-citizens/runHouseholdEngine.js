@@ -505,7 +505,7 @@ function runHouseholdEngine_(ctx) {
     // Hospitalized/critical stay: their hospital-strain pool IS the design.
     if (iStatus >= 0) {
       var hhGateStatus = (row[iStatus] || "").toString().trim().toLowerCase();
-      if (hhGateStatus === "deceased" || hhGateStatus === "inactive" || hhGateStatus === "traded" || hhGateStatus === "pending") continue;
+      if (hhGateStatus === "deceased" || hhGateStatus === "inactive" || hhGateStatus === "traded" || hhGateStatus === "pending" || hhGateStatus === "detained") continue;
     }
 
     // ═══════════════════════════════════════════════════════════════════════

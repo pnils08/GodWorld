@@ -922,6 +922,9 @@
 
 - **pick_(ctx, arr)**
 
+- **hospitalPriorStatusForDischarge_(ctx, popId)**
+  Sheets: Hospital_Ledger
+
 - **runGenerationalEngine_(ctx)**
   Reads: S.cycleId, S.generationalEvents, S.holiday, S.holidayPriority, S.hospitalEvents, S.isCreationDay, S.isFirstFriday, S.month, S.season, S.sportsSeason, S.storyHooks, S.weatherEvents
   Writes: S.generationalEvents, S.hospitalEvents, S.storyHooks
@@ -2008,6 +2011,22 @@
 - **countPriorArrests_(cases, popId, arrestCycle, caseId)**
 
 - **advanceCase_(caseIn, cycle, rates, rng, priorArrests)**
+
+- **judicialCaseData_(ctx)**
+
+- **judicialHealthStatus_(status)**
+
+- **judicialPriorStatusForCare_(ctx, popId, from)**
+  Reads: S.judicialEvents
+
+- **judicialSetStatus_(ctx, row, status, cycle, iStatus, iStart)**
+
+- **judicialLifecycleReceipt_(c, kind, cycle)**
+
+- **runJudicialLifecycle_(ctx)**
+  Reads: S.absoluteCycle, S.cycleId, S.judicialEvents
+  Writes: S.judicialEvents
+  Config: ctx.config.cycleCount
 
 ### maneuverEngine.js
 - **maneuverConfig_(ctx)**
@@ -3165,6 +3184,10 @@
   Writes: S.hospitalCensus
   Sheets: Hospital_Ledger
 
+- **persistJudicialLedger_(ctx)**
+  Reads: S.judicialEvents
+  Writes: S.judicialCensus
+
 - **getCivicContextForPacket_(ss, cycle, cal)**
   Sheets: Civic_Office_Ledger, Election_Log
 
@@ -4275,4 +4298,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1509
+**Functions mapped:** 1517

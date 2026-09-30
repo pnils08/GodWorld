@@ -291,6 +291,12 @@ if (require.main === module) {
     check('7b missing Status or POPID header throws by name',
       namesError(() => service.careJusticeResidentIndex_(noStatus), 'Status') &&
       namesError(() => service.careJusticeResidentIndex_(noPop), 'POPID'));
+    const custody = ctx();
+    custody.ledger.rows[0][2] = 'detained';
+    const residents = service.careJusticeResidentIndex_(custody);
+    check('T6 detained citizen leaves the street resident index and tracked share',
+      !(residents.Fruitvale || []).length &&
+      service.runCareJusticeDemand_(custody).hoods.Fruitvale.trackedResidents === 0);
   }
   console.log('\ncareJusticeService: ' + passed + ' passed, ' + failed + ' failed');
   process.exit(failed ? 1 : 0);

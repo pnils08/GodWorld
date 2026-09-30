@@ -181,8 +181,8 @@ function runToClose(c, fromCycle, rngAt, prior, cap) {
 
 // ── chaos engine harness (single-row ledger: every event hits the same citizen) ──
 function judicialCtx(status, extraHeaders) {
-  const headers = ['POPID', 'First', 'Last', 'Neighborhood', 'LifeHistory', 'DialState', 'LastUpdated', 'Status', 'StatusStartCycle', 'HealthCause'];
-  const row = ['SYNTHETIC-JUDICIAL', 'Synthetic', 'Defendant', 'Fruitvale', '', '', '', status, '', ''];
+  const headers = ['POPID', 'First', 'Last', 'Neighborhood', 'LifeHistory', 'DialState', 'LastUpdated', 'Status', 'StatusStartCycle', 'HealthCause', 'ClockMode'];
+  const row = ['SYNTHETIC-JUDICIAL', 'Synthetic', 'Defendant', 'Fruitvale', '', '', '', status, '', '', 'ENGINE'];
   const ledger = { headers: headers.concat(extraHeaders || []), rows: [row], dirty: false };
   return { summary: { cycleRef: 'C100', careJusticeDemand: makeDemandFixture_('Fruitvale', ledger) }, ledger };
 }
@@ -234,8 +234,9 @@ global.loadChaosCarsConfig_ = () => [
       { outcome: 'ticket', severity: 'low', lifeHistoryTag: 'Setback', weight: 1 }
     ], metricImpacts: [] }
 ];
-function fixedCopRun(failPayload, status) {
+function fixedCopRun(failPayload, status, clockMode) {
   const ctx = judicialCtx(status || 'Active');
+  if (clockMode) ctx.ledger.rows[0][ctx.ledger.headers.indexOf('ClockMode')] = clockMode;
   ctx.summary.cycleId = 100;
   ctx.summary.careJusticeDemand.hoods.Fruitvale.charges = 1;
   ctx.summary.careJusticeDemand.exposureDial = 1000;
@@ -264,6 +265,9 @@ function fixedCopRun(failPayload, status) {
     JSON.stringify(ev.map(e => [e.kind, e.sourceEventId])));
   assert('11 pass arrest keeps its hook', run.ctx.summary.storyHooks.filter(k => k.hookType === 'CITIZEN_ARRESTED').length === 1);
   assert('11 no hospital receipt from a cop car', !run.ctx.summary.hospitalEvents);
+  assert('T6 arrest flips Status after source row and receipt, stamps Cycle',
+    run.ctx.ledger.rows[0][run.ctx.ledger.headers.indexOf('Status')] === 'detained' &&
+    run.ctx.ledger.rows[0][run.ctx.ledger.headers.indexOf('StatusStartCycle')] === 100);
 
   // ── 8. every receipt and lifecycle event folds through the accounting ──
   const c = jl.openCaseFromReceipt_(ev[0]);
@@ -280,6 +284,12 @@ function fixedCopRun(failPayload, status) {
   const run = fixedCopRun(true);
   assert('16 payload failure → error surfaces, no judicial receipt',
     !!run.error && !run.ctx.summary.judicialEvents, run.error && run.error.message);
+  assert('T6 source row failure leaves citizen Status unchanged',
+    run.ctx.ledger.rows[0][run.ctx.ledger.headers.indexOf('Status')] === 'Active');
+  const game = fixedCopRun(false, 'Active', 'GAME');
+  assert('T6 GAME arrest opens case but leaves Status unchanged',
+    !game.error && game.ctx.summary.judicialEvents.length === 1 &&
+    game.ctx.ledger.rows[0][game.ctx.ledger.headers.indexOf('Status')] === 'Active');
 }
 
 // ── 12. overdue decision decides once, same as on time; second call is a no-op ──
@@ -369,6 +379,207 @@ function seenFrom(cases) {
   const ex = jl.advanceCase_(a, 101, rates, fixed(0.5), 0);
   const replayExit = acct.foldCareJusticeReceipts_([arrestReceipt('SYN-17a', 100), ex.event], seenFrom([ex.case]));
   assert('17 arrest → exit persisted → replay books none', replayExit.receipts.length === 0 && replayExit.duplicates === 2);
+}
+
+// Task 6: exercise the scheduled phase and Phase-10 writer against an isolated,
+// deliberately reordered 21-column tab. All IDs and rows are synthetic.
+const phaseBox = { Logger: { log() {} }, seededRngFor_,
+  requireTab_: (ss, name) => {
+    const tab = ss.getSheetByName(name);
+    if (!tab) throw new Error(name + ' tab missing');
+    return tab;
+  },
+  persistWithRetry_: fn => fn(), appendRowWithRetry_: (tab, row) => tab.appendRow(row) };
+vm.createContext(phaseBox);
+for (const file of ['phase05-citizens/judicialLifecycle.js', 'phase10-persistence/buildCyclePacket.js']) {
+  vm.runInContext(fs.readFileSync(path.join(ROOT, file), 'utf8'), phaseBox, { filename: file });
+}
+const modeBox = { Logger: { log() {} }, queueBatchAppendIntent_: () => {
+  throw new Error('detained mode citizen queued a sheet intent');
+} };
+vm.createContext(modeBox);
+for (const file of ['phase05-citizens/generateCivicModeEvents.js',
+  'phase05-citizens/generateMediaModeEvents.js']) {
+  vm.runInContext(fs.readFileSync(path.join(ROOT, file), 'utf8'), modeBox, { filename: file });
+}
+for (const mode of ['CIVIC', 'MEDIA']) {
+  const headers = ['POPID', 'First', 'Last', 'Tier', 'ClockMode', 'Status',
+    'LifeHistory', 'LastUpdated', 'Neighborhood', 'RoleType'];
+  const row = ['SYN-T6-MODE', 'Synthetic', 'Person', 4, mode, 'detained', '', '',
+    'SYNTHETIC_HOOD', mode === 'CIVIC' ? 'Council Member' : 'Reporter'];
+  let draws = 0;
+  const ctx = { ledger: { headers, rows: [row], dirty: false },
+    summary: { cycleId: 101 }, config: { cycleCount: 101 },
+    rng: () => { draws++; return 0; }, ss: { getSheetByName: () => null } };
+  modeBox[mode === 'CIVIC' ? 'generateCivicModeEvents_' : 'generateMediaModeEvents_'](ctx);
+  assert('T6 detained ' + mode + ' citizen emits no mode event or intent',
+    draws === 0 && !ctx.ledger.dirty &&
+    ctx.summary[mode === 'CIVIC' ? 'civicModeEvents' : 'mediaModeEvents'] === 0);
+}
+function phaseFixture(status, cycle, event, cfg) {
+  const fields = jl.JUDICIAL_CASE_FIELDS_.slice().reverse(); // prove header-name mapping
+  const rows = [fields];
+  const tab = {
+    getDataRange: () => ({ getValues: () => rows.map(row => row.slice()) }),
+    appendRow: row => rows.push(row.slice()),
+    getRange: (r, c) => ({ setValues: values => values[0].forEach((value, offset) => {
+      rows[r - 1][c - 1 + offset] = value;
+    }) })
+  };
+  const headers = ['POPID', 'Status', 'StatusStartCycle', 'ClockMode'];
+  const person = ['SYN-T6', status, '', 'ENGINE'];
+  const ctx = {
+    config: { ...RATES_CFG, ...cfg, cycleCount: cycle },
+    summary: { cycleId: cycle, ...(event ? { judicialEvents: [event] } : {}) },
+    ledger: { headers, rows: [person], dirty: false },
+    cache: { getData: name => name === 'Judicial_Ledger' ?
+      { exists: true, values: rows.map(row => row.slice()) } : { exists: false, values: [] } },
+    ss: { getSheetByName: name => name === 'Judicial_Ledger' ? tab : null }
+  };
+  return { ctx, rows, fields, person };
+}
+function caseFromFixture(fx, r) {
+  const result = {};
+  fx.fields.forEach((field, i) => { result[field] = fx.rows[r || 1][i]; });
+  return result;
+}
+{
+  const ev = arrestReceipt('SYN-T6', 100, 'minor');
+  const fx = phaseFixture('detained', 100, ev, {
+    judicialReleasedRate: 0, judicialDivertedRate: 0, judicialHeldRate: 1
+  });
+  phaseBox.runJudicialLifecycle_(fx.ctx);
+  phaseBox.persistJudicialLedger_(fx.ctx);
+  assert('T6 intake writes 21 header-mapped cells with pending and PriorStatus',
+    fx.rows.length === 2 && fx.rows[1].length === 21 &&
+    caseFromFixture(fx).StatusNow === 'pending' && caseFromFixture(fx).PriorStatus === 'Active');
+  fx.ctx.summary = { cycleId: 101 };
+  fx.ctx.config.cycleCount = 101;
+  phaseBox.runJudicialLifecycle_(fx.ctx);
+  const once = fx.ctx.summary.judicialEvents.length;
+  phaseBox.runJudicialLifecycle_(fx.ctx);
+  assert('T6 second Phase-5 call emits no duplicate decision', fx.ctx.summary.judicialEvents.length === once);
+  phaseBox.persistJudicialLedger_(fx.ctx);
+  assert('T6 seeded decision enters held at +1 and leaves citizen detained',
+    caseFromFixture(fx).StatusNow === 'held' && caseFromFixture(fx).HeldUntilCycle === 102 &&
+    fx.person[1] === 'detained');
+  fx.ctx.summary = { cycleId: 102 };
+  fx.ctx.config.cycleCount = 102;
+  phaseBox.runJudicialLifecycle_(fx.ctx);
+  phaseBox.persistJudicialLedger_(fx.ctx);
+  assert('T6 held-served closes at HeldUntilCycle and restores casing',
+    caseFromFixture(fx).Outcome === 'held-served' && caseFromFixture(fx).ResolveCycle === 102 &&
+    fx.person[1] === 'Active');
+  assert('T6 Phase-5 queues no sheet intent', !fx.ctx.intents && fx.ctx.ledger.dirty);
+}
+{
+  const open = jl.openCaseFromReceipt_(arrestReceipt('SYN-T6', 100));
+  const fx = phaseFixture('active', 101, null);
+  fx.rows.push(fx.fields.map(field => open[field]));
+  fx.ctx.config.judicialReleasedRate = 1;
+  fx.ctx.config.judicialDivertedRate = 0;
+  fx.ctx.config.judicialHeldRate = 0;
+  phaseBox.runJudicialLifecycle_(fx.ctx);
+  assert('T6 release restores the case PriorStatus casing', fx.person[1] === 'Active');
+  // The due release above restores Active. Test re-assert before the due Cycle.
+  fx.rows[1][fx.fields.indexOf('DecisionCycle')] = 103;
+  fx.rows[1][fx.fields.indexOf('LastTransitionCycle')] = 100;
+  fx.ctx.summary = { cycleId: 102 };
+  fx.ctx.config.cycleCount = 102;
+  phaseBox.runJudicialLifecycle_(fx.ctx);
+  assert('T6 pre-decision open case re-asserts custody', fx.person[1] === 'detained');
+  fx.person[1] = 'recovering';
+  phaseBox.runJudicialLifecycle_(fx.ctx);
+  assert('T6 care state wins custody re-assert', fx.person[1] === 'recovering');
+  fx.person[1] = 'active'; fx.person[3] = 'GAME';
+  phaseBox.runJudicialLifecycle_(fx.ctx);
+  assert('T6 GAME clock keeps status during open custody', fx.person[1] === 'active');
+}
+{
+  const open = jl.openCaseFromReceipt_(arrestReceipt('SYN-T6', 100));
+  const fx = phaseFixture('deceased', 101);
+  fx.rows.push(fx.fields.map(field => open[field]));
+  phaseBox.runJudicialLifecycle_(fx.ctx);
+  phaseBox.persistJudicialLedger_(fx.ctx);
+  assert('T6 death precedes due decision and closes deceased',
+    caseFromFixture(fx).Outcome === 'deceased' && fx.person[1] === 'deceased');
+}
+{
+  const open = jl.openCaseFromReceipt_(arrestReceipt('SYN-T6', 100));
+  const fx = phaseFixture('hospitalized', 101);
+  fx.rows.push(fx.fields.map(field => open[field]));
+  fx.ctx.config.judicialReleasedRate = 1;
+  fx.ctx.config.judicialDivertedRate = 0;
+  fx.ctx.config.judicialHeldRate = 0;
+  phaseBox.runJudicialLifecycle_(fx.ctx);
+  phaseBox.persistJudicialLedger_(fx.ctx);
+  assert('T6 case exits during care without overwriting health Status',
+    caseFromFixture(fx).Outcome === 'released' && fx.person[1] === 'hospitalized');
+}
+for (const left of ['traded', 'inactive']) {
+  const open = jl.openCaseFromReceipt_(arrestReceipt('SYN-T6', 100));
+  const fx = phaseFixture(left, 101);
+  fx.rows.push(fx.fields.map(field => open[field]));
+  phaseBox.runJudicialLifecycle_(fx.ctx);
+  phaseBox.persistJudicialLedger_(fx.ctx);
+  assert('T6 ' + left + ' closes case with reconciliation and keeps Status',
+    caseFromFixture(fx).Outcome === left + '-reconciled' && fx.person[1] === left);
+}
+{
+  const investigate = { ...arrestReceipt('SYN-T6', 100, 'grave'), entryType: 'investigation',
+    kind: 'transition', sourceSystem: 'conduct', sourceEventId: 'conduct:synthetic:SYN-T6' };
+  const open = jl.openCaseFromReceipt_(investigate);
+  const fx = phaseFixture('active', 101, null, { investigationArrestRate: 0 });
+  fx.rows.push(fx.fields.map(field => open[field]));
+  phaseBox.runJudicialLifecycle_(fx.ctx);
+  phaseBox.persistJudicialLedger_(fx.ctx);
+  assert('T6 no-arrest investigation closes row without an intake or exit receipt',
+    caseFromFixture(fx).Outcome === 'no-arrest' && caseFromFixture(fx).ResolveCycle === 101 &&
+    fx.ctx.summary.judicialEvents.length === 1 && fx.ctx.summary.judicialEvents[0].kind === 'transition');
+}
+{
+  const fx = phaseFixture('detained', 100);
+  phaseBox.runJudicialLifecycle_(fx.ctx);
+  phaseBox.persistJudicialLedger_(fx.ctx);
+  assert('T6 stranded detention opens visible reconcile case',
+    caseFromFixture(fx).SourceSystem === 'reconcile' && caseFromFixture(fx).PriorStatus === '');
+  fx.ctx.summary = { cycleId: 101 };
+  fx.ctx.config.cycleCount = 101;
+  fx.ctx.config.judicialReleasedRate = 1;
+  fx.ctx.config.judicialDivertedRate = 0;
+  fx.ctx.config.judicialHeldRate = 0;
+  phaseBox.runJudicialLifecycle_(fx.ctx);
+  assert('T6 reconcile exit restores known blank to active', fx.person[1] === 'active');
+}
+{
+  const fx = phaseFixture('active', 101);
+  assert('T6 no judicialEvents array is a valid empty Cycle', !throwsNaming(() =>
+    phaseBox.runJudicialLifecycle_(fx.ctx), 'judicialEvents'));
+  fx.ctx.cache.getData = () => ({ exists: false, values: [] });
+  assert('T6 missing Judicial_Ledger tab throws', throwsNaming(() =>
+    phaseBox.runJudicialLifecycle_(fx.ctx), 'Judicial_Ledger'));
+  fx.ctx.cache.getData = () => ({ exists: true, values: [['CaseId']] });
+  assert('T6 missing Judicial_Ledger header throws by name', throwsNaming(() =>
+    phaseBox.runJudicialLifecycle_(fx.ctx), 'POPID'));
+  fx.ctx.config.judicialHeldRate = undefined;
+  assert('T6 missing judicial rate throws by key', throwsNaming(() =>
+    phaseBox.runJudicialLifecycle_(fx.ctx), 'judicialHeldRate'));
+}
+{
+  const open = jl.openCaseFromReceipt_(arrestReceipt('SYN-T6', 100));
+  const fx = phaseFixture('detained', 101, null);
+  fx.rows.push(fx.fields.map(field => open[field]));
+  fx.rows.push(fx.fields.map(field => ({ ...open, CaseId: 'J-duplicate' })[field]));
+  assert('T6 duplicate open POPID throws in Phase 5', throwsNaming(() =>
+    phaseBox.runJudicialLifecycle_(fx.ctx), 'SYN-T6'));
+  assert('T6 duplicate open POPID throws in writer', throwsNaming(() =>
+    phaseBox.persistJudicialLedger_(fx.ctx), 'SYN-T6'));
+  fx.rows.pop();
+  fx.ctx.summary.judicialEvents = [{ ...arrestReceipt('SYN-T6', 101), kind: 'transition',
+    sourceEventId: open.SourceEventId, reArrestEventId: 'patrol:second:SYN-T6' }];
+  phaseBox.persistJudicialLedger_(fx.ctx);
+  assert('T6 re-arrest transition stamps Cycle without blanking StatusNow',
+    caseFromFixture(fx).StatusNow === 'pending' && caseFromFixture(fx).LastTransitionCycle === 101);
 }
 
 console.log(`\njudicialLifecycle: ${passed} passed, ${failed} failed`);

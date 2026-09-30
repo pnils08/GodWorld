@@ -115,7 +115,8 @@ function makeSS(sheets) {
 // ═══════════════════════════════════════════════════════════════════════════
 (function testNewAdmissionCause() {
   const headers = ['AdmissionId', 'POPID', 'Name', 'Neighborhood', 'Cause',
-    'AdmitCycle', 'StatusNow', 'LastTransitionCycle', 'DischargeCycle', 'Outcome', 'CyclesInCare'];
+    'AdmitCycle', 'StatusNow', 'LastTransitionCycle', 'DischargeCycle', 'Outcome', 'CyclesInCare',
+    'IntakeType', 'SourceSystem', 'SourceEventId', 'TransferFromId', 'PriorStatus']; // engine.254 Task 6: L–P
   const rows = [headers];
   const sheets = { Hospital_Ledger: makeSheet('Hospital_Ledger', rows) };
   const ctx = {
@@ -146,7 +147,8 @@ function makeSS(sheets) {
 // ═══════════════════════════════════════════════════════════════════════════
 (function testCauseBackfill() {
   const headers = ['AdmissionId', 'POPID', 'Name', 'Neighborhood', 'Cause',
-    'AdmitCycle', 'StatusNow', 'LastTransitionCycle', 'DischargeCycle', 'Outcome', 'CyclesInCare'];
+    'AdmitCycle', 'StatusNow', 'LastTransitionCycle', 'DischargeCycle', 'Outcome', 'CyclesInCare',
+    'IntakeType', 'SourceSystem', 'SourceEventId', 'TransferFromId', 'PriorStatus']; // engine.254 Task 6: L–P
   const rows = [
     headers,
     ['H-C99-001', 'POP-B-001', 'Alice', 'Downtown', '', 99, 'hospitalized', 99, '', '', ''],
@@ -179,7 +181,8 @@ function makeSS(sheets) {
 // ═══════════════════════════════════════════════════════════════════════════
 (function testGhostReconcile() {
   const headers = ['AdmissionId', 'POPID', 'Name', 'Neighborhood', 'Cause',
-    'AdmitCycle', 'StatusNow', 'LastTransitionCycle', 'DischargeCycle', 'Outcome', 'CyclesInCare'];
+    'AdmitCycle', 'StatusNow', 'LastTransitionCycle', 'DischargeCycle', 'Outcome', 'CyclesInCare',
+    'IntakeType', 'SourceSystem', 'SourceEventId', 'TransferFromId', 'PriorStatus']; // engine.254 Task 6: L–P
   const rows = [
     headers,
     ['H-C99-001', 'POP-C-001', 'Active Alice', 'Downtown', 'flu', 99, 'hospitalized', 99, '', '', ''],
@@ -231,7 +234,8 @@ function makeSS(sheets) {
 // ═══════════════════════════════════════════════════════════════════════════
 (function testHospitalTalkback() {
   const hospHeaders = ['AdmissionId', 'POPID', 'Name', 'Neighborhood', 'Cause',
-    'AdmitCycle', 'StatusNow', 'LastTransitionCycle', 'DischargeCycle', 'Outcome', 'CyclesInCare'];
+    'AdmitCycle', 'StatusNow', 'LastTransitionCycle', 'DischargeCycle', 'Outcome', 'CyclesInCare',
+    'IntakeType', 'SourceSystem', 'SourceEventId', 'TransferFromId', 'PriorStatus']; // engine.254 Task 6: L–P
   const wpHeaders = ['totalPopulation', 'illnessRate', 'employmentRate', 'migration', 'economy'];
 
   function buildOpenRows(count) {

@@ -343,7 +343,7 @@ function generateMediaModeEvents_(ctx) {
     var neighborhood = iNeighborhood >= 0 ? (row[iNeighborhood] || "").toString() : "";
 
     if (mode !== "MEDIA") continue;
-    if (status === "inactive" || status === "deceased" || status === "traded" || status === "pending") continue; // engine.67 step 4 (S325): traded/pending file no stories here
+    if (status === "inactive" || status === "deceased" || status === "traded" || status === "pending" || status === "detained") continue; // engine.254: custody cannot participate
     if (!first || !popId) continue;
 
     // Health penalty

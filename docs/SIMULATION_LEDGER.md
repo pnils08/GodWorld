@@ -56,6 +56,7 @@ The SL holds ALL simulated people, not just city citizens. ClockMode determines 
 | Active | 664 |
 | Retired | 9 |
 | Recovering | 2 |
+| detained | — |
 
 ---
 
@@ -201,7 +202,7 @@ Every column is a data point in someone's life. This maps who writes each column
 | Col | # | Header | Valid Values | Writers | Readers | S321 Verdict |
 |-----|---|--------|-------------|---------|---------|--------------|
 | K | 11 | RoleType | Text. ENGINE: "Carpenter". GAME: "Shortstop, Oakland A's" | runCareerEngine (transitions), integration scripts | buildDeskPackets, civic engines, economicLookup, linkCitizensToEmployers | **CAUSAL** — `generateGameModeMicroEvents.js:364` pitcher-role event routing; media-role routing |
-| L | 12 | Status | Active / Retired / Recovering | runCareerEngine, civic engines, integration scripts | All event generators (skip non-Active), buildDeskPackets | **CAUSAL** — universal skip gate (inactive/deceased/retired); `generationalWealthEngine.js:286` |
+| L | 12 | Status | Active / Retired / Recovering / detained | runCareerEngine, civic engines, integration scripts | All event generators (skip non-Active), buildDeskPackets | **CAUSAL** — universal skip gate (inactive/deceased/retired); `generationalWealthEngine.js:286` |
 | M | 13 | BirthYear | 4-digit year. Age = 2041 - BirthYear. | Integration scripts, cleanup | educationCareerEngine, householdFormation, youthEngine (age gates), buildDeskPackets | **CAUSAL** — age linchpin: `educationCareerEngine.js:229` (settlement), `runYouthEngine.js:372` (youth gate), `generationalWealthEngine.js:318` (money-loop minor gate) |
 | N | 14 | OrginCity | Text (legacy misspelled column name) | — | — | RECORD-by-design |
 

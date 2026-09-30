@@ -393,7 +393,7 @@ function generateCivicModeEvents_(ctx) {
     var neighborhood = iNeighborhood >= 0 ? (row[iNeighborhood] || "").toString() : "";
 
     if (mode !== "CIVIC") continue;
-    if (status === "inactive" || status === "deceased" || status === "traded" || status === "pending") continue; // engine.67 step 4 (S325): traded/pending hold no office here
+    if (status === "inactive" || status === "deceased" || status === "traded" || status === "pending" || status === "detained") continue; // engine.254: custody cannot participate
     if (!first || !popId) continue;
 
     // Hospitalized/recovering citizens get reduced event chance but aren't skipped

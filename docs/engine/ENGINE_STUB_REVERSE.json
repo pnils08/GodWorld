@@ -2,7 +2,7 @@
   "generated": "2026-09-30",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 180,
-  "functionsMapped": 1509,
+  "functionsMapped": 1517,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -24,6 +24,7 @@
         "phase05-citizens/civicInitiativeEngine.js::applyActiveInitiativeRipples_",
         "phase05-citizens/civicInitiativeEngine.js::applyNeighborhoodRipple_",
         "phase05-citizens/civicInitiativeEngine.js::checkMayoralVeto_",
+        "phase05-citizens/judicialLifecycle.js::runJudicialLifecycle_",
         "phase05-citizens/runAsUniversePipeline.js::runAsUniversePipeline_",
         "phase05-citizens/runCareerEngine.js::runCareerEngine_",
         "phase05-citizens/runCivicElectionsv1.js::runCivicElections_",
@@ -702,6 +703,7 @@
         "phase05-citizens/generationalWealthEngine.js::calculateCitizenIncomes_",
         "phase05-citizens/generationalWealthEngine.js::processGenerationalWealth_",
         "phase05-citizens/householdFormationEngine.js::buildCitizenMoneyLookup_",
+        "phase05-citizens/judicialLifecycle.js::runJudicialLifecycle_",
         "phase05-citizens/maneuverEngine.js::runManeuverEngine_",
         "phase05-citizens/migrationTrackingEngine.js::processMigrationTracking_",
         "phase05-citizens/neighborhoodTrajectoryEngine.js::processNeighborhoodTrajectory_",
@@ -2820,10 +2822,14 @@
     },
     "judicialEvents": {
       "writers": [
-        "phase04-events/chaosCarsEngine.js::runChaosEvent_"
+        "phase04-events/chaosCarsEngine.js::runChaosEvent_",
+        "phase05-citizens/judicialLifecycle.js::runJudicialLifecycle_"
       ],
       "readers": [
-        "phase04-events/chaosCarsEngine.js::runChaosEvent_"
+        "phase04-events/chaosCarsEngine.js::runChaosEvent_",
+        "phase05-citizens/judicialLifecycle.js::judicialPriorStatusForCare_",
+        "phase05-citizens/judicialLifecycle.js::runJudicialLifecycle_",
+        "phase10-persistence/buildCyclePacket.js::persistJudicialLedger_"
       ]
     },
     "tier1ChaosEvents": {
@@ -4282,6 +4288,12 @@
       ],
       "readers": []
     },
+    "judicialCensus": {
+      "writers": [
+        "phase10-persistence/buildCyclePacket.js::persistJudicialLedger_"
+      ],
+      "readers": []
+    },
     "pressureCounts": {
       "writers": [
         "utilities/citizenDialMap.js::emitPressureTag_"
@@ -4695,6 +4707,7 @@
       "writers": [],
       "readers": [
         "phase03-population/applyDemographicDrift.js::applyDemographicDrift_",
+        "phase04-events/generationalEventsEngine.js::hospitalPriorStatusForDischarge_",
         "phase10-persistence/buildCyclePacket.js::persistHospitalLedger_"
       ]
     },

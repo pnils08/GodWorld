@@ -15,6 +15,7 @@ const cm = require('../utilities/citizenMemory.js');
 const comp = require('../utilities/compressLifeHistory.js');
 const dialMap = require('../utilities/citizenDialMap.js');
 const { makeDemandFixture_ } = require('./careJusticeService.test.js');
+global.careJusticeResidentIndex_ = require('../phase04-events/careJusticeService.js').careJusticeResidentIndex_;
 global.Logger = { log() {} };
 global.inWorldStamp_ = () => 'C100';
 ['deserialize_', 'serialize_', 'accrueChaos_', 'applyChaosReaction_', 'newCitizen_']
@@ -35,14 +36,14 @@ function assert(label, cond, detail) {
 
 // minimal shared ctx.ledger with a DialState column (col index 5)
 function makeCtx() {
-  return {
-    summary: { cycleRef: 'C100', careJusticeDemand: makeDemandFixture_('Fruitvale') },
-    ledger: {
+  const ledger = {
       headers: ['POPID', 'First', 'Last', 'Neighborhood', 'LifeHistory', 'DialState', 'LastUpdated'],
       rows: [['POP-09001', 'Test', 'Citizen', 'Fruitvale', '', '', '']],
       dirty: false
-    }
-  };
+    };
+  ledger.headers.push('Status');
+  ledger.rows[0].push('active');
+  return { summary: { cycleRef: 'C100', careJusticeDemand: makeDemandFixture_('Fruitvale', ledger) }, ledger };
 }
 const target = { rowIndex: 0, popId: 'POP-09001', neighborhood: 'Fruitvale', tier: 4 };
 const vehicle = { name: 'tow_truck' };
@@ -115,8 +116,9 @@ assert('streak preserved through all writes', dialOf(ctx).streak !== undefined);
 // Task 4: isolated synthetic ambulance receipts; no intent is sent to a Sheet.
 function medicalCtx(status, cause) {
   const ctx = makeCtx();
-  ctx.ledger.headers.push('Status', 'StatusStartCycle', 'HealthCause');
-  ctx.ledger.rows[0].push(status, '', cause || '');
+  ctx.ledger.headers.push('StatusStartCycle', 'HealthCause');
+  ctx.ledger.rows[0][7] = status;
+  ctx.ledger.rows[0].push('', cause || '');
   ctx.ledger.rows[0][0] = 'SYNTHETIC-CHAOS-CARE';
   return ctx;
 }

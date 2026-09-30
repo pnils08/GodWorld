@@ -175,7 +175,7 @@ function isArrayChaos_(x) {
 var VEHICLE_CONFIGS = [
   {
     name: 'cop_car', displayName: 'Cop car',
-    scopes: ['citizen', 'neighborhood'], baseFrequencyWeight: 1.2,
+    scopes: ['citizen', 'neighborhood'], baseFrequencyWeight: 1.2, namedCallsField: 'charges',
     textureOutcomes: [
       { outcome: 'ticket',              weight: 0.40, severity: 'low',  lifeHistoryTag: 'Setback',              role: 'victim'  },
       { outcome: 'pulled_over_warning', weight: 0.20, severity: 'low',  lifeHistoryTag: 'Friction',             role: 'subject' }, // engine.201 ruling 5: chaos is never a calm day

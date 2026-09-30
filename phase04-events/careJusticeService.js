@@ -111,24 +111,34 @@ function careJusticeLogUnknownHoods_(deployed, hoodSet, cycle) {
   }
 }
 
-function careJusticeTrackedByHood_(ctx) {
+function careJusticeResidentIndex_(ctx) {
   if (!ctx.ledger || !ctx.ledger.headers || !ctx.ledger.rows) {
     throw new Error('careJusticeDemand: ctx.ledger missing');
   }
   var headers = ctx.ledger.headers;
   var iHood = headers.indexOf('Neighborhood');
   var iStatus = headers.indexOf('Status');
+  var iPop = headers.indexOf('POPID');
   if (iHood < 0) throw new Error('careJusticeDemand: Simulation_Ledger.Neighborhood missing');
-  var counts = {};
+  if (iStatus < 0) throw new Error('careJusticeDemand: Simulation_Ledger.Status missing');
+  if (iPop < 0) throw new Error('careJusticeDemand: Simulation_Ledger.POPID missing');
+  var index = {};
   for (var i = 0; i < ctx.ledger.rows.length; i++) {
     var row = ctx.ledger.rows[i];
-    if (iStatus >= 0) {
-      var status = String(row[iStatus] || '').trim().toLowerCase();
-      if (status === 'deceased' || status === 'inactive' || status === 'traded' || status === 'pending') continue;
-    }
+    var status = String(row[iStatus] || '').trim().toLowerCase();
+    if (status === 'deceased' || status === 'inactive' || status === 'traded' || status === 'pending') continue;
+    if (!String(row[iPop] || '').trim()) throw new Error('careJusticeDemand: Simulation_Ledger.POPID empty at row ' + (i + 2));
     var hood = String(row[iHood] || '').trim();
-    counts[hood] = (counts[hood] || 0) + 1;
+    if (!index[hood]) index[hood] = [];
+    index[hood].push(i);
   }
+  return index;
+}
+
+function careJusticeTrackedByHood_(ctx) {
+  var index = careJusticeResidentIndex_(ctx);
+  var counts = {};
+  for (var hood in index) if (index.hasOwnProperty(hood)) counts[hood] = index[hood].length;
   return counts;
 }
 
@@ -149,6 +159,14 @@ function runCareJusticeDemand_(ctx) {
     'S.worldPopulation.totalPopulation', '', true);
   var admitRate = careJusticeRate_(ctx.config, 'careJusticeAdmitPerSick');
   var oariShare = careJusticeRate_(ctx.config, 'careJusticeOariEligibleShare');
+  var exposureDial = ctx.config && ctx.config.careJusticeExposureDial;
+  if (exposureDial === undefined || exposureDial === null || String(exposureDial).trim() === '') {
+    throw new Error('careJusticeDemand: World_Config key "careJusticeExposureDial" missing');
+  }
+  exposureDial = Number(exposureDial);
+  if (!isFinite(exposureDial) || exposureDial < 0) {
+    throw new Error('careJusticeDemand: World_Config key "careJusticeExposureDial" must be finite and >= 0');
+  }
   var oariConfig = careJusticeOariConfig_();
   var oariHoods = careJusticeOariHoods_(ctx, oariConfig.initiativeId);
   var crime = S.crimeMetrics.byNeighborhood;
@@ -183,7 +201,7 @@ function runCareJusticeDemand_(ctx) {
   var cycle = (S.absoluteCycle || S.cycleId || (ctx.config && ctx.config.cycleCount) || ctx.cycle);
   careJusticeLogUnknownHoods_(oariHoods, crime, cycle);
   var demand = {
-    cycle: cycle, methodVersion: 'demand-v1', basis: 'hood-table', hoods: {},
+    cycle: cycle, methodVersion: 'demand-v1', basis: 'hood-table', exposureDial: exposureDial, hoods: {},
     unallocated: { status: 'unavailable' },
     city: { charges: 0, judicialIntakes: 0, sick: 0, hospitalIntakes: 0,
       oariEligible: 0, oariDiversions: 0, oariHoods: [] }
@@ -272,6 +290,7 @@ function careJusticeOtherResident_(demand, trackedIntakesByHood) {
 
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
+    careJusticeResidentIndex_: careJusticeResidentIndex_,
     runCareJusticeDemand_: runCareJusticeDemand_,
     careJusticeOtherResident_: careJusticeOtherResident_,
     careJusticeOariHoods_: careJusticeOariHoods_

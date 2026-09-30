@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-09-29 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-09-30 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -766,12 +766,14 @@
 
 - **careJusticeLogUnknownHoods_(deployed, hoodSet, cycle)**
 
+- **careJusticeResidentIndex_(ctx)**
+
 - **careJusticeTrackedByHood_(ctx)**
 
 - **runCareJusticeDemand_(ctx)**
   Reads: S.absoluteCycle, S.careJusticeDemand, S.crimeMetrics, S.cycleId, S.neighborhoodDemographics, S.worldPopulation
   Writes: S.careJusticeDemand
-  Config: ctx.config.cycleCount
+  Config: ctx.config.careJusticeExposureDial, ctx.config.cycleCount
 
 - **careJusticeOtherResident_(demand, trackedIntakesByHood)**
 
@@ -785,6 +787,10 @@
 - **weightedPickChaos_(rng, items, weightFn)**
 
 - **pickEventCount_(rng)**
+
+- **chaosLoopScopes_(vehicle)**
+
+- **chaosLoopWeight_(vehicle)**
 
 - **pickVehicle_(rng, configs)**
 
@@ -834,9 +840,20 @@
 
 - **pickTargetByScope_(rng, ctx, scope, vehicle)**
 
-- **runChaosCarsEngine_(ctx)**
-  Reads: S.absoluteCycle, S.careJusticeDemand, S.chaosBusinessFold, S.chaosCarsEvents, S.contractSeeds, S.cycle, S.cycleId, S.hospitalEvents, S.judicialEvents, S.storySeeds, S.tier1ChaosEvents, S.weatherEvents
+- **runChaosEvent_(ctx, rng, cycle, vehicle, scope, target, friction, label)**
+  Reads: S.chaosCarsEvents, S.contractSeeds, S.hospitalEvents, S.judicialEvents, S.storySeeds, S.tier1ChaosEvents
   Writes: S.chaosCarsEvents, S.hospitalEvents, S.judicialEvents, S.tier1ChaosEvents
+
+- **chaosLog1p_(x)**
+
+- **chaosBinomial_(rng, n, p, vehicle, hood)**
+
+- **runChaosNamedPass_(ctx, rng, cycle, configs, friction)**
+  Reads: S.careJusticeDemand
+
+- **runChaosCarsEngine_(ctx)**
+  Reads: S.absoluteCycle, S.careJusticeDemand, S.chaosBusinessFold, S.chaosCarsEvents, S.cycle, S.cycleId, S.tier1ChaosEvents, S.weatherEvents
+  Writes: S.chaosCarsEvents, S.tier1ChaosEvents
   Config: ctx.config.cycleCount
   RNG: ctx.rng / safeRand_(ctx)
 
@@ -4270,4 +4287,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1508
+**Functions mapped:** 1515

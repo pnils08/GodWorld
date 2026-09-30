@@ -15,6 +15,7 @@ const cm = require('../utilities/citizenMemory.js');
 const comp = require('../utilities/compressLifeHistory.js');
 const dialMap = require('../utilities/citizenDialMap.js');
 const { makeDemandFixture_ } = require('./careJusticeService.test.js');
+global.careJusticeResidentIndex_ = require('../phase04-events/careJusticeService.js').careJusticeResidentIndex_;
 global.Logger = { log() {} };
 global.inWorldStamp_ = () => 'C100';
 ['deserialize_', 'serialize_', 'accrueChaos_', 'applyChaosReaction_', 'newCitizen_']
@@ -182,8 +183,8 @@ function runToClose(c, fromCycle, rngAt, prior, cap) {
 function judicialCtx(status, extraHeaders) {
   const headers = ['POPID', 'First', 'Last', 'Neighborhood', 'LifeHistory', 'DialState', 'LastUpdated', 'Status', 'StatusStartCycle', 'HealthCause'];
   const row = ['SYNTHETIC-JUDICIAL', 'Synthetic', 'Defendant', 'Fruitvale', '', '', '', status, '', ''];
-  return { summary: { cycleRef: 'C100', careJusticeDemand: makeDemandFixture_('Fruitvale') },
-    ledger: { headers: headers.concat(extraHeaders || []), rows: [row], dirty: false } };
+  const ledger = { headers: headers.concat(extraHeaders || []), rows: [row], dirty: false };
+  return { summary: { cycleRef: 'C100', careJusticeDemand: makeDemandFixture_('Fruitvale', ledger) }, ledger };
 }
 const jTarget = { rowIndex: 0, popId: 'SYNTHETIC-JUDICIAL', neighborhood: 'Fruitvale', tier: 4 };
 const copCar = { name: 'cop_car', displayName: 'Synthetic cop car' };
@@ -223,13 +224,21 @@ const arrested = { outcome: 'arrested', severity: 'high', lifeHistoryTag: 'Trans
   assert('14 unknown-age arrest writes its receipt', r && r.kind === 'intake');
 }
 
-// ── caller loop: 3 cop-car events on one citizen, fixed draws ───────────────
+// ── caller loop: cop car leaves the loop; its one named call arrests ─────────
 global.validateAllChaosConfigs_ = () => {};
-global.loadChaosCarsConfig_ = () => [{ ...copCar, episodic: false, baseFrequencyWeight: 1,
-  scopes: ['citizen'], textureOutcomes: [arrested], metricImpacts: [] }];
+global.loadChaosCarsConfig_ = () => [
+  { ...copCar, namedCallsField: 'charges', episodic: false, baseFrequencyWeight: 1,
+    scopes: ['citizen'], textureOutcomes: [arrested], metricImpacts: [] },
+  { name: 'synthetic_unmapped', displayName: 'Synthetic unmapped', episodic: false,
+    baseFrequencyWeight: 1, scopes: ['citizen'], textureOutcomes: [
+      { outcome: 'ticket', severity: 'low', lifeHistoryTag: 'Setback', weight: 1 }
+    ], metricImpacts: [] }
+];
 function fixedCopRun(failPayload, status) {
   const ctx = judicialCtx(status || 'Active');
   ctx.summary.cycleId = 100;
+  ctx.summary.careJusticeDemand.hoods.Fruitvale.charges = 1;
+  ctx.summary.careJusticeDemand.exposureDial = 1000;
   let draws = 0;
   ctx.rng = () => { draws++; return draws === 1 ? 0 : ((draws * 17) % 97) / 97; };
   const recorded = [];
@@ -246,16 +255,14 @@ function fixedCopRun(failPayload, status) {
 {
   const run = fixedCopRun(false);
   const ev = run.ctx.summary.judicialEvents || [];
-  assert('10 fixed seed: 3 events, 42 draws — same count as the ambulance run (T4-12)',
-    !run.error && run.recorded.length === 3 && run.draws === 42, run.error ? run.error.message : run.draws);
-  const first = 'patrol:' + run.recorded[0] + ':SYNTHETIC-JUDICIAL';
-  assert('11 three arrests of one citizen → one intake, two transitions on the first key',
-    ev.length === 3 && ev[0].kind === 'intake' && ev[0].sourceEventId === first &&
-    ev[1].kind === 'transition' && ev[1].sourceEventId === first &&
-    ev[1].reArrestEventId === 'patrol:' + run.recorded[1] + ':SYNTHETIC-JUDICIAL' &&
-    ev[2].kind === 'transition' && ev[2].reArrestEventId === 'patrol:' + run.recorded[2] + ':SYNTHETIC-JUDICIAL',
-    JSON.stringify(ev.map(e => [e.kind, e.sourceEventId, e.reArrestEventId])));
-  assert('11 every hit keeps its hook', run.ctx.summary.storyHooks.filter(k => k.hookType === 'CITIZEN_ARRESTED').length === 3);
+  assert('10 mapped citizen-only cop has loop weight zero; 3 loop + 1 pass rows',
+    eng.chaosLoopWeight_(global.loadChaosCarsConfig_()[0]) === 0 &&
+    !run.error && run.recorded.length === 4, run.error ? run.error.message : run.draws);
+  const first = 'patrol:' + run.recorded[3] + ':SYNTHETIC-JUDICIAL';
+  assert('11 pass arrest creates one intake on its source row',
+    ev.length === 1 && ev[0].kind === 'intake' && ev[0].sourceEventId === first,
+    JSON.stringify(ev.map(e => [e.kind, e.sourceEventId])));
+  assert('11 pass arrest keeps its hook', run.ctx.summary.storyHooks.filter(k => k.hookType === 'CITIZEN_ARRESTED').length === 1);
   assert('11 no hospital receipt from a cop car', !run.ctx.summary.hospitalEvents);
 
   // ── 8. every receipt and lifecycle event folds through the accounting ──
@@ -264,7 +271,7 @@ function fixedCopRun(failPayload, status) {
   let foldOk = true, folded;
   try { folded = acct.foldCareJusticeReceipts_(ev.concat(life.events), {}); } catch (e) { foldOk = false; }
   assert('8 receipts + lifecycle events fold with no throw; one intake counted',
-    foldOk && folded.receipts.filter(r => r.kind === 'intake').length === 1 && folded.transitions >= 2,
+    foldOk && folded.receipts.filter(r => r.kind === 'intake').length === 1 && folded.transitions >= 0,
     foldOk ? JSON.stringify(folded.receipts.map(r => r.kind)) : 'threw');
 }
 

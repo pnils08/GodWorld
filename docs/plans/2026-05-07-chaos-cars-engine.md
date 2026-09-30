@@ -41,7 +41,7 @@ pointers:
 4. **Universal constraint enforced:** zero death-class outcomes (`death`, `died`, `fatal`, `kill`, `killed`) across 5+ live cycles. Validator throws if any vehicle config contains a forbidden outcome string.
 5. **Tier-1 cascade test:** synthetic Tier-1 hit (forced via dry-run script) produces all four cascade outputs: (a) `world_summary_c{XX}.md` carries scandal/event entry, (b) all voice agents' `pending_decisions.md` auto-populated next cycle with chaos-event reaction prompt, (c) new `Storyline_Tracker` row created with arc state, (d) routing plan Engine A `consequenceFloor: true` set on the auto-generated seed.
 6. **Asymmetric decay observable:** positive metric swings (ice cream → Sentiment UP) revert toward baseline within 1–2 cycles; negative swings (garbage → Sentiment DOWN, fire → Annual_Revenue DOWN) persist 3–5+ cycles. **[S265: measurable only after T1.5 clobber fix; neighborhood decays in the writer fold, business in applyChaosDecay — see §S265.]** Measurement script T6.2 confirms.
-7. Frequency stays within 3–15 bound across 5 dry-run cycles. No cycle produces 0 events; no cycle exceeds 15.
+7. The non-episodic loop stays within 3–15 attempts across 5 dry-run cycles and never draws zero attempts; demand-named citizen hits occur outside that loop and may bring the `Chaos_Cars` row count above 15 (engine.254 Task 7b).
 
 ---
 

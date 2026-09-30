@@ -16,6 +16,7 @@ global.chaosOutcomePool_ = cfg.chaosOutcomePool_;
 global.admitJudicialReceipt_ = require('../phase05-citizens/judicialLifecycle.js').admitJudicialReceipt_;
 global.CHAOS_SHIP_PORT_SECTORS = cfg.CHAOS_SHIP_PORT_SECTORS;
 global.chaosDecayResidualOneCycle_ = decay.chaosDecayResidualOneCycle_;
+global.careJusticeResidentIndex_ = require('./careJusticeService.js').careJusticeResidentIndex_;
 
 // PropertiesService stub (in-memory key/value) for the neighborhood residual store.
 let _props = {};
@@ -60,11 +61,11 @@ function rngFrom(seed) {
 }
 
 function makeCtx(seed) {
-  const headers = ['POPID', 'First', 'Last', 'Tier', 'Neighborhood', 'LifeHistory', 'LastUpdated'];
+  const headers = ['POPID', 'First', 'Last', 'Tier', 'Neighborhood', 'LifeHistory', 'LastUpdated', 'Status'];
   const rows = [];
   for (let i = 1; i <= 40; i++) {
     rows.push(['POP-' + String(i).padStart(5, '0'), 'First' + i, 'Last' + i,
-      (i === 1 ? 1 : (i % 4) + 1), 'Fruitvale', '', '']);
+      (i === 1 ? 1 : (i % 4) + 1), 'Fruitvale', '', '', 'active']);
   }
   const bizData = [
     ['BIZ_ID', 'Name', 'Sector', 'Neighborhood', 'Employee_Count', ' Avg_Salary ', ' Annual_Revenue ', 'Growth_Rate', 'Key_Personnel'],
@@ -80,7 +81,7 @@ function makeCtx(seed) {
     rng: rngFrom(seed),
     cycle: 99,
     now: new Date(0),
-    summary: { careJusticeDemand: makeDemandFixture_('Fruitvale') },
+    summary: { careJusticeDemand: makeDemandFixture_('Fruitvale', { headers, rows }) },
     ledger: { headers, rows, dirty: false },
     ss: { getSheetByName: (n) => ({ getDataRange: () => ({ getValues: () => (n === 'Business_Ledger' ? bizData : nbData) }) }) }
   };
@@ -289,6 +290,237 @@ console.log('\nTest 7: neighborhood residual persistence (resolveChaosNeighborho
   assert('C: fresh adds on decayed prior → -0.12', Math.abs(c.Fruitvale.Sentiment + 0.12) < 1e-9, `got ${c.Fruitvale.Sentiment}`);
   assert('C: CrimeIndex keeps decaying (no fresh)', c.Fruitvale.CrimeIndex < 0 && c.Fruitvale.CrimeIndex > -0.032);
   assert('C: multi-column held across cycles (B6 fix)', 'Sentiment' in c.Fruitvale && 'CrimeIndex' in c.Fruitvale);
+}
+
+// ── Task 7b: demand-named cop contacts ───────────────────────────────────────
+console.log('\nTask 7b: named calls and loop reweight');
+{
+  const car = cfg.loadChaosCarsConfig_().find(v => v.name === 'cop_car');
+  const ambulance = cfg.loadChaosCarsConfig_().find(v => v.name === 'ambulance');
+  const oari = cfg.loadChaosCarsConfig_().find(v => v.name === 'oari_van');
+  function passCtx(seed) {
+    const c = makeCtx(seed);
+    c.summary.chaosCarsEvents = [];
+    c.summary.tier1ChaosEvents = [];
+    return c;
+  }
+  function throwsNaming(fn, part) {
+    try { fn(); } catch (e) { return e.message.includes(part); }
+    return false;
+  }
+  assert('7b only cop car is mapped; its loop weight is 0.6 and citizen scope is removed',
+    car.namedCallsField === 'charges' && !ambulance.namedCallsField && !oari.namedCallsField &&
+    Math.abs(eng.chaosLoopWeight_(car) - 0.6) < 1e-12 &&
+    JSON.stringify(eng.chaosLoopScopes_(car)) === JSON.stringify(['neighborhood']) &&
+    eng.chaosLoopScopes_(ambulance).includes('citizen'));
+  let copCitizenLoop = 0, otherDemandCitizenLoop = 0;
+  for (let seed = 1; seed <= 100; seed++) {
+    reset();
+    const c = makeCtx(seed);
+    c.summary.careJusticeDemand.exposureDial = 0;
+    eng.runChaosCarsEngine_(c);
+    copCitizenLoop += chaosRows.filter(r => r.vehicleType === 'cop_car' && r.targetScope === 'citizen').length;
+    otherDemandCitizenLoop += chaosRows.filter(r =>
+      (r.vehicleType === 'ambulance' || r.vehicleType === 'oari_van') && r.targetScope === 'citizen').length;
+  }
+  assert('7b mapped cop never uses citizen loop; ambulance and OARI still do',
+    copCitizenLoop === 0 && otherDemandCitizenLoop > 0,
+    JSON.stringify({ copCitizenLoop, otherDemandCitizenLoop }));
+
+  // 5,000 independent seeded pass runs; contacts are tested separately from outcomes.
+  let contacts = 0, arrests = 0, receipts = 0;
+  const trials = 5000;
+  const expected = 8 * 40 / 1000;
+  for (let seed = 1; seed <= trials; seed++) {
+    reset();
+    const c = passCtx(seed);
+    eng.runChaosNamedPass_(c, c.rng, 100, [car], []);
+    contacts += c.summary.chaosCarsEvents.length;
+    arrests += c.summary.chaosCarsEvents.filter(e => e.diceOutcome === 'arrested').length;
+    receipts += (c.summary.judicialEvents || []).filter(e => e.kind === 'intake').length;
+  }
+  const se = Math.sqrt(expected * (1 - 40 / 1000) / trials);
+  assert('7b 5,000 seeded passes: mean contacts within 3 standard errors of independent expectation',
+    Math.abs(contacts / trials - expected) <= 3 * se,
+    JSON.stringify({ contacts, arrests, receipts, expected, se }));
+  assert('7b arrest outcomes and judicial intakes counted separately from contacts',
+    contacts > arrests && arrests >= receipts,
+    JSON.stringify({ contacts, arrests, receipts }));
+
+  reset();
+  const zero = passCtx(4);
+  zero.summary.careJusticeDemand.hoods.Fruitvale.charges = 0;
+  zero.summary.careJusticeDemand.hoods.Temescal.charges = 80;
+  let draws = 0;
+  zero.rng = () => { draws++; return 0; };
+  const passLogs = [];
+  global.Logger = { log: line => passLogs.push(line) };
+  eng.runChaosNamedPass_(zero, zero.rng, 100, [car], []);
+  assert('7b zero tracked share names nobody; one hood draw each and log remains',
+    zero.summary.chaosCarsEvents.length === 0 && draws === Object.keys(zero.summary.careJusticeDemand.hoods).length &&
+    passLogs.length === 1 && passLogs[0].includes('named=0'));
+  const dialZero = passCtx(4);
+  dialZero.summary.careJusticeDemand.exposureDial = 0;
+  draws = 0;
+  dialZero.rng = () => { draws++; return 0; };
+  eng.runChaosNamedPass_(dialZero, dialZero.rng, 100, [car], []);
+  assert('7b dial zero still draws once per hood and names zero',
+    draws === Object.keys(dialZero.summary.careJusticeDemand.hoods).length &&
+    dialZero.summary.chaosCarsEvents.length === 0 && passLogs.length === 2);
+
+  const tooHigh = passCtx(2);
+  tooHigh.summary.careJusticeDemand.exposureDial = 26;
+  assert('7b p above one throws naming hood',
+    throwsNaming(() => eng.runChaosNamedPass_(tooHigh, tooHigh.rng, 100, [car], []), 'Fruitvale'));
+  for (const bad of [undefined, -1, 1.5, Infinity]) {
+    const c = passCtx(2); c.summary.careJusticeDemand.hoods.Fruitvale.charges = bad;
+    assert('7b invalid charges names vehicle, hood and field: ' + String(bad),
+      throwsNaming(() => eng.runChaosNamedPass_(c, c.rng, 100, [car], []), 'cop_car Fruitvale charges'));
+  }
+  const pOne = passCtx(2);
+  pOne.summary.careJusticeDemand.exposureDial = 25;
+  pOne.summary.careJusticeDemand.hoods.Fruitvale.charges = 1;
+  const arrestOnly = { ...car, textureOutcomes: [car.textureOutcomes.find(o => o.outcome === 'arrested')] };
+  reset();
+  eng.runChaosNamedPass_(pOne, pOne.rng, 100, [arrestOnly], []);
+  const row = pOne.summary.chaosCarsEvents[0];
+  assert('7b pass hit lives in charged hood and keeps source row, hook and judicial receipt',
+    row && row.targetScope === 'citizen' && row.vehicleType === 'cop_car' &&
+    pOne.ledger.rows.some(r => r[0] === row.targetId && r[4] === 'Fruitvale') &&
+    pOne.summary.storyHooks.some(h => h.hookType === 'CITIZEN_ARRESTED') &&
+    pOne.summary.judicialEvents[0].sourceEventId === 'patrol:' + row.eventId + ':' + row.targetId);
+  const hospitalized = passCtx(2);
+  hospitalized.summary.careJusticeDemand.exposureDial = 25;
+  hospitalized.summary.careJusticeDemand.hoods.Fruitvale.charges = 1;
+  hospitalized.ledger.rows.forEach(r => { r[7] = 'hospitalized'; });
+  eng.runChaosNamedPass_(hospitalized, hospitalized.rng, 100, [arrestOnly], []);
+  assert('7b hospitalized fixture has a contact and arrest outcome but no judicial intake',
+    hospitalized.summary.chaosCarsEvents.length === 1 &&
+    hospitalized.summary.chaosCarsEvents[0].diceOutcome === 'arrested' &&
+    !(hospitalized.summary.judicialEvents || []).length);
+  const oldLifeState = global.deriveLifeState_;
+  global.simYearOf_ = () => 2090;
+  global.deriveLifeState_ = () => ({ isMinor: true, age: 15, working: '' });
+  const minors = passCtx(2);
+  minors.summary.careJusticeDemand.exposureDial = 25;
+  minors.summary.careJusticeDemand.hoods.Fruitvale.charges = 1;
+  eng.runChaosNamedPass_(minors, minors.rng, 100, [car], []);
+  assert('7b minor-heavy fixture has one named draw and no arrest',
+    !(minors.summary.judicialEvents || []).length &&
+    minors.summary.chaosCarsEvents.every(e => e.diceOutcome !== 'arrested'));
+  if (oldLifeState === undefined) delete global.deriveLifeState_;
+  else global.deriveLifeState_ = oldLifeState;
+
+  function exactBinomial(n, p, u) {
+    let mass = Math.pow(1 - p, n), cdf = 0;
+    for (let k = 0; k <= n; k++) {
+      cdf += mass;
+      if (u < cdf) return k;
+      mass *= (n - k) / (k + 1) * p / (1 - p);
+    }
+    return n;
+  }
+  assert('7b inverse CDF matches exact small-n pmf',
+    [0.01, 0.2, 0.5, 0.8, 0.99].every(u =>
+      eng.chaosBinomial_(() => u, 5, 0.35, 'cop_car', 'Fruitvale') === exactBinomial(5, 0.35, u)));
+  assert('7b p one yields all calls; n350 p0.9 lands near its mean',
+    eng.chaosBinomial_(() => 0.3, 7, 1, 'cop_car', 'Fruitvale') === 7 &&
+    Math.abs(eng.chaosBinomial_(() => 0.5, 350, 0.9, 'cop_car', 'Fruitvale') - 315) < 5);
+  const twice = passCtx(3);
+  twice.summary.careJusticeDemand.hoods.Fruitvale.charges = 0;
+  draws = 0;
+  twice.rng = () => { draws++; return 0.5; };
+  eng.runChaosNamedPass_(twice, twice.rng, 100, [car, { ...car, name: 'synthetic_mapped' }], []);
+  assert('7b draw count is hoods times mapped vehicles when calls are zero',
+    draws === 2 * Object.keys(twice.summary.careJusticeDemand.hoods).length);
+
+  const oldConfigLoader = global.loadChaosCarsConfig_;
+  const unmapped = { name: 'synthetic_unmapped', displayName: 'Synthetic unmapped',
+    scopes: ['citizen'], baseFrequencyWeight: 1, episodic: false,
+    textureOutcomes: [{ outcome: 'ticket', weight: 1, severity: 'low', lifeHistoryTag: 'Setback' }],
+    metricImpacts: [] };
+  global.loadChaosCarsConfig_ = () => [unmapped];
+  function forcedLoop(first) {
+    reset();
+    const c = makeCtx(1);
+    let count = 0;
+    c.rng = () => { count++; return count === 1 ? first : 0.5; };
+    eng.runChaosCarsEngine_(c);
+    return { c, count, rows: chaosRows.slice(), intents: appendIntents.slice() };
+  }
+  const low = forcedLoop(0);
+  const high = forcedLoop(0.999999);
+  global.loadChaosCarsConfig_ = oldConfigLoader;
+  const validator = require('../scripts/chaosCarsFrequencyCheck.js');
+  const capRows = high.rows.map(r => ({ CycleId: r.cycleId, VehicleType: r.vehicleType,
+    TargetScope: r.targetScope }));
+  capRows.push({ CycleId: 99, VehicleType: 'cop_car', TargetScope: 'citizen' });
+  capRows.push({ CycleId: 99, VehicleType: 'container_ship', TargetScope: 'port' });
+  capRows.push({ CycleId: 100, VehicleType: 'cop_car', TargetScope: 'citizen' });
+  const counted = validator.loopCounts(capRows, cfg.loadChaosCarsConfig_());
+  assert('7b forced 3 and 15 attempts produce 3 and 15 non-port loop rows',
+    low.rows.length === 3 && high.rows.length === 15);
+  assert('7b validator excludes mapped citizen and port rows from 15-attempt Cycle',
+    counted[99] === 15 && counted[100] === 0 &&
+    validator.MIN_EVENTS === 3 && validator.MAX_EVENTS === 15);
+  assert('7b pass and loop payload shapes match; fixture tracked counts match ledger',
+    JSON.stringify(Object.keys(row).sort()) === JSON.stringify(Object.keys(low.rows[0]).sort()) &&
+    Object.keys(pOne.summary.careJusticeDemand.hoods).every(hood =>
+      pOne.summary.careJusticeDemand.hoods[hood].trackedResidents ===
+      (global.careJusticeResidentIndex_(pOne)[hood] || []).length));
+  assert('7b unmapped loop preserves one scope draw per attempt',
+    low.count > 3 && high.count > low.count);
+
+  // Call the extracted body with the same selected target and RNG stream as a
+  // forced unmapped loop. Capture payloads, intents, friction and draw count.
+  reset();
+  const direct = makeCtx(1);
+  direct.summary.chaosCarsEvents = [];
+  direct.summary.tier1ChaosEvents = [];
+  let directCount = 0;
+  direct.rng = () => { directCount++; return directCount === 1 ? 0 : 0.5; };
+  const attempts = eng.pickEventCount_(direct.rng);
+  const directFriction = [];
+  const priorRipple = global.recordRipple_;
+  let ripples = [];
+  global.recordRipple_ = (_ctx, ripple) => ripples.push(ripple);
+  for (let i = 0; i < attempts; i++) {
+    const vehicle = eng.pickVehicle_(direct.rng, [unmapped]);
+    const scope = eng.pickFromArrayChaos_(direct.rng, vehicle.scopes);
+    const target = eng.pickTargetByScope_(direct.rng, direct, scope, vehicle);
+    eng.runChaosEvent_(direct, direct.rng, 99, vehicle, scope, target, directFriction, i);
+  }
+  const directRows = JSON.stringify(chaosRows);
+  const directIntents = JSON.stringify(appendIntents);
+  const directHooks = JSON.stringify(direct.summary.storyHooks || []);
+  const directRipples = JSON.stringify(ripples);
+  direct.rng(); direct.rng(); // ship slot consumes two draws even without a port vehicle
+  reset();
+  ripples = [];
+  global.loadChaosCarsConfig_ = () => [unmapped];
+  const loop = makeCtx(1);
+  let loopCount = 0;
+  loop.rng = () => { loopCount++; return loopCount === 1 ? 0 : 0.5; };
+  eng.runChaosCarsEngine_(loop);
+  global.loadChaosCarsConfig_ = oldConfigLoader;
+  if (priorRipple === undefined) delete global.recordRipple_;
+  else global.recordRipple_ = priorRipple;
+  assert('7b extracted event body matches unmapped loop payloads, intents, hooks, ripples and draw count',
+    JSON.stringify(chaosRows) === directRows && JSON.stringify(appendIntents) === directIntents &&
+    JSON.stringify(loop.summary.storyHooks || []) === directHooks &&
+    JSON.stringify(ripples) === directRipples && loopCount === directCount &&
+    directFriction.length === loop.summary.chaosFriction.entries.length);
+
+  reset();
+  const fail = passCtx(2);
+  fail.summary.careJusticeDemand.exposureDial = 25;
+  fail.summary.careJusticeDemand.hoods.Fruitvale.charges = 1;
+  const writer = global.writeChaosCarsRow_;
+  global.writeChaosCarsRow_ = () => { throw new Error('synthetic source row failure'); };
+  assert('7b source-row failure propagates before judicial receipt',
+    throwsNaming(() => eng.runChaosNamedPass_(fail, fail.rng, 100, [arrestOnly], []),
+      'synthetic source row failure') && !(fail.summary.judicialEvents || []).length);
+  global.writeChaosCarsRow_ = writer;
 }
 
 console.log('\n' + '─'.repeat(60));

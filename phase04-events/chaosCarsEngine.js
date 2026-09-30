@@ -88,10 +88,27 @@ function pickEventCount_(rng) {
   return CHAOS_MIN_EVENTS + Math.floor(rng() * (CHAOS_MAX_EVENTS - CHAOS_MIN_EVENTS + 1));
 }
 
+function chaosLoopScopes_(vehicle) {
+  if (!vehicle.namedCallsField) return vehicle.scopes;
+  var scopes = [];
+  for (var i = 0; i < vehicle.scopes.length; i++) {
+    if (vehicle.scopes[i] !== 'citizen') scopes.push(vehicle.scopes[i]);
+  }
+  return scopes;
+}
+
+function chaosLoopWeight_(vehicle) {
+  return vehicle.episodic ? 0 : vehicle.baseFrequencyWeight *
+    chaosLoopScopes_(vehicle).length / vehicle.scopes.length;
+}
+
 // T3.2 — vehicle weighted by baseFrequencyWeight. Episodic vehicles (the ship) are never
 // drawn here — runChaosShip_ rolls them once a Cycle.
 function pickVehicle_(rng, configs) {
-  return weightedPickChaos_(rng, configs, function (v) { return v.episodic ? 0 : v.baseFrequencyWeight; });
+  var total = 0;
+  for (var i = 0; i < configs.length; i++) total += chaosLoopWeight_(configs[i]);
+  if (!(total > 0)) throw new Error('chaos_cars: loop vehicle weight must be > 0');
+  return weightedPickChaos_(rng, configs, chaosLoopWeight_);
 }
 
 // T3.6 — outcome weighted by outcome.weight; re-validate no-death at roll time.
@@ -308,24 +325,7 @@ function pickCareJusticeTarget_(rng, ctx, scope, vehicle) {
   var demand = ctx.summary && ctx.summary.careJusticeDemand;
   if (!demand || !demand.hoods) throw new Error('chaos_cars: S.careJusticeDemand missing');
   var hoods = Object.keys(demand.hoods);
-  var indicesByHood = {};
-  if (scope === 'citizen') {
-    var ledger = ctx.ledger;
-    if (!ledger || !ledger.headers || !ledger.rows) throw new Error('chaos_cars: ctx.ledger missing');
-    var iHood = ledger.headers.indexOf('Neighborhood');
-    var iStatus = ledger.headers.indexOf('Status');
-    if (iHood < 0) throw new Error('chaos_cars: Simulation_Ledger.Neighborhood missing');
-    for (var i = 0; i < ledger.rows.length; i++) {
-      var row = ledger.rows[i];
-      if (iStatus >= 0) {
-        var status = String(row[iStatus] || '').trim().toLowerCase();
-        if (status === 'deceased' || status === 'inactive' || status === 'traded' || status === 'pending') continue;
-      }
-      var rowHood = String(row[iHood] || '').trim();
-      if (!indicesByHood[rowHood]) indicesByHood[rowHood] = [];
-      indicesByHood[rowHood].push(i);
-    }
-  }
+  var indicesByHood = scope === 'citizen' ? careJusticeResidentIndex_(ctx) : {};
   var weightByHood = {};
   var total = 0;
   for (var h = 0; h < hoods.length; h++) {
@@ -616,6 +616,199 @@ function pickTargetByScope_(rng, ctx, scope, vehicle) {
   return null;
 }
 
+function runChaosEvent_(ctx, rng, cycle, vehicle, scope, target, friction, label) {
+  var outcome = rollOutcome_(rng, vehicle, scope, target); // engine.67 step 8: target-aware
+  if (!outcome) { friction.push('event ' + label + ': ' + vehicle.name + ' has no citizen-taggable outcome for scope ' + scope); return; }
+  var impacts = impactsForScope_(vehicle, scope, outcome.outcome);
+
+  // Sample one magnitude per impacted column (a vehicle may move >1 column for a scope).
+  var magnitudesByColumn = {};
+  var primaryMetric = '';
+  var primaryMagnitude = 0;
+  for (var k = 0; k < impacts.length; k++) {
+    var mag = sampleMagnitude_(rng, impacts[k]);
+    magnitudesByColumn[impacts[k].column] = mag;
+    if (k === 0) { primaryMetric = impacts[k].column; primaryMagnitude = mag; }
+  }
+  if (scope === 'business') { primaryMetric = 'Growth_Rate'; primaryMagnitude = Number(outcome.bizEvent) || 0; }
+
+  var text = chaosEventText_(vehicle, outcome, target, scope);
+
+  // Tier-1 cascade flag (T5.1): citizen-scope + Tier-1 + high-severity outcome.
+  var consequenceFloorFired = false;
+  if (scope === 'citizen' && target.tier === 1 && outcome.severity === 'high') {
+    consequenceFloorFired = true;
+  }
+
+  // Writeback by scope.
+  var receipt = null; // hospital (ambulance) or judicial (cop_car) — one hit is never both
+  if (scope === 'citizen') {
+    receipt = writeCitizenEvent_(ctx, target, vehicle, outcome, cycle, text);
+    primaryMetric = outcome.lifeHistoryTag; // citizen "metric" = the dial tag (provenance)
+    primaryMagnitude = 0;
+  } else if (scope === 'business') {
+    accumulateBusinessEvent_(ctx, target.bizId, outcome.bizEvent);
+  } else if (scope === 'neighborhood') {
+    accumulateNeighborhoodFold_(ctx, target.neighborhood, impacts, magnitudesByColumn);
+  }
+
+  // chaos_cars source row FIRST (§Hard Constraints — canonical, scope writeback derived).
+  var payload = {
+    cycleId: cycle,
+    eventId: chaosEventId_(rng),
+    vehicleType: vehicle.name,
+    targetScope: scope,
+    targetId: (scope === 'citizen') ? target.popId : (scope === 'business') ? target.bizId : target.neighborhood,
+    targetTier: (scope === 'citizen') ? target.tier : null,
+    diceOutcome: outcome.outcome,
+    primaryMetric: primaryMetric,
+    metricMagnitude: primaryMagnitude,
+    consequenceFloorFired: consequenceFloorFired,
+    narrativeSeed: outcome.narrativeSeed || '',
+    coverageContribution: outcome.coverageContribution === true
+  };
+  if (typeof writeChaosCarsRow_ === 'function') writeChaosCarsRow_(ctx, payload);
+  ctx.summary.chaosCarsEvents.push(payload);
+  if (consequenceFloorFired) ctx.summary.tier1ChaosEvents.push(payload);
+  if (receipt && receipt.system === 'judicial') {
+    // engine.254 Task 5: no reader until Task 8 persists cases — pushed and dropped each Cycle.
+    receipt.sourceEventId = 'patrol:' + payload.eventId + ':' + receipt.popId;
+    ctx.summary.judicialEvents = ctx.summary.judicialEvents || [];
+    admitJudicialReceipt_(ctx.summary.judicialEvents, receipt); // one open case per POPID (F1)
+  } else if (receipt) {
+    if (receipt.kind === 'intake') {
+      receipt.sourceEventId = 'ambulance:' + payload.eventId + ':' + receipt.popId;
+    }
+    ctx.summary.hospitalEvents = ctx.summary.hospitalEvents || [];
+    ctx.summary.hospitalEvents.push(receipt);
+  }
+
+  // V2-5 (S326): consequence-class chaos hit → story surface. Solo-major
+  // magnitude (0.05) — a hospitalization or arrest IS a story. Event-level,
+  // not conditional on the status flip (a retiree's medical emergency is
+  // still the neighborhood's news even though their Status stays 'retired').
+  // engine.41 Wire 1 (S499): the story line is the outcome's authored narrativeSeed
+  // when it has one ("Lights and sirens at the curb — a medical emergency…"), the
+  // mechanical event text only when it doesn't.
+  if (scope === 'citizen' && CHAOS_RIPPLE_OUTCOMES[outcome.outcome] &&
+      typeof recordRipple_ === 'function') {
+    recordRipple_(ctx, {
+      causeType: 'chaos-event',
+      causeId: payload.eventId,
+      causeDetail: payload.narrativeSeed || text,
+      effectType: outcome.outcome,
+      targetScope: 'citizen',
+      targetIds: [target.popId],
+      neighborhood: target.neighborhood || '',
+      magnitude: 0.05,
+      duration: 1,
+      sourceEngine: 'chaosCarsEngine'
+    });
+  }
+
+  // engine.41 Wire 1 (S499): a high-severity hit on a business or a neighborhood
+  // is a public event — its own story seed (builder S275). Wire 1 seeded these
+  // through applyStorySeeds' S.storySeeds, which Phase 10 no longer persists
+  // (saveV3Seeds writes S.contractSeeds, built from ripples), so none of the 22
+  // narrative-seeded hits C101–C108 ever reached Story_Seed_Deck. The authored
+  // narrativeSeed is the gate, as Wire 1 specified: low-severity blips stay silent.
+  if ((scope === 'business' || scope === 'neighborhood') && payload.narrativeSeed &&
+      typeof recordRipple_ === 'function') {
+    recordRipple_(ctx, {
+      causeType: 'chaos-event',
+      causeId: payload.eventId,
+      causeDetail: payload.narrativeSeed,
+      effectType: outcome.outcome,
+      targetScope: scope,
+      targetIds: scope === 'business' ? [target.bizId] : [],
+      neighborhood: target.neighborhood || '',
+      magnitude: 0.05,
+      duration: 1,
+      sourceEngine: 'chaosCarsEngine'
+    });
+  }
+}
+
+function chaosLog1p_(x) {
+  if (Math.abs(x) >= 0.0001) return Math.log(1 + x);
+  var sum = 0;
+  var term = x;
+  for (var i = 1; i <= 8; i++) {
+    sum += (i % 2 ? 1 : -1) * term / i;
+    term *= x;
+  }
+  return sum;
+}
+
+function chaosBinomial_(rng, n, p, vehicle, hood) {
+  var draw = rng(); // exactly one draw, including n=0 and p=0/1
+  if (!n || p === 0) return 0;
+  if (p === 1) return n;
+  var logP = Math.log(p);
+  var logQ = chaosLog1p_(-p);
+  var logMass = n * logQ;
+  var cumulative = 0;
+  for (var k = 0; k <= n; k++) {
+    cumulative += Math.exp(logMass);
+    if (draw < cumulative) return k;
+    if (k < n) logMass += Math.log(n - k) - Math.log(k + 1) + logP - logQ;
+  }
+  if (cumulative < 1 - 1e-9) {
+    throw new Error('chaos_cars: binomial cumulative incomplete for ' + vehicle + ' ' + hood);
+  }
+  return n;
+}
+
+function runChaosNamedPass_(ctx, rng, cycle, configs, friction) {
+  var demand = ctx.summary.careJusticeDemand;
+  if (!demand || !demand.hoods) throw new Error('chaos_cars: S.careJusticeDemand.hoods missing');
+  var hoods = Object.keys(demand.hoods).sort();
+  var residents = null;
+  for (var v = 0; v < configs.length; v++) {
+    var vehicle = configs[v];
+    if (!vehicle.namedCallsField) continue;
+    if (!residents) residents = careJusticeResidentIndex_(ctx);
+    var calls = 0, expected = 0, named = 0, names = [];
+    for (var h = 0; h < hoods.length; h++) {
+      var hood = hoods[h];
+      var record = demand.hoods[hood];
+      var field = vehicle.namedCallsField;
+      var n = record && record[field];
+      if (typeof n !== 'number' || !isFinite(n) || n < 0 ||
+          n !== Math.floor(n) || n > 9007199254740991) {
+        throw new Error('chaos_cars: ' + vehicle.name + ' ' + hood + ' ' + field +
+          ' must be a non-negative safe integer');
+      }
+      var share = record.trackedShare;
+      if (typeof share !== 'number' || !isFinite(share) || share < 0) {
+        throw new Error('chaos_cars: ' + hood + ' trackedShare must be finite and >= 0');
+      }
+      var dial = demand.exposureDial;
+      if (typeof dial !== 'number' || !isFinite(dial) || dial < 0) {
+        throw new Error('chaos_cars: careJusticeExposureDial must be finite and >= 0');
+      }
+      var p = share * dial;
+      if (!isFinite(p) || p > 1) throw new Error('chaos_cars: ' + hood + ' named probability > 1');
+      calls += n;
+      expected += n * p;
+      var k = chaosBinomial_(rng, n, p, vehicle.name, hood);
+      named += k;
+      var candidates = residents[hood] || [];
+      if (k && !candidates.length) {
+        throw new Error('chaos_cars: ' + vehicle.name + ' ' + hood + ' trackedShare resident mismatch');
+      }
+      for (var hit = 0; hit < k; hit++) {
+        var target = chaosCitizenTargetAt_(ctx, pickFromArrayChaos_(rng, candidates));
+        names.push(hood + ':' + target.popId);
+        runChaosEvent_(ctx, rng, cycle, vehicle, 'citizen', target, friction, 'named ' + vehicle.name + ' ' + hood);
+      }
+    }
+    Logger.log('careJusticeNamed C' + cycle + ' ' + vehicle.name + ' dial=' +
+      demand.exposureDial + ' calls=' + calls + ' expected=' + expected +
+      ' named=' + named + ' [' + names.join(' ') + ']');
+  }
+}
+
 function runChaosCarsEngine_(ctx) {
   if (typeof ctx.rng !== 'function') {
     throw new Error('chaos_cars: ctx.rng required (deterministic runs — engine.md, no Math.random).');
@@ -637,121 +830,14 @@ function runChaosCarsEngine_(ctx) {
   var n = pickEventCount_(rng);
   for (var i = 0; i < n; i++) {
     var vehicle = pickVehicle_(rng, configs);
-    var scope = pickFromArrayChaos_(rng, vehicle.scopes);
+    var scope = pickFromArrayChaos_(rng, chaosLoopScopes_(vehicle));
     var target = pickTargetByScope_(rng, ctx, scope, vehicle);
     if (!target) { friction.push('event ' + i + ': empty target pool for scope ' + scope + ' (vehicle ' + vehicle.name + ')'); continue; }
 
-    var outcome = rollOutcome_(rng, vehicle, scope, target); // engine.67 step 8: target-aware
-    if (!outcome) { friction.push('event ' + i + ': ' + vehicle.name + ' has no citizen-taggable outcome for scope ' + scope); continue; }
-    var impacts = impactsForScope_(vehicle, scope, outcome.outcome);
-
-    // Sample one magnitude per impacted column (a vehicle may move >1 column for a scope).
-    var magnitudesByColumn = {};
-    var primaryMetric = '';
-    var primaryMagnitude = 0;
-    for (var k = 0; k < impacts.length; k++) {
-      var mag = sampleMagnitude_(rng, impacts[k]);
-      magnitudesByColumn[impacts[k].column] = mag;
-      if (k === 0) { primaryMetric = impacts[k].column; primaryMagnitude = mag; }
-    }
-    if (scope === 'business') { primaryMetric = 'Growth_Rate'; primaryMagnitude = Number(outcome.bizEvent) || 0; }
-
-    var text = chaosEventText_(vehicle, outcome, target, scope);
-
-    // Tier-1 cascade flag (T5.1): citizen-scope + Tier-1 + high-severity outcome.
-    var consequenceFloorFired = false;
-    if (scope === 'citizen' && target.tier === 1 && outcome.severity === 'high') {
-      consequenceFloorFired = true;
-    }
-
-    // Writeback by scope.
-    var receipt = null; // hospital (ambulance) or judicial (cop_car) — one hit is never both
-    if (scope === 'citizen') {
-      receipt = writeCitizenEvent_(ctx, target, vehicle, outcome, cycle, text);
-      primaryMetric = outcome.lifeHistoryTag; // citizen "metric" = the dial tag (provenance)
-      primaryMagnitude = 0;
-    } else if (scope === 'business') {
-      accumulateBusinessEvent_(ctx, target.bizId, outcome.bizEvent);
-    } else if (scope === 'neighborhood') {
-      accumulateNeighborhoodFold_(ctx, target.neighborhood, impacts, magnitudesByColumn);
-    }
-
-    // chaos_cars source row FIRST (§Hard Constraints — canonical, scope writeback derived).
-    var payload = {
-      cycleId: cycle,
-      eventId: chaosEventId_(rng),
-      vehicleType: vehicle.name,
-      targetScope: scope,
-      targetId: (scope === 'citizen') ? target.popId : (scope === 'business') ? target.bizId : target.neighborhood,
-      targetTier: (scope === 'citizen') ? target.tier : null,
-      diceOutcome: outcome.outcome,
-      primaryMetric: primaryMetric,
-      metricMagnitude: primaryMagnitude,
-      consequenceFloorFired: consequenceFloorFired,
-      narrativeSeed: outcome.narrativeSeed || '',
-      coverageContribution: outcome.coverageContribution === true
-    };
-    if (typeof writeChaosCarsRow_ === 'function') writeChaosCarsRow_(ctx, payload);
-    ctx.summary.chaosCarsEvents.push(payload);
-    if (consequenceFloorFired) ctx.summary.tier1ChaosEvents.push(payload);
-    if (receipt && receipt.system === 'judicial') {
-      // engine.254 Task 5: no reader until Task 8 persists cases — pushed and dropped each Cycle.
-      receipt.sourceEventId = 'patrol:' + payload.eventId + ':' + receipt.popId;
-      ctx.summary.judicialEvents = ctx.summary.judicialEvents || [];
-      admitJudicialReceipt_(ctx.summary.judicialEvents, receipt); // one open case per POPID (F1)
-    } else if (receipt) {
-      if (receipt.kind === 'intake') {
-        receipt.sourceEventId = 'ambulance:' + payload.eventId + ':' + receipt.popId;
-      }
-      ctx.summary.hospitalEvents = ctx.summary.hospitalEvents || [];
-      ctx.summary.hospitalEvents.push(receipt);
-    }
-
-    // V2-5 (S326): consequence-class chaos hit → story surface. Solo-major
-    // magnitude (0.05) — a hospitalization or arrest IS a story. Event-level,
-    // not conditional on the status flip (a retiree's medical emergency is
-    // still the neighborhood's news even though their Status stays 'retired').
-    // engine.41 Wire 1 (S499): the story line is the outcome's authored narrativeSeed
-    // when it has one ("Lights and sirens at the curb — a medical emergency…"), the
-    // mechanical event text only when it doesn't.
-    if (scope === 'citizen' && CHAOS_RIPPLE_OUTCOMES[outcome.outcome] &&
-        typeof recordRipple_ === 'function') {
-      recordRipple_(ctx, {
-        causeType: 'chaos-event',
-        causeId: payload.eventId,
-        causeDetail: payload.narrativeSeed || text,
-        effectType: outcome.outcome,
-        targetScope: 'citizen',
-        targetIds: [target.popId],
-        neighborhood: target.neighborhood || '',
-        magnitude: 0.05,
-        duration: 1,
-        sourceEngine: 'chaosCarsEngine'
-      });
-    }
-
-    // engine.41 Wire 1 (S499): a high-severity hit on a business or a neighborhood
-    // is a public event — its own story seed (builder S275). Wire 1 seeded these
-    // through applyStorySeeds' S.storySeeds, which Phase 10 no longer persists
-    // (saveV3Seeds writes S.contractSeeds, built from ripples), so none of the 22
-    // narrative-seeded hits C101–C108 ever reached Story_Seed_Deck. The authored
-    // narrativeSeed is the gate, as Wire 1 specified: low-severity blips stay silent.
-    if ((scope === 'business' || scope === 'neighborhood') && payload.narrativeSeed &&
-        typeof recordRipple_ === 'function') {
-      recordRipple_(ctx, {
-        causeType: 'chaos-event',
-        causeId: payload.eventId,
-        causeDetail: payload.narrativeSeed,
-        effectType: outcome.outcome,
-        targetScope: scope,
-        targetIds: scope === 'business' ? [target.bizId] : [],
-        neighborhood: target.neighborhood || '',
-        magnitude: 0.05,
-        duration: 1,
-        sourceEngine: 'chaosCarsEngine'
-      });
-    }
+    runChaosEvent_(ctx, rng, cycle, vehicle, scope, target, friction, i);
   }
+
+  runChaosNamedPass_(ctx, rng, cycle, configs, friction);
 
   // ── engine.70 W-3 (S327): salient weather hits businesses ────────────────
   // A storm/flood cycle (applyWeatherModel PART 13, Phase 2) dents 1-3
@@ -938,6 +1024,11 @@ if (typeof module !== 'undefined' && module.exports) {
     CHAOS_MAX_EVENTS: CHAOS_MAX_EVENTS,
     pickEventCount_: pickEventCount_,
     pickVehicle_: pickVehicle_,
+    chaosLoopScopes_: chaosLoopScopes_,
+    chaosLoopWeight_: chaosLoopWeight_,
+    chaosBinomial_: chaosBinomial_,
+    runChaosNamedPass_: runChaosNamedPass_,
+    runChaosEvent_: runChaosEvent_,
     rollOutcome_: rollOutcome_,
     sampleMagnitude_: sampleMagnitude_,
     impactsForScope_: impactsForScope_,

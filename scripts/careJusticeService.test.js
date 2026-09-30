@@ -4,21 +4,33 @@
 const HOODS = ['Fruitvale', 'Temescal'];
 for (let i = 1; i <= 20; i++) HOODS.push('SYNTHETIC_HOOD_' + String(i).padStart(2, '0'));
 
-function makeDemandFixture_(residentHood) {
+function makeDemandFixture_(residentHood, ledger) {
   const picked = residentHood || 'Fruitvale';
   const hoods = {};
+  const counts = {};
+  if (ledger) {
+    const iHood = ledger.headers.indexOf('Neighborhood');
+    const iStatus = ledger.headers.indexOf('Status');
+    for (const row of ledger.rows) {
+      const status = iStatus < 0 ? '' : String(row[iStatus] || '').toLowerCase();
+      if (['deceased', 'inactive', 'traded', 'pending'].includes(status)) continue;
+      const hood = String(row[iHood] || '').trim();
+      counts[hood] = (counts[hood] || 0) + 1;
+    }
+  } else counts[picked] = 1;
   for (const hood of HOODS) {
+    const tracked = counts[hood] || 0;
     hoods[hood] = {
       charges: hood === picked ? 8 : 0, clearance: 0.25,
       judicialIntakes: hood === picked ? 2 : 0, sick: hood === picked ? 100 : 0,
       hospitalIntakes: hood === picked ? 2 : 0, hospitalIntakeType: 'illness',
       oariDeployed: hood === picked, oariEligible: hood === picked ? 2 : 0,
       oariDiversions: hood === picked ? 1 : 0,
-      trackedResidents: hood === picked ? 1 : 0, tablePopulation: 100,
-      ratePopulation: 1000, trackedShare: hood === picked ? 0.001 : 0
+      trackedResidents: tracked, tablePopulation: 100,
+      ratePopulation: 1000, trackedShare: tracked / 1000
     };
   }
-  return { cycle: 100, methodVersion: 'demand-v1', basis: 'hood-table', hoods,
+  return { cycle: 100, methodVersion: 'demand-v1', basis: 'hood-table', exposureDial: 1, hoods,
     unallocated: { status: 'unavailable' },
     city: { charges: 8, judicialIntakes: 2, sick: 100, hospitalIntakes: 2,
       oariEligible: 2, oariDiversions: 1, oariHoods: [picked] } };
@@ -40,6 +52,7 @@ if (require.main === module) {
   const logs = [];
   global.Logger = { log: line => logs.push(line) };
   const service = require('../phase04-events/careJusticeService.js');
+  global.careJusticeResidentIndex_ = service.careJusticeResidentIndex_;
   const chaos = require('../phase04-events/chaosCarsEngine.js');
   let passed = 0, failed = 0;
   function check(label, condition, detail) {
@@ -61,7 +74,7 @@ if (require.main === module) {
       ['INIT-002', 'dispatch-live', 'Fruitvale, Temescal', 'safety']
     ];
     return { rng: () => 0, config: { careJusticeAdmitPerSick: 0.02,
-      careJusticeOariEligibleShare: 0.25 },
+      careJusticeOariEligibleShare: 0.25, careJusticeExposureDial: 1 },
     summary: { cycleId: 100, crimeMetrics: { byNeighborhood: crime },
       neighborhoodDemographics: demo, worldPopulation: { totalPopulation: 22000 } },
     ledger: { headers: ['POPID', 'Neighborhood', 'Status', 'Tier'],
@@ -172,7 +185,7 @@ if (require.main === module) {
   // 7: forced picker draws match hood and texture picker keeps its uniform path.
   {
     const c = ctx();
-    c.summary.careJusticeDemand = makeDemandFixture_('Fruitvale');
+    c.summary.careJusticeDemand = makeDemandFixture_('Fruitvale', c.ledger);
     const vehicles = ['cop_car', 'ambulance', 'oari_van'];
     const names = vehicles.map(name => chaos.pickTargetByScope_(() => 0, c, 'citizen', { name }).neighborhood);
     const texture = chaos.pickTargetByScope_(() => 0, c, 'citizen', { name: 'mail_truck' });
@@ -198,7 +211,7 @@ if (require.main === module) {
   }
   // 10: weighted picker must not see an all-zero pool.
   {
-    const c = ctx(); c.summary.careJusticeDemand = makeDemandFixture_();
+    const c = ctx(); c.summary.careJusticeDemand = makeDemandFixture_('Fruitvale', c.ledger);
     for (const h of Object.values(c.summary.careJusticeDemand.hoods)) {
       h.charges = 0; h.sick = 0;
     }
@@ -256,6 +269,28 @@ if (require.main === module) {
     check('14 typed illness and arrest demand',
       d.hoods.Fruitvale.hospitalIntakeType === 'illness' &&
       !!r.hoods.Fruitvale.hospital.illness && !!r.hoods.Fruitvale.judicial.arrest);
+  }
+  // Task 7b: one exposure dial, no cap; shared index must fail on missing columns.
+  {
+    const missing = ctx(); delete missing.config.careJusticeExposureDial;
+    const negative = ctx(); negative.config.careJusticeExposureDial = -1;
+    const infinite = ctx(); infinite.config.careJusticeExposureDial = Infinity;
+    const doubled = ctx(); doubled.config.careJusticeExposureDial = 2;
+    check('7b exposure dial is required, finite, non-negative and may exceed one',
+      namesError(() => service.runCareJusticeDemand_(missing), 'careJusticeExposureDial') &&
+      namesError(() => service.runCareJusticeDemand_(negative), 'careJusticeExposureDial') &&
+      namesError(() => service.runCareJusticeDemand_(infinite), 'careJusticeExposureDial') &&
+      service.runCareJusticeDemand_(doubled).exposureDial === 2);
+    const c = ctx();
+    const index = service.careJusticeResidentIndex_(c);
+    const demand = service.runCareJusticeDemand_(c);
+    check('7b resident index matches demand tracked counts in every hood',
+      HOODS.every(hood => (index[hood] || []).length === demand.hoods[hood].trackedResidents));
+    const noStatus = ctx(); noStatus.ledger.headers.splice(2, 1);
+    const noPop = ctx(); noPop.ledger.headers.splice(0, 1);
+    check('7b missing Status or POPID header throws by name',
+      namesError(() => service.careJusticeResidentIndex_(noStatus), 'Status') &&
+      namesError(() => service.careJusticeResidentIndex_(noPop), 'POPID'));
   }
   console.log('\ncareJusticeService: ' + passed + ' passed, ' + failed + ' failed');
   process.exit(failed ? 1 : 0);

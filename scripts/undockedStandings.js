@@ -128,8 +128,8 @@ async function main() {
   const rows = compute(feed);
   // Feed rows pushed before the holder fix carry a blank Holder; resolve by POPID
   // against the ledger (the world's record) so the board never shows a bare ID.
-  if (rows.some(r => !r[2])) {
-    const led = await sheets.getSheetData('Simulation_Ledger');
+  const led = rows.some(r => !r[2]) ? await sheets.getSheetData('Simulation_Ledger') : null;
+  if (led && led.length) {
     const h = led[0], iP = h.indexOf('POPID'), iF = h.indexOf('First'), iL = h.indexOf('Last');
     const byPop = {};
     for (let i = 1; i < led.length; i++) {

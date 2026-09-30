@@ -455,6 +455,10 @@ if (require.main === module) {
       process.exit(2);
     }
   }
+  if (holder && paths.length !== 1) {
+    console.error('--holder applies to exactly one --episode');
+    process.exit(2);
+  }
   if (!paths.length) {
     console.error('usage: --episode <json> | --all-three');
     process.exit(2);

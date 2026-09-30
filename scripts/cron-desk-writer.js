@@ -968,7 +968,7 @@ async function main() {
     firebrandHeat +
     priorArcSystem +
     cascadeRateRule +
-    '=== YOUR SKILL (.claude/agents/' + (PERSONA || (DESK + '-desk')) + ') ===\n\n' + skill +
+    '=== YOUR SKILL (.claude/agents/' + (VOICE_DIR || PERSONA || (DESK + '-desk')) + ') ===\n\n' + skill +
     (strictSourceBlock ? '\n\n' + strictSourceBlock : '') +
     (PACKET_ONLY
       ? '\n\n=== TYPED PACKET OUTPUT CONTRACT ===\n' +

@@ -77,13 +77,13 @@ Two Claude seats plus guests, one working tree.
 
 Builder-owned items only, one line each: `HH:MM seat — the question, with enough context to answer it cold`. Sim calls with no ruling, credit spending, and irreversible actions land here. Anything decided in-scope does not. The builder clears lines as answered.
 
-(empty)
+01:10 es — engine.254 Task 7b ships for cop cars only (calls = a hood's charges, as ruled). What counts as a "call" for the ambulance and the OARI van is unruled, and one exposure dial can't span them: ambulance on a hood's Sick → 4.6 named citizens a Cycle (today 0.47, ten times more); on its bed admissions → 0.08. OARI on charges in its three hoods → 0.07 (today 0.52 when deployed); on its eligible crisis calls → 0.02. Which base for each, or keep both on today's random draw with Task 7 placement? (Bench C110 numbers; mapping is a config edit, no code.)
 
 ## 7. Working ledger
 
 Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman register, results first. Purge at the start of each night (git keeps history); do not write narrative here.
 
-(empty)
+01:10 es CLAIM codex es engine.254 Task 7b cut review
 
 ## 8. Stop rule and usage
 

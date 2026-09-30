@@ -22,6 +22,12 @@ own rollout rows.
 
 Current assignments ride `SESSION_CONTEXT.md` `NEXT[<lane>]` lines; the open rows are below.
 
+**Pull order (builder, 2026-09-29) — what a fresh session picks next:**
+1. **engine.254** care and justice — the active build (engine-sheet).
+2. **Sports as a lived system** — HIGH priority, mid-build: engine.204, 205, 206, 208, 209, 211, 194 (WeekRecord engine.202 and sports phase engine.210 already live). Plan: [[../plans/2026-09-11-sports-as-a-lived-system]].
+3. **engine.94** citizen memory, then **engine.98** pets and **engine.264** the maker's hand (newer, ruled, not started).
+4. Everything else by row state; `ready` rows carry their own builder rulings.
+
 ## Rules & conventions → [[rollout-rules]]
 
 **The operating doctrine for this tracker lives in [[rollout-rules]].** State labels, group taxonomy, how to add/close work, filing, archiving, and the sweep code — one doctrine, every terminal follows it. Read it before adding or closing a row.

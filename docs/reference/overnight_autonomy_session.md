@@ -102,6 +102,8 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 03:05 es CLAIM codex es engine.273 wave 1 build (774ccf67)
 03:20 es RELEASE kimi (Task 6 review folded)
 03:45 es RELEASE agy (7b diff review folded be0d3534); 7b LIVE PROD @127, rb messaged for PIN
+04:10 es RELEASE codex (wave 1 built, committed df3173cd, bench @152 firing)
+04:10 es CLAIM kimi es engine.273 wave 1 diff review
 
 ## 8. Stop rule and usage
 
@@ -114,3 +116,4 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 01:24 rb CLAIM agy rb undocked 7b403b5c adversarial review (kimi stays es's)
 01:26 rb CHECK es idle-prompt w/ 1 shell+1 agent (not stalled), codex building 7b, kimi idle unclaimed by me, agy reviewing 7b403b5c
 01:38 rb RELEASE agy; review verified, 4 fixes committed, F-05 Name-column claim false, F-04/06 skipped (no live dupes; standings self-heals)
+02:26 rb CHECK es working (engine.273 wave 1 bench C113 fire), codex idle post-review, kimi idle, agy cleared. rb: undocked proof waits on 20:30 flight + Sat 10-03 write; no open rb item

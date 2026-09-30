@@ -1,7 +1,7 @@
 ---
 title: Research Sub-Catalog
 created: 2026-06-01
-updated: 2026-09-29
+updated: 2026-09-30
 type: reference
 tags: [research, architecture, active]
 sources:
@@ -25,6 +25,7 @@ Grep here before grepping the tree. Each row: file · one-line purpose · verdic
 
 | File | Purpose | Verdict |
 |------|---------|---------|
+| **[[2026-09-30-codex-task7b-cut]]** | Adversarial review of the engine.254 Task 7b cut: partial delivery, 3–15 row contract, arrest-rate bounds, binomial underflow, draw count, extraction equivalence, fixtures, index headers, bench gate | `adopt` — 9 findings verified and folded; thinning replaced by reweight |
 | **[[2026-09-29-codex-holiday-calendar-inventory]]** | engine.273 Task 1: hardcoded holidays, months and real-world observances across engine, agents, skills and crons | `adopt` — verified by research-build 2026-09-29; 8 missed readers added in the plan |
 | **[[2026-09-29-codex-task7-demand-first-cut]]** | Adversarial review of the engine.254 Task 7 cut: guard placement, rate framing, rng stream, demographics tab state, census contracts, OARI read | `adopt` — 14 findings verified and folded before build |
 | **[[2026-09-29-kimi-care-justice-task7-diff]]** | Adversarial diff review of `58d06aa0` (engine.254 Task 7 demand-first): fallback/clamp/gate/rng/ES5 hunts vs §Task 7 cut; F1–F4 low notes | `SHIP` |

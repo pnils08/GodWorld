@@ -965,6 +965,17 @@ This pass: 4 closed (pipeline.3, engine.3, infrastructure.1, infrastructure.2) �
 
 ## S506 Archive Pass (2026-09-29, research-build) — post-S505 closures sweep
 
+4 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 2 engine.* + 2 governance.*.
+
+- **engine.8** [engine-sheet] — Header-drift detector C93 Type-2 triage (16 MED clusters) + C94 sweep absorbed S225 (G-EC5–G-EC21 orphan literals + G-EC24–G-EC32 defensive-fallback noise + G-RC7 KONO civic.10b follow-up) per triage cluster C11 — closed 2026-09-29 (builder): detector shipped in engineCycleAudit.js header-drift class (S202), triage clusters folded **State at archive:** done-pending-archive. Pointer: [[../plans/2026-05-05-writer-header-alignment-detector]] §Triage; C11 fold ref [[../plans/2026-05-22-c94-gap-log-triage]] §3 C11
+- **engine.30** [engine-sheet] — Citizen card full-life enrichment — not actually blocked (its blocker resolved 2026-06-09, sibling engine.32 shipped 2026-09-04); relabeled to reflect it's just deprioritized — closed 2026-09-29: card life/work/essence/fame lines built S255 in buildCitizenCards.js **State at archive:** done-pending-archive. Pointer: [[../plans/2026-05-31-emergent-bio-engine]]
+- **governance.3** [research-build] — Mags-at-/root steward layer — closed 2026-09-29 (builder): rb and es serve as dual stewards, no separate layer **State at archive:** done-pending-archive. Pointer: [[../plans/2026-05-09-boot-load-audit]] — detail in pointer (relocated 2026-07-02)
+- **governance.52** [research-build] — Wider AI autonomy — agentic loops/cross-cycle objectives for civic roles; scope against civic.38's shipped game loop first — closed 2026-09-29 (builder): covered by civic.38 game loop; any genuinely open piece folds into another lane **State at archive:** done-pending-archive. Pointer: [[../plans/2026-09-26-future-build-ideas]] §5
+
+This pass: 4 rows — engine.8 + engine.30 + governance.3 + governance.52. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+
+## S506 Archive Pass (2026-09-29, research-build) — post-S505 closures sweep
+
 3 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 engine.* + 2 research.*.
 
 - **engine.263** [engine-sheet] — Credit/default cascades — loans/defaults rippling through households/businesses — folded 2026-09-29 (builder) into the household-spending plan; concept kept in future-build-ideas §4 **State at archive:** done-pending-archive. Pointer: [[../plans/2026-09-26-future-build-ideas]] §4 + [[../plans/2026-09-22-initiative-budget-disbursement]] §Out of scope

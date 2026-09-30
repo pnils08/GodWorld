@@ -60,7 +60,6 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 |---|------|-------|----------|---------|
 | engine.5 | Household + family simulation (Representative Sample model, reframed S243) — functional youth seed → engine life-event simulation → publication-driven family materialization. Steward authority granted S243. | in-progress | engine-sheet | [[engine/archive/LEDGER_REPAIR_HOUSEHOLDS]] |
 | engine.7 | Engine Routing Foundation — Phase 6 cutover (gated on 3 cycles shadow data) | in-progress | research-build / engine-sheet | [[../plans/2026-05-07-engine-routing-foundation]] |
-| engine.8 | Header-drift detector C93 Type-2 triage (16 MED clusters) + C94 sweep absorbed S225 (G-EC5–G-EC21 orphan literals + G-EC24–G-EC32 defensive-fallback noise + G-RC7 KONO civic.10b follow-up) per triage cluster C11 | blocked | engine-sheet | [[../plans/2026-05-05-writer-header-alignment-detector]] §Triage; C11 fold ref [[../plans/2026-05-22-c94-gap-log-triage]] §3 C11 |
 | engine.11 | Chaos-cars engine — all 4 cascade outputs + all 3 validators now built (S423); only gate left is T5.3 live-fire on a real Tier-1 hit | in-progress | engine-sheet / research-build | [[../plans/2026-05-07-chaos-cars-engine]] — detail in pointer (relocated 2026-07-02) |
 | engine.20d | Sift Step 5 `covered-by-feature` triage handle (shipped) — cadence cap still open: 1 dedicated article/cycle/initiative, movement-only | ready | research-build | [[../plans/2026-05-22-engine-regulatory-friction]] §Task 5 |
 | engine.27 | Phase A re-enabled 09-26 post infra.12 PATCH fix; Phase B (B1-B4 not started, Apps Script + cycle-critical-path — retagged S501, was stale) | in-progress | engine-sheet | [[../plans/2026-05-26-engine-27-wd-card-auto-invalidation]] |
@@ -141,7 +140,6 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | research.4 | Desk agents migration off Claude → DeepSeek (research/watch — cost/limits trigger) — parked 2026-09-29: cost/limits trigger only, 153 days quiet; revisit if a desk budget or rate limit bites | parked | research-build | [[../MIGRATION_OFF_CLAUDE]] |
 | research.9 | Inter-agent conversation harness — blocker (Phase 40.2 cattle refactor / engine.1) just wontfixed, will never clear as stated; needs re-scoping — parked 2026-09-29: blocker wontfixed; revisit if agent-to-agent conversation is scoped again | parked | research-build | [[../plans/2026-05-31-autonomy-roadmap]] + [[../RESEARCH]] |
 | research.12 | Autonomy roadmap | in-progress | research-build | [[../plans/2026-05-31-autonomy-roadmap]] — detail in pointer (relocated 2026-07-02) |
-| engine.30 | Citizen card full-life enrichment — not actually blocked (its blocker resolved 2026-06-09, sibling engine.32 shipped 2026-09-04); relabeled to reflect it's just deprioritized | parked | engine-sheet | [[../plans/2026-05-31-emergent-bio-engine]] |
 | research.19 | Citizen perception & immersion access layer — parked: two open design questions, no build in flight (es confirmed 2026-09-29); revisit when a citizen-facing surface is next scoped | parked | research-build | [[../plans/2026-06-23-citizen-perception-immersion-layer]] |
 | engine.38 | Living City full-population coverage — parked: plan's 8 tasks never started (last touched 2026-08-13), es holds nothing; revisit when the citizen-loop or archive work reaches the unmapped tail | parked | research-build | [[../plans/2026-06-19-living-city-full-population-coverage]] + [[../plans/2026-06-30-central-generator-atmospheric-expansion]] + [[../plans/2026-07-01-persistence-seams-content-ledger]] |
 | research.21 | Citizen-signal story emergence — parked: detector build tasks never started (last touched 2026-07-28), es holds nothing; revisit with engine.270's storyline review | parked | research-build | [[../plans/2026-06-26-citizen-signal-story-emergence]] + [[../plans/2026-06-29-citizen-signal-detector-build]] |
@@ -155,8 +153,6 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
-| governance.3 | Mags-at-/root steward layer | blocked | research-build | [[../plans/2026-05-09-boot-load-audit]] — detail in pointer (relocated 2026-07-02) |
-| governance.52 | Wider AI autonomy — agentic loops/cross-cycle objectives for civic roles; scope against civic.38's shipped game loop first | needs-info | research-build | [[../plans/2026-09-26-future-build-ideas]] §5 |
 
 ---
 

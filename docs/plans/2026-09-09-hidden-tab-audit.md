@@ -102,3 +102,4 @@ Per-tab keep/delete ruling for the six DEAD tabs. Default recommendation: delete
 ## Changelog
 
 - 2026-09-09 (kimi) — Audit executed (live sheet metadata read: 82 tabs / 16 hidden; per-tab classification verified against code, crontab, dashboard). Plan filed as infrastructure.8, state `parked` (builder: not a priority job).
+- 2026-09-29 (rb) — Builder: full copies of the ledgers exist, so the live sheet need not carry dead tabs; deletion is low-risk when picked up. Stays parked (low priority until the engine runs clean).

@@ -168,4 +168,4 @@ engine.259 fund tranches (applyInitiativeImplementationEffects.js :544–572), a
 
 ### engine.262 — built S502 `24a0e04c`, bench-proven SANDBOX 0908 @142 C125
 C125 ledger exactly as predicted: OPENING $100M · PREFUNDED INIT-001/002/005 (Baylight INIT-006 absent) · REVENUE $5M → $105M; World_Config keys self-armed; 0 errors. Unit test `scripts/cityTreasury.test.js` 17/17 covers underfunded appropriation, once-only charge, once-per-Cycle revenue, renewal short. Live needs the City_Treasury tab created before the first fire on this code.
-
+- 2026-09-29 (rb) — §5 wider AI autonomy (governance.52) closed by the builder: covered by civic.38's game loop; open pieces fold into another lane if they appear. §4 credit/default cascades (engine.263) folded into [[2026-09-22-initiative-budget-disbursement]] §Out of scope; concept kept here.

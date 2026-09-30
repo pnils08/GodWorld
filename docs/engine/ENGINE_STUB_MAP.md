@@ -764,6 +764,8 @@
 - **careJusticeOariHoods_(ctx, initiativeId)**
   Sheets: Initiative_Tracker
 
+- **careJusticeLogUnknownHoods_(deployed, hoodSet, cycle)**
+
 - **careJusticeTrackedByHood_(ctx)**
 
 - **runCareJusticeDemand_(ctx)**
@@ -4268,4 +4270,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1507
+**Functions mapped:** 1508

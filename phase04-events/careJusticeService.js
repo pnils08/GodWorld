@@ -101,6 +101,16 @@ function careJusticeOariHoods_(ctx, initiativeId) {
   return deployed;
 }
 
+// kimi F2 (2026-09-29): a tracker hood that misses the demand table is not an
+// error (the tracker is a civic-written cell) but it must not vanish quietly.
+function careJusticeLogUnknownHoods_(deployed, hoodSet, cycle) {
+  for (var name in deployed) {
+    if (deployed.hasOwnProperty(name) && !hoodSet.hasOwnProperty(name)) {
+      Logger.log('careJusticeDemand C' + cycle + ' OARI hood "' + name + '" listed in Initiative_Tracker but not in the demand table — no weight');
+    }
+  }
+}
+
 function careJusticeTrackedByHood_(ctx) {
   if (!ctx.ledger || !ctx.ledger.headers || !ctx.ledger.rows) {
     throw new Error('careJusticeDemand: ctx.ledger missing');
@@ -171,6 +181,7 @@ function runCareJusticeDemand_(ctx) {
   if (!(tableTotal > 0)) throw new Error('careJusticeDemand: table population sum must be > 0');
   var tracked = careJusticeTrackedByHood_(ctx);
   var cycle = (S.absoluteCycle || S.cycleId || (ctx.config && ctx.config.cycleCount) || ctx.cycle);
+  careJusticeLogUnknownHoods_(oariHoods, crime, cycle);
   var demand = {
     cycle: cycle, methodVersion: 'demand-v1', basis: 'hood-table', hoods: {},
     unallocated: { status: 'unavailable' },

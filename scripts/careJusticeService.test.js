@@ -98,6 +98,18 @@ if (require.main === module) {
       ['SYNTHETIC-OTHER', 'operational', 'Temescal', 'safety']
     ] });
     const deployed = service.runCareJusticeDemand_(e);
+    const u = ctx();
+    u.cache.getData = () => ({ exists: true, values: [
+      ['InitiativeID', 'ImplementationPhase', 'AffectedNeighborhoods', 'PolicyDomain'],
+      ['INIT-002', 'dispatch-live', 'Fruitvale', 'safety'],
+      ['INIT-002', 'operational', 'Temescal, SYNTHETIC_NOWHERE', 'safety']
+    ] });
+    const before = logs.length;
+    const union = service.runCareJusticeDemand_(u);
+    check('2b two rows sharing the ID union their hoods; an unknown listed hood is logged, not weighted',
+      union.hoods.Fruitvale.oariDeployed && union.hoods.Temescal.oariDeployed &&
+      union.city.oariHoods.length === 2 &&
+      logs.slice(before).some(line => line.indexOf('SYNTHETIC_NOWHERE') >= 0));
     check('2 announced OARI is idle; another safety ID cannot deploy it',
       d.city.oariHoods.length === 0 && !d.hoods.Fruitvale.oariDeployed &&
       deployed.city.oariHoods.length === 1 && deployed.hoods.Fruitvale.oariDeployed &&

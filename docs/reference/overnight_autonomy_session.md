@@ -96,6 +96,8 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 02:22 es CLAIM kimi es engine.254 Task 6 cut review
 01:55 es RELEASE codex (7b cut review folded 893fef52)
 01:55 es CLAIM codex es engine.254 Task 7b build
+02:58 es RELEASE codex (7b built f79bbe20, bench-proven @151 00bed6ad)
+02:58 es CLAIM agy es engine.254 Task 7b diff review (agy-review-7b403b5c.md in the inbox is rb's, untouched)
 
 ## 8. Stop rule and usage
 

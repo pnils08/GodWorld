@@ -132,36 +132,20 @@ function advanceSimulationCalendar_(ctx) {
   // HOLIDAY CALCULATION (from Cycle, not date)
   // ═══════════════════════════════════════════════════════════════════════════
 
-  var holiday = "none";
-  var holidayDetails = null;
-
-  if (typeof getSimHoliday_ === 'function') {
-    // v2.3+ takes cycleOfYear
-    holiday = getSimHoliday_(cycleOfYear);
-  }
-
-  if (typeof getSimHolidayDetails_ === 'function') {
-    holidayDetails = getSimHolidayDetails_(cycleOfYear);
-  }
+  var holiday = getSimHoliday_(cycleOfYear);
+  var holidayDetails = getSimHolidayDetails_(cycleOfYear);
 
   // ═══════════════════════════════════════════════════════════════════════════
   // FIRST FRIDAY CHECK
   // ═══════════════════════════════════════════════════════════════════════════
 
-  var isFirstFriday = false;
-  if (typeof isFirstFridayCycle_ === 'function') {
-    isFirstFriday = isFirstFridayCycle_(cycleOfYear);
-  } else {
-    // Fallback: first cycle of each month
-    var firstFridayCycles = [1, 6, 10, 14, 18, 23, 27, 31, 36, 40, 45, 49];
-    isFirstFriday = firstFridayCycles.indexOf(cycleOfYear) >= 0;
-  }
+  var isFirstFriday = isFirstFridayCycle_(cycleOfYear);
 
   // ═══════════════════════════════════════════════════════════════════════════
   // CREATION DAY CHECK
   // ═══════════════════════════════════════════════════════════════════════════
 
-  var isCreationDay = (cycleOfYear === 48);
+  var isCreationDay = (holiday === 'CreationDay');
   var creationDayAnniversary = isCreationDay ? godWorldYear - 1 : null;
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -188,16 +172,6 @@ function advanceSimulationCalendar_(ctx) {
   queueCellIntent_(ctx, 'Simulation_Calendar', 2, 6, cycleNote,     'calendar advance: cycle note',        'world');
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // MONTH NAME LOOKUP
-  // ═══════════════════════════════════════════════════════════════════════════
-
-  var monthNames = [
-    "", "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
-  ];
-  var monthName = monthNames[simMonth] || "Unknown";
-
-  // ═══════════════════════════════════════════════════════════════════════════
   // SUMMARY FIELDS
   // ═══════════════════════════════════════════════════════════════════════════
   
@@ -207,14 +181,14 @@ function advanceSimulationCalendar_(ctx) {
   S.cycleInMonth = cycleInMonth;
   S.simYear = simYearFromCycle_(absoluteCycle);  // calendar year for age math (simYear - birthYear); godWorldYear stays the ordinal used by cycleRef/elections/display. S243 fix: was aliased to the ordinal, freezing every age-gated life event (age = 2 - birthYear ≈ -2000). engine.148: the ONE formula, see simYearFromCycle_ below.
   S.simMonth = simMonth;
-  S.month = simMonth;        // engine.222: five readers read S.month (economy, media feedback, generational events, World_Events record, cycle packet) — nothing wrote it, so every month-gated branch was dead
+  S.month = simMonth;        // engine.222: economy, media feedback, generational events and World_Events record use this rhythm key
   S.simDay = cycleInMonth;   // Alias for backwards compatibility
-  S.monthName = monthName;
   S.season = season;
   S.holiday = holiday;
+  S.holidayLabel = holidayDetails.label;
   S.holidayDetails = holidayDetails;
-  S.holidayPriority = holidayDetails ? holidayDetails.priority : "none";
-  S.holidayNeighborhood = holidayDetails ? holidayDetails.neighborhood : null;
+  S.holidayPriority = holidayDetails.priority;
+  S.holidayNeighborhood = holidayDetails.neighborhood;
   S.isFirstFriday = isFirstFriday;
   S.isCreationDay = isCreationDay;
   S.creationDayAnniversary = creationDayAnniversary;

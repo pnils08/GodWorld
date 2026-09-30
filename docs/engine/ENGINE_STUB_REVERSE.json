@@ -2,7 +2,7 @@
   "generated": "2026-09-30",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 180,
-  "functionsMapped": 1515,
+  "functionsMapped": 1509,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -187,6 +187,14 @@
         "phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_"
       ],
       "readers": []
+    },
+    "holidayLabel": {
+      "writers": [
+        "phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_"
+      ],
+      "readers": [
+        "phase10-persistence/buildCyclePacket.js::buildCyclePacket_"
+      ]
     },
     "holidayNeighborhood": {
       "writers": [
@@ -423,20 +431,12 @@
         "phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_"
       ],
       "readers": [
-        "phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_",
         "phase04-events/generationalEventsEngine.js::runGenerationalEngine_",
         "phase06-analysis/economicRippleEngine.js::runEconomicRippleEngine_",
         "phase07-evening-media/mediaFeedbackEngine.js::runMediaFeedbackEngine_",
         "phase07-evening-media/mediaRoomIntake.js::getCurrentCalendarContext_",
-        "phase10-persistence/buildCyclePacket.js::buildCyclePacket_",
         "phase10-persistence/recordWorldEventsv25.js::recordWorldEvents25_"
       ]
-    },
-    "monthName": {
-      "writers": [
-        "phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_"
-      ],
-      "readers": []
     },
     "season": {
       "writers": [
@@ -506,8 +506,7 @@
         "phase04-events/faithEventsEngine.js::runFaithEventsEngine_",
         "phase05-citizens/runYouthEngine.js::runYouthEngine_",
         "phase06-analysis/applyShockMonitor.js::applyShockMonitor_",
-        "phase07-evening-media/mediaRoomIntake.js::getCurrentCalendarContext_",
-        "phase10-persistence/buildCyclePacket.js::buildCyclePacket_"
+        "phase07-evening-media/mediaRoomIntake.js::getCurrentCalendarContext_"
       ]
     },
     "simYear": {

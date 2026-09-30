@@ -42,6 +42,7 @@ const path = require('path');
 const sheets = require('/root/GodWorld/lib/sheets');
 // W5h2 (S336 engine.76): roster lane pools for the byline WHO-assist
 const { buildLanePools } = require('./engine-auditor/bayTribuneRoster');
+const { SIM_HOLIDAYS } = require('../phase02-world-state/getSimHoliday');
 
 const REPO_ROOT = path.resolve(__dirname, '..');
 const SCRIPT_VERSION = '2.2.0';
@@ -178,11 +179,16 @@ function realSeasonLabel_(sportsRows, cycle) {
 function emitHeader(cycle, rileyCurr, calendar, sportsRows) {
   const weather = parseJsonField(rileyCurr.Weather, {});
   const calRow = calendar.find(r => r && r.length >= 4 && r[0] && r[1]);
-  const simYear = calRow ? calRow[0] : '—';
-  const simMonth = calRow ? calRow[1] : '—';
-  const simDay = calRow ? calRow[2] : '—';
-  const season = calRow ? calRow[3] : '—';
-  const holiday = calRow ? calRow[4] : 'none';
+  if (!calRow) throw new Error('Simulation_Calendar row missing from world summary');
+  const simYear = calRow[0];
+  const cycleOfYear = ((cycle - 1) % 52) + 1;
+  const season = calRow[3];
+  const holidayFlag = calRow[4];
+  const holidayRow = Object.values(SIM_HOLIDAYS).find(row => row.name === holidayFlag);
+  // A flag the table no longer knows is a row written by the engine before engine.273
+  // wave 1 reached that sheet — printed as written, with a warning, never invented.
+  if (holidayFlag !== 'none' && !holidayRow) console.warn('buildWorldSummary: holiday flag not in SIM_HOLIDAYS (pre-wave-1 row?): ' + holidayFlag);
+  const holidayLabel = holidayRow ? holidayRow.label : (holidayFlag || 'none');
 
   const nightlife = parseJsonField(rileyCurr.NightLife, {});
   const sportsSeason = realSeasonLabel_(sportsRows, cycle)
@@ -195,7 +201,7 @@ function emitHeader(cycle, rileyCurr, calendar, sportsRows) {
     `**Season:** ${season} | **Weather:** ${formatWeatherLine(weather)}`,
     `**Cycle Weight:** ${rileyCurr.CycleWeight || '—'} | **Pattern:** ${rileyCurr.PatternFlag || '—'} | **Shock:** ${rileyCurr.ShockFlag || '—'} | **Civic Load:** ${rileyCurr.CivicLoad || '—'}`,
     `**Cycle Weight Reason:** ${rileyCurr.CycleWeightReason || '—'}`,
-    `**Calendar context:** SimYear ${simYear}, Month ${simMonth}, Day ${simDay}, ${season}, holiday=${holiday} | Sports season: ${sportsSeason} | First Friday: ${firstFriday}`,
+    `**Calendar context:** Y${simYear}C${cycleOfYear}, ${season}, holiday=${holidayLabel} | Sports season: ${sportsSeason} | First Friday: ${firstFriday}`,
     '',
     '---',
     ''

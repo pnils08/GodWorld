@@ -16,8 +16,8 @@
 
 ### advanceSimulationCalendar.js
 - **advanceSimulationCalendar_(ctx)**
-  Reads: S.cycleId, S.holidayPriority, S.month, S.weather, S.weatherMood
-  Writes: S.absoluteCycle, S.creationDayAnniversary, S.cycleInMonth, S.cycleOfYear, S.cycleRef, S.godWorldYear, S.holiday, S.holidayDetails, S.holidayNeighborhood, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.isWeekend, S.month, S.monthName, S.season, S.simDay, S.simMonth, S.simYear, S.weather, S.weatherMood
+  Reads: S.cycleId, S.holidayPriority, S.weather, S.weatherMood
+  Writes: S.absoluteCycle, S.creationDayAnniversary, S.cycleInMonth, S.cycleOfYear, S.cycleRef, S.godWorldYear, S.holiday, S.holidayDetails, S.holidayLabel, S.holidayNeighborhood, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.isWeekend, S.month, S.season, S.simDay, S.simMonth, S.simYear, S.weather, S.weatherMood
   Config: ctx.config.cycleCount
   Sheets: Simulation_Calendar
   RNG: ctx.rng / safeRand_(ctx)
@@ -481,19 +481,9 @@
 
 - **isFirstFridayCycle_(cycleOfYear)**
 
-- **isCreationDay_(cycleOfYear)**
-
-- **getCreationDayAnniversary_(godWorldYear)**
-
 - **getCycleOfYear_(absoluteCycle)**
 
 - **getGodWorldYear_(absoluteCycle)**
-
-- **getMonthFromCycle_(cycleOfYear)**
-
-- **getSimMonthFromCycle_(cycleOfYear)**
-
-- **getHolidayPriority_(holidayName)**
 
 ### getsimseason.js
 - **getSimSeason_(month)**
@@ -3164,7 +3154,7 @@
 
 ### buildCyclePacket.js
 - **buildCyclePacket_(ctx)**
-  Reads: S.absoluteCycle, S.bondSummary, S.cityDynamics, S.cityEventDetails, S.civicLoad, S.civicLoadFactors, S.civicLoadScore, S.compressedLine, S.creationDayAnniversary, S.crimeMetrics, S.crowdHotspots, S.crowdMap, S.cycleId, S.cycleInMonth, S.cycleOfYear, S.cycleRef, S.cycleSummary, S.cycleWeight, S.cycleWeightReason, S.demographicDrift, S.demographicShifts, S.domainPresence, S.dominantDomain, S.economicSummary, S.eveningFood, S.eveningSafety, S.eveningTraffic, S.eventArcs, S.generationalEvents, S.generationalSummary, S.godWorldYear, S.holiday, S.holidayNeighborhood, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.mediaSummary, S.migrationBrief, S.migrationDrift, S.month, S.namedSpotlights, S.neighborhoodDynamics, S.neighborhoodEconomies, S.neighborhoodMigration, S.nightlife, S.patternFlag, S.season, S.shockDuration, S.shockFlag, S.shockReasons, S.shockScore, S.simMonth, S.storyHooks, S.textureTriggers, S.transitMetrics, S.weather, S.weatherSummary, S.worldEvents, S.worldPopulation
+  Reads: S.absoluteCycle, S.bondSummary, S.cityDynamics, S.cityEventDetails, S.civicLoad, S.civicLoadFactors, S.civicLoadScore, S.compressedLine, S.creationDayAnniversary, S.crimeMetrics, S.crowdHotspots, S.crowdMap, S.cycleId, S.cycleInMonth, S.cycleOfYear, S.cycleRef, S.cycleSummary, S.cycleWeight, S.cycleWeightReason, S.demographicDrift, S.demographicShifts, S.domainPresence, S.dominantDomain, S.economicSummary, S.eveningFood, S.eveningSafety, S.eveningTraffic, S.eventArcs, S.generationalEvents, S.generationalSummary, S.godWorldYear, S.holiday, S.holidayLabel, S.holidayNeighborhood, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.mediaSummary, S.migrationBrief, S.migrationDrift, S.namedSpotlights, S.neighborhoodDynamics, S.neighborhoodEconomies, S.neighborhoodMigration, S.nightlife, S.patternFlag, S.season, S.shockDuration, S.shockFlag, S.shockReasons, S.shockScore, S.storyHooks, S.textureTriggers, S.transitMetrics, S.weather, S.weatherSummary, S.worldEvents, S.worldPopulation
   Writes: S.cyclePacket
 
 - **hospitalCapacity_(ctx)**
@@ -3177,8 +3167,6 @@
 
 - **getCivicContextForPacket_(ss, cycle, cal)**
   Sheets: Civic_Office_Ledger, Election_Log
-
-- **getMonthName_Packet_(month)**
 
 ### commitSimulationLedger.js
 - **commitSimulationLedger_(ctx)**
@@ -4287,4 +4275,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1515
+**Functions mapped:** 1509

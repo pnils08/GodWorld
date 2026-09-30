@@ -499,7 +499,7 @@ function loadCycleContext(cycle) {
   const sfreq = {}; streaks.forEach((s) => { sfreq[s] = (sfreq[s] || 0) + 1; });
   const asStreak = streaks.length ? Object.keys(sfreq).sort((a, b) => (sfreq[b] - sfreq[a]) || a.localeCompare(b))[0] : null;
   return {
-    holiday: m(/holiday=([^\s|]+)/),
+    holiday: m(/holiday=([^|\n]+?)\s*(?:\||\n|$)/), // labels carry spaces ("New Year's Eve")
     firstFriday: /First Friday:\s*true/i.test(t),
     season: m(/\*\*Season:\*\*\s*([A-Za-z]+)/),
     citySentiment: m(/CitySentiment\)?:\*\*\s*([+\-0-9.]+)/),

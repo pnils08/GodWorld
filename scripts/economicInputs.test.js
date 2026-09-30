@@ -33,6 +33,7 @@ function sandbox() {
   const sb = { Logger: { log: () => {} }, Math, Object, Array, Number, String, JSON, Date, isFinite, isNaN, parseFloat, parseInt,
     safeRand_: () => () => 0.5, recordRipple_: () => true, hoodNamesWithScene_: () => [], queueCellIntent_: () => {}, queueAppendIntent_: () => {}, PropertiesService: null };
   vm.createContext(sb);
+  load(sb, 'phase02-world-state/getSimHoliday.js'); // engine.273: the calendar writer reads the one holiday table
   load(sb, 'phase01-config/advanceSimulationCalendar.js');
   load(sb, 'phase06-analysis/economicRippleEngine.js');
   load(sb, 'phase06-analysis/applyShockMonitor.js');

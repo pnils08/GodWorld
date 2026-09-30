@@ -69,7 +69,7 @@ function generateInitiativeBriefing(init, cycle, baseContext, manifest) {
   let md = `# ${init.name} Briefing — Cycle ${cycle}\n\n`;
 
   if (baseContext) {
-    md += `**Cycle ${cycle}** | ${baseContext.month || ''} ${baseContext.simYear || ''} | ${baseContext.season || ''}\n\n`;
+    md += `**Cycle ${cycle}** | ${baseContext.cycleRef || ''} | ${baseContext.season || ''}\n\n`;
   }
 
   // Initiative status from manifest

@@ -45,7 +45,7 @@ function getCliArg(flag) {
 // ─── CONFIGURATION ─────────────────────────────────────────
 const getCurrentCycle = require('../lib/getCurrentCycle');
 const contextScan = require('../lib/contextScan');
-const CYCLE = getCurrentCycle();
+const { SIM_HOLIDAYS, isFirstFridayCycle_ } = require('../phase02-world-state/getSimHoliday');
 const PROJECT_ROOT = path.resolve(__dirname, '..');
 
 // Phase 40.6 Layer 4 — scan any packet we write and abort the build on a hit.
@@ -71,6 +71,37 @@ const sheets = require(path.join(PROJECT_ROOT, 'lib/sheets'));
 function safe(val, def) {
   if (val === undefined || val === null || val === '') return def !== undefined ? def : '';
   return val;
+}
+
+function deriveDeskCalendar_(cycle, calRow, holidayOverride) {
+  if (!calRow || !calRow[0] || !calRow[3] || !calRow[4]) {
+    throw new Error('Simulation_Calendar row is missing year, season, or holiday flag');
+  }
+  var cycleOfYear = ((cycle - 1) % 52) + 1;
+  var holidayFlag = String(calRow[4]);
+  var displayFlag = holidayOverride || holidayFlag;
+  var holidayLabel = 'none';
+  function holidayRowForFlag(flag) {
+    if (flag === 'none') return null;
+    for (var position in SIM_HOLIDAYS) {
+      if (Object.prototype.hasOwnProperty.call(SIM_HOLIDAYS, position) && SIM_HOLIDAYS[position].name === flag) {
+        return SIM_HOLIDAYS[position];
+      }
+    }
+    // A flag the table no longer knows is a pre-wave-1 engine row: printed as written, warned.
+    console.warn('buildDeskPackets: holiday flag not in SIM_HOLIDAYS (pre-wave-1 row?): ' + flag);
+    return { label: flag };
+  }
+  var displayRow = holidayRowForFlag(displayFlag);
+  if (displayRow) holidayLabel = displayRow.label;
+  return {
+    simYear: calRow[0],
+    cycleRef: 'Y' + calRow[0] + 'C' + cycleOfYear,
+    season: calRow[3],
+    holiday: { name: holidayLabel, priority: displayFlag !== 'none' ? 'active' : 'none' },
+    isFirstFriday: isFirstFridayCycle_(cycleOfYear),
+    isCreationDay: holidayFlag === 'CreationDay'
+  };
 }
 
 function toObj(headers, row) {
@@ -375,6 +406,7 @@ function buildEconomicContext(worldPopRaw, simLedger, activeHouseholds, neighbor
  * Extracts nightlife, food scene, media climate, weather mood, and cultural activity.
  */
 async function main() {
+  const CYCLE = getCurrentCycle();
   console.log('=== buildDeskPackets v1.8 (Auto Archive Context) ===');
   console.log('Cycle:', CYCLE);
   console.log('Pulling live data from Google Sheets...\n');
@@ -510,51 +542,24 @@ async function main() {
   // ── Build base context ──
   // Calendar from Simulation_Calendar sheet — the simulation's own timeline.
   // NEVER derive from system date. GodWorld is its own world.
-  var monthNames = ['','January','February','March','April','May','June',
-    'July','August','September','October','November','December'];
-  var seasonFromCal = '';
-  var monthFromCal = '';
-  var holidayFromCal = 'none';
-  var simYear = '';
-  var simMonth = 0;
-  var isFirstFridayFromCal = false;
-  var isCreationDayFromCal = false;
   if (simCalRaw.length <= 1) {
-    console.warn('  WARN: Simulation_Calendar is empty — season/month/holiday will default to "unknown"');
-  }
-  if (simCalRaw.length > 1) {
-    var calRow = simCalRaw[1]; // row 0 is headers
-    simYear = calRow[0] || '';
-    simMonth = parseInt(calRow[1]) || 0;
-    monthFromCal = monthNames[simMonth] || '';
-    seasonFromCal = calRow[3] || '';
-    holidayFromCal = calRow[4] || 'none';
-
-    // Derive isFirstFriday/isCreationDay from cycle number
-    // Same logic as advanceSimulationCalendar.js
-    var cycleOfYear = ((CYCLE - 1) % 52) + 1;
-    var firstFridayCycles = [1, 6, 10, 14, 18, 23, 27, 31, 36, 40, 45, 49];
-    isFirstFridayFromCal = firstFridayCycles.indexOf(cycleOfYear) >= 0;
-    isCreationDayFromCal = (cycleOfYear === 48);
+    throw new Error('Simulation_Calendar is empty');
   }
 
-  // CLI overrides: --season Summer --month August --holiday "none" --sports-season mid-season
+  // CLI overrides: --season Summer --holiday "none" --sports-season mid-season
   var cliSeason = getCliArg('--season');
-  var cliMonth = getCliArg('--month');
   var cliHoliday = getCliArg('--holiday');
   var cliSportsSeason = getCliArg('--sports-season');
+  var deskCalendar = deriveDeskCalendar_(CYCLE, simCalRaw[1], cliHoliday);
 
   var baseContext = {
     cycle: CYCLE,
-    simYear: simYear,
-    season: cliSeason || seasonFromCal || 'unknown',
-    month: cliMonth || monthFromCal || 'unknown',
-    holiday: {
-      name: cliHoliday || holidayFromCal,
-      priority: holidayFromCal !== 'none' ? 'active' : 'none'
-    },
-    isFirstFriday: isFirstFridayFromCal,
-    isCreationDay: isCreationDayFromCal,
+    simYear: deskCalendar.simYear,
+    cycleRef: deskCalendar.cycleRef,
+    season: cliSeason || deskCalendar.season,
+    holiday: deskCalendar.holiday,
+    isFirstFriday: deskCalendar.isFirstFriday,
+    isCreationDay: deskCalendar.isCreationDay,
     sportsSeason: cliSportsSeason || '',
     weather: extractWeatherFromEvents(events),
     sentiment: extractFieldFromEvents(events, 'CitySentiment'),
@@ -682,8 +687,12 @@ function determineCycleWeight(events) {
 }
 
 // ─── RUN ───────────────────────────────────────────────────
-main().catch(function(err) {
-  console.error('FATAL:', err.message);
-  if (err.stack) console.error(err.stack);
-  process.exit(1);
-});
+if (require.main === module) {
+  main().catch(function(err) {
+    console.error('FATAL:', err.message);
+    if (err.stack) console.error(err.stack);
+    process.exit(1);
+  });
+}
+
+module.exports = { deriveDeskCalendar_: deriveDeskCalendar_ };

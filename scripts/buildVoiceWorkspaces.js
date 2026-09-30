@@ -403,7 +403,7 @@ function generateVoiceBriefing(agent, cycle, baseContext) {
   md += `${lens}. Let this shape your tone and priorities — not your principles, but where you put your weight.\n\n`;
 
   if (baseContext) {
-    md += `**Cycle ${cycle}** | ${baseContext.month || ''} ${baseContext.simYear || ''} | ${baseContext.season || ''}\n\n`;
+    md += `**Cycle ${cycle}** | ${baseContext.cycleRef || ''} | ${baseContext.season || ''}\n\n`;
   }
 
   if (baseContext && baseContext.canon) {

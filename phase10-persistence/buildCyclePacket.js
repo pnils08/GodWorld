@@ -66,7 +66,6 @@ function buildCyclePacket_(ctx) {
     holidayPriority: S.holidayPriority || 'none',
     isFirstFriday: S.isFirstFriday || false,
     isCreationDay: S.isCreationDay || false,
-    month: S.month || S.simMonth || 0,
     cycleOfYear: S.cycleOfYear || 1,
     godWorldYear: S.godWorldYear || 1
   };
@@ -99,13 +98,13 @@ function buildCyclePacket_(ctx) {
   lines.push('--- CALENDAR ---');
   lines.push('GodWorldYear: ' + cal.godWorldYear);
   lines.push('CycleOfYear: ' + cal.cycleOfYear + ' / 52');
-  lines.push('Month: ' + cal.month + ' (' + getMonthName_Packet_(cal.month) + ')');
   lines.push('CycleInMonth: ' + (S.cycleInMonth || 1));
   lines.push('Season: ' + cal.season);
   
   if (cal.holiday !== 'none') {
+    if (!S.holidayLabel) throw new Error('buildCyclePacket_: holiday label missing for ' + cal.holiday);
     var nh = S.holidayNeighborhood ? ' @ ' + S.holidayNeighborhood : '';
-    lines.push('Holiday: ' + cal.holiday + ' [' + cal.holidayPriority + ']' + nh);
+    lines.push('Holiday: ' + S.holidayLabel + ' [' + cal.holidayPriority + ']' + nh);
   } else {
     lines.push('Holiday: none');
   }
@@ -1131,19 +1130,6 @@ function getCivicContextForPacket_(ss, cycle, cal) {
   }
   
   return result;
-}
-
-
-/**
- * Helper: Get month name from number
- */
-function getMonthName_Packet_(month) {
-  var names = {
-    1: 'January', 2: 'February', 3: 'March', 4: 'April',
-    5: 'May', 6: 'June', 7: 'July', 8: 'August',
-    9: 'September', 10: 'October', 11: 'November', 12: 'December'
-  };
-  return names[month] || 'Unknown';
 }
 
 

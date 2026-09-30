@@ -25,6 +25,7 @@ Grep here before grepping the tree. Each row: file · one-line purpose · verdic
 
 | File | Purpose | Verdict |
 |------|---------|---------|
+| **[[2026-09-30-agy-task6-diff]]** | Adversarial diff review of `67a8a912` + `d257bd99` (engine.254 Task 6): fallbacks, status-vs-case sync, hospital P, judicial writer, rng isolation, tests, downstream readers | `SHIP` — engine-sheet spot-checked the restore and GAME-exemption claims against code |
 | **[[2026-09-30-agy-holiday-wave1-diff]]** | Adversarial diff review of `df3173cd` (engine.273 wave 1): table metadata, month/First Friday/Creation Day readers, packet and summary text parsers, fallbacks, tests | `adopt` — core SHIP; 3 missed readers fixed (desk folders, season feel, handoff Month line); source-text test to wave 2 |
 | **[[2026-09-30-agy-task7b-diff]]** | Adversarial diff review of `f79bbe20` (engine.254 Task 7b): validator history, missing determinism test, tautological assertion, binomial unit guard; moved body, rng counts, numerics verified | `adopt` — HOLD items fixed in the follow-up commit; core SHIP |
 | **[[2026-09-30-kimi-task6-cut]]** | Adversarial review of the engine.254 Task 6 cut (detained gates, case carrier): stranded custody, left-the-city resurrection, GAME re-assert, gate completeness, P resolution order, L–P headers, death order, receipt shapes | `adopt` — REVISE, 12 findings folded; wider-than-illness gating to the builder |

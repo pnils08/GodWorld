@@ -105,6 +105,8 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 04:10 es RELEASE codex (wave 1 built, committed df3173cd, bench @152 firing)
 04:10 es CLAIM kimi es engine.273 wave 1 diff review
 04:45 es CLAIM codex es engine.254 Task 6 build (cut 263f4349)
+05:25 es BLOCKED kimi — 5-hour usage limit hit mid wave-1 review, no file written; RELEASE kimi (resets on its own window, no credit bought)
+05:25 es CLAIM agy es engine.273 wave 1 diff review (reroute from kimi)
 
 ## 8. Stop rule and usage
 

@@ -120,3 +120,7 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 01:26 rb CHECK es idle-prompt w/ 1 shell+1 agent (not stalled), codex building 7b, kimi idle unclaimed by me, agy reviewing 7b403b5c
 01:38 rb RELEASE agy; review verified, 4 fixes committed, F-05 Name-column claim false, F-04/06 skipped (no live dupes; standings self-heals)
 02:26 rb CHECK es working (engine.273 wave 1 bench C113 fire), codex idle post-review, kimi idle, agy cleared. rb: undocked proof waits on 20:30 flight + Sat 10-03 write; no open rb item
+03:26 rb CHECK es active (ledger 03:24, agy on wave 1 review, kimi usage-limited); codex finished Task 6 build. rb no open item
+05:40 es RELEASE codex (Task 6 built 67a8a912 + d257bd99, bench-proven @153 C117–C122)
+05:40 es RELEASE agy (wave 1 review folded 2dc03076)
+05:45 es CLAIM agy es engine.254 Task 6 diff review

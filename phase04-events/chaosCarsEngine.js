@@ -188,6 +188,16 @@ function pickCitizenTarget_(rng, ctx) {
   }
   if (!eligible.length) return null;
   var r = eligible[Math.floor(rng() * eligible.length)];
+  return chaosCitizenTargetAt_(ctx, r);
+}
+
+function chaosCitizenTargetAt_(ctx, r) {
+  var header = ctx.ledger.headers;
+  var rows = ctx.ledger.rows;
+  var iPop = header.indexOf('POPID');
+  var iTier = header.indexOf('Tier');
+  var iNb = header.indexOf('Neighborhood');
+  var iStatus = header.indexOf('Status');
   var row = rows[r];
   // engine.67 step 8: carry the target's life-state so the outcome roll can
   // gate what can happen TO them (deriveLifeState_ — citizenContextBuilder).
@@ -290,6 +300,54 @@ function pickNeighborhoodTarget_(rng, ctx) {
   var names = loadNeighborhoodNames_(ctx);
   if (!names.length) return null;
   return { neighborhood: pickFromArrayChaos_(rng, names) };
+}
+
+// Task 7: place demand-vehicle events by the city's hood numbers. A citizen
+// scope event still names one tracked resident when a positive weight exists.
+function pickCareJusticeTarget_(rng, ctx, scope, vehicle) {
+  var demand = ctx.summary && ctx.summary.careJusticeDemand;
+  if (!demand || !demand.hoods) throw new Error('chaos_cars: S.careJusticeDemand missing');
+  var hoods = Object.keys(demand.hoods);
+  var indicesByHood = {};
+  if (scope === 'citizen') {
+    var ledger = ctx.ledger;
+    if (!ledger || !ledger.headers || !ledger.rows) throw new Error('chaos_cars: ctx.ledger missing');
+    var iHood = ledger.headers.indexOf('Neighborhood');
+    var iStatus = ledger.headers.indexOf('Status');
+    if (iHood < 0) throw new Error('chaos_cars: Simulation_Ledger.Neighborhood missing');
+    for (var i = 0; i < ledger.rows.length; i++) {
+      var row = ledger.rows[i];
+      if (iStatus >= 0) {
+        var status = String(row[iStatus] || '').trim().toLowerCase();
+        if (status === 'deceased' || status === 'inactive' || status === 'traded' || status === 'pending') continue;
+      }
+      var rowHood = String(row[iHood] || '').trim();
+      if (!indicesByHood[rowHood]) indicesByHood[rowHood] = [];
+      indicesByHood[rowHood].push(i);
+    }
+  }
+  var weightByHood = {};
+  var total = 0;
+  for (var h = 0; h < hoods.length; h++) {
+    var hood = hoods[h];
+    var record = demand.hoods[hood];
+    var base = vehicle.name === 'ambulance' ? record.sick : record.charges;
+    if (vehicle.name === 'oari_van' && record.oariDeployed !== true) base = 0;
+    var weight = scope === 'citizen' ? base * record.trackedShare : base;
+    if (!isFinite(weight) || weight < 0) {
+      throw new Error('chaos_cars: invalid careJusticeDemand weight for ' + hood);
+    }
+    weightByHood[hood] = weight;
+    total += weight;
+  }
+  // weightedPickChaos_ deliberately has a uniform zero-weight fallback; demand
+  // placement must not use it when the city has no eligible weight.
+  if (!(total > 0)) return null;
+  var chosen = weightedPickChaos_(rng, hoods, function(name) { return weightByHood[name]; });
+  if (scope === 'neighborhood') return { neighborhood: chosen };
+  var candidates = indicesByHood[chosen] || [];
+  if (!candidates.length) throw new Error('chaos_cars: careJusticeDemand trackedShare mismatch for ' + chosen);
+  return chaosCitizenTargetAt_(ctx, pickFromArrayChaos_(rng, candidates));
 }
 
 // ── scope writebacks (T3.8 / T3.9 / T3.10) ───────────────────────────────────
@@ -547,7 +605,11 @@ function resolveChaosNeighborhoodFold_(ctx) {
 
 // ── orchestrator (T3.12 + T5.1) ──────────────────────────────────────────────
 
-function pickTargetByScope_(rng, ctx, scope) {
+function pickTargetByScope_(rng, ctx, scope, vehicle) {
+  if (vehicle && (vehicle.name === 'cop_car' || vehicle.name === 'ambulance' || vehicle.name === 'oari_van') &&
+      (scope === 'citizen' || scope === 'neighborhood')) {
+    return pickCareJusticeTarget_(rng, ctx, scope, vehicle);
+  }
   if (scope === 'citizen') return pickCitizenTarget_(rng, ctx);
   if (scope === 'business') return pickBusinessTarget_(rng, ctx);
   if (scope === 'neighborhood') return pickNeighborhoodTarget_(rng, ctx);
@@ -569,13 +631,14 @@ function runChaosCarsEngine_(ctx) {
 
   if (!ctx.summary.chaosCarsEvents) ctx.summary.chaosCarsEvents = [];
   if (!ctx.summary.tier1ChaosEvents) ctx.summary.tier1ChaosEvents = [];
+  if (!ctx.summary.careJusticeDemand) throw new Error('chaos_cars: S.careJusticeDemand missing');
   var friction = [];
 
   var n = pickEventCount_(rng);
   for (var i = 0; i < n; i++) {
     var vehicle = pickVehicle_(rng, configs);
     var scope = pickFromArrayChaos_(rng, vehicle.scopes);
-    var target = pickTargetByScope_(rng, ctx, scope);
+    var target = pickTargetByScope_(rng, ctx, scope, vehicle);
     if (!target) { friction.push('event ' + i + ': empty target pool for scope ' + scope + ' (vehicle ' + vehicle.name + ')'); continue; }
 
     var outcome = rollOutcome_(rng, vehicle, scope, target); // engine.67 step 8: target-aware
@@ -886,6 +949,8 @@ if (typeof module !== 'undefined' && module.exports) {
     runChaosShip_: runChaosShip_,
     chaosShipFactor_: chaosShipFactor_,
     writeCitizenEvent_: writeCitizenEvent_,
+    pickTargetByScope_: pickTargetByScope_,
+    pickCareJusticeTarget_: pickCareJusticeTarget_,
     runChaosCarsEngine_: runChaosCarsEngine_
   };
 }

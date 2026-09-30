@@ -8,10 +8,12 @@
 // ── wire clasped utilities/ globals into Node global scope (Apps Script flat namespace) ──
 const cfg = require('../utilities/chaosCarsConfig');
 const decay = require('../utilities/chaosCarsDecay');
+const { makeDemandFixture_ } = require('../scripts/careJusticeService.test.js');
 global.validateOutcome = cfg.validateOutcome;
 global.loadChaosCarsConfig_ = cfg.loadChaosCarsConfig_;
 global.validateAllChaosConfigs_ = cfg.validateAllChaosConfigs_;
 global.chaosOutcomePool_ = cfg.chaosOutcomePool_;
+global.admitJudicialReceipt_ = require('../phase05-citizens/judicialLifecycle.js').admitJudicialReceipt_;
 global.CHAOS_SHIP_PORT_SECTORS = cfg.CHAOS_SHIP_PORT_SECTORS;
 global.chaosDecayResidualOneCycle_ = decay.chaosDecayResidualOneCycle_;
 
@@ -78,7 +80,7 @@ function makeCtx(seed) {
     rng: rngFrom(seed),
     cycle: 99,
     now: new Date(0),
-    summary: {},
+    summary: { careJusticeDemand: makeDemandFixture_('Fruitvale') },
     ledger: { headers, rows, dirty: false },
     ss: { getSheetByName: (n) => ({ getDataRange: () => ({ getValues: () => (n === 'Business_Ledger' ? bizData : nbData) }) }) }
   };

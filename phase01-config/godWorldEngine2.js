@@ -326,6 +326,7 @@ function runWorldCycle() {
   // engine.11 chaos-cars (T3.13) — stochastic event injection. Last Phase-4 step: after
   // Phase-3 demographic drift, before Phase-5 citizen engines + Phase-6 storyline weaving
   // (so chaos events are visible to arc creation + the Tier-1 cascade same cycle).
+  safePhaseCall_(ctx, 'Phase4-CareJusticeDemand', function() { runCareJusticeDemand_(ctx); });
   safePhaseCall_(ctx, 'Phase4-ChaosCars', function() { runChaosCarsEngine_(ctx); });
 
   // ═══════════════════════════════════════════════════════════
@@ -2040,6 +2041,7 @@ function runCyclePhases_(ctx) {
   // engine.11 chaos-cars (T3.13) — stochastic event injection. Last Phase-4 step: after
   // Phase-3 demographic drift, before Phase-5 citizen engines + Phase-6 storyline weaving
   // (so chaos events are visible to arc creation + the Tier-1 cascade same cycle).
+  safePhaseCall_(ctx, 'Phase4-CareJusticeDemand', function() { runCareJusticeDemand_(ctx); });
   safePhaseCall_(ctx, 'Phase4-ChaosCars', function() { runChaosCarsEngine_(ctx); });
 
   // ═══════════════════════════════════════════════════════════

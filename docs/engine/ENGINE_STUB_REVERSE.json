@@ -1,8 +1,8 @@
 {
   "generated": "2026-09-29",
   "generator": "scripts/stubEngine.js",
-  "filesScanned": 179,
-  "functionsMapped": 1497,
+  "filesScanned": 180,
+  "functionsMapped": 1507,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -17,6 +17,7 @@
         "phase02-world-state/updateTransitMetrics.js::updateTransitMetrics_Phase2_",
         "phase03-population/generateCrisisBuckets.js::generateCrisisBuckets_",
         "phase03-population/updateCrimeMetrics.js::updateCrimeMetrics_Phase3_",
+        "phase04-events/careJusticeService.js::runCareJusticeDemand_",
         "phase04-events/chaosCarsEngine.js::runChaosCarsEngine_",
         "phase04-events/faithEventsEngine.js::runFaithEventsEngine_",
         "phase04-events/worldEventsEngine.js::worldEventsEngine_",
@@ -659,6 +660,7 @@
         "phase03-population/generateCrisisSpikes.js::generateCrisisSpikes_",
         "phase03-population/updateNeighborhoodDemographics.js::updateNeighborhoodDemographics_",
         "phase04-events/buildCityEvents.js::buildCityEvents_",
+        "phase04-events/careJusticeService.js::runCareJusticeDemand_",
         "phase04-events/chaosCarsEngine.js::runChaosCarsEngine_",
         "phase04-events/chaosCarsEngine.js::writeChaosNeighborhoodStore_",
         "phase04-events/generateGameModeMicroEvents.js::generateGameModeMicroEvents_",
@@ -1137,6 +1139,7 @@
       ],
       "readers": [
         "phase03-population/updateNeighborhoodDemographics.js::updateNeighborhoodDemographics_",
+        "phase04-events/careJusticeService.js::runCareJusticeDemand_",
         "phase06-analysis/applyShockMonitor.js::applyShockMonitor_",
         "phase07-evening-media/applyStorySeeds.js::applyStorySeeds_",
         "phase10-persistence/buildCyclePacket.js::buildCyclePacket_",
@@ -1886,6 +1889,7 @@
       ],
       "readers": [
         "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
+        "phase04-events/careJusticeService.js::runCareJusticeDemand_",
         "phase04-events/generationalEventsEngine.js::checkHealthEvent_",
         "phase06-analysis/prioritizeEvents.js::prioritizeEvents_",
         "phase07-evening-media/applyStorySeeds.js::applyStorySeeds_",
@@ -2676,6 +2680,7 @@
       "readers": [
         "phase03-population/updateNeighborhoodDemographics.js::buildHoodIllnessWeights_",
         "phase03-population/updateNeighborhoodDemographics.js::driftNeighborhoodEducation_",
+        "phase04-events/careJusticeService.js::runCareJusticeDemand_",
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
         "phase05-citizens/generateCivicModeEvents.js::generateCivicModeEvents_",
         "phase05-citizens/generateMediaModeEvents.js::generateMediaModeEvents_",
@@ -2755,6 +2760,16 @@
         "phase04-events/buildCityEvents.js::buildCityEvents_"
       ],
       "readers": []
+    },
+    "careJusticeDemand": {
+      "writers": [
+        "phase04-events/careJusticeService.js::runCareJusticeDemand_"
+      ],
+      "readers": [
+        "phase04-events/careJusticeService.js::runCareJusticeDemand_",
+        "phase04-events/chaosCarsEngine.js::pickCareJusticeTarget_",
+        "phase04-events/chaosCarsEngine.js::runChaosCarsEngine_"
+      ]
     },
     "chaosBusinessFold": {
       "writers": [
@@ -4585,6 +4600,7 @@
       ],
       "readers": [
         "phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_",
+        "phase04-events/careJusticeService.js::careJusticeOariHoods_",
         "phase05-citizens/applyBusinessDynamics.test.js::ctxWith",
         "phase05-citizens/civicInitiativeEngine.js::addSwingVoter2Columns",
         "phase05-citizens/civicInitiativeEngine.js::createInitiativeTrackerSheet_",

@@ -216,6 +216,7 @@ var VEHICLE_CONFIGS = [
   },
   {
     name: 'oari_van', displayName: 'OARI response van',
+    initiativeId: 'INIT-002',
     scopes: ['citizen', 'neighborhood'], baseFrequencyWeight: 1.0,
     textureOutcomes: [
       { outcome: 'welfare_check',         weight: 0.50, severity: 'low',  lifeHistoryTag: 'Recovering', role: 'victim' },

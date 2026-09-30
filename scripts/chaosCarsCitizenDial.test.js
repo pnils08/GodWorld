@@ -14,6 +14,7 @@
 const cm = require('../utilities/citizenMemory.js');
 const comp = require('../utilities/compressLifeHistory.js');
 const dialMap = require('../utilities/citizenDialMap.js');
+const { makeDemandFixture_ } = require('./careJusticeService.test.js');
 global.Logger = { log() {} };
 global.inWorldStamp_ = () => 'C100';
 ['deserialize_', 'serialize_', 'accrueChaos_', 'applyChaosReaction_', 'newCitizen_']
@@ -35,7 +36,7 @@ function assert(label, cond, detail) {
 // minimal shared ctx.ledger with a DialState column (col index 5)
 function makeCtx() {
   return {
-    summary: { cycleRef: 'C100' },
+    summary: { cycleRef: 'C100', careJusticeDemand: makeDemandFixture_('Fruitvale') },
     ledger: {
       headers: ['POPID', 'First', 'Last', 'Neighborhood', 'LifeHistory', 'DialState', 'LastUpdated'],
       rows: [['POP-09001', 'Test', 'Citizen', 'Fruitvale', '', '', '']],
@@ -184,10 +185,10 @@ function fixedMedicalRun(failPayload) {
     receipts[0].sourceEventId === 'ambulance:' + run.recorded[0] + ':SYNTHETIC-CHAOS-CARE',
     run.error && run.error.message);
   const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
-  const expectedIds = [6, 18, 30].map(start => Array.from({ length: 8 }, (_, offset) =>
+  const expectedIds = [7, 20, 33].map(start => Array.from({ length: 8 }, (_, offset) =>
     chars.charAt(Math.floor(((((start + offset) * 17) % 97) / 97) * chars.length))).join(''));
-  assert('T4-12 fixed RNG keeps payload IDs and draw count',
-    run.draws === 39 && JSON.stringify(run.recorded) === JSON.stringify(expectedIds),
+  assert('T4-12 fixed RNG uses two target draws and stable payload IDs',
+    run.draws === 42 && JSON.stringify(run.recorded) === JSON.stringify(expectedIds),
     JSON.stringify({ draws: run.draws, recorded: run.recorded, expectedIds }));
 }
 {

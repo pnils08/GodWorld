@@ -754,6 +754,25 @@
   Sheets: Heritage_Ledger
   RNG: ctx.rng / safeRand_(ctx)
 
+### careJusticeService.js
+- **careJusticeRate_(config, key)**
+
+- **careJusticeNumber_(value, field, hood, positive)**
+
+- **careJusticeOariConfig_()**
+
+- **careJusticeOariHoods_(ctx, initiativeId)**
+  Sheets: Initiative_Tracker
+
+- **careJusticeTrackedByHood_(ctx)**
+
+- **runCareJusticeDemand_(ctx)**
+  Reads: S.absoluteCycle, S.careJusticeDemand, S.crimeMetrics, S.cycleId, S.neighborhoodDemographics, S.worldPopulation
+  Writes: S.careJusticeDemand
+  Config: ctx.config.cycleCount
+
+- **careJusticeOtherResident_(demand, trackedIntakesByHood)**
+
 ### chaosCarsEngine.js
 - **chaosChargeGravity_(outcome)**
 
@@ -775,6 +794,8 @@
 
 - **pickCitizenTarget_(rng, ctx)**
 
+- **chaosCitizenTargetAt_(ctx, r)**
+
 - **loadBusinessRows_(ctx)**
   Sheets: Business_Ledger
 
@@ -784,6 +805,9 @@
   Sheets: Neighborhood_Map
 
 - **pickNeighborhoodTarget_(rng, ctx)**
+
+- **pickCareJusticeTarget_(rng, ctx, scope, vehicle)**
+  Reads: S.careJusticeDemand
 
 - **writeCitizenEvent_(ctx, target, vehicle, outcome, cycle, text)**
   Sheets: LifeHistory_Log
@@ -806,10 +830,10 @@
   Reads: S.chaosNeighborhoodFold
   Writes: S.chaosNeighborhoodFold
 
-- **pickTargetByScope_(rng, ctx, scope)**
+- **pickTargetByScope_(rng, ctx, scope, vehicle)**
 
 - **runChaosCarsEngine_(ctx)**
-  Reads: S.absoluteCycle, S.chaosBusinessFold, S.chaosCarsEvents, S.contractSeeds, S.cycle, S.cycleId, S.hospitalEvents, S.judicialEvents, S.storySeeds, S.tier1ChaosEvents, S.weatherEvents
+  Reads: S.absoluteCycle, S.careJusticeDemand, S.chaosBusinessFold, S.chaosCarsEvents, S.contractSeeds, S.cycle, S.cycleId, S.hospitalEvents, S.judicialEvents, S.storySeeds, S.tier1ChaosEvents, S.weatherEvents
   Writes: S.chaosCarsEvents, S.hospitalEvents, S.judicialEvents, S.tier1ChaosEvents
   Config: ctx.config.cycleCount
   RNG: ctx.rng / safeRand_(ctx)
@@ -1957,6 +1981,8 @@
 - **judicialServeHeld_(c, cycle)**
 
 - **judicialResolveInvestigation_(c, cycle, rates, rng)**
+
+- **judicialClock_(c, field)**
 
 - **judicialDraw_(rng, c)**
 
@@ -4241,5 +4267,5 @@ _No top-level function declarations found (helper/constants file)._
 
 ---
 
-**Files scanned:** 179
-**Functions mapped:** 1497
+**Files scanned:** 180
+**Functions mapped:** 1507

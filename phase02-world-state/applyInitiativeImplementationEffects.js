@@ -141,6 +141,28 @@ function sportsHasOpenedBaylight_(S) {
  * @return {{factor:number, untended:number, reference:number}}
  */
 var CIVIC_TEND_STAGES_ = ['Standing', 'Delivering'];
+var INITIATIVE_PHASE_INTENSITY_ = {
+  'announced': 0,
+  'legislation-filed': 0.05,
+  'vote-scheduled': 0,
+  'vote-ready': 0.15,
+  'visioning': 0.1,
+  'visioning-complete': 0.15,
+  'design-phase': 0.2,
+  'construction-planning': 0.3,
+  'construction-active': 0.8,
+  'implementation-active': 0.8,
+  'disbursement-active': 1.0,
+  'dispatch-live': 1.0,
+  'pilot-active': 0.6,
+  'pilot_evaluation': 0.6,
+  'operational': 0.9,
+  'complete': 0.5,
+  'stalled': -0.5,
+  'blocked': -0.7,
+  'suspended': -0.6,
+  'defunded': -1.0
+};
 function civicTendFactor_(t) {
   t = t || {};
   var out = { factor: 1, untended: 0, reference: 0 };
@@ -327,28 +349,7 @@ function applyInitiativeImplementationEffects_(ctx) {
 
   var pendingHealthRelief = [];
 
-  var PHASE_INTENSITY = {
-    'announced': 0,
-    'legislation-filed': 0.05,
-    'vote-scheduled': 0,
-    'vote-ready': 0.15,
-    'visioning': 0.1,
-    'visioning-complete': 0.15,
-    'design-phase': 0.2,
-    'construction-planning': 0.3,
-    'construction-active': 0.8,
-    'implementation-active': 0.8,
-    'disbursement-active': 1.0,
-    'dispatch-live': 1.0,
-    'pilot-active': 0.6,
-    'pilot_evaluation': 0.6,
-    'operational': 0.9,
-    'complete': 0.5,
-    'stalled': -0.5,
-    'blocked': -0.7,
-    'suspended': -0.6,
-    'defunded': -1.0
-  };
+  var PHASE_INTENSITY = INITIATIVE_PHASE_INTENSITY_;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // POLICY DOMAIN → NEIGHBORHOOD EFFECTS

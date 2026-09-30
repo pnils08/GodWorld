@@ -119,7 +119,7 @@ var FRONT_MEDIA_NAMES = {
   },
   'MARINE': {
     weak: ['marine layer', 'coastal fog', 'low clouds'],
-    moderate: ['marine layer return', 'bay fog', 'June gloom'],
+    moderate: ['marine layer return', 'bay fog', 'summer gloom'],
     strong: ['persistent marine layer', 'deep fog bank', 'stubborn coastal stratus']
   },
   'WINDY': {

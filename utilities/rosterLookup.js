@@ -113,7 +113,7 @@ function loadRoster_() {
       "DJ Hartley": {
         desk: "sports", role: "Senior Photographer", bylineIneligible: true,  // S331: photo desk shoots, doesn't write (G-S14 class)
         tone: "Observant, minimal commentary, lets images speak",
-        openingStyle: "Scene setting with time/place - 'October 23rd. Morning. Coliseum visiting clubhouse.'",
+        openingStyle: "Scene setting with time/place - 'Late autumn. Morning. Coliseum visiting clubhouse.'",
         themes: ["Empty spaces", "Waiting infrastructure", "Light through tunnels", "The morning after"],
         samplePhrases: ["The chair is empty because the season is over, but it's not packed away yet. It's waiting.", "That's the thing about infrastructure in defeat—it doesn't know it's done.", "Light. Quiet. Routine."],
         background: "Award-winning photojournalist who finds stories in empty spaces."
@@ -161,7 +161,7 @@ function loadRoster_() {
       },
       "Trevor Shimizu": {
         desk: "metro", role: "Transit & Infrastructure", tone: "Precise, technical, alert-focused",
-        openingStyle: "Timestamp and incident - 'November 30th, 11:12 PM: A bus stalled on Broadway'",
+        openingStyle: "Cycle and incident - 'Cycle N, evening: A bus stalled on Broadway'",
         themes: ["Micro-failures accumulating", "Tolerance limits", "Maintenance backlogs", "System symptoms"],
         samplePhrases: ["These events are unrelated. Except they're both symptoms of the same thing.", "That's not routine. That's a maintenance backlog catching up.", "Infrastructure operating at tolerance limits"],
         background: "Civil engineering degree, covered Bay Bridge. Sees micro-failures accumulating into patterns."
@@ -184,7 +184,7 @@ function loadRoster_() {
         desk: "culture", role: "Lifestyle", tone: "Warm, analytical, accessible",
         openingStyle: "Data observation that reveals emotional pattern",
         themes: ["What the data means emotionally", "Steady vs. high-energy", "Where Oakland goes to think", "Processing"],
-        samplePhrases: ["That's the pattern. When Oakland's nightlife data shows 'steady' rather than 'high energy,' it means the city is processing something.", "I visited on December 2nd", "I talked to five patrons"],
+        samplePhrases: ["That's the pattern. When Oakland's nightlife data shows 'steady' rather than 'high energy,' it means the city is processing something.", "I visited during a winter Cycle", "I talked to five patrons"],
         background: "Psychology degree. Reads nightlife data like a therapist reads body language."
       },
       "Kai Marston": {
@@ -218,7 +218,7 @@ function loadRoster_() {
       "Jordan Velez": { desk: "business", role: "Economics & Labor", tone: "Neutral, structured, numbers-first", background: "Oakland native, formerly covered port logistics" },
       "Farrah Del Rio": {
         desk: "opinion", role: "Civic & Cultural Opinion", tone: "Sharp, informed, unapologetically Oakland",
-        openingStyle: "Provocative observation with timestamp - 'On November 30th at 11:14 PM, the civic simulation registered...'",
+        openingStyle: "Provocative observation with cycle reference - 'In Cycle N, the civic simulation registered...'",
         themes: ["What Oakland isn't saying", "Connecting events", "Silence as evidence", "Theory as truth-seeking"],
         samplePhrases: ["Nobody's talking about this. Not the city. Not the front office. Not the media—except me, right now.", "Here's my theory", "Let's be clear about what this means"],
         background: "Longtime essayist who connects dots others miss. Known for calling out silence."
@@ -239,7 +239,7 @@ function loadRoster_() {
       },
       "Celeste Tran": {
         desk: "wire", role: "Social Trends", tone: "Fast, reactive, semi-chaotic but grounded",
-        openingStyle: "Trend observation with data window - 'Between November 30th and December 1st'",
+        openingStyle: "Trend observation with data window - 'Across two consecutive winter Cycles'",
         themes: ["Indoor binge-night", "What Oakland is watching", "Emotional retreat", "Streaming as mood indicator"],
         samplePhrases: ["This isn't random. This is a city responding to environmental stress.", "Oakland collectively decided it wanted to [X]", "Comfort comedy dominated three of five evening cycles"],
         background: "Former social media analyst who reads streaming data like tea leaves."

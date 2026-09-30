@@ -67,7 +67,7 @@ function applyCycleRecovery_(ctx) {
   var moderateThreshold = 6;
   var heavyThreshold = 10;
 
-  var bigCelebrations = ['oaklandpride', 'artsoulfestival', 'newyearseve', 'independence'];
+  var bigCelebrations = ['newyearseve'];
   if (bigCelebrations.indexOf(holiday.toLowerCase()) !== -1) {
     lightThreshold += 3;
     moderateThreshold += 4;
@@ -80,14 +80,7 @@ function applyCycleRecovery_(ctx) {
     heavyThreshold += 3;
   }
 
-  var culturalFestivals = ['lunarnewyear', 'cincodemayo', 'diademuertos', 'juneteenth'];
-  if (culturalFestivals.indexOf(holiday.toLowerCase()) !== -1) {
-    lightThreshold += 2;
-    moderateThreshold += 2;
-    heavyThreshold += 3;
-  }
-
-  if (holiday.toLowerCase() === 'stpatricksday' || holiday.toLowerCase() === 'halloween') {
+  if (holiday.toLowerCase() === 'halloween') {
     lightThreshold += 2;
     moderateThreshold += 2;
     heavyThreshold += 2;
@@ -120,12 +113,6 @@ function applyCycleRecovery_(ctx) {
     lightThreshold -= 0;
     moderateThreshold -= 0;
     heavyThreshold -= 0;
-  }
-
-  if (holiday.toLowerCase() === 'openingday') {
-    lightThreshold += 2;
-    moderateThreshold += 3;
-    heavyThreshold += 3;
   }
 
   if (isFirstFriday) {

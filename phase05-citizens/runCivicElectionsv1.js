@@ -20,7 +20,7 @@
  *   inherit an incumbent's high-approval streak or owned scandal lifecycle.
  * 
  * Lightweight election engine for GodWorld civic positions.
- * Runs during November election window (Cycles 45-48 of even years).
+ * Runs during the election window (Cycles 45-48 of even years).
  * 
  * DESIGN PHILOSOPHY:
  * - Elections are "dramatic promotions" — simple mechanics, rich storytelling
@@ -60,7 +60,7 @@ function runCivicElections_(ctx) {
   var godWorldYear = S.godWorldYear || Math.ceil(S.absoluteCycle / 52);
   var cycle = S.absoluteCycle || ctx.config.cycleCount || 0;
   
-  // Election window: Cycles 45-48 (November)
+  // Election window: Cycles 45-48
   var inElectionWindow = (cycleOfYear >= 45 && cycleOfYear <= 48);
   
   // Only even years have elections

@@ -222,7 +222,7 @@ function generateGenericCitizenMicroEvents_(ctx) {
     Halloween: [
       "noticed spooky decorations appearing",
       "saw early costumes being worn",
-      "felt the playful October spirit"
+      "felt the playful autumn spirit"
     ],
     Easter: [
       "noticed spring decorations around",

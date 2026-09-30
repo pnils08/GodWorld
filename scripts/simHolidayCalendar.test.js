@@ -126,11 +126,43 @@ test('missing calendar data fails loudly; a pre-wave-1 flag prints as written wi
   assert(warned.length >= 1 && /pre-wave-1/.test(warned[0]));
 });
 
-test('packet calendar source has no month line or English month lookup', () => {
-  const packet = fs.readFileSync(path.join(root, 'phase10-persistence/buildCyclePacket.js'), 'utf8');
-  const calendar = packet.split("lines.push('--- CALENDAR ---');")[1].split("lines.push('');")[0];
-  assert(!/lines\.push\('Month:|January|February|March|April|May|June|July|August|September|October|November|December/.test(calendar));
-  assert(!packet.includes('getMonthName_Packet_'));
+test('rendered packet calendar lines carry no English month', () => {
+  const rows = [];
+  const packetSheet = {
+    getLastRow: () => rows.length + 1,
+    getRange: () => ({ setValues: values => rows.push(...values) })
+  };
+  const ss = { getSheetByName: name => name === 'Cycle_Packet' ? packetSheet : null };
+  const packetContext = {
+    Logger: { log: () => {} },
+    inWorldStamp_: () => 'C_SYNTHETIC',
+    requireTab_: (spreadsheet, name) => {
+      assert.strictEqual(name, 'Cycle_Packet');
+      return spreadsheet.getSheetByName(name);
+    }
+  };
+  vm.createContext(packetContext);
+  vm.runInContext(fs.readFileSync(path.join(root, 'phase10-persistence/buildCyclePacket.js'), 'utf8'), packetContext);
+  packetContext.persistHospitalLedger_ = () => null;
+  packetContext.persistJudicialLedger_ = () => null;
+
+  for (let position = 1; position <= 52; position++) {
+    const holiday = holidays.getSimHolidayDetails_(position);
+    const summary = {};
+    context.advanceSimulationCalendar_({
+      ss: { getSheetByName: () => ({}) },
+      config: { cycleCount: 104 + position },
+      summary
+    });
+    packetContext.buildCyclePacket_({ ss, summary });
+    const packet = rows[rows.length - 1][2];
+    const calendar = packet.split('--- CALENDAR ---\n')[1].split('\n\n')[0];
+    assert(calendar, 'calendar missing at position ' + position);
+    assert(!/\b(?:January|February|March|April|May|June|July|August|September|October|November|December)\b/i.test(calendar),
+      'English month in calendar at position ' + position + ': ' + calendar);
+    assert(calendar.includes('Holiday: ' + (holiday.name === 'none' ? 'none' : holiday.label)),
+      'holiday label missing at position ' + position);
+  }
 });
 
 console.log(passed + ' tests passed');

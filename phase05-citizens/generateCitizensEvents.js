@@ -1907,7 +1907,7 @@ function generateCitizensEvents_(ctx) {
   var holidayPools = {
     Thanksgiving: ["prepared for a holiday gathering", "reflected on things to be grateful for", "helped with meal preparations"],
     Holiday: ["felt the holiday spirit in the air", "wrapped up last-minute seasonal tasks", "enjoyed decorations around town"],
-    NewYear: ["reflected on the year past", "thought about resolutions ahead", "felt the fresh-start energy of January"],
+    NewYear: ["reflected on the year past", "thought about resolutions ahead", "felt the fresh-start energy of the year's first Cycle"],
     NewYearsEve: ["made plans for the evening countdown", "felt anticipation for the new year", "prepared for celebration"],
     Valentine: ["noticed Valentine's displays around town", "thought about loved ones", "felt the romantic atmosphere"],
     Halloween: ["noticed spooky decorations around town", "saw costumes appearing early", "felt the playful autumn spirit"],

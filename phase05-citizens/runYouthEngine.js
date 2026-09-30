@@ -60,7 +60,7 @@ var YOUTH_EVENT_PROBS = {
 // school-wide events feed the S326 V2-5 youth ripple emitter.
 var ACADEMIC_CALENDAR = {
   1: { period: 'winter_break_return', events: ['new semester begins', 'winter sports season'] },
-  2: { period: 'mid_winter', events: ['black history month', 'winter formal dances'] },
+  2: { period: 'mid_winter', events: ['winter formal dances'] },
   3: { period: 'spring_prep', events: ['spring break approaching', 'standardized testing'] },
   4: { period: 'spring', events: ['spring sports', 'prom season begins'] },
   5: { period: 'end_of_year', events: ['AP exams', 'spring concerts', 'senior activities'] },

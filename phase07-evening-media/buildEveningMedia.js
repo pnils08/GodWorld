@@ -123,7 +123,7 @@ function buildEveningMedia_(ctx) {
     },
     "Halloween": {
       tv: ["Halloween Horror Night", "Spooky Special", "Monster Marathon"],
-      movies: ["Shadow House", "October Dark", "Trick or Terror"],
+      movies: ["Shadow House", "Autumn Dark", "Trick or Terror"],
       streaming: "horror movie marathon"
     },
     "Valentine": {

@@ -1037,8 +1037,8 @@ function checkWedding_(ctx, popId, age, lifeHistory, cal, hasHousehold) {
   var descriptions;
   if (cal.month === 6) {
     descriptions = [
-      "celebrated a beautiful June wedding",
-      "tied the knot in a classic June ceremony",
+      "celebrated a beautiful summer wedding",
+      "tied the knot in a summer ceremony",
       "married their sweetheart in a summer garden wedding"
     ];
   } else if (cal.season === "spring") {

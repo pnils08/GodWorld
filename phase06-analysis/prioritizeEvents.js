@@ -136,33 +136,11 @@ function prioritizeEvents_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   var holidayDomainBoost = {
     // Major holidays
-    "Independence": { civic: 3, community: 3, safety: 2 },
     "Thanksgiving": { community: 4, household: 3 },
     "Holiday": { community: 3, economic: 3, household: 2 },
     "NewYear": { civic: 2, community: 2, economic: 2 },
-    "MemorialDay": { civic: 3, community: 2 },
-    "LaborDay": { economic: 3, community: 2 },
-    "VeteransDay": { civic: 4, community: 2 },
-    
-    // Cultural holidays
-    "MLKDay": { civic: 4, community: 3, culture: 3 },
-    "Juneteenth": { civic: 3, community: 4, culture: 4 },
-    "BlackHistoryMonth": { culture: 4, community: 3, civic: 2 },
-    "PrideMonth": { culture: 4, community: 4, civic: 2 },
-    "OaklandPride": { culture: 5, community: 4, civic: 2 },
-    "CincoDeMayo": { culture: 4, community: 3 },
-    "DiaDeMuertos": { culture: 5, community: 3 },
-    "IndigenousPeoplesDay": { culture: 3, civic: 3, community: 2 },
-    
-    // Oakland-specific
-    "OpeningDay": { sports: 5, community: 3, culture: 2, economic: 2 },
-    "ArtSoulFestival": { culture: 5, community: 4 },
-    
-    // Minor holidays
     "Halloween": { community: 3, culture: 2 },
-    "Valentine": { community: 2, economic: 2 },
-    "StPatricksDay": { community: 2, culture: 2 },
-    "EarthDay": { environment: 4, community: 2, civic: 2 }
+    "Valentine": { community: 2, economic: 2 }
   };
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -274,7 +252,6 @@ function prioritizeEvents_(ctx) {
     }
 
     // Opening Day special boost
-    if (holiday === "OpeningDay" && evType === "sports") score += 5;
 
     // ═══════════════════════════════════════════════════════════════════════
     // CULTURAL ACTIVITY BOOST (v2.2)
@@ -453,11 +430,6 @@ function prioritizeEvents_(ctx) {
  * - Laurel: 0.8
  * 
  * Holiday-Domain Affinity (v2.2):
- * - MLKDay → civic +4, community +3, culture +3
- * - Juneteenth → civic +3, community +4, culture +4
- * - OpeningDay → sports +5, community +3
- * - OaklandPride → culture +5, community +4
- * - EarthDay → environment +4
  * - etc.
  * 
  * Calendar Boosts (v2.2):

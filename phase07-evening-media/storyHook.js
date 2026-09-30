@@ -409,38 +409,8 @@ function storyHookEngine_(ctx) {
     ));
   }
 
-  if (holiday === "MLKDay") {
-    hooks.push(makeHook(
-      'CIVIC',
-      'West Oakland',
-      2,
-      'MLK Day: Service events, community reflection, legacy stories. Interview local leaders.',
-      null,
-      'holiday'
-    ));
-  }
 
-  if (holiday === "Juneteenth") {
-    hooks.push(makeHook(
-      'CULTURAL',
-      'West Oakland',
-      3,
-      'Juneteenth: Major celebration in West Oakland. Cultural pride, historical significance, community voices.',
-      null,
-      'holiday'
-    ));
-  }
 
-  if (holiday === "Independence") {
-    hooks.push(makeHook(
-      'COMMUNITY',
-      'Lake Merritt',
-      2,
-      'Fourth of July: Fireworks coverage, patriotic gatherings, neighborhood celebrations.',
-      null,
-      'holiday'
-    ));
-  }
 
   if (holiday === "Halloween") {
     hooks.push(makeHook(
@@ -476,105 +446,15 @@ function storyHookEngine_(ctx) {
   }
 
   // Cultural holidays
-  if (holiday === "CincoDeMayo") {
-    hooks.push(makeHook(
-      'CULTURAL',
-      'Fruitvale',
-      3,
-      'Cinco de Mayo: Fruitvale celebrations peak. Mariachi, street festivals, cultural pride. Photo essay opportunity.',
-      null,
-      'holiday'
-    ));
-  }
 
-  if (holiday === "DiaDeMuertos") {
-    hooks.push(makeHook(
-      'CULTURAL',
-      'Fruitvale',
-      3,
-      'Día de los Muertos: Altars, processions, cemetery gatherings in Fruitvale. Deeply meaningful visual story.',
-      null,
-      'holiday'
-    ));
-  }
 
-  if (holiday === "PrideMonth") {
-    hooks.push(makeHook(
-      'CULTURAL',
-      'Downtown',
-      2,
-      'Pride Month begins: Rainbow flags appear. Preview Oakland Pride, community voices, LGBTQ+ features.',
-      null,
-      'holiday'
-    ));
-  }
 
-  if (holiday === "BlackHistoryMonth") {
-    hooks.push(makeHook(
-      'CULTURAL',
-      'West Oakland',
-      2,
-      'Black History Month: Educational events, cultural programming, historical features. Oakland\'s rich heritage.',
-      null,
-      'holiday'
-    ));
-  }
 
-  if (holiday === "IndigenousPeoplesDay") {
-    hooks.push(makeHook(
-      'CIVIC',
-      '',
-      2,
-      'Indigenous Peoples Day: Native heritage observances, land acknowledgment, community events.',
-      null,
-      'holiday'
-    ));
-  }
 
   // Oakland-specific holidays
-  if (holiday === "OpeningDay") {
-    hooks.push(makeHook(
-      'SPORTS',
-      'Jack London',
-      3,
-      'A\'s Opening Day: Baseball returns! Tailgate scenes, fan profiles, optimism stories. Stadium atmosphere.',
-      null,
-      'holiday'
-    ));
-  }
 
-  if (holiday === "OaklandPride") {
-    hooks.push(makeHook(
-      'CULTURAL',
-      'Downtown',
-      3,
-      'Oakland Pride: Major parade and celebration. LGBTQ+ community spotlight, parade coverage, party scenes.',
-      null,
-      'holiday'
-    ));
-  }
 
-  if (holiday === "ArtSoulFestival") {
-    hooks.push(makeHook(
-      'CULTURE',
-      'Downtown',
-      3,
-      'Art + Soul Festival: Oakland\'s signature summer event. Music, art, food, community. Full coverage recommended.',
-      null,
-      'holiday'
-    ));
-  }
 
-  if (holiday === "EarthDay") {
-    hooks.push(makeHook(
-      'ENVIRONMENT',
-      'Lake Merritt',
-      2,
-      'Earth Day: Environmental events at Lake Merritt. Volunteer cleanups, sustainability features.',
-      null,
-      'holiday'
-    ));
-  }
 
   // ═══════════════════════════════════════════════════════════
   // FIRST FRIDAY HOOKS (monthly art walk)
@@ -1303,16 +1183,6 @@ function storyHookEngine_(ctx) {
     ));
   }
 
-  if (holiday === "WinterSolstice") {
-    hooks.push(makeHook(
-      'GENERAL',
-      '',
-      1,
-      'Winter solstice: Darkest day. Holiday season mood, year-end reflection.',
-      null,
-      'seasonal'
-    ));
-  }
 
   // ═══════════════════════════════════════════════════════════
   // v3.5: CITIZEN RELATIONSHIP HOOKS

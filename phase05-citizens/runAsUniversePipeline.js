@@ -373,22 +373,6 @@ function runAsUniversePipeline_(ctx) {
       "reflecting on the new year in retirement",
       "enjoying a quieter New Year's celebration"
     ],
-    'MLKDay': [
-      "reflecting on legacy and service",
-      "attending community MLK observances"
-    ],
-    'Independence': [
-      "enjoying a relaxed Fourth of July",
-      "watching fireworks with family"
-    ],
-    'MemorialDay': [
-      "honoring fallen veterans quietly",
-      "enjoying the long weekend"
-    ],
-    'LaborDay': [
-      "appreciating a career well-lived",
-      "enjoying the unofficial end of summer"
-    ],
     'Thanksgiving': [
       "gathering with family for Thanksgiving",
       "reflecting on blessings in retirement"
@@ -396,19 +380,6 @@ function runAsUniversePipeline_(ctx) {
     'Holiday': [
       "enjoying a peaceful holiday season",
       "spending time with loved ones"
-    ],
-    'OpeningDay': [
-      "feeling the familiar excitement of Opening Day",
-      "reminiscing about past seasons",
-      "watching the opener with old teammates"
-    ],
-    'Juneteenth': [
-      "celebrating Juneteenth with community",
-      "reflecting on freedom and progress"
-    ],
-    'VeteransDay': [
-      "honoring those who served",
-      "attending memorial observances"
     ]
   };
 

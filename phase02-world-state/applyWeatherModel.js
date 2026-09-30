@@ -319,11 +319,6 @@ function applyWeatherModel_(ctx) {
     var k;
     for (k in trans) if (trans.hasOwnProperty(k)) t[k] = trans[k];
 
-    if (holidayName === 'Independence') {
-      t.CLEAR = (t.CLEAR || 0) + 0.05;
-      t.MARINE = (t.MARINE || 0) * 0.8;
-      t.RAIN = (t.RAIN || 0) * 0.3;
-    }
     if (holidayName === 'Halloween') {
       t.MARINE = (t.MARINE || 0) + 0.04;
       t.OVERCAST = (t.OVERCAST || 0) + 0.02;
@@ -332,10 +327,6 @@ function applyWeatherModel_(ctx) {
       t.OVERCAST = (t.OVERCAST || 0) + 0.04;
       t.RAIN = (t.RAIN || 0) + 0.03;
       t.CLEAR = (t.CLEAR || 0) * 0.9;
-    }
-    if (holidayName === 'Juneteenth' || holidayName === 'PrideMonth' || holidayName === 'OaklandPride') {
-      t.CLEAR = (t.CLEAR || 0) + 0.03;
-      t.MARINE = (t.MARINE || 0) + 0.02;
     }
 
     if (isFF) t.CLEAR = (t.CLEAR || 0) + 0.02;
@@ -876,7 +867,6 @@ function applyWeatherModel_(ctx) {
   if (holidayPriority === 'cultural' || holidayPriority === 'oakland') {
     mood.socialInclination = Math.min(1, mood.socialInclination + 0.15);
   }
-  if (holiday === 'DiaDeMuertos') mood.nostalgiaFactor = Math.min(1, mood.nostalgiaFactor + 0.4);
   if (holiday === 'Halloween' && type === 'fog') mood.creativityBoost = Math.min(1, mood.creativityBoost + 0.2);
   if (isCreationDay) {
     mood.nostalgiaFactor = Math.min(1, mood.nostalgiaFactor + 0.3);
@@ -974,22 +964,10 @@ function applyWeatherModel_(ctx) {
   }
 
   // Holiday-specific event hooks
-  if (holiday === 'Independence' && type === 'clear') {
-    S.weatherEventPools.holiday.push(
-      'enjoyed clear weather for celebrations',
-      'felt energized under a bright summer sky'
-    );
-  }
   if (holiday === 'Halloween' && (type === 'fog' || type === 'wind' || type === 'overcast')) {
     S.weatherEventPools.holiday.push(
       'felt the atmosphere match the holiday mood',
       'noticed how the streets changed under the weather'
-    );
-  }
-  if (holiday === 'DiaDeMuertos' && (type === 'fog' || type === 'overcast')) {
-    S.weatherEventPools.holiday.push(
-      'felt the air carry a quiet weight',
-      'noticed the atmosphere honoring memory'
     );
   }
   if (isFirstFriday && mood.perfectWeather) {

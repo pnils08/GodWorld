@@ -120,9 +120,9 @@ console.log('═══ Task 5 — evening food names come from the Business_Ledg
   check('T5e fast comes from the quick-service rows only', f1.fast.length === 1 && f1.fast[0] === 'SpeedyBurger');
   const empty = mk([['BIZ-9', 'Civis Systems', 'Urban Systems Intelligence Firm', 'West Oakland']], {}, 2);
   check('T5f a ledger with no food rows serves nothing, invents nothing', empty.restaurants.length === 0 && empty.fast.length === 0 && typeof empty.trend === 'string');
-  // Lunar New Year leans on Chinatown: across seeds Chinatown must be served more often than under 'none'.
+  // engine.273 wave 2: the Lunar New Year hood lean was deleted with the dropped flag — it now draws like 'none'.
   const countHood = (holiday) => { let c = 0; for (let s = 1; s <= 60; s++) mk(BL, { holiday }, s).restaurantDetails.forEach(d => { if (d.neighborhood === 'Chinatown') c++; }); return c; };
-  check('T5g Lunar New Year leans the draw toward Chinatown', countHood('LunarNewYear') > countHood('none'));
+  check('T5g a dropped flag (LunarNewYear) no longer leans the draw — same as none', countHood('LunarNewYear') === countHood('none'));
   // First Friday lean is ledger-derived (employerCharacter), not a hood literal
   const ff = mk(BL, { isFirstFriday: true, neighborhoodState: { KONO: { employerCharacter: 'arts' } } }, 9);
   check('T5h First Friday adds the nightlife rows and still stays on the ledger', ff.restaurants.every(n => ledgerNames.has(n)) && ff.restaurants.length === 3);

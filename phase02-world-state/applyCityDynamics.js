@@ -341,9 +341,8 @@ function applyCityDynamics_(ctx) {
   }
 
   // engine.196: the holiday table's sentiment lifts were tuned against the −0.48/cycle
-  // tax engine.185 removed; the biggest days pinned 20 of 22 hoods at 1.00 (bench 0908
-  // @13: Independence, OaklandPride), erasing hood spread the way engine.188 fixed for
-  // ordinary days. One scale on the holiday-driven sentiment delta — the priority baseline,
+  // tax engine.185 removed; the biggest days pinned 20 of 22 hoods at 1.00.
+  // One scale on the holiday-driven sentiment delta — the priority baseline,
   // Creation Day and the named-holiday table, not First Friday — keeps every holiday's rank
   // and brings the top (major +0.1 stacked on +0.4/+0.5) to ~+0.30. Same shape as
   // WEATHER_MOOD_SCALE above.
@@ -409,43 +408,24 @@ function applyCityDynamics_(ctx) {
     // Major holidays (keep v2.5 values)
     if (holiday === 'NewYear') { m.nightlife *= 1.4; m.publicSpaces *= 1.3; m.retail *= 1.1; m.sentiment += 0.4; }
     if (holiday === 'NewYearsEve') { m.nightlife *= 1.8; m.publicSpaces *= 1.5; m.traffic *= 1.3; m.sentiment += 0.5; }
-    if (holiday === 'MLKDay') { m.communityEngagement *= 1.4; m.culturalActivity *= 1.3; m.publicSpaces *= 1.2; m.sentiment += 0.2; }
     if (holiday === 'Easter') { m.communityEngagement *= 1.3; m.retail *= 1.2; m.sentiment += 0.2; }
-    if (holiday === 'MemorialDay') { m.publicSpaces *= 1.3; m.traffic *= 1.2; m.tourism *= 1.2; m.communityEngagement *= 1.2; m.sentiment += 0.2; }
-    if (holiday === 'Juneteenth') { m.communityEngagement *= 1.5; m.culturalActivity *= 1.5; m.publicSpaces *= 1.4; m.nightlife *= 1.3; m.sentiment += 0.4; }
-    if (holiday === 'Independence') { m.tourism *= 1.4; m.publicSpaces *= 1.5; m.nightlife *= 1.4; m.traffic *= 1.3; m.sentiment += 0.4; }
-    if (holiday === 'LaborDay') { m.publicSpaces *= 1.3; m.traffic *= 1.2; m.communityEngagement *= 1.2; m.sentiment += 0.2; }
     if (holiday === 'Halloween') { m.nightlife *= 1.4; m.publicSpaces *= 1.3; m.communityEngagement *= 1.4; m.culturalActivity *= 1.3; m.retail *= 1.2; m.sentiment += 0.3; }
     if (holiday === 'Thanksgiving') { m.traffic *= 1.3; m.retail *= 1.3; m.communityEngagement *= 1.3; m.nightlife *= 0.7; m.sentiment += 0.3; }
     if (holiday === 'Holiday') { m.retail *= 1.5; m.nightlife *= 1.3; m.publicSpaces *= 1.3; m.communityEngagement *= 1.3; m.traffic *= 1.2; m.sentiment += 0.4; }
 
     // Cultural holidays
-    if (holiday === 'BlackHistoryMonth') { m.culturalActivity *= 1.4; m.communityEngagement *= 1.3; m.sentiment += 0.1; }
-    if (holiday === 'CincoDeMayo') { m.nightlife *= 1.5; m.culturalActivity *= 1.5; m.communityEngagement *= 1.4; m.publicSpaces *= 1.3; m.retail *= 1.2; m.sentiment += 0.3; }
-    if (holiday === 'PrideMonth') { m.culturalActivity *= 1.4; m.communityEngagement *= 1.3; m.nightlife *= 1.2; m.sentiment += 0.2; }
-    if (holiday === 'IndigenousPeoplesDay') { m.culturalActivity *= 1.3; m.communityEngagement *= 1.2; m.sentiment += 0.1; }
-    if (holiday === 'DiaDeMuertos') { m.culturalActivity *= 1.6; m.communityEngagement *= 1.5; m.publicSpaces *= 1.3; m.sentiment += 0.2; }
     if (holiday === 'Hanukkah') { m.culturalActivity *= 1.2; m.communityEngagement *= 1.2; m.retail *= 1.1; m.sentiment += 0.1; }
 
     // Oakland-specific
-    if (holiday === 'OpeningDay') { m.traffic *= 1.4; m.nightlife *= 1.4; m.publicSpaces *= 1.3; m.communityEngagement *= 1.4; m.sentiment += 0.4; }
-    if (holiday === 'OaklandPride') { m.nightlife *= 1.6; m.publicSpaces *= 1.5; m.culturalActivity *= 1.6; m.communityEngagement *= 1.5; m.tourism *= 1.3; m.sentiment += 0.5; }
-    if (holiday === 'EarthDay') { m.publicSpaces *= 1.3; m.communityEngagement *= 1.3; m.culturalActivity *= 1.2; m.sentiment += 0.2; }
-    if (holiday === 'ArtSoulFestival') { m.nightlife *= 1.5; m.publicSpaces *= 1.6; m.culturalActivity *= 1.7; m.communityEngagement *= 1.5; m.traffic *= 1.3; m.tourism *= 1.3; m.sentiment += 0.4; }
-    if (holiday === 'SummerFestival') { m.nightlife *= 1.3; m.publicSpaces *= 1.4; m.communityEngagement *= 1.3; m.sentiment += 0.3; }
 
     // Minor holidays
     if (holiday === 'Valentine') { m.nightlife *= 1.3; m.retail *= 1.3; m.sentiment += 0.2; }
-    if (holiday === 'StPatricksDay') { m.nightlife *= 1.5; m.traffic *= 1.1; m.sentiment += 0.2; }
-    if (holiday === 'PresidentsDay') { m.retail *= 1.2; m.traffic *= 0.9; }
     if (holiday === 'MothersDay' || holiday === 'FathersDay') { m.retail *= 1.3; m.communityEngagement *= 1.1; m.sentiment += 0.1; }
-    if (holiday === 'VeteransDay') { m.communityEngagement *= 1.1; m.sentiment += 0.1; }
-    if (holiday === 'PatriotDay') { m.communityEngagement *= 1.1; m.nightlife *= 0.8; m.sentiment -= 0.1; }
     if (holiday === 'BackToSchool') { m.traffic *= 1.2; m.retail *= 1.4; }
 
     // Seasonal markers
     if (holiday === 'SpringEquinox' || holiday === 'SummerSolstice') { m.publicSpaces *= 1.1; m.sentiment += 0.1; }
-    if (holiday === 'FallEquinox' || holiday === 'WinterSolstice') { m.sentiment -= 0.05; }
+    if (holiday === 'FallEquinox') { m.sentiment -= 0.05; }
 
     // Winter dampening
     if (seasonName === 'Winter') m.publicSpaces *= 0.97;

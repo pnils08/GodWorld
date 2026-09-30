@@ -315,7 +315,7 @@ assert('B2 the richest hood (Rockridge/Jack London) runs below the poorest (KONO
   let uu = 0;
   const real = { Utilities: { getUuid: () => 'uuid-' + (++uu) }, Logger: { log: () => {} }, safeRand_: ctx => ctx.rng,
     Math, JSON, Object, Array, String, Number, Date, RegExp, Error, isNaN, isFinite, parseInt, parseFloat };
-  const SCENES = { LunarNewYear: [['Chinatown', 5], ['Downtown', 2]], FirstFriday: [['Uptown', 4], ['KONO', 3]] };
+  const SCENES = { Halloween: [['Chinatown', 5], ['Downtown', 2]], FirstFriday: [['Uptown', 4], ['KONO', 3]] }; // engine.273: a kept flag
   real.hoodsWithScene_ = (ctx, tag) => (SCENES[tag] || []).map(r => r.slice());
   const sb = new Proxy(real, { has: () => true, get: (t, k) => (k in t) ? t[k] : (typeof k === 'symbol' ? undefined : function () { return undefined; }) });
   vm.createContext(sb);
@@ -324,15 +324,15 @@ assert('B2 the richest hood (Rockridge/Jack London) runs below the poorest (KONO
   const seedsFor = holiday => {
     const S = { cycleId: 114, holiday, neighborhoodDemographics: {}, demographicDrift: {}, generationalEvents: [], worldEvents: [], weather: {},
       cityDynamics: {}, worldPopulation: {}, domainPresence: {}, eventArcs: [], crimeMetrics: {},
-      canonHoods: { list: ['Chinatown', 'Downtown', 'Uptown', 'KONO'], scenes: { Chinatown: { LunarNewYear: 5 } } } };
+      canonHoods: { list: ['Chinatown', 'Downtown', 'Uptown', 'KONO'], scenes: { Chinatown: { Halloween: 5 } } } };
     const ctx = { ss: null, config: {}, summary: S, rng: () => 0.6, ledger: null };
     real.applyStorySeeds_(ctx);
     return (ctx.summary.storySeeds || []).filter(x => x.seedType === 'holiday');
   };
-  const lny = seedsFor('LunarNewYear');
-  assert('E1 Lunar New Year seeds land on the Scenes hoods, heaviest first (Chinatown, then Downtown)',
+  const lny = seedsFor('Halloween');
+  assert('E1 Halloween seeds land on the Scenes hoods, heaviest first (Chinatown, then Downtown)',
     lny.length >= 2 && lny[0].neighborhood === 'Chinatown' && lny[1].neighborhood === 'Downtown', JSON.stringify(lny.map(x => x.neighborhood)));
-  const mlk = seedsFor('MLKDay');
+  const mlk = seedsFor('Thanksgiving');
   assert('E2 a holiday no hood carries is citywide, not the old Downtown / West Oakland literals',
     mlk.length >= 1 && mlk.every(x => !x.neighborhood), JSON.stringify(mlk.map(x => x.neighborhood)));
   const src = fs.readFileSync(p, 'utf8');

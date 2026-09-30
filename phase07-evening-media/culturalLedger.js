@@ -247,44 +247,15 @@ function registerCulturalEntity_(ctx, name, roleType, journalistName, neighborho
   // HOLIDAY FAME MODIFIERS (v2.2)
   // ─────────────────────────────────────────────────────────────────────────
 
-  // Cultural holidays boost cultural figures
-  var culturalHolidays = [
-    "Juneteenth", "CincoDeMayo", "DiaDeMuertos", "LunarNewYear",
-    "MLKDay", "OaklandPride", "ArtSoulFestival", "BlackHistoryMonth"
-  ];
-  var isCulturalHoliday = false;
-  for (var chi = 0; chi < culturalHolidays.length; chi++) {
-    if (culturalHolidays[chi] === holiday) { isCulturalHoliday = true; break; }
-  }
-  if (isCulturalHoliday) {
-    if (fam.dom === "Arts" || fam.dom === "Civic" || fam.cat === "activist") {
-      fameBonus += 3;
-    }
-  }
 
   // Oakland pride boosts LGBTQ+ and community figures
-  if (holiday === "OaklandPride") {
-    if (fam.dom === "Civic" || fam.cat === "activist" || fam.cat === "community-leader") {
-      fameBonus += 4;
-    }
-  }
 
   // Art & Soul Festival boosts arts figures
-  if (holiday === "ArtSoulFestival") {
-    if (fam.dom === "Arts") {
-      fameBonus += 5;
-    }
-  }
 
   // Sports holidays boost athletes
-  if (holiday === "OpeningDay") {
-    if (fam.dom === "Sports") {
-      fameBonus += 5;
-    }
-  }
 
   // Culinary holidays boost chefs
-  var culinaryHolidays = ["Thanksgiving", "CincoDeMayo", "DiaDeMuertos", "LunarNewYear"];
+  var culinaryHolidays = ["Thanksgiving"];
   var isCulinaryHoliday = false;
   for (var clhi = 0; clhi < culinaryHolidays.length; clhi++) {
     if (culinaryHolidays[clhi] === holiday) { isCulinaryHoliday = true; break; }
@@ -694,9 +665,6 @@ function resolveLedgerPopId_(ctx, name) {
  * | Economic mood ≥65 | All | +2 |
  * | Economic mood ≤35 | All | -1 |
  * | Cultural holidays | Arts/Civic/activist | +3 |
- * | OaklandPride | Civic/activist/community | +4 |
- * | ArtSoulFestival | Arts | +5 |
- * | OpeningDay | Sports | +5 |
  * | Culinary holidays | Culinary | +3 |
  * | Major holiday | All | +1 |
  * | First Friday | Arts | +4 |

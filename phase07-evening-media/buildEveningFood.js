@@ -93,11 +93,7 @@ function buildEveningFood_(ctx) {
     }
   };
 
-  if (holiday === "LunarNewYear") lean(["Chinatown"], 3);
-  if (holiday === "CincoDeMayo" || holiday === "DiaDeMuertos") lean(["Fruitvale"], 3);
-  if (holiday === "OpeningDay") lean(sportsHoods, 3);
-  if (holiday === "Independence" || holiday === "MemorialDay" || holiday === "LaborDay") lean(["Jack London", "Lake Merritt"], 1); // waterfront summer
-  if (holiday === "OaklandPride") lean(artsHoods, 2);
+   // waterfront summer
   if (isFirstFriday) { lean(artsHoods, 2); addNightlife(); }
   if (sportsSeason === "championship") lean(sportsHoods, 3);
   else if (sportsSeason === "playoffs" || sportsSeason === "post-season") lean(sportsHoods, 2);
@@ -130,18 +126,6 @@ function buildEveningFood_(ctx) {
     trend = "Thanksgiving feast dining - family gatherings";
   } else if (holiday === "Holiday" || holiday === "NewYearsEve") {
     trend = "Holiday celebration dining - festive atmosphere";
-  } else if (holiday === "LunarNewYear") {
-    trend = "Lunar New Year dining - Chinatown spotlight";
-  } else if (holiday === "CincoDeMayo") {
-    trend = "Cinco de Mayo dining - Fruitvale fiesta";
-  } else if (holiday === "DiaDeMuertos") {
-    trend = "Día de los Muertos dining - traditional remembrance";
-  } else if (holiday === "Independence" || holiday === "MemorialDay" || holiday === "LaborDay") {
-    trend = "BBQ and outdoor dining - summer celebration";
-  } else if (holiday === "OaklandPride") {
-    trend = "Pride celebration dining - inclusive atmosphere";
-  } else if (holiday === "OpeningDay") {
-    trend = "Opening Day dining - stadium district buzzing";
   } else if (isFirstFriday) {
     trend = "First Friday arts district dining - gallery crowd";
   } else if (isCreationDay) {

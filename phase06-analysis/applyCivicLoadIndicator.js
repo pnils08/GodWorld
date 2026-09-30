@@ -255,7 +255,7 @@ function applyCivicLoadIndicator_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   
   var highStrainHolidays = [
-    "Independence", "NewYearsEve", "Halloween", "Thanksgiving"
+    "NewYearsEve", "Halloween", "Thanksgiving"
   ];
   
   if (highStrainHolidays.indexOf(holiday) >= 0) {
@@ -264,20 +264,10 @@ function applyCivicLoadIndicator_(ctx) {
     calendarFactors.push('high-strain-holiday');
   }
 
-  var moderateStrainHolidays = [
-    "OpeningDay", "OaklandPride", "ArtSoulFestival", "CincoDeMayo",
-    "Juneteenth", "DiaDeMuertos"
-  ];
   
-  if (moderateStrainHolidays.indexOf(holiday) >= 0) {
-    score += 2;
-    factors.push(holiday + ' gathering load');
-    calendarFactors.push('moderate-strain-holiday');
-  }
 
   var civicRestHolidays = [
-    "MLKDay", "PresidentsDay", "MemorialDay", "LaborDay",
-    "VeteransDay", "Holiday", "NewYear"
+    "Holiday", "NewYear"
   ];
   
   if (civicRestHolidays.indexOf(holiday) >= 0) {
@@ -324,11 +314,6 @@ function applyCivicLoadIndicator_(ctx) {
   } else if (sportsSeason === "playoffs" || sportsSeason === "post-season") {
     score += 2;
     calendarFactors.push('playoffs-load');
-  } else if (holiday === "OpeningDay") {
-    if (chaosCount >= 2) {
-      score += 1;
-      calendarFactors.push('opening-day-combined-strain');
-    }
   }
 
   // ═══════════════════════════════════════════════════════════════════════════

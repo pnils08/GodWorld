@@ -291,28 +291,15 @@ function generateGenericCitizens_(ctx) {
 
   // Travel holidays bring temporary residents / new arrivals
   var travelHolidays = [
-    "Thanksgiving", "Holiday", "NewYear", "MemorialDay",
-    "LaborDay", "Independence"
+    "Thanksgiving", "Holiday", "NewYear"
   ];
   if (travelHolidays.indexOf(holiday) >= 0) {
     baseCount += 1;
   }
 
   // Oakland celebration holidays draw new residents
-  var oaklandCelebrations = [
-    "OpeningDay", "OaklandPride", "ArtSoulFestival", "Juneteenth"
-  ];
-  if (oaklandCelebrations.indexOf(holiday) >= 0 && rand() < 0.5) {
-    baseCount += 1;
-  }
 
   // Cultural holidays may draw diaspora arrivals
-  var culturalHolidays = [
-    "CincoDeMayo", "DiaDeMuertos", "LunarNewYear", "Juneteenth"
-  ];
-  if (culturalHolidays.indexOf(holiday) >= 0 && rand() < 0.4) {
-    baseCount += 1;
-  }
 
   // First Friday draws creative types to Oakland
   if (isFirstFriday && rand() < 0.4) {
@@ -572,32 +559,17 @@ function generateGenericCitizens_(ctx) {
     }
 
     // Lunar New Year boosts Chinatown
-    if (holiday === "LunarNewYear") {
-      weights['Chinatown'] = (weights['Chinatown'] || 1.0) + 0.5;
-    }
 
-    // CincoDeMayo / DiaDeMuertos boosts Fruitvale
-    if (holiday === "CincoDeMayo" || holiday === "DiaDeMuertos") {
-      weights['Fruitvale'] = (weights['Fruitvale'] || 1.0) + 0.4;
-    }
 
     // Opening Day / Sports boosts Jack London / Downtown
-    if (holiday === "OpeningDay" || sportsSeason === "championship") {
+    if (sportsSeason === "championship") {
       weights['Jack London'] = (weights['Jack London'] || 1.0) + 0.4;
       weights['Downtown'] = (weights['Downtown'] || 1.0) + 0.3;
     }
 
     // Oakland Pride boosts Downtown / Lake Merritt
-    if (holiday === "OaklandPride") {
-      weights['Downtown'] = (weights['Downtown'] || 1.0) + 0.3;
-      weights['Lake Merritt'] = (weights['Lake Merritt'] || 1.0) + 0.3;
-      weights['Uptown'] = (weights['Uptown'] || 1.0) + 0.3;
-    }
 
     // Art & Soul boosts Downtown
-    if (holiday === "ArtSoulFestival") {
-      weights['Downtown'] = (weights['Downtown'] || 1.0) + 0.5;
-    }
 
     // High cultural activity boosts arts neighborhoods
     if (dynamics.culturalActivity >= 1.4) {
@@ -702,17 +674,7 @@ function generateGenericCitizens_(ctx) {
       var holidayContextMap = {
         "Thanksgiving": " Arrived during Thanksgiving travel.",
         "Holiday": " Holiday movement influenced this arrival.",
-        "NewYear": " New year brought a fresh start.",
-        "Independence": " Independence Day celebrations drew them in.",
-        "MemorialDay": " Arrived during Memorial Day weekend.",
-        "LaborDay": " Labor Day weekend marked their arrival.",
-        "OpeningDay": " Baseball excitement welcomed them.",
-        "OaklandPride": " Pride celebration energy drew them to Oakland.",
-        "Juneteenth": " Juneteenth celebration welcomed their arrival.",
-        "CincoDeMayo": " Cinco de Mayo festivities marked their arrival.",
-        "DiaDeMuertos": " Dia de los Muertos spirit welcomed them.",
-        "LunarNewYear": " Lunar New Year brought new beginnings.",
-        "ArtSoulFestival": " Art & Soul Festival energy drew them in."
+        "NewYear": " New year brought a fresh start."
       };
       if (holidayContextMap[holiday]) {
         worldContext += holidayContextMap[holiday];

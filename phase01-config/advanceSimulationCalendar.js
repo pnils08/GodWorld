@@ -310,7 +310,6 @@ function inWorldStamp_(ctx) {
  * B      | SimMonth    | 5           | Derived from cycle (1-12)
  * C      | SimDay      | 1           | Cycle-in-month (1-5)
  * D      | Season      | Spring      | Derived from SimMonth
- * E      | HolidayFlag | CincoDeMayo | From cycle, not date
  * F      | Notes       | Cycle 18... | Optional cycle reference
  * 
  * ============================================================================

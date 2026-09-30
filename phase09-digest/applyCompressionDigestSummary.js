@@ -175,27 +175,11 @@ function applyCompressedDigestSummary_(ctx) {
       "Holiday": "HOL",
       "NewYear": "NY",
       "NewYearsEve": "NYE",
-      "Independence": "IND",
-      "MLKDay": "MLK",
-      "PresidentsDay": "PRES",
       "Valentine": "VAL",
       "Easter": "ESTR",
-      "MemorialDay": "MEM",
-      "Juneteenth": "JUN",
-      "LaborDay": "LAB",
       "Halloween": "HWEEN",
-      "VeteransDay": "VET",
-      "CincoDeMayo": "C5M",
-      "DiaDeMuertos": "DDM",
-      "LunarNewYear": "LNY",
-      "OpeningDay": "OPN",
-      "OaklandPride": "PRDE",
-      "BlackFriday": "BFRI",
-      "StPatricksDay": "STPAT",
       "MothersDay": "MOM",
-      "FathersDay": "DAD",
-      "EarthDay": "ERTH",
-      "ArtSoulFestival": "A&S"
+      "FathersDay": "DAD"
     };
     calendarTag = holidayAbbrev[holiday] || holiday.substring(0, 4).toUpperCase();
   }
@@ -368,13 +352,6 @@ function applyCompressedDigestSummary_(ctx) {
  * 
  * hol: Holiday abbreviation
  * - TG (Thanksgiving), HOL (Holiday), NY (NewYear), NYE (NewYearsEve)
- * - IND (Independence), MLK (MLKDay), PRES (PresidentsDay)
- * - VAL (Valentine), ESTR (Easter), MEM (MemorialDay)
- * - JUN (Juneteenth), LAB (LaborDay), HWEEN (Halloween)
- * - VET (VeteransDay), C5M (CincoDeMayo), DDM (DiaDeMuertos)
- * - LNY (LunarNewYear), OPN (OpeningDay), PRDE (OaklandPride)
- * - BFRI (BlackFriday), STPAT (StPatricksDay), MOM (MothersDay)
- * - DAD (FathersDay), ERTH (EarthDay), A&S (ArtSoulFestival)
  * 
  * FF: First Friday (shown if true)
  * CD: Creation Day (shown if true)

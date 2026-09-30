@@ -297,19 +297,7 @@ function buildCityEvents_(ctx) {
     { name: "Temescal Resolution Run", neighborhood: "Temescal" }
   ];
 
-  var MLK_DAY_EVENTS = [
-    { name: "Downtown MLK March", neighborhood: "Downtown" },
-    { name: "West Oakland Dream Rally", neighborhood: "West Oakland" },
-    { name: "Fruitvale Unity Gathering", neighborhood: "Fruitvale" },
-    { name: "Lake Merritt Peace Walk", neighborhood: "Lake Merritt" }
-  ];
 
-  var LUNAR_NEW_YEAR_EVENTS = [
-    { name: "Chinatown Lunar New Year Parade", neighborhood: "Chinatown" },
-    { name: "Chinatown Lion Dance Festival", neighborhood: "Chinatown" },
-    { name: "Chinatown Firecracker Ceremony", neighborhood: "Chinatown" },
-    { name: "Downtown Asian Heritage Celebration", neighborhood: "Downtown" }
-  ];
 
   var VALENTINE_EVENTS = [
     { name: "Lake Merritt Sweetheart Stroll", neighborhood: "Lake Merritt" },
@@ -317,16 +305,7 @@ function buildCityEvents_(ctx) {
     { name: "Jack London Couples Cruise", neighborhood: "Jack London" }
   ];
 
-  var PRESIDENTS_DAY_EVENTS = [
-    { name: "Downtown Presidents Day Observance", neighborhood: "Downtown" },
-    { name: "Lake Merritt History Walk", neighborhood: "Lake Merritt" }
-  ];
 
-  var ST_PATRICKS_EVENTS = [
-    { name: "Jack London St. Patrick's Pub Crawl", neighborhood: "Jack London" },
-    { name: "Downtown Green Parade", neighborhood: "Downtown" },
-    { name: "Temescal Irish Music Night", neighborhood: "Temescal" }
-  ];
 
   var EASTER_EVENTS = [
     { name: "Lake Merritt Easter Egg Hunt", neighborhood: "Lake Merritt" },
@@ -334,18 +313,7 @@ function buildCityEvents_(ctx) {
     { name: "Fruitvale Easter Festival", neighborhood: "Fruitvale" }
   ];
 
-  var EARTH_DAY_EVENTS = [
-    { name: "Lake Merritt Environmental Fair", neighborhood: "Lake Merritt" },
-    { name: "West Oakland Sustainability Summit", neighborhood: "West Oakland" },
-    { name: "Temescal Green Market", neighborhood: "Temescal" }
-  ];
 
-  var CINCO_DE_MAYO_EVENTS = [
-    { name: "Fruitvale Cinco de Mayo Festival", neighborhood: "Fruitvale" },
-    { name: "Fruitvale Mariachi Parade", neighborhood: "Fruitvale" },
-    { name: "Downtown Cinco Celebration", neighborhood: "Downtown" },
-    { name: "Lake Merritt Mexican Heritage Day", neighborhood: "Lake Merritt" }
-  ];
 
   var MOTHERS_DAY_EVENTS = [
     { name: "Rockridge Mother's Day Brunch Walk", neighborhood: "Rockridge" },
@@ -353,18 +321,7 @@ function buildCityEvents_(ctx) {
     { name: "Piedmont Ave Mother's Day Market", neighborhood: "Piedmont Ave" }
   ];
 
-  var MEMORIAL_DAY_EVENTS = [
-    { name: "Downtown Memorial Ceremony", neighborhood: "Downtown" },
-    { name: "Mountain View Cemetery Observance", neighborhood: "Piedmont Ave" },
-    { name: "Jack London Veterans Tribute", neighborhood: "Jack London" }
-  ];
 
-  var JUNETEENTH_EVENTS = [
-    { name: "West Oakland Juneteenth Festival", neighborhood: "West Oakland" },
-    { name: "Downtown Freedom Parade", neighborhood: "Downtown" },
-    { name: "Lake Merritt Liberation Celebration", neighborhood: "Lake Merritt" },
-    { name: "Fruitvale Juneteenth Block Party", neighborhood: "Fruitvale" }
-  ];
 
   var FATHERS_DAY_EVENTS = [
     { name: "Lake Merritt Father's Day BBQ", neighborhood: "Lake Merritt" },
@@ -372,18 +329,7 @@ function buildCityEvents_(ctx) {
     { name: "Temescal Father-Child Festival", neighborhood: "Temescal" }
   ];
 
-  var INDEPENDENCE_EVENTS = [
-    { name: "Jack London Fourth of July Fireworks", neighborhood: "Jack London" },
-    { name: "Lake Merritt Independence Celebration", neighborhood: "Lake Merritt" },
-    { name: "Downtown Patriotic Parade", neighborhood: "Downtown" },
-    { name: "Temescal Red White Blue Block Party", neighborhood: "Temescal" }
-  ];
 
-  var LABOR_DAY_EVENTS = [
-    { name: "Downtown Labor Day Parade", neighborhood: "Downtown" },
-    { name: "West Oakland Workers Festival", neighborhood: "West Oakland" },
-    { name: "Jack London End of Summer Bash", neighborhood: "Jack London" }
-  ];
 
   var HALLOWEEN_EVENTS = [
     { name: "Lake Merritt Ghost Walk", neighborhood: "Lake Merritt" },
@@ -393,39 +339,10 @@ function buildCityEvents_(ctx) {
     { name: "Laurel District Spooky Stroll", neighborhood: "Laurel" }
   ];
 
-  var DIA_DE_MUERTOS_EVENTS = [
-    { name: "Fruitvale Día de los Muertos Festival", neighborhood: "Fruitvale" },
-    { name: "Fruitvale Altar Walk", neighborhood: "Fruitvale" },
-    { name: "Downtown Ofrenda Exhibition", neighborhood: "Downtown" },
-    { name: "Lake Merritt Marigold Ceremony", neighborhood: "Lake Merritt" }
-  ];
 
-  var VETERANS_DAY_EVENTS = [
-    { name: "Downtown Veterans Parade", neighborhood: "Downtown" },
-    { name: "Jack London Veterans Memorial", neighborhood: "Jack London" },
-    { name: "West Oakland Service Recognition", neighborhood: "West Oakland" }
-  ];
 
-  var OAKLAND_PRIDE_EVENTS = [
-    { name: "Downtown Oakland Pride Parade", neighborhood: "Downtown" },
-    { name: "Lake Merritt Pride Festival", neighborhood: "Lake Merritt" },
-    { name: "Uptown Pride Block Party", neighborhood: "Uptown" },
-    { name: "Jack London Rainbow Celebration", neighborhood: "Jack London" }
-  ];
 
-  var ART_SOUL_EVENTS = [
-    { name: "Downtown Art & Soul Festival Main Stage", neighborhood: "Downtown" },
-    { name: "Downtown Art & Soul Vendor Village", neighborhood: "Downtown" },
-    { name: "Downtown Art & Soul Youth Zone", neighborhood: "Downtown" },
-    { name: "Lake Merritt Art & Soul Overflow", neighborhood: "Lake Merritt" }
-  ];
 
-  var OPENING_DAY_EVENTS = [
-    { name: "Jack London Opening Day Block Party", neighborhood: "Jack London" },
-    { name: "Jack London Pre-Game Tailgate", neighborhood: "Jack London" },
-    { name: "Downtown Baseball Fever Rally", neighborhood: "Downtown" },
-    { name: "Lake Merritt Opening Day Picnic", neighborhood: "Lake Merritt" }
-  ];
 
   // ═══════════════════════════════════════════════════════════════════════════
   // FIRST FRIDAY EVENT POOLS
@@ -506,26 +423,11 @@ function buildCityEvents_(ctx) {
   if (holiday === "Holiday") addEvents_(HOLIDAY_EVENTS, 2, ["source:holiday", "pool:Holiday"]);
   if (holiday === "NewYearsEve") addEvents_(NEW_YEARS_EVE_EVENTS, 2, ["source:holiday", "pool:NewYearsEve"]);
   if (holiday === "NewYear") addEvents_(NEW_YEAR_EVENTS, 2, ["source:holiday", "pool:NewYear"]);
-  if (holiday === "MLKDay") addEvents_(MLK_DAY_EVENTS, 2, ["source:holiday", "pool:MLKDay"]);
-  if (holiday === "LunarNewYear") addEvents_(LUNAR_NEW_YEAR_EVENTS, 3, ["source:holiday", "pool:LunarNewYear"]);
   if (holiday === "Valentine") addEvents_(VALENTINE_EVENTS, 1, ["source:holiday", "pool:Valentine"]);
-  if (holiday === "PresidentsDay") addEvents_(PRESIDENTS_DAY_EVENTS, 1, ["source:holiday", "pool:PresidentsDay"]);
-  if (holiday === "StPatricksDay") addEvents_(ST_PATRICKS_EVENTS, 1, ["source:holiday", "pool:StPatricksDay"]);
   if (holiday === "Easter") addEvents_(EASTER_EVENTS, 1, ["source:holiday", "pool:Easter"]);
-  if (holiday === "EarthDay") addEvents_(EARTH_DAY_EVENTS, 1, ["source:holiday", "pool:EarthDay"]);
-  if (holiday === "CincoDeMayo") addEvents_(CINCO_DE_MAYO_EVENTS, 2, ["source:holiday", "pool:CincoDeMayo"]);
   if (holiday === "MothersDay") addEvents_(MOTHERS_DAY_EVENTS, 1, ["source:holiday", "pool:MothersDay"]);
-  if (holiday === "MemorialDay") addEvents_(MEMORIAL_DAY_EVENTS, 1, ["source:holiday", "pool:MemorialDay"]);
-  if (holiday === "Juneteenth") addEvents_(JUNETEENTH_EVENTS, 2, ["source:holiday", "pool:Juneteenth"]);
   if (holiday === "FathersDay") addEvents_(FATHERS_DAY_EVENTS, 1, ["source:holiday", "pool:FathersDay"]);
-  if (holiday === "Independence") addEvents_(INDEPENDENCE_EVENTS, 2, ["source:holiday", "pool:Independence"]);
-  if (holiday === "LaborDay") addEvents_(LABOR_DAY_EVENTS, 1, ["source:holiday", "pool:LaborDay"]);
   if (holiday === "Halloween") addEvents_(HALLOWEEN_EVENTS, 2, ["source:holiday", "pool:Halloween"]);
-  if (holiday === "DiaDeMuertos") addEvents_(DIA_DE_MUERTOS_EVENTS, 2, ["source:holiday", "pool:DiaDeMuertos"]);
-  if (holiday === "VeteransDay") addEvents_(VETERANS_DAY_EVENTS, 1, ["source:holiday", "pool:VeteransDay"]);
-  if (holiday === "OaklandPride") addEvents_(OAKLAND_PRIDE_EVENTS, 3, ["source:holiday", "pool:OaklandPride"]);
-  if (holiday === "ArtSoulFestival") addEvents_(ART_SOUL_EVENTS, 3, ["source:holiday", "pool:ArtSoulFestival"]);
-  if (holiday === "OpeningDay") addEvents_(OPENING_DAY_EVENTS, 3, ["source:holiday", "pool:OpeningDay"]);
 
   // ───────────────────────────────────────────────────────────────────────────
   // FIRST FRIDAY
@@ -680,7 +582,6 @@ function buildCityEvents_(ctx) {
   if (holidayPriority === "major" || holidayPriority === "oakland") count = Math.max(count, 4);
   if (isFirstFriday) count = Math.max(count, 4);
   if (sportsSeason === "championship") count = Math.max(count, 5);
-  if (holiday === "OaklandPride" || holiday === "ArtSoulFestival") count = Math.max(count, 5);
 
   // ═══════════════════════════════════════════════════════════════════════════
   // WEIGHTED SAMPLE WITHOUT REPLACEMENT (v2.4)
@@ -805,16 +706,7 @@ function buildCityEvents_(ctx) {
  * | Thanksgiving | 4 | 2 | Downtown, Lake Merritt, Fruitvale |
  * | Holiday | 5 | 2 | Downtown, Lake Merritt, Rockridge |
  * | NewYearsEve | 4 | 2 | Downtown, Jack London, Lake Merritt |
- * | MLKDay | 4 | 2 | Downtown, West Oakland, Fruitvale |
- * | LunarNewYear | 4 | 3 | Chinatown (3), Downtown |
- * | CincoDeMayo | 4 | 2 | Fruitvale (2), Downtown |
- * | Juneteenth | 4 | 2 | West Oakland, Downtown, Lake Merritt |
- * | Independence | 4 | 2 | Jack London, Lake Merritt, Downtown |
  * | Halloween | 5 | 2 | Lake Merritt, Temescal, Jack London |
- * | DiaDeMuertos | 4 | 2 | Fruitvale (2), Downtown |
- * | OaklandPride | 4 | 3 | Downtown, Lake Merritt, Uptown |
- * | ArtSoulFestival | 4 | 3 | Downtown (3), Lake Merritt |
- * | OpeningDay | 4 | 3 | Jack London (2), Downtown |
  *
  * FIRST FRIDAY (6 events, weight 3):
  * - Uptown, KONO, Temescal, Jack London, Downtown, Lake Merritt
@@ -832,7 +724,6 @@ function buildCityEvents_(ctx) {
  * - Major/Oakland holiday: 2+
  * - First Friday: 2+
  * - Championship: 3
- * - OaklandPride/ArtSoulFestival: 3
  *
  * OUTPUT:
  * - cityEvents: Array<string> (names only, for backwards compatibility)

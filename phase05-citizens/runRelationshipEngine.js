@@ -198,25 +198,9 @@ function runRelationshipEngine_(ctx) {
     holidayRels.push("shared New Year hopes with a friend");
     holidayRels.push("celebrated the turning of the year with others");
   }
-  if (holiday === "MLKDay") {
-    holidayRels.push("discussed legacy and justice with someone");
-    holidayRels.push("felt community bond during MLK observances");
-  }
   if (holiday === "Easter") {
     holidayRels.push("gathered with family for Easter");
     holidayRels.push("exchanged greetings with neighbors on the holiday");
-  }
-  if (holiday === "MemorialDay" || holiday === "LaborDay") {
-    holidayRels.push("enjoyed long weekend gatherings with friends");
-    holidayRels.push("shared a barbecue with neighbors");
-  }
-  if (holiday === "Juneteenth") {
-    holidayRels.push("celebrated Juneteenth with community");
-    holidayRels.push("felt cultural pride connecting with others");
-  }
-  if (holiday === "Independence") {
-    holidayRels.push("watched fireworks with friends");
-    holidayRels.push("gathered for Fourth of July celebrations");
   }
   if (holiday === "Halloween") {
     holidayRels.push("connected with neighbors during trick-or-treat");
@@ -232,32 +216,8 @@ function runRelationshipEngine_(ctx) {
   }
 
   // Cultural holidays
-  if (holiday === "CincoDeMayo") {
-    holidayRels.push("celebrated with friends at a Cinco de Mayo gathering");
-    holidayRels.push("felt cultural bonds strengthen");
-  }
-  if (holiday === "DiaDeMuertos") {
-    holidayRels.push("shared memories of loved ones with family");
-    holidayRels.push("felt connected to ancestors and community");
-  }
-  if (holiday === "PrideMonth" || holiday === "OaklandPride") {
-    holidayRels.push("celebrated pride with friends");
-    holidayRels.push("felt community solidarity during pride");
-  }
-  if (holiday === "BlackHistoryMonth") {
-    holidayRels.push("discussed heritage and history with friends");
-    holidayRels.push("attended a cultural event with community");
-  }
 
   // Oakland-specific
-  if (holiday === "OpeningDay") {
-    holidayRels.push("connected with fellow fans on Opening Day");
-    holidayRels.push("shared baseball excitement with friends");
-  }
-  if (holiday === "ArtSoulFestival") {
-    holidayRels.push("met new people at Art + Soul");
-    holidayRels.push("reconnected with friends at the festival");
-  }
 
   // Minor holidays
   if (holiday === "Valentine") {

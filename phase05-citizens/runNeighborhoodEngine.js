@@ -329,59 +329,14 @@ function runNeighborhoodEngine_(ctx) {
   var holidayNeighborhoodEvents = {};
 
   // Fruitvale holidays
-  if (holiday === "CincoDeMayo" || holiday === "DiaDeMuertos") {
-    holidayNeighborhoodEvents['Fruitvale'] = [
-      "felt the neighborhood's cultural celebration energy",
-      "noticed decorations and preparations throughout Fruitvale",
-      "heard music drifting through the streets",
-      "sensed the community's festive pride"
-    ];
-  }
 
   // West Oakland holidays
-  if (holiday === "Juneteenth" || holiday === "MLKDay" || holiday === "BlackHistoryMonth") {
-    holidayNeighborhoodEvents['West Oakland'] = [
-      "felt the neighborhood's cultural significance today",
-      "noticed community gathering for observances",
-      "sensed historical pride in the air",
-      "observed neighbors preparing for celebrations"
-    ];
-  }
 
   // Downtown/Uptown holidays
-  if (holiday === "OaklandPride" || holiday === "PrideMonth") {
-    holidayNeighborhoodEvents['Downtown'] = [
-      "noticed rainbow flags appearing in windows",
-      "felt the neighborhood's pride energy building",
-      "observed parade preparations",
-      "sensed community solidarity"
-    ];
-    holidayNeighborhoodEvents['Uptown'] = [
-      "felt Uptown's pride celebration energy",
-      "noticed the arts district embracing the festivities",
-      "observed colorful decorations appearing"
-    ];
-  }
 
   // Jack London - Opening Day
-  if (holiday === "OpeningDay") {
-    holidayNeighborhoodEvents['Jack London'] = [
-      "felt Opening Day excitement in the air",
-      "noticed fans in green and gold heading to the waterfront",
-      "observed tailgate preparations near the estuary",
-      "sensed the neighborhood's baseball fever"
-    ];
-  }
 
   // Lake Merritt holidays
-  if (holiday === "Independence" || holiday === "EarthDay") {
-    holidayNeighborhoodEvents['Lake Merritt'] = [
-      "noticed crowds gathering at the lake",
-      "felt the holiday atmosphere by the water",
-      "observed families setting up for celebrations",
-      "sensed the community energy around the lake"
-    ];
-  }
 
   // ═══════════════════════════════════════════════════════════════════════════
   // FIRST FRIDAY EVENTS (v2.2)
@@ -669,9 +624,7 @@ function runNeighborhoodEngine_(ctx) {
  * ─────────────────────────────────────────────────────────────────────────
  * Temescal       | Creative, cafes              | First Friday spillover
  * Downtown       | Urban, business              | Pride, civic events
- * Fruitvale      | Cultural, Latino heritage    | CincoDeMayo, DiaDeMuertos
  * Lake Merritt   | Lakeside, families           | July 4th, Earth Day
- * West Oakland   | Industrial, evolving         | Juneteenth, MLK, BHM
  * Laurel         | Residential, calm            | —
  * Rockridge      | Upscale, tree-lined          | —
  * Jack London    | Waterfront, nightlife        | Opening Day, arts

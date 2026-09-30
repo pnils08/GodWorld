@@ -639,68 +639,6 @@ function applyStorySeeds_(ctx) {
         { text: "Safety preparations underway for countdown festivities. Officials on alert.", domain: "SAFETY", nh: "Downtown", priority: 2 }
       ]
     },
-    "Independence": {
-      seeds: [
-        { text: "Fourth of July preparations underway. Fireworks, flags, and festivities.", domain: "COMMUNITY", nh: "Lake Merritt", priority: 2 },
-        { text: "Patriotic displays and community gatherings define the day. Local traditions.", domain: "CULTURE", nh: "", priority: 1 }
-      ]
-    },
-
-    // Cultural holidays
-    "MLKDay": {
-      seeds: [
-        { text: "Dr. King's legacy honored across Oakland. Community reflection and action.", domain: "CIVIC", nh: "Downtown", priority: 3 },
-        { text: "Service events connect residents to civil rights tradition. Local heroes.", domain: "COMMUNITY", nh: "West Oakland", priority: 2 }
-      ]
-    },
-    "Juneteenth": {
-      seeds: [
-        { text: "Juneteenth celebrations honor freedom and heritage. Oakland's Black community stories.", domain: "CULTURE", nh: "West Oakland", priority: 3 },
-        { text: "Historical significance meets contemporary meaning. Voices of celebration.", domain: "COMMUNITY", nh: "", priority: 2 }
-      ]
-    },
-    "CincoDeMayo": {
-      seeds: [
-        { text: "Cinco de Mayo festivities energize Fruitvale. Cultural pride on display.", domain: "CULTURE", nh: "Fruitvale", priority: 2 },
-        { text: "Mexican heritage celebrated across the city. Food, music, community.", domain: "COMMUNITY", nh: "Fruitvale", priority: 2 }
-      ]
-    },
-    "DiaDeMuertos": {
-      seeds: [
-        { text: "Dia de los Muertos altars honor ancestors. Fruitvale's beautiful tradition.", domain: "CULTURE", nh: "Fruitvale", priority: 3 },
-        { text: "Community remembers those who came before. Stories of loss and love.", domain: "COMMUNITY", nh: "Fruitvale", priority: 2 }
-      ]
-    },
-    "LunarNewYear": {
-      seeds: [
-        { text: "Lunar New Year celebrations transform Chinatown. Cultural renewal.", domain: "CULTURE", nh: "Chinatown", priority: 3 },
-        { text: "Red lanterns and lion dances mark the new year. Tradition meets modernity.", domain: "COMMUNITY", nh: "Chinatown", priority: 2 }
-      ]
-    },
-
-    // Oakland-specific holidays (v3.4: Generalized sports references)
-    "OpeningDay": {
-      seeds: [
-        { text: "Opening Day brings sports fever to Oakland. Season begins with optimism.", domain: "SPORTS", nh: "Jack London", priority: 3 },
-        { text: "Fans flood the waterfront district. Economic and emotional energy.", domain: "BUSINESS", nh: "Jack London", priority: 2 },
-        { text: "Faithful gather for another season. Hope springs eternal.", domain: "SPORTS", nh: "Jack London", priority: 2 }
-      ]
-    },
-    "OaklandPride": {
-      seeds: [
-        { text: "Oakland Pride celebrates LGBTQ+ community. Rainbow energy downtown.", domain: "CULTURE", nh: "Downtown", priority: 3 },
-        { text: "Inclusive celebration draws crowds to Lake Merritt. Love wins.", domain: "COMMUNITY", nh: "Lake Merritt", priority: 2 },
-        { text: "Local businesses show support during Pride. Rainbow storefronts.", domain: "BUSINESS", nh: "Uptown", priority: 2 }
-      ]
-    },
-    "ArtSoulFestival": {
-      seeds: [
-        { text: "Art & Soul Festival takes over downtown. Oakland's creative heart beats.", domain: "CULTURE", nh: "Downtown", priority: 3 },
-        { text: "Music, art, and community converge. Festival stories emerging.", domain: "COMMUNITY", nh: "Downtown", priority: 2 }
-      ]
-    },
-
-    // Minor holidays
     "Valentine": {
       seeds: [
         { text: "Valentine's Day romance and commerce. Who's celebrating love?", domain: "BUSINESS", nh: "", priority: 1 }
@@ -716,23 +654,6 @@ function applyStorySeeds_(ctx) {
       seeds: [
         { text: "Easter celebrations gather families. Spring traditions observed.", domain: "COMMUNITY", nh: "", priority: 1 }
       ]
-    },
-    "MemorialDay": {
-      seeds: [
-        { text: "Memorial Day honors fallen service members. Oakland remembers.", domain: "CIVIC", nh: "", priority: 2 },
-        { text: "Summer unofficially begins. Weekend getaway stories.", domain: "COMMUNITY", nh: "", priority: 1 }
-      ]
-    },
-    "LaborDay": {
-      seeds: [
-        { text: "Labor Day celebrates workers. Union stories and labor history.", domain: "CIVIC", nh: "West Oakland", priority: 2 },
-        { text: "End of summer marked with gatherings. Last hurrah before fall.", domain: "COMMUNITY", nh: "", priority: 1 }
-      ]
-    },
-    "VeteransDay": {
-      seeds: [
-        { text: "Veterans Day honors those who served. Local veteran stories.", domain: "CIVIC", nh: "", priority: 2 }
-      ]
     }
   };
 
@@ -740,9 +661,7 @@ function applyStorySeeds_(ctx) {
   if (holiday !== "none" && holidaySeeds[holiday]) {
     // engine.240h: the bank's `nh` literals are ignored — a holiday seed lands on the hoods the
     // holiday's authored Scenes name (heaviest first, one per seed), citywide when none carry it.
-    // The bank reproduced real Oakland's demographic geography in code (LunarNewYear → Chinatown,
-    // Juneteenth → West Oakland, DiaDeMuertos → Fruitvale); the same pairs now come from the sheet
-    // where canon put them, and a holiday with no tag no longer invents a place.
+    // A holiday with no scene tag remains citywide.
     var hsList = holidaySeeds[holiday].seeds;
     var holHoods = sceneHoodsFor_(holiday);
     for (var hsi = 0; hsi < hsList.length; hsi++) {

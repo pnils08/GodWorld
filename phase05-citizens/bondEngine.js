@@ -782,10 +782,6 @@ function updateExistingBonds_(ctx) {
     }
 
     // Alliance bonds strengthen during community celebrations
-    var communityHolidays = ['Juneteenth', 'MLKDay', 'OaklandPride', 'ArtSoulFestival'];
-    if (bond.bondType === BOND_TYPES.ALLIANCE && communityHolidays.indexOf(holiday) >= 0) {
-      intensity += 0.5;
-    }
 
     // Professional bonds strengthen on First Friday (networking)
     if (bond.bondType === BOND_TYPES.PROFESSIONAL && isFirstFriday) {

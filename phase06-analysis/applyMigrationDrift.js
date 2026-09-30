@@ -277,14 +277,10 @@ function applyMigrationDrift_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // HOLIDAY EFFECTS
   // ═══════════════════════════════════════════════════════════════════════════
-  var travelHolidays = ['Thanksgiving', 'Holiday', 'NewYear', 'MemorialDay', 'LaborDay', 'Independence'];
+  var travelHolidays = ['Thanksgiving', 'Holiday', 'NewYear'];
   if (travelHolidays.indexOf(holiday) >= 0) { drift += rSym(15); factors.push(holiday + '-travel'); }
 
-  var gatheringHolidays = ['OpeningDay', 'OaklandPride', 'ArtSoulFestival', 'Juneteenth', 'CincoDeMayo', 'DiaDeMuertos'];
-  if (gatheringHolidays.indexOf(holiday) >= 0) { drift += rInt(8); factors.push(holiday + '-gathering-inflow'); }
 
-  var culturalVisitorHolidays = ['DiaDeMuertos', 'CincoDeMayo', 'Juneteenth', 'BlackHistoryMonth', 'PrideMonth', 'OaklandPride'];
-  if (culturalVisitorHolidays.indexOf(holiday) >= 0) { drift += rInt(5); factors.push('cultural-visitor-inflow'); }
 
   if (holidayPriority === 'major') { drift += rSym(10); factors.push('major-holiday-movement'); }
   else if (holidayPriority === 'oakland') { drift += rInt(6); factors.push('oakland-holiday-inflow'); }
@@ -316,7 +312,6 @@ function applyMigrationDrift_(ctx) {
   }
   addSportsDrift_(sportsPhase);
 
-  if (holiday === 'OpeningDay') { drift += rInt(10); factors.push('opening-day-crowd'); }
 
   // ═══════════════════════════════════════════════════════════════════════════
   // CULTURAL ACTIVITY / COMMUNITY

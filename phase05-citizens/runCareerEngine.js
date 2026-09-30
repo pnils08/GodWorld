@@ -777,11 +777,6 @@ function runCareerEngine_(ctx) {
   var holidayCareer = [];
 
   // Long weekend holidays
-  if (holiday === "MemorialDay" || holiday === "LaborDay" || holiday === "Independence") {
-    holidayCareer.push("enjoyed the long weekend break from work");
-    holidayCareer.push("wrapped up tasks before the holiday");
-    holidayCareer.push("noticed lighter office attendance before the holiday");
-  }
 
   // Thanksgiving
   if (holiday === "Thanksgiving") {
@@ -811,10 +806,6 @@ function runCareerEngine_(ctx) {
   }
 
   // Black Friday (day after Thanksgiving)
-  if (holiday === "BlackFriday") {
-    holidayCareer.push("experienced the retail rush");
-    holidayCareer.push("worked extra hours during the shopping surge");
-  }
 
   // Back to school
   if (holiday === "BackToSchool") {
@@ -1004,8 +995,7 @@ function runCareerEngine_(ctx) {
     else if (holidayPriority === "minor") chance += 0.005;
 
     // Long weekend holidays boost (v2.2)
-    if (holiday === "MemorialDay" || holiday === "LaborDay" ||
-        holiday === "Thanksgiving" || holiday === "Independence") {
+    if (holiday === "Thanksgiving") {
       chance += 0.008;
     }
 

@@ -161,12 +161,6 @@ function applyChaosCategoryWeights_(ctx) {
     w[CAT.MICRO_CRIME] *= 1.3;
   }
 
-  if (holiday === "MLKDay") {
-    w[CAT.CIVIC] *= 1.6;
-    w[CAT.PROTEST] *= 1.4;
-    w[CAT.COMMUNITY] *= 1.4;
-    w[CAT.MEETING] *= 1.3;
-  }
 
   if (holiday === "Easter") {
     w[CAT.COMMUNITY] *= 1.4;
@@ -174,36 +168,9 @@ function applyChaosCategoryWeights_(ctx) {
     w[CAT.MEETING] *= 1.2;
   }
 
-  if (holiday === "MemorialDay") {
-    w[CAT.COMMUNITY] *= 1.4;
-    w[CAT.RESTAURANT] *= 1.3;
-    w[CAT.ACCIDENT] *= 1.2;
-    w[CAT.CIVIC] *= 1.2;
-  }
 
-  if (holiday === "Juneteenth") {
-    w[CAT.CIVIC] *= 1.5;
-    w[CAT.PROTEST] *= 1.3;
-    w[CAT.COMMUNITY] *= 1.5;
-    w[CAT.CELEBRITY] *= 1.3;
-    w[CAT.RESTAURANT] *= 1.2;
-  }
 
-  if (holiday === "Independence") {
-    w[CAT.PROTEST] *= 1.7;
-    w[CAT.CELEBRITY] *= 1.4;
-    w[CAT.SPORTS] *= 1.6;
-    w[CAT.NEAR_MISS] *= 1.3;  // Fireworks
-    w[CAT.COMMUNITY] *= 1.4;
-    w[CAT.ACCIDENT] *= 1.2;
-  }
 
-  if (holiday === "LaborDay") {
-    w[CAT.COMMUNITY] *= 1.4;
-    w[CAT.RESTAURANT] *= 1.3;
-    w[CAT.ACCIDENT] *= 1.2;
-    w[CAT.CIVIC] *= 1.2;
-  }
 
   if (holiday === "Halloween") {
     w[CAT.COMMUNITY] *= 1.5;
@@ -233,40 +200,10 @@ function applyChaosCategoryWeights_(ctx) {
   // CULTURAL HOLIDAY MULTIPLIERS
   // ═══════════════════════════════════════════════════════════════════════════
 
-  if (holiday === "BlackHistoryMonth") {
-    w[CAT.CIVIC] *= 1.4;
-    w[CAT.COMMUNITY] *= 1.3;
-    w[CAT.MEETING] *= 1.2;
-    w[CAT.CELEBRITY] *= 1.2;
-  }
 
-  if (holiday === "CincoDeMayo") {
-    w[CAT.COMMUNITY] *= 1.5;
-    w[CAT.RESTAURANT] *= 1.5;
-    w[CAT.CELEBRITY] *= 1.2;
-    w[CAT.MICRO_CRIME] *= 1.2;
-    w[CAT.ACCIDENT] *= 1.1;
-  }
 
-  if (holiday === "PrideMonth") {
-    w[CAT.COMMUNITY] *= 1.4;
-    w[CAT.CIVIC] *= 1.3;
-    w[CAT.CELEBRITY] *= 1.3;
-    w[CAT.PROTEST] *= 1.2;
-  }
 
-  if (holiday === "IndigenousPeoplesDay") {
-    w[CAT.CIVIC] *= 1.4;
-    w[CAT.COMMUNITY] *= 1.3;
-    w[CAT.PROTEST] *= 1.2;
-  }
 
-  if (holiday === "DiaDeMuertos") {
-    w[CAT.COMMUNITY] *= 1.5;
-    w[CAT.CIVIC] *= 1.2;
-    w[CAT.CELEBRITY] *= 1.2;
-    w[CAT.RESTAURANT] *= 1.2;
-  }
 
   if (holiday === "Hanukkah") {
     w[CAT.COMMUNITY] *= 1.3;
@@ -277,43 +214,10 @@ function applyChaosCategoryWeights_(ctx) {
   // OAKLAND-SPECIFIC HOLIDAY MULTIPLIERS
   // ═══════════════════════════════════════════════════════════════════════════
 
-  if (holiday === "OpeningDay") {
-    w[CAT.SPORTS] *= 2.0;
-    w[CAT.RESTAURANT] *= 1.4;
-    w[CAT.CELEBRITY] *= 1.4;
-    w[CAT.COMMUNITY] *= 1.3;
-    w[CAT.NEAR_MISS] *= 1.2;
-  }
 
-  if (holiday === "OaklandPride") {
-    w[CAT.COMMUNITY] *= 1.6;
-    w[CAT.CIVIC] *= 1.4;
-    w[CAT.CELEBRITY] *= 1.4;
-    w[CAT.RESTAURANT] *= 1.3;
-    w[CAT.PROTEST] *= 1.2;
-  }
 
-  if (holiday === "EarthDay") {
-    w[CAT.CIVIC] *= 1.4;
-    w[CAT.COMMUNITY] *= 1.3;
-    w[CAT.PROTEST] *= 1.2;
-    w[CAT.MEETING] *= 1.2;
-  }
 
-  if (holiday === "ArtSoulFestival") {
-    w[CAT.COMMUNITY] *= 1.6;
-    w[CAT.CELEBRITY] *= 1.5;
-    w[CAT.RESTAURANT] *= 1.4;
-    w[CAT.MICRO_CRIME] *= 1.2;
-    w[CAT.NEAR_MISS] *= 1.2;
-  }
 
-  if (holiday === "SummerFestival") {
-    w[CAT.COMMUNITY] *= 1.4;
-    w[CAT.RESTAURANT] *= 1.3;
-    w[CAT.CELEBRITY] *= 1.2;
-    w[CAT.NEAR_MISS] *= 1.1;
-  }
 
   // ═══════════════════════════════════════════════════════════════════════════
   // MINOR HOLIDAY MULTIPLIERS
@@ -325,17 +229,7 @@ function applyChaosCategoryWeights_(ctx) {
     w[CAT.BUSINESS] *= 1.2;  // Retail
   }
 
-  if (holiday === "StPatricksDay") {
-    w[CAT.RESTAURANT] *= 1.5;
-    w[CAT.ACCIDENT] *= 1.3;
-    w[CAT.MICRO_CRIME] *= 1.2;
-    w[CAT.NEAR_MISS] *= 1.2;
-  }
 
-  if (holiday === "PresidentsDay") {
-    w[CAT.CIVIC] *= 1.2;
-    w[CAT.BUSINESS] *= 1.2;
-  }
 
   if (holiday === "MothersDay" || holiday === "FathersDay") {
     w[CAT.RESTAURANT] *= 1.4;
@@ -343,16 +237,7 @@ function applyChaosCategoryWeights_(ctx) {
     w[CAT.BUSINESS] *= 1.2;
   }
 
-  if (holiday === "VeteransDay") {
-    w[CAT.CIVIC] *= 1.4;
-    w[CAT.MEETING] *= 1.3;
-  }
 
-  if (holiday === "PatriotDay") {  // 9/11
-    w[CAT.CIVIC] *= 1.4;
-    w[CAT.MEETING] *= 1.2;
-    w[CAT.COMMUNITY] *= 1.2;
-  }
 
   if (holiday === "BackToSchool") {
     w[CAT.SCHOOL] *= 1.6;
@@ -361,8 +246,7 @@ function applyChaosCategoryWeights_(ctx) {
   }
 
   // Seasonal markers (equinoxes/solstices)
-  if (holiday === "SpringEquinox" || holiday === "FallEquinox" ||
-      holiday === "SummerSolstice" || holiday === "WinterSolstice") {
+  if (holiday === "SpringEquinox" || holiday === "FallEquinox" || holiday === "SummerSolstice") {
     w[CAT.WEATHER] *= 1.2;
     w[CAT.COMMUNITY] *= 1.1;
   }

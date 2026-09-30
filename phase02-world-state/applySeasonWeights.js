@@ -136,11 +136,6 @@ function applySeasonalWeights_(ctx) {
     w.economicWeight *= 1.4;  // Peak retail
   }
 
-  if (holiday === "Independence") {
-    w.eventWeight *= 2.0;
-    w.nightlifeWeight *= 1.4;
-    w.civicWeight *= 1.3;
-  }
 
   if (holiday === "NewYear") {
     w.eventWeight *= 1.8;
@@ -168,12 +163,6 @@ function applySeasonalWeights_(ctx) {
     w.culturalWeight *= 1.2;
   }
 
-  if (holiday === "LaborDay" || holiday === "MemorialDay") {
-    w.eventWeight *= 1.4;
-    w.nightlifeWeight *= 1.3;
-    w.schoolWeight *= 0.3;
-    w.civicWeight *= 1.2;
-  }
 
   if (holiday === "Easter") {
     w.eventWeight *= 1.3;
@@ -185,67 +174,18 @@ function applySeasonalWeights_(ctx) {
   // SPECIFIC HOLIDAY MULTIPLIERS (Civic/Remembrance)
   // ═══════════════════════════════════════════════════════════════════════════
 
-  if (holiday === "MLKDay") {
-    w.civicWeight *= 1.5;
-    w.eventWeight *= 1.2;
-    w.schoolWeight *= 0.5;
-    w.communityWeight *= 1.4;
-  }
 
-  if (holiday === "Juneteenth") {
-    w.civicWeight *= 1.5;
-    w.eventWeight *= 1.4;
-    w.culturalWeight *= 1.5;
-    w.communityWeight *= 1.5;
-    w.nightlifeWeight *= 1.2;
-  }
 
-  if (holiday === "VeteransDay") {
-    w.civicWeight *= 1.4;
-    w.eventWeight *= 1.1;
-    w.schoolWeight *= 0.5;
-  }
 
-  if (holiday === "PatriotDay") {  // 9/11
-    w.civicWeight *= 1.3;
-    w.eventWeight *= 0.8;  // Somber
-    w.nightlifeWeight *= 0.7;
-  }
 
-  if (holiday === "IndigenousPeoplesDay") {
-    w.civicWeight *= 1.3;
-    w.culturalWeight *= 1.4;
-    w.communityWeight *= 1.2;
-  }
 
   // ═══════════════════════════════════════════════════════════════════════════
   // SPECIFIC HOLIDAY MULTIPLIERS (Cultural)
   // ═══════════════════════════════════════════════════════════════════════════
 
-  if (holiday === "CincoDeMayo") {
-    w.culturalWeight *= 1.6;
-    w.eventWeight *= 1.4;
-    w.nightlifeWeight *= 1.3;
-    w.communityWeight *= 1.4;  // Fruitvale
-  }
 
-  if (holiday === "DiaDeMuertos") {
-    w.culturalWeight *= 1.7;
-    w.eventWeight *= 1.3;
-    w.communityWeight *= 1.5;  // Fruitvale
-  }
 
-  if (holiday === "PrideMonth") {
-    w.culturalWeight *= 1.4;
-    w.eventWeight *= 1.3;
-    w.communityWeight *= 1.3;
-  }
 
-  if (holiday === "BlackHistoryMonth") {
-    w.culturalWeight *= 1.4;
-    w.civicWeight *= 1.2;
-    w.communityWeight *= 1.3;
-  }
 
   if (holiday === "Hanukkah") {
     w.culturalWeight *= 1.3;
@@ -256,38 +196,10 @@ function applySeasonalWeights_(ctx) {
   // SPECIFIC HOLIDAY MULTIPLIERS (Oakland)
   // ═══════════════════════════════════════════════════════════════════════════
 
-  if (holiday === "OaklandPride") {
-    w.eventWeight *= 1.5;
-    w.nightlifeWeight *= 1.4;
-    w.culturalWeight *= 1.5;
-    w.communityWeight *= 1.5;
-  }
 
-  if (holiday === "ArtSoulFestival") {
-    w.eventWeight *= 1.6;
-    w.culturalWeight *= 1.6;
-    w.communityWeight *= 1.5;
-    w.nightlifeWeight *= 1.3;
-  }
 
-  if (holiday === "OpeningDay") {  // A's Opening Day
-    w.sportsWeight *= 1.8;
-    w.eventWeight *= 1.5;
-    w.nightlifeWeight *= 1.3;
-    w.communityWeight *= 1.3;
-  }
 
-  if (holiday === "SummerFestival") {
-    w.eventWeight *= 1.4;
-    w.nightlifeWeight *= 1.3;
-    w.communityWeight *= 1.3;
-  }
 
-  if (holiday === "EarthDay") {
-    w.civicWeight *= 1.3;
-    w.eventWeight *= 1.2;
-    w.communityWeight *= 1.2;
-  }
 
   // ═══════════════════════════════════════════════════════════════════════════
   // SPECIFIC HOLIDAY MULTIPLIERS (Minor)
@@ -299,10 +211,6 @@ function applySeasonalWeights_(ctx) {
     w.economicWeight *= 1.1;  // Retail
   }
 
-  if (holiday === "StPatricksDay") {
-    w.nightlifeWeight *= 1.4;
-    w.eventWeight *= 1.2;
-  }
 
   if (holiday === "MothersDay" || holiday === "FathersDay") {
     w.eventWeight *= 1.1;
@@ -310,10 +218,6 @@ function applySeasonalWeights_(ctx) {
     w.communityWeight *= 1.1;
   }
 
-  if (holiday === "PresidentsDay") {
-    w.schoolWeight *= 0.3;
-    w.economicWeight *= 1.1;  // Sales
-  }
 
   if (holiday === "BackToSchool") {
     w.schoolWeight *= 1.5;
@@ -321,8 +225,7 @@ function applySeasonalWeights_(ctx) {
   }
 
   // Seasonal markers (equinoxes/solstices)
-  if (holiday === "SpringEquinox" || holiday === "FallEquinox" || 
-      holiday === "SummerSolstice" || holiday === "WinterSolstice") {
+  if (holiday === "SpringEquinox" || holiday === "FallEquinox" || holiday === "SummerSolstice") {
     w.weatherWeight *= 1.1;
   }
 

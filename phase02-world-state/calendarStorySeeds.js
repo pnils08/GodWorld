@@ -11,7 +11,6 @@
  * - forEach -> for loop, spread operator -> manual array building
  *
  * v2.3 Fixes:
- * - Removed WinterSolstice (calendar never emits it)
  * - Fixed weatherMood check: 'energetic' → 'energized'
  * - Removed sportsSeason-based seeds (user controls sports sim)
  * - Fixed seed object: 'seed' → 'text' (downstream compatibility)
@@ -144,13 +143,6 @@ function applySeasonalStorySeeds_(ctx) {
     );
   }
 
-  if (holiday === "MLKDay") {
-    seeds.push(
-      seed("MLK Day observances shape community reflection", "CIVIC", "West Oakland"),
-      seed("Service events honor the day's meaning", "COMMUNITY"),
-      seed("Conversations turn to justice and legacy", "CIVIC")
-    );
-  }
 
   if (holiday === "Easter") {
     seeds.push(
@@ -160,39 +152,9 @@ function applySeasonalStorySeeds_(ctx) {
     );
   }
 
-  if (holiday === "MemorialDay") {
-    seeds.push(
-      seed("Memorial Day marks unofficial summer start", "COMMUNITY"),
-      seed("Long weekend influences resident travel patterns", "COMMUNITY"),
-      seed("Remembrance ceremonies honor service members", "CIVIC")
-    );
-  }
 
-  if (holiday === "Juneteenth") {
-    seeds.push(
-      seed("Juneteenth celebrations energize Oakland communities", "CULTURE", "West Oakland"),
-      seed("Cultural pride visible in street celebrations", "COMMUNITY"),
-      seed("Historical significance shapes public gatherings", "CIVIC"),
-      seed("Block parties and cookouts activate neighborhoods", "CULTURE")
-    );
-  }
 
-  if (holiday === "Independence") {
-    seeds.push(
-      seed("Independence festivities increase crowds and movement", "CIVIC", "Lake Merritt"),
-      seed("Holiday energy shapes public-space activity", "COMMUNITY"),
-      seed("Fireworks anticipation builds through the day", "CULTURE"),
-      seed("Barbecue smoke signals neighborhood gatherings", "COMMUNITY")
-    );
-  }
 
-  if (holiday === "LaborDay") {
-    seeds.push(
-      seed("Labor Day marks summer's symbolic end", "COMMUNITY"),
-      seed("Long weekend influences resident travel patterns", "COMMUNITY"),
-      seed("Workers reflect on labor and livelihood", "CIVIC")
-    );
-  }
 
   if (holiday === "Halloween") {
     seeds.push(
@@ -225,47 +187,10 @@ function applySeasonalStorySeeds_(ctx) {
   // CULTURAL HOLIDAYS
   // ═══════════════════════════════════════════════════════════════════════════
 
-  if (holiday === "BlackHistoryMonth") {
-    seeds.push(
-      seed("Black History Month observances shape cultural programming", "CULTURE", "West Oakland"),
-      seed("Educational events highlight historical contributions", "CIVIC"),
-      seed("Community discussions center heritage and legacy", "COMMUNITY")
-    );
-  }
 
-  if (holiday === "CincoDeMayo") {
-    seeds.push(
-      seed("Cinco de Mayo celebrations activate Fruitvale", "CULTURE", "Fruitvale"),
-      seed("Mariachi music drifts through neighborhood streets", "CULTURE"),
-      seed("Mexican heritage pride visible in public gatherings", "COMMUNITY"),
-      seed("Restaurants and bars see celebratory crowds", "ECONOMIC", "Fruitvale")
-    );
-  }
 
-  if (holiday === "PrideMonth") {
-    seeds.push(
-      seed("Pride Month visibility increases across the city", "CULTURE", "Downtown"),
-      seed("Rainbow flags appear in storefronts and windows", "COMMUNITY"),
-      seed("LGBTQ+ community events draw participation", "CULTURE")
-    );
-  }
 
-  if (holiday === "IndigenousPeoplesDay") {
-    seeds.push(
-      seed("Indigenous Peoples Day shifts civic conversation", "CIVIC"),
-      seed("Native heritage observances shape the day's meaning", "CULTURE"),
-      seed("Community reflects on land and history", "COMMUNITY")
-    );
-  }
 
-  if (holiday === "DiaDeMuertos") {
-    seeds.push(
-      seed("Día de los Muertos altars appear throughout Fruitvale", "CULTURE", "Fruitvale"),
-      seed("Marigold petals and candles honor departed loved ones", "COMMUNITY"),
-      seed("Face paint and processions mark the observance", "CULTURE"),
-      seed("Families gather at cemeteries and home altars", "COMMUNITY")
-    );
-  }
 
   if (holiday === "Hanukkah") {
     seeds.push(
@@ -278,48 +203,10 @@ function applySeasonalStorySeeds_(ctx) {
   // OAKLAND-SPECIFIC HOLIDAYS
   // ═══════════════════════════════════════════════════════════════════════════
 
-  if (holiday === "OpeningDay") {
-    seeds.push(
-      seed("A's Opening Day energy fills Jack London Square", "SPORTS", "Jack London"),
-      seed("Baseball fans don green and gold throughout the city", "CULTURE"),
-      seed("Optimism of a new season shapes conversations", "COMMUNITY"),
-      seed("Tailgate gatherings activate stadium surroundings", "COMMUNITY", "Jack London")
-    );
-  }
 
-  if (holiday === "OaklandPride") {
-    seeds.push(
-      seed("Oakland Pride celebration draws massive crowds", "CULTURE", "Downtown"),
-      seed("Pride parade energy transforms downtown streets", "COMMUNITY"),
-      seed("LGBTQ+ community visibility at annual peak", "CULTURE"),
-      seed("Rainbow colors dominate the urban landscape", "COMMUNITY")
-    );
-  }
 
-  if (holiday === "EarthDay") {
-    seeds.push(
-      seed("Earth Day events activate Lake Merritt", "CIVIC", "Lake Merritt"),
-      seed("Environmental awareness shapes public conversations", "CIVIC"),
-      seed("Volunteer cleanups draw community participation", "COMMUNITY")
-    );
-  }
 
-  if (holiday === "ArtSoulFestival") {
-    seeds.push(
-      seed("Art + Soul Festival transforms downtown Oakland", "CULTURE", "Downtown"),
-      seed("Music stages and art booths line the streets", "CULTURE"),
-      seed("Oakland's creative community on full display", "COMMUNITY"),
-      seed("Festival crowds pack restaurants and venues", "ECONOMIC", "Downtown")
-    );
-  }
 
-  if (holiday === "SummerFestival") {
-    seeds.push(
-      seed("Summer festival energy spreads through neighborhoods", "CULTURE"),
-      seed("Block parties and outdoor events multiply", "COMMUNITY"),
-      seed("Seasonal celebration mood lifts public spaces", "COMMUNITY")
-    );
-  }
 
   // ═══════════════════════════════════════════════════════════════════════════
   // MINOR HOLIDAYS
@@ -333,19 +220,7 @@ function applySeasonalStorySeeds_(ctx) {
     );
   }
 
-  if (holiday === "StPatricksDay") {
-    seeds.push(
-      seed("St. Patrick's Day greens the bar scene", "CULTURE", "Downtown"),
-      seed("Pub crowds swell for the occasion", "COMMUNITY")
-    );
-  }
 
-  if (holiday === "PresidentsDay") {
-    seeds.push(
-      seed("Presidents Day gives workers a long weekend", "COMMUNITY"),
-      seed("Retail sales events draw shoppers", "ECONOMIC")
-    );
-  }
 
   if (holiday === "MothersDay") {
     seeds.push(
@@ -361,19 +236,7 @@ function applySeasonalStorySeeds_(ctx) {
     );
   }
 
-  if (holiday === "VeteransDay") {
-    seeds.push(
-      seed("Veterans Day observances influence civic atmosphere", "CIVIC"),
-      seed("Service members honored in public ceremonies", "COMMUNITY")
-    );
-  }
 
-  if (holiday === "PatriotDay") {  // 9/11
-    seeds.push(
-      seed("9/11 remembrance creates somber reflection", "CIVIC"),
-      seed("Moment of silence observed across the city", "COMMUNITY")
-    );
-  }
 
   if (holiday === "BackToSchool") {
     seeds.push(
@@ -393,7 +256,6 @@ function applySeasonalStorySeeds_(ctx) {
   if (holiday === "FallEquinox") {
     seeds.push(seed("Fall equinox signals seasonal shift", "ENVIRONMENT"));
   }
-  // v2.3: Removed WinterSolstice (calendar never emits it)
 
   // ═══════════════════════════════════════════════════════════════════════════
   // WEATHER
@@ -457,7 +319,6 @@ function applySeasonalStorySeeds_(ctx) {
   }
 
   // v2.3: Removed SPORTS SEASON section (user controls sports sim)
-  // OpeningDay is kept as a calendar holiday above
 
   // ═══════════════════════════════════════════════════════════════════════════
   // CITY DYNAMICS

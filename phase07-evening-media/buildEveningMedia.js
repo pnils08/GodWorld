@@ -121,36 +121,6 @@ function buildEveningMedia_(ctx) {
       movies: ["When the Ball Drops", "Last Night", "Midnight Kiss"],
       streaming: "party playlist"
     },
-    "Independence": {
-      tv: ["Fourth of July Fireworks", "Patriotic Special", "Independence Day Parade"],
-      movies: ["Summer of Freedom", "Stars and Stripes", "American Dream"],
-      streaming: "summer blockbusters"
-    },
-    "MLKDay": {
-      tv: ["Dream Remembered", "Civil Rights Special", "Legacy Hour", "Unity March Coverage"],
-      movies: ["March to Freedom", "Voice of Change", "Dream Forward"],
-      streaming: "civil rights documentaries"
-    },
-    "Juneteenth": {
-      tv: ["Freedom Day Special", "Juneteenth Celebration", "Heritage Hour"],
-      movies: ["Liberation Day", "Ancestors' Dream", "Freedom Ring"],
-      streaming: "Black excellence showcase"
-    },
-    "CincoDeMayo": {
-      tv: ["Cinco Celebration", "Fiesta Oakland", "Cultural Pride Hour"],
-      movies: ["Cinco Stories", "Border Dreams", "Familia"],
-      streaming: "Latin cinema spotlight"
-    },
-    "DiaDeMuertos": {
-      tv: ["Día de los Muertos Special", "Remembrance Hour", "Altar Stories"],
-      movies: ["Beyond the Veil", "Marigold Path", "Ancestor's Return"],
-      streaming: "animated favorites marathon"
-    },
-    "LunarNewYear": {
-      tv: ["Lunar New Year Parade", "Year of Celebration", "Chinatown Special"],
-      movies: ["Dragon Dance", "New Year Fortune", "Red Envelope"],
-      streaming: "Asian cinema showcase"
-    },
     "Halloween": {
       tv: ["Halloween Horror Night", "Spooky Special", "Monster Marathon"],
       movies: ["Shadow House", "October Dark", "Trick or Terror"],
@@ -165,41 +135,6 @@ function buildEveningMedia_(ctx) {
       tv: ["Easter Special", "Spring Celebration", "Family Sunday"],
       movies: ["Spring Awakening", "Renewal", "Family Traditions"],
       streaming: "family films"
-    },
-    "MemorialDay": {
-      tv: ["Memorial Tribute", "Honor Our Heroes", "Remembrance Special"],
-      movies: ["Service and Sacrifice", "Brothers in Arms", "Coming Home"],
-      streaming: "war documentaries"
-    },
-    "LaborDay": {
-      tv: ["Labor Day Special", "Worker's Pride", "End of Summer"],
-      movies: ["Blue Collar Dreams", "Working Class", "Final Summer"],
-      streaming: "end-of-summer binge"
-    },
-    "VeteransDay": {
-      tv: ["Veterans Tribute", "Service Stories", "Honor Special"],
-      movies: ["The Long Road Home", "Uniform Pride", "Thank You for Service"],
-      streaming: "military documentaries"
-    },
-    "OpeningDay": {
-      tv: ["Opening Day Live", "Baseball's Back", "First Pitch Special", "A's Preview"],
-      movies: ["Diamond Dreams", "Opening Day", "Field of Dreams"],
-      streaming: "baseball classics"
-    },
-    "OaklandPride": {
-      tv: ["Pride Parade Live", "Oakland Pride Special", "Rainbow Hour", "Love Wins"],
-      movies: ["Pride Stories", "Rainbow Rising", "Out and Proud"],
-      streaming: "LGBTQ+ cinema showcase"
-    },
-    "ArtSoulFestival": {
-      tv: ["Art & Soul Live", "Oakland Culture Hour", "Festival Highlights"],
-      movies: ["Soul of the City", "Art's Heart", "Festival Dreams"],
-      streaming: "music documentaries"
-    },
-    "StPatricksDay": {
-      tv: ["St. Patrick's Parade", "Green Hour", "Irish Oakland"],
-      movies: ["Lucky Day", "Emerald Dreams", "Irish Eyes"],
-      streaming: "Irish cinema"
     },
     "MothersDay": {
       tv: ["Mother's Day Special", "Mom Appreciation Hour"],
@@ -525,11 +460,6 @@ function buildEveningMedia_(ctx) {
  * HOLIDAY PROGRAMMING (v2.2):
  *
  * 21 holidays with custom TV, movie, and streaming pools:
- * - Major: Thanksgiving, Holiday, NewYear, NewYearsEve, Independence
- * - Cultural: MLKDay, Juneteenth, CincoDeMayo, DiaDeMuertos, LunarNewYear
- * - Oakland: OpeningDay, OaklandPride, ArtSoulFestival
- * - Minor: Halloween, Valentine, Easter, MemorialDay, LaborDay, VeteransDay
- * - Family: StPatricksDay, MothersDay, FathersDay
  *
  * FIRST FRIDAY:
  * - TV: Art Walk Live, Gallery Hour, Oakland Arts Tonight

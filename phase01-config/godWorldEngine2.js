@@ -897,8 +897,7 @@ function updateWorldPopulation_(ctx) {
 
   // Holiday illness patterns - large gatherings increase transmission
   var gatheringHolidays = [
-    "Thanksgiving", "Holiday", "NewYearsEve", "NewYear",
-    "Independence", "OpeningDay", "OaklandPride"
+    "Thanksgiving", "Holiday", "NewYearsEve", "NewYear"
   ];
   if (gatheringHolidays.indexOf(holiday) >= 0) {
     ill += 0.0006;
@@ -938,16 +937,12 @@ function updateWorldPopulation_(ctx) {
   if (weather.impact >= 1.3) emp -= 0.0005;
 
   // Holiday employment effects - retail holidays boost employment
-  var retailHolidays = ["Holiday", "BlackFriday", "Valentine", "MothersDay", "FathersDay"];
+  var retailHolidays = ["Holiday", "Valentine", "MothersDay", "FathersDay"];
   if (retailHolidays.indexOf(holiday) >= 0) {
     emp += 0.0008;
   }
 
   // Summer/outdoor event holidays boost service employment
-  var serviceHolidays = ["Independence", "MemorialDay", "LaborDay", "CincoDeMayo"];
-  if (serviceHolidays.indexOf(holiday) >= 0) {
-    emp += 0.0005;
-  }
 
   // Sports season employment boost
   if (sports === "championship") {
@@ -1007,45 +1002,26 @@ function updateWorldPopulation_(ctx) {
 
   // TRAVEL HOLIDAYS - High movement volatility
   var travelHolidays = [
-    "Thanksgiving", "Holiday", "NewYear", "NewYearsEve",
-    "MemorialDay", "LaborDay", "Independence"
+    "Thanksgiving", "Holiday", "NewYear", "NewYearsEve"
   ];
   if (travelHolidays.indexOf(holiday) >= 0) {
     mig += Math.round((rng() - 0.5) * 50);
   }
 
   // GATHERING HOLIDAYS - Net inflow for celebrations
-  var gatheringInflow = [
-    "OpeningDay", "OaklandPride", "ArtSoulFestival",
-    "Juneteenth", "CincoDeMayo", "DiaDeMuertos"
-  ];
-  if (gatheringInflow.indexOf(holiday) >= 0) {
-    mig += Math.round(rng() * 40);
-  }
 
   // CULTURAL HOLIDAYS - Diaspora visitors
-  var culturalVisitorHolidays = [
-    "DiaDeMuertos", "CincoDeMayo", "Juneteenth",
-    "BlackHistoryMonth", "PrideMonth", "LunarNewYear"
-  ];
-  if (culturalVisitorHolidays.indexOf(holiday) >= 0) {
-    mig += Math.round(rng() * 25);
-  }
 
   // MINOR HOLIDAYS - Slight local movement
   var minorHolidays = [
-    "Valentine", "StPatricksDay", "Easter", "Halloween",
-    "MothersDay", "FathersDay", "EarthDay"
+    "Valentine", "Easter", "Halloween",
+    "MothersDay", "FathersDay"
   ];
   if (minorHolidays.indexOf(holiday) >= 0) {
     mig += Math.round((rng() - 0.5) * 20);
   }
 
   // CIVIC OBSERVATION HOLIDAYS - Reduced movement
-  var civicRestHolidays = ["MLKDay", "PresidentsDay", "VeteransDay"];
-  if (civicRestHolidays.indexOf(holiday) >= 0) {
-    mig += Math.round((rng() - 0.5) * 10);
-  }
 
   // HOLIDAY PRIORITY EFFECTS
   if (holidayPriority === "major") {

@@ -661,31 +661,10 @@ function ensureNeighborhoodMapSchemaAppendOnly_(ss, sheetName, headers) {
 function buildHolidayNeighborhoodMods_(holiday, isFirstFriday, isCreationDay, sportsSeason) {
   var mods = {};
 
-  if (holiday === 'LunarNewYear') {
-    mods['Chinatown'] = { eventMod: 2.5, nightlifeMod: 1.5, noiseMod: 1.5, sentimentMod: 0.15 };
-    mods['Downtown'] = { eventMod: 1.3, nightlifeMod: 1.2 };
-  }
 
-  if (holiday === 'CincoDeMayo' || holiday === 'DiaDeMuertos') {
-    mods['Fruitvale'] = { eventMod: 2.5, nightlifeMod: 1.5, noiseMod: 1.4, sentimentMod: 0.15 };
-    mods['San Antonio'] = { eventMod: 1.5, nightlifeMod: 1.2 };
-  }
 
-  if (holiday === 'Juneteenth') {
-    mods['West Oakland'] = { eventMod: 2.0, nightlifeMod: 1.3, sentimentMod: 0.1 };
-    mods['Downtown'] = { eventMod: 1.3 };
-  }
 
-  if (holiday === 'OaklandPride') {
-    mods['Downtown'] = { eventMod: 2.5, nightlifeMod: 1.8, noiseMod: 1.5, sentimentMod: 0.2 };
-    mods['Grand Lake'] = { eventMod: 2.0, nightlifeMod: 1.5, sentimentMod: 0.15 };
-    mods['Adams Point'] = { eventMod: 1.5, nightlifeMod: 1.3 };
-  }
 
-  if (holiday === 'ArtSoulFestival') {
-    mods['Downtown'] = { eventMod: 2.5, nightlifeMod: 1.6, noiseMod: 1.4, sentimentMod: 0.15 };
-    mods['Jack London'] = { eventMod: 1.5, nightlifeMod: 1.3 };
-  }
 
   if (holiday === 'NewYearsEve') {
     mods['Downtown'] = { eventMod: 2.0, nightlifeMod: 2.0, noiseMod: 1.8, sentimentMod: 0.1 };
@@ -699,15 +678,7 @@ function buildHolidayNeighborhoodMods_(holiday, isFirstFriday, isCreationDay, sp
     mods['Piedmont Ave'] = { eventMod: 1.3, nightlifeMod: 1.1 };
   }
 
-  if (holiday === 'StPatricksDay') {
-    mods['Jack London'] = { eventMod: 1.8, nightlifeMod: 2.0, noiseMod: 1.5 };
-    mods['Downtown'] = { eventMod: 1.3, nightlifeMod: 1.5 };
-  }
 
-  if (holiday === 'OpeningDay') {
-    mods['Jack London'] = { eventMod: 2.5, nightlifeMod: 1.8, noiseMod: 1.6, sentimentMod: 0.1 };
-    mods['Downtown'] = { eventMod: 1.5, nightlifeMod: 1.3 };
-  }
 
   if (isFirstFriday) {
     mods['Temescal'] = mods['Temescal'] || {};
@@ -751,13 +722,6 @@ function buildHolidayNeighborhoodMods_(holiday, isFirstFriday, isCreationDay, sp
 function getDemographicMarkerV35_(neighborhood, baseLabel, arcByNeighborhood, summary, holiday, isFirstFriday, isCreationDay) {
 
   // Calendar-first markers
-  if (holiday === 'LunarNewYear' && neighborhood === 'Chinatown') return 'Lunar New Year celebration zone';
-  if ((holiday === 'CincoDeMayo' || holiday === 'DiaDeMuertos') && neighborhood === 'Fruitvale') {
-    return holiday === 'CincoDeMayo' ? 'Cinco de Mayo celebration zone' : 'Día de los Muertos observance zone';
-  }
-  if (holiday === 'OaklandPride' && (neighborhood === 'Downtown' || neighborhood === 'Grand Lake')) return 'Pride celebration zone';
-  if (holiday === 'ArtSoulFestival' && neighborhood === 'Downtown') return 'Art & Soul Festival zone';
-  if (holiday === 'Juneteenth' && neighborhood === 'West Oakland') return 'Juneteenth celebration zone';
   if (isFirstFriday && neighborhood === 'Temescal') return 'First Friday arts walk zone';
   if (isCreationDay && neighborhood === 'Downtown') return 'Creation Day celebration zone';
 

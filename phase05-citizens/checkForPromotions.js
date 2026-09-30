@@ -224,26 +224,15 @@ function checkForPromotions_(ctx) {
 
     // Community gathering holidays increase visibility
     var gatheringHolidays = [
-      "Thanksgiving", "Independence", "MemorialDay", "LaborDay"
+      "Thanksgiving"
     ];
     if (gatheringHolidays.indexOf(holiday) >= 0) {
       c += 0.03;
     }
 
     // Cultural celebration holidays boost emergence
-    var culturalHolidays = [
-      "Juneteenth", "CincoDeMayo", "DiaDeMuertos", "OaklandPride",
-      "LunarNewYear", "MLKDay", "BlackHistoryMonth"
-    ];
-    if (culturalHolidays.indexOf(holiday) >= 0) {
-      c += 0.04;
-    }
 
     // Oakland-specific holidays provide strong boost
-    var oaklandHolidays = ["OpeningDay", "OaklandPride", "ArtSoulFestival"];
-    if (oaklandHolidays.indexOf(holiday) >= 0) {
-      c += 0.05;
-    }
 
     // Major holidays have mixed effect (some visibility, some distraction)
     if (holidayPriority === "major") {
@@ -432,16 +421,7 @@ function checkForPromotions_(ctx) {
     // Calendar context (v2.2)
     if (holiday !== "none") {
       var holidayContextMap = {
-        "Thanksgiving": "Emerged during Thanksgiving community gathering. ",
-        "Independence": "Celebrated independence alongside neighbors. ",
-        "Juneteenth": "Rose to visibility during Juneteenth celebration. ",
-        "CincoDeMayo": "Emerged during Cinco de Mayo festivities. ",
-        "DiaDeMuertos": "Remembered and emerged during Día de los Muertos. ",
-        "OaklandPride": "Celebrated identity during Oakland Pride. ",
-        "OpeningDay": "Rose with the excitement of Opening Day. ",
-        "LunarNewYear": "Emerged during Lunar New Year celebrations. ",
-        "MLKDay": "Emerged during MLK Day reflection. ",
-        "ArtSoulFestival": "Emerged during Art & Soul Festival. "
+        "Thanksgiving": "Emerged during Thanksgiving community gathering. "
       };
       if (holidayContextMap[holiday]) {
         context += holidayContextMap[holiday];

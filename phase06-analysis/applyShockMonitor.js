@@ -109,18 +109,15 @@ function applyShockMonitor_(ctx) {
   // CALENDAR-AWARE THRESHOLDS
   // ═══════════════════════════════════════════════════════════════════════════
   var highActivityHolidays = [
-    "Independence", "NewYearsEve", "Halloween", "OpeningDay",
-    "OaklandPride", "ArtSoulFestival", "CincoDeMayo"
+    "NewYearsEve", "Halloween"
   ];
 
   var travelHolidays = [
-    "Thanksgiving", "Holiday", "NewYear", "NewYearsEve",
-    "MemorialDay", "LaborDay", "Independence"
+    "Thanksgiving", "Holiday", "NewYear", "NewYearsEve"
   ];
 
   var crowdHolidays = [
-    "Independence", "NewYearsEve", "Halloween", "OpeningDay",
-    "OaklandPride", "CincoDeMayo", "DiaDeMuertos"
+    "NewYearsEve", "Halloween"
   ];
 
   var eventThresholdMod = 0;
@@ -326,7 +323,7 @@ function applyShockMonitor_(ctx) {
     shockReasons.push("championship tension");
   }
 
-  var fireworksHolidays = ["Independence", "NewYearsEve"];
+  var fireworksHolidays = ["NewYearsEve"];
   if (fireworksHolidays.indexOf(holiday) >= 0) {
     var safetyEvents = 0;
     for (var s = 0; s < worldEvents.length; s++) {
@@ -338,11 +335,6 @@ function applyShockMonitor_(ctx) {
     }
   }
 
-  var culturalHolidays = ["Juneteenth","CincoDeMayo","DiaDeMuertos","OaklandPride","LunarNewYear","MLKDay"];
-  if (culturalHolidays.indexOf(holiday) >= 0 && (dynamics.culturalActivity || 1) < 0.7) {
-    shock = true;
-    shockReasons.push("cultural disconnect");
-  }
 
   if (isCreationDay && curChaos >= 5) {
     shock = true;

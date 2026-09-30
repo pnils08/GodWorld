@@ -123,7 +123,6 @@ function filterNoiseEvents_(ctx) {
         return true;
       }
       // Opening Day sports events
-      if (holiday === "OpeningDay") return true;
     }
 
     // Events in holiday neighborhood preserved during holidays

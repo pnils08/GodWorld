@@ -157,19 +157,9 @@ function applyNamedCitizenSpotlights_(ctx) {
   // HOLIDAY-DOMAIN SPOTLIGHT BOOST (v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
   var holidayDomainBoost = {
-    "MLKDay": { civic: 3, community: 2 },
-    "Juneteenth": { civic: 2, community: 3, culture: 3 },
-    "Independence": { civic: 2, community: 2 },
     "Thanksgiving": { community: 3 },
     "Holiday": { community: 2, economic: 2 },
-    "NewYear": { civic: 2 },
-    "OpeningDay": { sports: 4, community: 2 },
-    "OaklandPride": { culture: 4, community: 3 },
-    "DiaDeMuertos": { culture: 4, community: 2 },
-    "CincoDeMayo": { culture: 3, community: 2 },
-    "BlackHistoryMonth": { culture: 3, community: 2 },
-    "PrideMonth": { culture: 3, community: 3 },
-    "EarthDay": { environment: 3, community: 2 }
+    "NewYear": { civic: 2 }
   };
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -387,10 +377,6 @@ function applyNamedCitizenSpotlights_(ctx) {
         addReason(pid, "late-season");
       }
       // Opening Day
-      if (holiday === "OpeningDay") {
-        scores[pid] += 3;
-        addReason(pid, "opening-day");
-      }
     }
 
     // ═══════════════════════════════════════════════════════════════════════
@@ -541,9 +527,6 @@ function applyNamedCitizenSpotlights_(ctx) {
  * - Community surge: +2 (per community event)
  *
  * Holiday-Domain Affinity:
- * - MLKDay → civic +3, community +2
- * - OpeningDay → sports +4, community +2
- * - OaklandPride → culture +4, community +3
  * - etc.
  *
  * Threshold Adjustments (v2.2):

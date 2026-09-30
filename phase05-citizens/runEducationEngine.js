@@ -243,39 +243,6 @@ function runEducationEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   var holidayEdu = [];
 
-  if (holiday === "MLKDay") {
-    holidayEdu.push("engaged with civil rights history and teachings");
-    holidayEdu.push("reflected on Dr. King's legacy and writings");
-    holidayEdu.push("participated in a community service learning event");
-  }
-  if (holiday === "BlackHistoryMonth") {
-    holidayEdu.push("explored Black history and cultural contributions");
-    holidayEdu.push("attended a cultural education event");
-    holidayEdu.push("read about local Black history");
-  }
-  if (holiday === "Juneteenth") {
-    holidayEdu.push("learned more about Juneteenth's historical significance");
-    holidayEdu.push("engaged with freedom and liberation narratives");
-  }
-  if (holiday === "IndigenousPeoplesDay") {
-    holidayEdu.push("learned about Indigenous history and culture");
-    holidayEdu.push("reflected on the land's original inhabitants");
-  }
-  if (holiday === "DiaDeMuertos") {
-    holidayEdu.push("learned about Día de los Muertos traditions");
-    holidayEdu.push("explored cultural memorial practices");
-  }
-  if (holiday === "CincoDeMayo") {
-    holidayEdu.push("learned about Mexican history and culture");
-  }
-  if (holiday === "PrideMonth" || holiday === "OaklandPride") {
-    holidayEdu.push("engaged with LGBTQ+ history and culture");
-    holidayEdu.push("learned about the history of the pride movement");
-  }
-  if (holiday === "EarthDay") {
-    holidayEdu.push("learned about environmental sustainability");
-    holidayEdu.push("explored climate and ecology topics");
-  }
   if (holiday === "BackToSchool") {
     holidayEdu.push("prepared learning materials for the new school year");
     holidayEdu.push("engaged with educational planning");
@@ -408,8 +375,7 @@ function runEducationEngine_(ctx) {
     else if (holidayPriority === "major") chance += 0.005;
 
     // Education-focused holidays boost (v2.2)
-    if (holiday === "MLKDay" || holiday === "BlackHistoryMonth" || 
-        holiday === "IndigenousPeoplesDay" || holiday === "BackToSchool") {
+    if (holiday === "BackToSchool") {
       chance += 0.015;
     }
 
@@ -513,13 +479,6 @@ function runEducationEngine_(ctx) {
  * - Education-Cultural: Cultural programming
  * 
  * Holiday Education Focus:
- * - MLKDay: Civil rights history
- * - BlackHistoryMonth: Black history and culture
- * - Juneteenth: Liberation history
- * - IndigenousPeoplesDay: Indigenous history
- * - DiaDeMuertos: Cultural traditions
- * - PrideMonth: LGBTQ+ history
- * - EarthDay: Environmental topics
  * - BackToSchool: Educational preparation
  * 
  * Neighborhood Education (12 total):

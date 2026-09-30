@@ -332,8 +332,8 @@ function applyCycleWeight_(ctx) {
 
   // High-signal holidays that typically generate significant activity
   var highSignalHolidays = [
-    "Independence", "Thanksgiving", "Holiday", "NewYear", "NewYearsEve",
-    "OpeningDay", "OaklandPride", "Halloween"
+    "Thanksgiving", "Holiday", "NewYear", "NewYearsEve",
+    "Halloween"
   ];
 
   if (highSignalHolidays.indexOf(holiday) !== -1) {

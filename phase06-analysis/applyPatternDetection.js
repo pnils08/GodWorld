@@ -125,9 +125,8 @@ function applyPatternDetection_(ctx) {
 
   // High-activity holidays expect more events
   var highActivityHolidays = [
-    "Independence", "Thanksgiving", "Holiday", "NewYearsEve", "NewYear",
-    "OpeningDay", "OaklandPride", "ArtSoulFestival", "Halloween",
-    "CincoDeMayo", "Juneteenth", "DiaDeMuertos"
+    "Thanksgiving", "Holiday", "NewYearsEve", "NewYear",
+    "Halloween"
   ];
 
   var isHighActivityHoliday = highActivityHolidays.indexOf(holiday) !== -1;
@@ -376,9 +375,6 @@ function applyPatternDetection_(ctx) {
  * | elevated-high | 60 | 75 |
  * 
  * High-Activity Periods:
- * - Independence, Thanksgiving, Holiday, NewYearsEve, NewYear
- * - OpeningDay, OaklandPride, ArtSoulFestival, Halloween
- * - CincoDeMayo, Juneteenth, DiaDeMuertos
  * - First Friday
  * - Championship, Playoffs
  * 

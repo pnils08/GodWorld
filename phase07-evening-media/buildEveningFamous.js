@@ -269,37 +269,21 @@ function buildEveningFamous_(ctx) {
   // ───────────────────────────────────────────────────────────────────────────
 
   // Cultural holidays boost cultural figures
-  var culturalHolidays = [
-    "Juneteenth", "CincoDeMayo", "DiaDeMuertos", "LunarNewYear",
-    "MLKDay", "OaklandPride", "ArtSoulFestival", "BlackHistoryMonth"
-  ];
-  if (culturalHolidays.indexOf(holiday) !== -1) {
-    pool = pool.concat(CULTURAL_LEADERS, CULTURAL_LEADERS, CIVIC);
-  }
 
   // Art & Soul Festival: artists and musicians
-  if (holiday === "ArtSoulFestival") {
-    pool = pool.concat(ARTISTS, ARTISTS, MUSICIANS, MUSICIANS);
-  }
 
   // Oakland Pride: diverse voices
-  if (holiday === "OaklandPride") {
-    pool = pool.concat(INFLUENCERS, CIVIC, CULTURAL_LEADERS);
-  }
 
   // Opening Day: athletes and sports figures
-  if (holiday === "OpeningDay") {
-    pool = pool.concat(athletePool, athletePool, SPORTS_LEGENDS, SPORTS_LEGENDS);
-  }
 
   // Culinary holidays: chefs
-  var culinaryHolidays = ["Thanksgiving", "CincoDeMayo", "DiaDeMuertos", "LunarNewYear"];
+  var culinaryHolidays = ["Thanksgiving"];
   if (culinaryHolidays.indexOf(holiday) !== -1) {
     pool = pool.concat(CHEFS, CHEFS);
   }
 
   // Entertainment holidays: actors and musicians
-  var entertainmentHolidays = ["NewYearsEve", "Independence", "Halloween"];
+  var entertainmentHolidays = ["NewYearsEve", "Halloween"];
   if (entertainmentHolidays.indexOf(holiday) !== -1) {
     pool = pool.concat(ACTORS, MUSICIANS, INFLUENCERS);
   }
@@ -481,20 +465,13 @@ function buildEveningFamous_(ctx) {
     if (isFirstFriday && (ent.role.indexOf("artist") !== -1 || ent.role.indexOf("gallery") !== -1 || ent.role.indexOf("musician") !== -1)) {
       // Artists on First Friday are in arts districts
       neighborhood = artsNeighborhoods[Math.floor(rng() * artsNeighborhoods.length)];
-    } else if (holiday === "LunarNewYear" && rng() < 0.4) {
-      neighborhood = "Chinatown";
-    } else if ((holiday === "CincoDeMayo" || holiday === "DiaDeMuertos") && rng() < 0.4) {
-      neighborhood = "Fruitvale";
-    } else if ((holiday === "OpeningDay" || sportsSeason === "championship") && (ent.role.indexOf("athlete") !== -1 || ent.role === "A's player")) {
+    } else if (sportsSeason === "championship" && (ent.role.indexOf("athlete") !== -1 || ent.role === "A's player")) {
       // Athletes near the stadium — engine.134 Task 6: the sports zone follows
       // the stadium (S.sportsZones, engine.131 T7); Jack London/Downtown until it lights.
       neighborhood = pickAthleteSightingHood_(S, rng);
     } else if (ent.role === "A's player" && ent.homeNeighborhood && rng() < 0.5) {
       // v2.5: Real players spotted in their home neighborhood half the time
       neighborhood = ent.homeNeighborhood;
-    } else if (holiday === "OaklandPride" && rng() < 0.4) {
-      var prideNeighborhoods = ["Downtown", "Lake Merritt", "Uptown"];
-      neighborhood = prideNeighborhoods[Math.floor(rng() * prideNeighborhoods.length)];
     } else {
       // Default random neighborhood
       neighborhood = neighborhoods[Math.floor(rng() * neighborhoods.length)];
@@ -612,9 +589,6 @@ function buildEveningFamous_(ctx) {
  * | Holiday/Event | Boosted Pools |
  * |---------------|---------------|
  * | Cultural holidays | CULTURAL_LEADERS, CIVIC |
- * | ArtSoulFestival | ARTISTS, MUSICIANS |
- * | OaklandPride | INFLUENCERS, CIVIC, CULTURAL_LEADERS |
- * | OpeningDay | ATHLETES, SPORTS_LEGENDS |
  * | Culinary holidays | CHEFS |
  * | Entertainment holidays | ACTORS, MUSICIANS, INFLUENCERS |
  * | First Friday | ARTISTS, MUSICIANS, INFLUENCERS |
@@ -633,10 +607,6 @@ function buildEveningFamous_(ctx) {
  *
  * CALENDAR-AWARE NEIGHBORHOODS (v2.2):
  * - First Friday + artists → arts districts (Uptown, KONO, Temescal, Jack London)
- * - LunarNewYear → Chinatown (40% chance)
- * - CincoDeMayo/DiaDeMuertos → Fruitvale (40% chance)
- * - OpeningDay/Championship + athletes → Jack London/Downtown
- * - OaklandPride → Downtown/Lake Merritt/Uptown (40% chance)
  *
  * NEIGHBORHOODS (12):
  * - Temescal, Downtown, Fruitvale, Lake Merritt

@@ -14,7 +14,6 @@
  * 
  * v2.2 Enhancements:
  * - Expanded to 12 neighborhoods
- * - Holiday-specific civic notes (MLK Day, Juneteenth, etc.)
  * - First Friday civic presence
  * - Creation Day civic reflection
  * - Cultural activity and community engagement modifiers
@@ -205,58 +204,6 @@ function runCivicRoleEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // HOLIDAY-SPECIFIC CIVIC NOTES (v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
-  var holidayCivicNotes = {
-    'MLKDay': [
-      "MLK Day observance duties fulfilled.",
-      "Civil rights commemoration activities attended.",
-      "Community service events participated in."
-    ],
-    'Juneteenth': [
-      "Juneteenth civic observances attended.",
-      "Cultural celebration civic presence noted.",
-      "Community commemoration duties fulfilled."
-    ],
-    'Independence': [
-      "July Fourth civic duties fulfilled.",
-      "Holiday civic presence maintained.",
-      "Public celebration oversight continues."
-    ],
-    'MemorialDay': [
-      "Memorial Day observances attended.",
-      "Veterans commemoration duties fulfilled.",
-      "Civic memorial presence noted."
-    ],
-    'VeteransDay': [
-      "Veterans Day civic observances attended.",
-      "Military appreciation events participated in.",
-      "Civic commemoration duties fulfilled."
-    ],
-    'BlackHistoryMonth': [
-      "Black History Month civic programming attended.",
-      "Cultural heritage events supported.",
-      "Community education initiatives participated in."
-    ],
-    'PrideMonth': [
-      "Pride Month civic events attended.",
-      "Community celebration support provided.",
-      "Inclusive civic engagement demonstrated."
-    ],
-    'OaklandPride': [
-      "Oakland Pride civic presence maintained.",
-      "Community celebration officially represented.",
-      "Civic support for Pride demonstrated."
-    ],
-    'EarthDay': [
-      "Earth Day civic initiatives attended.",
-      "Environmental programming supported.",
-      "Sustainability civic duties fulfilled."
-    ],
-    'IndigenousPeoplesDay': [
-      "Indigenous Peoples Day observances attended.",
-      "Cultural recognition civic duties fulfilled.",
-      "Community acknowledgment events participated in."
-    ]
-  };
 
   // ═══════════════════════════════════════════════════════════════════════════
   // FIRST FRIDAY CIVIC NOTES (v2.2)
@@ -331,10 +278,6 @@ function runCivicRoleEngine_(ctx) {
       else if (holidayPriority === "oakland") chance += 0.008;
 
       // Civic holidays boost (v2.2)
-      if (holiday === "MLKDay" || holiday === "Juneteenth" || holiday === "VeteransDay" ||
-          holiday === "MemorialDay" || holiday === "IndigenousPeoplesDay") {
-        chance += 0.015;
-      }
 
       // First Friday boost (v2.2)
       if (isFirstFriday) chance += 0.008;
@@ -369,9 +312,6 @@ function runCivicRoleEngine_(ctx) {
         pool = pool.concat(hoodTexturePool_(ctx, neighborhood, CIVIC_NOTE_BY_CHARACTER_, CIVIC_NOTE_BESPOKE_, 'runCivicRoleEngine_'));
 
         // Add holiday-specific notes (v2.2)
-        if (holiday !== "none" && holidayCivicNotes[holiday]) {
-          pool = pool.concat(holidayCivicNotes[holiday]);
-        }
 
         // Add First Friday notes (v2.2)
         if (isFirstFriday) {
@@ -400,10 +340,6 @@ function runCivicRoleEngine_(ctx) {
     if (season === "Fall") context += " Fall civic cycle heightens public interest.";
 
     // Holiday influence (expanded v2.2)
-    if (holiday === "Independence") context += " Holiday period amplifies civic visibility.";
-    if (holiday === "MLKDay") context += " MLK Day brings civic reflection.";
-    if (holiday === "Juneteenth") context += " Juneteenth celebration heightens civic awareness.";
-    if (holiday === "VeteransDay" || holiday === "MemorialDay") context += " Observance day brings civic solemnity.";
 
     // First Friday influence (v2.2)
     if (isFirstFriday) context += " First Friday brings cultural civic focus.";
@@ -485,16 +421,6 @@ function runCivicRoleEngine_(ctx) {
  * 
  * Holiday             | Civic Notes
  * ─────────────────────────────────────────────────────────────────────────
- * MLKDay              | Civil rights commemoration
- * Juneteenth          | Cultural celebration civic presence
- * Independence        | July Fourth duties
- * MemorialDay         | Veterans commemoration
- * VeteransDay         | Military appreciation
- * BlackHistoryMonth   | Cultural heritage support
- * PrideMonth          | Inclusive civic engagement
- * OaklandPride        | Community celebration representation
- * EarthDay            | Environmental initiatives
- * IndigenousPeoplesDay| Cultural recognition
  * 
  * ============================================================================
  * 

@@ -144,7 +144,6 @@ function buildCityEveningSystems_(ctx) {
       // Holiday adjustments
       if (holiday === "Thanksgiving" || holiday === "Holiday") nightRate -= 0.03;
       if (holiday === "NewYearsEve") nightRate += 0.02;
-      if (holiday === "LaborDay") nightRate -= 0.02;
 
       nightShiftLoad = Math.max(0, Math.round(activeWorkers * nightRate));
     }
@@ -181,14 +180,7 @@ function buildCityEveningSystems_(ctx) {
   // Table-driven holiday modifiers
   var TRAFFIC_HOLIDAY = {
     NewYearsEve: 5,
-    OaklandPride: 4,
-    ArtSoulFestival: 4,
-    Independence: 3,
-    Halloween: 3,
-    LunarNewYear: 3,
-    CincoDeMayo: 3,
-    Juneteenth: 2,
-    OpeningDay: 3
+    Halloween: 3
   };
   var TRAFFIC_QUIET = { Thanksgiving: -2, Holiday: -2, Easter: -2 };
 
@@ -242,11 +234,7 @@ function buildCityEveningSystems_(ctx) {
   // Table-driven volume modifiers
   var VOLUME_HOLIDAY = {
     NewYearsEve: 4,
-    Halloween: 3,
-    OaklandPride: 3,
-    StPatricksDay: 3,
-    CincoDeMayo: 2,
-    Independence: 2
+    Halloween: 3
   };
   var VOLUME_QUIET = {
     Thanksgiving: -2,
@@ -264,7 +252,6 @@ function buildCityEveningSystems_(ctx) {
 
   if (sportsSeason === "championship") volume += 3;
   if (sportsSeason === "playoffs") volume += 2;
-  if (holiday === "OpeningDay") volume += 2;
 
   if (culturalActivity >= 1.4) volume += 1;
 
@@ -286,9 +273,6 @@ function buildCityEveningSystems_(ctx) {
 
   if (holiday === "NewYearsEve" || holiday === "Halloween") {
     if (safety === "calm" || safety === "normal") safety = "festive-crowded";
-  }
-  if (holiday === "OaklandPride" || holiday === "ArtSoulFestival") {
-    if (safety === "calm" || safety === "normal") safety = "celebratory";
   }
   if (isFirstFriday) {
     if (safety === "calm") safety = "art-walk-energy";
@@ -493,7 +477,6 @@ function buildCityEveningSystems_(ctx) {
  * - Table-driven modifiers (easier to maintain)
  * - Crowd map generated from neighborhoods array (prevents drift)
  * - trafficDyn used as baseline modifier
- * - LunarNewYear included (may not fire if not in getSimHoliday_)
  *
  * ============================================================================
  */

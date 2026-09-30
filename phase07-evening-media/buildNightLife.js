@@ -165,23 +165,8 @@ function buildNightlife_(ctx) {
     { name: "Winter Wonderland Lounge", neighborhood: "Temescal" }
   ];
 
-  var ST_PATRICKS_SPOTS = [
-    { name: "Shamrock Pub", neighborhood: "Jack London" },
-    { name: "Green Light Tavern", neighborhood: "Downtown" },
-    { name: "Lucky Clover Bar", neighborhood: "Temescal" }
-  ];
 
-  var CINCO_SPOTS = [
-    { name: "Cinco Cantina", neighborhood: "Fruitvale" },
-    { name: "Margarita Mile", neighborhood: "Fruitvale" },
-    { name: "Fiesta Lounge", neighborhood: "Downtown" }
-  ];
 
-  var INDEPENDENCE_SPOTS = [
-    { name: "Red White Blue Bar", neighborhood: "Jack London" },
-    { name: "Fireworks View Terrace", neighborhood: "Lake Merritt" },
-    { name: "Fourth of July Tavern", neighborhood: "Downtown" }
-  ];
 
   var HALLOWEEN_SPOTS = [
     { name: "Haunted House Bar", neighborhood: "Jack London" },
@@ -190,24 +175,8 @@ function buildNightlife_(ctx) {
     { name: "Monster Mash Nightclub", neighborhood: "Uptown" }
   ];
 
-  var DIA_DE_MUERTOS_SPOTS = [
-    { name: "Altar Bar", neighborhood: "Fruitvale" },
-    { name: "Marigold Lounge", neighborhood: "Fruitvale" },
-    { name: "Ancestor's Toast", neighborhood: "Downtown" }
-  ];
 
-  var PRIDE_SPOTS = [
-    { name: "Rainbow Room", neighborhood: "Downtown" },
-    { name: "Pride Pavilion", neighborhood: "Lake Merritt" },
-    { name: "Equality Lounge", neighborhood: "Uptown" },
-    { name: "Love Wins Bar", neighborhood: "Jack London" }
-  ];
 
-  var LUNAR_NEW_YEAR_SPOTS = [
-    { name: "Golden Dragon Lounge", neighborhood: "Chinatown" },
-    { name: "Red Envelope Bar", neighborhood: "Chinatown" },
-    { name: "Lucky Year Club", neighborhood: "Downtown" }
-  ];
 
   // ═══════════════════════════════════════════════════════════════════════════
   // FIRST FRIDAY NIGHTLIFE POOLS (v2.2)
@@ -264,26 +233,8 @@ function buildNightlife_(ctx) {
   if (holiday === "Holiday" || holiday === "NewYear") {
     pool = pool.concat(HOLIDAY_SPOTS);
   }
-  if (holiday === "StPatricksDay") {
-    pool = pool.concat(ST_PATRICKS_SPOTS, ST_PATRICKS_SPOTS);
-  }
-  if (holiday === "CincoDeMayo") {
-    pool = pool.concat(CINCO_SPOTS, CINCO_SPOTS);
-  }
-  if (holiday === "Independence") {
-    pool = pool.concat(INDEPENDENCE_SPOTS, INDEPENDENCE_SPOTS);
-  }
   if (holiday === "Halloween") {
     pool = pool.concat(HALLOWEEN_SPOTS, HALLOWEEN_SPOTS, LATE_NIGHT);
-  }
-  if (holiday === "DiaDeMuertos") {
-    pool = pool.concat(DIA_DE_MUERTOS_SPOTS, DIA_DE_MUERTOS_SPOTS);
-  }
-  if (holiday === "OaklandPride") {
-    pool = pool.concat(PRIDE_SPOTS, PRIDE_SPOTS, DANCE);
-  }
-  if (holiday === "LunarNewYear") {
-    pool = pool.concat(LUNAR_NEW_YEAR_SPOTS, LUNAR_NEW_YEAR_SPOTS);
   }
 
   // ───────────────────────────────────────────────────────────────────────────
@@ -307,7 +258,7 @@ function buildNightlife_(ctx) {
     pool = pool.concat(CHAMPIONSHIP_SPOTS, CHAMPIONSHIP_SPOTS, SPORTS_BARS);
   } else if (sportsSeason === "playoffs" || sportsSeason === "post-season") {
     pool = pool.concat(SPORTS_BARS, SPORTS_BARS);
-  } else if (sportsSeason === "late-season" || holiday === "OpeningDay") {
+  } else if (sportsSeason === "late-season") {
     pool = pool.concat(SPORTS_BARS);
   }
 
@@ -420,10 +371,6 @@ function buildNightlife_(ctx) {
   // Major party holidays
   if (holiday === "NewYearsEve") volume += 4;
   if (holiday === "Halloween") volume += 3;
-  if (holiday === "StPatricksDay") volume += 3;
-  if (holiday === "CincoDeMayo") volume += 2;
-  if (holiday === "OaklandPride") volume += 3;
-  if (holiday === "Independence") volume += 2;
 
   // Quieter holidays
   if (holiday === "Thanksgiving") volume -= 1;
@@ -440,7 +387,6 @@ function buildNightlife_(ctx) {
   // Sports season
   if (sportsSeason === "championship") volume += 3;
   if (sportsSeason === "playoffs") volume += 2;
-  if (holiday === "OpeningDay") volume += 2;
 
   // Cultural activity
   if (culturalActivity >= 1.4) volume += 1;
@@ -459,7 +405,7 @@ function buildNightlife_(ctx) {
 
   // v2.2: More spots for big party nights
   if (holiday === "NewYearsEve" || holiday === "Halloween") count = Math.max(count, 4);
-  if (holiday === "OaklandPride" || isFirstFriday) count = Math.max(count, 3);
+  if (isFirstFriday) count = Math.max(count, 3);
   if (sportsSeason === "championship") count = Math.max(count, 3);
 
   // Add late night spots for high volume
@@ -480,14 +426,6 @@ function buildNightlife_(ctx) {
     vibe = "celebratory";
   } else if (holiday === "Halloween") {
     vibe = "festive-spooky";
-  } else if (holiday === "OaklandPride") {
-    vibe = "festive-pride";
-  } else if (holiday === "StPatricksDay") {
-    vibe = "pub-crawl";
-  } else if (holiday === "CincoDeMayo") {
-    vibe = "fiesta";
-  } else if (holiday === "DiaDeMuertos") {
-    vibe = "reflective-festive";
   } else if (isFirstFriday) {
     vibe = "art-scene";
   } else if (isCreationDay) {
@@ -523,7 +461,7 @@ function buildNightlife_(ctx) {
   if (econMood <= 30) movement = "cautious";
 
   // v2.2: Holiday movement overrides
-  if (holiday === "NewYearsEve" || holiday === "OaklandPride") movement = "high-energy";
+  if (holiday === "NewYearsEve") movement = "high-energy";
   if (isFirstFriday) movement = "art-walk";
   if (sportsSeason === "championship") movement = "fan-surge";
 
@@ -583,13 +521,7 @@ function buildNightlife_(ctx) {
  * |---------|-------|-------------------|
  * | NewYearsEve | 4 | Downtown, Jack London, Lake Merritt, Uptown |
  * | Holiday | 3 | Downtown, Rockridge, Temescal |
- * | StPatricksDay | 3 | Jack London, Downtown, Temescal |
- * | CincoDeMayo | 3 | Fruitvale ×2, Downtown |
- * | Independence | 3 | Jack London, Lake Merritt, Downtown |
  * | Halloween | 4 | Jack London, Downtown, Temescal, Uptown |
- * | DiaDeMuertos | 3 | Fruitvale ×2, Downtown |
- * | OaklandPride | 4 | Downtown, Lake Merritt, Uptown, Jack London |
- * | LunarNewYear | 3 | Chinatown ×2, Downtown |
  *
  * FIRST FRIDAY (5 spots):
  * - Gallery Night Lounge (Uptown), Art Walk Bar (KONO), etc.
@@ -605,12 +537,8 @@ function buildNightlife_(ctx) {
  * VOLUME MODIFIERS (v2.2):
  * - NewYearsEve: +4
  * - Halloween: +3
- * - StPatricksDay: +3
- * - OaklandPride: +3
  * - Championship: +3
  * - First Friday: +2
- * - Independence: +2
- * - CincoDeMayo: +2
  * - Playoffs: +2
  * - Opening Day: +2
  * - Thanksgiving/Holiday: -1
@@ -619,7 +547,6 @@ function buildNightlife_(ctx) {
  * SPOT COUNT:
  * - Base: 1-3 based on volume
  * - NewYearsEve/Halloween: 4
- * - OaklandPride/First Friday: 3
  * - Championship: 3
  *
  * VIBES (v2.2):

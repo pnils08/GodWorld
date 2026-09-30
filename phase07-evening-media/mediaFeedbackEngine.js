@@ -88,7 +88,7 @@ function mediaSceneHoods_(ctx, tag) {
 // v2.1: Feel-good holiday list
 var FEEL_GOOD_HOLIDAYS = [
   'Thanksgiving', 'Holiday', 'Easter', 'MothersDay', 'FathersDay',
-  'ValentinesDay', 'NewYearsDay'
+  'NewYearsDay'
 ];
 
 // v2.1: Year-end recap period
@@ -218,26 +218,8 @@ function applyCalendarMediaModifiers_(ctx) {
   }
 
   // Oakland festivals = celebration coverage
-  var oaklandFestivals = ['OaklandPride', 'ArtSoulFestival', 'Juneteenth'];
-  if (oaklandFestivals.indexOf(cal.holiday) >= 0) {
-    effects.hopeFactor += 0.25;
-    effects.celebrityBuzz += 0.15; // Local celebrities in spotlight
-    effects.holidayNarrative = 'celebration';
-    effects.coverageProfile.festivalCoverage = cal.holiday;
-
-    // Festival neighborhoods get extra positive coverage
-    effects.festivalSpotlight = mediaSceneHoods_(ctx, cal.holiday);   // engine.240: authored Scenes
-  }
 
   // Cultural holidays = community focus
-  var culturalHolidays = ['LunarNewYear', 'CincoDeMayo', 'DiaDeMuertos'];
-  if (culturalHolidays.indexOf(cal.holiday) >= 0) {
-    effects.hopeFactor += 0.15;
-    effects.holidayNarrative = 'cultural_celebration';
-    effects.coverageProfile.culturalFocus = cal.holiday;
-
-    effects.festivalSpotlight = mediaSceneHoods_(ctx, cal.holiday);   // engine.240: authored Scenes
-  }
 
   // Year-end period = recap narratives
   if (YEAR_END_MONTHS.indexOf(cal.month) >= 0) {
@@ -251,7 +233,7 @@ function applyCalendarMediaModifiers_(ctx) {
   }
 
   // Party holidays = nightlife coverage
-  var partyHolidays = ['NewYearsEve', 'StPatricksDay', 'Halloween'];
+  var partyHolidays = ['NewYearsEve', 'Halloween'];
   if (partyHolidays.indexOf(cal.holiday) >= 0) {
     effects.coverageProfile.nightlifeFocus = true;
     effects.holidayNarrative = 'party_coverage';
@@ -280,11 +262,6 @@ function applyCalendarMediaModifiers_(ctx) {
     effects.trendAmplification.sports = 0.2;
   }
 
-  if (cal.holiday === 'OpeningDay') {
-    effects.hopeFactor += 0.2;
-    effects.sportsNarrative = 'opening_day_optimism';
-    effects.coverageProfile.sportsDominance = 'opening_day';
-  }
 
   // ─────────────────────────────────────────────────────────────
   // FIRST FRIDAY
@@ -1118,43 +1095,6 @@ function generateMediaEventPools_(ctx) {
   }
 
   // Festival event pools
-  if (cal.holiday === 'OaklandPride') {
-    effects.eventPools.festival = [
-      "felt the Pride celebration energy everywhere",
-      "saw Pride coverage dominating the feeds",
-      "noticed the rainbow colors across the city",
-      "felt moved by Pride stories in the media",
-      "celebrated the visibility and joy of Pride"
-    ];
-  } else if (cal.holiday === 'ArtSoulFestival') {
-    effects.eventPools.festival = [
-      "caught up in Art & Soul Festival coverage",
-      "felt the creative energy across Oakland",
-      "saw artists being celebrated in the media",
-      "noticed the festival spirit in the air"
-    ];
-  } else if (cal.holiday === 'LunarNewYear') {
-    effects.eventPools.festival = [
-      "enjoyed Lunar New Year celebration coverage",
-      "felt the festive energy from Chinatown",
-      "saw beautiful cultural coverage in the media",
-      "noticed the community celebration spirit"
-    ];
-  } else if (cal.holiday === 'CincoDeMayo' || cal.holiday === 'DiaDeMuertos') {
-    effects.eventPools.festival = [
-      "felt the celebration energy from Fruitvale",
-      "enjoyed cultural celebration coverage",
-      "saw beautiful traditions highlighted in media",
-      "noticed the community pride in coverage"
-    ];
-  } else if (cal.holiday === 'Juneteenth') {
-    effects.eventPools.festival = [
-      "felt moved by Juneteenth coverage",
-      "saw the community celebration highlighted",
-      "noticed the historical significance in media",
-      "felt the pride and reflection in coverage"
-    ];
-  }
 
   // Oakland Pride (Creation Day)
   if (cal.isCreationDay) {

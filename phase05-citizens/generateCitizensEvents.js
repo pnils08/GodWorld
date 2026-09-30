@@ -1909,23 +1909,11 @@ function generateCitizensEvents_(ctx) {
     Holiday: ["felt the holiday spirit in the air", "wrapped up last-minute seasonal tasks", "enjoyed decorations around town"],
     NewYear: ["reflected on the year past", "thought about resolutions ahead", "felt the fresh-start energy of January"],
     NewYearsEve: ["made plans for the evening countdown", "felt anticipation for the new year", "prepared for celebration"],
-    Independence: ["noticed festive decorations around town", "made plans for nighttime viewing", "enjoyed the holiday atmosphere"],
-    MLKDay: ["reflected on legacy and justice", "thought about community and action", "felt the weight of history"],
-    Juneteenth: ["celebrated freedom and heritage", "connected with community history", "felt pride in cultural roots"],
-    CincoDeMayo: ["enjoyed a festive atmosphere", "celebrated cultural heritage", "noticed colorful decorations"],
-    DiaDeMuertos: ["honored ancestors in quiet reflection", "noticed beautiful altars around town", "felt connection to those passed"],
-    LunarNewYear: ["enjoyed new year festivities", "noticed red decorations around Chinatown", "felt the celebratory energy"],
-    OpeningDay: ["felt the excitement of a season opener", "noticed fans and rituals returning", "made plans to follow the opener"],
-    OaklandPride: ["celebrated community pride", "noticed rainbow flags around town", "felt the city's inclusive spirit"],
     Valentine: ["noticed Valentine's displays around town", "thought about loved ones", "felt the romantic atmosphere"],
     Halloween: ["noticed spooky decorations around town", "saw costumes appearing early", "felt the playful autumn spirit"],
     Easter: ["noticed spring celebrations around town", "enjoyed the seasonal atmosphere", "saw families gathering"],
-    StPatricksDay: ["noticed green everywhere", "felt the festive spirit", "saw celebrations starting early"],
     MothersDay: ["thought about family connections", "noticed families gathering", "felt grateful for maternal figures"],
-    FathersDay: ["thought about family bonds", "noticed families celebrating", "felt grateful for paternal figures"],
-    MemorialDay: ["reflected on those who served", "enjoyed the long weekend atmosphere", "noticed flags around town"],
-    LaborDay: ["appreciated workers and labor", "enjoyed the last summer holiday", "felt the end-of-summer mood"],
-    VeteransDay: ["honored veterans in thought", "noticed memorial observances", "reflected on service and sacrifice"]
+    FathersDay: ["thought about family bonds", "noticed families celebrating", "felt grateful for paternal figures"]
   };
 
   var firstFridayTexts = ["checked out First Friday galleries", "enjoyed the art walk atmosphere", "felt the creative energy of First Friday", "wandered through open studios", "discovered new local artists", "soaked in the community arts scene"];

@@ -783,7 +783,6 @@ function upgradeBondSheetSchema_(ctx) {
  * Holiday, HolidayPriority, FirstFriday, CreationDay, SportsSeason
  *
  * CALENDAR-AWARE QUERIES:
- * - getBondsByHoliday_(ctx, 'OaklandPride')
  * - getFirstFridayBonds_(ctx)
  * - getCreationDayBonds_(ctx)
  * - getBondsBySportsSeason_(ctx, 'championship')

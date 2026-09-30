@@ -214,11 +214,6 @@ function generateGenericCitizenMicroEvents_(ctx) {
       "felt anticipation for the countdown",
       "saw people dressed for celebration"
     ],
-    Independence: [
-      "noticed red, white, and blue decorations",
-      "heard distant fireworks being set up",
-      "felt the patriotic atmosphere"
-    ],
     Valentine: [
       "noticed Valentine's displays in windows",
       "saw couples enjoying the day",
@@ -233,56 +228,6 @@ function generateGenericCitizenMicroEvents_(ctx) {
       "noticed spring decorations around",
       "saw families in their Sunday best",
       "felt the seasonal renewal"
-    ],
-    MLKDay: [
-      "reflected on Dr. King's legacy",
-      "noticed observance events being organized",
-      "felt the weight of history"
-    ],
-    Juneteenth: [
-      "felt the celebration of freedom",
-      "noticed community events being set up",
-      "appreciated the cultural significance"
-    ],
-    CincoDeMayo: [
-      "heard festive music from Fruitvale",
-      "noticed colorful decorations",
-      "felt the celebratory energy"
-    ],
-    DiaDeMuertos: [
-      "noticed beautiful altars being arranged",
-      "saw marigolds decorating storefronts",
-      "felt the reverent atmosphere"
-    ],
-    LunarNewYear: [
-      "noticed red lanterns in Chinatown",
-      "heard firecrackers in the distance",
-      "felt the celebratory energy"
-    ],
-    OpeningDay: [
-      "noticed green and gold everywhere",
-      "felt baseball excitement in the air",
-      "heard fans heading to the game"
-    ],
-    OaklandPride: [
-      "noticed rainbow flags around town",
-      "felt the inclusive celebration",
-      "saw the community coming together"
-    ],
-    MemorialDay: [
-      "noticed flags at half-staff",
-      "felt the reflective atmosphere",
-      "enjoyed the long weekend energy"
-    ],
-    LaborDay: [
-      "enjoyed the end-of-summer holiday",
-      "noticed barbecue smoke in the air",
-      "appreciated the day of rest"
-    ],
-    VeteransDay: [
-      "noticed observance ceremonies",
-      "felt respect for those who served",
-      "saw veterans being honored"
     ],
     MothersDay: [
       "saw families treating their mothers",

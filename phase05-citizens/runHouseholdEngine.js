@@ -235,22 +235,9 @@ function runHouseholdEngine_(ctx) {
     holidayPool.push("prepared the home for New Year's celebration");
     holidayPool.push("gathered with household for countdown");
   }
-  if (holiday === "MLKDay") {
-    holidayPool.push("spent the day off at home");
-    holidayPool.push("watched MLK Day programming together");
-  }
   if (holiday === "Easter") {
     holidayPool.push("prepared Easter gathering at home");
     holidayPool.push("enjoyed holiday brunch with household");
-  }
-  if (holiday === "MemorialDay" || holiday === "LaborDay") {
-    holidayPool.push("enjoyed a relaxed long weekend at home");
-    holidayPool.push("fired up the grill in the backyard");
-  }
-  if (holiday === "Independence") {
-    holidayPool.push("adjusted home routines for celebration noise");
-    holidayPool.push("watched fireworks from the window");
-    holidayPool.push("hosted a small Fourth of July gathering");
   }
   if (holiday === "Halloween") {
     holidayPool.push("decorated the home for Halloween");
@@ -270,19 +257,6 @@ function runHouseholdEngine_(ctx) {
   }
 
   // Cultural holidays
-  if (holiday === "CincoDeMayo") {
-    holidayPool.push("prepared festive food at home");
-    holidayPool.push("celebrated with music and family");
-  }
-  if (holiday === "DiaDeMuertos") {
-    holidayPool.push("set up an ofrenda at home");
-    holidayPool.push("honored ancestors with household members");
-    holidayPool.push("prepared pan de muerto and shared memories");
-  }
-  if (holiday === "Juneteenth") {
-    holidayPool.push("celebrated Juneteenth with a family cookout");
-    holidayPool.push("shared stories of heritage at home");
-  }
   if (holiday === "Hanukkah") {
     holidayPool.push("lit the menorah with household members");
     holidayPool.push("prepared latkes at home");
@@ -292,10 +266,6 @@ function runHouseholdEngine_(ctx) {
   if (holiday === "Valentine") {
     holidayPool.push("shared a special dinner at home");
     holidayPool.push("exchanged Valentine's greetings with household");
-  }
-  if (holiday === "StPatricksDay") {
-    holidayPool.push("wore green around the house");
-    holidayPool.push("prepared corned beef at home");
   }
   if (holiday === "MothersDay") {
     holidayPool.push("prepared breakfast in bed for mom");
@@ -307,10 +277,6 @@ function runHouseholdEngine_(ctx) {
   }
 
   // Oakland-specific
-  if (holiday === "OpeningDay") {
-    holidayPool.push("watched the A's opener on TV at home");
-    holidayPool.push("wore green and gold around the house");
-  }
 
   // ═══════════════════════════════════════════════════════════════════════════
   // FIRST FRIDAY HOUSEHOLD EFFECTS (v2.2)
@@ -694,9 +660,7 @@ function runHouseholdEngine_(ctx) {
  * - Thanksgiving: Meal prep, hosting family, gratitude
  * - Holiday (Christmas): Decorating, gifts, gatherings
  * - Halloween: Decorating, candy, pumpkins
- * - DiaDeMuertos: Ofrenda, honoring ancestors
  * - Easter: Gatherings, brunch
- * - Independence: Fireworks watching, BBQ
  * - etc.
  * 
  * Neighborhood Flavor (12 total):

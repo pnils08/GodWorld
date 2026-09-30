@@ -192,8 +192,7 @@ function applyDemographicDrift_(ctx) {
 
   // Gathering holidays increase illness spread
   var gatheringHolidays = [
-    "Thanksgiving", "Holiday", "NewYearsEve", "NewYear",
-    "Independence", "OpeningDay", "OaklandPride"
+    "Thanksgiving", "Holiday", "NewYearsEve", "NewYear"
   ];
   if (gatheringHolidays.indexOf(holiday) >= 0) {
     ill += illnessStepUp * 3;
@@ -301,16 +300,12 @@ function applyDemographicDrift_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
 
   // Retail holidays boost temporary employment
-  var retailHolidays = ["Holiday", "BlackFriday", "Valentine", "MothersDay", "FathersDay"];
+  var retailHolidays = ["Holiday", "Valentine", "MothersDay", "FathersDay"];
   if (retailHolidays.indexOf(holiday) >= 0) {
     emp += illnessStepUp * 4;
   }
 
   // Service industry holidays boost employment
-  var serviceHolidays = ["Independence", "MemorialDay", "LaborDay", "CincoDeMayo"];
-  if (serviceHolidays.indexOf(holiday) >= 0) {
-    emp += illnessStepUp * 2.5;
-  }
 
   // Championship economic boost
   if (sportsSeason === "championship") {

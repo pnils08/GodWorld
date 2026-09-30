@@ -185,41 +185,11 @@ function buildEveningSportsAndStreaming_(ctx) {
     "date-night movie picks"
   ];
 
-  var INDEPENDENCE_STREAMING = [
-    "patriotic film classics",
-    "action movie marathon",
-    "summer blockbuster binge"
-  ];
 
-  var PRIDE_STREAMING = [
-    "LGBTQ+ cinema celebration",
-    "Pride documentary marathon",
-    "queer classics rotation"
-  ];
 
-  var MLK_STREAMING = [
-    "civil rights documentary marathon",
-    "Black history cinema",
-    "social justice film series"
-  ];
 
-  var JUNETEENTH_STREAMING = [
-    "Black cinema celebration",
-    "freedom documentary series",
-    "Black excellence film rotation"
-  ];
 
-  var DIA_DE_MUERTOS_STREAMING = [
-    "Día de los Muertos specials",
-    "Latin cinema celebration",
-    "cultural film marathon"
-  ];
 
-  var LUNAR_NEW_YEAR_STREAMING = [
-    "Asian cinema celebration",
-    "Lunar New Year specials",
-    "martial arts classics marathon"
-  ];
 
   // ═══════════════════════════════════════════════════════════════════════════
   // FIRST FRIDAY STREAMING
@@ -267,24 +237,6 @@ function buildEveningSportsAndStreaming_(ctx) {
   }
   if (holiday === "Valentine") {
     streamPool = streamPool.concat(VALENTINE_STREAMING, VALENTINE_STREAMING);
-  }
-  if (holiday === "Independence" || holiday === "MemorialDay" || holiday === "LaborDay") {
-    streamPool = streamPool.concat(INDEPENDENCE_STREAMING);
-  }
-  if (holiday === "OaklandPride") {
-    streamPool = streamPool.concat(PRIDE_STREAMING, PRIDE_STREAMING);
-  }
-  if (holiday === "MLKDay") {
-    streamPool = streamPool.concat(MLK_STREAMING, MLK_STREAMING);
-  }
-  if (holiday === "Juneteenth") {
-    streamPool = streamPool.concat(JUNETEENTH_STREAMING, JUNETEENTH_STREAMING);
-  }
-  if (holiday === "DiaDeMuertos") {
-    streamPool = streamPool.concat(DIA_DE_MUERTOS_STREAMING, DIA_DE_MUERTOS_STREAMING);
-  }
-  if (holiday === "LunarNewYear") {
-    streamPool = streamPool.concat(LUNAR_NEW_YEAR_STREAMING, LUNAR_NEW_YEAR_STREAMING);
   }
 
   // ───────────────────────────────────────────────────────────────────────────

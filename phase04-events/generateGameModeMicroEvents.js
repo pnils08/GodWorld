@@ -335,13 +335,7 @@ function generateGameModeMicroEvents_(ctx) {
   var holidayPublicPool = {
     Thanksgiving: ["participated in a holiday community event"],
     Holiday: ["attended a holiday charity function"],
-    NewYear: ["reflected publicly on the year ahead"],
-    Independence: ["appeared at a civic celebration"],
-    OpeningDay: ["felt the excitement of Opening Day"],
-    Juneteenth: ["participated in community observance"],
-    MemorialDay: ["honored the occasion publicly"],
-    LaborDay: ["acknowledged workers at a public event"],
-    VeteransDay: ["paid respects at a veterans event"]
+    NewYear: ["reflected publicly on the year ahead"]
   };
 
   function yn_(v) {

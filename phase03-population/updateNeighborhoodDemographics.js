@@ -579,34 +579,11 @@ function buildNeighborhoodDemographicModifiers_(holiday, isFirstFriday, isCreati
   // HOLIDAY-SPECIFIC MODIFIERS
   // ─────────────────────────────────────────────────────────────────────────
 
-  if (holiday === 'LunarNewYear') {
-    modifiers['Chinatown'] = { inflowMod: 1.8, outflowMod: 0.5 };
-  }
 
-  if (holiday === 'CincoDeMayo' || holiday === 'DiaDeMuertos') {
-    modifiers['Fruitvale'] = { inflowMod: 1.8, outflowMod: 0.5 };
-    modifiers['San Antonio'] = { inflowMod: 1.4, outflowMod: 0.7 };
-  }
 
-  if (holiday === 'Juneteenth') {
-    modifiers['West Oakland'] = { inflowMod: 1.6, outflowMod: 0.6 };
-  }
 
-  if (holiday === 'OaklandPride') {
-    modifiers['Downtown'] = { inflowMod: 1.8, outflowMod: 0.5 };
-    modifiers['Grand Lake'] = { inflowMod: 1.5, outflowMod: 0.6 };
-    modifiers['Adams Point'] = { inflowMod: 1.3, outflowMod: 0.7 };
-  }
 
-  if (holiday === 'ArtSoulFestival') {
-    modifiers['Downtown'] = { inflowMod: 1.8, outflowMod: 0.5 };
-    modifiers['Jack London'] = { inflowMod: 1.4, outflowMod: 0.7 };
-  }
 
-  if (holiday === 'OpeningDay') {
-    modifiers['Jack London'] = { inflowMod: 2.0, outflowMod: 0.4 };
-    modifiers['Downtown'] = { inflowMod: 1.3, outflowMod: 0.8 };
-  }
 
   // ─────────────────────────────────────────────────────────────────────────
   // FIRST FRIDAY MODIFIERS (arts districts)
@@ -675,12 +652,6 @@ function buildNeighborhoodDemographicModifiers_(holiday, isFirstFriday, isCreati
  * 8. Calculate demographic shifts for story signals
  *
  * CALENDAR MODIFIERS:
- * - LunarNewYear: Chinatown +80% inflow
- * - CincoDeMayo/DiaDeMuertos: Fruitvale +80% inflow
- * - Juneteenth: West Oakland +60% inflow
- * - OaklandPride: Downtown/Grand Lake +80%/+50% inflow
- * - ArtSoulFestival: Downtown +80% inflow
- * - OpeningDay: Jack London +100% inflow
  * - First Friday: Temescal +50%, Downtown +30% inflow
  * - Creation Day: Downtown +40% inflow, global -20% outflow
  * - Championship: Jack London +100% inflow

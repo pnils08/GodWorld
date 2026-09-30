@@ -210,11 +210,6 @@ function textureTriggerEngine_(ctx) {
     cappedPush(makeTrigger('FESTIVAL', '', 'fireworks_anticipation', 'City awaiting midnight fireworks', 'moderate'));
   }
 
-  if (holiday === 'Independence') {
-    cappedPush(makeTrigger('HOLIDAY', '', 'patriotic_decorations', 'Red, white, and blue decorations everywhere', 'moderate'));
-    cappedPush(makeTrigger('HOLIDAY', 'Jack London', 'bbq_smoke', 'BBQ smoke drifting through neighborhoods', 'low'));
-    cappedPush(makeTrigger('HOLIDAY', 'Lake Merritt', 'fireworks_gathering', 'Crowds gathering for fireworks viewing', 'high'));
-  }
 
   if (holiday === 'Halloween') {
     cappedPush(makeTrigger('HOLIDAY', 'Temescal', 'costume_parade', 'Costumed figures filling the streets', 'high'));
@@ -233,72 +228,21 @@ function textureTriggerEngine_(ctx) {
     cappedPush(makeTrigger('HOLIDAY', '', 'festive_mood', 'Festive spirit in the air', 'moderate'));
   }
 
-  if (holiday === 'OaklandPride') {
-    cappedPush(makeTrigger('FESTIVAL', 'Downtown', 'rainbow_decorations', 'Rainbow flags and decorations everywhere', 'high'));
-    cappedPush(makeTrigger('FESTIVAL', 'Lake Merritt', 'celebration_crowds', 'Joyful Pride celebration crowds', 'high'));
-    cappedPush(makeTrigger('FESTIVAL', 'Uptown', 'pride_energy', 'Pride energy radiating through the district', 'high'));
-  }
 
-  if (holiday === 'ArtSoulFestival') {
-    cappedPush(makeTrigger('FESTIVAL', 'Downtown', 'festival_grounds', 'Festival stages and vendors filling downtown', 'high'));
-    cappedPush(makeTrigger('FESTIVAL', 'Downtown', 'live_music_energy', 'Live music energy pulsing through streets', 'high'));
-    cappedPush(makeTrigger('CULTURE', '', 'cultural_celebration', 'Oakland culture on full display', 'high'));
-  }
 
-  if (holiday === 'LunarNewYear') {
-    cappedPush(makeTrigger('FESTIVAL', 'Chinatown', 'lion_dance_drums', 'Lion dance drums echoing through streets', 'high'));
-    cappedPush(makeTrigger('FESTIVAL', 'Chinatown', 'red_lanterns', 'Red lanterns decorating storefronts', 'moderate'));
-    cappedPush(makeTrigger('FESTIVAL', 'Chinatown', 'firecracker_smoke', 'Firecracker smoke lingering in the air', 'moderate'));
-  }
 
-  if (holiday === 'CincoDeMayo') {
-    cappedPush(makeTrigger('FESTIVAL', 'Fruitvale', 'mariachi_music', 'Mariachi music filling the streets', 'high'));
-    cappedPush(makeTrigger('FESTIVAL', 'Fruitvale', 'fiesta_colors', 'Vibrant fiesta decorations everywhere', 'moderate'));
-    cappedPush(makeTrigger('FESTIVAL', 'Fruitvale', 'street_celebration', 'Street celebration energy', 'high'));
-  }
 
-  if (holiday === 'DiaDeMuertos') {
-    cappedPush(makeTrigger('FESTIVAL', 'Fruitvale', 'altar_candles', 'Candlelit altars glowing on porches', 'moderate'));
-    cappedPush(makeTrigger('FESTIVAL', 'Fruitvale', 'marigold_scent', 'Marigold scent in the air', 'moderate'));
-    cappedPush(makeTrigger('FESTIVAL', 'Fruitvale', 'face_paint_processions', 'Calavera face paint in the crowds', 'moderate'));
-  }
 
-  if (holiday === 'Juneteenth') {
-    cappedPush(makeTrigger('FESTIVAL', 'West Oakland', 'celebration_gathering', 'Community celebration gathering', 'high'));
-    cappedPush(makeTrigger('FESTIVAL', 'Downtown', 'freedom_celebration', 'Freedom celebration energy', 'high'));
-    cappedPush(makeTrigger('COMMUNITY', 'Lake Merritt', 'heritage_pride', 'Heritage pride on display', 'moderate'));
-  }
 
-  if (holiday === 'StPatricksDay') {
-    cappedPush(makeTrigger('HOLIDAY', 'Jack London', 'pub_overflow', 'Pubs overflowing with green-clad revelers', 'high'));
-    cappedPush(makeTrigger('HOLIDAY', '', 'green_decorations', 'Green decorations throughout the city', 'moderate'));
-  }
 
-  if (holiday === 'MLKDay') {
-    cappedPush(makeTrigger('CIVIC', 'Downtown', 'march_assembly', 'March participants assembling', 'moderate'));
-    cappedPush(makeTrigger('CIVIC', '', 'reflective_mood', 'Reflective, purposeful mood in the city', 'moderate'));
-  }
 
-  if (holiday === 'MemorialDay' || holiday === 'VeteransDay') {
-    cappedPush(makeTrigger('CIVIC', 'Downtown', 'ceremony_gathering', 'Veterans and families gathering for ceremony', 'moderate'));
-    cappedPush(makeTrigger('CIVIC', '', 'flags_display', 'American flags on display throughout city', 'low'));
-  }
 
   if (holiday === 'Easter') {
     cappedPush(makeTrigger('HOLIDAY', '', 'spring_pastels', 'Spring pastels and Easter decorations', 'low'));
     cappedPush(makeTrigger('COMMUNITY', 'Lake Merritt', 'egg_hunt_activity', 'Families at egg hunt events', 'moderate'));
   }
 
-  if (holiday === 'EarthDay') {
-    cappedPush(makeTrigger('ENVIRONMENT', '', 'green_awareness', 'Environmental awareness events throughout city', 'moderate'));
-    cappedPush(makeTrigger('COMMUNITY', 'Lake Merritt', 'cleanup_crews', 'Volunteer cleanup crews at work', 'moderate'));
-  }
 
-  if (holiday === 'OpeningDay') {
-    cappedPush(makeTrigger('SPORTS', 'Jack London', 'baseball_fever', 'Opening Day baseball fever', 'high'));
-    cappedPush(makeTrigger('SPORTS', 'Jack London', 'green_and_gold', 'Green and gold everywhere near the stadium', 'high'));
-    cappedPush(makeTrigger('SPORTS', 'Downtown', 'parade_energy', 'Opening Day parade energy downtown', 'moderate'));
-  }
 
   if (holiday !== 'none' && holidayPriority === 'major') {
     cappedPush(makeTrigger('HOLIDAY', '', 'holiday_atmosphere', 'Major holiday atmosphere pervading the city', 'high'));

@@ -85,7 +85,6 @@ var AGE_RANGES = {
 };
 
 var WEDDING_BOOST_HOLIDAYS = [
-  "ValentinesDay", // legacy
   "Valentine",     // used elsewhere in your scripts
   "NewYearsEve"
 ];
@@ -1019,7 +1018,7 @@ function checkWedding_(ctx, popId, age, lifeHistory, cal, hasHousehold) {
   if (cal.month === 6) c *= 3.0;
   else if (cal.season === "spring" || cal.season === "summer") c *= 2.0;
 
-  if (cal.holiday === "ValentinesDay" || cal.holiday === "Valentine") c *= 2.5;
+  if (cal.holiday === "Valentine") c *= 2.5;
   if (cal.holiday === "NewYearsEve") c *= 1.5;
 
   var bonds = getCitizenBondsFromStorage_(ctx, popId);

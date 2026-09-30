@@ -151,22 +151,11 @@ function worldEventsEngine_(ctx) {
   var PARTY_EVENTS = ["noise complaint wave", "street party overflow", "intoxication incident", "rideshare surge chaos"];
 
   var NEW_YEARS_EVE_EVENTS = ["countdown crowd surge", "champagne bottle incident", "midnight noise complaint", "fireworks injury", "party overflow into street"];
-  var INDEPENDENCE_EVENTS = ["illegal firework seizure", "BBQ grill flare-up", "sparkler burn report", "flag pole incident", "patriotic parade delay"];
   var HALLOWEEN_EVENTS = ["costume altercation", "haunted house panic", "trick-or-treat traffic jam", "pumpkin vandalism", "fake blood slip hazard"];
   var THANKSGIVING_EVENTS = ["turkey fryer fire", "family dispute call", "grocery store rush incident", "parade balloon snag"];
   var HOLIDAY_EVENTS = ["shopping rush injury", "package theft spike", "decoration electrical issue", "tree lighting delay"];
 
-  var LUNAR_NEW_YEAR_EVENTS = ["lion dance traffic stop", "firecracker complaint", "parade dragon tangle", "red envelope dispute"];
-  var CINCO_EVENTS = ["mariachi noise complaint", "street fair overcrowding", "festival food cart fire", "piñata debris cleanup"];
-  var DIA_DE_MUERTOS_EVENTS = ["altar candle fire concern", "marigold supply shortage", "cemetery traffic jam", "face paint allergy report"];
-  var JUNETEENTH_EVENTS = ["parade route adjustment", "festival sound check complaint", "vendor permit dispute", "block party overflow"];
-  var PRIDE_EVENTS = ["parade float breakdown", "rainbow crosswalk photo crowd", "costume heat exhaustion", "glitter cleanup complaint", "celebration crowd surge"];
-  var ART_SOUL_EVENTS = ["stage sound issue", "vendor tent collapse", "art installation damage", "crowd capacity concern", "food vendor line dispute"];
-  var ST_PATRICKS_EVENTS = ["pub crawl overflow", "green beer spill hazard", "parade shamrock float issue", "bar capacity complaint"];
   var EASTER_EVENTS = ["egg hunt overcrowding", "Easter parade delay", "bunny costume heat issue"];
-  var EARTH_DAY_EVENTS = ["cleanup crew traffic issue", "environmental protest", "tree planting ceremony delay"];
-  var MLK_EVENTS = ["march route adjustment", "memorial service overflow", "unity rally traffic"];
-  var MEMORIAL_VETERANS_EVENTS = ["ceremony cannon complaint", "memorial parade delay", "veteran tribute traffic"];
 
   var FIRST_FRIDAY_EVENTS = ["gallery overcrowding", "street performer permit issue", "art installation mishap", "wine spill on artwork", "parking garage backup", "food truck line dispute"];
   var CREATION_DAY_EVENTS = ["founders ceremony delay", "heritage walk overcrowding", "history exhibit mishap", "community speech feedback issue"];
@@ -174,7 +163,6 @@ function worldEventsEngine_(ctx) {
   var SPORTS_BASE_EVENTS = ["game day traffic surge", "tailgate grill fire", "parking lot fender-bender", "fan celebration spillover"];
   var PLAYOFF_EVENTS = ["playoff watch party overflow", "fan altercation", "scalping bust", "sports bar capacity issue", "honking celebration complaint"];
   var CHAMPIONSHIP_EVENTS = ["championship crowd surge", "victory celebration damage", "championship parade prep", "trophy viewing line chaos", "citywide honking complaint"];
-  var OPENING_DAY_EVENTS = ["Opening Day parade delay", "first pitch ceremony traffic", "sold-out parking chaos", "tailgate zone overflow"];
 
   // ═══════════════════════════════════════════════════════════════════════════
   // ADD CALENDAR CATEGORIES (with _domain tags)
@@ -186,10 +174,6 @@ function worldEventsEngine_(ctx) {
     categories.push({ weight: holidayWeight, _domain: 'FESTIVAL', list: FIREWORKS_EVENTS });
     categories.push({ weight: holidayWeight, _domain: 'NIGHTLIFE', list: PARTY_EVENTS });
   }
-  if (holiday === "Independence") {
-    categories.push({ weight: holidayWeight * 2, _domain: 'FESTIVAL', list: INDEPENDENCE_EVENTS });
-    categories.push({ weight: holidayWeight, _domain: 'FESTIVAL', list: FIREWORKS_EVENTS });
-  }
   if (holiday === "Halloween") {
     categories.push({ weight: holidayWeight * 2, _domain: 'FESTIVAL', list: HALLOWEEN_EVENTS });
     categories.push({ weight: holidayWeight, _domain: 'NIGHTLIFE', list: PARTY_EVENTS });
@@ -197,40 +181,8 @@ function worldEventsEngine_(ctx) {
   if (holiday === "Thanksgiving") categories.push({ weight: holidayWeight, _domain: 'HOLIDAY', list: THANKSGIVING_EVENTS });
   if (holiday === "Holiday") categories.push({ weight: holidayWeight, _domain: 'HOLIDAY', list: HOLIDAY_EVENTS });
 
-  if (holiday === "LunarNewYear") {
-    categories.push({ weight: holidayWeight * 1.5, _domain: 'FESTIVAL', list: LUNAR_NEW_YEAR_EVENTS });
-    categories.push({ weight: holidayWeight, _domain: 'FESTIVAL', list: FESTIVAL_EVENTS });
-  }
-  if (holiday === "CincoDeMayo") {
-    categories.push({ weight: holidayWeight * 1.5, _domain: 'FESTIVAL', list: CINCO_EVENTS });
-    categories.push({ weight: holidayWeight, _domain: 'FESTIVAL', list: FESTIVAL_EVENTS });
-  }
-  if (holiday === "DiaDeMuertos") categories.push({ weight: holidayWeight * 1.5, _domain: 'FESTIVAL', list: DIA_DE_MUERTOS_EVENTS });
-  if (holiday === "Juneteenth") {
-    categories.push({ weight: holidayWeight * 1.5, _domain: 'FESTIVAL', list: JUNETEENTH_EVENTS });
-    categories.push({ weight: holidayWeight, _domain: 'FESTIVAL', list: FESTIVAL_EVENTS });
-  }
-  if (holiday === "StPatricksDay") {
-    categories.push({ weight: holidayWeight * 1.5, _domain: 'FESTIVAL', list: ST_PATRICKS_EVENTS });
-    categories.push({ weight: holidayWeight, _domain: 'NIGHTLIFE', list: PARTY_EVENTS });
-  }
   if (holiday === "Easter") categories.push({ weight: holidayWeight, _domain: 'HOLIDAY', list: EASTER_EVENTS });
-  if (holiday === "EarthDay") categories.push({ weight: holidayWeight, _domain: 'CIVIC', list: EARTH_DAY_EVENTS });
-  if (holiday === "MLKDay") categories.push({ weight: holidayWeight, _domain: 'CIVIC', list: MLK_EVENTS });
-  if (holiday === "MemorialDay" || holiday === "VeteransDay") categories.push({ weight: holidayWeight, _domain: 'CIVIC', list: MEMORIAL_VETERANS_EVENTS });
 
-  if (holiday === "OaklandPride") {
-    categories.push({ weight: holidayWeight * 2, _domain: 'FESTIVAL', list: PRIDE_EVENTS });
-    categories.push({ weight: holidayWeight, _domain: 'FESTIVAL', list: FESTIVAL_EVENTS });
-  }
-  if (holiday === "ArtSoulFestival") {
-    categories.push({ weight: holidayWeight * 2, _domain: 'CULTURE', list: ART_SOUL_EVENTS });
-    categories.push({ weight: holidayWeight, _domain: 'FESTIVAL', list: FESTIVAL_EVENTS });
-  }
-  if (holiday === "OpeningDay") {
-    categories.push({ weight: holidayWeight * 2, _domain: 'SPORTS', list: OPENING_DAY_EVENTS });
-    categories.push({ weight: holidayWeight, _domain: 'SPORTS', list: SPORTS_BASE_EVENTS });
-  }
 
   if (isFirstFriday) categories.push({ weight: holidayWeight * 1.5, _domain: 'CULTURE', list: FIRST_FRIDAY_EVENTS });
   if (isCreationDay) {
@@ -261,12 +213,9 @@ function worldEventsEngine_(ctx) {
   if (civicLoad === "load-strain") baseCount++;
 
   if (holiday === "NewYearsEve") baseCount += 2;
-  if (holiday === "OaklandPride" || holiday === "ArtSoulFestival") baseCount += 2;
-  if (holiday === "Independence" || holiday === "Halloween") baseCount++;
-  if (holiday === "LunarNewYear" || holiday === "CincoDeMayo") baseCount++;
+  if (holiday === "Halloween") baseCount++;
   if (holidayPriority === "major") baseCount++;
   if (isFirstFriday) baseCount++;
-  if (holiday === "OpeningDay") baseCount++;
 
   if (holiday === "Thanksgiving" || holiday === "Easter") baseCount--;
   if (holiday === "MothersDay" || holiday === "FathersDay") baseCount--;
@@ -377,7 +326,7 @@ function worldEventsEngine_(ctx) {
     if (weatherImp >= 1.3) sevScore += 1;
     if (drift <= -20) sevScore += 1;
 
-    if (holiday === "NewYearsEve" || holiday === "OaklandPride") sevScore += 1;
+    if (holiday === "NewYearsEve") sevScore += 1;
     if (allowChampFlavor) sevScore += 1;
 
     if (holiday === "Thanksgiving" || holiday === "Easter") sevScore -= 1;

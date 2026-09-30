@@ -80,32 +80,8 @@ function deriveDemographicDrift_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
 
   // Major Oakland festivals → visitor surge
-  if (holiday === 'OaklandPride') {
-    driftFactors.push("Festival visitors (Pride celebration)");
-    driftFactors.push("LGBTQ+ community inflow (Pride weekend)");
-  }
-  if (holiday === 'ArtSoulFestival') {
-    driftFactors.push("Festival visitors (Art & Soul)");
-    driftFactors.push("Cultural tourists (Oakland festival)");
-  }
 
   // Cultural holidays → community-specific visitors
-  if (holiday === 'LunarNewYear') {
-    driftFactors.push("Cultural tourists (Lunar New Year)");
-    driftFactors.push("Family inflow (holiday gathering)");
-  }
-  if (holiday === 'CincoDeMayo') {
-    driftFactors.push("Festival visitors (Cinco de Mayo)");
-    driftFactors.push("Cultural tourists (Fruitvale celebration)");
-  }
-  if (holiday === 'DiaDeMuertos') {
-    driftFactors.push("Cultural visitors (Día de los Muertos)");
-    driftFactors.push("Family inflow (honoring ancestors)");
-  }
-  if (holiday === 'Juneteenth') {
-    driftFactors.push("Community gathering (Juneteenth)");
-    driftFactors.push("Cultural visitors (freedom celebration)");
-  }
 
   // Family holidays → family inflow, less transients
   if (holiday === 'Thanksgiving') {
@@ -128,27 +104,12 @@ function deriveDemographicDrift_(ctx) {
     driftFactors.push("Party crowd inflow (New Year celebration)");
     driftFactors.push("Youth surge (countdown events)");
   }
-  if (holiday === 'StPatricksDay') {
-    driftFactors.push("Bar crowd inflow (St. Patrick's Day)");
-    driftFactors.push("Youth surge (pub crawl energy)");
-  }
   if (holiday === 'Halloween') {
     driftFactors.push("Party visitors (Halloween events)");
     driftFactors.push("Family inflow (trick-or-treat)");
   }
 
   // Patriotic holidays → mixed patterns
-  if (holiday === 'Independence') {
-    driftFactors.push("Family inflow (July 4th gathering)");
-    driftFactors.push("Visitor surge (fireworks viewing)");
-  }
-  if (holiday === 'MemorialDay' || holiday === 'VeteransDay') {
-    driftFactors.push("Veteran community gathering");
-    driftFactors.push("Family inflow (memorial observance)");
-  }
-  if (holiday === 'MLKDay') {
-    driftFactors.push("Community gathering (MLK observance)");
-  }
 
   // ═══════════════════════════════════════════════════════════════════════════
   // v3.2: FIRST FRIDAY DRIFT
@@ -183,10 +144,6 @@ function deriveDemographicDrift_(ctx) {
     driftFactors.push("Sports interest (pennant race)");
   }
 
-  if (holiday === 'OpeningDay') {
-    driftFactors.push("Baseball fans surge (Opening Day)");
-    driftFactors.push("Sports visitors (season opener)");
-  }
 
   // ═══════════════════════════════════════════════════════════════════════════
   // EXISTING DRIFT FACTORS (preserved from v3.1)
@@ -354,19 +311,10 @@ function deriveDemographicDrift_(ctx) {
  * 
  * | Holiday | Drift Factors |
  * |---------|---------------|
- * | OaklandPride | Festival visitors, LGBTQ+ community inflow |
- * | ArtSoulFestival | Festival visitors, Cultural tourists |
- * | LunarNewYear | Cultural tourists, Family inflow |
- * | CincoDeMayo | Festival visitors, Cultural tourists |
- * | DiaDeMuertos | Cultural visitors, Family inflow |
- * | Juneteenth | Community gathering, Cultural visitors |
  * | Thanksgiving | Family inflow, Transient outflow |
  * | Holiday | Family inflow, Shopper surge |
  * | NewYearsEve | Party crowd inflow, Youth surge |
- * | StPatricksDay | Bar crowd inflow, Youth surge |
  * | Halloween | Party visitors, Family inflow |
- * | Independence | Family inflow, Visitor surge |
- * | OpeningDay | Baseball fans surge, Sports visitors |
  * 
  * FIRST FRIDAY DRIFT:
  * - Arts crowd inflow

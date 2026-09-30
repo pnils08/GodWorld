@@ -104,19 +104,13 @@ function generateCrisisSpikes_(ctx) {
 
   // High-activity holidays may INCREASE certain crisis types (crowds, accidents)
   var crowdHolidays = [
-    "Independence", "NewYearsEve", "Halloween", "OpeningDay", "OaklandPride"
+    "NewYearsEve", "Halloween"
   ];
   if (crowdHolidays.indexOf(holiday) >= 0) {
     baseChance += 0.05;
   }
 
   // Civic observance holidays reduce crisis (offices closed, less activity)
-  var civicRestHolidays = [
-    "MLKDay", "PresidentsDay", "MemorialDay", "LaborDay", "VeteransDay"
-  ];
-  if (civicRestHolidays.indexOf(holiday) >= 0) {
-    baseChance -= 0.08;
-  }
 
   // First Friday reduces crisis (community focus, positive energy)
   if (isFirstFriday) {
@@ -193,15 +187,11 @@ function generateCrisisSpikes_(ctx) {
 
   // Holiday-specific domain shifts
   var gatheringHolidays = [
-    "Thanksgiving", "Holiday", "NewYearsEve", "Independence", "OpeningDay"
+    "Thanksgiving", "Holiday", "NewYearsEve"
   ];
-  var fireworksHolidays = ["Independence", "NewYearsEve"];
-  var travelHolidays = ["Thanksgiving", "Holiday", "MemorialDay", "LaborDay"];
-  var retailHolidays = ["Holiday", "BlackFriday"];
-  var culturalCelebrations = [
-    "Juneteenth", "CincoDeMayo", "DiaDeMuertos", "OaklandPride",
-    "LunarNewYear", "MLKDay"
-  ];
+  var fireworksHolidays = ["NewYearsEve"];
+  var travelHolidays = ["Thanksgiving", "Holiday"];
+  var retailHolidays = ["Holiday"];
 
   for (var dj = 0; dj < DOMAINS.length; dj++) {
     var dom = DOMAINS[dj];
@@ -239,10 +229,6 @@ function generateCrisisSpikes_(ctx) {
     }
 
     // Cultural holidays reduce cultural crisis (celebration, not crisis)
-    if (dom.name === 'CULTURE' && culturalCelebrations.indexOf(holiday) >= 0) {
-      dom.weight -= 0.2;
-      if (dom.weight < 0.1) dom.weight = 0.1;
-    }
 
     // First Friday reduces cultural crisis, increases safety slightly
     if (isFirstFriday) {
@@ -279,7 +265,6 @@ function generateCrisisSpikes_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // CALENDAR NEIGHBORHOOD ADJUSTMENTS (v2.5)
   // ═══════════════════════════════════════════════════════════════════════════
-  var fruitvaleCultural = ['CincoDeMayo', 'DiaDeMuertos'];
 
   for (var ni = 0; ni < neighborhoods.length; ni++) {
     var n = neighborhoods[ni];
@@ -299,20 +284,13 @@ function generateCrisisSpikes_(ctx) {
     // franchise opens in Baylight; after that this would keep sending crowd
     // risk to a district with no game in it.
     var sportsZones_ = S.sportsZones || ['Jack London', 'Downtown'];
-    if ((holiday === 'OpeningDay' || sportsSeason === 'championship') &&
-        sportsZones_.indexOf(n.name) >= 0) {
+    if (sportsSeason === 'championship' && sportsZones_.indexOf(n.name) >= 0) {
       n.weight += 0.3;
     }
 
     // Chinatown during Lunar New Year
-    if (holiday === 'LunarNewYear' && n.name === 'Chinatown') {
-      n.weight += 0.4;
-    }
 
     // Fruitvale during cultural holidays
-    if (fruitvaleCultural.indexOf(holiday) >= 0 && n.name === 'Fruitvale') {
-      n.weight += 0.3;
-    }
 
     // Downtown during major holidays
     if (holidayPriority === 'major' && n.name === 'Downtown') {
@@ -439,8 +417,6 @@ function generateCrisisSpikes_(ctx) {
  * | Factor | Effect |
  * |--------|--------|
  * | Peaceful holidays (Thanksgiving, etc.) | -0.15 |
- * | Crowd holidays (Independence, etc.) | +0.05 |
- * | Civic rest holidays (MLKDay, etc.) | -0.08 |
  * | First Friday | -0.1 |
  * | Creation Day | -0.12 |
  * | Championship | +0.08 |
@@ -472,7 +448,6 @@ function generateCrisisSpikes_(ctx) {
  * - First Friday → Uptown/KONO/Temescal +0.3, Jack London +0.2
  * - Sports → Jack London/Downtown +0.3
  * - Lunar New Year → Chinatown +0.4
- * - CincoDeMayo/DiaDeMuertos → Fruitvale +0.3
  * - Major holidays → Downtown +0.2
  * 
  * SEVERITY:

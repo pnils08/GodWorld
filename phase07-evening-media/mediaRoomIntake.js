@@ -1003,7 +1003,6 @@ function parseCitizenEntry_(entry, section, team) {
     }
   } else if (section === 'quotedNew' || section === 'lettersNew') {
     // Format: "Name, Age, Neighborhood, Occupation (Article context)"
-    // e.g., "Terrell Davis, Laurel, Cook (Juneteenth front page)"
     // or: "Javier Harris, 57, West Oakland, Electrician (Stabilization Fund)"
     var quotedMatch = entry.match(/^([^,]+),\s*(\d+)?,?\s*([^,]+),\s*([^(]+)\s*\(([^)]+)\)/);
     if (quotedMatch) {

@@ -171,8 +171,7 @@ function hoodOfJobMoves_(ctx, field) {
   return best;
 }
 
-var SHOPPING_HOLIDAYS = ['Thanksgiving', 'Holiday', 'BlackFriday'];
-var FESTIVAL_HOLIDAYS = ['OaklandPride', 'ArtSoulFestival', 'Independence'];
+var SHOPPING_HOLIDAYS = ['Thanksgiving', 'Holiday'];
 
 
 // ═══════════════════════════════════════════════════════════════
@@ -452,27 +451,14 @@ function detectCalendarRipples_(ctx, currentCycle) {
   // engine.240: festival / celebration / cultural ripples land on the hoods the holiday's authored
   // Scenes name (heaviest first = primary), spread over all of them.
   var festHoods = sceneHoods_(ctx, cal.holiday);
-  if (FESTIVAL_HOLIDAYS.indexOf(cal.holiday) >= 0) {
-    var fr = createRipple_(S, 'FESTIVAL_TOURISM', currentCycle, 
-      { description: cal.holiday + ' festival tourism' }, festHoods[0] || '', cal);
-    if (fr && festHoods.length) fr.neighborhoods = festHoods.slice();
-  }
   
-  if (cal.holidayPriority === 'oakland' && FESTIVAL_HOLIDAYS.indexOf(cal.holiday) < 0) {
+  if (cal.holidayPriority === 'oakland') {
     var fr2 = createRipple_(S, 'FESTIVAL_TOURISM', currentCycle, 
       { description: cal.holiday + ' celebration tourism' }, festHoods[0] || '', cal);
     if (fr2 && festHoods.length) fr2.neighborhoods = festHoods.slice();
   }
   
   // Cultural celebrations
-  var culturalHolidays = ['LunarNewYear', 'CincoDeMayo', 'DiaDeMuertos', 'Juneteenth'];
-  if (culturalHolidays.indexOf(cal.holiday) >= 0) {
-    var ripple = createRipple_(S, 'CULTURAL_CELEBRATION', currentCycle, 
-      { description: cal.holiday + ' economic activity' }, festHoods[0] || '', cal);
-    if (ripple && festHoods.length) {
-      ripple.neighborhoods = festHoods.slice();
-    }
-  }
   
   // Sports
   if (cal.sportsSeason === 'championship') {
@@ -483,10 +469,6 @@ function detectCalendarRipples_(ctx, currentCycle) {
       { description: 'Playoff game spending' }, primarySportsZone_(cal), cal);
   }
   
-  if (cal.holiday === 'OpeningDay') {
-    createRipple_(S, 'SPORTS_CHAMPIONSHIP', currentCycle, 
-      { description: 'Opening Day economic boost' }, primarySportsZone_(cal), cal);
-  }
   
   // First Friday
   if (cal.isFirstFriday) {

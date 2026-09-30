@@ -76,22 +76,15 @@ function applyDomainCooldowns_(ctx) {
   }
 
   // Big celebration days → everything celebration-related flows
-  var bigCelebrations = ['OaklandPride', 'ArtSoulFestival', 'NewYearsEve', 'Independence'];
+  var bigCelebrations = ['NewYearsEve'];
   if (bigCelebrations.indexOf(holiday) !== -1) {
     calendarBoostedDomains.push('NIGHTLIFE', 'COMMUNITY', 'CULTURE');
   }
 
   // Cultural festivals → CULTURE and COMMUNITY
-  var culturalFestivals = ['LunarNewYear', 'CincoDeMayo', 'DiaDeMuertos', 'Juneteenth'];
-  if (culturalFestivals.indexOf(holiday) !== -1) {
-    calendarBoostedDomains.push('CULTURE', 'COMMUNITY');
-  }
 
   // Sports seasons → SPORTS domain
   if (sportsSeason === 'championship' || sportsSeason === 'playoffs') {
-    calendarBoostedDomains.push('SPORTS');
-  }
-  if (holiday === 'OpeningDay') {
     calendarBoostedDomains.push('SPORTS');
   }
 
@@ -106,7 +99,7 @@ function applyDomainCooldowns_(ctx) {
   }
 
   // Party holidays → NIGHTLIFE
-  if (holiday === 'StPatricksDay' || holiday === 'Halloween' || holiday === 'NewYearsEve') {
+  if (holiday === 'Halloween' || holiday === 'NewYearsEve') {
     calendarBoostedDomains.push('NIGHTLIFE');
   }
 
@@ -264,7 +257,6 @@ function applyDomainCooldowns_(ctx) {
  * | Any holiday | FESTIVAL, HOLIDAY |
  * | Major/Oakland priority | COMMUNITY, CULTURE |
  * | Pride/ArtSoul/NYE/July4 | NIGHTLIFE, COMMUNITY, CULTURE |
- * | Lunar/Cinco/DiaDeMuertos/Juneteenth | CULTURE, COMMUNITY |
  * | Championship/Playoffs | SPORTS |
  * | Opening Day | SPORTS |
  * | First Friday | ARTS, CULTURE, NIGHTLIFE |

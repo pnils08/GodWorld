@@ -192,21 +192,6 @@ function domainTracker_(ctx) {
   }
 
   // Specific holiday domain boosts
-  if (holiday === 'OaklandPride' || holiday === 'ArtSoulFestival') {
-    domain['FESTIVAL'] = (domain['FESTIVAL'] || 0) + 2;
-    domain['CULTURE'] = (domain['CULTURE'] || 0) + 1;
-  }
-  if (holiday === 'LunarNewYear' || holiday === 'CincoDeMayo' || holiday === 'DiaDeMuertos') {
-    domain['FESTIVAL'] = (domain['FESTIVAL'] || 0) + 1;
-    domain['COMMUNITY'] = (domain['COMMUNITY'] || 0) + 1;
-  }
-  if (holiday === 'Juneteenth' || holiday === 'MLKDay') {
-    domain['CIVIC'] = (domain['CIVIC'] || 0) + 1;
-    domain['COMMUNITY'] = (domain['COMMUNITY'] || 0) + 1;
-  }
-  if (holiday === 'Independence' || holiday === 'MemorialDay' || holiday === 'VeteransDay') {
-    domain['CIVIC'] = (domain['CIVIC'] || 0) + 1;
-  }
   if (holiday === 'Halloween') {
     domain['COMMUNITY'] = (domain['COMMUNITY'] || 0) + 1;
   }
@@ -241,9 +226,6 @@ function domainTracker_(ctx) {
     domain['SPORTS'] = (domain['SPORTS'] || 0) + 2;
   } else if (sportsSeason === 'late-season') {
     domain['SPORTS'] = (domain['SPORTS'] || 0) + 1;
-  }
-  if (holiday === 'OpeningDay') {
-    domain['SPORTS'] = (domain['SPORTS'] || 0) + 2;
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -320,10 +302,6 @@ function domainTracker_(ctx) {
  * | Any holiday | HOLIDAY +1 |
  * | Oakland priority | FESTIVAL +2 |
  * | Major priority | FESTIVAL +1 |
- * | OaklandPride/ArtSoul | FESTIVAL +2, CULTURE +1 |
- * | LunarNewYear/Cinco/DiaDeMuertos | FESTIVAL +1, COMMUNITY +1 |
- * | Juneteenth/MLKDay | CIVIC +1, COMMUNITY +1 |
- * | Independence/Memorial/Veterans | CIVIC +1 |
  * | Halloween/Thanksgiving/Easter | COMMUNITY +1 |
  * | First Friday | ARTS +2, CULTURE +1, NIGHTLIFE +1 |
  * | Creation Day | CIVIC +2, COMMUNITY +1 |

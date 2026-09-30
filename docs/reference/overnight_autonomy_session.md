@@ -124,3 +124,4 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 05:40 es RELEASE codex (Task 6 built 67a8a912 + d257bd99, bench-proven @153 C117–C122)
 05:40 es RELEASE agy (wave 1 review folded 2dc03076)
 05:45 es CLAIM agy es engine.254 Task 6 diff review
+05:50 es CLAIM codex es engine.273 wave 2 commit-A build (neutral deletions, scope 5167d747)

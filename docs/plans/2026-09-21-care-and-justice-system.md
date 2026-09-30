@@ -537,6 +537,18 @@ Outside review: `docs/research/2026-09-29-codex-task7-demand-first-cut.md` — 1
 2. Should the named-hit frequency follow demand next (Task 7b): the three demand vehicles leave the 3–15 draw and each hood's calls hit a tracked resident with probability `trackedShare_h` × one exposure dial. At dial 1.0 that is 0.44 cop-car contacts a Cycle (from 0.62) and one arrest per ~15 Cycles. Recommendation: yes, after one bench read of this cut's placement.
 3. The concentration reading above — accept "none tracked" for the thin hoods, or queue intake there.
 
+### engine.272 trace — why integrity never falls (engine-sheet, 2026-09-30, read-only)
+
+**Live ledger (2026-09-30, 963 rows, every row has DialState):** integrity **base** 926 at exactly 50 (the midpoint, never moved), 37 at 55–70, none below 50; **current** (base + mood) lowest 44.9. The gate needs current < 20, or < 40 with composure < 20 (`compressLifeHistory.js:1185-1186`, cuts `citizenMemory.js:52`) — the nearest citizen is 25 points away.
+
+**Four causes, each read in code:**
+1. **The gate is circular.** The only crime-sized down-movers are `Transgression-Petty/Serious/Grave` (−4/−8/−12, `citizenDialMap.js:94-96`), and the conduct engine emits them only for a citizen already crime-reachable (`runConductEngine.js:233-275`). The one outside entry is the cop car's `arrested` outcome (`Transgression-Serious`, `chaosCarsConfig.js:183`) — ≈ 0.09 a Cycle city-wide, adults only.
+2. **The ordinary branch drifts up.** A non-reachable citizen meets a moral test at 1.2% a Cycle (`runConductEngine.js:212`); at band 0 it slips 25% (−1) and keeps 75% (+1) (`:249`) — expected +0.006 integrity a Cycle. `Reputation` (+3, `citizenDialMap.js:57`) and `Principled` (+4, `:106`) only push up.
+3. **Nudges land in mood, not base.** A tag moves `mood`, which decays ×0.8 a Cycle (`citizenMemory.js:36`), and reaches `base` only through a same-direction run of 3 (`HARDEN_STREAK`, `:37-38`, `:124-126`). At 1.2% a Cycle, three slips in a row is effectively never.
+4. **No ordinary life pressure touches integrity.** engine.201's pressure causes move `outabout`, `drive` and `family` (rent, debt, hood, unemployed, overwork — `citizenDialMap.js:184-187`); none moves integrity. Hardship in this world never wears on a citizen's scruples.
+
+**What the fix is not:** lowering the cut, or seeding low integrity (a gate moved to meet the data is §15's trick). **What it is:** a cause that wears integrity down in ordinary life, at a rate and severity the builder sets — a sim call (morning list 2026-09-30). The circularity (cause 1) and the mood-only path (cause 3) are mechanism and follow whichever cause is ruled.
+
 ### Task 7b cut — named-hit frequency follows demand, cop car first (engine-sheet, 2026-09-30 — cut, awaiting outside review)
 
 Builder ruling 2026-09-29 (above, ruling 2): named-hit frequency follows demand — "the rarity is accurate, so we don't end up arresting everyone in the sim." The ruling specifies the cop car completely (calls = a hood's charges, one exposure dial at 1.0). It does not name what a "call" is for the ambulance or the OARI van, and the read below shows the choice moves their rates by 10× either way — **this cut ships the cop car only; the other two stay on Task 7 placement until the builder rules** (morning list, `docs/reference/overnight_autonomy_session.md` §6, 2026-09-30 01:10). Partial delivery of a confirmed ruling, not a redesign: mapping a vehicle later is a config edit.

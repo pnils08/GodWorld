@@ -193,6 +193,7 @@ The stage step runs 31 slots before the household engine (`godWorldEngine2.js:35
 - A city treasury / revenue that caps open budgets.
 - The petition support band for housing (parent open question; unchanged).
 - Transit as a system — engine.253.
+- Credit and default cascades (loans, missed payments, defaults rippling through households and businesses) — concept kept in [[2026-09-26-future-build-ideas]] §4; belongs after household stress (engine.257) makes outflows real and the debt ratio exists. Its ROLLOUT row (engine.263) was folded here 2026-09-29 on the builder's ruling.
 
 ## Open questions
 

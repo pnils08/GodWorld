@@ -965,6 +965,16 @@ This pass: 4 closed (pipeline.3, engine.3, infrastructure.1, infrastructure.2) �
 
 ## S506 Archive Pass (2026-09-29, research-build) — post-S505 closures sweep
 
+3 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 engine.* + 2 research.*.
+
+- **engine.263** [engine-sheet] — Credit/default cascades — loans/defaults rippling through households/businesses — folded 2026-09-29 (builder) into the household-spending plan; concept kept in future-build-ideas §4 **State at archive:** done-pending-archive. Pointer: [[../plans/2026-09-26-future-build-ideas]] §4 + [[../plans/2026-09-22-initiative-budget-disbursement]] §Out of scope
+- **research.13** [research-build] — Citizen-autonomous PoC — closed 2026-09-29 (builder): became the citizen-wake crons (citizen-wake.js) **State at archive:** done-pending-archive. Pointer: [[../plans/2026-05-31-citizen-autonomous-poc]] — detail in pointer (relocated 2026-07-02)
+- **research.17** [research-build] — Storyline-spine memory — REGROUNDED S306 (Mike-direct, design WITH Mike); prior P1/P2 plans + ADR-0011 DEAD — closed 2026-09-29 (builder): the storyline spine is being built as engine.270 **State at archive:** done-pending-archive. Pointer: [[../research/2026-06-20-layered-memory-architecture]] §S306 regrounding
+
+This pass: 3 rows — engine.263 + research.13 + research.17. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+
+## S506 Archive Pass (2026-09-29, research-build) — post-S505 closures sweep
+
 25 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 pipeline.* + 8 engine.* + 1 civic.* + 6 research.* + 9 governance.*.
 
 - **pipeline.8** [research-build] — Supplemental strategy — one per cycle minimum — closed 2026-09-29 (builder): supplemental cadence is no longer a standing rule **State at archive:** done-pending-archive. Pointer: [[../EDITION_PIPELINE]]

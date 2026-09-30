@@ -100,6 +100,22 @@ The test: a month or holiday that *directs* a cron, agent or skill, or any use o
 - Forbidden-date examples and `validateEdition.js` month checks are guards, so keep them.
 - Codex's script coverage held: the six extra script files a sweep flagged are all false positives.
 
+#### Task 1 review — kimi (2026-09-29)
+
+**Verdict: agree.** Restored by research-build from kimi's report; its first write was overwritten by a concurrent research-build edit.
+1. The 4 missed readers are verified and exact:
+   - `filterNoiseEvents.js`: `:126` OpeningDay keep; `:130-135` priority/neighbourhood keep; `:102-117` First Friday / Creation Day branches.
+   - `applyCycleRecovery.js`: `:70` bigCelebrations (3 of 4 names in the drop bin); `:77-81` oakland-priority threshold raise.
+   - `updateTransitMetrics.js:123-124`: any holiday other than none sets `dayType='holiday'`.
+   - `generateCivicModeEvents.js:428` and `generateMediaModeEvents.js:379`: +0.02 chance.
+2. The 5 zero-caller helpers are confirmed, with no callers in `phase*/ utilities/ lib/ scripts/`.
+3. The sweep found 4 additions of the same kind in `utilities/`, none contradicting the ruling:
+   - `ensureTransitMetrics.js:510-511`: consumes the holiday `dayType` (transit ×0.4).
+   - `neighborhoodPulseMap.js:51`: the FirstFriday tag pulses attractiveness/vitality.
+   - `bylineEngine.js:140,632`: firstfriday seed type sets the dispatch format.
+   - `loadEventContentLedger.js:44-45`: holiday/firstFriday/creationDay source tags (pass-through).
+   - False positives cleared: `initiativePhaseContract.js:722` ("observation holiday" is a grace-period metaphor) and `restoreCarryForward103.js` (fixture data).
+
 ### Task 2 — design (engine-sheet, after the inventory)
 
 - The new cycle-of-year table, world-born holidays with in-world names (builder confirms names and weeks), tax-day week, and the removal list. Advisor + outside review before build.

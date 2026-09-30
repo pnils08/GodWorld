@@ -550,7 +550,7 @@ Outside review: `docs/research/2026-09-29-codex-task7-demand-first-cut.md` — 1
 
 **What the fix is not:** lowering the cut, or seeding low integrity (a gate moved to meet the data is §15's trick). **What it is:** a cause that wears integrity down in ordinary life, at a rate and severity the builder sets — a sim call (morning list 2026-09-30). The circularity (cause 1) and the mood-only path (cause 3) are mechanism and follow whichever cause is ruled.
 
-### Task 6 cut — detained gates, custody carried by the case (engine-sheet, 2026-09-30 — BENCH-PROVEN @153, agy diff review SHIP, PROD next)
+### Task 6 cut — detained gates, custody carried by the case (engine-sheet, 2026-09-30 — LIVE PROD @128 = `bf8e69f4`, first live fire C110 2026-10-04)
 
 **Read-before (2026-09-30, `engine-wiring` card on Status + code).**
 

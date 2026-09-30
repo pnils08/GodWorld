@@ -120,7 +120,7 @@ The test: a month or holiday that *directs* a cron, agent or skill, or any use o
 
 - The new cycle-of-year table, world-born holidays with in-world names (builder confirms names and weeks), tax-day week, and the removal list. Advisor + outside review before build.
 
-#### Task 2 design (engine-sheet, 2026-09-30 — kimi review folded; build queued behind engine.254 Task 6)
+#### Task 2 design (engine-sheet, 2026-09-30 — wave 1 LIVE PROD @128 = `bf8e69f4`, first live fire C110 2026-10-04; wave 2 building; wave 3 offered to research-build)
 
 **Read-before (2026-09-30, code).** `getSimHoliday_` (`getSimHoliday.js:15-112`) and `getSimHolidayDetails_` (`:129-191`) are the only live sources; `isFirstFridayCycle_` (`:208`) has one caller (`advanceSimulationCalendar.js:151`), which also carries its own fallback list (`:154-156`). Zero callers: `isCreationDay_` `:224`, `getCreationDayAnniversary_` `:242`, `getMonthFromCycle_` `:297`, `getSimMonthFromCycle_` `:324`, `getHolidayPriority_` `:351` (grep over `phase* utilities lib scripts dashboard`). Reach of the names the build touches: `OpeningDay` 45 files; the Christmas flag literal `'Holiday'` 91 hits in 63 files; `S.monthName` is written (`advanceSimulationCalendar.js:212`) and read by nothing — the English month reaches output through `buildCyclePacket.js:102` (`getMonthName_Packet_` `:1140`), `buildDeskPackets.js:513-529`, and `buildWorldSummary.js` ("Month N" in the calendar line). Absolute Cycle → year position is `((c − 1) % 52) + 1` (`advanceSimulationCalendar.js:55`): C79 → position 27, C110 → 6.
 

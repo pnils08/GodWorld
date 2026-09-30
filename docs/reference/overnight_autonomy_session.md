@@ -83,6 +83,8 @@ Builder-owned items only, one line each: `HH:MM seat — the question, with enou
 01:45 es — engine.272 (no citizen can reach crime): traced. Integrity never falls because nothing in ordinary life wears it down. Only crimes lower it much, and only already-reachable citizens commit them. Live: 926 of 963 sit at exactly 50, and the gate is under 20. Which hardships should wear on a citizen's scruples, and how fast? Candidates already in the engine: debt, rent, unemployment, a rough hood, a run of setbacks. Trace: care-and-justice plan §engine.272 trace.
 02:05 es — engine.254 Task 6 (detained): when a cop car arrests an athlete, the case opens but the athlete's Status would stay unchanged. The sports feed rejects any player not active or recovering, and sports isn't the engine's to gate. Keep that default, or should athletes be arrest-proof entirely?
 02:05 es — engine.254 Task 6: should a detained citizen's salary keep accruing while held (1–4 Cycles)? Today nothing stops it. Options: keep paying; stop for the held weeks; or stop only when held, not while the case is pending.
+02:20 es — engine.273: the keep list never named these, so they stay in the table until you say. Spring Equinox, Summer Solstice, Fall Equinox, the Back-to-School week, and Hanukkah (the faith question above). Drop all five, keep some?
+02:20 es — engine.273: month names leave everything the newsroom sees. Internally the engine still counts a 1–12 month to time weather, school, the economy's year-end, births and weddings. Values don't change either way. Is that fine as a hidden rhythm, or do you want those curves re-pinned to the 52 weeks so no month exists anywhere?
 
 ## 7. Working ledger
 
@@ -90,6 +92,7 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 
 01:10 es CLAIM codex es engine.254 Task 7b cut review
 01:08 es CLAIM kimi es engine.273 Task 2 design review
+02:20 es RELEASE kimi (holiday review folded)
 01:55 es RELEASE codex (7b cut review folded 893fef52)
 01:55 es CLAIM codex es engine.254 Task 7b build
 
@@ -102,3 +105,5 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 01:14 rb COMMIT 7b403b5c undocked fixes (brief schema, holder, weekly voiceDir). rb CLAIM kimi QUEUED review of 7b403b5c after es RELEASE; hourly rb check on es pane
 01:20 rb DONE dup-trace: daily flights, no defect. waiting es RELEASE kimi; hourly cron 17
 01:24 rb CLAIM agy rb undocked 7b403b5c adversarial review (kimi stays es's)
+01:26 rb CHECK es idle-prompt w/ 1 shell+1 agent (not stalled), codex building 7b, kimi idle unclaimed by me, agy reviewing 7b403b5c
+01:38 rb RELEASE agy; review verified, 4 fixes committed, F-05 Name-column claim false, F-04/06 skipped (no live dupes; standings self-heals)

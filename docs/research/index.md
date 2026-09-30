@@ -25,6 +25,7 @@ Grep here before grepping the tree. Each row: file · one-line purpose · verdic
 
 | File | Purpose | Verdict |
 |------|---------|---------|
+| **[[2026-09-30-kimi-holiday-task2-design]]** | Adversarial review of the engine.273 Task 2 holiday design: wave-2 classification, month-string rule, Creation Day dual checks, First Friday copies, unruled sim calls | `adopt` — 22 findings verified; do-not-build-as-written folded (classification inverted, third FF copy, 5 flags held) |
 | **[[2026-09-30-codex-task7b-cut]]** | Adversarial review of the engine.254 Task 7b cut: partial delivery, 3–15 row contract, arrest-rate bounds, binomial underflow, draw count, extraction equivalence, fixtures, index headers, bench gate | `adopt` — 9 findings verified and folded; thinning replaced by reweight |
 | **[[2026-09-29-codex-holiday-calendar-inventory]]** | engine.273 Task 1: hardcoded holidays, months and real-world observances across engine, agents, skills and crons | `adopt` — verified by research-build 2026-09-29; 8 missed readers added in the plan |
 | **[[2026-09-29-codex-task7-demand-first-cut]]** | Adversarial review of the engine.254 Task 7 cut: guard placement, rate framing, rng stream, demographics tab state, census contracts, OARI read | `adopt` — 14 findings verified and folded before build |

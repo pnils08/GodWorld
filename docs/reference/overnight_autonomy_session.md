@@ -125,3 +125,6 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 05:40 es RELEASE agy (wave 1 review folded 2dc03076)
 05:45 es CLAIM agy es engine.254 Task 6 diff review
 05:50 es CLAIM codex es engine.273 wave 2 commit-A build (neutral deletions, scope 5167d747)
+06:20 es RELEASE agy (Task 6 review SHIP filed bf8e69f4); PROD @128 = bf8e69f4 live (wave 1 + Task 6), rb messaged for PIN; pushing verified stack (53 commits, rb's UNDOCKED commits complete)
+04:31 rb DONE engine.273 wave 3 directive fixes 9d90b140 (7 text swaps, no code path); plan §3 updated
+04:26 rb CHECK es active (1 shell), codex on wave 2 commit A, agy on Task 6 review; kimi idle. rb no open item

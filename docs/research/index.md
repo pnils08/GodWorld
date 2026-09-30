@@ -25,6 +25,7 @@ Grep here before grepping the tree. Each row: file · one-line purpose · verdic
 
 | File | Purpose | Verdict |
 |------|---------|---------|
+| **[[2026-09-30-codex-task8-rev1]]** | Re-review of Task 8 Revision 1: disposition of 12 findings, new blockers (booked vs persisted replay, lazy-cache snapshot, partial unallocated encoding, missed-Cycle stock, keyed-replace integrity) | `adopt` — HOLD; open items listed as Revision 2 prerequisites in the plan |
 | **[[2026-09-30-codex-task8-cut]]** | Adversarial review of the engine.254 Task 8 census cut: replay keys, exit typing, bootstrap, writer-failure detection, unallocated availability, suffixes, idempotent census write, stay dial, validator scope | `adopt` — HOLD, 12 findings folded as Revision 1; re-review before build |
 | **[[2026-09-30-agy-wave2-diff]]** | Adversarial diff review of `c3c38aa0` + `cbc9e638` (engine.273 wave 2): gating of every deletion, kept/held/cultural preservation, precedence, shared chains and pools, rng counts, B's pool lengths, VM packet test | `SHIP` — engine-sheet spot-checked two precedence rewrites and the no-Hanukkah deletion |
 | **[[2026-09-30-codex-wave2-notes]]** | engine.273 wave 2 commit A: per-file classification of every dropped-holiday deletion (flag-gated / comment) and the always-reachable strings kept | `adopt` — engine-sheet verified: one precedence slip fixed (`buildEveningFamous.js:468`), two leftovers are legitimate |

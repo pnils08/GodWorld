@@ -35,9 +35,9 @@ One bash command, used as the `--terminal` arg for Step 3:
 tmux display-message -t "$TMUX_PANE" -p '#W'
 ```
 
-Map to `research-build` / `engine-sheet` / `media` / `civic`. Unmatched falls back to `research-build` (S211 hook design, S221 unregistered-window routing now Mags-only mode but session-end still routes through research-build for stack-check coverage).
+Map to `research-build` / `engine-sheet` (the only two seats since 2026-08-20; media and civic are retired). Unmatched falls back to `research-build` (unregistered windows run Mags-only mode but session-end still routes through research-build for stack-check coverage).
 
-Each terminal's `TERMINAL.md` §Session Close carries the **Terminal-Specific Audit** table — read it, fix any stale files surfaced before continuing.
+The **Terminal-Specific Audit** table for your seat is §Terminal-Specific Detail below — read it, fix any stale files surfaced before continuing.
 
 ### Step 2: Update SESSION_CONTEXT PIN + NEXT + ROLLOUT_PLAN — model judgment
 
@@ -53,11 +53,13 @@ Three sub-actions:
    **PIN:** S<N> | Day <D> | canonical C<c> (bench state) | prod <engine range + what's pending> | <standing facts>
    ```
 
+   **Ownership:** when a governing doc hands the PIN to one seat (e.g. `docs/reference/overnight_autonomy_session.md` §4c — PIN is rb's), the other seat messages its PIN facts to the owner instead of writing the line.
+
    Bump `S<N>` +1 on every close, soft *or* hard — it's a boot odometer, a mechanical instance counter, not a span marker (ADR-0009 §loop-tightening refinement 1). Bump `Day <D>` only if a real day boundary crossed. Move the canonical cycle only if a cycle actually ran. Everything after that is standing world-state: prod engine range, the weekly cadence, frozen paths. Add a fact when it becomes true for all lanes; drop one when it stops being load-bearing. There is no `Session:` or `Edition:` field — a close that writes those is writing a PIN that no longer matches the file.
 
 2. **Rewrite your own `NEXT[<lane>]:` line** — one line, aim for ≤ 350 chars: where the work is + the next move, with a `(claude-mem: <hook>)` pointer when the thread is rich. NOT a task stub, and NOT a narrative paragraph — detail lives in ROLLOUT rows / plan changelogs / claude-mem; NEXT is just the entry point into them. Identical form soft or hard. **Default to not touching another lane's NEXT line** — their content is theirs; a verifiable stale fact is fair to correct (2026-08-20 lift, see §External lanes). The ≤350-char aim is the load-bearing part of this step and it is the one most often ignored: lines have reached 1,867 chars by absorbing session narrative that belongs in claude-mem. If your line needs a paragraph, the paragraph goes elsewhere and NEXT carries the pointer.
 
-3. **Update ROLLOUT_PLAN.md** — refresh Next Session Priorities; flip closed rows to `done-pending-archive`; move fully-closed clusters to `ROLLOUT_ARCHIVE.md`. ROLLOUT is canonical for what's open.
+3. **Update ROLLOUT_PLAN.md** — flip closed rows to `done-pending-archive`; move fully-closed clusters to `ROLLOUT_ARCHIVE.md`. ROLLOUT is canonical for what's open.
 
    **Archive Sweep Trigger (deterministic — G-SE2, don't re-litigate per close):** sweep `done-pending-archive` rows to `ROLLOUT_ARCHIVE.md` **IF** their count ≥ 2 **OR** the prior sweep was ≥ 2 sessions ago. **Skip** (defer to next clean close) **IF** the working tree has uncommitted cross-terminal changes. Newest Archive Pass inserts first within the Archive Pass section (see the convention comment in ROLLOUT_ARCHIVE.md).
 
@@ -67,7 +69,7 @@ Three sub-actions:
 - **Session save — REQUIRED, one per session, BEFORE Step 3.** Command and rules: `CLAUDE.md` §Search before you guess (the brain). Worth saving: rulings, landmines, a container/schema change, a frozen-vs-live distinction. A session with nothing to say still leaves one line on what it did. `/save-to-mags` writes to Mags' own `mags` container and does NOT reach sl-godworld — don't treat one as covering the other.
 - **`/batch`** — submit heavy analysis work that wasn't urgent enough to run live. Results wait at 50% cost for next session.
 
-**Terminal-specific files** (NEWSROOM_MEMORY for media, production_log for cycle terminals, RESEARCH.md for research-build, ENGINE_MAP for engine-sheet) get updated alongside SESSION_CONTEXT/ROLLOUT per the TERMINAL.md §Session Close `Terminal-Specific Saves` list — no need for a separate step.
+**Terminal-specific files** (RESEARCH.md for research-build, ENGINE_MAP / stub maps / DEPLOY.md pointers for engine-sheet) get updated alongside SESSION_CONTEXT/ROLLOUT per the audit tables in §Terminal-Specific Detail — no separate step.
 
 ### Step 3: Run Mechanical Orchestrator
 
@@ -200,6 +202,8 @@ Pulled out of the boot-loaded TERMINAL.md files (2026-08-15, HOUSE-PROCESS GATE)
 ---
 
 ## Changelog
+
+- 2026-09-29 (S506, engine-sheet) — v2.9 staleness pass: Step 0 still mapped retired media/civic seats and pointed at a TERMINAL.md audit table that lives in this file; ROLLOUT has no Next Session Priorities section; no `Terminal-Specific Saves` list exists anywhere; PIN ownership under a governing doc (overnight §4c) was unstated.
 
 - 2026-09-28 (S500, engine-sheet) — v2.8. Three doc-vs-reality fixes found closing the C109 session: the sl-godworld save was listed optional while CLAUDE.md requires one per session; the Failure Modes table still said the ownership guard blocks a cross-lane NEXT correction (unwired 2026-08-20, §External Lanes already said so); Step 3's command carried the vestigial `--rotate-history` flag and printed the whole run into the transcript. Lint findings are now fixed in the close that surfaces them.
 

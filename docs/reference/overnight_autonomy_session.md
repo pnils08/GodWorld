@@ -104,6 +104,7 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 03:45 es RELEASE agy (7b diff review folded be0d3534); 7b LIVE PROD @127, rb messaged for PIN
 04:10 es RELEASE codex (wave 1 built, committed df3173cd, bench @152 firing)
 04:10 es CLAIM kimi es engine.273 wave 1 diff review
+04:45 es CLAIM codex es engine.254 Task 6 build (cut 263f4349)
 
 ## 8. Stop rule and usage
 

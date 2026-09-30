@@ -25,6 +25,7 @@ Grep here before grepping the tree. Each row: file · one-line purpose · verdic
 
 | File | Purpose | Verdict |
 |------|---------|---------|
+| **[[2026-09-30-agy-wave2-diff]]** | Adversarial diff review of `c3c38aa0` + `cbc9e638` (engine.273 wave 2): gating of every deletion, kept/held/cultural preservation, precedence, shared chains and pools, rng counts, B's pool lengths, VM packet test | `SHIP` — engine-sheet spot-checked two precedence rewrites and the no-Hanukkah deletion |
 | **[[2026-09-30-codex-wave2-notes]]** | engine.273 wave 2 commit A: per-file classification of every dropped-holiday deletion (flag-gated / comment) and the always-reachable strings kept | `adopt` — engine-sheet verified: one precedence slip fixed (`buildEveningFamous.js:468`), two leftovers are legitimate |
 | **[[2026-09-30-agy-task6-diff]]** | Adversarial diff review of `67a8a912` + `d257bd99` (engine.254 Task 6): fallbacks, status-vs-case sync, hospital P, judicial writer, rng isolation, tests, downstream readers | `SHIP` — engine-sheet spot-checked the restore and GAME-exemption claims against code |
 | **[[2026-09-30-agy-holiday-wave1-diff]]** | Adversarial diff review of `df3173cd` (engine.273 wave 1): table metadata, month/First Friday/Creation Day readers, packet and summary text parsers, fallbacks, tests | `adopt` — core SHIP; 3 missed readers fixed (desk folders, season feel, handoff Month line); source-text test to wave 2 |

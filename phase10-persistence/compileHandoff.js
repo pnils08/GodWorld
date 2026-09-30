@@ -681,7 +681,6 @@ function buildSection01_EditorialHeader_(data, cycle) {
   // Parse from packet text
   var packet = data.packetText;
   lines.push('Season: ' + parsePacketField_(packet, 'Season'));
-  lines.push('Month: ' + parsePacketField_(packet, 'Month'));
 
   // Holiday from briefing row
   if (data.briefingRow) {

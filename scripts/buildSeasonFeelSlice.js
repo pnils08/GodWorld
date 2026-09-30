@@ -47,7 +47,7 @@ function parseSeasonFeel(summaryMd, cycle, opts) {
   const md = String(summaryMd || '');
   const season = ((md.match(/\*\*Season:\*\*\s*([^|\n]+)/) || [])[1] || '').trim();
   const weather = cleanWeather((md.match(/\*\*Weather:\*\*\s*([^\n]+)/) || [])[1] || '');
-  const holiday = /holiday=Holiday/i.test(md);
+  const holiday = /holiday=(?:Holiday|Christmas)\b/i.test(md); // engine.273: world summary prints the label
   const sportsOff = /Sports season:\s*off-season/i.test(md);
   const illness = (md.match(/Illness rate\s+([\d.]+)%/) || [])[1] || null;
   const night = md.match(/\*\*Nightlife:\*\*\s*\*\*([^*]+)\*\*\s*\(([^)]+)\)\.\s*Volume\s+(\d+),\s*vibe\s+([^.,]+).*?Weather impact\s+([\d.]+)/i);

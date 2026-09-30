@@ -250,7 +250,7 @@ function generateBriefing(desk, cycle, summary, baseContext, maraGuidance, errat
   // Calendar context
   if (baseContext) {
     const bc = baseContext;
-    md += `**Cycle ${cycle}** | ${bc.month || ''} ${bc.simYear || ''} | ${bc.season || ''}\n\n`;
+    md += `**Cycle ${cycle}** | ${bc.cycleRef || ''} | ${bc.season || ''}\n\n`;
   }
 
   // Guardian warnings

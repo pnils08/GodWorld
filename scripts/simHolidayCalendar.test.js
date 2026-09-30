@@ -165,4 +165,27 @@ test('rendered packet calendar lines carry no English month', () => {
   }
 });
 
+test('a throwing ledger writer never costs the packet (engine.254 Task 8 R1-4)', () => {
+  const rows = [];
+  const packetSheet = { getLastRow: () => rows.length + 1, getRange: () => ({ setValues: values => rows.push(...values) }) };
+  const ss = { getSheetByName: name => name === 'Cycle_Packet' ? packetSheet : null };
+  const logged = [];
+  const packetContext = {
+    Logger: { log: () => {} },
+    inWorldStamp_: () => 'C_SYNTHETIC',
+    requireTab_: (spreadsheet, name) => spreadsheet.getSheetByName(name),
+    logEngineError_: (ctx, phase, err) => logged.push(phase + ':' + err.message)
+  };
+  vm.createContext(packetContext);
+  vm.runInContext(fs.readFileSync(path.join(root, 'phase10-persistence/buildCyclePacket.js'), 'utf8'), packetContext);
+  packetContext.persistHospitalLedger_ = () => { throw new Error('hospital boom'); };
+  packetContext.persistJudicialLedger_ = () => { throw new Error('judicial boom'); };
+  const summary = {};
+  context.advanceSimulationCalendar_({ ss: { getSheetByName: () => ({}) }, config: { cycleCount: 110 }, summary });
+  packetContext.buildCyclePacket_({ ss, summary });
+  assert.strictEqual(rows.length, 1, 'packet row still written');
+  assert.strictEqual(JSON.stringify(summary.careJusticeWriteStatus), JSON.stringify({ hospital: 'failed', judicial: 'failed' })); // VM realm: compare by value
+  assert.deepStrictEqual(logged, ['Phase10-HospitalLedger:hospital boom', 'Phase10-JudicialLedger:judicial boom']);
+});
+
 console.log(passed + ' tests passed');

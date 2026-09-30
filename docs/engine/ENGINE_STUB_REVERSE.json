@@ -4276,6 +4276,12 @@
         "phase09-digest/finalizeCycleState.js::compactRelocationFlow_"
       ]
     },
+    "careJusticeWriteStatus": {
+      "writers": [
+        "phase10-persistence/buildCyclePacket.js::buildCyclePacket_"
+      ],
+      "readers": []
+    },
     "cyclePacket": {
       "writers": [
         "phase10-persistence/buildCyclePacket.js::buildCyclePacket_"

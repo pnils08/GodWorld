@@ -75,8 +75,15 @@ function buildCyclePacket_(ctx) {
 
   // engine.52 B2 — persist hospital admissions/discharges collected in Phase 4
   // and compute the census before packet lines are built.
-  var hospital = persistHospitalLedger_(ctx);
-  persistJudicialLedger_(ctx);
+  // engine.254 Task 8 R1-4: each ledger writer is isolated — a throw is an
+  // Engine_Errors row plus a status flag (the census reads it), never a lost
+  // Cycle_Packet or a skipped second writer.
+  var hospital = null;
+  var careWrite = ctx.summary.careJusticeWriteStatus = { hospital: 'ok', judicial: 'ok' };
+  try { hospital = persistHospitalLedger_(ctx); }
+  catch (hospitalErr) { careWrite.hospital = 'failed'; logEngineError_(ctx, 'Phase10-HospitalLedger', hospitalErr); }
+  try { persistJudicialLedger_(ctx); }
+  catch (judicialErr) { careWrite.judicial = 'failed'; logEngineError_(ctx, 'Phase10-JudicialLedger', judicialErr); }
 
   var lines = [];
 

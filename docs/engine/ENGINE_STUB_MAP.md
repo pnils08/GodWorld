@@ -3174,7 +3174,7 @@
 ### buildCyclePacket.js
 - **buildCyclePacket_(ctx)**
   Reads: S.absoluteCycle, S.bondSummary, S.cityDynamics, S.cityEventDetails, S.civicLoad, S.civicLoadFactors, S.civicLoadScore, S.compressedLine, S.creationDayAnniversary, S.crimeMetrics, S.crowdHotspots, S.crowdMap, S.cycleId, S.cycleInMonth, S.cycleOfYear, S.cycleRef, S.cycleSummary, S.cycleWeight, S.cycleWeightReason, S.demographicDrift, S.demographicShifts, S.domainPresence, S.dominantDomain, S.economicSummary, S.eveningFood, S.eveningSafety, S.eveningTraffic, S.eventArcs, S.generationalEvents, S.generationalSummary, S.godWorldYear, S.holiday, S.holidayLabel, S.holidayNeighborhood, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.mediaSummary, S.migrationBrief, S.migrationDrift, S.namedSpotlights, S.neighborhoodDynamics, S.neighborhoodEconomies, S.neighborhoodMigration, S.nightlife, S.patternFlag, S.season, S.shockDuration, S.shockFlag, S.shockReasons, S.shockScore, S.storyHooks, S.textureTriggers, S.transitMetrics, S.weather, S.weatherSummary, S.worldEvents, S.worldPopulation
-  Writes: S.cyclePacket
+  Writes: S.careJusticeWriteStatus, S.cyclePacket
 
 - **hospitalCapacity_(ctx)**
   Reads: S.demographicDrift

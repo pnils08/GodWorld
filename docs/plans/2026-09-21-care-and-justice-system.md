@@ -449,7 +449,7 @@ Pushed to `S.judicialEvents`. **Eligibility:** adult (existing gate) **and** pri
 16. injected throw in `writeChaosCarsRow_` → no receipt, error propagates (F7).
 17. kind-aware seen set: investigation open → conversion → replay books one intake; arrest → exit → replay books none (F2 — spec'd here, run against the Task 8 fold).
 
-### Task 7 cut — demand first, names second (engine-sheet, 2026-09-29 — REVIEWED, ready to build)
+### Task 7 cut — demand first, names second (engine-sheet, 2026-09-29 — LIVE PROD @126 2026-09-30, first live fire C110 2026-10-04)
 
 Outside review: `docs/research/2026-09-29-codex-task7-demand-first-cut.md` — 14 findings, 4 contradicted, all verified against code and folded below (§Review outcome at the end of this cut).
 
@@ -504,6 +504,8 @@ Outside review: `docs/research/2026-09-29-codex-task7-demand-first-cut.md` — 1
 **BENCH-PROVEN 2026-09-29 (SANDBOX 0908 @149 = `58d06aa0`, C142–C143, Engine_Errors 4→4, both new phase entries ok both Cycles).** C142 (INIT-002 `stalled`, OARI weight 0): 13 chaos events; cop_car citizen → POP-00639 Fruitvale (cop weight 0.033 > 0), cop_car neighborhood → Ivy Hill (9 charges), ambulance neighborhood → Temescal (93 sick); no oari_van drawn, no throw. C143 (bench-only flip of INIT-002 to `dispatch-live`, matching live): 9 events; **oari_van citizen → POP-01143 West Oakland, a deployed hood**; ambulance citizen → POP-01145 West Oakland (highest sick × tracked share, 0.49); ambulance neighborhood → Brooklyn. Every demand-vehicle hit sat in a hood with positive weight, rebuilt from the bench tabs after the fire. The 23 `careJusticeDemand` log lines live in the Apps Script execution log, not exported this run; the placement proof stands on `Chaos_Cars` + the tabs. Bench sheet now C143 — never replay.
 
 **Diff review (kimi 2026-09-29, `docs/research/2026-09-29-kimi-care-justice-task7-diff.md`): SHIP.** F2 (unknown tracker hood logged, not weighted) and F4 (union test) folded the same night — one `Logger.log` line is the only engine delta over the benched `58d06aa0`. F1 (phase substring match mirrors the effects reader — change both or neither) and F3 (status exclusion in three copies — one helper when Task 8's census assembler lands) are Task 8 notes.
+
+**Live-synced proof + PROD (2026-09-30).** SANDBOX 0908 resynced from live C109 (83 tabs, read-back OK; no open row leaned on bench-only state), @150 = `1e82acb0`, fired C110: ok, no failed phase, Engine_Errors 4→4, both OARI van hits in West Oakland (a deployed hood; one `deescalated` — a diversion). PROD @126 = isolated stage of `1e82acb0`, pull-back 167/167 + manifest byte-identical; World_Config keys on PROD. **Next: Task 7b** (builder-confirmed): the three demand vehicles leave the 3–15 draw and each hood's calls name a tracked resident with probability `trackedShare_h` × one exposure dial — read one live Cycle of placement first.
 
 **Bench plan.** SANDBOX 0908, two Cycles, forced arrest probe not needed: read the 23 `careJusticeDemand` log lines with `scripts/fetchExecutionLog.js`, confirm the 22-hood table and the city sums against the SANDBOX tabs, confirm every named cop-car/ambulance/OARI hit's hood matches a hood with nonzero weight and OARI hits sit in the three deployed hoods, 0 new `Engine_Errors`. Then kimi/agy diff review, then PROD with a smoke-test note dated to the next live fire.
 
@@ -603,3 +605,4 @@ Outside review: `docs/research/2026-09-29-codex-task7-demand-first-cut.md` — 1
 - 2026-09-29 (engine-sheet) — Task 7 cut drafted (§Task 7 cut): demand-first per-hood numbers before chaos, vehicle-aware picker, other-resident helper; advisor + codex review pending.
 - 2026-09-29 (engine-sheet) — codex review of the Task 7 cut: 14 findings verified, 4 contradictions corrected (pre-loop guard, rate framing, rng stream, demographics tab state), census contracts for Task 8 named. Cut READY.
 - 2026-09-29 (engine-sheet) — Builder rulings on the Task 7 cut: dials confirmed, Task 7b (frequency follows demand) confirmed for after the placement bench, thin-hood concentration accepted. Build dispatched to codex.
+- 2026-09-30 (engine-sheet) — Task 7 LIVE PROD @126 after a live-synced bench C110 on @150; kimi SHIP folded. Next Task 7b, then Task 6.

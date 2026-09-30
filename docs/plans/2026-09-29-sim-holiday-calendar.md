@@ -38,7 +38,7 @@ pointers:
 
 - **Files:** every file in `phase*/`, `utilities/`, `lib/`, `scripts/`, `.claude/agents/`, `.claude/skills/`, `docs/media/` that names a holiday, a month, or a real-world observance.
 - **Steps:** list the calendar source (`getSimHoliday.js`, `advanceSimulationCalendar.js`, `Simulation_Calendar` tab) and every hardcoded holiday or month read elsewhere, with file:line, what reads it, and what it changes (engine effects, story seeds, desk prompts). Classify each holiday: keep (basic shared) · drop (real-world political/heritage) · sports-driven (remove from engine) · world-born (keep/extend). Flag every month-name dependency.
-- **Output:** `docs/for-claude-review/2026-09-29-codex-holiday-calendar-inventory.md`.
+- **Output:** [[research/2026-09-29-codex-holiday-calendar-inventory]] (filed from the review inbox 2026-09-30, engine-sheet, when Task 2 was handed over).
 - **Status:** [x] inventory landed 2026-09-29; verified by research-build (outcome below).
 
 #### Task 1 outcome — research-build ruling (2026-09-29)

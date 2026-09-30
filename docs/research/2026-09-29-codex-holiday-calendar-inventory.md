@@ -3,7 +3,7 @@ title: Sim holiday calendar — Codex Task 1 inventory
 created: 2026-09-29
 updated: 2026-09-29
 type: reference
-tags: [research, engine, media, draft]
+tags: [research, engine, media]
 sources:
   - docs/plans/2026-09-29-sim-holiday-calendar.md §Builder direction and Task 1
   - phase02-world-state/getSimHoliday.js

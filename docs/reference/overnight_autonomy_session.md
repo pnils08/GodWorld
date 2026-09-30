@@ -78,6 +78,8 @@ Two Claude seats plus guests, one working tree.
 Builder-owned items only, one line each: `HH:MM seat — the question, with enough context to answer it cold`. Sim calls with no ruling, credit spending, and irreversible actions land here. Anything decided in-scope does not. The builder clears lines as answered.
 
 01:10 es — engine.254 Task 7b ships for cop cars only (calls = a hood's charges, as ruled). What counts as a "call" for the ambulance and the OARI van is unruled, and one exposure dial can't span them: ambulance on a hood's Sick → 4.6 named citizens a Cycle (today 0.47, ten times more); on its bed admissions → 0.08. OARI on charges in its three hoods → 0.07 (today 0.52 when deployed); on its eligible crisis calls → 0.02. Which base for each, or keep both on today's random draw with Task 7 placement? (Bench C110 numbers; mapping is a config edit, no code.)
+01:40 es — engine.273 holidays: name the world-born holidays and confirm their weeks. Cycle 79 falls at year position 27 (C79 = Y2C27). For "the week the court opened" and "the week the world began running on its own", which Cycle did each happen? Names are told in-world, by what the world gained. Until named, the table ships with the ten kept holidays only.
+01:40 es — engine.273 faith: `HOLY_DAYS` gives 13 traditions month-timed real-world observances (Epiphany, Lent, Pentecost, Assumption, All Saints, Purim, Passover, Shavuot, Rosh Hashanah, Yom Kippur, Sukkot, Hanukkah, Ramadan, the Eids, Losar, Vesak, Obon, Holi, Janmashtami, Diwali, Vaisakhi, Gurpurab, Winter Solstice, General Assembly). Easter and Christmas stay. Keep, drop, or replace each with a sim storyline? The table is untouched until ruled.
 
 ## 7. Working ledger
 

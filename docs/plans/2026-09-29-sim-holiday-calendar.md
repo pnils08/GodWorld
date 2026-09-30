@@ -1,7 +1,7 @@
 ---
 title: Sim holiday calendar — seasons and cycles, world-born holidays
 created: 2026-09-29
-updated: 2026-09-29
+updated: 2026-09-30
 type: plan
 tags: [engine, calendar, draft]
 sources:
@@ -120,9 +120,57 @@ The test: a month or holiday that *directs* a cron, agent or skill, or any use o
 
 - The new cycle-of-year table, world-born holidays with in-world names (builder confirms names and weeks), tax-day week, and the removal list. Advisor + outside review before build.
 
+#### Task 2 design (engine-sheet, 2026-09-30 — awaiting outside review)
+
+**Read-before (2026-09-30, code).** `getSimHoliday_` (`getSimHoliday.js:15-112`) and `getSimHolidayDetails_` (`:129-191`) are the only live sources; `isFirstFridayCycle_` (`:208`) has one caller (`advanceSimulationCalendar.js:151`), which also carries its own fallback list (`:154-156`). Zero callers: `isCreationDay_` `:224`, `getCreationDayAnniversary_` `:242`, `getMonthFromCycle_` `:297`, `getSimMonthFromCycle_` `:324`, `getHolidayPriority_` `:351` (grep over `phase* utilities lib scripts dashboard`). Reach of the names the build touches: `OpeningDay` 45 files; the Christmas flag literal `'Holiday'` 91 hits in 63 files; `S.monthName` is written (`advanceSimulationCalendar.js:212`) and read by nothing — the English month reaches output through `buildCyclePacket.js:102` (`getMonthName_Packet_` `:1140`), `buildDeskPackets.js:513-529`, and `buildWorldSummary.js` ("Month N" in the calendar line). Absolute Cycle → year position is `((c − 1) % 52) + 1` (`advanceSimulationCalendar.js:55`): C79 → position 27, C110 → 6.
+
+**The table (engine, one source).** `getSimHoliday.js` holds one `SIM_HOLIDAYS` object keyed by year position → `{ name, label, priority, neighborhood, type }`; `getSimHoliday_` and `getSimHolidayDetails_` read it; the metadata map at `:137-181` and the dead helpers above are deleted.
+
+| Pos | Flag | Label (output) | Priority | Hood | Basis |
+|---:|---|---|---|---|---|
+| 1 | `NewYear` | New Year | major | Downtown | keep list |
+| 7 | `Valentine` | Valentine's | minor | — | keep list |
+| 15 | `Easter` | Easter | major | — | keep list |
+| 19 | `MothersDay` | Mother's Day | minor | — | keep list (2026-09-29) |
+| 25 | `FathersDay` | Father's Day | minor | — | keep list (2026-09-29) |
+| 44 | `Halloween` | Halloween | major | Temescal | keep list |
+| 47 | `Thanksgiving` | Thanksgiving | major | — | keep list |
+| 48 | `CreationDay` | Creation Day | major | Oakland | world-born, standing (priority unchanged) |
+| 51 | `Holiday` | Christmas | major | — | keep list — flag value unchanged (91 reads), label carries the name |
+| 52 | `NewYearsEve` | New Year's Eve | major | Downtown | keep list |
+| *builder* | world-born | *builder names* | oakland | *builder* | reserved, below |
+
+Everything else in today's table leaves it: the real-world political and heritage observances, St Patrick's, Earth Day, Summer Festival, `OpeningDay` (sports-driven — the teams are not engine-run), and the three season markers and `BackToSchool` (not on the keep list; season stays in `S.season`, school timing stays in `runYouthEngine`'s own calendar). 34 flagged weeks become 10 plus the world-born ones.
+
+**Priority `oakland` becomes the world-born tier.** Today it holds only dropped names (`OpeningDay`, `OaklandPride`, `ArtSoulFestival`, `SummerFestival`, `EarthDay`); every new world-born holiday takes it. Creation Day stays `major` — moving it would change what its week does, which nobody ruled. The readers that key on priority (`generateCivicModeEvents.js:428`, `generateMediaModeEvents.js:379` +0.02; `applyCycleRecovery.js:77-81` threshold raise; `filterNoiseEvents.js:130-135` keep) keep working on the key without a rename — the tier means "the city's own days."
+
+**World-born holidays — reserved, builder names them.** From the builder's candidates: *the week at Cycle 79* → position 27 (C79 = Y2C27); *the week the court system opened* and *the week the world began running on its own* → positions set from the in-world Cycle each happened, which the builder confirms. Names are in-world only, marked by what the world gained that week, never by who built it (canon guard above). Until named, no slot is emitted — the table ships with the ten above.
+
+**First Friday cadence (engine-sheet's call, ruled 2026-09-29).** Every fourth week from position 2: 2, 6, 10, … 50 — 13 a year, one source (`isFirstFridayCycle_`), no fallback list in the calendar writer. The cadence touches no keep-list position, so a First Friday never shares a week with a kept holiday.
+
+**Creation Day, one form.** `S.isCreationDay = (S.holiday === 'CreationDay')` in the writer; the separate `cycleOfYear === 48` test goes. Every reader that checks both `S.holiday === 'CreationDay'` and `S.isCreationDay` is read in the build and applies the effect once — the inventory lists them (`applyCityDynamics`, `calendarChaosWeights`, `calendarStorySeeds`, `buildCityEvents`, `applyCycleWeight`, `applyStorySeeds`, `cityEveningSystems`, the Phase-5 engines); each is a named line in the build diff.
+
+**Months: English names leave output; the month index stays as a rhythm key.** `S.simMonth` / `S.month` (1–12, derived from year position) keep driving the timing curves — climate, academic calendar, economy and media gates, generational month gates, faith — whose values do not change in this build; re-keying them to year-position ranges is identical behaviour for churn. What goes: `S.monthName` (no reader); the English month in `Cycle_Packet` (`buildCyclePacket.js:102`, `getMonthName_Packet_`), desk base context (`buildDeskPackets.js:513-551` and its `--month` override), and the world-summary calendar line — each replaced with season + `Y<n>C<m>`; month prose inside engine content pools ("October spirit" `generateGenericCitizenMicroEvent.js:230`, "January" `generateCitizensEvents.js:1910`, "June wedding" `generationalEventsEngine.js`, "June gloom" `applyWeatherModel.js:122`, "October Dark" `buildEveningMedia.js:156`, election "November" `runCivicElectionsv1.js:23,63`) rewritten to season or cycle wording. `Simulation_Calendar` column B stays numeric (sheet contract, rhythm key). Guards stay untouched: `validateEdition.js` month checks, `editionParser`, `canon-name-check`, forbidden-date examples in agent rules.
+
+**Readers (the sweep).** Every branch, list entry and content pool keyed only on a dropped flag is deleted (builder: pools are deleted, not left dormant); every `OpeningDay` branch is deleted (sports effects come from the sports feed, `applySportsSeason.js:3-20`); orphan aliases the source never emits (`LunarNewYear`, `BlackFriday`, `ValentinesDay`, `WinterSolstice`) are deleted; `applyCycleRecovery.js:70` `bigCelebrations` keeps `newyearseve` only. The inventory's reader table (`docs/research/2026-09-29-codex-holiday-calendar-inventory.md` §Engine consumers, plus the four readers in §Task 1 outcome and kimi's four in `utilities/`) is the checklist; each file is a line in the build notes.
+
+**Build in three waves, each its own commit and proof.**
+1. **Source** — the table, the First Friday cadence, Creation Day's one form, `S.monthName` and the packet/desk/summary month names, dead helpers. This is the only wave that changes behaviour (dropped holidays stop firing). Bench: fire on live-synced state across a year position that used to carry a dropped holiday and one that carries a kept one; assert the flag, First Friday and `Cycle_Packet` month line; 0 new `Engine_Errors`.
+2. **Reader sweep** — deletions of branches the source can no longer reach. **Behaviour-neutral by construction:** a branch keyed on a name the source never emits is already dead after wave 1, so the proof is equivalence — the sweep's test suite runs the touched engines on fixed ctx and seed for every year position 1–52 and asserts identical `S` output and `ctx.rng` draw count before and after. A deletion that moves a draw count means the branch was reachable — stop and read it. Content-pool rewrites of month prose (above) are the one non-neutral part of this wave; they are listed separately in the diff.
+3. **Directive fixes outside the engine** (research-build's five, §Task 1 review): culture-desk "Fourth of July" example → an honored or world-born moment; "Summer Festival" example label in letters-, sports-, culture-desk `RULES.md` → an honored holiday; `write-supplemental/SKILL.md:58` Rosh Hashanah → a sim storyline; `buildInitiativePackets.js:103` "September 15" → a cycle; the month carriers drop with wave 1. Agent/skill files are coordinated with research-build before edit (`TERMINAL.md` §Authority).
+
+**Faith (`HOLY_DAYS`, `ensureFaithLedger.js:304-380`) — to the builder, unchanged until ruled.** The table keys 13 traditions by month index to real-world observances. Easter and Christmas entries stay (ruled). Every other entry is the builder's call under *more sim storylines, less real-world influence*; the build does not touch the table until the list comes back (§6 morning list).
+
+**Tax day** is engine.271's placement, on a holiday-free, non-First-Friday position; this table reserves nothing for it.
+
+**Consequences, stated.** Holiday-driven boosts fire in 10 weeks a year instead of 34: transit `dayType='holiday'` (`updateTransitMetrics.js:123`), city dynamics, event counts, story seeds and cycle weight all go quiet in the 24 weeks that lose a flag. That is the ruling working — ordinary weeks are ordinary — and the world-born holidays add their weeks back as the builder names them.
+
+**Not in this design.** Re-keying timing curves off the month index; the sports clock (independent, feed-driven); historical records (`docs/media/*` indexes and archives are history, never rewritten); tax day (engine.271).
+
 ## Changelog
 
 - 2026-09-29 (engine-sheet) — Plan filed from builder direction; Task 1 dispatched to codex.
 - 2026-09-29 (research-build) — Task 1 verified and ruled (§Task 1 outcome): 4 missed engine readers added, scope set to engine hardcoding, 3 builder calls raised.
 - 2026-09-29 (kimi) — Adversarial review of the ruling (§Task 1 review — kimi): agree; all sampled claims verified, 4 small same-class additions in `utilities/`.
 - 2026-09-29 (research-build) — builder calls resolved (Mother's/Father's Day + First Friday kept; faith list to builder in Task 2); contamination test applied to agents/skills/crons: 4 directive fixes + month-carrier note.
+- 2026-09-30 (engine-sheet) — Task 2 design written: 10-flag table + reserved world-born slots, First Friday every 4th week from 2, Creation Day one form, English month names out of output, three-wave build (source → behaviour-neutral reader sweep → directive fixes); faith list and world-born names to the builder.

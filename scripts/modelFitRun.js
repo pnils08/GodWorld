@@ -104,7 +104,9 @@ async function complete(system, user, maxTok) {
   if (!process.env.OPENROUTER_API_KEY) throw new Error('OPENROUTER_API_KEY missing');
   const body = { model: MODEL, max_tokens: MAXT + (REASONING === 'on' ? THINK_BUDGET : 0),
     messages: [{ role: 'system', content: system }, { role: 'user', content: user }],
-    reasoning: REASONING === 'on' ? { enabled: true } : { enabled: false } };
+    // Cap the thinking budget: `enabled` alone lets the provider pick its own effort, and Sonnet 4.6
+    // spent 3.8k of a 4.2k max on reasoning and truncated the narration (2026-10-01 run).
+    reasoning: REASONING === 'on' ? { enabled: true, max_tokens: THINK_BUDGET } : { enabled: false } };
   const j = await postJson('openrouter.ai', '/api/v1/chat/completions',
     { Authorization: 'Bearer ' + process.env.OPENROUTER_API_KEY }, body, 240000);
   if (j.error) {

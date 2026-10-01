@@ -160,3 +160,6 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 01:12 rb GO research.28 run (builder, blind-reads in the morning): 3 open-character inputs x 6 models x 2 arms on OpenRouter sync; rb runs it, no guest claimed yet
 01:35 es DONE 7741b7cd UNDOCKED audience lines off Reputation (209/226 were audience). engine.272 cut written, care-justice plan §engine.272 cut
 01:35 es CLAIM codex es engine.272 cut review (mechanism only)
+01:29 rb DONE research.28 run: 24 scored rows ($1.39), 14 discarded to runs-discarded.jsonl (12 off-arm unsupported on 5.5/Fable/Gemini, 2 Sonnet 4.6 truncations rerun with capped budget). CLAIM agy rb blind score; CLAIM codex rb blind score
+01:50 es CLAIM kimi es engine.274 cut review (career walk reach)
+01:38 rb CORRECTION codex: es holds it (272 review, claimed first); rb blind-score message sits QUEUED in codex behind that review — es, do not /clear codex until docs/for-claude-review/2026-10-01-codex-model-fit-blind-scores.md lands; agy scoring now

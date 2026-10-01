@@ -1,0 +1,146 @@
+{
+  "A": {
+    "rowIndex": 15,
+    "input": "open-character-3_mags-narration-c105.json",
+    "model": "deepseek/deepseek-chat",
+    "reasoning": "off"
+  },
+  "B": {
+    "rowIndex": 1,
+    "input": "open-character-1_mags-narration-c108.json",
+    "model": "deepseek/deepseek-chat",
+    "reasoning": "on"
+  },
+  "C": {
+    "rowIndex": 0,
+    "input": "open-character-1_mags-narration-c108.json",
+    "model": "deepseek/deepseek-chat",
+    "reasoning": "off"
+  },
+  "D": {
+    "rowIndex": 13,
+    "input": "open-character-2_elias-varek-interview-c108.json",
+    "model": "anthropic/claude-opus-5.5",
+    "reasoning": "on"
+  },
+  "E": {
+    "rowIndex": 14,
+    "input": "open-character-2_elias-varek-interview-c108.json",
+    "model": "anthropic/claude-fable-5.1",
+    "reasoning": "on"
+  },
+  "F": {
+    "rowIndex": 20,
+    "input": "open-character-3_mags-narration-c105.json",
+    "model": "anthropic/claude-opus-5.5",
+    "reasoning": "on"
+  },
+  "G": {
+    "rowIndex": 19,
+    "input": "open-character-3_mags-narration-c105.json",
+    "model": "anthropic/claude-sonnet-5.5",
+    "reasoning": "on"
+  },
+  "H": {
+    "rowIndex": 18,
+    "input": "open-character-3_mags-narration-c105.json",
+    "model": "anthropic/claude-sonnet-4.6",
+    "reasoning": "off"
+  },
+  "I": {
+    "rowIndex": 9,
+    "input": "open-character-2_elias-varek-interview-c108.json",
+    "model": "google/gemini-3.7-flash",
+    "reasoning": "on"
+  },
+  "J": {
+    "rowIndex": 22,
+    "input": "open-character-1_mags-narration-c108.json",
+    "model": "anthropic/claude-sonnet-4.6",
+    "reasoning": "on"
+  },
+  "K": {
+    "rowIndex": 4,
+    "input": "open-character-1_mags-narration-c108.json",
+    "model": "anthropic/claude-sonnet-5.5",
+    "reasoning": "on"
+  },
+  "L": {
+    "rowIndex": 23,
+    "input": "open-character-3_mags-narration-c105.json",
+    "model": "anthropic/claude-sonnet-4.6",
+    "reasoning": "on"
+  },
+  "M": {
+    "rowIndex": 12,
+    "input": "open-character-2_elias-varek-interview-c108.json",
+    "model": "anthropic/claude-sonnet-5.5",
+    "reasoning": "on"
+  },
+  "N": {
+    "rowIndex": 8,
+    "input": "open-character-2_elias-varek-interview-c108.json",
+    "model": "deepseek/deepseek-chat",
+    "reasoning": "on"
+  },
+  "O": {
+    "rowIndex": 3,
+    "input": "open-character-1_mags-narration-c108.json",
+    "model": "anthropic/claude-sonnet-4.6",
+    "reasoning": "off"
+  },
+  "P": {
+    "rowIndex": 17,
+    "input": "open-character-3_mags-narration-c105.json",
+    "model": "google/gemini-3.7-flash",
+    "reasoning": "on"
+  },
+  "Q": {
+    "rowIndex": 2,
+    "input": "open-character-1_mags-narration-c108.json",
+    "model": "google/gemini-3.7-flash",
+    "reasoning": "on"
+  },
+  "R": {
+    "rowIndex": 10,
+    "input": "open-character-2_elias-varek-interview-c108.json",
+    "model": "anthropic/claude-sonnet-4.6",
+    "reasoning": "off"
+  },
+  "S": {
+    "rowIndex": 21,
+    "input": "open-character-3_mags-narration-c105.json",
+    "model": "anthropic/claude-fable-5.1",
+    "reasoning": "on"
+  },
+  "T": {
+    "rowIndex": 11,
+    "input": "open-character-2_elias-varek-interview-c108.json",
+    "model": "anthropic/claude-sonnet-4.6",
+    "reasoning": "on"
+  },
+  "U": {
+    "rowIndex": 5,
+    "input": "open-character-1_mags-narration-c108.json",
+    "model": "anthropic/claude-opus-5.5",
+    "reasoning": "on"
+  },
+  "V": {
+    "rowIndex": 6,
+    "input": "open-character-1_mags-narration-c108.json",
+    "model": "anthropic/claude-fable-5.1",
+    "reasoning": "on"
+  },
+  "W": {
+    "rowIndex": 16,
+    "input": "open-character-3_mags-narration-c105.json",
+    "model": "deepseek/deepseek-chat",
+    "reasoning": "on"
+  },
+  "X": {
+    "rowIndex": 7,
+    "input": "open-character-2_elias-varek-interview-c108.json",
+    "model": "deepseek/deepseek-chat",
+    "reasoning": "off"
+  }
+}

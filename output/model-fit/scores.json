@@ -1,0 +1,550 @@
+{
+  "scores": [
+    {
+      "input": "output/model-fit/inputs/open-character-1_mags-narration-c108.json",
+      "model": "deepseek/deepseek-chat",
+      "reasoning": "off",
+      "tier": "open-character",
+      "errored": false,
+      "finish": "stop",
+      "truncated": false,
+      "tokensIn": 4461,
+      "tokensOut": 1267,
+      "tokensReasoning": 0,
+      "tokens": 5728,
+      "costUsd": 0.00245,
+      "words": 921,
+      "wordRange": [
+        900,
+        1200
+      ],
+      "wordRangeOk": true,
+      "factsChecked": 5,
+      "factViolations": []
+    },
+    {
+      "input": "output/model-fit/inputs/open-character-1_mags-narration-c108.json",
+      "model": "deepseek/deepseek-chat",
+      "reasoning": "on",
+      "tier": "open-character",
+      "errored": false,
+      "finish": "stop",
+      "truncated": false,
+      "tokensIn": 4461,
+      "tokensOut": 1006,
+      "tokensReasoning": 0,
+      "tokens": 5467,
+      "costUsd": 0.00218,
+      "words": 721,
+      "wordRange": [
+        900,
+        1200
+      ],
+      "wordRangeOk": false,
+      "factsChecked": 5,
+      "factViolations": []
+    },
+    {
+      "input": "output/model-fit/inputs/open-character-1_mags-narration-c108.json",
+      "model": "google/gemini-3.7-flash",
+      "reasoning": "on",
+      "tier": "open-character",
+      "errored": false,
+      "finish": "stop",
+      "truncated": false,
+      "tokensIn": 4587,
+      "tokensOut": 3565,
+      "tokensReasoning": 2152,
+      "tokens": 8152,
+      "costUsd": 0.01681,
+      "words": 1166,
+      "wordRange": [
+        900,
+        1200
+      ],
+      "wordRangeOk": true,
+      "factsChecked": 5,
+      "factViolations": []
+    },
+    {
+      "input": "output/model-fit/inputs/open-character-1_mags-narration-c108.json",
+      "model": "anthropic/claude-sonnet-4.6",
+      "reasoning": "off",
+      "tier": "open-character",
+      "errored": false,
+      "finish": "stop",
+      "truncated": false,
+      "tokensIn": 4853,
+      "tokensOut": 1370,
+      "tokensReasoning": 0,
+      "tokens": 6223,
+      "costUsd": 0.03511,
+      "words": 995,
+      "wordRange": [
+        900,
+        1200
+      ],
+      "wordRangeOk": true,
+      "factsChecked": 5,
+      "factViolations": []
+    },
+    {
+      "input": "output/model-fit/inputs/open-character-1_mags-narration-c108.json",
+      "model": "anthropic/claude-sonnet-5.5",
+      "reasoning": "on",
+      "tier": "open-character",
+      "errored": false,
+      "finish": "stop",
+      "truncated": false,
+      "tokensIn": 6819,
+      "tokensOut": 2951,
+      "tokensReasoning": 762,
+      "tokens": 9770,
+      "costUsd": 0.04315,
+      "words": 1157,
+      "wordRange": [
+        900,
+        1200
+      ],
+      "wordRangeOk": true,
+      "factsChecked": 5,
+      "factViolations": []
+    },
+    {
+      "input": "output/model-fit/inputs/open-character-1_mags-narration-c108.json",
+      "model": "anthropic/claude-opus-5.5",
+      "reasoning": "on",
+      "tier": "open-character",
+      "errored": false,
+      "finish": "stop",
+      "truncated": false,
+      "tokensIn": 6819,
+      "tokensOut": 3298,
+      "tokensReasoning": 855,
+      "tokens": 10117,
+      "costUsd": 0.09324,
+      "words": 1298,
+      "wordRange": [
+        900,
+        1200
+      ],
+      "wordRangeOk": false,
+      "factsChecked": 5,
+      "factViolations": []
+    },
+    {
+      "input": "output/model-fit/inputs/open-character-1_mags-narration-c108.json",
+      "model": "anthropic/claude-fable-5.1",
+      "reasoning": "on",
+      "tier": "open-character",
+      "errored": false,
+      "finish": "stop",
+      "truncated": false,
+      "tokensIn": 6819,
+      "tokensOut": 3339,
+      "tokensReasoning": 721,
+      "tokens": 10158,
+      "costUsd": 0.23514,
+      "words": 1354,
+      "wordRange": [
+        900,
+        1200
+      ],
+      "wordRangeOk": false,
+      "factsChecked": 5,
+      "factViolations": [
+        "no-engine-vocabulary"
+      ]
+    },
+    {
+      "input": "output/model-fit/inputs/open-character-2_elias-varek-interview-c108.json",
+      "model": "deepseek/deepseek-chat",
+      "reasoning": "off",
+      "tier": "open-character",
+      "errored": false,
+      "finish": "stop",
+      "truncated": false,
+      "tokensIn": 7695,
+      "tokensOut": 141,
+      "tokensReasoning": 0,
+      "tokens": 7836,
+      "costUsd": 0.00213,
+      "words": 104,
+      "wordRangeOk": null,
+      "factsChecked": 6,
+      "factViolations": []
+    },
+    {
+      "input": "output/model-fit/inputs/open-character-2_elias-varek-interview-c108.json",
+      "model": "deepseek/deepseek-chat",
+      "reasoning": "on",
+      "tier": "open-character",
+      "errored": false,
+      "finish": "stop",
+      "truncated": false,
+      "tokensIn": 7694,
+      "tokensOut": 263,
+      "tokensReasoning": 0,
+      "tokens": 7957,
+      "costUsd": 0.00225,
+      "words": 187,
+      "wordRangeOk": null,
+      "factsChecked": 6,
+      "factViolations": []
+    },
+    {
+      "input": "output/model-fit/inputs/open-character-2_elias-varek-interview-c108.json",
+      "model": "google/gemini-3.7-flash",
+      "reasoning": "on",
+      "tier": "open-character",
+      "errored": false,
+      "finish": "stop",
+      "truncated": false,
+      "tokensIn": 8022,
+      "tokensOut": 1110,
+      "tokensReasoning": 859,
+      "tokens": 9132,
+      "costUsd": 0.01018,
+      "words": 199,
+      "wordRangeOk": null,
+      "factsChecked": 6,
+      "factViolations": []
+    },
+    {
+      "input": "output/model-fit/inputs/open-character-2_elias-varek-interview-c108.json",
+      "model": "anthropic/claude-sonnet-4.6",
+      "reasoning": "off",
+      "tier": "open-character",
+      "errored": false,
+      "finish": "stop",
+      "truncated": false,
+      "tokensIn": 8488,
+      "tokensOut": 318,
+      "tokensReasoning": 0,
+      "tokens": 8806,
+      "costUsd": 0.03023,
+      "words": 249,
+      "wordRangeOk": null,
+      "factsChecked": 6,
+      "factViolations": []
+    },
+    {
+      "input": "output/model-fit/inputs/open-character-2_elias-varek-interview-c108.json",
+      "model": "anthropic/claude-sonnet-4.6",
+      "reasoning": "on",
+      "tier": "open-character",
+      "errored": false,
+      "finish": "stop",
+      "truncated": false,
+      "tokensIn": 8488,
+      "tokensOut": 624,
+      "tokensReasoning": 284,
+      "tokens": 9112,
+      "costUsd": 0.03482,
+      "words": 263,
+      "wordRangeOk": null,
+      "factsChecked": 6,
+      "factViolations": []
+    },
+    {
+      "input": "output/model-fit/inputs/open-character-2_elias-varek-interview-c108.json",
+      "model": "anthropic/claude-sonnet-5.5",
+      "reasoning": "on",
+      "tier": "open-character",
+      "errored": false,
+      "finish": "stop",
+      "truncated": false,
+      "tokensIn": 12043,
+      "tokensOut": 728,
+      "tokensReasoning": 302,
+      "tokens": 12771,
+      "costUsd": 0.03137,
+      "words": 253,
+      "wordRangeOk": null,
+      "factsChecked": 6,
+      "factViolations": []
+    },
+    {
+      "input": "output/model-fit/inputs/open-character-2_elias-varek-interview-c108.json",
+      "model": "anthropic/claude-opus-5.5",
+      "reasoning": "on",
+      "tier": "open-character",
+      "errored": false,
+      "finish": "stop",
+      "truncated": false,
+      "tokensIn": 12043,
+      "tokensOut": 628,
+      "tokensReasoning": 211,
+      "tokens": 12671,
+      "costUsd": 0.06073,
+      "words": 253,
+      "wordRangeOk": null,
+      "factsChecked": 6,
+      "factViolations": []
+    },
+    {
+      "input": "output/model-fit/inputs/open-character-2_elias-varek-interview-c108.json",
+      "model": "anthropic/claude-fable-5.1",
+      "reasoning": "on",
+      "tier": "open-character",
+      "errored": false,
+      "finish": "stop",
+      "truncated": false,
+      "tokensIn": 12043,
+      "tokensOut": 717,
+      "tokensReasoning": 280,
+      "tokens": 12760,
+      "costUsd": 0.15628,
+      "words": 260,
+      "wordRangeOk": null,
+      "factsChecked": 6,
+      "factViolations": []
+    },
+    {
+      "input": "output/model-fit/inputs/open-character-3_mags-narration-c105.json",
+      "model": "deepseek/deepseek-chat",
+      "reasoning": "off",
+      "tier": "open-character",
+      "errored": false,
+      "finish": "stop",
+      "truncated": false,
+      "tokensIn": 4195,
+      "tokensOut": 730,
+      "tokensReasoning": 0,
+      "tokens": 4925,
+      "costUsd": 0.00183,
+      "words": 494,
+      "wordRange": [
+        900,
+        1200
+      ],
+      "wordRangeOk": false,
+      "factsChecked": 5,
+      "factViolations": []
+    },
+    {
+      "input": "output/model-fit/inputs/open-character-3_mags-narration-c105.json",
+      "model": "deepseek/deepseek-chat",
+      "reasoning": "on",
+      "tier": "open-character",
+      "errored": false,
+      "finish": "stop",
+      "truncated": false,
+      "tokensIn": 4195,
+      "tokensOut": 818,
+      "tokensReasoning": 0,
+      "tokens": 5013,
+      "costUsd": 0.00192,
+      "words": 585,
+      "wordRange": [
+        900,
+        1200
+      ],
+      "wordRangeOk": false,
+      "factsChecked": 5,
+      "factViolations": []
+    },
+    {
+      "input": "output/model-fit/inputs/open-character-3_mags-narration-c105.json",
+      "model": "google/gemini-3.7-flash",
+      "reasoning": "on",
+      "tier": "open-character",
+      "errored": false,
+      "finish": "stop",
+      "truncated": false,
+      "tokensIn": 4345,
+      "tokensOut": 2856,
+      "tokensReasoning": 1561,
+      "tokens": 7201,
+      "costUsd": 0.01397,
+      "words": 1087,
+      "wordRange": [
+        900,
+        1200
+      ],
+      "wordRangeOk": true,
+      "factsChecked": 5,
+      "factViolations": []
+    },
+    {
+      "input": "output/model-fit/inputs/open-character-3_mags-narration-c105.json",
+      "model": "anthropic/claude-sonnet-4.6",
+      "reasoning": "off",
+      "tier": "open-character",
+      "errored": false,
+      "finish": "stop",
+      "truncated": false,
+      "tokensIn": 4588,
+      "tokensOut": 1225,
+      "tokensReasoning": 0,
+      "tokens": 5813,
+      "costUsd": 0.03214,
+      "words": 879,
+      "wordRange": [
+        900,
+        1200
+      ],
+      "wordRangeOk": false,
+      "factsChecked": 5,
+      "factViolations": [
+        "clock-not-real-dates"
+      ]
+    },
+    {
+      "input": "output/model-fit/inputs/open-character-3_mags-narration-c105.json",
+      "model": "anthropic/claude-sonnet-5.5",
+      "reasoning": "on",
+      "tier": "open-character",
+      "errored": false,
+      "finish": "stop",
+      "truncated": false,
+      "tokensIn": 6369,
+      "tokensOut": 3117,
+      "tokensReasoning": 984,
+      "tokens": 9486,
+      "costUsd": 0.04391,
+      "words": 1163,
+      "wordRange": [
+        900,
+        1200
+      ],
+      "wordRangeOk": true,
+      "factsChecked": 5,
+      "factViolations": []
+    },
+    {
+      "input": "output/model-fit/inputs/open-character-3_mags-narration-c105.json",
+      "model": "anthropic/claude-opus-5.5",
+      "reasoning": "on",
+      "tier": "open-character",
+      "errored": false,
+      "finish": "stop",
+      "truncated": false,
+      "tokensIn": 6369,
+      "tokensOut": 3271,
+      "tokensReasoning": 962,
+      "tokens": 9640,
+      "costUsd": 0.0909,
+      "words": 1256,
+      "wordRange": [
+        900,
+        1200
+      ],
+      "wordRangeOk": false,
+      "factsChecked": 5,
+      "factViolations": [
+        "no-engine-vocabulary"
+      ]
+    },
+    {
+      "input": "output/model-fit/inputs/open-character-3_mags-narration-c105.json",
+      "model": "anthropic/claude-fable-5.1",
+      "reasoning": "on",
+      "tier": "open-character",
+      "errored": false,
+      "finish": "stop",
+      "truncated": false,
+      "tokensIn": 6369,
+      "tokensOut": 2977,
+      "tokensReasoning": 670,
+      "tokens": 9346,
+      "costUsd": 0.21254,
+      "words": 1256,
+      "wordRange": [
+        900,
+        1200
+      ],
+      "wordRangeOk": false,
+      "factsChecked": 5,
+      "factViolations": []
+    },
+    {
+      "input": "output/model-fit/inputs/open-character-1_mags-narration-c108.json",
+      "model": "anthropic/claude-sonnet-4.6",
+      "reasoning": "on",
+      "tier": "open-character",
+      "errored": false,
+      "finish": "stop",
+      "truncated": false,
+      "tokensIn": 4882,
+      "tokensOut": 1745,
+      "tokensReasoning": 78,
+      "tokens": 6627,
+      "costUsd": 0.04082,
+      "words": 1228,
+      "wordRange": [
+        900,
+        1200
+      ],
+      "wordRangeOk": false,
+      "factsChecked": 5,
+      "factViolations": []
+    },
+    {
+      "input": "output/model-fit/inputs/open-character-3_mags-narration-c105.json",
+      "model": "anthropic/claude-sonnet-4.6",
+      "reasoning": "on",
+      "tier": "open-character",
+      "errored": false,
+      "finish": "stop",
+      "truncated": false,
+      "tokensIn": 4617,
+      "tokensOut": 1658,
+      "tokensReasoning": 68,
+      "tokens": 6275,
+      "costUsd": 0.03872,
+      "words": 1149,
+      "wordRange": [
+        900,
+        1200
+      ],
+      "wordRangeOk": true,
+      "factsChecked": 5,
+      "factViolations": [
+        "clock-not-real-dates"
+      ]
+    }
+  ],
+  "distinctiveness": {
+    "deepseek/deepseek-chat (off)": {
+      "model": "deepseek/deepseek-chat",
+      "reasoning": "off",
+      "mags_vs_elias": 0.0376
+    },
+    "deepseek/deepseek-chat (on)": {
+      "model": "deepseek/deepseek-chat",
+      "reasoning": "on",
+      "mags_vs_elias": 0.0538
+    },
+    "google/gemini-3.7-flash (on)": {
+      "model": "google/gemini-3.7-flash",
+      "reasoning": "on",
+      "mags_vs_elias": 0.0411
+    },
+    "anthropic/claude-sonnet-4.6 (off)": {
+      "model": "anthropic/claude-sonnet-4.6",
+      "reasoning": "off",
+      "mags_vs_elias": 0.0713
+    },
+    "anthropic/claude-sonnet-5.5 (on)": {
+      "model": "anthropic/claude-sonnet-5.5",
+      "reasoning": "on",
+      "mags_vs_elias": 0.0967
+    },
+    "anthropic/claude-opus-5.5 (on)": {
+      "model": "anthropic/claude-opus-5.5",
+      "reasoning": "on",
+      "mags_vs_elias": 0.0818
+    },
+    "anthropic/claude-fable-5.1 (on)": {
+      "model": "anthropic/claude-fable-5.1",
+      "reasoning": "on",
+      "mags_vs_elias": 0.0641
+    },
+    "anthropic/claude-sonnet-4.6 (on)": {
+      "model": "anthropic/claude-sonnet-4.6",
+      "reasoning": "on",
+      "mags_vs_elias": 0.072
+    }
+  }
+}

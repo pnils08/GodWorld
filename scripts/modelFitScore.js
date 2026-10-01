@@ -343,14 +343,17 @@ function generateBlindPack(rows, blindDir) {
 
     shuffled.forEach((item, i) => {
       const label = getLabel(i);
+      const inputName = item.row.input ? path.basename(item.row.input) : null;
       keyData[label] = {
         rowIndex: item.rowIndex,
+        input: inputName,
         model: item.row.model,
         reasoning: item.row.reasoning,
       };
 
+      // The input name is not a model leak — a scorer needs to know which prompt an output answers.
       const sanitizedOutput = stripModelLines(item.row.output, modelNames);
-      blindSections.push(`## Output ${label}\n\n${sanitizedOutput}\n\n---`);
+      blindSections.push(`## Output ${label}${inputName ? ` — input: ${inputName}` : ''}\n\n${sanitizedOutput}\n\n---`);
     });
 
     const blindFile = path.join(blindDir, `${tier}-blind.md`);

@@ -232,6 +232,7 @@ var FIRE_GUARD_DEFAULT_MINUTES = 60;        // also the ENGINE275_CONFIG_SEEDS s
 var FIRE_ADMISSION_PROP = 'FIRE_ADMISSION_JSON';
 var FIRE_OVERRIDE_PROP = 'FIRE_GUARD_OVERRIDE';
 var FIRE_GUARD_MAX_MINUTES = 1440;           // the contract's upper bound
+var FIRE_CLOCK_SLACK_MS = 5 * 60000;        // a record dated further ahead than this is not one we wrote
 var FIRE_STATES = { running: true, done: true, failed: true, unpersisted: true, unverified: true, aborted: true };
 
 function fireGuardRefuse_(ss, cycleId, message) {
@@ -289,12 +290,14 @@ function admitCycleFire_(ss, webOpts, nowMs) {
   var props = PropertiesService.getScriptProperties();
   var raw = props.getProperty(FIRE_ADMISSION_PROP);
   var prior = null;
-  if (raw) {
+  if (raw !== null && raw !== undefined) {   // present — even an empty string — must be a record this code wrote
     try { prior = JSON.parse(raw); } catch (parseErr) { prior = null; }
+    var wholeMs = function(v) { return typeof v === 'number' && isFinite(v) && v > 0 && Math.floor(v) === v; };
     var shapeOk = prior && typeof prior === 'object' && !Array.isArray(prior) &&
       typeof prior.cycle === 'number' && isFinite(prior.cycle) && prior.cycle >= 1 && Math.floor(prior.cycle) === prior.cycle &&
-      typeof prior.startedMs === 'number' && isFinite(prior.startedMs) && prior.startedMs > 0 &&
-      typeof prior.state === 'string' && FIRE_STATES[prior.state] === true;
+      wholeMs(prior.startedMs) && prior.startedMs <= nowMs + FIRE_CLOCK_SLACK_MS &&
+      typeof prior.state === 'string' && FIRE_STATES[prior.state] === true &&
+      (prior.state === 'running' ? prior.finishedMs === undefined : (wholeMs(prior.finishedMs) && prior.finishedMs >= prior.startedMs));
     if (!shapeOk) {
       fireGuardRefuse_(ss, target, 'engine.275: the fire record (script property ' + FIRE_ADMISSION_PROP + ') is unreadable — refusing to fire. ' +
         'Inspect it; to fire deliberately, delete that property.');
@@ -349,8 +352,11 @@ function assertFireConfigLoaded_(ctx, fire) {
       ' but this fire was admitted for Cycle ' + fire.admission.cycle + ' — stopping before time advances');
   }
 }
-function assertFireAdvanced_(ctx, fire) {
+function assertFireAdvanced_(ctx, fire, advanceOk) {
   if (!fire || !fire.admission) return;
+  if (advanceOk === false) {   // the wrapped phase threw — possibly after it set the Cycle number and before the counter was queued
+    throw new Error('engine.275: Phase1-AdvanceTime failed for Cycle ' + fire.admission.cycle + ' — stopping before any world phase runs');
+  }
   if (Number(ctx && ctx.summary ? ctx.summary.cycleId : NaN) !== fire.admission.cycle) {
     throw new Error('engine.275: Phase1-AdvanceTime did not produce Cycle ' + fire.admission.cycle + ' (summary.cycleId is ' +
       String(ctx && ctx.summary ? ctx.summary.cycleId : undefined) + ') — stopping before any world phase runs');
@@ -361,7 +367,7 @@ function assertFireAdvanced_(ctx, fire) {
 // AdvanceTime, and does the sheet now hold its Cycle number?
 //   aborted     — stopped before AdvanceTime: nothing advanced; a re-fire is free.
 //   done        — advanced, no throw, flush ok, cycleCount read back == this Cycle.
-//   failed      — advanced and the body threw.
+//   failed      — advanced and the body threw, or a queued write is known not to have landed.
 //   unpersisted — advanced, but cycleCount on the sheet is not this Cycle.
 //   unverified  — advanced, but the flush or the read-back itself failed.
 // Returns { state, problem } — problem is a message for the caller when the run did not
@@ -388,6 +394,9 @@ function closeCycleFire_(fire, threw, ss, flushErr) {
     } else if (onSheet !== cycle) {
       state = 'unpersisted';
       problem = 'engine.275: Cycle ' + cycle + ' ran but World_Config.cycleCount reads ' + onSheet + ' — the counter did not persist';
+    } else if (fire.commitProblem) {
+      state = 'failed';
+      problem = 'engine.275: Cycle ' + cycle + ' advanced but ' + fire.commitProblem + ' — the world is partly written';
     } else {
       state = threw ? 'failed' : 'done';
     }
@@ -496,8 +505,8 @@ function runWorldCycleLocked_(ss, fire) {
   // dry-run/replay internally; see loadPreviousEvening.js).
   assertCarryForwardPresent_(ctx);
   safePhaseCall_(ctx, 'Phase1-CanonHoods', function() { loadCanonNeighborhoods_(ctx); });  // engine.99 — ADR-0016 canonical hood set from Neighborhood_Map
-  safePhaseCall_(ctx, 'Phase1-AdvanceTime', function() { advanceWorldTime_(ctx); });
-  assertFireAdvanced_(ctx, fire);  // engine.275: UNWRAPPED — no world phase runs unless time advanced to the admitted Cycle
+  var advanceOk = safePhaseCall_(ctx, 'Phase1-AdvanceTime', function() { advanceWorldTime_(ctx); });
+  assertFireAdvanced_(ctx, fire, advanceOk);  // engine.275: UNWRAPPED — no world phase runs unless AdvanceTime finished and produced the admitted Cycle
   safePhaseCall_(ctx, 'Phase1-SeedRng', function() { initializeSeededRng_(ctx); });  // after AdvanceTime so seed = real cycleId (fixes dry-run seed-1 too; replay keeps its stored seed)
   safePhaseCall_(ctx, 'Phase1-Calendar', function() { advanceSimulationCalendar_(ctx); });
   safePhaseCall_(ctx, 'Phase1-ResetAudit', function() { resetCycleAuditIssues_(ctx); });
@@ -830,11 +839,13 @@ function runWorldCycleLocked_(ss, fire) {
           // rows were queued all cycle and never landed. Logger-only before.
           logEngineError_(ctx, 'Phase11-CacheFlushPartial', new Error(
             flushStats.errors.length + ' queued write(s) did not land: ' + flushStats.errors.join(', ')));
+          if (fire) fire.commitProblem = flushStats.errors.length + ' queued write(s) did not land';  // engine.275: a known missing write is not a done
         }
       } catch (flushErr) {
         // engine.136 — was Logger-only. Every queued write of the cycle is lost
         // here, cycleCount included; that has to reach Engine_Errors.
         logEngineError_(ctx, 'FATAL-CacheFlush', flushErr);
+        if (fire) fire.commitProblem = 'the cache flush threw: ' + flushErr.message;  // engine.275
       }
       // engine.136 — runs after either branch: a flush can also report success
       // and still not have moved the cell (C110's transient took the response too).

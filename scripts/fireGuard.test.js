@@ -71,6 +71,7 @@ function world(opts) {
     if (w.bodyMode === 'nopersist') { ctx.summary.cycleId = Number(row[1]) + 1; return; }   // ran, but the counter write never landed
     row[1] = Number(row[1]) + 1; ctx.summary.cycleId = row[1];
     if (w.bodyMode === 'crash') throw new Error('phase blew up after AdvanceTime');
+    if (w.bodyMode === 'partial') fire.commitProblem = '2 queued write(s) did not land';   // what the body's cache-flush handler records
   };
   w.box = box;
   w.cycleCount = () => w.config.find(r => r[0] === 'cycleCount')[1];
@@ -147,7 +148,8 @@ console.log('═══ 3 — runs that do not end cleanly');
     k.errors.some(r => r[2] === 'Phase1-FireGuard' && /Cycle 109\) was left running/.test(r[3])));
 
   // the record already names the Cycle about to run: the counter never moved — never run it twice
-  const rec = (cycle, state, agoMin) => ({ props: { FIRE_ADMISSION_JSON: JSON.stringify({ cycle: cycle, startedMs: 1800000000000 - agoMin * 60000, state: state }) } });
+  const rec = (cycle, state, agoMin) => ({ props: { FIRE_ADMISSION_JSON: JSON.stringify(Object.assign({ cycle: cycle, startedMs: 1800000000000 - agoMin * 60000, state: state },
+    state === 'running' ? {} : { finishedMs: 1800000000000 - agoMin * 60000 + 200000 })) } });
   const s1 = world(rec(110, 'done', 180));
   const e1 = s1.fire();
   assert('3.9 record says Cycle 110 ran, sheet still 109, three hours later: REFUSED', /Cycle 110 was already admitted \(done\) and World_Config.cycleCount is still 109 — refusing to run it again/.test(e1 || '') && s1.runs === 0, e1);
@@ -182,6 +184,11 @@ console.log('═══ 3 — runs that do not end cleanly');
   assert('3.21 ...and the lock is still released', fl.lockReleases === 1);
   fl.flushThrows = false; fl.minutes(5);
   assert('3.22 ...and a re-fire five minutes later is refused', /refusing a second fire/.test(fl.fire() || '') && fl.runs === 1);
+
+  // the counter landed but another queued write is known not to have
+  const pc = world(); pc.bodyMode = 'partial';
+  const pe = pc.fire();
+  assert('3.23 a partial commit: the caller is told, the record says failed, not done', /Cycle 110 advanced but 2 queued write\(s\) did not land — the world is partly written/.test(pe || '') && pc.record().state === 'failed' && pc.cycleCount() === 110, pe);
 })();
 
 // ---------------------------------------------------------------------------
@@ -215,13 +222,24 @@ console.log('═══ 5 — unreadable inputs refuse; they never wave a fire th
   bad('5.10 fireGuardMinutes negative', { config: [H, ['cycleCount', 109, ''], ['fireGuardMinutes', -5, '']] }, /fireGuardMinutes is not a number from 0 to 1440/);
   bad('5.10b fireGuardMinutes over the bound', { config: [H, ['cycleCount', 109, ''], ['fireGuardMinutes', 5000, '']] }, /from 0 to 1440/);
   const shape = (label, rec) => bad(label, { props: { FIRE_ADMISSION_JSON: JSON.stringify(rec) } }, /is unreadable — refusing/);
-  shape('5.2b a record with a null Cycle', { cycle: null, startedMs: 1799999000000, state: 'done' });
-  shape('5.2c a record whose Cycle is text', { cycle: '108', startedMs: 1799999000000, state: 'done' });
-  shape('5.2d a record with a zero start time', { cycle: 108, startedMs: 0, state: 'done' });
-  shape('5.2e a record with an unknown state', { cycle: 108, startedMs: 1799999000000, state: 'whatever' });
-  shape('5.2f a record with no state', { cycle: 108, startedMs: 1799999000000 });
-  shape('5.2g a record that is an array', [108, 1799999000000, 'done']);
-  shape('5.2h a hand-typed aborted record with a bad Cycle cannot wave a fire through', { cycle: 0, startedMs: 1799999000000, state: 'aborted' });
+  const T0 = 1799999000000, T1 = 1799999200000;
+  shape('5.2b a record with a null Cycle', { cycle: null, startedMs: T0, state: 'done', finishedMs: T1 });
+  shape('5.2c a record whose Cycle is text', { cycle: '108', startedMs: T0, state: 'done', finishedMs: T1 });
+  shape('5.2d a record with a zero start time', { cycle: 108, startedMs: 0, state: 'done', finishedMs: T1 });
+  shape('5.2e a record with an unknown state', { cycle: 108, startedMs: T0, state: 'whatever', finishedMs: T1 });
+  shape('5.2f a record with no state', { cycle: 108, startedMs: T0 });
+  shape('5.2g a record that is an array', [108, T0, 'done']);
+  shape('5.2h a hand-typed aborted record with a bad Cycle cannot wave a fire through', { cycle: 0, startedMs: T0, state: 'aborted', finishedMs: T1 });
+  shape('5.2i a fractional start time', { cycle: 108, startedMs: T0 + 0.5, state: 'done', finishedMs: T1 });
+  shape('5.2j a finished state with no finish time', { cycle: 108, startedMs: T0, state: 'done' });
+  shape('5.2k a finish time before the start', { cycle: 108, startedMs: T0, state: 'failed', finishedMs: T0 - 1 });
+  shape('5.2l a running record that claims a finish time', { cycle: 108, startedMs: T0, state: 'running', finishedMs: T1 });
+  shape('5.2m an aborted record dated in the future cannot wave a fire through', { cycle: 110, startedMs: 1800000000000 + 3600000, state: 'aborted', finishedMs: 1800000000000 + 3700000 });
+  bad('5.2n an empty-string record is present and unreadable, not absent', { props: { FIRE_ADMISSION_JSON: '' } }, /is unreadable — refusing/);
+  const okRec = world({ props: { FIRE_ADMISSION_JSON: JSON.stringify({ cycle: 108, startedMs: T0 - 7 * 86400000, state: 'done', finishedMs: T1 - 7 * 86400000 }) } });
+  assert('5.2o a record exactly as this code writes it is accepted', okRec.fire() === null && okRec.runs === 1);
+  const slack = world({ props: { FIRE_ADMISSION_JSON: JSON.stringify({ cycle: 108, startedMs: 1800000000000 + 60000, state: 'aborted', finishedMs: 1800000000000 + 61000 }) } });
+  assert('5.2p a minute of clock skew is tolerated', slack.fire() === null && slack.runs === 1);
   bad('5.11 World_Config missing', { noConfig: true }, /World_Config not found — refusing/);
   const d = world({ config: [H, ['cycleCount', 109, '']] });      // key absent: the seed value applies
   d.fire(); d.minutes(30);
@@ -231,8 +249,8 @@ console.log('═══ 5 — unreadable inputs refuse; they never wave a fire th
   assert('5.13 fireGuardMinutes 0 (bench): no time test', z.fire() === null && z.runs === 2 && z.cycleCount() === 111);
   const t = world({ config: [H, ['cycleCount', '109', ''], ['fireGuardMinutes', '60', '']] });
   assert('5.14 numeric text in the cells reads as numbers', t.fire() === null && t.cycleCount() === 110);
-  const f = world({ props: { FIRE_ADMISSION_JSON: JSON.stringify({ cycle: 109, startedMs: 1800000000000 + 90 * 60000, state: 'done' }) } });
-  assert('5.15 a record dated in the future refuses', /refusing a second fire/.test(f.fire() || '') && f.runs === 0);
+  const f = world({ props: { FIRE_ADMISSION_JSON: JSON.stringify({ cycle: 109, startedMs: 1800000000000 + 90 * 60000, state: 'done', finishedMs: 1800000000000 + 94 * 60000 }) } });
+  assert('5.15 a record dated in the future refuses', /is unreadable — refusing/.test(f.fire() || '') && f.runs === 0);
 })();
 
 // ---------------------------------------------------------------------------
@@ -271,25 +289,37 @@ console.log('═══ 6b — inside the body: the two unwrapped checks, and the
   assert('6b.4 AdvanceTime produced the admitted Cycle: passes', thr(() => b.assertFireAdvanced_({ summary: { cycleId: 110 } }, fire)) === null);
   assert('6b.5 AdvanceTime failed (no Cycle number): stops before any world phase', /did not produce Cycle 110 .* stopping before any world phase runs/.test(thr(() => b.assertFireAdvanced_({ summary: { cycleId: null } }, fire)) || ''));
   assert('6b.6 AdvanceTime produced another Cycle: stops', /did not produce Cycle 110/.test(thr(() => b.assertFireAdvanced_({ summary: { cycleId: 1 } }, fire)) || ''));
+  assert('6b.6b AdvanceTime THREW after it set the Cycle number (before queueing the counter): still stops', /Phase1-AdvanceTime failed for Cycle 110 — stopping before any world phase runs/.test(thr(() => b.assertFireAdvanced_({ summary: { cycleId: 110 } }, fire, false)) || ''));
+  assert('6b.6c AdvanceTime returned true with the right Cycle: passes', thr(() => b.assertFireAdvanced_({ summary: { cycleId: 110 } }, fire, true)) === null);
   assert('6b.7 no admission on the fire object (dry-run / replay harness): both are no-ops', thr(() => b.assertFireConfigLoaded_({ config: {} }, null)) === null && thr(() => b.assertFireAdvanced_({ summary: {} }, {})) === null);
   const eng = fs.readFileSync(path.join(ROOT, 'phase01-config/godWorldEngine2.js'), 'utf8');
   const body = eng.slice(eng.indexOf('function runWorldCycleLocked_'), eng.indexOf('function loadConfig_'));
   const at = t => body.indexOf(t);
   assert('6b.8 order in the body: LoadConfig, config check, carry-forward check, AdvanceTime, advance check, then the rest',
     at("'Phase1-LoadConfig'") > 0 && at("'Phase1-LoadConfig'") < at('assertFireConfigLoaded_(ctx, fire);') && at('assertFireConfigLoaded_(ctx, fire);') < at('assertCarryForwardPresent_(ctx);') &&
-    at('assertCarryForwardPresent_(ctx);') < at("'Phase1-AdvanceTime'") && at("'Phase1-AdvanceTime'") < at('assertFireAdvanced_(ctx, fire);') && at('assertFireAdvanced_(ctx, fire);') < at("'Phase1-SeedRng'"));
+    at('assertCarryForwardPresent_(ctx);') < at("'Phase1-AdvanceTime'") && at("var advanceOk = safePhaseCall_(ctx, 'Phase1-AdvanceTime'") > 0 && at("'Phase1-AdvanceTime'") < at('assertFireAdvanced_(ctx, fire, advanceOk);') && at('assertFireAdvanced_(ctx, fire, advanceOk);') < at("'Phase1-SeedRng'"));
   assert('6b.9 both checks are unwrapped (a throw stops the run)', !/safePhaseCall_\([^\n]*assertFire(ConfigLoaded|Advanced)_/.test(body));
   const adv = eng.slice(eng.indexOf('function advanceWorldTime_'), eng.indexOf('function advanceWorldTime_') + 1600);
   assert('6b.10 AdvanceTime sets summary.cycleId before it queues the counter write (so "no Cycle number" means nothing was queued)', adv.indexOf('ctx.summary.cycleId = cycle;') > 0 && adv.indexOf('ctx.summary.cycleId = cycle;') < adv.indexOf("queueWrite('World_Config', cycleRow"));
 
-  // the bench door: clear a record the resync left ahead of the sheet
-  const d = world({ props: { FIRE_ADMISSION_JSON: JSON.stringify({ cycle: 171, startedMs: 1799990000000, state: 'done' }) } });
-  assert('6b.11 clearfire needs the token', d.post({ token: 'nope', action: 'clearfire' }).error === 'bad token' && d.record().cycle === 171);
-  const c = d.post({ token: 'tok', action: 'clearfire' });
-  assert('6b.12 clearfire removes the record and returns what it removed', c.ok === true && /"cycle":171/.test(c.cleared) && d.record() === null);
+  // the bench door: clear a record the resync left ahead of the sheet — narrow on purpose
+  const H3 = ['Key', 'Value', 'Description'];
+  const ahead = { cycle: 171, startedMs: 1799990000000, state: 'done', finishedMs: 1799990200000 };
+  const bench = (guard, count, rec, lockHeld) => { const x = world({ config: [H3, ['cycleCount', count, ''], ['fireGuardMinutes', guard, '']], props: { FIRE_ADMISSION_JSON: JSON.stringify(rec) } }); x.lockHeldElsewhere = !!lockHeld; return x; };
+  const d = bench(0, 109, ahead);
+  assert('6b.11 clearfire needs the token', d.post({ token: 'nope', action: 'clearfire', cycle: '171' }).error === 'bad token' && d.record().cycle === 171);
+  assert('6b.11b ...and the caller must name the record\'s Cycle', /send cycle=171/.test(d.post({ token: 'tok', action: 'clearfire' }).error) && /send cycle=171/.test(d.post({ token: 'tok', action: 'clearfire', cycle: '170' }).error) && d.record().cycle === 171);
+  const c = d.post({ token: 'tok', action: 'clearfire', cycle: '171' });
+  assert('6b.12 on a guard-0 sheet behind its record, clearfire removes it and returns what it removed', c.ok === true && /"cycle":171/.test(c.cleared) && d.record() === null);
   assert('6b.13 ...after which the resynced bench fires', d.get({ token: 'tok', expect: '109' }).ok === true && d.cycleCount() === 110);
-  const live = world({ token: null, props: { FIRE_ADMISSION_JSON: JSON.stringify({ cycle: 110, startedMs: 1799990000000, state: 'done' }) } });
-  assert('6b.14 with no trigger token (the live script) that door is shut', live.post({ token: 'x', action: 'clearfire' }).error === 'CYCLE_TRIGGER_TOKEN script property not set' && live.record().cycle === 110);
+  const g60 = bench(60, 109, ahead);
+  assert('6b.13b on a 60-minute sheet (what live carries) clearfire is refused', /clearfire is a bench action: World_Config.fireGuardMinutes is 60, not 0/.test(g60.post({ token: 'tok', action: 'clearfire', cycle: '171' }).error) && g60.record().cycle === 171);
+  const level = bench(0, 171, ahead);
+  assert('6b.13c a sheet that is NOT behind its record has nothing to reconcile', /is not behind the record/.test(level.post({ token: 'tok', action: 'clearfire', cycle: '171' }).error) && level.record().cycle === 171);
+  const busy = bench(0, 109, ahead, true);
+  assert('6b.13d while a Cycle holds the lock clearfire is refused', /a Cycle is running/.test(busy.post({ token: 'tok', action: 'clearfire', cycle: '171' }).error) && busy.record().cycle === 171);
+  const live = world({ token: null, props: { FIRE_ADMISSION_JSON: JSON.stringify(ahead) } });
+  assert('6b.14 with no trigger token (the live script) that door is shut', live.post({ token: 'x', action: 'clearfire', cycle: '171' }).error === 'CYCLE_TRIGGER_TOKEN script property not set' && live.record().cycle === 171);
   assert('6b.15 the carry-forward actions still work as before', d.post({ token: 'tok', action: 'getprop', key: 'NOT_LISTED' }).error === 'key not in carry-forward whitelist');
   const out = require('child_process').spawnSync(process.execPath, [path.join(ROOT, 'scripts/ctxMap.js')], { encoding: 'utf8' }).stdout || '';
   const m = /execution order: (\d+) orchestrated slots/.exec(out);

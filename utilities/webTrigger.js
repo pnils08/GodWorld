@@ -89,11 +89,36 @@ function doPost(e) {
     } else if (String(p.token || '') !== token) {
       out.error = 'bad token';
     } else if (p.action === 'clearfire') {
-      // engine.275: the reconciliation door for a bench whose sheet was resynced back
-      // behind its fire record (the record would refuse every fire). Returns what it cleared.
-      out.cleared = PropertiesService.getScriptProperties().getProperty('FIRE_ADMISSION_JSON');
-      PropertiesService.getScriptProperties().deleteProperty('FIRE_ADMISSION_JSON');
-      out.ok = true;
+      // engine.275: the reconciliation door for a BENCH whose sheet was resynced back behind
+      // its fire record (the record then refuses every fire). Narrow on purpose: under the
+      // fire lock; only on a sheet whose fireGuardMinutes is 0 (live carries 60); the caller
+      // names the record's Cycle; and the sheet's counter must be behind that record.
+      var cfLock = LockService.getScriptLock();
+      if (!cfLock.tryLock(5000)) {
+        out.error = 'a Cycle is running — clearfire refused';
+      } else {
+        try {
+          var cfProps = PropertiesService.getScriptProperties();
+          var cfRaw = cfProps.getProperty('FIRE_ADMISSION_JSON');
+          var cfRec = null; try { cfRec = JSON.parse(cfRaw); } catch (cfErr) { cfRec = null; }
+          var cfg = readFireGuardConfig_(openSimSpreadsheet_());
+          if (cfg.guardMinutes !== 0) {
+            out.error = 'clearfire is a bench action: World_Config.fireGuardMinutes is ' + cfg.guardMinutes + ', not 0';
+          } else if (!cfRec || typeof cfRec.cycle !== 'number') {
+            out.error = 'no readable fire record to clear';
+          } else if (String(p.cycle || '') !== String(cfRec.cycle)) {
+            out.error = 'the record is for Cycle ' + cfRec.cycle + '; send cycle=' + cfRec.cycle + ' to clear it';
+          } else if (!(cfg.cycleCount < cfRec.cycle)) {
+            out.error = 'cycleCount ' + cfg.cycleCount + ' is not behind the record (Cycle ' + cfRec.cycle + ') — nothing to reconcile';
+          } else {
+            cfProps.deleteProperty('FIRE_ADMISSION_JSON');
+            out.ok = true;
+            out.cleared = cfRaw;
+          }
+        } finally {
+          cfLock.releaseLock();
+        }
+      }
     } else if (!CARRY_FORWARD_PROP_WHITELIST[String(p.key || '')]) {
       out.error = 'key not in carry-forward whitelist';
     } else if (p.action === 'setprop') {

@@ -179,7 +179,7 @@
 - **assertFireConfigLoaded_(ctx, fire)**
   Config: ctx.config.cycleCount
 
-- **assertFireAdvanced_(ctx, fire)**
+- **assertFireAdvanced_(ctx, fire, advanceOk)**
   Reads: S.cycleId
 
 - **closeCycleFire_(fire, threw, ss, flushErr)**

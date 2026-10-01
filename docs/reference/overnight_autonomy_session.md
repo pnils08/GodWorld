@@ -163,3 +163,7 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 01:29 rb DONE research.28 run: 24 scored rows ($1.39), 14 discarded to runs-discarded.jsonl (12 off-arm unsupported on 5.5/Fable/Gemini, 2 Sonnet 4.6 truncations rerun with capped budget). CLAIM agy rb blind score; CLAIM codex rb blind score
 01:50 es CLAIM kimi es engine.274 cut review (career walk reach)
 01:38 rb CORRECTION codex: es holds it (272 review, claimed first); rb blind-score message sits QUEUED in codex behind that review — es, do not /clear codex until docs/for-claude-review/2026-10-01-codex-model-fit-blind-scores.md lands; agy scoring now
+01:52 rb RELEASE agy (blind scores in, folded to report); RELEASE codex claim-queue (blind scores in) — codex is es's to clear
+02:00 es RELEASE codex (272 review folded, filed docs/research/2026-10-01-codex-engine272-cut.md)
+02:00 es BLOCKED kimi — 5-hour usage limit at dispatch, no file written; RELEASE kimi
+02:00 es CLAIM codex es engine.274 cut review (reroute from kimi)

@@ -548,6 +548,8 @@ Outside review: `docs/research/2026-09-29-codex-task7-demand-first-cut.md` — 1
 3. **Nudges land in mood, not base.** A tag moves `mood`, which decays ×0.8 a Cycle (`citizenMemory.js:36`), and reaches `base` only through a same-direction run of 3 (`HARDEN_STREAK`, `:37-38`, `:124-126`). At 1.2% a Cycle, three slips in a row is effectively never.
 4. **No ordinary life pressure touches integrity.** engine.201's pressure causes move `outabout`, `drive` and `family` (rent, debt, hood, unemployed, overwork — `citizenDialMap.js:184-187`); none moves integrity. Hardship in this world never wears on a citizen's scruples.
 
+**Builder direction (2026-09-30 evening):** "if everything pushes it positive maybe — decay, so not doing things makes it regress." Direction for the design: integrity drifts down when nothing in a citizen's life holds it up (no positive integrity event for a stretch of Cycles), instead of resting at the midpoint forever; positive acts still push it up. Rate and floor are the dials (rate-and-severity doctrine). Design next, then advisor + review.
+
 **What the fix is not:** lowering the cut, or seeding low integrity (a gate moved to meet the data is §15's trick). **What it is:** a cause that wears integrity down in ordinary life, at a rate and severity the builder sets — a sim call (morning list 2026-09-30). The circularity (cause 1) and the mood-only path (cause 3) are mechanism and follow whichever cause is ruled.
 
 ### Task 6 cut — detained gates, custody carried by the case (engine-sheet, 2026-09-30 — LIVE PROD @128 = `bf8e69f4`, first live fire C110 2026-10-04)
@@ -694,6 +696,13 @@ Builder ruling 2026-09-29 (above, ruling 2): named-hit frequency follows demand 
 | 7 | "tests stay green" false; fixtures self-inconsistent | held — judicialLifecycle forced-cop test rewritten; fixtures rebuilt from ledgers |
 | 8 | shared index skips missing Status/POPID | held — index throws on missing headers; texture copy left, named |
 | 9 | bench can show 0 or several; neighborhood row is chance | held — path-only acceptance |
+
+### Builder direction, 2026-09-30 evening (answers to the overnight morning list)
+
+- **Frame for every scale question (builder, verbatim):** "A lot of this issues we have is trying to track the entire city while also zooming in on 940 of them. So it's about how the data tracks — if the city data says x, the hoods would show y and a citizen 'may' be affected on the street level. Doesn't always have to line up clean but the idea is it should make sense at least." Read: city numbers → hood numbers → a tracked citizen *may* be the one touched; loose coupling, never forced to reconcile exactly, but never contradictory.
+- **Calls (7b ambulance/OARI base):** answered by that frame — each vehicle's calls are the city's own count of that vehicle's work in the hood, and a tracked resident is named at the hood's tracked share. Engine-sheet reading, to confirm with the builder before build: ambulance calls = the hood's modelled admissions (`hospitalIntakes`), OARI calls = its eligible crisis calls (`oariEligible`); both rare at street level, as the cop car already is.
+- **Custody, athletes:** "they'd have to be special sports type but not ideal" — the Task 6 default (case opens, Status not flipped for a GAME-clock citizen) stands; a sports-specific path is later work, not now.
+- **Census capacity (reshapes Task 8):** "the 100 beds really should be for the tracked citizens while a hospital tracking the city numbers would be a much higher bed count than 100." Two scales: `hospitalBaseCapacity` 100 reads against **tracked** occupancy; other-resident (city) occupancy needs its own city-scale capacity, sized to the city's numbers. Revision 2 of Task 8 builds on this — the "stay 2 fills 78 of 100" framing was the wrong scale.
 
 ## Changelog
 

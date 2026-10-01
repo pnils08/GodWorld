@@ -178,6 +178,10 @@ Everything else in today's table leaves it: the real-world political and heritag
 
 **Not in this design.** Re-keying timing curves off the month index; the sports clock (independent, feed-driven); historical records (`docs/media/*` indexes and archives are history, never rewritten); tax day (engine.271).
 
+### Builder direction, 2026-09-30 evening
+
+- "I'd have to be able to review what this list all consists of … it's a sim game and don't want to get overly invested in every little 'holiday'." The held markers, Hanukkah, the faith list and world-born names go to the builder as **one short reviewable list with a recommended default for each**, not separate questions.
+
 ## Changelog
 
 - 2026-09-29 (engine-sheet) — Plan filed from builder direction; Task 1 dispatched to codex.

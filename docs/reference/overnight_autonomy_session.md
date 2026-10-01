@@ -192,3 +192,4 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 11:54 rb CHECK es working (engine.272 switched ON at the builder's ruling — standing hardship, rate 1, floor 10; bench run-forward C142–C171 in flight, 1 shell), guests idle, inbox clean; commits 1fe1e414/0c1d0bdf es, eab76fed rb (Varek wake direction). rb open: none; PIN moves when es reports the PROD stage
 12:38 rb DONE overnight doc §2/§4: peers answer each other's permission prompts within the gate; a context stand-down = clear + reboot into the next item (builder 12:36). es messaged
 12:42 rb DONE overnight doc §4: hourly wake on both seats (rb :26 set; es :41 — es messaged to set it)
+12:50 es CHECK rb idle after its session-end (a /clear sits unsent in its prompt — left alone); no guest claimed by es; review inbox clean; bench run-forward at C158 of C171, all fires ok, errors 4, 36 citizens crime-reachable since C155

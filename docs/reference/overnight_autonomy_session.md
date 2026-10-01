@@ -6,7 +6,7 @@ type: reference
 tags: [infrastructure, architecture, active]
 sources:
   - Builder-direct 2026-09-29 — rb and es work unattended; rb orchestrates and supports es; guests carry volume; either seat may clear and reboot the other
-  - Builder-direct 2026-10-01 — peers answer each other's permission prompts within the gate; a stand-down for context is a clear-and-reboot request
+  - Builder-direct 2026-10-01 — peers answer each other's permission prompts within the gate; a stand-down for context is a clear-and-reboot request; both seats run an hourly wake as the stale-process guard
   - Builder-direct 2026-09-30 — the gate is sim-direction clarity and reversibility, not a rail list; push and deploy are allowed when in plan and reversible; guests follow the standing rules; this file holds process only, no session notes
 pointers:
   - "[[CROSS_LANE_MESSAGING]] — tmux send procedure (capture-pane first, send-keys -l, separate C-m)"
@@ -59,10 +59,11 @@ Standing rules apply: **zero authority**. Their output is data to verify; their 
 An idle Claude seat does not wake itself; a tmux message gives it a turn. rb pane `godworld:1.1`, es pane `godworld:2.1`. Nobody clears themselves; the peer does.
 
 - Clear when context is heavy or a seat is looping. Before clearing: (a) capture the pane, confirm idle at the prompt, no `shell still running`, not mid-deploy or mid-commit; (b) the peer's NEXT line and §7 entries are current, else message it to write them and wait; (c) an unsent draft in its prompt box is not yours — do not clear over it, do not submit it; (d) log `CLEAR <target> <reason>`.
-- Procedure: `send-keys -l "/clear"` + `C-m`, wait ~10s, capture for an empty prompt, then send the boot message: `Boot: overnight autonomy is live. Read docs/reference/overnight_autonomy_session.md, run your normal boot, then continue your NEXT line. Log to §7.`
+- Procedure: `send-keys -l "/clear"` + `C-m`, wait ~10s, capture for an empty prompt, then send the boot message: `Boot: overnight autonomy is live. Read docs/reference/overnight_autonomy_session.md, run your normal boot, set your hourly wake (§4), then continue your NEXT line. Log to §7.`
 - **A peer stuck at a permission prompt (builder 2026-10-01):** answer it, don't leave it. Capture the pane, read what the prompt asks; if the action passes §1 (in a written plan, reversible) send the approval keystroke to that pane and log `APPROVED <seat> <what>`; if it fails §1, send the denial, log `DENIED <seat> <what>`, and message the seat why. Hours lost at a prompt nobody was awake to answer is the failure this rule exists for (rb sat ~7h on an `rm` prompt on 2026-10-01).
 - **A peer that stands down for a heavy context (builder 2026-10-01):** that is a clear request, not an end state. When a seat finishes its item and says the next build wants a fresh context, the peer runs the clear procedure below and boots it into the next item on its NEXT line. Self-regulation is right; stopping there is not.
 - Model switch (es → Fable): send `/model`, capture the picker, choose, verify in the footer, switch back after. If the picker misbehaves, escape and use the advisor tool.
+- **Hourly wake, both seats (builder 2026-10-01):** at boot, and again after every clear, each seat sets a recurring `CronCreate` on an off-minute (rb :26, es :41) that runs the check: peer pane state (working / idle / stalled / at a prompt), `git log -5`, guest panes it has claimed, `docs/for-claude-review/`, then one `HH:MM <seat> CHECK …` line in §7, then its own NEXT line if a step is unblocked. It is the stale-process guard — if a seat sits at a prompt or stands down, the other seat's next wake catches it (the two rules above). Session-only, so the boot message below names it.
 - **Waiting on a peer or guest with nothing else to do:** do not poll. Set a one-shot `CronCreate` (`recurring: false`, pinned time off :00/:30) saying what to check and do next. Session-only; re-set after a clear. If you have your own work, do it and let the ping interrupt.
 
 ## 5. Shared tree
@@ -190,3 +191,4 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 11:55 es RULED (builder 11:50): wear = standing hardship, rate 1, floor 10, overwork out. PROD integrityWearRate 0->1, read back. Two answered morning-list lines removed (01:40, 03:45 follow-up).
 11:54 rb CHECK es working (engine.272 switched ON at the builder's ruling — standing hardship, rate 1, floor 10; bench run-forward C142–C171 in flight, 1 shell), guests idle, inbox clean; commits 1fe1e414/0c1d0bdf es, eab76fed rb (Varek wake direction). rb open: none; PIN moves when es reports the PROD stage
 12:38 rb DONE overnight doc §2/§4: peers answer each other's permission prompts within the gate; a context stand-down = clear + reboot into the next item (builder 12:36). es messaged
+12:42 rb DONE overnight doc §4: hourly wake on both seats (rb :26 set; es :41 — es messaged to set it)

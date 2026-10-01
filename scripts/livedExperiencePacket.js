@@ -365,8 +365,13 @@ function buildAnglePacket({ cycle, desk, reporter, story, approach, slice, lane 
   if (slice && slice.scene && slice.scene.neighborhoodTexture) {
     known.push(refClaim('FACT', slice.scene.neighborhoodTexture, src));
   }
-  const prewriteEvidence = (slice && slice.prewrite && slice.prewrite.evidence) || [];
-  for (const fact of (slice && slice.prewrite && slice.prewrite.anchorFacts) || []) {
+  // The civic-domain seats (Carmen, Luis) hand their slice over as
+  // { ...slice, packetSeat }: the seat's prewrite sits one level down. Read only
+  // at the top, its anchor facts — the initiative, budget and office lines —
+  // never reached the Packet and the seat wrote from one line (C109: 3 facts).
+  const prewrite = (slice && (slice.prewrite || (slice.packetSeat && slice.packetSeat.prewrite))) || {};
+  const prewriteEvidence = prewrite.evidence || [];
+  for (const fact of prewrite.anchorFacts || []) {
     const text = clean(fact, 500);
     const evidence = prewriteEvidence.find(row => row && clean(row.text, 500) === text);
     const factSrc = clean(evidence && evidence.src, 300) || clean(src, 300);
@@ -375,7 +380,7 @@ function buildAnglePacket({ cycle, desk, reporter, story, approach, slice, lane 
       known.push(refClaim('FACT', text, factSrc));
     }
   }
-  for (const fact of (slice && slice.prewrite && slice.prewrite.presentFacts) || []) {
+  for (const fact of prewrite.presentFacts || []) {
     const text = clean(fact, 500);
     if (text && !known.some(claim => claim.text === text && claim.src === clean(src, 300))) {
       known.push(refClaim('FACT', text, src));
@@ -383,8 +388,11 @@ function buildAnglePacket({ cycle, desk, reporter, story, approach, slice, lane 
   }
   // Interview exposure is identity-bearing: unresolved names may remain in the
   // assigned facts, but only ledger-resolved POPIDs can become W2 targets.
+  // Builder ruling 2026-09-30: a reporter interviews a citizen the story
+  // touched, or no citizen. The proximity fallback (a neighbor, a city resident)
+  // is not a target.
   const candidates = candidateRows(story, slice)
-    .filter(candidate => isLedgerPop(candidate.pop))
+    .filter(candidate => isLedgerPop(candidate.pop) && !isProximityCandidate(candidate))
     .slice(0, 12);
   const hasTargetCandidates = candidates.length > 0;
   const creativeBrief = creativeBriefFromSlice(slice);
@@ -677,11 +685,17 @@ function questionFor(candidate, anglePlan, story) {
 // sheet+row, a StorylineId, a feed cycle — verified addressable, never a bare label).
 // A candidate reached only by that proximity fallback gets no evidence row; everyone
 // else does, sourced to story.ref.
-const PROXIMITY_WHY = new Set(['same-hood-ledger', 'ledger-resident']);
+// 'same-hood-signal' (named on some other signal in the hood), 'city-resident'
+// and 'bond-hop …' are the Jax slice's own bench fills — near the story, not in it.
+const PROXIMITY_WHY = new Set(['same-hood-ledger', 'ledger-resident', 'same-hood-signal', 'city-resident']);
+function isProximityCandidate(candidate) {
+  const why = String(candidate && candidate.why || '');
+  return PROXIMITY_WHY.has(why) || /^bond-hop\b/.test(why);
+}
 function evidenceFor(candidate, story) {
   const ref = clean(story && story.ref, 300);
   if (!ref || ref === 'assignment') return [];
-  if (PROXIMITY_WHY.has(candidate && candidate.why)) return [];
+  if (isProximityCandidate(candidate)) return [];
   const pop = clean(candidate && candidate.pop, 40);
   if (!pop) return [];
   const id = 'EV-' + crypto.createHash('sha256').update(pop + '|' + ref).digest('hex').slice(0, 10);
@@ -868,6 +882,6 @@ module.exports = {
   VERSION, CLAIM_TYPES, WAKES, refClaim, assertBase, buildAnglePacket,
   validateAngleOutput, reporterChaseText, chaseIsJsonShaped, candidateRows,
   buildReportPacket, validateReportOutput,
-  quoteIneligibility, isAthleteRow, ledgerRowForPop, neighborsFromLedger,
+  quoteIneligibility, isAthleteRow, ledgerRowForPop, neighborsFromLedger, isProximityCandidate,
   buildWritePacket, parseJsonObject, prompt,
 };

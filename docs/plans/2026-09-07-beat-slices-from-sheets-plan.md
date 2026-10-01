@@ -117,8 +117,8 @@
 |---|---|
 | Mon | Carmen Delaine (civic ledger) · Jordan Velez (business + casino) · Dr. Lila Mezran (health, hospital rows) · Trevor Shimizu (transit) · Anthony Raines (A's) |
 | Tue | Luis Navarro (investigations) · Sgt. Rachel Torres (safety) · Angela Reyes (schools) · Selena Grant (Oaks) |
-| Wed | Jax Caldera (accountability) · Noah Tan (environment) · Elliot Marbury (data desk) · P Slayer (fan pulse) |
-| Thu | Elliot Graye (faith) · Simon Leary (sports as civic architecture) · Hal Richmond / Tanya Cruz alternating (A's) · Talia Finch (Oaks, the street) |
+| Wed | Jax Caldera (accountability) · Noah Tan (environment) · Elliot Marbury (data desk — not seated: no wake package yet) · P Slayer (fan pulse) · Tanya Cruz (A's clubhouse, weekly from 2026-09-30) |
+| Thu | Elliot Graye (faith) · Simon Leary (sports as civic architecture) · Hal Richmond (A's, weekly from 2026-09-30) · Talia Finch (Oaks, the street) |
 | Fri | Mason Ortega (food) · Kai Marston (arts, nightlife) · Sharon Okafor (lifestyle) · Maria Keen (neighborhood) · Celeste Tran (social trends — seat exists on the ledger, no writer agent yet) |
 
   ≈22 slots/week + Nia ×5 ≈ 27 articles, down from 35 attempts; every seat exactly once.
@@ -181,15 +181,50 @@ Builder's read: runs light, P Slayer failing, Jax failing, reporting sounds the 
 
 **Sameness — measured causes, still open.**
 1. **Bystander interviews.** Candidates reached by the proximity fallback (`why: ledger-resident | same-hood-ledger`) carry `exposure.evidence: []`, `livedContextAllowed: false`, and the rule "The Packet fact is city news you heard about". They have no stake and no life context, so they relay hearsay: Luis Navarro's Fruitvale piece quotes a Temescal baker and two Rockridge servers. The reporter's question does not reach them (they are not W1 targets). Needs a sim ruling: who a reporter may interview, and what of the citizen's own cycle (life lines, own seed — pipeline.69 Task 2 is the wake-side sibling) rides the W2 packet.
-2. **No interview cooldown.** Melton Neilon and Elio Perez quoted by Luis (Tue) and Noah Tan (Wed) — a sourdough baker at a farmers market in one, at a dim sum cart in the other. Ronald Williams quoted by Anthony Raines (Mon) and Rachel Torres (Tue). Ernesto Quintero (A's 3B/1B, Baylight resident) quoted in Selena Grant's Oaks piece as if on the team.
+2. **The rest window lets repeats through.** `REST_CAP` 2 interviews per 72 h (`cron-desk-run.js`), and the bench fill ranked street jobs first then POPID order, so the same few citizens came up for every reporter. Melton Neilon and Elio Perez quoted by Luis (Tue) and Noah Tan (Wed) — a sourdough baker at a farmers market in one, at a dim sum cart in the other. Ronald Williams quoted by Anthony Raines (Mon) and Rachel Torres (Tue). Ernesto Quintero (A's 3B/1B, Baylight resident) quoted in Selena Grant's Oaks piece as if on the team.
 3. **Approach text is per desk, not per reporter** (Task 5 scope, add to it): seven civic seats share one paragraph — Noah Tan's weather piece is told "start from the official action — who in city hall did what"; five sports seats share one, five culture seats share one. The civic and firebrand lines both mandate ending on the unanswered question; six of nine C109 pieces close on "the question now is / remains".
 4. **Model spread.** Writers: 13 seats on `deepseek/deepseek-chat`, 6 on `meta-llama/llama-3.3-70b-instruct`, 2 on `anthropic/claude-sonnet-5` (Luis, Jax — the two that read differently). Every citizen quote is `deepseek-chat` unless the seat's package says otherwise. P Slayer's W1 opens "I'm still trying to process…" in 12 of 12 samples and in the C108 live run. Cost call → builder.
 5. **Slice-sourced seats resolve no profiles.** Jax `citizens resolved 0/12`, P Slayer `0/5`, Nia `0/1` — every run since 09-01 (one 4/9 on 09-09). Unexamined.
 
 **Other crons (found, not cut).** `backup.sh` prune is refused by rm-guard — 51 archives, 7.4 GB, one more a day. `moltbook-heartbeat` failed 09-28 and 09-29 (prompt 48.7k over a 32k model limit), ran 09-30. `compactCycleOutput` fails c103 on a missing packet file. `appendReflection_` errors print `[object Object]` (fanout 09-30) and "Content field is empty" (work-wake 09-22). Civic chain, wakes, exchange, reflection, digest, NotebookLM, UNDOCKED flight: running, provider errors sporadic.
 
+### Builder rulings 2026-09-30 23:01 — interviews, models, Wednesday
+
+1. **Interview a citizen the story touched, or no citizen.** "Restrict to citizens impacted or don't use a citizen." Not every journalist quotes citizens: Carmen Delaine reports the civic record and another reporter in the civic room carries the quotes; Anthony Raines is stats and data. Sourcing mode is one of the ways seats differ.
+2. **More models in use** — the builder is open to it.
+3. **Wednesday gets more seats.**
+
+**Measured before cutting (C107–C109, 52 `asks.json` files, 204 asks):** 74 asks went to proximity picks (`same-hood-ledger` 53, `ledger-resident` 21) — a citizen with no evidence row. Carmen 0 story-linked of 12; Luis 0 of 12; Rachel Torres 3 of 12; Nia Rook 3 of 12; Noah Tan 5 of 12; Maria Keen 2 of 8. Trevor, Angela, business 12 of 12; Lila 11 of 12. Seeds and slices do attach citizens; the bystanders came from a second step — `collectQuoteAsks` completed a four-person bench from `neighborsFromLedger()` (same hood, then the whole city; bakers, bartenders, baristas, servers and cooks ranked first) so a wake would not go quoteless, because a quoteless wake failed closed.
+
+**Cut (ruling 1).**
+- `collectQuoteAsks` asks no proximity candidate and fills no bench; W1 `exposure.candidates` drops them too, so a reporter cannot target one.
+- Zero quotes is a legal state: W2 and W3 log it and file. The W3 write packet says no quoted speech when `approvedQuotes` is empty; the manifest audit still blocks an invented quote.
+- Wake package `sourcing: "records"` — the seat interviews nobody. Set on `carmen-delaine` (CARMEN-LEP2-2, purpose reworded off "a named resident") and `anthony-raines` (ANTHONY-LEP2-2). Luis Navarro needs no flag: none of his citizens were story-linked.
+- Carmen's record: (a) `buildAnglePacket` read `slice.prewrite` while the civic-domain seats pass `{ ...slice, packetSeat }` — her ten anchor facts never reached the Packet (C109 W1: 3 facts). Fixed. (b) `initiativeRecordFacts` hands her the story initiative's tracker row — vote requirement and record, signature, budget total and remaining, last disbursement, next scheduled action, Cycle-dated milestones (tab-upkeep lines filtered).
+- Bench, C109 Stabilization Fund, no quotes, `deepseek-chat`: with the loose facts only, the draft printed "unanimous support" on a 6-3 bill; with the tracker row it printed 6-3, Tran no, Vega yes, $28M, $23.4M remaining, the Cycle 110 review. Luis quoteless on Sonnet: clean on the repair pass.
+
+**Cut (ruling 3).** `WEEK_GRID` Wed = Jax, Noah Tan, P Slayer, Tanya Cruz; Thu = Elliot Graye, Simon Leary, Hal Richmond, Talia Finch. The Hal/Tanya alternation ends — both file weekly. The fifth Wednesday seat is already ruled in Task 7's grid — Elliot Marbury, data desk — and is unseated only because he has no wake package or data slice. He is a records seat by this session's ruling; the package is authored work, not cut here.
+
+**Cut (ruling 2) — write stage only; angle and report models unchanged.** Sweep on two frozen C109 packets (Trevor's live write packet, Carmen's quoteless records packet), then each moved seat on its own latest packet: all clean, no repair pass on the seat runs (`deepseek-chat` needed one on nearly every C109 piece).
+
+| Write model | Seats | Reads as |
+|---|---|---|
+| `anthropic/claude-haiku-4.5` | Carmen Delaine, Anthony Raines, Dr. Lila Mezran | structured, exact; kept the 6-3 vote and the money right |
+| `openai/gpt-5.6-luna` | Trevor Shimizu, Jordan Velez (business), Simon Leary | analytic, opens on the telling detail |
+| `x-ai/grok-4.3` | Sgt. Rachel Torres, Tanya Cruz | terse wire copy, declarative close |
+| `deepseek/deepseek-chat` | Angela Reyes, Elliot Graye, Maria Keen, Mason Ortega, Noah Tan, Hal Richmond, Sharon Okafor | unchanged |
+| `meta-llama/llama-3.3-70b-instruct` | P Slayer, Selena Grant, Talia Finch, Nia Rook (+weekly), Kai Marston, Celeste Tran | unchanged |
+| `anthropic/claude-sonnet-5` | Luis Navarro, Jax Caldera | unchanged |
+
+Rejected: `moonshotai/kimi-k2.5` (5–10 minutes and 9–17k output tokens an article), `mistralai/mistral-large-2512` (provider error on both runs), `qwen/qwen3-235b-a22b-2507` (printed speech without quotation marks, invented clock times, blight scenery).
+
+**Codex review folded** ([[../research/2026-09-30-codex-interview-rule-diff-review]]): Jax's slice had three more bench-fill labels (`same-hood-signal`, `city-resident`, `bond-hop …`) — now rejected; a quoteless Packet could lend a fact to a speaker — a quoted run of five words or more now fails when nobody is on the record; the gate's family check treats `anthropic` and `claude` as one. Replay of C107–C109 through the final rule: 208 asks → 129; only Carmen and Luis have no one to ask.
+
+**Open from these rulings.** Proximity is recognised by the candidate's `why` label — interim; each slice builder should stamp story-touched itself. The tracker's `MilestoneNotes` for INIT-001 carries upkeep text in the city record ("retag reversed … the 2026-09-22 retag was engine-sheet error", "C108 conversion: …") — engine-sheet's tab. Carmen's quoteless draft still wrote "peeling paint, boarded windows" and an invented "declined to comment" — writer-model behavior, ruling 2. Records seats beyond Carmen and Anthony (Selena Grant's analysis seat, Hal Richmond) are not set.
+
 ## Changelog
 
+- 2026-09-30 (research-build S512) — builder rulings 23:01 cut: impacted-or-none interviews, records seats (Carmen, Anthony), Carmen's tracker record, Wednesday +Tanya; detail §Status log.
 - 2026-09-30 (research-build S512) — crons audit filed §Status log; five newsroom cuts landed, kimi review folded ([[../research/2026-09-30-kimi-cron-audit-diff-review]]); Task 5 scope grows by audit item 3.
 
 - 2026-09-07 — Initial draft (S433 engine-sheet, drafted from the facts-not-color ruling and the desk-signal audit the same night).

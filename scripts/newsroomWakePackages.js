@@ -5,6 +5,9 @@ const path = require('path');
 
 const CONFIG_PATH = path.join(__dirname, 'newsroom-wake-packages.json');
 const WAKE_STAGES = Object.freeze(['angle', 'report', 'write']);
+// How a seat sources a story. `people` (default) interviews the citizens its
+// story is attached to; `records` interviews nobody and reports the record.
+const SOURCING = Object.freeze(['people', 'records']);
 
 function slug(value) {
   return String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
@@ -27,6 +30,9 @@ function validatePackage(key, value) {
     if (!route || route.provider !== 'openrouter' || !String(route.model || '').includes('/')) {
       errors.push('models.' + stage + ' requires an explicit OpenRouter model');
     }
+  }
+  if (value && value.sourcing !== undefined && !SOURCING.includes(value.sourcing)) {
+    errors.push('sourcing must be one of ' + SOURCING.join(', '));
   }
   const a = value && value.assignment;
   if (!a || !a.desk || !a.name || !/^POP-\d{5}$/.test(String(a.popid || '')) || !a.beatDomain) {
@@ -76,6 +82,10 @@ function routeFor(value, stage) {
   return value.models[stage];
 }
 
+function sourcingFor(value) {
+  return value && value.sourcing === 'records' ? 'records' : 'people';
+}
+
 function gateAssignments(assignments, packages) {
   const eligible = [];
   const skipped = [];
@@ -104,5 +114,6 @@ module.exports = {
   packageForAssignment,
   activePackages,
   routeFor,
+  sourcingFor,
   gateAssignments,
 };

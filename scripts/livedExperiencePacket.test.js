@@ -286,4 +286,12 @@ const askedOfficial = p.buildReportPacket({ cycle: 999, desk: 'civic', reporter:
   story, candidate: candidates[0] });
 assert.match(askedOfficial.task.question, /creates accountability/, 'an official still gets the bounded accountability question');
 
+// Builder ruling 2026-09-30: every bench-fill label is a bystander; a stated story link is not.
+for (const why of ['same-hood-ledger', 'ledger-resident', 'same-hood-signal', 'city-resident', 'bond-hop from interview pool']) {
+  assert.equal(p.isProximityCandidate({ why }), true, why + ' is a bystander');
+}
+for (const why of ['assignment', 'stink-handle', 'feed-names', 'on Hospital_Ledger this cycle', 'on the ledger in Temescal (Simulation_Ledger)']) {
+  assert.equal(p.isProximityCandidate({ why }), false, why + ' is story-linked');
+}
+
 console.log('livedExperiencePacket.test.js: PASS');

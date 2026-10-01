@@ -375,6 +375,9 @@ function buildWritePacket(args) {
       packet.limits.rule += ' Write 400-700 words as this reporter living the known condition. Do not print engine classifier names, severity labels, source row numbers, or a silence-clock section.';
     }
   }
+  if (!approvedQuotes.length) {
+    packet.limits.rule += ' No citizen spoke for this piece: manifest.approvedQuotes is empty. Write no quoted speech and attribute no statement to any person; the piece stands on the record and the place.';
+  }
   if (packet.task.writingMode === 'SOURCE_BRIEF') {
     packet.limits.rule += ' Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition.';
   }
@@ -592,6 +595,10 @@ function auditArticle(draftText, packet) {
     const norm = normalizedSpeech(quote);
     if (!norm) return true;
     if (approvedQuoteNorms.some(approved => approved.includes(norm))) return false;
+    // With nobody on the record, a quoted run of five words or more is speech
+    // or a quoted document the Packet never supplied — even when its words
+    // happen to sit in an approved fact. A scare-quoted term stays legal.
+    if (!approvedQuoteNorms.length && norm.split(' ').length >= 5 && !isSignage(quote, bodyText)) return true;
     if (approvedRecordNorm.includes(norm)) return false;
     if (isSignage(quote, bodyText)) return false;
     return true;
@@ -666,6 +673,7 @@ module.exports = {
   assertBase,
   candidateRows: v1.candidateRows,
   neighborsFromLedger: v1.neighborsFromLedger,
+  isProximityCandidate: v1.isProximityCandidate,
   validateAngleOutput: v1.validateAngleOutput,
   reporterChaseText: v1.reporterChaseText,
   chaseIsJsonShaped: v1.chaseIsJsonShaped,

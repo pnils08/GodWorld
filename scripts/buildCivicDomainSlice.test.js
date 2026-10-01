@@ -422,6 +422,26 @@ try {
     fs.rmSync(beatsRoot, { recursive: true, force: true });
   }
 
+  // Records seat: the story's own initiative arrives as its tracker row.
+  const recordFacts = require('./buildCivicDomainSlice').initiativeRecordFacts({
+    InitiativeID: 'INIT-TEST', Name: 'TEST-ONLY Fund', Budget: '$28M', VoteRequirement: '6-3', VoteCycle: '78',
+    Outcome: 'PASSED', Notes: 'Cycle 78: Passed 6-3. Test One voted yes. Test Two voted no.',
+    MayoralAction: 'signed', MayoralActionCycle: '78', ImplementationPhase: 'disbursement-active',
+    BudgetTotal: '28000000', BudgetRemaining: '23400000', LastDisburseCycle: '109',
+    NextScheduledAction: 'Month-nine review', NextActionCycle: '110',
+    MilestoneNotes: 'C108: retag reversed — housing→economic (the 2026-09-22 retag was engine-sheet error).\n' +
+      'C108 conversion: passed before the step existed.\n' +
+      'C109: tranche $400,000 released (2 household grants). Downtown is outside the area — that is INIT-008.',
+  });
+  assert.ok(recordFacts.some(f => /vote record — Cycle 78: Passed 6-3\. Test One voted yes\. Test Two voted no\./.test(f)));
+  assert.ok(recordFacts.some(f => /budget total \$28,000,000; remaining \$23,400,000; last disbursement Cycle 109/.test(f)));
+  assert.ok(recordFacts.some(f => /milestone — C109: tranche \$400,000 released \(2 household grants\)\. \[Initiative_Tracker\]$/.test(f)));
+  assert.ok(!recordFacts.some(f => /retag|conversion|INIT-008|2026-09-22/.test(f)), 'tab upkeep notes are not city record');
+  assert.deepStrictEqual(require('./buildCivicDomainSlice').initiativeRecordFacts(null), []);
+  assert.ok(!require('./buildCivicDomainSlice').initiativeRecordFacts({
+    Name: 'TEST-ONLY Fund', MilestoneNotes: 'C109: manual backfill of prior tracker rows.' })
+    .some(f => /milestone/.test(f)), 'a backfill note is tab upkeep');
+
   console.log('buildCivicDomainSlice.test.js PASS');
 } finally {
   fs.rmSync(root, { recursive: true, force: true });

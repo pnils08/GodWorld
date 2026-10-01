@@ -409,6 +409,12 @@ function interviewTally() {
 // lane's popids as fallback. Kills the fabricated-resident class at the root.
 function collectQuoteAsks(lane, persona, story, angleArt) {
   const asks = [];
+  // A records seat (wake package `sourcing: "records"`) reports the record and
+  // the numbers; the people belong to the seats that carry them.
+  if (ACTIVE_WAKE_PACKAGE && wakePackages.sourcingFor(ACTIVE_WAKE_PACKAGE) === 'records') {
+    log('records seat — no citizen interviews');
+    return asks;
+  }
   const seen = new Set();
   const rested = [];
   const tally = interviewTally();
@@ -423,25 +429,15 @@ function collectQuoteAsks(lane, persona, story, angleArt) {
       ? exactPacketCandidates
       : livedPacket.candidateRows(story, slice))
     : [];
+  // Builder ruling 2026-09-30: a reporter interviews a citizen the story
+  // touched, or no citizen. The four-person bench used to be completed from the
+  // ledger (same hood, then anyone — street jobs first), so the same bakers and
+  // servers answered every reporter about news they never lived: 74 of 204
+  // asks over C107–C109. A proximity candidate is no longer asked; a story with
+  // nobody attached files without a quote.
   const packetCandidates = new Map();
   for (const c of filled) {
-    if (c && c.pop) packetCandidates.set(c.pop, c);
-  }
-  // A reporter target is a priority, not the whole source pool. Complete the
-  // bounded four-person bench so one abstention or rejected response cannot
-  // turn a sourced assignment into a quoteless wake. Assignment/affected
-  // citizens retain insertion priority; same-hood and then city residents fill
-  // the remaining seats through neighborsFromLedger().
-  if (story && packetCandidates.size < QUOTE_CITIZEN_CAP) {
-    for (const c of livedPacket.neighborsFromLedger(story.hood, {
-      cap: QUOTE_CITIZEN_CAP,
-      exclude: [...packetCandidates.keys(), persona && persona.popid].filter(Boolean),
-      desk: angleArt && angleArt.desk,
-      story,
-    })) {
-      if (!packetCandidates.has(c.pop)) packetCandidates.set(c.pop, c);
-      if (packetCandidates.size >= QUOTE_CITIZEN_CAP) break;
-    }
+    if (c && c.pop && !livedPacket.isProximityCandidate(c)) packetCandidates.set(c.pop, c);
   }
   const push = (pop, label, ignoreRest) => {
     if (!pop || seen.has(pop) || asks.length >= QUOTE_CITIZEN_CAP) return;
@@ -554,9 +550,13 @@ function assertPublishableQuotesStrict(quotes, stage) {
   }
 }
 
-function assertPublishableQuotes(quotes, stage) {
+// Builder ruling 2026-09-30: no citizen is a legal state for a story — it
+// files without a quote. This used to fail the wake closed, which is what the
+// bystander bench was built to dodge. The W3 manifest audit still blocks any
+// quotation that no citizen gave.
+function noteQuoteState(quotes, stage) {
   if (!PACKET_ACTIVE) return;
-  assertPublishableQuotesStrict(quotes, stage);
+  if (!Array.isArray(quotes) || !quotes.length) log(stage + ': no citizen on the record — filing without a quote');
 }
 
 function writeCitizenArc(stem, args) {
@@ -2472,7 +2472,7 @@ async function runReport(assign) {
   // Task 2.5.3 — §3: the interviews land in the growing story doc.
   storyDocAppend(stem, '§3 INTERVIEWS (wake 2 — real citizens, real quotes)',
     quotes.map(q => '- ' + q.name + ' (' + q.pop + '): "' + String(q.quote).replace(/\s+/g, ' ').trim() + '"').join('\n'));
-  assertPublishableQuotes(quotes, 'W2');
+  noteQuoteState(quotes, 'W2');
 }
 
 // pipeline.45 Phase 1 — enrich the parsed INTAKE with ids for the sidecar.
@@ -2586,7 +2586,7 @@ async function runWrite(assign) {
 
   let quotes = (packet && packet.quotes) || [];
   if (PACKET_ACTIVE) {
-    assertPublishableQuotes(quotes, 'W3');
+    noteQuoteState(quotes, 'W3');
   } else if (!quotes.length) {
     const story = (packet && packet.assignment && packet.assignment.story)
       || (angle && angle.assignment && angle.assignment.story) || null;
@@ -2690,7 +2690,7 @@ async function runWrite(assign) {
     assignment: assignment && assignment.story && (assignment.story.angle || assignment.story.label) || '',
     quotes,
     packet: writePacket,
-    requireQuote: true,
+    requireQuote: false,
   }) : { fail: false, findings: [] };
   if (!PACKET_ACTIVE && shape.fail) {
     throw new Error('W3 refused summary article: ' + shape.reasons.join(','));
@@ -3276,6 +3276,6 @@ module.exports = {
   storyDocOpen,
   storyDocPath,
   humanChaseOrThrow,
-  assertPublishableQuotes,
+  noteQuoteState,
   assertPublishableQuotesStrict,
 };

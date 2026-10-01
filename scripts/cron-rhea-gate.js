@@ -464,8 +464,11 @@ async function main() {
   // deepseek-deepseek-chat). DeepSeek graded its own draft "0 hallucinations"
   // with a 78 OVR leak in it — self-grading is banned, fail loud.
   const writerSlug = path.basename(draftAbs, '.md').split('_').pop();
-  const writerFamily = (writerSlug || '').split('-')[0];
-  const gateFamily = BACKEND === 'api' ? API_MODEL.split('/')[0].toLowerCase() : 'claude';
+  // An OpenRouter Claude draft is slugged anthropic-claude-…; the Claude backend's
+  // family is 'claude'. Same family — without this Claude could grade Claude.
+  const family = name => (name === 'anthropic' ? 'claude' : name);
+  const writerFamily = family((writerSlug || '').split('-')[0]);
+  const gateFamily = BACKEND === 'api' ? family(API_MODEL.split('/')[0].toLowerCase()) : 'claude';
   if (writerFamily && writerFamily === gateFamily) {
     throw new Error('S325 independence rule: gate family "' + gateFamily + '" matches the writer ("' +
       writerSlug + '") — pick a different --api-model (or backend). Self-grading is banned.');

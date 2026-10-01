@@ -130,6 +130,17 @@ assert.ok(!p.auditArticle(scareDraft, w3).errors.some(e => e.code === 'UNAPPROVE
 // Paraphrase — same idea, different words — still fails closed.
 const paraDraft = '## TEST-ONLY\n\nTest Resident said, “The record really does not line up with anything I expected to see.”\n';
 assert.ok(p.auditArticle(paraDraft, w3).errors.some(e => e.code === 'UNAPPROVED_QUOTE'));
+// Nobody on the record: a five-word quoted run is speech even when its words sit in an approved fact.
+const quotelessW3 = JSON.parse(JSON.stringify(w3));
+quotelessW3.manifest.approvedQuotes = [];
+const longFact = quotelessW3.manifest.approvedFacts.map(row => row.text).find(text => text.split(/\s+/).length >= 5);
+if (longFact) {
+  const borrowed = longFact.split(/\s+/).slice(0, 5).join(' ');
+  assert.ok(p.auditArticle('## TEST-ONLY\n\nTest Resident said, “' + borrowed + '.”\n', quotelessW3)
+    .errors.some(e => e.code === 'UNAPPROVED_QUOTE'), 'a quoteless Packet cannot lend a fact to a speaker');
+}
+assert.ok(!p.auditArticle('## TEST-ONLY\n\nThe record calls it “' + factFragment + '” again.\n', quotelessW3)
+  .errors.some(e => e.code === 'UNAPPROVED_QUOTE'), 'a short scare-quoted term still passes with nobody on the record');
 const bad = good + '\nI stood on 8th Street. A source said, “Invented words.”\n';
 const audit = p.auditArticle(bad, w3);
 assert.equal(audit.ok, false);
@@ -300,9 +311,10 @@ const unresolvedSportsW1 = p.buildAnglePacket({
   slice: { ...sportsSlice, players: [{ popid: null, name: 'Unresolved Test Player', why: 'feed-name' }] },
   lane: [],
 });
-assert.ok(unresolvedSportsW1.exposure.candidates.length >= 1,
-  'unresolved feed names fall through to ledger residents, not a sealed empty set');
-assert.ok(unresolvedSportsW1.exposure.candidates.every(c => /^(?:POP-|TEST-)/i.test(c.pop)));
+// Builder ruling 2026-09-30: an unresolved feed name does not fall through to
+// ledger residents — nobody attached means nobody to interview.
+assert.deepStrictEqual(unresolvedSportsW1.exposure.candidates, [],
+  'no story-linked citizen resolves, so the reporter is offered no bystander');
 
 // Hal's archive posture is typed, but history is not a creative blank check.
 // Present feed facts enter the manifest; unsupplied people/events remain missing.
@@ -631,8 +643,9 @@ assert.deepStrictEqual(foodW1.task.creativeBrief.workplaces, ['Test Diner — Re
 assert.deepStrictEqual(foodW1.task.creativeBrief.engineColour, ['Test Cook — burned the toast']);
 assert.ok(/tip jar/.test(foodW1.task.creativeBrief.roomIsYours));
 
-// C103 Jordan regression: a selected economic signal can carry no citizen POPIDs.
-// W1 now fills from the ledger instead of sealing an empty interview set.
+// A selected economic signal can carry no citizen POPIDs. Builder ruling
+// 2026-09-30: W1 no longer fills from the ledger — the interview set is empty
+// and any target the reporter names anyway is dropped, never asked.
 const noCandidateW1 = p.buildAnglePacket({
   cycle: 999, desk: 'business', reporter: jordanReporter,
   story: { ...economicStory, popids: [], citizens: [] },
@@ -640,25 +653,15 @@ const noCandidateW1 = p.buildAnglePacket({
   slice: { ...economicSlice, citizens: [], candidates: [], players: [] },
   lane: [],
 });
-assert.ok(noCandidateW1.exposure.candidates.length >= 1);
-assert.throws(() => p.validateAngleOutput({
-  focus: 'TEST-ONLY livelihood pressure', why: 'The supplied condition has a worker consequence',
-  checks: ['Check the supplied ledger record'],
-  targets: [
-    { pop: 'MADE-UP-01', question: 'What changed?', basis: 'invented' },
-    { pop: 'MADE-UP-02', question: 'Who is affected?', basis: 'invented' },
-  ],
-  interpretation: 'The pressure may reach payroll', unverifiedLead: [],
-  closeQuestion: 'Who carries the supplied pressure?',
-}, noCandidateW1), /supplied pop/);
+assert.deepStrictEqual(noCandidateW1.exposure.candidates, []);
 const noCandidatePlan = p.validateAngleOutput({
   focus: 'TEST-ONLY livelihood pressure', why: 'The supplied condition has a worker consequence',
   checks: ['Check the supplied ledger record'],
-  targets: [{ pop: noCandidateW1.exposure.candidates[0].pop, question: 'What changed?', basis: 'assignment' }],
+  targets: [{ pop: 'MADE-UP-01', question: 'What changed?', basis: 'invented' }],
   interpretation: 'The pressure may reach payroll', unverifiedLead: [],
   closeQuestion: 'Who carries the supplied pressure?',
 }, noCandidateW1);
-assert.equal(noCandidatePlan.targets[0].pop, noCandidateW1.exposure.candidates[0].pop);
+assert.deepStrictEqual(noCandidatePlan.targets, [], 'with nobody attached, an invented target is dropped');
 const economicPlan = p.validateAngleOutput({
   focus: 'TEST-ONLY livelihood pressure', why: 'The supplied condition has a worker consequence',
   checks: ['Check the supplied ledger record'],

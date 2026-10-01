@@ -189,7 +189,7 @@ assert.equal(stageRoute('business', jordanAssignment.persona, 'angle').model,
 assert.equal(stageRoute('business', jordanAssignment.persona, 'report').model,
   'deepseek/deepseek-chat');
 assert.equal(stageRoute('business', jordanAssignment.persona, 'write').model,
-  'deepseek/deepseek-chat');
+  'openai/gpt-5.6-luna');
 
 const kaiAssignment = {
   name: 'Kai Marston',
@@ -220,7 +220,7 @@ assert.equal(stageRoute('civic', lilaAssignment.persona, 'angle').model,
 assert.equal(stageRoute('civic', lilaAssignment.persona, 'report').model,
   'deepseek/deepseek-chat');
 assert.equal(stageRoute('civic', lilaAssignment.persona, 'write').model,
-  'deepseek/deepseek-chat');
+  'anthropic/claude-haiku-4.5');
 
 const angelaAssignment = {
   name: 'Angela Reyes', popid: 'POP-00156', desk: 'civic',

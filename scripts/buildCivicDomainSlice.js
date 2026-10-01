@@ -313,6 +313,44 @@ function initiativeFact(row) {
   return name + ' — ' + (bits.join(', ') || 'listed') + ' [Initiative_Tracker]';
 }
 
+// Carmen is a records seat (builder ruling 2026-09-30): her story's own
+// initiative arrives as its tracker row, one plain fact per line — the vote,
+// the signature, the money, the next clock. Handed only the status label she
+// wrote from one line; handed loose office-approval lines with no vote record
+// she printed a unanimous vote on a 6-3 bill (C109 bench).
+function initiativeRecordFacts(row) {
+  if (!row) return [];
+  const v = key => String(row[key] == null ? '' : row[key]).trim();
+  const money = key => { const n = Number(v(key)); return v(key) && Number.isFinite(n) ? '$' + n.toLocaleString('en-US') : ''; };
+  const name = v('Name') || v('InitiativeID');
+  const facts = [];
+  const vote = [v('Budget') && 'budget ' + v('Budget'), v('VoteRequirement') && 'vote requirement ' + v('VoteRequirement'),
+    v('VoteCycle') && 'voted Cycle ' + v('VoteCycle'), v('Outcome') && 'outcome ' + v('Outcome')].filter(Boolean);
+  if (vote.length) facts.push(name + ' — ' + vote.join('; '));
+  if (v('Notes')) facts.push(name + ' vote record — ' + v('Notes'));
+  if (v('Proposer')) facts.push(name + ' — proposed by ' + v('Proposer') + (v('ProposedCycle') ? ', Cycle ' + v('ProposedCycle') : ''));
+  if (v('MayoralAction')) facts.push(name + ' — mayoral action: ' + v('MayoralAction') + (v('MayoralActionCycle') ? ', Cycle ' + v('MayoralActionCycle') : ''));
+  const phase = [v('ImplementationPhase') && 'implementation phase ' + v('ImplementationPhase'),
+    v('AffectedNeighborhoods') && 'neighborhoods ' + v('AffectedNeighborhoods'),
+    v('PolicyDomain') && 'policy domain ' + v('PolicyDomain')].filter(Boolean);
+  if (phase.length) facts.push(name + ' — ' + phase.join('; '));
+  const funds = [money('BudgetTotal') && 'budget total ' + money('BudgetTotal'),
+    money('BudgetRemaining') && 'remaining ' + money('BudgetRemaining'),
+    v('LastDisburseCycle') && 'last disbursement Cycle ' + v('LastDisburseCycle')].filter(Boolean);
+  if (funds.length) facts.push(name + ' — ' + funds.join('; '));
+  if (v('NextScheduledAction')) facts.push(name + ' — next scheduled action: ' + v('NextScheduledAction') + (v('NextActionCycle') ? ', Cycle ' + v('NextActionCycle') : ''));
+  // Milestone lines dated to a Cycle only, first sentence only. The tab also
+  // keeps its own upkeep notes there (conversions, retags, real dates, other
+  // rows' ids) — those are not city record.
+  const milestones = v('MilestoneNotes').split(/\n+/).map(line => line.trim())
+    .filter(line => /^C\d+:/.test(line))
+    .map(line => line.split(/(?<=[.)])\s+(?=[A-Z])/)[0].slice(0, 240))
+    .filter(line => !/\b(?:retag\w*|engine|sheet|conversion|INIT-\d+|20\d{2}-\d{2}-\d{2}|tracker|rows?|columns?|tabs?|backfill\w*|manual\w*|migrat\w*|scripts?|schema|bugs?|patch\w*|fix(?:ed|es)?|errors?)\b/i.test(line))
+    .slice(-2);
+  for (const line of milestones) facts.push(name + ' milestone — ' + line);
+  return facts.map(text => text + ' [Initiative_Tracker]');
+}
+
 // Carmen: initiatives whose record moved this cycle vs prev/ (new rows count
 // as moved). Without prev/, fall back to rows carrying a vote/outcome this
 // cycle — the columns civicInitiativeEngine writes per cycle.
@@ -879,8 +917,14 @@ function attachCivicDump(packet, slug, deck) {
       .concat(realOffices.map(officeFact))
       .slice(0, 8);
     packet.trackerFacts = trackerFacts;
-    if (trackerFacts.length) {
-      packet.prewrite.anchorFacts = (packet.prewrite.anchorFacts || []).concat(trackerFacts);
+    const storyId = (String(packet.story && packet.story.ref || '').match(/INIT-\d+/) || [])[0];
+    const storyRow = storyId && deck && deck.ok
+      ? (deck.tabs.Initiative_Tracker || []).find(row => String(row.InitiativeID || '').trim() === storyId)
+      : null;
+    const recordFacts = initiativeRecordFacts(storyRow);
+    packet.recordFacts = recordFacts;
+    if (recordFacts.length || trackerFacts.length) {
+      packet.prewrite.anchorFacts = (packet.prewrite.anchorFacts || []).concat(recordFacts, trackerFacts);
     }
     packet.hooks = civicHooksFor(deck, 'Carmen Delaine');
     return packet;
@@ -1060,6 +1104,7 @@ module.exports = {
   publicEducationFact,
   loadHealthEntries,
   publicWeatherFact,
+  initiativeRecordFacts,
   buildCivicDomainSlice,
   formatCivicDomainSliceMarkdown,
   slicePaths,

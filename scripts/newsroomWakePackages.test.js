@@ -62,7 +62,8 @@ assert.ok(jax.reviewProfile.textureConditions.some(v => v.includes('backend-comp
 assert.ok(jax.reviewProfile.canonBlockers.some(v => v.includes('official inaction')));
 
 const carmen = packages['carmen-delaine'];
-assert.equal(carmen.version, 'CARMEN-LEP2-1');
+assert.equal(carmen.version, 'CARMEN-LEP2-2');
+assert.equal(packagesApi.sourcingFor(carmen), 'records');
 assert.equal(carmen.requiredDaily, true);
 assert.equal(carmen.assignment.desk, 'civic');
 assert.equal(carmen.assignment.name, 'Carmen Delaine');
@@ -70,7 +71,7 @@ assert.equal(carmen.assignment.popid, 'POP-00011');
 assert.equal(carmen.packetContract, 'v2');
 assert.equal(packagesApi.routeFor(carmen, 'angle').model, 'deepseek/deepseek-chat');
 assert.equal(packagesApi.routeFor(carmen, 'report').model, 'deepseek/deepseek-chat');
-assert.equal(packagesApi.routeFor(carmen, 'write').model, 'deepseek/deepseek-chat');
+assert.equal(packagesApi.routeFor(carmen, 'write').model, 'anthropic/claude-haiku-4.5');
 assert.equal(carmen.reviewProfile.canonPolicy, 'load-bearing');
 assert.equal(carmen.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
 assert.ok(carmen.reviewProfile.textureConditions.some(v => v.includes('all nine seats')));
@@ -102,7 +103,7 @@ assert.equal(trevor.assignment.beatDomain, 'INFRASTRUCTURE');
 assert.equal(trevor.packetContract, 'v2');
 assert.equal(packagesApi.routeFor(trevor, 'angle').model, 'deepseek/deepseek-chat');
 assert.equal(packagesApi.routeFor(trevor, 'report').model, 'deepseek/deepseek-chat');
-assert.equal(packagesApi.routeFor(trevor, 'write').model, 'deepseek/deepseek-chat');
+assert.equal(packagesApi.routeFor(trevor, 'write').model, 'openai/gpt-5.6-luna');
 assert.equal(trevor.reviewProfile.canonPolicy, 'load-bearing');
 assert.equal(trevor.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
 assert.ok(trevor.reviewProfile.textureConditions.some(v => v.includes('cascade')));
@@ -124,7 +125,8 @@ assert.ok(pSlayer.reviewProfile.textureConditions.some(v => v.includes('prior-ta
 assert.ok(pSlayer.reviewProfile.canonBlockers.some(v => v.includes('collective fan sentiment')));
 
 const anthony = packages['anthony-raines'];
-assert.equal(anthony.version, 'ANTHONY-LEP2-1');
+assert.equal(anthony.version, 'ANTHONY-LEP2-2');
+assert.equal(packagesApi.sourcingFor(anthony), 'records');
 assert.equal(anthony.active, true);
 assert.equal(anthony.requiredDaily, true);
 assert.equal(anthony.assignment.desk, 'sports');
@@ -134,7 +136,7 @@ assert.equal(anthony.assignment.beatDomain, 'SPORTS_ANALYTICS');
 assert.equal(anthony.packetContract, 'v2');
 assert.equal(packagesApi.routeFor(anthony, 'angle').model, 'deepseek/deepseek-chat');
 assert.equal(packagesApi.routeFor(anthony, 'report').model, 'deepseek/deepseek-chat');
-assert.equal(packagesApi.routeFor(anthony, 'write').model, 'deepseek/deepseek-chat');
+assert.equal(packagesApi.routeFor(anthony, 'write').model, 'anthropic/claude-haiku-4.5');
 assert.equal(anthony.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
 assert.ok(anthony.reviewProfile.textureConditions.some(v => v.includes('unresolved feed subject')));
 assert.ok(anthony.reviewProfile.canonBlockers.some(v => v.includes('wrong player')));
@@ -228,7 +230,7 @@ assert.equal(jordan.assignment.beatDomain, 'ECONOMIC');
 assert.equal(jordan.packetContract, 'v2');
 assert.equal(packagesApi.routeFor(jordan, 'angle').model, 'deepseek/deepseek-chat');
 assert.equal(packagesApi.routeFor(jordan, 'report').model, 'deepseek/deepseek-chat');
-assert.equal(packagesApi.routeFor(jordan, 'write').model, 'deepseek/deepseek-chat');
+assert.equal(packagesApi.routeFor(jordan, 'write').model, 'openai/gpt-5.6-luna');
 assert.equal(jordan.reviewProfile.canonPolicy, 'load-bearing');
 assert.equal(jordan.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
 assert.ok(jordan.reviewProfile.textureConditions.some(v => v.includes('raw engine labels')));
@@ -254,7 +256,7 @@ const rachel = packages['rachel-torres'];
 assert.equal(rachel.version, 'RACHEL-LEP2-1');
 assert.equal(rachel.assignment.popid, 'POP-00057');
 assert.equal(rachel.assignment.beatDomain, 'SAFETY');
-assert.equal(packagesApi.routeFor(rachel, 'write').model, 'deepseek/deepseek-chat');
+assert.equal(packagesApi.routeFor(rachel, 'write').model, 'x-ai/grok-4.3');
 assert.equal(rachel.reviewProfile.canonPolicy, 'load-bearing');
 assert.equal(rachel.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
 assert.ok(rachel.reviewProfile.canonBlockers.some(v => v.includes('invented incident')));
@@ -267,7 +269,7 @@ assert.equal(lila.assignment.popid, 'POP-00154');
 assert.equal(lila.assignment.beatDomain, 'HEALTH');
 assert.equal(packagesApi.routeFor(lila, 'angle').model, 'deepseek/deepseek-chat');
 assert.equal(packagesApi.routeFor(lila, 'report').model, 'deepseek/deepseek-chat');
-assert.equal(packagesApi.routeFor(lila, 'write').model, 'deepseek/deepseek-chat');
+assert.equal(packagesApi.routeFor(lila, 'write').model, 'anthropic/claude-haiku-4.5');
 assert.equal(lila.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
 assert.ok(lila.reviewProfile.textureConditions.some(v => v.includes('human consequence')));
 assert.ok(lila.reviewProfile.canonBlockers.some(v => v.includes('invented diagnosis')));
@@ -304,9 +306,9 @@ const gate = packagesApi.gateAssignments([
 ], packages);
 assert.equal(gate.eligible.length, 5);
 assert.equal(gate.eligible[0].wakePackage, 'JAX-LEP2-1');
-assert.equal(gate.eligible[1].wakePackage, 'CARMEN-LEP2-1');
+assert.equal(gate.eligible[1].wakePackage, 'CARMEN-LEP2-2');
 assert.equal(gate.eligible[2].wakePackage, 'PSLAYER-LEP2-1');
-assert.equal(gate.eligible[3].wakePackage, 'ANTHONY-LEP2-1');
+assert.equal(gate.eligible[3].wakePackage, 'ANTHONY-LEP2-2');
 assert.equal(gate.eligible[4].wakePackage, 'JORDAN-LEP2-1');
 assert.deepStrictEqual(gate.skipped.map(row => row.name),
   ['TEST-ONLY Unpackaged Reporter']);
@@ -370,9 +372,21 @@ const cityBenchAsks = runApi.collectQuoteAsks([], {
     { pop: 'POP-91001', question: 'TEST-ONLY affected?', basis: 'assignment' }
   ], closeQuestion: 'TEST-ONLY close' } }
 });
+// Builder ruling 2026-09-30: only a citizen the story touched is asked. The
+// same-hood neighbor and the two city residents are bystanders.
 assert.deepStrictEqual(cityBenchAsks.map(row => row.pop),
-  ['POP-91001', 'POP-91002', 'POP-91003', 'POP-91004'],
-  'one reporter-selected target must not suppress the remaining supplied city bench');
+  ['POP-91001'],
+  'a bystander bench is never asked; the attached citizen is');
+assert.match(cityBenchAsks[0].inputPacket.task.question, /^TEST-ONLY affected\?/,
+  'the reporter\'s own question reaches its target');
+const noOneAttached = runApi.collectQuoteAsks([], { name: 'Luis Navarro', popid: 'POP-00636' },
+  { ref: 'TEST-ONLY-ASSIGNMENT', label: 'TEST-ONLY nobody attached', hood: 'Downtown' },
+  { cycle: 999, desk: 'civic', inputPacket: { v: 'LEP/2', wake: 'W1', actor: {}, task: {}, signal: {},
+    exposure: { candidates: [
+      { pop: 'POP-91002', name: 'Test Neighbor', profile: 'Test neighbor profile', why: 'same-hood-ledger' }
+    ] }, known: [], limits: {}, output: {} },
+    angleRead: { plan: { focus: 'TEST-ONLY focus', targets: [], closeQuestion: 'TEST-ONLY close' } } });
+assert.deepStrictEqual(noOneAttached, [], 'a story with nobody attached asks nobody');
 runApi.activateWakeContext(null, 'p-slayer');
 const fanAsks = runApi.collectQuoteAsks([], { name: 'P Slayer', popid: 'POP-00008' }, {
   ref: 'TEST-ONLY-SPORTS', label: 'TEST-ONLY no-hitter', popids: ['POP-90005'],

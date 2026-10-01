@@ -47,8 +47,8 @@ const DAILY_QUOTAS = { civic: 2, sports: 2, culture: 1, business: 1, undocked: 1
 const WEEK_GRID = Object.freeze({
   1: ['carmen-delaine', 'business-desk', 'lila-mezran', 'trevor-shimizu', 'anthony-raines'],
   2: ['luis-navarro', 'rachel-torres', 'angela-reyes', 'selena-grant'],
-  3: ['freelance-firebrand', 'noah-tan', 'p-slayer'],
-  4: ['elliot-graye', 'simon-leary', 'hal-richmond|tanya-cruz', 'talia-finch'],
+  3: ['freelance-firebrand', 'noah-tan', 'p-slayer', 'tanya-cruz'],
+  4: ['elliot-graye', 'simon-leary', 'hal-richmond', 'talia-finch'],
   5: ['mason-ortega', 'kai-marston', 'sharon-okafor', 'maria-keen', 'celeste-tran']
 });
 function weekdayOf(date) {

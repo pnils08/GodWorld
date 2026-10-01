@@ -56,6 +56,7 @@ tmux send-keys -t <pane_id> C-m          # separate submit — the first Enter i
 ```
 
 - **Single line, no embedded newlines** — a newline mid-string submits early and fragments the message.
+- **Keep it short for codex** — past ~1,000 characters its TUI folds the input into `[Pasted Content …]` blocks, garbles the tail and does not submit (seen 2026-09-30). Write the brief to a file and send one line pointing at it; `C-u` clears a stuck input first.
 - Avoid apostrophes inside a single-quoted shell var (`A's` → `A/s`, or switch quoting).
 
 ## 4. Wait for the reply

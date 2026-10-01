@@ -2,7 +2,7 @@
   "generated": "2026-09-30",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 180,
-  "functionsMapped": 1517,
+  "functionsMapped": 1522,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -1477,6 +1477,7 @@
         "phase05-citizens/generateGenericCitizens.js::generateGenericCitizens_",
         "phase05-citizens/generateMediaModeEvents.js::generateMediaModeEvents_",
         "phase05-citizens/runAsUniversePipeline.js::runAsUniversePipeline_",
+        "phase05-citizens/runCareerEngine.js::applyCustodyDismissals_",
         "phase05-citizens/runCareerEngine.js::applyEmployerSuccess_",
         "phase05-citizens/runCareerEngine.js::runCareerEngine_",
         "phase05-citizens/runCivicRoleEngine.js::runCivicRoleEngine_",
@@ -1501,6 +1502,7 @@
         "phase05-citizens/generateGenericCitizens.js::generateGenericCitizens_",
         "phase05-citizens/generateMediaModeEvents.js::generateMediaModeEvents_",
         "phase05-citizens/runAsUniversePipeline.js::runAsUniversePipeline_",
+        "phase05-citizens/runCareerEngine.js::applyCustodyDismissals_",
         "phase05-citizens/runCareerEngine.js::applyEmployerSuccess_",
         "phase05-citizens/runCareerEngine.js::runCareerEngine_",
         "phase05-citizens/runCivicRoleEngine.js::runCivicRoleEngine_",
@@ -2827,6 +2829,7 @@
       ],
       "readers": [
         "phase04-events/chaosCarsEngine.js::runChaosEvent_",
+        "phase05-citizens/judicialLifecycle.js::judicialCustodyClock_",
         "phase05-citizens/judicialLifecycle.js::judicialPriorStatusForCare_",
         "phase05-citizens/judicialLifecycle.js::runJudicialLifecycle_",
         "phase10-persistence/buildCyclePacket.js::persistJudicialLedger_"
@@ -3316,6 +3319,7 @@
       "readers": [
         "phase05-citizens/educationCareerEngine.js::settleAdulthood_",
         "phase05-citizens/processAdvancementIntake.js::processAdvancementRows_",
+        "phase05-citizens/runCareerEngine.js::applyCustodyDismissals_",
         "phase05-citizens/runCareerEngine.js::applyEmployerSuccess_",
         "phase05-citizens/runCareerEngine.js::runCareerEngine_",
         "phase06-analysis/economicRippleEngine.js::detectCareerRipples_",
@@ -4495,6 +4499,7 @@
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
         "phase05-citizens/generationalWealthEngine.js::applyOwnerDraw_",
         "phase05-citizens/householdFormationEngine.js::applyFundDisbursementBody_",
+        "phase05-citizens/judicialLifecycle.js::judicialSettleLostPay_",
         "phase05-citizens/maneuverEngine.js::runManeuverEngine_",
         "phase05-citizens/migrationTrackingEngine.js::processRelocations_",
         "phase05-citizens/processAdvancementIntake.js::applyTierLadderState_",
@@ -4527,6 +4532,7 @@
         "phase05-citizens/generateMediaModeEvents.js::generateMediaModeEvents_",
         "phase05-citizens/generationalWealthEngine.js::applyOwnerDraw_",
         "phase05-citizens/householdFormationEngine.js::applyFundDisbursementBody_",
+        "phase05-citizens/judicialLifecycle.js::judicialSettleLostPay_",
         "phase05-citizens/maneuverEngine.js::runManeuverEngine_",
         "phase05-citizens/migrationTrackingEngine.js::processRelocations_",
         "phase05-citizens/processAdvancementIntake.js::applyTierLadderState_",
@@ -4679,6 +4685,7 @@
         "phase05-citizens/processAdvancementIntake.js::buildMintBizPool_",
         "phase05-citizens/processAdvancementIntake.js::buildOwnerDoorPool_",
         "phase05-citizens/processAdvancementIntake.js::wireBusinessOwners_",
+        "phase05-citizens/runCareerEngine.js::applyCustodyDismissals_",
         "phase05-citizens/runCareerEngine.js::applyEmployerSuccess_",
         "phase05-citizens/runCareerEngine.js::runCareerEngine_",
         "phase06-analysis/economicRippleEngine.js::runEconomicRippleEngine_",

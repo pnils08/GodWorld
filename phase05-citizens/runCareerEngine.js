@@ -222,6 +222,146 @@ function latestCareerMoveIsLayoff_(lifeHistory) {
   return last === 'Career-Layoff';
 }
 
+// engine.254 Task 6b: the citizen side of losing a job, shared by the employer-success
+// layoff, the headcount reconcile and the custody dismissal. No rng, no Income, no
+// counter and no business signal in here — each caller keeps its own, where it had them.
+function careerRecordLayoff_(ctx, row, cols, cycle, text, logRows) {
+  row[cols.iEmp] = '';
+  if (cols.iLastUpd >= 0) row[cols.iLastUpd] = ctx.now;
+  appendCareerLifeLine_(ctx, row, cols.iLife, cycle, 'Career-Layoff', text); // engine.201 W1a: the fold reads the cell, not the log
+  noteRetrenchAfterFieldChange_(ctx, row, cols.iLife, cycle); // engine.201 Wave 2
+  logRows.push([ctx.now, row[cols.iPop], '', 'Career-Layoff', text, '', cycle]);
+}
+
+// engine.254 Task 6b (builder 2026-09-30): held past judicialDismissAfterCycles, a
+// tracked employer lets the citizen go. Keyed on the case (judicialCustodyClock_),
+// run before the citizen loop so the loop's event cap cannot hide a detainee.
+// Every check for a case is staged before its first write: a throw leaves that
+// citizen and every later one untouched; dismissals already committed stand.
+function applyCustodyDismissals_(ctx, cycle, S, logRows) {
+  var out = { dismissed: 0, skipped: 0 };
+  S.careerSignals.custody = out;
+  var header = ctx.ledger.headers, rows = ctx.ledger.rows;
+  var idx = function(n) { return header.indexOf(n); };
+  var iPop = idx('POPID'), iStatus = idx('Status'), iTier = idx('Tier'), iClock = idx('ClockMode'),
+      iEmp = idx('EmployerBizId'), iIncome = idx('Income'), iLife = idx('LifeHistory'), iLastUpd = idx('LastUpdated'),
+      iEcon = idx('EconomicProfileKey'), iBirth = idx('BirthYear'), iStage = idx('CareerStage'),
+      iFirst = idx('First'), iLast = idx('Last');
+  if (iPop < 0 || iStatus < 0 || iEmp < 0 || iIncome < 0 || iLife < 0) {
+    throw new Error('custody dismissal: Simulation_Ledger POPID/Status/EmployerBizId/Income/LifeHistory column missing');
+  }
+  var dial = loadJudicialDismissAfter_(ctx.config);
+  var clock = judicialCustodyClock_(ctx, cycle);
+  var due = [];
+  for (var pop in clock) {
+    if (clock.hasOwnProperty(pop) && cycle - clock[pop].arrestCycle >= dial) due.push(pop);
+  }
+  if (!due.length) return out;
+  due.sort();
+
+  var rowByPop = {}, rowByName = {}, activeAt = {};
+  for (var r = 0; r < rows.length; r++) {
+    var lr = rows[r];
+    if (!lr || !lr[iPop]) continue;
+    var lower0 = String(lr[iStatus] || 'active').toLowerCase().trim();
+    if (lower0 !== 'deceased') { // the owner draw's own maps (applyOwnerDraw_)
+      rowByPop[String(lr[iPop]).trim()] = lr;
+      var nameKey = ownerNameKey_((iFirst >= 0 ? (lr[iFirst] || '') : '') + ' ' + (iLast >= 0 ? (lr[iLast] || '') : ''));
+      if (nameKey && !rowByName[nameKey]) rowByName[nameKey] = lr;
+    }
+    // the reconcile's own count of who holds a seat (reconcileBusinessHeadcounts_)
+    if (String(lr[iStatus] === null || lr[iStatus] === undefined ? '' : lr[iStatus]).trim() === 'Active') {
+      var seatAt = String(lr[iEmp] || '').trim();
+      if (seatAt.indexOf('BIZ-') === 0) activeAt[seatAt] = (activeAt[seatAt] || 0) + 1;
+    }
+  }
+
+  var bizById = null; // one lazy Business_Ledger read, only on a Cycle with a dismissal due
+  function loadBiz_() {
+    bizById = {};
+    var sheet = ctx.ss ? ctx.ss.getSheetByName('Business_Ledger') : null;
+    if (!sheet) throw new Error('custody dismissal: Business_Ledger not found');
+    var data = sheet.getDataRange().getValues();
+    var bh = data[0] || [];
+    var bId = bh.indexOf('BIZ_ID'), bNm = bh.indexOf('Name'), bCnt = bh.indexOf('Employee_Count'), bKP = bh.indexOf('Key_Personnel');
+    if (bId < 0) throw new Error('custody dismissal: Business_Ledger BIZ_ID column missing');
+    for (var b = 1; b < data.length; b++) {
+      var id = String(data[b][bId] || '').trim();
+      if (!id) continue;
+      var rawCount = bCnt >= 0 ? data[b][bCnt] : '';
+      bizById[id] = {
+        name: String(bNm >= 0 ? (data[b][bNm] || id) : id),
+        stated: (rawCount === '' || rawCount === null || rawCount === undefined || isNaN(Number(rawCount))) ? null : Number(rawCount),
+        keyPersonnel: bKP >= 0 ? data[b][bKP] : ''
+      };
+    }
+  }
+
+  var cols = { iEmp: iEmp, iLastUpd: iLastUpd, iLife: iLife, iPop: iPop };
+  for (var d = 0; d < due.length; d++) {
+    var popId = due[d], entry = clock[popId], row = rowByPop[popId];
+    // ── stage ──
+    if (!row) { out.skipped++; continue; }
+    var lower = String(row[iStatus] || '').toLowerCase().trim();
+    if (lower !== 'detained' && !judicialHealthStatus_(lower)) {
+      // an open case over a free ledger row (a failed ledger commit): Phase5-Judicial
+      // re-asserts custody this Cycle; dismissing now would hand them to the rehire matcher.
+      Logger.log('custody dismissal: ' + popId + ' has open case ' + entry.caseId + ' but Status "' + row[iStatus] + '" — skipped this Cycle');
+      out.skipped++;
+      continue;
+    }
+    var clockMode = String(iClock >= 0 ? (row[iClock] || '') : '').trim().toUpperCase();
+    if (clockMode && clockMode !== 'ENGINE') { out.skipped++; continue; }
+    var tier = iTier >= 0 ? Number(row[iTier]) : 4;
+    if (tier !== 3 && tier !== 4) { out.skipped++; continue; }
+    if (iEcon >= 0 && String(row[iEcon] || '').trim() === 'SPORTS_OVERRIDE') { out.skipped++; continue; }
+    if (iBirth >= 0) {
+      var by = Number(row[iBirth]) || 0;
+      if (by > 1900 && by < 2100 && (simYearOf_(ctx) - by) < 18) { out.skipped++; continue; }
+    }
+    if (iStage >= 0 && String(row[iStage] || '').trim().toLowerCase() === 'retired') { out.skipped++; continue; }
+    var bizId = String(row[iEmp] || '').trim();
+    if (!/^BIZ-\d+$/.test(bizId)) { out.skipped++; continue; } // self-employed, untracked, or already let go
+    if (bizById === null) loadBiz_();
+    var biz = bizById[bizId];
+    if (!biz) {
+      Logger.log('custody dismissal: ' + popId + ' employer ' + bizId + ' has no Business_Ledger row — ownership and seat unknown, not dismissed');
+      out.skipped++;
+      continue;
+    }
+    var isOwner = false, owners = parseKeyPersonnelOwners_(biz.keyPersonnel);
+    for (var o = 0; o < owners.length; o++) {
+      if (owners[o].owner && resolveOwnerRow_(owners[o], rowByPop, rowByName) === row) { isOwner = true; break; }
+    }
+    if (isOwner) { out.skipped++; continue; } // nobody is dismissed from their own business
+    var delta = S.careerSignals.businessDeltas[bizId];
+    var net = delta ? ((delta.gained || 0) - (delta.lost || 0)) : 0;
+    // the seat rule: a decline during custody may already have taken this seat; the
+    // delta is recorded only while stated stays >= the Active tracked staff, so a
+    // dismissal can never be what makes the reconcile fire someone else.
+    var seatStands = biz.stated !== null && (biz.stated + net - 1 >= (activeAt[bizId] || 0));
+    var income = Number(row[iIncome]) || 0;
+    var cut = income > 0 ? Math.round(income * (0.80 + seededRngFor_(cycle, 'custody-dismiss:' + entry.caseId)() * 0.08)) : income;
+    var weeks = cycle - entry.arrestCycle;
+    var text = 'Dismissed by ' + biz.name + ' after ' + weeks + ' weeks in custody';
+    // ── commit: assignments and pushes only ──
+    if (income > 0) row[iIncome] = cut;
+    careerRecordLayoff_(ctx, row, cols, cycle, text, logRows);
+    if (seatStands) {
+      if (!delta) delta = S.careerSignals.businessDeltas[bizId] = { gained: 0, lost: 0 };
+      delta.lost += 1;
+    } else {
+      Logger.log('custody dismissal: ' + popId + ' at ' + bizId + ' — seat already shed or count blank, no headcount change');
+    }
+    S.careerSignals.layoffs += 1;
+    S.careerSignals.transitions += 1;
+    S.eventsGenerated = (S.eventsGenerated || 0) + 1;
+    out.dismissed++;
+    ctx.ledger.dirty = true;
+  }
+  return out;
+}
+
 function applyEmployerSuccess_(ctx, cycle, roll, logRows, S, gapFactor) {
   var out = { promotions: 0, layoffs: 0, businesses: 0 };
   var header = ctx.ledger && ctx.ledger.headers, rows = ctx.ledger && ctx.ledger.rows;
@@ -318,12 +458,8 @@ function applyEmployerSuccess_(ctx, cycle, roll, logRows, S, gapFactor) {
       })[0];
       var vRow = rows[victim];
       vRow[iIncome] = Math.round((Number(vRow[iIncome]) || 0) * (0.80 + roll() * 0.08)); // −12–20%, the reconciliation's cut
-      vRow[iEmp] = '';
-      if (iLastUpd >= 0) vRow[iLastUpd] = ctx.now;
-      var layoffText = 'Let go as ' + b.name + ' pulled back';
-      appendCareerLifeLine_(ctx, vRow, iLife, cycle, 'Career-Layoff', layoffText); // engine.201 W1a: the fold reads the cell, not the log
-      noteRetrenchAfterFieldChange_(ctx, vRow, iLife, cycle); // engine.201 Wave 2
-      logRows.push([ctx.now, vRow[iPop], '', 'Career-Layoff', layoffText, '', cycle]);
+      careerRecordLayoff_(ctx, vRow, { iEmp: iEmp, iLastUpd: iLastUpd, iLife: iLife, iPop: iPop }, cycle,
+        'Let go as ' + b.name + ' pulled back', logRows);
       if (!S.careerSignals.businessDeltas[ids[k]]) S.careerSignals.businessDeltas[ids[k]] = { gained: 0, lost: 0 };
       S.careerSignals.businessDeltas[ids[k]].lost += 1;
       S.careerSignals.layoffs += 1;
@@ -535,6 +671,19 @@ function runCareerEngine_(ctx) {
       if (!S.careerSignals.businessDeltas[dk]) S.careerSignals.businessDeltas[dk] = { gained: 0, lost: 0 };
       S.careerSignals.businessDeltas[dk].lost += dn;
     }
+  }
+
+  // engine.254 Task 6b: custody dismissals, before the citizen loop (whose event cap
+  // would hide a detainee) and after the decline fold (the seat rule reads its deltas).
+  // Isolated like the employer-success and reconcile passes below, but with an
+  // Engine_Errors row: no dismissal this Cycle, and the next pass still finds the case.
+  try {
+    applyCustodyDismissals_(ctx, cycle, S, logRows);
+  } catch (custodyErr) {
+    var custodyDone = (S.careerSignals.custody && S.careerSignals.custody.dismissed) || 0;
+    var custodyReport = new Error(String(custodyErr && custodyErr.message || custodyErr) + ' (' + custodyDone + ' dismissal(s) committed before the fault)');
+    if (typeof logEngineError_ === 'function') logEngineError_(ctx, 'Phase5-CustodyDismissal', custodyReport);
+    Logger.log('runCareerEngine custody dismissal pass failed (career events unaffected): ' + custodyReport.message);
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -1612,12 +1761,8 @@ function runCareerEngine_(ctx) {
         var vRow = rows[victims[fv]];
         var vIncome = (iIncome >= 0) ? (Number(vRow[iIncome]) || 0) : 0;
         if (vIncome > 0) vRow[iIncome] = Math.round(vIncome * (0.80 + roll() * 0.08)); // same cut as the layoff path
-        vRow[iEmployerBizId] = '';
-        vRow[iLastUpd] = ctx.now;
-        var cutText = 'Lost their job when ' + fInfo.name + ' cut ' + shortfall + ' position' + (shortfall > 1 ? 's' : '');
-        appendCareerLifeLine_(ctx, vRow, iLife, cycle, 'Career-Layoff', cutText); // engine.201 W1a
-        noteRetrenchAfterFieldChange_(ctx, vRow, iLife, cycle); // engine.201 Wave 2
-        logRows.push([ctx.now, vRow[iPopID], '', 'Career-Layoff', cutText, '', cycle]);
+        careerRecordLayoff_(ctx, vRow, { iEmp: iEmployerBizId, iLastUpd: iLastUpd, iLife: iLife, iPop: iPopID }, cycle,
+          'Lost their job when ' + fInfo.name + ' cut ' + shortfall + ' position' + (shortfall > 1 ? 's' : ''), logRows);
         if (!S.careerSignals.businessDeltas[fBizId]) S.careerSignals.businessDeltas[fBizId] = { gained: 0, lost: 0 };
         S.careerSignals.businessDeltas[fBizId].lost += 1; // Phase-6 ripple sees the contraction; stated is already reconciled
         S.careerSignals.layoffs += 1;

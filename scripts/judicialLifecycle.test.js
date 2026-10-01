@@ -47,7 +47,8 @@ function throwsNaming(fn, key) {
 
 const RATES_CFG = {
   judicialReleasedRate: 0.40, judicialDivertedRate: 0.25, judicialHeldRate: 0.35,
-  investigationArrestRate: 0.30, judicialRepeatHeldMultiplier: 1.5
+  investigationArrestRate: 0.30, judicialRepeatHeldMultiplier: 1.5,
+  judicialDismissAfterCycles: 3 // Task 6b: validated by the lifecycle every Cycle
 };
 const rates = jl.loadJudicialRates_(RATES_CFG);
 const fixed = v => () => v;                      // constant draw
@@ -426,8 +427,9 @@ function phaseFixture(status, cycle, event, cfg) {
       rows[r - 1][c - 1 + offset] = value;
     }) })
   };
-  const headers = ['POPID', 'Status', 'StatusStartCycle', 'ClockMode'];
-  const person = ['SYN-T6', status, '', 'ENGINE'];
+  const headers = ['POPID', 'Status', 'StatusStartCycle', 'ClockMode',
+    'Tier', 'BirthYear', 'Income', 'NetWorth', 'DebtLevel', 'LifeHistory']; // Task 6b: settlement columns
+  const person = ['SYN-T6', status, '', 'ENGINE', 4, '', 52000, 10000, 0, ''];
   const ctx = {
     config: { ...RATES_CFG, ...cfg, cycleCount: cycle },
     summary: { cycleId: cycle, ...(event ? { judicialEvents: [event] } : {}) },
@@ -580,6 +582,150 @@ for (const left of ['traded', 'inactive']) {
   phaseBox.persistJudicialLedger_(fx.ctx);
   assert('T6 re-arrest transition stamps Cycle without blanking StatusNow',
     caseFromFixture(fx).StatusNow === 'pending' && caseFromFixture(fx).LastTransitionCycle === 101);
+}
+
+// ── Task 6b: custody costs a livelihood — settlement, clock, dial (build spec B1, B3, B5) ──
+{
+  const H6 = ['POPID', 'Status', 'StatusStartCycle', 'ClockMode', 'Tier', 'BirthYear', 'Income', 'NetWorth', 'DebtLevel', 'LifeHistory'];
+  const cols = { iClock: 3, iTier: 4, iBirth: 5, iIncome: 6, iNW: 7, iDebt: 8, iLife: 9 };
+  const logged = [], engineErrors = [];
+  const savedQueue = global.queueAppendIntent_;
+  global.queueAppendIntent_ = (ctx, tab, row) => logged.push({ tab, row });
+  global.logEngineError_ = (ctx, phase, err) => engineErrors.push({ phase, message: err.message });
+  function settle(rowOver, caseOver, statusBefore) {
+    logged.length = 0; engineErrors.length = 0;
+    const row = ['SYN-6B', 'detained', 100, 'ENGINE', 4, '', 52000, 10000, 0, ''];
+    Object.keys(rowOver || {}).forEach(k => { row[H6.indexOf(k)] = rowOver[k]; });
+    const c = Object.assign({ CaseId: 'J-C100-SYN-6B', POPID: 'SYN-6B', Outcome: 'released', SourceSystem: 'patrol',
+      PriorStatus: 'Active', CyclesHeld: 1, ArrestCycle: 100 }, caseOver || {});
+    const ctx = { ledger: { dirty: false }, now: 'synthetic' };
+    const before = row.slice();
+    const res = jl.judicialSettleLostPay_(ctx, row, c, 101, cols, statusBefore === undefined ? 'detained' : statusBefore);
+    return { row, before, res, ctx };
+  }
+  const nw = r => r.row[cols.iNW];
+  const untouched = r => r.res === null && JSON.stringify(r.row) === JSON.stringify(r.before) && logged.length === 0;
+
+  let r = settle();
+  assert('6b released after 1 Cycle → one week of pay off savings', nw(r) === 9000 && r.res.charge === 1000 && r.res.weeks === 1);
+  assert('6b Income and every other column untouched', r.row[cols.iIncome] === 52000 && r.row[cols.iDebt] === 0 && r.row[1] === 'detained');
+  assert('6b one stamped [Money] line with the case marker',
+    r.row[cols.iLife] === 'Y2C49 — [Money] 1 week held with no pay — savings covered it [IncomeHit J100]');
+  assert('6b one LifeHistory_Log row, ledger marked dirty',
+    logged.length === 1 && logged[0].tab === 'LifeHistory_Log' && logged[0].row[3] === 'Money' && r.ctx.ledger.dirty === true);
+  r = settle({}, { Outcome: 'held-served', CyclesHeld: 4 });
+  assert('6b held-served after 4 Cycles → four weeks', nw(r) === 6000 && /4 weeks held/.test(r.row[cols.iLife]));
+  r = settle({}, { Outcome: 'diverted', CyclesHeld: 1 });
+  assert('6b diverted is charged', nw(r) === 9000);
+
+  r = settle({ NetWorth: 400, DebtLevel: 2 });
+  assert('6b savings short → NetWorth 0, DebtLevel +1, borrowed line',
+    nw(r) === 0 && r.row[cols.iDebt] === 3 && r.res.borrowed === true && /borrowed to cover it \[IncomeHit J100\]$/.test(r.row[cols.iLife]));
+  r = settle({ NetWorth: 400, DebtLevel: 6 });
+  assert('6b DebtLevel capped at 6', nw(r) === 0 && r.row[cols.iDebt] === 6);
+
+  for (const outcome of ['deceased', 'traded-reconciled', 'inactive-reconciled', 'no-arrest']) {
+    assert('6b ' + outcome + ' close is not charged', untouched(settle({}, { Outcome: outcome })));
+  }
+  assert('6b GAME clock not charged', untouched(settle({ ClockMode: 'GAME' })));
+  assert('6b Income 0 not charged', untouched(settle({ Income: 0 })));
+  assert('6b Tier 1 not charged', untouched(settle({ Tier: 1 })));
+  assert('6b Tier 2 not charged', untouched(settle({ Tier: 2 })));
+  assert('6b CIVIC-clock Tier 3 charged', nw(settle({ ClockMode: 'CIVIC', Tier: 3 })) === 9000);
+  assert('6b PriorStatus Retired not charged (the money loop never paid them)', untouched(settle({}, { PriorStatus: 'Retired' })));
+  assert('6b PriorStatus recovering not charged', untouched(settle({}, { PriorStatus: 'recovering' })));
+  assert('6b blank PriorStatus on a real case counts as active', nw(settle({}, { PriorStatus: '' })) === 9000);
+  assert('6b reconcile case never settled', untouched(settle({}, { SourceSystem: 'reconcile', PriorStatus: '' })));
+  assert('6b closed while hospitalized → charged', nw(settle({ Status: 'hospitalized' }, {}, 'hospitalized')) === 9000);
+  assert('6b second close with the life-state already restored → no charge', untouched(settle({ Status: 'Active' }, {}, 'active')));
+  assert('6b marker already on the row → no second charge',
+    untouched(settle({ LifeHistory: 'Y2C49 — [Money] 1 week held with no pay — savings covered it [IncomeHit J100]' })));
+  assert('6b a different case\'s marker does not block this one',
+    nw(settle({ LifeHistory: 'Y2C10 — [Money] 2 weeks held with no pay — savings covered it [IncomeHit J61]' })) === 9000);
+
+  r = settle({ NetWorth: '$12,400' });
+  assert('6b formatted NetWorth parsed', nw(r) === 11400);
+  r = settle({ NetWorth: 'n/a' });
+  assert('6b unreadable NetWorth: cell untouched, error row, no charge',
+    r.res === null && nw(r) === 'n/a' && engineErrors.length === 1 && engineErrors[0].phase === 'Phase5-CustodySettlement' && logged.length === 0);
+  r = settle({ NetWorth: '' });
+  assert('6b blank NetWorth: never a zero written over it', r.res === null && nw(r) === '' && engineErrors.length === 1);
+
+  r = settle();
+  const lineText = r.row[cols.iLife].split(' — ').slice(1).join(' — ').replace('[Money] ', '');
+  const short = settle({ NetWorth: 1 });
+  const shortText = short.row[cols.iLife].split(' — ').slice(1).join(' — ').replace('[Money] ', '');
+  assert('6b both settlement texts fold to zero dial nudges',
+    Object.keys(dialMap.nudgesForEvent_('Money', 1, lineText)).length === 0 &&
+    Object.keys(dialMap.nudgesForEvent_('Money', 1, shortText)).length === 0);
+  const parsed = comp.parseLifeHistoryEntries_ ? comp.parseLifeHistoryEntries_(r.row[cols.iLife]).entries : null;
+  assert('6b the line parses as a stamped Money entry (not legacy)',
+    parsed === null || (parsed.length === 1 && parsed[0].tag === 'Money' && parsed[0].cycle === 101));
+
+  global.queueAppendIntent_ = savedQueue;
+  delete global.logEngineError_;
+
+  // dial (B5)
+  for (const bad of [undefined, '', 0, 2.5, Infinity, 'three', -1]) {
+    assert('6b dial ' + JSON.stringify(bad) + ' throws naming the key',
+      throwsNaming(() => jl.loadJudicialDismissAfter_({ judicialDismissAfterCycles: bad }), 'judicialDismissAfterCycles'));
+  }
+  assert('6b dial 3 and "3" accepted', jl.loadJudicialDismissAfter_({ judicialDismissAfterCycles: 3 }) === 3 &&
+    jl.loadJudicialDismissAfter_({ judicialDismissAfterCycles: '3' }) === 3);
+
+  // clock (B3)
+  const F = jl.JUDICIAL_CASE_FIELDS_;
+  const caseRow = o => F.map(f => o[f] === undefined ? '' : o[f]);
+  const clockCtx = (rows, events, cyc) => ({ summary: { judicialEvents: events || [] },
+    cache: { getData: () => ({ exists: true, values: [F.slice()].concat(rows) }) } });
+  const open = (pop, status, arrest) => caseRow({ CaseId: 'J-C' + arrest + '-' + pop, POPID: pop, EntryType: 'arrest',
+    StatusNow: status, ArrestCycle: arrest, OpenCycle: 100, DecisionCycle: 101, SourceEventId: 'e:' + pop });
+  const clock = jl.judicialCustodyClock_(clockCtx([
+    open('P-PEND', 'pending', 100), open('P-HELD', 'held', 98),
+    caseRow({ CaseId: 'J-inv', POPID: 'P-INV', EntryType: 'investigation', StatusNow: 'investigating', OpenCycle: 100, DecisionCycle: 101 }),
+    caseRow({ CaseId: 'J-closed', POPID: 'P-DONE', EntryType: 'arrest', StatusNow: 'closed', ArrestCycle: 90, ResolveCycle: 92, Outcome: 'held-served' })
+  ], [arrestReceipt('P-NEW', 101), { ...arrestReceipt('P-OLD', 100) }]), 101);
+  assert('6b clock: pending and held rows carry their ArrestCycle',
+    clock['P-PEND'].arrestCycle === 100 && clock['P-HELD'].arrestCycle === 98 && clock['P-HELD'].caseId === 'J-C98-P-HELD');
+  assert('6b clock: this-Cycle arrest intake is elapsed 0', clock['P-NEW'].arrestCycle === 101 && clock['P-NEW'].caseId === 'J-C101-P-NEW');
+  assert('6b clock: investigating, closed and stale-receipt entries absent', !clock['P-INV'] && !clock['P-DONE'] && !clock['P-OLD']);
+  for (const badArrest of ['', 0, 100.5, 102, 'soon']) {
+    assert('6b clock: ArrestCycle ' + JSON.stringify(badArrest) + ' throws naming the case',
+      throwsNaming(() => jl.judicialCustodyClock_(clockCtx([open('P-BAD', 'held', badArrest)]), 101), 'J-C' + badArrest + '-P-BAD'));
+  }
+}
+
+// Task 6b through the scheduled phase: the Status is read before the restore.
+{
+  const ev = arrestReceipt('SYN-T6', 100, 'minor');
+  const fx = phaseFixture('detained', 100, ev, { judicialReleasedRate: 1, judicialDivertedRate: 0, judicialHeldRate: 0 });
+  const iNW = 7, iLife = 9, iIncome = 6;
+  phaseBox.runJudicialLifecycle_(fx.ctx);
+  phaseBox.persistJudicialLedger_(fx.ctx);
+  assert('6b arrest Cycle charges nothing', fx.person[iNW] === 10000 && fx.person[iLife] === '');
+  fx.ctx.summary = { cycleId: 101 };
+  fx.ctx.config.cycleCount = 101;
+  phaseBox.runJudicialLifecycle_(fx.ctx);
+  assert('6b normal release: charged one week AND restored (charge is non-zero, so Status was read before the restore)',
+    fx.person[iNW] === 9000 && fx.person[1] === 'Active' && fx.person[iIncome] === 52000 &&
+    /\[IncomeHit J100\]$/.test(fx.person[iLife]));
+  // failed case write: the tab still reads pending, the ledger is restored and committed
+  fx.ctx.summary = { cycleId: 102 };
+  fx.ctx.config.cycleCount = 102;
+  phaseBox.runJudicialLifecycle_(fx.ctx);
+  assert('6b case closing again after a failed case write → not charged twice', fx.person[iNW] === 9000);
+  fx.person[iLife] = ''; // even with the marker aged out, the restored Status blocks it
+  fx.ctx.summary = { cycleId: 102 };
+  phaseBox.runJudicialLifecycle_(fx.ctx);
+  assert('6b … and the Status guard alone holds without the marker', fx.person[iNW] === 9000);
+
+  const noKey = phaseFixture('Active', 101, null);
+  delete noKey.ctx.config.judicialDismissAfterCycles;
+  assert('6b lifecycle throws on a missing dismissal dial, every Cycle',
+    throwsNaming(() => phaseBox.runJudicialLifecycle_(noKey.ctx), 'judicialDismissAfterCycles'));
+  const noCol = phaseFixture('Active', 101, null);
+  noCol.ctx.ledger.headers[7] = 'NetWorthX';
+  assert('6b lifecycle throws on a missing NetWorth column', throwsNaming(() => phaseBox.runJudicialLifecycle_(noCol.ctx), 'NetWorth'));
 }
 
 console.log(`\njudicialLifecycle: ${passed} passed, ${failed} failed`);

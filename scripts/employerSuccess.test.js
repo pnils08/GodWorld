@@ -318,6 +318,7 @@ const bl = rows => [BLH].concat(rows);
     'utilities/citizenMemory.js', 'utilities/citizenDialMap.js', 'utilities/compressLifeHistory.js',
     'utilities/citizenDerivation.js', 'phase01-config/advanceSimulationCalendar.js',
     'phase05-citizens/educationCareerEngine.js', 'phase05-citizens/maneuverEngine.js',
+    'utilities/cycleModes.js', 'phase05-citizens/judicialLifecycle.js', // engine.254 Task 6b: the custody dismissal pass
     'phase05-citizens/runCareerEngine.js'
   ]) {
     const filename = path.join(__dirname, '..', rel);
@@ -336,7 +337,8 @@ const bl = rows => [BLH].concat(rows);
     errors.length = 0; writes.length = 0;
     let draw = 0;
     const business = [BLH.slice(), ['BIZ-SYNTHETIC-W1', 'Synthetic W1 Business', 'Bakery', 'Temescal', stated, 50000, 100000, growth]];
-    const ctx = { mode: {}, config: { cycleCount: 200 }, now: 'C200',
+    const ctx = { mode: {}, config: { cycleCount: 200, judicialDismissAfterCycles: 3 }, now: 'C200',
+      cache: { getData: tab => tab === 'Judicial_Ledger' ? { exists: true, values: [w.JUDICIAL_CASE_FIELDS_.slice()] } : { exists: false, values: [] } },
       summary: { absoluteCycle: 200, maneuver: { byPop: maneuver || {} } },
       rng: () => draw < sequence.length ? sequence[draw++] : 0.999,
       ledger: { headers, rows: [r], dirty: false },

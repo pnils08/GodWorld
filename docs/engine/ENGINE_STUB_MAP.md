@@ -2019,6 +2019,14 @@
 - **judicialPriorStatusForCare_(ctx, popId, from)**
   Reads: S.judicialEvents
 
+- **loadJudicialDismissAfter_(cfg)**
+
+- **judicialCustodyClock_(ctx, cycle)**
+  Reads: S.judicialEvents
+
+- **judicialSettleLostPay_(ctx, row, c, cycle, cols, statusBefore)**
+  Sheets: LifeHistory_Log
+
 - **judicialSetStatus_(ctx, row, status, cycle, iStatus, iStart)**
 
 - **judicialLifecycleReceipt_(c, kind, cycle)**
@@ -2278,6 +2286,13 @@
 - **unemployedRunHeldLastCycle_(dialStateCell, cycle)**
 
 - **latestCareerMoveIsLayoff_(lifeHistory)**
+
+- **careerRecordLayoff_(ctx, row, cols, cycle, text, logRows)**
+
+- **applyCustodyDismissals_(ctx, cycle, S, logRows)**
+  Reads: S.careerSignals, S.eventsGenerated
+  Writes: S.eventsGenerated
+  Sheets: Business_Ledger
 
 - **applyEmployerSuccess_(ctx, cycle, roll, logRows, S, gapFactor)**
   Reads: S.careerSignals, S.eventsGenerated
@@ -4298,4 +4313,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1517
+**Functions mapped:** 1522

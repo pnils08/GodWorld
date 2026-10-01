@@ -340,6 +340,113 @@ function judicialPriorStatusForCare_(ctx, popId, from) {
   return open.PriorStatus || '';
 }
 
+// engine.254 Task 6b: Cycles in custody before a tracked employer dismisses.
+// Called by the lifecycle every Cycle, so a missing key is an Engine_Errors row
+// on the first fire, not on the first dismissal years later.
+function loadJudicialDismissAfter_(cfg) {
+  var k = 'judicialDismissAfterCycles';
+  var raw = cfg ? cfg[k] : undefined;
+  if (raw === undefined || raw === null || String(raw).trim() === '') {
+    throw new Error('judicialLifecycle: World_Config key "' + k + '" missing');
+  }
+  var v = Number(raw);
+  if (!isFinite(v) || Math.floor(v) !== v || v < 1 || v > 9007199254740991) {
+    throw new Error('judicialLifecycle: "' + k + '" must be a whole number of Cycles >= 1, got ' + raw);
+  }
+  return v;
+}
+
+// Custody's durable clock is the case, never StatusStartCycle (re-stamped at
+// every re-assert). { POPID: { caseId, arrestCycle } } for open pending/held
+// rows plus this Cycle's arrest intakes; an investigating row is not custody.
+function judicialCustodyClock_(ctx, cycle) {
+  var out = {};
+  var open = judicialCaseData_(ctx).open;
+  for (var pop in open) {
+    if (!open.hasOwnProperty(pop)) continue;
+    var c = open[pop];
+    if (JUDICIAL_CUSTODY_STATES_.indexOf(String(c.StatusNow)) < 0) continue;
+    var a = Number(c.ArrestCycle);
+    if (c.ArrestCycle === '' || c.ArrestCycle === null || c.ArrestCycle === undefined ||
+        !isFinite(a) || Math.floor(a) !== a || a < 1 || a > cycle) {
+      throw new Error('judicialLifecycle: ArrestCycle "' + c.ArrestCycle + '" is not a Cycle at or before C' +
+        cycle + ' on ' + c.StatusNow + ' case ' + c.CaseId);
+    }
+    out[pop] = { caseId: String(c.CaseId), arrestCycle: a };
+  }
+  var events = (ctx.summary && ctx.summary.judicialEvents) || [];
+  for (var i = 0; i < events.length; i++) {
+    var e = events[i];
+    if (!e || e.system !== 'judicial' || e.kind !== 'intake' || e.entryType !== 'arrest') continue;
+    if (Number(e.cycle) !== cycle || out[String(e.popId)]) continue;
+    out[String(e.popId)] = { caseId: 'J-C' + cycle + '-' + e.popId, arrestCycle: cycle };
+  }
+  return out;
+}
+
+var JUDICIAL_SETTLED_OUTCOMES_ = ['released', 'diverted', 'held-served'];
+
+// engine.254 Task 6b (builder 2026-09-30): missed pay comes out of savings.
+// Income is never touched — the weekly money loop already pays only Active
+// adults, so a held citizen saves nothing; this charges the weeks themselves,
+// once, where the case closes, by the money loop's own shock-expense rule.
+// statusBefore is the Status read BEFORE this Cycle's restore: a normal close
+// finds custody or care there; a case closing a second time after a failed case
+// write finds the life-state already restored and is not charged again.
+function judicialSettleLostPay_(ctx, row, c, cycle, cols, statusBefore) {
+  if (JUDICIAL_SETTLED_OUTCOMES_.indexOf(String(c.Outcome)) < 0) return null;
+  if (String(c.SourceSystem || '').trim().toLowerCase() === 'reconcile') return null; // its clock starts at the repair
+  var prior = String(c.PriorStatus || '').trim().toLowerCase();
+  if (prior !== '' && prior !== 'active') return null; // only a paycheck the money loop was paying
+  if (statusBefore !== 'detained' && !judicialHealthStatus_(statusBefore)) return null;
+  if (String(row[cols.iClock] || '').trim().toUpperCase() === 'GAME') return null;
+  var tier = cols.iTier >= 0 ? Number(row[cols.iTier]) : 4;
+  if (tier === 1 || tier === 2) return null; // their money moves by story, not by plan
+  if (cols.iBirth >= 0) {
+    var by = Number(row[cols.iBirth]) || 0;
+    if (by > 0 && typeof simYearOf_ === 'function' && (simYearOf_(ctx, cycle) - by) < 18) return null;
+  }
+  var income = Number(row[cols.iIncome]) || 0;
+  var weeks = Number(c.CyclesHeld);
+  if (!(income > 0) || !(weeks >= 1)) return null;
+  var marker = '[IncomeHit J' + c.ArrestCycle + ']';
+  var life = cols.iLife >= 0 ? String(row[cols.iLife] || '') : '';
+  if (life.indexOf(marker) >= 0) return null;
+
+  var rawNw = row[cols.iNW];
+  var nw = Number(String(rawNw === null || rawNw === undefined ? '' : rawNw).replace(/[$,\s]/g, ''));
+  if (rawNw === '' || rawNw === null || rawNw === undefined || !isFinite(nw)) {
+    // never write a zero over a value that could not be read
+    var unread = new Error('judicialLifecycle: NetWorth "' + rawNw + '" unreadable on ' + c.POPID + ' — case ' + c.CaseId + ' closed without the lost-pay charge');
+    if (typeof logEngineError_ === 'function') logEngineError_(ctx, 'Phase5-CustodySettlement', unread);
+    else if (typeof Logger !== 'undefined') Logger.log(unread.message);
+    return null;
+  }
+  var charge = Math.round(income / 52 * weeks);
+  var held = weeks + (weeks === 1 ? ' week' : ' weeks') + ' held with no pay';
+  var text;
+  if (nw >= charge) {
+    row[cols.iNW] = nw - charge;
+    text = held + ' — savings covered it';
+  } else {
+    row[cols.iNW] = 0;
+    if (cols.iDebt >= 0) {
+      var debt = Number(row[cols.iDebt]) || 0;
+      if (debt < 6) row[cols.iDebt] = debt + 1;
+    }
+    text = held + ' — more than the savings could hold, borrowed to cover it';
+  }
+  if (cols.iLife >= 0) {
+    var stamp = 'Y' + (Math.floor((cycle - 1) / 52) + 1) + 'C' + (((cycle - 1) % 52) + 1); // the money loop's stamp
+    row[cols.iLife] = (life ? life + '\n' : '') + stamp + ' — [Money] ' + text + ' ' + marker;
+  }
+  if (typeof queueAppendIntent_ === 'function') {
+    queueAppendIntent_(ctx, 'LifeHistory_Log', [ctx.now, c.POPID, '', 'Money', text, '', cycle]);
+  }
+  ctx.ledger.dirty = true;
+  return { popId: c.POPID, weeks: weeks, charge: charge, borrowed: nw < charge };
+}
+
 function judicialSetStatus_(ctx, row, status, cycle, iStatus, iStart) {
   row[iStatus] = status;
   // Custody stamps its start; a restored life-state clears it, as a care discharge does.
@@ -362,6 +469,7 @@ function runJudicialLifecycle_(ctx) {
   var cycle = Number(S.absoluteCycle || S.cycleId || (ctx.config && ctx.config.cycleCount));
   if (!(cycle > 0)) throw new Error('judicialLifecycle: current Cycle missing');
   var rates = loadJudicialRates_(ctx.config);
+  loadJudicialDismissAfter_(ctx.config); // Task 6b: read by the career dismissal pass; validated here every Cycle
   var data = judicialCaseData_(ctx);
   var events = S.judicialEvents || [];
   if (!Array.isArray(events)) throw new Error('judicialLifecycle: S.judicialEvents must be an array');
@@ -373,6 +481,13 @@ function runJudicialLifecycle_(ctx) {
   if (iPop < 0 || iStatus < 0 || iStart < 0 || iClock < 0) {
     throw new Error('judicialLifecycle: Simulation_Ledger custody columns missing');
   }
+  var payCols = { iClock: iClock, iTier: header.indexOf('Tier'), iBirth: header.indexOf('BirthYear'),
+    iIncome: header.indexOf('Income'), iNW: header.indexOf('NetWorth'), iDebt: header.indexOf('DebtLevel'),
+    iLife: header.indexOf('LifeHistory') };
+  if (payCols.iIncome < 0 || payCols.iNW < 0) {
+    throw new Error('judicialLifecycle: Simulation_Ledger Income/NetWorth columns missing');
+  }
+  var settled = [];
   var citizen = {};
   for (var r = 0; r < rows.length; r++) citizen[String(rows[r][iPop])] = rows[r];
 
@@ -436,6 +551,9 @@ function runJudicialLifecycle_(ctx) {
         kind = c.Outcome === 'no-arrest' ? 'transition' : 'exit';
       }
       if (c.ResolveCycle !== '') {
+        // Task 6b: `lower` is the Status before the restore below — the settlement's replay guard.
+        var paid = judicialSettleLostPay_(ctx, row, c, cycle, payCols, lower);
+        if (paid) settled.push(paid);
         if (c.Outcome !== 'no-arrest' && !judicialHealthStatus_(lower) && lower !== 'deceased' &&
             lower !== 'traded' && lower !== 'inactive' && lower !== 'pending' &&
             String(row[iClock] || '').trim().toUpperCase() !== 'GAME') {
@@ -450,6 +568,7 @@ function runJudicialLifecycle_(ctx) {
     }
     if (kind) events.push(judicialLifecycleReceipt_(c, kind, cycle));
   }
+  if (typeof Logger !== 'undefined') Logger.log('judicialLifecycle C' + cycle + ': lost-pay settlements ' + settled.length);
 }
 
 if (typeof module !== 'undefined' && module.exports) {
@@ -463,6 +582,8 @@ if (typeof module !== 'undefined' && module.exports) {
     countPriorArrests_: countPriorArrests_,
     advanceCase_: advanceCase_,
     judicialCaseData_: judicialCaseData_, judicialPriorStatusForCare_: judicialPriorStatusForCare_,
+    loadJudicialDismissAfter_: loadJudicialDismissAfter_, judicialCustodyClock_: judicialCustodyClock_,
+    judicialSettleLostPay_: judicialSettleLostPay_,
     runJudicialLifecycle_: runJudicialLifecycle_
   };
 }

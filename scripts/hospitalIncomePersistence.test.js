@@ -26,6 +26,7 @@ const sb = { Logger: { log() {} }, safeRand_: ctx => ctx.rng,
 vm.createContext(sb);
 for (const file of ['phase01-config/advanceSimulationCalendar.js', 'utilities/citizenDerivation.js',
   'phase05-citizens/educationCareerEngine.js', 'phase05-citizens/runCareerEngine.js',
+  'utilities/cycleModes.js', 'phase05-citizens/judicialLifecycle.js', // Task 6b: custody clock + seeded dismissal draw
   'phase05-citizens/runHouseholdEngine.js',
   'phase05-citizens/generationalWealthEngine.js', 'phase04-events/generationalEventsEngine.js',
   'utilities/citizenMemory.js', 'utilities/citizenDialMap.js', 'utilities/compressLifeHistory.js']) {
@@ -41,7 +42,7 @@ function make(employer) {
     HealthCause: 'SYNTHETIC TEST CAUSE', TraitProfile: '', DialState: '' };
   const ctx = { config: { cycleCount: 8002, griefDurationCycles: 3, griefHolidayDurationCycles: 5,
     griefParticipationMultiplier: 0.8, griefPublicActivityMultiplier: 0.75,
-    griefSupportMultiplier: 1.25, griefResponseChance: 0.35 },
+    griefSupportMultiplier: 1.25, griefResponseChance: 0.35, judicialDismissAfterCycles: 3 },
     summary: { cycleId: 8002 }, now: 'synthetic', rng: () => 0.6,
     ledger: { headers: H.slice(), rows: [H.map(name => values[name])], dirty: false }, logRows: [],
     ss: { getSheetByName: name => name === 'Business_Ledger' ?
@@ -50,7 +51,8 @@ function make(employer) {
     exists: true, values: [['AdmissionId', 'POPID', 'Name', 'Neighborhood', 'Cause', 'AdmitCycle',
       'StatusNow', 'LastTransitionCycle', 'DischargeCycle', 'Outcome', 'CyclesInCare',
       'Kind', 'IntakeType', 'SourceEventId', 'SourceSystem', 'PriorStatus']]
-  } : { exists: false, values: [] } };
+  } : name === 'Judicial_Ledger' ? { exists: true, values: [sb.JUDICIAL_CASE_FIELDS_.slice()] }
+    : { exists: false, values: [] } };
   floors(ctx);
   return ctx;
 }
@@ -514,6 +516,233 @@ check('T6 detained citizen is gated from career and household events', () => {
   assert.strictEqual(JSON.stringify(row), before);
   assert.strictEqual(draws, 0);
   assert.strictEqual(ctx.logRows.length, 0);
+});
+
+// ── engine.254 Task 6b: custody dismissal through the real Career phase (build spec B2, B4) ──
+const BH6 = ['BIZ_ID', 'Name', 'Sector', 'Avg_Salary', 'Employee_Count', 'Growth_Rate', 'Key_Personnel'];
+const CYC = 113; // arrest at 110 → three Cycles held
+if (typeof sb.hoodTexturePool_ !== 'function') sb.hoodTexturePool_ = () => []; // hood texture lines are not under test here
+function person(over) {
+  return Object.assign({ POPID: 'SYN-6B-DET', First: 'Synthetic', Last: 'Detainee', Tier: 4, ClockMode: 'ENGINE',
+    LifeHistory: '', LastUpdated: '', Neighborhood: 'SYNTHETIC_TEST_HOOD', RoleType: 'Plumber', Income: 60000,
+    EconomicProfileKey: 'synthetic-priced', EmployerBizId: 'BIZ-999999', EducationLevel: 'trade-cert',
+    CareerStage: 'mid-career', YearsInCareer: 8, Status: 'detained', StatusStartCycle: 110, BirthYear: '',
+    SkillTags: '', HealthCause: '', TraitProfile: '', DialState: '' }, over || {});
+}
+function caseRowFor(pop, arrest, over) {
+  const c = Object.assign({ CaseId: 'J-C' + arrest + '-' + pop, POPID: pop, EntryType: 'arrest', StatusNow: 'held',
+    ArrestCycle: arrest, OpenCycle: arrest, DecisionCycle: arrest + 1, HeldUntilCycle: arrest + 4,
+    LastTransitionCycle: arrest + 1, PriorStatus: 'Active', SourceSystem: 'patrol', SourceEventId: 'patrol:' + pop,
+    ChargeGravity: 'serious' }, over || {});
+  return sb.JUDICIAL_CASE_FIELDS_.map(f => c[f] === undefined ? '' : c[f]);
+}
+function custody(people, opts) {
+  opts = opts || {};
+  const biz = [BH6.slice()].concat(opts.biz || [['BIZ-999999', 'SYNTHETIC TEST EMPLOYER', 'Construction', 100000, 5, '', '']]);
+  const cases = opts.cases || people.filter(p => p.Status !== 'Active' || opts.caseForAll)
+    .map(p => caseRowFor(p.POPID, opts.arrest === undefined ? 110 : opts.arrest));
+  const cells = [], errors = [];
+  let draws = 0;
+  const ctx = { config: { cycleCount: opts.cycle || CYC, judicialDismissAfterCycles: opts.dial === undefined ? 3 : opts.dial },
+    summary: Object.assign({ cycleId: opts.cycle || CYC }, opts.summary || {}), now: 'synthetic',
+    rng: () => { draws++; return opts.rngValue === undefined ? 0.999 : opts.rngValue; },
+    ledger: { headers: H.slice(), rows: people.map(p => H.map(name => p[name])), dirty: false }, logRows: [],
+    ss: { getSheetByName: name => name === 'Business_Ledger' ?
+      { getDataRange: () => ({ getValues: () => biz.map(row => row.slice()) }) } : null },
+    cache: { getData: name => name === 'Judicial_Ledger' && !opts.noTab ?
+      { exists: true, values: [sb.JUDICIAL_CASE_FIELDS_.slice()].concat(cases) } : { exists: false, values: [] } } };
+  const saved = { cell: sb.queueCellIntent_, err: sb.logEngineError_ };
+  sb.queueCellIntent_ = (c, tab, r, col, value) => cells.push({ tab, r, col, value });
+  sb.logEngineError_ = (c, phase, err) => errors.push({ phase, message: err.message });
+  try { sb.runCareerEngine_(ctx); } finally { sb.queueCellIntent_ = saved.cell; sb.logEngineError_ = saved.err; }
+  return { ctx, cells, errors, draws: () => draws, row: i => ctx.ledger.rows[i || 0],
+    get: (i, name) => ctx.ledger.rows[i][ix(name)], custody: ctx.summary.careerSignals && ctx.summary.careerSignals.custody };
+}
+const dismissed = (run, i) => run.get(i || 0, 'EmployerBizId') === '' && /\[Career-Layoff\] Dismissed by /.test(run.get(i || 0, 'LifeHistory'));
+const untouchedRow = (run, i, p) => JSON.stringify(run.row(i)) === JSON.stringify(H.map(name => p[name]));
+
+check('6b held 2 Cycles: not dismissed', () => {
+  const p = person();
+  const run = custody([p], { arrest: 111 });
+  assert(untouchedRow(run, 0, p), 'row untouched before the dial');
+  assert.deepStrictEqual(JSON.parse(JSON.stringify(run.custody)), { dismissed: 0, skipped: 0 });
+});
+check('6b held 3 Cycles: dismissed — employer cleared, Income cut 12–20%, layoff line, counters, seat delta', () => {
+  const run = custody([person()]);
+  const income = run.get(0, 'Income');
+  assert(dismissed(run), 'employer cleared and Career-Layoff line written');
+  assert(income >= 4110 && income <= 52800 && income !== 60000, 'Income × 0.80–0.88, got ' + income);
+  assert(/Dismissed by SYNTHETIC TEST EMPLOYER after 3 weeks in custody$/.test(run.get(0, 'LifeHistory')), 'text names employer and weeks');
+  assert.strictEqual(run.get(0, 'Status'), 'detained', 'Status is custody\'s, not the dismissal\'s');
+  assert.strictEqual(run.ctx.logRows.filter(l => l[3] === 'Career-Layoff').length, 1);
+  assert.strictEqual(run.ctx.summary.careerSignals.layoffs, 1);
+  assert.strictEqual(run.ctx.summary.careerSignals.transitions, 1);
+  assert.deepStrictEqual(JSON.parse(JSON.stringify(run.ctx.summary.careerSignals.businessDeltas['BIZ-999999'])), { gained: 0, lost: 1 });
+  assert.deepStrictEqual(run.cells.map(c => [c.tab, c.value]), [['Business_Ledger', 4]], 'write-back lowers the stated count 5 → 4');
+  assert.deepStrictEqual(JSON.parse(JSON.stringify(run.custody)), { dismissed: 1, skipped: 0 });
+  assert.strictEqual(run.errors.length, 0);
+});
+check('6b the dismissal draw is the case\'s own: same case same Cycle → same figure, and the career stream does not move', () => {
+  const a = custody([person()]), b = custody([person()]);
+  assert.strictEqual(a.get(0, 'Income'), b.get(0, 'Income'));
+  const expected = Math.round(60000 * (0.80 + sb.seededRngFor_(CYC, 'custody-dismiss:J-C110-SYN-6B-DET')() * 0.08));
+  assert.strictEqual(a.get(0, 'Income'), expected);
+  const bystander = person({ POPID: 'SYN-6B-FREE', Last: 'Bystander', Status: 'Active', EmployerBizId: 'UNTRACKED' });
+  const withDismissal = custody([person(), bystander], { rngValue: 0 });
+  const without = custody([person(), bystander], { rngValue: 0, arrest: 111 });
+  assert(dismissed(withDismissal) && !dismissed(without), 'fixture splits on the dismissal');
+  assert.strictEqual(withDismissal.draws(), without.draws(), 'ctx.rng draw count identical with and without a dismissal');
+  assert.strictEqual(JSON.stringify(withDismissal.row(1)), JSON.stringify(without.row(1)), 'the other citizen\'s row is identical');
+});
+check('6b once per case: the next Cycle neither dismisses again nor cuts again', () => {
+  const run = custody([person()]);
+  const after = Object.assign(person(), { EmployerBizId: '', Income: run.get(0, 'Income'), LifeHistory: run.get(0, 'LifeHistory') });
+  const next = custody([after], { cycle: CYC + 1 });
+  assert.strictEqual(next.get(0, 'Income'), after.Income);
+  assert.strictEqual((next.get(0, 'LifeHistory').match(/Career-Layoff/g) || []).length, 1);
+  assert.deepStrictEqual(JSON.parse(JSON.stringify(next.custody)), { dismissed: 0, skipped: 1 });
+});
+check('6b a detainee past the tenth career event is still dismissed (the loop cap cannot hide them)', () => {
+  const crowd = [];
+  for (let i = 0; i < 14; i++) crowd.push(person({ POPID: 'SYN-6B-A' + String(i).padStart(2, '0'), Last: 'Worker' + i, Status: 'Active', EmployerBizId: 'UNTRACKED' }));
+  const run = custody(crowd.concat([person()]), { rngValue: 0, cases: [caseRowFor('SYN-6B-DET', 110)] });
+  const moved = crowd.filter((p, i) => run.get(i, 'LifeHistory') !== '').length;
+  assert.strictEqual(moved, 10, 'the citizen loop stopped at its ten-event cap (got ' + moved + ')');
+  assert(dismissed(run, 14), 'row 15 dismissed by the case-keyed pass');
+});
+check('6b seat already shed: no headcount delta, and the Active bystander is not fired', () => {
+  const mate = person({ POPID: 'SYN-6B-MATE', Last: 'Colleague', Status: 'Active' });
+  const run = custody([person(), mate], { biz: [['BIZ-999999', 'SYNTHETIC TEST EMPLOYER', 'Construction', 100000, 1, '', '']],
+    cases: [caseRowFor('SYN-6B-DET', 110)] });
+  assert(dismissed(run, 0), 'detainee dismissed');
+  assert.strictEqual(run.ctx.summary.careerSignals.businessDeltas['BIZ-999999'], undefined, 'no delta');
+  assert.strictEqual(run.get(1, 'EmployerBizId'), 'BIZ-999999', 'colleague keeps the job');
+  assert.strictEqual(run.cells.length, 0, 'stated count untouched');
+  assert.strictEqual(run.ctx.summary.careerSignals.headcountWriteBack.fired, 0);
+});
+check('6b a decline during custody takes the seat first: the dismissal adds no second loss', () => {
+  const mate = person({ POPID: 'SYN-6B-MATE', Last: 'Colleague', Status: 'Active' });
+  const run = custody([person(), mate], { biz: [['BIZ-999999', 'SYNTHETIC TEST EMPLOYER', 'Construction', 100000, 2, '', '']],
+    cases: [caseRowFor('SYN-6B-DET', 110)], summary: { businessDeclines: { 'BIZ-999999': 1 } } });
+  assert(dismissed(run, 0));
+  assert.strictEqual(run.ctx.summary.careerSignals.businessDeltas['BIZ-999999'].lost, 1, 'only the decline\'s own loss');
+  assert.strictEqual(run.get(1, 'EmployerBizId'), 'BIZ-999999', 'colleague keeps the job');
+  assert.strictEqual(run.ctx.summary.careerSignals.headcountWriteBack.fired, 0);
+});
+check('6b blank stated count: dismissed, no delta; no Business_Ledger row: not dismissed', () => {
+  const blank = custody([person()], { biz: [['BIZ-999999', 'SYNTHETIC TEST EMPLOYER', 'Construction', 100000, '', '', '']] });
+  assert(dismissed(blank) && blank.ctx.summary.careerSignals.businessDeltas['BIZ-999999'] === undefined);
+  const p = person();
+  const missing = custody([p], { biz: [['BIZ-000001', 'SOMEONE ELSE', 'Construction', 100000, 5, '', '']] });
+  assert(untouchedRow(missing, 0, p), 'no employer row → untouched');
+  assert.deepStrictEqual(JSON.parse(JSON.stringify(missing.custody)), { dismissed: 0, skipped: 1 });
+});
+check('6b owners are never dismissed from their own business — every Key_Personnel shape', () => {
+  const kp = k => ({ biz: [['BIZ-999999', 'SYNTHETIC TEST EMPLOYER', 'Construction', 100000, 5, '', k]] });
+  for (const shape of ['Synthetic Detainee (Founder)', 'POP-00000 Other Person (Owner); Synthetic Detainee (Co-Founder)']) {
+    const p = person();
+    assert(untouchedRow(custody([p], kp(shape)), 0, p), 'owner by name "' + shape + '" kept');
+  }
+  const idName = person({ POPID: 'POP-99001' });
+  assert(untouchedRow(custody([idName], Object.assign(kp('POP-99001 Synthetic Detainee (Owner)'), { cases: [caseRowFor('POP-99001', 110)] })), 0, idName), 'id + name + owner tag kept');
+  const idInTag = person({ POPID: 'POP-99001' });
+  assert(untouchedRow(custody([idInTag], Object.assign(kp('POP-99001 (Synthetic Detainee, Owner)'), { cases: [caseRowFor('POP-99001', 110)] })), 0, idInTag), 'name inside the tag kept');
+  const idOnly = person({ POPID: 'POP-99001' });
+  assert(untouchedRow(custody([idOnly], Object.assign(kp('POP-99001 Synthetic Detainee'), { cases: [caseRowFor('POP-99001', 110)] })), 0, idOnly), 'bare id + name (minted-owner form) kept');
+  const mismatch = person({ POPID: 'POP-99001' });
+  assert(dismissed(custody([mismatch], Object.assign(kp('POP-99001 Somebody Else (Owner)'), { cases: [caseRowFor('POP-99001', 110)] }))), 'id beside another name resolves nobody → an employee, dismissed');
+  assert(dismissed(custody([person()], kp('Synthetic Detainee (Site Manager)'))), 'named staff with a job tag is not an owner');
+});
+check('6b scope: only an ENGINE-clock Tier 3–4 working adult with a tracked employer is dismissed', () => {
+  for (const over of [{ EmployerBizId: 'SELF_EMPLOYED' }, { EmployerBizId: 'UNTRACKED' }, { EmployerBizId: '' }, { Tier: 2 }, { Tier: 1 },
+    { ClockMode: 'CIVIC' }, { ClockMode: 'MEDIA' }, { ClockMode: 'GAME' }, { CareerStage: 'retired' },
+    { EconomicProfileKey: 'SPORTS_OVERRIDE' }, { Status: 'deceased' }, { Status: 'traded' }, { Status: 'inactive' }]) {
+    const p = person(over);
+    const run = custody([p], { cases: [caseRowFor(p.POPID, 110)] });
+    assert(untouchedRow(run, 0, p), JSON.stringify(over) + ' must not be dismissed');
+  }
+  const minor = person({ BirthYear: sb.simYearOf_({ summary: { cycleId: CYC }, config: { cycleCount: CYC } }, CYC) - 16 });
+  assert(untouchedRow(custody([minor]), 0, minor), 'a minor is not dismissed');
+  const zero = custody([person({ Income: 0 })]);
+  assert(dismissed(zero) && zero.get(0, 'Income') === 0, 'Income 0: dismissed, nothing to cut');
+});
+check('6b in care inside custody past the dial: dismissed (the clock is the case)', () => {
+  for (const status of ['hospitalized', 'critical', 'recovering']) {
+    const p = person({ Status: status });
+    assert(dismissed(custody([p], { cases: [caseRowFor(p.POPID, 110)] })), status);
+  }
+});
+check('6b an open case over a free ledger row is skipped this Cycle and dismissed the next', () => {
+  const free = person({ Status: 'Active', SkillTags: 'Construction' });
+  const run = custody([free], { cases: [caseRowFor(free.POPID, 110)],
+    biz: [['BIZ-999999', 'SYNTHETIC TEST EMPLOYER', 'Construction', 100000, 5, 60, '']] });
+  assert.strictEqual(run.get(0, 'EmployerBizId'), 'BIZ-999999', 'not dismissed while the ledger shows them free');
+  assert(!/Career-Layoff|Career-Hired/.test(run.get(0, 'LifeHistory')), 'never handed to the rehire matcher');
+  assert.strictEqual(run.custody.skipped, 1);
+  const reasserted = person();
+  assert(dismissed(custody([reasserted], { cycle: CYC + 1 })), 'dismissed once custody is re-asserted');
+});
+check('6b failure policy: no tab → career completes, Phase5-CustodyDismissal logged, nothing dismissed; lands next Cycle', () => {
+  const p = person();
+  const run = custody([p], { noTab: true });
+  assert(untouchedRow(run, 0, p));
+  assert.strictEqual(run.errors.length, 1);
+  assert.strictEqual(run.errors[0].phase, 'Phase5-CustodyDismissal');
+  assert(/Judicial_Ledger tab missing \(0 dismissal\(s\) committed before the fault\)/.test(run.errors[0].message), run.errors[0].message);
+  assert(run.ctx.summary.careerSignals.headcountWriteBack, 'the rest of the career run completed');
+  assert(dismissed(custody([person()], { cycle: CYC + 1 })), 'next Cycle still finds the case past the dial');
+});
+check('6b failure policy: a bad dial is reported the same way', () => {
+  const p = person();
+  const run = custody([p], { dial: 2.5 });
+  assert(untouchedRow(run, 0, p) && run.errors.length === 1 && /judicialDismissAfterCycles/.test(run.errors[0].message));
+});
+check('6b stage then commit: a fault on the second case leaves it untouched; the first stands', () => {
+  const first = person({ POPID: 'SYN-6B-AAA', Last: 'First' }), second = person({ POPID: 'SYN-6B-ZZZ', Last: 'Second' });
+  const real = sb.parseKeyPersonnelOwners_;
+  let calls = 0;
+  sb.parseKeyPersonnelOwners_ = cell => { if (++calls === 2) throw new Error('synthetic stage fault'); return real(cell); };
+  let run;
+  try { run = custody([first, second]); } finally { sb.parseKeyPersonnelOwners_ = real; }
+  assert(dismissed(run, 0), 'first committed');
+  assert(untouchedRow(run, 1, second), 'second untouched');
+  assert(/synthetic stage fault \(1 dismissal\(s\) committed before the fault\)/.test(run.errors[0].message), run.errors[0].message);
+  assert.strictEqual(run.ctx.summary.careerSignals.layoffs, 1);
+});
+check('6b headcount reconcile firing: zero-income victim draws nothing, positive-income victim one draw (B4 extraction)', () => {
+  for (const income of [0, 60000]) {
+    const a = person({ POPID: 'SYN-6B-W1', Last: 'One', Status: 'Active', Income: income });
+    const b = person({ POPID: 'SYN-6B-W2', Last: 'Two', Status: 'Active', Income: 90000 });
+    const run = custody([a, b], { cases: [], biz: [['BIZ-999999', 'SYNTHETIC TEST EMPLOYER', 'Construction', 100000, 1, '', '']] });
+    assert.strictEqual(run.get(0, 'EmployerBizId'), '', 'lowest earner fired');
+    assert(/\[Career-Layoff\] Lost their job when SYNTHETIC TEST EMPLOYER cut 1 position$/.test(run.get(0, 'LifeHistory')));
+    assert.strictEqual(run.get(0, 'LastUpdated'), 'synthetic');
+    assert.strictEqual(run.get(1, 'EmployerBizId'), 'BIZ-999999');
+    assert.strictEqual(run.ctx.summary.careerSignals.headcountWriteBack.fired, 1);
+    assert.strictEqual(run.ctx.summary.careerSignals.businessDeltas['BIZ-999999'].lost, 1);
+    if (income === 0) assert.strictEqual(run.get(0, 'Income'), 0);
+    else assert(run.get(0, 'Income') >= 4110 && run.get(0, 'Income') <= 52800);
+    run.firedDraws = run.draws();
+    custody.lastDraws = custody.lastDraws || {};
+    custody.lastDraws[income] = run.draws();
+  }
+  assert.strictEqual(custody.lastDraws[60000] - custody.lastDraws[0], 1, 'exactly one extra career draw for the positive-income cut');
+});
+check('6b dismissed, then released: the savings charge is at the reduced figure for every week held', () => {
+  const HX = H.concat(['NetWorth', 'DebtLevel']);
+  const p = person();
+  const run = custody([p]);
+  const reduced = run.get(0, 'Income');
+  const row = run.row(0).concat([20000, 0]);
+  const c = {}; sb.JUDICIAL_CASE_FIELDS_.forEach((f, i) => { c[f] = caseRowFor(p.POPID, 110)[i]; });
+  c.Outcome = 'held-served'; c.CyclesHeld = 4; c.ResolveCycle = 114;
+  const cols = { iClock: HX.indexOf('ClockMode'), iTier: HX.indexOf('Tier'), iBirth: HX.indexOf('BirthYear'),
+    iIncome: HX.indexOf('Income'), iNW: HX.indexOf('NetWorth'), iDebt: HX.indexOf('DebtLevel'), iLife: HX.indexOf('LifeHistory') };
+  const res = sb.judicialSettleLostPay_({ ledger: { dirty: false }, logRows: [], now: 'synthetic', summary: { cycleId: 114 }, config: { cycleCount: 114 } },
+    row, c, 114, cols, 'detained');
+  assert.strictEqual(res.charge, Math.round(reduced / 52 * 4));
+  assert.strictEqual(row[cols.iNW], 20000 - res.charge);
+  assert.strictEqual(row[cols.iIncome], reduced, 'Income untouched by the settlement');
 });
 console.log(passed + ' passed, ' + failed + ' failed');
 process.exitCode = failed ? 1 : 0;

@@ -181,3 +181,4 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 03:20 es BENCH @162 C139-C141 ok, errors 4->4: wear 38/39/38 steps by rule, 7 natural regains; career lines rotate (start rows 874/527/145)
 03:20 es RELEASE agy (diff review read: all checks clean, 1 test-style finding not folded, reason in plan)
 03:45 es PROD @134 = engine code 74925c1c (272 wear OFF, 274 career reach, UNDOCKED routing), pull-back 168/168; keys on PROD by hand. rb: PIN needs @134 + bench @162/C141. ROLLOUT commit carries rb's research.28 row hunk (complete).
+03:55 es PUSHED 079a924d (11 commits, incl. rb a0f02613). agy cleared, codex cleared, kimi untouched (usage limit). es stand-down: next is engine.254 Task 8 Revision 2, a six-item design pass — wants a fresh context, not the tail of this one. rb pane is waiting at a permission prompt (rm ask-rule) — not mine to answer.

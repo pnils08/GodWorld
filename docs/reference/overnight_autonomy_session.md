@@ -89,6 +89,9 @@ Builder-owned items only, one line each: `HH:MM seat — the question, with enou
 07:45 es — engine.254 Task 8: other residents (the untracked city) leave hospital beds and custody on a stay model. Default is a 2-Cycle average stay for both. At today's numbers, stay 2 fills ~78 of the hospital's 100 beds and holds ~58 people in custody. Stay 3 means ~117 beds, over capacity: "the hospital is full" becomes a live headline. Is 2 right, and should hospital and custody have separate dials? Tunable live either way.
 01:40 es — engine.272 (integrity decay): what should wear a citizen's scruples down? Two measured options. (A) A standing hardship — debt, rent, a rough hood, no work: reaches 55 of the 711 crime-eligible citizens today (8%), differs by person and hood, the rest don't move; at 1 point a week about 37 long-hardship citizens become crime-capable after ~30 weeks, roughly 5 crimes a sim-year. (B) No good act for a stretch, as you said on 2026-09-30: after the game-show fix only 22 of 711 had one in six weeks, so 97% slide together — at the same rate all ~690 read "slippery" by week 10 and "corrupt" by week 30, roughly 110 crimes a sim-year. I recommend A (B only as a slow background that stops inside the neutral band). Also yours: the rate (points a week), the floor (lowest that wear can take someone; below 20 = crime-capable), and whether overwork counts as a hardship. Ships switched off until you set them.
 
+01:58 rb — research.28 blind read, in this order: (1) `output/model-fit/blind/open-character-blind.md` — 24 outputs A–X, each heading names its input (Mags C108 / Mags C105 / Elias); score them your way; (2) only then `docs/research/2026-10-01-model-fit-open-character-results.md` — §3 is the key and unblinds you.
+01:58 rb — research.28 seat change, your call: Mags's Saturday narration from Sonnet 4.6 to Sonnet 5.5 (`cron-saturday-run.js:604`, one line). Both scorers put 5.5 a full point over the production arm, clean on facts and length, per-token cheaper, ~$0.04 a Saturday either way. Next fire is 10-03; say go and it lands before. Elias stays as is (one constructed prompt, scorers split).
+
 ## 7. Working ledger
 
 Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman register, results first. Purge at the start of each night (git keeps history); do not write narrative here.
@@ -167,3 +170,6 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 02:00 es RELEASE codex (272 review folded, filed docs/research/2026-10-01-codex-engine272-cut.md)
 02:00 es BLOCKED kimi — 5-hour usage limit at dispatch, no file written; RELEASE kimi
 02:00 es CLAIM codex es engine.274 cut review (reroute from kimi)
+01:58 rb DONE research.28 report docs/research/2026-10-01-model-fit-open-character-results.md; §6 two builder lines (read order, Mags seat change). rb next: watch-list items, hourly checks
+02:25 es RELEASE codex (274 review folded, filed docs/research/2026-10-01-codex-engine274-cut.md); 272 built be902aad
+02:25 es NOTE ran git stash by mistake ~02:10, popped --index within 30s, 121 tracked files restored, nothing lost; if a file of yours looks reverted, tell me

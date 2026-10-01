@@ -708,7 +708,7 @@ Builder ruling 2026-09-29 (above, ruling 2): named-hit frequency follows demand 
 
 **Builder rulings, 2026-09-30 20:54 (Task 6b — custody costs a livelihood).** "Pay doesn't continue while detained and if detained for xx cycles should be fired." Custody stays rarer than illness (it already is: ~1 arrest per 11–15 Cycles citywide among tracked citizens). Read before design: the wealth passes only drift salary toward a reference (`generationalWealthEngine.js:648-660`, `:879-890`) — there is no per-Cycle paycheck to pause; hospitalization stops pay through the income-hit carrier (`hospitalIncomeHit_` / `setHospitalIncomeState_`, engine.218), and the career engine already owns layoff paths (`runCareerEngine.js:1517-1525`, engine.201 W1b). **Design next:** a detained citizen takes the same income-hit carrier for the Cycles in custody; after `judicialDismissAfterCycles` Cycles detained (World_Config, **3 — builder-confirmed 2026-09-30 21:41**; dismisses serious held 2+ and grave cases, never a one-Cycle pending release) the case reuses the layoff path. Cut → advisor → review → build.
 
-### Task 6b cut — custody costs a livelihood (engine-sheet, 2026-09-30 — builder ruled 22:36: missed pay out of savings; BUILT, kimi SHIP, BENCH-PROVEN @160 = `4ae350dd`; PROD push pending)
+### Task 6b cut — custody costs a livelihood (engine-sheet, 2026-09-30 — builder ruled 22:36: missed pay out of savings; LIVE PROD @133 = `4ae350dd`, first live fire C110 2026-10-04)
 
 **Read-before (2026-09-30 22:00, code + bench SANDBOX 0908 at C130 + PROD at C109).**
 
@@ -893,6 +893,8 @@ Commit: Income, `careerRecordLayoff_` with "Dismissed by <business> after <n> we
 
 **PROD state 2026-09-30 23:45.** `judicialDismissAfterCycles` 3 is on PROD World_Config (read back; inert under the current code). **The code is NOT on PROD** — the push from the isolated stage was refused by the session's permission classifier; PROD web app is still @132. Remaining: push `4ae350dd` from a `git archive` stage, bump the deployment, pull-back compare, smoke note.
 
+**LIVE PROD @133, 2026-10-01 01:00 (`4ae350dd`).** Builder cleared the push. Isolated stage → `clasp push` → deployment @132 bumped, `clasp deployments` reads @133 → pull-back 168/168 files byte-identical to HEAD (167 + manifest). The key went on PROD World_Config before the code. First live fire C110, 2026-10-04.
+
 ## Changelog
 
 - 2026-09-30 (engine-sheet) — Task 6b cut drafted (§Task 6b cut): weekly pay stop at the career detained branch, floors stand down, dismissal at `judicialDismissAfterCycles` through one shared layoff body; reach and rates measured on PROD and bench. Advisor + codex review pending, nothing built.
@@ -973,3 +975,4 @@ Commit: Income, `careerRecordLayoff_` with "Dismissed by <business> after <n> we
 - 2026-09-30 (engine-sheet) — Task 6b build spec consolidated (§BUILD SPEC); Tier 1–2 exempt from the savings charge by default; diff review assigned to kimi.
 - 2026-09-30 (engine-sheet) — Task 6b built (`f1898e37`), kimi diff review SHIP; builder ruled no tier is gated from the savings charge — tier test removed, minor test added.
 - 2026-09-30 (engine-sheet) — Task 6b bench-proven on SANDBOX 0908 @160 (C131–C138): savings charge, dismissal at week 3, blank-savings case, clean Cycle at ruled dials. Key on PROD World_Config; code push to PROD pending (blocked by the permission classifier).
+- 2026-10-01 (engine-sheet) — Task 6b LIVE PROD @133 (`4ae350dd`), pull-back 168/168; smoke at C110.

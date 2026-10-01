@@ -653,8 +653,12 @@ for (const left of ['traded', 'inactive']) {
   r = settle({ NetWorth: 'n/a' });
   assert('6b unreadable NetWorth: cell untouched, error row, no charge',
     r.res === null && nw(r) === 'n/a' && engineErrors.length === 1 && engineErrors[0].phase === 'Phase5-CustodySettlement' && logged.length === 0);
-  r = settle({ NetWorth: '' });
-  assert('6b blank NetWorth: never a zero written over it', r.res === null && nw(r) === '' && engineErrors.length === 1);
+  r = settle({ NetWorth: '', DebtLevel: 4 });
+  assert('6b blank NetWorth is nothing saved (the money loop\'s reading): borrowed, DebtLevel +1, the cell stays blank, no error row',
+    r.res && r.res.borrowed === true && nw(r) === '' && r.row[cols.iDebt] === 5 && engineErrors.length === 0 &&
+    /borrowed to cover it \[IncomeHit J100\]$/.test(r.row[cols.iLife]));
+  r = settle({ NetWorth: 0, DebtLevel: 6 });
+  assert('6b NetWorth 0 at the debt cap: line written, nothing else moves', r.res.borrowed === true && nw(r) === 0 && r.row[cols.iDebt] === 6);
 
   r = settle();
   const lineText = r.row[cols.iLife].split(' — ').slice(1).join(' — ').replace('[Money] ', '');

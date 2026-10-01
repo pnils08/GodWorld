@@ -413,8 +413,12 @@ function judicialSettleLostPay_(ctx, row, c, cycle, cols, statusBefore) {
   if (life.indexOf(marker) >= 0) return null;
 
   var rawNw = row[cols.iNW];
-  var nw = Number(String(rawNw === null || rawNw === undefined ? '' : rawNw).replace(/[$,\s]/g, ''));
-  if (rawNw === '' || rawNw === null || rawNw === undefined || !isFinite(nw)) {
+  // A blank NetWorth is nothing saved — the money loop's own reading (Number(cell) || 0);
+  // 30 earning citizens on the live ledger carry one. Only a value that is there and
+  // cannot be read stops the charge.
+  var nwBlank = rawNw === '' || rawNw === null || rawNw === undefined;
+  var nw = nwBlank ? 0 : Number(String(rawNw).replace(/[$,\s]/g, ''));
+  if (!isFinite(nw)) {
     // never write a zero over a value that could not be read
     var unread = new Error('judicialLifecycle: NetWorth "' + rawNw + '" unreadable on ' + c.POPID + ' — case ' + c.CaseId + ' closed without the lost-pay charge');
     if (typeof logEngineError_ === 'function') logEngineError_(ctx, 'Phase5-CustodySettlement', unread);
@@ -428,7 +432,7 @@ function judicialSettleLostPay_(ctx, row, c, cycle, cols, statusBefore) {
     row[cols.iNW] = nw - charge;
     text = held + ' — savings covered it';
   } else {
-    row[cols.iNW] = 0;
+    if (!nwBlank) row[cols.iNW] = 0; // a blank stays blank: the gap is the ledger's, not this charge's
     if (cols.iDebt >= 0) {
       var debt = Number(row[cols.iDebt]) || 0;
       if (debt < 6) row[cols.iDebt] = debt + 1;

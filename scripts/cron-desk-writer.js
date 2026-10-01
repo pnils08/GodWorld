@@ -367,8 +367,7 @@ function formatStrictSourceHygiene(nameCheck, packet) {
 
 function stripRepairChrome(text) {
   return String(text || '')
-    .replace(/^\s*here['’]?s the corrected article[^\n]*\n+/i, '')
-    .replace(/^\s*here is the corrected article[^\n]*\n+/i, '')
+    .replace(/^\s*here(?:['’]?s| is) the (?:corrected|revised|repaired) (?:article|draft|piece|version|[a-z]+ section)[^\n]*\n+/i, '')
     .replace(/^\s*corrected article with all unapproved quotes removed[^\n]*\n+/i, '');
 }
 

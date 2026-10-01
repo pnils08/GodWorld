@@ -397,7 +397,8 @@ function buildAnglePacket({ cycle, desk, reporter, story, approach, slice, lane 
       assignment: clean(story.angle || story.label, 500), approach: clean(approach, 900) || null,
       ...(creativeBrief ? { creativeBrief } : {}) },
     signal: { kind: story.kind || 'story-signal', hood: story.hood || null,
-      score: story.stinkScore == null ? null : story.stinkScore, src },
+      score: story.stinkScore == null ? null : story.stinkScore, src,
+      ...(clean(story.team, 60) ? { team: clean(story.team, 60) } : {}) },
     exposure: { basis: ['editor-assignment', 'desk-signal'],
       candidates: candidates.map(c => ({ pop: c.pop, name: c.name, profile: clean(c.profile, 300),
         why: c.why, role: c.role, hood: c.hood })) },
@@ -485,8 +486,18 @@ function chaseReplacesAssignment(chase, input) {
   const tokens = blob.split(/[^a-z0-9-]+/).filter(function (w) {
     return w.replace(/-/g, '').length >= 5;
   });
+  // The team is the one canon noun the 5-letter floor can never admit ("Oaks",
+  // "A's"), so a fan-heat chase about "the Oaks' latest loss" that names no
+  // player failed as off-assignment (P Slayer C109: 3 of 4 samples). It rides
+  // signal.team and matches as a whole word at any length; lowering the floor
+  // itself would let "with"/"from" pass anything.
+  const team = clean((input && input.signal && input.signal.team) || '').toLowerCase().replace(/’/g, "'");
   if (!tokens.length) return false;
-  const c = clean(chase).toLowerCase();
+  const c = clean(chase).toLowerCase().replace(/’/g, "'");
+  if (team) {
+    const esc = team.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    if (new RegExp('(^|[^a-z0-9])' + esc + '($|[^a-z0-9])').test(c)) return false;
+  }
   return !tokens.some(function (t) { return c.indexOf(t) >= 0; });
 }
 
@@ -498,8 +509,18 @@ function reporterChaseText(plan) {
 }
 
 function validateAngleOutput(value, input) {
-  const out = typeof value === 'string' ? parseJsonObject(value) : value;
+  const raw = typeof value === 'string' ? parseJsonObject(value) : value;
+  const out = raw && typeof raw === 'object' && !Array.isArray(raw) ? Object.assign({}, raw) : raw;
   const errs = [];
+  // A lead filed as one string, or left null when there is none, is the same
+  // plan in a different shape (Nia Rook C109, Sharon Okafor C108 each lost the
+  // day to it) — the W2 contract already accepts "array or one string".
+  if (out && typeof out === 'object' && !Array.isArray(out.unverifiedLead)) {
+    const lead = clean(out.unverifiedLead);
+    if (out.unverifiedLead == null || typeof out.unverifiedLead === 'string') {
+      out.unverifiedLead = lead ? [lead] : [];
+    }
+  }
   for (const k of ['focus', 'why', 'interpretation', 'closeQuestion']) if (!clean(out && out[k])) errs.push('missing ' + k);
   if (!clean(out && out.chase)) errs.push('missing chase');
   else if (chaseIsJsonShaped(out.chase)) errs.push('chase is JSON-shaped');
@@ -621,6 +642,19 @@ function questionFor(candidate, anglePlan, story) {
   const focus = clean(anglePlan && anglePlan.focus, 260) || clean(story.angle || story.label, 260);
   if (/council|mayor|official|director|chief/.test(role)) {
     return 'Using only the supplied facts, what about "' + focus + '" creates accountability for you, and what answer do you want? Do not claim any past or future official action that is not in the Packet.';
+  }
+  // W1 makes the reporter write one question per target, and until C109 W2
+  // threw it away: every citizen of every reporter answered the stock question
+  // below, and every quote came back "I've heard folks talking about <focus>,
+  // but honestly...". The reporter's question goes to the person it was written
+  // for; the stock one stays for candidates the reporter never targeted.
+  const planned = (anglePlan && anglePlan.targets || []).find(function (t) {
+    return t && candidate && t.pop === candidate.pop;
+  });
+  const plannedQuestion = clean(planned && planned.question, 400);
+  if (plannedQuestion) {
+    return plannedQuestion + (/[?.!]$/.test(plannedQuestion) ? '' : '?') +
+      ' Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet.';
   }
   if (candidate && candidate.hood && story.hood && candidate.hood === story.hood) {
     return 'As a resident of ' + story.hood + ', what have you seen, felt, or understood about "' + focus + '"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.';

@@ -98,6 +98,21 @@ function isCodeRenderedBrief(articleText) {
   return require('./livedArticleShape').isSummaryArticle(articleText).fail;
 }
 
+// The write wake scans against its packet, so a phrase grounded by the story's
+// own assignment (articleContamination `groundedBy`) stages clean; this door
+// re-scanned with no packet and would turn the same Article away. Read the
+// SAME packet the write wake scanned against — its `.state.json`, written
+// beside the draft under the staged file's own stem. Absent or unreadable →
+// no packet, which is the strict reading.
+function stagedWritePacket(side) {
+  const base = path.basename(String(side && side.article || ''));
+  const m = /^(.*_packet-v\d+_.+?)\.staged(?:-\d{4})?\.md$/.exec(base);
+  if (!m) return null;
+  try {
+    return JSON.parse(fs.readFileSync(path.join(ROOT, 'output', 'cron-compare', m[1] + '.state.json'), 'utf8'));
+  } catch (_) { return null; }
+}
+
 function verifyStagedProof(side, articleText, fallbackVerdict) {
   if (!side || side.status !== 'staged') return { ok: false, reason: 'sidecar status is not staged' };
   const articleSha256 = crypto.createHash('sha256').update(articleText).digest('hex');
@@ -107,7 +122,7 @@ function verifyStagedProof(side, articleText, fallbackVerdict) {
     const passed = proofs.some(proof => proof.pass === true);
     return { ok: false, reason: passed ? 'Rhea pass hash does not match staged Article' : 'no exact Rhea pass proof' };
   }
-  const contamination = articleContamination.scan(articleText, { desk: side.desk });
+  const contamination = articleContamination.scan(articleText, { desk: side.desk, packet: stagedWritePacket(side) });
   if (contamination.fail) {
     return { ok: false, articleSha256,
       reason: 'deterministic world-contamination blocker failed', contamination };

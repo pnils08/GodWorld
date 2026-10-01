@@ -60,6 +60,30 @@ assert(roomTalk.findings.some(f => f.check === 'unsupplied-access' && f.issue ==
 const chrome = scan('Here\'s the corrected article with all unapproved quotes removed:\n\nNightline was open.', { desk: 'culture' });
 assert(chrome.findings.some(f => f.check === 'repair-chrome'));
 
+const chromeSection = scan('Here\'s the corrected civic section for cycle 109:\n\nThe bakery was open.', { desk: 'civic' });
+assert(chromeSection.findings.some(f => f.issue === 'corrected-article'), JSON.stringify(chromeSection.findings));
+const quoteNarration = scan('"The money is there," said Walker, using the exact words from his approved statement.', { desk: 'business' });
+assert(quoteNarration.findings.some(f => f.issue === 'approved-quote-narration'), JSON.stringify(quoteNarration.findings));
+for (const legit of [
+  'The council approved statement language for the fund on the record.',
+  'The mayor read his approved statement at the hall and took no questions.',
+  'The council released the budget Tuesday. Here is the revised version of the transit plan as filed.',
+]) {
+  assert.equal(scan(legit, { desk: 'civic' }).findings.filter(f => f.check === 'repair-chrome').length, 0,
+    'reporting about a statement or a revision is not repair text: ' + legit);
+}
+
+// C109 Caldera/Downtown: a citizen answering the assigned anomaly by its own label.
+const decayQuote = '"I haven\'t really noticed any decay in our neighborhood, to be honest," Tao said.';
+const decayGrounded = scan(decayQuote, { desk: 'civic',
+  packet: { known: [{ text: 'Downtown: decay [Sentiment -0.050, HousingPressure +1.000]' }] } });
+assert.equal(decayGrounded.findings.filter(f => f.issue === 'decay-narrative').length, 0,
+  'the labeled anomaly grounds the word: ' + JSON.stringify(decayGrounded.findings));
+const decayBare = scan(decayQuote, { desk: 'civic',
+  packet: { task: { approach: 'boomtown copy vs decay, crisis with no owner' } } });
+assert(decayBare.findings.some(f => f.issue === 'decay-narrative'),
+  'the bare word in an approach line does not ground it');
+
 const tinas = scan([
   '# Game day',
   '',

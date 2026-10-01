@@ -117,3 +117,7 @@ through the wrapper. Confirmed, not assumed.
   `gateAssignments` attaches a persona to every eligible assignment); the
   `uniqueDest` `-HHMM` suffix lands after `.staged` and cannot break the prefix
   match; unreadable/missing packet → `null` → old strict behavior, fail-closed.
+
+## Review — 2026-09-30 (research-build)
+
+Accepted; all five findings folded before commit. 1 — the widened `corrected-article` form is now a whole line ending in a colon. 2 — `approved-quote-narration` requires the adherence verb and covers `its`/`the`. 3 — Saturday reads `<staged stem>.state.json`, the exact packet the write wake scanned. 4 — stands as noted (strict on a miss); the three-blob consolidation is not cut. 5 — the tokenless early return is restored; the team only adds a pass.

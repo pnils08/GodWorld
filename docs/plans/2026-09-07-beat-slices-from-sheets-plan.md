@@ -163,7 +163,34 @@
 
 Beat slices from Sheets (§13). T1 dump (ac808611) · T2 economic/food slice (662e614d) · T3 Mason + packet-v2 wiring (6860e07f) · T4 one builder + artifact per journalist: transit/health/schools/environment/faith/safety (1e1f0ead) · T7 WEEK_GRID rota, seat-scoped failure (69396c28, a553ca9c) — all LIVE 2026-09-07. Open: T5 approach strings (non-beat seats), T6 write-gate audit, T7b latency, T8 docs. Acceptance = unattended Mon–Fri rota from 2026-09-07
 
+### Crons audit — C109 week (research-build, 2026-09-30 / S512)
+
+Builder's read: runs light, P Slayer failing, Jax failing, reporting sounds the same. Measured from `logs/newsroom-fanout.log*` (five weeks), `output/cron-compare/fanout-*.json`, the nine C109 pieces filed Mon–Wed.
+
+**Rota is by design.** `WEEK_GRID` seats Mon 5 · Tue 4 · Wed 3 · Thu 4 · Fri 5, plus Nia Rook any day UNDOCKED has an un-recapped episode. Tue 09-29 filed 3 of 5 (Angela Reyes W3 fatal, Nia Rook W1 shape). Wed 09-30 filed 3 of 4 (P Slayer W1).
+
+**Seat losses, five weeks, by cause.** W1 `chase replaces the assignment`: P Slayer 09-16 + 09-30, Tanya Cruz 09-17, Hal Richmond 09-24. W1 output shape (`unverifiedLead must be an array`, no JSON): Sharon Okafor 09-25, Nia Rook 09-29. W2 zero publishable answers: Anthony Raines 08-31 + 09-14, Tanya Cruz 09-03, Noah Tan 09-04. W3 `UNAPPROVED_QUOTE` fatal after the repair pass: Jordan Velez 09-03, Angela Reyes 09-29. Provider outage: all five 09-15 W1.
+
+**Cut this session (bench: 12 suites green; live samples below).**
+- `chaseReplacesAssignment` — the team rides `signal.team` and matches as a whole word. Cause: the 5-letter token floor cannot admit "Oaks"/"A's", so a fan-heat chase naming the team and no player failed. Samples on the C109 Oaks packet: 1 of 4 passed before, 4 of 4 after. On the C108 A's packet 2 of 4 passed before.
+- `validateAngleOutput` — a string or null `unverifiedLead` becomes an array.
+- `articleContamination` `decay-narrative` — `groundedBy` the labeled anomaly form (`: decay [`). Jax's C109 slice assigned "Downtown: decay […]"; two citizens said "I haven't noticed any decay in our neighborhood"; the piece flagged on the assigned word. Same class as the 09-17 `falling-apart` fix.
+- `cron-saturday-run` `verifyStagedProof` — scans against the write packet W3 used (`<staged stem>.state.json`). It scanned with no packet, so a phrase grounded at W3 would have been turned away at the canon door.
+- Repair-pass text in prose — `stripRepairChrome` + `REPAIR_CHROME` widened. Two C109 pieces staged with it: Carmen Delaine opens "Here's the corrected civic section for cycle 109:"; the business piece narrates "using the exact words from his approved statement". Both now fail the Saturday scan and will not publish.
+- `questionFor` — the reporter's own W1 target question goes to that citizen. W1 required one question per target and W2 discarded it; every citizen answered `What have you seen, felt, or understood about "<focus>"?`. Carmen's four C109 targets re-asked unrecorded: stock question → four "I've heard folks talking about the Stabilization Fund…"; her questions → "I haven't received a check yet", "I don't own a bakery, I just work at one".
+
+**Sameness — measured causes, still open.**
+1. **Bystander interviews.** Candidates reached by the proximity fallback (`why: ledger-resident | same-hood-ledger`) carry `exposure.evidence: []`, `livedContextAllowed: false`, and the rule "The Packet fact is city news you heard about". They have no stake and no life context, so they relay hearsay: Luis Navarro's Fruitvale piece quotes a Temescal baker and two Rockridge servers. The reporter's question does not reach them (they are not W1 targets). Needs a sim ruling: who a reporter may interview, and what of the citizen's own cycle (life lines, own seed — pipeline.69 Task 2 is the wake-side sibling) rides the W2 packet.
+2. **No interview cooldown.** Melton Neilon and Elio Perez quoted by Luis (Tue) and Noah Tan (Wed) — a sourdough baker at a farmers market in one, at a dim sum cart in the other. Ronald Williams quoted by Anthony Raines (Mon) and Rachel Torres (Tue). Ernesto Quintero (A's 3B/1B, Baylight resident) quoted in Selena Grant's Oaks piece as if on the team.
+3. **Approach text is per desk, not per reporter** (Task 5 scope, add to it): seven civic seats share one paragraph — Noah Tan's weather piece is told "start from the official action — who in city hall did what"; five sports seats share one, five culture seats share one. The civic and firebrand lines both mandate ending on the unanswered question; six of nine C109 pieces close on "the question now is / remains".
+4. **Model spread.** Writers: 13 seats on `deepseek/deepseek-chat`, 6 on `meta-llama/llama-3.3-70b-instruct`, 2 on `anthropic/claude-sonnet-5` (Luis, Jax — the two that read differently). Every citizen quote is `deepseek-chat` unless the seat's package says otherwise. P Slayer's W1 opens "I'm still trying to process…" in 12 of 12 samples and in the C108 live run. Cost call → builder.
+5. **Slice-sourced seats resolve no profiles.** Jax `citizens resolved 0/12`, P Slayer `0/5`, Nia `0/1` — every run since 09-01 (one 4/9 on 09-09). Unexamined.
+
+**Other crons (found, not cut).** `backup.sh` prune is refused by rm-guard — 51 archives, 7.4 GB, one more a day. `moltbook-heartbeat` failed 09-28 and 09-29 (prompt 48.7k over a 32k model limit), ran 09-30. `compactCycleOutput` fails c103 on a missing packet file. `appendReflection_` errors print `[object Object]` (fanout 09-30) and "Content field is empty" (work-wake 09-22). Civic chain, wakes, exchange, reflection, digest, NotebookLM, UNDOCKED flight: running, provider errors sporadic.
+
 ## Changelog
+
+- 2026-09-30 (research-build S512) — crons audit filed §Status log; five newsroom cuts landed, kimi review folded ([[../research/2026-09-30-kimi-cron-audit-diff-review]]); Task 5 scope grows by audit item 3.
 
 - 2026-09-07 — Initial draft (S433 engine-sheet, drafted from the facts-not-color ruling and the desk-signal audit the same night).
 - 2026-09-07 — Task 1 cut and verified live (S433): `scripts/dumpBeatTabs.js`, 14 tabs incl. Story_Seed_Deck / Story_Hook_Deck / Casino_Ledger, run-cycle Step 5.56 wired. Tasks 2–7 handed to research-build (their files).

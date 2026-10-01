@@ -249,4 +249,41 @@ const differentStoryEv = p.buildReportPacket({ cycle: 999, desk: 'civic', report
 assert.notEqual(differentStoryEv.exposure.evidence[0].id, official.exposure.evidence[0].id,
   'evidence id is derived from pop+ref — a different story yields a different id for the same citizen');
 
+// C109 P Slayer: a fan-heat chase that names the team but no player is on-assignment.
+const teamStory = { ...story, label: 'The TEST-ONLY side lose yet again', angle: 'The TEST-ONLY side lose yet again',
+  hookLine: null, team: 'Oaks' };
+const teamW1 = p.buildAnglePacket({ cycle: 999, desk: 'sports', reporter: { popid: 'TEST-REPORTER', name: 'Test Reporter' },
+  story: teamStory, approach: 'Test the heat', slice: null, lane: [] });
+assert.equal(teamW1.signal.team, 'Oaks', 'the story team rides the W1 signal');
+assert.equal(w1.signal.team, undefined, 'a story with no team adds no key');
+const teamPlan = { focus: 'x', why: 'x', checks: [], targets: [], interpretation: 'x', unverifiedLead: [], closeQuestion: 'x' };
+assert.doesNotThrow(() => p.validateAngleOutput({ ...teamPlan,
+  chase: "I keep turning over the Oaks' latest night and what we asked of them." }, teamW1));
+assert.throws(() => p.validateAngleOutput({ ...teamPlan,
+  chase: 'The soaks at the car wash are the real story tonight.' }, teamW1), /replaces the assignment/,
+  'the team matches as a whole word only');
+const asW1 = JSON.parse(JSON.stringify(teamW1));
+asW1.signal.team = "A's";
+assert.doesNotThrow(() => p.validateAngleOutput({ ...teamPlan,
+  chase: 'I am still sitting with the A’s week and the weight we put on them.' }, asW1));
+
+// C109 Nia Rook / C108 Sharon Okafor: one lead as a string, or none as null, is the same plan.
+const baseLeadPlan = withChase(w1, { focus: 'TEST-ONLY mismatch', why: 'It is unresolved', checks: [],
+  targets: [], interpretation: 'x', closeQuestion: 'Who owns the response?' });
+assert.deepEqual(p.validateAngleOutput({ ...baseLeadPlan, unverifiedLead: 'one loose lead' }, w1).unverifiedLead,
+  ['one loose lead']);
+assert.deepEqual(p.validateAngleOutput({ ...baseLeadPlan, unverifiedLead: null }, w1).unverifiedLead, []);
+assert.throws(() => p.validateAngleOutput({ ...baseLeadPlan, unverifiedLead: { a: 1 } }, w1), /unverifiedLead must be an array/);
+
+// The reporter's own W1 question reaches the citizen it was written for.
+const askedPlan = { ...plan, targets: [{ pop: 'TEST-POP-02', question: 'What changed on your block this week', basis: 'resident' }] };
+const asked = p.buildReportPacket({ cycle: 999, desk: 'civic', reporter: { name: 'Test Reporter' },
+  angleInput: w1, anglePlan: askedPlan, story, candidate: candidates[1] });
+assert.match(asked.task.question, /^What changed on your block this week\? Speak from your life\./);
+assert.match(asked.task.question, /has not happened to you, say so/);
+const askedOfficial = p.buildReportPacket({ cycle: 999, desk: 'civic', reporter: { name: 'Test Reporter' },
+  angleInput: w1, anglePlan: { ...plan, targets: [{ pop: 'TEST-POP-01', question: 'Why did you stall it?', basis: 'assigned-official' }] },
+  story, candidate: candidates[0] });
+assert.match(askedOfficial.task.question, /creates accountability/, 'an official still gets the bounded accountability question');
+
 console.log('livedExperiencePacket.test.js: PASS');

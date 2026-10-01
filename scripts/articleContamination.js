@@ -32,7 +32,14 @@ const REAL_OAKLAND = [
 ];
 
 const REPAIR_CHROME = [
-  { id: 'corrected-article', re: /here['’]?s the corrected article/i },
+  // The widened form is a whole line ending in a colon ("Here's the corrected
+  // civic section for cycle 109:" — Carmen C109, staged), so a sentence about a
+  // revised ordinance stays legal.
+  { id: 'corrected-article', re: /here['’]?s the corrected article|^[ \t]*here(?:['’]?s| is) the (?:corrected|revised|repaired) (?:article|draft|piece|version|[a-z]+ section)\b[^\n]*:[ \t]*$/im },
+  // The repair pass's instruction narrated as prose ("said Walker, using the
+  // exact words from his approved statement" — business C109, staged). Needs
+  // the adherence verb: "the mayor read his approved statement" is reporting.
+  { id: 'approved-quote-narration', re: /\b(?:using|sticking to|adhering to|keeping to|repeating|quoting) (?:the )?(?:exact (?:words|wording) (?:from|of) )?(?:his|her|their|its|the) (?:approved|authorized) (?:statement|quote|wording)\b/i },
   { id: 'unapproved-quotes-removed', re: /unapproved quotes removed/i },
   { id: 'no-fabricated-speech', re: /no fabricated speech/i },
   { id: 'packet-narration', re: /\bthe Packet does not\b/i },
@@ -55,7 +62,12 @@ const ROOM_SOURCED_SPEECH = [
 // the packet blob for that anomaly's own vocabulary before blocking; absent
 // any such signal, the phrase blocks exactly as before.
 const BLIGHT = [
-  { id: 'decay-narrative', re: /\bdecay(?:'s|s)?\b.{0,40}\b(?:eating|metrics|epicenter|neighborhood|chinatown|west oakland)\b|\b(?:eating away at|epicenter of the city's decay)\b/i },
+  // Same class, C109 Caldera/Downtown (2026-09-30): the slice assigned "Downtown:
+  // decay [Sentiment -0.050, ...]" and two citizens answered "I haven't noticed
+  // any decay in our neighborhood" — the piece blocked on the word its own
+  // assignment handed it. Grounded only by the labeled anomaly form, not the
+  // bare word: Jax's approach text says "decay" every run.
+  { id: 'decay-narrative', re: /\bdecay(?:'s|s)?\b.{0,40}\b(?:eating|metrics|epicenter|neighborhood|chinatown|west oakland)\b|\b(?:eating away at|epicenter of the city's decay)\b/i, groundedBy: /:\s*decay\s*\[/i },
   { id: 'real-life-struggles', re: /real-life struggles/i, groundedBy: /\bdecay\b|\banomaly\b|\bcrisis\b/i },
   { id: 'falling-apart', re: /falling apart/i, groundedBy: /\bdecay\b|\banomaly\b/i },
   { id: 'isnt-safe', re: /isn['’]?t safe|city isn['’]?t safe/i, groundedBy: /\bcrime\b|\bviolentcrimeindex\b|\bsafety\b|\bunsafe\b/i },

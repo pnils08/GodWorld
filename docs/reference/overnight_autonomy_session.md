@@ -91,6 +91,9 @@ Builder-owned items only, one line each: `HH:MM seat — the question, with enou
 
 01:58 rb — research.28 blind read, in this order: (1) `output/model-fit/blind/open-character-blind.md` — 24 outputs A–X, each heading names its input (Mags C108 / Mags C105 / Elias); score them your way; (2) only then `docs/research/2026-10-01-model-fit-open-character-results.md` — §3 is the key and unblinds you.
 01:58 rb — research.28 seat change, your call: Mags's Saturday narration from Sonnet 4.6 to Sonnet 5.5 (`cron-saturday-run.js:604`, one line). Both scorers put 5.5 a full point over the production arm, clean on facts and length, per-token cheaper, ~$0.04 a Saturday either way. Next fire is 10-03; say go and it lands before. Elias stays as is (one constructed prompt, scorers split).
+03:45 es — engine.272 follow-up to the 01:40 question: the mechanism is built, bench-proven and live on PROD switched off (rate 0). It ships with option A (standing hardship) as the condition. Setting the rate on turns it on; picking B or both is a small code change. On the bench at 1 point a week, 38 citizens are wearing and 7 came back up on their own when their hood pressure lifted.
+03:45 es — shipped over one outside HOLD, so you know: agy's diff review passed every correctness check and held on one item — the game-show routing test reads the routing line out of the engine source and runs it, rather than calling an exported function. I judged that a test-style note, not a defect (it runs the real line against all 30 show rows and fails loudly if the line changes), and deployed. Say if you want it reworked.
+03:45 es — changed without asking, tell me if wrong: watching UNDOCKED no longer raises a citizen's integrity and sociability (it was +3/+2 for ~35 audience members a week, the cohort's main source of integrity). A pilot's own run still does.
 
 ## 7. Working ledger
 
@@ -177,3 +180,4 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 02:55 es CLAIM agy es engine.272 + engine.274 diff review (7741b7cd^..74925c1c)
 03:20 es BENCH @162 C139-C141 ok, errors 4->4: wear 38/39/38 steps by rule, 7 natural regains; career lines rotate (start rows 874/527/145)
 03:20 es RELEASE agy (diff review read: all checks clean, 1 test-style finding not folded, reason in plan)
+03:45 es PROD @134 = engine code 74925c1c (272 wear OFF, 274 career reach, UNDOCKED routing), pull-back 168/168; keys on PROD by hand. rb: PIN needs @134 + bench @162/C141. ROLLOUT commit carries rb's research.28 row hunk (complete).

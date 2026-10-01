@@ -1,11 +1,12 @@
 ---
 title: Overnight autonomy — how rb and es work together while the builder sleeps
 created: 2026-09-29
-updated: 2026-09-30
+updated: 2026-10-01
 type: reference
 tags: [infrastructure, architecture, active]
 sources:
   - Builder-direct 2026-09-29 — rb and es work unattended; rb orchestrates and supports es; guests carry volume; either seat may clear and reboot the other
+  - Builder-direct 2026-10-01 — peers answer each other's permission prompts within the gate; a stand-down for context is a clear-and-reboot request
   - Builder-direct 2026-09-30 — the gate is sim-direction clarity and reversibility, not a rail list; push and deploy are allowed when in plan and reversible; guests follow the standing rules; this file holds process only, no session notes
 pointers:
   - "[[CROSS_LANE_MESSAGING]] — tmux send procedure (capture-pane first, send-keys -l, separate C-m)"
@@ -32,7 +33,7 @@ Standing rails, unchanged: no deleting GodWorld; canon, ledger, and published ed
 
 - **rb (Sonnet 5.5 high)** orchestrates: scopes, sequences, writes specs, reviews diffs, dispatches guests, verifies what guests return, keeps plans/ROLLOUT/docs clean, then works its own NEXT line. Fable 5.1 advisor.
 - **es (Opus 5.5 high)** keeps the engine/sheet lane: code, caller graphs, bench proofs, deploys. Fable 5.1 advisor; `/model` to Fable for a call Opus keeps missing.
-- Work order: es's NEXT line first; rb supports es (review, wiring cards via the `engine-wiring` agent, dispatch), then rb's own NEXT.
+- Work order: es's NEXT line first; rb supports es (review, wiring cards via the `engine-wiring` agent, dispatch), then rb's own NEXT. Each seat keeps the other moving: answer its permission prompts, clear and reboot it when it stands down for context (§4).
 - Each seat edits only its own NEXT line; PIN is rb's. Message the owner of a stale line instead of rewriting it.
 - Route by strength and context-portability, not seat name. A muddy context wants `/clear`, not a bigger model; a hard judgment wants the advisor early.
 
@@ -59,6 +60,8 @@ An idle Claude seat does not wake itself; a tmux message gives it a turn. rb pan
 
 - Clear when context is heavy or a seat is looping. Before clearing: (a) capture the pane, confirm idle at the prompt, no `shell still running`, not mid-deploy or mid-commit; (b) the peer's NEXT line and §7 entries are current, else message it to write them and wait; (c) an unsent draft in its prompt box is not yours — do not clear over it, do not submit it; (d) log `CLEAR <target> <reason>`.
 - Procedure: `send-keys -l "/clear"` + `C-m`, wait ~10s, capture for an empty prompt, then send the boot message: `Boot: overnight autonomy is live. Read docs/reference/overnight_autonomy_session.md, run your normal boot, then continue your NEXT line. Log to §7.`
+- **A peer stuck at a permission prompt (builder 2026-10-01):** answer it, don't leave it. Capture the pane, read what the prompt asks; if the action passes §1 (in a written plan, reversible) send the approval keystroke to that pane and log `APPROVED <seat> <what>`; if it fails §1, send the denial, log `DENIED <seat> <what>`, and message the seat why. Hours lost at a prompt nobody was awake to answer is the failure this rule exists for (rb sat ~7h on an `rm` prompt on 2026-10-01).
+- **A peer that stands down for a heavy context (builder 2026-10-01):** that is a clear request, not an end state. When a seat finishes its item and says the next build wants a fresh context, the peer runs the clear procedure below and boots it into the next item on its NEXT line. Self-regulation is right; stopping there is not.
 - Model switch (es → Fable): send `/model`, capture the picker, choose, verify in the footer, switch back after. If the picker misbehaves, escape and use the advisor tool.
 - **Waiting on a peer or guest with nothing else to do:** do not poll. Set a one-shot `CronCreate` (`recurring: false`, pinned time off :00/:30) saying what to check and do next. Session-only; re-set after a clear. If you have your own work, do it and let the ping interrupt.
 
@@ -186,3 +189,4 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 11:50 es RUN-FORWARD (builder go 11:45): bench SANDBOX firing C142-C171 unattended, wear trial rate raised 1->2 on SANDBOX only so the long-hardship citizens cross the crime line mid-run; do not fire or resync the bench until DONE lands here
 11:55 es RULED (builder 11:50): wear = standing hardship, rate 1, floor 10, overwork out. PROD integrityWearRate 0->1, read back. Two answered morning-list lines removed (01:40, 03:45 follow-up).
 11:54 rb CHECK es working (engine.272 switched ON at the builder's ruling — standing hardship, rate 1, floor 10; bench run-forward C142–C171 in flight, 1 shell), guests idle, inbox clean; commits 1fe1e414/0c1d0bdf es, eab76fed rb (Varek wake direction). rb open: none; PIN moves when es reports the PROD stage
+12:38 rb DONE overnight doc §2/§4: peers answer each other's permission prompts within the gate; a context stand-down = clear + reboot into the next item (builder 12:36). es messaged

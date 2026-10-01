@@ -81,6 +81,7 @@ One call: `node scripts/modelFitRun.js --input <frozen file> --model <id> --prov
 
 ## Changelog
 
+- 2026-10-01 (research-build S512) — Builder restated the ask (Varek, Mags: citizens with large roles on better models). The newsroom write sweep ran Claude synchronously through OpenRouter this session, so the run can start on that route without waiting on direct credit.
 - 2026-09-21 (research-build) — Draft filed from builder direction; waiting on credit.
 - 2026-09-28 (S501, research-build) — Task 1 partially unblocked: freezing inputs doesn't need the
   Anthropic credit, only the Task 3 run does. Staged 6/9 (structured-seat ×3 council datawake packs,

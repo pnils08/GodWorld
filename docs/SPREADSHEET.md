@@ -54,6 +54,8 @@ Hospital income persistence (engine.218, landed 2026-09-14, codex-led) uses exis
 | **Civic_Office_Ledger** | 999* | ENGINE, SCRIPT, DASHBOARD | ENGINE | Council members, civic officials, factions |
 | **Initiative_Tracker** | 994* | ENGINE, SCRIPT, DASHBOARD | ENGINE | 5 civic initiatives with votes, status, timeline |
 | **City_Treasury** | 1 | ENGINE | ENGINE | engine.262 (S502) general-fund ledger, Baylight apart — OPENING / PREFUNDED / REVENUE / APPROPRIATION / RENEWAL rows, BalanceAfter |
+| **Judicial_Ledger** | 0+ | ENGINE | ENGINE | engine.254 Task 6 (2026-09-30, PROD @128) — one row per court case: 21 columns (CaseId J-C<cycle>-<POPID> … PriorStatus, SourceEventId, Counterparty); written direct by `persistJudicialLedger_` at Phase10-CyclePacket, read by `runJudicialLifecycle_` (Phase5-Judicial); one open row per POPID |
+| **Hospital_Ledger** (L–P) | — | ENGINE | ENGINE | engine.254 Task 6 appended IntakeType, SourceSystem, SourceEventId, TransferFromId, PriorStatus (cols 12–16; grid resized 11→16); this build writes P only, Task 8 stamps L–O |
 | **Civic_Sweep_Report** | 8 | ENGINE | ENGINE | Civic sweep results |
 | **WorldEvents_Ledger** | 239 | ENGINE, SCRIPT | ENGINE | Legacy world events |
 | **WorldEvents_V3_Ledger** | 183 | ENGINE, SCRIPT | ENGINE | V3 world events |

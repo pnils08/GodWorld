@@ -2,7 +2,7 @@
   "generated": "2026-10-01",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 180,
-  "functionsMapped": 1528,
+  "functionsMapped": 1534,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -848,7 +848,7 @@
       ],
       "readers": [
         "phase01-config/godWorldEngine2.js::logEngineError_",
-        "phase01-config/godWorldEngine2.js::runWorldCycle",
+        "phase01-config/godWorldEngine2.js::runWorldCycleLocked_",
         "phase01-config/godWorldEngine2.js::writeDigest_",
         "phase03-population/applyDemographicDrift.js::pushMissingConfigWarning_",
         "phase03-population/generateCrisisBuckets.js::generateCrisisBuckets_",
@@ -863,7 +863,7 @@
       ],
       "readers": [
         "phase01-config/godWorldEngine2.js::logEngineError_",
-        "phase01-config/godWorldEngine2.js::runWorldCycle"
+        "phase01-config/godWorldEngine2.js::runWorldCycleLocked_"
       ]
     },
     "phaseTimings": {
@@ -878,14 +878,14 @@
     "transitStorySignals": {
       "writers": [
         "phase01-config/godWorldEngine2.js::runCyclePhases_",
-        "phase01-config/godWorldEngine2.js::runWorldCycle"
+        "phase01-config/godWorldEngine2.js::runWorldCycleLocked_"
       ],
       "readers": []
     },
     "validationReport": {
       "writers": [
         "phase01-config/godWorldEngine2.js::runCyclePhases_",
-        "phase01-config/godWorldEngine2.js::runWorldCycle"
+        "phase01-config/godWorldEngine2.js::runWorldCycleLocked_"
       ],
       "readers": []
     },
@@ -895,7 +895,7 @@
       ],
       "readers": [
         "phase01-config/godWorldEngine2.js::runCyclePhases_",
-        "phase01-config/godWorldEngine2.js::runWorldCycle",
+        "phase01-config/godWorldEngine2.js::runWorldCycleLocked_",
         "phase05-citizens/bondEngine.js::ensureBondEngineData_",
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
         "phase06-analysis/economicRippleEngine.js::detectNewRipples_"
@@ -907,7 +907,7 @@
       ],
       "readers": [
         "phase01-config/godWorldEngine2.js::runCyclePhases_",
-        "phase01-config/godWorldEngine2.js::runWorldCycle",
+        "phase01-config/godWorldEngine2.js::runWorldCycleLocked_",
         "phase01-config/godWorldEngine2.js::writeDigest_",
         "phase04-events/buildCityEvents.js::buildCityEvents_",
         "phase07-evening-media/applyStorySeeds.js::applyStorySeeds_",
@@ -920,7 +920,7 @@
       ],
       "readers": [
         "phase01-config/godWorldEngine2.js::runCyclePhases_",
-        "phase01-config/godWorldEngine2.js::runWorldCycle",
+        "phase01-config/godWorldEngine2.js::runWorldCycleLocked_",
         "phase04-events/chaosCarsEngine.js::runChaosEvent_",
         "phase10-persistence/saveV3Seeds.js::saveV3Seeds_"
       ]
@@ -932,7 +932,7 @@
       ],
       "readers": [
         "phase01-config/godWorldEngine2.js::runCyclePhases_",
-        "phase01-config/godWorldEngine2.js::runWorldCycle",
+        "phase01-config/godWorldEngine2.js::runWorldCycleLocked_",
         "phase06-analysis/economicRippleEngine.js::detectNewRipples_",
         "phase07-evening-media/applyStorySeeds.js::applyStorySeeds_",
         "phase07-evening-media/mediaFeedbackEngine.js::analyzeWorldEventsCoverage_",
@@ -953,7 +953,7 @@
       ],
       "readers": [
         "phase01-config/godWorldEngine2.js::runCyclePhases_",
-        "phase01-config/godWorldEngine2.js::runWorldCycle",
+        "phase01-config/godWorldEngine2.js::runWorldCycleLocked_",
         "phase01-config/godWorldEngine2.js::writeDigest_",
         "phase07-evening-media/buildEveningFamous.js::buildEveningFamous_",
         "phase07-evening-media/buildEveningMedia.js::buildEveningMedia_",
@@ -968,7 +968,7 @@
       ],
       "readers": [
         "phase01-config/godWorldEngine2.js::runCyclePhases_",
-        "phase01-config/godWorldEngine2.js::runWorldCycle",
+        "phase01-config/godWorldEngine2.js::runWorldCycleLocked_",
         "phase02-world-state/applySeasonWeights.js::applySeasonalWeights_",
         "phase05-citizens/runRelationshipEngine.js::runRelationshipEngine_",
         "phase06-analysis/applyShockMonitor.js::applyShockMonitor_",
@@ -999,7 +999,7 @@
     "mediaIntake": {
       "writers": [],
       "readers": [
-        "phase01-config/godWorldEngine2.js::runWorldCycle",
+        "phase01-config/godWorldEngine2.js::runWorldCycleLocked_",
         "phase10-persistence/recordMediaLedger.js::recordMediaLedger_"
       ]
     },
@@ -1009,7 +1009,7 @@
       ],
       "readers": [
         "phase01-config/godWorldEngine2.js::runCyclePhases_",
-        "phase01-config/godWorldEngine2.js::runWorldCycle",
+        "phase01-config/godWorldEngine2.js::runWorldCycleLocked_",
         "phase01-config/godWorldEngine2.js::writeDigest_",
         "phase07-evening-media/cityEveningSystems.js::buildCityEveningSystems_",
         "phase09-digest/finalizeCycleState.js::snapshotEveningForCarryForward_",
@@ -1023,7 +1023,7 @@
       ],
       "readers": [
         "phase01-config/godWorldEngine2.js::runCyclePhases_",
-        "phase01-config/godWorldEngine2.js::runWorldCycle",
+        "phase01-config/godWorldEngine2.js::runWorldCycleLocked_",
         "phase03-population/deriveDemographicDrift.js::deriveDemographicDrift_",
         "phase04-events/worldEventsEngine.js::worldEventsEngine_",
         "phase07-evening-media/buildEveningFood.js::buildEveningFood_",
@@ -1039,7 +1039,7 @@
       ],
       "readers": [
         "phase01-config/godWorldEngine2.js::runCyclePhases_",
-        "phase01-config/godWorldEngine2.js::runWorldCycle",
+        "phase01-config/godWorldEngine2.js::runWorldCycleLocked_",
         "phase07-evening-media/buildContractSeeds.js::buildContractSeeds_",
         "utilities/rippleLedger.js::recordRipple_"
       ]
@@ -1076,7 +1076,7 @@
       ],
       "readers": [
         "phase01-config/godWorldEngine2.js::runCyclePhases_",
-        "phase01-config/godWorldEngine2.js::runWorldCycle",
+        "phase01-config/godWorldEngine2.js::runWorldCycleLocked_",
         "phase03-population/deriveDemographicDrift.js::deriveDemographicDrift_",
         "phase04-events/generationalEventsEngine.js::runGenerationalEngine_",
         "phase05-citizens/bondEngine.js::marryCitizens_",
@@ -1119,7 +1119,7 @@
       "writers": [],
       "readers": [
         "phase01-config/godWorldEngine2.js::runCyclePhases_",
-        "phase01-config/godWorldEngine2.js::runWorldCycle"
+        "phase01-config/godWorldEngine2.js::runWorldCycleLocked_"
       ]
     },
     "undockedFeedEntries": {
@@ -1128,7 +1128,7 @@
       ],
       "readers": [
         "phase01-config/godWorldEngine2.js::runCyclePhases_",
-        "phase01-config/godWorldEngine2.js::runWorldCycle",
+        "phase01-config/godWorldEngine2.js::runWorldCycleLocked_",
         "phase02-world-state/loadEventContentLedger.js::loadUndockedFeed_",
         "phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_",
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_"
@@ -4388,8 +4388,10 @@
         "phase01-config/engine94SheetContract.js::ensureEngine213Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine221Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine272Config_",
+        "phase01-config/engine94SheetContract.js::ensureEngine275Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine94SheetContract_",
         "phase01-config/engine94SheetContract.js::ensureEngine96Config_",
+        "phase01-config/godWorldEngine2.js::readFireGuardConfig_",
         "phase01-config/godWorldEngine2.js::verifyCycleCountPersisted_",
         "phase05-citizens/civicInitiativeEngine.js::manualRunVote",
         "phase05-citizens/processAdvancementIntake.js::getCurrentCycleFromConfig_",

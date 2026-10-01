@@ -107,6 +107,9 @@
 - **ensureEngine221Config_(ss)**
   Sheets: World_Config
 
+- **ensureEngine275Config_(ss)**
+  Sheets: World_Config
+
 - **ensureEngine272Config_(ss)**
   Sheets: World_Config
 
@@ -166,7 +169,18 @@
 - **emitPhaseTimings_(ctx)**
   Reads: S.cycleId, S.phaseTimings
 
-- **runWorldCycle()**
+- **fireGuardRefuse_(ss, cycleId, message)**
+
+- **readFireGuardConfig_(ss)**
+  Sheets: World_Config
+
+- **admitCycleFire_(ss, webOpts, nowMs)**
+
+- **closeCycleFire_(fire, threw)**
+
+- **runWorldCycle(opts)**
+
+- **runWorldCycleLocked_(ss, fire)**
   Reads: S.auditIssues, S.citizenEvents, S.cityEvents, S.contractSeeds, S.domainPresence, S.engineErrorCount, S.eveningSports, S.mediaEffects, S.mediaIntake, S.nightlife, S.nightlifeVolume, S.rippleEvents, S.storyHooks, S.storylineHealth, S.undockedFeedEntries
   Writes: S.transitStorySignals, S.validationReport
   RNG: ctx.rng / safeRand_(ctx)
@@ -4327,4 +4341,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1528
+**Functions mapped:** 1534

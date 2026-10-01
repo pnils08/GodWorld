@@ -16,10 +16,13 @@
  *        Execute as: Me · Who has access: Anyone
  *   3. Copy the Web app URL.
  *
- * FIRE:  curl -L "<url>?token=<token>"
+ * FIRE:  curl -L "<url>?token=<token>&expect=<cycleCount now on the sheet>"
  * Response: JSON {ok:true} on success; {ok:false, error:...} otherwise.
  *
- * Safety: token-gated; LockService refuses overlapping cycles; AIM-GUARD
+ * Safety: token-gated; expect= is mandatory (engine.275) — a repeated or retried
+ * call names a cycleCount the first run has already moved and is refused. The
+ * script lock and the double-fire window live in runWorldCycle itself, so they
+ * cover the sheet menu too. AIM-GUARD
  * still protects the target sheet exactly as on manual fires. The live
  * script carries this code but stays inert unless a deployment + token are
  * ever created there.
@@ -32,31 +35,25 @@ function doGet(e) {
       out.error = 'CYCLE_TRIGGER_TOKEN script property not set';
     } else if (!e || !e.parameter || String(e.parameter.token || '') !== token) {
       out.error = 'bad token';
+    } else if (!/^\d+$/.test(String(e.parameter.expect === undefined ? '' : e.parameter.expect))) {
+      out.error = 'engine.275: expect=<cycleCount> is required — read World_Config.cycleCount and send it';
     } else {
-      var lock = LockService.getScriptLock();
-      if (!lock.tryLock(5000)) {
-        out.error = 'a cycle is already running';
-      } else {
-        try {
-          var t0 = Date.now();
-          runWorldCycle();
-          out.ok = true;
-          out.ranMs = Date.now() - t0;
-          // engine.59 diag-emit: the fire response carries the bond engine's why
-          if (typeof ENGINE59_DIAG !== 'undefined' && ENGINE59_DIAG) out.diag59 = ENGINE59_DIAG;
-          // engine.61 diag-emit: the rate walk's why (persistence is invisible from outside)
-          if (typeof ENGINE61_DIAG !== 'undefined' && ENGINE61_DIAG) out.diag61 = ENGINE61_DIAG;
-          // engine.95 Task 2: per-phase timings (no GCP project → clasp logs unavailable)
-          if (typeof ENGINE95_TIMING_DIAG !== 'undefined' && ENGINE95_TIMING_DIAG) out.timing = ENGINE95_TIMING_DIAG;
-          // engine.187 part 4 diag-emit: which shock gate fired, and every number it read
-          if (typeof ENGINE187_DIAG !== 'undefined' && ENGINE187_DIAG) out.diag187 = ENGINE187_DIAG;
-          // engine.119 T3: carry-forward ghost skips / sheet recoveries (empty on a clean fire)
-          if (typeof CARRY_FORWARD_DIAG !== 'undefined' && CARRY_FORWARD_DIAG && CARRY_FORWARD_DIAG.length) out.carryForward = CARRY_FORWARD_DIAG;
-          if (typeof CITIZEN_ARCHIVE_DIAG !== 'undefined' && CITIZEN_ARCHIVE_DIAG && CITIZEN_ARCHIVE_DIAG.enabled) out.citizenArchive = CITIZEN_ARCHIVE_DIAG; // engine.90
-        } finally {
-          lock.releaseLock();
-        }
-      }
+      var t0 = Date.now();
+      // engine.275: the lock, the admission test and the close live in runWorldCycle.
+      runWorldCycle({ web: true, expect: Number(e.parameter.expect) });
+      out.ok = true;
+      out.ranMs = Date.now() - t0;
+      // engine.59 diag-emit: the fire response carries the bond engine's why
+      if (typeof ENGINE59_DIAG !== 'undefined' && ENGINE59_DIAG) out.diag59 = ENGINE59_DIAG;
+      // engine.61 diag-emit: the rate walk's why (persistence is invisible from outside)
+      if (typeof ENGINE61_DIAG !== 'undefined' && ENGINE61_DIAG) out.diag61 = ENGINE61_DIAG;
+      // engine.95 Task 2: per-phase timings (no GCP project → clasp logs unavailable)
+      if (typeof ENGINE95_TIMING_DIAG !== 'undefined' && ENGINE95_TIMING_DIAG) out.timing = ENGINE95_TIMING_DIAG;
+      // engine.187 part 4 diag-emit: which shock gate fired, and every number it read
+      if (typeof ENGINE187_DIAG !== 'undefined' && ENGINE187_DIAG) out.diag187 = ENGINE187_DIAG;
+      // engine.119 T3: carry-forward ghost skips / sheet recoveries (empty on a clean fire)
+      if (typeof CARRY_FORWARD_DIAG !== 'undefined' && CARRY_FORWARD_DIAG && CARRY_FORWARD_DIAG.length) out.carryForward = CARRY_FORWARD_DIAG;
+      if (typeof CITIZEN_ARCHIVE_DIAG !== 'undefined' && CITIZEN_ARCHIVE_DIAG && CITIZEN_ARCHIVE_DIAG.enabled) out.citizenArchive = CITIZEN_ARCHIVE_DIAG; // engine.90
     }
   } catch (err) {
     out.error = String((err && err.message) || err);

@@ -209,11 +209,150 @@ function emitPhaseTimings_(ctx) {
   Logger.log('PHASE_TIMING_END');
 }
 
-function runWorldCycle() {
-  var ss, ctx;
+// ============================================================================
+// engine.275 — A CYCLE CANNOT FIRE TWICE
+// ----------------------------------------------------------------------------
+// One trigger call ran two Cycles on the bench (2026-10-01, C157-C158), and the
+// menu path held no lock at all. Every caller now passes through runWorldCycle:
+//   1. the script lock — an overlapping fire is refused;
+//   2. admission — read straight from the sheet and from this script's own record
+//      (FIRE_ADMISSION_JSON, epoch ms), BEFORE any contract seed or world write:
+//      a fire inside fireGuardMinutes of the last one is refused; a web fire must
+//      say which cycleCount it expects;
+//   3. close — the record is marked done / failed / aborted, the sheet is flushed,
+//      then the lock is released.
+// A refused fire advances nothing. Deliberate re-fire inside the window: set script
+// property FIRE_GUARD_OVERRIDE to the Cycle number about to run (one shot).
+// ============================================================================
+var FIRE_GUARD_DEFAULT_MINUTES = 60;        // also the ENGINE275_CONFIG_SEEDS seed
+var FIRE_ADMISSION_PROP = 'FIRE_ADMISSION_JSON';
+var FIRE_OVERRIDE_PROP = 'FIRE_GUARD_OVERRIDE';
+
+function fireGuardRefuse_(ss, cycleId, message) {
+  var err = new Error(message);
+  try { logEngineError_({ ss: ss, summary: { cycleId: cycleId } }, 'Phase1-FireGuard', err); } catch (logErr) { /* best effort */ }
+  throw err;
+}
+
+// World_Config read directly (never through loadConfig_, which parseFloats strings and
+// is wrapped — an unreadable config must stop the fire, not run on as Cycle 1).
+function readFireGuardConfig_(ss) {
+  var sheet = ss.getSheetByName('World_Config');
+  if (!sheet) fireGuardRefuse_(ss, null, 'engine.275: World_Config not found — refusing to fire');
+  var values = sheet.getDataRange().getValues();
+  var counts = [], guards = [];
+  for (var r = 1; r < values.length; r++) {
+    var k = (values[r][0] || '').toString().trim();
+    if (k === 'cycleCount') counts.push(values[r][1]);
+    if (k === 'fireGuardMinutes') guards.push(values[r][1]);
+  }
+  function num(raw) {
+    if (raw === '' || raw === null || raw === undefined || typeof raw === 'boolean' || raw instanceof Date) return NaN;
+    return Number(raw);
+  }
+  if (counts.length !== 1) fireGuardRefuse_(ss, null, 'engine.275: World_Config.cycleCount appears ' + counts.length + ' times — refusing to fire');
+  var cycleCount = num(counts[0]);
+  if (!isFinite(cycleCount) || cycleCount < 0 || Math.floor(cycleCount) !== cycleCount) {
+    fireGuardRefuse_(ss, null, 'engine.275: World_Config.cycleCount is not a whole number (' + String(counts[0]) + ') — refusing to fire');
+  }
+  var guardMinutes = FIRE_GUARD_DEFAULT_MINUTES;   // key absent: the seed value; the contract seeds it after admission
+  if (guards.length > 1) fireGuardRefuse_(ss, cycleCount + 1, 'engine.275: World_Config.fireGuardMinutes appears ' + guards.length + ' times — refusing to fire');
+  if (guards.length === 1) {
+    guardMinutes = num(guards[0]);
+    if (!isFinite(guardMinutes) || guardMinutes < 0) {
+      fireGuardRefuse_(ss, cycleCount + 1, 'engine.275: World_Config.fireGuardMinutes is not a number >= 0 (' + String(guards[0]) + ') — refusing to fire');
+    }
+  }
+  return { cycleCount: cycleCount, guardMinutes: guardMinutes };
+}
+
+// Admit or refuse this fire. Returns the admission record; throws to refuse.
+function admitCycleFire_(ss, webOpts, nowMs) {
+  var cfg = readFireGuardConfig_(ss);
+  var target = cfg.cycleCount + 1;   // the Cycle this fire would produce
+
+  if (webOpts) {
+    if (typeof webOpts.expect !== 'number' || !isFinite(webOpts.expect)) {
+      fireGuardRefuse_(ss, target, 'engine.275: a web fire must carry expect=<cycleCount> (cycleCount is ' + cfg.cycleCount + ') — refusing');
+    }
+    if (webOpts.expect !== cfg.cycleCount) {
+      fireGuardRefuse_(ss, target, 'engine.275: cycleCount is ' + cfg.cycleCount + ', caller expected ' + webOpts.expect + ' — refusing a repeated or stale fire');
+    }
+  }
+
+  var props = PropertiesService.getScriptProperties();
+  var raw = props.getProperty(FIRE_ADMISSION_PROP);
+  var prior = null;
+  if (raw) {
+    try { prior = JSON.parse(raw); } catch (parseErr) { prior = null; }
+    if (!prior || typeof prior !== 'object' || !isFinite(Number(prior.startedMs)) || !isFinite(Number(prior.cycle))) {
+      fireGuardRefuse_(ss, target, 'engine.275: the fire record (script property ' + FIRE_ADMISSION_PROP + ') is unreadable — refusing to fire. ' +
+        'Inspect it; to fire deliberately, delete that property.');
+    }
+  }
+
+  var notes = [];
+  if (prior && prior.state !== 'aborted' && cfg.guardMinutes > 0) {
+    var ageMin = (nowMs - Number(prior.startedMs)) / 60000;
+    if (ageMin < cfg.guardMinutes) {
+      var override = props.getProperty(FIRE_OVERRIDE_PROP);
+      if (override !== null && String(override).trim() === String(target)) {
+        props.deleteProperty(FIRE_OVERRIDE_PROP);
+        notes.push('one-shot override consumed: Cycle ' + target + ' fired ' + Math.max(0, Math.round(ageMin)) + ' min after Cycle ' + prior.cycle + ' started');
+      } else {
+        fireGuardRefuse_(ss, target, 'engine.275: Cycle ' + prior.cycle + ' started ' + Math.max(0, Math.round(ageMin)) + ' min ago — refusing a second fire inside ' +
+          cfg.guardMinutes + ' min. If this re-fire is deliberate, set script property ' + FIRE_OVERRIDE_PROP + '=' + target + ' and fire again.');
+      }
+    }
+  }
+  if (prior && prior.state === 'running') notes.push('the previous fire (Cycle ' + prior.cycle + ') never recorded completion');
+  if (prior && prior.state !== 'aborted' && Number(prior.cycle) === target) notes.push('Cycle ' + target + ' was admitted before and cycleCount did not move');
+
+  var admission = { cycle: target, startedMs: nowMs, state: 'running' };
+  props.setProperty(FIRE_ADMISSION_PROP, JSON.stringify(admission));
+  for (var n = 0; n < notes.length; n++) {
+    try { logEngineError_({ ss: ss, summary: { cycleId: target } }, 'Phase1-FireGuard', new Error('engine.275: ' + notes[n])); } catch (noteErr) { /* best effort */ }
+  }
+  admission.guardMinutes = cfg.guardMinutes;
+  return admission;
+}
+
+// Mark the record. Reached Phase1-AdvanceTime -> done (or failed if the body threw);
+// stopped before it -> aborted, which the time test ignores (nothing advanced).
+function closeCycleFire_(fire, threw) {
+  if (!fire || !fire.admission) return;
+  var advanced = !!(fire.ctx && fire.ctx.summary && Number(fire.ctx.summary.cycleId) === fire.admission.cycle);
+  var record = { cycle: fire.admission.cycle, startedMs: fire.admission.startedMs,
+    state: advanced ? (threw ? 'failed' : 'done') : 'aborted', finishedMs: Date.now() };
+  PropertiesService.getScriptProperties().setProperty(FIRE_ADMISSION_PROP, JSON.stringify(record));
+}
+
+// The one production entry: the sheet menu, the web trigger, any installed trigger.
+// opts is read only when the web trigger built it ({ web: true, expect: n }) — a menu
+// or trigger event object is ignored.
+function runWorldCycle(opts) {
+  var lock = LockService.getScriptLock();
+  if (!lock.tryLock(5000)) throw new Error('engine.275: a Cycle is already running — refusing an overlapping fire');
+  var fire = { admission: null, ctx: null };
+  var threw = false;
+  try {
+    var ss = openSimSpreadsheet_();  // v2.14: Use configured spreadsheet ID
+    fire.admission = admitCycleFire_(ss, (opts && opts.web === true) ? opts : null, Date.now());
+    runWorldCycleLocked_(ss, fire);
+  } catch (e) {
+    threw = true;
+    throw e;
+  } finally {
+    try { closeCycleFire_(fire, threw); } catch (closeErr) { Logger.log('engine.275: could not close the fire record: ' + closeErr.message); }
+    try { SpreadsheetApp.flush(); } catch (flushErr) { Logger.log('engine.275: flush before lock release failed: ' + flushErr.message); }
+    lock.releaseLock();
+  }
+}
+
+function runWorldCycleLocked_(ss, fire) {
+  var ctx;
 
   try {
-    ss = openSimSpreadsheet_();  // v2.14: Use configured spreadsheet ID
     // engine.94 code-carried migration: production receives code, not sandbox
     // Sheet mutations. Seed/verify the required rows and headers before cache
     // creation, time advance, ledger initialization, or any other Cycle write.
@@ -231,8 +370,9 @@ function runWorldCycle() {
     ensureEngine192Config_(ss);  // engine.192 school drift - step, pull, grad lag, initiative funding %, same self-arm contract
     ensureEngine221Config_(ss);  // engine.221 econMoodInertia - the city economic mood's memory, same self-arm contract
     ensureEngine272Config_(ss);  // engine.272 integrity wear rate + floor (seeded off), same self-arm contract
+    ensureEngine275Config_(ss);  // engine.275 fireGuardMinutes — the double-fire window, same self-arm contract
   } catch (e) {
-    Logger.log('FATAL: Cannot open or prepare spreadsheet: ' + e.message);
+    Logger.log('FATAL: Cannot prepare spreadsheet: ' + e.message);
     throw e; // Cannot continue without spreadsheet
   }
 
@@ -254,6 +394,7 @@ function runWorldCycle() {
       auditIssues: []
     }
   };
+  if (fire) fire.ctx = ctx;  // engine.275: the wrapper reads summary.cycleId to close the fire record
 
   // v2.12: Initialize mode flags for replay/dry-run support.
   // Seeded RNG moved to Phase1-SeedRng (after AdvanceTime) — initializing here

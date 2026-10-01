@@ -247,6 +247,24 @@ function ensureEngine221Config_(ss) {
   return { configSeeded: plan.additions.length };
 }
 
+var ENGINE275_CONFIG_SEEDS = [
+  ['fireGuardMinutes', 60, 'engine.275 a Cycle is refused if the last one STARTED fewer than this many minutes ago (a Cycle cannot fire twice). Live stays 60. 0 = no time test — bench only, where back-to-back fires are deliberate and the web trigger\'s expect= guards repeats', 0, 1440, false]
+];
+
+function ensureEngine275Config_(ss) {
+  if (!ss) throw new Error('engine.275 config: spreadsheet required');
+  var configSheet = ss.getSheetByName('World_Config');
+  if (!configSheet) throw new Error('engine.275 config: World_Config not found');
+  var plan = inspectEngine94Config_(configSheet.getDataRange().getValues(), ENGINE275_CONFIG_SEEDS);
+  if (plan.additions.length > 0) {
+    configSheet.getRange(configSheet.getLastRow() + 1, 1, plan.additions.length, 3).setValues(plan.additions);
+    var verified = inspectEngine94Config_(configSheet.getDataRange().getValues(), ENGINE275_CONFIG_SEEDS);
+    if (verified.additions.length > 0) throw new Error('engine.275 config: post-write verification failed');
+  }
+  Logger.log('engine.275 config ready: seeded ' + plan.additions.length + ' row(s)');
+  return { configSeeded: plan.additions.length };
+}
+
 var ENGINE272_CONFIG_SEEDS = [
   ['integrityWearRate', 0, 'engine.272 integrity points a standing hardship (debt, rent, hood, no work) wears off a citizen\'s base each Cycle it holds, regained at the same rate when it lifts. 0 = off (seeded off; the builder sets it)', 0, 10, false],
   ['integrityWearFloor', 10, 'engine.272 the lowest integrity that wear alone can take a citizen (an event may still go lower). Under 20 a worn citizen becomes crime-reachable; 20-39 reads slippery; 40+ changes nothing visible', 0, 100, false]

@@ -48,7 +48,7 @@ Deterministic (persona-fact contradictions from `persona-facts.json`, Mags word 
 | deepseek-chat (off) | 2.0 | 4.0 | 3.0 | clean | 1/2 | 921, 494 | 0.004 |
 | deepseek-chat (on) | 2.0 | 3.0 | 2.5 | clean | 0/2 (under) | 721, 585 | 0.004 |
 
-Fact hits, each read: Sonnet 4.6's hit (both arms, C105) is a `2035 parade` in Hal's memory that is in no digest and in no sports canon on disk — invented. Opus's and Fable's "engine vocabulary" hits are the word `ledger` used as a business ledger / an editor's idiom (the C108 digest itself says ledger) — the pattern over-matches; not a fault.
+Fact hits, each read — **none is a fault.** Sonnet 4.6's hit (both arms, C105) is Hal's `2035 parade`: the C105 digest carries it spelled out ("the two thousand thirty-five parade … confetti stick to the streetcar rails"), it is published canon (C94 interview, the A's last parade), and sports-clock years are canon by house rule — the digit pattern missed the spelled-out form and over-matched the rendering. Opus's and Fable's "engine vocabulary" hits are the word `ledger` as a business ledger / an editor's idiom (the C108 digest itself says ledger). Both patterns in `persona-facts.json` over-match; the Facts column above is the raw count, the reading is here.
 
 ### Elias Varek interview (one constructed prompt, n=1)
 
@@ -96,14 +96,14 @@ No persona-fact hits on any Elias row.
 
 ## 4. Scorer quality
 
-- **codex** scored with evidence: every reason names a concrete fault. Three spot-checked against the files and held — X opens with `[Leaning forward slightly, hands steepled]` in a spoken-only transcript; N says "Free agency's opening" when the question says free agency is behind him; V's Tobias/Ramas pairing is not in the C108 digest (Tobias is Treary's, not Ramas's).
+- **codex** scored with evidence: every reason names a concrete fault. Three spot-checked against the files: two held — X opens with `[Leaning forward slightly, hands steepled]` in a spoken-only transcript; N says "Free agency's opening" when the question says free agency is behind him. The third did not — V never names Tobias, so "turns Tobias into Ramas's partner" is not in the output as written. And its H and L reasons call the 2035 parade "a forbidden real-world year": wrong on house rules (sports-clock years are canon) and the year is in the digest. Codex's grounding calls are mostly right and sometimes not; treat its reasons as leads, not verdicts.
 - **agy** scored on length: ten identical "Excellent length and editor's voice" reasons, every under-length output 3, and Gemini's C105 narration — which codex found inventing a venue, a purchase and party attendance — a 5. Its scores discriminate length, not grounding. Reported, not silently down-weighted: the means above include it.
 
 ## 5. Decision rule applied
 
 Plan rule: a stronger model earns a seat only if it beats the current model by ≥1 on blind score AND passes deterministic checks at least as often, at a cost the builder accepts; ties to the cheaper model; reasoning-on only if it beats off.
 
-- **Mags narration → `adopt` Sonnet 5.5, provisional on the builder's read.** +1.5 (codex) / +1.0 (agy) over the Sonnet 4.6 production arm; the only Claude row clean on facts and inside the word range both weeks; per-token cheaper than 4.6 ($2/$10 vs $3/$15), $0.087 vs $0.067 per two narrations because its mandatory reasoning adds ~800 tokens a call. One Saturday a week: about $0.04 a narration either way.
+- **Mags narration → `adopt` Sonnet 5.5, provisional on the builder's read.** +1.5 (codex) / +1.0 (agy) over the Sonnet 4.6 production arm; inside the word range both weeks (the production arm is one of two) and clean on facts, as every Claude row is once the hits are read; per-token cheaper than 4.6 ($2/$10 vs $3/$15), $0.087 vs $0.067 per two narrations because its mandatory reasoning adds ~800 tokens a call. One Saturday a week: about $0.04 a narration either way.
 - **Mags → `take-nothing` on Opus 5.5 and Fable 5.1.** No blind gain over Sonnet 5.5, both over the word range both weeks, 2× and 5× the cost.
 - **Mags → the cheap floor fails.** DeepSeek is bottom on codex both weeks and under length three of four; Gemini splits the scorers exactly along the length-vs-grounding line. Mags's narration stays on a Claude model — a negative result worth keeping.
 - **Reasoning:** moot for 5.5 (mandatory). On Sonnet 4.6 it gained a little on Mags and lost on Elias, and it needs a capped budget or it truncates.
@@ -111,7 +111,7 @@ Plan rule: a stronger model earns a seat only if it beats the current model by �
 
 ## 6. If the builder confirms the Mags adopt
 
-One-line change, not made tonight: `cron-saturday-run.js:604` default `claude-sonnet-4-6` → `anthropic/claude-sonnet-5.5` (the OpenRouter route passes the slug through; the `anthropicSlug` hyphen rewrite at `:639` only handles `4.x` and would need `(\d)\.(\d)` for the direct-key fallback). Next Saturday fire is 2026-10-03; the change can land before it.
+One-line change, not made tonight: `cron-saturday-run.js:604` default `claude-sonnet-4-6` → `anthropic/claude-sonnet-5.5` (the OpenRouter route passes the slug through; the `anthropicSlug` hyphen rewrite at `:639` only handles `4.x` and would need `(\d)\.(\d)` for the direct-key fallback). **Before flipping it:** this test called OpenRouter's chat/completions endpoint; production narration goes through the Anthropic SDK against `openrouter.ai/api` (messages endpoint). One call through the production route with `--narrator-model anthropic/claude-sonnet-5.5` proves the slug there. Next Saturday fire is 2026-10-03; the change can land before it.
 
 ## 7. Scorer files, verbatim
 
@@ -184,3 +184,4 @@ Top 3 Mags: C, G, H. Top 2 Elias: N, R. Worst 3: A, B, F.
 ## Changelog
 
 - 2026-10-01 (research-build) — Created from the overnight run; two scorer files folded in; inbox copies removed.
+- 2026-10-01 (research-build, later) — Fact-hit reading corrected: the 2035 parade is in the C105 digest (spelled out) and is published canon; codex's V claim did not verify. Production-route proof added to §6.

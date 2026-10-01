@@ -780,6 +780,12 @@ const TEMPORAL_CUE_BEFORE = /(?:\b(?:in|by|since|early|late|mid|this|last|next|t
 const MONTH_IDIOM_AFTER = /^(?:-(?:ready|bound|tested|hardened|caliber|worthy)|\s+(?:baseball|ball|push|run|magic|glory|heroics|drama|chase|stage|dreams?|swoon|slump|surge|heat))\b/i;
 const MONTH_IDIOM_BEFORE = /\b(?:into|toward|towards|reaching|reached|reach|play(?:ing|ed)?\s+(?:into|in|through)|postseason|midsummer|all-star)\s+$/i;
 
+// Builder 2026-09-30: loose month talk is fine — citizens, reflections and sports
+// memory may say "that one October the A's were on fire". What stays flagged is a
+// month that DATES or DRIVES something (day numbers, "in/by/until October", "week
+// of April"). A month introduced as a remembered one is exempt.
+const MONTH_MEMORY_BEFORE = /\b(?:that|those|every|each|remember(?:ed)?|recall(?:ed)?)\s+(?:(?:one|particular|cold|hot|long|wet|dry|strange|famous|wild)\s+)*$/i;
+
 function checkInWorldLeaks(editionText) {
   const issues = [];
   const editorial = editionText.split(/ARTICLE TABLE/i)[0] || editionText;
@@ -798,6 +804,7 @@ function checkInWorldLeaks(editionText) {
   const isMonthIdiom = (index, m) => {
     const before = editorial.substring(Math.max(0, index - 24), index);
     const after = editorial.substring(index + m.length, index + m.length + 12);
+    if (MONTH_MEMORY_BEFORE.test(before) && !/^\s+\d{1,2}(?:st|nd|rd|th)?\b/.test(after)) return true;
     return MONTH_IDIOM_AFTER.test(after) || MONTH_IDIOM_BEFORE.test(before);
   };
 

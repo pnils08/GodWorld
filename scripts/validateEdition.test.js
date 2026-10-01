@@ -260,6 +260,13 @@ console.log('\nTest: ES-1 governance.42 gates (G-W4 / G-W5 / G-W7)');
     helper.checkInWorldLeaks('October-ready composure, a bat that plays into October.').filter(i => i.check === TIME).length, 0);
   assert('G-W7 still flags a real calendar date ("October 14")',
     helper.checkInWorldLeaks('The vote is set for October 14, a hard deadline.').some(i => i.check === TIME));
+  // Builder 2026-09-30 — loose remembered-month talk passes; dating/driving months still flagged.
+  assertEqual('loose "that one October" memory is not flagged',
+    helper.checkInWorldLeaks('"Remember that one October the A\'s were on fire," she said.').filter(i => i.check === TIME).length, 0);
+  assert('"in October the council votes" (month drives the story) still flagged',
+    helper.checkInWorldLeaks('In October the council votes on the fund.').some(i => i.check === TIME));
+  assert('"that October 14" (day number) still flagged',
+    helper.checkInWorldLeaks('Since that October 14 meeting, nothing moved.').some(i => i.check === TIME));
 }
 
 console.log(`\n${passed} passed, ${failed} failed`);

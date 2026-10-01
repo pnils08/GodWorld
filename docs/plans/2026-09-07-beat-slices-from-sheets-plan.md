@@ -385,6 +385,7 @@ Status after Revision 1: mechanism spec complete pending the builder's three rul
 ## Changelog
 
 - 2026-10-01 (research-build S515) — §Design: five sourcing modes + per-reporter proposal + build spec; §Design: Varek as the Civis node (node-wake spec, write authority open); 13:31 Varek direction captured.
+- 2026-10-01 (research-build S515) — Builder 16:51: journal publishes as Civis's own publication (A), business desk quotes it; offices interviews confirmed allowed (the abstain is a code gap, not a rule).
 - 2026-10-01 (research-build S515) — §Design Revision 2: builder 16:34 — Varek audits the system from inside the world; the Civis Systems Journal (engine_audit → Civis finding → published entry) replaces the node move; write authority closed (none); codex builds, kimi reviews.
 - 2026-10-01 (research-build S515) — §Design Revision 1: codex review folded (2 BLOCK, 6 FIX, 1 NOTE) — Civis move recorded not gated, `office-record` source type, pools fixed before W1, exact street matcher, node replay key, model route decision.
 

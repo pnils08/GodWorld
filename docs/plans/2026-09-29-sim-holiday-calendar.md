@@ -182,7 +182,7 @@ Everything else in today's table leaves it: the real-world political and heritag
 
 - "I'd have to be able to review what this list all consists of … it's a sim game and don't want to get overly invested in every little 'holiday'." The held markers, Hanukkah, the faith list and world-born names go to the builder as **one short reviewable list with a recommended default for each**, not separate questions.
 
-**Builder ruling, 2026-09-30 20:18.** "The 5 on hold I can see marking a season change since we have weather aligned, school likely has some sim value … otherwise this seems all good." → **kept:** `SpringEquinox`, `SummerSolstice`, `FallEquinox` (season-change markers), `BackToSchool`; **dropped:** `Hanukkah`; **faith `HOLY_DAYS`:** Easter and Christmas only, every other real-world observance removed; **world-born:** Cycle-79 week (position 27) accepted in principle, name still the builder's. Wave 4 (engine-sheet): table edit + Hanukkah branch deletion + faith table trim.
+**Builder ruling, 2026-09-30 20:18.** "The 5 on hold I can see marking a season change since we have weather aligned, school likely has some sim value … otherwise this seems all good." → **kept:** `SpringEquinox`, `SummerSolstice`, `FallEquinox` (season-change markers), `BackToSchool`; **dropped:** `Hanukkah`; **faith `HOLY_DAYS`:** Easter and Christmas only, every other real-world observance removed; **world-born:** Cycle-79 week (position 27) accepted in principle, name still the builder's. Wave 4 (engine-sheet): table edit + Hanukkah branch deletion + faith table trim — `88d56aa9`, bench @157 C128 ok, LIVE PROD @131.
 
 ## Changelog
 

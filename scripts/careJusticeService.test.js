@@ -286,6 +286,14 @@ if (require.main === module) {
     const demand = service.runCareJusticeDemand_(c);
     check('7b resident index matches demand tracked counts in every hood',
       HOODS.every(hood => (index[hood] || []).length === demand.hoods[hood].trackedResidents));
+    check('7b ambulance and OARI named-call fields follow admissions and deployed eligibility',
+      HOODS.every(hood => {
+        const row = demand.hoods[hood];
+        return Number.isInteger(row.hospitalIntakes) && row.hospitalIntakes >= 0 &&
+          Number.isInteger(row.oariEligible) && row.oariEligible >= 0 &&
+          (row.oariDeployed || row.oariEligible === 0);
+      }) && demand.hoods.Fruitvale.oariEligible > 0 &&
+      demand.hoods.SYNTHETIC_HOOD_01.oariEligible === 0);
     const noStatus = ctx(); noStatus.ledger.headers.splice(2, 1);
     const noPop = ctx(); noPop.ledger.headers.splice(0, 1);
     check('7b missing Status or POPID header throws by name',

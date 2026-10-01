@@ -202,7 +202,7 @@ var VEHICLE_CONFIGS = [
   },
   {
     name: 'ambulance', displayName: 'Ambulance',
-    scopes: ['citizen', 'neighborhood'], baseFrequencyWeight: 0.9,
+    scopes: ['citizen', 'neighborhood'], baseFrequencyWeight: 0.9, namedCallsField: 'hospitalIntakes',
     textureOutcomes: [
       { outcome: 'minor_injury',       weight: 0.55, severity: 'low',  lifeHistoryTag: 'Health',       role: 'victim' },
       { outcome: 'medical_emergency',  weight: 0.25, severity: 'high', lifeHistoryTag: 'Critical',     role: 'victim',
@@ -217,7 +217,7 @@ var VEHICLE_CONFIGS = [
   {
     name: 'oari_van', displayName: 'OARI response van',
     initiativeId: 'INIT-002',
-    scopes: ['citizen', 'neighborhood'], baseFrequencyWeight: 1.0,
+    scopes: ['citizen', 'neighborhood'], baseFrequencyWeight: 1.0, namedCallsField: 'oariEligible',
     textureOutcomes: [
       { outcome: 'welfare_check',         weight: 0.50, severity: 'low',  lifeHistoryTag: 'Recovering', role: 'victim' },
       { outcome: 'deescalated',           weight: 0.25, severity: 'high', lifeHistoryTag: 'Stabilized', role: 'victim', coverageContribution: true,

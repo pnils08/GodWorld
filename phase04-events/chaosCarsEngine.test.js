@@ -318,7 +318,7 @@ console.log('\nTest 7: neighborhood residual persistence (resolveChaosNeighborho
   assert('C: multi-column held across cycles (B6 fix)', 'Sentiment' in c.Fruitvale && 'CrimeIndex' in c.Fruitvale);
 }
 
-// ── Task 7b: demand-named cop contacts ───────────────────────────────────────
+// ── Task 7b: demand-named vehicle contacts ───────────────────────────────────
 console.log('\nTask 7b: named calls and loop reweight');
 {
   const car = cfg.loadChaosCarsConfig_().find(v => v.name === 'cop_car');
@@ -334,24 +334,51 @@ console.log('\nTask 7b: named calls and loop reweight');
     try { fn(); } catch (e) { return e.message.includes(part); }
     return false;
   }
-  assert('7b only cop car is mapped; its loop weight is 0.6 and citizen scope is removed',
-    car.namedCallsField === 'charges' && !ambulance.namedCallsField && !oari.namedCallsField &&
-    Math.abs(eng.chaosLoopWeight_(car) - 0.6) < 1e-12 &&
-    JSON.stringify(eng.chaosLoopScopes_(car)) === JSON.stringify(['neighborhood']) &&
-    eng.chaosLoopScopes_(ambulance).includes('citizen'));
-  let copCitizenLoop = 0, otherDemandCitizenLoop = 0;
+  const mapped = [car, ambulance, oari];
+  assert('7b all three demand vehicles are mapped with neighborhood-only loop weights',
+    car.namedCallsField === 'charges' &&
+    ambulance.namedCallsField === 'hospitalIntakes' &&
+    oari.namedCallsField === 'oariEligible' &&
+    mapped.every(v => JSON.stringify(eng.chaosLoopScopes_(v)) === JSON.stringify(['neighborhood'])) &&
+    [0.6, 0.45, 0.5].every((weight, i) => Math.abs(eng.chaosLoopWeight_(mapped[i]) - weight) < 1e-12));
+  let mappedCitizenLoop = 0;
   for (let seed = 1; seed <= 100; seed++) {
     reset();
     const c = makeCtx(seed);
     c.summary.careJusticeDemand.exposureDial = 0;
     eng.runChaosCarsEngine_(c);
-    copCitizenLoop += chaosRows.filter(r => r.vehicleType === 'cop_car' && r.targetScope === 'citizen').length;
-    otherDemandCitizenLoop += chaosRows.filter(r =>
-      (r.vehicleType === 'ambulance' || r.vehicleType === 'oari_van') && r.targetScope === 'citizen').length;
+    mappedCitizenLoop += chaosRows.filter(r =>
+      mapped.some(v => v.name === r.vehicleType) && r.targetScope === 'citizen').length;
   }
-  assert('7b mapped cop never uses citizen loop; ambulance and OARI still do',
-    copCitizenLoop === 0 && otherDemandCitizenLoop > 0,
-    JSON.stringify({ copCitizenLoop, otherDemandCitizenLoop }));
+  assert('7b no mapped vehicle uses the citizen loop when named probability is zero',
+    mappedCitizenLoop === 0, String(mappedCitizenLoop));
+
+  reset();
+  const scoped = passCtx(2);
+  scoped.ledger.rows.slice(20).forEach(r => { r[4] = 'Temescal'; });
+  scoped.summary.careJusticeDemand = makeDemandFixture_('Fruitvale', scoped.ledger);
+  scoped.summary.careJusticeDemand.exposureDial = 50; // 20 / 1000 in each hood -> p = 1
+  const fruitvale = scoped.summary.careJusticeDemand.hoods.Fruitvale;
+  const temescal = scoped.summary.careJusticeDemand.hoods.Temescal;
+  fruitvale.hospitalIntakes = 1; fruitvale.oariEligible = 1;
+  temescal.hospitalIntakes = 1; temescal.oariEligible = 0;
+  temescal.oariDeployed = false;
+  scoped.rng = () => 0.5;
+  const safeAmbulance = { ...ambulance, textureOutcomes: [ambulance.textureOutcomes[0]] };
+  const safeOari = { ...oari, textureOutcomes: [oari.textureOutcomes[0]] };
+  eng.runChaosNamedPass_(scoped, scoped.rng, 100, [safeAmbulance, safeOari], []);
+  const hoodByPop = Object.fromEntries(scoped.ledger.rows.map(r => [r[0], r[4]]));
+  const ambulanceRows = chaosRows.filter(r => r.vehicleType === 'ambulance');
+  const oariRows = chaosRows.filter(r => r.vehicleType === 'oari_van');
+  assert('7b ambulance pass names only residents in hoods with hospital admissions',
+    ambulanceRows.length === 2 &&
+    new Set(ambulanceRows.map(r => hoodByPop[r.targetId])).size === 2 &&
+    ambulanceRows.every(r => scoped.summary.careJusticeDemand.hoods[hoodByPop[r.targetId]].hospitalIntakes > 0));
+  assert('7b OARI pass names only residents in deployed hoods with eligible calls',
+    oariRows.length === 1 && oariRows.every(r => {
+      const hood = scoped.summary.careJusticeDemand.hoods[hoodByPop[r.targetId]];
+      return hood.oariDeployed && hood.oariEligible > 0;
+    }));
 
   // 5,000 independent seeded pass runs; contacts are tested separately from outcomes.
   let contacts = 0, arrests = 0, receipts = 0;
@@ -480,17 +507,25 @@ console.log('\nTask 7b: named calls and loop reweight');
   const validator = require('../scripts/chaosCarsFrequencyCheck.js');
   const capRows = high.rows.map(r => ({ CycleId: r.cycleId, VehicleType: r.vehicleType,
     TargetScope: r.targetScope }));
-  capRows.push({ CycleId: 99, VehicleType: 'cop_car', TargetScope: 'citizen' });
+  for (const vehicle of mapped) capRows.push({ CycleId: 99, VehicleType: vehicle.name, TargetScope: 'citizen' });
   capRows.push({ CycleId: 99, VehicleType: 'container_ship', TargetScope: 'port' });
-  capRows.push({ CycleId: 100, VehicleType: 'cop_car', TargetScope: 'citizen' });
-  capRows.push({ CycleId: 50, VehicleType: 'cop_car', TargetScope: 'citizen' });
+  for (const vehicle of mapped) {
+    capRows.push({ CycleId: 100, VehicleType: vehicle.name, TargetScope: 'citizen' });
+    capRows.push({ CycleId: 50, VehicleType: vehicle.name, TargetScope: 'citizen' });
+  }
   const counted = validator.loopCounts(capRows, cfg.loadChaosCarsConfig_(), 99);
   let cutoverRequired = false;
   try { validator.loopCounts(capRows, cfg.loadChaosCarsConfig_()); } catch (e) { cutoverRequired = /named-since/.test(e.message); }
+  // per-vehicle cutovers: an ambulance citizen row before its cutover still counts as a loop draw
+  const perVehicle = validator.loopCounts([{ CycleId: 120, VehicleType: 'ambulance', TargetScope: 'citizen' },
+    { CycleId: 130, VehicleType: 'ambulance', TargetScope: 'citizen' }], cfg.loadChaosCarsConfig_(),
+    { cop_car: 110, ambulance: 125, oari_van: 125 });
+  assert('7b validator per-vehicle cutover: pre-cutover ambulance row counts, post-cutover excluded',
+    perVehicle[120] === 1 && perVehicle[130] === 0);
   assert('7b forced 3 and 15 attempts produce 3 and 15 non-port loop rows',
     low.rows.length === 3 && high.rows.length === 15);
-  assert('7b validator excludes mapped citizen and port rows from 15-attempt Cycle; pre-cutover cop citizen rows still count; cutover required',
-    counted[99] === 15 && counted[100] === 0 && counted[50] === 1 && cutoverRequired &&
+  assert('7b validator excludes all three mapped citizen rows and port rows after cutover; pre-cutover rows count',
+    counted[99] === 15 && counted[100] === 0 && counted[50] === 3 && cutoverRequired &&
     validator.MIN_EVENTS === 3 && validator.MAX_EVENTS === 15);
   const freshCounts = passCtx(2);
   assert('7b pass and loop payload shapes match; initial tracked counts match ledger',

@@ -23,6 +23,7 @@ global.nudgesForEvent_ = M.nudgesForEvent_;
 global.baseTag_ = M.baseTag_;
 const C = require('../utilities/compressLifeHistory.js');
 global.getCitizenDialBands_ = C.getCitizenDialBands_;
+global.conductCohortRow_ = C.conductCohortRow_; // engine.272 shared cohort predicate
 // inWorldStamp_ lives in phase01 advanceSimulationCalendar.js (not loaded here)
 global.inWorldStamp_ = (ctx) => 'C' + ((ctx && ctx.config && ctx.config.cycleCount) || 0);
 

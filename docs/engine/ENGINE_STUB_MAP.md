@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-09-30 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-10-01 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -105,6 +105,9 @@
   Sheets: World_Config
 
 - **ensureEngine221Config_(ss)**
+  Sheets: World_Config
+
+- **ensureEngine272Config_(ss)**
   Sheets: World_Config
 
 - **ensureEngine176Config_(ss)**
@@ -3665,6 +3668,12 @@
 
 - **decayChaosExposure_(c, currentCycle)**
 
+- **integrityWornByPressure_(pressure, cycle)**
+
+- **integrityWearDue_(ds, cycle, rate, floor)**
+
+- **applyIntegrityWear_(c, worn, cycle, rate, floor)**
+
 - **credentialBand_(edu)**
 
 - **bandClamp_(v)**
@@ -3689,6 +3698,7 @@
 - **compressLifeHistory_(ctx, options)**
   Reads: S.absoluteCycle, S.biasIntents, S.contests, S.cycleId, S.pendingCascades, S.pressureCounts, S.relationshipBonds
   Writes: S.lifeHistoryCompression
+  Config: ctx.config.integrityWearFloor, ctx.config.integrityWearRate
   Sheets: Reflection_Intake
 
 - **parseLifeHistoryEntries_(historyStr)**
@@ -3726,6 +3736,8 @@
 - **getCitizenArchetype_(ctx, popId)**
 
 - **getCitizenDialBands_(ctx, popId, dialStrOpt)**
+
+- **conductCohortRow_(row, cols, simYear)**
 
 - **parseProfileString_(profileStr)**
 
@@ -4313,4 +4325,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1522
+**Functions mapped:** 1527

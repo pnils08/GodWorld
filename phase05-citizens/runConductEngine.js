@@ -78,6 +78,8 @@ function runConductEngine_(ctx) {
   var cycle = S.absoluteCycle || S.cycleId || ctx.config.cycleCount || 0;
   var simYear = simYearOf_(ctx, cycle); // engine.164
 
+  var cohortCols = { iStatus: iStatus, iTier: iTier, iClock: iClock, iUNI: iUNI, iMED: iMED, iCIV: iCIV, iBirthYear: iBirthYear };
+
   var cRng = safeRand_(ctx);
   var count = 0;
   var LIMIT = 3; // resolved moral tests per cycle (committed OR resisted)
@@ -182,23 +184,12 @@ function runConductEngine_(ctx) {
     var r = (scanStart + scanned) % rows.length;
     var row = rows[r];
 
-    // Match updateNamedCitizens_: Retired and legacy blank statuses still
-    // live here; a Deceased citizen never receives another conduct event.
-    if ((row[iStatus] || 'Active') === 'Deceased') continue;
-
-    var tier = Number(row[iTier] || 0);
-    var mode = (row[iClock] || "").toString().trim();
-    var isUNI = (row[iUNI] || "").toString().toLowerCase().startsWith("y");
-    var isMED = (row[iMED] || "").toString().toLowerCase().startsWith("y");
-    var isCIV = (row[iCIV] || "").toString().toLowerCase().startsWith("y");
+    // Eligibility: Tier-3/4 background ENGINE citizens, adults only. Retired and
+    // legacy blank statuses still live here; a Deceased citizen never receives
+    // another conduct event. One definition, shared with the Phase-9 integrity
+    // wear (engine.272) — conductCohortRow_, compressLifeHistory.js.
+    if (!conductCohortRow_(row, cohortCols, simYear)) continue;
     var neighborhood = iNeighborhood >= 0 ? (row[iNeighborhood] || '') : '';
-
-    // Eligibility: Tier-3/4 background ENGINE citizens, adults only
-    if (mode !== "ENGINE") continue;
-    if (tier !== 3 && tier !== 4) continue;
-    if (isUNI || isMED || isCIV) continue;
-    var birthYear = Number(row[iBirthYear] || 0);
-    if (birthYear > 0 && (simYear - birthYear) < 18) continue; // <18 = minor (S320 kid-age ruling)
 
     // Dial bands REQUIRED — the moral test is R-biased by definition, and
     // this keeps the engine inert until DialState deploys (copy-track).

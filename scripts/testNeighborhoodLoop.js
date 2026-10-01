@@ -49,6 +49,7 @@ const E = require('../utilities/citizenMemory.js');
 Object.keys(E).forEach(k => { global[k] = E[k]; });
 const C = require('../utilities/compressLifeHistory.js');
 global.getCitizenDialBands_ = C.getCitizenDialBands_;
+global.conductCohortRow_ = C.conductCohortRow_; // engine.272 shared cohort predicate
 const P = require('../utilities/neighborhoodPulseMap.js');
 global.recordPulse_ = P.recordPulse_;
 global.pulseForEvent_ = P.pulseForEvent_;

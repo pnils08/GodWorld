@@ -250,6 +250,7 @@ function serialize_(c) {
   var o = { base: c.base, mood: c.mood, streak: c.streak };
   if (c.chaosExposure) o.chaosExposure = c.chaosExposure;
   if (c.pressure) o.pressure = c.pressure;
+  if (c.wear) o.wear = c.wear;
   return o;
 }
 function deserialize_(obj) {
@@ -264,6 +265,7 @@ function deserialize_(obj) {
     if (obj.maneuver) c.maneuver = obj.maneuver; // engine.157 posture memory rides along
     if (obj.folded > 0) c.folded = obj.folded;   // engine.177 watermark (last folded cycle)
     if (obj.pressure) c.pressure = obj.pressure; // engine.201 W1f per-cause pressure run {cause:{n,l}}
+    if (obj.wear) c.wear = obj.wear;             // engine.272 integrity wear {d, l}
   }
   return c;
 }
@@ -347,6 +349,70 @@ function decayChaosExposure_(c, currentCycle) {
 }
 
 // ============================================================================
+// engine.272 — INTEGRITY WEAR (the crime axis gets a cause that reaches it)
+// ----------------------------------------------------------------------------
+// Before this, nothing in ordinary life lowered integrity: the only crime-sized
+// down-movers were crimes, which only an already-reachable citizen commits. A
+// standing hardship now wears the dial in BASE (mood fades x0.8 a Cycle and reaches
+// base only on a three-Cycle run, so a wear landed in mood never arrives), one step
+// a Cycle, down to a floor; when the hardship lifts the citizen regains at the same
+// rate. DialState.wear = { d, l }: d = points currently worn off, l = last Cycle a
+// step ran. Rate and floor are World_Config dials (integrityWearRate 0 = off).
+// Pure, ES5-safe. The fold (compressLifeHistory_) is the only caller.
+// ============================================================================
+// Causes that count as a standing hardship. overwork is the citizen's own drive
+// (PRESSURE_NO_ADAPT), not the world's pressure — out until the builder rules it in.
+var INTEGRITY_WEAR_CAUSES = { debt: true, rent: true, hood: true, unemployed: true };
+
+// true when a counted cause's pressure was admitted THIS Cycle (pressure[cause].l,
+// written in Phase 5 by pressureRunFromState_ — through adaptation too).
+function integrityWornByPressure_(pressure, cycle) {
+  if (!pressure || typeof pressure !== 'object') return false;
+  for (var cause in INTEGRITY_WEAR_CAUSES) {
+    if (!INTEGRITY_WEAR_CAUSES.hasOwnProperty(cause)) continue;
+    var rec = pressure[cause];
+    if (rec && Number(rec.l) === cycle) return true;
+  }
+  return false;
+}
+
+// Would a step move this citizen this Cycle? Reads the PARSED DialState object (no
+// deserialize), so the fold can decide before it commits to a read-modify-write.
+// 'wear' | 'regain' | null. Rate 0, no parsed base, or a step already run this Cycle -> null.
+function integrityWearDue_(ds, cycle, rate, floor) {
+  if (!(rate > 0) || !ds || !ds.base || typeof ds.base !== 'object') return null;
+  var w = ds.wear;
+  if (w && Number(w.l) === cycle) return null;
+  var base = ds.base.integrity != null ? Number(ds.base.integrity) : MIDPOINT;
+  if (integrityWornByPressure_(ds.pressure, cycle)) return base > floor ? 'wear' : null;
+  return (w && Number(w.d) > 0) ? 'regain' : null;
+}
+
+// One step. worn=true: down by rate, never past floor (floor is where WEAR stops; an
+// event may still take a citizen lower). worn=false: back up by rate, never more than
+// was worn off. Returns true when the citizen changed.
+function applyIntegrityWear_(c, worn, cycle, rate, floor) {
+  if (!c || !c.base || !(rate > 0)) return false;
+  var w = c.wear || { d: 0, l: 0 };
+  if (Number(w.l) === cycle) return false;
+  var base = c.base.integrity, d = Number(w.d) || 0, moved;
+  if (worn) {
+    moved = Math.min(rate, Math.max(0, base - floor));
+    if (!(moved > 0)) return false;
+    c.base.integrity = base - moved;
+    d += moved;
+  } else {
+    if (!(d > 0)) return false;
+    moved = Math.min(rate, d, Math.max(0, 100 - base));
+    c.base.integrity = base + moved;
+    d = moved > 0 ? d - moved : 0;   // at the pole there is nothing left to regain
+  }
+  if (d < 1e-6) delete c.wear;
+  else c.wear = { d: d, l: cycle };
+  return true;
+}
+
+// ============================================================================
 // engine.179 (S438) — CONTESTS RESOLVED BY CHARACTER (research.28 Cut D)
 // ----------------------------------------------------------------------------
 // Two citizens want the same thing. Exactly TWO terms per contest, weight 1 each,
@@ -411,6 +477,8 @@ if (typeof module !== 'undefined' && module.exports) {
     describe_: describe_, snapshot_: snapshot_,
     serialize_: serialize_, deserialize_: deserialize_,
     accrueChaos_: accrueChaos_, checkChaosReaction_: checkChaosReaction_,
-    applyChaosReaction_: applyChaosReaction_, decayChaosExposure_: decayChaosExposure_
+    applyChaosReaction_: applyChaosReaction_, decayChaosExposure_: decayChaosExposure_,
+    INTEGRITY_WEAR_CAUSES: INTEGRITY_WEAR_CAUSES, integrityWornByPressure_: integrityWornByPressure_,
+    integrityWearDue_: integrityWearDue_, applyIntegrityWear_: applyIntegrityWear_
   };
 }

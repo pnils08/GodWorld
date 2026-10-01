@@ -247,6 +247,25 @@ function ensureEngine221Config_(ss) {
   return { configSeeded: plan.additions.length };
 }
 
+var ENGINE272_CONFIG_SEEDS = [
+  ['integrityWearRate', 0, 'engine.272 integrity points a standing hardship (debt, rent, hood, no work) wears off a citizen\'s base each Cycle it holds, regained at the same rate when it lifts. 0 = off (seeded off; the builder sets it)', 0, 10, false],
+  ['integrityWearFloor', 10, 'engine.272 the lowest integrity that wear alone can take a citizen (an event may still go lower). Under 20 a worn citizen becomes crime-reachable; 20-39 reads slippery; 40+ changes nothing visible', 0, 100, false]
+];
+
+function ensureEngine272Config_(ss) {
+  if (!ss) throw new Error('engine.272 config: spreadsheet required');
+  var configSheet = ss.getSheetByName('World_Config');
+  if (!configSheet) throw new Error('engine.272 config: World_Config not found');
+  var plan = inspectEngine94Config_(configSheet.getDataRange().getValues(), ENGINE272_CONFIG_SEEDS);
+  if (plan.additions.length > 0) {
+    configSheet.getRange(configSheet.getLastRow() + 1, 1, plan.additions.length, 3).setValues(plan.additions);
+    var verified = inspectEngine94Config_(configSheet.getDataRange().getValues(), ENGINE272_CONFIG_SEEDS);
+    if (verified.additions.length > 0) throw new Error('engine.272 config: post-write verification failed');
+  }
+  Logger.log('engine.272 config ready: seeded ' + plan.additions.length + ' row(s)');
+  return { configSeeded: plan.additions.length };
+}
+
 var ENGINE176_CONFIG_SEEDS = [
   ['dialFrictionRentBurden', 50, 'engine.176 rent as % of household income above which an unbuffered renter takes a pressure tag (Friction, then Strain) — the negative pole from a cause', 10, 90, false],
   ['dialSetbackLossPct', 5, 'engine.176 a lost casino stake at/over this % of the citizen\'s net worth logs [Setback] instead of the ordinary [Casino] loss line', 1, 50, false],

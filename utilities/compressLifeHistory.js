@@ -461,6 +461,33 @@ function compressLifeHistory_(ctx, options) {
   }
   var griefApplied = 0, griefCitizens = 0, griefExpired = 0;
 
+  // engine.272: integrity wear dials, read once. ensureEngine272Config_ seeds and validates
+  // both keys before the Cycle; a value that is still not a finite number here means no
+  // wear this Cycle and an Engine_Errors row — never a throw, which safePhaseCall_ would
+  // swallow while the Cycle commits with the whole dial fold skipped. Absent keys (a
+  // harness with no config) = off, quietly. Rate 0 = off: no row enters the RMW for wear.
+  var wearRate = 0, wearFloor = 0;
+  var wearRawRate = ctx.config ? ctx.config.integrityWearRate : undefined;
+  var wearRawFloor = ctx.config ? ctx.config.integrityWearFloor : undefined;
+  if (wearRawRate !== undefined || wearRawFloor !== undefined) {
+    var wearNumRate = (wearRawRate === '' || wearRawRate === null || typeof wearRawRate === 'boolean') ? NaN : Number(wearRawRate);
+    var wearNumFloor = (wearRawFloor === '' || wearRawFloor === null || typeof wearRawFloor === 'boolean') ? NaN : Number(wearRawFloor);
+    if (isFinite(wearNumRate) && wearNumRate >= 0 && isFinite(wearNumFloor) && wearNumFloor >= 0 && wearNumFloor <= 100) {
+      wearRate = wearNumRate; wearFloor = wearNumFloor;
+    } else {
+      var wearCfgErr = new Error('engine.272: World_Config integrityWearRate/integrityWearFloor not usable (' +
+        String(wearRawRate) + ' / ' + String(wearRawFloor) + ') — no integrity wear this Cycle');
+      if (typeof logEngineError_ === 'function') logEngineError_(ctx, 'Phase9-IntegrityWear', wearCfgErr);
+      Logger.log(wearCfgErr.message);
+    }
+  }
+  var wearCols = null, wearSimYear = 0, wearSteps = 0, regainSteps = 0;
+  if (wearRate > 0) {
+    wearCols = { iStatus: idx('Status'), iTier: idx('Tier'), iClock: idx('ClockMode'), iUNI: idx('UNI (y/n)'),
+                 iMED: idx('MED (y/n)'), iCIV: idx('CIV (y/n)'), iBirthYear: idx('BirthYear') };
+    wearSimYear = simYearOf_(ctx, cycle);
+  }
+
   for (var r = 0; r < rows.length; r++) {
     var row = rows[r];
     var popId = row[iPopID];
@@ -522,12 +549,18 @@ function compressLifeHistory_(ctx, options) {
       for (var md in parsedDial.mood) { if (parsedDial.mood.hasOwnProperty(md) && Math.abs(parsedDial.mood[md] || 0) >= 0.5) { moodPending = true; break; } }
     }
 
-    if (!compressEligible && !newEntries.length && !moodPending && !pending.length && !biasPending.length && !griefPending.length && !griefNeedsMaintenance) { skipped++; continue; }
+    // engine.272: a quiet citizen under a standing hardship (or regaining after one) is
+    // exactly who the tests above would skip. integrityWearDue_ is null at rate 0, without
+    // a parsed base, or when no step would move — those rows stay skipped, bytes untouched.
+    var wearMode = (wearRate > 0 && conductCohortRow_(row, wearCols, wearSimYear))
+      ? integrityWearDue_(parsedDial, cycle, wearRate, wearFloor) : null;
+
+    if (!compressEligible && !newEntries.length && !moodPending && !pending.length && !biasPending.length && !griefPending.length && !griefNeedsMaintenance && !wearMode) { skipped++; continue; }
 
     // Grief-only maintenance must not even normalize the DialState cell. Existing
     // compressor/reflection/bias paths keep their prior RMW behavior; an envelope
     // insert/expiry by itself is strictly a MemoryRegisters change.
-    var dialRmwNeeded = compressEligible || newEntries.length || moodPending || pending.length || biasPending.length;
+    var dialRmwNeeded = compressEligible || newEntries.length || moodPending || pending.length || biasPending.length || !!wearMode;
     var c = dialRmwNeeded ? deserialize_(parsedDial) : null;
     if (c && foldedMark) c.folded = foldedMark;
 
@@ -541,6 +574,12 @@ function compressLifeHistory_(ctx, options) {
     // BEFORE this cycle's events land (settleCycle_ — MOOD_DECAY 0.8, citizenMemory.js).
     // First production caller; until S438 the fold zeroed mood outright.
     if (dialRmwNeeded) { settleCycle_(c); settled++; }
+
+    // engine.272: one wear (or regain) step, in base, after the settle and before this
+    // Cycle's events land on top.
+    if (wearMode && applyIntegrityWear_(c, wearMode === 'wear', cycle, wearRate, wearFloor)) {
+      if (wearMode === 'wear') wearSteps++; else regainSteps++;
+    }
 
     // engine.38 B1+B3 (S283): ONE parse of the register cell serves both the
     // unlived capture (fold-time, below) and the bias drain; written back only
@@ -664,6 +703,7 @@ function compressLifeHistory_(ctx, options) {
     griefApplied: griefApplied,
     griefCitizens: griefCitizens,
     griefExpired: griefExpired,
+    integrityWear: { rate: wearRate, floor: wearFloor, worn: wearSteps, regained: regainSteps }, // engine.272
     version: COMPRESS_VERSION
   };
 
@@ -675,6 +715,7 @@ function compressLifeHistory_(ctx, options) {
     (S.pressureCounts ? ', pressure ' + JSON.stringify(S.pressureCounts) : ', pressure none') + // engine.176 per-emitter counts (S.pressureCounts)
     (S.contests ? ', contests ' + JSON.stringify(S.contests) : ', contests none') + // engine.179 (S.contests)
     ', pushes ' + pushesQueued + // engine.180
+    ', integrity wear ' + wearSteps + '/' + regainSteps + ' at rate ' + wearRate + // engine.272 worn/regained
     ', unlived ' + unlivedApplied +
     ', bonds nudged ' + bondsNudged + (bondTargetsMissed ? ' (missed ' + bondTargetsMissed + ')' : ''));
 }
@@ -1191,6 +1232,24 @@ function getCitizenDialBands_(ctx, popId, dialStrOpt) {
   return result;
 }
 
+// engine.272 — the conduct cohort, one definition. runConductEngine_ draws moral tests
+// from these rows and the Phase-9 fold wears integrity on these rows, so the citizens
+// who can wear are the citizens who can be tested: not Deceased, ENGINE clock, Tier 3/4,
+// not UNI/MED/CIV, adult. cols = { iStatus, iTier, iClock, iUNI, iMED, iCIV, iBirthYear }
+// (-1 for an absent column reads as blank, as the inline tests it replaces did).
+function conductCohortRow_(row, cols, simYear) {
+  if ((row[cols.iStatus] || 'Active') === 'Deceased') return false;
+  if ((row[cols.iClock] || "").toString().trim() !== "ENGINE") return false;
+  var tier = Number(row[cols.iTier] || 0);
+  if (tier !== 3 && tier !== 4) return false;
+  if ((row[cols.iUNI] || "").toString().toLowerCase().startsWith("y")) return false;
+  if ((row[cols.iMED] || "").toString().toLowerCase().startsWith("y")) return false;
+  if ((row[cols.iCIV] || "").toString().toLowerCase().startsWith("y")) return false;
+  var birthYear = Number(row[cols.iBirthYear] || 0);
+  if (birthYear > 0 && (simYear - birthYear) < 18) return false; // <18 = minor (S320 kid-age ruling)
+  return true;
+}
+
 function parseProfileString_(profileStr) {
   if (!profileStr) return null;
 
@@ -1246,6 +1305,7 @@ function serializeDialState_(c) {
   if (c.chaosExposure) o.chaosExposure = c.chaosExposure;
   if (c.maneuver) o.maneuver = c.maneuver; // engine.157 posture memory {p, g, a, c} — additive, never wiped
   if (c.pressure) o.pressure = c.pressure; // engine.201 W1f per-cause pressure run {cause:{n,l}} — written by emitPressureTag_ in Phase 5
+  if (c.wear) o.wear = c.wear; // engine.272 integrity wear {d, l} — points worn off, last step Cycle
   return JSON.stringify(o);
 }
 
@@ -1591,6 +1651,7 @@ if (typeof module !== 'undefined' && module.exports) {
     formatDialFace_: formatDialFace_,
     parseProfileString_: parseProfileString_,
     getCitizenDialBands_: getCitizenDialBands_,
+    conductCohortRow_: conductCohortRow_,
     readPendingReflections_: readPendingReflections_,
     nudgeBondIntensity_: nudgeBondIntensity_,
     AFFECT_VALENCE: AFFECT_VALENCE,

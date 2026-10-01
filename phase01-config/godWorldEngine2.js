@@ -230,6 +230,7 @@ function runWorldCycle() {
     ensureEngine178Config_(ss);  // engine.178 dial gates (misfit move, owner room/expansion, integrity on the scandal ceiling), same self-arm contract
     ensureEngine192Config_(ss);  // engine.192 school drift - step, pull, grad lag, initiative funding %, same self-arm contract
     ensureEngine221Config_(ss);  // engine.221 econMoodInertia - the city economic mood's memory, same self-arm contract
+    ensureEngine272Config_(ss);  // engine.272 integrity wear rate + floor (seeded off), same self-arm contract
   } catch (e) {
     Logger.log('FATAL: Cannot open or prepare spreadsheet: ' + e.message);
     throw e; // Cannot continue without spreadsheet

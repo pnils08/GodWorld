@@ -265,7 +265,9 @@ What this changes, as a build (rb designs; es or codex executes against this sec
 3. **Colour is cron-side, per angle.** The crons already paint what the builder can't see (gate the facts, not the colour); each slice should hand its writer the colour hooks that fit its mode — a civic slice carries the record and the office's words, a trend slice carries the venue, the crowd, the citizens who were there.
 4. **Read before design:** `scripts/newsroom-wake-packages.json` (24 packages), `scripts/cron-desk-run.js` `collectQuoteAsks` + `noteQuoteState`, `scripts/livedExperiencePacket.js` `buildAnglePacket` / `isProximityCandidate`, `scripts/beatSliceKit.js`, the five `build*Slice.js` files, and the 2026-09-30 rulings above. Measure what each reporter's last three packets actually asked before proposing modes.
 
-Status: direction captured; not started. Owner next session: research-build (design + per-reporter mode list for the builder), then es/codex build.
+**Addendum, builder 2026-10-01 11:48 — Elias Varek's wakes belong to this same work.** Varek is the billionaire behind Civis Systems and should be *that node* in the sim. His wakes should embody it: fine-tuning his systems, building his system out from within — not a citizen answering a reporter. The model-fit `watch` on Elias (research.28) is closed by this: the lever is his wake instructions, not his model. Where they live: `.claude/agents/citizen-voice-elias-varek/` (SKILL.md, IDENTITY, LENS, RULES, disposition cache) and whatever the citizen-loop wake dispatch hands a Tier-1 voice — read both before writing. What a Varek wake should produce, as a first cut for the builder to correct: a Civis Systems move (a system he is tuning, a district he is instrumenting, a hire, a contract, a number he is watching), its effect on a hood or a node the engine can carry, and his read of the city as a system — the Oaks and Paulson as one thread inside that, not the whole of him.
+
+Status: direction captured; not started. Owner next session: research-build (design + per-reporter mode list for the builder; Varek wake spec alongside), then es/codex build.
 
 ## Changelog
 

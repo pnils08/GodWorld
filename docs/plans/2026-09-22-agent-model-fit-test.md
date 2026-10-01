@@ -81,6 +81,8 @@ One call: `node scripts/modelFitRun.js --input <frozen file> --model <id> --prov
 
 ## Changelog
 
+- 2026-10-01 (research-build, 11:48) — Elias `watch` closed by builder direction: the lever is his wake instructions (Civis Systems node — tuning and building his system from within), not his model. Carried in the beat-slices plan §Builder direction 2026-10-01 addendum.
+
 - 2026-10-01 (research-build, overnight) — Open-character tier run, scored (deterministic + agy + codex blind), reported. Report: [[../research/2026-10-01-model-fit-open-character-results]]. Open: builder's blind read, then the Mags seat change.
 
 - 2026-10-01 (research-build S512) — Builder restated the ask (Varek, Mags: citizens with large roles on better models). The newsroom write sweep ran Claude synchronously through OpenRouter this session, so the run can start on that route without waiting on direct credit.

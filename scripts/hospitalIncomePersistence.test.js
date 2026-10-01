@@ -736,7 +736,7 @@ check('6b dismissed, then released: the savings charge is at the reduced figure 
   const row = run.row(0).concat([20000, 0]);
   const c = {}; sb.JUDICIAL_CASE_FIELDS_.forEach((f, i) => { c[f] = caseRowFor(p.POPID, 110)[i]; });
   c.Outcome = 'held-served'; c.CyclesHeld = 4; c.ResolveCycle = 114;
-  const cols = { iClock: HX.indexOf('ClockMode'), iTier: HX.indexOf('Tier'), iBirth: HX.indexOf('BirthYear'),
+  const cols = { iClock: HX.indexOf('ClockMode'), iBirth: HX.indexOf('BirthYear'),
     iIncome: HX.indexOf('Income'), iNW: HX.indexOf('NetWorth'), iDebt: HX.indexOf('DebtLevel'), iLife: HX.indexOf('LifeHistory') };
   const res = sb.judicialSettleLostPay_({ ledger: { dirty: false }, logRows: [], now: 'synthetic', summary: { cycleId: 114 }, config: { cycleCount: 114 } },
     row, c, 114, cols, 'detained');

@@ -587,7 +587,7 @@ for (const left of ['traded', 'inactive']) {
 // ── Task 6b: custody costs a livelihood — settlement, clock, dial (build spec B1, B3, B5) ──
 {
   const H6 = ['POPID', 'Status', 'StatusStartCycle', 'ClockMode', 'Tier', 'BirthYear', 'Income', 'NetWorth', 'DebtLevel', 'LifeHistory'];
-  const cols = { iClock: 3, iTier: 4, iBirth: 5, iIncome: 6, iNW: 7, iDebt: 8, iLife: 9 };
+  const cols = { iClock: 3, iBirth: 5, iIncome: 6, iNW: 7, iDebt: 8, iLife: 9 };
   const logged = [], engineErrors = [];
   const savedQueue = global.queueAppendIntent_;
   global.queueAppendIntent_ = (ctx, tab, row) => logged.push({ tab, row });
@@ -629,8 +629,13 @@ for (const left of ['traded', 'inactive']) {
   }
   assert('6b GAME clock not charged', untouched(settle({ ClockMode: 'GAME' })));
   assert('6b Income 0 not charged', untouched(settle({ Income: 0 })));
-  assert('6b Tier 1 not charged', untouched(settle({ Tier: 1 })));
-  assert('6b Tier 2 not charged', untouched(settle({ Tier: 2 })));
+  for (const tier of [1, 2, 3, 4, '']) { // builder 2026-09-30: no tier is gated from the savings charge
+    assert('6b Tier ' + JSON.stringify(tier) + ' charged', nw(settle({ Tier: tier })) === 9000);
+  }
+  global.simYearOf_ = () => 2042;
+  assert('6b a minor is not charged', untouched(settle({ BirthYear: 2026 })));
+  assert('6b an adult with a BirthYear is charged', nw(settle({ BirthYear: 2000 })) === 9000);
+  delete global.simYearOf_;
   assert('6b CIVIC-clock Tier 3 charged', nw(settle({ ClockMode: 'CIVIC', Tier: 3 })) === 9000);
   assert('6b PriorStatus Retired not charged (the money loop never paid them)', untouched(settle({}, { PriorStatus: 'Retired' })));
   assert('6b PriorStatus recovering not charged', untouched(settle({}, { PriorStatus: 'recovering' })));

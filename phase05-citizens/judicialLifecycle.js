@@ -400,8 +400,7 @@ function judicialSettleLostPay_(ctx, row, c, cycle, cols, statusBefore) {
   if (prior !== '' && prior !== 'active') return null; // only a paycheck the money loop was paying
   if (statusBefore !== 'detained' && !judicialHealthStatus_(statusBefore)) return null;
   if (String(row[cols.iClock] || '').trim().toUpperCase() === 'GAME') return null;
-  var tier = cols.iTier >= 0 ? Number(row[cols.iTier]) : 4;
-  if (tier === 1 || tier === 2) return null; // their money moves by story, not by plan
+  // No tier is exempt (builder 2026-09-30): an arrest is an event, and every tier loses the weeks.
   if (cols.iBirth >= 0) {
     var by = Number(row[cols.iBirth]) || 0;
     if (by > 0 && typeof simYearOf_ === 'function' && (simYearOf_(ctx, cycle) - by) < 18) return null;
@@ -481,7 +480,7 @@ function runJudicialLifecycle_(ctx) {
   if (iPop < 0 || iStatus < 0 || iStart < 0 || iClock < 0) {
     throw new Error('judicialLifecycle: Simulation_Ledger custody columns missing');
   }
-  var payCols = { iClock: iClock, iTier: header.indexOf('Tier'), iBirth: header.indexOf('BirthYear'),
+  var payCols = { iClock: iClock, iBirth: header.indexOf('BirthYear'),
     iIncome: header.indexOf('Income'), iNW: header.indexOf('NetWorth'), iDebt: header.indexOf('DebtLevel'),
     iLife: header.indexOf('LifeHistory') };
   if (payCols.iIncome < 0 || payCols.iNW < 0) {

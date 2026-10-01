@@ -708,7 +708,7 @@ Builder ruling 2026-09-29 (above, ruling 2): named-hit frequency follows demand 
 
 **Builder rulings, 2026-09-30 20:54 (Task 6b — custody costs a livelihood).** "Pay doesn't continue while detained and if detained for xx cycles should be fired." Custody stays rarer than illness (it already is: ~1 arrest per 11–15 Cycles citywide among tracked citizens). Read before design: the wealth passes only drift salary toward a reference (`generationalWealthEngine.js:648-660`, `:879-890`) — there is no per-Cycle paycheck to pause; hospitalization stops pay through the income-hit carrier (`hospitalIncomeHit_` / `setHospitalIncomeState_`, engine.218), and the career engine already owns layoff paths (`runCareerEngine.js:1517-1525`, engine.201 W1b). **Design next:** a detained citizen takes the same income-hit carrier for the Cycles in custody; after `judicialDismissAfterCycles` Cycles detained (World_Config, **3 — builder-confirmed 2026-09-30 21:41**; dismisses serious held 2+ and grave cases, never a one-Cycle pending release) the case reuses the layoff path. Cut → advisor → review → build.
 
-### Task 6b cut — custody costs a livelihood (engine-sheet, 2026-09-30 — builder ruled 22:36: missed pay out of savings; Revision 2 + Revision 3 fold = the build spec; three codex rounds filed)
+### Task 6b cut — custody costs a livelihood (engine-sheet, 2026-09-30 — builder ruled 22:36: missed pay out of savings; BUILT `f1898e37`, kimi SHIP; bench in progress)
 
 **Read-before (2026-09-30 22:00, code + bench SANDBOX 0908 at C130 + PROD at C109).**
 
@@ -822,7 +822,7 @@ Builder ruling 2026-09-29 (above, ruling 2): named-hit frequency follows demand 
 
 **After a dismissal.** Released on the reduced figure with no employer; settlement (S1) charges the weeks at that figure. The rehire pool takes them from the first career pass after release if Status is exactly `Active`, age 18–64, SkillTags present and a window opens in their field (`:1212-1235`); the unemployment evidence (`:1517-1525`) applies from that pass, not before.
 
-**For the builder.** Civic/media-clock Tier 3–4 citizens are charged like anyone. Tier 1–2 savings are left untouched by default (build spec B1) until the builder says otherwise; sports-clock citizens are outside.
+**For the builder.** Every tier and every civic/media-clock citizen is charged like anyone (builder ruling 2026-09-30 23:13); only sports-clock citizens are outside, because custody is never applied to them.
 
 **Reach (PROD C109 snapshot, upper bounds).** Settlement: any non-GAME tracked adult with Income > 0 who is arrested. Dismissal: at most the 299 BIZ-employed in the career scope, less owners; about once per 3 sim-years at the ruled dials.
 
@@ -856,7 +856,7 @@ Builder ruling 2026-09-29 (above, ruling 2): named-hit frequency follows demand 
 **B1 — settlement (`runJudicialLifecycle_`, `judicialLifecycle.js`).** When a case closes this Cycle with `released`, `diverted` or `held-served`, charge once, **all** of these true:
 - the case's `SourceSystem` is not `reconcile`, and its `PriorStatus` lowercased is `active` or blank;
 - the row's Status **as read before this Cycle's restore** (the `lower` captured at `:418`) is `detained` or a health state;
-- `ClockMode` is not `GAME`; Tier is 3 or 4 (**Tier 1–2 exempt** — the wealth engine's standing rule that their money moves by story, `:482-485`; protective default, the builder may lift it); adult; Income > 0;
+- `ClockMode` is not `GAME`; **no tier is exempt** (builder 2026-09-30 23:13: "no tier would be gated from the savings charge"); adult; Income > 0;
 - the row's LifeHistory does not already hold `[IncomeHit J<ArrestCycle>]`.
 
 Charge = round(Income ÷ 52 × `CyclesHeld`), Income as on the row at close. `NetWorth` parsed by stripping `$`, commas, spaces; not finite → no charge, cell untouched, `logEngineError_(ctx, 'Phase5-CustodySettlement', …)`, the case still closes. `NetWorth` ≥ charge → subtract, line "`<n>` weeks held with no pay — savings covered it"; else `NetWorth` 0, `DebtLevel` +1 (cap 6), line "… — more than the savings could hold, borrowed to cover it". The line is tagged `[Money]`, carries the marker, is stamped exactly as the money loop stamps its own `[Money]` lines, and goes to `LifeHistory_Log` through the existing append intent. `ctx.ledger.dirty = true`. No dial rule (`DEFAULT_AMBIENT` is `{}`).
@@ -877,6 +877,12 @@ Commit: Income, `careerRecordLayoff_` with "Dismissed by <business> after <n> we
 **B5 — `loadJudicialDismissAfter_(cfg)`**: finite safe integer ≥ 1 or throw naming `judicialDismissAfterCycles`; called by `runJudicialLifecycle_` every Cycle and by the pass.
 
 **Tests:** Revision 2's list plus Revision 3's additions, with these corrections — settlement tests use Tier 3–4 fixtures and add "Tier 1–2 not charged"; test (8) becomes "CIVIC-clock Tier 3–4 charged"; the normal-release test asserts a non-zero charge (it proves the Status is read before the restore). **Diff review: kimi** (its standing lane), not agy. **Truth docs:** stub maps, `SIMULATION_LEDGER.md` (`NetWorth`, `DebtLevel` writers), World_Config key.
+
+**Built 2026-09-30 (`f1898e37` + the tier follow-up).** Code by engine-sheet against the build spec. Extraction check: the pre-build and built career engine on six fixtures (both layoff sites, zero- and positive-income victims, a promotion, a ten-event crowd) gave identical rows, log rows, intents, signals and draw counts. Tests: judicialLifecycle 141, hospitalIncomePersistence 71, employerSuccess 65, careerStage 83, chaosCarsEngine 80, seven other suites green; collisions 0; stub maps regenerated.
+
+**Diff review (kimi 2026-09-30, `docs/research/2026-09-30-kimi-task6b-diff.md`): SHIP.** Every B1–B5 clause BUILT; no double-charge path, no mutate-before-throw, no rng movement, no change at the two existing layoff sites. Six findings, none above medium: (1) deploy order — the World_Config key lands before the code, or `Phase5-Judicial` is dead every Cycle (deploy step 4 below); (2) the settlement's tier test — removed by the builder's ruling; (3) settlement minor test — added; (4) blank `ClockMode` counts as ENGINE in the dismissal pass, the layoff path's own convention (`:262-263`); (5), (6) accepted as designed.
+
+**Builder ruling, 2026-09-30 23:13:** no tier is gated from the savings charge. The dismissal keeps the layoff paths' own Tier 3–4 scope — the ruling is on the charge.
 
 ## Changelog
 
@@ -956,3 +962,4 @@ Commit: Income, `careerRecordLayoff_` with "Dismissed by <business> after <n> we
 - 2026-09-30 (engine-sheet) — Task 6b: builder ruled missed pay comes out of savings. Revision 2 written — one settlement where the case closes (the money loop's shock-expense rule), case-keyed dismissal pass with a seat rule that cannot fire a bystander. Out for review, nothing built.
 - 2026-09-30 (engine-sheet) — Task 6b: third codex round HOLD on four items, all verified and folded as Revision 3 (charge only a missed paycheck, reconcile cases never settled, Status guard on settlement and dismissal, stage-then-commit, owner predicate = the owner draw's). Build spec fixed.
 - 2026-09-30 (engine-sheet) — Task 6b build spec consolidated (§BUILD SPEC); Tier 1–2 exempt from the savings charge by default; diff review assigned to kimi.
+- 2026-09-30 (engine-sheet) — Task 6b built (`f1898e37`), kimi diff review SHIP; builder ruled no tier is gated from the savings charge — tier test removed, minor test added.

@@ -173,3 +173,7 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 01:58 rb DONE research.28 report docs/research/2026-10-01-model-fit-open-character-results.md; §6 two builder lines (read order, Mags seat change). rb next: watch-list items, hourly checks
 02:25 es RELEASE codex (274 review folded, filed docs/research/2026-10-01-codex-engine274-cut.md); 272 built be902aad
 02:25 es NOTE ran git stash by mistake ~02:10, popped --index within 30s, 121 tracked files restored, nothing lost; if a file of yours looks reverted, tell me
+02:55 es BUILT 272 be902aad + 274 74925c1c; bench SANDBOX @162, firing C139 (trial rate 1 floor 10 on SANDBOX World_Config only)
+02:55 es CLAIM agy es engine.272 + engine.274 diff review (7741b7cd^..74925c1c)
+03:20 es BENCH @162 C139-C141 ok, errors 4->4: wear 38/39/38 steps by rule, 7 natural regains; career lines rotate (start rows 874/527/145)
+03:20 es RELEASE agy (diff review read: all checks clean, 1 test-style finding not folded, reason in plan)

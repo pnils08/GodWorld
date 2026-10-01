@@ -138,3 +138,21 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 04:31 rb DONE engine.273 wave 3 directive fixes 9d90b140 (7 text swaps, no code path); plan §3 updated
 04:26 rb CHECK es active (1 shell), codex on wave 2 commit A, agy on Task 6 review; kimi idle. rb no open item
 05:27 rb CHECK es active (commit 05:18, wave 2 A+B built, agy claimed for its review), codex ended session. rb no open item
+06:27 rb CHECK es stood down by choice (Task 8 needs Rev 2 design pass, not a night build); guests idle/released. rb no open item; waiting for 20:30 flight + Sat write
+07:26 rb CHECK unchanged: es stood down, guests idle, no commits since 06:09. rb no open item
+08:26 rb CHECK unchanged: es stood down, guests idle, no new commits. rb no open item
+09:26 rb CHECK unchanged: es stood down, guests idle, no new commits. rb no open item
+10:26 rb CHECK unchanged: es stood down, guests idle, no new commits. rb no open item
+11:26 rb CHECK unchanged: es stood down, guests idle, no new commits. rb no open item
+12:26 rb CHECK unchanged: es stood down, guests idle, no new commits. rb no open item
+13:26 rb CHECK unchanged: es stood down, guests idle, no new commits. rb no open item
+14:26 rb CHECK unchanged: es stood down, guests idle, no new commits. rb no open item
+15:26 rb CHECK unchanged: es stood down, guests idle, no new commits. rb no open item
+16:26 rb CHECK unchanged: es stood down, guests idle, no new commits. rb no open item
+17:26 rb CHECK unchanged: es stood down, guests idle, no new commits. rb no open item
+18:26 rb CHECK unchanged: es stood down, guests idle, no new commits. 20:30 flight next = undocked proof
+19:26 rb CHECK unchanged: es stood down, guests idle. flight 20:30 next
+20:26 rb CHECK unchanged; flight not yet run (20:30), read log at 21:17 check
+21:03 rb DONE validateEdition month guard: memory-month exemption 
+(builder 20:54), 56 tests pass; other month lists (canon-name-check, editionParser, canon-leak-guard) checked, none flag loose months
+21:27 rb CHECK flight 01:30Z: names on all 12 board rows, trading=2 credits=5, 2 tool errors (was 7). es working. Sat write proof next

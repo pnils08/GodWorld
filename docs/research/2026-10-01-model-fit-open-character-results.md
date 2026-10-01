@@ -111,6 +111,10 @@ Plan rule: a stronger model earns a seat only if it beats the current model by �
 
 ## 6. If the builder confirms the Mags adopt
 
+**Confirmed 2026-10-01 10:52 (builder: "I trust your judgement on the model updates"). Shipped the same hour:** `cron-saturday-run.js` default `anthropic/claude-sonnet-5.5`, `anthropicSlug` generalised to any `major.minor`, narration cap 2200 → 3600 because the model's mandatory reasoning shares the cap. Proven through the production SDK route on the frozen C108 digest: `end_turn`, 1125 words, 2874 output tokens, 26 s. First unattended fire: Saturday 2026-10-03 16:00. Elias unchanged.
+
+Original note:
+
 One-line change, not made tonight: `cron-saturday-run.js:604` default `claude-sonnet-4-6` → `anthropic/claude-sonnet-5.5` (the OpenRouter route passes the slug through; the `anthropicSlug` hyphen rewrite at `:639` only handles `4.x` and would need `(\d)\.(\d)` for the direct-key fallback). **Before flipping it:** this test called OpenRouter's chat/completions endpoint; production narration goes through the Anthropic SDK against `openrouter.ai/api` (messages endpoint). One call through the production route with `--narrator-model anthropic/claude-sonnet-5.5` proves the slug there. Next Saturday fire is 2026-10-03; the change can land before it.
 
 ## 7. Scorer files, verbatim
@@ -179,9 +183,10 @@ Top 3 Mags: C, G, H. Top 2 Elias: N, R. Worst 3: A, B, F.
 
 ## Verdict
 
-`adopt` Sonnet 5.5 for Mags's Saturday narration, provisional on the builder's blind read. `watch` Elias Varek. `take-nothing` on Opus 5.5, Fable 5.1, Gemini 3.7 Flash and DeepSeek for either seat.
+`adopt` Sonnet 5.5 for Mags's Saturday narration — builder-confirmed and live 2026-10-01. `watch` Elias Varek. `take-nothing` on Opus 5.5, Fable 5.1, Gemini 3.7 Flash and DeepSeek for either seat.
 
 ## Changelog
 
 - 2026-10-01 (research-build) — Created from the overnight run; two scorer files folded in; inbox copies removed.
 - 2026-10-01 (research-build, later) — Fact-hit reading corrected: the 2035 parade is in the C105 digest (spelled out) and is published canon; codex's V claim did not verify. Production-route proof added to §6.
+- 2026-10-01 (research-build, 10:55) — Builder confirmed; Mags narration seat moved to Sonnet 5.5 in `cron-saturday-run.js`, production-route proof recorded in §6.

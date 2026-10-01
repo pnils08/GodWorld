@@ -601,7 +601,9 @@ async function stepSignals(cycle) {
 // run without --apply; publish is the canon door and is --apply-gated.
 // ---------------------------------------------------------------------------
 const AUDIT_MODEL = arg('--audit-model', 'google/gemini-3.7-flash');
-const NARRATOR_MODEL = arg('--narrator-model', 'claude-sonnet-4-6');
+// Sonnet 5.5 since 2026-10-01 (research.28: +1.5/+1.0 blind over 4.6, clean on facts and length,
+// per-token cheaper; docs/research/2026-10-01-model-fit-open-character-results.md).
+const NARRATOR_MODEL = arg('--narrator-model', 'anthropic/claude-sonnet-5.5');
 
 function readJsonSafe(p) {
   try { return JSON.parse(fs.readFileSync(p, 'utf8')); } catch (_) { return null; }
@@ -636,8 +638,8 @@ async function orChat(model, system, user, maxTokens) {
 // so the old flag value keeps working.
 const NARRATOR_PROVIDER = process.env.NARRATOR_PROVIDER || 'openrouter';
 function anthropicSlug(model) {
-  if (NARRATOR_PROVIDER === 'anthropic') return String(model).replace(/^anthropic\//, '').replace(/4\.(\d)/, '4-$1');
-  return String(model).includes('/') ? model : 'anthropic/' + String(model).replace(/-4-(\d)$/, '-4.$1');
+  if (NARRATOR_PROVIDER === 'anthropic') return String(model).replace(/^anthropic\//, '').replace(/(\d)\.(\d)/, '$1-$2');
+  return String(model).includes('/') ? model : 'anthropic/' + String(model).replace(/-(\d)-(\d)$/, '-$1.$2');
 }
 async function anthropicChat(model, system, user, maxTokens) {
   const Anthropic = require('@anthropic-ai/sdk');
@@ -893,7 +895,9 @@ async function stepNarrate(cycle) {
   }).filter(Boolean).join('\n\n');
   if (!material) throw new Error('curated set resolved to zero articles');
   const pulse = await anthropicChat(NARRATOR_MODEL, NARRATOR_CHARGE(cycle),
-    'THE WEEK\'S REPORTING (your staff, already cleared and published):\n\n' + material, 2200);
+    // 3600, not 2200: Sonnet 5.5 reasons before it writes and OpenRouter cannot turn that off,
+    // so ~800 thinking tokens share this cap with the ~1500-token narration (research.28 run).
+    'THE WEEK\'S REPORTING (your staff, already cleared and published):\n\n' + material, 3600);
   const p = path.join(ROOT, 'output', 'cycle_pulse_c' + cycle + '.md');
   fs.writeFileSync(p, pulse + '\n');
   console.log(pulse.split(/\s+/).length + ' words → ' + path.relative(ROOT, p));

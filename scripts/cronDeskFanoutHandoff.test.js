@@ -206,7 +206,7 @@ assert.equal(stageRoute('culture', kaiAssignment.persona, 'angle').model,
 assert.equal(stageRoute('culture', kaiAssignment.persona, 'report').model,
   'meta-llama/llama-3.3-70b-instruct');
 assert.equal(stageRoute('culture', kaiAssignment.persona, 'write').model,
-  'meta-llama/llama-3.3-70b-instruct');
+  'anthropic/claude-haiku-4.5');
 
 const lilaAssignment = {
   name: 'Dr. Lila Mezran', popid: 'POP-00154', desk: 'civic',
@@ -243,7 +243,7 @@ assert.equal(stageRoute('civic', angelaAssignment.persona, 'angle').model,
 assert.equal(stageRoute('civic', angelaAssignment.persona, 'report').model,
   'deepseek/deepseek-chat');
 assert.equal(stageRoute('civic', angelaAssignment.persona, 'write').model,
-  'deepseek/deepseek-chat');
+  'anthropic/claude-haiku-4.5');
 
 const noahAssignment = {
   name: 'Noah Tan', popid: 'POP-00157', desk: 'civic',
@@ -255,7 +255,7 @@ assert.equal(noahContext.wakePackage.version, 'NOAH-LEP2-1');
 assert.equal(stageRoute('civic', noahAssignment.persona, 'angle').model,
   'deepseek/deepseek-chat');
 assert.equal(stageRoute('civic', noahAssignment.persona, 'write').model,
-  'deepseek/deepseek-chat');
+  'openai/gpt-5.6-luna');
 
 const handoffAngle = {
   stage: 'angle', cycle: '103', persona: 'luis-navarro', packetContract: 'v2',

@@ -263,7 +263,7 @@
       },
       "write": {
         "provider": "openrouter",
-        "model": "meta-llama/llama-3.3-70b-instruct"
+        "model": "x-ai/grok-4.3"
       }
     },
     "reviewProfile": {
@@ -360,11 +360,70 @@
       ]
     }
   },
+  "elliot-marbury": {
+    "version": "MARBURY-LEP2-1",
+    "active": true,
+    "requiredDaily": true,
+    "persona": "elliot-marbury",
+    "sourcing": "records",
+    "assignment": {
+      "desk": "sports",
+      "name": "Elliot Marbury",
+      "popid": "POP-00166",
+      "beatDomain": "GENERAL"
+    },
+    "packetContract": "v2",
+    "models": {
+      "angle": {
+        "provider": "openrouter",
+        "model": "deepseek/deepseek-chat"
+      },
+      "report": {
+        "provider": "openrouter",
+        "model": "deepseek/deepseek-chat"
+      },
+      "write": {
+        "provider": "openrouter",
+        "model": "anthropic/claude-sonnet-5"
+      }
+    },
+    "reviewProfile": {
+      "id": "marbury-data-desk-v1",
+      "canonPolicy": "load-bearing",
+      "purpose": "Put one audit-grade claim in the paper: a single player's Packet-backed season lines, the rates the Packet has already worked from them, and the peer band, with the sample stated. The memo is the proof. One falsifiable claim the numbers carry is success; a quote, a scene, fan heat, elegy, or a number the Packet does not hold is not.",
+      "articleContract": {
+        "renderMode": "SOURCE_BRIEF",
+        "voice": "dry third-person data-desk memo, source-forward",
+        "targetWords": "evidence-bounded; 350-600",
+        "opening": "the one Packet-backed season line or rate that carries the claim",
+        "closing": "the number next season that would disprove the claim"
+      },
+      "authorizedTexture": [
+        "plain-language reading of supplied season lines with each statistic kept with its named player and season",
+        "a trend or peer-band interpretation explicitly limited by the supplied games, innings, or at-bats",
+        "a blank or thin sample named as blank or thin rather than filled in"
+      ],
+      "textureConditions": [
+        "every named player, team, position, season, and source must come from the Packet",
+        "every statistic and rate must be a Packet figure as supplied; the memo performs no arithmetic the Packet has not already worked",
+        "a season year belongs to the player's dossier as supplied and is never moved, merged, or projected forward",
+        "the piece interviews nobody and attributes no statement, mood, or intention to any player, coach, or front office"
+      ],
+      "canonBlockers": [
+        "a statistic or rate attributed to the wrong player or the wrong season, or two players' lines merged into one subject",
+        "a rate, split, projection, or advanced metric the Packet does not supply",
+        "an invented award, contract, salary, injury, roster move, result, quote, interview, or front-office act",
+        "a named player, team, venue, institution, league, organization, or real-world entity not found in the supplied record",
+        "a one-season or thin-sample line presented as settled identity"
+      ]
+    }
+  },
   "hal-richmond": {
-    "version": "HAL-LEP2-1",
+    "version": "HAL-LEP2-2",
     "active": true,
     "requiredDaily": true,
     "persona": "hal-richmond",
+    "sourcing": "records",
     "assignment": {
       "desk": "sports",
       "name": "Hal Richmond",
@@ -383,7 +442,7 @@
       },
       "write": {
         "provider": "openrouter",
-        "model": "deepseek/deepseek-chat"
+        "model": "anthropic/claude-sonnet-5"
       }
     },
     "reviewProfile": {
@@ -393,7 +452,7 @@
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
         "voice": "first-person reflective sports history",
-        "targetWords": "evidence-bounded literary Article",
+        "targetWords": "long-form literary Article, 800-1200 words, bounded by the supplied evidence",
         "opening": "one Packet-backed present fact",
         "closing": "continuity or its loss, with the historical echo named"
       },
@@ -546,7 +605,7 @@
       },
       "write": {
         "provider": "openrouter",
-        "model": "deepseek/deepseek-chat"
+        "model": "anthropic/claude-sonnet-5"
       }
     },
     "reviewProfile": {
@@ -598,7 +657,7 @@
       },
       "write": {
         "provider": "openrouter",
-        "model": "deepseek/deepseek-chat"
+        "model": "anthropic/claude-haiku-4.5"
       }
     },
     "reviewProfile": {
@@ -650,7 +709,7 @@
       },
       "write": {
         "provider": "openrouter",
-        "model": "deepseek/deepseek-chat"
+        "model": "x-ai/grok-4.3"
       }
     },
     "reviewProfile": {
@@ -702,7 +761,7 @@
       },
       "write": {
         "provider": "openrouter",
-        "model": "deepseek/deepseek-chat"
+        "model": "openai/gpt-5.6-luna"
       }
     },
     "reviewProfile": {
@@ -814,7 +873,7 @@
       },
       "write": {
         "provider": "openrouter",
-        "model": "meta-llama/llama-3.3-70b-instruct"
+        "model": "anthropic/claude-haiku-4.5"
       }
     },
     "reviewProfile": {
@@ -985,7 +1044,7 @@
       },
       "write": {
         "provider": "openrouter",
-        "model": "deepseek/deepseek-chat"
+        "model": "anthropic/claude-haiku-4.5"
       }
     },
     "reviewProfile": {
@@ -1041,7 +1100,7 @@
       },
       "write": {
         "provider": "openrouter",
-        "model": "deepseek/deepseek-chat"
+        "model": "openai/gpt-5.6-luna"
       }
     },
     "reviewProfile": {
@@ -1097,7 +1156,7 @@
       },
       "write": {
         "provider": "openrouter",
-        "model": "meta-llama/llama-3.3-70b-instruct"
+        "model": "x-ai/grok-4.3"
       }
     },
     "reviewProfile": {
@@ -1165,7 +1224,7 @@
       },
       "write": {
         "provider": "openrouter",
-        "model": "meta-llama/llama-3.3-70b-instruct"
+        "model": "x-ai/grok-4.3"
       }
     },
     "reviewProfile": {
@@ -1212,10 +1271,11 @@
     }
   },
   "selena-grant": {
-    "version": "SELENA-OAKS-1",
+    "version": "SELENA-OAKS-2",
     "active": true,
     "requiredDaily": true,
     "persona": "selena-grant",
+    "sourcing": "records",
     "assignment": {
       "desk": "sports",
       "name": "Selena Grant",
@@ -1234,7 +1294,7 @@
       },
       "write": {
         "provider": "openrouter",
-        "model": "meta-llama/llama-3.3-70b-instruct"
+        "model": "openai/gpt-5.6-luna"
       }
     },
     "reviewProfile": {
@@ -1295,7 +1355,7 @@
       },
       "write": {
         "provider": "openrouter",
-        "model": "meta-llama/llama-3.3-70b-instruct"
+        "model": "openai/gpt-5.6-luna"
       }
     },
     "reviewProfile": {
@@ -1356,7 +1416,7 @@
       },
       "write": {
         "provider": "openrouter",
-        "model": "meta-llama/llama-3.3-70b-instruct"
+        "model": "x-ai/grok-4.3"
       }
     },
     "reviewProfile": {

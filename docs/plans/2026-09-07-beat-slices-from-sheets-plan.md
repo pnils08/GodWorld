@@ -117,7 +117,7 @@
 |---|---|
 | Mon | Carmen Delaine (civic ledger) · Jordan Velez (business + casino) · Dr. Lila Mezran (health, hospital rows) · Trevor Shimizu (transit) · Anthony Raines (A's) |
 | Tue | Luis Navarro (investigations) · Sgt. Rachel Torres (safety) · Angela Reyes (schools) · Selena Grant (Oaks) |
-| Wed | Jax Caldera (accountability) · Noah Tan (environment) · Elliot Marbury (data desk — not seated: no wake package yet) · P Slayer (fan pulse) · Tanya Cruz (A's clubhouse, weekly from 2026-09-30) |
+| Wed | Jax Caldera (accountability) · Noah Tan (environment) · Elliot Marbury (data desk, seated 2026-10-01: MARBURY-LEP2-1 + `buildMarburySlice.js`) · P Slayer (fan pulse) · Tanya Cruz (A's clubhouse, weekly from 2026-09-30) |
 | Thu | Elliot Graye (faith) · Simon Leary (sports as civic architecture) · Hal Richmond (A's, weekly from 2026-09-30) · Talia Finch (Oaks, the street) |
 | Fri | Mason Ortega (food) · Kai Marston (arts, nightlife) · Sharon Okafor (lifestyle) · Maria Keen (neighborhood) · Celeste Tran (social trends — seat exists on the ledger, no writer agent yet) |
 
@@ -220,9 +220,39 @@ Rejected: `moonshotai/kimi-k2.5` (5–10 minutes and 9–17k output tokens an ar
 
 **Codex review folded** ([[../research/2026-09-30-codex-interview-rule-diff-review]]): Jax's slice had three more bench-fill labels (`same-hood-signal`, `city-resident`, `bond-hop …`) — now rejected; a quoteless Packet could lend a fact to a speaker — a quoted run of five words or more now fails when nobody is on the record; the gate's family check treats `anthropic` and `claude` as one. Replay of C107–C109 through the final rule: 208 asks → 129; only Carmen and Luis have no one to ask.
 
-**Open from these rulings.** Proximity is recognised by the candidate's `why` label — interim; each slice builder should stamp story-touched itself. The tracker's `MilestoneNotes` for INIT-001 carries upkeep text in the city record ("retag reversed … the 2026-09-22 retag was engine-sheet error", "C108 conversion: …") — engine-sheet's tab. Carmen's quoteless draft still wrote "peeling paint, boarded windows" and an invented "declined to comment" — writer-model behavior, ruling 2. Records seats beyond Carmen and Anthony (Selena Grant's analysis seat, Hal Richmond) are not set.
+**Open from the 23:01 rulings.** Proximity is recognised by the candidate's `why` label — interim; each slice builder should stamp story-touched itself. The tracker's `MilestoneNotes` for INIT-001 carries upkeep text in the city record ("retag reversed … the 2026-09-22 retag was engine-sheet error", "C108 conversion: …") — engine-sheet's tab. Carmen's quoteless draft still wrote "peeling paint, boarded windows" and an invented "declined to comment" — writer-model behavior, ruling 2. Records seats beyond Carmen and Anthony (Selena Grant's analysis seat, Hal Richmond) are not set.
+
+### Builder rulings 2026-09-30 23:52 — Marbury seated, second wave, Hal and Selena
+
+"Yes seat Marbury, and move the second wave. Hal is long-form sports historian and Selena is the stats, data reporter for the Oaks."
+
+**Elliot Marbury (POP-00166, verified by name on the ledger) — seated Wednesday.**
+- `scripts/buildMarburySlice.js` (`DATA-DESK-SLICE-1`, on the beat-slice kit): one player's season-by-season line off `output/player_truesource_mirror.json` (28 of 29 dossiers carry a readable season table), up to six seasons; K/9, BB/9, K/BB or AB-per-HR and AB-per-SO for each season shown, **worked in the builder** — the bag's derived set and nothing else; up to two peers at the same position with their latest line and rates; this cycle's feed line when he is on it. Subject = a dossier player named on this cycle's `Oakland_Sports_Feed`, three seasons or more preferred, picked by cycle number; else the dossier list in rotation.
+- Why the rates are worked in code: the first bench left the peers' rates to the writer and it printed a wrong K-per-BB and "ten strikeouts" for a 20-SO line.
+- Package `MARBURY-LEP2-1`: records seat, desk `sports`, review profile authored from `docs/media/MARBURY_DATA_BAG.md`; write on `claude-sonnet-5` (his agent file's own model; the audit-grade seat gets the most careful writer).
+- Registered in both `BEAT_BUILDERS` tables, `BEAT_NAME_RE`, `beatSlugForName`, `WEEK_GRID[3]`. In-memory build of the 2026-10-07 rotation seats him with "Mariano Rosales — 6 seasons on the dossier".
+- `As_Roster` is not in the beat dump, so the bag's first authority (WAR, salary, tier) is not on disk for him yet; Salary–WAR Spread and Board Concentration modes wait on that tab joining `dumpBeatTabs.js`.
+
+**Records seats.** Selena Grant (`SELENA-OAKS-2`) and Hal Richmond (`HAL-LEP2-2`, target now long-form 800–1,200 words) interview nobody. Records seats are now Carmen, Anthony, Selena, Hal, Marbury; Luis has no one attached.
+
+**Second wave — every seat off `deepseek-chat` and `llama-3.3-70b` at the write stage.** Thirteen seats benched on their own latest packets (Nia weekly rides Nia's result): exit 0, contamination clean; 11 with no repair pass.
+
+| Write model | Seats |
+|---|---|
+| `anthropic/claude-sonnet-5` | Luis Navarro, Jax Caldera, Hal Richmond, Elliot Marbury, Maria Keen |
+| `anthropic/claude-haiku-4.5` | Carmen Delaine, Anthony Raines, Dr. Lila Mezran, Angela Reyes, Kai Marston, Elliot Graye |
+| `openai/gpt-5.6-luna` | Trevor Shimizu, Jordan Velez, Simon Leary, Selena Grant, Sharon Okafor, Talia Finch, Noah Tan |
+| `x-ai/grok-4.3` | Sgt. Rachel Torres, Tanya Cruz, P Slayer, Mason Ortega, Celeste Tran, Nia Rook (+weekly) |
+
+Rejected in the second sweep: `moonshotai/kimi-k2` (printed its own planning notes into the article), `mistralai/mistral-large-2512` (paraphrased an approved quote → fatal; provider error), `minimax/minimax-m3` (16k output tokens, 3 min), `deepseek/deepseek-v4-pro` (clean prose, but 63–162 s a call against the writer's 180 s per-call ceiling — not seated). Angle and report stages stay on their existing models for every seat.
+
+**Codex review folded** ([[../research/2026-10-01-codex-marbury-wave2-diff-review]]): the shared writer brief told every piece to open on a person "in a body, doing something" — a records seat with nobody on the record now gets a records brief (open on the line, no scene, no speech, sources named the way a reader would); a non-numeric dossier cell drops its row and a rate with a missing cell is not emitted; seasons are sorted by year; peers are same-position only; a subject named only in the feed notes carries the sentence that names him; the failure ping's recovery command passes `--gate-backend api` (the default gate cannot grade a Claude-written draft, now 11 seats). Seating, registrations, model-slug readers: clean.
+
+**Cost, write stage only** (OpenRouter list prices fetched 2026-09-30; old side = 107 real writer runs over five weeks, new side = bench token counts): $0.27 → $0.68 a week, about +$0.41. Largest lines: Hal $0.08, Maria $0.06, Marbury $0.06 (new seat), Nia $0.01 × up to five a week.
 
 ## Changelog
+
+- 2026-10-01 (research-build S512) — Elliot Marbury seated Wednesday (`buildMarburySlice.js`, MARBURY-LEP2-1); Selena and Hal records seats; second write-model wave, no seat left on deepseek-chat or llama; detail §Status log.
 
 - 2026-09-30 (research-build S512) — builder rulings 23:01 cut: impacted-or-none interviews, records seats (Carmen, Anthony), Carmen's tracker record, Wednesday +Tanya; detail §Status log.
 - 2026-09-30 (research-build S512) — crons audit filed §Status log; five newsroom cuts landed, kimi review folded ([[../research/2026-09-30-kimi-cron-audit-diff-review]]); Task 5 scope grows by audit item 3.

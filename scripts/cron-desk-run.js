@@ -55,11 +55,13 @@ const BEAT_BUILDERS = {
   'maria-keen': 'buildNeighborhoodSlice',
   'selena-grant': 'buildOaksBeatSlice',
   'talia-finch': 'buildOaksGroundSlice',
-  'celeste-tran': 'buildTrendsSlice'
+  'celeste-tran': 'buildTrendsSlice',
+  'elliot-marbury': 'buildMarburySlice'
 };
-const BEAT_NAME_RE = /trevor\s*shimizu|lila\s*mezran|angela\s*reyes|noah\s*tan|elliot\s*graye|rachel\s*torres|kai\s*marston|sharon\s*okafor|maria\s*keen|selena\s*grant|talia\s*finch|celeste\s*tran/i;
+const BEAT_NAME_RE = /elliot\s*marbury|trevor\s*shimizu|lila\s*mezran|angela\s*reyes|noah\s*tan|elliot\s*graye|rachel\s*torres|kai\s*marston|sharon\s*okafor|maria\s*keen|selena\s*grant|talia\s*finch|celeste\s*tran/i;
 function beatSlugForName(name) {
   const n = String(name || '');
+  if (/elliot\s*marbury/i.test(n)) return 'elliot-marbury';
   if (/trevor\s*shimizu/i.test(n)) return 'trevor-shimizu';
   if (/lila\s*mezran/i.test(n)) return 'lila-mezran';
   if (/angela\s*reyes/i.test(n)) return 'angela-reyes';
@@ -3191,7 +3193,8 @@ function notifyFanoutFailures(date, failed, total) {
     if (!webhookUrl) { console.log('[fanout] failure ping skipped: DISCORD_WEBHOOK_URL not set'); return resolve(); }
     const lines = ['**NEWSROOM WAKE FAILURES — ' + date + ' ' + STAGE + '** (' + failed.length + '/' + total + ')'];
     for (const f of failed) lines.push('- ' + f.name + ' (' + f.desk + '): ' + String(f.error).slice(0, 140));
-    lines.push('log: `logs/newsroom-fanout.log` — recover: `cron-desk-run.js --stage=' + STAGE + ' --fanout --only "<name>"`');
+    lines.push('log: `logs/newsroom-fanout.log` — recover: `cron-desk-run.js --stage=' + STAGE + ' --fanout --only "<name>"' +
+      (STAGE === 'write' ? ' --gate-backend api' : '') + '`');   // the default claude gate may not grade a Claude-written draft
     const parsed = new URL(webhookUrl);
     const payload = JSON.stringify({ content: lines.join('\n') });
     const req = https.request({

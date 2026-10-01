@@ -207,6 +207,12 @@ const CALL_TIMEOUT_MS = parseInt(arg('--call-timeout', '180000'), 10);
 // instead of the full 40k world_summary blob (the firehose that made C101 desks
 // self-filter). Additive — absent = the proven full-summary path, unchanged.
 const STATE_FILE = arg('--state-file', null);
+// A records seat (wake package `sourcing: "records"`) writing a Packet with no
+// approved quote: the shared "open on a person in a scene" brief would stop the
+// write or make the writer invent the scene (Carmen C109 bench: "peeling paint,
+// boarded windows"). A people seat that merely had nobody attached this cycle
+// keeps the shared brief — it may still open on a Packet-named place.
+let RECORDS_PIECE = false;
 // Evaluation-only composition binding. It is inert unless explicitly supplied
 // alongside an artifact tag and an injected lane state.
 const BRIEF_REQUIREMENT_FILE = arg('--brief-requirement-file', null);
@@ -784,6 +790,14 @@ async function main() {
     // NOT silently fall back to the 40k blob (that would mask a broken chain and
     // "prove" a dead lane; S332 advisor trap).
     worldState = fs.readFileSync(resolveInRepo(STATE_FILE), 'utf8');
+    try {
+      const statePacket = JSON.parse(worldState);
+      const wakePackagesApi = require('./newsroomWakePackages');
+      const seatPackage = PERSONA ? wakePackagesApi.loadPackages()[PERSONA] : null;
+      RECORDS_PIECE = Boolean(seatPackage && wakePackagesApi.sourcingFor(seatPackage) === 'records' &&
+        statePacket && statePacket.manifest &&
+        Array.isArray(statePacket.manifest.approvedQuotes) && !statePacket.manifest.approvedQuotes.length);
+    } catch (_) { /* a markdown lane state is not a Packet */ }
     log.info('lane state-file injected: ' + STATE_FILE + ' (' + worldState.length + ' chars) — full-summary blob bypassed');
   } else {
     try {
@@ -958,8 +972,11 @@ async function main() {
   const system =
     'You are this journalist, alive in GodWorld this cycle — not a systems analyst, not a briefing desk, ' +
     'not a reciter of the world summary. Sheets and the edition header already hold the weather and the ' +
-    'tracker. NotebookLM will summarize you later. Your job is street grain: a named regular, a named ' +
-    'counter, dirt at a Packet-named place that is this place\'s dirt. Only Packet and ledger names. ' +
+    'tracker. NotebookLM will summarize you later. ' + (RECORDS_PIECE
+      ? 'Nobody was interviewed for this piece, so your job is the record made plain: the line, the vote, ' +
+        'the figure, what it shows and what it does not. No one speaks in it and no scene is staged for it. '
+      : 'Your job is street grain: a named regular, a named ' +
+        'counter, dirt at a Packet-named place that is this place\'s dirt. ') + 'Only Packet and ledger names. ' +
     'Your SKILL is voice. Read IDENTITY/LENS/RULES.\n\n' +
     'CURRENT-CYCLE OVERRIDE: the edition pipeline is paused, so your desk workspace ' +
     '(output/desks/' + DESK + '/current/) is STALE — do NOT take cycle facts from it. ' + depthInstr +
@@ -1051,7 +1068,9 @@ async function main() {
       '\n\nWRITE the full ' + DESK + ' section for cycle ' + cycle + ' — the complete, publish-ready ' +
       'markdown, built ONLY from the events/names/records in the world state above plus what your tools ' +
       'return. ' + (PACKET_ONLY
-        ? 'You are this journalist in GodWorld this cycle. The Packet facts are the physics — what the engine did. The Article is someone living under that physics. Open on a named interviewed person or a Packet-named place, in a body, doing something. Use every approved quote as spoken speech in a scene, not as a caption under a recap. Never announce the season or the temperature; if it is winter, show a Packet-backed thing that moved on a day like this. Never lead with a tracker phase, a feed label, a bullet list of approved facts, or the words supplied record / listed as / what remains to be learned. Do not import real-world Oakland winter tropes the Packet did not name. Do not invent names, numbers, quotes, or events. Texture may only dress Packet-named places and approved speakers. If you cannot write the life, stop. End with ## INTAKE using one record per line, then the exact SELF-SCORE comment. '
+        ? (RECORDS_PIECE
+          ? 'You are this journalist in GodWorld this cycle. Nobody was interviewed for this piece: the Packet holds no approved quote. Write it from the record. Open the way packet.reviewProfile.articleContract.opening says — on a supplied line, figure, vote or filing — and close the way its closing says. Write no quoted speech and attribute no statement, mood or intention to anyone. Do not stage a scene, a street, a bar or a room to carry the facts. Name a source the way a reader would — the city\'s initiative record, his career line — never the Packet, a tab or file name, or a bracketed tag. Never lead with a tracker phase label, a feed label, or a bullet list of approved facts. Do not import real-world Oakland tropes the Packet did not name. Do not invent names, numbers, quotes, or events, and do no arithmetic the Packet has not already done. End with ## INTAKE using one record per line, then the exact SELF-SCORE comment. '
+          : 'You are this journalist in GodWorld this cycle. The Packet facts are the physics — what the engine did. The Article is someone living under that physics. Open on a named interviewed person or a Packet-named place, in a body, doing something. Use every approved quote as spoken speech in a scene, not as a caption under a recap. Never announce the season or the temperature; if it is winter, show a Packet-backed thing that moved on a day like this. Never lead with a tracker phase, a feed label, a bullet list of approved facts, or the words supplied record / listed as / what remains to be learned. Do not import real-world Oakland winter tropes the Packet did not name. Do not invent names, numbers, quotes, or events. Texture may only dress Packet-named places and approved speakers. If you cannot write the life, stop. End with ## INTAKE using one record per line, then the exact SELF-SCORE comment. ')
         : 'Use your tools FIRST where the state runs thin — verify a citizen before characterizing them, search prior coverage for depth — then compose. ') +
       priorArcFinal + strictSourceFinal + ' Output ONLY the section.';
     const r = await openRouterToolLoop({ model: MODEL, system, user: composeUser,

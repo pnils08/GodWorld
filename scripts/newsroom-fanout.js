@@ -42,12 +42,12 @@ const DAILY_QUOTAS = { civic: 2, sports: 2, culture: 1, business: 1, undocked: 1
 // Rook daily on top when UNDOCKED has an un-recapped episode. DAILY_QUOTAS
 // stays only for boundDailyAssignments (legacy fanout files) and the tests.
 // Off the grid by ruling: the OakTown Echo six, podcast hosts, photographers,
-// Ariana (data analyst), Rhea (copy chief), and Bay Tribune seats with no voice
-// agent (Celeste Tran) or no wake package (Elliot Marbury) until seated.
+// Ariana (data analyst), Rhea (copy chief). Elliot Marbury (data desk) seated
+// Wednesday 2026-09-30 with MARBURY-LEP2-1 + buildMarburySlice.
 const WEEK_GRID = Object.freeze({
   1: ['carmen-delaine', 'business-desk', 'lila-mezran', 'trevor-shimizu', 'anthony-raines'],
   2: ['luis-navarro', 'rachel-torres', 'angela-reyes', 'selena-grant'],
-  3: ['freelance-firebrand', 'noah-tan', 'p-slayer', 'tanya-cruz'],
+  3: ['freelance-firebrand', 'noah-tan', 'elliot-marbury', 'p-slayer', 'tanya-cruz'],
   4: ['elliot-graye', 'simon-leary', 'hal-richmond', 'talia-finch'],
   5: ['mason-ortega', 'kai-marston', 'sharon-okafor', 'maria-keen', 'celeste-tran']
 });
@@ -697,7 +697,8 @@ async function buildFanout(date) {
     'maria-keen': 'buildNeighborhoodSlice',
     'selena-grant': 'buildOaksBeatSlice',
     'talia-finch': 'buildOaksGroundSlice',
-    'celeste-tran': 'buildTrendsSlice'
+    'celeste-tran': 'buildTrendsSlice',
+    'elliot-marbury': 'buildMarburySlice'
   };
   let beatEnrich = { enriched: false, reason: 'none', seats: [], dropped: [] };
   if (cycle != null) {

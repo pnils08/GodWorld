@@ -1,0 +1,28 @@
+---
+title: Codex review — Marbury wave 2 diff
+created: 2026-10-01
+updated: 2026-10-01
+type: reference
+tags: [media, sports, draft]
+sources:
+  - /tmp/claude-0/-root-GodWorld/8ae94af4-235d-457f-9dae-e871c3bbd708/scratchpad/marbury-wave2.diff
+  - scripts/buildMarburySlice.js
+  - scripts/newsroom-wake-packages.json
+pointers:
+  - "[[../media/MARBURY_DATA_BAG]] — data-desk contract"
+---
+
+# Adversarial findings
+
+- **HIGH — The shared writer asks the records memo for a scene.** `scripts/cron-desk-writer.js:958-962,1054` instructs every packet writer to open on an interviewed person or a Packet-named place “in a body, doing something,” and to stop if it cannot write that life. Marbury's slice sets `hood: null`, interviews nobody, and explicitly requires “No quotes, no scene” (`scripts/buildMarburySlice.js:24,143-150`); its package requires a sourced season-line opening (`scripts/newsroom-wake-packages.json:394-410`). This can stop the write or induce unsupported scene texture. Selena's records package likewise requires a stat opening and “never a scene” (`scripts/newsroom-wake-packages.json:1303-1309`). No records-seat exception exists in the shared prompt.
+- **HIGH — A malformed numeric cell becomes a published-fact candidate.** `scripts/buildMarburySlice.js:56-62,83-92,113-116` checks row width but does not validate numeric cells before deriving and adding rates to `prewrite.anchorFacts` (`scripts/beatSliceKit.js:180-185`). Read-only synthetic probe: `IP=63.2, SO=—, BB=14` emits `NaN K per 9` and `NaN K per BB`; `AB=100, HR=5, SO=0` emits `one SO every — AB`. A missing/invalid cell should yield no derived fact, and zero strikeouts should not produce a dangling rate. The current mirror did not contain an affected rate cell.
+- **MEDIUM — A feed-selected subject can lose the current-cycle delta.** `scripts/buildMarburySlice.js:101-108,131-136,153` selects a dossier name found anywhere in `NamesUsed`, `Stats`, `StoryAngle`, or `Notes`, but adds a feed fact only when a comma-delimited `Stats` segment starts with that name. At C109, `output/beats/Oakland_Sports_Feed.jsonl:229` names Mariano Rosales in `Notes` as allowing two runs in relief, while `Stats` names other players. A read-only C109 build selected Mariano, set `subject is on this cycle's feed`, and emitted zero `This cycle` facts. The memo loses the very feed delta that selected him.
+- **MEDIUM — “Same-job” peer band can mix positions.** `scripts/buildMarburySlice.js:118-129` sorts by exact position but only filters pitchers into starter versus other pitcher and accepts every hitter position. For C109 Mariano Rosales (CP), the resulting peers are Julio Valencia (CP) and Louis Cross (RP); the latter is not a peer at position under `docs/media/MARBURY_DATA_BAG.md:44`. Hitter subjects can similarly receive a different-position peer whenever fewer than two exact-position cards exist.
+- **MEDIUM — “Latest” depends on dossier row order.** `scripts/buildMarburySlice.js:55-63,124-129,139-149` neither checks nor sorts season years, then treats `seasons[0]` as the latest subject and peer season. A read-only synthetic card with 2040 before 2041 parses both and labels 2040 “the latest.” The current mirror's parsed cards are in descending year order, so this is a format-drift risk, not an observed current mislabel.
+- **MEDIUM — Bare write CLI cannot gate Claude-written drafts.** `scripts/cron-desk-run.js:107-112` defaults to the `claude` Rhea backend; `scripts/cron-rhea-gate.js:462-474` correctly rejects a Claude writer graded by that backend. The new Marbury write route is `anthropic/claude-sonnet-5` (`scripts/newsroom-wake-packages.json:385-387`), as are several changed seats, so a direct `--stage=write` invocation without `--gate-backend api` cannot stage them. The scheduled weekday command and pre-Saturday sweep explicitly pass `api` (`docs/OPERATIONS.md:65`, `scripts/preSaturdayCoverageSweep.js:192-202`), so those routes are clean on this point.
+
+**NONE:** No missing Marbury persona, builder, fanout, desk, Rhea, or Saturday registration found. `elliot marbury` and `elliot graye` use distinct full-name matches (`scripts/cron-desk-run.js:61-70`). Records sourcing returns zero interview asks (`scripts/cron-desk-run.js:412-419`), and the packet/Rhea quoted-source checks accept an empty quote list (`scripts/livedExperiencePacketV2.js:295-337,378-379`; `scripts/cron-rhea-gate.js:507-525`). The production model routes, staged/state filename readers, delivery, and digest showed no model-slug dependency that breaks these new write models. The Marbury ref includes subject POPID and Cycle; `staleBeatRef` is keyed by persona plus ref (`scripts/buildMarburySlice.js:145-150`; `scripts/newsroom-fanout.js:168-188`). No downstream conversion of dossier years to sim dates found. Subject selection is deterministic for unchanged mirror and beat inputs; there is no cross-seat guard against selecting Anthony's subject, but no contract requires distinct subjects and the two seats have different reporting jobs.
+
+## Review — 2026-10-01 (research-build)
+
+Accepted; all six folded before commit. 1 — a records seat writing a Packet with no approved quote gets its own writer brief (open on the record, no scene, no speech); a people seat with nobody attached keeps the shared brief. Re-bench: Carmen and Marbury both open on the line, no staged scene. 2 — a non-numeric cell drops the row; a rate with a missing cell is not emitted; zero strikeouts reads "no SO". 3 — a subject named only in the feed notes carries the sentence that names him. 4 — peers are same primary position only; a shorter band over a mixed one. 5 — seasons sort by year. 6 — the failure ping's recovery command passes `--gate-backend api`.

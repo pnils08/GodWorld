@@ -6,7 +6,7 @@ const packagesApi = require('./newsroomWakePackages');
 const packages = packagesApi.loadPackages();
 const active = packagesApi.activePackages(packages);
 assert.deepStrictEqual(active.map(row => row.key),
-  ['freelance-firebrand', 'carmen-delaine', 'luis-navarro', 'trevor-shimizu', 'p-slayer', 'anthony-raines', 'hal-richmond', 'tanya-cruz', 'simon-leary', 'maria-keen', 'elliot-graye', 'mason-ortega', 'sharon-okafor', 'business-desk', 'kai-marston', 'rachel-torres', 'lila-mezran', 'angela-reyes', 'noah-tan', 'nia-rook', 'nia-rook-weekly', 'selena-grant', 'talia-finch', 'celeste-tran']);
+  ['freelance-firebrand', 'carmen-delaine', 'luis-navarro', 'trevor-shimizu', 'p-slayer', 'anthony-raines', 'elliot-marbury', 'hal-richmond', 'tanya-cruz', 'simon-leary', 'maria-keen', 'elliot-graye', 'mason-ortega', 'sharon-okafor', 'business-desk', 'kai-marston', 'rachel-torres', 'lila-mezran', 'angela-reyes', 'noah-tan', 'nia-rook', 'nia-rook-weekly', 'selena-grant', 'talia-finch', 'celeste-tran']);
 
 // pipeline.60 — Nia Rook's UNDOCKED show seat (own desk key, feed-built lane)
 const nia = packages['nia-rook'];
@@ -16,7 +16,7 @@ assert.equal(nia.requiredDaily, true);
 assert.equal(nia.assignment.desk, 'undocked');
 assert.equal(nia.assignment.popid, 'POP-01076');
 assert.equal(nia.packetContract, 'v2');
-assert.equal(packagesApi.routeFor(nia, 'write').model, 'meta-llama/llama-3.3-70b-instruct');
+assert.equal(packagesApi.routeFor(nia, 'write').model, 'x-ai/grok-4.3');
 assert.equal(nia.reviewProfile.canonPolicy, 'load-bearing');
 
 // (e) NEXT BUILD (2026-09-25) — Nia's weekly leaderboard/digest: own desk key
@@ -30,7 +30,7 @@ assert.equal(niaWeekly.requiredDaily, false);
 assert.equal(niaWeekly.assignment.desk, 'undocked-digest');
 assert.equal(niaWeekly.assignment.popid, 'POP-01076');
 assert.equal(niaWeekly.packetContract, 'v2');
-assert.equal(packagesApi.routeFor(niaWeekly, 'write').model, 'meta-llama/llama-3.3-70b-instruct');
+assert.equal(packagesApi.routeFor(niaWeekly, 'write').model, 'x-ai/grok-4.3');
 assert.equal(niaWeekly.reviewProfile.canonPolicy, 'load-bearing');
 assert.ok(nia.reviewProfile.canonBlockers.some(b => /video game/.test(b)));
 
@@ -118,7 +118,7 @@ assert.equal(pSlayer.assignment.popid, 'POP-00008');
 assert.equal(pSlayer.packetContract, 'v2');
 assert.equal(packagesApi.routeFor(pSlayer, 'angle').model, 'meta-llama/llama-3.3-70b-instruct');
 assert.equal(packagesApi.routeFor(pSlayer, 'report').model, 'meta-llama/llama-3.3-70b-instruct');
-assert.equal(packagesApi.routeFor(pSlayer, 'write').model, 'meta-llama/llama-3.3-70b-instruct');
+assert.equal(packagesApi.routeFor(pSlayer, 'write').model, 'x-ai/grok-4.3');
 assert.equal(pSlayer.reviewProfile.canonPolicy, 'load-bearing');
 assert.equal(pSlayer.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
 assert.ok(pSlayer.reviewProfile.textureConditions.some(v => v.includes('prior-take')));
@@ -142,7 +142,17 @@ assert.ok(anthony.reviewProfile.textureConditions.some(v => v.includes('unresolv
 assert.ok(anthony.reviewProfile.canonBlockers.some(v => v.includes('wrong player')));
 
 const hal = packages['hal-richmond'];
-assert.equal(hal.version, 'HAL-LEP2-1');
+assert.equal(hal.version, 'HAL-LEP2-2');
+assert.equal(packagesApi.sourcingFor(hal), 'records');
+// Records seats (builder rulings 2026-09-30): stats, data, the civic record, the long view.
+for (const key of ['carmen-delaine', 'anthony-raines', 'selena-grant', 'hal-richmond', 'elliot-marbury']) {
+  assert.equal(packagesApi.sourcingFor(packages[key]), 'records', key + ' interviews nobody');
+}
+assert.equal(packagesApi.sourcingFor(packages['trevor-shimizu']), 'people');
+const marbury = packages['elliot-marbury'];
+assert.equal(marbury.version, 'MARBURY-LEP2-1');
+assert.equal(marbury.assignment.popid, 'POP-00166');
+assert.equal(packagesApi.routeFor(marbury, 'write').model, 'anthropic/claude-sonnet-5');
 assert.equal(hal.active, true);
 assert.equal(hal.requiredDaily, true);
 assert.equal(hal.assignment.desk, 'sports');
@@ -152,7 +162,7 @@ assert.equal(hal.assignment.beatDomain, 'SPORTS_HISTORY');
 assert.equal(hal.packetContract, 'v2');
 assert.equal(packagesApi.routeFor(hal, 'angle').model, 'meta-llama/llama-3.3-70b-instruct');
 assert.equal(packagesApi.routeFor(hal, 'report').model, 'meta-llama/llama-3.3-70b-instruct');
-assert.equal(packagesApi.routeFor(hal, 'write').model, 'deepseek/deepseek-chat');
+assert.equal(packagesApi.routeFor(hal, 'write').model, 'anthropic/claude-sonnet-5');
 assert.equal(hal.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
 assert.match(hal.reviewProfile.purpose, /Packet will not contain 1973/);
 assert.ok(hal.reviewProfile.authorizedTexture.some(v => /predecessor ghost|era comparison/i.test(v)));
@@ -246,7 +256,7 @@ assert.equal(kai.assignment.beatDomain, 'CULTURE');
 assert.equal(kai.packetContract, 'v2');
 assert.equal(packagesApi.routeFor(kai, 'angle').model, 'meta-llama/llama-3.3-70b-instruct');
 assert.equal(packagesApi.routeFor(kai, 'report').model, 'meta-llama/llama-3.3-70b-instruct');
-assert.equal(packagesApi.routeFor(kai, 'write').model, 'meta-llama/llama-3.3-70b-instruct');
+assert.equal(packagesApi.routeFor(kai, 'write').model, 'anthropic/claude-haiku-4.5');
 assert.equal(kai.reviewProfile.canonPolicy, 'load-bearing');
 assert.equal(kai.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
 assert.ok(kai.reviewProfile.textureConditions.some(v => v.includes('evening source')));
@@ -282,7 +292,7 @@ assert.equal(angela.assignment.popid, 'POP-00156');
 assert.equal(angela.assignment.beatDomain, 'EDUCATION');
 assert.equal(packagesApi.routeFor(angela, 'angle').model, 'deepseek/deepseek-chat');
 assert.equal(packagesApi.routeFor(angela, 'report').model, 'deepseek/deepseek-chat');
-assert.equal(packagesApi.routeFor(angela, 'write').model, 'deepseek/deepseek-chat');
+assert.equal(packagesApi.routeFor(angela, 'write').model, 'anthropic/claude-haiku-4.5');
 assert.equal(angela.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
 assert.ok(angela.reviewProfile.textureConditions.some(v => v.includes('stability evidence')));
 assert.ok(angela.reviewProfile.canonBlockers.some(v => v.includes('invented student')));
@@ -429,11 +439,11 @@ const approaches = {
 };
 
 const rotaPool = activeRotaCandidates(packages);
-assert.equal(rotaPool.length, 23); // celeste-tran joins the rota pool (research-build persona half, 2026-09-16)
+assert.equal(rotaPool.length, 24); // + elliot-marbury, data desk (seated 2026-09-30)
 assert.deepStrictEqual(
   Object.fromEntries(Object.keys(DAILY_QUOTAS).map(desk => [desk,
     rotaPool.filter(row => row.desk === desk).length])),
-  { civic: 8, sports: 7, culture: 5, business: 1, undocked: 1 }); // celeste-tran's desk is 'wire', outside DAILY_QUOTAS' known buckets
+  { civic: 8, sports: 8, culture: 5, business: 1, undocked: 1 }); // celeste-tran's desk is 'wire', outside DAILY_QUOTAS' known buckets
 
 // The daily selector supplies at most the declared 2/2/1/1 seats. The package
 // gate normalizes those selected identities but cannot insert the other active

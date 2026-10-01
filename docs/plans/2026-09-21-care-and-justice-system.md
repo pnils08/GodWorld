@@ -704,7 +704,7 @@ Builder ruling 2026-09-29 (above, ruling 2): named-hit frequency follows demand 
 - **Custody, athletes:** "they'd have to be special sports type but not ideal" — the Task 6 default (case opens, Status not flipped for a GAME-clock citizen) stands; a sports-specific path is later work, not now.
 - **Census capacity (reshapes Task 8):** "the 100 beds really should be for the tracked citizens while a hospital tracking the city numbers would be a much higher bed count than 100." Two scales: `hospitalBaseCapacity` 100 reads against **tracked** occupancy; other-resident (city) occupancy needs its own city-scale capacity, sized to the city's numbers. Revision 2 of Task 8 builds on this — the "stay 2 fills 78 of 100" framing was the wrong scale.
 
-**Builder ruling, 2026-09-30 20:18:** the calls reading is confirmed ("seems all good") — ambulance `namedCallsField: 'hospitalIntakes'`, OARI van `namedCallsField: 'oariEligible'`; config edit plus test updates, bench, PROD.
+**Builder ruling, 2026-09-30 20:18:** the calls reading is confirmed ("seems all good") — ambulance `namedCallsField: 'hospitalIntakes'`, OARI van `namedCallsField: 'oariEligible'`; config edit plus test updates, bench, PROD — `0fec66e0`, bench @158 C129–C130 ok, LIVE PROD @132.
 
 ## Changelog
 

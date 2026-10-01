@@ -47,5 +47,24 @@ check('undocked=1 fail-closed (flag, no op)', box.parseContentConditions_('undoc
 check('undocked;warmth>=60 parses', Array.isArray(box.parseContentConditions_('undocked;warmth>=60')));
 check('first tag whitelisted', !!box.CONTENT_LEDGER_SOURCE_WHITELIST['source:undocked']);
 
+// engine.272: the pilot's run is a Reputation event; the audience watching is a plain day.
+const gen = fs.readFileSync(path.join(__dirname, '..', 'phase05-citizens', 'generateCitizensEvents.js'), 'utf8');
+const route = /if \(has\("source:undocked"\)\) return ([^;]+);/.exec(gen);
+check('undocked routing found', !!route);
+const routeFor = function (tags) {
+  return new Function('has', 'return ' + route[1] + ';')(function (t) { return tags.indexOf(t) >= 0; });
+};
+const DM = require('../utilities/citizenDialMap.js');
+P.ROWS.forEach(function (r, i) {
+  const tags = r.Tags.split(',');
+  const isPilot = tags.indexOf('ecl:kind:pilot') >= 0;
+  const tag = routeFor(tags);
+  check('row ' + i + ' routes ' + (isPilot ? 'Reputation (pilot run)' : 'plain day (audience)'),
+    isPilot ? tag === 'Reputation' : Object.keys(DM.nudgesForEvent_(tag, 1, r.Text)).length === 0, tag);
+});
+check('pilot rows are exactly the undockedpilot-gated rows', P.ROWS.every(function (r) {
+  return (r.Tags.split(',').indexOf('ecl:kind:pilot') >= 0) === /(^|;)undockedpilot(;|$)/.test(r.Conditions);
+}));
+
 if (failed) { console.error(failed + ' failed'); process.exit(1); }
 console.log('undockedEclPool: ok');

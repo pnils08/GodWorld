@@ -815,7 +815,10 @@ function generateCitizensEvents_(ctx) {
     // research.27 2.3: the show routes to Reputation — standing in the city is
     // what a run on UNDOCKED actually moves. Paired with the source whitelist
     // entry added in the same commit.
-    if (has("source:undocked")) return "Reputation";
+    // engine.272: only the PILOT's own run is that event. An audience line (watch /
+    // argue / lottery / love / aspire) is a plain day — live C104–C109 it was 209 of
+    // 226 show lines and the cohort's main integrity +3 (engine.201 ruling 1b).
+    if (has("source:undocked")) return has("ecl:kind:pilot") ? "Reputation" : "Personal";
     if (has("relationship:rivalry")) return "Rivalry";
     if (has("relationship:alliance")) return "Alliance";
     if (has("relationship:mentorship")) return "Mentorship";

@@ -54,7 +54,7 @@ var CONTENT_LEDGER_SOURCE_WHITELIST = {
   'source:economy': 1, 'source:chaos': 1, 'source:sentiment': 1,
   'source:season': 1, 'source:age': 1, 'source:familyLife': 1,
   // research.27 2.3 (S376): the show. Whitelisted in the SAME commit as its
-  // primaryFromTags branch (Reputation), per the rule above — without both,
+  // primaryFromTags branch (pilot rows Reputation, audience rows Personal), per the rule above — without both,
   // an authored UNDOCKED row would be rejected at load and nobody would know why.
   'source:undocked': 1
 };

@@ -88,6 +88,12 @@ function doPost(e) {
       out.error = 'CYCLE_TRIGGER_TOKEN script property not set';
     } else if (String(p.token || '') !== token) {
       out.error = 'bad token';
+    } else if (p.action === 'clearfire') {
+      // engine.275: the reconciliation door for a bench whose sheet was resynced back
+      // behind its fire record (the record would refuse every fire). Returns what it cleared.
+      out.cleared = PropertiesService.getScriptProperties().getProperty('FIRE_ADMISSION_JSON');
+      PropertiesService.getScriptProperties().deleteProperty('FIRE_ADMISSION_JSON');
+      out.ok = true;
     } else if (!CARRY_FORWARD_PROP_WHITELIST[String(p.key || '')]) {
       out.error = 'key not in carry-forward whitelist';
     } else if (p.action === 'setprop') {

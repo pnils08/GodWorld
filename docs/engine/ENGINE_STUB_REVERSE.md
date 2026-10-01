@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 180 · **Functions mapped:** 1534 · **S.* fields:** 363 · **Sheets:** 60
+**Files scanned:** 180 · **Functions mapped:** 1536 · **S.* fields:** 363 · **Sheets:** 60
 
 ## S.* / ctx.summary reverse index
 
@@ -123,7 +123,7 @@
 | `S.cycleAuditIssues` | `phase06-analysis/applyCivicLoadIndicator.js::resetCycleAuditIssues_` | `phase06-analysis/applyCivicLoadIndicator.js::applyCivicLoadIndicator_` | 1 | 1 |
 | `S.cycleFinalizedAt` | `phase09-digest/finalizeCycleState.js::finalizeCycleState_` | _(none)_ | 1 | 0 |
 | `S.cycleFinalState` | `phase09-digest/finalizeCycleState.js::finalizeCycleState_` | _(none)_ | 1 | 0 |
-| `S.cycleId` | `phase01-config/godWorldEngine2.js::advanceWorldTime_`, `phase08-v3-chicago/v3Integration.js::v3Integration_` | `phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_`, `phase01-config/advanceSimulationCalendar.js::simYearOf_`, `phase01-config/godWorldEngine2.js::emitPhaseTimings_`, `phase01-config/godWorldEngine2.js::logEngineError_`, `phase01-config/godWorldEngine2.js::processIntake_`, `phase01-config/godWorldEngine2.js::runDryRunCycle`, …(+109 more) | 2 | 115 |
+| `S.cycleId` | `phase01-config/godWorldEngine2.js::advanceWorldTime_`, `phase08-v3-chicago/v3Integration.js::v3Integration_` | `phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_`, `phase01-config/advanceSimulationCalendar.js::simYearOf_`, `phase01-config/godWorldEngine2.js::assertFireAdvanced_`, `phase01-config/godWorldEngine2.js::emitPhaseTimings_`, `phase01-config/godWorldEngine2.js::logEngineError_`, `phase01-config/godWorldEngine2.js::processIntake_`, …(+110 more) | 2 | 116 |
 | `S.cycleInMonth` | `phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_` | `phase10-persistence/buildCyclePacket.js::buildCyclePacket_` | 1 | 1 |
 | `S.cycleOfYear` | `phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_` | `phase02-world-state/applySeasonWeights.js::applySeasonalWeights_`, `phase02-world-state/applyWeatherModel.js::applyWeatherModel_`, `phase02-world-state/calendarStorySeeds.js::applySeasonalStorySeeds_`, `phase05-citizens/runCivicElectionsv1.js::runCivicElections_`, `phase07-evening-media/storyHook.js::storyHookEngine_`, `phase10-persistence/buildCyclePacket.js::buildCyclePacket_` | 1 | 6 |
 | `S.cyclePacket` | `phase10-persistence/buildCyclePacket.js::buildCyclePacket_` | _(none)_ | 1 | 0 |
@@ -453,7 +453,7 @@ Sheet detection: `getSheetByName`, `queue*Intent_`, known sheet-name string + wr
 | `Transit_Metrics` | `utilities/ensureTransitMetrics.js::recordTransitMetrics_` | `utilities/ensureTransitMetrics.js::getTransitMetrics_`, `utilities/ensureTransitMetrics.js::recordTransitMetrics_` | 1 | 2 |
 | `Undocked_Draw` | `phase05-citizens/casinoLedgerEngine.js::undockedDrawCast_` | `phase05-citizens/casinoLedgerEngine.js::undockedDrawCast_` | 1 | 1 |
 | `Undocked_Feed` | _(none)_ | `phase02-world-state/loadEventContentLedger.js::loadUndockedFeed_` | 0 | 1 |
-| `World_Config` | _(none)_ | `phase01-config/engine94SheetContract.js::ensureEngine133Config_`, `phase01-config/engine94SheetContract.js::ensureEngine135Config_`, `phase01-config/engine94SheetContract.js::ensureEngine148Config_`, `phase01-config/engine94SheetContract.js::ensureEngine157Config_`, `phase01-config/engine94SheetContract.js::ensureEngine160Config_`, …(+16 more) | 0 | 21 |
+| `World_Config` | _(none)_ | `phase01-config/engine94SheetContract.js::ensureEngine133Config_`, `phase01-config/engine94SheetContract.js::ensureEngine135Config_`, `phase01-config/engine94SheetContract.js::ensureEngine148Config_`, `phase01-config/engine94SheetContract.js::ensureEngine157Config_`, `phase01-config/engine94SheetContract.js::ensureEngine160Config_`, …(+17 more) | 0 | 22 |
 | `World_Drift_Report` | _(none)_ | `phase03-population/generateMonthlyDriftReport.js::generateMonthlyDriftReport` | 0 | 1 |
 | `World_Population` | `phase03-population/finalizeWorldPopulation.js::finalizeWorldPopulation_` | `phase01-config/godWorldEngine2.js::updateWorldPopulation_`, `phase03-population/applyDemographicDrift.js::applyDemographicDrift_`, `phase03-population/finalizeWorldPopulation.js::finalizeWorldPopulation_`, `phase03-population/generateMonthlyDriftReport.js::generateMonthlyDriftReport`, `phase05-citizens/citizenContextBuilder.js::diagnoseLedgerStructure`, …(+7 more) | 1 | 12 |
 | `WorldEvents_Ledger` | _(none)_ | `phase04-events/worldEventsEngine.js::worldEventsEngine_`, `phase10-persistence/recordWorldEventsv25.js::ensureWorldEventsLedger_`, `phase10-persistence/recordWorldEventsv25.js::recordWorldEvents25_`, `phase10-persistence/recordWorldEventsv25.js::upgradeWorldEventsLedger_`, `utilities/cycleRollback.js::previewRollbackToCycle78`, …(+1 more) | 0 | 6 |

@@ -281,12 +281,15 @@ const ORCHESTRATOR = 'phase01-config/godWorldEngine2.js';
 const orchLines = fs.readFileSync(path.join(ROOT, ORCHESTRATOR), 'utf8').split('\n');
 
 // --- 1. the production phase sequence, in order -----------------------------
-let inRun = false;
+let inRun = false, seenBody = false;
 const slots = [];
 for (let li = 0; li < orchLines.length; li++) {
   const line = orchLines[li];
+  // engine.275: the production entry is a wrapper (lock, admission, close) and the phase
+  // sequence lives in runWorldCycleLocked_ right after it — scan both, in order.
   if (/^function runWorldCycle\s*\(/.test(line)) { inRun = true; continue; }
-  if (inRun && /^function /.test(line)) break;
+  if (/^function runWorldCycleLocked_\s*\(/.test(line)) { inRun = true; seenBody = true; continue; }
+  if (inRun && /^function /.test(line)) { if (seenBody) break; inRun = false; continue; }
   if (!inRun) continue;
   if (line.trim().startsWith('//')) continue;          // commented-out slot = not wired
   const m = line.match(/safePhaseCall_\(\s*ctx\s*,\s*'([^']+)'\s*,\s*function\s*\(\)\s*\{\s*([A-Za-z0-9_]+_)\s*\(/);

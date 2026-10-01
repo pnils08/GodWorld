@@ -219,14 +219,20 @@ function emitPhaseTimings_(ctx) {
 //      (FIRE_ADMISSION_JSON, epoch ms), BEFORE any contract seed or world write:
 //      a fire inside fireGuardMinutes of the last one is refused; a web fire must
 //      say which cycleCount it expects;
-//   3. close — the record is marked done / failed / aborted, the sheet is flushed,
-//      then the lock is released.
-// A refused fire advances nothing. Deliberate re-fire inside the window: set script
-// property FIRE_GUARD_OVERRIDE to the Cycle number about to run (one shot).
+//   3. close — the sheet is flushed, cycleCount is read back, and the record is
+//      marked done / failed / unpersisted / unverified / aborted; then the lock is
+//      released. Anything but a verified done is reported to the caller.
+// A refused fire advances nothing. A Cycle the record already names is never admitted
+// again, whatever the clock says: the counter did not move, so the last run needs a
+// look (fix World_Config.cycleCount, or clear the record) before another fire.
+// Deliberate re-fire of the NEXT Cycle inside the window: set script property
+// FIRE_GUARD_OVERRIDE to the Cycle number about to run (one shot).
 // ============================================================================
 var FIRE_GUARD_DEFAULT_MINUTES = 60;        // also the ENGINE275_CONFIG_SEEDS seed
 var FIRE_ADMISSION_PROP = 'FIRE_ADMISSION_JSON';
 var FIRE_OVERRIDE_PROP = 'FIRE_GUARD_OVERRIDE';
+var FIRE_GUARD_MAX_MINUTES = 1440;           // the contract's upper bound
+var FIRE_STATES = { running: true, done: true, failed: true, unpersisted: true, unverified: true, aborted: true };
 
 function fireGuardRefuse_(ss, cycleId, message) {
   var err = new Error(message);
@@ -259,8 +265,8 @@ function readFireGuardConfig_(ss) {
   if (guards.length > 1) fireGuardRefuse_(ss, cycleCount + 1, 'engine.275: World_Config.fireGuardMinutes appears ' + guards.length + ' times — refusing to fire');
   if (guards.length === 1) {
     guardMinutes = num(guards[0]);
-    if (!isFinite(guardMinutes) || guardMinutes < 0) {
-      fireGuardRefuse_(ss, cycleCount + 1, 'engine.275: World_Config.fireGuardMinutes is not a number >= 0 (' + String(guards[0]) + ') — refusing to fire');
+    if (!isFinite(guardMinutes) || guardMinutes < 0 || guardMinutes > FIRE_GUARD_MAX_MINUTES) {
+      fireGuardRefuse_(ss, cycleCount + 1, 'engine.275: World_Config.fireGuardMinutes is not a number from 0 to ' + FIRE_GUARD_MAX_MINUTES + ' (' + String(guards[0]) + ') — refusing to fire');
     }
   }
   return { cycleCount: cycleCount, guardMinutes: guardMinutes };
@@ -285,19 +291,33 @@ function admitCycleFire_(ss, webOpts, nowMs) {
   var prior = null;
   if (raw) {
     try { prior = JSON.parse(raw); } catch (parseErr) { prior = null; }
-    if (!prior || typeof prior !== 'object' || !isFinite(Number(prior.startedMs)) || !isFinite(Number(prior.cycle))) {
+    var shapeOk = prior && typeof prior === 'object' && !Array.isArray(prior) &&
+      typeof prior.cycle === 'number' && isFinite(prior.cycle) && prior.cycle >= 1 && Math.floor(prior.cycle) === prior.cycle &&
+      typeof prior.startedMs === 'number' && isFinite(prior.startedMs) && prior.startedMs > 0 &&
+      typeof prior.state === 'string' && FIRE_STATES[prior.state] === true;
+    if (!shapeOk) {
       fireGuardRefuse_(ss, target, 'engine.275: the fire record (script property ' + FIRE_ADMISSION_PROP + ') is unreadable — refusing to fire. ' +
         'Inspect it; to fire deliberately, delete that property.');
     }
   }
 
+  // A Cycle the record already names is never admitted twice. The counter on the sheet
+  // has not moved past it (a write that failed, or a sheet rolled back), so another run
+  // would be that Cycle again — whatever the clock or the guard window says.
+  if (prior && prior.state !== 'aborted' && prior.cycle >= target) {
+    fireGuardRefuse_(ss, target, 'engine.275: Cycle ' + prior.cycle + ' was already admitted (' + prior.state + ') and World_Config.cycleCount is still ' +
+      cfg.cycleCount + ' — refusing to run it again. If Cycle ' + prior.cycle + ' did run, set cycleCount to ' + prior.cycle +
+      '; if it did not, clear script property ' + FIRE_ADMISSION_PROP + '. Then fire.');
+  }
+
   var notes = [];
+  var consumeOverride = false;
   if (prior && prior.state !== 'aborted' && cfg.guardMinutes > 0) {
     var ageMin = (nowMs - Number(prior.startedMs)) / 60000;
     if (ageMin < cfg.guardMinutes) {
       var override = props.getProperty(FIRE_OVERRIDE_PROP);
       if (override !== null && String(override).trim() === String(target)) {
-        props.deleteProperty(FIRE_OVERRIDE_PROP);
+        consumeOverride = true;
         notes.push('one-shot override consumed: Cycle ' + target + ' fired ' + Math.max(0, Math.round(ageMin)) + ' min after Cycle ' + prior.cycle + ' started');
       } else {
         fireGuardRefuse_(ss, target, 'engine.275: Cycle ' + prior.cycle + ' started ' + Math.max(0, Math.round(ageMin)) + ' min ago — refusing a second fire inside ' +
@@ -305,11 +325,11 @@ function admitCycleFire_(ss, webOpts, nowMs) {
       }
     }
   }
-  if (prior && prior.state === 'running') notes.push('the previous fire (Cycle ' + prior.cycle + ') never recorded completion');
-  if (prior && prior.state !== 'aborted' && Number(prior.cycle) === target) notes.push('Cycle ' + target + ' was admitted before and cycleCount did not move');
+  if (prior && prior.state !== 'done' && prior.state !== 'aborted') notes.push('the previous fire (Cycle ' + prior.cycle + ') was left ' + prior.state);
 
   var admission = { cycle: target, startedMs: nowMs, state: 'running' };
   props.setProperty(FIRE_ADMISSION_PROP, JSON.stringify(admission));
+  if (consumeOverride) props.deleteProperty(FIRE_OVERRIDE_PROP);   // only once the fire is on record
   for (var n = 0; n < notes.length; n++) {
     try { logEngineError_({ ss: ss, summary: { cycleId: target } }, 'Phase1-FireGuard', new Error('engine.275: ' + notes[n])); } catch (noteErr) { /* best effort */ }
   }
@@ -317,14 +337,65 @@ function admitCycleFire_(ss, webOpts, nowMs) {
   return admission;
 }
 
-// Mark the record. Reached Phase1-AdvanceTime -> done (or failed if the body threw);
-// stopped before it -> aborted, which the time test ignores (nothing advanced).
-function closeCycleFire_(fire, threw) {
+// The two unwrapped checks inside the body that make "aborted" mean what it says.
+// Phase1-LoadConfig and Phase1-AdvanceTime are wrapped (a throw is logged and the run
+// goes on): without these, an unreadable config would advance to Cycle 1, and a failed
+// AdvanceTime would let every later phase run with no Cycle number.
+function assertFireConfigLoaded_(ctx, fire) {
   if (!fire || !fire.admission) return;
-  var advanced = !!(fire.ctx && fire.ctx.summary && Number(fire.ctx.summary.cycleId) === fire.admission.cycle);
-  var record = { cycle: fire.admission.cycle, startedMs: fire.admission.startedMs,
-    state: advanced ? (threw ? 'failed' : 'done') : 'aborted', finishedMs: Date.now() };
+  var loaded = Number(ctx && ctx.config ? ctx.config.cycleCount : NaN);
+  if (loaded !== fire.admission.cycle - 1) {
+    throw new Error('engine.275: Phase1-LoadConfig read cycleCount ' + String(ctx && ctx.config ? ctx.config.cycleCount : undefined) +
+      ' but this fire was admitted for Cycle ' + fire.admission.cycle + ' — stopping before time advances');
+  }
+}
+function assertFireAdvanced_(ctx, fire) {
+  if (!fire || !fire.admission) return;
+  if (Number(ctx && ctx.summary ? ctx.summary.cycleId : NaN) !== fire.admission.cycle) {
+    throw new Error('engine.275: Phase1-AdvanceTime did not produce Cycle ' + fire.admission.cycle + ' (summary.cycleId is ' +
+      String(ctx && ctx.summary ? ctx.summary.cycleId : undefined) + ') — stopping before any world phase runs');
+  }
+}
+
+// Close the record AFTER the sheet is flushed, from evidence: did the run reach
+// AdvanceTime, and does the sheet now hold its Cycle number?
+//   aborted     — stopped before AdvanceTime: nothing advanced; a re-fire is free.
+//   done        — advanced, no throw, flush ok, cycleCount read back == this Cycle.
+//   failed      — advanced and the body threw.
+//   unpersisted — advanced, but cycleCount on the sheet is not this Cycle.
+//   unverified  — advanced, but the flush or the read-back itself failed.
+// Returns { state, problem } — problem is a message for the caller when the run did not
+// throw yet is not a verified done.
+function closeCycleFire_(fire, threw, ss, flushErr) {
+  if (!fire || !fire.admission) return null;
+  var cycle = fire.admission.cycle;
+  var advanced = !!(fire.ctx && fire.ctx.summary && Number(fire.ctx.summary.cycleId) === cycle);
+  var state, problem = null;
+  if (!advanced) {
+    state = 'aborted';
+  } else {
+    var onSheet = null, readErr = null;
+    try {
+      var values = ss.getSheetByName('World_Config').getDataRange().getValues();
+      for (var r = 1; r < values.length; r++) {
+        if ((values[r][0] || '').toString().trim() === 'cycleCount') { onSheet = Number(values[r][1]); break; }
+      }
+    } catch (e) { readErr = e; }
+    if (flushErr || readErr || onSheet === null) {
+      state = 'unverified';
+      problem = 'engine.275: Cycle ' + cycle + ' ran but its persistence could not be verified (' +
+        String((flushErr && flushErr.message) || (readErr && readErr.message) || 'cycleCount not found') + ')';
+    } else if (onSheet !== cycle) {
+      state = 'unpersisted';
+      problem = 'engine.275: Cycle ' + cycle + ' ran but World_Config.cycleCount reads ' + onSheet + ' — the counter did not persist';
+    } else {
+      state = threw ? 'failed' : 'done';
+    }
+  }
+  var record = { cycle: cycle, startedMs: fire.admission.startedMs, state: state, finishedMs: Date.now() };
   PropertiesService.getScriptProperties().setProperty(FIRE_ADMISSION_PROP, JSON.stringify(record));
+  if (problem) { try { logEngineError_({ ss: ss, summary: { cycleId: cycle } }, 'Phase11-FireGuardClose', new Error(problem)); } catch (logErr) { /* best effort */ } }
+  return { state: state, problem: problem };
 }
 
 // The one production entry: the sheet menu, the web trigger, any installed trigger.
@@ -334,19 +405,26 @@ function runWorldCycle(opts) {
   var lock = LockService.getScriptLock();
   if (!lock.tryLock(5000)) throw new Error('engine.275: a Cycle is already running — refusing an overlapping fire');
   var fire = { admission: null, ctx: null };
-  var threw = false;
+  var threw = false, ss = null, outcome = null, closeProblem = null;
   try {
-    var ss = openSimSpreadsheet_();  // v2.14: Use configured spreadsheet ID
+    ss = openSimSpreadsheet_();  // v2.14: Use configured spreadsheet ID
     fire.admission = admitCycleFire_(ss, (opts && opts.web === true) ? opts : null, Date.now());
     runWorldCycleLocked_(ss, fire);
   } catch (e) {
     threw = true;
     throw e;
   } finally {
-    try { closeCycleFire_(fire, threw); } catch (closeErr) { Logger.log('engine.275: could not close the fire record: ' + closeErr.message); }
-    try { SpreadsheetApp.flush(); } catch (flushErr) { Logger.log('engine.275: flush before lock release failed: ' + flushErr.message); }
-    lock.releaseLock();
+    // Flush first, then judge the run from what the sheet holds, then let go of the lock.
+    var flushErr = null;
+    try { SpreadsheetApp.flush(); } catch (fe) { flushErr = fe; }
+    try { outcome = closeCycleFire_(fire, threw, ss, flushErr); }
+    catch (closeErr) { closeProblem = 'engine.275: the fire record could not be closed (' + closeErr.message + ')'; }
+    try { lock.releaseLock(); } catch (relErr) { /* released at execution end regardless */ }
   }
+  // Reached only when the body did not throw: a run that ended but is not a verified
+  // done is reported to the caller instead of answering ok.
+  if (outcome && outcome.problem) throw new Error(outcome.problem);
+  if (closeProblem) throw new Error(closeProblem);
 }
 
 function runWorldCycleLocked_(ss, fire) {
@@ -412,12 +490,14 @@ function runWorldCycleLocked_(ss, fire) {
   // PHASE 1: CORE TIME + CONFIG
   // ═══════════════════════════════════════════════════════════
   safePhaseCall_(ctx, 'Phase1-LoadConfig', function() { loadConfig_(ctx); });
+  assertFireConfigLoaded_(ctx, fire);  // engine.275: UNWRAPPED — the config must show the count this fire was admitted on
   // engine.122: UNWRAPPED — missing carry-forward past cycle 1 aborts the run
   // BEFORE AdvanceTime queues the counter bump (abort = zero writes; skips
   // dry-run/replay internally; see loadPreviousEvening.js).
   assertCarryForwardPresent_(ctx);
   safePhaseCall_(ctx, 'Phase1-CanonHoods', function() { loadCanonNeighborhoods_(ctx); });  // engine.99 — ADR-0016 canonical hood set from Neighborhood_Map
   safePhaseCall_(ctx, 'Phase1-AdvanceTime', function() { advanceWorldTime_(ctx); });
+  assertFireAdvanced_(ctx, fire);  // engine.275: UNWRAPPED — no world phase runs unless time advanced to the admitted Cycle
   safePhaseCall_(ctx, 'Phase1-SeedRng', function() { initializeSeededRng_(ctx); });  // after AdvanceTime so seed = real cycleId (fixes dry-run seed-1 too; replay keeps its stored seed)
   safePhaseCall_(ctx, 'Phase1-Calendar', function() { advanceSimulationCalendar_(ctx); });
   safePhaseCall_(ctx, 'Phase1-ResetAudit', function() { resetCycleAuditIssues_(ctx); });

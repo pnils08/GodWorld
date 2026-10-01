@@ -176,7 +176,14 @@
 
 - **admitCycleFire_(ss, webOpts, nowMs)**
 
-- **closeCycleFire_(fire, threw)**
+- **assertFireConfigLoaded_(ctx, fire)**
+  Config: ctx.config.cycleCount
+
+- **assertFireAdvanced_(ctx, fire)**
+  Reads: S.cycleId
+
+- **closeCycleFire_(fire, threw, ss, flushErr)**
+  Sheets: World_Config
 
 - **runWorldCycle(opts)**
 
@@ -4341,4 +4348,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1534
+**Functions mapped:** 1536

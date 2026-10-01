@@ -94,6 +94,10 @@ Builder-owned items only, one line each: `HH:MM seat — the question, with enou
 
 03:45 es — shipped over one outside HOLD, so you know: agy's diff review passed every correctness check and held on one item — the game-show routing test reads the routing line out of the engine source and runs it, rather than calling an exported function. I judged that a test-style note, not a defect (it runs the real line against all 30 show rows and fails loudly if the line changes), and deployed. Say if you want it reworked.
 03:45 es — changed without asking, tell me if wrong: watching UNDOCKED no longer raises a citizen's integrity and sociability (it was +3/+2 for ~35 audience members a week, the cohort's main source of integrity). A pilot's own run still does.
+14:25 es — debt never resolves on the bench: the same 34 citizens stayed in debt all 61 Cycles, so under integrity wear they become a permanent crime-capable group, all crossing the line the same week (around C139 on live). How should debt get paid down or written off, so that group turns over? (engine.276)
+14:25 es — reading the Tribune still raises sociability (+4, 562 citizens in 12 Cycles) and ordinary job colour still raises drive (+4). Same shape as the game-show lines I cut. Plain days, or real events? (engine.277)
+14:25 es — an Epiphany line fires about 30 times a week, every week, from auto-written faith content rows on the sheet (live has them too, 21 lines at C109). Your holy-day ruling kept Easter and Christmas only. Remove those content rows from the live sheet? It is sheet content, so I left it.
+14:25 es — one trigger call ran two Cycles on the bench (and once on 2026-09-30). If that happened on a live fire the world would skip a week. I filed a guard as engine.275 and will build it next unless you say otherwise; until then, check the cycle number after the C110 fire before doing anything else.
 
 ## 7. Working ledger
 
@@ -194,3 +198,4 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 12:42 rb DONE overnight doc §4: hourly wake on both seats (rb :26 set; es :41 — es messaged to set it)
 12:50 es CHECK rb idle after its session-end (a /clear sits unsent in its prompt — left alone); no guest claimed by es; review inbox clean; bench run-forward at C158 of C171, all fires ok, errors 4, 36 citizens crime-reachable since C155
 12:54 rb CHECK es working (1 shell — bench run-forward; its own hourly wake now logging, 12:50 es CHECK), guests idle, inbox clean; commits: es d2cdb24d, rb S514 close fc6d4930. rb open: none (session closed S514; wake stays until this window ends)
+14:25 es DONE run-forward C142-C170 (28 fires ok, one fire ran two Cycles), notes in care-justice plan; C110 dress rehearsal on live-synced bench ok (37 wearers, show routing 43/5, career start row 930); bench RESYNCED from live, C109 — free to use. Rows engine.275/276/277 filed.

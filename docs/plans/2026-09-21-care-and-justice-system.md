@@ -708,7 +708,7 @@ Builder ruling 2026-09-29 (above, ruling 2): named-hit frequency follows demand 
 
 **Builder rulings, 2026-09-30 20:54 (Task 6b — custody costs a livelihood).** "Pay doesn't continue while detained and if detained for xx cycles should be fired." Custody stays rarer than illness (it already is: ~1 arrest per 11–15 Cycles citywide among tracked citizens). Read before design: the wealth passes only drift salary toward a reference (`generationalWealthEngine.js:648-660`, `:879-890`) — there is no per-Cycle paycheck to pause; hospitalization stops pay through the income-hit carrier (`hospitalIncomeHit_` / `setHospitalIncomeState_`, engine.218), and the career engine already owns layoff paths (`runCareerEngine.js:1517-1525`, engine.201 W1b). **Design next:** a detained citizen takes the same income-hit carrier for the Cycles in custody; after `judicialDismissAfterCycles` Cycles detained (World_Config, **3 — builder-confirmed 2026-09-30 21:41**; dismisses serious held 2+ and grave cases, never a one-Cycle pending release) the case reuses the layoff path. Cut → advisor → review → build.
 
-### Task 6b cut — custody costs a livelihood (engine-sheet, 2026-09-30 — builder ruled 22:36: missed pay out of savings; BUILT `f1898e37`, kimi SHIP; bench in progress)
+### Task 6b cut — custody costs a livelihood (engine-sheet, 2026-09-30 — builder ruled 22:36: missed pay out of savings; BUILT, kimi SHIP, BENCH-PROVEN @160 = `4ae350dd`; PROD push pending)
 
 **Read-before (2026-09-30 22:00, code + bench SANDBOX 0908 at C130 + PROD at C109).**
 
@@ -884,6 +884,15 @@ Commit: Income, `careerRecordLayoff_` with "Dismissed by <business> after <n> we
 
 **Builder ruling, 2026-09-30 23:13:** no tier is gated from the savings charge. The dismissal keeps the layoff paths' own Tier 3–4 scope — the ruling is on the charge.
 
+**BENCH-PROVEN 2026-09-30 (SANDBOX 0908 @159 = `f1898e37` for C131–C134, @160 = `4ae350dd` for C135–C138; live-lineage state).** `judicialDismissAfterCycles` 3 on SANDBOX World_Config, read back. Config-only probe C131–C137 (`careJusticeExposureDial` 20, `judicialHeldRate` 1), reverted before C138. Eight fires `ok`, no failed phase, `Engine_Errors` 4 rows throughout.
+- **Settlement, predicted before each fire:** POP-00013 (MEDIA clock, held 2) charged 3,077 at C134; POP-01135 and POP-00297 (held 4) charged 3,846 and 4,248 at C135; POP-00506 (CIVIC Tier 3, held 4) charged 9,231 at C136; each with its `[Money] … held with no pay — savings covered it [IncomeHit J<n>]` line, Income unchanged, Status restored. POP-00594 (`PriorStatus` Retired) released to `Retired` with no charge.
+- **Dismissal:** POP-00737 (Tier 4 ENGINE, Port of Oakland, arrested C134, held to C137) — at C137 `[Career-Layoff] Dismissed by Port of Oakland after 3 weeks in custody`, Income 123,500 → 99,815, employer cleared; released the same Cycle and charged 3 weeks at the reduced figure.
+- **Blank savings (found here, fixed `4ae350dd`):** POP-01045 has a blank `NetWorth`; released at C138 with the borrowed line, `DebtLevel` up one step, the cell still blank, no error row.
+- **Ruled dials, C138:** one case released and one diverted at the decision, each charged 1 week; one held. Not dismissed, as specified: a CIVIC-clock and a MEDIA-clock citizen with tracked employers, three self-employed citizens.
+- Sheet at C138 with three open cases — never replay.
+
+**PROD state 2026-09-30 23:45.** `judicialDismissAfterCycles` 3 is on PROD World_Config (read back; inert under the current code). **The code is NOT on PROD** — the push from the isolated stage was refused by the session's permission classifier; PROD web app is still @132. Remaining: push `4ae350dd` from a `git archive` stage, bump the deployment, pull-back compare, smoke note.
+
 ## Changelog
 
 - 2026-09-30 (engine-sheet) — Task 6b cut drafted (§Task 6b cut): weekly pay stop at the career detained branch, floors stand down, dismissal at `judicialDismissAfterCycles` through one shared layoff body; reach and rates measured on PROD and bench. Advisor + codex review pending, nothing built.
@@ -963,3 +972,4 @@ Commit: Income, `careerRecordLayoff_` with "Dismissed by <business> after <n> we
 - 2026-09-30 (engine-sheet) — Task 6b: third codex round HOLD on four items, all verified and folded as Revision 3 (charge only a missed paycheck, reconcile cases never settled, Status guard on settlement and dismissal, stage-then-commit, owner predicate = the owner draw's). Build spec fixed.
 - 2026-09-30 (engine-sheet) — Task 6b build spec consolidated (§BUILD SPEC); Tier 1–2 exempt from the savings charge by default; diff review assigned to kimi.
 - 2026-09-30 (engine-sheet) — Task 6b built (`f1898e37`), kimi diff review SHIP; builder ruled no tier is gated from the savings charge — tier test removed, minor test added.
+- 2026-09-30 (engine-sheet) — Task 6b bench-proven on SANDBOX 0908 @160 (C131–C138): savings charge, dismissal at week 3, blank-savings case, clean Cycle at ruled dials. Key on PROD World_Config; code push to PROD pending (blocked by the permission classifier).

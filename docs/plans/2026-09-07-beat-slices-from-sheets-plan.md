@@ -250,6 +250,10 @@ Rejected in the second sweep: `moonshotai/kimi-k2` (printed its own planning not
 
 **Cost, write stage only** (OpenRouter list prices fetched 2026-09-30; old side = 107 real writer runs over five weeks, new side = bench token counts): $0.27 → $0.68 a week, about +$0.41. Largest lines: Hal $0.08, Maria $0.06, Marbury $0.06 (new seat), Nia $0.01 × up to five a week.
 
+### Watch list and leftovers (S512 close)
+
+Unattended proofs: Thu 10-01 / Fri 10-02 first runs on the new write models and the no-bystander rule (W1 losses to chase or lead shape = 0; no `asks.json` exposure.basis of `same-hood-*`, `ledger-resident`, `city-resident`); Sat 10-03 12:00 sweep rewrites Jax, Angela Reyes, Rachel Torres; Sat 16:00 skips the two C109 pieces carrying repair text (Carmen, business); Mon 10-05 Carmen and Anthony quoteless; Tue 10-06 Selena; Wed 10-07 Marbury's first memo, Tanya seated, P Slayer passes W1; Thu 10-08 Hal long-form. Open: Task 5 per-reporter approach text; `As_Roster` into the beat dump for Marbury; slice builders stamping story-touched; slice seats resolving 0 profiles. For engine-sheet: INIT-001 `MilestoneNotes` upkeep text. Scratch rm-guard would not delete: `output/review-cron-audit-2026-09-30.diff`, `scripts/buildCivicDomainSlice.test.js.new`, `output/cron-compare/*_bench-*`.
+
 ## Changelog
 
 - 2026-10-01 (research-build S512) — Elliot Marbury seated Wednesday (`buildMarburySlice.js`, MARBURY-LEP2-1); Selena and Hal records seats; second write-model wave, no seat left on deepseek-chat or llama; detail §Status log.

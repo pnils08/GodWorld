@@ -3668,6 +3668,8 @@
 
 - **decayChaosExposure_(c, currentCycle)**
 
+- **rotatedScanStart_(n, cycle)**
+
 - **integrityWornByPressure_(pressure, cycle)**
 
 - **integrityWearDue_(ds, cycle, rate, floor)**
@@ -4325,4 +4327,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1527
+**Functions mapped:** 1528

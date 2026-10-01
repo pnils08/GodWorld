@@ -1029,10 +1029,17 @@ function runCareerEngine_(ctx) {
   var sumLevel = 0;
   var careerCounted = 0;
 
-  for (var r = 0; r < rows.length; r++) {
+  // engine.274: the walk reaches every row. Before this the loop BROKE at the tenth
+  // texture event — live C101–C109 it never got past row 386 of 963, so 403 of 619
+  // eligible citizens never had a career line, an overwork check or a hospital pay
+  // check. LIMIT now counts texture events only (see the cap below), and the walk
+  // starts at a rotated row each Cycle (rotatedScanStart_, the conduct engine's
+  // stride) so the ten events are not handed to the same early rows. r stays the
+  // physical row index.
+  var careerScanStart = rotatedScanStart_(rows.length, cycle);
+  for (var scanned = 0; scanned < rows.length; scanned++) {
 
-    if (count >= LIMIT) break;
-
+    var r = (careerScanStart + scanned) % rows.length;
     var row = rows[r];
 
     var tier = Number(row[iTier] || 0);
@@ -1098,6 +1105,26 @@ function runCareerEngine_(ctx) {
       }
       continue;
     }
+
+    // engine.32 T5 — Drive dial scales career-event frequency (0.5..1.5).
+    // null bands (no DialState) -> base rates unchanged.
+    var dialBands = getCitizenDialBands_(ctx, popId, iDialState >= 0 ? (row[iDialState] || "") : "");
+    // engine.182 (S438, builder: "what does that trait do?"): AMBITION COSTS. A citizen in the
+    // top drive band whose composure sits at or below neutral is working themselves thin —
+    // Strain every cycle the condition holds, and it never adapts (PRESSURE_NO_ADAPT).
+    // One pressure tag per citizen per cycle still applies (the hood tint claims first).
+    // engine.274: checked for every row that clears the gates above (it sat behind the
+    // event cap), and `existing` is re-read after it — a texture event below rebuilt the
+    // cell from the stale copy and overwrote the Strain line just written.
+    if (dialBands && dialBands.bands.drive >= 2 && dialBands.bands.composure <= 0 && iLife >= 0) {
+      emitPressureTag_(ctx, row, iLife, popId, 'overwork', pressureText_('overwork', cycle + r));
+      existing = row[iLife] ? row[iLife].toString() : "";
+    }
+
+    // engine.274: the cap bounds TEXTURE events (and their draws), not reach. Past it a
+    // row parses no career state and draws nothing. The hospital pay hit above is not
+    // capped: a stay long enough takes it at any row.
+    if (count >= LIMIT) continue;
 
     var st = parseCareerStateFromLife_(existing);
     if (!st.industry) st.industry = pickInitialIndustry_(tierRole);
@@ -1170,17 +1197,8 @@ function runCareerEngine_(ctx) {
     var macroP = getMacroPressure_(econMood);
     if (macroP <= -0.65 || macroP >= 0.7) chance += 0.006;
 
-    // engine.32 T5 — Drive dial scales career-event frequency (0.5..1.5).
-    // null bands (no DialState) -> base rates unchanged.
-    var dialBands = getCitizenDialBands_(ctx, popId, iDialState >= 0 ? (row[iDialState] || "") : "");
+    // Drive dial scales career-event frequency (dialBands read above, before the cap).
     if (dialBands) chance *= dialBands.careerFreq;
-    // engine.182 (S438, builder: "what does that trait do?"): AMBITION COSTS. A citizen in the
-    // top drive band whose composure sits at or below neutral is working themselves thin —
-    // Strain every cycle the condition holds, and it never adapts (PRESSURE_NO_ADAPT).
-    // One pressure tag per citizen per cycle still applies (the hood tint claims first).
-    if (dialBands && dialBands.bands.drive >= 2 && dialBands.bands.composure <= 0 && iLife >= 0) {
-      emitPressureTag_(ctx, row, iLife, popId, 'overwork', pressureText_('overwork', cycle + r));
-    }
 
     // Cap chance
     if (chance > 0.14) chance = 0.14;

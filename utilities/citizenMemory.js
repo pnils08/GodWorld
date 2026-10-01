@@ -348,6 +348,26 @@ function decayChaosExposure_(c, currentCycle) {
   return true;
 }
 
+// engine.201 S453 / engine.274: where a CAPPED scan of the ledger starts this Cycle.
+// A coprime stride visits every start exactly once per n Cycles; it sits near the
+// golden-ratio fraction so short runs spread too. No RNG draw, no row reorder, no
+// persisted cursor. The conduct engine (3 moral tests a Cycle) and the career engine
+// (10 texture events a Cycle) both walk (start + i) % n, so a cap never hands every
+// Cycle's events to the same early rows.
+function rotatedScanStart_(n, cycle) {
+  n = Math.floor(Number(n) || 0);
+  if (n <= 0) return 0;
+  var stride = Math.max(1, Math.floor(n * 0.618033988749895));
+  while (stride > 1) {
+    var a = n, b = stride;
+    while (b) { var rem = a % b; a = b; b = rem; }
+    if (a === 1) break;
+    stride--;
+  }
+  var c = Math.floor(Number(cycle) || 0);
+  return (((c % n) * stride) % n + n) % n;
+}
+
 // ============================================================================
 // engine.272 — INTEGRITY WEAR (the crime axis gets a cause that reaches it)
 // ----------------------------------------------------------------------------
@@ -479,6 +499,7 @@ if (typeof module !== 'undefined' && module.exports) {
     accrueChaos_: accrueChaos_, checkChaosReaction_: checkChaosReaction_,
     applyChaosReaction_: applyChaosReaction_, decayChaosExposure_: decayChaosExposure_,
     INTEGRITY_WEAR_CAUSES: INTEGRITY_WEAR_CAUSES, integrityWornByPressure_: integrityWornByPressure_,
-    integrityWearDue_: integrityWearDue_, applyIntegrityWear_: applyIntegrityWear_
+    integrityWearDue_: integrityWearDue_, applyIntegrityWear_: applyIntegrityWear_,
+    rotatedScanStart_: rotatedScanStart_
   };
 }

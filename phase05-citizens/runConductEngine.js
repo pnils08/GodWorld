@@ -84,19 +84,11 @@ function runConductEngine_(ctx) {
   var count = 0;
   var LIMIT = 3; // resolved moral tests per cycle (committed OR resisted)
 
-  // engine.201 S453: spread the capped scan across the ledger each Cycle.
-  // A coprime stride visits every start exactly once per rows.length Cycles;
-  // start near the golden-ratio fraction to spread short runs too. No RNG
-  // draw, row reorder, or persisted cursor. Individual opportunity odds stay.
-  var scanStride = Math.max(1, Math.floor(rows.length * 0.618033988749895));
-  while (scanStride > 1) {
-    var scanA = rows.length, scanB = scanStride;
-    while (scanB) { var scanRem = scanA % scanB; scanA = scanB; scanB = scanRem; }
-    if (scanA === 1) break;
-    scanStride--;
-  }
-  var scanCycle = Math.floor(Number(cycle) || 0);
-  var scanStart = (((scanCycle % rows.length) * scanStride) % rows.length + rows.length) % rows.length;
+  // engine.201 S453: spread the capped scan across the ledger each Cycle
+  // (coprime stride, no RNG draw, row reorder, or persisted cursor; individual
+  // opportunity odds stay). The arithmetic is rotatedScanStart_ (citizenMemory.js),
+  // shared with the career engine since engine.274.
+  var scanStart = rotatedScanStart_(rows.length, cycle);
 
   // ═══════════════════════════════════════════════════════════════════════════
   // POPULATION COUNTERWEIGHT — crime pressure, hood-grain since engine.33 T8.

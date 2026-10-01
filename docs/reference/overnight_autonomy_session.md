@@ -156,3 +156,6 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 21:03 rb DONE validateEdition month guard: memory-month exemption 
 (builder 20:54), 56 tests pass; other month lists (canon-name-check, editionParser, canon-leak-guard) checked, none flag loose months
 21:27 rb CHECK flight 01:30Z: names on all 12 board rows, trading=2 credits=5, 2 tool errors (was 7). es working. Sat write proof next
+01:12 rb GO research.28 run (builder, blind-reads in the morning): 3 open-character inputs x 6 models x 2 arms on OpenRouter sync; rb runs it, no guest claimed yet
+01:35 es DONE 7741b7cd UNDOCKED audience lines off Reputation (209/226 were audience). engine.272 cut written, care-justice plan §engine.272 cut
+01:35 es CLAIM codex es engine.272 cut review (mechanism only)

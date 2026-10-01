@@ -592,6 +592,28 @@ What each does to the world at rate 1 a Cycle, floor 10: **A** — after ~30 Cyc
 
 **Deploy.** Keys on SANDBOX → bench fires with a trial rate, read back: wearers = the condition set, `d` grows by `rate`, the rest byte-identical; lift the condition on a probe citizen and watch `d` return to 0 → diff review (agy or kimi) → PROD at rate 0 → the builder's values.
 
+### engine.274 cut — the career walk reaches every row; the cap counts events only (engine-sheet, 2026-10-01 — DESIGN, not built)
+
+**Read-before (2026-10-01, `runCareerEngine.js:1026-1280` read end to end; live C101–C109 `LifeHistory_Log` against ledger row positions).**
+
+- `if (count >= LIMIT) break;` (`:1034`, `LIMIT = 10` `:641`) ends the citizen walk at the tenth texture event. Live: **exactly 10 career-tag lines every Cycle, C101–C109; the highest row ever reached is 386 of 963.** 403 of the 619 eligible citizens sit past it and have never had a career line, an overwork check or a hospital pay check.
+- **Hospital pay hit** (`:1076-1100`): POP-00801, row 633, hospitalized since C106 — past the break every Cycle, so the two-Cycle-stay hit never ran. One `Career-Health` line exists in nine Cycles, at row 146.
+- **Overwork** (`:1181-1183`): all 43 overwork `Strain` lines are rows 119–269; all 18 citizens meeting the condition (drive band +2, composure ≤ 0) are in rows ≤ 386 and none past it — drive climbs on career lines, which the late rows never get.
+- **A second defect in the same loop.** `existing` is read at `:1064`; the overwork tag appends its line to `row[iLife]` at `:1182`; a texture event then writes `row[iLife] = existing + line` (`:1229`, `:1248`) — the `Strain` line just written is overwritten out of the cell (its `LifeHistory_Log` row and `DialState.pressure` record survive, the fold never sees it).
+- Tenure: `st.tenure += 1` (`:1109`) persists only when an event fires and the 20% state-line roll hits (`:1232`) — it has never been a per-Cycle count. Not changed here; named.
+
+**Mechanism.**
+
+1. **The walk never breaks.** Eligibility `continue`s and the hospital branch run for every row, as written.
+2. **The overwork check moves above the cap** and above the tenure/xp draw (it draws nothing: `emitPressureTag_` and `pressureText_` are deterministic), and `existing` is re-read from `row[iLife]` after it.
+3. **`if (count >= LIMIT) continue;`** sits after the overwork check: past the cap a row parses no career state, draws no xp and rolls no event — the cap bounds events and RNG draws, not reach.
+4. **The capped events rotate.** Row order becomes `(scanStart + scanned) % rows.length` with the conduct engine's coprime stride (`runConductEngine.js:85-97`, engine.201 S453), lifted to one shared helper `rotatedScanStart_(n, cycle)` that both engines call — the conduct engine's draws stay identical (same start, same order). Without it a full pass still hands the ten events to the same early rows.
+5. **RNG.** Draw order changes with the row order, deterministic for a given seed and Cycle; `applyEmployerSuccess_` and the matcher draw after the loop as before.
+
+**Predicted on the bench, before the fire.** Ten career-tag lines a Cycle, spread past row 386; a hospitalized citizen two Cycles into a stay, at any row, takes the pay hit once (`[IncomeHit A<admit>]`); overwork `Strain` count unchanged at first (the 18 are all early rows) and reaching late rows only as their drive climbs.
+
+**Tests (`scripts/careerEngineReach.test.js`, new; `conductEngine.test.js` stays green unchanged).** A hospitalized row placed after ten event-drawing rows takes the hit; the walk emits at most `LIMIT` events and visits the last row; two consecutive Cycles start at different rows and every start is visited once in `rows.length` Cycles; an overwork citizen who also draws an event keeps both lines in the cell; a fixed seed and Cycle give the same events twice; `rotatedScanStart_` equals the conduct engine's former inline value for n = 963 and 1105 across 200 Cycles.
+
 ### Task 6 cut — detained gates, custody carried by the case (engine-sheet, 2026-09-30 — LIVE PROD @128 = `bf8e69f4`, first live fire C110 2026-10-04)
 
 **Read-before (2026-09-30, `engine-wiring` card on Status + code).**
@@ -1017,3 +1039,4 @@ Commit: Income, `careerRecordLayoff_` with "Dismissed by <business> after <n> we
 - 2026-09-30 (engine-sheet) — Task 6b bench-proven on SANDBOX 0908 @160 (C131–C138): savings charge, dismissal at week 3, blank-savings case, clean Cycle at ruled dials. Key on PROD World_Config; code push to PROD pending (blocked by the permission classifier).
 - 2026-10-01 (engine-sheet) — Task 6b LIVE PROD @133 (`4ae350dd`), pull-back 168/168; smoke at C110.
 - 2026-10-01 (engine-sheet) — engine.272: an UNDOCKED audience line no longer routes to `Reputation` (`7741b7cd`; 209 of 226 show lines were audience colour — the cohort's main integrity +3). Cut written (§engine.272 cut): wear in `base` at a rate to a floor, regained when the condition lifts; the condition (standing hardship, 8% of the cohort, vs no positive act, 97%) is the builder's call; codex reviewing the mechanism.
+- 2026-10-01 (engine-sheet) — engine.274 cut written (§engine.274 cut): the career walk stops at row 386 of 963 every Cycle (403 of 619 eligible citizens never reached); full pass, cap on events only, rotated start shared with the conduct engine; an overwork line overwritten by a same-Cycle career event fixed in the same cut.

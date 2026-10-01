@@ -256,12 +256,6 @@ function runHouseholdEngine_(ctx) {
     holidayPool.push("enjoyed holiday meal with family");
   }
 
-  // Cultural holidays
-  if (holiday === "Hanukkah") {
-    holidayPool.push("lit the menorah with household members");
-    holidayPool.push("prepared latkes at home");
-  }
-
   // Minor holidays
   if (holiday === "Valentine") {
     holidayPool.push("shared a special dinner at home");

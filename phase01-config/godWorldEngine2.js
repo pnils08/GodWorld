@@ -904,7 +904,7 @@ function updateWorldPopulation_(ctx) {
   }
 
   // Post-holiday illness bump (winter holidays especially)
-  var winterHolidays = ["Holiday", "NewYear", "Hanukkah"];
+  var winterHolidays = ["Holiday", "NewYear"];
   if (winterHolidays.indexOf(holiday) >= 0 && season === "Winter") {
     ill += 0.0004;
   }

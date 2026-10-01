@@ -192,12 +192,6 @@ function applySeasonalStorySeeds_(ctx) {
 
 
 
-  if (holiday === "Hanukkah") {
-    seeds.push(
-      seed("Hanukkah observances light up family evenings", "CULTURE"),
-      seed("Menorah candles visible in neighborhood windows", "COMMUNITY")
-    );
-  }
 
   // ═══════════════════════════════════════════════════════════════════════════
   // OAKLAND-SPECIFIC HOLIDAYS

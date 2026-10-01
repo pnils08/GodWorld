@@ -23,7 +23,6 @@ const expected = {
   44: ['Halloween', 'Halloween', 'major', 'Temescal', 'celebration'],
   47: ['Thanksgiving', 'Thanksgiving', 'major', null, 'family'],
   48: ['CreationDay', 'Creation Day', 'major', 'Oakland', 'godworld'],
-  50: ['Hanukkah', 'Hanukkah', 'cultural', null, 'religious'],
   51: ['Holiday', 'Christmas', 'major', null, 'celebration'],
   52: ['NewYearsEve', "New Year's Eve", 'major', 'Downtown', 'celebration']
 };
@@ -44,7 +43,7 @@ vm.createContext(context);
 vm.runInContext(fs.readFileSync(path.join(root, 'phase02-world-state/getSimHoliday.js'), 'utf8'), context);
 vm.runInContext(fs.readFileSync(path.join(root, 'phase01-config/advanceSimulationCalendar.js'), 'utf8'), context);
 
-test('15 exact kept and held rows, including existing metadata', () => {
+test('14 exact kept rows, including existing metadata (Hanukkah dropped 2026-09-30)', () => {
   assert.deepStrictEqual(Object.keys(holidays.SIM_HOLIDAYS).map(Number), Object.keys(expected).map(Number));
   for (const [position, values] of Object.entries(expected)) {
     const row = holidays.SIM_HOLIDAYS[position];

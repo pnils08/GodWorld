@@ -15,7 +15,6 @@ var SIM_HOLIDAYS = {
   44: { name: 'Halloween', label: 'Halloween', priority: 'major', neighborhood: 'Temescal', type: 'celebration' },
   47: { name: 'Thanksgiving', label: 'Thanksgiving', priority: 'major', neighborhood: null, type: 'family' },
   48: { name: 'CreationDay', label: 'Creation Day', priority: 'major', neighborhood: 'Oakland', type: 'godworld' },
-  50: { name: 'Hanukkah', label: 'Hanukkah', priority: 'cultural', neighborhood: null, type: 'religious' },
   51: { name: 'Holiday', label: 'Christmas', priority: 'major', neighborhood: null, type: 'celebration' },
   52: { name: 'NewYearsEve', label: "New Year's Eve", priority: 'major', neighborhood: 'Downtown', type: 'celebration' }
 };

@@ -205,10 +205,6 @@ function applyChaosCategoryWeights_(ctx) {
 
 
 
-  if (holiday === "Hanukkah") {
-    w[CAT.COMMUNITY] *= 1.3;
-    w[CAT.RESTAURANT] *= 1.2;
-  }
 
   // ═══════════════════════════════════════════════════════════════════════════
   // OAKLAND-SPECIFIC HOLIDAY MULTIPLIERS

@@ -187,10 +187,6 @@ function applySeasonalWeights_(ctx) {
 
 
 
-  if (holiday === "Hanukkah") {
-    w.culturalWeight *= 1.3;
-    w.communityWeight *= 1.2;
-  }
 
   // ═══════════════════════════════════════════════════════════════════════════
   // SPECIFIC HOLIDAY MULTIPLIERS (Oakland)

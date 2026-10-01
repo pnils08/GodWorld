@@ -301,83 +301,24 @@ function faithVocabFor_(tradition) {
   return FAITH_VOCAB.neutral;
 }
 
-// Holy days by tradition (month-based approximation)
+// Holy days by tradition (month index = the engine's rhythm key).
+// engine.273 (builder 2026-09-30): Easter and Christmas only — every other
+// real-world observance removed (more sim storylines, less real-world
+// influence). Traditions with none return null from getHolyDayForTradition_.
 var HOLY_DAYS = {
-  'Protestant': {
-    1: 'Epiphany',
-    4: 'Easter',
-    5: 'Pentecost',
-    12: 'Advent and Christmas'
-  },
-  'Catholic': {
-    1: 'Epiphany',
-    3: 'Lent',
-    4: 'Easter',
-    8: 'Assumption',
-    11: 'All Saints',
-    12: 'Advent and Christmas'
-  },
-  'Baptist': {
-    4: 'Easter',
-    11: 'Thanksgiving',
-    12: 'Christmas'
-  },
-  'Methodist': {
-    4: 'Easter',
-    5: 'Pentecost',
-    12: 'Christmas'
-  },
-  'Pentecostal': {
-    4: 'Easter',
-    5: 'Pentecost',
-    12: 'Christmas'
-  },
-  'Reform Jewish': {
-    3: 'Purim',
-    4: 'Passover',
-    9: 'Rosh Hashanah',
-    10: 'Yom Kippur',
-    12: 'Hanukkah'
-  },
-  'Orthodox Jewish': {
-    3: 'Purim',
-    4: 'Passover',
-    5: 'Shavuot',
-    9: 'Rosh Hashanah',
-    10: 'Yom Kippur and Sukkot',
-    12: 'Hanukkah'
-  },
-  'Jewish Renewal': {
-    3: 'Purim',
-    4: 'Passover',
-    9: 'High Holy Days',
-    12: 'Hanukkah'
-  },
-  'Muslim': {
-    3: 'Ramadan',  // Variable lunar calendar - approximate months
-    4: 'Eid al-Fitr',
-    6: 'Eid al-Adha'
-  },
-  'Buddhist': {
-    2: 'Losar (Tibetan New Year)',
-    4: 'Vesak (Buddha Day)',
-    7: 'Obon'
-  },
-  'Hindu': {
-    3: 'Holi',
-    8: 'Janmashtami',
-    10: 'Diwali',
-    11: 'Diwali celebrations continue'
-  },
-  'Sikh': {
-    4: 'Vaisakhi',
-    11: 'Guru Nanak Gurpurab'
-  },
-  'Unitarian': {
-    4: 'Easter (Flower Communion)',
-    6: 'General Assembly',
-    12: 'Winter Solstice'
-  }
+  'Protestant':    { 4: 'Easter', 12: 'Advent and Christmas' },
+  'Catholic':      { 4: 'Easter', 12: 'Advent and Christmas' },
+  'Baptist':       { 4: 'Easter', 12: 'Christmas' },
+  'Methodist':     { 4: 'Easter', 12: 'Christmas' },
+  'Pentecostal':   { 4: 'Easter', 12: 'Christmas' },
+  'Reform Jewish': {},
+  'Orthodox Jewish': {},
+  'Jewish Renewal': {},
+  'Muslim':        {},
+  'Buddhist':      {},
+  'Hindu':         {},
+  'Sikh':          {},
+  'Unitarian':     { 4: 'Easter (Flower Communion)' }
 };
 
 // ============================================================================

@@ -413,9 +413,6 @@ function applyCityDynamics_(ctx) {
     if (holiday === 'Thanksgiving') { m.traffic *= 1.3; m.retail *= 1.3; m.communityEngagement *= 1.3; m.nightlife *= 0.7; m.sentiment += 0.3; }
     if (holiday === 'Holiday') { m.retail *= 1.5; m.nightlife *= 1.3; m.publicSpaces *= 1.3; m.communityEngagement *= 1.3; m.traffic *= 1.2; m.sentiment += 0.4; }
 
-    // Cultural holidays
-    if (holiday === 'Hanukkah') { m.culturalActivity *= 1.2; m.communityEngagement *= 1.2; m.retail *= 1.1; m.sentiment += 0.1; }
-
     // Oakland-specific
 
     // Minor holidays

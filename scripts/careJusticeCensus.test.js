@@ -244,6 +244,15 @@ for (const outcome of ['recovered', 'recovered-reconciled']) {
   w.census.rows.push(HEADERS.map(() => ' ')); // a stray space below the data
   run(w, 112);
   assert('9 whitespace below the data is not a row', block(w, 112).length === BLOCK && w.census.rows.length === 1 + 3 * BLOCK);
+  // A stray cell far below the data must not push the last block out of the tail read.
+  const far = world(); run(far, 110);
+  const seed = cell(far, 110, 'hospital', 'neighborhood', 'Alder', 'illness').OtherResidentOccupancy;
+  while (far.census.rows.length < 3000) far.census.rows.push(HEADERS.map(() => ''));
+  far.census.rows[2999] = HEADERS.map((h, i) => i === 7 ? ' ' : '');
+  run(far, 111);
+  const second = cell(far, 111, 'hospital', 'neighborhood', 'Alder', 'illness');
+  assert('9 a stray cell at row 3000: the next Cycle still opens from the last block and lands right after it',
+    second.OpeningOccupancy === seed && second.Corrections === 0 && Number(far.census.rows[1 + BLOCK][0]) === 111, text(second));
   const dup = world(); run(dup, 110);
   dup.census.rows[5] = dup.census.rows[4].slice(); dup.census.rows[5][HEADERS.indexOf('Completeness')] = 'incomplete';
   throws('9 a duplicate key is refused', () => run(dup, 110), 'duplicate row');
@@ -273,6 +282,29 @@ for (const outcome of ['recovered', 'recovered-reconciled']) {
   const g = cell(gone, 110, 'hospital', 'neighborhood', 'Alder', 'illness');
   assert('11 a missing tab is unavailable: blank, never zero', g.Completeness === 'unavailable' && g.TotalIntakes === '' && cell(gone, 110, 'hospital', 'city', '', 'all').ClosingOccupancy === '' &&
     cell(gone, 110, 'judicial', 'neighborhood', 'Cedar', 'arrest').Completeness === 'complete');
+  const unrun = world();
+  run(unrun, 110, ctx => { delete ctx.summary.careJusticeWriteStatus; });
+  assert('11 a Cycle whose packet phase never reached its writers is not a clean Cycle',
+    cell(unrun, 110, 'hospital', 'city', '', 'all').Completeness === 'incomplete' && cell(unrun, 110, 'judicial', 'city', '', 'all').Completeness === 'incomplete');
+  // A valid close and reopen in one Cycle: the exit landed on its own row, whatever opened after.
+  const reopen = world();
+  reopen.hospital.rows.push(hrow('H-C108-P1', 'P1', 'Alder', 108, 'active', { type: 'illness', system: 'ambulance', event: 'ambulance:old:P1', discharge: 110, outcome: 'recovered' }));
+  reopen.hospital.rows.push(hrow('H-C110-P1', 'P1', 'Alder', 110, 'hospitalized', { type: 'illness', system: 'ambulance', event: 'ambulance:new:P1' }));
+  reopen.judicial.rows.push(jrow({ CaseId: 'J-C108-P1', POPID: 'P1', OpenCycle: 108, ArrestCycle: 108, StatusNow: 'released', ResolveCycle: 110, Outcome: 'released', SourceEventId: 'patrol:old:P1' }));
+  reopen.judicial.rows.push(jrow({ CaseId: 'J-C110-P1', POPID: 'P1', OpenCycle: 110, ArrestCycle: 110, StatusNow: 'pending', SourceEventId: 'patrol:new:P1' }));
+  run(reopen, 110, ctx => {
+    ctx.summary.hospitalEvents = [{ popId: 'P1', to: 'active', kind: 'transition' }, { popId: 'P1', to: 'hospitalized', kind: 'intake', sourceEventId: 'ambulance:new:P1' }];
+    ctx.summary.judicialEvents = [{ system: 'judicial', kind: 'exit', popId: 'P1', sourceEventId: 'patrol:old:P1' }, { system: 'judicial', kind: 'intake', popId: 'P1', sourceEventId: 'patrol:new:P1' }];
+  });
+  const ro = cell(reopen, 110, 'hospital', 'neighborhood', 'Alder', 'illness'), rj = cell(reopen, 110, 'judicial', 'neighborhood', 'Alder', 'arrest');
+  assert('11 a same-Cycle close and reopen is one exit, one intake, one person in care — and complete',
+    ro.TrackedIntakes === 1 && ro.TrackedOccupancy === 1 && ro.Completeness === 'complete' &&
+    rj.TrackedIntakes === 1 && rj.TrackedOccupancy === 1 && rj.Completeness === 'complete', text(ro) + text(rj));
+  const flaky = world(); let reads = 0;
+  flaky.hospital.getDataRange = () => ({ getValues: () => { reads++; throw new Error('Service Spreadsheets failed while accessing document'); } });
+  run(flaky, 110);
+  assert('11 a ledger that cannot be read is unavailable, and the other system is still counted',
+    reads >= 1 && cell(flaky, 110, 'hospital', 'city', '', 'all').Completeness === 'unavailable' && cell(flaky, 110, 'judicial', 'city', '', 'all').Completeness === 'complete');
   const bad = world(); bad.hospital.rows[0][13] = 'EventId';
   run(bad, 110);
   assert('11 an unreadable header is unavailable too', cell(bad, 110, 'hospital', 'city', '', 'all').Completeness === 'unavailable');

@@ -1130,11 +1130,15 @@ function persistCareJusticeCensus_(ctx) {
   function ledgerImage(system, name) {
     var tab = ctx.ss.getSheetByName(name);
     if (!tab) { Logger.log('persistCareJusticeCensus_: ' + name + ' tab missing — ' + system + ' unavailable'); return null; }
-    var values = tab.getDataRange().getValues();
-    if (!values.length) return null;
-    try { careJusticeLedgerCols_(system, values[0]); }
-    catch (headerErr) { Logger.log('persistCareJusticeCensus_: ' + headerErr.message + ' — ' + system + ' unavailable'); return null; }
-    return values;
+    try {
+      var values = persistWithRetry_(function() { return tab.getDataRange().getValues(); }, name + ' census read');
+      if (!values.length) return null;
+      careJusticeLedgerCols_(system, values[0]);
+      return values;
+    } catch (readErr) {
+      Logger.log('persistCareJusticeCensus_: ' + name + ' unreadable (' + readErr.message + ') — ' + system + ' unavailable');
+      return null;
+    }
   }
   var ledgers = {
     hospital: ledgerImage('hospital', 'Hospital_Ledger'),
@@ -1155,8 +1159,18 @@ function persistCareJusticeCensus_(ctx) {
 
   var blockRows = (hoodCount + 2) * 9;
   var tailMax = blockRows * CARE_JUSTICE_TAIL_BLOCKS;
+  // The tail is anchored on the last row that carries a Cycle in column A — not
+  // on getLastRow(), which a stray cell far below the data would move, pushing
+  // the last real block out of the window and restarting the stock as a first census.
   function readTail() {
-    var lastRow = sheet.getLastRow();
+    var sheetLast = sheet.getLastRow();
+    if (sheetLast < 2) return { first: 2, rows: [] };
+    var cycles = sheet.getRange(2, 1, sheetLast - 1, 1).getValues();
+    var lastRow = 1;
+    for (var cr = cycles.length - 1; cr >= 0; cr--) {
+      var cv = cycles[cr][0];
+      if (cv !== '' && cv !== null && String(cv).replace(/^\s+|\s+$/g, '') !== '') { lastRow = cr + 2; break; }
+    }
     if (lastRow < 2) return { first: 2, rows: [] };
     var n = Math.min(lastRow - 1, tailMax);
     var first = lastRow - n + 1;

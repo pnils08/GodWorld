@@ -447,7 +447,8 @@ function careJusticeLedgerCols_(system, header) {
 function deriveCareJusticeMovements_(cycle, ledgers, hoodNames) {
   var out = { receipts: [], trackedOpen: [], derivedOpening: {},
     duplicates: { hospital: 0, judicial: 0 },
-    rowsByEvent: { hospital: {}, judicial: {} }, openByPop: { hospital: {}, judicial: {} } };
+    rowsByEvent: { hospital: {}, judicial: {} }, openByPop: { hospital: {}, judicial: {} },
+    closedByPop: { hospital: {}, judicial: {} } };
   var seen = {}, rowSeen = {};
 
   function cellOf(system, neighborhood, type) {
@@ -504,6 +505,7 @@ function deriveCareJusticeMovements_(cycle, ledgers, hoodNames) {
         out.derivedOpening[ok] = (out.derivedOpening[ok] || 0) + 1;
       }
       if (left === cycle) {
+        out.closedByPop[system][popId] = true; // this citizen's row closed this Cycle — whatever opened after
         var transferOut = !hospital && String(row[c.Outcome] || '') === 'diverted' &&
           !careJusticeIsBlank_(row[c.TransferToId]);
         push(system, transferOut ? 'transfer-out' : 'exit', id, popId, hood, type);
@@ -613,7 +615,9 @@ function planCareJusticeCensus_(args) {
   for (var s = 0; s < systems.length; s++) {
     var sys = systems[s];
     sources[sys] = args.ledgers[sys] && args.ledgers[sys].length ? 'ok' : 'missing';
-    incomplete[sys] = !!(args.writeStatus && args.writeStatus[sys] === 'failed');
+    // Only a writer that ran and said `ok` is evidence; a packet phase that threw
+    // before its writers leaves no status at all, and that is not a clean Cycle.
+    incomplete[sys] = !(args.writeStatus && args.writeStatus[sys] === 'ok');
     numbered[sys] = {};
     var K = null;
     for (var k = priorCycles.length - 1; k >= 0; k--) {
@@ -657,11 +661,11 @@ function planCareJusticeCensus_(args) {
       if (es === 'hospital') {
         var inCare = CARE_JUSTICE_HOSPITAL_OPEN.indexOf(ev.to) >= 0;
         if (ev.kind === 'intake' && inCare) landed = !!derived.rowsByEvent.hospital[String(ev.sourceEventId)];
-        else if (!inCare && !careJusticeIsBlank_(ev.to)) landed = !derived.openByPop.hospital[pop];
+        else if (!inCare && !careJusticeIsBlank_(ev.to)) landed = !!derived.closedByPop.hospital[pop] || !derived.openByPop.hospital[pop];
       } else if (ev.kind === 'intake') {
         landed = !!derived.rowsByEvent.judicial[String(ev.sourceEventId)] || !!derived.openByPop.judicial[pop];
       } else if (ev.kind === 'exit') {
-        landed = !derived.openByPop.judicial[pop];
+        landed = !!derived.closedByPop.judicial[pop] || !derived.openByPop.judicial[pop];
       }
       if (!landed) incomplete[es] = true;
     }

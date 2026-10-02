@@ -10,7 +10,8 @@
  * Scans output/cron-compare/{staged,flagged} for articles modified in the
  * last --hours (default 8) and posts each as a Discord message with the
  * article text attached as a file. Also posts editions/cycle_pulse_c*.txt
- * modified in the window (Saturday's paper).
+ * modified in the window (Saturday's paper), plus the latest staged Civis
+ * Systems Journal alongside that paper.
  *
  * Read-only over the newsroom artifacts; writes nothing but a state file so
  * re-runs never double-post. NOT CANON, no sheet writes.
@@ -26,6 +27,7 @@ const { sendDiscordFile, sendDiscordText } = require('./notebooklmPush');
 const ROOT = path.resolve(__dirname, '..');
 const COMPARE = path.join(ROOT, 'output', 'cron-compare');
 const EDITIONS = path.join(ROOT, 'editions');
+const CIVIS_JOURNAL = path.join(ROOT, 'output', 'civis-journal');
 const STATE_PATH = path.join(ROOT, 'output', 'article-delivery-state.json');
 
 function arg(name, fallback) {
@@ -77,6 +79,14 @@ function readerCopy(text) {
   return text.replace(/## INTAKE[\s\S]*$/, '').replace(/<!--\s*SELF-SCORE[\s\S]*?-->/g, '').trim();
 }
 
+function latestJournal(dir) {
+  if (!fs.existsSync(dir)) return null;
+  return fs.readdirSync(dir)
+    .map(name => ({ name, match: /^civis_journal_c(\d+)\.md$/.exec(name) }))
+    .filter(item => item.match && fs.existsSync(path.join(dir, item.name.replace(/\.md$/, '.json'))))
+    .sort((a, b) => Number(b.match[1]) - Number(a.match[1]))[0]?.name || null;
+}
+
 async function post(content, filePath, state, key) {
   if (DRY) { console.log('(dry-run) would post: ' + key); return; }
   const ok = filePath ? await sendDiscordFile(filePath, content) : await sendDiscordText(content);
@@ -118,13 +128,26 @@ async function main() {
     }
   }
 
+  let saturdayPulse = false;
   if (fs.existsSync(EDITIONS)) {
     for (const name of fs.readdirSync(EDITIONS).sort()) {
       if (!/^cycle_pulse_c\d+\.txt$/.test(name)) continue;
       const file = path.join(EDITIONS, name);
       if (fs.statSync(file).mtimeMs < cutoff) continue;
+      saturdayPulse = true;
       if (state.delivered[name]) continue;
       await post('🗞️ **THE CYCLE PULSE — the week\'s edition** (`' + name + '`)', file, state, name);
+      posted++;
+      console.log('delivered: ' + name);
+    }
+  }
+
+  if (saturdayPulse) {
+    const name = latestJournal(CIVIS_JOURNAL);
+    if (!name) console.log('Civis Journal absent; skipping');
+    else if (!state.delivered[name]) {
+      await post('📓 **CIVIS SYSTEMS JOURNAL — Elias Varek** (`' + name + '`)',
+        path.join(CIVIS_JOURNAL, name), state, name);
       posted++;
       console.log('delivered: ' + name);
     }
@@ -133,4 +156,8 @@ async function main() {
   console.log(posted ? posted + ' item(s) delivered' : 'nothing new to deliver');
 }
 
-main().catch(e => { console.error('deliver-articles failed: ' + e.message); process.exit(1); });
+if (require.main === module) {
+  main().catch(e => { console.error('deliver-articles failed: ' + e.message); process.exit(1); });
+}
+
+module.exports = { latestJournal };

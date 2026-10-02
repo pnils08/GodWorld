@@ -4285,9 +4285,7 @@
       "writers": [
         "phase10-persistence/buildCyclePacket.js::buildCyclePacket_"
       ],
-      "readers": [
-        "phase10-persistence/buildCyclePacket.js::persistHospitalLedger_"
-      ]
+      "readers": []
     },
     "cyclePacket": {
       "writers": [

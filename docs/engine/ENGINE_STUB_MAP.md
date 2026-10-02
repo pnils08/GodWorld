@@ -3229,7 +3229,7 @@
 - **hospitalRowId_(taken, cycle, popId)**
 
 - **persistHospitalLedger_(ctx)**
-  Reads: S.absoluteCycle, S.careJusticeWriteStatus, S.cycleId, S.hospitalEvents
+  Reads: S.absoluteCycle, S.cycleId, S.hospitalEvents
   Writes: S.hospitalCensus
   Sheets: Hospital_Ledger
 

@@ -914,12 +914,14 @@ function persistHospitalLedger_(ctx) {
     if (data[hi][0] !== '' && data[hi][0] !== null) hospitalIds[String(data[hi][0])] = true;
     if (data[hi][13] !== '' && data[hi][13] !== null && data[hi][13] !== undefined) hospitalEventIds[String(data[hi][13])] = true;
   }
-  // An intake receipt names its event; checked before any write, so a bad one
-  // fails the writer whole (S.careJusticeWriteStatus) and never half a Cycle.
+  // An intake receipt names its event and a known type; both are checked before
+  // any write, so a bad receipt fails the writer whole and never half a Cycle.
   for (var pe = 0; pe < events.length; pe++) {
-    if (events[pe].kind === 'intake' && HOSPITAL_OPEN_STATES.indexOf(events[pe].to) >= 0 && !events[pe].sourceEventId) {
+    if (events[pe].kind !== 'intake' || HOSPITAL_OPEN_STATES.indexOf(events[pe].to) < 0) continue;
+    if (!events[pe].sourceEventId) {
       throw new Error('Hospital_Ledger intake receipt without SourceEventId for ' + events[pe].popId);
     }
+    hospitalIntakeType_(events[pe].intakeType);
   }
 
   // Index open rows (DischargeCycle empty) by POPID — sheet row = index + 1.
@@ -1054,6 +1056,7 @@ function persistHospitalLedger_(ctx) {
     var mAdmit = mp.startCycle > 0 ? mp.startCycle : cycle;
     // A repair row is a correction, never an intake (schema, invariant F).
     var mEventId = hospitalReconcileEventId_(cycle, mPop);
+    if (hospitalEventIds[mEventId]) continue; // invariant D, as the event loop
     var mRow = [hospitalRowId_(hospitalIds, mAdmit, mPop), mPop, mp.name, mp.neighborhood,
                 mp.cause, mAdmit, mp.status, cycle, '', '', '',
                 'unclassified', 'reconcile', mEventId, '', ''];

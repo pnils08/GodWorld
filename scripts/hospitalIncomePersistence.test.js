@@ -834,8 +834,10 @@ check('T8 an intake without SourceEventId, or with an unknown type, fails the wr
   ctx.ss = { getSheetByName: name => name === 'Hospital_Ledger' ? sheet : null };
   assert.throws(() => sb.persistHospitalLedger_(ctx), /without SourceEventId/);
   assert.strictEqual(sheet.rows.length, 1, 'nothing written, not even the valid first receipt');
-  ctx.summary.hospitalEvents = [intake(pop, 'broken-leg', 'health-engine')];
+  ctx.summary.hospitalEvents = [intake(pop + '-OTHER', 'illness', 'health-engine'),
+    intake(pop, 'broken-leg', 'health-engine')];
   assert.throws(() => sb.persistHospitalLedger_(ctx), /unknown IntakeType/);
+  assert.strictEqual(sheet.rows.length, 1, 'nothing written ahead of the unknown type either');
 });
 check('T8 a tab whose L–O headers are out of place is refused', () => {
   const ctx = make('UNTRACKED');

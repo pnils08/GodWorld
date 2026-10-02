@@ -332,6 +332,53 @@ for (const outcome of ['recovered', 'recovered-reconciled']) {
     wrote.action === 'write' && again.action === 'skip' && healthyReads.length > 0 &&
     healthyReads.every(([r, n]) => r + n - 1 <= 1 + 2 * BLOCK), text(healthyReads));
 
+  // The paths in combination (codex diff review, finding 1).
+  // First census on a fresh tab, orphan past its block.
+  const first = world();
+  place(first, 1 + BLOCK + 7, 'before any census');
+  throws('9b a first census with an orphan past its block lands, then reports it', () => run(first, 110),
+    'Cycle 110 stands; row ' + (1 + BLOCK + 7) + ' below it holds "before any census" with no Cycle');
+  const firstClean = world(); run(firstClean, 110);
+  assert('9b …the first block is whole', text(block(first, 110)) === text(block(firstClean, 110)));
+
+  // Gap blocks plus the Cycle's block, orphan past both.
+  const gapped = world(); run(gapped, 110);
+  const gappedRow = 1 + 4 * BLOCK + 12;
+  place(gapped, gappedRow, 'past the gap');
+  throws('9b gap blocks and the Cycle\'s block land, then the orphan past them is reported', () => run(gapped, 113),
+    'Cycle 113 stands; row ' + gappedRow + ' below it holds "past the gap" with no Cycle');
+  assert('9b …two unavailable blocks and one written block, in order',
+    block(gapped, 111).length === BLOCK && block(gapped, 112).length === BLOCK && block(gapped, 113).length === BLOCK &&
+    block(gapped, 112).every(r => r.Completeness === 'unavailable') && Number(gapped.census.rows[1 + 3 * BLOCK][0]) === 113);
+
+  // A first attempt that landed and is retried: the retry skips, and still reports.
+  const retried = world(); run(retried, 110);
+  const retriedRow = 1 + 2 * BLOCK + 4;
+  place(retried, retriedRow, 'seen by the retry');
+  box.persistWithRetry_ = fn => { fn(); return fn(); };
+  let retryMsg = '';
+  try { run(retried, 111); } catch (e) { retryMsg = e.message; }
+  box.persistWithRetry_ = fn => fn();
+  assert('9b a write that landed and is retried writes one block and reports the orphan',
+    retryMsg.indexOf('Cycle 111 stands; row ' + retriedRow + ' below it holds "seen by the retry" with no Cycle') >= 0 &&
+    block(retried, 111).length === BLOCK && retried.census.rows.filter(r => Number(r[0]) === 111).length === BLOCK, retryMsg);
+
+  // The Cycle after a post-write report opens from the block that stood.
+  const after = world(); run(after, 110);
+  const afterRow = 1 + 3 * BLOCK + 30;
+  place(after, afterRow, 'still there');
+  throws('9b the report repeats each Cycle while the row stays', () => run(after, 111), 'Cycle 111 stands; row ' + afterRow + ' below it');
+  throws('9b …and the next Cycle still writes before it reports', () => run(after, 112), 'Cycle 112 stands; row ' + afterRow + ' below it');
+  run(clean, 112);
+  assert('9b …opening from the block that stood: equal to a run with no orphan, nothing restarted',
+    text(block(after, 112)) === text(block(clean, 112)) && block(after, 112).every(r => r.Completeness === 'complete'));
+
+  // A healthy equal-length rewrite: nothing below, nothing reported.
+  const mend = world(); run(mend, 110); run(mend, 111);
+  mend.census.rows[1 + BLOCK][HEADERS.indexOf('Completeness')] = 'incomplete';
+  const mended = run(mend, 111);
+  assert('9b a healthy equal-length rewrite reports nothing', mended.action === 'write' && text(block(mend, 111)) === text(block(clean, 111)));
+
   // Whitespace inside the window is not a row: looked at, never reported.
   const ws = world(); run(ws, 110);
   place(ws, 1 + 2 * BLOCK + 10, ' ');

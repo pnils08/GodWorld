@@ -1944,24 +1944,23 @@ function collectPropertyTax_(ss, ctx, cycle) {
   // per hood that paid (never one per household), and — the first time only — the
   // end of the weekly allocation. A ticket raises no hook: its line is on the row.
   var money = (typeof treasuryMoney_ === 'function') ? treasuryMoney_ : function (n) { return '$' + Math.round(n); };
+  // The hook deck carries `text`, so the numbers ride there as well as in `description`.
   var hooks = S.storyHooks = S.storyHooks || [];
+  var cityLine = 'Tax day — the city took in ' + money(results.cityTotal) + ' in property tax' +
+    (results.businessTax > 0 ? ' and ' + money(results.businessTax) + ' in business tax' : '') + '; ' +
+    results.households + ' tracked owner households paid ' + money(results.collected) +
+    (results.borrowed ? ', ' + results.borrowed + ' had to borrow to pay' : '');
   hooks.push({
-    hookType: 'TAX_DAY', severity: 5, priority: 4,
-    description: 'Tax day — the city took in ' + money(results.cityTotal) + ' in property tax' +
-      (results.businessTax > 0 ? ' and ' + money(results.businessTax) + ' in business tax' : '') + '; ' +
-      results.households + ' tracked owner households paid ' + money(results.collected) +
-      (results.borrowed ? ', ' + results.borrowed + ' had to borrow to pay' : ''),
-    cycleGenerated: cycle, neighborhood: '', domain: 'CIVIC',
-    text: 'Tax day: the city collected its yearly property tax'
+    hookType: 'TAX_DAY', severity: 5, priority: 4, description: cityLine,
+    cycleGenerated: cycle, neighborhood: '', domain: 'CIVIC', text: cityLine
   });
   for (var th in byHood) {
     if (!byHood.hasOwnProperty(th)) continue;
+    var hoodLine = 'Tax day in ' + (th || 'the city') + ' — ' + (householdsByHood[th] || 0) +
+      ((householdsByHood[th] || 0) === 1 ? ' owner household' : ' owner households') + ' paid ' + money(byHood[th]) + ' in property tax';
     hooks.push({
-      hookType: 'TAX_DAY', severity: 3, priority: 3,
-      description: 'Tax day in ' + (th || 'the city') + ' — ' + (householdsByHood[th] || 0) +
-        ((householdsByHood[th] || 0) === 1 ? ' owner household' : ' owner households') + ' paid ' + money(byHood[th]) + ' in property tax',
-      cycleGenerated: cycle, neighborhood: th, domain: 'CIVIC',
-      text: 'Property tax came due in ' + (th || 'the city')
+      hookType: 'TAX_DAY', severity: 3, priority: 3, description: hoodLine,
+      cycleGenerated: cycle, neighborhood: th, domain: 'CIVIC', text: hoodLine
     });
   }
   if (!(lastTax > 0) && treasury.lastTaxCycle === cycle) {

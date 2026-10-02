@@ -652,12 +652,12 @@ function runJudicialLifecycle_(ctx) {
             fined.push(fine);
             // the arrest reached the desks as CITIZEN_ARRESTED; the fine is its ending, same desk
             S.storyHooks = S.storyHooks || [];
+            // the hook deck carries `text`, so the name and the amount ride there too
+            var fineLine = (c.Name || c.POPID) + ' — fined $' + fine.fine + ' by the court on a ' + fine.gravity +
+              ' charge (' + c.Outcome + ', case ' + c.CaseId + ')' + (fine.borrowed ? '; had to borrow to pay it' : '');
             S.storyHooks.push({
-              hookType: 'COURT_FINE', severity: 4, priority: 4,
-              description: (c.Name || c.POPID) + ' — fined $' + fine.fine + ' by the court on a ' + fine.gravity +
-                ' charge (' + c.Outcome + ', case ' + c.CaseId + ')' + (fine.borrowed ? '; had to borrow to pay it' : ''),
-              cycleGenerated: cycle, neighborhood: c.Neighborhood || '', domain: 'SAFETY',
-              text: 'The court closed case ' + c.CaseId + ' with a $' + fine.fine + ' fine'
+              hookType: 'COURT_FINE', severity: 4, priority: 4, description: fineLine,
+              cycleGenerated: cycle, neighborhood: c.Neighborhood || '', domain: 'SAFETY', text: fineLine
             });
           }
         }

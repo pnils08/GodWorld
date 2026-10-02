@@ -315,6 +315,7 @@ console.log('\n10. tax day:');
   const hoodHooks = hk.filter(x => x.hookType === 'TAX_DAY' && x.neighborhood !== '');
   assert('10.11c one city tax-day hook with the totals, for the civic desk', cityHook.length === 1 && cityHook[0].domain === 'CIVIC' && /property tax and \$40K in business tax; 3 tracked owner households paid \$23K, 1 had to borrow/.test(cityHook[0].description), cityHook[0] && cityHook[0].description);
   assert('10.11d one hook per hood that paid — three hoods, not four payers', hoodHooks.length === 3 && hoodHooks.some(x => x.neighborhood === 'Rockridge' && /1 owner household paid \$11K/.test(x.description)), hoodHooks.map(x => x.description).join(' / '));
+  assert('10.11d2 the deck carries `text` — the numbers are in it, not only in the description', cityHook[0].text === cityHook[0].description && hoodHooks.every(x => /paid \$/.test(x.text)));
   assert('10.11e the first tax day says the allocation has ended', hk.filter(x => x.hookType === 'ALLOCATION_ENDED').length === 1);
   w = world({ lastTax: 68 });
   E.collectPropertyTax_(w.ctx.ss, w.ctx, 120);

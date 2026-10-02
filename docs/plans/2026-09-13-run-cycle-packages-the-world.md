@@ -261,7 +261,15 @@ Desk packets carry an EMPTY citizen archive (`0 citizens matched (of ~800)` ever
 
 **Cut review (codex 2026-10-02, `docs/research/2026-10-02-codex-engine279-cut.md`, HOLD — six points, each walked).** (1) the late flush changed the failure boundary and a `finally` could mask the body's error — accepted: the flush moved inside the body ahead of the queue clears, the wrapper preserves the first error, the all-or-nothing change is stated as policy. (2) `appendRow` vs `getLastRow() + 1` — the tab's main writer already places appends that way; live tail checked. (3) read-before overstated — reworded, remaining calls named. (4) held snapshot vs a concurrent edit — assumption stated, duplicate-name and already-`Emerged` tests added. (5) tests and the equality gate too weak — failure injection added; the gate is now a symmetric A/B with a pre-state hash and whole-Cycle comparison. (6) keep it to this pass — as cut.
 
+**BUILT `1c391906`, diff review agy SHIP (`output/antigravity/2026-10-02-review-engine279-diff.md`, no findings). Tests:** householdIntake 39 → 51, ownerDoor 29/29; the line-order and first-hit tests pass on the old code too; breaks caught — flush after the clears, no flush on a body throw, the flush error replacing the body's, a second flush after a landed-but-thrown write, a per-mint re-read, the flush removed. Not observable, kept for truth: mirroring `Emerged` into the held copy (the match never consults status).
+
+**BENCH A/B 2026-10-02 (SANDBOX 0908, live's 124-row queue, C110).** Pre-state hashes identical on nine tabs for both runs. A (old code, @171): 226 s, `Phase5-Advancement` 58.3 s. B (new code, @172): **168 s, `Phase5-Advancement` 11.4 s**. Whole-Cycle output identical: all 2,503 `LifeHistory_Log` lines of C110 in place, all 1,023 ledger rows, `Generic_Citizens`, the 15 intake rows left, `Household_Ledger`, `Family_Relationships`, `Engine_Errors`, `Citizen_Media_Usage`; every phase ok. Two earlier old-code runs from separate resyncs were identical to each other the same way, so the Cycle repeats and the equality is evidence. `Phase5-HouseholdFormation` stayed at 20–22 s (7.0 s on C111) — the next read-before if a queue this size becomes ordinary.
+
+**LIVE PROD 2026-10-02 02:24 (`1c391906`):** isolated stage, pre-flight delta exactly `phase05-citizens/processAdvancementIntake.js`, catalog in parity, pull-back 167/167 identical, no test file live. First live fire C110, 2026-10-04 — the queue it was cut for.
+
 ## Changelog
+
+- 2026-10-02 (engine-sheet S518) — engine.279 BUILT `1c391906`, bench A/B identical output, Advancement 58.3 → 11.4 s on the C110 queue, LIVE PROD 02:24.
 
 - 2026-10-02 (engine-sheet S518) — engine.279 filed and cut: the mint pass buffers its log lines (one write) and reads Generic_Citizens once; C110's 124-row queue ran 239–285 s on the bench.
 - 2026-09-26 (engine-sheet) — engine.227 CUT per §Status log 227 cut order (steps 1–3); ratio also bands downward (≤ 1/1.5 minimal); unbenched, rides the engine.193 stacked fire.

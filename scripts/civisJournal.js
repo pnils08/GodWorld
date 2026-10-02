@@ -15,7 +15,9 @@ const FALLBACK = 'claude-sonnet-5-5';
 
 function arg(name, fallback) {
   const hit = process.argv.find(a => a.startsWith(name + '='));
-  return hit ? hit.slice(name.length + 1) : fallback;
+  if (hit) return hit.slice(name.length + 1);
+  const index = process.argv.indexOf(name);
+  return index >= 0 && process.argv[index + 1] ? process.argv[index + 1] : fallback;
 }
 function readJson(file) { return JSON.parse(fs.readFileSync(file, 'utf8')); }
 function lines(file) {

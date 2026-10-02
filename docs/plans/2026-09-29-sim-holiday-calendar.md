@@ -1,7 +1,7 @@
 ---
 title: Sim holiday calendar — seasons and cycles, world-born holidays
 created: 2026-09-29
-updated: 2026-09-30
+updated: 2026-10-02
 type: plan
 tags: [engine, calendar, draft]
 sources:
@@ -188,7 +188,7 @@ Everything else in today's table leaves it: the real-world political and heritag
 
 **Builder direction, 2026-10-01 22:45 (the position-27 holiday).** Verbatim: "Open to some ideas, this is the day the Claude CLI took over and the project took on a new life." The out-of-world meaning stays out of the world (canon guard: told by what the world gained, never by who built it). Names put to the builder: **Rebirth Day** (his own word), **Second Dawn** (pairs with Creation Day — the world began, then it woke), **Voice Day** (what the world gained that week: the paper's full six desks, the city hearing itself), **The Turning**. **Ruled 2026-10-01 22:56: Second Dawn.** Position 27, priority `oakland`, citywide, told in-world as the week the city found its voice. Ready to build.
 
-#### Second Dawn cut (engine-sheet, 2026-10-02)
+#### Second Dawn cut (engine-sheet, 2026-10-02 — LIVE PROD `bce69997`, first live Second Dawn C131)
 
 **The row.** `27: { name: 'SecondDawn', label: 'Second Dawn', priority: 'oakland', neighborhood: null, type: 'godworld' }`. Citywide is `null`, as on every other citywide holiday (the packet line prints no `@`); `type` has no reader and pairs with Creation Day. `27 % 4 === 3` — never a First Friday. First live Second Dawn: C131 (`((131 − 1) % 52) + 1 = 27`), 21 weekly fires after C110.
 
@@ -240,7 +240,10 @@ Everything else in today's table leaves it: the real-world political and heritag
 - A scan of all 86 tabs for the flag: `SecondDawn` sits only in machine cells — `Holiday` columns (`Relationship_Bonds` 7, `Relationship_Bond_Ledger` 25, `WorldEvents_Ledger` 11, `Domain_Tracker`, `Cycle_Seeds`), `holiday:SecondDawn` event tags (2,492 `LifeHistory_Log` rows), calendar-context JSON in `Riley_Digest`. No prose cell carries it.
 - The label landed in: `Ripple_Ledger` and the seed deck's `Why` (`Second Dawn celebration tourism`, strength 7.8, carried to C133), `Story_Hook_Deck` (the hook), `Texture_Trigger_Log` (`city_celebration`, `second_dawn_voices`), two citizen life lines (`[Media] covered the Second Dawn celebrations across the city`).
 - Size of the tier week against its neighbours (`Riley_Digest`): city sentiment 0.16 (C130) → 0.22 → 0.10 (C132), inside the run's own range (−0.13 to 0.22 over C125–C132); migration drift +11 (range −12 to +17); events 2,658 (C130: 2,657). An ordinary week with a lift, not a spike.
-- **Two outputs reach no one.** The story seeds (`applyStorySeeds` bank, `calendarStorySeeds`) go to `S.storySeeds`, whose deck write was retired at S296 — the text is read by nothing; the entries only add domain counts (Easter's seed text at C119 is in no tab either). `S.mediaPacket` has no reader at all. So the Second Dawn seeds and the packet hint were text nobody reads plus a small unruled domain bump: **cut** (`holidaySeeds.SecondDawn`, the `calendarStorySeeds` block, the `SECOND DAWN` hint). What stays at position 27 is a strict subset of what C131 ran: the row, the tier, the hook, the trigger. The trimmed build fired C133 clean on the bench before PROD.
+- **Two outputs reach no one.** The story seeds (`applyStorySeeds` bank, `calendarStorySeeds`) go to `S.storySeeds`, whose deck write was retired at S296 — the text is read by nothing; the entries only add domain counts (Easter's seed text at C119 is in no tab either). `S.mediaPacket` has no reader at all. So the Second Dawn seeds and the packet hint were text nobody reads plus a small unruled domain bump: **cut** (`holidaySeeds.SecondDawn`, the `calendarStorySeeds` block, the `SECOND DAWN` hint). What stays at position 27 is a strict subset of what C131 ran: the row, the tier, the hook, the trigger. The trimmed build (@174 = `bce69997`) fired C133 on the bench before PROD — ok, 186 s, errors 4 → 4. C133 is position 29, so it proves the trimmed files load and run; position 27 itself was proven on @173.
+- **The cycle-weight reason did not show at C131, by design of the line:** `applyCycleWeight` joins the first five reasons (`reasons.slice(0, 5)`), and the holiday reason is pushed after events, weather, sentiment, civic load, shock, recovery, patterns, hooks, domains, arcs, economy and media — on a week with five earlier reasons it falls off (Father's Day at C129 shows none either). The runtime test proves the reason text; the tier's score (+3) applies regardless.
+- **Three label lines ran on no bench week** (they need a major holiday or a holiday with a media entry): the major-holiday hook, the high-strain civic-load factor, the evening special programming. A VM run in the calendar suite proves each (`Christmas observance citywide`, `New Year's Eve public load`, `Christmas programming`); first live execution is C111 (Valentine: the EveningMedia cell reads `Valentine's programming`, was `Valentine programming`).
+- **PROD:** engine files = `bce69997` 2026-10-02 03:54, isolated stage, pre-flight delta exactly the 14 changed files, pull-back 167/167 identical, 0 test files. Bench resynced from live C109 afterwards.
 - **What the newsroom actually gets:** the label on the calendar lines (`Cycle_Packet`, desk context, world summary), one hook line, one texture line, the tourism ripple. Nothing tells a desk what the day *is* beyond that hook — the carrier for a world-born holiday's meaning is a newsroom-side question (research-build), noted on the morning list.
 
 ## Changelog
@@ -254,3 +257,4 @@ Everything else in today's table leaves it: the real-world political and heritag
 - 2026-10-01 (engine-sheet) — Builder direction on the position-27 holiday recorded (the week the project took on a new life); four names put to him, ruling pending.
 - 2026-10-01 (engine-sheet) — Builder ruled the position-27 holiday: **Second Dawn**. Ready to build.
 - 2026-10-02 (engine-sheet) — Second Dawn cut written and built (§Second Dawn cut): the row wakes the `oakland` tier; Opening Day's sports cap and two Pride-reading texts removed from the tier; the holiday flag out of prose at six sites; thin telling (hint, trigger, seeds, hook). Outside review and bench at position 27 pending.
+- 2026-10-02 (engine-sheet) — Codex diff review folded (HOLD, three findings). Bench C131 at position 27 clean; the read showed story seeds and the media packet reach no one, so the Second Dawn seeds and packet hint were cut. LIVE PROD `bce69997`; first live Second Dawn C131.

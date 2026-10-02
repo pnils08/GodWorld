@@ -73,6 +73,12 @@ failsWith(' Forty percent of it went unread.', /machine term/);
 failsWith(' It was a medium reading.', /score or severity/);
 failsWith(' It is a high-severity signal.', /score or severity/);
 failsWith(' The Oaks open soon. Paulson knows it.', /Oaks\/Paulson/);
+for (const plain of [' We are a medium-sized firm, and Oakland is our only client.',
+  ' I want a high-level review of the Test District readings before Friday.',
+  ' That question is a low priority for me this week.',
+  ' A critical reading of the public record is what I owe this city.']) {
+  assert.deepEqual(journal.assertEntry(base + plain, frame, ids).failures, [], plain);
+}
 assert.equal(journal.assertEntry(base + ' The ledger and the public record disagree, and the instrument owes the city a better reading.', frame, ids).ok, true);
 failsWith(' The sentiment the city reads has not moved.', /machine term/);
 // A sentence may open on any word and a signature may stand on its own lines;

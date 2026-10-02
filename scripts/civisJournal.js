@@ -162,7 +162,10 @@ function assertEntry(prose, frame, selectedIds) {
   if (/\b(?:simulation|tags?|cycles?|dials?|sentiment|percent(?:age)?)\b|%/i.test(scrub)) {
     failures.push('machine term in prose (simulation, tag, cycle, dial, sentiment, percent)');
   }
-  if (/\b(?:severity|medium|rated|ratings?|scores?|scored)\b|\b(?:low|high|moderate|critical|elevated)[- ](?:severity|reading|rating|level|grade|priority|risk)\b/i.test(scrub)) {
+  // A grade of the instrument's output, not ordinary English: "a medium-sized
+  // firm", "a high-level review", "a low priority" and "a critical reading of
+  // the record" are a founder talking and must pass.
+  if (/\b(?:severity|rated|ratings?|scores?|scored)\b|\b(?:low|medium|high|moderate|critical|elevated)[- ](?:severity|rating|grade|score)\b|\b(?:low|medium|high|moderate|elevated)[- ](?:reading|signal)\b/i.test(scrub)) {
     failures.push('score or severity level in prose');
   }
   if (/\b(?:HousingPressure|RetailVitality|Sentiment|CrimeRate|TrafficIndex|HealthRisk|EconomicVitality|CivicLoad|Simulation Ledger|Neighborhood Map|Business Ledger|Riley Digest|Civic Office Ledger|Employment Roster)\b|\b[A-Z][a-z]+[A-Z][A-Za-z]+\b/.test(scrub)) {
@@ -212,8 +215,17 @@ async function callReasoner(system, user) {
   });
   const result = await r.json();
   if (!r.ok || result.error) throw new Error('reasoner: ' + (result.error && result.error.message || r.status));
-  return String(result.choices && result.choices[0] && result.choices[0].message &&
-    result.choices[0].message.content || '');
+  const choice = result.choices && result.choices[0] || {};
+  const content = String(choice.message && choice.message.content || '');
+  // An empty answer was seen once on this route (2026-10-01) with nothing to
+  // explain it; say how the call ended and what the reasoning spent.
+  if (!content.trim()) {
+    const usage = result.usage || {};
+    throw new Error('reasoner returned an empty answer (finish ' + choice.finish_reason + ', provider ' +
+      result.provider + ', reasoning ' + ((usage.completion_tokens_details || {}).reasoning_tokens ?? '?') +
+      ' of ' + (usage.completion_tokens ?? '?') + ' completion tokens)');
+  }
+  return content;
 }
 async function callSonnet(system, user) {
   if (!process.env.OPENROUTER_API_KEY) throw new Error('OpenRouter key unavailable');

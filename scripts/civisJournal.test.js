@@ -113,14 +113,14 @@ console.log = () => {};
     assert.equal(calls, 0);
     assert.equal(fs.existsSync(path.join(output, 'civis-journal')), false);
     const fallback = await journal.run(999, { root, dry: true, prior: [],
-      reasoner: async () => { throw new Error('TEST-ONLY route unavailable'); },
-      sonnet: async () => answer, page });
+      sonnet: async () => { throw new Error('TEST-ONLY route unavailable'); },
+      reasoner: async () => answer, page });
     assert.equal(fallback.assertion.ok, true);
     assert.equal(calls, 0);
     // An entry that fails the gate sends the week to the fallback, behind the same gate.
     const bad = JSON.stringify({ prose: prose.replace('a signal', 'a dial'), findingIds: ids });
     const rescued = await journal.run(999, { root, dry: true, prior: [],
-      reasoner: async () => bad, sonnet: async () => answer, page });
+      sonnet: async () => bad, reasoner: async () => answer, page });
     assert.equal(rescued.assertion.ok, true);
     const neither = await journal.run(999, { root, prior: [],
       reasoner: async () => bad, sonnet: async () => bad, page });
@@ -134,11 +134,11 @@ console.log = () => {};
     assert.equal(calls, 0);
     assert.equal(fs.existsSync(path.join(output, 'civis-journal')), false);
     const first = await journal.run(999, { root, prior: [],
-      reasoner: async () => answer, page });
+      sonnet: async () => answer, page });
     assert.ok(first.path.endsWith('civis_journal_c999.md'));
     assert.equal(calls, 1);
     const second = await journal.run(999, { root, prior: [],
-      reasoner: async () => { throw new Error('model must not be called'); }, page });
+      sonnet: async () => { throw new Error('model must not be called'); }, page });
     assert.equal(second.skipped, 'already-recorded');
     assert.equal(calls, 1);
     const saved = JSON.parse(fs.readFileSync(path.join(output, 'civis-journal', 'civis_journal_c999.json')));

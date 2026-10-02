@@ -288,7 +288,9 @@ async function run(cycle, opts = {}) {
   // reasoner fails to answer and also when its entry fails the assertion. The
   // first entry that passes is the week's journal; if neither does, the week is
   // skipped and nothing is written.
-  const routes = [['reasoner', opts.reasoner || callReasoner], ['Sonnet fallback', opts.sonnet || callSonnet]];
+  // Builder ruling 2026-10-01 22:52: Varek is Sonnet 5.5 - "we need him smart".
+  // Sonnet writes first; the reasoner is the fallback behind the same gate.
+  const routes = [['Sonnet', opts.sonnet || callSonnet], ['reasoner fallback', opts.reasoner || callReasoner]];
   let answer = null;
   let assertion = null;
   let answered = false;

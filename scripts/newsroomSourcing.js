@@ -11,16 +11,17 @@ const STREET_TAGS = new Set(['Sports', 'PrevEvening', 'Media', 'Lifestyle', 'Cul
   'Casino', 'Holiday', 'Neighborhood', 'Weather']);
 // City employers by Business_Ledger id, with the names a story uses for them.
 // Never a name regex: the ledger says "Oakland Unified School District" and
-// "Oakland Police Department", a story says OUSD and OPD. OARI has no business
-// row yet, so an OARI story draws no city worker until one exists. The story
-// must name the employer: "taken to the hospital" in a police story does not
-// seat a hospital worker.
+// "Oakland Police Department", a story says OUSD and OPD; OARI is BIZ-00095's
+// row. The story must name the employer: "taken to the hospital" in a police
+// story does not seat a hospital worker.
 const CIVIC_EMPLOYERS = Object.freeze({
   'BIZ-00013': ['AC Transit'],
   'BIZ-00014': ['BART'],
   'BIZ-00015': ['Oakland Hospital'],
   'BIZ-00016': ['OUSD', 'Oakland Unified'],
+  'BIZ-00023': ['OFD', 'Oakland Fire'],
   'BIZ-00024': ['OPD', 'Oakland Police'],
+  'BIZ-00095': ['OARI', 'Alternative Response'],
 });
 const DUMP_TABS = Object.freeze({
   workplace: ['Business_Ledger', 'Employment_Roster'],

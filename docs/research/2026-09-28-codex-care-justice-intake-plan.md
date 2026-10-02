@@ -208,7 +208,7 @@ Each item is a bounded review or implementation cut. Implementation tasks requir
 - **Files:** `phase03-population/applyDemographicDrift.js`, `scripts/buildWorldSummary.js`, `scripts/buildDeskPackets.js`, `scripts/buildHealthSlice.js`, `scripts/dumpBeatTabs.js`, `scripts/civicPetitions.js`, `scripts/cron-work-wake.js`.
 - **Steps:** Update each reader in a focused cut to select the correct scope, period, metric, and capacity. Keep named people backed by individual records. Preserve health petition Sick prevalence as its existing numerator unless separately ruled. Scripts on live schedules require explicit change approval before edits.
 - **Verify:** Run the relevant hospital, petition, slice, and wake tests; exports agree on totals and never narrate an aggregate row as a citizen. No initiative grade changes without approved committed receipts.
-- **Status:** [ ] gated on Tasks 7-9 and live-automation edit authority where applicable.
+- **Status:** [ ] edit authority given by the builder 2026-10-02 — hooks done engine-side; the beat dump and slices are handed to research-build with the data map: [[../plans/2026-09-21-care-and-justice-system]] §Task 10 handoff. Task 9 still waits on the cluster-scale review.
 
 ### Task 11 — bench proof and activation proposal
 

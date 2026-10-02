@@ -138,7 +138,7 @@ async function main() {
   // hall-of-famers and "resident" placeholder roles are not failed matches —
   // counting them as UNMATCHED buries the real unresolved tail in noise.
   // Blank employer is correct for them; they are skipped, not unresolved.
-  var NO_EMPLOYMENT_ROLE = /^student$|retired|hall of famer|resident$/i;
+  var NO_EMPLOYMENT_ROLE = /^student$|retired|hall of famer|\bresident$/i; // \b: 'Vice President' ends in 'resident' and was skipped as jobless
   var unmatched = 0;
   var results = []; // { rowIndex, popId, name, roleType, bizId, layer }
   var bizEmployees = {}; // bizId → [{ popId, name, roleType, income }]

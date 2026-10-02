@@ -2247,7 +2247,7 @@
 - **buildMintBizPool_(ss)**
   Sheets: Business_Ledger
 
-- **mintSelfEmployed_(role)**
+- **mintNamedEmployer_(role)**
 
 - **pickMintEmployer_(roleType, hood, clockMode, seed, pool, hasRoom)**
   RNG: ctx.rng / safeRand_(ctx)

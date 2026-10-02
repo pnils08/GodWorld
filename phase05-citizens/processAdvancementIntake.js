@@ -1526,39 +1526,103 @@ function buildMintBizPool_(ss) {
   }
 }
 
-// engine.278 — who is self-employed and who holds no job, ported from the
-// roster's own rules so the mint and scripts/linkCitizensToEmployers.js agree
-// on the same citizen (data/employer_mapping.json selfEmployedPatterns + its
-// SELF_EMPLOYED keyword rules; the script's NO_EMPLOYMENT_ROLE). Matching is
-// the script's: regex as written, keywords as case-sensitive substrings.
-// scripts/mintEmployerPick.test.js fails when either list drifts from its source.
+// engine.278 — which organisation a job title names, who is self-employed and
+// who holds no job: the roster's own rules, ported so the mint and
+// scripts/linkCitizensToEmployers.js place the same citizen the same way
+// (data/employer_mapping.json: parentheticalLookup, keywordRules in their
+// order, selfEmployedPatterns; the script's NO_EMPLOYMENT_ROLE). Matching is
+// the script's: a parenthetical read whole, keywords as case-sensitive
+// substrings with the first match deciding, patterns as unflagged regex.
+// scripts/mintEmployerPick.test.js fails when any list drifts from its source —
+// a mapping edit means a matching edit here.
+var MINT_PARENTHETICAL = {
+  'Port of Oakland': 'BIZ-00012', 'Anthropic': 'BIZ-00001', 'Gridiron Analytics': 'BIZ-00008', 'Oakmesh Systems': 'BIZ-00009', 'Portside Bio': 'BIZ-00010', 'Highland Hospital': 'BIZ-00015', 'AC Transit': 'BIZ-00013', 'Ridgeline Ventures': 'BIZ-00007', 'Community Affairs': 'BIZ-00017', 'UCSD': 'BIZ-00035', 'Private': 'SELF_EMPLOYED'
+};
+var MINT_KEYWORD_RULES = [
+  ['AC Transit', 'BIZ-00013'], ['BART', 'BIZ-00014'], ['Longshoreman', 'BIZ-00012'], ['Crane Operator', 'BIZ-00012'],
+  ['Dockworker', 'BIZ-00012'], ['Harbor', 'BIZ-00012'], ['Ship Pilot', 'BIZ-00012'], ['Maritime', 'BIZ-00012'],
+  ['Container Yard', 'BIZ-00012'], ['Port Logistics', 'BIZ-00012'], ['Tugboat', 'BIZ-00012'],
+  ['Trade Union', 'BIZ-00012'], ['Mayor', 'BIZ-00017'], ['Council', 'BIZ-00017'], ['Deputy Mayor', 'BIZ-00017'],
+  ['Deputy Director', 'BIZ-00017'], ['Chief of Staff', 'BIZ-00017'], ['City Planning', 'BIZ-00017'],
+  ['City Permit', 'BIZ-00017'], ['City Ombudsman', 'BIZ-00017'], ['Public Safety Executive', 'BIZ-00017'],
+  ['Oversight Executive', 'BIZ-00017'], ['Communications Director', 'BIZ-00017'], ['Ethics Commission', 'BIZ-00017'],
+  ['Elections Office', 'BIZ-00017'], ['Audit Commission', 'BIZ-00017'], ['Building Inspector', 'BIZ-00017'],
+  ['Code Enforcement', 'BIZ-00017'], ['Emergency Room', 'BIZ-00015'], ['Paramedic', 'BIZ-00015'],
+  ['Nurse', 'BIZ-00015'], ['Surgeon', 'BIZ-00015'], ['Trauma', 'BIZ-00015'], ['Mobile Clinic', 'BIZ-00026'],
+  ['Community Health', 'BIZ-00026'], ['Dental', 'BIZ-00025'], ['ESL Teacher', 'BIZ-00016'],
+  ['GED Program', 'BIZ-00016'], ['School', 'BIZ-00016'], ['Teacher', 'BIZ-00016'], ['Early Childhood', 'BIZ-00016'],
+  ['Education Director', 'BIZ-00016'], ['Librarian', 'BIZ-00021'], ['Public Library', 'BIZ-00021'],
+  ['Public Defender', 'BIZ-00022'], ['Court Reporter', 'BIZ-00022'], ['Probation', 'BIZ-00022'],
+  ['Legal Aid', 'BIZ-00022'], ['Fire', 'BIZ-00023'], ['Police', 'BIZ-00024'], ['Detective', 'BIZ-00024'],
+  ['Housing Authority', 'BIZ-00034'], ['Homeless Outreach', 'BIZ-00034'], ['Shelter Director', 'BIZ-00034'],
+  ['Reentry', 'BIZ-00034'], ['Editor-in-Chief', 'BIZ-00018'], ['Journalist', 'BIZ-00018'], ['Reporter', 'BIZ-00018'],
+  ['Desk Reporter', 'BIZ-00018'], ['Columnist', 'BIZ-00018'], ['Photographer', 'BIZ-00018'],
+  ['Sideline Reporter', 'BIZ-00018'], ['PG&E', 'BIZ-00032'], ['Baylight', 'BIZ-00020'],
+  ['Parks and Recreation', 'BIZ-00027'], ['Park Ranger', 'BIZ-00031'], ['Welding Instructor', 'BIZ-00035'],
+  ['Community College', 'BIZ-00035'], ['Pastry Chef', 'BIZ-00043'], ['Line Cook', 'BIZ-00044'],
+  ['Bartender', 'BIZ-00036'], ['Sommelier', 'BIZ-00043'], ['DJ$', 'BIZ-00039'], ['OEWD', 'BIZ-00094'],
+  ['Stabilization Fund', 'BIZ-00094'], ['OARI', 'BIZ-00095'], ['Alternative Response', 'BIZ-00095'],
+  ['Transit Hub', 'BIZ-00096'], ['Health Center', 'BIZ-00097'], ['Apprenticeship', 'BIZ-00098'],
+  ['Digital Twin', 'BIZ-00052'], ['Drone Fleet', 'BIZ-00052'], ['Autonomous Vehicle', 'BIZ-00052'],
+  ['Gene Therapy', 'BIZ-00015'], ['Climate Adaptation', 'BIZ-00017'], ['Smart Building', 'BIZ-00006'],
+  ['Vertical Farm', 'BIZ-00031'], ['Marine Biolog', 'BIZ-00031'], ['Architect', 'BIZ-00089'],
+  ['Affordable Housing', 'BIZ-00034'], ['Urban Planner', 'BIZ-00017'], ['Coach, Oakland A', 'BIZ-00005'],
+  ['Scout, Oakland A', 'BIZ-00005'], ['Manager, Oakland A', 'BIZ-00005'], ["A's Marketing", 'BIZ-00005'],
+  ['City Manager', 'BIZ-00017'], ['Public Safety', 'BIZ-00017'], ['DIRECTOR OF EMERGENCY MANAGEMENT', 'BIZ-00017'],
+  ['POLICE REVIEW BOARD', 'BIZ-00017'], ['Director of Sustainability', 'BIZ-00017'], ['Port Worker', 'BIZ-00012'],
+  ['DEPUTY CHIEF', 'BIZ-00024'], ['INTERNAL AFFAIRS', 'BIZ-00024'], ['OPOA', 'BIZ-00024'],
+  ['FIRE CHIEF', 'BIZ-00023'], ['EMS DIRECTOR', 'BIZ-00023'], ['MEDICAL EXAMINER', 'BIZ-00015'],
+  ['DISTRICT ATTORNEY', 'BIZ-00022'], ['PUBLIC DEFENDER', 'BIZ-00022'], ['SUPERIOR COURT', 'BIZ-00022'],
+  ['PROBATION & REENTRY DIRECTOR', 'BIZ-00022'], ['Oakland Oaks', 'BIZ-00074'], ['Copy Chief', 'BIZ-00018'],
+  ['Club Manager', 'BIZ-00040'], ['West Oakland Community Center', 'BIZ-00028'], ['DigitalOcean', 'BIZ-00002'],
+  ['Civis Systems', 'BIZ-00052'], ['Library Worker', 'BIZ-00021'], ['Software engineer', 'BIZ-00030'],
+  ['Bart Transit', 'BIZ-00014'], ['Bus driver', 'BIZ-00013'], ['Bus Driver', 'BIZ-00013'],
+  ['Taxi driver', 'SELF_EMPLOYED'], ['Taxi Driver', 'SELF_EMPLOYED'], ['Pianist', 'SELF_EMPLOYED'],
+  ['Aura Wellness', 'SELF_EMPLOYED'], ['Speculative Internet', 'SELF_EMPLOYED'], ['Gallery Owner', 'SELF_EMPLOYED'],
+  ['small business owner', 'SELF_EMPLOYED'], ['Actress', 'SELF_EMPLOYED'], ['Actor', 'SELF_EMPLOYED'],
+  ['Rapper', 'SELF_EMPLOYED'], ['Musician', 'SELF_EMPLOYED'], ['Painter', 'SELF_EMPLOYED'],
+  ['Artist', 'SELF_EMPLOYED'], ['Model', 'SELF_EMPLOYED'], ['Writer', 'SELF_EMPLOYED'],
+  ['Health Officer', 'BIZ-00015']
+];
 var MINT_SELF_EMPLOYED_PATTERNS = ['Owner$', '^Freelance', '^Independent', 'Artisan', 'Pitmaster$', 'Food Truck',
   'Tattoo Artist', 'Muralist', '^Booky$', 'Drug Dealer', 'Organized Crime'];
-var MINT_SELF_EMPLOYED_KEYWORDS = ['Taxi driver', 'Taxi Driver', 'Pianist', 'Aura Wellness', 'Speculative Internet',
-  'Gallery Owner', 'small business owner', 'Actress', 'Actor', 'Rapper', 'Musician', 'Painter', 'Artist', 'Model', 'Writer'];
-var MINT_NO_EMPLOYMENT_ROLE = /^student$|retired|hall of famer|resident$/i;
-function mintSelfEmployed_(role) {
-  for (var i = 0; i < MINT_SELF_EMPLOYED_PATTERNS.length; i++) if (new RegExp(MINT_SELF_EMPLOYED_PATTERNS[i]).test(role)) return true;
-  for (var k = 0; k < MINT_SELF_EMPLOYED_KEYWORDS.length; k++) if (role.indexOf(MINT_SELF_EMPLOYED_KEYWORDS[k]) !== -1) return true;
-  return false;
+var MINT_NO_EMPLOYMENT_ROLE = /^student$|retired|hall of famer|\bresident$/i;
+
+// The roster's layers 2-4 for one role: a BIZ id, 'SELF_EMPLOYED', or '' when no rule names anything.
+function mintNamedEmployer_(role) {
+  var paren = role.match(/\(([^)]+)\)/);
+  if (paren && MINT_PARENTHETICAL[paren[1].trim()]) return MINT_PARENTHETICAL[paren[1].trim()];
+  for (var k = 0; k < MINT_KEYWORD_RULES.length; k++) {
+    if (role.indexOf(MINT_KEYWORD_RULES[k][0]) !== -1) return MINT_KEYWORD_RULES[k][1];
+  }
+  for (var i = 0; i < MINT_SELF_EMPLOYED_PATTERNS.length; i++) if (new RegExp(MINT_SELF_EMPLOYED_PATTERNS[i]).test(role)) return 'SELF_EMPLOYED';
+  return '';
 }
 
 // engine.278 — the mint's employer pick, in order:
 //   a GAME-clock citizen or a no-job role (student, retired) → no employer, no line;
-//   a self-employed role → SELF_EMPLOYED;
-//   the role's field (roleFieldOf_, 'Trades' read as its field by skillTagField_)
-//     against businesses of that field with room — the citizen's own hood first
-//     ('City-wide' counts as every hood), then the whole field; seed-hash slot;
+//   a title the mapping names an organisation for (Police → the police
+//     department, Teacher → the school district) → that business, when it is a
+//     fielded business with room; a title the mapping calls self-employed →
+//     SELF_EMPLOYED;
+//   else the role's field (roleFieldOf_, 'Trades' read as its field by
+//     skillTagField_) against businesses of that field with room — the citizen's
+//     own hood first ('City-wide' counts as every hood), then the whole field;
+//     seed-hash slot;
 //   a field with no room, or a role with no field → UNTRACKED (a mint arrives
 //     with a job and its pay: employed off the tracked ledger, not seeking);
 //   an unreadable Business_Ledger → seeking: true (the caller writes the line).
+// A business whose Sector reads as no field (sports first among them — the
+// sports world places its own) is never picked, named or not.
 // Pure: no rng, no sheet. Returns { bizId, sentinel, seeking }.
 function pickMintEmployer_(roleType, hood, clockMode, seed, pool, hasRoom) {
   var out = { bizId: '', sentinel: '', seeking: false };
   var role = String(roleType || '').trim();
   if (String(clockMode || '').trim().toUpperCase() === 'GAME') return out; // the sports world places its own
   if (!role || MINT_NO_EMPLOYMENT_ROLE.test(role)) return out;
-  if (mintSelfEmployed_(role)) { out.sentinel = 'SELF_EMPLOYED'; return out; }
+  var named = mintNamedEmployer_(role);
+  if (named === 'SELF_EMPLOYED') { out.sentinel = 'SELF_EMPLOYED'; return out; }
+  if (named && pool && pool.fieldById && pool.fieldById[named] && hasRoom(named)) { out.bizId = named; return out; }
   var cat = (typeof roleFieldOf_ === 'function') ? roleFieldOf_(role) : null;
   var field = (cat && typeof skillTagField_ === 'function') ? skillTagField_(cat) : null;
   if (!field) { out.sentinel = 'UNTRACKED'; return out; }

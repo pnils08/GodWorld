@@ -450,6 +450,7 @@ The live ledger had 0 physicians at Oakland Hospital (BIZ-00015, 70 tracked work
 ## Changelog
 
 - 2026-10-02 (research-build S519, overnight) — C109 gate night: the four flagged pieces traced (two to the word-list blocker, two to the writer); `articleContamination` falling-apart needs a place in the clause, `livedExperiencePacket` W2 interviewees carry job and hood, `buildFaithSlice` gives the age of the house and today's leader instead of a founding year beside a name. All 17 C109 drafts staged (dc2a63e5).
+- 2026-10-02 06:50 (research-build S519, overnight) — Friday angle: Sharon Okafor lost both llama draws to a JSON parse the log could not explain; `parseJsonObject` now names the model text in its error (d2db91fa). Her angle re-run once by hand so the 13:15 report finds it; first occurrence of the shape, no parser loosening.
 - 2026-10-01 (research-build S519) — Builder 23:25 rulings executed: six department moves, four relinks, four office rows, speaker name; 60 of 65 misplaced employers restored by hand (Haiku pass discarded), 5 Tier 1–2 held; engine.278 filed; 30 staff authored for kimi review.
 - 2026-10-01 (engine-sheet S518) — es's piece complete: LENS/RULES `52f9219c`, run-cycle Step 5.58 `e5e29d91` (agy review folded; two-arm gate). First real run C110 2026-10-04.
 - 2026-10-01 (research-build S516) — Builder 23:03: Transit Hub lead is Elena Soria Dominguez; ledger + canon docs aligned.

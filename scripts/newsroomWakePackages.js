@@ -5,9 +5,8 @@ const path = require('path');
 
 const CONFIG_PATH = path.join(__dirname, 'newsroom-wake-packages.json');
 const WAKE_STAGES = Object.freeze(['angle', 'report', 'write']);
-// How a seat sources a story. `people` (default) interviews the citizens its
-// story is attached to; `records` interviews nobody and reports the record.
-const SOURCING = Object.freeze(['people', 'records']);
+// One positive evidence join per sourcing mode; absent legacy entries use named.
+const SOURCING = Object.freeze(['records', 'offices', 'named', 'street', 'workplace']);
 
 function slug(value) {
   return String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
@@ -83,7 +82,9 @@ function routeFor(value, stage) {
 }
 
 function sourcingFor(value) {
-  return value && value.sourcing === 'records' ? 'records' : 'people';
+  const mode = value && value.sourcing === undefined ? 'named' : value && value.sourcing;
+  if (!SOURCING.includes(mode)) throw new Error('unknown sourcing mode: ' + mode);
+  return mode;
 }
 
 function gateAssignments(assignments, packages) {
@@ -107,6 +108,7 @@ function gateAssignments(assignments, packages) {
 module.exports = {
   CONFIG_PATH,
   WAKE_STAGES,
+  SOURCING,
   slug,
   validatePackage,
   loadPackages,

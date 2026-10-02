@@ -346,7 +346,7 @@ function creativeBriefFromSlice(slice) {
     : null;
 }
 
-function buildAnglePacket({ cycle, desk, reporter, story, approach, slice, lane }) {
+function buildAnglePacket({ cycle, desk, reporter, story, approach, slice, lane, candidates: modeCandidates }) {
   if (!story) throw new Error('W1 Packet requires an assigned story');
   const src = story.ref || 'assignment';
   const known = [
@@ -391,7 +391,7 @@ function buildAnglePacket({ cycle, desk, reporter, story, approach, slice, lane 
   // Builder ruling 2026-09-30: a reporter interviews a citizen the story
   // touched, or no citizen. The proximity fallback (a neighbor, a city resident)
   // is not a target.
-  const candidates = candidateRows(story, slice)
+  const candidates = (modeCandidates === undefined ? candidateRows(story, slice) : modeCandidates)
     .filter(candidate => isLedgerPop(candidate.pop) && !isProximityCandidate(candidate))
     .slice(0, 12);
   const hasTargetCandidates = candidates.length > 0;
@@ -409,7 +409,8 @@ function buildAnglePacket({ cycle, desk, reporter, story, approach, slice, lane 
       ...(clean(story.team, 60) ? { team: clean(story.team, 60) } : {}) },
     exposure: { basis: ['editor-assignment', 'desk-signal'],
       candidates: candidates.map(c => ({ pop: c.pop, name: c.name, profile: clean(c.profile, 300),
-        why: c.why, role: c.role, hood: c.hood })) },
+        why: c.why, role: c.role, hood: c.hood,
+        mode: c.mode, sourceKind: c.sourceKind, evidence: c.evidence })) },
     known: uniqueClaims(known),
     limits: {
       assert: ['FACT'],
@@ -640,7 +641,11 @@ function isCivicStory(desk, story) {
 function quoteIneligibility(candidate, desk, story) {
   const row = ledgerRowForPop(candidate && candidate.pop);
   const role = (candidate && candidate.role) || (row && row.RoleType) || '';
-  if (/council|mayor|official|director|chief/i.test(role)) return 'INSTITUTIONAL';
+  const civicWorker = candidate && candidate.sourceKind === 'civic-worker' &&
+    candidate.mode === 'offices' && candidate.evidence && candidate.evidence.bizId &&
+    (candidate.evidence.topicId || candidate.evidence.topic) &&
+    candidate.evidence.source === 'output/beats/Employment_Roster.jsonl';
+  if (/council|mayor|official|director|chief/i.test(role) && !civicWorker) return 'INSTITUTIONAL';
   if (isCivicStory(desk, story) && isAthleteRow(row, role)) return 'PRO_ATHLETE_CIVIC_INELIGIBLE';
   return null;
 }
@@ -693,6 +698,12 @@ function isProximityCandidate(candidate) {
   return PROXIMITY_WHY.has(why) || /^bond-hop\b/.test(why);
 }
 function evidenceFor(candidate, story) {
+  if (candidate && candidate.sourceKind === 'life-line' && candidate.evidence &&
+      candidate.evidence.line && candidate.evidence.source) {
+    return [{ id: 'EV-LIFE-' + crypto.createHash('sha256').update(candidate.pop + '|' +
+      candidate.evidence.line).digest('hex').slice(0, 10),
+      src: candidate.evidence.source, text: candidate.evidence.line }];
+  }
   const ref = clean(story && story.ref, 300);
   if (!ref || ref === 'assignment') return [];
   if (isProximityCandidate(candidate)) return [];
@@ -707,8 +718,11 @@ function evidenceFor(candidate, story) {
 function buildReportPacket({ cycle, desk, reporter, angleInput, anglePlan, story, candidate }) {
   if (!story || !candidate) throw new Error('W2 Packet requires story+candidate');
   const src = story.ref || 'assignment';
-  const known = (angleInput && angleInput.known || []).filter(c => c.t === 'FACT').slice(0, 8);
-  if (candidate.profile) known.push(refClaim('FACT', candidate.profile, 'Simulation_Ledger profile for ' + candidate.pop));
+  const streetLife = candidate.sourceKind === 'life-line' && candidate.evidence && candidate.evidence.line;
+  const known = streetLife
+    ? [refClaim('FACT', candidate.evidence.line, candidate.evidence.source)]
+    : (angleInput && angleInput.known || []).filter(c => c.t === 'FACT').slice(0, 8);
+  if (candidate.profile && !streetLife) known.push(refClaim('FACT', candidate.profile, 'Simulation_Ledger profile for ' + candidate.pop));
   const isOfficial = /council|mayor|official|director|chief/i.test(candidate.role || '');
   const block = quoteIneligibility(candidate, desk, story);
   const packet = {
@@ -717,7 +731,13 @@ function buildReportPacket({ cycle, desk, reporter, angleInput, anglePlan, story
     actor: { id: candidate.pop, name: candidate.name, role: candidate.role || 'citizen', desk: null },
     task: { goal: 'Answer one reporter question from bounded lived experience',
       reporter: reporter && reporter.name || null,
-      question: questionFor(candidate, anglePlan, story) },
+      question: streetLife
+        ? ('Your own current-cycle line says: "' + candidate.evidence.line + '". What did you ' +
+          (candidate.evidence.predicate === 'attendance' ? 'see when you went to ' :
+            candidate.evidence.predicate === 'watch' ? 'think when you watched ' :
+              candidate.evidence.predicate === 'fan' ? 'do as a fan of ' : 'notice about ') +
+          candidate.evidence.entity + '? Speak only from that line and your own reaction.')
+        : questionFor(candidate, anglePlan, story) },
     signal: { kind: story.kind || 'story-signal', hood: story.hood || null,
       focus: clean(anglePlan && anglePlan.focus || story.angle || story.label, 500), src },
     exposure: { basis: uniq([candidate.why || 'assignment', candidate.hood === story.hood ? 'same-neighborhood' : null]),

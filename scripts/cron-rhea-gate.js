@@ -507,10 +507,23 @@ async function main() {
     const resolved = parsed.found ? resolveCitizens(parsed.names.map(n => n.name)) : [];
     const unresolvable = resolved.filter(r => r.popid === null && !r.ambiguous).map(r => r.name);
     let unbackedQuoted = [];
+    let invalidOfficeRecords = [];
     if (parsed.found && PACKET_FILE) {
       try {
         const packet = JSON.parse(fs.readFileSync(path.resolve(ROOT, PACKET_FILE), 'utf8'));
-        const quoted = new Set(((packet && packet.quotes) || []).map(q => String(q.name).toLowerCase()));
+        const verifyOffice = require('./newsroomSourcing').verifyOfficeRecord;
+        const quoted = new Set();
+        for (const q of (packet && packet.quotes) || []) {
+          if (q.sourceKind === 'office-record') {
+            if (!q.officeRecord || q.quote !== q.officeRecord.quote ||
+                q.pop !== q.officeRecord.holderPopid || q.name !== q.officeRecord.speakerName ||
+                !verifyOffice(q.officeRecord, packet.cycle, ROOT)) {
+              invalidOfficeRecords.push(q.name || 'unknown office');
+              continue;
+            }
+          }
+          quoted.add(String(q.name).toLowerCase());
+        }
         unbackedQuoted = parsed.names.filter(n => n.role === 'quoted-source' && !quoted.has(String(n.name).toLowerCase())).map(n => n.name);
       } catch (e) { log.warn('intake packet load failed (backing check skipped): ' + e.message); }
     }
@@ -523,6 +536,8 @@ async function main() {
         issue: 'INTAKE name(s) not in ledger: ' + unresolvable.join('; ') });
       if (unbackedQuoted.length) intakeBlockers.push({ severity: 'high', check: 'intake-quoted-source',
         issue: 'quoted-source with no wake-2 packet backing: ' + unbackedQuoted.join('; ') });
+      if (invalidOfficeRecords.length) intakeBlockers.push({ severity: 'high', check: 'office-record-provenance',
+        issue: 'office quote has no exact current-cycle civic-voice backing: ' + invalidOfficeRecords.join('; ') });
     }
     intakeReport = {
       found: parsed.found,

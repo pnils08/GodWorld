@@ -5,6 +5,7 @@
     "active": true,
     "requiredDaily": true,
     "persona": "freelance-firebrand",
+    "sourcing": "street",
     "assignment": {
       "desk": "civic",
       "name": "Jax Caldera",
@@ -71,7 +72,7 @@
     "active": true,
     "requiredDaily": true,
     "persona": "carmen-delaine",
-    "sourcing": "records",
+    "sourcing": "offices",
     "assignment": {
       "desk": "civic",
       "name": "Carmen Delaine",
@@ -130,6 +131,7 @@
     "active": true,
     "requiredDaily": true,
     "persona": "luis-navarro",
+    "sourcing": "offices",
     "assignment": {
       "desk": "civic",
       "name": "Luis Navarro",
@@ -187,6 +189,7 @@
     "active": true,
     "requiredDaily": true,
     "persona": "trevor-shimizu",
+    "sourcing": "workplace",
     "assignment": {
       "desk": "civic",
       "name": "Trevor Shimizu",
@@ -245,6 +248,7 @@
     "active": true,
     "requiredDaily": true,
     "persona": "p-slayer",
+    "sourcing": "street",
     "assignment": {
       "desk": "sports",
       "name": "P Slayer",
@@ -482,6 +486,7 @@
     "active": true,
     "requiredDaily": true,
     "persona": "tanya-cruz",
+    "sourcing": "named",
     "assignment": {
       "desk": "sports",
       "name": "Tanya Cruz",
@@ -535,6 +540,7 @@
     "active": true,
     "requiredDaily": true,
     "persona": "simon-leary",
+    "sourcing": "named",
     "assignment": {
       "desk": "sports",
       "name": "Simon Leary",
@@ -587,6 +593,7 @@
     "active": true,
     "requiredDaily": true,
     "persona": "maria-keen",
+    "sourcing": "street",
     "assignment": {
       "desk": "culture",
       "name": "Maria Keen",
@@ -639,6 +646,7 @@
     "active": true,
     "requiredDaily": true,
     "persona": "elliot-graye",
+    "sourcing": "named",
     "assignment": {
       "desk": "culture",
       "name": "Elliot Graye",
@@ -691,6 +699,7 @@
     "active": true,
     "requiredDaily": true,
     "persona": "mason-ortega",
+    "sourcing": "workplace",
     "assignment": {
       "desk": "culture",
       "name": "Mason Ortega",
@@ -743,6 +752,7 @@
     "active": true,
     "requiredDaily": true,
     "persona": "sharon-okafor",
+    "sourcing": "street",
     "assignment": {
       "desk": "culture",
       "name": "Sharon Okafor",
@@ -795,6 +805,7 @@
     "active": true,
     "requiredDaily": true,
     "persona": "business-desk",
+    "sourcing": "workplace",
     "assignment": {
       "desk": "business",
       "name": "Jordan Velez",
@@ -855,6 +866,7 @@
     "active": true,
     "requiredDaily": true,
     "persona": "kai-marston",
+    "sourcing": "named",
     "assignment": {
       "desk": "culture",
       "name": "Kai Marston",
@@ -915,6 +927,7 @@
     "active": true,
     "requiredDaily": true,
     "persona": "rachel-torres",
+    "sourcing": "offices",
     "assignment": {
       "desk": "civic",
       "name": "Sgt. Rachel Torres",
@@ -970,6 +983,7 @@
     "active": true,
     "requiredDaily": true,
     "persona": "lila-mezran",
+    "sourcing": "named",
     "assignment": {
       "desk": "civic",
       "name": "Dr. Lila Mezran",
@@ -1026,6 +1040,7 @@
     "active": true,
     "requiredDaily": true,
     "persona": "angela-reyes",
+    "sourcing": "workplace",
     "assignment": {
       "desk": "civic",
       "name": "Angela Reyes",
@@ -1082,6 +1097,7 @@
     "active": true,
     "requiredDaily": true,
     "persona": "noah-tan",
+    "sourcing": "street",
     "assignment": {
       "desk": "civic",
       "name": "Noah Tan",
@@ -1138,6 +1154,7 @@
     "active": true,
     "requiredDaily": true,
     "persona": "nia-rook",
+    "sourcing": "named",
     "assignment": {
       "desk": "undocked",
       "name": "Nia Rook",
@@ -1206,6 +1223,7 @@
     "active": true,
     "requiredDaily": false,
     "persona": "nia-rook-weekly",
+    "sourcing": "named",
     "assignment": {
       "desk": "undocked-digest",
       "name": "Nia Rook",
@@ -1337,6 +1355,7 @@
     "active": true,
     "requiredDaily": true,
     "persona": "talia-finch",
+    "sourcing": "street",
     "assignment": {
       "desk": "sports",
       "name": "Talia Finch",
@@ -1398,6 +1417,7 @@
     "active": true,
     "requiredDaily": true,
     "persona": "celeste-tran",
+    "sourcing": "street",
     "assignment": {
       "desk": "wire",
       "name": "Celeste Tran",

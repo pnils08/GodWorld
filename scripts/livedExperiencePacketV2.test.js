@@ -97,6 +97,19 @@ assert.ok(w3.manifest.approvedFacts.some(row => row.id === selectedFactId));
 assert.equal(w3.manifest.unverifiedLeads[0].publishable, false);
 assert.ok(w3.manifest.forbiddenClaimClasses.includes('new place or street'));
 assert.doesNotThrow(() => p.assertBase(w3, 'W3'));
+const officeRecord = { sourceKind: 'office-record', cycle: 999, officeSlug: 'test_office',
+  statementId: 'STMT-999-test-001', quote: 'Test-only official statement.',
+  topic: 'Test Initiative', initiativeId: 'INIT-900',
+  filePath: 'output/civic-voice/test_office_c999.json', holderPopid: 'TEST-POP-01',
+  speakerName: 'Test Official' };
+const officeW3 = p.buildWritePacket({ cycle: 999, desk: 'civic', reporter, story,
+  angleInput: w1, anglePlan: plan, interviews: [], officeRecords: [officeRecord], lane: [] });
+assert.equal(officeW3.manifest.approvedQuotes[0].sourceKind, 'office-record');
+assert.equal(officeW3.manifest.approvedQuotes[0].text, officeRecord.quote);
+assert.equal(officeW3.manifest.approvedQuotes[0].src,
+  officeRecord.filePath + '#' + officeRecord.statementId);
+assert.ok(officeW3.manifest.approvedSubjects.some(s => s.id === officeRecord.holderPopid));
+assert.doesNotThrow(() => p.assertBase(officeW3, 'W3'));
 
 // engine.270 — running stories ride the typed Packet as plain lines.
 const w3t = p.buildWritePacket({

@@ -333,6 +333,8 @@
 - **sportsHasOpenedBaylight_(S)**
   Reads: S.sportsZones
 
+- **initiativePhaseIntensity_(phase)**
+
 - **civicTendFactor_(t)**
 
 - **getCivicTendDials_(ctx)**
@@ -3218,8 +3220,16 @@
 - **hospitalCapacity_(ctx)**
   Reads: S.demographicDrift
 
+- **hospitalIntakeType_(raw)**
+
+- **hospitalReconcileEventId_(cycle, popId)**
+
+- **careLedgerRowId_(taken, base)**
+
+- **hospitalRowId_(taken, cycle, popId)**
+
 - **persistHospitalLedger_(ctx)**
-  Reads: S.absoluteCycle, S.cycleId, S.hospitalEvents
+  Reads: S.absoluteCycle, S.careJusticeWriteStatus, S.cycleId, S.hospitalEvents
   Writes: S.hospitalCensus
   Sheets: Hospital_Ledger
 
@@ -4348,4 +4358,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1536
+**Functions mapped:** 1541

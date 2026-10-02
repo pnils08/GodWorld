@@ -163,6 +163,16 @@ var INITIATIVE_PHASE_INTENSITY_ = {
   'suspended': -0.6,
   'defunded': -1.0
 };
+// One phase → intensity match for every reader (engine.254 Task 8, kimi Task 7
+// F1): the exact key first, then the first table key the phase contains, else 0.
+function initiativePhaseIntensity_(phase) {
+  var p = String(phase === undefined || phase === null ? '' : phase);
+  if (INITIATIVE_PHASE_INTENSITY_.hasOwnProperty(p)) return INITIATIVE_PHASE_INTENSITY_[p];
+  for (var pk in INITIATIVE_PHASE_INTENSITY_) {
+    if (INITIATIVE_PHASE_INTENSITY_.hasOwnProperty(pk) && p.indexOf(pk) >= 0) return INITIATIVE_PHASE_INTENSITY_[pk];
+  }
+  return 0;
+}
 function civicTendFactor_(t) {
   t = t || {};
   var out = { factor: 1, untended: 0, reference: 0 };
@@ -549,17 +559,7 @@ function applyInitiativeImplementationEffects_(ctx) {
     }
 
     // Get intensity from phase
-    var intensity = PHASE_INTENSITY[phase];
-    if (intensity === undefined) {
-      // Try partial matching for compound phases
-      intensity = 0;
-      for (var pk in PHASE_INTENSITY) {
-        if (phase.indexOf(pk) >= 0) {
-          intensity = PHASE_INTENSITY[pk];
-          break;
-        }
-      }
-    }
+    var intensity = initiativePhaseIntensity_(phase);
 
     // civic.38 Task 4 upkeep (rulings c/e): a delivered service nobody tends
     // weakens. Staged rows only (Standing / Delivering) and positive intensity

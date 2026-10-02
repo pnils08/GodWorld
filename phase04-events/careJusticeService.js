@@ -70,8 +70,8 @@ function careJusticeOariHoods_(ctx, initiativeId) {
     if (found < 0) throw new Error('careJusticeDemand: Initiative_Tracker.' + names[n] + ' column missing');
     cols[names[n]] = found;
   }
-  if (typeof INITIATIVE_PHASE_INTENSITY_ === 'undefined') {
-    throw new Error('careJusticeDemand: INITIATIVE_PHASE_INTENSITY_ missing');
+  if (typeof initiativePhaseIntensity_ !== 'function') {
+    throw new Error('careJusticeDemand: initiativePhaseIntensity_ missing');
   }
   var matches = 0;
   var deployed = {};
@@ -80,16 +80,7 @@ function careJusticeOariHoods_(ctx, initiativeId) {
     if (String(row[cols.InitiativeID] || '').trim() !== initiativeId) continue;
     matches++;
     var phase = String(row[cols.ImplementationPhase] || '').trim().toLowerCase();
-    var intensity = INITIATIVE_PHASE_INTENSITY_[phase];
-    if (intensity === undefined) {
-      intensity = 0;
-      for (var pk in INITIATIVE_PHASE_INTENSITY_) {
-        if (INITIATIVE_PHASE_INTENSITY_.hasOwnProperty(pk) && phase.indexOf(pk) >= 0) {
-          intensity = INITIATIVE_PHASE_INTENSITY_[pk];
-          break;
-        }
-      }
-    }
+    var intensity = initiativePhaseIntensity_(phase);
     if (intensity <= 0) continue;
     var parts = String(row[cols.AffectedNeighborhoods] || '').split(/[,;]+/);
     for (var h = 0; h < parts.length; h++) {

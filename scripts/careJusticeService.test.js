@@ -47,6 +47,7 @@ if (require.main === module) {
   vm.runInNewContext(fs.readFileSync(path.join(__dirname,
     '../phase02-world-state/applyInitiativeImplementationEffects.js'), 'utf8'), phaseBox);
   global.INITIATIVE_PHASE_INTENSITY_ = phaseBox.INITIATIVE_PHASE_INTENSITY_;
+  global.initiativePhaseIntensity_ = phaseBox.initiativePhaseIntensity_;
   global.loadChaosCarsConfig_ = config.loadChaosCarsConfig_;
   global.validateAllChaosConfigs_ = config.validateAllChaosConfigs_;
   const logs = [];
@@ -305,6 +306,23 @@ if (require.main === module) {
     check('T6 detained citizen leaves the street resident index and tracked share',
       !(residents.Fruitvale || []).length &&
       service.runCareJusticeDemand_(custody).hoods.Fruitvale.trackedResidents === 0);
+  }
+  {
+    // Task 8 / kimi Task 7 F1: one phase match for the effects engine and the OARI read.
+    const f = phaseBox.initiativePhaseIntensity_;
+    const firstContained = Object.keys(phaseBox.INITIATIVE_PHASE_INTENSITY_)
+      .find(k => 'post-dispatch-live-complete'.indexOf(k) >= 0);
+    check('F1 exact key wins; a compound phase takes the first table key it contains; unknown and blank are 0',
+      f('dispatch-live') === 1 && f('stalled') === -0.5 &&
+      f('post-dispatch-live-complete') === phaseBox.INITIATIVE_PHASE_INTENSITY_[firstContained] &&
+      f('never-heard-of-it') === 0 && f('') === 0 && f(undefined) === 0 && f('constructor') === 0,
+      firstContained);
+    const engineSrc = fs.readFileSync(path.join(__dirname, '../phase02-world-state/applyInitiativeImplementationEffects.js'), 'utf8');
+    const serviceSrc = fs.readFileSync(path.join(__dirname, '../phase04-events/careJusticeService.js'), 'utf8');
+    check('F1 both callers read the one helper and neither keeps its own substring loop',
+      /var intensity = initiativePhaseIntensity_\(phase\);/.test(engineSrc) &&
+      /var intensity = initiativePhaseIntensity_\(phase\);/.test(serviceSrc) &&
+      !/phase\.indexOf\(pk\)/.test(engineSrc) && !/phase\.indexOf\(pk\)/.test(serviceSrc));
   }
   console.log('\ncareJusticeService: ' + passed + ' passed, ' + failed + ' failed');
   process.exit(failed ? 1 : 0);

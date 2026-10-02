@@ -2,7 +2,7 @@
   "generated": "2026-10-01",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 180,
-  "functionsMapped": 1536,
+  "functionsMapped": 1541,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -4285,7 +4285,9 @@
       "writers": [
         "phase10-persistence/buildCyclePacket.js::buildCyclePacket_"
       ],
-      "readers": []
+      "readers": [
+        "phase10-persistence/buildCyclePacket.js::persistHospitalLedger_"
+      ]
     },
     "cyclePacket": {
       "writers": [

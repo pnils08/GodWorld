@@ -463,7 +463,9 @@ function judicialLifecycleReceipt_(c, kind, cycle) {
     sourceEventId: c.SourceEventId, popId: c.POPID, name: c.Name,
     neighborhood: c.Neighborhood, cycle: cycle, statusNow: c.StatusNow,
     lastTransitionCycle: c.LastTransitionCycle, heldUntilCycle: c.HeldUntilCycle,
-    resolveCycle: c.ResolveCycle, outcome: c.Outcome, cyclesHeld: c.CyclesHeld
+    resolveCycle: c.ResolveCycle, outcome: c.Outcome, cyclesHeld: c.CyclesHeld,
+    // Task 8 R2-1: a conversion's arrest stamps reach the writer.
+    arrestCycle: c.ArrestCycle, decisionCycle: c.DecisionCycle
   };
 }
 

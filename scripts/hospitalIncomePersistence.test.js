@@ -50,7 +50,7 @@ function make(employer) {
   ctx.cache = { getData: name => name === 'Hospital_Ledger' ? {
     exists: true, values: [['AdmissionId', 'POPID', 'Name', 'Neighborhood', 'Cause', 'AdmitCycle',
       'StatusNow', 'LastTransitionCycle', 'DischargeCycle', 'Outcome', 'CyclesInCare',
-      'Kind', 'IntakeType', 'SourceEventId', 'SourceSystem', 'PriorStatus']]
+      'IntakeType', 'SourceSystem', 'SourceEventId', 'TransferFromId', 'PriorStatus']]
   } : name === 'Judicial_Ledger' ? { exists: true, values: [sb.JUDICIAL_CASE_FIELDS_.slice()] }
     : { exists: false, values: [] } };
   floors(ctx);
@@ -266,7 +266,7 @@ vm.runInContext(fs.readFileSync(path.join(ROOT, 'phase05-citizens/judicialLifecy
 function hospitalSheet(open) {
   const rows = [['AdmissionId', 'POPID', 'Name', 'Neighborhood', 'Cause', 'AdmitCycle',
     'StatusNow', 'LastTransitionCycle', 'DischargeCycle', 'Outcome', 'CyclesInCare',
-    'Kind', 'IntakeType', 'SourceEventId', 'SourceSystem', 'PriorStatus']];
+    'IntakeType', 'SourceSystem', 'SourceEventId', 'TransferFromId', 'PriorStatus']];
   if (open) rows.push(open.slice());
   return { rows, getDataRange: () => ({ getValues: () => rows.map(row => row.slice()) }),
     appendRow: row => rows.push(row.slice()),
@@ -289,6 +289,8 @@ function syntheticAmbulance(ctx, status, cause) {
     { name: 'ambulance' },
     { outcome: 'medical_emergency', severity: 'high', lifeHistoryTag: 'Setback' },
     ctx.summary.cycleId, 'synthetic medical emergency');
+  // The real caller (runChaosEvent_) stamps the id once the payload eventId is drawn.
+  if (receipt.kind === 'intake') receipt.sourceEventId = 'ambulance:SYN-EVENT:' + receipt.popId;
   ctx.summary.hospitalEvents = [receipt];
   return receipt;
 }
@@ -743,6 +745,105 @@ check('6b dismissed, then released: the savings charge is at the reduced figure 
   assert.strictEqual(res.charge, Math.round(reduced / 52 * 4));
   assert.strictEqual(row[cols.iNW], 20000 - res.charge);
   assert.strictEqual(row[cols.iIncome], reduced, 'Income untouched by the settlement');
+});
+// ── Task 8 R2-1: the stamps the census is derived from (L IntakeType, M SourceSystem,
+// N SourceEventId, O TransferFromId) ──────────────────────────────────────────
+function intake(pop, type, system, extra) {
+  return Object.assign({ popId: pop, name: 'Synthetic Fixture', neighborhood: 'SYNTHETIC_TEST_HOOD',
+    cause: 'synthetic cause', from: 'Active', to: 'hospitalized', cycle: 8002, priorStatus: 'Active',
+    kind: 'intake', intakeType: type, sourceSystem: system,
+    sourceEventId: system + ':C8002:' + type + ':' + pop }, extra || {});
+}
+check('T8 ambulance intake stamps L–O from its receipt', () => {
+  const ctx = make('UNTRACKED');
+  ctx.ledger.rows[0][ix('HealthCause')] = '';
+  const receipt = syntheticAmbulance(ctx, 'active', '');
+  const row = persistOnMock(ctx).sheet.rows[1];
+  assert.strictEqual(row.length, 16);
+  assert.deepStrictEqual([...row.slice(11, 15)], ['illness', 'ambulance', receipt.sourceEventId, '']);
+  assert.strictEqual(row[0], 'H-C8002-' + receipt.popId);
+});
+check('T8 heat and ordinary-health intakes stamp their own type and source', () => {
+  for (const [type, system] of [['heat', 'heat-wave'], ['injury', 'health-engine'], ['illness', 'health-engine']]) {
+    const ctx = make('UNTRACKED');
+    const pop = ctx.ledger.rows[0][ix('POPID')];
+    ctx.ledger.rows[0][ix('Status')] = 'hospitalized';
+    ctx.summary.hospitalEvents = [intake(pop, type, system)];
+    const row = persistOnMock(ctx).sheet.rows[1];
+    assert.deepStrictEqual([...row.slice(11, 16)], [type, system, system + ':C8002:' + type + ':' + pop, '', 'Active']);
+  }
+});
+check('T8 missed-admission row is a reconcile row with the no-event id', () => {
+  const ctx = make('UNTRACKED');
+  const pop = ctx.ledger.rows[0][ix('POPID')];
+  ctx.ledger.rows[0][ix('Status')] = 'critical';
+  ctx.ledger.rows[0][ix('StatusStartCycle')] = 8000;
+  ctx.summary.hospitalEvents = [];
+  const row = persistOnMock(ctx).sheet.rows[1];
+  assert.strictEqual(row[5], 8000, 'AdmitCycle stays the Cycle care began');
+  assert.deepStrictEqual([...row.slice(11, 16)], ['unclassified', 'reconcile', 'reconcile:C8002:unclassified:' + pop, '', '']);
+});
+check('T8 a transition with no open row is a reconcile row, never an intake', () => {
+  const ctx = make('UNTRACKED');
+  const pop = ctx.ledger.rows[0][ix('POPID')];
+  ctx.ledger.rows[0][ix('Status')] = 'critical';
+  ctx.summary.hospitalEvents = [{ popId: pop, cycle: 8002, from: 'hospitalized',
+    to: 'critical', kind: 'transition', cause: 'synthetic illness' }];
+  const result = persistOnMock(ctx);
+  assert.strictEqual(result.sheet.rows.length, 2, 'one row: the missed-admission pass sees the bed');
+  assert.deepStrictEqual([...result.sheet.rows[1].slice(11, 16)],
+    ['unclassified', 'reconcile', 'reconcile:C8002:unclassified:' + pop, '', '']);
+});
+check('T8 an intake whose SourceEventId already has a row opens no second intake row', () => {
+  const ctx = make('UNTRACKED');
+  const pop = ctx.ledger.rows[0][ix('POPID')];
+  const ev = intake(pop, 'illness', 'health-engine');
+  const closed = ['H-C8002-' + pop, pop, '', '', '', 8002, 'active', 8002, 8002, 'recovered', 0,
+    'illness', 'health-engine', ev.sourceEventId, '', 'Active'];
+  ctx.ledger.rows[0][ix('Status')] = 'active';
+  ctx.summary.hospitalEvents = [ev];
+  const result = persistOnMock(ctx, closed);
+  assert.strictEqual(result.sheet.rows.length, 2);
+  assert.strictEqual(result.census.admitsThisCycle, 0);
+});
+check('T8 a second admission in the Cycle of a closed row takes the next free id', () => {
+  const ctx = make('UNTRACKED');
+  const pop = ctx.ledger.rows[0][ix('POPID')];
+  const closed = ['H-C8002-' + pop, pop, '', '', '', 8002, 'active', 8002, 8002, 'recovered', 0,
+    'illness', 'health-engine', 'health-engine:C8002:illness:' + pop, '', 'Active'];
+  ctx.ledger.rows[0][ix('Status')] = 'hospitalized';
+  ctx.summary.hospitalEvents = [intake(pop, 'injury', 'ambulance', { sourceEventId: 'ambulance:SYN-2:' + pop })];
+  const result = persistOnMock(ctx, closed);
+  assert.strictEqual(result.sheet.rows.length, 3);
+  assert.strictEqual(result.sheet.rows[2][0], 'H-C8002-' + pop + '-2');
+  // The missed-admission id is checked the same way (it is built from StatusStartCycle).
+  const ctx2 = make('UNTRACKED');
+  ctx2.ledger.rows[0][ix('Status')] = 'injured';
+  ctx2.ledger.rows[0][ix('StatusStartCycle')] = 8002;
+  ctx2.summary.hospitalEvents = [];
+  const result2 = persistOnMock(ctx2, closed);
+  assert.strictEqual(result2.sheet.rows[2][0], 'H-C8002-' + pop + '-2');
+});
+check('T8 an intake without SourceEventId, or with an unknown type, fails the writer before any write', () => {
+  const ctx = make('UNTRACKED');
+  const pop = ctx.ledger.rows[0][ix('POPID')];
+  ctx.ledger.rows[0][ix('Status')] = 'hospitalized';
+  ctx.summary.hospitalEvents = [intake(pop + '-OTHER', 'illness', 'health-engine'),
+    intake(pop, 'illness', 'health-engine', { sourceEventId: '' })];
+  const sheet = hospitalSheet();
+  ctx.ss = { getSheetByName: name => name === 'Hospital_Ledger' ? sheet : null };
+  assert.throws(() => sb.persistHospitalLedger_(ctx), /without SourceEventId/);
+  assert.strictEqual(sheet.rows.length, 1, 'nothing written, not even the valid first receipt');
+  ctx.summary.hospitalEvents = [intake(pop, 'broken-leg', 'health-engine')];
+  assert.throws(() => sb.persistHospitalLedger_(ctx), /unknown IntakeType/);
+});
+check('T8 a tab whose L–O headers are out of place is refused', () => {
+  const ctx = make('UNTRACKED');
+  ctx.summary.hospitalEvents = [];
+  const sheet = hospitalSheet();
+  sheet.rows[0][12] = 'SourceEventId'; sheet.rows[0][13] = 'SourceSystem';
+  ctx.ss = { getSheetByName: name => name === 'Hospital_Ledger' ? sheet : null };
+  assert.throws(() => sb.persistHospitalLedger_(ctx), /SourceSystem header missing at column M/);
 });
 console.log(passed + ' passed, ' + failed + ' failed');
 process.exitCode = failed ? 1 : 0;

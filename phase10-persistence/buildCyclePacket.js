@@ -817,6 +817,35 @@ function hospitalCapacity_(ctx) {
 
 var HOSPITAL_OPEN_STATES = ['hospitalized', 'critical', 'serious-condition', 'injured', 'recovering'];
 
+// engine.254 Task 8 R2-1 — the receipt stamps, columns L–O.
+var HOSPITAL_RECEIPT_HEADERS_ = ['IntakeType', 'SourceSystem', 'SourceEventId', 'TransferFromId'];
+var HOSPITAL_INTAKE_TYPES_ = ['injury', 'illness', 'heat', 'mental-health-crisis', 'substance-treatment', 'unclassified'];
+
+// The ledger enum; a blank type is `unclassified`, never inferred from the cause.
+function hospitalIntakeType_(raw) {
+  var t = String(raw === undefined || raw === null ? '' : raw).trim();
+  if (t === '') return 'unclassified';
+  if (HOSPITAL_INTAKE_TYPES_.indexOf(t) < 0) throw new Error('Hospital_Ledger: unknown IntakeType "' + raw + '"');
+  return t;
+}
+
+// The schema's no-event form: the Cycle the repair ran, not the Cycle care began.
+function hospitalReconcileEventId_(cycle, popId) {
+  return 'reconcile:C' + cycle + ':unclassified:' + popId;
+}
+
+// A row id is checked against every id in the tab (-2, -3 … until free) and
+// claimed, so a re-admission in the Cycle of a closed row never shares its id.
+function careLedgerRowId_(taken, base) {
+  var id = base;
+  for (var n = 2; taken[id]; n++) id = base + '-' + n;
+  taken[id] = true;
+  return id;
+}
+function hospitalRowId_(taken, cycle, popId) {
+  return careLedgerRowId_(taken, 'H-C' + cycle + '-' + popId);
+}
+
 /**
  * Persist ctx.summary.hospitalEvents (Phase 4) into the Hospital_Ledger tab,
  * close discharged/deceased rows, and return the census. Direct writes match
@@ -873,6 +902,25 @@ function persistHospitalLedger_(ctx) {
   if (!data.length || data[0].indexOf('PriorStatus') !== 15) {
     throw new Error('Hospital_Ledger.PriorStatus header missing at column P');
   }
+  // engine.254 Task 8 R2-1: rows are appended whole, so L–O must sit where the
+  // row array puts them. The census reads these stamps, not the receipts.
+  for (var hc = 0; hc < HOSPITAL_RECEIPT_HEADERS_.length; hc++) {
+    if (data[0][11 + hc] !== HOSPITAL_RECEIPT_HEADERS_[hc]) {
+      throw new Error('Hospital_Ledger.' + HOSPITAL_RECEIPT_HEADERS_[hc] + ' header missing at column ' + 'LMNO'.charAt(hc));
+    }
+  }
+  var hospitalIds = {}, hospitalEventIds = {};
+  for (var hi = 1; hi < data.length; hi++) {
+    if (data[hi][0] !== '' && data[hi][0] !== null) hospitalIds[String(data[hi][0])] = true;
+    if (data[hi][13] !== '' && data[hi][13] !== null && data[hi][13] !== undefined) hospitalEventIds[String(data[hi][13])] = true;
+  }
+  // An intake receipt names its event; checked before any write, so a bad one
+  // fails the writer whole (S.careJusticeWriteStatus) and never half a Cycle.
+  for (var pe = 0; pe < events.length; pe++) {
+    if (events[pe].kind === 'intake' && HOSPITAL_OPEN_STATES.indexOf(events[pe].to) >= 0 && !events[pe].sourceEventId) {
+      throw new Error('Hospital_Ledger intake receipt without SourceEventId for ' + events[pe].popId);
+    }
+  }
 
   // Index open rows (DischargeCycle empty) by POPID — sheet row = index + 1.
   var openByPopId = {};
@@ -898,16 +946,28 @@ function persistHospitalLedger_(ctx) {
         }, 'Hospital_Ledger transition');
         data[openRow][6] = ev.to;
       } else {
-        // New admission. (A lifecycle transition with no open row — citizen
-        // hospitalized before this ledger existed — admits at event cycle.)
-        var priorStatus = ev.kind === 'intake' ?
+        // New admission. Only an intake receipt is an intake: a lifecycle
+        // transition with no open row (a citizen in care the ledger never
+        // heard about) is a repair row — `reconcile`, a census correction.
+        var isIntake = ev.kind === 'intake';
+        var priorStatus = isIntake ?
           (ev.priorStatus !== undefined ? ev.priorStatus : (ev.from || '')) : '';
         if (String(priorStatus).trim().toLowerCase() === 'detained') {
           throw new Error('Hospital_Ledger.PriorStatus cannot be detained for ' + key);
         }
-        var newRow = ['H-C' + ev.cycle + '-' + key, ev.popId, ev.name || '',
+        var eventId = isIntake ? String(ev.sourceEventId) : hospitalReconcileEventId_(cycle, key);
+        // Invariant D at the writer: one row per SourceEventId, ever.
+        if (hospitalEventIds[eventId]) {
+          Logger.log('persistHospitalLedger_: SourceEventId ' + eventId + ' already has a row — no second row');
+          continue;
+        }
+        var newRow = [hospitalRowId_(hospitalIds, ev.cycle, key), ev.popId, ev.name || '',
                       ev.neighborhood || '', ev.cause || '', ev.cycle, ev.to,
-                      ev.cycle, '', '', '', '', '', '', '', priorStatus];
+                      ev.cycle, '', '', '',
+                      isIntake ? hospitalIntakeType_(ev.intakeType) : 'unclassified',
+                      isIntake ? (ev.sourceSystem || '') : 'reconcile',
+                      eventId, '', priorStatus];
+        hospitalEventIds[eventId] = true;
         appendRowWithRetry_(sheet, newRow, 'Hospital_Ledger admit');
         openByPopId[key] = data.length;
         data.push(newRow);
@@ -992,8 +1052,12 @@ function persistHospitalLedger_(ctx) {
     if (openByPopId.hasOwnProperty(mPop)) continue; // already has a bed
     var mp = patients[mPop];
     var mAdmit = mp.startCycle > 0 ? mp.startCycle : cycle;
-    var mRow = ['H-C' + mAdmit + '-' + mPop, mPop, mp.name, mp.neighborhood,
-                mp.cause, mAdmit, mp.status, cycle, '', '', '', '', '', '', '', ''];
+    // A repair row is a correction, never an intake (schema, invariant F).
+    var mEventId = hospitalReconcileEventId_(cycle, mPop);
+    var mRow = [hospitalRowId_(hospitalIds, mAdmit, mPop), mPop, mp.name, mp.neighborhood,
+                mp.cause, mAdmit, mp.status, cycle, '', '', '',
+                'unclassified', 'reconcile', mEventId, '', ''];
+    hospitalEventIds[mEventId] = true;
     appendRowWithRetry_(sheet, mRow, 'Hospital_Ledger missed-admit');
     openByPopId[mPop] = data.length;
     data.push(mRow);
@@ -1042,9 +1106,12 @@ function persistJudicialLedger_(ctx) {
   }
   if (data[0].length !== 21) throw new Error('Judicial_Ledger must have 21 columns');
   var open = {};
+  var caseIds = {}, caseEventIds = {};
   for (var r = 1; r < data.length; r++) {
     var existing = data[r];
     if (!String(existing[cols.CaseId] || '').trim()) continue;
+    caseIds[String(existing[cols.CaseId])] = true;
+    if (String(existing[cols.SourceEventId] || '').trim()) caseEventIds[String(existing[cols.SourceEventId])] = true;
     if (existing[cols.ResolveCycle] === '' || existing[cols.ResolveCycle] === null) {
       var pop = String(existing[cols.POPID]);
       if (open.hasOwnProperty(pop)) throw new Error('Judicial_Ledger has two open rows for ' + pop);
@@ -1060,7 +1127,14 @@ function persistJudicialLedger_(ctx) {
     if (!key || !ev.sourceEventId) throw new Error('Judicial_Ledger receipt missing POPID or SourceEventId');
     var rowIndex = open.hasOwnProperty(key) ? open[key] : -1;
     if (ev.kind === 'intake' && rowIndex < 0) {
+      // Invariant D at the writer: one case per SourceEventId, ever.
+      if (caseEventIds[String(ev.sourceEventId)]) {
+        Logger.log('persistJudicialLedger_: SourceEventId ' + ev.sourceEventId + ' already has a case — no second row');
+        continue;
+      }
       var c = openCaseFromReceipt_(ev);
+      c.CaseId = careLedgerRowId_(caseIds, c.CaseId);
+      caseEventIds[String(ev.sourceEventId)] = true;
       var newRow = [];
       for (var n = 0; n < 21; n++) newRow[n] = '';
       for (var j = 0; j < fields.length; j++) newRow[cols[fields[j]]] = c[fields[j]];
@@ -1077,6 +1151,12 @@ function persistJudicialLedger_(ctx) {
       if (ev.statusNow !== undefined) row[cols.StatusNow] = ev.statusNow;
       row[cols.LastTransitionCycle] = ev.lastTransitionCycle || ev.cycle;
       if (ev.heldUntilCycle !== undefined) row[cols.HeldUntilCycle] = ev.heldUntilCycle;
+      // An investigation that became an arrest: ArrestCycle is the census's
+      // intake stamp (Task 8 R2-1). A re-arrest receipt carries neither.
+      if (ev.kind === 'intake' && ev.arrestCycle !== undefined && ev.arrestCycle !== '') {
+        row[cols.ArrestCycle] = ev.arrestCycle;
+        if (ev.decisionCycle !== undefined && ev.decisionCycle !== '') row[cols.DecisionCycle] = ev.decisionCycle;
+      }
       if (ev.resolveCycle !== undefined && ev.resolveCycle !== '') {
         if (ev.outcome === undefined || ev.cyclesHeld === undefined) {
           throw new Error('Judicial_Ledger transition closure missing disposition for ' + key);

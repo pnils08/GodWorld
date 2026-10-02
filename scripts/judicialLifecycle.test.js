@@ -737,5 +737,59 @@ for (const left of ['traded', 'inactive']) {
   assert('6b lifecycle throws on a missing NetWorth column', throwsNaming(() => phaseBox.runJudicialLifecycle_(noCol.ctx), 'NetWorth'));
 }
 
+// ── Task 8 R2-1: the stamps the census is derived from ───────────────────────
+{
+  const investigate = { ...arrestReceipt('SYN-T6', 100, 'grave'), entryType: 'investigation',
+    kind: 'transition', sourceSystem: 'conduct', sourceEventId: 'conduct:synthetic:SYN-T6' };
+  const open = jl.openCaseFromReceipt_(investigate);
+  const fx = phaseFixture('active', 101, null, { investigationArrestRate: 1 });
+  fx.rows.push(fx.fields.map(field => open[field]));
+  assert('T8 fixture: the investigation row carries no ArrestCycle', caseFromFixture(fx).ArrestCycle === '');
+  phaseBox.runJudicialLifecycle_(fx.ctx);
+  const conv = fx.ctx.summary.judicialEvents[0];
+  assert('T8 conversion receipt carries ArrestCycle and DecisionCycle',
+    conv.kind === 'intake' && conv.arrestCycle === 101 && conv.decisionCycle === 102);
+  phaseBox.persistJudicialLedger_(fx.ctx);
+  assert('T8 conversion persists ArrestCycle and DecisionCycle on the open row',
+    fx.rows.length === 2 && caseFromFixture(fx).ArrestCycle === 101 &&
+    caseFromFixture(fx).DecisionCycle === 102 && caseFromFixture(fx).StatusNow === 'pending' &&
+    caseFromFixture(fx).ResolveCycle === '');
+}
+{
+  // A re-arrest receipt on an open case carries no arrest stamps and moves none.
+  const ev = arrestReceipt('SYN-T6', 100, 'minor');
+  const fx = phaseFixture('detained', 100, ev, {});
+  phaseBox.persistJudicialLedger_(fx.ctx);
+  fx.ctx.summary = { cycleId: 101, judicialEvents: [{ ...arrestReceipt('SYN-T6', 101, 'minor') }] };
+  phaseBox.persistJudicialLedger_(fx.ctx);
+  assert('T8 re-arrest on an open case leaves ArrestCycle and DecisionCycle alone',
+    fx.rows.length === 2 && caseFromFixture(fx).ArrestCycle === 100 && caseFromFixture(fx).DecisionCycle === 101);
+}
+{
+  // One case per SourceEventId, ever: a replayed intake after the case closed opens nothing.
+  const ev = arrestReceipt('SYN-T6', 100, 'minor');
+  const closed = jl.openCaseFromReceipt_(ev);
+  closed.StatusNow = 'released'; closed.ResolveCycle = 101; closed.Outcome = 'released'; closed.CyclesHeld = 1;
+  const fx = phaseFixture('Active', 102, { ...ev }, {});
+  fx.rows.push(fx.fields.map(field => closed[field]));
+  phaseBox.persistJudicialLedger_(fx.ctx);
+  assert('T8 an intake whose SourceEventId already has a case opens no second row', fx.rows.length === 2);
+  // A different event for the same citizen in the Cycle of a closed case takes the next free id.
+  const second = { ...arrestReceipt('SYN-T6', 100, 'minor'), sourceEventId: 'patrol:synth-second:SYN-T6' };
+  const fx2 = phaseFixture('Active', 100, second, {});
+  fx2.rows.push(fx2.fields.map(field => closed[field]));
+  phaseBox.persistJudicialLedger_(fx2.ctx);
+  assert('T8 a second case in the Cycle of a closed one takes CaseId suffix -2',
+    fx2.rows.length === 3 && caseFromFixture(fx2, 1).CaseId === 'J-C100-SYN-T6' &&
+    caseFromFixture(fx2, 2).CaseId === 'J-C100-SYN-T6-2', caseFromFixture(fx2, 2).CaseId);
+  const third = { ...second, sourceEventId: 'patrol:synth-third:SYN-T6' };
+  const closed2 = { ...closed, CaseId: 'J-C100-SYN-T6-2', SourceEventId: second.sourceEventId };
+  const fx3 = phaseFixture('Active', 100, third, {});
+  fx3.rows.push(fx3.fields.map(field => closed[field]));
+  fx3.rows.push(fx3.fields.map(field => closed2[field]));
+  phaseBox.persistJudicialLedger_(fx3.ctx);
+  assert('T8 the suffix runs to the first free id (-3)', caseFromFixture(fx3, 3).CaseId === 'J-C100-SYN-T6-3');
+}
+
 console.log(`\njudicialLifecycle: ${passed} passed, ${failed} failed`);
 if (failed) process.exit(1);

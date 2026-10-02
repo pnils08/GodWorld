@@ -127,8 +127,8 @@ console.log('\n3. the dials:');
 (function () {
   const seeds = E.ENGINE271_CONFIG_SEEDS.map(s => s[0]);
   assert('3.1 the seed list and the reader hold the same eleven keys', JSON.stringify(seeds.slice().sort()) === JSON.stringify(E.ENGINE271_KEYS.slice().sort()) && seeds.length === 11);
-  assert('3.2 the starting values are the ruled ones', JSON.stringify(E.ENGINE271_CONFIG_SEEDS.map(s => s[1])) === JSON.stringify([0.005, 500, 0.05, 5000, 0.10, 25000, 0.25, 0.01, 0, 16, 20]));
-  assert('3.3 business tax is off until its rate is given', E.ENGINE271_CONFIG_SEEDS.find(s => s[0] === 'businessTaxRate')[1] === 0);
+  assert('3.2 the starting values are the ruled ones', JSON.stringify(E.ENGINE271_CONFIG_SEEDS.map(s => s[1])) === JSON.stringify([0.005, 500, 0.05, 5000, 0.10, 25000, 0.25, 0.01, 0.01, 16, 20]));
+  assert('3.3 business tax starts at 1% (builder 2026-10-02)', E.ENGINE271_CONFIG_SEEDS.find(s => s[0] === 'businessTaxRate')[1] === 0.01);
   const miss = Object.assign({}, CFG); delete miss.fineCapMinor;
   assert('3.4 a missing key throws by name', /fineCapMinor missing/.test(throws(() => E.cityRevenueConfig_({ config: miss })) || ''));
   assert('3.4b a blank or unreadable value is missing, not zero', /propertyTaxRate missing/.test(throws(() => E.cityRevenueConfig_({ config: Object.assign({}, CFG, { propertyTaxRate: '' }) })) || '') &&

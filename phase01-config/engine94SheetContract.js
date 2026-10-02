@@ -324,7 +324,7 @@ var ENGINE271_CONFIG_SEEDS = [
   ['fineCapSerious', 25000, 'engine.271 the most a serious-charge fine can cost, in dollars', 0, 100000000, false],
   ['fineRateGrave', 0.25, 'engine.271 fine on a grave charge as a share of yearly salary — no cap (builder 2026-09-29)', 0, 1, false],
   ['propertyTaxRate', 0.01, 'engine.271 yearly property tax as a share of the hood\'s home value (rent x 12 x 22), paid by owner households on tax day; also enters the test for whether a household can carry a house', 0, 1, false],
-  ['businessTaxRate', 0, 'engine.271 yearly business tax as a share of Business_Ledger Annual_Revenue, credited to the treasury on tax day. 0 = off, until the builder gives the rate', 0, 1, false],
+  ['businessTaxRate', 0.01, 'engine.271 yearly business tax as a share of Business_Ledger Annual_Revenue, credited to the treasury on tax day (builder 2026-10-02: 1%). 0 = off', 0, 1, false],
   ['taxDayCyclePosition', 16, 'engine.271 the week of the sim year (1-52) on which property and business tax are collected. 0 = never', 0, 52, true],
   ['taxThinHoodFloor', 20, 'engine.271 a hood with fewer tracked residents than this shares one pooled city multiplier with the other thin hoods, so one household cannot swing the city\'s income', 0, 1000, true]
 ];

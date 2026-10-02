@@ -169,6 +169,18 @@ pointers:
 
 ---
 
+### Task 9: Mint the citizen into a business that fits the job — engine-sheet (engine.278)
+
+- **Found (2026-10-01, research-build):** `classifyMintSector_` (`phase05-citizens/processAdvancementIntake.js:1435`) buckets a RoleType into four groups (tech / creative / public / service) by keyword, buckets each Business_Ledger Sector the same way, and the mint hashes the citizen into any business in the bucket with headcount room. Everything not matched by the keyword lists is `service`, so a Plumber, a Dishwasher and a Retail worker share one bucket with Anthropic's sector neighbours and City Hall. Judged on the grouped view (every employer × job title), 65 of 585 linked citizens sit at an employer their job cannot belong to (60 Tier 3–4, 5 Tier 1–2); the list is `output/employer-alignment-audit.md` (`.json` sidecar, verdict + suggested target by hood).
+- **Files:** `phase05-citizens/processAdvancementIntake.js` (`classifyMintSector_`, `buildMintBizPool_`, the pick at ~line 890); `phase05-citizens/educationCareerEngine.js` (`sectorCategory_`, `roleSectorCategory_` — the canonical 15-category field map already in vocab-sync with SkillTags).
+- **Steps:**
+  1. Replace the four buckets with the catalog field: the role's category via `roleSectorCategory_` (exact-then-contains on `Economic_Parameters`, keyword fallback), the business's via `sectorCategory_(Sector)`. Pool = businesses whose field equals the role's field and have room; hood-first when the row carries a Neighborhood.
+  2. No field match → `SELF_EMPLOYED` for the mapping's self-employed patterns, else `UNTRACKED` with the existing "Seeking work (no tracked opening for …)" line. Never the service bucket as a catch-all.
+  3. A carried `EmployerBizId` (authored intake) still wins when the business has room — unchanged.
+- **Verify:** bench mint of a Plumber, a Dishwasher, a Nurse Aide and a Police Officer lands each at a Construction / dining / Healthcare / Public Safety employer or SELF_EMPLOYED/UNTRACKED; never City of Oakland or the hospital for the first two. `scripts/householdIntake.test.js` stays green.
+- **Restore:** the 65 are a one-time diff-restore (Tier 3–4 applied by hand 2026-10-01 with `MappingLayer` `manual` on the roster; Tier 1–2 rows held for the builder) — not a sweep, and not re-run after the fix.
+- **Status:** [ ] ready — engine.278
+
 ## Open questions
 
 - [x] **RESOLVED (S336):** the consumer lands INSIDE `runCareerEngine_` (Phase5-Career) as a v2.6 tail step — before `Phase10-ExecuteIntents`, so writes are `queueCellIntent_` write-intents (precedent: `applyChaosDecay.js` Business_Ledger intents from Phase 5). No new file: the career engine already reads Business_Ledger, owns the layoff mutation semantics, and flushes LifeHistory via `queueBatchAppendIntent_` — FIX-don't-ADD.
@@ -178,6 +190,7 @@ pointers:
 
 ## Changelog
 
+- 2026-10-01 (research-build S519) — Task 9 added: the mint's four-bucket employer pick misplaces jobs (engine.278, engine-sheet); 65 misplaced citizens judged by hand, 60 restored, 5 Tier 1–2 held — `output/employer-alignment-audit.md`.
 - 2026-07-27 — Initial draft (S335). Split by model fit per Mike: Opus 5 takes volume+judgment, Fable 5 takes the engine internals.
 - 2026-07-27 (S336, engine-sheet) — Tasks 4 + 5 BUILT + bench-proven (34 assertions green); both open questions resolved. **Live deploy of the Task 4 reconciliation is gated on Tasks 2–3** — detail in the task statuses.
 - 2026-07-27 (S336, engine-sheet, second pass) — Task 4 data gate verified CLEAR (deploy now waits on engine.79 only — see Task 4 status); SkillTags schema live + engine.86/87 closed (detail in Task 7 status).

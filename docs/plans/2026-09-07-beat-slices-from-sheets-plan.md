@@ -394,8 +394,58 @@ Merged to `main` (`234e5c1e`) after two kimi passes (SHIP-WITH-FIXES twice, ever
 - **Vocabulary:** Varek may use the words that align with his system that monitors the system, and any others he comes up with. The gate blocks RULES §6's list only (a figure, a dial or index name, a score or grade, a record id, a table or detector name, "simulation", "tag", "cycle", "dial", "sentiment"); "phase", "snapshot", "drain", "write-back", "engine", "ledger" pass.
 - **The world gaps are to be resolved** (a new session's build; facts checked 22:57): (1) **police and fire staff** — `Oakland Police Department` BIZ-00024 and `Oakland Fire Department` BIZ-00023 both carry **zero** roster workers; mint 10–15 authored citizens each through the promotion populator (`Advancement_Intake` → `processAdvancementIntake.js`, the engine mints at fire — [[2026-08-16-new-life-intake]] Task 4), then roster rows via `linkCitizensToEmployers.js` keyword layer (or the engine's own linkage); top-tier seats are authored, never pool-drawn. (2) **OARI's business row already exists** — BIZ-00095 `Oakland Alternative Response Initiative`, one roster worker (the director, POP-01021); the first review's "no OARI row" was a name-regex miss. Nothing to add unless the builder wants OARI teams rostered too. (3) **Office rows** for the four initiative directors, none of whom holds a `Civic_Office_Ledger` row, so their civic-voice statements never reach Carmen's `offices` pool: Vanessa Tran-Muñoz POP-01021 (OARI), Bobby Chen-Ramirez POP-00792 (Health Center), Marcus Webb POP-00790 (Stabilization Fund; the C109 file speaks as "Marcus Delano Webb" — align the file to the ledger), the Transit Hub lead POP-00791. Shape = `STAFF-BAYLIGHT` (Type `appointed`, District `citywide`, Faction `STAFF`, VotingPower `no`, Approval 65, TermStart 1) via `lib/sheets.appendRows('Civic_Office_Ledger', …)`. (4) **The Transit Hub lead's name — ruled 23:03: Elena Soria Dominguez** (the agent files, made first, are the canon; the ledger had veered to the wd-card form Eloise Soria-Dominguez under S230). Aligned the same hour: `docs/canon/INSTITUTIONS.md` corrections row (now Eloise → Elena), `CANON_RULES.md`, `utilities/tier1EssenceEvents.js`, `scripts/civic-office-map.json` note. Sim_Ledger POP-00791 First/Last written `Elena` / `Soria Dominguez` (row 625, builder-run 23:06). Civic-voice files already say Elena; prior editions that printed Eloise stay as published (paper of record).
 
+### Builder rulings 2026-10-01 23:25 — the world-gap build, executed
+
+Rulings: move the mislinked citizens; audit every citizen row for job vs employer; move both chiefs onto their department rows; rank mix as proposed (command at Tier 3, line staff at Tier 4, spread across the hoods that generate calls); staff the OARI response teams too.
+
+**Done on the live sheet (read back):**
+- **Department moves** (the chiefs ruling, extended to the department command that sat under `City of Oakland` BIZ-00017 by the same logic): Rafael Montez POP-00136 Police Chief, Kimberly Cho POP-00137 Deputy Chief of Operations, Leonard Briggs POP-00138 Deputy Chief of Community Engagement, Samantha Viteri POP-00139 Internal Affairs Division Lead → OPD BIZ-00024; Marcus Hollowell POP-00140 Fire Chief, Priya Narang POP-00141 EMS Director → OFD BIZ-00023. Civilian Police Review Board chair and the Medical Examiner stay with the city.
+- **Four relinks, not five** — Vincent Ramirez (OPOA President) stays at OPD: `OPOA → BIZ-00024` is a deliberate mapping rule. Rosa Foster POP-00849 Plumber → Baylight Construction Authority BIZ-00020; Gauri Han POP-00900 Security Guard (Jack London) → Jack London Square Markets BIZ-00033; Mei Renteria POP-01043 Security guard → City of Oakland BIZ-00017 (the city's other facility guards sit there); Renata Villanueva POP-01131 ER Nurse → Oakland Hospital BIZ-00015. `Employment_Roster` rows updated by POP_ID, `MappingLayer` `manual` (appended where no row existed).
+- **Four `Civic_Office_Ledger` rows** at rows 37–40 (the sheet's prefilled `[]`/`65` defaults run to row 1000, so `appendRows` lands past the grid — write by range): `STAFF-OARI` Vanessa Tran-Muñoz POP-01021, `STAFF-HEALTHCTR` Bobby Chen-Ramirez POP-00792, `STAFF-STABFUND` Marcus Webb POP-00790, `STAFF-TRANSITHUB` Elena Soria Dominguez POP-00791 — shape `STAFF-BAYLIGHT`. Readers checked: `buildCivicVoicePackets.js` / `buildInitiativePackets.js` select by named OfficeId or elected district seats and the civic cron wakes from `civic-office-map.json`, so an appointed STAFF row is inert there and reachable by `newsroomSourcing.offices()` (holder must be an active row).
+- **Speaker name:** the stabilization-fund agent files now say `Marcus Webb` (IDENTITY/LENS/RULES carried `Marcus Delano Webb`; the ledger has no middle name).
+- **The job-vs-employer audit.** A Haiku pass flagged 2 of 585 linked citizens and passed a dishwasher at City Hall and a musician at the hospital — discarded. Judged by hand on the grouped view (every employer × job title): `output/employer-alignment-audit.md` / `.json` is the real list — 65 misplaced; **60 Tier 3–4 restored on the live ledger + roster** (targets: a fitting tracked business in the citizen's own hood, else the mapping's SELF_EMPLOYED/UNTRACKED), 5 held for the builder (Elio Perez T1 Server at Baylight Construction, Jade Orion T2 Musician at Parks, Marcus Wright T2 Server at the Tech Collective, Theo Banks T2 rapper at Ridgeline Studio, Brenda Okoro T2 Deputy Mayor at OARI). Mechanism: `classifyMintSector_` (`phase05-citizens/processAdvancementIntake.js:1435`) buckets a job into four groups and hashes a mint into any business in the bucket with headcount room — that is how a plumber lands at the Police Department. Structural fix filed as **engine.278** (engine-sheet, [[2026-07-27-employment-living-system]] §Task 9).
+
+**Authored staff — to queue on `Advancement_Intake1` for the C110 mint, after kimi's pass and the builder's go.** All `ClockMode` ENGINE, `CIV/MED/UNI` no, `EmployerBizId` carried (the mint honours it while the business has headcount room — OPD states 701, OFD 452, OARI 46). BirthYear is sim-relative (Montez 1997 reads mid-40s). Names checked against the ledger and the 70 pending intake rows — no exact collision; surnames shared with large existing families avoided.
+
+| Dept | Name | RoleType | Tier | Hood | BirthYear | Gender |
+|---|---|---|---|---|---|---|
+| OPD | Dolores Achebe | Police Captain | 3 | West Oakland | 1994 | female |
+| OPD | Tomas Reinholt | Police Lieutenant | 3 | Laurel | 1998 | male |
+| OPD | Kendra Okafor-Lyle | Police Sergeant | 4 | East Oakland | 2004 | female |
+| OPD | Benjamin Tsai | Police Sergeant | 4 | Chinatown | 2006 | male |
+| OPD | Marisol Ibarra | Detective | 4 | Fruitvale | 2003 | female |
+| OPD | Devin Castellanos | Detective | 4 | Dimond | 2008 | male |
+| OPD | Ruth Anyanwu | Police Officer | 4 | East Oakland | 2012 | female |
+| OPD | Jerome Lindqvist | Police Officer | 4 | Eastlake | 2015 | male |
+| OPD | Hana Petrosyan | Police Officer | 4 | San Antonio | 2018 | female |
+| OPD | Calvin Mbeki | 911 Dispatcher | 4 | Downtown | 2010 | male |
+| OFD | Luis Ferreira-Nash | Deputy Fire Chief | 3 | Glenview | 1992 | male |
+| OFD | Ingrid Solberg | Battalion Chief | 3 | Rockridge | 1996 | female |
+| OFD | Omar Haddad | Fire Captain | 3 | West Oakland | 2000 | male |
+| OFD | Felicia Grandberry | Fire Lieutenant | 4 | East Oakland | 2003 | female |
+| OFD | Teodoro Villalpando | Fire Engineer | 4 | Fruitvale | 2005 | male |
+| OFD | Nadia Rasmussen | Firefighter | 4 | Temescal | 2010 | female |
+| OFD | Wesley Oduya | Firefighter | 4 | East Oakland | 2013 | male |
+| OFD | Priscilla Chang | Firefighter | 4 | KONO | 2016 | female |
+| OFD | Dmitri Volkov | Firefighter | 4 | Brooklyn | 2017 | male |
+| OFD | Yolanda Beckford | Firefighter-Paramedic | 4 | West Oakland | 2008 | female |
+| OFD | Samuel Adeyemi | Fire Inspector | 4 | Ivy Hill | 2001 | male |
+| OARI | Grace Oyelaran | OARI Team Lead | 3 | West Oakland | 2001 | female |
+| OARI | Rashida Coleman-Ortiz | OARI Team Lead | 3 | Fruitvale | 2004 | female |
+| OARI | Hector Quintanilla | OARI Team Lead | 3 | East Oakland | 1999 | male |
+| OARI | Imani Delacroix | Crisis Clinician | 4 | West Oakland | 2009 | female |
+| OARI | Patrick Asante | Crisis Clinician | 4 | Fruitvale | 2011 | male |
+| OARI | Lena Marchetti | Crisis Clinician | 4 | East Oakland | 2007 | female |
+| OARI | Tobias Nkemelu | Peer Responder | 4 | West Oakland | 2014 | male |
+| OARI | Esperanza Ruiz | Peer Responder | 4 | Fruitvale | 2012 | female |
+| OARI | Caleb Thornbury | Peer Responder | 4 | East Oakland | 2016 | male |
+
+After the mint: OPD 15 tracked (5 existing + 10), OFD 13 (2 + 11), OARI 11 (director + Okoro + 9 — three teams of three across the three dispatch-live hoods; canon states 18 positions with teams live in West Oakland and deploying East Oakland at C109, so nine is half the positions filled). One in-world line each in `CitizenBio`. Roster rows for the new mints come from `linkCitizensToEmployers.js --fill-blanks-only` after C110 — `--dry-run` first; never run it bare, the default mode rewrites every `EmployerBizId` from the mapping and would undo every hand fix above.
+
+
 ## Changelog
 
+- 2026-10-01 (research-build S519) — Builder 23:25 rulings executed: six department moves, four relinks, four office rows, speaker name; 60 of 65 misplaced employers restored by hand (Haiku pass discarded), 5 Tier 1–2 held; engine.278 filed; 30 staff authored for kimi review.
 - 2026-10-01 (engine-sheet S518) — es's piece complete: LENS/RULES `52f9219c`, run-cycle Step 5.58 `e5e29d91` (agy review folded; two-arm gate). First real run C110 2026-10-04.
 - 2026-10-01 (research-build S516) — Builder 23:03: Transit Hub lead is Elena Soria Dominguez; ledger + canon docs aligned.
 - 2026-10-01 (research-build S516) — Builder 22:52: merged after two kimi passes; Varek is Sonnet 5.5 first; vocabulary open beyond RULES §6; world gaps (police/fire staff, director office rows, the Transit Hub lead's name) filed as the next build, OARI row found present.

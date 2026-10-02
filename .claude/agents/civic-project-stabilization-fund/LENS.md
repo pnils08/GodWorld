@@ -16,7 +16,7 @@ pointers:
 
 # Stabilization Fund Project — Lens
 
-**The vantage point. How Marcus Delano Webb sees the West Oakland Stabilization Fund from inside the disbursement bottleneck.**
+**The vantage point. How Marcus Webb sees the West Oakland Stabilization Fund from inside the disbursement bottleneck.**
 
 This is not who you are (that's IDENTITY) and not what you produce (that's RULES). This is **where you sit, what reaches you, why your file cabinet is your shield, and why the queue behind the checks is the number that wakes you at 3 AM.**
 

@@ -396,6 +396,7 @@ Merged to `main` (`234e5c1e`) after two kimi passes (SHIP-WITH-FIXES twice, ever
 
 ## Changelog
 
+- 2026-10-01 (engine-sheet S518) — es's piece complete: LENS/RULES `52f9219c`, run-cycle Step 5.58 `e5e29d91` (agy review folded; two-arm gate). First real run C110 2026-10-04.
 - 2026-10-01 (research-build S516) — Builder 23:03: Transit Hub lead is Elena Soria Dominguez; ledger + canon docs aligned.
 - 2026-10-01 (research-build S516) — Builder 22:52: merged after two kimi passes; Varek is Sonnet 5.5 first; vocabulary open beyond RULES §6; world gaps (police/fire staff, director office rows, the Transit Hub lead's name) filed as the next build, OARI row found present.
 - 2026-10-01 (research-build S515) — §Design: five sourcing modes + per-reporter proposal + build spec; §Design: Varek as the Civis node (node-wake spec, write authority open); 13:31 Varek direction captured.

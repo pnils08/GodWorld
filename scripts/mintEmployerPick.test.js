@@ -125,8 +125,8 @@ check('6.2 a retiree holds no employer', blank(pick('Retired', 'Temescal')) && b
 check('6.3 a GAME-clock citizen is left to the sports world, whatever the role', blank(pick('Plumber', 'Temescal', 'GAME')) && blank(pick('Athlete', 'Jack London', 'GAME')));
 check('6.4 a blank role holds no employer', blank(pick('', 'Temescal')));
 check('6.4b a Vice President is not a resident — the roster rule skipped every title ending in "President" as jobless', !blank(pick('Vice President', 'Downtown')) && !blank(pick('Bank President', 'Downtown')) && blank(pick('Longtime resident', 'Downtown')), JSON.stringify(pick('Vice President', 'Downtown')));
-const odd = pick('Climate Adaptation Specialist', 'Temescal');
-check('6.5 a role with no field is UNTRACKED, never the service catch-all', odd.sentinel === 'UNTRACKED' && !odd.bizId, JSON.stringify(odd));
+const odd = pick('QA tester', 'Temescal');
+check('6.5 a role with no field and no named organisation is UNTRACKED, never the service catch-all', E.mintNamedEmployer_('QA tester') === '' && E.roleFieldOf_('QA tester') === null && odd.sentinel === 'UNTRACKED' && !odd.bizId, JSON.stringify(odd));
 const dead = pick('Plumber', 'Temescal', 'ENGINE', 's', null);
 check('6.6 an unreadable Business_Ledger leaves a fielded role seeking (the caller writes the line)', dead.seeking === true && !dead.bizId && !dead.sentinel, JSON.stringify(dead));
 check('6.7 Trades reads as its field through the alias', E.roleFieldOf_('Plumber') !== null && E.skillTagField_(E.roleFieldOf_('Plumber')) === 'Construction & Baylight', String(E.roleFieldOf_('Plumber')));

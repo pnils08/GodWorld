@@ -176,6 +176,17 @@ function processGenerationalWealth_(ctx) {
   var loopResults = processMoneyLoop_(ctx, cycle);
   results.moneyLoop = loopResults;
 
+  // Step 2.6 (engine.271): tax day — once a sim year the owner households pay
+  // property tax out of NetWorth and the treasury is credited at city scale.
+  // Its own error row: a tax failure must not take the rest of the wealth pass.
+  try {
+    results.propertyTax = collectPropertyTax_(ss, ctx, cycle);
+  } catch (taxErr) {
+    results.propertyTax = { error: taxErr.message };
+    if (typeof logEngineError_ === 'function') logEngineError_(ctx, 'Phase5-PropertyTax', taxErr);
+    else Logger.log('collectPropertyTax_: ' + taxErr.message);
+  }
+
   // Step 3: Process inheritance for recent deaths
   var inheritanceResults = processInheritance_(ctx, cycle);
   results.inheritanceProcessed = inheritanceResults.processed;
@@ -1788,10 +1799,148 @@ function homeHoodFloorAdmits_(ctx, hood, combinedNW) {
 }
 // engine.158: income says how you live there — a household with no income on
 // the column carries no loan.
-function homeCarries_(mortgageMonthly, householdIncome) {
+// engine.271 (builder 2026-09-29): the yearly property tax is part of what the
+// house costs to carry, so an expensive hood is harder to enter.
+function homeCarries_(mortgageMonthly, householdIncome, annualTax) {
   var inc = Number(householdIncome) || 0;
   if (inc <= 0) return false;
-  return (Number(mortgageMonthly) || 0) * 12 <= HOME_CARRY_MAX * inc;
+  return (Number(mortgageMonthly) || 0) * 12 + (Number(annualTax) || 0) <= HOME_CARRY_MAX * inc;
+}
+// The yearly property tax on a house of this price; 0 when the dial is not there
+// to read (a harness without it) — the carry test then reads as it did.
+function homeAnnualTax_(ctx, price) {
+  var rate = ctx && ctx.config ? Number(ctx.config.propertyTaxRate) : NaN;
+  return isFinite(rate) && rate > 0 ? Math.round((Number(price) || 0) * rate) : 0;
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// engine.271 — TAX DAY (builder rulings 2026-09-29, 2026-10-02)
+// On the Cycle whose year position is taxDayCyclePosition every active owned
+// household pays propertyTaxRate x the hood's home value (the purchase engine's
+// own price), split among its adults by net-worth share as the down payment was;
+// an adult who cannot cover a share goes to zero and up one debt level. The
+// tracked collections scale to the city hood by hood (cityHoodMultipliers_, thin
+// hoods pooled) into one PROPERTY-TAX row; business tax, when its rate is set,
+// is one BUSINESS-TAX row. Nothing is charged unless the treasury and the hood
+// table are both there to receive it, and never twice inside half a year.
+// No rng.
+// ════════════════════════════════════════════════════════════════════════════
+var TAX_DAY_MIN_GAP = 26; // Cycles — a moved dial or a repeated position cannot bill a household twice in a year
+function collectPropertyTax_(ss, ctx, cycle) {
+  var results = { taxDay: false, households: 0, payers: 0, collected: 0, borrowed: 0, cityTotal: 0, businessTax: 0 };
+  var S = ctx.summary || {};
+  var cfg = cityRevenueConfig_(ctx);
+  var position = Number(S.cycleOfYear) || (((cycle - 1) % 52) + 1);
+  if (!(cfg.taxDayCyclePosition > 0) || position !== cfg.taxDayCyclePosition) return results;
+  var treasury = S.treasury;
+  if (!treasury || !isFinite(Number(treasury.balance))) throw new Error('engine.271 tax day: no treasury this fire — nothing collected');
+  var lastTax = Number(treasury.lastTaxCycle) || 0;
+  if (lastTax > 0 && cycle - lastTax < TAX_DAY_MIN_GAP) return results;
+  var demand = S.careJusticeDemand;
+  if (!demand || !demand.hoods) throw new Error('engine.271 tax day: S.careJusticeDemand missing — no hood scale, nothing collected');
+  var hhSheet = ss.getSheetByName('Household_Ledger');
+  if (!hhSheet || !ctx.ledger) throw new Error('engine.271 tax day: Household_Ledger or the ledger missing — nothing collected');
+  results.taxDay = true;
+
+  var header = ctx.ledger.headers, rows = ctx.ledger.rows;
+  var idx = function(n) { return header.indexOf(n); };
+  var iPop = idx('POPID'), iNW = idx('NetWorth'), iDebt = idx('DebtLevel'), iStatus = idx('Status'),
+      iLife = idx('LifeHistory'), iBirth = idx('BirthYear'), iInc = idx('Income'),
+      iWealth = idx('WealthLevel'), iInher = idx('InheritanceReceived');
+  if (iPop < 0 || iNW < 0) throw new Error('engine.271 tax day: POPID/NetWorth columns missing');
+  var simYear = simYearOf_(ctx, cycle);
+  var rowByPop = {};
+  for (var r0 = 0; r0 < rows.length; r0++) {
+    if (rows[r0] && rows[r0][iPop]) rowByPop[String(rows[r0][iPop]).trim()] = rows[r0];
+  }
+  var hv = hhSheet.getDataRange().getValues();
+  var hh = hv[0];
+  var hj = function(n) { return hh.indexOf(n); };
+  var cMem = hj('Members'), cHood = hj('Neighborhood'), cType = hj('HousingType'),
+      cCost = hj('HousingCost'), cStat = hj('Status');
+  if (cMem < 0 || cType < 0 || cHood < 0) throw new Error('engine.271 tax day: Household_Ledger columns missing');
+  var stamp = 'Y' + (Math.floor((cycle - 1) / 52) + 1) + 'C' + (((cycle - 1) % 52) + 1);
+  var byHood = {};
+
+  for (var q = 1; q < hv.length; q++) {
+    if (cStat >= 0 && String(hv[q][cStat] || '').toLowerCase() !== 'active') continue;
+    if (String(hv[q][cType] || '').toLowerCase() !== 'owned') continue;
+    var hood = String(hv[q][cHood] || '').trim();
+    // the hood's market prices the house; off the map, the price it was bought at
+    var value = Math.round(homeMarketRent_(ctx, hood, 0) * 12 * HOME_PRICE_TO_RENT);
+    if (!(value > 0) && cCost >= 0) value = Number(hv[q][cCost]) || 0;
+    var tax = Math.round(value * cfg.propertyTaxRate);
+    if (!(tax > 0)) continue;
+
+    var memIds = [];
+    try { memIds = JSON.parse(String(hv[q][cMem] || '[]')); } catch (e) { memIds = []; }
+    var adults = [], combined = 0;
+    for (var m = 0; m < memIds.length; m++) {
+      var mRow = rowByPop[String(memIds[m]).trim()];
+      if (!mRow) continue;
+      var st = String(mRow[iStatus] || 'active').toLowerCase();
+      if (st === 'deceased' || st === 'inactive' || st === 'traded') continue;
+      var by = iBirth >= 0 ? (Number(mRow[iBirth]) || 0) : 0;
+      if (by > 1900 && (simYear - by) < 18) continue; // minors share the house, not the bill
+      var mNW = Number(String(mRow[iNW]).replace(/[$,\s]/g, ''));
+      adults.push({ row: mRow, nw: isFinite(mNW) && mNW > 0 ? mNW : 0 });
+      combined += isFinite(mNW) && mNW > 0 ? mNW : 0;
+    }
+    if (!adults.length) continue;
+    results.households++;
+
+    var billed = 0;
+    for (var a = 0; a < adults.length; a++) {
+      // the last adult takes the rounding, so the household pays exactly its tax
+      var share = a === adults.length - 1 ? tax - billed
+        : Math.round(tax * (combined > 0 ? adults[a].nw / combined : 1 / adults.length));
+      billed += share;
+      if (!(share > 0)) continue;
+      var paid = cityChargeNetWorth_(adults[a].row, iNW, iDebt, share);
+      if (!paid) continue; // a NetWorth that cannot be read is never overwritten
+      results.payers++;
+      results.collected += paid.paid;
+      if (paid.borrowed) results.borrowed++;
+      byHood[hood] = (byHood[hood] || 0) + paid.paid;
+      if (iWealth >= 0) {
+        adults[a].row[iWealth] = deriveWealthLevel_(iInc >= 0 ? (Number(adults[a].row[iInc]) || 0) : 0,
+          iInher >= 0 ? (Number(adults[a].row[iInher]) || 0) : 0,
+          Number(adults[a].row[iNW]) || 0, iDebt >= 0 ? (Number(adults[a].row[iDebt]) || 0) : 0);
+      }
+      if (iLife >= 0) {
+        var life = String(adults[a].row[iLife] || '');
+        adults[a].row[iLife] = (life ? life + '\n' : '') + stamp + ' — [Home] paid $' + paid.paid +
+          ' in property tax on the place in ' + (hood || 'the neighborhood') +
+          (paid.borrowed ? ' — more than the savings could hold, borrowed to cover it' : '');
+      }
+    }
+  }
+  if (results.payers) ctx.ledger.dirty = true;
+
+  var mult = cityHoodMultipliers_(demand, cfg.taxThinHoodFloor);
+  for (var h in byHood) {
+    if (byHood.hasOwnProperty(h)) results.cityTotal += byHood[h] * (mult[h] > 0 ? mult[h] : 1);
+  }
+  results.cityTotal = Math.round(results.cityTotal);
+  if (postTreasuryRevenue_(ctx, 'PROPERTY-TAX', results.cityTotal,
+      results.households + ' tracked owner households paid ' + results.collected + '; scaled to the city hood by hood')) {
+    treasury.lastTaxCycle = cycle;
+  }
+
+  if (cfg.businessTaxRate > 0) {
+    var bizSheet = ss.getSheetByName('Business_Ledger');
+    if (bizSheet) {
+      var bv = bizSheet.getDataRange().getValues();
+      var bRev = bv[0].indexOf('Annual_Revenue'), revenue = 0;
+      for (var b = 1; bRev >= 0 && b < bv.length; b++) revenue += Math.max(0, Number(bv[b][bRev]) || 0);
+      results.businessTax = Math.round(revenue * cfg.businessTaxRate);
+      postTreasuryRevenue_(ctx, 'BUSINESS-TAX', results.businessTax, 'business tax on ledger revenue');
+    }
+  }
+  Logger.log('collectPropertyTax_ C' + cycle + ': ' + results.households + ' households, ' + results.payers +
+    ' payers, collected ' + results.collected + ' (' + results.borrowed + ' borrowed), city ' + results.cityTotal +
+    ', business ' + results.businessTax);
+  return results;
 }
 
 function trackHomeOwnership_(ss, ctx, cycle) {
@@ -1859,7 +2008,7 @@ function trackHomeOwnership_(ss, ctx, cycle) {
     if (combinedNW < price * HOME_ELIGIBLE_NW) continue; // can't carry it yet
     if (!homeHoodFloorAdmits_(ctx, hood, combinedNW)) continue; // engine.158: net worth says where you live
     var mortgage = Math.round(price * HOME_MORTGAGE_MONTHLY);
-    if (!homeCarries_(mortgage, cInc >= 0 ? hv[q][cInc] : 0)) continue; // engine.158: income says how you live there
+    if (!homeCarries_(mortgage, cInc >= 0 ? hv[q][cInc] : 0, homeAnnualTax_(ctx, price))) continue; // engine.158: income says how you live there; engine.271: the tax is part of the carry
     // engine.157: the head of household's posture multiplies the roll when the house is the goal
     var headPop = cHead >= 0 ? String(hv[q][cHead] || '').trim() : '';
     if (!headPop && memIds.length) headPop = String(memIds[0]).trim();
@@ -2072,7 +2221,7 @@ function planOwnerMove_(ctx, household, memberRows, unitIncome, destHood) {
   var nwAfter = nw + proceeds;
   var buys = nwAfter >= price * HOME_ELIGIBLE_NW &&
     homeHoodFloorAdmits_(ctx, destHood, nwAfter) &&
-    homeCarries_(mortgage, unitIncome);
+    homeCarries_(mortgage, unitIncome, homeAnnualTax_(ctx, price)); // engine.271: the tax is part of the carry
   return {
     mode: buys ? 'trade-up' : 'rent', salePrice: salePrice, proceeds: proceeds,
     price: price, down: Math.round(price * HOME_DOWN), mortgage: mortgage,

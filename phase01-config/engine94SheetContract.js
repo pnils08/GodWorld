@@ -310,6 +310,39 @@ function ensureEngine276Config_(ss) {
   return { configSeeded: plan.additions.length };
 }
 
+// engine.271 — city revenue (builder rulings 2026-09-29 and 2026-10-02). Fines
+// are a share of the citizen's salary by level, capped below the grave level;
+// property tax is a share of the hood's home value, paid once a sim year on tax
+// day; the tracked collections scale to the city by hood. Starting values in the
+// care-and-justice plan §engine.271.
+var ENGINE271_CONFIG_SEEDS = [
+  ['fineRateTicket', 0.005, 'engine.271 a ticket\'s fine as a share of the citizen\'s yearly salary (cop-car ticket, parking ticket)', 0, 1, false],
+  ['fineCapTicket', 500, 'engine.271 the most a ticket can cost, in dollars', 0, 1000000, false],
+  ['fineRateMinor', 0.05, 'engine.271 fine on a minor charge as a share of yearly salary; also the fine the city collects per cleared charge, on the hood\'s median income', 0, 1, false],
+  ['fineCapMinor', 5000, 'engine.271 the most a minor-charge fine can cost, in dollars', 0, 100000000, false],
+  ['fineRateSerious', 0.10, 'engine.271 fine on a serious charge as a share of yearly salary', 0, 1, false],
+  ['fineCapSerious', 25000, 'engine.271 the most a serious-charge fine can cost, in dollars', 0, 100000000, false],
+  ['fineRateGrave', 0.25, 'engine.271 fine on a grave charge as a share of yearly salary — no cap (builder 2026-09-29)', 0, 1, false],
+  ['propertyTaxRate', 0.01, 'engine.271 yearly property tax as a share of the hood\'s home value (rent x 12 x 22), paid by owner households on tax day; also enters the test for whether a household can carry a house', 0, 1, false],
+  ['businessTaxRate', 0, 'engine.271 yearly business tax as a share of Business_Ledger Annual_Revenue, credited to the treasury on tax day. 0 = off, until the builder gives the rate', 0, 1, false],
+  ['taxDayCyclePosition', 16, 'engine.271 the week of the sim year (1-52) on which property and business tax are collected. 0 = never', 0, 52, true],
+  ['taxThinHoodFloor', 20, 'engine.271 a hood with fewer tracked residents than this shares one pooled city multiplier with the other thin hoods, so one household cannot swing the city\'s income', 0, 1000, true]
+];
+
+function ensureEngine271Config_(ss) {
+  if (!ss) throw new Error('engine.271 config: spreadsheet required');
+  var configSheet = ss.getSheetByName('World_Config');
+  if (!configSheet) throw new Error('engine.271 config: World_Config not found');
+  var plan = inspectEngine94Config_(configSheet.getDataRange().getValues(), ENGINE271_CONFIG_SEEDS);
+  if (plan.additions.length > 0) {
+    configSheet.getRange(configSheet.getLastRow() + 1, 1, plan.additions.length, 3).setValues(plan.additions);
+    var verified = inspectEngine94Config_(configSheet.getDataRange().getValues(), ENGINE271_CONFIG_SEEDS);
+    if (verified.additions.length > 0) throw new Error('engine.271 config: post-write verification failed');
+  }
+  Logger.log('engine.271 config ready: seeded ' + plan.additions.length + ' row(s)');
+  return { configSeeded: plan.additions.length };
+}
+
 var ENGINE176_CONFIG_SEEDS = [
   ['dialFrictionRentBurden', 50, 'engine.176 rent as % of household income above which an unbuffered renter takes a pressure tag (Friction, then Strain) — the negative pole from a cause', 10, 90, false],
   ['dialSetbackLossPct', 5, 'engine.176 a lost casino stake at/over this % of the citizen\'s net worth logs [Setback] instead of the ordinary [Casino] loss line', 1, 50, false],

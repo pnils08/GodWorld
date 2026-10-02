@@ -791,5 +791,59 @@ for (const left of ['traded', 'inactive']) {
   assert('T8 the suffix runs to the first free id (-3)', caseFromFixture(fx3, 3).CaseId === 'J-C100-SYN-T6-3');
 }
 
+// engine.271 — the scheduled phase fines a closing case and posts the court's money.
+console.log('\nengine.271 — the fine and the court rows through the scheduled phase:');
+{
+  const revBox = { Logger: { log() {} }, seededRngFor_, appended: [], errors: [],
+    queueAppendIntent_: (ctx, tab, row, reason, domain, priority) => revBox.appended.push({ tab, row, priority }),
+    logEngineError_: (ctx, phase, err) => revBox.errors.push(phase + ': ' + err.message),
+    requireTab_: (ss, name) => ss.getSheetByName(name), persistWithRetry_: fn => fn(), appendRowWithRetry_: (tab, row) => tab.appendRow(row) };
+  vm.createContext(revBox);
+  for (const file of ['phase02-world-state/applyInitiativeImplementationEffects.js', 'phase05-citizens/judicialLifecycle.js', 'phase10-persistence/buildCyclePacket.js']) {
+    vm.runInContext(fs.readFileSync(path.join(ROOT, file), 'utf8'), revBox, { filename: file });
+  }
+  const REV = { fineRateTicket: 0.005, fineCapTicket: 500, fineRateMinor: 0.05, fineCapMinor: 5000, fineRateSerious: 0.10, fineCapSerious: 25000,
+    fineRateGrave: 0.25, propertyTaxRate: 0.01, businessTaxRate: 0, taxDayCyclePosition: 16, taxThinHoodFloor: 20 };
+  const world = (cycle) => ({ cycleId: cycle, treasury: { balance: 1000000, cycle, entries: 0 },
+    careJusticeDemand: { hoods: { SYNTHETIC_HOOD: { judicialIntakes: 3 }, OTHER: { judicialIntakes: 2 } } },
+    neighborhoodState: { SYNTHETIC_HOOD: { medianIncome: 80000 }, OTHER: { medianIncome: 200000 } } });
+  const treasury = () => revBox.appended.filter(a => a.tab === 'City_Treasury').map(a => a.row);
+  const run = (rates, gravity) => {
+    revBox.appended.length = 0; revBox.errors.length = 0;
+    const ev = arrestReceipt('SYN-T6', 100, gravity);
+    const fx = phaseFixture('detained', 100, ev, { ...REV, ...rates });
+    fx.ctx.summary = { ...world(100), judicialEvents: [ev] };
+    revBox.runJudicialLifecycle_(fx.ctx);
+    revBox.persistJudicialLedger_(fx.ctx);
+    const c100 = treasury();
+    revBox.appended.length = 0;
+    fx.ctx.summary = world(101); fx.ctx.config.cycleCount = 101;
+    revBox.runJudicialLifecycle_(fx.ctx);
+    revBox.persistJudicialLedger_(fx.ctx);
+    return { fx, c100, c101: treasury() };
+  };
+  // the arrest Cycle: 3 cleared in the defendant's hood less the 1 tracked arrest = 2 x 4,000; OTHER 2 x 5,000 (cap)
+  let r = run({ judicialReleasedRate: 0, judicialDivertedRate: 1, judicialHeldRate: 0 }, 'serious');
+  assert('271 the arrest Cycle posts one COURT row: the hoods\' cleared charges less the tracked arrest', r.c100.length === 1 && r.c100[0][3] === 'COURT' &&
+    r.c100[0][2] === 2 * 4000 + 2 * 5000 && r.c100[0][4] === 1000000 + 18000, JSON.stringify(r.c100));
+  assert('271 a diverted serious case is fined 10% of salary when it closes, on top of the lost week', r.fx.person[7] === 10000 - 1000 - 5200 &&
+    /\[Money\] fined \$5200 by the court/.test(r.fx.person[9]), r.fx.person[7] + ' / ' + r.fx.person[9]);
+  assert('271 the close Cycle posts the named fine, then the court row, balances in order', r.c101.length === 2 && r.c101[0][3] === 'COURT-NAMED' && r.c101[0][2] === 5200 &&
+    r.c101[1][3] === 'COURT' && r.c101[1][2] === 3 * 4000 + 2 * 5000 && r.c101[1][4] === 1000000 + 5200 + 22000, JSON.stringify(r.c101));
+  assert('271 the case still closes diverted and the citizen is restored', caseFromFixture(r.fx).Outcome === 'diverted' && r.fx.person[1] === 'Active' && revBox.errors.length === 0, revBox.errors.join(';'));
+  r = run({ judicialReleasedRate: 1, judicialDivertedRate: 0, judicialHeldRate: 0 }, 'grave');
+  assert('271 a released case is not fined: only the court row posts', r.c101.length === 1 && r.c101[0][3] === 'COURT' && r.fx.person[7] === 9000 && !/fined/.test(r.fx.person[9]));
+  // a missing dial stops the money, not the custody work
+  revBox.appended.length = 0; revBox.errors.length = 0;
+  const ev = arrestReceipt('SYN-T6', 100, 'minor');
+  const bad = { ...REV }; delete bad.fineCapSerious;
+  const fx = phaseFixture('detained', 100, ev, { ...bad, judicialReleasedRate: 0, judicialDivertedRate: 1, judicialHeldRate: 0 });
+  fx.ctx.summary = { ...world(100), judicialEvents: [ev] };
+  revBox.runJudicialLifecycle_(fx.ctx);
+  revBox.persistJudicialLedger_(fx.ctx);
+  assert('271 a missing revenue dial is its own error row; the case still opens and nothing is posted', caseFromFixture(fx).StatusNow === 'pending' &&
+    treasury().length === 0 && revBox.errors.length === 1 && /Phase5-CourtRevenue: .*fineCapSerious missing/.test(revBox.errors[0]), revBox.errors.join(';'));
+}
+
 console.log(`\njudicialLifecycle: ${passed} passed, ${failed} failed`);
 if (failed) process.exit(1);

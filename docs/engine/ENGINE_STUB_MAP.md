@@ -116,6 +116,9 @@
 - **ensureEngine276Config_(ss)**
   Sheets: World_Config
 
+- **ensureEngine271Config_(ss)**
+  Sheets: World_Config
+
 - **ensureEngine176Config_(ss)**
   Sheets: World_Config
 
@@ -360,6 +363,18 @@
   Reads: S.canonHoods
 
 - **readTreasuryLedger_(rows)**
+
+- **cityRevenueConfig_(ctx)**
+
+- **cityFine_(income, level, cfg)**
+
+- **cityChargeNetWorth_(row, iNW, iDebt, amount)**
+
+- **postTreasuryRevenue_(ctx, counterparty, amount, note)**
+  Reads: S.treasury
+  Sheets: City_Treasury
+
+- **cityHoodMultipliers_(demand, floor)**
 
 - **treasuryDraw_(balance, amount)**
 
@@ -797,6 +812,8 @@
 - **careJusticeOtherResident_(demand, trackedIntakesByHood, everyHood)**
 
 ### chaosCarsEngine.js
+- **chaosTicketFine_(ctx, row, cycle, cfg)**
+
 - **chaosChargeGravity_(outcome)**
 
 - **chaosEventId_(rng)**
@@ -1921,7 +1938,14 @@
 - **homeHoodFloorAdmits_(ctx, hood, combinedNW)**
   Reads: S.neighborhoodState
 
-- **homeCarries_(mortgageMonthly, householdIncome)**
+- **homeCarries_(mortgageMonthly, householdIncome, annualTax)**
+
+- **homeAnnualTax_(ctx, price)**
+  Config: ctx.config.propertyTaxRate
+
+- **collectPropertyTax_(ss, ctx, cycle)**
+  Reads: S.careJusticeDemand, S.cycleOfYear, S.treasury
+  Sheets: Business_Ledger, Household_Ledger
 
 - **trackHomeOwnership_(ss, ctx, cycle)**
   Reads: S.storyHooks
@@ -2065,6 +2089,12 @@
 
 - **judicialSettleLostPay_(ctx, row, c, cycle, cols, statusBefore)**
   Sheets: LifeHistory_Log
+
+- **judicialSettleFine_(ctx, row, c, cycle, cols, cfg)**
+  Sheets: LifeHistory_Log
+
+- **cityCourtRevenue_(ctx, cfg, trackedIntakesByHood)**
+  Reads: S.careJusticeDemand, S.neighborhoodState
 
 - **judicialSetStatus_(ctx, row, status, cycle, iStatus, iStart)**
 
@@ -4412,4 +4442,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1565
+**Functions mapped:** 1576

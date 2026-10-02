@@ -316,7 +316,9 @@ function applyInitiativeImplementationEffects_(ctx) {
         trPost('PREFUNDED', 0, tpId, 'funded before the treasury');
       }
     }
-    if (!treasury.revenueCycles[String(trCycle)]) {
+    // engine.271 (builder 2026-10-02): the allocation stood in for taxes — it ends
+    // for good once the first property-tax row is on the tab.
+    if (!treasury.taxLanded && !treasury.revenueCycles[String(trCycle)]) {
       var weekly = Number(ctx.config && ctx.config.treasuryWeeklyAllocation);
       if (!(weekly >= 0)) weekly = 5000000;
       treasury.balance += weekly;
@@ -816,7 +818,8 @@ function applyInitiativeImplementationEffects_(ctx) {
       queueAppendIntent_(ctx, 'City_Treasury', treasury.entries[te], 'engine.262 treasury ' + treasury.entries[te][1], 'civic', 5);
     }
     S.treasury = { balance: Math.round(treasury.balance), cycle: treasury.cycle,
-      entries: treasury.entries.length, underfunded: treasury.underfunded };
+      entries: treasury.entries.length, underfunded: treasury.underfunded,
+      lastTaxCycle: treasury.lastTaxCycle || 0 }; // engine.271: later phases post revenue against this balance
   }
   S.initiativeSpend = spendSlice;
   S.initiativeRenewalCredits = renewalSlice;
@@ -1027,7 +1030,7 @@ var TREASURY_HEADERS_ = ['Cycle', 'Entry', 'Amount', 'Counterparty', 'BalanceAft
 
 /** Read the ledger: balance, and which counterparties were ever appropriated. Pure over rows. */
 function readTreasuryLedger_(rows) {
-  var out = { balance: 0, empty: true, appropriated: {}, revenueCycles: {} };
+  var out = { balance: 0, empty: true, appropriated: {}, revenueCycles: {}, taxLanded: false, lastTaxCycle: 0 };
   if (!rows || rows.length < 2) return out;
   var h = rows[0];
   var iC = h.indexOf('Cycle'), iE = h.indexOf('Entry'), iP = h.indexOf('Counterparty'), iB = h.indexOf('BalanceAfter');
@@ -1039,8 +1042,115 @@ function readTreasuryLedger_(rows) {
     if (isFinite(bal)) out.balance = bal;
     var cp = String(rows[r][iP] || '').trim();
     if ((e === 'APPROPRIATION' || e === 'PREFUNDED') && cp) out.appropriated[cp] = true;
-    if (e === 'REVENUE') out.revenueCycles[String(rows[r][iC])] = true;
+    // engine.271: only the allocation's own row marks its Cycle paid — a court or
+    // ticket row posted the same Cycle is revenue too and must not stand in for it.
+    if (e === 'REVENUE' && (cp === 'WEEKLY-ALLOCATION' || cp === '')) out.revenueCycles[String(rows[r][iC])] = true;
+    if (e === 'REVENUE' && cp === 'PROPERTY-TAX') {
+      out.taxLanded = true;
+      out.lastTaxCycle = Math.max(out.lastTaxCycle, Number(rows[r][iC]) || 0);
+    }
   }
+  return out;
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// engine.271 — CITY REVENUE (builder rulings 2026-09-29, 2026-10-02)
+// The treasury takes money in from three places: the court (each hood's cleared
+// charges, plus what named citizens are fined), tickets, and on tax day the
+// property and business tax. A fine is a share of salary by level, capped below
+// the grave level. What a tracked citizen pays comes out of NetWorth by the
+// money loop's shock rule: savings cover it, or savings go to zero and debt
+// rises a level. No rng anywhere here — arithmetic on values already on the row.
+// Spec: docs/plans/2026-09-21-care-and-justice-system.md §engine.271.
+// ════════════════════════════════════════════════════════════════════════════
+var ENGINE271_KEYS = ['fineRateTicket', 'fineCapTicket', 'fineRateMinor', 'fineCapMinor', 'fineRateSerious',
+  'fineCapSerious', 'fineRateGrave', 'propertyTaxRate', 'businessTaxRate', 'taxDayCyclePosition', 'taxThinHoodFloor'];
+
+// World_Config read — a missing key throws (ADR-0015: ensureEngine271Config_ self-arms at open).
+function cityRevenueConfig_(ctx) {
+  var out = {};
+  for (var i = 0; i < ENGINE271_KEYS.length; i++) {
+    var k = ENGINE271_KEYS[i];
+    var v = ctx && ctx.config ? Number(ctx.config[k]) : NaN;
+    if (isNaN(v)) throw new Error('engine.271: World_Config ' + k + ' missing — ensureEngine271Config_ did not run (ADR-0015)');
+    out[k] = v;
+  }
+  return out;
+}
+
+// A fine in dollars: yearly income x the level's rate, capped. Levels: ticket,
+// minor, serious, grave (the Judicial_Ledger ChargeGravity values; grave has no cap).
+function cityFine_(income, level, cfg) {
+  var inc = Number(income) || 0;
+  if (!(inc > 0)) return 0;
+  var rate, cap;
+  if (level === 'ticket') { rate = cfg.fineRateTicket; cap = cfg.fineCapTicket; }
+  else if (level === 'minor') { rate = cfg.fineRateMinor; cap = cfg.fineCapMinor; }
+  else if (level === 'serious') { rate = cfg.fineRateSerious; cap = cfg.fineCapSerious; }
+  else if (level === 'grave') { rate = cfg.fineRateGrave; cap = Infinity; }
+  else throw new Error('engine.271: unknown fine level "' + level + '"');
+  return Math.round(Math.min(inc * rate, cap));
+}
+
+// Take `amount` out of a ledger row's NetWorth. Savings cover it, or they go to
+// zero and DebtLevel rises one (never past 6) — the money loop's shock rule, the
+// one the custody settlement uses. A blank NetWorth is nothing saved and stays
+// blank; a value that cannot be read is never overwritten (returns null, nothing
+// charged). Returns { paid, borrowed }.
+function cityChargeNetWorth_(row, iNW, iDebt, amount) {
+  var amt = Math.round(Number(amount) || 0);
+  if (!(amt > 0) || iNW < 0) return null;
+  var raw = row[iNW];
+  var blank = raw === '' || raw === null || raw === undefined;
+  var nw = blank ? 0 : Number(String(raw).replace(/[$,\s]/g, ''));
+  if (!isFinite(nw)) return null;
+  if (nw >= amt) { row[iNW] = nw - amt; return { paid: amt, borrowed: false }; }
+  if (!blank) row[iNW] = 0;
+  if (iDebt >= 0) {
+    var debt = Number(row[iDebt]) || 0;
+    if (debt < 6) row[iDebt] = debt + 1;
+  }
+  return { paid: amt, borrowed: true };
+}
+
+// One REVENUE row on City_Treasury, this Cycle, from any phase after the treasury
+// opened (Phase2-InitiativeEffects). BalanceAfter continues from S.treasury.balance
+// and advances it; the intent carries the treasury's own priority, so Phase 10
+// appends it after the Phase-2 rows in queue order. No treasury this fire (no tab,
+// or its phase failed) → nothing is posted and null comes back: the citizen's side
+// has already happened and is not undone.
+function postTreasuryRevenue_(ctx, counterparty, amount, note) {
+  var amt = Math.round(Number(amount) || 0);
+  if (!(amt > 0)) return null;
+  var S = ctx.summary || {};
+  var t = S.treasury;
+  if (!t || !isFinite(Number(t.balance))) return null;
+  t.balance = Math.round(Number(t.balance) + amt);
+  t.entries = (Number(t.entries) || 0) + 1;
+  var row = [t.cycle, 'REVENUE', amt, String(counterparty), t.balance, note || ''];
+  queueAppendIntent_(ctx, 'City_Treasury', row, 'engine.271 treasury ' + counterparty, 'civic', 5);
+  return row;
+}
+
+// The city multiplier for each hood: its scaled population over its tracked
+// residents (S.careJusticeDemand.hoods — ratePopulation, trackedResidents). A hood
+// with fewer tracked residents than `floor` shares one pooled multiplier with the
+// other thin hoods (their populations over their tracked residents, together), so
+// a single household cannot swing the city's number. Returns { hood: multiplier };
+// a hood absent from the demand table has none (its collections stay unscaled).
+function cityHoodMultipliers_(demand, floor) {
+  var out = {};
+  if (!demand || !demand.hoods) return out;
+  var thin = [], thinPop = 0, thinTracked = 0;
+  for (var h in demand.hoods) {
+    if (!demand.hoods.hasOwnProperty(h)) continue;
+    var pop = Number(demand.hoods[h].ratePopulation) || 0;
+    var tr = Number(demand.hoods[h].trackedResidents) || 0;
+    if (tr < floor) { thin.push(h); thinPop += pop; thinTracked += tr; }
+    else if (tr > 0) out[h] = pop / tr;
+  }
+  var pooled = thinTracked > 0 ? thinPop / thinTracked : 0;
+  for (var i = 0; i < thin.length; i++) if (pooled > 0) out[thin[i]] = pooled;
   return out;
 }
 

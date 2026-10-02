@@ -45,6 +45,23 @@ var CHAOS_CHARGE_GRAVITY = {
   'Transgression-Serious': 'serious',
   'Transgression-Grave': 'grave'
 };
+// engine.271 — the outcomes that are a ticket, and what one costs the citizen.
+var CHAOS_TICKET_OUTCOMES = { ticket: true, parking_ticket: true };
+function chaosTicketFine_(ctx, row, cycle, cfg) {
+  var header = ctx.ledger.headers;
+  var iClock = header.indexOf('ClockMode'), iBirth = header.indexOf('BirthYear');
+  var iIncome = header.indexOf('Income'), iNW = header.indexOf('NetWorth'), iDebt = header.indexOf('DebtLevel');
+  if (iIncome < 0 || iNW < 0) return null;
+  if (iClock >= 0 && String(row[iClock] || '').trim().toUpperCase() === 'GAME') return null;
+  if (iBirth >= 0) {
+    var by = Number(row[iBirth]) || 0;
+    if (by > 0 && typeof simYearOf_ === 'function' && (simYearOf_(ctx, cycle) - by) < 18) return null;
+  }
+  var fine = cityFine_(Number(row[iIncome]) || 0, 'ticket', cfg);
+  if (!(fine > 0)) return null;
+  return cityChargeNetWorth_(row, iNW, iDebt, fine);
+}
+
 function chaosChargeGravity_(outcome) {
   var g = CHAOS_CHARGE_GRAVITY[outcome.lifeHistoryTag];
   if (!g) {
@@ -379,6 +396,27 @@ function writeCitizenEvent_(ctx, target, vehicle, outcome, cycle, text) {
   var line = stamp + ' — [' + dialTag + '] ' + text;
   var existing = (iLife >= 0 && row[iLife]) ? row[iLife].toString() : '';
   if (iLife >= 0) row[iLife] = existing ? existing + '\n' + line : line;
+
+  // engine.271 (builder 2026-10-02: "I'd assign a fine to tickets"): a ticket costs
+  // money — a share of salary, capped (cityFine_ level 'ticket'), out of NetWorth by
+  // the money loop's shock rule, and into the treasury as it was paid. Arithmetic
+  // only, no draw. A minor and a GAME-clock citizen pay nothing; a missing dial is an
+  // error row of its own and the ticket stays the texture it was.
+  if (CHAOS_TICKET_OUTCOMES[outcome.outcome] && typeof cityRevenueConfig_ === 'function') {
+    try {
+      var ticketPaid = chaosTicketFine_(ctx, row, cycle, cityRevenueConfig_(ctx));
+      if (ticketPaid && iLife >= 0) {
+        row[iLife] = row[iLife] + '\n' + inWorldStamp_(ctx) + ' — [Money] the ticket cost $' + ticketPaid.paid +
+          (ticketPaid.borrowed ? ' — more than the savings could hold, borrowed to cover it' : '');
+      }
+      if (ticketPaid && typeof postTreasuryRevenue_ === 'function') {
+        postTreasuryRevenue_(ctx, 'TICKETS', ticketPaid.paid, outcome.outcome.replace(/_/g, ' ') + ', ' + vehicle.name.replace(/_/g, ' '));
+      }
+    } catch (ticketErr) {
+      if (typeof logEngineError_ === 'function') logEngineError_(ctx, 'Phase4-TicketFine', ticketErr);
+      else if (typeof Logger !== 'undefined') Logger.log(ticketErr.message);
+    }
+  }
   if (iLastU >= 0) row[iLastU] = inWorldStamp_(ctx);  // S271 in-world, not wall-clock
   rows[target.rowIndex] = row;
   ctx.ledger.dirty = true;
@@ -1054,6 +1092,7 @@ if (typeof module !== 'undefined' && module.exports) {
     runChaosShip_: runChaosShip_,
     chaosShipFactor_: chaosShipFactor_,
     writeCitizenEvent_: writeCitizenEvent_,
+    chaosTicketFine_: chaosTicketFine_, CHAOS_TICKET_OUTCOMES: CHAOS_TICKET_OUTCOMES,
     pickTargetByScope_: pickTargetByScope_,
     pickCareJusticeTarget_: pickCareJusticeTarget_,
     runChaosCarsEngine_: runChaosCarsEngine_

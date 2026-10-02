@@ -2,7 +2,7 @@
   "generated": "2026-10-02",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 180,
-  "functionsMapped": 1565,
+  "functionsMapped": 1576,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -82,6 +82,7 @@
         "phase02-world-state/applySeasonWeights.js::applySeasonalWeights_",
         "phase02-world-state/applyWeatherModel.js::applyWeatherModel_",
         "phase02-world-state/calendarStorySeeds.js::applySeasonalStorySeeds_",
+        "phase05-citizens/generationalWealthEngine.js::collectPropertyTax_",
         "phase05-citizens/runCivicElectionsv1.js::runCivicElections_",
         "phase07-evening-media/storyHook.js::storyHookEngine_",
         "phase10-persistence/buildCyclePacket.js::buildCyclePacket_"
@@ -2086,6 +2087,7 @@
         "phase05-citizens/generationalWealthEngine.js::processMoneyLoop_",
         "phase05-citizens/generationalWealthEngine.js::sellHouseholdHome_",
         "phase05-citizens/householdFormationEngine.js::estimateRent_",
+        "phase05-citizens/judicialLifecycle.js::cityCourtRevenue_",
         "phase05-citizens/migrationTrackingEngine.js::processRelocations_",
         "phase05-citizens/migrationTrackingEngine.js::processSettledInCheck_",
         "phase05-citizens/processAdvancementIntake.js::queueHouseholdIntake_",
@@ -2254,7 +2256,10 @@
       "writers": [
         "phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_"
       ],
-      "readers": []
+      "readers": [
+        "phase02-world-state/applyInitiativeImplementationEffects.js::postTreasuryRevenue_",
+        "phase05-citizens/generationalWealthEngine.js::collectPropertyTax_"
+      ]
     },
     "initiativeImplementationTriggers": {
       "writers": [],
@@ -2784,6 +2789,8 @@
         "phase04-events/chaosCarsEngine.js::pickCareJusticeTarget_",
         "phase04-events/chaosCarsEngine.js::runChaosCarsEngine_",
         "phase04-events/chaosCarsEngine.js::runChaosNamedPass_",
+        "phase05-citizens/generationalWealthEngine.js::collectPropertyTax_",
+        "phase05-citizens/judicialLifecycle.js::cityCourtRevenue_",
         "phase10-persistence/buildCyclePacket.js::persistCareJusticeCensus_",
         "utilities/careJusticeAccounting.js::planCareJusticeCensus_"
       ]
@@ -4410,6 +4417,7 @@
         "phase01-config/engine94SheetContract.js::ensureEngine192Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine213Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine221Config_",
+        "phase01-config/engine94SheetContract.js::ensureEngine271Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine272Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine275Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine276Config_",
@@ -4527,6 +4535,7 @@
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
         "phase05-citizens/generationalWealthEngine.js::applyOwnerDraw_",
         "phase05-citizens/householdFormationEngine.js::applyFundDisbursementBody_",
+        "phase05-citizens/judicialLifecycle.js::judicialSettleFine_",
         "phase05-citizens/judicialLifecycle.js::judicialSettleLostPay_",
         "phase05-citizens/maneuverEngine.js::runManeuverEngine_",
         "phase05-citizens/migrationTrackingEngine.js::processRelocations_",
@@ -4560,6 +4569,7 @@
         "phase05-citizens/generateMediaModeEvents.js::generateMediaModeEvents_",
         "phase05-citizens/generationalWealthEngine.js::applyOwnerDraw_",
         "phase05-citizens/householdFormationEngine.js::applyFundDisbursementBody_",
+        "phase05-citizens/judicialLifecycle.js::judicialSettleFine_",
         "phase05-citizens/judicialLifecycle.js::judicialSettleLostPay_",
         "phase05-citizens/maneuverEngine.js::runManeuverEngine_",
         "phase05-citizens/migrationTrackingEngine.js::processRelocations_",
@@ -4640,10 +4650,12 @@
     },
     "City_Treasury": {
       "writers": [
-        "phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_"
+        "phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_",
+        "phase02-world-state/applyInitiativeImplementationEffects.js::postTreasuryRevenue_"
       ],
       "readers": [
-        "phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_"
+        "phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_",
+        "phase02-world-state/applyInitiativeImplementationEffects.js::postTreasuryRevenue_"
       ]
     },
     "Initiative_Tracker": {
@@ -4709,6 +4721,7 @@
         "phase05-citizens/educationCareerEngine.js::buildSettleBizPool_",
         "phase05-citizens/generationalWealthEngine.js::applyOwnerDraw_",
         "phase05-citizens/generationalWealthEngine.js::applyTrackedEmployerFloor_",
+        "phase05-citizens/generationalWealthEngine.js::collectPropertyTax_",
         "phase05-citizens/generationalWealthEngine.js::updateHeritage_",
         "phase05-citizens/processAdvancementIntake.js::buildMintBizPool_",
         "phase05-citizens/processAdvancementIntake.js::buildOwnerDoorPool_",
@@ -4799,6 +4812,7 @@
         "phase05-citizens/bondEngine.js::marryCitizens_",
         "phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_",
         "phase05-citizens/educationCareerEngine.js::settleAdulthood_",
+        "phase05-citizens/generationalWealthEngine.js::collectPropertyTax_",
         "phase05-citizens/generationalWealthEngine.js::processMoneyLoop_",
         "phase05-citizens/generationalWealthEngine.js::trackHomeOwnership_",
         "phase05-citizens/generationalWealthEngine.js::updateHeritage_",

@@ -450,6 +450,70 @@ function judicialSettleLostPay_(ctx, row, c, cycle, cols, statusBefore) {
   return { popId: c.POPID, weeks: weeks, charge: charge, borrowed: nw < charge };
 }
 
+// engine.271 (builder 2026-09-29, 2026-10-02): a decided case pays its fine where
+// it closes — a share of the defendant's salary by ChargeGravity, capped below the
+// grave level (cityFine_). Diverted and held cases pay; a released one does not.
+// Out of NetWorth by the same shortfall rule as the lost pay above. A reconcile
+// case (its gravity is a placeholder), a minor and a GAME-clock citizen pay nothing.
+// The marker guards a case that closes a second time after a failed case write.
+var JUDICIAL_FINED_OUTCOMES_ = ['diverted', 'held-served'];
+function judicialSettleFine_(ctx, row, c, cycle, cols, cfg) {
+  if (JUDICIAL_FINED_OUTCOMES_.indexOf(String(c.Outcome)) < 0) return null;
+  if (String(c.SourceSystem || '').trim().toLowerCase() === 'reconcile') return null;
+  if (String(row[cols.iClock] || '').trim().toUpperCase() === 'GAME') return null;
+  if (cols.iBirth >= 0) {
+    var by = Number(row[cols.iBirth]) || 0;
+    if (by > 0 && typeof simYearOf_ === 'function' && (simYearOf_(ctx, cycle) - by) < 18) return null;
+  }
+  var gravity = String(c.ChargeGravity || '').trim();
+  if (!JUDICIAL_HELD_RANGE_[gravity]) return null; // no level on the case, no fine
+  var fine = cityFine_(Number(row[cols.iIncome]) || 0, gravity, cfg);
+  if (!(fine > 0)) return null;
+  var marker = '[Fine J' + c.ArrestCycle + ']';
+  var life = cols.iLife >= 0 ? String(row[cols.iLife] || '') : '';
+  if (life.indexOf(marker) >= 0) return null;
+  var paid = cityChargeNetWorth_(row, cols.iNW, cols.iDebt, fine);
+  if (!paid) {
+    var unread = new Error('judicialLifecycle: NetWorth "' + row[cols.iNW] + '" unreadable on ' + c.POPID + ' — case ' + c.CaseId + ' closed without its fine');
+    if (typeof logEngineError_ === 'function') logEngineError_(ctx, 'Phase5-CourtRevenue', unread);
+    else if (typeof Logger !== 'undefined') Logger.log(unread.message);
+    return null;
+  }
+  var text = 'fined $' + fine + ' by the court' +
+    (paid.borrowed ? ' — more than the savings could hold, borrowed to cover it' : ' — paid out of savings');
+  if (cols.iLife >= 0) {
+    var stamp = 'Y' + (Math.floor((cycle - 1) / 52) + 1) + 'C' + (((cycle - 1) % 52) + 1); // the money loop's stamp
+    row[cols.iLife] = (life ? life + '\n' : '') + stamp + ' — [Money] ' + text + ' ' + marker;
+  }
+  if (typeof queueAppendIntent_ === 'function') {
+    queueAppendIntent_(ctx, 'LifeHistory_Log', [ctx.now, c.POPID, '', 'Money', text, '', cycle]);
+  }
+  ctx.ledger.dirty = true;
+  return { popId: c.POPID, fine: fine, gravity: gravity, borrowed: paid.borrowed };
+}
+
+// engine.271: what the city's court takes in this Cycle from everyone who is not a
+// tracked defendant — per hood, the cleared charges (S.careJusticeDemand
+// judicialIntakes) less the tracked arrests opened there this Cycle, each at the
+// minor fine on the hood's own median income. One incident is one charge (builder
+// 2026-09-29), so the count is already the city's and nothing is scaled.
+function cityCourtRevenue_(ctx, cfg, trackedIntakesByHood) {
+  var S = ctx.summary || {};
+  var demand = S.careJusticeDemand, hoodState = S.neighborhoodState || {};
+  var out = { amount: 0, cases: 0 };
+  if (!demand || !demand.hoods) return out;
+  for (var h in demand.hoods) {
+    if (!demand.hoods.hasOwnProperty(h)) continue;
+    var cleared = Number(demand.hoods[h].judicialIntakes) || 0;
+    var other = Math.max(0, cleared - (Number(trackedIntakesByHood && trackedIntakesByHood[h]) || 0));
+    var median = hoodState[h] ? Number(hoodState[h].medianIncome) || 0 : 0;
+    if (!(other > 0) || !(median > 0)) continue;
+    out.amount += other * cityFine_(median, 'minor', cfg);
+    out.cases += other;
+  }
+  return out;
+}
+
 function judicialSetStatus_(ctx, row, status, cycle, iStatus, iStart) {
   row[iStatus] = status;
   // Custody stamps its start; a restored life-state clears it, as a care discharge does.
@@ -493,6 +557,16 @@ function runJudicialLifecycle_(ctx) {
     throw new Error('judicialLifecycle: Simulation_Ledger Income/NetWorth columns missing');
   }
   var settled = [];
+  // engine.271: the revenue dials. A missing key is an error row of its own and
+  // stops the money, never the custody work below.
+  var revCfg = null, fined = [], trackedIntakesByHood = {};
+  if (typeof cityRevenueConfig_ === 'function') {
+    try { revCfg = cityRevenueConfig_(ctx); }
+    catch (cfgErr) {
+      if (typeof logEngineError_ === 'function') logEngineError_(ctx, 'Phase5-CourtRevenue', cfgErr);
+      else if (typeof Logger !== 'undefined') Logger.log(cfgErr.message);
+    }
+  }
   var citizen = {};
   for (var r = 0; r < rows.length; r++) citizen[String(rows[r][iPop])] = rows[r];
 
@@ -507,6 +581,9 @@ function runJudicialLifecycle_(ctx) {
     if (receipt.kind !== 'intake' || receipt.system !== 'judicial') continue;
     if (intakes[receipt.popId]) throw new Error('judicialLifecycle: duplicate intake for ' + receipt.popId);
     intakes[receipt.popId] = true;
+    if (Number(receipt.cycle) === cycle && receipt.neighborhood) {
+      trackedIntakesByHood[receipt.neighborhood] = (trackedIntakesByHood[receipt.neighborhood] || 0) + 1;
+    }
     if (!data.open[receipt.popId]) {
       var opened = openCaseFromReceipt_(receipt);
       data.open[receipt.popId] = opened;
@@ -559,6 +636,10 @@ function runJudicialLifecycle_(ctx) {
         // Task 6b: `lower` is the Status before the restore below — the settlement's replay guard.
         var paid = judicialSettleLostPay_(ctx, row, c, cycle, payCols, lower);
         if (paid) settled.push(paid);
+        if (revCfg) {
+          var fine = judicialSettleFine_(ctx, row, c, cycle, payCols, revCfg);
+          if (fine) fined.push(fine);
+        }
         if (c.Outcome !== 'no-arrest' && !judicialHealthStatus_(lower) && lower !== 'deceased' &&
             lower !== 'traded' && lower !== 'inactive' && lower !== 'pending' &&
             String(row[iClock] || '').trim().toUpperCase() !== 'GAME') {
@@ -574,6 +655,21 @@ function runJudicialLifecycle_(ctx) {
     if (kind) events.push(judicialLifecycleReceipt_(c, kind, cycle));
   }
   if (typeof Logger !== 'undefined') Logger.log('judicialLifecycle C' + cycle + ': lost-pay settlements ' + settled.length);
+
+  // engine.271 — the court's money reaches the treasury: named fines as they were
+  // paid, and the city's own take from the hoods' cleared charges.
+  if (revCfg && typeof postTreasuryRevenue_ === 'function') {
+    var namedTotal = 0;
+    for (var f = 0; f < fined.length; f++) namedTotal += fined[f].fine;
+    postTreasuryRevenue_(ctx, 'COURT-NAMED', namedTotal,
+      fined.length + (fined.length === 1 ? ' named defendant fined' : ' named defendants fined'));
+    var court = cityCourtRevenue_(ctx, revCfg, trackedIntakesByHood);
+    postTreasuryRevenue_(ctx, 'COURT', court.amount, court.cases + ' cleared charges, fined at the hood rate');
+    if (typeof Logger !== 'undefined') {
+      Logger.log('judicialLifecycle C' + cycle + ': court revenue ' + Math.round(court.amount) + ' from ' + court.cases +
+        ' cleared charges; named fines ' + fined.length + ' / ' + namedTotal);
+    }
+  }
 }
 
 if (typeof module !== 'undefined' && module.exports) {
@@ -589,6 +685,7 @@ if (typeof module !== 'undefined' && module.exports) {
     judicialCaseData_: judicialCaseData_, judicialPriorStatusForCare_: judicialPriorStatusForCare_,
     loadJudicialDismissAfter_: loadJudicialDismissAfter_, judicialCustodyClock_: judicialCustodyClock_,
     judicialSettleLostPay_: judicialSettleLostPay_,
+    judicialSettleFine_: judicialSettleFine_, cityCourtRevenue_: cityCourtRevenue_,
     runJudicialLifecycle_: runJudicialLifecycle_
   };
 }

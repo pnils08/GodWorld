@@ -45,7 +45,8 @@ assert.deepEqual(frame.deltas, [
   'Test District: recorded incidents fell',
 ]);
 const prompt = journal.promptFor(frame, [], root);
-assert.match(prompt.user, /PREVIOUS-CYCLE BEAT MOVEMENT[\s\S]*student presence rose, adult presence fell/);
+assert.match(prompt.user, /DISTRICT MOVEMENT SINCE LAST WEEK[\s\S]*student presence rose, adult presence fell/);
+assert.doesNotMatch(prompt.user.split('YOUR PRIOR JOURNAL ENTRIES')[0], /\b(?:cycle|beat|C999)\b/i, 'no machine words in the labels the model reads');
 fs.writeFileSync(path.join(prev, 'meta.json'), JSON.stringify({ cycle: 997 }));
 assert.throws(() => journal.loadFrame(999, root), /previous beat dump cycle mismatch/);
 fs.writeFileSync(path.join(prev, 'meta.json'), JSON.stringify({ cycle: 998 }));
@@ -110,6 +111,16 @@ console.log = () => {};
       sonnet: async () => answer, page });
     assert.equal(fallback.assertion.ok, true);
     assert.equal(calls, 0);
+    // An entry that fails the gate sends the week to the fallback, behind the same gate.
+    const bad = JSON.stringify({ prose: prose.replace('a signal', 'a dial'), findingIds: ids });
+    const rescued = await journal.run(999, { root, dry: true, prior: [],
+      reasoner: async () => bad, sonnet: async () => answer, page });
+    assert.equal(rescued.assertion.ok, true);
+    const neither = await journal.run(999, { root, prior: [],
+      reasoner: async () => bad, sonnet: async () => bad, page });
+    assert.equal(neither.skipped, 'assertion-failure');
+    assert.equal(calls, 0);
+    assert.equal(fs.existsSync(path.join(output, 'civis-journal')), false);
     // Both routes down is a skipped week: nothing written, the page untouched.
     const down = async () => { throw new Error('TEST-ONLY route unavailable'); };
     const both = await journal.run(999, { root, prior: [], reasoner: down, sonnet: down, page });

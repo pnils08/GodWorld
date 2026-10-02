@@ -246,9 +246,10 @@ function promptFor(frame, prior, root = ROOT) {
     'Varek voice and identity context follows. Where older wake instructions conflict, the journal contract above governs this work-side entry.',
     ...agentFiles,
   ].join('\n\n');
-  const user = 'CURRENT CYCLE: C' + frame.cycle + '\nCIVIS FINDINGS:\n' +
+  // The labels are read by the model and come back in its prose: no machine words here.
+  const user = 'THIS WEEK\'S FINDINGS:\n' +
     frame.findings.map(f => f.id + ': ' + f.civisFinding).join('\n') +
-    '\nPREVIOUS-CYCLE BEAT MOVEMENT (qualitative; describe only what serves a finding):\n' +
+    '\nDISTRICT MOVEMENT SINCE LAST WEEK (qualitative; describe only what serves a finding):\n' +
     (frame.deltas.length ? frame.deltas.join('\n') : '(no comparable movement)') +
     '\nALLOWED NAMES: ' + [...frame.names].sort().join('; ') +
     '\nYOUR PRIOR JOURNAL ENTRIES (memory, not new facts):\n' +
@@ -271,25 +272,39 @@ async function run(cycle, opts = {}) {
   const frame = loadFrame(cycle, root);
   const prior = opts.prior || await recallPage();
   const prompt = promptFor(frame, prior, root);
-  let answer;
-  try { answer = parseAnswer(await (opts.reasoner || callReasoner)(prompt.system, prompt.user)); }
-  catch (e) {
-    console.error('Civis reasoner failed or returned invalid output: ' + e.message);
-    try { answer = parseAnswer(await (opts.sonnet || callSonnet)(prompt.system, prompt.user)); }
-    catch (fallback) {
-      console.error('Civis Sonnet fallback failed: ' + fallback.message + '; skipping C' + cycle);
-      return { skipped: 'model-failure' };
+  // One route, one fallback, behind the same gate: the fallback is tried when the
+  // reasoner fails to answer and also when its entry fails the assertion. The
+  // first entry that passes is the week's journal; if neither does, the week is
+  // skipped and nothing is written.
+  const routes = [['reasoner', opts.reasoner || callReasoner], ['Sonnet fallback', opts.sonnet || callSonnet]];
+  let answer = null;
+  let assertion = null;
+  let answered = false;
+  for (const [label, call] of routes) {
+    let attempt;
+    try { attempt = parseAnswer(await call(prompt.system, prompt.user)); }
+    catch (e) {
+      console.error('Civis ' + label + ' failed or returned invalid output: ' + e.message);
+      continue;
     }
+    answered = true;
+    answer = attempt;
+    assertion = assertEntry(attempt.prose, frame, attempt.findingIds);
+    if (dry) {
+      console.log('--- ' + label + ' entry ---\n' + attempt.prose.trim());
+      console.log('Civis assertion (' + label + '): ' + (assertion.ok ? 'PASS' : 'FAIL — ' + assertion.failures.join('; ')) +
+        ' (' + assertion.words + ' words)');
+    }
+    if (assertion.ok) break;
+    console.error('Civis assertion failed C' + cycle + ' (' + label + '): ' + assertion.failures.join('; '));
   }
-  const assertion = assertEntry(answer.prose, frame, answer.findingIds);
-  if (dry) {
-    console.log(answer.prose.trim());
-    console.log('Civis assertion: ' + (assertion.ok ? 'PASS' : 'FAIL — ' + assertion.failures.join('; ')) +
-      ' (' + assertion.words + ' words)');
-    return { dryRun: true, assertion };
+  if (!answered) {
+    console.error('Civis Journal: no route answered; skipping C' + cycle);
+    return { skipped: 'model-failure' };
   }
+  if (dry) return { dryRun: true, assertion };
   if (!assertion.ok) {
-    console.error('Civis assertion failed C' + cycle + ': ' + assertion.failures.join('; '));
+    console.error('Civis Journal: no entry passed the assertion; skipping C' + cycle);
     return { skipped: 'assertion-failure', assertion };
   }
   const page = opts.page || require('../lib/citizenPage');

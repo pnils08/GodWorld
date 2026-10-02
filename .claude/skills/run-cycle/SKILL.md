@@ -128,6 +128,43 @@ node scripts/dumpBeatTabs.js {XX} --quiet
 
 **Gate:** `output/beats/meta.json` shows `"cycle": {XX}` and one entry under `rows` per tab in `dumpBeatTabs.js` (22 at C108); a missing tab aborts the script (schema event, not a soft skip).
 
+### Step 5.58: Civis Systems Journal (pipeline.68)
+
+One first-person entry a Cycle from Elias Varek (POP-00789): the Step 4 audit's patterns translated into Civis terms, the beat dump's week-over-week movement, his own prior entries. He publishes; no sheet is read or written. One model run (Sonnet 5.5 first, DeepSeek behind the same gate, both on the OpenRouter key). The only external write is his own page.
+
+**Run after both inputs carry C{XX}:** `output/engine_audit_c{XX}.json` (Step 4) and `output/beats/meta.json` (Step 5.56), with `output/beats/prev/meta.json` at the Cycle the audit names as `previousCycle`. The script checks all three and refuses on a mismatch.
+
+```bash
+node scripts/civisJournal.js --cycle {XX}
+```
+
+Never pass `--dry-run` here — a dry run calls the model and writes neither the page nor the artifact.
+
+**Read the last stdout line and stderr, then the files. The exit code is not the gate** — `model-failure` and `assertion-failure` exit 0 and leave no files.
+
+| What it printed | Exit | Meaning | Do |
+|---|---|---|---|
+| `{"path":…,"record":…}` | 0 | entry written, page appended | check the files (gate, first arm) |
+| `{"skipped":"already-recorded"}` | 0 | this Cycle's pair is already on disk; nothing written this run | check the files (gate, first arm) |
+| `{"skipped":"model-failure"}` | 0 | neither route produced an entry | re-run once; a second skip = no journal this week |
+| `{"skipped":"assertion-failure"}` | 0 | at least one entry was written and none passed the prose gate (stderr lists why) | re-run once **only** if stderr also shows `Civis Sonnet failed or returned invalid output` — his first writer never got a turn; otherwise no re-run, the week has no journal |
+| `civisJournal failed: valid --cycle N required` | 1 | the command was mistyped | fix the command |
+| `civisJournal failed:` … `cycle mismatch` / `demographics beat dump missing` / `ENOENT` | 1 | the audit or the beat dump is missing or on another Cycle, or `prev/` is not the prior Cycle | fix the step that owns the input (Step 4 or 5.56) and re-run |
+| `civisJournal failed: audit has no patterns` | 1 | a quiet audit — nothing for him to read | not a fault; no journal this week |
+| `civisJournal failed: audit target absent from current beat dump: <name>` | 1 | a pattern names a place or initiative the dump does not carry — a code/data defect; re-running the dump reads the same tabs | file the defect with the name; no journal this week |
+| `civisJournal failed: page recall` / `Civis page append failed` | 1 | his page could not be read or written | re-run as is — the page write is keyed per Cycle and cannot double |
+| `civisJournal failed: journal artifact collision` | 1 | a file pair for this Cycle carries another key | stop and read the two files before touching them |
+
+**Gate — one of two, and say which:**
+1. **Journal written:** both `output/civis-journal/civis_journal_c{XX}.json` and `output/civis-journal/civis_journal_c{XX}.md` exist, and the JSON reads `"cycle": {XX}`, `"replayKey": "POP-00789:C{XX}:journal"`, `"pageCustomId": "cp-POP-00789-c{XX}-journal"`.
+2. **No journal this week:** the outcome is one of the table's no-journal rows, neither file exists, and the Step 6 gap log carries one line with the printed reason.
+
+Anything else — files with the wrong keys, one file of the pair, a failure not on the table — is not a pass.
+
+**Non-blocking.** The chain continues at Step 5.6 on either arm. With no journal, the delivery run sends nothing for that Cycle (never an older entry). Do not loop on it and do not hand-write an entry.
+
+Reader: `scripts/deliver-articles.js` (`journalFor`) — whichever delivery run sends a Pulse also sends the journal of that Pulse's Cycle, once. Plan: `docs/plans/2026-09-07-beat-slices-from-sheets-plan.md` §Design Revision 2. Step review: `output/antigravity/2026-10-01-review-run-cycle-civis-journal-step.md`.
+
 ### Step 5.6: Content-ledger drafter (engine.49 T4)
 
 Draft condition-gated Event_Content_Ledger rows from what this cycle actually produced (Story_Seed_Deck seeds, Neighborhood_Map pressures, Cycle_Seeds weather/holiday). Cheap-helper LLM (OpenRouter deepseek default), never premium tokens.
@@ -208,6 +245,7 @@ Nothing downstream is hand-run. The artifacts this chain leaves on disk are read
 | `output/desk_signal_c{XX}.json` | `cron-desk-run`, `newsroom-fanout`, `cron-civic-run`, the desk slices (economic / safety / civic-domain / evening / Hal / Anthony / P Slayer / Jax), `stink-scanner` |
 | `output/engine_audit_c{XX}.json`, `output/baseline_briefs_c{XX}.json` | `cron-civic-run` (briefs are a **required** input), `buildCivicOfficeSlice`, `buildJaxSlice`, `civicMustDecide`, `tierClassifier` |
 | `output/beats/*.jsonl` (+ `prev/`) | economic / faith / health / safety / schools / transit / environment slices |
+| `output/civis-journal/civis_journal_c{XX}.md` + `.json` | `deliver-articles` — rides the Pulse of the same Cycle (Saturday 16:30; the weekday 18:45 run catches it if the Pulse is still inside its window) |
 | `output/neighborhood_texture_c{XX}.md`, `output/world_state.json` | `citizen-wake` (07:30 / 12:30 / 21:30), `citizen-exchange` (17:00), `discord-reflection`, `lib/wakePerception`, `lib/mags` |
 | `output/simulation_ledger_snapshot.jsonl` | `lib/mags.searchDisk`, MCP `search_everything`, `canon-name-check` |
 | `output/initiative_tracker.json`, `output/desk-packets/*` | civic office datawakes, desk agents |

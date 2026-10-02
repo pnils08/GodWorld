@@ -106,3 +106,65 @@ After 1–2 land, the deferred entry-level blanket judgement (F7) must run again
 ## Correction — 2026-10-01 (kimi)
 
 F19's last sentence is wrong as written: es's LENS/RULES amendments had already landed on `main` (`52f9219c`, before the dry-run), so dry-run #1 sent the **amended** agent files — the "reads the instrument / authority is to publish" frame, not the old citizen "no engine language" version. The precedence line in the prompt is belt-and-suspenders, not load-bearing. No other finding is affected; the egress set (F19) and the run's inputs are unchanged.
+
+## Re-review — 2026-10-01 (kimi, second pass)
+
+Scope: the owed entry judgement (three real C109 entries in `output/civis-journal-dryrun/`) and the fix commits `942f04e6`, `e653e9c0`, `051083e9` on the worktree branch. Read-only, no model calls; all gate probes below were run offline against the real functions with synthetic prose. The re-review brief was deleted on pickup.
+
+### 1. The owed entry judgement (F7 discharged)
+
+Governing text applied: `.claude/agents/citizen-voice-elias-varek/RULES.md` §6–7 and `docs/canon/INSTITUTIONS.md:439`. **On rb's narrowing: I read the canon the same way.** 439 names "the engine," "the sheet," "the ledger" as reading as Civis Systems by design, and the plan's own translation rule writes "the ledger that should move didn't" — so *ledger / engine / the system / the instrument* are Civis's working words, and the operative block list is RULES §6's: raw numbers, index/dial names, scores or severity levels, record ids, table/detector names, "simulation", "tag", "cycle" as a system term. Grey residue noted below (R2).
+
+Facts were checked against the dump (C109 vs C108): Downtown — sick 93→89 (fell), incidents 5→6 (rose); Fruitvale — sick 116→119 (rose), incidents 5→4 (fell); Grand Lake — sick 105→108 (rose), incidents 5→6 (rose); Temescal — sick 111→108 (fell). Each entry was also run through the **new** `assertEntry` offline against the real C109 frame.
+
+**Entry A (Sonnet 5.5 via the OpenRouter rail) — PASS, 413 words, zero gate failures.**
+Clean against RULES §6/§7 and the blanket: no digit, dial name, severity grade, record id, table name, or machine word; the Oaks and Paulson absent; first person throughout; lead + three carried findings (math-imbalance led, repeating-event, Temescal improvement, remedy overshoot). Every factual claim verified exact against the dump: "so are sick residents, yet recorded incidents fell" (Fruitvale ✓), "Downtown and Grand Lake went the other way on incidents, which rose in both" (✓), "Sick resident presence in Temescal fell in the last reading" (✓). One contract defect, pre-prompt-fix: **two forward moves** — "Civis will take the mood reading apart in Fruitvale, Downtown and Grand Lake and test why it stays flat… **We will also build** a proper way to follow Temescal Community Health Center from approval to people actually being served." The voice contract is one forward move. NOTE (the "exactly one forward move" prompt edit in `e653e9c0` addresses the source).
+
+**Entry B (deepseek-v4-pro) — FAIL, two blanket violations and one factual defect.**
+1. Dial name in prose (RULES §6; the new gate catches it): "the surface reflection—**the sentiment** the city uses to gauge its own health—is not registering the strain."
+2. Internal factual contradiction against the record: "In each, a rising burden is plain in the numbers the instrument collects: **more incidents**, more sickness, more pressure on the ground" — false for Fruitvale (incidents fell 5→4), and the entry itself says so two sentences later ("Fruitvale saw sickness rise even as incidents fell"). The summary sentence misreports the instrument.
+3. "The city moved in faith on other fronts." — the coverage-gap finding idiom-mangled into nonsense (deepseek read "moved in faith" as an idiom); `e653e9c0` rewrote the translation to "There was real movement in the city's faith life this week…". Pre-fix artifact, but it was printed in a saved entry.
+
+**Entry C (deepseek-v4-pro) — FAIL, one blanket violation, one gate-blind pipeline echo, one contract stretch.**
+1. Dial name: "the public-facing **sentiment** hasn't shifted" (gate catches).
+2. "The **beat movement** this week only sharpens the picture" — the `PREVIOUS-CYCLE BEAT MOVEMENT` prompt label echoed into prose. Pipeline vocabulary in Varek's mouth; the gate does **not** catch it (no digit, no listed machine word — verified: with 'sentiment' removed, C passes). `051083e9` fixed the label at source ("DISTRICT MOVEMENT SINCE LAST WEEK") and pins label hygiene in the test, but "beat" is not a gated word — a model can still import it from its own training. NOTE, residual.
+3. The prose carries five findings (repeating-event lead; three-district mood; faith coverage-gap; Temescal; remedy overshoot) against "one lead, two or three carried." Minor; without the run's `findingIds` JSON the selection check itself can't be judged for any entry.
+
+**Which model writes Varek better: A, Sonnet 5.5, and it is not close.** A argues like an owner with a position — "When two readings of one neighborhood disagree, one of them is lying by omission. Until Civis can say which, I won't tell anyone the mood is steady" — every claim landing exactly on the dump, and the annoyance register the spec asks for ("It is just noise we are paying to hear"). B and C are fluent summary, not voice: B contradicts its own facts within a paragraph and prints "The city moved in faith on other fronts"; C is warmer but echoes the pipeline ("The beat movement this week") and pads to five findings. DeepSeek treated the findings as material to compress; Sonnet treated them as a desk to sit at. If cost forces a single route, the reasoner-first order is still right — but the fallback is what wrote the only entry of the three that could have shipped, and the route loop (`051083e9`) now guarantees it gets its turn when the reasoner's entry fails the gate.
+
+### 2. The fix commits
+
+**F1/F2/F6 — fixed and proven in production shape.** Reasoner is now `deepseek/deepseek-v4-pro` with a capped reasoning budget (`ANSWER_TOKENS` 1800 + `THINK_BUDGET` 3000, civisJournal.js:19-24); the fallback is `anthropic/claude-sonnet-5.5` over the Anthropic SDK against OpenRouter's baseURL (`:214-220`) — the research.28 rail. Entries B/C prove the reasoner route answers; entry A proves the Sonnet rail answers and passes the gate.
+
+**F8 — fixed, empirically verified.** My original constructed line now fails ("machine term"). Additional probes: "City Council District 37", "DigitalOcean9", "Fruitvale HousingPressure" all fail — the name-stripping cannot hide a digit or a dial name inside or beside a handed name. "The Oaks open soon. Paulson knows it." fails as two sentences. A clean Civis-vocabulary passage ("The ledger and the public record disagree…") passes.
+
+**R1 — FIX (the one new defect found). The severity/grade regexes false-reject ordinary Varek-register English.** Verified against the real function, all four fail the gate:
+- "We are a **medium**-sized firm, and Oakland is our only client." (`\bmedium\b` bare)
+- "I want a **high-level** review of the Fruitvale readings before Friday."
+- "That question is a **low priority** for me this week."
+- "A **critical reading** of the public record is what I owe this city."
+(`civisJournal.js:165-167`: bare `severity|medium|rated|ratings?|scores?|scored`, and `(?:low|high|moderate|critical|elevated)[- ](?:severity|reading|rating|level|grade|priority|risk)`.) These are grades of nothing; each false reject costs a fallback call, and a week where both routes phrase it this way is skipped. Suggest: gate `medium` only adjacent to reading/signal/score, and drop `level|priority|reading` from the graded compound (or require `severity|rating|grade|score` as the noun).
+
+**R2 — NOTE. Grey-zone vocabulary passes per the narrowed rule.** "snapshot", "phase", "drain", "write-back", "engine" in one passage pass the gate. Under rb's narrowing (which I endorse) these are tracking-system vocabulary 439's blanket plausibly covers, but they are not Civis's *named* working words in RULES §6. If the builder wants them out they need a line in RULES §6, not a regex guess.
+
+**R3 — NOTE. Name-part looseness is real but bounded.** Any word inside any handed name is licensed anywhere: "The Center held its ground" and "I met with Council" pass (verified). By design ("part of a handed name is that name"); the edge is silly-but-harmless ("I met with Systems"). Accept.
+
+**R4 — verified OK. The route loop cannot write a failed entry.** Read line by line (`civisJournal.js:275-307`): each route's entry is gated independently; the loop breaks only on a pass; `!answered` → model-failure skip; `!assertion.ok` → assertion-failure skip **before** `require('../lib/citizenPage')` and before any `writeFileSync`. Dry-run returns before the page require and prints attempts only — still write-free. The `neither`/`both` tests pin both skips with zero page calls and no artifact directory.
+
+**F9 — fixed.** `CIVIC_EMPLOYERS` is a BIZ_ID allowlist with aliases joined by `phrase()` (newsroomSourcing.js:12-20, 185-189); the name-regex trap is dead (the test's "OPD Supply Test Shop" proves a lookalike name draws nothing). **R5 — NOTE: aliases are mention-based, not ownership-based** — "the hospital" / "school district" / "police department" in a story merely mentioning the employer pull its Active workers into the pool. Bounded (five BIZ_IDs, topic required), but a crime story with "taken to the hospital" can seat a hospital worker on a police question.
+
+**F10 — fixed.** `dumpRows` throws naming `dumpBeatTabs.js <cycle>` on a stale dump or a missing tab (newsroomSourcing.js:37-49); the ledger snapshot throws when missing; street's stale-meta case still returns empty by design ("a snapshot from another Cycle holds no life line from this one") — **R6 — NOTE: inconsistent loudness** (missing meta throws, stale meta silently empties street pools while workplace/offices throw). **R7 — rb's call to leave `named` unchecked is sound**: its evidence is the same-wake slice (the S434 builders throw on stale dumps themselves) or the exact-cycle UNDOCKED feed file; there is no independent dump read to go stale.
+
+**F18 — fixed.** `journalFor` is cycle-exact, validates the record's `cycle`, treats an unreadable record or half pair as absence, and the filename receipt still blocks double-post (deliver-articles.js:82-92, 150-157; tests pin all four). A skipped week sends nothing; a wrong-cycle journal cannot ride.
+
+**F4/F12 — fixed.** Both-routes-down and both-entries-fail are pinned with zero page calls; out-of-pool W1 targets now log a WARN (cron-desk-run.js:495-498).
+
+**R8 — NOTE (carried from first pass).** Skip still exits 0 (F5), Rhea's packet-load catch still downgrades I/O errors to a warn (F14), the Elena/Eloise name-form collision (F15) and the `named()` why-denylist residual (F11) stand as first-pass NOTEs — none touched by these commits, none blocking.
+
+**R9 — tests.** The new assertions test behavior, not the test: gate-failure rescue, both-fail skip, label hygiene (`doesNotMatch … cycle|beat|C999` on the pre-memory prompt section), stale/missing dump throws, cycle-exact delivery. One implementation-detail pin: "Lake Merritt is quiet." asserts the message names `Merritt` only (the sentence-opener is dropped by design) — the behavioral contract underneath is real.
+
+### Verdict
+
+All six first-pass fixes are landed and verified — four of them proven against live-route output, the gate both attacked and confirmed. The three real entries give the judgement that was owed: the writer + gate produce a shippable entry on the Sonnet rail (A), and the gate correctly fails both deepseek entries. One new defect (R1, false rejects on ordinary phrasing — safe direction: it costs calls and at worst skips a week, it never publishes a bad entry).
+
+**SHIP-WITH-FIXES: R1 (narrow the severity/grade regexes). Everything else NOTE.**

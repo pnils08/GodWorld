@@ -61,6 +61,27 @@ assert.match(journal.assertEntry(prose + ' HousingPressure', frame, ids).failure
 assert.match(journal.assertEntry(prose + ' POP-90001', frame, ids).failures.join(';'), /digits/);
 assert.match(journal.assertEntry(prose + ' in Fake District', frame, ids).failures.join(';'), /unknown named target/);
 assert.throws(() => journal.loadFrame(998, root), /ENOENT/);
+// The machine's words and graded readings fail; Civis's own vocabulary passes.
+const base = Array(13).fill(paragraph).join(' ').trim();
+const failsWith = (extra, re, f = frame) =>
+  assert.match(journal.assertEntry(base + extra, f, ids).failures.join(';'), re, extra);
+failsWith(' Nothing answered it this cycle.', /machine term/);
+failsWith(' A dial moved and nobody looked.', /machine term/);
+failsWith(' The simulation missed it.', /machine term/);
+failsWith(' Forty percent of it went unread.', /machine term/);
+failsWith(' It was a medium reading.', /score or severity/);
+failsWith(' It is a high-severity signal.', /score or severity/);
+failsWith(' The Oaks open soon. Paulson knows it.', /Oaks\/Paulson/);
+assert.equal(journal.assertEntry(base + ' The ledger and the public record disagree, and the instrument owes the city a better reading.', frame, ids).ok, true);
+// A handed name keeps its own shape: mid-word capitals and a district numeral.
+const named = { ...frame, names: new Set([...frame.names, 'DigitalOcean', 'City Council District 3']) };
+assert.equal(journal.assertEntry(base + ' I raised it at DigitalOcean and with City Council District 3 this week.', named, ids).ok, true);
+failsWith(' I raised it with District 4 this week.', /digits/, named);
+// An initiative is named in a finding, never cited by its record id.
+const byId = { type: 'stuck-initiative', affectedEntities: { initiatives: ['INIT-900'] }, evidence: { fields: {} } };
+assert.equal(journal.translate(byId, new Map([['INIT-900', 'Test Initiative']])).target, 'Test Initiative');
+assert.equal(journal.translate(byId).target, null);
+assert.ok(![...frame.names].some(n => /^(?:INIT|BIZ)-/.test(n)), 'record ids are not handed to the writer');
 
 const answer = JSON.stringify({ prose, findingIds: ids });
 let calls = 0;
@@ -83,6 +104,12 @@ console.log = () => {};
       sonnet: async () => answer, page });
     assert.equal(fallback.assertion.ok, true);
     assert.equal(calls, 0);
+    // Both routes down is a skipped week: nothing written, the page untouched.
+    const down = async () => { throw new Error('TEST-ONLY route unavailable'); };
+    const both = await journal.run(999, { root, prior: [], reasoner: down, sonnet: down, page });
+    assert.equal(both.skipped, 'model-failure');
+    assert.equal(calls, 0);
+    assert.equal(fs.existsSync(path.join(output, 'civis-journal')), false);
     const first = await journal.run(999, { root, prior: [],
       reasoner: async () => answer, page });
     assert.ok(first.path.endsWith('civis_journal_c999.md'));

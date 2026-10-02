@@ -9,7 +9,21 @@ const path = require('path');
 const ROOT = path.resolve(__dirname, '..');
 const STREET_TAGS = new Set(['Sports', 'PrevEvening', 'Media', 'Lifestyle', 'Cultural',
   'Casino', 'Holiday', 'Neighborhood', 'Weather']);
-const CIVIC_EMPLOYERS = /\b(?:BART|AC Transit|OARI|OUSD|OPD|Hospital)\b/i;
+// City employers by Business_Ledger id, with the names a story uses for them.
+// Never a name regex: the ledger says "Oakland Unified School District" and
+// "Oakland Police Department", a story says OUSD and OPD. OARI has no business
+// row yet, so an OARI story draws no city worker until one exists.
+const CIVIC_EMPLOYERS = Object.freeze({
+  'BIZ-00013': ['AC Transit'],
+  'BIZ-00014': ['BART'],
+  'BIZ-00015': ['Oakland Hospital', 'the hospital'],
+  'BIZ-00016': ['OUSD', 'Oakland Unified', 'school district'],
+  'BIZ-00024': ['OPD', 'Oakland Police', 'police department'],
+});
+const DUMP_TABS = Object.freeze({
+  workplace: ['Business_Ledger', 'Employment_Roster'],
+  offices: ['Business_Ledger', 'Employment_Roster', 'Civic_Office_Ledger', 'Initiative_Tracker'],
+});
 
 function readJson(file) {
   try { return JSON.parse(fs.readFileSync(file, 'utf8')); } catch (_) { return null; }
@@ -20,11 +34,25 @@ function rows(root, tab) {
       .split(/\r?\n/).filter(Boolean).map(JSON.parse);
   } catch (_) { return []; }
 }
+// A pool is built from this Cycle's dump or not at all: a stale dump or a missing
+// tab throws naming the fix, so an unreadable source never reads as "nobody".
+function dumpRows(root, cycle, tabs) {
+  const dir = path.join(root, 'output', 'beats');
+  const meta = readJson(path.join(dir, 'meta.json'));
+  if (!meta || Number(meta.cycle) !== Number(cycle)) {
+    throw new Error('beat dump missing or stale for C' + cycle + ' (dump is ' +
+      (meta ? 'C' + meta.cycle : 'unreadable') + '): run scripts/dumpBeatTabs.js ' + cycle);
+  }
+  return Object.fromEntries(tabs.map(tab => {
+    const file = path.join(dir, tab + '.jsonl');
+    if (!fs.existsSync(file)) throw new Error('beat dump tab missing: ' + tab + ': run scripts/dumpBeatTabs.js ' + cycle);
+    return [tab, fs.readFileSync(file, 'utf8').split(/\r?\n/).filter(Boolean).map(JSON.parse)];
+  }));
+}
 function ledgerRows(root) {
-  try {
-    return fs.readFileSync(path.join(root, 'output', 'simulation_ledger_snapshot.jsonl'), 'utf8')
-      .split(/\r?\n/).filter(Boolean).map(JSON.parse);
-  } catch (_) { return []; }
+  const file = path.join(root, 'output', 'simulation_ledger_snapshot.jsonl');
+  if (!fs.existsSync(file)) throw new Error('ledger snapshot missing: run scripts/dumpLedger.js');
+  return fs.readFileSync(file, 'utf8').split(/\r?\n/).filter(Boolean).map(JSON.parse);
 }
 function clean(s) { return String(s || '').trim(); }
 function frozen(mode, sourceKind, person, evidence, extra) {
@@ -154,10 +182,11 @@ function offices(story, slice, beats, cycle, root) {
   const topic = storyTopic(story, beats);
   if (!topic.id && !topic.topic) return { candidates: Object.freeze([]), records: Object.freeze([]) };
   const businessById = new Map((beats.Business_Ledger || []).map(b => [b.BIZ_ID, b]));
+  const storyText = [story && story.angle, story && story.label, story && story.hookLine].map(clean).join(' ');
   const joinedBusiness = new Set((beats.Business_Ledger || []).filter(b =>
-    CIVIC_EMPLOYERS.test(clean(b.Name)) &&
-    [story && story.angle, story && story.label, story && story.hookLine].some(s =>
-      clean(s).includes(clean(b.Name)))).map(b => b.BIZ_ID));
+    CIVIC_EMPLOYERS[b.BIZ_ID] &&
+    [clean(b.Name)].concat(CIVIC_EMPLOYERS[b.BIZ_ID]).some(alias => phrase(storyText, alias)))
+    .map(b => b.BIZ_ID));
   const workers = (beats.Employment_Roster || []).filter(r =>
     joinedBusiness.has(r.BIZ_ID) && clean(r.Status).toUpperCase() === 'ACTIVE')
     .map(r => frozen('offices', 'civic-worker', r,
@@ -209,7 +238,9 @@ function verbSupports(text, predicate) {
 }
 function street(story, slice, cycle, root, seat, opts = {}) {
   const meta = opts.meta || readJson(path.join(root, 'output', 'simulation_ledger_snapshot.meta.json'));
-  if (!meta || Number(meta.cycle) !== Number(cycle)) return Object.freeze([]);
+  if (!meta) throw new Error('ledger snapshot meta missing or unreadable: run scripts/dumpLedger.js');
+  // A snapshot from another Cycle holds no life line from this one.
+  if (Number(meta.cycle) !== Number(cycle)) return Object.freeze([]);
   const highlights = opts.highlights || typedHighlights(story, slice, seat);
   if (!opts.highlights && seat === 'talia-finch' &&
       clean(story && story.ref).includes('Oakland_Sports_Feed')) {
@@ -250,9 +281,7 @@ function street(story, slice, cycle, root, seat, opts = {}) {
 }
 function buildPool({ mode, story, slice, cycle, seat, root = ROOT, beats, streetOptions }) {
   if (mode === 'records') return Object.freeze({ mode, candidates: Object.freeze([]), officeRecords: Object.freeze([]) });
-  const beatData = beats || Object.fromEntries(
-    ['Business_Ledger', 'Employment_Roster', 'Civic_Office_Ledger', 'Initiative_Tracker']
-      .map(tab => [tab, rows(root, tab)]));
+  const beatData = beats || (DUMP_TABS[mode] ? dumpRows(root, cycle, DUMP_TABS[mode]) : {});
   let candidates = Object.freeze([]);
   let officeRecords = Object.freeze([]);
   if (mode === 'named') candidates = named(story, slice, cycle, root);

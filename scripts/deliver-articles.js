@@ -10,8 +10,8 @@
  * Scans output/cron-compare/{staged,flagged} for articles modified in the
  * last --hours (default 8) and posts each as a Discord message with the
  * article text attached as a file. Also posts editions/cycle_pulse_c*.txt
- * modified in the window (Saturday's paper), plus the latest staged Civis
- * Systems Journal alongside that paper.
+ * modified in the window (Saturday's paper), plus that Cycle's staged Civis
+ * Systems Journal alongside it.
  *
  * Read-only over the newsroom artifacts; writes nothing but a state file so
  * re-runs never double-post. NOT CANON, no sheet writes.
@@ -79,12 +79,16 @@ function readerCopy(text) {
   return text.replace(/## INTAKE[\s\S]*$/, '').replace(/<!--\s*SELF-SCORE[\s\S]*?-->/g, '').trim();
 }
 
-function latestJournal(dir) {
-  if (!fs.existsSync(dir)) return null;
-  return fs.readdirSync(dir)
-    .map(name => ({ name, match: /^civis_journal_c(\d+)\.md$/.exec(name) }))
-    .filter(item => item.match && fs.existsSync(path.join(dir, item.name.replace(/\.md$/, '.json'))))
-    .sort((a, b) => Number(b.match[1]) - Number(a.match[1]))[0]?.name || null;
+// The journal that rides a Pulse is the one written for that Pulse's Cycle: a
+// skipped week sends nothing, never an older entry. Both halves of the pair
+// must be there and the record must say it is that Cycle's.
+function journalFor(dir, cycle) {
+  const name = 'civis_journal_c' + cycle + '.md';
+  const record = path.join(dir, 'civis_journal_c' + cycle + '.json');
+  if (!fs.existsSync(path.join(dir, name)) || !fs.existsSync(record)) return null;
+  try { if (Number(JSON.parse(fs.readFileSync(record, 'utf8')).cycle) !== Number(cycle)) return null; }
+  catch (_) { return null; }
+  return name;
 }
 
 async function post(content, filePath, state, key) {
@@ -128,13 +132,14 @@ async function main() {
     }
   }
 
-  let saturdayPulse = false;
+  const pulseCycles = [];
   if (fs.existsSync(EDITIONS)) {
     for (const name of fs.readdirSync(EDITIONS).sort()) {
-      if (!/^cycle_pulse_c\d+\.txt$/.test(name)) continue;
+      const pulse = /^cycle_pulse_c(\d+)\.txt$/.exec(name);
+      if (!pulse) continue;
       const file = path.join(EDITIONS, name);
       if (fs.statSync(file).mtimeMs < cutoff) continue;
-      saturdayPulse = true;
+      pulseCycles.push(Number(pulse[1]));
       if (state.delivered[name]) continue;
       await post('🗞️ **THE CYCLE PULSE — the week\'s edition** (`' + name + '`)', file, state, name);
       posted++;
@@ -142,9 +147,9 @@ async function main() {
     }
   }
 
-  if (saturdayPulse) {
-    const name = latestJournal(CIVIS_JOURNAL);
-    if (!name) console.log('Civis Journal absent; skipping');
+  for (const cycle of pulseCycles) {
+    const name = journalFor(CIVIS_JOURNAL, cycle);
+    if (!name) console.log('Civis Journal absent for C' + cycle + '; skipping');
     else if (!state.delivered[name]) {
       await post('📓 **CIVIS SYSTEMS JOURNAL — Elias Varek** (`' + name + '`)',
         path.join(CIVIS_JOURNAL, name), state, name);
@@ -160,4 +165,4 @@ if (require.main === module) {
   main().catch(e => { console.error('deliver-articles failed: ' + e.message); process.exit(1); });
 }
 
-module.exports = { latestJournal };
+module.exports = { journalFor };

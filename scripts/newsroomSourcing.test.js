@@ -83,5 +83,29 @@ assert.equal(offices.candidates[0].sourceKind, 'office-record');
 assert.equal(offices.officeRecords[0].quote, 'Test-only exact office quote.');
 assert.equal(source.verifyOfficeRecord(offices.officeRecords[0], 999, root), true);
 assert.equal(source.verifyOfficeRecord({ ...offices.officeRecords[0], quote: 'Forged' }, 999, root), false);
+// A city employer joins by its ledger id and the name a story uses for it.
+const cityBeats = { ...beats,
+  Business_Ledger: [{ BIZ_ID: 'BIZ-00024', Name: 'Oakland Police Department' },
+    { BIZ_ID: 'BIZ-90009', Name: 'OPD Supply Test Shop' }],
+  Employment_Roster: [
+    { BIZ_ID: 'BIZ-00024', POP_ID: 'POP-90007', CitizenName: 'Test Officer', RoleType: 'Officer', Status: 'Active' },
+    { BIZ_ID: 'BIZ-90009', POP_ID: 'POP-90008', CitizenName: 'Test Clerk', Status: 'Active' }] };
+const cityStory = { angle: 'Test Initiative: what OPD says it changed', ref: 'TEST-ONLY-office-assignment' };
+const city = source.buildPool({ mode: 'offices', story: cityStory, cycle: 998, beats: cityBeats, root });
+assert.deepEqual(city.candidates.map(c => [c.pop, c.sourceKind]), [['POP-90007', 'civic-worker']]);
+assert.deepEqual(source.buildPool({ mode: 'offices', cycle: 998, beats: cityBeats, root,
+  story: { angle: 'Test Initiative status', ref: 'TEST-ONLY-office-assignment' } }).candidates, [],
+  'an employer the story does not name gives no worker');
+// Reading the dump itself: another Cycle's dump or a missing tab throws, never an empty pool.
+assert.throws(() => source.buildPool({ mode: 'workplace', story: {}, cycle: 999, root }), /beat dump missing or stale for C999 \(dump is unreadable\)/);
+fs.writeFileSync(path.join(beatsDir, 'meta.json'), JSON.stringify({ cycle: 998 }));
+assert.throws(() => source.buildPool({ mode: 'offices', story: officeStory, cycle: 999, root }), /stale for C999 \(dump is C998\)/);
+fs.writeFileSync(path.join(beatsDir, 'meta.json'), JSON.stringify({ cycle: 999 }));
+assert.throws(() => source.buildPool({ mode: 'workplace', story: {}, cycle: 999, root }), /beat dump tab missing: Business_Ledger/);
+for (const tab of ['Business_Ledger', 'Employment_Roster', 'Initiative_Tracker']) {
+  fs.writeFileSync(path.join(beatsDir, tab + '.jsonl'), beats[tab].map(JSON.stringify).join('\n') + '\n');
+}
+assert.equal(source.buildPool({ mode: 'offices', story: officeStory, cycle: 999, root }).officeRecords.length, 1);
+assert.throws(() => source.buildPool({ mode: 'street', story: {}, cycle: 999, root, seat: 'maria-keen' }), /ledger snapshot meta missing/);
 fs.rmSync(root, { recursive: true, force: true });
 console.log('newsroomSourcing.test.js: PASS');

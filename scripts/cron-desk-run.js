@@ -492,7 +492,10 @@ function collectQuoteAsks(lane, persona, story, angleArt) {
       angleArt.angleRead.plan && Array.isArray(angleArt.angleRead.plan.targets)
       ? angleArt.angleRead.plan.targets
         .map(target => target && target.pop)
-        .filter(pop => pop && packetCandidates.has(pop))
+        .filter(pop => {
+          if (pop && !packetCandidates.has(pop)) log('WARN angle target outside the sourcing pool dropped: ' + pop);
+          return pop && packetCandidates.has(pop);
+        })
       : [];
     const plannedPops = [...new Set(targetPops.concat([...packetCandidates.keys()]))];
     for (const pop of plannedPops) {

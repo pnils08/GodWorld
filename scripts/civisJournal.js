@@ -10,8 +10,16 @@ const crypto = require('crypto');
 const ROOT = path.resolve(__dirname, '..');
 const POPID = 'POP-00789';
 const WAKE = 'journal';
-const REASONER = 'deepseek/deepseek-reasoner';
-const FALLBACK = 'claude-sonnet-5-5';
+// Both routes ride the OpenRouter key. `deepseek/deepseek-reasoner` is not an
+// OpenRouter id (rejected as invalid, 2026-10-01) and the direct Anthropic key
+// holds no credits, so the fallback takes the Saturday narrator's rail
+// (cron-saturday-run.js anthropicChat): Anthropic SDK against OpenRouter.
+const REASONER = 'deepseek/deepseek-v4-pro';
+const FALLBACK = 'anthropic/claude-sonnet-5.5';
+// The answer is 300-500 words of JSON. Reasoning shares the provider's token
+// cap, so it gets its own capped budget on top (modelFitRun.js, 2026-10-01).
+const ANSWER_TOKENS = 1800;
+const THINK_BUDGET = 3000;
 
 function arg(name, fallback) {
   const hit = process.argv.find(a => a.startsWith(name + '='));
@@ -29,11 +37,12 @@ function idFor(pattern, cycle, index) {
     .update(JSON.stringify([cycle, index, pattern.type, pattern.evidence]))
     .digest('hex').slice(0, 12);
 }
-function translate(pattern) {
+function translate(pattern, initiativeNames = new Map()) {
   const e = pattern.affectedEntities || {};
   const f = pattern.evidence && pattern.evidence.fields || {};
   const places = (e.neighborhoods || []).filter(Boolean);
-  const initiatives = (e.initiatives || []).filter(Boolean);
+  // An initiative is named, never cited by its record id.
+  const initiatives = (e.initiatives || []).map(id => initiativeNames.get(id)).filter(Boolean);
   const target = places[0] || f.Name || initiatives[0] || null;
   const where = target ? ' in ' + target : '';
   const table = {
@@ -42,7 +51,7 @@ function translate(pattern) {
     'coverage-gap': 'The city moved in ' + String(f.domain || 'a civic domain') + ', but the public instrument did not carry that movement to the paper.',
     'writeback-drift': 'Council action reached the public record while the response instrument stayed flat.',
     'improvement': f.InitiativeID
-      ? String(f.Name || f.InitiativeID) + ' has advanced; Civis should measure whether the promised service actually reaches people.'
+      ? String(f.Name || initiativeNames.get(f.InitiativeID) || 'A city initiative') + ' has advanced; Civis should measure whether the promised service actually reaches people.'
       : 'A previous remedy moved beyond its expected mark; Civis should examine the calibration before claiming success.',
     'stuck-initiative': 'A public commitment has not moved through its next stage' + where + '.',
     'production-imbalance': 'A district reading is out of balance' + where + '.',
@@ -106,16 +115,20 @@ function loadFrame(cycle, root = ROOT) {
   }
   const previousCycle = Number(audit.previousCycle);
   const deltas = beatDeltas(beats, previousCycle);
-  const names = new Set(['Oakland', 'Civis Systems', 'Elias Varek', 'Oaks', 'Paulson']);
+  // The writer is handed display names only. Record ids (initiative, business,
+  // office) stay on this side: they are how a row is found, never what is printed.
+  const names = new Set(['Oakland', 'Civis Systems', 'Civis Systems Journal', 'Elias Varek', 'Oaks', 'Paulson']);
+  const initiativeNames = new Map();
   for (const tab of ['Neighborhood_Demographics', 'Civic_Office_Ledger', 'Initiative_Tracker', 'Business_Ledger']) {
     for (const row of lines(path.join(beats, tab + '.jsonl'))) {
-      for (const key of ['Neighborhood', 'Name', 'Title', 'InitiativeID', 'BIZ_ID', 'OfficeId']) {
+      for (const key of ['Neighborhood', 'Name', 'Title']) {
         if (row[key]) names.add(String(row[key]).trim());
       }
+      if (row.InitiativeID && row.Name) initiativeNames.set(String(row.InitiativeID).trim(), String(row.Name).trim());
     }
   }
   const findings = (audit.patterns || []).map((p, i) => {
-    const t = translate(p);
+    const t = translate(p, initiativeNames);
     return { id: idFor(p, cycle, i), type: p.type, target: t.target, civisFinding: t.text };
   });
   if (!findings.length) throw new Error('audit has no patterns for C' + cycle);
@@ -130,15 +143,31 @@ function assertEntry(prose, frame, selectedIds) {
   const words = body.split(/\s+/).filter(Boolean);
   if (words.length < 300 || words.length > 500) failures.push('word count outside 300–500');
   if (!/\bI\b|\bmy\b|\bwe\b/i.test(body)) failures.push('first-person voice missing');
-  if (/\d/.test(body)) failures.push('digits, decimals, or scores in prose');
-  if (/\b(?:POPID|POP-|BIZ-|INIT-|AUD-|DialState|severity|detector|worksheet|spreadsheet|sheet|tab|JSON)\b|[{}\[\]_]/i.test(body)) {
+  // Names the writer was handed are lifted out before the machine-shape checks:
+  // real businesses carry mid-word capitals (DigitalOcean, OakTown Social) and a
+  // council district carries its numeral. Everything else is held to the rule.
+  let scrub = body;
+  for (const name of [...frame.names].sort((a, b) => b.length - a.length)) scrub = scrub.split(name).join(' ');
+  if (/\d/.test(scrub)) failures.push('digits, decimals, or scores in prose');
+  if (/\b(?:POPID|POP-|BIZ-|INIT-|AUD-|DialState|detector|worksheet|spreadsheet|sheet|tab|JSON)\b|[{}\[\]_]/i.test(scrub)) {
     failures.push('private identifier or machine vocabulary in prose');
   }
-  if (/\b(?:HousingPressure|RetailVitality|Sentiment|CrimeRate|TrafficIndex|HealthRisk|EconomicVitality|CivicLoad|Simulation Ledger|Neighborhood Map|Business Ledger|Riley Digest|Civic Office Ledger|Employment Roster)\b|\b[A-Z][a-z]+[A-Z][A-Za-z]+\b/.test(body)) {
+  // RULES §6: the system, the instrument, a reading, a signal, the model and the
+  // public record are Civis's own words (INSTITUTIONS.md Civis blanket covers
+  // "the ledger" too). What stays out is the machine's: these words, and a
+  // reading recited as a figure or a grade.
+  if (/\b(?:simulation|tags?|cycles?|dials?|percent(?:age)?)\b|%/i.test(scrub)) {
+    failures.push('machine term in prose (simulation, tag, cycle, dial, percent)');
+  }
+  if (/\b(?:severity|medium|rated|ratings?|scores?|scored)\b|\b(?:low|high|moderate|critical|elevated)[- ](?:severity|reading|rating|level|grade|priority|risk)\b/i.test(scrub)) {
+    failures.push('score or severity level in prose');
+  }
+  if (/\b(?:HousingPressure|RetailVitality|Sentiment|CrimeRate|TrafficIndex|HealthRisk|EconomicVitality|CivicLoad|Simulation Ledger|Neighborhood Map|Business Ledger|Riley Digest|Civic Office Ledger|Employment Roster)\b|\b[A-Z][a-z]+[A-Z][A-Za-z]+\b/.test(scrub)) {
     failures.push('dial name in prose');
   }
-  const oaksLines = body.split(/\n/).filter(line => /\b(?:Oaks|Paulson)\b/i.test(line));
-  if (oaksLines.length > 1) failures.push('Oaks/Paulson exceeds one line');
+  // "One line at most" is one sentence, however the paragraphs fall.
+  const oaksSentences = body.split(/(?<=[.!?])\s+|\n+/).filter(s => /\b(?:Oaks|Paulson)\b/i.test(s));
+  if (oaksSentences.length > 1) failures.push('Oaks/Paulson exceeds one line');
   if (!Array.isArray(selectedIds) || selectedIds.length < 3 || selectedIds.length > 4 ||
       new Set(selectedIds).size !== selectedIds.length ||
       selectedIds.some(id => !frame.findings.some(f => f.id === id))) {
@@ -171,7 +200,8 @@ async function callReasoner(system, user) {
     method: 'POST',
     headers: { Authorization: 'Bearer ' + process.env.OPENROUTER_API_KEY,
       'Content-Type': 'application/json', 'HTTP-Referer': 'https://godworld.local' },
-    body: JSON.stringify({ model: REASONER, max_tokens: 3500, temperature: 0.3,
+    body: JSON.stringify({ model: REASONER, max_tokens: ANSWER_TOKENS + THINK_BUDGET, temperature: 0.3,
+      reasoning: { enabled: true, max_tokens: THINK_BUDGET },
       response_format: { type: 'json_object' },
       messages: [{ role: 'system', content: system }, { role: 'user', content: user }] }),
   });
@@ -181,10 +211,12 @@ async function callReasoner(system, user) {
     result.choices[0].message.content || '');
 }
 async function callSonnet(system, user) {
-  if (!process.env.ANTHROPIC_API_KEY) throw new Error('Sonnet key unavailable');
+  if (!process.env.OPENROUTER_API_KEY) throw new Error('OpenRouter key unavailable');
   const Anthropic = require('@anthropic-ai/sdk');
-  const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
-  const result = await client.messages.create({ model: FALLBACK, max_tokens: 2800, system,
+  const client = new Anthropic({ apiKey: process.env.OPENROUTER_API_KEY,
+    baseURL: 'https://openrouter.ai/api' });
+  const result = await client.messages.create({ model: FALLBACK,
+    max_tokens: ANSWER_TOKENS + THINK_BUDGET, system,
     messages: [{ role: 'user', content: user }] });
   return result.content.filter(x => x.type === 'text').map(x => x.text).join('\n');
 }
@@ -204,7 +236,7 @@ function promptFor(frame, prior, root = ROOT) {
     'Write a first-person Civis Systems Journal entry about how your system can serve the city better.',
     'The findings below are your company\'s internal audit translated into Civis terms. Lead with one, carry two or three, and end with one forward move: what Civis will examine or tune next. You publish; you change no city number.',
     'Use only the named places, offices, initiatives and businesses in the allowed list. Make no claims about a person\'s history or an unsupplied company act.',
-    'Never print digits, decimals, dial names, scores, POPIDs, tab names, detector ids, JSON, engine or sheet vocabulary in the prose. The Oaks and Paulson get at most one line.',
+    'Write every allowed name exactly as listed, including a numeral that is part of the name. Otherwise never print a digit, a decimal, a percentage, a dial or index name, a score, a rating or severity level (low, medium, high as a grade), a record id, a table or detector name, JSON, or the words "simulation", "tag", "cycle" or "dial" — say "week", "reading", "signal", "the instrument". The Oaks and Paulson get one sentence at most, or none.',
     'Return JSON with exactly prose (300–500 words, paragraphs) and findingIds (three or four IDs, first is lead).',
     'Varek voice and identity context follows. Where older wake instructions conflict, the journal contract above governs this work-side entry.',
     ...agentFiles,

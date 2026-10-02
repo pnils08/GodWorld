@@ -2,7 +2,7 @@
   "generated": "2026-10-02",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 180,
-  "functionsMapped": 1556,
+  "functionsMapped": 1558,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -3325,7 +3325,7 @@
       ],
       "readers": [
         "phase05-citizens/educationCareerEngine.js::settleAdulthood_",
-        "phase05-citizens/processAdvancementIntake.js::processAdvancementRows_",
+        "phase05-citizens/processAdvancementIntake.js::processAdvancementRowsBody_",
         "phase05-citizens/runCareerEngine.js::applyCustodyDismissals_",
         "phase05-citizens/runCareerEngine.js::applyEmployerSuccess_",
         "phase05-citizens/runCareerEngine.js::runCareerEngine_",
@@ -4480,7 +4480,7 @@
         "phase05-citizens/processAdvancementIntake.js::checkEmergencePromotions_",
         "phase05-citizens/processAdvancementIntake.js::checkFamilyMatchPromotions_",
         "phase05-citizens/processAdvancementIntake.js::markAsEmergedInGeneric_",
-        "phase05-citizens/processAdvancementIntake.js::processAdvancementRows_",
+        "phase05-citizens/processAdvancementIntake.js::processAdvancementRowsBody_",
         "phase05-citizens/processAdvancementIntake.js::processMediaUsage_",
         "phase05-citizens/processAdvancementIntake.js::seedEmergenceBonds_",
         "phase05-citizens/runYouthEngine.js::getGenericYouth_",
@@ -4956,7 +4956,7 @@
     "Advancement_Intake1": {
       "writers": [],
       "readers": [
-        "phase05-citizens/processAdvancementIntake.js::processAdvancementRows_",
+        "phase05-citizens/processAdvancementIntake.js::processAdvancementRowsBody_",
         "phase07-evening-media/mediaRoomIntake.js::flagCitizenForTierReview_",
         "phase07-evening-media/mediaRoomIntake.js::processCategoryEntries_",
         "phase07-evening-media/mediaRoomIntake.js::processQuotedCitizens_"

@@ -2196,9 +2196,14 @@
 - **processMediaUsage_(ctx, now, cycle)**
   Sheets: Citizen_Media_Usage, Generic_Citizens, LifeHistory_Log
 
+- **advancementLogBuffer_(sheet)**
+
 - **processAdvancementRows_(ctx, now, cycle)**
+  Sheets: LifeHistory_Log
+
+- **processAdvancementRowsBody_(ctx, now, cycle, log)**
   Reads: S.careerSignals
-  Sheets: Advancement_Intake1, Generic_Citizens, LifeHistory_Log
+  Sheets: Advancement_Intake1, Generic_Citizens
   RNG: ctx.rng / safeRand_(ctx)
 
 - **tierPayFactor_(tier)**
@@ -2275,7 +2280,7 @@
   Writes: S.relationshipBonds
   Sheets: Generic_Citizens
 
-- **markAsEmergedInGeneric_(ss, genericSheet, first, last, cycle)**
+- **markAsEmergedInGeneric_(ss, genericSheet, first, last, cycle, held)**
   Sheets: Generic_Citizens
 
 ### runAsUniversePipeline.js
@@ -4391,4 +4396,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1556
+**Functions mapped:** 1558

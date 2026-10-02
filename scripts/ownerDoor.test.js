@@ -59,6 +59,7 @@ function mkSheet(rows) {
     getValues: () => [s.rows[r - 1].slice(c - 1, c - 1 + (nc || 1))],
     setValue: (v) => { while (s.rows[r - 1].length < c) s.rows[r - 1].push(''); s.rows[r - 1][c - 1] = v; s.setCells.push([r, c, v]); },
     clearContent: () => { s.cleared.push(r); s.rows[r - 1] = s.rows[r - 1].map(() => ''); },
+    setValues: (vals) => { for (let k = 0; k < vals.length; k++) s.rows[r + k - 1] = vals[k].slice(); }, // engine.279: the pass's log lines land in one write
   });
   return s;
 }
@@ -174,7 +175,7 @@ console.log('\n3. the mint — through the populator, wired to the ledger:');
   check('catalog pay at C — the books take over at C+1 through applyOwnerDraw_', owner[col('Income')] === 61000);
   check('Key_Personnel by ONE Phase-10 cell intent: Coastline\'s row, the Key_Personnel column, POPID Name (owner), economy/90', cells.length === 1 && cells[0].tab === 'Business_Ledger' && cells[0].row === 2 && cells[0].col === 9 && cells[0].value === 'POP-00903 ' + who + ' (owner)' && cells[0].domain === 'economy' && cells[0].priority === 90, JSON.stringify(cells));
   check('the sheet itself was not written', w.sheets.Business_Ledger.setCells.length === 0 && w.sheets.Business_Ledger.rows[1][8] === '');
-  check('a [Business] life line, the log row, the hook', /\[Business\] Took over Coastline Construction in West Oakland — the business is the reason/.test(owner[col('LifeHistory')]) && w.sheets.LifeHistory_Log.appended.some(r => r[3] === 'Business-Owner' && /Became the owner of Coastline Construction/.test(r[4])) && w.ctx.summary.storyHooks.some(h => h.hookType === 'BUSINESS_OWNER_ARRIVED' && new RegExp(who + ' is the new owner of Coastline Construction').test(h.text)), JSON.stringify(w.ctx.summary.storyHooks));
+  check('a [Business] life line, the log row, the hook', /\[Business\] Took over Coastline Construction in West Oakland — the business is the reason/.test(owner[col('LifeHistory')]) && w.sheets.LifeHistory_Log.rows.slice(1).some(r => r[3] === 'Business-Owner' && /Became the owner of Coastline Construction/.test(r[4])) && w.ctx.summary.storyHooks.some(h => h.hookType === 'BUSINESS_OWNER_ARRIVED' && new RegExp(who + ' is the new owner of Coastline Construction').test(h.text)), JSON.stringify(w.ctx.summary.storyHooks));
   const gcNow = w.sheets.Generic_Citizens.rows.slice(1);
   check('no Generic_Citizens row was consumed or marked Emerged — the door authored its own person', gcNow.filter(r => r[9] === 'Emerged').length === 1 && gcNow[0][9] === 'Active' && w.sheets.Generic_Citizens.setCells.length === 0, JSON.stringify(gcNow.map(r => r[9])));
 }

@@ -35,8 +35,10 @@ function check(name, cond, detail) { if (cond) { pass++; console.log('  ok   ' +
 
 // ── mock sheets ──
 function mkSheet(rows) {
-  const s = { rows, appended: [], cleared: [], setCells: [] };
-  s.getDataRange = () => ({ getValues: () => s.rows.map(r => r.slice()) });
+  // writes: one entry per setValues call; reads: whole-tab reads; failWrites: an injected Sheets failure;
+  // failAfterWrite: the write lands and the call still throws (a timeout that landed)
+  const s = { rows, appended: [], cleared: [], setCells: [], writes: [], reads: 0, failWrites: false, failAfterWrite: false };
+  s.getDataRange = () => ({ getValues: () => { s.reads++; return s.rows.map(r => r.slice()); } });
   s.getLastColumn = () => (s.rows[0] || []).length;
   s.getLastRow = () => s.rows.length;
   s.appendRow = (r) => { s.rows.push(r.slice()); s.appended.push(r.slice()); };
@@ -44,7 +46,7 @@ function mkSheet(rows) {
     getValues: () => [s.rows[r - 1].slice(c - 1, c - 1 + (nc || 1))],
     setValue: (v) => { while (s.rows[r - 1].length < c) s.rows[r - 1].push(''); s.rows[r - 1][c - 1] = v; s.setCells.push([r, c, v]); },
     clearContent: () => { for (let k = 0; k < (nr || 1); k++) { s.cleared.push(r + k); if (s.rows[r + k - 1]) s.rows[r + k - 1] = s.rows[r + k - 1].map(() => ''); } },
-    setValues: (vals) => { for (let k = 0; k < vals.length; k++) { while (!s.rows[r + k - 1]) s.rows.push([]); for (let m = 0; m < vals[k].length; m++) { while (s.rows[r + k - 1].length < c + m) s.rows[r + k - 1].push(''); s.rows[r + k - 1][c + m - 1] = vals[k][m]; s.setCells.push([r + k, c + m, vals[k][m]]); } } },
+    setValues: (vals) => { if (s.failWrites) throw new Error('Service Spreadsheets failed (injected)'); s.writes.push({ row: r, rows: vals.length, width: vals[0].length }); for (let k = 0; k < vals.length; k++) { while (!s.rows[r + k - 1]) s.rows.push([]); for (let m = 0; m < vals[k].length; m++) { while (s.rows[r + k - 1].length < c + m) s.rows[r + k - 1].push(''); s.rows[r + k - 1][c + m - 1] = vals[k][m]; s.setCells.push([r + k, c + m, vals[k][m]]); } } if (s.failAfterWrite) throw new Error('Service timed out (injected, after the write landed)'); },
   });
   return s;
 }
@@ -161,7 +163,7 @@ console.log('\n2. the mint — through the populator, wired, one household:');
   check('register row: husband / wife / two children', fr && fr[1].indexOf('Marcus Bell') > 0 && fr[2].indexOf('Dana Bell') > 0 && fr[3] === 'married' && /Theo Bell/.test(fr[6]) && /Ivy Bell/.test(fr[7]) && fr[8] === '');
   const lifeAll = nu.map(r => r[col('LifeHistory')]).join('\n');
   check('no household line claims a lottery', /\(household intake\)/.test(lifeAll) && !/drip lottery/.test(lifeAll) && /\[Household\] A 4-person household begins in Temescal/.test(M[col('LifeHistory')]));
-  const lh = w.sheets.LifeHistory_Log.appended;
+  const lh = w.sheets.LifeHistory_Log.rows.slice(1); // engine.279: the pass's lines land in one write, not appendRow
   check('log: three Family arrivals + one Household line, none a lottery', lh.filter(r => r[3] === 'Family' && /Arrived with the household/.test(r[4])).length === 3 && lh.filter(r => r[3] === 'Household').length === 1 && !lh.some(r => /lottery/.test(r[4])));
   const hooks = w.ctx.summary.storyHooks;
   check('hooks: three FAMILY_REALIZED + one HOUSEHOLD_ARRIVED', hooks.filter(h => h.hookType === 'FAMILY_REALIZED').length === 3 && hooks.filter(h => h.hookType === 'HOUSEHOLD_ARRIVED').length === 1 && !hooks.some(h => /lottery/.test(h.text)));
@@ -242,6 +244,82 @@ console.log('\n7. engine.148 P3 — the door refuses an off-map hood and folds a
   E.processAdvancementRows_(w2.ctx, 'C' + CYCLE, CYCLE);
   const minted = w2.ctx.ledger.rows[before2];
   check('a child-area hood folds to its parent on the minted row', w2.ctx.ledger.rows.length === before2 + 1 && minted[col('Neighborhood')] === 'Downtown', minted && minted[col('Neighborhood')]);
+}
+
+console.log('\n8. engine.279 — the pass logs once and reads Generic_Citizens once:');
+{
+  const GC_H = ['First','Last','Age','BirthYear','Neighborhood','Occupation','EmergenceCount','EmergedCycle','EmergenceContext','Status','Sex','EmployerBizId'];
+  const gcRow = (f, l, status) => { const r = GC_H.map(() => ''); r[0] = f; r[1] = l; r[9] = status; return r; };
+  // A household of four, two plain mints (one from Generic_Citizens), and an existing citizen, in one pass.
+  const build = () => {
+    const w = world(bell);
+    runPlan(w);
+    const adv = w.sheets.Advancement_Intake1, qh = adv.rows[0], qc = (n) => qh.indexOf(n);
+    const plain = (f, l, by) => { const r = new Array(qh.length).fill(''); r[qc('First')] = f; r[qc('Last')] = l; r[qc('Tier')] = 4; r[qc('ClockMode')] = 'ENGINE'; r[qc('BirthYear')] = by; r[qc('Neighborhood')] = 'Temescal'; r[qc('Notes')] = 'note ' + f; return r; };
+    adv.appendRow(plain('Nadia', 'Okafor', 1991));
+    adv.appendRow(plain('Rosa', 'Nguyen', 1990));          // already on the ledger → an Advancement line
+    adv.appendRow(plain('Jonah', 'Pike', 1988));
+    const gc = w.sheets.Generic_Citizens;
+    gc.rows.push(gcRow('Jonah', 'Pike', 'Emerged'));        // first hit, already Emerged
+    gc.rows.push(gcRow('Nadia', 'Okafor', 'Active'));
+    gc.rows.push(gcRow('Jonah', 'Pike', 'Active'));         // a second row of the same name
+    return w;
+  };
+  const w = build();
+  const log = w.sheets.LifeHistory_Log, gc = w.sheets.Generic_Citizens, adv = w.sheets.Advancement_Intake1;
+  const res = E.processAdvancementRows_(w.ctx, 'C' + CYCLE, CYCLE);
+  const lines = log.rows.slice(1).map(r => r[3] + ' | ' + r[2] + ' | ' + String(r[4]).replace(/\s+/g, ' ').slice(0, 44));
+  const want = [
+    'Promotion | Marcus Bell | Added to Simulation_Ledger as Tier 4. Househ',
+    'Promotion | Dana Bell | Added to Simulation_Ledger as Tier 4. ',
+    'Family | Dana Bell | Arrived with the household — ',
+    'Promotion | Theo Bell | Added to Simulation_Ledger as Tier 4. ',
+    'Family | Theo Bell | Arrived with the household — ',
+    'Promotion | Ivy Bell | Added to Simulation_Ledger as Tier 4. ',
+    'Family | Ivy Bell | Arrived with the household — ',
+    'Promotion | Nadia Okafor | Added to Simulation_Ledger as Tier 4. note N',
+    'Advancement | Rosa Nguyen | Intake at Tier 4. note Rosa',
+    'Promotion | Jonah Pike | Added to Simulation_Ledger as Tier 4. note J',
+    'Household | Marcus Bell | 4-member household arrived through intake —',
+  ];
+  check('the lines land in the order the per-row appends wrote them', lines.length === want.length && lines.every((l, i) => l.indexOf(want[i]) === 0), '\n    ' + lines.join('\n    '));
+  check('one write for the whole pass, at the tab\'s tail, seven wide, no appendRow', log.writes.length === 1 && log.writes[0].row === 2 && log.writes[0].rows === want.length && log.writes[0].width === 7 && log.appended.length === 0, JSON.stringify(log.writes));
+  check('every line carries the timestamp and the Cycle as before', log.rows.slice(1).every(r => r[0] === 'C' + CYCLE && r[6] === CYCLE && r.length === 7));
+  check('all seven queue rows processed and cleared after the log landed', res.processed === 7 && adv.cleared.length === 7);
+  check('Generic_Citizens is read once for six mints', gc.reads === 1, 'reads ' + gc.reads);
+  check('the first name hit is the row marked, as before — an already-Emerged first hit stays the one written', gc.setCells.filter(c => c[2] === 'Emerged').map(c => c[0]).join() === '3,2' && gc.rows[3][9] === 'Active', JSON.stringify(gc.setCells));
+
+  // Nothing to log → no write.
+  const quiet = world([]);
+  E.ensureHouseholdQueueSheet_(quiet.ctx.ss);
+  E.processAdvancementRows_(quiet.ctx, 'C' + CYCLE, CYCLE);
+  check('a pass with nothing to log writes nothing to the log', quiet.sheets.LifeHistory_Log.writes.length === 0 && quiet.sheets.LifeHistory_Log.rows.length === 1);
+
+  // The log write fails: that error is the pass's error, and the queue is left as it was.
+  const f = build();
+  f.sheets.LifeHistory_Log.failWrites = true;
+  let ferr = null; try { E.processAdvancementRows_(f.ctx, 'C' + CYCLE, CYCLE); } catch (e) { ferr = e; }
+  check('a failed log write throws its own error and clears no queue row', !!ferr && /injected/.test(ferr.message) && f.sheets.Advancement_Intake1.cleared.length === 0 && f.sheets.LifeHistory_Log.rows.length === 1, ferr && ferr.message);
+
+  // The log write lands and the call still throws: the lines are there once, never written a second time.
+  const t = build();
+  t.sheets.LifeHistory_Log.failAfterWrite = true;
+  let terr = null; try { E.processAdvancementRows_(t.ctx, 'C' + CYCLE, CYCLE); } catch (e) { terr = e; }
+  check('a log write that landed and still threw is not written again', !!terr && /timed out/.test(terr.message) && t.sheets.LifeHistory_Log.writes.length === 1 && t.sheets.LifeHistory_Log.rows.length === 1 + 11 && t.sheets.Advancement_Intake1.cleared.length === 0, (terr && terr.message) + ' | writes ' + t.sheets.LifeHistory_Log.writes.length + ' rows ' + t.sheets.LifeHistory_Log.rows.length);
+
+  // The body throws mid-pass (an off-map hood on the last row): the lines buffered before it still land, and the body's error is thrown.
+  const badRow = (w) => { const adv = w.sheets.Advancement_Intake1, qh = adv.rows[0], qc = (n) => qh.indexOf(n); const r = new Array(qh.length).fill(''); r[qc('First')] = 'Lost'; r[qc('Last')] = 'Soul'; r[qc('Tier')] = 4; r[qc('ClockMode')] = 'ENGINE'; r[qc('BirthYear')] = 1990; r[qc('Neighborhood')] = 'Atlantis'; adv.appendRow(r); };
+  const b = build(); badRow(b);
+  let berr = null; try { E.processAdvancementRows_(b.ctx, 'C' + CYCLE, CYCLE); } catch (e) { berr = e; }
+  const blog = b.sheets.LifeHistory_Log;
+  check('a body throw still lands the lines buffered before it, in one write', !!berr && /Atlantis/.test(berr.message) && blog.writes.length === 1 && blog.rows.length === 1 + 10 && blog.rows[1][2] === 'Marcus Bell' && blog.rows[10][2] === 'Jonah Pike', (berr && berr.message) + ' | rows ' + blog.rows.length);
+  check('…and no queue row was cleared', b.sheets.Advancement_Intake1.cleared.length === 0);
+
+  // Both fail: the body's error is the one thrown.
+  const d = build(); badRow(d);
+  d.sheets.LifeHistory_Log.failWrites = true;
+  let derr = null; try { E.processAdvancementRows_(d.ctx, 'C' + CYCLE, CYCLE); } catch (e) { derr = e; }
+  check('body throw and log failure together: the body\'s error is thrown, not the write\'s', !!derr && /Atlantis/.test(derr.message) && !/injected/.test(derr.message), derr && derr.message);
 }
 
 console.log('\n' + pass + ' passed, ' + fail + ' failed');

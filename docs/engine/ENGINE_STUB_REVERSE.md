@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 180 · **Functions mapped:** 1556 · **S.* fields:** 363 · **Sheets:** 60
+**Files scanned:** 180 · **Functions mapped:** 1558 · **S.* fields:** 363 · **Sheets:** 60
 
 ## S.* / ctx.summary reverse index
 
@@ -53,7 +53,7 @@
 | `S.canonSportsPhase` | `phase05-citizens/runAsUniversePipeline.js::runAsUniversePipeline_` | _(none)_ | 1 | 0 |
 | `S.careerChurn` | `phase06-analysis/economicRippleEngine.js::detectCareerRipples_` | _(none)_ | 1 | 0 |
 | `S.careerEvents` | `phase05-citizens/runCareerEngine.js::runCareerEngine_` | _(none)_ | 1 | 0 |
-| `S.careerSignals` | `phase05-citizens/runCareerEngine.js::runCareerEngine_` | `phase05-citizens/educationCareerEngine.js::settleAdulthood_`, `phase05-citizens/processAdvancementIntake.js::processAdvancementRows_`, `phase05-citizens/runCareerEngine.js::applyCustodyDismissals_`, `phase05-citizens/runCareerEngine.js::applyEmployerSuccess_`, `phase05-citizens/runCareerEngine.js::runCareerEngine_`, `phase06-analysis/economicRippleEngine.js::detectCareerRipples_`, …(+2 more) | 1 | 8 |
+| `S.careerSignals` | `phase05-citizens/runCareerEngine.js::runCareerEngine_` | `phase05-citizens/educationCareerEngine.js::settleAdulthood_`, `phase05-citizens/processAdvancementIntake.js::processAdvancementRowsBody_`, `phase05-citizens/runCareerEngine.js::applyCustodyDismissals_`, `phase05-citizens/runCareerEngine.js::applyEmployerSuccess_`, `phase05-citizens/runCareerEngine.js::runCareerEngine_`, `phase06-analysis/economicRippleEngine.js::detectCareerRipples_`, …(+2 more) | 1 | 8 |
 | `S.careJusticeDemand` | `phase04-events/careJusticeService.js::runCareJusticeDemand_` | `phase04-events/careJusticeService.js::runCareJusticeDemand_`, `phase04-events/chaosCarsEngine.js::pickCareJusticeTarget_`, `phase04-events/chaosCarsEngine.js::runChaosCarsEngine_`, `phase04-events/chaosCarsEngine.js::runChaosNamedPass_`, `phase10-persistence/buildCyclePacket.js::persistCareJusticeCensus_`, `utilities/careJusticeAccounting.js::planCareJusticeCensus_` | 1 | 6 |
 | `S.careJusticeWriteStatus` | `phase10-persistence/buildCyclePacket.js::buildCyclePacket_` | `phase10-persistence/buildCyclePacket.js::persistCareJusticeCensus_` | 1 | 1 |
 | `S.carriedMediaEffects` | `phase07-evening-media/mediaFeedbackEngine.js::seedCarriedMediaEffects_` | `phase05-citizens/runRelationshipEngine.js::runRelationshipEngine_`, `phase07-evening-media/mediaFeedbackEngine.js::getMediaEventModifier_`, `phase07-evening-media/mediaFeedbackEngine.js::getMediaInfluencedEvent_` | 1 | 3 |
@@ -398,7 +398,7 @@ Sheet detection: `getSheetByName`, `queue*Intent_`, known sheet-name string + wr
 
 | Sheet | Writers | Readers | #W | #R |
 |---|---|---|---:|---:|
-| `Advancement_Intake1` | _(none)_ | `phase05-citizens/processAdvancementIntake.js::processAdvancementRows_`, `phase07-evening-media/mediaRoomIntake.js::flagCitizenForTierReview_`, `phase07-evening-media/mediaRoomIntake.js::processCategoryEntries_`, `phase07-evening-media/mediaRoomIntake.js::processQuotedCitizens_` | 0 | 4 |
+| `Advancement_Intake1` | _(none)_ | `phase05-citizens/processAdvancementIntake.js::processAdvancementRowsBody_`, `phase07-evening-media/mediaRoomIntake.js::flagCitizenForTierReview_`, `phase07-evening-media/mediaRoomIntake.js::processCategoryEntries_`, `phase07-evening-media/mediaRoomIntake.js::processQuotedCitizens_` | 0 | 4 |
 | `Business_Archive` | _(none)_ | `phase05-citizens/applyBusinessDynamics.js::archiveClosedBusinesses_` | 0 | 1 |
 | `Business_Ledger` | `phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_`, `phase05-citizens/generationalWealthEngine.js::applyOwnerDraw_`, `phase05-citizens/generationalWealthEngine.js::updateHeritage_`, `phase05-citizens/processAdvancementIntake.js::wireBusinessOwners_`, `phase05-citizens/runCareerEngine.js::runCareerEngine_` | `phase02-world-state/commuteFlowEngine.js::buildCommuteFlows_`, `phase03-population/applyDemographicDrift.js::businessDistressShare_`, `phase04-events/chaosCarsEngine.js::loadBusinessRows_`, `phase04-events/chaosCarsEngine.test.js::makeCtx`, `phase04-events/chaosCarsEngine.test.js::reset`, …(+18 more) | 5 | 23 |
 | `Carry_Forward_Store` | _(none)_ | `phase01-config/loadPreviousEvening.js::mirrorCarryForwardToSheet_`, `phase01-config/loadPreviousEvening.js::readCarryForwardFromSheet_` | 0 | 2 |

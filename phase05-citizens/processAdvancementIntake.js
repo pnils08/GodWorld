@@ -553,17 +553,63 @@ function processMediaUsage_(ctx, now, cycle) {
   return results;
 }
 
+// engine.279: the pass's LifeHistory_Log lines are buffered and written once.
+// Each was its own appendRow against a 20,000-row tab — one Sheets call per
+// logged row, 112 of them on the C110 queue (Phase5-Advancement 64.6 s on the
+// bench, 13 s on an ordinary week). The buffer stands in for the sheet: the
+// body and its helpers only ever call appendRow on it. One write, the
+// executor's batch-append shape: tail computed once, setValues under retry
+// (a re-attempt rewrites the same cells). A flush is attempted once, never twice.
+function advancementLogBuffer_(sheet) {
+  var buffer = { rows: [], attempted: false, sheet: null };
+  if (!sheet) { buffer.flush = function() { return 0; }; return buffer; }
+  buffer.sheet = { appendRow: function(row) { buffer.rows.push(row); } };
+  buffer.flush = function() {
+    if (buffer.attempted || !buffer.rows.length) return 0;
+    buffer.attempted = true;
+    var width = 0;
+    for (var w = 0; w < buffer.rows.length; w++) width = Math.max(width, buffer.rows[w].length);
+    var padded = [];
+    for (var p = 0; p < buffer.rows.length; p++) {
+      var line = buffer.rows[p].slice();
+      while (line.length < width) line.push('');
+      padded.push(line);
+    }
+    var target = sheet.getLastRow() + 1;
+    var write = function() { sheet.getRange(target, 1, padded.length, width).setValues(padded); };
+    if (typeof persistWithRetry_ === 'function') persistWithRetry_(write, 'LifeHistory_Log advancement lines');
+    else write();
+    return padded.length;
+  };
+  return buffer;
+}
+
 function processAdvancementRows_(ctx, now, cycle) {
+  var log = advancementLogBuffer_(ctx.ss.getSheetByName('LifeHistory_Log'));
+  try {
+    return processAdvancementRowsBody_(ctx, now, cycle, log);
+  } catch (bodyErr) {
+    // The lines for ledger rows already changed still land (the per-row appends
+    // did). The body's error is the one thrown; a second failure never replaces it.
+    try { log.flush(); } catch (flushErr) {
+      Logger.log('processAdvancementRows_: the log write also failed — ' + flushErr.message);
+    }
+    throw bodyErr;
+  }
+}
+
+function processAdvancementRowsBody_(ctx, now, cycle, log) {
   var ss = ctx.ss;
   var results = { processed: 0 };
-  
+
   var intakeSheet = ss.getSheetByName('Advancement_Intake1');
   if (!intakeSheet) return results;
-  
+
   // Phase 42 §5.6: read SL from shared ctx.ledger; mutations land in place;
   // new citizens push to ctx.ledger.rows (impl shape #18).
-  var logSheet = ss.getSheetByName('LifeHistory_Log');
+  var logSheet = log.sheet;
   var genericSheet = ss.getSheetByName('Generic_Citizens');
+  var genericHeld = {}; // engine.279: Generic_Citizens is read once for the pass
 
   var intakeData = intakeSheet.getDataRange().getValues();
   if (intakeData.length < 2) {
@@ -938,7 +984,7 @@ function processAdvancementRows_(ctx, now, cycle) {
       }
       // engine.66 — family-drip rows queued under the FAMILY surname; the GC
       // row still carries the birth name, so mark it Emerged by that.
-      markAsEmergedInGeneric_(ss, genericSheet, first, maiden || last, cycle);
+      markAsEmergedInGeneric_(ss, genericSheet, first, maiden || last, cycle, genericHeld);
       if (matchPop && matchType) {
         wireFamilyMatch_(ctx, ledgerRows.length - 1, newPopId, matchPop, matchType, now, cycle, logSheet,
           householdKey ? 'household intake' : 'drip lottery');
@@ -960,6 +1006,11 @@ function processAdvancementRows_(ctx, now, cycle) {
   results.householdsFormed = hhFormed.formed;
   var owned = wireBusinessOwners_(ctx, ownerMints, cycle, now, logSheet); // engine.96 Task 12
   results.ownersWired = owned.wired;
+
+  // engine.279: the pass's log lines land here — after the last helper that
+  // logs, before any queue row is cleared (a failed log write still leaves the
+  // queue as it was), and inside the pass, so later phases read the tab as before.
+  log.flush();
 
   if (rowsToClear.length > 0) {
     // engine.230: processed rows are cleared in contiguous RUNS, one call each, instead of one
@@ -2432,10 +2483,14 @@ function seedEmergenceBonds_(ctx, cycle) {
   return results;
 }
 
-function markAsEmergedInGeneric_(ss, genericSheet, first, last, cycle) {
+// `held` (optional, engine.279): a holder the caller keeps for the pass — the
+// tab is read into it once instead of once per mint. The match is unchanged:
+// by name, first hit, status not consulted.
+function markAsEmergedInGeneric_(ss, genericSheet, first, last, cycle, held) {
   if (!genericSheet) genericSheet = ss.getSheetByName('Generic_Citizens');
   if (!genericSheet) return;
-  var data = genericSheet.getDataRange().getValues();
+  var data = held && held.data ? held.data : genericSheet.getDataRange().getValues();
+  if (held) held.data = data;
   var headers = data[0];
   var gFirst = findColByName_(headers, 'First');
   var gLast = findColByName_(headers, 'Last');
@@ -2445,7 +2500,10 @@ function markAsEmergedInGeneric_(ss, genericSheet, first, last, cycle) {
     var f = String(data[r][gFirst] || '').trim();
     var l = String(data[r][gLast] || '').trim();
     if (f.toLowerCase() === first.toLowerCase() && l.toLowerCase() === last.toLowerCase()) {
-      if (gStatus >= 0) genericSheet.getRange(r + 1, gStatus + 1).setValue('Emerged');
+      if (gStatus >= 0) {
+        genericSheet.getRange(r + 1, gStatus + 1).setValue('Emerged');
+        data[r][gStatus] = 'Emerged';
+      }
       break;
     }
   }

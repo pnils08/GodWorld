@@ -253,6 +253,16 @@ for (const outcome of ['recovered', 'recovered-reconciled']) {
   const second = cell(far, 111, 'hospital', 'neighborhood', 'Alder', 'illness');
   assert('9 a stray cell at row 3000: the next Cycle still opens from the last block and lands right after it',
     second.OpeningOccupancy === seed && second.Corrections === 0 && Number(far.census.rows[1 + BLOCK][0]) === 111, text(second));
+  // A row with content and no Cycle is foreign: refused, never overwritten.
+  const orphan = world();
+  orphan.census.rows.push(HEADERS.map((h, i) => i === 1 ? 'orphan data' : ''));
+  throws('9 a nonblank row with a blank Cycle is refused on a fresh tab', () => run(orphan, 110), 'holds "orphan data"');
+  assert('9 …and left as found', orphan.census.rows.length === 2 && orphan.census.rows[1][1] === 'orphan data');
+  const orphan2 = world(); run(orphan2, 110);
+  orphan2.census.rows.push(HEADERS.map(() => '')); orphan2.census.rows.push(HEADERS.map((h, i) => i === 9 ? 7 : ''));
+  const kept = text(orphan2.census.rows);
+  throws('9 …and below an existing block', () => run(orphan2, 111), 'where the census would write');
+  assert('9 …with nothing written', text(orphan2.census.rows) === kept);
   const dup = world(); run(dup, 110);
   dup.census.rows[5] = dup.census.rows[4].slice(); dup.census.rows[5][HEADERS.indexOf('Completeness')] = 'incomplete';
   throws('9 a duplicate key is refused', () => run(dup, 110), 'duplicate row');
@@ -300,6 +310,20 @@ for (const outcome of ['recovered', 'recovered-reconciled']) {
   assert('11 a same-Cycle close and reopen is one exit, one intake, one person in care — and complete',
     ro.TrackedIntakes === 1 && ro.TrackedOccupancy === 1 && ro.Completeness === 'complete' &&
     rj.TrackedIntakes === 1 && rj.TrackedOccupancy === 1 && rj.Completeness === 'complete', text(ro) + text(rj));
+  // The exit receipt is matched to its own row: another row of the same citizen closing does not cover it.
+  const masked = world();
+  masked.judicial.rows.push(jrow({ CaseId: 'J-C108-P1', POPID: 'P1', OpenCycle: 108, ArrestCycle: 108, StatusNow: 'released', ResolveCycle: 110, Outcome: 'released', SourceEventId: 'patrol:A:P1' }));
+  masked.judicial.rows.push(jrow({ CaseId: 'J-C110-P1', POPID: 'P1', OpenCycle: 110, ArrestCycle: 110, StatusNow: 'pending', SourceEventId: 'patrol:B:P1' }));
+  run(masked, 110, ctx => { ctx.summary.judicialEvents = [
+    { system: 'judicial', kind: 'intake', popId: 'P1', sourceEventId: 'patrol:B:P1' },
+    { system: 'judicial', kind: 'exit', popId: 'P1', sourceEventId: 'patrol:B:P1' }]; });
+  assert('11 an exit aimed at a still-open case is lost, even when another case of that citizen closed', cell(masked, 110, 'judicial', 'city', '', 'all').Completeness === 'incomplete');
+  const twice = world();
+  twice.hospital.rows.push(hrow('H-C108-P1', 'P1', 'Alder', 108, 'active', { type: 'illness', system: 'ambulance', event: 'ambulance:A:P1', discharge: 110, outcome: 'recovered' }));
+  twice.hospital.rows.push(hrow('H-C110-P1', 'P1', 'Alder', 110, 'hospitalized', { type: 'illness', system: 'ambulance', event: 'ambulance:B:P1' }));
+  run(twice, 110, ctx => { ctx.summary.hospitalEvents = [{ popId: 'P1', to: 'active', kind: 'transition' },
+    { popId: 'P1', to: 'hospitalized', kind: 'intake', sourceEventId: 'ambulance:B:P1' }, { popId: 'P1', to: 'active', kind: 'transition' }]; });
+  assert('11 two hospital exits for one citizen need two rows closed', cell(twice, 110, 'hospital', 'city', '', 'all').Completeness === 'incomplete');
   const flaky = world(); let reads = 0;
   flaky.hospital.getDataRange = () => ({ getValues: () => { reads++; throw new Error('Service Spreadsheets failed while accessing document'); } });
   run(flaky, 110);

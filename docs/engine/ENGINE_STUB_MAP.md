@@ -3574,6 +3574,8 @@
 
 - **careJusticeWritePlan_(tail, firstTailRow, plan)**
 
+- **careJusticeTargetProblem_(existing, startRow, replaces)**
+
 - **careJusticeVerifyBlock_(tail, plan)**
 
 ### chaosCarsConfig.js
@@ -4387,4 +4389,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1554
+**Functions mapped:** 1555

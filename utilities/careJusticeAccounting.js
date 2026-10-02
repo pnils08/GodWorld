@@ -448,7 +448,7 @@ function deriveCareJusticeMovements_(cycle, ledgers, hoodNames) {
   var out = { receipts: [], trackedOpen: [], derivedOpening: {},
     duplicates: { hospital: 0, judicial: 0 },
     rowsByEvent: { hospital: {}, judicial: {} }, openByPop: { hospital: {}, judicial: {} },
-    closedByPop: { hospital: {}, judicial: {} } };
+    closedByPop: { hospital: {}, judicial: {} }, closedByEvent: { hospital: {}, judicial: {} } };
   var seen = {}, rowSeen = {};
 
   function cellOf(system, neighborhood, type) {
@@ -505,7 +505,10 @@ function deriveCareJusticeMovements_(cycle, ledgers, hoodNames) {
         out.derivedOpening[ok] = (out.derivedOpening[ok] || 0) + 1;
       }
       if (left === cycle) {
-        out.closedByPop[system][popId] = true; // this citizen's row closed this Cycle — whatever opened after
+        // Rows closed this Cycle, by event and counted per citizen: an exit
+        // receipt is matched to its own row, never to another row of the same person.
+        out.closedByPop[system][popId] = (out.closedByPop[system][popId] || 0) + 1;
+        if (eventId) out.closedByEvent[system][eventId] = true;
         var transferOut = !hospital && String(row[c.Outcome] || '') === 'diverted' &&
           !careJusticeIsBlank_(row[c.TransferToId]);
         push(system, transferOut ? 'transfer-out' : 'exit', id, popId, hood, type);
@@ -653,6 +656,15 @@ function planCareJusticeCensus_(args) {
     var es = systems[e];
     if (derived.duplicates[es]) incomplete[es] = true;
     var list = events[es] || [];
+    var exitsSeen = {};
+    // An exit with no event id (a hospital lifecycle transition carries none) is
+    // matched by count: the n-th exit of a citizen needs n rows of theirs closed
+    // this Cycle — or, for a citizen the ledger never held, no open row at all.
+    var exitLanded = function(system, pop) {
+      exitsSeen[pop] = (exitsSeen[pop] || 0) + 1;
+      var closed = derived.closedByPop[system][pop] || 0;
+      return closed ? exitsSeen[pop] <= closed : !derived.openByPop[system][pop];
+    };
     for (var i = 0; i < list.length; i++) {
       var ev = list[i];
       if (!ev) continue;
@@ -661,11 +673,11 @@ function planCareJusticeCensus_(args) {
       if (es === 'hospital') {
         var inCare = CARE_JUSTICE_HOSPITAL_OPEN.indexOf(ev.to) >= 0;
         if (ev.kind === 'intake' && inCare) landed = !!derived.rowsByEvent.hospital[String(ev.sourceEventId)];
-        else if (!inCare && !careJusticeIsBlank_(ev.to)) landed = !!derived.closedByPop.hospital[pop] || !derived.openByPop.hospital[pop];
+        else if (!inCare && !careJusticeIsBlank_(ev.to)) landed = exitLanded('hospital', pop);
       } else if (ev.kind === 'intake') {
         landed = !!derived.rowsByEvent.judicial[String(ev.sourceEventId)] || !!derived.openByPop.judicial[pop];
       } else if (ev.kind === 'exit') {
-        landed = !!derived.closedByPop.judicial[pop] || !derived.openByPop.judicial[pop];
+        landed = ev.sourceEventId ? !!derived.closedByEvent.judicial[String(ev.sourceEventId)] : exitLanded('judicial', pop);
       }
       if (!landed) incomplete[es] = true;
     }
@@ -794,7 +806,7 @@ function careJusticeWritePlan_(tail, firstTailRow, plan) {
       if (present[plan.gapBlocks[g].cycle]) continue;
       for (var gr = 0; gr < plan.gapBlocks[g].rows.length; gr++) values.push(careJusticeCensusRowValues_(plan.gapBlocks[g].rows[gr]));
     }
-    return { action: 'write', startRow: lastData + 1, values: values.concat(expectedValues) };
+    return { action: 'write', startRow: lastData + 1, replaces: 0, values: values.concat(expectedValues) };
   }
 
   var seen = {}, equal = mine.length === plan.rows.length, allComplete = true;
@@ -819,7 +831,24 @@ function careJusticeWritePlan_(tail, firstTailRow, plan) {
   if (mine.length === plan.rows.length && allComplete) {
     throw new Error('careJusticeCensus: Cycle ' + cycle + ' is already written complete and the recomputation differs — the stored rows stand');
   }
-  return { action: 'write', startRow: mine[0].row, values: expectedValues };
+  return { action: 'write', startRow: mine[0].row, replaces: mine.length, values: expectedValues };
+}
+
+/**
+ * The cells a write is about to cover, beyond the rows it knowingly replaces,
+ * must be empty (R2-8: only a row whose cells all trim to empty is blank). A row
+ * with content and no Cycle is foreign — refused, never overwritten.
+ * @return {String} '' when clear, else what was found
+ */
+function careJusticeTargetProblem_(existing, startRow, replaces) {
+  for (var r = replaces; r < (existing || []).length; r++) {
+    for (var c = 0; c < existing[r].length; c++) {
+      if (careJusticeCellText_(existing[r][c]).replace(/^\s+|\s+$/g, '') !== '') {
+        return 'row ' + (startRow + r) + ' holds "' + existing[r][c] + '" where the census would write';
+      }
+    }
+  }
+  return '';
 }
 
 // After the write: the block reads back whole, each key once, every cell equal.
@@ -863,6 +892,7 @@ if (typeof module !== 'undefined' && module.exports) {
     planCareJusticeCensus_: planCareJusticeCensus_,
     careJusticeWritePlan_: careJusticeWritePlan_,
     careJusticeVerifyBlock_: careJusticeVerifyBlock_,
+    careJusticeTargetProblem_: careJusticeTargetProblem_,
     CARE_JUSTICE_TAIL_BLOCKS: CARE_JUSTICE_TAIL_BLOCKS
   };
 }

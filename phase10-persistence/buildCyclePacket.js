@@ -1205,6 +1205,15 @@ function persistCareJusticeCensus_(ctx) {
     var fresh = readTail();
     var write = careJusticeWritePlan_(fresh.rows, fresh.first, plan);
     if (write.action === 'write') {
+      // Whatever already sits in the target cells (content can exist only up to
+      // the tab's last row) is read first: a foreign row is refused, not overwritten.
+      var sheetLast = sheet.getLastRow();
+      if (sheetLast >= write.startRow) {
+        var span = Math.min(write.values.length, sheetLast - write.startRow + 1);
+        var blocked = careJusticeTargetProblem_(
+          sheet.getRange(write.startRow, 1, span, width).getValues(), write.startRow, write.replaces);
+        if (blocked) throw new Error('careJusticeCensus: ' + blocked + ' — nothing written');
+      }
       sheet.getRange(write.startRow, 1, write.values.length, width).setValues(write.values);
     }
     return write;

@@ -174,29 +174,35 @@ console.log('\nTest 8: validateVehicleConfig scans full textureOutcomes[]');
 // ────────────────────────────────────────────────────────────────────────────
 // Test 9: VEHICLE_CONFIGS table — §S265 finalized shape
 // ────────────────────────────────────────────────────────────────────────────
-console.log('\nTest 9: VEHICLE_CONFIGS finalized 10-vehicle table');
+console.log('\nTest 9: VEHICLE_CONFIGS finalized 11-vehicle table');
 {
   const cfgs = helper.loadChaosCarsConfig_();
   assert('loadChaosCarsConfig_ returns the array', cfgs === helper.VEHICLE_CONFIGS);
-  assert('exactly 10 vehicles', cfgs.length === 10);
+  assert('exactly 11 vehicles', cfgs.length === 11);
 
   const EXPECTED = ['cop_car', 'fire_engine', 'ambulance', 'oari_van', 'building_inspector',
-    'garbage_truck', 'mail_truck', 'ice_cream_truck', 'street_sweeper', 'pge_truck'];
+    'garbage_truck', 'mail_truck', 'ice_cream_truck', 'street_sweeper', 'pge_truck', 'cargo_ship'];
   const names = cfgs.map((c) => c.name);
   for (const n of EXPECTED) assert(`vehicle "${n}" present`, names.indexOf(n) >= 0);
 
-  const VALID_SCOPES = { citizen: 1, business: 1, neighborhood: 1 };
+  const VALID_SCOPES = { citizen: 1, business: 1, neighborhood: 1, port: 1 };
   const VALID_COLS = {
     Sentiment: 1, CrimeIndex: 1, RetailVitality: 1, EventAttractiveness: 1,
     Annual_Revenue: 1, Employee_Count: 1,
   };
   for (const c of cfgs) {
-    assert(`${c.name}: has baseFrequencyWeight > 0`, Number(c.baseFrequencyWeight) > 0);
+    // engine.193 cut 3b: an episodic vehicle (the ship) is not in the weekly draw.
+    if (c.episodic) assert(`${c.name}: episodic, baseFrequencyWeight 0`, Number(c.baseFrequencyWeight) === 0);
+    else assert(`${c.name}: has baseFrequencyWeight > 0`, Number(c.baseFrequencyWeight) > 0);
     assert(`${c.name}: scopes non-empty`, Array.isArray(c.scopes) && c.scopes.length > 0);
     assert(`${c.name}: all scopes valid`, c.scopes.every((s) => VALID_SCOPES[s]));
-    // texture weights sum ~1.0
-    const sum = c.textureOutcomes.reduce((a, o) => a + (Number(o.weight) || 0), 0);
-    assert(`${c.name}: texture weights sum ~1.0 (got ${sum.toFixed(3)})`, Math.abs(sum - 1) <= 0.001);
+    // engine.193 cut 3b: weights sum ~1.0 per non-citizen scope pool; the citizen pool
+    // is renormalized at roll time and is not sum-checked (validateVehicleConfig).
+    for (const scope of c.scopes) {
+      if (scope === 'citizen') continue;
+      const sum = helper.chaosOutcomePool_(c, scope).reduce((a, o) => a + (Number(o.weight) || 0), 0);
+      assert(`${c.name}: ${scope} weights sum ~1.0 (got ${sum.toFixed(3)})`, Math.abs(sum - 1) <= 0.001);
+    }
     // every outcome string passes no-death
     for (const o of c.textureOutcomes) {
       assert(`${c.name}/${o.outcome}: outcome passes no-death`, helper.validateOutcome(o.outcome) === true);
@@ -230,11 +236,12 @@ console.log('\nTest 9: VEHICLE_CONFIGS finalized 10-vehicle table');
       v.textureOutcomes.every((o) => o.severity !== 'high'));
   }
 
-  // building_inspector Employee_Count impact is outcome-conditional
+  // engine.193 cut 3b: the inspector's closure is a signed business outcome, not a
+  // metricImpact — the hit rides the outcome itself.
   const insp = cfgs.find((c) => c.name === 'building_inspector');
-  const empImpact = insp.metricImpacts.find((m) => m.column === 'Employee_Count');
-  assert('inspector Employee_Count impact is gated onOutcome',
-    !!empImpact && empImpact.onOutcome === 'forced_temporary_closure');
+  const closure = insp.textureOutcomes.find((o) => o.outcome === 'forced_temporary_closure');
+  assert('inspector forced closure carries a negative bizEvent',
+    !!closure && Number(closure.bizEvent) < 0 && insp.metricImpacts.length === 0);
 }
 
 // ────────────────────────────────────────────────────────────────────────────

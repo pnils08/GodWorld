@@ -456,10 +456,14 @@ function judicialSettleLostPay_(ctx, row, c, cycle, cols, statusBefore) {
 // Out of NetWorth by the same shortfall rule as the lost pay above. A reconcile
 // case (its gravity is a placeholder), a minor and a GAME-clock citizen pay nothing.
 // The marker guards a case that closes a second time after a failed case write.
+// Two replay guards, the lost-pay settlement's own: statusBefore (a case closing a
+// second time after a failed case write finds the life-state already restored —
+// that one does not depend on LifeHistory, which the fold trims) and the marker.
 var JUDICIAL_FINED_OUTCOMES_ = ['diverted', 'held-served'];
-function judicialSettleFine_(ctx, row, c, cycle, cols, cfg) {
+function judicialSettleFine_(ctx, row, c, cycle, cols, cfg, statusBefore) {
   if (JUDICIAL_FINED_OUTCOMES_.indexOf(String(c.Outcome)) < 0) return null;
   if (String(c.SourceSystem || '').trim().toLowerCase() === 'reconcile') return null;
+  if (statusBefore !== 'detained' && !judicialHealthStatus_(statusBefore)) return null;
   if (String(row[cols.iClock] || '').trim().toUpperCase() === 'GAME') return null;
   if (cols.iBirth >= 0) {
     var by = Number(row[cols.iBirth]) || 0;
@@ -489,7 +493,7 @@ function judicialSettleFine_(ctx, row, c, cycle, cols, cfg) {
     queueAppendIntent_(ctx, 'LifeHistory_Log', [ctx.now, c.POPID, '', 'Money', text, '', cycle]);
   }
   ctx.ledger.dirty = true;
-  return { popId: c.POPID, fine: fine, gravity: gravity, borrowed: paid.borrowed };
+  return { popId: c.POPID, caseId: c.CaseId, fine: fine, gravity: gravity, borrowed: paid.borrowed };
 }
 
 // engine.271: what the city's court takes in this Cycle from everyone who is not a
@@ -500,8 +504,14 @@ function judicialSettleFine_(ctx, row, c, cycle, cols, cfg) {
 function cityCourtRevenue_(ctx, cfg, trackedIntakesByHood) {
   var S = ctx.summary || {};
   var demand = S.careJusticeDemand, hoodState = S.neighborhoodState || {};
-  var out = { amount: 0, cases: 0 };
-  if (!demand || !demand.hoods) return out;
+  var out = { amount: 0, cases: 0, unavailable: '' };
+  // No hood table this fire is not the same as no charges: say so, post nothing.
+  if (!demand || !demand.hoods) { out.unavailable = 'S.careJusticeDemand missing'; return out; }
+  var cyc = Number(S.absoluteCycle || S.cycleId);
+  if (cyc > 0 && Number(demand.cycle) > 0 && Number(demand.cycle) !== cyc) {
+    out.unavailable = 'S.careJusticeDemand is for Cycle ' + demand.cycle + ', not ' + cyc;
+    return out;
+  }
   for (var h in demand.hoods) {
     if (!demand.hoods.hasOwnProperty(h)) continue;
     var cleared = Number(demand.hoods[h].judicialIntakes) || 0;
@@ -637,7 +647,7 @@ function runJudicialLifecycle_(ctx) {
         var paid = judicialSettleLostPay_(ctx, row, c, cycle, payCols, lower);
         if (paid) settled.push(paid);
         if (revCfg) {
-          var fine = judicialSettleFine_(ctx, row, c, cycle, payCols, revCfg);
+          var fine = judicialSettleFine_(ctx, row, c, cycle, payCols, revCfg, lower);
           if (fine) fined.push(fine);
         }
         if (c.Outcome !== 'no-arrest' && !judicialHealthStatus_(lower) && lower !== 'deceased' &&
@@ -659,11 +669,18 @@ function runJudicialLifecycle_(ctx) {
   // engine.271 — the court's money reaches the treasury: named fines as they were
   // paid, and the city's own take from the hoods' cleared charges.
   if (revCfg && typeof postTreasuryRevenue_ === 'function') {
+    // one row per named fine, carrying its case — the treasury line resolves to the ledger row
     var namedTotal = 0;
-    for (var f = 0; f < fined.length; f++) namedTotal += fined[f].fine;
-    postTreasuryRevenue_(ctx, 'COURT-NAMED', namedTotal,
-      fined.length + (fined.length === 1 ? ' named defendant fined' : ' named defendants fined'));
+    for (var f = 0; f < fined.length; f++) {
+      namedTotal += fined[f].fine;
+      postTreasuryRevenue_(ctx, 'COURT-NAMED', fined[f].fine, 'case ' + fined[f].caseId + ', ' + fined[f].popId + ', ' + fined[f].gravity);
+    }
     var court = cityCourtRevenue_(ctx, revCfg, trackedIntakesByHood);
+    if (court.unavailable) {
+      var noDemand = new Error('judicialLifecycle: no court row this Cycle — ' + court.unavailable);
+      if (typeof logEngineError_ === 'function') logEngineError_(ctx, 'Phase5-CourtRevenue', noDemand);
+      else if (typeof Logger !== 'undefined') Logger.log(noDemand.message);
+    }
     postTreasuryRevenue_(ctx, 'COURT', court.amount, court.cases + ' cleared charges, fined at the hood rate');
     if (typeof Logger !== 'undefined') {
       Logger.log('judicialLifecycle C' + cycle + ': court revenue ' + Math.round(court.amount) + ' from ' + court.cases +

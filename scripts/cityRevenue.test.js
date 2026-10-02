@@ -131,6 +131,9 @@ console.log('\n3. the dials:');
   assert('3.3 business tax is off until its rate is given', E.ENGINE271_CONFIG_SEEDS.find(s => s[0] === 'businessTaxRate')[1] === 0);
   const miss = Object.assign({}, CFG); delete miss.fineCapMinor;
   assert('3.4 a missing key throws by name', /fineCapMinor missing/.test(throws(() => E.cityRevenueConfig_({ config: miss })) || ''));
+  assert('3.4b a blank or unreadable value is missing, not zero', /propertyTaxRate missing/.test(throws(() => E.cityRevenueConfig_({ config: Object.assign({}, CFG, { propertyTaxRate: '' }) })) || '') &&
+    /taxDayCyclePosition missing/.test(throws(() => E.cityRevenueConfig_({ config: Object.assign({}, CFG, { taxDayCyclePosition: 'soon' }) })) || '') &&
+    E.cityRevenueConfig_({ config: Object.assign({}, CFG, { businessTaxRate: 0 }) }).businessTaxRate === 0);
   const wc = [['Key', 'Value', 'Description'], ['cycleCount', 109, '']];
   const cfgSheet = { getDataRange() { return { getValues: () => wc.map(r => r.slice()) }; }, getLastRow: () => wc.length,
     getRange(r, c, n) { return { setValues: (v) => { v.forEach((x, i) => { wc[r - 1 + i] = x.slice(); }); } }; } };
@@ -151,7 +154,11 @@ console.log('\n4. the treasury post:');
   assert('4.3 queued on City_Treasury at the treasury\'s own priority (after the Phase-2 rows, in queue order)', appends.length === 2 && appends.every(a => a.tab === 'City_Treasury' && a.priority === 5));
   assert('4.4 nothing to post, no row', E.postTreasuryRevenue_(ctx, 'COURT', 0, '') === null && E.postTreasuryRevenue_(ctx, 'COURT', -5, '') === null && appends.length === 2);
   ctx = makeCtx([], { noTreasury: true });
-  assert('4.5 no treasury this fire: nothing posted, no throw', E.postTreasuryRevenue_(ctx, 'COURT', 5000, '') === null && appends.length === 0);
+  assert('4.5 no treasury this fire: nothing posted, and the missing credit is an error row by name and amount', E.postTreasuryRevenue_(ctx, 'COURT', 5000, 'n') === null && appends.length === 0 &&
+    errors.length === 1 && errors[0].phase === 'TreasuryPost' && /COURT \$5000 not posted/.test(errors[0].message), JSON.stringify(errors));
+  ctx = makeCtx([], { balance: 700, cycle: 120 });
+  const z = E.postTreasuryRevenue_(ctx, 'PROPERTY-TAX', 0, 'nothing collected', true);
+  assert('4.6 a zero row posts only when asked for (tax day): the day is on the tab whatever it collected', z && z[2] === 0 && z[4] === 700 && E.postTreasuryRevenue_(ctx, 'COURT', 0, '') === null);
 })();
 
 console.log('\n5. the ledger read — the allocation and the tax:');
@@ -164,6 +171,9 @@ console.log('\n5. the ledger read — the allocation and the tax:');
   assert('5.3 a court row alone does not stand in for the allocation', !t.revenueCycles['111'] && t.taxLanded === false);
   t = E.readTreasuryLedger_([h, [110, 'OPENING', 1e8, 'GENERAL-FUND', 1e8, ''], [120, 'REVENUE', 3e8, 'PROPERTY-TAX', 4e8, ''], [172, 'REVENUE', 3e8, 'PROPERTY-TAX', 7e8, '']]);
   assert('5.4 a property-tax row marks the tax landed, and the latest tax Cycle is kept', t.taxLanded === true && t.lastTaxCycle === 172);
+  assert('5.4b a damaged header stops the treasury instead of reading as an empty tab', /header must carry/.test(throws(() => E.readTreasuryLedger_([['Cycle', 'Entry', 'Amount', 'Counterparty', 'Note'], [110, 'OPENING', 1e8, 'GENERAL-FUND', '']])) || ''));
+  t = E.readTreasuryLedger_([h, [110, 'OPENING', 1e8, 'GENERAL-FUND', 1e8, ''], [111, 'REVENUE', 100, 'COURT', '', '']]);
+  assert('5.4c a blank balance cell is not a zero balance', t.balance === 1e8);
   const src = read('../phase02-world-state/applyInitiativeImplementationEffects.js');
   assert('5.5 the allocation is credited only while no tax has landed', /if \(!treasury\.taxLanded && !treasury\.revenueCycles\[String\(trCycle\)\]\)/.test(src));
   assert('5.6 the last tax Cycle rides S.treasury to the later phases', /lastTaxCycle: treasury\.lastTaxCycle \|\| 0/.test(src));
@@ -190,7 +200,7 @@ console.log('\n7. the named fine — where the case closes:');
 (function () {
   const cols = { iClock: col('ClockMode'), iBirth: col('BirthYear'), iIncome: col('Income'), iNW: col('NetWorth'), iDebt: col('DebtLevel'), iLife: col('LifeHistory') };
   const kase = (o) => Object.assign({ CaseId: 'J-1', POPID: 'P', Outcome: 'diverted', ChargeGravity: 'serious', ArrestCycle: 118, SourceSystem: 'patrol' }, o || {});
-  const run = (r, c) => E.judicialSettleFine_(makeCtx([r]), r, c, 120, cols, CFG);
+  const run = (r, c, before) => E.judicialSettleFine_(makeCtx([r]), r, c, 120, cols, CFG, before === undefined ? 'detained' : before);
   let r = row('P', { income: 60000, nw: 50000 });
   let f = run(r, kase());
   assert('7.1 a diverted serious case pays 10% of salary out of savings', f && f.fine === 6000 && nwOf(r) === 44000 && /\[Money\] fined \$6000 by the court — paid out of savings \[Fine J118\]/.test(lifeOf(r)), lifeOf(r));
@@ -215,7 +225,13 @@ console.log('\n7. the named fine — where the case closes:');
   assert('7.11 the cap protects the top earner: $25,000 on a serious charge at $100M', f.fine === 25000);
   r = row('P', { nw: 'n/a' });
   const ctx = makeCtx([r]);
-  assert('7.12 a net worth that cannot be read: no fine, an error row, the value untouched', E.judicialSettleFine_(ctx, r, kase(), 120, cols, CFG) === null && nwOf(r) === 'n/a' && errors.length === 1 && errors[0].phase === 'Phase5-CourtRevenue');
+  assert('7.12 a net worth that cannot be read: no fine, an error row, the value untouched', E.judicialSettleFine_(ctx, r, kase(), 120, cols, CFG, 'detained') === null && nwOf(r) === 'n/a' && errors.length === 1 && errors[0].phase === 'Phase5-CourtRevenue');
+  r = row('P', { income: 60000, nw: 50000 });
+  assert('7.13 a case closing again after the citizen was already restored is not fined — the guard that does not depend on the life line', run(r, kase(), 'active') === null && nwOf(r) === 50000);
+  r = row('P', { income: 60000, nw: 50000 });
+  assert('7.14 a defendant in care when the case closes still pays', run(r, kase(), 'hospitalized') !== null && nwOf(r) === 44000);
+  f = run(row('P', { income: 60000, nw: 50000 }), kase({ CaseId: 'J-C118-P' }));
+  assert('7.15 the fine carries its case', f.caseId === 'J-C118-P' && f.popId === 'P');
 })();
 
 console.log('\n8. the city\'s court money — the hoods\' cleared charges:');
@@ -230,7 +246,12 @@ console.log('\n8. the city\'s court money — the hoods\' cleared charges:');
   assert('8.3 more tracked arrests than cleared charges never goes below zero', c.cases === 5 && c.amount === 2 * 5000 + 3 * 4500);
   const noMed = makeCtx([], { hoodState: { Rockridge: { medianIncome: 160000 } } });
   assert('8.4 a hood with no median income on the map pays nothing rather than a guess', E.cityCourtRevenue_(noMed, CFG, {}).cases === 2);
-  assert('8.5 no hood table: no court money, no throw', E.cityCourtRevenue_(makeCtx([], { noDemand: true }), CFG, {}).amount === 0);
+  const none = E.cityCourtRevenue_(makeCtx([], { noDemand: true }), CFG, {});
+  assert('8.5 no hood table is "unavailable", not zero charges', none.amount === 0 && /careJusticeDemand missing/.test(none.unavailable));
+  const stale = makeCtx([]); stale.summary.cycleId = 120; stale.summary.careJusticeDemand.cycle = 119;
+  assert('8.6 a hood table stamped for another Cycle is unavailable too', /is for Cycle 119, not 120/.test(E.cityCourtRevenue_(stale, CFG, {}).unavailable));
+  const fresh = makeCtx([]); fresh.summary.cycleId = 120; fresh.summary.careJusticeDemand.cycle = 120;
+  assert('8.7 this Cycle\'s table is read', E.cityCourtRevenue_(fresh, CFG, {}).cases === 6 && E.cityCourtRevenue_(fresh, CFG, {}).unavailable === '');
 })();
 
 console.log('\n9. the ticket:');
@@ -280,6 +301,11 @@ console.log('\n10. tax day:');
   assert('10.9 the treasury is credited at city scale, hood by hood, the thin hoods on one pooled multiplier', res.cityTotal === expectCity && tr.length === 1 && tr[0][3] === 'PROPERTY-TAX' && tr[0][2] === expectCity && tr[0][4] === 1000000 + expectCity, res.cityTotal + ' vs ' + expectCity);
   assert('10.10 the tax Cycle is recorded for the rest of the fire', w.ctx.summary.treasury.lastTaxCycle === 120 && w.ctx.ledger.dirty === true);
   assert('10.11 wealth level is re-derived for a payer', byPop(w, 'A1')[col('WealthLevel')] !== '');
+
+  w = world({ hoodState: { Nowhere: { medianRent: 1 } }, households: null });
+  w.ctx.ss = { getSheetByName: (n) => (n === 'Household_Ledger' ? { getDataRange: () => ({ getValues: () => [HH] }) } : null) };
+  res = E.collectPropertyTax_(w.ctx.ss, w.ctx, 120);
+  assert('10.11b a tax day that collects nothing still posts its row — the day is on the tab', res.taxDay && res.collected === 0 && treasuryRows().length === 1 && treasuryRows()[0][3] === 'PROPERTY-TAX' && treasuryRows()[0][2] === 0 && w.ctx.summary.treasury.lastTaxCycle === 120);
 
   w = world({ position: 15 });
   res = E.collectPropertyTax_(w.ctx.ss, w.ctx, 119);

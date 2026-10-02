@@ -1034,11 +1034,15 @@ function readTreasuryLedger_(rows) {
   if (!rows || rows.length < 2) return out;
   var h = rows[0];
   var iC = h.indexOf('Cycle'), iE = h.indexOf('Entry'), iP = h.indexOf('Counterparty'), iB = h.indexOf('BalanceAfter');
+  // engine.271 (codex review): a tab with rows and a damaged header must stop the
+  // treasury, not read as empty and open the fund a second time.
+  if (iC < 0 || iE < 0 || iP < 0 || iB < 0) throw new Error('City_Treasury: header must carry Cycle, Entry, Counterparty, BalanceAfter');
   for (var r = 1; r < rows.length; r++) {
     var e = String(rows[r][iE] || '').trim();
     if (!e) continue;
     out.empty = false;
-    var bal = Number(rows[r][iB]);
+    var rawBal = rows[r][iB];
+    var bal = (rawBal === '' || rawBal === null || rawBal === undefined) ? NaN : Number(rawBal); // a blank cell is not a zero balance
     if (isFinite(bal)) out.balance = bal;
     var cp = String(rows[r][iP] || '').trim();
     if ((e === 'APPROPRIATION' || e === 'PREFUNDED') && cp) out.appropriated[cp] = true;
@@ -1071,8 +1075,9 @@ function cityRevenueConfig_(ctx) {
   var out = {};
   for (var i = 0; i < ENGINE271_KEYS.length; i++) {
     var k = ENGINE271_KEYS[i];
-    var v = ctx && ctx.config ? Number(ctx.config[k]) : NaN;
-    if (isNaN(v)) throw new Error('engine.271: World_Config ' + k + ' missing — ensureEngine271Config_ did not run (ADR-0015)');
+    var raw = ctx && ctx.config ? ctx.config[k] : undefined;
+    var v = (raw === '' || raw === null || raw === undefined) ? NaN : Number(raw); // a blank cell is missing, not zero
+    if (!isFinite(v)) throw new Error('engine.271: World_Config ' + k + ' missing — ensureEngine271Config_ did not run (ADR-0015)');
     out[k] = v;
   }
   return out;
@@ -1116,15 +1121,24 @@ function cityChargeNetWorth_(row, iNW, iDebt, amount) {
 // One REVENUE row on City_Treasury, this Cycle, from any phase after the treasury
 // opened (Phase2-InitiativeEffects). BalanceAfter continues from S.treasury.balance
 // and advances it; the intent carries the treasury's own priority, so Phase 10
-// appends it after the Phase-2 rows in queue order. No treasury this fire (no tab,
-// or its phase failed) → nothing is posted and null comes back: the citizen's side
-// has already happened and is not undone.
-function postTreasuryRevenue_(ctx, counterparty, amount, note) {
+// appends it after the Phase-2 rows in queue order (every treasury intent carries
+// priority 5; the executor's sort is stable inside a priority). No treasury this
+// fire (no tab, or Phase2-InitiativeEffects failed) → nothing is posted, null comes
+// back and the amount is written to Engine_Errors by name: a citizen charged
+// earlier in the fire is not undone, and the missing credit is on the record.
+// allowZero posts a zero row — tax day uses it, so the first tax day is on the tab
+// (and ends the allocation) whatever was collected.
+function postTreasuryRevenue_(ctx, counterparty, amount, note, allowZero) {
   var amt = Math.round(Number(amount) || 0);
-  if (!(amt > 0)) return null;
+  if (!(amt > 0) && !(allowZero && amt === 0)) return null;
   var S = ctx.summary || {};
   var t = S.treasury;
-  if (!t || !isFinite(Number(t.balance))) return null;
+  if (!t || !isFinite(Number(t.balance))) {
+    var lost = new Error('engine.271: no treasury this fire — ' + counterparty + ' $' + amt + ' not posted (' + (note || '') + ')');
+    if (typeof logEngineError_ === 'function') logEngineError_(ctx, 'TreasuryPost', lost);
+    else if (typeof Logger !== 'undefined') Logger.log(lost.message);
+    return null;
+  }
   t.balance = Math.round(Number(t.balance) + amt);
   t.entries = (Number(t.entries) || 0) + 1;
   var row = [t.cycle, 'REVENUE', amt, String(counterparty), t.balance, note || ''];

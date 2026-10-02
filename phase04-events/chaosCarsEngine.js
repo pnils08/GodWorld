@@ -410,7 +410,8 @@ function writeCitizenEvent_(ctx, target, vehicle, outcome, cycle, text) {
           (ticketPaid.borrowed ? ' — more than the savings could hold, borrowed to cover it' : '');
       }
       if (ticketPaid && typeof postTreasuryRevenue_ === 'function') {
-        postTreasuryRevenue_(ctx, 'TICKETS', ticketPaid.paid, outcome.outcome.replace(/_/g, ' ') + ', ' + vehicle.name.replace(/_/g, ' '));
+        postTreasuryRevenue_(ctx, 'TICKETS', ticketPaid.paid, outcome.outcome.replace(/_/g, ' ') + ', ' +
+          vehicle.name.replace(/_/g, ' ') + ', ' + (iPop >= 0 ? row[iPop] : target.popId));
       }
     } catch (ticketErr) {
       if (typeof logEngineError_ === 'function') logEngineError_(ctx, 'Phase4-TicketFine', ticketErr);

@@ -370,7 +370,7 @@
 
 - **cityChargeNetWorth_(row, iNW, iDebt, amount)**
 
-- **postTreasuryRevenue_(ctx, counterparty, amount, note)**
+- **postTreasuryRevenue_(ctx, counterparty, amount, note, allowZero)**
   Reads: S.treasury
   Sheets: City_Treasury
 
@@ -2090,11 +2090,11 @@
 - **judicialSettleLostPay_(ctx, row, c, cycle, cols, statusBefore)**
   Sheets: LifeHistory_Log
 
-- **judicialSettleFine_(ctx, row, c, cycle, cols, cfg)**
+- **judicialSettleFine_(ctx, row, c, cycle, cols, cfg, statusBefore)**
   Sheets: LifeHistory_Log
 
 - **cityCourtRevenue_(ctx, cfg, trackedIntakesByHood)**
-  Reads: S.careJusticeDemand, S.neighborhoodState
+  Reads: S.absoluteCycle, S.careJusticeDemand, S.cycleId, S.neighborhoodState
 
 - **judicialSetStatus_(ctx, row, status, cycle, iStatus, iStart)**
 

@@ -828,7 +828,7 @@ console.log('\nengine.271 — the fine and the court rows through the scheduled 
     r.c100[0][2] === 2 * 4000 + 2 * 5000 && r.c100[0][4] === 1000000 + 18000, JSON.stringify(r.c100));
   assert('271 a diverted serious case is fined 10% of salary when it closes, on top of the lost week', r.fx.person[7] === 10000 - 1000 - 5200 &&
     /\[Money\] fined \$5200 by the court/.test(r.fx.person[9]), r.fx.person[7] + ' / ' + r.fx.person[9]);
-  assert('271 the close Cycle posts the named fine, then the court row, balances in order', r.c101.length === 2 && r.c101[0][3] === 'COURT-NAMED' && r.c101[0][2] === 5200 &&
+  assert('271 the close Cycle posts the named fine, then the court row, balances in order', r.c101.length === 2 && r.c101[0][3] === 'COURT-NAMED' && r.c101[0][2] === 5200 && /^case J-C100-SYN-T6, SYN-T6, serious$/.test(r.c101[0][5]) &&
     r.c101[1][3] === 'COURT' && r.c101[1][2] === 3 * 4000 + 2 * 5000 && r.c101[1][4] === 1000000 + 5200 + 22000, JSON.stringify(r.c101));
   assert('271 the case still closes diverted and the citizen is restored', caseFromFixture(r.fx).Outcome === 'diverted' && r.fx.person[1] === 'Active' && revBox.errors.length === 0, revBox.errors.join(';'));
   r = run({ judicialReleasedRate: 1, judicialDivertedRate: 0, judicialHeldRate: 0 }, 'grave');

@@ -1922,8 +1922,9 @@ function collectPropertyTax_(ss, ctx, cycle) {
     if (byHood.hasOwnProperty(h)) results.cityTotal += byHood[h] * (mult[h] > 0 ? mult[h] : 1);
   }
   results.cityTotal = Math.round(results.cityTotal);
+  // posted even at zero: the first tax day is on the tab whatever it collected, and the allocation ends there
   if (postTreasuryRevenue_(ctx, 'PROPERTY-TAX', results.cityTotal,
-      results.households + ' tracked owner households paid ' + results.collected + '; scaled to the city hood by hood')) {
+      results.households + ' tracked owner households paid ' + results.collected + '; scaled to the city hood by hood', true)) {
     treasury.lastTaxCycle = cycle;
   }
 

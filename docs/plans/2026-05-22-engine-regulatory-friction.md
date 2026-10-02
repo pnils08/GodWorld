@@ -98,15 +98,16 @@ pointers:
 - **Verify:** `npm test scripts/engine-auditor/detectStuckInitiatives.test.js` green; C94 audit re-run shows expected HIGH-band drop.
 - **Status:** [ ] not started
 
-### Task 5: Initiative content audit (sift-side)
+### Task 5: Initiative content audit — re-pointed to the live surface (2026-10-02)
 
-- **Files:**
-  - `.claude/skills/sift/SKILL.md` — modify
-- **Steps:**
-  1. Add to Step 5 triage vocabulary (depends on C2 plan Task 5): `covered-by-feature` absorbs regulatory-process noise into civic round-up.
-  2. Cadence cap: at most 1 dedicated article per cycle per initiative AND only if there's actual movement (not just process-tick).
-- **Verify:** Cross-link to C2 plan Task 5.
-- **Status:** [ ] not started
+`/sift` left the chain at S456 (run-cycle §What Happens After: no sift, no edition step). The two items now read against the cron newsroom:
+
+1. **`covered-by-feature` — done by structure.** `scripts/newsroom-fanout.js` `assignedStoryRefs()` refuses a story ref already assigned in the same cycle-week, and engine.270 keys every initiative stage to one storyline (`<InitiativeID>:<stage>`) that the packet shows as a running story. One dedicated piece per initiative per cycle is enforced; the rest of the desk sees it as background.
+2. **Movement-only — OPEN, the cut:** `scripts/buildWorldSummary.js` (civic lane, ~line 1195) pushes a `kind: 'initiative'` seed for **every** `Initiative_Tracker` row every cycle, so a process-tick initiative is a weekly dedicated-article seed. At C109 all seven rows seeded; the only one that moved was INIT-001 (a disbursement, `LastDisburseCycle` 109). `LastWorkCycle` and `NextActionCycle` are the civic chain's own tick (108/109 on every standing row) and do not count as movement.
+   - **Movement** = any of `LastStageChangeCycle`, `LastDisburseCycle`, `MayoralActionCycle`, `VoteCycle`, `OverrideVoteCycle` equal to the cycle, or `ImplementationPhase` differing from the previous audit snapshot (`output/beats/prev/Initiative_Tracker.jsonl`).
+   - **Cut:** emit the `initiative` seed only on movement; keep the `vote` seed as is (an upcoming vote or scheduled action is its own signal); the storyline entry still reaches the packet through engine.270's registry, which reads the tracker directly. Test in `buildWorldSummary.test.js`: a row with no movement columns on the cycle emits no `initiative` seed; a disbursement on the cycle does.
+   - **Lands after the engine.270 review (week of 2026-10-05):** the builder is reading four cycles of the storyline feed as built, and thinning the civic lane mid-read would muddy that read. Code is a one-function change; nothing else waits on it.
+- **Status:** [~] item 1 done by structure; item 2 cut written, held for the engine.270 review week
 
 ### Task 6: Backfill INIT-001/002/005/006 phase clocks
 
@@ -145,3 +146,4 @@ pointers:
 
 - 2026-05-22 — Initial draft (S225, research-build). Filed under governance.13 Phase 2 cluster C13 row engine.20. Plan-level + engine-sheet implementation. Sequenced AFTER C2 (sift v2) Task 5 for the `covered-by-feature` triage handle.
 - 2026-05-23 (S227, engine-sheet) — **Task 1 reversal.** Empirical answer to §Open Q #1: phase tenure is neither code nor sheet config — it is **emergent from voice-agent decision cadence**. No `phase15-initiative-engine/` exists. `phase05-citizens/civicInitiativeEngine.js` only auto-reschedules visioning→vote-ready; it does not advance ImplementationPhase. The only write path is voice agents → `scripts/assembleDecisions.js:314` → `scripts/applyTrackerUpdates.js` (sheet write). To advance phases faster, voice-agent RULES.md files (5 project agents) must propose phase changes when implementation effects fire positively. **Retargeted scope filed:** engine.20a shipped (Task 4 alone, engine-sheet, single commit) — `detectStuckInitiatives` v1.2→v1.3 with remedy-firing-aware severity downgrade. engine.20b refiled (Tasks 2+3, civic/research-build) — voice-agent RULES.md updates. engine.20c (Task 6, blocked on 20b). engine.20d (Task 5, blocked on pipeline.24 sift v2). Original engine.20 row replaced with the four scoped successors in ROLLOUT.
+- 2026-10-02 — Task 5 re-pointed off `/sift` (retired S456) to the cron newsroom: `covered-by-feature` is structural (fanout ref dedup + engine.270 storylines); movement-only is a `buildWorldSummary.js` civic-lane cut, written, held for the engine.270 review week (research-build S519, overnight).

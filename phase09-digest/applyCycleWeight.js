@@ -315,15 +315,15 @@ function applyCycleWeight_(ctx) {
   
   if (holidayPriority === "major") {
     score += 4;
-    reasons.push('Major holiday (' + holiday + ')');
+    reasons.push('Major holiday (' + (S.holidayLabel || holiday) + ')');
     calendarFactors.push('major-holiday');
   } else if (holidayPriority === "oakland") {
     score += 3;
-    reasons.push('Oakland holiday (' + holiday + ')');
+    reasons.push('Oakland holiday (' + (S.holidayLabel || holiday) + ')');
     calendarFactors.push('oakland-holiday');
   } else if (holidayPriority === "cultural") {
     score += 3;
-    reasons.push('Cultural holiday (' + holiday + ')');
+    reasons.push('Cultural holiday (' + (S.holidayLabel || holiday) + ')');
     calendarFactors.push('cultural-holiday');
   } else if (holidayPriority === "minor") {
     score += 1;

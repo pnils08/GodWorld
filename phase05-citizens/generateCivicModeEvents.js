@@ -314,8 +314,8 @@ function generateCivicModeEvents_(ctx) {
   var holidayPool = [];
   if (holiday !== "none") {
     holidayPool.push(
-      ev("attended a " + holiday + " civic observance", ["type:holiday", "holiday:" + holiday], "Public"),
-      ev("balanced " + holiday + " obligations with public duties", ["type:holiday", "holiday:" + holiday], "Personal")
+      ev("attended a " + (S.holidayLabel || holiday) + " civic observance", ["type:holiday", "holiday:" + holiday], "Public"),
+      ev("balanced " + (S.holidayLabel || holiday) + " obligations with public duties", ["type:holiday", "holiday:" + holiday], "Personal")
     );
   }
 

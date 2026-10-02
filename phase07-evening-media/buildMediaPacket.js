@@ -74,7 +74,7 @@ function buildMediaPacket_(ctx) {
   var holiday = s.holiday || 'none';
   var holidayPriority = s.holidayPriority || 'none';
   if (holiday !== 'none') {
-    pkt.push('Holiday: ' + holiday + ' (priority: ' + holidayPriority + ')');
+    pkt.push('Holiday: ' + (s.holidayLabel || holiday) + ' (priority: ' + holidayPriority + ')');
   } else {
     pkt.push('Holiday: none');
   }
@@ -358,7 +358,10 @@ function buildMediaPacket_(ctx) {
     pkt.push('MAJOR HOLIDAY - expect holiday-themed coverage');
   }
   if (holiday !== 'none' && holidayPriority === 'oakland') {
-    pkt.push('OAKLAND CELEBRATION - local pride angle recommended');
+    pkt.push('OAKLAND CELEBRATION - the city marking one of its own days');
+  }
+  if (holiday === 'SecondDawn') {
+    pkt.push('SECOND DAWN - the week the city found its voice; the city hearing itself');
   }
   if (isFirstFriday) {
     pkt.push('FIRST FRIDAY - arts & culture focus');

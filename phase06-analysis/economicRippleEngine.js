@@ -428,7 +428,7 @@ function detectCalendarRipples_(ctx, currentCycle) {
   // Holiday shopping
   if (SHOPPING_HOLIDAYS.indexOf(cal.holiday) >= 0) {
     createRipple_(S, 'HOLIDAY_SHOPPING', currentCycle, 
-      { description: cal.holiday + ' shopping surge' }, '', cal);
+      { description: (S.holidayLabel || cal.holiday) + ' shopping surge' }, '', cal);
   }
   
   if (cal.month === 12 && cal.holiday === 'none') {
@@ -454,7 +454,7 @@ function detectCalendarRipples_(ctx, currentCycle) {
   
   if (cal.holidayPriority === 'oakland') {
     var fr2 = createRipple_(S, 'FESTIVAL_TOURISM', currentCycle, 
-      { description: cal.holiday + ' celebration tourism' }, festHoods[0] || '', cal);
+      { description: (S.holidayLabel || cal.holiday) + ' celebration tourism' }, festHoods[0] || '', cal);
     if (fr2 && festHoods.length) fr2.neighborhoods = festHoods.slice();
   }
   

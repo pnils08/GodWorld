@@ -179,7 +179,8 @@ function applyCompressedDigestSummary_(ctx) {
       "Easter": "ESTR",
       "Halloween": "HWEEN",
       "MothersDay": "MOM",
-      "FathersDay": "DAD"
+      "FathersDay": "DAD",
+      "SecondDawn": "DAWN"
     };
     calendarTag = holidayAbbrev[holiday] || holiday.substring(0, 4).toUpperCase();
   }

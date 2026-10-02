@@ -277,8 +277,8 @@ function generateMediaModeEvents_(ctx) {
   var holidayPool = [];
   if (holiday !== "none") {
     holidayPool.push(
-      ev("covered the " + holiday + " celebrations across the city", ["type:holiday", "holiday:" + holiday], "Media"),
-      ev("filed a " + holiday + " feature with more feeling than usual", ["type:holiday", "holiday:" + holiday], "Media")
+      ev("covered the " + (S.holidayLabel || holiday) + " celebrations across the city", ["type:holiday", "holiday:" + holiday], "Media"),
+      ev("filed a " + (S.holidayLabel || holiday) + " feature with more feeling than usual", ["type:holiday", "holiday:" + holiday], "Media")
     );
   }
 

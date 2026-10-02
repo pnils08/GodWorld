@@ -479,6 +479,17 @@ function storyHookEngine_(ctx) {
     ));
   }
 
+  if (holiday === "SecondDawn") {
+    hooks.push(makeHook(
+      'COMMUNITY',
+      '',
+      2,
+      'Second Dawn: the week the city found its voice. Whose story is heard now that would once have gone untold?',
+      null,
+      'holiday'
+    ));
+  }
+
   // ═══════════════════════════════════════════════════════════
   // CREATION DAY HOOKS (GodWorld Special - Cycle 48)
   // ═══════════════════════════════════════════════════════════

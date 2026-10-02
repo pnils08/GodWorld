@@ -122,7 +122,6 @@ function filterNoiseEvents_(ctx) {
           sportsSeason === "post-season") {
         return true;
       }
-      // Opening Day sports events
     }
 
     // Events in holiday neighborhood preserved during holidays
@@ -157,7 +156,6 @@ function filterNoiseEvents_(ctx) {
 
     // Oakland holidays boost local event caps
     if (holidayPriority === "oakland") {
-      if (evType === "sports") baseCap = 8;
       if (evType === "culture") baseCap = 7;
       if (evType === "community") baseCap = 7;
     }

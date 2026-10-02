@@ -612,6 +612,13 @@ function applyStorySeeds_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
 
   var holidaySeeds = {
+    // The city's own days
+    "SecondDawn": {
+      seeds: [
+        { text: "Second Dawn marks the week the city found its voice. Who is speaking up now, and who is listening?", domain: "COMMUNITY", nh: "", priority: 2 },
+        { text: "The city hears itself on Second Dawn. Residents on what gets said out loud now that once went unsaid.", domain: "CULTURE", nh: "", priority: 2 }
+      ]
+    },
     // Major holidays
     "Thanksgiving": {
       seeds: [

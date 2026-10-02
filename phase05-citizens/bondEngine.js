@@ -1177,7 +1177,7 @@ function detectNewBonds_(ctx) {
             nhA || nhB || 'Downtown',
             4,
             currentCycle,
-            'Met during ' + holiday + ' celebrations.',
+            'Met during ' + ((ctx.summary && ctx.summary.holidayLabel) || holiday) + ' celebrations.',
             ctx
           ));
           bondsCreated++;
@@ -1260,7 +1260,7 @@ function detectNewBonds_(ctx) {
             nhA,
             4,
             currentCycle,
-            'Connected during ' + holiday + ' neighborhood gathering.',
+            'Connected during ' + ((ctx.summary && ctx.summary.holidayLabel) || holiday) + ' neighborhood gathering.',
             ctx
           ));
           bondsCreated++;

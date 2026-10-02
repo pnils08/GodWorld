@@ -248,7 +248,10 @@ function textureTriggerEngine_(ctx) {
     cappedPush(makeTrigger('HOLIDAY', '', 'holiday_atmosphere', 'Major holiday atmosphere pervading the city', 'high'));
   }
   if (holiday !== 'none' && holidayPriority === 'oakland') {
-    cappedPush(makeTrigger('FESTIVAL', '', 'oakland_pride', 'Oakland pride and celebration visible everywhere', 'high'));
+    cappedPush(makeTrigger('FESTIVAL', '', 'city_celebration', 'The city marking one of its own days, visible everywhere', 'high'));
+  }
+  if (holiday === 'SecondDawn') {
+    cappedPush(makeTrigger('COMMUNITY', '', 'second_dawn_voices', 'Second Dawn: neighbors telling the city\'s stories out loud', 'moderate'));
   }
 
   if (isFirstFriday) {

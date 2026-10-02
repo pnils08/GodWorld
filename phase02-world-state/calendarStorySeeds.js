@@ -127,6 +127,13 @@ function applySeasonalStorySeeds_(ctx) {
   // MAJOR HOLIDAYS
   // ═══════════════════════════════════════════════════════════════════════════
 
+  if (holiday === "SecondDawn") {
+    seeds.push(
+      seed("The city marks the week it found its voice", "COMMUNITY"),
+      seed("Neighbors tell the city's stories out loud", "CULTURE")
+    );
+  }
+
   if (holiday === "NewYear") {
     seeds.push(
       seed("New Year optimism shapes early conversations", "COMMUNITY"),

@@ -10,6 +10,7 @@ var SIM_HOLIDAYS = {
   19: { name: 'MothersDay', label: "Mother's Day", priority: 'minor', neighborhood: null, type: 'family' },
   25: { name: 'FathersDay', label: "Father's Day", priority: 'minor', neighborhood: null, type: 'family' },
   26: { name: 'SummerSolstice', label: 'Summer Solstice', priority: 'minor', neighborhood: 'Lake Merritt', type: 'seasonal' },
+  27: { name: 'SecondDawn', label: 'Second Dawn', priority: 'oakland', neighborhood: null, type: 'godworld' },
   33: { name: 'BackToSchool', label: 'Back to School', priority: 'minor', neighborhood: null, type: 'civic' },
   38: { name: 'FallEquinox', label: 'Fall Equinox', priority: 'minor', neighborhood: null, type: 'seasonal' },
   44: { name: 'Halloween', label: 'Halloween', priority: 'major', neighborhood: 'Temescal', type: 'celebration' },

@@ -188,6 +188,45 @@ Everything else in today's table leaves it: the real-world political and heritag
 
 **Builder direction, 2026-10-01 22:45 (the position-27 holiday).** Verbatim: "Open to some ideas, this is the day the Claude CLI took over and the project took on a new life." The out-of-world meaning stays out of the world (canon guard: told by what the world gained, never by who built it). Names put to the builder: **Rebirth Day** (his own word), **Second Dawn** (pairs with Creation Day — the world began, then it woke), **Voice Day** (what the world gained that week: the paper's full six desks, the city hearing itself), **The Turning**. **Ruled 2026-10-01 22:56: Second Dawn.** Position 27, priority `oakland`, citywide, told in-world as the week the city found its voice. Ready to build.
 
+#### Second Dawn cut (engine-sheet, 2026-10-02)
+
+**The row.** `27: { name: 'SecondDawn', label: 'Second Dawn', priority: 'oakland', neighborhood: null, type: 'godworld' }`. Citywide is `null`, as on every other citywide holiday (the packet line prints no `@`); `type` has no reader and pairs with Creation Day. `27 % 4 === 3` — never a First Friday. First live Second Dawn: C131 (`((131 − 1) % 52) + 1 = 27`), 21 weekly fires after C110.
+
+**The blast radius is the tier, not the row.** No holiday has carried `oakland` since wave 2, so every `holidayPriority === 'oakland'` branch has been dead; this row wakes all of them for one week a year. Default: wake as written (the tier means "the city's own days", §Task 2 design). Walked, one line each:
+
+| Site | What fires at position 27 | Call |
+|---|---|---|
+| `advanceSimulationCalendar.js:268` | `weatherMood.holidayEnergy` 0.5 | wake |
+| `godWorldEngine2.js:1264` | migration +0–35 (one extra rng draw that week) | wake |
+| `applyWeatherModel.js:867` | `socialInclination` +0.15 | wake |
+| `applySeasonWeights.js:120` | community ×1.4, event ×1.3, cultural ×1.2 | wake |
+| `calendarChaosWeights.js:139` | COMMUNITY ×1.3, CELEBRITY ×1.1 | wake |
+| `applyCityDynamics.js:362`, `:833` | communityEngagement ×1.2, culturalActivity ×1.1; evening base +0.18 arts / +0.12 | wake |
+| `buildCityEvents.js:582`, `buildEveningFamous.js:412` | event count floor 4; famous floor 3 | wake |
+| `generateGenericCitizenMicroEvent.js:422`, `generateGameModeMicroEvents.js:498`, `runAsUniversePipeline.js:484`, `generateMediaModeEvents.js:379`, `generateCivicModeEvents.js:428`, `generateCitizensEvents.js:2194`, `runRelationshipEngine.js:371`, `runCivicRoleEngine.js:278` | event chance +0.008 to +0.02 | wake |
+| `applyNamedCitizenSpotlight.js:304`, `:441` | spotlight +2 once; threshold −1 | wake |
+| `bondPersistence.js:598` | a count of bonds formed on the day (summary only) | wake |
+| `applyMigrationDrift.js:286` | drift +0–5, factor `oakland-holiday-inflow` | wake |
+| `prioritizeEvents.js:217` | non-micro events +2 | wake |
+| `economicRippleEngine.js:455`, `:665`, `:792` | `FESTIVAL_TOURISM` ripple (impact 12 × 1.3, two Cycles, citywide — no Scenes tag for this holiday, so no invented hood); mood +2 | wake; **the ripple's ledger text printed the flag** (`SecondDawn celebration tourism` → `Ripple_Ledger` cause detail) → label |
+| `domainTracker.js:187` | FESTIVAL +2 | wake |
+| `mediaFeedbackEngine.js:593`, `:619`, `:708`, `:791`, `:1139`, `:1363` | buzz +2, a four-line celebrity pool (generic wording), intensity +0.2, narrative `festival_celebration`, city sentiment +0.1, `festival` topic true | wake; sentiment and economic-mood size read on the bench fire |
+| `applyCycleWeight.js:320`, `:416` | score +3, +2 with three or more events | wake; **the reason printed the flag** (`Oakland holiday (SecondDawn)` → `World_Population.cycleWeightReason` and the media packet's `WeightReason:`) → label, and the same for the `major` and `cultural` reasons (`Major holiday (Holiday)` is live today for Christmas) |
+| `filterNoiseEvents.js:130` | hood keep — needs a holiday hood, `null` here | never fires |
+| `filterNoiseEvents.js:159` | caps: sports 8, culture 7, community 7 | **sports cap deleted** — Opening Day's, dropped in wave 2 and missed because it is tier-keyed; the stranded `// Opening Day sports events` comment at `:124` goes too |
+| `textureTriggers.js:250` | `FESTIVAL / oakland_pride / "Oakland pride and celebration visible everywhere"` | **reworded** to `city_celebration` / "The city marking one of its own days, visible everywhere" — the old text reads as the dropped Pride festival; the key has no reader |
+| `buildMediaPacket.js:360` | `OAKLAND CELEBRATION - local pride angle recommended` | **reworded** to `OAKLAND CELEBRATION - the city marking one of its own days`, same reason |
+
+**The flag in prose, every holiday (found on the walk, fixed in the same build).** Wave 1 moved `Cycle_Packet`, desk context and the world summary to the label; these still concatenated the flag into text that reaches a sheet or a packet, for every holiday (`Holiday`, `NewYearsEve`, `MothersDay` live today): `buildMediaPacket.js:77` (`Holiday: <flag> (priority: …)`), `economicRippleEngine.js:431` (`<flag> shopping surge`), `generateMediaModeEvents.js:280-281` and `generateCivicModeEvents.js:317-318` (citizen life lines: "covered the <flag> celebrations", "attended a <flag> civic observance"), `bondEngine.js:1180`, `:1263` (bond notes: "Met during <flag> celebrations."). All read `S.holidayLabel` now, the flag as fallback; `holiday:<flag>` tags are machine keys and stay. Text only — no draw, count or key changes. Left: `compileHandoff.js:689` (off-cycle menu tool, reads the flag off a briefing row) and three `Logger.log` lines.
+
+**Name-keyed maps.** Every pool lookup is guarded (`pool[holiday] &&`), so an unknown name draws nothing and throws nothing. `applyCompressionDigestSummary.js:184` would abbreviate to `SECO` → `"SecondDawn": "DAWN"`. `scripts/validateEdition.js` forbids `CreationDay` in edition prose → `SecondDawn` joins it. `citizenDialMap` / `compressLifeHistory` key on event tags, not holiday names; no new tag is added.
+
+**The telling — thin on purpose.** The tier's own text says "celebration"; nothing says *voice*. Minimum that carries the ruling ("the week the city found its voice") into what the newsroom reads, mirroring Creation Day's sites and nothing from build history: one media-packet hint, one texture trigger, two story seeds (`applyStorySeeds` `holidaySeeds`), one story hook, two seasonal seeds (`calendarStorySeeds`). No citizen event pools, city-event pools or venue lists — Creation Day depth (27 files) is the builder's to ask for; a citizen's own `LifeHistory` will not name the day until then. Morning list carries the lines as written.
+
+**Tests.** `simHolidayCalendar.test.js` 9 → 12: the row; 27 in the no-First-Friday set; a C131 run of the calendar writer and `buildCyclePacket_` (`Holiday: Second Dawn [oakland]`, no `@`, no flag), desk context and world-summary line; the cycle-weight reason at runtime; a source rule that the six prose sites read the label. 34 suites that load a touched file: 0 failed; collisions 0.
+
+**Bench.** SANDBOX resynced from live C109, run forward on PROD's code (@172) to C130, then the build deployed and C131 (position 27) and C132 (position 28, `none` again) fired. Read: the packet calendar block, the tier's visible effects (FESTIVAL trigger, hint, seeds, cycle-weight reason, `DAWN` tag), city sentiment and economic mood against C130, no `SecondDawn` string in any output tab, `Engine_Errors` unchanged.
+
 ## Changelog
 
 - 2026-09-29 (engine-sheet) — Plan filed from builder direction; Task 1 dispatched to codex.
@@ -198,3 +237,4 @@ Everything else in today's table leaves it: the real-world political and heritag
 - 2026-09-30 (engine-sheet) — kimi review folded (`docs/research/2026-09-30-kimi-holiday-task2-design.md`): wave-2 default flag-gated (5 named pools were flag-gated), `runYouthEngine.js:63` the one always-reachable string, third First Friday copy in `buildDeskPackets.js`, month count 47, false-positive class, Creation Day premise corrected, season markers + BackToSchool + Hanukkah held, `cultural` tier extinction and opening-week filter stated, month-index skeleton to the builder.
 - 2026-10-01 (engine-sheet) — Builder direction on the position-27 holiday recorded (the week the project took on a new life); four names put to him, ruling pending.
 - 2026-10-01 (engine-sheet) — Builder ruled the position-27 holiday: **Second Dawn**. Ready to build.
+- 2026-10-02 (engine-sheet) — Second Dawn cut written and built (§Second Dawn cut): the row wakes the `oakland` tier; Opening Day's sports cap and two Pride-reading texts removed from the tier; the holiday flag out of prose at six sites; thin telling (hint, trigger, seeds, hook). Outside review and bench at position 27 pending.

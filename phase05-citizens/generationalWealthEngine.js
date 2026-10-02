@@ -186,6 +186,7 @@ function processGenerationalWealth_(ctx) {
     if (typeof logEngineError_ === 'function') logEngineError_(ctx, 'Phase5-PropertyTax', taxErr);
     else Logger.log('collectPropertyTax_: ' + taxErr.message);
   }
+  if (ENGINE61_DIAG) ENGINE61_DIAG.propertyTax = results.propertyTax; // the web trigger's answer carries it (bench reconciliation)
 
   // Step 3: Process inheritance for recent deaths
   var inheritanceResults = processInheritance_(ctx, cycle);

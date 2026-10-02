@@ -360,9 +360,6 @@ function buildMediaPacket_(ctx) {
   if (holiday !== 'none' && holidayPriority === 'oakland') {
     pkt.push('OAKLAND CELEBRATION - the city marking one of its own days');
   }
-  if (holiday === 'SecondDawn') {
-    pkt.push('SECOND DAWN - the week the city found its voice; the city hearing itself');
-  }
   if (isFirstFriday) {
     pkt.push('FIRST FRIDAY - arts & culture focus');
   }

@@ -382,9 +382,14 @@ Status after Revision 1: mechanism spec complete pending the builder's three rul
 
 **Open sim calls for the builder (revised):** (1) Carmen — `records` or `offices`; (2) the per-reporter list; (3) **publication surface for the journal — Civis's own publication quoted by the business desk (A), or a gated guest column in the Pulse (B).** Write authority is closed: none.
 
+### Builder rulings 2026-10-01 20:20 — all three closed; build dispatched
+
+Carmen = **`offices`**. The per-reporter list **stands as proposed** (§Design table, every row). Journal surface = **(A)** (16:51). Write authority = **none** (Revision 2). Nothing is open; the build runs against §Design + Revision 1 (sourcing modes) and Revision 2 (the Civis Systems Journal). Lanes as written: codex builds both, kimi adversarial-reviews the cut and the first entries, es lands LENS/RULES and the run-cycle step. Briefs: codex build brief (inbox message, deleted by codex on pickup per the inbox convention; its content beyond this plan was the mode→package table above, the worktree rule and the `--dry-run` flag) sent 20:31; codex builds in worktree `/root/GodWorld-pipeline68`, branch `pipeline68-sourcing-modes` — the crons run from the shared tree, so nothing lands on `main` until rb merges after kimi), `docs/for-claude-review/2026-10-01-rb-kimi-review-brief-civis-journal.md` (held in the inbox, sent when codex's DONE file lands; kimi judges three `--dry-run` entries against the C109 audit). es's piece (LENS/RULES + run-cycle step) is on `NEXT[engine-sheet]`.
+
 ## Changelog
 
 - 2026-10-01 (research-build S515) — §Design: five sourcing modes + per-reporter proposal + build spec; §Design: Varek as the Civis node (node-wake spec, write authority open); 13:31 Varek direction captured.
+- 2026-10-01 (research-build S515) — Builder 20:20: Carmen `offices`, list stands; all sim calls closed; codex build brief + kimi review brief written, codex dispatched.
 - 2026-10-01 (research-build S515) — Builder 16:51: journal publishes as Civis's own publication (A), business desk quotes it; offices interviews confirmed allowed (the abstain is a code gap, not a rule).
 - 2026-10-01 (research-build S515) — §Design Revision 2: builder 16:34 — Varek audits the system from inside the world; the Civis Systems Journal (engine_audit → Civis finding → published entry) replaces the node move; write authority closed (none); codex builds, kimi reviews.
 - 2026-10-01 (research-build S515) — §Design Revision 1: codex review folded (2 BLOCK, 6 FIX, 1 NOTE) — Civis move recorded not gated, `office-record` source type, pools fixed before W1, exact street matcher, node replay key, model route decision.

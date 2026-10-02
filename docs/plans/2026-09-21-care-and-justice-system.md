@@ -855,6 +855,34 @@ Writer changes this rests on: (a) L–O stamped (Mechanism 1); (b) a new hospita
 
 **Deploy steps amended:** step (1) carries the two stay keys in place of `careJusticeOtherStayCycles`; step (2) benches four Cycles — bootstrap, two continuations (the cohort window turns over at stay 2), and a forced gap (census phase disabled for one Cycle) — on live-lineage state.
 
+**Census BUILT 2026-10-01 (`7e8baf15`, review fixes `89bc5f83`).** Pure code in `utilities/careJusticeAccounting.js` — `deriveCareJusticeMovements_` (R2-1), `planCareJusticeCensus_` (R2-2 … R2-7), `careJusticeOtherWindow_` (R2-6), `careJusticeWritePlan_` / `careJusticeVerifyBlock_` (R2-8); the sheet I/O is `persistCareJusticeCensus_` in `buildCyclePacket.js`, its own entry `Phase10-CareJusticeCensus` after `Phase10-CyclePacket` at both entry points, skipped on dry-run and replay. Method `cj-2`. `scripts/careJusticeCensus.test.js` 74 through the writer on fake tabs; eight deliberate breaks each caught.
+
+**Bench, SANDBOX @168 = `7e8baf15`, live-synced C109, tab created at 300 rows, stays 2 and 2:**
+
+| Cycle | What | Result |
+|---|---|---|
+| C110 | first census | 216 rows, balanced; POP-00801 a correction (Rockridge, `unclassified`, one bed); hospital closes 77 (1 tracked + 76), custody 68; covered population 43,423; 205 s |
+| C111 | ordinary | opens 77, closes 76; one seed cohort (38) leaves; rows 218–433 written past the 300-row grid with no error; 180 s |
+| C112 | ordinary | POP-00801 discharged — exits 39 (38 + 1), tracked 0; 157 s |
+| C113 | census forced to fail (`careJusticeOtherHospitalStayCycles` 0) | one `Phase10-CareJusticeCensus` Engine_Errors row naming the key and the value; the Cycle completed; no census rows; 193 s |
+| C114 | restart | C113 written as 216 `unavailable` rows, blank; C114 `incomplete` in both systems, opening 73 = C112's closing, balanced; 164 s |
+
+Engine_Errors 4 → 5, the one forced row. Not reached on the bench (tests only): a tracked admission or arrest inside a census Cycle, a transfer, a repair row, a re-run of a written Cycle.
+
+**Diff + design review (codex, `docs/research/2026-10-01-codex-task8-census-diff.md`): HOLD — five findings, each checked against code.**
+
+| # | Finding | Decision |
+|---|---|---|
+| 1 | A valid same-Cycle close and reopen reads as a failed write — the exit check looked at the citizen's final open row | Fixed: an exit has landed when that citizen's row closed this Cycle (`closedByPop`); hospital and judicial tests |
+| 2 | A packet phase that throws before its writers leaves no status, and the census read that as `complete` | Fixed: only an explicit `ok` is a clean writer |
+| 3 | A stray cell far below the data moves `getLastRow`, pushes the last block out of the ten-block read and restarts the stock as a first census | Fixed: the tail is anchored on the last row carrying a Cycle in column A; test with a cell at row 3,000 |
+| 4 | A ledger read that fails loses the whole census | Fixed: the read is under retry and a failure is that system `unavailable` |
+| 5 | The fake sheet has no grid limit | Answered by the bench: a 300-row tab holds 1,080 rows after five Cycles |
+
+Its disposition of its own six open items: 1, 2, 3 closed; 4 and 5 closed with findings 3 and 5 above; 6 extended by the four new tests.
+
+**PROD state.** The builder ran `clasp push` at 21:55 from the repo root: live = `7e8baf15`'s engine code on all 167 files (pull-back identical) — the writer side **and** the census, ahead of the review fixes. PROD has no `Care_Justice_Census` tab and no stay keys, so on that code the census step would log one `Phase10-CareJusticeCensus` row a Cycle and write nothing. Owed before the C110 fire (2026-10-04): the fix commit pushed, the tab and the two keys on PROD.
+
 **Review of Revision 2 (agy 2026-10-01, `output/antigravity/2026-10-01-review-task8-rev2.md`, HOLD — six findings, each checked against code; the text above is amended where a finding held).**
 
 | # | Finding | Check | Decision |
@@ -1233,3 +1261,4 @@ Commit: Income, `careerRecordLayoff_` with "Dismissed by <business> after <n> we
 - 2026-10-01 (engine-sheet) — Task 8 Revision 2: agy confirm pass on the rewritten blocks (HOLD, four points, walked): missing Cycles are estimated at the first numbered Cycle after them (stable cohort), a tab holding a later Cycle is refused, locate-compare-write is the retried unit; R2-7 holds. Writer side built with tests (L–O stamps, reconcile ids, conversion stamps, one row per `SourceEventId`, row-id suffix, F1 shared helper) — bench and diff review next; the census itself waits on the builder's city-scale ruling.
 - 2026-10-01 (engine-sheet) — Task 8 writer side bench-proven (SANDBOX @166 C110–C113 with a bench-only exposure probe: ambulance admission stamped L–O, eight cases opened; @167 = `a60928dd` C110 clean on a fresh resync) and diff-reviewed (kimi SHIP, one medium fixed). PROD push refused from the seat by the permission classifier — builder-run; smoke layer and pointers follow the push.
 - 2026-10-01 (engine-sheet) — Builder ruled 21:33: the higher bed count applied only if the whole city were tracked; it is not, so the census stays at the 22-hood scale (R2-4) and no city-scale capacity key is built. Task 8 census build unblocked; stays start 2 and 2.
+- 2026-10-01 (engine-sheet) — Task 8 census built (`7e8baf15`), benched C110–C114 on SANDBOX @168 (first census, two ordinary, a forced failure, the restart — all balanced), reviewed by codex (HOLD, five findings; four fixed in `89bc5f83`, the fifth answered by the bench). The builder's 21:55 push put `7e8baf15` on PROD; the fix commit, the tab and the two stay keys are owed before C110.

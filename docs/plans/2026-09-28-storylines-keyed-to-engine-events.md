@@ -151,6 +151,8 @@ pointers:
 | week of 2026-10-05 — **REVIEW** | first read with the builder: did IDs attach, did rows land, did any stage close falsely, did the running-story lines show up in what writers wrote | all of the above |
 | after four cycles (C113) | how many storylines went uncovered (`Articles 0`), how many articles attached, whether writers used the running-story lines. Decides Task 7 and reporter-chased storylines | `Storyline_Ledger` |
 
+**For the review (raised by the builder 2026-10-02, after the old tabs were deleted):** the engine's seed scorer still carries a storyline boost and an arc-bound byline (`applyStorySeeds.js` → `priorityEngine.js` `computeArcMultiplier_` / `isConsequenceFloor_`, `bylineEngine.js` `loadArcBinding_`) that read `Storyline_Tracker` rows and now get an empty list every Cycle. The builder leans toward keeping the idea — "how else would the journalist know" — and the journalist's knowing is what this plan's running-stories lines already deliver. The question for the review is the other half: should a seed tied to a running story in this registry rank higher and keep its reporter? If yes, the scorer reads the registry (engine ID, stage, age) in place of the deleted tab; if no, the dead scoring code is removed. Not built before the review (the hold above).
+
 **What the ledger now is:** a history of engine events — one row per crisis arc and per initiative stage, with the cycle it started, the status the engine gave it, and the coverage it got.
 
 ## What was found (audit 2026-09-28, the reason for this plan)

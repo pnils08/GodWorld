@@ -51,6 +51,50 @@ function translate(pattern) {
   };
   return { target, text: table[pattern.type] || 'An unresolved signal in the city instrument needs a closer read' + where + '.' };
 }
+function beatDeltas(beats, previousCycle) {
+  if (!Number.isInteger(previousCycle) || previousCycle < 1) return [];
+  const prev = path.join(beats, 'prev');
+  if (Number(readJson(path.join(prev, 'meta.json')).cycle) !== previousCycle) {
+    throw new Error('previous beat dump cycle mismatch: C' + previousCycle);
+  }
+  const tab = 'Neighborhood_Demographics.jsonl';
+  if (!fs.existsSync(path.join(beats, tab)) || !fs.existsSync(path.join(prev, tab))) {
+    throw new Error('demographics beat dump missing for previousCycle comparison');
+  }
+  const oldRows = new Map(lines(path.join(prev, tab))
+    .filter(row => row.Neighborhood).map(row => [String(row.Neighborhood).trim(), row]));
+  const numeric = value => value == null || String(value).trim() === '' ? null : Number(value);
+  const deltas = [];
+  for (const row of lines(path.join(beats, tab))) {
+    const place = String(row.Neighborhood || '').trim();
+    const old = oldRows.get(place);
+    if (!place || !old) continue;
+    const changes = [];
+    for (const [column, label] of [['Students', 'student'], ['Adults', 'adult'], ['Seniors', 'senior'], ['Sick', 'sick resident']]) {
+      const now = numeric(row[column]);
+      const before = numeric(old[column]);
+      if (!Number.isFinite(now) || !Number.isFinite(before) || now === before) continue;
+      changes.push(label + ' presence ' + (now > before ? 'rose' : 'fell'));
+    }
+    if (changes.length) deltas.push(place + ': ' + changes.join(', '));
+  }
+  const crimeTab = 'Crime_Metrics.jsonl';
+  if (fs.existsSync(path.join(beats, crimeTab)) && fs.existsSync(path.join(prev, crimeTab))) {
+    const oldCrime = new Map(lines(path.join(prev, crimeTab))
+      .filter(row => row.Neighborhood).map(row => [String(row.Neighborhood).trim(), row]));
+    for (const row of lines(path.join(beats, crimeTab))) {
+      const place = String(row.Neighborhood || '').trim();
+      const old = oldCrime.get(place);
+      if (!place || !old) continue;
+      const now = numeric(row.IncidentCount);
+      const before = numeric(old.IncidentCount);
+      if (Number.isFinite(now) && Number.isFinite(before) && now !== before) {
+        deltas.push(place + ': recorded incidents ' + (now > before ? 'rose' : 'fell'));
+      }
+    }
+  }
+  return deltas;
+}
 function loadFrame(cycle, root = ROOT) {
   if (!Number.isInteger(cycle) || cycle < 1) throw new Error('valid --cycle N required');
   const audit = readJson(path.join(root, 'output', 'engine_audit_c' + cycle + '.json'));
@@ -60,6 +104,8 @@ function loadFrame(cycle, root = ROOT) {
       Number(meta.prevCycle) !== Number(audit.previousCycle)) {
     throw new Error('audit/beats cycle mismatch: C' + cycle + ' requires matching cycle and previousCycle');
   }
+  const previousCycle = Number(audit.previousCycle);
+  const deltas = beatDeltas(beats, previousCycle);
   const names = new Set(['Oakland', 'Civis Systems', 'Elias Varek', 'Oaks', 'Paulson']);
   for (const tab of ['Neighborhood_Demographics', 'Civic_Office_Ledger', 'Initiative_Tracker', 'Business_Ledger']) {
     for (const row of lines(path.join(beats, tab + '.jsonl'))) {
@@ -76,7 +122,7 @@ function loadFrame(cycle, root = ROOT) {
   for (const f of findings) if (f.target && !names.has(f.target)) {
     throw new Error('audit target absent from current beat dump: ' + f.target);
   }
-  return { cycle, previousCycle: Number(audit.previousCycle), findings, names };
+  return { cycle, previousCycle, findings, names, deltas };
 }
 function assertEntry(prose, frame, selectedIds) {
   const failures = [];
@@ -165,6 +211,8 @@ function promptFor(frame, prior, root = ROOT) {
   ].join('\n\n');
   const user = 'CURRENT CYCLE: C' + frame.cycle + '\nCIVIS FINDINGS:\n' +
     frame.findings.map(f => f.id + ': ' + f.civisFinding).join('\n') +
+    '\nPREVIOUS-CYCLE BEAT MOVEMENT (qualitative; describe only what serves a finding):\n' +
+    (frame.deltas.length ? frame.deltas.join('\n') : '(no comparable movement)') +
     '\nALLOWED NAMES: ' + [...frame.names].sort().join('; ') +
     '\nYOUR PRIOR JOURNAL ENTRIES (memory, not new facts):\n' +
     (prior.length ? require('../lib/memoryFence').wrap(prior.join('\n---\n'), 'citizen-page-journal') : '(none)');

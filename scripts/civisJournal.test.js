@@ -23,7 +23,16 @@ fs.writeFileSync(path.join(output, 'engine_audit_c999.json'), JSON.stringify({
   ]
 }));
 fs.writeFileSync(path.join(beats, 'Neighborhood_Demographics.jsonl'),
-  JSON.stringify({ Neighborhood: 'Test District' }) + '\n');
+  JSON.stringify({ Neighborhood: 'Test District', Students: '10', Adults: '20', Seniors: '5' }) + '\n');
+const prev = path.join(beats, 'prev');
+fs.mkdirSync(prev);
+fs.writeFileSync(path.join(prev, 'meta.json'), JSON.stringify({ cycle: 998 }));
+fs.writeFileSync(path.join(prev, 'Neighborhood_Demographics.jsonl'),
+  JSON.stringify({ Neighborhood: 'Test District', Students: '9', Adults: '21', Seniors: '5' }) + '\n');
+fs.writeFileSync(path.join(beats, 'Crime_Metrics.jsonl'),
+  JSON.stringify({ Neighborhood: 'Test District', IncidentCount: '4' }) + '\n');
+fs.writeFileSync(path.join(prev, 'Crime_Metrics.jsonl'),
+  JSON.stringify({ Neighborhood: 'Test District', IncidentCount: '5' }) + '\n');
 for (const tab of ['Civic_Office_Ledger', 'Initiative_Tracker', 'Business_Ledger']) {
   fs.writeFileSync(path.join(beats, tab + '.jsonl'), '');
 }
@@ -31,7 +40,15 @@ for (const tab of ['Civic_Office_Ledger', 'Initiative_Tracker', 'Business_Ledger
 const frame = journal.loadFrame(999, root);
 assert.equal(frame.findings.length, 3);
 assert.ok(frame.names.has('Test District'));
+assert.deepEqual(frame.deltas, [
+  'Test District: student presence rose, adult presence fell',
+  'Test District: recorded incidents fell',
+]);
 const prompt = journal.promptFor(frame, [], root);
+assert.match(prompt.user, /PREVIOUS-CYCLE BEAT MOVEMENT[\s\S]*student presence rose, adult presence fell/);
+fs.writeFileSync(path.join(prev, 'meta.json'), JSON.stringify({ cycle: 997 }));
+assert.throws(() => journal.loadFrame(999, root), /previous beat dump cycle mismatch/);
+fs.writeFileSync(path.join(prev, 'meta.json'), JSON.stringify({ cycle: 998 }));
 for (const name of ['IDENTITY.md', 'LENS.md', 'RULES.md']) {
   assert.ok(prompt.system.includes('TEST-ONLY ' + name + ' voice context'));
 }

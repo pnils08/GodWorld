@@ -686,7 +686,11 @@ function buildSection01_EditorialHeader_(data, cycle) {
   if (data.briefingRow) {
     var holiday = data.briefingRow.holiday || 'none';
     if (holiday !== 'none') {
-      lines.push('Holiday: ' + holiday + ' [' + (data.briefingRow.holidayPriority || '') + ']');
+      var holidayText = holiday;   // the briefing row carries the flag; print the table's label
+      for (var hPos in SIM_HOLIDAYS) {
+        if (SIM_HOLIDAYS.hasOwnProperty(hPos) && SIM_HOLIDAYS[hPos].name === holiday) holidayText = SIM_HOLIDAYS[hPos].label;
+      }
+      lines.push('Holiday: ' + holidayText + ' [' + (data.briefingRow.holidayPriority || '') + ']');
     } else {
       lines.push('Holiday: none');
     }

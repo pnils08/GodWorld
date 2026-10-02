@@ -260,7 +260,7 @@ function applyCivicLoadIndicator_(ctx) {
   
   if (highStrainHolidays.indexOf(holiday) >= 0) {
     score += 3;
-    factors.push(holiday + ' public load');
+    factors.push((S.holidayLabel || holiday) + ' public load');
     calendarFactors.push('high-strain-holiday');
   }
 

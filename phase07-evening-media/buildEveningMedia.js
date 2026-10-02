@@ -179,7 +179,7 @@ function buildEveningMedia_(ctx) {
     tv.push(pickRandom(hm.tv));
     movies.push(pickRandom(hm.movies));
     streaming = streaming || hm.streaming;
-    specialProgramming = holiday + " programming";
+    specialProgramming = (S.holidayLabel || holiday) + " programming";
 
     // Major holidays get extra slots
     if (holidayPriority === "major") {

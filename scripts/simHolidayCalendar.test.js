@@ -216,20 +216,36 @@ test('Second Dawn: position 27, the city\'s-own tier, citywide, label in the pac
   assert(header.some(line => line.includes('Y3C27') && line.includes('holiday=Second Dawn')), 'world summary calendar line');
 });
 
-test('engine prose built from the holiday prints the label, never the flag (source rule)', () => {
-  // The flag is a machine key ("holiday:" tags, map lookups, log lines); prose that reaches a sheet or a packet uses S.holidayLabel.
-  const sites = {
-    'phase09-digest/applyCycleWeight.js': /holiday \(' \+ holiday \+/,
-    'phase06-analysis/economicRippleEngine.js': /description: cal\.holiday \+/,
-    'phase07-evening-media/buildMediaPacket.js': /'Holiday: ' \+ holiday \+/,
-    'phase05-citizens/generateMediaModeEvents.js': /ev\("[^"]*" \+ holiday \+/,
-    'phase05-citizens/generateCivicModeEvents.js': /ev\("[^"]*" \+ holiday \+/,
-    'phase05-citizens/bondEngine.js': /during ' \+ holiday \+/
+test('no engine line builds prose from the bare holiday flag (source rule, every engine file)', () => {
+  // The flag is a machine key. Prose that reaches a sheet, a packet or a life line reads S.holidayLabel.
+  // Allowed: `holiday:<flag>` tags, log lines, thrown messages, and the named machine keys below.
+  const bare = /(["'`]\s*\+\s*(?:S\.|s\.|cal\.|cc\.|calendarContext\.|originalSeed\.)?holiday\b(?![A-Za-z:]))|(\b(?:S\.|s\.|cal\.|cc\.)?holiday\s*\+\s*["'`])/;
+  const allowed = [
+    /holiday:["']\s*\+\s*holiday/,                 // event tags
+    /Logger\.log|throw new Error/,                 // logs and errors
+    /^\s*' \| (Holiday|Calendar): ' \+/,           // continuation lines of two Logger.log calls (v3DomainWriter, v3Integration)
+    /'- Holiday: ' \+ cal\.holiday/,               // mediaRoomIntake log summary
+    /holiday \+ '-travel'/,                        // migration factor key
+    /differences\.push\('Holiday: '/               // cycleModes replay diagnostic
+  ];
+  const offenders = [];
+  const walk = dir => {
+    for (const entry of fs.readdirSync(path.join(root, dir), { withFileTypes: true })) {
+      const rel = dir + '/' + entry.name;
+      if (entry.isDirectory()) { walk(rel); continue; }
+      if (!/\.js$/.test(entry.name) || /\.test\.js$/.test(entry.name)) continue;
+      fs.readFileSync(path.join(root, rel), 'utf8').split('\n').forEach((line, i) => {
+        if (!bare.test(line) || /^\s*(\/\/|\*)/.test(line)) return;
+        if (allowed.some(rule => rule.test(line))) return;
+        offenders.push(rel + ':' + (i + 1) + ' ' + line.trim().slice(0, 90));
+      });
+    }
   };
-  for (const [file, bare] of Object.entries(sites)) {
-    const src = fs.readFileSync(path.join(root, file), 'utf8');
-    assert(!bare.test(src), 'bare holiday flag in prose: ' + file);
-    assert(/holidayLabel/.test(src), 'label not read: ' + file);
+  fs.readdirSync(root).filter(d => /^phase\d\d-/.test(d)).concat(['utilities']).forEach(walk);
+  assert.deepStrictEqual(offenders, []);
+  // the rule bites: the pre-fix line shapes are caught
+  for (const was of ["reasons.push('Oakland holiday (' + holiday + ')');", "holiday + ' observance citywide.'", 'specialProgramming = holiday + " programming";', "{ description: cal.holiday + ' shopping surge' }"]) {
+    assert(bare.test(was) && !allowed.some(rule => rule.test(was)), 'rule misses: ' + was);
   }
 });
 

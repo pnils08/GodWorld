@@ -380,7 +380,7 @@ function storyHookEngine_(ctx) {
       'HOLIDAY',
       holidayNeighborhood || '',
       2,
-      holiday + ' observance citywide. Feature opportunity: How Oakland celebrates. Human interest angles available.',
+      (S.holidayLabel || holiday) + ' observance citywide. Feature opportunity: How Oakland celebrates. Human interest angles available.',
       null,
       'holiday'
     ));

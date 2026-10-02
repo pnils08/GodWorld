@@ -262,4 +262,38 @@ test('the cycle-weight reason names Second Dawn by its label (runtime)', () => {
   assert(!/SecondDawn/.test(reason), 'flag in reason: ' + reason);
 });
 
+test('hook, civic-load factor and evening programming print the label (runtime)', () => {
+  const mk = () => { const sb = { Logger: { log: () => {} }, Utilities: { getUuid: () => 'u-xxxxxxxx' }, safeRand_: () => () => 0.5, console }; vm.createContext(sb); return sb; };
+  const load = (sb, rel) => vm.runInContext(fs.readFileSync(path.join(root, rel), 'utf8'), sb, { filename: rel });
+  const summary = (flag, label, priority) => ({ absoluteCycle: 155, cycleOfYear: 51, cycleId: 155, holiday: flag, holidayLabel: label, holidayPriority: priority,
+    season: 'Winter', sportsSeason: 'off-season', storyHooks: [], eventArcs: [], worldEvents: [], citizenEvents: [], cityDynamics: { sentiment: 0.1 }, weather: { impact: 1, type: 'clear' } });
+  const text = hooks => hooks.map(h => String(h.text || h.description || h.hookText || '')).join('\n');
+
+  const hookSb = mk();
+  for (const rel of ['utilities/rosterLookup.js', 'phase06-analysis/applyShockMonitor.js', 'phase07-evening-media/storyHook.js']) load(hookSb, rel);
+  const xmas = { config: { cycleCount: 155 }, summary: summary('Holiday', 'Christmas', 'major') };
+  hookSb.storyHookEngine_(xmas);
+  assert(/Christmas observance citywide/.test(text(xmas.summary.storyHooks)), 'major hook: ' + text(xmas.summary.storyHooks).slice(0, 200));
+  assert(!/Holiday observance/.test(text(xmas.summary.storyHooks)));
+  const dawn = { config: { cycleCount: 131 }, summary: summary('SecondDawn', 'Second Dawn', 'oakland') };
+  hookSb.storyHookEngine_(dawn);
+  assert(/Second Dawn: the week the city found its voice/.test(text(dawn.summary.storyHooks)), 'Second Dawn hook missing');
+  assert(!/SecondDawn/.test(text(dawn.summary.storyHooks)), 'flag in a hook');
+  const plain = { config: { cycleCount: 132 }, summary: summary('none', 'none', 'none') };
+  hookSb.storyHookEngine_(plain);
+  assert(!/Second Dawn/.test(text(plain.summary.storyHooks)), 'Second Dawn hook on a plain week');
+
+  const civicSb = mk();
+  for (const rel of ['phase06-analysis/applyShockMonitor.js', 'phase06-analysis/applyCivicLoadIndicator.js']) load(civicSb, rel);
+  const nye = { config: { cycleCount: 156 }, ss: { getSheetByName: () => null }, summary: summary('NewYearsEve', "New Year's Eve", 'major') };
+  civicSb.applyCivicLoadIndicator_(nye);
+  assert(nye.summary.civicLoadFactors.includes("New Year's Eve public load"), 'civic factors: ' + JSON.stringify(nye.summary.civicLoadFactors));
+
+  const mediaSb = mk();
+  load(mediaSb, 'phase07-evening-media/buildEveningMedia.js');
+  const eve = { config: { cycleCount: 155 }, rng: () => 0.5, ss: { getSheetByName: () => null }, summary: summary('Holiday', 'Christmas', 'major') };
+  mediaSb.buildEveningMedia_(eve);
+  assert.strictEqual(eve.summary.eveningMedia.specialProgramming, 'Christmas programming');
+});
+
 console.log(passed + ' tests passed');

@@ -126,7 +126,7 @@ node scripts/dumpLedger.js {XX} --quiet
 node scripts/dumpBeatTabs.js {XX} --quiet
 ```
 
-**Gate:** `output/beats/meta.json` shows `"cycle": {XX}` and one entry under `rows` per tab in `dumpBeatTabs.js` (22 at C108); a missing tab aborts the script (schema event, not a soft skip).
+**Gate:** `output/beats/meta.json` shows `"cycle": {XX}` and one entry under `rows` per tab in `dumpBeatTabs.js` (25 from C110: `City_Treasury`, `Judicial_Ledger`, `Care_Justice_Census` joined the optional list 2026-10-02); a missing tab aborts the script (schema event, not a soft skip).
 
 ### Step 5.58: Civis Systems Journal (pipeline.68)
 

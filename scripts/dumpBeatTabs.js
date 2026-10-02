@@ -72,6 +72,12 @@ const OPTIONAL_TABS = [
   'Civic_Office_Ledger',      // Carmen / Jax — office holders, approvals, Status=scandal
   'Election_Log',             // Carmen — outcomes and margins
   'Reflection_Intake',        // civic.38 — Civic visibility only; never petition signatures
+  // engine.254 Task 10 — the city's money, the court and the care/custody trail.
+  // All three are cumulative (Cycle-stamped rows); empty on the live sheet
+  // until their first fire, and an empty tab dumps as an empty file.
+  'City_Treasury',            // Carmen / business — Cycle · Entry · Amount · Counterparty · BalanceAfter · Note
+  'Judicial_Ledger',          // Rachel / Carmen — every case: charge, status, outcome, cycles held
+  'Care_Justice_Census',      // Rachel / Lila / Maria — per-hood trail: intakes, occupancy, beds (tracked vs other residents)
 ];
 
 const args = process.argv.slice(2);

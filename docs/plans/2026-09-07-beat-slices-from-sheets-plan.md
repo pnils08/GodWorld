@@ -443,6 +443,10 @@ Rulings: move the mislinked citizens; audit every citizen row for job vs employe
 After the mint: OPD 15 tracked (5 existing + 10), OFD 13 (2 + 11), OARI 11 (director + Okoro + 9 — three teams of three across the three pilot hoods — West Oakland dispatch-live, East Oakland deploying with training at C110, Fruitvale the D5 pilot district; canon states 18 positions, so nine is half the positions filled). One in-world line each in `CitizenBio`. Roster rows for the new mints come from `linkCitizensToEmployers.js --fill-blanks-only` after C110 — `--dry-run` first; never run it bare, the default mode rewrites every `EmployerBizId` from the mapping and would undo every hand fix above.
 
 
+### Builder go 2026-10-02 01:20 — doctors and school command (24 authored staff)
+
+The live ledger had 0 physicians at Oakland Hospital (BIZ-00015, 70 tracked workers) and no school command at Oakland Unified (BIZ-00016, 5,201 headcount, 11 active classroom teachers). Same pattern as police and fire: 24 authored rows queued on `Advancement_Intake1` rows 179–202 for the C110 mint, ClockMode ENGINE, employer carried. Hospital 12: Chief Medical Officer, Chief of Emergency Medicine, Chief of Surgery (Tier 3), nine line physicians (Tier 4). Schools 12: Superintendent, Deputy Superintendent, two principals, Special Education Director (Tier 3), seven teachers, counselor and nurse (Tier 4). Names checked against the 963 ledger rows and the queue (no duplicates; two hyphenates renamed off existing Delacroix and Cho families). Post-fire steps are the same as the 30 staff above. Not done, a sim call: a school board as Civic_Office_Ledger rows.
+
 ## Changelog
 
 - 2026-10-01 (research-build S519) — Builder 23:25 rulings executed: six department moves, four relinks, four office rows, speaker name; 60 of 65 misplaced employers restored by hand (Haiku pass discarded), 5 Tier 1–2 held; engine.278 filed; 30 staff authored for kimi review.

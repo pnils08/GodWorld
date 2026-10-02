@@ -49,6 +49,7 @@ check('1.1 a business is filed under the field its Sector reads as', fieldOfBiz(
 check('1.2 a sports business and a Sector with no field sit in no pool', fieldOfBiz('BIZ-K') === null && fieldOfBiz('BIZ-L') === null);
 check('1.3 the hood rides with the business', pool.byField['Construction & Baylight'].find(b => b.id === 'BIZ-F').hood === 'Temescal');
 check('1.4 the four keyword buckets are gone', pool.pools === undefined);
+check('1.4b each business\'s field is readable by id (the tag stamp reads it)', pool.fieldById['BIZ-B'] === 'Government & Civic' && pool.fieldById['BIZ-K'] === undefined);
 check('1.5 stated headcount is kept for the room test; a blank count reads as no room', pool.statedById['BIZ-I'] === 6 &&
   E.buildMintBizPool_(ssOf([BIZ[0], ['BIZ-Z', 'Blank Co', 'Retail', 'Temescal', '']])).statedById['BIZ-Z'] === null);
 check('1.6 a missing Business_Ledger gives no pool', E.buildMintBizPool_({ getSheetByName: () => null }) === null);

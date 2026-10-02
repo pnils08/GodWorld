@@ -341,9 +341,11 @@ console.log('\n9. engine.278 — the minted row carries the pick (field employer
   add('Pia', 'Plumber'); add('Tad', 'Taxi driver'); add('Cleo', 'Climate Adaptation Specialist');
   const carriedSE = {}; carriedSE[qc('EmployerBizId')] = 'SELF_EMPLOYED'; add('Sol', 'Plumber', carriedSE);
   add('Ret', 'Retired');
+  const carriedCity = {}; carriedCity[qc('EmployerBizId')] = 'BIZ-00902'; add('Dot', 'Detective', carriedCity);
   const before = w.ctx.ledger.rows.length;
   E.processAdvancementRows_(w.ctx, 'C' + CYCLE, CYCLE);
-  const [pia, tad, cleo, sol, ret] = w.ctx.ledger.rows.slice(before);
+  const [pia, tad, cleo, sol, ret, dot] = w.ctx.ledger.rows.slice(before);
+  check('a title the catalog does not know takes the field of the tracked business it was minted into', FIELD.roleFieldOf_('Detective') === null && dot && dot[col('EmployerBizId')] === 'BIZ-00902' && dot[col('SkillTags')] === 'Government & Civic', dot && (dot[col('EmployerBizId')] + '/' + dot[col('SkillTags')]));
   check('a retiree is minted with no employer and no seeking-work line', ret && ret[col('RoleType')] === 'Retired' && ret[col('EmployerBizId')] === '' && !/Seeking work/.test(ret[col('LifeHistory')]), ret && (ret[col('RoleType')] + '/' + ret[col('EmployerBizId')]));
   check('a Plumber is minted at the hood\'s construction employer, never City Hall or the shop', pia && pia[col('EmployerBizId')] === 'BIZ-00901', pia && pia[col('EmployerBizId')]);
   check('…tagged with the role\'s own field, not a bucket', pia && pia[col('SkillTags')] === FIELD.roleFieldOf_('Plumber') && pia[col('SkillTags')] !== 'Small Business', pia && pia[col('SkillTags')]);

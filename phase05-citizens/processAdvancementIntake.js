@@ -960,10 +960,15 @@ function processAdvancementRowsBody_(ctx, now, cycle, log) {
       // citizen from birth. engine.278: the tag is the role's own catalog field
       // (roleFieldOf_, the resolver the matcher and the pay engine read) — the
       // four-bucket map tagged every trade and kitchen job 'Small Business'. A
-      // role with no field stays untagged (blank is honest; the matcher skips it).
+      // title the catalog does not know (Detective, Pediatrician, Battalion Chief)
+      // takes the field of the tracked business it was minted into; with neither,
+      // the row stays untagged (blank is honest; the matcher skips it).
       var lSkillTags = findColByName_(ledgerHeaders, 'SkillTags');
       if (lSkillTags >= 0 && !newRow[lSkillTags]) {
         var mintField = (typeof roleFieldOf_ === 'function') ? roleFieldOf_(newRoleType) : null;
+        if (!mintField && lEmployerBiz >= 0 && mintBizPool && mintBizPool.fieldById) {
+          mintField = mintBizPool.fieldById[String(newRow[lEmployerBiz] || '').trim()] || null;
+        }
         if (mintField) newRow[lSkillTags] = mintField;
       }
       // Phase 42 §5.6 (impl #18): push new row to ctx.ledger.rows; Phase 10
@@ -1499,7 +1504,7 @@ function buildMintBizPool_(ss) {
     }
     if (bId < 0 || bSector < 0) return null;
     var catFn = (typeof sectorCategory_ === 'function') ? sectorCategory_ : null;
-    var byField = {};
+    var byField = {}, fieldById = {};
     var statedById = {};
     for (var r = 1; r < bizData.length; r++) {
       var id = String(bizData[r][bId] || '').trim();
@@ -1508,12 +1513,13 @@ function buildMintBizPool_(ss) {
       if (field) {
         if (!byField[field]) byField[field] = [];
         byField[field].push({ id: id, hood: bHood >= 0 ? String(bizData[r][bHood] || '').trim() : '' });
+        fieldById[id] = field;
       }
       var rawCount = bCount >= 0 ? bizData[r][bCount] : '';
       statedById[id] = (rawCount === '' || rawCount === null || rawCount === undefined || isNaN(Number(rawCount)))
         ? null : Number(rawCount);
     }
-    return { byField: byField, statedById: statedById };
+    return { byField: byField, fieldById: fieldById, statedById: statedById };
   } catch (e) {
     Logger.log('buildMintBizPool_: Business_Ledger read failed (' + e.message + ') — mint employer skipped');
     return null;

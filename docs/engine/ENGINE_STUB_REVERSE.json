@@ -2,7 +2,7 @@
   "generated": "2026-10-02",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 180,
-  "functionsMapped": 1558,
+  "functionsMapped": 1564,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -195,6 +195,14 @@
         "phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_"
       ],
       "readers": [
+        "phase05-citizens/bondEngine.js::detectNewBonds_",
+        "phase05-citizens/generateCivicModeEvents.js::generateCivicModeEvents_",
+        "phase05-citizens/generateMediaModeEvents.js::generateMediaModeEvents_",
+        "phase06-analysis/applyCivicLoadIndicator.js::applyCivicLoadIndicator_",
+        "phase06-analysis/economicRippleEngine.js::detectCalendarRipples_",
+        "phase07-evening-media/buildEveningMedia.js::buildEveningMedia_",
+        "phase07-evening-media/storyHook.js::storyHookEngine_",
+        "phase09-digest/applyCycleWeight.js::applyCycleWeight_",
         "phase10-persistence/buildCyclePacket.js::buildCyclePacket_"
       ]
     },
@@ -3444,6 +3452,12 @@
         "phase05-citizens/generationalWealthEngine.js::processBankRate_"
       ]
     },
+    "jobLosses": {
+      "writers": [],
+      "readers": [
+        "phase05-citizens/generationalWealthEngine.js::processMoneyLoop_"
+      ]
+    },
     "homesPurchasedByLine": {
       "writers": [
         "phase05-citizens/generationalWealthEngine.js::trackHomeOwnership_"
@@ -4398,6 +4412,7 @@
         "phase01-config/engine94SheetContract.js::ensureEngine221Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine272Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine275Config_",
+        "phase01-config/engine94SheetContract.js::ensureEngine276Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine94SheetContract_",
         "phase01-config/engine94SheetContract.js::ensureEngine96Config_",
         "phase01-config/godWorldEngine2.js::closeCycleFire_",

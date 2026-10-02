@@ -1306,6 +1306,7 @@ function serializeDialState_(c) {
   if (c.maneuver) o.maneuver = c.maneuver; // engine.157 posture memory {p, g, a, c} — additive, never wiped
   if (c.pressure) o.pressure = c.pressure; // engine.201 W1f per-cause pressure run {cause:{n,l}} — written by emitPressureTag_ in Phase 5
   if (c.wear) o.wear = c.wear; // engine.272 integrity wear {d, l} — points worn off, last step Cycle
+  if (c.debtDefault) o.debtDefault = c.debtDefault; // engine.276 default mark {l, n} — written by the money loop in Phase 5, read by the home roll
   return JSON.stringify(o);
 }
 

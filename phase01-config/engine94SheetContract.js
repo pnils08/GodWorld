@@ -284,6 +284,32 @@ function ensureEngine272Config_(ss) {
   return { configSeeded: plan.additions.length };
 }
 
+// engine.276 — debt follows net worth. The yardstick, both rates, the drag cap and
+// the ending are the builder's dials; the starting values were measured on live C109
+// rows (care-and-justice plan §engine.276 cut).
+var ENGINE276_CONFIG_SEEDS = [
+  ['debtLineMultiple', 1, 'engine.276 the debt line = this many years of the hood\'s Neighborhood_Map MedianIncome. Net worth under it, debt leans up; over it, debt leans down', 0.1, 10, false],
+  ['debtRiseRate', 0.02, 'engine.276 chance per Cycle that debt goes up one level at net worth zero; shrinks to nothing as net worth nears the line; times the hood credit factor', 0, 1, false],
+  ['debtFallRate', 0.08, 'engine.276 chance per Cycle that debt goes down one level at twice the line or more; shrinks to nothing as net worth nears the line from above', 0, 1, false],
+  ['debtDragCapShare', 0.5, 'engine.276 the most a week\'s debt drag can take, as a share of what the citizen saved that week — below 1 a debtor always puts something by', 0, 1, false],
+  ['debtDefaultCycles', 12, 'engine.276 Cycles the top debt level is held on average before default (a 1-in-this chance each Cycle; 0 = no defaults). Default: debt to 1, net worth to 0, a mark on the record', 0, 520, false],
+  ['debtDefaultMarkCycles', 52, 'engine.276 Cycles after a default that the citizen\'s household cannot buy a home', 0, 520, true]
+];
+
+function ensureEngine276Config_(ss) {
+  if (!ss) throw new Error('engine.276 config: spreadsheet required');
+  var configSheet = ss.getSheetByName('World_Config');
+  if (!configSheet) throw new Error('engine.276 config: World_Config not found');
+  var plan = inspectEngine94Config_(configSheet.getDataRange().getValues(), ENGINE276_CONFIG_SEEDS);
+  if (plan.additions.length > 0) {
+    configSheet.getRange(configSheet.getLastRow() + 1, 1, plan.additions.length, 3).setValues(plan.additions);
+    var verified = inspectEngine94Config_(configSheet.getDataRange().getValues(), ENGINE276_CONFIG_SEEDS);
+    if (verified.additions.length > 0) throw new Error('engine.276 config: post-write verification failed');
+  }
+  Logger.log('engine.276 config ready: seeded ' + plan.additions.length + ' row(s)');
+  return { configSeeded: plan.additions.length };
+}
+
 var ENGINE176_CONFIG_SEEDS = [
   ['dialFrictionRentBurden', 50, 'engine.176 rent as % of household income above which an unbuffered renter takes a pressure tag (Friction, then Strain) — the negative pole from a cause', 10, 90, false],
   ['dialSetbackLossPct', 5, 'engine.176 a lost casino stake at/over this % of the citizen\'s net worth logs [Setback] instead of the ordinary [Casino] loss line', 1, 50, false],

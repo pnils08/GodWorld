@@ -231,6 +231,11 @@ function careerRecordLayoff_(ctx, row, cols, cycle, text, logRows) {
   appendCareerLifeLine_(ctx, row, cols.iLife, cycle, 'Career-Layoff', text); // engine.201 W1a: the fold reads the cell, not the log
   noteRetrenchAfterFieldChange_(ctx, row, cols.iLife, cycle); // engine.201 Wave 2
   logRows.push([ctx.now, row[cols.iPop], '', 'Career-Layoff', text, '', cycle]);
+  // engine.276: a job loss puts a debt level on at once. The money loop
+  // (Phase5-GenerationalWealth, after every caller of this) reads the note.
+  var S276 = ctx.summary || (ctx.summary = {});
+  if (!S276.jobLosses) S276.jobLosses = {};
+  S276.jobLosses[String(row[cols.iPop] || '').trim()] = cycle;
 }
 
 // engine.254 Task 6b (builder 2026-09-30): held past judicialDismissAfterCycles, a

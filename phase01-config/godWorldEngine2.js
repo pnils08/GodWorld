@@ -458,6 +458,7 @@ function runWorldCycleLocked_(ss, fire) {
     ensureEngine221Config_(ss);  // engine.221 econMoodInertia - the city economic mood's memory, same self-arm contract
     ensureEngine272Config_(ss);  // engine.272 integrity wear rate + floor (seeded off), same self-arm contract
     ensureEngine275Config_(ss);  // engine.275 fireGuardMinutes — the double-fire window, same self-arm contract
+    ensureEngine276Config_(ss);  // engine.276 debt line, rise/fall rates, drag cap, default chance + mark, same self-arm contract
   } catch (e) {
     Logger.log('FATAL: Cannot prepare spreadsheet: ' + e.message);
     throw e; // Cannot continue without spreadsheet

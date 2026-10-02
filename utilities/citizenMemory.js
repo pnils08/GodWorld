@@ -251,6 +251,7 @@ function serialize_(c) {
   if (c.chaosExposure) o.chaosExposure = c.chaosExposure;
   if (c.pressure) o.pressure = c.pressure;
   if (c.wear) o.wear = c.wear;
+  if (c.debtDefault) o.debtDefault = c.debtDefault;
   return o;
 }
 function deserialize_(obj) {
@@ -266,6 +267,7 @@ function deserialize_(obj) {
     if (obj.folded > 0) c.folded = obj.folded;   // engine.177 watermark (last folded cycle)
     if (obj.pressure) c.pressure = obj.pressure; // engine.201 W1f per-cause pressure run {cause:{n,l}}
     if (obj.wear) c.wear = obj.wear;             // engine.272 integrity wear {d, l}
+    if (obj.debtDefault) c.debtDefault = obj.debtDefault; // engine.276 default mark {l, n} — the money loop writes it, the home roll reads it
   }
   return c;
 }

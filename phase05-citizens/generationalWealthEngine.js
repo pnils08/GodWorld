@@ -222,8 +222,9 @@ function processGenerationalWealth_(ctx) {
 // in their favor"; once married the household drives events → dials → kids.
 // ════════════════════════════════════════════════════════════════════════════
 var DEBT_DRAG = 40;            // per level per cycle — level 6 bleeds ~12.5k/yr
-var DEBT_PAYDOWN_CYCLES = 6;   // surplus cadence to shed a level
 var DEBT_PAYOFF_COST = 800;    // × level, paid from NetWorth
+var DEBT_TOP = 6;              // the level every writer stops at (mint seeds can sit above it; they only fall)
+var DEBT_DEFAULT_RESET = 1;    // engine.276: where a default leaves the level — low, not clean
 var EDU_SAVINGS_FACTOR = { doctorate: 1.2, masters: 1.2, bachelors: 1.1 };
 var SUPERCOUPLE_SAVINGS_FACTOR = 1.2;
 var NETWORTH_MILESTONE = 100000;
@@ -244,6 +245,74 @@ var BANK_RATE_MOOD_NUDGE = 0.3;                   // booming city ≈ +0.15/cycl
 var BANK_RATE_JITTER = 0.4;                       // the dice speak
 var SHOCK_EXPENSE_P = 0.004;                      // ~once per ~5yr per citizen
 var SHOCK_WINDFALL_P = 0.002;
+
+// ════════════════════════════════════════════════════════════════════════════
+// engine.276 — DEBT FOLLOWS NET WORTH (builder ruling 2026-10-01)
+// The yardstick is one year of the hood's own median income (Neighborhood_Map
+// MedianIncome via S.neighborhoodState, × debtLineMultiple). Under it debt leans
+// up, over it debt leans down — a chance each Cycle that grows with the distance
+// from the line, never a certainty. Drag is capped at a share of the week's own
+// saving, so a debtor can always put something by. A promotion takes a level off
+// and a job loss puts one on, at once. The top level ends in default at a
+// per-Cycle chance (a fixed count would default a cohort in one week).
+// Replaced: the crisis +1 a week (no household has met it since the one rent
+// rule) and the pay-down gate that needed saving to beat its own drag.
+// ════════════════════════════════════════════════════════════════════════════
+var ENGINE276_KEYS = ['debtLineMultiple', 'debtRiseRate', 'debtFallRate', 'debtDragCapShare',
+                      'debtDefaultCycles', 'debtDefaultMarkCycles'];
+
+// World_Config read — a missing key throws (ADR-0015: ensureEngine276Config_ self-arms
+// at open, so absence means the contract did not run).
+function debtConfig_(ctx) {
+  var out = {};
+  for (var i = 0; i < ENGINE276_KEYS.length; i++) {
+    var k = ENGINE276_KEYS[i];
+    var v = ctx && ctx.config ? Number(ctx.config[k]) : NaN;
+    if (isNaN(v)) throw new Error('engine.276: World_Config ' + k + ' missing — ensureEngine276Config_ did not run (ADR-0015)');
+    out[k] = v;
+  }
+  return out;
+}
+
+// Which way debt leans this Cycle and how hard. dir +1 / -1 / 0, p = the chance.
+// crisis = a household borrowing to stay housed: fully under the line whatever it holds.
+function debtLean_(netWorth, line, cfg, creditF, crisis) {
+  if (crisis) return { dir: 1, p: cfg.debtRiseRate * creditF };
+  if (!(line > 0)) return { dir: 0, p: 0 };
+  var ratio = (Number(netWorth) || 0) / line;
+  if (ratio < 1) return { dir: 1, p: cfg.debtRiseRate * (1 - ratio) * creditF };
+  return { dir: -1, p: cfg.debtFallRate * Math.min(1, ratio - 1) };
+}
+
+// The week's drag: level × DEBT_DRAG × rate factor, never more than capShare of
+// what the citizen saved this week.
+function debtDrag_(level, dragF, weekSaving, capShare) {
+  var raw = Math.round((Number(level) || 0) * DEBT_DRAG * dragF);
+  var cap = Math.floor(Math.max(0, Number(weekSaving) || 0) * capShare);
+  return Math.min(raw, cap);
+}
+
+// The mark a default leaves: DialState.debtDefault = { l: Cycle it landed, n: lifetime count }.
+// Returns false when the row has no DialState to carry it (the default still lands).
+function noteDebtDefault_(row, iDS, cycle) {
+  if (iDS < 0 || !row[iDS]) return false;
+  var ds;
+  try { ds = JSON.parse(String(row[iDS])); } catch (e) { return false; }
+  if (!ds || typeof ds !== 'object') return false;
+  ds.debtDefault = { l: cycle, n: ((ds.debtDefault && Number(ds.debtDefault.n)) || 0) + 1 };
+  row[iDS] = JSON.stringify(ds);
+  return true;
+}
+
+// true while a default's mark is still on the record (markCycles after it landed).
+function debtDefaultMarked_(dialStateCell, cycle, markCycles) {
+  var raw = String(dialStateCell || '');
+  if (raw.indexOf('"debtDefault"') < 0) return false;
+  var ds;
+  try { ds = JSON.parse(raw); } catch (e) { return false; }
+  var l = ds && ds.debtDefault ? Number(ds.debtDefault.l) : NaN;
+  return !isNaN(l) && (cycle - l) < markCycles;
+}
 
 // engine.61 diag-emit (same channel as ENGINE59_DIAG): the fire response
 // carries the rate walk's why — persistence is otherwise invisible from
@@ -288,7 +357,9 @@ function creditFactorFor_(nbState, hood) {
 }
 
 function processMoneyLoop_(ctx, cycle) {
-  var results = { accrued: 0, debtUp: 0, debtDown: 0, lines: 0, expense: 0, windfall: 0, deepDigs: 0 };
+  var results = { accrued: 0, debtUp: 0, debtDown: 0, lines: 0, expense: 0, windfall: 0,
+                  leanUp: 0, leanDown: 0, eventUp: 0, eventDown: 0, defaults: 0, unmarked: 0 };
+  var debtCfg = debtConfig_(ctx); // engine.276 — throws before any row moves
   // engine.61 T2 (S321): the rate reaches the loop. Factors normalize to 1.0
   // at the mean, so neutral weather reproduces the engine.60 proven baseline.
   var bankRate = (typeof ctx.summary.bankRate === 'number') ? ctx.summary.bankRate : BANK_RATE_MEAN;
@@ -303,8 +374,11 @@ function processMoneyLoop_(ctx, cycle) {
   var iInc = idx('Income'), iNW = idx('NetWorth'),
       iSav = idx('SavingsRate'), iDebt = idx('DebtLevel'), iEdu = idx('EducationLevel'),
       iHH = idx('HouseholdId'), iBirth = idx('BirthYear'), iStatus = idx('Status'),
-      iLife = idx('LifeHistory'), iHood = idx('Neighborhood');
+      iLife = idx('LifeHistory'), iHood = idx('Neighborhood'),
+      iPopD = idx('POPID'), iPromo = idx('LastPromotionCycle'), iClock = idx('ClockMode'), iDS = idx('DialState'),
+      iWealthD = idx('WealthLevel'), iInherD = idx('InheritanceReceived');
   if (iInc < 0 || iNW < 0 || iSav < 0) return results;
+  var jobLosses = ctx.summary.jobLosses || {}; // engine.276: careerRecordLayoff_ notes this Cycle's
   var simYear = simYearOf_(ctx, cycle);
   var stamp = 'Y' + (Math.floor((cycle - 1) / 52) + 1) + 'C' + (((cycle - 1) % 52) + 1);
 
@@ -342,32 +416,44 @@ function processMoneyLoop_(ctx, cycle) {
     var eduF = EDU_SAVINGS_FACTOR[String(row[iEdu] || '').toLowerCase()] || 1.0;
     var superF = hh.superCouple ? SUPERCOUPLE_SAVINGS_FACTOR : 1.0;
 
+    // engine.276 draw order, per adult row: (1) the lean roll, always; (2) the shock
+    // roll, always; (3) the shock or windfall amount, only when one lands; (4) the
+    // default roll, only at the top, off the GAME clock, with debtDefaultCycles > 0.
+    // (1) and (4) are new, so every later draw in the Cycle moves against engine.61's.
     // engine.61 T2/T3: yield and drag ride the rate; credit rides the hood.
-    var creditF = creditFactorFor_(nbState, iHood >= 0 ? row[iHood] : '');
-    var accrual = Math.round((income / 52) * rate * eduF * superF * yieldF) -
-                  Math.round(debt * DEBT_DRAG * dragF);
+    // engine.276: the drag never takes more than debtDragCapShare of the week's saving.
+    var hoodName = iHood >= 0 ? String(row[iHood] || '').trim() : '';
+    var creditF = creditFactorFor_(nbState, hoodName);
+    var weekSaving = Math.round((income / 52) * rate * eduF * superF * yieldF);
+    var accrual = weekSaving - debtDrag_(debt, dragF, weekSaving, debtCfg.debtDragCapShare);
     var nwNew = Math.max(0, nw + accrual);
-    var line = null;
+    var line = null, hook = null, shockLine = null, shockHook = null;
     var debtBefore = debt;
 
-    // debt accrues in a crisis household (borrowing to stay housed)
-    if (hh.crisis && income > 0 && iDebt >= 0 && debt < 6) {
-      debt++;
-      // engine.61 T3: in a tight-credit hood the same crisis digs deeper —
-      // bad terms compound. p scales with how far creditF sits above 1.
-      if (creditF > 1 && debt < 6 && rng() < (creditF - 1) * 2) {
+    if (iDebt >= 0) {
+      // engine.276: the lean — one roll a Cycle, drawn for every adult so the
+      // stream does not depend on who holds debt.
+      var hoodSt = nbState[hoodName];
+      var debtLine = (hoodSt && Number(hoodSt.medianIncome) > 0)
+        ? Number(hoodSt.medianIncome) * debtCfg.debtLineMultiple : 0;
+      var lean = debtLean_(nwNew, debtLine, debtCfg, creditF, hh.crisis && income > 0);
+      var leanRoll = rng();
+      if (lean.dir > 0 && debt < DEBT_TOP && leanRoll < lean.p) {
         debt++;
-        results.deepDigs++;
+        results.leanUp++;
+      } else if (lean.dir < 0 && debt > 0 && leanRoll < lean.p) {
+        // a level paid down costs money: scales with the rate AND the hood's credit (engine.61 T2/T3)
+        nwNew = Math.max(0, nwNew - Math.round(DEBT_PAYOFF_COST * debt * dragF * creditF));
+        debt--;
+        results.leanDown++;
       }
-      if (debt >= 5) line = '[Money] the debts crossed a line this week — sleep comes harder now';
-      else line = '[Money] borrowed against tomorrow to keep the ' + 'household afloat';
-    }
-    // debt pays down on sustained surplus (stateless cadence: row-offset mod)
-    else if (debt > 0 && accrual > 0 && ((cycle + r) % DEBT_PAYDOWN_CYCLES === 0)) {
-      debt--;
-      // engine.61 T2/T3: payoff cost scales with the rate AND the hood's credit.
-      nwNew = Math.max(0, nwNew - Math.round(DEBT_PAYOFF_COST * debtBefore * dragF * creditF));
-      if (debt === 0 && debtBefore >= 3) line = '[Money] the last debt cleared — the ledger finally reads clean';
+
+      // engine.276: events move a level at once, no roll. A promotion (the raise
+      // rides the same line, runCareerEngine applyEmployerSuccess_) takes one off;
+      // a job loss (careerRecordLayoff_, every path) puts one on.
+      var popD = iPopD >= 0 ? String(row[iPopD] || '').trim() : '';
+      if (iPromo >= 0 && Number(row[iPromo]) === cycle && debt > 0) { debt--; results.eventDown++; }
+      if (popD && jobLosses[popD] === cycle && debt < DEBT_TOP) { debt++; results.eventUp++; }
     }
 
     // engine.61 T4: honest dice — the week can hit, or hand you something.
@@ -378,23 +464,55 @@ function processMoneyLoop_(ctx, cycle) {
       results.expense++;
       if (nwNew >= hit) {
         nwNew -= hit;
-        if (!line) line = '[Money] an unplanned $' + hit + ' week — savings took the hit';
+        shockLine = '[Money] an unplanned $' + hit + ' week — savings took the hit';
       } else {
         nwNew = 0;
-        if (iDebt >= 0 && debt < 6) debt++;
-        if (!line) line = '[Money] the bad week cost more than the savings could hold — borrowed to cover it';
+        if (iDebt >= 0 && debt < DEBT_TOP) debt++;
+        shockLine = '[Money] the bad week cost more than the savings could hold — borrowed to cover it';
+        shockHook = 'MONEY_SHOCK';
       }
     } else if (shockRoll < SHOCK_EXPENSE_P + SHOCK_WINDFALL_P) {
       var gift = Math.round((2000 + rng() * 13000) / 100) * 100;
       nwNew += gift;
       results.windfall++;
-      if (!line) line = '[Money] a windfall landed — $' + gift + ', banked';
+      shockLine = '[Money] a windfall landed — $' + gift + ', banked';
+    }
+
+    // The week's line, read off where the level ended: a rise is the start of the
+    // chain (and its peak at 5), a level cleared to zero is one of its ends.
+    if (debt > debtBefore) {
+      if (debt >= 5) { line = '[Money] the debts crossed a line this week — sleep comes harder now'; hook = 'DEBT_CRISIS'; }
+      else if (shockHook) { line = shockLine; hook = shockHook; }
+      else line = '[Money] borrowed against tomorrow to keep the household afloat';
+    } else if (debt === 0 && debtBefore > 0) {
+      line = '[Money] the last debt cleared — the ledger finally reads clean';
+    }
+    if (!line && shockLine) { line = shockLine; hook = shockHook; }
+
+    // engine.276: the ending. At the top each Cycle carries a 1-in-debtDefaultCycles
+    // chance of default — the level resets low, the savings go, the record keeps it.
+    // GAME-clock citizens never default (the sports world's call, unruled).
+    if (iDebt >= 0 && debt >= DEBT_TOP &&
+        !(iClock >= 0 && String(row[iClock] || '').trim().toUpperCase() === 'GAME') &&
+        debtCfg.debtDefaultCycles > 0 && rng() < 1 / debtCfg.debtDefaultCycles) {
+      debt = DEBT_DEFAULT_RESET;
+      nwNew = 0;
+      results.defaults++;
+      if (!noteDebtDefault_(row, iDS, cycle)) results.unmarked++;
+      // Step 2 set WealthLevel from the net worth this default just emptied; redo the
+      // face here so Step 5 mobility sees the fall in the week it happened.
+      if (iWealthD >= 0) {
+        row[iWealthD] = deriveWealthLevel_(income, iInherD >= 0 ? (Number(row[iInherD]) || 0) : 0, 0, debt);
+      }
+      line = '[Money] defaulted on the debts — the savings are gone and the record carries it';
+      hook = 'DEBT_DEFAULT';
     }
 
     // milestone: first crossing of 100k lived wealth
     if (!line && nw < NETWORTH_MILESTONE && nwNew >= NETWORTH_MILESTONE &&
         String(row[iLife] || '').indexOf('crossed six figures') < 0) {
       line = '[Money] savings crossed six figures — years of steady weeks did that';
+      hook = 'MONEY_MILESTONE';
     }
 
     if (nwNew !== nw) { row[iNW] = nwNew; results.accrued++; }
@@ -410,12 +528,10 @@ function processMoneyLoop_(ctx, cycle) {
     if (line && iLife >= 0) {
       row[iLife] = (row[iLife] ? row[iLife] + '\n' : '') + stamp + ' — ' + line;
       results.lines++;
-      if (line.indexOf('crossed a line') >= 0 || line.indexOf('six figures') >= 0 ||
-          line.indexOf('cost more than the savings') >= 0) {
+      if (hook) {
         ctx.summary.storyHooks = ctx.summary.storyHooks || [];
         ctx.summary.storyHooks.push({
-          hookType: line.indexOf('six figures') >= 0 ? 'MONEY_MILESTONE' :
-                    line.indexOf('cost more than the savings') >= 0 ? 'MONEY_SHOCK' : 'DEBT_CRISIS',
+          hookType: hook,
           severity: 3, priority: 3,
           description: ((row[idx('First')] || '') + ' ' + (row[idx('Last')] || '')).trim() + ' — ' + line.replace('[Money] ', ''),
           cycleGenerated: cycle, neighborhood: row[idx('Neighborhood')] || '',
@@ -427,10 +543,13 @@ function processMoneyLoop_(ctx, cycle) {
   if (results.accrued || results.debtUp || results.debtDown) ctx.ledger.dirty = true;
   if (ENGINE61_DIAG) ENGINE61_DIAG.loop = {
     accrued: results.accrued, debtUp: results.debtUp, debtDown: results.debtDown,
-    deepDigs: results.deepDigs, expense: results.expense, windfall: results.windfall
+    leanUp: results.leanUp, leanDown: results.leanDown, eventUp: results.eventUp, eventDown: results.eventDown,
+    defaults: results.defaults, unmarked: results.unmarked, expense: results.expense, windfall: results.windfall
   };
-  Logger.log('processMoneyLoop_ engine.61: rate ' + bankRate + ', accrued ' + results.accrued +
-    ', debt +' + results.debtUp + '/-' + results.debtDown + ' (deep ' + results.deepDigs + ')' +
+  Logger.log('processMoneyLoop_ engine.276: rate ' + bankRate + ', accrued ' + results.accrued +
+    ', debt +' + results.debtUp + '/-' + results.debtDown +
+    ' (lean +' + results.leanUp + '/-' + results.leanDown + ', events +' + results.eventUp + '/-' + results.eventDown + ')' +
+    ', defaults ' + results.defaults + (results.unmarked ? ' (' + results.unmarked + ' unmarked)' : '') +
     ', shocks ' + results.expense + 'x/' + results.windfall + 'w, lines ' + results.lines);
   return results;
 }
@@ -1684,8 +1803,10 @@ function trackHomeOwnership_(ss, ctx, cycle) {
   var idx = function(n) { return header.indexOf(n); };
   var iPop = idx('POPID'), iNW = idx('NetWorth'), iStatus = idx('Status'),
       iLife = idx('LifeHistory'), iLin = idx('LineageId'), iFirst = idx('First'),
-      iLast = idx('Last'), iBirthH = idx('BirthYear'), iTierH = idx('Tier'); // engine.151
+      iLast = idx('Last'), iBirthH = idx('BirthYear'), iTierH = idx('Tier'), // engine.151
+      iDSH = idx('DialState'); // engine.276: the default mark rides DialState
   if (iPop < 0 || iNW < 0) return results;
+  var markCycles = debtConfig_(ctx).debtDefaultMarkCycles; // engine.276
   var simYearH = simYearOf_(ctx, cycle); // engine.144 loop 3 — youth-mode gate on the [Home] line
 
   var rowByPop = {};
@@ -1718,16 +1839,19 @@ function trackHomeOwnership_(ss, ctx, cycle) {
     var members = [];
     var combinedNW = 0;
     var bestTier = 4; // engine.151: the household's best rung pays on the roll
+    var marked = false; // engine.276: a member's default still on the record
     for (var m = 0; m < memIds.length; m++) {
       var mRow = rowByPop[String(memIds[m]).trim()];
       if (!mRow) continue;
       if (String(mRow[iStatus] || 'active').toLowerCase() === 'deceased') continue;
       members.push(mRow);
+      if (iDSH >= 0 && debtDefaultMarked_(mRow[iDSH], cycle, markCycles)) marked = true;
       combinedNW += Number(String(mRow[iNW]).replace(/[$,\s]/g, '')) || 0;
       var mTier = iTierH >= 0 ? (Math.round(Number(mRow[iTierH])) || 4) : 4;
       if (mTier >= 1 && mTier < bestTier) bestTier = mTier;
     }
     if (!members.length) continue;
+    if (marked) { results.markedOut = (results.markedOut || 0) + 1; continue; } // engine.276: no home purchase while a default's mark stands
 
     var hood = String(hv[q][cHood] || '').trim();
     var price = Math.round(homeMarketRent_(ctx, hood, rent) * 12 * HOME_PRICE_TO_RENT); // engine.158: the hood's market prices the house

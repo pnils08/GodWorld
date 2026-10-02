@@ -9,6 +9,11 @@ const root = fs.mkdtempSync(path.join(os.tmpdir(), 'test-only-civis-journal-'));
 const output = path.join(root, 'output');
 const beats = path.join(output, 'beats');
 fs.mkdirSync(beats, { recursive: true });
+const agentDir = path.join(root, '.claude', 'agents', 'citizen-voice-elias-varek');
+fs.mkdirSync(agentDir, { recursive: true });
+for (const name of ['IDENTITY.md', 'LENS.md', 'RULES.md']) {
+  fs.writeFileSync(path.join(agentDir, name), 'TEST-ONLY ' + name + ' voice context\n');
+}
 fs.writeFileSync(path.join(beats, 'meta.json'), JSON.stringify({ cycle: 999, prevCycle: 998 }));
 fs.writeFileSync(path.join(output, 'engine_audit_c999.json'), JSON.stringify({
   cycle: 999, previousCycle: 998, patterns: [
@@ -26,6 +31,10 @@ for (const tab of ['Civic_Office_Ledger', 'Initiative_Tracker', 'Business_Ledger
 const frame = journal.loadFrame(999, root);
 assert.equal(frame.findings.length, 3);
 assert.ok(frame.names.has('Test District'));
+const prompt = journal.promptFor(frame, [], root);
+for (const name of ['IDENTITY.md', 'LENS.md', 'RULES.md']) {
+  assert.ok(prompt.system.includes('TEST-ONLY ' + name + ' voice context'));
+}
 const paragraph = 'I read Test District as a signal Civis Systems must understand more carefully. ' +
   'I want the instrument to account for what the city experiences before I claim it has explained the change. ';
 const prose = Array(15).fill(paragraph).join(' ').trim();

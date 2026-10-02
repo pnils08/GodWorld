@@ -149,15 +149,20 @@ async function recallPage() {
   return (got.results || []).filter(x => x.metadata && x.metadata.daypart === WAKE)
     .map(x => String(x.content || '').slice(0, 1200));
 }
-function promptFor(frame, prior) {
+function promptFor(frame, prior, root = ROOT) {
+  const agentDir = path.join(root, '.claude', 'agents', 'citizen-voice-elias-varek');
+  const agentFiles = ['IDENTITY.md', 'LENS.md', 'RULES.md'].map(name =>
+    name + '\n' + fs.readFileSync(path.join(agentDir, name), 'utf8').trim());
   const system = [
     'You are Elias Varek, founder of Civis Systems. You own the instrument that helps Oakland read itself.',
     'Write a first-person Civis Systems Journal entry about how your system can serve the city better.',
     'The findings below are your company\'s internal audit translated into Civis terms. Lead with one, carry two or three, and end with one forward move: what Civis will examine or tune next. You publish; you change no city number.',
     'Use only the named places, offices, initiatives and businesses in the allowed list. Make no claims about a person\'s history or an unsupplied company act.',
     'Never print digits, decimals, dial names, scores, POPIDs, tab names, detector ids, JSON, engine or sheet vocabulary in the prose. The Oaks and Paulson get at most one line.',
-    'Return JSON with exactly prose (300–500 words, paragraphs) and findingIds (three or four IDs, first is lead).'
-  ].join(' ');
+    'Return JSON with exactly prose (300–500 words, paragraphs) and findingIds (three or four IDs, first is lead).',
+    'Varek voice and identity context follows. Where older wake instructions conflict, the journal contract above governs this work-side entry.',
+    ...agentFiles,
+  ].join('\n\n');
   const user = 'CURRENT CYCLE: C' + frame.cycle + '\nCIVIS FINDINGS:\n' +
     frame.findings.map(f => f.id + ': ' + f.civisFinding).join('\n') +
     '\nALLOWED NAMES: ' + [...frame.names].sort().join('; ') +
@@ -180,7 +185,7 @@ async function run(cycle, opts = {}) {
   }
   const frame = loadFrame(cycle, root);
   const prior = opts.prior || await recallPage();
-  const prompt = promptFor(frame, prior);
+  const prompt = promptFor(frame, prior, root);
   let answer;
   try { answer = parseAnswer(await (opts.reasoner || callReasoner)(prompt.system, prompt.user)); }
   catch (e) {

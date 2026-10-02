@@ -603,11 +603,11 @@ var TIER1_ESSENCE = {
     ]
   },
 
-  // ---- POP-00791 Eloise Soria-Dominguez — Fruitvale Transit Hub Planning Lead ----
-  //      NAME DRIFT (C98 RB-2 / C99 G-S5): ledger row = "Eloise Soria-Dominguez"; canonical/agent
-  //      pinned name = "Elena Soria Dominguez". Keyed by POPID; engine-sheet reconcile at write.
+  // ---- POP-00791 Elena Soria Dominguez — Fruitvale Transit Hub Planning Lead ----
+  //      Name drift closed S516: the agent files' form is canon; the ledger row reconciles to it
+  //      (INSTITUTIONS.md §Citizens Corrections Forward). Keyed by POPID.
   'POP-00791': {
-    name: 'Eloise Soria-Dominguez', pillar: null,
+    name: 'Elena Soria Dominguez', pillar: null,
     target: { drive: 'high', integrity: 'high', composure: 'high', openness: 'moderate',
               sociability: 'moderate', warmth: 'neutral', family: 'neutral', outabout: 'neutral' },
     events: [

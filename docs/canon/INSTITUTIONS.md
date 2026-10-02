@@ -417,7 +417,7 @@ The bay-tribune Supermemory container + published editions are not retroactively
 
 | Bay-tribune form | Editions | Canon form (Sim_Ledger) | Notes |
 |---|---|---|---|
-| Elena Soria Dominguez | E93 only | Eloise Soria-Dominguez (POP-00791) | S230 ruling per canon.3 ADR-0007 — bay-tribune E93 published "Elena," wd-card + Sim_Ledger POP-00791 canonical "Eloise"; editorial call favors wd-card form. Reporters encountering "Elena" in E93 source briefings substitute to "Eloise Soria-Dominguez" with CONTINUITY NOTE. POP-00791 First/Last verified `Eloise` / `Soria-Dominguez` S233. |
+| Eloise Soria-Dominguez | E94–E109 (wd-card / ledger form) | Elena Soria Dominguez (POP-00791) | S516 ruling, reversing S230: the civic-project agent files carry the canon form — `Elena Soria Dominguez`, no hyphen — and the ledger had veered to the wd-card form. Sim_Ledger POP-00791 First/Last reconcile to `Elena` / `Soria Dominguez`. Reporters encountering "Eloise" in prior editions, briefings or civic-voice files substitute to "Elena Soria Dominguez" with CONTINUITY NOTE. |
 
 Specific per-edition citations populate as Mara audit logs and reader-side scans surface them; absence of a citation column entry means the map applies whenever the bay-tribune form is encountered.
 

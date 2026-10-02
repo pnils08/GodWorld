@@ -659,7 +659,7 @@
       "neighborhoods": [
         "Fruitvale"
       ],
-      "_note": "S344: ledger FullName corrected Eloise->Elena by Mike; agent canon and ledger now agree",
+      "_note": "S344: ledger FullName corrected Eloise->Elena by Mike; the ledger veered back to Eloise; S516 ruling re-affirms Elena (agent files are the canon) and the ledger row reconciles to it",
       "dutyDays": "sun-thu",
       "model": "deepseek/deepseek-chat"
     }

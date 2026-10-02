@@ -10,7 +10,7 @@ Mechanism: `classifyMintSector_` (phase05-citizens/processAdvancementIntake.js:1
 | Linked (tracked employer) | 585 |
 | Moved by hand this session (departments + four relinks) | 10 |
 | MISMATCH | 60 |
-| NOTE | 5 |
+| APPLIED (builder go) | 5 |
 
 | POPID | Name | T | Role | Hood | Employer | Verdict | Suggested | Reason |
 |---|---|---|---|---|---|---|---|---|
@@ -74,8 +74,8 @@ Mechanism: `classifyMintSector_` (phase05-citizens/processAdvancementIntake.js:1
 | POP-01061 | Celeste Moon | 3 | singer | KONO | BIZ-00089 Atlas Bay Architects | MISMATCH | SELF_EMPLOYED  | creative — self-employed per mapping |
 | POP-01017 | Valentina Campbell | 4 | Server | Jack London | BIZ-00093 Telegraph Presbyterian Fellowship | MISMATCH | BIZ-00041 Green & Gold Tavern | kitchen role at a non-dining employer |
 | POP-00168 | Ariana Lee | 4 | Biotech Lab Assistant | Piedmont Ave | BIZ-00097 Temescal Community Health Center | MISMATCH | BIZ-00010 Portside Bio | Portside Bio |
-| POP-00201 | Elio Perez | 1 | Server | Rockridge | BIZ-00020 Baylight Construction Authority | NOTE | BIZ-00169 Claremont Table | kitchen role at a non-dining employer — Tier 1, builder call |
-| POP-00540 | Jade Orion | 2 | Musician | Lake Merritt | BIZ-00027 Oakland Parks & Recreation | NOTE | SELF_EMPLOYED  | creative — self-employed per mapping — Tier 2, builder call |
-| POP-00288 | Marcus Wright | 2 | Server | West Oakland | BIZ-00030 Oakland Tech Collective | NOTE | BIZ-00048 West Side Cafe | kitchen role at a non-dining employer — Tier 2, builder call |
-| POP-01056 | Theo Banks | 2 | rapper | Uptown | BIZ-00053 Ridgeline Studio | NOTE | SELF_EMPLOYED  | creative — self-employed per mapping — Tier 2, builder call |
-| POP-00037 | Brenda Okoro | 2 | Deputy Mayor (Community Affairs) | Rockridge | BIZ-00095 Oakland Alternative Response Initiative | NOTE | BIZ-00017 City of Oakland | City of Oakland (NOTE: deputy mayor at OARI) — Tier 2, builder call |
+| POP-00201 | Elio Perez | 1 | Server | Rockridge | BIZ-00020 Baylight Construction Authority | APPLIED (builder go) | BIZ-00169 Claremont Table | kitchen role at a non-dining employer — Tier 1, builder call |
+| POP-00540 | Jade Orion | 2 | Musician | Lake Merritt | BIZ-00027 Oakland Parks & Recreation | APPLIED (builder go) | SELF_EMPLOYED  | creative — self-employed per mapping — Tier 2, builder call |
+| POP-00288 | Marcus Wright | 2 | Server | West Oakland | BIZ-00030 Oakland Tech Collective | APPLIED (builder go) | BIZ-00048 West Side Cafe | kitchen role at a non-dining employer — Tier 2, builder call |
+| POP-01056 | Theo Banks | 2 | rapper | Uptown | BIZ-00053 Ridgeline Studio | APPLIED (builder go) | SELF_EMPLOYED  | creative — self-employed per mapping — Tier 2, builder call |
+| POP-00037 | Brenda Okoro | 2 | Deputy Mayor (Community Affairs) | Rockridge | BIZ-00095 Oakland Alternative Response Initiative | APPLIED (builder go) | BIZ-00017 City of Oakland | City of Oakland (NOTE: deputy mayor at OARI) — Tier 2, builder call |

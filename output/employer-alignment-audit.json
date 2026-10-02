@@ -848,10 +848,10 @@
   "employerBizId": "BIZ-00020",
   "bizName": "Baylight Construction Authority",
   "sector": "Construction",
-  "verdict": "NOTE",
+  "verdict": "APPLIED",
   "suggestedBizId": "BIZ-00169",
   "suggestedBizName": "Claremont Table",
-  "reason": "kitchen role at a non-dining employer — Tier 1, builder call"
+  "reason": "kitchen role at a non-dining employer — Tier 1, builder go 2026-10-02 00:00"
  },
  {
   "popid": "POP-00540",
@@ -862,10 +862,10 @@
   "employerBizId": "BIZ-00027",
   "bizName": "Oakland Parks & Recreation",
   "sector": "Public Services",
-  "verdict": "NOTE",
+  "verdict": "APPLIED",
   "suggestedBizId": "SELF_EMPLOYED",
   "suggestedBizName": "",
-  "reason": "creative — self-employed per mapping — Tier 2, builder call"
+  "reason": "creative — self-employed per mapping — Tier 2, builder go 2026-10-02 00:00"
  },
  {
   "popid": "POP-00288",
@@ -876,10 +876,10 @@
   "employerBizId": "BIZ-00030",
   "bizName": "Oakland Tech Collective",
   "sector": "Coworking / Tech Hub",
-  "verdict": "NOTE",
+  "verdict": "APPLIED",
   "suggestedBizId": "BIZ-00048",
   "suggestedBizName": "West Side Cafe",
-  "reason": "kitchen role at a non-dining employer — Tier 2, builder call"
+  "reason": "kitchen role at a non-dining employer — Tier 2, builder go 2026-10-02 00:00"
  },
  {
   "popid": "POP-01056",
@@ -890,10 +890,10 @@
   "employerBizId": "BIZ-00053",
   "bizName": "Ridgeline Studio",
   "sector": "Architecture",
-  "verdict": "NOTE",
+  "verdict": "APPLIED",
   "suggestedBizId": "SELF_EMPLOYED",
   "suggestedBizName": "",
-  "reason": "creative — self-employed per mapping — Tier 2, builder call"
+  "reason": "creative — self-employed per mapping — Tier 2, builder go 2026-10-02 00:00"
  },
  {
   "popid": "POP-00037",
@@ -904,9 +904,9 @@
   "employerBizId": "BIZ-00095",
   "bizName": "Oakland Alternative Response Initiative",
   "sector": "Public Safety / Crisis Response",
-  "verdict": "NOTE",
+  "verdict": "APPLIED",
   "suggestedBizId": "BIZ-00017",
   "suggestedBizName": "City of Oakland",
-  "reason": "City of Oakland (NOTE: deputy mayor at OARI) — Tier 2, builder call"
+  "reason": "City of Oakland (NOTE: deputy mayor at OARI) — Tier 2, builder go 2026-10-02 00:00"
  }
 ]

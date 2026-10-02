@@ -1090,6 +1090,126 @@ function persistHospitalLedger_(ctx) {
   return census;
 }
 
+// ═══════════════════════════════════════════════════════════
+// CARE AND JUSTICE CENSUS (engine.254 Task 8)
+// ═══════════════════════════════════════════════════════════
+
+/**
+ * Write this Cycle's Care_Justice_Census block. The arithmetic and every
+ * decision are in utilities/careJusticeAccounting.js; this function only reads
+ * the two ledgers and the census tail, and writes one range. Its own phase
+ * entry, after Phase10-CyclePacket: a throw here is an Engine_Errors row and no
+ * census this Cycle (the next one restarts across the gap) — never a lost packet.
+ */
+function persistCareJusticeCensus_(ctx) {
+  if (ctx.mode && (ctx.mode.dryRun || ctx.mode.replay)) {
+    Logger.log('persistCareJusticeCensus_: skipped (dry-run / replay)');
+    return null;
+  }
+  var S = ctx.summary || {};
+  var cycle = S.absoluteCycle || S.cycleId || 0;
+  var demand = S.careJusticeDemand;
+  if (!demand || !demand.hoods) throw new Error('careJusticeCensus: S.careJusticeDemand missing — no scopes, no census');
+  var cfg = ctx.config || {};
+  var stays = {
+    hospital: careJusticeStay_(cfg.careJusticeOtherHospitalStayCycles, 'careJusticeOtherHospitalStayCycles'),
+    judicial: careJusticeStay_(cfg.careJusticeOtherCustodyStayCycles, 'careJusticeOtherCustodyStayCycles')
+  };
+
+  var sheet = requireTab_(ctx.ss, 'Care_Justice_Census');
+  var width = CARE_JUSTICE_CENSUS_HEADERS.length;
+  var header = sheet.getRange(1, 1, 1, width).getValues()[0];
+  for (var h = 0; h < width; h++) {
+    if (header[h] !== CARE_JUSTICE_CENSUS_HEADERS[h]) {
+      throw new Error('Care_Justice_Census.' + CARE_JUSTICE_CENSUS_HEADERS[h] + ' header missing at column ' + (h + 1));
+    }
+  }
+
+  // A fresh read of each ledger, after both writers. A tab or header that
+  // cannot be read makes that system `unavailable` — blank, never zero.
+  function ledgerImage(system, name) {
+    var tab = ctx.ss.getSheetByName(name);
+    if (!tab) { Logger.log('persistCareJusticeCensus_: ' + name + ' tab missing — ' + system + ' unavailable'); return null; }
+    var values = tab.getDataRange().getValues();
+    if (!values.length) return null;
+    try { careJusticeLedgerCols_(system, values[0]); }
+    catch (headerErr) { Logger.log('persistCareJusticeCensus_: ' + headerErr.message + ' — ' + system + ' unavailable'); return null; }
+    return values;
+  }
+  var ledgers = {
+    hospital: ledgerImage('hospital', 'Hospital_Ledger'),
+    judicial: ledgerImage('judicial', 'Judicial_Ledger')
+  };
+
+  var hoodCount = 0;
+  for (var hn in demand.hoods) if (demand.hoods.hasOwnProperty(hn)) hoodCount++;
+  var outsideTracked = 0;
+  if (!ctx.ledger || !ctx.ledger.rows || !ctx.ledger.headers) throw new Error('careJusticeCensus: Simulation_Ledger not loaded');
+  var lStatus = ctx.ledger.headers.indexOf('Status'), lHood = ctx.ledger.headers.indexOf('Neighborhood');
+  if (lStatus < 0 || lHood < 0) throw new Error('careJusticeCensus: Simulation_Ledger Status / Neighborhood column missing');
+  for (var lr = 0; lr < ctx.ledger.rows.length; lr++) {
+    var person = ctx.ledger.rows[lr];
+    if (String(person[lStatus] || '').trim().toLowerCase() === 'deceased') continue;
+    if (!demand.hoods.hasOwnProperty(String(person[lHood] || '').trim())) outsideTracked++;
+  }
+
+  var blockRows = (hoodCount + 2) * 9;
+  var tailMax = blockRows * CARE_JUSTICE_TAIL_BLOCKS;
+  function readTail() {
+    var lastRow = sheet.getLastRow();
+    if (lastRow < 2) return { first: 2, rows: [] };
+    var n = Math.min(lastRow - 1, tailMax);
+    var first = lastRow - n + 1;
+    var values = sheet.getRange(first, 1, n, width).getValues();
+    var rows = [];
+    for (var i = 0; i < values.length; i++) rows.push({ row: first + i, values: values[i] });
+    return { first: first, rows: rows };
+  }
+
+  var read = readTail();
+  var tailValues = [];
+  // A truncated read can open on half of its oldest Cycle: that Cycle is not evidence.
+  var dropCycle = read.first > 2 && read.rows.length ? String(read.rows[0].values[0]) : null;
+  for (var tv = 0; tv < read.rows.length; tv++) {
+    if (dropCycle !== null && String(read.rows[tv].values[0]) === dropCycle) continue;
+    tailValues.push(read.rows[tv].values);
+  }
+
+  var plan = planCareJusticeCensus_({
+    cycle: cycle, demand: demand, ledgers: ledgers, tail: tailValues, stays: stays,
+    outsideTracked: outsideTracked, writeStatus: S.careJusticeWriteStatus,
+    events: { hospital: S.hospitalEvents || [], judicial: S.judicialEvents || [] },
+    otherResidentOf: function(trackedByHood) { return careJusticeOtherResident_(demand, trackedByHood, true); }
+  });
+  if (plan.rows.length !== blockRows) {
+    throw new Error('careJusticeCensus: built ' + plan.rows.length + ' rows, expected ' + blockRows);
+  }
+
+  // Locate-compare-write is the retried unit: an attempt that timed out but
+  // landed is found equal on the next attempt and not written twice.
+  var done = persistWithRetry_(function() {
+    var fresh = readTail();
+    var write = careJusticeWritePlan_(fresh.rows, fresh.first, plan);
+    if (write.action === 'write') {
+      sheet.getRange(write.startRow, 1, write.values.length, width).setValues(write.values);
+    }
+    return write;
+  }, 'Care_Justice_Census block');
+
+  if (done.action === 'write') {
+    var problem = careJusticeVerifyBlock_(readTail().rows, plan);
+    if (problem) throw new Error('careJusticeCensus: Cycle ' + cycle + ' did not read back — ' + problem);
+  }
+
+  Logger.log('persistCareJusticeCensus_ C' + cycle + ': ' + done.action +
+    (done.action === 'write' ? ' ' + done.values.length + ' rows at ' + done.startRow : '') +
+    ' | hospital ' + plan.completeness.hospital + ' | judicial ' + plan.completeness.judicial +
+    (plan.firstCensus ? ' | first census' : '') +
+    (plan.gapBlocks.length ? ' | gap Cycles ' + plan.gapBlocks.length : '') +
+    ' | outside-table tracked ' + outsideTracked);
+  return { action: done.action, completeness: plan.completeness };
+}
+
 // Phase-10 direct writer: the pre-created 21-column case tab carries open
 // custody between Cycles. No Phase-5 sheet intents are used.
 function persistJudicialLedger_(ctx) {

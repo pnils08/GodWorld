@@ -791,7 +791,7 @@
   Writes: S.careJusticeDemand
   Config: ctx.config.careJusticeExposureDial, ctx.config.cycleCount
 
-- **careJusticeOtherResident_(demand, trackedIntakesByHood)**
+- **careJusticeOtherResident_(demand, trackedIntakesByHood, everyHood)**
 
 ### chaosCarsEngine.js
 - **chaosChargeGravity_(outcome)**
@@ -3233,6 +3233,10 @@
   Writes: S.hospitalCensus
   Sheets: Hospital_Ledger
 
+- **persistCareJusticeCensus_(ctx)**
+  Reads: S.absoluteCycle, S.careJusticeDemand, S.careJusticeWriteStatus, S.cycleId, S.hospitalEvents, S.judicialEvents
+  Sheets: Hospital_Ledger
+
 - **persistJudicialLedger_(ctx)**
   Reads: S.judicialEvents
   Writes: S.judicialCensus
@@ -3546,6 +3550,31 @@
 - **validateCareJusticeCensus_(rows)**
 
 - **careJusticeCensusRowValues_(row)**
+
+- **careJusticeIsBlank_(v)**
+
+- **careJusticeStay_(raw, key)**
+
+- **careJusticeLedgerCols_(system, header)**
+
+- **deriveCareJusticeMovements_(cycle, ledgers, hoodNames)**
+
+- **careJusticeTailBlocks_(tailValues)**
+
+- **careJusticeNumberedCells_(rows, system)**
+
+- **careJusticeOtherWindow_(opening, intakes, history)**
+
+- **planCareJusticeCensus_(args)**
+  Reads: S.careJusticeDemand
+
+- **careJusticeRowKey_(row)**
+
+- **careJusticeCellText_(v)**
+
+- **careJusticeWritePlan_(tail, firstTailRow, plan)**
+
+- **careJusticeVerifyBlock_(tail, plan)**
 
 ### chaosCarsConfig.js
 - **validateOutcome(outcomeText)**
@@ -4358,4 +4387,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1541
+**Functions mapped:** 1554

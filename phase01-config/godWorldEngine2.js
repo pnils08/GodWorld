@@ -786,6 +786,8 @@ function runWorldCycleLocked_(ss, fire) {
   safePhaseCall_(ctx, 'Phase10-Textures', function() { saveV3Textures_(ctx); });
 
   safePhaseCall_(ctx, 'Phase10-CyclePacket', function() { buildCyclePacket_(ctx); });
+  // engine.254 Task 8: the census reads the two care ledgers after their writers ran.
+  safePhaseCall_(ctx, 'Phase10-CareJusticeCensus', function() { persistCareJusticeCensus_(ctx); });
   // safePhaseCall_(ctx, 'Phase10-MediaBriefing', function() { generateMediaBriefing_(ctx); });
   // ^ DISABLED S328 W2a (compile-layer rebuild, Mike-approved): Media_Briefing had
   //   ZERO readers in the current pipeline (only its own writer + retired exporters)
@@ -2470,6 +2472,8 @@ function runCyclePhases_(ctx) {
   safePhaseCall_(ctx, 'Phase10-Hooks', function() { saveV3Hooks_(ctx); });
   safePhaseCall_(ctx, 'Phase10-Textures', function() { saveV3Textures_(ctx); });
   safePhaseCall_(ctx, 'Phase10-CyclePacket', function() { buildCyclePacket_(ctx); });
+  // engine.254 Task 8: the census reads the two care ledgers after their writers ran.
+  safePhaseCall_(ctx, 'Phase10-CareJusticeCensus', function() { persistCareJusticeCensus_(ctx); });
   // safePhaseCall_(ctx, 'Phase10-MediaBriefing', function() { generateMediaBriefing_(ctx); });
   // ^ DISABLED S328 W2a (compile-layer rebuild, Mike-approved): Media_Briefing had
   //   ZERO readers in the current pipeline (only its own writer + retired exporters)

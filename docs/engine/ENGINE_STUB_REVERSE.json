@@ -2,7 +2,7 @@
   "generated": "2026-10-01",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 180,
-  "functionsMapped": 1541,
+  "functionsMapped": 1554,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -42,6 +42,7 @@
         "phase08-v3-chicago/applyCycleRecovery.js::applyCycleRecovery_",
         "phase08-v3-chicago/applyDomainCooldowns.js::applyDomainCooldowns_",
         "phase10-persistence/buildCyclePacket.js::buildCyclePacket_",
+        "phase10-persistence/buildCyclePacket.js::persistCareJusticeCensus_",
         "phase10-persistence/buildCyclePacket.js::persistHospitalLedger_",
         "phase10-persistence/recordCycleWeather.js::recordCycleWeather_",
         "utilities/citizenDialMap.js::emitPressureTag_",
@@ -742,6 +743,7 @@
         "phase09-digest/finalizeCycleState.js::finalizeCycleState_",
         "phase09-digest/finalizeCycleState.js::snapshotEveningForCarryForward_",
         "phase10-persistence/buildCyclePacket.js::buildCyclePacket_",
+        "phase10-persistence/buildCyclePacket.js::persistCareJusticeCensus_",
         "phase10-persistence/buildCyclePacket.js::persistHospitalLedger_",
         "phase10-persistence/recordCycleWeather.js::recordCycleWeather_",
         "phase10-persistence/recordMediaLedger.js::recordMediaLedger_",
@@ -2773,7 +2775,9 @@
         "phase04-events/careJusticeService.js::runCareJusticeDemand_",
         "phase04-events/chaosCarsEngine.js::pickCareJusticeTarget_",
         "phase04-events/chaosCarsEngine.js::runChaosCarsEngine_",
-        "phase04-events/chaosCarsEngine.js::runChaosNamedPass_"
+        "phase04-events/chaosCarsEngine.js::runChaosNamedPass_",
+        "phase10-persistence/buildCyclePacket.js::persistCareJusticeCensus_",
+        "utilities/careJusticeAccounting.js::planCareJusticeCensus_"
       ]
     },
     "chaosBusinessFold": {
@@ -2820,6 +2824,7 @@
         "phase04-events/chaosCarsEngine.js::runChaosEvent_",
         "phase04-events/generationalEventsEngine.js::runGenerationalEngine_",
         "phase09-digest/finalizeCycleState.js::finalizeCycleState_",
+        "phase10-persistence/buildCyclePacket.js::persistCareJusticeCensus_",
         "phase10-persistence/buildCyclePacket.js::persistHospitalLedger_"
       ]
     },
@@ -2833,6 +2838,7 @@
         "phase05-citizens/judicialLifecycle.js::judicialCustodyClock_",
         "phase05-citizens/judicialLifecycle.js::judicialPriorStatusForCare_",
         "phase05-citizens/judicialLifecycle.js::runJudicialLifecycle_",
+        "phase10-persistence/buildCyclePacket.js::persistCareJusticeCensus_",
         "phase10-persistence/buildCyclePacket.js::persistJudicialLedger_"
       ]
     },
@@ -4285,7 +4291,9 @@
       "writers": [
         "phase10-persistence/buildCyclePacket.js::buildCyclePacket_"
       ],
-      "readers": []
+      "readers": [
+        "phase10-persistence/buildCyclePacket.js::persistCareJusticeCensus_"
+      ]
     },
     "cyclePacket": {
       "writers": [
@@ -4726,6 +4734,7 @@
       "readers": [
         "phase03-population/applyDemographicDrift.js::applyDemographicDrift_",
         "phase04-events/generationalEventsEngine.js::hospitalPriorStatusForDischarge_",
+        "phase10-persistence/buildCyclePacket.js::persistCareJusticeCensus_",
         "phase10-persistence/buildCyclePacket.js::persistHospitalLedger_"
       ]
     },

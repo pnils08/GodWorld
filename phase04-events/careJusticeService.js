@@ -241,7 +241,7 @@ function runCareJusticeDemand_(ctx) {
   return demand;
 }
 
-function careJusticeOtherResident_(demand, trackedIntakesByHood) {
+function careJusticeOtherResident_(demand, trackedIntakesByHood, everyHood) {
   if (!demand || !demand.hoods) throw new Error('careJusticeOtherResident: demand.hoods missing');
   var input = trackedIntakesByHood || {};
   var result = { hoods: {}, city: { hospital: { illness: { other: 0, total: 0, tracked: 0,
@@ -258,6 +258,11 @@ function careJusticeOtherResident_(demand, trackedIntakesByHood) {
       var item = systems[i];
       var modelled = careJusticeNumber_(demand.hoods[hood][item.field], item.field, hood, false);
       var raw = input[hood] && input[hood][item.system] && input[hood][item.system][item.type];
+      // The census passes every table hood, zero written out: an absent entry
+      // there is a lost count, not a zero (Task 8, decision 11).
+      if (everyHood && raw === undefined) {
+        throw new Error('careJusticeOtherResident: tracked ' + item.system + '/' + item.type + ' count missing for ' + hood);
+      }
       var tracked = raw === undefined ? 0 : careJusticeNumber_(raw, 'tracked ' + item.type, hood, false);
       var overdrawn = tracked > modelled;
       var cell = { other: Math.max(0, modelled - tracked), total: Math.max(modelled, tracked),

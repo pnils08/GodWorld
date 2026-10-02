@@ -66,7 +66,7 @@ function clean(label, rows) {
     acct.careJusticeCensusRowValues_(rows[0]).length === 22 && acct.CARE_JUSTICE_CENSUS_HEADERS.length === 22);
   assert('coverage: city = hood table + remainder', find(rows, 'hospital', 'city', '', 'all').CoveredPopulation === 100000);
   assert('unallocated row names no neighbourhood',
-    find(rows, 'hospital', 'unallocated', '', 'all').PopulationBasis === 'city-remainder');
+    find(rows, 'hospital', 'unallocated', '', 'all').PopulationBasis === 'tracked-outside-table');
   clean('empty Cycle', rows);
 }
 

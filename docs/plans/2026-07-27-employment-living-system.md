@@ -179,7 +179,27 @@ pointers:
   3. A carried `EmployerBizId` (authored intake) still wins when the business has room — unchanged.
 - **Verify:** bench mint of a Plumber, a Dishwasher, a Nurse Aide and a Police Officer lands each at a Construction / dining / Healthcare / Public Safety employer or SELF_EMPLOYED/UNTRACKED; never City of Oakland or the hospital for the first two. `scripts/householdIntake.test.js` stays green.
 - **Restore:** the 65 are a one-time diff-restore (60 Tier 3–4 applied by hand 2026-10-01, the 5 Tier 1–2 on the builder's go 2026-10-02, `MappingLayer` `manual` on the roster) — not a sweep, and not re-run after the fix.
-- **Status:** [ ] ready — engine.278
+- **Status:** [ ] built 2026-10-02 (engine-sheet), tests green, bench + PROD next — engine.278. Cut below.
+
+#### engine.278 cut (engine-sheet, 2026-10-02)
+
+**Read-before (bench copy of live C109).** 176 businesses; the four buckets hold tech 11 / creative 17 / public 39 / **service 109**. By field (`sectorCategory_`, strict): Small Business 52, Food & Culture 39, Creative & Arts 17, Faith & Community 14, Healthcare 11, Government & Civic 9, Tech & Innovation 9, Construction & Baylight 7, Transit & Infrastructure 5, Education 2, Port & Labor 1, Professional 1, no field 9 (six sports, `Corporate`, `Science`, `Talent Management`). Every business has room today (stated headcount is the real one, tracked staff a sliver of it), so the pick is decided by field and hood, not by room. 777 of 860 active non-athlete roles resolve to a field through `roleFieldOf_`; of the 83 that do not, 42 are `student`. `Generic_Citizens` carries no employer (`generateGenericCitizens.js` writes none), so every emergence mint goes through this pick; the 54 authored staff on the C110 queue carry theirs and do not.
+
+**Two plan steps corrected by what the code and the audit say.**
+1. *Self-employed is tested before the field, not after.* The audit's own targets are Taxi driver, Artist/Muralist and Gallery Owner → `SELF_EMPLOYED`; field-first sends the cab driver to a transit agency and the gallery owner to someone else's gallery. The roster script (`linkCitizensToEmployers.js`) also tests self-employed before any category.
+2. *A field with no room is `UNTRACKED` without the seeking-work line.* `UNTRACKED` is "employed at a business off the tracked ledger" and the rehire matcher skips it (`runCareerEngine.js` engine.135 E3); blank is unemployed. A mint arrives with a job title and its pay, so it is employed; "Seeking work" on that row would be false. The line stays for the one case it is true of: the Business_Ledger could not be read.
+
+**The pick, in order (`pickMintEmployer_`, pure — no rng, no sheet).** (a) A carried `BIZ-` employer with room wins (unchanged); a carried `SELF_EMPLOYED` / `UNTRACKED` is kept. (b) A GAME-clock citizen, or a no-job role (`student`, retired — the roster's `NO_EMPLOYMENT_ROLE`), holds no employer and gets no line. **The old pick hired students: `student` fell to `service`.** (c) A self-employed role → `SELF_EMPLOYED` (the mapping's 11 `selfEmployedPatterns` + its 15 `SELF_EMPLOYED` keyword rules, matched the roster's way). (d) Role field = `skillTagField_(roleFieldOf_(role))` (so `Trades` reads as Construction & Baylight) against businesses of that field with room — the citizen's hood first, `City-wide` counting as every hood, then the whole field; the same seed-hash slot as before. (e) A field with no room, or a role with no field → `UNTRACKED`. Sentinels reserve no slot and send no headcount signal.
+
+**The tag.** The mint's `SkillTags` stamp was the same four buckets (every trade and kitchen job tagged `Small Business`, so the rehire matcher offered a laid-off plumber a shop). It is now the role's catalog field from `roleFieldOf_`; a role with no field stays untagged.
+
+**Removed.** `classifyMintSector_`, the four `pools`, the service catch-all.
+
+**What it does not do.** (1) The field is the grain: a bus driver can land at any Transit & Infrastructure business, the water utility included; `Cab Driver` is not in the mapping's self-employed rules (only `Taxi driver`) and reads as transit — the mapping is research-build's config. (2) The nine no-field businesses take no mint. (3) The age-18 settlement (`educationCareerEngine.js:1274-1276`) is field-first already but keeps its own bucket fallback and service catch-all for a settler with no field — same fault, separate follow-up. (4) The mapping's 123 org-name keyword rules are not ported; the roster run after the fire still applies them to blanks only. (5) No restore: the 65 were moved by hand.
+
+**Files.** `phase05-citizens/processAdvancementIntake.js` (the pick, the pool, the tag, the two ported lists); `scripts/mintEmployerPick.test.js` (new, 37 checks: pool, the plan's four roles, 1,000-seed no-stray sweep, hood, room, self-employed, no-job, list parity against `data/employer_mapping.json` and the roster script); `scripts/householdIntake.test.js` (real field resolvers in place of a stub that returned null; section 9, seven end-to-end mint checks). Fifteen deliberate breaks, each caught.
+
+**Bench.** One C110 fire on the live-synced bench: the 54 authored staff land at their five carried employers (10 BIZ-00024, 11 BIZ-00023, 9 BIZ-00095, 12 BIZ-00015, 12 BIZ-00016); every other adult mint reads a field-matched employer, a sentinel, or blank for a no-job role; no minor holds an employer; no `Phase5-Advancement` row in Engine_Errors; `ranMs` usual.
 
 ## Open questions
 
@@ -196,3 +216,4 @@ pointers:
 - 2026-07-27 (S336, engine-sheet, second pass) — Task 4 data gate verified CLEAR (deploy now waits on engine.79 only — see Task 4 status); SkillTags schema live + engine.86/87 closed (detail in Task 7 status).
 - 2026-07-27 (S336, engine-sheet, third pass) — Tasks 7 + 8 BUILT: rehire matcher (v2.7) + mint economics; every engine-sheet task in this plan is now built. Deploy of the whole employment set rides the engine.79 gate.
 - 2026-08-01 (Kimi) — Audit pointer added: build-order step 5 of [[../research/2026-08-01-simulation-realism-audit]]. Business birth/mint stays in this plan; decline/death scoped to engine.96 ([[2026-08-01-business-lifecycle-generator]]).
+- 2026-10-02 (engine-sheet) — Task 9 / engine.278 BUILT: the mint's employer pick matches role field to business field (self-employed first, hood first, `UNTRACKED` when the field has no room), the four buckets and the service catch-all removed, the mint tag is the role's field. Cut under Task 9.

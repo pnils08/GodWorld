@@ -10,6 +10,11 @@ const fs = require('fs'), path = require('path');
 const R = (p) => fs.readFileSync(path.resolve(__dirname, '..', p), 'utf8');
 
 const intents = [], logs = [];
+// engine.278: the mint's employer pick and tag stamp read the real field resolvers
+// (a stub returning null sent every adult down the no-field path)
+const FIELD = new Function('ECONOMIC_PARAMETERS', 'Logger',
+  ['utilities/citizenDerivation.js', 'phase05-citizens/runCareerEngine.js', 'phase05-citizens/generationalWealthEngine.js', 'phase05-citizens/educationCareerEngine.js'].map(R).join('\n') +
+  '\nreturn { roleFieldOf_, skillTagField_, sectorCategory_, setCurrentField_ };')(JSON.parse(R('data/economic_parameters.json')), { log() {} });
 const sandbox = {
   ECONOMIC_PARAMETERS: JSON.parse(R('data/economic_parameters.json')), // engine.199: live reads the Economic_Parameters tab
   Logger: { log(m) { logs.push(String(m)); } },
@@ -23,7 +28,7 @@ const sandbox = {
   getCoreSimNeighborhoods_: () => ['Temescal'],
   // engine.148 P3: the door folds an authored hood to the map; off-map → null
   resolveHoodOrChild_: (ctx, name) => ({ temescal: 'Temescal', downtown: 'Downtown', 'old oakland': 'Downtown' }[String(name).trim().toLowerCase()] || null),
-  setCurrentField_: (a) => a, roleFieldOf_: () => null,
+  setCurrentField_: FIELD.setCurrentField_, roleFieldOf_: FIELD.roleFieldOf_, skillTagField_: FIELD.skillTagField_, sectorCategory_: FIELD.sectorCategory_,
   requireTab_: (ss, name) => ss.getSheetByName(name), // engine.119 (utilities/utilityFunctions.js)
   nextPopIdLocked_: require('../utilities/popIdAllocator').nextPopIdLocked_, // engine.90: the real allocator
 };
@@ -320,6 +325,33 @@ console.log('\n8. engine.279 — the pass logs once and reads Generic_Citizens o
   d.sheets.LifeHistory_Log.failWrites = true;
   let derr = null; try { E.processAdvancementRows_(d.ctx, 'C' + CYCLE, CYCLE); } catch (e) { derr = e; }
   check('body throw and log failure together: the body\'s error is thrown, not the write\'s', !!derr && /Atlantis/.test(derr.message) && !/injected/.test(derr.message), derr && derr.message);
+}
+
+console.log('\n9. engine.278 — the minted row carries the pick (field employer, sentinel, tag):');
+{
+  const w = world([]);
+  w.sheets.Business_Ledger.rows.push(
+    ['BIZ-00901', 'Northgate Construction', 'Construction', 'Temescal', 35, '', '', '', ''],
+    ['BIZ-00902', 'City of Oakland', 'Municipal Government', 'City-wide', 900, '', '', '', ''],
+    ['BIZ-00903', 'Corner Market', 'Retail', 'Temescal', 6, '', '', '', '']);
+  E.ensureHouseholdQueueSheet_(w.ctx.ss);
+  const adv = w.sheets.Advancement_Intake1, qh = adv.rows[0], qc = (n) => qh.indexOf(n);
+  qh.push('EmployerBizId'); // the queue column live carries (the owner door ensures it there)
+  const add = (first, role, extra) => { const r = new Array(qh.length).fill(''); r[qc('First')] = first; r[qc('Last')] = 'Pickett'; r[qc('RoleType')] = role; r[qc('Tier')] = 4; r[qc('ClockMode')] = 'ENGINE'; r[qc('BirthYear')] = 1990; r[qc('Neighborhood')] = 'Temescal'; Object.assign(r, extra || {}); adv.appendRow(r); };
+  add('Pia', 'Plumber'); add('Tad', 'Taxi driver'); add('Cleo', 'Climate Adaptation Specialist');
+  const carriedSE = {}; carriedSE[qc('EmployerBizId')] = 'SELF_EMPLOYED'; add('Sol', 'Plumber', carriedSE);
+  add('Ret', 'Retired');
+  const before = w.ctx.ledger.rows.length;
+  E.processAdvancementRows_(w.ctx, 'C' + CYCLE, CYCLE);
+  const [pia, tad, cleo, sol, ret] = w.ctx.ledger.rows.slice(before);
+  check('a retiree is minted with no employer and no seeking-work line', ret && ret[col('RoleType')] === 'Retired' && ret[col('EmployerBizId')] === '' && !/Seeking work/.test(ret[col('LifeHistory')]), ret && (ret[col('RoleType')] + '/' + ret[col('EmployerBizId')]));
+  check('a Plumber is minted at the hood\'s construction employer, never City Hall or the shop', pia && pia[col('EmployerBizId')] === 'BIZ-00901', pia && pia[col('EmployerBizId')]);
+  check('…tagged with the role\'s own field, not a bucket', pia && pia[col('SkillTags')] === FIELD.roleFieldOf_('Plumber') && pia[col('SkillTags')] !== 'Small Business', pia && pia[col('SkillTags')]);
+  check('a Taxi driver is minted SELF_EMPLOYED, with no seeking-work line', tad && tad[col('EmployerBizId')] === 'SELF_EMPLOYED' && !/Seeking work/.test(tad[col('LifeHistory')]), tad && tad[col('EmployerBizId')]);
+  check('a role with no field is minted UNTRACKED, untagged, with no seeking-work line', cleo && cleo[col('EmployerBizId')] === 'UNTRACKED' && cleo[col('SkillTags')] === '' && !/Seeking work/.test(cleo[col('LifeHistory')]), cleo && (cleo[col('EmployerBizId')] + '/' + cleo[col('SkillTags')]));
+  check('an authored SELF_EMPLOYED on the queue row is kept', sol && sol[col('EmployerBizId')] === 'SELF_EMPLOYED', sol && sol[col('EmployerBizId')]);
+  const sig = w.ctx.summary.careerSignals;
+  check('a sentinel reserves no slot and sends no headcount signal', !sig || !sig.businessDeltas || (!sig.businessDeltas.SELF_EMPLOYED && !sig.businessDeltas.UNTRACKED));
 }
 
 console.log('\n' + pass + ' passed, ' + fail + ' failed');

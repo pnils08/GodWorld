@@ -2244,10 +2244,13 @@
   Writes: S.tierDecay
   Sheets: Citizen_Media_Usage, LifeHistory_Log
 
-- **classifyMintSector_(role)**
-
 - **buildMintBizPool_(ss)**
   Sheets: Business_Ledger
+
+- **mintSelfEmployed_(role)**
+
+- **pickMintEmployer_(roleType, hood, clockMode, seed, pool, hasRoom)**
+  RNG: ctx.rng / safeRand_(ctx)
 
 - **checkEmergencePromotions_(ss, cycle, maxQueue, simYear)**
   Sheets: Generic_Citizens
@@ -4409,4 +4412,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1564
+**Functions mapped:** 1565

@@ -903,10 +903,11 @@ function processAdvancementRowsBody_(ctx, now, cycle, log) {
       var lMaiden = findColByName_(ledgerHeaders, 'MaidenName');
       if (lMaiden >= 0 && maiden) newRow[lMaiden] = maiden;
       // S336 (employment-living-system Task 5): a promoted citizen arrives with
-      // a tracked workplace — never a job title with no employer. Intake's
-      // EmployerBizId (carried from Generic_Citizens) wins; else a
-      // capacity-aware draw from the final RoleType. No opening anywhere →
-      // explicitly recorded as seeking work; silence is not an outcome.
+      // a workplace — never a job title with no employer. Intake's
+      // EmployerBizId (carried from Generic_Citizens) wins; else the pick below.
+      // engine.278 (Task 9): the pick matches the role's field to a business of
+      // the same field (pickMintEmployer_) — the four-bucket draw put a Plumber
+      // at the police department and a student on a corner store's payroll.
       // engine.109 (S419): a minor is a student, not a hire — the bench put a
       // 9-year-old on a payroll. Minors earn nothing (S320) and hold no
       // employer; the 18th-birthday settlement places them.
@@ -924,7 +925,7 @@ function processAdvancementRowsBody_(ctx, now, cycle, log) {
           }
         }
         var carried = (iEmployerBiz >= 0) ? String(row[iEmployerBiz] || '').trim() : '';
-        var mintedBiz = '';
+        var mintedBiz = '', mintSentinel = '', mintSeeking = false;
         var mintRoom = function (bid) {
           if (!mintBizPool) return false;
           var st = mintBizPool.statedById[bid];
@@ -932,19 +933,14 @@ function processAdvancementRowsBody_(ctx, now, cycle, log) {
         };
         if (carried.indexOf('BIZ-') === 0 && mintRoom(carried)) {
           mintedBiz = carried; // born into the tracked job the pool assigned — and it has room
-        } else if (mintBizPool) {
+        } else if (carried === 'SELF_EMPLOYED' || carried === 'UNTRACKED') {
+          mintSentinel = carried; // an authored row that says so keeps it
+        } else {
           // Carried-but-full falls through here: rule 1 binds BOTH paths — the
           // business has room or the citizen goes elsewhere (plan Task 5 step 4).
-          var mInd = classifyMintSector_(newRoleType);
-          var mPool = (mintBizPool.pools[mInd] || []).filter(mintRoom);
-          if (!mPool.length) mPool = (mintBizPool.pools.service || []).filter(mintRoom);
-          if (mPool.length) {
-            // Deterministic slot: seed-hash over the citizen identity, no rng
-            // (this path predates ctx.rng plumbing; replayable either way).
-            var mHash = 0;
-            for (var mc = 0; mc < seed.length; mc++) mHash = ((mHash << 5) - mHash + seed.charCodeAt(mc)) | 0;
-            mintedBiz = mPool[Math.abs(mHash) % mPool.length];
-          }
+          var mPick = pickMintEmployer_(newRoleType, lNeighborhood >= 0 ? newRow[lNeighborhood] : '',
+            clockMode, seed, mintBizPool, mintRoom);
+          mintedBiz = mPick.bizId; mintSentinel = mPick.sentinel; mintSeeking = mPick.seeking;
         }
         if (mintedBiz) {
           newRow[lEmployerBiz] = mintedBiz;
@@ -954,18 +950,21 @@ function processAdvancementRowsBody_(ctx, now, cycle, log) {
             if (!mcs.businessDeltas[mintedBiz]) mcs.businessDeltas[mintedBiz] = { gained: 0, lost: 0 };
             mcs.businessDeltas[mintedBiz].gained += 1;
           }
-        } else if (lLifeHistory >= 0) {
+        } else if (mintSentinel) {
+          newRow[lEmployerBiz] = mintSentinel; // self-employed, or employed off the tracked ledger — no slot, no headcount signal
+        } else if (mintSeeking && lLifeHistory >= 0) {
           newRow[lLifeHistory] += ' Seeking work (no tracked opening for ' + newRoleType + ').';
         }
       }
       // S336 Task 7: stamp the field tag so the rehire matcher can route this
-      // citizen from birth. classifyMintSector_ returns the 4-industry bucket;
-      // map it to the canonical 15-category SkillTags vocabulary (coarse is
-      // fine — the backfill refines nothing that starts blank).
+      // citizen from birth. engine.278: the tag is the role's own catalog field
+      // (roleFieldOf_, the resolver the matcher and the pay engine read) — the
+      // four-bucket map tagged every trade and kitchen job 'Small Business'. A
+      // role with no field stays untagged (blank is honest; the matcher skips it).
       var lSkillTags = findColByName_(ledgerHeaders, 'SkillTags');
       if (lSkillTags >= 0 && !newRow[lSkillTags]) {
-        var mintTagMap = { tech: 'Tech & Innovation', creative: 'Creative & Arts', 'public': 'Government & Civic', service: 'Small Business' };
-        newRow[lSkillTags] = mintTagMap[classifyMintSector_(newRoleType)] || 'Small Business';
+        var mintField = (typeof roleFieldOf_ === 'function') ? roleFieldOf_(newRoleType) : null;
+        if (mintField) newRow[lSkillTags] = mintField;
       }
       // Phase 42 §5.6 (impl #18): push new row to ctx.ledger.rows; Phase 10
       // consolidated commit auto-extends the sheet — no separate append intent.
@@ -1478,48 +1477,97 @@ var DRIP_PARENT_AGE_MAX = 45;
  * to the update path, never a duplicate mint.
  */
 // S336 (employment-living-system Task 5): capacity-aware Business_Ledger pool
-// for the mint's employer draw. MUST stay in sync with buildSettleBizPool_ /
-// classifySettleSector_ in educationCareerEngine.js (file-scoped there — the
-// deliberate small duplication is the established pattern, see that file's
-// classifySettleSector_ note). Returns null on any read failure; the mint then
+// for the mint's employer pick. engine.278 (Task 9): each business is filed
+// under its field (sectorCategory_, strict — the same map the rehire matcher
+// reads) with its hood, replacing the four keyword buckets. A business whose
+// Sector reads as no field (sports, 'Corporate', 'Science', 'Talent
+// Management') takes no mint. Returns null on any read failure; the mint then
 // records seeking-work instead of throwing.
-function classifyMintSector_(role) {
-  var s = String(role || '').toLowerCase();
-  if (/tech|software|cloud|\bai\b|analytics|platform|agent|biotech|intelligence|coworking|venture|engineer|developer|data/.test(s)) return 'tech';
-  if (/media|journal|gallery|entertainment|nightlife|music|design|architect|arts|artist|writer/.test(s)) return 'creative';
-  if (/public|municipal|government|transit|utilit|civic|education|teacher|healthcare|nurse|medical|legal|judicial|safety|police|fire|\bport\b|logistic|faith|community|housing|social/.test(s)) return 'public';
-  return 'service';
-}
-
 function buildMintBizPool_(ss) {
   try {
     var bizSheet = ss ? ss.getSheetByName('Business_Ledger') : null;
     if (!bizSheet) return null;
     var bizData = bizSheet.getDataRange().getValues();
     if (bizData.length < 2) return null;
-    var bh = bizData[0], bId = -1, bSector = -1, bCount = -1;
+    var bh = bizData[0], bId = -1, bSector = -1, bCount = -1, bHood = -1;
     for (var c = 0; c < bh.length; c++) {
       var h = String(bh[c]).trim();
       if (h === 'BIZ_ID') bId = c;
       if (h === 'Sector') bSector = c;
       if (h === 'Employee_Count') bCount = c;
+      if (h === 'Neighborhood') bHood = c;
     }
     if (bId < 0 || bSector < 0) return null;
-    var pools = { tech: [], service: [], public: [], creative: [] };
+    var catFn = (typeof sectorCategory_ === 'function') ? sectorCategory_ : null;
+    var byField = {};
     var statedById = {};
     for (var r = 1; r < bizData.length; r++) {
       var id = String(bizData[r][bId] || '').trim();
       if (!id) continue;
-      pools[classifyMintSector_(bizData[r][bSector])].push(id);
+      var field = catFn ? catFn(bizData[r][bSector], true) : null;
+      if (field) {
+        if (!byField[field]) byField[field] = [];
+        byField[field].push({ id: id, hood: bHood >= 0 ? String(bizData[r][bHood] || '').trim() : '' });
+      }
       var rawCount = bCount >= 0 ? bizData[r][bCount] : '';
       statedById[id] = (rawCount === '' || rawCount === null || rawCount === undefined || isNaN(Number(rawCount)))
         ? null : Number(rawCount);
     }
-    return { pools: pools, statedById: statedById };
+    return { byField: byField, statedById: statedById };
   } catch (e) {
     Logger.log('buildMintBizPool_: Business_Ledger read failed (' + e.message + ') — mint employer skipped');
     return null;
   }
+}
+
+// engine.278 — who is self-employed and who holds no job, ported from the
+// roster's own rules so the mint and scripts/linkCitizensToEmployers.js agree
+// on the same citizen (data/employer_mapping.json selfEmployedPatterns + its
+// SELF_EMPLOYED keyword rules; the script's NO_EMPLOYMENT_ROLE). Matching is
+// the script's: regex as written, keywords as case-sensitive substrings.
+// scripts/mintEmployerPick.test.js fails when either list drifts from its source.
+var MINT_SELF_EMPLOYED_PATTERNS = ['Owner$', '^Freelance', '^Independent', 'Artisan', 'Pitmaster$', 'Food Truck',
+  'Tattoo Artist', 'Muralist', '^Booky$', 'Drug Dealer', 'Organized Crime'];
+var MINT_SELF_EMPLOYED_KEYWORDS = ['Taxi driver', 'Taxi Driver', 'Pianist', 'Aura Wellness', 'Speculative Internet',
+  'Gallery Owner', 'small business owner', 'Actress', 'Actor', 'Rapper', 'Musician', 'Painter', 'Artist', 'Model', 'Writer'];
+var MINT_NO_EMPLOYMENT_ROLE = /^student$|retired|hall of famer|resident$/i;
+function mintSelfEmployed_(role) {
+  for (var i = 0; i < MINT_SELF_EMPLOYED_PATTERNS.length; i++) if (new RegExp(MINT_SELF_EMPLOYED_PATTERNS[i]).test(role)) return true;
+  for (var k = 0; k < MINT_SELF_EMPLOYED_KEYWORDS.length; k++) if (role.indexOf(MINT_SELF_EMPLOYED_KEYWORDS[k]) !== -1) return true;
+  return false;
+}
+
+// engine.278 — the mint's employer pick, in order:
+//   a GAME-clock citizen or a no-job role (student, retired) → no employer, no line;
+//   a self-employed role → SELF_EMPLOYED;
+//   the role's field (roleFieldOf_, 'Trades' read as its field by skillTagField_)
+//     against businesses of that field with room — the citizen's own hood first
+//     ('City-wide' counts as every hood), then the whole field; seed-hash slot;
+//   a field with no room, or a role with no field → UNTRACKED (a mint arrives
+//     with a job and its pay: employed off the tracked ledger, not seeking);
+//   an unreadable Business_Ledger → seeking: true (the caller writes the line).
+// Pure: no rng, no sheet. Returns { bizId, sentinel, seeking }.
+function pickMintEmployer_(roleType, hood, clockMode, seed, pool, hasRoom) {
+  var out = { bizId: '', sentinel: '', seeking: false };
+  var role = String(roleType || '').trim();
+  if (String(clockMode || '').trim().toUpperCase() === 'GAME') return out; // the sports world places its own
+  if (!role || MINT_NO_EMPLOYMENT_ROLE.test(role)) return out;
+  if (mintSelfEmployed_(role)) { out.sentinel = 'SELF_EMPLOYED'; return out; }
+  var cat = (typeof roleFieldOf_ === 'function') ? roleFieldOf_(role) : null;
+  var field = (cat && typeof skillTagField_ === 'function') ? skillTagField_(cat) : null;
+  if (!field) { out.sentinel = 'UNTRACKED'; return out; }
+  if (!pool || !pool.byField) { out.seeking = true; return out; }
+  var open = (pool.byField[field] || []).filter(function (b) { return hasRoom(b.id); });
+  var h = String(hood || '').trim();
+  var near = h ? open.filter(function (b) { return b.hood === h || b.hood === 'City-wide'; }) : [];
+  var from = near.length ? near : open;
+  if (!from.length) { out.sentinel = 'UNTRACKED'; return out; }
+  // Deterministic slot: seed-hash over the citizen identity, no rng
+  // (this path predates ctx.rng plumbing; replayable either way).
+  var s = String(seed || ''), mHash = 0;
+  for (var mc = 0; mc < s.length; mc++) mHash = ((mHash << 5) - mHash + s.charCodeAt(mc)) | 0;
+  out.bizId = from[Math.abs(mHash) % from.length].id;
+  return out;
 }
 
 function checkEmergencePromotions_(ss, cycle, maxQueue, simYear) {
@@ -1829,8 +1877,7 @@ function checkFamilyMatchPromotions_(ctx, cycle, slots) {
 var OWNER_DOOR_REQUIRED_KEYS = ['bizOwnerMintP', 'bizOwnerMaxStaff', 'bizOwnerMinAge', 'bizOwnerMinProfit'];
 // Institutions, public bodies, faith, and the real-world vendors on the ledger
 // never draw an owner — an explicit denylist on Sector and Name, not an income
-// cut (a hospital out-earns every contractor). classifyMintSector_'s
-// file-scoped duplication pattern, deliberate.
+// cut (a hospital out-earns every contractor). File-scoped on purpose.
 var OWNER_DOOR_INST_SECTOR_RE = /public|municipal|government|transit|utilit|education|school|legal|judicial|safety|police|fire|port|logistic|faith|church|synagogue|mosque|temple|community|housing|social|workforce|stadium|franchise|sports|media|journalism|platform|cloud|research|agent|science|development|authority|corporate|civic/i;
 var OWNER_DOOR_INST_NAME_RE = /authority|department|county|city of|unified|public|district$/i;
 var OWNER_QUEUE_COLS_ = ['BirthYear', 'Neighborhood', 'EmployerBizId', 'OwnerOfBizId', 'Gender'];

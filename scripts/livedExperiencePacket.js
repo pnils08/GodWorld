@@ -447,7 +447,11 @@ function parseJsonObject(text) {
   const start = raw.indexOf('{');
   const end = raw.lastIndexOf('}');
   if (start < 0 || end <= start) throw new Error('model returned no JSON object');
-  return JSON.parse(raw.slice(start, end + 1));
+  // Sharon Okafor C109 (2026-10-02): both angle draws died on "Expected property name
+  // or '}' at position 2" and the log kept nothing of what the model sent. The error
+  // carries the head of the text so the next one is diagnosable from the log alone.
+  try { return JSON.parse(raw.slice(start, end + 1)); }
+  catch (e) { throw new Error(String(e && e.message || e) + ' — model text begins: ' + JSON.stringify(raw.slice(start, start + 120))); }
 }
 
 function chaseIsJsonShaped(text) {

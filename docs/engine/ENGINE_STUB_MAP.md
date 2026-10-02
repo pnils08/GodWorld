@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-10-01 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-10-02 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -3576,6 +3576,8 @@
 
 - **careJusticeTargetProblem_(existing, startRow, replaces)**
 
+- **careJusticeFirstContent_(rows, firstRow, from)**
+
 - **careJusticeVerifyBlock_(tail, plan)**
 
 ### chaosCarsConfig.js
@@ -4389,4 +4391,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1555
+**Functions mapped:** 1556

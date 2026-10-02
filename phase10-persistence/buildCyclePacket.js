@@ -1162,22 +1162,24 @@ function persistCareJusticeCensus_(ctx) {
   // The tail is anchored on the last row that carries a Cycle in column A — not
   // on getLastRow(), which a stray cell far below the data would move, pushing
   // the last real block out of the window and restarting the stock as a first census.
+  // `anchor` (1 = no census row yet) and `sheetLast` ride along for the
+  // rows-below check after the outcome.
   function readTail() {
     var sheetLast = sheet.getLastRow();
-    if (sheetLast < 2) return { first: 2, rows: [] };
+    if (sheetLast < 2) return { first: 2, rows: [], anchor: 1, sheetLast: sheetLast };
     var cycles = sheet.getRange(2, 1, sheetLast - 1, 1).getValues();
     var lastRow = 1;
     for (var cr = cycles.length - 1; cr >= 0; cr--) {
       var cv = cycles[cr][0];
       if (cv !== '' && cv !== null && String(cv).replace(/^\s+|\s+$/g, '') !== '') { lastRow = cr + 2; break; }
     }
-    if (lastRow < 2) return { first: 2, rows: [] };
+    if (lastRow < 2) return { first: 2, rows: [], anchor: 1, sheetLast: sheetLast };
     var n = Math.min(lastRow - 1, tailMax);
     var first = lastRow - n + 1;
     var values = sheet.getRange(first, 1, n, width).getValues();
     var rows = [];
     for (var i = 0; i < values.length; i++) rows.push({ row: first + i, values: values[i] });
-    return { first: first, rows: rows };
+    return { first: first, rows: rows, anchor: lastRow, sheetLast: sheetLast };
   }
 
   var read = readTail();
@@ -1201,8 +1203,10 @@ function persistCareJusticeCensus_(ctx) {
 
   // Locate-compare-write is the retried unit: an attempt that timed out but
   // landed is found equal on the next attempt and not written twice.
+  var standing = null; // the read the rows-below check stands on
   var done = persistWithRetry_(function() {
     var fresh = readTail();
+    standing = fresh;
     var write = careJusticeWritePlan_(fresh.rows, fresh.first, plan);
     if (write.action === 'write') {
       // Whatever already sits in the target cells (content can exist only up to
@@ -1220,7 +1224,10 @@ function persistCareJusticeCensus_(ctx) {
   }, 'Care_Justice_Census block');
 
   if (done.action === 'write') {
-    var problem = careJusticeVerifyBlock_(readTail().rows, plan);
+    // The read-back is taken after setValues: its anchor is the block just
+    // written. The pre-write read's anchor sits above it and must not be used below.
+    standing = readTail();
+    var problem = careJusticeVerifyBlock_(standing.rows, plan);
     if (problem) throw new Error('careJusticeCensus: Cycle ' + cycle + ' did not read back — ' + problem);
   }
 
@@ -1230,6 +1237,23 @@ function persistCareJusticeCensus_(ctx) {
     (plan.firstCensus ? ' | first census' : '') +
     (plan.gapBlocks.length ? ' | gap Cycles ' + plan.gapBlocks.length : '') +
     ' | outside-table tracked ' + outsideTracked);
+
+  // Rows below the census (R2-8: only blank rows follow). A report, after the
+  // outcome: the Cycle's block already stands, and a row that was not in its way
+  // never costs the Cycle its census. Whitespace is not a row. The look is one
+  // tail window deep; the census grows a block a Cycle toward anything further.
+  if (standing.sheetLast > standing.anchor) {
+    var belowFirst = standing.anchor + 1;
+    var belowCount = Math.min(standing.sheetLast - standing.anchor, tailMax);
+    var below = persistWithRetry_(function() {
+      return sheet.getRange(belowFirst, 1, belowCount, width).getValues();
+    }, 'Care_Justice_Census rows below');
+    var orphan = careJusticeFirstContent_(below, belowFirst, 0);
+    if (orphan) {
+      throw new Error('careJusticeCensus: Cycle ' + cycle + ' stands; row ' + orphan.row + ' below it holds "' +
+        orphan.value + '" with no Cycle — clear it');
+    }
+  }
   return { action: done.action, completeness: plan.completeness };
 }
 

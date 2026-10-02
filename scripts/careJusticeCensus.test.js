@@ -272,6 +272,91 @@ for (const outcome of ['recovered', 'recovered-reconciled']) {
   throws('9 a run with another Cycle\'s rows after it is refused', () => run(tail, 111), 'follow Cycle 111');
 }
 
+// ── 9b. Rows below the census: reported on every outcome, after the block stands ──
+{
+  const TAIL = BLOCK * box.CARE_JUSTICE_TAIL_BLOCKS;
+  const blankRow = () => HEADERS.map(() => '');
+  const orphanRow = v => HEADERS.map((h, i) => i === 9 ? v : '');
+  // Put `value` on sheet row `sheetRow`, padding with blank rows.
+  const place = (w, sheetRow, value) => {
+    while (w.census.rows.length < sheetRow) w.census.rows.push(blankRow());
+    w.census.rows[sheetRow - 1] = orphanRow(value);
+  };
+  // Record every read of the census tab as [firstRow, rowCount, width].
+  const watch = w => {
+    const reads = [], real = w.census.getRange;
+    w.census.getRange = (r, c, n, wd) => { const rng = real(r, c, n, wd);
+      return { getValues: () => { reads.push([r, n, wd]); return rng.getValues(); }, setValues: rng.setValues }; };
+    return reads;
+  };
+  const clean = world(); run(clean, 110); run(clean, 111);
+
+  // Skip: the stored block is equal and an orphan sits right under it.
+  const skip = world(); run(skip, 110);
+  place(skip, 1 + BLOCK + 1, 'left by hand');
+  const skipKept = text(skip.census.rows);
+  throws('9b an orphan under an equal block is reported on the re-run', () => run(skip, 110),
+    'Cycle 110 stands; row ' + (1 + BLOCK + 1) + ' below it holds "left by hand" with no Cycle');
+  assert('9b …with the block and the orphan left as found', text(skip.census.rows) === skipKept);
+
+  // Append: the orphan sits past the cells the next block covers.
+  const far = world(); run(far, 110);
+  const farRow = 1 + 2 * BLOCK + 20;
+  place(far, farRow, 'far orphan');
+  throws('9b an orphan past the append span is reported after the block lands', () => run(far, 111),
+    'Cycle 111 stands; row ' + farRow + ' below it holds "far orphan" with no Cycle');
+  assert('9b …the Cycle\'s block is whole and equal to a clean run\'s', text(block(far, 111)) === text(block(clean, 111)));
+  assert('9b …and the orphan is left as found', far.census.rows[farRow - 1][9] === 'far orphan');
+
+  // In-place rewrite of a whole-length run, orphan right under it.
+  const same = world(); run(same, 110); run(same, 111);
+  same.census.rows[1 + BLOCK][HEADERS.indexOf('Completeness')] = 'incomplete';
+  place(same, 1 + 2 * BLOCK + 1, 'under rewrite');
+  throws('9b an orphan under an equal-length rewrite is reported after the rewrite', () => run(same, 111),
+    'Cycle 111 stands; row ' + (1 + 2 * BLOCK + 1) + ' below it holds "under rewrite" with no Cycle');
+  assert('9b …the run was rewritten whole', text(block(same, 111)) === text(block(clean, 111)));
+
+  // A short run rewritten to a whole block that ends just above the orphan.
+  const short = world(); run(short, 110); run(short, 111);
+  short.census.rows.length -= 5;
+  place(short, 1 + 2 * BLOCK + 1, 'under short run');
+  throws('9b an orphan just under a short-run rewrite is reported after the rewrite', () => run(short, 111),
+    'Cycle 111 stands; row ' + (1 + 2 * BLOCK + 1) + ' below it holds "under short run" with no Cycle');
+  assert('9b …the short run is a whole block again', text(block(short, 111)) === text(block(clean, 111)));
+
+  // A healthy tab ends on a census row: nothing below the block is read.
+  const healthy = world(); run(healthy, 110);
+  const healthyReads = watch(healthy);
+  const wrote = run(healthy, 111), again = run(healthy, 111);
+  assert('9b a tab ending on a census row: write and re-run both pass and read nothing below the block',
+    wrote.action === 'write' && again.action === 'skip' && healthyReads.length > 0 &&
+    healthyReads.every(([r, n]) => r + n - 1 <= 1 + 2 * BLOCK), text(healthyReads));
+
+  // Whitespace inside the window is not a row: looked at, never reported.
+  const ws = world(); run(ws, 110);
+  place(ws, 1 + 2 * BLOCK + 10, ' ');
+  const wsReads = watch(ws);
+  const wsSkip = run(ws, 110), wsWrite = run(ws, 111);
+  assert('9b a whitespace cell below the census is read and not reported, on a skip and on a write',
+    wsSkip.action === 'skip' && wsWrite.action === 'write' && block(ws, 111).length === BLOCK &&
+    wsReads.some(([r, n, wd]) => wd === HEADERS.length && r === 1 + BLOCK + 1 && n === BLOCK + 10) &&
+    wsReads.some(([r, n, wd]) => wd === HEADERS.length && r === 1 + 2 * BLOCK + 1 && n === 10), text(wsReads));
+
+  // Past the window: silent this Cycle, the read stays inside the window, seen once the census grows.
+  const beyond = world(); run(beyond, 110);
+  const beyondRow = 1 + BLOCK + TAIL + 3;
+  place(beyond, beyondRow, 'beyond the window');
+  const beyondReads = watch(beyond);
+  const quiet = run(beyond, 110);
+  // The column-A scan (width 1) runs the tab's length as before; no full-width read leaves the window.
+  const wide = beyondReads.filter(([r, n, wd]) => wd === HEADERS.length);
+  assert('9b an orphan past the window is not reported that Cycle and no full-width read reaches it',
+    quiet.action === 'skip' && wide.some(([r]) => r === 1 + BLOCK + 1) &&
+    wide.every(([r, n]) => r + n - 1 <= 1 + BLOCK + TAIL), text(beyondReads));
+  throws('9b …and is reported once the census has grown to within the window', () => run(beyond, 111),
+    'Cycle 111 stands; row ' + beyondRow + ' below it holds "beyond the window" with no Cycle');
+}
+
 // ── 11. Completeness is checked ──
 {
   const w = world();

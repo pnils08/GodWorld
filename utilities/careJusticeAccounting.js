@@ -841,14 +841,24 @@ function careJusticeWritePlan_(tail, firstTailRow, plan) {
  * @return {String} '' when clear, else what was found
  */
 function careJusticeTargetProblem_(existing, startRow, replaces) {
-  for (var r = replaces; r < (existing || []).length; r++) {
-    for (var c = 0; c < existing[r].length; c++) {
-      if (careJusticeCellText_(existing[r][c]).replace(/^\s+|\s+$/g, '') !== '') {
-        return 'row ' + (startRow + r) + ' holds "' + existing[r][c] + '" where the census would write';
+  var hit = careJusticeFirstContent_(existing, startRow, replaces);
+  return hit ? 'row ' + hit.row + ' holds "' + hit.value + '" where the census would write' : '';
+}
+
+/**
+ * The first cell that does not trim to empty in `rows` (sheet rows starting at
+ * `firstRow`), looking from index `from` on.
+ * @return {{row: Number, value: *}|null}
+ */
+function careJusticeFirstContent_(rows, firstRow, from) {
+  for (var r = from || 0; r < (rows || []).length; r++) {
+    for (var c = 0; c < rows[r].length; c++) {
+      if (careJusticeCellText_(rows[r][c]).replace(/^\s+|\s+$/g, '') !== '') {
+        return { row: firstRow + r, value: rows[r][c] };
       }
     }
   }
-  return '';
+  return null;
 }
 
 // After the write: the block reads back whole, each key once, every cell equal.
@@ -893,6 +903,7 @@ if (typeof module !== 'undefined' && module.exports) {
     careJusticeWritePlan_: careJusticeWritePlan_,
     careJusticeVerifyBlock_: careJusticeVerifyBlock_,
     careJusticeTargetProblem_: careJusticeTargetProblem_,
+    careJusticeFirstContent_: careJusticeFirstContent_,
     CARE_JUSTICE_TAIL_BLOCKS: CARE_JUSTICE_TAIL_BLOCKS
   };
 }

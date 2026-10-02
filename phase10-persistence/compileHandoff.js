@@ -1168,20 +1168,8 @@ function buildSection13_ReturnsExpected_() {
   lines.push('|Reporter|StoryType|SignalSource|Headline|ArticleText|CulturalMentions|');
   lines.push('(One row per article)');
   lines.push('');
-  lines.push('STORYLINES UPDATED:');
-  lines.push('FORMAT: Pipe-separated fields matching Storyline_Intake.');
-  lines.push('Only NEW and RESOLVED. Do NOT re-list active storylines.');
-  lines.push('');
-  lines.push('NEW THIS CYCLE:');
-  lines.push('— [type] | [description] | [neighborhood] | [citizens] | [priority]');
-  lines.push('  Types: arc, thread, question, mystery, developing, seasonal, sports');
-  lines.push('  Priority: urgent, high, normal, low, background');
-  lines.push('  e.g. — arc | Stabilization Fund implementation | West Oakland | Denise Carter | high');
-  lines.push('');
-  lines.push('RESOLVED THIS CYCLE:');
-  lines.push('— resolved | [description of storyline being closed]');
-  lines.push('  e.g. — resolved | Stabilization Fund committee vote');
-  lines.push('');
+  // engine.268: the STORYLINES UPDATED return section is gone — nothing parses it since
+  // Storyline_Intake was deleted; running stories reach writers from the engine-keyed registry.
   lines.push('CITIZEN USAGE LOG:');
   lines.push('FORMAT: This feeds the intake parser. Follow formats exactly.');
   lines.push('NO parentheses inside fields — parens ONLY for the final field.');

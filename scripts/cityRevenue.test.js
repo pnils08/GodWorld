@@ -307,9 +307,22 @@ console.log('\n10. tax day:');
   res = E.collectPropertyTax_(w.ctx.ss, w.ctx, 120);
   assert('10.11b a tax day that collects nothing still posts its row — the day is on the tab', res.taxDay && res.collected === 0 && treasuryRows().length === 1 && treasuryRows()[0][3] === 'PROPERTY-TAX' && treasuryRows()[0][2] === 0 && w.ctx.summary.treasury.lastTaxCycle === 120);
 
+  // hooks: the desks hear about tax day through the deck
+  w = world({ business: [['BIZ_ID', 'Name', 'Annual_Revenue'], ['B1', 'x', 4000000]], cfg: { businessTaxRate: 0.01 } });
+  res = E.collectPropertyTax_(w.ctx.ss, w.ctx, 120);
+  let hk = w.ctx.summary.storyHooks || [];
+  const cityHook = hk.filter(x => x.hookType === 'TAX_DAY' && x.neighborhood === '');
+  const hoodHooks = hk.filter(x => x.hookType === 'TAX_DAY' && x.neighborhood !== '');
+  assert('10.11c one city tax-day hook with the totals, for the civic desk', cityHook.length === 1 && cityHook[0].domain === 'CIVIC' && /property tax and \$40K in business tax; 3 tracked owner households paid \$23K, 1 had to borrow/.test(cityHook[0].description), cityHook[0] && cityHook[0].description);
+  assert('10.11d one hook per hood that paid — three hoods, not four payers', hoodHooks.length === 3 && hoodHooks.some(x => x.neighborhood === 'Rockridge' && /1 owner household paid \$11K/.test(x.description)), hoodHooks.map(x => x.description).join(' / '));
+  assert('10.11e the first tax day says the allocation has ended', hk.filter(x => x.hookType === 'ALLOCATION_ENDED').length === 1);
+  w = world({ lastTax: 68 });
+  E.collectPropertyTax_(w.ctx.ss, w.ctx, 120);
+  assert('10.11f a later tax day does not announce the allocation again', (w.ctx.summary.storyHooks || []).filter(x => x.hookType === 'ALLOCATION_ENDED').length === 0 && (w.ctx.summary.storyHooks || []).filter(x => x.hookType === 'TAX_DAY').length === 4);
+
   w = world({ position: 15 });
   res = E.collectPropertyTax_(w.ctx.ss, w.ctx, 119);
-  assert('10.12 any other week: nobody pays, nothing is posted', res.taxDay === false && nwOf(byPop(w, 'A1')) === 300000 && treasuryRows().length === 0);
+  assert('10.12 any other week: nobody pays, nothing is posted, no hook', res.taxDay === false && nwOf(byPop(w, 'A1')) === 300000 && treasuryRows().length === 0 && !(w.ctx.summary.storyHooks || []).length);
   w = world({ cfg: { taxDayCyclePosition: 0 } });
   assert('10.13 position 0 turns tax day off', E.collectPropertyTax_(w.ctx.ss, w.ctx, 120).taxDay === false);
   w = world({ lastTax: 110 });

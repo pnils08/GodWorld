@@ -1861,7 +1861,7 @@ function collectPropertyTax_(ss, ctx, cycle) {
       cCost = hj('HousingCost'), cStat = hj('Status');
   if (cMem < 0 || cType < 0 || cHood < 0) throw new Error('engine.271 tax day: Household_Ledger columns missing');
   var stamp = 'Y' + (Math.floor((cycle - 1) / 52) + 1) + 'C' + (((cycle - 1) % 52) + 1);
-  var byHood = {};
+  var byHood = {}, householdsByHood = {};
 
   for (var q = 1; q < hv.length; q++) {
     if (cStat >= 0 && String(hv[q][cStat] || '').toLowerCase() !== 'active') continue;
@@ -1889,6 +1889,7 @@ function collectPropertyTax_(ss, ctx, cycle) {
     }
     if (!adults.length) continue;
     results.households++;
+    householdsByHood[hood] = (householdsByHood[hood] || 0) + 1;
 
     var billed = 0;
     for (var a = 0; a < adults.length; a++) {
@@ -1939,6 +1940,39 @@ function collectPropertyTax_(ss, ctx, cycle) {
       postTreasuryRevenue_(ctx, 'BUSINESS-TAX', results.businessTax, 'business tax on ledger revenue');
     }
   }
+  // The desks hear about tax day through the hook deck: one hook for the city, one
+  // per hood that paid (never one per household), and — the first time only — the
+  // end of the weekly allocation. A ticket raises no hook: its line is on the row.
+  var money = (typeof treasuryMoney_ === 'function') ? treasuryMoney_ : function (n) { return '$' + Math.round(n); };
+  var hooks = S.storyHooks = S.storyHooks || [];
+  hooks.push({
+    hookType: 'TAX_DAY', severity: 5, priority: 4,
+    description: 'Tax day — the city took in ' + money(results.cityTotal) + ' in property tax' +
+      (results.businessTax > 0 ? ' and ' + money(results.businessTax) + ' in business tax' : '') + '; ' +
+      results.households + ' tracked owner households paid ' + money(results.collected) +
+      (results.borrowed ? ', ' + results.borrowed + ' had to borrow to pay' : ''),
+    cycleGenerated: cycle, neighborhood: '', domain: 'CIVIC',
+    text: 'Tax day: the city collected its yearly property tax'
+  });
+  for (var th in byHood) {
+    if (!byHood.hasOwnProperty(th)) continue;
+    hooks.push({
+      hookType: 'TAX_DAY', severity: 3, priority: 3,
+      description: 'Tax day in ' + (th || 'the city') + ' — ' + (householdsByHood[th] || 0) +
+        ((householdsByHood[th] || 0) === 1 ? ' owner household' : ' owner households') + ' paid ' + money(byHood[th]) + ' in property tax',
+      cycleGenerated: cycle, neighborhood: th, domain: 'CIVIC',
+      text: 'Property tax came due in ' + (th || 'the city')
+    });
+  }
+  if (!(lastTax > 0) && treasury.lastTaxCycle === cycle) {
+    hooks.push({
+      hookType: 'ALLOCATION_ENDED', severity: 5, priority: 4,
+      description: 'The weekly budget allocation ends with this first tax day — from here the treasury lives on what the city collects',
+      cycleGenerated: cycle, neighborhood: '', domain: 'CIVIC',
+      text: 'The city\'s weekly budget allocation ends; taxes and court money fund the treasury now'
+    });
+  }
+
   Logger.log('collectPropertyTax_ C' + cycle + ': ' + results.households + ' households, ' + results.payers +
     ' payers, collected ' + results.collected + ' (' + results.borrowed + ' borrowed), city ' + results.cityTotal +
     ', business ' + results.businessTax);

@@ -1944,7 +1944,8 @@
   Config: ctx.config.propertyTaxRate
 
 - **collectPropertyTax_(ss, ctx, cycle)**
-  Reads: S.careJusticeDemand, S.cycleOfYear, S.treasury
+  Reads: S.careJusticeDemand, S.cycleOfYear, S.storyHooks, S.treasury
+  Writes: S.storyHooks
   Sheets: Business_Ledger, Household_Ledger
 
 - **trackHomeOwnership_(ss, ctx, cycle)**
@@ -2101,8 +2102,8 @@
 - **judicialLifecycleReceipt_(c, kind, cycle)**
 
 - **runJudicialLifecycle_(ctx)**
-  Reads: S.absoluteCycle, S.cycleId, S.judicialEvents
-  Writes: S.judicialEvents
+  Reads: S.absoluteCycle, S.cycleId, S.judicialEvents, S.storyHooks
+  Writes: S.judicialEvents, S.storyHooks
   Config: ctx.config.cycleCount
 
 ### maneuverEngine.js

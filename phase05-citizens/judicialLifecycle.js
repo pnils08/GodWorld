@@ -648,7 +648,18 @@ function runJudicialLifecycle_(ctx) {
         if (paid) settled.push(paid);
         if (revCfg) {
           var fine = judicialSettleFine_(ctx, row, c, cycle, payCols, revCfg, lower);
-          if (fine) fined.push(fine);
+          if (fine) {
+            fined.push(fine);
+            // the arrest reached the desks as CITIZEN_ARRESTED; the fine is its ending, same desk
+            S.storyHooks = S.storyHooks || [];
+            S.storyHooks.push({
+              hookType: 'COURT_FINE', severity: 4, priority: 4,
+              description: (c.Name || c.POPID) + ' — fined $' + fine.fine + ' by the court on a ' + fine.gravity +
+                ' charge (' + c.Outcome + ', case ' + c.CaseId + ')' + (fine.borrowed ? '; had to borrow to pay it' : ''),
+              cycleGenerated: cycle, neighborhood: c.Neighborhood || '', domain: 'SAFETY',
+              text: 'The court closed case ' + c.CaseId + ' with a $' + fine.fine + ' fine'
+            });
+          }
         }
         if (c.Outcome !== 'no-arrest' && !judicialHealthStatus_(lower) && lower !== 'deceased' &&
             lower !== 'traded' && lower !== 'inactive' && lower !== 'pending' &&

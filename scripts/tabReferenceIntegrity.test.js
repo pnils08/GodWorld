@@ -41,8 +41,6 @@ const ALLOWLIST = {
   'Hospital_Ledger':     'lazy-created engine tab (engine.52; phase09-digest/finalizeCycleState.js:150); schema header missing',
   'Intake':              'live tab, created on prod S305 for engine.51 processIntake_ front door (docs/SPREADSHEET.md:196); schema header missing',
   'Media_Intake':        'live tab (docs/SPREADSHEET.md:112); schema header missing',
-  'Storyline_Intake':    'live tab (docs/SPREADSHEET.md:113); schema header missing',
-  'Storyline_Tracker':   'live tab, DISCONTINUED 2026-08-05 but legacy writers still touch it (docs/SPREADSHEET.md:116); schema header missing',
   // --- Auto-created manual-entry tabs (Election_Log precedent: created on write) ---
   'MediaRoom_Paste':     'auto-created manual-entry tab — phase07-evening-media/parseMediaRoomMarkdown.js insertSheet on operator run; menu-wired (utilities/godWorldMenu.js "Parse Media Room Markdown")',
 };

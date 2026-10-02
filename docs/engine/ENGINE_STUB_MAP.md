@@ -3045,8 +3045,6 @@
 
 - **parseArticleTable_(ss, section)**
 
-- **parseStorylines_(ss, section)**
-
 - **parseCitizenUsage_(ss, section)**
 
 - **parseContinuityNotes_(ss, section)**
@@ -3056,9 +3054,6 @@
 
 - **ensureMediaIntakeSheet_(ss)**
   Sheets: Media_Intake
-
-- **ensureStorylineIntakeSheet_(ss)**
-  Sheets: Storyline_Intake
 
 - **ensureCitizenUsageIntakeSheet_(ss)**
   Sheets: Citizen_Usage_Intake
@@ -4442,4 +4437,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1576
+**Functions mapped:** 1574

@@ -2,7 +2,7 @@
   "generated": "2026-10-02",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 180,
-  "functionsMapped": 1576,
+  "functionsMapped": 1574,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -5048,12 +5048,6 @@
         "phase07-evening-media/mediaRoomIntake.js::processRawCitizenUsageLogManual",
         "phase07-evening-media/parseMediaRoomMarkdown.js::diagnosePasteSheet",
         "phase07-evening-media/parseMediaRoomMarkdown.js::parseMediaRoomMarkdown"
-      ]
-    },
-    "Storyline_Intake": {
-      "writers": [],
-      "readers": [
-        "phase07-evening-media/parseMediaRoomMarkdown.js::ensureStorylineIntakeSheet_"
       ]
     },
     "Domain_Tracker": {

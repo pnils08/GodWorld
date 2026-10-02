@@ -60,7 +60,7 @@ console.log('\nTest 3: SHEET_COLUMNS schema covers expected reader sheets');
   for (const sheet of [
     'Simulation_Ledger', 'Generic_Citizens', 'Household_Ledger',
     'Civic_Office_Ledger', 'Initiative_Tracker', 'Relationship_Bonds',
-    'LifeHistory_Log', 'Citizen_Media_Usage', 'Storyline_Tracker',
+    'LifeHistory_Log', 'Citizen_Media_Usage',
     'Story_Hook_Deck', 'World_Population'
   ]) {
     assert(`SHEET_COLUMNS includes '${sheet}'`, source.includes(`'${sheet}'`));

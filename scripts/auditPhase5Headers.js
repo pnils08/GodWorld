@@ -108,19 +108,7 @@ const SHEET_COLUMNS = {
     }
   },
 
-  'Storyline_Tracker': {
-    readers: [], // engine readers deleted engine.141 S419 (tab discontinued 2026-08-05)
-    required: [
-      'StorylineId', 'Description', 'Neighborhood',
-      'LinkedArc', 'Status', 'LastMentionedCycle', 'Priority',
-      'Title', 'LastCoverageCycle', 'MentionCount', 'CoverageGap',
-      'ResolutionCondition', 'StaleAfterCycles', 'IsStale', 'WrapUpGenerated'
-    ],
-    // updateStorylineStatusv1.2.js uses findColByArray_ for these
-    alternates: {
-      'Type': ['StorylineType', 'Type']
-    }
-  },
+  // 'Storyline_Tracker' removed engine.268 — the tab is deleted.
 
   'Story_Hook_Deck': {
     readers: ['hookLifecycleEngine.js'],

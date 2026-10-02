@@ -11,7 +11,7 @@
  * 
  * Parses Media Room markdown output and populates intake sheets:
  * - ARTICLE TABLE → Media_Intake (7 columns)
- * - STORYLINES CARRIED FORWARD → Storyline_Intake (6 columns)
+ * - STORYLINES CARRIED FORWARD — no longer parsed (engine.268: Storyline_Intake deleted)
  * - CITIZEN USAGE LOG → Citizen_Usage_Intake (5 columns)
  * - CONTINUITY NOTES → LifeHistory_Log (direct quotes only; rest is audit-only)
  * 
@@ -180,13 +180,9 @@ function parseAllSections_(ss, markdown) {
   }
   
   // STORYLINES CARRIED FORWARD (also check for "STORYLINES UPDATED")
-  var storylineSection = extractSection_(markdown, 'STORYLINES CARRIED FORWARD');
-  if (!storylineSection) {
-    storylineSection = extractSection_(markdown, 'STORYLINES UPDATED');
-  }
-  if (storylineSection) {
-    results.storylines = parseStorylines_(ss, storylineSection);
-  }
+  // engine.268: the storyline section is no longer parsed — Storyline_Intake and
+  // Storyline_Tracker are deleted (retired engine.266; the reporter-slug pipeline
+  // into Storyline_Ledger replaced them). results.storylines stays 0.
   
   // CITIZEN USAGE LOG
   var citizenSection = extractSection_(markdown, 'CITIZEN USAGE LOG');
@@ -386,120 +382,6 @@ function parseArticleTable_(ss, section) {
 }
 
 
-// ════════════════════════════════════════════════════════════════════════════
-// STORYLINES PARSER
-// Storyline_Intake: StorylineType, Description, Neighborhood, RelatedCitizens, Priority, Status
-// ════════════════════════════════════════════════════════════════════════════
-
-function parseStorylines_(ss, section) {
-  var lines = section.split('\n');
-  var storylines = [];
-  var currentCategory = 'active';
-  
-  for (var i = 0; i < lines.length; i++) {
-    var line = lines[i].trim();
-    if (!line) continue;
-    
-    // Category headers
-    if (line.match(/^RESOLVED/i)) {
-      currentCategory = 'resolved';
-      continue;
-    }
-    if (line.match(/^PHASE CHANGES/i)) {
-      currentCategory = 'phase-change';
-      continue;
-    }
-    if (line.match(/^STILL ACTIVE/i) || line.match(/^ACTIVE/i)) {
-      currentCategory = 'active';
-      continue;
-    }
-    if (line.match(/^NEW THREAD/i) || line.match(/^NEW THIS CYCLE/i) || line.match(/^NEW:/i)) {
-      currentCategory = 'new';
-      continue;
-    }
-    if (line.match(/^QUESTIONS/i)) {
-      currentCategory = 'question';
-      continue;
-    }
-    
-    // Parse entries (— or - prefix)
-    if (line.match(/^[—\-]\s+/)) {
-      var content = line.replace(/^[—\-]\s+/, '').trim();
-      
-      // Extract name: description format
-      var colonIdx = content.indexOf(':');
-      var storylineName = '';
-      var description = content;
-      
-      if (colonIdx > 0 && colonIdx < 50) {
-        storylineName = content.substring(0, colonIdx).trim();
-        description = content.substring(colonIdx + 1).trim();
-      }
-      
-      // Determine type
-      var storyType = currentCategory;
-      if (currentCategory === 'question') {
-        storyType = 'question';
-      } else if (currentCategory === 'resolved') {
-        storyType = 'resolved';
-      } else if (currentCategory === 'phase-change') {
-        storyType = 'phase-change';
-      } else if (currentCategory === 'new') {
-        storyType = 'new';
-      } else {
-        storyType = 'active';
-      }
-
-      // Determine priority
-      var priority = 'normal';
-      if (currentCategory === 'new' || currentCategory === 'phase-change') {
-        priority = 'high';
-      }
-      
-      // Extract neighborhood if mentioned
-      var neighborhood = '';
-      var neighborhoods = ['Temescal', 'Downtown', 'West Oakland', 'Fruitvale', 'Laurel', 
-                          'Jack London', 'Lake Merritt', 'Chinatown', 'Rockridge', 'Piedmont'];
-      for (var n = 0; n < neighborhoods.length; n++) {
-        if (content.indexOf(neighborhoods[n]) >= 0) {
-          neighborhood = neighborhoods[n];
-          break;
-        }
-      }
-      
-      storylines.push({
-        storylineType: storyType,
-        description: storylineName ? storylineName + ': ' + description : description,
-        neighborhood: neighborhood,
-        relatedCitizens: '',
-        priority: priority
-      });
-    }
-  }
-  
-  if (storylines.length === 0) return 0;
-  
-  var sheet = ensureStorylineIntakeSheet_(ss);
-  
-  var rows = [];
-  for (var j = 0; j < storylines.length; j++) {
-    var s = storylines[j];
-    rows.push([
-      s.storylineType,
-      s.description,
-      s.neighborhood,
-      s.relatedCitizens,
-      s.priority,
-      ''  // Status
-    ]);
-  }
-  
-  var startRow = sheet.getLastRow() + 1;
-  sheet.getRange(startRow, 1, rows.length, 6).setValues(rows);
-  
-  Logger.log('parseStorylines_: Added ' + storylines.length + ' storylines');
-  return storylines.length;
-}
 
 
 // ════════════════════════════════════════════════════════════════════════════
@@ -766,20 +648,6 @@ function ensureMediaIntakeSheet_(ss) {
   var sheet = ss.getSheetByName('Media_Intake');
   if (!sheet) {
     sheet = ss.insertSheet('Media_Intake');
-    sheet.appendRow(HEADERS);
-    sheet.setFrozenRows(1);
-    sheet.getRange(1, 1, 1, HEADERS.length).setFontWeight('bold');
-  }
-  return sheet;
-}
-
-
-function ensureStorylineIntakeSheet_(ss) {
-  var HEADERS = ['StorylineType', 'Description', 'Neighborhood', 'RelatedCitizens', 'Priority', 'Status'];
-  
-  var sheet = ss.getSheetByName('Storyline_Intake');
-  if (!sheet) {
-    sheet = ss.insertSheet('Storyline_Intake');
     sheet.appendRow(HEADERS);
     sheet.setFrozenRows(1);
     sheet.getRange(1, 1, 1, HEADERS.length).setFontWeight('bold');

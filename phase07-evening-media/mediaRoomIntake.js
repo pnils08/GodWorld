@@ -541,8 +541,7 @@ function setupMediaIntakeV2() {
   // 1. Media_Intake (Articles)
   var articleSheet = requireTab_(ss, 'Media_Intake'); // engine.119: no runtime create
 
-  // 2. Storyline_Intake
-  var storylineSheet = requireTab_(ss, 'Storyline_Intake'); // engine.119: no runtime create
+  // 2. Storyline_Intake — deleted engine.268 (tab retired with Storyline_Tracker)
 
   // 3. Citizen_Usage_Intake
   var usageSheet = requireTab_(ss, 'Citizen_Usage_Intake'); // engine.119: no runtime create
@@ -809,7 +808,7 @@ function upgradeMediaLedgerWithCalendar_(ss) {
 
 function clearAllProcessedIntake() {
   var ss = openSimSpreadsheet_() // v2.14: Use configured spreadsheet ID;
-  var sheets = ['Media_Intake', 'Storyline_Intake', 'Citizen_Usage_Intake'];
+  var sheets = ['Media_Intake', 'Citizen_Usage_Intake']; // engine.268: Storyline_Intake deleted
   var total = 0;
 
   for (var s = 0; s < sheets.length; s++) {

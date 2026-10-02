@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 180 · **Functions mapped:** 1576 · **S.* fields:** 364 · **Sheets:** 60
+**Files scanned:** 180 · **Functions mapped:** 1574 · **S.* fields:** 364 · **Sheets:** 59
 
 ## S.* / ctx.summary reverse index
 
@@ -450,7 +450,6 @@ Sheet detection: `getSheetByName`, `queue*Intent_`, known sheet-name string + wr
 | `Simulation_Ledger` | `phase05-citizens/generationalWealthEngine.js::ensureHeritageSchema_` | `phase01-config/initSimulationLedger.js::initSimulationLedger_`, `phase05-citizens/bondEngine.js::ensureBondEngineData_`, `phase05-citizens/citizenContextBuilder.js::diagnoseLedgerStructure`, `phase05-citizens/citizenContextBuilder.js::findInSimulationLedger_`, `phase05-citizens/citizenContextBuilder.js::listNamedCitizens`, …(+9 more) | 1 | 14 |
 | `Story_Hook_Deck` | _(none)_ | `phase08-v3-chicago/v3StoryHookWriter.js::saveV3Hooks_`, `utilities/cycleRollback.js::previewRollbackToCycle78`, `utilities/cycleRollback.js::rollbackToCycle78` | 0 | 3 |
 | `Story_Seed_Deck` | _(none)_ | `phase07-evening-media/buildContractSeeds.js::contractSeedUsageTally_`, `phase10-persistence/saveV3Seeds.js::migrateSeedDeckV4_`, `phase10-persistence/saveV3Seeds.js::saveV3Seeds_`, `utilities/cycleRollback.js::previewRollbackToCycle78`, `utilities/cycleRollback.js::rollbackToCycle78` | 0 | 5 |
-| `Storyline_Intake` | _(none)_ | `phase07-evening-media/parseMediaRoomMarkdown.js::ensureStorylineIntakeSheet_` | 0 | 1 |
 | `Transit_Metrics` | `utilities/ensureTransitMetrics.js::recordTransitMetrics_` | `utilities/ensureTransitMetrics.js::getTransitMetrics_`, `utilities/ensureTransitMetrics.js::recordTransitMetrics_` | 1 | 2 |
 | `Undocked_Draw` | `phase05-citizens/casinoLedgerEngine.js::undockedDrawCast_` | `phase05-citizens/casinoLedgerEngine.js::undockedDrawCast_` | 1 | 1 |
 | `Undocked_Feed` | _(none)_ | `phase02-world-state/loadEventContentLedger.js::loadUndockedFeed_` | 0 | 1 |

@@ -133,10 +133,10 @@ Read/written by Node.js scripts during edition production.
 |-----|------|---------|----------|---------|
 | **Intake** | 1 | ENGINE | MIKE, ENGINE | Lean engine.51 citizen front door (First/Last/Age/Neighborhood/RoleType/Category/Family/Notes/IntakeStatus) — created on prod S305; processed by `processIntake_` Phase 5, fed by `mediaRoomIntake.js` |
 | **Media_Intake** | 222 | SCRIPT | SCRIPT | Citizen intake from editions |
-| **Storyline_Intake** | 363 | — | — (unwired scripts only) | FROZEN engine.266 — engine processor removed. Deletion = engine.268 |
+| ~~Storyline_Intake~~ | — | — | — | **DELETED 2026-10-02 (engine.268, builder-approved).** 363 rows exported to `output/archive/storyline_tabs_retired_c109.json` |
 | **Citizen_Usage_Intake** | 852 | SCRIPT | SCRIPT | Citizen usage tracking with POPID |
 | **Citizen_Media_Usage** | 500 | ENGINE, SCRIPT | ENGINE, SCRIPT | Citizen media appearances (cleaned S99) |
-| **Storyline_Tracker** | 240 | — | — | DISCONTINUED 2026-08-05 — superseded by Storyline_Ledger. FROZEN engine.266: zero writers, zero readers. Deletion = engine.268 |
+| ~~Storyline_Tracker~~ | — | — | — | **DELETED 2026-10-02 (engine.268, builder-approved).** Superseded by Storyline_Ledger; 240 rows exported to `output/archive/storyline_tabs_retired_c109.json` |
 | **Storyline_Ledger** | 23 | SCRIPT (buildWorldSummary desk_signal, buildDeskPackets, curation) | SCRIPT (cron-saturday-run.js step 6b) | Storylines keyed to engine events (crisis arcs, initiative stages); Status engine-owned; every registry entry has a row (engine.270). 97 legacy rows C103–C108 kept as record |
 | **Employment_Roster** | 658 | SCRIPT | SCRIPT | Citizen-employer linkage |
 | **Health_Cause_Queue** | 3 | ENGINE | ENGINE | Phase 11 health cause assignments |
@@ -228,7 +228,7 @@ infrastructure.6 Track B close (2026-08-16, `c3fe1780` + `86f43999`). Each row c
 |-----------|-----------------|---------------|
 | **Intake** | `editionIntake.js` (old) | **CLOSED S106 / S305.** Old writer rerouted to `Citizen_Usage_Intake`. Tab created on prod S305 for the engine.51 `processIntake_` front door. |
 | **Advancement_Intake** | `processAdvancementIntake.js`, `mediaRoomIntake.js` fallbacks | **CLOSED `c3fe1780` — fallbacks dropped.** Bare `Advancement_Intake` does not exist; each site already guarded (return / lazy-create / `if (advSheet)`). No behavior change. **`Advancement_Intake1` is live** (`schemas/SCHEMA_HEADERS.md`) and is not a ghost. `sheetNames.js` `ADVANCEMENT_INTAKE` constant removed. |
-| **Business_Intake** | `editionIntake.js` (old) | **CLOSED S106.** Writes to `Storyline_Intake`. |
+| **Business_Intake** | `editionIntake.js` (old) | **CLOSED S106.** Wrote to `Storyline_Intake` (tab and script deleted engine.268). |
 | **Sports_Feed** | `diagnoseDashboardData.js` (old), `sheetNames.js` | **CLOSED `c3fe1780`.** Diagnostic read repointed to `Oakland_Sports_Feed`. `SPORTS_FEED` constant removed. Zero consumers of the ghost name. |
 | **Citizens** | `buildDeskPackets.js` (historical) | **CLOSED — stale doc-only.** Zero live `getSheetByName('Citizens')` in `phase*/`, `utilities/`, `lib/`. Simulation_Ledger is the citizen tab. |
 | **Citizen_Directory** | `bondEngine.js` (historical), `sheetNames.js` | **CLOSED.** Tab never existed. Constant absent from `sheetNames.js`. Live lookup is Simulation_Ledger. |

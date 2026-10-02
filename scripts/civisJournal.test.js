@@ -73,6 +73,12 @@ failsWith(' It was a medium reading.', /score or severity/);
 failsWith(' It is a high-severity signal.', /score or severity/);
 failsWith(' The Oaks open soon. Paulson knows it.', /Oaks\/Paulson/);
 assert.equal(journal.assertEntry(base + ' The ledger and the public record disagree, and the instrument owes the city a better reading.', frame, ids).ok, true);
+failsWith(' The sentiment the city reads has not moved.', /machine term/);
+// A sentence may open on any word and a signature may stand on its own lines;
+// a name nobody handed over fails even as a single word.
+assert.equal(journal.assertEntry(base + ' In Test District the reading held. Until Civis can say why, I will not call it steady.\n\nElias Varek\nCivis Systems Journal', frame, ids).ok, true);
+failsWith(' I walked through Lakeview on the way in.', /unknown named target: Lakeview/);
+failsWith(' Lake Merritt is quiet.', /unknown named target: Merritt/);
 // A handed name keeps its own shape: mid-word capitals and a district numeral.
 const named = { ...frame, names: new Set([...frame.names, 'DigitalOcean', 'City Council District 3']) };
 assert.equal(journal.assertEntry(base + ' I raised it at DigitalOcean and with City Council District 3 this week.', named, ids).ok, true);

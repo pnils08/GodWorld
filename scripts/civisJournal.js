@@ -18,6 +18,9 @@ const REASONER = 'deepseek/deepseek-v4-pro';
 const FALLBACK = 'anthropic/claude-sonnet-5.5';
 // The answer is 300-500 words of JSON. Reasoning shares the provider's token
 // cap, so it gets its own capped budget on top (modelFitRun.js, 2026-10-01).
+const CALENDAR_WORDS = new Set(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday',
+  'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October',
+  'November', 'December']);
 const ANSWER_TOKENS = 1800;
 const THINK_BUDGET = 3000;
 
@@ -48,7 +51,7 @@ function translate(pattern, initiativeNames = new Map()) {
   const table = {
     'repeating-event': 'The same signal keeps returning' + where + ' without an answer downstream.',
     'math-imbalance': 'Two district readings disagree' + where + '; a rising burden is not reflected in the city\'s stated mood.',
-    'coverage-gap': 'The city moved in ' + String(f.domain || 'a civic domain') + ', but the public instrument did not carry that movement to the paper.',
+    'coverage-gap': 'There was real movement in the city\'s ' + String(f.domain || 'civic') + ' life this week, but the public instrument did not carry it to the paper.',
     'writeback-drift': 'Council action reached the public record while the response instrument stayed flat.',
     'improvement': f.InitiativeID
       ? String(f.Name || initiativeNames.get(f.InitiativeID) || 'A city initiative') + ' has advanced; Civis should measure whether the promised service actually reaches people.'
@@ -156,8 +159,8 @@ function assertEntry(prose, frame, selectedIds) {
   // public record are Civis's own words (INSTITUTIONS.md Civis blanket covers
   // "the ledger" too). What stays out is the machine's: these words, and a
   // reading recited as a figure or a grade.
-  if (/\b(?:simulation|tags?|cycles?|dials?|percent(?:age)?)\b|%/i.test(scrub)) {
-    failures.push('machine term in prose (simulation, tag, cycle, dial, percent)');
+  if (/\b(?:simulation|tags?|cycles?|dials?|sentiment|percent(?:age)?)\b|%/i.test(scrub)) {
+    failures.push('machine term in prose (simulation, tag, cycle, dial, sentiment, percent)');
   }
   if (/\b(?:severity|medium|rated|ratings?|scores?|scored)\b|\b(?:low|high|moderate|critical|elevated)[- ](?:severity|reading|rating|level|grade|priority|risk)\b/i.test(scrub)) {
     failures.push('score or severity level in prose');
@@ -173,18 +176,20 @@ function assertEntry(prose, frame, selectedIds) {
       selectedIds.some(id => !frame.findings.some(f => f.id === id))) {
     failures.push('one lead and two or three carried findings required');
   }
-  // Only source-listed proper targets may appear. A target mentioned in prose
-  // must exist in the current dump; the model may use no names beyond this set.
-  const targetWords = [
-    ...[...body.matchAll(/\b(?:in|at|for|from|about|through)\s+([A-Z][A-Za-z]+(?:\s+[A-Z][A-Za-z]+){0,4})/g)]
-      .map(m => m[1].trim()),
-    ...[...body.matchAll(/\b[A-Z][A-Za-z’'-]+(?:\s+[A-Z][A-Za-z’'-]+)+/g)]
-      .map(m => m[0].replace(/^(?:The|A|This|Our)\s+/, '').trim()),
-  ];
-  const allowed = [...frame.names];
-  for (const name of targetWords) {
-    if (['I', 'Civis', 'The', 'A', 'My', 'Oaks'].includes(name)) continue;
-    if (!allowed.some(a => a === name || a.startsWith(name + ' '))) failures.push('unknown named target: ' + name);
+  // Only handed names may appear. Lift every handed name out; a proper noun
+  // still standing mid-sentence is one the writer was not given. Part of a
+  // handed name ("the Health Center", "the Council") is that name; the capital
+  // a sentence opens on is grammar, not a name.
+  const handed = [...frame.names].sort((x, y) => y.length - x.length);
+  const partOfHanded = seq => handed.some(name => (' ' + name + ' ').includes(' ' + seq + ' '));
+  let rest = body;
+  for (const name of handed) rest = rest.split(name).join('·');
+  for (const m of rest.matchAll(/[A-Z][A-Za-z’'-]*(?:[ \t]+[A-Z][A-Za-z’'-]*)*/g)) {
+    const opensSentence = /(?:^|[.!?:;—–][”"’')]*\s*|\n\s*|[“"(]\s*)$/.test(rest.slice(0, m.index));
+    let parts = m[0].split(/[ \t]+/).map(w => w.replace(/[’']s?$/, ''));
+    if (opensSentence) parts = parts.slice(1);
+    parts = parts.filter(w => w && w !== 'I' && !/^I[’']/.test(w) && !CALENDAR_WORDS.has(w));
+    if (parts.length && !partOfHanded(parts.join(' '))) failures.push('unknown named target: ' + parts.join(' '));
   }
   return { ok: failures.length === 0, failures, words: words.length };
 }
@@ -234,9 +239,9 @@ function promptFor(frame, prior, root = ROOT) {
   const system = [
     'You are Elias Varek, founder of Civis Systems. You own the instrument that helps Oakland read itself.',
     'Write a first-person Civis Systems Journal entry about how your system can serve the city better.',
-    'The findings below are your company\'s internal audit translated into Civis terms. Lead with one, carry two or three, and end with one forward move: what Civis will examine or tune next. You publish; you change no city number.',
+    'The findings below are your company\'s internal audit translated into Civis terms. Lead with one, carry two or three, and end with exactly one forward move: the single thing Civis will examine or tune next. You publish; you change no city number.',
     'Use only the named places, offices, initiatives and businesses in the allowed list. Make no claims about a person\'s history or an unsupplied company act.',
-    'Write every allowed name exactly as listed, including a numeral that is part of the name. Otherwise never print a digit, a decimal, a percentage, a dial or index name, a score, a rating or severity level (low, medium, high as a grade), a record id, a table or detector name, JSON, or the words "simulation", "tag", "cycle" or "dial" — say "week", "reading", "signal", "the instrument". The Oaks and Paulson get one sentence at most, or none.',
+    'Write every allowed name exactly as listed, including a numeral that is part of the name. Otherwise never print a digit, a decimal, a percentage, a dial or index name, a score, a rating or severity level (low, medium, high as a grade), a record id, a table or detector name, JSON, or the words "simulation", "tag", "cycle", "dial" or "sentiment" — say "week", "reading", "signal", "mood", "the instrument". The Oaks and Paulson get one sentence at most, or none.',
     'Return JSON with exactly prose (300–500 words, paragraphs) and findingIds (three or four IDs, first is lead).',
     'Varek voice and identity context follows. Where older wake instructions conflict, the journal contract above governs this work-side entry.',
     ...agentFiles,

@@ -178,7 +178,7 @@ pointers:
   2. No field match → `SELF_EMPLOYED` for the mapping's self-employed patterns, else `UNTRACKED` with the existing "Seeking work (no tracked opening for …)" line. Never the service bucket as a catch-all.
   3. A carried `EmployerBizId` (authored intake) still wins when the business has room — unchanged.
 - **Verify:** bench mint of a Plumber, a Dishwasher, a Nurse Aide and a Police Officer lands each at a Construction / dining / Healthcare / Public Safety employer or SELF_EMPLOYED/UNTRACKED; never City of Oakland or the hospital for the first two. `scripts/householdIntake.test.js` stays green.
-- **Restore:** the 65 are a one-time diff-restore (Tier 3–4 applied by hand 2026-10-01 with `MappingLayer` `manual` on the roster; Tier 1–2 rows held for the builder) — not a sweep, and not re-run after the fix.
+- **Restore:** the 65 are a one-time diff-restore (60 Tier 3–4 applied by hand 2026-10-01, the 5 Tier 1–2 on the builder's go 2026-10-02, `MappingLayer` `manual` on the roster) — not a sweep, and not re-run after the fix.
 - **Status:** [ ] ready — engine.278
 
 ## Open questions

@@ -121,6 +121,7 @@ Grep here before grepping the tree. Each row: file · one-line purpose · verdic
 - [[2026-09-15-kimi-culture-lane]] · Culture lane (kimi) — per-seat slices for Kai, Sharon, Maria; raw-hook normalization and deskMap holes shipped (engine.231 / .232) · **adopt**
 - [[2026-09-15-kimi-environment-safety-audit]] · Environment + safety (kimi) — Noah adequate; Rachel's crime shifts/hotspots computed but never persisted → engine.235 · **adopt**
 - [[2026-09-19-kimi-initiative-stage-voting-and-wake-incentives]] · Wake-as-turn game loop (kimi, builder-direct) — wakes as rare turns with stakes; initiatives clear stages by civic work, not time; chaos-car nodes for dark seats; player named-trigger → civic.38 · **adopt**
+- [[2026-10-01-kimi-world-gap-staff-review]] · World-gap authored staff (kimi) — 30 OPD/OFD/OARI rows checked for collisions, hoods, BirthYear, rank mix, OARI canon; SHIP-WITH-FIXES, four folded in the beat-slices plan §Builder rulings 2026-10-01 23:25 · **adopt**
 
 ## Notes
 

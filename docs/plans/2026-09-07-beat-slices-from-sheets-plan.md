@@ -405,20 +405,20 @@ Rulings: move the mislinked citizens; audit every citizen row for job vs employe
 - **Speaker name:** the stabilization-fund agent files now say `Marcus Webb` (IDENTITY/LENS/RULES carried `Marcus Delano Webb`; the ledger has no middle name).
 - **The job-vs-employer audit.** A Haiku pass flagged 2 of 585 linked citizens and passed a dishwasher at City Hall and a musician at the hospital — discarded. Judged by hand on the grouped view (every employer × job title): `output/employer-alignment-audit.md` / `.json` is the real list — 65 misplaced; **all 65 restored on the live ledger + roster** (targets: a fitting tracked business in the citizen's own hood, else the mapping's SELF_EMPLOYED/UNTRACKED) — the five Tier 1–2 rows on the builder's go 2026-10-02 00:00 (Elio Perez T1 Server at Baylight Construction, Jade Orion T2 Musician at Parks, Marcus Wright T2 Server at the Tech Collective, Theo Banks T2 rapper at Ridgeline Studio, Brenda Okoro T2 Deputy Mayor at OARI). Mechanism: `classifyMintSector_` (`phase05-citizens/processAdvancementIntake.js:1435`) buckets a job into four groups and hashes a mint into any business in the bucket with headcount room — that is how a plumber lands at the Police Department. Structural fix filed as **engine.278** (engine-sheet, [[2026-07-27-employment-living-system]] §Task 9).
 
-**Authored staff — to queue on `Advancement_Intake1` for the C110 mint, after kimi's pass and the builder's go.** All `ClockMode` ENGINE, `CIV/MED/UNI` no, `EmployerBizId` carried (the mint honours it while the business has headcount room — OPD states 701, OFD 452, OARI 46). BirthYear is sim-relative (Montez 1997 reads mid-40s). Names checked against the ledger and the 70 pending intake rows — no exact collision; surnames shared with large existing families avoided.
+**Authored staff — to queue on `Advancement_Intake1` for the C110 mint, after kimi's pass and the builder's go.** All `ClockMode` ENGINE, `CIV/MED/UNI` no, `EmployerBizId` carried (the mint honours it while the business has headcount room — OPD states 701, OFD 452, OARI 46). BirthYear is sim-relative (Montez 1997 reads mid-40s). Names checked against the ledger and the 70 pending intake rows — no exact collision; surnames shared with large existing families avoided. Kimi review [[../research/2026-10-01-kimi-world-gap-staff-review]] SHIP-WITH-FIXES, all four folded: Achebe → Nwachukwu and Mbeki → Mokoena (public-figure surnames), Okafor-Lyle → Lyle-Nnamdi (read as kin to the Tribune's Sharon Okafor), the OARI hood wording above.
 
 | Dept | Name | RoleType | Tier | Hood | BirthYear | Gender |
 |---|---|---|---|---|---|---|
-| OPD | Dolores Achebe | Police Captain | 3 | West Oakland | 1994 | female |
+| OPD | Dolores Nwachukwu | Police Captain | 3 | West Oakland | 1994 | female |
 | OPD | Tomas Reinholt | Police Lieutenant | 3 | Laurel | 1998 | male |
-| OPD | Kendra Okafor-Lyle | Police Sergeant | 4 | East Oakland | 2004 | female |
+| OPD | Kendra Lyle-Nnamdi | Police Sergeant | 4 | East Oakland | 2004 | female |
 | OPD | Benjamin Tsai | Police Sergeant | 4 | Chinatown | 2006 | male |
 | OPD | Marisol Ibarra | Detective | 4 | Fruitvale | 2003 | female |
 | OPD | Devin Castellanos | Detective | 4 | Dimond | 2008 | male |
 | OPD | Ruth Anyanwu | Police Officer | 4 | East Oakland | 2012 | female |
 | OPD | Jerome Lindqvist | Police Officer | 4 | Eastlake | 2015 | male |
 | OPD | Hana Petrosyan | Police Officer | 4 | San Antonio | 2018 | female |
-| OPD | Calvin Mbeki | 911 Dispatcher | 4 | Downtown | 2010 | male |
+| OPD | Calvin Mokoena | 911 Dispatcher | 4 | Downtown | 2010 | male |
 | OFD | Luis Ferreira-Nash | Deputy Fire Chief | 3 | Glenview | 1992 | male |
 | OFD | Ingrid Solberg | Battalion Chief | 3 | Rockridge | 1996 | female |
 | OFD | Omar Haddad | Fire Captain | 3 | West Oakland | 2000 | male |
@@ -440,7 +440,7 @@ Rulings: move the mislinked citizens; audit every citizen row for job vs employe
 | OARI | Esperanza Ruiz | Peer Responder | 4 | Fruitvale | 2012 | female |
 | OARI | Caleb Thornbury | Peer Responder | 4 | East Oakland | 2016 | male |
 
-After the mint: OPD 15 tracked (5 existing + 10), OFD 13 (2 + 11), OARI 11 (director + Okoro + 9 — three teams of three across the three dispatch-live hoods; canon states 18 positions with teams live in West Oakland and deploying East Oakland at C109, so nine is half the positions filled). One in-world line each in `CitizenBio`. Roster rows for the new mints come from `linkCitizensToEmployers.js --fill-blanks-only` after C110 — `--dry-run` first; never run it bare, the default mode rewrites every `EmployerBizId` from the mapping and would undo every hand fix above.
+After the mint: OPD 15 tracked (5 existing + 10), OFD 13 (2 + 11), OARI 11 (director + Okoro + 9 — three teams of three across the three pilot hoods — West Oakland dispatch-live, East Oakland deploying with training at C110, Fruitvale the D5 pilot district; canon states 18 positions, so nine is half the positions filled). One in-world line each in `CitizenBio`. Roster rows for the new mints come from `linkCitizensToEmployers.js --fill-blanks-only` after C110 — `--dry-run` first; never run it bare, the default mode rewrites every `EmployerBizId` from the mapping and would undo every hand fix above.
 
 
 ## Changelog

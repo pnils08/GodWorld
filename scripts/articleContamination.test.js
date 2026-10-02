@@ -84,6 +84,15 @@ const decayBare = scan(decayQuote, { desk: 'civic',
 assert(decayBare.findings.some(f => f.issue === 'decay-narrative'),
   'the bare word in an approach line does not ground it');
 
+// C109 Richmond: a lineup falling apart is baseball, not blight; a neighborhood falling apart is the import.
+const lineupApart = scan('The kind of season that keeps a lineup from falling apart in June.', { desk: 'sports', packet: {} });
+assert.equal(lineupApart.findings.filter(f => f.issue === 'falling-apart').length, 0,
+  'a lineup falling apart is not a blight import: ' + JSON.stringify(lineupApart.findings));
+const hoodApart = scan('Everyone on the block will tell you the neighborhood is falling apart.', { desk: 'civic', packet: {} });
+assert(hoodApart.findings.some(f => f.issue === 'falling-apart'), 'a neighborhood falling apart still blocks');
+const cityApart = scan('The whole city is falling apart and nobody at the hall will say it.', { desk: 'civic', packet: {} });
+assert(cityApart.findings.some(f => f.issue === 'falling-apart'), 'a city falling apart still blocks');
+
 const tinas = scan([
   '# Game day',
   '',

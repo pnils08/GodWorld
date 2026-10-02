@@ -850,11 +850,18 @@ function buildWritePacket({ cycle, desk, reporter, story, approach, angleInput, 
         const wanted = new Set([...officialTargets, ...usable.map(q => q.pop)]);
         const byPop = new Map(candidates.map(c => [c.pop, c]));
         for (const q of usable) {
-          if (!byPop.has(q.pop)) byPop.set(q.pop, {
-            pop: q.pop, name: q.name,
-            profile: q.inputPacket && q.inputPacket.actor ? q.inputPacket.actor.name : q.name,
-            src: 'packet.W2.interview'
-          });
+          if (!byPop.has(q.pop)) {
+            // C109 Torres (2026-10-01): a W2 interviewee outside the W1 candidates reached
+            // the writer as a bare name, and the writer invented a job for him (the medical
+            // examiner became a plum-cart vendor). The ledger row names the job and the hood.
+            const row = ledgerRowForPop(q.pop);
+            const name = (q.inputPacket && q.inputPacket.actor && q.inputPacket.actor.name) || q.name;
+            byPop.set(q.pop, {
+              pop: q.pop, name: q.name,
+              profile: [name, row && row.RoleType, row && row.Neighborhood].filter(Boolean).join(' — '),
+              src: 'packet.W2.interview'
+            });
+          }
           wanted.add(q.pop);
         }
         return [...byPop.values()]

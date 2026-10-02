@@ -69,7 +69,10 @@ const BLIGHT = [
   // bare word: Jax's approach text says "decay" every run.
   { id: 'decay-narrative', re: /\bdecay(?:'s|s)?\b.{0,40}\b(?:eating|metrics|epicenter|neighborhood|chinatown|west oakland)\b|\b(?:eating away at|epicenter of the city's decay)\b/i, groundedBy: /:\s*decay\s*\[/i },
   { id: 'real-life-struggles', re: /real-life struggles/i, groundedBy: /\bdecay\b|\banomaly\b|\bcrisis\b/i },
-  { id: 'falling-apart', re: /falling apart/i, groundedBy: /\bdecay\b|\banomaly\b/i },
+  // C109 Richmond (2026-10-01): "keeps a lineup from falling apart in June" blocked a
+  // sports column on the bare phrase. The import is a PLACE falling apart — a city,
+  // a block, a neighborhood — so the phrase needs one in the same clause.
+  { id: 'falling-apart', re: /\b(?:city|town|neighborhood|neighbourhood|block|district|streets?|oakland|place|everything)\b[^.!?]{0,60}\bfalling apart\b|\bfalling apart\b[^.!?]{0,60}\b(?:city|town|neighborhood|neighbourhood|block|district|streets?|oakland)\b/i, groundedBy: /\bdecay\b|\banomaly\b/i },
   { id: 'isnt-safe', re: /isn['’]?t safe|city isn['’]?t safe/i, groundedBy: /\bcrime\b|\bviolentcrimeindex\b|\bsafety\b|\bunsafe\b/i },
   { id: 'zombie-set', re: /zombie movie/i },
   { id: 'shadow-leverage', re: /shadow leverage/i },

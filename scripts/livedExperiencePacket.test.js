@@ -188,7 +188,7 @@ assert.equal(p.quoteIneligibility({ pop: 'POP-00599', role: 'Catcher, Oakland A\
 {
   const colon = p.ledgerRowForPop('POP-00599');
   if (colon) {
-    assert.equal(String(colon.SMPageId || '').trim(), '', 'Colon has never been woken');
+    // The SMPageId assertion was a world fact (Colon unwoken); the world moved and he has a page now.
     assert.equal(p.quoteIneligibility({ pop: 'POP-00599', role: colon.RoleType }, 'civic', { kind: 'anomaly' }),
       'PRO_ATHLETE_CIVIC_INELIGIBLE');
   }

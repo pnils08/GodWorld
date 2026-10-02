@@ -25,6 +25,18 @@
 'use strict';
 const K = require('./beatSliceKit');
 
+// C109 Graye (2026-10-01): "founded 1982, led by Bhai Manjit Singh" became "has tended the
+// kitchen since the founding in 1982" — a leader born 1993. The slice gives the age of the
+// house, not a year, and says who leads it TODAY so a tenure cannot be read off the founding.
+function foundedAgo(founded) {
+  const year = Number(founded);
+  if (!(year > 0)) return '';
+  const simYear = require('../lib/citizenDerivation').currentSimYear();
+  const age = simYear - year;
+  if (!(age >= 0)) return '';
+  return age < 2 ? ', founded this year' : ', founded ' + age + ' years ago';
+}
+
 const SEAT = {
   slug: 'elliot-graye', name: 'Elliot Graye', popid: 'POP-00012', desk: 'culture',
   kind: 'beat-faith', domain: 'faith', artifact: 'faith', builder: 'buildFaithSlice.js',
@@ -88,8 +100,8 @@ function build(cycle, { beats, profiles }) {
   }
   facts.push({
     text: 'In focus: ' + lead.Organization + (lead.FaithTradition ? ' — ' + lead.FaithTradition : '') + (lead.Neighborhood ? ', ' + lead.Neighborhood : '') +
-      (K.num(lead.Congregation) != null ? ', congregation ' + K.fmtInt(K.num(lead.Congregation)) : '') + (lead.Founded ? ', founded ' + lead.Founded : '') +
-      (lead.Leader ? ', led by ' + lead.Leader : '') + (lead.Character ? ' — ' + lead.Character : ''),
+      (K.num(lead.Congregation) != null ? ', congregation ' + K.fmtInt(K.num(lead.Congregation)) : '') + foundedAgo(lead.Founded) +
+      (lead.Leader ? ', led today by ' + lead.Leader : '') + (lead.Character ? ' — ' + lead.Character : ''),
     src
   });
   const people = [];

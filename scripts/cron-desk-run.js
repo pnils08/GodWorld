@@ -141,6 +141,7 @@ const ANGLE_MODEL_OVERRIDE = arg('--angle-model', null);
 const EVALUATION_TAG = arg('--evaluation-tag', null);
 const EVALUATE_PACKAGE = arg('--evaluate-package', null);
 const wakePackages = require('./newsroomWakePackages');
+const sourcingModes = require('./newsroomSourcing');
 const interviewContract = require('./newsroomInterviewContract');
 let ACTIVE_WAKE_PACKAGE = null;
 let PACKET_CONTRACT = null;
@@ -426,11 +427,18 @@ function collectQuoteAsks(lane, persona, story, angleArt) {
   const slice = angleArt && (angleArt.beatSlice || angleArt.jaxSlice || angleArt.pslayerSlice ||
     angleArt.economicSlice || angleArt.safetySlice || angleArt.eveningSlice ||
     angleArt.civicDomainSlice);
-  const filled = story
-    ? (exactPacketCandidates.length
-      ? exactPacketCandidates
-      : livedPacket.candidateRows(story, slice))
-    : [];
+  if (PACKET_ACTIVE && (!angleArt || !angleArt.sourcingPool)) {
+    throw new Error('W2 requires the fixed W1 sourcing pool');
+  }
+  const pool = PACKET_ACTIVE ? angleArt.sourcingPool : null;
+  const w1ByPop = new Map(exactPacketCandidates.map(c => [c.pop, c]));
+  const filled = PACKET_ACTIVE
+    ? (pool.candidates || []).filter(c => {
+      const w1 = w1ByPop.get(c.pop);
+      return w1 && w1.sourceKind === c.sourceKind &&
+        JSON.stringify(w1.evidence) === JSON.stringify(c.evidence);
+    })
+    : story ? livedPacket.candidateRows(story, slice) : [];
   // Builder ruling 2026-09-30: a reporter interviews a citizen the story
   // touched, or no citizen. The four-person bench used to be completed from the
   // ledger (same hood, then anyone — street jobs first), so the same bakers and
@@ -439,7 +447,8 @@ function collectQuoteAsks(lane, persona, story, angleArt) {
   // nobody attached files without a quote.
   const packetCandidates = new Map();
   for (const c of filled) {
-    if (c && c.pop && !livedPacket.isProximityCandidate(c)) packetCandidates.set(c.pop, c);
+    if (c && c.pop && c.sourceKind !== 'office-record' &&
+        !livedPacket.isProximityCandidate(c)) packetCandidates.set(c.pop, c);
   }
   const push = (pop, label, ignoreRest) => {
     if (!pop || seen.has(pop) || asks.length >= QUOTE_CITIZEN_CAP) return;
@@ -454,10 +463,8 @@ function collectQuoteAsks(lane, persona, story, angleArt) {
     let askText;
     let inputPacket = null;
     if (PACKET_ACTIVE) {
-      const candidate = packetCandidates.get(pop) || {
-        pop, name: null, role: null, hood: story && story.hood || null,
-        profile: null, why: 'desk-signal candidate',
-      };
+      const candidate = packetCandidates.get(pop);
+      if (!candidate) throw new Error('W2 target is outside fixed sourcing pool: ' + pop);
       inputPacket = interviewContract.prepareInterviewPacket(livedPacket.buildReportPacket({
         cycle: angleArt && angleArt.cycle,
         desk: angleArt && angleArt.desk,
@@ -485,7 +492,10 @@ function collectQuoteAsks(lane, persona, story, angleArt) {
       angleArt.angleRead.plan && Array.isArray(angleArt.angleRead.plan.targets)
       ? angleArt.angleRead.plan.targets
         .map(target => target && target.pop)
-        .filter(pop => pop && packetCandidates.has(pop))
+        .filter(pop => {
+          if (pop && !packetCandidates.has(pop)) log('WARN angle target outside the sourcing pool dropped: ' + pop);
+          return pop && packetCandidates.has(pop);
+        })
       : [];
     const plannedPops = [...new Set(targetPops.concat([...packetCandidates.keys()]))];
     for (const pop of plannedPops) {
@@ -1627,6 +1637,13 @@ async function runAngle(assign) {
   }
   let angleRead = null;
   let inputPacket = null;
+  const typedSlice = selectTypedSlice([beatSlice, jaxSlice, pslayerSlice, anthonySlice,
+    halSlice, tanyaSlice, simonSlice, economicSlice, safetySlice, eveningSlice, civicDomainSlice]);
+  const sourcingPool = PACKET_ACTIVE && story
+    ? sourcingModes.buildPool({ mode: ACTIVE_WAKE_PACKAGE
+      ? wakePackages.sourcingFor(ACTIVE_WAKE_PACKAGE) : 'named',
+      story, slice: typedSlice, cycle, seat: personaSlug || '', root: ROOT })
+    : null;
   if (asker) {
     const brief = story ? citizenBrief(story.citizens) : { names: [], profiles: [] };
     // grok 2026-08-06: persona + stink seed → lead with the contradiction (not free
@@ -1893,8 +1910,8 @@ async function runAngle(assign) {
     if (PACKET_ACTIVE) {
       inputPacket = livedPacket.buildAnglePacket({
         cycle, desk, reporter: asker, story, approach,
-        slice: selectTypedSlice([beatSlice, jaxSlice, pslayerSlice, anthonySlice, halSlice, tanyaSlice, simonSlice,
-          economicSlice, safetySlice, eveningSlice, civicDomainSlice]), lane,
+        slice: typedSlice, lane,
+        candidates: sourcingPool ? sourcingPool.candidates : [],
       });
       ask = livedPacket.prompt(inputPacket);
     }
@@ -1963,7 +1980,7 @@ async function runAngle(assign) {
   fs.mkdirSync(COMPARE, { recursive: true });
   fs.writeFileSync(anglePath, JSON.stringify({
     stage: 'angle', desk, cycle, persona: personaSlug,
-    ...(PACKET_ACTIVE ? { packetContract: livedPacket.VERSION, inputPacket } : {}),
+    ...(PACKET_ACTIVE ? { packetContract: livedPacket.VERSION, inputPacket, sourcingPool } : {}),
     reporter: assign ? { name: assign.name, popid: assign.popid } : (persona ? { name: persona.name, popid: persona.popid } : null),
     assignment: story ? { story, approach } : null,   // Task 2.5.2: the EIC assignment rides the handoff
     jaxSlice: jaxSlice ? {
@@ -2455,7 +2472,21 @@ async function runReport(assign) {
     || (assign && assign.story) || null;
   const asks = collectQuoteAsks(lane, askVoice, story, angleArt);
   log('quote pre-pass (reporter-voiced): ' + asks.length + ' citizen(s)...');
-  const { quotes, interviews } = runCitizenQuotePass(asks, cycle, stem);
+  const officeRecords = (angleArt.sourcingPool && angleArt.sourcingPool.officeRecords || []);
+  for (const record of officeRecords) {
+    if (!sourcingModes.verifyOfficeRecord(record, cycle, ROOT)) {
+      throw new Error('office-record failed exact-cycle provenance check: ' + record.statementId);
+    }
+  }
+  const pass = runCitizenQuotePass(asks, cycle, stem);
+  const interviews = pass.interviews;
+  const quotes = pass.quotes.concat(officeRecords.map(record => ({
+    pop: record.holderPopid, name: record.speakerName, quote: record.quote,
+    sourceKind: 'office-record', officeRecord: record,
+  })));
+  const officeSilence = angleArt.sourcingPool && angleArt.sourcingPool.mode === 'offices' &&
+    !officeRecords.length ? 'no matching current-cycle office statement; tier-2 adapter unavailable' : null;
+  if (officeSilence) log('office silence: ' + officeSilence);
   const packetPath = path.join(COMPARE, stem + 'packet.json');
   fs.writeFileSync(packetPath, JSON.stringify({
     stage: 'report', desk, cycle, persona: personaSlug,
@@ -2463,7 +2494,8 @@ async function runReport(assign) {
     reporter: assign ? { name: assign.name, popid: assign.popid } : null,
     assignment: story ? { story } : null,   // Task 2.5.4: what the quote pool was seeded from
     angle: path.relative(ROOT, anglePath),
-    quotesRequested: asks.length, quotesLanded: quotes.length, quotes,
+    quotesRequested: asks.length + officeRecords.length, quotesLanded: quotes.length, quotes,
+    officeRecords, officeSilence,
     ...(PACKET_ACTIVE ? { interviews } : {}),
     ranAt: new Date().toISOString()
   }, null, 2));
@@ -2556,6 +2588,16 @@ async function runWrite(assign) {
   require('./canon-name-check').ensureLedgerSnapshot(cycle);
   const angle = readJson(anglePath);
   const packet = readJson(packetPath);
+  for (const record of packet && packet.officeRecords || []) {
+    if (!(angle && angle.sourcingPool && angle.sourcingPool.officeRecords || [])
+      .some(allowed => JSON.stringify(allowed) === JSON.stringify(record)) ||
+        !sourcingModes.verifyOfficeRecord(record, cycle, ROOT) ||
+        !(packet.quotes || []).some(q => q.sourceKind === 'office-record' &&
+          q.officeRecord && q.officeRecord.statementId === record.statementId &&
+          q.quote === record.quote && q.pop === record.holderPopid)) {
+      throw new Error('W3 office-record provenance mismatch: ' + record.statementId);
+    }
+  }
   if (angle && angle.assignment && angle.assignment.story && packet) {
     const packed = packet.assignment && packet.assignment.story;
     if (JSON.stringify(packed || null) !== JSON.stringify(angle.assignment.story)) {
@@ -2644,6 +2686,7 @@ async function runWrite(assign) {
       angleInput: angle && angle.inputPacket,
       anglePlan: angle && angle.angleRead && angle.angleRead.plan,
       interviews: packet && packet.interviews || [],
+      officeRecords: packet && packet.officeRecords || [],
       lane,
       // engine.270: running stories ride the Packet as plain lines.
       runningStories: storylineLines(loadStorylines(cycle, desk)),

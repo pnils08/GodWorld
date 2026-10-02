@@ -63,7 +63,7 @@ assert.ok(jax.reviewProfile.canonBlockers.some(v => v.includes('official inactio
 
 const carmen = packages['carmen-delaine'];
 assert.equal(carmen.version, 'CARMEN-LEP2-2');
-assert.equal(packagesApi.sourcingFor(carmen), 'records');
+assert.equal(packagesApi.sourcingFor(carmen), 'offices');
 assert.equal(carmen.requiredDaily, true);
 assert.equal(carmen.assignment.desk, 'civic');
 assert.equal(carmen.assignment.name, 'Carmen Delaine');
@@ -144,11 +144,24 @@ assert.ok(anthony.reviewProfile.canonBlockers.some(v => v.includes('wrong player
 const hal = packages['hal-richmond'];
 assert.equal(hal.version, 'HAL-LEP2-2');
 assert.equal(packagesApi.sourcingFor(hal), 'records');
-// Records seats (builder rulings 2026-09-30): stats, data, the civic record, the long view.
-for (const key of ['carmen-delaine', 'anthony-raines', 'selena-grant', 'hal-richmond', 'elliot-marbury']) {
+// One sourcing mode per registered package (builder ruling 2026-10-01).
+for (const key of ['anthony-raines', 'selena-grant', 'hal-richmond', 'elliot-marbury']) {
   assert.equal(packagesApi.sourcingFor(packages[key]), 'records', key + ' interviews nobody');
 }
-assert.equal(packagesApi.sourcingFor(packages['trevor-shimizu']), 'people');
+assert.equal(packagesApi.sourcingFor(packages['trevor-shimizu']), 'workplace');
+const modeKeys = {
+  offices: ['carmen-delaine', 'luis-navarro', 'rachel-torres'],
+  workplace: ['trevor-shimizu', 'angela-reyes', 'mason-ortega', 'business-desk'],
+  named: ['lila-mezran', 'tanya-cruz', 'simon-leary', 'elliot-graye', 'kai-marston', 'nia-rook', 'nia-rook-weekly'],
+  street: ['noah-tan', 'freelance-firebrand', 'p-slayer', 'talia-finch', 'maria-keen', 'sharon-okafor', 'celeste-tran'],
+  records: ['anthony-raines', 'elliot-marbury', 'hal-richmond', 'selena-grant'],
+};
+assert.deepStrictEqual(Object.values(modeKeys).flat().sort(), Object.keys(packages).sort());
+for (const [mode, keys] of Object.entries(modeKeys)) for (const key of keys) {
+  assert.equal(packagesApi.sourcingFor(packages[key]), mode);
+}
+assert.equal(packagesApi.sourcingFor({}), 'named');
+assert.throws(() => packagesApi.sourcingFor({ sourcing: 'people' }), /unknown sourcing mode/);
 const marbury = packages['elliot-marbury'];
 assert.equal(marbury.version, 'MARBURY-LEP2-1');
 assert.equal(marbury.assignment.popid, 'POP-00166');
@@ -330,6 +343,10 @@ assert.throws(() => packagesApi.validatePackage('bad', { active: true }), /inval
 const { applyWakePackageGate, activeRotaCandidates, boundDailyAssignments,
   DAILY_QUOTAS } = require('./newsroom-fanout');
 const runApi = require('./cron-desk-run');
+const testCandidate = (pop, name, profile) => ({ pop, name, profile,
+  mode: 'named', sourceKind: 'slice-row', evidence: { source: 'TEST-ONLY-slice', pop } });
+const fixedTwo = [testCandidate('POP-90001', 'Test Civic One', 'Test profile one'),
+  testCandidate('POP-90002', 'Test Civic Two', 'Test profile two')];
 runApi.activateWakeContext(null, 'luis-navarro');
 const packetAsks = runApi.collectQuoteAsks([
   { label: 'TEST-ONLY generic civic fallback', popids: ['POP-90003', 'POP-90004'] }
@@ -339,12 +356,10 @@ const packetAsks = runApi.collectQuoteAsks([
   citizens: ['Test Civic One (POP-90001)', 'Test Civic Two (POP-90002)']
 }, {
   cycle: 999, desk: 'civic',
+  sourcingPool: { mode: 'named', candidates: fixedTwo, officeRecords: [] },
   inputPacket: {
     v: 'LEP/2', wake: 'W1', actor: {}, task: {}, signal: {}, exposure: {
-      candidates: [
-        { pop: 'POP-90001', name: 'Test Civic One', profile: 'Test profile one', why: 'assignment' },
-        { pop: 'POP-90002', name: 'Test Civic Two', profile: 'Test profile two', why: 'assignment' }
-      ]
+      candidates: fixedTwo
     }, known: [], limits: {}, output: {}
   },
   angleRead: { plan: { focus: 'TEST-ONLY focus', targets: [
@@ -368,10 +383,11 @@ const cityBenchAsks = runApi.collectQuoteAsks([], {
   ref: 'TEST-ONLY-ASSIGNMENT', label: 'TEST-ONLY city bench', hood: 'Downtown'
 }, {
   cycle: 999, desk: 'civic',
+  sourcingPool: { mode: 'named', candidates: [testCandidate('POP-91001', 'Test Affected', 'Test affected profile')], officeRecords: [] },
   inputPacket: {
     v: 'LEP/2', wake: 'W1', actor: {}, task: {}, signal: {}, exposure: {
       candidates: [
-        { pop: 'POP-91001', name: 'Test Affected', profile: 'Test affected profile', why: 'assignment' },
+        testCandidate('POP-91001', 'Test Affected', 'Test affected profile'),
         { pop: 'POP-91002', name: 'Test Neighbor', profile: 'Test neighbor profile', why: 'same-hood-ledger' },
         { pop: 'POP-91003', name: 'Test Resident One', profile: 'Test city profile one', why: 'ledger-resident' },
         { pop: 'POP-91004', name: 'Test Resident Two', profile: 'Test city profile two', why: 'ledger-resident' }
@@ -391,7 +407,8 @@ assert.match(cityBenchAsks[0].inputPacket.task.question, /^TEST-ONLY affected\?/
   'the reporter\'s own question reaches its target');
 const noOneAttached = runApi.collectQuoteAsks([], { name: 'Luis Navarro', popid: 'POP-00636' },
   { ref: 'TEST-ONLY-ASSIGNMENT', label: 'TEST-ONLY nobody attached', hood: 'Downtown' },
-  { cycle: 999, desk: 'civic', inputPacket: { v: 'LEP/2', wake: 'W1', actor: {}, task: {}, signal: {},
+  { cycle: 999, desk: 'civic', sourcingPool: { mode: 'named', candidates: [], officeRecords: [] },
+    inputPacket: { v: 'LEP/2', wake: 'W1', actor: {}, task: {}, signal: {},
     exposure: { candidates: [
       { pop: 'POP-91002', name: 'Test Neighbor', profile: 'Test neighbor profile', why: 'same-hood-ledger' }
     ] }, known: [], limits: {}, output: {} },
@@ -403,15 +420,44 @@ const fanAsks = runApi.collectQuoteAsks([], { name: 'P Slayer', popid: 'POP-0000
   hood: 'Downtown'
 }, {
   cycle: 999, desk: 'sports',
+  sourcingPool: { mode: 'street', candidates: [], officeRecords: [] },
   inputPacket: {
     v: 'LEP/2', wake: 'W1', actor: {}, task: {}, signal: { hood: 'Downtown' },
     exposure: { candidates: [] }, known: [], limits: {}, output: {}
   },
   angleRead: { plan: { focus: 'TEST-ONLY fan focus', targets: [], closeQuestion: 'TEST-ONLY close' } }
 });
-assert.ok(fanAsks.some(row => row.pop === 'POP-90005'),
-  'empty packet candidates must not seal the city — story POPIDs become interviews');
-assert.ok(fanAsks.length >= 1, 'W2 must ask at least one ledger/story citizen');
+assert.deepStrictEqual(fanAsks, [], 'an empty W1 street pool remains empty despite story POPIDs');
+const sourceFixture = {
+  offices: { seat: 'rachel-torres', sourceKind: 'civic-worker',
+    evidence: { source: 'output/beats/Employment_Roster.jsonl', bizId: 'BIZ-90001', topicId: 'INIT-900' } },
+  workplace: { seat: 'trevor-shimizu', sourceKind: 'active-roster',
+    evidence: { source: 'output/beats/Employment_Roster.jsonl', bizId: 'BIZ-90001', status: 'Active' } },
+  named: { seat: 'lila-mezran', sourceKind: 'slice-row',
+    evidence: { source: 'TEST-ONLY-slice', pop: 'POP-92001' } },
+  street: { seat: 'noah-tan', sourceKind: 'life-line',
+    evidence: { source: 'output/simulation_ledger_snapshot.jsonl', cycle: 999,
+      line: 'C999 — [Weather] noticed Test Storm', entity: 'Test Storm', predicate: 'observe' } },
+};
+for (const [mode, fixture] of Object.entries(sourceFixture)) {
+  runApi.activateWakeContext(null, fixture.seat);
+  const candidate = { pop: 'POP-92001', name: 'Test Source', role: 'Test Director',
+    profile: 'Test-only source', mode, sourceKind: fixture.sourceKind, evidence: fixture.evidence };
+  const modeAsks = runApi.collectQuoteAsks([
+    { label: 'TEST-ONLY wrong lane', popids: ['POP-92002'] }
+  ], { name: 'Test Reporter', popid: 'POP-92003' },
+  { ref: 'TEST-ONLY-ASSIGNMENT', label: 'TEST-ONLY sourcing', popids: ['POP-92002'] },
+  { cycle: 999, desk: 'civic', sourcingPool: { mode, candidates: [candidate], officeRecords: [] },
+    inputPacket: { v: 'LEP/2', wake: 'W1', actor: {}, task: {}, signal: {},
+      exposure: { candidates: [candidate] }, known: [], limits: {}, output: {} },
+    angleRead: { plan: { focus: 'TEST-ONLY focus', targets: [], closeQuestion: 'TEST-ONLY close' } } });
+  assert.deepStrictEqual(modeAsks.map(a => a.pop), ['POP-92001'], mode + ' cannot fill from story or lane');
+}
+runApi.activateWakeContext(null, 'anthony-raines');
+assert.deepStrictEqual(runApi.collectQuoteAsks([], { name: 'Test Reporter', popid: 'POP-92003' },
+  { ref: 'TEST-ONLY-ASSIGNMENT', label: 'TEST-ONLY records', popids: ['POP-92002'] },
+  { cycle: 999, desk: 'sports', sourcingPool: { mode: 'records', candidates: [], officeRecords: [] },
+    inputPacket: { exposure: { candidates: [] } } }), [], 'records has no interview fallback');
 const approaches = {
   civic: 'generic civic',
   sports: 'generic sports',

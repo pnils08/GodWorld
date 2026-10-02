@@ -303,6 +303,22 @@ function buildWritePacket(args) {
       factIds: row.claims.factIds || [],
       src: 'packet.W2[' + row.pop + ']',
     }));
+  for (const source of args.officeRecords || []) {
+    if (!source || source.sourceKind !== 'office-record' || !source.statementId ||
+        !source.holderPopid || !source.speakerName || !source.quote || !source.filePath) {
+      throw new Error('invalid office-record source for W3');
+    }
+    const id = 'Q-OFFICE-' + crypto.createHash('sha256')
+      .update(source.filePath + '|' + source.statementId + '|' + source.quote)
+      .digest('hex').slice(0, 12);
+    approvedQuotes.push({ id, speakerId: source.holderPopid,
+      speakerName: source.speakerName, text: source.quote, factIds: [],
+      sourceKind: 'office-record', officeRecord: clone(source),
+      src: source.filePath + '#' + source.statementId });
+    packet.exposure.subjects.push({ pop: source.holderPopid, name: source.speakerName,
+      profile: source.speakerName + ' — civic office holder',
+      quotationEligible: true, src: source.filePath });
+  }
   const factMap = new Map(packet.known.map(claim => [claim.id, claim]));
   for (const row of interviews) {
     if (!row || !row.claims || !row.inputPacket) continue;
@@ -315,6 +331,7 @@ function buildWritePacket(args) {
   packet.exposure.sources = approvedQuotes.map(q => ({
     id: q.id, pop: q.speakerId, name: q.speakerName, quote: q.text,
     factIds: q.factIds, src: q.src,
+    ...(q.sourceKind ? { sourceKind: q.sourceKind, officeRecord: q.officeRecord } : {}),
   }));
   const approvedFacts = packet.known.map(c => ({ id: c.id, t: c.t, text: c.text, src: c.src }));
   const approvedFactIds = new Set(approvedFacts.map(c => c.id));

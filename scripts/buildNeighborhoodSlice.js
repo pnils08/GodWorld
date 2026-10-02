@@ -15,6 +15,9 @@
  *     NEIGHBORHOOD_BOOM / NEIGHBORHOOD_RISING / NEIGHBORHOOD_COOLING /
  *     CITIZEN_RELOCATED / RENT_BURDEN_CRISIS rows by domain — those are
  *     raw-carried with no desk and no journalist engine-side (cut filed).
+ *   engine.254 Task 10, the focus hood only: its care and custody trail
+ *     (Care_Justice_Census, one scope), its tax-day hook, its debt pattern
+ *     (DEBT_CRISIS / DEBT_DEFAULT hooks + the ledger's DebtLevel and default mark).
  * Focus hood rotates by cycle through hoods with an active program.
  * Artifacts: output/slices/c{N}/maria-keen.md · output/cron-compare/neighborhood_slice_c{N}.json
  */
@@ -24,9 +27,9 @@ const K = require('./beatSliceKit');
 const SEAT = {
   slug: 'maria-keen', name: 'Maria Keen', popid: 'POP-00013', desk: 'culture',
   kind: 'beat-neighborhood', domain: 'neighborhood', artifact: 'neighborhood', builder: 'buildNeighborhoodSlice.js',
-  version: 'HOOD-SLICE-1', nameRe: /maria\s*keen/i,
-  tabs: ['Community_Programs', 'Neighborhood_Demographics', 'Story_Hook_Deck'],
-  approach: 'Neighborhood approach: this slice is one block\'s record — its community programs and their founders, who is moving in or out, and the engine\'s neighborhood hooks this cycle. First-person witness, one block one truth. The programs, founders and movement numbers are real; the stoop conversations, the mailboxes, the dog everyone knows are yours.',
+  version: 'HOOD-SLICE-2', nameRe: /maria\s*keen/i,
+  tabs: ['Community_Programs', 'Neighborhood_Demographics', 'Story_Hook_Deck', 'Crime_Metrics', 'Hospital_Ledger', 'Judicial_Ledger', 'Care_Justice_Census'],
+  approach: 'Neighborhood approach: this slice is one block\'s record — its community programs and their founders, who is moving in or out, who the block has in a hospital bed or in custody, what it paid on tax day, whose debts crossed the line, and the engine\'s neighborhood hooks this cycle. First-person witness, one block one truth. The programs, founders, movement numbers, patients, defendants and money lines are real; the stoop conversations, the mailboxes, the dog everyone knows are yours.',
   roomIsYours: 'the stoop, the corner store counter, who moved in last month and who is thinking about leaving, what the block argues about',
   build
 };
@@ -70,6 +73,39 @@ function build(cycle, { root, beats, profiles }) {
       (prevDemo ? ' vs prev/' : '') });
   }
 
+  // engine.254 Task 10 — this block only, one scope per line. The care and
+  // custody trail with the block's own demand numbers and its tracked names;
+  // the tax-day hook for the block (the engine's own count and amount); and
+  // debt as a pattern on the block (hooks + the ledger's own default mark).
+  const crime = (beats.Crime_Metrics || []).find(r => K.hoodKey(r.Neighborhood) === K.hoodKey(hood));
+  const custody = K.censusTrail(beats.Care_Justice_Census, cycle, 'judicial', {
+    demandByHood: new Map(crime ? [[K.hoodKey(hood), K.num(crime.IncidentCount)]] : []),
+    namesByHood: K.custodyNamesByHood(beats.Judicial_Ledger, profiles)
+  });
+  const care = K.censusTrail(beats.Care_Justice_Census, cycle, 'hospital', {
+    demandByHood: new Map(demo ? [[K.hoodKey(hood), K.num(demo.Sick)]] : []),
+    namesByHood: K.careNamesByHood(beats.Hospital_Ledger, profiles)
+  });
+  const censusSrc = 'output/beats/Care_Justice_Census.jsonl @C' + cycle;
+  for (const [trail, system] of [[custody, 'judicial'], [care, 'hospital']]) {
+    const mine = trail.hoods.find(t => K.hoodKey(t.hood) === K.hoodKey(hood));
+    if (!mine) continue;
+    const line = K.censusFacts({ state: 'ON_RECORD', city: null, hoods: [mine] }, system, censusSrc + ' ' + system, 1)[0];
+    if (line) facts.push(line);
+    for (const name of mine.names) {
+      const row = (system === 'judicial' ? beats.Judicial_Ledger : beats.Hospital_Ledger).find(r => String(r.Name || '').trim() === name && K.hoodKey(r.Neighborhood) === K.hoodKey(hood));
+      const popid = row && String(row.POPID || '').toUpperCase();
+      if (!popid || people.some(p => p.popid === popid)) continue;
+      const why = system === 'judicial' ? 'in custody on the court record' : 'in hospital care on the record';
+      people.push(K.personFromProfile(profiles, popid, why, hood) || K.person(popid, name, null, hood, why));
+    }
+  }
+  for (const f of K.receiptHookFacts(beats.Story_Hook_Deck, cycle, /^TAX_DAY$/, 'output/beats/Story_Hook_Deck.jsonl', hood)) facts.push(f);
+  const debt = K.debtPattern(profiles, beats.Story_Hook_Deck, cycle, 'output/beats/Story_Hook_Deck.jsonl', hood);
+  for (const f of debt.facts) facts.push(f);
+  for (const p of debt.defaults) if (!people.some(q => q.popid === p.popid)) people.push(p);
+
+  // The tax-day and debt hooks ride as facts above (their numbers are the engine's own); the colour hooks stay as they were.
   const hooks = K.domainHooks(beats, cycle, SEAT.name,
     /^(NEIGHBORHOOD_BOOM|NEIGHBORHOOD_RISING|NEIGHBORHOOD_COOLING|CITIZEN_RELOCATED|RENT_BURDEN_CRISIS|COMMUNITY)$/).slice(0, 8);
 
@@ -85,7 +121,9 @@ function build(cycle, { root, beats, profiles }) {
     deltas: { state: prev.state, vs: prev.vs },
     hooks,
     note: people.length ? null : 'no program founder in ' + hood + ' resolves on the ledger',
-    extra: { programs: here.map(pr => pr.Name), rotation: { index: cycle % hoods.length, of: hoods.length } }
+    extra: { programs: here.map(pr => pr.Name), rotation: { index: cycle % hoods.length, of: hoods.length },
+      careJustice: { custody: custody.hoods.find(t => K.hoodKey(t.hood) === K.hoodKey(hood)) || null, care: care.hoods.find(t => K.hoodKey(t.hood) === K.hoodKey(hood)) || null,
+        debt: { defaults: debt.defaults.map(p => p.popid), overLine: debt.overLine, crisisByHood: Object.fromEntries(debt.crisisByHood) } } }
   });
 }
 

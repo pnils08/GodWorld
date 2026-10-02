@@ -77,7 +77,17 @@ function makeRoot(cycle) {
   ];
   const HOOKS = [
     { Cycle: String(cycle), HookId: 'bh1', HookType: 'signal', Domain: 'BUSINESS', Neighborhood: 'Jack London', Priority: '3', HookText: 'Notable event: "Harborline Grill posts a record week". Follow-up recommended.', SuggestedDesks: 'Business Desk', SuggestedJournalist: 'Jordan Velez', SuggestedAngle: '' },
-    { Cycle: String(cycle - 1), HookId: 'bh0', HookType: 'signal', Domain: 'BUSINESS', Neighborhood: '', Priority: '3', HookText: 'STALE business hook.', SuggestedDesks: 'Business Desk', SuggestedJournalist: 'Jordan Velez', SuggestedAngle: '' }
+    { Cycle: String(cycle - 1), HookId: 'bh0', HookType: 'signal', Domain: 'BUSINESS', Neighborhood: '', Priority: '3', HookText: 'STALE business hook.', SuggestedDesks: 'Business Desk', SuggestedJournalist: 'Jordan Velez', SuggestedAngle: '' },
+    // engine.254 Task 10 receipts — no desk, no journalist on the row; the business desk reads them by HookType.
+    { Cycle: String(cycle), HookId: 'bh2', HookType: 'TAX_DAY', Domain: 'CIVIC', Neighborhood: '', Priority: '4', HookText: 'Tax day — the city took in $310.1M in property tax and $92M in business tax; 124 tracked owner households paid $1.1M', SuggestedDesks: '', SuggestedJournalist: '', SuggestedAngle: '' },
+    { Cycle: String(cycle), HookId: 'bh3', HookType: 'TAX_DAY', Domain: 'CIVIC', Neighborhood: 'Rockridge', Priority: '3', HookText: 'Tax day in Rockridge — 9 owner households paid $71,800 in property tax', SuggestedDesks: '', SuggestedJournalist: '', SuggestedAngle: '' },
+    { Cycle: String(cycle), HookId: 'bh4', HookType: 'DEBT_DEFAULT', Domain: 'COMMUNITY', Neighborhood: 'Fruitvale', Priority: '3', HookText: 'defaulted on the debts — the savings are gone and the record carries it', SuggestedDesks: '', SuggestedJournalist: '', SuggestedAngle: '' }
+  ];
+  const TREASURY = [
+    { Cycle: String(cycle - 1), Entry: 'OPENING', Amount: '100000000', Counterparty: 'GENERAL-FUND', BalanceAfter: '100000000', Note: 'general fund opens' },
+    { Cycle: String(cycle), Entry: 'REVENUE', Amount: '5000000', Counterparty: 'WEEKLY-ALLOCATION', BalanceAfter: '105000000', Note: 'weekly budget allocation' },
+    { Cycle: String(cycle), Entry: 'REVENUE', Amount: '153351', Counterparty: 'COURT', BalanceAfter: '105153351', Note: '34 cleared charges, fined at the hood rate' },
+    { Cycle: String(cycle), Entry: 'APPROPRIATION', Amount: '-2000000', Counterparty: 'INIT-002', BalanceAfter: '103153351', Note: 'funded in full' }
   ];
   const ARCHIVE = [
     { BIZ_ID: 'BIZ-00091', Name: 'Fruitvale Fruit Carts', Sector: 'Food & Beverage', Neighborhood: 'Fruitvale', Employee_Count: '0', Avg_Salary: '30000', Annual_Revenue: '80000', Growth_Rate: '-15', Key_Personnel: 'Maria Foo', ArchiveReason: 'closed', ExitCycle: String(cycle), SourceEventId: 'engine.96:BIZ-00091:C' + cycle, ClosedCycle: String(cycle) },
@@ -104,9 +114,10 @@ function makeRoot(cycle) {
   writeJsonl(path.join(beats, 'Story_Hook_Deck.jsonl'), HOOKS);
   writeJsonl(path.join(beats, 'Business_Archive.jsonl'), ARCHIVE);
   writeJsonl(path.join(beats, 'Casino_Ledger.jsonl'), CASINO);
+  writeJsonl(path.join(beats, 'City_Treasury.jsonl'), TREASURY);
   writeJsonl(path.join(root, 'output', 'simulation_ledger_snapshot.jsonl'), [
-    { POPID: 'POP-00900', Name: 'Rosa Delgado', RoleType: 'Line Cook', Neighborhood: 'Rockridge' },
-    { POPID: 'POP-00910', Name: 'Test Bettor', RoleType: 'Mechanic', Neighborhood: 'Fruitvale' }
+    { POPID: 'POP-00900', Name: 'Rosa Delgado', RoleType: 'Line Cook', Neighborhood: 'Rockridge', DebtLevel: '5' },
+    { POPID: 'POP-00910', Name: 'Test Bettor', RoleType: 'Mechanic', Neighborhood: 'Fruitvale', DebtLevel: '1', DialState: JSON.stringify({ base: {}, debtDefault: { l: cycle, n: 1 } }) }
   ]);
   const prevDir = path.join(beats, 'prev');
   fs.mkdirSync(prevDir, { recursive: true });
@@ -114,7 +125,7 @@ function makeRoot(cycle) {
   fs.writeFileSync(path.join(prevDir, 'meta.json'), JSON.stringify({ cycle: cycle - 1, rows: { Business_Ledger: PREV_BL.length } }));
   fs.writeFileSync(path.join(beats, 'meta.json'), JSON.stringify({
     cycle, rows: { Business_Ledger: BL.length, Employment_Roster: ER.length, Story_Seed_Deck: SEEDS.length,
-      Story_Hook_Deck: HOOKS.length, Business_Archive: ARCHIVE.length, Casino_Ledger: CASINO.length }
+      Story_Hook_Deck: HOOKS.length, Business_Archive: ARCHIVE.length, Casino_Ledger: CASINO.length, City_Treasury: TREASURY.length }
   }));
   return root;
 }
@@ -195,7 +206,16 @@ console.log('business variant:');
   ok('casino: untracked patron never prints', !JSON.stringify(slice.casino).includes('POP-99999'));
   ok('casino: house float carried', slice.casino.houseFloat === 250000);
   ok('casino bettors are candidates, not story.citizens', slice.citizens.some(c => c.popid === 'POP-00910' && /Casino_Ledger/.test(c.why)) && !slice.story.citizens.some(t => /Test Bettor/.test(t)));
-  ok('BUSINESS hook reaches the slice; the stale one does not', slice.prewrite.hooks.length === 1 && /Harborline Grill posts a record week/.test(slice.prewrite.hooks[0].text));
+  ok('BUSINESS hook reaches the slice; the stale one does not', slice.prewrite.hooks.some(h => /Harborline Grill posts a record week/.test(h.text)) && !slice.prewrite.hooks.some(h => /STALE/.test(h.text)));
+  ok('money receipts reach the business desk by HookType (no journalist on the row)', slice.prewrite.hooks.some(h => /^Tax day — the city took in/.test(h.text)) && slice.prewrite.hooks.some(h => /^defaulted on the debts/.test(h.text)));
+  ok('city money: the treasury week as facts (in, out, balance)', slice.prewrite.anchorFacts.includes('CITY MONEY: City treasury this cycle took in $5.2M: $5M the weekly budget allocation, $153,351 court money on 34 cleared charges') &&
+    slice.prewrite.anchorFacts.includes('CITY MONEY: City treasury paid out $2M: $2M to INIT-002') && slice.prewrite.anchorFacts.includes('CITY MONEY: City treasury balance at the close: $103.2M (from $100M)'));
+  ok('city money: the city tax-day receipt only, never the hood lines', slice.prewrite.anchorFacts.some(f => /^CITY MONEY: Tax day — the city took in \$310\.1M/.test(f)) && !slice.prewrite.anchorFacts.some(f => /Tax day in Rockridge/.test(f)));
+  ok('debt: the default named off the ledger mark, the over-the-line count off DebtLevel', slice.prewrite.anchorFacts.includes('DEBT: Debt this cycle: 1 defaulted: Test Bettor (Fruitvale)') &&
+    slice.prewrite.anchorFacts.includes('DEBT: 1 tracked residents on the ledger carry debt at or over the crisis line — most in Rockridge 1'));
+  // Test Bettor is already a candidate off the casino row — never listed twice.
+  ok('debt: the defaulted citizen is an interview candidate, once', slice.citizens.filter(c => c.popid === 'POP-00910').length === 1);
+  ok('cityMoney typed on the slice', slice.cityMoney && slice.cityMoney.treasury.state === 'ON_RECORD' && slice.cityMoney.treasury.closing === 103153351 && slice.cityMoney.debt.overLine === 1);
   ok('every evidence line is sourced to a file on disk', slice.prewrite.evidence.length === slice.prewrite.anchorFacts.length &&
     slice.prewrite.evidence.every(e => /^output\//.test(e.src)));
   const mdV3 = formatEconomicSliceMarkdown(slice);

@@ -252,7 +252,9 @@ function readJsonl(file) {
   } catch (_) { return []; }
 }
 
-const CIVIC_DUMP_TABS = ['Initiative_Tracker', 'Civic_Office_Ledger', 'Election_Log', 'Civic_Ledger', 'Story_Hook_Deck'];
+// engine.254 Task 10: City_Treasury (the city's money) and Judicial_Ledger (the
+// court) ride Carmen's packet — cumulative tabs, empty until their first fire.
+const CIVIC_DUMP_TABS = ['Initiative_Tracker', 'Civic_Office_Ledger', 'Election_Log', 'Civic_Ledger', 'Story_Hook_Deck', 'City_Treasury', 'Judicial_Ledger'];
 
 function loadBeatDump(cycle, root = ROOT) {
   const dir = path.join(root, 'output', 'beats');
@@ -893,16 +895,35 @@ function packetForEntries(entries, slug, profiles, deck) {
     candidates,
     pointers: unique(candidates.map(candidate => candidate.ref))
   };
-  attachCivicDump(packet, slug, deck);
+  attachCivicDump(packet, slug, deck, profiles);
   return packet;
 }
 
+// engine.254 Task 10 — the city's money and the court, for Carmen. The treasury
+// week (what came in, from where; what went out, to which initiative by name; the
+// balance), the tax-day / allocation-ended receipts off the hook deck, and the
+// court's money side: cases resolved this cycle with the fine the court took.
+// Record facts, appended to anchorFacts like trackerFacts. Internal IDs stay in src.
+function cityMoneyFacts(deck, profiles) {
+  if (!deck || !deck.ok) return [];
+  const K = require('./beatSliceKit');
+  const cycle = deck.cycle;
+  const names = new Map((deck.tabs.Initiative_Tracker || []).map(row => [String(row.InitiativeID || '').trim(), String(row.Name || '').trim()]).filter(([id, name]) => id && name));
+  const treasurySrc = 'output/beats/City_Treasury.jsonl @C' + cycle;
+  const facts = K.treasuryWeek(deck.tabs.City_Treasury, cycle, treasurySrc, id => names.get(id)).facts.map(f => f.text + ' [City_Treasury]');
+  for (const f of K.receiptHookFacts(deck.tabs.Story_Hook_Deck, cycle, /^(TAX_DAY|ALLOCATION_ENDED)$/, 'output/beats/Story_Hook_Deck.jsonl', '')) facts.push(f.text + ' [Story_Hook_Deck]');
+  const court = K.courtCases(deck.tabs.Judicial_Ledger, deck.tabs.City_Treasury, cycle, profiles || new Map(), 'output/beats/Judicial_Ledger.jsonl @C' + cycle);
+  for (const c of court.cases.filter(c => c.resolvedThisCycle && c.fine != null).slice(0, 3)) facts.push('Court: ' + c.text + ' [Judicial_Ledger + City_Treasury]');
+  return facts.slice(0, 6);
+}
+
 // Beat-dump attachments for the two live civic seats. Carmen gets record
-// facts (trackerFacts, also appended to her anchorFacts) plus CIVIC hooks;
+// facts (trackerFacts, also appended to her anchorFacts) plus CIVIC hooks and,
+// since engine.254 Task 10, the city's money (cityMoneyFacts, record facts);
 // Luis gets CIVIC hooks, stalling-initiative colour, and faction standings.
 // Hooks/stalling/factions are colour/pointers — never anchorFacts. Every read
-// is soft: a missing/stale dump leaves all four fields empty.
-function attachCivicDump(packet, slug, deck) {
+// is soft: a missing/stale dump leaves all the fields empty.
+function attachCivicDump(packet, slug, deck, profiles) {
   if (!packet || packet.empty) return packet;
   if (slug === 'carmen-delaine') {
     const moved = deck && deck.ok ? movedInitiativeRows(deck) : [];
@@ -923,8 +944,10 @@ function attachCivicDump(packet, slug, deck) {
       : null;
     const recordFacts = initiativeRecordFacts(storyRow);
     packet.recordFacts = recordFacts;
-    if (recordFacts.length || trackerFacts.length) {
-      packet.prewrite.anchorFacts = (packet.prewrite.anchorFacts || []).concat(recordFacts, trackerFacts);
+    const moneyFacts = cityMoneyFacts(deck, profiles);
+    packet.cityMoneyFacts = moneyFacts;
+    if (recordFacts.length || trackerFacts.length || moneyFacts.length) {
+      packet.prewrite.anchorFacts = (packet.prewrite.anchorFacts || []).concat(recordFacts, trackerFacts, moneyFacts);
     }
     packet.hooks = civicHooksFor(deck, 'Carmen Delaine');
     return packet;
@@ -953,7 +976,7 @@ function buildCivicDomainSlice(cycle, { root = ROOT } = {}) {
     [slug, packetForEntries(entries, slug, profiles, deck)]));
   const nonempty = Object.values(packets).filter(packet => packet && !packet.empty);
   return {
-    version: 'CIVIC-DOMAIN-SLICE-5',
+    version: 'CIVIC-DOMAIN-SLICE-6',
     cycle: Number(cycle),
     kind: 'civic-domain',
     empty: nonempty.length === 0,
@@ -991,6 +1014,10 @@ function formatCivicDomainSliceMarkdown(slice) {
     if (packet.trackerFacts && packet.trackerFacts.length) {
       lines.push('- TrackerFacts (beat dump, record facts):');
       for (const fact of packet.trackerFacts) lines.push('  - ' + fact);
+    }
+    if (packet.cityMoneyFacts && packet.cityMoneyFacts.length) {
+      lines.push('- The city\'s money (beat dump, record facts):');
+      for (const fact of packet.cityMoneyFacts) lines.push('  - ' + fact);
     }
     if (packet.stalling && packet.stalling.length) {
       lines.push('- Stalling initiatives (unchanged vs prev cycle, colour):');
@@ -1031,7 +1058,7 @@ function writeCivicDomainSlice(cycle, slice, root = ROOT) {
 
 function loadCivicDomainSlice(cycle, root = ROOT) {
   const existing = loadJson(slicePaths(cycle, root).json);
-  if (existing && existing.version === 'CIVIC-DOMAIN-SLICE-5') return existing;
+  if (existing && existing.version === 'CIVIC-DOMAIN-SLICE-6') return existing;
   const slice = buildCivicDomainSlice(cycle, { root });
   if (!slice.empty) writeCivicDomainSlice(cycle, slice, root);
   return slice.empty ? null : slice;

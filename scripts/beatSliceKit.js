@@ -321,9 +321,304 @@ function wire(seat) {
   return { paths, build, write, load, isSeat, assignmentFromSlice, enrichAssignment, main, formatMarkdown };
 }
 
+// ── engine.254 Task 10: the city's money, the court, the care/custody trail ──
+// Three cumulative, Cycle-stamped tabs (City_Treasury, Judicial_Ledger,
+// Care_Justice_Census) plus the receipt hooks the engine writes for them. Every
+// helper reads one cycle's rows and returns typed facts; an empty tab (nothing
+// has fired yet) returns no facts — never a throw, never a fact about silence.
+// Internal IDs (case IDs embed the POPID) ride in `src`, never in `text`.
+
+const ATHLETE_RE = /\b(?:athlete|player|pitcher|catcher|fielder|shortstop|baseman|designated hitter|coach|manager, oakland)\b/i;
+/** A GAME-clock citizen is the sports desks' — never named as a patient or a defendant on a civic beat. */
+function sportsSubject(profiles, popid) {
+  const p = profiles && profiles.get(String(popid || '').toUpperCase());
+  if (!p) return false;
+  return String(p.EconomicProfileKey || '') === 'SPORTS_OVERRIDE' || String(p.ClockMode || '').toUpperCase() === 'GAME' ||
+    ATHLETE_RE.test(String(p.RoleType || ''));
+}
+
+function money(n) {
+  if (n == null || !Number.isFinite(Number(n))) return '—';
+  const v = Number(n), abs = Math.abs(v);
+  const body = abs >= 1e6 ? (Math.round(abs / 1e5) / 10) + 'M' : Math.round(abs).toLocaleString('en-US');
+  return (v < 0 ? '-$' : '$') + body;
+}
+
+// What each treasury counterparty means, in the words a reporter prints.
+const TREASURY_SOURCES = {
+  'WEEKLY-ALLOCATION': 'the weekly budget allocation',
+  'COURT': 'court money on cleared charges',
+  'COURT-NAMED': 'fines paid by named defendants',
+  'TICKETS': 'tickets',
+  'PROPERTY-TAX': 'property tax',
+  'BUSINESS-TAX': 'business tax',
+  'GENERAL-FUND': 'the general fund'
+};
+
+/**
+ * This cycle on City_Treasury: what came in and from where, what went out and to
+ * whom, and the balance. `nameOf(counterparty)` turns an initiative ID into its
+ * name for the outflow line. Returns { state, facts, income, outflows, opening, closing }.
+ */
+function treasuryWeek(rows, cycle, src, nameOf) {
+  const all = rows || [];
+  const week = all.filter(r => Number(r.Cycle) === Number(cycle));
+  const out = { state: all.length ? (week.length ? 'ON_RECORD' : 'NO_ROWS_THIS_CYCLE') : 'NO_ROWS', facts: [], income: {}, outflows: [], opening: null, closing: null };
+  if (!week.length) return out;
+  const first = all.indexOf(week[0]);
+  const before = first > 0 ? all[first - 1] : null;
+  out.opening = before ? num(before.BalanceAfter) : (num(week[0].BalanceAfter) != null ? num(week[0].BalanceAfter) - (num(week[0].Amount) || 0) : null);
+  out.closing = num(week[week.length - 1].BalanceAfter);
+  let totalIn = 0, totalOut = 0;
+  for (const r of week) {
+    const entry = String(r.Entry || '').toUpperCase(), cp = String(r.Counterparty || '').trim(), amt = num(r.Amount) || 0;
+    if (entry === 'OPENING') { out.facts.push({ text: 'The city treasury opened this cycle at ' + money(amt), src }); continue; }
+    if (entry === 'PREFUNDED') continue;
+    if (entry === 'REVENUE') {
+      const slot = out.income[cp] || (out.income[cp] = { amount: 0, count: 0, charges: null });
+      slot.amount += amt; slot.count += 1; totalIn += amt;
+      if (cp === 'COURT') { const m = String(r.Note || '').match(/^(\d+)\s+cleared/); if (m) slot.charges = Number(m[1]); }
+      continue;
+    }
+    if (amt < 0 || entry === 'APPROPRIATION' || entry === 'RENEWAL') {
+      out.outflows.push({ entry, counterparty: cp, name: (nameOf && nameOf(cp)) || cp, amount: Math.abs(amt), note: String(r.Note || '').trim() });
+      totalOut += Math.abs(amt);
+    }
+  }
+  const parts = Object.keys(out.income).map(cp => {
+    const s = out.income[cp];
+    let what = TREASURY_SOURCES[cp] || cp.toLowerCase();
+    if (cp === 'COURT' && s.charges != null) what = 'court money on ' + s.charges + ' cleared charge' + (s.charges === 1 ? '' : 's');
+    if (cp === 'COURT-NAMED') what = 'fines paid by ' + s.count + ' named defendant' + (s.count === 1 ? '' : 's');
+    if (cp === 'TICKETS') what = s.count + ' ticket' + (s.count === 1 ? '' : 's');
+    return money(s.amount) + ' ' + what;
+  });
+  if (parts.length) out.facts.push({ text: 'City treasury this cycle took in ' + money(totalIn) + ': ' + parts.join(', '), src });
+  if (out.outflows.length) {
+    out.facts.push({ text: 'City treasury paid out ' + money(totalOut) + ': ' + out.outflows.map(o => money(o.amount) + ' to ' + o.name + (o.entry === 'RENEWAL' ? ' (renewal)' : '') + (/underfunded/i.test(o.note) ? ' — opened underfunded' : '')).join('; '), src });
+  }
+  if (out.closing != null) {
+    out.facts.push({ text: 'City treasury balance at the close: ' + money(out.closing) + (out.opening != null && out.opening !== out.closing ? ' (from ' + money(out.opening) + ')' : ''), src });
+  }
+  return out;
+}
+
+const CUSTODY_STATES = /^(pending|held)$/i;
+const HOSPITAL_OPEN_STATES = /^(hospitalized|critical|serious-condition|injured|recovering)$/i;
+
+/**
+ * Judicial_Ledger cases that moved this cycle or still hold someone, joined to the
+ * fine the court took (City_Treasury COURT-NAMED, by case ID). A GAME-clock
+ * citizen's case is counted, never named. Returns { cases, sportsCases }.
+ */
+function courtCases(judicialRows, treasuryRows, cycle, profiles, src) {
+  const fines = new Map();
+  for (const r of treasuryRows || []) {
+    if (Number(r.Cycle) !== Number(cycle) || String(r.Counterparty || '') !== 'COURT-NAMED') continue;
+    const m = String(r.Note || '').match(/case\s+(\S+)/i);
+    if (m) fines.set(m[1].replace(/,$/, ''), num(r.Amount));
+  }
+  const cases = [];
+  let sportsCases = 0;
+  for (const c of judicialRows || []) {
+    const caseId = String(c.CaseId || '').trim();
+    if (!caseId) continue;
+    const touched = ['OpenCycle', 'ArrestCycle', 'DecisionCycle', 'ResolveCycle', 'LastTransitionCycle'].some(k => Number(c[k]) === Number(cycle));
+    const inCustody = CUSTODY_STATES.test(String(c.StatusNow || '').trim());
+    if (!touched && !inCustody) continue;
+    const popid = String(c.POPID || '').toUpperCase();
+    if (sportsSubject(profiles, popid)) { sportsCases += 1; continue; }
+    const name = String(c.Name || '').trim();
+    if (!name) continue;
+    const hood = String(c.Neighborhood || '').trim() || null;
+    const gravity = String(c.ChargeGravity || '').trim();
+    const status = String(c.StatusNow || '').trim();
+    const outcome = String(c.Outcome || '').trim();
+    const held = num(c.CyclesHeld);
+    const fine = fines.get(caseId);
+    const bits = [name + (hood ? ' (' + hood + ')' : '') + ' — ' + (gravity ? gravity + ' charge' : 'a charge') + (c.ChargeCause ? ' after ' + String(c.ChargeCause).trim() : '')];
+    if (Number(c.ArrestCycle) === Number(cycle)) bits.push('arrested this cycle');
+    bits.push(inCustody ? 'in custody (' + status + ')' + (held ? ', held ' + held + ' cycle' + (held === 1 ? '' : 's') : '') : status || 'status unrecorded');
+    if (outcome) bits.push('outcome ' + outcome + (Number(c.ResolveCycle) === Number(cycle) ? ' this cycle' : ''));
+    if (fine != null) bits.push('fined ' + money(fine) + ' by the court');
+    cases.push({ caseId, popid, name, hood, gravity, status, outcome, inCustody, cyclesHeld: held, fine: fine != null ? fine : null,
+      arrestedThisCycle: Number(c.ArrestCycle) === Number(cycle), resolvedThisCycle: Number(c.ResolveCycle) === Number(cycle),
+      text: bits.join(', '), src: src + ' ' + caseId });
+  }
+  cases.sort((a, b) => (b.arrestedThisCycle - a.arrestedThisCycle) || (b.resolvedThisCycle - a.resolvedThisCycle) || (b.inCustody - a.inCustody) || a.name.localeCompare(b.name));
+  return { cases, sportsCases };
+}
+
+/**
+ * Care_Justice_Census for one system ('judicial' | 'hospital') this cycle, read
+ * one scope at a time off the IntakeType `all` rows — the typed rows are never
+ * summed on top of them, and `city` is never added to the hoods. A row whose
+ * Completeness is not `complete` keeps its numbers off the facts and says so.
+ * `demandByHood` (hoodKey → number) is the demand side (charges or sick
+ * residents); `namesByHood` (hoodKey → [names]) is the tracked people on the
+ * ledger for that system, so every hood line ends in names or "none tracked".
+ */
+function censusTrail(censusRows, cycle, system, { demandByHood, namesByHood } = {}) {
+  const rows = (censusRows || []).filter(r => Number(r.Cycle) === Number(cycle) && String(r.System || '') === system && String(r.IntakeType || '') === 'all');
+  const out = { state: rows.length ? 'ON_RECORD' : ((censusRows || []).length ? 'NO_ROWS_THIS_CYCLE' : 'NO_ROWS'), city: null, unallocated: null, hoods: [] };
+  const read = r => {
+    const complete = String(r.Completeness || '') === 'complete';
+    const key = hoodKey(r.Neighborhood);
+    return {
+      scope: r.GeographicScope, hood: String(r.Neighborhood || '').trim() || null, complete, completeness: String(r.Completeness || '') || 'unrecorded',
+      demand: demandByHood && demandByHood.has(key) ? demandByHood.get(key) : null,
+      intakes: complete ? num(r.TotalIntakes) : null, tracked: complete ? num(r.TrackedIntakes) : null, other: complete ? num(r.OtherResidentIntakes) : null,
+      closing: complete ? num(r.ClosingOccupancy) : null, trackedOcc: complete ? num(r.TrackedOccupancy) : null, otherOcc: complete ? num(r.OtherResidentOccupancy) : null,
+      beds: complete && system === 'hospital' ? num(r.BedsOccupied) : null, exits: complete ? num(r.Exits) : null,
+      names: (namesByHood && namesByHood.get(key)) || []
+    };
+  };
+  for (const r of rows) {
+    const t = read(r);
+    if (t.scope === 'city') out.city = t;
+    else if (t.scope === 'unallocated') out.unallocated = t;
+    else if (t.scope === 'neighborhood' && t.hood) out.hoods.push(t);
+  }
+  out.hoods.sort((a, b) => ((b.closing || 0) - (a.closing || 0)) || ((b.intakes || 0) - (a.intakes || 0)) || a.hood.localeCompare(b.hood));
+  return out;
+}
+
+const TRAIL_WORDS = {
+  judicial: { demand: 'charges', intake: 'arrest', occ: 'in custody', beds: null },
+  hospital: { demand: 'sick residents', intake: 'admission', occ: 'in care', beds: 'beds' }
+};
+function trailLine(t, system) {
+  const w = TRAIL_WORDS[system];
+  if (!t.complete) return t.hood + ': census ' + t.completeness + ' this cycle — numbers withheld' + (t.names.length ? '; on the ledger: ' + t.names.join(', ') : '');
+  const bits = [];
+  if (t.demand != null) bits.push(fmtInt(t.demand) + ' ' + w.demand);
+  bits.push(fmtInt(t.intakes) + ' ' + w.intake + ((t.intakes || 0) === 1 ? '' : 's') + (t.tracked ? ' (' + t.tracked + ' tracked)' : ''));
+  bits.push(fmtInt(t.closing) + ' ' + w.occ + ' at the close' + (t.otherOcc != null && t.trackedOcc != null ? ' (' + t.trackedOcc + ' tracked, ' + t.otherOcc + ' other residents)' : ''));
+  if (w.beds && t.beds != null) bits.push(t.beds + ' ' + w.beds + ' occupied');
+  // Names come off the ledger; a tracked count with no name is a sports-clock citizen (the sports desks') or a lost write.
+  return t.hood + ': ' + bits.join(' → ') + '; tracked: ' + (t.names.length ? t.names.join(', ') : (t.trackedOcc > 0 ? 'tracked residents not named on this beat' : 'none tracked'));
+}
+/** Facts off a censusTrail: one city line, then up to `maxHoods` hood lines (one scope each). */
+function censusFacts(trail, system, src, maxHoods = 4) {
+  const facts = [];
+  if (trail.state !== 'ON_RECORD') return facts;
+  const w = TRAIL_WORDS[system];
+  const c = trail.city;
+  if (c) {
+    facts.push({
+      text: c.complete
+        ? 'Citywide ' + (system === 'judicial' ? 'custody' : 'hospital') + ' this cycle: ' + fmtInt(c.intakes) + ' ' + w.intake + ((c.intakes || 0) === 1 ? '' : 's') +
+          (c.tracked != null ? ' (' + c.tracked + ' tracked, ' + c.other + ' other residents)' : '') + '; ' + fmtInt(c.closing) + ' ' + w.occ + ' at the close' +
+          (w.beds && c.beds != null ? ', ' + c.beds + ' ' + w.beds + ' occupied' : '') + (c.exits ? '; ' + c.exits + ' left' : '')
+        : 'Citywide ' + (system === 'judicial' ? 'custody' : 'hospital') + ' census is ' + c.completeness + ' this cycle — the city number is withheld',
+      src: src + ' city'
+    });
+  }
+  for (const t of trail.hoods.slice(0, maxHoods)) facts.push({ text: trailLine(t, system), src: src + ' ' + t.hood });
+  return facts;
+}
+
+/** Tracked names per hood off the two ledgers, for the census trail. */
+function custodyNamesByHood(judicialRows, profiles) {
+  const m = new Map();
+  for (const c of judicialRows || []) {
+    if (!CUSTODY_STATES.test(String(c.StatusNow || '').trim()) || !c.Name) continue;
+    if (sportsSubject(profiles, c.POPID)) continue;
+    const k = hoodKey(c.Neighborhood);
+    if (!m.has(k)) m.set(k, []);
+    m.get(k).push(String(c.Name).trim());
+  }
+  return m;
+}
+function careNamesByHood(hospitalRows, profiles) {
+  const m = new Map();
+  for (const r of hospitalRows || []) {
+    if (!HOSPITAL_OPEN_STATES.test(String(r.StatusNow || '').trim()) || !r.Name) continue;
+    if (sportsSubject(profiles, r.POPID)) continue;
+    const k = hoodKey(r.Neighborhood);
+    if (!m.has(k)) m.set(k, []);
+    m.get(k).push(String(r.Name).trim());
+  }
+  return m;
+}
+
+/** The engine's receipt hooks (numbers in the text are the engine's own) as facts, by HookType; a hood filter when the beat is one block. */
+function receiptHookFacts(hookRows, cycle, typeRe, src, hood) {
+  const seen = new Set();
+  return (hookRows || [])
+    .filter(r => Number(r.Cycle) === Number(cycle) && typeRe.test(String(r.HookType || '').toUpperCase()) &&
+      (hood === undefined || hoodKey(r.Neighborhood) === hoodKey(hood)))
+    // The engine's own fine line names the case ID (it embeds the POPID): the ID stays in src, the prose loses it.
+    .map(r => ({ text: String(r.HookText || '').trim().replace(/,?\s*case J-C\d+-POP-\d+/gi, ''), src: src + ' ' + String(r.HookType || '').toUpperCase() + (r.Neighborhood ? ' ' + r.Neighborhood : '') }))
+    .filter(f => f.text && !seen.has(f.text) && seen.add(f.text));
+}
+
+const DEBT_CRISIS_LINE = 5; // the engine's own line (generationalWealthEngine: debt >= 5 raises DEBT_CRISIS)
+function parseDialState(raw) {
+  if (!raw) return null;
+  if (typeof raw === 'object') return raw;
+  try { return JSON.parse(String(raw)); } catch (_) { return null; }
+}
+/**
+ * Debt as a pattern this cycle: who defaulted (the ledger's own mark,
+ * DialState.debtDefault.l === cycle), where the DEBT_CRISIS / DEBT_DEFAULT hooks
+ * landed, and how many on the ledger sit at or over the engine's crisis line.
+ * `hood` narrows every count to one block. Returns { defaults, crisisByHood, overLine, overLineByHood, facts }.
+ */
+function debtPattern(profiles, hookRows, cycle, src, hood) {
+  const want = hood === undefined ? null : hoodKey(hood);
+  const defaults = [];
+  let overLine = 0;
+  const overLineByHood = new Map();
+  for (const p of (profiles || new Map()).values()) {
+    const h = String(p.Neighborhood || '').trim();
+    if (want != null && hoodKey(h) !== want) continue;
+    const lvl = num(p.DebtLevel);
+    if (lvl != null && lvl >= DEBT_CRISIS_LINE && !sportsSubject(profiles, p.POPID)) {
+      overLine += 1;
+      overLineByHood.set(h, (overLineByHood.get(h) || 0) + 1);
+    }
+    const ds = parseDialState(p.DialState);
+    if (ds && ds.debtDefault && Number(ds.debtDefault.l) === Number(cycle) && !sportsSubject(profiles, p.POPID)) {
+      defaults.push(person(String(p.POPID).toUpperCase(), String(p.Name || '').trim(), String(p.RoleType || '').trim() || null, h || null,
+        'defaulted on the debts this cycle (Simulation_Ledger)'));
+    }
+  }
+  const crisisByHood = new Map();
+  for (const r of hookRows || []) {
+    if (Number(r.Cycle) !== Number(cycle)) continue;
+    const t = String(r.HookType || '').toUpperCase();
+    if (t !== 'DEBT_CRISIS' && t !== 'DEBT_DEFAULT') continue;
+    const h = String(r.Neighborhood || '').trim() || 'unplaced';
+    if (want != null && hoodKey(h) !== want) continue;
+    if (!crisisByHood.has(h)) crisisByHood.set(h, { crisis: 0, defaults: 0 });
+    crisisByHood.get(h)[t === 'DEBT_CRISIS' ? 'crisis' : 'defaults'] += 1;
+  }
+  const facts = [];
+  const crisisTotal = [...crisisByHood.values()].reduce((a, v) => a + v.crisis, 0);
+  const defaultHooks = [...crisisByHood.values()].reduce((a, v) => a + v.defaults, 0);
+  if (crisisTotal || defaultHooks || defaults.length) {
+    const bits = [];
+    if (crisisTotal) bits.push(crisisTotal + ' household' + (crisisTotal === 1 ? "'s" : "s'") + ' debts crossed the line this cycle' +
+      (want == null ? ' (' + [...crisisByHood].filter(([, v]) => v.crisis).map(([h, v]) => h + ' ' + v.crisis).join(', ') + ')' : ''));
+    const d = Math.max(defaultHooks, defaults.length);
+    if (d) bits.push(d + ' defaulted' + (defaults.length ? ': ' + defaults.map(p => p.name + (want == null && p.neighborhood ? ' (' + p.neighborhood + ')' : '')).join(', ') : ''));
+    facts.push({ text: (want == null ? 'Debt this cycle: ' : hood + ' debt this cycle: ') + bits.join('; '), src: src + ' DEBT_CRISIS/DEBT_DEFAULT' + (defaults.length ? ' + Simulation_Ledger DialState' : '') });
+  }
+  if (overLine) {
+    const top = [...overLineByHood].sort((a, b) => b[1] - a[1]).slice(0, 4).map(([h, n]) => h + ' ' + n).join(', ');
+    facts.push({ text: (want == null ? overLine + ' tracked residents on the ledger carry debt at or over the crisis line' + (top ? ' — most in ' + top : '')
+      : overLine + ' tracked residents of ' + hood + ' carry debt at or over the crisis line'), src: 'output/simulation_ledger_snapshot.jsonl DebtLevel >= ' + DEBT_CRISIS_LINE });
+  }
+  return { defaults, crisisByHood, overLine, overLineByHood, facts };
+}
+
 module.exports = {
   ROOT, SCHEMA, FACTS_TAIL, FORBIDDEN,
   num, hoodKey, fmtInt, loadJson, arg,
   loadBeatTabs, loadProfiles, prevTabRows, rosterAtSectors, hooksFor, domainHooks, seedsFor,
-  person, personFromProfile, citizenTags, makeSlice, emptySlice, formatMarkdown, wire
+  person, personFromProfile, citizenTags, makeSlice, emptySlice, formatMarkdown, wire,
+  // engine.254 Task 10
+  sportsSubject, money, TREASURY_SOURCES, treasuryWeek, courtCases, censusTrail, censusFacts,
+  custodyNamesByHood, careNamesByHood, receiptHookFacts, debtPattern, DEBT_CRISIS_LINE
 };

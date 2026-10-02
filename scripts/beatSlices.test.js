@@ -124,8 +124,62 @@ function writeDump(dir, cycle) {
       // NEIGHBORHOOD_* are raw-carried too.
       { Cycle: String(cycle), HookId: 'h7', HookType: 'NEIGHBORHOOD_RISING', Domain: 'NEIGHBORHOOD_RISING', Neighborhood: 'Downtown', Priority: '', HookText: 'Downtown is rising — momentum building.', SuggestedDesks: '', SuggestedJournalist: '', SuggestedAngle: '' },
       // ENVIRONMENT routes to the Civic Desk and a non-seat journalist — Noah gets it by domain.
-      { Cycle: String(cycle), HookId: 'h8', HookType: 'signal', Domain: 'ENVIRONMENT', Neighborhood: '', Priority: '1', HookText: 'Air quality watch: wildfire smoke drifts in from the hills.', SuggestedDesks: 'Civic Desk', SuggestedJournalist: 'Mags Corliss', SuggestedAngle: '' }
+      { Cycle: String(cycle), HookId: 'h8', HookType: 'signal', Domain: 'ENVIRONMENT', Neighborhood: '', Priority: '1', HookText: 'Air quality watch: wildfire smoke drifts in from the hills.', SuggestedDesks: 'Civic Desk', SuggestedJournalist: 'Mags Corliss', SuggestedAngle: '' },
+      // engine.254 Task 10 receipts: the engine's own numbers ride in the text; none of these is routed to a journalist.
+      { Cycle: String(cycle), HookId: 'h9', HookType: 'COURT_FINE', Domain: 'SAFETY', Neighborhood: 'Fruitvale', Priority: '4', HookText: 'Test Defendant — fined $1200 by the court on a misdemeanor charge (diverted, case J-C101-POP-90040)', SuggestedDesks: '', SuggestedJournalist: '', SuggestedAngle: '' },
+      { Cycle: String(cycle), HookId: 'h10', HookType: 'TAX_DAY', Domain: 'CIVIC', Neighborhood: '', Priority: '4', HookText: 'Tax day — the city took in $310.1M in property tax and $92M in business tax; 124 tracked owner households paid $1.1M', SuggestedDesks: '', SuggestedJournalist: '', SuggestedAngle: '' },
+      { Cycle: String(cycle), HookId: 'h11', HookType: 'TAX_DAY', Domain: 'CIVIC', Neighborhood: 'Downtown', Priority: '3', HookText: 'Tax day in Downtown — 9 owner households paid $71,800 in property tax', SuggestedDesks: '', SuggestedJournalist: '', SuggestedAngle: '' },
+      { Cycle: String(cycle), HookId: 'h12', HookType: 'ALLOCATION_ENDED', Domain: 'CIVIC', Neighborhood: '', Priority: '4', HookText: 'The city\'s weekly budget allocation ends; taxes and court money fund the treasury now', SuggestedDesks: '', SuggestedJournalist: '', SuggestedAngle: '' },
+      { Cycle: String(cycle), HookId: 'h13', HookType: 'DEBT_CRISIS', Domain: 'COMMUNITY', Neighborhood: 'Downtown', Priority: '3', HookText: 'the debts crossed a line this week — sleep comes harder now', SuggestedDesks: '', SuggestedJournalist: '', SuggestedAngle: '' },
+      { Cycle: String(cycle), HookId: 'h14', HookType: 'DEBT_CRISIS', Domain: 'COMMUNITY', Neighborhood: 'Fruitvale', Priority: '3', HookText: 'the debts crossed a line this week — sleep comes harder now', SuggestedDesks: '', SuggestedJournalist: '', SuggestedAngle: '' },
+      { Cycle: String(cycle), HookId: 'h15', HookType: 'DEBT_DEFAULT', Domain: 'COMMUNITY', Neighborhood: 'Fruitvale', Priority: '3', HookText: 'defaulted on the debts — the savings are gone and the record carries it', SuggestedDesks: '', SuggestedJournalist: '', SuggestedAngle: '' },
+      { Cycle: String(cycle - 1), HookId: 'h16', HookType: 'TAX_DAY', Domain: 'CIVIC', Neighborhood: '', Priority: '4', HookText: 'STALE tax day', SuggestedDesks: '', SuggestedJournalist: '', SuggestedAngle: '' }
     ],
+    // engine.254 Task 10 — the city's money, the court, the care/custody trail (cumulative, Cycle-stamped).
+    City_Treasury: [
+      { Cycle: String(cycle - 1), Entry: 'OPENING', Amount: '100000000', Counterparty: 'GENERAL-FUND', BalanceAfter: '100000000', Note: 'general fund opens' },
+      { Cycle: String(cycle - 1), Entry: 'PREFUNDED', Amount: '0', Counterparty: 'INIT-001', BalanceAfter: '100000000', Note: 'funded before the treasury' },
+      { Cycle: String(cycle - 1), Entry: 'REVENUE', Amount: '5000000', Counterparty: 'WEEKLY-ALLOCATION', BalanceAfter: '105000000', Note: 'weekly budget allocation' },
+      { Cycle: String(cycle), Entry: 'REVENUE', Amount: '5000000', Counterparty: 'WEEKLY-ALLOCATION', BalanceAfter: '110000000', Note: 'weekly budget allocation' },
+      { Cycle: String(cycle), Entry: 'APPROPRIATION', Amount: '-2000000', Counterparty: 'INIT-002', BalanceAfter: '108000000', Note: 'funded in full' },
+      { Cycle: String(cycle), Entry: 'REVENUE', Amount: '153351', Counterparty: 'COURT', BalanceAfter: '108153351', Note: '34 cleared charges, fined at the hood rate' },
+      { Cycle: String(cycle), Entry: 'REVENUE', Amount: '1200', Counterparty: 'COURT-NAMED', BalanceAfter: '108154551', Note: 'case J-C101-POP-90040, POP-90040, misdemeanor' },
+      { Cycle: String(cycle), Entry: 'REVENUE', Amount: '290', Counterparty: 'TICKETS', BalanceAfter: '108154841', Note: 'parking ticket, cop car, POP-90001' }
+    ],
+    Judicial_Ledger: [
+      // resolved this cycle, fined (joined to the COURT-NAMED row by case ID)
+      { CaseId: 'J-C101-POP-90040', POPID: 'POP-90040', Name: 'Test Defendant', Neighborhood: 'Fruitvale', ChargeCause: 'a bar fight', ChargeGravity: 'misdemeanor', EntryType: 'arrest', OpenCycle: '101', ArrestCycle: '101', DecisionCycle: String(cycle), StatusNow: 'released', LastTransitionCycle: String(cycle), HeldUntilCycle: '', ResolveCycle: String(cycle), Outcome: 'diverted', CyclesHeld: '2', PriorStatus: 'active', SourceSystem: 'chaos-cars', SourceEventId: 'e1', TransferToId: '', Counterparty: '' },
+      // arrested this cycle, held
+      { CaseId: 'J-C103-POP-90041', POPID: 'POP-90041', Name: 'Test Held Resident', Neighborhood: 'Fruitvale', ChargeCause: '', ChargeGravity: 'felony', EntryType: 'arrest', OpenCycle: String(cycle), ArrestCycle: String(cycle), DecisionCycle: '', StatusNow: 'held', LastTransitionCycle: String(cycle), HeldUntilCycle: String(cycle + 2), ResolveCycle: '', Outcome: '', CyclesHeld: '0', PriorStatus: 'active', SourceSystem: 'chaos-cars', SourceEventId: 'e2', TransferToId: '', Counterparty: '' },
+      // a sports-clock citizen's case: counted, never named on a civic beat
+      { CaseId: 'J-C103-POP-90002', POPID: 'POP-90002', Name: 'Test Pro Athlete', Neighborhood: 'Downtown', ChargeCause: '', ChargeGravity: 'misdemeanor', EntryType: 'arrest', OpenCycle: String(cycle), ArrestCycle: String(cycle), DecisionCycle: '', StatusNow: 'pending', LastTransitionCycle: String(cycle), HeldUntilCycle: '', ResolveCycle: '', Outcome: '', CyclesHeld: '0', PriorStatus: 'active', SourceSystem: 'chaos-cars', SourceEventId: 'e3', TransferToId: '', Counterparty: '' },
+      // closed three cycles ago — not this cycle's record
+      { CaseId: 'J-C99-POP-90042', POPID: 'POP-90042', Name: 'Test Old Case', Neighborhood: 'Rockridge', ChargeCause: '', ChargeGravity: 'misdemeanor', EntryType: 'arrest', OpenCycle: '99', ArrestCycle: '99', DecisionCycle: '100', StatusNow: 'released', LastTransitionCycle: '100', HeldUntilCycle: '', ResolveCycle: '100', Outcome: 'released', CyclesHeld: '1', PriorStatus: 'active', SourceSystem: 'chaos-cars', SourceEventId: 'e0', TransferToId: '', Counterparty: '' }
+    ],
+    Care_Justice_Census: (() => {
+      const row = (system, scope, hood, type, o) => Object.assign({ Cycle: String(cycle), System: system, GeographicScope: scope, Neighborhood: hood, IntakeType: type,
+        PopulationBasis: scope === 'city' ? 'covered-sum' : scope === 'unallocated' ? 'tracked-outside-table' : 'hood-table', CoveredPopulation: '1000', MethodVersion: 'cj-2',
+        Completeness: 'complete', TotalIntakes: '0', TrackedIntakes: '0', OtherResidentIntakes: '0', OccupancyMeasure: system === 'hospital' ? 'in-care' : 'in-custody',
+        OpeningOccupancy: '0', ClosingOccupancy: '0', TrackedOccupancy: '0', OtherResidentOccupancy: '0', BedsOccupied: system === 'hospital' ? '0' : '', TransfersIn: '0', TransfersOut: '0', Exits: '0', Corrections: '0' }, o);
+      return [
+        // judicial — the typed `arrest` row and the `all` row carry the same numbers: summing both would double the hood
+        row('judicial', 'neighborhood', 'Fruitvale', 'arrest', { TotalIntakes: '2', TrackedIntakes: '1', OtherResidentIntakes: '1', ClosingOccupancy: '3', TrackedOccupancy: '1', OtherResidentOccupancy: '2' }),
+        row('judicial', 'neighborhood', 'Fruitvale', 'all', { TotalIntakes: '2', TrackedIntakes: '1', OtherResidentIntakes: '1', ClosingOccupancy: '3', TrackedOccupancy: '1', OtherResidentOccupancy: '2' }),
+        row('judicial', 'neighborhood', 'Rockridge', 'all', { TotalIntakes: '1', OtherResidentIntakes: '1', ClosingOccupancy: '1', OtherResidentOccupancy: '1' }),
+        row('judicial', 'neighborhood', 'Downtown', 'all', { TotalIntakes: '1', TrackedIntakes: '1', ClosingOccupancy: '1', TrackedOccupancy: '1' }),
+        row('judicial', 'neighborhood', 'Chinatown', 'all', { Completeness: 'incomplete', TotalIntakes: '5', ClosingOccupancy: '5', OtherResidentOccupancy: '5' }),
+        row('judicial', 'unallocated', '', 'all', {}),
+        row('judicial', 'city', '', 'all', { TotalIntakes: '4', TrackedIntakes: '2', OtherResidentIntakes: '2', ClosingOccupancy: '5', TrackedOccupancy: '2', OtherResidentOccupancy: '3', Exits: '1' }),
+        // hospital
+        row('hospital', 'neighborhood', 'Chinatown', 'illness', { TotalIntakes: '4', TrackedIntakes: '1', OtherResidentIntakes: '3', ClosingOccupancy: '6', OtherResidentOccupancy: '6', BedsOccupied: '5' }),
+        row('hospital', 'neighborhood', 'Chinatown', 'all', { TotalIntakes: '4', TrackedIntakes: '1', OtherResidentIntakes: '3', ClosingOccupancy: '6', OtherResidentOccupancy: '6', BedsOccupied: '5' }),
+        row('hospital', 'neighborhood', 'Temescal', 'all', { TotalIntakes: '1', TrackedIntakes: '1', ClosingOccupancy: '1', TrackedOccupancy: '1', BedsOccupied: '1' }),
+        row('hospital', 'neighborhood', 'Downtown', 'all', { TotalIntakes: '1', TrackedIntakes: '1', ClosingOccupancy: '1', TrackedOccupancy: '1', BedsOccupied: '0' }),
+        row('hospital', 'city', '', 'all', { TotalIntakes: '6', TrackedIntakes: '3', OtherResidentIntakes: '3', ClosingOccupancy: '8', TrackedOccupancy: '2', OtherResidentOccupancy: '6', BedsOccupied: '6' }),
+        // last cycle's rows — never this cycle's
+        row('judicial', 'city', '', 'all', { Cycle: String(cycle - 1), TotalIntakes: '99', ClosingOccupancy: '99' })
+      ];
+    })(),
     Story_Seed_Deck: [
       { Cycle: String(cycle), SeedID: 'cs1', Desk: 'culture', Class: 'minor', Domain: 'COMMUNITY', Neighborhood: 'Temescal', What: 'holy_day +0.01', Why: 'x', Citizens: 'POP-90001 Test Civic Resident', CitizenEvents: '', Businesses: '', OtherEntities: '', Magnitude: '0.01', Trend: '', SuggestedJournalist: '', SuggestedAngle: '' }
     ],
@@ -150,9 +204,11 @@ try {
   const output = path.join(root, 'output');
   writeDump(path.join(output, 'beats'), CYCLE);
   writeJsonl(path.join(output, 'simulation_ledger_snapshot.jsonl'), [
-    { Name: 'Test Civic Resident', POPID: 'POP-90001', RoleType: 'Mechanic', Neighborhood: 'Fruitvale' },
-    { Name: 'Test Pro Athlete', POPID: 'POP-90002', RoleType: 'Right Fielder, Test Team', EconomicProfileKey: 'SPORTS_OVERRIDE' },
-    { Name: 'Test Clinic Patient', POPID: 'POP-90003', RoleType: 'Line Cook', Neighborhood: 'Temescal' },
+    { Name: 'Test Civic Resident', POPID: 'POP-90001', RoleType: 'Mechanic', Neighborhood: 'Fruitvale', DebtLevel: '6', DialState: JSON.stringify({ base: { drive: 50 }, debtDefault: { l: CYCLE, n: 1 } }) },
+    { Name: 'Test Pro Athlete', POPID: 'POP-90002', RoleType: 'Right Fielder, Test Team', EconomicProfileKey: 'SPORTS_OVERRIDE', Neighborhood: 'Downtown', DebtLevel: '7' },
+    { Name: 'Test Clinic Patient', POPID: 'POP-90003', RoleType: 'Line Cook', Neighborhood: 'Temescal', DebtLevel: '5', DialState: JSON.stringify({ base: { drive: 50 }, debtDefault: { l: CYCLE - 20, n: 1 } }) },
+    { Name: 'Test Defendant', POPID: 'POP-90040', RoleType: 'Line Cook', Neighborhood: 'Fruitvale', DebtLevel: '2' },
+    { Name: 'Test Held Resident', POPID: 'POP-90041', RoleType: 'Warehouse Lead', Neighborhood: 'Fruitvale', DebtLevel: '', DialState: 'not json' },
     { Name: 'Test Seasonal Resident', POPID: 'POP-90004', RoleType: 'Bus Operator', Neighborhood: 'Laurel' },
     { Name: 'Test Queue Patient', POPID: 'POP-90007', RoleType: 'Retired Tailor', Neighborhood: 'Chinatown' },
     { Name: 'Rev. Test Leader', POPID: 'POP-90010', RoleType: 'Senior Pastor / Faith Leader', Neighborhood: 'Downtown' },
@@ -196,6 +252,12 @@ try {
     h.facts.some(f => /Test Seasonal Resident dealt with a seasonal health concern/.test(f.text) && /world_summary_c103\.md/.test(f.src)));
   ok('few-named note', /named rows are few \(3\)/.test(h.prewrite.note));
   ok('only this cycle\'s hook', h.prewrite.hooks.length === 1 && h.prewrite.hooks[0].text === 'Heavy health activity this cycle.');
+  ok('care trail: city line off the city scope only', h.facts.some(f => f.text === 'Citywide hospital this cycle: 6 admissions (3 tracked, 3 other residents); 8 in care at the close, 6 beds occupied' && /Care_Justice_Census.*city$/.test(f.src)));
+  ok('care trail: hood line = sick → admissions → in care → beds, typed row never added to the all row', h.facts.some(f => f.text === 'Chinatown: 125 sick residents → 4 admissions (1 tracked) → 6 in care at the close (0 tracked, 6 other residents) → 5 beds occupied; tracked: none tracked'));
+  // Temescal has no Neighborhood_Demographics row in this fixture → no demand clause; the trail still reads.
+  ok('care trail: tracked patient named off the hospital record', h.facts.some(f => f.text === 'Temescal: 1 admission (1 tracked) → 1 in care at the close (1 tracked, 0 other residents) → 1 beds occupied; tracked: Test Clinic Patient'));
+  ok('care trail: a sports-clock patient is counted, never named', h.facts.some(f => /^Downtown: .*tracked: tracked residents not named on this beat$/.test(f.text)) && !JSON.stringify(h).includes('Test Pro Athlete'));
+  ok('care trail: hook line carries the citywide close', /8 in hospital care citywide, 6 beds occupied\.$/.test(h.story.hookLine));
 
   console.log('schools:');
   // Enrollment moves: stage a prior-cycle demographics dump for this section only.
@@ -266,9 +328,22 @@ try {
   const r = safety.buildSafetySlice(CYCLE, { root });
   ok('lead hood = most incidents', r.hood === 'Fruitvale' && /Fruitvale logged the most incidents \(9\)/.test(r.story.label));
   ok('slowest response named', r.facts.some(x => /Slowest response: Rockridge: 3 incidents, response 12.4 min, clearance 40%/.test(x.text)));
-  ok('public-safety staff by BIZ_ID join only', r.story.citizens.length === 1 && r.story.citizens[0] === 'Test Chief (POP-90023)');
+  ok('public-safety staff by BIZ_ID join only (plus the court record\'s defendants)', r.story.citizens.includes('Test Chief (POP-90023)') && r.story.citizens.length === 3 && !r.story.citizens.some(c => /Operator|Bartender|Farmer/.test(c)));
   ok('"Vertical Farm Systems Engineer" never matches a safety regex', !JSON.stringify(r.citizens).includes('Farmer'));
   ok('legacy loadSafetySlice export still works', typeof safety.loadSafetySlice === 'function');
+  ok('court: resolved case joined to its fine, prose carries no case ID', r.facts.some(f => f.text === 'COURT: Test Defendant (Fruitvale) — misdemeanor charge after a bar fight, released, outcome diverted this cycle, fined $1,200 by the court' && /Judicial_Ledger.*J-C101-POP-90040$/.test(f.src)));
+  ok('court: arrested this cycle and held', r.facts.some(f => f.text === 'COURT: Test Held Resident (Fruitvale) — felony charge, arrested this cycle, in custody (held)'));
+  ok('court: old case never rides; sports-clock case counted not named', !JSON.stringify(r).includes('Test Old Case') && !JSON.stringify(r).includes('Test Pro Athlete') && r.facts.some(f => f.text === 'COURT: 1 further case on the record belongs to the sports desks'));
+  ok('court: defendants are people on the record', r.citizens.some(c => c.popid === 'POP-90040' && c.role === 'Line Cook' && /court record/.test(c.why)) && r.citizens.some(c => c.popid === 'POP-90041' && /in custody/.test(c.why)));
+  ok('court: COURT_FINE hook deduped against the case it names', !r.facts.some(f => /^COURT: Test Defendant — fined/.test(f.text)));
+  ok('custody trail: city line', r.facts.some(f => f.text === 'Citywide custody this cycle: 4 arrests (2 tracked, 2 other residents); 5 in custody at the close; 1 left'));
+  ok('custody trail: charges → arrests → in custody with the tracked name', r.facts.some(f => f.text === 'Fruitvale: 9 charges → 2 arrests (1 tracked) → 3 in custody at the close (1 tracked, 2 other residents); tracked: Test Held Resident'));
+  ok('custody trail: explicit none tracked', r.facts.some(f => f.text === 'Rockridge: 3 charges → 1 arrest → 1 in custody at the close (0 tracked, 1 other residents); tracked: none tracked'));
+  ok('custody trail: incomplete scope withholds its numbers', r.facts.some(f => f.text === 'Chinatown: census incomplete this cycle — numbers withheld'));
+  ok('custody trail: never the unallocated or prior-cycle rows', !JSON.stringify(r.facts).includes('99'));
+  ok('safety hooks by type: COURT_FINE reaches Rachel with no journalist on the row', r.prewrite.hooks.some(hk => /Test Defendant — fined \$1200/.test(hk.text)));
+  ok('hook line carries the court and the custody close', /2 cases on the court record; 5 in custody citywide/.test(r.story.hookLine));
+  ok('every safety fact sourced to disk', r.facts.every(f => /^output\//.test(f.src)));
 
   console.log('culture lane (kai / sharon / maria):');
   const k = arts.buildArtsSlice(CYCLE, { root });
@@ -300,6 +375,28 @@ try {
     return x.facts.some(f => /Downtown this cycle: 300 students, 5,000 adults, 600 seniors — moved vs C102: \+10 students, \+50 adults/.test(f.text));
   })());
   ok('maria: deltas typed', m.prewrite.deltas && (m.prewrite.deltas.state === 'NO_PRIOR_CYCLE' || m.prewrite.deltas.state === 'PRIOR_CYCLE_ON_DISK'));
+  // Downtown has no Crime_Metrics row and a blank Sick in this fixture → no demand clause on either line.
+  ok('maria: the block\'s own custody line, one scope', m.facts.some(f => f.text === 'Downtown: 1 arrest (1 tracked) → 1 in custody at the close (1 tracked, 0 other residents); tracked: tracked residents not named on this beat') && !JSON.stringify(m.facts).includes('Fruitvale:'));
+  ok('maria: the block\'s own care line', m.facts.some(f => f.text === 'Downtown: 1 admission (1 tracked) → 1 in care at the close (1 tracked, 0 other residents) → 0 beds occupied; tracked: tracked residents not named on this beat'));
+  ok('maria: tax day for the block only', m.facts.some(f => f.text === 'Tax day in Downtown — 9 owner households paid $71,800 in property tax') && !JSON.stringify(m.facts).includes('$310.1M'));
+  ok('maria: debt on the block only — no default named from another hood', m.facts.some(f => f.text === "Downtown debt this cycle: 1 household's debts crossed the line this cycle") && !JSON.stringify(m).includes('Test Civic Resident defaulted'));
+  ok('maria: sports-clock citizen never a person on the slice', !m.citizens.some(c => c.popid === 'POP-90002'));
+
+  console.log('engine.254 Task 10 — empty tabs (the live shape until the first fire):');
+  {
+    const bd = path.join(output, 'beats');
+    const keep = {};
+    for (const tab of ['City_Treasury', 'Judicial_Ledger', 'Care_Justice_Census']) { keep[tab] = fs.readFileSync(path.join(bd, tab + '.jsonl'), 'utf8'); fs.writeFileSync(path.join(bd, tab + '.jsonl'), ''); }
+    const r0 = safety.buildSafetySlice(CYCLE, { root });
+    const h0 = health.buildHealthSlice(CYCLE, { root });
+    const m0 = neighborhood.buildNeighborhoodSlice(CYCLE, { root });
+    // The COURT_FINE receipt on the hook deck still rides (it is the engine's own line); nothing is read off the empty tabs.
+    ok('safety slice stands on the crime table alone, no court-record or custody fact', !r0.empty && !r0.facts.some(f => /custody|charges →|Judicial_Ledger|Care_Justice/.test(f.text + ' ' + f.src)) && r0.citizens.length === 1);
+    ok('health slice stands, no care-trail fact', !h0.empty && !h0.facts.some(f => /in care at the close/.test(f.text)));
+    ok('maria stands; tax day + debt still read off the hook deck and the ledger', !m0.empty && m0.facts.some(f => /^Tax day in Downtown/.test(f.text)) && !m0.facts.some(f => /charges →/.test(f.text)));
+    ok('typed empty states on the slice', r0.custodyTrail && r0.custodyTrail.state === 'NO_ROWS' && r0.court.state === 'NO_CASES' && h0.careTrail.state === 'NO_ROWS');
+    for (const tab of Object.keys(keep)) fs.writeFileSync(path.join(bd, tab + '.jsonl'), keep[tab]);
+  }
 
   console.log('oaks seats (selena / talia):');
   const sg = arts && require('./buildOaksBeatSlice').buildOaksBeatSlice(CYCLE, { root });

@@ -8,6 +8,9 @@
  * hospitalizations from the world summary, Story_Hook_Deck hooks. A pro
  * athlete on the hospital record is a sports story, not a health one (same
  * rule as the civic desk).
+ * engine.254 Task 10: the care trail (Care_Justice_Census, hospital system:
+ * sick residents → admissions → in care and beds, per hood, tracked names or
+ * "none tracked").
  * Artifacts: output/slices/c{N}/lila-mezran.md · output/cron-compare/health_slice_c{N}.json
  */
 'use strict';
@@ -17,19 +20,14 @@ const { loadHealthEntries } = require('./buildCivicDomainSlice');
 const SEAT = {
   slug: 'lila-mezran', name: 'Dr. Lila Mezran', popid: 'POP-00154', desk: 'civic',
   kind: 'beat-health', domain: 'health', artifact: 'health', builder: 'buildHealthSlice.js',
-  version: 'HEALTH-SLICE-2', nameRe: /lila\s*mezran/i,
-  tabs: ['Neighborhood_Demographics', 'Hospital_Ledger', 'Health_Cause_Queue', 'Story_Hook_Deck'],
-  approach: 'Health approach: this slice is the illness count by neighborhood, every resident named on the hospital and live cause records, and the residents the cycle summary names under Health/Recovering. Clinical calm, human cost, no diagnosis beyond what the record says. When the named rows are few, write the neighborhood, not a ward.',
+  version: 'HEALTH-SLICE-3', nameRe: /lila\s*mezran/i,
+  tabs: ['Neighborhood_Demographics', 'Hospital_Ledger', 'Health_Cause_Queue', 'Story_Hook_Deck', 'Care_Justice_Census'],
+  approach: 'Health approach: this slice is the illness count by neighborhood, every resident named on the hospital and live cause records, the residents the cycle summary names under Health/Recovering, and the care trail — sick residents to admissions to who is in a bed, hood by hood, tracked and other residents apart. Clinical calm, human cost, no diagnosis beyond what the record says. When the named rows are few, write the neighborhood, not a ward.',
   roomIsYours: 'the waiting room, the walk to the clinic, what a household does when one person is sick, who covers the shift',
   build
 };
 
-const ATHLETE_RE = /\b(?:athlete|player|pitcher|catcher|fielder|shortstop|baseman|designated hitter|coach|manager, oakland)\b/i;
-function ineligible(profiles, popid) {
-  const p = profiles.get(String(popid || '').toUpperCase());
-  if (!p) return false;
-  return String(p.EconomicProfileKey || '') === 'SPORTS_OVERRIDE' || ATHLETE_RE.test(String(p.RoleType || ''));
-}
+const ineligible = K.sportsSubject;
 
 function build(cycle, { root, beats, profiles }) {
   const demo = (beats.Neighborhood_Demographics || []).map(r => ({ hood: r.Neighborhood, sick: K.num(r.Sick) }))
@@ -87,18 +85,30 @@ function build(cycle, { root, beats, profiles }) {
     }
     facts.push({ text: (e.handle && e.handle.angle) || e.label, src: e.ref });
   }
+  // engine.254 Task 10 — the care trail, one scope per line: sick residents
+  // (Neighborhood_Demographics.Sick, the demand side) → admissions → in care and
+  // beds at the close, tracked and other residents apart, with the tracked names
+  // off the hospital record or an explicit "none tracked".
+  const trail = K.censusTrail(beats.Care_Justice_Census, cycle, 'hospital', {
+    demandByHood: new Map(demo.map(r => [K.hoodKey(r.hood), r.sick])),
+    namesByHood: K.careNamesByHood(beats.Hospital_Ledger, profiles)
+  });
+  for (const f of K.censusFacts(trail, 'hospital', 'output/beats/Care_Justice_Census.jsonl hospital @C' + cycle, 5)) facts.push(f);
+  const inCare = trail.city && trail.city.complete ? trail.city.closing : null;
+
   const label = lead.hood + ' carries the most sick residents (' + lead.sick + ') | ' + people.length + ' named on the hospital and cause records';
   return K.makeSlice(SEAT, cycle, beats, {
     ref: demoSrc + ' + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl', hood: lead.hood, label,
     angle: label,
-    hookLine: people.length
-      ? people[0].name + ' is one of ' + people.length + ' residents on the record this cycle; ' + lead.hood + ' carries the most illness.'
-      : lead.hood + ' carries the most illness this cycle; no resident is named on the hospital or cause records.',
+    hookLine: (people.length
+      ? people[0].name + ' is one of ' + people.length + ' residents on the record this cycle; ' + lead.hood + ' carries the most illness'
+      : lead.hood + ' carries the most illness this cycle; no resident is named on the hospital or cause records') +
+      (inCare != null ? '; ' + inCare + ' in hospital care citywide' + (trail.city.beds != null ? ', ' + trail.city.beds + ' beds occupied' : '') : '') + '.',
     facts, people,
     deltas: { state: prevDemo.state, vs: prevDemo.vs },
     hooks: K.hooksFor(beats, cycle, SEAT.name),
     note: people.length < 5 ? 'named rows are few (' + people.length + ') — write the neighborhood, not a ward' : null,
-    extra: { byHood: demo }
+    extra: { byHood: demo, careTrail: trail }
   });
 }
 

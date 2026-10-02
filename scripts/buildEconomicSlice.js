@@ -20,6 +20,9 @@
  *   output/beats/Business_Archive.jsonl   — closures with exit metadata (engine.96 Phase11)
  *   output/beats/Casino_Ledger.jsonl      — wagers + house float (business covers casino, S433)
  *   output/beats/prev/Business_Ledger.jsonl — prior cycle, for movement facts (typed NO_PRIOR_CYCLE until it exists)
+ *   output/beats/City_Treasury.jsonl      — engine.254 Task 10: the city's money this cycle (business variant only)
+ *   output/beats/Story_Hook_Deck.jsonl    — TAX_DAY / ALLOCATION_ENDED receipts, DEBT_CRISIS / DEBT_DEFAULT hooks (business variant only)
+ *   output/simulation_ledger_snapshot.jsonl — DebtLevel + the default mark, for debt as a pattern (business variant only)
  *   output/desk_signal_c{N}.json          — optional; lanes.business as pointers only
  *
  * A missing or stale dump throws. There is no fallback to the old signal-only slice.
@@ -38,7 +41,7 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.join(__dirname, '..');
-const VERSION = 'ECONOMIC-SLICE-3';
+const VERSION = 'ECONOMIC-SLICE-4';
 
 const FACTS_TAIL =
   'Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent ' +
@@ -79,7 +82,7 @@ const NON_HOODS = new Set(['city-wide', 'citywide', '']);
 const NON_BUSINESS_SECTOR_RE =
   /municipal|public (transit|services|safety)|legal|judicial|faith|synagogue|church|community (development|services)|transit & infrastructure|housing & social|media & journalism|crisis response|^sports( franchise)?$/i;
 
-const BEAT_TABS = ['Business_Ledger', 'Employment_Roster', 'Story_Seed_Deck', 'Story_Hook_Deck', 'Business_Archive', 'Casino_Ledger'];
+const BEAT_TABS = ['Business_Ledger', 'Employment_Roster', 'Story_Seed_Deck', 'Story_Hook_Deck', 'Business_Archive', 'Casino_Ledger', 'City_Treasury'];
 
 function arg(flag, def) {
   const i = process.argv.indexOf(flag);
@@ -176,12 +179,14 @@ function fmtDelta(n) {
   return (n > 0 ? '+$' : '-$') + fmtMoney(Math.abs(n)).slice(1);
 }
 
-/** This cycle's hooks for the business desk: named to Jordan Velez or Domain BUSINESS. */
+/** This cycle's hooks for the business desk: named to Jordan Velez, Domain BUSINESS, or the engine's money receipts (engine.254 Task 10). */
+const MONEY_HOOK_RE = /^(TAX_DAY|ALLOCATION_ENDED|DEBT_CRISIS|DEBT_DEFAULT)$/;
 function hooksForBusiness(hookRows, cycle) {
   const seen = new Set();
   return (hookRows || [])
     .filter(r => Number(r.Cycle) === Number(cycle) &&
-      (/jordan\s*velez/i.test(String(r.SuggestedJournalist || '')) || String(r.Domain || '').toUpperCase() === 'BUSINESS'))
+      (/jordan\s*velez/i.test(String(r.SuggestedJournalist || '')) || String(r.Domain || '').toUpperCase() === 'BUSINESS' ||
+        MONEY_HOOK_RE.test(String(r.HookType || '').toUpperCase())))
     .map(r => ({
       text: String(r.HookText || '').trim(), angle: String(r.SuggestedAngle || '').trim() || null,
       hood: r.Neighborhood || null
@@ -578,6 +583,28 @@ function buildEconomicSlice(cycle, opts) {
   if (!food && casino.houseFloat != null) {
     factEntries.push({ text: 'CASINO: the house float stands at ' + fmtMoney(casino.houseFloat), src: casinoSrc });
   }
+  // engine.254 Task 10 (business variant): the city's money this cycle — what
+  // came in and from where, what went out, the balance (City_Treasury); tax day
+  // and the end of the allocation as the engine's own receipts (hook deck); debt
+  // as a pattern — who defaulted, where the debts crossed the line, how many on
+  // the ledger sit over it. Helpers live in beatSliceKit (required lazily: the
+  // kit requires this file for loadBeatTabs).
+  const cityMoney = { treasury: null, debt: null };
+  if (!food) {
+    const K = require('./beatSliceKit');
+    const treasurySrc = 'output/beats/City_Treasury.jsonl @C' + cyc;
+    cityMoney.treasury = K.treasuryWeek(beats.City_Treasury, cyc, treasurySrc);
+    for (const f of cityMoney.treasury.facts) factEntries.push({ text: 'CITY MONEY: ' + f.text, src: f.src });
+    for (const f of K.receiptHookFacts(beats.Story_Hook_Deck, cyc, /^(TAX_DAY|ALLOCATION_ENDED)$/, 'output/beats/Story_Hook_Deck.jsonl', '')) {
+      factEntries.push({ text: 'CITY MONEY: ' + f.text, src: f.src });
+    }
+    cityMoney.debt = K.debtPattern(profiles, beats.Story_Hook_Deck, cyc, 'output/beats/Story_Hook_Deck.jsonl');
+    for (const f of cityMoney.debt.facts) factEntries.push({ text: 'DEBT: ' + f.text, src: f.src });
+    for (const p of cityMoney.debt.defaults) {
+      if (citizenRows.some(r => r.popid === p.popid)) continue;
+      citizenRows.push({ popid: p.popid, name: p.name, role: p.role, neighborhood: p.neighborhood, business: null, profile: p.profile, why: p.why });
+    }
+  }
   const anchorFacts = factEntries.map(e => e.text);
 
   return {
@@ -592,6 +619,10 @@ function buildEconomicSlice(cycle, opts) {
     closures,
     contractionWatch,
     casino: food ? null : casino,
+    cityMoney: food ? null : {
+      treasury: cityMoney.treasury ? { state: cityMoney.treasury.state, opening: cityMoney.treasury.opening, closing: cityMoney.treasury.closing, income: cityMoney.treasury.income, outflows: cityMoney.treasury.outflows } : null,
+      debt: cityMoney.debt ? { defaults: cityMoney.debt.defaults.map(p => p.popid), overLine: cityMoney.debt.overLine, crisisByHood: Object.fromEntries(cityMoney.debt.crisisByHood) } : null
+    },
     deltas: { state: prev.state, vs: prev.vs },
     prewrite: {
       pulseClass: pulse.className,
@@ -625,6 +656,7 @@ function buildEconomicSlice(cycle, opts) {
       prev.state === 'PRIOR_CYCLE_ON_DISK' ? 'output/beats/prev/Business_Ledger.jsonl (movement vs C' + prev.vs + ')' : null,
       closures.length ? 'output/beats/Business_Archive.jsonl (closures this cycle: ' + closures.length + ')' : null,
       !food && casino.totalRows ? 'output/beats/Casino_Ledger.jsonl (' + casino.totalRows + ' wager rows this cycle)' : null,
+      !food && cityMoney.treasury && cityMoney.treasury.state === 'ON_RECORD' ? 'output/beats/City_Treasury.jsonl (the city\'s money this cycle)' : null,
       hooks.length ? 'output/beats/Story_Hook_Deck.jsonl (business hooks this cycle: ' + hooks.length + ')' : null,
       signals.length ? 'output/desk_signal_c' + cyc + '.json lanes.business (pointers only)' : null,
       'docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 2'

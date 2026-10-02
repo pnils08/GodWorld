@@ -234,7 +234,7 @@ try {
   stale.packets['luis-navarro'].prewrite = { anchorFacts: ['STALE TEST-ONLY FACT'] };
   fs.writeFileSync(paths.json, JSON.stringify(stale, null, 2));
   const rebuilt = civic.loadCivicDomainSlice(103, root);
-  assert.strictEqual(rebuilt.version, 'CIVIC-DOMAIN-SLICE-5');
+  assert.strictEqual(rebuilt.version, 'CIVIC-DOMAIN-SLICE-6');
   assert.strictEqual(rebuilt.packets['luis-navarro'].prewrite.schema, 'INVESTIGATION-BRIEF-1');
   assert.notDeepStrictEqual(rebuilt.packets['luis-navarro'].prewrite.anchorFacts, ['STALE TEST-ONLY FACT']);
 
@@ -287,6 +287,17 @@ try {
       { OfficeId: 'CLERK-01', Title: 'City Clerk', Type: 'STAFF', Holder: 'SYNTH Clerk', Status: 'active', Approval: '', Faction: 'STAFF', VotingPower: 'no' },
       { OfficeId: '', Title: '', Type: '', Holder: '', Status: '', Approval: '', Faction: '', VotingPower: '' }
     ].map(row => JSON.stringify(row)).join('\n') + '\n');
+    // engine.254 Task 10 — the city's money and the court, for Carmen.
+    fs.writeFileSync(path.join(beatsDir, 'City_Treasury.jsonl'), [
+      { Cycle: '102', Entry: 'OPENING', Amount: '100000000', Counterparty: 'GENERAL-FUND', BalanceAfter: '100000000', Note: 'general fund opens' },
+      { Cycle: '103', Entry: 'REVENUE', Amount: '5000000', Counterparty: 'WEEKLY-ALLOCATION', BalanceAfter: '105000000', Note: 'weekly budget allocation' },
+      { Cycle: '103', Entry: 'REVENUE', Amount: '1200', Counterparty: 'COURT-NAMED', BalanceAfter: '105001200', Note: 'case J-C101-POP-90040, POP-90040, misdemeanor' },
+      { Cycle: '103', Entry: 'APPROPRIATION', Amount: '-2000000', Counterparty: 'INIT-MOVED', BalanceAfter: '103001200', Note: 'opens underfunded: $2M of $10M' }
+    ].map(row => JSON.stringify(row)).join('\n') + '\n');
+    fs.writeFileSync(path.join(beatsDir, 'Judicial_Ledger.jsonl'), [
+      { CaseId: 'J-C101-POP-90040', POPID: 'POP-90040', Name: 'SYNTH Defendant', Neighborhood: 'Fruitvale', ChargeCause: '', ChargeGravity: 'misdemeanor', EntryType: 'arrest', OpenCycle: '101', ArrestCycle: '101', DecisionCycle: '103', StatusNow: 'released', LastTransitionCycle: '103', ResolveCycle: '103', Outcome: 'diverted', CyclesHeld: '2' },
+      { CaseId: 'J-C103-POP-90041', POPID: 'POP-90041', Name: 'SYNTH Held Resident', Neighborhood: 'Fruitvale', ChargeCause: '', ChargeGravity: 'felony', EntryType: 'arrest', OpenCycle: '103', ArrestCycle: '103', StatusNow: 'held', LastTransitionCycle: '103', ResolveCycle: '', Outcome: '', CyclesHeld: '0' }
+    ].map(row => JSON.stringify(row)).join('\n') + '\n');
     fs.writeFileSync(path.join(beatsDir, 'Election_Log.jsonl'), [
       { Cycle: 103, OfficeId: 'COUNCIL-D1', Winner: 'SYNTH Councilor', Margin: '7%' }
     ].map(row => JSON.stringify(row)).join('\n') + '\n');
@@ -322,8 +333,21 @@ try {
     assert.deepStrictEqual(carmen.prewrite.anchorFacts.slice(0, 2),
       ['SYNTH Test Initiative | Status active', 'INIT-SYNTH'],
       'desk-signal spine facts keep their order ahead of the dump facts');
-    assert.deepStrictEqual(carmen.prewrite.anchorFacts.slice(2), carmen.trackerFacts,
+    assert.deepStrictEqual(carmen.prewrite.anchorFacts.slice(2, 2 + carmen.trackerFacts.length), carmen.trackerFacts,
       'trackerFacts appended to anchorFacts (record facts, unlike hooks)');
+    // (a2) engine.254 Task 10: the city's money — the treasury week with the
+    //      initiative named (not its ID), and the court's money side — ride as
+    //      record facts after trackerFacts. The case ID never reaches the prose.
+    assert.deepStrictEqual(carmen.cityMoneyFacts, [
+      'City treasury this cycle took in $5M: $5M the weekly budget allocation, $1,200 fines paid by 1 named defendant [City_Treasury]',
+      'City treasury paid out $2M: $2M to SYNTH Moved Initiative — opened underfunded [City_Treasury]',
+      'City treasury balance at the close: $103M (from $100M) [City_Treasury]',
+      'Court: SYNTH Defendant (Fruitvale) — misdemeanor charge, released, outcome diverted this cycle, fined $1,200 by the court [Judicial_Ledger + City_Treasury]'
+    ], 'city money facts for Carmen');
+    assert.deepStrictEqual(carmen.prewrite.anchorFacts.slice(2 + carmen.trackerFacts.length), carmen.cityMoneyFacts,
+      'cityMoneyFacts appended to anchorFacts after trackerFacts');
+    assert(!carmen.prewrite.anchorFacts.some(f => /POP-9004|J-C10/.test(f)), 'no internal ID in a money fact');
+    assert(!JSON.stringify(withDump.packets['luis-navarro']).includes('City treasury'), 'the money facts are Carmen\'s, not Luis\'s');
     assert(!carmen.prewrite.anchorFacts.some(f => /civic hook for/.test(f)),
       'hooks must never leak into anchorFacts');
     // (b) Luis: his named hook + the stuck initiative (identical status+phase

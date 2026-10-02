@@ -302,12 +302,27 @@ console.log('═══ 8 — the ending');
   ctx = makeCtx(r, [0.99, 0.99, 0]); res = E.processMoneyLoop_(ctx, CY);
   assert('8.12 no DialState: the default still lands and is counted unmarked', debtOf(r[0]) === 1 && res.unmarked === 1 && r[0][col('DialState')] === '');
 
-  r = [row('POP-A', { nw: 2000000, debt: 6, sav: 0, wealth: 9 })];
+  r = [row('POP-A', { nw: 90000, debt: 6, sav: 0, wealth: 9 })];
   ctx = makeCtx(r, [0.99, 0.99, 0]); E.processMoneyLoop_(ctx, CY);
   assert('8.14 a default redoes WealthLevel from the emptied net worth, the same week', nwOf(r[0]) === 0 && Number(r[0][col('WealthLevel')]) < 9 && r[0][col('WealthLevel')] !== '', r[0][col('WealthLevel')]);
-  r = [row('POP-A', { nw: 2000000, debt: 6, sav: 0, wealth: 9 })];
+  r = [row('POP-A', { nw: 90000, debt: 6, sav: 0, wealth: 9 })];
   ctx = makeCtx(r, [0.99, 0.99, 0.5]); E.processMoneyLoop_(ctx, CY);
   assert('8.15 no default, no WealthLevel write from the loop', r[0][col('WealthLevel')] === 9);
+
+  r = [row('POP-A', { nw: 1500000, debt: 6, sav: 0, wealth: 8 })];
+  ctx = makeCtx(r, [0.99, 0.99, 0]); res = E.processMoneyLoop_(ctx, CY);
+  assert('8.17 over the line there is no default and no default roll (the first bench wiped $1.46M this way)',
+    debtOf(r[0]) === 6 && nwOf(r[0]) === 1500000 && res.defaults === 0 && ctx.draws.n === 2 && !dsOf(r[0]).debtDefault, nwOf(r[0]) + '/' + ctx.draws.n);
+  r = [row('POP-A', { nw: 100000, debt: 6, sav: 0 })];
+  ctx = makeCtx(r, [0.99, 0.99, 0]); res = E.processMoneyLoop_(ctx, CY);
+  assert('8.18 exactly on the line counts as over it', res.defaults === 0 && debtOf(r[0]) === 6);
+  r = [row('POP-A', { nw: 1500000, debt: 6, sav: 0, hh: 'HH-1' })];
+  ctx = makeCtx(r, [0.99, 0.99, 0], { households: [['HouseholdId', 'HouseholdIncome', 'MonthlyRent', 'HouseholdSavings', 'SuperCouple', 'Status'], ['HH-1', 24000, 1500, 0, '', 'active']] });
+  res = E.processMoneyLoop_(ctx, CY);
+  assert('8.19 a household in crisis is under the line for the ending too', res.defaults === 1 && nwOf(r[0]) === 0);
+  r = [row('POP-A', { nw: 0, debt: 6, sav: 0, hood: 'Nowhere' })];
+  ctx = makeCtx(r, [0.99, 0.99, 0]); res = E.processMoneyLoop_(ctx, CY);
+  assert('8.20 no hood line, no default', res.defaults === 0 && debtOf(r[0]) === 6);
 
   r = [row('POP-A', { nw: 100, debt: 5, sav: 0 })];
   ctx = makeCtx(r, [0.99, 0.001, 0.5, 0]); res = E.processMoneyLoop_(ctx, CY);

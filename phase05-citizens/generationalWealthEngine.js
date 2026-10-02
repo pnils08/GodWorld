@@ -418,7 +418,8 @@ function processMoneyLoop_(ctx, cycle) {
 
     // engine.276 draw order, per adult row: (1) the lean roll, always; (2) the shock
     // roll, always; (3) the shock or windfall amount, only when one lands; (4) the
-    // default roll, only at the top, off the GAME clock, with debtDefaultCycles > 0.
+    // default roll, only at the top, under the line, off the GAME clock, with
+    // debtDefaultCycles > 0.
     // (1) and (4) are new, so every later draw in the Cycle moves against engine.61's.
     // engine.61 T2/T3: yield and drag ride the rate; credit rides the hood.
     // engine.276: the drag never takes more than debtDragCapShare of the week's saving.
@@ -429,6 +430,7 @@ function processMoneyLoop_(ctx, cycle) {
     var nwNew = Math.max(0, nw + accrual);
     var line = null, hook = null, shockLine = null, shockHook = null;
     var debtBefore = debt;
+    var underLine = false; // engine.276: the lean points up this week (under the line, or a household in crisis)
 
     if (iDebt >= 0) {
       // engine.276: the lean — one roll a Cycle, drawn for every adult so the
@@ -437,6 +439,7 @@ function processMoneyLoop_(ctx, cycle) {
       var debtLine = (hoodSt && Number(hoodSt.medianIncome) > 0)
         ? Number(hoodSt.medianIncome) * debtCfg.debtLineMultiple : 0;
       var lean = debtLean_(nwNew, debtLine, debtCfg, creditF, hh.crisis && income > 0);
+      underLine = lean.dir > 0;
       var leanRoll = rng();
       if (lean.dir > 0 && debt < DEBT_TOP && leanRoll < lean.p) {
         debt++;
@@ -491,8 +494,10 @@ function processMoneyLoop_(ctx, cycle) {
 
     // engine.276: the ending. At the top each Cycle carries a 1-in-debtDefaultCycles
     // chance of default — the level resets low, the savings go, the record keeps it.
+    // Only under the line: a citizen whose net worth clears it pays down by the lean
+    // and has the means to (the first bench defaulted ten of them, one holding $1.46M).
     // GAME-clock citizens never default (the sports world's call, unruled).
-    if (iDebt >= 0 && debt >= DEBT_TOP &&
+    if (iDebt >= 0 && debt >= DEBT_TOP && underLine &&
         !(iClock >= 0 && String(row[iClock] || '').trim().toUpperCase() === 'GAME') &&
         debtCfg.debtDefaultCycles > 0 && rng() < 1 / debtCfg.debtDefaultCycles) {
       debt = DEBT_DEFAULT_RESET;

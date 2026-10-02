@@ -1821,7 +1821,7 @@
 
 - **debtConfig_(ctx)**
 
-- **debtLean_(netWorth, line, cfg, creditF, crisis)**
+- **debtLean_(netWorth, line, cfg, creditF)**
 
 - **debtDrag_(level, dragF, weekSaving, capShare)**
 

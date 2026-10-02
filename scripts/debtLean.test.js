@@ -115,7 +115,7 @@ console.log('═══ 1 — the lean, pure');
   var h = L(0, 0, CFG, 1, false);
   assert('1.7 no hood line: no lean', h.dir === 0 && h.p === 0);
   var i = L(900000, 100000, CFG, 1, true), j = L(900000, 0, CFG, 1, true);
-  assert('1.8 a household in crisis leans up at the full rate whatever it holds', i.dir === 1 && near(i.p, 0.02) && j.dir === 1);
+  assert('1.8 net worth is the only input: no household flag turns the lean up', i.dir === -1 && near(i.p, 0.08) && j.dir === 0);
 })();
 
 console.log('═══ 2 — the drag cap');
@@ -193,14 +193,14 @@ console.log('═══ 4 — the loop: lean');
   ctx = makeCtx(r, [0.024]); E.processMoneyLoop_(ctx, CY);
   assert('4.11 a tight-credit hood raises the rise chance (0.02 × 1.25)', debtOf(r[0]) === 3);
 
-  // crisis household
+  // a rent-burdened household row with an empty savings cell (the second bench: a household formed that Cycle)
   var hh = [['HouseholdId', 'HouseholdIncome', 'MonthlyRent', 'HouseholdSavings', 'SuperCouple', 'Status'], ['HH-1', 24000, 1500, 0, '', 'active']];
   r = [row('POP-A', { nw: 900000, debt: 2, sav: 0, hh: 'HH-1' })];
   ctx = makeCtx(r, [0.019], { households: hh }); E.processMoneyLoop_(ctx, CY);
-  assert('4.12 a household in crisis leans up though the citizen sits over the line', debtOf(r[0]) === 3);
+  assert('4.12 a rent-burdened household does not turn the lean up for a citizen over the line', debtOf(r[0]) === 1);
   r = [row('POP-A', { nw: 900000, debt: 2, sav: 0, hh: 'HH-1' })];
-  ctx = makeCtx(r, [0.021], { households: hh }); E.processMoneyLoop_(ctx, CY);
-  assert('4.13 …at the rate, not as a certainty (the old path added one every week)', debtOf(r[0]) === 2);
+  ctx = makeCtx(r, [0.081], { households: hh }); E.processMoneyLoop_(ctx, CY);
+  assert('4.13 …and the fall stays a rate, not a certainty (the old crisis path added one every week)', debtOf(r[0]) === 2);
 
   // the multiple moves the line: 60k against a 100k median is under at 1x and over at 0.5x
   r = [row('POP-A', { nw: 60000, debt: 2, sav: 0 })];
@@ -319,7 +319,8 @@ console.log('═══ 8 — the ending');
   r = [row('POP-A', { nw: 1500000, debt: 6, sav: 0, hh: 'HH-1' })];
   ctx = makeCtx(r, [0.99, 0.99, 0], { households: [['HouseholdId', 'HouseholdIncome', 'MonthlyRent', 'HouseholdSavings', 'SuperCouple', 'Status'], ['HH-1', 24000, 1500, 0, '', 'active']] });
   res = E.processMoneyLoop_(ctx, CY);
-  assert('8.19 a household in crisis is under the line for the ending too', res.defaults === 1 && nwOf(r[0]) === 0);
+  assert('8.19 a rent-burdened household is no way into a default over the line',
+    res.defaults === 0 && debtOf(r[0]) === 6 && nwOf(r[0]) === 1500000 && ctx.draws.n === 2, nwOf(r[0]) + '/' + ctx.draws.n);
   r = [row('POP-A', { nw: 0, debt: 6, sav: 0, hood: 'Nowhere' })];
   ctx = makeCtx(r, [0.99, 0.99, 0]); res = E.processMoneyLoop_(ctx, CY);
   assert('8.20 no hood line, no default', res.defaults === 0 && debtOf(r[0]) === 6);

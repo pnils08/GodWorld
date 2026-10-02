@@ -255,8 +255,10 @@ var SHOCK_WINDFALL_P = 0.002;
 // saving, so a debtor can always put something by. A promotion takes a level off
 // and a job loss puts one on, at once. The top level ends in default at a
 // per-Cycle chance (a fixed count would default a cohort in one week).
-// Replaced: the crisis +1 a week (no household has met it since the one rent
-// rule) and the pay-down gate that needed saving to beat its own drag.
+// Removed: the household rent-crisis clause (no household meets it in a settled
+// week; the second bench saw it fire only on a household formed that Cycle, its
+// savings cell still empty, on a citizen holding four times the line) and the
+// pay-down gate that needed saving to beat its own drag.
 // ════════════════════════════════════════════════════════════════════════════
 var ENGINE276_KEYS = ['debtLineMultiple', 'debtRiseRate', 'debtFallRate', 'debtDragCapShare',
                       'debtDefaultCycles', 'debtDefaultMarkCycles'];
@@ -275,9 +277,8 @@ function debtConfig_(ctx) {
 }
 
 // Which way debt leans this Cycle and how hard. dir +1 / -1 / 0, p = the chance.
-// crisis = a household borrowing to stay housed: fully under the line whatever it holds.
-function debtLean_(netWorth, line, cfg, creditF, crisis) {
-  if (crisis) return { dir: 1, p: cfg.debtRiseRate * creditF };
+// Net worth against the line is the only input.
+function debtLean_(netWorth, line, cfg, creditF) {
   if (!(line > 0)) return { dir: 0, p: 0 };
   var ratio = (Number(netWorth) || 0) / line;
   if (ratio < 1) return { dir: 1, p: cfg.debtRiseRate * (1 - ratio) * creditF };
@@ -382,21 +383,16 @@ function processMoneyLoop_(ctx, cycle) {
   var simYear = simYearOf_(ctx, cycle);
   var stamp = 'Y' + (Math.floor((cycle - 1) / 52) + 1) + 'C' + (((cycle - 1) % 52) + 1);
 
-  // Household money state: crisis + SuperCouple, one read
+  // Household money state: SuperCouple, one read
   var hhState = {};
   var hhSheet = ctx.ss.getSheetByName('Household_Ledger');
   if (hhSheet) {
     var hv = hhSheet.getDataRange().getValues();
     var hj = function(n) { return hv[0].indexOf(n); };
-    var cId = hj('HouseholdId'), cInc = hj('HouseholdIncome'), cRent = hj('MonthlyRent'),
-        cSav = hj('HouseholdSavings'), cSuper = hj('SuperCouple'), cStat = hj('Status');
+    var cId = hj('HouseholdId'), cSuper = hj('SuperCouple'), cStat = hj('Status');
     for (var q = 1; q < hv.length; q++) {
       if (String(hv[q][cStat] || '').toLowerCase() !== 'active') continue;
-      var hInc = Number(hv[q][cInc]) || 0;
-      var rentA = (Number(hv[q][cRent]) || 0) * 12;
       hhState[String(hv[q][cId])] = {
-        crisis: hInc > 0 && rentA / hInc >= 0.5 &&
-                (Number(hv[q][cSav]) || 0) < (Number(hv[q][cRent]) || 0) * 12,
         superCouple: cSuper >= 0 && String(hv[q][cSuper] || '').toLowerCase() === 'yes'
       };
     }
@@ -412,7 +408,7 @@ function processMoneyLoop_(ctx, cycle) {
     var rate = Number(row[iSav]) || 0;
     var debt = iDebt >= 0 ? (Number(row[iDebt]) || 0) : 0;
     var nw = Number(row[iNW]) || 0;
-    var hh = hhState[String(row[iHH] || '').trim()] || { crisis: false, superCouple: false };
+    var hh = hhState[String(row[iHH] || '').trim()] || { superCouple: false };
     var eduF = EDU_SAVINGS_FACTOR[String(row[iEdu] || '').toLowerCase()] || 1.0;
     var superF = hh.superCouple ? SUPERCOUPLE_SAVINGS_FACTOR : 1.0;
 
@@ -430,7 +426,7 @@ function processMoneyLoop_(ctx, cycle) {
     var nwNew = Math.max(0, nw + accrual);
     var line = null, hook = null, shockLine = null, shockHook = null;
     var debtBefore = debt;
-    var underLine = false; // engine.276: the lean points up this week (under the line, or a household in crisis)
+    var underLine = false; // engine.276: net worth sits under the line this week
 
     if (iDebt >= 0) {
       // engine.276: the lean — one roll a Cycle, drawn for every adult so the
@@ -438,7 +434,7 @@ function processMoneyLoop_(ctx, cycle) {
       var hoodSt = nbState[hoodName];
       var debtLine = (hoodSt && Number(hoodSt.medianIncome) > 0)
         ? Number(hoodSt.medianIncome) * debtCfg.debtLineMultiple : 0;
-      var lean = debtLean_(nwNew, debtLine, debtCfg, creditF, hh.crisis && income > 0);
+      var lean = debtLean_(nwNew, debtLine, debtCfg, creditF);
       underLine = lean.dir > 0;
       var leanRoll = rng();
       if (lean.dir > 0 && debt < DEBT_TOP && leanRoll < lean.p) {

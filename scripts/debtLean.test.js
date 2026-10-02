@@ -116,8 +116,6 @@ console.log('═══ 1 — the lean, pure');
   assert('1.7 no hood line: no lean', h.dir === 0 && h.p === 0);
   var i = L(900000, 100000, CFG, 1, true), j = L(900000, 0, CFG, 1, true);
   assert('1.8 a household in crisis leans up at the full rate whatever it holds', i.dir === 1 && near(i.p, 0.02) && j.dir === 1);
-  var k = L(40000, 100000, Object.assign({}, CFG, { debtLineMultiple: 0.5 }), 1, false);
-  assert('1.9 the multiple moves the line (the caller multiplies; 40k against a 50k line)', E.debtLean_(40000, 100000 * 0.5, CFG, 1, false).dir === 1 && k.dir === 1);
 })();
 
 console.log('═══ 2 — the drag cap');
@@ -204,6 +202,13 @@ console.log('═══ 4 — the loop: lean');
   ctx = makeCtx(r, [0.021], { households: hh }); E.processMoneyLoop_(ctx, CY);
   assert('4.13 …at the rate, not as a certainty (the old path added one every week)', debtOf(r[0]) === 2);
 
+  // the multiple moves the line: 60k against a 100k median is under at 1x and over at 0.5x
+  r = [row('POP-A', { nw: 60000, debt: 2, sav: 0 })];
+  ctx = makeCtx(r, [0]); E.processMoneyLoop_(ctx, CY);
+  var r2 = [row('POP-A', { nw: 60000, debt: 2, sav: 0 })];
+  var ctx2 = makeCtx(r2, [0], { config: { debtLineMultiple: 0.5 } }); E.processMoneyLoop_(ctx2, CY);
+  assert('4.15 debtLineMultiple moves the line: the same citizen rises at 1x and pays down at 0.5x', debtOf(r[0]) === 3 && debtOf(r2[0]) === 1, debtOf(r[0]) + '/' + debtOf(r2[0]));
+
   // draw count does not depend on debt
   r = [row('POP-A', { nw: 0, debt: 0, sav: 0 })]; ctx = makeCtx(r, []); E.processMoneyLoop_(ctx, CY); var n0 = ctx.draws.n;
   r = [row('POP-A', { nw: 0, debt: 4, sav: 0 })]; ctx = makeCtx(r, []); E.processMoneyLoop_(ctx, CY);
@@ -223,9 +228,9 @@ console.log('═══ 5 — the loop: drag and saving');
 
 console.log('═══ 6 — the loop: events');
 (function() {
-  var r = [row('POP-A', { nw: 0, debt: 3, sav: 0, promo: CY })];
+  var r = [row('POP-A', { nw: 50000, debt: 3, sav: 0, promo: CY })];
   var ctx = makeCtx(r, [0.99, 0.99]); var res = E.processMoneyLoop_(ctx, CY);
-  assert('6.1 promoted this Cycle: a level off, no cost, no roll', debtOf(r[0]) === 2 && nwOf(r[0]) === 0 && res.eventDown === 1);
+  assert('6.1 promoted this Cycle: a level off, no cost, no roll', debtOf(r[0]) === 2 && nwOf(r[0]) === 50000 && res.eventDown === 1, nwOf(r[0]));
   r = [row('POP-A', { nw: 0, debt: 3, sav: 0, promo: CY - 1 })];
   ctx = makeCtx(r, [0.99, 0.99]); E.processMoneyLoop_(ctx, CY);
   assert('6.2 last Cycle\'s promotion moves nothing', debtOf(r[0]) === 3);

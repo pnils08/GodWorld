@@ -834,7 +834,9 @@ function generateCitizensEvents_(ctx) {
       if (has("state:retail")) return "Lifestyle";
       return "Neighborhood";
     }
-    if (has("source:faith")) return "Faith"; // engine.33 T9 — dial warmth/composure + hood pulse
+    // engine.277: routine attendance is a plain day (no dial), same hood pulse. `Faith` stays for the
+    // congregation join (bondEngine), reflections and essence, which keep warmth/composure.
+    if (has("source:faith")) return "Faith-Practice";
     if (has("source:neighborhood")) return "Neighborhood";
     if (has("source:firstFriday")) return "FirstFriday";
     if (has("source:creationDay")) return "CreationDay";

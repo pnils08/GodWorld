@@ -39,13 +39,13 @@ These represent the concrete events and are mapped to dial deltas.
 | Category | Tags |
 |---|---|
 | **Work / Drive** | `Career`, `Career-Transition`, `Promotion`, `Education`, `Graduation`, `Career-Hired`, `Career-FieldChange`, `Career-Layoff` |
-| **Social** | `Relationship`, `Community`, `Reputation`, `Media`, `Public`, `Cultural`, `Mentorship`, `Faith`, `Bond` (warmth +1) |
+| **Social** | `Relationship`, `Community`, `Reputation`, `Media`, `Public`, `Cultural`, `Mentorship`, `Faith` (the congregation join, reflections, essence — warmth +3 / composure +2), `Bond` (warmth +1) |
 | **Family** | `Household`, `Wedding`, `Birth`, `Divorce`, `Retirement` |
 | **Health / Composure** | `Health`, `Critical` / `Hospitalized` (also outabout −1), `Setback`, `Recovery` |
 | **Conduct / Integrity** | `Transgression-Petty`, `Transgression-Serious`, `Transgression-Grave`, `Resisted` (crime-reachable citizens), `BoundaryKept` +1 / `BoundaryCompromised` −1 (everyone else) |
 | **Pressure (engine-emitted)** | `Friction`, `Strain`, `Stumble` — plus the cause's second dial, recovered from the emitter's own text pool: rent/debt/hood outabout −1, unemployed drive −1, overwork family −1 |
 | **Two-way causes (engine.201 Wave 2)** | `ConnectionWithdrawn` soc −1 / `ConnectionMaintained` soc +1 (bond goes cold / picks back up), `TrustGuarded` warmth −1 (triangle; a confrontation — a feud rests 6 cycles between confrontations, engine.201b), `RoutineRetrenched` openness −1 (venture closed, field change ended in layoff). **The ordinary hood line is a plain `Neighborhood` line whatever the hood's rank (S451, builder ruling 2026-09-13: dials follow events, never a rank retag)** — the engine.201b `ActivityExpanded` / `ActivityContracted` / `StreetsGuarded` retags are removed and unmapped (a legacy line carrying one resolves to {}); only a persisted pressure bar (engine.176) still tints it |
-| **Plain days — move nothing** (engine.201 rulings 1 / 1b, 2026-09-13) | `Neighborhood` (middle-band and housing-pressured hoods only — see above), `Civic`, `Civic Perception`, `Personal`, `Lifestyle`, `PrevEvening`, `Sports`, `Team`, `Season`, `Holiday`, `FirstFriday`, `CreationDay`, `Daily`, `Background`, `Micro-Event`, `Life Event`, `Life`, `Weather`, `Faith-Drift`, and any unmatched line. The crons still read them as lived experience; the citizen's reaction reaches the dials through the reflection path. |
+| **Plain days — move nothing** (engine.201 rulings 1 / 1b, 2026-09-13) | `Neighborhood` (middle-band and housing-pressured hoods only — see above), `Civic`, `Civic Perception`, `Personal`, `Lifestyle`, `PrevEvening`, `Sports`, `Team`, `Season`, `Holiday`, `FirstFriday`, `CreationDay`, `Daily`, `Background`, `Micro-Event`, `Life Event`, `Life`, `Weather`, `Faith-Drift`, `Work` and `Faith-Practice` (engine.277, builder 2026-10-02: job colour and routine faith attendance; `Faith-Practice` keeps the `Faith` hood pulse), and any unmatched line. The crons still read them as lived experience; the citizen's reaction reaches the dials through the reflection path. |
 | **Other** | `Arrival` |
 
 ### 2. Affect Tags (The Subjective Layer)

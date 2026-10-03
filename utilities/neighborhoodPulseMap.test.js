@@ -11,12 +11,14 @@ function check(name, cond) {
   else { failures++; console.error('  FAIL ' + name); }
 }
 
-// 1. Every PULSE_MAP key produces bounded, non-empty deltas.
+// 1. Every PULSE_MAP key produces bounded, non-empty deltas — except a key ruled to pulse nothing.
 (function () {
   var BOUND = 10;
+  var RULED_EMPTY = { 'BoundaryCompromised': true };   // engine.201: a non-criminal slip moves no crime metric
   var ok = true;
   for (var tag in m.PULSE_MAP) {
     if (!m.PULSE_MAP.hasOwnProperty(tag)) continue;
+    if (RULED_EMPTY[tag]) { if (Object.keys(m.PULSE_MAP[tag]).length) { ok = false; console.error('    ruled-empty key carries deltas: ' + tag); } continue; }
     var fx = m.pulseForEvent_(tag, [], '');
     var any = false;
     for (var k in fx) {
@@ -97,6 +99,11 @@ check('Resisted -> crime < 0', m.pulseForEvent_('Resisted', [], '').crime < 0);
 // 10. Faith keys present (Task 10 dependency).
 check('Faith + Faith-Crisis mapped, crisis negative',
   m.pulseForEvent_('Faith', [], '').sentiment > 0 && m.pulseForEvent_('Faith-Crisis', [], '').sentiment < 0);
+
+// 11. engine.277: routine attendance (Faith-Practice) pulses the hood exactly as Faith did.
+check('Faith-Practice pulse == Faith pulse (with and without source:faith)',
+  JSON.stringify(m.pulseForEvent_('Faith-Practice', ['source:faith'], '')) === JSON.stringify(m.pulseForEvent_('Faith', ['source:faith'], '')) &&
+  JSON.stringify(m.pulseForEvent_('Faith-Practice', [], '')) === JSON.stringify(m.pulseForEvent_('Faith', [], '')));
 
 if (failures) { console.error(failures + ' failure(s)'); process.exit(1); }
 console.log('neighborhoodPulseMap.test.js: all green');

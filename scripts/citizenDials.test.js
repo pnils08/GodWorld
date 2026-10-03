@@ -96,6 +96,22 @@ console.log('═══ Section C — tag -> dial map');
   assert('C7 Conduct severity ladder: Grave erodes integrity more than Petty', M.nudgesForEvent_('Transgression-Grave').integrity < M.nudgesForEvent_('Transgression-Petty').integrity);
   assert('C8 severityMult scales deltas', M.nudgesForEvent_('Transgression-Petty', 2).integrity === M.nudgesForEvent_('Transgression-Petty').integrity * 2);
   assert('C9 Death is terminal -> empty (never a self-memory)', JSON.stringify(M.nudgesForEvent_('Death')) === '{}');
+  // engine.277 (builder 2026-10-02): job colour and routine faith attendance are plain days; the Tribune is not.
+  assert('C10a Work (job colour) is a plain day', JSON.stringify(M.nudgesForEvent_('Work', 1, 'covered a double shift at the clinic')) === '{}');
+  assert('C10b Faith-Practice (routine attendance) is a plain day', JSON.stringify(M.nudgesForEvent_('Faith-Practice', 1, 'caught a notable service at St. Columba')) === '{}');
+  assert('C10c Faith-Practice survives the calendar-suffix strip', JSON.stringify(M.nudgesForEvent_('Faith-Practice-Holiday')) === '{}');
+  var joinFx = M.nudgesForEvent_('Faith', 1, 'joined the congregation at St. Columba');
+  assert('C10d congregation join keeps warmth +3 / composure +2', joinFx.warmth === 3 && joinFx.composure === 2);
+  var reflFx = M.nudgesForReflection_('Faith', null, 1, 'Sat in the back pew long after the service ended.');
+  assert('C10e reflection Faith event tag keeps warmth +3 (composure from affect only)', reflFx.warmth === 3 && !reflFx.composure);
+  assert('C10f Media (reading the Tribune) keeps sociability +4', M.nudgesForEvent_('Media').sociability === 4);
+  var gce = require('fs').readFileSync(require('path').join(__dirname, '..', 'phase05-citizens', 'generateCitizensEvents.js'), 'utf8');
+  var iFaith = gce.indexOf('if (has("source:faith")) return "Faith-Practice";');
+  var iWork = gce.indexOf('if (has("source:occupation")) return "Work";');
+  assert('C10g router: source:faith -> Faith-Practice, source:occupation -> Work', iFaith > 0 && iWork > 0);
+  assert('C10h router priority kept: grief reconnection and media resolve before faith/work',
+    gce.indexOf('if (has("grief:reconnection")) return "Community";') > 0 && gce.indexOf('if (has("grief:reconnection")) return "Community";') < iFaith &&
+    gce.indexOf('if (has("source:media")) return "Media";') > 0 && gce.indexOf('if (has("source:media")) return "Media";') < iFaith && iFaith < iWork);
 }
 
 console.log('═══ Section D — back-dating texture + crime as erosion');

@@ -39,7 +39,9 @@ var DIAL_MAP = {
   'Education-Cultural': { openness: 5, drive: 2 },
   'Graduation':         { drive: 8, openness: 2 },
   'Arc':                { drive: 4, openness: 2 },
-  'Work':               { drive: 4 },                 // legacy generic work tag
+  // engine.277 (builder 2026-10-02): job colour (source:occupation, GAME media-staff routine) is a
+  //   plain day — the tag stays for the trait fold and archetype weight; it moves no dial. Was drive +4.
+  'Work':               {},
   'CivicRole':          { sociability: 5, drive: 2 },
   'Civic Role':         { sociability: 5, drive: 2 }, // space variant
   // engine.201 ruling 1b (2026-09-13): a routine generator line is a plain day — it moves nothing.
@@ -63,7 +65,8 @@ var DIAL_MAP = {
   'Cultural':           { openness: 4, outabout: 3 },  // a cultural night out
   'Lifestyle':          {},                            // ruling 1b plain day
   'Mentorship':         { warmth: 6, drive: 2 },
-  'Faith':              { warmth: 3, composure: 2 },   // faith community + grounding
+  'Faith':              { warmth: 3, composure: 2 },   // faith community + grounding: congregation join, reflections, essence
+  'Faith-Practice':     {},                            // engine.277: routine attendance colour (router source:faith) — a plain day
 
   // --- Family ---
   'Household':          { family: 5 },

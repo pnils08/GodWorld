@@ -10,6 +10,6 @@
 
 **NEXT[codex]:** Verify remaining board comparator/config/history export gaps against docs/plans/2026-09-19-civic-wake-game-loop.md §Task 4 engine rulings; coordinate runner edits with Kimi. Separate counter threshold-rounding defect recorded in the same plan §Health numerator amendment.
 
-**NEXT[antigravity]:** Nothing queued.
+**NEXT[antigravity]:** engine.208 review completed to docs/research/2026-10-02-agy-engine-208-draft-review.md. 3 FIXES: Undocked engagement dropped from table, Oaks expansion expectation penalty re-opens Q3, magnitudes presented as sim calls instead of mechanism. Proposed a 10-cycle bench test for spread verification.
 
 **NEXT[grok]:** No pane; nothing queued.

@@ -484,6 +484,8 @@ These files live at `/root/GodWorld/` and are catalogued here for completeness. 
 
 ---
 
+- **[[plans/2026-10-03-citizen-pages-drive-canon]]** — pipeline.70: the citizens' own pages (2,077 docs, 369 citizens, no newsroom reader) wired into sourcing (`street` page-line evidence), packets, Celeste's pulse slice, the letters pool and Rhea — builder ruling 2026-10-03 that the pages are not private and should drive canon. *(plan, newsroom, draft)*
+
 ## `docs/adr/` — architectural decision records (new S187, ADR pattern)
 
 Small, dated decision records. Created only when a choice is (a) hard to reverse, (b) surprising without context, (c) result of a real trade-off. Pattern adopted from `mattpocock/skills` MIT-licensed example.

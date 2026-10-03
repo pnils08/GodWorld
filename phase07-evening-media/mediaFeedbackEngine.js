@@ -244,22 +244,33 @@ function applyCalendarMediaModifiers_(ctx) {
   // SPORTS SEASON NARRATIVES
   // ─────────────────────────────────────────────────────────────
 
+  // labels stay on the phase word (prose)
   if (cal.sportsSeason === 'championship') {
-    effects.hopeFactor += 0.3;
-    effects.celebrityBuzz += 0.25; // Athletes in spotlight
     effects.sportsNarrative = 'championship_fever';
     effects.coverageProfile.sportsDominance = 'championship';
-    effects.trendAmplification.sports = 0.5;
   } else if (cal.sportsSeason === 'playoffs') {
-    effects.hopeFactor += 0.2;
-    effects.celebrityBuzz += 0.15;
     effects.sportsNarrative = 'playoff_drama';
     effects.coverageProfile.sportsDominance = 'playoffs';
-    effects.trendAmplification.sports = 0.35;
   } else if (cal.sportsSeason === 'late-season') {
-    effects.hopeFactor += 0.1;
     effects.sportsNarrative = 'pennant_race';
     effects.coverageProfile.sportsDominance = 'late-season';
+  }
+
+  // engine.281 (a): the numbers follow the week's band (top/high/elevated carry the old
+  // championship/playoffs/late-season payloads); hope is a result channel — only a week
+  // that went better than expected adds it (Q2)
+  var sportsBandM = (cal.sportsCity && cal.sportsCity.band) || 'quiet';
+  var sportsWonM = (Number((cal.sportsCity || {}).signed) || 0) > 0;
+  if (sportsBandM === 'top') {
+    if (sportsWonM) effects.hopeFactor += 0.3;
+    effects.celebrityBuzz += 0.25; // Athletes in spotlight
+    effects.trendAmplification.sports = 0.5;
+  } else if (sportsBandM === 'high') {
+    if (sportsWonM) effects.hopeFactor += 0.2;
+    effects.celebrityBuzz += 0.15;
+    effects.trendAmplification.sports = 0.35;
+  } else if (sportsBandM === 'elevated') {
+    if (sportsWonM) effects.hopeFactor += 0.1;
     effects.trendAmplification.sports = 0.2;
   }
 
@@ -594,7 +605,9 @@ function analyzeCelebrityCoverage_(ctx) {
   if (cal.holiday !== 'none' && cal.holidayPriority === 'oakland') {
     totalBuzz += 2; // Local celebrities at Oakland events
   }
-  if (cal.sportsSeason === 'championship' || cal.sportsSeason === 'playoffs') {
+  // engine.281 (a): a big game week, not the phase word
+  var sportsBandC = (cal.sportsCity && cal.sportsCity.band) || 'quiet';
+  if (sportsBandC === 'top' || sportsBandC === 'high') {
     totalBuzz += 2; // Athletes in spotlight
   }
 
@@ -709,9 +722,11 @@ function calculateCoverageIntensity_(ctx) {
   if (cal.holiday !== 'none' && cal.holidayPriority === 'oakland') {
     intensity += 0.2; // Oakland festivals get heavy coverage
   }
-  if (cal.sportsSeason === 'championship') {
+  // engine.281 (a): coverage follows the week's band, not the phase word
+  var sportsBandI = (cal.sportsCity && cal.sportsCity.band) || 'quiet';
+  if (sportsBandI === 'top') {
     intensity += 0.25;
-  } else if (cal.sportsSeason === 'playoffs') {
+  } else if (sportsBandI === 'high') {
     intensity += 0.15;
   }
   if (cal.isFirstFriday) {
@@ -831,6 +846,7 @@ function applyNeighborhoodMediaEffects_(ctx) {
   var mediaHoods = mediaHoods_(ctx);
   var sportsSpot = (S.sportsZones && S.sportsZones.length) ? S.sportsZones
     : (typeof primarySportsZone_ === 'function' ? [primarySportsZone_({})] : []);
+  var sportsBandN = (cal.sportsCity && cal.sportsCity.band) || 'quiet';
   for (var ni = 0; ni < mediaHoods.length; ni++) {
     var nh = mediaHoods[ni];
     var profile = { mediaWeight: mediaHoodWeight_(ctx, nh) };
@@ -884,7 +900,8 @@ function applyNeighborhoodMediaEffects_(ctx) {
 
     // v2.1: Sports spotlight during the post-season — wherever the sport is (engine.240: was a
     // 'Jack London' literal; primarySportsZone_ keeps the pre-stadium fallback, sports lane)
-    if (sportsSpot.indexOf(nh) >= 0 && (cal.sportsSeason === 'playoffs' || cal.sportsSeason === 'championship')) {
+    // engine.281 (a): on a big game week (band top/high), not the phase word
+    if (sportsSpot.indexOf(nh) >= 0 && (sportsBandN === 'top' || sportsBandN === 'high')) {
       nhEffect.coverageCount += 2;
       nhEffect.perceptionShift += 0.25;
       nhEffect.topics.push('sports');
@@ -960,12 +977,14 @@ function amplifyArcsFromCoverage_(ctx, cycle) {
       boostReason = 'festival_coverage';
     }
 
-    // v2.1: Sports arcs boosted during playoffs/championship
+    // v2.1: Sports arcs boosted on a big game week (engine.281 (a): band top/high carry the
+    // old championship/playoffs boosts)
     if (arcDomain === 'sports') {
-      if (cal.sportsSeason === 'championship') {
+      var sportsBandA = (cal.sportsCity && cal.sportsCity.band) || 'quiet';
+      if (sportsBandA === 'top') {
         coverageBoost += 0.5;
         boostReason = 'championship_coverage';
-      } else if (cal.sportsSeason === 'playoffs') {
+      } else if (sportsBandA === 'high') {
         coverageBoost += 0.35;
         boostReason = 'playoff_coverage';
       }
@@ -1140,7 +1159,10 @@ function applyMediaToCityDynamics_(ctx) {
     if (cal.holiday !== 'none' && cal.holidayPriority === 'oakland') {
       mediaShift += 0.1;
     }
-    if (cal.sportsSeason === 'championship') {
+    // engine.281 (a): sentiment is a result channel (Q2) — a top-band week that went better
+    // than expected; the 0.1 is engine.194's magnitude to set
+    var sportsCityS = cal.sportsCity || {};
+    if (sportsCityS.band === 'top' && (Number(sportsCityS.signed) || 0) > 0) {
       mediaShift += 0.1;
     }
     if (cal.isCreationDay) {

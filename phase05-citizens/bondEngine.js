@@ -600,6 +600,7 @@ function updateExistingBonds_(ctx) {
   var cal = ctx.bondCalendarContext || {};
   var holiday = cal.holiday || 'none';
   var sportsSeason = cal.sportsSeason || 'off-season';
+  var sportsBandU = (S.sportsCity && S.sportsCity.band) || 'quiet';   // engine.281 (a)
   var isFirstFriday = cal.isFirstFriday || false;
   var isCreationDay = cal.isCreationDay || false;
 
@@ -764,13 +765,14 @@ function updateExistingBonds_(ctx) {
       intensity += 0.5;
     }
 
-    // Sports rivalries intensify during playoffs/championship
+    // Sports rivalries intensify on a big game week (engine.281 (a): band top/high/elevated
+    // carry the old championship/playoffs/late-season steps)
     if (bond.bondType === BOND_TYPES.SPORTS_RIVAL) {
-      if (sportsSeason === 'championship') {
+      if (sportsBandU === 'top') {
         intensity += 1.5;
-      } else if (sportsSeason === 'playoffs') {
+      } else if (sportsBandU === 'high') {
         intensity += 1.0;
-      } else if (sportsSeason === 'late-season') {
+      } else if (sportsBandU === 'elevated') {
         intensity += 0.5;
       }
     }
@@ -1121,7 +1123,7 @@ function detectNewBonds_(ctx) {
   if (isFirstFriday) {
     maxNewBonds = Math.max(maxNewBonds, 3);
   }
-  if (sportsSeason === 'championship') {
+  if (((ctx.summary && ctx.summary.sportsCity) || {}).band === 'top') {   // engine.281 (a): band, not the word
     maxNewBonds = Math.max(maxNewBonds, 3);
   }
 
@@ -1436,6 +1438,7 @@ function checkConfrontationTriggers_(ctx) {
   // v2.2: Calendar context
   var cal = ctx.bondCalendarContext || {};
   var sportsSeason = cal.sportsSeason || 'off-season';
+  var sportsBandC = (ctx.summary.sportsCity && ctx.summary.sportsCity.band) || 'quiet';   // engine.281 (a)
 
   for (var i = 0; i < bonds.length; i++) {
     var bond = bonds[i];
@@ -1443,9 +1446,10 @@ function checkConfrontationTriggers_(ctx) {
     if (bond.bondType !== BOND_TYPES.RIVALRY && bond.bondType !== BOND_TYPES.SPORTS_RIVAL) continue;
     if (bond.status !== BOND_STATUS.ACTIVE) continue;
 
-    // v2.2: Sports rivalries have lower confrontation threshold during championship
+    // v2.2: Sports rivalries have a lower confrontation threshold on a top-band week
+    // (engine.281 (a): was the championship word)
     var threshold = 8;
-    if (bond.bondType === BOND_TYPES.SPORTS_RIVAL && sportsSeason === 'championship') {
+    if (bond.bondType === BOND_TYPES.SPORTS_RIVAL && sportsBandC === 'top') {
       threshold = 6;
     }
 

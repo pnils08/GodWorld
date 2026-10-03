@@ -53,7 +53,8 @@ function world() {
     safePhaseCall_: (ctx, label, fn) => fn(),
     ctx: { config: { cycleCount: 8000 }, ss: { getSheetByName: () => null }, writeIntents: [],
       summary: { cycleId: 8000, season: 'Spring', month: 4, holiday: 'none', holidayPriority: 'none', isCreationDay: true,
-        sportsSeason: 'playoffs', worldEvents: [], citizenEvents: [], neighborhoodState: {},
+        sportsSeason: 'playoffs', sportsCity: { band: 'high', signed: 0, intensity: 0.5, reach: 0.5 },   // engine.281 (a): the arc boost reads the band
+        worldEvents: [], citizenEvents: [], neighborhoodState: {},
         cityDynamics: { sentiment: 0.20 },
         eventArcs: [{ arcId: 'SYNTHETIC_ARC', type: 'sports-run', domainTag: 'sports', phase: 'active', tension: 5 }] } }
   };

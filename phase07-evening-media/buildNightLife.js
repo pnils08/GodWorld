@@ -67,6 +67,9 @@ function buildNightlife_(ctx) {
   var isFirstFriday = S.isFirstFriday || false;
   var isCreationDay = S.isCreationDay || false;
   var sportsSeason = S.sportsSeason || "off-season";
+  // engine.281 (a): the numbers (volume, spot count) follow the week's band; the pools and
+  // labels stay on the phase word (prose)
+  var sportsBand = (S.sportsCity && S.sportsCity.band) || "quiet";
 
   // ═══════════════════════════════════════════════════════════════════════════
   // NIGHTLIFE SPOT POOLS (Oakland - 12 neighborhoods)
@@ -384,9 +387,9 @@ function buildNightlife_(ctx) {
   // Creation Day community
   if (isCreationDay) volume += 1;
 
-  // Sports season
-  if (sportsSeason === "championship") volume += 3;
-  if (sportsSeason === "playoffs") volume += 2;
+  // Sports week (engine.281 (a): band top/high carry the old championship/playoffs +3/+2)
+  if (sportsBand === "top") volume += 3;
+  else if (sportsBand === "high") volume += 2;
 
   // Cultural activity
   if (culturalActivity >= 1.4) volume += 1;
@@ -406,7 +409,7 @@ function buildNightlife_(ctx) {
   // v2.2: More spots for big party nights
   if (holiday === "NewYearsEve" || holiday === "Halloween") count = Math.max(count, 4);
   if (isFirstFriday) count = Math.max(count, 3);
-  if (sportsSeason === "championship") count = Math.max(count, 3);
+  if (sportsBand === "top") count = Math.max(count, 3);
 
   // Add late night spots for high volume
   if (volume >= 8) pool = pool.concat(LATE_NIGHT);

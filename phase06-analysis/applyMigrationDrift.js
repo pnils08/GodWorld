@@ -310,7 +310,21 @@ function applyMigrationDrift_(ctx) {
     else if (phase === 'in-season') { drift += Math.round(rInt(3) * manualSportsCrowdIntensity); factors.push(tag + '-routine-movement'); }
     else if (phase === 'preseason') { drift += Math.round(rInt(2) * manualSportsCrowdIntensity); factors.push(tag + '-early-movement'); }
   }
-  addSportsDrift_(sportsPhase);
+  // engine.281 (a): the drift tier follows the week's band (top/high/elevated carry the old
+  // finals/postseason/late-season draws); a post-season or late-season lens on a lower band
+  // reads as an ordinary game week (normal) or no movement (quiet — Q1). In-season and
+  // preseason lenses stay on the word; a Maker override still wins. sportsPhase (the lens)
+  // stays the label the lede reads (sportsPhaseUsed).
+  var sportsBandMig = (S.sportsCity && S.sportsCity.band) || 'quiet';
+  var sportsDriftTier = sportsPhase;
+  if (!manualSportsPhaseOverride) {
+    var bandTierMig = { top: 'finals', high: 'postseason', elevated: 'late-season' }[sportsBandMig];
+    if (bandTierMig) sportsDriftTier = bandTierMig;
+    else if (sportsPhase === 'finals' || sportsPhase === 'postseason' || sportsPhase === 'late-season') {
+      sportsDriftTier = sportsBandMig === 'normal' ? 'in-season' : 'off-season';
+    }
+  }
+  addSportsDrift_(sportsDriftTier);
 
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -568,6 +582,7 @@ function applyMigrationDrift_(ctx) {
     positiveRipples: positiveRipples,
     negativeRipples: negativeRipples,
     sportsPhaseUsed: sportsPhase,
+    sportsDriftTier: sportsDriftTier,   // engine.281 (a): the band's tier the drift drew
     manualSportsLabel: manualSportsLabel,
     feedbackEnabled: feedbackEnabled,
     feedbackScale: feedbackScale,

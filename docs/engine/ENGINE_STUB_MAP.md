@@ -1175,7 +1175,7 @@
 - **findColIndex_(headers, possibleNames)**
 
 - **updateExistingBonds_(ctx)**
-  Reads: S.cityDynamics, S.cycleActiveCitizens, S.cycleId, S.previousCycleState, S.relationshipBonds
+  Reads: S.cityDynamics, S.cycleActiveCitizens, S.cycleId, S.previousCycleState, S.relationshipBonds, S.sportsCity
   Config: ctx.config.cycleCount
   RNG: ctx.rng / safeRand_(ctx)
 
@@ -1205,7 +1205,7 @@
 - **lastConfrontationCycle_(notes)**
 
 - **checkConfrontationTriggers_(ctx)**
-  Reads: S.cycleId, S.relationshipBonds
+  Reads: S.cycleId, S.relationshipBonds, S.sportsCity
   Config: ctx.config.cycleCount
 
 - **applyAllianceBenefits_(ctx)**
@@ -2666,7 +2666,7 @@
 - **createSeededRng_(seed, stateOverride)**
 
 - **applyMigrationDrift_(ctx)**
-  Reads: S.cityDynamics, S.economicMood, S.economicMoodDesc, S.economicRipples, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.manualMigrationInputs, S.neighborhoodEconomies, S.rngState, S.sportsSeason, S.weather, S.worldEvents
+  Reads: S.cityDynamics, S.economicMood, S.economicMoodDesc, S.economicRipples, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.manualMigrationInputs, S.neighborhoodEconomies, S.rngState, S.sportsCity, S.sportsSeason, S.weather, S.worldEvents
   Writes: S.economicMood, S.economicMoodDesc, S.migrationDrift, S.migrationDriftFactors, S.migrationEconomicLink, S.neighborhoodEconomies, S.neighborhoodEconomyFeedback, S.neighborhoodMigration, S.rngState
   Config: ctx.config.enableMigrationEconomicFeedback, ctx.config.enableMigrationNeighborhoodEconomicFeedback, ctx.config.manualMigrationInputs, ctx.config.migrationEconomicFeedbackMaxDelta, ctx.config.migrationEconomicFeedbackScale, ctx.config.migrationNeighborhoodEconomicFeedbackMaxDelta, ctx.config.migrationNeighborhoodEconomicFeedbackScale, ctx.config.migrationPopulationFallback, ctx.config.rngSeed, ctx.config.rngState
   Sheets: Neighborhood_Map, World_Population
@@ -2857,7 +2857,7 @@
 
 ### buildEveningFood.js
 - **buildEveningFood_(ctx)**
-  Reads: S.cityDynamics, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.nightlifeVolume, S.season, S.sportsSeason, S.sportsZones, S.weather, S.weatherMood, S.worldEvents
+  Reads: S.cityDynamics, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.nightlifeVolume, S.season, S.sportsCity, S.sportsSeason, S.sportsZones, S.weather, S.weatherMood, S.worldEvents
   Writes: S.eveningFood
   RNG: ctx.rng / safeRand_(ctx)
 
@@ -2885,7 +2885,7 @@
 
 ### buildNightLife.js
 - **buildNightlife_(ctx)**
-  Reads: S.cityDynamics, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.neighborhoodDynamics, S.neighborhoodEconomies, S.season, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
+  Reads: S.cityDynamics, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.neighborhoodDynamics, S.neighborhoodEconomies, S.season, S.sportsCity, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
   Writes: S.nightlife, S.nightlifeVolume
   RNG: ctx.rng / safeRand_(ctx)
 

@@ -1249,9 +1249,14 @@
         "phase01-config/godWorldEngine2.js::updateWorldPopulation_",
         "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
         "phase03-population/generateCrisisSpikes.js::generateCrisisSpikes_",
+        "phase05-citizens/bondEngine.js::checkConfrontationTriggers_",
         "phase05-citizens/bondEngine.js::detectNewBonds_",
+        "phase05-citizens/bondEngine.js::updateExistingBonds_",
+        "phase06-analysis/applyMigrationDrift.js::applyMigrationDrift_",
         "phase06-analysis/applyShockMonitor.js::applyShockMonitor_",
         "phase06-analysis/economicRippleEngine.js::calculateEconomicMood_",
+        "phase07-evening-media/buildEveningFood.js::buildEveningFood_",
+        "phase07-evening-media/buildNightLife.js::buildNightlife_",
         "phase07-evening-media/cityEveningSystems.js::buildCityEveningSystems_",
         "phase07-evening-media/mediaFeedbackEngine.js::runMediaFeedbackEngine_"
       ]

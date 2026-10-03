@@ -148,5 +148,75 @@ console.log('5. phase-word tests left in the converted numeric files');
   console.log('     exempt word tests left: ' + left.filter(x => EXEMPT.test(x)).join(' '));
 }
 
+// ── engine.281 (a1): the numeric sites outside the 204/205 census ──────────────
+console.log('6. engine.281 (a1) — media, bonds, nightlife, food, migration on the band');
+{
+  const msb = { Logger: { log: () => {} } };
+  vm.createContext(msb);
+  load(msb, 'phase07-evening-media/mediaFeedbackEngine.js');
+  function media(word, city, extra) {
+    const S = Object.assign({ sportsSeason: word, sportsCity: city, worldEvents: [], famousPeople: [], namedSpotlights: [],
+      mediaEffects: { coverageProfile: {}, hopeFactor: 0, anxietyFactor: 0, celebrityBuzz: 0, crisisSaturation: 0,
+        sentimentPressure: 0, trendAmplification: {}, neighborhoodEffects: {}, eventPools: {} }, cityDynamics: { sentiment: 0 } }, extra || {});
+    const ctx = { summary: S, mediaCalendarContext: { holiday: 'none', holidayPriority: 'none', sportsSeason: word, sportsCity: city, month: 6 } };
+    msb.analyzeCelebrityCoverage_(ctx);
+    const buzzBefore = S.mediaEffects.celebrityBuzz;
+    msb.applyCalendarMediaModifiers_(ctx);
+    msb.applyMediaToCityDynamics_(ctx);
+    const e = S.mediaEffects;
+    return { celebBase: buzzBefore, hope: e.hopeFactor, buzz: e.celebrityBuzz, trend: e.trendAmplification.sports,
+      narr: e.sportsNarrative, sent: S.cityDynamics.sentiment };
+  }
+  // C110 as typed: lens championship, two away wins → band high, signed +.24
+  const c110 = media('championship', { band: 'high', signed: 0.24, intensity: 0.515, reach: 1 });
+  check('media C110: high band → playoffs payloads (hope .2, buzz .24+.15, trend .35); label stays championship_fever',
+    c110.hope === 0.2 && Math.abs(c110.buzz - 0.39) < 1e-9 && c110.trend === 0.35 && c110.narr === 'championship_fever', JSON.stringify(c110));
+  check('media C110: no city sentiment lift below the top band', c110.sent === 0, JSON.stringify(c110));
+  const topLoss = media('championship', { band: 'top', signed: -0.5, intensity: 0.9, reach: 1 });
+  check('media: a top-band LOSING week adds no hope and no sentiment, still the coverage',
+    topLoss.hope === 0 && topLoss.sent === 0 && Math.abs(topLoss.buzz - 0.49) < 1e-9 && topLoss.trend === 0.5, JSON.stringify(topLoss));
+  const topWin = media('playoffs', { band: 'top', signed: 0.6, intensity: 0.9, reach: 0.75 });
+  check('media: a top-band winning week under a playoffs lens takes the top payload (hope .3, sentiment +.1)',
+    topWin.hope === 0.3 && topWin.sent === 0.1 && topWin.narr === 'playoff_drama', JSON.stringify(topWin));
+  const quietChamp = media('championship', { band: 'quiet', signed: 0, intensity: 0, reach: 0 });
+  check('media: the championship word with no games moves no number',
+    quietChamp.hope === 0 && quietChamp.buzz === 0 && quietChamp.trend === undefined && quietChamp.sent === 0, JSON.stringify(quietChamp));
+  const elev = media('playoffs', { band: 'elevated', signed: 0.1, intensity: 0.41, reach: 0.5 });
+  check('media: elevated → late-season payloads (hope .1 on a win, no buzz)', elev.hope === 0.1 && elev.buzz === 0 && elev.trend === 0.2, JSON.stringify(elev));
+
+  // a numeric payload sitting under a phase-word test, in the five a1 files
+  const WORD = /(===|!==) *['"](championship|playoffs|late-season|post-season)['"]/;
+  const NUM = /\+=|-=|\*=|Math\.max\(|Math\.min\(|lean\(/;
+  const a1 = ['phase07-evening-media/mediaFeedbackEngine.js', 'phase05-citizens/bondEngine.js',
+    'phase07-evening-media/buildNightLife.js', 'phase07-evening-media/buildEveningFood.js',
+    'phase06-analysis/applyMigrationDrift.js'];
+  const hits = [];
+  for (const f of a1) {
+    const L = fs.readFileSync(path.join(ROOT, f), 'utf8').split('\n');
+    L.forEach((line, i) => {
+      if (!WORD.test(line)) return;
+      if (/\bphase === /.test(line)) return;   // migration's tier dispatcher, fed by the band
+      const body = [line].concat(L.slice(i + 1, i + 3).filter(x => !WORD.test(x)));
+      if (body.some(x => NUM.test(x))) hits.push(f + ':' + (i + 1));
+    });
+  }
+  check('no numeric payload left under a phase word in the a1 files', hits.length === 0, hits.join(' '));
+
+  const bo = fs.readFileSync(path.join(ROOT, 'phase05-citizens/bondEngine.js'), 'utf8');
+  check('bonds: rivalry heat, new-bond cap and confront threshold read the band',
+    /sportsBandU === 'top'\) \{\s*intensity \+= 1\.5/.test(bo) && /sportsCity\) \|\| \{\}\)\.band === 'top'\) \{[^\n]*\n\s*maxNewBonds = Math\.max\(maxNewBonds, 3\)/.test(bo)
+    && /SPORTS_RIVAL && sportsBandC === 'top'\) \{\s*threshold = 6/.test(bo));
+  const nl = fs.readFileSync(path.join(ROOT, 'phase07-evening-media/buildNightLife.js'), 'utf8');
+  check('nightlife: volume +3/+2 and the 3-spot floor on band top/high',
+    /sportsBand === "top"\) volume \+= 3;\s*else if \(sportsBand === "high"\) volume \+= 2;/.test(nl) && /sportsBand === "top"\) count = Math\.max\(count, 3\)/.test(nl));
+  const fd = fs.readFileSync(path.join(ROOT, 'phase07-evening-media/buildEveningFood.js'), 'utf8');
+  check('food: stadium-hood lean 3/2/1 and four restaurants on band top/high/elevated',
+    /sportsBand === "top"\) lean\(sportsHoods, 3\)/.test(fd) && /sportsBand === "elevated"\) lean\(sportsHoods, 1\)/.test(fd)
+    && /sportsBand === "top"\) restaurantCount = 4/.test(fd));
+  const mg = fs.readFileSync(path.join(ROOT, 'phase06-analysis/applyMigrationDrift.js'), 'utf8');
+  check('migration: drift tier from the band, the lede keeps the lens, a Maker override wins',
+    /addSportsDrift_\(sportsDriftTier\)/.test(mg) && /sportsPhaseUsed: sportsPhase,/.test(mg) && /if \(!manualSportsPhaseOverride\) \{/.test(mg));
+}
+
 console.log(`\n${passed} passed, ${failed} failed`);
 if (failed) process.exitCode = 1;

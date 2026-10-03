@@ -60,6 +60,7 @@ function buildEveningFood_(ctx) {
   var isFirstFriday = S.isFirstFriday || false;
   var isCreationDay = S.isCreationDay || false;
   var sportsSeason = S.sportsSeason || "off-season";
+  var sportsBand = (S.sportsCity && S.sportsCity.band) || "quiet";   // engine.281 (a)
 
   // ═══════════════════════════════════════════════════════════════════════════
   // THE LEDGER (v2.5) — fail-soft Business_Ledger read, same pattern as
@@ -95,9 +96,11 @@ function buildEveningFood_(ctx) {
 
    // waterfront summer
   if (isFirstFriday) { lean(artsHoods, 2); addNightlife(); }
-  if (sportsSeason === "championship") lean(sportsHoods, 3);
-  else if (sportsSeason === "playoffs" || sportsSeason === "post-season") lean(sportsHoods, 2);
-  else if (sportsSeason === "late-season") lean(sportsHoods, 1);
+  // engine.281 (a): the lean follows the week's band (top/high/elevated carry the old
+  // championship/playoffs/late-season weights); the trend label below stays on the word
+  if (sportsBand === "top") lean(sportsHoods, 3);
+  else if (sportsBand === "high") lean(sportsHoods, 2);
+  else if (sportsBand === "elevated") lean(sportsHoods, 1);
   if (culturalActivity >= 1.4) lean(artsHoods, 1);
   if (nightlife >= 7) addNightlife();
 
@@ -112,7 +115,7 @@ function buildEveningFood_(ctx) {
   var restaurantCount = rng() < 0.3 ? 3 : 2;
   if (holidayPriority === "major" || holidayPriority === "oakland") restaurantCount = 3;
   if (isFirstFriday) restaurantCount = 3;
-  if (sportsSeason === "championship") restaurantCount = 4;
+  if (sportsBand === "top") restaurantCount = 4;
 
   var selectedRestaurants = weightedDrawWithoutReplacement_(candidates, weight, restaurantCount, rng);
   var selectedFast = weightedDrawWithoutReplacement_(fastCandidates, {}, sportsSeason !== "off-season" ? 2 : 1, rng);

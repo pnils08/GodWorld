@@ -460,6 +460,8 @@ Cuts carried from the drained engine.194 row (measured C101–C106, detail in th
 ### Task 8 — engine.208 (NEW): dial 9, fandom
 RULED by Mike S446. Ships with its negative pole or not at all (engine.197's lesson). **Prerequisite accepted S447 (`0c1fa07b`):** the seven `DIALS` copies now use the existing exported source in `utilities/citizenMemory.js` (F6). Apps Script keeps its global `var`; Node keeps CommonJS imports. Remaining: poles, `DIAL_MAP` entries both directions, inheritance from household, and the cron-tone feedback channel. Verify against engine.197 criterion 4 (a spread, not two blobs) and engine.201 (does it wake citizens the pools never reach).
 
+**Read-before + proposed cut (research-build, 2026-10-02):** [[../research/2026-10-02-engine-208-fandom-dial-read-before]] — substrate measured, seed inputs measured (texture is not a seed; 44 bettors, 169 zone residents), feed round-vocabulary gap measured, four sim calls in its §4. Research §6 Q6 (summary row owns the phase) is closed as superseded by the sixth block.
+
 
 #### Event_Content_Ledger — sports event content and fandom (builder-directed 2026-09-16)
 

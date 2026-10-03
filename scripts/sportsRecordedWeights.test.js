@@ -8,7 +8,7 @@ const vm = require('vm');
 const read = file => fs.readFileSync(path.join(__dirname, '..', file), 'utf8');
 const s = { Logger: { log() {} }, inWorldStamp_: () => 'C901' };
 vm.createContext(s);
-for (const file of ['phase02-world-state/applySportsSeason.js',
+for (const file of ['utilities/sportsWeekRecord.js', 'phase02-world-state/applySportsSeason.js',
   'phase02-world-state/applySeasonWeights.js', 'phase04-events/worldEventsEngine.js']) {
   vm.runInContext(read(file), s, { filename: file });
 }

@@ -2781,7 +2781,10 @@ function generateCitizensEvents_(ctx) {
         // which fails any warmth/drive term while leaving plain `undocked`
         // rows reachable (fail-closed on the dial, not on the whole beat).
         warmth: dialBands ? dialBands.current.warmth : null,
-        drive: dialBands ? dialBands.current.drive : null
+        drive: dialBands ? dialBands.current.drive : null,
+        // engine.208: a ledger row can aim at who cares — fandom>=60 (a playoff bar), fandom<40
+        // (dragged along). The CURRENT value, as warmth/drive: how they feel this week.
+        fandom: dialBands ? dialBands.current.fandom : null
       };
       for (var clk in contentLedger.lines) {
         if (!contentLedger.lines.hasOwnProperty(clk)) continue;
@@ -2888,6 +2891,16 @@ function generateCitizensEvents_(ctx) {
 
     if (pool.length === 0) continue;
 
+    // engine.208 C5: a player's sports life is the feed (applyGameNightMoments_) — a GAME-clock
+    // citizen never draws a spectator line ("bought a new A's jersey"). Removed before any
+    // weighting or draw, hardcoded and ledger entries alike, so no rng is spent on them.
+    if (String(mode).toUpperCase() === "GAME") {
+      for (var gsi = pool.length - 1; gsi >= 0; gsi--) {
+        if ((pool[gsi].tags || []).indexOf("source:sports") >= 0) pool.splice(gsi, 1);
+      }
+      if (pool.length === 0) continue;
+    }
+
     // v2.7: Apply archetype weights to pool entries
     if (traitProfile) {
       for (var awi = 0; awi < pool.length; awi++) {
@@ -2929,7 +2942,8 @@ function generateCitizensEvents_(ctx) {
           if (dwTag.indexOf('relationship:') === 0) dwMod *= dm.sociability;
           else if (dwTag === 'source:occupation') dwMod *= dm.drive;
           else if (dwTag === 'source:neighborhood' || dwTag === 'source:prevEvening') dwMod *= dm.outabout;
-          else if (dwTag === 'source:firstFriday' || dwTag === 'source:holiday' || dwTag === 'source:sports' || dwTag === 'source:creationDay') dwMod *= dm.outabout;
+          else if (dwTag === 'source:sports') dwMod *= dm.fandom; // engine.208: fandom is the selector (plan §4) — was outabout
+          else if (dwTag === 'source:firstFriday' || dwTag === 'source:holiday' || dwTag === 'source:creationDay') dwMod *= dm.outabout;
           else if (dwTag === 'source:continuity') dwMod *= dm.composure < 1 ? (2 - dm.composure) : 1; // low composure dwells on unresolved tension
           else if (dwTag === 'evening:cityEventAttend') dwMod *= dm.sociability; // engine.32 T8 — attending stacks sociability on top of prevEvening's outabout
           else if (dwTag === 'source:fame') dwMod *= dm.sociability; // engine.32 T3 — sociable citizens lean into recognition
@@ -3176,6 +3190,14 @@ function generateCitizensEvents_(ctx) {
     if (archetype && archetype !== 'Drifter') tags = mergeTags(tags, ["archetype:" + archetype]);
 
     var primaryTag = primaryFromTags(tags);
+    // engine.208 C5: a drawn A's / Oaks ledger line in a week that team has a signed result is the
+    // week as this citizen caught it — its tag, not a plain Sports day. Only the exact team pools;
+    // citywide / hood / hardcoded sports lines stay plain (no team guessed from prose).
+    var sportsLineTeam = entry.eclPoolKey === "sports.as" ? "A's" : (entry.eclPoolKey === "sports.oaks" ? "Oaks" : "");
+    if (sportsLineTeam && S.sportsWeek && S.sportsWeek[sportsLineTeam] &&
+        SPORTS_WEEK_TAG_[S.sportsWeek[sportsLineTeam].cls]) {
+      primaryTag = SPORTS_WEEK_TAG_[S.sportsWeek[sportsLineTeam].cls];
+    }
     // engine.201b hood retag (ActivityExpanded / ActivityContracted / StreetsGuarded) REMOVED S451
     // (builder ruling 2026-09-13: dials follow EVENTS — never retag texture to move a dial).
     var tagString = [primaryTag].concat(tags).join("|");

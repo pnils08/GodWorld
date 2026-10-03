@@ -207,5 +207,45 @@ console.log('═══ Routing: ledger line primary tag');
     taggedLine !== null && taggedLine.indexOf('[QoL]') >= 0, taggedLine || 'never drawn in 200 seeds');
 }
 
+console.log('═══ engine.208 C5: the sports picker');
+{
+  global.SPORTS_WEEK_TAG_ = require('../utilities/sportsWeekRecord.js').SPORTS_WEEK_TAG_;
+  const SPORTS_FIXTURE = [
+    LEDGER_HDR,
+    ['line', 'sports.as', '', 'wore the green cap to the corner store', '80', '', 'source:sports', '', ''],
+    ['line', 'sports.oaks', '', 'argued the Oaks rotation at the barbershop', '80', '', 'source:sports', '', ''],
+    ['line', 'sports.citywide', '', 'heard a game through an open window', '80', '', 'source:sports', '', ''],
+    ['line', 'test.fan', '', 'planned the whole night around the game', '80', 'fandom>=60', 'source:neighborhood', '', '']
+  ];
+  const weeks = { "A's": { cls: 'TITLE' }, Oaks: { cls: 'LOSING_WEEK' } };
+  const prevBands = global.getCitizenDialBands_;
+  const mult = { drive: 1, sociability: 1, warmth: 1, openness: 1, composure: 1, integrity: 1, family: 1, outabout: 1, fandom: 1 };
+  global.getCitizenDialBands_ = (ctx, popId) => ({ mult, current: { warmth: 50, drive: 50, fandom: popId === 'POP-FAN' ? 70 : 40 } });
+  const seen = { as: null, oaks: null, city: null }; let gameSports = 0, fanGateWrong = 0, fanGateRight = 0;
+  for (let s = 1; s <= 200; s++) {
+    const player = makeRow('POP-GAME'); player[4] = 'GAME';
+    const rows = [makeRow('POP-FAN'), makeRow('POP-COLD'), player];
+    const ctx = makeCtx(rows, mulberry32(s * 2741), SPORTS_FIXTURE);
+    ctx.summary.sportsWeek = weeks;
+    generateCitizensEvents_(ctx);
+    const L = emittedLines(ctx).map((t) => t.split('\n'));
+    for (const line of L[0].concat(L[1])) {
+      if (line.indexOf('green cap') >= 0) seen.as = seen.as || line;
+      if (line.indexOf('Oaks rotation') >= 0) seen.oaks = seen.oaks || line;
+      if (line.indexOf('open window') >= 0) seen.city = seen.city || line;
+    }
+    gameSports += L[2].filter((l) => /green cap|Oaks rotation|open window/.test(l)).length;
+    fanGateRight += L[0].filter((l) => l.indexOf('planned the whole night') >= 0).length;
+    fanGateWrong += L[1].filter((l) => l.indexOf('planned the whole night') >= 0).length;
+  }
+  global.getCitizenDialBands_ = prevBands;
+  assert('an A\'s pool line in a title week reads [Sports-Title]', seen.as && seen.as.indexOf('[Sports-Title]') >= 0, seen.as || 'never drawn');
+  assert('an Oaks pool line in a losing week reads [Sports-LosingWeek]', seen.oaks && seen.oaks.indexOf('[Sports-LosingWeek]') >= 0, seen.oaks || 'never drawn');
+  assert('a citywide sports line stays a plain [Sports] day', seen.city && seen.city.indexOf('[Sports]') >= 0, seen.city || 'never drawn');
+  assert('a GAME-clock citizen never draws a spectator line', gameSports === 0, `hits=${gameSports}`);
+  assert('fandom>=60 row reaches the fan', fanGateRight > 0, `hits=${fanGateRight}`);
+  assert('fandom>=60 row never reaches fandom 40', fanGateWrong === 0, `hits=${fanGateWrong}`);
+}
+
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

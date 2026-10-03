@@ -108,7 +108,9 @@ var CONTENT_LEDGER_DSL_FIELDS = {
   // lines as everyone watching from Oakland.
   undockedpilot: { kind: 'flag' },
   warmth:       { kind: 'num' },
-  drive:        { kind: 'num' }
+  drive:        { kind: 'num' },
+  // engine.208: Dial 9, the citizen's live fandom (base+mood, 0-100); null fails the term
+  fandom:       { kind: 'num' }
 };
 
 /**

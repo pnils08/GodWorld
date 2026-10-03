@@ -103,10 +103,5 @@ check('Resisted -> crime < 0', m.pulseForEvent_('Resisted', [], '').crime < 0);
 check('Faith + Faith-Crisis mapped, crisis negative',
   m.pulseForEvent_('Faith', [], '').sentiment > 0 && m.pulseForEvent_('Faith-Crisis', [], '').sentiment < 0);
 
-// 11. engine.277: routine attendance (Faith-Practice) pulses the hood exactly as Faith did.
-check('Faith-Practice pulse == Faith pulse (with and without source:faith)',
-  JSON.stringify(m.pulseForEvent_('Faith-Practice', ['source:faith'], '')) === JSON.stringify(m.pulseForEvent_('Faith', ['source:faith'], '')) &&
-  JSON.stringify(m.pulseForEvent_('Faith-Practice', [], '')) === JSON.stringify(m.pulseForEvent_('Faith', [], '')));
-
 if (failures) { console.error(failures + ' failure(s)'); process.exit(1); }
 console.log('neighborhoodPulseMap.test.js: all green');

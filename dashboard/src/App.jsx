@@ -928,7 +928,6 @@ function CitizenDetailPanel({ detail, coverage, onClose }) {
     Crime: 'bg-red-500/20 text-red-400',
     Family: 'bg-pink-500/20 text-pink-400',
     Faith: 'bg-violet-500/20 text-violet-400',
-    'Faith-Practice': 'bg-violet-500/20 text-violet-400',
   };
 
   return (

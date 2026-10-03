@@ -34,7 +34,6 @@ var PULSE_MAP = {
 
   // --- Faith (engine.33 fan-out emits; faithEventsEngine records org-side) ---
   'Faith':              { sentiment: 1, attractiveness: 1 },
-  'Faith-Practice':     { sentiment: 1, attractiveness: 1 },   // engine.277: routine attendance keeps the same hood pulse
   'Faith-Crisis':       { sentiment: -3 },
 
   // --- Conduct -> crime (COMMIT events only — Task 3 wires the gate) ---

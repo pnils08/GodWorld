@@ -67,7 +67,9 @@ function spikeNeighbours(profiles, hood, cycle, people) {
   const pool = [];
   for (const [popid, p] of profiles) {
     if (K.hoodKey(p.Neighborhood) !== want || !String(p.Name || '').trim()) continue;
-    if (/deceased|dead/i.test(String(p.Status || '')) || ineligible(profiles, popid)) continue;
+    // Dead, in a bed (the ledger's own status, whatever the dump's hospital tab
+    // caught) or a sports subject: never a neighbour.
+    if (/deceased|dead|hospital/i.test(String(p.Status || '')) || ineligible(profiles, popid)) continue;
     if (people.some(q => q.popid === popid)) continue;
     pool.push(popid);
   }

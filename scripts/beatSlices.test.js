@@ -417,11 +417,12 @@ try {
     profiles.set('POP-90034', { Name: 'Test Chinatown Third', POPID: 'POP-90034', RoleType: 'Barber', Neighborhood: 'Chinatown', Status: 'Retired' });
     profiles.set('POP-90035', { Name: 'Test Chinatown Pitcher', POPID: 'POP-90035', RoleType: 'Pitcher, Test Team', Neighborhood: 'Chinatown', ClockMode: 'GAME' });
     profiles.set('POP-90036', { Name: 'Test Chinatown Late', POPID: 'POP-90036', RoleType: 'Clerk', Neighborhood: 'Chinatown', Status: 'Deceased' });
+    profiles.set('POP-90037', { Name: 'Test Chinatown Bedridden', POPID: 'POP-90037', RoleType: 'Clerk', Neighborhood: 'Chinatown', Status: 'hospitalized' });
     const h1 = health.buildHealthSlice(CYCLE, { root, profiles });
     const nb = h1.citizens.filter(c => /a neighbour to quote, not a patient/.test(c.why));
     ok('spike hood → two neighbours, tagged, from the hood', nb.length === 2 && nb.every(c => c.neighborhood === 'Chinatown' && /lives in Chinatown, where illness is up this cycle/.test(c.why)));
     ok('a resident already on the record is not doubled', h1.citizens.filter(c => c.popid === 'POP-90007').length === 1 && !nb.some(c => c.popid === 'POP-90007'));
-    ok('sports subject and dead resident never ride', !JSON.stringify(h1).includes('Test Chinatown Pitcher') && !JSON.stringify(h1).includes('Test Chinatown Late'));
+    ok('sports subject, dead and hospitalized residents never ride as neighbours', !JSON.stringify(h1).includes('Test Chinatown Pitcher') && !JSON.stringify(h1).includes('Test Chinatown Late') && !JSON.stringify(h1).includes('Test Chinatown Bedridden'));
     ok('pick is deterministic by POPID from a cycle-rotated start', nb.map(c => c.popid).join(',') === ['POP-90032', 'POP-90033', 'POP-90034'].slice(CYCLE % 3).concat(['POP-90032', 'POP-90033', 'POP-90034']).slice(0, 2).join(','));
     ok('spike fact is the engine share, hood only, no names', h1.facts.some(f => f.text === 'Chinatown: 170 sick of 2,680 residents, 6.3% — at or over the 6% watch bar' && /Neighborhood_Demographics\.jsonl Sick\/Students\+Adults\+Seniors @C103$/.test(f.src)));
     ok('record count, lead name and few-named note exclude the neighbours', /\| 3 named on the hospital and cause records$/.test(h1.story.label) && /named rows are few \(3\)/.test(h1.prewrite.note) && h1.story.hookLine.startsWith(h0.story.hookLine.replace(/\.$/, '')));

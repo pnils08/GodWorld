@@ -81,7 +81,9 @@ function makeRoot(cycle) {
     // engine.254 Task 10 receipts — no desk, no journalist on the row; the business desk reads them by HookType.
     { Cycle: String(cycle), HookId: 'bh2', HookType: 'TAX_DAY', Domain: 'CIVIC', Neighborhood: '', Priority: '4', HookText: 'Tax day — the city took in $310.1M in property tax and $92M in business tax; 124 tracked owner households paid $1.1M', SuggestedDesks: '', SuggestedJournalist: '', SuggestedAngle: '' },
     { Cycle: String(cycle), HookId: 'bh3', HookType: 'TAX_DAY', Domain: 'CIVIC', Neighborhood: 'Rockridge', Priority: '3', HookText: 'Tax day in Rockridge — 9 owner households paid $71,800 in property tax', SuggestedDesks: '', SuggestedJournalist: '', SuggestedAngle: '' },
-    { Cycle: String(cycle), HookId: 'bh4', HookType: 'DEBT_DEFAULT', Domain: 'COMMUNITY', Neighborhood: 'Fruitvale', Priority: '3', HookText: 'defaulted on the debts — the savings are gone and the record carries it', SuggestedDesks: '', SuggestedJournalist: '', SuggestedAngle: '' }
+    { Cycle: String(cycle), HookId: 'bh4', HookType: 'DEBT_DEFAULT', Domain: 'COMMUNITY', Neighborhood: 'Fruitvale', Priority: '3', HookText: 'defaulted on the debts — the savings are gone and the record carries it', SuggestedDesks: '', SuggestedJournalist: '', SuggestedAngle: '' },
+    // the C120 shape: tax day writes one row per paying hood (bench: 17) — the business desk takes the city line only
+    ...['Fruitvale', 'Downtown', 'Temescal', 'Uptown', 'Laurel', 'Jack London'].map((h, i) => ({ Cycle: String(cycle), HookId: 'bt' + i, HookType: 'TAX_DAY', Domain: 'CIVIC', Neighborhood: h, Priority: '3', HookText: 'Tax day in ' + h + ' — 3 owner households paid $20,000 in property tax', SuggestedDesks: '', SuggestedJournalist: '', SuggestedAngle: '' }))
   ];
   const TREASURY = [
     { Cycle: String(cycle - 1), Entry: 'OPENING', Amount: '100000000', Counterparty: 'GENERAL-FUND', BalanceAfter: '100000000', Note: 'general fund opens' },
@@ -208,6 +210,7 @@ console.log('business variant:');
   ok('casino bettors are candidates, not story.citizens', slice.citizens.some(c => c.popid === 'POP-00910' && /Casino_Ledger/.test(c.why)) && !slice.story.citizens.some(t => /Test Bettor/.test(t)));
   ok('BUSINESS hook reaches the slice; the stale one does not', slice.prewrite.hooks.some(h => /Harborline Grill posts a record week/.test(h.text)) && !slice.prewrite.hooks.some(h => /STALE/.test(h.text)));
   ok('money receipts reach the business desk by HookType (no journalist on the row)', slice.prewrite.hooks.some(h => /^Tax day — the city took in/.test(h.text)) && slice.prewrite.hooks.some(h => /^defaulted on the debts/.test(h.text)));
+  ok('a tax week never crowds the desk\'s own hooks out: own first, city tax line only, hood tax lines never', /Harborline Grill/.test(slice.prewrite.hooks[0].text) && !slice.prewrite.hooks.some(h => /^Tax day in /.test(h.text)) && slice.prewrite.hooks.length <= 6);
   ok('city money: the treasury week as facts (in, out, balance)', slice.prewrite.anchorFacts.includes('CITY MONEY: City treasury this cycle took in $5.2M: $5M the weekly budget allocation, $153,351 court money on 34 cleared charges') &&
     slice.prewrite.anchorFacts.includes('CITY MONEY: City treasury paid out $2M: $2M to INIT-002') && slice.prewrite.anchorFacts.includes('CITY MONEY: City treasury balance at the close: $103.2M (from $100M)'));
   ok('city money: the city tax-day receipt only, never the hood lines', slice.prewrite.anchorFacts.some(f => /^CITY MONEY: Tax day — the city took in \$310\.1M/.test(f)) && !slice.prewrite.anchorFacts.some(f => /Tax day in Rockridge/.test(f)));
@@ -216,6 +219,11 @@ console.log('business variant:');
   // Test Bettor is already a candidate off the casino row — never listed twice.
   ok('debt: the defaulted citizen is an interview candidate, once', slice.citizens.filter(c => c.popid === 'POP-00910').length === 1);
   ok('cityMoney typed on the slice', slice.cityMoney && slice.cityMoney.treasury.state === 'ON_RECORD' && slice.cityMoney.treasury.closing === 103153351 && slice.cityMoney.debt.overLine === 1);
+  ok('debt: the over-the-line count is context for an event, never a standing weekly line', (() => {
+    const K = require('./beatSliceKit');
+    const quiet = K.debtPattern(new Map([['POP-1', { POPID: 'POP-1', Name: 'Quiet Debtor', Neighborhood: 'Uptown', DebtLevel: '6' }]]), [], CYCLE, 'x');
+    return quiet.overLine === 1 && quiet.facts.length === 0;
+  })());
   ok('every evidence line is sourced to a file on disk', slice.prewrite.evidence.length === slice.prewrite.anchorFacts.length &&
     slice.prewrite.evidence.every(e => /^output\//.test(e.src)));
   const mdV3 = formatEconomicSliceMarkdown(slice);

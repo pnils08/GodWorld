@@ -605,7 +605,10 @@ function debtPattern(profiles, hookRows, cycle, src, hood) {
     if (d) bits.push(d + ' defaulted' + (defaults.length ? ': ' + defaults.map(p => p.name + (want == null && p.neighborhood ? ' (' + p.neighborhood + ')' : '')).join(', ') : ''));
     facts.push({ text: (want == null ? 'Debt this cycle: ' : hood + ' debt this cycle: ') + bits.join('; '), src: src + ' DEBT_CRISIS/DEBT_DEFAULT' + (defaults.length ? ' + Simulation_Ledger DialState' : '') });
   }
-  if (overLine) {
+  // The over-the-line count is standing state, not an event: it rides only as
+  // context in a cycle where a debt crossed the line or a default landed, so a
+  // weekly piece never echoes the same number back into canon.
+  if (overLine && facts.length) {
     const top = [...overLineByHood].sort((a, b) => b[1] - a[1]).slice(0, 4).map(([h, n]) => h + ' ' + n).join(', ');
     facts.push({ text: (want == null ? overLine + ' tracked residents on the ledger carry debt at or over the crisis line' + (top ? ' — most in ' + top : '')
       : overLine + ' tracked residents of ' + hood + ' carry debt at or over the crisis line'), src: 'output/simulation_ledger_snapshot.jsonl DebtLevel >= ' + DEBT_CRISIS_LINE });

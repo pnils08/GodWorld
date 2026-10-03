@@ -380,6 +380,7 @@ try {
   ok('maria: the block\'s own care line', m.facts.some(f => f.text === 'Downtown: 1 admission (1 tracked) → 1 in care at the close (1 tracked, 0 other residents) → 0 beds occupied; tracked: tracked residents not named on this beat'));
   ok('maria: tax day for the block only', m.facts.some(f => f.text === 'Tax day in Downtown — 9 owner households paid $71,800 in property tax') && !JSON.stringify(m.facts).includes('$310.1M'));
   ok('maria: debt on the block only — no default named from another hood', m.facts.some(f => f.text === "Downtown debt this cycle: 1 household's debts crossed the line this cycle") && !JSON.stringify(m).includes('Test Civic Resident defaulted'));
+  ok('maria: the over-the-line count rides only beside a debt event (Downtown has the event, no one over the line → no count line)', !m.facts.some(f => /over the crisis line/.test(f.text)));
   ok('maria: sports-clock citizen never a person on the slice', !m.citizens.some(c => c.popid === 'POP-90002'));
 
   console.log('engine.254 Task 10 — empty tabs (the live shape until the first fire):');

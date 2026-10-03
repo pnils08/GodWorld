@@ -179,14 +179,25 @@ function fmtDelta(n) {
   return (n > 0 ? '+$' : '-$') + fmtMoney(Math.abs(n)).slice(1);
 }
 
-/** This cycle's hooks for the business desk: named to Jordan Velez, Domain BUSINESS, or the engine's money receipts (engine.254 Task 10). */
+/**
+ * This cycle's hooks for the business desk: named to Jordan Velez or Domain
+ * BUSINESS first, then the engine's money receipts (engine.254 Task 10) — the
+ * city-level TAX_DAY / ALLOCATION_ENDED rows only (tax day also writes one row
+ * per paying hood; those are the neighborhood seats') and the debt hooks. Six
+ * slots, the desk's own hooks ahead of the receipts so a tax week never crowds
+ * them out.
+ */
 const MONEY_HOOK_RE = /^(TAX_DAY|ALLOCATION_ENDED|DEBT_CRISIS|DEBT_DEFAULT)$/;
 function hooksForBusiness(hookRows, cycle) {
   const seen = new Set();
-  return (hookRows || [])
-    .filter(r => Number(r.Cycle) === Number(cycle) &&
-      (/jordan\s*velez/i.test(String(r.SuggestedJournalist || '')) || String(r.Domain || '').toUpperCase() === 'BUSINESS' ||
-        MONEY_HOOK_RE.test(String(r.HookType || '').toUpperCase())))
+  const thisCycle = (hookRows || []).filter(r => Number(r.Cycle) === Number(cycle));
+  const own = thisCycle.filter(r => /jordan\s*velez/i.test(String(r.SuggestedJournalist || '')) || String(r.Domain || '').toUpperCase() === 'BUSINESS');
+  const money = thisCycle.filter(r => {
+    const t = String(r.HookType || '').toUpperCase();
+    if (!MONEY_HOOK_RE.test(t)) return false;
+    return (t === 'TAX_DAY' || t === 'ALLOCATION_ENDED') ? !String(r.Neighborhood || '').trim() : true;
+  });
+  return own.concat(money)
     .map(r => ({
       text: String(r.HookText || '').trim(), angle: String(r.SuggestedAngle || '').trim() || null,
       hood: r.Neighborhood || null

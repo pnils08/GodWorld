@@ -11,10 +11,23 @@
  *
  * RARITY IS STRUCTURAL: fires only when S.sportsFeedEntries has entries for
  * THIS cycle (no game played → no moments; "No feed entries for cycle N" is
- * the normal quiet case). Named players get the full moment; unnamed roster
- * teammates get nothing here — a game only ripples to who it actually touched
- * (exact-citizens law). Ripple row records the named POPIDs, so the sports
- * seed finally carries the players themselves.
+ * the normal quiet case). Ripple row records the touched POPIDs, so the sports
+ * seed carries the players themselves.
+ *
+ * engine.208 (builder 2026-10-02 ruling i + 2026-10-03 amendment): the feed is
+ * the athletes' life and the fans' week. Three received lines, all signed tags
+ * the Phase-9 fold reads (citizenDialMap):
+ *   1. NAMED — every feed row whose NamesUsed resolves BY NAME writes one line on
+ *      that citizen, routed by EventType (game → Sports-Played / -PlayedWin,
+ *      injury → Sports-Injured, roster-move/trade/re-signing/draft → Sports-Moved,
+ *      feature/awards → Reputation; any other kind a plain [Sports] line).
+ *   2. STAFF — every GAME-clock player and staff member of a franchise that played
+ *      gets the team's week line (S.sportsWeek[f].cls → Sports-Win/Loss/…), named
+ *      or not ("all should be getting life events from the week's success").
+ *   3. FANS — every citizen whose base.fandom is 60+ and who follows that team
+ *      (DialState fan; none recorded = the A's) gets the same week line (ruling v:
+ *      a fan feels every losing week). Membership reads BASE, not this week's mood.
+ * An EVEN or no-game week writes no week line.
  *
  * Direct LifeHistory write — same allowed class as the Phase 4/5 event
  * generators (engine.md exceptions). Ledger row mutation via shared
@@ -77,9 +90,78 @@ function gameNightNameKey_(s) {
   return String(s || '').trim().replace(/\.$/, '').trim().toLowerCase();
 }
 
+// engine.208 — line pools for the received lines. Color, never fact: the fact is the
+// feed row / the week's result; the sentence is texture around it.
+var SPORTS_NAMED_POOLS = {
+  injured: [
+    "spent the evening with ice and a training-room printout of exercises",
+    "told the family the scan looked fine and did not quite believe it",
+    "sat out the next practice and watched from the rail"
+  ],
+  moved: [
+    "spent the night on the phone working out where the family would land",
+    "packed a bag with the news still settling",
+    "called home first, before the club announced anything"
+  ],
+  featured: [
+    "got recognized twice at the grocery store after the story ran",
+    "had a neighbor tape the article to the building's front door",
+    "fielded a round of texts from people who hadn't called in years"
+  ],
+  named: [
+    "saw their name in the sports pages again",
+    "heard their name come up on the radio on the drive in",
+    "got asked about the club at a family dinner"
+  ]
+};
+var SPORTS_WEEK_POOLS = {
+  staff: {
+    TITLE: ["rode the parade route home, still in the jersey", "held the trophy for a photo with the clubhouse staff", "slept four hours and woke up a champion"],
+    RUN: ["kept the routine exactly the same — the run asks for that", "came home late from the park and couldn't wind down", "fielded the playoff-ticket calls from every cousin"],
+    WIN: ["drove home from a good week with the window down", "stayed late in the clubhouse while the music was still on", "let the week's wins carry dinner"],
+    LOSS: ["watched the tape twice and saw the same thing both times", "went quiet at home after a bad week at work", "stayed after practice to fix what the week exposed"],
+    LOSING_WEEK: ["took a losing week home and set it down at the door", "worked through the week's losses in the cage", "told the kids it was a long season"]
+  },
+  fan: {
+    TITLE: ["went downtown for the celebration and lost their voice", "hung the championship pennant by the front door", "called everyone who had ever doubted the team"],
+    RUN: ["planned the week around the playoff games", "watched every pitch of the series from the same seat", "bought playoff gear for the whole house"],
+    WIN: ["checked the scores twice a day all week, happy every time", "argued the team's case at work and won", "wore the cap all week"],
+    LOSS: ["turned the game off early and stewed about it", "spent the week grumbling about the roster", "skipped the highlights after the third loss"],
+    LOSING_WEEK: ["shrugged off another losing week and kept the cap on", "watched a loss with the patience of a real fan", "said next week would be different"]
+  }
+};
+// franchise employer of record (the same pair processAdvancementIntake reads)
+var SPORTS_FRANCHISE_EMPLOYER_ = { 'BIZ-00005': "A's", 'BIZ-00074': 'Oaks' };
+var SPORTS_FAN_TEAM_ = { as: "A's", oaks: 'Oaks' };
+
+function sportsNamedRoute_(eventType, cls) {
+  var t = String(eventType || '').toLowerCase();
+  if (t.indexOf('game') >= 0) {
+    var winWeek = cls === 'WIN' || cls === 'RUN' || cls === 'TITLE';
+    return { tag: winWeek ? 'Sports-PlayedWin' : 'Sports-Played', pool: null };
+  }
+  if (t === 'injury') return { tag: 'Sports-Injured', pool: 'injured' };
+  if (t === 'roster-move' || t === 'trade-recap' || t === 're-signing' || t === 'draft') return { tag: 'Sports-Moved', pool: 'moved' };
+  if (t === 'player-feature' || t === 'awards') return { tag: 'Reputation', pool: 'featured' };
+  return { tag: 'Sports', pool: 'named' };
+}
+
+// the franchises a GAME-clock citizen works for: employer of record, plus a role that names
+// a second club (the two-team GM)
+function sportsStaffTeams_(employerBizId, roleType) {
+  var teams = {};
+  if (SPORTS_FRANCHISE_EMPLOYER_[employerBizId]) teams[SPORTS_FRANCHISE_EMPLOYER_[employerBizId]] = true;
+  var role = String(roleType || '');
+  if (teams["A's"] || teams.Oaks) {
+    if (/\bA'?s\b/.test(role)) teams["A's"] = true;
+    if (/\bOaks\b/.test(role)) teams.Oaks = true;
+  }
+  return teams;
+}
+
 /**
- * Phase 5 entry. Named players from this cycle's feed rows get their
- * going-home moment on their own ledger row + LifeHistory_Log.
+ * Phase 5 entry. The feed's named citizens, each franchise's staff and its fans get
+ * this Cycle's received lines on their own ledger row + LifeHistory_Log.
  */
 function applyGameNightMoments_(ctx) {
   var S = ctx.summary || {};
@@ -92,102 +174,128 @@ function applyGameNightMoments_(ctx) {
   function idx(n) { return header.indexOf(n); }
   var iPop = idx('POPID'), iFirst = idx('First'), iLast = idx('Last');
   var iLife = idx('LifeHistory'), iStatus = idx('Status'), iNbhd = idx('Neighborhood');
+  var iClock = idx('ClockMode'), iEmployer = idx('EmployerBizId'), iRole = idx('RoleType'), iDial = idx('DialState');
   var iLastU = (idx('LastUpdated') >= 0) ? idx('LastUpdated') : idx('Last Updated');
   if (iPop < 0 || iLife < 0) return;
+  var logSheet = ctx.ss ? ctx.ss.getSheetByName('LifeHistory_Log') : null;
+  // engine.208 Revision 1: the log is half the evidence — never write the ledger half alone
+  if (!logSheet) throw new Error('applyGameNightMoments_: LifeHistory_Log tab missing');
 
-  // name (lowercased "first last") → row index, active citizens only
+  var weeks = S.sportsWeek || {};
+  var rng = safeRand_(ctx);
+  function pick(pool) { return pool[Math.floor(rng() * pool.length)]; }
+  function living(r) { return !/^(deceased|dead)$/i.test(String(iStatus >= 0 ? rows[r][iStatus] || '' : '').trim()); }
+
+  // name -> row index (every living citizen; a retired legend named in a feature still lives it)
   var byName = {};
   for (var r = 0; r < rows.length; r++) {
-    if (iStatus >= 0 && String(rows[r][iStatus] || '').toLowerCase() !== 'active') continue;
+    if (!living(r)) continue;
     var full = gameNightNameKey_((rows[r][iFirst] || '') + ' ' + (rows[r][iLast] || ''));
     if (full) byName[full] = r;
   }
 
   var cycle = S.cycleId || (ctx.config && ctx.config.cycleCount) || 0;
   var stamp = (typeof inWorldStamp_ === 'function') ? inWorldStamp_(ctx) : ('C' + cycle);
-  var logSheet = ctx.ss ? ctx.ss.getSheetByName('LifeHistory_Log') : null;
   var logRows = [];
-  var touched = [];
-  var perPlayer = {};
+  var touched = {};
+  var counts = { named: 0, staff: 0, fan: 0 };
   var unresolved = [];
 
+  function write(ri, tag, text, logTag) {
+    var row = rows[ri];
+    var line = stamp + ' — [' + tag + '] ' + text;
+    row[iLife] = row[iLife] ? row[iLife] + '\n' + line : line;
+    if (iLastU >= 0) row[iLastU] = ctx.now;
+    logRows.push([ctx.now, row[iPop], ((row[iFirst] || '') + ' ' + (row[iLast] || '')).trim(), logTag, text,
+      (iNbhd >= 0 ? (row[iNbhd] || '') : ''), cycle]);
+    touched[String(row[iPop])] = true;
+  }
+
+  // 1. NAMED — one line per resolving feed row (row-level receipt)
   for (var e = 0; e < entries.length; e++) {
     var entry = entries[e];
-    if (String(entry.eventType || '').toLowerCase().indexOf('game') < 0) continue;
-    var bucket = gameNightBucket_(entry);
-    var pool = GAME_NIGHT_POOLS[bucket];
+    var team = normalizeOaklandFeedTeam_(entry.teamsUsed);
+    var route = sportsNamedRoute_(entry.eventType, weeks[team] ? weeks[team].cls : 'none');
     var names = parseNamesUsed_(entry);
-
+    var seenThisRow = {};
     for (var n = 0; n < names.length; n++) {
       var key = gameNightNameKey_(names[n]);
       var ri = byName[key];
       if (ri === undefined) { if (unresolved.indexOf(names[n]) < 0) unresolved.push(names[n]); continue; }
-      if (perPlayer[key]) continue; // already had their night
-      perPlayer[key] = true;
-
-      var pick = pool[Math.floor(safeRand_(ctx)() * pool.length)]; // engine.208 M1: safeRand_ returns the rng; the bare product was NaN
-      var row = rows[ri];
-      var tagString = 'Sports|source:sports|gameNight|streak:' + (entry.streak || '-');
-      var line = stamp + ' — [Sports] ' + pick;
-      row[iLife] = row[iLife] ? row[iLife] + '\n' + line : line;
-      if (iLastU >= 0) row[iLastU] = ctx.now;
-      rows[ri] = row;
-
-      logRows.push([
-        ctx.now,
-        row[iPop],
-        ((row[iFirst] || '') + ' ' + (row[iLast] || '')).trim(),
-        tagString,
-        pick,
-        (iNbhd >= 0 ? (row[iNbhd] || '') : ''),
-        cycle
-      ]);
-      touched.push(String(row[iPop]));
+      if (seenThisRow[key]) continue;
+      seenThisRow[key] = true;
+      var text = route.pool ? pick(SPORTS_NAMED_POOLS[route.pool]) : pick(GAME_NIGHT_POOLS[gameNightBucket_(entry)]);
+      write(ri, route.tag, text, route.tag + '|source:sports|feedNamed|event:' + (entry.eventType || '-') + '|team:' + (team || '-'));
+      counts.named++;
     }
   }
 
-  // engine.208 M1: a feed name that matches no active citizen is named, not dropped silently —
+  // 2. STAFF and 3. FANS — the team's week, for every franchise with a signed week
+  var signed = {};
+  for (var f in weeks) {
+    if (weeks.hasOwnProperty(f) && SPORTS_WEEK_TAG_[weeks[f].cls]) signed[f] = weeks[f].cls;
+  }
+  var anySigned = false;
+  for (var sf in signed) { if (signed.hasOwnProperty(sf)) { anySigned = true; break; } }
+  if (anySigned) {
+    for (var rr = 0; rr < rows.length; rr++) {
+      if (!living(rr)) continue;
+      var row2 = rows[rr];
+      var isStaff = iClock >= 0 && String(row2[iClock] || '').toUpperCase() === 'GAME';
+      var teams = {};
+      if (isStaff) {
+        teams = sportsStaffTeams_(iEmployer >= 0 ? String(row2[iEmployer] || '').trim() : '', iRole >= 0 ? row2[iRole] : '');
+      } else if (iDial >= 0 && row2[iDial]) {
+        var ds = parseDialState_(row2[iDial]);
+        if (ds && ds.base && ds.base.fandom >= 60) {
+          var fan = ds.fan || 'as';
+          if (fan === 'both') { teams["A's"] = true; teams.Oaks = true; }
+          else if (SPORTS_FAN_TEAM_[fan]) teams[SPORTS_FAN_TEAM_[fan]] = true;
+        }
+      }
+      for (var tm in teams) {
+        if (!teams.hasOwnProperty(tm) || !signed[tm]) continue;
+        var cls = signed[tm];
+        var who = isStaff ? 'staff' : 'fan';
+        write(rr, SPORTS_WEEK_TAG_[cls], pick(SPORTS_WEEK_POOLS[who][cls]),
+          SPORTS_WEEK_TAG_[cls] + '|source:sports|' + who + 'Week|team:' + tm + '|week:' + cls);
+        counts[who]++;
+      }
+    }
+  }
+
+  // engine.208 M1: a feed name that matches no living citizen is named, not dropped silently —
   // a typo on the sheet ("Mark Aiken") or a sports-layer player with no POPID.
   if (unresolved.length && typeof Logger !== 'undefined') {
     Logger.log('applyGameNightMoments_: unresolved feed names, cycle ' + cycle + ': ' + unresolved.join(', '));
   }
 
-  if (!touched.length) return;
+  var touchedIds = Object.keys(touched);
+  if (!touchedIds.length) return;
 
   ctx.ledger.dirty = true;
-  if (logSheet && logRows.length) {
-    var startRow = logSheet.getLastRow() + 1;
-    logSheet.getRange(startRow, 1, logRows.length, logRows[0].length).setValues(logRows);
-  }
+  var startRow = logSheet.getLastRow() + 1;
+  logSheet.getRange(startRow, 1, logRows.length, logRows[0].length).setValues(logRows);
 
-  // Attribution: the game touched THESE players — the sports seed names them.
+  // Attribution: the week touched THESE citizens — the sports seed names them.
   if (typeof recordRipple_ === 'function') {
     recordRipple_(ctx, {
       causeType: 'sports',
       causeId: 'Oakland_Sports_Feed.gameNight',
-      causeDetail: 'Game night reached ' + touched.length + ' player(s) at home — ' +
-        (entries[0].streak ? 'streak ' + entries[0].streak + ', ' : '') +
-        (entries[0].playerMood ? 'clubhouse ' + entries[0].playerMood : 'regular night'),
+      causeDetail: 'The sports week reached ' + touchedIds.length + ' citizen(s) — ' + counts.named + ' named, ' +
+        counts.staff + ' staff week lines, ' + counts.fan + ' fan week lines',
       effectType: 'game-night',
       targetScope: 'citizen',
-      targetIds: touched,
+      targetIds: touchedIds,
       neighborhood: '',
-      magnitude: touched.length,
+      magnitude: touchedIds.length,
       duration: 1,
       sourceEngine: 'applyGameNightMoments_'
     });
   }
 
   if (typeof Logger !== 'undefined') {
-    Logger.log('applyGameNightMoments_: ' + touched.length + ' player going-home moment(s), cycle ' + cycle);
+    Logger.log('applyGameNightMoments_: cycle ' + cycle + ' — ' + counts.named + ' named, ' + counts.staff +
+      ' staff, ' + counts.fan + ' fan line(s); weeks ' + JSON.stringify(signed));
   }
-}
-
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = {
-    applyGameNightMoments_: applyGameNightMoments_,
-    gameNightBucket_: gameNightBucket_,
-    parseNamesUsed_: parseNamesUsed_,
-    GAME_NIGHT_POOLS: GAME_NIGHT_POOLS
-  };
 }

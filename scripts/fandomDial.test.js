@@ -81,5 +81,10 @@ E.applyCycleEffects_(fan, M.nudgesForEvent_('Sports-LosingWeek', 1, ''));
 ok('a losing week dips current below 60', E.current_(fan, 'fandom') < 60, String(E.current_(fan, 'fandom')));
 ok('base stays a fan (60)', fan.base.fandom === 60);
 
+// 7. the fold reads the bracket tag the feed seam writes (applyGameNightMoments_ line shape)
+const parsedLines = C.parseLifeHistoryEntries_('C110 — [Sports-Title] rode the parade route home\nC110 — [Undocked-Audience] watched the show\nY3C110 — [Sports-LosingWeek] said next week would be different');
+const ptags = (parsedLines.entries || []).map((e) => e.tag + '@' + e.cycle);
+ok('fold parses the new tags with their Cycle (Y3C110 = absolute 214)', ['Sports-Title@110', 'Undocked-Audience@110', 'Sports-LosingWeek@214'].every((t) => ptags.includes(t)), JSON.stringify(ptags));
+
 console.log('\n' + passed + ' passed, ' + failed + ' failed');
 if (failed) process.exit(1);

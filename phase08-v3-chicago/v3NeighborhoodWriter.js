@@ -463,7 +463,7 @@ function saveV3NeighborhoodMap_(ctx) {
   var hoodBizGrowthMedian = hoodBusinessCity_(S);
 
   // Holiday / calendar neighborhood boosts
-  var holidayMods = buildHolidayNeighborhoodMods_(holiday, isFirstFriday, isCreationDay, sportsSeason);
+  var holidayMods = buildHolidayNeighborhoodMods_(holiday, isFirstFriday, isCreationDay, sportsSeason, S.sportsWeek || {});
 
   // Helpers
   function round2(n) { return Math.round(n * 100) / 100; }
@@ -658,7 +658,7 @@ function ensureNeighborhoodMapSchemaAppendOnly_(ss, sheetName, headers) {
 }
 
 
-function buildHolidayNeighborhoodMods_(holiday, isFirstFriday, isCreationDay, sportsSeason) {
+function buildHolidayNeighborhoodMods_(holiday, isFirstFriday, isCreationDay, sportsSeason, sportsWeek) {
   var mods = {};
 
 
@@ -701,18 +701,21 @@ function buildHolidayNeighborhoodMods_(holiday, isFirstFriday, isCreationDay, sp
     mods['West Oakland'].eventMod = (mods['West Oakland'].eventMod || 1) * 1.3;
   }
 
-  if (sportsSeason === 'championship') {
-    mods['Jack London'] = mods['Jack London'] || {};
-    mods['Jack London'].eventMod = (mods['Jack London'].eventMod || 1) * 2.0;
-    mods['Jack London'].nightlifeMod = (mods['Jack London'].nightlifeMod || 1) * 1.8;
-    mods['Jack London'].noiseMod = (mods['Jack London'].noiseMod || 1) * 1.5;
-
-    mods['Downtown'] = mods['Downtown'] || {};
-    mods['Downtown'].eventMod = (mods['Downtown'].eventMod || 1) * 1.5;
-  } else if (sportsSeason === 'playoffs') {
-    mods['Jack London'] = mods['Jack London'] || {};
-    mods['Jack London'].eventMod = (mods['Jack London'].eventMod || 1) * 1.5;
-    mods['Jack London'].nightlifeMod = (mods['Jack London'].nightlifeMod || 1) * 1.4;
+  // engine.204/205 §2.2: the stadium hoods by each franchise's home volume (unsigned ×
+  // venueShare) at its own venue — the old championship mods are the top of the scale
+  // (event ×2.0, nightlife ×1.8, noise ×1.5 at a full home week); an away week moves none.
+  var weeks = sportsWeek || {};
+  for (var f in weeks) {
+    if (!weeks.hasOwnProperty(f)) continue;
+    var x = Math.min(1, (Number(weeks[f].unsigned) || 0) * (Number(weeks[f].venueShare) || 0));
+    if (!(x > 0)) continue;
+    var venue = weeks[f].venue || [];
+    for (var vi = 0; vi < venue.length; vi++) {
+      var vm = mods[venue[vi]] = mods[venue[vi]] || {};
+      vm.eventMod = (vm.eventMod || 1) * (1 + 1.0 * x);
+      vm.nightlifeMod = (vm.nightlifeMod || 1) * (1 + 0.8 * x);
+      vm.noiseMod = (vm.noiseMod || 1) * (1 + 0.5 * x);
+    }
   }
 
   return mods;

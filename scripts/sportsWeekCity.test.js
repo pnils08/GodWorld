@@ -97,5 +97,56 @@ console.log('3. shock monitor');
   check('thresholds keyed on the band', /sportsCityShock\.band === "top"/.test(SRC) && /sportsCityShock\.band === "high"/.test(SRC));
 }
 
+// ── slice C: venue consumers ─────────────────────────────────────────────────
+console.log('4. venue consumers');
+{
+  const hsb = { Logger: { log: () => {} } };
+  vm.createContext(hsb);
+  load(hsb, 'phase08-v3-chicago/v3NeighborhoodWriter.js');
+  const full = { "A's": { unsigned: 1, venueShare: 1, venue: ['Jack London', 'Downtown'] } };
+  const m = JSON.parse(JSON.stringify(hsb.buildHolidayNeighborhoodMods_('none', false, false, 'championship', full)));
+  check('hood writer: a full home week = the old championship mods at the venue',
+    m['Jack London'].eventMod === 2 && Math.abs(m['Jack London'].nightlifeMod - 1.8) < 1e-9 && m['Downtown'].noiseMod === 1.5, JSON.stringify(m));
+  const away = JSON.parse(JSON.stringify(hsb.buildHolidayNeighborhoodMods_('none', false, false, 'championship', { "A's": { unsigned: 0.49, venueShare: 0, venue: ['Jack London'] } })));
+  check('hood writer: the word with an away week moves no stadium hood', !away['Jack London'], JSON.stringify(away));
+  const bay = JSON.parse(JSON.stringify(hsb.buildHolidayNeighborhoodMods_('none', false, false, 'playoffs', { Oaks: { unsigned: 0.2, venueShare: 0.5, venue: ['Baylight District'] } })));
+  check('hood writer: the Oaks at Baylight, scaled by home volume .1', Math.abs(bay['Baylight District'].eventMod - 1.1) < 1e-9 && !bay['Jack London'], JSON.stringify(bay));
+
+  const src = rel => fs.readFileSync(path.join(ROOT, rel), 'utf8');
+  const ge = src('phase05-citizens/generateCitizensEvents.js');
+  check('game night gates on games played (S.sportsWeek g > 0)', /gnWeeks\[gwf\]\.g > 0/.test(ge) && /gnAny && gnf < gnFeed\.length/.test(ge));
+  const ev = src('phase07-evening-media/cityEveningSystems.js');
+  check('evening: no sportsNeighborhoodEffects read; crowd at the venue by home volume',
+    !/S\.sportsNeighborhoodEffects \|\|/.test(ev) && /venueShare\) \|\| 0\) \* 10\)/.test(ev));
+  const cr = src('phase03-population/generateCrisisSpikes.js');
+  check('crisis: no Jack London/Downtown fallback literal', !/S\.sportsZones \|\| \['Jack London', 'Downtown'\]/.test(cr));
+  const bo = src('phase05-citizens/bondEngine.js');
+  check('bonds: the rivalry hoods are S.sportsZones, not a literal', !/var sportsHoods = \['Jack London', 'Downtown'\]/.test(bo));
+}
+
+// ── acceptance 5: word tests left in the converted files (exempt lines named) ──
+console.log('5. phase-word tests left in the converted numeric files');
+{
+  const WORD = /(===|!==) *['"](championship|playoffs|late-season|post-season)['"]/;
+  const files = ['phase02-world-state/applyCityDynamics.js', 'phase06-analysis/economicRippleEngine.js',
+    'phase01-config/godWorldEngine2.js', 'phase03-population/generateCrisisSpikes.js',
+    'phase07-evening-media/cityEveningSystems.js', 'phase08-v3-chicago/v3NeighborhoodWriter.js',
+    'phase05-citizens/bondEngine.js', 'phase02-world-state/updateTransitMetrics.js',
+    'phase06-analysis/applyShockMonitor.js'];
+  const left = [];
+  const lineOf = x => { const [f, n] = x.split(':'); return fs.readFileSync(path.join(ROOT, f), 'utf8').split('\n')[Number(n) - 1]; };
+  for (const f of files) {
+    fs.readFileSync(path.join(ROOT, f), 'utf8').split('\n').forEach((line, i) => { if (WORD.test(line)) left.push(f + ':' + (i + 1)); });
+  }
+  // exempt, by design: the city sentiment lines (engine.194's) read the normalized word
+  // ('postseason'/'finals'), not these; the Maker-override branch in the shock monitor; the
+  // seed calendar boost; bond intensity/decay (follow-up row); population calendarFactors label
+  const EXEMPT = /applyShockMonitor\.js|bondEngine\.js/;
+  const exemptLine = /m\.sentiment|if \(s === /;   // city sentiment (194's) + its normalizer
+  const unexpected = left.filter(x => !EXEMPT.test(x) && !exemptLine.test(lineOf(x)));
+  check('no unexpected word test in a converted numeric file', unexpected.length === 0, unexpected.join(' '));
+  console.log('     exempt word tests left: ' + left.filter(x => EXEMPT.test(x)).join(' '));
+}
+
 console.log(`\n${passed} passed, ${failed} failed`);
 if (failed) process.exitCode = 1;

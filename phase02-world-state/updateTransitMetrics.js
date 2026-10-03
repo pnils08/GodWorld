@@ -21,6 +21,9 @@
  * - Game-day hoods = feed HomeNeighborhood ∪ S.sportsZones; stations and
  *   corridors take the boost by hood intersection, not by a 'Coliseum' /
  *   'I-880' string.
+ * - engine.204/205: game day = a franchise played at HOME (S.sportsWeek[f].h > 0);
+ *   hoods = that franchise's venue; the bump scales by unsigned × venueShare.
+ *   The typed HomeNeighborhood is no longer read.
  * - Previous-cycle events read from WorldEvents_V3_Ledger (Domain, Severity,
  *   Neighborhood); a per-hood tally lifts the stations serving those hoods.
  * - Initiative phases move the stations they build: reads the transit slice
@@ -129,11 +132,15 @@ function updateTransitMetrics_Phase2_(ctx) {
   var eventSummary = summarizePrevCycleEvents_(prevCycleEvents);
   var majorEvents = eventSummary.major;
 
-  // engine.183: game day is the sports feed — a row this cycle means a game was
-  // played (applySportsSeason_ published S.sportsFeedEntries upstream). The
-  // hoods are where the sport physically is: feed HomeNeighborhood ∪ S.sportsZones.
-  var gameDay = isGameDay_(ctx);
-  var gameDayHoods = gameDay ? gameDayHoodsFor_(S) : [];
+  // engine.204/205 §2.2: game day is a HOME game this cycle (S.sportsWeek[f].h > 0); the
+  // hoods are that franchise's own venue (the typed HomeNeighborhood is no longer read),
+  // and the bump scales by its home volume (unsigned × venueShare). An away week puts
+  // nothing on the stadium's stations — the watch parties are nightlife, not transit.
+  var gameDayLoad = gameDayLoadByHood_(S);
+  var gameDayHoods = Object.keys(gameDayLoad);
+  var gameDay = gameDayHoods.length > 0;
+  var gameDayPeak = 0;
+  for (var gdh = 0; gdh < gameDayHoods.length; gdh++) gameDayPeak = Math.max(gameDayPeak, gameDayLoad[gameDayHoods[gdh]]);
 
   // engine.183: initiative build phases → the stations/corridors they touch.
   var initiativeEffects = initiativeTransitEffects_(S);
@@ -152,6 +159,8 @@ function updateTransitMetrics_Phase2_(ctx) {
     events: majorEvents,
     gameDay: gameDay,
     gameDayHoods: gameDayHoods,
+    gameDayLoad: gameDayLoad,
+    gameDayPeak: gameDayPeak,
     eventHoods: eventSummary.byHood,
     initiatives: initiativeEffects,
     // engine.93 Task 9: the commute matrix rides along so per-station ridership
@@ -366,11 +375,11 @@ function calculateStationMetrics_(station, context, demographics, rng) {
                                     [station.neighborhood].concat(station.corridors || []));
 
   // engine.183: game day lands on the stations serving where the game IS
-  // (feed HomeNeighborhood ∪ S.sportsZones), not on a station named 'Coliseum'.
+  // (the home franchise's venue, engine.204/205), not on a station named 'Coliseum'.
   var gameHoodsHere = intersectHoods_(servedHoods, context.gameDayHoods || []);
   var gameDayHere = context.gameDay && gameHoodsHere.length > 0;
   if (gameDayHere) {
-    ridershipMod *= (1 + TRANSIT_FACTORS.GAMEDAY_RIDERSHIP_BOOST);
+    ridershipMod *= (1 + TRANSIT_FACTORS.GAMEDAY_RIDERSHIP_BOOST * gameDayLoadAt_(gameHoodsHere, context.gameDayLoad));
     causes.push('game day (' + gameHoodsHere.join(', ') + ')');
   }
 
@@ -506,7 +515,7 @@ function calculateCorridorTraffic_(corridor, context, rng) {
   var gameHoodsHere = intersectHoods_(hoods, context.gameDayHoods || []);
   var gameDayHere = context.gameDay && gameHoodsHere.length > 0;
   if (gameDayHere) {
-    trafficMod *= (1 + TRANSIT_FACTORS.GAMEDAY_TRAFFIC_INCREASE);
+    trafficMod *= (1 + TRANSIT_FACTORS.GAMEDAY_TRAFFIC_INCREASE * gameDayLoadAt_(gameHoodsHere, context.gameDayLoad));
     causes.push('game day (' + gameHoodsHere.join(', ') + ')');
   }
 
@@ -576,7 +585,7 @@ function calculateTrafficModLocal_(context) {
   var events = context.events || 0;
   if (events > 0) mod *= (1 + events * 0.1);
 
-  if (context.gameDay) mod *= 1.25;
+  if (context.gameDay) mod *= 1 + 0.25 * (Number(context.gameDayPeak) || 0);   // engine.204/205: by home volume
 
   return mod;
 }
@@ -664,17 +673,29 @@ function summarizePrevCycleEvents_(worldEvents) {
  * @return {Array<string>}
  */
 function gameDayHoodsFor_(S) {
-  var out = [];
-  var entries = (S && S.sportsFeedEntries) || [];
-  for (var i = 0; i < entries.length; i++) {
-    var h = String(entries[i].homeNeighborhood || entries[i].neighborhood || '').replace(/^\s+|\s+$/g, '');
-    if (h && out.indexOf(h) < 0) out.push(h);
-  }
-  var zones = (S && S.sportsZones) || [];
-  for (var z = 0; z < zones.length; z++) {
-    if (zones[z] && out.indexOf(zones[z]) < 0) out.push(zones[z]);
+  return Object.keys(gameDayLoadByHood_(S));
+}
+
+// engine.204/205 §2.2: {hood: home volume} for every franchise that played at home this
+// Cycle — unsigned × venueShare at its own venue (max when two franchises share a hood).
+function gameDayLoadByHood_(S) {
+  var out = {};
+  var weeks = (S && S.sportsWeek) || {};
+  for (var f in weeks) {
+    if (!weeks.hasOwnProperty(f) || !(weeks[f] && weeks[f].h > 0)) continue;
+    var x = (Number(weeks[f].unsigned) || 0) * (Number(weeks[f].venueShare) || 0);
+    var venue = weeks[f].venue || [];
+    for (var i = 0; i < venue.length; i++) {
+      if (venue[i] && !(out[venue[i]] >= x)) out[venue[i]] = x;
+    }
   }
   return out;
+}
+
+function gameDayLoadAt_(hoods, load) {
+  var x = 0;
+  for (var i = 0; i < (hoods || []).length; i++) x = Math.max(x, Number((load || {})[hoods[i]]) || 0);
+  return x;
 }
 
 /**
@@ -779,8 +800,7 @@ function countMajorEvents_(worldEvents) {
  * @return {boolean}
  */
 function isGameDay_(ctx) {
-  var S = ctx.summary || {};
-  return ((S.sportsFeedEntries || []).length > 0);
+  return gameDayHoodsFor_(ctx.summary || {}).length > 0;   // engine.204/205: a home game
 }
 
 /**

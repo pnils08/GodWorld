@@ -573,12 +573,11 @@
 
 ### updateTransitMetrics.js
 - **updateTransitMetrics_Phase2_(ctx)**
-  Reads: S.absoluteCycle, S.commuteFlows, S.holiday, S.previousCycleState, S.season, S.sportsFeedEntries, S.sportsZones, S.transitMetrics, S.transitState, S.weather
+  Reads: S.absoluteCycle, S.commuteFlows, S.holiday, S.previousCycleState, S.season, S.sportsWeek, S.transitMetrics, S.transitState, S.weather
   Writes: S.transitMetrics, S.transitState
   RNG: ctx.rng / safeRand_(ctx)
 
 - **calculateStationMetrics_(station, context, demographics, rng)**
-  Reads: S.sportsZones
 
 - **intersectHoods_(a, b)**
 
@@ -598,7 +597,11 @@
 - **summarizePrevCycleEvents_(worldEvents)**
 
 - **gameDayHoodsFor_(S)**
-  Reads: S.sportsFeedEntries, S.sportsZones
+
+- **gameDayLoadByHood_(S)**
+  Reads: S.sportsWeek
+
+- **gameDayLoadAt_(hoods, load)**
 
 - **initiativeTransitEffects_(S)**
   Reads: S.initiativeImplementationEffects
@@ -606,7 +609,6 @@
 - **countMajorEvents_(worldEvents)**
 
 - **isGameDay_(ctx)**
-  Reads: S.sportsFeedEntries
 
 - **sumRidership_(stationMetrics)**
 
@@ -698,7 +700,7 @@
 - **crisisSpikeDescription_(domain, severity, neighborhood)**
 
 - **generateCrisisSpikes_(ctx)**
-  Reads: S.cityDynamics, S.cycleId, S.economicMood, S.eventsGenerated, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.sportsSeason, S.sportsZones, S.weather, S.weatherMood, S.worldEvents
+  Reads: S.cityDynamics, S.cycleId, S.economicMood, S.eventsGenerated, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.sportsCity, S.sportsSeason, S.sportsWeek, S.weather, S.weatherMood, S.worldEvents
   Writes: S.eventsGenerated, S.worldEvents
   Config: ctx.config.cycleCount
   RNG: ctx.rng / safeRand_(ctx)
@@ -1194,7 +1196,7 @@
   RNG: ctx.rng / safeRand_(ctx)
 
 - **detectNewBonds_(ctx)**
-  Reads: S.cycleActiveCitizens, S.cycleId, S.holidayLabel
+  Reads: S.cycleActiveCitizens, S.cycleId, S.holidayLabel, S.sportsCity, S.sportsZones
   Config: ctx.config.cycleCount
   RNG: ctx.rng / safeRand_(ctx)
 
@@ -2887,7 +2889,7 @@
 
 ### cityEveningSystems.js
 - **buildCityEveningSystems_(ctx)**
-  Reads: S.canonHoods, S.cityDynamics, S.cityEventDetails, S.cityEvents, S.civicLoad, S.crowdHotspots, S.economicMood, S.eveningSports, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.neighborhoodDynamics, S.neighborhoodEconomies, S.neighborhoodState, S.nightlife, S.season, S.shockFlag, S.sportsNeighborhoodEffects, S.sportsSeason, S.sportsZones, S.weather, S.weatherMood, S.worldEvents
+  Reads: S.canonHoods, S.cityDynamics, S.cityEventDetails, S.cityEvents, S.civicLoad, S.crowdHotspots, S.economicMood, S.eveningSports, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.neighborhoodDynamics, S.neighborhoodEconomies, S.neighborhoodState, S.nightlife, S.season, S.shockFlag, S.sportsCity, S.sportsNeighborhoodEffects, S.sportsSeason, S.sportsWeek, S.sportsZones, S.weather, S.weatherMood, S.worldEvents
   Writes: S.crowdHotspots, S.crowdMap, S.eveningSafety, S.eveningSystemsCalendarContext, S.eveningTraffic, S.nightShiftLoad, S.nightlifeVolume, S.weatherImpact, S.weatherType
   Sheets: World_Population
 
@@ -3180,14 +3182,14 @@
 - **pulseFoldDelta_(pulse, key)**
 
 - **saveV3NeighborhoodMap_(ctx)**
-  Reads: S.chaosNeighborhoodFold, S.cityDynamics, S.crimeMetrics, S.cycleId, S.demographicDrift, S.eventArcs, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.migrationDrift, S.neighborhoodDynamics, S.neighborhoodMigration, S.neighborhoodPulse, S.sportsSeason, S.sportsZones, S.storyHooks, S.storySeeds, S.v3Arcs, S.weather, S.worldEvents
+  Reads: S.chaosNeighborhoodFold, S.cityDynamics, S.crimeMetrics, S.cycleId, S.demographicDrift, S.eventArcs, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.migrationDrift, S.neighborhoodDynamics, S.neighborhoodMigration, S.neighborhoodPulse, S.sportsSeason, S.sportsWeek, S.sportsZones, S.storyHooks, S.storySeeds, S.v3Arcs, S.weather, S.worldEvents
   Config: ctx.config.cycleCount
   Sheets: Neighborhood_Map
   RNG: ctx.rng / safeRand_(ctx)
 
 - **ensureNeighborhoodMapSchemaAppendOnly_(ss, sheetName, headers)**
 
-- **buildHolidayNeighborhoodMods_(holiday, isFirstFriday, isCreationDay, sportsSeason)**
+- **buildHolidayNeighborhoodMods_(holiday, isFirstFriday, isCreationDay, sportsSeason, sportsWeek)**
 
 - **getDemographicMarkerV35_(neighborhood, baseLabel, arcByNeighborhood, summary, holiday, isFirstFriday, isCreationDay)**
 
@@ -4489,4 +4491,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1597
+**Functions mapped:** 1599

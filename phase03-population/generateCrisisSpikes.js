@@ -122,10 +122,12 @@ function generateCrisisSpikes_(ctx) {
     baseChance -= 0.12;
   }
 
-  // Championship/playoffs may increase safety-related incidents (crowds)
-  if (sportsSeason === "championship") {
+  // A big game week's crowds may increase safety-related incidents — engine.204/205: by the
+  // week's band (top/high carry the old championship/playoff values), never the phase word
+  var sportsBandCr = (S.sportsCity && S.sportsCity.band) || 'quiet';
+  if (sportsBandCr === "top") {
     baseChance += 0.08;
-  } else if (sportsSeason === "playoffs" || sportsSeason === "post-season") {
+  } else if (sportsBandCr === "high") {
     baseChance += 0.05;
   }
 
@@ -207,9 +209,9 @@ function generateCrisisSpikes_(ctx) {
     }
 
     // Championship increases safety crisis risk (crowds, celebrations)
-    if (dom.name === 'SAFETY' && sportsSeason === "championship") {
+    if (dom.name === 'SAFETY' && sportsBandCr === "top") {
       dom.weight += 0.3;
-    } else if (dom.name === 'SAFETY' && (sportsSeason === "playoffs" || sportsSeason === "post-season")) {
+    } else if (dom.name === 'SAFETY' && sportsBandCr === "high") {
       dom.weight += 0.15;
     }
 
@@ -283,9 +285,13 @@ function generateCrisisSpikes_(ctx) {
     // Was hardcoded to Jack London + Downtown. Those are correct only until a
     // franchise opens in Baylight; after that this would keep sending crowd
     // risk to a district with no game in it.
-    var sportsZones_ = S.sportsZones || ['Jack London', 'Downtown'];
-    if (sportsSeason === 'championship' && sportsZones_.indexOf(n.name) >= 0) {
-      n.weight += 0.3;
+    // engine.204/205: by each franchise's home volume at its own venue (cap .3, the old
+    // championship value) — an away week puts no stadium crowd anywhere
+    var sportsWeeksCr = S.sportsWeek || {};
+    for (var swc in sportsWeeksCr) {
+      if (!sportsWeeksCr.hasOwnProperty(swc)) continue;
+      if ((sportsWeeksCr[swc].venue || []).indexOf(n.name) < 0) continue;
+      n.weight += 0.3 * Math.min(1, (Number(sportsWeeksCr[swc].unsigned) || 0) * (Number(sportsWeeksCr[swc].venueShare) || 0));
     }
 
     // Chinatown during Lunar New Year
@@ -312,7 +318,7 @@ function generateCrisisSpikes_(ctx) {
   }
 
   // Crowd holidays can increase severity
-  if (crowdHolidays.indexOf(holiday) >= 0 || sportsSeason === 'championship') {
+  if (crowdHolidays.indexOf(holiday) >= 0 || sportsBandCr === 'top') {
     severityPool = ['low', 'medium', 'medium', 'medium', 'high', 'high'];
   }
 

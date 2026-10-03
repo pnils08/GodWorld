@@ -94,9 +94,9 @@ function run(S, opts) {
 // 3. Feed row in Baylight → Coliseum + I-880 take the game, Broadway/12th St do not
 {
   const base = run({ sportsFeedEntries: [], sportsZones: ['Baylight District'] });
-  const r = run({ sportsFeedEntries: [{ homeNeighborhood: 'Baylight District' }], sportsZones: ['Baylight District'] });
-  eq(r.S.transitMetrics.factors.gameDay, true, 'feed row → game day');
-  eq(r.S.transitMetrics.factors.gameDayHoods.join(','), 'Baylight District', 'game-day hoods from the feed');
+  const r = run({ sportsWeek: { Oaks: { h: 3, g: 3, unsigned: 1, venueShare: 1, venue: ['Baylight District'] } }, sportsZones: ['Baylight District'] });
+  eq(r.S.transitMetrics.factors.gameDay, true, 'a home week → game day');
+  eq(r.S.transitMetrics.factors.gameDayHoods.join(','), 'Baylight District', 'game-day hoods = the franchise venue');
   ok(r.by['Coliseum'].factors.indexOf('game day (Baylight District)') >= 0, 'Coliseum row names the game');
   ok(r.by['Coliseum'].notes.indexOf('game day crowds') >= 0, 'Coliseum notes: game day crowds');
   eq(r.by['Coliseum'].ridershipVolume, Math.round(base.by['Coliseum'].ridershipVolume * 1.3), 'Coliseum +30% on game day');
@@ -106,10 +106,20 @@ function run(S, opts) {
   ok(r.by['Broadway'].factors.indexOf('game day') < 0 && r.by['Grand Ave'].factors.indexOf('game day') < 0, 'Broadway / Grand Ave do not');
 }
 
+
+// engine.204/205: an away week is no game day; a partial home week scales the bump
+{
+  const base = run({ sportsFeedEntries: [], sportsZones: ['Baylight District'] });
+  const away = run({ sportsFeedEntries: [{ homeNeighborhood: 'Baylight District' }], sportsWeek: { Oaks: { h: 0, g: 2, unsigned: 0.4, venueShare: 0, venue: ['Baylight District'] } }, sportsZones: ['Baylight District'] });
+  eq(away.S.transitMetrics.factors.gameDay, false, 'an away week (typed hood or not) → no game day');
+  const half = run({ sportsWeek: { Oaks: { h: 1, g: 2, unsigned: 0.5, venueShare: 0.5, venue: ['Baylight District'] } }, sportsZones: ['Baylight District'] });
+  eq(half.by['Coliseum'].ridershipVolume, Math.round(base.by['Coliseum'].ridershipVolume * 1.075), 'Coliseum +30% × home volume .25 = +7.5%');
+}
+
 // 4. Legacy zones (feed row without a hood) → Jack London / Downtown stations + corridors
 {
-  const r = run({ sportsFeedEntries: [{ teamsUsed: "A's" }], sportsZones: ['Jack London', 'Downtown'] });
-  eq(r.S.transitMetrics.factors.gameDayHoods.join(','), 'Jack London,Downtown', 'zones fill in when the feed row has no hood');
+  const r = run({ sportsWeek: { "A's": { h: 2, g: 2, unsigned: 1, venueShare: 1, venue: ['Jack London', 'Downtown'] } }, sportsZones: ['Jack London', 'Downtown'] });
+  eq(r.S.transitMetrics.factors.gameDayHoods.join(','), 'Jack London,Downtown', 'a home week lands on the franchise\'s own venue');
   ok(r.by['12th St Oakland City Center'].factors.indexOf('game day') >= 0, '12th St takes the legacy game');
   ok(r.by['West Oakland'].factors.indexOf('game day') >= 0, 'West Oakland station (Jack London corridor) too');
   ok(r.by['Coliseum'].factors.indexOf('game day') < 0, 'Coliseum does not');
@@ -206,7 +216,7 @@ function run(S, opts) {
 // 9. Story signals name the drivers
 {
   const v3 = [['Y3C1', 106, 'Fair', 'community', 'CELEBRATION', 'low', 'Fruitvale']];
-  const r = run({ sportsFeedEntries: [{ homeNeighborhood: 'Baylight District' }], sportsZones: ['Baylight District'],
+  const r = run({ sportsWeek: { Oaks: { h: 3, g: 3, unsigned: 1, venueShare: 1, venue: ['Baylight District'] } }, sportsZones: ['Baylight District'],
     initiativeImplementationEffects: { transit: [{ name: 'Fruitvale Transit Hub Phase II', phase: 'design-phase', intensity: 0.2, domain: 'transit', hoods: ['Fruitvale'], baylight: false }] } }, { v3 });
   const sig = T.getTransitStorySignals_(r.ctx);
   const gd = sig.filter(s => s.type === 'gameday_transit')[0];

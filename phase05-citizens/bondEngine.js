@@ -1186,11 +1186,14 @@ function detectNewBonds_(ctx) {
       }
 
       // SPORTS RIVALRIES during playoffs/championship
-      if (sportsSeason === 'championship' || sportsSeason === 'playoffs') {
-        var sportsHoods = ['Jack London', 'Downtown'];
+      // engine.204/205 §2.2: on a big game week (band high or top), not the phase word; the
+      // draw scales with the week's intensity; the hoods are where the sport is (S.sportsZones)
+      var sportsCityB = (ctx.summary && ctx.summary.sportsCity) || {};
+      if (typeof sportsBandAtLeast_ === 'function' && sportsBandAtLeast_(sportsCityB, 'high')) {
+        var sportsHoods = (ctx.summary && ctx.summary.sportsZones) || [];
         var inSportsZone = sportsHoods.indexOf(nhA) >= 0 || sportsHoods.indexOf(nhB) >= 0;
 
-        if (inSportsZone && rng() < 0.3) {
+        if (inSportsZone && rng() < 0.3 * Math.min(1, Number(sportsCityB.intensity) || 0)) {
           newBonds.push(makeBond_(
             citizenA, citizenB,
             BOND_TYPES.SPORTS_RIVAL,

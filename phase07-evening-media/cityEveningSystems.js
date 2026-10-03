@@ -190,8 +190,10 @@ function buildCityEveningSystems_(ctx) {
   if (isFirstFriday) trafficScore += 3;
   if (isCreationDay) trafficScore += 2;
 
-  if (sportsSeason === "championship") trafficScore += 4;
-  if (sportsSeason === "playoffs") trafficScore += 3;
+  // engine.204/205: a game week's band, not the phase word (top/high carry the old +4/+3)
+  var sportsCityEv = S.sportsCity || {};
+  if (sportsCityEv.band === "top") trafficScore += 4;
+  else if (sportsCityEv.band === "high") trafficScore += 3;
 
   var eveningTraffic = "light";
   if (trafficScore >= 10) eveningTraffic = "gridlock";
@@ -250,8 +252,8 @@ function buildCityEveningSystems_(ctx) {
   if (isFirstFriday) volume += 2;
   if (isCreationDay) volume += 1;
 
-  if (sportsSeason === "championship") volume += 3;
-  if (sportsSeason === "playoffs") volume += 2;
+  if (sportsCityEv.band === "top") volume += 3;           // engine.204/205: by band
+  else if (sportsCityEv.band === "high") volume += 2;
 
   if (culturalActivity >= 1.4) volume += 1;
 
@@ -329,11 +331,10 @@ function buildCityEveningSystems_(ctx) {
 
   if (isCreationDay) applyCrowdBoosts_(crowd, hoodsWithScene_(ctx, 'CreationDay'));
 
-  if (sportsSeason === "championship") {
-    bump(sportsHoods0, 4); bump(eveningHoods, 2);
-  } else if (sportsSeason === "playoffs") {
-    bump(sportsHoods0, 3); bump(eveningHoods, 1);
-  }
+  // engine.204/205: the evening districts fill on a big game week, home or away (watch
+  // parties); the stadium's own crowd is the home volume further down
+  if (sportsCityEv.band === "top") bump(eveningHoods, 2);
+  else if (sportsCityEv.band === "high") bump(eveningHoods, 1);
 
   // Event-driven distribution (details)
   for (var ei = 0; ei < cityEventDetails.length; ei++) {
@@ -401,15 +402,19 @@ function buildCityEveningSystems_(ctx) {
   // Community engagement → the hoods most engaged this cycle
   if (communityEngagement >= 1.4) bump(topBy(S.neighborhoodDynamics || {}, 'communityEngagement', 1, 2), 1);
 
-  // v2.4: Sports neighborhood effects (game-day crowd boost)
-  var sportsEffects = S.sportsNeighborhoodEffects || {};
-  var sportsHoods = Object.keys(sportsEffects);
-  for (var shi = 0; shi < sportsHoods.length; shi++) {
-    var sHood = sportsHoods[shi];
-    var effects = sportsEffects[sHood];
-    if (effects && effects.traffic > 0) {
-      if (!crowd[sHood]) crowd[sHood] = 0;
-      crowd[sHood] += Math.round(effects.traffic * 10);
+  // engine.204/205 §2.2: the game-day crowd is at each franchise's own venue, by its home
+  // volume (unsigned × venueShare × 10) — an away week puts no one at the stadium. Replaces
+  // the S.sportsNeighborhoodEffects loop, which was keyed on the typed HomeNeighborhood.
+  var sportsWeeksEv = S.sportsWeek || {};
+  for (var swf in sportsWeeksEv) {
+    if (!sportsWeeksEv.hasOwnProperty(swf)) continue;
+    var swkEv = sportsWeeksEv[swf];
+    var homeCrowd = Math.round((Number(swkEv.unsigned) || 0) * (Number(swkEv.venueShare) || 0) * 10);
+    if (!(homeCrowd > 0)) continue;
+    var swVenue = swkEv.venue || [];
+    for (var svi = 0; svi < swVenue.length; svi++) {
+      if (!crowd[swVenue[svi]]) crowd[swVenue[svi]] = 0;
+      crowd[swVenue[svi]] += homeCrowd;
     }
   }
 

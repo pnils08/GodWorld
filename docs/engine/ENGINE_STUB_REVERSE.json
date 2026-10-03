@@ -2,7 +2,7 @@
   "generated": "2026-10-03",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 180,
-  "functionsMapped": 1597,
+  "functionsMapped": 1599,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -1248,8 +1248,11 @@
       "readers": [
         "phase01-config/godWorldEngine2.js::updateWorldPopulation_",
         "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
+        "phase03-population/generateCrisisSpikes.js::generateCrisisSpikes_",
+        "phase05-citizens/bondEngine.js::detectNewBonds_",
         "phase06-analysis/applyShockMonitor.js::applyShockMonitor_",
         "phase06-analysis/economicRippleEngine.js::calculateEconomicMood_",
+        "phase07-evening-media/cityEveningSystems.js::buildCityEveningSystems_",
         "phase07-evening-media/mediaFeedbackEngine.js::runMediaFeedbackEngine_"
       ]
     },
@@ -2172,10 +2175,15 @@
         "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
         "phase02-world-state/applySportsSeason.js::applySportsSeason_",
         "phase02-world-state/applySportsSeason.js::normalizeOaklandFeedTeam_",
+        "phase02-world-state/updateTransitMetrics.js::gameDayLoadByHood_",
+        "phase02-world-state/updateTransitMetrics.js::updateTransitMetrics_Phase2_",
+        "phase03-population/generateCrisisSpikes.js::generateCrisisSpikes_",
         "phase05-citizens/applyGameNightMoments.js::applyGameNightMoments_",
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
         "phase06-analysis/economicRippleEngine.js::calculateNeighborhoodEconomies_",
-        "phase06-analysis/economicRippleEngine.js::detectCalendarRipples_"
+        "phase06-analysis/economicRippleEngine.js::detectCalendarRipples_",
+        "phase07-evening-media/cityEveningSystems.js::buildCityEveningSystems_",
+        "phase08-v3-chicago/v3NeighborhoodWriter.js::saveV3NeighborhoodMap_"
       ]
     },
     "weatherEvents": {
@@ -2243,10 +2251,7 @@
       "readers": [
         "phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_",
         "phase02-world-state/applyInitiativeImplementationEffects.js::sportsHasOpenedBaylight_",
-        "phase02-world-state/updateTransitMetrics.js::calculateStationMetrics_",
-        "phase02-world-state/updateTransitMetrics.js::gameDayHoodsFor_",
-        "phase02-world-state/updateTransitMetrics.js::updateTransitMetrics_Phase2_",
-        "phase03-population/generateCrisisSpikes.js::generateCrisisSpikes_",
+        "phase05-citizens/bondEngine.js::detectNewBonds_",
         "phase06-analysis/economicRippleEngine.js::runEconomicRippleEngine_",
         "phase07-evening-media/applyStorySeeds.js::applyStorySeeds_",
         "phase07-evening-media/buildEveningFamous.js::buildEveningFamous_",
@@ -2363,9 +2368,6 @@
         "phase02-world-state/applySportsSeason.js::applySportsSeason_"
       ],
       "readers": [
-        "phase02-world-state/updateTransitMetrics.js::gameDayHoodsFor_",
-        "phase02-world-state/updateTransitMetrics.js::isGameDay_",
-        "phase02-world-state/updateTransitMetrics.js::updateTransitMetrics_Phase2_",
         "phase05-citizens/applyGameNightMoments.js::applyGameNightMoments_",
         "phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_",
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",

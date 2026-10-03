@@ -1735,8 +1735,17 @@ function generateCitizensEvents_(ctx) {
   var gameNightPool = [];
   var gnGame = null;
   var gnFeed = S.sportsFeedEntries || [];
-  for (var gnf = 0; gnf < gnFeed.length; gnf++) {
-    if (String(gnFeed[gnf].eventType || '').toLowerCase().indexOf('game') >= 0) { gnGame = gnFeed[gnf]; break; }
+  // engine.204/205 §2.2: the gate is games PLAYED (S.sportsWeek[f].g > 0), not a row whose
+  // EventType says game; the row that names the night is that franchise's first game row
+  var gnPlayed = {}, gnAny = false, gnWeeks = S.sportsWeek || {};
+  for (var gwf in gnWeeks) {
+    if (gnWeeks.hasOwnProperty(gwf) && gnWeeks[gwf] && gnWeeks[gwf].g > 0) { gnPlayed[gwf] = true; gnAny = true; }
+  }
+  for (var gnf = 0; gnAny && gnf < gnFeed.length; gnf++) {
+    if (String(gnFeed[gnf].eventType || '').toLowerCase().indexOf('game') < 0) continue;
+    var gnTeam = (typeof normalizeOaklandFeedTeam_ === 'function') ? normalizeOaklandFeedTeam_(gnFeed[gnf].teamsUsed) : null;
+    if (gnTeam && !gnPlayed[gnTeam]) continue;
+    gnGame = gnFeed[gnf]; break;
   }
   if (gnGame) {
     var gnBucket = (typeof gameNightBucket_ === 'function') ? gameNightBucket_(gnGame) : 'neutral';

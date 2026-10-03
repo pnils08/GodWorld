@@ -468,8 +468,9 @@ function applyCityDynamics_(ctx) {
     }
 
     // At the stadium: the cluster holding a franchise's venue, by that franchise's home
-    // volume (an away week puts nothing at the stadium). Baylight District sits in no
-    // cluster, so a Baylight home week lifts no cluster here — the hood writer reaches it.
+    // volume (an away week puts nothing at the stadium). engine.281 (c): the venue's cluster
+    // is its named-or-adopted one (hoodClusters) — Baylight District, unnamed, adopts
+    // EAST_OAKLAND through its canon neighbour East Oakland (Coliseum site, D5).
     var weeks = S.sportsWeek || {};
     for (var f in weeks) {
       if (!weeks.hasOwnProperty(f)) continue;
@@ -477,7 +478,7 @@ function applyCityDynamics_(ctx) {
       if (!(x > 0)) continue;
       var venue = weeks[f].venue || [];
       for (var vi = 0; vi < venue.length; vi++) {
-        if (neighborhoodToCluster_(venue[vi], CLUSTERS) !== clusterName) continue;
+        if (hoodClusters.byHood[venue[vi]] !== clusterName) continue;
         m.traffic *= 1 + 0.15 * x;
         m.nightlife *= 1 + 0.15 * x;
         break;
@@ -1126,6 +1127,10 @@ function applyCityDynamics_(ctx) {
     if (wxe && wxe.salient && (wxe.type === 'storm' || wxe.type === 'flood_conditions' || wxe.type === 'heat_wave')) weatherCatastrophe = true;
   }
 
+  // Every canon hood's cluster, named + adopted (see the per-hood pass below). Built before
+  // the first pass so the stadium lift in applySportsModifiers_ finds an adopted venue hood.
+  var hoodClusters = buildHoodClusterAssignment_(ctx, CLUSTERS);
+
   // First pass: compute cluster dynamics
   for (var cname in CLUSTERS) {
     if (!CLUSTERS.hasOwnProperty(cname)) continue;
@@ -1378,8 +1383,7 @@ function applyCityDynamics_(ctx) {
   // Oakland). An unclustered hood now ADOPTS the cluster most of its canon
   // neighbours belong to (Neighborhood_Map.Adjacent) as its starting point only:
   // cluster metrics, the crime ripple and the city blend are unchanged; the
-  // per-hood pass below moves it by its own inputs.
-  var hoodClusters = buildHoodClusterAssignment_(ctx, CLUSTERS);
+  // per-hood pass below moves it by its own inputs. (hoodClusters is built before the first pass.)
   for (var cname2 in CLUSTERS) {
     if (!CLUSTERS.hasOwnProperty(cname2)) continue;
     var clusterM = clusterDynamics[cname2];

@@ -41,6 +41,7 @@ var clampSent = function(n){ return clamp(n,-1,1); };
 function safeNum_(v,d){ if(d===undefined)d=0; var n=Number(v); return isFinite(n)?n:d; }
 var S = {}; var CLUSTERS = { DOWNTOWN_CORE: { hoods: ['Downtown'] } };
 function neighborhoodToCluster_(h){ return h === 'Downtown' ? 'DOWNTOWN_CORE' : null; }
+var hoodClusters = { byHood: { Downtown: 'DOWNTOWN_CORE' } };   // engine.281 (c): the venue reads named + adopted
 function __setS(x){ S = x; }
 `;
 const M = new Function(HELPERS + NAMES.map(grab).join('\n') + '\nreturn {__setS:__setS,' + NAMES.join(',') + '};')();

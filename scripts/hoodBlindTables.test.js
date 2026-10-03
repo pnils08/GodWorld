@@ -54,7 +54,8 @@ t('every hood has a zone, a numeric attention, and a mirrored adjacency', () => 
   const ctx = makeCtx(sb);
   HOODS.forEach(h => { assert.ok(sb.getHoodWeatherZone_(ctx, h)); assert.ok(isFinite(sb.getHoodAttention_(ctx, h))); assert.ok(sb.getAdjacentHoods_(ctx, h).length >= 1, h + ' has no neighbours'); });
   assert.ok(sb.getAdjacentHoods_(ctx, 'West Oakland').includes('Downtown')); // Downtown lists West Oakland → mirrored
-  assert.ok(sb.getAdjacentHoods_(ctx, 'Baylight District').includes('West Oakland'));
+  // engine.281 (c): Baylight is the Coliseum site (INSTITUTIONS: D5, East Oakland's Coliseum/Elmhurst) — not the waterfront
+  assert.strictEqual(JSON.stringify(sb.getAdjacentHoods_(ctx, 'Baylight District')), '["East Oakland"]');
   HOODS.forEach(h => sb.getAdjacentHoods_(ctx, h).forEach(o => assert.ok(sb.getAdjacentHoods_(ctx, o).includes(h), h + '↔' + o + ' not symmetric')));
 });
 t('a child area in Adjacent folds to its parent; an off-map name throws at seed', () => {
@@ -230,7 +231,22 @@ t('unclustered hoods adopt the cluster of their canon neighbours; none left unpl
   assert.strictEqual(all.length, 22);
   assert.strictEqual(new Set(all).size, 22);
   ['Rockridge', 'Temescal'].forEach(h => assert.strictEqual(r.byHood[h], 'NORTH_HILLS'));   // named members keep their cluster
+  assert.strictEqual(r.byHood['Baylight District'], 'EAST_OAKLAND');   // engine.281 (c): the Coliseum site
   assert.ok(/buildHoodClusterAssignment_\(ctx, CLUSTERS\)/.test(src('phase02-world-state/applyCityDynamics.js')));
+});
+t('engine.281 (c): a Baylight home week lifts EAST_OAKLAND at the stadium; an away week lifts nothing', () => {
+  const run = (venueShare) => {
+    const ctx = makeCtx(sb);
+    Object.assign(ctx, { config: {}, writeIntents: [], mode: {} });
+    Object.assign(ctx.summary, { cycleId: 901, season: 'Fall', holiday: 'none', sportsSeason: 'off-season', economicMood: 50,
+      sportsCity: {}, sportsWeek: { Oaks: { unsigned: 1, venueShare, venue: ['Baylight District'] } } });
+    sb.applyCityDynamics_(ctx);
+    return ctx.summary.clusterDynamics;
+  };
+  const home = run(1), away = run(0);
+  assert.ok(home.EAST_OAKLAND.traffic > away.EAST_OAKLAND.traffic * 1.1, 'EAST_OAKLAND traffic ' + away.EAST_OAKLAND.traffic + ' → ' + home.EAST_OAKLAND.traffic);
+  ['DOWNTOWN_CORE', 'WATERFRONT_WEST', 'LAKE_CORRIDOR', 'NORTH_HILLS'].forEach(c =>
+    assert.strictEqual(home[c].traffic, away[c].traffic, c + ' moved on a Baylight home week'));
 });
 
 console.log('T9 media coverage reaches every canon hood, weighted by the authored attention knob (engine.240)');

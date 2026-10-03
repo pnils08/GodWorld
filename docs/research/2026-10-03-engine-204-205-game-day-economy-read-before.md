@@ -49,7 +49,7 @@ Everything in §1 was read from code or the beats mirror on 2026-10-03 (mirror p
 
 ### 1.4 Consumer census today — every numeric site keys on a phase word, none on the record
 
-62 files read `S.sportsSeason`; **174** `=== 'championship' | 'playoffs' | 'late-season'` tests across `phase*/`. The numeric ones this build converts:
+62 files read `S.sportsSeason`; **174** `=== championship | playoffs | late-season` tests across `phase*/` (both quote styles: 101 double-quoted, 73 single-quoted — a single-quote-only grep reads 85 across `phase*/ lib/ utilities/`; agy review hunt 1). The numeric ones this build converts:
 
 | Site | File:line | Keys on | Class (Q2) |
 |---|---|---|---|
@@ -62,6 +62,7 @@ Everything in §1 was read from code or the beats mirror on 2026-10-03 (mirror p
 | Bonds | `bondEngine.js:1188-1200` | phase word; **hardcoded `['Jack London','Downtown']`** | volume at venue |
 | Transit | `updateTransitMetrics.js:135-136`, `:666-673`, `:781-783` | any feed row = game day; hoods = typed `HomeNeighborhood` ∪ zones | volume at venue |
 | Game night gate | `generateCitizensEvents.js:1737` | first row whose `EventType` contains `game`; weight from `sportsSentimentBoost` (`:1743`, engine.194's constant) | gate only (this build); magnitude is 194's |
+| Media feedback | `mediaFeedbackEngine.js:533-541` `hopeBoost` 0.15 / 0.10 / 0.08 on the phase word; `:1341` sports topic multiplier 2.0 / 1.5 on the word (agy review hunt 7 — missed in the first draft); `:246-258` coverage-profile labels | result (hope follows how it went); topic weight = volume |
 | Shock monitor | `applyShockMonitor.js:83-92` | **`S.simMonth` 4–10 = "in-season"** — the retired calendar, still read | delete |
 | Prose / pools | `textureTriggers.js:272-283`, `applyStorySeeds.js:724`, hooks | phase word; venue literal `'Jack London'` | stay on lens words; venue from `S.sportsZones[0]` |
 
@@ -124,6 +125,7 @@ Research §5's migration path: convert *when* a branch fires without retuning *h
 | Bonds | `sportsHoods` = `S.sportsZones`; rivalry draw `0.3 × intensity` at band ≥ high |
 | Transit | `isGameDay_` = any franchise with `h > 0`; `gameDayHoodsFor_` = `venue` of those franchises (the typed hood is no longer read); per-station bump × `unsigned × venueShare` |
 | Game night gate | `g > 0` for any franchise, not "EventType contains game"; the `gnI` constant at `:1743` is 194's and stays |
+| Media feedback | `hopeBoost` `0.05 + 0.10 × max(0, signedCity) × reach` (a losing week adds no hope; the 0.05 floor stays); topic multiplier `1 + intensity × reach` (top ≈ 2.0, high ≈ 1.5 — today's constants at the band); the `:246-258` coverage labels stay on the lens word |
 | Shock monitor | the `simMonth` branch deleted; sports threshold lift on band ≥ high |
 | Prose / pools | lens words unchanged; venue literal → `S.sportsZones[0]` |
 
@@ -157,7 +159,7 @@ Research §5's table: the per-franchise group (transit, crisis zone weight, hood
 2. Bench C110: transit game-day hoods = the A's `venue`, **not Eastlake**; evening crowd at the venue 0 (away week); one ripple on `['all']`, positive, impact < 15; no `CHAMPIONSHIP_BOOM` / `PLAYOFF_SPENDING` row.
 3. Bench, a synthetic home losing week (`H:L H:L H:L`, lens playoffs, A's): crowd and transit at the venue **up**; nightlife multiplier **below 1**; ripple **negative**; economy label one step down from `strong`; bars' `Growth_Rate` nudged down.
 4. Bench, Oaks `H:L A:L` at weight 0.35: signed small negative; nothing at band level moves (the A's carry the city); an Oaks fan's dial line is 208's, not here.
-5. `grep -c "=== 'championship'\|=== 'playoffs'\|=== 'late-season'"` over the numeric files in §1.4 reads **0**; prose files keep theirs.
+5. `grep -cE "=== *['\"](championship|playoffs|late-season)['\"]"` over the numeric files in §1.4 (both quote styles) reads **0**; prose files keep theirs.
 6. `applyShockMonitor.js` has no `simMonth` read.
 7. Live, first fire after deploy: no `Phase2-SportsSeason` row in `Engine_Errors`; `S.sportsWeek` on the packet; `ranMs` in the usual range.
 
@@ -190,6 +192,8 @@ iv. **Authored economy columns — RULED as proposed:** **delete `EconomicFootpr
 **Status after the rulings:** nothing in this document is waiting on a ruling. es builds §2 on top of the 208 week object, with agy's review folded first if it lands with FIXes.
 
 ## Changelog
+
+- 2026-10-03 02:00 (research-build, S523) — agy read-only review folded ([[2026-10-03-agy-engine-204-205-draft-review]], SHIP-WITH-FIXES): `mediaFeedbackEngine.js` `hopeBoost` + sports topic multiplier added to §1.4 and §2.2 (a real miss); the 174 count kept, with its pattern stated (both quote styles; agy's 85 is single-quoted only). Hunts 2–6 (re-litigation, C110 replay, §15, seams, sim vs mechanism) all NOTE.
 
 - 2026-10-03 01:52 (research-build, S523) — Mike ruled all four §4 calls as proposed (verbatim under §4 Rulings): priors .750/.400, weights 1.0/0.35, the reach table, delete EconomicFootprint and keep FranchiseStability + CommunityInvestment. Build-ready for es.
 

@@ -460,7 +460,7 @@ Cuts carried from the drained engine.194 row (measured C101–C106, detail in th
 ### Task 8 — engine.208 (NEW): dial 9, fandom
 RULED by Mike S446. Ships with its negative pole or not at all (engine.197's lesson). **Prerequisite accepted S447 (`0c1fa07b`):** the seven `DIALS` copies now use the existing exported source in `utilities/citizenMemory.js` (F6). Apps Script keeps its global `var`; Node keeps CommonJS imports. Remaining: poles, `DIAL_MAP` entries both directions, inheritance from household, and the cron-tone feedback channel. Verify against engine.197 criterion 4 (a spread, not two blobs) and engine.201 (does it wake citizens the pools never reach).
 
-**Read-before + proposed cut (research-build, 2026-10-02):** [[../research/2026-10-02-engine-208-fandom-dial-read-before]] — substrate measured, seed inputs measured (texture is not a seed; 44 bettors, 169 zone residents), feed round-vocabulary gap measured, four sim calls in its §4. Research §6 Q6 (summary row owns the phase) is closed as superseded by the sixth block.
+**Read-before + proposed cut (research-build, 2026-10-02):** [[../research/2026-10-02-engine-208-fandom-dial-read-before]] — substrate measured, seed inputs measured (texture is not a seed; 44 bettors, 169 zone residents), feed round-vocabulary gap measured, the §4 sim calls — **all five RULED 2026-10-02 23:29 (recorded in that doc §4 Rulings): athletes carry the dial inert and a citizen named on a feed row gets a signed life event by EventType; thin seed accepted, families + canon fans authored; round words added to the SeasonType dropdown; §2.2 magnitudes and the Oaks fan-side loss rule approved.** Build-ready for es. Research §6 Q6 (summary row owns the phase) is closed as superseded by the sixth block.
 
 
 #### Event_Content_Ledger — sports event content and fandom (builder-directed 2026-09-16)
@@ -509,6 +509,8 @@ LIVE PROD @98 + `WeekRecord` column; dead `VideoGameDate`/`VideoGame` DELETED 20
 engine.210 LIVE on PROD @97; engine.202 LIVE on PROD @98 with the `WeekRecord` column on the live feed (dead VideoGame columns deleted 2026-09-19 — 19 columns, `WeekRecord` at S) — bench-proven C115 (weekly settlement, bad-cell rejection, payouts). Smoke both at live C108. Research for Tasks 3/4/10: [[../research/2026-09-18-sports-intensity-and-game-day-economy]]. Population/economy effects defer to record-driven impact. Event_Content_Ledger selection/feedback remains under engine.208 Task 8.
 
 ## Changelog
+
+- 2026-10-02 (research-build, S522) — engine.208 read-before + cut drafted and agy-reviewed; builder ruled the five fandom sim calls the same night (athletes, seed, round words, magnitudes, Oaks fan cost) — see the research doc §4 Rulings. Dropdown gains playoff round words (ruling iii); feed-named citizens get signed life events (ruling i).
 
 - 2026-09-16 (codex) — Guarded legacy draft projection against silently dropping WeekRecord; the new contract regression fails before the guard and passes afterward.
 

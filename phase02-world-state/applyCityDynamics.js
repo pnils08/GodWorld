@@ -470,7 +470,7 @@ function applyCityDynamics_(ctx) {
     // At the stadium: the cluster holding a franchise's venue, by that franchise's home
     // volume (an away week puts nothing at the stadium). engine.281 (c): the venue's cluster
     // is its named-or-adopted one (hoodClusters) — Baylight District, unnamed, adopts
-    // EAST_OAKLAND through its canon neighbour East Oakland (Coliseum site, D5).
+    // WATERFRONT_WEST through its map neighbours West Oakland and Jack London (harbor land).
     var weeks = S.sportsWeek || {};
     for (var f in weeks) {
       if (!weeks.hasOwnProperty(f)) continue;

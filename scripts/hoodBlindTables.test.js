@@ -54,8 +54,8 @@ t('every hood has a zone, a numeric attention, and a mirrored adjacency', () => 
   const ctx = makeCtx(sb);
   HOODS.forEach(h => { assert.ok(sb.getHoodWeatherZone_(ctx, h)); assert.ok(isFinite(sb.getHoodAttention_(ctx, h))); assert.ok(sb.getAdjacentHoods_(ctx, h).length >= 1, h + ' has no neighbours'); });
   assert.ok(sb.getAdjacentHoods_(ctx, 'West Oakland').includes('Downtown')); // Downtown lists West Oakland → mirrored
-  // engine.281 (c): Baylight is the Coliseum site (INSTITUTIONS: D5, East Oakland's Coliseum/Elmhurst) — not the waterfront
-  assert.strictEqual(JSON.stringify(sb.getAdjacentHoods_(ctx, 'Baylight District')), '["East Oakland"]');
+  // Baylight is harbor land on the waterfront (Baylight District Project v1.1), beside West Oakland and Jack London
+  assert.strictEqual(JSON.stringify(sb.getAdjacentHoods_(ctx, 'Baylight District')), '["West Oakland","Jack London"]');
   HOODS.forEach(h => sb.getAdjacentHoods_(ctx, h).forEach(o => assert.ok(sb.getAdjacentHoods_(ctx, o).includes(h), h + '↔' + o + ' not symmetric')));
 });
 t('a child area in Adjacent folds to its parent; an off-map name throws at seed', () => {
@@ -231,10 +231,10 @@ t('unclustered hoods adopt the cluster of their canon neighbours; none left unpl
   assert.strictEqual(all.length, 22);
   assert.strictEqual(new Set(all).size, 22);
   ['Rockridge', 'Temescal'].forEach(h => assert.strictEqual(r.byHood[h], 'NORTH_HILLS'));   // named members keep their cluster
-  assert.strictEqual(r.byHood['Baylight District'], 'EAST_OAKLAND');   // engine.281 (c): the Coliseum site
+  assert.strictEqual(r.byHood['Baylight District'], 'WATERFRONT_WEST');   // engine.281 (c): the harbor waterfront
   assert.ok(/buildHoodClusterAssignment_\(ctx, CLUSTERS\)/.test(src('phase02-world-state/applyCityDynamics.js')));
 });
-t('engine.281 (c): a Baylight home week lifts EAST_OAKLAND at the stadium; an away week lifts nothing', () => {
+t('engine.281 (c): a Baylight home week lifts WATERFRONT_WEST at the stadium; an away week lifts nothing', () => {
   const run = (venueShare) => {
     const ctx = makeCtx(sb);
     Object.assign(ctx, { config: {}, writeIntents: [], mode: {} });
@@ -244,8 +244,8 @@ t('engine.281 (c): a Baylight home week lifts EAST_OAKLAND at the stadium; an aw
     return ctx.summary.clusterDynamics;
   };
   const home = run(1), away = run(0);
-  assert.ok(home.EAST_OAKLAND.traffic > away.EAST_OAKLAND.traffic * 1.1, 'EAST_OAKLAND traffic ' + away.EAST_OAKLAND.traffic + ' → ' + home.EAST_OAKLAND.traffic);
-  ['DOWNTOWN_CORE', 'WATERFRONT_WEST', 'LAKE_CORRIDOR', 'NORTH_HILLS'].forEach(c =>
+  assert.ok(home.WATERFRONT_WEST.traffic > away.WATERFRONT_WEST.traffic * 1.1, 'WATERFRONT_WEST traffic ' + away.WATERFRONT_WEST.traffic + ' → ' + home.WATERFRONT_WEST.traffic);
+  ['DOWNTOWN_CORE', 'LAKE_CORRIDOR', 'NORTH_HILLS', 'EAST_OAKLAND'].forEach(c =>
     assert.strictEqual(home[c].traffic, away[c].traffic, c + ' moved on a Baylight home week'));
 });
 

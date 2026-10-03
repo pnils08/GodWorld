@@ -99,6 +99,7 @@ console.log('═══ Section C — tag -> dial map');
   // engine.277 (builder 2026-10-02): job colour and routine faith attendance are plain days; the Tribune is not.
   assert('C10a Work (job colour) is a plain day', JSON.stringify(M.nudgesForEvent_('Work', 1, 'covered a double shift at the clinic')) === '{}');
   assert('C10b Faith-Practice (routine attendance) is a plain day', JSON.stringify(M.nudgesForEvent_('Faith-Practice', 1, 'caught a notable service at St. Columba')) === '{}');
+  assert('C10a2 Work and Faith-Practice are KNOWN plain-day tags, not unmapped lines', M.DIAL_MAP.hasOwnProperty('Work') && M.DIAL_MAP.hasOwnProperty('Faith-Practice'));
   assert('C10c Faith-Practice survives the calendar-suffix strip', JSON.stringify(M.nudgesForEvent_('Faith-Practice-Holiday')) === '{}');
   var joinFx = M.nudgesForEvent_('Faith', 1, 'joined the congregation at St. Columba');
   assert('C10d congregation join keeps warmth +3 / composure +2', joinFx.warmth === 3 && joinFx.composure === 2);

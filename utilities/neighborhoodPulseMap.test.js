@@ -18,7 +18,10 @@ function check(name, cond) {
   var ok = true;
   for (var tag in m.PULSE_MAP) {
     if (!m.PULSE_MAP.hasOwnProperty(tag)) continue;
-    if (RULED_EMPTY[tag]) { if (Object.keys(m.PULSE_MAP[tag]).length) { ok = false; console.error('    ruled-empty key carries deltas: ' + tag); } continue; }
+    if (RULED_EMPTY[tag]) {
+      if (Object.keys(m.PULSE_MAP[tag]).length || Object.keys(m.pulseForEvent_(tag, [], 'cut a corner on a small promise')).length) { ok = false; console.error('    ruled-empty key pulses: ' + tag); }
+      continue;
+    }
     var fx = m.pulseForEvent_(tag, [], '');
     var any = false;
     for (var k in fx) {

@@ -14,16 +14,21 @@
  * Not yet readable: the evening-media slate (what Oakland is watching) lives in
  * S.eveningMedia → world-summary texture, not a dumped tab — noted for the
  * persona build (her roster themes are streaming/mood).
+ *   The pulse (pipeline.70 seam 3) — output/cron-compare/pulse_c{N}.json from buildPulseSlice.js:
+ *     what the citizens' own pages are talking about (THE PAGES SAY) and the loudest voice on each
+ *     of the top themes as a person on the record. Absent pulse = no section, a note, nothing else.
  * Artifacts: output/slices/c{N}/celeste-tran.md · output/cron-compare/trends_slice_c{N}.json
  */
 'use strict';
 const K = require('./beatSliceKit');
+const pulseSlice = require('./buildPulseSlice');
 
 const SEAT = {
   slug: 'celeste-tran', name: 'Celeste Tran', popid: 'POP-00164', desk: 'wire',
   kind: 'beat-trends', domain: 'trends', artifact: 'trends', builder: 'buildTrendsSlice.js',
-  version: 'TRENDS-SLICE-1', nameRe: /celeste\s*tran/i,
+  version: 'TRENDS-SLICE-2', nameRe: /celeste\s*tran/i,
   tabs: ['Cultural_Ledger', 'Neighborhood_Demographics', 'Story_Hook_Deck'],
+  // + output/cron-compare/pulse_c{N}.json (pipeline.70), read soft
   approach: 'Social-trends approach: this slice is what the city is doing together — the names climbing the culture record, where people are moving, what the engine\'s hooks say is shifting. Fast, reactive, grounded: a trend claim needs a window and a number from this slice. The names and moves are real; the group chat, the binge-night, the collective mood swing are yours.',
   roomIsYours: 'the group chat, the third rewatch, who suddenly has an opinion about something nobody mentioned last month, what the city collectively decided to care about',
   build
@@ -99,6 +104,20 @@ function build(cycle, { root, beats, profiles }) {
   const hooks = K.domainHooks(beats, cycle, SEAT.name,
     /^(NEIGHBORHOOD_BOOM|NEIGHBORHOOD_RISING|NEIGHBORHOOD_COOLING|CITIZEN_RELOCATED|RENT_BURDEN_CRISIS)$/).slice(0, 8);
 
+  // pipeline.70 seam 3: the pages. The loudest voice on each of the top three themes becomes a
+  // person on the record (her sources), the top five themes ride as colour. Never a GAME-clock
+  // citizen (buildPulseSlice already excludes them and MEDIA seats).
+  const pulse = pulseSlice.load(cycle, root);
+  const pageVoices = pulse ? pulseSlice.voiceLines(pulse, 5) : [];
+  if (pulse) {
+    for (const t of pulse.themes.filter(t => t.voices.length).slice(0, 3)) {
+      const v = t.voices[0];
+      if (people.some(p => p.popid === v.popid) || K.sportsSubject(profiles, v.popid)) continue;
+      const p = K.personFromProfile(profiles, v.popid, 'has been saying it on their own page — ' + t.label + ', C' + v.cycle + ': “' + v.excerpt + '”', v.hood);
+      if (p) people.push(p);
+    }
+  }
+
   const lead = talkedAbout[0];
   const label = (lead ? lead.name + ' leads the conversation (' + lead.mediaCount + ' mentions)' : 'a quiet week on the culture record') +
     (moves.length ? '; ' + moves[0].hood + ' moves the most' : '');
@@ -111,8 +130,11 @@ function build(cycle, { root, beats, profiles }) {
     facts, people,
     deltas: { state: prev.state, vs: prev.vs },
     hooks,
-    note: people.length ? null : 'no talked-about figure links to a ledger citizen this cycle',
-    extra: { talkedAbout: talkedAbout.length, appeared: appeared.length, moves: moves.length }
+    pageVoices,
+    note: [people.length ? null : 'no talked-about figure links to a ledger citizen this cycle',
+      pulse ? null : 'no pulse on disk for this Cycle (buildPulseSlice.js) — the pages are silent in this slice'].filter(Boolean).join('; ') || null,
+    extra: { talkedAbout: talkedAbout.length, appeared: appeared.length, moves: moves.length,
+      pulse: pulse ? { generatedAt: pulse.generatedAt, docs: pulse.counted.docs, citizens: pulse.counted.citizens } : null }
   });
 }
 

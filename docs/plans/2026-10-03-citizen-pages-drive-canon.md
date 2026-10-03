@@ -1,6 +1,6 @@
 ---
 title: The citizen pages drive canon — where to wire the citizens' own words into the newsroom
-status: draft for builder review (ruling 2026-10-03 00:43 — the pages are not private; they should drive canon)
+status: approved to build (builder go 2026-10-03 02:05 — six seams as written; seam 4 letters rule ruled: a letter-writer is a citizen whose page carries a stance on the topic, or no letter on that topic)
 owner: research-build (plan); engine-sheet / codex (scripts); research-build (agent files, Rhea)
 rollout: pipeline.70
 parent: [[2026-09-07-beat-slices-from-sheets-plan]] §Design: sourcing modes
@@ -50,6 +50,43 @@ related: [[../research/2026-10-02-engine-208-fandom-dial-read-before]] (first us
 
 None open. The ruling is the design. The window question closed 00:49 (most recent page, age stamped; pulse over a rolling 8 Cycles).
 
+## 5. Seam 1 build brief (codex builds, research-build verifies and lands)
+
+**Read first:** this file §1 rows 1–2, §2; `scripts/newsroomSourcing.js` (`street()`, `frozen()`, `unique()`, `phrase()`, `verbSupports()`), `scripts/livedExperiencePacket.js` (`evidenceFor()`, `buildReportPacket()`), `scripts/scanCitizenPages.js` (`loadIndex()`, the admission rule in the header), `scripts/cron-desk-run.js` lines around `W2 requires the fixed W1 sourcing pool` (the pool is fixed at W1; W2 keeps only candidates whose `sourceKind` and `evidence` JSON are byte-identical).
+
+**Files you may touch:** `scripts/newsroomSourcing.js`, `scripts/newsroomSourcing.test.js`, `scripts/livedExperiencePacket.js`, `scripts/livedExperiencePacket.test.js`. Nothing else. Do not commit, do not push.
+
+**The substrate (already built, 2026-10-03):** `output/citizen_pages/index.jsonl` — one row per admitted page doc: `{docId, customId, popId, cycle, slot, type ('reflection'|'tension'), daypart, affect, event, createdAt, content}`; `loadIndex(root)` returns rows newest first, `[]` when the file is missing. Written by `scanCitizenPages.js --dump` at the angle stage only (`refreshCitizenPages` in cron-desk-run), never at report — so the index cannot move between W1 and W2.
+
+### 5.1 `street()` — a second evidence source, `page-line`
+
+After the life-line pass (unchanged), a page-line pass over the same `ledgerRows` filter (Active). For each citizen with no life-line candidate already in `out`:
+
+- Take `opts.pageIndex` if given (tests), else `require('./scanCitizenPages').loadIndex(root)`. Missing or empty index → no page-line candidates, **never a throw** (a Supermemory outage must not kill every street wake; the beat-dump fail-loud rule does not apply here).
+- Skip the citizen when `ClockMode` is `MEDIA` (a reporter is not a street source for their own paper) or when `sportsSubject`-shaped (`ClockMode` `GAME`, `EconomicProfileKey` `SPORTS_OVERRIDE`) — zero GAME-clock citizens in any pool (§3 item 1).
+- Their docs: `type === 'reflection'` only (a `tension` doc is the open question they carry — "TENSION[c108]: Will the Oaks improve…" — not their words), `cycle <= Number(cycle)`, newest first (cycle desc, then createdAt desc).
+- A doc is evidence for a highlight `h` when (a) `phrase(content, h.entity)` and (b) the **sentence holding the entity** passes a page-stance test: the existing `verbSupports(sentence, h.predicate)` **or** a first-person stance in that sentence — `/\b(?:I|I['’]m|I['’]ve|I['’]d|I['’]ll|me|my|mine|we|we['’]re|us|our)\b/`. Measured 2026-10-03 on the index: the literal consumption verbs (`visited|watched|bought…`) admit **none** of the plan's proof citizens; their pages name the entity in first person ("I've seen the Oaks struggle…", "What will Oakland's identity be without the A's"). Record the sentence as `excerpt` (≤ 240 chars, whitespace-collapsed, the citizen's text as written).
+- Drop a doc whose content matches `/\b20\d\d-\d\d-\d\d\b|\b(?:Claude|Codex|Anthropic|Supermemory|OpenRouter|Gemini)\b/` (leak guard; the admission gate already keeps the desk journal out — belt and braces).
+- First matching doc wins (most recent, whatever its age — §2 window rule); candidate:
+  `frozen('street', 'page-line', row, { source: 'output/citizen_pages/index.jsonl', docId, customId, cycle: <doc cycle>, excerpt, highlightKind: hit.kind, entity: hit.entity, predicate: hit.predicate }, { matchedPageLine: excerpt })`.
+- Pool order: all life-line candidates first, then page-line; `unique()` as today (one candidate per POPID, first wins). Keep `street()` synchronous.
+
+### 5.2 Packet — the page is what the citizen believes, never what happened
+
+- `evidenceFor()`: a `page-line` candidate returns `[{ id: 'EV-PAGE-' + sha256(pop + '|' + customId).slice(0,10), src: customId, text: excerpt }]`.
+- `buildReportPacket()`: for `page-line`, `known` = `[refClaim('INTERPRETATION', excerpt, customId)]` **plus** the profile FACT (`refClaim('FACT', candidate.profile, 'Simulation_Ledger profile for ' + pop)`) — the page is in the known-claims section as an INTERPRETATION, not a FACT. Question: `'Your own page at C<cycle> says: "<excerpt>". Is that still how you see <entity>? Speak only from that and your own reaction.'` Everything else as the life-line branch.
+- A page-line candidate is never a proximity candidate (`isProximityCandidate` unchanged).
+
+### 5.3 Tests (extend the two existing files; keep every current assertion)
+
+- `newsroomSourcing.test.js`: `streetOptions.pageIndex` fixture rows. Assert: a citizen with a C998 reflection naming `Test Venue` in first person ("I keep going back to Test Venue") is a `page-line` candidate with `evidence.cycle` 998 and `evidence.customId` set, **after** the life-line citizen; a `tension` doc on the venue yields nothing; a MEDIA-clock row yields nothing; a GAME-clock row yields nothing; a doc containing a `2026-10-03` date yields nothing; `pageIndex: []` yields exactly today's result; an entity named without first person or a consumption verb ("Test Venue reopened") yields nothing.
+- `livedExperiencePacket.test.js`: a `page-line` candidate's report packet carries `known[0].t === 'INTERPRETATION'` with `src` the customId, `exposure.evidence[0].id` starting `EV-PAGE-`, and the page question text.
+- Run: `node scripts/newsroomSourcing.test.js && node scripts/livedExperiencePacket.test.js`.
+
+**Report in one line:** files touched, tests pass/fail, anything in the brief that the code made impossible (do not work around it — say it).
+
 ## Changelog
+- 2026-10-03 02:30 (research-build) — seam 1 brief (§5) written for codex. Mechanism call: the page-line predicate is entity phrase + first-person stance in the sentence (or the consumption verbs); measured on the index, the literal verb test admitted none of §3's proof citizens. Substrate: `scanCitizenPages.js --dump` → `output/citizen_pages/index.jsonl`, admission gate in the dump (reflection/tension only, wake-slot allowlist, cycle ≤ live; office statements and the desk journal never land). Seam 3 built: `buildPulseSlice.js`, pulse rides the trends slice as THE PAGES SAY + top voices as people; refreshed once per angle fanout.
+- 2026-10-03 02:05 (research-build) — builder go on all six seams; seam 4 letters rule RULED as written (stance on the page, or no letter). Build order holds: seam 3 (rb) and seam 1 brief (codex) first.
 - 2026-10-03 00:49 (research-build) — window rule reset on builder direction: most recent page whatever its age, Cycle-stamped; pulse over a rolling 8 Cycles. Measured 2-Cycle reach 167/369 vs 8-Cycle 343/369.
 - 2026-10-03 (research-build, S522) — drafted from the 00:43 ruling; measured the zero-reader gap; six seams ordered.

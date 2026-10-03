@@ -183,6 +183,8 @@ function makeSlice(seat, cycle, beats, body) {
       anchorFacts: facts.map(f => f.text), evidence: facts,
       forbidden: FORBIDDEN,
       deltas: body.deltas || null, hooks: body.hooks || [], note: body.note || null,
+      // pipeline.70: what the citizens' own pages say — colour and sourcing, never a number in print.
+      pageVoices: body.pageVoices || [],
       roomIsYours: seat.roomIsYours
     },
     ...(body.extra || {}),
@@ -222,6 +224,11 @@ function formatMarkdown(slice) {
   if ((slice.prewrite.hooks || []).length) {
     L.push('## ENGINE HOOKS FOR YOU (colour, not fact)');
     for (const h of slice.prewrite.hooks) L.push('- ' + h.text + (h.angle ? ' (' + h.angle + ')' : ''));
+    L.push('');
+  }
+  if ((slice.prewrite.pageVoices || []).length) {
+    L.push('## THE PAGES SAY (the citizens\' own words — colour and sourcing, never a number in print)');
+    for (const v of slice.prewrite.pageVoices) L.push('- ' + v);
     L.push('');
   }
   L.push('## THE ROOM IS YOURS');

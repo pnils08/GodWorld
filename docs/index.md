@@ -30,7 +30,8 @@ pointers:
 
 ## Repo root (outside `docs/`)
 
-- **`scripts/scanCitizenPages.js`** — corpus grep over the citizens' own pages (Supermemory `citizen-pages`, v3 list of all ~2,077 docs, regex over summaries, cp-POP tag → ledger join). Answers "which citizens say X in their own words" with deterministic coverage; v4 search is NOT coverage. First use: engine.208 fandom seed overrides (2026-10-02). Read-only, build/wake-side only.
+- **`scripts/scanCitizenPages.js`** — the citizens' own pages as a local corpus: `--dump` mirrors the admitted page docs (Supermemory `citizen-pages`, v3 list + GET, incremental, rate-limit backoff) to `output/citizen_pages/index.jsonl` + `meta.json` with the admission gate in the dump (reflection/tension only, wake-slot allowlist, cycle ≤ live — office statements and the desk journal never land); `--pattern` is the corpus grep (engine.208 fandom seeds, 2026-10-02). Every newsroom reader (street page-line, the pulse, letters, Rhea) reads the index, never Supermemory. pipeline.70. v4 search is NOT coverage.
+- **`scripts/buildPulseSlice.js`** — pipeline.70 seam 3: the city pulse off the page index — standing themes + this Cycle's culture-record names over a rolling 8-Cycle window, trend word, the loudest voices with one excerpt each; `output/cron-compare/pulse_c{N}.json` + `output/slices/c{N}/pulse.md`. Rides Celeste's trends slice as THE PAGES SAY + people on the record; refreshed once per angle fanout (`refreshCitizenPages` in cron-desk-run). A sourcing signal and colour, never a published statistic.
 These files live at `/root/GodWorld/` and are catalogued here for completeness. They are not under the `docs/` tree but are load-bearing.
 
 - **`CONTEXT.md`** — project vocabulary. Every meaningful term defined exactly once. Read at boot; cite by canonical term; update inline when grilling sessions resolve a term. Adopted S187 (ADR-0001). *(reference, vocabulary, active)*
@@ -484,7 +485,7 @@ These files live at `/root/GodWorld/` and are catalogued here for completeness. 
 
 ---
 
-- **[[plans/2026-10-03-citizen-pages-drive-canon]]** — pipeline.70: the citizens' own pages (2,077 docs, 369 citizens, no newsroom reader) wired into sourcing (`street` page-line evidence), packets, Celeste's pulse slice, the letters pool and Rhea — builder ruling 2026-10-03 that the pages are not private and should drive canon. *(plan, newsroom, draft)*
+- **[[plans/2026-10-03-citizen-pages-drive-canon]]** — pipeline.70: the citizens' own pages (2,077 docs, 369 citizens, no newsroom reader) wired into sourcing (`street` page-line evidence), packets, Celeste's pulse slice, the letters pool and Rhea — builder ruling 2026-10-03 that the pages are not private and should drive canon; go 02:05 on all six seams, §5 is the seam 1 build brief. *(plan, newsroom, in-progress)*
 
 ## `docs/adr/` — architectural decision records (new S187, ADR pattern)
 

@@ -907,6 +907,10 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
             L.push('ENGINE HOOKS FOR YOU (colour, not fact):');
             for (const h of bs.prewrite.hooks.slice(0, 3)) L.push('  - ' + h.text);
           }
+          if ((bs.prewrite.pageVoices || []).length) {
+            L.push('THE PAGES SAY (the citizens\' own words — colour and sourcing, never a number in print):');
+            for (const v of bs.prewrite.pageVoices.slice(0, 5)) L.push('  - ' + v);
+          }
           L.push('THE ROOM IS YOURS: ' + bs.prewrite.roomIsYours);
           L.push('');
         }
@@ -1382,6 +1386,25 @@ function uniqueDest(dir, name) {
 // friction leads back in their voice). Persona reporters get their authored
 // stance; roster reporters answer as themselves. Deterministic assembly otherwise.
 // assign (fanout mode): {desk, name, popid, beatDomain, persona} from newsroom-fanout.
+// pipeline.70 — the citizens' own pages reach the newsroom: mirror the page docs to the local index
+// (scripts/scanCitizenPages.js --dump, the only network step, best-effort — an outage means
+// yesterday's index, never a dead fanout), count the pulse off the index, rebuild Celeste's slice so
+// THE PAGES SAY and the top voices ride today's wake. Runs once per angle fanout, BEFORE the W1
+// sourcing pools are built: the pool is fixed at W1 and W2 requires byte-identical evidence, so the
+// index must not move between the two stages — the report stage never refreshes it.
+async function refreshCitizenPages(cycle) {
+  if (cycle == null) return;
+  try { await require('./scanCitizenPages').dumpIndex({ quiet: true }); }
+  catch (e) { log('[pages] index refresh skipped (using the index on disk): ' + e.message); }
+  try {
+    const pulse = require('./buildPulseSlice');
+    const trends = require('./buildTrendsSlice');
+    const p = pulse.write(cycle, pulse.build(cycle));
+    trends.writeTrendsSlice(cycle, trends.buildTrendsSlice(cycle));
+    log('[pages] pulse c' + cycle + ' → ' + path.relative(ROOT, p.json) + '; trends slice rebuilt');
+  } catch (e) { log('[pages] pulse skipped: ' + e.message); }
+}
+
 async function runAngle(assign) {
   const cycle = arg('--cycle', null) || detectCycle();
   const desk = assign ? assign.desk : DESK;
@@ -1864,6 +1887,8 @@ async function runAngle(assign) {
         (facts.length ? '\nFACTS (real — every line is a row on the record):\n' + facts.map(f => '  - ' + f).join('\n') : '') +
         (brief.names.length ? '\nPEOPLE ON THE RECORD (your sources — never invent another):\n' + brief.names.map(n => '  - ' + n).join('\n') : '') +
         (beatSlice.prewrite.note ? '\nNOTE: ' + beatSlice.prewrite.note : '') +
+        ((beatSlice.prewrite.pageVoices || []).length ? '\nTHE PAGES SAY (the citizens\' own words — colour and sourcing, never a number in print):\n' +
+          beatSlice.prewrite.pageVoices.slice(0, 5).map(v => '  - ' + v).join('\n') : '') +
         '\nTHE ROOM IS YOURS: ' + beatSlice.prewrite.roomIsYours +
         (approach ? '\n\n' + approach : '') +
         (asker._wallSnippet ? '\n\n' + asker._wallSnippet : '') +
@@ -3181,6 +3206,7 @@ async function runFanoutStage() {
   if (limit > 0) list = list.slice(0, limit);
   console.log('Fan-out ' + STAGE.toUpperCase() + ' — ' + date + ', ' + list.length + ' assignment(s)');
   console.log('===================================');
+  if (STAGE === 'angle') await refreshCitizenPages(fanout.cycle);
   const results = [];
   for (const a of list) {
     try {

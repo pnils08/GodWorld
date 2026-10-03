@@ -22,6 +22,7 @@ const lifestyle = require('./buildLifestyleSlice');
 const neighborhood = require('./buildNeighborhoodSlice');
 const trends = require('./buildTrendsSlice');
 const v2 = require('./livedExperiencePacketV2');
+const K = require('./beatSliceKit');
 
 const CYCLE = 103;
 const root = fs.mkdtempSync(path.join(os.tmpdir(), 'godworld-beat-slices-'));
@@ -397,6 +398,53 @@ try {
     ok('maria stands; tax day + debt still read off the hook deck and the ledger', !m0.empty && m0.facts.some(f => /^Tax day in Downtown/.test(f.text)) && !m0.facts.some(f => /charges →/.test(f.text)));
     ok('typed empty states on the slice', r0.custodyTrail && r0.custodyTrail.state === 'NO_ROWS' && r0.court.state === 'NO_CASES' && h0.careTrail.state === 'NO_ROWS');
     for (const tab of Object.keys(keep)) fs.writeFileSync(path.join(bd, tab + '.jsonl'), keep[tab]);
+  }
+
+  console.log('hood illness spike — neighbours on the health slice:');
+  {
+    // The shared fixture sits under the bar: Chinatown 125 / 2,680 = 4.7%, no prev/.
+    const h0 = health.buildHealthSlice(CYCLE, { root });
+    ok('no spike → no neighbour, no spike fact, typed null', h0.spikeHood === null && !h0.citizens.some(c => /neighbour/.test(c.why)) && !h0.facts.some(f => /watch bar/.test(f.text)));
+    const demoFile = path.join(output, 'beats', 'Neighborhood_Demographics.jsonl');
+    const keepDemo = fs.readFileSync(demoFile, 'utf8');
+    const rows = keepDemo.trim().split('\n').map(l => JSON.parse(l));
+    // Chinatown 170 / 2,680 = 6.3% — over the bar. Two tracked residents on the
+    // ledger (POP-90007 already rides via the queue; POP-90032 does not), plus a
+    // sports subject and a dead resident who never ride.
+    writeJsonl(demoFile, rows.map(r => r.Neighborhood === 'Chinatown' ? Object.assign({}, r, { Sick: '170' }) : r));
+    const profiles = K.loadProfiles(root);
+    profiles.set('POP-90033', { Name: 'Test Chinatown Neighbour', POPID: 'POP-90033', RoleType: 'Grocer', Neighborhood: 'Chinatown', Status: 'Active' });
+    profiles.set('POP-90034', { Name: 'Test Chinatown Third', POPID: 'POP-90034', RoleType: 'Barber', Neighborhood: 'Chinatown', Status: 'Retired' });
+    profiles.set('POP-90035', { Name: 'Test Chinatown Pitcher', POPID: 'POP-90035', RoleType: 'Pitcher, Test Team', Neighborhood: 'Chinatown', ClockMode: 'GAME' });
+    profiles.set('POP-90036', { Name: 'Test Chinatown Late', POPID: 'POP-90036', RoleType: 'Clerk', Neighborhood: 'Chinatown', Status: 'Deceased' });
+    const h1 = health.buildHealthSlice(CYCLE, { root, profiles });
+    const nb = h1.citizens.filter(c => /a neighbour to quote, not a patient/.test(c.why));
+    ok('spike hood → two neighbours, tagged, from the hood', nb.length === 2 && nb.every(c => c.neighborhood === 'Chinatown' && /lives in Chinatown, where illness is up this cycle/.test(c.why)));
+    ok('a resident already on the record is not doubled', h1.citizens.filter(c => c.popid === 'POP-90007').length === 1 && !nb.some(c => c.popid === 'POP-90007'));
+    ok('sports subject and dead resident never ride', !JSON.stringify(h1).includes('Test Chinatown Pitcher') && !JSON.stringify(h1).includes('Test Chinatown Late'));
+    ok('pick is deterministic by POPID from a cycle-rotated start', nb.map(c => c.popid).join(',') === ['POP-90032', 'POP-90033', 'POP-90034'].slice(CYCLE % 3).concat(['POP-90032', 'POP-90033', 'POP-90034']).slice(0, 2).join(','));
+    ok('spike fact is the engine share, hood only, no names', h1.facts.some(f => f.text === 'Chinatown: 170 sick of 2,680 residents, 6.3% — at or over the 6% watch bar' && /Neighborhood_Demographics\.jsonl Sick\/Students\+Adults\+Seniors @C103$/.test(f.src)));
+    ok('record count, lead name and few-named note exclude the neighbours', /\| 3 named on the hospital and cause records$/.test(h1.story.label) && /named rows are few \(3\)/.test(h1.prewrite.note) && h1.story.hookLine.startsWith(h0.story.hookLine.replace(/\.$/, '')));
+    ok('hook line names the block and its neighbours', /; illness is up in Chinatown — .+ and .+ can speak for the block\.$/.test(h1.story.hookLine));
+    ok('typed on the slice', h1.spikeHood && h1.spikeHood.hood === 'Chinatown' && h1.spikeHood.overBar === true && h1.spikeHood.risen === false && h1.spikeHood.neighbours.length === 2);
+    // Fruitvale over the bar (160 / 2,350 = 6.8%) with no tracked resident of the hood in the profiles → the fact rides, nobody is added.
+    writeJsonl(demoFile, rows.map(r => r.Neighborhood === 'Fruitvale' ? Object.assign({}, r, { Sick: '160' }) : r));
+    const noFruitvale = new Map([...K.loadProfiles(root)].filter(([, p]) => p.Neighborhood !== 'Fruitvale'));
+    const h2 = health.buildHealthSlice(CYCLE, { root, profiles: noFruitvale });
+    ok('spike hood with no tracked residents → people unchanged, fact says so', h2.spikeHood.hood === 'Fruitvale' && h2.spikeHood.neighbours.length === 0 &&
+      h2.citizens.map(c => c.popid).join() === h0.citizens.map(c => c.popid).join() && h2.facts.some(f => /^Fruitvale: 160 sick of 2,350 residents, 6\.8% — at or over the 6% watch bar; no tracked resident of the block is free to quote$/.test(f.text)));
+    // Up a quarter on prev/: Rockridge 55 / 2,523 = 2.2% → 70 / 2,523 = 2.8% (×1.27), under the bar, still a spike.
+    const prevDir = path.join(output, 'beats', 'prev');
+    fs.mkdirSync(prevDir, { recursive: true });
+    fs.writeFileSync(path.join(prevDir, 'meta.json'), JSON.stringify({ cycle: CYCLE - 1 }));
+    writeJsonl(path.join(prevDir, 'Neighborhood_Demographics.jsonl'), rows.map(r => r.Neighborhood === 'Rockridge' ? Object.assign({}, r, { Sick: '55' }) : r));
+    writeJsonl(demoFile, rows.map(r => r.Neighborhood === 'Rockridge' ? Object.assign({}, r, { Sick: '70' }) : r));
+    const h3 = health.buildHealthSlice(CYCLE, { root });
+    ok('up a quarter on the previous cycle, under the bar → spike with the prior share', h3.spikeHood && h3.spikeHood.hood === 'Rockridge' && h3.spikeHood.overBar === false && h3.spikeHood.risen === true &&
+      h3.facts.some(f => f.text.startsWith('Rockridge: 70 sick of 2,523 residents, 2.8% — up from 2.2% at C102') && / vs prev\/$/.test(f.src)));
+    ok('rise neighbours come off the ledger (Rockridge has two)', h3.spikeHood.neighbours.length === 2);
+    fs.rmSync(prevDir, { recursive: true, force: true });
+    fs.writeFileSync(demoFile, keepDemo);
   }
 
   console.log('oaks seats (selena / talia):');

@@ -1,7 +1,7 @@
 ---
 title: Research Sub-Catalog
 created: 2026-06-01
-updated: 2026-09-30
+updated: 2026-10-03
 type: reference
 tags: [research, architecture, active]
 sources:
@@ -25,6 +25,7 @@ Grep here before grepping the tree. Each row: file · one-line purpose · verdic
 
 | File | Purpose | Verdict |
 |------|---------|---------|
+| **[[2026-10-03-engine-204-205-game-day-economy-read-before]]** | engine.204/205 read-before + cut: the week object (volume × stakes × surprise × weight, venue share from home games, per-round reach), word tests → bands at every numeric site, negative ripples and bars, `HomeNeighborhood` off the tab, four sim calls; C110 worked case against the sixth-block lens ruling | draft for builder review |
 | **[[2026-09-30-codex-task8-rev1]]** | Re-review of Task 8 Revision 1: disposition of 12 findings, new blockers (booked vs persisted replay, lazy-cache snapshot, partial unallocated encoding, missed-Cycle stock, keyed-replace integrity) | `adopt` — HOLD; open items listed as Revision 2 prerequisites in the plan |
 | **[[2026-09-30-codex-task8-cut]]** | Adversarial review of the engine.254 Task 8 census cut: replay keys, exit typing, bootstrap, writer-failure detection, unallocated availability, suffixes, idempotent census write, stay dial, validator scope | `adopt` — HOLD, 12 findings folded as Revision 1; re-review before build |
 | **[[2026-10-02-agy-task10-slices-diff]]** | Diff review of `e4f42227..48e974d2` (Task 10, the reporters' slices): census read off the `all` rows one scope at a time, names or "none tracked" on every hood line, no ID in prose, athletes counted never named, the fine join, the treasury week, debt parsing, the circular require, hard vs soft tab reads, no hook class lost | `SHIP` — ten of ten; its line references overrun the files (weak evidence column) and its circular-require reason held for one entry order only, so the exports moved above the CLI main (`492f218f`+) |
@@ -192,3 +193,4 @@ Grep here before grepping the tree. Each row: file · one-line purpose · verdic
 - 2026-09-21 (research-build) — Registered [[2026-09-21-batch-cost-and-model-variety]]: measured civic spend (~$0.18/wk, only directive/mayor calls log usage), per-family `:batch` availability on OpenRouter (62 of 74 half price; four cost more than standard), Claude-tier batch cost for civic/Carmen/Mags/Elias; OpenRouter batch already proven in-repo (scripts/orBatch.js) — verdict `adopt`, supersedes the `watch` in [[2026-09-21-batch-inference-options]].
 - 2026-10-01 (research-build, overnight) — Registered [[2026-10-01-model-fit-open-character-results]]: research.28 open-character run and report; Sonnet 5.5 `adopt` for Mags's narration pending the builder's blind read; Elias `watch`; the two guest score files folded in, inbox copies removed.
 - 2026-10-01 (research-build S515) — Accepted [[2026-10-01-codex-sourcing-modes-review]] from the review inbox: pipeline.68 mechanism review, 2 BLOCK (Civis move has no intake consumer; office quotes have no W3/Rhea provenance path) + 6 FIX-BEFORE-BUILD + 1 NOTE — all folded into the plan as §Design Revision 1.
+- 2026-10-03 (S523, research-build) — Registered [[2026-10-03-engine-204-205-game-day-economy-read-before]] (Mike's go, while engine-sheet builds engine.208): read-before + proposed cut for sports plan Tasks 3/4/10; the research [[2026-09-18-sports-intensity-and-game-day-economy]] re-measured on today's code; shares the expectation baseline with [[2026-10-02-engine-208-fandom-dial-read-before]] §2.7.

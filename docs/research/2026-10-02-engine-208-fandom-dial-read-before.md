@@ -121,6 +121,51 @@ The `Phase5-Advancement` intake (the seam where engine.278 reads the carried emp
 5. Live: a playoff week wakes at least one citizen whose only wake reason is fandom (engine.201).
 6. **Bench, before any live fold (agy review hunt 7):** a synthetic 10-Cycle run over the 963 seeded rows at realistic received-event rates (the C101–C109 win/loss/run cadence, Oaks L-streak, a tone line a week) through `applyCycleEffects_` + `settleCycle_` at `MOOD_DECAY` 0.8 — print the band histogram each Cycle. If the decay pulls everyone back to the middle before the histogram separates, the magnitudes or the decay move *on bench*, not after ten live Cycles.
 
+### 2.9 es build cut (engine-sheet, 2026-10-03) — what gets built; supersedes §2.3 half-gap, §2.6, §2.7 interim
+Folds §4 Rulings + the 2026-10-03 Amendment. Status: **for review (codex), not built.**
+
+**Measured 2026-10-03 (live sheet + code):**
+
+| # | Finding | Source |
+|---|---|---|
+| M1 | **The athlete seam has never fired.** `LifeHistory_Log`: 0 rows ever carry a `GAME_NIGHT_POOLS` line; the one athlete-writer row (C101, POP-01022) has a blank pick. Cause A: `NamesUsed` carries positions (`Arturo Ramos (SP)`), the match is exact lowercased `first last` → 17/165 C100+ mentions resolve; stripping `(…)` → 142/165. Remaining 23: typos (`Mark Aiken`, `Vinne Keane`, `Isely Kelley`, `Ernesto Quitero`), sports-layer names with no POPID (`Peter Busch`, `Cy Newell`…), and splits inside parentheses (`(3B/1B)`, `(SP`). Cause B: `pool[Math.floor(safeRand_(ctx) * pool.length)]` — `safeRand_` returns the rng *function* (`utilities/safeRand.js:28`) → NaN → `undefined`. The 302 `gameNight|streak:` log rows are the spectator writer's, not the athletes'. | `phase05-citizens/applyGameNightMoments.js:61,88,113`; live `LifeHistory_Log` |
+| M2 | GAME-clock citizens draw everyday lines, incl. `source:sports` spectator rows ("bought a new A's jersey"). | `generateCitizensEvents.js:2126` (A1-cont) |
+| M3 | Selector today: `source:sports` pool weight × **outabout** band. | `generateCitizensEvents.js` dial-band block (~:2925) |
+| M4 | ECL sports rows carry the team in `PoolKey`: `sports.as` 11, `sports.oaks` 9, `sports.citywide` 4, hood 3. | live `Event_Content_Ledger` (350 rows) |
+| M5 | `S.sportsSeason` has 150+ literal compares (`'playoffs'`, `'championship'`), `normalizeSportsPhase_` buckets, season pools keyed by string; one numeric reader (`deepestSportsPhase_`). | engine-wiring card; `applyCityDynamics.js:173`, `generateGenericCitizenMicroEvent.js:260`, `generateCitizensEvents.js:1934`, `applySportsSeason.js:444` |
+| M6 | D3: `processFeedSheet_` skips a team with no current-Cycle row → its sentiment share snaps to 0 the first quiet week. The row scan already holds every earlier row per team. | `applySportsSeason.js:757,854` |
+| M7 | Casino sports markets carry the team: `sports:as` / `sports:oaks`. | `casinoLedgerEngine.js:881` |
+| M8 | Canon fans' households: 2 members via `SpouseId`/`ParentIds`, 3 via `HouseholdId`. | live ledger |
+| M9 | The 8-dial `deserialize_` keeps only `DIALS` keys of `base` → a `fandom` written before the 9-dial code is live is dropped at the next fold. | `citizenMemory.js:64,257` |
+
+**C1 Dial.** `DIALS += 'fandom'`; `PHRASE.fandom`, `POLES.fandom` per §2.1. Per-dial decay: `MOOD_DECAY_BY_DIAL = { fandom: 0.9 }` in `settleCycle_` (a fan's upset lasts ~6–7 Cycles, not ~3–4; the other eight stay 0.8). Team on `DialState` as `fan: 'as'|'oaks'|'both'` (serialize/deserialize like `wear`). The fandom value is never pinned; athletes move like anyone (Amendment).
+
+**C2 Tags** (`DIAL_MAP`, prefix-form). Fans: `Sports-Win` +2 · `Sports-Loss` −2 · `Sports-LosingWeek` −1 · `Sports-Run` +4 / outabout +1 · `Sports-Title` +6 / outabout +1, sociability +1 · `Undocked-Engaged` +1. Athletes, by `EventType` (ruling i, magnitudes mechanism): `game-result` → `Sports-Played` composure +1 · `injury` → `Sports-Injured` composure −2, outabout −1 · `roster-move`/`trade-recap`/`re-signing` → `Sports-Moved` openness +2, family −1 · `player-feature`/awards → `Reputation` (exists).
+
+**C3 Week result, per team, stateless from the feed** (published `S.sportsWeekByTeam`, Phase 2). Week = this Cycle's `game-result` `WeekRecord` cells (`H:W`/`A:L`) → W, L. Expectation = win% over the team's games in the prior `fandomExpectWindow` (8) Cycles; `n` = prior Cycles with games. Class: no games → none · W>L and week% ≥ expectation → `WIN` · W<L and n ≥ 4 and week% < expectation − `fandomExpectMargin` (0.15) → `LOSS` · any other W<L → `LOSING_WEEK` · else `EVEN` (plain `Sports`). With n < 4 there is no expectation, so every Oaks losing week is −1 — ruling v exactly, and the rule is one rule for both teams. A playoff-round or `world-series`/`finals` week with W ≥ L → `RUN`; a `championship` game-result won → `TITLE`. Three World_Config keys, read with a throw on missing (engine.276 pattern).
+
+**C4 Who receives a week line** (Phase 5, `applyGameNightMoments_` becomes the feed→citizen seam; write path unchanged — row `LifeHistory` + `LifeHistory_Log` batch, SHEETS_MANIFEST §9 row 155):
+- **Staff of a team** — GAME clock, `EmployerBizId` BIZ-00005 → A's, BIZ-00074 → Oaks (both for a two-team GM): the team's week line whenever it played (Amendment: "all should be getting life events from the week's success").
+- **Fans** — band ≥3 with `fan` matching: the same line, every week the team plays (ruling v: "every losing week").
+- **Named on a row** — by name after normalization, Active only: the C2 `EventType` line. One line per (citizen, EventType), cap 3 lines per citizen per Cycle.
+- M1 fixed: `safeRand_(ctx)()`; names: strip `(…)` (incl. an unclosed one) before splitting, split on `, | ; /` and `. ` + capital, trim a trailing `.`; exact match after that, never fuzzy (POPID-by-name rule). Unresolved names → one `Logger` line per Cycle naming them, so a typo in the feed is visible.
+
+**C5 Selector** (`generateCitizensEvents.js`). `source:sports` weight × **fandom** band multiplier (replaces outabout). GAME-clock citizens skip `source:sports` spectator entries (their sports life is C4; no player buys his own jersey). A drawn `sports.as`/`sports.oaks` line in a week that team has a C3 class takes that class's tag instead of plain `Sports` — a casual fan feels the week when they catch it; citywide/hood pools stay plain. ECL DSL gains `fandom` (num) beside warmth/drive.
+
+**C6 Rounds** (ruling iii). Dropdown + contract test + `SPORTS_PHASE_ALIASES_`: `wild-card`, `division-series`, `league-championship`, `play-in`, `first-round`, `conference-semis`, `conference-finals`, each **aliasing to `playoffs`** — `S.sportsSeason`, the 150+ compares, `normalizeSportsPhase_` and the season pools see exactly today's value (M5: zero consumer change). The raw round rides on the feed entry (`rawSeasonType`) into C3. Reach (Q4, "each round casts a bigger net"): a `RUN` week also reaches band-2 citizens with probability `reach × 0.05` (wild-card/play-in 1 · division-series/first-round 2 · league-championship/conference-semis/conference-finals 3 · world-series/finals 4), `ctx.rng`, counted in the log line.
+
+**C7 Seed** (one-shot via `lib/sheets`, scratchpad, `--dry-run` histogram first; no repo script — engine.md). Precedence: canon override (`data/fandom_seed_overrides.json`, authored base + team) > GAME-clock team staff 65 + employer team > sports wager 60 + market team (both markets → `both`) > stadium-zone resident +5 (55, no team). Then **families start as fans** (Amendment): every `SpouseId`/`ParentIds`/`ChildrenIds`/`HouseholdId` member of a seeded fan (≥60) → max(own, min(fan's base, 65)), fan's team; one pass, no chains. Writes `DialState` only where fandom ≠ 50 or a team is set. Order is code → seed → fire (M9). Bench: free, after the last resync, no resync until live is seeded. **Live write = one plain confirm from the builder with the dry-run numbers** (TERMINAL.md §Authority, many-row write).
+
+**C8 Inheritance in the engine** (new citizens; supersedes §2.6). Phase-9 fold: a row whose `DialState` cell is blank (mint or birth) seeds `base.fandom` from its household — any fan (current ≥60) among `SpouseId`/`ParentIds`/`HouseholdId` → min(value, 65) + team; else 50. A pre-pass indexes fans from the same rows. A row with `DialState` and no `fandom` key reads 50 until seeded.
+
+**C9 UNDOCKED.** Audience line routes `Undocked-Engaged` (fandom +1 only — engine.272's integrity/sociability cut stays) instead of `Personal`; the pilot's own run stays `Reputation` (`generateCitizensEvents.js:821`).
+
+**C10 engine.203d city fade** (`processFeedSheet_`). A team with earlier rows and none this Cycle contributes its last-row share × `sportsFadeRate` (0.85, World_Config) ^ quiet Cycles, to zero below 0.01 — never a snap, never a hold. **"Upset first" sign after a won title: open to the builder** (2026-09-27 verbatim: "being upset should happen first").
+
+**Out of this build (filed as follow-ups):** `Sports-Soured`/`Sports-Lifted` (no per-piece tone exists — §2.5 gap); `Sports-Gutted` (no negative flag on roster rows; rides the tone follow-up); `Sports-Attended` (needs an authored ECL attendance tag — rb's content lane). The negative pole ships via `Sports-Loss`/`Sports-LosingWeek`.
+
+**Acceptance (bench, before PROD):** §2.8 items 1–3 and 6, plus: C110 bench fire — named-name resolution count + unresolved list in the log, no `undefined` pick; every A's staff row carries a `TITLE` or `RUN` line at C110; Oaks staff + band ≥3 Oaks fans carry `Sports-LosingWeek` on an Oaks 0-2 week; a round-typed fixture row leaves `S.sportsSeason` = `playoffs` (contract test); `fandom:` on every TraitProfile after one fold; no `Phase5-GameNightMoments` row in Engine_Errors. **Deploy:** PROD after the C110 live fire (2026-10-04), then the live seed, before C111.
+
 ## 3. The feed question (data in §1.3)
 
 Two parts, two owners:
@@ -147,6 +192,18 @@ iv. **Magnitudes — APPROVED** as in §2.2.
 v. **What an Oaks loss costs a fan — APPROVED:** band ≥3 Oaks fan −1 every losing week, −2 under the Oaks' own running expectation after ≥4 weeks of record. The negative pole is live from the first fold.
 
 **Status after the rulings:** nothing in this document is waiting on a ruling. es builds in the §2 order with these five folded; research-build owes the canon-fan overrides list (ii) before the seed pass.
+
+**Verbatim behind the five rulings (Mike, 2026-10-02 23:29):** "1.yes but should be generating life events when they are named in the oakland_sports_feed , 2 - accept thin seed, but families and any canon should be added as fans, 3 - what ever is an option in the drop down menus I use, 4 - approved, 5 - approved"
+
+### Amendment (Mike, 2026-10-03 01:25) — supersedes ruling i's "inert" and §2.3's half-gap
+Verbatim: "families start as fans, go, 1 on how you read them is a little off, Athletes have fandom dial and start as fans, the sports-event picker im not sure what that is but when athletes are named on "names used" on "oakland sports ledger" the athlete should be geneating a life event from that and probably all should be getting life events from the weeks success or lack their of. an outside piece is if undocked plays into this fandom?"
+
+Read (es):
+- **Families start as fans.** A household member of a seeded fan (canon override, wager, zone) seeds at fan level, not half the gap. Same at mint (§2.6): a child or spouse minted into a fan's household starts as a fan.
+- **Athletes carry a live fandom dial and start as fans.** Not inert. They seed at fan level like any canon fan; their dial moves like anyone's.
+- **Feed-named athletes get a life event from the row** — ruling i's routing by `EventType` stands.
+- **Every athlete gets a life event from his team's week** — a win week or a losing week — named on a row or not. "All" read as all athletes (the sentence's subject); the fans' week lines are §2.2 already.
+- **UNDOCKED** — the parent plan already rules it in (plan §4: "What moves it UP: … Undocked engagement"; "One dial covers a citizen's relationship to the city's spectacle"). §2.2 carries `Undocked-Engaged` +1.
 
 ## Changelog
 - 2026-10-02 23:29 (research-build, S522) — Mike ruled all five §4 calls (recorded under §4 Rulings): athletes inert + feed-named citizens get signed life events per EventType; thin seed accepted + families and canon fans authored; round words go into the dropdown; magnitudes and the Oaks fan-side loss rule approved. Document is build-ready for es.

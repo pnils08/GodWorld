@@ -488,6 +488,14 @@ function compressLifeHistory_(ctx, options) {
     wearSimYear = simYearOf_(ctx, cycle);
   }
 
+  // engine.208 C8: a citizen the dials have never met (blank DialState: a mint, a birth, an arrival)
+  // takes fandom from the household on this fold — families start as fans (builder 2026-10-03).
+  // Donors are BASE fans (>= 60), indexed once.
+  var fandomIdx = { iSpouse: idx('SpouseId'), iParents: idx('ParentIds'), iChildren: idx('ChildrenIds'), iHousehold: idx('HouseholdId'),
+                    iClock: idx('ClockMode'), iEmployer: idx('EmployerBizId'), iRole: idx('RoleType') };
+  var fandomDonors = buildFandomDonors_(rows, iPopID, iDialState, fandomIdx.iHousehold);
+  var fandomSeeded = 0, fandomInheritedFans = 0;
+
   for (var r = 0; r < rows.length; r++) {
     var row = rows[r];
     var popId = row[iPopID];
@@ -536,6 +544,10 @@ function compressLifeHistory_(ctx, options) {
     // own cadence and folds only the LEGACY (unstamped) lines, once, as before.
     // Also: a row carrying residual mood must be settled (decayed) even on a quiet cycle.
     var parsedDial = parseDialState_(existingDialState);
+    // engine.208 C8: a BLANK DialState is a citizen the dials have never met (a mint, a birth, an
+    // arrival) — seed fandom from the household on this first fold. An existing row without fandom
+    // reads 50 and is left byte-identical (grief / wear stability); the one-time seed writes those.
+    var fandomSeedDue = !existingDialState;
     var foldedMark = (parsedDial && parsedDial.folded > 0) ? parsedDial.folded : 0;
     var newEntries = [];
     if (entries && entries.length) {
@@ -555,13 +567,29 @@ function compressLifeHistory_(ctx, options) {
     var wearMode = (wearRate > 0 && conductCohortRow_(row, wearCols, wearSimYear))
       ? integrityWearDue_(parsedDial, cycle, wearRate, wearFloor) : null;
 
-    if (!compressEligible && !newEntries.length && !moodPending && !pending.length && !biasPending.length && !griefPending.length && !griefNeedsMaintenance && !wearMode) { skipped++; continue; }
+    if (!compressEligible && !newEntries.length && !moodPending && !pending.length && !biasPending.length && !griefPending.length && !griefNeedsMaintenance && !wearMode && !fandomSeedDue) { skipped++; continue; }
 
     // Grief-only maintenance must not even normalize the DialState cell. Existing
     // compressor/reflection/bias paths keep their prior RMW behavior; an envelope
     // insert/expiry by itself is strictly a MemoryRegisters change.
-    var dialRmwNeeded = compressEligible || newEntries.length || moodPending || pending.length || biasPending.length || !!wearMode;
+    var dialRmwNeeded = compressEligible || newEntries.length || moodPending || pending.length || biasPending.length || !!wearMode || fandomSeedDue;
     var c = dialRmwNeeded ? deserialize_(parsedDial) : null;
+    if (c && fandomSeedDue) {
+      var inherited = inheritFandom_(row, String(popId).trim().toUpperCase(), fandomIdx, fandomDonors);
+      // athletes start as fans (builder 2026-10-03): a GAME-clock player or staff member of a
+      // franchise (sportsStaffTeams_, applyGameNightMoments.js — the one employer table) starts at 65
+      var staffTeams = (fandomIdx.iClock >= 0 && String(row[fandomIdx.iClock] || '').toUpperCase() === 'GAME' &&
+        typeof sportsStaffTeams_ === 'function')
+        ? sportsStaffTeams_(fandomIdx.iEmployer >= 0 ? String(row[fandomIdx.iEmployer] || '').trim() : '', fandomIdx.iRole >= 0 ? row[fandomIdx.iRole] : '')
+        : null;
+      if (staffTeams && (staffTeams["A's"] || staffTeams.Oaks)) {
+        inherited = { v: inherited.v > 65 ? inherited.v : 65,
+                      t: (staffTeams["A's"] && staffTeams.Oaks) ? 'both' : (staffTeams.Oaks ? 'oaks' : 'as') };
+      }
+      c.base.fandom = inherited.v;
+      if (inherited.t) { c.fan = inherited.t; fandomInheritedFans++; }
+      fandomSeeded++;
+    }
     if (c && foldedMark) c.folded = foldedMark;
 
     // engine.42 chaos-trauma (S275): chaos-free time heals. Lazily fade the persisted
@@ -704,6 +732,7 @@ function compressLifeHistory_(ctx, options) {
     griefCitizens: griefCitizens,
     griefExpired: griefExpired,
     integrityWear: { rate: wearRate, floor: wearFloor, worn: wearSteps, regained: regainSteps }, // engine.272
+    fandomSeeded: { rows: fandomSeeded, fans: fandomInheritedFans }, // engine.208 C8
     version: COMPRESS_VERSION
   };
 
@@ -712,6 +741,7 @@ function compressLifeHistory_(ctx, options) {
     ', reflections ' + reflectionsMoved + '/' + reflectionCitizens + ' citizens' +
     ', biases ' + biasApplied + '/' + biasCitizens + ' citizens' +
     ', folded ' + foldedEntries + ' entries, settled ' + settled +
+    ', fandom seeded ' + fandomSeeded + ' (' + fandomInheritedFans + ' as household fans)' + // engine.208 C8
     (S.pressureCounts ? ', pressure ' + JSON.stringify(S.pressureCounts) : ', pressure none') + // engine.176 per-emitter counts (S.pressureCounts)
     (S.contests ? ', contests ' + JSON.stringify(S.contests) : ', contests none') + // engine.179 (S.contests)
     ', pushes ' + pushesQueued + // engine.180
@@ -1294,6 +1324,47 @@ function parseDialState_(str) {
   } catch (e) { return {}; }
 }
 
+// engine.208 C8 — household fandom donors: POPID -> { v: base.fandom, t: team } for every BASE fan
+// (>= 60), plus HouseholdId -> [donor POPIDs]. A fan with no team recorded follows the A's.
+function buildFandomDonors_(rows, iPopID, iDialState, iHousehold) {
+  var byPop = {}, byHouse = {};
+  for (var i = 0; i < rows.length; i++) {
+    var pop = String(rows[i][iPopID] || '').trim().toUpperCase();
+    if (!pop || iDialState < 0 || !rows[i][iDialState]) continue;
+    var ds = parseDialState_(String(rows[i][iDialState]));
+    if (!ds.base || !(ds.base.fandom >= 60)) continue;
+    byPop[pop] = { v: ds.base.fandom, t: ds.fan || 'as' };
+    var hh = iHousehold >= 0 ? String(rows[i][iHousehold] || '').trim() : '';
+    if (hh) (byHouse[hh] = byHouse[hh] || []).push(pop);
+  }
+  return { byPop: byPop, byHouse: byHouse };
+}
+
+// engine.208 C8 — a no-fandom citizen's start: the strongest fan among spouse, parents, children
+// and household, capped at 65 (a real fan, not the donor's own devotion); else 50, no team.
+// SpouseId may read 'POP-00123 Name', ParentIds is JSON — any POPID token in the cell counts.
+function inheritFandom_(row, selfPop, idxs, donors) {
+  var cand = [];
+  var cells = [idxs.iSpouse, idxs.iParents, idxs.iChildren];
+  for (var k = 0; k < cells.length; k++) {
+    if (cells[k] < 0) continue;
+    var m = String(row[cells[k]] || '').match(/POP-\d+/gi);
+    if (m) for (var j = 0; j < m.length; j++) cand.push(m[j].toUpperCase());
+  }
+  var hh = idxs.iHousehold >= 0 ? String(row[idxs.iHousehold] || '').trim() : '';
+  if (hh && donors.byHouse[hh]) cand = cand.concat(donors.byHouse[hh]);
+  var best = null, as = false, oaks = false;
+  for (var c = 0; c < cand.length; c++) {
+    var d = donors.byPop[cand[c]];
+    if (!d || cand[c] === selfPop) continue;
+    if (best === null || d.v > best) best = d.v;
+    if (d.t === 'both' || d.t === 'as') as = true;
+    if (d.t === 'both' || d.t === 'oaks') oaks = true;
+  }
+  if (best === null) return { v: 50, t: null };
+  return { v: best < 65 ? best : 65, t: (as && oaks) ? 'both' : (oaks ? 'oaks' : 'as') };
+}
+
 // persist base + streak + mood + folded (engine.177, S438: mood is the live swing that
 // settleCycle_ decays each cycle; folded is the watermark cycle of the last stamped entry
 // folded). Before S438 only {base, streak} persisted and mood was zeroed at fold.
@@ -1651,6 +1722,8 @@ if (typeof module !== 'undefined' && module.exports) {
     foldAgedOutEntries_: foldAgedOutEntries_,
     deriveArchetypeFromBands_: deriveArchetypeFromBands_,
     formatDialFace_: formatDialFace_,
+    buildFandomDonors_: buildFandomDonors_,
+    inheritFandom_: inheritFandom_,
     parseProfileString_: parseProfileString_,
     getCitizenDialBands_: getCitizenDialBands_,
     conductCohortRow_: conductCohortRow_,

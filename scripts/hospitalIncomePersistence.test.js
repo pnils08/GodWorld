@@ -242,7 +242,12 @@ check('hospital income metadata does not trigger compression of a sparse history
   row[ix('LifeHistory')] = '[Background] SYNTHETIC one\n[Background] SYNTHETIC two\n[HospitalIncomeState] statusStart=8000|hit=8000';
   const before = row.slice();
   sb.compressLifeHistory_(ctx, { forceAll: true });
-  assert.deepStrictEqual(row, before, 'two events remain compression-ineligible');
+  // engine.208 C8: a blank DialState gets its first one (fandom from the household); every other
+  // cell — LifeHistory, TraitProfile — stays exactly as it was: no compression.
+  const iDS = ix('DialState');
+  const strip = (r) => r.filter((_, i) => i !== iDS);
+  assert.deepStrictEqual(strip(row), strip(before), 'two events remain compression-ineligible');
+  if (iDS >= 0 && !before[iDS]) assert.strictEqual(JSON.parse(row[iDS]).base.fandom, 50);
 });
 check('cleared employer keeps a layoff cut', () => {
   const ctx = make('UNTRACKED'), row = ctx.ledger.rows[0];

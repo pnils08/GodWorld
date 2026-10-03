@@ -86,5 +86,41 @@ const parsedLines = C.parseLifeHistoryEntries_('C110 — [Sports-Title] rode the
 const ptags = (parsedLines.entries || []).map((e) => e.tag + '@' + e.cycle);
 ok('fold parses the new tags with their Cycle (Y3C110 = absolute 214)', ['Sports-Title@110', 'Undocked-Audience@110', 'Sports-LosingWeek@214'].every((t) => ptags.includes(t)), JSON.stringify(ptags));
 
+// 8. C8 through the real fold: a blank DialState (mint / birth / arrival) inherits from the household
+{
+  const vm = require('vm'), fs = require('fs'), path = require('path');
+  // sportsStaffTeams_ (applyGameNightMoments.js) is the one franchise-employer table; an Apps Script global
+  vm.runInThisContext(fs.readFileSync(path.join(__dirname, '../phase05-citizens/applyGameNightMoments.js'), 'utf8'));
+  global.simYearOf_ = () => 2042;
+  const H = ['POPID', 'LifeHistory', 'TraitProfile', 'DialState', 'Status', 'Tier', 'ClockMode', 'SpouseId', 'ParentIds', 'ChildrenIds', 'HouseholdId', 'EmployerBizId', 'RoleType'];
+  const iDS = H.indexOf('DialState');
+  const dial = (fandom, fan) => JSON.stringify({ base: { drive: 50, fandom }, mood: {}, streak: {}, folded: 109, ...(fan ? { fan } : {}) });
+  const old8 = '{"base":{"drive":50,"sociability":50,"warmth":50,"openness":50,"composure":50,"integrity":50,"family":50,"outabout":50},"mood":{},"streak":{},"folded":109}';
+  const r = (id, ds, o = {}) => [id, '', '', ds, 'Active', 4, o.clock || 'ENGINE', o.spouse || '', o.parents || '', o.children || '', o.hh || '', o.emp || '', o.role || ''];
+  const rows = [
+    r('POP-00900', dial(70, 'oaks'), { hh: 'HH-1' }),                         // 0 an Oaks fan, household HH-1
+    r('POP-00901', '', { hh: 'HH-1', parents: '["POP-00900","POP-00950"]' }),  // 1 newborn in HH-1
+    r('POP-00202', dial(85, 'as')),                                          // 2 an A's fan at 85
+    r('POP-00903', '', { spouse: 'POP-00202 Marky Beal' }),                  // 3 a new spouse of the 85 fan
+    r('POP-00904', ''),                                                      // 4 a stranger
+    r('POP-00905', '', { clock: 'GAME', emp: 'BIZ-00074', role: 'SG / The Oaks' }), // 5 a new Oaks player
+    r('POP-00906', old8, { hh: 'HH-1' }),                                    // 6 an existing 8-dial row in a fan house
+    r('POP-00907', dial(59, 'as'), { hh: 'HH-2' }),                          // 7 not a fan (59)
+    r('POP-00908', '', { hh: 'HH-2' })                                       // 8 new in a non-fan house
+  ];
+  const before6 = rows[6][iDS];
+  const ctx = { mode: {}, summary: { absoluteCycle: 110, simYear: 2042 }, config: {}, ledger: { headers: H.slice(), rows, dirty: false } };
+  C.compressLifeHistory_(ctx, {});
+  const got = (i) => C.parseDialState_(ctx.ledger.rows[i][iDS]);
+  ok('C8 newborn in a fan household starts a fan, capped at 65, the house team', got(1).base.fandom === 65 && got(1).fan === 'oaks', ctx.ledger.rows[1][iDS]);
+  ok('C8 a new spouse of an 85 fan starts at 65, A\'s', got(3).base.fandom === 65 && got(3).fan === 'as');
+  ok('C8 a stranger starts at 50 with no team', got(4).base.fandom === 50 && !got(4).fan);
+  ok('C8 a new Oaks player starts a fan (athletes start as fans)', got(5).base.fandom === 65 && got(5).fan === 'oaks');
+  ok('C8 an existing row is left byte-identical (the seed writes it, not the fold)', ctx.ledger.rows[6][iDS] === before6);
+  ok('C8 a 59 is not a donor', got(8).base.fandom === 50 && !got(8).fan);
+  ok('C8 counts reach the summary', ctx.summary.lifeHistoryCompression.fandomSeeded.rows === 5 && ctx.summary.lifeHistoryCompression.fandomSeeded.fans === 3,
+    JSON.stringify(ctx.summary.lifeHistoryCompression.fandomSeeded));
+}
+
 console.log('\n' + passed + ' passed, ' + failed + ' failed');
 if (failed) process.exit(1);

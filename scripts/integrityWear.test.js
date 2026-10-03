@@ -144,7 +144,11 @@ function integ(ctx, i) { return JSON.parse(ctx.ledger.rows[i][iDS]); }
   [2, 3, 4, 5, 6, 7, 8, 9].forEach(function(i) {
     assert('3.4 out-of-cohort row ' + rows[i][0] + ' never wears — exact bytes', ctx.ledger.rows[i][iDS] === before[i]);
   });
-  assert('3.5 no DialState: never worn, never seeded', ctx.ledger.rows[10][iDS] === '');
+  // engine.208 C8: a blank DialState is a citizen the dials have never met — the fold now gives it a
+  // first DialState (fandom from the household). What this row protects is unchanged: no wear.
+  var k = ctx.ledger.rows[10][iDS] ? JSON.parse(ctx.ledger.rows[10][iDS]) : null;
+  assert('3.5 no DialState: never worn (engine.208 seeds a first DialState, no wear in it)',
+    k && !k.wear && k.base.integrity === 50 && k.base.fandom === 50, ctx.ledger.rows[10][iDS]);
   assert('3.6 a DialState with no base: never worn, never seeded', ctx.ledger.rows[11][iDS] === before[11]);
   var m = integ(ctx, 12);
   assert('3.7 hardship lifted: regains by rate', near(m.base.integrity, 46.5) && near(m.wear.d, 3.5) && m.wear.l === CY, JSON.stringify(m));

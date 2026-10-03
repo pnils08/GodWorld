@@ -42,6 +42,8 @@ These files live at `/root/GodWorld/` and are catalogued here for completeness. 
 
 ---
 
+- **`data/fandom_seed_overrides.json`** — engine.208 dial 9 AUTHORED seed values: 22 canon fans (citizen-pages + edition ingest, hand-classified 2026-10-02), with the exclusion rationale inline. Read by the fandom seed pass; everyone else starts at 50 + wager/zone/household terms.
+
 ## Top level — `docs/`
 
 - **[[for-claude-review/README]]** — the house-guest inbox (builder-direct 2026-08-29). A finished research/plan MD from Kimi/Codex/Grok/Antigravity saved to `docs/for-claude-review/` is a message to Claude; the session-startup hook greets with `REVIEW INBOX: clean` or `N waiting — <files>` (count + names only, never contents). Claude reads on demand, then accepts (moves to `docs/research/` or `docs/plans/`, registers here, files the ROLLOUT row, updates the guest `NEXT` line) or sends back (dated `## Review` section appended, file stays). Clean inbox = no guest work waiting. *(reference, governance, house-guests, active)*

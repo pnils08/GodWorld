@@ -158,35 +158,40 @@ function themesFor(text) {
   for (const m of String(text || '').match(/\b[A-Z][a-z]+(?:\s+[A-Z][a-z]+)+\b/g) || []) if (!hoodNames().has(m)) out.add(m);
   return out;
 }
+/** stances(text) -> [{ entity, polarity, sentence }] — polarity and entity bound in the SAME sentence
+ *  (codex review 2026-10-03: whole-segment polarity leaked from one entity to another, and two
+ *  reversals on different entities cancelled to zero). " --- " (the wake's multi-answer joiner) and
+ *  blank lines are sentence boundaries. */
+function stances(text) {
+  const out = [];
+  const flat = citizenText(text).replace(/\s+---\s+|\n{2,}/g, '. ').replace(/\s+/g, ' ');
+  for (const sentence of flat.match(/[^.!?]+[.!?]*/g) || []) {
+    const polarity = polarityOfText(sentence);
+    if (!polarity) continue;
+    for (const entity of themesFor(sentence)) out.push({ entity, polarity, sentence: sentence.trim() });
+  }
+  return out;
+}
 /** stanceConflict(quoteText, docs, opts) -> null | { entity, quotePolarity, pagePolarity, customId, cycle, excerpt }
- *  docs: that citizen's index rows (any order); opts.skipCustomIds: docs the quote itself answered
- *  (a page-line sourced interview quotes the page back — a reversal there is an answer, not a conflict). */
+ *  docs: that citizen's index rows (any order); opts.skipCustomIds: the doc this quote itself answered
+ *  (a page-line sourced interview quotes the page back — a reversal there is an answer, not a conflict);
+ *  opts.limit: how many recent reflections to read (3). The quote's own sentences, where a PRESS doc
+ *  stored them, are removed sentence by sentence — the rest of that doc is still read. */
 function stanceConflict(quoteText, docs, opts = {}) {
-  const qp = polarityOfText(quoteText);
-  if (!qp) return null;
-  const qThemes = themesFor(quoteText);
-  if (!qThemes.size) return null;
+  const q = stances(quoteText);
+  if (!q.length) return null;
   const skip = new Set(opts.skipCustomIds || []);
-  // The interview's own record: a PRESS page doc that IS this quote (or holds it) is the same
-  // utterance, not a prior stance — never compared against itself.
-  const qKey = String(quoteText || '').replace(/\s+/g, ' ').trim().slice(0, 60).toLowerCase();
-  const sameUtterance = d => { const t = citizenText(d.content).replace(/\s+/g, ' ').toLowerCase(); return qKey.length >= 20 && (t.includes(qKey) || String(quoteText).toLowerCase().includes(t.slice(0, 60))); };
-  const recent = (docs || []).filter(d => d && d.type === 'reflection' && !skip.has(d.customId) && !sameUtterance(d))
+  const own = new Set(stances(quoteText).map(x => x.sentence.toLowerCase()).concat(
+    (citizenText(quoteText).replace(/\s+/g, ' ').match(/[^.!?]+[.!?]*/g) || []).map(x => x.trim().toLowerCase())));
+  const recent = (docs || []).filter(d => d && d.type === 'reflection' && !skip.has(d.customId))
     .sort((a, b) => (b.cycle - a.cycle) || String(b.createdAt || '').localeCompare(String(a.createdAt || '')))
     .slice(0, opts.limit || 3);
   for (const d of recent) {
-    // A PRESS page doc can hold several answers joined by " --- "; each is its own stance. Read the
-    // segment that names the entity, never the whole doc (a cheer about the A's two answers up
-    // must not colour a sceptical line about the council).
-    const segments = citizenText(d.content).split(/\s+---\s+|\n{2,}/).map(x => x.trim()).filter(Boolean);
-    for (const seg of segments) {
-      const pp = polarityOfText(seg);
-      if (!pp || pp === qp) continue;
-      for (const entity of themesFor(seg)) {
-        if (!qThemes.has(entity)) continue;
-        const sentence = (seg.replace(/\s+/g, ' ').match(/[^.!?]*[.!?]?/g) || []).find(x => themesFor(x).has(entity)) || seg.slice(0, 200);
-        return { entity, quotePolarity: qp, pagePolarity: pp, customId: d.customId, cycle: d.cycle, excerpt: sentence.trim().slice(0, 200) };
-      }
+    for (const ps of stances(d.content)) {
+      if (own.has(ps.sentence.toLowerCase())) continue; // the same utterance, not a prior stance
+      const qs = q.find(x => x.entity === ps.entity && x.polarity !== ps.polarity);
+      if (!qs) continue;
+      return { entity: ps.entity, quotePolarity: qs.polarity, pagePolarity: ps.polarity, customId: d.customId, cycle: d.cycle, excerpt: ps.sentence.slice(0, 200) };
     }
   }
   return null;
@@ -314,7 +319,7 @@ async function grep() {
 }
 
 module.exports = { INDEX_DIR, INDEX_PATH, META_PATH, SLOT_RE, TYPES, RULE, admit, loadIndex, loadMeta, dumpIndex, listAll, citizenText,
-  stanceConflict, polarityOfText, polarityOfDoc, themesFor };
+  stanceConflict, stances, polarityOfText, polarityOfDoc, themesFor };
 
 if (require.main === module) {
   (async () => {

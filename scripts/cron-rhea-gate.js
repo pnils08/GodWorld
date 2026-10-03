@@ -535,13 +535,17 @@ async function main() {
           if (index.length) {
             const byPop = new Map();
             for (const r of index) { if (!byPop.has(r.popId)) byPop.set(r.popId, []); byPop.get(r.popId).push(r); }
-            const pageLineDocs = new Set(((packet && packet.sourcingPool && packet.sourcingPool.candidates) || [])
-              .filter(c => c && c.sourceKind === 'page-line' && c.evidence && c.evidence.customId).map(c => c.evidence.customId));
+            // The page a quote answered is skipped for THAT citizen only (codex review: a packet-wide skip
+            // could hide another citizen's reversal at the same doc id — ids embed the POPID, but bind anyway).
+            const pageLineByPop = new Map(((packet && packet.sourcingPool && packet.sourcingPool.candidates) || [])
+              .filter(c => c && c.sourceKind === 'page-line' && c.evidence && c.evidence.customId && c.pop)
+              .map(c => [String(c.pop).toUpperCase(), c.evidence.customId]));
             for (const q of (packet && packet.quotes) || []) {
               if (!q || !q.pop || !q.quote || q.sourceKind === 'office-record') continue;
               const docs = byPop.get(String(q.pop).toUpperCase());
               if (!docs) continue;
-              const hit = pages.stanceConflict(q.quote, docs, { skipCustomIds: [...pageLineDocs] });
+              const own = pageLineByPop.get(String(q.pop).toUpperCase());
+              const hit = pages.stanceConflict(q.quote, docs, { skipCustomIds: own ? [own] : [] });
               if (hit) pageContradictions.push({ name: q.name || q.pop, pop: q.pop, entity: hit.entity, customId: hit.customId, cycle: hit.cycle, excerpt: hit.excerpt,
                 quotePolarity: hit.quotePolarity, pagePolarity: hit.pagePolarity });
             }

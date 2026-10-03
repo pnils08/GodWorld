@@ -33,3 +33,12 @@ assert.strictEqual(p.stanceConflict('The council met on Tuesday.', docs), null, 
 assert.strictEqual(p.stanceConflict('I am proud of the council this week.', docs, { skipCustomIds: ['cp-POP-90001-c108-evening'] }), null, 'the page the quote answered is skipped');
 assert.strictEqual(p.stanceConflict('I am proud of the council this week.', [docs[2]]), null, 'a tension doc is never the page side');
 console.log('scanCitizenPages.test.js: PASS');
+
+// codex review 2026-10-03 (seams 4+5) — the repros that held
+const T = (q, page, extra) => p.stanceConflict(q, [{ customId: 'cp-POP-90009-c108-PRESS', popId: 'POP-90009', cycle: 108, type: 'reflection', content: page }], extra);
+assert.strictEqual(T('I support transit. The council met.', 'I hate the council. Transit was discussed.'), null, 'F2: polarity does not leak from the council sentence onto transit');
+assert.ok(T('I love transit. I hate the council.', 'I hate transit. I love the council.'), 'F3: two reversals on two entities do not cancel');
+assert.ok(T('I am proud of transit improving now.', 'I am proud of transit improving now. --- I hate transit this week.'), 'F4: only the quoted sentence is removed, the rest of the doc is read');
+assert.strictEqual(T('I love transit.', 'I love transit. --- The council met.'), null, 'own utterance removed, nothing else conflicts');
+assert.strictEqual(T('I love transit.', 'I hate transit.', { skipCustomIds: ['cp-POP-90009-c108-PRESS'] }), null, 'skip is honoured');
+console.log('scanCitizenPages.test.js (codex fold): PASS');

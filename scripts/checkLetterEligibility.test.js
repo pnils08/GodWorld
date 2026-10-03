@@ -116,7 +116,12 @@ console.log('\n[ES-2 step 1] ' + passed + '/' + total + ' assertions passed');
   var none = g.screenPageStance(lines, null);
   assert.strictEqual(none.ok.length, 0, 'no index = nobody verified');
   assert.ok(/scanCitizenPages.js --dump/.test(none.failed[0].reason), 'missing index names the dump command');
-  console.log('  ok  pipeline.70 page-stance backstop');
+  // codex review 2026-10-03 F1: a second POPID on a line used to ride unscreened
+  var two = g.screenPageStance(['- POP-90001 — verified [cp-POP-90001-c999-morning]; POP-90002 — writer without page'], index);
+  assert.deepStrictEqual(two.ok, [], 'two POPIDs on one line: nobody passes');
+  assert.deepStrictEqual(two.failed.map(function (f) { return f.popId; }).sort(), ['POP-90001', 'POP-90002']);
+  assert.ok(/one writer per line/.test(two.failed[0].reason));
+  console.log('  ok  pipeline.70 page-stance backstop (+ one writer per line)');
 })();
 
 process.exit(passed === total ? 0 : 1);

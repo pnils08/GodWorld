@@ -147,13 +147,17 @@ function extractCandidateLines(text) {
 function screenPageStance(lines, index) {
   const ok = [], failed = [];
   if (!Array.isArray(index)) {
-    for (const l of lines) { const pop = (l.match(POPID_RE) || [])[0]; if (pop) failed.push({ popId: pop, reason: 'no page index on disk — run `node scripts/scanCitizenPages.js --dump` (can\'t-verify = ineligible)' }); }
+    for (const l of lines) for (const pop of new Set(l.match(POPID_RE) || [])) failed.push({ popId: pop, reason: 'no page index on disk — run `node scripts/scanCitizenPages.js --dump` (can\'t-verify = ineligible)' });
     return { ok, failed };
   }
   const byId = new Map(index.map((r) => [r.customId, r]));
   for (const l of lines) {
-    const pop = (l.match(POPID_RE) || [])[0];
-    if (!pop) continue;
+    // One writer per line: every POPID on the line is a candidate and is screened; two POPIDs on one
+    // line is ambiguous and fails both (codex review 2026-10-03: a second POPID used to ride unscreened).
+    const popsOnLine = [...new Set(l.replace(PAGE_CITE_RE, '').match(POPID_RE) || [])];
+    if (!popsOnLine.length) continue;
+    if (popsOnLine.length > 1) { for (const pop of popsOnLine) failed.push({ popId: pop, reason: 'more than one POPID on a candidate line (' + popsOnLine.join(', ') + ') — one writer per line, each with their own page citation' }); continue; }
+    const pop = popsOnLine[0];
     const cite = l.match(PAGE_CITE_RE);
     if (!cite) { failed.push({ popId: pop, reason: 'no page citation [cp-POP-…-c<N>-<slot>] on the candidate line — a letter-writer has a stance on their own page, or no letter' }); continue; }
     const doc = byId.get(cite[1]);
@@ -233,6 +237,8 @@ async function main() {
     const index = fs.existsSync(pages.INDEX_PATH) ? pages.loadIndex() : null;
     const stance = screenPageStance(extractCandidateLines(fs.readFileSync(filePath, 'utf8')), index);
     pageFailed = stance.failed;
+    const okSet = new Set(stance.ok);
+    for (const pop of candidateIds) if (!okSet.has(pop) && !pageFailed.some((f) => f.popId === pop)) pageFailed.push({ popId: pop, reason: 'in the pool but on no screened candidate line' });
     console.log('  page stance (pipeline.70): cited ' + stance.ok.length + ' | NO STANCE: ' + pageFailed.length);
     pageFailed.forEach((x) => console.error('  ✗ NO PAGE STANCE ' + x.popId + ' — ' + x.reason));
   }

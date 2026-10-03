@@ -426,6 +426,10 @@ console.log('═══ H. v1.5 demotion campaign — the drop is the vote');
   check('H11 out-of-town defaults pump Drive/Integrity/Composure and dump Family',
     defaults.base.drive >= 70 && defaults.base.integrity >= 60 &&
     defaults.base.composure >= 60 && defaults.base.family < 50);
+  // engine.208: the challenger's DialState is not blank, so the fold never seeds it — it carries dial 9 itself
+  check('H11b challenger carries all nine dials (fandom 50, no team: no household at mint)',
+    defaults.base.fandom === 50 && defaults.streak.fandom === 0 && !defaults.fan &&
+    require('../utilities/citizenMemory.js').DIALS.every(d => defaults.base[d] != null));
 
   // civic.32 — one citizen, one race. Bench C112 readback: Shai Diaz ran for D3
   // (since 111) and D5 (since 112); Ingrid Bautista seated as Mayor at C112 and

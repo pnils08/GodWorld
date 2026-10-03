@@ -1272,16 +1272,19 @@ function readDialBase_(dialState, dial) {
   }
 }
 
-/** Civic-challenger defaults: pumped Drive / Integrity / Composure; dumped Family (they left home). */
+/** Civic-challenger defaults: pumped Drive / Integrity / Composure; dumped Family (they left home).
+ *  engine.208: dial 9 fandom at 50 — a challenger mints with no spouse, parents or household, so the
+ *  household inheritance rule (compressLifeHistory inheritFandom_) gives 50 and no team. Written here
+ *  because this DialState is not blank, so the fold's blank-row seed never reaches it. */
 function challengerDialStateJson_() {
   return JSON.stringify({
     base: {
       drive: 72, sociability: 62, warmth: 52, openness: 58,
-      composure: 64, integrity: 68, family: 44, outabout: 66
+      composure: 64, integrity: 68, family: 44, outabout: 66, fandom: 50
     },
     streak: {
       drive: 0, sociability: 0, warmth: 0, openness: 0,
-      composure: 0, integrity: 0, family: 0, outabout: 0
+      composure: 0, integrity: 0, family: 0, outabout: 0, fandom: 0
     }
   });
 }

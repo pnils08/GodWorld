@@ -1,0 +1,47 @@
+========================================================================
+sessionEndMechanical: terminal=research-build, rotate-history=false, dry-run=false
+========================================================================
+Expected upstream model step (BEFORE this script):
+  1. SESSION_CONTEXT.md PIN + NEXT[terminal] line + ROLLOUT_PLAN.md updated
+
+Mechanical sub-steps (5):
+  [1/5] session summary → Supermemory (best-effort)
+  [2/5] auditPlanTagDrift (informational)
+  [3/5] ROLLOUT conformance lint (informational)
+  [4/5] cross-terminal git stack check (read-only)
+  [5/5] pm2 restart
+========================================================================
+
+--- [1/5] session summary → Supermemory (best-effort) ---
+✓ session log → Supermemory [session-logs] doc yz3Tbn6bmZoPHoXSJdfoUR (296 chars, 1 summary rows folded)
+
+--- [2/5] auditPlanTagDrift (informational) ---
+  # Plan tag drift audit
+  
+  Generated: 2026-10-03T06:55:52.464Z
+  Plans scanned: 134
+  No frontmatter: 7
+  No changelog: 7
+  No status-verb match: 118
+  Drifts found: 0
+  
+  No plan-tag drift detected.
+  ✓ no drift detected
+
+--- [3/5] ROLLOUT conformance lint (informational) ---
+  ROLLOUT LINT: clean — every row is a sweep-safe pointer within budget.
+
+--- [4/5] cross-terminal git stack check (read-only) ---
+  ⚠ 4 unpushed commit(s) ahead of origin/main:
+    10f45060 engine.204/205: agy review folded (mediaFeedbackEngine hopeBoost + topic multiplier added to the census and band map; count pattern stated); review filed to docs/research, indexed
+    16a362e9 engine.204/205: all four sim calls RULED 2026-10-03 as proposed (priors .750/.400, weights 1.0/0.35, reach table, EconomicFootprint out, FranchiseStability + CommunityInvestment kept) — build-ready for es
+    e59e89f8 engine.208 M1: athlete going-home lines finally reach the players
+    bac8b8fd engine.208 cut Revision 1 after codex HOLD (10 hunts verified against code); review filed to docs/research
+  Model decision: push if all yours, hold if other terminals stacked.
+
+--- [5/5] pm2 restart ---
+  ✓ godworld-dashboard restarted
+
+========================================================================
+sessionEndMechanical: complete (terminal=research-build)
+========================================================================

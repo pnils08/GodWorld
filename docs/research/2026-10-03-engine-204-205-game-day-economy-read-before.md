@@ -1,6 +1,6 @@
 ---
 title: engine.204 / engine.205 — intensity, reach and the game-day economy: read-before and proposed cut
-status: draft for builder review
+status: build-ready — four sim calls ruled 2026-10-03
 owner: research-build (draft); engine-sheet (build, bench, deploy)
 parent: [[../plans/2026-09-11-sports-as-a-lived-system]] Tasks 3, 4, 10
 related: [[2026-09-18-sports-intensity-and-game-day-economy]] (the census and formulas this builds on), [[2026-10-02-engine-208-fandom-dial-read-before]] (the citizen side; shares the week object), [[../plans/2026-07-05-game-night-connection-design]] Task 3 (Hop 6, folded here)
@@ -178,7 +178,20 @@ iv. **The three authored economy columns** — `EconomicFootprint`, `CommunityIn
 
 Nothing else in this document needs a ruling.
 
+### Rulings (Mike, 2026-10-03 01:52) — the §4 calls are closed
+
+**Verbatim:** "agreed on your recommendations"
+
+i. **Expectation priors — RULED as proposed:** A's .750, Oaks .400 weekly win share, used while fewer than 4 game Cycles exist in the last 8; the franchise's own record after. Fills the `null` in es's stateless scan (§2.1).
+ii. **Franchise weight starts — RULED as proposed:** A's 1.0, Oaks 0.35, in `Carry_Forward_Store.sportsFranchiseWeight`; engine.209 drifts them.
+iii. **Reach per round — RULED as proposed:** off/pre .15 · regular .25 · mid .30 · late .40 · wild-card/play-in .50 · division/first-round .60 · LCS/conf-semis .75 · conf-finals .85 · championship 1.00.
+iv. **Authored economy columns — RULED as proposed:** **delete `EconomicFootprint`**; **keep `FranchiseStability`** as engine.209's authored drift input; **keep `CommunityInvestment`** as community-program pressure in the franchise's venue. Both kept columns must move their number off the hood key before `HomeNeighborhood` is deleted (§2.6).
+
+**Status after the rulings:** nothing in this document is waiting on a ruling. es builds §2 on top of the 208 week object, with agy's review folded first if it lands with FIXes.
+
 ## Changelog
+
+- 2026-10-03 01:52 (research-build, S523) — Mike ruled all four §4 calls as proposed (verbatim under §4 Rulings): priors .750/.400, weights 1.0/0.35, the reach table, delete EconomicFootprint and keep FranchiseStability + CommunityInvestment. Build-ready for es.
 
 - 2026-10-03 01:45 (research-build, S523) — es's three substrate calls folded (builder in `sportsWeekRecord.js`; expectation/median a stateless feed scan, `null` below 4 game Cycles; rounds alias to `playoffs` for the label, raw word as `lens`); 208 builds the first half of the object (`a1102e5f`), not a gate. C108 corrected to its real `playoffs` lens and one accepted `WeekRecord` cell; C101–C108 named as a `Team Record` proxy, not a replay — acceptance (1) rescoped to C109–C110 + synthetic weeks; `top` band shown unreached in range. Reader line `:176`.
 - 2026-10-03 (research-build, S523) — initial read-before and proposed cut, drafted on Mike's go while engine-sheet builds engine.208. Measured: home/away is parsed but unread; `HomeNeighborhood` still on the tab and typed as the story's setting (C110 Eastlake ×3 for two away games); 174 word tests, 0 per-franchise readers; the `simMonth` calendar read survives; the authored economy columns reach one site via the hood being deleted. C110 worked case stated against the sixth-block lens ruling. Four sim calls.

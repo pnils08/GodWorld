@@ -510,7 +510,7 @@ engine.210 LIVE on PROD @97; engine.202 LIVE on PROD @98 with the `WeekRecord` c
 
 ## Changelog
 
-- 2026-10-03 (research-build, S523) — engine.204/205 read-before + cut drafted: [[../research/2026-10-03-engine-204-205-game-day-economy-read-before]]. Tasks 3, 4 and 10 build as one week object (`S.sportsWeek` / `S.sportsCity`) — volume from the folded `WeekRecord`, stakes from the last-entry lens (sixth block), surprise against a per-franchise expectation shared with engine.208, venue share from home games, per-round reach. Hop 6 folded (§2.4). Four sim calls open (§4): expectation priors, franchise weight starts, reach numbers, the three authored economy columns.
+- 2026-10-03 (research-build, S523) — engine.204/205 read-before + cut drafted: [[../research/2026-10-03-engine-204-205-game-day-economy-read-before]]. Tasks 3, 4 and 10 build as one week object (`S.sportsWeek` / `S.sportsCity`) — volume from the folded `WeekRecord`, stakes from the last-entry lens (sixth block), surprise against a per-franchise expectation shared with engine.208, venue share from home games, per-round reach. Hop 6 folded (§2.4). Four sim calls RULED the same night as proposed (research doc §4 Rulings): priors .750/.400, weights 1.0/0.35, reach table, EconomicFootprint deleted / FranchiseStability + CommunityInvestment kept. Build-ready for es, on top of the 208 week object.
 
 - 2026-10-02 (research-build, S522) — engine.208 read-before + cut drafted and agy-reviewed; builder ruled the five fandom sim calls the same night (athletes, seed, round words, magnitudes, Oaks fan cost) — see the research doc §4 Rulings. Dropdown gains playoff round words (ruling iii); feed-named citizens get signed life events (ruling i).
 

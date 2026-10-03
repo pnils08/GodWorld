@@ -58,10 +58,23 @@ function gameNightBucket_(entry) {
   return 'neutral';
 }
 
+// engine.208 M1: the feed writes positions — "Arturo Ramos (SP)", "Ernesto Quintero (3B/1B/DH)",
+// "Kevin Clark (3B). Sidney Tumolo (2B)", an unclosed "(SP" — and the match below is exact, so
+// before this only 17 of 165 C100+ mentions resolved. Strip closed then unclosed position
+// groups (a closed group becomes a separator: "Benji Dillon (SP/RP) Pablo Almanzar (SP)" has no comma),
+// split on , | ; / and on ". " before a capital, compare with gameNightNameKey_.
 function parseNamesUsed_(entry) {
   var raw = String(entry.namesUsed || '').trim();
   if (!raw) return [];
-  return raw.split(/[,|;\/]+/).map(function (s) { return s.trim(); }).filter(Boolean);
+  return raw.replace(/\([^(),|;.]*\)/g, ',').replace(/\([^,|;.]+/g, '')
+    .split(/[,|;\/]+|\.\s+(?=[A-Z])/)
+    .map(function (s) { return s.trim(); }).filter(Boolean);
+}
+
+// one key for a feed name and a ledger "First Last": trailing period off ("Carter Jr." = "Carter Jr"),
+// lowercased. Exact after that — a typo stays unresolved, never fuzzy-matched to a POPID.
+function gameNightNameKey_(s) {
+  return String(s || '').trim().replace(/\.$/, '').trim().toLowerCase();
 }
 
 /**
@@ -86,7 +99,7 @@ function applyGameNightMoments_(ctx) {
   var byName = {};
   for (var r = 0; r < rows.length; r++) {
     if (iStatus >= 0 && String(rows[r][iStatus] || '').toLowerCase() !== 'active') continue;
-    var full = ((rows[r][iFirst] || '') + ' ' + (rows[r][iLast] || '')).trim().toLowerCase();
+    var full = gameNightNameKey_((rows[r][iFirst] || '') + ' ' + (rows[r][iLast] || ''));
     if (full) byName[full] = r;
   }
 
@@ -96,6 +109,7 @@ function applyGameNightMoments_(ctx) {
   var logRows = [];
   var touched = [];
   var perPlayer = {};
+  var unresolved = [];
 
   for (var e = 0; e < entries.length; e++) {
     var entry = entries[e];
@@ -105,12 +119,13 @@ function applyGameNightMoments_(ctx) {
     var names = parseNamesUsed_(entry);
 
     for (var n = 0; n < names.length; n++) {
-      var key = names[n].toLowerCase();
+      var key = gameNightNameKey_(names[n]);
       var ri = byName[key];
-      if (ri === undefined || perPlayer[key]) continue; // unknown name or already had their night
+      if (ri === undefined) { if (unresolved.indexOf(names[n]) < 0) unresolved.push(names[n]); continue; }
+      if (perPlayer[key]) continue; // already had their night
       perPlayer[key] = true;
 
-      var pick = pool[Math.floor(safeRand_(ctx) * pool.length)];
+      var pick = pool[Math.floor(safeRand_(ctx)() * pool.length)]; // engine.208 M1: safeRand_ returns the rng; the bare product was NaN
       var row = rows[ri];
       var tagString = 'Sports|source:sports|gameNight|streak:' + (entry.streak || '-');
       var line = stamp + ' — [Sports] ' + pick;
@@ -129,6 +144,12 @@ function applyGameNightMoments_(ctx) {
       ]);
       touched.push(String(row[iPop]));
     }
+  }
+
+  // engine.208 M1: a feed name that matches no active citizen is named, not dropped silently —
+  // a typo on the sheet ("Mark Aiken") or a sports-layer player with no POPID.
+  if (unresolved.length && typeof Logger !== 'undefined') {
+    Logger.log('applyGameNightMoments_: unresolved feed names, cycle ' + cycle + ': ' + unresolved.join(', '));
   }
 
   if (!touched.length) return;

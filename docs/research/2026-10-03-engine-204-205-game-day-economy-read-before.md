@@ -32,18 +32,19 @@ Everything in §1 was read from code or the beats mirror on 2026-10-03 (mirror p
 | Token grammar | `utilities/sportsWeekRecord.js:7` `parseSportsWeekRecord_` | `H:W H:L A:W …` or `none`. Returns `games[]`, `wins`, `losses`, `gamesPlayed`, `homeGames`, `awayGames`, `firstResult`. **Home/away is known per game** since engine.202 — the research's "only `WeekRecord` knows *h* — today nothing does" is half-resolved: the parser knows, no cycle-path consumer reads it. |
 | Fold | `applySportsSeason.js:227-258` | Several game rows for one franchise fold in row order into the first row's week (`foldSportsWeeks_`). A blank `WeekRecord` cell is **neither folded nor rejected** — the row stays an entry (its `SeasonType` still sets the lens). A bad cell rejects the cell to `Engine_Errors`, never the Cycle. |
 | Who reads the week | `casinoLedgerEngine.js:152` via `sportsWeeklyResult_` (`sportsWeekRecord.js:57`) | **The casino is the only reader**, and it reads `firstResult` only. `gamesPlayed` / `homeGames` / `wins` / `losses` reach nothing in the cycle path (`grep weekRecord\|homeGames\|gamesPlayed` over `phase*/ utilities/ lib/`: parser, reader, casino, `compileHandoff.js:1530` prose, contract/preflight scripts — nothing else). |
-| Typed so far | beats mirror, C109–C110 | C109 A's `H:W` `H:L` `A:W` (3 games, 2 home, 2-1); Oaks `H:L` `A:L` (0-2, L7). **C110 A's `A:W` `A:W`** on two `playoffs` `game-result` rows, then a third `game-result` row typed `championship`, `Team Record` 11-3, **`WeekRecord` blank**. |
+| Typed so far | beats mirror, C101–C110 | **C101–C108: 47 rows, 3 `WeekRecord` cells** (all C108: one A's `game-result` `H:W`; an A's `season-state` `A:W`, which `sportsWeekForEntry_` rejects — games require `game-result`; an Oaks `game-result` `A:L`). There is no home/away history before C109 (research §Hazard): the research's C101–C108 K1 numbers are a `Team Record` proxy, not a replayable week. C109 A's `H:W` `H:L` `A:W` (3 games, 2 home, 2-1); Oaks `H:L` `A:L` (0-2, L7). **C110 A's `A:W` `A:W`** on two `playoffs` `game-result` rows, then a third `game-result` row typed `championship`, `Team Record` 11-3, **`WeekRecord` blank**. |
 
 ### 1.2 Phase and the lens — the C110 worked case
 
 - `deriveSeasonByTeamFromFeed_` (`applySportsSeason.js:417`): the later row wins per team — the lens. `deepestSportsPhase_` (`:444`) takes the MAX across teams for `S.sportsSeason`. **`S.sportsSeasonByTeam` still has zero readers outside the file** (unchanged since 09-18).
-- **C110 as typed today:** the A's week folds to `A:W A:W` — 2 games, 0 home, 2-0. The third row (blank `WeekRecord`) sets the lens to `championship` and folds nothing. The casino settles on `W`. No Oaks row yet.
+- **C110 as typed today:** the A's week folds to `A:W A:W` — 2 games, 0 home, 2-0. The third row (blank `WeekRecord`) sets the lens to `championship` and folds nothing. The casino settles on `W`. No Oaks row yet. (Live practice, es 2026-10-03: World Series games are typed `playoffs`; only the clinch is `championship` — so `championship` as a lens is the title moment, and the round words from 208 ruling iii alias to `playoffs` for the `S.sportsSeason` label while the raw word rides on as `lens`.)
+- **C108 on the mirror** (not the research's §1.7 expectation, which was written before the championship row was retyped for C109): every A's row reads `playoffs`; the only accepted `WeekRecord` is one `H:W`. Today's code ran C108 as `playoffs`, correctly (engine.210 row).
 - **What today's code does with that at the fire:** `S.sportsSeason` = `championship`, so every championship branch fires on the word with two away ALCS wins behind it — `CHAMPIONSHIP_BOOM` impact 15 ×1.5 at the sports zones (`economicRippleEngine.js:463-466`, `:671`), migration `+rng×60`, employment `+0.001`, economy label → `booming` (`godWorldEngine2.js:1284`, `:1186`, `:1335`), crisis crowd weight, bonds, evening crowd JL +4, and transit "game day" on **Eastlake** (typed `HomeNeighborhood` on all three rows) ∪ the zones.
 - **What the cut does with it (§2.1 numbers):** A's volume `vol(2)` = 0.49 × stakes 1.0 × weight 1.0 → unsigned 0.49; surprise against a dynasty prior of .750 = (1.0 − .75)/.5 = +0.5 → signed +0.24; **venue share 0** (no home game: no stadium crowd, no transit game day); city share at championship reach 1.0 — nightlife and retail up city-wide, one positive ripple on `['all']`. The top of today's scale is reached only by a full home World Series week won above expectation; two away wins are a fraction of it by construction. That is the plan's "they stay as the top of the scale".
 
 ### 1.3 `HomeNeighborhood` — still on the tab, still a reach channel
 
-- The column survived the 2026-09-19 column audit (19 columns; it is read at `applySportsSeason.js:174`). The ruling (§0-2) is unexecuted because two consumers still read it: transit game-day hoods (`updateTransitMetrics.js:666-673`, `isGameDay_` `:781` true on any row) and the per-hood effects of the authored columns (`processFeedSheet_` → `S.sportsNeighborhoodEffects` keyed by the typed hood, read at `cityEveningSystems.js:405`).
+- The column survived the 2026-09-19 column audit (19 columns; it is read at `applySportsSeason.js:176`). The ruling (§0-2) is unexecuted because two consumers still read it: transit game-day hoods (`updateTransitMetrics.js:666-673`, `isGameDay_` `:781` true on any row) and the per-hood effects of the authored columns (`processFeedSheet_` → `S.sportsNeighborhoodEffects` keyed by the typed hood, read at `cityEveningSystems.js:405`).
 - It is typed as **the story's setting**, as the research found: C107 Eastlake / Glenview / Fruitvale; C109 Jack London ×2, Chinatown, Baylight District, Downtown; **C110 Eastlake ×3 for two away games**. Transit will call Eastlake a game-day hood at C110.
 
 ### 1.4 Consumer census today — every numeric site keys on a phase word, none on the record
@@ -72,7 +73,7 @@ Values C107–C110, every row: A's `EconomicFootprint` growing / `FranchiseStabi
 
 ### 1.6 `Carry_Forward_Store`
 
-`saveCarryForwardBlob_` / `loadCarryForwardBlob_` (`loadPreviousEvening.js:125`, `:159`): keyed JSON, a 9 KB script-property layer with a sheet ring behind it, self-ghost detection on replay. The home for the expectation, the trailing median and the franchise weight (engine.209's chosen home too). Key names `sportsWeek`, `sportsExpectation`, `sportsFranchiseWeight` are unused today.
+`saveCarryForwardBlob_` / `loadCarryForwardBlob_` (`loadPreviousEvening.js:125`, `:159`): keyed JSON, a 9 KB script-property layer with a sheet ring behind it, self-ghost detection on replay. The home for the franchise weight only (engine.209's chosen home); expectation and median are a stateless feed scan (§2.1, es). Key name `sportsFranchiseWeight` is unused today.
 
 ### 1.7 What changed since the 09-18 research
 
@@ -84,27 +85,27 @@ Build order: week object → numeric consumers → venue/city split → bars →
 
 ### 2.1 The week object — built once, published to every consumer
 
-`utilities/sportsWeek.js` (pure, Node-testable, same shape as `sportsWeekRecord.js`); `applySportsSeason_` calls it after the feed read and before `ctx.summary = S`, so every Phase 2+ consumer sees it.
+The builder lives in the existing `utilities/sportsWeekRecord.js` (es, substrate owner, 2026-10-03 — not a new file); `applySportsSeason_` calls it after the feed read and before `ctx.summary = S`, so every Phase 2+ consumer sees it. **engine.208 builds the first half of this object** (`g/w/l/h/a`, `lens`, `expectation`, `n`, `surprise`, `cls` — committed `a1102e5f`, 208 doc §2.9 C3); this build adds `vol`, `stakes`, `reach`, `weight`, `unsigned`/`signed`, `venue`, `venueShare`, `median`.
 
 Per franchise *f* (`S.sportsWeek[f]`):
 
 | Field | Source | Formula |
 |---|---|---|
 | `g, w, l, h, a` | folded `WeekRecord` | as parsed; absent → all 0 |
-| `lens`, `depth` | last entry (§0-5) | `SPORTS_PHASE_DEPTH_[lens]` with the round words split in (208 ruling iii) |
+| `lens`, `depth` | last entry (§0-5) | `lens` is the **raw** `SeasonType` word (round words included); `depth` from a round table keyed on `lens`. `S.sportsSeason` keeps today's label (rounds alias to `playoffs`, es 2026-10-03) so the 174 word sites read today's value until §2.2 converts them |
 | `vol` | `g` | `1 − e^(−g/3)` (saturating; 1 game 0.28, 3 → 0.63, 7 → 0.90) |
 | `stakes` | `depth` | `depth / maxDepth` |
 | `reach` | `lens` | per-round table (§4(iii)): regular .25 · mid .30 · late .40 · wild-card/play-in .50 · division/first-round .60 · LCS/conf-semis .75 · conf-finals .85 · championship 1.00 · off/pre .15 |
-| `expectation` | `Carry_Forward_Store.sportsExpectation[f]` | authored prior (§4(i)) until 4 weeks of record exist, then the trailing-8-week mean of `w/g`; updated each game week |
-| `surprise` | week vs expectation | `clamp((w/g − expectation) / 0.5, −1, 1)`; 0 when `g` = 0 |
+| `expectation`, `n` | **stateless feed scan** (es 2026-10-03): win share over the franchise's last 8 Cycles that had games, `n` = those Cycles, `null` below 4 — survives the off-season, needs no store | the authored prior (§4(i)) fills the `null` once ruled; until then `null` → `surprise` 0 for the Oaks, and the A's run on 208's interim |
+| `surprise` | week vs expectation | `clamp((w/g − expectation) / 0.5, −1, 1)`; 0 when `g` = 0 or `expectation` is `null` |
 | `weight` | `Carry_Forward_Store.sportsFranchiseWeight[f]` | authored start (§4(ii)); engine.209 drifts it later |
 | `unsigned` | | `vol × stakes × weight` |
 | `signed` | | `vol × stakes × surprise × weight` |
 | `venueShare` | | `h / g` (0 when `g` = 0) |
 | `venue` | | `[Baylight District]` if `S.baylightOpenings[f]`, else `LEGACY_SPORTS_ZONES_` — per franchise, not the union |
-| `median` | `Carry_Forward_Store` | trailing median of the franchise's own nonzero `unsigned` weeks (engine.184 / engine.188 `medianOf_` shape) |
+| `median` | the same feed scan | trailing median of the franchise's own nonzero `unsigned` weeks over the scanned Cycles (engine.188 `medianOf_` shape); no store |
 
-City (`S.sportsCity`): `intensity` = Σ `unsigned`; `signed` = Σ `signed`; `reach` = max `reach` over franchises with `g` > 0; `band` from `intensity` — top ≥ 0.75 · high ≥ 0.50 · elevated ≥ 0.30 · normal ≥ 0.10 · **quiet** below 0.10 *or* below half the city's own trailing median (the §15 downside without a loss). Measured on the research's C101–C108 K1 sums (0.50 / 0.67 / 0.71 / 0.47 / 0.28 / 0.05 / 0.61 / 0.86): high · high · high · elevated · normal · quiet · high · top. The championship branches fire at C108 because 5 ALCS games were played at depth 6, not because the word was typed; C106 (no A's games, `playoffs` lens) is quiet, as Q1 rules.
+City (`S.sportsCity`): `intensity` = Σ `unsigned`; `signed` = Σ `signed`; `reach` = max `reach` over franchises with `g` > 0; `band` from `intensity` — top ≥ 0.75 · high ≥ 0.50 · elevated ≥ 0.30 · normal ≥ 0.10 · **quiet** below 0.10 *or* below half the city's own trailing median (the §15 downside without a loss). Measured on the research's C101–C108 K1 proxy sums (`Team Record` deltas, no home/away — §1.1), with C108 at its real `playoffs` lens (0.81 × 5/6 = 0.68): high · high · high · elevated · normal · quiet · high · high. **Nothing in C101–C110 reaches `top`**: that band is a full home World Series week — the synthetic case in §2.8(3). C106 (no A's games, `playoffs` lens) is quiet, as Q1 rules; the championship branches never fire on the word alone.
 
 `deepestSportsPhase_` and `S.sportsSeason` stay as the **label** for prose and pools. The bands are the replacement for word tests at numeric sites.
 
@@ -145,15 +146,14 @@ Research §5's table: the per-franchise group (transit, crisis zone weight, hood
 
 ### 2.7 Substrate calls for es (not sim)
 
-- Where the expectation and median update: end of Phase 2 (so the same Cycle's week is judged against the prior weeks, not itself) — propose `finalizeCycleState` writes the store, `applySportsSeason_` reads it.
-- Band thresholds and the `|signed| ≥ 0.15` ripple gate are es's to tune on the C101–C110 replay; the bands above are the proposal.
-- `maxDepth` after the round words land (208 ruling iii): the table in §2.1 assumes the rounds are distinct depths.
-- The 208 seam: `Sports-Win` / `Sports-Loss` read `S.sportsWeek[f].surprise` sign (> +0.2 / < −0.2); 208 §2.7's interim rule (A's under .500; Oaks after 4 weeks) **is** the prior-until-4-weeks behaviour here, so nothing in 208 changes except where it reads from.
-- Order against engine.208: this week object first or alongside — 208's signed tags need `surprise`.
+- Expectation and median are a stateless scan of the feed's prior Cycles (es), judged against prior weeks only — the current Cycle is excluded from its own baseline. `Carry_Forward_Store` holds **`weight` only** (engine.209's home).
+- Band thresholds and the `|signed| ≥ 0.15` ripple gate are es's to tune on the C109–C110 replay plus synthetic weeks; the bands above are the proposal.
+- The round table: `depth` and `reach` key on the raw `lens`; `S.sportsSeason` stays aliased (`playoffs` for every round word, `championship` for the clinch) so no word site changes until it is converted in §2.2.
+- The 208 seam is settled (es `a1102e5f`): 208 ships on its own interim and exposes `surprise` (±0.2 → `cls`); this build swaps in the §4(i) priors for the `null` case after the ruling. **Not a gate on 208.**
 
 ### 2.8 Acceptance (dated, C110 named)
 
-1. Bench, replay C101–C110 from the beats rows: the per-franchise week table prints (`g h w l lens vol stakes reach expectation surprise unsigned signed venueShare band`); C106 is `quiet`; C108 is `top` on 5 games at depth 6; **C110 A's: g 2, h 0, lens championship, venueShare 0, signed > 0**.
+1. Bench, replay **C109–C110** from the beats rows (the only Cycles with real `WeekRecord` weeks — C101–C108 have 3 cells and no home/away history, so they are not a replay) plus the synthetic weeks below: the per-franchise week table prints (`g h w l lens vol stakes reach expectation n surprise unsigned signed venueShare band`); C109 A's g 3, h 2; **C110 A's: g 2, h 0, lens championship, venueShare 0, signed > 0**; a Cycle with no rows is `quiet`.
 2. Bench C110: transit game-day hoods = the A's `venue`, **not Eastlake**; evening crowd at the venue 0 (away week); one ripple on `['all']`, positive, impact < 15; no `CHAMPIONSHIP_BOOM` / `PLAYOFF_SPENDING` row.
 3. Bench, a synthetic home losing week (`H:L H:L H:L`, lens playoffs, A's): crowd and transit at the venue **up**; nightlife multiplier **below 1**; ripple **negative**; economy label one step down from `strong`; bars' `Growth_Rate` nudged down.
 4. Bench, Oaks `H:L A:L` at weight 0.35: signed small negative; nothing at band level moves (the A's carry the city); an Oaks fan's dial line is 208's, not here.
@@ -171,7 +171,7 @@ Research §5's table: the per-franchise group (transit, crisis zone weight, hood
 
 ## 4. Sim calls for Mike
 
-i. **Expectation priors, as numbers.** Q3 ruled the principle. Proposed: A's dynasty norm **.750** weekly win share, Oaks expansion prior **.400**, each held until 4 weeks of record exist, then the franchise's own trailing 8 weeks. (A 2-1 A's week reads a mild letdown; an Oaks 2-1 week reads a surprise.)
+i. **Expectation priors, as numbers.** Q3 ruled the principle. Proposed: A's dynasty norm **.750** weekly win share, Oaks expansion prior **.400**, each used while fewer than 4 game Cycles exist in the last 8, then the franchise's own record. (A 2-1 A's week reads a mild letdown; an Oaks 2-1 week reads a surprise.)
 ii. **Franchise weight start values** before engine.209 drifts them. Ruled "A's harder". Proposed: A's **1.0**, Oaks **0.35**.
 iii. **Reach per round, as numbers** (Q4 ruled the shape). Proposed table in §2.1 — regular .25 up to championship 1.00. Confirm or move a number.
 iv. **The three authored economy columns** — `EconomicFootprint`, `CommunityInvestment`, `FranchiseStability`. Data: never varied within a franchise C107–C110; their only reader dies with the hood column you ruled off the tab. The plan's rule is "use it or it goes". Proposed: **delete `EconomicFootprint`** (the record is the footprint), **keep `FranchiseStability`** as engine.209's authored drift input, **keep `CommunityInvestment`** as venue community-program pressure — or delete all three and the tab drops to 15 columns.
@@ -180,4 +180,5 @@ Nothing else in this document needs a ruling.
 
 ## Changelog
 
+- 2026-10-03 01:45 (research-build, S523) — es's three substrate calls folded (builder in `sportsWeekRecord.js`; expectation/median a stateless feed scan, `null` below 4 game Cycles; rounds alias to `playoffs` for the label, raw word as `lens`); 208 builds the first half of the object (`a1102e5f`), not a gate. C108 corrected to its real `playoffs` lens and one accepted `WeekRecord` cell; C101–C108 named as a `Team Record` proxy, not a replay — acceptance (1) rescoped to C109–C110 + synthetic weeks; `top` band shown unreached in range. Reader line `:176`.
 - 2026-10-03 (research-build, S523) — initial read-before and proposed cut, drafted on Mike's go while engine-sheet builds engine.208. Measured: home/away is parsed but unread; `HomeNeighborhood` still on the tab and typed as the story's setting (C110 Eastlake ×3 for two away games); 174 word tests, 0 per-franchise readers; the `simMonth` calendar read survives; the authored economy columns reach one site via the hood being deleted. C110 worked case stated against the sixth-block lens ruling. Four sim calls.

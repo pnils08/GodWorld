@@ -248,6 +248,25 @@ function sportsBandAtLeast_(city, band) {
   return !!city && (SPORTS_BAND_RANK_[city.band] || 0) >= (SPORTS_BAND_RANK_[band] || 0);
 }
 
+// engine.205 slice D (bars fill, engine.47 Hop 6): the week's signed result as one hood's
+// bars and restaurants feel it. Per franchise that played: its home games land at its own
+// venue (venueShare), its away games are watch parties in the nightlife hoods at the round's
+// reach. nightlifeOn = the hood's NightlifeProfile sits at or above the city's own median
+// (SIM_DOCTRINE §15, a band on the middle). Share capped at 1 per franchise; no game → 0.
+function sportsBarTerm_(weeks, hood, nightlifeOn) {
+  var t = 0;
+  for (var f in (weeks || {})) {
+    if (!weeks.hasOwnProperty(f)) continue;
+    var wk = weeks[f];
+    if (!(wk && wk.g > 0) || !wk.signed) continue;
+    var vs = Number(wk.venueShare) || 0;
+    var share = ((wk.venue || []).indexOf(hood) >= 0 ? vs : 0) +
+      (nightlifeOn ? (1 - vs) * (Number(wk.reach) || 0) : 0);
+    t += wk.signed * Math.min(1, share);
+  }
+  return t;
+}
+
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
     parseSportsWeekRecord_: parseSportsWeekRecord_,
@@ -263,6 +282,7 @@ if (typeof module !== 'undefined' && module.exports) {
     sportsUnsigned_: sportsUnsigned_,
     addSportsWeekIntensity_: addSportsWeekIntensity_,
     buildSportsCity_: buildSportsCity_,
-    sportsBandAtLeast_: sportsBandAtLeast_
+    sportsBandAtLeast_: sportsBandAtLeast_,
+    sportsBarTerm_: sportsBarTerm_
   };
 }

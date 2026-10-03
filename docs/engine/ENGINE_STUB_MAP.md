@@ -1095,6 +1095,10 @@
 
 - **bizVitalityMedian_(ns)**
 
+- **bizNightlifeMedian_(ns)**
+
+- **bizIsBar_(sector)**
+
 - **bizMayorApproval_(ctx)**
   Sheets: Civic_Office_Ledger
 
@@ -1111,7 +1115,7 @@
 - **bizShipOffset_(ship, sector, echoShare)**
 
 - **applyBusinessDynamics_(ctx)**
-  Reads: S.canonHoods, S.chaosBusinessFold, S.chaosNeighborhoodFold, S.chaosShip, S.cycleId, S.initiativeNeighborhoodEffects, S.neighborhoodState, S.previousCycleState, S.worldEvents
+  Reads: S.canonHoods, S.chaosBusinessFold, S.chaosNeighborhoodFold, S.chaosShip, S.cycleId, S.initiativeNeighborhoodEffects, S.neighborhoodState, S.previousCycleState, S.sportsWeek, S.worldEvents
   Writes: S.businessClosures, S.businessDeclines, S.businessDynamicsState, S.hoodBusinessMomentum, S.worldEvents
   Config: ctx.config.cycleCount
   Sheets: Business_Ledger
@@ -4410,6 +4414,8 @@
 
 - **sportsBandAtLeast_(city, band)**
 
+- **sportsBarTerm_(weeks, hood, nightlifeOn)**
+
 ### textCrawler.js
 - **crawlAllTxtFiles(rootFolderId, outputFileName)**
 
@@ -4491,4 +4497,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1599
+**Functions mapped:** 1602

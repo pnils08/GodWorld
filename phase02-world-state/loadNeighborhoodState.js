@@ -14,6 +14,7 @@
  *   trajectory, trajectoryMomentum, housingPressure, medianRent,  // slow cols (engine-owned, S315 trajectory block)
  *   migrationFlow,
  *   noiseIndex, medianIncome,                                     // engine.133 structural layers
+ *   nightlifeProfile,                                             // engine.205 slice D (bars fill)
  *   incomeTier, boomExposure, boomIndex, employerCharacter,
  *   wealthMin, wealthMax                                          // engine.135 B1 authored hood profile
  * }
@@ -78,6 +79,7 @@ function loadNeighborhoodState_(ctx) {
   var iNoise = idx('NoiseIndex');
   var iIncome = idx('MedianIncome');
   var iShare = idx('RentShare'); // engine.171: per-hood share, blank = World_Config hoodRentShare
+  var iNight = idx('NightlifeProfile'); // engine.205 slice D: which hoods' bars fill on an away week
   // engine.135 B1 — the authored hood economic profile (INSTITUTIONS
   // §Neighborhoods rendered as Neighborhood_Map columns, ADR-0016: the sheet is
   // the truth, code reads it). Employment envelope, pay bands, business fill
@@ -127,6 +129,7 @@ function loadNeighborhoodState_(ctx) {
       rentShare: iShare >= 0 ? num(row, iShare) : null, // engine.171
       migrationFlow: num(row, iFlow),
       noiseIndex: num(row, iNoise),      // engine.133
+      nightlifeProfile: num(row, iNight), // engine.205 slice D
       medianIncome: num(row, iIncome),   // engine.133
       incomeTier: num(row, iTier),                                            // engine.135 B1 (1 pressured … 6 elite)
       boomExposure: iBoom >= 0 ? (row[iBoom] || '').toString().trim() : '',   // engine.135 B1 (canon label)

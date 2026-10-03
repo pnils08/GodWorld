@@ -2,7 +2,7 @@
   "generated": "2026-10-03",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 180,
-  "functionsMapped": 1599,
+  "functionsMapped": 1602,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -2178,6 +2178,7 @@
         "phase02-world-state/updateTransitMetrics.js::gameDayLoadByHood_",
         "phase02-world-state/updateTransitMetrics.js::updateTransitMetrics_Phase2_",
         "phase03-population/generateCrisisSpikes.js::generateCrisisSpikes_",
+        "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_",
         "phase05-citizens/applyGameNightMoments.js::applyGameNightMoments_",
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
         "phase06-analysis/economicRippleEngine.js::calculateNeighborhoodEconomies_",

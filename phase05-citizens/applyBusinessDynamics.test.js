@@ -19,6 +19,7 @@ function assert(label, cond, detail) { if (cond) { console.log(`  ok   ${label}`
 // the signed Task 3 table, as the self-arm seeds it
 const CFG = { bizShipEchoShare: 0.15, bizDeclineStreak: 4, bizDriftMaxUp: 1.0, bizDriftMaxDown: 1.0, bizGrowthCeil: 40, bizGrowthFloor: -10, bizNoiseBound: 0.25, bizCoverageUnit: 0.1, bizVitalityGain: 0.15, bizSuccessWindow: 3, bizSuccessVitalityHigh: 9.0, bizSuccessApprovalHigh: 85, bizSuccessPenalty: 0.3, bizDisruptBaseChance: 2, bizDisruptSuccessMult: 3, bizDisruptShock: 2.0, bizClosureStreak: 8, bizClosureRevenueFloorPct: 40, bizEventShockScale: 1.0, bizVol_faith: 0.5, bizVol_retail: 1.2, bizVol_food: 1.3, bizVol_health: 0.7, bizVol_tech: 1.5, bizVol_professional: 0.8, bizVol_construction: 1.1, bizVol_arts: 1.2, bizVol_education: 0.6, bizVol_default: 1.0,
   bizInitiativeStallDrag: 0.5,   // engine.250, builder-ruled half weight
+  bizSportsWeekPp: 2.0,          // engine.205 slice D
   // engine.178 owner dial gates, as ensureEngine178Config_ seeds them
   dialOwnerStreakRoom: 1, dialOwnerDriveExpandMult: 1.25 };
 const BL_H = ['BIZ_ID', 'Name', 'Sector', 'Neighborhood', 'Employee_Count', 'Avg_Salary', ' Annual_Revenue ', 'Growth_Rate ', 'Key_Personnel'];
@@ -100,7 +101,7 @@ console.log('wiring');
   assert('ensureEngine96Config_ self-arms beside 133/135', /ensureEngine135Config_\(ss\);[^\n]*\n\s*ensureEngine96Config_\(ss\);/.test(orch));
   const contract = fs.readFileSync(path.join(__dirname, '..', 'phase01-config', 'engine94SheetContract.js'), 'utf8');
   const seeded = (contract.match(/\['biz[A-Za-z_]+',/g) || []).map(s => s.slice(2, -2));
-  assert('the 27 signed keys + bizDeclineStreak + bizInitiativeStallDrag (engine.250) + bizShipEchoShare (engine.193 3b) + the 4 owner-door keys (Task 12) are seeded; the dynamics pass requires exactly its 30', seeded.length === 34 && mod.BIZ_DYNAMICS_REQUIRED_KEYS.length === 30 && mod.BIZ_DYNAMICS_REQUIRED_KEYS.every(k => seeded.includes(k)), JSON.stringify(seeded));
+  assert('the 27 signed keys + bizDeclineStreak + bizInitiativeStallDrag (engine.250) + bizShipEchoShare (engine.193 3b) + bizSportsWeekPp (engine.205 D) + the 4 owner-door keys (Task 12) are seeded; the dynamics pass requires exactly its 31', seeded.length === 35 && mod.BIZ_DYNAMICS_REQUIRED_KEYS.length === 31 && mod.BIZ_DYNAMICS_REQUIRED_KEYS.every(k => seeded.includes(k)), JSON.stringify(seeded));
   const fin = fs.readFileSync(path.join(__dirname, '..', 'phase09-digest', 'finalizeCycleState.js'), 'utf8');
   assert('finalizeCycleState carries businessDynamics from S.businessDynamicsState', /businessDynamics: S\.businessDynamicsState \|\| \{\}/.test(fin));
   const gw = fs.readFileSync(path.join(__dirname, '..', 'phase05-citizens', 'generationalWealthEngine.js'), 'utf8');
@@ -316,6 +317,47 @@ console.log('engine.193 cut 3b — chaos reads signed; the ship steps around the
   assert('floor weeks: the release lands on the quiet twin exactly (no windfall, no loss)', Math.abs(low.growth - lowQ.growth) < 1e-9 && ls.ship === 0, [low.growth, lowQ.growth]);
   const fin = fs.readFileSync(path.join(__dirname, '..', 'phase09-digest', 'finalizeCycleState.js'), 'utf8');
   assert('finalizeCycleState carries the ship episode', /chaosShip: S\.chaosShip \|\| null/.test(fin));
+}
+
+console.log('engine.205 slice D — a game week at the bars');
+{
+  // sportsBarTerm_ lives in utilities/sportsWeekRecord.js (shared Apps Script scope)
+  global.sportsBarTerm_ = require('../utilities/sportsWeekRecord').sportsBarTerm_;
+  const ripples = [];
+  global.recordRipple_ = (ctx, e) => { ripples.push(e); return true; };
+  const DBL = [BL_H,
+    ['BIZ-B1', 'Harbor Grill', 'Restaurant & Dining', 'Jack London', 12, 40000, 2000000, 6, ''],   // venue, nightlife hood
+    ['BIZ-B2', 'Uptown Lounge', 'Bar / lounge', 'Uptown', 8, 38000, 900000, 6, ''],               // nightlife hood, not the venue
+    ['BIZ-B3', 'Glen Diner', 'Restaurant & Dining', 'Glenview', 6, 36000, 700000, 6, ''],          // under the nightlife median
+    ['BIZ-R1', 'Uptown Goods', 'Retail', 'Uptown', 5, 37000, 500000, 6, ''],                       // nightlife hood, not a bar
+    ['BIZ-H1', 'Harbor Hotel', 'Hospitality', 'Jack London', 30, 45000, 5000000, 6, '']            // hospitality an earlier class does not claim
+  ];
+  const NS = { 'Jack London': { nightlifeProfile: 1.87 }, 'Uptown': { nightlifeProfile: 1.25 }, 'Downtown': { nightlifeProfile: 0.88 },
+    'Dimond': { nightlifeProfile: 0.76 }, 'Glenview': { nightlifeProfile: 0.62 } };   // median 0.88
+  const wk = (o) => ({ "A's": Object.assign({ g: 0, h: 0, signed: 0, reach: 0, venueShare: 0, venue: ['Jack London', 'Downtown'] }, o) });
+  const run = (sportsWeek) => {
+    ranges = []; ripples.length = 0;
+    const out = mod.applyBusinessDynamics_(ctxWith({ bl: DBL.map(r => r.slice()), S: { neighborhoodState: NS, sportsWeek } }));
+    return { growth: ranges[0].values.map(v => v[1]), ripples: ripples.filter(r => r.sourceEngine === 'applyBusinessDynamics.sportsWeekBars'), out };
+  };
+  const quiet = run(undefined);
+  const noGame = run(wk({ g: 0, signed: 0.5 }));
+  const awayWin = run(wk({ g: 2, h: 0, signed: 0.24, reach: 1, venueShare: 0 }));       // the C110 week
+  const homeLoss = run(wk({ g: 3, h: 3, signed: -0.3, reach: 0.5, venueShare: 1 }));   // acceptance 3's synthetic week
+  const d = (a, i) => Math.round((a.growth[i] - quiet.growth[i]) * 1000) / 1000;
+  const near = (x, y) => Math.abs(x - y) <= 0.0101;   // Growth_Rate is written to 0.01
+  assert('bar/hospitality classing: food class, Hospitality, Retail & Food in; Retail and Civic Tech out',
+    mod.bizIsBar_('Restaurant & Dining') && mod.bizIsBar_('Hospitality') && mod.bizIsBar_('Retail & Food') && mod.bizIsBar_('Bar / lounge') && !mod.bizIsBar_('Retail') && !mod.bizIsBar_('Civic Tech'));
+  assert('nightlife median of the hood map', mod.bizNightlifeMedian_(NS) === 0.88 && mod.bizNightlifeMedian_({}) === null);
+  assert('no week object, or a week with no game: growth identical, no ripple', JSON.stringify(noGame.growth) === JSON.stringify(quiet.growth) && noGame.ripples.length === 0 && quiet.ripples.length === 0, JSON.stringify([noGame.growth, quiet.growth]));
+  assert('away win: the nightlife-hood bars lift (venue hood at reach 1: +.24 × 2pp × food vol 1.3 = +.624)', near(d(awayWin, 0), 0.624) && near(d(awayWin, 1), 0.624), JSON.stringify(awayWin.growth));
+  assert('away win: the bar under the nightlife median and the retail shop do not move', d(awayWin, 2) === 0 && d(awayWin, 3) === 0, JSON.stringify(awayWin.growth));
+  assert('away win: the hotel (default class vol 1.0) lifts +.48', near(d(awayWin, 4), 0.48), d(awayWin, 4));
+  assert('home loss: the venue\'s bars take the cut (−.3 × 2pp × 1.3 = −.78); an off-venue nightlife bar is untouched (home games concentrate at the stadium)', near(d(homeLoss, 0), -0.78) && d(homeLoss, 1) === 0 && d(homeLoss, 2) === 0 && d(homeLoss, 3) === 0, JSON.stringify(homeLoss.growth));
+  const r = awayWin.ripples[0];
+  assert('one business-scoped ripple naming the moved bars, neighborhood blank, magnitude = mean pp event', awayWin.ripples.length === 1 && r.targetScope === 'business' && JSON.stringify(r.targetIds) === '["BIZ-B1","BIZ-B2","BIZ-H1"]' && r.neighborhood === '' && r.magnitude === 0.48 && /A's signed \+0\.24/.test(r.causeDetail), JSON.stringify(r));
+  assert('home loss ripple is negative', homeLoss.ripples.length === 1 && homeLoss.ripples[0].magnitude < 0 && homeLoss.out.sportsBars === 2, JSON.stringify(homeLoss.ripples));
+  delete global.recordRipple_;
 }
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

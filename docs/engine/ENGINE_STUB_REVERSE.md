@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 180 · **Functions mapped:** 1599 · **S.* fields:** 366 · **Sheets:** 60
+**Files scanned:** 180 · **Functions mapped:** 1602 · **S.* fields:** 366 · **Sheets:** 60
 
 ## S.* / ctx.summary reverse index
 
@@ -338,7 +338,7 @@
 | `S.sportsSeasonOakland` | `phase02-world-state/applySportsSeason.js::applySportsSeason_` | _(none)_ | 1 | 0 |
 | `S.sportsSentimentBoost` | `phase02-world-state/applySportsSeason.js::applySportsFeedTriggers_` | `phase02-world-state/applyCityDynamics.js::applyCityDynamics_`, `phase02-world-state/applySportsSeason.js::applySportsFeedTriggers_`, `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_` | 1 | 3 |
 | `S.sportsSource` | `phase02-world-state/applySportsSeason.js::applySportsSeason_` | `phase02-world-state/applySeasonWeights.js::applySeasonalWeights_`, `phase04-events/worldEventsEngine.js::worldEventsEngine_`, `phase06-analysis/applyShockMonitor.js::applyShockMonitor_` | 1 | 3 |
-| `S.sportsWeek` | `phase02-world-state/applySportsSeason.js::applySportsSeason_` | `phase02-world-state/applyCityDynamics.js::applyCityDynamics_`, `phase02-world-state/applySportsSeason.js::applySportsSeason_`, `phase02-world-state/applySportsSeason.js::normalizeOaklandFeedTeam_`, `phase02-world-state/updateTransitMetrics.js::gameDayLoadByHood_`, `phase02-world-state/updateTransitMetrics.js::updateTransitMetrics_Phase2_`, `phase03-population/generateCrisisSpikes.js::generateCrisisSpikes_`, …(+6 more) | 1 | 12 |
+| `S.sportsWeek` | `phase02-world-state/applySportsSeason.js::applySportsSeason_` | `phase02-world-state/applyCityDynamics.js::applyCityDynamics_`, `phase02-world-state/applySportsSeason.js::applySportsSeason_`, `phase02-world-state/applySportsSeason.js::normalizeOaklandFeedTeam_`, `phase02-world-state/updateTransitMetrics.js::gameDayLoadByHood_`, `phase02-world-state/updateTransitMetrics.js::updateTransitMetrics_Phase2_`, `phase03-population/generateCrisisSpikes.js::generateCrisisSpikes_`, …(+7 more) | 1 | 13 |
 | `S.sportsZones` | `phase02-world-state/applySportsSeason.js::applySportsSeason_` | `phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_`, `phase02-world-state/applyInitiativeImplementationEffects.js::sportsHasOpenedBaylight_`, `phase05-citizens/bondEngine.js::detectNewBonds_`, `phase06-analysis/economicRippleEngine.js::runEconomicRippleEngine_`, `phase07-evening-media/applyStorySeeds.js::applyStorySeeds_`, `phase07-evening-media/buildEveningFamous.js::buildEveningFamous_`, …(+6 more) | 1 | 12 |
 | `S.spotlightStats` | `phase05-citizens/applyNamedCitizenSpotlight.js::applyNamedCitizenSpotlights_` | _(none)_ | 1 | 0 |
 | `S.storyHooks` | `phase04-events/generationalEventsEngine.js::runGenerationalEngine_`, `phase05-citizens/bondEngine.js::marryCitizens_`, `phase05-citizens/bondEngine.js::processRomanceAndMarriage_`, `phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_`, `phase05-citizens/civicInitiativeEngine.js::generateOverrideStoryHook_`, `phase05-citizens/civicInitiativeEngine.js::generateVetoStoryHook_`, …(+23 more) | `phase01-config/godWorldEngine2.js::runCyclePhases_`, `phase01-config/godWorldEngine2.js::runWorldCycleLocked_`, `phase03-population/deriveDemographicDrift.js::deriveDemographicDrift_`, `phase04-events/generationalEventsEngine.js::runGenerationalEngine_`, `phase05-citizens/bondEngine.js::marryCitizens_`, `phase05-citizens/bondEngine.js::processRomanceAndMarriage_`, …(+34 more) | 29 | 40 |

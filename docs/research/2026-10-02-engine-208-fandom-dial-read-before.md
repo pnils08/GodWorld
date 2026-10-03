@@ -49,7 +49,7 @@ Everything in §1 was read from code or the C109 ledger dump on 2026-10-02. §2 
 | Real sports wagers | `Casino_Ledger`: 45 sports-market rows, **44 distinct bettors**; 47 citizens carry `[Casino]`/wager text | A real money event on a team. Valid seed input. |
 | Residence in a stadium zone | `LEGACY_SPORTS_ZONES_` = Jack London (77) + Downtown (92) = **169 citizens** (`applySportsSeason.js:499`; Baylight District 5 after the move) | Plan §4 names "living in a game-day hood" as an up-mover. Valid seed input, small. |
 | Household | `SpouseId`/`ParentIds` present on the row | Inheritance is ruled; at seed it only propagates whatever the other inputs gave. |
-| Authored Tier-1 | ~GAME-clock 58, MEDIA 44, CIVIC 53 | Top-tier is authored, never pool-drawn — Tier-1 fandom is a value someone writes, not a roll. |
+| Authored top-tier citizens | `ClockMode` counts: GAME 58, MEDIA 44, CIVIC 53, ENGINE 808 (Tier is a separate column, not counted here) | Top-tier is authored, never pool-drawn — an authored citizen's fandom is a value someone writes, not a roll. |
 | `outabout` as a proxy | base mean 51.0, sd 2.9, **946/963 in the middle band** | Useless as a spread source — it is itself one blob. |
 
 **Consequence:** the seed inputs are thin. A seed pass will separate perhaps 200 citizens from the middle; the **spread has to come from signed events over Cycles**, which is what the dial system is for. engine.197 criterion 4 (a spread, not two blobs) therefore needs a **date** — first fold + 10 Cycles — not a bench read at the seed.
@@ -86,9 +86,12 @@ Proposed magnitudes, on the existing scale (Promotion +8, Divorce −8, ambient 
 | `Sports-Attended` | the `outabout` correlate — went to the game (ECL content row) | +3 | outabout +1 |
 | `Sports-Soured` | post-publish, a sports-desk piece negative about the team, to band ≥3 fans (§2.5) | −2 | — |
 | `Sports-Lifted` | same seam, positive piece | +1 | — |
+| `Undocked-Engaged` | received UNDOCKED audience/pilot line (engine.274 already routes pilots → `Reputation`, audience → `Personal`; this adds the fandom fold the ruling names: one dial covers the city's spectacle) | +1 | — |
 | `Sports` (plain) | unchanged | {} | — |
 
-Only **received** events move the dial (Task 8 item 4) — candidate rows and texture never do. A losing Oaks preseason costs a fan −2 a week against an expansion expectation that mostly reads "as expected" → near zero (Q3/Q7 fall out without a rule).
+Only **received** events move the dial (Task 8 item 4) — candidate rows and texture never do.
+
+**The Oaks and the negative pole (agy review hunt 4, verified):** if Q3's expectation neutralises every Oaks loss as "as expected", `Sports-Loss` is never emitted at ship — the Oaks are the only team losing, so the negative pole would be dead on day one (engine.197's exact failure). Q7 ruled what the Oaks' losses cost the *city* (little); what they cost a *fan* is open and is §4(v). The rule proposed there fires regardless of the expectation baseline, so the pole is live from the first fold.
 
 ### 2.3 Seed (one explicit pass, bench first, then live under the usual one-confirm)
 `base.fandom` = 50 + (sports wager on record +10) + (resident of a stadium zone +5) + (household member already above 60: inherit toward their value, half the gap) ; Tier-1 authored values from the populator's profile field where one exists, else the same formula. Everyone else **stays at 50 and earns their fandom**. A `scripts/seedFandomDial.js` with `--dry-run` printing the distribution; the band histogram goes into the bench proof. The script writes `DialState` only — `TraitProfile` re-renders on the next fold.
@@ -97,12 +100,15 @@ Only **received** events move the dial (Task 8 item 4) — candidate rows and te
 `generateCitizensEvents.js:2904` region: for a candidate whose primary route is Sports, multiply `weightMod` by `bandMultiplier_(c,'fandom')` (0.5 … 1.5 — `citizenMemory.js:217`, already the back-arc consumer) × reach(round) × franchise weight (1 until engine.209). ECL DSL (`loadEventContentLedger.js:64`): add `fandom` as a `num` field alongside warmth/drive so content rows can require `fandom>=60` (a playoff-bar scene) or `fandom<40` (someone dragged along). Proof: two otherwise-equal fixtures at fandom 25 and 85 draw different sports-event distributions (Task 8 item 3).
 
 ### 2.5 Cron tone → dial (the ruled feedback loop)
-Extend the post-publish step that already writes `E<edition>-S<n>` citations (`scripts/enrichCitizenProfiles.js`): for each sports-desk piece, read the tone the gate already computes (the sift/Rhea sentiment field — the exact field to be named by es from the publish packet, not here), and append `Sports-Soured` / `Sports-Lifted` LifeHistory lines to citizens in fandom band ≥3 who live in the city (all tracked, or capped at a draw of N — substrate). That makes the desks the sensor of the fans' mood, which is the ruling. No new channel; one more emitter on an existing seam.
+Extend the post-publish step that already writes `E<edition>-S<n>` citations (`scripts/enrichCitizenProfiles.js`): for each sports-desk piece, read a per-piece tone and append `Sports-Soured` / `Sports-Lifted` LifeHistory lines to citizens in fandom band ≥3 (all tracked, or capped at a draw of N — substrate). That makes the desks the sensor of the fans' mood, which is the ruling. No new channel; one more emitter on an existing seam.
+
+**Gap, verified 2026-10-02:** no per-piece tone exists today. The `sentiment:` hits in `scripts/build*Packets.js` are the city sentiment going *into* the desks, and no Rhea/sift output carries an article-level tone or stance field (`grep -rln "articleSentiment|pieceTone|\"tone\""` over `scripts/` finds none). The emitter needs one: a cheap classifier pass over the sports-desk pieces at post-publish (helper-model lane, three labels: negative / neutral / positive about the franchise). The feed's authored `FanSentiment` column (`applySportsSeason.js:178`, today a nightlife/retail multiplier) is the *author's* reading, not the desks' — it does not satisfy the ruling and is not the interim.
 
 ### 2.6 Inheritance at mint
 The `Phase5-Advancement` intake (the seam where engine.278 reads the carried employer): a minted child or spouse joining a household takes `base.fandom` from the household head's current value minus 10, floor 50.
 
-### 2.7 Substrate calls for es (not sim)
+### 2.7 Substrate calls and prerequisites for es (not sim)
+- **Prerequisite — the Q3 expectation baseline does not exist.** `Sports-Win`/`Sports-Loss` are defined against "the team's own expectation" and nothing in the engine computes one (research §6, "what the rulings need from the feed": A's from their own running record, Oaks an expansion prior until a record accumulates). engine.209's franchise weight is a different number. Until es carries a per-franchise expectation (a `Carry_Forward_Store` value, same home §7 gives franchise weight), the two tags cannot be emitted — and the negative pole is dead for that reason, not a magnitude one. Interim that fires on day one: `Sports-Loss` on a week record under .500 for the A's and under the Oaks' running week average once ≥4 weeks exist; before that, an Oaks loss week emits nothing (Q7).
 - `MOOD_DECAY` per-dial or uniform — the 203d "slow fade" is about the **city's** sports state; a fan's upset fading at 0.8/Cycle (gone in ~4) may be right or may be fast. es rules; if per-dial, fandom gets its own constant.
 - Reach(round) needs the §3 vocabulary; until it lands, reach = depth/6 off the existing table.
 - `Hash` churn on first fold: every TraitProfile rewrites once. Note it in the smoke so nobody reads it as a defect.
@@ -113,6 +119,7 @@ The `Phase5-Advancement` intake (the seam where engine.278 reads the carried emp
 3. Bench: an Oaks L-streak week emits `Sports-Loss` to band ≥3 Oaks fans and **moves them down** (the negative pole fires on day one).
 4. Live, first fold + 10 Cycles: band histogram is not one blob — at least three bands populated, middle band under 80% (engine.197 criterion 4).
 5. Live: a playoff week wakes at least one citizen whose only wake reason is fandom (engine.201).
+6. **Bench, before any live fold (agy review hunt 7):** a synthetic 10-Cycle run over the 963 seeded rows at realistic received-event rates (the C101–C109 win/loss/run cadence, Oaks L-streak, a tone line a week) through `applyCycleEffects_` + `settleCycle_` at `MOOD_DECAY` 0.8 — print the band histogram each Cycle. If the decay pulls everyone back to the middle before the histogram separates, the magnitudes or the decay move *on bench*, not after ten live Cycles.
 
 ## 3. The feed question (data in §1.3)
 
@@ -126,9 +133,11 @@ Two parts, two owners:
 i. **Athletes.** 58 GAME-clock citizens are the subject of the coverage. Do they carry a fandom dial at all (pinned high? excluded from the selector so a player never "attends his own game")? Proposed: excluded from sports-event selection, dial present but inert for them.
 ii. **Who starts as a fan.** Accept the thin seed in §2.3 (≈200 separate from 50, the rest earn it over Cycles), or author Tier-1 fandom by hand first? Proposed: accept; author Tier-1 where the populator profile already says so.
 iii. **Round words** (§3, first bullet) — which ones he'll type.
-iv. **Magnitudes** (§2.2 table) — confirm, or move a number.
+iv. **Magnitudes** (§2.2 table) — confirm, or move a number. (agy's review called this mechanism; plan Task 8 item 4 says "poles and magnitudes remain sim decisions", so it stays here — a confirm, not an open question.)
+v. **What an Oaks loss costs a fan.** Q7 settled the city's side (an expansion team's losses cost the city little). The fan's side: proposed — a band ≥3 Oaks fan feels every losing week at −1, and −2 once the week falls under the Oaks' own running expectation (≥4 weeks of record; before that, the expansion prior = "losing is expected", so −1 only). A real fan of a bad team gets a little sadder every week; that is the pole firing at ship.
 
 Nothing else in this document needs a ruling.
 
 ## Changelog
+- 2026-10-02 (research-build, S522) — agy read-only review folded ([[2026-10-02-agy-engine-208-draft-review]]: SHIP-WITH-FIXES): `Undocked-Engaged` tag restored to the table (ruled up-mover); Oaks loss made an explicit fan-side sim call §4(v) so the negative pole is live at ship; synthetic 10-Cycle bench added to §2.8; magnitudes kept as a sim confirm per plan Task 8 item 4. Also: §2.5 per-piece tone verified absent (gap named), Q3 expectation baseline added as an es prerequisite §2.7, ClockMode counts relabelled.
 - 2026-10-02 (research-build, S522) — initial read-before and proposed cut; feed vocabulary gap measured on the live C107–C109 rows; §6 Q6 summary-row item closed as superseded by the sixth block.

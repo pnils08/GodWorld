@@ -908,6 +908,8 @@ var HOSPITAL_STRAIN_MIN_MIDDLE = 10;
 var HOSPITAL_STRAIN_EXCESS_CAP = 0.5;
 
 function careJusticeWhole_(v) {
+  // A Date cell (Apps Script getValues) would pass Number() as a whole epoch count.
+  if (typeof v !== 'number' && typeof v !== 'string') return null;
   var n = (typeof v === 'number') ? v : (String(v).replace(/^\s+|\s+$/g, '') === '' ? NaN : Number(v));
   return (isFinite(n) && Math.floor(n) === n) ? n : null;
 }

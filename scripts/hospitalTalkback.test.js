@@ -413,6 +413,9 @@ function makeSS(sheets) {
   assert('D30 hospitalCapacity_ still reads baseCapacity', sandbox.hospitalCapacity_(r.ctx) === 100 && r.ctx.summary.demographicDrift.hospitalConfig.baseCapacity === 100);
   r = run({ now: undefined, census: censusRows(flat(110, 114, 60)) });
   assert('D32 no Cycle number -> malformed + one error row, never a silent ahead', r.tb.state === 'malformed' && r.errs.length === 1 && r.tb.applied === 0, JSON.stringify(r.tb));
+  rows = censusRows(flat(110, 114, 60)); rows[rows.length - 1][0] = new Date(2026, 9, 2);
+  r = run({ now: 115, census: rows });
+  assert('D33 a Date in the Cycle column -> malformed + one error row, not ahead', r.tb.state === 'malformed' && r.errs.length === 1, JSON.stringify(r.tb));
   assert('D31 the record shape', JSON.stringify(Object.keys(r.tb)) === JSON.stringify(['state', 'cycleRead', 'beds', 'middle', 'ratio', 'applied']));
   delete sandbox.logEngineError_;
 })();

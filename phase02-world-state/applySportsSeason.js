@@ -26,6 +26,9 @@ function applySportsSeason_(ctx) {
   var S = ctx.summary;
   // engine.208 C3: the week object, per franchise; {} unless the feed is read (override / quiet).
   S.sportsWeek = {};
+  // engine.204/205: the city's reading of the week — quiet unless a franchise played.
+  // An override declares a season, never games, so it moves no number either.
+  S.sportsCity = buildSportsCity_({}, []);
 
   // ─────────────────────────────────────────────────────────────
   // PRIORITY 1: World_Config override (Maker control)
@@ -108,6 +111,9 @@ function applySportsSeason_(ctx) {
     // engine.131 T7 — where the sport physically IS this cycle.
     S.baylightOpenings = deriveBaylightOpenings_(ctx, currentCycle);
     S.sportsZones = deriveSportsZones_(S.baylightOpenings);
+    // engine.204/205: intensity on each franchise-week + the city's band (needs the venues)
+    S.sportsCity = deriveSportsIntensity_(S.sportsWeek, ctx._sportsWeekHistory || {},
+      ctx._sportsLensHistory || {}, S.baylightOpenings, currentCycle);
     // Unchanged and deliberate: the feed never licenses invented atmosphere.
     S.sportsAtmosphereEnabled = false;
 
@@ -191,20 +197,31 @@ function readOaklandFeedEntries_(ctx, currentCycle) {
   // A bad historical cell is skipped silently here; it was rejected (and logged) in its own Cycle.
   var weekHistory = {};
   ctx._sportsWeekHistory = weekHistory;
+  // engine.204/205: each earlier Cycle's lens per franchise (its LAST row, WeekRecord blank
+  // or not), so a past game week's stakes — and the trailing median — can be recomputed.
+  var lensHistory = {};
+  ctx._sportsLensHistory = lensHistory;
 
   for (var i = 1; i < data.length; i++) {
     var row = data[i];
     var cycle = cycleCol !== -1 ? parseInt(row[cycleCol], 10) : 0;
-    if (!isNaN(cycle) && cycle < currentCycle && weekRecordCol !== -1) {
-      try {
-        var pastWeek = parseSportsWeekRecord_(getColVal_(row, weekRecordCol));
-        var pastTeam = normalizeOaklandFeedTeam_(getColVal_(row, teamsCol));
-        if (pastWeek && pastWeek.gamesPlayed && (pastTeam === "A's" || pastTeam === 'Oaks')) {
-          var byCycle = weekHistory[pastTeam] || (weekHistory[pastTeam] = {});
-          var slot = byCycle[cycle] || (byCycle[cycle] = { w: 0, l: 0 });
-          slot.w += pastWeek.wins; slot.l += pastWeek.losses;
-        }
-      } catch (pastErr) { /* rejected in its own Cycle */ }
+    if (!isNaN(cycle) && cycle < currentCycle) {
+      var pastTeam = normalizeOaklandFeedTeam_(getColVal_(row, teamsCol));
+      var pastLens = getColVal_(row, seasonTypeCol);
+      if (pastLens && (pastTeam === "A's" || pastTeam === 'Oaks')) {
+        (lensHistory[pastTeam] || (lensHistory[pastTeam] = {}))[cycle] = pastLens;
+      }
+      if (weekRecordCol !== -1) {
+        try {
+          // the same acceptance as the row's own Cycle: games only on a game-result row
+          var pastWeek = sportsWeekForEntry_({ weekRecord: getColVal_(row, weekRecordCol), eventType: getColVal_(row, eventTypeCol) });
+          if (pastWeek && pastWeek.gamesPlayed && (pastTeam === "A's" || pastTeam === 'Oaks')) {
+            var byCycle = weekHistory[pastTeam] || (weekHistory[pastTeam] = {});
+            var slot = byCycle[cycle] || (byCycle[cycle] = { w: 0, l: 0 });
+            slot.w += pastWeek.wins; slot.l += pastWeek.losses;
+          }
+        } catch (pastErr) { /* rejected in its own Cycle */ }
+      }
     }
     if (isNaN(cycle) || cycle !== currentCycle) continue;
 
@@ -298,6 +315,61 @@ function deriveSportsWeekFromFeed_(entries, history, currentCycle) {
     if (lens.hasOwnProperty(t)) out[t] = buildSportsWeek_(t, weekly[t] || null, lens[t], history[t] || {}, currentCycle);
   }
   return out;
+}
+
+/**
+ * engine.204/205 §2.1 — adds intensity to every franchise-week in `weeks` (in place) and
+ * returns S.sportsCity. Stateless like the expectation: earlier game weeks are re-read
+ * from the feed (history = {f: {cycle: {w, l}}}, lensHistory = {f: {cycle: rawSeasonType}}),
+ * at the franchise's weight today. Venue is the franchise's own stadium, not the union.
+ */
+function sportsLensDepth_(raw) {
+  return SPORTS_PHASE_DEPTH_[canonicalSportsPhase_(raw)] || 0;
+}
+
+function deriveSportsIntensity_(weeks, history, lensHistory, openings, currentCycle) {
+  var pastByFranchise = {}, cityByCycle = {};
+  for (var f in history) {
+    if (!history.hasOwnProperty(f)) continue;
+    var cycles = [];
+    for (var c in history[f]) {
+      if (!history[f].hasOwnProperty(c)) continue;
+      var hv = history[f][c];
+      if (Number(c) < currentCycle && hv && (hv.w + hv.l) > 0) cycles.push(Number(c));
+    }
+    cycles.sort(function(x, y) { return y - x; });
+    cycles = cycles.slice(0, SPORTS_EXPECT_WINDOW_);
+    var past = [];
+    for (var i = 0; i < cycles.length; i++) {
+      var g = history[f][cycles[i]].w + history[f][cycles[i]].l;
+      var u = sportsUnsigned_(f, g, sportsLensDepth_((lensHistory[f] || {})[cycles[i]]));
+      past.push(u);
+      cityByCycle[cycles[i]] = (cityByCycle[cycles[i]] || 0) + u;
+    }
+    pastByFranchise[f] = past;
+  }
+  for (var t in weeks) {
+    if (!weeks.hasOwnProperty(t)) continue;
+    var venue = (openings && openings[t] !== undefined) ? [BAYLIGHT_ZONE_] : LEGACY_SPORTS_ZONES_.slice();
+    addSportsWeekIntensity_(t, weeks[t], sportsLensDepth_(weeks[t].lens), canonicalSportsPhase_(weeks[t].lens),
+      venue, pastByFranchise[t] || []);
+  }
+  var cityCycles = Object.keys(cityByCycle).map(Number).sort(function(x, y) { return y - x; })
+    .slice(0, SPORTS_EXPECT_WINDOW_);
+  var city = buildSportsCity_(weeks, cityCycles.map(function(cy) { return cityByCycle[cy]; }));
+
+  var r2 = function(x) { return x == null ? 'null' : Math.round(x * 100) / 100; };
+  for (var k in weeks) {
+    if (!weeks.hasOwnProperty(k)) continue;
+    var w = weeks[k];
+    Logger.log('  sportsWeek ' + k + ': g ' + w.g + ' h ' + w.h + ' w ' + w.w + ' l ' + w.l + ' lens ' + w.lens +
+      ' vol ' + r2(w.vol) + ' stakes ' + r2(w.stakes) + ' reach ' + r2(w.reach) + ' exp ' + r2(w.expectation) +
+      ' n ' + w.n + ' surprise ' + r2(w.surprise) + ' unsigned ' + r2(w.unsigned) + ' signed ' + r2(w.signed) +
+      ' venueShare ' + r2(w.venueShare) + ' venue ' + w.venue.join('/') + ' median ' + r2(w.median));
+  }
+  Logger.log('  sportsCity: intensity ' + r2(city.intensity) + ' signed ' + r2(city.signed) + ' reach ' +
+    r2(city.reach) + ' games ' + city.games + ' median ' + r2(city.median) + ' band ' + city.band);
+  return city;
 }
 
 /**

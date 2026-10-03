@@ -321,5 +321,92 @@ test('208 C6 the seven round words count as playoffs for the city', () => {
   assert.strictEqual(box.canonicalSportsPhase_('world-series'), 'championship');           // unchanged (Revision 1)
 });
 
+// ── engine.204/205 §2.1: intensity on the week object + the city's band ───────
+const near = (a, b, msg) => assert.ok(Math.abs(a - b) < 1e-3, `${msg}: ${a} vs ${b}`);
+const feedRows = (rows) => {
+  const headers = [...Object.keys(base), 'WeekRecord'];
+  const values = [headers, ...rows.map(c => headers.map(h => c[h] ?? ''))];
+  return { ss: { getSheetByName: () => ({ getDataRange: () => ({ getValues: () => values }) }) } };
+};
+test('204/205 C110 shape: two away wins on a championship lens — signed > 0, nothing at the stadium', () => {
+  const weeks = { "A's": box.buildSportsWeek_("A's", box.parseSportsWeekRecord_('A:W A:W'), 'championship', {}, 110) };
+  const city = plain(box.deriveSportsIntensity_(weeks, {}, {}, {}, 110));
+  const a = plain(weeks["A's"]);
+  assert.strictEqual(a.g, 2); assert.strictEqual(a.h, 0);
+  near(a.vol, 1 - Math.exp(-2 / 3), 'vol(2)');
+  assert.strictEqual(a.stakes, 1); assert.strictEqual(a.reach, 1); assert.strictEqual(a.weight, 1);
+  near(a.unsigned, 0.4866, 'unsigned'); near(a.signed, 0.2433, 'signed = unsigned × surprise .5');
+  assert.strictEqual(a.venueShare, 0);
+  assert.deepStrictEqual(a.venue, ['Jack London', 'Downtown']);
+  assert.strictEqual(city.band, 'elevated'); assert.strictEqual(city.reach, 1); assert.ok(city.signed > 0);
+});
+test('204/205 reach: the round words, a bare playoffs reads as the entry round, aliases fall to their phase', () => {
+  const r = (lens) => box.sportsReach_(lens, box.canonicalSportsPhase_(lens));
+  assert.strictEqual(r('playoffs'), 0.5); assert.strictEqual(r('wild-card'), 0.5);
+  assert.strictEqual(r('division-series'), 0.6); assert.strictEqual(r('league-championship'), 0.75);
+  assert.strictEqual(r('conference-finals'), 0.85); assert.strictEqual(r('world-series'), 1);
+  assert.strictEqual(r('championship'), 1); assert.strictEqual(r('summer league'), 0.15);
+  assert.strictEqual(r('late-season'), 0.4); assert.strictEqual(r('regular-season'), 0.25);
+});
+test('204/205 acceptance 4: an Oaks 0-2 preseason week at weight .35 is a small negative, quiet city', () => {
+  const weeks = { Oaks: box.buildSportsWeek_('Oaks', box.parseSportsWeekRecord_('H:L A:L'), 'preseason', {}, 110) };
+  const city = plain(box.deriveSportsIntensity_(weeks, {}, {}, {}, 110));
+  const o = plain(weeks.Oaks);
+  assert.ok(o.signed < 0 && o.signed > -0.05, 'signed ' + o.signed);
+  near(o.venueShare, 0.5, 'one home game of two');
+  assert.strictEqual(city.band, 'quiet');
+});
+test('204/205 a home losing playoff week: unsigned volume stays, signed goes negative', () => {
+  const weeks = { "A's": box.buildSportsWeek_("A's", box.parseSportsWeekRecord_('H:L H:L H:L'), 'playoffs', {}, 110) };
+  const city = plain(box.deriveSportsIntensity_(weeks, {}, {}, {}, 110));
+  const a = plain(weeks["A's"]);
+  assert.strictEqual(a.venueShare, 1); assert.strictEqual(a.surprise, -1);
+  near(a.unsigned, (1 - Math.exp(-1)) * 5 / 6, 'vol(3) × 5/6');
+  near(a.signed, -a.unsigned, 'signed = -unsigned');
+  assert.strictEqual(city.band, 'high');
+});
+test('204/205 a Cycle with no games is quiet; the band ladder and the half-median floor', () => {
+  assert.strictEqual(plain(box.buildSportsCity_({}, [])).band, 'quiet');
+  const at = (x, past) => plain(box.buildSportsCity_({ f: { unsigned: x, signed: 0, g: 1, reach: 0.25 } }, past || [])).band;
+  assert.strictEqual(at(0.05), 'quiet'); assert.strictEqual(at(0.1), 'normal'); assert.strictEqual(at(0.3), 'elevated');
+  assert.strictEqual(at(0.5), 'high'); assert.strictEqual(at(0.75), 'top');
+  assert.strictEqual(at(0.3, [0.7, 0.7, 0.7]), 'elevated');          // 3 past weeks: no median yet
+  assert.strictEqual(at(0.3, [0.7, 0.7, 0.7, 0.7]), 'quiet');        // under half its own median
+  assert.ok(box.sportsBandAtLeast_({ band: 'high' }, 'elevated') && !box.sportsBandAtLeast_({ band: 'normal' }, 'high'));
+});
+test('204/205 the reader records each past Cycle\'s lens and skips a game token on a season-state row', () => {
+  const ctx = feedRows([
+    row({ Cycle: 401, SeasonType: 'playoffs', WeekRecord: 'H:W' }),
+    row({ Cycle: 401, SeasonType: 'playoffs', EventType: 'season-state', WeekRecord: 'A:W' }),
+    row({ Cycle: 402, SeasonType: 'championship' }),
+    row({ Cycle: 404, WeekRecord: 'H:W' })]);
+  box.readOaklandFeedEntries_(ctx, 404);
+  assert.deepStrictEqual(plain(ctx._sportsWeekHistory), { "A's": { 401: { w: 1, l: 0 } } });
+  assert.deepStrictEqual(plain(ctx._sportsLensHistory), { "A's": { 401: 'playoffs', 402: 'championship' } });
+});
+test('204/205 median and the city median come from the franchise\'s earlier game weeks at their own lens', () => {
+  const hist = { "A's": { 400: { w: 2, l: 1 }, 401: { w: 3, l: 0 }, 402: { w: 1, l: 1 }, 403: { w: 2, l: 2 } } };
+  const lensH = { "A's": { 400: 'late-season', 401: 'late-season', 402: 'playoffs', 403: 'playoffs' } };
+  const weeks = { "A's": box.buildSportsWeek_("A's", box.parseSportsWeekRecord_('H:W'), 'playoffs', hist["A's"], 404) };
+  const city = plain(box.deriveSportsIntensity_(weeks, hist, lensH, {}, 404));
+  const u = (g, d) => (1 - Math.exp(-g / 3)) * d / 6;
+  const past = [u(3, 4), u(3, 4), u(2, 5), u(4, 5)].sort((a, b) => a - b);
+  near(weeks["A's"].median, (past[1] + past[2]) / 2, 'franchise median');
+  near(city.median, (past[1] + past[2]) / 2, 'city median (one franchise)');
+});
+test('204/205 Baylight: a franchise that opened plays at Baylight, the other keeps the legacy zones', () => {
+  const weeks = {
+    "A's": box.buildSportsWeek_("A's", box.parseSportsWeekRecord_('H:W'), 'regular-season', {}, 404),
+    Oaks: box.buildSportsWeek_('Oaks', box.parseSportsWeekRecord_('H:W'), 'mid-season', {}, 404) };
+  box.deriveSportsIntensity_(weeks, {}, {}, { Oaks: 401 }, 404);
+  assert.deepStrictEqual(plain(weeks.Oaks.venue), ['Baylight District']);
+  assert.deepStrictEqual(plain(weeks["A's"].venue), ['Jack London', 'Downtown']);
+});
+test('204/205 the override and empty-feed paths publish a quiet city', () => {
+  const S = { cycleId: 404 };
+  box.applySportsSeason_({ summary: S, config: { sportsState_Oakland: 'championship' }, ss: null });
+  assert.strictEqual(S.sportsCity.band, 'quiet'); assert.strictEqual(S.sportsCity.intensity, 0);
+});
+
 console.log(`${passed} passed; ${failed} failed`);
 if (failed) process.exitCode = 1;

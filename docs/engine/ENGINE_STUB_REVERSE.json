@@ -1,8 +1,8 @@
 {
-  "generated": "2026-10-02",
+  "generated": "2026-10-03",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 180,
-  "functionsMapped": 1581,
+  "functionsMapped": 1597,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -1252,6 +1252,7 @@
         "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
         "phase02-world-state/applySeasonWeights.js::applySeasonalWeights_",
         "phase02-world-state/applySportsSeason.js::applySportsSeason_",
+        "phase02-world-state/applySportsSeason.js::normalizeOaklandFeedTeam_",
         "phase02-world-state/calendarChaosWeights.js::applyChaosCategoryWeights_",
         "phase03-population/applyDemographicDrift.js::applyDemographicDrift_",
         "phase03-population/deriveDemographicDrift.js::deriveDemographicDrift_",
@@ -1303,7 +1304,8 @@
         "phase09-digest/applyCompressionDigestSummary.js::applyCompressedDigestSummary_",
         "phase09-digest/applyCycleWeight.js::applyCycleWeight_",
         "phase09-digest/finalizeCycleState.js::finalizeCycleState_",
-        "phase10-persistence/recordWorldEventsv25.js::recordWorldEvents25_"
+        "phase10-persistence/recordWorldEventsv25.js::recordWorldEvents25_",
+        "utilities/sportsWeekRecord.js::sportsWeeklyResult_"
       ]
     },
     "worldEvents": {
@@ -2331,6 +2333,12 @@
         "phase02-world-state/applySportsSeason.js::applySportsSeason_"
       ]
     },
+    "sportsCity": {
+      "writers": [
+        "phase02-world-state/applySportsSeason.js::applySportsSeason_"
+      ],
+      "readers": []
+    },
     "sportsFeedEntries": {
       "writers": [
         "phase02-world-state/applySportsSeason.js::applySportsSeason_"
@@ -2366,6 +2374,17 @@
         "phase02-world-state/applySportsSeason.js::applySportsSeason_"
       ],
       "readers": []
+    },
+    "sportsWeek": {
+      "writers": [
+        "phase02-world-state/applySportsSeason.js::applySportsSeason_"
+      ],
+      "readers": [
+        "phase02-world-state/applySportsSeason.js::applySportsSeason_",
+        "phase02-world-state/applySportsSeason.js::normalizeOaklandFeedTeam_",
+        "phase05-citizens/applyGameNightMoments.js::applyGameNightMoments_",
+        "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_"
+      ]
     },
     "sportsEventTriggers": {
       "writers": [

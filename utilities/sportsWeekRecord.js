@@ -153,6 +153,101 @@ var SPORTS_WEEK_TAG_ = {
   LOSS: 'Sports-Loss', LOSING_WEEK: 'Sports-LosingWeek'
 };
 
+// ─────────────────────────────────────────────────────────────────────────────
+// engine.204/205 §2.1 — the second half of the week object: how much the week weighs
+// on the city. Volume (games) is unsigned and lands at the venue; the result (surprise
+// against the franchise's own expectation) is signed and lands city-wide at reach.
+// Ruled 2026-10-03 (§4): weights A's 1.0 / Oaks 0.35 — engine.209 drifts them and moves
+// them into Carry_Forward_Store with its writer; reach per round as the table below.
+var SPORTS_FRANCHISE_WEIGHT_ = { "A's": 1.0, 'Oaks': 0.35 };
+var SPORTS_DEPTH_MAX_ = 6;          // SPORTS_PHASE_DEPTH_.championship — stakes = depth / max
+var SPORTS_VOL_GAMES_ = 3;          // vol = 1 - e^(-g/3): 1 game .28, 3 → .63, 7 → .90
+// reach keys on the RAW lens first (the round words), then the canonical phase. A bare
+// 'playoffs' names no round, so it reads as the entry round (.50); typing the round
+// word is what reaches further.
+var SPORTS_REACH_ = {
+  'wild-card': 0.50, 'play-in': 0.50,
+  'division-series': 0.60, 'first-round': 0.60,
+  'league-championship': 0.75, 'conference-semis': 0.75,
+  'conference-finals': 0.85,
+  'off-season': 0.15, 'spring-training': 0.15, 'preseason': 0.15,
+  'early-season': 0.25, 'regular-season': 0.25,
+  'mid-season': 0.30, 'late-season': 0.40,
+  'playoffs': 0.50, 'post-season': 0.50,
+  'championship': 1.00
+};
+// §2.1 bands on the city's summed unsigned intensity; below 'normal' is quiet
+var SPORTS_BANDS_ = [['top', 0.75], ['high', 0.50], ['elevated', 0.30], ['normal', 0.10]];
+var SPORTS_BAND_RANK_ = { quiet: 0, normal: 1, elevated: 2, high: 3, top: 4 };
+
+function sportsMedian_(vals) {
+  if (!vals || !vals.length) return null;
+  var b = vals.slice().sort(function(x, y) { return x - y; });
+  var m = Math.floor(b.length / 2);
+  return b.length % 2 ? b[m] : (b[m - 1] + b[m]) / 2;
+}
+
+function sportsReach_(lens, phase) {
+  if (SPORTS_REACH_[lens] != null) return SPORTS_REACH_[lens];
+  if (SPORTS_REACH_[phase] != null) return SPORTS_REACH_[phase];
+  return SPORTS_REACH_['off-season'];
+}
+
+// one franchise-week's unsigned weight on the city: volume × stakes × franchise weight
+function sportsUnsigned_(franchise, g, depth) {
+  var vol = g > 0 ? 1 - Math.exp(-g / SPORTS_VOL_GAMES_) : 0;
+  return vol * (Math.max(0, depth) / SPORTS_DEPTH_MAX_) * (SPORTS_FRANCHISE_WEIGHT_[franchise] || 0);
+}
+
+// Adds vol/stakes/reach/weight/unsigned/signed/venueShare/venue/median onto a 208 week.
+// depth/phase: the caller's canonical reading of wk.lens; venue: the franchise's own
+// stadium hoods; pastUnsigned: the franchise's earlier game weeks' unsigned (newest first).
+function addSportsWeekIntensity_(franchise, wk, depth, phase, venue, pastUnsigned) {
+  wk.depth = depth;
+  wk.vol = wk.g > 0 ? 1 - Math.exp(-wk.g / SPORTS_VOL_GAMES_) : 0;
+  wk.stakes = Math.max(0, depth) / SPORTS_DEPTH_MAX_;
+  wk.reach = sportsReach_(wk.lens, phase);
+  wk.weight = SPORTS_FRANCHISE_WEIGHT_[franchise] || 0;
+  wk.unsigned = wk.vol * wk.stakes * wk.weight;
+  wk.signed = wk.unsigned * wk.surprise;
+  wk.venueShare = wk.g > 0 ? wk.h / wk.g : 0;
+  wk.venue = (venue || []).slice();
+  var nz = [];
+  for (var i = 0; i < (pastUnsigned || []).length; i++) if (pastUnsigned[i] > 0) nz.push(pastUnsigned[i]);
+  wk.median = nz.length >= SPORTS_EXPECT_MIN_WEEKS_ ? sportsMedian_(nz) : null;
+  return wk;
+}
+
+// S.sportsCity: the scalar group's one reading of the week. pastCity = the city's summed
+// unsigned on its earlier sports weeks (newest first). Quiet below .10, or below half the
+// city's own trailing median once four weeks exist (§15: the downside without a loss).
+function buildSportsCity_(weeks, pastCity) {
+  var city = { intensity: 0, signed: 0, reach: 0, games: 0, median: null, band: 'quiet' };
+  for (var f in (weeks || {})) {
+    if (!weeks.hasOwnProperty(f)) continue;
+    var wk = weeks[f];
+    city.intensity += wk.unsigned || 0;
+    city.signed += wk.signed || 0;
+    city.games += wk.g || 0;
+    if (wk.g > 0 && wk.reach > city.reach) city.reach = wk.reach;
+  }
+  var nz = [];
+  for (var i = 0; i < (pastCity || []).length; i++) if (pastCity[i] > 0) nz.push(pastCity[i]);
+  if (nz.length >= SPORTS_EXPECT_MIN_WEEKS_) city.median = sportsMedian_(nz);
+  var floorMedian = city.median != null && city.intensity < city.median / 2;
+  if (!floorMedian) {
+    for (var b = 0; b < SPORTS_BANDS_.length; b++) {
+      if (city.intensity >= SPORTS_BANDS_[b][1]) { city.band = SPORTS_BANDS_[b][0]; break; }
+    }
+  }
+  return city;
+}
+
+// band comparisons for consumers: sportsBandAtLeast_(S.sportsCity, 'high')
+function sportsBandAtLeast_(city, band) {
+  return !!city && (SPORTS_BAND_RANK_[city.band] || 0) >= (SPORTS_BAND_RANK_[band] || 0);
+}
+
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
     parseSportsWeekRecord_: parseSportsWeekRecord_,
@@ -162,6 +257,12 @@ if (typeof module !== 'undefined' && module.exports) {
     buildSportsWeek_: buildSportsWeek_,
     sportsWeekClass_: sportsWeekClass_,
     SPORTS_WEEK_TAG_: SPORTS_WEEK_TAG_,
-    SPORTS_EXPECT_PRIOR_: SPORTS_EXPECT_PRIOR_
+    SPORTS_EXPECT_PRIOR_: SPORTS_EXPECT_PRIOR_,
+    SPORTS_FRANCHISE_WEIGHT_: SPORTS_FRANCHISE_WEIGHT_,
+    sportsReach_: sportsReach_,
+    sportsUnsigned_: sportsUnsigned_,
+    addSportsWeekIntensity_: addSportsWeekIntensity_,
+    buildSportsCity_: buildSportsCity_,
+    sportsBandAtLeast_: sportsBandAtLeast_
   };
 }

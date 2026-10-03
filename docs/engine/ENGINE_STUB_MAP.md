@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-10-02 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-10-03 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -396,12 +396,18 @@
 
 ### applySportsSeason.js
 - **applySportsSeason_(ctx)**
-  Reads: S.activeSports, S.baylightOpenings, S.cycle, S.cycleId, S.sportsSeason, S.sportsSeasonByTeam
-  Writes: S.activeSports, S.baylightOpenings, S.sportsAtmosphereEnabled, S.sportsFeedEntries, S.sportsFeedSeasonType, S.sportsSeason, S.sportsSeasonByTeam, S.sportsSeasonOakland, S.sportsSource, S.sportsZones
+  Reads: S.activeSports, S.baylightOpenings, S.cycle, S.cycleId, S.sportsSeason, S.sportsSeasonByTeam, S.sportsWeek
+  Writes: S.activeSports, S.baylightOpenings, S.sportsAtmosphereEnabled, S.sportsCity, S.sportsFeedEntries, S.sportsFeedSeasonType, S.sportsSeason, S.sportsSeasonByTeam, S.sportsSeasonOakland, S.sportsSource, S.sportsWeek, S.sportsZones
   Config: ctx.config.sportsStateOakland, ctx.config.sportsState_Oakland
 
 - **readOaklandFeedEntries_(ctx, currentCycle)**
   Sheets: Oakland_Sports_Feed
+
+- **deriveSportsWeekFromFeed_(entries, history, currentCycle)**
+
+- **sportsLensDepth_(raw)**
+
+- **deriveSportsIntensity_(weeks, history, lensHistory, openings, currentCycle)**
 
 - **getColVal_(row, colIdx)**
 
@@ -410,6 +416,7 @@
 - **sportsFeedTimeZone_(ssOrSheet)**
 
 - **normalizeOaklandFeedTeam_(value)**
+  Reads: S.sportsSeason, S.sportsWeek
 
 - **canonicalSportsPhase_(rawSeasonType)**
 
@@ -1124,8 +1131,14 @@
 
 - **parseNamesUsed_(entry)**
 
+- **gameNightNameKey_(s)**
+
+- **sportsNamedRoute_(eventType, cls)**
+
+- **sportsStaffTeams_(employerBizId, roleType)**
+
 - **applyGameNightMoments_(ctx)**
-  Reads: S.cycleId, S.sportsFeedEntries
+  Reads: S.cycleId, S.sportsFeedEntries, S.sportsWeek
   Config: ctx.config.cycleCount
   Sheets: LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)
@@ -1790,7 +1803,7 @@
 - **applyGriefPoolWeights_(pool, griefConfig)**
 
 - **generateCitizensEvents_(ctx)**
-  Reads: S.biasIntents, S.citizenEventMemory, S.citizenEvents, S.cityDynamics, S.contentLedger, S.crimeByNeighborhood, S.crimeMetrics, S.cycle, S.cycleActiveCitizens, S.cycleId, S.economicMood, S.eventsGenerated, S.faithEvents, S.faithExposures, S.holiday, S.holidayPriority, S.initiativeEvents, S.isCreationDay, S.isFirstFriday, S.localEntities, S.neighborhoodDynamics, S.neighborhoodState, S.neighborhoodWeather, S.previousEvening, S.season, S.sportsFeedEntries, S.sportsSeason, S.sportsSentimentBoost, S.storyHooks, S.templateCooldowns, S.transitState, S.undockedFeedEntries, S.undockedPilots, S.weather, S.worldEvents
+  Reads: S.biasIntents, S.citizenEventMemory, S.citizenEvents, S.cityDynamics, S.contentLedger, S.crimeByNeighborhood, S.crimeMetrics, S.cycle, S.cycleActiveCitizens, S.cycleId, S.economicMood, S.eventsGenerated, S.faithEvents, S.faithExposures, S.holiday, S.holidayPriority, S.initiativeEvents, S.isCreationDay, S.isFirstFriday, S.localEntities, S.neighborhoodDynamics, S.neighborhoodState, S.neighborhoodWeather, S.previousEvening, S.season, S.sportsFeedEntries, S.sportsSeason, S.sportsSentimentBoost, S.sportsWeek, S.storyHooks, S.templateCooldowns, S.transitState, S.undockedFeedEntries, S.undockedPilots, S.weather, S.worldEvents
   Writes: S.biasIntents, S.citizenEventMemory, S.citizenEvents, S.cycleActiveCitizens, S.eventsGenerated, S.faithExposures, S.householdMoments, S.minorsSkippedTexture, S.storyHooks, S.templateCooldowns
   Config: ctx.config.cycleCount, ctx.config.eclExclusiveMinLines, ctx.config.eclExclusivePools, ctx.config.gcSurfaceChance, ctx.config.hoodFloorSurfaceQuota, ctx.config.rngSeed
   Sheets: Content_Telemetry, Generic_Citizens, LifeHistory_Log
@@ -3873,6 +3886,10 @@
 
 - **parseDialState_(str)**
 
+- **buildFandomDonors_(rows, iPopID, iDialState, iHousehold)**
+
+- **inheritFandom_(row, selfPop, idxs, donors)**
+
 - **serializeDialState_(c)**
 
 - **pushFromResolves_(text)**
@@ -4373,6 +4390,23 @@
 - **foldSportsWeeks_(first, next, label)**
 
 - **sportsWeeklyResult_(entries, matchesTeam)**
+  Reads: S.sportsSeason
+
+- **buildSportsWeek_(franchise, weekly, lens, historyByCycle, currentCycle)**
+
+- **sportsWeekClass_(franchise, wk)**
+
+- **sportsMedian_(vals)**
+
+- **sportsReach_(lens, phase)**
+
+- **sportsUnsigned_(franchise, g, depth)**
+
+- **addSportsWeekIntensity_(franchise, wk, depth, phase, venue, pastUnsigned)**
+
+- **buildSportsCity_(weeks, pastCity)**
+
+- **sportsBandAtLeast_(city, band)**
 
 ### textCrawler.js
 - **crawlAllTxtFiles(rootFolderId, outputFileName)**
@@ -4455,4 +4489,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1581
+**Functions mapped:** 1597

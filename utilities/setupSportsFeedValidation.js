@@ -63,6 +63,14 @@ var SEASON_TYPE_VALUES = [
   'late-season',
   'regular-season',
   'playoffs',
+  // engine.208 ruling iii: pick the round once a series is set (each counts as playoffs for the city)
+  'wild-card',
+  'division-series',
+  'league-championship',
+  'play-in',
+  'first-round',
+  'conference-semis',
+  'conference-finals',
   'post-season',
   'championship',
   'finals',
@@ -177,6 +185,7 @@ var HEADER_NOTES = {
   'SeasonType': 'Required. Where this team is in its season.\n' +
     'The city runs at the DEEPEST phase across both teams; within one team the LAST row of the Cycle wins.\n' +
     'world-series and finals count as championship (the final round is on — not won).\n' +
+    'Pick the round, not playoffs, once a series is set: wild-card / division-series / league-championship (A\'s), play-in / first-round / conference-semis / conference-finals (Oaks) — each counts as playoffs for the city and as that round for the fans. Type championship on the clinch game.\n' +
     'Today a row with no games still sets the phase.',
   'EventType': 'Required. One event per row.\n' +
     'The engine acts on:\n' +

@@ -24,6 +24,8 @@
 
 function applySportsSeason_(ctx) {
   var S = ctx.summary;
+  // engine.208 C3: the week object, per franchise; {} unless the feed is read (override / quiet).
+  S.sportsWeek = {};
 
   // ─────────────────────────────────────────────────────────────
   // PRIORITY 1: World_Config override (Maker control)
@@ -99,6 +101,7 @@ function applySportsSeason_(ctx) {
 
     var lastEntry = entries[entries.length - 1];
     S.sportsFeedSeasonType = lastEntry.seasonType || "unknown";
+    S.sportsWeek = deriveSportsWeekFromFeed_(entries, ctx._sportsWeekHistory || {}, currentCycle);
     S.activeSports = deriveActiveSportsFromFeed_(entries);
     S.sportsSource = "oakland-feed";
 
@@ -184,10 +187,25 @@ function readOaklandFeedEntries_(ctx, currentCycle) {
   var feedTz = sportsFeedTimeZone_(ss);   // engine.247
   var entries = [];
   var weeklyTeams = {};
+  // engine.208 C3: earlier Cycles' game weeks, from this same grid — the expectation baseline.
+  // A bad historical cell is skipped silently here; it was rejected (and logged) in its own Cycle.
+  var weekHistory = {};
+  ctx._sportsWeekHistory = weekHistory;
 
   for (var i = 1; i < data.length; i++) {
     var row = data[i];
     var cycle = cycleCol !== -1 ? parseInt(row[cycleCol], 10) : 0;
+    if (!isNaN(cycle) && cycle < currentCycle && weekRecordCol !== -1) {
+      try {
+        var pastWeek = parseSportsWeekRecord_(getColVal_(row, weekRecordCol));
+        var pastTeam = normalizeOaklandFeedTeam_(getColVal_(row, teamsCol));
+        if (pastWeek && pastWeek.gamesPlayed && (pastTeam === "A's" || pastTeam === 'Oaks')) {
+          var byCycle = weekHistory[pastTeam] || (weekHistory[pastTeam] = {});
+          var slot = byCycle[cycle] || (byCycle[cycle] = { w: 0, l: 0 });
+          slot.w += pastWeek.wins; slot.l += pastWeek.losses;
+        }
+      } catch (pastErr) { /* rejected in its own Cycle */ }
+    }
     if (isNaN(cycle) || cycle !== currentCycle) continue;
 
     var entry = {
@@ -262,6 +280,25 @@ function readOaklandFeedEntries_(ctx, currentCycle) {
   return entries;
 }
 
+
+/**
+ * engine.208 C3 — S.sportsWeek[franchise] from this Cycle's entries + earlier game weeks.
+ * The lens is the raw SeasonType of the franchise's LAST row (the plan's sixth block); the
+ * weekly result is the folded WeekRecord the reader anchored on the first game row.
+ */
+function deriveSportsWeekFromFeed_(entries, history, currentCycle) {
+  var out = {}, lens = {}, weekly = {};
+  for (var i = 0; i < entries.length; i++) {
+    var team = normalizeOaklandFeedTeam_(entries[i].teamsUsed);
+    if (team !== "A's" && team !== 'Oaks') continue;
+    lens[team] = entries[i].seasonType;
+    if (entries[i].weekRecord && !weekly[team]) weekly[team] = parseSportsWeekRecord_(entries[i].weekRecord);
+  }
+  for (var t in lens) {
+    if (lens.hasOwnProperty(t)) out[t] = buildSportsWeek_(t, weekly[t] || null, lens[t], history[t] || {}, currentCycle);
+  }
+  return out;
+}
 
 /**
  * Safe column value extraction. Returns trimmed string or empty string.
@@ -372,7 +409,17 @@ var SPORTS_PHASE_ALIASES_ = {
   'postseason': 'post-season',
   'summer league': 'preseason',
   'summer-league': 'preseason',
-  'regular': 'regular-season'
+  'regular': 'regular-season',
+  // engine.208 C6 (ruling iii): the round words are dropdown options. Each aliases to 'playoffs' so
+  // S.sportsSeason and its 150+ word-compare readers see exactly today's value; the raw word rides
+  // on as S.sportsWeek[f].lens (RUN vs TITLE, and 204/205's per-round reach).
+  'wild-card': 'playoffs',
+  'division-series': 'playoffs',
+  'league-championship': 'playoffs',
+  'play-in': 'playoffs',
+  'first-round': 'playoffs',
+  'conference-semis': 'playoffs',
+  'conference-finals': 'playoffs'
 };
 
 var SPORTS_PHASE_DEPTH_ = {

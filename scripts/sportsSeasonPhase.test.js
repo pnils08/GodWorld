@@ -35,6 +35,9 @@ const sandbox = {
 };
 
 vm.createContext(sandbox);
+// engine.208 C3: the week builder is an Apps Script global from utilities/sportsWeekRecord.js
+const weekRecordPath = path.join(__dirname, '..', 'utilities', 'sportsWeekRecord.js');
+vm.runInContext(fs.readFileSync(weekRecordPath, 'utf8'), sandbox, { filename: weekRecordPath });
 vm.runInContext(fs.readFileSync(sourcePath, 'utf8'), sandbox, {
   filename: sourcePath,
 });

@@ -242,5 +242,84 @@ test('Node and Apps Script share weekly outcomes without mutating feed entries',
   }
 });
 
+// ── engine.208 C3: the week object (one baseline with engine.204/205) ─────────
+const wk = (team, cell, lens, hist, cyc = 404) =>
+  plain(box.buildSportsWeek_(team, cell ? box.parseSportsWeekRecord_(cell) : null, lens, hist || {}, cyc));
+const H = (...weeks) => { const o = {}; weeks.forEach(([c, w, l]) => (o[c] = { w, l })); return o; };
+test('208 C3 below 4 game weeks the ruled prior stands (A\'s .750, Oaks .400)', () => {
+  assert.strictEqual(wk("A's", 'H:W', 'regular-season').expectation, 0.75);
+  assert.strictEqual(wk('Oaks', 'H:W', 'preseason').expectation, 0.4);
+  assert.strictEqual(wk('Oaks', 'H:W', 'preseason', H([400, 1, 0], [401, 0, 1], [402, 0, 1])).n, 3);
+});
+test('208 C3 expectation = mean weekly win share over the last 8 game weeks, current Cycle excluded', () => {
+  const hist = H([395, 1, 0], [396, 1, 0], [397, 0, 1], [398, 1, 1], [399, 2, 0], [400, 0, 0], [401, 1, 0], [402, 0, 2], [403, 3, 0], [404, 0, 5]);
+  const w = wk("A's", 'H:W', 'regular-season', hist);
+  assert.strictEqual(w.n, 8);                         // 400 had no games; 404 is the current Cycle
+  const shares = [1, 1, 0, 0.5, 1, 1, 0, 1];         // 403 402 401 399 398 397 396 395 (newest first)
+  assert.ok(Math.abs(w.expectation - shares.reduce((a, b) => a + b) / 8) < 1e-12);
+});
+test('208 C3 the window survives an off-season (game weeks, not calendar Cycles)', () => {
+  const w = wk("A's", 'H:L A:L', 'regular-season', H([300, 2, 0], [301, 2, 0], [302, 1, 0], [303, 2, 1]), 404);
+  assert.strictEqual(w.n, 4);
+  assert.strictEqual(w.cls, 'LOSS');
+});
+test('208 C3 class precedence edges', () => {
+  const perfect = H([400, 3, 0], [401, 2, 0], [402, 1, 0], [403, 4, 0]);
+  assert.strictEqual(wk("A's", 'H:W H:W H:W', 'regular-season', perfect).cls, 'WIN');        // sweep at expectation 1
+  assert.strictEqual(wk("A's", 'H:W A:L', 'division-series', perfect).cls, 'RUN');           // tied playoff week held
+  assert.strictEqual(wk("A's", 'A:L A:L', 'division-series', perfect).cls, 'LOSS');          // a lost playoff week is no run
+  assert.strictEqual(wk("A's", 'A:W A:W', 'championship').cls, 'TITLE');                      // C110 shape
+  assert.strictEqual(wk("A's", 'H:L H:L H:W', 'championship').cls, 'TITLE');                  // the clinch win counts
+  assert.strictEqual(wk("A's", 'A:L', 'championship').cls, 'LOSS');                           // prior .75, surprise -1
+  assert.strictEqual(wk("A's", 'H:W H:W H:L', 'regular-season').cls, 'EVEN');                 // 2-1 under a .750 norm
+  assert.strictEqual(wk("A's", 'H:W H:L', 'regular-season').cls, 'EVEN');                     // split
+  assert.strictEqual(wk("A's", 'none', 'regular-season').cls, 'none');
+  assert.strictEqual(wk("A's", '', 'regular-season').cls, 'none');
+});
+test('208 C3 ruling v: an Oaks losing week is -1 until four own game weeks, then -2 under its norm', () => {
+  assert.strictEqual(wk('Oaks', 'H:L A:L', 'preseason', H([400, 0, 1], [401, 0, 1])).cls, 'LOSING_WEEK');
+  assert.strictEqual(wk('Oaks', 'A:L', 'regular-season').cls, 'LOSING_WEEK');                 // prior .4, n 0
+  const fourWins = H([400, 2, 0], [401, 2, 0], [402, 1, 0], [403, 2, 0]);
+  assert.strictEqual(wk('Oaks', 'A:L A:L', 'regular-season', fourWins).cls, 'LOSS');
+  const fourLosses = H([400, 0, 2], [401, 0, 1], [402, 0, 1], [403, 0, 3]);
+  assert.strictEqual(wk('Oaks', 'A:L A:L', 'regular-season', fourLosses).cls, 'LOSING_WEEK'); // as expected
+  assert.strictEqual(wk('Oaks', 'H:W', 'preseason').cls, 'WIN');                             // over a .400 prior
+});
+test('208 C3 tags for each class; none/EVEN carry no signed line', () => {
+  assert.deepStrictEqual(plain(box.SPORTS_WEEK_TAG_), { TITLE: 'Sports-Title', RUN: 'Sports-Run', WIN: 'Sports-Win', LOSS: 'Sports-Loss', LOSING_WEEK: 'Sports-LosingWeek' });
+});
+test('208 C3 the reader projects earlier Cycles from the same grid; a bad old cell is skipped silently', () => {
+  box.__rejections.length = 0;
+  const headers = [...Object.keys(base), 'WeekRecord'];
+  const r = (c) => headers.map(h => c[h] ?? '');
+  const values = [headers,
+    r(row({ Cycle: 401, WeekRecord: 'H:W' })), r(row({ Cycle: 401, WeekRecord: 'A:L' })),
+    r(row({ Cycle: 402, WeekRecord: 'H:X' })),
+    r(row({ Cycle: 403, TeamsUsed: 'Oaks', WeekRecord: 'A:L' })),
+    r(row({ Cycle: 404, WeekRecord: 'H:W' }))];
+  const ctx = { ss: { getSheetByName: () => ({ getDataRange: () => ({ getValues: () => values }) }) } };
+  box.readOaklandFeedEntries_(ctx, 404);
+  assert.deepStrictEqual(plain(ctx._sportsWeekHistory), { "A's": { 401: { w: 1, l: 1 } }, Oaks: { 403: { w: 0, l: 1 } } });
+  assert.deepStrictEqual(rejected(), []);
+});
+test('208 C3 S.sportsWeek: lens is the franchise\'s LAST row; week anchored on the first game row', () => {
+  const entries = [
+    { teamsUsed: "A's", seasonType: 'playoffs', weekRecord: 'A:W A:W', eventType: 'game-result' },
+    { teamsUsed: "A's", seasonType: 'playoffs', eventType: 'game-result' },
+    { teamsUsed: "A's", seasonType: 'championship', eventType: 'game-result' },
+    { teamsUsed: 'Oaks', seasonType: 'preseason', weekRecord: 'H:L A:L', eventType: 'game-result' }];
+  const out = plain(box.deriveSportsWeekFromFeed_(entries, { Oaks: H([108, 0, 1], [109, 0, 2]) }, 110));
+  assert.strictEqual(out["A's"].lens, 'championship');
+  assert.strictEqual(out["A's"].cls, 'TITLE');
+  assert.strictEqual(out.Oaks.cls, 'LOSING_WEEK');
+  assert.strictEqual(out.Oaks.n, 2);
+});
+test('208 C6 the seven round words count as playoffs for the city', () => {
+  for (const w of ['wild-card', 'division-series', 'league-championship', 'play-in', 'first-round', 'conference-semis', 'conference-finals']) {
+    assert.strictEqual(box.canonicalSportsPhase_(w), 'playoffs', w);
+  }
+  assert.strictEqual(box.canonicalSportsPhase_('world-series'), 'championship');           // unchanged (Revision 1)
+});
+
 console.log(`${passed} passed; ${failed} failed`);
 if (failed) process.exitCode = 1;

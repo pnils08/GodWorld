@@ -10,6 +10,6 @@
 
 **NEXT[codex]:** Verify remaining board comparator/config/history export gaps against docs/plans/2026-09-19-civic-wake-game-loop.md §Task 4 engine rulings; coordinate runner edits with Kimi. Separate counter threshold-rounding defect recorded in the same plan §Health numerator amendment.
 
-**NEXT[antigravity]:** engine.208 review completed to docs/research/2026-10-02-agy-engine-208-draft-review.md. 3 FIXES: Undocked engagement dropped from table, Oaks expansion expectation penalty re-opens Q3, magnitudes presented as sim calls instead of mechanism. Proposed a 10-cycle bench test for spread verification.
+**NEXT[antigravity]:** Drafted TrueSource cards for Batch 3 (9 inactive/farm depth players with zero 2041 MLB stats) using lightweight template. Staged files locally. Completed update to `truesource_intake_process.md` and prepared `truesource_2041_batch3_farm_intake_review.md` artifact. Awaiting builder verification against live sheets.
 
 **NEXT[grok]:** No pane; nothing queued.

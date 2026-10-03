@@ -52,6 +52,14 @@ const SEED_CYCLE = 99;   // current cycle (C99 RAN) — stamps Updated:cN on the
 const ESSENCE_CYCLE = 0; // backstory marker — sorts as oldest, not "recent"
 const WAKE_GATE = 60;    // citizen-wake.js SHAPED_MIN
 
+// engine.208: fandom is seeded and inherited, never replayed from history — a rebuild carries the
+// row's existing base.fandom and team forward instead of resetting them to 50 (codex M9 hunt 8).
+function carryFandom_(c, existingDialState) {
+  const p = C.parseDialState_(existingDialState || '');
+  if (p && p.base && p.base.fandom != null) c.base.fandom = p.base.fandom;
+  if (p && p.fan) c.fan = p.fan;
+}
+
 // dampened seed, identical to backdateCitizenDials.js backdate()
 function backdate(events) {
   const net = {}; E.DIALS.forEach((d) => (net[d] = 0));
@@ -138,10 +146,11 @@ function backdate(events) {
     events.forEach((e, i) => (e._i = i));
     events.sort((a, b) => (a.cycle == null && b.cycle == null) ? a._i - b._i : a.cycle == null ? 1 : b.cycle == null ? -1 : (a.cycle - b.cycle || a._i - b._i));
     const c = backdate(events);
+    carryFandom_(c, rowByPop[pop][iDial]);
     const curRounded = {}; E.DIALS.forEach((d) => (curRounded[d] = Math.round(c.base[d])));
     const dev = dials.deviation(curRounded);
     const ess = TIER1_ESSENCE[pop];
-    const misses = E.DIALS.filter((d) => { const tgt = (ess.target && ess.target[d]) || 'neutral'; return !TGT_OK[tgt](dials.bandIdx(curRounded[d]), curRounded[d]); })
+    const misses = E.DIALS.filter((d) => d !== 'fandom').filter((d) => { const tgt = (ess.target && ess.target[d]) || 'neutral'; return !TGT_OK[tgt](dials.bandIdx(curRounded[d]), curRounded[d]); })
       .map((d) => `${d}=${curRounded[d]}/${(ess.target && ess.target[d]) || 'neutral'}`);
     const oParsed = C.parseLifeHistoryEntries_(String(rowByPop[pop][iLife] || ''));
     c.folded = oParsed.entries.reduce((m, e) => (e.cycle > m ? e.cycle : m), 0); // engine.177 watermark survives a rebuild

@@ -30,10 +30,14 @@
 //   integrity   corrupt    <-> incorruptible   (the crime axis — erosion = crime)
 //   family      unattached <-> devoted to family
 //   outabout    homebody   <-> always out      (PRESENCE at the city's events — feeds the evening engine; not "more social", it's showing up)
-var DIALS = ['drive', 'sociability', 'warmth', 'openness', 'composure', 'integrity', 'family', 'outabout'];
+//   fandom      doesn't follow <-> lives and dies with them  (the SELECTOR for sports / UNDOCKED events; Dial 9, engine.208)
+var DIALS = ['drive', 'sociability', 'warmth', 'openness', 'composure', 'integrity', 'family', 'outabout', 'fandom'];
 
 var MIDPOINT = 50;          // bipolar center; below 50 IS the negative pole
 var MOOD_DECAY = 0.8;       // temporary swing fades 20%/cycle back toward baseline
+// engine.208: a fan's upset fades slower than an ordinary swing (the 2026-09-27 ruling — sports is a
+// heavy driver, the fade is slow). Any dial not listed keeps MOOD_DECAY.
+var MOOD_DECAY_BY_DIAL = { fandom: 0.9 };
 var HARDEN_STREAK = 3;      // same-direction push sustained N times -> permanent baseline shift
 var HARDEN_FRACTION = 0.4;  // fraction of a sustained swing that bakes in permanently
 
@@ -201,7 +205,7 @@ function accreteReflectionsIntoBase_(c, reflections, dialMap, mult, frac) {
 function settleCycle_(c) {
   for (var i = 0; i < DIALS.length; i++) {
     var d = DIALS[i];
-    c.mood[d] = c.mood[d] * MOOD_DECAY;
+    c.mood[d] = c.mood[d] * (MOOD_DECAY_BY_DIAL[d] != null ? MOOD_DECAY_BY_DIAL[d] : MOOD_DECAY);
     if (Math.abs(c.mood[d]) < 0.5) c.mood[d] = 0;
   }
 }
@@ -225,7 +229,8 @@ var PHRASE = {
   composure:   ['volatile', 'anxious', '', 'steady', 'unshakable'],
   integrity:   ['corrupt', 'slippery', '', 'principled', 'incorruptible'],
   family:      ['unattached', 'independent', '', 'family-minded', 'devoted to family'],
-  outabout:    ['homebody', 'stays in', '', 'often out', 'always out']
+  outabout:    ['homebody', 'stays in', '', 'often out', 'always out'],
+  fandom:      ["doesn't follow the teams", 'half an eye on the scores', '', 'a real fan', 'lives and dies with them']
 };
 function describe_(c) {
   var notes = [];
@@ -252,6 +257,7 @@ function serialize_(c) {
   if (c.pressure) o.pressure = c.pressure;
   if (c.wear) o.wear = c.wear;
   if (c.debtDefault) o.debtDefault = c.debtDefault;
+  if (c.fan) o.fan = c.fan; // engine.208 the team a fan follows: 'as' | 'oaks' | 'both'
   return o;
 }
 function deserialize_(obj) {
@@ -268,6 +274,7 @@ function deserialize_(obj) {
     if (obj.pressure) c.pressure = obj.pressure; // engine.201 W1f per-cause pressure run {cause:{n,l}}
     if (obj.wear) c.wear = obj.wear;             // engine.272 integrity wear {d, l}
     if (obj.debtDefault) c.debtDefault = obj.debtDefault; // engine.276 default mark {l, n} — the money loop writes it, the home roll reads it
+    if (obj.fan) c.fan = obj.fan;                 // engine.208 the team a fan follows — seed / household / mint write it
   }
   return c;
 }

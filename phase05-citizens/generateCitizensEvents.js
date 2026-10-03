@@ -818,7 +818,9 @@ function generateCitizensEvents_(ctx) {
     // engine.272: only the PILOT's own run is that event. An audience line (watch /
     // argue / lottery / love / aspire) is a plain day — live C104–C109 it was 209 of
     // 226 show lines and the cohort's main integrity +3 (engine.201 ruling 1b).
-    if (has("source:undocked")) return has("ecl:kind:pilot") ? "Reputation" : "Personal";
+    // engine.208: the audience line moves fandom (+1, Undocked-Audience) and nothing else — engine.272's
+    // integrity/sociability cut stands; the pilot's own run stays Reputation.
+    if (has("source:undocked")) return has("ecl:kind:pilot") ? "Reputation" : "Undocked-Audience";
     if (has("relationship:rivalry")) return "Rivalry";
     if (has("relationship:alliance")) return "Alliance";
     if (has("relationship:mentorship")) return "Mentorship";

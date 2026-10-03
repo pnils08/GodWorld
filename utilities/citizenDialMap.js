@@ -161,6 +161,23 @@ var DIAL_MAP = {
   'Holiday':            {},                            // ruling 1b plain day
   'CreationDay':        {},                            // ruling 1b plain day
   'Sports':             {},                            // ruling 1b plain day
+
+  // --- engine.208 Dial 9 fandom: a received week, emitted only at the feed seam (the team's week
+  //     class, research doc §2.9 C3) — never texture. Prefix-form: a '-Sports' suffix would be
+  //     stripped by baseTag_. Magnitudes approved 2026-10-02 (§4 ruling iv); LosingWeek is ruling v. ---
+  'Sports-Win':         { fandom: 2 },                 // the team met or beat its own norm this week
+  'Sports-Loss':        { fandom: -2 },                // lost the week, well under its own norm
+  'Sports-LosingWeek':  { fandom: -1 },                // lost the week, roughly as expected (a bad team's fan)
+  'Sports-Run':         { fandom: 4, outabout: 1 },    // a playoff week the team held
+  'Sports-Title':       { fandom: 6, outabout: 1, sociability: 1 }, // the clinch
+  // athletes named on a feed row (§4 ruling i — the athlete's own dials; magnitudes are mechanism)
+  'Sports-Played':      { composure: 1 },              // played a game this week
+  'Sports-PlayedWin':   { composure: 2 },              // played in a winning / run / title week
+  'Sports-Injured':     { composure: -2, outabout: -1 },
+  'Sports-Moved':       { openness: 2, family: -1 },   // traded, sent down, re-signed: the life moves
+  // UNDOCKED audience (plan §4: "Undocked engagement" moves fandom up). Not "Undocked-Engaged" —
+  // 'engaged' would read as a marriage in CONTENT_RULES. The pilot's own run stays Reputation.
+  'Undocked-Audience':  { fandom: 1 },
   'Weather':            {},                             // a plain day with weather in it (ruling 1)
   'Arrival':            { openness: 3 },                // arrived in Oakland -> new start
 

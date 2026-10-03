@@ -24,7 +24,7 @@ function replay(c, tag, n, mult) { for (let i = 0; i < n; i++) { E.applyEvent_(c
 console.log('═══ Section A — dial mechanic');
 {
   const c = E.newCitizen_();
-  assert('A1 all 8 dials init at midpoint 50', E.DIALS.length === 8 && E.DIALS.every(d => E.current_(c, d) === 50));
+  assert('A1 all 9 dials init at midpoint 50 (engine.208 fandom is dial 9)', E.DIALS.length === 9 && E.DIALS[8] === 'fandom' && E.DIALS.every(d => E.current_(c, d) === 50));
   assert('A2 snapshot reflects neutral', E.snapshot_(c).drive === 50 && E.snapshot_(c).integrity === 50);
 
   const c2 = E.newCitizen_();

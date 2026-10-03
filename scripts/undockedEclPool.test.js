@@ -59,8 +59,10 @@ P.ROWS.forEach(function (r, i) {
   const tags = r.Tags.split(',');
   const isPilot = tags.indexOf('ecl:kind:pilot') >= 0;
   const tag = routeFor(tags);
-  check('row ' + i + ' routes ' + (isPilot ? 'Reputation (pilot run)' : 'plain day (audience)'),
-    isPilot ? tag === 'Reputation' : Object.keys(DM.nudgesForEvent_(tag, 1, r.Text)).length === 0, tag);
+  // engine.208: an audience line moves fandom +1 and nothing else (engine.272's integrity/sociability cut stands)
+  check('row ' + i + ' routes ' + (isPilot ? 'Reputation (pilot run)' : 'fandom +1 only (audience)'),
+    isPilot ? tag === 'Reputation'
+      : tag === 'Undocked-Audience' && JSON.stringify(DM.nudgesForEvent_(tag, 1, r.Text)) === JSON.stringify({ fandom: 1 }), tag);
 });
 check('pilot rows are exactly the undockedpilot-gated rows', P.ROWS.every(function (r) {
   return (r.Tags.split(',').indexOf('ecl:kind:pilot') >= 0) === /(^|;)undockedpilot(;|$)/.test(r.Conditions);

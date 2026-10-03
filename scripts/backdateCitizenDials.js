@@ -53,6 +53,14 @@ function colLetter(n) { var s = ''; while (n > 0) { var m = (n - 1) % 26; s = St
 // prolific citizens asymptote toward the poles (never blow past 0/100). No
 // streak/harden here — that's the LIVE compressor's job going forward; the seed
 // just reflects the net shape of a life. base 50 = no signal.
+// engine.208: fandom is seeded and inherited, never replayed from history — a rebuild carries the
+// row's existing base.fandom and team forward instead of resetting them to 50 (codex M9 hunt 8).
+function carryFandom_(c, existingDialState) {
+  const p = C.parseDialState_(existingDialState || '');
+  if (p && p.base && p.base.fandom != null) c.base.fandom = p.base.fandom;
+  if (p && p.fan) c.fan = p.fan;
+}
+
 function backdate(events) {
   const net = {}; E.DIALS.forEach(d => net[d] = 0);
   for (const ev of events) {
@@ -138,6 +146,7 @@ function backdate(events) {
     events.sort((a, b) => (a.cycle == null && b.cycle == null) ? a._i - b._i : a.cycle == null ? 1 : b.cycle == null ? -1 : (a.cycle - b.cycle || a._i - b._i));
 
     const c = backdate(events);
+    carryFandom_(c, iDial >= 0 ? row[iDial] : '');
     // engine.177: a rebuilt citizen carries the watermark at the newest stamped col-O entry,
     // else the next Phase 9 re-folds the whole raw window on top of this replay.
     c.folded = oParsed.entries.reduce((m, e) => (e.cycle > m ? e.cycle : m), 0);

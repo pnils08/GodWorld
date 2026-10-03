@@ -848,6 +848,33 @@ function enrichAssignment(assign, cycle, root) {
   });
 }
 
+// Exports before the CLI main: beatSliceKit requires this file for loadBeatTabs and
+// this file lazily requires the kit (engine.254 Task 10), so the exports must be
+// populated before main() can pull the kit in.
+module.exports = {
+  VERSION,
+  buildEconomicSlice,
+  writeEconomicSlice,
+  loadEconomicSlice,
+  formatEconomicSliceMarkdown,
+  assignmentFromSlice,
+  enrichAssignment,
+  isBusinessDesk,
+  isFoodSeat,
+  slicePaths,
+  loadBeatTabs,
+  joinLedgerToRoster,
+  seedsForCycle,
+  eligibleHoods,
+  pickHood,
+  priorCoverage,
+  FOOD_SECTOR_RE,
+  NON_BUSINESS_SECTOR_RE,
+  ECONOMIC_APPROACH,
+  FOOD_APPROACH,
+  FACTS_TAIL
+};
+
 if (require.main === module) {
   const cycle = arg('--cycle', null) || (() => {
     try {
@@ -881,27 +908,3 @@ if (require.main === module) {
     console.log('→ ' + path.relative(ROOT, paths.json));
   }
 }
-
-module.exports = {
-  VERSION,
-  buildEconomicSlice,
-  writeEconomicSlice,
-  loadEconomicSlice,
-  formatEconomicSliceMarkdown,
-  assignmentFromSlice,
-  enrichAssignment,
-  isBusinessDesk,
-  isFoodSeat,
-  slicePaths,
-  loadBeatTabs,
-  joinLedgerToRoster,
-  seedsForCycle,
-  eligibleHoods,
-  pickHood,
-  priorCoverage,
-  FOOD_SECTOR_RE,
-  NON_BUSINESS_SECTOR_RE,
-  ECONOMIC_APPROACH,
-  FOOD_APPROACH,
-  FACTS_TAIL
-};

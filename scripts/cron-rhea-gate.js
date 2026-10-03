@@ -508,6 +508,7 @@ async function main() {
     const unresolvable = resolved.filter(r => r.popid === null && !r.ambiguous).map(r => r.name);
     let unbackedQuoted = [];
     let invalidOfficeRecords = [];
+    const pageContradictions = [];
     if (parsed.found && PACKET_FILE) {
       try {
         const packet = JSON.parse(fs.readFileSync(path.resolve(ROOT, PACKET_FILE), 'utf8'));
@@ -525,6 +526,27 @@ async function main() {
           quoted.add(String(q.name).toLowerCase());
         }
         unbackedQuoted = parsed.names.filter(n => n.role === 'quoted-source' && !quoted.has(String(n.name).toLowerCase())).map(n => n.name);
+        // pipeline.70 seam 5 — page-backed quote check. For every citizen quote whose author has a
+        // page, read their three most recent reflections: a quote that cheers what the page curses
+        // (same entity) is a visible medium flag — a held draft, not a fail; agreement is silent.
+        try {
+          const pages = require('./scanCitizenPages');
+          const index = pages.loadIndex(ROOT);
+          if (index.length) {
+            const byPop = new Map();
+            for (const r of index) { if (!byPop.has(r.popId)) byPop.set(r.popId, []); byPop.get(r.popId).push(r); }
+            const pageLineDocs = new Set(((packet && packet.sourcingPool && packet.sourcingPool.candidates) || [])
+              .filter(c => c && c.sourceKind === 'page-line' && c.evidence && c.evidence.customId).map(c => c.evidence.customId));
+            for (const q of (packet && packet.quotes) || []) {
+              if (!q || !q.pop || !q.quote || q.sourceKind === 'office-record') continue;
+              const docs = byPop.get(String(q.pop).toUpperCase());
+              if (!docs) continue;
+              const hit = pages.stanceConflict(q.quote, docs, { skipCustomIds: [...pageLineDocs] });
+              if (hit) pageContradictions.push({ name: q.name || q.pop, pop: q.pop, entity: hit.entity, customId: hit.customId, cycle: hit.cycle, excerpt: hit.excerpt,
+                quotePolarity: hit.quotePolarity, pagePolarity: hit.pagePolarity });
+            }
+          }
+        } catch (e) { log.warn('page-backed quote check skipped (non-fatal): ' + e.message); }
       } catch (e) { log.warn('intake packet load failed (backing check skipped): ' + e.message); }
     }
     if (!parsed.found) {
@@ -545,12 +567,14 @@ async function main() {
         storylines: parsed.storylines.length, hoods: parsed.hoods.length, claims: parsed.claims.length },
       grammarErrors: parsed.errors.length,
       unresolvable, unbackedQuoted,
+      pageContradictions, // pipeline.70 seam 5 — visible, non-blocking
       packetChecked: !!(parsed.found && PACKET_FILE)
     };
     console.log('intake pre-check: ' + (parsed.found
       ? parsed.names.length + ' names / ' + parsed.claims.length + ' claims, ' + parsed.errors.length + ' grammar error(s)' +
         (unresolvable.length ? ', unresolvable [' + unresolvable.join('; ') + ']' : '') +
-        (unbackedQuoted.length ? ', unbacked quoted-source [' + unbackedQuoted.join('; ') + ']' : '')
+        (unbackedQuoted.length ? ', unbacked quoted-source [' + unbackedQuoted.join('; ') + ']' : '') +
+        (pageContradictions.length ? ', PAGE_CONTRADICTION [' + pageContradictions.map(c => c.name + ' on ' + c.entity).join('; ') + ']' : '')
       : 'MISSING'));
   }
 
@@ -660,6 +684,13 @@ async function main() {
   if (detBlockers.length) {
     console.log('deterministic blockers: ' + detBlockers.map(d => d.check).join(', '));
     flagsArr.push(...detBlockers);
+  }
+  // pipeline.70 seam 5 — PAGE_CONTRADICTION rides as a MEDIUM flag: visible in the verdict and the
+  // staged sidecar's rhea proof, never a fail ("held" = seen, not blocked; the gate has no third tier).
+  for (const c of (intakeReport && intakeReport.pageContradictions) || []) {
+    flagsArr.push({ severity: 'medium', check: 'page-contradiction',
+      issue: c.name + ' is quoted ' + (c.quotePolarity > 0 ? 'for' : 'against') + ' ' + c.entity + ', but their own page at C' + c.cycle +
+        ' (' + c.customId + ') runs the other way: “' + c.excerpt + '”' });
   }
 
   const gatePass = verdict.pass === true && Array.isArray(verdict.flags) && highSevCount === 0 && detBlockers.length === 0;

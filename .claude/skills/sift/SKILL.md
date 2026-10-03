@@ -827,7 +827,8 @@ Emit `output/letters/c{XX}_candidates.md` — candidate POOL (NOT assignment). L
 **Input:**
 - Step 6 locked slate (thematic awareness for cycle theme).
 - `.claude/agent-memory/letters-desk/memory_letters-desk.md §Rest Cycle Tracking` (preloaded at Step 2).
-- Citizen pool from `lookup_citizen()` + Step 2 canon archive (recent-coverage candidates).
+- **`output/slices/c{XX}/pulse.md` §WHO IS SAYING IT (pipeline.70 — the pool's only source of writers).** A letter-writer is a citizen whose own page carries a stance on one of the edition's topics, or there is no letter on that topic (builder ruling 2026-10-03). Draw every candidate from the pulse voices (or `output/citizen_pages/index.jsonl` directly for a topic the pulse does not list), and put the page citation on the candidate line: `- {POPID} — {Name} ({Neighborhood}) — {the stance in their words} [cp-POP-xxxxx-c<N>-<slot>]`. The stance is the letter's spine; the desk writes the letter around it. No generic invented letter-writers (the S227 letters-texture exception is closed by the ruling). If the pulse has nobody on a topic, that topic gets no letter — say so in the pool file.
+- Citizen pool from `lookup_citizen()` + Step 2 canon archive (recent-coverage candidates) — for card checks on the pulse voices, not as a second source of writers.
 
 **Rest-cycle filter:** before emit, exclude any citizen with `REST through E{XX-1}` or later in the letters-desk MEMORY tracker. Pre-emission filter — desk-side LENS still catches any that slip, but pool itself shouldn't include known-blocked citizens.
 
@@ -842,7 +843,7 @@ Emit `output/letters/c{XX}_candidates.md` — candidate POOL (NOT assignment). L
 node scripts/checkLetterEligibility.js {XX}
 ```
 
-It reads the candidates file directly, resolves every candidate POPID against the live `Simulation_Ledger`, and flags any that is a canon field-actor (e.g. POP-00004 Lucia Polito), carries an entity bio-marker, or is unresolvable on the ledger. **Exit 1 = HALT:** strip the flagged POPIDs from the pool, re-emit, and re-run until it exits 0 before the pool is final / handed to letters-desk selection. Do not proceed on a non-zero exit. (Scope: letters pool only — incidental cameos are a deferred separate gate.)
+It reads the candidates file directly, resolves every candidate POPID against the live `Simulation_Ledger`, and flags any that is a canon field-actor (e.g. POP-00004 Lucia Polito), carries an entity bio-marker, or is unresolvable on the ledger — and (pipeline.70) any candidate line without a page citation that resolves to that citizen's own `reflection` doc in `output/citizen_pages/index.jsonl` (no index on disk = HALT; run `node scripts/scanCitizenPages.js --dump`). **Exit 1 = HALT:** strip the flagged POPIDs from the pool, re-emit, and re-run until it exits 0 before the pool is final / handed to letters-desk selection. Do not proceed on a non-zero exit. (Scope: letters pool only — incidental cameos are a deferred separate gate.)
 
 **Pool shape** (per brief_template_v2 §Letters-desk variant):
 
@@ -863,7 +864,7 @@ It reads the candidates file directly, resolves every candidate POPID against th
 
 ## Candidate pool
 
-- {POPID} — {Name} ({Neighborhood}) — {one-line why-they-might-write}.
+- {POPID} — {Name} ({Neighborhood}) — {the stance, in their own words from the page} [cp-POP-xxxxx-c<N>-<slot>]
 - {POPID} — {Name} ({Neighborhood}) — {context}.
 - ... {3-5 candidates minimum}
 

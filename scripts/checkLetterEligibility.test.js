@@ -91,4 +91,32 @@ total++; passed += passing('G-S4 — raw --popids list (no heading) falls back t
 });
 
 console.log('\n[ES-2 step 1] ' + passed + '/' + total + ' assertions passed');
+// pipeline.70 seam 4 — page-stance backstop
+(function () {
+  var g = require('./checkLetterEligibility');
+  var pool = '# Letters-Desk — C999 Candidate Pool\n\n## Candidate pool\n\n' +
+    '- POP-90001 — A Writer (Test District) — says it on their page [cp-POP-90001-c999-morning]\n' +
+    '- POP-90002 — No Cite (Test District) — picked for the theme\n' +
+    '- POP-90003 — Wrong Doc (Test District) — cites another citizen [cp-POP-90001-c999-morning]\n' +
+    '- POP-90004 — Tension Only (Test District) — [cp-POP-90004-c999-PRESS-tension]\n' +
+    '- POP-90005 — Gone (Test District) — [cp-POP-90005-c999-evening]\n';
+  var index = [
+    { customId: 'cp-POP-90001-c999-morning', popId: 'POP-90001', cycle: 999, type: 'reflection', content: 'I keep thinking about rent.' },
+    { customId: 'cp-POP-90004-c999-PRESS-tension', popId: 'POP-90004', cycle: 999, type: 'tension', content: 'TENSION[c999]: Will rent ever drop?' }
+  ];
+  var lines = g.extractCandidateLines(pool);
+  assert.strictEqual(lines.length, 5, 'five candidate lines');
+  var r = g.screenPageStance(lines, index);
+  assert.deepStrictEqual(r.ok, ['POP-90001'], 'only the cited reflection passes');
+  assert.deepStrictEqual(r.failed.map(function (f) { return f.popId; }), ['POP-90002', 'POP-90003', 'POP-90004', 'POP-90005']);
+  assert.ok(/no page citation/.test(r.failed[0].reason));
+  assert.ok(/belongs to POP-90001/.test(r.failed[1].reason));
+  assert.ok(/tension doc/.test(r.failed[2].reason));
+  assert.ok(/not in the index/.test(r.failed[3].reason));
+  var none = g.screenPageStance(lines, null);
+  assert.strictEqual(none.ok.length, 0, 'no index = nobody verified');
+  assert.ok(/scanCitizenPages.js --dump/.test(none.failed[0].reason), 'missing index names the dump command');
+  console.log('  ok  pipeline.70 page-stance backstop');
+})();
+
 process.exit(passed === total ? 0 : 1);

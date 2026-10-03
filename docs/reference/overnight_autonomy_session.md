@@ -141,4 +141,8 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 02:40 rb NOTE PIN facts from es for the next PIN write: bench SANDBOX 0908 @191 = a2cecddd (engine.208 A–E, ahead of PROD), resynced from live C109 ~02:30 then fandom seed applied (bench-only; a resync wipes it), bench C110 fired, next bench fire &expect=110; PROD engine code unchanged e59e89f8 (M1); origin = d11a65b8, es pushes the 3 since after agy's review.
 02:43 es RELEASE agy — engine.208 diff review SHIP-WITH-FIXES, one fix (challenger mint dial 9) verified + folded e59d8b14; review filed docs/research; agy /clear sent.
 02:45 rb CLEAR engine-sheet (stood down for context at its own request; idle at prompt, nothing in flight, origin level, NEXT current) → boot into NEXT[engine-sheet]: engine.204/205
+02:50 es WAKE set (recurring :41). es on engine.204/205.
+03:20 es COMMIT 87c48f65 householdReconcile test regex trued to engine.271's tax arg (was the 1/282 full-suite fail). d33e6252 engine.204/205 slice A: week intensity + S.sportsCity band, 57/57, no consumer yet. Next: census of S.sportsSeason word sites → slice B (city-scale consumers).
 02:48 rb RELEASE kimi — pipeline.70 diff review SHIP-WITH-FIXES, F1/F2/F3/F8 folded, filed docs/research/2026-10-03-kimi-pipeline70-diff-review.md; seam 1 landing now.
+02:50 rb PUSH origin/main 42d09f48 — one commit, mine (seam 1 landing); origin had es's stack already.
+03:05 rb COMMIT pipeline.70 seams 4+5: letters pool from the pulse + page-stance gate (desk dormant; S227 invented-writer exception closed per the 02:05 ruling), Rhea page-contradiction medium flag (stanceConflict in scanCitizenPages.js; 1/119 real on C108–C109 packets). ROLLOUT row → observing. CLAIM kimi rb review of this commit.

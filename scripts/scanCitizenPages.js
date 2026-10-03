@@ -120,6 +120,78 @@ function citizenText(text) {
   return t;
 }
 
+// ── pipeline.70 seam 5 — Rhea's page-backed quote check ──────────────────────────────────────
+// A quote attributed to a citizen with a page: read their three most recent reflections. A
+// CONTRADICTION is the quote cheering what the page curses (or the reverse) about the SAME entity.
+// Page-side polarity is the wake's own affect tag (lib/reflectionClassifier AFFECT_TAGS, on every
+// classified doc); quote-side polarity is a short lexicon seeded from the classifier's fallback
+// words. Entity = one of the pulse's standing themes or a shared capitalised name. Deterministic,
+// no LLM. Agreement is silent backing; a conflict is a visible flag, never a fail.
+const POSITIVE_AFFECT = new Set(['Content', 'Calm', 'Excited', 'Energized']);
+const NEGATIVE_AFFECT = new Set(['Frustrated', 'Irritable', 'Anxious', 'Angry', 'Resentful']);
+const POS_WORDS = /\b(?:love|loving|proud|excit\w*|thrilled|glad|happy|grateful|hopeful|finally|great|good news|better|relieved|can['’]t wait|looking forward|believe in|support)\b/i;
+const NEG_WORDS = /\b(?:hate|sick of|tired of|fed up|worried|anxious|angry|furious|frustrat\w*|disappoint\w*|worse|broken|dragging|failing|betray\w*|ignored|let (?:us|me) down|a joke|disgrace|resent\w*|bitter)\b/i;
+function polarityOfText(text) {
+  const t = String(text || '');
+  const pos = POS_WORDS.test(t), neg = NEG_WORDS.test(t);
+  return pos && !neg ? 1 : neg && !pos ? -1 : 0;
+}
+// The SAME reading on both sides — the words. The wake's affect tag is NOT used: the C108/C109 smoke
+// showed PRESS answers tagged Content while the words were sceptical ("but honestly, I don't see
+// much action"), and identical texts disagreeing when one side read the tag. A page with no
+// polarity words holds no stance for this check. (AFFECT sets kept for callers that want the tag.)
+function polarityOfDoc(doc) {
+  return polarityOfText(doc && citizenText(doc.content));
+}
+let HOODS = null;
+function hoodNames() {
+  if (HOODS) return HOODS;
+  HOODS = new Set();
+  for (const r of Object.values(loadLedger())) if (r.Neighborhood) HOODS.add(String(r.Neighborhood).trim());
+  return HOODS;
+}
+function themesFor(text) {
+  const { THEMES } = require('./buildPulseSlice'); // lazy: buildPulseSlice requires this module
+  const out = new Set();
+  for (const t of THEMES) if (t.re.test(String(text || ''))) out.add(t.label);
+  // A shared capitalised name is an entity; a neighbourhood is where they live, not what they hold a stance on.
+  for (const m of String(text || '').match(/\b[A-Z][a-z]+(?:\s+[A-Z][a-z]+)+\b/g) || []) if (!hoodNames().has(m)) out.add(m);
+  return out;
+}
+/** stanceConflict(quoteText, docs, opts) -> null | { entity, quotePolarity, pagePolarity, customId, cycle, excerpt }
+ *  docs: that citizen's index rows (any order); opts.skipCustomIds: docs the quote itself answered
+ *  (a page-line sourced interview quotes the page back — a reversal there is an answer, not a conflict). */
+function stanceConflict(quoteText, docs, opts = {}) {
+  const qp = polarityOfText(quoteText);
+  if (!qp) return null;
+  const qThemes = themesFor(quoteText);
+  if (!qThemes.size) return null;
+  const skip = new Set(opts.skipCustomIds || []);
+  // The interview's own record: a PRESS page doc that IS this quote (or holds it) is the same
+  // utterance, not a prior stance — never compared against itself.
+  const qKey = String(quoteText || '').replace(/\s+/g, ' ').trim().slice(0, 60).toLowerCase();
+  const sameUtterance = d => { const t = citizenText(d.content).replace(/\s+/g, ' ').toLowerCase(); return qKey.length >= 20 && (t.includes(qKey) || String(quoteText).toLowerCase().includes(t.slice(0, 60))); };
+  const recent = (docs || []).filter(d => d && d.type === 'reflection' && !skip.has(d.customId) && !sameUtterance(d))
+    .sort((a, b) => (b.cycle - a.cycle) || String(b.createdAt || '').localeCompare(String(a.createdAt || '')))
+    .slice(0, opts.limit || 3);
+  for (const d of recent) {
+    // A PRESS page doc can hold several answers joined by " --- "; each is its own stance. Read the
+    // segment that names the entity, never the whole doc (a cheer about the A's two answers up
+    // must not colour a sceptical line about the council).
+    const segments = citizenText(d.content).split(/\s+---\s+|\n{2,}/).map(x => x.trim()).filter(Boolean);
+    for (const seg of segments) {
+      const pp = polarityOfText(seg);
+      if (!pp || pp === qp) continue;
+      for (const entity of themesFor(seg)) {
+        if (!qThemes.has(entity)) continue;
+        const sentence = (seg.replace(/\s+/g, ' ').match(/[^.!?]*[.!?]?/g) || []).find(x => themesFor(x).has(entity)) || seg.slice(0, 200);
+        return { entity, quotePolarity: qp, pagePolarity: pp, customId: d.customId, cycle: d.cycle, excerpt: sentence.trim().slice(0, 200) };
+      }
+    }
+  }
+  return null;
+}
+
 /** loadIndex(root?) -> rows (newest first). Missing index -> []. Never throws on a bad line. */
 function loadIndex(root) {
   const p = root ? path.join(root, 'output', 'citizen_pages', 'index.jsonl') : INDEX_PATH;
@@ -241,7 +313,8 @@ async function grep() {
   if (OUT) { fs.writeFileSync(OUT, JSON.stringify({ pattern, container: CONTAINER, via, scanned: docs.length, citizens: table, docs: perDoc }, null, 2)); console.error('->', OUT); }
 }
 
-module.exports = { INDEX_DIR, INDEX_PATH, META_PATH, SLOT_RE, TYPES, RULE, admit, loadIndex, loadMeta, dumpIndex, listAll, citizenText };
+module.exports = { INDEX_DIR, INDEX_PATH, META_PATH, SLOT_RE, TYPES, RULE, admit, loadIndex, loadMeta, dumpIndex, listAll, citizenText,
+  stanceConflict, polarityOfText, polarityOfDoc, themesFor };
 
 if (require.main === module) {
   (async () => {

@@ -38,6 +38,10 @@
  *   node scripts/checkLetterEligibility.js --popids POP-x,..  # screen an explicit POPID list
  * Exit 0 = all eligible; exit 1 = one or more ineligible/unresolvable (HALT).
  *
+ * pipeline.70 seam 4 (2026-10-03): a file-based pool is ALSO screened for a page stance — each
+ * candidate line must cite the citizen's own reflection doc `[cp-POP-xxxxx-c<N>-<slot>]` from
+ * output/citizen_pages/index.jsonl (screenPageStance). No stance, no letter.
+ *
  * SCOPE: letters-candidate pool. "Incidental cameos" (the gap's secondary ask)
  * are NOT screened here — that needs a compile-time byline→POPID map and is
  * explicitly DEFERRED (flagged, not silently dropped).
@@ -119,6 +123,48 @@ function extractCandidatePopIds(text) {
   return [...new Set(ids)];
 }
 
+// pipeline.70 seam 4 (builder ruling 2026-10-03 02:05): a letter-writer is a citizen whose own
+// page carries a stance on the topic, or there is no letter on that topic. The topic half is the
+// LLM first line (sift Step 10 draws the pool from output/slices/c{N}/pulse.md and cites the page
+// doc); this is the mechanical backstop: every candidate line must cite a page doc
+// `[cp-POP-xxxxx-c<N>-<slot>]` that exists in output/citizen_pages/index.jsonl, belongs to that
+// POPID, and is a `reflection` (a tension doc is the question they carry, not their words).
+// Missing index = can't-verify = HALT, with the dump command named.
+const PAGE_CITE_RE = /\[(cp-(POP-\d{5})-c\d+-[A-Za-z-]+)\]/;
+function extractCandidateLines(text) {
+  let scope = String(text || '');
+  const m = scope.match(/^##\s+Candidate pool\s*$/im);
+  if (m) {
+    const rest = scope.slice(m.index + m[0].length);
+    const next = rest.search(/^##\s+/im);
+    scope = next === -1 ? rest : rest.slice(0, next);
+  }
+  const one = new RegExp(POPID_RE.source); // POPID_RE is /g — a stateful .test() would skip every other line
+  return scope.split(/\r?\n/).filter((l) => one.test(l));
+}
+// screenPageStance(lines, index) -> { ok: [popId], failed: [{ popId, reason }] }
+//   index: rows from scanCitizenPages.loadIndex() (or a test fixture); null = no index on disk.
+function screenPageStance(lines, index) {
+  const ok = [], failed = [];
+  if (!Array.isArray(index)) {
+    for (const l of lines) { const pop = (l.match(POPID_RE) || [])[0]; if (pop) failed.push({ popId: pop, reason: 'no page index on disk — run `node scripts/scanCitizenPages.js --dump` (can\'t-verify = ineligible)' }); }
+    return { ok, failed };
+  }
+  const byId = new Map(index.map((r) => [r.customId, r]));
+  for (const l of lines) {
+    const pop = (l.match(POPID_RE) || [])[0];
+    if (!pop) continue;
+    const cite = l.match(PAGE_CITE_RE);
+    if (!cite) { failed.push({ popId: pop, reason: 'no page citation [cp-POP-…-c<N>-<slot>] on the candidate line — a letter-writer has a stance on their own page, or no letter' }); continue; }
+    const doc = byId.get(cite[1]);
+    if (!doc) { failed.push({ popId: pop, reason: 'cited page ' + cite[1] + ' is not in the index' }); continue; }
+    if (cite[2] !== pop || doc.popId !== pop) { failed.push({ popId: pop, reason: 'cited page ' + cite[1] + ' belongs to ' + doc.popId + ', not ' + pop }); continue; }
+    if (doc.type !== 'reflection') { failed.push({ popId: pop, reason: 'cited page ' + cite[1] + ' is a ' + doc.type + ' doc (the question they carry), not their words' }); continue; }
+    ok.push(pop);
+  }
+  return { ok, failed };
+}
+
 // Screen a list of candidate POPIDs. Returns { eligible, ineligible, unresolvable }.
 //   ineligible:  [{ popId, reason }]
 //   unresolvable: [popId] — present in the pool but not on the ledger (can't-verify)
@@ -180,8 +226,19 @@ async function main() {
   ineligible.forEach((x) => console.error('  ✗ INELIGIBLE ' + x.popId + ' — ' + x.reason));
   unresolvable.forEach((p) => console.error('  ✗ UNRESOLVABLE ' + p + ' — not on Simulation_Ledger (can\'t-verify = ineligible)'));
 
-  if (ineligible.length > 0 || unresolvable.length > 0) {
-    console.error('\nHALT: letters candidate pool contains ineligible/unresolvable entries. Remove them before letters-desk selection.');
+  // pipeline.70 seam 4 — the page-stance backstop (file-based pools only; --popids has no lines to cite from).
+  let pageFailed = [];
+  if (!popidArg) {
+    const pages = require('./scanCitizenPages');
+    const index = fs.existsSync(pages.INDEX_PATH) ? pages.loadIndex() : null;
+    const stance = screenPageStance(extractCandidateLines(fs.readFileSync(filePath, 'utf8')), index);
+    pageFailed = stance.failed;
+    console.log('  page stance (pipeline.70): cited ' + stance.ok.length + ' | NO STANCE: ' + pageFailed.length);
+    pageFailed.forEach((x) => console.error('  ✗ NO PAGE STANCE ' + x.popId + ' — ' + x.reason));
+  }
+
+  if (ineligible.length > 0 || unresolvable.length > 0 || pageFailed.length > 0) {
+    console.error('\nHALT: letters candidate pool contains ineligible/unresolvable/no-stance entries. Remove them before letters-desk selection.');
     process.exit(1);
   }
   console.log('  ✓ all candidates eligible.');
@@ -189,6 +246,9 @@ async function main() {
 }
 
 module.exports = {
+  PAGE_CITE_RE,
+  extractCandidateLines,
+  screenPageStance,
   FIELD_ACTOR_ENTITIES,
   ENTITY_BIO_MARKERS,
   buildIneligibleMap,

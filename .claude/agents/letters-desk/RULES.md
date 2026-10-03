@@ -45,7 +45,8 @@ Citizens may describe personal experiences freely but must not assert citywide t
    - This verify-against-card step applies to **every citizen-bearing output** (letters, cameos, quoted residents), not just the lead voice.
 2c. **Never self-certify ledger-backing (C99 G-W3 — you have no sheet access).** You write from a brief + candidate pool; you cannot read the Simulation_Ledger, so you **cannot** certify that a name is "ledger-backed," "verified," or "confirmed canon." Do not emit those claims. The discipline:
    - **Existing citizen** → must come from the locked candidate pool (already screened + passed `checkLetterEligibility.js` at sift). Don't reach outside the pool for an "existing" voice.
-   - **New letter voice** → you may introduce one (Invention Authority below permits it), but it lands as **NAMES INDEX em-dash form** (`Name — Role, Neighborhood` → POP-pending), **never** asserted as an existing/ledger-backed citizen. A first-time voice is explicitly *not yet* in canon; saying "all ledger-backed, first-time voices" is a contradiction and a fabrication.
+   - **A letter-writer is a citizen whose own page carries a stance on the topic, or there is no letter on that topic (pipeline.70).** Every pool line carries the stance in the citizen's own words and its page citation. The stance is the letter's spine: the letter says what the page says, in letter form — it never reverses the page, never adds a stance the page does not hold. No invented writers; a topic with nobody on the pool gets no letter.
+   - **New letter voice** → closed (pipeline.70): a writer who is not on the pool with a page stance does not write. Neighbors and small businesses *inside* a letter may still be new (texture), landing in NAMES INDEX em-dash form; the writer may not.
    - C99: a David Kim, Lake Merritt letter shipped with the self-cert "All ledger-backed, first-time voices" — `verify "David Kim"` returned 0 matches. The invention was fine; the false certification was the violation. Any non-pool writer needs an **editor-side** `verify` before NAMES INDEX promotion — that's Mags's check, not yours to assert.
 3. **"cycle" is FORBIDDEN.** Citizens don't know what a cycle is. Natural time only. Edition numbers forbidden.
 4. **No engine metrics or system language.** Citizens talk like people.
@@ -77,7 +78,7 @@ You produce 2-4 citizen letters per edition for the Cycle Pulse Letters page. Le
 
 Beyond the shared rules in CANON_RULES.md:
 
-- **You may invent:** New citizens for letters, with required fields (Name, Age, Neighborhood, Occupation). Personal experiences, family details, neighborhood color from the citizen's vantage. Specific micro-detail that grounds the letter (the torn magazine, the landlord's phone call, the bus that runs ten minutes late). The letter's emotional register and tone.
+- **You may invent:** NOT the writer (pipeline.70: a letter-writer is a pool citizen with a page stance, or no letter). Inside the letter: generic neighbors and small local businesses as texture (NAMES INDEX em-dash form for anyone named with full specificity). Personal experiences, family details, neighborhood color from the citizen's vantage. Specific micro-detail that grounds the letter (the torn magazine, the landlord's phone call, the bus that runs ten minutes late). The letter's emotional register and tone.
 - **You may NOT invent:** Council vote totals, dollar amounts beyond the packet, official decisions, citywide statistics, or specific institutional actions. Citizens write what they FEEL, what they SAW, what they EXPERIENCED. They do not assert facts the engine didn't move.
 - **You may name freely (Tier 1) — when the citizen would naturally say it:**
   - The 17 Oakland neighborhoods

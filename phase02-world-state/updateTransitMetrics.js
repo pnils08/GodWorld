@@ -665,9 +665,10 @@ function summarizePrevCycleEvents_(worldEvents) {
 }
 
 /**
- * engine.183 — where the game is this cycle: every feed row's HomeNeighborhood
- * plus the stadium zones applySportsSeason_ derived (legacy Jack London /
- * Downtown until Baylight opens, then Baylight District). Canon hood names only.
+ * engine.183 — where the game is this cycle. engine.204/205: the venue of every
+ * franchise that played at home (S.sportsWeek[f].venue — legacy Jack London /
+ * Downtown until Baylight opens, then Baylight District); the typed
+ * HomeNeighborhood is no longer read. Canon hood names only.
  *
  * @param {Object} S - ctx.summary
  * @return {Array<string>}

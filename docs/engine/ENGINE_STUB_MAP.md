@@ -436,13 +436,11 @@
 - **buildActiveSportsFromOverride_(oaklandState)**
 
 - **applySportsFeedTriggers_(ctx)**
-  Reads: S.cycle, S.sentiment, S.sportsSentimentBoost
-  Writes: S.sportsEventTriggers, S.sportsNeighborhoodEffects, S.sportsSentimentBoost
+  Reads: S.cycle, S.sentiment, S.sportsSentimentBoost, S.sportsWeek
+  Writes: S.sportsEventTriggers, S.sportsSentimentBoost
   Sheets: Oakland_Sports_Feed
 
-- **processFeedSheet_(sheet, currentCycle)**
-
-- **mergeNeighborhoodEffects_(target, source)**
+- **processFeedSheet_(sheet, currentCycle, weeks)**
 
 - **parseWinPercentage_(record)**
 
@@ -4497,4 +4495,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1602
+**Functions mapped:** 1601

@@ -2,7 +2,7 @@
   "generated": "2026-10-03",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 180,
-  "functionsMapped": 1602,
+  "functionsMapped": 1601,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -2173,6 +2173,7 @@
       ],
       "readers": [
         "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
+        "phase02-world-state/applySportsSeason.js::applySportsFeedTriggers_",
         "phase02-world-state/applySportsSeason.js::applySportsSeason_",
         "phase02-world-state/applySportsSeason.js::normalizeOaklandFeedTeam_",
         "phase02-world-state/updateTransitMetrics.js::gameDayLoadByHood_",
@@ -2403,14 +2404,6 @@
       ],
       "readers": [
         "phase07-evening-media/storyHook.js::storyHookEngine_"
-      ]
-    },
-    "sportsNeighborhoodEffects": {
-      "writers": [
-        "phase02-world-state/applySportsSeason.js::applySportsFeedTriggers_"
-      ],
-      "readers": [
-        "phase07-evening-media/cityEveningSystems.js::buildCityEveningSystems_"
       ]
     },
     "previousSeason": {
@@ -4042,6 +4035,12 @@
         "phase07-evening-media/cityEveningSystems.js::buildCityEveningSystems_"
       ],
       "readers": []
+    },
+    "sportsNeighborhoodEffects": {
+      "writers": [],
+      "readers": [
+        "phase07-evening-media/cityEveningSystems.js::buildCityEveningSystems_"
+      ]
     },
     "culturalEntityCreates": {
       "writers": [

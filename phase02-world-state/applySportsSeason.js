@@ -769,14 +769,18 @@ function buildActiveSportsFromOverride_(oaklandState) {
  *   TeamsUsed         - team identification
  *   Team Record       - win percentage -> base sentiment
  *   EventTrigger      - special event triggers (hot-streak, playoff-clinch, etc.)
- *   HomeNeighborhood  - game day neighborhood effects
  *   Streak            - hot/cold streak amplifier (W6, L3 format)
  *   PlayerMood        - story hook triggers (frustrated = drama, electric = energy)
- *   FanSentiment      - nightlife + retail multiplier
- *   FranchiseStability- long-term economic signal (uncertain = business caution)
- *   EconomicFootprint - retail + traffic around stadium neighborhood
- *   CommunityInvestment - community engagement in HomeNeighborhood
- *   MediaProfile      - scales all effects (national = 1.5x, regional = 1.0x)
+ *   FanSentiment      - sentiment modifier
+ *   MediaProfile      - scales the sentiment (national = 1.5x, regional = 1.0x)
+ *
+ * engine.204/205 slice E: HomeNeighborhood, EconomicFootprint, CommunityInvestment and
+ * FranchiseStability are no longer read here. Their one consumer was a per-hood effects
+ * block keyed on the typed HomeNeighborhood (S.sportsNeighborhoodEffects) that nothing
+ * read after slice C, and its Ripple_Ledger row put an away week's crowd in Downtown.
+ * A trigger's place is the franchise's own venue on a home week, none on an away week
+ * (the result is city-wide). The parse helpers stay as the feed vocabulary until the
+ * columns come off the tab (the builder's call).
  *
  * Convention: Last entry per cycle is the "season-state" row — definitive
  * snapshot. Earlier entries are story content for reporters. Last row wins
@@ -785,7 +789,6 @@ function buildActiveSportsFromOverride_(oaklandState) {
  * Outputs to ctx.summary:
  *   - sportsSentimentBoost: cumulative sentiment modifier
  *   - sportsEventTriggers: array of {team, trigger, neighborhood, playerMood}
- *   - sportsNeighborhoodEffects: {neighborhood: {traffic, retail, nightlife, communityEngagement}}
  *
  * ============================================================================
  */
@@ -796,7 +799,6 @@ function applySportsFeedTriggers_(ctx) {
   // Initialize outputs
   S.sportsSentimentBoost = 0;
   S.sportsEventTriggers = [];
-  S.sportsNeighborhoodEffects = {};
 
   var ss = ctx.ss;
   if (!ss) return;
@@ -804,15 +806,13 @@ function applySportsFeedTriggers_(ctx) {
   var currentCycle = S.cycle || 0;
   var totalSentiment = 0;
   var allTriggers = [];
-  var neighborhoodEffects = {};
 
   // Process Oakland_Sports_Feed
   var oakSheet = ss.getSheetByName('Oakland_Sports_Feed');
   if (oakSheet) {
-    var oakResult = processFeedSheet_(oakSheet, currentCycle);
+    var oakResult = processFeedSheet_(oakSheet, currentCycle, S.sportsWeek);
     totalSentiment += oakResult.sentiment;
     allTriggers = allTriggers.concat(oakResult.triggers);
-    mergeNeighborhoodEffects_(neighborhoodEffects, oakResult.neighborhoodEffects);
   } else {
     Logger.log('applySportsFeedTriggers_ v3.0: Oakland_Sports_Feed not found');
   }
@@ -820,10 +820,9 @@ function applySportsFeedTriggers_(ctx) {
   // Apply outputs
   S.sportsSentimentBoost = totalSentiment;
   S.sportsEventTriggers = allTriggers;
-  S.sportsNeighborhoodEffects = neighborhoodEffects;
 
-  // engine.45 T1: persist sports attribution — the sentiment scalar was a dead write and
-  // per-hood effects merged into anonymous numbers (trace S1/S3, gaps 1/2/4).
+  // engine.45 T1: persist sports attribution — the sentiment scalar was a dead write
+  // (trace S1/S3, gaps 1/2/4). The per-hood row went with the hood block (slice E).
   if (typeof recordRipple_ === 'function') {
     if (totalSentiment !== 0) {
       var trigParts = [];
@@ -838,20 +837,6 @@ function applySportsFeedTriggers_(ctx) {
         effectType: 'sentiment',
         targetScope: 'citywide',
         magnitude: Math.round(totalSentiment * 1000) / 1000,
-        duration: 1,
-        sourceEngine: 'applySportsSeason.applySportsFeedTriggers_'
-      });
-    }
-    for (var rnh in neighborhoodEffects) {
-      recordRipple_(ctx, {
-        causeType: 'sports',
-        causeId: 'Oakland_Sports_Feed',
-        causeDetail: JSON.stringify(neighborhoodEffects[rnh]),
-        effectType: 'traffic/retail/nightlife/communityEngagement',
-        targetScope: 'neighborhood',
-        targetIds: [rnh],
-        neighborhood: rnh,
-        magnitude: (neighborhoodEffects[rnh] && neighborhoodEffects[rnh].traffic) || 0,
         duration: 1,
         sourceEngine: 'applySportsSeason.applySportsFeedTriggers_'
       });
@@ -872,9 +857,11 @@ function applySportsFeedTriggers_(ctx) {
  * Process a single sports feed sheet and extract per-team sentiment + triggers.
  * Scans all rows up to currentCycle, builds latest state per team,
  * then calculates sentiment from record + season + streak.
+ * weeks = S.sportsWeek (Phase2-SportsSeason): a trigger is placed at its franchise's
+ * venue on a home week (h > 0) and nowhere on an away week.
  */
-function processFeedSheet_(sheet, currentCycle) {
-  var empty = { sentiment: 0, triggers: [], neighborhoodEffects: {} };
+function processFeedSheet_(sheet, currentCycle, weeks) {
+  var empty = { sentiment: 0, triggers: [] };
 
   var data = sheet.getDataRange().getValues();
   if (data.length < 2) return empty;
@@ -888,12 +875,8 @@ function processFeedSheet_(sheet, currentCycle) {
   var recordCol = findColumnIndex_(headers, ['Team Record', 'teamrecord', 'record']);
   var streakCol = findColumnIndex_(headers, ['Streak', 'streak']);
   var triggerCol = findColumnIndex_(headers, ['EventTrigger', 'eventtrigger', 'trigger']);
-  var neighborhoodCol = findColumnIndex_(headers, ['HomeNeighborhood', 'homeneighborhood', 'neighborhood']);
   var playerMoodCol = findColumnIndex_(headers, ['PlayerMood', 'playermood']);
   var fanSentimentCol = findColumnIndex_(headers, ['FanSentiment', 'fansentiment']);
-  var franchiseCol = findColumnIndex_(headers, ['FranchiseStability', 'franchisestability']);
-  var economicCol = findColumnIndex_(headers, ['EconomicFootprint', 'economicfootprint']);
-  var communityCol = findColumnIndex_(headers, ['CommunityInvestment', 'communityinvestment']);
   var mediaProfileCol = findColumnIndex_(headers, ['MediaProfile', 'mediaprofile']);
 
   var feedTz2 = sportsFeedTimeZone_(sheet);   // engine.247
@@ -911,9 +894,8 @@ function processFeedSheet_(sheet, currentCycle) {
 
     if (!teamState[team]) {
       teamState[team] = {
-        record: '', seasonType: '', streak: '', trigger: '', neighborhood: '',
-        playerMood: '', fanSentiment: '', franchiseStability: '',
-        economicFootprint: '', communityInvestment: '', mediaProfile: '',
+        record: '', seasonType: '', streak: '', trigger: '',
+        playerMood: '', fanSentiment: '', mediaProfile: '',
         cycle: 0
       };
     }
@@ -927,12 +909,8 @@ function processFeedSheet_(sheet, currentCycle) {
       var seasonType = seasonTypeCol !== -1 ? (row[seasonTypeCol] || '').toString().trim() : '';
       var streak = streakCol !== -1 ? (row[streakCol] || '').toString().trim() : '';
       var trigger = triggerCol !== -1 ? (row[triggerCol] || '').toString().trim() : '';
-      var neighborhood = neighborhoodCol !== -1 ? (row[neighborhoodCol] || '').toString().trim() : '';
       var playerMood = playerMoodCol !== -1 ? (row[playerMoodCol] || '').toString().trim() : '';
       var fanSentiment = fanSentimentCol !== -1 ? (row[fanSentimentCol] || '').toString().trim() : '';
-      var franchise = franchiseCol !== -1 ? (row[franchiseCol] || '').toString().trim() : '';
-      var economic = economicCol !== -1 ? (row[economicCol] || '').toString().trim() : '';
-      var community = communityCol !== -1 ? (row[communityCol] || '').toString().trim() : '';
       var mediaProfile = mediaProfileCol !== -1 ? (row[mediaProfileCol] || '').toString().trim() : '';
 
       // Blank/dash fields preserve earlier data. Use the sentiment parser to
@@ -945,12 +923,8 @@ function processFeedSheet_(sheet, currentCycle) {
       if (seasonType && seasonType !== '-') ts.seasonType = seasonType;
       if (streak && streak !== '-') ts.streak = streak;
       if (trigger && trigger !== '-') ts.trigger = trigger;
-      if (neighborhood && neighborhood !== '-') ts.neighborhood = neighborhood;
       if (playerMood && playerMood !== '-') ts.playerMood = playerMood;
       if (fanSentiment && fanSentiment !== '-') ts.fanSentiment = fanSentiment;
-      if (franchise && franchise !== '-') ts.franchiseStability = franchise;
-      if (economic && economic !== '-') ts.economicFootprint = economic;
-      if (community && community !== '-') ts.communityInvestment = community;
       if (mediaProfile && mediaProfile !== '-') ts.mediaProfile = mediaProfile;
       ts.cycle = cycle;
     }
@@ -959,10 +933,12 @@ function processFeedSheet_(sheet, currentCycle) {
   // Calculate sentiment and triggers for each team
   var totalSentiment = 0;
   var triggers = [];
-  var neighborhoodEffects = {};
 
   for (var teamName in teamState) {
     var state = teamState[teamName];
+    // engine.204/205 slice E: the franchise's own venue on a home week, none away
+    var wkH = weeks && weeks[teamName];
+    var trigHood = (wkH && wkH.h > 0 && wkH.venue && wkH.venue[0]) || '';
 
     // engine.75 (S328, Mike-direct): only teams with a row in the CURRENT
     // cycle speak. The carry-forward state map never aged teams out, so
@@ -1025,14 +1001,14 @@ function processFeedSheet_(sheet, currentCycle) {
       if (mood === 'frustrated' || mood === 'angry') {
         triggers.push({
           team: teamName, trigger: 'player-frustration',
-          neighborhood: state.neighborhood || 'Downtown',
+          neighborhood: trigHood,
           streak: state.streak, sentiment: teamSentiment,
           playerMood: state.playerMood
         });
       } else if (mood === 'electric' || mood === 'confident') {
         triggers.push({
           team: teamName, trigger: 'player-energy',
-          neighborhood: state.neighborhood || 'Downtown',
+          neighborhood: trigHood,
           streak: state.streak, sentiment: teamSentiment,
           playerMood: state.playerMood
         });
@@ -1043,66 +1019,17 @@ function processFeedSheet_(sheet, currentCycle) {
       triggers.push({
         team: teamName,
         trigger: triggerValue,
-        neighborhood: state.neighborhood || 'Downtown',
+        neighborhood: trigHood,
         streak: state.streak,
         sentiment: teamSentiment,
         playerMood: state.playerMood || ''
       });
       Logger.log('Sports trigger: ' + teamName + ' -> ' + triggerValue +
-        ' @ ' + (state.neighborhood || 'Downtown'));
-    }
-
-    // Neighborhood effects (game day impacts + new columns)
-    if (state.neighborhood) {
-      if (!neighborhoodEffects[state.neighborhood]) {
-        neighborhoodEffects[state.neighborhood] = {
-          traffic: 0, retail: 0, nightlife: 0, communityEngagement: 0
-        };
-      }
-      var ne = neighborhoodEffects[state.neighborhood];
-
-      // Base game day effects (existing)
-      var fanBoost = 1 + Math.max(0, teamSentiment * 2);
-      ne.traffic += 0.15 * fanBoost;
-      ne.retail += 0.10 * fanBoost;
-      ne.nightlife += 0.12 * fanBoost;
-
-      // FanSentiment → nightlife + retail (v3.0)
-      // electric = big boost, frustrated = dampens nightlife
-      ne.nightlife += fanMod * 0.5;
-      ne.retail += fanMod * 0.3;
-
-      // EconomicFootprint → retail + traffic (v3.0)
-      var econMod = parseEconomicFootprint_(state.economicFootprint);
-      ne.retail += econMod * 0.15;
-      ne.traffic += econMod * 0.10;
-
-      // CommunityInvestment → communityEngagement (v3.0)
-      var commMod = parseCommunityInvestment_(state.communityInvestment);
-      ne.communityEngagement += commMod * 0.15;
-
-      // FranchiseStability → economic caution signal (v3.0)
-      var stabMod = parseFranchiseStability_(state.franchiseStability);
-      ne.retail += stabMod * 0.10;
+        ' @ ' + (trigHood || 'city-wide'));
     }
   }
 
-  return { sentiment: totalSentiment, triggers: triggers, neighborhoodEffects: neighborhoodEffects };
-}
-
-/**
- * Merge neighborhood effects from source into target (accumulates).
- */
-function mergeNeighborhoodEffects_(target, source) {
-  for (var hood in source) {
-    if (!target[hood]) {
-      target[hood] = { traffic: 0, retail: 0, nightlife: 0, communityEngagement: 0 };
-    }
-    target[hood].traffic += source[hood].traffic || 0;
-    target[hood].retail += source[hood].retail || 0;
-    target[hood].nightlife += source[hood].nightlife || 0;
-    target[hood].communityEngagement += source[hood].communityEngagement || 0;
-  }
+  return { sentiment: totalSentiment, triggers: triggers };
 }
 
 /**

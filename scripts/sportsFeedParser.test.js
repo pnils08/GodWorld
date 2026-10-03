@@ -112,7 +112,7 @@ test('D3 guard: prior-Cycle fields still carry when the team has a current row',
 });
 test('D3 guard: team without a current row stays silent', () => {
   assert.deepStrictEqual(read([Object.assign({}, complete, { Cycle: 105 })]).result,
-    { sentiment: 0, triggers: [], neighborhoodEffects: {} });
+    { sentiment: 0, triggers: [] });
 });
 test('published S fields keep their shapes and atmosphere licence stays untouched', () => {
   const sheet = { getDataRange: () => ({ getValues: () => [headers, headers.map(h => complete[h] ?? '')] }) };
@@ -120,9 +120,24 @@ test('published S fields keep their shapes and atmosphere licence stays untouche
   sandbox.applySportsFeedTriggers_(ctx);
   assert.strictEqual(typeof ctx.summary.sportsSentimentBoost, 'number');
   assert(Array.isArray(ctx.summary.sportsEventTriggers));
-  assert.deepStrictEqual(Object.keys(ctx.summary.sportsNeighborhoodEffects['SYNTHETIC-HOOD']).sort(),
-    ['communityEngagement', 'nightlife', 'retail', 'traffic']);
+  assert.strictEqual(ctx.summary.sportsNeighborhoodEffects, undefined, 'slice E: the hood-keyed effects block is gone');
   assert.strictEqual(ctx.summary.sportsAtmosphereEnabled, false);
+});
+// engine.204/205 slice E: the typed HomeNeighborhood never places a trigger. A home week
+// places it at the franchise's venue; an away week (or no week object) places it nowhere.
+const trigHoods = (week) => {
+  const sheet = { getDataRange: () => ({ getValues: () => [headers, headers.map(h => complete[h] ?? '')] }) };
+  const ctx = { summary: { cycle: 106, sportsWeek: week }, ss: { getSheetByName: () => sheet } };
+  sandbox.applySportsFeedTriggers_(ctx);
+  return ctx.summary.sportsEventTriggers.map(t => t.neighborhood);
+};
+test('slice E: home week → the venue; away week / no week → no hood; the typed hood is never read', () => {
+  const home = trigHoods({ "A's": { g: 2, h: 1, venue: ['Jack London', 'Downtown'] } });
+  const away = trigHoods({ "A's": { g: 2, h: 0, venue: ['Jack London', 'Downtown'] } });
+  const none = trigHoods(undefined);
+  assert(home.length > 0 && home.every(h => h === 'Jack London'), JSON.stringify(home));
+  assert(away.length === home.length && away.every(h => h === ''), JSON.stringify(away));
+  assert(none.every(h => h === '') && ![].concat(home, away, none).includes('SYNTHETIC-HOOD'));
 });
 
 // engine.247 — live C108 shape: Sheets stored 4-1 / 4-1 / 7-2 as DATE cells (m-d), 3-0 stayed text.

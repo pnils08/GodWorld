@@ -184,7 +184,7 @@ var BIZ_ARCHIVE_HEADERS = ['BIZ_ID', 'Name', 'Sector', 'Neighborhood', 'Employee
 var BIZ_SECTOR_CLASSES = [
   ['faith', /faith|church|temple|mosque|synagogue|congregation|ministry|parish/i],
   ['retail', /retail|shop|store|boutique|grocery/i],
-  ['food', /cafe|coffee|bakery|restaurant|dining|diner|food|bar\b|\bpub\b|brewery|lounge|nightlife|club|market/i],   // \bpub\b: an unbounded 'pub' classed every Public Transit / Services / Safety row as a bar
+  ['food', /cafe|coffee|bakery|restaurant|dining|diner|food|bar\b|pubs?\b|brewery|lounge|nightlife|club|market/i],   // pubs?\b: an unbounded 'pub' classed every Public Transit / Services / Safety row as a bar; the suffix form keeps gastropub / brewpub
   ['health', /clinic|health|medical|dental|care/i],
   ['tech', /tech|software|systems|data|lab|research|analytics|platform/i],
   ['professional', /architect|law|legal|consult|account|firm|agency|professional|insurance|finance/i],

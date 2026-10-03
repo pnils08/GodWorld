@@ -348,8 +348,8 @@ console.log('engine.205 slice D — a game week at the bars');
   const near = (x, y) => Math.abs(x - y) <= 0.0101;   // Growth_Rate is written to 0.01
   assert('bar/hospitality classing: food class, Hospitality, Retail & Food in; Retail and Civic Tech out',
     mod.bizIsBar_('Restaurant & Dining') && mod.bizIsBar_('Hospitality') && mod.bizIsBar_('Retail & Food') && mod.bizIsBar_('Bar / lounge') && !mod.bizIsBar_('Retail') && !mod.bizIsBar_('Civic Tech'));
-  assert('a Public Transit / Services / Safety row is not a pub (class default, not food; no bar term) — a real pub still is',
-    ['Public Transit', 'Public Services', 'Public Safety', 'Public Safety / Crisis Response'].every(x => mod.bizSectorClass_(x) === 'default' && !mod.bizIsBar_(x)) && mod.bizSectorClass_('Irish Pub') === 'food');
+  assert('a Public Transit / Services / Safety row is not a pub (class default, not food; no bar term) — a real pub (gastropub, brewpub) still is',
+    ['Public Transit', 'Public Services', 'Public Safety', 'Public Safety / Crisis Response'].every(x => mod.bizSectorClass_(x) === 'default' && !mod.bizIsBar_(x)) && ['Irish Pub', 'Gastropub', 'Brewpub', 'Pubs & Taverns'].every(x => mod.bizSectorClass_(x) === 'food'));
   assert('nightlife median of the hood map', mod.bizNightlifeMedian_(NS) === 0.88 && mod.bizNightlifeMedian_({}) === null);
   assert('no week object, or a week with no game: growth identical, no ripple', JSON.stringify(noGame.growth) === JSON.stringify(quiet.growth) && noGame.ripples.length === 0 && quiet.ripples.length === 0, JSON.stringify([noGame.growth, quiet.growth]));
   assert('away win: the nightlife-hood bars lift (venue hood at reach 1: +.24 × 2pp × food vol 1.3 = +.624)', near(d(awayWin, 0), 0.624) && near(d(awayWin, 1), 0.624), JSON.stringify(awayWin.growth));

@@ -866,7 +866,7 @@ async function appendIntakeRows(intakeRows, sheetsClient, sheetId) {
 const SECTOR_ECON_SEEDS = [
   [/faith|church|temple|mosque|synagogue|congregation|ministry|parish/i, { emp: 8, sal: 52000, rev: 600000, growth: 2 }],
   [/retail|shop|store|boutique|grocery/i, { emp: 4, sal: 42000, rev: 380000, growth: 2 }], // before food: "Retail & Food" is a shop, not a kitchen
-  [/cafe|coffee|bakery|restaurant|dining|diner|food|bar\b|\bpub\b|brewery|lounge|nightlife|club|market/i, { emp: 11, sal: 48000, rev: 720000, growth: 3 }],
+  [/cafe|coffee|bakery|restaurant|dining|diner|food|bar\b|pubs?\b|brewery|lounge|nightlife|club|market/i, { emp: 11, sal: 48000, rev: 720000, growth: 3 }],
   [/clinic|health|medical|dental|care/i, { emp: 38, sal: 85000, rev: 4000000, growth: 3 }],
   [/tech|software|systems|data|lab|research|analytics|platform/i, { emp: 45, sal: 120000, rev: 9000000, growth: 8 }],
   [/architect|law|legal|consult|account|firm|agency|professional|insurance|finance/i, { emp: 26, sal: 95000, rev: 6200000, growth: 4 }],

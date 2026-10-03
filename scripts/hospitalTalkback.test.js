@@ -8,8 +8,10 @@
  * Cause fix", acceptance criterion 5). Verifies that new hospital admissions
  * carry a populated Cause, existing open rows have blank Cause backfilled only
  * when no cause is already present, ghost beds are reconciled against the
- * Simulation_Ledger, and the hospital census feeds the next World_Population
- * illness computation via configured baseCapacity/loadPerSick/talkbackGain.
+ * Simulation_Ledger; and (Test D, engine.254 Task 10) the talk-back: last
+ * Cycle's Care_Justice_Census city beds against their own recent middle push
+ * the World_Population illness rate (hospitalStrainWindow / Band / Gain), with
+ * the ensureEngine254Config_ seeder in Test F.
  */
 
 const fs = require('fs');
@@ -409,6 +411,8 @@ function makeSS(sheets) {
   r = run({ now: 110, census: [H.slice()], hospitalOpen: 500 });
   assert('D29 a Hospital_Ledger with 500 open rows changes nothing', r.tb.applied === 0 && near(r.ill, 0.05), JSON.stringify(r.tb));
   assert('D30 hospitalCapacity_ still reads baseCapacity', sandbox.hospitalCapacity_(r.ctx) === 100 && r.ctx.summary.demographicDrift.hospitalConfig.baseCapacity === 100);
+  r = run({ now: undefined, census: censusRows(flat(110, 114, 60)) });
+  assert('D32 no Cycle number -> malformed + one error row, never a silent ahead', r.tb.state === 'malformed' && r.errs.length === 1 && r.tb.applied === 0, JSON.stringify(r.tb));
   assert('D31 the record shape', JSON.stringify(Object.keys(r.tb)) === JSON.stringify(['state', 'cycleRead', 'beds', 'middle', 'ratio', 'applied']));
   delete sandbox.logEngineError_;
 })();

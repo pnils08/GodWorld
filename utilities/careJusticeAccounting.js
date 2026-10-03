@@ -930,11 +930,13 @@ function careJusticeHospitalStrain_(input) {
     out.state = state; out.reason = reason || ''; out.logError = !!logError; return out;
   }
   if (input.unavailable) return done('unavailable', input.unavailable, true);
+  // No Cycle number would read every census as `ahead` forever — say so instead.
+  var now = careJusticeWhole_(input.cycleNow);
+  if (now === null || now < 1) return done('malformed', 'this Cycle\'s number "' + input.cycleNow + '" is not a whole number of 1 or more', true);
   if (input.anchorCycle === null || input.anchorCycle === undefined) return done('no-census');
   var K = careJusticeWhole_(input.anchorCycle);
   if (K === null) return done('malformed', 'last census Cycle "' + input.anchorCycle + '" is not a whole number', true);
   out.cycleRead = K;
-  var now = Number(input.cycleNow);
   if (K >= now) return done('ahead', 'census already holds Cycle ' + K + ' at Cycle ' + now);
   if (K < now - 1) return done('gap', 'last census Cycle ' + K + ', expected ' + (now - 1));
 

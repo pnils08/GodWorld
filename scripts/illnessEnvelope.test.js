@@ -91,7 +91,7 @@ const CONFIG = {
   illnessSupportThreshold: 0.08, illnessSupportCycles: 3, illnessFallbackRate: 0.05,
   employmentFloor: 0.80, employmentAttractor: 0.90, employmentStep: 0.0003, employmentFallbackRate: 0.91,
   migrationClampLow: -5000, migrationClampHigh: 5000,
-  hospitalBaseCapacity: 100, hospitalLoadPerSick: 1, hospitalTalkbackGain: 0.001,
+  hospitalBaseCapacity: 100, hospitalStrainWindow: 8, hospitalStrainBand: 0.25, hospitalStrainGain: 0.02,
   illnessInitiativeRelief: 0.25, illnessConvergenceRate: 0.25,
   // engine.133 D6
   illnessBaseline: 0.035, illnessAttractorPull: 0.12, illnessEventStrain: 0.015,

@@ -343,6 +343,30 @@ function ensureEngine271Config_(ss) {
   return { configSeeded: plan.additions.length };
 }
 
+// engine.254 Task 10 — the hospital talk-back reads the census city beds
+// against their own recent middle (care-and-justice plan §Task 10 talk-back
+// cut). Gain capped at 0.02: with the excess cap 0.5 the push is at most 0.01 a
+// Cycle, half one salient weather event.
+var ENGINE254_CONFIG_SEEDS = [
+  ['hospitalStrainWindow', 8, 'engine.254 Cycles of census city beds averaged into the ward\'s middle (contiguous complete Cycles; fewer than 4 = warming, no push)', 4, 26, true],
+  ['hospitalStrainBand', 0.25, 'engine.254 how far above its middle the ward runs before it pushes illness up (0.25 = beds 25% over the middle)', 0, 2, false],
+  ['hospitalStrainGain', 0.02, 'engine.254 illness added per unit of ratio over the band (excess capped at 0.5, so at most gain x 0.5 a Cycle). 0 = talk-back off', 0, 0.02, false]
+];
+
+function ensureEngine254Config_(ss) {
+  if (!ss) throw new Error('engine.254 config: spreadsheet required');
+  var configSheet = ss.getSheetByName('World_Config');
+  if (!configSheet) throw new Error('engine.254 config: World_Config not found');
+  var plan = inspectEngine94Config_(configSheet.getDataRange().getValues(), ENGINE254_CONFIG_SEEDS);
+  if (plan.additions.length > 0) {
+    configSheet.getRange(configSheet.getLastRow() + 1, 1, plan.additions.length, 3).setValues(plan.additions);
+    var verified = inspectEngine94Config_(configSheet.getDataRange().getValues(), ENGINE254_CONFIG_SEEDS);
+    if (verified.additions.length > 0) throw new Error('engine.254 config: post-write verification failed');
+  }
+  Logger.log('engine.254 config ready: seeded ' + plan.additions.length + ' row(s)');
+  return { configSeeded: plan.additions.length };
+}
+
 var ENGINE176_CONFIG_SEEDS = [
   ['dialFrictionRentBurden', 50, 'engine.176 rent as % of household income above which an unbuffered renter takes a pressure tag (Friction, then Strain) — the negative pole from a cause', 10, 90, false],
   ['dialSetbackLossPct', 5, 'engine.176 a lost casino stake at/over this % of the citizen\'s net worth logs [Setback] instead of the ordinary [Casino] loss line', 1, 50, false],

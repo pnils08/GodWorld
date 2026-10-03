@@ -52,6 +52,10 @@ const sandbox = {
 
 vm.createContext(sandbox);
 
+const careJusticeAccountingPath = path.join(__dirname, '..', 'utilities', 'careJusticeAccounting.js');
+vm.runInContext(fs.readFileSync(careJusticeAccountingPath, 'utf8'), sandbox, { filename: careJusticeAccountingPath });
+const CJ = require(careJusticeAccountingPath);
+
 const buildCyclePacketPath = path.join(__dirname, '..', 'phase10-persistence', 'buildCyclePacket.js');
 vm.runInContext(fs.readFileSync(buildCyclePacketPath, 'utf8'), sandbox, { filename: buildCyclePacketPath });
 
@@ -230,79 +234,217 @@ function makeSS(sheets) {
 })();
 
 // ═══════════════════════════════════════════════════════════════════════════
-// Test D: hospital talk-back into World_Population illness rate
+// Test D: hospital talk-back — census city beds against their own middle
+// (engine.254 Task 10, care-and-justice plan §Task 10 talk-back cut)
 // ═══════════════════════════════════════════════════════════════════════════
 (function testHospitalTalkback() {
-  const hospHeaders = ['AdmissionId', 'POPID', 'Name', 'Neighborhood', 'Cause',
-    'AdmitCycle', 'StatusNow', 'LastTransitionCycle', 'DischargeCycle', 'Outcome', 'CyclesInCare',
-    'IntakeType', 'SourceSystem', 'SourceEventId', 'TransferFromId', 'PriorStatus']; // engine.254 Task 6: L–P
+  const H = CJ.CARE_JUSTICE_CENSUS_HEADERS;
+  const col = name => H.indexOf(name);
   const wpHeaders = ['totalPopulation', 'illnessRate', 'employmentRate', 'migration', 'economy'];
 
-  function buildOpenRows(count) {
-    const r = [hospHeaders];
-    for (let i = 0; i < count; i++) {
-      r.push(['H-C99-' + i, 'POP-D-' + i, 'P' + i, 'Downtown', 'flu', 99,
-        'hospitalized', 99, '', '', '']);
-    }
+  function censusRow(cycle, system, scope, type, completeness, beds) {
+    const r = H.map(() => 0);
+    r[col('Cycle')] = cycle; r[col('System')] = system; r[col('GeographicScope')] = scope;
+    r[col('Neighborhood')] = scope === 'neighborhood' ? 'Downtown' : ''; r[col('IntakeType')] = type;
+    r[col('Completeness')] = completeness; r[col('BedsOccupied')] = beds;
     return r;
   }
-
-  function makeCtx(openCount) {
-    const hospRows = buildOpenRows(openCount);
-    const wpRows = [wpHeaders, [10000, 0.05, 0.91, 0, 'stable']];
-    const sheets = {
-      Hospital_Ledger: makeSheet('Hospital_Ledger', hospRows),
-      World_Population: makeSheet('World_Population', wpRows),
-    };
+  // One Cycle's block: a hood row, a typed city row (beds 9999 — must never be
+  // read), the city `all` row, and a judicial city row.
+  function block(cycle, beds, completeness) {
+    const c = completeness || 'complete';
+    return [
+      censusRow(cycle, 'hospital', 'neighborhood', 'all', c, 1),
+      censusRow(cycle, 'hospital', 'city', 'illness', c, 9999),
+      censusRow(cycle, 'hospital', 'city', 'all', c, c === 'unavailable' ? '' : beds),
+      censusRow(cycle, 'judicial', 'city', 'all', c, '')
+    ];
+  }
+  function censusSheet(rows, opts) {
+    opts = opts || {};
+    const reads = [];
     return {
-      ss: makeSS(sheets),
-      summary: {
-        season: 'Spring',
-        weather: { type: 'clear', impact: 1 },
-        weatherMood: {},
-        worldEvents: [],
-        cityDynamics: { sentiment: 0, culturalActivity: 1, communityEngagement: 1 },
-        economicMood: 50,
-      },
-      config: {
-        hospitalBaseCapacity: 100,
-        hospitalLoadPerSick: 1,
-        hospitalTalkbackGain: 0.001,
-        illnessAttractorPull: 0, // engine.133: zero the baseline attractor so W4 talk-back is measured alone
-      },
-      rng: function() { return 0.6; }, // neutralizes base illness drift
+      reads: reads,
+      getLastRow: () => rows.length,
+      getLastColumn: () => rows.reduce((m, r) => Math.max(m, r.length), 0),
+      getRange: (r, c, nr, nc) => ({
+        getValues: () => {
+          if (opts.throwOnRead && r > 1) throw new Error('read failed');
+          reads.push({ r: r, c: c, nr: nr, nc: nc });
+          const out = [];
+          for (let i = 0; i < nr; i++) {
+            const src = rows[r - 1 + i] || [];
+            const row = [];
+            for (let j = 0; j < nc; j++) row.push(src[c - 1 + j] === undefined ? '' : src[c - 1 + j]);
+            out.push(row);
+          }
+          return out;
+        }
+      })
     };
   }
+  // cycles: array of [cycle, beds, completeness]
+  function censusRows(cycles) {
+    let rows = [H.slice()];
+    cycles.forEach(c => { rows = rows.concat(block(c[0], c[1], c[2])); });
+    return rows;
+  }
+  const errs = [];
+  sandbox.logEngineError_ = function(ctx, phase, e) { errs.push({ phase: phase, msg: e.message }); };
 
-  // D1: above capacity
-  const ctxAbove = makeCtx(150);
-  applyDemographicDrift_(ctxAbove);
-  const wpAbove = ctxAbove.ss.getSheetByName('World_Population');
-  const illAbove = wpAbove.getDataRange().getValues()[1][1];
-  const talkbackAbove = ctxAbove.summary.hospitalTalkback;
-  const expectedStrainAbove = 0.001 * (150 - 100); // 0.05
-  assert('D1: talkback strain above capacity',
-    talkbackAbove && talkbackAbove.applied === expectedStrainAbove,
-    'expected applied ' + expectedStrainAbove + ', got ' + (talkbackAbove && talkbackAbove.applied));
-  assert('D1: illness rate increased by exact strain',
-    Math.abs(illAbove - (0.05 + expectedStrainAbove)) < 0.0000001,
-    'expected illness ~0.10, got ' + illAbove);
-  assert('D1: loadUnits reflects open count',
-    talkbackAbove && talkbackAbove.loadUnits === 150,
-    'expected loadUnits 150, got ' + (talkbackAbove && talkbackAbove.loadUnits));
+  function run(opts) {
+    errs.length = 0;
+    const sheets = { World_Population: makeSheet('World_Population', [wpHeaders, [10000, 0.05, 0.91, 0, 'stable']]) };
+    if (opts.census !== null) sheets.Care_Justice_Census = opts.sheet || censusSheet(opts.census || [H.slice()]);
+    if (opts.hospitalOpen) {
+      const hr = [['AdmissionId', 'POPID', 'DischargeCycle']];
+      for (let i = 0; i < opts.hospitalOpen; i++) hr.push(['H' + i, 'P' + i, '']);
+      sheets.Hospital_Ledger = makeSheet('Hospital_Ledger', hr);
+    }
+    const config = Object.assign({
+      hospitalBaseCapacity: 100, illnessAttractorPull: 0,
+      hospitalStrainWindow: 8, hospitalStrainBand: 0.25, hospitalStrainGain: 0.02
+    }, opts.config || {});
+    (opts.drop || []).forEach(k => { delete config[k]; });
+    const ctx = {
+      ss: makeSS(sheets),
+      summary: {
+        absoluteCycle: opts.now, season: 'Spring', weather: { type: 'clear', impact: 1 }, weatherMood: {},
+        worldEvents: [], cityDynamics: { sentiment: 0, culturalActivity: 1, communityEngagement: 1 }, economicMood: 50
+      },
+      config: config,
+      rng: function() { return 0.6; }
+    };
+    applyDemographicDrift_(ctx);
+    const wp = sheets.World_Population.getDataRange().getValues()[1];
+    return { tb: ctx.summary.hospitalTalkback, ill: wp[1], emp: wp[2], errs: errs.slice(), ctx: ctx,
+             changes: (ctx.summary.demographicDrift || {}).changes || [], sheet: sheets.Care_Justice_Census };
+  }
+  const flat = (from, to, beds) => { const a = []; for (let c = from; c <= to; c++) a.push([c, beds]); return a; };
+  const near = (a, b) => Math.abs(a - b) < 1e-9;
 
-  // D2: below capacity
-  const ctxBelow = makeCtx(80);
-  applyDemographicDrift_(ctxBelow);
-  const wpBelow = ctxBelow.ss.getSheetByName('World_Population');
-  const illBelow = wpBelow.getDataRange().getValues()[1][1];
-  const talkbackBelow = ctxBelow.summary.hospitalTalkback;
-  assert('D2: no strain below capacity',
-    talkbackBelow && talkbackBelow.applied === 0,
-    'expected applied 0, got ' + (talkbackBelow && talkbackBelow.applied));
-  assert('D2: illness rate unchanged',
-    Math.abs(illBelow - 0.05) < 0.0000001,
-    'expected illness 0.05, got ' + illBelow);
+  // States
+  let r = run({ now: 110, census: [H.slice()] });
+  assert('D1 no census row -> no-census, no strain, no error', r.tb.state === 'no-census' && r.tb.applied === 0 && near(r.ill, 0.05) && r.errs.length === 0, JSON.stringify(r.tb));
+  r = run({ now: 114, census: censusRows(flat(110, 113, 60)) });
+  assert('D2 three complete Cycles before K -> warming', r.tb.state === 'warming' && r.tb.cycleRead === 113 && r.errs.length === 0, JSON.stringify(r.tb));
+  r = run({ now: 115, census: censusRows(flat(110, 114, 60)) });
+  assert('D3 C110-C114 complete -> C115 reads ok', r.tb.state === 'ok' && r.tb.middle === 60 && r.tb.ratio === 1 && r.tb.applied === 0, JSON.stringify(r.tb));
+  r = run({ now: 116, census: censusRows(flat(110, 114, 60)) });
+  assert('D4 K two Cycles behind -> gap', r.tb.state === 'gap' && r.tb.applied === 0 && r.errs.length === 0, JSON.stringify(r.tb));
+  r = run({ now: 114, census: censusRows(flat(110, 114, 60)) });
+  assert('D5 census already holds this Cycle -> ahead, no strain', r.tb.state === 'ahead' && r.tb.applied === 0 && r.errs.length === 0, JSON.stringify(r.tb));
+  r = run({ now: 116, census: censusRows(flat(110, 114, 60).concat([[115, '', 'unavailable']])) });
+  assert('D6 K unavailable -> unavailable, no error row', r.tb.state === 'unavailable' && r.errs.length === 0, JSON.stringify(r.tb));
+  r = run({ now: 116, census: censusRows(flat(110, 114, 60).concat([[115, 200, 'incomplete']])) });
+  assert('D7 K incomplete -> incomplete, named apart, no strain', r.tb.state === 'incomplete' && r.tb.applied === 0 && r.errs.length === 0, JSON.stringify(r.tb));
+  r = run({ now: 119, census: censusRows([[110, 60], [111, 60], [112, 60], [113, '', 'unavailable'], [114, 60], [115, 60], [116, 60], [117, 60], [118, 60]]) });
+  assert('D8 a gap block before the run: middle uses only the four after it', r.tb.state === 'ok' && r.tb.middle === 60, JSON.stringify(r.tb) + ' ' + JSON.stringify(r.errs));
+  r = run({ now: 119, census: censusRows([[110, 60], [111, 60], [112, 60], [113, 60], [114, 60], [115, 60, 'incomplete'], [116, 60], [117, 60], [118, 300]]) });
+  assert('D9 a non-complete Cycle inside the window resets it -> warming', r.tb.state === 'warming' && r.tb.applied === 0, JSON.stringify(r.tb));
+  r = run({ now: 115, census: censusRows(flat(110, 113, 6).concat([[114, 30]])) });
+  assert('D10 middle under 10 beds -> warming', r.tb.state === 'warming' && r.tb.applied === 0, JSON.stringify(r.tb));
+
+  // Strain
+  r = run({ now: 115, census: censusRows(flat(110, 113, 80).concat([[114, 100]])) });
+  assert('D11 band edge r = 1.25 -> no strain', r.tb.state === 'ok' && r.tb.ratio === 1.25 && r.tb.applied === 0 && near(r.ill, 0.05), JSON.stringify(r.tb));
+  r = run({ now: 115, census: censusRows(flat(110, 113, 80).concat([[114, 120]])) });
+  assert('D12 r = 1.5 -> gain x 0.25 = 0.005 on illness', r.tb.applied === 0.005 && near(r.ill, 0.055) && r.changes.indexOf('hospital-strain') >= 0, JSON.stringify(r.tb) + ' ill ' + r.ill);
+  r = run({ now: 115, census: censusRows(flat(110, 113, 80).concat([[114, 400]])) });
+  assert('D13 excess capped at 0.5 -> at most 0.01 a Cycle', r.tb.applied === 0.01 && near(r.ill, 0.06), JSON.stringify(r.tb));
+  r = run({ now: 115, census: censusRows(flat(110, 113, 80).concat([[114, 400]])), config: { hospitalStrainGain: 0 } });
+  assert('D14 gain 0 -> talk-back off', r.tb.state === 'ok' && r.tb.applied === 0 && near(r.ill, 0.05), JSON.stringify(r.tb));
+  r = run({ now: 120, census: censusRows([[110, 1000]].concat(flat(111, 118, 80)).concat([[119, 80]])) });
+  assert('D15 window 8: a Cycle older than K-8 never enters the middle', r.tb.middle === 80, JSON.stringify(r.tb));
+
+  // Contract
+  let rows = censusRows(flat(110, 114, 60));
+  rows.push(censusRow(114, 'hospital', 'city', 'all', 'complete', 60));
+  r = run({ now: 115, census: rows });
+  assert('D16 duplicate city all row -> malformed + one error row', r.tb.state === 'malformed' && r.tb.applied === 0 && r.errs.length === 1 && r.errs[0].phase === 'Phase3-HospitalTalkback', JSON.stringify(r.tb) + JSON.stringify(r.errs));
+  ['', 'many', -3].forEach(function(bad) {
+    const rr = run({ now: 115, census: censusRows(flat(110, 113, 60).concat([[114, bad]])) });
+    assert('D17 beds "' + bad + '" on a complete row -> malformed + one error row', rr.tb.state === 'malformed' && rr.tb.applied === 0 && rr.errs.length === 1, JSON.stringify(rr.tb));
+  });
+  rows = censusRows(flat(110, 113, 60));
+  rows.push(censusRow(114, 'hospital', 'neighborhood', 'all', 'complete', 1));
+  r = run({ now: 115, census: rows });
+  assert('D18 K has rows but no city all row -> malformed', r.tb.state === 'malformed' && r.errs.length === 1, JSON.stringify(r.tb));
+  r = run({ now: 115, census: censusRows(flat(110, 112, 60).concat([[113, 60, 'pending']]).concat([[114, 60]])) });
+  assert('D19 unknown Completeness in the window -> malformed', r.tb.state === 'malformed' && r.errs.length === 1, JSON.stringify(r.tb));
+  r = run({ now: 115, census: null });
+  assert('D20 tab missing -> unavailable + one error row, illness unchanged', r.tb.state === 'unavailable' && r.errs.length === 1 && near(r.ill, 0.05), JSON.stringify(r.tb));
+  rows = censusRows(flat(110, 114, 60)).map(x => x.slice(0, col('BedsOccupied')));
+  r = run({ now: 115, census: rows });
+  assert('D21 BedsOccupied header missing -> unavailable + one error row', r.tb.state === 'unavailable' && r.errs.length === 1 && /BedsOccupied/.test(r.errs[0].msg), JSON.stringify(r.errs));
+
+  // Locator
+  rows = censusRows(flat(110, 114, 60));
+  for (let i = 0; i < 40; i++) rows.push(H.map(() => ''));
+  const stray = H.map(() => ''); stray[3] = 'note'; rows.push(stray);
+  const ws = H.map(() => ''); ws[0] = '   '; rows.push(ws);
+  r = run({ now: 115, census: rows });
+  assert('D22 stray content and whitespace below the data do not move K', r.tb.state === 'ok' && r.tb.cycleRead === 114, JSON.stringify(r.tb));
+  rows = [H.slice()];
+  flat(110, 114, 60).forEach(c => { rows = rows.concat(block(c[0], c[1])); rows.push(H.map(() => '')); });
+  r = run({ now: 115, census: rows });
+  assert('D23 blank rows between blocks are read as blank', r.tb.state === 'ok' && r.tb.middle === 60, JSON.stringify(r.tb));
+  const big = censusSheet(censusRows(flat(100, 119, 60)));
+  r = run({ now: 120, sheet: big, census: [] });
+  const wide = big.reads.filter(x => x.nc > 1 && x.r > 1);
+  assert('D24 reads only Cycles K-8..K and columns A-R', r.tb.state === 'ok' && wide.length === 1 && wide[0].nr === 9 * 4 && wide[0].nc === col('BedsOccupied') + 1, JSON.stringify(big.reads));
+  rows = censusRows(flat(110, 114, 60));
+  rows.splice(1, 2); // C110's block opens mid-block: its city all row is still there
+  r = run({ now: 115, census: rows });
+  assert('D25 a partial oldest block is still read by its rows', r.tb.state === 'ok' && r.tb.middle === 60, JSON.stringify(r.tb));
+
+  // Boundary
+  const off = run({ now: 115, census: censusRows(flat(110, 113, 80).concat([[114, 120]])), config: { hospitalStrainGain: 0 } });
+  r = run({ now: 115, sheet: censusSheet(censusRows(flat(110, 114, 80)), { throwOnRead: true }) });
+  assert('D26 a throw inside the read -> one error row, no strain, drift runs on', r.tb.applied === 0 && r.errs.length === 1 && r.errs[0].phase === 'Phase3-HospitalTalkback' && near(r.ill, off.ill) && near(r.emp, off.emp) && !!r.ctx.summary.demographicDrift, JSON.stringify(r.tb) + JSON.stringify(r.errs));
+  r = run({ now: 115, census: censusRows(flat(110, 113, 80).concat([[114, 400]])), drop: ['hospitalStrainGain'] });
+  assert('D27 missing key throws inside the talk-back only', r.tb.applied === 0 && r.errs.length === 1 && /hospitalStrainGain/.test(r.errs[0].msg) && near(r.ill, 0.05) && !!r.ctx.summary.demographicDrift, JSON.stringify(r.errs));
+  r = run({ now: 115, census: censusRows(flat(110, 113, 80).concat([[114, 400]])), config: { hospitalStrainWindow: 3 } });
+  assert('D28 out-of-range window throws inside the talk-back only', r.tb.applied === 0 && r.errs.length === 1, JSON.stringify(r.errs));
+  r = run({ now: 110, census: [H.slice()], hospitalOpen: 500 });
+  assert('D29 a Hospital_Ledger with 500 open rows changes nothing', r.tb.applied === 0 && near(r.ill, 0.05), JSON.stringify(r.tb));
+  assert('D30 hospitalCapacity_ still reads baseCapacity', sandbox.hospitalCapacity_(r.ctx) === 100 && r.ctx.summary.demographicDrift.hospitalConfig.baseCapacity === 100);
+  assert('D31 the record shape', JSON.stringify(Object.keys(r.tb)) === JSON.stringify(['state', 'cycleRead', 'beds', 'middle', 'ratio', 'applied']));
+  delete sandbox.logEngineError_;
+})();
+
+// ═══════════════════════════════════════════════════════════════════════════
+// Test F: ensureEngine254Config_ — the three talk-back keys self-arm
+// ═══════════════════════════════════════════════════════════════════════════
+(function testEngine254Seeder() {
+  const src = fs.readFileSync(path.join(__dirname, '..', 'phase01-config', 'engine94SheetContract.js'), 'utf8');
+  const K = new Function('Logger', src + '\nreturn { seeds: ENGINE254_CONFIG_SEEDS, ensure: ensureEngine254Config_ };')({ log: function() {} });
+  function cfgSheet(rows) {
+    return {
+      getDataRange: () => ({ getValues: () => rows.map(r => r.slice()) }),
+      getLastRow: () => rows.length,
+      getRange: (r, c, nr) => ({ setValues: vals => { for (let i = 0; i < nr; i++) rows[r - 1 + i] = vals[i].slice(); } })
+    };
+  }
+  const ss = sheet => ({ getSheetByName: n => (n === 'World_Config' ? sheet : null) });
+  assert('F1 seeds window 8, band 0.25, gain 0.02', JSON.stringify(K.seeds.map(s => [s[0], s[1]])) === JSON.stringify([['hospitalStrainWindow', 8], ['hospitalStrainBand', 0.25], ['hospitalStrainGain', 0.02]]));
+  const rows = [['Key', 'Value', 'Description']];
+  const sh = cfgSheet(rows);
+  assert('F2 missing keys seeded', K.ensure(ss(sh)).configSeeded === 3 && rows.length === 4);
+  assert('F3 a second run seeds nothing', K.ensure(ss(sh)).configSeeded === 0);
+  const tryVal = (key, v) => { const rr = [['Key', 'Value', 'Description'], [key, v, '']]; try { K.ensure(ss(cfgSheet(rr))); return true; } catch (e) { return false; } };
+  assert('F4 window 3, 27 and 4.5 rejected', !tryVal('hospitalStrainWindow', 3) && !tryVal('hospitalStrainWindow', 27) && !tryVal('hospitalStrainWindow', 4.5));
+  assert('F5 window 4 and 26 accepted', tryVal('hospitalStrainWindow', 4) && tryVal('hospitalStrainWindow', 26));
+  assert('F6 gain 0.03, -0.01 and text rejected; 0 and 0.02 accepted', !tryVal('hospitalStrainGain', 0.03) && !tryVal('hospitalStrainGain', -0.01) && !tryVal('hospitalStrainGain', 'high') && tryVal('hospitalStrainGain', 0) && tryVal('hospitalStrainGain', 0.02));
+  assert('F7 band 2.5 rejected; 0 and 2 accepted', !tryVal('hospitalStrainBand', 2.5) && tryVal('hospitalStrainBand', 0) && tryVal('hospitalStrainBand', 2));
+  const dup = [['Key', 'Value', 'Description'], ['hospitalStrainBand', 0.25, ''], ['hospitalStrainBand', 0.3, '']];
+  let threw = false; try { K.ensure(ss(cfgSheet(dup))); } catch (e) { threw = true; }
+  assert('F8 a duplicate key throws', threw);
+  const tuned = [['Key', 'Value', 'Description'], ['hospitalStrainGain', 0.01, '']];
+  K.ensure(ss(cfgSheet(tuned)));
+  assert('F9 a tuned value is kept', tuned[1][1] === 0.01 && tuned.length === 4);
+  const eng = fs.readFileSync(path.join(__dirname, '..', 'phase01-config', 'godWorldEngine2.js'), 'utf8');
+  assert('F10 the self-arm runs at open, before the config is loaded', eng.indexOf('ensureEngine254Config_(ss)') > 0 && eng.indexOf('ensureEngine254Config_(ss)') < eng.indexOf("'Phase1-LoadConfig'"));
 })();
 
 // ═══════════════════════════════════════════════════════════════════════════

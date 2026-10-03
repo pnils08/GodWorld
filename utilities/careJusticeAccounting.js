@@ -884,8 +884,121 @@ function careJusticeVerifyBlock_(tail, plan) {
   return count === plan.rows.length ? '' : count + ' rows read back, ' + plan.rows.length + ' written';
 }
 
+/**
+ * The sheet row of the last census row: the last column-A value that carries a
+ * Cycle, so a stray cell far below the data cannot move it. Shared by the
+ * Phase-10 writer's tail and the Phase-3 talk-back reader (engine.254 Task 10).
+ * @param {Array<Array>} colA column A values from sheet row 2 down
+ * @return {Number} 1-based sheet row; 1 when no row carries a Cycle
+ */
+function careJusticeAnchorRow_(colA) {
+  for (var cr = colA.length - 1; cr >= 0; cr--) {
+    var cv = colA[cr][0];
+    if (cv !== '' && cv !== null && String(cv).replace(/^\s+|\s+$/g, '') !== '') return cr + 2;
+  }
+  return 1;
+}
+
+// engine.254 Task 10 talk-back: the ward is crowded when its city beds run well
+// above their own recent middle. Constants named in the plan (§Task 10 talk-back
+// cut, items 4-5): fewer than 4 contiguous complete Cycles before the read is
+// warming; a middle under 10 beds is warming; the excess over the band is capped.
+var HOSPITAL_STRAIN_MIN_CYCLES = 4;
+var HOSPITAL_STRAIN_MIN_MIDDLE = 10;
+var HOSPITAL_STRAIN_EXCESS_CAP = 0.5;
+
+function careJusticeWhole_(v) {
+  var n = (typeof v === 'number') ? v : (String(v).replace(/^\s+|\s+$/g, '') === '' ? NaN : Number(v));
+  return (isFinite(n) && Math.floor(n) === n) ? n : null;
+}
+
+/**
+ * The hospital's push on the city's illness, from the census city rows.
+ * Pure: the caller reads the sheet. States: no-census, gap, ahead, unavailable,
+ * incomplete, malformed, warming, ok — only ok strains. `logError` marks the
+ * states that write an Engine_Errors row.
+ * @param {{cycleNow, anchorCycle, rows, window, band, gain}} input — `rows` are
+ *   objects keyed Cycle, System, GeographicScope, IntakeType, Completeness,
+ *   BedsOccupied for Cycles anchorCycle-window … anchorCycle; `anchorCycle` is
+ *   column A of the anchor row, or null when the tab holds no census row
+ * @return {{state, cycleRead, beds, middle, ratio, applied, cyclesInMiddle, logError, reason}}
+ */
+function careJusticeHospitalStrain_(input) {
+  var out = { state: '', cycleRead: null, beds: null, middle: null, ratio: null, applied: 0,
+              cyclesInMiddle: 0, logError: false, reason: '' };
+  function done(state, reason, logError) {
+    out.state = state; out.reason = reason || ''; out.logError = !!logError; return out;
+  }
+  if (input.unavailable) return done('unavailable', input.unavailable, true);
+  if (input.anchorCycle === null || input.anchorCycle === undefined) return done('no-census');
+  var K = careJusticeWhole_(input.anchorCycle);
+  if (K === null) return done('malformed', 'last census Cycle "' + input.anchorCycle + '" is not a whole number', true);
+  out.cycleRead = K;
+  var now = Number(input.cycleNow);
+  if (K >= now) return done('ahead', 'census already holds Cycle ' + K + ' at Cycle ' + now);
+  if (K < now - 1) return done('gap', 'last census Cycle ' + K + ', expected ' + (now - 1));
+
+  // One city hospital `all` row per Cycle, by Cycle.
+  var byCycle = {}, seen = {};
+  for (var i = 0; i < input.rows.length; i++) {
+    var r = input.rows[i];
+    var c = careJusticeWhole_(r.Cycle);
+    if (c === null) {
+      if (String(r.Cycle === null || r.Cycle === undefined ? '' : r.Cycle).replace(/^\s+|\s+$/g, '') === '') continue;
+      return done('malformed', 'census Cycle "' + r.Cycle + '" is not a whole number', true);
+    }
+    seen[c] = true;
+    if (r.System === 'hospital' && r.GeographicScope === 'city' && r.IntakeType === 'all') {
+      (byCycle[c] = byCycle[c] || []).push(r);
+    }
+  }
+  // Cycle c's one row, or a reason it is malformed; null when the Cycle has no rows at all.
+  function cityRow(c) {
+    if (!seen[c]) return null;
+    var list = byCycle[c] || [];
+    if (list.length !== 1) return { bad: 'Cycle ' + c + ' has ' + list.length + ' city hospital rows' };
+    var row = list[0];
+    var comp = String(row.Completeness || '');
+    if (comp === 'unavailable' || comp === 'incomplete') return { row: row, completeness: comp };
+    if (comp !== 'complete') return { bad: 'Cycle ' + c + ' city hospital row has Completeness "' + comp + '"' };
+    var b = row.BedsOccupied;
+    var beds = (typeof b === 'number') ? b : (String(b).replace(/^\s+|\s+$/g, '') === '' ? NaN : Number(b));
+    if (!isFinite(beds) || beds < 0) return { bad: 'Cycle ' + c + ' city hospital BedsOccupied "' + b + '"' };
+    return { row: row, completeness: comp, beds: beds };
+  }
+
+  var head = cityRow(K);
+  if (!head) return done('malformed', 'anchor Cycle ' + K + ' has no rows', true);
+  if (head.bad) return done('malformed', head.bad, true);
+  if (head.completeness !== 'complete') return done(head.completeness, 'Cycle ' + K + ' reads ' + head.completeness);
+  out.beds = head.beds;
+
+  // The middle: contiguous complete Cycles before K, newest first; any
+  // non-complete Cycle, or no rows at all, ends the run.
+  var sum = 0, n = 0;
+  for (var back = 1; back <= input.window; back++) {
+    var cell = cityRow(K - back);
+    if (!cell) break;
+    if (cell.bad) return done('malformed', cell.bad, true);
+    if (cell.completeness !== 'complete') break;
+    sum += cell.beds; n++;
+  }
+  out.cyclesInMiddle = n;
+  if (n < HOSPITAL_STRAIN_MIN_CYCLES) return done('warming', n + ' complete Cycle(s) before ' + K);
+  var middle = sum / n;
+  out.middle = Math.round(middle * 100) / 100;
+  if (middle < HOSPITAL_STRAIN_MIN_MIDDLE) return done('warming', 'middle ' + out.middle + ' beds under ' + HOSPITAL_STRAIN_MIN_MIDDLE);
+  var ratio = head.beds / middle;
+  out.ratio = Math.round(ratio * 1000) / 1000;
+  var excess = ratio - 1 - input.band;
+  if (excess > 0) out.applied = Math.round(input.gain * Math.min(excess, HOSPITAL_STRAIN_EXCESS_CAP) * 1e6) / 1e6;
+  return done('ok');
+}
+
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
+    careJusticeAnchorRow_: careJusticeAnchorRow_,
+    careJusticeHospitalStrain_: careJusticeHospitalStrain_,
     CARE_JUSTICE_METHOD_VERSION: CARE_JUSTICE_METHOD_VERSION,
     CARE_JUSTICE_CENSUS_HEADERS: CARE_JUSTICE_CENSUS_HEADERS,
     CARE_JUSTICE_TYPES: CARE_JUSTICE_TYPES,

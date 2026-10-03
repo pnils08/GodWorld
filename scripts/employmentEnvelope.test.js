@@ -72,7 +72,7 @@ const CONFIG = {
   illnessSupportThreshold: 0.08, illnessSupportCycles: 3, illnessFallbackRate: 0.05,
   illnessBaseline: 0.035, illnessAttractorPull: 0.12, illnessEventStrain: 0.015, illnessHoodWeightMin: 0.5, illnessHoodWeightMax: 2.0,
   illnessInitiativeRelief: 0.25, illnessConvergenceRate: 0.25,
-  migrationClampLow: -5000, migrationClampHigh: 5000, hospitalBaseCapacity: 100, hospitalLoadPerSick: 1, hospitalTalkbackGain: 0.001,
+  migrationClampLow: -5000, migrationClampHigh: 5000, hospitalBaseCapacity: 100, hospitalStrainWindow: 8, hospitalStrainBand: 0.25, hospitalStrainGain: 0.02,
   // engine.135 A — the realistic-with-boom-kick dial (plan §Phase A)
   employmentFloor: 0.88, employmentAttractor: 0.96, employmentFallbackRate: 0.96, employmentAttractorPull: 0.12, employmentDistressGain: 0.3,
   // engine.135 B2

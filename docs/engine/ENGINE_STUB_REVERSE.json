@@ -2,7 +2,7 @@
   "generated": "2026-10-02",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 180,
-  "functionsMapped": 1574,
+  "functionsMapped": 1581,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -15,6 +15,7 @@
         "phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_",
         "phase02-world-state/applyWeatherModel.js::applyWeatherModel_",
         "phase02-world-state/updateTransitMetrics.js::updateTransitMetrics_Phase2_",
+        "phase03-population/applyDemographicDrift.js::readHospitalCensusTail_",
         "phase03-population/generateCrisisBuckets.js::generateCrisisBuckets_",
         "phase03-population/updateCrimeMetrics.js::updateCrimeMetrics_Phase3_",
         "phase04-events/careJusticeService.js::runCareJusticeDemand_",
@@ -667,6 +668,7 @@
         "phase02-world-state/applyInitiativeImplementationEffects.js::loadCivicVoiceSentiment_",
         "phase02-world-state/applySportsSeason.js::applySportsSeason_",
         "phase02-world-state/applyWeatherModel.js::applyWeatherModel_",
+        "phase03-population/applyDemographicDrift.js::readHospitalCensusTail_",
         "phase03-population/finalizeWorldPopulation.js::finalizeWorldPopulation_",
         "phase03-population/generateCrisisBuckets.js::generateCrisisBuckets_",
         "phase03-population/generateCrisisSpikes.js::generateCrisisSpikes_",
@@ -2554,7 +2556,9 @@
       "writers": [
         "phase03-population/applyDemographicDrift.js::applyDemographicDrift_"
       ],
-      "readers": []
+      "readers": [
+        "phase10-persistence/buildCyclePacket.js::buildCyclePacket_"
+      ]
     },
     "migrationClamps": {
       "writers": [
@@ -4423,6 +4427,7 @@
         "phase01-config/engine94SheetContract.js::ensureEngine192Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine213Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine221Config_",
+        "phase01-config/engine94SheetContract.js::ensureEngine254Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine271Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine272Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine275Config_",
@@ -4763,13 +4768,10 @@
         "utilities/ensureWorldEventsV3Ledger.js::ensureWorldEventsV3Ledger_"
       ]
     },
-    "Hospital_Ledger": {
+    "Care_Justice_Census": {
       "writers": [],
       "readers": [
-        "phase03-population/applyDemographicDrift.js::applyDemographicDrift_",
-        "phase04-events/generationalEventsEngine.js::hospitalPriorStatusForDischarge_",
-        "phase10-persistence/buildCyclePacket.js::persistCareJusticeCensus_",
-        "phase10-persistence/buildCyclePacket.js::persistHospitalLedger_"
+        "phase03-population/applyDemographicDrift.js::readHospitalCensusTail_"
       ]
     },
     "Event_Arc_Ledger": {
@@ -4798,6 +4800,14 @@
         "phase05-citizens/generationalWealthEngine.js::heritageTierByPop_",
         "phase05-citizens/generationalWealthEngine.js::updateHeritage_",
         "phase05-citizens/maneuverEngine.js::maneuverLines_"
+      ]
+    },
+    "Hospital_Ledger": {
+      "writers": [],
+      "readers": [
+        "phase04-events/generationalEventsEngine.js::hospitalPriorStatusForDischarge_",
+        "phase10-persistence/buildCyclePacket.js::persistCareJusticeCensus_",
+        "phase10-persistence/buildCyclePacket.js::persistHospitalLedger_"
       ]
     },
     "Household_Ledger": {

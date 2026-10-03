@@ -202,6 +202,17 @@ function buildCyclePacket_(ctx) {
       ', deaths ' + hospital.deathsThisCycle +
       ', load ' + Math.round(hospital.load * 100) + '%)');
   }
+  // engine.254 Task 10 — the talk-back watched (builder 2026-10-02): census city
+  // beds read, the ward's recent middle, and what was added to illness.
+  var strain = S.hospitalTalkback;
+  if (strain && strain.state) {
+    lines.push('HospitalStrain: ' + strain.state +
+      (strain.cycleRead !== null && strain.cycleRead !== undefined ? ' | census C' + strain.cycleRead : '') +
+      (strain.beds !== null && strain.beds !== undefined ? ' | beds ' + strain.beds : '') +
+      (strain.middle !== null && strain.middle !== undefined ? ' vs middle ' + strain.middle : '') +
+      (strain.ratio !== null && strain.ratio !== undefined ? ' (x' + strain.ratio + ')' : '') +
+      ' | illness +' + (strain.applied || 0));
+  }
   lines.push('');
 
   // ═══════════════════════════════════════════════════════════
@@ -1167,12 +1178,7 @@ function persistCareJusticeCensus_(ctx) {
   function readTail() {
     var sheetLast = sheet.getLastRow();
     if (sheetLast < 2) return { first: 2, rows: [], anchor: 1, sheetLast: sheetLast };
-    var cycles = sheet.getRange(2, 1, sheetLast - 1, 1).getValues();
-    var lastRow = 1;
-    for (var cr = cycles.length - 1; cr >= 0; cr--) {
-      var cv = cycles[cr][0];
-      if (cv !== '' && cv !== null && String(cv).replace(/^\s+|\s+$/g, '') !== '') { lastRow = cr + 2; break; }
-    }
+    var lastRow = careJusticeAnchorRow_(sheet.getRange(2, 1, sheetLast - 1, 1).getValues());
     if (lastRow < 2) return { first: 2, rows: [], anchor: 1, sheetLast: sheetLast };
     var n = Math.min(lastRow - 1, tailMax);
     var first = lastRow - n + 1;

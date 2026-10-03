@@ -119,6 +119,9 @@
 - **ensureEngine271Config_(ss)**
   Sheets: World_Config
 
+- **ensureEngine254Config_(ss)**
+  Sheets: World_Config
+
 - **ensureEngine176Config_(ss)**
   Sheets: World_Config
 
@@ -625,12 +628,20 @@
 - **applyDemographicDrift_(ctx)**
   Reads: S.cityDynamics, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.sportsAtmosphereEnabled, S.sportsSeason, S.weather, S.weatherEvents, S.weatherMood, S.worldEvents
   Writes: S.demographicDrift, S.employmentDistress, S.hospitalTalkback, S.migrationClamps
-  Sheets: Hospital_Ledger, World_Population
+  Sheets: World_Population
   RNG: ctx.rng / safeRand_(ctx)
 
 - **businessDistressShare_(ctx, S)**
   Reads: S.previousCycleState
   Sheets: Business_Ledger
+
+- **readHospitalCensusTail_(ctx, cfg)**
+  Reads: S.absoluteCycle, S.cycleId
+  Sheets: Care_Justice_Census
+
+- **hospitalStrainCfg_(cfg, key, lo, hi, whole)**
+
+- **hospitalTalkbackError_(ctx, err)**
 
 - **cfgNum_(ctx, cfg, key, defaultValue)**
 
@@ -3261,7 +3272,7 @@
 
 ### buildCyclePacket.js
 - **buildCyclePacket_(ctx)**
-  Reads: S.absoluteCycle, S.bondSummary, S.cityDynamics, S.cityEventDetails, S.civicLoad, S.civicLoadFactors, S.civicLoadScore, S.compressedLine, S.creationDayAnniversary, S.crimeMetrics, S.crowdHotspots, S.crowdMap, S.cycleId, S.cycleInMonth, S.cycleOfYear, S.cycleRef, S.cycleSummary, S.cycleWeight, S.cycleWeightReason, S.demographicDrift, S.demographicShifts, S.domainPresence, S.dominantDomain, S.economicSummary, S.eveningFood, S.eveningSafety, S.eveningTraffic, S.eventArcs, S.generationalEvents, S.generationalSummary, S.godWorldYear, S.holiday, S.holidayLabel, S.holidayNeighborhood, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.mediaSummary, S.migrationBrief, S.migrationDrift, S.namedSpotlights, S.neighborhoodDynamics, S.neighborhoodEconomies, S.neighborhoodMigration, S.nightlife, S.patternFlag, S.season, S.shockDuration, S.shockFlag, S.shockReasons, S.shockScore, S.storyHooks, S.textureTriggers, S.transitMetrics, S.weather, S.weatherSummary, S.worldEvents, S.worldPopulation
+  Reads: S.absoluteCycle, S.bondSummary, S.cityDynamics, S.cityEventDetails, S.civicLoad, S.civicLoadFactors, S.civicLoadScore, S.compressedLine, S.creationDayAnniversary, S.crimeMetrics, S.crowdHotspots, S.crowdMap, S.cycleId, S.cycleInMonth, S.cycleOfYear, S.cycleRef, S.cycleSummary, S.cycleWeight, S.cycleWeightReason, S.demographicDrift, S.demographicShifts, S.domainPresence, S.dominantDomain, S.economicSummary, S.eveningFood, S.eveningSafety, S.eveningTraffic, S.eventArcs, S.generationalEvents, S.generationalSummary, S.godWorldYear, S.holiday, S.holidayLabel, S.holidayNeighborhood, S.holidayPriority, S.hospitalTalkback, S.isCreationDay, S.isFirstFriday, S.mediaSummary, S.migrationBrief, S.migrationDrift, S.namedSpotlights, S.neighborhoodDynamics, S.neighborhoodEconomies, S.neighborhoodMigration, S.nightlife, S.patternFlag, S.season, S.shockDuration, S.shockFlag, S.shockReasons, S.shockScore, S.storyHooks, S.textureTriggers, S.transitMetrics, S.weather, S.weatherSummary, S.worldEvents, S.worldPopulation
   Writes: S.careJusticeWriteStatus, S.cyclePacket
 
 - **hospitalCapacity_(ctx)**
@@ -3626,6 +3637,12 @@
 - **careJusticeFirstContent_(rows, firstRow, from)**
 
 - **careJusticeVerifyBlock_(tail, plan)**
+
+- **careJusticeAnchorRow_(colA)**
+
+- **careJusticeWhole_(v)**
+
+- **careJusticeHospitalStrain_(input)**
 
 ### chaosCarsConfig.js
 - **validateOutcome(outcomeText)**
@@ -4438,4 +4455,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1574
+**Functions mapped:** 1581

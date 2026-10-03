@@ -94,10 +94,10 @@ function applyDemographicDrift_(ctx) {
   var migrationClampLow = cfgNum_(ctx, cfg, 'migrationClampLow', -5000);
   var migrationClampHigh = cfgNum_(ctx, cfg, 'migrationClampHigh', 5000);
 
-  // Hospital coefficients (read for W4 talk-back; not applied here).
+  // Tracked-scale bed capacity: read here only to hand on to hospitalCapacity_
+  // (the Cycle_Packet load). The talk-back no longer reads it, nor the retired
+  // hospitalLoadPerSick / hospitalTalkbackGain (engine.254 Task 10).
   var hospitalBaseCapacity = cfgNum_(ctx, cfg, 'hospitalBaseCapacity', 100);
-  var hospitalLoadPerSick = cfgNum_(ctx, cfg, 'hospitalLoadPerSick', 1);
-  var hospitalTalkbackGain = cfgNum_(ctx, cfg, 'hospitalTalkbackGain', 0.001);
 
   // ═══════════════════════════════════════════════════════════════════════════
   // WORLD CONTEXT
@@ -214,37 +214,30 @@ function applyDemographicDrift_(ctx) {
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // HOSPITAL TALK-BACK (engine.102 W4, Task 7)
+  // HOSPITAL TALK-BACK (engine.254 Task 10; was engine.102 W4)
   // ═══════════════════════════════════════════════════════════════════════════
-  // Previous cycle's hospital census strains the city: open admissions above
-  // capacity push the illness rate up (ground talking back to the city face).
-  // Phase 3 runs before this cycle's Phase-10 hospital persist, so the read is
-  // structurally last cycle's census — exactly the talk-back direction.
-  var hospitalOpen = 0;
-  var hospSheet = ctx.ss.getSheetByName('Hospital_Ledger');
-  if (hospSheet) {
-    var hospVals = hospSheet.getDataRange().getValues();
-    var hIdxDischarge = hospVals.length ? hospVals[0].indexOf('DischargeCycle') : -1;
-    if (hIdxDischarge >= 0) {
-      for (var hRow102 = 1; hRow102 < hospVals.length; hRow102++) {
-        var dv = hospVals[hRow102][hIdxDischarge];
-        if (dv === '' || dv === null) hospitalOpen++;
-      }
-    }
+  // Last Cycle's census city beds against their own recent middle: a ward well
+  // above its middle pushes the illness rate up. No capacity number (builder
+  // 2026-10-01). Phase 3 runs before this Cycle's Phase-10 census write, so the
+  // read is last Cycle's. Its own try/catch: a failure here applies no strain
+  // and the rest of the drift runs on (plan §Task 10 talk-back cut, item 6).
+  var talkback = { state: 'error', cycleRead: null, beds: null, middle: null, ratio: null, applied: 0 };
+  try {
+    var tb = careJusticeHospitalStrain_(readHospitalCensusTail_(ctx, cfg));
+    talkback = { state: tb.state, cycleRead: tb.cycleRead, beds: tb.beds, middle: tb.middle,
+                 ratio: tb.ratio, applied: tb.applied };
+    if (tb.logError) hospitalTalkbackError_(ctx, new Error(tb.state + ': ' + tb.reason));
+  } catch (tbErr) {
+    talkback.applied = 0;
+    hospitalTalkbackError_(ctx, tbErr);
   }
-  var hospitalLoadUnits = hospitalOpen * hospitalLoadPerSick;
-  var hospitalStrainApplied = 0;
-  if (hospitalLoadUnits > hospitalBaseCapacity) {
-    hospitalStrainApplied = hospitalTalkbackGain * (hospitalLoadUnits - hospitalBaseCapacity);
-    ill += hospitalStrainApplied;
+  if (talkback.applied > 0) {
+    ill += talkback.applied;
     changes.push('hospital-strain');
   }
-  S.hospitalTalkback = {
-    open: hospitalOpen,
-    loadUnits: hospitalLoadUnits,
-    capacity: hospitalBaseCapacity,
-    applied: round4(hospitalStrainApplied)
-  };
+  S.hospitalTalkback = talkback;
+  Logger.log('hospitalTalkback: ' + talkback.state + ' | C' + talkback.cycleRead + ' beds ' + talkback.beds +
+    ' middle ' + talkback.middle + ' ratio ' + talkback.ratio + ' applied ' + talkback.applied);
 
   ill = round4(ill);
   if (ill < 0) ill = 0;
@@ -420,9 +413,7 @@ function applyDemographicDrift_(ctx) {
     illnessBaseline: illnessBaseline,
     illnessEventStrain: round4(eventStrainApplied),
     hospitalConfig: {
-      baseCapacity: hospitalBaseCapacity,
-      loadPerSick: hospitalLoadPerSick,
-      talkbackGain: hospitalTalkbackGain
+      baseCapacity: hospitalBaseCapacity
     }
   };
 
@@ -464,6 +455,81 @@ function businessDistressShare_(ctx, S) {
   }
   out.share = out.stated > 0 ? out.distressed / out.stated : 0;
   return out;
+}
+
+/**
+ * engine.254 Task 10 — what the talk-back reads off Care_Justice_Census: the
+ * anchor row's Cycle (the writer's own anchor, careJusticeAnchorRow_) and the
+ * rows of Cycles K-window … K, columns Cycle … BedsOccupied only. A missing tab
+ * or header comes back as `unavailable`; the arithmetic is
+ * careJusticeHospitalStrain_ (utilities/careJusticeAccounting.js).
+ */
+function readHospitalCensusTail_(ctx, cfg) {
+  var S = ctx.summary || {};
+  var input = {
+    cycleNow: Number(S.absoluteCycle || S.cycleId || 0), anchorCycle: null, rows: [], unavailable: '',
+    window: hospitalStrainCfg_(cfg, 'hospitalStrainWindow', 4, 26, true),
+    band: hospitalStrainCfg_(cfg, 'hospitalStrainBand', 0, 2, false),
+    gain: hospitalStrainCfg_(cfg, 'hospitalStrainGain', 0, 0.02, false)
+  };
+  var sheet = ctx.ss.getSheetByName('Care_Justice_Census');
+  if (!sheet) { input.unavailable = 'Care_Justice_Census tab missing'; return input; }
+  var lastCol = sheet.getLastColumn();
+  var header = lastCol > 0 ? sheet.getRange(1, 1, 1, lastCol).getValues()[0] : [];
+  var names = ['Cycle', 'System', 'GeographicScope', 'IntakeType', 'Completeness', 'BedsOccupied'];
+  var at = {}, width = 0;
+  for (var h = 0; h < header.length; h++) {
+    var hn = String(header[h]).replace(/^\s+|\s+$/g, '');
+    if (names.indexOf(hn) >= 0 && !at.hasOwnProperty(hn)) at[hn] = h;
+  }
+  for (var n = 0; n < names.length; n++) {
+    if (!at.hasOwnProperty(names[n])) { input.unavailable = 'Care_Justice_Census header ' + names[n] + ' missing'; return input; }
+    if (at[names[n]] + 1 > width) width = at[names[n]] + 1;
+  }
+  if (at.Cycle !== 0) { input.unavailable = 'Care_Justice_Census Cycle is not column A'; return input; }
+
+  var last = sheet.getLastRow();
+  if (last < 2) return input;
+  var colA = sheet.getRange(2, 1, last - 1, 1).getValues();
+  var anchor = careJusticeAnchorRow_(colA);
+  if (anchor < 2) return input;
+  input.anchorCycle = colA[anchor - 2][0];
+  var K = Number(input.anchorCycle);
+  if (!isFinite(K)) return input;
+  // Oldest row of Cycle K-window: walk up until a Cycle older than that.
+  var first = anchor;
+  for (var r = anchor - 2; r >= 0; r--) {
+    var v = colA[r][0];
+    if (v === '' || v === null || String(v).replace(/^\s+|\s+$/g, '') === '') continue;
+    var cv = Number(v);
+    if (isFinite(cv) && cv < K - input.window) break;
+    first = r + 2;
+  }
+  var values = sheet.getRange(first, 1, anchor - first + 1, width).getValues();
+  for (var i = 0; i < values.length; i++) {
+    var row = {};
+    for (var k = 0; k < names.length; k++) row[names[k]] = values[i][at[names[k]]];
+    input.rows.push(row);
+  }
+  return input;
+}
+
+// The talk-back's three keys: a missing or out-of-range key throws (ADR-0015 —
+// ensureEngine254Config_ self-arms them); the caller's try/catch keeps the throw
+// inside the talk-back.
+function hospitalStrainCfg_(cfg, key, lo, hi, whole) {
+  var raw = cfg ? cfg[key] : undefined;
+  var v = (raw === undefined || raw === null || raw === '') ? NaN : Number(raw);
+  if (isNaN(v)) throw new Error('World_Config ' + key + ' missing — ensureEngine254Config_ did not run (ADR-0015)');
+  if (v < lo || v > hi || (whole && Math.floor(v) !== v)) {
+    throw new Error('World_Config ' + key + ' = ' + raw + ' outside ' + lo + '-' + hi + (whole ? ' (whole number)' : ''));
+  }
+  return v;
+}
+
+function hospitalTalkbackError_(ctx, err) {
+  if (typeof logEngineError_ === 'function') logEngineError_(ctx, 'Phase3-HospitalTalkback', err);
+  else Logger.log('Phase3-HospitalTalkback: ' + err.message);
 }
 
 function cfgNum_(ctx, cfg, key, defaultValue) {

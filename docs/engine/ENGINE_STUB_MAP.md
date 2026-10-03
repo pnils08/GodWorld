@@ -391,7 +391,7 @@
 
 ### applySeasonWeights.js
 - **applySeasonalWeights_(ctx)**
-  Reads: S.cycleOfYear, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.isWeekend, S.mediaEffects, S.previousCycleState, S.season, S.sportsAtmosphereEnabled, S.sportsSeason, S.sportsSource, S.weatherMood
+  Reads: S.cycleOfYear, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.isWeekend, S.mediaEffects, S.previousCycleState, S.season, S.sportsAtmosphereEnabled, S.sportsCity, S.sportsSeason, S.sportsSource, S.weatherMood
   Writes: S.creationDayActive, S.seasonal
 
 ### applySportsSeason.js
@@ -1149,7 +1149,7 @@
 
 ### applyNamedCitizenSpotlight.js
 - **applyNamedCitizenSpotlights_(ctx)**
-  Reads: S.cityDynamics, S.civicLoad, S.economicMood, S.engineEvents, S.eventArcs, S.holiday, S.holidayNeighborhood, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.patternFlag, S.shockFlag, S.sportsSeason, S.weatherMood, S.worldEvents
+  Reads: S.cityDynamics, S.civicLoad, S.economicMood, S.engineEvents, S.eventArcs, S.holiday, S.holidayNeighborhood, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.patternFlag, S.shockFlag, S.sportsCity, S.sportsSeason, S.weatherMood, S.worldEvents
   Writes: S.namedSpotlights, S.spotlightStats
 
 ### bondEngine.js
@@ -1475,7 +1475,7 @@
 
 ### checkForPromotions.js
 - **checkForPromotions_(ctx)**
-  Reads: S.cityDynamics, S.cycleId, S.economicMood, S.eventsGenerated, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
+  Reads: S.cityDynamics, S.cycleId, S.economicMood, S.eventsGenerated, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.sportsCity, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
   Writes: S.eventsGenerated, S.hoodFloorWaveCount, S.promotions, S.promotionsCount
   Config: ctx.config.cycleCount
   Sheets: Generic_Citizens, LifeHistory_Log
@@ -1807,7 +1807,7 @@
 - **applyGriefPoolWeights_(pool, griefConfig)**
 
 - **generateCitizensEvents_(ctx)**
-  Reads: S.biasIntents, S.citizenEventMemory, S.citizenEvents, S.cityDynamics, S.contentLedger, S.crimeByNeighborhood, S.crimeMetrics, S.cycle, S.cycleActiveCitizens, S.cycleId, S.economicMood, S.eventsGenerated, S.faithEvents, S.faithExposures, S.holiday, S.holidayPriority, S.initiativeEvents, S.isCreationDay, S.isFirstFriday, S.localEntities, S.neighborhoodDynamics, S.neighborhoodState, S.neighborhoodWeather, S.previousEvening, S.season, S.sportsFeedEntries, S.sportsSeason, S.sportsSentimentBoost, S.sportsWeek, S.storyHooks, S.templateCooldowns, S.transitState, S.undockedFeedEntries, S.undockedPilots, S.weather, S.worldEvents
+  Reads: S.biasIntents, S.citizenEventMemory, S.citizenEvents, S.cityDynamics, S.contentLedger, S.crimeByNeighborhood, S.crimeMetrics, S.cycle, S.cycleActiveCitizens, S.cycleId, S.economicMood, S.eventsGenerated, S.faithEvents, S.faithExposures, S.holiday, S.holidayPriority, S.initiativeEvents, S.isCreationDay, S.isFirstFriday, S.localEntities, S.neighborhoodDynamics, S.neighborhoodState, S.neighborhoodWeather, S.previousEvening, S.season, S.sportsCity, S.sportsFeedEntries, S.sportsSeason, S.sportsSentimentBoost, S.sportsWeek, S.storyHooks, S.templateCooldowns, S.transitState, S.undockedFeedEntries, S.undockedPilots, S.weather, S.worldEvents
   Writes: S.biasIntents, S.citizenEventMemory, S.citizenEvents, S.cycleActiveCitizens, S.eventsGenerated, S.faithExposures, S.householdMoments, S.minorsSkippedTexture, S.storyHooks, S.templateCooldowns
   Config: ctx.config.cycleCount, ctx.config.eclExclusiveMinLines, ctx.config.eclExclusivePools, ctx.config.gcSurfaceChance, ctx.config.hoodFloorSurfaceQuota, ctx.config.rngSeed
   Sheets: Content_Telemetry, Generic_Citizens, LifeHistory_Log
@@ -1834,7 +1834,7 @@
 - **inferSexFromFirstName_(first)**
 
 - **generateGenericCitizens_(ctx)**
-  Reads: S.cityDynamics, S.cycleId, S.economicMood, S.eventsGenerated, S.genericCitizensHoodShortfall, S.holiday, S.isCreationDay, S.isFirstFriday, S.season, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
+  Reads: S.cityDynamics, S.cycleId, S.economicMood, S.eventsGenerated, S.genericCitizensHoodShortfall, S.holiday, S.isCreationDay, S.isFirstFriday, S.season, S.sportsCity, S.sportsSeason, S.sportsZones, S.weather, S.weatherMood, S.worldEvents
   Writes: S.eventsGenerated, S.genericCitizensDistribution, S.genericCitizensGenerated, S.genericCitizensHoodShortfall, S.newGenericCitizens
   Config: ctx.config.gcPoolFloorFemale, ctx.config.gcPoolFloorMale
   Sheets: Generic_Citizens
@@ -2652,7 +2652,7 @@
 
 ### applyCivicLoadIndicator.js
 - **applyCivicLoadIndicator_(ctx)**
-  Reads: S.auditIssues, S.cityDynamics, S.cycleAuditIssues, S.cycleId, S.demographicDrift, S.economicMood, S.eventArcs, S.holiday, S.holidayLabel, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.patternFlag, S.previousCycleState, S.shockFlag, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
+  Reads: S.auditIssues, S.cityDynamics, S.cycleAuditIssues, S.cycleId, S.demographicDrift, S.economicMood, S.eventArcs, S.holiday, S.holidayLabel, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.patternFlag, S.previousCycleState, S.shockFlag, S.sportsCity, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
   Writes: S.civicLoad, S.civicLoadCalendarFactors, S.civicLoadFactors, S.civicLoadScore
   Config: ctx.config.cycleCount
 
@@ -2679,7 +2679,7 @@
 
 ### applyPatternDetection.js
 - **applyPatternDetection_(ctx)**
-  Reads: S.cityDynamics, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.sportsSeason, S.worldEvents
+  Reads: S.cityDynamics, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.sportsCity, S.sportsSeason, S.worldEvents
   Writes: S.patternCalendarContext, S.patternFlag
   Sheets: Riley_Digest
 
@@ -2763,7 +2763,7 @@
 
 ### filterNoiseEvents.js
 - **filterNoiseEvents_(ctx)**
-  Reads: S.cityDynamics, S.economicMood, S.engineEvents, S.holiday, S.holidayNeighborhood, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.patternFlag, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
+  Reads: S.cityDynamics, S.economicMood, S.engineEvents, S.holiday, S.holidayNeighborhood, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.patternFlag, S.sportsCity, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
   Writes: S.engineEvents, S.noiseFilterStats
 
 ### prePublicationValidation.js
@@ -2783,7 +2783,7 @@
 
 ### prioritizeEvents.js
 - **prioritizeEvents_(ctx)**
-  Reads: S.cityDynamics, S.civicLoad, S.demographicShifts, S.economicMood, S.engineEvents, S.holiday, S.holidayNeighborhood, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.mediaEffects, S.neighborhoodDemographics, S.patternFlag, S.previousCycleState, S.season, S.shockFlag, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
+  Reads: S.cityDynamics, S.civicLoad, S.demographicShifts, S.economicMood, S.engineEvents, S.holiday, S.holidayNeighborhood, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.mediaEffects, S.neighborhoodDemographics, S.patternFlag, S.previousCycleState, S.season, S.shockFlag, S.sportsCity, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
   Writes: S.eventPrioritization
 
 - **eventHoodWeight_(ctx, hood)**
@@ -2846,7 +2846,7 @@
 
 ### buildEveningFamous.js
 - **buildEveningFamous_(ctx)**
-  Reads: S.cityDynamics, S.cycleId, S.economicMood, S.eveningSports, S.famousPeople, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.sportsSeason, S.sportsZones, S.weather, S.weatherMood, S.worldEvents
+  Reads: S.cityDynamics, S.cycleId, S.economicMood, S.eveningSports, S.famousPeople, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.sportsCity, S.sportsSeason, S.sportsZones, S.weather, S.weatherMood, S.worldEvents
   Writes: S.famousPeople, S.famousSightings, S.famousSightingsContext
   Config: ctx.config.cycleCount
   Sheets: Business_Ledger
@@ -2905,7 +2905,7 @@
   Sheets: Cultural_Ledger
 
 - **registerCulturalEntity_(ctx, name, roleType, journalistName, neighborhood)**
-  Reads: S.cityDynamics, S.culturalEntityCreates, S.culturalEntityUpdates, S.culturalRegistry, S.cycleId, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.sportsSeason
+  Reads: S.cityDynamics, S.culturalEntityCreates, S.culturalEntityUpdates, S.culturalRegistry, S.cycleId, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.sportsCity, S.sportsSeason
   Writes: S.culturalEntityCreates, S.culturalEntityUpdates, S.culturalRegistry
   Config: ctx.config.cycleCount
   Sheets: Cultural_Ledger
@@ -2916,7 +2916,7 @@
 
 ### domainTracker.js
 - **domainTracker_(ctx)**
-  Reads: S.cityDynamics, S.eventArcs, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.previousCycleState, S.sportsSeason, S.weather, S.worldEvents
+  Reads: S.cityDynamics, S.eventArcs, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.previousCycleState, S.sportsCity, S.sportsSeason, S.weather, S.worldEvents
   Writes: S.domainCalendarContext, S.domainPresence, S.dominantDomain
 
 ### mediaFeedbackEngine.js
@@ -3124,7 +3124,7 @@
 
 ### applyDomainCooldowns.js
 - **applyDomainCooldowns_(ctx)**
-  Reads: S.absoluteCycle, S.cycleId, S.domainCooldowns, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.sportsSeason, S.suppressDomains, S.worldEvents
+  Reads: S.absoluteCycle, S.cycleId, S.domainCooldowns, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.sportsCity, S.sportsSeason, S.suppressDomains, S.worldEvents
   Writes: S.activeCooldowns, S.cooldownCalendarContext, S.domainCooldowns, S.suppressDomains
   Config: ctx.config.cycleCount
 
@@ -3135,7 +3135,7 @@
   Sheets: Domain_Tracker
 
 - **deriveDomainPresenceV34_(ctx)**
-  Reads: S.cityDynamics, S.eventArcs, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.sportsSeason, S.storyHooks, S.storySeeds, S.weather, S.worldEvents
+  Reads: S.cityDynamics, S.eventArcs, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.sportsCity, S.sportsSeason, S.storyHooks, S.storySeeds, S.weather, S.worldEvents
 
 - **normalizeDomainV34_(domain)**
 
@@ -3225,7 +3225,7 @@
 
 ### applyCycleWeight.js
 - **applyCycleWeight_(ctx)**
-  Reads: S.cityDynamics, S.civicLoad, S.cycle, S.cycleId, S.domainPresence, S.economicMood, S.economicRipples, S.eventArcs, S.holiday, S.holidayLabel, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.mediaEffects, S.patternFlag, S.recoveryLevel, S.shockFlag, S.sportsSeason, S.storyHooks, S.storySeeds, S.weather, S.worldEvents
+  Reads: S.cityDynamics, S.civicLoad, S.cycle, S.cycleId, S.domainPresence, S.economicMood, S.economicRipples, S.eventArcs, S.holiday, S.holidayLabel, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.mediaEffects, S.patternFlag, S.recoveryLevel, S.shockFlag, S.sportsCity, S.sportsSeason, S.storyHooks, S.storySeeds, S.weather, S.worldEvents
   Writes: S.cycleWeight, S.cycleWeightCalendarFactors, S.cycleWeightReason, S.cycleWeightScore
   Config: ctx.config.cycleCount
 
@@ -4412,6 +4412,8 @@
 
 - **sportsBandAtLeast_(city, band)**
 
+- **sportsRung_(lens, city)**
+
 - **sportsBarTerm_(weeks, hood, nightlifeOn)**
 
 ### textCrawler.js
@@ -4495,4 +4497,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1601
+**Functions mapped:** 1602

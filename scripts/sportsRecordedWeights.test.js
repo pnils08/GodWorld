@@ -22,13 +22,17 @@ function context(rows = [], config = {}) {
   return { config, summary: { cycleId: 901, season: 'Spring' }, ss: {
     getSheetByName: name => name !== 'Oakland_Sports_Feed' ? null : {
       getDataRange: () => ({ getValues: () => [
-        ['Cycle', 'SeasonType', 'EventType', 'TeamsUsed'], ...rows
+        ['Cycle', 'SeasonType', 'EventType', 'TeamsUsed', 'WeekRecord'], ...rows
       ] })
     }
   } };
 }
 // Existing franchise key is a parser input; these are non-canon test rows.
-const row = (phase, cycle = 901) => [cycle, phase, 'game-result', "A's"];
+// engine.281 (a): the ladder reads the week's band, so each ruled phase carries the games
+// that reach it (A's weight 1: 2 games late-season = elevated, 3 playoffs = high, 5 at the
+// championship = top); a ruled phase with no games moves nothing (Q1).
+const WEEK = { 'late-season': 'H:W H:W', 'playoffs': 'H:W H:W H:W', 'championship': 'H:W H:W H:W H:W H:W' };
+const row = (phase, cycle = 901, rec = WEEK[phase] || '') => [cycle, phase, 'game-result', "A's", rec];
 function run(rows, config) {
   const ctx = context(rows, config);
   s.applySportsSeason_(ctx);
@@ -54,6 +58,11 @@ for (const [name, rows] of [['empty', []], ['historical', [row('championship', 9
     assert.strictEqual(state.sportsAtmosphereEnabled, false);
   });
 }
+test('a ruled phase with no games preserves non-sports weights (Q1)', () => {
+  const state = run([row('playoffs', 901, '')]).summary;
+  assert.deepStrictEqual(plain(state.seasonal), baseline);
+  assert.strictEqual(state.sportsSeason, 'playoffs');
+});
 test('override retains coefficients and atmosphere license', () => {
   const state = run([row('preseason')], { sportsState_Oakland: 'championship' }).summary;
   assert.strictEqual(state.seasonal.sportsWeight, 2.5);

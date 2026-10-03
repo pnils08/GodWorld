@@ -218,5 +218,48 @@ console.log('6. engine.281 (a1) — media, bonds, nightlife, food, migration on 
     /addSportsDrift_\(sportsDriftTier\)/.test(mg) && /sportsPhaseUsed: sportsPhase,/.test(mg) && /if \(!manualSportsPhaseOverride\) \{/.test(mg));
 }
 
+// ── engine.281 (a2): the ladder sites read sportsRung_ ──────────────────────────
+console.log('7. engine.281 (a2) — sportsRung_ and the ladder sites');
+{
+  const R = (lens, band) => wsb.sportsRung_(lens, band ? { band } : undefined);
+  check('rung: band top/high/elevated → championship/playoffs/late-season, whatever the lens',
+    R('playoffs', 'top') === 'championship' && R('championship', 'high') === 'playoffs' && R('regular-season', 'elevated') === 'late-season');
+  check('rung: a ruled lens on a normal band is an ordinary game week, on a quiet one no rung (Q1)',
+    R('championship', 'normal') === 'regular-season' && R('playoffs', 'quiet') === '' && R('late-season', 'quiet') === '' && R('post-season', 'normal') === 'regular-season');
+  check('rung: an unruled lens passes through below elevated; no lens reads off-season',
+    R('mid-season', 'quiet') === 'mid-season' && R('regular-season', 'normal') === 'regular-season' && R('off-season') === 'off-season' && R(undefined) === 'off-season');
+  check('rung: C110 as typed (championship lens, band high) → playoffs', R('championship', 'high') === 'playoffs');
+
+  const a2 = ['phase05-citizens/applyNamedCitizenSpotlight.js', 'phase05-citizens/generateCitizensEvents.js',
+    'phase06-analysis/filterNoiseEvents.js', 'phase07-evening-media/buildEveningFamous.js', 'phase05-citizens/checkForPromotions.js',
+    'phase05-citizens/generateGenericCitizens.js', 'phase06-analysis/applyCivicLoadIndicator.js', 'phase09-digest/applyCycleWeight.js',
+    'phase07-evening-media/domainTracker.js', 'phase06-analysis/applyPatternDetection.js', 'phase06-analysis/prioritizeEvents.js',
+    'phase07-evening-media/culturalLedger.js', 'phase08-v3-chicago/applyDomainCooldowns.js', 'phase08-v3-chicago/v3DomainWriter.js'];
+  const WORD = /sportsSeason (===|!==) *['"](championship|playoffs|late-season|post-season)['"]/;
+  // a number moved under the word: += / *= (not a string concatenation), a count, a tally,
+  // a placement or an athlete-weighted pool; the window takes the line before (a condition
+  // continued from it) and the two after
+  const NUM = /\+= *(?![\s'"]*['"])|-=|\*=|Math\.max\(|Math\.min\(|= \d|\|\| 0\) \+ \d|isHighActivityPeriod|return true|calendarBoostedDomains|neighborhood = |pool = pool\.concat\(athlete/;
+  const hits = [], noDecl = [];
+  for (const f of a2) {
+    const src = fs.readFileSync(path.join(ROOT, f), 'utf8');
+    if (!/var sportsRung = sportsRung_\(sportsSeason, S\.sportsCity\);/.test(src)) noDecl.push(f);
+    const L = src.split('\n');
+    L.forEach((line, i) => {
+      if (!WORD.test(line)) return;
+      const body = [L[i - 1] || '', line].concat(L.slice(i + 1, i + 3)).filter(x => x === line || (!WORD.test(x) && !/sportsRung/.test(x)));
+      if (body.some(x => NUM.test(x))) hits.push(f + ':' + (i + 1));
+    });
+  }
+  check('every a2 file reads the rung once, beside its lens', noDecl.length === 0, noDecl.join(' '));
+  check('no numeric payload left under a lens word test in the a2 files', hits.length === 0, hits.join(' '));
+  const sw = fs.readFileSync(path.join(ROOT, 'phase02-world-state/applySeasonWeights.js'), 'utf8');
+  check('season weights: a feed week reads the rung, a Maker-declared season keeps its word',
+    /\(S\.sportsSource === 'oakland-feed'\) \? sportsRung_\(S\.sportsSeason, S\.sportsCity\)/.test(sw) && /S\.sportsAtmosphereEnabled === true \? S\.sportsSeason : ""/.test(sw));
+  const gg = fs.readFileSync(path.join(ROOT, 'phase05-citizens/generateGenericCitizens.js'), 'utf8');
+  check('generic citizens: the stadium-hood weight reads S.sportsZones, not a literal pair',
+    /genZones = \(S\.sportsZones && S\.sportsZones\.length\)/.test(gg) && !/weights\['Jack London'\] = \(weights\['Jack London'\] \|\| 1\.0\) \+ 0\.4/.test(gg));
+}
+
 console.log(`\n${passed} passed, ${failed} failed`);
 if (failed) process.exitCode = 1;

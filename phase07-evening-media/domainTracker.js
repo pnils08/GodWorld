@@ -49,6 +49,7 @@ function domainTracker_(ctx) {
   var isFirstFriday = S.isFirstFriday || false;
   var isCreationDay = S.isCreationDay || false;
   var sportsSeason = S.sportsSeason || 'off-season';
+  var sportsRung = sportsRung_(sportsSeason, S.sportsCity);   // engine.281 (a): the numbers read the week's band
 
   // ═══════════════════════════════════════════════════════════════════════════
   // DOMAIN MAP (v3.2 - matches recordWorldEventsv3 v3.2)
@@ -219,12 +220,12 @@ function domainTracker_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // v3.2: SPORTS SEASON BOOST
   // ═══════════════════════════════════════════════════════════════════════════
-  if (sportsSeason === 'championship') {
+  if (sportsRung === 'championship') {
     domain['SPORTS'] = (domain['SPORTS'] || 0) + 3;
     domain['COMMUNITY'] = (domain['COMMUNITY'] || 0) + 1;
-  } else if (sportsSeason === 'playoffs') {
+  } else if (sportsRung === 'playoffs') {
     domain['SPORTS'] = (domain['SPORTS'] || 0) + 2;
-  } else if (sportsSeason === 'late-season') {
+  } else if (sportsRung === 'late-season') {
     domain['SPORTS'] = (domain['SPORTS'] || 0) + 1;
   }
 

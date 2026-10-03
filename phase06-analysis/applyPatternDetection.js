@@ -55,6 +55,7 @@ function applyPatternDetection_(ctx) {
   var isFirstFriday = S.isFirstFriday || false;
   var isCreationDay = S.isCreationDay || false;
   var sportsSeason = S.sportsSeason || "off-season";
+  var sportsRung = sportsRung_(sportsSeason, S.sportsCity);   // engine.281 (a): the numbers read the week's band
   var culturalActivity = (S.cityDynamics || {}).culturalActivity || 1;
   var communityEngagement = (S.cityDynamics || {}).communityEngagement || 1;
 
@@ -131,7 +132,7 @@ function applyPatternDetection_(ctx) {
 
   var isHighActivityHoliday = highActivityHolidays.indexOf(holiday) !== -1;
   var isHighActivityPeriod = isHighActivityHoliday || isFirstFriday ||
-    sportsSeason === "championship" || sportsSeason === "playoffs";
+    sportsRung === "championship" || sportsRung === "playoffs";
 
   // engine.38 B2 — thresholds as ratios of the population-relative baseline.
   // Ratios preserve the original intent (at the legacy ~52 baseline these land

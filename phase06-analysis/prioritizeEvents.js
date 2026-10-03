@@ -75,6 +75,7 @@ function prioritizeEvents_(ctx) {
   var isFirstFriday = S.isFirstFriday || false;
   var isCreationDay = S.isCreationDay || false;
   var sportsSeason = S.sportsSeason || "off-season";
+  var sportsRung = sportsRung_(sportsSeason, S.sportsCity);   // engine.281 (a): the numbers read the week's band
 
   // Demographic context (v2.3 - Tier 3)
   var demographicShifts = S.demographicShifts || [];
@@ -246,9 +247,9 @@ function prioritizeEvents_(ctx) {
     // SPORTS SEASON BOOST (v2.2)
     // ═══════════════════════════════════════════════════════════════════════
     if (evType === "sports") {
-      if (sportsSeason === "championship") score += 6;
-      else if (sportsSeason === "playoffs" || sportsSeason === "post-season") score += 4;
-      else if (sportsSeason === "late-season") score += 2;
+      if (sportsRung === "championship") score += 6;
+      else if (sportsRung === "playoffs" || sportsRung === "post-season") score += 4;
+      else if (sportsRung === "late-season") score += 2;
     }
 
     // Opening Day special boost

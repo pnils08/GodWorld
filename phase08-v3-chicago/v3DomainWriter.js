@@ -253,6 +253,7 @@ function deriveDomainPresenceV34_(ctx) {
   var isFirstFriday = S.isFirstFriday || false;
   var isCreationDay = S.isCreationDay || false;
   var sportsSeason = S.sportsSeason || 'off-season';
+  var sportsRung = sportsRung_(sportsSeason, S.sportsCity);   // engine.281 (a): the numbers read the week's band
 
   // Holidays boost HOLIDAY and possibly FESTIVAL
   if (holiday !== 'none') {
@@ -277,9 +278,9 @@ function deriveDomainPresenceV34_(ctx) {
   // Sports season boosts SPORTS
   if (sportsSeason && sportsSeason !== 'off-season') {
     presence['SPORTS'] = (presence['SPORTS'] || 0) + 1;
-    if (sportsSeason === 'championship') {
+    if (sportsRung === 'championship') {
       presence['SPORTS'] = (presence['SPORTS'] || 0) + 2;
-    } else if (sportsSeason === 'playoffs') {
+    } else if (sportsRung === 'playoffs') {
       presence['SPORTS'] = (presence['SPORTS'] || 0) + 1;
     }
   }

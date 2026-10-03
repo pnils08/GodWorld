@@ -97,6 +97,7 @@ function checkForPromotions_(ctx) {
   var isFirstFriday = S.isFirstFriday || false;
   var isCreationDay = S.isCreationDay || false;
   var sportsSeason = S.sportsSeason || "off-season";
+  var sportsRung = sportsRung_(sportsSeason, S.sportsCity);   // engine.281 (a): the numbers read the week's band
 
   // Use simYear or calculate from cycle (52 cycles = 1 year)
   var simYear = simYearOf_(ctx, cycle);
@@ -262,9 +263,9 @@ function checkForPromotions_(ctx) {
     }
 
     // Sports season visibility boost
-    if (sportsSeason === "championship") {
+    if (sportsRung === "championship") {
       c += 0.04;
-    } else if (sportsSeason === "playoffs" || sportsSeason === "post-season") {
+    } else if (sportsRung === "playoffs" || sportsRung === "post-season") {
       c += 0.02;
     }
 

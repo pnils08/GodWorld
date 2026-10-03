@@ -12,7 +12,8 @@ global.Logger = { log() {} };
 
 const loadFn = (rel, name) => {
   const src = fs.readFileSync(path.resolve(__dirname, rel), 'utf8');
-  return new Function(src + '\nreturn ' + name + ';')();
+  const sw = fs.readFileSync(path.resolve(__dirname, '../utilities/sportsWeekRecord.js'), 'utf8');   // engine.281 (a): sportsRung_
+  return new Function(sw + src + '\nreturn ' + name + ';')();
 };
 const applyPatternDetection_ = loadFn('../phase06-analysis/applyPatternDetection.js', 'applyPatternDetection_');
 const applyShockMonitor_ = loadFn('../phase06-analysis/applyShockMonitor.js', 'applyShockMonitor_');
@@ -152,6 +153,7 @@ function runShock(curEvents, prevEvents, sOverrides) {
   const vm2 = require('vm'), fs2 = require('fs'), path2 = require('path');
   const cl = { Logger: { log() {} }, Math, JSON, Object, Array, String, Number };
   vm2.createContext(cl);
+  vm2.runInContext(fs2.readFileSync(path2.join(__dirname, '..', 'utilities/sportsWeekRecord.js'), 'utf8'), cl);   // engine.281 (a): sportsRung_
   vm2.runInContext(fs2.readFileSync(path2.join(__dirname, '..', 'phase06-analysis/applyShockMonitor.js'), 'utf8'), cl);
   vm2.runInContext(fs2.readFileSync(path2.join(__dirname, '..', 'phase06-analysis/applyCivicLoadIndicator.js'), 'utf8'), cl);
   const load = over => {
@@ -179,6 +181,7 @@ function runShock(curEvents, prevEvents, sOverrides) {
   const vm3 = require('vm'), fs3 = require('fs'), path3 = require('path');
   const pd = { Logger: { log() {} }, Math, JSON, Object, Array, String, Number };
   vm3.createContext(pd);
+  vm3.runInContext(fs3.readFileSync(path3.join(__dirname, '..', 'utilities/sportsWeekRecord.js'), 'utf8'), pd);   // engine.281 (a): sportsRung_
   vm3.runInContext(fs3.readFileSync(path3.join(__dirname, '..', 'phase06-analysis/applyPatternDetection.js'), 'utf8'), pd, { filename: 'applyPatternDetection.js' });
   // Riley_Digest rows: E(4) events, F(5) issues, I(8) CivicLoad, J(9) drift, K(10) pattern, L(11) shock, M(12) seeds, AB(27) sentiment
   const row = (civic, events) => { const r = new Array(28).fill(''); r[4] = events; r[5] = ''; r[8] = civic; r[9] = 0; r[10] = ''; r[11] = 'none'; r[12] = 0; r[27] = 0.2; return r; };

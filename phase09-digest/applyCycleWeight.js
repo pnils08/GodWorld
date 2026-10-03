@@ -72,6 +72,7 @@ function applyCycleWeight_(ctx) {
   var isFirstFriday = S.isFirstFriday || false;
   var isCreationDay = S.isCreationDay || false;
   var sportsSeason = S.sportsSeason || "off-season";
+  var sportsRung = sportsRung_(sportsSeason, S.sportsCity);   // engine.281 (a): the numbers read the week's band
 
   var score = 0;
   var reasons = [];
@@ -365,15 +366,15 @@ function applyCycleWeight_(ctx) {
   // SPORTS SEASON INTENSITY (v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
   
-  if (sportsSeason === "championship") {
+  if (sportsRung === "championship") {
     score += 4;
     reasons.push('Championship game/series');
     calendarFactors.push('championship');
-  } else if (sportsSeason === "playoffs" || sportsSeason === "post-season") {
+  } else if (sportsRung === "playoffs" || sportsRung === "post-season") {
     score += 2;
     reasons.push('Playoff intensity');
     calendarFactors.push('playoffs');
-  } else if (sportsSeason === "late-season") {
+  } else if (sportsRung === "late-season") {
     score += 1;
     calendarFactors.push('late-season');
   }

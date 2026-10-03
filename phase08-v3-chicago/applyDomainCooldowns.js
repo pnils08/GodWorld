@@ -49,6 +49,7 @@ function applyDomainCooldowns_(ctx) {
   var isFirstFriday = S.isFirstFriday || false;
   var isCreationDay = S.isCreationDay || false;
   var sportsSeason = S.sportsSeason || 'off-season';
+  var sportsRung = sportsRung_(sportsSeason, S.sportsCity);   // engine.281 (a): the numbers read the week's band
 
   // ═══════════════════════════════════════════════════════════════════════════
   // DOMAIN CLASSIFICATIONS
@@ -84,7 +85,7 @@ function applyDomainCooldowns_(ctx) {
   // Cultural festivals → CULTURE and COMMUNITY
 
   // Sports seasons → SPORTS domain
-  if (sportsSeason === 'championship' || sportsSeason === 'playoffs') {
+  if (sportsRung === 'championship' || sportsRung === 'playoffs') {
     calendarBoostedDomains.push('SPORTS');
   }
 

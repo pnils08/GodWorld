@@ -30,8 +30,10 @@ function applySeasonalWeights_(ctx) {
   // engine.210: Phase2-SportsSeason runs first. Recorded feed phases can
   // weight ordinary city events; the separate atmosphere license still gates
   // dedicated sports prose in event/citizen generators (S302).
-  var sports = (S.sportsSource === 'oakland-feed' || S.sportsAtmosphereEnabled === true)
-    ? S.sportsSeason : "";
+  // engine.281 (a): a recorded feed week reads the ladder off the week's band (sportsRung_),
+  // not the phase word; a Maker-declared season keeps its word (override path, unchanged)
+  var sports = (S.sportsSource === 'oakland-feed') ? sportsRung_(S.sportsSeason, S.sportsCity)
+    : (S.sportsAtmosphereEnabled === true ? S.sportsSeason : "");
   var econMood = S.economicMood || 50;
   var weatherMood = S.weatherMood || {};
   var isWeekend = S.isWeekend || false;

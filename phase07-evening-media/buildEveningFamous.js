@@ -77,6 +77,7 @@ function buildEveningFamous_(ctx) {
   var isFirstFriday = S.isFirstFriday || false;
   var isCreationDay = S.isCreationDay || false;
   var sportsSeason = S.sportsSeason || "off-season";
+  var sportsRung = sportsRung_(sportsSeason, S.sportsCity);   // engine.281 (a): the numbers read the week's band
 
   // engine.99 Cohort 2 — core-sim hoods from Neighborhood_Map CoreSimRank (ADR-0016)
   var neighborhoods = getCoreSimNeighborhoods_(ctx);
@@ -311,11 +312,11 @@ function buildEveningFamous_(ctx) {
   // ───────────────────────────────────────────────────────────────────────────
   // SPORTS SEASON (v2.2)
   // ───────────────────────────────────────────────────────────────────────────
-  if (sportsSeason === "championship") {
+  if (sportsRung === "championship") {
     pool = pool.concat(athletePool, athletePool, athletePool, SPORTS_LEGENDS);
-  } else if (sportsSeason === "playoffs" || sportsSeason === "post-season") {
+  } else if (sportsRung === "playoffs" || sportsRung === "post-season") {
     pool = pool.concat(athletePool, athletePool, SPORTS_LEGENDS);
-  } else if (sportsSeason === "late-season") {
+  } else if (sportsRung === "late-season") {
     pool = pool.concat(athletePool, athletePool);
   }
 
@@ -411,7 +412,7 @@ function buildEveningFamous_(ctx) {
   // v2.2: Calendar increases sightings
   if (holidayPriority === "major" || holidayPriority === "oakland") count = Math.max(count, 3);
   if (isFirstFriday) count = Math.max(count, 3);
-  if (sportsSeason === "championship") count = 4;
+  if (sportsRung === "championship") count = 4;
 
   var selected = typeof pickRandomSet_ === 'function'
     ? pickRandomSet_(uniq, count, rng)
@@ -465,7 +466,7 @@ function buildEveningFamous_(ctx) {
     if (isFirstFriday && (ent.role.indexOf("artist") !== -1 || ent.role.indexOf("gallery") !== -1 || ent.role.indexOf("musician") !== -1)) {
       // Artists on First Friday are in arts districts
       neighborhood = artsNeighborhoods[Math.floor(rng() * artsNeighborhoods.length)];
-    } else if (sportsSeason === "championship" && (ent.role.indexOf("athlete") !== -1 || ent.role === "A's player")) {
+    } else if (sportsRung === "championship" && (ent.role.indexOf("athlete") !== -1 || ent.role === "A's player")) {
       // Athletes near the stadium — engine.134 Task 6: the sports zone follows
       // the stadium (S.sportsZones, engine.131 T7); Jack London/Downtown until it lights.
       neighborhood = pickAthleteSightingHood_(S, rng);

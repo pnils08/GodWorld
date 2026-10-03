@@ -248,6 +248,20 @@ function sportsBandAtLeast_(city, band) {
   return !!city && (SPORTS_BAND_RANK_[city.band] || 0) >= (SPORTS_BAND_RANK_[band] || 0);
 }
 
+// engine.281 (a): the old phase-word ladder read off the week, for the numeric sites that
+// keep a full ladder. Band top/high/elevated → 'championship'/'playoffs'/'late-season' (the
+// read-before §2.2 mapping); a championship/post-season/late-season lens on a lower band
+// reads 'regular-season' (normal: an ordinary game week) or '' (quiet: no games, Q1 — no
+// rung fires); every other lens word passes through. Prose and pools keep the lens itself.
+var SPORTS_BAND_RUNG_ = { top: 'championship', high: 'playoffs', elevated: 'late-season' };
+var SPORTS_RULED_LENS_ = { 'championship': 1, 'playoffs': 1, 'post-season': 1, 'late-season': 1 };
+function sportsRung_(lens, city) {
+  var band = (city && city.band) || 'quiet';
+  if (SPORTS_BAND_RUNG_[band]) return SPORTS_BAND_RUNG_[band];
+  if (SPORTS_RULED_LENS_[lens]) return band === 'normal' ? 'regular-season' : '';
+  return lens || 'off-season';
+}
+
 // engine.205 slice D (bars fill, engine.47 Hop 6): the week's signed result as one hood's
 // bars and restaurants feel it. Per franchise that played: its home games land at its own
 // venue (venueShare), its away games are watch parties in the nightlife hoods at the round's

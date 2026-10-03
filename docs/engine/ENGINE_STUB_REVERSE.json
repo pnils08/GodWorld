@@ -2,7 +2,7 @@
   "generated": "2026-10-03",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 180,
-  "functionsMapped": 1601,
+  "functionsMapped": 1602,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -1248,17 +1248,32 @@
       "readers": [
         "phase01-config/godWorldEngine2.js::updateWorldPopulation_",
         "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
+        "phase02-world-state/applySeasonWeights.js::applySeasonalWeights_",
         "phase03-population/generateCrisisSpikes.js::generateCrisisSpikes_",
+        "phase05-citizens/applyNamedCitizenSpotlight.js::applyNamedCitizenSpotlights_",
         "phase05-citizens/bondEngine.js::checkConfrontationTriggers_",
         "phase05-citizens/bondEngine.js::detectNewBonds_",
         "phase05-citizens/bondEngine.js::updateExistingBonds_",
+        "phase05-citizens/checkForPromotions.js::checkForPromotions_",
+        "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
+        "phase05-citizens/generateGenericCitizens.js::generateGenericCitizens_",
+        "phase06-analysis/applyCivicLoadIndicator.js::applyCivicLoadIndicator_",
         "phase06-analysis/applyMigrationDrift.js::applyMigrationDrift_",
+        "phase06-analysis/applyPatternDetection.js::applyPatternDetection_",
         "phase06-analysis/applyShockMonitor.js::applyShockMonitor_",
         "phase06-analysis/economicRippleEngine.js::calculateEconomicMood_",
+        "phase06-analysis/filterNoiseEvents.js::filterNoiseEvents_",
+        "phase06-analysis/prioritizeEvents.js::prioritizeEvents_",
+        "phase07-evening-media/buildEveningFamous.js::buildEveningFamous_",
         "phase07-evening-media/buildEveningFood.js::buildEveningFood_",
         "phase07-evening-media/buildNightLife.js::buildNightlife_",
         "phase07-evening-media/cityEveningSystems.js::buildCityEveningSystems_",
-        "phase07-evening-media/mediaFeedbackEngine.js::runMediaFeedbackEngine_"
+        "phase07-evening-media/culturalLedger.js::registerCulturalEntity_",
+        "phase07-evening-media/domainTracker.js::domainTracker_",
+        "phase07-evening-media/mediaFeedbackEngine.js::runMediaFeedbackEngine_",
+        "phase08-v3-chicago/applyDomainCooldowns.js::applyDomainCooldowns_",
+        "phase08-v3-chicago/v3DomainWriter.js::deriveDomainPresenceV34_",
+        "phase09-digest/applyCycleWeight.js::applyCycleWeight_"
       ]
     },
     "sportsSeason": {
@@ -2259,6 +2274,7 @@
         "phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_",
         "phase02-world-state/applyInitiativeImplementationEffects.js::sportsHasOpenedBaylight_",
         "phase05-citizens/bondEngine.js::detectNewBonds_",
+        "phase05-citizens/generateGenericCitizens.js::generateGenericCitizens_",
         "phase06-analysis/economicRippleEngine.js::runEconomicRippleEngine_",
         "phase07-evening-media/applyStorySeeds.js::applyStorySeeds_",
         "phase07-evening-media/buildEveningFamous.js::buildEveningFamous_",

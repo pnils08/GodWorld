@@ -72,6 +72,7 @@ function applyNamedCitizenSpotlights_(ctx) {
   var isFirstFriday = S.isFirstFriday || false;
   var isCreationDay = S.isCreationDay || false;
   var sportsSeason = S.sportsSeason || "off-season";
+  var sportsRung = sportsRung_(sportsSeason, S.sportsCity);   // engine.281 (a): the numbers read the week's band
 
   var scores = {}; // popId → numeric score
   var reasons = {}; // popId → array of reason tags
@@ -366,13 +367,13 @@ function applyNamedCitizenSpotlights_(ctx) {
     // SPORTS SEASON SPOTLIGHT BOOST (v2.2)
     // ═══════════════════════════════════════════════════════════════════════
     if (evTypeLower === "sports") {
-      if (sportsSeason === "championship") {
+      if (sportsRung === "championship") {
         scores[pid] += 5; // Event-specific (sports event during championship)
         addReason(pid, "championship");
-      } else if (sportsSeason === "playoffs" || sportsSeason === "post-season") {
+      } else if (sportsRung === "playoffs" || sportsRung === "post-season") {
         scores[pid] += 3;
         addReason(pid, "playoffs");
-      } else if (sportsSeason === "late-season") {
+      } else if (sportsRung === "late-season") {
         scores[pid] += 1;
         addReason(pid, "late-season");
       }
@@ -443,7 +444,7 @@ function applyNamedCitizenSpotlights_(ctx) {
   }
   if (isFirstFriday) baseThreshold -= 0.5;
   if (isCreationDay) baseThreshold -= 0.5;
-  if (sportsSeason === "championship") baseThreshold -= 1;
+  if (sportsRung === "championship") baseThreshold -= 1;
 
   // Safety minimum
   if (baseThreshold < 3) baseThreshold = 3;

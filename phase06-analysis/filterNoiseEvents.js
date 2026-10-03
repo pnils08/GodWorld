@@ -53,6 +53,7 @@ function filterNoiseEvents_(ctx) {
   var isFirstFriday = S.isFirstFriday || false;
   var isCreationDay = S.isCreationDay || false;
   var sportsSeason = S.sportsSeason || "off-season";
+  var sportsRung = sportsRung_(sportsSeason, S.sportsCity);   // engine.281 (a): the numbers read the week's band
 
   // ES5: Use plain objects instead of Set
   var seenMicro = {};
@@ -118,8 +119,8 @@ function filterNoiseEvents_(ctx) {
 
     // Sports events preserved during high-intensity seasons
     if (evType === "sports") {
-      if (sportsSeason === "championship" || sportsSeason === "playoffs" ||
-          sportsSeason === "post-season") {
+      if (sportsRung === "championship" || sportsRung === "playoffs" ||
+          sportsRung === "post-season") {
         return true;
       }
     }

@@ -153,6 +153,7 @@ function registerCulturalEntity_(ctx, name, roleType, journalistName, neighborho
   var isFirstFriday = S.isFirstFriday || false;
   var isCreationDay = S.isCreationDay || false;
   var sportsSeason = S.sportsSeason || "off-season";
+  var sportsRung = sportsRung_(sportsSeason, S.sportsCity);   // engine.281 (a): the numbers read the week's band
   var dynamics = S.cityDynamics || { culturalActivity: 1, communityEngagement: 1 };
   var culturalActivity = dynamics.culturalActivity || 1;
   var communityEngagement = dynamics.communityEngagement || 1;
@@ -303,11 +304,11 @@ function registerCulturalEntity_(ctx, name, roleType, journalistName, neighborho
   // SPORTS SEASON FAME MODIFIERS (v2.2)
   // ─────────────────────────────────────────────────────────────────────────
   if (fam.dom === "Sports") {
-    if (sportsSeason === "championship") {
+    if (sportsRung === "championship") {
       fameBonus += 6;
-    } else if (sportsSeason === "playoffs" || sportsSeason === "post-season") {
+    } else if (sportsRung === "playoffs" || sportsRung === "post-season") {
       fameBonus += 4;
-    } else if (sportsSeason === "late-season") {
+    } else if (sportsRung === "late-season") {
       fameBonus += 2;
     }
   }

@@ -377,6 +377,7 @@ function generateCitizensEvents_(ctx) {
   var isFirstFriday = !!S.isFirstFriday;
   var isCreationDay = !!S.isCreationDay;
   var sportsSeason = S.sportsSeason || "off-season";
+  var sportsRung = sportsRung_(sportsSeason, S.sportsCity);   // engine.281 (a): the numbers read the week's band
 
   // v2.5: Sim year for age grouping — the calendar's (engine.164)
   var simYear = simYearOf_(ctx);
@@ -2215,8 +2216,8 @@ function generateCitizensEvents_(ctx) {
 
     if (isCreationDay) chance += 0.01;
 
-    if (sportsSeason === "championship") chance += 0.015;
-    else if (sportsSeason === "playoffs" || sportsSeason === "post-season") chance += 0.01;
+    if (sportsRung === "championship") chance += 0.015;
+    else if (sportsRung === "playoffs" || sportsRung === "post-season") chance += 0.01;
 
     if (dynamics.culturalActivity >= 1.4) chance += 0.008;
     if (dynamics.communityEngagement >= 1.3) chance += 0.005;

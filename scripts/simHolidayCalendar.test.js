@@ -255,7 +255,7 @@ test('the cycle-weight reason names Second Dawn by its label (runtime)', () => {
       summary: { cycleId: 131, season: 'Summer', month: 7, holiday: 'SecondDawn', holidayLabel: 'Second Dawn', holidayPriority: 'oakland',
         sportsSeason: 'off-season', worldEvents: [], citizenEvents: [], eventArcs: [], storySeeds: [], cityDynamics: { sentiment: 0.1 }, weather: { impact: 1 } } } };
   vm.createContext(sb);
-  for (const rel of ['phase06-analysis/applyShockMonitor.js', 'phase09-digest/applyCycleWeight.js']) vm.runInContext(fs.readFileSync(path.join(root, rel), 'utf8'), sb, { filename: rel });
+  for (const rel of ['utilities/sportsWeekRecord.js', 'phase06-analysis/applyShockMonitor.js', 'phase09-digest/applyCycleWeight.js']) vm.runInContext(fs.readFileSync(path.join(root, rel), 'utf8'), sb, { filename: rel });
   vm.runInContext('applyCycleWeight_(ctx)', sb);
   const reason = String(sb.ctx.summary.cycleWeightReason || '');
   assert(reason.includes('Oakland holiday (Second Dawn)'), 'reason: ' + reason);
@@ -263,7 +263,9 @@ test('the cycle-weight reason names Second Dawn by its label (runtime)', () => {
 });
 
 test('hook, civic-load factor and evening programming print the label (runtime)', () => {
-  const mk = () => { const sb = { Logger: { log: () => {} }, Utilities: { getUuid: () => 'u-xxxxxxxx' }, safeRand_: () => () => 0.5, console }; vm.createContext(sb); return sb; };
+  const mk = () => { const sb = { Logger: { log: () => {} }, Utilities: { getUuid: () => 'u-xxxxxxxx' }, safeRand_: () => () => 0.5, console }; vm.createContext(sb);
+    vm.runInContext(fs.readFileSync(path.join(root, 'utilities/sportsWeekRecord.js'), 'utf8'), sb);   // engine.281 (a): sportsRung_
+    return sb; };
   const load = (sb, rel) => vm.runInContext(fs.readFileSync(path.join(root, rel), 'utf8'), sb, { filename: rel });
   const summary = (flag, label, priority) => ({ absoluteCycle: 155, cycleOfYear: 51, cycleId: 155, holiday: flag, holidayLabel: label, holidayPriority: priority,
     season: 'Winter', sportsSeason: 'off-season', storyHooks: [], eventArcs: [], worldEvents: [], citizenEvents: [], cityDynamics: { sentiment: 0.1 }, weather: { impact: 1, type: 'clear' } });

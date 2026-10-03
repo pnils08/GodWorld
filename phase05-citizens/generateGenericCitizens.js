@@ -258,6 +258,7 @@ function generateGenericCitizens_(ctx) {
     sentiment: 0, culturalActivity: 1, communityEngagement: 1
   };
   var sportsSeason = S.sportsSeason || "off-season";
+  var sportsRung = sportsRung_(sportsSeason, S.sportsCity);   // engine.281 (a): the numbers read the week's band
   var econMood = S.economicMood || 50;
 
   // Calendar context (v2.2)
@@ -312,9 +313,9 @@ function generateGenericCitizens_(ctx) {
   }
 
   // Championship brings temporary population surge
-  if (sportsSeason === "championship") {
+  if (sportsRung === "championship") {
     baseCount += 1;
-  } else if ((sportsSeason === "playoffs" || sportsSeason === "post-season") && rand() < 0.4) {
+  } else if ((sportsRung === "playoffs" || sportsRung === "post-season") && rand() < 0.4) {
     baseCount += 1;
   }
 
@@ -561,10 +562,13 @@ function generateGenericCitizens_(ctx) {
     // Lunar New Year boosts Chinatown
 
 
-    // Opening Day / Sports boosts Jack London / Downtown
-    if (sportsSeason === "championship") {
-      weights['Jack London'] = (weights['Jack London'] || 1.0) + 0.4;
-      weights['Downtown'] = (weights['Downtown'] || 1.0) + 0.3;
+    // A top-band sports week boosts the stadium hoods — wherever the stadium is (engine.281
+    // (a): was a 'Jack London' / 'Downtown' literal; S.sportsZones reads the same two today)
+    if (sportsRung === "championship") {
+      var genZones = (S.sportsZones && S.sportsZones.length) ? S.sportsZones : ['Jack London', 'Downtown'];
+      for (var gz = 0; gz < genZones.length; gz++) {
+        weights[genZones[gz]] = (weights[genZones[gz]] || 1.0) + (gz === 0 ? 0.4 : 0.3);
+      }
     }
 
     // Oakland Pride boosts Downtown / Lake Merritt

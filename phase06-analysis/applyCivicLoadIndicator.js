@@ -76,6 +76,7 @@ function applyCivicLoadIndicator_(ctx) {
   var isFirstFriday = S.isFirstFriday || false;
   var isCreationDay = S.isCreationDay || false;
   var sportsSeason = S.sportsSeason || "off-season";
+  var sportsRung = sportsRung_(sportsSeason, S.sportsCity);   // engine.281 (a): the numbers read the week's band
 
   var chaosCount = worldEvents.length;
   var factors = [];
@@ -307,11 +308,11 @@ function applyCivicLoadIndicator_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // SPORTS SEASON EFFECTS (v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
-  if (sportsSeason === "championship") {
+  if (sportsRung === "championship") {
     score += 4;
     factors.push('championship civic strain');
     calendarFactors.push('championship-load');
-  } else if (sportsSeason === "playoffs" || sportsSeason === "post-season") {
+  } else if (sportsRung === "playoffs" || sportsRung === "post-season") {
     score += 2;
     calendarFactors.push('playoffs-load');
   }

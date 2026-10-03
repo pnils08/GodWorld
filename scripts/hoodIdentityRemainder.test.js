@@ -172,16 +172,17 @@ console.log('═══ Tasks 2–3 — fold + economy blob from Neighborhood_Map
   check('T2b ledger child-fold then identity, no substring matching (' + Object.keys(cases).length + ' cases)', bad.length === 0, bad.join(' '));
   let threw = false; try { sb.resolveHoodOrChild_({ summary: {} }, 'Downtown'); } catch (e) { threw = /not seeded/.test(e.message); }
   check('T2d accessor throws unseeded (ADR-0016 wall)', threw);
-  const ctx = { summary: Object.assign({ economicRipples: [], economicMood: 50 }, S), economicCalendarContext: { holiday: 'none', isFirstFriday: true, sportsSeason: 'championship', sportsZones: ['Baylight District'] } };
+  // engine.204/205: the stadium bonus is the franchise's home volume at its own venue (8 × unsigned × venueShare)
+  const ctx = { summary: Object.assign({ economicRipples: [], economicMood: 50, sportsWeek: { "A's": { venue: ['Baylight District'], unsigned: 1, venueShare: 1 } } }, S), economicCalendarContext: { holiday: 'none', isFirstFriday: true, sportsSeason: 'championship', sportsZones: ['Baylight District'] } };
   sb.calculateNeighborhoodEconomies_(ctx);
   const E = ctx.summary.neighborhoodEconomies;
   check('T3a economy blob has exactly the 22 Neighborhood_Map keys', Object.keys(E).length === 22 && NM.every(h => E[h]) && !E.Montclair, Object.keys(E).join(','));
   check('T3b sectors come from employerCharacter (stadium → entertainment-led; clinic → healthcare-led)', E['Baylight District'].sectors[0] === 'entertainment' && E['Temescal'].sectors[0] === 'healthcare');
   check('T3c First Friday lifts arts/nightlife hoods by label, not by name', E['KONO'].mood === 53 && E['Jack London'].mood === 53 && E['Rockridge'].mood === 50, JSON.stringify([E.KONO.mood, E['Jack London'].mood, E.Rockridge.mood]));
-  check('T3d championship bonus lands on the sports zone only', E['Baylight District'].mood === 58 && E['Baylight District'].isSportsZone === true && E['Downtown'].isSportsZone === false, JSON.stringify([E['Baylight District'].mood, E.Downtown.mood]));
+  check('T3d a full home week lands its bonus on its venue only', E['Baylight District'].mood === 58 && E['Baylight District'].isSportsZone === true && E['Downtown'].isSportsZone === false, JSON.stringify([E['Baylight District'].mood, E.Downtown.mood]));
   const dark = { summary: Object.assign({ economicRipples: [], economicMood: 50 }, S), economicCalendarContext: { holiday: 'none', sportsSeason: 'championship', sportsZones: [] } };
   sb.calculateNeighborhoodEconomies_(dark);
-  check('T3e T7 dark (empty zones) → no sports bonus anywhere', NM.every(h => dark.summary.neighborhoodEconomies[h].mood === 50));
+  check('T3e no game week (word only, empty zones) → no sports bonus anywhere', NM.every(h => dark.summary.neighborhoodEconomies[h].mood === 50));
 }
 
 // ── Task 7: orphaned ctx publications are gone ────────────────────────────

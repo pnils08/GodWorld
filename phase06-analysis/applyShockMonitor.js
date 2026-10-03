@@ -80,16 +80,11 @@ function applyShockMonitor_(ctx) {
   var sportsSource = (S.sportsSource || "").toString(); // 'config-override' or 'simmonth-calculated' etc.
   var sportsIsOverride = (sportsSource === "config-override");
 
-  function getSportsPhaseSimple() {
-    // simplest canon: summer = in-season baseball vibe; winter = off-season vibe
-    // You can tune this later, but this keeps the monitor from inventing "playoffs" intensity.
-    var m = S.simMonth || 1;
-    if (m === 3) return "spring-training";
-    if (m >= 4 && m <= 10) return "in-season";
-    return "off-season";
-  }
-
-  var sportsPhase = sportsIsOverride ? sportsSeason : getSportsPhaseSimple();
+  // engine.204/205 §2.2: the simMonth "in-season" guess is gone — there is no sports
+  // calendar and the engine must not read one (ruled). The phase is the feed's label;
+  // what lifts the thresholds below is the week's band (games played), not a month.
+  var sportsPhase = sportsSeason;
+  var sportsCityShock = S.sportsCity || {};
 
   // ═══════════════════════════════════════════════════════════════════════════
   // PREVIOUS CYCLE STATE
@@ -153,12 +148,19 @@ function applyShockMonitor_(ctx) {
       chaosThresholdMod += 2;
       migrationThresholdMod += 40;
     }
-  } else {
-    // canon-friendly: in-season adds a *small* crowd/traffic baseline
-    if (sportsPhase === "in-season") {
-      eventThresholdMod += 1;
-      chaosThresholdMod += 1;
-    }
+  } else if (sportsCityShock.band === "top") {
+    // a recorded game week, by its band: the old championship / playoff payloads
+    eventThresholdMod += 4;
+    chaosThresholdMod += 3;
+    migrationThresholdMod += 60;
+  } else if (sportsCityShock.band === "high") {
+    eventThresholdMod += 2;
+    chaosThresholdMod += 2;
+    migrationThresholdMod += 40;
+  } else if (sportsCityShock.band === "elevated" || sportsCityShock.band === "normal") {
+    // a game week adds a small crowd/traffic baseline; a week without games adds none
+    eventThresholdMod += 1;
+    chaosThresholdMod += 1;
   }
 
   if (isCreationDay) {
@@ -514,9 +516,10 @@ function isActiveShock_(flag) {
  * 12. Media crisis saturation
  * 13. Calendar-specific shocks
  *
- * CANON-SAFE SPORTS:
- * - Only applies big threshold mods when sportsIsOverride
- * - In-season adds small baseline mods only
+ * SPORTS:
+ * - Maker override: the declared season's threshold mods
+ * - Feed: the week's band (engine.204/205) — top/high carry the old payloads,
+ *   any other game week a small baseline, no games nothing
  *
  * CALL ORDER:
  * 1. generateCrisisBuckets_ (creates events/arcs)

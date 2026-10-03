@@ -69,6 +69,9 @@ var ECONOMIC_TRIGGERS = {
   FESTIVAL_TOURISM: { impact: 12, duration: 2, sectors: ['entertainment', 'food', 'retail', 'tourism'] },
   PLAYOFF_SPENDING: { impact: 8, duration: 3, sectors: ['entertainment', 'food', 'retail'] },
   CHAMPIONSHIP_BOOM: { impact: 15, duration: 3, sectors: ['entertainment', 'food', 'retail', 'merchandise'] },
+  // engine.204/205 §2.2: the one sports-week ripple; impact is set from the signed result
+  // (-15 … +15) after creation. PLAYOFF_SPENDING / CHAMPIONSHIP_BOOM stay for carried rows.
+  SPORTS_WEEK: { impact: 15, duration: 3, sectors: ['entertainment', 'food', 'retail'] },
   ARTS_DISTRICT_BOOST: { impact: 6, duration: 1, sectors: ['arts', 'entertainment', 'food'] },
   LOCAL_PRIDE_BOOST: { impact: 5, duration: 2, sectors: ['retail', 'food', 'local'] },
   SUMMER_TOURISM: { impact: 7, duration: 8, sectors: ['tourism', 'entertainment', 'food'] },
@@ -460,13 +463,24 @@ function detectCalendarRipples_(ctx, currentCycle) {
   
   // Cultural celebrations
   
-  // Sports
-  if (cal.sportsSeason === 'championship') {
-    createRipple_(S, 'CHAMPIONSHIP_BOOM', currentCycle, 
-      { description: 'Championship economic surge' }, primarySportsZone_(cal), cal);
-  } else if (cal.sportsSeason === 'playoffs') {
-    createRipple_(S, 'PLAYOFF_SPENDING', currentCycle, 
-      { description: 'Playoff game spending' }, primarySportsZone_(cal), cal);
+  // Sports — engine.204/205 §2.2: one ripple per franchise-week, sized by the signed result
+  // (a week below the franchise's own expectation is a negative ripple); the stakes are in
+  // the number, never the phase word. A home week lands at that franchise's venue, an away
+  // week city-wide (watch parties). Under |signed| .15 the week moves no ripple.
+  var sportsWeeks = S.sportsWeek || {};
+  for (var sf in sportsWeeks) {
+    if (!sportsWeeks.hasOwnProperty(sf)) continue;
+    var swk = sportsWeeks[sf], swSigned = Number(swk.signed) || 0;
+    if (Math.abs(swSigned) < 0.15) continue;
+    var swHome = (Number(swk.venueShare) || 0) >= 0.5 && swk.venue && swk.venue.length;
+    var swRipple = createRipple_(S, 'SPORTS_WEEK', currentCycle,
+      { description: sf + (swSigned > 0 ? ' game-week spending' : ' game-week slump'),
+        rippleKey: String(sf).replace(/[^A-Za-z]/g, '').toUpperCase() },
+      swHome ? swk.venue[0] : 'all', cal);
+    if (swRipple) {
+      swRipple.impact = swRipple.currentStrength = Math.round(15 * swSigned);
+      swRipple.neighborhoods = swHome ? swk.venue.slice() : ['all'];
+    }
   }
   
   
@@ -644,7 +658,8 @@ function createRipple_(S, triggerType, cycle, sourceEvent, eventNeighborhood, ca
   var trigger = ECONOMIC_TRIGGERS[triggerType];
   if (!trigger) return null;
   
-  var rippleId = triggerType + '_' + cycle;
+  // engine.204/205: rippleKey lets one type fire once per franchise in a Cycle
+  var rippleId = triggerType + (sourceEvent && sourceEvent.rippleKey ? '_' + sourceEvent.rippleKey : '') + '_' + cycle;
   for (var i = 0; i < S.economicRipples.length; i++) {
     if (S.economicRipples[i] && S.economicRipples[i].id === rippleId) return null;
   }
@@ -668,9 +683,7 @@ function createRipple_(S, triggerType, cycle, sourceEvent, eventNeighborhood, ca
       impact *= 1.2;
     }
   }
-  if (cal && cal.sportsSeason === 'championship' && triggerType.indexOf('SPORTS') >= 0) {
-    impact *= 1.5;
-  }
+  // engine.204/205: the championship ×1.5 is gone — the week's stakes are in its number
   
   var ripple = {
     id: rippleId,
@@ -793,11 +806,10 @@ function calculateEconomicMood_(ctx) {
     newMood += 2;
   }
   
-  if (cal.sportsSeason === 'championship') {
-    newMood += 4;
-  } else if (cal.sportsSeason === 'playoffs') {
-    newMood += 2;
-  }
+  // engine.204/205: the city's mood follows the week's signed result (cap ±4, today's
+  // championship constant), not the phase word; a quiet week moves nothing
+  var scity = S.sportsCity || {};
+  newMood += Math.max(-4, Math.min(4, 8 * (Number(scity.signed) || 0) * (Number(scity.reach) || 0)));
   
   if (cal.isFirstFriday) {
     newMood += 1;
@@ -922,7 +934,7 @@ function calculateNeighborhoodEconomies_(ctx) {
   
   var nhEconomies = {};
   var holidayZones = sceneHoods_(ctx, cal.holiday);   // engine.240: authored Scenes
-  var sportsZones = cal.sportsZones || [];
+  var hoodSportsWeeks = S.sportsWeek || {};   // engine.204/205: each franchise's venue + home volume
   var hoodState = S.neighborhoodState || {};
 
   // engine.134 Task 3: every Neighborhood_Map hood, profile from the sheet.
@@ -965,11 +977,13 @@ function calculateNeighborhoodEconomies_(ctx) {
       localMood += 3;
     }
     
-    // the post-season lifts wherever the sport physically is (engine.131 T7 set);
-    // while T7 is dark the set is empty and the bonus is zero, which is correct
-    if ((cal.sportsSeason === 'playoffs' || cal.sportsSeason === 'championship') && 
-        sportsZones.indexOf(nh) >= 0) {
-      localMood += cal.sportsSeason === 'championship' ? 8 : 5;
+    // engine.204/205: a home week lifts business at that franchise's own stadium by its
+    // volume (tickets and concessions sell win or lose; cap 8, today's championship value)
+    for (var vf in hoodSportsWeeks) {
+      if (!hoodSportsWeeks.hasOwnProperty(vf)) continue;
+      var vwk = hoodSportsWeeks[vf];
+      if ((vwk.venue || []).indexOf(nh) < 0) continue;
+      localMood += Math.min(8, 8 * (Number(vwk.unsigned) || 0) * (Number(vwk.venueShare) || 0));
     }
     
     localMood = Math.round(Math.max(0, Math.min(100, localMood)) * 100) / 100;
@@ -984,7 +998,7 @@ function calculateNeighborhoodEconomies_(ctx) {
       isHolidayZone: holidayZones.indexOf(nh) >= 0,
       // T7: a set, not a string — during the changeover the city has live sport
       // in two districts at once.
-      isSportsZone: sportsZones.indexOf(nh) >= 0 && cal.sportsSeason !== 'off-season'
+      isSportsZone: (cal.sportsZones || []).indexOf(nh) >= 0 && cal.sportsSeason !== 'off-season'
     };
   }
   
@@ -1029,6 +1043,7 @@ function generateEconomicSummary_(ctx) {
     HOLIDAY_SHOPPING: 'Holiday shopping drives retail surge.',
     FESTIVAL_TOURISM: 'Festival visitors fill hotels and restaurants.',
     PLAYOFF_SPENDING: 'Playoff excitement boosts sports bars.',
+    SPORTS_WEEK: 'Game-week crowds keep sports bars and shops busy.',
     CHAMPIONSHIP_BOOM: 'Championship fever drives activity to new heights.',
     ARTS_DISTRICT_BOOST: 'First Friday brings crowds to arts district.',
     LOCAL_PRIDE_BOOST: 'Community pride drives local business support.',
@@ -1044,6 +1059,9 @@ function generateEconomicSummary_(ctx) {
   };
   
   S.economicNarrative = strongestRipple ? (narratives[strongestRipple.type] || '') : '';
+  if (strongestRipple && strongestRipple.type === 'SPORTS_WEEK' && strongestRipple.impact < 0) {
+    S.economicNarrative = 'A rough week for the home team leaves sports bars quieter.';
+  }
   
   var struggling = [];
   var thriving = [];

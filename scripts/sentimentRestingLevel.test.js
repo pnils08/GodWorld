@@ -39,8 +39,11 @@ const HELPERS = `
 var clamp = function(n,min,max){ return Math.max(min, Math.min(max, n)); };
 var clampSent = function(n){ return clamp(n,-1,1); };
 function safeNum_(v,d){ if(d===undefined)d=0; var n=Number(v); return isFinite(n)?n:d; }
+var S = {}; var CLUSTERS = { DOWNTOWN_CORE: { hoods: ['Downtown'] } };
+function neighborhoodToCluster_(h){ return h === 'Downtown' ? 'DOWNTOWN_CORE' : null; }
+function __setS(x){ S = x; }
 `;
-const M = new Function(HELPERS + NAMES.map(grab).join('\n') + '\nreturn {' + NAMES.join(',') + '};')();
+const M = new Function(HELPERS + NAMES.map(grab).join('\n') + '\nreturn {__setS:__setS,' + NAMES.join(',') + '};')();
 
 let pass = 0, fail = 0;
 const ok = (l, c, d) => c ? (console.log('  ok   ' + l), pass++)
@@ -150,9 +153,17 @@ console.log('4. sports phase is a calendar fact, not a result');
     'delta=' + (mid - off).toFixed(3));
   ok('a finals run is still a city-wide event', (fin - off) >= 0.30,
     'delta=' + (fin - off).toFixed(3));
+  // engine.204/205: the crowd follows the recorded week, not the word
   const m2 = M.makeMetrics_(); M.applySportsModifiers_(m2, 'mid-season', 'DOWNTOWN_CORE');
-  ok('the crowd effects are untouched (traffic 1.2, nightlife 1.1)',
-    near(m2.traffic, 1.2) && near(m2.nightlife, 1.1));
+  ok('a phase word with no games moves no crowd (traffic 1, nightlife 1)',
+    near(m2.traffic, 1) && near(m2.nightlife, 1));
+  M.__setS({ sportsCity: { intensity: 0.5, signed: -0.4, reach: 1, band: 'high' },
+    sportsWeek: { "A's": { unsigned: 0.5, venueShare: 1, venue: ['Downtown'] } } });
+  const m3 = M.makeMetrics_(); M.applySportsModifiers_(m3, 'playoffs', 'DOWNTOWN_CORE');
+  ok('a losing home week: traffic up (1.25 × stadium 1.075), nightlife below 1 city-wide',
+    near(m3.traffic, 1.25 * 1.075) && near(m3.nightlife, 0.8 * 1.075) && near(m3.communityEngagement, 1.2),
+    JSON.stringify([m3.traffic, m3.nightlife]));
+  M.__setS({});
 }
 
 // ── 5. the momentum carrier does not integrate a level ────────────────────

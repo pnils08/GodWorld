@@ -518,7 +518,6 @@
         "phase02-world-state/applyWeatherModel.js::applyWeatherModel_",
         "phase04-events/faithEventsEngine.js::runFaithEventsEngine_",
         "phase05-citizens/runYouthEngine.js::runYouthEngine_",
-        "phase06-analysis/applyShockMonitor.js::applyShockMonitor_",
         "phase07-evening-media/mediaRoomIntake.js::getCurrentCalendarContext_"
       ]
     },
@@ -1240,6 +1239,18 @@
         "phase10-persistence/recordMediaLedger.js::recordMediaLedger_",
         "phase10-persistence/recordWorldEventsv25.js::recordWorldEvents25_",
         "utilities/exportCycleArtifacts.js::buildCycleContextPack_"
+      ]
+    },
+    "sportsCity": {
+      "writers": [
+        "phase02-world-state/applySportsSeason.js::applySportsSeason_"
+      ],
+      "readers": [
+        "phase01-config/godWorldEngine2.js::updateWorldPopulation_",
+        "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
+        "phase06-analysis/applyShockMonitor.js::applyShockMonitor_",
+        "phase06-analysis/economicRippleEngine.js::calculateEconomicMood_",
+        "phase07-evening-media/mediaFeedbackEngine.js::runMediaFeedbackEngine_"
       ]
     },
     "sportsSeason": {
@@ -2153,6 +2164,20 @@
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_"
       ]
     },
+    "sportsWeek": {
+      "writers": [
+        "phase02-world-state/applySportsSeason.js::applySportsSeason_"
+      ],
+      "readers": [
+        "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
+        "phase02-world-state/applySportsSeason.js::applySportsSeason_",
+        "phase02-world-state/applySportsSeason.js::normalizeOaklandFeedTeam_",
+        "phase05-citizens/applyGameNightMoments.js::applyGameNightMoments_",
+        "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
+        "phase06-analysis/economicRippleEngine.js::calculateNeighborhoodEconomies_",
+        "phase06-analysis/economicRippleEngine.js::detectCalendarRipples_"
+      ]
+    },
     "weatherEvents": {
       "writers": [
         "phase02-world-state/applyWeatherModel.js::applyWeatherModel_"
@@ -2333,12 +2358,6 @@
         "phase02-world-state/applySportsSeason.js::applySportsSeason_"
       ]
     },
-    "sportsCity": {
-      "writers": [
-        "phase02-world-state/applySportsSeason.js::applySportsSeason_"
-      ],
-      "readers": []
-    },
     "sportsFeedEntries": {
       "writers": [
         "phase02-world-state/applySportsSeason.js::applySportsSeason_"
@@ -2374,17 +2393,6 @@
         "phase02-world-state/applySportsSeason.js::applySportsSeason_"
       ],
       "readers": []
-    },
-    "sportsWeek": {
-      "writers": [
-        "phase02-world-state/applySportsSeason.js::applySportsSeason_"
-      ],
-      "readers": [
-        "phase02-world-state/applySportsSeason.js::applySportsSeason_",
-        "phase02-world-state/applySportsSeason.js::normalizeOaklandFeedTeam_",
-        "phase05-citizens/applyGameNightMoments.js::applyGameNightMoments_",
-        "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_"
-      ]
     },
     "sportsEventTriggers": {
       "writers": [

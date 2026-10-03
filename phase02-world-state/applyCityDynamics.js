@@ -446,26 +446,41 @@ function applyCityDynamics_(ctx) {
     // for a mid-season game. What comes off is the mood the calendar was
     // paying regardless of how the season was going. A playoff run stays a
     // thing the whole city feels, because that IS an event.
+    // engine.204/205 §2.2: the crowd and the bars follow the RECORD, not the word.
+    // Sentiment stays on the phase word below — its magnitude is engine.194's (Task 7).
     if (phase === 'preseason') m.sentiment += 0.02;
-    else if (phase === 'in-season') { m.sentiment += 0.02; m.nightlife *= 1.05; }
-    else if (phase === 'mid-season') { m.traffic *= 1.2; m.nightlife *= 1.1; m.sentiment += 0.04; }
-    else if (phase === 'late-season') { m.traffic *= 1.3; m.nightlife *= 1.2; m.sentiment += 0.06; }
-    else if (phase === 'postseason') { m.traffic *= 1.4; m.nightlife *= 1.3; m.communityEngagement *= 1.2; m.sentiment += 0.20; }
-    else if (phase === 'finals') { m.traffic *= 1.5; m.nightlife *= 1.5; m.publicSpaces *= 1.3; m.communityEngagement *= 1.4; m.sentiment += 0.35; }
+    else if (phase === 'in-season') m.sentiment += 0.02;
+    else if (phase === 'mid-season') m.sentiment += 0.04;
+    else if (phase === 'late-season') m.sentiment += 0.06;
+    else if (phase === 'postseason') m.sentiment += 0.20;
+    else if (phase === 'finals') m.sentiment += 0.35;
 
-    // Cluster-specific sports ripple (Coliseum area = East Oakland/Waterfront)
-    if (phase === 'postseason' || phase === 'finals') {
-      if (clusterName === 'WATERFRONT_WEST') {
-        m.traffic *= 1.15;
-        m.nightlife *= 1.1;
-      }
-      if (clusterName === 'EAST_OAKLAND') {
-        m.traffic *= 1.1;
-        m.communityEngagement *= 1.1;
-      }
-      if (clusterName === 'DOWNTOWN_CORE') {
-        m.nightlife *= 1.15;
-        m.traffic *= 1.1;
+    var city = S.sportsCity || {};
+    var intensity = Number(city.intensity) || 0, signedCity = Number(city.signed) || 0, reach = Number(city.reach) || 0;
+    if (intensity > 0) {
+      // volume, unsigned: games draw people out whatever the score (Q2)
+      m.traffic *= 1 + 0.5 * intensity * reach;
+      // result, signed: a losing week empties the bars a little (floor 0.8)
+      m.nightlife *= Math.max(0.8, 1 + 0.5 * signedCity * reach);
+      // the gathering: today's constants as the band payload
+      if (city.band === 'top') { m.publicSpaces *= 1.3; m.communityEngagement *= 1.4; }
+      else if (city.band === 'high') m.communityEngagement *= 1.2;
+    }
+
+    // At the stadium: the cluster holding a franchise's venue, by that franchise's home
+    // volume (an away week puts nothing at the stadium). Baylight District sits in no
+    // cluster, so a Baylight home week lifts no cluster here — the hood writer reaches it.
+    var weeks = S.sportsWeek || {};
+    for (var f in weeks) {
+      if (!weeks.hasOwnProperty(f)) continue;
+      var x = (Number(weeks[f].unsigned) || 0) * (Number(weeks[f].venueShare) || 0);
+      if (!(x > 0)) continue;
+      var venue = weeks[f].venue || [];
+      for (var vi = 0; vi < venue.length; vi++) {
+        if (neighborhoodToCluster_(venue[vi], CLUSTERS) !== clusterName) continue;
+        m.traffic *= 1 + 0.15 * x;
+        m.nightlife *= 1 + 0.15 * x;
+        break;
       }
     }
   }

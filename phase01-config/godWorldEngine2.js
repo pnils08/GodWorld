@@ -1182,12 +1182,11 @@ function updateWorldPopulation_(ctx) {
 
   // Summer/outdoor event holidays boost service employment
 
-  // Sports season employment boost
-  if (sports === "championship") {
-    emp += 0.001;
-  } else if (sports === "playoffs" || sports === "post-season") {
-    emp += 0.0006;
-  }
+  // Sports employment — engine.204/205 §2.2: game-week volume, not the phase word
+  // (championship-week constant .001 at intensity 1; a week without games adds nothing)
+  var sportsCity = S.sportsCity || {};
+  var sportsIntensity = Number(sportsCity.intensity) || 0;
+  emp += 0.001 * sportsIntensity;
 
   // First Friday boosts arts/service employment
   if (isFirstFriday) {
@@ -1280,14 +1279,10 @@ function updateWorldPopulation_(ctx) {
     mig += Math.round(rng() * 15);
   }
 
-  // SPORTS SEASON EFFECTS
-  if (sports === "championship") {
-    mig += Math.round(rng() * 60);
-  } else if (sports === "playoffs" || sports === "post-season") {
-    mig += Math.round(rng() * 40);
-  } else if (sports === "late-season") {
-    mig += Math.round(rng() * 20);
-  }
+  // SPORTS — engine.204/205 §2.2: visitors follow the week's volume at its reach; no
+  // games, no draw (the rng is only consumed when a game week can move anyone)
+  var sportsPull = sportsIntensity * (Number(sportsCity.reach) || 0);
+  if (sportsPull > 0) mig += Math.round(rng() * 60 * sportsPull);
 
   // CHAOS → MOVEMENT VOLATILITY
   if (chaos.length > 0) mig += Math.round((rng() - 0.5) * 30);
@@ -1331,10 +1326,17 @@ function updateWorldPopulation_(ctx) {
     econ = "booming";
   }
 
-  // Championship economy boost
-  if (sports === "championship" && econ !== "weak") {
-    if (econ === "stable") econ = "strong";
-    if (econ === "strong") econ = "booming";
+  // Sports economy — engine.204/205 §2.2: the label follows the week's signed result.
+  // A top week above expectation books a boom, a high one a strong economy; a bad run
+  // at that size takes the label one step down (the downside it never had).
+  var sportsSigned = Number(sportsCity.signed) || 0;
+  if (sportsSigned > 0 && econ !== "weak") {
+    if (sportsCity.band === "top" && (econ === "stable" || econ === "strong")) econ = "booming";
+    else if (sportsCity.band === "high" && econ === "stable") econ = "strong";
+  } else if (sportsSigned < -0.3 && sportsBandAtLeast_(sportsCity, "high")) {
+    if (econ === "booming") econ = "strong";
+    else if (econ === "strong") econ = "stable";
+    else if (econ === "stable") econ = "unstable";
   }
 
   // ═══════════════════════════════════════════════════════════════════════════

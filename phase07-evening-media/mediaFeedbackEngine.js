@@ -119,6 +119,7 @@ function runMediaFeedbackEngine_(ctx) {
     isFirstFriday: S.isFirstFriday || false,
     isCreationDay: S.isCreationDay || false,
     sportsSeason: S.sportsSeason || 'off-season',
+    sportsCity: S.sportsCity || {},   // engine.204/205: the week's intensity / signed / reach / band
     season: S.season || 'unknown',
     seasonKey: String(S.season || 'unknown').toLowerCase(),   // engine.222: comparisons below were against lowercase and never matched the calendar's 'Winter'
     month: S.month || 0
@@ -528,17 +529,17 @@ function analyzeEntertainmentSignals_(ctx) {
   // v2.1: Enhanced sports coverage based on season
   if (sportsBroadcast && sportsBroadcast.indexOf('Game') !== -1) {
     var sportsHype = 'moderate';
-    var hopeBoost = 0.05;
+    // engine.204/205 §2.2: hope follows how the week went — a losing week adds none past
+    // the .05 floor; the hype label stays on the phase word (prose)
+    var sportsCityM = cal.sportsCity || {};
+    var hopeBoost = 0.05 + 0.10 * Math.max(0, Number(sportsCityM.signed) || 0) * (Number(sportsCityM.reach) || 0);
 
     if (cal.sportsSeason === 'championship') {
       sportsHype = 'championship';
-      hopeBoost = 0.15;
     } else if (cal.sportsSeason === 'playoffs') {
       sportsHype = 'playoffs';
-      hopeBoost = 0.1;
     } else if (cal.sportsSeason === 'late-season') {
       sportsHype = 'pennant_race';
-      hopeBoost = 0.08;
     }
 
     effects.coverageProfile.sportsHype = sportsHype;
@@ -1338,7 +1339,8 @@ function getMediaEventModifier_(ctx, eventCategory) {
     'crisis': effects.crisisSaturation > 0.5 ? 1.5 : 1.0,
     // v2.1: Calendar-specific modifiers
     'festival': cal.holiday !== 'none' ? 1.5 : 1.0,
-    'sports': cal.sportsSeason === 'championship' ? 2.0 : cal.sportsSeason === 'playoffs' ? 1.5 : 1.0,
+    // engine.204/205: the week's volume at its reach (top ≈ 2.0, high ≈ 1.5 — the old constants)
+    'sports': 1.0 + (Number((cal.sportsCity || {}).intensity) || 0) * (Number((cal.sportsCity || {}).reach) || 0),
     'arts': cal.isFirstFriday ? 1.4 : 1.0,
     'community': cal.isCreationDay ? 1.3 : 1.0
   };

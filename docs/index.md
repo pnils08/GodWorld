@@ -30,6 +30,7 @@ pointers:
 
 ## Repo root (outside `docs/`)
 
+- **`scripts/scanCitizenPages.js`** — corpus grep over the citizens' own pages (Supermemory `citizen-pages`, v3 list of all ~2,077 docs, regex over summaries, cp-POP tag → ledger join). Answers "which citizens say X in their own words" with deterministic coverage; v4 search is NOT coverage. First use: engine.208 fandom seed overrides (2026-10-02). Read-only, build/wake-side only.
 These files live at `/root/GodWorld/` and are catalogued here for completeness. They are not under the `docs/` tree but are load-bearing.
 
 - **`CONTEXT.md`** — project vocabulary. Every meaningful term defined exactly once. Read at boot; cite by canonical term; update inline when grilling sessions resolve a term. Adopted S187 (ADR-0001). *(reference, vocabulary, active)*

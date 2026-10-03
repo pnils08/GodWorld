@@ -73,20 +73,26 @@ console.log('1. ripple — one per franchise-week, signed');
 }
 
 // ── population ───────────────────────────────────────────────────────────────
-console.log('2. population label');
+console.log('2. economy label — one label, one owner (engine.281 (d))');
 {
-  const SRC = fs.readFileSync(path.join(ROOT, 'phase01-config/godWorldEngine2.js'), 'utf8');
-  const fn = SRC.slice(SRC.indexOf('function updateWorldPopulation_'));
-  const body = fn.slice(fn.indexOf('// Sports economy — engine.204/205'), fn.indexOf('// WRITE BACK TO SHEET'));
-  const label = new Function('econ', 'sportsCity', 'sportsBandAtLeast_',
-    'var sportsSigned = 0;' + body.replace(/^.*\n/, '').replace('var sportsSigned =', 'sportsSigned =') + '; return econ;');
-  const at = (econ, city) => label(econ, city, wsb.sportsBandAtLeast_);
+  const DRIFT = fs.readFileSync(path.join(ROOT, 'phase03-population/applyDemographicDrift.js'), 'utf8');
+  const label = new Function(DRIFT.match(/function sportsEconomyLabel_[\s\S]*?\n}\n/)[0] + '\nreturn sportsEconomyLabel_;')();
+  const at = (econ, city) => label(econ, city);
   check('top + above expectation: stable → booming', at('stable', { band: 'top', signed: 0.5 }) === 'booming');
   check('high + above: stable → strong, strong stays', at('stable', { band: 'high', signed: 0.3 }) === 'strong' && at('strong', { band: 'high', signed: 0.3 }) === 'strong');
   check('a bad high week steps strong down one', at('strong', { band: 'high', signed: -0.5 }) === 'stable');
   check('a bad week below high moves nothing', at('strong', { band: 'elevated', signed: -0.5 }) === 'strong');
-  check('weak is never lifted', at('weak', { band: 'top', signed: 0.9 }) === 'weak');
-  check('the phase word is not read', !/sports === "championship"|sports === "playoffs"|sports === "late-season"/.test(fn.slice(0, fn.indexOf('\nfunction ', 10))));
+  check('weak and struggling are never lifted', at('weak', { band: 'top', signed: 0.9 }) === 'weak' && at('struggling', { band: 'top', signed: 0.9 }) === 'struggling');
+  check('no week (override / quiet) leaves the label', at('strong', undefined) === 'strong' && at('stable', { band: 'quiet', signed: 0 }) === 'stable');
+  const dfn = DRIFT.slice(DRIFT.indexOf('function applyDemographicDrift_'));
+  check('drift owns it: applies the week rule, publishes to S.worldPopulation.economy, no championship-word boost',
+    /econ = sportsEconomyLabel_\(econ, S\.sportsCity\);/.test(dfn) && /if \(S\.worldPopulation\) S\.worldPopulation\.economy = econ;/.test(dfn)
+    && !/sportsSeason === "championship" && econ !== "weak"/.test(dfn));
+  const SRC = fs.readFileSync(path.join(ROOT, 'phase01-config/godWorldEngine2.js'), 'utf8');
+  const fn = SRC.slice(SRC.indexOf('function updateWorldPopulation_'));
+  const body = fn.slice(0, fn.indexOf('\nfunction ', 10));
+  check('updateWorldPopulation_ derives no label of its own', !/econ = "(booming|strong|weak|stable|unstable)"/.test(body));
+  check('the phase word is not read', !/sports === "championship"|sports === "playoffs"|sports === "late-season"/.test(body));
 }
 
 // ── shock monitor ────────────────────────────────────────────────────────────

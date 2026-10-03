@@ -366,10 +366,10 @@ function applyDemographicDrift_(ctx) {
     econ = "booming"; // Holiday spending boost
   }
 
-  // Championship economic boost
-  if (sportsSeason === "championship" && econ !== "weak" && econ !== "struggling") {
-    econ = "booming";
-  }
+  // Sports week — engine.204/205 §2.2 via engine.281 (d): the label follows the recorded
+  // week's signed result (S.sportsCity), not the phase word; replaces the S302-gated
+  // championship boost, which never fired on a feed Cycle
+  econ = sportsEconomyLabel_(econ, S.sportsCity);
 
   // Post-holiday slump
   if (holiday === "NewYear" && econ === "booming") {
@@ -388,6 +388,8 @@ function applyDemographicDrift_(ctx) {
   sheet.getRange(2, iEmp + 1).setValue(emp);
   // Migration write removed (v2.3) — owned by updateWorldPopulation_
   sheet.getRange(2, iEcon + 1).setValue(econ);
+  // engine.281 (d): the one label — story seeds and the cycle packet read it from here
+  if (S.worldPopulation) S.worldPopulation.economy = econ;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // SUMMARY
@@ -622,3 +624,24 @@ function pushMissingConfigWarning_(ctx, key, defaultValue) {
  *
  * ============================================================================
  */
+
+
+/**
+ * engine.204/205 §2.2 (engine.281 (d) moved it here, the label's one owner): the economy
+ * label follows the week's signed result. A top week above expectation books a boom, a high
+ * one a strong economy; a bad run at that size (signed < -0.3, band high or top) takes the
+ * label one step down. weak and struggling are never lifted. city = S.sportsCity.
+ */
+function sportsEconomyLabel_(econ, city) {
+  var c = city || {};
+  var signed = Number(c.signed) || 0;
+  if (signed > 0 && econ !== "weak" && econ !== "struggling") {
+    if (c.band === "top" && (econ === "stable" || econ === "strong")) return "booming";
+    if (c.band === "high" && econ === "stable") return "strong";
+  } else if (signed < -0.3 && (c.band === "high" || c.band === "top")) {
+    if (econ === "booming") return "strong";
+    if (econ === "strong") return "stable";
+    if (econ === "stable") return "unstable";
+  }
+  return econ;
+}

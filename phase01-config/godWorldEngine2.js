@@ -1311,33 +1311,13 @@ function updateWorldPopulation_(ctx) {
   if (total < 0) total = 0;
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // 6. ECONOMY LABEL
+  // 6. ECONOMY LABEL — engine.281 (d): one label, one owner. applyDemographicDrift_
+  // (Phase3-Demographics, the next phase; engine.102 sole owner of the sheet cell) sets the
+  // Cycle's label from economic mood + chaos + holiday + the sports week and publishes it
+  // to S.worldPopulation.economy. Until it runs, econ is last Cycle's label as read from
+  // the sheet row. (This function used to derive its own label from employment, so the
+  // packet / story seeds and the sheet / media packet could print two economies.)
   // ═══════════════════════════════════════════════════════════════════════════
-
-  if (emp > 0.94) econ = "strong";
-  else if (emp < 0.88) econ = "weak";
-  else econ = "stable";
-
-  // Chaos → can destabilize economy
-  if (chaos.length > 0 && econ === "stable") econ = "unstable";
-
-  // Major holidays during strong economy = "booming"
-  if (holidayPriority === "major" && emp > 0.92 && econ === "strong") {
-    econ = "booming";
-  }
-
-  // Sports economy — engine.204/205 §2.2: the label follows the week's signed result.
-  // A top week above expectation books a boom, a high one a strong economy; a bad run
-  // at that size takes the label one step down (the downside it never had).
-  var sportsSigned = Number(sportsCity.signed) || 0;
-  if (sportsSigned > 0 && econ !== "weak") {
-    if (sportsCity.band === "top" && (econ === "stable" || econ === "strong")) econ = "booming";
-    else if (sportsCity.band === "high" && econ === "stable") econ = "strong";
-  } else if (sportsSigned < -0.3 && sportsBandAtLeast_(sportsCity, "high")) {
-    if (econ === "booming") econ = "strong";
-    else if (econ === "strong") econ = "stable";
-    else if (econ === "stable") econ = "unstable";
-  }
 
   // ═══════════════════════════════════════════════════════════════════════════
   // WRITE BACK TO SHEET (v2.10: queued writes with column bounds checking)

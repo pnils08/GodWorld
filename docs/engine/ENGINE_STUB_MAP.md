@@ -214,7 +214,7 @@
 - **repairCycleCount_(ctx, sheet, rowNum, expected, sawValue)**
 
 - **updateWorldPopulation_(ctx)**
-  Reads: S.cityDynamics, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.sportsCity, S.sportsSeason, S.weather, S.worldEvents
+  Reads: S.cityDynamics, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.sportsCity, S.sportsSeason, S.weather, S.worldEvents, S.worldPopulation
   Writes: S.worldPopulation
   Sheets: World_Population
   RNG: ctx.rng / safeRand_(ctx)
@@ -633,7 +633,7 @@
 
 ### applyDemographicDrift.js
 - **applyDemographicDrift_(ctx)**
-  Reads: S.cityDynamics, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.sportsAtmosphereEnabled, S.sportsSeason, S.weather, S.weatherEvents, S.weatherMood, S.worldEvents
+  Reads: S.cityDynamics, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.sportsAtmosphereEnabled, S.sportsCity, S.sportsSeason, S.weather, S.weatherEvents, S.weatherMood, S.worldEvents, S.worldPopulation
   Writes: S.demographicDrift, S.employmentDistress, S.hospitalTalkback, S.migrationClamps
   Sheets: World_Population
   RNG: ctx.rng / safeRand_(ctx)
@@ -655,6 +655,8 @@
 - **pushMissingConfigWarning_(ctx, key, defaultValue)**
   Reads: S._configMissingWarnings, S.auditIssues
   Writes: S._configMissingWarnings, S.auditIssues
+
+- **sportsEconomyLabel_(econ, city)**
 
 ### deriveDemographicDrift.js
 - **deriveDemographicDrift_(ctx)**
@@ -4497,4 +4499,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1602
+**Functions mapped:** 1603

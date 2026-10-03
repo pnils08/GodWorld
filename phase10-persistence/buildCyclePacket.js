@@ -203,9 +203,12 @@ function buildCyclePacket_(ctx) {
       ', load ' + Math.round(hospital.load * 100) + '%)');
   }
   // engine.254 Task 10 — the talk-back watched (builder 2026-10-02): census city
-  // beds read, the ward's recent middle, and what was added to illness.
+  // beds read, the ward's recent middle, and what was added to illness. Its own
+  // section so it survives the KEEP filter below (POPULATION is trimmed).
   var strain = S.hospitalTalkback;
   if (strain && strain.state) {
+    lines.push('');
+    lines.push('--- HOSPITAL STRAIN ---');
     lines.push('HospitalStrain: ' + strain.state +
       (strain.cycleRead !== null && strain.cycleRead !== undefined ? ' | census C' + strain.cycleRead : '') +
       (strain.beds !== null && strain.beds !== undefined ? ' | beds ' + strain.beds : '') +
@@ -768,7 +771,8 @@ function buildCyclePacket_(ctx) {
   // reader — pure noise in the tab and in every LLM search that grepped it.
   // Emitter blocks above are untouched (reversible: edit KEEP list to restore).
   var KEEP_SECTIONS = ['CALENDAR', 'CITY DYNAMICS', 'MEDIA CLIMATE', 'WEATHER MOOD',
-    'EVENING CITY', 'CRIME SNAPSHOT', 'TRANSIT'];
+    'EVENING CITY', 'CRIME SNAPSHOT', 'TRANSIT',
+    'HOSPITAL STRAIN']; // engine.254 Task 10: the talk-back watched, one line
   var filtered = [];
   var keeping = true;
   for (var li = 0; li < lines.length; li++) {

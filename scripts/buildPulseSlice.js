@@ -53,7 +53,7 @@ const THEMES = [
   { key: 'council', label: 'the council', re: /\b(?:council|the mayor|Santana|city hall|district \d|the vote|ordinance|Okoro|the hearing|the budget)\b/i }
 ];
 // A page that names a real-world date or the tooling is not a citizen's voice for the paper.
-const LEAK_RE = /\b20\d\d-\d\d-\d\d\b|\b(?:Claude|Codex|Anthropic|Supermemory|OpenRouter|Gemini)\b/;
+const LEAK_RE = /\b20\d\d-\d\d-\d\d\b|\b(?:Claude|Codex|Anthropic|Supermemory|OpenRouter|Gemini)\b/i;
 // An office speaks through the civic record (sourcing mode `offices`), not through the pulse —
 // a director's page line is the office talking, not the block. Same shape as the packet's isOfficial.
 const OFFICIAL_RE = /\b(?:council|mayor|director|chief|commissioner|superintendent|district attorney|city clerk|program lead|planning lead)\b/i;
@@ -74,27 +74,16 @@ function adHocThemes(root, cycle) {
       .map(r => ({ name: String(r.Name).trim(), n: K.num(r.MediaCount) || 0 }))
       .sort((a, b) => b.n - a.n).slice(0, 5);
     for (const r of rows) {
-      const last = r.name.split(/\s+/).slice(-1)[0];
-      // Full name, or the surname when it is long enough not to be a common word.
-      const alt = last.length >= 5 ? '|' + esc(last) : '';
-      out.push({ key: 'adhoc:' + r.name, label: r.name, adHoc: true, re: new RegExp('\\b(?:' + esc(r.name) + alt + ')\\b') });
+      // Full name only, case-sensitive: a surname alone ("Cross", "Monroe") is a word in someone
+      // else's sentence (agy recount 2026-10-03 caught it on Lena Cross).
+      out.push({ key: 'adhoc:' + r.name, label: r.name, adHoc: true, re: new RegExp('\\b' + esc(r.name) + '\\b') });
     }
   } catch (_) { /* no culture record on disk — standing list only */ }
   return out;
 }
 
-/** Some pages were stored with the wake's raw wrapper around them (a ```json block, an {"answer":"quote","quote":"…"} object, a leading "--- "). The citizen's words are inside; take those. */
-function citizenText(text) {
-  let t = String(text || '');
-  const q = t.match(/"quote"\s*:\s*"((?:[^"\\]|\\.)*)"/);
-  if (q) t = q[1].replace(/\\"/g, '"').replace(/\\n/g, ' ');
-  t = t.replace(/```(?:json)?/g, ' ').replace(/^\s*(?:---\s*)+/, '').replace(/\s*---\s*$/, '');
-  t = t.replace(/\bTENSION(?:-RESOLVED)?\[c\d+\]:\s*/g, '');
-  return t;
-}
-
 function excerptFor(text, re) {
-  const clean = citizenText(text).replace(/\s+/g, ' ').trim();
+  const clean = pages.citizenText(text).replace(/\s+/g, ' ').trim();
   const m = re.exec(clean);
   if (!m) return null;
   // The sentence that holds the match.
@@ -159,11 +148,18 @@ function build(cycle, { root = ROOT } = {}) {
       // ("TENSION[c108]: Will the Oaks improve…"), counted toward the theme, never read as their words.
       const docs = hits.filter(x => x.r.popId === e.popid && x.r.type === 'reflection').map(x => x.r)
         .sort((a, b) => b.cycle - a.cycle || String(b.createdAt).localeCompare(String(a.createdAt)));
-      const doc = docs.find(d => !LEAK_RE.test(d.content));
+      // The first doc that passes the leak guard AND yields an excerpt in the cleaned text (kimi F8:
+      // a theme can match raw content that the cleaner strips — never print “null”).
+      let doc = null, excerpt = null;
+      for (const d of docs) {
+        if (LEAK_RE.test(d.content)) continue;
+        const ex = excerptFor(d.content, t.re);
+        if (ex) { doc = d; excerpt = ex; break; }
+      }
       if (!doc) { excluded.leak++; continue; }
       voices.push({ popid: e.popid, name: String(e.p.Name || '').trim(), hood: String(e.p.Neighborhood || '').trim() || null,
         role: String(e.p.RoleType || '').trim() || null, docs: e.docs, cycle: doc.cycle, customId: doc.customId, docId: doc.docId,
-        excerpt: excerptFor(doc.content, t.re) });
+        excerpt });
       used.add(e.popid);
       if (voices.length >= VOICES) break;
     }
@@ -189,9 +185,11 @@ function voiceLines(pulse, max = TOP_THEMES) {
     // Words, not counts: her stance line asks for "a window and a number from the slice", and the
     // pulse is the one thing on it that must never print as a number. The counts stay in the JSON.
     const scale = t.citizens >= 40 ? 'most of the city' : t.citizens >= 16 ? 'dozens of citizens' : t.citizens >= 6 ? 'a dozen or so citizens' : 'a handful of citizens';
+    // The guardrail rides inside the string so it survives into the packet JSON (kimi F2): a page
+    // line is the citizen's own page, not an interview — never printed as a quote.
     out.push(t.label + ' — ' + t.trend + (t.adHoc ? ' (a name on the culture record)' : '') + '; ' + scale + ' over the last two months' +
       (t.thisCycle ? ', still talking this week' : ', quiet this week') +
-      (v ? '. Loudest: ' + v.name + (v.hood ? ' (' + v.hood + ')' : '') + ', said at C' + v.cycle + ': “' + v.excerpt + '”' : ''));
+      (v ? '. Loudest: ' + v.name + (v.hood ? ' (' + v.hood + ')' : '') + ', on their own page at C' + v.cycle + ' (not an interview — colour only, never a quote): “' + v.excerpt + '”' : ''));
   }
   return out;
 }
@@ -242,7 +240,7 @@ function load(cycle, root = ROOT) {
   try { const j = JSON.parse(fs.readFileSync(paths(cycle, root).json, 'utf8')); return j && j.version === VERSION && Number(j.cycle) === Number(cycle) ? j : null; } catch (_) { return null; }
 }
 
-module.exports = { VERSION, THEMES, build, write, load, paths, voiceLines, formatMarkdown, excerptFor, citizenText };
+module.exports = { VERSION, THEMES, build, write, load, paths, voiceLines, formatMarkdown, excerptFor };
 
 if (require.main === module) {
   const cycle = arg('--cycle', null) || (() => { try { return require(path.join(ROOT, 'lib', 'getCurrentCycle'))({ soft: true, noArgv: true }); } catch (_) { return null; } })();

@@ -235,6 +235,28 @@ assert.equal(official.exposure.evidence[0].text, story.hookLine);
 assert.ok(/^EV-[0-9a-f]{10}$/.test(official.exposure.evidence[0].id));
 assert.deepStrictEqual(resident.exposure.evidence, [], 'proximity-only candidate gets no evidence row');
 
+const pageCandidate = {
+  pop: 'POP-90013', name: 'Test Page Citizen', role: 'Resident', hood: 'TEST-HOOD',
+  profile: 'Test Page Citizen — Resident', sourceKind: 'page-line', why: 'assignment',
+  evidence: { source: 'output/citizen_pages/index.jsonl', docId: 'test-only-doc-13',
+    customId: 'cp-POP-90013-c998-morning', cycle: 998,
+    excerpt: 'I keep going back to Test Venue.', entity: 'Test Venue', predicate: 'attendance' },
+};
+const pagePacket = p.buildReportPacket({ cycle: 999, desk: 'culture', reporter: { name: 'Test Reporter' },
+  angleInput: w1, anglePlan: plan, story, candidate: pageCandidate });
+assert.equal(pagePacket.known[0].t, 'INTERPRETATION');
+assert.equal(pagePacket.known[0].src, pageCandidate.evidence.customId);
+assert.equal(pagePacket.known[0].text, pageCandidate.evidence.excerpt);
+assert.deepEqual(pagePacket.known[1], { t: 'FACT', text: pageCandidate.profile,
+  src: 'Simulation_Ledger profile for ' + pageCandidate.pop });
+assert.equal(pagePacket.known.length, 2, 'page content does not inherit unrelated angle facts');
+assert.match(pagePacket.exposure.evidence[0].id, /^EV-PAGE-[0-9a-f]{10}$/);
+assert.equal(pagePacket.exposure.evidence[0].src, pageCandidate.evidence.customId);
+assert.equal(pagePacket.exposure.evidence[0].text, pageCandidate.evidence.excerpt);
+assert.equal(pagePacket.task.question, 'Your own page at C998 says: "I keep going back to Test Venue". ' +
+  'Is that still how you see Test Venue? Speak only from that and your own reaction.');
+assert.equal(p.isProximityCandidate(pageCandidate), false);
+
 const evForNoRefStory = p.buildReportPacket({ cycle: 999, desk: 'civic', reporter: { name: 'Test Reporter' },
   angleInput: w1, anglePlan: plan, story: { ...story, ref: undefined }, candidate: candidates[0] });
 assert.deepStrictEqual(evForNoRefStory.exposure.evidence, [],

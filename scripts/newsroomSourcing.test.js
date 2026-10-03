@@ -47,7 +47,7 @@ assert.equal(workplace.candidates[0].evidence.bizId, 'BIZ-90001');
 
 const streetStory = { venue: 'Test Venue', pulseClass: 'nightlife-spot' };
 const streetSlice = { pulse: { className: 'nightlife-spot', venue: 'Test Venue' }, hood: 'Test District' };
-const streetOpts = { meta: { cycle: 999 }, ledgerRows: [
+const streetOpts = { meta: { cycle: 999 }, pageIndex: [], ledgerRows: [
   { POPID: 'POP-90007', Name: 'Test Visitor', Status: 'Active',
     LifeHistory: 'Y20C11 — [PrevEvening] visited Test Venue after work' },
   { POPID: 'POP-90008', Name: 'Test Hood Resident', Status: 'Active',
@@ -61,6 +61,53 @@ const street = source.buildPool({ mode: 'street', story: streetStory, slice: str
   seat: 'talia-finch', cycle: 999, beats, streetOptions: streetOpts });
 assert.deepEqual(street.candidates.map(c => c.pop), ['POP-90007']);
 assert.equal(street.candidates[0].evidence.line, streetOpts.ledgerRows[0].LifeHistory);
+assert.deepEqual(source.buildPool({ mode: 'street', story: streetStory, slice: streetSlice,
+  seat: 'talia-finch', cycle: 999, beats, root, streetOptions: { ...streetOpts, pageIndex: [] } }).candidates,
+  street.candidates, 'an empty page index leaves the life-line pool unchanged');
+const streetWithoutIndex = { ...streetOpts };
+delete streetWithoutIndex.pageIndex;
+assert.deepEqual(source.buildPool({ mode: 'street', story: streetStory, slice: streetSlice,
+  seat: 'talia-finch', cycle: 999, beats, root, streetOptions: streetWithoutIndex }).candidates,
+  street.candidates, 'a missing index file leaves the life-line pool unchanged');
+const pageRows = [
+  { POPID: 'POP-90013', Name: 'Test Page Citizen', Status: 'Active' },
+  { POPID: 'POP-90014', Name: 'Test Tension Citizen', Status: 'Active' },
+  { POPID: 'POP-90015', Name: 'Test Reporter', Status: 'Active', ClockMode: 'MEDIA' },
+  { POPID: 'POP-90016', Name: 'Test Athlete', Status: 'Active', ClockMode: 'GAME' },
+  { POPID: 'POP-90017', Name: 'Test Date Citizen', Status: 'Active' },
+  { POPID: 'POP-90018', Name: 'Test Neutral Citizen', Status: 'Active' },
+  { POPID: 'POP-90019', Name: 'Test Sports Override', Status: 'Active', EconomicProfileKey: 'SPORTS_OVERRIDE' },
+  { POPID: 'POP-90020', Name: 'Test Future Citizen', Status: 'Active' },
+];
+const pageDoc = (popId, cycle, content, type = 'reflection') => ({
+  popId, cycle, content, type, createdAt: 'test-only-order',
+  docId: 'test-only-doc-' + popId + '-' + cycle,
+  customId: 'cp-' + popId + '-c' + cycle + '-morning',
+});
+const pageOpts = { ...streetOpts, ledgerRows: streetOpts.ledgerRows.concat(pageRows), pageIndex: [
+  pageDoc('POP-90013', 997, 'I used to visit Test Venue.'),
+  pageDoc('POP-90013', 998, 'I keep going back to Test Venue.'),
+  pageDoc('POP-90007', 998, 'I keep going back to Test Venue.'),
+  pageDoc('POP-90014', 998, 'I worry about Test Venue.', 'tension'),
+  pageDoc('POP-90015', 998, 'I like Test Venue.'),
+  pageDoc('POP-90016', 998, 'I like Test Venue.'),
+  pageDoc('POP-90017', 998, 'On 2026-10-03 I visited Test Venue.'),
+  pageDoc('POP-90018', 998, 'Test Venue reopened.'),
+  pageDoc('POP-90019', 998, 'I like Test Venue.'),
+  pageDoc('POP-90020', 1000, 'I like Test Venue.'),
+] };
+const withPages = source.buildPool({ mode: 'street', story: streetStory, slice: streetSlice,
+  seat: 'talia-finch', cycle: 999, beats, root, streetOptions: pageOpts });
+assert.deepEqual(withPages.candidates.map(c => c.pop), ['POP-90007', 'POP-90013']);
+assert.deepEqual(withPages.candidates.map(c => c.sourceKind), ['life-line', 'page-line']);
+assert.equal(withPages.candidates[1].evidence.cycle, 998);
+assert.equal(withPages.candidates[1].evidence.customId, 'cp-POP-90013-c998-morning');
+assert.equal(withPages.candidates[1].evidence.excerpt, 'I keep going back to Test Venue.');
+assert.equal(withPages.candidates[1].matchedPageLine, withPages.candidates[1].evidence.excerpt);
+assert.equal(source.buildPool({ mode: 'street', story: streetStory, slice: streetSlice,
+  seat: 'talia-finch', cycle: 999, beats, root,
+  streetOptions: { ...streetOpts, ledgerRows: pageRows, pageIndex: [] } }).candidates.length, 0,
+  'an empty page index creates no page-line candidates');
 assert.deepEqual(source.buildPool({ mode: 'street', story: streetStory, slice: streetSlice,
   seat: 'talia-finch', cycle: 999, beats, streetOptions: { ...streetOpts, meta: { cycle: 998 } } }).candidates, []);
 

@@ -213,6 +213,8 @@ function creativeBriefFromSlice(slice) {
       engineHooks: (prewrite.hooks || []).slice(0, 4).map(h => clean(
         [h && h.text, h && h.angle ? '(' + h.angle + ')' : null].filter(Boolean).join(' '), 240)).filter(Boolean),
       roomIsYours: clean(prewrite.roomIsYours, 300) || null,
+      // pipeline.70: what the citizens' own pages say — colour and sourcing, never a number in print.
+      pageVoices: (prewrite.pageVoices || []).slice(0, 5).map(v => clean(v, 320)).filter(Boolean),
       forbidden: uniq(prewrite.forbidden).slice(0, 6),
     };
   } else if (slice.kind === 'economic-storefront' || slice.kind === 'food-workplaces') {
@@ -702,6 +704,12 @@ function isProximityCandidate(candidate) {
   return PROXIMITY_WHY.has(why) || /^bond-hop\b/.test(why);
 }
 function evidenceFor(candidate, story) {
+  if (candidate && candidate.sourceKind === 'page-line' && candidate.evidence &&
+      candidate.evidence.customId && candidate.evidence.excerpt) {
+    return [{ id: 'EV-PAGE-' + crypto.createHash('sha256').update(candidate.pop + '|' +
+      candidate.evidence.customId).digest('hex').slice(0, 10),
+      src: candidate.evidence.customId, text: candidate.evidence.excerpt }];
+  }
   if (candidate && candidate.sourceKind === 'life-line' && candidate.evidence &&
       candidate.evidence.line && candidate.evidence.source) {
     return [{ id: 'EV-LIFE-' + crypto.createHash('sha256').update(candidate.pop + '|' +
@@ -723,7 +731,10 @@ function buildReportPacket({ cycle, desk, reporter, angleInput, anglePlan, story
   if (!story || !candidate) throw new Error('W2 Packet requires story+candidate');
   const src = story.ref || 'assignment';
   const streetLife = candidate.sourceKind === 'life-line' && candidate.evidence && candidate.evidence.line;
-  const known = streetLife
+  const streetPage = candidate.sourceKind === 'page-line' && candidate.evidence && candidate.evidence.excerpt;
+  const known = streetPage
+    ? [refClaim('INTERPRETATION', candidate.evidence.excerpt, candidate.evidence.customId)]
+    : streetLife
     ? [refClaim('FACT', candidate.evidence.line, candidate.evidence.source)]
     : (angleInput && angleInput.known || []).filter(c => c.t === 'FACT').slice(0, 8);
   if (candidate.profile && !streetLife) known.push(refClaim('FACT', candidate.profile, 'Simulation_Ledger profile for ' + candidate.pop));
@@ -741,6 +752,10 @@ function buildReportPacket({ cycle, desk, reporter, angleInput, anglePlan, story
             candidate.evidence.predicate === 'watch' ? 'think when you watched ' :
               candidate.evidence.predicate === 'fan' ? 'do as a fan of ' : 'notice about ') +
           candidate.evidence.entity + '? Speak only from that line and your own reaction.')
+        : streetPage
+          ? ('Your own page at C' + candidate.evidence.cycle + ' says: "' +
+            String(candidate.evidence.excerpt).replace(/[.\s]+$/, '') + '". Is that still how you see ' +
+            candidate.evidence.entity + '? Speak only from that and your own reaction.')
         : questionFor(candidate, anglePlan, story) },
     signal: { kind: story.kind || 'story-signal', hood: story.hood || null,
       focus: clean(anglePlan && anglePlan.focus || story.angle || story.label, 500), src },

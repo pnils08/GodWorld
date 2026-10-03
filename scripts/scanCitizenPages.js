@@ -13,7 +13,9 @@
  *   --pattern   corpus grep (the original use: engine.208 fandom seed overrides, 2026-10-02).
  *               Reads the index when it exists, else the list summaries.
  *
- * ADMISSION (the leak guard lives HERE, not in the consumers — every reader inherits it):
+ * ADMISSION (the office/journal/slot/type classes are decided HERE, once, and every reader inherits it;
+ * the cycle cap is dropped when no live cycle is on disk (meta.liveCycle null) and real-world dates in page
+ * TEXT are not a dump concern — both consumers re-filter: cycle window + content leak guard):
  *   - customId `cp-POP-xxxxx-c<N>-<slot>` (every doc is Cycle-addressable)
  *   - metadata.type `reflection` or `tension` — never `office-position` (civic office statements,
  *     CIVIC-cascade-STMT-* / CIVIC-datawake-*, ~425 docs; they have their own record)
@@ -106,6 +108,16 @@ async function getContent(id) {
 
 function liveCycle() {
   try { return require(path.join(ROOT, 'lib', 'getCurrentCycle'))({ soft: true, noArgv: true }); } catch (e) { return null; }
+}
+
+/** Some pages were stored with the wake's raw wrapper around them (a ```json block, an {"answer":"quote","quote":"…"} object, a leading "--- "). The citizen's words are inside; take those. */
+function citizenText(text) {
+  let t = String(text || '');
+  const q = t.match(/"quote"\s*:\s*"((?:[^"\\]|\\.)*)"/);
+  if (q) t = q[1].replace(/\\"/g, '"').replace(/\\n/g, ' ');
+  t = t.replace(/```(?:json)?/g, ' ').replace(/^\s*(?:---\s*)+/, '').replace(/\s*---\s*$/, '');
+  t = t.replace(/\bTENSION(?:-RESOLVED)?\[c\d+\]:\s*/g, '');
+  return t;
 }
 
 /** loadIndex(root?) -> rows (newest first). Missing index -> []. Never throws on a bad line. */
@@ -229,7 +241,7 @@ async function grep() {
   if (OUT) { fs.writeFileSync(OUT, JSON.stringify({ pattern, container: CONTAINER, via, scanned: docs.length, citizens: table, docs: perDoc }, null, 2)); console.error('->', OUT); }
 }
 
-module.exports = { INDEX_DIR, INDEX_PATH, META_PATH, SLOT_RE, TYPES, RULE, admit, loadIndex, loadMeta, dumpIndex, listAll };
+module.exports = { INDEX_DIR, INDEX_PATH, META_PATH, SLOT_RE, TYPES, RULE, admit, loadIndex, loadMeta, dumpIndex, listAll, citizenText };
 
 if (require.main === module) {
   (async () => {

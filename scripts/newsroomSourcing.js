@@ -263,7 +263,8 @@ function street(story, slice, cycle, root, seat, opts = {}) {
   }
   if (!highlights.length) return Object.freeze([]);
   const out = [];
-  for (const row of opts.ledgerRows || ledgerRows(root)) {
+  const ledger = opts.ledgerRows || ledgerRows(root);
+  for (const row of ledger) {
     if (clean(row.Status).toLowerCase() !== 'active') continue;
     for (const raw of String(row.LifeHistory || '').split(/\r?\n/)) {
       const life = parseLife(raw);
@@ -279,6 +280,55 @@ function street(story, slice, cycle, root, seat, opts = {}) {
           entity: hit.entity, predicate: hit.predicate }, { matchedLifeLine: life.line }));
       break;
     }
+  }
+  // pipeline.70 seam 1: a second evidence source — the citizen's own page (the most recent
+  // reflection naming the entity, in first person; stamped with its Cycle). The index is
+  // scanCitizenPages.js --dump; missing index = no page-line candidates, never a throw.
+  let pageIndex = opts.pageIndex;
+  let citizenText = (t) => String(t || '');
+  try {
+    const pages = require('./scanCitizenPages');
+    citizenText = pages.citizenText || citizenText; // an export shuffle degrades to identity, never a TypeError (kimi F1)
+    if (pageIndex === undefined) pageIndex = pages.loadIndex(root);
+  } catch (_) { if (pageIndex === undefined) pageIndex = []; }
+  if (!Array.isArray(pageIndex) || !pageIndex.length) return unique(out);
+  const lifePops = new Set(out.map(c => c.pop));
+  const pagesByPop = new Map();
+  for (const doc of pageIndex.slice().sort((a, b) =>
+    (Number(b.cycle) - Number(a.cycle)) ||
+    String(b.createdAt || '').localeCompare(String(a.createdAt || '')))) {
+    if (!doc || doc.type !== 'reflection' || Number(doc.cycle) > Number(cycle) ||
+        !/^POP-\d{5}$/.test(clean(doc.popId)) ||
+        /\b20\d\d-\d\d-\d\d\b|\b(?:Claude|Codex|Anthropic|Supermemory|OpenRouter|Gemini)\b/i.test(String(doc.content || ''))) continue;
+    if (!pagesByPop.has(doc.popId)) pagesByPop.set(doc.popId, []);
+    pagesByPop.get(doc.popId).push(doc);
+  }
+  const firstPerson = /\b(?:I|I['’]m|I['’]ve|I['’]d|I['’]ll|me|my|mine|we|we['’]re|us|our)\b/i;
+  for (const row of ledger) {
+    if (clean(row.Status).toLowerCase() !== 'active') continue;
+    const pop = clean(row.POPID || row.PopId || row.POP_ID);
+    if (lifePops.has(pop) ||
+        ['MEDIA', 'GAME'].includes(clean(row.ClockMode).toUpperCase()) ||
+        clean(row.EconomicProfileKey).toUpperCase() === 'SPORTS_OVERRIDE') continue;
+    let match = null;
+    for (const doc of pagesByPop.get(pop) || []) {
+      const sentences = citizenText(doc.content).match(/[^.!?\r\n]+[.!?]*/g) || [];
+      for (const sentence of sentences) {
+        const hit = highlights.find(h => phrase(sentence, h.entity) &&
+          (verbSupports(sentence, h.predicate) || firstPerson.test(sentence)));
+        if (!hit) continue;
+        match = { doc, hit, excerpt: sentence.replace(/\s+/g, ' ').trim().slice(0, 240) };
+        break;
+      }
+      if (match) break;
+    }
+    if (!match) continue;
+    const { doc, hit, excerpt } = match;
+    out.push(frozen('street', 'page-line', row,
+      { source: 'output/citizen_pages/index.jsonl', docId: doc.docId,
+        customId: doc.customId, cycle: Number(doc.cycle), excerpt,
+        highlightKind: hit.kind, entity: hit.entity, predicate: hit.predicate },
+      { matchedPageLine: excerpt }));
   }
   return unique(out);
 }

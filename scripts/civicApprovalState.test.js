@@ -282,7 +282,9 @@ console.log('═══ G. civic.38 Task 5 — the sponsor owns its bill; a reviv
   let rngQueue = [];
   G.safeRand_ = () => () => (rngQueue.length ? rngQueue.shift() : 0.5);   // past the queue: 0.5 → an unnamed IND votes no
   const E = new Function(src('../phase01-config/advanceSimulationCalendar.js') + '\n' + src('../phase05-citizens/civicInitiativeEngine.js') +
-    '\nreturn { runCivicInitiativeEngine_, resolveCouncilVote_, getBoardState_: typeof getBoardState_ === "function" ? getBoardState_ : () => { throw new Error("getBoardState_ absent"); } };')();
+    '\nreturn { runCivicInitiativeEngine_, resolveCouncilVote_, civicStageStep_, renewalEligibility_,' +
+    ' getBoardState_: typeof getBoardState_ === "function" ? getBoardState_ : () => { throw new Error("getBoardState_ absent"); },' +
+    ' initiativeVoted_: typeof initiativeVoted_ === "function" ? initiativeVoted_ : () => { throw new Error("initiativeVoted_ absent"); } };')();
   const IT_HEAD = ['InitiativeID','Name','Type','Status','Budget','VoteRequirement','VoteCycle','Projection','LeadFaction','OppositionFaction','SwingVoter','Outcome','SwingVoter2','SwingVoter2Lean','Consequences','Notes','LastUpdated','AffectedNeighborhoods','PolicyDomain','MayoralAction','MayoralActionCycle','VetoReason','OverrideVoteCycle','OverrideOutcome','ImplementationPhase','MilestoneNotes','NextScheduledAction','NextActionCycle','Proposer','ProposingOffice','ProposedCycle','Stage','StageBaseline','LastStageChangeCycle','LastWorkCycle','LastWorkSeat','PriorPhase','StageHold','BudgetTotal','BudgetRemaining','LastDisburseCycle','OpensCycle','BizID','OpenTrackedSlots','RenewalVoteCycle','RenewalAmount','RenewalOutcome','RenewalCreditCycle'];
   const COL_HEAD = ['OfficeId','Title','Type','District','Holder','PopId','TermStart','TermEnd','TermYears','ElectionGroup','Status','LastElection','NextElection','Notes','','VotingPower','Faction','ExecutiveActions','Approval','HighApprovalStreak','AutoScandalUntilCycle','AutoScandalSource'];
   const seat = (id, title, district, holder, pop, group, faction) => [id, title, 'elected', district, holder, pop, 1, 209, 4, group, 'active', '', '', '', '', 'yes', faction, '', 65, 0, '', ''];
@@ -300,8 +302,9 @@ console.log('═══ G. civic.38 Task 5 — the sponsor owns its bill; a reviv
       setValue: (v) => { values[r - 1][c - 1] = v; }, setValues: (vs) => { for (let i = 0; i < vs.length; i++) values[r - 1 + i] = vs[i].slice(); } }; } });
   const initRow = (o) => { const r = IT_HEAD.map(() => ''); const set = (k, v) => { r[IT_HEAD.indexOf(k)] = v; };
     set('InitiativeID', o.id); set('Name', o.name); set('Type', 'vote'); set('Status', o.status || 'active'); set('Budget', '$1M'); set('VoteRequirement', o.req || '5-4'); set('VoteCycle', 110);
-    set('Projection', 'lean pass'); set('LeadFaction', 'OPP'); set('OppositionFaction', 'CRC'); set('SwingVoter', 'Ramon Vega'); set('SwingVoter2', 'Leonard Tran'); set('SwingVoter2Lean', 'toss-up');
+    set('Projection', 'lean pass'); set('LeadFaction', o.lead || 'OPP'); set('OppositionFaction', o.opp || 'CRC'); set('SwingVoter', 'Ramon Vega'); set('SwingVoter2', 'Leonard Tran'); set('SwingVoter2Lean', 'toss-up');
     set('AffectedNeighborhoods', 'Temescal'); set('PolicyDomain', o.domain); set('MayoralAction', o.mayoral || ''); set('Notes', ''); set('BudgetTotal', 1000000); set('BudgetRemaining', 1000000);
+    if (o.override) { set('OverrideVoteCycle', 110); set('MayoralAction', 'vetoed'); set('VetoReason', 'test'); }
     if (o.renew) { set('Stage', 'Standing'); set('ImplementationPhase', 'operational'); set('RenewalVoteCycle', 110); set('RenewalAmount', 500000); set('RenewalOutcome', ''); set('MilestoneNotes', 'notes'); set('LastStageChangeCycle', 109); set('LastWorkCycle', 109); }
     return r; };
   // the live civic dials a staged row's stall clock reads (World_Config 2026-10-04)
@@ -328,7 +331,8 @@ console.log('═══ G. civic.38 Task 5 — the sponsor owns its bill; a reviv
   check('T3.3 a safety initiative in the same fire is still the council\'s: nine council votes, no board name, no "School board"',
     saf.Status === 'passed' && votes(saf.Notes) === 9 && namesIn(saf.Notes, COUNCIL_NAMES).length === 9 && namesIn(saf.Notes, BOARD_NAMES).length === 0 && !/School board/.test(saf.Notes), saf.Notes);
   check('T3.4 a passed board vote gets no mayoral veto roll: MayoralAction untouched, Status passed', edu.MayoralAction === '' && edu.Status === 'passed', JSON.stringify([edu.MayoralAction, edu.Status]));
-  check('T3.5 votesThisCycle names the body', JSON.stringify(a.ctx.summary.votesThisCycle.map(v => [v.name, v.body])) === JSON.stringify([['After-School Literacy Corps', 'school board'], ['Corner Lighting', 'council']]));
+  check('T3.5 votesThisCycle: the board vote names its body; the council event keeps its old shape (no body key)',
+    a.ctx.summary.votesThisCycle[0].body === 'school board' && !('body' in a.ctx.summary.votesThisCycle[1]), JSON.stringify(a.ctx.summary.votesThisCycle.map(v => [v.name, v.body])));
   const b = fire([{ id: 'INIT-E2', name: 'Summer Reading Bridge', domain: 'education', req: '6-3' }], boardRows(), YES3);
   check('T3.6 three yes fails (4 of 7 is the bar, whatever the row\'s VoteRequirement says)', b.row('INIT-E2').Status === 'failed' && /School board: Failed 3-4\./.test(b.row('INIT-E2').Notes), b.row('INIT-E2').Notes);
   const c = fire([{ id: 'INIT-E3', name: 'Counselor Corps', domain: 'education' }], boardRows(['active', 'hospitalized']), YES4);
@@ -340,8 +344,37 @@ console.log('═══ G. civic.38 Task 5 — the sponsor owns its bill; a reviv
   const e = fire([{ id: 'INIT-E5', name: 'Library Hours', domain: 'education' }], [], YES4);
   check('T3.9 no board seated (before Task 2): delayed with the cause, never passed, never a council vote',
     e.row('INIT-E5').Status === 'delayed' && /No school board seated; 4 votes required/.test(e.row('INIT-E5').Notes) && votes(e.row('INIT-E5').Notes) === 0, e.row('INIT-E5').Notes);
-  const f = fire([{ id: 'INIT-E6', name: 'Tutoring Fund', domain: 'education', status: 'passed', mayoral: 'signed', renew: true }], boardRows(), YES4);
-  check('T3.10 an education program\'s renewal is the board\'s vote too', /^RENEWED 4-3 C110$/.test(f.row('INIT-E6').RenewalOutcome) && /school board renews Tutoring Fund/.test(f.row('INIT-E6').Notes) && namesIn(f.row('INIT-E6').Notes, COUNCIL_NAMES).length === 0, f.row('INIT-E6').RenewalOutcome + ' | ' + f.row('INIT-E6').Notes);
+  const f = fire([{ id: 'INIT-E6', name: 'Tutoring Fund', domain: 'education', status: 'passed', mayoral: '', renew: true }], boardRows(), YES4);
+  check('T3.10 a board-passed program (no signature) renews by the board, with every member\'s vote in Notes',
+    /^RENEWED 4-3 C110$/.test(f.row('INIT-E6').RenewalOutcome) && /school board renews Tutoring Fund/.test(f.row('INIT-E6').Notes) && votes(f.row('INIT-E6').Notes) === 7 &&
+    namesIn(f.row('INIT-E6').Notes, BOARD_NAMES).length === 7 && namesIn(f.row('INIT-E6').Notes, COUNCIL_NAMES).length === 0, f.row('INIT-E6').RenewalOutcome + ' | ' + f.row('INIT-E6').Notes);
+  // codex T3 review, folded 2026-10-04
+  const g = fire([{ id: 'INIT-E7', name: 'Arts Block', domain: 'education', lead: 'IND', opp: 'IND' }], boardRows(), YES4);
+  check('T3.12 IND in the row\'s faction columns does not double-count the board: still seven votes, 4-3',
+    g.row('INIT-E7').Status === 'passed' && votes(g.row('INIT-E7').Notes) === 7 && /School board: Passed 4-3\./.test(g.row('INIT-E7').Notes), g.row('INIT-E7').Notes);
+  check('T3.13 a board pass is VOTED at the stage gate without a signature; an unsigned council pass is not',
+    E.initiativeVoted_('passed', '', 'education') === true && E.initiativeVoted_('passed', '', 'safety') === false && E.initiativeVoted_('passed', 'signed', 'safety') === true && E.initiativeVoted_('override-passed', '', 'safety') === true &&
+    E.civicStageStep_({ stage: 'Proposed', status: 'passed', mayoralAction: '', policyDomain: 'education', cycle: 110 }) !== null &&
+    E.civicStageStep_({ stage: 'Proposed', status: 'passed', mayoralAction: '', policyDomain: 'safety', cycle: 110 }) === null);
+  check('T3.14 renewal eligibility reads the same rule',
+    E.renewalEligibility_({ status: 'passed', mayoral: '', policyDomain: 'education', stage: 'Standing', phase: 'operational', amount: 500000 }).ok === true &&
+    E.renewalEligibility_({ status: 'passed', mayoral: '', policyDomain: 'safety', stage: 'Standing', phase: 'operational', amount: 500000 }).ok === false);
+  const h = fire([{ id: 'INIT-E8', name: 'Tutoring Fund', domain: 'education', status: 'passed', mayoral: '', renew: true }], boardRows(['hospitalized', 'hospitalized', 'injured', 'resigned']), YES4);
+  check('T3.15 a renewal with no quorum is HELD, not failed: RenewalOutcome stays blank, no vote event, the hold is noted',
+    h.row('INIT-E8').RenewalOutcome === '' && /school board renewal vote for Tutoring Fund held — School board: Vote delayed\. Only 3 votes available/.test(h.row('INIT-E8').Notes) && h.ctx.summary.votesThisCycle.length === 0 && h.ctx.summary.initiativeEvents.length === 0,
+    h.row('INIT-E8').RenewalOutcome + ' | ' + h.row('INIT-E8').Notes);
+  const k = fire([{ id: 'INIT-E9', name: 'Old Veto', domain: 'education', status: 'vetoed', override: true }], boardRows(), YES4);
+  check('T3.16 a vetoed education row gets no council override: stays vetoed, the note says why, the override cycle clears',
+    k.row('INIT-E9').Status === 'vetoed' && /no council override — education initiatives are the school board's/.test(k.row('INIT-E9').Notes) && k.row('INIT-E9').OverrideVoteCycle === '' && namesIn(k.row('INIT-E9').Notes, COUNCIL_NAMES).length === 0, k.row('INIT-E9').Notes);
+  const eighth = boardRows().concat([seat('BOARD-OUSD-8', 'School Board Member', 'citywide', 'Extra Seat', 'POP-09008', 'B', '')]);
+  const m = fire([{ id: 'INIT-E10', name: 'Eighth Seat', domain: 'education' }], eighth, YES4);
+  check('T3.17 an eighth seat under the prefix is a malformed ledger: delayed with the cause, nobody votes',
+    m.row('INIT-E10').Status === 'delayed' && /School board: Vote delayed\. school board ledger malformed: unexpected seat BOARD-OUSD-8\./.test(m.row('INIT-E10').Notes) && votes(m.row('INIT-E10').Notes) === 0, m.row('INIT-E10').Notes);
+  const dup = boardRows(); dup[3][0] = 'BOARD-OUSD-2';
+  const n2 = fire([{ id: 'INIT-E11', name: 'Dup Seat', domain: 'education' }], dup, YES4);
+  check('T3.18 a duplicate seat id is malformed too', n2.row('INIT-E11').Status === 'delayed' && /malformed: duplicate seat BOARD-OUSD-2\./.test(n2.row('INIT-E11').Notes), n2.row('INIT-E11').Notes);
+  const p = fire([{ id: 'INIT-E12', name: 'Four Under Six', domain: 'education', req: '6-3' }], boardRows(), YES4);
+  check('T3.19 four yes passes under a 6-3 row requirement (the board\'s bar is 4, the row\'s number is ignored)', p.row('INIT-E12').Status === 'passed' && /Passed 4-3/.test(p.row('INIT-E12').Notes), p.row('INIT-E12').Notes);
   const bs = E.getBoardState_({ ss: { getSheetByName: n => n === 'Civic_Office_Ledger' ? mockSheet([COL_HEAD.slice(), ...COUNCIL, ...boardRows(['active', 'vacant'])]) : null } }, 'BOARD-OUSD-');
   check('T3.11 board state: 7 seated, 1 vacant, 6 available, every member an unnamed IND, no mayor, no factions',
     bs.seated === 7 && bs.vacantSeats === 1 && bs.availableVotes === 6 && bs.indMembers.length === 6 && bs.mayor === null && bs.factions.OPP.available === 0 && bs.factions.CRC.available === 0, JSON.stringify([bs.seated, bs.vacantSeats, bs.availableVotes]));

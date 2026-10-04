@@ -1566,6 +1566,8 @@
 ### civicInitiativeEngine.js
 - **isBoardDomain_(policyDomain)**
 
+- **initiativeVoted_(status, mayoralAction, policyDomain)**
+
 - **runCivicInitiativeEngine_(ctx)**
   Reads: S.cityDynamics, S.cycleId, S.grantsThisCycle, S.initiativeEvents, S.storyHooks, S.votesThisCycle
   Writes: S.civicDemographicContext, S.grantsThisCycle, S.initiativeEvents, S.storyHooks, S.votesThisCycle
@@ -4521,4 +4523,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1610
+**Functions mapped:** 1611

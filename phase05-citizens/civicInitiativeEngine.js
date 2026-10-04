@@ -91,6 +91,18 @@ var BOARD_OUSD_VOTE_ = { votesNeeded: 4, body: 'school board', label: 'School bo
 function isBoardDomain_(policyDomain) {
   return String(policyDomain || '').trim().toLowerCase() === 'education';
 }
+// A row is VOTED (approved) when the council passed it and the mayor signed, when
+// an override passed, or when the school board passed an education row — the
+// board's pass needs no signature because no veto applies to it. Every stage,
+// renewal and clock gate reads this one rule (codex T3 review F2/F3).
+function initiativeVoted_(status, mayoralAction, policyDomain) {
+  var s = String(status == null ? '' : status).trim().toLowerCase();
+  if (s === 'override-passed') return true;
+  if (s !== 'passed') return false;
+  if (String(mayoralAction == null ? '' : mayoralAction).trim().toLowerCase() === 'signed') return true;
+  return isBoardDomain_(policyDomain);
+}
+var BOARD_OUSD_SEAT_RE_ = /^BOARD-OUSD-([1-7])$/;
 
 /**
  * Main entry point - process initiatives for current cycle
@@ -296,7 +308,7 @@ function runCivicInitiativeEngine_(ctx) {
     // and nothing in-cycle can advance it, so it is exactly "a row the engine
     // has no path to move". Skipped un-held, INIT-002/INIT-006 sat at 105 and
     // scored the Mayor silence every cycle (−6 −3) until the chain re-armed them.
-    if (status === 'passed' && row[iMayoralAction] === 'signed') {
+    if (status === 'passed' && initiativeVoted_(status, row[iMayoralAction], iPolicyDomain >= 0 ? row[iPolicyDomain] : '')) {
       // civic.38 ruling 2: a staged row has one clock (the stage model's) — the
       // ENGINE-CLOCK hold has nothing to detect there and writes machine state
       // into Notes. Legacy rows keep it.
@@ -449,14 +461,15 @@ function runCivicInitiativeEngine_(ctx) {
         });
 
         if (type === 'vote' || type === 'council-vote') {
-          S.votesThisCycle.push({
+          var voteEvent = {
             name: name,
             outcome: result.outcome,
             voteCount: result.voteCount,
             swingVoters: result.swingVoters || [],  // v1.1: Array of swing voter results
-            swingVoted: result.swingVoted,          // Legacy field
-            body: result.board || 'council'         // civic.43 Task 3: which body voted
-          });
+            swingVoted: result.swingVoted           // Legacy field
+          };
+          if (result.board) voteEvent.body = result.board;   // civic.43 Task 3: a board vote names its body; council events keep their shape
+          S.votesThisCycle.push(voteEvent);
         } else if (type === 'grant' || type === 'federal-grant') {
           S.grantsThisCycle.push({
             name: name,
@@ -541,6 +554,20 @@ function runCivicInitiativeEngine_(ctx) {
     if (overrideVoteCycle !== cycle) continue;
 
     var name = row[iName] || 'Unknown Initiative';
+    // civic.43 Task 3: the council cannot override on an education row — the board
+    // holds that jurisdiction and its passes are never vetoed. A legacy vetoed
+    // education row (none exist today) stays where it is and says why.
+    if (isBoardDomain_(iPolicyDomain >= 0 ? row[iPolicyDomain] : '')) {
+      Logger.log('civicInitiativeEngine: no council override on an education row (' + name + ') — the school board holds it');
+      if (iNotes >= 0) {
+        var oNotes = row[iNotes] || '';
+        row[iNotes] = oNotes + (oNotes ? '\n' : '') + 'Cycle ' + cycle + ': no council override — education initiatives are the school board\'s; re-file for a board vote.';
+        row[iOverrideVoteCycle] = '';
+        rows[r] = row;
+        updated = true;
+      }
+      continue;
+    }
     Logger.log('civicInitiativeEngine: Processing override vote for ' + name);
 
     // Run override vote
@@ -617,6 +644,7 @@ function runCivicInitiativeEngine_(ctx) {
       var rId = String(rRow[iID] || '').trim();
       var rElig = renewalEligibility_({
         status: rRow[iStatus], mayoral: iMayoralAction >= 0 ? rRow[iMayoralAction] : '',
+        policyDomain: iPolicyDomain >= 0 ? rRow[iPolicyDomain] : '',   // civic.43 T3: a board-passed education row is voted without a signature
         stage: stageIx.stage >= 0 ? rRow[stageIx.stage] : '',
         phase: iImplementationPhase >= 0 ? rRow[iImplementationPhase] : '',
         milestoneNotes: stageIx.milestone >= 0 ? rRow[stageIx.milestone] : '',
@@ -647,17 +675,33 @@ function runCivicInitiativeEngine_(ctx) {
         var rPassed = rResult.status === 'passed';
         var rMoney = renewalMoneyText_(rElig.amount);
         var rBodyName = rResult.board ? 'School board' : 'Council';
+        if (rResult.status === 'delayed') {
+          // No quorum (the board unseated or short): the renewal stays PENDING —
+          // RenewalOutcome blank, no money event, no fallout — and is retried at the
+          // next fire with the staged cycle (codex T3 review F4). The hold is noted.
+          rNote = 'Cycle ' + cycle + ': ' + rBodyName.toLowerCase() + ' renewal vote for ' + rName + ' held — ' + rResult.notes;
+          Logger.log('civicInitiativeEngine: Job 6 renewal ' + rId + ' DELAYED — ' + rResult.voteCount);
+          if (iNotes >= 0) { var rPriorD = String(rRow[iNotes] || ''); rRow[iNotes] = rPriorD + (rPriorD ? '\n' : '') + rNote; }
+          if (iLastUpdated >= 0) rRow[iLastUpdated] = ctx.now;
+          rows[rr] = rRow;
+          updated = true;
+          continue;
+        }
         rRow[iRenewOut] = (rPassed ? 'RENEWED ' : 'RENEWAL FAILED ') + rResult.voteCount + ' C' + cycle;
+        // Every member's vote rides the Notes, as it does for a first vote (codex F5).
+        var rVoteLines = (rResult.swingVoters || []).map(function(v) { return v.name + ' voted ' + v.vote + '.'; }).join(' ');
         rNote = 'Cycle ' + cycle + ': ' + rBodyName.toLowerCase() + ' ' + (rPassed ? 'renews ' : 'declines to renew ') + rName + ' for ' +
           rMoney + ' (' + rResult.voteCount + ')' +
           (rPassed ? ' — the money lands next week'
-                   : (rElig.revivePhase ? ' — the program stays closed' : ' — the program runs out its runway'));
+                   : (rElig.revivePhase ? ' — the program stays closed' : ' — the program runs out its runway')) +
+          (rVoteLines ? ' ' + rVoteLines : '');
         // Citizens hear "<program> renewal passed / went down at council".
         S.initiativeEvents.push({ id: rId, name: rName + ' renewal', type: 'renewal',
           outcome: rPassed ? 'passed' : 'failed', voteCount: rResult.voteCount, cycle: cycle });
-        S.votesThisCycle.push({ name: rName + ' renewal', outcome: rPassed ? 'RENEWED' : 'RENEWAL FAILED',
-          voteCount: rResult.voteCount, swingVoters: rResult.swingVoters || [], swingVoted: rResult.swingVoted,
-          body: rResult.board || 'council' });
+        var rVoteEvent = { name: rName + ' renewal', outcome: rPassed ? 'RENEWED' : 'RENEWAL FAILED',
+          voteCount: rResult.voteCount, swingVoters: rResult.swingVoters || [], swingVoted: rResult.swingVoted };
+        if (rResult.board) rVoteEvent.body = rResult.board;   // council events keep their shape (codex F7)
+        S.votesThisCycle.push(rVoteEvent);
         S.storyHooks = S.storyHooks || [];
         S.storyHooks.push({
           hookType: rPassed ? 'RENEWAL_PASSED' : 'RENEWAL_FAILED', theme: 'CIVIC', domain: 'CIVIC',
@@ -895,12 +939,19 @@ function getBoardState_(ctx, prefix) {
   var idx = function(n) { return header.indexOf(n); };
   var iOfficeId = idx('OfficeId'), iTitle = idx('Title'), iHolder = idx('Holder'), iPopId = idx('PopId'),
       iStatus = idx('Status'), iVotingPower = idx('VotingPower');
+  // The seven seats are BOARD-OUSD-1..7, each once. Anything else under the prefix
+  // (an eighth seat, a duplicate id) is a malformed ledger: the vote is delayed with
+  // the cause in Notes rather than counted (codex T3 review F8).
+  var seen = {};
   for (var r = 1; r < data.length; r++) {
     var row = data[r];
-    var officeId = String(row[iOfficeId] || '');
+    var officeId = String(row[iOfficeId] || '').trim();
     if (officeId.indexOf(prefix) !== 0) continue;
     state.totalSeats++;
     state.seated++;
+    if (!BOARD_OUSD_SEAT_RE_.test(officeId)) { state.malformed = state.malformed || ('unexpected seat ' + officeId); continue; }
+    if (seen[officeId]) { state.malformed = state.malformed || ('duplicate seat ' + officeId); continue; }
+    seen[officeId] = true;
     var holder = String(row[iHolder] || '').trim();
     var status = String(row[iStatus] || 'active').toLowerCase();
     var votingPower = iVotingPower >= 0 ? String(row[iVotingPower] || 'no').toLowerCase() : 'no';
@@ -908,16 +959,16 @@ function getBoardState_(ctx, prefix) {
     state.filledSeats++;
     var isAvailable = !(status === 'hospitalized' || status === 'serious-condition' || status === 'critical' ||
       status === 'injured' || status === 'deceased' || status === 'resigned' || status === 'retired');
+    // No faction bucket for the board — a row's LeadFaction/OppositionFaction of
+    // IND must find nobody here, or every member would vote twice (codex F1).
     var member = { name: holder, popId: String(row[iPopId] || ''), office: officeId, title: String(row[iTitle] || ''),
-      status: status, faction: 'IND', available: isAvailable };
+      status: status, faction: '', available: isAvailable };
     state.members.push(member);
-    state.factions.IND.count++;
-    state.factions.IND.members.push(holder);
-    if (!isAvailable) { state.unavailable.push({ name: holder, reason: status, faction: 'IND' }); continue; }
-    state.factions.IND.available++;
+    if (!isAvailable) { state.unavailable.push({ name: holder, reason: status, faction: '' }); continue; }
     state.availableVotes++;
     state.indMembers.push({ name: holder, popId: member.popId, title: member.title });
   }
+  if (state.malformed) { state.availableVotes = 0; state.indMembers = []; }
   return state;
 }
 
@@ -1112,17 +1163,22 @@ function resolveCouncilVote_(ctx, row, header, councilState, sentiment, swingInf
   // all (the school board before Task 2 seats it) says so — it is never the council.
   if (totalAvailable < votesNeeded) {
     var notSeated = voteOpts && councilState.seated === 0;
+    var malformed = voteOpts && councilState.malformed ? String(councilState.malformed) : '';
     return {
       status: 'delayed',
       outcome: 'DELAYED',
       voteCount: totalAvailable + ' available, ' + votesNeeded + ' needed',
-      consequences: notSeated
-        ? 'No ' + bodyName + ' seated. Delayed until the ' + bodyName + ' exists.'
-        : 'Insufficient ' + bodyName + ' members for vote. Delayed pending appointments.',
-      notes: bodyLabel + (notSeated
-        ? 'Vote delayed. No ' + bodyName + ' seated; ' + votesNeeded + ' votes required.'
-        : 'Vote delayed. Only ' + totalAvailable + ' votes available; ' +
-          votesNeeded + ' required. ' + vacantSeats + ' seats vacant.'),
+      consequences: malformed
+        ? 'The ' + bodyName + ' ledger is malformed (' + malformed + '). Delayed until it is repaired.'
+        : notSeated
+          ? 'No ' + bodyName + ' seated. Delayed until the ' + bodyName + ' exists.'
+          : 'Insufficient ' + bodyName + ' members for vote. Delayed pending appointments.',
+      notes: bodyLabel + (malformed
+        ? 'Vote delayed. ' + bodyName + ' ledger malformed: ' + malformed + '.'
+        : notSeated
+          ? 'Vote delayed. No ' + bodyName + ' seated; ' + votesNeeded + ' votes required.'
+          : 'Vote delayed. Only ' + totalAvailable + ' votes available; ' +
+            votesNeeded + ' required. ' + vacantSeats + ' seats vacant.'),
       swingVoters: [],
       board: voteOpts ? bodyName : null
     };
@@ -3385,10 +3441,9 @@ function renewalMoneyText_(n) {
  */
 function renewalEligibility_(r) {
   var status = String(r.status == null ? '' : r.status).trim().toLowerCase();
-  var mayoral = String(r.mayoral == null ? '' : r.mayoral).trim().toLowerCase();
   var stage = String(r.stage == null ? '' : r.stage).trim();
   var phase = String(r.phase == null ? '' : r.phase).trim().toLowerCase();
-  if (!(status === 'override-passed' || (status === 'passed' && mayoral === 'signed'))) return { ok: false, reason: 'not a voted program' };
+  if (!initiativeVoted_(status, r.mayoral, r.policyDomain)) return { ok: false, reason: 'not a voted program' };
   if (stage !== 'Standing' && stage !== 'Delivering') return { ok: false, reason: 'stage ' + (stage || 'blank') };
   var revivePhase = null;
   if (phase === 'complete') {
@@ -3927,8 +3982,7 @@ function civicStageStep_(st) {
   var stage = String(st.stage == null ? '' : st.stage).trim();
   if (!stage) return null;
   var status = String(st.status == null ? '' : st.status).trim().toLowerCase();
-  var voted = status === 'override-passed' ||
-    (status === 'passed' && String(st.mayoralAction == null ? '' : st.mayoralAction).trim().toLowerCase() === 'signed');
+  var voted = initiativeVoted_(status, st.mayoralAction, st.policyDomain);
   if (!voted) return null;
   var cycle = Number(st.cycle);
   if (!isFinite(cycle) || cycle < 1) return null;
@@ -3969,8 +4023,7 @@ function civicStageStep_(st) {
 function civicBuildOpenStep_(st) {
   if (String(st.stage == null ? '' : st.stage).trim() !== 'Standing') return null;
   var status = String(st.status == null ? '' : st.status).trim().toLowerCase();
-  var voted = status === 'override-passed' ||
-    (status === 'passed' && String(st.mayoralAction == null ? '' : st.mayoralAction).trim().toLowerCase() === 'signed');
+  var voted = initiativeVoted_(status, st.mayoralAction, st.policyDomain);
   if (!voted) return null;
   var phase = String(st.phase == null ? '' : st.phase).trim().toLowerCase();
   if (CIVIC_CONSTRUCTION_PHASES_.indexOf(phase) < 0) return null;
@@ -3996,7 +4049,7 @@ function applyCivicBuildOpen_(ctx, row, ix, cycle) {
   var phase = String(cell(ix.phase) || '').trim().toLowerCase();
   if (CIVIC_CONSTRUCTION_PHASES_.indexOf(phase) < 0) return false;
   var res = civicBuildOpenStep_({
-    stage: cell(ix.stage), status: cell(ix.status), mayoralAction: cell(ix.mayoralAction),
+    stage: cell(ix.stage), status: cell(ix.status), mayoralAction: cell(ix.mayoralAction), policyDomain: cell(ix.policyDomain),
     phase: phase, opensCycle: cell(ix.opens), voteCycle: cell(ix.voteCycle),
     lastStageChangeCycle: cell(ix.lastStageChange),
     buildCycles: getCivicBuildCycles_(ctx, cell(ix.policyDomain)), cycle: cycle
@@ -4294,8 +4347,7 @@ function applyCivicDeliveryStep_(ctx, row, ix, cycle) {
   var stage = String(cell(ix.stage) == null ? '' : cell(ix.stage)).trim();
   if (stage !== 'Standing' && stage !== 'Delivering') return false;
   var status = String(cell(ix.status) == null ? '' : cell(ix.status)).trim().toLowerCase();
-  var voted = status === 'override-passed' ||
-    (status === 'passed' && String(cell(ix.mayoralAction) == null ? '' : cell(ix.mayoralAction)).trim().toLowerCase() === 'signed');
+  var voted = initiativeVoted_(status, cell(ix.mayoralAction), cell(ix.policyDomain));
   if (!voted) return false;
   var domain = String(cell(ix.policyDomain) == null ? '' : cell(ix.policyDomain)).trim().toLowerCase();
   var req = civicStageRequirement_({ stage: stage, phase: cell(ix.phase), policyDomain: domain });
@@ -4346,8 +4398,7 @@ function applyCivicStallEntry_(ctx, row, ix, cycle) {
   var stage = String(cell(ix.stage) == null ? '' : cell(ix.stage)).trim();
   if (!stage) return false;
   var status = String(cell(ix.status) == null ? '' : cell(ix.status)).trim().toLowerCase();
-  var voted = status === 'override-passed' ||
-    (status === 'passed' && String(cell(ix.mayoralAction) == null ? '' : cell(ix.mayoralAction)).trim().toLowerCase() === 'signed');
+  var voted = initiativeVoted_(status, cell(ix.mayoralAction), ix.policyDomain >= 0 ? cell(ix.policyDomain) : '');
   if (!voted) return false;
   var dials = getCivicStallDials_(ctx);
   var clock = civicStallClock_({
@@ -4397,8 +4448,7 @@ function applyCivicRevival_(ctx, row, ix, cycle) {
   // Same eligibility as every other stage operation (ruling 6; codex stall
   // review F1): a vetoed, failed or retired row gets no generic revival.
   var status = String(cell(ix.status) == null ? '' : cell(ix.status)).trim().toLowerCase();
-  var voted = status === 'override-passed' ||
-    (status === 'passed' && String(cell(ix.mayoralAction) == null ? '' : cell(ix.mayoralAction)).trim().toLowerCase() === 'signed');
+  var voted = initiativeVoted_(status, cell(ix.mayoralAction), ix.policyDomain >= 0 ? cell(ix.policyDomain) : '');
   if (!voted) return false;
   var hold = civicStageHoldRead_(cell(ix.hold));
   var d = civicReviveDecision_({

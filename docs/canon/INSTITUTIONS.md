@@ -374,7 +374,7 @@ The district the boom passed over, and the only one that was passed over for a *
 
 #### D5 — Janae Rivers (OPP)
 
-- **East Oakland** — the flatlands. Twenty years of boom reached here last and is arriving fast: the Coliseum and Elmhurst sit here, and so does the Stabilization Fund's disbursement office. The city's most contested square — the ground that has to hold while the money arrives. **Council district anchor: D5 (Janae Rivers, OPP)** — canonized S374. Baylight is not Rivers's district (D2, corrected S525). Demographics character: east flatlands, arriving frontier.
+- **East Oakland** — the flatlands. Twenty years of boom reached here last and is arriving fast: the Coliseum sits here, and so does the Stabilization Fund's disbursement office. The city's most contested square — the ground that has to hold while the money arrives. **Council district anchor: D5 (Janae Rivers, OPP)** — canonized S374. Baylight is not Rivers's district (D2, corrected S525). Demographics character: east flatlands, arriving frontier.
 
 #### D6 — Elliott Crane (CRC)
 

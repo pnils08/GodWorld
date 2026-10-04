@@ -185,6 +185,7 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 09:35 es COMMIT 641232a3 T3 fold; PUSH origin, level 641232a3, tree clean; rb told (inbox empty, codex still rb's). NEXT[engine-sheet] trued (T3 + B.3 in the unbenched stack — now eight builds behind one bench). Queue EMPTY again; everything left is gated (C110 still 109, new bench project, builder reads §6 03:54 / 03:10 / 03:32 / 05:35). STAND-BY, wake :41.
 08:52 rb RELEASE codex — civic.43 T3 review HOLD (8 real findings) folded by es on origin; codex /clear sent. engine.94 B.3 landed 6cfe7ef5. ROLLOUT civic.43 + engine.94 rows updated. My box is empty (no "Fired C110" draft at 08:51); cycleCount 109.
 08:53 es CHECK rb IDLE (worked at 08:52, "Nothing to request"; box now holds a different unsent draft, "Fired C110, run the smoke" — not touched, §4c; live cycleCount is STILL 109, no C110). No permission prompt. git: origin level 9a8a261a (rb's ROLLOUT true-up), 0 unpushed, tree clean. Guests: none held (codex idle, rb's). Inbox: README only. NEXT[engine-sheet]: nothing unblocked — eight unbenched builds behind the bench cap; standing by.
+09:33 rb CHECK es IDLE at its prompt with an unsent builder draft in its box ("Fired C110, run the smoke") — not touched (§4c); live cycleCount still 109, so no fire has completed; no permission prompt; codex/agy idle, no claims; inbox empty; origin level fec0dbf1, tree clean.
 
 ## 8. Stop rule and usage
 

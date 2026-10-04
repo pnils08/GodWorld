@@ -336,6 +336,16 @@ All scripts verified correct containers. No old GodWorld org refs. No mara acces
 
 ## S142 Archive Pass (2026-04-11)
 
+### Archive Pass — S526 (2026-10-04, research-build)
+
+Three rows closed overnight or by acceptance. engine.268 stays open (null scorer plumbing not on PROD until the next push); engine.266 stays live-observing until the C110 smoke.
+
+| ID | Item | State | Owner | Pointer |
+|---|---|---|---|---|
+| pipeline.64 | Pre-Saturday coverage sweep (Sat 12:00) — acceptance MET 2026-10-03 unattended: 4 candidates retried, 2 staged, 2 left for /sift (Sharon Okafor culture, Celeste Tran wire) — a reporter problem, not a sweep problem; status file written | done-pending-archive | research-build | [[../plans/2026-09-04-pre-saturday-coverage-sweep]] |
+| engine.211 | Extreme phase-word gates replaced by record-driven effects (204/205 + 281); census of the 88 remaining sites verified — override-only or season-structure reads, no feed-path numeric gate left | done-pending-archive | engine-sheet | [[../plans/2026-09-11-sports-as-a-lived-system]] §1 F8–F9, [[../research/2026-10-04-agy-engine211-census]] |
+| engine.277 | Ambient lines — builder 2026-10-02 "reads the tribune no, job and faith yes", corrected 2026-10-03: job and faith lines move dials, Tribune left as wired. A build on a backwards reading went live as `46832db3` and was reverted 2026-10-03 before any live fire; net no change | done-pending-archive | engine-sheet | [[../plans/2026-09-21-care-and-justice-system]] §engine.272 run-forward notes |
+
 ### Archive Pass — S474 (2026-09-20, engine-sheet)
 
 One row, closed by a fix that shipped three sessions before anyone noticed the row was still open. engine.243 (crisis naming, PROD @103) is the continuation and stays open until the live C108 smoke.

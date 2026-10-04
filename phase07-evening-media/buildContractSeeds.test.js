@@ -194,6 +194,25 @@ var LH_HEADER = ['Timestamp', 'POPID', 'Name', 'EventTag', 'EventText', 'Neighbo
   assert('5a business attached', ctx.summary.contractSeeds[0].businesses === 'Fruitvale Mercado');
 })();
 
+// §5b engine.206: a birth leads over a carryover; a business-scoped economic ripple lists its bars; transit-event → CIVIC
+(function () {
+  var ids = ['BIZ-01', 'BIZ-02', 'BIZ-03', 'BIZ-04', 'BIZ-05', 'BIZ-06', 'BIZ-07', 'BIZ-08', 'BIZ-09', 'BIZ-10'];
+  var ctx = { ss: fakeSS([LH_HEADER]), summary: { cycleId: 119, rippleEvents: [
+    { cycle: 119, causeType: 'economic-event', causeId: 'SPORTS_WEEK_AS_118', causeDetail: 'carryover: cycle 1 of 3', effectType: 'carryover', targetScope: 'neighborhood', targetIds: ['Jack London'], neighborhood: 'Jack London', magnitude: 4, duration: 3 },
+    { cycle: 119, causeType: 'economic-event', causeId: 'SPORTS_WEEK_AS_119', causeDetail: "A's game-week spending — 10 bar(s) and restaurant(s) at Jack London / Downtown, Growth_Rate +0.6pp", effectType: 'sector-impact:entertainment/food/retail', targetScope: 'business', targetIds: ids, neighborhood: 'Jack London', magnitude: 12, duration: 3 },
+    { cycle: 119, causeType: 'transit-event', causeId: "game-day-c119:A's", causeDetail: "A's home week — 3 home games; game-day crowds through Jack London, Downtown, station ridership up to +16%", effectType: 'game-day-crowds', targetScope: 'neighborhood', targetIds: ['Jack London', 'Downtown'], neighborhood: 'Jack London', magnitude: 0.158, duration: 1 }
+  ] } };
+  b.buildContractSeeds_(ctx);
+  var seeds = ctx.summary.contractSeeds;
+  var econ = seeds.filter(function (s) { return s.domain === 'ECONOMIC'; })[0];
+  var civic = seeds.filter(function (s) { return s.domain === 'CIVIC'; })[0];
+  assert('5b.a the birth leads the hood\'s economic cluster: What names the week\'s spending, not the carryover', !!econ && /^sector-impact:entertainment\/food\/retail \+16 \(2 related effects this cycle\)$/.test(econ.what));
+  assert('5b.b SeedID hashes the birth\'s causeId', !!econ && econ.seedId === b.contractSeedHash_('119|economic-event|jacklondon|SPORTS_WEEK_AS_119'));
+  assert('5b.c the Businesses column lists the ten bars, business desk', !!econ && econ.businesses.split('; ').length === 10 && econ.businesses.indexOf('BIZ-01') === 0 && econ.desk === 'business');
+  assert('5b.d the game-day ripple seeds CIVIC / civic desk at Jack London, major (.158 ≥ .05)', !!civic && civic.desk === 'civic' && civic.neighborhood === 'Jack London' && civic.seedClass === 'major' && /^game-day-crowds \+0\.16$/.test(civic.what));
+  assert('5b.e two seeds about one homestand share the hood', !!econ && !!civic && econ.neighborhood === civic.neighborhood);
+})();
+
 // §6 Fail-soft: no sheet access → seeds still built from causes alone
 (function () {
   var ctx = {

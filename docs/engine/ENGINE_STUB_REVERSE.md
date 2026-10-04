@@ -1,6 +1,6 @@
 # Engine Stub Reverse Index
 
-**Generated:** 2026-10-03 by `scripts/stubEngine.js` (mechanical — no LLM).
+**Generated:** 2026-10-04 by `scripts/stubEngine.js` (mechanical — no LLM).
 
 **Purpose:** Cheap lookup — given an `S.*` field or sheet name, find every function that reads or writes it. Companion to `ENGINE_STUB_MAP.md` (forward: function → fields).
 
@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 180 · **Functions mapped:** 1603 · **S.* fields:** 366 · **Sheets:** 60
+**Files scanned:** 180 · **Functions mapped:** 1604 · **S.* fields:** 367 · **Sheets:** 60
 
 ## S.* / ctx.summary reverse index
 
@@ -149,7 +149,7 @@
 | `S.economicMoodDesc` | `phase01-config/loadPreviousEvening.js::seedCarriedEconomicMood_`, `phase06-analysis/applyMigrationDrift.js::applyMigrationDrift_`, `phase06-analysis/economicRippleEngine.js::calculateEconomicMood_` | `phase06-analysis/applyMigrationDrift.js::applyMigrationDrift_`, `phase06-analysis/economicRippleEngine.js::generateEconomicSummary_` | 3 | 2 |
 | `S.economicMoodLevel` | `phase06-analysis/economicRippleEngine.js::calculateEconomicMood_` | _(none)_ | 1 | 0 |
 | `S.economicNarrative` | `phase06-analysis/economicRippleEngine.js::generateEconomicSummary_` | `phase06-analysis/economicRippleEngine.js::generateEconomicSummary_` | 1 | 1 |
-| `S.economicRipples` | `phase01-config/loadPreviousEvening.js::restoreCarriedRipples_`, `phase06-analysis/economicRippleEngine.js::createRipple_`, `phase06-analysis/economicRippleEngine.js::processActiveRipples_`, `phase06-analysis/economicRippleEngine.js::runEconomicRippleEngine_`, `phase08-v3-chicago/v3preLoader.js::v3PreloadContext_` | `phase01-config/loadPreviousEvening.js::restoreCarriedRipples_`, `phase06-analysis/applyMigrationDrift.js::applyMigrationDrift_`, `phase06-analysis/economicRippleEngine.js::calculateEconomicMood_`, `phase06-analysis/economicRippleEngine.js::calculateNeighborhoodEconomies_`, `phase06-analysis/economicRippleEngine.js::createRipple_`, `phase06-analysis/economicRippleEngine.js::detectCalendarRipples_`, …(+8 more) | 5 | 14 |
+| `S.economicRipples` | `phase01-config/loadPreviousEvening.js::restoreCarriedRipples_`, `phase06-analysis/economicRippleEngine.js::createRipple_`, `phase06-analysis/economicRippleEngine.js::processActiveRipples_`, `phase06-analysis/economicRippleEngine.js::runEconomicRippleEngine_`, `phase08-v3-chicago/v3preLoader.js::v3PreloadContext_` | `phase01-config/loadPreviousEvening.js::restoreCarriedRipples_`, `phase06-analysis/applyMigrationDrift.js::applyMigrationDrift_`, `phase06-analysis/economicRippleEngine.js::calculateEconomicMood_`, `phase06-analysis/economicRippleEngine.js::calculateNeighborhoodEconomies_`, `phase06-analysis/economicRippleEngine.js::createRipple_`, `phase06-analysis/economicRippleEngine.js::detectCalendarRipples_`, …(+9 more) | 5 | 15 |
 | `S.economicSummary` | `phase06-analysis/economicRippleEngine.js::generateEconomicSummary_` | `phase10-persistence/buildCyclePacket.js::buildCyclePacket_` | 1 | 1 |
 | `S.editionCoverageEffects` | `phase02-world-state/applyEditionCoverageEffects.js::applyEditionCoverageEffects_` | _(none)_ | 1 | 0 |
 | `S.editionCoverageTriggers` | `phase02-world-state/applyEditionCoverageEffects.js::applyEditionCoverageEffects_` | `phase07-evening-media/applyStorySeeds.js::applyStorySeeds_` | 1 | 1 |
@@ -339,6 +339,7 @@
 | `S.sportsSentimentBoost` | `phase02-world-state/applySportsSeason.js::applySportsFeedTriggers_` | `phase02-world-state/applyCityDynamics.js::applyCityDynamics_`, `phase02-world-state/applySportsSeason.js::applySportsFeedTriggers_`, `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_` | 1 | 3 |
 | `S.sportsSource` | `phase02-world-state/applySportsSeason.js::applySportsSeason_` | `phase02-world-state/applySeasonWeights.js::applySeasonalWeights_`, `phase04-events/worldEventsEngine.js::worldEventsEngine_`, `phase06-analysis/applyShockMonitor.js::applyShockMonitor_` | 1 | 3 |
 | `S.sportsWeek` | `phase02-world-state/applySportsSeason.js::applySportsSeason_` | `phase02-world-state/applyCityDynamics.js::applyCityDynamics_`, `phase02-world-state/applySportsSeason.js::applySportsFeedTriggers_`, `phase02-world-state/applySportsSeason.js::applySportsSeason_`, `phase02-world-state/applySportsSeason.js::normalizeOaklandFeedTeam_`, `phase02-world-state/updateTransitMetrics.js::gameDayLoadByHood_`, `phase02-world-state/updateTransitMetrics.js::updateTransitMetrics_Phase2_`, …(+8 more) | 1 | 14 |
+| `S.sportsWeekBars` | `phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_` | `phase05-citizens/applyBusinessDynamics.test.js::ctxWith`, `phase06-analysis/economicRippleEngine.js::detectCalendarRipples_` | 1 | 2 |
 | `S.sportsZones` | `phase02-world-state/applySportsSeason.js::applySportsSeason_` | `phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_`, `phase02-world-state/applyInitiativeImplementationEffects.js::sportsHasOpenedBaylight_`, `phase05-citizens/bondEngine.js::detectNewBonds_`, `phase05-citizens/generateGenericCitizens.js::generateGenericCitizens_`, `phase06-analysis/economicRippleEngine.js::runEconomicRippleEngine_`, `phase07-evening-media/applyStorySeeds.js::applyStorySeeds_`, …(+7 more) | 1 | 13 |
 | `S.spotlightStats` | `phase05-citizens/applyNamedCitizenSpotlight.js::applyNamedCitizenSpotlights_` | _(none)_ | 1 | 0 |
 | `S.storyHooks` | `phase04-events/generationalEventsEngine.js::runGenerationalEngine_`, `phase05-citizens/bondEngine.js::marryCitizens_`, `phase05-citizens/bondEngine.js::processRomanceAndMarriage_`, `phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_`, `phase05-citizens/civicInitiativeEngine.js::generateOverrideStoryHook_`, `phase05-citizens/civicInitiativeEngine.js::generateVetoStoryHook_`, …(+23 more) | `phase01-config/godWorldEngine2.js::runCyclePhases_`, `phase01-config/godWorldEngine2.js::runWorldCycleLocked_`, `phase03-population/deriveDemographicDrift.js::deriveDemographicDrift_`, `phase04-events/generationalEventsEngine.js::runGenerationalEngine_`, `phase05-citizens/bondEngine.js::marryCitizens_`, `phase05-citizens/bondEngine.js::processRomanceAndMarriage_`, …(+34 more) | 29 | 40 |

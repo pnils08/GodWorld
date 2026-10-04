@@ -523,7 +523,7 @@ function applyBusinessDynamics_(ctx) {
   var sportsWeeks = S.sportsWeek || {}, sportsGame = false;
   for (var swf in sportsWeeks) if (sportsWeeks.hasOwnProperty(swf) && sportsWeeks[swf] && sportsWeeks[swf].g > 0) sportsGame = true;
   var nightlifeMedian = sportsGame ? bizNightlifeMedian_(ns) : null;
-  var barIds = [], barPp = 0;
+  var barIds = [], barPp = 0, barByHood = {};   // engine.206: the moved bars, by parent hood, for the economy's game-week ripple
 
   var ship = S.chaosShip || null;               // engine.193 cut 3b — runChaosShip_ (Phase 4)
 
@@ -582,9 +582,9 @@ function applyBusinessDynamics_(ctx) {
     // before closure; drive +2 multiplies a positive drift. Owner = Key_Personnel
     // (owner/founder tag, POPID-carrying) resolved to the ledger row's DialState.
     var ownerB = bizOwnerBands_(ctx, iKP >= 0 ? row[iKP] : '');
-    var barTerm = 0;
+    var barTerm = 0, barHood = '';
     if (sportsGame && bizIsBar_(row[iSec])) {
-      var barHood = bizHoodKey(hood) || hood;   // a child area reads its parent's venue and nightlife
+      barHood = bizHoodKey(hood) || hood;   // a child area reads its parent's venue and nightlife
       var nl = ns[barHood] ? ns[barHood].nightlifeProfile : null;
       barTerm = sportsBarTerm_(sportsWeeks, barHood,
         nightlifeMedian !== null && nl !== null && nl !== undefined && Number(nl) >= nightlifeMedian);
@@ -604,7 +604,12 @@ function applyBusinessDynamics_(ctx) {
       sportsWeek: barTerm   // engine.205 slice D
     };
     var d = bizDriftOne_(cfg, biz, ps, inputs, cycle);
-    if (d.parts.sports) { barIds.push(id); barPp += d.parts.sports; }
+    if (d.parts.sports) {
+      barIds.push(id); barPp += d.parts.sports;
+      var bhk = barHood || hood || '';
+      if (!barByHood[bhk]) barByHood[bhk] = { ids: [], pp: 0 };
+      barByHood[bhk].ids.push(id); barByHood[bhk].pp += d.parts.sports;
+    }
     var ownerRoom = ownerB ? (ownerB.composure >= 1 ? 1 : ownerB.composure <= -1 ? -1 : 0) * pressureBar_(ctx, 'dialOwnerStreakRoom') : 0;
     if (ownerRoom) { out.ownerRoom = (out.ownerRoom || 0) + 1; }
     out.rows++;
@@ -693,27 +698,19 @@ function applyBusinessDynamics_(ctx) {
     queueRangeIntent_(ctx, 'Business_Ledger', 2, iRev + 1, revCol, 'engine.96 business dynamics drift (Annual_Revenue)', 'economy', 90);
     queueRangeIntent_(ctx, 'Business_Ledger', 2, iGrow + 1, growCol, 'engine.96 business dynamics drift (Growth_Rate)', 'economy', 90);
   }
-  // engine.205 slice D: one business-scoped ripple naming the bars the game week moved.
-  // Neighborhood blank on purpose — buildContractSeeds files it with the week's other
-  // citywide sports ripple, so that seed knows which bars felt it (engine.206).
+  // engine.206: the bars the week moved, by parent hood (the key sportsBarTerm_ read), for the
+  // economy's own game-week ripple to name (Phase 6, economicRippleEngine SPORTS_WEEK → the
+  // ECONOMIC seed at the venue). The Phase-5 'sports' ripple slice D filed here is gone — it
+  // clustered into the citywide sentiment seed and the business desk never saw the bars.
   out.sportsBars = barIds.length;
   out.sportsBarPp = barIds.length ? Math.round(barPp / barIds.length * 100) / 100 : 0;
-  if (barIds.length && typeof recordRipple_ === 'function') {
-    var swParts = [];
-    for (var swk in sportsWeeks) {
-      if (sportsWeeks.hasOwnProperty(swk) && sportsWeeks[swk] && sportsWeeks[swk].g > 0) {
-        var sgn = Math.round((Number(sportsWeeks[swk].signed) || 0) * 100) / 100;
-        swParts.push(swk + ' signed ' + (sgn > 0 ? '+' : '') + sgn);
-      }
+  if (barIds.length) {
+    var barsByHood = {};
+    for (var bhh in barByHood) {
+      if (!barByHood.hasOwnProperty(bhh)) continue;
+      barsByHood[bhh] = { ids: barByHood[bhh].ids, pp: Math.round(barByHood[bhh].pp / barByHood[bhh].ids.length * 100) / 100 };
     }
-    recordRipple_(ctx, {
-      causeType: 'sports', causeId: 'Oakland_Sports_Feed.bars',
-      causeDetail: 'Game week at the bars: ' + barIds.length + ' bar(s) and restaurant(s), Growth_Rate event mean ' +
-        (out.sportsBarPp > 0 ? '+' : '') + out.sportsBarPp + 'pp (' + swParts.join(', ') + ')',
-      effectType: 'Growth_Rate', targetScope: 'business', targetIds: barIds,
-      neighborhood: '', magnitude: out.sportsBarPp, duration: 1, remainingStrength: 1,
-      cycle: cycle, sourceEngine: 'applyBusinessDynamics.sportsWeekBars'
-    });
+    S.sportsWeekBars = { byHood: barsByHood, ids: barIds, pp: out.sportsBarPp };
   }
   S.businessDynamicsState = state; // finalizeCycleState carries it as businessDynamics
   Logger.log('applyBusinessDynamics_ engine.96: ' + out.rows + ' businesses, ' + out.drifted + ' drifted, ' +

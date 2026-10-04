@@ -1,8 +1,8 @@
 {
-  "generated": "2026-10-03",
+  "generated": "2026-10-04",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 180,
-  "functionsMapped": 1603,
+  "functionsMapped": 1604,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -1891,6 +1891,7 @@
         "phase06-analysis/economicRippleEngine.js::generateEconomicSummary_",
         "phase06-analysis/economicRippleEngine.js::processActiveRipples_",
         "phase06-analysis/economicRippleEngine.js::runEconomicRippleEngine_",
+        "phase07-evening-media/buildContractSeeds.js::buildContractSeeds_",
         "phase08-v3-chicago/v3Integration.js::v3Integration_",
         "phase08-v3-chicago/v3preLoader.js::v3PreloadContext_",
         "phase09-digest/applyCompressionDigestSummary.js::applyCompressedDigestSummary_",
@@ -3121,6 +3122,15 @@
       "readers": [
         "phase08-v3-chicago/v3NeighborhoodWriter.js::hoodBusinessCity_",
         "phase08-v3-chicago/v3NeighborhoodWriter.js::hoodBusinessFactor_"
+      ]
+    },
+    "sportsWeekBars": {
+      "writers": [
+        "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_"
+      ],
+      "readers": [
+        "phase05-citizens/applyBusinessDynamics.test.js::ctxWith",
+        "phase06-analysis/economicRippleEngine.js::detectCalendarRipples_"
       ]
     },
     "namedSpotlights": {

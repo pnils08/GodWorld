@@ -265,5 +265,33 @@ function run(S, opts) {
   eq(T.initiativeTransitEffects_(ctx.summary).corridors.length, 0, 'operational Baylight: no corridor effect');
 }
 
+// engine.206 — a homestand is a transit seed: one ripple per franchise home week at venue[0]
+{
+  const gd = (r) => r.ctx && [];
+  const crowds = () => ripples.filter(r => r.effectType === 'game-day-crowds');
+  run({ sportsWeek: { Oaks: { h: 3, g: 3, unsigned: 1, venueShare: 1, venue: ['Baylight District'] } }, sportsZones: ['Baylight District'] });
+  let c = crowds();
+  eq(c.length, 1, 'a home week → one game-day-crowds ripple');
+  eq(c[0].causeType, 'transit-event', 'causeType transit-event (→ CIVIC seed)');
+  eq(c[0].neighborhood, 'Baylight District', 'at the franchise venue');
+  eq(c[0].magnitude, 0.3, 'magnitude = GAMEDAY_RIDERSHIP_BOOST × unsigned × venueShare (.3 × 1 × 1)');
+  eq(c[0].causeId, 'game-day-c107:Oaks', 'causeId names the cycle and the franchise');
+  ok(/Oaks home week — 3 home games; game-day crowds through Baylight District, station ridership up to \+30%/.test(c[0].causeDetail), 'detail names the franchise, home games, venue, lift: ' + c[0].causeDetail);
+  run({ sportsWeek: { "A's": { h: 2, g: 3, unsigned: 0.6, venueShare: 2 / 3, venue: ['Jack London', 'Downtown'] } }, sportsZones: ['Jack London', 'Downtown'] });
+  c = crowds();
+  eq(c.length, 1, 'a two-hood venue → still ONE ripple (one homestand, one seed)');
+  eq(c[0].neighborhood, 'Jack London', 'at venue[0], where the economy\'s SPORTS_WEEK also sits');
+  eq(c[0].targetIds.join(','), 'Jack London,Downtown', 'both venue hoods as targets');
+  eq(c[0].magnitude, 0.12, '.3 × .6 × 2/3 = .12');
+  run({ sportsWeek: { Oaks: { h: 0, g: 2, unsigned: 0.4, venueShare: 0, venue: ['Baylight District'] } }, sportsZones: ['Baylight District'] });
+  eq(crowds().length, 0, 'an away week → no game-day ripple');
+  run({ sportsZones: ['Baylight District'] });
+  eq(crowds().length, 0, 'no week → none');
+  run({ sportsWeek: { "A's": { h: 3, g: 3, unsigned: 0.8, venueShare: 1, venue: ['Jack London', 'Downtown'] }, Oaks: { h: 1, g: 2, unsigned: 0.2, venueShare: 0.5, venue: ['Baylight District'] } }, sportsZones: ['Jack London', 'Downtown', 'Baylight District'] });
+  c = crowds();
+  eq(c.length, 2, 'two franchises home → two ripples, one each');
+  eq(c.map(r => r.neighborhood).sort().join(','), 'Baylight District,Jack London', 'each at its own primary venue');
+}
+
 console.log('transitCauses: ' + pass + ' passed, ' + fail + ' failed');
 process.exit(fail ? 1 : 0);

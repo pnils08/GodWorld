@@ -72,6 +72,53 @@ console.log('1. ripple — one per franchise-week, signed');
     both.length === 1 && /_AS_110$/.test(both[0].id), JSON.stringify(both.map(x => x.id)));
 }
 
+console.log('1b. engine.206 — the game-week ripple names the bars the week moved');
+{
+  function ripplesWithBars(sportsSeason, week, bars, prior) {
+    const rows = [];
+    const sb = { Logger: { log: () => {} }, Math, Object, Array, Number, String, JSON, Date, isFinite, isNaN, parseFloat, parseInt,
+      safeRand_: () => () => 0.5, recordRipple_: (ctx, e) => { rows.push(e); return true; }, hoodNamesWithScene_: () => [], queueCellIntent_: () => {}, queueAppendIntent_: () => {}, PropertiesService: null };
+    vm.createContext(sb);
+    load(sb, 'phase01-config/advanceSimulationCalendar.js');
+    load(sb, 'phase06-analysis/economicRippleEngine.js');
+    const ns = {}; HOODS.forEach(h => { ns[h] = { employerCharacter: 'retail', boomIndex: 0 }; });
+    const ctx = { config: { cycleCount: 110, rngSeed: 3, econMoodInertia: 1 }, ss: { getSheetByName: () => null }, writeIntents: [],
+      summary: Object.assign({ cycleId: 110, season: 'Fall', simMonth: 10, month: 10, holiday: 'none', sportsSeason,
+        sportsZones: ['Jack London', 'Downtown'], neighborhoodState: ns, economicRipples: prior || [], economicMood: 50,
+        worldEvents: [], weatherEvents: [], weather: { type: 'clear', impact: 1 }, sportsWeekBars: bars }, week) };
+    sb.runEconomicRippleEngine_(ctx);
+    return { S: ctx.summary, rows: rows.filter(r => r.causeType === 'economic-event' && /SPORTS_WEEK/.test(r.causeId)) };
+  }
+  const BARS = { byHood: { 'Jack London': { ids: ['BIZ-01', 'BIZ-02'], pp: 0.6 }, 'Downtown': { ids: ['BIZ-03'], pp: 0.6 }, 'Uptown': { ids: ['BIZ-04'], pp: 0.3 } },
+    ids: ['BIZ-01', 'BIZ-02', 'BIZ-03', 'BIZ-04'], pp: 0.53 };
+  const home = ripplesWithBars('playoffs', weekOf({ "A's": ['H:W H:W H:W', 'playoffs'] }, 110), BARS);
+  const hr = sportsRipples(home.S)[0];
+  check('home week: the SPORTS_WEEK ripple carries the venue hoods\' bars (Jack London + Downtown, not Uptown) and its text names them',
+    hr && JSON.stringify(hr.bizIds) === '["BIZ-01","BIZ-02","BIZ-03"]' && hr.bizPp === 0.6 &&
+    /^A's game-week spending — 3 bar\(s\) and restaurant\(s\) at Jack London \/ Downtown, Growth_Rate \+0\.6pp$/.test(hr.source),
+    JSON.stringify([hr && hr.bizIds, hr && hr.source]));
+  check('home week: the ledger row is business-scoped with those ids, at the primary venue',
+    home.rows.length === 1 && home.rows[0].targetScope === 'business' && JSON.stringify(home.rows[0].targetIds) === '["BIZ-01","BIZ-02","BIZ-03"]' && home.rows[0].neighborhood === 'Jack London',
+    JSON.stringify(home.rows));
+  const away = ripplesWithBars('championship', weekOf({ "A's": ['A:W A:W', 'championship'] }, 110), BARS);
+  const ar = sportsRipples(away.S)[0];
+  check('away week: every moved bar (no franchise home) rides the citywide ripple, weighted mean pp',
+    ar && JSON.stringify(ar.bizIds) === '["BIZ-01","BIZ-02","BIZ-03","BIZ-04"]' && ar.bizPp === 0.52 && /across the nightlife hoods, Growth_Rate \+0\.52pp/.test(ar.source) && away.rows[0].targetScope === 'business',
+    JSON.stringify([ar && ar.bizIds, ar && ar.source]));
+  const small = ripplesWithBars('regular-season', weekOf({ Oaks: ['H:W H:W', 'regular-season'] }, 110), BARS);
+  check('under .15 (the Oaks\' small week): no ripple, so no bars named — one gate both ways',
+    sportsRipples(small.S).length === 0 && small.rows.length === 0, JSON.stringify(small.rows));
+  const carried = ripplesWithBars('playoffs', weekOf({ "A's": ['H:W H:W H:W', 'playoffs'] }, 110), null,
+    [{ id: 'SPORTS_WEEK_AS_109', type: 'SPORTS_WEEK', impact: 8, sectors: ['food'], neighborhoods: ['Jack London', 'Downtown'], primaryNeighborhood: 'Jack London', startCycle: 109, endCycle: 112, currentStrength: 6, source: "A's game-week spending — 3 bar(s)" }]);
+  const carryRow = carried.rows.filter(r => r.effectType === 'carryover')[0];
+  check('a carried ripple stays hood-scoped (the bars were named the week it happened)',
+    carryRow && carryRow.targetScope === 'neighborhood' && JSON.stringify(carryRow.targetIds) === '["Jack London"]', JSON.stringify(carryRow));
+  const none = ripplesWithBars('playoffs', weekOf({ "A's": ['H:W H:W H:W', 'playoffs'] }, 110), undefined);
+  const nr = sportsRipples(none.S)[0];
+  check('no bars moved (S.sportsWeekBars absent): the ripple files hood-scoped with its plain text, as before',
+    nr && nr.bizIds === undefined && none.rows[0].targetScope === 'neighborhood' && nr.source === "A's game-week spending", JSON.stringify([nr && nr.source, none.rows[0]]));
+}
+
 // ── population ───────────────────────────────────────────────────────────────
 console.log('2. economy label — one label, one owner (engine.281 (d))');
 {

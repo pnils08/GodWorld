@@ -449,6 +449,11 @@ function buildContractSeeds_(ctx) {
   for (var k = 0; k < order.length; k++) {
     var group = clusters[order[k]];
     var lead = group[0];
+    // engine.206: a restored carryover sits first in S.economicRipples, so a hood's economic
+    // seed read 'carryover +N' with the week's own cause buried inside it. The first birth leads.
+    for (var li = 0; li < group.length; li++) {
+      if (group[li].effectType !== 'carryover') { lead = group[li]; break; }
+    }
     var totalMag = 0;
     var causeLines = [];
     var targetPops = [];

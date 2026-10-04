@@ -337,8 +337,9 @@ console.log('engine.205 slice D — a game week at the bars');
   const wk = (o) => ({ "A's": Object.assign({ g: 0, h: 0, signed: 0, reach: 0, venueShare: 0, venue: ['Jack London', 'Downtown'] }, o) });
   const run = (sportsWeek) => {
     ranges = []; ripples.length = 0;
-    const out = mod.applyBusinessDynamics_(ctxWith({ bl: DBL.map(r => r.slice()), S: { neighborhoodState: NS, sportsWeek } }));
-    return { growth: ranges[0].values.map(v => v[1]), ripples: ripples.filter(r => r.sourceEngine === 'applyBusinessDynamics.sportsWeekBars'), out };
+    const ctx = ctxWith({ bl: DBL.map(r => r.slice()), S: { neighborhoodState: NS, sportsWeek } });
+    const out = mod.applyBusinessDynamics_(ctx);
+    return { growth: ranges[0].values.map(v => v[1]), ripples: ripples.filter(r => r.sourceEngine === 'applyBusinessDynamics.sportsWeekBars'), out, bars: ctx.summary.sportsWeekBars };
   };
   const quiet = run(undefined);
   const noGame = run(wk({ g: 0, signed: 0.5 }));
@@ -356,9 +357,13 @@ console.log('engine.205 slice D — a game week at the bars');
   assert('away win: the bar under the nightlife median and the retail shop do not move', d(awayWin, 2) === 0 && d(awayWin, 3) === 0, JSON.stringify(awayWin.growth));
   assert('away win: the hotel (default class vol 1.0) lifts +.48', near(d(awayWin, 4), 0.48), d(awayWin, 4));
   assert('home loss: the venue\'s bars take the cut (−.3 × 2pp × 1.3 = −.78); an off-venue nightlife bar is untouched (home games concentrate at the stadium)', near(d(homeLoss, 0), -0.78) && d(homeLoss, 1) === 0 && d(homeLoss, 2) === 0 && d(homeLoss, 3) === 0, JSON.stringify(homeLoss.growth));
-  const r = awayWin.ripples[0];
-  assert('one business-scoped ripple naming the moved bars, neighborhood blank, magnitude = mean pp event', awayWin.ripples.length === 1 && r.targetScope === 'business' && JSON.stringify(r.targetIds) === '["BIZ-B1","BIZ-B2","BIZ-H1"]' && r.neighborhood === '' && r.magnitude === 0.48 && /A's signed \+0\.24/.test(r.causeDetail), JSON.stringify(r));
-  assert('home loss ripple is negative', homeLoss.ripples.length === 1 && homeLoss.ripples[0].magnitude < 0 && homeLoss.out.sportsBars === 2, JSON.stringify(homeLoss.ripples));
+  assert('engine.206: no Phase-5 bars ripple any more — the economy\'s own game-week ripple names the bars; no game → no S.sportsWeekBars',
+    awayWin.ripples.length === 0 && homeLoss.ripples.length === 0 && quiet.ripples.length === 0 && noGame.bars === undefined && quiet.bars === undefined, JSON.stringify(awayWin.ripples));
+  assert('engine.206: away win → S.sportsWeekBars groups the three moved bars by parent hood, mean pp per hood and overall (+.24 × 2pp = .48 before vol)',
+    awayWin.bars && JSON.stringify(awayWin.bars.ids) === '["BIZ-B1","BIZ-B2","BIZ-H1"]' && awayWin.bars.pp === 0.48 &&
+    JSON.stringify(awayWin.bars.byHood['Jack London']) === '{"ids":["BIZ-B1","BIZ-H1"],"pp":0.48}' && JSON.stringify(awayWin.bars.byHood['Uptown']) === '{"ids":["BIZ-B2"],"pp":0.48}', JSON.stringify(awayWin.bars));
+  assert('engine.206: home loss → only the venue hood\'s bars, negative (−.3 × 2pp = −.6)',
+    homeLoss.bars && Object.keys(homeLoss.bars.byHood).join() === 'Jack London' && homeLoss.bars.pp === -0.6 && homeLoss.out.sportsBars === 2, JSON.stringify(homeLoss.bars));
   delete global.recordRipple_;
 }
 console.log(`\n${passed} passed, ${failed} failed`);

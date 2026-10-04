@@ -750,6 +750,7 @@ const RIPPLE_LANE_MAP = {
   'initiative-implementation': 'civic',
   'approval-shift': 'civic',
   'sports': 'sports',
+  'transit-event': 'civic',   // engine.206: gridlock + game-day crowds seed CIVIC; the lane follows
   'faith-event': 'culture',
   'fame-event': 'culture',
   'lifestyle-sighting': 'culture',

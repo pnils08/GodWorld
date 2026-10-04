@@ -313,6 +313,34 @@ function updateTransitMetrics_Phase2_(ctx) {
       sourceEngine: 'updateTransitMetrics'
     });
   }
+  // engine.206: a homestand is a transit seed. One ripple per franchise home week at its
+  // primary venue hood — the economy's SPORTS_WEEK sits at venue[0] too, so the two seeds
+  // about one homestand share a hood. Magnitude = the station lift the crowds took
+  // (GAMEDAY_RIDERSHIP_BOOST × the week's home load, the same number :382 applies).
+  if (typeof recordRipple_ === 'function') {
+    var gdWeeks = S.sportsWeek || {};
+    for (var gdf in gdWeeks) {
+      if (!gdWeeks.hasOwnProperty(gdf)) continue;
+      var gdw = gdWeeks[gdf];
+      if (!(gdw && gdw.h > 0) || !(gdw.venue && gdw.venue.length)) continue;
+      var gdLift = Math.round(TRANSIT_FACTORS.GAMEDAY_RIDERSHIP_BOOST *
+        (Number(gdw.unsigned) || 0) * (Number(gdw.venueShare) || 0) * 1000) / 1000;
+      if (!(gdLift > 0)) continue;
+      recordRipple_(ctx, {
+        causeType: 'transit-event',
+        causeId: 'game-day-c' + cycle + ':' + gdf,
+        causeDetail: gdf + ' home week — ' + gdw.h + ' home game' + (gdw.h === 1 ? '' : 's') +
+          '; game-day crowds through ' + gdw.venue.join(', ') + ', station ridership up to +' + Math.round(gdLift * 100) + '%',
+        effectType: 'game-day-crowds',
+        targetScope: 'neighborhood',
+        targetIds: gdw.venue.slice(),
+        neighborhood: gdw.venue[0],
+        magnitude: gdLift,
+        duration: 1,
+        sourceEngine: 'updateTransitMetrics'
+      });
+    }
+  }
   // ── end engine.70 T-1 ────────────────────────────────────────────────────
 
   return allMetrics;

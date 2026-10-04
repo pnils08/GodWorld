@@ -261,9 +261,10 @@ function runEconomicRippleEngine_(ctx) {
       var rlr = S.economicRipples[rli];
       if (!rlr) continue;
       var isCarried = rlr.startCycle < currentCycle;
-      // runEconomicRippleEngine_ runs twice per cycle (Phase 6 + v3Integration, C104 log).
-      // Birth guard is a boolean (object dies if never carried); carryover guard is
-      // cycle-valued so it re-arms each cycle the ripple survives.
+      // Phase 6 owns the one scheduled run (engine.217 dropped Phase 8's second call); the
+      // guards stay so a harness calling twice cannot double-ledger. Birth guard is a boolean
+      // (object dies if never carried); carryover guard is cycle-valued so it re-arms each
+      // cycle the ripple survives.
       if (isCarried) {
         if (rlr._carryLedgered === currentCycle) continue;
         rlr._carryLedgered = currentCycle;
@@ -282,8 +283,10 @@ function runEconomicRippleEngine_(ctx) {
           : ('sector-impact:' + ((rlr.sectors || []).join('/'))),
         // T4 (research.24): business-threaded ripples ledger business-scoped —
         // birth AND carryover rows (bizId rides the ripple + snapshot compactor).
-        targetScope: rlr.bizId ? 'business' : (rlr.primaryNeighborhood ? 'neighborhood' : 'citywide'),
-        targetIds: rlr.bizId ? [rlr.bizId] : (rlr.primaryNeighborhood ? [rlr.primaryNeighborhood] : (rlr.neighborhoods || [])),
+        // engine.206: a game-week ripple names the bars it moved (bizIds, birth row only —
+        // compactEconomicRipples_ does not carry them, so a carryover stays hood-scoped).
+        targetScope: (rlr.bizIds && rlr.bizIds.length) || rlr.bizId ? 'business' : (rlr.primaryNeighborhood ? 'neighborhood' : 'citywide'),
+        targetIds: (rlr.bizIds && rlr.bizIds.length) ? rlr.bizIds.slice() : rlr.bizId ? [rlr.bizId] : (rlr.primaryNeighborhood ? [rlr.primaryNeighborhood] : (rlr.neighborhoods || [])),
         neighborhood: rlr.primaryNeighborhood || '',
         magnitude: rlr.impact,
         duration: rlr.endCycle - rlr.startCycle,
@@ -467,19 +470,39 @@ function detectCalendarRipples_(ctx, currentCycle) {
   // (a week below the franchise's own expectation is a negative ripple); the stakes are in
   // the number, never the phase word. A home week lands at that franchise's venue, an away
   // week city-wide (watch parties). Under |signed| .15 the week moves no ripple.
+  // engine.206: the ripple also names the bars the week moved (S.sportsWeekBars, Phase 5, by
+  // parent hood) — a home week takes its venue hoods' bars, an away week every moved bar not
+  // in a franchise's home venue this week (two away franchises: the larger |signed| takes them).
+  // Under the .15 gate the bars still move and nothing names them: one gate, both ways.
   var sportsWeeks = S.sportsWeek || {};
+  var weekBars = S.sportsWeekBars || null;
+  var homeVenues = {}, awayLead = '', awayLeadSigned = 0;
+  for (var hf in sportsWeeks) {
+    if (!sportsWeeks.hasOwnProperty(hf) || !sportsWeeks[hf] || !(sportsWeeks[hf].g > 0)) continue;
+    var hfw = sportsWeeks[hf], hfSigned = Math.abs(Number(hfw.signed) || 0);
+    if ((Number(hfw.venueShare) || 0) >= 0.5 && hfw.venue && hfw.venue.length) {
+      for (var hvi = 0; hvi < hfw.venue.length; hvi++) homeVenues[hfw.venue[hvi]] = true;
+    } else if (hfSigned > awayLeadSigned) { awayLead = hf; awayLeadSigned = hfSigned; }
+  }
   for (var sf in sportsWeeks) {
     if (!sportsWeeks.hasOwnProperty(sf)) continue;
     var swk = sportsWeeks[sf], swSigned = Number(swk.signed) || 0;
     if (Math.abs(swSigned) < 0.15) continue;
     var swHome = (Number(swk.venueShare) || 0) >= 0.5 && swk.venue && swk.venue.length;
+    var swBars = sportsWeekBarsFor_(weekBars, swHome ? swk.venue : null, homeVenues, !swHome && sf === awayLead);
+    var swText = sf + (swSigned > 0 ? ' game-week spending' : ' game-week slump');
+    if (swBars.ids.length) {
+      swText += ' — ' + swBars.ids.length + ' bar(s) and restaurant(s) ' +
+        (swHome ? 'at ' + swk.venue.join(' / ') : 'across the nightlife hoods') +
+        ', Growth_Rate ' + (swBars.pp > 0 ? '+' : '') + swBars.pp + 'pp';
+    }
     var swRipple = createRipple_(S, 'SPORTS_WEEK', currentCycle,
-      { description: sf + (swSigned > 0 ? ' game-week spending' : ' game-week slump'),
-        rippleKey: String(sf).replace(/[^A-Za-z]/g, '').toUpperCase() },
+      { description: swText, rippleKey: String(sf).replace(/[^A-Za-z]/g, '').toUpperCase() },
       swHome ? swk.venue[0] : 'all', cal);
     if (swRipple) {
       swRipple.impact = swRipple.currentStrength = Math.round(15 * swSigned);
       swRipple.neighborhoods = swHome ? swk.venue.slice() : ['all'];
+      if (swBars.ids.length) { swRipple.bizIds = swBars.ids; swRipple.bizPp = swBars.pp; }
     }
   }
   
@@ -652,6 +675,27 @@ function isBusinessClosure_(evt, evtText) {
     if (evtText.indexOf(BUSINESS_CLOSURE_NOUNS_[i]) >= 0) return true;
   }
   return false;
+}
+
+// engine.206: which of the week's moved bars (S.sportsWeekBars, Phase 5, keyed by parent hood)
+// a SPORTS_WEEK ripple names. venueHoods set → a home week, its venue hoods' bars; else an away
+// week → every moved bar outside any franchise's home venue this week, and only on the away
+// ripple the caller flags as the taker. pp = the ids' mean Growth_Rate event, weighted by count.
+function sportsWeekBarsFor_(weekBars, venueHoods, homeVenues, takeAway) {
+  var out = { ids: [], pp: 0 };
+  if (!weekBars || !weekBars.byHood) return out;
+  var sum = 0;
+  for (var hood in weekBars.byHood) {
+    if (!weekBars.byHood.hasOwnProperty(hood)) continue;
+    var take = venueHoods ? venueHoods.indexOf(hood) >= 0 : (takeAway && !(homeVenues || {})[hood]);
+    if (!take) continue;
+    var grp = weekBars.byHood[hood] || {};
+    var ids = grp.ids || [];
+    for (var i = 0; i < ids.length; i++) out.ids.push(ids[i]);
+    sum += (Number(grp.pp) || 0) * ids.length;
+  }
+  if (out.ids.length) out.pp = Math.round(sum / out.ids.length * 100) / 100;
+  return out;
 }
 
 function createRipple_(S, triggerType, cycle, sourceEvent, eventNeighborhood, cal) {

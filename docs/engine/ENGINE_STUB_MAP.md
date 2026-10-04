@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-10-03 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-10-04 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -1116,7 +1116,7 @@
 
 - **applyBusinessDynamics_(ctx)**
   Reads: S.canonHoods, S.chaosBusinessFold, S.chaosNeighborhoodFold, S.chaosShip, S.cycleId, S.initiativeNeighborhoodEffects, S.neighborhoodState, S.previousCycleState, S.sportsWeek, S.worldEvents
-  Writes: S.businessClosures, S.businessDeclines, S.businessDynamicsState, S.hoodBusinessMomentum, S.worldEvents
+  Writes: S.businessClosures, S.businessDeclines, S.businessDynamicsState, S.hoodBusinessMomentum, S.sportsWeekBars, S.worldEvents
   Config: ctx.config.cycleCount
   Sheets: Business_Ledger
 
@@ -1129,7 +1129,7 @@
 - **assert(label, cond, detail)**
 
 - **ctxWith(o)**
-  Reads: S.businessClosures, S.businessDeclines, S.businessDynamicsState, S.initiativeNeighborhoodEffects, S.worldEvents
+  Reads: S.businessClosures, S.businessDeclines, S.businessDynamicsState, S.initiativeNeighborhoodEffects, S.sportsWeekBars, S.worldEvents
   Sheets: Business_Ledger, Civic_Office_Ledger, Initiative_Tracker
 
 ### applyGameNightMoments.js
@@ -2724,7 +2724,7 @@
 - **mapToCanonicalNeighborhood_(blNeighborhood, ctx)**
 
 - **detectCalendarRipples_(ctx, currentCycle)**
-  Reads: S.economicRipples, S.holidayLabel, S.sportsWeek
+  Reads: S.economicRipples, S.holidayLabel, S.sportsWeek, S.sportsWeekBars
 
 - **detectNewRipples_(ctx, currentCycle)**
   Reads: S.citizenEvents, S.crisisSpikes, S.domainPresence, S.weatherEvents, S.worldEvents
@@ -2732,6 +2732,8 @@
 - **isConstructionBoom_(evt, evtText)**
 
 - **isBusinessClosure_(evt, evtText)**
+
+- **sportsWeekBarsFor_(weekBars, venueHoods, homeVenues, takeAway)**
 
 - **createRipple_(S, triggerType, cycle, sourceEvent, eventNeighborhood, cal)**
   Reads: S.economicRipples, S.neighborhoodAdjacency
@@ -2836,7 +2838,7 @@
 - **contractSeedBackdropDraw_(pool, excludeKeys, used, fillN, roll)**
 
 - **buildContractSeeds_(ctx)**
-  Reads: S.cycle, S.cycleId, S.rippleEvents
+  Reads: S.cycle, S.cycleId, S.economicRipples, S.rippleEvents
   Writes: S.contractSeeds
   Config: ctx.config.cycleCount
   RNG: ctx.rng / safeRand_(ctx)
@@ -4499,4 +4501,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1603
+**Functions mapped:** 1604

@@ -425,9 +425,10 @@ console.log('\nTest 11c: rippleEntry + RIPPLE_LANE_MAP');
     'lifestyle-sighting': 'culture',
     'trajectory': 'business',
     'migration': 'business',
-    'edition-coverage': 'business'
+    'edition-coverage': 'business',
+    'transit-event': 'civic'   // engine.206: gridlock + game-day crowds seed CIVIC; the desk-signal lane follows
   };
-  assertEqual('RIPPLE_LANE_MAP has exactly the 9 live cause types', Object.keys(helper.RIPPLE_LANE_MAP).sort(), Object.keys(expected).sort());
+  assertEqual('RIPPLE_LANE_MAP has exactly the 10 live cause types', Object.keys(helper.RIPPLE_LANE_MAP).sort(), Object.keys(expected).sort());
   for (const [k, lane] of Object.entries(expected)) {
     assertEqual(`route ${k} → ${lane}`, helper.RIPPLE_LANE_MAP[k], lane);
   }

@@ -1,7 +1,7 @@
 ---
 title: Citizen Memory & Perception Plan (Typed Emotion + Folk Memory)
 created: 2026-07-31
-updated: 2026-08-09
+updated: 2026-10-04
 type: plan
 tags: [engine, citizens, media, memory, active]
 sources:
@@ -196,6 +196,7 @@ Citizen memory and approval ceiling — Track A code-only self-arm plus grief an
 - 2026-08-09 — Codex: Task 5 staged on SANDBOX 0720. Migration read-back is 8/8 config and 3/3 columns; exact main `dda0b129` is deployed @40 with a 171/171 byte-identical pull-back and zero test files. C113 pre-fire state is clean; attended C114 fire remains.
 - 2026-08-09 — Codex: Task 5 sandbox proof closed from the shared C114–C115 fires. All four ≥80 offices persisted streak 2, the other six remained 0, no premature scandal fired, config/schema remained exact, and both Cycles had zero engine errors. Track A is complete; Track B remains gated on research.17.
 - 2026-08-09 — Codex: Mike identified a release-blocking deployment flaw: the engine.94 commits required Sheet state that a code-only production deploy would not carry. Added a pre-Cycle, code-carried, idempotent self-arm for all 14 config rows and 3 headers; 24/24 first-live-Cycle assertions and the 141/141-file suite pass. Sandbox redeploy proof remains before Track A can close again.
+- 2026-10-04 — rb (overnight): Track B designed as "memory that fires" — §Track B design below: history fields on the content DSL from the 12-Cycle LifeHistory_Log + DialState stamps + bonds, ~24 authored memory rows, one election TENSION seed. No new store. engine.94 ROLLOUT → in-progress.
 - 2026-08-09 — Codex: Deployment-safety correction `d3b70f3c` sandbox-proven @41/C116. Exact 172/172 pull-back, 128 phases `ok:true`, config 14/14 and headers 3/3 retained, qualifying streaks advanced to 3, one naturally active grief register carried one machine source, and zero engine errors. The commit is now independently safe under the code-only production deployment model; Track A closes again.
 
 ## Builder ruling 2026-09-27 — grudge / folk memory
@@ -204,3 +205,56 @@ events, but the folk memory would have to serve the sim rather than add another 
 no new memory store for its own sake. Folk memory returns as EVENTS (Event_Content_Ledger conditions that fire
 because of what happened before); grudges may use bonds and/or dial tags as needed. Test: does it make something
 happen in the sim, not does it remember more.
+
+## Track B design — memory that fires (research-build, 2026-10-04 overnight; builder priority 2026-09-29)
+
+**Tier A. Reads the 2026-09-27 ruling as written: no new store; folk memory returns as events; grudges via bonds as needed; the test is "does it make something happen."** Every carrier below already exists on the sheet or in `S`. The cut adds *condition fields* and one *bond seed*; the content that fires is operator-authored rows in `Event_Content_Ledger`, the same surface every other texture uses.
+
+### B.0 Measured 2026-10-04 02:30 (live sheet + code)
+
+- `Event_Content_Ledger`: 350 rows (328 lines, 22 fragments). Fields conditioned on today: `lifestate` 103, `occupation` 87, `band` 67, `age` 39, `wealth` 37, `hood` 34, `children` 28, `undocked` 22, `heritage` 8, `undockedpilot` 8, `warmth` 7, `fame` 6, `hoodtrend` 4, `momentum` 2, `drive` 2. **Not one field reads the past.** The DSL table (`phase02-world-state/loadEventContentLedger.js:64-112`) and the scopes (`phase05-citizens/generateCitizensEvents.js:2740-2800`) are the two places a field lives; `hoodtrend`/`momentum` (engine.79, `27776f0a`) are the precedent for adding a pair.
+- `LifeHistory_Log`: 20,573 rows, all C98–C109 — `utilities/archiveLifeHistory.js:45` keeps the last **12 Cycles** (`CYCLE_RETAIN_CYCLES`), older rows go to `LifeHistory_Archive`. Columns `Timestamp, POPID, Name, EventTag, EventText, Neighborhood, Cycle`; `EventTag` = `Primary|tag|tag…`. The generator already opens the tab every Cycle (`generateCitizensEvents.js:296`, engine.38 A2 anti-inert floor).
+- Primary tags with consequence in the window: `Death` 8, `Setback` 7, `Rivalry` 7, `Transgression-Serious` 3, `Hospitalized` 2, `Critical` 1, `Recovering` 15. Thin on purpose: the judicial (`Money` fines, arrests — `judicialLifecycle.js:444-447`), debt-default (`generationalWealthEngine.js:520`, plus `DialState.debtDefault {l, n}`), ticket and property-tax lines all start at C110. Memory has little to read today and a great deal from next week.
+- Hood on the log row is filled for the tracked hoods (Lake Merritt 2,044 … Jack London 1,527 rows in the window).
+- Grudge carrier: `bondEngine.js` TENSION → RIVALRY at intensity ≥ 6, TENSION → PROFESSIONAL at ≤ 2 after 3 Cycles (`:840-858`); `createBond_(ctx, a, b, type, origin, domainTag, neighborhood, notes)` (`:2709`). Elections (`runCivicElectionsv1.js:319-345`) name winner and challenger and create no bond between them.
+- Hood direction memory already exists one level up: trajectory `momentum` 0–10 accumulates across Cycles (`neighborhoodTrajectoryEngine.js:193-197`).
+
+### B.1 Fields — the past becomes addressable (engine-sheet builds; codex may draft against this spec)
+
+One pass per Cycle over the `LifeHistory_Log` rows already read at `generateCitizensEvents.js:296`, window = `folkMemoryWindow` Cycles (World_Config, default **8**, hard-capped at the log's 12), producing `S.folkMemory = { byHood: { hood: { tag: count } }, byCitizen: { POPID: { tag: lastCycle } } }` for a **locked tag set** (the DSL vocab rule, S289: a typo narrows, never widens). Then the DSL table and the scopes gain:
+
+| Field | Kind | Reads | Null (fails the term) when |
+|---|---|---|---|
+| `bereaved` | num | Cycles since the citizen's grief register was set (`MemoryRegisters.grief`, Track A) — the survivor's carrier, not the deceased's row | no grief in window |
+| `charged` | num | Cycles since the citizen's last judicial line (the tag `judicialLifecycle.js` writes — es reads it off the DIAL_MAP, not this table) | none in window |
+| `defaulted` | num | Cycles since `DialState.debtDefault.l` | never defaulted |
+| `rival` | flag | an ACTIVE `rivalry` or `sports_rival` bond on this citizen | — |
+| `hooddeaths` | num | `Death` rows in the citizen's hood, window | hood has no log rows → 0, not null (an empty hood is a quiet hood) |
+| `hoodcharged` | num | judicial-tag rows in the hood, window | same |
+| `hoodhospital` | num | `Hospitalized` + `Critical` rows in the hood, window | same |
+| `hoodclosed` | num | business-closure owner lines in the hood (the tag `applyBusinessDynamics.js:317` writes), window | same |
+
+Rules: numeric, so a row author sets the bar (`hoodcharged>=4`, `charged<=3`); the count is of **tracked** lines, so bars are tracked-scale (a hood with 4 charges in 8 Cycles is loud — the ledger is the 0.25% subset, never a world denominator). No new tab, no new column, no new store: `S.folkMemory` is rebuilt every Cycle from the log and dies with the run.
+
+### B.2 Content — what the memory makes happen (research-build authors; bench first, PROD rows ride the code deploy)
+
+~24 rows in `Event_Content_Ledger`, pools `memory.hood.*` and `memory.own.*`, each with a source tag that already routes dials (`primaryFromTags`, `generateCitizensEvents.js:804-835` — es confirms which source carries which dial move before the rows are seeded; the row's *effect* is that routing, nothing new). Shape, not final text: a hood four charges deep draws "still checks the lock twice since the spring the block got loud" (`hoodcharged>=4`, source routed to the wary side); a citizen three Cycles past a court date draws "kept the receipt from the court clerk in the kitchen drawer" (`charged<=3`); a defaulted citizen a year on draws the long version (`defaulted>=40`); a bereaved household at the one-year mark (`bereaved>=50; bereaved<=53`). **The test is the ruling's:** each row moves a dial or seeds a bond when drawn; a row that only remembers is cut.
+
+### B.3 Grudge seed — one named loss makes one named bond (engine-sheet)
+
+When an election seats a challenger over a tracked incumbent, or an incumbent holds against a tracked challenger, create one `TENSION` bond between the two (`createBond_`, origin `election`, domain `civic`, hood = the seat's district or the loser's hood, notes naming the race and Cycle) if none exists. The existing ladder does the rest — it hardens to `rivalry` or settles to `professional` by what happens next. No other seed in this cut; sports rivalries already form on their own.
+
+### B.4 Proof
+
+- Bench (SANDBOX, post-C110 data so judicial/debt lines exist): one fire — `S.folkMemory` built in < 2 s over ≤ 20k rows; a `hoodcharged>=N` row drawn only in hoods at or above N; `charged`/`defaulted`/`bereaved` rows drawn only by citizens carrying the stamp; hoods with no log rows draw no memory row and raise no error; one TENSION bond after a contested election; zero new Engine_Errors; the fire's run time within the engine.279 range.
+- Live acceptance after deploy: by C114 at least one memory-conditioned line in a citizen's LifeHistory and one in a street pool; the civic desk can follow an election grudge in Citizen_Bonds.
+
+### B.5 Weakest assumptions, attacked
+
+1. *The log read at `:296` is the whole tab.* If it is a tail read, B.1 adds one full-column read (`Cycle`, `POPID`, `EventTag`, `Neighborhood`) — four columns, ≤ 20k rows, inside the Apps Script budget engine.279 just widened. es measures before building on it.
+2. *Tag names.* `Death`, `Hospitalized`, `Critical` are measured; judicial and closure tags are read from their writers at build time, never from this table.
+3. *Thin today.* With 3 serious transgressions in 12 Cycles the hood fields barely fire before C110's systems warm up. That is correct behaviour (SIM_DOCTRINE §15 — a bar the input never crosses is inert only if the input can never cross it; here it crosses from next week), not a reason to lower bars.
+
+### B.6 Sim calls for the builder
+
+None required to build B.1 and B.3. **One for B.2's text:** the ~24 memory rows are canon texture — say whether you want to read them before they reach the live ledger, or trust the bench and the ruling.

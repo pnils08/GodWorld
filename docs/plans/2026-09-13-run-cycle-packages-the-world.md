@@ -1,7 +1,7 @@
 ---
 title: Run-Cycle Packages the World to Its Readers Plan
 created: 2026-09-13
-updated: 2026-09-14
+updated: 2026-10-04
 type: plan
 tags: [engine, pipeline, citizen-loop, active]
 sources:

@@ -1,7 +1,7 @@
 ---
 title: Sports as a lived system — plan
 created: 2026-09-11
-updated: 2026-09-16
+updated: 2026-10-04
 type: plan
 status: draft
 tags: [plan, engine, sports, ingest, fandom, active]

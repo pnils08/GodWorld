@@ -1,7 +1,7 @@
 ---
 title: Engine Routing Foundation Plan
 created: 2026-05-07
-updated: 2026-05-07
+updated: 2026-10-04
 type: plan
 tags: [engine, media, architecture, active]
 sources:

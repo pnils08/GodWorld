@@ -218,6 +218,12 @@ Read (es):
 - **Every athlete gets a life event from his team's week** — a win week or a losing week — named on a row or not. "All" read as all athletes (the sentence's subject); the fans' week lines are §2.2 already.
 - **UNDOCKED** — the parent plan already rules it in (plan §4: "What moves it UP: … Undocked engagement"; "One dial covers a citizen's relationship to the city's spectacle"). §2.2 carries `Undocked-Engaged` +1.
 
+## Status log
+
+### engine.280 — status (drained from ROLLOUT, 2026-10-04 / S274)
+
+engine.208 follow-ups (§2.9 "Out of this build"): Sports-Soured/Lifted need a per-piece tone at post-publish (no article tone exists — pipeline seam); Sports-Gutted needs a negative flag on roster rows; Sports-Attended needs an authored ECL attendance tag (rb content lane); refresh the live dropdown (`setupSportsFeedValidation`) after the 208 deploy.
+
 ## Changelog
 - 2026-10-02 23:29 (research-build, S522) — Mike ruled all five §4 calls (recorded under §4 Rulings): athletes inert + feed-named citizens get signed life events per EventType; thin seed accepted + families and canon fans authored; round words go into the dropdown; magnitudes and the Oaks fan-side loss rule approved. Document is build-ready for es.
 - 2026-10-02 (research-build, S522) — agy read-only review folded ([[2026-10-02-agy-engine-208-draft-review]]: SHIP-WITH-FIXES): `Undocked-Engaged` tag restored to the table (ruled up-mover); Oaks loss made an explicit fan-side sim call §4(v) so the negative pole is live at ship; synthetic 10-Cycle bench added to §2.8; magnitudes kept as a sim confirm per plan Task 8 item 4. Also: §2.5 per-piece tone verified absent (gap named), Q3 expectation baseline added as an es prerequisite §2.7, ClockMode counts relabelled.

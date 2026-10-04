@@ -2,15 +2,18 @@
 'use strict';
 
 /**
- * Append authored UNDOCKED ECL rows to Event_Content_Ledger.
- * Default dry-run. Idempotent on Text.
+ * Append authored ECL rows to Event_Content_Ledger. Default dry-run. Idempotent on Text.
+ * Pools: undocked (default) | memory (engine.94 B.2, scripts/memoryEclPool.js).
  *
- *   node scripts/undockedEclPoolApply.js
- *   node scripts/undockedEclPoolApply.js --apply
+ *   node scripts/undockedEclPoolApply.js [--pool memory]
+ *   node scripts/undockedEclPoolApply.js [--pool memory] --apply
  */
 
 require('../lib/env');
-const P = require('./undockedEclPool');
+// --pool memory selects the engine.94 memory pool (scripts/memoryEclPool.js); default stays UNDOCKED.
+const POOL_ARG = (function () { const i = process.argv.indexOf('--pool'); return i >= 0 ? String(process.argv[i + 1] || '') : 'undocked'; })();
+if (POOL_ARG !== 'undocked' && POOL_ARG !== 'memory') throw new Error('unknown --pool ' + POOL_ARG + ' (undocked|memory)');
+const P = require(POOL_ARG === 'memory' ? './memoryEclPool' : './undockedEclPool');
 
 const APPLY = process.argv.includes('--apply');
 

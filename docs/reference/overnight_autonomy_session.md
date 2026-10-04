@@ -195,3 +195,4 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 - Systemic blocker (unexplained test failure, guest rewriting outside scope, weekly budget warning): stop that thread, log `BLOCKED <what>`, take the next item. Two consecutive blocked threads → stand down and wait for morning; do not thrash.
 - Self-loop → `/self-debug`.
 
+10:33 rb CHECK — es idle post-09:53 CHECK, builder draft "Fired C110, run the smoke" still unsent in its box (untouched); live cycleCount 109, C110 not fired; origin level 79db1db0, 0 unpushed; inbox README only; no guest claims open (codex/agy idle); nothing on NEXT[research-build] unblocked. Next wake :26.

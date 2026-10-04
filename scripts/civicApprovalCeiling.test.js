@@ -641,5 +641,58 @@ console.log('═══ H. v1.5 demotion campaign — the drop is the vote');
     JSON.stringify(cleared.notes));
 }
 
+console.log('═══ B3. engine.94 B.3 — one named loss makes one named bond (real runCivicElections_ + real createBond_)');
+{
+  const G = global;
+  const bondSource = fs.readFileSync(path.resolve(__dirname, '../phase05-citizens/bondEngine.js'), 'utf8');
+  const B = new Function(bondSource + '\nreturn { createBond_: createBond_, BOND_TYPES: BOND_TYPES };')();
+  G.createBond_ = B.createBond_; G.BOND_TYPES = B.BOND_TYPES;
+  const SR = new Function(fs.readFileSync(path.resolve(__dirname, '../utilities/safeRand.js'), 'utf8') + '\nreturn { seedGeneratedIds_: seedGeneratedIds_, uniqueGeneratedId_: uniqueGeneratedId_ };')();
+  G.seedGeneratedIds_ = SR.seedGeneratedIds_; G.uniqueGeneratedId_ = SR.uniqueGeneratedId_;   // generateBondId_ reads these
+  const BP = new Function(fs.readFileSync(path.resolve(__dirname, '../phase05-citizens/bondPersistence.js'), 'utf8') + '\nreturn { normalizeBondCitizenId_: normalizeBondCitizenId_ };')();
+  G.normalizeBondCitizenId_ = BP.normalizeBondCitizenId_;   // makeBond_ canonicalises ids through it (POPIDs pass through)
+  G.getApprovalCeilingConfig_ = A.getApprovalCeilingConfig_;
+  G.requireTab_ = (ss, n) => ss.getSheetByName(n) || {};
+  G.inWorldStamp_ = () => 'Y2C45';
+  const appended = []; G.queueAppendIntent_ = (ctx, tab, row) => appended.push({ tab, row }); G.queueRangeIntent_ = () => {};
+  let rngQueue = []; G.safeRand_ = () => () => (rngQueue.length ? rngQueue.shift() : 0.5);
+  const EL = new Function(electionSource + '\nreturn { runCivicElections_: runCivicElections_ };')();
+  const COL_HEAD = ['OfficeId','Title','Type','District','Holder','PopId','TermStart','TermEnd','TermYears','ElectionGroup','Status','LastElection','NextElection','Notes','','VotingPower','Faction','ExecutiveActions','Approval','HighApprovalStreak','AutoScandalUntilCycle','AutoScandalSource'];
+  const seatRow = (o) => ['COUNCIL-D3', 'City Council District 3', 'elected', 'D3', o.holder, o.pop, 1, 209, 4, 'A', o.status || 'active', '', '', '', '', 'yes', 'OPP', '', 64, 0, '', ''];
+  const LH = ['POPID', 'First', 'Last', 'FullName', 'Tier', 'Neighborhood', 'CIV (y/n)', 'Status', 'TierRole'];
+  const INCUMBENT = ['POP-00503', 'Rose', 'Delgado', 'Rose Delgado', 2, 'Lake Merritt', 'y', 'Active', 'City Council District 3'];
+  const CHALLENGER = ['POP-00800', 'Marcus', 'Webb', 'Marcus Webb', 3, 'Temescal', 'n', 'Active', 'community organizer'];   // civic-adjacent → incumbent score 60
+  const fire = (o) => {
+    rngQueue = (o.rng || []).slice(); appended.length = 0;
+    const office = [COL_HEAD.slice(), seatRow(o.seat)];
+    const sheet = { getDataRange: () => ({ getValues: () => office.map(r => r.slice()) }) };
+    const ctx = { ss: { getSheetByName: n => n === 'Civic_Office_Ledger' ? sheet : null }, ledger: { headers: LH.slice(), rows: (o.rows || [INCUMBENT, CHALLENGER]).map(r => r.slice()), dirty: false },
+      summary: { absoluteCycle: 97, cycleId: 97, economicMood: 50, cityDynamics: { sentiment: 0 }, relationshipBonds: (o.bonds || []).slice() },
+      config: Object.assign({ cycleCount: 97 }, APPROVED), writeIntents: [] };
+    EL.runCivicElections_(ctx);
+    return { ctx, bonds: ctx.summary.relationshipBonds, result: ctx.summary.electionResults && ctx.summary.electionResults.results ? ctx.summary.electionResults.results[0] : null };
+  };
+  // rng order for a contested seat: challenger pick, variance (0.5 → 0), the roll (< 60 keeps the incumbent)
+  const hold = fire({ seat: { holder: 'Rose Delgado', pop: 'POP-00503' }, rng: [0, 0.5, 0.1] });
+  check('B3.1 the incumbent holds against a tracked challenger → one TENSION bond, winner ↔ loser by POPID, origin election, domain civic',
+    hold.result && hold.result.winner === 'Rose Delgado' && hold.bonds.length === 1 && hold.bonds[0].bondType === 'tension' && hold.bonds[0].origin === 'election' &&
+    hold.bonds[0].domainTag === 'civic' && hold.bonds[0].citizenA === 'POP-00503' && hold.bonds[0].citizenB === 'POP-00800', JSON.stringify(hold.bonds[0] || hold.result));
+  check('B3.2 the bond sits in the loser\'s hood and names the race', hold.bonds[0] && hold.bonds[0].neighborhood === 'Temescal' && /election C97 COUNCIL-D3 \(D3\): Rose Delgado beat Marcus Webb, /.test(hold.bonds[0].notes), hold.bonds[0] && hold.bonds[0].notes);
+  check('B3.3 the election result carries the bond id for the civic desk', hold.result.grudgeBond === hold.bonds[0].bondId && !!hold.result.grudgeBond, JSON.stringify(hold.result));
+  const upset = fire({ seat: { holder: 'Rose Delgado', pop: 'POP-00503' }, rng: [0, 0.5, 0.99] });
+  check('B3.4 a challenger seated over the incumbent → winner first, the incumbent\'s ledger hood (not in the candidate pool), the race in the notes',
+    upset.result.winner === 'Marcus Webb' && upset.result.upset === true && upset.bonds.length === 1 && upset.bonds[0].citizenA === 'POP-00800' && upset.bonds[0].citizenB === 'POP-00503' &&
+    upset.bonds[0].neighborhood === 'Lake Merritt' && /Marcus Webb beat Rose Delgado/.test(upset.bonds[0].notes), JSON.stringify(upset.bonds[0] || upset.result));
+  const open = fire({ seat: { holder: 'TBD', pop: '', status: 'vacant' }, rng: [0, 0.5] });
+  check('B3.5 an open seat makes no bond', open.result && open.result.winner === 'Marcus Webb' && open.bonds.length === 0 && open.result.grudgeBond === null, JSON.stringify(open.result));
+  const unopposed = fire({ seat: { holder: 'Rose Delgado', pop: 'POP-00503' }, rows: [INCUMBENT], rng: [] });
+  check('B3.6 an unopposed incumbent makes no bond', unopposed.result && unopposed.result.challenger === 'Unopposed' && unopposed.bonds.length === 0, JSON.stringify(unopposed.result));
+  const held = fire({ seat: { holder: 'Rose Delgado', pop: 'POP-00503' }, rng: [0, 0.5, 0.1], bonds: [{ bondId: 'B-1', citizenA: 'POP-00800', citizenB: 'POP-00503', bondType: 'professional', status: 'active' }] });
+  check('B3.7 a pair already bonded gets no second bond (bondExists_ linear scan, either order)', held.bonds.length === 1 && held.bonds[0].bondId === 'B-1' && held.result.grudgeBond === null, JSON.stringify(held.bonds));
+  const noPop = fire({ seat: { holder: 'Rose Delgado', pop: '' }, rng: [0, 0.5, 0.1] });
+  check('B3.8 a holder with no PopId makes no bond (never a name)', noPop.result && noPop.result.winner === 'Rose Delgado' && noPop.bonds.length === 0 && noPop.result.grudgeBond === null, JSON.stringify(noPop.bonds));
+  check('B3.9 the election log append is untouched', appended.length === 1 && appended[0].tab === 'Election_Log', JSON.stringify(appended));
+}
+
 console.log(`\n${passed}/${passed + failed} passed`);
 process.exit(failed ? 1 : 0);

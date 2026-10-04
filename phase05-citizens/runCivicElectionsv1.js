@@ -241,6 +241,15 @@ function runCivicElections_(ctx) {
   // pre-created; cycle-path election writes route via queueAppendIntent_ /
   // queueRangeIntent_ below.
   var electionLog = requireTab_(ss, 'Election_Log');
+
+  // engine.94 B.3: a tracked row's hood by POPID — the incumbent is CIV and so
+  // never in the candidate pool; the ledger row is the only place its hood lives.
+  function ledgerHoodOf_(popId) {
+    for (var lh = 0; lh < simRows.length; lh++) {
+      if (String(simRows[lh][iSPopId] || '').trim() === popId) return String(simRows[lh][iSNeighborhood] || '').trim();
+    }
+    return '';
+  }
   
   for (var e = 0; e < seatsUp.length; e++) {
     var seat = seatsUp[e];
@@ -457,6 +466,34 @@ function runCivicElections_(ctx) {
     // STORE RESULT FOR MEDIA BRIEFING
     // ─────────────────────────────────────────────────────────────────────────
     
+    // ─────────────────────────────────────────────────────────────────────────
+    // engine.94 B.3 (citizen-memory plan §Track B): one named loss makes one
+    // named bond. A contested race between two tracked rows — a challenger seated
+    // over an incumbent, or an incumbent holding against a challenger — leaves one
+    // TENSION bond between them (origin election, domain civic, the loser's hood,
+    // the race in the notes) if none exists; the bond ladder hardens it to rivalry
+    // or settles it to professional from there. POPIDs only: the bond ledger is
+    // POPID-keyed and bondExists_ runs its linear scan here (Phase5-Bonds builds
+    // the key set later). An open seat, an unopposed incumbent, or a holder with
+    // no PopId makes no bond — logged, never guessed.
+    // ─────────────────────────────────────────────────────────────────────────
+    var grudgeBond = null;
+    if (!seat.isVacant && challenger && typeof createBond_ === 'function' && typeof BOND_TYPES !== 'undefined') {
+      var challengerWon = (winner === challengerName);
+      var winnerPop = String((challengerWon ? challenger.popId : seat.currentPopId) || '').trim();
+      var loserPop = String((challengerWon ? seat.currentPopId : challenger.popId) || '').trim();
+      if (/^POP-/.test(winnerPop) && /^POP-/.test(loserPop) && winnerPop !== loserPop) {
+        var loserHood = challengerWon ? ledgerHoodOf_(loserPop) : String(challenger.neighborhood || '');
+        if (loserHood === 'Unknown') loserHood = '';
+        var loserName = challengerWon ? incumbentName : challengerName;
+        grudgeBond = createBond_(ctx, winnerPop, loserPop, BOND_TYPES.TENSION, 'election', 'civic', loserHood,
+          'election C' + cycle + ' ' + seat.officeId + ' (' + seat.district + '): ' + winner + ' beat ' + loserName + ', ' + marginType);
+        Logger.log('runCivicElections_ engine.94 B.3: ' + (grudgeBond ? 'TENSION bond ' + winnerPop + ' <-> ' + loserPop : 'bond already held ' + winnerPop + ' <-> ' + loserPop) + ' from ' + seat.officeId);
+      } else {
+        Logger.log('runCivicElections_ engine.94 B.3: no bond for ' + seat.officeId + ' — winner ' + (winnerPop || 'no PopId') + ', loser ' + (loserPop || 'no PopId'));
+      }
+    }
+
     results.push({
       office: seat.title,
       district: seat.district,
@@ -466,7 +503,8 @@ function runCivicElections_(ctx) {
       margin: margin,
       marginType: marginType,
       narrative: narrative,
-      upset: winner === challengerName && !seat.isVacant
+      upset: winner === challengerName && !seat.isVacant,
+      grudgeBond: grudgeBond ? grudgeBond.bondId : null   // engine.94 B.3: the civic desk can follow it in Citizen_Bonds
     });
   }
   

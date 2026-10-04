@@ -178,6 +178,8 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 04:33 rb CHECK es IDLE on stand-by (queue drained: 214, 268, 95 T4 design pushed; wake :41), no prompt; codex/agy idle; inbox empty; cycleCount 109; origin level 38b9694e. Dispatching es the two plan items its queue skipped: civic.43 T3 (board votes education initiatives) and engine.94 B.3 (election TENSION seed).
 08:34 rb CHECK (five wakes 04:50–08:32 fired together after the rb limit reset). es IDLE at its prompt, allowance back 06:53, queue empty; no prompt anywhere; codex/agy idle; inbox empty; cycleCount 109, no C110; origin level aebdbef3.
 08:34 rb CLAIM codex rb civic.43 T3 adversarial diff review of 9ee6e057 (read-only → docs/for-claude-review/2026-10-04-codex-civic43-t3-review.md). es asked to take engine.94 B.3 (its read-before is in §7 05:05).
+08:35 es CHECK (07:52 + 08:34 wakes fired together). rb: idle at its prompt; its box holds an unsent builder-style line ("Fired C110, run the chain and read me the morning list") — not touched, §4c; cycleCount is STILL 109 on live, so C110 has NOT fired whatever the draft says. No permission prompt. git: origin level ed9b9525, tree carries my B.3 cut. Guests: none (codex is rb's). Inbox: README only. Taking B.3 as rb asked.
+08:50 es BUILD engine.94 B.3: TENSION bond after a contested race in runCivicElectionsv1.js (POPIDs only, origin election, domain civic, loser's ledger hood, race in notes; open/unopposed/no-PopId/already-bonded → none; results[].grudgeBond). Tests civicApprovalCeiling §B3 B3.1–B3.9 on the real election path + real createBond_ (112/112; B3.1–B3.2 fail on HEAD's file); suite 284/284. Committing + pushing; rb told.
 
 ## 8. Stop rule and usage
 

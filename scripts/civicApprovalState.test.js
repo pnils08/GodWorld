@@ -167,7 +167,10 @@ console.log('═══ F. Full run on the live C106 seats — the C107 projectio
     ['MAYOR-01', 'Mayor', 'citywide', 'Avery Santana', 'POP-00034', 'active', 64, 'OPP', 0, '', '', 'yes', ''],
     ['COUNCIL-D1', 'D1', 'D1', 'Denise Carter', 'POP-00501', 'active', 76, 'OPP', 0, '', '', 'yes', ''],
     ['COUNCIL-D7', 'D7', 'D7', 'Warren Ashford', 'POP-00507', 'active', 45, 'CRC', 0, '', '', 'yes', ''],
-    ['COUNCIL-D4', 'D4', 'D4', 'Ramon Vega', 'POP-00504', 'active', 51, 'IND', 0, '', '', 'yes', '']
+    ['COUNCIL-D4', 'D4', 'D4', 'Ramon Vega', 'POP-00504', 'active', 51, 'IND', 0, '', '', 'yes', ''],
+    // civic.43 Task 1: a school-board seat is driven like a council seat; the DA (appointed, same citywide district) is not
+    ['BOARD-OUSD-1', 'School Board Member', 'citywide', 'Rosa Ochoa', 'POP-00706', 'active', 45, '', 0, '', '', 'yes', ''],
+    ['DA-01', 'District Attorney', 'citywide', 'Clarissa Dane', 'POP-00040', 'active', 45, '', 0, '', '', 'yes', '']
   ];
   // Initiative_Tracker as written 2026-09-13 18:36 (every clock 107), read at the C107 fire with C106's phase map carried.
   const tHeaders = ['InitiativeID', 'Name', 'Status', 'ImplementationPhase', 'AffectedNeighborhoods', 'LeadFaction', 'OppositionFaction', 'NextActionCycle'];
@@ -180,9 +183,9 @@ console.log('═══ F. Full run on the live C106 seats — the C107 projectio
     ['INIT-007', 'Oakland Youth Apprenticeship Pipeline', 'announced', 'operational', 'West Oakland, East Oakland, Fruitvale', 'OPP', '', 107]
   ];
   const prevPhases = { 'INIT-001': 'disbursement-active', 'INIT-002': 'implementation-active', 'INIT-003': 'visioning-complete', 'INIT-005': 'construction-active', 'INIT-006': 'construction-planning', 'INIT-007': 'implementation-active' };
-  const intents = [];
+  const intents = [], ripplesF = [];
   global.queueCellIntent_ = (ctx, tab, row, col, value) => intents.push({ row, col, value });
-  global.recordRipple_ = () => {};
+  global.recordRipple_ = (ctx, e) => { ripplesF.push(e); };
   global.recordHookRipple_ = () => {};
   global.safeRand_ = () => () => 0.99;
   global.getCitizenDialBands_ = () => null;
@@ -218,6 +221,15 @@ console.log('═══ F. Full run on the live C106 seats — the C107 projectio
   check('F5 no sitting row appears as a drain in any reason', !Object.keys(by).some(h => /sitting \(-/.test(why(h))));
   check('F6 campaigns: none started (nobody under 40)', ctx.summary.civicCampaigns.length === 0);
   check('F7 approval writes queued for every changed seat', intents.length === ctx.summary.approvalChanges.length);
+  // civic.43 Task 1
+  check('F8 a BOARD-OUSD seat is driven: at 45 under a city target in the 60s it climbs', appr('Rosa Ochoa') !== null && appr('Rosa Ochoa') > 45, String(appr('Rosa Ochoa')) + ' ← ' + why('Rosa Ochoa'));
+  check('F9 the DA (appointed, same citywide district, same 45) is not touched', by['Clarissa Dane'] === undefined);
+  const boardRipple = ripplesF.filter(r => r.causeType === 'approval-shift' && r.causeId === 'BOARD-OUSD-1')[0];
+  const mayorRipple = ripplesF.filter(r => r.causeType === 'approval-shift' && r.causeId === 'MAYOR-01')[0];
+  check('F10 a citywide seat\'s approval ripples to every canon hood (was: nowhere) — board and mayor alike',
+    !!boardRipple && boardRipple.targetIds.length === canon.list.length && !!mayorRipple && mayorRipple.targetIds.length === canon.list.length,
+    JSON.stringify([boardRipple && boardRipple.targetIds.length, mayorRipple && mayorRipple.targetIds.length, canon.list.length]));
+  check('F11 a district seat still ripples to its own district only', ripplesF.filter(r => r.causeId === 'COUNCIL-D7')[0].targetIds.join() === DISTRICTS.D7.join());
 }
 
 console.log('═══ G. civic.38 Task 5 — the sponsor owns its bill; a revival is not an advance');

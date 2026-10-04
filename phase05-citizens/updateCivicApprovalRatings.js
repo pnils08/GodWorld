@@ -547,8 +547,10 @@ function updateCivicApprovalRatings_(ctx) {
 
     if (isNaN(currentApproval)) currentApproval = 65;
 
-    // Only process active elected officials and mayor
-    if (!officeId || (!officeId.match(/^COUNCIL/) && !officeId.match(/^MAYOR/))) continue;
+    // Only process active elected officials — council, mayor, and the school board
+    // (civic.43 Task 1). By OfficeId prefix, not Type, so DA-01 / PD-01 (appointed
+    // characters with their own agents) never take scandal or challenger rolls.
+    if (!officeId || !officeId.match(/^(COUNCIL|MAYOR|BOARD-OUSD)/)) continue;
     if (status === 'vacant') continue;
 
     var lifecycle = resolveApprovalCeilingLifecycle_({
@@ -955,6 +957,13 @@ function updateCivicApprovalRatings_(ctx) {
   for (var ai = 0; ai < changes.length; ai++) {
     var ch = changes[ai];
     var dHoods = getDistrictHoods_(ctx, ch.district);
+    // civic.43 Task 1 (plan §4): a citywide seat — the mayor, a school-board member — has no
+    // district row in the canon map, so its ripple landed nowhere. It ripples to every hood
+    // at the same per-point weight a district seat applies to its own.
+    if (!dHoods.length && String(ch.district || '').trim().toLowerCase() === 'citywide' &&
+        typeof getCanonNeighborhoods_ === 'function') {
+      dHoods = getCanonNeighborhoods_(ctx);
+    }
 
     // Small sentiment ripple: approval drop → district sentiment dips
     var ripple = ch.delta * 0.003; // +/-0.003 per approval point change

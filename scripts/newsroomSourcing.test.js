@@ -106,7 +106,7 @@ assert.equal(withPages.candidates[1].evidence.excerpt, 'I keep going back to Tes
 assert.equal(withPages.candidates[1].matchedPageLine, withPages.candidates[1].evidence.excerpt);
 assert.equal(source.buildPool({ mode: 'street', story: streetStory, slice: streetSlice,
   seat: 'talia-finch', cycle: 999, beats, root,
-  streetOptions: { ...streetOpts, ledgerRows: pageRows, pageIndex: [] } }).candidates.length, 0,
+  streetOptions: { ...streetOpts, ledgerRows: pageRows, pageIndex: [], exchanges: [] } }).candidates.length, 0,
   'an empty page index creates no page-line candidates');
 assert.deepEqual(source.buildPool({ mode: 'street', story: streetStory, slice: streetSlice,
   seat: 'talia-finch', cycle: 999, beats, streetOptions: { ...streetOpts, meta: { cycle: 998 } } }).candidates, []);

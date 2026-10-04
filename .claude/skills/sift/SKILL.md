@@ -237,6 +237,7 @@ Walk Step 1 raw inputs + Step 2 annotations through the five buckets:
 | **CIVIC-WITH-WEIGHT** | city-hall log + engine_audit | Civic threads passing narrative-weight test: vote firing, voice debut, directive closing, engine-vs-action puzzle, **NEW canon being introduced**, arc closing / escalating |
 | **CIVIC-TRACKER-ONLY** | city-hall log + initiative tracker | Civic threads that DON'T pass narrative-weight: tracker-advanced-N-steps without other movement, routine phase ticks. Routes to baseline-brief Tier C, not slate. |
 | **TENSION-REGISTER** | `logs/citizen-tension-state.json` (citizen-wake open questions) | Subjective door-knock seeds — a citizen's own open question, never a standalone published claim (§3e) |
+| **EXCHANGE-TRANSCRIPTS** | `output/exchanges/exchange_c{N}_*.md` for the last 3 cycles (engine.53 T6) | One candidate per transcript — `participants \| format \| trigger \| path`, flagged `source=exchange`. Subjective source material: a desk piece may quote-mine a turn as what the citizen *said*; never a standalone fact (same wall as the tension register). The live fanout reads the same files as `exchange-line` street evidence. |
 
 **Atmospheric-overlay rule:** FamousPeople column entries (Vinnie Keane spotted at X, etc.) + streaming-trend rows + food-trend rows are treated as ambient mention layer, never anchored as standalone scene thread. Tag `atmosphericOnly: true` in candidate. Atmospheric signals route via Step 5 `defer-to-supplemental(target=dispatch)` if they warrant a /dispatch scene piece elsewhere.
 

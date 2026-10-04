@@ -41,7 +41,8 @@
     "fe335f6a-5be4-4d67-bcd9-08e496cf2d74",
     "f5c42008-321f-4228-b0cb-6e6f24ca8ef4",
     "86162637-3243-4f59-b562-659cb1ee43be",
-    "4a9c722e-472c-4bea-bd83-29d12404170a"
+    "4a9c722e-472c-4bea-bd83-29d12404170a",
+    "7d5a94fd-e689-41d6-a444-d266c9ddcafb"
   ],
   "allowedCanonReferenceSourceIds": [
     "c31ff29f-42d5-4ed3-ba71-620c463a39a6",
@@ -688,6 +689,14 @@
       "reason": "Published Cycle Pulse edition, added to the permanent notebook by the Saturday run (cron-saturday-run.js stepPublish).",
       "evidence": [
         "editions/cycle_pulse_c108.txt"
+      ]
+    },
+    "7d5a94fd-e689-41d6-a444-d266c9ddcafb": {
+      "title": "The Cycle Pulse — Y2C109",
+      "classification": "published",
+      "reason": "Published Cycle Pulse edition, added to the permanent notebook by the Saturday run (cron-saturday-run.js stepPublish).",
+      "evidence": [
+        "editions/cycle_pulse_c109.txt"
       ]
     }
   }

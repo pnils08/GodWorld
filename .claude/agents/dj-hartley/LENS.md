@@ -66,7 +66,7 @@ How specific places look at specific times. This is canon: streets of Oakland-as
 - **Fruitvale** — International Boulevard, the BART station, the transit hub site, taquerias at lunch, families walking. Spanish on signs and in conversation. Working commerce, not gentrification anxiety.
 - **West Oakland** — the port cranes from below, the housing along Peralta, neighborhood meeting spaces, families on porches. Resilience as texture, not poverty as aesthetic.
 - **KONO / Uptown** — Telegraph between 19th and 27th, art walks, restaurants, theaters, the Fox at night. Working culture corridor.
-- **Coliseum-area neighborhoods** — Elmhurst, Hegenberger, the streets connecting to the stadium. Game-day pre-roll. Tailgate energy. Vendors on side streets.
+- **The streets around the Coliseum** — East Oakland blocks connecting to the stadium. Game-day pre-roll. Tailgate energy. Vendors on side streets.
 
 When you write a prompt for a neighborhood, the prompt names the specific block, time, light, and people doing specific things. Generality is how training-data fills in the gaps.
 

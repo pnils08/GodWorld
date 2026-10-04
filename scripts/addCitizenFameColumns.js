@@ -37,12 +37,10 @@
  *   - LastMentionedCycle (cycle number)
  *   - FameTrend (rising/stable/fading)
  *
- * Storyline_Tracker (+3):
- *   - LastCoverageCycle (cycle number)
- *   - MentionCount (how many times covered)
- *   - CoverageGap (cycles since last mention)
+ * Storyline_Tracker (+3) — RETIRED engine.268: the tab is deleted; this
+ * one-off no longer touches it.
  *
- * Total: 18 new columns (7 + 3 + 0 + 4 + 3 = 17, plus 1 for adjustment)
+ * Total: 14 new columns (7 + 3 + 0 + 4)
  *
  * Usage:
  *   node scripts/addCitizenFameColumns.js
@@ -78,12 +76,6 @@ const CHICAGO_CITIZENS_ADDITIONS = [
   { name: 'MediaMentions', defaultValue: 0 },
   { name: 'LastMentionedCycle', defaultValue: '' },
   { name: 'FameTrend', defaultValue: 'stable' }
-];
-
-const STORYLINE_TRACKER_ADDITIONS = [
-  { name: 'LastCoverageCycle', defaultValue: '' },
-  { name: 'MentionCount', defaultValue: 0 },
-  { name: 'CoverageGap', defaultValue: 0 }
 ];
 
 
@@ -230,15 +222,13 @@ async function main() {
     Simulation_Ledger: { added: 0, skipped: 0 },
     Generic_Citizens: { added: 0, skipped: 0 },
     Cultural_Ledger: { verified: true },
-    Chicago_Citizens: { added: 0, skipped: 0 },
-    Storyline_Tracker: { added: 0, skipped: 0 }
+    Chicago_Citizens: { added: 0, skipped: 0 }
   };
 
-  // Add columns to each sheet
+  // Add columns to each sheet (Storyline_Tracker retired engine.268)
   results.Simulation_Ledger = await addColumnsToSheet('Simulation_Ledger', SIMULATION_LEDGER_ADDITIONS, dryRun);
   results.Generic_Citizens = await addColumnsToSheet('Generic_Citizens', GENERIC_CITIZENS_ADDITIONS, dryRun);
   results.Chicago_Citizens = await addColumnsToSheet('Chicago_Citizens', CHICAGO_CITIZENS_ADDITIONS, dryRun);
-  results.Storyline_Tracker = await addColumnsToSheet('Storyline_Tracker', STORYLINE_TRACKER_ADDITIONS, dryRun);
 
   // Verify Cultural_Ledger (no additions needed)
   await verifyCulturalLedgerColumns();

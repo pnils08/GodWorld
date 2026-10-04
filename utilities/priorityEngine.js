@@ -7,10 +7,12 @@
  * Plan: docs/plans/2026-05-07-engine-routing-foundation.md
  * Phase 2 task scope:
  *   - T2.1 (this commit): DOMAIN_WEIGHTS + SEVERITY_MULTIPLIERS constants
- *   - T2.2: computeArcMultiplier_ + loadStorylineState_
+ *   - T2.2: computeArcMultiplier_ + loadStorylineState_ — RETIRED engine.268
+ *     with the Storyline_Tracker (the arc term read an input that was always
+ *     empty, so every live seed scored at arc 1.0)
  *   - T2.3: computeCoverageMultiplier_
  *   - T2.4: computePriorityScore_ (orchestrator)
- *   - T2.5: isConsequenceFloor_ (boolean flag)
+ *   - T2.5: isConsequenceFloor_ (boolean flag — HIGH + uncovered crisis)
  *
  * Runtime: dual — Apps Script (engine-sheet, via clasp) and Node (validation
  * harness in scripts/, T2.8). Pattern mirrors lib/districtMap.js.
@@ -79,92 +81,6 @@ var SEVERITY_MULTIPLIERS = {
   'MED':  1.0,
   'LOW':  0.6
 };
-
-// ─────────────────────────────────────────────────────────────────────────────
-// STORYLINE_PRIORITY_TO_SEVERITY — Storyline_Tracker.Priority (column G) ->
-// engine severity bucket. Used as priorPeakSeverity proxy in arc-multiplier
-// scoring. Live values per S206 inspection: { normal: 158, high: 78, urgent: 1,
-// low: 2, background: implied by applyStorySeeds.js:458 }.
-// ─────────────────────────────────────────────────────────────────────────────
-var STORYLINE_PRIORITY_TO_SEVERITY = {
-  'urgent':     'HIGH',
-  'high':       'HIGH',
-  'normal':     'MED',
-  'low':        'LOW',
-  'background': 'LOW'
-};
-
-// ─────────────────────────────────────────────────────────────────────────────
-// computeArcMultiplier_ — priority multiplier from arc persistence.
-//
-// Plan T2.2 returns:
-//   1.0 — no arc (storylineState null/empty)
-//   1.2 — arc active 1–2 cycles
-//   1.4 — arc active 3+ cycles, no severity peak
-//   1.6 — arc active 3+ cycles AND priorPeakSeverity === 'HIGH' (comeback amp)
-// ─────────────────────────────────────────────────────────────────────────────
-function computeArcMultiplier_(seed, storylineState) {
-  if (!storylineState) return 1.0;
-  var cyclesActive = storylineState.cyclesActive || 0;
-  if (cyclesActive < 1) return 1.0;
-  if (cyclesActive <= 2) return 1.2;
-  if (storylineState.priorPeakSeverity === 'HIGH') return 1.6;
-  return 1.4;
-}
-
-// ─────────────────────────────────────────────────────────────────────────────
-// parseStorylineRow_ — pure function, derives priority-engine state from a raw
-// Storyline_Tracker row + headers. Returns { cyclesActive, priorPeakSeverity,
-// lastCoveredCycle, status } or null if row is malformed.
-// ─────────────────────────────────────────────────────────────────────────────
-function parseStorylineRow_(row, headers, currentCycle) {
-  if (!row || !headers) return null;
-  var cycleAddedIdx = headers.indexOf('CycleAdded');
-  var priorityIdx   = headers.indexOf('Priority');
-  var statusIdx     = headers.indexOf('Status');
-  var lastCovIdx    = headers.indexOf('LastCoverageCycle');
-  if (cycleAddedIdx < 0) return null;
-
-  var cycleAdded = parseInt(row[cycleAddedIdx], 10) || 0;
-  var cyclesActive = (parseInt(currentCycle, 10) || 0) - cycleAdded;
-  var rawPriority = String(row[priorityIdx] != null ? row[priorityIdx] : 'normal').trim().toLowerCase();
-  var priorPeakSeverity = STORYLINE_PRIORITY_TO_SEVERITY[rawPriority] || 'MED';
-  var lastCoveredCycle = lastCovIdx >= 0 ? (parseInt(row[lastCovIdx], 10) || null) : null;
-  var status = statusIdx >= 0 ? String(row[statusIdx] || '').trim() : '';
-
-  return {
-    cyclesActive: cyclesActive,
-    priorPeakSeverity: priorPeakSeverity,
-    lastCoveredCycle: lastCoveredCycle,
-    status: status
-  };
-}
-
-// ─────────────────────────────────────────────────────────────────────────────
-// loadStorylineStateForSeed_ — runtime-agnostic seed -> storyline lookup.
-//
-// Reads `seed.linkedStorylineId` as a row number (1-indexed sheet row). Per
-// applyStorySeeds.js v3.8 reality, the field carries the Storyline_Tracker
-// rowNumber, NOT the column-O StorylineId — naming bug flagged for engine-sheet
-// cleanup, treat field as opaque key for now.
-//
-// Caller pre-loads Storyline_Tracker as 2D array (Apps Script: SpreadsheetApp;
-// Node: lib/sheets.js getRawSheetData). Pure-function lookup keeps this file
-// runtime-neutral.
-//
-// Returns parsed state or null if seed has no linkage or row is out of bounds.
-// ─────────────────────────────────────────────────────────────────────────────
-function loadStorylineStateForSeed_(seed, storylineData, currentCycle) {
-  if (!seed || seed.linkedStorylineId == null) return null;
-  if (!storylineData || storylineData.length < 2) return null;
-
-  var rowNumber = parseInt(seed.linkedStorylineId, 10);
-  if (!isFinite(rowNumber) || rowNumber < 2 || rowNumber > storylineData.length) return null;
-
-  var headers = storylineData[0];
-  var row = storylineData[rowNumber - 1];
-  return parseStorylineRow_(row, headers, currentCycle);
-}
 
 // ─────────────────────────────────────────────────────────────────────────────
 // COVERAGE_DOMAIN_NORMALIZE — Edition_Coverage_Ratings.Domain (col B) values
@@ -319,11 +235,12 @@ function computeCoverageMultiplier_(seedDomain, coverageState) {
 // ─────────────────────────────────────────────────────────────────────────────
 // computePriorityScore_ — Engine A composer (plan T2.4).
 //
-// Combines DOMAIN_WEIGHTS × SEVERITY_MULTIPLIERS × arcMul × coverageMul into
-// a single 0–10 priority score. Returns components alongside the score for
-// transparency-layer consumption (T5.1 rationale payload).
+// Combines DOMAIN_WEIGHTS × SEVERITY_MULTIPLIERS × coverageMul into a single
+// 0–10 priority score. Returns components alongside the score for
+// transparency-layer consumption (T5.1 rationale payload). engine.268: the
+// arc-persistence term is gone with the Storyline_Tracker.
 //
-// Score = domainWeight × severityMul × arcMul × coverageMul
+// Score = domainWeight × severityMul × coverageMul
 //
 // Clamp policy: if raw > 10, hard-cap at 10 and emit a console.warn so the
 // validation harness (T2.8) can see when scoring saturates ceiling. (The T2.4
@@ -335,14 +252,13 @@ function computeCoverageMultiplier_(seedDomain, coverageState) {
 //   missing seed         -> score 0, all components 0
 //   missing seed.domain  -> DOMAIN_WEIGHT_DEFAULT (1, below GENERAL)
 //   missing auditPattern -> severity MED (1.0 multiplier)
-//   missing storylineState -> arc 1.0 (no arc binding)
 //   missing coverageState  -> coverage 1.0 (no signal)
 // ─────────────────────────────────────────────────────────────────────────────
-function computePriorityScore_(seed, auditPattern, storylineState, coverageState) {
+function computePriorityScore_(seed, auditPattern, coverageState) {
   if (!seed) {
     return {
       priorityScore: 0,
-      components: { domain: 0, severity: 0, arc: 0, coverage: 0 }
+      components: { domain: 0, severity: 0, coverage: 0 }
     };
   }
 
@@ -352,10 +268,9 @@ function computePriorityScore_(seed, auditPattern, storylineState, coverageState
     ? String(auditPattern.severity).toUpperCase()
     : 'MED';
   var severityMul = (SEVERITY_MULTIPLIERS[severityKey] != null) ? SEVERITY_MULTIPLIERS[severityKey] : 1.0;
-  var arcMul = computeArcMultiplier_(seed, storylineState);
   var coverageMul = computeCoverageMultiplier_(domain, coverageState);
 
-  var raw = domainWeight * severityMul * arcMul * coverageMul;
+  var raw = domainWeight * severityMul * coverageMul;
   var clamped = raw;
   var clampLogged = false;
   // S409 (chase §S-E A5): the T2.4 "divide by 1.5 if > 10" step was
@@ -389,19 +304,10 @@ function computePriorityScore_(seed, auditPattern, storylineState, coverageState
     components: {
       domain:   domainWeight,
       severity: severityMul,
-      arc:      arcMul,
       coverage: coverageMul
     }
   };
 }
-
-// ─────────────────────────────────────────────────────────────────────────────
-// CONSEQUENCE_FLOOR_DOMAINS — domains where HIGH-severity unresolved arcs
-// floor coverage (override editorial veto). Top-3 DOMAIN_WEIGHTS by design;
-// these are the "must-cover" beats. Future seed-side additions (ECONOMIC,
-// ENVIRONMENT) can join after editorial review establishes precedent.
-// ─────────────────────────────────────────────────────────────────────────────
-var CONSEQUENCE_FLOOR_DOMAINS = ['HEALTH', 'SAFETY', 'CIVIC'];
 
 // ─────────────────────────────────────────────────────────────────────────────
 // isConsequenceFloor_ — Engine A floor flag (plan T2.5).
@@ -410,37 +316,27 @@ var CONSEQUENCE_FLOOR_DOMAINS = ['HEALTH', 'SAFETY', 'CIVIC'];
 // Floor flag is non-negotiable; sift can re-order WITHIN floored seeds, can't
 // bury them. Returns false otherwise.
 //
-// Two trigger conditions (either suffices, both require severity=HIGH):
-//   1. Uncovered crisis: HIGH severity AND coverageState.lastRating reaches
-//      crisis threshold (shared with T2.3 multiplier — calibrated to live data
-//      via COVERAGE_THRESHOLDS.CRISIS_RATING). HIGH+crisis is the differentiator
-//      vs the multiplier; the multiplier alone fires on any crisis, the floor
-//      requires HIGH severity stamping.
-//   2. Persistent top-domain arc: HIGH severity in HEALTH/SAFETY/CIVIC AND
-//      arc has been active ≥ 2 cycles (storylineState.cyclesActive). The
-//      "structural problem unresolved across editions" signal.
+// One trigger (requires severity=HIGH): an uncovered crisis — HIGH severity
+// AND coverageState.lastRating reaches the crisis threshold (shared with the
+// T2.3 multiplier — calibrated to live data via COVERAGE_THRESHOLDS.CRISIS_RATING).
+// HIGH+crisis is the differentiator vs the multiplier; the multiplier alone
+// fires on any crisis, the floor requires HIGH severity stamping.
 //
-// Plan signature was (auditPattern, coverageState) but condition 2 needs
-// seed.domain and storylineState.cyclesActive. Expanded to symmetric 4-arg
-// form matching computePriorityScore_.
+// engine.268: the second trigger (HIGH in HEALTH/SAFETY/CIVIC + an arc active
+// 2+ Cycles) and CONSEQUENCE_FLOOR_DOMAINS went with the Storyline_Tracker —
+// no seed ever carried a storyline state on live. The engine passes a null
+// auditPattern (no engine_audit in Apps Script), so this flag fires only in
+// the Node auditor; the seed param stays for the signature's symmetry.
 // ─────────────────────────────────────────────────────────────────────────────
-function isConsequenceFloor_(seed, auditPattern, storylineState, coverageState) {
+function isConsequenceFloor_(seed, auditPattern, coverageState) {
   if (!auditPattern) return false;
   var severity = String(auditPattern.severity || '').toUpperCase();
   if (severity !== 'HIGH') return false;
 
-  // Condition 1: HIGH + uncovered crisis (any domain).
+  // HIGH + uncovered crisis (any domain).
   if (coverageState &&
       typeof coverageState.lastRating === 'number' &&
       coverageState.lastRating <= COVERAGE_THRESHOLDS.CRISIS_RATING) {
-    return true;
-  }
-
-  // Condition 2: HIGH + top-domain + arc unresolved 2+ cycles.
-  var domain = String((seed && seed.domain) || '').toUpperCase();
-  if (CONSEQUENCE_FLOOR_DOMAINS.indexOf(domain) >= 0 &&
-      storylineState &&
-      (storylineState.cyclesActive || 0) >= 2) {
     return true;
   }
 
@@ -461,41 +357,15 @@ function _runPrioritySelfTests_() {
   }
   function isNull(label, actual) { eq(label, actual, null); }
 
-  // computeArcMultiplier_
-  eq('arc: null state -> 1.0', computeArcMultiplier_({}, null), 1.0);
-  eq('arc: cyclesActive 0 -> 1.0', computeArcMultiplier_({}, { cyclesActive: 0 }), 1.0);
-  eq('arc: cyclesActive 1 -> 1.2', computeArcMultiplier_({}, { cyclesActive: 1 }), 1.2);
-  eq('arc: cyclesActive 2 -> 1.2', computeArcMultiplier_({}, { cyclesActive: 2 }), 1.2);
-  eq('arc: cyclesActive 3 + MED -> 1.4', computeArcMultiplier_({}, { cyclesActive: 3, priorPeakSeverity: 'MED' }), 1.4);
-  eq('arc: cyclesActive 5 + HIGH -> 1.6', computeArcMultiplier_({}, { cyclesActive: 5, priorPeakSeverity: 'HIGH' }), 1.6);
-  eq('arc: cyclesActive 7 + LOW -> 1.4', computeArcMultiplier_({}, { cyclesActive: 7, priorPeakSeverity: 'LOW' }), 1.4);
-
-  // parseStorylineRow_
-  var headers = ['CycleAdded', 'Priority', 'Status', 'LastCoverageCycle'];
-  var s1 = parseStorylineRow_([88, 'urgent', 'active', 91], headers, 93);
-  eq('parse: cyclesActive 88->93 = 5', s1.cyclesActive, 5);
-  eq('parse: urgent -> HIGH', s1.priorPeakSeverity, 'HIGH');
-  eq('parse: lastCoveredCycle 91', s1.lastCoveredCycle, 91);
-  eq('parse: status active', s1.status, 'active');
-  eq('parse: normal -> MED', parseStorylineRow_([90, 'normal', 'active', 92], headers, 93).priorPeakSeverity, 'MED');
-  eq('parse: low -> LOW', parseStorylineRow_([90, 'low', 'active', 92], headers, 93).priorPeakSeverity, 'LOW');
-  eq('parse: background -> LOW', parseStorylineRow_([90, 'background', 'active', 92], headers, 93).priorPeakSeverity, 'LOW');
-  eq('parse: unknown priority -> MED default', parseStorylineRow_([90, 'weird', 'active', 92], headers, 93).priorPeakSeverity, 'MED');
-  isNull('parse: null row -> null', parseStorylineRow_(null, headers, 93));
-  isNull('parse: missing CycleAdded header -> null', parseStorylineRow_([88, 'urgent'], ['Priority', 'X'], 93));
-
-  // loadStorylineStateForSeed_
-  var sheet = [
-    ['CycleAdded', 'Priority', 'Status', 'LastCoverageCycle'],
-    [88, 'urgent', 'active', 91],
-    [80, 'normal', 'dormant', 85]
-  ];
-  eq('load row 2 (urgent)', loadStorylineStateForSeed_({ linkedStorylineId: 2 }, sheet, 93).priorPeakSeverity, 'HIGH');
-  eq('load row 3 (normal)', loadStorylineStateForSeed_({ linkedStorylineId: 3 }, sheet, 93).priorPeakSeverity, 'MED');
-  isNull('load missing linkage -> null', loadStorylineStateForSeed_({}, sheet, 93));
-  isNull('load null seed -> null', loadStorylineStateForSeed_(null, sheet, 93));
-  isNull('load OOB row -> null', loadStorylineStateForSeed_({ linkedStorylineId: 99 }, sheet, 93));
-  isNull('load row 1 (header) -> null', loadStorylineStateForSeed_({ linkedStorylineId: 1 }, sheet, 93));
+  // engine.268: no storyline state in the scorer — the retired functions are not
+  // reachable from any name in this file.
+  eq('engine.268: computeArcMultiplier_ gone', typeof computeArcMultiplier_, 'undefined');
+  eq('engine.268: parseStorylineRow_ gone', typeof parseStorylineRow_, 'undefined');
+  eq('engine.268: loadStorylineStateForSeed_ gone', typeof loadStorylineStateForSeed_, 'undefined');
+  eq('engine.268: STORYLINE_PRIORITY_TO_SEVERITY gone', typeof STORYLINE_PRIORITY_TO_SEVERITY, 'undefined');
+  eq('engine.268: CONSEQUENCE_FLOOR_DOMAINS gone', typeof CONSEQUENCE_FLOOR_DOMAINS, 'undefined');
+  eq('engine.268: computePriorityScore_ takes (seed, auditPattern, coverageState)', computePriorityScore_.length, 3);
+  eq('engine.268: isConsequenceFloor_ takes (seed, auditPattern, coverageState)', isConsequenceFloor_.length, 3);
 
   // normalizeCoverageDomain_
   eq('normalize: CRIME -> SAFETY', normalizeCoverageDomain_('CRIME'), 'SAFETY');
@@ -560,64 +430,61 @@ function _runPrioritySelfTests_() {
   var origWarn = console.warn;
   console.warn = function () {};  // silence clamp logs during self-test
 
-  // Plan acceptance: HIGH-severity HEALTH crisis with 3-cycle arc lands >= 8.0
+  // Plan acceptance: HIGH-severity HEALTH crisis lands >= 8.0
   var planCase = computePriorityScore_(
     { domain: 'HEALTH' },
     { severity: 'HIGH' },
-    { cyclesActive: 3, priorPeakSeverity: 'HIGH' },  // arc=1.6 (comeback amp)
     { ratings: [0, 0, -1], lastRating: -1 }           // crisis=1.3
   );
-  // raw = 10 * 1.5 * 1.6 * 1.3 = 31.2; hard-cap 10
+  // raw = 10 * 1.5 * 1.3 = 19.5; hard-cap 10
   eq('compose: plan acceptance >= 8.0', planCase.priorityScore >= 8.0, true);
   eq('compose: components.domain', planCase.components.domain, 10);
   eq('compose: components.severity', planCase.components.severity, 1.5);
-  eq('compose: components.arc', planCase.components.arc, 1.6);
   eq('compose: components.coverage', planCase.components.coverage, 1.3);
+  eq('compose: no arc component (engine.268)', 'arc' in planCase.components, false);
 
   // Defensive defaults
-  var nullSeed = computePriorityScore_(null, null, null, null);
+  var nullSeed = computePriorityScore_(null, null, null);
   eq('compose: null seed -> score 0', nullSeed.priorityScore, 0);
   eq('compose: null seed -> domain 0', nullSeed.components.domain, 0);
-  var bareSeed = computePriorityScore_({ domain: 'HEALTH' }, null, null, null);
-  // raw = 10 * 1.0 (MED default) * 1.0 (no arc) * 1.0 (no coverage) = 10
+  var bareSeed = computePriorityScore_({ domain: 'HEALTH' }, null, null);
+  // raw = 10 * 1.0 (MED default) * 1.0 (no coverage) = 10
   eq('compose: bare seed defaults -> 10', bareSeed.priorityScore, 10);
-  var unknownDomain = computePriorityScore_({ domain: 'WEIRD_NEW_DOMAIN' }, { severity: 'MED' }, null, null);
-  // raw = 1 (DOMAIN_WEIGHT_DEFAULT) * 1.0 * 1.0 * 1.0 = 1
+  var unknownDomain = computePriorityScore_({ domain: 'WEIRD_NEW_DOMAIN' }, { severity: 'MED' }, null);
+  // raw = 1 (DOMAIN_WEIGHT_DEFAULT) * 1.0 * 1.0 = 1
   eq('compose: unknown domain -> DOMAIN_WEIGHT_DEFAULT', unknownDomain.priorityScore, 1);
-  var lowCase = computePriorityScore_({ domain: 'GENERAL' }, { severity: 'LOW' }, null, null);
-  // raw = 2 * 0.6 * 1.0 * 1.0 = 1.2
+  var lowCase = computePriorityScore_({ domain: 'GENERAL' }, { severity: 'LOW' }, null);
+  // raw = 2 * 0.6 * 1.0 = 1.2
   eq('compose: GENERAL+LOW -> 1.2', Math.round(lowCase.priorityScore * 10) / 10, 1.2);
 
   // Saturation suppression flow
   var saturated = computePriorityScore_(
     { domain: 'HEALTH' },
     { severity: 'MED' },
-    null,
     { ratings: [3, 3, 3], lastRating: 3 }  // saturation -> 0.7
   );
-  // raw = 10 * 1.0 * 1.0 * 0.7 = 7.0
+  // raw = 10 * 1.0 * 0.7 = 7.0
   eq('compose: saturation halves toward 7', saturated.priorityScore, 7.0);
 
   // Clamp ceiling triggered
   var bigCase = computePriorityScore_(
     { domain: 'HEALTH' },
     { severity: 'HIGH' },
-    { cyclesActive: 5, priorPeakSeverity: 'HIGH' },
     { ratings: [0, 0, -1], lastRating: -1 }
   );
-  // raw = 10 * 1.5 * 1.6 * 1.3 = 31.2 -> cap 10
+  // raw = 10 * 1.5 * 1.3 = 19.5 -> cap 10
   eq('compose: extreme score caps at 10', bigCase.priorityScore, 10);
 
   // Case-insensitive domain
-  var lowerDomain = computePriorityScore_({ domain: 'health' }, { severity: 'MED' }, null, null);
+  var lowerDomain = computePriorityScore_({ domain: 'health' }, { severity: 'MED' }, null);
   eq('compose: lowercase domain normalized', lowerDomain.components.domain, 10);
 
   // S409 A5 regression — the clamp must be order-preserving: a coverage
   // crisis can never rank a seed below the same seed without the crisis.
-  var civicCrisis = computePriorityScore_({ domain: 'CIVIC' }, { severity: 'MED' }, null, { ratings: [-1, -1, -1], lastRating: -1 });
-  var civicPlain  = computePriorityScore_({ domain: 'CIVIC' }, { severity: 'MED' }, null, null);
-  var healthCrisis = computePriorityScore_({ domain: 'HEALTH' }, { severity: 'MED' }, null, { ratings: [-1, -1, -1], lastRating: -1 });
-  var healthPlain  = computePriorityScore_({ domain: 'HEALTH' }, { severity: 'MED' }, null, null);
+  var civicCrisis = computePriorityScore_({ domain: 'CIVIC' }, { severity: 'MED' }, { ratings: [-1, -1, -1], lastRating: -1 });
+  var civicPlain  = computePriorityScore_({ domain: 'CIVIC' }, { severity: 'MED' }, null);
+  var healthCrisis = computePriorityScore_({ domain: 'HEALTH' }, { severity: 'MED' }, { ratings: [-1, -1, -1], lastRating: -1 });
+  var healthPlain  = computePriorityScore_({ domain: 'HEALTH' }, { severity: 'MED' }, null);
   eq('clamp: CIVIC MED crisis (raw 11.7) never below plain CIVIC (9)', civicCrisis.priorityScore >= civicPlain.priorityScore, true);
   eq('clamp: HEALTH MED crisis (raw 13) never below plain HEALTH (10)', healthCrisis.priorityScore >= healthPlain.priorityScore, true);
   eq('clamp: C105 shape — CIVIC MED crisis caps at 10 (was 7.8)', civicCrisis.priorityScore, 10);
@@ -627,40 +494,17 @@ function _runPrioritySelfTests_() {
 
   // isConsequenceFloor_ (T2.5)
   // Plan acceptance: HIGH unresolved health crisis -> true
-  eq('floor: HIGH HEALTH + crisis -1 -> true (cond 1)',
+  eq('floor: HIGH HEALTH + crisis -1 -> true',
     isConsequenceFloor_(
       { domain: 'HEALTH' },
       { severity: 'HIGH' },
-      null,
       { ratings: [-1], lastRating: -1 }
     ), true);
-  eq('floor: HIGH HEALTH + 3-cycle arc -> true (cond 2)',
-    isConsequenceFloor_(
-      { domain: 'HEALTH' },
-      { severity: 'HIGH' },
-      { cyclesActive: 3 },
-      null
-    ), true);
-  eq('floor: HIGH SAFETY + 2-cycle arc -> true (cond 2 boundary)',
-    isConsequenceFloor_(
-      { domain: 'SAFETY' },
-      { severity: 'HIGH' },
-      { cyclesActive: 2 },
-      null
-    ), true);
-  eq('floor: HIGH CIVIC + 1-cycle arc -> false (cond 2 needs >=2)',
-    isConsequenceFloor_(
-      { domain: 'CIVIC' },
-      { severity: 'HIGH' },
-      { cyclesActive: 1 },
-      null
-    ), false);
-  // Cross-domain: cond 1 fires on any domain when crisis hits
-  eq('floor: HIGH SPORTS + crisis -1 -> true (cond 1, any domain)',
+  // Cross-domain: the crisis floor fires on any domain
+  eq('floor: HIGH SPORTS + crisis -1 -> true (any domain)',
     isConsequenceFloor_(
       { domain: 'SPORTS' },
       { severity: 'HIGH' },
-      null,
       { ratings: [-1], lastRating: -1 }
     ), true);
   // Severity gate
@@ -668,44 +512,29 @@ function _runPrioritySelfTests_() {
     isConsequenceFloor_(
       { domain: 'HEALTH' },
       { severity: 'MED' },
-      null,
       { ratings: [-1], lastRating: -1 }
     ), false);
-  // Cond 2 only fires for top-3 domains
-  eq('floor: HIGH COMMUNITY + 3-cycle arc -> false (not in floor domains)',
-    isConsequenceFloor_(
-      { domain: 'COMMUNITY' },
-      { severity: 'HIGH' },
-      { cyclesActive: 3 },
-      null
-    ), false);
-  eq('floor: HIGH ECONOMIC + 3-cycle arc -> false (not in floor domains)',
-    isConsequenceFloor_(
-      { domain: 'ECONOMIC' },
-      { severity: 'HIGH' },
-      { cyclesActive: 3 },
-      null
-    ), false);
-  // No states at all
-  eq('floor: HIGH HEALTH + no states -> false',
-    isConsequenceFloor_({ domain: 'HEALTH' }, { severity: 'HIGH' }, null, null), false);
+  // engine.268: HIGH in a top domain with no coverage crisis is NOT floored —
+  // the arc-persistence trigger is gone with the Storyline_Tracker.
+  eq('floor: HIGH HEALTH + no coverage state -> false',
+    isConsequenceFloor_({ domain: 'HEALTH' }, { severity: 'HIGH' }, null), false);
+  eq('floor: HIGH CIVIC + no coverage state -> false',
+    isConsequenceFloor_({ domain: 'CIVIC' }, { severity: 'HIGH' }, null), false);
   // Coverage at 0 doesn't fire crisis
   eq('floor: HIGH HEALTH + lastRating 0 -> false (above crisis threshold)',
     isConsequenceFloor_(
       { domain: 'HEALTH' },
       { severity: 'HIGH' },
-      null,
       { ratings: [0], lastRating: 0 }
     ), false);
   // Defensive nulls
-  eq('floor: null auditPattern -> false', isConsequenceFloor_({ domain: 'HEALTH' }, null, null, null), false);
-  eq('floor: missing severity -> false', isConsequenceFloor_({ domain: 'HEALTH' }, {}, null, null), false);
+  eq('floor: null auditPattern -> false', isConsequenceFloor_({ domain: 'HEALTH' }, null, null), false);
+  eq('floor: missing severity -> false', isConsequenceFloor_({ domain: 'HEALTH' }, {}, null), false);
   eq('floor: lowercase severity -> normalized',
     isConsequenceFloor_(
       { domain: 'HEALTH' },
       { severity: 'high' },
-      { cyclesActive: 3 },
-      null
+      { ratings: [-1], lastRating: -1 }
     ), true);
 
   console.log('priorityEngine self-tests: ' + pass + ' pass / ' + fail + ' fail');
@@ -719,18 +548,13 @@ if (typeof module !== 'undefined' && module.exports) {
     DOMAIN_WEIGHTS: DOMAIN_WEIGHTS,
     DOMAIN_WEIGHT_DEFAULT: DOMAIN_WEIGHT_DEFAULT,
     SEVERITY_MULTIPLIERS: SEVERITY_MULTIPLIERS,
-    STORYLINE_PRIORITY_TO_SEVERITY: STORYLINE_PRIORITY_TO_SEVERITY,
     COVERAGE_DOMAIN_NORMALIZE: COVERAGE_DOMAIN_NORMALIZE,
     COVERAGE_THRESHOLDS: COVERAGE_THRESHOLDS,
-    computeArcMultiplier_: computeArcMultiplier_,
-    parseStorylineRow_: parseStorylineRow_,
-    loadStorylineStateForSeed_: loadStorylineStateForSeed_,
     normalizeCoverageDomain_: normalizeCoverageDomain_,
     parseCoverageRow_: parseCoverageRow_,
     loadCoverageStateForDomain_: loadCoverageStateForDomain_,
     computeCoverageMultiplier_: computeCoverageMultiplier_,
     computePriorityScore_: computePriorityScore_,
-    CONSEQUENCE_FLOOR_DOMAINS: CONSEQUENCE_FLOOR_DOMAINS,
     isConsequenceFloor_: isConsequenceFloor_
   };
 }

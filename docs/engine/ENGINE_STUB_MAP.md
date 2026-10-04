@@ -3615,12 +3615,6 @@
 
 - **cadenceAxis_(journalistName, state)**
 
-- **loadArcBinding_(seed, storylineData)**
-
-- **arcBindingScore_(journalistName, arcBinding)**
-
-- **arcBindingAxis_(journalistName, state)**
-
 - **filterRosterForByline_(roster)**
 
 - **scoreByline_(seed, journalistName, state)**
@@ -4249,12 +4243,6 @@
   Config: ctx.config.popIdHighWater
 
 ### priorityEngine.js
-- **computeArcMultiplier_(seed, storylineState)**
-
-- **parseStorylineRow_(row, headers, currentCycle)**
-
-- **loadStorylineStateForSeed_(seed, storylineData, currentCycle)**
-
 - **normalizeCoverageDomain_(domain)**
 
 - **parseCoverageRow_(row, headers)**
@@ -4263,9 +4251,9 @@
 
 - **computeCoverageMultiplier_(seedDomain, coverageState)**
 
-- **computePriorityScore_(seed, auditPattern, storylineState, coverageState)**
+- **computePriorityScore_(seed, auditPattern, coverageState)**
 
-- **isConsequenceFloor_(seed, auditPattern, storylineState, coverageState)**
+- **isConsequenceFloor_(seed, auditPattern, coverageState)**
 
 - **_runPrioritySelfTests_()**
 
@@ -4528,4 +4516,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1614
+**Functions mapped:** 1608

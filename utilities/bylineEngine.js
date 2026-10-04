@@ -8,17 +8,15 @@
  *     (with `top.score >= 3` absolute floor for HIGH per S206 stewardship).
  *   - T3.2: formatAxis fills via inferSeedFormat_ + formatFitScore_ tables.
  *   - T3.3: cadenceAxis fills via loadCycleCadence_ + cadenceMultiplier_.
- *   - T3.4: arcBindingAxis fills via loadArcBinding_ + arcBindingScore_.
- *
- * Until T3.2-T3.4 ship, format/cadence/arc axes are stubs (format=0,
- * cadence=1.0 multiplier, arc=0). Theme axis is fully wired against the
- * ported partial-match scorer + GENERAL bypass.
+ *   - T3.4: arcBindingAxis (loadArcBinding_ + arcBindingScore_) — RETIRED
+ *     engine.268 with the Storyline_Tracker: the axis read an input that was
+ *     always empty, so every live seed scored arc 0.
  *
  * Composition formula:
- *   total = (themeScore + formatScore + arcBonus) * cadenceMultiplier
+ *   total = (themeScore + formatScore) * cadenceMultiplier
  *
- * Theme + format + arc are additive contributors; cadence multiplies the
- * total to suppress over-routed bylines.
+ * Theme + format are additive contributors; cadence multiplies the total to
+ * suppress over-routed bylines.
  *
  * Runtime: dual — Apps Script (engine-sheet, via clasp) and Node (validation
  * harness in scripts/, T3.9). Pattern mirrors `utilities/priorityEngine.js`.
@@ -28,8 +26,7 @@
  *     roster: { 'Anthony': { themes: [...], desk: '...', ... }, ... },  // required
  *     cycle: 93,                                                         // required
  *     cadence: { 'Simon Leary': 838, ... } | null,                       // T3.3 fills
- *     totalSeeds: 1109,                                                  // for cadence ratio
- *     arcBinding: 'Hal Richmond' | null                                  // T3.4 fills
+ *     totalSeeds: 1109                                                   // for cadence ratio
  *   }
  */
 
@@ -317,76 +314,6 @@ function cadenceAxis_(journalistName, state) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// ARC BINDING — bonus for arc-bound reporters. Plan T3.4.
-//
-// When a Storyline has a populated `AssignedReporter` (auto-bound by T3.5
-// from Mags' actual published bylines after 2+ consecutive editions), the
-// bound reporter gets +3 on any seed linked to that storyline.
-//
-// Decay: resolved or abandoned storylines return null binding (no bonus).
-// Warm-up: `AssignedReporter` column absent (pre-T3.5) → null binding for
-// every seed → arcBindingAxis returns 0 → multi-axis scorer functions as
-// 3-axis (theme + format + cadence) until first auto-bind row lands. Per
-// Fork 2 = Mags' picks, that takes ~2 cycles after Phase 6 cutover.
-// ─────────────────────────────────────────────────────────────────────────────
-var ARC_BINDING_BONUS = 3;
-
-// ─────────────────────────────────────────────────────────────────────────────
-// loadArcBinding_ — pure-function lookup of arc's bound reporter.
-//
-// Plan signature was `(arcId, storylineData)`; S206 stewardship adjustment:
-// take whole seed for symmetry with priorityEngine.js's
-// `loadStorylineStateForSeed_(seed, storylineData, cycle)`. Reads
-// `seed.linkedStorylineId` as a Storyline_Tracker rowNumber (per
-// applyStorySeeds.js v3.8 docstring — opaque key for this purpose).
-//
-// Returns:
-//   string  — bound reporter name (active arc, AssignedReporter populated)
-//   null    — no binding for any reason (warm-up, resolved/abandoned arc,
-//             empty cell, seed without linkage, OOB row, T3.5 column absent)
-// ─────────────────────────────────────────────────────────────────────────────
-function loadArcBinding_(seed, storylineData) {
-  if (!seed || seed.linkedStorylineId == null) return null;
-  if (!storylineData || storylineData.length < 2) return null;
-
-  var rowNumber = parseInt(seed.linkedStorylineId, 10);
-  if (!isFinite(rowNumber) || rowNumber < 2 || rowNumber > storylineData.length) return null;
-
-  var headers = storylineData[0];
-  var bindIdx = headers.indexOf('AssignedReporter');
-  if (bindIdx < 0) return null;  // T3.5 not yet shipped — warm-up null
-  var statusIdx = headers.indexOf('Status');
-
-  var row = storylineData[rowNumber - 1];
-
-  // Decay: resolved/abandoned arcs nullify binding.
-  if (statusIdx >= 0) {
-    var status = String(row[statusIdx] || '').trim().toLowerCase();
-    if (status === 'resolved' || status === 'abandoned') return null;
-  }
-
-  var binding = String(row[bindIdx] || '').trim();
-  return binding || null;
-}
-
-// ─────────────────────────────────────────────────────────────────────────────
-// arcBindingScore_ — pure scoring. +3 to bound reporter, 0 to everyone else.
-// ─────────────────────────────────────────────────────────────────────────────
-function arcBindingScore_(journalistName, arcBinding) {
-  if (!arcBinding || !journalistName) return 0;
-  return (journalistName === arcBinding) ? ARC_BINDING_BONUS : 0;
-}
-
-// ─────────────────────────────────────────────────────────────────────────────
-// arcBindingAxis_ — wired S206. Reads state.arcBinding (caller pre-resolves
-// per seed via loadArcBinding_). Cold-state and warm-up both return 0.
-// ─────────────────────────────────────────────────────────────────────────────
-function arcBindingAxis_(journalistName, state) {
-  if (!state) return 0;
-  return arcBindingScore_(journalistName, state.arcBinding);
-}
-
-// ─────────────────────────────────────────────────────────────────────────────
 // BYLINE_INELIGIBLE_ROLES — roles excluded from byline auto-assignment.
 //
 // Editor-in-Chief composes the load-out (doesn't take byline assignments);
@@ -440,21 +367,21 @@ function scoreByline_(seed, journalistName, state) {
   }
   var journalist = state.roster[journalistName];
   if (!journalist) {
-    return { name: journalistName, score: 0, components: { theme: 0, format: 0, arc: 0, cadence: 0 } };
+    return { name: journalistName, score: 0, components: { theme: 0, format: 0, cadence: 0 } };
   }
 
   var theme = themeAxis_(seed, journalist);
   var format = formatAxis_(seed, journalistName);
-  var arc = arcBindingAxis_(journalistName, state);
   var cadence = cadenceAxis_(journalistName, state);
 
-  var total = (theme + format + arc) * cadence;
+  // engine.268: the arc-binding axis is gone with the Storyline_Tracker.
+  var total = (theme + format) * cadence;
   if (total < 0) total = 0;
 
   return {
     name: journalistName,
     score: total,
-    components: { theme: theme, format: format, arc: arc, cadence: cadence }
+    components: { theme: theme, format: format, cadence: cadence }
   };
 }
 
@@ -529,7 +456,7 @@ function _runBylineSelfTests_() {
       themes: ['Micro-failures accumulating', 'Tolerance limits', 'Maintenance backlogs', 'System symptoms']
     }
   };
-  var STATE = { roster: ROSTER, cycle: 94, cadence: null, totalSeeds: 0, arcBinding: null };
+  var STATE = { roster: ROSTER, cycle: 94, cadence: null, totalSeeds: 0 };
 
   // themeAxis_ — Carmen wins on civic per plan acceptance.
   // Note: themeAxis_ tests pass minimal seeds (just domain) since theme-axis
@@ -572,16 +499,16 @@ function _runBylineSelfTests_() {
   eq('conf: top 0 -> low', categorizeConfidence_(0, 0).label, 'low');
   eq('conf: negative second clamped', categorizeConfidence_(5, -1).gap, 1);
 
-  // scoreByline_ composition: total = (theme + format + arc) * cadence
+  // scoreByline_ composition: total = (theme + format) * cadence
   // Use realistic seed (with seedType=civic → edition format → Carmen 4 fit)
   var civicEditionSeedProbe = { seedType: 'civic', domain: 'CIVIC', priority: 'HIGH' };
   var s1 = scoreByline_(civicEditionSeedProbe, 'Carmen Delaine', STATE);
   eq('scoreByline: Carmen on civic+edition name', s1.name, 'Carmen Delaine');
   eq('scoreByline: Carmen on civic+edition theme', s1.components.theme, 3);
   eq('scoreByline: Carmen on civic+edition format', s1.components.format, 4);
-  eq('scoreByline: Carmen on civic+edition arc stub', s1.components.arc, 0);
+  eq('scoreByline: no arc component (engine.268)', 'arc' in s1.components, false);
   eq('scoreByline: Carmen on civic+edition cadence stub', s1.components.cadence, 1.0);
-  eq('scoreByline: Carmen total = (3+4+0)*1.0 = 7', s1.score, 7);
+  eq('scoreByline: Carmen total = (3+4)*1.0 = 7', s1.score, 7);
 
   // Unknown journalist — defensive zero return
   var sUnknown = scoreByline_(civicEditionSeedProbe, 'Nobody Special', STATE);
@@ -783,82 +710,21 @@ function _runBylineSelfTests_() {
   var rankedCapped = scoreAllBylines_(supSeed, stateWithCadence);
   eq('rankedCapped: Carmen tops Simon under cadence cap', rankedCapped[0].name, 'Carmen Delaine');
 
-  // ── T3.4: loadArcBinding_ ────────────────────────────────────────────────
-  // Warm-up: storyline data without AssignedReporter column → null
-  var storylineWarmup = [
-    ['CycleAdded', 'StorylineId', 'Priority', 'Status'],
-    [88, 'SL-88-AAAA', 'high', 'active']
-  ];
-  eq('loadArcBinding: warm-up (no AssignedReporter col) -> null',
-    loadArcBinding_({ linkedStorylineId: 2 }, storylineWarmup), null);
-
-  // Active arc with binding populated
-  var storylineLive = [
-    ['CycleAdded', 'StorylineId', 'Priority', 'Status', 'AssignedReporter'],
-    [88, 'SL-88-AAAA', 'high', 'active',    'Hal Richmond'],
-    [89, 'SL-89-BBBB', 'high', 'resolved',  'Carmen Delaine'],
-    [90, 'SL-90-CCCC', 'high', 'abandoned', 'Maria Keen'],
-    [91, 'SL-91-DDDD', 'high', 'active',    '']  // empty cell
-  ];
-  eq('loadArcBinding: active arc -> Hal',
-    loadArcBinding_({ linkedStorylineId: 2 }, storylineLive), 'Hal Richmond');
-  eq('loadArcBinding: resolved arc -> null (decay)',
-    loadArcBinding_({ linkedStorylineId: 3 }, storylineLive), null);
-  eq('loadArcBinding: abandoned arc -> null (decay)',
-    loadArcBinding_({ linkedStorylineId: 4 }, storylineLive), null);
-  eq('loadArcBinding: empty cell -> null',
-    loadArcBinding_({ linkedStorylineId: 5 }, storylineLive), null);
-  eq('loadArcBinding: missing seed linkage -> null',
-    loadArcBinding_({}, storylineLive), null);
-  eq('loadArcBinding: null seed -> null',
-    loadArcBinding_(null, storylineLive), null);
-  eq('loadArcBinding: OOB row -> null',
-    loadArcBinding_({ linkedStorylineId: 99 }, storylineLive), null);
-  eq('loadArcBinding: header row (rowNumber=1) -> null',
-    loadArcBinding_({ linkedStorylineId: 1 }, storylineLive), null);
-  eq('loadArcBinding: empty storylineData -> null',
-    loadArcBinding_({ linkedStorylineId: 2 }, []), null);
-
-  // ── T3.4: arcBindingScore_ ───────────────────────────────────────────────
-  eq('arcBindingScore: matching name -> +3', arcBindingScore_('Hal Richmond', 'Hal Richmond'), 3);
-  eq('arcBindingScore: non-matching -> 0', arcBindingScore_('Carmen Delaine', 'Hal Richmond'), 0);
-  eq('arcBindingScore: null binding -> 0', arcBindingScore_('Hal Richmond', null), 0);
-  eq('arcBindingScore: null name -> 0', arcBindingScore_(null, 'Hal Richmond'), 0);
-  eq('arcBindingScore: empty binding -> 0', arcBindingScore_('Hal Richmond', ''), 0);
-
-  // ── T3.4: arcBindingAxis_ end-to-end ─────────────────────────────────────
-  eq('arcBindingAxis: state without arcBinding -> 0 (warm-up)',
-    arcBindingAxis_('Hal Richmond', { roster: ROSTER, cycle: 94 }), 0);
-  eq('arcBindingAxis: state.arcBinding=null -> 0',
-    arcBindingAxis_('Hal Richmond', { roster: ROSTER, cycle: 94, arcBinding: null }), 0);
-  eq('arcBindingAxis: bound reporter +3',
-    arcBindingAxis_('Hal Richmond', { roster: ROSTER, cycle: 94, arcBinding: 'Hal Richmond' }), 3);
-  eq('arcBindingAxis: non-bound reporter 0',
-    arcBindingAxis_('Carmen Delaine', { roster: ROSTER, cycle: 94, arcBinding: 'Hal Richmond' }), 0);
-
-  // ── T3.4: scoreByline_ end-to-end with arc-binding nudging ranking ──────
-  // GENERAL+storyline-followup with no cadence: Simon wins on supplemental
-  // format-fit (4). Add arcBinding to a competitor → that competitor jumps.
+  // ── engine.268: the arc-binding axis is gone ─────────────────────────────
+  eq('engine.268: loadArcBinding_ gone', typeof loadArcBinding_, 'undefined');
+  eq('engine.268: arcBindingScore_ gone', typeof arcBindingScore_, 'undefined');
+  eq('engine.268: arcBindingAxis_ gone', typeof arcBindingAxis_, 'undefined');
+  eq('engine.268: ARC_BINDING_BONUS gone', typeof ARC_BINDING_BONUS, 'undefined');
+  // A stale arcBinding on the state moves nothing: Simon keeps the GENERAL
+  // supplemental seed on format fit alone.
   var arcSeed = { seedType: 'storyline-followup', domain: 'GENERAL' };
-  var stateArcBoundCarmen = {
-    roster: ROSTER,
-    cycle: 94,
-    cadence: null,
-    totalSeeds: 0,
-    arcBinding: 'Carmen Delaine'
-  };
-  // Carmen: theme 0 + format 3 + arc 3 = 6, * cadence 1.0 = 6
-  // Simon: theme 0 + format 4 + arc 0 = 4, * cadence 1.0 = 4
-  var carmenArcBound = scoreByline_(arcSeed, 'Carmen Delaine', stateArcBoundCarmen);
-  eq('scoreByline: Carmen arc-bound total = (0+3+3)*1.0 = 6', carmenArcBound.score, 6);
-  eq('scoreByline: Carmen arc component = 3', carmenArcBound.components.arc, 3);
-  var simonNotBound = scoreByline_(arcSeed, 'Simon Leary', stateArcBoundCarmen);
-  eq('scoreByline: Simon not-bound arc = 0', simonNotBound.components.arc, 0);
-  eq('scoreByline: Simon not-bound total = 4', simonNotBound.score, 4);
-  // Carmen tops the ranking under arc binding
-  var rankedArc = scoreAllBylines_(arcSeed, stateArcBoundCarmen);
-  eq('rankedArc: Carmen tops Simon under arc binding', rankedArc[0].name, 'Carmen Delaine');
-  eq('rankedArc: Carmen score 6', rankedArc[0].score, 6);
+  var stateStaleArc = { roster: ROSTER, cycle: 94, cadence: null, totalSeeds: 0, arcBinding: 'Carmen Delaine' };
+  var carmenStale = scoreByline_(arcSeed, 'Carmen Delaine', stateStaleArc);
+  eq('engine.268: a stale state.arcBinding adds nothing (Carmen 0+3)', carmenStale.score, 3);
+  eq('engine.268: no arc component on the row', 'arc' in carmenStale.components, false);
+  var rankedStale = scoreAllBylines_(arcSeed, stateStaleArc);
+  eq('engine.268: Simon tops GENERAL supplemental on format fit (4)', rankedStale[0].name, 'Simon Leary');
+  eq('engine.268: Simon score 4', rankedStale[0].score, 4);
 
   // ── G-S14: filterRosterForByline_ — non-reporter candidate-pool filter ──
   var roleMixed = {
@@ -898,7 +764,6 @@ if (typeof module !== 'undefined' && module.exports) {
     themeAxis_: themeAxis_,
     formatAxis_: formatAxis_,
     cadenceAxis_: cadenceAxis_,
-    arcBindingAxis_: arcBindingAxis_,
     scoreByline_: scoreByline_,
     scoreAllBylines_: scoreAllBylines_,
     EDITION_SEEDTYPES: EDITION_SEEDTYPES,
@@ -914,9 +779,6 @@ if (typeof module !== 'undefined' && module.exports) {
     CADENCE_CAP_FLOOR: CADENCE_CAP_FLOOR,
     loadCycleCadence_: loadCycleCadence_,
     cadenceMultiplier_: cadenceMultiplier_,
-    ARC_BINDING_BONUS: ARC_BINDING_BONUS,
-    loadArcBinding_: loadArcBinding_,
-    arcBindingScore_: arcBindingScore_,
     BYLINE_INELIGIBLE_ROLES: BYLINE_INELIGIBLE_ROLES,
     filterRosterForByline_: filterRosterForByline_
   };

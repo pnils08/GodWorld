@@ -426,10 +426,11 @@ function collapseSeeds(intents, cycle, cycleCtx) {
 // priority + byline for a finalized intent (run AFTER collapse so cadence isn't
 // polluted by the pre-collapse fragments). Behavior-preserving for passthrough seeds.
 function finalizeSeed(it, bylineState, roster) {
-  const seedForScore = { domain: it.domain, linkedStorylineId: null, seedType: PATTERN_SEED_TYPE, priority: it.priority };
+  const seedForScore = { domain: it.domain, seedType: PATTERN_SEED_TYPE, priority: it.priority };
   const auditForScore = { severity: normSeverity(it.severity) };
-  const pr = priorityEngine.computePriorityScore_(seedForScore, auditForScore, null, null);
-  const floor = priorityEngine.isConsequenceFloor_(seedForScore, auditForScore, null, null);
+  // engine.268: no storyline state — (seed, auditPattern, coverageState); no coverage read here.
+  const pr = priorityEngine.computePriorityScore_(seedForScore, auditForScore, null);
+  const floor = priorityEngine.isConsequenceFloor_(seedForScore, auditForScore, null);
   let ranked = null;
   try { ranked = bylineEngine.scoreAllBylines_(seedForScore, bylineState); }
   catch (e) { ranked = null; }
@@ -615,7 +616,7 @@ async function routePatternSeeds(cycle, opts) {
   // ── Phase C: byline + priority over the collapsed set (highest-severity picks first) ──
   const sevRank = { HIGH: 3, MED: 2, LOW: 1 };
   collapsed.sort((a, b) => sevRank[normSeverity(b.severity)] - sevRank[normSeverity(a.severity)]);
-  const bylineState = { roster, cadence: {}, totalSeeds: 0, arcBinding: null };
+  const bylineState = { roster, cadence: {}, totalSeeds: 0 };
   const seeds = collapsed.map((it) => finalizeSeed(it, bylineState, roster));
 
   // sort final output by priorityScore desc for deck legibility.

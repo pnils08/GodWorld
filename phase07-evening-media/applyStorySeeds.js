@@ -39,13 +39,13 @@
  *
  * v3.12 Enhancements (S206 — Engine B wire-up per routing-foundation plan T3.6):
  * - makeSeed now ranks every roster journalist via utilities/bylineEngine.js
- *   `scoreAllBylines_` (theme + format + arc + cadence axes). Returns ranked
- *   array sorted descending; top entry gets confidence label.
+ *   `scoreAllBylines_` (theme + format axes, × cadence; the arc-binding axis
+ *   went with the Storyline_Tracker, engine.268). Returns ranked array sorted
+ *   descending; top entry gets confidence label.
  * - bylineState built once at applyStorySeeds_ entry: {roster, cadence: {},
- *   totalSeeds: 0, arcBinding: null}. roster pulled from rosterLookup.js
- *   getRoster_().journalists. cadence + totalSeeds mutate per-seed AFTER
- *   scoring (so a seed's own pick doesn't influence its own cap). arcBinding
- *   pre-resolved per-seed via loadArcBinding_(seedForPriority, storylineRawData).
+ *   totalSeeds: 0}. roster pulled from rosterLookup.js getRoster_().journalists.
+ *   cadence + totalSeeds mutate per-seed AFTER scoring (so a seed's own pick
+ *   doesn't influence its own cap).
  * - 3 new seed fields: bylineCandidate (top.name), bylineConfidence (top.confidence),
  *   bylineRationale ({components: top.components, alternates: ranked.slice(1,3)}).
  * - **Transition cycle:** v3.9 suggestStoryAngle_ block KEPT in parallel for one
@@ -54,23 +54,19 @@
  *   / Rationale populate from scoreAllBylines_. Next engine-sheet pickup (post-C94
  *   smoke-test) will retire suggestStoryAngle_ block + cols I-L per T3.6 spec
  *   "replace" framing.
- * - **T3.5 status:** schema-only (AssignedReporter col added to Storyline_Tracker
- *   live S206); auto-bind writer DEFERRED to research-build (Press_Drafts
- *   upstream gap — LinkedStoryline col exists but 0% populated, so engine-side
- *   Press_Drafts-driven path is dead-on-arrival; research-build owns the source
- *   decision). loadArcBinding_ gracefully no-ops on missing-writer state.
+ * - **T3.5 (arc auto-bind):** never shipped past schema; retired with the
+ *   Storyline_Tracker (engine.266/268).
  *
  * v3.11 Enhancements (S206 — Engine A wire-up per routing-foundation plan T2.6):
  * - makeSeed now computes priorityScore + consequenceFloor + priorityComponents
- *   via utilities/priorityEngine.js (Engine A: domain-severity × arc-persistence
- *   × prior-coverage). Pre-loads raw Storyline_Tracker + Edition_Coverage_Ratings
- *   sheets at applyStorySeeds_ entry; passes raw 2D arrays to per-seed
- *   loadStorylineStateForSeed_ + loadCoverageStateForDomain_ from priorityEngine.
+ *   via utilities/priorityEngine.js (Engine A: domain-severity × prior-coverage;
+ *   the arc-persistence term went with the Storyline_Tracker, engine.268).
+ *   Pre-loads the raw Edition_Coverage_Ratings sheet at applyStorySeeds_ entry;
+ *   passes the 2D array to per-seed loadCoverageStateForDomain_.
  * - auditPattern arg passed null — Apps Script doesn't have engine_audit_c{XX}.json
- *   (post-cycle Node artifact); severity defaults to MED per priorityEngine.
- * - loadActiveStorylines_ expanded (T2.6 step 4): reads StorylineId (col O),
- *   LastCoverageCycle (col S), MentionCount (col T) into parsed record. Closes
- *   the column-set gap surfaced by parseStorylineRow_.
+ *   (post-cycle Node artifact); severity defaults to MED per priorityEngine, and
+ *   the consequence floor (HIGH + uncovered crisis) therefore never fires in the
+ *   engine — only the Node auditor passes a real severity.
  *
  * v3.10 Enhancements (S202 — wires the dead output):
  * - Reads S.editionCoverageTriggers (set by applyEditionCoverageEffects_ in
@@ -190,17 +186,16 @@ function applyStorySeeds_(ctx) {
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // v3.11 (S206): ENGINE A — Pre-load raw sheets for priority engine
+  // v3.11 (S206): ENGINE A — Pre-load the coverage sheet for the priority engine
   // ═══════════════════════════════════════════════════════════════════════════
-  // makeSeed (defined below) closes over these — populated NOW so they're
-  // ready when first makeSeed invocation fires. Empty-array defaults if sheets
-  // missing or empty so priorityEngine functions degrade to `null` state.
-  var storylineRawData = [];
+  // makeSeed (defined below) closes over this — populated NOW so it's ready
+  // when the first makeSeed invocation fires. Empty-array default if the sheet
+  // is missing or empty so loadCoverageStateForDomain_ degrades to `null`.
+  // engine.268: the Storyline_Tracker pre-load and the per-seed storyline-state
+  // / arc-binding lookups are gone with the tab — they read an input that was
+  // always empty, so every seed scored at arc 1.0 and arc axis 0 regardless.
   var coverageRawData = [];
   if (ctx.ss) {
-    // engine.266: the Storyline_Tracker read is retired (tab discontinued).
-    // storylineRawData stays empty, so the storyline-state and arc-binding
-    // lookups below return null for every seed.
     var ecrSheet = ctx.ss.getSheetByName('Edition_Coverage_Ratings');
     if (ecrSheet && ecrSheet.getLastRow() > 0) {
       coverageRawData = ecrSheet.getDataRange().getValues();
@@ -210,8 +205,7 @@ function applyStorySeeds_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // v3.12 (S206): ENGINE B — Byline ranker state init (mutated per-seed)
   // ═══════════════════════════════════════════════════════════════════════════
-  // Closure-scoped; makeSeed mutates cadence + totalSeeds AFTER each scoring,
-  // pre-resolves arcBinding via loadArcBinding_ before each scoring.
+  // Closure-scoped; makeSeed mutates cadence + totalSeeds AFTER each scoring.
   // Empty-roster fallback if rosterLookup.js fails to load — scoreAllBylines_
   // will throw on empty-roster, so the makeSeed call is wrapped in typeof guard.
   //
@@ -224,8 +218,7 @@ function applyStorySeeds_(ctx) {
       ? filterRosterForByline_(bylineRawRoster)
       : bylineRawRoster,
     cadence: {},
-    totalSeeds: 0,
-    arcBinding: null  // mutated per-seed via loadArcBinding_
+    totalSeeds: 0
   };
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -374,34 +367,28 @@ function applyStorySeeds_(ctx) {
     // even if priorityEngine.js fails to load.
     // v3.12 (S206): seedForPriority extended with seedType + priority for
     // bylineEngine consumption (inferSeedFormat_ + storyline-active branch).
+    // engine.268: no storyline state — the tracker is gone; the score is
+    // domain × severity × coverage, the floor is HIGH + uncovered crisis.
     var seedForPriority = {
       domain: normalDomain,
-      linkedStorylineId: linkedStorylineId || null,
       seedType: normalSeedType,
       priority: priority || 1
     };
-    var storylineState = (typeof loadStorylineStateForSeed_ === 'function')
-      ? loadStorylineStateForSeed_(seedForPriority, storylineRawData, cycle)
-      : null;
     var coverageState = (typeof loadCoverageStateForDomain_ === 'function')
       ? loadCoverageStateForDomain_(normalDomain, coverageRawData, cycle)
       : null;
     var priorityResult = (typeof computePriorityScore_ === 'function')
-      ? computePriorityScore_(seedForPriority, null, storylineState, coverageState)
+      ? computePriorityScore_(seedForPriority, null, coverageState)
       : null;
     var floorFlag = (typeof isConsequenceFloor_ === 'function')
-      ? isConsequenceFloor_(seedForPriority, null, storylineState, coverageState)
+      ? isConsequenceFloor_(seedForPriority, null, coverageState)
       : false;
 
-    // v3.12 (S206): Engine B — multi-axis byline ranker via utilities/bylineEngine.js.
-    // Pre-resolve arcBinding for this seed (null pre-T3.5b auto-bind writer ships;
-    // bylineEngine warm-up returns 0 for arc axis). Mutate cadence + totalSeeds
-    // AFTER scoring so the seed's own pick doesn't influence its own cadence cap.
+    // v3.12 (S206): Engine B — multi-axis byline ranker via utilities/bylineEngine.js
+    // (theme + format, × cadence). Mutate cadence + totalSeeds AFTER scoring so
+    // the seed's own pick doesn't influence its own cadence cap.
     var bylineRanked = null;
     if (typeof scoreAllBylines_ === 'function' && bylineState.roster && Object.keys(bylineState.roster).length > 0) {
-      bylineState.arcBinding = (typeof loadArcBinding_ === 'function')
-        ? loadArcBinding_(seedForPriority, storylineRawData)
-        : null;
       try {
         bylineRanked = scoreAllBylines_(seedForPriority, bylineState);
       } catch (e) {

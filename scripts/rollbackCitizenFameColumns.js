@@ -18,7 +18,7 @@
  *   FameTrend, ActiveStorylines, StorylineRole (7 columns)
  * - Generic_Citizens: PromotionCandidate, PromotionScore, PromotionReason (3 columns)
  * - Chicago_Citizens: FameScore, MediaMentions, LastMentionedCycle, FameTrend (4 columns)
- * - Storyline_Tracker: LastCoverageCycle, MentionCount, CoverageGap (3 columns)
+ * - Storyline_Tracker: retired engine.268 (tab deleted) — nothing to roll back
  * - Cultural_Ledger: No columns removed (existing fame system preserved)
  * - Citizen_Media_Usage: FameProcessed column removed (1 column)
  *
@@ -55,11 +55,6 @@ const ROLLBACK_DEFINITIONS = {
     'MediaMentions',
     'LastMentionedCycle',
     'FameTrend'
-  ],
-  'Storyline_Tracker': [
-    'LastCoverageCycle',
-    'MentionCount',
-    'CoverageGap'
   ],
   'Citizen_Media_Usage': [
     'FameProcessed'

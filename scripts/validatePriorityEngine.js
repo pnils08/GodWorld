@@ -226,7 +226,7 @@ async function main() {
     lines.push('Working questions for shadow-cycle review (answers feed v2 correlation strategy):');
     lines.push('');
     lines.push('1. **Top-overlap.** How many of Mags\' top-N proposals have a corresponding seed in Engine A\'s top-N? Define N (5? 10?) and the matching rule (sourceSignal token? domain+neighborhood? title-keyword?).');
-    lines.push('2. **Floor coverage.** Are all `🔒` floored seeds reflected in Mags\' picks? If not, the floor flag is firing on seeds Mags doesn\'t see as front-page-worthy — tune `isConsequenceFloor_` or `CONSEQUENCE_FLOOR_DOMAINS`.');
+    lines.push('2. **Floor coverage.** Are all `🔒` floored seeds reflected in Mags\' picks? If not, the floor flag is firing on seeds Mags doesn\'t see as front-page-worthy — tune `isConsequenceFloor_` (HIGH + uncovered crisis; the arc trigger retired engine.268).');
     lines.push('3. **Score-band pattern.** Do Mags\' HIGH-priority proposals cluster around the same priorityScore band? If they spread across 3-9, the score isn\'t separating priority well.');
     lines.push('4. **Domain concentration.** Engine A vs Mags — does either over-represent a domain relative to the other?');
     lines.push('');

@@ -60,7 +60,8 @@ How specific places look at specific times. This is canon: streets of Oakland-as
 
 - **Temescal** — Telegraph & 47th, 49th, 51st. Pharmacy awning, neighborhood grocery, corner barbershop, families on weekend mornings, food carts at lunch. Light comes through the oaks and slants across the sidewalk. People are moving — to work, to school, to the café. NOT empty, NOT desperate, NOT lined with tents.
 - **Jack London Square** — water, ferry terminal, Heinold's, the produce district at 5 AM, restaurant lights at 9 PM. Working waterfront, not gentrified glass.
-- **The Coliseum & Baylight** — cranes, construction fences, the stadium tunnel, the parking lot at 6 PM, the BART connector. A city building something. Workers in motion. The hills behind.
+- **The Coliseum** — the stadium tunnel, the parking lot at 6 PM, the hills behind.
+- **Baylight** — cranes over the harbor, construction fences, the Port cranes beyond, the ferry terminal taking shape. A city building something. Workers in motion.
 - **Lake Merritt** — joggers at 7 AM, kids at the pergola, evening light on the water, the necklace of lights at dusk. Mags walks here with Robert.
 - **Fruitvale** — International Boulevard, the BART station, the transit hub site, taquerias at lunch, families walking. Spanish on signs and in conversation. Working commerce, not gentrification anxiety.
 - **West Oakland** — the port cranes from below, the housing along Peralta, neighborhood meeting spaces, families on porches. Resilience as texture, not poverty as aesthetic.

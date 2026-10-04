@@ -66,7 +66,7 @@ Not the press tour — the actual walks.
 - **West Oakland** — Denise Carter's district. You go because Brenda Okoro asks you to. The Stabilization Fund offices are here. You meet with families when the schedule allows.
 - **Fruitvale** — your Latino base, Ramon Vega's district (technically — you know the line). You go to International Boulevard. Spanish on signs. You know enough to greet, not pretend.
 - **Temescal** — middle-class, mixed, the Health Center is the talk. Coffee shops, family-owned. You like the place.
-- **Coliseum / Baylight** — your legacy district. Construction fences, food trucks, workers on lunch. You go to the construction site visibly.
+- **Baylight** — your legacy district, on the harbor beside Jack London. Construction fences, food trucks, workers on lunch. You go to the construction site visibly.
 - **Lake Merritt** — joggers, the pergola, kids. Sunday morning runs sometimes. You wave more than you talk.
 - **KONO / Uptown** — art walks, restaurants. Press-friendly. You go when there's a thing.
 

@@ -239,6 +239,44 @@ function verbSupports(text, predicate) {
   if (predicate === 'fan') return /\b(?:bought|wore|watched|saw|attended)\b/i.test(text);
   return /\b(?:heard|noticed|saw|watched|visited|attended|bought|browsed)\b/i.test(text);
 }
+// engine.53 Task 6 (re-scoped 2026-10-04): the citizen's own words in an exchange transcript
+// (scripts/citizen-exchange.js → output/exchanges/exchange_c{N}_<date>_<format>.md) as a third
+// street evidence source. Window = this Cycle and the two before (the T6 spec's "last 3 cycles").
+// Transcripts are subjective source material: quote-mineable by a desk piece, never fact.
+const EXCHANGE_WINDOW = 3;
+function loadExchanges(root, cycle, window = EXCHANGE_WINDOW) {
+  const dir = path.join(root, 'output', 'exchanges');
+  let files = [];
+  try { files = fs.readdirSync(dir); } catch (_) { return []; }
+  const turns = [];
+  for (const file of files) {
+    const m = /^exchange_c(\d+)_[^_]+_([a-z]+)\.md$/i.exec(file);
+    if (!m) continue;
+    const c = Number(m[1]);
+    if (!(c <= Number(cycle) && c > Number(cycle) - window)) continue;
+    let text = '';
+    try { text = fs.readFileSync(path.join(dir, file), 'utf8'); } catch (_) { continue; }
+    const popByName = new Map();
+    const header = /^- participants:\s*(.+)$/m.exec(text);
+    if (!header) continue;
+    for (const part of header[1].split('|')) {
+      const pm = /^\s*(POP-\d{5})\s+(.+?)\s*$/.exec(part);
+      if (pm) popByName.set(pm[2], pm[1]);
+    }
+    if (!popByName.size) continue;
+    for (const line of text.split(/\r?\n/)) {
+      const tm = /^\*\*([^*]+?):\*\*\s*(.*)$/.exec(line);
+      if (!tm) continue;
+      const popId = popByName.get(tm[1].trim());
+      if (!popId) continue;
+      const spoken = tm[2].replace(/\*[^*]*\*/g, ' ').replace(/\s+/g, ' ').trim(); // stage directions out
+      if (!spoken) continue;
+      turns.push({ file: 'output/exchanges/' + file, cycle: c, format: m[2].toLowerCase(),
+        popId, name: tm[1].trim(), text: spoken });
+    }
+  }
+  return turns.sort((a, b) => Number(b.cycle) - Number(a.cycle));
+}
 function street(story, slice, cycle, root, seat, opts = {}) {
   const meta = opts.meta || readJson(path.join(root, 'output', 'simulation_ledger_snapshot.meta.json'));
   if (!meta) throw new Error('ledger snapshot meta missing or unreadable: run scripts/dumpLedger.js');
@@ -291,25 +329,25 @@ function street(story, slice, cycle, root, seat, opts = {}) {
     citizenText = pages.citizenText || citizenText; // an export shuffle degrades to identity, never a TypeError (kimi F1)
     if (pageIndex === undefined) pageIndex = pages.loadIndex(root);
   } catch (_) { if (pageIndex === undefined) pageIndex = []; }
-  if (!Array.isArray(pageIndex) || !pageIndex.length) return unique(out);
+  const leak = /\b20\d\d-\d\d-\d\d\b|\b(?:Claude|Codex|Anthropic|Supermemory|OpenRouter|Gemini)\b/i;
+  const firstPerson = /\b(?:I|I['’]m|I['’]ve|I['’]d|I['’]ll|me|my|mine|we|we['’]re|us|our)\b/i;
+  const offStreet = (row) => ['MEDIA', 'GAME'].includes(clean(row.ClockMode).toUpperCase()) ||
+    clean(row.EconomicProfileKey).toUpperCase() === 'SPORTS_OVERRIDE';
   const lifePops = new Set(out.map(c => c.pop));
   const pagesByPop = new Map();
-  for (const doc of pageIndex.slice().sort((a, b) =>
+  for (const doc of (Array.isArray(pageIndex) ? pageIndex : []).slice().sort((a, b) =>
     (Number(b.cycle) - Number(a.cycle)) ||
     String(b.createdAt || '').localeCompare(String(a.createdAt || '')))) {
     if (!doc || doc.type !== 'reflection' || Number(doc.cycle) > Number(cycle) ||
-        !/^POP-\d{5}$/.test(clean(doc.popId)) ||
-        /\b20\d\d-\d\d-\d\d\b|\b(?:Claude|Codex|Anthropic|Supermemory|OpenRouter|Gemini)\b/i.test(String(doc.content || ''))) continue;
+        !/^POP-\d{5}$/.test(clean(doc.popId)) || leak.test(String(doc.content || ''))) continue;
     if (!pagesByPop.has(doc.popId)) pagesByPop.set(doc.popId, []);
     pagesByPop.get(doc.popId).push(doc);
   }
-  const firstPerson = /\b(?:I|I['’]m|I['’]ve|I['’]d|I['’]ll|me|my|mine|we|we['’]re|us|our)\b/i;
   for (const row of ledger) {
+    if (!pagesByPop.size) break;
     if (clean(row.Status).toLowerCase() !== 'active') continue;
     const pop = clean(row.POPID || row.PopId || row.POP_ID);
-    if (lifePops.has(pop) ||
-        ['MEDIA', 'GAME'].includes(clean(row.ClockMode).toUpperCase()) ||
-        clean(row.EconomicProfileKey).toUpperCase() === 'SPORTS_OVERRIDE') continue;
+    if (lifePops.has(pop) || offStreet(row)) continue;
     let match = null;
     for (const doc of pagesByPop.get(pop) || []) {
       const sentences = citizenText(doc.content).match(/[^.!?\r\n]+[.!?]*/g) || [];
@@ -330,6 +368,42 @@ function street(story, slice, cycle, root, seat, opts = {}) {
         highlightKind: hit.kind, entity: hit.entity, predicate: hit.predicate },
       { matchedPageLine: excerpt }));
   }
+  // engine.53 T6: third pass — exchange transcripts, for citizens with no life-line or page-line yet.
+  let exchanges = opts.exchanges;
+  if (exchanges === undefined) { try { exchanges = loadExchanges(root, cycle); } catch (_) { exchanges = []; } }
+  if (Array.isArray(exchanges) && exchanges.length) {
+    const sourced = new Set(out.map(c => c.pop));
+    const turnsByPop = new Map();
+    for (const turn of exchanges) {
+      if (!turn || Number(turn.cycle) > Number(cycle) || !/^POP-\d{5}$/.test(clean(turn.popId)) ||
+          leak.test(String(turn.text || ''))) continue;
+      if (!turnsByPop.has(turn.popId)) turnsByPop.set(turn.popId, []);
+      turnsByPop.get(turn.popId).push(turn);
+    }
+    for (const row of ledger) {
+      if (clean(row.Status).toLowerCase() !== 'active') continue;
+      const pop = clean(row.POPID || row.PopId || row.POP_ID);
+      if (sourced.has(pop) || offStreet(row)) continue;
+      let match = null;
+      for (const turn of turnsByPop.get(pop) || []) {
+        const sentences = String(turn.text).match(/[^.!?\r\n]+[.!?]*/g) || [];
+        for (const sentence of sentences) {
+          const hit = highlights.find(h => phrase(sentence, h.entity) &&
+            (verbSupports(sentence, h.predicate) || firstPerson.test(sentence)));
+          if (!hit) continue;
+          match = { turn, hit, excerpt: sentence.replace(/\s+/g, ' ').trim().slice(0, 240) };
+          break;
+        }
+        if (match) break;
+      }
+      if (!match) continue;
+      const { turn, hit, excerpt } = match;
+      out.push(frozen('street', 'exchange-line', row,
+        { source: turn.file, cycle: Number(turn.cycle), format: turn.format, excerpt,
+          highlightKind: hit.kind, entity: hit.entity, predicate: hit.predicate },
+        { matchedExchangeLine: excerpt }));
+    }
+  }
   return unique(out);
 }
 function buildPool({ mode, story, slice, cycle, seat, root = ROOT, beats, streetOptions }) {
@@ -347,5 +421,5 @@ function buildPool({ mode, story, slice, cycle, seat, root = ROOT, beats, street
   return Object.freeze({ mode, candidates, officeRecords });
 }
 
-module.exports = { buildPool, named, workplace, offices, street, parseLife,
+module.exports = { buildPool, named, workplace, offices, street, parseLife, loadExchanges,
   typedHighlights, officeSources, verifyOfficeRecord, storyTopic, leadBizId };

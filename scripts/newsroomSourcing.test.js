@@ -110,6 +110,48 @@ assert.equal(source.buildPool({ mode: 'street', story: streetStory, slice: stree
   'an empty page index creates no page-line candidates');
 assert.deepEqual(source.buildPool({ mode: 'street', story: streetStory, slice: streetSlice,
   seat: 'talia-finch', cycle: 999, beats, streetOptions: { ...streetOpts, meta: { cycle: 998 } } }).candidates, []);
+// engine.53 T6: exchange transcripts as a third street evidence source (after life-line and page-line).
+const exRows = [
+  { POPID: 'POP-90030', First: 'Ex', Last: 'Thirty', Status: 'Active', ClockMode: 'ENGINE', Neighborhood: 'Fruitvale', Tier: 3, LifeHistory: '' },
+  { POPID: 'POP-90031', First: 'Ex', Last: 'Reporter', Status: 'Active', ClockMode: 'MEDIA', Neighborhood: 'Fruitvale', Tier: 2, LifeHistory: '' },
+  { POPID: 'POP-90032', First: 'Ex', Last: 'Leak', Status: 'Active', ClockMode: 'ENGINE', Neighborhood: 'Fruitvale', Tier: 3, LifeHistory: '' },
+  { POPID: 'POP-90033', First: 'Ex', Last: 'Future', Status: 'Active', ClockMode: 'ENGINE', Neighborhood: 'Fruitvale', Tier: 3, LifeHistory: '' },
+];
+const turn = (popId, cycle, text) => ({ file: 'output/exchanges/exchange_c' + cycle + '_2026-01-01_conversation.md',
+  cycle, format: 'conversation', popId, name: 'Ex', text });
+const exOpts = { ...streetOpts, ledgerRows: streetOpts.ledgerRows.concat(pageRows, exRows), pageIndex: [
+  pageDoc('POP-90013', 998, 'I keep going back to Test Venue.') ], exchanges: [
+  turn('POP-90030', 998, 'Honestly? I keep going back to Test Venue. Nothing else is open.'),
+  turn('POP-90013', 999, 'I keep going back to Test Venue.'),   // already a page-line candidate: page wins
+  turn('POP-90031', 998, 'I keep going back to Test Venue.'),   // MEDIA clock: never a street source
+  turn('POP-90032', 998, 'Codex told me to keep going back to Test Venue.'), // leak guard
+  turn('POP-90033', 1000, 'I keep going back to Test Venue.'),  // a future Cycle cannot be evidence
+] };
+const withExchanges = source.buildPool({ mode: 'street', story: streetStory, slice: streetSlice,
+  seat: 'talia-finch', cycle: 999, beats, root, streetOptions: exOpts });
+assert.deepEqual(withExchanges.candidates.map(c => c.pop), ['POP-90007', 'POP-90013', 'POP-90030']);
+assert.deepEqual(withExchanges.candidates.map(c => c.sourceKind), ['life-line', 'page-line', 'exchange-line']);
+assert.equal(withExchanges.candidates[2].evidence.excerpt, 'I keep going back to Test Venue.');
+assert.equal(withExchanges.candidates[2].evidence.cycle, 998);
+assert.equal(withExchanges.candidates[2].evidence.format, 'conversation');
+assert.equal(withExchanges.candidates[2].matchedExchangeLine, withExchanges.candidates[2].evidence.excerpt);
+assert.equal(source.buildPool({ mode: 'street', story: streetStory, slice: streetSlice,
+  seat: 'talia-finch', cycle: 999, beats, root,
+  streetOptions: { ...streetOpts, ledgerRows: exRows, pageIndex: [], exchanges: [] } }).candidates.length, 0,
+  'no transcripts creates no exchange-line candidates');
+// loadExchanges: parses the transcript shape citizen-exchange.js writes; window = 3 Cycles; stage directions stripped.
+const exRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'exchanges-'));
+fs.mkdirSync(path.join(exRoot, 'output', 'exchanges'), { recursive: true });
+fs.writeFileSync(path.join(exRoot, 'output', 'exchanges', 'exchange_c998_2026-01-01_conversation.md'),
+  '# Exchange — conversation (Cycle 998)\n\n- participants: POP-90030 Ex Thirty | POP-90031 Ex Reporter\n- trigger: ripple\n\n---\n\n' +
+  '**Ex Thirty:** *leaning on the rail* I keep going back to Test Venue. *laughs*\n\n**Ex Reporter:** Same.\n\n**Someone Else:** not a participant\n');
+fs.writeFileSync(path.join(exRoot, 'output', 'exchanges', 'exchange_c995_2026-01-01_debate.md'),
+  '- participants: POP-90030 Ex Thirty\n\n**Ex Thirty:** Old words.\n');
+const loaded = source.loadExchanges(exRoot, 999);
+assert.deepEqual(loaded.map(t => [t.popId, t.text, t.cycle, t.format]),
+  [['POP-90030', 'I keep going back to Test Venue.', 998, 'conversation'], ['POP-90031', 'Same.', 998, 'conversation']]);
+assert.deepEqual(source.loadExchanges(path.join(exRoot, 'nowhere'), 999), [], 'a missing directory is no transcripts, never a throw');
+
 
 const officeStory = { angle: 'Test Initiative status', ref: 'TEST-ONLY-office-assignment' };
 let offices = source.buildPool({ mode: 'offices', story: officeStory, cycle: 999, beats, root });

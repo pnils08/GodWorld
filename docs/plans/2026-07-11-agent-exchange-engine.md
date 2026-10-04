@@ -1,7 +1,7 @@
 ---
 title: Agent Exchange Engine — Conversations, Interviews, Debates Plan
 created: 2026-07-11
-updated: 2026-07-11
+updated: 2026-10-04
 type: plan
 tags: [citizens, citizen-loop, voice-agents, engine, media, draft]
 sources:
@@ -111,7 +111,7 @@ pointers:
   1. Sourcing step: list `output/exchanges/exchange_c{N}_*.md` for the last 3 cycles; emit each as a story-seed candidate `participants | format | topic/trigger | path`, flagged `source=exchange`.
   2. Scope note in skill text: transcripts are subjective source material — quote-mineable by a desk piece, never publishable as standalone fact (same wall as the tension register).
 - **Verify:** dry `/sift` with ≥1 transcript present lists the candidates section; empty dir → section absent.
-- **Status:** [ ] not started
+- **Status:** [x] SHIPPED 2026-10-04 (research-build, overnight) — **re-scoped before build:** `/sift` is no longer a step downstream of the cycle chain (run-cycle skill S456: the chain ships to crons; the live newsroom is `cron-desk-run.js` angle → report → write). The equivalent live seam is the street sourcing pool, where pipeline.70 just added the citizens' pages as `page-line` evidence. T6 lands there as a third evidence source, `exchange-line`: `scripts/newsroomSourcing.js` `loadExchanges(root, cycle)` parses `output/exchanges/exchange_c{N}_<date>_<format>.md` (participants header → POPIDs, `**Name:** turn` lines, stage directions stripped, window = this Cycle and the two before), and `street()` runs a third pass after life-line and page-line for citizens not yet sourced (same admission as page-line: Active, not MEDIA/GAME/`SPORTS_OVERRIDE`, sentence names the highlight entity with `verbSupports` or a first-person stance, leak guard, cycle ≤ current). `scripts/livedExperiencePacket.js` packets the turn as an **INTERPRETATION** claim (what the citizen said, never fact) and an `EV-EXCH-` evidence row. Tests: `newsroomSourcing.test.js` (pool order life → page → exchange, MEDIA excluded, leak guard, future Cycle excluded, loader fixture + missing dir) and `livedExperiencePacket.test.js` — both PASS; `auditWriterExitCodes.js --gate` clean. Measured on the real C107–C109 transcripts: 71 turns from 14 speakers, most of them GAME-clock athletes (excluded by rule), four ENGINE-clock citizens eligible. **Acceptance = the next unattended angle fanout (Mon 2026-10-05 06:15): an `exchange-line` candidate in a street pool, or none because no transcript matched — never a hand-driven run.**
 
 ---
 

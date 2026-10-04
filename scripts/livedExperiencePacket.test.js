@@ -250,6 +250,24 @@ assert.equal(pagePacket.known[0].text, pageCandidate.evidence.excerpt);
 assert.deepEqual(pagePacket.known[1], { t: 'FACT', text: pageCandidate.profile,
   src: 'Simulation_Ledger profile for ' + pageCandidate.pop });
 assert.equal(pagePacket.known.length, 2, 'page content does not inherit unrelated angle facts');
+// engine.53 T6: an exchange-line candidate packets like a page line — INTERPRETATION, never FACT.
+const exchangeCandidate = {
+  pop: 'POP-90030', name: 'Test Exchange Citizen', role: 'Resident', hood: 'TEST-HOOD',
+  profile: 'Test Exchange Citizen — Resident', sourceKind: 'exchange-line', why: 'assignment',
+  evidence: { source: 'output/exchanges/exchange_c998_2026-01-01_conversation.md', cycle: 998, format: 'conversation',
+    excerpt: 'I keep going back to Test Venue.', entity: 'Test Venue', predicate: 'attendance' },
+};
+const exchangePacket = p.buildReportPacket({ cycle: 999, desk: 'culture', reporter: { name: 'Test Reporter' },
+  angleInput: w1, anglePlan: plan, story, candidate: exchangeCandidate });
+assert.equal(exchangePacket.known[0].t, 'INTERPRETATION');
+assert.equal(exchangePacket.known[0].src, exchangeCandidate.evidence.source);
+assert.equal(exchangePacket.known[0].text, exchangeCandidate.evidence.excerpt);
+assert.equal(exchangePacket.known.length, 2, 'exchange content does not inherit unrelated angle facts');
+const exchangeEvidence = exchangePacket.exposure.evidence;
+assert.equal(exchangeEvidence.length, 1);
+assert.ok(/^EV-EXCH-[0-9a-f]{10}$/.test(exchangeEvidence[0].id));
+assert.equal(exchangeEvidence[0].src, exchangeCandidate.evidence.source);
+
 assert.match(pagePacket.exposure.evidence[0].id, /^EV-PAGE-[0-9a-f]{10}$/);
 assert.equal(pagePacket.exposure.evidence[0].src, pageCandidate.evidence.customId);
 assert.equal(pagePacket.exposure.evidence[0].text, pageCandidate.evidence.excerpt);

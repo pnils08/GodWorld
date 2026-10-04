@@ -710,6 +710,13 @@ function evidenceFor(candidate, story) {
       candidate.evidence.customId).digest('hex').slice(0, 10),
       src: candidate.evidence.customId, text: candidate.evidence.excerpt }];
   }
+  // engine.53 T6: an exchange turn is the citizen's own words, same standing as a page line.
+  if (candidate && candidate.sourceKind === 'exchange-line' && candidate.evidence &&
+      candidate.evidence.source && candidate.evidence.excerpt) {
+    return [{ id: 'EV-EXCH-' + crypto.createHash('sha256').update(candidate.pop + '|' +
+      candidate.evidence.source + '|' + candidate.evidence.excerpt).digest('hex').slice(0, 10),
+      src: candidate.evidence.source, text: candidate.evidence.excerpt }];
+  }
   if (candidate && candidate.sourceKind === 'life-line' && candidate.evidence &&
       candidate.evidence.line && candidate.evidence.source) {
     return [{ id: 'EV-LIFE-' + crypto.createHash('sha256').update(candidate.pop + '|' +
@@ -732,8 +739,11 @@ function buildReportPacket({ cycle, desk, reporter, angleInput, anglePlan, story
   const src = story.ref || 'assignment';
   const streetLife = candidate.sourceKind === 'life-line' && candidate.evidence && candidate.evidence.line;
   const streetPage = candidate.sourceKind === 'page-line' && candidate.evidence && candidate.evidence.excerpt;
+  const streetExchange = candidate.sourceKind === 'exchange-line' && candidate.evidence && candidate.evidence.excerpt;
   const known = streetPage
     ? [refClaim('INTERPRETATION', candidate.evidence.excerpt, candidate.evidence.customId)]
+    : streetExchange
+    ? [refClaim('INTERPRETATION', candidate.evidence.excerpt, candidate.evidence.source)]
     : streetLife
     ? [refClaim('FACT', candidate.evidence.line, candidate.evidence.source)]
     : (angleInput && angleInput.known || []).filter(c => c.t === 'FACT').slice(0, 8);

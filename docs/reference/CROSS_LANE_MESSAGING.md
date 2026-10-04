@@ -53,6 +53,9 @@ MSG='your single-line message here'
 tmux send-keys -t <pane_id> -l "$MSG"    # -l = literal, no key interpretation
 sleep 1
 tmux send-keys -t <pane_id> C-m          # separate submit — the first Enter is swallowed by paste mode
+# Codex (2026-10-04): a brief over ~1k chars lands as "[Pasted Content N chars]" and ONE C-m is not enough —
+# the box keeps it unsent indefinitely (rb lost 40 min this way). Wait ~3s after -l, send C-m, capture; if the
+# pane still shows "Pasted Content", send C-m again; done only when the pane shows "Working".
 ```
 
 - **Single line, no embedded newlines** — a newline mid-string submits early and fragments the message.

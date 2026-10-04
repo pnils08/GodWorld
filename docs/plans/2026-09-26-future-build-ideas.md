@@ -169,3 +169,33 @@ engine.259 fund tranches (applyInitiativeImplementationEffects.js :544–572), a
 ### engine.262 — built S502 `24a0e04c`, bench-proven SANDBOX 0908 @142 C125
 C125 ledger exactly as predicted: OPENING $100M · PREFUNDED INIT-001/002/005 (Baylight INIT-006 absent) · REVENUE $5M → $105M; World_Config keys self-armed; 0 errors. Unit test `scripts/cityTreasury.test.js` 17/17 covers underfunded appropriation, once-only charge, once-per-Cycle revenue, renewal short. Live needs the City_Treasury tab created before the first fire on this code.
 - 2026-09-29 (rb) — §5 wider AI autonomy (governance.52) closed by the builder: covered by civic.38's game loop; open pieces fold into another lane if they appear. §4 credit/default cascades (engine.263) folded into [[2026-09-22-initiative-budget-disbursement]] §Out of scope; concept kept here.
+
+## engine.98 pets — design (research-build, 2026-10-04 overnight; ruled 2026-09-27, after engine.94)
+
+**Tier A. The ruling, verbatim (§Builder rulings above):** *"yes, track pets; pets trigger pet events; acquisition gated on dials (e.g. a level of kindness or isolation); personality decides cat / dog / none."* Builder sequencing 2026-09-29: after engine.94. This design rides engine.94 Track B's rails — a `DialState` stamp as the carrier, one content-DSL field, authored rows that move dials — so it costs one roll and one enum, not a system.
+
+### Measured 2026-10-04 (live Simulation_Ledger, 918 active rows with `DialState`)
+
+- Dials sit at 50: warmth p50 50 / p90 59.9, 77 citizens ≥ 60; sociability p90 83, 231 ≥ 60; outabout p90 55, 17 ≥ 60; family p90 75.6, 243 ≥ 60; openness p90 62.5, 117 ≥ 60. **No dial is low:** ≤ 40 counts are 0–2 on every axis. "Isolation" cannot be read off a low dial today; it can be read off the world — 703 of 782 households are one person, and 325 of 963 citizens hold no bond at all (`output/citizen-bond-graph.json`: 638 nodes with ≥ 1 edge).
+- `DialState` top-level keys today: `base, streak, mood, folded, maneuver, pressure, chaosExposure` (+ `debtDefault {l, n}` from C110, `grief {l}` from engine.94 B.1). The per-citizen read-modify-write lives in `utilities/compressLifeHistory.js:707` (Phase 9) and `chaosCarsEngine.js:439`; `parseDialState_` / `serializeDialState_` at `compressLifeHistory.js:1319/1373`.
+- Housing: 592 rented / 190 owned households (beats dump C109).
+
+### The cut
+
+1. **Carrier.** `DialState.pet = { k: 'cat'|'dog', l: <Cycle acquired>, n: <lifetime count> }`. No column, no tab. A citizen without the key has no pet. One pet at a time (a second roll while one is held is a no-op).
+2. **Acquisition roll** (engine-sheet; one per active ENGINE/MEDIA/CIVIC-clock adult citizen per Cycle, inside the Phase-9 RMW so DialState is parsed once): chance = `petAcquireBase` × kindness × isolation, where kindness = 1 + (`warmth` − 50) / `petWarmthSpan` (floor 0) and isolation = `petIsolationMult` when the household is one person **and** the citizen holds no active bond, else 1. **Rate and severity are the dials** (doctrine 2026-09-22): a warm, solitary citizen is the one who brings an animal home; a cold one with a full house does not. World_Config seeds (self-arm pattern, `engine94SheetContract.js`): `petAcquireBase` 0.004, `petWarmthSpan` 20, `petIsolationMult` 3, `petRentedMult` 0.6 (a rented home takes the animal less often), `petLossPerCycle` 0.0015. At today's numbers that is roughly 3–5 new pets a Cycle citywide, most of them in one-person rented homes with a warm owner — bench confirms before the dials are set.
+3. **Personality picks the animal** at acquisition, from the same read: `openness ≥ 55` or `outabout ≥ 55` → dog; `composure ≥ 55` or `sociability ≤ 50` → cat; both → whichever margin is larger; neither → **none** (the roll succeeded but the citizen "thought about it and didn't" — a life line, no stamp). Deterministic from the citizen's own numbers, no second roll.
+4. **Pet events = content rows.** DSL field `pet` (enum `cat|dog`, null when no pet) joins the B.1 table; `petage` (num, Cycles since `pet.l`). Authored rows in a `pets.cat` / `pets.dog` pool through the same `memoryEclPool.js`-style module and `undockedEclPoolApply.js --pool pets` (one more branch). Routing tags, same B.2a mechanism: `pet:walk` → `Outabout`-moving primary (DIAL_MAP entry `Pet-Walk { outabout: 2, warmth: 1 }`), `pet:home` → `Household` (family +5, exists), `pet:vet` → `Friction` (composure −2, exists) with a `[Money]` cost line through the existing shock writer. The dog gets the citizen out of the house; the cat keeps the house warm; the vet bill is a bad week. That is what the pet *does*.
+5. **Loss.** `petLossPerCycle` roll on a held pet → the stamp clears, `n` kept, one `[Household]` line and a `grief {l}`-shaped `petLoss {l}` stamp so a `petloss` DSL num field can gate "still reaches for the leash by the door" rows for a season. Small, not a death in the household: no grief register.
+6. **Newsroom.** Nothing to build: pet lines reach reporters through LifeHistory and the street pools like any other life line. Sharon Okafor (behaviour patterns) will see them first.
+
+### Proof
+- Bench: one fire with the seeds set; count new `pet` stamps (expect single digits), zero on GAME-clock rows, zero where warmth < 50 and the house is full; cat/dog split matches the rule on a hand-checked sample of ten; a `pet=dog` row draws only for dog owners; Engine_Errors 0.
+- Live acceptance: within five Cycles a named citizen has a named animal in a published piece.
+
+### Sim calls for the builder
+- None to build steps 1–4. **One on taste:** should a pet have a name? The engine can draw one from a small authored list at acquisition (stored as `pet.name`) so reporters can write "Marisol's dog, Biscuit" rather than "her dog". Costs nothing; it is a naming surface, so it is yours.
+
+### Weakest assumptions
+1. *Acquisition sits in Phase 9's RMW.* If that pass runs only when `dialRmwNeeded`, the roll needs its own trigger — es reads `compressLifeHistory.js:690-710` before placing it.
+2. *3–5 a Cycle.* The base rate is a guess at the shape, not the number; the bench histogram sets it (same rule as B.2's bars).

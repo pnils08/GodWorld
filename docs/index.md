@@ -486,6 +486,7 @@ These files live at `/root/GodWorld/` and are catalogued here for completeness. 
 ---
 
 - **[[plans/2026-10-03-citizen-pages-drive-canon]]** — pipeline.70: the citizens' own pages (2,077 docs, 369 citizens, no newsroom reader) wired into sourcing (`street` page-line evidence), packets, Celeste's pulse slice, the letters pool and Rhea — builder ruling 2026-10-03 that the pages are not private and should drive canon; go 02:05 on all six seams, §5 is the seam 1 build brief. *(plan, newsroom, in-progress)*
+- **[[plans/2026-10-04-school-board]]** — civic.43: seven elected citywide Oakland Unified board seats; approval engine widened by ID prefix, education initiatives voted by the board, holders authored from the ledger; no hospital board. *(plan, civic, engine, in-progress)*
 
 ## `docs/adr/` — architectural decision records (new S187, ADR pattern)
 

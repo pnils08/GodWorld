@@ -1,0 +1,57 @@
+---
+title: Oakland Unified School Board Plan
+created: 2026-10-04
+updated: 2026-10-04
+type: plan
+tags: [civic, engine, in-progress]
+sources:
+  - docs/engine/ROLLOUT_PLAN.md civic.43
+  - docs/reference/overnight_autonomy_session.md §6 (01:21 rb line, answered 02:22)
+  - docs/SIM_DOCTRINE.md §5 (adding citizens is adding engines), §15 (no inert thresholds)
+pointers:
+  - "[[engine/ROLLOUT_PLAN]] — parent rollout (civic.43)"
+  - "[[2026-09-21-care-and-justice-system]] — the queued superintendent and command rows (Task 10 handoff)"
+---
+
+# Oakland Unified School Board
+
+**Tier A. One sentence:** seven elected citywide board seats on `Civic_Office_Ledger`, driven by the engines that already run elected offices, owning the education initiatives that move the schools numbers the engine already tracks. No hospital board.
+
+## 0. The ruling, verbatim
+
+Builder, 2026-10-04 02:18, on the §6 question (board seats for Oakland Unified and the hospital): *"If it aligns with how the sim works and adds value we could add them"*. On the recommended shape below, 02:22: *"Ok illl take you're recommendations"*.
+
+The recommendation he took (rb, 02:20): seven elected citywide seats split across election groups A and B; the approval engine widened so the board is driven between elections; the board owns the education initiatives; holders authored from existing tracked citizens, not mints. **Hospital board: no** — appointed rows are inert in every engine; the hospital keeps its project director and its business dynamics.
+
+## 1. Measured state (read 2026-10-04 02:15, beats dump C109 + code)
+
+- `Civic_Office_Ledger`: 39 real rows — `elected/A` 5, `elected/B` 7, `appointed` 26, `commission` 1. Mayor, DA, PD, nine council seats, staff and chiefs. Columns: `OfficeId, Title, Type, District, Holder, PopId, TermStart, TermEnd, TermYears, ElectionGroup, Status, LastElection, NextElection, Notes, VotingPower, Faction, ExecutiveActions, Approval, HighApprovalStreak, AutoScandalUntilCycle, AutoScandalSource`.
+- **Elections** (`phase05-citizens/runCivicElectionsv1.js`): every row with `Type === 'elected'` in the active group runs (`:137-144`); challengers from Tier 2-3 civic-adjacent citizens, district seats prefer local candidates, `citywide` seats draw from the whole pool (`:252-289`). A citywide board seat goes through the same path as the mayor's row.
+- **Approval / scandal / challenger / leaving office** (`phase05-citizens/updateCivicApprovalRatings.js:550`): `if (!officeId.match(/^COUNCIL/) && !officeId.match(/^MAYOR/)) continue;` — only council and mayor. A board row would get an election and then sit still. **This is the gap Task 1 closes.** Approval ripples into the seat's district hoods via `getDistrictHoods_` (`:957-970`); a citywide seat ripples wherever that helper sends the mayor.
+- **Initiatives** (`phase05-citizens/civicInitiativeEngine.js`): nine-seat council faction math, mayor vetoes, `PolicyDomain` column already on the tracker (`:188`, v1.6). No second voting body exists.
+- **The schools numbers the engine tracks:** `Neighborhood_Demographics.SchoolQualityIndex` and `GraduationRate` (per hood, C109 e.g. 7.9 / 90.74); engine.192 school drift (step, pull, grad lag, initiative funding %, `godWorldEngine2.js:457`); minors' `SchoolQuality` stamped from the hood index (`educationCareerEngine.js:671-690`). An education initiative therefore has a real repair target — the board is not a job invented to give rows something to do.
+- Oakland Unified (`BIZ-00016`) holds 18 tracked school-role citizens on the roster (principals, teachers, psychologists, after-school directors, youth coaches, a counselor) and a superintendent + command queued for the C110 mint (care-and-justice plan, Task 10 handoff). The roster also carries alignment noise at that employer (a City Manager, line cooks, a mover) — not school staff, never holders.
+
+## 2. Tasks
+
+| # | Task | Owner | State |
+|---|---|---|---|
+| 1 | **Approval engine drives board seats.** Widen `updateCivicApprovalRatings.js:550` from `/^COUNCIL|^MAYOR/` to `/^COUNCIL|^MAYOR|^BOARD-OUSD/` — by ID prefix, not by `Type`, so DA-01 / PD-01 (Clarissa Dane, the Public Defender — existing characters with their own agents) do not start taking scandal and challenger rolls. Confirm `getDistrictHoods_` returns the city for `citywide` the way it does for MAYOR-01. Confirm the election path seats a `citywide` challenger into a `BOARD-OUSD-*` row with the same term/approval reset as a council seat. Bench: one fire on SANDBOX with seven synthetic BOARD rows (holders = any seven bench citizens), assert approval rows move, zero new Engine_Errors. No PROD write in this task. | engine-sheet | ready |
+| 2 | **Author the seven holders and write the rows** — AFTER the C110 smoke (the Sunday civic chain reads the office ledger; no live write mid-smoke). OfficeIds `BOARD-OUSD-1`…`-7`, `Title` "School Board Member", `Type` elected, `District` citywide, `ElectionGroup` A for 1-4, B for 5-7, `TermYears` 4, `Approval` 65, `Faction` blank, `VotingPower` 1. Holders resolved by NAME against the ledger (`node scripts/queryLedger.js`, never the beats dump, never an agent-supplied POPID): Tier 2-3, Status Active, not GAME/MEDIA clock, not an office holder, **not an Oakland Unified employee** (the board governs the district; its staff do not sit on it), not Tier-1 protected. Prefer parents of tracked minors (household has a `SchoolQuality`-stamped child) and civic-adjacent citizens, spread across hoods. Write via the existing office-ledger writer path, one batch, read-back. Notes column: `civic.43 seated 2026-10-04`. | research-build | blocked on C110 smoke |
+| 3 | **Education initiatives resolve by the board.** An initiative with `PolicyDomain` = `education` is voted by the seven BOARD-OUSD rows instead of the council: no factions, each member votes like an unnamed IND (probability clamped 0.15-0.85, swing modified by the initiative's affected neighbourhoods exactly as today's IND path), 4 of 7 passes, mayor veto does not apply, council override does not apply. All other domains unchanged. Notes record seven named votes the way council votes are recorded. Bench with one synthetic education initiative; assert the board's votes and the council's absence in Notes. | engine-sheet | ready after Task 1 |
+| 4 | **Coverage.** Angela Reyes (schools and youth) and Carmen Delaine (civic) get one line each that the board exists and what `BOARD-OUSD-*` rows mean; the Sunday nine-seat table (civic.24) is unchanged. No new agent. | research-build | after Task 2 |
+
+## 3. Proof / acceptance
+
+- Task 1: bench fire with seven BOARD rows — approval values change, a scandal or challenger hook can fire for a board row, DA/PD rows untouched. Tests green.
+- Task 2: `Civic_Office_Ledger` carries seven BOARD-OUSD rows with real POPIDs that resolve by name; `queryLedger.js` on each holder shows Active, Tier 2-3, no OUSD employer.
+- Task 3: one education initiative on the bench resolves with seven board votes in Notes and no council vote.
+- Live acceptance: the first election Cycle for the board's group seats or re-seats a member and the civic desk has a story it can follow.
+
+## 4. Sim calls for the builder
+
+None open after the 02:22 ruling. If Task 1's bench shows the citywide ripple lands nowhere (helper returns no hoods for `citywide`), the fix is in-scope: ripple to every hood at the mayor's weight.
+
+## Changelog
+
+- 2026-10-04 02:30 — plan written (rb, overnight). Rulings verbatim §0. Task 1 handed to engine-sheet.

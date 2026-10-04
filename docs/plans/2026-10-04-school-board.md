@@ -46,7 +46,7 @@ The recommendation he took (rb, 02:20): seven elected citywide seats split acros
 - Task 1: bench fire with seven BOARD rows — approval values change, a scandal or challenger hook can fire for a board row, DA/PD rows untouched. Tests green.
 - Task 2: `Civic_Office_Ledger` carries seven BOARD-OUSD rows with real POPIDs that resolve by name; `queryLedger.js` on each holder shows Active, Tier 2-3, no OUSD employer.
 - Task 3: one education initiative on the bench resolves with seven board votes in Notes and no council vote.
-- Live acceptance: the first election Cycle for the board's group seats or re-seats a member and the civic desk has a story it can follow.
+- Live acceptance: a board seat whose approval drops under 40 is unseated that Cycle and a ledger citizen takes it (builder 2026-10-04 15:56: no scheduled elections; engine.94 B.3 v2), and the civic desk has a story it can follow. `ElectionGroup` A/B is inert.
 
 ## 4. Sim calls for the builder
 
@@ -54,6 +54,7 @@ None open after the 02:22 ruling. If Task 1's bench shows the citywide ripple la
 
 ## Changelog
 
+- 2026-10-04 16:05 — es: live acceptance re-ruled — no scheduled elections (builder 15:56); board seats turn over by approval drop under 40; calendar election deleted under engine.94 B.3 v2.
 - 2026-10-04 12:4x — Tasks 1+3 bench-proven on SANDBOX 1004 C111 (engine-sheet): seven synthetic BOARD-OUSD rows, synthetic INIT-901 education vote failed 3-4 with seven named board votes, no council vote, no mayoral action; board approvals moved; 0 Engine_Errors.
 
 - 2026-10-04 02:30 — plan written (rb, overnight). Rulings verbatim §0. Task 1 handed to engine-sheet.

@@ -197,3 +197,4 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 - Self-loop → `/self-debug`.
 
 10:33 rb CHECK — es idle post-09:53 CHECK, builder draft "Fired C110, run the smoke" still unsent in its box (untouched); live cycleCount 109, C110 not fired; origin level 79db1db0, 0 unpushed; inbox README only; no guest claims open (codex/agy idle); nothing on NEXT[research-build] unblocked. Next wake :26.
+11:33 rb CHECK — es idle (session-end done, draft "Fired C110, run the smoke" still unsent, untouched); cycleCount 109, C110 not fired; origin level d7ca2aa8, inbox README only, no guest claims; PIN origin clause trued (es flagged stale). Builder asked about the bench: answered, new bench script project (§6 03:10), awaits his "go" to es. Next wake :26.

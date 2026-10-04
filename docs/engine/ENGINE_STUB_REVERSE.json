@@ -2,7 +2,7 @@
   "generated": "2026-10-04",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 180,
-  "functionsMapped": 1608,
+  "functionsMapped": 1610,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -4552,6 +4552,7 @@
         "phase01-config/engine94SheetContract.js::ensureEngine94SheetContract_",
         "phase05-citizens/applyBusinessDynamics.js::bizMayorApproval_",
         "phase05-citizens/applyBusinessDynamics.test.js::ctxWith",
+        "phase05-citizens/civicInitiativeEngine.js::getBoardState_",
         "phase05-citizens/civicInitiativeEngine.js::getCouncilState_",
         "phase05-citizens/civicInitiativeEngine.js::lookupAuthoringSeat_",
         "phase05-citizens/generateCivicModeEvents.js::buildOfficeLookup_",

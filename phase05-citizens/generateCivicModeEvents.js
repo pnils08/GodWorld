@@ -133,6 +133,8 @@ function generateCivicModeEvents_(ctx) {
     // Vote outcome reactions
     for (var v = 0; v < votesThisCycle.length; v++) {
       var vote = votesThisCycle[v];
+      // civic.43 Task 3: a school board vote is not the mayor's to sign or to answer for
+      if (vote.body && vote.body !== 'council') continue;
       if (vote.outcome === "PASSED") {
         pool.push(ev("prepared signing remarks for the " + vote.name + " passage", ["civic:mayor", "type:legislation", "initiative:" + vote.name], "Civic"));
       } else if (vote.outcome === "FAILED") {

@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 180 · **Functions mapped:** 1608 · **S.* fields:** 371 · **Sheets:** 60
+**Files scanned:** 180 · **Functions mapped:** 1610 · **S.* fields:** 371 · **Sheets:** 60
 
 ## S.* / ctx.summary reverse index
 
@@ -417,7 +417,7 @@ Sheet detection: `getSheetByName`, `queue*Intent_`, known sheet-name string + wr
 | `Citizen_Media_Usage` | `phase05-citizens/processAdvancementIntake.js::markUsageProcessed_` | `phase05-citizens/citizenContextBuilder.js::getMediaAppearances_`, `phase05-citizens/citizenContextBuilder.js::getReturningCitizens`, `phase05-citizens/processAdvancementIntake.js::decayMediaAttention_`, `phase05-citizens/processAdvancementIntake.js::earnedCitationsByKey_`, `phase05-citizens/processAdvancementIntake.js::markUsageProcessed_`, …(+2 more) | 1 | 7 |
 | `Citizen_Usage_Intake` | _(none)_ | `phase07-evening-media/mediaRoomIntake.js::processCitizenUsageIntake_`, `phase07-evening-media/parseMediaRoomMarkdown.js::ensureCitizenUsageIntakeSheet_` | 0 | 2 |
 | `City_Treasury` | `phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_`, `phase02-world-state/applyInitiativeImplementationEffects.js::postTreasuryRevenue_` | `phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_`, `phase02-world-state/applyInitiativeImplementationEffects.js::postTreasuryRevenue_` | 2 | 2 |
-| `Civic_Office_Ledger` | `phase05-citizens/generationalWealthEngine.js::updateHeritage_`, `phase05-citizens/runCivicElectionsv1.js::runCivicElections_`, `phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_` | `phase01-config/engine94SheetContract.js::ensureEngine94SheetContract_`, `phase05-citizens/applyBusinessDynamics.js::bizMayorApproval_`, `phase05-citizens/applyBusinessDynamics.test.js::ctxWith`, `phase05-citizens/civicInitiativeEngine.js::getCouncilState_`, `phase05-citizens/civicInitiativeEngine.js::lookupAuthoringSeat_`, …(+11 more) | 3 | 16 |
+| `Civic_Office_Ledger` | `phase05-citizens/generationalWealthEngine.js::updateHeritage_`, `phase05-citizens/runCivicElectionsv1.js::runCivicElections_`, `phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_` | `phase01-config/engine94SheetContract.js::ensureEngine94SheetContract_`, `phase05-citizens/applyBusinessDynamics.js::bizMayorApproval_`, `phase05-citizens/applyBusinessDynamics.test.js::ctxWith`, `phase05-citizens/civicInitiativeEngine.js::getBoardState_`, `phase05-citizens/civicInitiativeEngine.js::getCouncilState_`, …(+12 more) | 3 | 17 |
 | `Civic_Sweep_Report` | _(none)_ | `phase05-citizens/generateMonthlyCivicSweep.js::generateMonthlyCivicSweep` | 0 | 1 |
 | `Community_Programs` | _(none)_ | `phase05-citizens/runYouthEngine.js::runYouthEngine_`, `phase07-evening-media/buildContractSeeds.js::contractSeedBackdropIndex_` | 0 | 2 |
 | `Content_Telemetry` | `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_` | `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_` | 1 | 1 |

@@ -125,7 +125,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | civic.24 | Sunday nine-seat table — grok Tasks 1-9 closed (`b75bb28c` dry C104). Open: Task 10 sheet tab (engine-sheet). Crontab still `--apply` | in-progress | engine-sheet | [[../plans/2026-08-16-city-hall-nine-seat-table]] |
 | engine.108 | Media promotion path — Tier-5 read restored as a bounded fallback (LANDED `e371d815` 2026-08-16; row was stale); never converted a GC yet (max EmergenceCount 2, bar 3, 2026-09-02); quoted citizens now credited at the canon door (S412) | in-progress | engine-sheet | [[../plans/2026-08-16-new-life-intake]] §2-3.1 |
 | civic.33 | Recall/challenger fall-rate — acceptance by observation: challenger tiers 2/3 unit-proven only; watch seat turnover at the 20-approval floor with city-hall + media both running | needs-info | engine-sheet | [[../plans/2026-08-29-employment-system-cascade]] §civic.33 — status |
-| civic.43 | Oakland Unified school board — 7 elected citywide seats (A 1-4 / B 5-7); approval engine widened by ID prefix (T1 es); holders authored from the ledger after the C110 smoke (T2 rb); education initiatives voted by the board (T3 es). Hospital board: no (ruled 2026-10-04). | in-progress | engine-sheet / research-build | [[../plans/2026-10-04-school-board]] |
+| civic.43 | Oakland Unified school board — 7 elected citywide seats; T1 approval engine + T3 board votes education (4 of 7, no veto) BUILT, unit-proven, bench-wait; T2 holders after the C110 smoke (rb) | in-progress | engine-sheet / research-build | [[../plans/2026-10-04-school-board]] |
 
 ### infrastructure.* — Supermemory, services, ingest
 

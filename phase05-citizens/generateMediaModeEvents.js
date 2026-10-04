@@ -192,7 +192,9 @@ function generateMediaModeEvents_(ctx) {
     // Vote coverage
     for (var v = 0; v < votesThisCycle.length; v++) {
       var vote = votesThisCycle[v];
-      pool.push(ev("covered the " + vote.name + " vote from the council chambers", ["media:reporter", "type:civic", "initiative:" + vote.name], "Media"));
+      // civic.43 Task 3: an education initiative is the school board's vote, not the council's
+      var voteRoom = vote.body === 'school board' ? ' vote from the school board meeting' : ' vote from the council chambers';
+      pool.push(ev("covered the " + vote.name + voteRoom, ["media:reporter", "type:civic", "initiative:" + vote.name], "Media"));
     }
 
     // Crime beat

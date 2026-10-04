@@ -268,5 +268,84 @@ console.log('═══ G. civic.38 Task 5 — the sponsor owns its bill; a reviv
   check('G4 revival pays 0 — not advanced, and not silence even on an overdue clock', !/advanced/.test(revivedRow) && !/silence/.test(revivedRow), revivedRow);
 }
 
+// ═══ civic.43 Task 3 — education initiatives resolve by the school board, on the real run loop ═══
+// Real civicInitiativeEngine_ over a mock tracker (the live 48-column header) and a
+// mock office ledger (the live 22-column header, the 9 council seats + 7 BOARD-OUSD
+// rows). Everything the loop needs outside the file is stubbed to a no-op.
+{
+  const G = global;
+  G.parseJSON = (v, fb) => { try { const p = JSON.parse(v); return p === null ? fb : p; } catch (e) { return fb; } };
+  G.queueCellIntent_ = () => {}; G.queueAppendIntent_ = () => {}; G.queueRangeIntent_ = () => {};
+  G.recordRipple_ = () => {}; G.recordHookRipple_ = () => {};
+  G.requireTab_ = (ss, n) => ss.getSheetByName(n);
+  G.resolveHoodOrChild_ = (ctx, h) => h;
+  let rngQueue = [];
+  G.safeRand_ = () => () => (rngQueue.length ? rngQueue.shift() : 0.5);   // past the queue: 0.5 → an unnamed IND votes no
+  const E = new Function(src('../phase01-config/advanceSimulationCalendar.js') + '\n' + src('../phase05-citizens/civicInitiativeEngine.js') +
+    '\nreturn { runCivicInitiativeEngine_, resolveCouncilVote_, getBoardState_: typeof getBoardState_ === "function" ? getBoardState_ : () => { throw new Error("getBoardState_ absent"); } };')();
+  const IT_HEAD = ['InitiativeID','Name','Type','Status','Budget','VoteRequirement','VoteCycle','Projection','LeadFaction','OppositionFaction','SwingVoter','Outcome','SwingVoter2','SwingVoter2Lean','Consequences','Notes','LastUpdated','AffectedNeighborhoods','PolicyDomain','MayoralAction','MayoralActionCycle','VetoReason','OverrideVoteCycle','OverrideOutcome','ImplementationPhase','MilestoneNotes','NextScheduledAction','NextActionCycle','Proposer','ProposingOffice','ProposedCycle','Stage','StageBaseline','LastStageChangeCycle','LastWorkCycle','LastWorkSeat','PriorPhase','StageHold','BudgetTotal','BudgetRemaining','LastDisburseCycle','OpensCycle','BizID','OpenTrackedSlots','RenewalVoteCycle','RenewalAmount','RenewalOutcome','RenewalCreditCycle'];
+  const COL_HEAD = ['OfficeId','Title','Type','District','Holder','PopId','TermStart','TermEnd','TermYears','ElectionGroup','Status','LastElection','NextElection','Notes','','VotingPower','Faction','ExecutiveActions','Approval','HighApprovalStreak','AutoScandalUntilCycle','AutoScandalSource'];
+  const seat = (id, title, district, holder, pop, group, faction) => [id, title, 'elected', district, holder, pop, 1, 209, 4, group, 'active', '', '', '', '', 'yes', faction, '', 65, 0, '', ''];
+  const COUNCIL = [seat('MAYOR-01', 'Mayor', 'citywide', 'Avery Santana', 'POP-00034', 'A', 'OPP'),
+    seat('COUNCIL-D1', 'City Council District 1', 'D1', 'Denise Carter', 'POP-00501', 'A', 'OPP'), seat('COUNCIL-D2', 'City Council District 2', 'D2', 'Leonard Tran', 'POP-00502', 'A', 'IND'),
+    seat('COUNCIL-D3', 'City Council District 3', 'D3', 'Rose Delgado', 'POP-00503', 'A', 'OPP'), seat('COUNCIL-D4', 'City Council District 4', 'D4', 'Ramon Vega', 'POP-00042', 'B', 'IND'),
+    seat('COUNCIL-D5', 'City Council District 5', 'D5', 'Janae Rivers', 'POP-00043', 'B', 'OPP'), seat('COUNCIL-D6', 'City Council District 6', 'D6', 'Elliott Crane', 'POP-00044', 'B', 'CRC'),
+    seat('COUNCIL-D7', 'City Council District 7', 'D7', 'Warren Ashford', 'POP-00504', 'B', 'CRC'), seat('COUNCIL-D8', 'City Council District 8', 'D8', 'Nina Chen', 'POP-00505', 'B', 'CRC'),
+    seat('COUNCIL-D9', 'City Council District 9', 'D9', 'Terrence Mobley', 'POP-00506', 'B', 'OPP')];
+  const COUNCIL_NAMES = COUNCIL.slice(1).map(r => r[4]);
+  const BOARD_NAMES = ['Rosa Ochoa', 'Rafael Pilgrim', 'Merkin Jumper', 'Jessica Brooks', 'Soriya Rodriguez', 'Yusuf Carmichael', 'Yael Bauer'];
+  const boardRows = (statuses) => BOARD_NAMES.map((n, i) => { const r = seat('BOARD-OUSD-' + (i + 1), 'School Board Member', 'citywide', n, 'POP-0900' + (i + 1), i < 4 ? 'A' : 'B', ''); r[10] = (statuses && statuses[i]) || 'active'; return r; });
+  const mockSheet = (values) => ({ getDataRange() { return { getValues: () => values.map(r => r.slice()) }; }, getLastColumn() { return values[0].length; }, getLastRow() { return values.length; },
+    getRange(r, c, nr, nc) { return { getValue: () => (values[r - 1] || [])[c - 1] ?? '', getValues: () => values.slice(r - 1, r - 1 + (nr || 1)).map(x => x.slice(c - 1, c - 1 + (nc || 1))),
+      setValue: (v) => { values[r - 1][c - 1] = v; }, setValues: (vs) => { for (let i = 0; i < vs.length; i++) values[r - 1 + i] = vs[i].slice(); } }; } });
+  const initRow = (o) => { const r = IT_HEAD.map(() => ''); const set = (k, v) => { r[IT_HEAD.indexOf(k)] = v; };
+    set('InitiativeID', o.id); set('Name', o.name); set('Type', 'vote'); set('Status', o.status || 'active'); set('Budget', '$1M'); set('VoteRequirement', o.req || '5-4'); set('VoteCycle', 110);
+    set('Projection', 'lean pass'); set('LeadFaction', 'OPP'); set('OppositionFaction', 'CRC'); set('SwingVoter', 'Ramon Vega'); set('SwingVoter2', 'Leonard Tran'); set('SwingVoter2Lean', 'toss-up');
+    set('AffectedNeighborhoods', 'Temescal'); set('PolicyDomain', o.domain); set('MayoralAction', o.mayoral || ''); set('Notes', ''); set('BudgetTotal', 1000000); set('BudgetRemaining', 1000000);
+    if (o.renew) { set('Stage', 'Standing'); set('ImplementationPhase', 'operational'); set('RenewalVoteCycle', 110); set('RenewalAmount', 500000); set('RenewalOutcome', ''); set('MilestoneNotes', 'notes'); set('LastStageChangeCycle', 109); set('LastWorkCycle', 109); }
+    return r; };
+  // the live civic dials a staged row's stall clock reads (World_Config 2026-10-04)
+  const CIVIC_DIALS = { civicOpenSlots: 2, civicStageStallCycles: 5, civicStageUntendedStallCycles: 12, civicTendGraceCycles: 6, civicTendDecayPerCycle: 0.15, civicTendFloor: 0.3 };
+  const fire = (inits, board, rng) => {
+    rngQueue = (rng || []).slice();
+    const tracker = [IT_HEAD.slice(), ...inits.map(initRow)];
+    const office = [COL_HEAD.slice(), ...COUNCIL.map(r => r.slice()), ...(board || [])];
+    const tabs = { Initiative_Tracker: mockSheet(tracker), Civic_Office_Ledger: mockSheet(office) };
+    const ctx = { summary: { cycleId: 110, cityDynamics: { sentiment: 0 }, previousCycleState: {} }, config: Object.assign({ cycleCount: 110 }, CIVIC_DIALS), now: 't', ss: { getSheetByName: n => tabs[n] || null }, writeIntents: [] };
+    E.runCivicInitiativeEngine_(ctx);
+    const row = (id) => { const r = tracker.find(x => x[0] === id); const o = {}; IT_HEAD.forEach((k, i) => { o[k] = r[i]; }); return o; };
+    return { ctx, row };
+  };
+  const votes = (notes) => (String(notes).match(/ voted (yes|no)\./g) || []).length;
+  const namesIn = (notes, names) => names.filter(n => String(notes).indexOf(n) >= 0);
+  const YES4 = [0.1, 0.1, 0.1, 0.1, 0.9, 0.9, 0.9], YES3 = [0.1, 0.1, 0.1, 0.9, 0.9, 0.9, 0.9];
+
+  const a = fire([{ id: 'INIT-E1', name: 'After-School Literacy Corps', domain: 'education' }, { id: 'INIT-S1', name: 'Corner Lighting', domain: 'safety' }], boardRows(), YES4);
+  const edu = a.row('INIT-E1'), saf = a.row('INIT-S1');
+  check('T3.1 an education initiative resolves by the school board: seven named votes, "School board:" in Notes, 4 of 7 passes',
+    edu.Status === 'passed' && /School board: Passed 4-3\./.test(edu.Notes) && votes(edu.Notes) === 7 && namesIn(edu.Notes, BOARD_NAMES).length === 7, edu.Notes);
+  check('T3.2 no council member votes on it', namesIn(edu.Notes, COUNCIL_NAMES).length === 0, edu.Notes);
+  check('T3.3 a safety initiative in the same fire is still the council\'s: nine council votes, no board name, no "School board"',
+    saf.Status === 'passed' && votes(saf.Notes) === 9 && namesIn(saf.Notes, COUNCIL_NAMES).length === 9 && namesIn(saf.Notes, BOARD_NAMES).length === 0 && !/School board/.test(saf.Notes), saf.Notes);
+  check('T3.4 a passed board vote gets no mayoral veto roll: MayoralAction untouched, Status passed', edu.MayoralAction === '' && edu.Status === 'passed', JSON.stringify([edu.MayoralAction, edu.Status]));
+  check('T3.5 votesThisCycle names the body', JSON.stringify(a.ctx.summary.votesThisCycle.map(v => [v.name, v.body])) === JSON.stringify([['After-School Literacy Corps', 'school board'], ['Corner Lighting', 'council']]));
+  const b = fire([{ id: 'INIT-E2', name: 'Summer Reading Bridge', domain: 'education', req: '6-3' }], boardRows(), YES3);
+  check('T3.6 three yes fails (4 of 7 is the bar, whatever the row\'s VoteRequirement says)', b.row('INIT-E2').Status === 'failed' && /School board: Failed 3-4\./.test(b.row('INIT-E2').Notes), b.row('INIT-E2').Notes);
+  const c = fire([{ id: 'INIT-E3', name: 'Counselor Corps', domain: 'education' }], boardRows(['active', 'hospitalized']), YES4);
+  check('T3.7 a hospitalized member is absent: six vote, the absence is noted, four yes still passes',
+    c.row('INIT-E3').Status === 'passed' && votes(c.row('INIT-E3').Notes) === 6 && /\(Rafael Pilgrim absent\)/.test(c.row('INIT-E3').Notes), c.row('INIT-E3').Notes);
+  const d = fire([{ id: 'INIT-E4', name: 'Band Instruments', domain: 'education' }], boardRows(['hospitalized', 'hospitalized', 'injured', 'resigned']), YES4);
+  check('T3.8 three available: delayed, four required, the council never steps in',
+    d.row('INIT-E4').Status === 'delayed' && /School board: Vote delayed\. Only 3 votes available; 4 required\./.test(d.row('INIT-E4').Notes) && namesIn(d.row('INIT-E4').Notes, COUNCIL_NAMES).length === 0, d.row('INIT-E4').Notes);
+  const e = fire([{ id: 'INIT-E5', name: 'Library Hours', domain: 'education' }], [], YES4);
+  check('T3.9 no board seated (before Task 2): delayed with the cause, never passed, never a council vote',
+    e.row('INIT-E5').Status === 'delayed' && /No school board seated; 4 votes required/.test(e.row('INIT-E5').Notes) && votes(e.row('INIT-E5').Notes) === 0, e.row('INIT-E5').Notes);
+  const f = fire([{ id: 'INIT-E6', name: 'Tutoring Fund', domain: 'education', status: 'passed', mayoral: 'signed', renew: true }], boardRows(), YES4);
+  check('T3.10 an education program\'s renewal is the board\'s vote too', /^RENEWED 4-3 C110$/.test(f.row('INIT-E6').RenewalOutcome) && /school board renews Tutoring Fund/.test(f.row('INIT-E6').Notes) && namesIn(f.row('INIT-E6').Notes, COUNCIL_NAMES).length === 0, f.row('INIT-E6').RenewalOutcome + ' | ' + f.row('INIT-E6').Notes);
+  const bs = E.getBoardState_({ ss: { getSheetByName: n => n === 'Civic_Office_Ledger' ? mockSheet([COL_HEAD.slice(), ...COUNCIL, ...boardRows(['active', 'vacant'])]) : null } }, 'BOARD-OUSD-');
+  check('T3.11 board state: 7 seated, 1 vacant, 6 available, every member an unnamed IND, no mayor, no factions',
+    bs.seated === 7 && bs.vacantSeats === 1 && bs.availableVotes === 6 && bs.indMembers.length === 6 && bs.mayor === null && bs.factions.OPP.available === 0 && bs.factions.CRC.available === 0, JSON.stringify([bs.seated, bs.vacantSeats, bs.availableVotes]));
+}
+
 console.log((failed === 0 ? 'ALL ' + passed + ' PASS' : failed + ' FAILURES / ' + passed + ' pass'));
 process.exit(failed === 0 ? 0 : 1);

@@ -85,6 +85,13 @@
  * ============================================================================
  */
 
+// civic.43 Task 3 — the school board's voting contract (see runCivicInitiativeEngine_).
+var BOARD_OUSD_PREFIX_ = 'BOARD-OUSD-';
+var BOARD_OUSD_VOTE_ = { votesNeeded: 4, body: 'school board', label: 'School board' };
+function isBoardDomain_(policyDomain) {
+  return String(policyDomain || '').trim().toLowerCase() === 'education';
+}
+
 /**
  * Main entry point - process initiatives for current cycle
  */
@@ -103,7 +110,21 @@ function runCivicInitiativeEngine_(ctx) {
   
   // Get council state
   var councilState = getCouncilState_(ctx);
-  
+  // civic.43 Task 3 (builder 2026-10-04 02:22: "the board owns the education initiatives").
+  // An initiative whose PolicyDomain is `education` is voted by the BOARD-OUSD-* rows,
+  // not the council: no factions, every member votes as an unnamed IND (sentiment +
+  // the affected-hood swing, clamped 0.15–0.85), 4 of 7 passes, no mayoral veto, no
+  // council override. Every other domain is unchanged. No board seated (Task 2 writes
+  // the rows after the C110 smoke) → the vote is DELAYED with the cause in Notes —
+  // never a fallback to the council. The board state is built on the first education
+  // vote of the fire and never otherwise.
+  var boardState = null;
+  function voteBodyFor_(policyDomain) {
+    if (!isBoardDomain_(policyDomain)) return { state: councilState, opts: null, named: true };
+    boardState = boardState || getBoardState_(ctx, BOARD_OUSD_PREFIX_);
+    return { state: boardState, opts: BOARD_OUSD_VOTE_, named: false };
+  }
+
   // Get city sentiment for swing vote calculations
   var dynamics = S.cityDynamics || { sentiment: 0 };
   var sentiment = dynamics.sentiment || 0;
@@ -377,36 +398,20 @@ function runCivicInitiativeEngine_(ctx) {
         }).filter(function(n) { return n !== ''; });
       }
 
-      if (type === 'vote' || type === 'council-vote') {
-        // v1.3: Pass swing voter info and demographics
-        var swingInfo = {
-          primary: swingVoter,
-          secondary: swingVoter2,
-          secondaryLean: swingVoter2Lean
-        };
-        // v1.6: Include PolicyDomain if set
-        var policyDomain = iPolicyDomain >= 0 ? (row[iPolicyDomain] || '').toString().trim() : '';
-        var demoContext = {
-          demographics: neighborhoodDemographics,
-          affectedNeighborhoods: affectedNeighborhoods,
-          initiativeType: type,
-          initiativeName: name,
-          policyDomain: policyDomain  // v1.6
-        };
-        result = resolveCouncilVote_(ctx, row, header, councilState, sentiment, swingInfo, demoContext, rng);
-      } else if (type === 'grant' || type === 'federal-grant' || type === 'external') {
+      // v1.6: Include PolicyDomain if set
+      var policyDomain = iPolicyDomain >= 0 ? (row[iPolicyDomain] || '').toString().trim() : '';
+      if (type === 'grant' || type === 'federal-grant' || type === 'external') {
         result = resolveExternalDecision_(ctx, row, header, sentiment, rng);
       } else if (type === 'visioning' || type === 'input') {
         result = resolveVisioningPhase_(ctx, row, header);
       } else {
-        // Default to council vote
-        var swingInfo = {
-          primary: swingVoter,
-          secondary: swingVoter2,
-          secondaryLean: swingVoter2Lean
-        };
-        // v1.6: Include PolicyDomain if set
-        var policyDomain = iPolicyDomain >= 0 ? (row[iPolicyDomain] || '').toString().trim() : '';
+        // 'vote' / 'council-vote', and the default for any other type.
+        // civic.43 Task 3: an education initiative is the school board's vote — the
+        // row's named swing voters are council members and do not apply.
+        var body = voteBodyFor_(policyDomain);
+        var swingInfo = body.named
+          ? { primary: swingVoter, secondary: swingVoter2, secondaryLean: swingVoter2Lean }   // v1.3
+          : { primary: '', secondary: '', secondaryLean: '' };
         var demoContext = {
           demographics: neighborhoodDemographics,
           affectedNeighborhoods: affectedNeighborhoods,
@@ -414,7 +419,7 @@ function runCivicInitiativeEngine_(ctx) {
           initiativeName: name,
           policyDomain: policyDomain  // v1.6
         };
-        result = resolveCouncilVote_(ctx, row, header, councilState, sentiment, swingInfo, demoContext, rng);
+        result = resolveCouncilVote_(ctx, row, header, body.state, sentiment, swingInfo, demoContext, rng, body.opts);
       }
       
       // Update row with result
@@ -449,7 +454,8 @@ function runCivicInitiativeEngine_(ctx) {
             outcome: result.outcome,
             voteCount: result.voteCount,
             swingVoters: result.swingVoters || [],  // v1.1: Array of swing voter results
-            swingVoted: result.swingVoted           // Legacy field
+            swingVoted: result.swingVoted,          // Legacy field
+            body: result.board || 'council'         // civic.43 Task 3: which body voted
           });
         } else if (type === 'grant' || type === 'federal-grant') {
           S.grantsThisCycle.push({
@@ -458,8 +464,9 @@ function runCivicInitiativeEngine_(ctx) {
           });
         }
 
-        // v1.7: Check for mayoral veto if vote passed
-        if ((type === 'vote' || type === 'council-vote') && result.outcome === 'PASSED') {
+        // v1.7: Check for mayoral veto if vote passed. civic.43 Task 3: a school
+        // board vote is not the mayor's to veto (and the council cannot override it).
+        if ((type === 'vote' || type === 'council-vote') && result.outcome === 'PASSED' && !result.board) {
           var vetoData = checkMayoralVeto_(ctx, row, header, result, rng);
 
           if (vetoData && vetoData.vetoed) {
@@ -624,18 +631,24 @@ function runCivicInitiativeEngine_(ctx) {
         var rHoods = iAffectedNeighborhoods >= 0 && rRow[iAffectedNeighborhoods]
           ? String(rRow[iAffectedNeighborhoods]).split(',').map(function(n) { return n.trim(); }).filter(function(n) { return n !== ''; })
           : [];
-        var rResult = resolveCouncilVote_(ctx, rRow, header, councilState, sentiment,
-          { primary: rRow[iSwingVoter] || '',
-            secondary: iSwingVoter2 >= 0 ? (rRow[iSwingVoter2] || '') : '',
-            secondaryLean: iSwingVoter2Lean >= 0 ? (rRow[iSwingVoter2Lean] || '') : '' },
+        // civic.43 Task 3: an education program's renewal is the school board's vote too.
+        var rDomain = iPolicyDomain >= 0 ? String(rRow[iPolicyDomain] || '').trim() : '';
+        var rBody = voteBodyFor_(rDomain);
+        var rResult = resolveCouncilVote_(ctx, rRow, header, rBody.state, sentiment,
+          rBody.named
+            ? { primary: rRow[iSwingVoter] || '',
+                secondary: iSwingVoter2 >= 0 ? (rRow[iSwingVoter2] || '') : '',
+                secondaryLean: iSwingVoter2Lean >= 0 ? (rRow[iSwingVoter2Lean] || '') : '' }
+            : { primary: '', secondary: '', secondaryLean: '' },
           { demographics: neighborhoodDemographics, affectedNeighborhoods: rHoods,
             initiativeType: String(rRow[iType] || 'vote').toLowerCase(), initiativeName: rName,
-            policyDomain: iPolicyDomain >= 0 ? String(rRow[iPolicyDomain] || '').trim() : '' },
-          rng);
+            policyDomain: rDomain },
+          rng, rBody.opts);
         var rPassed = rResult.status === 'passed';
         var rMoney = renewalMoneyText_(rElig.amount);
+        var rBodyName = rResult.board ? 'School board' : 'Council';
         rRow[iRenewOut] = (rPassed ? 'RENEWED ' : 'RENEWAL FAILED ') + rResult.voteCount + ' C' + cycle;
-        rNote = 'Cycle ' + cycle + ': council ' + (rPassed ? 'renews ' : 'declines to renew ') + rName + ' for ' +
+        rNote = 'Cycle ' + cycle + ': ' + rBodyName.toLowerCase() + ' ' + (rPassed ? 'renews ' : 'declines to renew ') + rName + ' for ' +
           rMoney + ' (' + rResult.voteCount + ')' +
           (rPassed ? ' — the money lands next week'
                    : (rElig.revivePhase ? ' — the program stays closed' : ' — the program runs out its runway'));
@@ -643,12 +656,13 @@ function runCivicInitiativeEngine_(ctx) {
         S.initiativeEvents.push({ id: rId, name: rName + ' renewal', type: 'renewal',
           outcome: rPassed ? 'passed' : 'failed', voteCount: rResult.voteCount, cycle: cycle });
         S.votesThisCycle.push({ name: rName + ' renewal', outcome: rPassed ? 'RENEWED' : 'RENEWAL FAILED',
-          voteCount: rResult.voteCount, swingVoters: rResult.swingVoters || [], swingVoted: rResult.swingVoted });
+          voteCount: rResult.voteCount, swingVoters: rResult.swingVoters || [], swingVoted: rResult.swingVoted,
+          body: rResult.board || 'council' });
         S.storyHooks = S.storyHooks || [];
         S.storyHooks.push({
           hookType: rPassed ? 'RENEWAL_PASSED' : 'RENEWAL_FAILED', theme: 'CIVIC', domain: 'CIVIC',
           severity: rPassed ? 6 : 7, initiative: rName,
-          description: 'Council ' + (rPassed ? 'renews ' : 'declines to renew ') + rName + ' for ' + rMoney + ' (' + rResult.voteCount + ')',
+          description: rBodyName + ' ' + (rPassed ? 'renews ' : 'declines to renew ') + rName + ' for ' + rMoney + ' (' + rResult.voteCount + ')',
           suggestedAngle: rPassed ? 'A program that was running low keeps its staff and its name'
                                   : (rElig.revivePhase ? 'A closed program stays closed — who it served, and what fills the gap'
                                                        : 'A program on its last weeks of money — the people it serves, and what comes after')
@@ -854,6 +868,60 @@ function getCouncilState_(ctx) {
 
 
 /**
+ * civic.43 Task 3 — the school board as a voting body, in the council-state shape so
+ * resolveCouncilVote_ runs it unchanged: every seated, available member sits in
+ * `indMembers` (votes as an unnamed IND — sentiment plus the affected-hood swing,
+ * clamped 0.15–0.85); the faction buckets exist and are empty (the row's LeadFaction /
+ * OppositionFaction find nobody); no mayor (no veto); `seated` = rows carried under
+ * the prefix, 0 until Task 2 writes them. Read only when an education row votes.
+ */
+function getBoardState_(ctx, prefix) {
+  var state = {
+    totalSeats: 0, filledSeats: 0, availableVotes: 0, vacantSeats: 0, seated: 0,
+    members: [],
+    factions: {
+      'OPP': { count: 0, available: 0, members: [] },
+      'CRC': { count: 0, available: 0, members: [] },
+      'IND': { count: 0, available: 0, members: [] }
+    },
+    indMembers: [], unavailable: [], mayor: null, president: null,
+    body: BOARD_OUSD_VOTE_.body, prefix: prefix
+  };
+  var sheet = ctx.ss ? ctx.ss.getSheetByName('Civic_Office_Ledger') : null;
+  if (!sheet) return state;
+  var data = sheet.getDataRange().getValues();
+  if (data.length < 2) return state;
+  var header = data[0];
+  var idx = function(n) { return header.indexOf(n); };
+  var iOfficeId = idx('OfficeId'), iTitle = idx('Title'), iHolder = idx('Holder'), iPopId = idx('PopId'),
+      iStatus = idx('Status'), iVotingPower = idx('VotingPower');
+  for (var r = 1; r < data.length; r++) {
+    var row = data[r];
+    var officeId = String(row[iOfficeId] || '');
+    if (officeId.indexOf(prefix) !== 0) continue;
+    state.totalSeats++;
+    state.seated++;
+    var holder = String(row[iHolder] || '').trim();
+    var status = String(row[iStatus] || 'active').toLowerCase();
+    var votingPower = iVotingPower >= 0 ? String(row[iVotingPower] || 'no').toLowerCase() : 'no';
+    if (votingPower === 'vacant' || status === 'vacant' || holder === 'TBD' || !holder) { state.vacantSeats++; continue; }
+    state.filledSeats++;
+    var isAvailable = !(status === 'hospitalized' || status === 'serious-condition' || status === 'critical' ||
+      status === 'injured' || status === 'deceased' || status === 'resigned' || status === 'retired');
+    var member = { name: holder, popId: String(row[iPopId] || ''), office: officeId, title: String(row[iTitle] || ''),
+      status: status, faction: 'IND', available: isAvailable };
+    state.members.push(member);
+    state.factions.IND.count++;
+    state.factions.IND.members.push(holder);
+    if (!isAvailable) { state.unavailable.push({ name: holder, reason: status, faction: 'IND' }); continue; }
+    state.factions.IND.available++;
+    state.availableVotes++;
+    state.indMembers.push({ name: holder, popId: member.popId, title: member.title });
+  }
+  return state;
+}
+
+/**
  * Fallback: Get council state from Simulation_Ledger (legacy method)
  */
 function getCouncilStateFromSimLedger_(ctx) {
@@ -998,11 +1066,17 @@ function getCouncilStateFromSimLedger_(ctx) {
  * v1.3: Now accepts demoContext with neighborhood demographics for vote influence
  * v1.5: Now accepts rng function for deterministic simulation
  */
-function resolveCouncilVote_(ctx, row, header, councilState, sentiment, swingInfo, demoContext, rng) {
+function resolveCouncilVote_(ctx, row, header, councilState, sentiment, swingInfo, demoContext, rng, voteOpts) {
   if (typeof rng !== 'function') throw new Error('civicInitiativeEngine.resolveCouncilVote_: rng parameter required (Phase 40.3 Path 1)');
 
   // v1.3: Demographics context (optional for backwards compatibility)
   demoContext = demoContext || { demographics: {}, affectedNeighborhoods: [] };
+  // civic.43 Task 3: another body than the council (the school board) — a fixed
+  // votesNeeded (the spec's number, never derived from the seated count) and a label
+  // for Notes; the council path passes nothing and reads the row's VoteRequirement.
+  voteOpts = voteOpts || null;
+  var bodyName = voteOpts && voteOpts.body ? voteOpts.body : 'council';
+  var bodyLabel = voteOpts && voteOpts.label ? voteOpts.label + ': ' : '';
   
   var idx = function(n) { return header.indexOf(n); };
   
@@ -1026,24 +1100,31 @@ function resolveCouncilVote_(ctx, row, header, councilState, sentiment, swingInf
   
   // Parse vote requirement
   var reqParts = voteReq.split('-');
-  var votesNeeded = parseInt(reqParts[0]) || 5;
+  var votesNeeded = (voteOpts && voteOpts.votesNeeded) ? voteOpts.votesNeeded : (parseInt(reqParts[0]) || 5);
   var isSupermajority = votesNeeded >= 6;
-  
+
   // Check if vote is even possible
   var totalAvailable = councilState.availableVotes;
   var totalFilled = councilState.filledSeats;
   var vacantSeats = councilState.vacantSeats;
-  
-  // If not enough seats filled for quorum, vote is delayed
+
+  // If not enough seats filled for quorum, vote is delayed. A body with no rows at
+  // all (the school board before Task 2 seats it) says so — it is never the council.
   if (totalAvailable < votesNeeded) {
+    var notSeated = voteOpts && councilState.seated === 0;
     return {
       status: 'delayed',
       outcome: 'DELAYED',
       voteCount: totalAvailable + ' available, ' + votesNeeded + ' needed',
-      consequences: 'Insufficient council members for vote. Delayed pending appointments.',
-      notes: 'Vote delayed. Only ' + totalAvailable + ' votes available; ' + 
-             votesNeeded + ' required. ' + vacantSeats + ' seats vacant.',
-      swingVoters: []
+      consequences: notSeated
+        ? 'No ' + bodyName + ' seated. Delayed until the ' + bodyName + ' exists.'
+        : 'Insufficient ' + bodyName + ' members for vote. Delayed pending appointments.',
+      notes: bodyLabel + (notSeated
+        ? 'Vote delayed. No ' + bodyName + ' seated; ' + votesNeeded + ' votes required.'
+        : 'Vote delayed. Only ' + totalAvailable + ' votes available; ' +
+          votesNeeded + ' required. ' + vacantSeats + ' seats vacant.'),
+      swingVoters: [],
+      board: voteOpts ? bodyName : null
     };
   }
   
@@ -1215,16 +1296,17 @@ function resolveCouncilVote_(ctx, row, header, councilState, sentiment, swingInf
     consequences: '',
     notes: '',
     affectedNeighborhoods: demoContext.affectedNeighborhoods || [],  // v1.3: For ripple effects
-    policyDomain: demoContext.policyDomain || ''  // v1.6: Explicit domain override
+    policyDomain: demoContext.policyDomain || '',  // v1.6: Explicit domain override
+    board: voteOpts ? bodyName : null              // civic.43 Task 3: which body voted (null = the council)
   };
-  
+
   // Generate consequences and notes
   if (passed) {
     result.consequences = 'Initiative approved. Implementation begins.';
-    result.notes = 'Passed ' + voteCount + '.';
+    result.notes = bodyLabel + 'Passed ' + voteCount + '.';
   } else {
     result.consequences = 'Initiative defeated. Political fallout expected.';
-    result.notes = 'Failed ' + voteCount + '.';
+    result.notes = bodyLabel + 'Failed ' + voteCount + '.';
     if (isSupermajority) {
       result.notes += ' Supermajority requirement not met.';
     }

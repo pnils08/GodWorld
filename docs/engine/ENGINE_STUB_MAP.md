@@ -1564,6 +1564,8 @@
   Sheets: Citizen_Media_Usage
 
 ### civicInitiativeEngine.js
+- **isBoardDomain_(policyDomain)**
+
 - **runCivicInitiativeEngine_(ctx)**
   Reads: S.cityDynamics, S.cycleId, S.grantsThisCycle, S.initiativeEvents, S.storyHooks, S.votesThisCycle
   Writes: S.civicDemographicContext, S.grantsThisCycle, S.initiativeEvents, S.storyHooks, S.votesThisCycle
@@ -1574,9 +1576,12 @@
 - **getCouncilState_(ctx)**
   Sheets: Civic_Office_Ledger
 
+- **getBoardState_(ctx, prefix)**
+  Sheets: Civic_Office_Ledger
+
 - **getCouncilStateFromSimLedger_(ctx)**
 
-- **resolveCouncilVote_(ctx, row, header, councilState, sentiment, swingInfo, demoContext, rng)**
+- **resolveCouncilVote_(ctx, row, header, councilState, sentiment, swingInfo, demoContext, rng, voteOpts)**
 
 - **isSwingVoterAvailable_(voterName, councilState, availableIndMembers)**
 
@@ -4516,4 +4521,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1608
+**Functions mapped:** 1610

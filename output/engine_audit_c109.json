@@ -2070,7 +2070,7 @@
         "MedianIncome": "139720",
         "MedianRent": "3493",
         "TrajectoryMomentum": "3",
-        "District": "D5",
+        "District": "D2",
         "CoreSimRank": "14",
         "IncomeTier": "5",
         "BoomExposure": "anchor",
@@ -2371,31 +2371,31 @@
         "Approval": "65"
       },
       {
-        "OfficeId": "",
-        "PopId": "",
-        "Holder": "",
-        "District": "",
+        "OfficeId": "STAFF-OARI",
+        "PopId": "POP-01021",
+        "Holder": "Vanessa Tran-Muñoz",
+        "District": "citywide",
         "Approval": "65"
       },
       {
-        "OfficeId": "",
-        "PopId": "",
-        "Holder": "",
-        "District": "",
+        "OfficeId": "STAFF-HEALTHCTR",
+        "PopId": "POP-00792",
+        "Holder": "Bobby Chen-Ramirez",
+        "District": "citywide",
         "Approval": "65"
       },
       {
-        "OfficeId": "",
-        "PopId": "",
-        "Holder": "",
-        "District": "",
+        "OfficeId": "STAFF-STABFUND",
+        "PopId": "POP-00790",
+        "Holder": "Marcus Webb",
+        "District": "citywide",
         "Approval": "65"
       },
       {
-        "OfficeId": "",
-        "PopId": "",
-        "Holder": "",
-        "District": "",
+        "OfficeId": "STAFF-TRANSITHUB",
+        "PopId": "POP-00791",
+        "Holder": "Elena Soria Dominguez",
+        "District": "citywide",
         "Approval": "65"
       },
       {
@@ -10356,5 +10356,19 @@
       "Transit_Metrics"
     ],
     "notLoaded": []
-  }
+  },
+  "snapshotNotes": [
+    {
+      "at": "pre-fire C110",
+      "field": "Neighborhood_Map, Civic_Office_Ledger",
+      "why": "Neighborhood_Map Baylight District D5->D2: commit fb9dee6d 2026-10-03 (builder yes). Civic_Office_Ledger STAFF-OARI/HEALTHCTR/STABFUND/TRANSITHUB: commit dbbc4515 world-gap build, four office rows. Both hand writes after the C109 fire; part of C109 closing state.",
+      "changes": [
+        "Neighborhood_Map.Baylight District.District D5→D2",
+        "Civic_Office_Ledger.STAFF-OARI: new row on live",
+        "Civic_Office_Ledger.STAFF-HEALTHCTR: new row on live",
+        "Civic_Office_Ledger.STAFF-STABFUND: new row on live",
+        "Civic_Office_Ledger.STAFF-TRANSITHUB: new row on live"
+      ]
+    }
+  ]
 }

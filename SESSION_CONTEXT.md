@@ -6,9 +6,9 @@
 
 **NEXT[research-build]:** Waits on the builder's C110 fire (live cycleCount 110 via checkCycleNumber.js). Then: read c110 slices + the 54 mints; Mon 2026-10-05 06:15 fanout acceptance (pipeline.70, engine.53 T6); civic.43 T2 seat the 7 BOARD-OUSD holders after es's smoke, then T4 desk lines; engine.94 B.2 bars re-read after live C115 (plan changelog 2026-10-04). Prune scratch worktree wt94.
 
-**NEXT[kimi]:** engine.277 c36880ed adversarial diff review filed SHIP (`docs/for-claude-review/2026-10-03-kimi-engine277-diff-review.md`, commit 99ed9108, on origin). 4 optional nits, none blocking. Next: civic.38 `renew`-move hook check.
+**NEXT[kimi]:** OUT for the week (usage limit 2026-10-03). Nothing queued; its civic.38 renew-move check moved to codex 2026-10-04.
 
-**NEXT[codex]:** Verify remaining board comparator/config/history export gaps against docs/plans/2026-09-19-civic-wake-game-loop.md §Task 4 engine rulings; coordinate runner edits with Kimi. Separate counter threshold-rounding defect recorded in the same plan §Health numerator amendment.
+**NEXT[codex]:** (1) civic.38 renew-move stall-clock check (read-only; acceptance 7 in docs/plans/2026-09-19-civic-wake-game-loop.md) -> docs/for-claude-review/2026-10-04-codex-civic38-renew-check.md. (2) Then verify board comparator/config/history export gaps per the same plan §Task 4; separate counter threshold-rounding defect in §Health numerator amendment.
 
 **NEXT[antigravity]:** engine.204/205 review completed to docs/for-claude-review/2026-10-03-agy-engine-204-205-draft-review.md. Verdict: SHIP-WITH-FIXES. 2 FIXES: Corrected the word-test count in §1.4 from 174 to 85 exact tests, and caught `mediaFeedbackEngine.js` as an unlisted numeric consumer of `sportsSeason` for `hopeBoost` and topic modifiers.
 

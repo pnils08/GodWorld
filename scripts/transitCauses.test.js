@@ -267,7 +267,6 @@ function run(S, opts) {
 
 // engine.206 — a homestand is a transit seed: one ripple per franchise home week at venue[0]
 {
-  const gd = (r) => r.ctx && [];
   const crowds = () => ripples.filter(r => r.effectType === 'game-day-crowds');
   run({ sportsWeek: { Oaks: { h: 3, g: 3, unsigned: 1, venueShare: 1, venue: ['Baylight District'] } }, sportsZones: ['Baylight District'] });
   let c = crowds();

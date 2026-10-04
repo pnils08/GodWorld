@@ -285,8 +285,8 @@ function runEconomicRippleEngine_(ctx) {
         // birth AND carryover rows (bizId rides the ripple + snapshot compactor).
         // engine.206: a game-week ripple names the bars it moved (bizIds, birth row only —
         // compactEconomicRipples_ does not carry them, so a carryover stays hood-scoped).
-        targetScope: (rlr.bizIds && rlr.bizIds.length) || rlr.bizId ? 'business' : (rlr.primaryNeighborhood ? 'neighborhood' : 'citywide'),
-        targetIds: (rlr.bizIds && rlr.bizIds.length) ? rlr.bizIds.slice() : rlr.bizId ? [rlr.bizId] : (rlr.primaryNeighborhood ? [rlr.primaryNeighborhood] : (rlr.neighborhoods || [])),
+        targetScope: (!isCarried && rlr.bizIds && rlr.bizIds.length) || rlr.bizId ? 'business' : (rlr.primaryNeighborhood ? 'neighborhood' : 'citywide'),
+        targetIds: (!isCarried && rlr.bizIds && rlr.bizIds.length) ? rlr.bizIds.slice() : rlr.bizId ? [rlr.bizId] : (rlr.primaryNeighborhood ? [rlr.primaryNeighborhood] : (rlr.neighborhoods || [])),
         neighborhood: rlr.primaryNeighborhood || '',
         magnitude: rlr.impact,
         duration: rlr.endCycle - rlr.startCycle,
@@ -487,7 +487,7 @@ function detectCalendarRipples_(ctx, currentCycle) {
   for (var sf in sportsWeeks) {
     if (!sportsWeeks.hasOwnProperty(sf)) continue;
     var swk = sportsWeeks[sf], swSigned = Number(swk.signed) || 0;
-    if (Math.abs(swSigned) < 0.15) continue;
+    if (!(swk && swk.g > 0) || Math.abs(swSigned) < 0.15) continue;   // no games → no week (signed is 0 then anyway; agy review)
     var swHome = (Number(swk.venueShare) || 0) >= 0.5 && swk.venue && swk.venue.length;
     var swBars = sportsWeekBarsFor_(weekBars, swHome ? swk.venue : null, homeVenues, !swHome && sf === awayLead);
     var swText = sf + (swSigned > 0 ? ' game-week spending' : ' game-week slump');

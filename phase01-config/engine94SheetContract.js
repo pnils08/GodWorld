@@ -13,6 +13,7 @@
  */
 
 var ENGINE94_CONFIG_SEEDS = [
+  ['folkMemoryWindow', 8, 'engine.94 Cycles of recent folk memory (runtime capped at 12)', 1, 52, true],
   ['griefDurationCycles', 3, 'engine.94 ordinary grief duration in Cycles', 1, 52, true],
   ['griefHolidayDurationCycles', 5, 'engine.94 stress-holiday grief duration in Cycles', 1, 52, true],
   ['griefParticipationMultiplier', 0.80, 'engine.94 active-grief atmospheric participation multiplier', 0, 2, false],

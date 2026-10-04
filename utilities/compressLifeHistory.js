@@ -629,9 +629,12 @@ function compressLifeHistory_(ctx, options) {
       regsDirty = true;
     }
 
+    var griefStampDue = false;
     if (griefPending.length && regs) {
       var griefN = foldGriefCascades_(regs, griefPending);
       if (griefN > 0) { griefApplied += griefN; regsDirty = true; }
+      // The active envelope expires; this stamp survives for history conditions.
+      griefStampDue = griefN > 0;
       griefCitizens++;
     }
 
@@ -705,6 +708,13 @@ function compressLifeHistory_(ctx, options) {
     }
 
     if (dialRmwNeeded) row[iDialState] = serializeDialState_(c);
+    if (griefStampDue) {
+      // Grief-only maintenance keeps the rest of DialState, including unknown
+      // additive fields, without normalizing the dial body.
+      var stampedDial = parseDialState_(row[iDialState] ? String(row[iDialState]) : '');
+      stampedDial.grief = { l: cycle };
+      row[iDialState] = JSON.stringify(stampedDial);
+    }
     rows[r] = row;
     updated++;
   }
@@ -1378,6 +1388,7 @@ function serializeDialState_(c) {
   if (c.pressure) o.pressure = c.pressure; // engine.201 W1f per-cause pressure run {cause:{n,l}} — written by emitPressureTag_ in Phase 5
   if (c.wear) o.wear = c.wear; // engine.272 integrity wear {d, l} — points worn off, last step Cycle
   if (c.debtDefault) o.debtDefault = c.debtDefault; // engine.276 default mark {l, n} — written by the money loop in Phase 5, read by the home roll
+  if (c.grief) o.grief = c.grief; // engine.94 B.1 durable bereavement stamp
   if (c.fan) o.fan = c.fan; // engine.208 the team a fan follows ('as' | 'oaks' | 'both')
   return JSON.stringify(o);
 }

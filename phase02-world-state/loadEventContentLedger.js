@@ -110,7 +110,15 @@ var CONTENT_LEDGER_DSL_FIELDS = {
   warmth:       { kind: 'num' },
   drive:        { kind: 'num' },
   // engine.208: Dial 9, the citizen's live fandom (base+mood, 0-100); null fails the term
-  fandom:       { kind: 'num' }
+  fandom:       { kind: 'num' },
+  bereaved:     { kind: 'num' },     // Cycles since DialState.grief.l
+  charged:      { kind: 'num' },     // Cycles since latest Judicial_Ledger.ArrestCycle
+  defaulted:    { kind: 'num' },     // Cycles since DialState.debtDefault.l
+  rival:        { kind: 'flag' },    // active rivalry or sports_rival bond
+  hooddeaths:   { kind: 'num' },     // tracked Death lines in the hood window
+  hoodcharged:  { kind: 'num' },     // Judicial_Ledger arrests in the hood window
+  hoodhospital: { kind: 'num' },     // Hospitalized + Critical lines
+  hoodclosed:   { kind: 'num' }      // stamped RoutineRetrenched LifeHistory lines
 };
 
 /**

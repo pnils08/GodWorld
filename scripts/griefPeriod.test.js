@@ -116,8 +116,8 @@ function neutralDialState() {
 }
 
 const REG_HEADERS = ['POPID', 'LifeHistory', 'TraitProfile', 'DialState', 'MemoryRegisters'];
-function registerCtx(cycle, memory, cascades) {
-  const beforeDial = '{"future":{"keep":true},"base":{"drive":50}}';
+function registerCtx(cycle, memory, cascades, dialState) {
+  const beforeDial = dialState || '{"future":{"keep":true},"base":{"drive":50}}';
   return {
     ctx: {
       mode: {},
@@ -143,22 +143,24 @@ let persistedRegister;
   assert('C1 compress-ineligible survivor still persists grief', regs.grief && regs.grief.startCycle === 101 && regs.grief.throughCycle === 103);
   assert('C2 duplicate bonds to same deceased dedupe source', regs.grief.sourceIds.length === 1 && regs.grief.sourceIds[0] === 'POP-00001');
   assert('C3 biases/unlived/unknown fields survive', regs.biases.length === 1 && regs.unlived.length === 1 && regs.future.keep === true);
-  assert('C4 grief storage leaves DialState byte-identical', box.ctx.ledger.rows[0][3] === box.beforeDial);
+  assert('C4 grief writes a durable DialState stamp and keeps other fields',
+    JSON.parse(box.ctx.ledger.rows[0][3]).grief.l === 100 &&
+    JSON.parse(box.ctx.ledger.rows[0][3]).future.keep === true);
   assert('C5 summary exposes one applied envelope change', box.ctx.summary.lifeHistoryCompression.griefApplied === 1 && box.ctx.summary.lifeHistoryCompression.griefCitizens === 1);
 
   assert('C6 created Cycle inactive', C.activeGriefFromRegisters_(persistedRegister, 100) === null);
   assert('C7 C+1 through C+D active', [101, 102, 103].every((cy) => !!C.activeGriefFromRegisters_(persistedRegister, cy)));
   assert('C8 C+D+1 inactive', C.activeGriefFromRegisters_(persistedRegister, 104) === null);
 
-  const activeBox = registerCtx(102, persistedRegister, []);
+  const activeBox = registerCtx(102, persistedRegister, [], box.ctx.ledger.rows[0][3]);
   C.compressLifeHistory_(activeBox.ctx);
   assert('C8a active envelope needs no Phase-9 rewrite', activeBox.ctx.ledger.rows[0][4] === persistedRegister && activeBox.ctx.ledger.dirty === false);
 
-  const expireBox = registerCtx(104, persistedRegister, []);
+  const expireBox = registerCtx(104, persistedRegister, [], box.ctx.ledger.rows[0][3]);
   C.compressLifeHistory_(expireBox.ctx);
   const expired = JSON.parse(expireBox.ctx.ledger.rows[0][4]);
   assert('C9 first Phase 9 after expiry removes only grief', !('grief' in expired) && expired.biases.length === 1 && expired.unlived.length === 1 && expired.future.keep === true);
-  assert('C10 expiry leaves DialState byte-identical', expireBox.ctx.ledger.rows[0][3] === expireBox.beforeDial);
+  assert('C10 expiry preserves the durable DialState stamp', JSON.parse(expireBox.ctx.ledger.rows[0][3]).grief.l === 100);
   assert('C11 malformed null-cycle state is inactive', C.activeGriefFromRegisters_(JSON.stringify({ grief: { startCycle: null, throughCycle: 3 } }), 1) === null);
 
   const missingTarget = registerCtx(100, seedRegister, ordinaryCascades.concat([{

@@ -118,9 +118,9 @@ const approvalMigration = require('./applyApprovalCeilingConfig.js');
 const migrationRows = griefMigration.CONFIG_ROWS.concat(approvalMigration.CONFIG_ROWS);
 
 console.log('═══ A. Code-carried payload matches reviewed migrations');
-check('A1 fourteen config seeds are code-carried', C.seeds.length === 14);
+check('A1 fifteen config seeds are code-carried', C.seeds.length === 15 && C.seeds[0][0] === 'folkMemoryWindow' && C.seeds[0][1] === 8);
 check('A2 seed key/value/description payload matches both migration scripts',
-  JSON.stringify(C.seeds.map(row => row.slice(0, 3))) === JSON.stringify(migrationRows));
+  JSON.stringify(C.seeds.slice(1).map(row => row.slice(0, 3))) === JSON.stringify(migrationRows));
 check('A3 three state columns match the migration script',
   JSON.stringify(C.columns) === JSON.stringify(approvalMigration.CIVIC_COLUMNS));
 
@@ -133,7 +133,7 @@ console.log('═══ B. Fresh live Sheet self-arms before consumers');
   const result = C.ensure(f.ss);
   const configPlan = C.inspectConfig(f.config.getDataRange().getValues());
   const headerPlan = C.inspectHeader(f.civic.values[0]);
-  check('B1 all fourteen missing config rows seeded', result.configSeeded === 14);
+  check('B1 all fifteen missing config rows seeded', result.configSeeded === 15);
   check('B2 all three missing civic headers added', result.civicHeadersAdded === 3);
   check('B3 post-write config is complete', configPlan.additions.length === 0);
   check('B4 post-write civic header is complete', headerPlan.additions.length === 0);

@@ -234,6 +234,52 @@ var CITIZEN_INSTITUTIONS_BESPOKE_ = {
   "Piedmont Ave": ["a neighborhood meetup", "a local volunteer circle"]
 };
 
+// engine.94 B.1: bounded, code-locked history vocabulary. Exact primary tags
+// only; an unknown log tag cannot broaden an authored condition.
+var FOLK_MEMORY_LOG_TAGS_ = {
+  Death: 1, Setback: 1, Rivalry: 1, 'Transgression-Serious': 1,
+  Hospitalized: 1, Critical: 1, Recovering: 1
+};
+
+function folkMemoryAdd_(memory, pop, hood, tag, eventCycle) {
+  if (hood) {
+    var hc = memory.byHood[hood] || (memory.byHood[hood] = {});
+    hc[tag] = (hc[tag] || 0) + 1;
+  }
+  if (pop) {
+    var pc = memory.byCitizen[pop] || (memory.byCitizen[pop] = {});
+    if (pc[tag] == null || eventCycle > pc[tag]) pc[tag] = eventCycle;
+  }
+}
+
+function folkMemorySince_(stamp, cycle) {
+  if (!stamp || stamp.l === '' || stamp.l === null || stamp.l === undefined) return null;
+  var last = Number(stamp.l);
+  return isFinite(last) && Math.floor(last) === last && last >= 0 && last <= cycle ? cycle - last : null;
+}
+
+function folkMemoryScopes_(memory, pop, hood, cycle, dialCell, bonds) {
+  var dial = null;
+  try { dial = dialCell ? JSON.parse(String(dialCell)) : null; } catch (e) {}
+  var pc = memory.byCitizen[pop] || {};
+  var hc = memory.byHood[hood] || {};
+  var rival = false;
+  for (var i = 0; bonds && i < bonds.length; i++) {
+    var b = bonds[i];
+    if (b && b.status === 'active' && (b.bondType === 'rivalry' || b.bondType === 'sports_rival')) { rival = true; break; }
+  }
+  return {
+    bereaved: folkMemorySince_(dial && dial.grief, cycle),
+    charged: pc.Charged == null ? null : cycle - pc.Charged,
+    defaulted: folkMemorySince_(dial && dial.debtDefault, cycle),
+    rival: rival,
+    hooddeaths: hc.Death || 0,
+    hoodcharged: hc.Charged || 0,
+    hoodhospital: (hc.Hospitalized || 0) + (hc.Critical || 0),
+    hoodclosed: hc.RoutineRetrenched || 0
+  };
+}
+
 function generateCitizensEvents_(ctx) {
   // Phase 42 §5.6: SL read/mutate via shared ctx.ledger; commit at Phase 10.
   if (!ctx.ledger) {
@@ -290,12 +336,41 @@ function generateCitizensEvents_(ctx) {
   var iWealth = idx("WealthLevel");
   var iDisplRisk = idx("DisplacementRisk");
   var iMemReg = idx("MemoryRegisters"); // engine.38 B3 read (S283, seams Task 9) — unlived echo source
+  var iDialState = idx("DialState");
 
   if (iTier < 0 || iClock < 0 || iLife < 0 || iLastU < 0 || iPopID < 0) return;
 
   var lifeLog = ctx.ss.getSheetByName("LifeHistory_Log");
   var S = ctx.summary || (ctx.summary = {});
   var cycle = S.cycleId || (ctx.config && ctx.config.cycleCount) || 0;
+
+  // The self-arm supplies 8 on live Sheets. The cap follows the log's 12-Cycle
+  // retention even when an operator has a larger valid World_Config value.
+  var rawFolkWindow = ctx.config && ctx.config.folkMemoryWindow;
+  var folkWindow = rawFolkWindow == null ? 8 : Number(rawFolkWindow);
+  if (!isFinite(folkWindow) || Math.floor(folkWindow) !== folkWindow || folkWindow < 1) {
+    throw new Error('engine.94: invalid World_Config.folkMemoryWindow');
+  }
+  folkWindow = Math.min(folkWindow, 12);
+  var folkMemory = S.folkMemory = { byHood: {}, byCitizen: {} };
+  var hoodByPop = {};
+  for (var fm = 0; fm < rows.length; fm++) {
+    var fmPop = String(rows[fm][iPopID] || '').trim().toUpperCase();
+    var fmHood = iNeighborhood >= 0 ? String(rows[fm][iNeighborhood] || '').trim() : '';
+    if (!fmPop) continue;
+    if (fmHood) hoodByPop[fmPop] = fmHood;
+    // RoutineRetrenched is written only to the ledger's LifeHistory column.
+    var fmLife = String(rows[fm][iLife] || '').split('\n');
+    for (var fl = 0; fl < fmLife.length; fl++) {
+      if (fmLife[fl].indexOf('[RoutineRetrenched]') < 0) continue;
+      var stamp = fmLife[fl].match(/^Y([0-9]+)C([0-9]+)\b/);
+      if (!stamp || Number(stamp[2]) < 1 || Number(stamp[2]) > 52) continue;
+      var stampCycle = (Number(stamp[1]) - 1) * 52 + Number(stamp[2]);
+      if (stampCycle <= cycle && cycle - stampCycle < folkWindow) {
+        folkMemoryAdd_(folkMemory, fmPop, fmHood, 'RoutineRetrenched', stampCycle);
+      }
+    }
+  }
 
   // engine.38 A2 — anti-inert floor signal. LifeHistory_Log is append-only (no
   // clearer, compressor doesn't touch it), so its Cycle column is a persistent
@@ -309,6 +384,8 @@ function generateCitizensEvents_(ctx) {
     var logHdr = logVals[0] || [];
     var iLogPop = logHdr.indexOf("POPID");
     var iLogCyc = logHdr.indexOf("Cycle");
+    var iLogTag = logHdr.indexOf("EventTag");
+    var iLogHood = logHdr.indexOf("Neighborhood");
     if (iLogPop >= 0 && iLogCyc >= 0) {
       for (var lv = 1; lv < logVals.length; lv++) {
         var lp = logVals[lv][iLogPop];
@@ -316,7 +393,34 @@ function generateCitizensEvents_(ctx) {
         if (lp && (!(lp in lastEventCycleByPop) || lc > lastEventCycleByPop[lp])) {
           lastEventCycleByPop[lp] = lc;
         }
+        if (iLogTag < 0 || !lp || !lc || lc > cycle || cycle - lc >= folkWindow) continue;
+        var primary = String(logVals[lv][iLogTag] || '').split('|')[0].trim();
+        if (!FOLK_MEMORY_LOG_TAGS_[primary]) continue;
+        var lpNorm = String(lp).trim().toUpperCase();
+        var logHood = iLogHood >= 0 ? String(logVals[lv][iLogHood] || '').trim() : '';
+        folkMemoryAdd_(folkMemory, lpNorm, hoodByPop[lpNorm] || logHood, primary, lc);
       }
+    }
+  }
+
+  // Judicial rows have their own hood and arrest Cycle; the LifeHistory arrest
+  // text is not a bracket tag. Reuse the cache already opened by the lifecycle.
+  var judicial = ctx.cache && ctx.cache.getData('Judicial_Ledger');
+  if (ctx.cache && (!judicial || !judicial.exists || !judicial.values || !judicial.values.length)) {
+    throw new Error('engine.94: Judicial_Ledger cache missing');
+  }
+  if (judicial && judicial.values && judicial.values.length) {
+    var jv = judicial.values, jh = jv[0];
+    var jPop = jh.indexOf('POPID'), jHood = jh.indexOf('Neighborhood'), jCycle = jh.indexOf('ArrestCycle');
+    if (jPop < 0 || jHood < 0 || jCycle < 0) throw new Error('engine.94: Judicial_Ledger header missing');
+    for (var ji = 1; ji < jv.length; ji++) {
+      var arrest = jv[ji][jCycle];
+      if (arrest === '' || arrest === null || arrest === undefined) continue;
+      var arrestCycle = Number(arrest);
+      if (!isFinite(arrestCycle) || Math.floor(arrestCycle) !== arrestCycle ||
+          arrestCycle < 0 || arrestCycle > cycle || cycle - arrestCycle >= folkWindow) continue;
+      folkMemoryAdd_(folkMemory, String(jv[ji][jPop] || '').trim().toUpperCase(),
+        String(jv[ji][jHood] || '').trim(), 'Charged', arrestCycle);
     }
   }
 
@@ -516,7 +620,6 @@ function generateCitizensEvents_(ctx) {
     if (iTraitProfile < 0) iTraitProfile = idx("OriginVault");
     // engine.31 Phase 5: DialState carries the machine truth the dial-band seam
     // reads (getCitizenDialBands_). Inert (-1 -> "") until the column exists.
-    var iDialState = idx("DialState");
 
     for (var ri = 0; ri < rows.length; ri++) {
       var rowL = rows[ri];
@@ -809,6 +912,13 @@ function generateCitizensEvents_(ctx) {
     if (has("grief:withdrawal")) return "Strain";
     if (has("grief:memorial")) return "Personal";
     if (has("grief:reconnection")) return "Community";
+    // engine.94 B.2a: a memory row (first tag source:continuity for the loader's
+    // whitelist) that moves a dial routes through the existing vocabulary —
+    // checked before the source: branches, like the grief:/relationship: tags.
+    // A memory row with no memory: tag is a plain day (ruling 1b).
+    if (has("memory:strain")) return "Strain";
+    if (has("memory:community")) return "Community";
+    if (has("memory:rivalry")) return "Rivalry";
     if (has("source:qol")) return "QoL";
     if (has("source:media")) return "Media";
     if (has("source:weather")) return "Weather";
@@ -2737,7 +2847,19 @@ function generateCitizensEvents_(ctx) {
     if (contentLedger && contentLedger.lineCount) {
       var hoodStateForCond = (S.neighborhoodState && neighborhood) ? S.neighborhoodState[neighborhood] : null;
       var eclEligibleByPool = {}; // engine.79 item 7: per-pool eligible count for THIS citizen (post-cap)
+      var memoryScopes = folkMemoryScopes_(folkMemory, popIdNorm, neighborhood, cycle,
+        iDialState >= 0 ? row[iDialState] : '', citizenBonds);
       var condScopes = {
+        // B.1: personal stamps are null until they exist; hood counts are zero.
+        // The evaluator already fails numeric terms on null.
+        bereaved: memoryScopes.bereaved,
+        charged: memoryScopes.charged,
+        defaulted: memoryScopes.defaulted,
+        rival: memoryScopes.rival,
+        hooddeaths: memoryScopes.hooddeaths,
+        hoodcharged: memoryScopes.hoodcharged,
+        hoodhospital: memoryScopes.hoodhospital,
+        hoodclosed: memoryScopes.hoodclosed,
         wealth: wealthLvl,
         children: kidCount,
         married: maritalLc === "married",

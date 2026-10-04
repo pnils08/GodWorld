@@ -181,5 +181,44 @@ function check(name, cond) {
   check('both bad rows counted as skipped', L.skipped === 2);
 }
 
+// 10. engine.94 B.1 — locked history vocabulary and fixture-backed scope values
+{
+  const names = ['bereaved', 'charged', 'defaulted', 'hooddeaths',
+    'hoodcharged', 'hoodhospital', 'hoodclosed'];
+  const terms = names.map(name => name + '>=0').join('; ') + '; rival';
+  const ctx = mockCtx([
+    HDR,
+    ['line', 'memory.ok', '', 'remembered a week', '', terms, 'source:continuity', '', ''],
+    ['line', 'memory.bad', '', 'bad memory typo', '', 'hoodhospitol>=1', 'source:continuity', '', ''],
+    ['line', 'memory.badflag', '', 'bad rival operator', '', 'rival=1', 'source:continuity', '', '']
+  ]);
+  loadEventContentLedger_(ctx);
+  const L = ctx.summary.contentLedger;
+  const compiled = L.lines['memory.ok'][0].conditions;
+  check('B.1 seven numeric terms and one bare rival flag compile',
+    compiled.length === 8 && compiled.slice(0, 7).every(t => t.op === '>=' && t.v === 0) &&
+    compiled[7].f === 'rival' && compiled[7].op === 'flag');
+  check('B.1 typo and operated flag reject whole rows', L.skipped === 2 && !L.lines['memory.bad'] && !L.lines['memory.badflag']);
+
+  const genSource = fs.readFileSync(path.join(__dirname, '..', 'phase05-citizens', 'generateCitizensEvents.js'), 'utf8');
+  const scopes = new Function(genSource + '\nreturn folkMemoryScopes_;')();
+  const memory = {
+    byCitizen: { 'POP-TEST-A': { Charged: 105 } },
+    byHood: { 'Fixture Hood': { Death: 2, Charged: 4, Hospitalized: 3, Critical: 1, RoutineRetrenched: 2 } }
+  };
+  const bonds = [{ bondType: 'sports_rival', status: 'active' }];
+  const actual = scopes(memory, 'POP-TEST-A', 'Fixture Hood', 109,
+    JSON.stringify({ grief: { l: 100 }, debtDefault: { l: 65 } }), bonds);
+  check('B.1 personal ages and active sports rival resolve',
+    actual.bereaved === 9 && actual.charged === 4 && actual.defaulted === 44 && actual.rival === true);
+  check('B.1 hood counts use tracked lines and cases',
+    actual.hooddeaths === 2 && actual.hoodcharged === 4 && actual.hoodhospital === 4 && actual.hoodclosed === 2);
+  const empty = scopes(memory, 'POP-TEST-B', 'Empty Fixture Hood', 109, '',
+    [{ bondType: 'rivalry', status: 'severed' }]);
+  check('B.1 absent personal history is null; empty hood counts are zero',
+    empty.bereaved === null && empty.charged === null && empty.defaulted === null && empty.rival === false &&
+    empty.hooddeaths === 0 && empty.hoodcharged === 0 && empty.hoodhospital === 0 && empty.hoodclosed === 0);
+}
+
 console.log('\n' + pass + '/' + (pass + fail) + ' passed');
 process.exit(fail ? 1 : 0);

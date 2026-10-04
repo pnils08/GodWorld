@@ -257,6 +257,7 @@ function serialize_(c) {
   if (c.pressure) o.pressure = c.pressure;
   if (c.wear) o.wear = c.wear;
   if (c.debtDefault) o.debtDefault = c.debtDefault;
+  if (c.grief) o.grief = c.grief;
   if (c.fan) o.fan = c.fan; // engine.208 the team a fan follows: 'as' | 'oaks' | 'both'
   return o;
 }
@@ -274,6 +275,7 @@ function deserialize_(obj) {
     if (obj.pressure) c.pressure = obj.pressure; // engine.201 W1f per-cause pressure run {cause:{n,l}}
     if (obj.wear) c.wear = obj.wear;             // engine.272 integrity wear {d, l}
     if (obj.debtDefault) c.debtDefault = obj.debtDefault; // engine.276 default mark {l, n} — the money loop writes it, the home roll reads it
+    if (obj.grief) c.grief = obj.grief; // engine.94 B.1 latest bereavement Cycle
     if (obj.fan) c.fan = obj.fan;                 // engine.208 the team a fan follows — seed / household / mint write it
   }
   return c;

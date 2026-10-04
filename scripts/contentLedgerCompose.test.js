@@ -207,6 +207,29 @@ console.log('═══ Routing: ledger line primary tag');
     taggedLine !== null && taggedLine.indexOf('[QoL]') >= 0, taggedLine || 'never drawn in 200 seeds');
 }
 
+console.log('═══ engine.94 B.2a: memory rows route through the dial vocabulary');
+{
+  // First tag source:continuity (the loader whitelist); the memory: tag picks the
+  // primary that moves the dial. No memory: tag = a plain day, as before.
+  const ROUTES = [
+    ['memory:strain', '[Strain]', 'checked the lock twice since the spring'],
+    ['memory:community', '[Community]', 'brought a plate to the block table again'],
+    ['memory:rivalry', '[Rivalry]', 'crossed the street rather than share the corner'],
+    ['', '[Continuity]', 'kept the receipt in the kitchen drawer']
+  ];
+  for (const [tag, primary, text] of ROUTES) {
+    const FIX = [LEDGER_HDR, ['line', 'test.memory', '', text, '80', '', 'source:continuity' + (tag ? ',' + tag : ''), '', '']];
+    let drawn = null;
+    for (let s = 1; s <= 200 && !drawn; s++) {
+      const ctx = makeCtx([makeRow('POP-T0')], mulberry32(s * 7919), FIX);
+      generateCitizensEvents_(ctx);
+      drawn = emittedLines(ctx)[0].split('\n').find(l => l.indexOf(text) >= 0) || null;
+    }
+    assert((tag || 'bare source:continuity') + ' routes ' + primary,
+      drawn !== null && drawn.indexOf(primary) >= 0, drawn || 'never drawn in 200 seeds');
+  }
+}
+
 console.log('═══ engine.208 C5: the sports picker');
 {
   global.SPORTS_WEEK_TAG_ = require('../utilities/sportsWeekRecord.js').SPORTS_WEEK_TAG_;
@@ -245,6 +268,54 @@ console.log('═══ engine.208 C5: the sports picker');
   assert('a GAME-clock citizen never draws a spectator line', gameSports === 0, `hits=${gameSports}`);
   assert('fandom>=60 row reaches the fan', fanGateRight > 0, `hits=${fanGateRight}`);
   assert('fandom>=60 row never reaches fandom 40', fanGateWrong === 0, `hits=${fanGateWrong}`);
+}
+
+console.log('═══ engine.94 B.1: one bounded history build from fixtures');
+{
+  const owner = makeRow('POP-TEST-OWNER', { hood: 'Fixture Hood',
+    life: 'Y2C48 — [RoutineRetrenched] a synthetic closure' });
+  const fallback = makeRow('POP-TEST-FALLBACK', { hood: '' });
+  fallback[7] = '';
+  const ctx = makeCtx([owner, fallback], mulberry32(94), [LEDGER_HDR]);
+  ctx.config.folkMemoryWindow = 8;
+  ctx.ss.getSheetByName = name => name === 'LifeHistory_Log' ? {
+    getLastRow: () => 7,
+    getRange: () => ({ setValues: () => {} }),
+    getDataRange: () => ({ getValues: () => [
+      ['POPID', 'EventTag', 'Neighborhood', 'Cycle'],
+      ['POP-TEST-OWNER', 'Death|source:death', '', 93],
+      ['POP-TEST-OWNER', 'Critical|source:health', 'Wrong Log Hood', 100],
+      ['POP-TEST-OWNER', 'Death|source:death', '', 92],
+      ['POP-TEST-OWNER', 'Death|source:death', '', 89],
+      ['POP-TEST-OWNER', 'Death|source:death', '', 88],
+      ['POP-TEST-FALLBACK', 'Hospitalized|source:health', 'Fallback Fixture Hood', 99]
+    ] })
+  } : null;
+  ctx.cache = { getData: name => name === 'Judicial_Ledger' ? {
+    exists: true, values: [
+      ['POPID', 'Neighborhood', 'ArrestCycle'],
+      ['POP-TEST-OWNER', 'Fixture Hood', 99],
+      ['POP-TEST-OWNER', 'Fixture Hood', 90]
+    ]
+  } : null };
+  generateCitizensEvents_(ctx);
+  const m = ctx.summary.folkMemory;
+  assert('ledger hood wins over log; window excludes C92',
+    m.byHood['Fixture Hood'].Death === 1 && m.byHood['Fixture Hood'].Critical === 1 &&
+    !m.byHood['Wrong Log Hood']);
+  assert('blank ledger hood falls back to log Neighborhood',
+    m.byHood['Fallback Fixture Hood'].Hospitalized === 1);
+  assert('closure stamp and Judicial_Ledger arrest contribute once in window',
+    m.byHood['Fixture Hood'].RoutineRetrenched === 1 && m.byHood['Fixture Hood'].Charged === 1 &&
+    m.byCitizen['POP-TEST-OWNER'].Charged === 99);
+  const capped = makeCtx([makeRow('POP-TEST-OWNER', { hood: 'Fixture Hood' })], mulberry32(95), [LEDGER_HDR]);
+  capped.config.folkMemoryWindow = 52;
+  capped.ss = ctx.ss;
+  capped.cache = ctx.cache;
+  generateCitizensEvents_(capped);
+  assert('operator window above 12 is capped to 12 Cycles',
+    capped.summary.folkMemory.byHood['Fixture Hood'].Death === 3 &&
+    capped.summary.folkMemory.byHood['Fixture Hood'].Charged === 2);
 }
 
 console.log(`\n${passed} passed, ${failed} failed`);

@@ -72,8 +72,8 @@ const C106 = {
   'Ivy Hill': { sentiment: 0.36, retailVitality: 3.66, crimeIndex: 0.49, trajectoryMomentum: 5 }
 };
 const DISTRICTS = {
-  D1: ['West Oakland', 'Brooklyn'], D2: ['Downtown', 'Jack London', 'Chinatown'], D3: ['Fruitvale', 'San Antonio'],
-  D4: ['Glenview', 'Dimond', 'Ivy Hill'], D5: ['Baylight District', 'East Oakland'], D6: ['Piedmont Ave'],
+  D1: ['West Oakland', 'Brooklyn'], D2: ['Downtown', 'Jack London', 'Chinatown', 'Baylight District'], D3: ['Fruitvale', 'San Antonio'],
+  D4: ['Glenview', 'Dimond', 'Ivy Hill'], D5: ['East Oakland'], D6: ['Piedmont Ave'],
   D7: ['Temescal', 'Rockridge', 'KONO'], D8: ['Adams Point', 'Grand Lake', 'Eastlake', 'Lake Merritt'], D9: ['Laurel', 'Uptown']
 };
 const S106 = { neighborhoodState: C106 };
@@ -89,7 +89,7 @@ console.log('═══ B. City middle and district composite (§15: bands relati
   const d5 = A.districtStateScore_(S106, DISTRICTS.D5, mid);
   check('B3 Temescal/Rockridge/KONO read above the middle', d7 > 0.5, String(d7));
   check('B4 West Oakland/Brooklyn (low retail, high crime) read below the middle', d1 < 0, String(d1));
-  check('B5 Baylight/East Oakland read below D7', d5 < d7, d5 + ' vs ' + d7);
+  check('B5 East Oakland reads below D7', d5 < d7, d5 + ' vs ' + d7);
   const sum = Object.keys(DISTRICTS).reduce((a, d) => a + A.districtStateScore_(S106, DISTRICTS[d], mid), 0);
   check('B6 the districts roughly balance around the middle (|mean| < 0.5)', Math.abs(sum / 9) < 0.5, String(sum / 9));
   check('B7 composite is clamped to [-2, 2]', A.hoodStateComposite_({ sentiment: 99, retailVitality: 99, crimeIndex: -99, trajectoryMomentum: 99 }, mid) === 2);
@@ -113,7 +113,7 @@ console.log('═══ B2. The reader test — every seat\'s target on the live 
   check('R1 every seat in a positive city sits above 50', Object.values(target).every(t => t > 50), JSON.stringify(target));
   check('R2 the whole council sits inside 55..70 — no seat is a cliff', Object.keys(DISTRICTS).every(d => target[d] >= 55 && target[d] <= 70), JSON.stringify(target));
   check('R3 Ashford (Temescal/Rockridge/KONO) is the top of the council', Object.keys(DISTRICTS).every(d => target[d] <= target.D7), JSON.stringify(target));
-  check('R4 Baylight/East Oakland (a $2.1B site + the city\'s investment) is NOT the bottom by a cliff — within 8 of the median', Math.abs(target.D5 - 61) <= 8, String(target.D5));
+  check('R4 East Oakland (the city\'s investment) is NOT the bottom by a cliff — within 8 of the median', Math.abs(target.D5 - 61) <= 8, String(target.D5));
   check('R5 West Oakland/Brooklyn (sentiment above the city mean, retail lowest) reads mid-50s, not a failure', target.D1 >= 55, String(target.D1));
   check('R6 the Mayor of a +0.37 city reads low 60s', target.MAYOR >= 60 && target.MAYOR <= 66, String(target.MAYOR));
 }

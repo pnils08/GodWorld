@@ -37,7 +37,8 @@
  *
  * Canon source: docs/canon/INSTITUTIONS.md §Neighborhoods, as reconciled in
  * docs/plans/2026-08-15-district-map-reconciliation.md §4 (Coliseum + Elmhurst
- * retired to the Baylight successor, KONO at D7, Baylight at D5).
+ * retired, KONO at D7; Baylight moved D5→D2 2026-10-03 — it is harbor waterfront
+ * beside Jack London, not the Coliseum site).
  */
 
 require('/root/GodWorld/lib/env');
@@ -66,8 +67,8 @@ const ADD_ROWS = process.argv.includes('--add-rows');
 // This was 4 hand-listed S215 mappings with the note "only four are
 // canon-authorized today; the rest stay blank until canon expands." Canon has
 // since expanded and the map was reconciled in civic.18: Coliseum and Elmhurst
-// removed (INSTITUTIONS §336 makes Baylight the successor on the same land),
-// KONO settled at D7, Baylight at D5. lib/districtMap.js is the Node-side mirror
+// removed (no map row), KONO settled at D7; Baylight later moved D5→D2 (harbor
+// waterfront beside Jack London, 2026-10-03). lib/districtMap.js is the Node-side mirror
 // of that reconciliation, so deriving here keeps one source instead of a fifth copy.
 //
 // Deliberately NOT reading Neighborhood_Map.District as the source: this script

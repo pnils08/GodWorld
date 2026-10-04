@@ -221,24 +221,24 @@ happen in the sim, not does it remember more.
 
 ### B.1 Fields — the past becomes addressable (engine-sheet builds; codex may draft against this spec)
 
-One pass per Cycle over the `LifeHistory_Log` rows already read at `generateCitizensEvents.js:296`, window = `folkMemoryWindow` Cycles (World_Config, default **8**, hard-capped at the log's 12), producing `S.folkMemory = { byHood: { hood: { tag: count } }, byCitizen: { POPID: { tag: lastCycle } } }` for a **locked tag set** (the DSL vocab rule, S289: a typo narrows, never widens). Then the DSL table and the scopes gain:
+One pass per Cycle inside the whole-tab `LifeHistory_Log` read the generator already does (`generateCitizensEvents.js:307-321`, `getDataRange().getValues()` — measured 2026-10-04: whole tab, not a tail; B.1 extends that loop, no new read), window = `folkMemoryWindow` Cycles (World_Config, default **8**, hard-capped at the log's 12), producing `S.folkMemory = { byHood: { hood: { tag: count } }, byCitizen: { POPID: { tag: lastCycle } } }` for a **locked tag set** (the DSL vocab rule, S289: a typo narrows, never widens). **Hood is resolved from the ledger row by POPID** (`ctx.ledger` is in hand), with the log's `Neighborhood` only as fallback: 1,198 of 20,573 log rows carry a blank hood, and the writers that matter are the blank ones — `Death` 8/8, `Health` 22/35, every `Career-*` line. Then the DSL table and the scopes gain:
 
 | Field | Kind | Reads | Null (fails the term) when |
 |---|---|---|---|
-| `bereaved` | num | Cycles since the citizen's grief register was set (`MemoryRegisters.grief`, Track A) — the survivor's carrier, not the deceased's row | no grief in window |
-| `charged` | num | Cycles since the citizen's last judicial line (the tag `judicialLifecycle.js` writes — es reads it off the DIAL_MAP, not this table) | none in window |
+| `bereaved` | num | Cycles since `DialState.grief.l` — a stamp the Track A grief writer (`generationalEventsEngine.js`, the `MemoryRegisters.grief` envelope) adds in B.1, same shape as `debtDefault {l}`. The register itself clears after `griefDurationCycles` 3 / `griefHolidayDurationCycles` 5, so it cannot carry a year; the stamp can. Survivor's row, never the deceased's | never bereaved |
+| `charged` | num | Cycles since the citizen's latest `Judicial_Ledger` row (`ArrestCycle`; the tab `judicialLifecycle.js` already reads) — not the log: the arrest life line's tag is not a bracket line in that writer, and the ledger row carries Neighborhood, StatusNow, Outcome | no case |
 | `defaulted` | num | Cycles since `DialState.debtDefault.l` | never defaulted |
 | `rival` | flag | an ACTIVE `rivalry` or `sports_rival` bond on this citizen | — |
 | `hooddeaths` | num | `Death` rows in the citizen's hood, window | hood has no log rows → 0, not null (an empty hood is a quiet hood) |
-| `hoodcharged` | num | judicial-tag rows in the hood, window | same |
+| `hoodcharged` | num | `Judicial_Ledger` rows with `Neighborhood` = hood and `ArrestCycle` in window | same |
 | `hoodhospital` | num | `Hospitalized` + `Critical` rows in the hood, window | same |
-| `hoodclosed` | num | business-closure owner lines in the hood (the tag `applyBusinessDynamics.js:317` writes), window | same |
+| `hoodclosed` | num | `[RoutineRetrenched]` lines (`applyBusinessDynamics.js:349`) in the `LifeHistory` column of ledger rows in the hood whose `Y<n>C<m>` stamp falls in the window — that writer appends to the column only, never to the log | same |
 
 Rules: numeric, so a row author sets the bar (`hoodcharged>=4`, `charged<=3`); the count is of **tracked** lines, so bars are tracked-scale (a hood with 4 charges in 8 Cycles is loud — the ledger is the 0.25% subset, never a world denominator). No new tab, no new column, no new store: `S.folkMemory` is rebuilt every Cycle from the log and dies with the run.
 
 ### B.2 Content — what the memory makes happen (research-build authors; bench first, PROD rows ride the code deploy)
 
-~24 rows in `Event_Content_Ledger`, pools `memory.hood.*` and `memory.own.*`, each with a source tag that already routes dials (`primaryFromTags`, `generateCitizensEvents.js:804-835` — es confirms which source carries which dial move before the rows are seeded; the row's *effect* is that routing, nothing new). Shape, not final text: a hood four charges deep draws "still checks the lock twice since the spring the block got loud" (`hoodcharged>=4`, source routed to the wary side); a citizen three Cycles past a court date draws "kept the receipt from the court clerk in the kitchen drawer" (`charged<=3`); a defaulted citizen a year on draws the long version (`defaulted>=40`); a bereaved household at the one-year mark (`bereaved>=50; bereaved<=53`). **The test is the ruling's:** each row moves a dial or seeds a bond when drawn; a row that only remembers is cut.
+~24 rows in `Event_Content_Ledger`, pools `memory.hood.*` and `memory.own.*`, each with a source tag that already routes dials (`primaryFromTags`, `generateCitizensEvents.js:804-835` — es confirms which source carries which dial move before the rows are seeded; the row's *effect* is that routing, nothing new). Shape, not final text: a hood four charges deep draws "still checks the lock twice since the spring the block got loud" (`hoodcharged>=4`, source routed to the wary side); a citizen three Cycles past a court date draws "kept the receipt from the court clerk in the kitchen drawer" (`charged<=3`); a defaulted citizen a year on draws the long version (`defaulted>=40`); a bereaved household at the one-year mark (`bereaved>=50; bereaved<=53`). **Bars come from the bench, not the plan:** named judicial lines will be fractional at first, so every seeded row's threshold is set from a post-C110 bench histogram of `S.folkMemory`, never authored cold. **The test is the ruling's:** each row moves a dial or seeds a bond when drawn; a row that only remembers is cut.
 
 ### B.3 Grudge seed — one named loss makes one named bond (engine-sheet)
 
@@ -251,8 +251,8 @@ When an election seats a challenger over a tracked incumbent, or an incumbent ho
 
 ### B.5 Weakest assumptions, attacked
 
-1. *The log read at `:296` is the whole tab.* If it is a tail read, B.1 adds one full-column read (`Cycle`, `POPID`, `EventTag`, `Neighborhood`) — four columns, ≤ 20k rows, inside the Apps Script budget engine.279 just widened. es measures before building on it.
-2. *Tag names.* `Death`, `Hospitalized`, `Critical` are measured; judicial and closure tags are read from their writers at build time, never from this table.
+1. *The log read at `:296` is the whole tab.* **Resolved 2026-10-04:** `getDataRange().getValues()` at `:307` — whole tab, in memory; B.1 is one more branch in that loop.
+2. *Tag names.* `Death`, `Hospitalized`, `Critical` measured on the log; closures are `[RoutineRetrenched]` in the column; charges come from `Judicial_Ledger`, not a tag at all.
 3. *Thin today.* With 3 serious transgressions in 12 Cycles the hood fields barely fire before C110's systems warm up. That is correct behaviour (SIM_DOCTRINE §15 — a bar the input never crosses is inert only if the input can never cross it; here it crosses from next week), not a reason to lower bars.
 
 ### B.6 Sim calls for the builder

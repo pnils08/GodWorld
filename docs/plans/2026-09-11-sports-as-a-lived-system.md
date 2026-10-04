@@ -480,6 +480,8 @@ Sports stops being a lane and becomes a horizontal. A cycle's sports emits seeds
 - Bench: a synthetic C119 feed week (A's home week, strong signed; Oaks away) on SANDBOX 0908 (`&expect=118`). Story_Seed_Deck C119: an ECONOMIC seed at Jack London whose What leads with the week's spending (not `carryover`) and whose Businesses list the Jack London / Downtown bars; one CIVIC `game-day-crowds` seed at Jack London; the citywide SPORTS seed no longer carries the bars line. Ripple_Ledger: no `Oakland_Sports_Feed.bars` row; the SPORTS_WEEK row is business-scoped. 0 new Engine_Errors.
 - Full suite green; `auditFunctionCollisions` 0. agy diff review before PROD. PROD rides 204/205's push after the C110 live fire (2026-10-04).
 
+**Status (2026-10-04 02:57):** BUILT `d7ac5fff`, unit-proven (every new assertion fails on the old code), suite 284/284, **BENCH-PROVEN** C119 on SANDBOX 0908 @200 — every acceptance line above read back as written (economic seed at Jack London leads with the week's spending, 10 bars listed; one CIVIC game-day seed at the same hood, .16 major; bars line gone from the citywide SPORTS seed; 0 `Oakland_Sports_Feed.bars` rows; 0 new Engine_Errors). agy diff review next; PROD after the C110 live fire.
+
 ### Task 7 — engine.194: reprice sentiment
 Only after 1-4. Magnitude is downstream of the contract. Carries the `generateCitizensEvents.js:1707` saturation fix (`min(1,abs(boost)/0.15)`).
 **Builder 2026-09-14: folded to codex.** The open sim question on the ROLLOUT row (title magnitude vs the ±0.20 edition / ±0.15 initiative siblings) is decided here as part of the contract work, not posed separately. Owner codex; engine-sheet lands and benches the cut.
@@ -568,3 +570,4 @@ engine.210 LIVE on PROD @97; engine.202 LIVE on PROD @98 with the `WeekRecord` c
   engine.208 comes first or with it.
 - 2026-10-04 (engine-sheet) — Task 6 build card: engine.190's causeType copy at the bars (G1 → economic-event) and game-day transit (G2 → transit-event) sites; E1/E2 already cross; G3 civic lands with Task 9; `RIPPLE_LANE_MAP` transit-event fold. Pre-review (codex).
 - 2026-10-04 (engine-sheet) — Task 6 card revised after codex HOLD (8 findings folded): bars ride the economy's SPORTS_WEEK ripple (bizIds, one gate), transit one ripple per franchise home week at venue[0], builder lets a birth lead over a carryover; limits and rejected alternatives recorded.
+- 2026-10-04 02:57 (engine-sheet) — Task 6 built d7ac5fff and bench-proven C119 @200; status line under the card.

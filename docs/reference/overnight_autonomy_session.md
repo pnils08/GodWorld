@@ -127,6 +127,8 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 
 02:20 rb PURGE §7 (night of 2026-10-04; git keeps history). Live C110 NOT fired (cycleCount 109). es idle, no wake, unsent builder draft in its prompt box — not touched. codex/agy idle at prompt; kimi OUT.
 02:20 rb WAKE set (recurring :26).
+02:30 rb COMMIT civic.43 school board plan + ROLLOUT row + index; §6 01:21 ANSWERED; pipeline.64 → done-pending-archive (Sat sweep acceptance met).
+02:30 rb CHECK es WORKING (booted, wake :41, codex claimed by es for engine.206 card review).
 02:21 es WAKE set (recurring :41, job 8440c803). es on engine.206: build card written to sports plan Task 6 (pre-review). CLAIM codex es engine.206 card review → docs/for-claude-review/2026-10-04-codex-engine206-card-review.md
 
 ## 8. Stop rule and usage

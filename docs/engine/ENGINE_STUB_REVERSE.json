@@ -2,7 +2,7 @@
   "generated": "2026-10-04",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 180,
-  "functionsMapped": 1604,
+  "functionsMapped": 1609,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -1840,6 +1840,24 @@
         "phase10-persistence/buildCyclePacket.js::buildCyclePacket_"
       ]
     },
+    "franchiseWeight": {
+      "writers": [
+        "phase01-config/loadPreviousEvening.js::seedCarriedFranchiseWeight_"
+      ],
+      "readers": [
+        "phase01-config/loadPreviousEvening.js::seedCarriedFranchiseWeight_",
+        "phase02-world-state/applySportsSeason.js::applySportsSeason_",
+        "phase09-digest/finalizeCycleState.js::savePreviousCycleState_"
+      ]
+    },
+    "franchiseWeightCarry": {
+      "writers": [
+        "phase01-config/loadPreviousEvening.js::seedCarriedFranchiseWeight_"
+      ],
+      "readers": [
+        "utilities/sportsWeekRecord.js::driftFranchiseWeight_"
+      ]
+    },
     "activityObservations": {
       "writers": [
         "phase01-config/loadPreviousEvening.js::seedCarriedActivityObservations_",
@@ -2209,7 +2227,8 @@
         "phase06-analysis/economicRippleEngine.js::calculateNeighborhoodEconomies_",
         "phase06-analysis/economicRippleEngine.js::detectCalendarRipples_",
         "phase07-evening-media/cityEveningSystems.js::buildCityEveningSystems_",
-        "phase08-v3-chicago/v3NeighborhoodWriter.js::saveV3NeighborhoodMap_"
+        "phase08-v3-chicago/v3NeighborhoodWriter.js::saveV3NeighborhoodMap_",
+        "utilities/sportsWeekRecord.js::driftFranchiseWeight_"
       ]
     },
     "weatherEvents": {
@@ -3131,6 +3150,14 @@
       "readers": [
         "phase05-citizens/applyBusinessDynamics.test.js::ctxWith",
         "phase06-analysis/economicRippleEngine.js::detectCalendarRipples_"
+      ]
+    },
+    "sportsWeekReach": {
+      "writers": [
+        "phase05-citizens/applyGameNightMoments.js::applyGameNightMoments_"
+      ],
+      "readers": [
+        "utilities/sportsWeekRecord.js::driftFranchiseWeight_"
       ]
     },
     "namedSpotlights": {
@@ -4488,6 +4515,7 @@
         "phase01-config/engine94SheetContract.js::ensureEngine176Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine178Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine192Config_",
+        "phase01-config/engine94SheetContract.js::ensureEngine209Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine213Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine221Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine254Config_",

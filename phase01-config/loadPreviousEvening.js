@@ -283,6 +283,7 @@ function loadPreviousCycleState_(ctx) {
       seedCarriedActivityObservations_(ctx, S);   // engine.228
       seedCarriedCityDynamics_(ctx, S);           // engine.195
       seedCarriedRelocationFlow_(ctx, S);         // engine.249
+      seedCarriedFranchiseWeight_(ctx, S);        // engine.209
       if (typeof seedCarriedMediaEffects_ === 'function') seedCarriedMediaEffects_(ctx, S); // G-EC59
     } else {
       S.previousCycleState = null;
@@ -350,6 +351,36 @@ function seedCarriedNeighborhoodEconomies_(ctx, S) {
   }
 }
 
+
+/**
+ * engine.209: each franchise's weight on the city — derived, drifting, carried on its OWN key
+ * (PREV_FRANCHISE_WEIGHT_JSON = { f: { w, weeks, fans } }, written by Phase 9's
+ * driftFranchiseWeight_). Publishes S.franchiseWeight = { f: w } for Phase 2's week reader and
+ * S.franchiseWeightCarry (the blob) for Phase 9's drift. No blob (first fire on this code, or a
+ * fresh bench) → nothing published; the reader falls back to the ruled constants.
+ */
+function seedCarriedFranchiseWeight_(ctx, S) {
+  if (S.franchiseWeight && Object.keys(S.franchiseWeight).length) return;
+  var json = null;
+  try { json = loadCarryForwardBlob_(ctx, 'PREV_FRANCHISE_WEIGHT_JSON', carryForwardCycleId_(ctx)); } catch (e) { json = null; }
+  if (!json) return;
+  var carried;
+  try { carried = JSON.parse(json); } catch (e) { return; }
+  if (!carried || typeof carried !== 'object') return;
+  var weights = {}, n = 0;
+  for (var f in carried) {
+    if (!carried.hasOwnProperty(f) || !carried[f]) continue;
+    var w = Number(carried[f].w);
+    if (!isFinite(w) || w < 0) continue;
+    weights[f] = w;
+    n++;
+  }
+  if (n) {
+    S.franchiseWeight = weights;
+    S.franchiseWeightCarry = carried;
+    Logger.log('seedCarriedFranchiseWeight_: ' + n + ' franchise weight(s) carried: ' + JSON.stringify(weights));
+  }
+}
 
 /**
  * engine.228: Phase 2's activity history — the 6-Cycle baseline every engine.185/188

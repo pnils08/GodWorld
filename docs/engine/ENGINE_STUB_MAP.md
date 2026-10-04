@@ -107,6 +107,9 @@
 - **ensureEngine221Config_(ss)**
   Sheets: World_Config
 
+- **ensureEngine209Config_(ss)**
+  Sheets: World_Config
+
 - **ensureEngine275Config_(ss)**
   Sheets: World_Config
 
@@ -291,6 +294,10 @@
   Reads: S.neighborhoodEconomies
   Writes: S.neighborhoodEconomies
 
+- **seedCarriedFranchiseWeight_(ctx, S)**
+  Reads: S.franchiseWeight
+  Writes: S.franchiseWeight, S.franchiseWeightCarry
+
 - **seedCarriedActivityObservations_(ctx, S)**
   Reads: S.activityObservations
   Writes: S.activityObservations
@@ -396,7 +403,7 @@
 
 ### applySportsSeason.js
 - **applySportsSeason_(ctx)**
-  Reads: S.activeSports, S.baylightOpenings, S.cycle, S.cycleId, S.sportsSeason, S.sportsSeasonByTeam, S.sportsWeek
+  Reads: S.activeSports, S.baylightOpenings, S.cycle, S.cycleId, S.franchiseWeight, S.sportsSeason, S.sportsSeasonByTeam, S.sportsWeek
   Writes: S.activeSports, S.baylightOpenings, S.sportsAtmosphereEnabled, S.sportsCity, S.sportsFeedEntries, S.sportsFeedSeasonType, S.sportsSeason, S.sportsSeasonByTeam, S.sportsSeasonOakland, S.sportsSource, S.sportsWeek, S.sportsZones
   Config: ctx.config.sportsStateOakland, ctx.config.sportsState_Oakland
 
@@ -407,7 +414,7 @@
 
 - **sportsLensDepth_(raw)**
 
-- **deriveSportsIntensity_(weeks, history, lensHistory, openings, currentCycle)**
+- **deriveSportsIntensity_(weeks, history, lensHistory, openings, currentCycle, weights)**
 
 - **getColVal_(row, colIdx)**
 
@@ -1145,6 +1152,7 @@
 
 - **applyGameNightMoments_(ctx)**
   Reads: S.cycleId, S.sportsFeedEntries, S.sportsWeek
+  Writes: S.sportsWeekReach
   Config: ctx.config.cycleCount
   Sheets: LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)
@@ -3263,7 +3271,7 @@
   Reads: S.previousCityDynamics
 
 - **savePreviousCycleState_(ctx)**
-  Reads: S.neighborhoodEconomies, S.previousCycleState
+  Reads: S.franchiseWeight, S.neighborhoodEconomies, S.previousCycleState
 
 - **compactApprovalNeighborhoodEffects_(bus)**
 
@@ -4408,9 +4416,16 @@
 
 - **sportsReach_(lens, phase)**
 
-- **sportsUnsigned_(franchise, g, depth)**
+- **sportsFranchiseWeight_(franchise, weights)**
 
-- **addSportsWeekIntensity_(franchise, wk, depth, phase, venue, pastUnsigned)**
+- **sportsUnsigned_(franchise, g, depth, weights)**
+
+- **franchiseWeightConfig_(ctx)**
+
+- **driftFranchiseWeight_(ctx, S)**
+  Reads: S.franchiseWeightCarry, S.sportsWeek, S.sportsWeekReach
+
+- **addSportsWeekIntensity_(franchise, wk, depth, phase, venue, pastUnsigned, weights)**
 
 - **buildSportsCity_(weeks, pastCity)**
 
@@ -4501,4 +4516,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1604
+**Functions mapped:** 1609

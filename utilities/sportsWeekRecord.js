@@ -193,21 +193,100 @@ function sportsReach_(lens, phase) {
   return SPORTS_REACH_['off-season'];
 }
 
+// engine.209: the franchise's weight today — the carried, drifting value when the Cycle has one
+// (S.franchiseWeight, seeded at Phase 1 from PREV_FRANCHISE_WEIGHT_JSON), else the ruled start.
+function sportsFranchiseWeight_(franchise, weights) {
+  if (weights && weights.hasOwnProperty(franchise)) {
+    var w = Number(weights[franchise]);
+    if (isFinite(w) && w >= 0) return w;
+  }
+  return SPORTS_FRANCHISE_WEIGHT_[franchise] || 0;
+}
+
 // one franchise-week's unsigned weight on the city: volume × stakes × franchise weight
-function sportsUnsigned_(franchise, g, depth) {
+function sportsUnsigned_(franchise, g, depth, weights) {
   var vol = g > 0 ? 1 - Math.exp(-g / SPORTS_VOL_GAMES_) : 0;
-  return vol * (Math.max(0, depth) / SPORTS_DEPTH_MAX_) * (SPORTS_FRANCHISE_WEIGHT_[franchise] || 0);
+  return vol * (Math.max(0, depth) / SPORTS_DEPTH_MAX_) * sportsFranchiseWeight_(franchise, weights);
+}
+
+// engine.209 dials — World_Config keys (self-arm contract, engine94SheetContract.js). Absent
+// keys (a harness with no config) read the defaults; a present-but-unusable key is an
+// Engine_Errors row and no drift this Cycle (the engine.272 shape — never a throw Phase 9 swallows).
+var FRANCHISE_WEIGHT_DEFAULTS_ = { resultRate: 0.02, tenureRate: 0.004, fanRate: 0.01, cap: 1.5, floor: 0.1 };
+var FRANCHISE_WEIGHT_KEYS_ = { resultRate: 'franchiseWeightResultRate', tenureRate: 'franchiseWeightTenureRate',
+  fanRate: 'franchiseWeightFanRate', cap: 'franchiseWeightCap', floor: 'franchiseWeightFloor' };
+function franchiseWeightConfig_(ctx) {
+  var cfg = {}, bad = [];
+  for (var k in FRANCHISE_WEIGHT_KEYS_) {
+    if (!FRANCHISE_WEIGHT_KEYS_.hasOwnProperty(k)) continue;
+    var raw = ctx && ctx.config ? ctx.config[FRANCHISE_WEIGHT_KEYS_[k]] : undefined;
+    if (raw === undefined) { cfg[k] = FRANCHISE_WEIGHT_DEFAULTS_[k]; continue; }
+    var n = (raw === '' || raw === null || typeof raw === 'boolean') ? NaN : Number(raw);
+    if (!isFinite(n) || n < 0) bad.push(FRANCHISE_WEIGHT_KEYS_[k] + '=' + String(raw));
+    else cfg[k] = n;
+  }
+  if (!bad.length && cfg.floor > cfg.cap) bad.push('franchiseWeightFloor ' + cfg.floor + ' > franchiseWeightCap ' + cfg.cap);
+  if (bad.length) {
+    var err = new Error('engine.209: World_Config franchise weight dials not usable (' + bad.join(', ') + ') — no weight drift this Cycle');
+    if (typeof logEngineError_ === 'function') logEngineError_(ctx, 'Phase9-FranchiseWeight', err);
+    if (typeof Logger !== 'undefined') Logger.log(err.message);
+    return null;
+  }
+  return cfg;
+}
+
+// engine.209 (Mike S446: the weight drifts on results, tenure and attendance; derived, never
+// authored). Phase 9, after the week is known. For every franchise that PLAYED this Cycle:
+//   result     = resultRate × surprise        (beat its own expectation → up; fell short → down)
+//   tenure     = tenureRate × (1 − w / cap)   (climbs by playing; slower near the cap)
+//   attendance = fanRate × clamp((fansNow − trailing fans) / max(trailing, 1), −1, 1)
+// A franchise with no game carries unchanged — a dynasty's weight is not lost over a winter.
+// Returns the blob to save ({ f: { w, weeks, fans } }); null when the dials are unusable.
+function driftFranchiseWeight_(ctx, S) {
+  var cfg = franchiseWeightConfig_(ctx);
+  if (!cfg) return null;
+  var carry = (S && S.franchiseWeightCarry) || {};
+  var weeks = (S && S.sportsWeek) || {};
+  var reach = (S && S.sportsWeekReach) || {};
+  var out = {};
+  var names = {};
+  for (var f in SPORTS_FRANCHISE_WEIGHT_) if (SPORTS_FRANCHISE_WEIGHT_.hasOwnProperty(f)) names[f] = true;
+  for (var c in carry) if (carry.hasOwnProperty(c)) names[c] = true;
+  for (var name in names) {
+    if (!names.hasOwnProperty(name)) continue;
+    var prev = carry[name] || {};
+    var w = isFinite(Number(prev.w)) && prev.w !== undefined ? Number(prev.w) : (SPORTS_FRANCHISE_WEIGHT_[name] || 0);
+    var played = Number(prev.weeks) || 0;
+    var fans = Number(prev.fans) || 0;
+    var wk = weeks[name];
+    if (wk && wk.g > 0) {
+      var surprise = Number(wk.surprise) || 0;
+      var fansNow = reach[name] ? (Number(reach[name].fan) || 0) : 0;
+      var result = cfg.resultRate * surprise;
+      var tenure = cfg.tenureRate * Math.max(0, 1 - w / cfg.cap);
+      var attendance = 0;
+      if (fans > 0 || fansNow > 0) {
+        var rel = (fansNow - fans) / Math.max(fans, 1);
+        attendance = cfg.fanRate * Math.max(-1, Math.min(1, rel));
+      }
+      w = Math.max(cfg.floor, Math.min(cfg.cap, w + result + tenure + attendance));
+      played += 1;
+      fans = fans > 0 ? 0.8 * fans + 0.2 * fansNow : fansNow;
+    }
+    out[name] = { w: Math.round(w * 10000) / 10000, weeks: played, fans: Math.round(fans * 100) / 100 };
+  }
+  return out;
 }
 
 // Adds vol/stakes/reach/weight/unsigned/signed/venueShare/venue/median onto a 208 week.
 // depth/phase: the caller's canonical reading of wk.lens; venue: the franchise's own
 // stadium hoods; pastUnsigned: the franchise's earlier game weeks' unsigned (newest first).
-function addSportsWeekIntensity_(franchise, wk, depth, phase, venue, pastUnsigned) {
+function addSportsWeekIntensity_(franchise, wk, depth, phase, venue, pastUnsigned, weights) {
   wk.depth = depth;
   wk.vol = wk.g > 0 ? 1 - Math.exp(-wk.g / SPORTS_VOL_GAMES_) : 0;
   wk.stakes = Math.max(0, depth) / SPORTS_DEPTH_MAX_;
   wk.reach = sportsReach_(wk.lens, phase);
-  wk.weight = SPORTS_FRANCHISE_WEIGHT_[franchise] || 0;
+  wk.weight = sportsFranchiseWeight_(franchise, weights);   // engine.209: carried + drifting
   wk.unsigned = wk.vol * wk.stakes * wk.weight;
   wk.signed = wk.unsigned * wk.surprise;
   wk.venueShare = wk.g > 0 ? wk.h / wk.g : 0;
@@ -294,6 +373,10 @@ if (typeof module !== 'undefined' && module.exports) {
     SPORTS_FRANCHISE_WEIGHT_: SPORTS_FRANCHISE_WEIGHT_,
     sportsReach_: sportsReach_,
     sportsUnsigned_: sportsUnsigned_,
+    sportsFranchiseWeight_: sportsFranchiseWeight_,
+    franchiseWeightConfig_: franchiseWeightConfig_,
+    driftFranchiseWeight_: driftFranchiseWeight_,
+    FRANCHISE_WEIGHT_DEFAULTS_: FRANCHISE_WEIGHT_DEFAULTS_,
     addSportsWeekIntensity_: addSportsWeekIntensity_,
     buildSportsCity_: buildSportsCity_,
     sportsBandAtLeast_: sportsBandAtLeast_,

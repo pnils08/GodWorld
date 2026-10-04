@@ -112,8 +112,9 @@ function applySportsSeason_(ctx) {
     S.baylightOpenings = deriveBaylightOpenings_(ctx, currentCycle);
     S.sportsZones = deriveSportsZones_(S.baylightOpenings);
     // engine.204/205: intensity on each franchise-week + the city's band (needs the venues)
+    // engine.209: at each franchise's carried weight (Phase 1 seed), the ruled constants when none
     S.sportsCity = deriveSportsIntensity_(S.sportsWeek, ctx._sportsWeekHistory || {},
-      ctx._sportsLensHistory || {}, S.baylightOpenings, currentCycle);
+      ctx._sportsLensHistory || {}, S.baylightOpenings, currentCycle, S.franchiseWeight || null);
     // Unchanged and deliberate: the feed never licenses invented atmosphere.
     S.sportsAtmosphereEnabled = false;
 
@@ -327,7 +328,7 @@ function sportsLensDepth_(raw) {
   return SPORTS_PHASE_DEPTH_[canonicalSportsPhase_(raw)] || 0;
 }
 
-function deriveSportsIntensity_(weeks, history, lensHistory, openings, currentCycle) {
+function deriveSportsIntensity_(weeks, history, lensHistory, openings, currentCycle, weights) {
   var pastByFranchise = {}, cityByCycle = {};
   for (var f in history) {
     if (!history.hasOwnProperty(f)) continue;
@@ -342,7 +343,7 @@ function deriveSportsIntensity_(weeks, history, lensHistory, openings, currentCy
     var past = [];
     for (var i = 0; i < cycles.length; i++) {
       var g = history[f][cycles[i]].w + history[f][cycles[i]].l;
-      var u = sportsUnsigned_(f, g, sportsLensDepth_((lensHistory[f] || {})[cycles[i]]));
+      var u = sportsUnsigned_(f, g, sportsLensDepth_((lensHistory[f] || {})[cycles[i]]), weights);
       past.push(u);
       cityByCycle[cycles[i]] = (cityByCycle[cycles[i]] || 0) + u;
     }
@@ -352,7 +353,7 @@ function deriveSportsIntensity_(weeks, history, lensHistory, openings, currentCy
     if (!weeks.hasOwnProperty(t)) continue;
     var venue = (openings && openings[t] !== undefined) ? [BAYLIGHT_ZONE_] : LEGACY_SPORTS_ZONES_.slice();
     addSportsWeekIntensity_(t, weeks[t], sportsLensDepth_(weeks[t].lens), canonicalSportsPhase_(weeks[t].lens),
-      venue, pastByFranchise[t] || []);
+      venue, pastByFranchise[t] || [], weights);
   }
   var cityCycles = Object.keys(cityByCycle).map(Number).sort(function(x, y) { return y - x; })
     .slice(0, SPORTS_EXPECT_WINDOW_);

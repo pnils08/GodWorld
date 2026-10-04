@@ -199,6 +199,7 @@ function applyGameNightMoments_(ctx) {
   var logRows = [];
   var touched = {};
   var counts = { named: 0, staff: 0, fan: 0 };
+  var reach = {};   // engine.209: per franchise { staff, fan } — the week's attendance input
   var unresolved = [];
 
   function write(ri, tag, text, logTag) {
@@ -260,9 +261,14 @@ function applyGameNightMoments_(ctx) {
         write(rr, SPORTS_WEEK_TAG_[cls], pick(SPORTS_WEEK_POOLS[who][cls]),
           SPORTS_WEEK_TAG_[cls] + '|source:sports|' + who + 'Week|team:' + tm + '|week:' + cls);
         counts[who]++;
+        if (!reach[tm]) reach[tm] = { staff: 0, fan: 0 };
+        reach[tm][who]++;
       }
     }
   }
+  // engine.209: how far each franchise's week reached its own people — Phase 9 drifts the
+  // franchise weight on the fan count relative to the franchise's own trailing mean.
+  ctx.summary.sportsWeekReach = reach;
 
   // engine.208 M1: a feed name that matches no living citizen is named, not dropped silently —
   // a typo on the sheet ("Mark Aiken") or a sports-layer player with no POPID.

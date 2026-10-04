@@ -528,6 +528,17 @@ function savePreviousCycleState_(ctx) {
     if (relocFlow) {
       saveCarryForwardBlob_(ctx, 'PREV_RELOC_FLOW_JSON', JSON.stringify(relocFlow), snapshot.cycle);
     }
+    // engine.209: the franchise weight drifts on the week just played (results, tenure, fan
+    // reach) and rides its OWN key (~2 franchises, ~120 chars). Phase 1 seeds S.franchiseWeight
+    // from it; Phase 2 reads the week at that weight. Null = dials unusable, nothing saved.
+    if (typeof driftFranchiseWeight_ === 'function') {
+      var franchiseWeights = driftFranchiseWeight_(ctx, S);
+      if (franchiseWeights) {
+        var fwJson = JSON.stringify(franchiseWeights);
+        saveCarryForwardBlob_(ctx, 'PREV_FRANCHISE_WEIGHT_JSON', fwJson, snapshot.cycle);
+        Logger.log('savePreviousCycleState_: Saved franchise weights ' + fwJson + ' for cycle ' + snapshot.cycle);
+      }
+    }
     var cityDyn = compactCityDynamicsCarrier_(S);
     if (cityDyn) {
       var cityDynJson = JSON.stringify(cityDyn);

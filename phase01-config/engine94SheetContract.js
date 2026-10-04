@@ -248,6 +248,32 @@ function ensureEngine221Config_(ss) {
   return { configSeeded: plan.additions.length };
 }
 
+// engine.209 (Mike S446, ruled starts 2026-10-03 §4) — the franchise weight drifts on results,
+// tenure and attendance. Same self-arm contract; driftFranchiseWeight_ reads the five each
+// Cycle, absent = these defaults, unusable = Engine_Errors row and no drift that Cycle.
+var ENGINE209_CONFIG_SEEDS = [
+  ['franchiseWeightResultRate', 0.02, 'engine.209 weight moved per game week by the franchise beating (+) or missing (−) its own expectation: rate × surprise, surprise in −1..1', 0, 1, false],
+  ['franchiseWeightTenureRate', 0.004, 'engine.209 weight gained per game week just by playing, scaled by how far below the cap the franchise sits (rate × (1 − w/cap))', 0, 1, false],
+  ['franchiseWeightFanRate', 0.01, 'engine.209 weight moved per game week by fan reach relative to the franchise\'s own trailing mean (rate × clamp(Δ/mean, −1, 1)); 0 while fandom is unseeded', 0, 1, false],
+  ['franchiseWeightCap', 1.5, 'engine.209 the most any franchise can weigh on the city (the A\'s start at 1.0)', 0.1, 5, false],
+  ['franchiseWeightFloor', 0.1, 'engine.209 the least any franchise can weigh once it has played (the Oaks start at 0.35)', 0, 1, false]
+];
+
+function ensureEngine209Config_(ss) {
+  if (!ss) throw new Error('engine.209 config: spreadsheet required');
+  var configSheet = ss.getSheetByName('World_Config');
+  if (!configSheet) throw new Error('engine.209 config: World_Config not found');
+  var plan = inspectEngine94Config_(configSheet.getDataRange().getValues(), ENGINE209_CONFIG_SEEDS);
+  if (plan.additions.length > 0) {
+    configSheet.getRange(configSheet.getLastRow() + 1, 1, plan.additions.length, 3).setValues(plan.additions);
+    var verified = inspectEngine94Config_(configSheet.getDataRange().getValues(), ENGINE209_CONFIG_SEEDS);
+    if (verified.additions.length > 0) throw new Error('engine.209 config: seed write did not land (' + verified.additions.length + ' still missing)');
+    Logger.log('ensureEngine209Config_: seeded ' + plan.additions.length + ' franchise-weight key(s)');
+  }
+  if (plan.invalid && plan.invalid.length > 0) throw new Error('engine.209 config invalid: ' + plan.invalid.join('; '));
+  return plan;
+}
+
 var ENGINE275_CONFIG_SEEDS = [
   ['fireGuardMinutes', 60, 'engine.275 a Cycle is refused if the last one STARTED fewer than this many minutes ago (a Cycle cannot fire twice). Live stays 60. 0 = no time test — bench only, where back-to-back fires are deliberate and the web trigger\'s expect= guards repeats', 0, 1440, false]
 ];

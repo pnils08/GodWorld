@@ -76,7 +76,8 @@ function doGet(e) {
 var CARRY_FORWARD_PROP_WHITELIST = {
   'PREV_EVENING_JSON': true,
   'PREV_CYCLE_STATE_JSON': true,
-  'CHAOS_NBHD_FOLD_JSON': true
+  'CHAOS_NBHD_FOLD_JSON': true,
+  'PREV_FRANCHISE_WEIGHT_JSON': true   // engine.209: the drifting franchise weights
 };
 
 function doPost(e) {

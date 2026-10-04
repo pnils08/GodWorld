@@ -408,5 +408,57 @@ test('204/205 the override and empty-feed paths publish a quiet city', () => {
   assert.strictEqual(S.sportsCity.band, 'quiet'); assert.strictEqual(S.sportsCity.intensity, 0);
 });
 
+// ── engine.209: the franchise weight is carried and drifts ───────────────────
+test('209: deriveSportsIntensity_ reads a carried weight when given one; the ruled constant when not', () => {
+  const mk = () => ({ "A's": box.buildSportsWeek_("A's", box.parseSportsWeekRecord_('A:W A:W'), 'championship', {}, 110) });
+  const w1 = mk(); box.deriveSportsIntensity_(w1, {}, {}, {}, 110);
+  const w2 = mk(); box.deriveSportsIntensity_(w2, {}, {}, {}, 110, { "A's": 1.2 });
+  const w3 = mk(); box.deriveSportsIntensity_(w3, {}, {}, {}, 110, { Oaks: 0.5 });
+  assert.strictEqual(plain(w1["A's"]).weight, 1);
+  assert.strictEqual(plain(w2["A's"]).weight, 1.2);
+  near(plain(w2["A's"]).unsigned, 0.4866 * 1.2, 'unsigned scales with the carried weight');
+  assert.strictEqual(plain(w3["A's"]).weight, 1, 'a weights object without the franchise falls back to the constant');
+  assert.strictEqual(box.sportsFranchiseWeight_('Oaks', { Oaks: 'x' }), 0.35, 'an unusable carried value falls back');
+  assert.strictEqual(box.sportsFranchiseWeight_('Oaks', { Oaks: 0 }), 0, 'zero is a value, not an absence');
+});
+test('209: drift — results, tenure and attendance move a franchise that played; one that did not carries unchanged', () => {
+  const ctx = { config: {} };   // absent dials → defaults (.02 / .004 / .01 / cap 1.5 / floor .1)
+  const S = { sportsWeek: { Oaks: { g: 3, surprise: 0.5 } }, sportsWeekReach: { Oaks: { staff: 10, fan: 14 } },
+    franchiseWeightCarry: { "A's": { w: 1.0, weeks: 40, fans: 30 }, Oaks: { w: 0.35, weeks: 4, fans: 10 } } };
+  const out = box.driftFranchiseWeight_(ctx, S);
+  // .35 + .02×.5 + .004×(1 − .35/1.5) + .01×min(1, (14−10)/10) = .35 + .01 + .0030667 + .004 = .3670667
+  near(out.Oaks.w, 0.3671, 'Oaks weight after a good home week with rising fans');
+  assert.strictEqual(out.Oaks.weeks, 5);
+  near(out.Oaks.fans, 10.8, 'trailing fans EMA .8/.2');
+  assert.deepStrictEqual(plain(out["A's"]), { w: 1, weeks: 40, fans: 30 }, 'no game → carried unchanged');
+});
+test('209: drift — a bad week pulls down, the floor and cap hold, no carry seeds from the constants, fans unseeded = no attendance term', () => {
+  const ctx = { config: {} };
+  const down = box.driftFranchiseWeight_(ctx, { sportsWeek: { "A's": { g: 3, surprise: -1 } }, sportsWeekReach: {}, franchiseWeightCarry: { "A's": { w: 1.0, weeks: 1, fans: 0 } } });
+  near(down["A's"].w, 1.0 - 0.02 + 0.004 * (1 - 1 / 1.5), 'surprise −1 costs the full result rate; tenure still accrues; fans 0 both sides → 0');
+  const floor = box.driftFranchiseWeight_(ctx, { sportsWeek: { Oaks: { g: 2, surprise: -1 } }, franchiseWeightCarry: { Oaks: { w: 0.105, weeks: 1, fans: 0 } } });
+  assert.strictEqual(floor.Oaks.w, 0.1, 'floor');
+  const cap = box.driftFranchiseWeight_(ctx, { sportsWeek: { "A's": { g: 7, surprise: 1 } }, franchiseWeightCarry: { "A's": { w: 1.49, weeks: 1, fans: 0 } } });
+  assert.strictEqual(cap["A's"].w, 1.5, 'cap');
+  const fresh = box.driftFranchiseWeight_(ctx, { sportsWeek: { Oaks: { g: 2, surprise: 0 } } });
+  assert.strictEqual(fresh["A's"].w, 1.0, 'no carry: the A\'s seed from the constant and did not play');
+  assert.strictEqual(fresh["A's"].weeks, 0);
+  near(fresh.Oaks.w, 0.35 + 0.004 * (1 - 0.35 / 1.5), 'no carry: the Oaks seed from .35 and gain tenure for playing');
+  assert.strictEqual(fresh.Oaks.weeks, 1);
+});
+test('209: dials — World_Config values are read; an unusable one is an Engine_Errors row and no drift (null), never a throw', () => {
+  const cfg = box.franchiseWeightConfig_({ config: { franchiseWeightResultRate: '0.05', franchiseWeightTenureRate: 0.01, franchiseWeightFanRate: '0', franchiseWeightCap: 2, franchiseWeightFloor: 0.2 } });
+  assert.deepStrictEqual(plain(cfg), { resultRate: 0.05, tenureRate: 0.01, fanRate: 0, cap: 2, floor: 0.2 });
+  assert.deepStrictEqual(plain(box.franchiseWeightConfig_({ config: {} })), plain(box.FRANCHISE_WEIGHT_DEFAULTS_), 'absent keys → defaults');
+  box.__rejections.length = 0;
+  const bad = box.driftFranchiseWeight_({ config: { franchiseWeightResultRate: 'lots' } }, { sportsWeek: { "A's": { g: 3, surprise: 1 } } });
+  assert.strictEqual(bad, null);
+  assert.match(box.__rejections.join('\n'), /Phase9-FranchiseWeight: engine\.209: .*franchiseWeightResultRate=lots/);
+  box.__rejections.length = 0;
+  const inverted = box.driftFranchiseWeight_({ config: { franchiseWeightCap: 0.2, franchiseWeightFloor: 0.5 } }, { sportsWeek: {} });
+  assert.strictEqual(inverted, null, 'floor above cap is unusable');
+  assert.match(box.__rejections.join('\n'), /franchiseWeightFloor 0\.5 > franchiseWeightCap 0\.2/);
+});
+
 console.log(`${passed} passed; ${failed} failed`);
 if (failed) process.exitCode = 1;

@@ -116,5 +116,27 @@ console.log('engine.219 — hood economic carry');
   const woB6 = B.summary.neighborhoodEconomies['West Oakland'];
   check('next Cycle: Phase 6 recomputes from the city mood + the decayed ripple (no stacking on the carry)', Math.abs((B.summary.economicMood - woB6.mood) - 2.4) < 0.011 && woB6.carried !== true, 'city=' + B.summary.economicMood + ' wo=' + woB6.mood);
 }
+
+// ── engine.209: the franchise weight drifts at Phase 9 and the next Cycle opens on it ──────
+{
+  const w = world();
+  load(w.sb, 'utilities/sportsWeekRecord.js');
+  const A = ctxFor(108, { sportsWeek: { Oaks: { g: 3, surprise: 0.5 } }, sportsWeekReach: { Oaks: { staff: 10, fan: 14 } },
+    franchiseWeightCarry: { Oaks: { w: 0.35, weeks: 4, fans: 10 } } });
+  A.ss = { getSheetByName: () => null };
+  w.sb.finalizeCycleState_(A);
+  w.sb.savePreviousCycleState_(A);
+  const blob = JSON.parse(w.props.PREV_FRANCHISE_WEIGHT_JSON || 'null');
+  check('209 save: PREV_FRANCHISE_WEIGHT_JSON rides its own key with the drifted Oaks and the A\'s seeded from the constant',
+    blob && Math.abs(blob.Oaks.w - 0.3671) < 0.0001 && blob.Oaks.weeks === 5 && blob["A's"] && blob["A's"].w === 1 && blob["A's"].weeks === 0, JSON.stringify(blob));
+  check('209 save: the key is stamped with the Cycle', w.props.PREV_FRANCHISE_WEIGHT_JSON_CYCLE === '108');
+  const B = ctxFor(109);
+  w.sb.loadPreviousCycleState_(B);
+  check('209 seed: next Cycle opens with S.franchiseWeight from the blob', B.summary.franchiseWeight && Math.abs(B.summary.franchiseWeight.Oaks - 0.3671) < 0.0001 && B.summary.franchiseWeight["A's"] === 1, JSON.stringify(B.summary.franchiseWeight));
+  check('209 seed: the carry rides beside it for Phase 9', B.summary.franchiseWeightCarry && B.summary.franchiseWeightCarry.Oaks.weeks === 5 && B.summary.franchiseWeightCarry.Oaks.fans === 10.8, JSON.stringify(B.summary.franchiseWeightCarry));
+  const w0 = world(); load(w0.sb, 'utilities/sportsWeekRecord.js');
+  const C = ctxFor(108); w0.sb.loadPreviousCycleState_(C);
+  check('209 seed: no blob → nothing published, no throw (first fire reads the constants)', C.summary.franchiseWeight === undefined && C.summary.franchiseWeightCarry === undefined);
+}
 console.log(passed + ' passed, ' + failed + ' failed');
 process.exitCode = failed ? 1 : 0;

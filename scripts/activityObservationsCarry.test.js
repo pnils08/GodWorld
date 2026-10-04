@@ -36,8 +36,10 @@ function world() {
   load(sb, 'phase09-digest/finalizeCycleState.js');
   return { sb, props, store };
 }
+// engine.214: the anchors the self-arm seeds on a live sheet — read from ctx.config, never from the engine.
+const SEEDS214 = Object.fromEntries(vm.runInNewContext(fs.readFileSync(path.join(ROOT, 'phase01-config/engine94SheetContract.js'), 'utf8') + ';ENGINE214_CONFIG_SEEDS').map(s => [s[0], s[1]]));
 function ctxFor(cycle, extra) {
-  return { config: { cycleCount: cycle, rngSeed: 5, econMoodInertia: 0.3 }, ss: { getSheetByName: () => null }, writeIntents: [], mode: {},
+  return { config: Object.assign({ cycleCount: cycle, rngSeed: 5, econMoodInertia: 0.3 }, SEEDS214), ss: { getSheetByName: () => null }, writeIntents: [], mode: {},
     summary: Object.assign({ cycleId: cycle, season: 'Spring', month: 4, simMonth: 4, holiday: 'none', sportsSeason: 'off-season', weather: { type: 'clear', impact: 1 },
       neighborhoodState: {}, neighborhoodEconomies: {}, neighborhoodDemographics: {}, economicMood: 55, economicRipples: [], worldEvents: [], storySeeds: [], crimeByNeighborhood: {} }, extra || {}) };
 }

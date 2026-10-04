@@ -110,6 +110,9 @@
 - **ensureEngine209Config_(ss)**
   Sheets: World_Config
 
+- **ensureEngine214Config_(ss)**
+  Sheets: World_Config
+
 - **ensureEngine275Config_(ss)**
   Sheets: World_Config
 
@@ -321,6 +324,9 @@
   Reads: S.absoluteCycle, S.activityObservations, S.approvalNeighborhoodEffects, S.cityCapacity, S.cityDynamics, S.cityDynamicsLag, S.clusterDefinitions, S.commuteInbound, S.crimeByNeighborhood, S.crimeEvents, S.crimeSpikes, S.cycleId, S.editionNeighborhoodEffects, S.editionSentimentBoost, S.eventsGenerated, S.holiday, S.holidayPriority, S.initiativeImplementationEffects, S.initiativeNeighborhoodEffects, S.isCreationDay, S.isFirstFriday, S.manualDynamicsInputs, S.mediaCount, S.mediaCoverage, S.neighborhoodDemographics, S.neighborhoodDynamics, S.neighborhoodEconomies, S.neighborhoodState, S.neighborhoodWeather, S.previousCityDynamics, S.previousCycleState, S.resetDynamicsMomentum, S.season, S.sentiment, S.shockFlag, S.sportsCity, S.sportsSeason, S.sportsSentimentBoost, S.sportsWeek, S.storySeeds, S.weather, S.weatherEvents, S.worldEvents
   Writes: S.activityObservations, S.cityDynamics, S.cityDynamicsCapacity, S.cityDynamicsLag, S.clusterDefinitions, S.clusterDynamics, S.neighborhoodDemographics, S.neighborhoodDynamics, S.previousCityDynamics, S.previousClusterDynamics, S.previousNeighborhoodDynamics, S.resetDynamicsMomentum, S.storySeedSignals
   Config: ctx.config.cityCapacity, ctx.config.cycleCount, ctx.config.manualDynamicsInputs
+
+- **seedClusterAnchors_(ctx, clusters)**
+  Reads: S.canonHoods
 
 - **buildHoodClusterAssignment_(ctx, clusters)**
   Reads: S.canonHoods
@@ -1816,10 +1822,16 @@
 
 - **applyGriefPoolWeights_(pool, griefConfig)**
 
+- **folkMemoryAdd_(memory, pop, hood, tag, eventCycle)**
+
+- **folkMemorySince_(stamp, cycle)**
+
+- **folkMemoryScopes_(memory, pop, hood, cycle, dialCell, bonds)**
+
 - **generateCitizensEvents_(ctx)**
   Reads: S.biasIntents, S.citizenEventMemory, S.citizenEvents, S.cityDynamics, S.contentLedger, S.crimeByNeighborhood, S.crimeMetrics, S.cycle, S.cycleActiveCitizens, S.cycleId, S.economicMood, S.eventsGenerated, S.faithEvents, S.faithExposures, S.holiday, S.holidayPriority, S.initiativeEvents, S.isCreationDay, S.isFirstFriday, S.localEntities, S.neighborhoodDynamics, S.neighborhoodState, S.neighborhoodWeather, S.previousEvening, S.season, S.sportsCity, S.sportsFeedEntries, S.sportsSeason, S.sportsSentimentBoost, S.sportsWeek, S.storyHooks, S.templateCooldowns, S.transitState, S.undockedFeedEntries, S.undockedPilots, S.weather, S.worldEvents
-  Writes: S.biasIntents, S.citizenEventMemory, S.citizenEvents, S.cycleActiveCitizens, S.eventsGenerated, S.faithExposures, S.householdMoments, S.minorsSkippedTexture, S.storyHooks, S.templateCooldowns
-  Config: ctx.config.cycleCount, ctx.config.eclExclusiveMinLines, ctx.config.eclExclusivePools, ctx.config.gcSurfaceChance, ctx.config.hoodFloorSurfaceQuota, ctx.config.rngSeed
+  Writes: S.biasIntents, S.citizenEventMemory, S.citizenEvents, S.cycleActiveCitizens, S.eventsGenerated, S.faithExposures, S.folkMemory, S.householdMoments, S.minorsSkippedTexture, S.storyHooks, S.templateCooldowns
+  Config: ctx.config.cycleCount, ctx.config.eclExclusiveMinLines, ctx.config.eclExclusivePools, ctx.config.folkMemoryWindow, ctx.config.gcSurfaceChance, ctx.config.hoodFloorSurfaceQuota, ctx.config.rngSeed
   Sheets: Content_Telemetry, Generic_Citizens, LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)
 
@@ -4516,4 +4528,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1609
+**Functions mapped:** 1614

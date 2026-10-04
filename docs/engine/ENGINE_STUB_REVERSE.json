@@ -2,7 +2,7 @@
   "generated": "2026-10-04",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 180,
-  "functionsMapped": 1609,
+  "functionsMapped": 1614,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -821,6 +821,7 @@
         "phase01-config/canonNeighborhoodLoader.js::isCanonNeighborhood_",
         "phase01-config/canonNeighborhoodLoader.js::resolveHoodOrChild_",
         "phase02-world-state/applyCityDynamics.js::buildHoodClusterAssignment_",
+        "phase02-world-state/applyCityDynamics.js::seedClusterAnchors_",
         "phase02-world-state/applyInitiativeImplementationEffects.js::buildDisbursementSlice_",
         "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_",
         "phase05-citizens/civicInitiativeEngine.js::applyCivicStageBaseline_",
@@ -3460,6 +3461,12 @@
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_"
       ]
     },
+    "folkMemory": {
+      "writers": [
+        "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_"
+      ],
+      "readers": []
+    },
     "householdMoments": {
       "writers": [
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_"
@@ -4517,6 +4524,7 @@
         "phase01-config/engine94SheetContract.js::ensureEngine192Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine209Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine213Config_",
+        "phase01-config/engine94SheetContract.js::ensureEngine214Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine221Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine254Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine271Config_",

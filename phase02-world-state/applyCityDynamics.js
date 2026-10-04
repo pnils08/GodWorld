@@ -645,34 +645,36 @@ function applyCityDynamics_(ctx) {
 
   // ─────────────────────────────────────────────────────────────────────────
   // CLUSTER DEFINITIONS (exposed via S.clusterDefinitions)
+  // engine.214: the five clusters are authored CHARACTER (weights, congestion
+  // sensitivity). Which hoods anchor each one is World_Config truth
+  // (clusterAnchors_<CLUSTER>, engine94SheetContract.js self-arm) — no hood is
+  // named in this engine. seedClusterAnchors_ fills `hoods` from the sheet and
+  // throws on a missing key, a name off the canon map, a hood in two clusters
+  // or an empty cluster; every other canon hood adopts by adjacency below.
   // ─────────────────────────────────────────────────────────────────────────
   var CLUSTERS = {
     'DOWNTOWN_CORE': {
-      hoods: ['Downtown', 'Uptown', 'KONO', 'Chinatown'],
       weights: { traffic: 1.15, retail: 1.12, tourism: 1.10, nightlife: 1.25, publicSpaces: 1.05, culturalActivity: 1.20, communityEngagement: 1.00 },
-      capacitySensitivity: 1.4  // Downtown feels congestion most
+      capacitySensitivity: 1.4  // the core feels congestion most
     },
     'WATERFRONT_WEST': {
-      hoods: ['Jack London', 'West Oakland'],
       weights: { traffic: 1.05, retail: 0.95, tourism: 1.20, nightlife: 1.10, publicSpaces: 1.05, culturalActivity: 1.05, communityEngagement: 1.05 },
       capacitySensitivity: 1.1
     },
     'LAKE_CORRIDOR': {
-      hoods: ['Lake Merritt', 'Piedmont Ave'],
       weights: { traffic: 1.00, retail: 1.05, tourism: 1.08, nightlife: 1.00, publicSpaces: 1.25, culturalActivity: 1.10, communityEngagement: 1.10 },
       capacitySensitivity: 0.9
     },
     'NORTH_HILLS': {
-      hoods: ['Rockridge', 'Temescal'],
       weights: { traffic: 0.95, retail: 1.10, tourism: 0.95, nightlife: 1.05, publicSpaces: 1.08, culturalActivity: 1.08, communityEngagement: 1.05 },
       capacitySensitivity: 0.7
     },
     'EAST_OAKLAND': {
-      hoods: ['Fruitvale', 'Laurel'],
       weights: { traffic: 1.00, retail: 0.95, tourism: 0.80, nightlife: 0.90, publicSpaces: 0.95, culturalActivity: 1.08, communityEngagement: 1.15 },
-      capacitySensitivity: 0.6  // Less affected by citywide congestion
+      capacitySensitivity: 0.6  // least affected by citywide congestion
     }
   };
+  seedClusterAnchors_(ctx, CLUSTERS);
 
   // Adjacent clusters for sentiment bleed
   var CLUSTER_ADJACENCY = {
@@ -1931,6 +1933,48 @@ function applyCityDynamics_(ctx) {
  * Safe accessor with fallback to city dynamics.
  * ============================================================================
  */
+/**
+ * engine.214: the hoods that anchor each dynamics cluster come from World_Config
+ * (clusterAnchors_<CLUSTER>, a pipe-separated list of canon hood names; seeded
+ * once by ensureEngine214Config_, read from ctx.config every Cycle). Fills
+ * clusters[c].hoods in place. No fallback: a missing or blank key means the
+ * self-arm did not run and throws; a name off the canon map, a hood anchoring
+ * two clusters or a cluster with no anchor throws the same way — inside
+ * safePhaseCall_ that is an Engine_Errors row and no dynamics this Cycle, the
+ * wall the Phase-1 loader already raises for a bad Adjacent name. The canon
+ * check is skipped only when Phase1-CanonHoods did not run (an offline harness).
+ */
+function seedClusterAnchors_(ctx, clusters) {
+  var cfg = (ctx && ctx.config) || {};
+  var canonSeeded = typeof getCanonNeighborhoods_ === 'function' && !!(ctx && ctx.summary && ctx.summary.canonHoods);
+  var canonSet = {};
+  if (canonSeeded) {
+    var canon = getCanonNeighborhoods_(ctx);
+    for (var ci = 0; ci < canon.length; ci++) canonSet[canon[ci]] = true;
+  }
+  var seen = {};
+  for (var c in clusters) {
+    if (!clusters.hasOwnProperty(c)) continue;
+    var key = 'clusterAnchors_' + c;
+    var raw = cfg[key];
+    if (typeof raw !== 'string' || raw.trim() === '') {
+      throw new Error('engine.214: World_Config.' + key + ' missing or not text — the engine.214 self-arm (ensureEngine214Config_) did not run');
+    }
+    var parts = raw.split('|'), hoods = [];
+    for (var p = 0; p < parts.length; p++) {
+      var h = parts[p].trim();
+      if (!h) continue;
+      if (canonSeeded && !canonSet[h]) throw new Error('engine.214: World_Config.' + key + ' names "' + h + '", not a canon hood (Neighborhood_Map)');
+      if (seen[h]) throw new Error('engine.214: "' + h + '" anchors both ' + seen[h] + ' and ' + c + ' — one cluster per hood');
+      seen[h] = c;
+      hoods.push(h);
+    }
+    if (!hoods.length) throw new Error('engine.214: World_Config.' + key + ' names no hood — every cluster needs at least one anchor');
+    clusters[c].hoods = hoods;
+  }
+  return clusters;
+}
+
 /**
  * 2026-09-19: hood → cluster for the per-hood dynamics pass. The CLUSTERS
  * members keep their cluster; every other canon hood adopts the cluster most of

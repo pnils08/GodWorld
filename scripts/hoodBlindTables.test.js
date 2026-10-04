@@ -31,6 +31,7 @@ function makeSandbox() {
   const sb = { console, Logger: { log() {} }, Utilities: {}, SpreadsheetApp: {} };
   vm.createContext(sb);
   load(sb, 'phase01-config/canonNeighborhoodLoader.js');
+  load(sb, 'phase01-config/engine94SheetContract.js');   // engine.214: the cluster anchors are World_Config seeds, read from ctx.config
   load(sb, 'phase02-world-state/applyWeatherModel.js');
   load(sb, 'phase03-population/updateCrimeMetrics.js');
   load(sb, 'phase06-analysis/prioritizeEvents.js');
@@ -38,8 +39,10 @@ function makeSandbox() {
   load(sb, 'utilities/citizenDerivation.js');
   return sb;
 }
+// engine.214: what the self-arm would have seeded on a live sheet — the harness carries no hood names of its own.
+const config214 = sb => Object.fromEntries(sb.ENGINE214_CONFIG_SEEDS.map(s => [s[0], s[1]]));
 function makeCtx(sb, over) {
-  const ctx = { summary: {}, config: {}, ledger: { headers: ['Neighborhood', 'Status'], rows: [] }, ss: { getSheetByName: n => n === 'Neighborhood_Map' ? { getDataRange: () => ({ getValues: () => mapSheet(over) }) } : null } };
+  const ctx = { summary: {}, config: config214(sb), ledger: { headers: ['Neighborhood', 'Status'], rows: [] }, ss: { getSheetByName: n => n === 'Neighborhood_Map' ? { getDataRange: () => ({ getValues: () => mapSheet(over) }) } : null } };
   sb.loadCanonNeighborhoods_(ctx);
   ctx.summary.neighborhoodState = {};
   HOODS.forEach(h => { ctx.summary.neighborhoodState[h] = { incomeTier: TIER[h], crimeIndex: CRIME[h] }; });
@@ -234,10 +237,34 @@ t('unclustered hoods adopt the cluster of their canon neighbours; none left unpl
   assert.strictEqual(r.byHood['Baylight District'], 'WATERFRONT_WEST');   // engine.281 (c): the harbor waterfront
   assert.ok(/buildHoodClusterAssignment_\(ctx, CLUSTERS\)/.test(src('phase02-world-state/applyCityDynamics.js')));
 });
+t('engine.214: the cluster anchors are World_Config rows — the engine names no hood; a bad row throws', () => {
+  // Source: the CLUSTERS table carries character only. No canon hood name between the table and the adjacency map.
+  const s = src('phase02-world-state/applyCityDynamics.js');
+  const table = s.slice(s.indexOf('var CLUSTERS = {'), s.indexOf('var CLUSTER_ADJACENCY'));
+  HOODS.forEach(h => assert.ok(table.indexOf("'" + h + "'") < 0 && table.indexOf('"' + h + '"') < 0, h + ' is named in the CLUSTERS table'));
+  assert.ok(/seedClusterAnchors_\(ctx, CLUSTERS\)/.test(table));
+  assert.ok(/ensureEngine214Config_\(ss\)/.test(src('phase01-config/godWorldEngine2.js')), 'self-arm not wired at open');
+  // Runtime: the sheet row decides. Move an anchor and the cluster follows it.
+  const run = (over) => { const ctx = makeCtx(sb); Object.assign(ctx, { writeIntents: [], mode: {} }); Object.assign(ctx.config, over);
+    Object.assign(ctx.summary, { cycleId: 902, season: 'Fall', holiday: 'none', sportsSeason: 'off-season', economicMood: 50, sportsCity: {}, sportsWeek: {} });
+    sb.applyCityDynamics_(ctx); return ctx.summary.clusterDefinitions; };
+  const seeded = run({});
+  assert.strictEqual(seeded.NORTH_HILLS.neighborhoods.length, 2);
+  const moved = run({ clusterAnchors_DOWNTOWN_CORE: 'Downtown|Uptown|KONO|Chinatown|Temescal', clusterAnchors_NORTH_HILLS: ' Rockridge ' });
+  assert.ok(moved.DOWNTOWN_CORE.neighborhoods.includes('Temescal') && !moved.NORTH_HILLS.neighborhoods.includes('Temescal'), JSON.stringify(moved.NORTH_HILLS));
+  eq(moved.NORTH_HILLS.neighborhoods, ['Rockridge']);   // trimmed
+  // Failure policy: the throw, not a fallback to any name in code.
+  assert.throws(() => run({ clusterAnchors_EAST_OAKLAND: '' }), /engine\.214.*clusterAnchors_EAST_OAKLAND.*self-arm/);
+  assert.throws(() => run({ clusterAnchors_EAST_OAKLAND: undefined }), /engine\.214.*self-arm/);
+  assert.throws(() => run({ clusterAnchors_EAST_OAKLAND: 7 }), /engine\.214.*not text/);
+  assert.throws(() => run({ clusterAnchors_EAST_OAKLAND: 'Fruitvale|Montclair' }), /engine\.214.*"Montclair", not a canon hood/);
+  assert.throws(() => run({ clusterAnchors_EAST_OAKLAND: 'Fruitvale|Laurel|Rockridge' }), /engine\.214.*"Rockridge" anchors both NORTH_HILLS and EAST_OAKLAND/);
+  assert.throws(() => run({ clusterAnchors_EAST_OAKLAND: '| |' }), /engine\.214.*names no hood/);
+});
 t('engine.281 (c): a Baylight home week lifts WATERFRONT_WEST at the stadium; an away week lifts nothing', () => {
   const run = (venueShare) => {
     const ctx = makeCtx(sb);
-    Object.assign(ctx, { config: {}, writeIntents: [], mode: {} });
+    Object.assign(ctx, { writeIntents: [], mode: {} });
     Object.assign(ctx.summary, { cycleId: 901, season: 'Fall', holiday: 'none', sportsSeason: 'off-season', economicMood: 50,
       sportsCity: {}, sportsWeek: { Oaks: { unsigned: 1, venueShare, venue: ['Baylight District'] } } });
     sb.applyCityDynamics_(ctx);

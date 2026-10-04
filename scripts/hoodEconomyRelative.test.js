@@ -49,13 +49,15 @@ function world() {
   const sb = { Logger: { log: () => {} }, Math, Object, Array, Number, String, JSON, Date, isFinite, isNaN, parseFloat,
     safeRand_: () => () => 0.5, recordRipple_: () => true, safePhaseCall_: (ctx, label, fn) => fn() };
   vm.createContext(sb);
-  for (const rel of ['phase06-analysis/economicRippleEngine.js', 'phase02-world-state/applyCityDynamics.js', 'phase06-analysis/applyMigrationDrift.js']) {
+  for (const rel of ['phase01-config/engine94SheetContract.js', 'phase06-analysis/economicRippleEngine.js', 'phase02-world-state/applyCityDynamics.js', 'phase06-analysis/applyMigrationDrift.js']) {
     vm.runInContext(read(rel), sb, { filename: rel });
   }
   return { sb, rows };
 }
+// engine.214: the cluster anchors the self-arm seeds on a live sheet, read from ctx.config.
+const config214 = sb => Object.fromEntries(sb.ENGINE214_CONFIG_SEEDS.map(s => [s[0], s[1]]));
 function ctxFor(sb, economies) {
-  return { config: { cycleCount: 108, rngSeed: 7 }, ss: { getSheetByName: n => n === 'Neighborhood_Map' ? sb.__map : null }, writeIntents: [],
+  return { config: Object.assign({ cycleCount: 108, rngSeed: 7 }, config214(sb)), ss: { getSheetByName: n => n === 'Neighborhood_Map' ? sb.__map : null }, writeIntents: [],
     summary: { cycleId: 108, season: 'Winter', month: 1, holiday: 'none', sportsSeason: 'off-season', weather: { type: 'clear', impact: 1 },
       neighborhoodState: hoodState(), neighborhoodEconomies: economies, economicMood: 55.4, migrationDrift: 0,
       neighborhoodDemographics: {}, worldEvents: [], storySeeds: [], crimeByNeighborhood: {}, previousCycleState: { cycle: 107, migrationDrift: 0 } } };

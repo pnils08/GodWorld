@@ -108,7 +108,7 @@ Three causes, not one:
   2. One file per bench fire; read the 22-hood outputs back (Neighborhood_Map, WorldEvents by hood, venues by hood).
   3. Re-run the sweep: `node -e '<the S456 sweep>'` → zero files.
 - **Verify:** C108 bench: world events, venues, and city events land in at least one of the ten hoods each cycle; Sentiment moves per hood, not in lockstep with the city scalar.
-- **Status:** [~] engine.214 cut S458 (below); the 24-file sweep not started
+- **Status:** [~] engine.214 S458 cut rejected (kept names + authored tables); engine.239b adoption LIVE @101; **2026-10-04 (overnight): the 12 anchors moved to World_Config** — `clusterAnchors_<CLUSTER>` string rows, self-armed by `ensureEngine214Config_` (string branch in `inspectEngine94Config_`), read by `seedClusterAnchors_` every Cycle; a missing/blank/non-text row, a non-canon name, a hood in two clusters or an empty cluster throws (Engine_Errors, no dynamics that Cycle — the plan's :119 policy). The five weight tables stay authored cluster character. Proven in `hoodBlindTables.test.js` (source sweep of the table + anchor move + six throws; fails on the pre-cut file) and `engine94SheetContract.test.js` B2 (8 checks). Three harnesses seed `ctx.config` from `ENGINE214_CONFIG_SEEDS`. Bench waits on the new script project; the 24-file sweep not started.
 
 #### engine.214 — the cluster table (cut S458, `phase02-world-state/applyCityDynamics.js`)
 
@@ -269,6 +269,7 @@ Desk packets carry an EMPTY citizen archive (`0 citizens matched (of ~800)` ever
 
 ## Changelog
 
+- 2026-10-04 (engine-sheet, overnight) — engine.214: the 12 cluster anchors leave the engine for World_Config `clusterAnchors_<CLUSTER>` (string self-arm, throw on a bad row); unit-proven, bench waits on the new script project; Task 4 status updated.
 - 2026-10-02 (engine-sheet S518) — engine.279 BUILT `1c391906`, bench A/B identical output, Advancement 58.3 → 11.4 s on the C110 queue, LIVE PROD 02:24.
 
 - 2026-10-02 (engine-sheet S518) — engine.279 filed and cut: the mint pass buffers its log lines (one write) and reads Generic_Citizens once; C110's 124-row queue ran 239–285 s on the bench.

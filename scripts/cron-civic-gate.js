@@ -311,10 +311,11 @@ if (require.main === module) (async () => {
   let sanityStatus = 'missing';
   if (NO_SANITY) {
     const prior = readJson(path.join(CIVIC, 'gate_c' + cycle + '.json'));
-    if (prior && (prior.sanityStatus === 'pass' || prior.sanityStatus === 'fail' || prior.sanityStatus === 'skipped-empty')) {
+    if (prior && (prior.sanityStatus === 'pass' || prior.sanityStatus === 'fail' || prior.sanityStatus === 'fail-scoped' || prior.sanityStatus === 'skipped-empty')) {
       sanityStatus = prior.sanityStatus;
       sanity = prior.sanity || null;
       if (sanityStatus === 'fail') failures.push({ check: 'sanity-read', detail: 'prior sanity-read FAIL verdict stands (carried forward)' });
+      if (sanityStatus === 'fail-scoped') for (const i of (sanity && sanity.issues) || []) failures.push({ check: 'sanity-read', detail: i });
       log('--no-sanity: carried prior sanity verdict forward (' + sanityStatus + ')');
     } else {
       sanityStatus = 'skipped';
@@ -370,7 +371,7 @@ if (require.main === module) (async () => {
         )).join('\n\n');
         const sys = 'You are a neutral records auditor for a city government. You check the cycle\'s FINAL tracker write-set — each entry shows the row as it stands (prior row) and the fields about to be written (write) — for internal contradictions and fabrications before it is committed to the record. The prior row IS the city\'s record: a write that extends it (a later month, a running total, the next phase, a next action scheduled for a later cycle) is grounded and needs no outside verification. Political disagreement between offices is out of scope — you audit only what is about to be written.';
         const user = 'Final write-set for cycle ' + cycle + ' (one entry per initiative, already resolved by voice priority; NextActionCycle is the cycle the row is next acted on, always after ' + cycle + '):\n\n' + digest +
-          '\n\nChecks: (a) does any single write contradict itself (phase vs milestone notes telling different stories)? (b) does a write contradict its own prior row — a phase moving backwards, a figure that cannot follow from the prior figure, a milestone the prior row says already happened? (c) does any write look fabricated — a vote result, dollar figure, or program that no city record could plausibly contain? Do not flag a figure merely because you cannot verify it from outside.\n\nRespond ONLY with JSON: {"pass": true|false, "issues": ["<one line each>"]}';
+          '\n\nChecks: (a) does any single write contradict itself (phase vs milestone notes telling different stories)? (b) does a write contradict its own prior row — a phase moving backwards, a figure that cannot follow from the prior figure, a milestone the prior row says already happened? (c) does any write look fabricated — a vote result, dollar figure, or program that no city record could plausibly contain? Do not flag a figure merely because you cannot verify it from outside. A write whose primary voice is move-fold carries only LastWorkCycle and LastWorkSeat — that is the complete shape of a work move (the director tended the row this week), never incomplete, never flag it. Begin every issue with the initiative id it concerns (e.g. "INIT-005: ...").\n\nRespond ONLY with JSON: {"pass": true|false, "issues": ["<one line each>"]}';
         try {
           // 8000: gemini-flash spends reasoning tokens from the same budget — at
           // 2000 the verdict JSON truncated mid-string (same trap cron-rhea-gate hit)
@@ -378,7 +379,19 @@ if (require.main === module) (async () => {
           const s = raw.replace(/^\s*```(?:json)?\s*/i, '').replace(/\s*```\s*$/, '');
           sanity = JSON.parse(s.slice(s.indexOf('{'), s.lastIndexOf('}') + 1));
           sanityStatus = sanity.pass ? 'pass' : 'fail';
-          log('sanity-read (' + MODEL + '): ' + (sanity.pass ? 'pass' : 'FAIL') + ((sanity.issues || []).length ? ' — ' + sanity.issues.join('; ').slice(0, 300) : ''));
+          // civic.44 (C110, 2026-10-04): a FAIL that names initiatives blocks THOSE
+          // rows, not the week — one director's contradiction voided four clean
+          // work moves. Every issue must carry an initiative id; if all do, the
+          // verdict is 'fail-scoped' and the apply excludes exactly those rows.
+          if (!sanity.pass) {
+            const issues = sanity.issues || [];
+            const ids = issues.map(i => (/\b(INIT-\d+)\b/.exec(String(i)) || [])[1] || null);
+            if (issues.length && ids.every(Boolean)) {
+              sanity.blockedInitiatives = [...new Set(ids)];
+              sanityStatus = 'fail-scoped';
+            }
+          }
+          log('sanity-read (' + MODEL + '): ' + (sanity.pass ? 'pass' : (sanityStatus === 'fail-scoped' ? 'FAIL-SCOPED ' + sanity.blockedInitiatives.join(',') : 'FAIL')) + ((sanity.issues || []).length ? ' — ' + sanity.issues.join('; ').slice(0, 300) : ''));
           if (!sanity.pass) for (const i of sanity.issues || []) failures.push({ check: 'sanity-read', detail: i });
         } catch (e) {
           // deferred, never fail-closed (civic.39 ruling 3)

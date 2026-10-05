@@ -109,6 +109,15 @@ test('a sanity-read FAIL blocks at any time — even past the cutoff', () => {
   assert.strictEqual(d.blocked, true);
 });
 
+test('a scoped sanity-read FAIL excludes the named rows and applies the rest (civic.44)', () => {
+  const d = decideApply({ dryOk: true, deterministicPass: true, clerkStatus: 'pass', sanityStatus: 'fail-scoped', blockedInitiatives: ['INIT-005'] });
+  assert.strictEqual(d.apply, true);
+  assert.deepStrictEqual(d.excluded, ['INIT-005']);
+  const none = decideApply({ dryOk: true, deterministicPass: true, clerkStatus: 'pass', sanityStatus: 'fail-scoped', blockedInitiatives: [] });
+  assert.strictEqual(none.apply, false);
+  assert.strictEqual(none.blocked, true);
+});
+
 test('both verdicts in and clean → apply via verdicts', () => {
   const d = decideApply({ dryOk: true, deterministicPass: true, clerkStatus: 'pass', sanityStatus: 'pass' });
   assert.strictEqual(d.apply, true);

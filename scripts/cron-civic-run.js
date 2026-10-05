@@ -2210,7 +2210,7 @@ async function runClose() {
   const decision = decideApply({
     dryOk: det.dryOk, deterministicPass: gate.deterministicPass,
     clerkStatus: clerk.overall || 'unknown', sanityStatus: gate.sanityStatus,
-    firedAt: state.engineFiredAt,
+    blockedInitiatives: gate.blockedInitiatives, firedAt: state.engineFiredAt,
   });
   let applied = false;
   if (decision.apply && APPLY) {
@@ -2266,6 +2266,7 @@ async function runClose() {
     const legLines = [LEG, ''];
     if (!gatePass) legLines.push('- G-R (AUTO): apply gate deterministic checks failed — see output/cron-civic/gate_c' + cycle + '.json');
     if (gate.sanityStatus === 'fail') legLines.push('- G-R (AUTO): sanity-read verdict FAIL — see output/cron-civic/gate_c' + cycle + '.json');
+    if (gate.sanityStatus === 'fail-scoped') legLines.push('- G-R (AUTO): sanity-read FAIL-SCOPED — ' + (gate.blockedInitiatives || []).join(', ') + ' excluded from the write, rest applied — see output/cron-civic/gate_c' + cycle + '.json');
     if (clerk.overall === 'fail') legLines.push('- G-R (AUTO): clerk verdict fail — see clerk_audit_c' + cycle + '.json');
     if (applied && decision.via === 'cutoff') legLines.push('- G-R (AUTO): applied under the 6h verdict cutoff — missing verdicts: ' + (decision.missingVerdicts || []).join(', '));
     if (pendingVoices.length) legLines.push('- G-R (AUTO): ' + pendingVoices.length + ' voice(s) pending this window: ' + pendingVoices.join(', '));
@@ -3652,19 +3653,20 @@ function refreshWeekState(state, root) {
     : 'missing';
   set('verdict-sanity', !gateRec ? 'waiting'
     : sanityStatus === 'fail' ? 'failed'
-    : (sanityStatus === 'pass' || sanityStatus === 'skipped-empty') ? 'done'
-    : 'deferred', { verdict: sanityStatus });
+    : (sanityStatus === 'pass' || sanityStatus === 'skipped-empty' || sanityStatus === 'fail-scoped') ? 'done'
+    : 'deferred', { verdict: sanityStatus, blockedInitiatives: (gateRec && gateRec.sanity && gateRec.sanity.blockedInitiatives) || [] });
 
   const closeRec = readJson(path.join(civic, 'close_c' + cycle + '.json'));
   const applied = !!(closeRec && closeRec.applied === true);
   const decision = detPass === null ? null : decideApply({
     dryOk: true, deterministicPass: detPass, clerkStatus, sanityStatus, firedAt: fire.firedAt,
+    blockedInitiatives: (gateRec && gateRec.sanity && gateRec.sanity.blockedInitiatives) || [],
   });
   set('apply', applied ? 'done'
     : (decision && decision.apply) ? 'ready'
     : (decision && decision.blocked) ? 'failed'
     : 'waiting',
-    { decision: decision ? { apply: decision.apply, blocked: !!decision.blocked, via: decision.via || null, reason: decision.reason || null, missingVerdicts: decision.missingVerdicts || [] } : null });
+    { decision: decision ? { apply: decision.apply, blocked: !!decision.blocked, via: decision.via || null, reason: decision.reason || null, missingVerdicts: decision.missingVerdicts || [], excluded: decision.excluded || [] } : null });
   return state;
 }
 
@@ -3679,9 +3681,13 @@ function decideApply(opts) {
   if (!opts.deterministicPass) return { apply: false, blocked: true, reason: 'deterministic gate checks failed' };
   if (clerkStatus === 'fail') return { apply: false, blocked: true, reason: 'clerk verdict FAIL' };
   if (sanityStatus === 'fail') return { apply: false, blocked: true, reason: 'sanity-read verdict FAIL' };
+  // civic.44: a scoped FAIL settles the verdict for every row it did not name —
+  // the named rows are excluded from the write, the rest of the week lands.
+  const excluded = sanityStatus === 'fail-scoped' ? (opts.blockedInitiatives || []) : [];
+  if (sanityStatus === 'fail-scoped' && !excluded.length) return { apply: false, blocked: true, reason: 'sanity-read verdict FAIL-SCOPED with no initiative list' };
   const clerkSettled = clerkStatus === 'pass' || clerkStatus === 'skipped-empty';
-  const sanitySettled = sanityStatus === 'pass' || sanityStatus === 'skipped-empty';
-  if (clerkSettled && sanitySettled) return { apply: true, via: 'verdicts' };
+  const sanitySettled = sanityStatus === 'pass' || sanityStatus === 'skipped-empty' || sanityStatus === 'fail-scoped';
+  if (clerkSettled && sanitySettled) return excluded.length ? { apply: true, via: 'verdicts', excluded } : { apply: true, via: 'verdicts' };
   const t = opts.firedAt ? new Date(opts.firedAt).getTime() : NaN;
   const now = opts.now || Date.now();
   const waitingOn = [];
@@ -3778,6 +3784,7 @@ function runGate(cycle, opts) {
     deterministicPass: rec ? (rec.deterministicPass !== undefined ? rec.deterministicPass
       : (rec.pass || (rec.failures || []).every(f => f.check === 'sanity-read'))) : false,
     sanityStatus: rec ? (rec.sanityStatus || (rec.sanity ? (rec.sanity.pass ? 'pass' : 'fail') : 'missing')) : 'missing',
+    blockedInitiatives: (rec && rec.sanity && rec.sanity.blockedInitiatives) || [],
     record: rec,
   };
 }
@@ -3792,8 +3799,13 @@ function maybeApply(cycle, decision, APPLY, source) {
     log('APPLYING UNDER THE VERDICT CUTOFF — missing verdicts: ' + (decision.missingVerdicts || []).join(', ') +
       ' (flagged in the run record; a late FAIL is still a real finding and still blocks any later write)');
   }
-  execFileSync('node', [path.join(ROOT, 'scripts', 'applyTrackerUpdates.js'), String(cycle), '--apply'], { cwd: ROOT, stdio: 'inherit', timeout: 300000 });
-  log('tracker write applied (' + source + ', via ' + (decision.via || 'verdicts') + ')');
+  const applyArgs = [path.join(ROOT, 'scripts', 'applyTrackerUpdates.js'), String(cycle), '--apply'];
+  if ((decision.excluded || []).length) {
+    applyArgs.push('--exclude', decision.excluded.join(','));
+    log('APPLYING WITH ' + decision.excluded.join(', ') + ' EXCLUDED — sanity-read FAIL-SCOPED; those decisions stay staged, their rows are not written this week');
+  }
+  execFileSync('node', applyArgs, { cwd: ROOT, stdio: 'inherit', timeout: 300000 });
+  log('tracker write applied (' + source + ', via ' + (decision.via || 'verdicts') + (decision.excluded && decision.excluded.length ? ', excluded ' + decision.excluded.join(',') : '') + ')');
   return true;
 }
 

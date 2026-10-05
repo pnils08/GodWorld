@@ -134,6 +134,9 @@ const DECISIONS_DIR = path.join(ROOT, 'output/city-civic-database/initiatives');
 const VOICE_DIR = path.join(ROOT, 'output/civic-voice');
 const SHEET_NAME = 'Initiative_Tracker';
 const APPLY = process.argv.includes('--apply');
+// civic.44: --exclude INIT-005[,INIT-xxx] — rows the gate's scoped sanity FAIL
+// named; their decisions stay staged on disk and are never read into the write.
+const EXCLUDE = new Set((() => { const i = process.argv.indexOf('--exclude'); return i > -1 && process.argv[i + 1] ? process.argv[i + 1].split(',').map(s => s.trim()).filter(Boolean) : []; })());
 
 // Write-surface allowlist — the ONLY Initiative_Tracker columns the gate may
 // write. Enforced in normalizeTrackerWrite.setField (defense: a field outside
@@ -364,6 +367,8 @@ function findDecisionFiles(cycle) {
     if (fs.existsSync(decFile)) {
       try {
         const data = JSON.parse(fs.readFileSync(decFile, 'utf-8'));
+        const initId = data.initiative || data.initiativeId;
+        if (EXCLUDE.has(initId)) { console.log(`  EXCLUDED ${initId} (${agent}) — sanity-read FAIL-SCOPED; decision stays staged, row not written`); continue; }
         if (data.trackerUpdates && Object.keys(data.trackerUpdates).length > 0) {
           files.push({
             agent,

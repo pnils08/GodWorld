@@ -79,12 +79,12 @@ Read Riley_Digest (3 cycles), Sports Feed (3 cycles), civic production log (if e
 ```bash
 source ~/.bashrc && XX={XX} && for tag in wd-summary wd-snapshot; do
   if [ "$tag" = wd-summary ]; then C=$(jq -n --rawfile c output/world_summary_c$XX.md '$c'); T=cycle_summary; else C=$(jq -n --arg c "$(grep -m1 '^Snapshot: Cycle ' output/world_summary_c$XX.md)" '$c'); T=cycle_snapshot; fi
-  curl -s -X POST https://api.supermemory.ai/v3/documents -H "Authorization: Bearer $SUPERMEMORY_CC_API_KEY" -H "Content-Type: application/json" \
+  curl -s --max-time 60 -X POST https://api.supermemory.ai/v3/documents -H "Authorization: Bearer $SUPERMEMORY_CC_API_KEY" -H "Content-Type: application/json" \
     -d "$(jq -n --argjson content "$C" --arg cycle "$XX" --arg tag "$tag" --arg type "$T" '{content: $content, containerTags: ["world-data", $tag], metadata: {type: $type, cycle: $cycle}}')" | jq -r '.id // .error'
 done
 ```
 
-**Gate:** File exists on disk + both POSTs return a doc id.
+**Gate:** File exists on disk + both POSTs return a doc id. `--max-time 60` is load-bearing: C110 (2026-10-04) the two POSTs hung 17:12→22:07 with no timeout, and every step behind them (5.55, 5.56) sat for five hours while the 17:17 tick launched the civic chain on a c109 beats dump.
 
 ### Step 5.5: Neighborhood texture (citizen perception — research.19 T2)
 

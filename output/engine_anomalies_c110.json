@@ -1,0 +1,86 @@
+{
+  "cycle": 110,
+  "generatedAt": "C110",
+  "detectorVersion": "1.1.0",
+  "anomalies": [
+    {
+      "type": "anomaly",
+      "severity": "high",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [
+          "POP-01134"
+        ],
+        "neighborhoods": [
+          "Chinatown"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Simulation_Ledger",
+        "rows": [],
+        "fields": {
+          "POPID": "POP-01134",
+          "previousIncome": 74000,
+          "currentIncome": 627147,
+          "ratio": "8.475",
+          "peerShare": "0.00",
+          "subCheck": "citizen-income"
+        }
+      },
+      "description": "POPID POP-01134 income Δ 747% (74000 → 627147); peer move share 0%",
+      "historicalContext": {
+        "priorCycles": [
+          74000
+        ],
+        "currentCycle": 627147
+      },
+      "triagePath": "route-to-engine-debug",
+      "confidence": "high",
+      "detectorVersion": "1.1.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "medium",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [],
+        "neighborhoods": [
+          "Adams Point"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Neighborhood_Map",
+        "rows": [],
+        "fields": {
+          "Neighborhood": "Adams Point",
+          "previousMigrationFlow": 0,
+          "currentMigrationFlow": -4,
+          "delta": "-4.00",
+          "subCheck": "migration-shift",
+          "band": 3.33
+        }
+      },
+      "description": "Adams Point migration flow shifted 0 → -4",
+      "historicalContext": {
+        "priorCycles": [
+          0
+        ],
+        "currentCycle": -4
+      },
+      "triagePath": "suppress-until-verified",
+      "confidence": "medium",
+      "detectorVersion": "1.1.0"
+    }
+  ],
+  "summary": {
+    "total": 2,
+    "byTriage": {
+      "route-to-engine-debug": 1,
+      "suppress-until-verified": 1
+    }
+  }
+}

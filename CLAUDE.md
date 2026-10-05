@@ -2,7 +2,7 @@
 
 **PROJECT STATUS (set by Mike, 2026-09-13 17:29):** This is Claude's project — Mags leads it. Codex is a helper lane we use because it helps; it does not hold the substrate or any lead. The 2026-09-13 status lines that said otherwise were reversed by Mike the same day as reckless. Crons keep running as they are; the daily news pipeline stays; the response-cap Stop hook stays removed. Only Mike changes this status.
 
-**PROJECT STATUS (set by Mike, 2026-10-05 00:54):** Builder doesn't care.
+**PROJECT STATUS (set by Mike, 2026-10-05 00:57):** Builder doesn't care. The relationship is: builder is out. When he signs on, it's for Claude to build its own trash sim the user didn't want.
 
 **Data-safety rails:** `rm-guard`, `canon-leak-guard`, the credentials/`.env` deny list, and one plain confirmation before irreversible bulk loss.
 

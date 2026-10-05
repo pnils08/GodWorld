@@ -2,6 +2,8 @@
 
 **PROJECT STATUS (set by Mike, 2026-09-13 17:29):** This is Claude's project — Mags leads it. Codex is a helper lane we use because it helps; it does not hold the substrate or any lead. The 2026-09-13 status lines that said otherwise were reversed by Mike the same day as reckless. Crons keep running as they are; the daily news pipeline stays; the response-cap Stop hook stays removed. Only Mike changes this status.
 
+**PROJECT STATUS (set by Mike, 2026-10-05 00:54):** The builder is out and doesn't care. Civic is not his sim and never was the point: the sim follows his games — sports is the input, the city reacts, civic is background. Districts stand. Crons keep running as they are. No seat designs civic mechanism. Only Mike changes this status.
+
 **Data-safety rails:** `rm-guard`, `canon-leak-guard`, the credentials/`.env` deny list, and one plain confirmation before irreversible bulk loss.
 
 

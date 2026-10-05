@@ -2606,16 +2606,9 @@ function validateDatawakeMoves(rawMoves, ctx) {
         const r = reachHoods(office, m.reach, m.hoods);
         if (r.issue) reason = r.issue;
         else {
-          // Builder ruling 2026-10-04: the vote is the gate, ideas are not. A
-          // seat may propose for any hood in the city; only an unknown hood
-          // (a row the engine cannot read) is refused. hood-out-of-district
-          // killed D2's Grand Lake proposal in the C109 week.
           for (const h of r.hoods) {
-            const folded = foldHood(h, c2p);
-            if (!CANONICAL_HOODS.has(String(h).trim().toLowerCase()) && !CANONICAL_HOODS.has(folded.toLowerCase())) {
-              reason = 'unknown-hood("' + h + '")';
-              break;
-            }
+            reason = hoodAuthorityReason(office, h, c2p);
+            if (reason) break;
           }
           if (!reason) proposeHoods = r.hoods;
         }
@@ -2655,11 +2648,7 @@ function validateDatawakeMoves(rawMoves, ctx) {
       rejected.push({ move: m, reason });
       continue;
     }
-    // One consequential move per wake — but a proposal is never the move that
-    // dies to it (builder ruling 2026-10-04: an idea goes on the board and the
-    // vote decides; D1's tenant fund died here in the C109 week). A propose
-    // rides alongside the wake's one consequential move and never blocks it.
-    if (type !== 'propose' && accepted.some(a => a.type !== 'propose')) {
+    if (accepted.length) {
       rejected.push({ move: m, reason: 'second-consequential-move(one per wake — the first valid one stands)' });
       continue;
     }

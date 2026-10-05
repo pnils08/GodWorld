@@ -194,7 +194,7 @@ test('T1.2: Live validateDatawakeMoves validates closed move types & rejects unk
   assert.equal(res.rejected[1].reason, 'unknown-move-type(spin)');
 });
 
-test('T1.3: one consequential move per wake (first valid wins) — a propose rides alongside, never blocked (ruling 2026-10-04)', () => {
+test('T1.3: Live validateDatawakeMoves enforces at most one consequential move per wake (first valid wins)', () => {
   const office = { officeId: 'COUNCIL-D1', agentDir: 'civic-office-council-d1', district: 'D1' };
   const boardIds = new Set(['INIT-001', 'INIT-002']);
   const catalog = phaseContract.INTERVENTION_CATALOG;
@@ -206,12 +206,12 @@ test('T1.3: one consequential move per wake (first valid wins) — a propose rid
   ];
 
   const res = civicRun.validateDatawakeMoves(rawMoves, { office, boardIds, catalog, childToParent: CHILD_TO_PARENT_HOOD });
-  assert.equal(res.accepted.length, 2, 'the one consequential move plus the proposal');
+  assert.equal(res.accepted.length, 1, 'Exactly one consequential move is accepted per wake');
   assert.equal(res.accepted[0].type, 'work');
-  assert.equal(res.accepted[1].type, 'propose');
 
-  assert.equal(res.rejected.length, 1);
+  assert.equal(res.rejected.length, 2);
   assert.match(res.rejected[0].reason, /second-consequential-move/);
+  assert.match(res.rejected[1].reason, /second-consequential-move/);
 });
 
 test('T1.4: Live validateDatawakeMoves rejects work move when initiative is off-board', () => {
@@ -242,9 +242,7 @@ test('T1.5: Live validateDatawakeMoves propose hood grounding requires EVERY hoo
   assert.equal(res1.accepted.length, 1);
   assert.equal(res1.accepted[0].payload.title, 'Synthetic clinic service');
 
-  // Cross-district hood (Temescal in D7) -> ACCEPTED since the 2026-10-04 ruling:
-  // ideas are not gated by district, the council vote decides. Only an unknown
-  // hood is refused.
+  // Cross-district hood (Temescal in D7) -> entire move rejected (no intersect loophole)
   const invalidMove = [{
     type: 'propose',
     title: 'Synthetic cross-city clinic',
@@ -254,12 +252,9 @@ test('T1.5: Live validateDatawakeMoves propose hood grounding requires EVERY hoo
     budget: '$20M'
   }];
   const res2 = civicRun.validateDatawakeMoves(invalidMove, { office, catalog, childToParent: CHILD_TO_PARENT_HOOD });
-  assert.equal(res2.accepted.length, 1);
-  assert.equal(res2.rejected.length, 0);
-  const unknownHoodMove = [{ type: 'propose', title: 'Nowhere clinic', category: 'health', reach: 'hood', hoods: ['Atlantis'], problem: 'x', budget: '$20M' }];
-  const resUnknown = civicRun.validateDatawakeMoves(unknownHoodMove, { office, catalog, childToParent: CHILD_TO_PARENT_HOOD });
-  assert.equal(resUnknown.accepted.length, 0);
-  assert.match(resUnknown.rejected[0].reason, /unknown-hood/);
+  assert.equal(res2.accepted.length, 0);
+  assert.equal(res2.rejected.length, 1);
+  assert.match(res2.rejected[0].reason, /hood-out-of-district/);
 
   // Job 2 reach: district expands to every hood in the seat's district, by name
   // (never blank — an empty list fails the engine baseline, no-target-hoods).

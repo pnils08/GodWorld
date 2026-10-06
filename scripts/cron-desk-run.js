@@ -1955,7 +1955,9 @@ async function runAngle(assign) {
     // off-assignment, and that one still fails closed on the second attempt.
     const ANGLE_ATTEMPTS = 2;
     let angleErr = null;
+    let lastAngleRaw = null;
     for (let attempt = 1; attempt <= ANGLE_ATTEMPTS; attempt++) {
+      lastAngleRaw = null;
       try {
         const out = execFileSync('node', [path.join(ROOT, 'scripts', 'citizenVoice.js'),
           '--pop=' + asker.popid, '--ask=' + ask, '--cycle=' + cycle, '--json',
@@ -1970,6 +1972,7 @@ async function runAngle(assign) {
         const jsonStart = outTrim.search(/^\{/m);
         if (jsonStart === -1) throw new Error('citizenVoice --json returned no JSON envelope: ' + outTrim.slice(0, 200));
         const r = JSON.parse(outTrim.slice(jsonStart));
+        lastAngleRaw = String(r.text);
         const plan = PACKET_ACTIVE ? livedPacket.validateAngleOutput(r.text, inputPacket) : null;
         angleRead = { name: r.name, popid: r.popId,
           text: PACKET_ACTIVE ? livedPacket.reporterChaseText(plan) : r.text,
@@ -1984,6 +1987,7 @@ async function runAngle(assign) {
       } catch (e) {
         angleErr = e;
         angleRead = null;
+        if (lastAngleRaw) log('angle attempt ' + attempt + ' raw output: ' + lastAngleRaw.replace(/\s+/g, ' ').slice(0, 400));
         if (attempt < ANGLE_ATTEMPTS) {
           log('angle attempt ' + attempt + '/' + ANGLE_ATTEMPTS + ' failed: ' +
             String(e && e.message || e).replace(/\s+/g, ' ').slice(0, 160) + ' — resampling');

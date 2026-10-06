@@ -524,7 +524,14 @@ function reporterChaseText(plan) {
 }
 
 function validateAngleOutput(value, input) {
-  const raw = typeof value === 'string' ? parseJsonObject(value) : value;
+  let raw = typeof value === 'string' ? parseJsonObject(value) : value;
+  // Jordan Velez C110 (2026-10-05): the model filed the whole plan inside {"output": {...}},
+  // so every field read as missing on both draws. One envelope key holding the plan is the
+  // same plan in a different shape — unwrap it, only when no plan field sits at the top.
+  if (raw && typeof raw === 'object' && !Array.isArray(raw) && !('focus' in raw) && !('chase' in raw)) {
+    const wrap = ['output', 'plan', 'result', 'response'].find(k => raw[k] && typeof raw[k] === 'object' && !Array.isArray(raw[k]));
+    if (wrap) raw = raw[wrap];
+  }
   const out = raw && typeof raw === 'object' && !Array.isArray(raw) ? Object.assign({}, raw) : raw;
   const errs = [];
   // A lead filed as one string, or left null when there is none, is the same

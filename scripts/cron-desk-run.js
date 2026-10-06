@@ -3178,7 +3178,10 @@ function main() {
 // require it. One assignment's failure never kills the rest of the rota.
 // ---------------------------------------------------------------------------
 async function runFanoutStage() {
-  const date = new Date().toISOString().slice(0, 10);
+  // --date YYYY-MM-DD replays a past day's rotation (a missed seat re-run with --only); default is today.
+  const dateArg = arg('--date', null);
+  if (dateArg && !/^\d{4}-\d{2}-\d{2}$/.test(dateArg)) throw new Error('--date must be YYYY-MM-DD');
+  const date = dateArg || new Date().toISOString().slice(0, 10);
   const fanoutApi = require('./newsroom-fanout');
   let fanout = fanoutApi.loadFanout(date);
   if (!fanout) {

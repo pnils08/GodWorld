@@ -113,6 +113,14 @@ const plan = p.validateAngleOutput(withChase(w1, {
 }), w1);
 assert.equal(plan.targets[0].pop, 'TEST-POP-01');
 assert.ok(plan.chase.indexOf('TEST-ONLY') >= 0);
+// Envelope shape (Jordan Velez C110): the same plan filed inside {"output": {...}} validates identically.
+const wrapped = p.validateAngleOutput(JSON.stringify({ output: withChase(w1, {
+  focus: 'TEST-ONLY mismatch', why: 'It is unresolved', checks: ['Check the source'],
+  targets: [{ pop: 'TEST-POP-01', question: 'What do you own?', basis: 'assigned-official' }],
+  interpretation: 'Accountability may lag', unverifiedLead: [], closeQuestion: 'Who owns the response?'
+}) }), w1);
+assert.equal(wrapped.focus, plan.focus);
+assert.throws(() => p.validateAngleOutput({ output: { interpretation: 'only this' } }, w1), /missing focus/);
 assert.throws(() => p.validateAngleOutput({ ...plan, targets: [{ pop: 'MADE-UP', question: 'x', basis: 'x' }] }, w1), /supplied pop/);
 assert.throws(() => p.validateAngleOutput(withChase(w1, {
   chase: '',

@@ -66,7 +66,8 @@ function syncRules() {
     if (prev && prev.hash === hash) { next[d.key] = prev; skipped++; continue; }
     const customId = 'rules-' + sha(d.key).slice(0, 24);
     try {
-      const out = execSync(`npx supermemory add --stdin --tag ${RULES_TAG} --id ${customId} --title ${JSON.stringify(d.title)} --metadata ${JSON.stringify(JSON.stringify({ source: d.key }))} --json`,
+      // supermemory CLI 5.x: `--namespace` (was `--tag`); `--title` is gone — the title is the content's first line.
+      const out = execSync(`npx supermemory add --stdin --namespace ${RULES_TAG} --id ${customId} --metadata ${JSON.stringify(JSON.stringify({ source: d.key, title: d.title }))} --json`,
         { input: content, stdio: ['pipe', 'pipe', 'pipe'], timeout: 90000 }).toString();
       const res = JSON.parse(out.slice(out.indexOf('{')));
       next[d.key] = { hash, customId, id: res.id };
@@ -80,7 +81,7 @@ function syncRules() {
   for (const [key, entry] of Object.entries(manifest)) {
     if (next[key]) continue;
     try {
-      execSync(`npx supermemory docs delete ${entry.id} --yes`, { stdio: ['ignore', 'pipe', 'pipe'], timeout: 60000 });
+      execSync(`npx supermemory docs delete ${entry.id} --namespace ${RULES_TAG} --yes`, { stdio: ['ignore', 'pipe', 'pipe'], timeout: 60000 });
       removed++;
     } catch (e) {
       next[key] = entry;  // retry the delete next run
@@ -129,16 +130,19 @@ function searchBrain(tag = BRAIN_TAG, source = 'brain') {
     // sl-rules runs hybrid: its value is the rule TEXT (document chunks), which memory-only
     // extraction drops; sl-godworld saves are already atomic memories.
     const mode = tag === RULES_TAG ? ' --mode hybrid' : '';
-    const out = execSync(`npx supermemory search ${JSON.stringify(query)} --tag ${tag}${mode}`, { stdio: ['ignore', 'pipe', 'pipe'], timeout: 60000 }).toString();
+    // supermemory CLI 5.x: `--namespace` (was `--tag`), results under `.results[]` with the
+    // text in `chunk` and the dates under `system.{updatedAt,createdAt}`.
+    const out = execSync(`npx supermemory search ${JSON.stringify(query)} --namespace ${tag}${mode} --json`, { stdio: ['ignore', 'pipe', 'pipe'], timeout: 60000 }).toString();
     const start = out.indexOf('{');
     const data = JSON.parse(out.slice(start));
     const results = Array.isArray(data) ? data : (data.results || []);
     const cutoff = DAYS > 0 ? Date.now() - DAYS * 86400000 : 0;
+    const when = r => (r.system && (r.system.updatedAt || r.system.createdAt)) || r.updatedAt || r.createdAt || '';
     return results
-      .filter(r => !cutoff || Date.parse(r.updatedAt || r.createdAt || 0) >= cutoff)
+      .filter(r => !cutoff || Date.parse(when(r) || 0) >= cutoff)
       .slice(0, LIMIT)
       .map(r => ({
-        source, date: (r.updatedAt || r.createdAt || '').slice(0, 10), id: r.id,
+        source, date: when(r).slice(0, 10), id: r.id,
         kind: `sim=${(r.similarity || 0).toFixed(2)}`,
         text: (r.memory || r.chunk || '').replace(/\s+/g, ' ').slice(0, 240),
         pointer: `supermemory ${tag} ${r.id}`,

@@ -510,6 +510,9 @@ function processMoneyLoop_(ctx, cycle) {
         debtCfg.debtDefaultCycles > 0 && rng() < 1 / debtCfg.debtDefaultCycles) {
       debt = DEBT_DEFAULT_RESET;
       nwNew = 0;
+      // engine.282: a blank NetWorth cell reads 0, so the change-gated write below
+      // would skip it — the default writes its 0 here, blank cell or not.
+      if (iNW >= 0) row[iNW] = 0;
       results.defaults++;
       if (!noteDebtDefault_(row, iDS, cycle)) results.unmarked++;
       // Step 2 set WealthLevel from the net worth this default just emptied; redo the

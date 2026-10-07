@@ -551,7 +551,7 @@ for (const left of ['traded', 'inactive']) {
   fx.ctx.config.judicialDivertedRate = 0;
   fx.ctx.config.judicialHeldRate = 0;
   phaseBox.runJudicialLifecycle_(fx.ctx);
-  assert('T6 reconcile exit restores known blank to active', fx.person[1] === 'active');
+  assert('T6 reconcile exit restores known blank to Active (engine.283 canonical case)', fx.person[1] === 'Active');
 }
 {
   const fx = phaseFixture('active', 101);

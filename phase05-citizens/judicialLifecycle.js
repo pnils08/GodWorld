@@ -525,7 +525,9 @@ function cityCourtRevenue_(ctx, cfg, trackedIntakesByHood) {
 }
 
 function judicialSetStatus_(ctx, row, status, cycle, iStatus, iStart) {
-  row[iStatus] = status;
+  // engine.283: the ledger's canonical case is `Active`; exact-match readers
+  // (runCareerEngine, undockedEligible_) skip a lowercase cell.
+  row[iStatus] = String(status).trim().toLowerCase() === 'active' ? 'Active' : status;
   // Custody stamps its start; a restored life-state clears it, as a care discharge does.
   row[iStart] = String(status).toLowerCase() === 'detained' ? cycle : '';
   ctx.ledger.dirty = true;

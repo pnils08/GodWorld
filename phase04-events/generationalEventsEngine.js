@@ -430,10 +430,15 @@ function runGenerationalEngine_(ctx) {
       );
 
       if (healthResult) {
-        if (healthResult.newStatus === 'active') {
+        // engine.283: the health engine's 'active' is the discharge; the carried
+        // PriorStatus (Retired, Active…) replaces it, so key cleanup on the flag.
+        var discharged = healthResult.newStatus === 'active';
+        if (discharged) {
           healthResult.newStatus = hospitalPriorStatusForDischarge_(ctx, popId) || 'active';
         }
-        row[iStatus] = healthResult.newStatus;
+        // The ledger cell carries the canonical `Active`; the event payload keeps its own case.
+        row[iStatus] = String(healthResult.newStatus).trim().toLowerCase() === 'active' ?
+          'Active' : healthResult.newStatus;
 
         // engine.102 W4 — legacy tracked citizens with a blank HealthCause
         // (pre-W4 admissions) get a cause stamped at their next transition,
@@ -462,13 +467,13 @@ function runGenerationalEngine_(ctx) {
           row[iLife] = setHospitalIncomeState_(row[iLife], continuesHospital ? cycle : 0,
             continuesHospital ? carriedIncomeHit : 0);
           if (iStatusStart >= 0) {
-            row[iStatusStart] = (healthResult.newStatus === "active" ||
+            row[iStatusStart] = (discharged ||
               !(['hospitalized', 'critical', 'recovering', 'injured', 'serious-condition'].indexOf(
                 String(healthResult.newStatus).toLowerCase()) >= 0)) ? "" : cycle;
           }
         }
 
-        if (healthResult.newStatus === "active" && iHealthCause >= 0) {
+        if (discharged && iHealthCause >= 0) {
           row[iHealthCause] = "";
         }
 
@@ -478,7 +483,7 @@ function runGenerationalEngine_(ctx) {
         );
         ctx.summary.generationalEvents.push(transitionEvent);
 
-        if (healthResult.newStatus === "active") counts.recoveries++;
+        if (discharged) counts.recoveries++;
         if (healthResult.newStatus === "deceased") counts.deaths++;
         if (healthResult.newStatus === "critical") counts.deteriorations++;
 

@@ -470,6 +470,56 @@ check('T6 discharge restores hospital P casing and closes its row', () => {
   assert.strictEqual(hospital.rows[1][8], 8002);
   assert.strictEqual(hospital.rows[1][9], 'recovered');
 });
+// engine.283: a discharge to a carried prior is still a discharge — cause and
+// start clear, the recovery counts (the Logger line is the counter's only reader).
+function recoveriesLogged(fn) {
+  const lines = [], prev = sb.Logger.log;
+  sb.Logger.log = m => lines.push(String(m));
+  try { fn(); } finally { sb.Logger.log = prev; }
+  const hit = lines.map(l => /Recoveries: (\d+)/.exec(l)).filter(Boolean)[0];
+  return hit ? Number(hit[1]) : NaN;
+}
+check('engine.283 discharge to a carried Retired clears cause + start and counts the recovery', () => {
+  const ctx = make('UNTRACKED');
+  const pop = ctx.ledger.rows[0][ix('POPID')];
+  const hospital = hospitalSheet(['H-C8000-' + pop, pop, '', '', '', 8000,
+    'recovering', 8001, '', '', '', '', '', '', '', 'Retired']);
+  ctx.ledger.rows[0][ix('Status')] = 'recovering';
+  ctx.ledger.rows[0][ix('StatusStartCycle')] = 8000;
+  ctx.cache.getData = () => ({ exists: true, values: hospital.rows.map(row => row.slice()) });
+  const n = recoveriesLogged(() => withEngineStubs({ processHealthLifecycle_: () => ({ type: 'health', tag: 'Recovery',
+    description: 'synthetic recovery', newStatus: 'active' }) }, () => sb.runGenerationalEngine_(ctx)));
+  assert.strictEqual(ctx.ledger.rows[0][ix('Status')], 'Retired');
+  assert.strictEqual(ctx.ledger.rows[0][ix('HealthCause')], '');
+  assert.strictEqual(ctx.ledger.rows[0][ix('StatusStartCycle')], '');
+  assert.strictEqual(ctx.summary.hospitalEvents[0].to, 'Retired');
+  assert.strictEqual(n, 1);
+});
+check('engine.283 discharge to a carried Active writes Active and counts the recovery', () => {
+  const ctx = make('UNTRACKED');
+  const pop = ctx.ledger.rows[0][ix('POPID')];
+  const hospital = hospitalSheet(['H-C8000-' + pop, pop, '', '', '', 8000,
+    'recovering', 8001, '', '', '', '', '', '', '', 'Active']);
+  ctx.ledger.rows[0][ix('Status')] = 'recovering';
+  ctx.ledger.rows[0][ix('StatusStartCycle')] = 8000;
+  ctx.cache.getData = () => ({ exists: true, values: hospital.rows.map(row => row.slice()) });
+  const n = recoveriesLogged(() => withEngineStubs({ processHealthLifecycle_: () => ({ type: 'health', tag: 'Recovery',
+    description: 'synthetic recovery', newStatus: 'active' }) }, () => sb.runGenerationalEngine_(ctx)));
+  assert.strictEqual(ctx.ledger.rows[0][ix('Status')], 'Active');
+  assert.strictEqual(ctx.ledger.rows[0][ix('HealthCause')], '');
+  assert.strictEqual(n, 1);
+});
+check('engine.283 a transition that is not a discharge counts no recovery and keeps the cause', () => {
+  const ctx = make('UNTRACKED');
+  ctx.ledger.rows[0][ix('Status')] = 'recovering';
+  ctx.ledger.rows[0][ix('StatusStartCycle')] = 8000;
+  ctx.cache.getData = () => ({ exists: true, values: [hospitalSheet(['x']).rows[0]] });
+  const n = recoveriesLogged(() => withEngineStubs({ processHealthLifecycle_: () => ({ type: 'health', tag: 'Relapse',
+    description: 'synthetic relapse', newStatus: 'hospitalized' }) }, () => sb.runGenerationalEngine_(ctx)));
+  assert.strictEqual(ctx.ledger.rows[0][ix('Status')], 'hospitalized');
+  assert.strictEqual(ctx.ledger.rows[0][ix('HealthCause')], 'SYNTHETIC TEST CAUSE');
+  assert.strictEqual(n, 0);
+});
 check('T6 pre-P blank discharge restores active', () => {
   const ctx = make('UNTRACKED');
   const pop = ctx.ledger.rows[0][ix('POPID')];
@@ -480,7 +530,9 @@ check('T6 pre-P blank discharge restores active', () => {
   ctx.cache.getData = () => ({ exists: true, values: hospital.rows.map(row => row.slice()) });
   withEngineStubs({ processHealthLifecycle_: () => ({ type: 'health', tag: 'Recovery',
     description: 'synthetic recovery', newStatus: 'active' }) }, () => sb.runGenerationalEngine_(ctx));
-  assert.strictEqual(ctx.ledger.rows[0][ix('Status')], 'active');
+  // engine.283: the cell is canonical, the event keeps the engine's own case
+  assert.strictEqual(ctx.ledger.rows[0][ix('Status')], 'Active');
+  assert.strictEqual(ctx.summary.hospitalEvents[0].to, 'active');
 });
 check('T6 missing-bed lifecycle transition admits with blank P, never a health state', () => {
   const ctx = make('UNTRACKED');

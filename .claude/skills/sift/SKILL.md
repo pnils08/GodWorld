@@ -63,7 +63,7 @@ v2 separates **canon content sources** (Steps 1-2) from **structured inputs** (S
 ### Canon content sources (load-bearing)
 
 1. **Sheet primary** — `lib/sheets.getSheetData()` reads `Oakland_Sports_Feed` (Mike-typed sports canon rows) + `Riley_Digest` (evening media programming, atmospheric texture) + `Initiative_Tracker` (initiative phase, status, vote-cycle freshness) + `Simulation_Ledger` (citizen lookup baseline). THE canon content source. Replaces v1.x's world_summary-as-primary.
-2. **Canon archive** — `search_canon(topic)` MCP (bay-tribune published-canon) + `mcp__plugin_claude-mem_mcp-search__search` (past-session adjacent threads) + `search-memory.cjs --user` (Supermemory mags — editorial decisions). What the Tribune already published / decided. Step 2 mandatory.
+2. **Canon archive** — `search_canon(topic)` MCP (bay-tribune published-canon) + `mcp__plugin_claude-mem_mcp-search__search` (past-session adjacent threads) + `npx supermemory search "<topic>" --namespace mags --json` (Supermemory mags — editorial decisions). What the Tribune already published / decided. Step 2 mandatory.
 3. **NEWSROOM_MEMORY** — `docs/mags-corliss/NEWSROOM_MEMORY.md` — errata, coverage gaps, character continuity, active story tracking. Ranged-read per S215 prescription (file is ~1,155 lines / ~50K tokens — exceeds Read tool's 25K whole-file limit).
 
 ### Structured inputs (auditor JSONs + city-hall log)
@@ -181,7 +181,7 @@ Mandatory pre-extraction lookups. Skipping this step = silo'd story selection th
 **Canon archive lookups:**
 - `search_canon(query)` — MCP bay-tribune. Query per thread surfaced in Step 1. What has the Tribune published on this topic / citizen / initiative.
 - `mcp__plugin_claude-mem_mcp-search__search` — past-session adjacent threads (decisions, failures, what was tried).
-- `search-memory.cjs --user "<query>"` — Supermemory mags (editorial decisions, character continuity).
+- `npx supermemory search "<query>" --namespace mags --json` — Supermemory mags (editorial decisions, character continuity).
 
 **NEWSROOM_MEMORY ranged-read prescription (S215, closes G-S4):** the file is ~1,155 lines / ~50K tokens — exceeds Read tool's 25K whole-file limit. Read by section:
 

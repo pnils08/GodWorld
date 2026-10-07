@@ -348,6 +348,8 @@ function creativeBriefFromSlice(slice) {
     : null;
 }
 
+const PLANNING_SKIP_FACT = /^(?:CASINO|CITY MONEY|DEBT):/;
+
 function buildAnglePacket({ cycle, desk, reporter, story, approach, slice, lane, candidates: modeCandidates }) {
   if (!story) throw new Error('W1 Packet requires an assigned story');
   const src = story.ref || 'assignment';
@@ -375,6 +377,7 @@ function buildAnglePacket({ cycle, desk, reporter, story, approach, slice, lane,
   const prewriteEvidence = prewrite.evidence || [];
   for (const fact of prewrite.anchorFacts || []) {
     const text = clean(fact, 500);
+    if (PLANNING_SKIP_FACT.test(text || '')) continue;
     const evidence = prewriteEvidence.find(row => row && clean(row.text, 500) === text);
     const factSrc = clean(evidence && evidence.src, 300) || clean(src, 300);
     if (text && !/\b(?:do not|never)\s+(?:invent|lead|print|publish|assert|name|use)\b/i.test(text) &&
@@ -382,8 +385,14 @@ function buildAnglePacket({ cycle, desk, reporter, story, approach, slice, lane,
       known.push(refClaim('FACT', text, factSrc));
     }
   }
+  // The planner picks a chase; the casino, city-treasury and debt lines are
+  // money context for the writer, not the plan. Business desk C110 (2026-10-05):
+  // with 11 of them in W1 `known` both models answered with a fact-id lattice
+  // instead of the plan form (0 of 9 valid); without them 6 of 8 were valid and
+  // the rest fell to the resample. The writer wake reads the slice, not this list.
   for (const fact of prewrite.presentFacts || []) {
     const text = clean(fact, 500);
+    if (PLANNING_SKIP_FACT.test(text || '')) continue;
     if (text && !known.some(claim => claim.text === text && claim.src === clean(src, 300))) {
       known.push(refClaim('FACT', text, src));
     }

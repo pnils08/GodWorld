@@ -120,6 +120,12 @@ const wrapped = p.validateAngleOutput(JSON.stringify({ output: withChase(w1, {
   interpretation: 'Accountability may lag', unverifiedLead: [], closeQuestion: 'Who owns the response?'
 }) }), w1);
 assert.equal(wrapped.focus, plan.focus);
+// Money lines (casino, city treasury, debt) stay out of the planner's known list.
+const moneyW1 = p.buildAnglePacket({ cycle: 110, desk: 'business', reporter: { popid: 'TEST-POP-01', name: 'T' },
+  story: { angle: 'TEST-ONLY storefronts', label: 'TEST-ONLY storefronts' }, approach: 'a',
+  slice: { prewrite: { anchorFacts: ['TEST-ONLY shop A · 4 employees', 'CASINO: TEST-ONLY wager'], presentFacts: ['CITY MONEY: TEST-ONLY treasury', 'DEBT: TEST-ONLY level'] } } });
+assert.ok(moneyW1.known.some(k => /shop A/.test(k.text)));
+assert.ok(!moneyW1.known.some(k => /^(CASINO|CITY MONEY|DEBT):/.test(k.text)));
 assert.throws(() => p.validateAngleOutput({ output: { interpretation: 'only this' } }, w1), /missing focus/);
 assert.throws(() => p.validateAngleOutput({ ...plan, targets: [{ pop: 'MADE-UP', question: 'x', basis: 'x' }] }, w1), /supplied pop/);
 assert.throws(() => p.validateAngleOutput(withChase(w1, {

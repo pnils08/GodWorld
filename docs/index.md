@@ -491,6 +491,7 @@ These files live at `/root/GodWorld/` and are catalogued here for completeness. 
 
 - **[[plans/2026-10-03-citizen-pages-drive-canon]]** — pipeline.70: the citizens' own pages (2,077 docs, 369 citizens, no newsroom reader) wired into sourcing (`street` page-line evidence), packets, Celeste's pulse slice, the letters pool and Rhea — builder ruling 2026-10-03 that the pages are not private and should drive canon; go 02:05 on all six seams, §5 is the seam 1 build brief. *(plan, newsroom, in-progress)*
 - **[[plans/2026-10-04-school-board]]** — civic.43: seven elected citywide Oakland Unified board seats; approval engine widened by ID prefix, education initiatives voted by the board, holders authored from the ledger; no hospital board. *(plan, civic, engine, in-progress)*
+- **[[plans/2026-10-06-supermemory-v5-migration]]** — infrastructure.10: vendor v3/v4 sunset ~2027-01-06; call-site inventory (~30 direct callers, live bot, 3 crons, 4 skill curls), v5 field map, the one-namespace-per-document design decision, cut order and acceptance.
 
 ## `docs/adr/` — architectural decision records (new S187, ADR pattern)
 
@@ -639,3 +640,4 @@ _(Newest first, per SCHEMA §12 — normalized 2026-07-24.)_
 - 2026-04-14 — Initial catalog (Phase 41.2, S146). 86 active docs across 7 folders. Companion to [[SCHEMA]]. Will fold [[engine/DOCUMENTATION_LEDGER]] in over time.
 
 - 2026-09-28 (engine-sheet) — Registered the storylines-keyed-to-engine-events plan under engine.270.
+- 2026-10-06 (engine-sheet) — Registered [[plans/2026-10-06-supermemory-v5-migration]] (infrastructure.10; vendor migration email received the same day).

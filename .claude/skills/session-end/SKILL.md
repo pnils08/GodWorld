@@ -66,7 +66,7 @@ Three sub-actions:
 **Optional model sub-actions:**
 
 - **`/save-to-mags`** — model judgment whether the session has anything architectural worth canonizing. Tag with terminal name (`[research/build]`, `[media]`, etc.). There is NO Stop-hook auto-save (neutralized S221, verified S283) — deliberate saves are the only Supermemory writes; claude-mem carries the automatic session record.
-- **Session save — REQUIRED, one per session, BEFORE Step 3.** Command and rules: `CLAUDE.md` §Search before you guess (the brain). Worth saving: rulings, landmines, a container/schema change, a frozen-vs-live distinction. A session with nothing to say still leaves one line on what it did. `/save-to-mags` writes to Mags' own `mags` container and does NOT reach sl-godworld — don't treat one as covering the other.
+- **Session save — REQUIRED, one per session, BEFORE Step 3.** Command and rules: `CLAUDE.md` §Boot and memory (the brain). Worth saving: rulings, landmines, a container/schema change, a frozen-vs-live distinction. A session with nothing to say still leaves one line on what it did. `/save-to-mags` writes to Mags' own `mags` container and does NOT reach sl-godworld — don't treat one as covering the other.
 - **`/batch`** — submit heavy analysis work that wasn't urgent enough to run live. Results wait at 50% cost for next session.
 
 **Terminal-specific files** (RESEARCH.md for research-build, ENGINE_MAP / stub maps / DEPLOY.md pointers for engine-sheet) get updated alongside SESSION_CONTEXT/ROLLOUT per the audit tables in §Terminal-Specific Detail — no separate step.

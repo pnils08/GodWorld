@@ -48,7 +48,7 @@ pointers:
 
 **Guard** — `.claude/hooks/pre-tool-check.sh:286` keys on `curl.*api\.supermemory\.ai` + a mutating verb, not on `/v3/`; moving skills to `/ns/` stays guarded. `.claude/settings.json:102` allowlist is host-only; unchanged.
 
-**Already done** — `scripts/brainSearch.js` on CLI 5.x (`--namespace`, `.results[].chunk`, `system.updatedAt`). `CLAUDE.md:53` save row still reads `remember --tag`; builder's file.
+**Already done** — `scripts/brainSearch.js` on CLI 5.x (`--namespace`, `.results[].chunk`, `system.updatedAt`). `CLAUDE.md` save row on `add --namespace sl-godworld` (builder-direct 2026-10-07).
 
 ## The design decision (one namespace per document)
 

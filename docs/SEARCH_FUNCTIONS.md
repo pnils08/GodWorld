@@ -41,7 +41,8 @@ that. This is "which function do I call."
 | Free-text term across every sheet (audit/verify) | `queryLedger.js verify <term>` | 6 core ledger sheets, full-row scan |
 | Term appearing in a published article | `queryLedger.js articles <term>` or MCP `search_articles` | `editions/` + `output/drive-files/` (CLI) vs dashboard article index (MCP) — not the same corpus, see below |
 | Discord bot / citizen-loop free-text city search | `search_world` (Discord tool) → `lib/mags.js searchDisk` | live grep `output/` + `docs/` + `editions/` |
-| A citizen's own private reflections/journal | `lib/citizenPage.js readPage_`/`recentPage_` | `citizen-pages` container, tag `cp-POP-XXXXX` |
+| A citizen's own private reflections/journal | `lib/citizenPage.js recentPage_` | `citizen-pages` container, tag `cp-POP-XXXXX` |
+| Which citizens have talked about X (all pages, by meaning) | `scripts/scanCitizenPages.js --query "X"` | `citizen-pages` as one namespace, ledger join |
 
 ## MCP surfaces — `scripts/godworld-mcp.py`
 
@@ -158,6 +159,23 @@ called from the deterministic cycle path).
   recent reflections."
 - Consumers: citizen-wake flow (Phase-2 narrative store, research.19),
   `magsPageRecall.js` (Mags' own EIC memory injection from her citizen page).
+
+### Across ALL citizens — `scripts/scanCitizenPages.js`
+
+Both modes read the whole `citizen-pages` container and join each hit to the
+ledger snapshot (name, clock, tier, role, hood). Read-only, build/wake-side.
+
+- **`--pattern "<regex>"`** — exact-word grep over the local mirror
+  (`output/citizen_pages/index.jsonl`, refreshed by `--dump`). "Who said the
+  word Oaks."
+- **`--query "<meaning>"`** `[--limit 30] [--min-sim 0.5] [--hood name] [--out f]`
+  — meaning search, one v5 call (`POST /ns/citizen-pages/search`), grouped by
+  citizen with each hit's cycle/daypart/similarity and the citizen's words.
+  "Who has talked about sitting by the water." Admission rule applied from
+  the hit's metadata (type reflection|tension, cycle ≤ live). Added
+  2026-10-06; the v3/v4 routes 500 on this container for many queries.
+- Same thing by hand: `npx supermemory search "<meaning>" --namespace citizen-pages --json`
+  (no ledger join, no admission rule).
 
 ## Supermemory CLI (manual/ad hoc)
 

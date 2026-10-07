@@ -318,8 +318,59 @@ async function grep() {
   if (OUT) { fs.writeFileSync(OUT, JSON.stringify({ pattern, container: CONTAINER, via, scanned: docs.length, citizens: table, docs: perDoc }, null, 2)); console.error('->', OUT); }
 }
 
+// --query: meaning search across EVERY citizen's page — "who has talked about X" — grouped by
+// citizen. The pattern grep above needs the exact words; this asks the service for the idea and
+// gets back the citizens who voiced it, with their words. Hits the parent container as one v5
+// namespace (`POST /ns/citizen-pages/search`, default mode — each hit carries `metadata.popId`,
+// `metadata.type`, `metadata.cycle` from the writer, so the admission rule still applies: type in
+// {reflection,tension}, cycle <= live). Supermemory v5 route (infrastructure.10) — the v3/v4
+// routes 500 on this container for many queries. Read-only; wake-side/build-side only.
+async function query() {
+  const q = arg('query', null);
+  const LIMIT = Math.min(Number(arg('limit', 30)), 100);
+  const MIN_SIM = Number(arg('min-sim', 0.5));
+  const HOOD = arg('hood', null);
+  const OUT = arg('out', null);
+  const live = liveCycle();
+  let res = null, status = 0;
+  for (let attempt = 0; attempt < 2 && !res; attempt++) {  // the search route 500s intermittently; one retry
+    const r = await fetch(API + '/ns/' + CONTAINER + '/search', { method: 'POST', headers: auth(), body: JSON.stringify({ query: q, limit: LIMIT }) });
+    status = r.status;
+    const j = await r.json().catch(() => ({}));
+    if (r.ok && Array.isArray(j.results)) res = j.results;
+  }
+  if (!res) { console.error('search failed (HTTP ' + status + ')'); process.exit(1); }
+  const ledger = loadLedger();
+  const perCitizen = {}; let admitted = 0, dropped = { type: 0, cycle: 0, sim: 0, hood: 0, nopop: 0 };
+  for (const r of res) {
+    const m = r.metadata || {};
+    const popId = String(m.popId || m.popid || '').toUpperCase();
+    if (!/^POP-\d{5}$/.test(popId)) { dropped.nopop++; continue; }
+    if (!TYPES.has(String(m.type || ''))) { dropped.type++; continue; }
+    if (live != null && Number(m.cycle) > live) { dropped.cycle++; continue; }
+    if ((r.similarity || 0) < MIN_SIM) { dropped.sim++; continue; }
+    const row = ledger[popId] || {};
+    if (HOOD && String(row.Neighborhood || '') !== HOOD) { dropped.hood++; continue; }
+    admitted++;
+    const c = perCitizen[popId] || (perCitizen[popId] = { popId, name: row.Name || '?', clock: row.ClockMode || '?', tier: row.Tier || '?',
+      role: String(row.RoleType || '').replace(/\s+/g, ' ').slice(0, 40), hood: row.Neighborhood || '?', hits: 0, best: 0, lines: [] });
+    c.hits++;
+    c.best = Math.max(c.best, r.similarity || 0);
+    c.lines.push({ cycle: m.cycle, daypart: m.daypart, type: m.type, sim: Math.round((r.similarity || 0) * 100) / 100,
+      text: String(r.chunk || r.memory || '').replace(/\s+/g, ' ').slice(0, 240), id: r.id });
+  }
+  const table = Object.values(perCitizen).sort((a, b) => b.best - a.best || b.hits - a.hits);
+  console.log(`query "${q}" | results ${res.length} | admitted ${admitted} | citizens ${table.length} | dropped ${JSON.stringify(dropped)} | live C${live}`);
+  console.log('POPID | Name | Clock | Tier | Role | Hood | hits | best');
+  for (const c of table) {
+    console.log([c.popId, c.name, c.clock, c.tier, c.role, c.hood, c.hits, c.best.toFixed(2)].join(' | '));
+    for (const l of c.lines) console.log(`    c${l.cycle} ${l.daypart} ${l.type} ${l.sim}  ${l.text}`);
+  }
+  if (OUT) { fs.writeFileSync(OUT, JSON.stringify({ query: q, container: CONTAINER, results: res.length, admitted, citizens: table }, null, 2)); console.error('->', OUT); }
+}
+
 module.exports = { INDEX_DIR, INDEX_PATH, META_PATH, SLOT_RE, TYPES, RULE, admit, loadIndex, loadMeta, dumpIndex, listAll, citizenText,
-  stanceConflict, stances, polarityOfText, polarityOfDoc, themesFor };
+  stanceConflict, stances, polarityOfText, polarityOfDoc, themesFor, query };
 
 if (require.main === module) {
   (async () => {
@@ -332,7 +383,8 @@ if (require.main === module) {
       return;
     }
     if (arg('pattern', null)) { await grep(); return; }
-    console.error('usage: --dump [--quiet] [--concurrency n] | --pattern <regex> [--out file] [--min-hits n] [--hood name]');
+    if (arg('query', null)) { await query(); return; }
+    console.error('usage: --dump [--quiet] [--concurrency n] | --pattern <regex> [--out file] [--min-hits n] [--hood name] | --query "<meaning>" [--limit n] [--min-sim 0.5] [--hood name] [--out file]');
     process.exit(2);
   })().catch((e) => { console.error('FAIL', e.message); process.exit(1); });
 }

@@ -178,6 +178,11 @@
             "type": "command",
             "command": "bash /root/GodWorld/.claude/hooks/canon-leak-guard.sh",
             "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "bash /root/GodWorld/.claude/hooks/civic-gate-guard.sh",
+            "timeout": 10
           }
         ]
       },

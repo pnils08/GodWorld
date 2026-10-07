@@ -95,6 +95,14 @@ if ! bash "$(git rev-parse --show-toplevel)/.claude/hooks/canon-leak-guard.sh" -
   exit 1
 fi
 
+# Civic gate — the vote is the gate (builder ruling 2026-10-04; kept and wired
+# on builder's word 2026-10-06). A new refusal on the civic move path blocks;
+# catches Bash-side writes the PreToolUse hook cannot see. Runs regardless of
+# CLAUDE_CTL. Detail: .claude/hooks/civic-gate-guard.sh
+if ! bash "$(git rev-parse --show-toplevel)/.claude/hooks/civic-gate-guard.sh" --staged; then
+  exit 1
+fi
+
 # ---------------------------------------------------------------------------
 # Writer exit-code lint (governance.49) — ratcheted standing check for the
 # writer-fixed/artifact-persists class: a script whose delete/replace failure

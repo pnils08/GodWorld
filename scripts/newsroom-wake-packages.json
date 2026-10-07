@@ -824,7 +824,7 @@
       },
       "write": {
         "provider": "openrouter",
-        "model": "openai/gpt-5.6-luna"
+        "model": "anthropic/claude-opus-5.5"
       }
     },
     "reviewProfile": {

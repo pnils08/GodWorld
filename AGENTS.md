@@ -104,8 +104,8 @@ Container: `sl-godworld`. Every lane writes and reads the same one — kimi, cod
 grok, antigravity, and all four Claude terminals. One brain; the reasoning model
 differs, the memory does not.
 
-- Save: `npx supermemory remember "<fact>" --tag sl-godworld` (`--static` = permanent)
-- Search: `npx supermemory search "<query>" --tag sl-godworld`
+- Save: `npx supermemory add "<fact>" --namespace sl-godworld`
+- Search: `npx supermemory search "<query>" --namespace sl-godworld`
 
 Rules:
 

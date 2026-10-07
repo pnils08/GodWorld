@@ -48,6 +48,9 @@ paths:
   - ".claude/skills/cycle-review/**"
   - ".claude/skills/capability-review/**"
   - ".claude/skills/adversarial-review/**"
+  - "scripts/cron-desk-run.js"
+  - "scripts/cron-civic-run.js"
+  - "scripts/newsroom-*"
 ---
 
 <!-- G-SS10 (S247/RB-6): the `output/` entries above are the newsroom-OWNED subdirs, NOT a bare
@@ -118,3 +121,18 @@ These are media-terminal-specific; they left universal MEMORY.md to load only wh
 - New citizens require: Name, Age, Neighborhood, Occupation.
 - Mara Directive topics are assignments, not suggestions.
 - **Citizen age = the sim's calendar year − `BirthYear`.** The year turned to 2042 when C104 closed (C105–C156 = 2042; engine `simYearFromCycle_`). Read `BirthYear` from the ledger (or MCP `lookup_citizen`); the `Age` column is empty by design. Never guess an age, never hardcode a year, never trust `Age` values in derived docs (`world_summary_*`, `pending_decisions_*`).
+
+## Newsroom memories (moved from MEMORY.md 2026-10-07; files in the auto-memory dir, searchable via `node scripts/brainSearch.js`)
+
+- A civic story needs a non-official citizen living the consequence. (`feedback_civic-story-needs-affected-citizen`)
+- Interview only citizens the story touched, or none; reporters differ by sourcing. (`feedback_interview-impacted-citizens-or-none`)
+- Canon is color, not a data echo — restating an engine number writes it into canon twice. (`feedback_canon-is-color-not-data-echo`)
+- Centralized curation tidies stories — reach around curated feeds to the raw ledger and citizens' own words. (`feedback_centralized-curation-tidies-stories`)
+- Gate the facts (citizens, offices, teams, tracker), not the color; all other invention is the job. (`project_gate-the-facts-not-the-color`)
+- Every article threads engine + simulation + user actions. (`project_three-layer-coverage-principle`)
+- Editions invented struggle the engine never reported; the fix is shared neighborhood-slicer data. (`project_edition-engine-fidelity-seam`)
+- Check named businesses on the Business ledger before inventing a neighborhood economy. (`feedback_business-ledger-before-neighborhood-description`)
+- Months as loose talk are fine; calendar-driven stories are not. (`feedback_months-loose-talk-ok-calendar-driven-stories-not`)
+- What Mike hates: repeated front pages, thin engine texture, cynical tone, invented citizens when existing ones fit. (`feedback_what-mike-hates`)
+- Division III: cover what no real newsroom can afford to staff. (`project_division-three-principle`)
+- Notebook sources go through the validator first; `unclassifiedIds: 0` after every add. (`feedback_notebook-sources-go-through-the-validator-first`)

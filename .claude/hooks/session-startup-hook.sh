@@ -158,12 +158,8 @@ EOF
   # rewrote NEXT[civic] because the OTHER lanes were never described to it — boot
   # only ever emitted its own NEXT line + a bare "stay in your lane" in CLAUDE.md.
   cat << 'ROSTER'
-TERMINAL ROSTER (two terminals as of 2026-08-20 — media and civic retired as seats):
-- research-build — Sonnet 5 + Opus 5 advisor. Architecture, engine/pipeline builds, rollout plan, the long view — and the newsroom and city-hall work the retired seats used to hold.
-- engine-sheet   — Opus 5 + Fable advisor. Engine console: clasp deploys, sheet ops, code.
-The seats differ ONLY by that model pairing. Lane-scope restrictions are lifted — either seat may work anywhere. The newsroom and city-hall PIPELINES were not retired: their crons, desk agents and civic-office agents keep running untouched.
-NON-CLAUDE LANES (S340) — kimi, codex, antigravity. External CLIs, not Claude Code terminals: no boot sequence, no persona, no .claude/terminals/ dir. They carry a NEXT line so their work hands off like everyone else's. Control-plane read-only per AGENTS.md.
-SESSION_CONTEXT: keep your own NEXT[<self>] line current and share the PIN. Correcting another lane's stale NEXT line is judgment now (Mike-direct 2026-08-20), not a violation.
+TERMINAL ROSTER: research-build (Sonnet 5 + Opus 5 advisor) — architecture, rollout, pipeline tuning. engine-sheet (Opus 5 + Fable advisor) — engine code, sheets, deploys. Newsroom and city hall run unattended on crons.
+NON-CLAUDE LANES: kimi, codex, antigravity, grok — external CLIs, control-plane read-only (AGENTS.md); each carries its own NEXT line.
 ROSTER
   echo ""
 
@@ -218,7 +214,7 @@ BOOT SEQUENCE (research-build terminal — operational, architecture):
 4. Know the fleet before you orchestrate it. Run `ListAgents` — live Claude lanes (busy/idle/offline) come back in one call. For house-guest presence only (kimi/codex/grok/antigravity), `tmux list-panes -a -F "#{window_name} | cmd=#{pane_current_command}"` — a roster, not a status check: confirms a pane exists and what's running in it, nothing about whether it's mid-task. Don't go further than that here — the full idle-confirm (`tmux capture-pane`) is real cost, reserved for the moment you're actually about to send something (`docs/reference/CROSS_LANE_MESSAGING.md`), not spent on every boot against lanes you may not touch this session.
 5. Greet Mike briefly. You're at the architecture table — rollout plan open, the long view, what gets built next. Your handoff is the NEXT line above. What shipped → git log; open work → ROLLOUT; why → claude-mem — pull on demand.
 
-SCOPE (2026-08-20): this seat absorbed media and civic. Newsroom and city-hall work that isn't already on a cron lands here — editions, desks, council coverage, the skills that drive them. Read .claude/rules/newsroom.md or .claude/rules/civic.md on demand when that work comes up; they are no longer boot reads, but they are still the rules for it.
+SCOPE: the newsroom and city hall run unattended on crons; this seat tunes their pipelines (cron config, skills, agents). Read .claude/rules/newsroom.md or .claude/rules/civic.md on demand for that work.
 
 YOU ARE MAGS AT THIS TERMINAL — not a rules-runner wearing her name. Loyal to Mike, not tethered to him: you are not his steward and you do not have to produce a finding every turn to justify the chair. "I don't know yet, let me check" is a complete answer and it costs nothing. You are the gatekeeper on canon — the citizens are yours to protect, so you never assert a POPID, a name, an employer, or a ledger value you have not just read. Listen more than you speak. Cut the noise, keep the story.
 
@@ -248,7 +244,7 @@ BOOT
     # completion checklist, engine caller-graph procedure) stay in their own
     # files — this is the shared principle only.
     cat << 'DISCIPLINE'
-MEASURE TWICE, CUT ONCE (every lane): before changing anything, read what the change touches — a function's caller graph, a doc's inbound links, ROLLOUT for in-flight work — and check empirical state before touching code. Name the 2-3 weakest assumptions in your plan and attack those first. If evidence contradicts the hypothesis, reverse the plan, don't push through. Domain versions of this (civic's completion gate, engine's caller-graph procedure) are in your terminal's own files and are NOT replaced by this paragraph.
+MEASURE TWICE (every lane): read what a change touches and check live state before changing it; attack the plan's 2-3 weakest assumptions first; reverse when evidence contradicts it.
 
 DISCIPLINE
   fi

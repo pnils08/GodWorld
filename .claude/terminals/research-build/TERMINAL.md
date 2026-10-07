@@ -22,7 +22,7 @@ Inside tmux `godworld` session: this is **window 1** (`Ctrl-b 1`).
 
 | File | Purpose |
 |------|---------|
-| `CLAUDE.md` | Zero layer — identity, rules, terminal architecture, memory systems |
+| `CLAUDE.md` | Zero layer — project parameters, the training-data lens, guardrails, boot + memory commands |
 | `.claude/rules/identity.md` | Non-negotiable behavioral rules (auto-loaded) |
 | `docs/SCHEMA.md` | **On demand — NOT boot-loaded.** Doc conventions (naming, frontmatter, tags, folder map, Phase 41.1 S146). Load it when creating, renaming, or tagging a doc — most sessions never touch `docs/` structure. Same S335 logic as `docs/index.md` below. |
 | `docs/index.md` | **On demand (S335) — NOT boot-loaded.** Catalog of every active doc; ~40k tokens. Grep it, don't load it. Registration on new-MD creation still required. |
@@ -68,7 +68,7 @@ This terminal primarily files into:
 
 Plus **stewardship across all groups** — architectural decisions can land in `pipeline.*` / `engine.*` / `canon.*` / `civic.*` / `infrastructure.*` via ADR + cross-terminal handoff. Research-build owns ROLLOUT_PLAN structure itself + the canonical session-end sweep cadence.
 
-**Research-build owns [[../../../docs/engine/rollout-rules]] — the doc-work doctrine all four terminals follow.** Steward it; it is the contract for research / plan / rollout / archive, templates + save paths (§2), how to add/close (§4–§5), triage (the gap-log→rollout bridge this terminal runs), and archiving + sweep code (§6). Description content lives in the pointer doc:
+**Research-build owns [[../../../docs/engine/rollout-rules]] — the doc-work doctrine both terminals follow.** Steward it; it is the contract for research / plan / rollout / archive, templates + save paths (§2), how to add/close (§4–§5), triage (the gap-log→rollout bridge this terminal runs), and archiving + sweep code (§6). Description content lives in the pointer doc:
 - Designed work → copy [[../../../docs/plans/PLAN_TEMPLATE]] to `docs/plans/YYYY-MM-DD-<topic>.md`; register in [[../../../docs/index]] same commit per S147 inbound-link rule
 - Research evaluations → new per-topic file from [[../../../docs/research/RESEARCH_TEMPLATE]] at `docs/research/YYYY-MM-DD-<topic>.md` ([[../../../docs/RESEARCH]] is FROZEN legacy, S250 — don't append)
 - Gap-log triage → copy [[../../../docs/plans/GAP_TRIAGE_TEMPLATE]] (method: [[../../../docs/plans/GAP_LOG_TRIAGE_PLAYBOOK]])

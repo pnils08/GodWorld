@@ -98,7 +98,7 @@ If you can't tell which tier: query INSTITUTIONS.md (it's organized by tier). If
 
 You may introduce these without escalation, provided they cohere with canon:
 
-- New citizens (required fields: Name, Age via `2041 − BirthYear`, Neighborhood, Occupation)
+- New citizens (required fields: Name, Age via `2042 − BirthYear`, Neighborhood, Occupation)
 - Small businesses (corner restaurants, neighborhood shops, single-location services)
 - Community groups, advocacy orgs, mutual-aid networks at neighborhood scale
 - Workplace teams, project subgroups, internal departments

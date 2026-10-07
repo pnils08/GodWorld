@@ -162,7 +162,7 @@ Mayor: **Avery Santana** (citywide).
 - **No month names. No years. No calendar dates. Cycles only.**
 - Correct: "within two cycles," "this past cycle," "by next cycle," "C{XX}."
 - Forbidden: "November 8," "Q3 2041," "October 25-27," "May 4th."
-- Year-anchor 2041 is for citizen ages ONLY. Never for calendar dates.
+- Year-anchor 2042 (C105–C156) is for citizen ages ONLY. Never for calendar dates.
 
 **Authoritative reference:** `.claude/rules/newsroom.md` (S146).
 

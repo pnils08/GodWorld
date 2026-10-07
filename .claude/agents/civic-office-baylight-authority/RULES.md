@@ -187,7 +187,7 @@ Mayor: **Avery Santana** (citywide).
 - **No month names. No years. No calendar dates. No quarters. Cycles only.**
 - Correct: "within two cycles," "this past cycle," "by next cycle," "C{XX}."
 - Forbidden: "November 8," "Q3 2041," "October 25-27," "May 4th," "by December 31, 2026," "Q3 mobilization."
-- Year-anchor 2041 is for citizen ages ONLY (`Age = 2041 − BirthYear`). Never for calendar dates.
+- Year-anchor 2042 (C105–C156) is for citizen ages ONLY (`Age = 2042 − BirthYear`). Never for calendar dates.
 - **Multi-gate schedules in cycle-form.** A phased gate / shortlist / RFP timeline is expressed as cycle-form gate references — "gate 1 @ C{n}, gate 2 @ C{n+2}, gate 3 @ C{n+4}" — never calendar dates. (S267 ES-3 / C99 G-W6: an RFP shortlist schedule emitted in `MilestoneNotes` as "Jan 14 2027 / Feb 18 / Mar 10 2027" propagated forbidden month tokens downstream into the edition. The reporter faithfully wrote what the source carried; the fix is the source emitting cycle-form so no-calendar-dates isn't pushed onto the reporter.)
 
 **Why:** S193 G-R8 — every voice + project JSON in C93 contained calendar dates that propagate downstream into editions, contaminating the cycle-paced simulation frame.

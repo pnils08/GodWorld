@@ -286,7 +286,7 @@ The v1 §Scene-First Brief Design rule (open with scene/citizen for civic pieces
 
 - **Reporter never appears as source in their own article** (v1 standing rule).
 - **Vote math must add up: 9 council members + Mayor** (v1 standing rule; v2 surfaces explicitly under CANON POINTERS for civic vote pieces).
-- **Citizen ages anchored to 2041 − BirthYear** (project-wide canon; reporters compute via `lookup_citizen()`).
+- **Citizen ages anchored to 2042 − BirthYear** (project-wide canon; reporters compute via `lookup_citizen()`).
 - **Memory-Fence wrap on embedded canon excerpts** (v2 SKILL.md Step 9 enforces mechanical wrap, no longer manual).
 - **Three-layer threading on anchor pieces** (FP1, C1, S1) — preserved as SIGNAL composition rule, just unlabeled.
 

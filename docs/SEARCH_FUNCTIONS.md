@@ -108,7 +108,7 @@ lookups, `/city-hall-prep`, ad hoc verification.
 
 | Mode | Function | Reads | Notes |
 |---|---|---|---|
-| `citizen` | `queryCitizen` (L238) | `Simulation_Ledger` (exact name/POPID match) + `LifeHistory_Log` (last 10) + `Relationship_Bonds` + `Household_Ledger` | Emits **all 54** `Simulation_Ledger` columns via `buildCitizenProfile` (L121) — deliberately not trimmed (S345: trimming blinded story agents to migration/family-graph/memory fields). Parses `LifeHistory` lines matching either `YYYY-MM-DD` or `Y<n>C<m>` cycle-calendar shape via `parseLifeHistory` (L101). Age always computed `2041 − BirthYear`, never the empty `Age` column. |
+| `citizen` | `queryCitizen` (L238) | `Simulation_Ledger` (exact name/POPID match) + `LifeHistory_Log` (last 10) + `Relationship_Bonds` + `Household_Ledger` | Emits **all 54** `Simulation_Ledger` columns via `buildCitizenProfile` (L121) — deliberately not trimmed (S345: trimming blinded story agents to migration/family-graph/memory fields). Parses `LifeHistory` lines matching either `YYYY-MM-DD` or `Y<n>C<m>` cycle-calendar shape via `parseLifeHistory` (L101). Age always computed `2042 − BirthYear`, never the empty `Age` column. |
 | `pair` | `queryPair` (L257) | same sheets as `citizen`, for two citizens | Returns both full profiles + shared household/neighborhood/spouse flags + direct bonds + shared third-party bond partners. |
 | `initiative` | `queryInitiative` (L324) | `Initiative_Tracker` (substring match on ID/name) + `Civic_Office_Ledger` for vote context | |
 | `council` | `queryCouncil` (L378) | `Civic_Office_Ledger`, optional filter on faction/district/holder/officeId | Splits into council (9 seats) vs staff. |

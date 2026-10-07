@@ -51,7 +51,7 @@ Build the charge from [[../../../docs/media/charge_brief_template]], written to 
 - **BEAT** — the slice's LANE sentence, verbatim, + "You are {journalist}."
 - **CYCLE** — the slice's POINTERS block, verbatim. Pointers, never figures.
 - **STORYLINES** — the slice's STORYLINES block, verbatim, + "YOU pick which one carries your piece — the one that is most true about the city this cycle."
-- **CANON-MAP** — attached citizens per storyline + tools (MCP lookup_citizen / search_canon / search_world; dashboard API; Grep over output/) + rules (CANON_RULES.md; names from canon only; any vote lists all 9 with the math proven; ages = 2041 − BirthYear).
+- **CANON-MAP** — attached citizens per storyline + tools (MCP lookup_citizen / search_canon / search_world; dashboard API; Grep over output/) + rules (CANON_RULES.md; names from canon only; any vote lists all 9 with the math proven; ages = 2042 − BirthYear).
 - **CRAFT** — (a) supplied-voices anchor: "your storyline's citizens have spoken — supplied lines arrive with your writing charge; use at least one, verbatim or trimmed, never paraphrase-then-attribute"; (b) **REAL ASKS ONLY**: claim an interview/question/"did not respond" ONLY for an ask that actually happened (a supplied line or a recorded no-response in your materials); otherwise state absence plainly — a performed query that never occurred is fabrication (Task 1 new veer class); (c) canonize the finding, not the supporting metrics.
 - **FRESHNESS** — reconcile before writing; two sources disagree → newer/primary wins AND verify vs world_summary/MCP; a contradicted scope claim is a HARD STOP. (Writer-side belt; the structural catch is Step 4.)
 

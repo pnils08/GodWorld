@@ -369,7 +369,7 @@ Lane schema contract: `docs/engine/archive/REVIEWER_LANE_SCHEMA.md` — four fie
 - **Every name verified.** Ledger, truesource, bay-tribune, world-data. No exceptions.
 - **Story-driven layout.** No fixed sections. If there's no business story, there's no business section.
 - **Cycles only.** Edition numbers FORBIDDEN in article text. "Cycle" allowed and encouraged (per `.claude/rules/newsroom.md`, S146 reversal).
-- **Ages: `2041 − BirthYear`.** Every citizen age uses the 2041 anchor. Don't trust `Age` in derived docs.
+- **Ages: `2042 − BirthYear`.** Every citizen age uses the 2041 anchor. Don't trust `Age` in derived docs.
 - **Agents get identity + assignment.** No 170K char data dumps. Bounded input. Memory Fence (Layer 2) + Context Scan (Layer 4) before every brief handoff.
 - **One production log per cycle (target convention, S230 G-EPD3).** Every cycle-active skill appends its named section at `output/production_log_c{XX}.md`. Log persists from `/city-hall-prep` (opens) through `/post-publish` (closes). C93 implemented unified shape; C94 reverted to per-terminal split (transitional). Per-skill path-cascade audits filed as `pipeline.32`. See §Production Log Lifecycle below + `docs/media/production_log_template.md` for shape.
 - **City-hall is mandatory — never skippable.** No alternate path. Voices govern every cycle (when decisions are due); the edition reports FROM city-hall's output.

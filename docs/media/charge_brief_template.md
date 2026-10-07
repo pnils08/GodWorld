@@ -73,7 +73,7 @@ The latitude grant, made safe:
 
 - **The citizen pool, not the subject.** Present the candidate citizens (POPIDs + one-line each, or a pointer to the pool) and say plainly: **you pick who carries the story.** Latitude over subject AND angle.
 - **The tools** the source-search agents may use to reach raw data (MCP `lookup_citizen` / `search_canon` / `search_world`, dashboard API `localhost:3001/api/...`, Glob/Grep over `output/`).
-- **The rules that bind invention** — pointers, not re-statement: [[canon/CANON_RULES]] (three-tier framework), names come from canon, vote math lists all 9, ages are `2041 − BirthYear`. The latitude is over angle and subject; it is **never** over inventing a real-world fact the engine denies.
+- **The rules that bind invention** — pointers, not re-statement: [[canon/CANON_RULES]] (three-tier framework), names come from canon, vote math lists all 9, ages are `2042 − BirthYear`. The latitude is over angle and subject; it is **never** over inventing a real-world fact the engine denies.
 
 ---
 
@@ -126,7 +126,7 @@ CYCLE — where the signal lives (pointers, not the signal)
 CANON-MAP — pool + tools + rules
 - Citizen pool: {POPIDs + one line each, OR pointer}. YOU pick who carries the story.
 - Tools: {MCP calls, dashboard API, Glob/Grep over output/}.
-- Bound by: docs/canon/CANON_RULES.md; names from canon only; vote math lists all 9; ages = 2041 − BirthYear.
+- Bound by: docs/canon/CANON_RULES.md; names from canon only; vote math lists all 9; ages = 2042 − BirthYear.
 
 CRAFT
 - One lived-experience anchor (a resident/officer/owner — one breath of lived experience). One.

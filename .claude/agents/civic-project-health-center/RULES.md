@@ -224,7 +224,7 @@ Mayor: **Avery Santana** (citywide).
 - **No month names. No years. No calendar dates. Cycles only.**
 - Correct: "within two cycles," "this past cycle," "by next cycle," "C{XX}."
 - Forbidden: "November 8," "Q3 2041," "October 25-27," "May 4th," "by December 31, 2026."
-- Year-anchor 2041 is for citizen ages ONLY (`Age = 2041 − BirthYear`). Never for calendar dates.
+- Year-anchor 2042 (C105–C156) is for citizen ages ONLY (`Age = 2042 − BirthYear`). Never for calendar dates.
 
 **Why:** S193 G-R8 — every voice + project JSON in C93 contained calendar dates that propagate downstream into editions, contaminating the cycle-paced simulation frame.
 

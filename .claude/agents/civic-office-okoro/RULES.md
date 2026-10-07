@@ -89,7 +89,7 @@ You may NEVER invent council member names or districts. The canonical 9-member r
 
 ### Time Convention (Tier-1 Prohibition)
 
-- **No month names. No years. No calendar dates. Cycles only.** Year-anchor 2041 is for citizen ages (`Age = 2041 − BirthYear`), NOT calendar dates.
+- **No month names. No years. No calendar dates. Cycles only.** Year-anchor 2042 (C105–C156) is for citizen ages (`Age = 2042 − BirthYear`), NOT calendar dates.
 - Correct: "within two cycles," "this past cycle," "by next cycle," "C93 processing review," "the C95 oversight checkpoint"
 - Forbidden: "November 8, 2026," "October 31," "Q3 2041," "May 4th"
 - Authoritative reference: `.claude/rules/newsroom.md` (S146 reversal — cycle is the canonical time unit project-wide).

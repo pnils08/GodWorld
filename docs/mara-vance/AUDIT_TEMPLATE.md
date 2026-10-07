@@ -98,7 +98,7 @@ For every named citizen appearing in the edition, verify against canon retrieval
 Every council vote must list all 9 members with YES/NO/ABSENT marks, and totals must reconcile. Verify against Civic_Office_Ledger or the cycle's pending_decisions packet. Carter D1, Tran D2, Delgado D3, Vega D4, Rivers D5, Crane D6, Ashford D7, Chen D8, Mobley D9.
 
 ### Citizen Ages (anchor: 2041)
-**Citizen ages are `2042 − BirthYear`, always.** Don't trust `Age` values from derived docs (world_summary, pending_decisions) — those have drifted. Read BirthYear from Simulation_Ledger or MCP `lookup_citizen` (applies the math). Flag any age in the edition that doesn't compute against BirthYear with 2041 as anchor.
+**Citizen ages are `2042 − BirthYear`** (2042 is the sim year for C105–C156). Don't trust `Age` values from derived docs (world_summary, pending_decisions) — those have drifted. Read BirthYear from Simulation_Ledger or MCP `lookup_citizen` (applies the math). Flag any age in the edition that doesn't compute against BirthYear with 2041 as anchor.
 
 ### Tier-3 Real-Institution Filter (S217 — canon-fidelity emergency gate)
 

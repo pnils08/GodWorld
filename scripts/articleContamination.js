@@ -27,7 +27,8 @@ const REAL_OAKLAND = [
   { id: 'international-blvd', re: /International (?:Boulevard|Blvd)\b/i },
   { id: 'allen-temple-bus', re: /Allen Temple bus stop/i },
   { id: 'reagan-era', re: /since the Reagan administration/i },
-  { id: 'ebmud', re: /\bEBMUD\b|\bEast Bay Municipal Utility\b/i },
+  // EBMUD is also a ledger business (BIZ-00019, Priya Nair's employer): leaked only when the packet does not supply it.
+  { id: 'ebmud', re: /\bEBMUD\b|\bEast Bay Municipal Utility\b/i, groundedBy: /\bEBMUD\b/i },
   { id: 'frank-ogawa', re: /Frank Ogawa Plaza/i },
 ];
 
@@ -200,7 +201,7 @@ function scan(text, opts) {
   const blob = packetBlob(packet);
   const findings = [];
   findings.push(...scanLattice(prose));
-  findings.push(...scanPatterns(prose, REAL_OAKLAND, 'real-oakland-leak'));
+  findings.push(...scanPatterns(prose, REAL_OAKLAND, 'real-oakland-leak', blob));
   findings.push(...scanPatterns(prose, BLIGHT, 'blight-import', blob));
   findings.push(...scanPatterns(prose, REPAIR_CHROME, 'repair-chrome'));
   findings.push(...scanUnsuppliedAccess(prose, packet));

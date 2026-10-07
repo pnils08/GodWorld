@@ -60,6 +60,18 @@ Existing double-tagged documents already list under **both** namespaces in v5 (p
 
 **Recommendation (engineering lane):** the domain namespace (`wd-business`, `bay-tribune`, `cp-POP-xxxxx`…) is the one namespace on every write; the two cross-container readers fan out to one `/ns/{ns}/search` per namespace and merge by `similarity`. The parent `world-data` namespace stops receiving new cards; its remaining read use is the snapshot/summary writes from `post-publish`, which get their own `wd-summary`/`wd-snapshot` namespace. No merge or delete of existing data.
 
+## Search quality (probed 2026-10-06, same key, same namespaces)
+
+Three queries against `world-data` and `sl-godworld`, v3 `/search` vs v5 `/ns/{ns}/search`:
+
+| query | v3 chunks | v5 `searchMode:"chunks"` | v5 default (hybrid) |
+|---|---|---|---|
+| who owns Dillon Clinic | Dillon Clinic card, 6.3 s | same cards, 4.3 s | run 1: 0 hits; run 2: same cards |
+| Baylight District location | 3 Baylight cards, 3.5 s | same 3 cards, 4.8 s | 3 Cycle-106 metric memories, no cards |
+| why was engine.277 reverted (`sl-godworld`) | — | unrelated chunks | run 1: the correction memory, top hit; run 2: HTTP 500 |
+
+**Verdict: no search-quality gain.** v5 chunk mode returns the same documents at the same latency. The v5 default is `hybrid`, which for the card readers swaps documents for distilled metric memories and was non-deterministic across runs. **Every v3-lineage reader (`searchContext`, bot, `mags.js`, `wakePerception`, `citizenPage`) pins `searchMode:"chunks"` on cutover** to keep today's behaviour. `brainSearch` keeps memories for `sl-godworld` and hybrid for `sl-rules` as already wired. The body key is `searchMode`, not `mode` (`mode` → 400 `unrecognized_keys`).
+
 ## Cut order (one domain at a time, rollback = revert the path-specific commit)
 
 1. `lib/supermemory.js` — add v5 path, `searchContext` reads `chunk` instead of `chunks[].isRelevant`; nine callers unchanged in signature. Prove on `brainSearch`-style search against `sl-godworld`.

@@ -47,10 +47,8 @@ esac
 [ -z "$target" ] && exit 0
 printf '%s' "$target" | grep -qE "$PROTECTED_RE" || exit 0
 
-cat >&2 <<MSG
-boot-doc-guard: editing boot doc '$target' — Mike's instruction file, not a session
-scratchpad. Make sure this was requested (by him, or in-scope mechanism he asked for),
-not an unrequested add/rationale-paragraph/session-note. Proceeding (warn-only, S426
-Mike-direct — was a hard block before this).
-MSG
+# A PreToolUse hook's stderr on exit 0 reaches the debug log only — Claude never sees it.
+# additionalContext is the non-blocking channel Claude reads (hooks docs, 2026-10-07).
+msg="boot-doc-guard: editing boot doc '$target' — Mike's instruction file, not a session scratchpad. Make sure this was requested (by him, or in-scope mechanism he asked for), not an unrequested add, rationale paragraph or session note. Warn-only (S426 Mike-direct)."
+python3 -c 'import json,sys; print(json.dumps({"hookSpecificOutput":{"hookEventName":"PreToolUse","additionalContext":sys.argv[1]}}))' "$msg"
 exit 0

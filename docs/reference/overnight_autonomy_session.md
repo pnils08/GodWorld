@@ -11,7 +11,7 @@ sources:
 pointers:
   - "[[CROSS_LANE_MESSAGING]] — tmux send procedure (capture-pane first, send-keys -l, separate C-m)"
   - "[[../index]] — registered same commit"
-  - "CLAUDE.md §Data-safety rails, .claude/rules/identity.md §Hard Rules — the rails this doc never overrides"
+  - "CLAUDE.md §Guardrails, .claude/rules/identity.md §Hard Rules — the rails this doc never overrides"
 ---
 
 # Overnight autonomy

@@ -180,7 +180,7 @@ ROSTER
   # same brain regardless of which model is reasoning. Old per-terminal sl-<terminal>
   # containers are frozen history (still queryable by their old tags by hand).
   if [ "$MAGS_ONLY" != "yes" ] && [ -n "$TERMINAL_NAME" ]; then
-    # Search/save commands live in ONE place: CLAUDE.md §Search before you guess (the brain).
+    # Search/save commands live in ONE place: CLAUDE.md §Boot and memory (the brain).
     :
   fi
 

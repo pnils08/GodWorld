@@ -669,7 +669,10 @@ async function main() {
   const detBlockers = [];
   detBlockers.push(...intakeBlockers);   // pipeline.45: INTAKE validity is part of clearance
   for (const j of scanStructuralJunk(draftText)) detBlockers.push({ severity: 'high', check: 'structural', issue: j });
-  const bodyForScan = unwrapWholeDocFence(draftText).replace(/```[\s\S]*?```/g, '');
+  // Scan what the reader gets: delivery cuts `## INTAKE` to EOF (deliver-articles.js
+  // readerCopy, cron-saturday-run.js), so a POPID in an INTAKE source cite never
+  // publishes. Same regex as delivery, so the exemption can't outgrow the strip.
+  const bodyForScan = unwrapWholeDocFence(draftText).replace(/## INTAKE[\s\S]*$/, '').replace(/```[\s\S]*?```/g, '');
   const popHits = bodyForScan.match(/\bPOP-\d{5}\b/g);
   if (popHits) detBlockers.push({ severity: 'high', check: 'popid-leak', issue: 'raw POPID(s) in prose: ' + [...new Set(popHits)].join(', ') });
   // groundedBy support (articleContamination.js, 2026-09-17 Chinatown/Caldera

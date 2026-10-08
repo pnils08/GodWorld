@@ -148,6 +148,14 @@ EOF
     fi
   fi
 
+  # --- Supermemory recall patch (docs/SUPERMEMORY.md §Hooks) — a plugin update
+  # overwrites it silently (0.1.8 -> 0.1.9 on 2026-10-04 did); say so at boot.
+  SM_ROOT=$(python3 -c "import json;print(json.load(open('$HOME/.claude/plugins/installed_plugins.json'))['plugins']['supermemory@supermemory-plugins'][0]['installPath'])" 2>/dev/null)
+  if [ -n "$SM_ROOT" ] && ! grep -q "GodWorld patch 2026-10-07" "$SM_ROOT/hooks/recall-directive.js" "$SM_ROOT/hooks/session-start.js" 2>/dev/null; then
+    echo ""
+    echo "SUPERMEMORY PATCH MISSING in $SM_ROOT — recall is serving the undated auto container. Re-port from the .pre-slgodworld notes in docs/SUPERMEMORY.md before trusting ◪ lines."
+  fi
+
   # (G-SS3 "Last journal" line retired S300 — journal froze to Mags' page; the
   # media boot sequence reads her recent reflections via magsPageRecall.js. T4.)
   echo ""

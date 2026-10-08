@@ -599,8 +599,8 @@ UserPromptSubmit.
 
 | Hook | When | Container |
 |------|------|-----------|
-| **SessionStart** | Every boot | `session-start.js` (patched 2026-10-07, plugin 0.1.8, vendor original `.pre-slgodworld`) — injects nothing while `injectProfile:false`; the boot hook carries state |
-| **UserPromptSubmit** | Before user-turn handling | `recall-directive.js` (patched 2026-09-24; 2026-10-07 auto repo container dropped, lines dated; prior patch kept as `.slgodworld-2026-09-23`) — searches `sl-rules` (hybrid, top 2, `[rule]`-labeled) + `sl-godworld`, merged by similarity. **A plugin update overwrites this patch** — re-apply if recall stops surfacing `[rule]` hits |
+| **SessionStart** | Every boot | `session-start.js` (patched 2026-10-07 on plugin 0.1.9, the active install; vendor original `.pre-slgodworld`; the boot hook warns SUPERMEMORY PATCH MISSING if an update drops it) — injects nothing while `injectProfile:false`; the boot hook carries state |
+| **UserPromptSubmit** | Before user-turn handling | `recall-directive.js` (patched 2026-09-24 on 0.1.8; the 0.1.9 auto-update 2026-10-04 dropped it silently — re-ported 2026-10-07 to 0.1.9 with the auto repo container dropped and lines dated; vendor original `.pre-slgodworld`) — searches `sl-rules` (hybrid, top 2, `[rule]`-labeled) + `sl-godworld`, merged by similarity. **A plugin update overwrites this patch** — re-apply if recall stops surfacing `[rule]` hits |
 | **PreToolUse** | Before `Skill` or `Bash` recall/search | `recall-approve.cjs` handles plugin recall approval |
 | **Stop** | Every assistant turn | **Re-enabled 2026-09-24** (reversing the 2026-05-22 neutralization below) — saves signal turns to the auto repo container only, never `sl-godworld` or `mags`. The S221 contamination risk this neutralization originally guarded against was speaker-collapse into `mags`; the auto repo container isn't a personal-identity read lane, so that specific risk doesn't apply here. |
 | **PostToolUse** | Not defined | No active PostToolUse capture path |

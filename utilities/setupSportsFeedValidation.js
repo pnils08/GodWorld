@@ -299,7 +299,10 @@ function setupOaklandFeedOnly() {
  */
 function setupFeedSheet_(sheet, city, teamValues, neighborhoodValues) {
   var lastRow = Math.max(sheet.getLastRow(), 20);
-  var dataRows = lastRow - 1;
+  // Dropdowns cover the whole grid, not just the filled rows: the empty rows
+  // below are where the next weeks get typed, and they kept years-old short
+  // lists (live 2026-10-08: row 239 had 12 SeasonType / 3 FanSentiment options).
+  var dataRows = Math.max(sheet.getMaxRows(), lastRow) - 1;
 
   // ── Ensure we have 15 columns ──
   var currentCols = sheet.getMaxColumns();
@@ -468,7 +471,7 @@ function clearSportsFeedValidation() {
     for (var i = 0; i < FEED_DROPDOWN_HEADERS.length; i++) {
       var col = headerRow.indexOf(FEED_DROPDOWN_HEADERS[i]) + 1;
       if (!col) continue;
-      var range = sheet.getRange(2, col, Math.max(lastRow - 1, 1), 1);
+      var range = sheet.getRange(2, col, Math.max(sheet.getMaxRows() - 1, 1), 1);
       range.clearDataValidations();
     }
     Logger.log('Cleared validation from ' + sheetNames[s]);

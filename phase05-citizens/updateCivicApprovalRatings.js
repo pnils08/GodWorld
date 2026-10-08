@@ -1392,7 +1392,7 @@ function mintChallengerOnLedger_(ctx, spec) {
   set('POPID', pop);
   set('First', spec.first);
   set('Last', spec.last);
-  set('Status', 'active');
+  set('Status', 'Active'); // canonical ledger case (engine.283)
   set('Tier', 3);
   set('RoleType', 'Civic candidate');
   set('ClockMode', 'CIVIC');

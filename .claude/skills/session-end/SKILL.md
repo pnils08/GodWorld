@@ -61,7 +61,7 @@ Three sub-actions:
 
 3. **Update ROLLOUT_PLAN.md** — flip closed rows to `done-pending-archive`; move fully-closed clusters to `ROLLOUT_ARCHIVE.md`. ROLLOUT is canonical for what's open.
 
-   **Archive Sweep Trigger (deterministic — G-SE2, don't re-litigate per close):** sweep `done-pending-archive` rows to `ROLLOUT_ARCHIVE.md` **IF** their count ≥ 2 **OR** the prior sweep was ≥ 2 sessions ago. **Skip** (defer to next clean close) **IF** the working tree has uncommitted cross-terminal changes. Newest Archive Pass inserts first within the Archive Pass section (see the convention comment in ROLLOUT_ARCHIVE.md).
+   **Archive sweep is automatic:** `sessionEndMechanical.js` sweeps every `done-pending-archive` row to `ROLLOUT_ARCHIVE.md` at each close, then regenerates ROLLOUT's plans-in-motion block, then lints (overdue waits named). Closing a row = flip it to `done-pending-archive` with its evidence in the item cell; the close does the rest (builder 2026-10-07).
 
 **Optional model sub-actions:**
 

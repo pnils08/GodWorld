@@ -130,7 +130,7 @@ function runLint(gate) {
   // Overdue is a warning, never a gate: it names rows to re-read, the session decides.
   const overdue = overdueRows();
   if (overdue.length) {
-    console.log(`ROLLOUT OVERDUE: ${overdue.length} row(s) wait on a Cycle or date that has passed — read the record, then flip, re-date or close:`);
+    console.log(`ROLLOUT OVERDUE: ${overdue.length} waiting row(s) past their Cycle/date or naming none — read the record, then flip, re-date or close:`);
     overdue.forEach(p => console.log(p));
   }
 }
@@ -168,7 +168,7 @@ function overdueRows() {
     if (/^Organic:/.test(item)) return;
     const cycles = [...item.matchAll(/\bC(\d{2,3})\b/g)].map(m => Number(m[1]));
     const dates = [...item.matchAll(/\b(20\d\d-\d\d-\d\d)\b/g)].map(m => m[1]).sort();
-    if (!cycles.length && !dates.length) return;
+    if (!cycles.length && !dates.length) { out.push(`  L${i + 1} ${idMatch[1]}: names no Cycle or date — overdue can't see it; name the fire it waits on or start the item 'Organic:'`); return; }
     // Overdue only when EVERY named wait is behind us — a future Cycle or date keeps the row live.
     const cyclePast = !cycles.length || (cycle !== null && Math.max(...cycles) < cycle);
     const datePast = !dates.length || dates[dates.length - 1] < today;

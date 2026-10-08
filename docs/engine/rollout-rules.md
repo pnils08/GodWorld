@@ -165,7 +165,8 @@ Closing detail goes to cold storage; the tracker stays lean. **Archive doesn't m
 - **`scripts/rolloutSweep.js`** — the mutating sweep. Moves `done-pending-archive` rows from ROLLOUT_PLAN Open Work → ROLLOUT_ARCHIVE verbatim (table-row → archive-bullet). **Dry-run by default; `--apply` to execute.** Prints line-count deltas. Run at session-end.
 - **`scripts/docLoopStatus.js`** — the read-only detector / validator. Surfaces `done-pending-archive` rows pending sweep and (v2) `--foreign` non-conforming rows. Run before sweeping to see what's pending.
 - **Completed plans → `docs/archive/plans/`.** When a plan has fully shipped (its rollout row swept to ROLLOUT_ARCHIVE), move the plan MD `docs/plans/<file>.md` → `docs/archive/plans/<file>.md` and **repoint its inbound links** (the ROLLOUT_ARCHIVE bullet + the [[index]] entry → archive path). This is part of closing, not a later step — it keeps `docs/plans/` showing only live work. (Research never archives — standing library; gap logs stay in `output/`; only plans + triage docs move.)
-- **Cadence:** sweep rows every session-end; move shipped plans on close. Don't let `done-pending-archive` rows or finished plans pile up in the live tracker / `docs/plans/` — that's the noise this doctrine removes.
+- **Automatic at close (2026-10-07):** `sessionEndMechanical.js` runs the sweep `--apply` whenever a `done-pending-archive` row exists, regenerates the plans-in-motion block (`docLoopStatus.js --plans --write`), then lints and names overdue waits.
+- **Cadence:** rows sweep at every close; move shipped plans on close. Don't let `done-pending-archive` rows or finished plans pile up in the live tracker / `docs/plans/` — that's the noise this doctrine removes.
 
 ---
 

@@ -102,11 +102,11 @@
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
 | engine.270 | OVERDUE: the storyline review due the week of 2026-10-05. Rewire the seed scorer to the registry if the reporter needs it, else remove the dead path. Decides engine.20d | in-progress | engine-sheet | [[../plans/2026-09-28-storylines-keyed-to-engine-events]] §Observation and review |
-| engine.20d | Initiative coverage cadence: movement-only seeding in buildWorldSummary's civic lane, decided at the engine.270 review | blocked | research-build | [[../plans/2026-05-22-engine-regulatory-friction]] §Task 5 |
+| engine.20d | Initiative coverage cadence: movement-only seeding in buildWorldSummary's civic lane, decided at the engine.270 review (due the week of 2026-10-05) | blocked | research-build | [[../plans/2026-05-22-engine-regulatory-friction]] §Task 5 |
 | pipeline.70 | Read the staged C110 pieces for the story test, then flip; watch the first unattended Opus business run | live-observing | research-build | [[../plans/2026-10-03-citizen-pages-drive-canon]] |
 | engine.53 | Readback owed: the Mon 2026-10-05 fanout shows no exchange-line match in output/cron-compare. Find it or name why it is missing | live-observing | research-build | [[../plans/2026-07-11-agent-exchange-engine]] |
 | research.27 | Readback owed: the Sat 2026-10-03 UNDOCKED write staged; the Citizen_Media_Usage credit is unproven | live-observing | research-build | [[../plans/2026-08-07-spacemolt-game-show]] §Post-ship (e) |
-| engine.48 | Readback owed: T8 tension seeds are on the cron; no organic result recorded yet | live-observing | research-build | [[../plans/2026-07-06-citizen-loop-deepening]] |
+| engine.48 | Organic: the first T8 tension-seed result off the cron; none recorded yet | live-observing | research-build | [[../plans/2026-07-06-citizen-loop-deepening]] |
 | engine.201 | Readback owed: fixed-cohort causal proof across the live fires since the 2026-09-14 ruling | live-observing | engine-sheet | [[../plans/2026-09-10-inactivity-is-regression]] §BUILD SPEC |
 | pipeline.48 | Readback owed: Anthony + Hal solo sports seats, Task 4 live-observe only; unverified since 2026-09-26 | live-observing | research-build | [[../plans/2026-08-07-anthony-hal-solo-sports-seats]] |
 | pipeline.49 | Readback owed: civic solo seats, Task 3 live-observe only; unverified since 2026-09-26 | live-observing | research-build | [[../plans/2026-08-07-civic-solo-seats]] |

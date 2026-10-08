@@ -109,8 +109,22 @@ function printBanner(args, steps) {
 
 function subRolloutLint(args) {
   try {
-    // The plans-in-motion block is regenerated first so the file the builder reads never drifts.
-    execSync('node scripts/docLoopStatus.js --plans --write', { cwd: ROOT, stdio: 'pipe' });
+    // Closed rows sweep to ROLLOUT_ARCHIVE first (deterministic: any done-pending-archive
+    // row goes, every close — builder 2026-10-07), then the plans-in-motion block is
+    // regenerated so the file the builder reads never drifts.
+    const rollout = fs.readFileSync(path.join(ROOT, 'docs/engine/ROLLOUT_PLAN.md'), 'utf8');
+    if (args.dryRun) {
+      console.log('  (dry-run: sweep and plans block not written)');
+    } else if (/\|\s*done-pending-archive\s*\|/.test(rollout)) {
+      const pin = (fs.readFileSync(path.join(ROOT, 'SESSION_CONTEXT.md'), 'utf8').match(/\*\*PIN:\*\*\s*S(\d+)/) || [])[1];
+      if (pin) {
+        const swept = execSync(`node scripts/rolloutSweep.js --session=${pin} --terminal=${args.terminal} --apply`, { cwd: ROOT, stdio: 'pipe' });
+        swept.toString().trim().split('\n').forEach(line => console.log('  ' + line));
+      } else {
+        console.log('  ⚠ sweep skipped: no S<N> in the SESSION_CONTEXT PIN');
+      }
+    }
+    if (!args.dryRun) execSync('node scripts/docLoopStatus.js --plans --write', { cwd: ROOT, stdio: 'pipe' });
     const out = execSync('node scripts/docLoopStatus.js --lint', { cwd: ROOT, stdio: 'pipe' });
     out.toString().trim().split('\n').forEach(line => console.log('  ' + line));
     return { ok: true };

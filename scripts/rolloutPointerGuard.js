@@ -17,10 +17,26 @@ process.stdin.on('end', () => {
 
   let fat = 0, reason = '', context = '';
   if (fp.endsWith('docs/engine/ROLLOUT_PLAN.md')) {
-    fat = lines.filter(l => l.trimStart().startsWith('|') && l.length > MAX).length;
-    reason = `ROLLOUT is a pointer index — ${fat} row(s) exceed ${MAX} chars. ` +
-      'Move the detail into the owning plan/research/triage doc and keep the rollout row to one pointer line (id | title | state | owner | plan link).';
-    context = 'Doctrine for this file: docs/engine/rollout-rules.md — row contract (§3: 5 cells, bare state token, summary ≤280 chars), add/close (§4-§5), sweep (§6), house-guest conventions (§7). Verify rows with: node scripts/docLoopStatus.js --lint';
+    // Same budget as docLoopStatus --lint: the ITEM cell (between the id and the
+    // state token) is ≤ ITEM_BUDGET; the pointer cell is not counted (2026-10-07 —
+    // a whole-line cap denied rows the lint passed).
+    const ITEM_BUDGET = 280;
+    const STATES = new Set(['ready', 'in-progress', 'live-observing', 'done-pending-archive', 'blocked', 'needs-info', 'wontfix', 'parked']);
+    fat = lines.filter(l => {
+      if (!/^\s*\|\s*[a-z][a-z-]*\.\d+[a-z]?\s*\|/.test(l)) return false;
+      const cells = l.split('|').map(c => c.trim());
+      const s = cells.findIndex(c => STATES.has(c));
+      return (s > 2 ? cells.slice(2, s).join(' | ').length : l.length) > ITEM_BUDGET;
+    }).length;
+    const generated = /<!-- generated: plans in motion/.test(input.tool_input && input.tool_input.old_string || '');
+    if (generated && !fat) {
+      console.log(JSON.stringify({ hookSpecificOutput: { hookEventName: 'PreToolUse', permissionDecision: 'deny',
+        permissionDecisionReason: 'The plans-in-motion block is generated from the rows — edit the rows, then run node scripts/docLoopStatus.js --plans --write.' } }));
+      process.exit(0);
+    }
+    reason = `ROLLOUT is a pointer index — ${fat} row(s) have an item cell over ${ITEM_BUDGET} chars. ` +
+      'Move the detail into the owning plan/research/triage doc and keep the rollout row to one pointer line (id | item | state | owner | plan link).';
+    context = 'Doctrine for this file: docs/engine/rollout-rules.md — row contract (§3: 5 cells, bare state token, item ≤280 chars), sections by what a row waits on, a waiting row names its Cycle or date (or starts `Organic:`), ids never reused. The plans-in-motion block is generated — never hand-edit it. Verify: node scripts/docLoopStatus.js --lint';
   } else if (/\/docs\/plans\/[^/]+\.md$/.test(fp)) {
     fat = lines.filter(l => /^\s*-\s*20\d\d-\d\d-\d\d/.test(l) && l.length > MAX).length;
     reason = `Plan changelog entries are one line — ${fat} dated entry(ies) exceed ${MAX} chars. ` +

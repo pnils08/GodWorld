@@ -35,10 +35,11 @@ try: print(json.load(sys.stdin).get('tool_input',{}).get('command',''))
 except Exception: print('')
 " 2>/dev/null)"
     # only a WRITE-shaped bash command counts; reading a boot doc stays free.
-    # quoted text (commit messages, echo strings) is not a write target — drop it first.
-    cmdw="$(printf '%s' "$cmd" | sed -E "s/'[^']*'//g; s/\"[^\"]*\"//g" | sed -E 's/[0-9]*>&[0-9]+//g; s/[0-9]*>>? *\/dev\/null//g')"
+    # quoted prose (commit messages, echo strings, saved facts) is not a write target — drop
+    # any quoted span with a space; a quoted bare path ("CLAUDE.md") stays visible.
+    cmdw="$(printf '%s' "$cmd" | sed -E "s/'[^']* [^']*'//g; s/\"[^\"]* [^\"]*\"//g" | sed -E 's/[0-9]*>&[0-9]+//g; s/[0-9]*>>? *\/dev\/null//g')"
     if printf '%s' "$cmdw" | grep -qE '>|>>|\b(sed +-i|tee|truncate|dd|mv|cp|install|patch|python3?|perl|ex|ed)\b'; then
-      for tok in $(printf '%s' "$cmd" | grep -oE "[A-Za-z0-9_./-]+\.md"); do
+      for tok in $(printf '%s' "$cmdw" | grep -oE "[A-Za-z0-9_./-]+\.md"); do
         printf '%s' "$tok" | grep -qE "$PROTECTED_RE" && { target="$tok"; break; }
       done
     fi

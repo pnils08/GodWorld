@@ -326,6 +326,52 @@ function createSheetCache_(ss) {
     };
   }
 
+  /**
+   * engine.95 — the queues leave the closure as plain data so a checkpoint can
+   * carry them across executions. Deep-copied: the caller cannot reach the live
+   * queue. Shape: { writeQueue: { tab: [ {row,col,value} | {row,rowValues[]} ] },
+   *                 appendQueue: { tab: [ rowValues[] ] } } — order preserved.
+   */
+  function exportQueues() {
+    var w = {}, a = {}, tab, i;
+    for (tab in writeQueue) {
+      w[tab] = [];
+      for (i = 0; i < writeQueue[tab].length; i++) {
+        var it = writeQueue[tab][i];
+        w[tab].push(it.rowValues ? { row: it.row, rowValues: it.rowValues.slice() } : { row: it.row, col: it.col, value: it.value });
+      }
+    }
+    for (tab in appendQueue) {
+      a[tab] = [];
+      for (i = 0; i < appendQueue[tab].length; i++) a[tab].push(appendQueue[tab][i].slice());
+    }
+    return { writeQueue: w, appendQueue: a };
+  }
+
+  /**
+   * engine.95 — the inverse of exportQueues, through the same queue functions
+   * so read-your-write visibility holds on the resumed cache. Refuses to import
+   * onto a cache that already holds queued writes: a resume starts empty, and a
+   * double import would land every cell twice.
+   */
+  function importQueues(q) {
+    if (!q || typeof q !== 'object') throw new Error('sheetCache.importQueues: no queues');
+    var pending = getStats();
+    if (pending.pendingWrites > 0 || pending.pendingAppends > 0) throw new Error('sheetCache.importQueues: cache already holds queued writes');
+    var tab, i, list;
+    for (tab in (q.writeQueue || {})) {
+      list = q.writeQueue[tab];
+      for (i = 0; i < list.length; i++) {
+        if (list[i].rowValues) queueRowWrite(tab, list[i].row, list[i].rowValues);
+        else queueWrite(tab, list[i].row, list[i].col, list[i].value);
+      }
+    }
+    for (tab in (q.appendQueue || {})) {
+      list = q.appendQueue[tab];
+      for (i = 0; i < list.length; i++) queueAppend(tab, list[i]);
+    }
+  }
+
   // Return public API
   return {
     getSheet: getSheet,
@@ -341,7 +387,9 @@ function createSheetCache_(ss) {
     invalidate: invalidate,
     invalidateAll: invalidateAll,
     flush: flush,
-    getStats: getStats
+    getStats: getStats,
+    exportQueues: exportQueues,   // engine.95
+    importQueues: importQueues    // engine.95
   };
 }
 

@@ -1,8 +1,8 @@
 {
   "generated": "2026-10-08",
   "generator": "scripts/stubEngine.js",
-  "filesScanned": 179,
-  "functionsMapped": 1614,
+  "filesScanned": 180,
+  "functionsMapped": 1627,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -3272,6 +3272,7 @@
         "phase05-citizens/bondPersistence.js::loadRelationshipBonds_"
       ],
       "readers": [
+        "phase05-citizens/bondEngine.js::saveV3BondsToLedger_",
         "phase05-citizens/bondPersistence.js::saveRelationshipBonds_",
         "phase05-citizens/updateCivicApprovalRatings.js::demotionGrudge_"
       ]

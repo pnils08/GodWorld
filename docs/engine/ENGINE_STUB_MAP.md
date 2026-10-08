@@ -1332,7 +1332,7 @@
   Config: ctx.config.cycleCount
 
 - **saveV3BondsToLedger_(ctx)**
-  Reads: S.cycleId, S.relationshipBonds
+  Reads: S.cycleId, S.relationshipBonds, S.relationshipBondsLoaded
   Config: ctx.config.cycleCount
   Sheets: Relationship_Bond_Ledger
 
@@ -2628,6 +2628,8 @@
 
 - **shouldStartCampaign_(status, newApproval, existingCampaign)**
 
+- **validateCampaign_(ctx, campaign, incumbentPop, officeId)**
+
 - **ledgerRowByPop_(ctx, pop)**
 
 - **turnoverLedger_(ctx, successorPop, title, departedPop, kind)**
@@ -3432,6 +3434,32 @@
 - **writeHandoffSheet_(ss, cycle, handoffText)**
 
 - **exportHandoffToDrive_(cycle, handoffText)**
+
+### cycleCheckpoint.js
+- **ckIsDate_(v)**
+
+- **ckEncodeValue_(v, path)**
+
+- **ckDecodeValue_(v)**
+
+- **ckKeyCount_(o)**
+
+- **encodeCheckpointPayload_(payload)**
+
+- **decodeCheckpointPayload_(encoded)**
+
+- **chunkEncoded_(encoded, maxChars)**
+
+- **chunkRows_(gen, chunks)**
+
+- **joinChunks_(rows, expected)**
+
+- **checkpointDigest_(encoded)**
+
+- **buildCheckpointPayload_(ctx, fire, diags, gen)**
+  RNG: ctx.rng / safeRand_(ctx)
+
+- **validateCheckpointPayload_(payload, manifest)**
 
 ### cycleExportAutomation.js
 - **exportCurrentCycleAll()**
@@ -4523,5 +4551,5 @@ _No top-level function declarations found (helper/constants file)._
 
 ---
 
-**Files scanned:** 179
-**Functions mapped:** 1614
+**Files scanned:** 180
+**Functions mapped:** 1627

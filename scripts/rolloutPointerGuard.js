@@ -37,6 +37,21 @@ process.stdin.on('end', () => {
     reason = `ROLLOUT is a pointer index — ${fat} row(s) have an item cell over ${ITEM_BUDGET} chars. ` +
       'Move the detail into the owning plan/research/triage doc and keep the rollout row to one pointer line (id | item | state | owner | plan link).';
     context = 'Doctrine for this file: docs/engine/rollout-rules.md — row contract (§3: 5 cells, bare state token, item ≤280 chars), sections by what a row waits on, a waiting row names its Cycle or date (or starts `Organic:`), ids never reused. The plans-in-motion block is generated — never hand-edit it. Verify: node scripts/docLoopStatus.js --lint';
+  } else if (/\/docs\/(plans|research)\/\d{4}-\d\d-\d\d-[^/]+\.md$/.test(fp) && input.tool_input.content !== undefined && !require('fs').existsSync(fp)) {
+    // A NEW plan / research / review file: hand the writer the template at the
+    // moment of writing (2026-10-07) and name any heading the checks key on that is missing.
+    const c = input.tool_input.content;
+    const type = (c.match(/^type:\s*(\w+)/m) || [])[1] || '';
+    const need = ['## Changelog'];
+    if (type === 'plan') need.push("**Builder's words", '## Tasks');
+    if (type === 'research') need.push('**Verdict:**');
+    if (type === 'review') need.push('**Result:**', '## Findings');
+    const missing = need.filter(h => !c.includes(h));
+    console.log(JSON.stringify({ hookSpecificOutput: { hookEventName: 'PreToolUse', additionalContext:
+      `New ${type || 'untyped'} doc: shape is docs/plans/PLAN_TEMPLATE.md (§Plan / §Research / §Review; frontmatter type: plan, research or review). ` +
+      (missing.length ? `Missing: ${missing.join(', ')} — scripts and searches key on these exact headings. ` : '') +
+      'Register it in docs/index.md in the same commit; point its rollout row at it.' } }));
+    process.exit(0);
   } else if (/\/docs\/plans\/[^/]+\.md$/.test(fp)) {
     fat = lines.filter(l => /^\s*-\s*20\d\d-\d\d-\d\d/.test(l) && l.length > MAX).length;
     reason = `Plan changelog entries are one line — ${fat} dated entry(ies) exceed ${MAX} chars. ` +

@@ -142,7 +142,7 @@ State answers "is this pickable right now"; terminal answers "by whom." They are
    - **Evaluations** → `docs/research/YYYY-MM-DD-<topic>.md` (per [[../research/RESEARCH_TEMPLATE]]).
    - **Architectural decisions** → next ADR (follow ADR-0001 / 0004 / 0005 shape).
    - **Engine work** → existing parent spec ([[engine/archive/PHASE_42_PATTERNS]], [[archive/ENGINE_REPAIR]] row).
-7. Add the row to the appropriate group table in §Open Work.
+7. Add the row to the section for what it waits on (§3 Sections); a waiting row names its Cycle or date, or starts `Organic:`.
 
 **Description content lives in the pointer doc, NOT the ROLLOUT row.**
 

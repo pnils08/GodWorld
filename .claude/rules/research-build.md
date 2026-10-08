@@ -50,47 +50,14 @@ If a doc would be isolated (no natural parent), question whether it should exist
 
 ## Rollout discipline
 
-`docs/engine/ROLLOUT_PLAN.md` is canonical for open/closed work across the project. Research-build owns it — every architectural decision lands as a rollout entry tagged for the executing terminal. Per S147: rollout entries are pointers, not inline notes. Each item points to a file path / supermemory tag / claude-mem ID / phase plan — no inline research, no pattern exposition. Forces every session to read real context before acting.
-
-When closing a rollout entry: move to `ROLLOUT_ARCHIVE.md` with full details (commit hashes, what shipped, what was learned). Don't delete inline.
-
-Stale-entry triage runs through the rollout discipline itself — `done-pending-archive` state visibility + governance.10-class archive sweeps every 1-2 closes + per-terminal sweep ownership. The compounding-HIGH problem (G-W16 meta-pattern S195) that previously required a separate scan (`scripts/rolloutTriage.js`, RETIRED S235 / governance.6 close) is structurally addressed by S212+S229 architecture. Unarchive trigger documented in script header if rollout-discipline cadence falls behind by >3 sessions OR a HIGH ROLLOUT row sits across >3 cycles without movement.
-
-## Standing rules (S259 — redistributed from MEMORY.md)
-
-These are research-build-specific; they left universal MEMORY.md to load only here.
-
-- **Filing isn't fixing.** When Mike's verb is "finish" / "address" / "close out" / "do" gap-log items, execute the doable parts THIS session — don't triage into more ROLLOUT rows (that moves the problem between tracking layers without closing it). Two-phase: triage if volume needs sorting, then immediately execute every research-build row (skill edits, RULES updates, doc-registration, agent builds).
-- **Agent hosting sequencing — reviewers first.** Reviewer lanes (Rhea, cycle-review, Mara audit, capability, Final Arbiter) are the only class cleared for external execution infra while the pipeline settles. Desk reporters, civic voices, project agents stay local. New cloud-host proposal → "is this a reviewer?" — if no, it waits.
-
-## Plan workflow
-
-For non-trivial architectural work, write a plan first:
-
-1. Plan lands at `docs/plans/YYYY-MM-DD-<topic>.md` with phased tasks (Phase 1: research, Phase 2: design, Phase 3: build, etc.)
-2. Plan is the load-out for execution — names which terminals own which phases, what acceptance criteria look like, what gets handed off
-3. Rollout entry points to the plan (`[[plans/YYYY-MM-DD-topic]]`); plan carries detail, rollout carries state
-4. After execution, plan stays as historical record — don't delete
-
-Plans are not theater. Mike doesn't read them in chat. They exist so future sessions (mine or another terminal's) can read the load-out and execute without rebuilding context. (S208 work-is-canonization principle: plans serve future-instances, not Mike-the-reader.)
-
-## Stewardship routing protocol
-
-When work surfaces that doesn't belong at this seat:
-
-1. **Recognize early** — for civic/media pipeline work, rb designs, es executes; there's no third seat to route to anymore. **For engine-sheet substrate work, "is this apparatus or substrate?"** — apparatus-cutting decisions earn a research-build plan; substrate-routine work routes directly to engine-sheet and they execute without design gating (S218).
-2. **File the rollout entry** — tag `(engine terminal)` for es-execution work; civic/media pipeline tuning stays untagged (rb/es handle it directly, there's no receiving terminal).
-3. **Dispatch same turn, don't wait for their next boot** — message the executing lane directly (`SendMessage` per `ListAgents` for a live Claude session, `tmux send-keys -l` + separate `C-m` for house guests). Filing the row is the record; the message is the delivery. Reserve `SESSION_CONTEXT.md` NEXT-line flagging for work that's genuinely not urgent — the default is dispatch, not wait-and-hope-they-notice. (S375 correction, Mike-direct — this step read as passive SESSION_CONTEXT-flagging pre-fix, which is the pre-S372 steward pattern, not the orchestrator one.)
-4. **Don't execute substrate work here** — the failure mode is doing engine work in research-build because "I'm here anyway." That stacks unpushed commits (S156 cross-terminal git rule) and obscures who owns what.
-
-## Research synthesis discipline
+`docs/engine/ROLLOUT_PLAN.md` is the tracker of current work and waits, one pointer row per job; the plan it points to holds the detail. Its own header and `docs/engine/rollout-rules.md` are the contract: four sections by what a row waits on (builder call, dated or `Organic:` fire, now, queue), a waiting row names its Cycle or date, parked work lives in BACKLOG, ids are never reused. Close a row by flipping it to `done-pending-archive` with its evidence; the session close sweeps it to ROLLOUT_ARCHIVE, regenerates the plans-in-motion block and names overdue waits — no hand sweep.
 
 When evaluating papers, tools, or external patterns:
 
-- **File each source as a per-topic research file** from [[../../../docs/research/RESEARCH_TEMPLATE]] → `docs/research/YYYY-MM-DD-<topic>.md`, catalogued in [[../../../docs/research/index]] (the sub-catalog — NOT top-level index.md). `docs/RESEARCH.md` is the **frozen legacy log** (S250); don't append to it. A research file is a source-mining record: one source in, "what's usable for the sim and where" out, grep-able forever. Cite precisely (path + section / Drive-ID — never title-only, S145 token-cost rule).
+- **File each source as a per-topic research file** from [[../../../docs/plans/PLAN_TEMPLATE]] §Research (a lane's review of a plan or diff uses §Review) → `docs/research/YYYY-MM-DD-<topic>.md`, catalogued in [[../../../docs/research/index]] (the sub-catalog — NOT top-level index.md). `docs/RESEARCH.md` is the **frozen legacy log** (S250); don't append to it. A research file is a source-mining record: one source in, "what's usable for the sim and where" out, grep-able forever. Cite precisely (path + section / Drive-ID — never title-only, S145 token-cost rule).
 - Add reading-archive entry in `docs/mags-corliss/TECH_READING_ARCHIVE.md`
 - **Research/plan boundary.** Research = *what's true / what are the options.* Plan = *what we'll build / the tasks.* The plan cites `Research basis:`; the research lists `Ignited plans:`. No content duplication — research is the measure-twice substrate behind the plan via a pointer, never folded into it.
-- **Verdict, never state.** A research file carries a verdict (`adopt` / `watch` / `take-nothing`), not a rollout state. Pending-ness is ROLLOUT's job: take-nothing → no row; adopt → a `ready` row; watch → the Watch List with a trigger. A terminal knows research is pending because it reads ROLLOUT at boot, not because it opens the research file.
+- **Verdict, never state.** A research file carries a verdict (`adopt` / `watch` / `take-nothing`), not a rollout state. Pending-ness is ROLLOUT's job: take-nothing → no row; adopt → a `ready` row; watch → BACKLOG §Watch List with a trigger.
 - **Research never archives.** Unlike a plan (finalizes → ships its rollout pointer to ROLLOUT_ARCHIVE), a research file is a standing library — grep-able forever, accreting applications. It does not move to archive.
 - Don't propose adoption from a single source — name the adjacent tools / alternatives Mike could have picked instead, so the choice is contextualized (S145 teach-the-landscape rule)
 - Sources Mike shares deliberately are load-bearing — papers in chat = what he's wrestling with, not curiosities

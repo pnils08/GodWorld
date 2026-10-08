@@ -72,6 +72,33 @@ WORLD_DOMAIN_TAGS = (
 # HELPERS
 # ═══════════════════════════════════════════════════════════════════════════
 
+def _to_v5_filter(legacy: dict) -> dict:
+    """Translate the legacy AND-of-{key,value} filter to the Supermemory 5.x CLI shape.
+
+    The 5.x CLI takes one {field, operator, value} condition. Only the single
+    equality condition this server uses is translated; anything else raises
+    rather than guessing a compound syntax (a wrong filter would silently widen
+    the audited provenance lane).
+    """
+    if isinstance(legacy, dict) and 'field' in legacy:
+        return legacy
+    conditions = legacy.get('AND') if isinstance(legacy, dict) else None
+    if (isinstance(conditions, list) and len(conditions) == 1
+            and isinstance(conditions[0], dict)
+            and 'key' in conditions[0] and 'value' in conditions[0]):
+        return {'field': conditions[0]['key'], 'operator': 'eq',
+                'value': conditions[0]['value']}
+    raise ValueError('metadata_filter: only a single equality condition is supported')
+
+
+def _updated_at(hit: dict) -> str:
+    """Last-updated stamp: 5.x nests it under system.updatedAt; older shape was top-level."""
+    system = hit.get('system')
+    if isinstance(system, dict) and system.get('updatedAt'):
+        return system['updatedAt']
+    return hit.get('updatedAt') or ''
+
+
 def _project_supermemory_hits(query: str, container: str, hits: list,
                               limit: int, sort: str = None,
                               label: str = None) -> str:
@@ -79,7 +106,7 @@ def _project_supermemory_hits(query: str, container: str, hits: list,
     if sort == 'recency':
         hits.sort(
             key=lambda item: (
-                item.get('updatedAt') or '',
+                _updated_at(item),
                 item.get('similarity') or 0,
             ),
             reverse=True,
@@ -99,7 +126,7 @@ def _project_supermemory_hits(query: str, container: str, hits: list,
         source = metadata.get('source') or hit.get('source')
         cycle = metadata.get('cycle') or hit.get('cycle')
         record_type = metadata.get('type') or hit.get('type')
-        updated = (hit.get('updatedAt') or '').split('T')[0]
+        updated = _updated_at(hit).split('T')[0]
         similarity = hit.get('similarity')
         if source:
             provenance.append(f"source={source}")
@@ -142,7 +169,8 @@ def supermemory_search(query: str, container: str, limit: int = 5,
         66→55 across E85→E92→E93 + Dante Nelson Adams Point→West Oakland
         across E83→E86; bay-tribune doesn't dedupe per-citizen, so similarity
         ranking surfaces whichever version had the fattest content match).
-    metadata_filter: Supermemory AND/OR filter object passed as compact JSON.
+    metadata_filter: legacy {'AND': [{key, value}]} with ONE condition, translated to the
+        5.x {field, operator, value} form (see _to_v5_filter); passed as compact JSON.
         A filtered search always parses JSON and returns the projected shape.
     project: parse JSON and return only useful content/provenance fields.
     """
@@ -156,16 +184,18 @@ def supermemory_search(query: str, container: str, limit: int = 5,
 
         needs_json = bool(sort or project or metadata_filter is not None)
         fetch_limit = max(limit * 3, 10) if sort == 'recency' else limit
-        cmd = ['npx', 'supermemory', 'search', query, '--tag', container,
+        # Supermemory CLI 5.x (npx cache moved to it 2026-10-06): --namespace
+        # replaced --tag, and the 'documents' search mode is now 'chunks'.
+        cmd = ['npx', 'supermemory', 'search', query, '--namespace', container,
                '--limit', str(fetch_limit)]
         if mode:
-            cmd.extend(['--mode', mode])
+            cmd.extend(['--mode', 'chunks' if mode == 'documents' else mode])
         if threshold is not None:
             cmd.extend(['--threshold', str(threshold)])
         if metadata_filter is not None:
             cmd.extend([
                 '--filter',
-                json.dumps(metadata_filter, separators=(',', ':'), sort_keys=True),
+                json.dumps(_to_v5_filter(metadata_filter), separators=(',', ':'), sort_keys=True),
             ])
         if needs_json:
             cmd.append('--json')

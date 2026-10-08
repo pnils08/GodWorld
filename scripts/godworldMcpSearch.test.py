@@ -50,13 +50,14 @@ class SupermemorySearchTests(unittest.TestCase):
 
         self.assertEqual(len(calls), 1)
         cmd = calls[0][0]
-        self.assertEqual(cmd[cmd.index('--tag') + 1], 'bay-tribune')
+        self.assertEqual(cmd[cmd.index('--namespace') + 1], 'bay-tribune')
         self.assertEqual(cmd[cmd.index('--mode') + 1], 'hybrid')
         self.assertEqual(cmd[cmd.index('--threshold') + 1], '0.3')
         self.assertEqual(
             json.loads(cmd[cmd.index('--filter') + 1]),
-            MODULE['PUBLISHED_CANON_FILTER'],
+            {'field': 'source', 'operator': 'eq', 'value': 'edition-ingest'},
         )
+        self.assertNotIn('--tag', cmd)
         self.assertIn('--json', cmd)
         self.assertIn('published provenance only', result)
         self.assertIn('Bay Tribune Edition 101', result)
@@ -66,6 +67,31 @@ class SupermemorySearchTests(unittest.TestCase):
         self.assertNotIn('/internal/path', result)
         self.assertNotIn('internal-root', result)
         self.assertNotIn('internal-document-id', result)
+
+    def test_v5_shape_nested_updated_at_sorts_and_filter_translation_is_strict(self):
+        payload = {
+            'results': [
+                {'memory': 'Older.', 'system': {'updatedAt': '2026-09-01T00:00:00Z'},
+                 'metadata': {'title': 'Older', 'source': 'edition-ingest'}},
+                {'memory': 'Newest.', 'system': {'updatedAt': '2026-10-05T00:00:00Z'},
+                 'metadata': {'title': 'Newest', 'source': 'edition-ingest'}},
+            ],
+        }
+        with patch.object(MODULE['subprocess'], 'run', return_value=completed(json.dumps(payload))):
+            result = MODULE['published_canon_search']('citizen', 2, sort='recency')
+        self.assertLess(result.index('Newest'), result.index('Older'))
+        self.assertIn('updated=2026-10-05', result)
+        # a compound filter is refused, never guessed
+        with self.assertRaises(ValueError):
+            MODULE['_to_v5_filter']({'AND': [{'key': 'a', 'value': '1'}, {'key': 'b', 'value': '2'}]})
+        # the legacy 'documents' mode name maps to 'chunks'
+        seen = []
+        def fake_run(cmd, **kwargs):
+            seen.append(cmd)
+            return completed(json.dumps({'results': []}))
+        with patch.object(MODULE['subprocess'], 'run', side_effect=fake_run):
+            MODULE['supermemory_search']('q', 'bay-tribune', 3, mode='documents')
+        self.assertEqual(seen[0][seen[0].index('--mode') + 1], 'chunks')
 
     def test_projected_json_failure_is_loud_and_does_not_fall_back(self):
         with patch.object(
@@ -113,7 +139,7 @@ class SupermemorySearchTests(unittest.TestCase):
         lock = threading.Lock()
 
         def fake_run(cmd, **kwargs):
-            tag = cmd[cmd.index('--tag') + 1]
+            tag = cmd[cmd.index('--namespace') + 1]
             with lock:
                 seen.append(tag)
             payload = {

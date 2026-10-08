@@ -50,7 +50,7 @@ pointers:
 
 **Guard** — `.claude/hooks/pre-tool-check.sh:286` keys on `curl.*api\.supermemory\.ai` + a mutating verb, not on `/v3/`; moving skills to `/ns/` stays guarded. `.claude/settings.json:102` allowlist is host-only; unchanged.
 
-**Already done** — `scripts/brainSearch.js` on CLI 5.x (`--namespace`, `.results[].chunk`, `system.updatedAt`). `CLAUDE.md` save row on `add --namespace sl-godworld` (builder-direct 2026-10-07).
+**Already done** — `scripts/brainSearch.js` on CLI 5.x (`--namespace`, `.results[].chunk`, `system.updatedAt`). `CLAUDE.md` save row on `add --namespace sl-godworld` (builder-direct 2026-10-07). `scripts/godworld-mcp.py` (the godworld MCP server: `search_canon`, `search_world`, `search_build`, the `lookup_*` tools) shells out to the CLI and was MISSING from the inventory above; it failed "CLI exited 1" from 2026-10-06 when the npx cache moved to 5.x. Fixed 2026-10-08: `--namespace`, mode `documents` → `chunks`, filter `{field, operator:"eq", value}` (single condition only), `system.updatedAt`; tests in `scripts/godworldMcpSearch.test.py`; the running MCP process needs a reconnect (`/mcp`) to load it. Still on `--tag` (agy's, not touched): `.gemini/search-all.sh`. "Nothing is broken today" (above) held for the HTTP API only, not for the CLI shell-outs.
 
 ## The design decision (one namespace per document)
 

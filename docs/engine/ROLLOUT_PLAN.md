@@ -29,8 +29,8 @@
 - [[../plans/2026-07-11-agent-exchange-engine]]: engine.53 live-observing
 - [[../plans/2026-08-07-spacemolt-game-show]]: research.27 live-observing
 - [[../plans/2026-07-06-citizen-loop-deepening]]: engine.48 live-observing
-- [[../plans/2026-08-07-anthony-hal-solo-sports-seats]]: pipeline.48 live-observing
-- [[../plans/2026-08-07-civic-solo-seats]]: pipeline.49 live-observing
+- [[../plans/2026-08-07-anthony-hal-solo-sports-seats]]: pipeline.48 done-pending-archive
+- [[../plans/2026-08-07-civic-solo-seats]]: pipeline.49 done-pending-archive
 - [[../plans/2026-09-07-beat-slices-from-sheets-plan]]: pipeline.68 ready
 - [[../plans/2026-08-09-citizen-day-digest]]: pipeline.53 ready
 - [[../plans/2026-08-29-boot-doc-consolidation]]: governance.51 in-progress
@@ -102,8 +102,8 @@
 | research.27 | Sat 2026-10-10 run: expect featured Citizen_Media_Usage rows for the C110 digest pilots. The 10-03 digest named three pilots and credited none (reconcile pass dropped it); fixed 2026-10-08 | live-observing | research-build | [[../plans/2026-08-07-spacemolt-game-show]] §Post-ship (e) |
 | engine.48 | Organic: the first T8 tension-seed result off the cron; none recorded yet | live-observing | research-build | [[../plans/2026-07-06-citizen-loop-deepening]] |
 | engine.201 | Fixed-cohort proof: 48 citizens drawn at C110 (output/engine201). Resnap after C111, C112, C113; trace at the C113 fire, Sun 2026-10-25, codex leading | live-observing | engine-sheet | [[../plans/2026-09-10-inactivity-is-regression]] §BUILD SPEC |
-| pipeline.48 | Readback owed: Anthony + Hal solo sports seats, Task 4 live-observe only; unverified since 2026-09-26 | live-observing | research-build | [[../plans/2026-08-07-anthony-hal-solo-sports-seats]] |
-| pipeline.49 | Readback owed: civic solo seats, Task 3 live-observe only; unverified since 2026-09-26 | live-observing | research-build | [[../plans/2026-08-07-civic-solo-seats]] |
+| pipeline.48 | Anthony + Hal solo sports seats observed live C108–C110: persona, one byline, single voice, Rhea pass; wall inject off by design under packet-v2 | done-pending-archive | research-build | [[../plans/2026-08-07-anthony-hal-solo-sports-seats]] §Task 4 |
+| pipeline.49 | Six civic solo seats observed live C108–C110: persona, one byline, single voice, Rhea pass | done-pending-archive | research-build | [[../plans/2026-08-07-civic-solo-seats]] §Task 3 |
 | pipeline.68 | The 54 C110 mints need roster rows: linkCitizensToEmployers --fill-blanks-only, dry-run first. World-gap staff landed at C110 | ready | research-build | [[../plans/2026-09-07-beat-slices-from-sheets-plan]] |
 | pipeline.53 | Citizen day digest: land the audio-direction rebalance (40/40 city/citizens to 20/60) in config/audio_direction_daily.md | ready | engine-sheet | [[../plans/2026-08-09-citizen-day-digest]] |
 | pipeline.69 | Run-cycle packages the world: T1 texture by hood, T2 wake tells a citizen their seed, T3 seed floor, T5 C108 slice readback | in-progress | engine-sheet | [[../plans/2026-09-13-run-cycle-packages-the-world]] |

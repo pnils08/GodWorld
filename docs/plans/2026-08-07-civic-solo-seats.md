@@ -56,7 +56,7 @@ pointers:
 
 ### Task 3: Live observe
 - Fanout assigns civic POPIDs with `[persona: …]` + single-voice draft
-- **Status:** [ ] open
+- **Status:** [x] observed 2026-10-08 (research-build): unattended filings C108–C110 — Angela Reyes, Carmen Delaine, Lila Mezran, Luis Navarro, Rachel Torres and Trevor Shimizu each filed with their persona and one byline, single-voice, Rhea pass (21 filings across both solo-seat plans).
 
 ### Task 4: civic-desk legacy note (media)
 - Headless path = personas; multi-voice edition-only until migrated
@@ -72,3 +72,4 @@ pointers:
 
 - 2026-09-26 (research-build) — Task 2 landed confirmed (commit `2af16dcd`); Task 4 resolved-by-fact (media terminal retired). Task 3 live-observe stays open. ROLLOUT pipeline.49 stays in-progress.
 - 2026-08-07 (grok) — Initial plan; Tasks 1–2 scripts/docs shipped.
+- 2026-10-08 (research-build) — Task 3 live-observe closed on the C108–C110 unattended filings. ROLLOUT pipeline.49 done-pending-archive.

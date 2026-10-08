@@ -62,7 +62,7 @@ pointers:
 ### Task 4: Live observe
 
 - **Steps:** Wait for sports fanout to assign Anthony or Hal; confirm `[persona: anthony-raines|hal-richmond]` + wall inject + single-voice draft
-- **Status:** [ ] open
+- **Status:** [x] observed 2026-10-08 (research-build): unattended filings C108–C110 — Anthony C108, C109, C110 and Hal C109 each carry the persona and one byline, single-voice, Rhea pass. The wall inject is OFF by design: the packet-v2 contract disables the reporter wall (`reporterWall` null in every angle; [[2026-08-09-three-wake-lived-packet-pilot]] §packet contract), so that clause of the criterion is superseded.
 
 ### Task 5: Sports-desk legacy note (media)
 
@@ -93,3 +93,4 @@ pointers:
 - 2026-09-06 (S428, research-build) — Task 6 added (pipeline.67): Oaks beat decision. Verified the Chicago desk was never re-beat (no persona-map entry, no lane); Oaks coverage rides the general sports seats. Awaiting Mike's call, nothing built.
 - 2026-09-06 (S429, research-build) — Task 6 built: Selena Grant (Oaks beat analyst, Jack London) + Talia Finch (Oaks ground, West Oakland) as solo sports-lane seats; Chicago Bureau agent/skill retired. Mint handed to engine-sheet.
 - 2026-09-06 (S431, research-build) — Task 6 activated: no mint needed (both already on the ledger, engine-sheet S430 finding); renamed the pending wake-package keys, filled popids, corrected the two voice files' invented neighborhoods against the real ledger rows, updated `newsroomWakePackages.test.js`'s golden fixture (22 rota candidates, sports 7). pipeline.67 closed.
+- 2026-10-08 (research-build) — Task 4 live-observe closed on the C108–C110 unattended filings; wall inject superseded by packet-v2. ROLLOUT pipeline.48 done-pending-archive.

@@ -110,7 +110,8 @@ function build(cycle, { root, beats }) {
   const pool = deep.length ? deep : named;
   const subject = pool[Number(cycle) % pool.length];
 
-  const src = 'output/player_truesource_mirror.json ' + subject.pop;
+  // src becomes the INTAKE CLAIM cite (cron-desk-writer) and INTAKE rides into the published edition: name the dossier, never the POPID (Rhea popid-leak, C110).
+  const src = 'output/player_truesource_mirror.json ' + subject.name;
   const facts = [{ text: subject.name + ' — ' + [subject.position, subject.team].filter(Boolean).join(', ') +
     '; ' + subject.seasons.length + ' season' + (subject.seasons.length === 1 ? '' : 's') + ' on the dossier', src }];
   // Every season shown gets its rates — a memo told two of five seasons are "blank" says so in print.
@@ -128,7 +129,7 @@ function build(cycle, { root, beats }) {
     .sort((a, b) => a.pop.localeCompare(b.pop))
     .slice(0, 2);
   for (const p of peers) {
-    const peerSrc = 'output/player_truesource_mirror.json ' + p.pop;
+    const peerSrc = 'output/player_truesource_mirror.json ' + p.name;
     facts.push({ text: 'Peer — ' + p.name + ' (' + [p.position, p.team].filter(Boolean).join(', ') + ') ' + seasonLine(p, p.seasons[0]), src: peerSrc });
     // The peer's rates are worked here too — a writer left to divide gets it wrong (bench C109).
     const peerRate = rateLine(p, p.seasons[0]);

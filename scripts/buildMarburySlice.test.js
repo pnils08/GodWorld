@@ -69,6 +69,7 @@ try {
   assert.equal(slice.subject.pop, 'POP-90002', 'the dossier player on THIS cycle\'s feed is the subject');
   assert.deepStrictEqual(slice.story.popids, ['POP-90002']);
   assert.ok(slice.story.ref.endsWith('@C999'), 'the ref carries the cycle so a seat is not dropped as stale next cycle');
+  assert.ok(![slice.story.ref, ...slice.facts.map(f => f.src)].some(x => /POP-\d{5}/.test(x)), 'no POPID in a source cite — it becomes the published INTAKE CLAIM ref and trips the Rhea popid-leak scan');
   const text = slice.facts.map(f => f.text);
   assert.ok(text.some(t => /2041 TST: 60 G/.test(t)) && text.some(t => /2039 TST: 67 G/.test(t)), 'every season line is a fact');
   assert.ok(text.some(t => /11\.6 K per 9.*worked from the season line/.test(t)), 'rates are worked here, not by the writer');

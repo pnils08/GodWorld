@@ -591,7 +591,6 @@ function runWorldCycleLocked_(ss, fire) {
   safePhaseCall_(ctx, 'Phase5-Neighborhoods', function() { runNeighborhoodEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase5-Universe', function() { runAsUniversePipeline_(ctx); });
   safePhaseCall_(ctx, 'Phase5-CivicRoles', function() { runCivicRoleEngine_(ctx); });
-  safePhaseCall_(ctx, 'Phase5-Elections', function() { runCivicElections_(ctx); });
   safePhaseCall_(ctx, 'Phase5-Initiatives', function() { runCivicInitiativeEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase5-ApprovalRatings', function() { updateCivicApprovalRatings_(ctx); });  // v1.0 S137b
   safePhaseCall_(ctx, 'Phase5-CivicModeEvents', function() { generateCivicModeEvents_(ctx); });
@@ -2269,7 +2268,6 @@ function runCyclePhases_(ctx) {
   safePhaseCall_(ctx, 'Phase5-Neighborhoods', function() { runNeighborhoodEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase5-Universe', function() { runAsUniversePipeline_(ctx); });
   safePhaseCall_(ctx, 'Phase5-CivicRoles', function() { runCivicRoleEngine_(ctx); });
-  safePhaseCall_(ctx, 'Phase5-Elections', function() { runCivicElections_(ctx); });
   safePhaseCall_(ctx, 'Phase5-Initiatives', function() { runCivicInitiativeEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase5-ApprovalRatings', function() { updateCivicApprovalRatings_(ctx); });  // v1.0 S137b
   safePhaseCall_(ctx, 'Phase5-CivicModeEvents', function() { generateCivicModeEvents_(ctx); });

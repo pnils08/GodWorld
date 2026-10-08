@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-10-04 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-10-08 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -1340,19 +1340,21 @@
   Sheets: Relationship_Bonds
 
 ### bondPersistence.js
+- **missingBondHeaders_(headers)**
+
 - **asBool_(v)**
 
 - **isLedgerSchema_(headers)**
 
 - **loadRelationshipBonds_(ctx)**
   Reads: S.relationshipBonds
-  Writes: S.relationshipBonds
+  Writes: S.relationshipBonds, S.relationshipBondsLoaded
   Sheets: Relationship_Bonds
 
 - **normalizeBondCitizenId_(ctx, val)**
 
 - **saveRelationshipBonds_(ctx)**
-  Reads: S.cycleId, S.relationshipBonds
+  Reads: S.cycleId, S.relationshipBonds, S.relationshipBondsLoaded
   Config: ctx.config.cycleCount
   Sheets: Relationship_Bonds
 
@@ -2441,14 +2443,6 @@
   Sheets: Business_Ledger, Initiative_Tracker, LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)
 
-### runCivicElectionsv1.js
-- **runCivicElections_(ctx)**
-  Reads: S.absoluteCycle, S.cityDynamics, S.cycleOfYear, S.economicMood, S.godWorldYear
-  Writes: S.electionResults
-  Config: ctx.config.cycleCount
-  Sheets: Civic_Office_Ledger, Election_Log
-  RNG: ctx.rng / safeRand_(ctx)
-
 ### runCivicRoleEngine.js
 - **runCivicRoleEngine_(ctx)**
   Reads: S.absoluteCycle, S.cityDynamics, S.cycleId, S.economicMood, S.eventsGenerated, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.weather, S.weatherMood, S.worldEvents
@@ -2630,9 +2624,16 @@
 
 - **approvalDeltaForInitiative_(motion, owns, opposed)**
 
-- **shouldLeaveOffice_(status, newApproval, currentApproval, silenceOwned)**
+- **shouldLeaveOffice_(status, newApproval)**
 
 - **shouldStartCampaign_(status, newApproval, existingCampaign)**
+
+- **ledgerRowByPop_(ctx, pop)**
+
+- **turnoverLedger_(ctx, successorPop, title, departedPop, kind)**
+
+- **demotionGrudge_(ctx, challengerPop, incumbentPop, officeId, challengerName, holderName, cycle)**
+  Reads: S.relationshipBondsLoaded
 
 - **seedOccupiedPopIds_(ledgerData, iPopId, iStatus, iNotes)**
 
@@ -4522,5 +4523,5 @@ _No top-level function declarations found (helper/constants file)._
 
 ---
 
-**Files scanned:** 180
-**Functions mapped:** 1611
+**Files scanned:** 179
+**Functions mapped:** 1614

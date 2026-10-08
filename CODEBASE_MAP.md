@@ -156,7 +156,6 @@ The largest and most complex phase; simulates individual citizen lifecycles each
 | `bondPersistence.js` (~26 KB) | Persists bond state back to sheet |
 | `applyNamedCitizenSpotlight.js` (~28 KB) | Spotlight logic for named/prominent citizens |
 | `checkForPromotions.js` (~27 KB) | Evaluates promotion eligibility |
-| `runCivicElectionsv1.js` (~25 KB) | Civic elections simulation |
 | `runEducationEngine.js` (~25 KB) | Education attainment and school system simulation |
 | `runNeighborhoodEngine.js` (~26 KB) | Neighbourhood-level citizen dynamics |
 | `generationalWealthEngine.js` (~24 KB) | Generational wealth tracking and inheritance |

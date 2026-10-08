@@ -134,7 +134,6 @@ Council and government processing:
 | Engine | What it does |
 |--------|-------------|
 | `generateCivicModeEvents_()` | Council hearings, committee actions, health events for recovering officials |
-| `runCivicElections_()` | Council election logic |
 | `runCivicInitiativeEngine_()` | Initiative votes and implementation |
 
 ### MEDIA Mode (29 citizens)

@@ -1,8 +1,8 @@
 {
-  "generated": "2026-10-04",
+  "generated": "2026-10-08",
   "generator": "scripts/stubEngine.js",
-  "filesScanned": 180,
-  "functionsMapped": 1611,
+  "filesScanned": 179,
+  "functionsMapped": 1614,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -29,7 +29,6 @@
         "phase05-citizens/judicialLifecycle.js::runJudicialLifecycle_",
         "phase05-citizens/runAsUniversePipeline.js::runAsUniversePipeline_",
         "phase05-citizens/runCareerEngine.js::runCareerEngine_",
-        "phase05-citizens/runCivicElectionsv1.js::runCivicElections_",
         "phase05-citizens/runCivicRoleEngine.js::runCivicRoleEngine_",
         "phase05-citizens/runConductEngine.js::runConductEngine_",
         "phase05-citizens/runEducationEngine.js::runEducationEngine_",
@@ -85,7 +84,6 @@
         "phase02-world-state/applyWeatherModel.js::applyWeatherModel_",
         "phase02-world-state/calendarStorySeeds.js::applySeasonalStorySeeds_",
         "phase05-citizens/generationalWealthEngine.js::collectPropertyTax_",
-        "phase05-citizens/runCivicElectionsv1.js::runCivicElections_",
         "phase07-evening-media/storyHook.js::storyHookEngine_",
         "phase10-persistence/buildCyclePacket.js::buildCyclePacket_"
       ]
@@ -108,7 +106,6 @@
         "phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_"
       ],
       "readers": [
-        "phase05-citizens/runCivicElectionsv1.js::runCivicElections_",
         "phase10-persistence/buildCyclePacket.js::buildCyclePacket_"
       ]
     },
@@ -1208,7 +1205,6 @@
         "phase05-citizens/generateMediaModeEvents.js::generateMediaModeEvents_",
         "phase05-citizens/runAsUniversePipeline.js::runAsUniversePipeline_",
         "phase05-citizens/runCareerEngine.js::runCareerEngine_",
-        "phase05-citizens/runCivicElectionsv1.js::runCivicElections_",
         "phase05-citizens/runCivicRoleEngine.js::runCivicRoleEngine_",
         "phase05-citizens/runEducationEngine.js::runEducationEngine_",
         "phase05-citizens/runHouseholdEngine.js::runHouseholdEngine_",
@@ -1775,7 +1771,6 @@
         "phase05-citizens/generateGenericCitizens.js::generateGenericCitizens_",
         "phase05-citizens/runAsUniversePipeline.js::runAsUniversePipeline_",
         "phase05-citizens/runCareerEngine.js::runCareerEngine_",
-        "phase05-citizens/runCivicElectionsv1.js::runCivicElections_",
         "phase05-citizens/runCivicRoleEngine.js::runCivicRoleEngine_",
         "phase05-citizens/runConductEngine.js::runConductEngine_",
         "phase05-citizens/runEducationEngine.js::runEducationEngine_",
@@ -3272,6 +3267,15 @@
         "phase05-citizens/bondEngine.js::noteBondConnectionShift_"
       ]
     },
+    "relationshipBondsLoaded": {
+      "writers": [
+        "phase05-citizens/bondPersistence.js::loadRelationshipBonds_"
+      ],
+      "readers": [
+        "phase05-citizens/bondPersistence.js::saveRelationshipBonds_",
+        "phase05-citizens/updateCivicApprovalRatings.js::demotionGrudge_"
+      ]
+    },
     "undockedNextCast": {
       "writers": [
         "phase05-citizens/casinoLedgerEngine.js::undockedDrawCast_"
@@ -3642,12 +3646,6 @@
     "careerEvents": {
       "writers": [
         "phase05-citizens/runCareerEngine.js::runCareerEngine_"
-      ],
-      "readers": []
-    },
-    "electionResults": {
-      "writers": [
-        "phase05-citizens/runCivicElectionsv1.js::runCivicElections_"
       ],
       "readers": []
     },
@@ -4545,7 +4543,6 @@
     "Civic_Office_Ledger": {
       "writers": [
         "phase05-citizens/generationalWealthEngine.js::updateHeritage_",
-        "phase05-citizens/runCivicElectionsv1.js::runCivicElections_",
         "phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_"
       ],
       "readers": [
@@ -4557,7 +4554,6 @@
         "phase05-citizens/civicInitiativeEngine.js::lookupAuthoringSeat_",
         "phase05-citizens/generateCivicModeEvents.js::buildOfficeLookup_",
         "phase05-citizens/generationalWealthEngine.js::updateHeritage_",
-        "phase05-citizens/runCivicElectionsv1.js::runCivicElections_",
         "phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_",
         "phase05-citizens/updateCivicLedgerFactions.js::getCouncilStateFromLedger_",
         "phase05-citizens/updateCivicLedgerFactions.js::updateCivicOfficeLedgerFactions_",
@@ -4599,7 +4595,8 @@
         "phase01-config/godWorldEngine2.js::processIntake_",
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
         "phase05-citizens/processAdvancementIntake.js::processMediaUsage_",
-        "phase05-citizens/updateCivicApprovalRatings.js::mintOutOfTownChallenger_"
+        "phase05-citizens/updateCivicApprovalRatings.js::mintOutOfTownChallenger_",
+        "phase05-citizens/updateCivicApprovalRatings.js::pickGenericCitizenChallenger_"
       ],
       "readers": [
         "phase01-config/godWorldEngine2.js::processIntake_",
@@ -5107,17 +5104,6 @@
         "phase07-evening-media/mediaRoomIntake.js::processQuotedCitizens_"
       ]
     },
-    "Election_Log": {
-      "writers": [
-        "phase05-citizens/runCivicElectionsv1.js::runCivicElections_"
-      ],
-      "readers": [
-        "phase05-citizens/runCivicElectionsv1.js::runCivicElections_",
-        "phase10-persistence/buildCyclePacket.js::getCivicContextForPacket_",
-        "utilities/cycleRollback.js::previewRollbackToCycle78",
-        "utilities/cycleRollback.js::rollbackToCycle78"
-      ]
-    },
     "Community_Programs": {
       "writers": [],
       "readers": [
@@ -5177,6 +5163,14 @@
       "writers": [],
       "readers": [
         "phase08-v3-chicago/v3StoryHookWriter.js::saveV3Hooks_",
+        "utilities/cycleRollback.js::previewRollbackToCycle78",
+        "utilities/cycleRollback.js::rollbackToCycle78"
+      ]
+    },
+    "Election_Log": {
+      "writers": [],
+      "readers": [
+        "phase10-persistence/buildCyclePacket.js::getCivicContextForPacket_",
         "utilities/cycleRollback.js::previewRollbackToCycle78",
         "utilities/cycleRollback.js::rollbackToCycle78"
       ]

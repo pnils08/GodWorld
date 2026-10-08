@@ -166,7 +166,7 @@ Each read is one `getCitizenDialBands_` call at a roll that already exists. Bars
 - **Status:** [ ] not started
 
 ### Task 5: civic — integrity on the scandal ceiling
-- **Files:** `phase05-citizens/runCivicElectionsv1.js:334` (the engine.94 27.10 ceiling)
+- **Files:** `phase05-citizens/runCivicElectionsv1.js:334` (the engine.94 27.10 ceiling) — file deleted 2026-10-08 (engine.94 B.3 v3, no scheduled election); the ceiling lives in `updateCivicApprovalRatings.js`
 - **Steps:** scandal odds × `BAND_MULT` inverted on integrity (band −2 → ×1.5, +2 → ×0.5).
 - **Verify:** unit over 200 seeded rolls: low-integrity incumbents scandal ~3× high-integrity at the same approval.
 - **Status:** [ ] not started
@@ -203,7 +203,7 @@ Each read is one `getCitizenDialBands_` call at a roll that already exists. Bars
 - **Status:** [ ] not started
 
 ### Task 4: the civic challenger
-- **Files:** `phase05-citizens/runCivicElectionsv1.js:282-296`
+- **Files:** `phase05-citizens/runCivicElectionsv1.js:282-296` — file deleted 2026-10-08 (engine.94 B.3 v3); the contest seam is `contestRoll_` in `utilities/citizenMemory.js`
 - **Steps:** the tier-weighted pool stays; the final pick among the top-weighted two is `contestRoll_` on `[sociability, integrity]`.
 - **Verify:** unit over seeds: the sociable principled candidate is picked ~66% against an equal-tier rival.
 - **Status:** [ ] not started

@@ -60,7 +60,7 @@ console.log('\nTest 3: SCHEMAS covers expected writer-paired sheets');
   assert('SCHEMAS object declared',
     /const\s+SCHEMAS\s*=\s*\{/.test(source));
   for (const sheet of [
-    'Riley_Digest', 'Engine_Errors', 'Chicago_Citizens', 'Election_Log',
+    'Riley_Digest', 'Engine_Errors', 'Chicago_Citizens',
     'Health_Cause_Queue', 'Relationship_Bond_Ledger', 'Crime_Metrics',
     'Transit_Metrics'
   ]) {
@@ -88,12 +88,9 @@ console.log('\nTest 5: Riley_Digest covers cycle-summary columns');
   }
 }
 
-console.log('\nTest 6: Election_Log + Health_Cause_Queue load-bearing cols');
+console.log('\nTest 6: Health_Cause_Queue load-bearing cols (Election_Log left the writer map with runCivicElectionsv1.js — engine.94 B.3 v3)');
 {
-  // Election_Log post-S141 schema landmines
-  for (const col of ['OfficeId', 'Incumbent', 'Challenger', 'Winner', 'MarginType']) {
-    assert(`Election_Log writerCols includes '${col}'`, source.includes(`'${col}'`));
-  }
+  assert('Election_Log has no writer mapping (its writer is deleted; the tab stays as history)', !source.includes("'Election_Log'"));
   // Health_Cause_Queue intake schema
   for (const col of ['StatusStartCycle', 'CyclesSick', 'AssignedCause', 'Processed']) {
     assert(`Health_Cause_Queue writerCols includes '${col}'`, source.includes(`'${col}'`));

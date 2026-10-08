@@ -47,15 +47,6 @@ const SCHEMAS = {
     ]
   },
 
-  'Election_Log': {
-    file: 'runCivicElectionsv1.js',
-    writerCols: [
-      'Timestamp', 'Cycle', 'GodWorldYear', 'OfficeId', 'Title', 'District',
-      'Incumbent', 'Challenger', 'Winner', 'Margin', 'MarginType',
-      'IncumbentAdvantage', 'EconFactor', 'Narrative'
-    ]
-  },
-
   'Health_Cause_Queue': {
     file: 'healthCauseIntake.js',
     writerCols: [

@@ -95,9 +95,6 @@ function buildCyclePacket_(ctx) {
   lines.push('CycleRef: ' + (S.cycleRef || 'Y' + cal.godWorldYear + 'C' + cal.cycleOfYear));
   lines.push('Timestamp: ' + inWorldStamp_(ctx));  // S271 in-world, not wall-clock
   
-  if (civic.electionWindow) {
-    lines.push('🗳️ ELECTION WINDOW ACTIVE — Group ' + civic.electionGroup);
-  }
   lines.push('');
 
   // ═══════════════════════════════════════════════════════════
@@ -137,20 +134,10 @@ function buildCyclePacket_(ctx) {
   lines.push('Officials: ' + civic.totalOfficials + ' | Vacancies: ' + civic.vacancies);
   lines.push('CivicLoad: ' + (S.civicLoad || 'stable'));
   
-  if (civic.electionWindow) {
-    lines.push('');
-    lines.push('🗳️ ELECTION WINDOW:');
-    lines.push('  Year: ' + cal.godWorldYear + ' | Group: ' + civic.electionGroup);
-    lines.push('  Seats Up: ' + civic.seatsUp.length);
-    for (var su = 0; su < civic.seatsUp.length; su++) {
-      var seat = civic.seatsUp[su];
-      var statusFlag = seat.status !== 'active' ? ' [' + seat.status.toUpperCase() + ']' : '';
-      lines.push('  - ' + seat.title + ': ' + seat.holder + statusFlag);
-    }
-  } else if (civic.cyclesUntilElection <= 15) {
-    lines.push('📅 Next Election: ' + civic.cyclesUntilElection + ' cycles');
-  }
-  
+  // engine.94 B.3 v3 (builder 2026-10-08): no scheduled election exists — seats
+  // turn over by approval in Phase5-ApprovalRatings. The election window and
+  // its countdown left the packet with runCivicElectionsv1.js.
+
   if (civic.recentResults && civic.recentResults.length > 0) {
     lines.push('');
     lines.push('📊 RECENT RESULTS:');
@@ -808,8 +795,7 @@ function buildCyclePacket_(ctx) {
     ]
   ]);
 
-  Logger.log('buildCyclePacket_ v3.8: Cycle ' + (S.absoluteCycle || S.cycleId) +
-    ' | Election: ' + civic.electionWindow);
+  Logger.log('buildCyclePacket_ v3.8: Cycle ' + (S.absoluteCycle || S.cycleId));
 
   ctx.summary.cyclePacket = packet;
 }
@@ -1383,42 +1369,16 @@ function persistJudicialLedger_(ctx) {
  */
 function getCivicContextForPacket_(ss, cycle, cal) {
   
+  // engine.94 B.3 v3: no election window, no countdown — the calendar election
+  // is gone (runCivicElectionsv1.js deleted 2026-10-08). Election_Log stays as
+  // history and is still read below for recentResults.
   var result = {
-    electionWindow: false,
-    electionGroup: '',
-    nextElectionYear: 0,
-    nextElectionGroup: '',
-    cyclesUntilElection: 999,
-    seatsUp: [],
     recentResults: [],
     notableStatuses: [],
     vacancies: 0,
     totalOfficials: 0
   };
-  
-  var cycleOfYear = cal.cycleOfYear || 1;
-  var godWorldYear = cal.godWorldYear || 1;
-  
-  // Check election window (November = cycles 45-48, even years)
-  var inNovember = (cycleOfYear >= 45 && cycleOfYear <= 48);
-  var isEvenYear = (godWorldYear % 2 === 0);
-  
-  if (inNovember && isEvenYear) {
-    result.electionWindow = true;
-    result.electionGroup = (godWorldYear % 4 === 0) ? 'B' : 'A';
-  }
-  
-  // Calculate next election
-  if (!result.electionWindow) {
-    var yearsToNextEven = isEvenYear ? 2 : 1;
-    result.nextElectionYear = godWorldYear + yearsToNextEven;
-    result.nextElectionGroup = (result.nextElectionYear % 4 === 0) ? 'B' : 'A';
-    
-    var cyclesLeftThisYear = 52 - cycleOfYear;
-    var fullYearsWait = yearsToNextEven - 1;
-    result.cyclesUntilElection = cyclesLeftThisYear + (fullYearsWait * 52) + 45;
-  }
-  
+
   // Read Civic_Office_Ledger
   var officeLedger = ss.getSheetByName('Civic_Office_Ledger');
   if (officeLedger) {
@@ -1431,7 +1391,6 @@ function getCivicContextForPacket_(ss, cycle, cal) {
     var iType = col('Type');
     var iHolder = col('Holder');
     var iStatus = col('Status');
-    var iElectionGroup = col('ElectionGroup');
     
     for (var i = 1; i < data.length; i++) {
       var row = data[i];
@@ -1440,22 +1399,12 @@ function getCivicContextForPacket_(ss, cycle, cal) {
       var type = (row[iType] || '').toLowerCase();
       var holder = row[iHolder] || 'TBD';
       var status = (row[iStatus] || 'active').toLowerCase();
-      var group = (row[iElectionGroup] || '').toUpperCase();
 
       result.totalOfficials++;
       
       // Count vacancies
       if (status === 'vacant' || holder === 'TBD' || holder === '') {
         result.vacancies++;
-      }
-      
-      // Seats up for election
-      if (result.electionWindow && type === 'elected' && group === result.electionGroup) {
-        result.seatsUp.push({
-          title: title,
-          holder: holder,
-          status: status
-        });
       }
       
       // Notable statuses

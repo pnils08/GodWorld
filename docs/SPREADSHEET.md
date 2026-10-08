@@ -239,7 +239,7 @@ infrastructure.6 Track B close (2026-08-16, `c3fe1780` + `86f43999`). Each row c
 | **MediaRoom_Paste** | `parseMediaRoomMarkdown.js`, `mediaRoomIntake.js` | **CLOSED — kept + allowlisted.** Auto-created on operator run (`insertSheet`). Same class as `Election_Log`. |
 | **Raw_Continuity_Paste** | `continuityNotesParser.js` | **CLOSED — file deleted whole.** Tab never existed. Zero live callers. |
 | **Story_Hook_Archive** | `hookLifecycleEngine.js` (historical) | **CLOSED — stale doc-only.** Zero live code refs. `hookLifecycleEngine` itself is gone. |
-| **Election_Log** | `runCivicElectionsv1.js` | **CLOSED — reclassified, not a ghost.** Schema-documented; auto-created on write. Precedent for `MediaRoom_Paste`. |
+| **Election_Log** | (history; writer `runCivicElectionsv1.js` deleted 2026-10-08, engine.94 B.3 v3) | **CLOSED — history tab.** Read by `getCivicContextForPacket_` and the civic slice; nothing writes it. Seats turn over by approval. |
 | **Continuity_Intake** | `continuityNotesParser.js` | **CLOSED — file deleted whole.** Tab never existed. Zero live callers. |
 
 ---

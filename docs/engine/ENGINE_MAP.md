@@ -123,7 +123,6 @@
 | 5-Neighborhoods | `runNeighborhoodEngine_()` | phase05-citizens/runNeighborhoodEngine.js | ENGINE citizens without UNI/MED/CIV flags | `isUNI\|\|isMED\|\|isCIV` skip |
 | 5-Universe | `runAsUniversePipeline_()` | phase05-citizens/runAsUniversePipeline.js | UNI-flagged citizens ONLY | `!isUNI` skip |
 | 5-CivicRoles | `runCivicRoleEngine_()` | phase05-citizens/runCivicRoleEngine.js | CIV-flagged citizens | CIV check |
-| 5-Elections | `runCivicElections_()` | phase05-citizens/runCivicElectionsv1.js | Council election logic | — |
 | 5-Initiatives | `runCivicInitiativeEngine_()` | phase05-citizens/civicInitiativeEngine.js | Initiative_Tracker sheet | — |
 | 5-ApprovalRatings | `updateCivicApprovalRatings_()` | phase05-citizens/updateCivicApprovalRatings.js | Dynamic approval from initiative performance + media + district alignment. Writes to Civic_Office_Ledger Approval column. Triggers: vulnerable (<30), recall-pressure (<20), popular (>80) (v1.0 S137b) | — |
 

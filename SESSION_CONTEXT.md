@@ -9,6 +9,6 @@
 
 **NEXT[codex]:** Verify board comparator/config/history export gaps per the same plan §Task 4; separate counter threshold-rounding defect in §Health numerator amendment.
 
-**NEXT[antigravity]:** engine.204/205 review completed to docs/for-claude-review/2026-10-03-agy-engine-204-205-draft-review.md. Verdict: SHIP-WITH-FIXES. 2 FIXES: Corrected the word-test count in §1.4 from 174 to 85 exact tests, and caught `mediaFeedbackEngine.js` as an unlisted numeric consumer of `sportsSeason` for `hopeBoost` and topic modifiers.
+**NEXT[antigravity]:** engine.95 checkpoint/resume review completed to output/antigravity/2026-10-08-review-engine95.md. Verdict: SHIP. All 7 hunted vectors (cache flush, admission, context payload, codec, save ordering, assertions, web contract) verified safe and matching the design. Standing by.
 
 **NEXT[grok]:** No pane; nothing queued.

@@ -1,7 +1,7 @@
 ---
 title: Supermemory API v5 Migration
 created: 2026-10-06
-updated: 2026-10-06
+updated: 2026-10-07
 type: plan
 tags: [infrastructure, supermemory, ready]
 sources:
@@ -14,6 +14,8 @@ pointers:
 ---
 
 # Supermemory API v5 Migration
+
+**Scheduled:** Sunday 2026-11-01 (builder 2026-10-07) — held until then; v5's default hybrid search tested worse (§Search quality).
 
 **Deadline:** vendor email 2026-10-06 gives 3 months → cut over before **2027-01-06**. The guide itself names no sunset. Probed 2026-10-06 with the lib's key: `/v3/search`, `/v4/search`, `/ns/sl-godworld/search`, `/v3/documents/list` all **200**. Nothing is broken today.
 

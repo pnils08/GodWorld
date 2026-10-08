@@ -134,7 +134,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | infrastructure.6 | Sim-health observability + ghost-tab integrity — `/api/sim-health` off engineAuditor JSON + dashboard panel; disposition 11 ghost tab refs + tab-reference integrity test | ready | engine-sheet | [[../plans/2026-07-31-engine-observability-integrity]] |
 | infrastructure.8 | Hidden-tab audit + disposition (kimi) — 16 hidden tabs classified vs live code (3 load-bearing, 6 dead); Task 1 doc truth pass, Task 2 builder keep/delete rulings, Task 3 backup-then-delete. **Builder 2026-09-14: low priority — pick up only once the engine runs clean.** | parked | engine-sheet | [[../plans/2026-09-09-hidden-tab-audit]] |
 | infrastructure.9 | Daytime autonomy — builder 2026-10-01: run the overnight loop every session so rb works the ROLLOUT list without the builder; Discord as the reach-out channel. Design after a week of clean nights | parked | research-build | [[../reference/overnight_autonomy_session]] |
-| infrastructure.10 | Supermemory API v5 migration — vendor email 2026-10-06, v3/v4 off ~2027-01-06; ~30 direct callers + live bot + 3 crons; one-namespace-per-document design pass, cut one domain at a time | ready | engine-sheet | [[../plans/2026-10-06-supermemory-v5-migration]] |
+| infrastructure.10 | Supermemory API v5 migration — vendor email 2026-10-06, v3/v4 off ~2027-01-06; ~30 direct callers + live bot + 3 crons; one-namespace-per-document design pass, cut one domain at a time. **Held to Sun 2026-11-01** (builder 2026-10-07) | parked | engine-sheet | [[../plans/2026-10-06-supermemory-v5-migration]] |
 
 ### research.* — Papers, external tools, evaluations
 

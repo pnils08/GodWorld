@@ -421,6 +421,7 @@ one pushed, Node-requirable source remains Watch List; no longer a correctness g
 - **D1:** `processFeedSheet_` uses `canonicalSportsPhase_` before sentiment and inferred season triggers. Existing aliases and fail-closed `off-season` behavior are preserved; no vocabulary expansion.
 - **D4:** the reducer uses the existing `parseWinPercentage_` to prevent a no-information record from replacing an informative record. Engine-sheet's measured C106 sequence (`127-35`, blank, `0-0`, `0-0`) now retains `127-35`; a lone Oaks `0-0` remains valid with zero base sentiment. Literal `-` acts as blank across all eleven state fields. Published `S.` field shapes are unchanged.
 - **engine.203d (D3): ruled decay, not current-Cycle reset.** Inactivity drifts toward the city's baseline across cycles; it neither snaps to zero nor holds stale values. Sequence after engine.210, which benches first and alone.
+- **engine.203d — Builder's words (2026-10-07), overnight §6 02:39 closed:** asked whether the city dips first even after a won title or the glow fades slowly. **Verbatim:** "slow fade for title, upset first on a loss". **Reading:** a season that ends on a won title → slow fade toward baseline, no dip; a season that ends on a loss (eliminated, or goes quiet falling) → upset first, then the slow fade (2026-09-27 ruling). Build-ready.
 
 **Local proof:** `scripts/sportsFeedParser.test.js` has 47 cases: 23 fail against the pre-fix engine and all 47 pass with D1/D4. Coverage includes the measured four-row sequence, genuine 0-0, played 0-3, each dash field, aliases/unknown labels, retained historical carry-forward, and unchanged published output shapes.
 
@@ -556,6 +557,9 @@ LIVE PROD @98 + `WeekRecord` column; dead `VideoGameDate`/`VideoGame` DELETED 20
 engine.210 LIVE on PROD @97; engine.202 LIVE on PROD @98 with the `WeekRecord` column on the live feed (dead VideoGame columns deleted 2026-09-19 — 19 columns, `WeekRecord` at S) — bench-proven C115 (weekly settlement, bad-cell rejection, payouts). Smoke both at live C108. Research for Tasks 3/4/10: [[../research/2026-09-18-sports-intensity-and-game-day-economy]]. Population/economy effects defer to record-driven impact. Event_Content_Ledger selection/feedback remains under engine.208 Task 8.
 
 ## Changelog
+
+- 2026-10-07 (engine-sheet, S536) — engine.203d ruled: slow fade after a title, upset first on a loss (verbatim in Task 2). ROLLOUT engine.203d → section 4, ready.
+- 2026-10-07 (engine-sheet, S536) — engine.204/205 column removal HELD by the builder for a ripple review and a dashboard/sheet/code option-sync audit; verbatim in [[../research/2026-10-03-engine-204-205-game-day-economy-read-before]] §4 Builder's words (2026-10-07).
 
 - 2026-10-03 (research-build, S523) — engine.204/205 read-before + cut drafted: [[../research/2026-10-03-engine-204-205-game-day-economy-read-before]]. Tasks 3, 4 and 10 build as one week object (`S.sportsWeek` / `S.sportsCity`) — volume from the folded `WeekRecord`, stakes from the last-entry lens (sixth block), surprise against a per-franchise expectation shared with engine.208, venue share from home games, per-round reach. Hop 6 folded (§2.4). Four sim calls RULED the same night as proposed (research doc §4 Rulings): priors .750/.400, weights 1.0/0.35, reach table, EconomicFootprint deleted / FranchiseStability + CommunityInvestment kept. Build-ready for es, on top of the 208 week object.
 

@@ -246,7 +246,19 @@ Everything else in today's table leaves it: the real-world political and heritag
 - **PROD:** engine files = `bce69997` 2026-10-02 03:54, isolated stage, pre-flight delta exactly the 14 changed files, pull-back 167/167 identical, 0 test files. Bench resynced from live C109 afterwards.
 - **What the newsroom actually gets:** the label on the calendar lines (`Cycle_Packet`, desk context, world summary), one hook line, one texture line, the tourism ripple. Nothing tells a desk what the day *is* beyond that hook — the carrier for a world-born holiday's meaning is a newsroom-side question (research-build), noted on the morning list.
 
+### Builder's words (2026-10-07) — overnight §6 01:40 / 03:58 closed
+
+Asked as one list with defaults: (5a) the court week — C110, year position 6, name "Open Court Week"; (5b) the week the world runs on its own — not yet happened; (5c) Second Dawn's depth — kept thin; (5d) a one-sentence meaning for Creation Day and Second Dawn carried to the desks.
+
+**Verbatim:** "5a, approved default, 5b - hold it, 5c - this is the really more aligned with the cli workflows started and media started to quote citizens, not the birth of crons , but the claude cli takeover, so youre feel it probably correct. 5d i agree on this, creation day is somewhat obvious but it also marks when the engine went online with civis systems began to track the city"
+
+**Reading:** (5a) `OpenCourtWeek` / label "Open Court Week", position 6, priority `oakland`, citywide, low-key; position 6 is a First Friday (`% 4 === 2`) — the table test's "no First Friday on a kept holiday" is resolved in the build (engineering). (5b) reserved until the week it happens; named then. (5c) Second Dawn stays thin. Its in-world meaning: the week the city found its voice — the paper began carrying citizens' own words (out-of-world origin stays out of the world). (5d) yes — one sentence each, drafted by es, builder approves; Creation Day = the week Civis Systems came online and began tracking the city. The carrier into desk context is research-build's (03:58).
+
+**Meaning sentences (2026-10-07), drafted by es:** Creation Day — "Creation Day marks the week Civis Systems came online and began tracking the city — the week Oakland started keeping its own record." Second Dawn — "Second Dawn marks the week the city found its voice — when the Tribune began carrying its citizens' own words, and Oakland started hearing itself." **Builder:** "the holiday lines look good, we would just ultimatley brainstorm them to be more media and sim aligned" — approved as the working lines; a later brainstorm reshapes them toward what the media and the sim use.
+
 ## Changelog
+
+- 2026-10-07 (engine-sheet, S536) — Builder: Open Court Week at position 6 approved; running-on-its-own week held; Second Dawn stays thin; meaning sentences yes (verbatim under §Builder's words 2026-10-07). ROLLOUT engine.273 → section 3.
 
 - 2026-09-29 (engine-sheet) — Plan filed from builder direction; Task 1 dispatched to codex.
 - 2026-09-29 (research-build) — Task 1 verified and ruled (§Task 1 outcome): 4 missed engine readers added, scope set to engine hardcoding, 3 builder calls raised.

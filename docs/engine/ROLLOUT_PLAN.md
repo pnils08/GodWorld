@@ -65,18 +65,8 @@
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
-| engine.204 | Game-day city impact is LIVE since 2026-10-06. Builder's go on two things: delete HomeNeighborhood + EconomicFootprint from the tab (readers moved first), and where CommunityInvestment is carried | needs-info | engine-sheet | [[../research/2026-10-03-engine-204-205-game-day-economy-read-before]] |
-| engine.205 | Weekly game economy both ways, LIVE since 2026-10-06. Waits on the same two builder calls as engine.204 | needs-info | engine-sheet | [[../plans/2026-09-11-sports-as-a-lived-system]] Tasks 4, 10 |
-| engine.208 | Fandom dial LIVE since 2026-10-06. Builder's go on the live seed (overnight doc §6) | needs-info | engine-sheet | [[../research/2026-10-02-engine-208-fandom-dial-read-before]] §2.9 |
-| engine.203d | Slow fade after a won title, unbuilt: builder's sign on dip first, or the glow fades (overnight doc §6 02:39) | needs-info | engine-sheet | [[../plans/2026-09-11-sports-as-a-lived-system]] Task 2 |
-| engine.281 | Sports-week ladder + venue (a–d) LIVE since 2026-10-06. Open (e): which column surfaces it — builder + research-build | needs-info | engine-sheet / research-build | [[../research/2026-10-03-engine-204-205-game-day-economy-read-before]] §1.4 / §2.2 |
-| engine.214 | Cluster anchors out of the engine, LIVE since 2026-10-06; the five rows self-arm at C111. Builder question at overnight doc §6 03:54 | needs-info | engine-sheet | [[../plans/2026-09-13-run-cycle-packages-the-world]] Task 4 |
-| engine.273 | Holiday calendar LIVE; first Second Dawn C131. Two more world-born weeks wait on the builder's names | needs-info | engine-sheet | [[../plans/2026-09-29-sim-holiday-calendar]] |
-| engine.193 | Adversity tiers LIVE. Builder call: what causes a citywide contraction, and how often | needs-info | engine-sheet | [[../plans/2026-09-10-inactivity-is-regression]] §engine.193 |
-| engine.90 | Citizen Archive code deployed with the flag off. Builder call: flip `citizenArchiveEnabled` and backfill the archive cards live | needs-info | engine-sheet | [[../plans/2026-08-21-citizen-archive]] |
-| engine.95 | Checkpoint/resume (Task 4, with Task 5 dedup) designed 2026-10-04. Build waits on the builder's numbers and go | needs-info | engine-sheet | [[../plans/2026-07-31-platform-ceiling-resilience]] |
-| civic.43 | School board: T1 + T3 LIVE since 2026-10-06. Canon call before T2 seats seven: the plan and the BOARD-OUSD office IDs use 'Oakland Unified', which canon.5 ruled a contaminant (S368) | needs-info | research-build | [[../plans/2026-10-04-school-board]] + [[canon/INSTITUTIONS]] §Education |
-| pipeline.51 | NotebookLM daily news router is live; the five-shadow gate is superseded. Builder's go on the paid Task 22 comparison; Task 24 coverage table is lane work | needs-info | engine-sheet | [[../plans/2026-07-10-notebooklm-bridge-deploy]] §Phase 6 |
+| engine.214 | Cluster anchors out of the engine, LIVE since 2026-10-06; the five rows self-arm at C111. Builder 2026-10-07: needs its own discussion session — do the authored cluster-character tables duplicate the per-hood data the sheets already track (INSTITUTIONS seeds, the sim drifts)? | needs-info | engine-sheet | [[../plans/2026-09-13-run-cycle-packages-the-world]] §engine.214 Builder's words (2026-10-07) |
+| civic.43 | School board: T1 + T3 LIVE since 2026-10-06. T2 seating HELD (builder 2026-10-07): the school system is half built — hood school data but no schools in the hoods, SchoolQuality with no school behind it. Needs a deep review (engine outcomes + what media can connect), then the canon-name fix before any seat | needs-info | research-build / engine-sheet | [[../plans/2026-10-04-school-board]] §Builder's words (2026-10-07) |
 
 ## 2. Waiting on a fire — dated or organic
 
@@ -101,6 +91,13 @@
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
+| engine.204 | Game-day city impact LIVE since 2026-10-06. Column removal HELD (builder 2026-10-07): ripple map of every feed column + dashboard/sheet/code option-sync audit first; the CommunityInvestment carrier waits on it | in-progress | engine-sheet | [[../research/2026-10-03-engine-204-205-game-day-economy-read-before]] §4 Builder's words (2026-10-07) |
+| engine.205 | Weekly game economy LIVE since 2026-10-06. Held with engine.204 for the same ripple + option-sync review | in-progress | engine-sheet | [[../plans/2026-09-11-sports-as-a-lived-system]] Tasks 4, 10 |
+| engine.281 | Sports-week ladder + venue (a–d) LIVE since 2026-10-06. (e) the column surface folds into the engine.204/205 ripple + option-sync review (2026-10-07) | in-progress | engine-sheet / research-build | [[../research/2026-10-03-engine-204-205-game-day-economy-read-before]] §5 |
+| engine.208 | Fandom dial LIVE since 2026-10-06. Builder GO 2026-10-07: run the live seed as built, once, before C111 (Sun 2026-10-11) | ready | engine-sheet | [[../research/2026-10-02-engine-208-fandom-dial-read-before]] §4 Builder's words (2026-10-07) |
+| engine.273 | Holidays LIVE; first Second Dawn C131. Ruled 2026-10-07: add Open Court Week (position 6); meaning sentences for Creation Day + Second Dawn (es drafts, builder approves; rb carries to desks); running-on-its-own week held until it happens | ready | engine-sheet / research-build | [[../plans/2026-09-29-sim-holiday-calendar]] §Builder's words (2026-10-07) |
+| engine.193 | Adversity tiers LIVE. Ruled 2026-10-07: (b) institution growth cools toward sector norm, then (a) budget squeeze on public employers; then design a CAT layer (escalating catastrophe probability the sim lowers; hood/district reach; hood-wide chaos-car inspector) for the builder before build | ready | engine-sheet | [[../plans/2026-09-10-inactivity-is-regression]] §engine.193 Builder's words (2026-10-07) |
+| engine.90 | Citizen Archive LIVE: the flag was flipped by C106 (56 exits archived through C109). Left: verify the archived citizens' cards, run the --from-archive card build if missing | ready | engine-sheet | [[../plans/2026-08-21-citizen-archive]] §Changelog 2026-10-07 |
 | engine.270 | OVERDUE: the storyline review due the week of 2026-10-05. Rewire the seed scorer to the registry if the reporter needs it, else remove the dead path. Decides engine.20d | in-progress | engine-sheet | [[../plans/2026-09-28-storylines-keyed-to-engine-events]] §Observation and review |
 | engine.20d | Initiative coverage cadence: movement-only seeding in buildWorldSummary's civic lane, decided at the engine.270 review (due the week of 2026-10-05) | blocked | research-build | [[../plans/2026-05-22-engine-regulatory-friction]] §Task 5 |
 | pipeline.70 | Read the staged C110 pieces for the story test, then flip; watch the first unattended Opus business run | live-observing | research-build | [[../plans/2026-10-03-citizen-pages-drive-canon]] |
@@ -132,8 +129,10 @@
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
+| engine.95 | Checkpoint/resume (Task 4 + Task 5 dedup). Builder go 2026-10-07: budget 330 s, tail reserve 60 s, save cost measured on the bench | ready | engine-sheet | [[../plans/2026-07-31-platform-ceiling-resilience]] §Build notes Task 4 design |
 | engine.98 | Pets — designed 2026-10-04 on engine.94 rails; builds after engine.94 | ready | engine-sheet / research-build | [[../plans/2026-09-26-future-build-ideas]] §engine.98 pets — design |
 | engine.264 | The maker's hand — builder intake tab the sim never sees; after engine.94 (builder 2026-09-29) | ready | research-build | [[../plans/2026-09-26-future-build-ideas]] §Builder rulings |
+| engine.203d | Slow fade after a season ends, unbuilt. Ruled 2026-10-07: a won title fades slowly with no dip; a season ending in a loss is upset first, then the slow fade | ready | engine-sheet | [[../plans/2026-09-11-sports-as-a-lived-system]] Task 2 |
 | engine.194 | Record-driven sentiment and game-night intensity: codex authors Task 7 now that Tasks 1–4 are live | ready | engine-sheet | [[../plans/2026-09-11-sports-as-a-lived-system]] Task 7 |
 | engine.280 | Fandom dial follow-up (read-before §2.9) | ready | engine-sheet | [[../research/2026-10-02-engine-208-fandom-dial-read-before]] §2.9 |
 | engine.104 | Mint economy: arrivals born with role-consistent salary, education, career stage; plan revision first, codex vets | ready | research-build | [[../plans/2026-08-10-economy-native-rebuild]] |

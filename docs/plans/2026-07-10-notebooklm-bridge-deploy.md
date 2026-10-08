@@ -339,7 +339,7 @@ shadow runs should record the three-valued disposition from the first run so the
   3. Change only the format axis and record the listening verdict below.
 - **Verify:** both artifacts cite only their selected sources; no source or
   artifact touches the permanent published notebook.
-- **Status:** [ ] blocked on explicit live NotebookLM approval after Task 21
+- **Status:** [x] CLOSED 2026-10-07, not run — superseded by Task 23 live since 2026-08-31 (the builder's daily listening is the comparison). Builder: "we can close this work,"
 
 ### Task 23: Existing-schedule activation
 
@@ -368,7 +368,7 @@ shadow runs should record the three-valued disposition from the first run so the
   2. Mark the artifact `NOT_CANON` and keep it out of public audio sources.
 - **Verify:** the targeted test proves one row per assignment and no article
   body or external write.
-- **Status:** [ ] sequence after Task 23; does not block audio branching
+- **Status:** [x] CLOSED 2026-10-07, not built — builder closed pipeline.51 ("we can close this work,")
 
 ### Daily News listening trial log
 
@@ -422,6 +422,8 @@ failure recovery: [[../reference/notebookLM-CLI]].
 ---
 
 ## Changelog
+
+- 2026-10-07 (engine-sheet, S536) — Builder closed pipeline.51. Asked: skip the paid Task 22 format comparison (the live router since 08-31 and his daily listening already answer it). Verbatim: "we can close this work,". Task 22 superseded, Task 24 not built. Row archived.
 
 - 2026-07-10 — Initial draft (S310). Research basis locked same day; jacob-bd adopted over PleasePrompto (S307 candidate) and roomi-fields per landscape table. Draft pending Mike's answers on Q1–Q3.
 - 2026-07-11 — Auth live (manual cookie), existing GodWorld notebook adopted (no backfill, Mike-direct), grounded-ask smoke test PASS with citations, wrapper live-verified + audio source-scoping fix, MCP registered. Remaining: Tasks 8/9 live-fire + acceptance 2 on next edition publish; Task 11 close-out after.

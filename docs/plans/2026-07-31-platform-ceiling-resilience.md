@@ -153,6 +153,8 @@ Mechanism, six parts:
 
 Bench plan: set `wallBudgetMs` to 1 on the bench so every fire takes the checkpoint path; let the trigger resume it; compare the resumed Cycle's tabs with a normal fire of the same seed (byte-equal save timestamps); then kill a resume mid-Phase-10 by hand (a `wallBudgetMs` tuned to fall inside the commit) and prove the re-run lands zero duplicate rows. Builder's three numbers and the go are the gate (§Status).
 
+**Builder's words (2026-10-07) — Task 4 go:** asked for the go and the three numbers (total budget 330 s, tail reserve 60 s, checkpoint save measured on the bench before it is set). **Verbatim:** "i agree, go with those numbers". **Reading:** build Task 4 + Task 5 as designed; `wallBudgetMs` 330000, `tailReserveMs` 60000, `checkpointSaveMs` from the bench's first checkpoint fire.
+
 ---
 
 ## Open questions
@@ -163,6 +165,8 @@ Bench plan: set `wallBudgetMs` to 1 on the bench so every fire takes the checkpo
 ---
 
 ## Changelog
+
+- 2026-10-07 (engine-sheet, S536) — Builder go on Task 4/5 with wallBudgetMs 330000, tailReserveMs 60000, checkpointSaveMs measured on the bench (verbatim above §Open questions). ROLLOUT engine.95 → section 4, ready.
 
 - 2026-10-04 (engine-sheet, overnight) — Task 4 design written (§Build notes): gate before Phase 10 on three World_Config numbers, intents to `_CycleCheckpoint`, trigger resumes the tail with Task 5 dedup; timing refreshed. Build waits on the builder.
 - 2026-07-31 — Initial draft (Kimi CLI, builder-directed external-audit remediation batch). Audit gaps #5+#6 combined (both are Sheets/Apps-Script platform-ceiling concerns). Audit's "time bomb" framing tempered by the verified writes-confined-to-Phase-10 safety property; the real exposure is Phase 10 mid-commit and the absence of any wall-distance measurement.

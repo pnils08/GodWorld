@@ -218,6 +218,14 @@ Read (es):
 - **Every athlete gets a life event from his team's week** — a win week or a losing week — named on a row or not. "All" read as all athletes (the sentence's subject); the fans' week lines are §2.2 already.
 - **UNDOCKED** — the parent plan already rules it in (plan §4: "What moves it UP: … Undocked engagement"; "One dial covers a citizen's relationship to the city's spectacle"). §2.2 carries `Undocked-Engaged` +1.
 
+### Builder's words (2026-10-07) — live seed GO; overnight §6 02:39 (1) and (2) closed
+
+Asked in plain words: (2) the live seed as built (players/staff 65, canon fans as authored, bettors 60/65 by stadium, fan families lifted, stadium-zone residents 55, everyone else 50; every player the same 65, Paulson included); (2b) who feels the week's success — team + fans + moment-catchers as built, vs every citizen weighted by fandom; (2c) fan-making speed — playoff fever fades, lasting fandom builds over seasons.
+
+**Verbatim:** "2 - go as built, 2b - keep as built, 2c - keep it"
+
+**Reading:** run the live seed as built, once, before C111 (Sun 2026-10-11). 02:39 (1) stands: team + fans + moment-catchers. 02:39 (2) stands: no faster lasting-fan conversion.
+
 ## Status log
 
 ### engine.280 — status (drained from ROLLOUT, 2026-10-04 / S274)
@@ -225,6 +233,7 @@ Read (es):
 engine.208 follow-ups (§2.9 "Out of this build"): Sports-Soured/Lifted need a per-piece tone at post-publish (no article tone exists — pipeline seam); Sports-Gutted needs a negative flag on roster rows; Sports-Attended needs an authored ECL attendance tag (rb content lane); refresh the live dropdown (`setupSportsFeedValidation`) after the 208 deploy.
 
 ## Changelog
+- 2026-10-07 (engine-sheet, S536) — Builder: live seed GO as built; overnight §6 02:39 (1) reach and (2) fan-making speed kept as built (verbatim under §4 Builder's words 2026-10-07). ROLLOUT engine.208 → section 3, seed before C111.
 - 2026-10-02 23:29 (research-build, S522) — Mike ruled all five §4 calls (recorded under §4 Rulings): athletes inert + feed-named citizens get signed life events per EventType; thin seed accepted + families and canon fans authored; round words go into the dropdown; magnitudes and the Oaks fan-side loss rule approved. Document is build-ready for es.
 - 2026-10-02 (research-build, S522) — agy read-only review folded ([[2026-10-02-agy-engine-208-draft-review]]: SHIP-WITH-FIXES): `Undocked-Engaged` tag restored to the table (ruled up-mover); Oaks loss made an explicit fan-side sim call §4(v) so the negative pole is live at ship; synthetic 10-Cycle bench added to §2.8; magnitudes kept as a sim confirm per plan Task 8 item 4. Also: §2.5 per-piece tone verified absent (gap named), Q3 expectation baseline added as an es prerequisite §2.7, ClockMode counts relabelled.
 - 2026-10-02 (research-build, S522) — initial read-before and proposed cut; feed vocabulary gap measured on the live C107–C109 rows; §6 Q6 summary-row item closed as superseded by the sixth block.

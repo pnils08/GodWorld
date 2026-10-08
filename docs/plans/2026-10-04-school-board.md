@@ -52,7 +52,15 @@ The recommendation he took (rb, 02:20): seven elected citywide seats split acros
 
 None open after the 02:22 ruling. If Task 1's bench shows the citywide ripple lands nowhere (helper returns no hoods for `citywide`), the fix is in-scope: ripple to every hood at the mayor's weight.
 
+## Builder's words (2026-10-07) — T2 held for a school-system review
+
+Asked: rename the board and its office IDs to the canon district name (Oakland City Schools, `BOARD-OCS-*`) before seating the seven, since "Oakland Unified"/"OUSD" is a ruled contaminant. **Verbatim:** "this reality of this build is the school system is half built, we track school data per hood but no schools in those hoods, so as I agree all teachers can work for a "Oakland School System", but the added work would likely to have to incorporate a school to align with the school grades simualtion ledger uses. this is another one that will need some deep review on data the media can connect and the engine can use to determine outcomes"
+
+**Reading:** T2 (seating the seven) is HELD. The canon-name fix stands in principle (the district is one employer for all teachers; INSTITUTIONS names it "Oakland City Schools" — the builder said "Oakland School System" in passing; INSTITUTIONS stays the name of record until he rules otherwise). The deeper gap: per-hood school data exists but no schools sit in the hoods, and the ledger's school grades (SchoolQuality) have no school behind them. Before seating: a deep review — what school data the engine can use to decide outcomes, and what the media can connect to — likely its own session.
+
 ## Changelog
+
+- 2026-10-07 (engine-sheet, S536) — T2 held by the builder for a school-system deep review (verbatim §Builder's words 2026-10-07): schools are half built — hood school data, no schools in hoods, SchoolQuality with no school behind it.
 
 - 2026-10-04 16:05 — es: live acceptance re-ruled — no scheduled elections (builder 15:56); board seats turn over by approval drop under 40; calendar election deleted under engine.94 B.3 v2.
 - 2026-10-04 12:4x — Tasks 1+3 bench-proven on SANDBOX 1004 C111 (engine-sheet): seven synthetic BOARD-OUSD rows, synthetic INIT-901 education vote failed 3-4 with seven named board votes, no council vote, no mayoral action; board approvals moved; 0 Engine_Errors.

@@ -1318,9 +1318,9 @@ function ledgerRowByPop_(ctx, pop) {
 
 /**
  * engine.94 B.3 v3 F4 — the citizen ledger turns over with the seat. The
- * successor becomes CIV with the office Title as RoleType; a demoted holder
- * drops to CIV n / `Former <Title>`; a retired or deceased holder drops to
- * CIV n with RoleType untouched. In-memory on ctx.ledger, committed by
+ * successor becomes CIV `yes` with the office Title as RoleType; a demoted holder
+ * drops to CIV `no` / `Former <Title>`; a retired or deceased holder drops to
+ * CIV `no` with RoleType untouched. (`yes`/`no` is the ledger's own spelling.) In-memory on ctx.ledger, committed by
  * commitSimulationLedger_ at Phase 10 through the dirty flag.
  */
 function turnoverLedger_(ctx, successorPop, title, departedPop, kind) {
@@ -1329,12 +1329,12 @@ function turnoverLedger_(ctx, successorPop, title, departedPop, kind) {
   var d = ledgerRowByPop_(ctx, departedPop);
   var touched = false;
   if (s) {
-    if (s.iCiv >= 0) { s.row[s.iCiv] = 'y'; touched = true; }
+    if (s.iCiv >= 0) { s.row[s.iCiv] = 'yes'; touched = true; } // the ledger spells it yes/no (live: 882 no / 58 yes)
     if (s.iRole >= 0 && title) { s.row[s.iRole] = title; touched = true; }
     out.successor = true;
   }
   if (d) {
-    if (d.iCiv >= 0) { d.row[d.iCiv] = 'n'; touched = true; }
+    if (d.iCiv >= 0) { d.row[d.iCiv] = 'no'; touched = true; }
     if (kind === 'demotion' && d.iRole >= 0 && title) { d.row[d.iRole] = 'Former ' + title; touched = true; }
     out.departed = true;
   }

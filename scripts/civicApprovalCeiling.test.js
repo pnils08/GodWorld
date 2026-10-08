@@ -656,8 +656,8 @@ console.log('═══ B3v3. engine.94 B.3 v3 — the seat turns over on the rea
     o.holder === undefined ? 'Rose Delgado' : o.holder, o.pop === undefined ? 'POP-00503' : o.pop, 1, 209, 4, 'A',
     o.status || 'active', '', '', o.notes || '', '', o.vp || 'yes', 'OPP', '', o.approval == null ? 64 : o.approval, o.hs || 0, '', ''];
   const LH = ['POPID', 'First', 'Last', 'FullName', 'Tier', 'Neighborhood', 'CIV (y/n)', 'Status', 'RoleType', 'BirthYear'];
-  const INCUMBENT = ['POP-00503', 'Rose', 'Delgado', 'Rose Delgado', 2, 'Lake Merritt', 'y', 'Active', 'City Council District 3', 1985];
-  const CHALLENGER = ['POP-00800', 'Marcus', 'Webb', 'Marcus Webb', 3, 'Fruitvale', 'n', 'Active', 'community organizer', 1988]; // D3-local + civic-adjacent
+  const INCUMBENT = ['POP-00503', 'Rose', 'Delgado', 'Rose Delgado', 2, 'Lake Merritt', 'yes', 'Active', 'City Council District 3', 1985];
+  const CHALLENGER = ['POP-00800', 'Marcus', 'Webb', 'Marcus Webb', 3, 'Fruitvale', 'no', 'Active', 'community organizer', 1988]; // D3-local + civic-adjacent; CIV spelled yes/no like the live ledger
   const NOTE = A.formatCampaignNote_({ pop: 'POP-00800', name: 'Marcus Webb', since: 110 }, '');
   const GC_HEAD = ['First', 'Last', 'Age', 'BirthYear', 'Neighborhood', 'Occupation', 'EmergenceCount', 'EmergedCycle', 'EmergenceContext', 'Status', 'Sex', 'EmployerBizId'];
   const fire = (o) => {
@@ -701,9 +701,9 @@ console.log('═══ B3v3. engine.94 B.3 v3 — the seat turns over on the rea
   check('B3v3.4 the CIVIC_DEMOTION description ends with the bond id (F6: it rides in HookText) and the departure carries it',
     !!demo && demo.description.endsWith('(bond ' + d.bonds[0].bondId + ')') && demo.grudgeBond === d.bonds[0].bondId &&
     d.dep.length === 1 && d.dep[0].type === 'demoted' && d.dep[0].grudgeBond === d.bonds[0].bondId && d.ripples.some(r => r.causeType === 'demotion'), demo && demo.description);
-  check('B3v3.5 the ledger turns over (F4): successor CIV y + office Title, displaced CIV n + Former Title, ledger dirty',
-    d.led('POP-00800').civ === 'y' && d.led('POP-00800').role === 'City Council District 3' &&
-    d.led('POP-00503').civ === 'n' && d.led('POP-00503').role === 'Former City Council District 3' && d.ctx.ledger.dirty === true,
+  check('B3v3.5 the ledger turns over (F4): successor CIV yes + office Title, displaced CIV no + Former Title, ledger dirty',
+    d.led('POP-00800').civ === 'yes' && d.led('POP-00800').role === 'City Council District 3' &&
+    d.led('POP-00503').civ === 'no' && d.led('POP-00503').role === 'Former City Council District 3' && d.ctx.ledger.dirty === true,
     JSON.stringify([d.led('POP-00800'), d.led('POP-00503')]));
 
   const k = fire({ seat: { approval: 25 }, rows: [INCUMBENT], gc: [] });
@@ -713,7 +713,7 @@ console.log('═══ B3v3. engine.94 B.3 v3 — the seat turns over on the rea
   A.updateCivicApprovalRatings_(k.ctx);
   check('B3v3.6c a replayed call before Phase 10 queues no second arrival (in-run set, F2)', k.gcAppends.length === 1, String(k.gcAppends.length));
 
-  const INC5 = ['POP-00504', 'Omar', 'Reyes', 'Omar Reyes', 2, 'Montclair', 'y', 'Active', 'City Council District 5', 1980];
+  const INC5 = ['POP-00504', 'Omar', 'Reyes', 'Omar Reyes', 2, 'Montclair', 'yes', 'Active', 'City Council District 5', 1980];
   const GC1 = ['Dina', 'Farrow', 38, 2004, 'Fruitvale', 'Community organizer', 1, 'Cycle 100', '', 'Active', 'F', ''];
   const two = fire({ seats: [seat({ approval: 35 }), seat({ officeId: 'COUNCIL-D5', title: 'City Council District 5', district: 'D5', holder: 'Omar Reyes', pop: 'POP-00504', approval: 35 })],
     rows: [INCUMBENT, INC5], gc: [GC1] });
@@ -740,16 +740,16 @@ console.log('═══ B3v3. engine.94 B.3 v3 — the seat turns over on the rea
   check('B3v3.10 a pair already bonded (either order) gets no second bond', pb.bonds.length === 1 && pb.bonds[0].bondId === 'B-1' && pb.dep[0].grudgeBond === null, JSON.stringify(pb.bonds));
   const bad = fire({ seat: { approval: 25, notes: '[CAMPAIGN pop=POP-800 name=Marcus Webb since=110]' } });
   check('B3v3.11 a malformed challenger id seats by the row, makes no bond, touches no successor ledger row',
-    bad.cell(2, 'PopId') === 'POP-800' && bad.bonds.length === 0 && bad.led('POP-00800').civ === 'n' && bad.led('POP-00503').civ === 'n');
-  const far = ['POP-00801', 'Nina', 'Park', 'Nina Park', 3, 'Fruitvale', 'n', 'Active', 'community organizer', 1990];
+    bad.cell(2, 'PopId') === 'POP-800' && bad.bonds.length === 0 && bad.led('POP-00800').civ === 'no' && bad.led('POP-00503').civ === 'no');
+  const far = ['POP-00801', 'Nina', 'Park', 'Nina Park', 3, 'Fruitvale', 'no', 'Active', 'community organizer', 1990];
   const miss = fire({ seat: { approval: 25, notes: NOTE }, rows: [INCUMBENT, far] });
   check('B3v3.11b a named challenger with no ledger row seats by the row but makes no bond (both rows required)',
     miss.cell(2, 'Holder') === 'Marcus Webb' && miss.bonds.length === 0, JSON.stringify(miss.bonds));
 
   const rt = fire({ seat: { status: 'retired' } });
-  check('B3v3.12 office row retired (F3): pick-and-seat at 50, no grudge, departed CIV n with RoleType untouched, successor CIV y, CIVIC_SEAT_FILLED',
+  check('B3v3.12 office row retired (F3): pick-and-seat at 50, no grudge, departed CIV no with RoleType untouched, successor CIV yes, CIVIC_SEAT_FILLED',
     rt.cell(2, 'Holder') === 'Marcus Webb' && rt.cell(2, 'Approval') === 50 && rt.cell(2, 'Status') === 'active' && rt.bonds.length === 0 &&
-    rt.led('POP-00503').civ === 'n' && rt.led('POP-00503').role === 'City Council District 3' && rt.led('POP-00800').civ === 'y' &&
+    rt.led('POP-00503').civ === 'no' && rt.led('POP-00503').role === 'City Council District 3' && rt.led('POP-00800').civ === 'yes' &&
     rt.hooks.some(h => h.hookType === 'CIVIC_SEAT_FILLED') && rt.dep[0].type === 'retired' && /Rose Delgado retired\. Marcus Webb \(POP-00800\) seated\./.test(rt.cell(2, 'Notes')),
     JSON.stringify([rt.intents, rt.dep]));
   const dead = INCUMBENT.slice(); dead[7] = 'deceased';
@@ -757,13 +757,13 @@ console.log('═══ B3v3. engine.94 B.3 v3 — the seat turns over on the rea
   check('B3v3.13 the holder\'s ledger row deceased (office row active): the seat is filled, the record says died in office',
     dc.cell(2, 'Holder') === 'Marcus Webb' && /died in office/.test(dc.cell(2, 'Notes')) && dc.dep[0].type === 'deceased' && dc.bonds.length === 0, String(dc.cell(2, 'Notes')));
   const nv = fire({ seat: { status: 'retired' }, rows: [INCUMBENT], gc: [] });
-  check('B3v3.14 can\'t serve and nobody qualified: the seat goes vacant (Holder TBD, PopId blank, VotingPower vacant, Status vacant), CIVIC_LEFT_OFFICE, departed CIV n',
+  check('B3v3.14 can\'t serve and nobody qualified: the seat goes vacant (Holder TBD, PopId blank, VotingPower vacant, Status vacant), CIVIC_LEFT_OFFICE, departed CIV no',
     nv.cell(2, 'Holder') === 'TBD' && nv.cell(2, 'PopId') === '' && nv.cell(2, 'VotingPower') === 'vacant' && nv.cell(2, 'Status') === 'vacant' &&
-    nv.hooks.some(h => h.hookType === 'CIVIC_LEFT_OFFICE') && nv.led('POP-00503').civ === 'n' && nv.dep[0].successor === null, JSON.stringify(nv.intents));
+    nv.hooks.some(h => h.hookType === 'CIVIC_LEFT_OFFICE') && nv.led('POP-00503').civ === 'no' && nv.dep[0].successor === null, JSON.stringify(nv.intents));
   const vf = fire({ seat: { holder: 'TBD', pop: '', status: 'vacant', vp: 'vacant', approval: 65 }, rows: [CHALLENGER] });
   check('B3v3.15 a vacant elected seat is filled at approval 50 (Status active, VotingPower yes), departure vacant-filled, no bond',
     vf.cell(2, 'Holder') === 'Marcus Webb' && vf.cell(2, 'PopId') === 'POP-00800' && vf.cell(2, 'Approval') === 50 && vf.cell(2, 'Status') === 'active' &&
-    vf.cell(2, 'VotingPower') === 'yes' && vf.dep[0].type === 'vacant-filled' && vf.bonds.length === 0 && vf.led('POP-00800').civ === 'y', JSON.stringify(vf.intents));
+    vf.cell(2, 'VotingPower') === 'yes' && vf.dep[0].type === 'vacant-filled' && vf.bonds.length === 0 && vf.led('POP-00800').civ === 'yes', JSON.stringify(vf.intents));
   const vw = fire({ seat: { holder: 'TBD', pop: '', status: 'vacant', vp: 'vacant' }, rows: [], gc: [] });
   check('B3v3.16 a vacant seat with nobody qualified waits: nothing written, one arrival queued', vw.intents.length === 0 && vw.gcAppends.length === 1 && vw.dep.length === 0);
 

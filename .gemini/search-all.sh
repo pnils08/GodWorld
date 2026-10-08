@@ -9,5 +9,5 @@ export SUPERMEMORY_API_KEY="${SUPERMEMORY_API_KEY:-$(grep -oP 'SUPERMEMORY_CC_AP
 # gemini = agy's own memory; the rest are read-only depth (primary editor's layers).
 for C in gemini mags bay-tribune world-data; do
   echo "===== $C ====="
-  npx --no-install supermemory search "$Q" --tag "$C" --limit 5 2>/dev/null || echo "(no results / error)"
+  npx --no-install supermemory search "$Q" --namespace "$C" --limit 5 2>/dev/null || echo "(no results / error)"
 done

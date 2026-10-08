@@ -55,11 +55,14 @@ class SupermemorySearchTests(unittest.TestCase):
         self.assertEqual(cmd[cmd.index('--threshold') + 1], '0.3')
         self.assertEqual(
             json.loads(cmd[cmd.index('--filter') + 1]),
-            {'field': 'source', 'operator': 'eq', 'value': 'edition-ingest'},
+            {'operator': 'or', 'operands': [
+                {'field': 'source', 'operator': 'eq', 'value': 'edition-ingest'},
+                {'field': 'source', 'operator': 'eq', 'value': 'saturday-sweep'},
+            ]},
         )
         self.assertNotIn('--tag', cmd)
         self.assertIn('--json', cmd)
-        self.assertIn('published provenance only', result)
+        self.assertIn('published canon only', result)
         self.assertIn('Bay Tribune Edition 101', result)
         self.assertIn('source=edition-ingest', result)
         self.assertIn('cycle=101', result)
@@ -81,9 +84,18 @@ class SupermemorySearchTests(unittest.TestCase):
             result = MODULE['published_canon_search']('citizen', 2, sort='recency')
         self.assertLess(result.index('Newest'), result.index('Older'))
         self.assertIn('updated=2026-10-05', result)
-        # a compound filter is refused, never guessed
-        with self.assertRaises(ValueError):
-            MODULE['_to_v5_filter']({'AND': [{'key': 'a', 'value': '1'}, {'key': 'b', 'value': '2'}]})
+        # filter translation: single, AND/OR of equalities; anything else is refused, never guessed
+        f = MODULE['_to_v5_filter']
+        self.assertEqual(f({'AND': [{'key': 'a', 'value': '1'}]}),
+                         {'field': 'a', 'operator': 'eq', 'value': '1'})
+        self.assertEqual(f({'AND': [{'key': 'a', 'value': '1'}, {'key': 'b', 'value': '2'}]}),
+                         {'operator': 'and', 'operands': [
+                             {'field': 'a', 'operator': 'eq', 'value': '1'},
+                             {'field': 'b', 'operator': 'eq', 'value': '2'}]})
+        for bad in ({'NOT': [{'key': 'a', 'value': '1'}]}, {'AND': []}, {'AND': [{'field': 'a'}]},
+                    {'AND': [{'key': 'a', 'value': '1'}], 'OR': [{'key': 'b', 'value': '2'}]}):
+            with self.assertRaises(ValueError):
+                f(bad)
         # the legacy 'documents' mode name maps to 'chunks'
         seen = []
         def fake_run(cmd, **kwargs):
@@ -92,6 +104,31 @@ class SupermemorySearchTests(unittest.TestCase):
         with patch.object(MODULE['subprocess'], 'run', side_effect=fake_run):
             MODULE['supermemory_search']('q', 'bay-tribune', 3, mode='documents')
         self.assertEqual(seen[0][seen[0].index('--mode') + 1], 'chunks')
+
+    def test_published_canon_includes_swept_articles_and_drops_intake_chunks(self):
+        payload = {
+            'results': [
+                {'chunk': '## INTAKE\nNAMES: Rick Walker | quoted-source\nCLAIM: x | cite',
+                 'metadata': {'title': 'civic_c108_x', 'source': 'saturday-sweep', 'cycle': '108'}},
+                {'memory': 'Rick Walker said the transit hub has stalled.',
+                 'metadata': {'title': 'civic_c108_x', 'source': 'saturday-sweep', 'cycle': '108'}},
+                {'memory': 'Jose Walker is a nurse aide in Uptown.',
+                 'metadata': {'title': 'Edition 92', 'source': 'edition-ingest'}},
+            ],
+        }
+        calls = []
+        def fake_run(cmd, **kwargs):
+            calls.append(cmd)
+            return completed(json.dumps(payload))
+        with patch.object(MODULE['subprocess'], 'run', side_effect=fake_run):
+            result = MODULE['published_canon_search']('Rick Walker', 2)
+        self.assertIn('source=saturday-sweep', result)
+        self.assertIn('Rick Walker said the transit hub has stalled.', result)
+        self.assertNotIn('## INTAKE', result)
+        self.assertNotIn('quoted-source', result)
+        self.assertIn('2 hit(s)', result)          # the register chunk did not use a slot
+        cmd = calls[0]
+        self.assertGreater(int(cmd[cmd.index('--limit') + 1]), 2)   # over-fetched to cover dropped chunks
 
     def test_projected_json_failure_is_loud_and_does_not_fall_back(self):
         with patch.object(

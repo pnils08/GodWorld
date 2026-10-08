@@ -51,9 +51,15 @@ mcp = FastMCP("godworld", instructions="GodWorld city simulation data. Search ca
 SUPERMEMORY_KEY = os.environ.get('SUPERMEMORY_CC_API_KEY', '')
 DASHBOARD_URL = 'http://localhost:3001'
 PROJECT_ROOT = Path(__file__).parent.parent
+# Published canon = the audited edition ingest (masthead/narration frames and
+# legacy editions) plus the Saturday per-article sweep, which posts every
+# published article with status 'canon' (builder 2026-10-08: swept articles are
+# canon and must be searchable; since pipeline.65 the edition ingest carries
+# only the frame, so article prose lives under the sweep's source).
 PUBLISHED_CANON_FILTER = {
-    'AND': [
+    'OR': [
         {'key': 'source', 'value': 'edition-ingest'},
+        {'key': 'source', 'value': 'saturday-sweep'},
     ],
 }
 WORLD_DOMAIN_TAGS = (
@@ -73,22 +79,29 @@ WORLD_DOMAIN_TAGS = (
 # ═══════════════════════════════════════════════════════════════════════════
 
 def _to_v5_filter(legacy: dict) -> dict:
-    """Translate the legacy AND-of-{key,value} filter to the Supermemory 5.x CLI shape.
+    """Translate the legacy {AND|OR: [{key, value}, ...]} filter to the Supermemory 5.x CLI shape.
 
-    The 5.x CLI takes one {field, operator, value} condition. Only the single
-    equality condition this server uses is translated; anything else raises
-    rather than guessing a compound syntax (a wrong filter would silently widen
-    the audited provenance lane).
+    5.x takes one {field, operator, value} condition, or a compound
+    {operator: 'and'|'or', operands: [conditions]}. Only equality conditions are
+    translated; anything else raises rather than guessing (a wrong filter would
+    silently widen the audited provenance lane).
     """
-    if isinstance(legacy, dict) and 'field' in legacy:
+    if isinstance(legacy, dict) and ('field' in legacy or 'operands' in legacy):
         return legacy
-    conditions = legacy.get('AND') if isinstance(legacy, dict) else None
-    if (isinstance(conditions, list) and len(conditions) == 1
-            and isinstance(conditions[0], dict)
-            and 'key' in conditions[0] and 'value' in conditions[0]):
-        return {'field': conditions[0]['key'], 'operator': 'eq',
-                'value': conditions[0]['value']}
-    raise ValueError('metadata_filter: only a single equality condition is supported')
+
+    def cond(c):
+        if isinstance(c, dict) and 'key' in c and 'value' in c:
+            return {'field': c['key'], 'operator': 'eq', 'value': c['value']}
+        raise ValueError('metadata_filter: only equality conditions {key, value} are supported')
+
+    if isinstance(legacy, dict) and len(legacy) == 1:
+        op, conditions = next(iter(legacy.items()))
+        if op in ('AND', 'OR') and isinstance(conditions, list) and conditions:
+            operands = [cond(c) for c in conditions]
+            if len(operands) == 1:
+                return operands[0]
+            return {'operator': op.lower(), 'operands': operands}
+    raise ValueError('metadata_filter: expected {"AND"|"OR": [{key, value}, ...]}')
 
 
 def _updated_at(hit: dict) -> str:
@@ -99,10 +112,24 @@ def _updated_at(hit: dict) -> str:
     return hit.get('updatedAt') or ''
 
 
+def _hit_body(hit: dict) -> str:
+    return str(
+        hit.get('memory') or hit.get('content') or hit.get('chunk') or hit.get('summary') or ''
+    )
+
+
 def _project_supermemory_hits(query: str, container: str, hits: list,
                               limit: int, sort: str = None,
-                              label: str = None) -> str:
-    """Render only retrieval content and useful provenance from JSON hits."""
+                              label: str = None,
+                              drop_intake: bool = False) -> str:
+    """Render only retrieval content and useful provenance from JSON hits.
+
+    drop_intake: skip a chunk that is the INTAKE machine register (names, claims,
+    source cites, self-score). Articles swept before 2026-10-08 still carry that
+    chunk in canon; prose search should not return it (builder 2026-10-08).
+    """
+    if drop_intake:
+        hits = [h for h in hits if not _hit_body(h).lstrip().startswith('## INTAKE')]
     if sort == 'recency':
         hits.sort(
             key=lambda item: (
@@ -140,21 +167,15 @@ def _project_supermemory_hits(query: str, container: str, hits: list,
             provenance.append(f"sim={similarity:.3f}")
         suffix = f" [{' '.join(provenance)}]" if provenance else ''
         lines.append(f"--- {title}{suffix}")
-        body = (
-            hit.get('memory')
-            or hit.get('content')
-            or hit.get('chunk')
-            or hit.get('summary')
-            or ''
-        )
-        lines.append(str(body).strip() or '(no projected text)')
+        lines.append(_hit_body(hit).strip() or '(no projected text)')
     return '\n'.join(lines)
 
 
 def supermemory_search(query: str, container: str, limit: int = 5,
                        mode: str = None, threshold: float = None,
                        sort: str = None, metadata_filter: dict = None,
-                       project: bool = False, label: str = None) -> str:
+                       project: bool = False, label: str = None,
+                       drop_intake: bool = False) -> str:
     """Search a Supermemory container.
 
     mode: None (CLI default 'memories'), 'hybrid', or 'documents'. Use 'hybrid'
@@ -183,7 +204,7 @@ def supermemory_search(query: str, container: str, limit: int = 5,
             raise ValueError('metadata_filter must be an object')
 
         needs_json = bool(sort or project or metadata_filter is not None)
-        fetch_limit = max(limit * 3, 10) if sort == 'recency' else limit
+        fetch_limit = max(limit * 3, 10) if (sort == 'recency' or drop_intake) else limit
         # Supermemory CLI 5.x (npx cache moved to it 2026-10-06): --namespace
         # replaced --tag, and the 'documents' search mode is now 'chunks'.
         cmd = ['npx', 'supermemory', 'search', query, '--namespace', container,
@@ -222,7 +243,8 @@ def supermemory_search(query: str, container: str, limit: int = 5,
             except (json.JSONDecodeError, AttributeError, TypeError) as exc:
                 return f"Search error: invalid Supermemory JSON for {container}: {exc}"
             return _project_supermemory_hits(
-                query, container, hits, limit, sort=sort, label=label
+                query, container, hits, limit, sort=sort, label=label,
+                drop_intake=drop_intake
             )
 
         return result.stdout.strip()
@@ -232,7 +254,7 @@ def supermemory_search(query: str, container: str, limit: int = 5,
 
 def published_canon_search(query: str, limit: int = 5,
                            sort: str = None) -> str:
-    """Search only the audited published-ingest provenance lane."""
+    """Search only the published-canon lane: audited edition ingest + swept articles."""
     return supermemory_search(
         query,
         'bay-tribune',
@@ -242,7 +264,8 @@ def published_canon_search(query: str, limit: int = 5,
         sort=sort,
         metadata_filter=PUBLISHED_CANON_FILTER,
         project=True,
-        label='published provenance only',
+        label='published canon only — edition ingest + swept articles',
+        drop_intake=True,
     )
 
 
@@ -525,7 +548,8 @@ def lookup_initiative(name: str) -> str:
 @mcp.tool()
 def search_canon(query: str) -> str:
     """Search the Bay Tribune canon archive (bay-tribune container).
-    Returns only records carrying audited edition-ingest provenance.
+    Returns published canon only: audited edition-ingest records and the swept,
+    published articles (INTAKE machine-register chunks are left out).
     Use for: 'What has been published about OARI?', 'Beverly Hayes quotes', 'Baylight timeline'."""
     return published_canon_search(query, 5)
 
@@ -783,7 +807,7 @@ def search_everything(query: str) -> str:
     """Search EVERYTHING for a bare string — no entity type required. Fans out to
     all three storage shelves at once and returns merged, source-tagged hits:
       1. world-data Supermemory  — bounded fan-out over the real wd-* domains.
-      2. bay-tribune Supermemory — published-ingest provenance only.
+      2. bay-tribune Supermemory — published canon only (edition ingest + swept articles).
       3. dashboard articles API  — published-article index.
       4. disk (live grep)        — output/ + docs/, structured data ranked first.
 
@@ -821,7 +845,7 @@ def search_everything(query: str) -> str:
     return (
         f"╔═══ SEARCH_EVERYTHING: '{q}' ═══╗\n\n"
         f"=== SUPERMEMORY · world-data (wd-* domain fan-out) ===\n{world}\n\n"
-        f"=== SUPERMEMORY · bay-tribune (published provenance only) ===\n{canon}\n\n"
+        f"=== SUPERMEMORY · bay-tribune (published canon only) ===\n{canon}\n\n"
         f"=== DASHBOARD · published articles ===\n{articles}\n\n"
         f"=== DISK · live grep (output/ + docs/) ===\n{disk}"
     )

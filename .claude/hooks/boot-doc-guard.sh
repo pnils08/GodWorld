@@ -35,9 +35,16 @@ try: print(json.load(sys.stdin).get('tool_input',{}).get('command',''))
 except Exception: print('')
 " 2>/dev/null)"
     # only a WRITE-shaped bash command counts; reading a boot doc stays free.
-    # quoted prose (commit messages, echo strings, saved facts) is not a write target — drop
-    # any quoted span with a space; a quoted bare path ("CLAUDE.md") stays visible.
-    cmdw="$(printf '%s' "$cmd" | sed -E "s/'[^']* [^']*'//g; s/\"[^\"]* [^\"]*\"//g" | sed -E 's/[0-9]*>&[0-9]+//g; s/[0-9]*>>? *\/dev\/null//g')"
+    # heredoc bodies and quoted prose (commit messages, saved facts) are not write targets —
+    # drop them whole-command (they span lines; sed can't). The heredoc opener line stays, so
+    # `cat > CLAUDE.md <<EOF` still warns; a quoted bare path ("CLAUDE.md") stays visible.
+    cmdw="$(printf '%s' "$cmd" | python3 -c '
+import re,sys
+c=sys.stdin.read()
+c=re.sub(r"(<<-?\s*([\x27\x22]?)(\w+)\2[^\n]*)\n.*?\n\s*\3(?=\n|$)", r"\1", c, flags=re.S)
+c=re.sub(r"\x27[^\x27]*\s[^\x27]*\x27|\x22[^\x22]*\s[^\x22]*\x22", "", c)
+c=re.sub(r"\d*>&\d+|\d*>>?\s*/dev/null", "", c)
+print(c)')"
     if printf '%s' "$cmdw" | grep -qE '>|>>|\b(sed +-i|tee|truncate|dd|mv|cp|install|patch|python3?|perl|ex|ed)\b'; then
       for tok in $(printf '%s' "$cmdw" | grep -oE "[A-Za-z0-9_./-]+\.md"); do
         printf '%s' "$tok" | grep -qE "$PROTECTED_RE" && { target="$tok"; break; }

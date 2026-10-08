@@ -354,6 +354,16 @@ Hood groups at bench C118 (openness / outabout / all-neutral): crime-bar 51.82 /
 
 The tagging = the engine.201b hood-rank retags (`ActivityExpanded` / `ActivityContracted` / `StreetsGuarded`). Already cut S451 PROD @79; verified absent in code this session — `generateCitizensEvents.js:3151` and `citizenDialMap.js:173` carry the REMOVED markers, and no live call to `hoodOverCrimeBar_` / `activityTopHoods_` remains. The rest stays: Wave 1 plumbing, the cause-carrying pressure seams, conduct @80, owner-reader @81, feud rest, neglect fade. Review is engine-sheet's; no further sim ruling is owed. What remains open under engine.201 is the fixed-cohort causal proof, read off the next live fires (held under codex's lead).
 
+## Fixed-cohort causal proof — cohort drawn 2026-10-08
+
+**Why it starts now:** DialState holds only the current values and no beat snapshot carries dials, so C107–C110 cannot be reconstructed. The proof is forward-only. Definition unchanged ([[2026-09-13-codex-dial-drift-review]] §Acceptance evidence): a fixed cohort traced condition → personal response → persistent change → different later choice, including citizens who receive no wake.
+
+**Cohort (builder direction 2026-10-08: "a varied mix … different tiers, different stages of life, different ages, different hoods, those that have waken and those that haven't"):** 48 Active citizens, drawn from the live ledger at C110 before the C111 fire, POP-00005 excluded. Quota by tier × woken (woken = at least one `Reflection_Intake` row at the draw): T1 5 woken + 1 never, T2 5+5, T3 7+7, T4 9+9 — 26 woken, 22 never. Inside each quota a greedy pick maximises new age band / career stage / neighborhood / ClockMode, ties by a hash of the POPID. Result covers all 22 hoods, all six age bands, all six career stages, all four clock modes. Thin cells, by what the ledger holds: ages under 18 (1) and 75+ (1; only 3 exist); students (1).
+
+**Files:** `output/engine201/cohort-baseline.json` (the 48 POPIDs with dials, household, income, career, wake counts, LifeHistory tail), `output/engine201/cohort-snapshot.js` (`--resnap` re-reads the same 48 into `cohort-c<cycle>.json`; a bare run refuses to redraw). `cohort-c110.json` is a test resnap equal to the baseline.
+
+**Schedule:** `--resnap` after the C111, C112 and C113 fires (Sun 2026-10-11, 10-18, 10-25); trace at C113, codex leading as before, engine-sheet reading. A citizen who leaves Active is reported, not replaced. "Woken" counts the citizen-wake loop only; an edition quote is not a wake.
+
 ## engine.193 — the downturn generators (engine-sheet S495, 2026-09-26)
 
 Ruling stands (S443): fix the generators, never the tiers. Tiers: `applyCityDynamics.js` `applyDemographicModifiers_` unemployment `> 0.08` / `> 0.12`, sickness `> 0.06` / `> 0.10`; hood `sick0 >= 0.10`.
@@ -478,3 +488,4 @@ Verbatim: "Yes week to week, this way articles serve as persistence." **Read:** 
 persist the momentum carrier (`S.previousCityDynamics` / cluster / neighborhood) across executions through
 Carry_Forward_Store, the way engine.221 carries economic mood, so what the paper wrote about last week still
 describes a city that remembers it. The S499 carrier fix (pre-boost values) is what gets persisted. Next build.
+- 2026-10-08 (research-build) — engine.201 cohort drawn (48, builder-directed mix); baseline taken at C110; resnap after C111–C113, trace at C113 (2026-10-25).

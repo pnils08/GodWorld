@@ -101,7 +101,7 @@
 | engine.53 | Readback owed: the Mon 2026-10-05 fanout shows no exchange-line match in output/cron-compare. Find it or name why it is missing | live-observing | research-build | [[../plans/2026-07-11-agent-exchange-engine]] |
 | research.27 | Readback owed: the Sat 2026-10-03 UNDOCKED write staged; the Citizen_Media_Usage credit is unproven | live-observing | research-build | [[../plans/2026-08-07-spacemolt-game-show]] §Post-ship (e) |
 | engine.48 | Organic: the first T8 tension-seed result off the cron; none recorded yet | live-observing | research-build | [[../plans/2026-07-06-citizen-loop-deepening]] |
-| engine.201 | Readback owed: fixed-cohort causal proof across the live fires since the 2026-09-14 ruling | live-observing | engine-sheet | [[../plans/2026-09-10-inactivity-is-regression]] §BUILD SPEC |
+| engine.201 | Fixed-cohort proof: 48 citizens drawn at C110 (output/engine201). Resnap after C111, C112, C113; trace at the C113 fire, Sun 2026-10-25, codex leading | live-observing | engine-sheet | [[../plans/2026-09-10-inactivity-is-regression]] §BUILD SPEC |
 | pipeline.48 | Readback owed: Anthony + Hal solo sports seats, Task 4 live-observe only; unverified since 2026-09-26 | live-observing | research-build | [[../plans/2026-08-07-anthony-hal-solo-sports-seats]] |
 | pipeline.49 | Readback owed: civic solo seats, Task 3 live-observe only; unverified since 2026-09-26 | live-observing | research-build | [[../plans/2026-08-07-civic-solo-seats]] |
 | pipeline.68 | The 54 C110 mints need roster rows: linkCitizensToEmployers --fill-blanks-only, dry-run first. World-gap staff landed at C110 | ready | research-build | [[../plans/2026-09-07-beat-slices-from-sheets-plan]] |

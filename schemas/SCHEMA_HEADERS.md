@@ -993,7 +993,7 @@ pointers:
 
 - **Rows:** 1 (manifest) + n chunk rows while a checkpoint is held; empty otherwise
 - **Columns:** 4
-- **Hidden.** engine.95 (plan §Build notes Revision 2). Pre-created by hand on each target before the push; the engine never creates it. Row 1 col A holds the manifest JSON `{gen, cycle, state, n, chars, sha, build, startedMs, elapsedMs, entryMs, saveMs, late, stage, triggerId, result}`; rows 2.. hold the encoded payload chunks.
+- **Hidden. Created EMPTY — no header row.** engine.95 (plan §Build notes Revision 2). Pre-created by hand on each target before the push; the engine never creates it. The column names below are the meaning of each column, not a header row: row 1 col A holds the manifest JSON `{gen, cycle, state, n, chars, sha, build, startedMs, elapsedMs, entryMs, saveMs, late, stage, triggerId, result}`; rows 2.. hold the encoded payload chunks.
 
 | Col | Header |
 |-----|--------|

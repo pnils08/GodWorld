@@ -251,6 +251,23 @@ console.log('═══ 7 — a resume that dies stops the world: no retry, refus
   assert('door refused where fireGuardMinutes is 60', /bench action/.test(w2.post({ action: 'clearcheckpoint', gen: 'x' }).error));
 }
 
+console.log('═══ 7b — the other resume faults, and a tolerated Phase-11 error inside a resume');
+for (const fault of [1, 3, 4]) {
+  const w = world(); w.setCfg('checkpointForce', 1); w.setCfg('checkpointResumeFaultAt', fault);
+  w.get({ expect: '110' });
+  const rs = w.resume();
+  const stage = { 1: 'executor-started', 3: 'phase11-done', 4: 'phase11-done' }[fault];
+  assert('resume fault ' + fault + ': throws, manifest resuming at stage ' + stage + ', record failed, counter not advanced', rs.err && w.manifest().state === 'resuming' && w.manifest().stage === stage && w.record().state === 'failed' && w.cycleCount() === 110, { err: rs.err, m: w.manifest() });
+  assert('resume fault ' + fault + ': no second attempt', /state resuming/.test(w.resume().err));
+}
+{
+  const w = world(); w.setCfg('checkpointForce', 1); w.phase11Mode = 'throwCitizen';
+  w.get({ expect: '110' });
+  const rs = w.resume();
+  assert('a tolerated Phase-11 throw inside the resume still ends committed/done (as on a normal fire)', !rs.err && w.manifest().state === 'committed' && w.record().state === 'done' && w.cycleCount() === 111, { err: rs.err, m: w.manifest() });
+  assert('the throw is an Engine_Errors row, the trim still ran', w.errors('Phase11-CitizenArchive').length === 1 && w.calls.indexOf('trim') > w.calls.indexOf('citizenArchive'));
+}
+
 console.log('═══ 8 — the executor fails inside the resume: commit-failed, Phase 11 not run, payload retained');
 {
   const w = world(); w.setCfg('checkpointForce', 1);

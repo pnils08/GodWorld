@@ -25,6 +25,8 @@ Grep here before grepping the tree. Each row: file · one-line purpose · verdic
 
 | File | Purpose | Verdict |
 |------|---------|---------|
+| **[[2026-10-08-codex-engine95-review2]]** | codex Review 2 of the engine.95 Revision 1 design: receipts discard resume-time state, save-exception states undefined, admission/result contract, tail-match dedup unsound (failed cell + landed append), `failed` not `unpersisted`, codec and bench-baseline requirements | HOLD — 5 BLOCK / 2 FIX / 1 NOTE; folded into Revision 2 (one resume, no retry) |
+| **[[2026-10-08-codex-engine95-design]]** | codex Review 1 of the engine.95 2026-10-04 checkpoint/resume design: the Phase-9 gate was not an intent-only boundary (20 producers before the executor), queue is `ctx.persist`, executor clears queues on error, 25 append targets with no uniform cycle/hash schema, Task 5 premises false | HOLD — 6 BLOCK / 3 FIX / 1 NOTE; folded into Revision 1 then 2; engine.285 filed |
 | **[[2026-10-07-codex-rb-cronpath-fixes]]** | codex review of rb's two cron-path fixes (8b923371): the Rhea INTAKE POPID exemption reached readers through the Edition, the canon sweep and the daily brief; the `appendReflection_` error-string fix passed with a small test gap | HOLD (exemption) / SHIP-WITH-FIXES (error string); resolved by the builder's names-not-IDs principle |
 | **[[2026-10-07-codex-engine282-283-plan]]** | codex adversarial review of the engine.282/283 plan (NetWorth default write, Status discharge flag): nine findings incl. the C112 fixture contaminating other checks and the PROD delta needing its own gate; shipped in PROD f2a61e5e | HOLD as written, spent by shipping |
 | **[[2026-10-06-codex-c110-smoke-plan]]** | codex review of the C110 smoke and bench-resync scratchpad plan: S525 checks omitted, recording location against the PIN-only shape, resync needs target/preservation/read-back gates | HOLD before execution, spent (smoke ran) |
@@ -150,6 +152,7 @@ Grep here before grepping the tree. Each row: file · one-line purpose · verdic
 
 ## Changelog
 
+- 2026-10-08 (engine-sheet) — Accepted [[2026-10-08-codex-engine95-design]] and [[2026-10-08-codex-engine95-review2]] from the review inbox; both folded into the engine.95 plan §Build notes Revision 2.
 - 2026-10-08 (engine-sheet) — Accepted [[2026-10-08-codex-engine94-b3-v3-diff-review]] from the review inbox; F1-F7 folded into engine.94 B.3 v3 (e87362b4), bench-proven, PROD.
 - 2026-09-20 (engine-sheet) — Accepted [[2026-09-20-codex-civic38-game-loop-review]] out of the review inbox into `docs/research/`; reconciled into [[../plans/2026-09-19-civic-wake-game-loop]].
 - 2026-09-20 (codex) — Registered [[2026-09-20-codex-civic38-game-loop-review]] in the review inbox, attached to the existing civic.38 plan and row.

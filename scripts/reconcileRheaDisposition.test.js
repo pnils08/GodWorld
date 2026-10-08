@@ -43,6 +43,30 @@ function fixture(stem, pass, hashOverride) {
   return { draft, verdict };
 }
 
+function digestFixture() {
+  const stem = 'undocked-digest_c999_test-digest';
+  const draft = path.join(compare, stem + '.md');
+  fs.writeFileSync(draft, [
+    '# TEST-ONLY Digest', '', 'Test Pilot flew two episodes this week.', '',
+    '## INTAKE', 'CLAIM: UNDOCKED week-in-review c999 | undocked-week:weekly-c999'
+  ].join('\n'));
+  writeJson(path.join(compare, stem + '.wake.json'), {
+    desk: 'undocked-digest', cycle: '999', persona: 'nia-rook-weekly',
+    byline: { name: 'Test Reporter', popid: 'POP-99999' }, disposition: 'flagged', article: 'TEST-OLD-PATH'
+  });
+  writeJson(path.join(compare, stem + '.state.json'), { exposure: { sources: [] } });
+  writeJson(path.join(compare, 'nia_weekly_slice_c999.json'), { v: 1, cycle: 999, pilots: [
+    { POPID: 'POP-99998', name: 'Test Pilot', episodes: 2, creditsDelta: 10, combatEvents: 0, mishapCount: 0 }
+  ] });
+  const verdict = path.join(compare, stem + '.rhea.json');
+  writeJson(verdict, {
+    draft: path.relative(root, draft), cycle: '999', model: 'test/rhea', pass: true,
+    draftSha256: sha256File(draft), flags: [], flagCount: 0, summary: 'pass',
+    reviewProfile: { manifestId: 'AM-TEST' }, ranAt: '2026-08-13T08:00:00.000Z'
+  });
+  return { stem, verdict };
+}
+
 try {
   console.log('Test 1: pass promotes current reviewed Article and archives active failure');
   const pass = fixture('civic_c999_test-pass', true);
@@ -104,6 +128,15 @@ try {
   assert.equal(quarantineWake.rheaPass, true, 'Rhea result remains historically honest');
   assert.equal(quarantineWake.contamination.fail, true);
   assert(!fs.existsSync(path.join(staged, 'civic_c999_test-contaminated.staged.json')));
+
+  console.log('Test: a reconciled undocked-digest keeps the weekly pilot credit (research.27)');
+  const digest = digestFixture();
+  const staged9 = reconcileVerdict({ root, verdictPath: digest.verdict, apply: true,
+    now: new Date('2026-08-13T11:00:00.000Z') });
+  assert.equal(staged9.disposition, 'staged');
+  const digestSide = JSON.parse(fs.readFileSync(path.join(staged, digest.stem + '.staged.json'), 'utf8'));
+  assert.deepStrictEqual(digestSide.intake.names,
+    [{ name: 'Test Pilot', role: 'subject', popid: 'POP-99998' }]);
 
   console.log('reconcileRheaDisposition.test.js: PASS');
 } finally {

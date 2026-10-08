@@ -160,9 +160,18 @@ function reconcileVerdict({ root = ROOT, verdictPath, apply = false, now = new D
     // engine.270: the storyline is resolved from the assignment's ref, which the
     // wake-3 state carries as signal.src.
     const storyRef = state && state.signal && state.signal.src;
-    const intake = buildIntakeSidecar(fs.readFileSync(draftAbs, 'utf8'), quotesFromState(state),
+    let intake = buildIntakeSidecar(fs.readFileSync(draftAbs, 'utf8'), quotesFromState(state),
       storyRef ? storylineTagFor({ ref: storyRef }, cycle) : null);
     if (!intake) throw new Error('reviewed Article has no parseable INTAKE block');
+    // research.27: the weekly digest's pilot credit is injected after buildIntakeSidecar in the
+    // write stage; a rebuild here dropped it (Sat 2026-10-03: three printed pilots, names [], no
+    // Citizen_Media_Usage row). Same call, same slice.
+    if (wake.desk === 'undocked-digest') {
+      const { injectWeeklyPilotCredit } = require('./cron-desk-run');
+      const { loadNiaWeeklySlice } = require('./buildNiaSlice');
+      const weekly = loadNiaWeeklySlice(cycle, root);
+      intake = injectWeeklyPilotCredit(intake, fs.readFileSync(draftAbs, 'utf8'), weekly && weekly.pilots);
+    }
     let priorSidecar = null;
     if (fs.existsSync(stagedSidecar)) {
       try { priorSidecar = readJson(stagedSidecar); } catch (_) { /* replace invalid local sidecar */ }

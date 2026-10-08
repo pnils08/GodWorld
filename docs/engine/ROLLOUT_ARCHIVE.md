@@ -973,6 +973,15 @@ Prior sweep passes: §S212 Migration Pass (governance.3 + governance.5 + S203 di
 
 This pass: 4 closed (pipeline.3, engine.3, infrastructure.1, infrastructure.2) — not `done-pending-archive` sweep rows, moved by hand per rollout-rules §6 wontfix/unresolvable-stale convention.
 
+## S540 Archive Pass (2026-10-08, research-build) — post-S539 closures sweep
+
+2 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 2 pipeline.*.
+
+- **pipeline.48** [research-build] — Anthony + Hal solo sports seats observed live C108–C110: persona, one byline, single voice, Rhea pass; wall inject off by design under packet-v2 **State at archive:** done-pending-archive. Pointer: [[../plans/2026-08-07-anthony-hal-solo-sports-seats]] §Task 4
+- **pipeline.49** [research-build] — Six civic solo seats observed live C108–C110: persona, one byline, single voice, Rhea pass **State at archive:** done-pending-archive. Pointer: [[../plans/2026-08-07-civic-solo-seats]] §Task 3
+
+This pass: 2 rows — pipeline.48 + pipeline.49. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+
 ## S535 Archive Pass (2026-10-07, engine-sheet) — rollout trued to current work (builder 2026-10-07)
 
 13 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 10 engine.* + 1 research.* + 2 pipeline.*.

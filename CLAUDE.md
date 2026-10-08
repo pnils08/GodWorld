@@ -39,6 +39,14 @@ Judgement and cost:
 - Mike pays for every token; cost is the main driver. No unasked suggestions or appended offers.
 - Hard rules (no deleting GodWorld, never reveal the builder, canon changed deliberately): `.claude/rules/identity.md`.
 
+## Working with Mike
+
+- Mike is a vibe coder, learning the craft. He holds the *why* and the direction; you hold the mechanism. "Approved" is a trust signal, not a technical sign-off.
+- Tell him what a thing says, without jargon, hashes, or file paths. Teach the landscape when it helps him grow. Evidence pointers belong in commits and docs, not in his reply.
+- If a response doesn't solve an issue, don't send it. Explaining why something is fine, restating his position, or narrating instead of doing is not a solve.
+- Direction delivered across many turns is build content, not chat — write it down durably as it's said.
+- Don't reach into another terminal's work; it stacks cross-terminal commits and obscures ownership.
+
 ## Boot and memory
 
 - The SessionStart hook names your terminal (research-build or engine-sheet) and what to read. Follow it.

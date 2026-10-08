@@ -188,6 +188,14 @@ PROD `e87362b4` 2026-10-08; bench 1004 @4 C112 fixture-proven (seat lost under 3
 
 `runCivicRoleEngine_` gates on `CIV (y/n) === 'y'` exactly (`runCivicRoleEngine.js:239-240`); the ledger spells it `yes`/`no` (live 882 no / 58 yes / 0 y), so the gate never opens — a dead gate (SIM_DOCTRINE §15). The fix is a prefix match, but it wakes an engine that has never run live for 58 CIV citizens: bench first, read what it generates, builder reads the texture before PROD.
 
+**Flag-column audit (research-build, 2026-10-08, live ledger 1,025 rows; builder asked "can the gate take y and yes").** Answer: yes. Twelve other engines already read the three flags as lowercase + `startsWith('y')` (or y/yes); `runCivicRoleEngine_` is the lone exact-`'y'` gate, missed by the S106 sweep (exact `'y'` since the file was created). Fix = the same one-line pattern.
+- **Clean:** UNI 73 yes / MED 44-45 yes / CIV 58 yes; no citizen carries two flags; GAME→UNI (58), CIVIC→CIV (53), MEDIA→MED (44) agree row for row.
+- **ENGINE-clock rows that still carry a flag (21):** 15 UNI (POP-00114, 00123–00129 former A's players/staff + Tre Mingo; POP-00619/621/624–627/631 working T4 civilians), 5 CIV (POP-00755/759/763 senior pastors, POP-00769 artist, POP-00770 trainer), 1 MED (POP-00773 Jada Rayes). Not verified deliberate. The 5 CIV rows are in the set the fixed gate wakes.
+- **Blank flags (81):** all ENGINE/Active, POP-01084..01196, minted by births (`generationalEventsEngine.js`) and intake promotions (`processAdvancementIntake.js` — sets ClockMode, never UNI/MED/CIV). Every engine reads blank as no, so no live harm; the gap is latent: an intake of a CIVIC/MEDIA/GAME citizen lands with the right ClockMode and a blank flag, and every flag-gated engine skips them. The `checkForPromotions.js` and challenger-mint paths do set the flags (challenger CIV `n` by design; `yes` on seat, `no` on loss).
+- **Stray spelling (6):** `No`, `Yes`, ` no` (Hal Richmond CIV, Ariana Reyes, Nia Rook, Necklar, Storip, Aguilar) — harmless, every reader lowercases.
+- **What waking the engine does:** all 58 CIV rows are Active, so only the soft-note path fires — each rolls 1.5–8% per cycle (≈1–4 `[Civic Role]` LifeHistory + LifeHistory_Log lines per cycle, cap 6), text from a generic pool ("Continuing civic responsibilities.") plus role and hood texture. The 58 include the mayor, chief of staff, deputy mayor, council members: pool-drawn text on authored seats is the builder's texture call.
+- **Open for builder:** (1) do the 5 ENGINE-clock CIV rows (3 pastors, artist, trainer) belong in the civic role pool; (2) pool-drawn lines on the authored civic seats; (3) register intake and birth mints with explicit flags (engineering, es).
+
 ## Changelog
 
 - 2026-10-08 (engine-sheet, S539) — ROLLOUT engine.94 and engine.284 rows drained here (lint: item cells over budget); rows now one line + pointer.

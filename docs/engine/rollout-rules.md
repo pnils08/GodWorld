@@ -116,26 +116,16 @@ Every active rollout item carries one state tag inline.
 | `live-observing` | Shipped. Only an acceptance run, smoke test or observation window is left; nothing to build. |
 | `blocked` | Depends on something not yet landed (preconditions named in the entry). |
 | `done-pending-archive` | Completed, awaiting move to ROLLOUT_ARCHIVE at next sweep. |
-| `parked` | Deliberately shelved — kept for the record, not pickable, revisit on trigger named in the pointer doc. |
+| `parked` | Deliberately shelved — not pickable, revisit on trigger named in the pointer doc. A parked row leaves ROLLOUT for [[../plans/BACKLOG]] §Parked ideas and external watches (builder 2026-10-07: ROLLOUT holds current work and waits only). |
 | `wontfix` | Decided not to do. Rare; document the reason. |
 
 State answers "is this pickable right now"; terminal answers "by whom." They are orthogonal.
 
 ### Grouping
 
-**Current:** rows group by **type-of-work** (semantic groups — `pipeline` / `engine` / `canon` / `civic` / `infrastructure` / `research` / `governance`), each coded `<group>.<n>`. Numbers within a group are identifiers, not sequential; deletions don't renumber; cross-cutting work picks the **primary group** (don't multi-tag).
+**Sections (builder 2026-10-07):** ROLLOUT holds only current work and waits, in four sections — (1) waiting on the builder: named calls, `needs-info`; (2) waiting on a fire: the Cycle or date in the row, or `Organic:` when the world has to produce it; (3) now: `in-progress`, readbacks owed, pickable `ready`; (4) queue: ruled, not started. Ids keep their type prefix (`pipeline` / `engine` / `canon` / `civic` / `infrastructure` / `research` / `governance`) — numbers are identifiers, deletions don't renumber, cross-cutting work picks the primary group.
 
-| Group | Scope |
-|-------|-------|
-| **pipeline** | Edition production end-to-end (sift / write-edition / post-publish / dispatch / interview / supplemental / print / photos) |
-| **engine** | Engine code, ledger, schema, tech debt, engine-sheet repair |
-| **canon** | World-fidelity layer, citizens, voices, real-name blocklists, contamination scrub |
-| **civic** | City-hall, voice agents, council canon, civic-process gap-logs, governance simulation |
-| **infrastructure** | Supermemory, Discord, dashboard, MCP, claude-mem, services, ingest pipelines |
-| **research** | Papers, external tools, evaluations, watch-list items |
-| **governance** | Skills, MDs, ADRs, MEMORY rules, doc-audit, project-internal hygiene |
-
-**Migrating:** governance.30 (ROLLOUT v2.0) flips grouping to **by-terminal, actionable-first within** — so a terminal at boot reads "what's mine?" directly. When v2 lands, this section updates. Until then, the live tracker is by-type. Full taxonomy + alternatives: [[../adr/0005-rollout-plan-structure]]. Migration: [[../plans/2026-06-01-rollout-v2-migration]].
+**An id is never reused.** Once a row is archived its id is spent; new work takes the next free number. A reused id makes every older memory and commit about it read as current (2026-10-07: a 09-27 capture about the archived infrastructure.10 was recalled as fact about the new one).
 
 ---
 
@@ -192,6 +182,8 @@ The house-guest lanes (**kimi / codex / antigravity**, S340) work plans under th
 ---
 
 ## Changelog
+
+- 2026-10-07 (engine-sheet) — §3: four sections by what a row waits on; parked rows move to BACKLOG; ids never reused (builder: the rollout was unreadable).
 
 - 2026-08-02 (S349, Mike-direct) — Gap-fix pass after Kimi failed to find this doc: §2 gained a **Registers in** column (research → `docs/research/index.md`, plans/triage → `docs/index.md`, same commit) + the index-registration rule; filing rules gained **research changes → the research file itself**; §3 gained the **mechanical row contract** (was only in AGENTS.md) + `parked` state (was live in the tracker but undocumented here); new **§7 House guests** — lane-tagged plan-changelog completion convention for kimi/codex/antigravity. `rolloutPointerGuard.js` now injects a pointer to this doc on every ROLLOUT_PLAN / docs/plans edit in Claude terminals.
 - 2026-06-01 (S251) — Created. Task 1 of the ROLLOUT v2.0 migration (governance.30). The operating-rule sections (state labels, group taxonomy, how-to-add, how-to-close) evicted from ROLLOUT_PLAN.md and folded into the four-role doctrine Mike set across the S251 conversation: research (incl. skill-terminal gap logs) / plan (self-documenting via redlines) / rollout (clean tracker) / archive (code-maintained). Keystone: skill terminals don't blind-log on rollout — the gap log is their research layer. ROLLOUT_PLAN keeps a pointer header to this file. §The Spine (completed historical roadmap) relocated to ROLLOUT_ARCHIVE rather than carried here — a rules doc shouldn't hold a finished roadmap.

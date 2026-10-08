@@ -973,6 +973,26 @@ Prior sweep passes: §S212 Migration Pass (governance.3 + governance.5 + S203 di
 
 This pass: 4 closed (pipeline.3, engine.3, infrastructure.1, infrastructure.2) — not `done-pending-archive` sweep rows, moved by hand per rollout-rules §6 wontfix/unresolvable-stale convention.
 
+## S535 Archive Pass (2026-10-07, engine-sheet) — rollout trued to current work (builder 2026-10-07)
+
+13 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 10 engine.* + 1 research.* + 2 pipeline.*.
+
+- **engine.266** [engine-sheet] — C109 dead paths + Storyline_Tracker retirement; closed 2026-10-07: C110 smoke confirms the tabs absent, 0 errors **State at archive:** done-pending-archive. Pointer: `output/smoke_c110.md` §The fire
+- **engine.268** [engine-sheet] — Storyline tabs deleted, null scorer plumbing cut; closed 2026-10-07: pushed with PROD f2a61e5e **State at archive:** done-pending-archive. Pointer: [[../plans/2026-09-28-storyline-tracker-retirement-ruling]]
+- **engine.274** [engine-sheet] — Career walk full pass; closed 2026-10-07: C110 smoke 10 career lines wrapping past row 386 **State at archive:** done-pending-archive. Pointer: `output/smoke_c110.md` §engine.274
+- **engine.275** [engine-sheet] — A Cycle cannot fire twice; closed 2026-10-07: C110 bootstrap fire clean under the lock, no FireGuard rows **State at archive:** done-pending-archive. Pointer: `output/smoke_c110.md` §The fire
+- **engine.276** [engine-sheet] — Debt follows net worth; closed 2026-10-07: C110 smoke all checks, the one shape miss split to engine.282 **State at archive:** done-pending-archive. Pointer: `output/smoke_c110.md` §engine.276
+- **engine.278** [engine-sheet] — The mint lands a citizen where the job fits; closed 2026-10-07: C110 smoke exact employer counts **State at archive:** done-pending-archive. Pointer: `output/smoke_c110.md` §engine.278 / engine.279
+- **engine.279** [engine-sheet] — The mint logs once and reads Generic_Citizens once; closed 2026-10-07: Phase5-Advancement 8,248 ms at C110 **State at archive:** done-pending-archive. Pointer: `output/smoke_c110.md` §engine.278 / engine.279
+- **engine.259** [engine-sheet] — The fund moves; closed 2026-10-07: INIT-001 BudgetRemaining 23.8M seeded to 23.0M through C110, drain running **State at archive:** done-pending-archive. Pointer: `scripts/fundDisbursement.test.js`
+- **engine.210** [engine-sheet] — Sports phase from the feed; closed 2026-10-07: C110 world summary reads A's playoffs/championship **State at archive:** done-pending-archive. Pointer: [[../plans/2026-09-11-sports-as-a-lived-system]] Task 0
+- **engine.96** [engine-sheet] — Business lifecycle generator, Tasks 5–12 live; closed 2026-10-07: the plan names nothing open **State at archive:** done-pending-archive. Pointer: [[../plans/2026-08-01-business-lifecycle-generator]]
+- **research.28** [research-build] — Model-fit, Mags narration on Sonnet 5.5; closed 2026-10-07: cycle_pulse_c109.md 1,155 words, written 10-03 16:02 **State at archive:** done-pending-archive. Pointer: [[../research/2026-10-01-model-fit-open-character-results]]
+- **pipeline.60** [engine-sheet] — Nia Rook newsroom dispatch; closed 2026-10-07: her unattended wakes fire (the 10-07 self-record error came from a live run) **State at archive:** done-pending-archive. Pointer: [[../plans/2026-08-07-spacemolt-game-show]] §2.5
+- **pipeline.54** [engine-sheet] — S344 human story slots; closed 2026-10-07: Tasks 10/11 recorded complete in the plan (codex chase) **State at archive:** done-pending-archive. Pointer: [[../plans/2026-08-20-s344-human-story-template-pressure-test]]
+
+This pass: 13 rows — engine.266 + engine.268 + engine.274 + engine.275 + engine.276 + engine.278 + engine.279 + engine.259 + engine.210 + engine.96 + research.28 + pipeline.60 + pipeline.54. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+
 ## S506 Archive Pass (2026-09-29, research-build) — post-S505 closures sweep
 
 2 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 pipeline.* + 1 civic.*.

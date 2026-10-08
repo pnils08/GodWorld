@@ -507,9 +507,74 @@ Five research rows had no owning doc (pointer was inline text or an external wat
 - **research.8** — Hermes Agent (NousResearch) reference architecture monitoring. Was `needs-info`, owner research-build. Original pointer cell: external-watch
 - **research.10** — Arc engine grafts + Patterns A/B/D in idea-park (chaos-cars sibling, deferred). Was `blocked`, owner research-build / engine-sheet. Original pointer cell: inline-park (S190 grilling artifacts)
 
+
+### Parked from ROLLOUT 2026-10-07 (engine-sheet, builder: rollout holds current work and waits only)
+
+Row text verbatim; the reason it parked follows each.
+
+- **research.12** — Autonomy roadmap Was `in-progress`, owner research-build. Pointer: [[../plans/2026-05-31-autonomy-roadmap]] — detail in pointer (relocated 2026-07-02) **Parked because:** umbrella roadmap with no executable acceptance; execution lives on child rows (codex chase 2026-10-07).
+- **research.2** — Memento CBR case-bank (Phase 1 ready; Phase 2 blocked on ≥500 tuples + droplet headroom) — parked 2026-09-29: Phase 2 needs 500+ tuples and droplet headroom, 159 days quiet; revisit on that data Was `parked`, owner research-build. Pointer: [[../plans/2026-04-21-memento-cbr-case-bank]]
+- **research.4** — Desk agents migration off Claude → DeepSeek (research/watch — cost/limits trigger) — parked 2026-09-29: cost/limits trigger only, 153 days quiet; revisit if a desk budget or rate limit bites Was `parked`, owner research-build. Pointer: [[../MIGRATION_OFF_CLAUDE]]
+- **research.9** — Inter-agent conversation harness — blocker (Phase 40.2 cattle refactor / engine.1) just wontfixed, will never clear as stated; needs re-scoping — parked 2026-09-29: blocker wontfixed; revisit if agent-to-agent conversation is scoped again Was `parked`, owner research-build. Pointer: [[../plans/2026-05-31-autonomy-roadmap]] + [[../RESEARCH]]
+- **research.19** — Citizen perception & immersion access layer — parked: two open design questions, no build in flight (es confirmed 2026-09-29); revisit when a citizen-facing surface is next scoped Was `parked`, owner research-build. Pointer: [[../plans/2026-06-23-citizen-perception-immersion-layer]]
+- **research.21** — Citizen-signal story emergence — parked: detector build tasks never started (last touched 2026-07-28), es holds nothing; revisit with engine.270's storyline review Was `parked`, owner research-build. Pointer: [[../plans/2026-06-26-citizen-signal-story-emergence]] + [[../plans/2026-06-29-citizen-signal-detector-build]] **Parked because:** revisit at the engine.270 storyline review.
+- **engine.38** — Living City full-population coverage — parked: plan's 8 tasks never started (last touched 2026-08-13), es holds nothing; revisit when the citizen-loop or archive work reaches the unmapped tail Was `parked`, owner research-build. Pointer: [[../plans/2026-06-19-living-city-full-population-coverage]] + [[../plans/2026-06-30-central-generator-atmospheric-expansion]] + [[../plans/2026-07-01-persistence-seams-content-ledger]]
+- **engine.7** — Engine Routing Foundation — Phase 6 cutover (gated on 3 cycles shadow data) Was `in-progress`, owner research-build / engine-sheet. Pointer: [[../plans/2026-05-07-engine-routing-foundation]] **Parked because:** gate stale: the Phase 6 cutover assumes the frozen /sift path; the newsroom runs scheduled desk stages now (codex chase 2026-10-07).
+- **engine.76** — Compile-layer rebuild — W1–W3 + W5 complete (half 2 shipped S336: usage-rotated per-lane byline candidate in desk_signal, 3-cycle bench proven); OPEN: W4 two-stack consolidation only, gated on the fork proving (pipeline.44) Was `in-progress`, owner engine-sheet. Pointer: [[../plans/2026-07-26-compile-layer-rebuild]] **Parked because:** W4 gate gone: pipeline.44 (the fork) is archived; re-scope W4 if two-stack consolidation is still wanted.
+- **engine.207b** — First-result casino selection accepted S447; stored EventId comparison parked until intake changes. Was `parked`, owner engine-sheet. Pointer: [[../plans/2026-09-11-sports-as-a-lived-system]] Task 5
+- **engine.252** — Retail-gated initiative domains have no lever (economic, workforce, sports marked not playable after the matched-control pair): design a provable measurable per domain, bring to the builder, flip only on a bench pair Was `ready`, owner engine-sheet. Pointer: [[../plans/2026-09-19-civic-wake-game-loop]] §Matched-control measurement; data `output/engine-sheet/2026-09-21-matched-control-c108-c112.json` **Parked because:** builder 2026-10-05: civic is background, no civic design from engine-sheet.
+- **infrastructure.3** — Reviewer lanes → Claude Managed Agents (Dreaming pilot, Anthropic preview-access gated) — parked 2026-09-29: preview-access gated, 174 days quiet; revisit when Anthropic opens access Was `parked`, owner research-build. Pointer: [[../ACTION_MANAGED_AGENTS]]
+- **infrastructure.8** — Hidden-tab audit + disposition (kimi) — 16 hidden tabs classified vs live code (3 load-bearing, 6 dead); Task 1 doc truth pass, Task 2 builder keep/delete rulings, Task 3 backup-then-delete. **Builder 2026-09-14: low priority — pick up only once the engine runs clean.** Was `parked`, owner engine-sheet. Pointer: [[../plans/2026-09-09-hidden-tab-audit]]
+- **infrastructure.9** — Daytime autonomy — builder 2026-10-01: run the overnight loop every session so rb works the ROLLOUT list without the builder; Discord as the reach-out channel. Design after a week of clean nights Was `parked`, owner research-build. Pointer: [[../reference/overnight_autonomy_session]]
+
+### Watch List (moved from ROLLOUT 2026-10-07)
+
+Tracking for future adoption, not building. Dropped on the move: the Drive OAuth token row (its 2026-06-27 trigger date passed) and the retired RAGFlow row.
+
+| Feature | Trigger to Act |
+|---------|---------------|
+| **Unidentified EmployerBizId re-linker** — 6 of engine.191's 12 school-district rows moved to other employers between 2026-09-10 and 09-26 with no `[Career-*]` LifeHistory line (POP-00040/217/239/267/539/743); a writer not on SHEETS_MANIFEST §9 or an off-ledger hand fix | Any further EmployerBizId change on live with no Career line — then trace the writer |
+| **Frozen-column audit** — a `deadBranchScan.js`-shaped scan for beat-slice/story-hook columns with no phase writer (SIM_DOCTRINE §16) | A second instance surfaces past engine.192 (schools), OR a lane-program pass (kimi) flags one on its own — then it earns a script, not a one-off find |
+| **Headless cron newsroom + agentic RAG** ([[../research/2026-07-19-headless-cron-newsroom-agentic-rag]], S325) | A: Mike re-opens edition path for automation (reverses S313). B: cheap-model retrieval eval on one narrow subtask passes. Detail in research file. |
+| **Instance-unification / model-triage pivot** ([[../research/2026-07-25-instance-unification-model-triage]], S333) | Collapse four terminals → one Mags core, model as the division axis. Trigger: coordination pain justifies a real dispatch layer, OR a one-session proving-run confirms the Claude Code harness drives on a non-Claude brain (Kimi/DeepSeek base-URL) — attack the proving-run first. Subagent-cost rule + live model map already extracted to MODEL_HIERARCHY §8. |
+| Agent Teams stability | Experimental graduation → test Phase 7.6 |
+| Multi-Character Discord | TinyClaw reference architecture matures |
+| MiniMax M2.5 / DeepSeek-V3 | Cost spike or quality test passes |
+| Skills Portability | HuggingFace format becomes standard |
+| Tribune Fine-Tuning | 238 articles as training dataset for voice model |
+| Desktop App (Linux) | Linux support ships |
+| Lightpanda Browser | Beta stabilizes, saves 300MB RAM |
+| Claude Code Voice Mode | Maturity improves |
+| Extended Thinking for Agents | Test on civic/sports desks |
+| Computer Use exits beta | Stable + cheaper → expand beyond QA to routine agent tasks |
+| CLI-over-MCP token optimization | Measured: too many MCPs drops 200k context to 70k. Replace idle MCPs with CLI-wrapper skills. Source: everything-claude-code S131 |
+| Selective skill loading | Only load skills relevant to current workflow. Chat doesn't need 21 skills. Manifest-driven selection. Source: everything-claude-code S131 |
+| Continuous learning hooks | Auto-extract debugging patterns into reusable skills with confidence scoring. Source: everything-claude-code S131 |
+| llms.txt for documentation | Many doc sites serve `/llms.txt` — LLM-optimized docs. Check before web-fetching. Source: everything-claude-code S131 |
+| Proactive agent dispatch | Rule-based agent routing without user prompts. Post-write → reviewer, security-sensitive → scanner. Source: everything-claude-code S131 |
+| NPM Package Drift | 7 packages behind. Batch update in maintenance session. |
+| Codex Plugin (`/codex:adversarial-review`) | Mike keeps ChatGPT sub → install plugin for free adversarial code review. Sub cancelled → skip. Source: S131 |
+| Open-source agent harnesses | Stable harness with MCP + skills + hooks support → re-evaluate Phase 21 as real multi-model pipeline. Track: Claw Code (instructkr/claw-code), community forks. Source: S131 |
+| xMemory (hierarchical memory) | AutoDream fails to solve collapsed retrieval after 5 sessions → evaluate self-hosted xMemory |
+| Auto Mode | Evaluate for production pipelines — could eliminate approval prompts during `/write-edition` |
+| HTTP Hooks migration | Replace shell-based hooks with HTTP POST to dashboard endpoints for unified event stream |
+| **Forked subagents** (`CLAUDE_CODE_FORK_SUBAGENT=1`, claude-code 2.1.117) | Parallel desk-reporter pipeline becomes a goal AND harness contract validated across forked children. Source: S177 |
+| **Hooks → MCP tools** (`type: "mcp_tool"`, claude-code 2.1.118) | Stop / post-publish hook would benefit from direct MCP call (e.g. godworld `lookup_citizen`) instead of node-script glue. Source: S177 |
+| **Agent frontmatter `mcpServers` in main-thread sessions** (claude-code 2.1.117) | Per-agent MCP-tool isolation becomes part of canon-fidelity tightening — each agent declares exactly which MCPs it consumes. Source: S177 |
+| **`--print` honors agent `tools:` / `disallowedTools:` frontmatter** (claude-code 2.1.119) | Sandcastle+Daytona reviewer hosting goes operational — per-agent tool restrictions ride along into the sandbox. Strengthens Phase 40.6 Layer 4 (tool gate). Source: S177 |
+| Agent lifecycle hooks (SubagentStart/Stop) | Desk agent monitoring — track which agents take longest, fail most |
+| Prompt/Agent hooks | Replace pattern-based hookify rules with semantic LLM-evaluated checks |
+| FileChanged hook | Auto-react to git pulls, external file changes during autonomous operation |
+| Overture (visual agent planning) | Mike can see plans visually → install when accessible from Remote Control or web dashboard. github.com/SixHq/Overture. Source: S137b |
+| **OpenVLThinkerV2 (open VLM from UCLA NLP)** | GPU droplet spun up — evaluate as vision backbone for Phase 28.2 dashboard visual QA, photo pipeline verification, two-pass hallucination visual reviewer, research paper ingestion. Qwen3-VL-8B base + custom G²RPO training. Beats GPT-4o on MMMU (71.6%). Open weights. github.com/uclanlp/OpenVLThinker. Source: S142 |
+| **Adobe Creative Cloud connector** (Anthropic Apr 28 2026) | Returning to FLUX text-suppression ceiling research (`docs/RESEARCH.md §S197`) — 5th intervention path: generate base scenes in FLUX, post-process failure modes (gibberish placards, real-brand logos, wrong jersey numbers) in Photoshop via Claude instead of regenerating. Addresses the S196 mesa case (3 regens, 3 different failure modes). Source: S207 tech reading. |
+| **Outside-vendor image swap** (GPT Image 2 / Ideogram 3 — [[../research/2026-06-16-flux-image-model-eval]], verdict `watch`) | engine.37 (FLUX.2 pro bump) ships and STILL misses one axis on real specs → run a one-cycle two-axis bake-off (text-suppression AND named-subject fidelity) vs GPT Image 2 + Ideogram 3 on the standing fixture (mesa / baylight / transit_hub + an Isley-class named subject). Gated on new-API integration + per-image cost + content-moderation risk on crime/OPD scenes. FLUX.2 pro clears both axes → take-nothing on the outside swap. (The cheap variant bump is NOT here — it's engine.37 ready.) Source: S263 research. |
+| **Blender MCP connector** (Anthropic Apr 28 2026) | Chaos-cars plan (`plans/2026-05-07-chaos-cars-engine`) ever wants visual scene-render hooks for typed municipal-vehicle events — Blender MCP + Python API is the path. Anthropic donated to Blender to support continued Python API development. Long-tail / idea-park. Source: S207 tech reading. |
+
 ---
 
 ## Changelog
 
 - 2026-04-16 — Initial consolidation (S152). Content extracted verbatim from [[engine/ROLLOUT_PLAN]] §Open Phases + research patterns. When any phase here becomes active work, extract to its own [[plans/PLAN_TEMPLATE]]-shaped plan file and replace the section here with a pointer.
+- 2026-10-07 — Fourteen parked ROLLOUT rows and the Watch List moved here (engine-sheet; builder: rollout holds current work and waits only).
 - 2026-09-29 — Added §Parked ideas and external watches (research.3/5/7/8/10 moved from ROLLOUT_PLAN, which had no owning doc for them).

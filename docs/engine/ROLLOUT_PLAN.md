@@ -2,7 +2,7 @@
 
 **Current work and waits only.** A row is here because someone is working it now, because it waits on a dated fire or a named builder call, or because it is ruled and next in the queue. Closed work → [[ROLLOUT_ARCHIVE]]. Parked work and external watches → [[../plans/BACKLOG]] §Parked ideas and external watches. Row contract, states and the sweep → [[rollout-rules]]. Sim lens before touching a mechanic → [[SIM_DOCTRINE]] §15. Last trued 2026-10-07 (engine-sheet, against the C110 smoke, PROD `f2a61e5e` and codex's row chase [[../research/2026-10-07-codex-rollout-chase]]).
 
-**Reading this file:** section 1 is the builder's list. Sections 2–4 are the lanes'. One line per job; the detail is in the plan the row names. Live Cycle C110; next live fire C111, Sunday 2026-10-11.
+**Reading this file:** section 1 is the builder's list. Sections 2–4 are the lanes'. By plan instead: `node scripts/docLoopStatus.js --plans`. Waits whose date has passed: `--lint` (runs at every session close). One line per job; the detail is in the plan the row names. Live Cycle C110; next live fire C111, Sunday 2026-10-11.
 
 ## Pull order (builder, 2026-09-29; trued 2026-10-07)
 

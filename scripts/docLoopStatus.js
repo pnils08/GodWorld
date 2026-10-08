@@ -19,7 +19,8 @@
 //   node scripts/docLoopStatus.js --next     # ready-by-terminal only
 //   node scripts/docLoopStatus.js --watch    # watch-verdict research only
 //   node scripts/docLoopStatus.js --json     # machine-readable, all three
-//   node scripts/docLoopStatus.js --lint     # flag rows that break the archive sweep (exit 0)
+//   node scripts/docLoopStatus.js --lint     # flag rows that break the archive sweep, + overdue waits (exit 0)
+//   node scripts/docLoopStatus.js --plans    # the rollout read by plan: each plan in motion, its rows and states
 //   node scripts/docLoopStatus.js --gate     # same, but exit 1 on problems (pre-commit gate)
 //
 // Exits 0 in every mode EXCEPT --gate (S335) — it's a surfacing report by default.
@@ -125,6 +126,57 @@ function runLint(gate) {
   } else {
     console.log('ROLLOUT LINT: clean — every row is a sweep-safe pointer within budget.');
   }
+  // Overdue is a warning, never a gate: it names rows to re-read, the session decides.
+  const overdue = overdueRows();
+  if (overdue.length) {
+    console.log(`ROLLOUT OVERDUE: ${overdue.length} row(s) wait on a Cycle or date that has passed — read the record, then flip, re-date or close:`);
+    overdue.forEach(p => console.log(p));
+  }
+}
+
+// --- overdue: a waiting row whose every named Cycle/date is behind us ------
+// Rows went stale because shipped work never flipped (S420, 2026-10-07). A
+// live-observing or blocked row names the fire it waits on ("C111 (Sun
+// 2026-10-11)"); once the latest Cycle it names is below the live Cycle, or the
+// latest date is before today, the wait is over and nobody read it. `Organic:`
+// rows name no fire and are skipped.
+function currentCycle() {
+  try {
+    const c = JSON.parse(fs.readFileSync(path.join(ROOT, 'output', 'world_state.json'), 'utf8')).meta.cycle;
+    if (Number.isFinite(c)) return c;
+  } catch (_) { /* fall through to the PIN */ }
+  try {
+    const m = fs.readFileSync(path.join(ROOT, 'SESSION_CONTEXT.md'), 'utf8').match(/canonical C(\d+)/);
+    if (m) return Number(m[1]);
+  } catch (_) { /* no cycle source */ }
+  return null;
+}
+
+function overdueRows() {
+  const cycle = currentCycle();
+  const today = new Date().toISOString().slice(0, 10);
+  const out = [];
+  fs.readFileSync(ROLLOUT, 'utf8').split('\n').forEach((line, i) => {
+    const idMatch = line.match(ROW_ID);
+    if (!idMatch) return;
+    const cells = line.split('|').map(c => c.trim());
+    const sIdx = cells.findIndex(c => STATES.has(c));
+    if (sIdx === -1 || !['live-observing', 'blocked'].includes(cells[sIdx])) return;
+    const item = cells.slice(2, sIdx).join(' ');
+    if (/^Organic:/.test(item)) return;
+    const cycles = [...item.matchAll(/\bC(\d{2,3})\b/g)].map(m => Number(m[1]));
+    const dates = [...item.matchAll(/\b(20\d\d-\d\d-\d\d)\b/g)].map(m => m[1]).sort();
+    if (!cycles.length && !dates.length) return;
+    // Overdue only when EVERY named wait is behind us — a future Cycle or date keeps the row live.
+    const cyclePast = !cycles.length || (cycle !== null && Math.max(...cycles) < cycle);
+    const datePast = !dates.length || dates[dates.length - 1] < today;
+    if (!(cyclePast && datePast)) return;
+    const why = [];
+    if (cycles.length) why.push(`latest Cycle named C${Math.max(...cycles)}, live is C${cycle}`);
+    if (dates.length) why.push(`latest date named ${dates[dates.length - 1]}, today is ${today}`);
+    out.push(`  L${i + 1} ${idMatch[1]}: ${why.join('; ')}`);
+  });
+  return out;
 }
 
 // --- research verdict parse ---------------------------------------------
@@ -179,10 +231,33 @@ function printSection(report, which) {
   }
 }
 
+// --plans: the rollout read by plan, generated from the rows so it cannot drift.
+// One line per plan in motion: its rows and the state each is in. Rows whose
+// pointer names no [[plan]] group under their pointer text.
+function runPlans() {
+  const byPlan = new Map();
+  fs.readFileSync(ROLLOUT, 'utf8').split('\n').forEach(line => {
+    const idMatch = line.match(ROW_ID);
+    if (!idMatch) return;
+    const cells = line.split('|').map(c => c.trim());
+    const sIdx = cells.findIndex(c => STATES.has(c));
+    if (sIdx === -1) return;
+    const ptr = cells.filter(Boolean).pop() || '';
+    const m = ptr.match(/\[\[([^\]]+)\]\]/);
+    const plan = m ? m[1].replace(/^(\.\.\/)+/, '') : ptr.split(/\s/)[0];
+    if (!byPlan.has(plan)) byPlan.set(plan, []);
+    byPlan.get(plan).push(`${idMatch[1]} ${cells[sIdx]}`);
+  });
+  const plans = [...byPlan.entries()].sort((a, b) => b[1].length - a[1].length);
+  console.log(`## Plans in motion (${plans.length}) — generated from ROLLOUT rows`);
+  plans.forEach(([plan, rows]) => console.log(`- ${plan}: ${rows.join(', ')}`));
+}
+
 function main() {
   const args = process.argv.slice(2);
   if (args.includes('--gate')) { runLint(true); return; }
   if (args.includes('--lint')) { runLint(false); return; }
+  if (args.includes('--plans')) { runPlans(); return; }
   const report = buildReport();
   if (args.includes('--json')) {
     console.log(JSON.stringify(report, null, 2));

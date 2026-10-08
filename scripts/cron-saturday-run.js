@@ -58,6 +58,7 @@ const path = require('path');
 const https = require('https');
 const crypto = require('crypto');
 const articleContamination = require('./articleContamination');
+const { readerCopy } = require('../lib/articleIntake');   // canon content is article prose; the INTAKE register lives in the metadata
 
 const ROOT = path.resolve(__dirname, '..');
 const STAGED = path.join(ROOT, 'output', 'cron-compare', 'staged');
@@ -241,7 +242,10 @@ function articleDoc(cycle, entry) {
     if ((intake.hoods || []).length) meta.hoods = intake.hoods.join(',');
     if ((intake.storylines || []).length) meta.storylines = intake.storylines.map(x => x.slug).join(',');
   }
-  return { customId: articleCustomId(cycle, entry.stem), containerTags: tags, metadata: meta, content: entry.text };
+  // Canon search reads prose. The INTAKE register (names, claims, source cites,
+  // self-score) is already carried as filterable metadata above, and as its own
+  // chunk it shows up beside the prose in name searches (builder 2026-10-08).
+  return { customId: articleCustomId(cycle, entry.stem), containerTags: tags, metadata: meta, content: readerCopy(entry.text) };
 }
 
 function postDocument(doc) {

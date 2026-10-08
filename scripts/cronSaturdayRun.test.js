@@ -67,7 +67,13 @@ console.log('Test 3: articleDoc (Supermemory shape)');
   assert('metadata popids flat string, nulls dropped', doc.metadata.popids === 'POP-00654,POP-00381,POP-00122');
   assert('metadata hoods + storylines', doc.metadata.hoods === 'Fruitvale' && doc.metadata.storylines === 'fruitvale-transit-hub');
   assert('all Saturday-swept Articles become canon', doc.metadata.status === 'canon');
-  assert('content is article text', doc.content === ENTRY.text);
+  assert('content is article text (trimmed)', doc.content === ENTRY.text.trim());
+  // INTAKE rides in the staged file; canon content is prose only, metadata keeps the register.
+  const withRegister = Object.assign({}, ENTRY, { text: ENTRY.text + '\n\n## INTAKE\nNAMES: Gregory Mims | quoted-source\nCLAIM: A claim | world_summary_c102 POP-00654\n<!-- SELF-SCORE: question-answered=no -->' });
+  const rdoc = articleDoc('102', withRegister);
+  assert('content drops the INTAKE register and self-score',
+    rdoc.content === ENTRY.text.trim() && !/INTAKE|SELF-SCORE|quoted-source|POP-00654/.test(rdoc.content));
+  assert('metadata still carries the register', rdoc.metadata.popids === 'POP-00654,POP-00381,POP-00122' && rdoc.metadata.hoods === 'Fruitvale');
 }
 
 console.log('Test 4: articleCustomId stable');

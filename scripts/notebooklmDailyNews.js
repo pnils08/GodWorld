@@ -32,6 +32,7 @@ const {
 } = require('./notebooklmPush');
 const dailyRouter = require('./notebooklmDailyRouter');
 const articleContamination = require('./articleContamination');
+const { readerCopy } = require('../lib/articleIntake');   // daily brief is a listening surface: prose only, no INTAKE register
 const s344Slots = require('./s344HumanSlots');
 
 const CONFIG_PATH = path.join(ROOT, 'config', 'notebooklm.json');
@@ -440,7 +441,7 @@ function buildSourcePack(input) {
       if ((report.flags || []).length || report.flagSummary) lines.push('');
     }
     lines.push(
-      report.body.trim(),
+      readerCopy(report.body),
       ''
     );
   }
@@ -541,7 +542,7 @@ function buildBoundedNewsSource(input) {
       '',
       status,
       '',
-      report.body.trim(),
+      readerCopy(report.body),
       ''
     );
   }

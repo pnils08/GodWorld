@@ -73,11 +73,8 @@ function flagLines(file) {
   } catch (_) { return []; }
 }
 
-// Reader copy: article prose only — the INTAKE block and self-score comment
-// are machine sidecars, not for the reader.
-function readerCopy(text) {
-  return text.replace(/## INTAKE[\s\S]*$/, '').replace(/<!--\s*SELF-SCORE[\s\S]*?-->/g, '').trim();
-}
+// Reader copy: article prose only — one definition in lib/articleIntake.
+const { readerCopy } = require('../lib/articleIntake');
 
 // The journal that rides a Pulse is the one written for that Pulse's Cycle: a
 // skipped week sends nothing, never an older entry. Both halves of the pair

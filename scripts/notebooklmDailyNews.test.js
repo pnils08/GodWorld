@@ -163,6 +163,26 @@ assert.strictEqual(isCompletedManifest({
   assert(!source.includes('FLAGGED_EXCLUSION'));
 }
 
+// The daily brief is a listening surface: article prose only. An INTAKE register
+// (names, claims, source cites with POPIDs) and the self-score comment never reach
+// the source the audio is generated from (builder 2026-10-08).
+{
+  const withRegister = Object.assign({}, syntheticInput.reports[0], {
+    body: '# Synthetic filing\n\nA synthetic scene in prose.\n\n## INTAKE\nNAMES: Synthetic Person | subject\nCLAIM: A synthetic claim | synthetic cite POP-99998 @C999\n<!-- SELF-SCORE: question-answered=no -->',
+  });
+  const input = Object.assign({}, syntheticInput, { reports: [withRegister] });
+  const pack = buildSourcePack(input);
+  const bounded = buildBoundedNewsSource({
+    cycle: input.cycle, worldSummary: input.worldSummary, reports: input.reports,
+    archiveAnswer: 'Synthetic published background.',
+  });
+  for (const text of [pack.text, bounded]) {
+    assert(text.includes('A synthetic scene in prose.'), 'the prose stays');
+    assert(!text.includes('POP-99998'), 'an INTAKE-only POPID never reaches the brief source');
+    assert(!text.includes('## INTAKE') && !text.includes('SELF-SCORE') && !text.includes('A synthetic claim'));
+  }
+}
+
 const syntheticPulse = {
   cycle: 999,
   fingerprint: 'synthetic-pulse-fingerprint',

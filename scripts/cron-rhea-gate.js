@@ -236,6 +236,18 @@ function articleProseForReview(draftText) {
   return unwrapWholeDocFence(draftText).split(/^##\s+INTAKE\s*$/im)[0].trim();
 }
 
+// A raw POPID in the article's PROSE is machine text in the reader's news —
+// the reader hears names, never the register's IDs. The INTAKE block is a
+// machine sidecar (a POPID there is not contamination, builder 2026-10-08) and
+// is not scanned; the daily brief and the delivery copy strip it before any
+// person reads or hears it (lib/articleIntake readerCopy). Fenced blocks are
+// skipped after the whole-doc unwrap, so a fence can never blank the scan.
+function scanPopidLeak(draftText) {
+  const prose = articleProseForReview(draftText).replace(/```[\s\S]*?```/g, '');
+  const hits = prose.match(/\bPOP-\d{5}\b/g);
+  return hits ? [...new Set(hits)] : [];
+}
+
 function scanEngineVerbiage(draftText) {
   // INTAKE is machine-readable provenance, not Article prose. Source refs in
   // that block intentionally retain canonical table/artifact names, so scanning
@@ -669,9 +681,8 @@ async function main() {
   const detBlockers = [];
   detBlockers.push(...intakeBlockers);   // pipeline.45: INTAKE validity is part of clearance
   for (const j of scanStructuralJunk(draftText)) detBlockers.push({ severity: 'high', check: 'structural', issue: j });
-  const bodyForScan = unwrapWholeDocFence(draftText).replace(/```[\s\S]*?```/g, '');
-  const popHits = bodyForScan.match(/\bPOP-\d{5}\b/g);
-  if (popHits) detBlockers.push({ severity: 'high', check: 'popid-leak', issue: 'raw POPID(s) in prose: ' + [...new Set(popHits)].join(', ') });
+  const popHits = scanPopidLeak(draftText);
+  if (popHits.length) detBlockers.push({ severity: 'high', check: 'popid-leak', issue: 'raw POPID(s) in prose: ' + popHits.join(', ') });
   // groundedBy support (articleContamination.js, 2026-09-17 Chinatown/Caldera
   // false-positive fix): a blunt decay/safety phrase only blocks when the
   // packet carries no matching engine-anomaly signal, so this call needs the
@@ -759,4 +770,5 @@ module.exports = {
   articleProseForReview,
   scanEngineVerbiage,
   scanStructuralJunk,
+  scanPopidLeak,
 };

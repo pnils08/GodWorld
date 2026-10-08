@@ -40,8 +40,13 @@ cache their environment; an explicitly approved credential rotation requires
   the open "leave, or point recall at `sl-godworld`" question this snapshot
   used to carry: the plugin's recall hook (`hooks/recall-directive.js`,
   patched, verified still applied 2026-09-26) now searches `sl-rules` (hybrid,
-  top 2, labeled `[rule]`) + `sl-godworld` + the auto repo container together,
-  merged by similarity. Stop-hook auto-save is back on, but scoped — it saves
+  top 2, labeled `[rule]`) + `sl-godworld`, each line dated. The auto repo
+  container was dropped from recall 2026-10-07 (builder flagged stale boot
+  recall: a 09-27 capture about the old infrastructure.10 read as current after
+  the ID was reused) — still written, searched on purpose via brainSearch.
+  SessionStart profile injection is off (`injectProfile:false` in
+  `~/.supermemory-claude/settings.json`, honored by a `session-start.js` patch;
+  vendor original `.pre-slgodworld`). Stop-hook auto-save is back on, but scoped — it saves
   to the auto repo container only, never `sl-godworld` (that stays hand-write,
   `npx supermemory remember ... --tag sl-godworld`).
 - `sl-rules` (mirror of memory files + `SIM_DOCTRINE.md` + ADRs) syncs nightly
@@ -594,8 +599,8 @@ UserPromptSubmit.
 
 | Hook | When | Container |
 |------|------|-----------|
-| **SessionStart** | Every boot | Loads context via `context-hook.cjs` off the auto repo container (no more config-file override — see §Plugin Config) |
-| **UserPromptSubmit** | Before user-turn handling | `recall-directive.js` (patched 2026-09-24, verified still applied 2026-09-26) — searches `sl-rules` (hybrid, top 2, `[rule]`-labeled) + `sl-godworld` + the auto repo container, merged by similarity. **A plugin update overwrites this patch** — re-apply if recall stops surfacing `[rule]` hits |
+| **SessionStart** | Every boot | `session-start.js` (patched 2026-10-07, plugin 0.1.8, vendor original `.pre-slgodworld`) — injects nothing while `injectProfile:false`; the boot hook carries state |
+| **UserPromptSubmit** | Before user-turn handling | `recall-directive.js` (patched 2026-09-24; 2026-10-07 auto repo container dropped, lines dated; prior patch kept as `.slgodworld-2026-09-23`) — searches `sl-rules` (hybrid, top 2, `[rule]`-labeled) + `sl-godworld`, merged by similarity. **A plugin update overwrites this patch** — re-apply if recall stops surfacing `[rule]` hits |
 | **PreToolUse** | Before `Skill` or `Bash` recall/search | `recall-approve.cjs` handles plugin recall approval |
 | **Stop** | Every assistant turn | **Re-enabled 2026-09-24** (reversing the 2026-05-22 neutralization below) — saves signal turns to the auto repo container only, never `sl-godworld` or `mags`. The S221 contamination risk this neutralization originally guarded against was speaker-collapse into `mags`; the auto repo container isn't a personal-identity read lane, so that specific risk doesn't apply here. |
 | **PostToolUse** | Not defined | No active PostToolUse capture path |

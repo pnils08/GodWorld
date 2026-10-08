@@ -259,7 +259,7 @@ function validateRelationshipBondsSchema_(ss) {
   }
 
   // Check required headers
-  var requiredHeaders = ['BondId', 'CitizenA', 'CitizenB', 'BondType', 'Intensity', 'Status'];
+  var requiredHeaders = BOND_REQUIRED_HEADERS_; // engine.94 B.3 v3 F5: one list, shared with the loader (bondPersistence.js)
   for (var i = 0; i < requiredHeaders.length; i++) {
     var required = requiredHeaders[i];
     var found = false;

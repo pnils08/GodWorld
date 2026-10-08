@@ -49,6 +49,21 @@
 // SHEET HEADERS (v2.1: with calendar columns)
 // ═══════════════════════════════════════════════════════════════
 
+// engine.94 B.3 v3 F5 — the six headers a load must see before it certifies
+// (S.relationshipBondsLoaded). One constant, shared with
+// validateRelationshipBondsSchema_ (utilities/ensureRelationshipBonds.js).
+var BOND_REQUIRED_HEADERS_ = ['BondId', 'CitizenA', 'CitizenB', 'BondType', 'Intensity', 'Status'];
+
+function missingBondHeaders_(headers) {
+  var seen = {};
+  for (var i = 0; i < (headers || []).length; i++) seen[String(headers[i] || '').trim()] = true;
+  var missing = [];
+  for (var j = 0; j < BOND_REQUIRED_HEADERS_.length; j++) {
+    if (!seen[BOND_REQUIRED_HEADERS_[j]]) missing.push(BOND_REQUIRED_HEADERS_[j]);
+  }
+  return missing;
+}
+
 var BOND_SHEET_HEADERS = [
   'BondId',
   'CitizenA',
@@ -114,25 +129,41 @@ function loadRelationshipBonds_(ctx) {
 
   // Initialize the bonds array
   S.relationshipBonds = [];
+  // engine.94 B.3 v3 F5: false until this load certifies; the saver queues no
+  // master replace and the demotion grudge makes no bond while it is false.
+  S.relationshipBondsLoaded = false;
+  ctx.summary = S;
 
   // engine.119: the tab is pre-created; a missing one throws to safePhaseCall_
   var sheet = requireTab_(ss, 'Relationship_Bonds');
 
   // Read existing bonds
   var data = sheet.getDataRange().getValues();
-  if (data.length <= 1) {
-    ctx.summary = S;
-    Logger.log('loadRelationshipBonds_ v2.2: No bonds to load');
-    return; // Only headers, no bonds
-  }
-
-  var headers = data[0];
+  var headers = data.length ? data[0] : [];
 
   // v2.2: Guard against ledger schema collision
   if (isLedgerSchema_(headers)) {
     Logger.log('loadRelationshipBonds_ v2.2: Relationship_Bonds appears to be ledger schema (has Timestamp/Cycle); aborting load to prevent corruption');
-    ctx.summary = S;
+    if (typeof logEngineError_ === 'function') {
+      logEngineError_(ctx, 'Phase5-LoadBonds', new Error('Relationship_Bonds carries ledger-schema headers — bonds not loaded, save held this Cycle'));
+    }
     return;
+  }
+
+  // F5: the required headers certify the load; missing ones are an Engine_Errors row, not a quiet empty tab
+  var missing = missingBondHeaders_(headers);
+  if (missing.length) {
+    Logger.log('loadRelationshipBonds_ engine.94 B.3 v3: Relationship_Bonds missing header(s) ' + missing.join(', ') + ' — not loaded, save held');
+    if (typeof logEngineError_ === 'function') {
+      logEngineError_(ctx, 'Phase5-LoadBonds', new Error('Relationship_Bonds missing header(s): ' + missing.join(', ') + ' — bonds not loaded, save held this Cycle'));
+    }
+    return;
+  }
+
+  if (data.length <= 1) {
+    S.relationshipBondsLoaded = true; // headers present, nothing to load — a valid empty state
+    Logger.log('loadRelationshipBonds_ v2.2: No bonds to load');
+    return; // Only headers, no bonds
   }
 
   // Build column index map
@@ -173,6 +204,7 @@ function loadRelationshipBonds_(ctx) {
     S.relationshipBonds.push(bond);
   }
 
+  S.relationshipBondsLoaded = true;
   ctx.summary = S;
   Logger.log('loadRelationshipBonds_ v2.2: Loaded ' + S.relationshipBonds.length + ' active bonds');
 }
@@ -222,6 +254,14 @@ function saveRelationshipBonds_(ctx) {
   var S = ctx.summary || {};
   var ss = ctx.ss;
   var bonds = S.relationshipBonds || [];
+
+  // engine.94 B.3 v3 F5: a load that did not certify (missing headers, ledger
+  // schema, loader never ran) never gets a master replace behind it — every
+  // bond write this Cycle is held, not only the grudge.
+  if (S.relationshipBondsLoaded !== true) {
+    Logger.log('saveRelationshipBonds_ engine.94 B.3 v3: bond load not certified this Cycle — no master replace queued');
+    return;
+  }
 
   // Initialize persist context if needed
   if (!ctx.persist) {

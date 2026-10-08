@@ -39,6 +39,11 @@ const A = new Function(calendarSource + loaderSource + approvalSource + '\nretur
   'formatCampaignNote_: formatCampaignNote_,' +
   'pickCampaignChallenger_: pickCampaignChallenger_,' +
   'seedOccupiedPopIds_: seedOccupiedPopIds_,' +
+  'ledgerRowByPop_: ledgerRowByPop_,' +
+  'turnoverLedger_: turnoverLedger_,' +
+  'demotionGrudge_: demotionGrudge_,' +
+  'CHALLENGER_NAMED_BELOW_: CHALLENGER_NAMED_BELOW_,' +
+  'SEAT_LOST_BELOW_: SEAT_LOST_BELOW_,' +
   'scoreLedgerCitizenForOffice_: scoreLedgerCitizenForOffice_,' +
   'challengerDialStateJson_: challengerDialStateJson_,' +
   'MOTION_LADDERS_: MOTION_LADDERS_' +
@@ -308,18 +313,16 @@ console.log('═══ F. v1.3 motion physics — nothing free, silence costs mo
     silentSunday === -18 && A.MOTION_LADDERS_.silence.owned.reduce(function (x, y) { return x + y; }, 0) === -6, String(silentSunday));
 }
 
-console.log('═══ G. v1.4 leave office — unfit node leaves the chair');
+console.log('═══ G. engine.94 B.3 v3 — the seat is lost under 30 (builder 2026-10-08: "a civic office loses its seat at 30, at 40 the challenger is named")');
 {
-  check('G1 crossing below 20 unseats',
-    A.shouldLeaveOffice_('active', 18, 22, 0) === true);
-  check('G2 already low and still silent unseats',
-    A.shouldLeaveOffice_('active', 10, 12, 2) === true);
-  check('G3 already low but they moved (no silence) stays',
-    A.shouldLeaveOffice_('active', 16, 18, 0) === false);
-  check('G4 above 20 never unseats',
-    A.shouldLeaveOffice_('active', 58, 95, 6) === false);
-  check('G5 vacant seat is not unseated twice',
-    A.shouldLeaveOffice_('vacant', 10, 10, 6) === false);
+  check('G1 under 30 loses the seat',
+    A.shouldLeaveOffice_('active', 29) === true && A.shouldLeaveOffice_('active', 12) === true);
+  check('G2 30 and above keeps it — the v1.4 crossing and silence clauses are retired by the ruling',
+    A.shouldLeaveOffice_('active', 30) === false && A.shouldLeaveOffice_('active', 58) === false);
+  check('G3 vacant is never unseated',
+    A.shouldLeaveOffice_('vacant', 10) === false);
+  check('G4 the two lines are 40 (named) and 30 (lost)',
+    A.CHALLENGER_NAMED_BELOW_ === 40 && A.SEAT_LOST_BELOW_ === 30);
 }
 
 console.log('═══ H. v1.5 demotion campaign — the drop is the vote');
@@ -692,6 +695,192 @@ console.log('═══ B3. engine.94 B.3 — one named loss makes one named bond
   const noPop = fire({ seat: { holder: 'Rose Delgado', pop: '' }, rng: [0, 0.5, 0.1] });
   check('B3.8 a holder with no PopId makes no bond (never a name)', noPop.result && noPop.result.winner === 'Rose Delgado' && noPop.bonds.length === 0 && noPop.result.grudgeBond === null, JSON.stringify(noPop.bonds));
   check('B3.9 the election log append is untouched', appended.length === 1 && appended[0].tab === 'Election_Log', JSON.stringify(appended));
+}
+
+
+console.log('═══ B3v3. engine.94 B.3 v3 — the seat turns over on the real writer (demotion + grudge, fill, ledger turnover, pool consumed)');
+{
+  const G = global;
+  const bondSource = fs.readFileSync(path.resolve(__dirname, '../phase05-citizens/bondEngine.js'), 'utf8');
+  const B = new Function(bondSource + '\nreturn { createBond_: createBond_, BOND_TYPES: BOND_TYPES };')();
+  G.createBond_ = B.createBond_; G.BOND_TYPES = B.BOND_TYPES;
+  const SR = new Function(fs.readFileSync(path.resolve(__dirname, '../utilities/safeRand.js'), 'utf8') + '\nreturn { seedGeneratedIds_: seedGeneratedIds_, uniqueGeneratedId_: uniqueGeneratedId_ };')();
+  G.seedGeneratedIds_ = SR.seedGeneratedIds_; G.uniqueGeneratedId_ = SR.uniqueGeneratedId_;
+  const BP = new Function(fs.readFileSync(path.resolve(__dirname, '../phase05-citizens/bondPersistence.js'), 'utf8') + '\nreturn { normalizeBondCitizenId_: normalizeBondCitizenId_ };')();
+  G.normalizeBondCitizenId_ = BP.normalizeBondCitizenId_;
+  G.nextPopIdLocked_ = require('../utilities/popIdAllocator').nextPopIdLocked_;
+  G.safeRand_ = () => () => 0.5;
+  G.Logger = { log() {} };
+  const COL_HEAD = ['OfficeId','Title','Type','District','Holder','PopId','TermStart','TermEnd','TermYears','ElectionGroup','Status','LastElection','NextElection','Notes','','VotingPower','Faction','ExecutiveActions','Approval','HighApprovalStreak','AutoScandalUntilCycle','AutoScandalSource'];
+  const seat = (o) => [o.officeId || 'COUNCIL-D3', o.title || 'City Council District 3', 'elected', o.district || 'D3',
+    o.holder === undefined ? 'Rose Delgado' : o.holder, o.pop === undefined ? 'POP-00503' : o.pop, 1, 209, 4, 'A',
+    o.status || 'active', '', '', o.notes || '', '', o.vp || 'yes', 'OPP', '', o.approval == null ? 64 : o.approval, o.hs || 0, '', ''];
+  const LH = ['POPID', 'First', 'Last', 'FullName', 'Tier', 'Neighborhood', 'CIV (y/n)', 'Status', 'RoleType', 'BirthYear'];
+  const INCUMBENT = ['POP-00503', 'Rose', 'Delgado', 'Rose Delgado', 2, 'Lake Merritt', 'y', 'Active', 'City Council District 3', 1985];
+  const CHALLENGER = ['POP-00800', 'Marcus', 'Webb', 'Marcus Webb', 3, 'Fruitvale', 'n', 'Active', 'community organizer', 1988]; // D3-local + civic-adjacent
+  const NOTE = A.formatCampaignNote_({ pop: 'POP-00800', name: 'Marcus Webb', since: 110 }, '');
+  const GC_HEAD = ['First', 'Last', 'Age', 'BirthYear', 'Neighborhood', 'Occupation', 'EmergenceCount', 'EmergedCycle', 'EmergenceContext', 'Status', 'Sex', 'EmployerBizId'];
+  const fire = (o) => {
+    const intents = [], ripples = [], gcAppends = [];
+    G.queueCellIntent_ = (ctx, sheet, row, col, value, reason) => intents.push({ sheet, row, col, value, reason });
+    G.queueAppendIntent_ = (ctx, tab, row) => gcAppends.push({ tab, row: row.slice() });
+    G.recordHookRipple_ = (ctx, causeType, hook) => { ripples.push({ causeType, hook }); return true; };
+    const offices = [COL_HEAD.slice()].concat((o.seats || [seat(o.seat || {})]).map(r => r.slice()));
+    const gcRows = [GC_HEAD.slice()].concat((o.gc || []).map(r => r.slice()));
+    const tabs = {
+      Civic_Office_Ledger: { getDataRange: () => ({ getValues: () => offices.map(r => r.slice()) }) },
+      Generic_Citizens: o.gc ? { getDataRange: () => ({ getValues: () => gcRows.map(r => r.slice()) }) } : null
+    };
+    const ctx = {
+      mode: {}, config: { ...APPROVED, cycleCount: 113 },
+      summary: { cycleId: 113, economicMood: 50, canonHoods: CANON_HOODS, relationshipBonds: (o.bonds || []).slice(),
+        relationshipBondsLoaded: o.loaded === undefined ? true : o.loaded },
+      ss: { getSheetByName: n => tabs[n] || null }
+    };
+    if (!o.noLedger) ctx.ledger = { headers: LH.slice(), rows: (o.rows || [INCUMBENT, CHALLENGER]).map(r => r.slice()), dirty: false };
+    A.updateCivicApprovalRatings_(ctx);
+    const cell = (rowNum, col) => {
+      const hits = intents.filter(i => i.sheet === 'Civic_Office_Ledger' && i.row === rowNum && i.col === COL_HEAD.indexOf(col) + 1);
+      return hits.length ? hits[hits.length - 1].value : undefined;
+    };
+    const led = (pop) => { const r = (ctx.ledger ? ctx.ledger.rows : []).find(r => r[0] === pop); return r ? { civ: r[6], role: r[8], status: r[7] } : null; };
+    return { ctx, intents, ripples, gcAppends, cell, led, bonds: ctx.summary.relationshipBonds, hooks: ctx.summary.storyHooks || [], dep: ctx.summary.officeDepartures };
+  };
+
+  const d = fire({ seat: { approval: 25, notes: NOTE, hs: 2 } });
+  check('B3v3.1 under 30 with a named challenger: Holder / PopId / Approval 50 / streak cleared by intent (Status and VotingPower already active/yes — unchanged cells queue nothing)',
+    d.cell(2, 'Holder') === 'Marcus Webb' && d.cell(2, 'PopId') === 'POP-00800' && d.cell(2, 'VotingPower') === undefined &&
+    d.cell(2, 'Approval') === 50 && d.cell(2, 'Status') === undefined && d.cell(2, 'HighApprovalStreak') === 0, JSON.stringify(d.intents));
+  check('B3v3.2 the campaign note is cleared by the seating and the record names the drop',
+    /C113: Rose Delgado demoted \(approval 25, under 30\)\. Marcus Webb \(POP-00800\) seated, named since C110\./.test(d.cell(2, 'Notes')) && !/\[CAMPAIGN/.test(d.cell(2, 'Notes')), d.cell(2, 'Notes'));
+  check('B3v3.3 one TENSION bond challenger ↔ incumbent, origin demotion, domain civic, the incumbent\'s hood, the race in the notes',
+    d.bonds.length === 1 && d.bonds[0].bondType === 'tension' && d.bonds[0].origin === 'demotion' && d.bonds[0].domainTag === 'civic' &&
+    d.bonds[0].citizenA === 'POP-00800' && d.bonds[0].citizenB === 'POP-00503' && d.bonds[0].neighborhood === 'Lake Merritt' &&
+    /^demotion C113 COUNCIL-D3: Marcus Webb took the seat from Rose Delgado$/.test(d.bonds[0].notes), JSON.stringify(d.bonds));
+  const demo = d.hooks.find(h => h.hookType === 'CIVIC_DEMOTION');
+  check('B3v3.4 the CIVIC_DEMOTION description ends with the bond id (F6: it rides in HookText) and the departure carries it',
+    !!demo && demo.description.endsWith('(bond ' + d.bonds[0].bondId + ')') && demo.grudgeBond === d.bonds[0].bondId &&
+    d.dep.length === 1 && d.dep[0].type === 'demoted' && d.dep[0].grudgeBond === d.bonds[0].bondId && d.ripples.some(r => r.causeType === 'demotion'), demo && demo.description);
+  check('B3v3.5 the ledger turns over (F4): successor CIV y + office Title, displaced CIV n + Former Title, ledger dirty',
+    d.led('POP-00800').civ === 'y' && d.led('POP-00800').role === 'City Council District 3' &&
+    d.led('POP-00503').civ === 'n' && d.led('POP-00503').role === 'Former City Council District 3' && d.ctx.ledger.dirty === true,
+    JSON.stringify([d.led('POP-00800'), d.led('POP-00503')]));
+
+  const k = fire({ seat: { approval: 25 }, rows: [INCUMBENT], gc: [] });
+  check('B3v3.6 under 30 with nobody named: the holder keeps the seat — nothing seated, no departure, no bond, approval cell untouched',
+    k.cell(2, 'Holder') === undefined && k.cell(2, 'Status') === undefined && k.dep.length === 0 && k.bonds.length === 0 && k.intents.length === 0, JSON.stringify(k.intents));
+  check('B3v3.6b … and one out-of-town arrival is queued to Generic_Citizens', k.gcAppends.length === 1 && k.gcAppends[0].tab === 'Generic_Citizens');
+  A.updateCivicApprovalRatings_(k.ctx);
+  check('B3v3.6c a replayed call before Phase 10 queues no second arrival (in-run set, F2)', k.gcAppends.length === 1, String(k.gcAppends.length));
+
+  const INC5 = ['POP-00504', 'Omar', 'Reyes', 'Omar Reyes', 2, 'Montclair', 'y', 'Active', 'City Council District 5', 1980];
+  const GC1 = ['Dina', 'Farrow', 38, 2004, 'Fruitvale', 'Community organizer', 1, 'Cycle 100', '', 'Active', 'F', ''];
+  const two = fire({ seats: [seat({ approval: 35 }), seat({ officeId: 'COUNCIL-D5', title: 'City Council District 5', district: 'D5', holder: 'Omar Reyes', pop: 'POP-00504', approval: 35 })],
+    rows: [INCUMBENT, INC5], gc: [GC1] });
+  const emerged = two.intents.filter(i => i.sheet === 'Generic_Citizens');
+  check('B3v3.7 two under-40 seats, one pool candidate (F2): one mint, the pool row consumed once (Emerged by cell intent, row 2), the other seat gets one arrival queued',
+    two.ctx.ledger.rows.length === 3 && emerged.length === 1 && emerged[0].row === 2 && emerged[0].col === GC_HEAD.indexOf('Status') + 1 && emerged[0].value === 'Emerged' &&
+    two.gcAppends.length === 1, JSON.stringify({ rows: two.ctx.ledger.rows.length, emerged, appends: two.gcAppends.length }));
+  check('B3v3.7b the first seat carries the named challenger (note written), the second has nobody yet; neither is seated at 35; the minted row dirties the ledger',
+    /\[CAMPAIGN pop=POP-\d{5} name=Dina Farrow since=113\]/.test(two.cell(2, 'Notes')) && two.cell(3, 'Notes') === undefined &&
+    two.cell(2, 'Holder') === undefined && two.cell(3, 'Holder') === undefined && two.ctx.ledger.dirty === true, String(two.cell(2, 'Notes')));
+
+  const n = fire({ seat: { approval: 35, notes: NOTE } });
+  check('B3v3.8 a named challenger stays named (no stand-down): note kept as is, no new campaign hook, no seating',
+    n.cell(2, 'Notes') === undefined && !n.hooks.some(h => h.hookType === 'CIVIC_CHALLENGER_CAMPAIGN') && n.cell(2, 'Holder') === undefined &&
+    n.ctx.summary.civicCampaigns.length === 1 && n.ctx.summary.civicCampaigns[0].since === 110, JSON.stringify(n.intents));
+  const up = fire({ seat: { approval: 45, notes: NOTE } });
+  check('B3v3.8b back over 40 the challenger is still named (ruled 2026-10-08) — nothing clears the note',
+    up.cell(2, 'Notes') === undefined && up.ctx.summary.civicCampaigns.length === 1, JSON.stringify(up.intents));
+
+  const nf = fire({ seat: { approval: 25, notes: NOTE }, loaded: false });
+  check('B3v3.9 bond load not certified (F5): seated, no bond, the hook carries no bond id',
+    nf.cell(2, 'Holder') === 'Marcus Webb' && nf.bonds.length === 0 && !/\(bond/.test(nf.hooks.find(h => h.hookType === 'CIVIC_DEMOTION').description) && nf.dep[0].grudgeBond === null);
+  const pb = fire({ seat: { approval: 25, notes: NOTE }, bonds: [{ bondId: 'B-1', citizenA: 'POP-00503', citizenB: 'POP-00800', bondType: 'professional', status: 'active' }] });
+  check('B3v3.10 a pair already bonded (either order) gets no second bond', pb.bonds.length === 1 && pb.bonds[0].bondId === 'B-1' && pb.dep[0].grudgeBond === null, JSON.stringify(pb.bonds));
+  const bad = fire({ seat: { approval: 25, notes: '[CAMPAIGN pop=POP-800 name=Marcus Webb since=110]' } });
+  check('B3v3.11 a malformed challenger id seats by the row, makes no bond, touches no successor ledger row',
+    bad.cell(2, 'PopId') === 'POP-800' && bad.bonds.length === 0 && bad.led('POP-00800').civ === 'n' && bad.led('POP-00503').civ === 'n');
+  const far = ['POP-00801', 'Nina', 'Park', 'Nina Park', 3, 'Fruitvale', 'n', 'Active', 'community organizer', 1990];
+  const miss = fire({ seat: { approval: 25, notes: NOTE }, rows: [INCUMBENT, far] });
+  check('B3v3.11b a named challenger with no ledger row seats by the row but makes no bond (both rows required)',
+    miss.cell(2, 'Holder') === 'Marcus Webb' && miss.bonds.length === 0, JSON.stringify(miss.bonds));
+
+  const rt = fire({ seat: { status: 'retired' } });
+  check('B3v3.12 office row retired (F3): pick-and-seat at 50, no grudge, departed CIV n with RoleType untouched, successor CIV y, CIVIC_SEAT_FILLED',
+    rt.cell(2, 'Holder') === 'Marcus Webb' && rt.cell(2, 'Approval') === 50 && rt.cell(2, 'Status') === 'active' && rt.bonds.length === 0 &&
+    rt.led('POP-00503').civ === 'n' && rt.led('POP-00503').role === 'City Council District 3' && rt.led('POP-00800').civ === 'y' &&
+    rt.hooks.some(h => h.hookType === 'CIVIC_SEAT_FILLED') && rt.dep[0].type === 'retired' && /Rose Delgado retired\. Marcus Webb \(POP-00800\) seated\./.test(rt.cell(2, 'Notes')),
+    JSON.stringify([rt.intents, rt.dep]));
+  const dead = INCUMBENT.slice(); dead[7] = 'deceased';
+  const dc = fire({ rows: [dead, CHALLENGER] });
+  check('B3v3.13 the holder\'s ledger row deceased (office row active): the seat is filled, the record says died in office',
+    dc.cell(2, 'Holder') === 'Marcus Webb' && /died in office/.test(dc.cell(2, 'Notes')) && dc.dep[0].type === 'deceased' && dc.bonds.length === 0, String(dc.cell(2, 'Notes')));
+  const nv = fire({ seat: { status: 'retired' }, rows: [INCUMBENT], gc: [] });
+  check('B3v3.14 can\'t serve and nobody qualified: the seat goes vacant (Holder TBD, PopId blank, VotingPower vacant, Status vacant), CIVIC_LEFT_OFFICE, departed CIV n',
+    nv.cell(2, 'Holder') === 'TBD' && nv.cell(2, 'PopId') === '' && nv.cell(2, 'VotingPower') === 'vacant' && nv.cell(2, 'Status') === 'vacant' &&
+    nv.hooks.some(h => h.hookType === 'CIVIC_LEFT_OFFICE') && nv.led('POP-00503').civ === 'n' && nv.dep[0].successor === null, JSON.stringify(nv.intents));
+  const vf = fire({ seat: { holder: 'TBD', pop: '', status: 'vacant', vp: 'vacant', approval: 65 }, rows: [CHALLENGER] });
+  check('B3v3.15 a vacant elected seat is filled at approval 50 (Status active, VotingPower yes), departure vacant-filled, no bond',
+    vf.cell(2, 'Holder') === 'Marcus Webb' && vf.cell(2, 'PopId') === 'POP-00800' && vf.cell(2, 'Approval') === 50 && vf.cell(2, 'Status') === 'active' &&
+    vf.cell(2, 'VotingPower') === 'yes' && vf.dep[0].type === 'vacant-filled' && vf.bonds.length === 0 && vf.led('POP-00800').civ === 'y', JSON.stringify(vf.intents));
+  const vw = fire({ seat: { holder: 'TBD', pop: '', status: 'vacant', vp: 'vacant' }, rows: [], gc: [] });
+  check('B3v3.16 a vacant seat with nobody qualified waits: nothing written, one arrival queued', vw.intents.length === 0 && vw.gcAppends.length === 1 && vw.dep.length === 0);
+
+  const ok = fire({ seat: { approval: 65 } });
+  check('B3v3.17 at 65 nothing moves: no intents, no campaign, no departure, no bond', ok.intents.length === 0 && ok.ctx.summary.civicCampaigns.length === 0 && ok.dep.length === 0 && ok.bonds.length === 0);
+  const nm = fire({ seat: { approval: 35 } });
+  check('B3v3.18 under 40 names the challenger: note written, CIVIC_CHALLENGER_CAMPAIGN hook, the seat kept',
+    /\[CAMPAIGN pop=POP-00800 name=Marcus Webb since=113\]/.test(nm.cell(2, 'Notes')) && nm.hooks.some(h => h.hookType === 'CIVIC_CHALLENGER_CAMPAIGN') &&
+    nm.cell(2, 'Holder') === undefined && nm.dep.length === 0, String(nm.cell(2, 'Notes')));
+  const nm2 = fire({ seat: { approval: 25, notes: nm.cell(2, 'Notes') } });
+  check('B3v3.19 … and under 30 the next Cycle the named challenger takes the seat with the grudge', nm2.cell(2, 'Holder') === 'Marcus Webb' && nm2.bonds.length === 1);
+  const nl = fire({ seat: { approval: 25 }, noLedger: true });
+  check('B3v3.20 a ctx without a ledger (the E-section shape) runs: under 30 with no pool keeps the holder, no throw',
+    nl.cell(2, 'Holder') === undefined && nl.dep.length === 0);
+  const nlr = fire({ seat: { status: 'retired' }, noLedger: true });
+  check('B3v3.20b … and a retired office row with no ledger goes vacant without a throw', nlr.cell(2, 'Status') === 'vacant' && nlr.cell(2, 'Holder') === 'TBD');
+
+  delete G.queueCellIntent_; delete G.queueAppendIntent_; delete G.recordHookRipple_;
+}
+
+console.log('═══ F5. engine.94 B.3 v3 — the bond load certifies; a failed load holds the save');
+{
+  const G = global;
+  const BPsrc = fs.readFileSync(path.resolve(__dirname, '../phase05-citizens/bondPersistence.js'), 'utf8');
+  const BPm = new Function(BPsrc + '\nreturn { loadRelationshipBonds_: loadRelationshipBonds_, saveRelationshipBonds_: saveRelationshipBonds_, missingBondHeaders_: missingBondHeaders_, BOND_REQUIRED_HEADERS_: BOND_REQUIRED_HEADERS_ };')();
+  const errors = []; G.logEngineError_ = (ctx, phase, e) => errors.push(phase + ': ' + e.message);
+  G.requireTab_ = (ss, n) => { const t = ss.getSheetByName(n); if (!t) throw new Error('missing tab ' + n); return t; };
+  const replaces = []; G.queueReplaceIntent_ = (ctx, tab, rows) => replaces.push({ tab, rows: rows.length });
+  G.initializePersistContext_ = (ctx) => { ctx.persist = {}; };
+  G.Logger = { log() {} };
+  const mk = (rows) => ({ summary: {}, config: { cycleCount: 113 }, ss: { getSheetByName: n => n === 'Relationship_Bonds' ? {
+    getDataRange: () => ({ getValues: () => rows.map(r => r.slice()) }),
+    getLastColumn: () => (rows[0] || []).length,
+    getRange: (r, c, nr, nc) => ({ getValues: () => [(rows[0] || []).slice(c - 1, c - 1 + nc)] }),
+    getLastRow: () => rows.length
+  } : null } });
+  const FULL = ['BondId', 'CitizenA', 'CitizenB', 'BondType', 'Intensity', 'Status', 'Origin', 'DomainTag', 'Neighborhood', 'CycleCreated', 'LastUpdate', 'Notes', 'Holiday', 'HolidayPriority', 'FirstFriday', 'CreationDay', 'SportsSeason'];
+  const c1 = mk([FULL]); BPm.loadRelationshipBonds_(c1);
+  check('F5.1 a header-only tab certifies the load (true) with 0 bonds', c1.summary.relationshipBondsLoaded === true && c1.summary.relationshipBonds.length === 0);
+  const c2 = mk([FULL, ['B-1', 'POP-00001', 'POP-00002', 'friendship', 5, 'active', 'seed', '', 'Downtown', 100, 100, '', 'none', 'none', false, false, 'off-season']]); BPm.loadRelationshipBonds_(c2);
+  check('F5.2 a full load certifies with the rows loaded', c2.summary.relationshipBondsLoaded === true && c2.summary.relationshipBonds.length === 1);
+  const c3 = mk([FULL.filter(h => h !== 'Intensity'), ['B-1', 'POP-00001', 'POP-00002', 'friendship', 'active']]); errors.length = 0; BPm.loadRelationshipBonds_(c3);
+  check('F5.3 a missing required header: flag stays false, one Engine_Errors row names it, nothing loaded',
+    c3.summary.relationshipBondsLoaded === false && errors.length === 1 && /Phase5-LoadBonds: Relationship_Bonds missing header\(s\): Intensity/.test(errors[0]) && c3.summary.relationshipBonds.length === 0, errors.join(';'));
+  const c4 = mk([['Timestamp', 'Cycle', 'Action'], ['t', 1, 'x']]); errors.length = 0; BPm.loadRelationshipBonds_(c4);
+  check('F5.4 ledger-schema headers: flag false, one Engine_Errors row, nothing loaded', c4.summary.relationshipBondsLoaded === false && errors.length === 1 && c4.summary.relationshipBonds.length === 0);
+  const c0 = mk([]); errors.length = 0; BPm.loadRelationshipBonds_(c0);
+  check('F5.4b an empty tab (no header row) is a failed load, not a quiet empty state', c0.summary.relationshipBondsLoaded === false && errors.length === 1);
+  c3.summary.relationshipBonds = [{ bondId: 'B-9', citizenA: 'POP-00001', citizenB: 'POP-00002', bondType: 'tension' }]; replaces.length = 0; BPm.saveRelationshipBonds_(c3);
+  check('F5.5 the saver queues no master replace behind a failed load (every bond write held, not only the grudge)', replaces.length === 0);
+  replaces.length = 0; BPm.saveRelationshipBonds_(c2);
+  check('F5.6 the saver queues the replace behind a certified load', replaces.length === 1 && replaces[0].tab === 'Relationship_Bonds' && replaces[0].rows === 2, JSON.stringify(replaces));
+  const c5 = mk([FULL]); c5.summary.relationshipBonds = [{ bondId: 'x' }]; replaces.length = 0; BPm.saveRelationshipBonds_(c5);
+  check('F5.7 a Cycle where the loader never ran saves nothing', replaces.length === 0);
+  check('F5.8 one required list, shared with the validator', BPm.BOND_REQUIRED_HEADERS_.join() === 'BondId,CitizenA,CitizenB,BondType,Intensity,Status' &&
+    /var requiredHeaders = BOND_REQUIRED_HEADERS_/.test(fs.readFileSync(path.resolve(__dirname, '../utilities/ensureRelationshipBonds.js'), 'utf8')));
+  delete G.logEngineError_; delete G.queueReplaceIntent_; delete G.initializePersistContext_;
 }
 
 console.log(`\n${passed}/${passed + failed} passed`);

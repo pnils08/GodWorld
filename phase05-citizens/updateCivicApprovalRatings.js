@@ -42,6 +42,18 @@
  * citizen campaign (deterministic challenger from the ledger). Crossing 20
  * seats that challenger. No election window. The vote is the drop.
  *
+ * v1.8 (engine.94 B.3 v3, builder 2026-10-08): "a civic office loses its seat
+ * at 30, at 40 the challenger is named" / "you keep your position your whole
+ * life until you dont perform." Under 40 a challenger is NAMED on the row (the
+ * [CAMPAIGN] note; the media can cover them) and never stands down. Under 30
+ * the named challenger takes the seat that Cycle; under 30 with nobody named
+ * the holder keeps the chair and is read again next Cycle — approval never
+ * empties a seat. A holder who cannot serve (office row or ledger row
+ * retired/deceased) is replaced the same way, as is a vacant elected seat; no
+ * grudge on those. A demotion makes one TENSION bond between the two
+ * (demotionGrudge_). The ledger turns over with the seat (turnoverLedger_).
+ * No scheduled election exists (runCivicElectionsv1.js deleted).
+ *
  * v1.6: never leave a seat empty by default. In-ledger bar is the 8 dials
  * (Drive to want it, Integrity to hold it, Composure to sit it) plus adult
  * non-T1 non-CIV. Generic_Citizens is a name/occupation feeder. If neither
@@ -532,6 +544,27 @@ function updateCivicApprovalRatings_(ctx) {
     ceilingWrites.push({ row: rowNumber, col: columnIndex + 1, value: after, reason: reason });
   };
 
+  // engine.94 B.3 v3 — one seating path for the three ways a seat turns over:
+  // demotion (approval unseat), can't-serve (retired/deceased holder), vacant.
+  // Office cells by intent; the citizen ledger by turnoverLedger_ (F4).
+  var seatSuccessor = function(li, row, office, successor, departed, kind, priorNotes, noteLine) {
+    var rowNum = li + 1;
+    var tag = kind + ' — ';
+    if (iHolder !== -1) planCeilingWrite(rowNum, iHolder, row[iHolder], successor.name, tag + 'successor seated');
+    if (iPopId !== -1) planCeilingWrite(rowNum, iPopId, row[iPopId], successor.popId, tag + 'successor pop');
+    if (iVotingPower !== -1) planCeilingWrite(rowNum, iVotingPower, row[iVotingPower], 'yes', tag + 'successor votes');
+    if (iApproval !== -1) planCeilingWrite(rowNum, iApproval, row[iApproval], 50, tag + 'successor starts at 50');
+    planCeilingWrite(rowNum, iStatus, row[iStatus], 'active', tag + 'seat active');
+    planCeilingWrite(rowNum, iHighStreak, row[iHighStreak], 0, tag + 'owned state cleared');
+    planCeilingWrite(rowNum, iAutoUntil, row[iAutoUntil], '', tag + 'owned state cleared');
+    planCeilingWrite(rowNum, iAutoSource, row[iAutoSource], '', tag + 'owned state cleared');
+    if (iNotes !== -1) {
+      var rest = stripCampaignNote_(priorNotes);
+      planCeilingWrite(rowNum, iNotes, row[iNotes], noteLine + (rest ? ' | ' + rest : ''), tag + 'record');
+    }
+    return turnoverLedger_(ctx, successor.popId, office.title, departed.pop, kind);
+  };
+
   for (var li = 1; li < ledgerData.length; li++) {
     var row = ledgerData[li];
     var officeId = iOfficeId !== -1 ? (row[iOfficeId] || '').toString().trim() : '';
@@ -551,7 +584,97 @@ function updateCivicApprovalRatings_(ctx) {
     // (civic.43 Task 1). By OfficeId prefix, not Type, so DA-01 / PD-01 (appointed
     // characters with their own agents) never take scandal or challenger rolls.
     if (!officeId || !officeId.match(/^(COUNCIL|MAYOR|BOARD-OUSD)/)) continue;
-    if (status === 'vacant') continue;
+
+    // engine.94 B.3 v3 F3 — before the status gate: a holder who cannot serve
+    // (office row or ledger row retired/deceased) and a vacant elected seat both
+    // run pick-and-seat through the same successor path the demotion uses. No
+    // grudge. No successor for a can't-serve holder → the chair goes vacant
+    // (never kept by someone who cannot sit it); a vacant seat with nobody
+    // qualified waits for next Cycle. Neither path scores approval this Cycle.
+    var incumbentPop = iPopId !== -1 ? (row[iPopId] || '').toString().trim() : '';
+    var holderLedger = ledgerRowByPop_(ctx, incumbentPop);
+    var holderLedgerStatus = holderLedger && holderLedger.iStatus >= 0
+      ? String(holderLedger.row[holderLedger.iStatus] || '').trim().toLowerCase() : '';
+    var cantServe = status === 'retired' || status === 'deceased' ||
+      holderLedgerStatus === 'retired' || holderLedgerStatus === 'deceased';
+    if (status === 'vacant' || cantServe) {
+      var fillKind = status === 'vacant' ? 'vacant'
+        : ((status === 'retired' || status === 'deceased') ? status : holderLedgerStatus);
+      var fillNotes = iNotes !== -1 ? (row[iNotes] || '').toString() : '';
+      var fillVerb = fillKind === 'deceased' ? 'died in office' : 'retired';
+      var fillPick = pickCampaignChallenger_(ctx, district, incumbentPop, occupiedPopIds, officeId, cycle);
+      if (fillPick) {
+        occupiedPopIds[fillPick.popId] = true;
+        var fillLine = fillKind === 'vacant'
+          ? 'C' + cycle + ': ' + fillPick.name + ' (' + fillPick.popId + ') seated in the vacant ' + title + '.'
+          : 'C' + cycle + ': ' + holder + ' ' + fillVerb + '. ' + fillPick.name + ' (' + fillPick.popId + ') seated.';
+        seatSuccessor(li, row, { officeId: officeId, title: title, district: district }, fillPick,
+          { pop: incumbentPop, name: holder }, fillKind, fillNotes, fillLine);
+        var fillDeparture = {
+          type: fillKind === 'vacant' ? 'vacant-filled' : fillKind,
+          holder: holder, popid: incumbentPop, officeId: officeId, district: district,
+          approval: currentApproval, cycle: cycle,
+          successor: { pop: fillPick.popId, name: fillPick.name }, grudgeBond: null
+        };
+        approvalTriggers.push(fillDeparture);
+        S.officeDepartures.push(fillDeparture);
+        var fillHook = {
+          hookType: 'CIVIC_SEAT_FILLED',
+          domain: 'CIVIC',
+          severity: 6,
+          description: fillKind === 'vacant'
+            ? fillPick.name + ' takes the vacant ' + title
+            : holder + ' ' + fillVerb + ' — ' + fillPick.name + ' takes the ' + title,
+          cycleGenerated: cycle,
+          popid: fillPick.popId,
+          officeId: officeId,
+          approval: 50
+        };
+        S.storyHooks = S.storyHooks || [];
+        S.storyHooks.push(fillHook);
+        if (!isDryRun && typeof recordHookRipple_ === 'function') {
+          recordHookRipple_(ctx, 'seat-filled', fillHook, 'updateCivicApprovalRatings');
+        }
+        Logger.log('  SEAT FILLED ' + officeId + ' (' + fillKind + ') → ' + fillPick.name);
+      } else if (fillKind !== 'vacant') {
+        if (iHolder !== -1) planCeilingWrite(li + 1, iHolder, row[iHolder], 'TBD', fillKind + ' — seat vacant');
+        if (iPopId !== -1) planCeilingWrite(li + 1, iPopId, row[iPopId], '', fillKind + ' — seat vacant');
+        if (iVotingPower !== -1) planCeilingWrite(li + 1, iVotingPower, row[iVotingPower], 'vacant', fillKind + ' — no vote');
+        planCeilingWrite(li + 1, iStatus, row[iStatus], 'vacant', fillKind + ' — seat vacant');
+        if (iNotes !== -1) {
+          var vacRest = stripCampaignNote_(fillNotes);
+          planCeilingWrite(li + 1, iNotes, row[iNotes],
+            'C' + cycle + ': ' + holder + ' ' + fillVerb + '; no successor found, seat vacant.' + (vacRest ? ' | ' + vacRest : ''),
+            fillKind + ' — record');
+        }
+        turnoverLedger_(ctx, '', title, incumbentPop, fillKind);
+        var vacDeparture = {
+          type: fillKind, holder: holder, popid: incumbentPop, officeId: officeId, district: district,
+          approval: currentApproval, cycle: cycle, successor: null, grudgeBond: null
+        };
+        approvalTriggers.push(vacDeparture);
+        S.officeDepartures.push(vacDeparture);
+        var vacHook = {
+          hookType: 'CIVIC_LEFT_OFFICE',
+          domain: 'CIVIC',
+          severity: 7,
+          description: holder + ' ' + fillVerb + ' — the ' + title + ' sits vacant',
+          cycleGenerated: cycle,
+          popid: incumbentPop,
+          officeId: officeId,
+          approval: currentApproval
+        };
+        S.storyHooks = S.storyHooks || [];
+        S.storyHooks.push(vacHook);
+        if (!isDryRun && typeof recordHookRipple_ === 'function') {
+          recordHookRipple_(ctx, 'left-office', vacHook, 'updateCivicApprovalRatings');
+        }
+        Logger.log('  LEFT OFFICE ' + holder + ' (' + officeId + ', ' + fillKind + ') — seat vacant');
+      } else {
+        Logger.log('  VACANT ' + officeId + ': no qualified successor this Cycle');
+      }
+      continue;
+    }
 
     var lifecycle = resolveApprovalCeilingLifecycle_({
       status: status,
@@ -747,13 +870,12 @@ function updateCivicApprovalRatings_(ctx) {
 
     var priorNotes = iNotes !== -1 ? (row[iNotes] || '').toString() : '';
     var campaign = parseCampaignNote_(priorNotes);
-    var incumbentPop = iPopId !== -1 ? (row[iPopId] || '').toString().trim() : '';
     if (shouldStartCampaign_(status, newApproval, campaign)) {
       var picked = pickCampaignChallenger_(ctx, district, incumbentPop, occupiedPopIds, officeId, cycle);
       if (picked) {
         campaign = { pop: picked.popId, name: picked.name, since: cycle };
         occupiedPopIds[picked.popId] = true;
-        reasons.push('campaign started: ' + picked.name);
+        reasons.push('challenger named: ' + picked.name);
       }
     }
     if (campaign) {
@@ -764,27 +886,33 @@ function updateCivicApprovalRatings_(ctx) {
       });
     }
 
-    var leaving = shouldLeaveOffice_(status, newApproval, currentApproval, silenceOwned);
-    var seating = leaving && campaign;
-    var nextStatus = leaving && !seating ? 'vacant' : (leaving && seating ? 'active' : ceiling.status);
-
-    planCeilingWrite(li + 1, iStatus, row[iStatus], nextStatus,
-      seating ? 'demoted — challenger seated' :
-        (leaving ? 'left office — unfit to run the city' :
-          (ceiling.triggered ? 'approval ceiling scandal triggered' :
-            (lifecycle.recovered ? 'approval ceiling scandal expired' : 'approval ceiling status state'))));
-    planCeilingWrite(li + 1, iHighStreak, currentHighStreak, ceiling.highStreak,
-      'approval ceiling streak update');
-    planCeilingWrite(li + 1, iAutoUntil, currentAutoUntil, ceiling.untilCycle,
-      'approval ceiling expiry update');
-    planCeilingWrite(li + 1, iAutoSource, currentAutoSource, ceiling.source,
-      'approval ceiling source update');
-
-    if (campaign && !leaving && iNotes !== -1) {
-      var kept = formatCampaignNote_(campaign, stripCampaignNote_(priorNotes));
-      planCeilingWrite(li + 1, iNotes, row[iNotes], kept, 'challenger campaign');
+    // engine.94 B.3 v3: under 30 the named challenger takes the seat this
+    // Cycle. Under 30 with nobody named, the holder keeps the chair and is
+    // read again next Cycle — approval never empties a seat.
+    var leaving = shouldLeaveOffice_(status, newApproval);
+    var seating = !!(leaving && campaign);
+    if (leaving && !seating) {
+      reasons.push('under ' + SEAT_LOST_BELOW_ + ' with nobody named — holder keeps the seat this Cycle');
     }
-    if (campaign && !leaving && campaign.since === cycle) {
+
+    if (!seating) {
+      planCeilingWrite(li + 1, iStatus, row[iStatus], ceiling.status,
+        (ceiling.triggered ? 'approval ceiling scandal triggered' :
+          (lifecycle.recovered ? 'approval ceiling scandal expired' : 'approval ceiling status state')));
+      planCeilingWrite(li + 1, iHighStreak, currentHighStreak, ceiling.highStreak,
+        'approval ceiling streak update');
+      planCeilingWrite(li + 1, iAutoUntil, currentAutoUntil, ceiling.untilCycle,
+        'approval ceiling expiry update');
+      planCeilingWrite(li + 1, iAutoSource, currentAutoSource, ceiling.source,
+        'approval ceiling source update');
+    }
+
+    if (campaign && !seating && iNotes !== -1) {
+      // the named challenger stays named until a seating (ruled 2026-10-08: no stand-down)
+      var kept = formatCampaignNote_(campaign, stripCampaignNote_(priorNotes));
+      planCeilingWrite(li + 1, iNotes, row[iNotes], kept, 'challenger named');
+    }
+    if (campaign && !seating && campaign.since === cycle) {
       var campHook = {
         hookType: 'CIVIC_CHALLENGER_CAMPAIGN',
         domain: 'CIVIC',
@@ -808,78 +936,50 @@ function updateCivicApprovalRatings_(ctx) {
       Logger.log('  CAMPAIGN ' + campaign.name + ' vs ' + holder + ' (' + officeId + ')');
     }
 
-    if (leaving) {
-      if (seating) {
-        if (iHolder !== -1) {
-          planCeilingWrite(li + 1, iHolder, holder, campaign.name, 'demotion — challenger seated');
-        }
-        if (iPopId !== -1) {
-          planCeilingWrite(li + 1, iPopId, row[iPopId], campaign.pop, 'demotion — challenger pop');
-        }
-        if (iVotingPower !== -1) {
-          planCeilingWrite(li + 1, iVotingPower, row[iVotingPower], 'yes', 'demotion — successor votes');
-        }
-        if (iApproval !== -1) {
-          newApproval = 50;
-          planCeilingWrite(li + 1, iApproval, currentApproval, 50, 'demotion — successor starts at 50');
-        }
-        if (iNotes !== -1) {
-          var seated = 'C' + cycle + ': ' + holder + ' demoted (approval dropped to unfit). ' +
-            campaign.name + ' (' + campaign.pop + ') seated from campaign since C' + campaign.since + '.';
-          planCeilingWrite(li + 1, iNotes, row[iNotes],
-            seated + (stripCampaignNote_(priorNotes) ? ' | ' + stripCampaignNote_(priorNotes) : ''),
-            'demotion — record');
-        }
-      } else {
-        if (iHolder !== -1) {
-          planCeilingWrite(li + 1, iHolder, holder, 'TBD', 'left office — seat vacant');
-        }
-        if (iVotingPower !== -1) {
-          planCeilingWrite(li + 1, iVotingPower, row[iVotingPower], 'vacant', 'left office — no vote');
-        }
-        if (iNotes !== -1) {
-          var former = 'C' + cycle + ': ' + holder + ' left office (approval ' +
-            newApproval + ', silence on ' + silenceOwned +
-            ' initiative(s)). Repeated refusal to move the city.';
-          planCeilingWrite(li + 1, iNotes, row[iNotes],
-            former + (stripCampaignNote_(priorNotes) ? ' | ' + stripCampaignNote_(priorNotes) : ''),
-            'left office — record');
-        }
-      }
+    if (seating) {
+      var unseatApproval = newApproval;
+      var grudgeBond = demotionGrudge_(ctx, campaign.pop, incumbentPop, officeId, campaign.name, holder, cycle);
+      newApproval = 50;
+      seatSuccessor(li, row, { officeId: officeId, title: title, district: district },
+        { popId: campaign.pop, name: campaign.name }, { pop: incumbentPop, name: holder },
+        'demotion', priorNotes,
+        'C' + cycle + ': ' + holder + ' demoted (approval ' + unseatApproval + ', under ' + SEAT_LOST_BELOW_ + '). ' +
+          campaign.name + ' (' + campaign.pop + ') seated, named since C' + campaign.since + '.' +
+          (grudgeBond ? ' Grudge bond ' + grudgeBond + '.' : ''));
       var departure = {
-        type: seating ? 'demoted' : 'left-office',
+        type: 'demoted',
         holder: holder,
         popid: incumbentPop,
         officeId: officeId,
         district: district,
-        approval: newApproval,
+        approval: unseatApproval,
         silenceOwned: silenceOwned,
         cycle: cycle,
-        successor: seating ? { pop: campaign.pop, name: campaign.name } : null
+        successor: { pop: campaign.pop, name: campaign.name },
+        grudgeBond: grudgeBond
       };
       approvalTriggers.push(departure);
       S.officeDepartures.push(departure);
       var leaveHook = {
-        hookType: seating ? 'CIVIC_DEMOTION' : 'CIVIC_LEFT_OFFICE',
+        hookType: 'CIVIC_DEMOTION',
         domain: 'CIVIC',
         severity: 8,
-        description: seating
-          ? holder + ' demoted — ' + campaign.name + ' takes the seat'
-          : holder + ' left office — approval ' + newApproval +
-            ' after repeated failure to move the city',
+        // F6: the bond id rides in the persisted HookText (storyHook normalizes description → text)
+        description: holder + ' demoted — ' + campaign.name + ' takes the seat' +
+          (grudgeBond ? ' (bond ' + grudgeBond + ')' : ''),
         cycleGenerated: cycle,
-        popid: seating ? campaign.pop : departure.popid,
+        popid: campaign.pop,
         officeId: officeId,
-        approval: newApproval
+        approval: unseatApproval,
+        grudgeBond: grudgeBond
       };
       S.storyHooks = S.storyHooks || [];
       S.storyHooks.push(leaveHook);
       if (!isDryRun && typeof recordHookRipple_ === 'function') {
-        recordHookRipple_(ctx, seating ? 'demotion' : 'left-office', leaveHook, 'updateCivicApprovalRatings');
+        recordHookRipple_(ctx, 'demotion', leaveHook, 'updateCivicApprovalRatings');
       }
-      Logger.log('  ' + (seating ? 'DEMOTED' : 'LEFT OFFICE') + ' ' + holder +
-        ' (' + officeId + ')' + (seating ? ' → ' + campaign.name : '') +
-        ' approval=' + newApproval + ' silenceOwned=' + silenceOwned);
+      Logger.log('  DEMOTED ' + holder + ' (' + officeId + ') → ' + campaign.name +
+        ' approval=' + unseatApproval + (grudgeBond ? ' bond=' + grudgeBond : ' no bond'));
     }
 
     if (newApproval !== currentApproval) {
@@ -895,7 +995,7 @@ function updateCivicApprovalRatings_(ctx) {
       });
 
       // Threshold triggers
-      if (newApproval < 20 && currentApproval >= 20) {
+      if (newApproval < SEAT_LOST_BELOW_ && currentApproval >= SEAT_LOST_BELOW_) {
         approvalTriggers.push({
           type: 'recall-pressure',
           holder: holder,
@@ -903,7 +1003,7 @@ function updateCivicApprovalRatings_(ctx) {
           approval: newApproval
         });
       }
-      if (newApproval < 40 && currentApproval >= 40) {
+      if (newApproval < CHALLENGER_NAMED_BELOW_ && currentApproval >= CHALLENGER_NAMED_BELOW_) {
         approvalTriggers.push({
           type: 'vulnerable',
           holder: holder,
@@ -1177,17 +1277,95 @@ function approvalDeltaForInitiative_(motion, owns, opposed) {
  * Crossing below 20 is the verdict after the drop. Already-unfit + still
  * silent is the repeated refusal. Completing work while low does not unseat.
  */
-function shouldLeaveOffice_(status, newApproval, currentApproval, silenceOwned) {
+// engine.94 B.3 v3 (builder 2026-10-08, verbatim): "a civic office loses its
+// seat at 30, at 40 the challenger is named". Two lines, flat — the v1.4
+// crossing/silence clauses are retired: the reading of the correction is that
+// the number is the verdict, and a holder under 30 keeps the chair only while
+// nobody is named to take it.
+var CHALLENGER_NAMED_BELOW_ = 40;
+var SEAT_LOST_BELOW_ = 30;
+
+/** Under 30 the seat is lost — to the named challenger, that Cycle. The caller
+ *  keeps the holder when nobody is named (never a vacancy by approval). */
+function shouldLeaveOffice_(status, newApproval) {
   if (String(status || '').toLowerCase() === 'vacant') return false;
-  if (Number(newApproval) >= 20) return false;
-  if (Number(currentApproval) >= 20) return true;
-  return Number(silenceOwned) > 0;
+  return Number(newApproval) < SEAT_LOST_BELOW_;
 }
 
 function shouldStartCampaign_(status, newApproval, existingCampaign) {
   if (existingCampaign) return false;
   if (String(status || '').toLowerCase() === 'vacant') return false;
-  return Number(newApproval) < 40;
+  return Number(newApproval) < CHALLENGER_NAMED_BELOW_;
+}
+
+/** Exact-POPID row lookup on ctx.ledger; null when absent or the id is not a POPID. */
+function ledgerRowByPop_(ctx, pop) {
+  if (!ctx || !ctx.ledger || !ctx.ledger.headers || !ctx.ledger.rows) return null;
+  var p = String(pop || '').trim().toUpperCase();
+  if (!/^POP-\d{5}$/.test(p)) return null;
+  var h = ctx.ledger.headers;
+  var iPop = h.indexOf('POPID');
+  if (iPop < 0) return null;
+  for (var r = 0; r < ctx.ledger.rows.length; r++) {
+    var row = ctx.ledger.rows[r];
+    if (String(row[iPop] || '').trim().toUpperCase() === p) {
+      return { row: row, index: r, iStatus: h.indexOf('Status'), iCiv: h.indexOf('CIV (y/n)'),
+        iRole: h.indexOf('RoleType'), iHood: h.indexOf('Neighborhood') };
+    }
+  }
+  return null;
+}
+
+/**
+ * engine.94 B.3 v3 F4 — the citizen ledger turns over with the seat. The
+ * successor becomes CIV with the office Title as RoleType; a demoted holder
+ * drops to CIV n / `Former <Title>`; a retired or deceased holder drops to
+ * CIV n with RoleType untouched. In-memory on ctx.ledger, committed by
+ * commitSimulationLedger_ at Phase 10 through the dirty flag.
+ */
+function turnoverLedger_(ctx, successorPop, title, departedPop, kind) {
+  var out = { successor: false, departed: false };
+  var s = ledgerRowByPop_(ctx, successorPop);
+  var d = ledgerRowByPop_(ctx, departedPop);
+  var touched = false;
+  if (s) {
+    if (s.iCiv >= 0) { s.row[s.iCiv] = 'y'; touched = true; }
+    if (s.iRole >= 0 && title) { s.row[s.iRole] = title; touched = true; }
+    out.successor = true;
+  }
+  if (d) {
+    if (d.iCiv >= 0) { d.row[d.iCiv] = 'n'; touched = true; }
+    if (kind === 'demotion' && d.iRole >= 0 && title) { d.row[d.iRole] = 'Former ' + title; touched = true; }
+    out.departed = true;
+  }
+  if (touched) ctx.ledger.dirty = true;
+  return out;
+}
+
+/**
+ * engine.94 B.3 — one named loss makes one named bond. On an approval unseat
+ * only: both ids exact POPIDs, distinct, both rows on ctx.ledger (the
+ * incumbent's row gives the hood), the bond load certified this Cycle
+ * (S.relationshipBondsLoaded, F5), no bond already between them (either
+ * order, createBond_ → bondExists_). Returns the BondId or null, never throws.
+ */
+function demotionGrudge_(ctx, challengerPop, incumbentPop, officeId, challengerName, holderName, cycle) {
+  var S = ctx && ctx.summary ? ctx.summary : {};
+  var a = String(challengerPop || '').trim().toUpperCase();
+  var b = String(incumbentPop || '').trim().toUpperCase();
+  var re = /^POP-\d{5}$/;
+  var skip = function(why) { Logger.log('demotionGrudge_ ' + officeId + ': no bond — ' + why); return null; };
+  if (!re.test(a) || !re.test(b)) return skip('ids not both POPIDs (' + a + ', ' + b + ')');
+  if (a === b) return skip('same citizen');
+  if (S.relationshipBondsLoaded !== true) return skip('bond load not certified this Cycle');
+  if (typeof createBond_ !== 'function' || typeof BOND_TYPES === 'undefined') return skip('bond engine not loaded');
+  var cr = ledgerRowByPop_(ctx, a), ir = ledgerRowByPop_(ctx, b);
+  if (!cr || !ir) return skip('ledger row missing (' + (cr ? '' : a) + (ir ? '' : ' ' + b) + ')');
+  var hood = ir.iHood >= 0 ? String(ir.row[ir.iHood] || '').trim() : '';
+  var bond = createBond_(ctx, a, b, BOND_TYPES.TENSION, 'demotion', 'civic', hood,
+    'demotion C' + cycle + ' ' + officeId + ': ' + challengerName + ' took the seat from ' + holderName);
+  if (!bond) return skip('pair already bonded');
+  return bond.bondId || null;
 }
 
 var CAMPAIGN_RE_ = /\[CAMPAIGN pop=(POP-\d+) name=([^\]|]+?) since=(\d+)\]/;
@@ -1422,6 +1600,7 @@ function mintChallengerOnLedger_(ctx, spec) {
   set('OriginGame', spec.originCity || 'out-of-town');
   set('LifeHistory', 'C' + spec.cycle + ': Arrived to campaign for ' + (spec.officeId || 'a civic seat') + '.');
   rows.push(row);
+  ctx.ledger.dirty = true; // engine.94 B.3 v3: the row lands at Phase 10 whether or not another writer dirtied the ledger
   return {
     popId: pop,
     name: (spec.first + ' ' + spec.last).trim(),
@@ -1447,9 +1626,13 @@ function pickGenericCitizenChallenger_(ctx, district, specBase) {
   var iF = idx('First'), iL = idx('Last'), iOcc = idx('Occupation');
   var iHood = idx('Neighborhood'), iBy = idx('BirthYear'), iSt = idx('Status'), iSex = idx('Sex');
   var hoods = getDistrictHoods_(ctx, district);
+  // engine.94 B.3 v3 F2: a pool row minted this fire is taken for every later
+  // office in the same fire (the sheet does not change until Phase 10).
+  ctx.civicGcTaken = ctx.civicGcTaken || {};
   var best = null, bestScore = -1;
   for (var r = 1; r < data.length; r++) {
     var row = data[r];
+    if (ctx.civicGcTaken[r]) continue;
     var st = iSt >= 0 ? String(row[iSt] || 'active').toLowerCase() : 'active';
     if (st && st !== 'active') continue;
     var first = iF >= 0 ? String(row[iF] || '').trim() : '';
@@ -1473,18 +1656,29 @@ function pickGenericCitizenChallenger_(ctx, district, specBase) {
         first: first, last: last, hood: hood || (hoods[0] || 'Downtown'),
         birthYear: iBy >= 0 ? row[iBy] : 1988,
         gender: iSex >= 0 ? row[iSex] : '',
-        occ: occ
+        occ: occ, rowIndex: r
       };
     }
   }
   if (!best) return null;
-  return mintChallengerOnLedger_(ctx, {
+  var minted = mintChallengerOnLedger_(ctx, {
     first: best.first, last: best.last, hood: best.hood,
     birthYear: best.birthYear || 1988, gender: best.gender,
     cycle: specBase.cycle, officeId: specBase.officeId,
     origin: 'generic', originCity: best.hood,
     reason: 'emerged from the city to challenge a failing office'
   });
+  if (!minted) return null;
+  // F2: the pool row is consumed — `Emerged`, the same column and value the
+  // advancement promotion writes (markAsEmergedInGeneric_), queued as a cell
+  // intent for Phase 10 rather than written direct.
+  ctx.civicGcTaken[best.rowIndex] = true;
+  var dry = ctx.mode && ctx.mode.dryRun;
+  if (!dry && iSt >= 0 && typeof queueCellIntent_ === 'function') {
+    queueCellIntent_(ctx, 'Generic_Citizens', best.rowIndex + 1, iSt + 1, 'Emerged',
+      'civic challenger ' + minted.popId + ' minted from the pool (engine.94 B.3 v3)', 'population');
+  }
+  return minted;
 }
 
 /**
@@ -1519,6 +1713,10 @@ function mintOutOfTownChallenger_(ctx, district, officeId, cycle) {
   };
   var iCtx = idxG('EmergenceContext');
   var marker = 'arrived to challenge ' + String(officeId || district || '');
+  // engine.94 B.3 v3 F2: the persisted marker is read below; the in-run set
+  // covers a second call before Phase 10 commits the first append.
+  ctx.civicGcQueued = ctx.civicGcQueued || {};
+  if (ctx.civicGcQueued[String(officeId || district || '')]) return null;
   if (iCtx >= 0) {
     for (var r = 1; r < data.length; r++) {
       if (String(data[r][iCtx] || '').indexOf(marker) >= 0) return null; // already waiting in the pool
@@ -1546,6 +1744,7 @@ function mintOutOfTownChallenger_(ctx, district, officeId, cycle) {
   setG('Status', 'Active');
   setG('Sex', gender);
   queueAppendIntent_(ctx, 'Generic_Citizens', gcNew, 'civic.31 out-of-town challenger -> GC', 'population', 50);
+  ctx.civicGcQueued[String(officeId || district || '')] = true;
   return null; // no challenger this Cycle — they are in the pool, and the feeder finds them next Cycle
 }
 

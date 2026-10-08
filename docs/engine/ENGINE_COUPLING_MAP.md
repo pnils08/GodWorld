@@ -270,7 +270,7 @@ These mutate structural SL columns (beyond LifeHistory) and feed cross-sheet sta
   - Stale comments: Logger says `v1.6` (L499; code is v1.9); `seedInitiativeTracker_` comment says "v1.1 schema" (L2190) but seeds v1.7 data.
   - Carve-outs (correct, not bugs): `manualRunVote` uses `Math.random` + `new Date()` (L2069/1991, operator path, no ctx.rng); `addSwingVoter2Columns`/`seedInitiativeTracker_` use `getActiveSpreadsheet` (setup). No cycle-path `new Date()`; `ctx.now` used throughout.
 
-### `runCivicElectionsv1.js` (`runCivicElections_`, Phase 5) — FULL-READ VERIFIED (Sonnet-mapped, S277)
+### `runCivicElectionsv1.js` (`runCivicElections_`, Phase 5) — DELETED 2026-10-08 (engine.94 B.3 v3: no scheduled election; seats turn over by approval in `updateCivicApprovalRatings_`). Historical description, as read S277:
 - **Gate:** fires only on `cycleOfYear===45` AND `godWorldYear % 2 === 0` (L53-70) — once per even God-world year; else `S.electionResults=null` + return. Seat group alternates by `godWorldYear % 4` (L104).
 - **Layer 1:** challenger pool from SL (Tier 2-4, active, non-CIV unless journalist, L172-210). Outcome (L291-378): `incumbentScore` base 50 ±incumbency/econMood/sentiment/scandal/variance, clamp 25-75, `rng()` roll decides. Margin buckets → narrative.
 - **Layer 2 (dials/structural):** no `citizenDialMap`, no dial touch. **Structural-civic:** mutates `Civic_Office_Ledger` office fields; **for an upset winner flips the SL row `CIV='y'` + `TierRole=<office>` (L467-484)** — the one citizen-row structural touch.

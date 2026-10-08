@@ -738,13 +738,24 @@ console.log('═══ B3v3. engine.94 B.3 v3 — the seat turns over on the rea
     nf.cell(2, 'Holder') === 'Marcus Webb' && nf.bonds.length === 0 && !/\(bond/.test(nf.hooks.find(h => h.hookType === 'CIVIC_DEMOTION').description) && nf.dep[0].grudgeBond === null);
   const pb = fire({ seat: { approval: 25, notes: NOTE }, bonds: [{ bondId: 'B-1', citizenA: 'POP-00503', citizenB: 'POP-00800', bondType: 'professional', status: 'active' }] });
   check('B3v3.10 a pair already bonded (either order) gets no second bond', pb.bonds.length === 1 && pb.bonds[0].bondId === 'B-1' && pb.dep[0].grudgeBond === null, JSON.stringify(pb.bonds));
+  // codex 2026-10-08 F3: a note names a successor, it does not certify one.
   const bad = fire({ seat: { approval: 25, notes: '[CAMPAIGN pop=POP-800 name=Marcus Webb since=110]' } });
-  check('B3v3.11 a malformed challenger id seats by the row, makes no bond, touches no successor ledger row',
-    bad.cell(2, 'PopId') === 'POP-800' && bad.bonds.length === 0 && bad.led('POP-00800').civ === 'no' && bad.led('POP-00503').civ === 'no');
+  check('B3v3.11 a malformed challenger id is a stale note: dropped, a valid challenger named afresh and seated, the bad id never written',
+    bad.cell(2, 'PopId') === 'POP-00800' && bad.cell(2, 'Holder') === 'Marcus Webb' && !/POP-800\b/.test(String(bad.cell(2, 'Notes'))) &&
+    bad.bonds.length === 1 && bad.led('POP-00800').civ === 'yes', JSON.stringify(bad.intents));
   const far = ['POP-00801', 'Nina', 'Park', 'Nina Park', 3, 'Fruitvale', 'no', 'Active', 'community organizer', 1990];
   const miss = fire({ seat: { approval: 25, notes: NOTE }, rows: [INCUMBENT, far] });
-  check('B3v3.11b a named challenger with no ledger row seats by the row but makes no bond (both rows required)',
-    miss.cell(2, 'Holder') === 'Marcus Webb' && miss.bonds.length === 0, JSON.stringify(miss.bonds));
+  check('B3v3.11b a named challenger with no ledger row is stale: the pool names Nina Park, who is seated; POP-00800 is never written',
+    miss.cell(2, 'Holder') === 'Nina Park' && miss.cell(2, 'PopId') === 'POP-00801' && miss.bonds.length === 1 && miss.bonds[0].citizenA === 'POP-00801', JSON.stringify(miss.intents));
+  const deadCh = CHALLENGER.slice(); deadCh[7] = 'deceased';
+  const dch = fire({ seat: { approval: 25, notes: NOTE }, rows: [INCUMBENT, deadCh], gc: [] });
+  check('B3v3.11c a named challenger who died is stale: nobody else qualifies → the note is stripped, the holder keeps the seat, no bond, no ledger write',
+    dch.cell(2, 'Holder') === undefined && dch.cell(2, 'Notes') === '' && dch.bonds.length === 0 && dch.dep.length === 0 && dch.led('POP-00800').civ === 'no' && dch.ctx.ledger.dirty === false, JSON.stringify(dch.intents));
+  const stale35 = fire({ seat: { approval: 35, notes: '[CAMPAIGN pop=POP-800 name=Nobody since=110]' }, rows: [INCUMBENT], gc: [] });
+  check('B3v3.11d a stale note at 35 with nobody available: note stripped, nothing else written, one arrival queued',
+    stale35.cell(2, 'Notes') === '' && stale35.intents.length === 1 && stale35.gcAppends.length === 1 && stale35.ctx.summary.civicCampaigns.length === 0, JSON.stringify(stale35.intents));
+  const nl2 = fire({ seat: { approval: 25, notes: NOTE }, noLedger: true });
+  check('B3v3.11e with no ledger a note cannot be certified: holder kept, note stripped, no throw', nl2.cell(2, 'Holder') === undefined && nl2.cell(2, 'Notes') === '');
 
   const rt = fire({ seat: { status: 'retired' } });
   check('B3v3.12 office row retired (F3): pick-and-seat at 50, no grudge, departed CIV no with RoleType untouched, successor CIV yes, CIVIC_SEAT_FILLED',
@@ -752,6 +763,13 @@ console.log('═══ B3v3. engine.94 B.3 v3 — the seat turns over on the rea
     rt.led('POP-00503').civ === 'no' && rt.led('POP-00503').role === 'City Council District 3' && rt.led('POP-00800').civ === 'yes' &&
     rt.hooks.some(h => h.hookType === 'CIVIC_SEAT_FILLED') && rt.dep[0].type === 'retired' && /Rose Delgado retired\. Marcus Webb \(POP-00800\) seated\./.test(rt.cell(2, 'Notes')),
     JSON.stringify([rt.intents, rt.dep]));
+  // codex 2026-10-08 F4: the seat's own named challenger is first in line on the fill path
+  const own = fire({ seat: { status: 'retired', notes: NOTE }, gc: [] });
+  check('B3v3.12b retired holder with a named challenger on the row: the named challenger is seated (not refused as occupied), note cleared, no bond, no arrival queued',
+    own.cell(2, 'Holder') === 'Marcus Webb' && own.cell(2, 'PopId') === 'POP-00800' && !/\[CAMPAIGN/.test(String(own.cell(2, 'Notes'))) && own.bonds.length === 0 &&
+    own.gcAppends.length === 0 && own.led('POP-00800').civ === 'yes' && own.dep[0].type === 'retired', JSON.stringify(own.intents));
+  const ownDead = fire({ seat: { status: 'retired', notes: NOTE }, rows: [INCUMBENT, deadCh], gc: [] });
+  check('B3v3.12c retired holder whose named challenger died: stale, nobody else → seat vacant', ownDead.cell(2, 'Status') === 'vacant' && ownDead.cell(2, 'Holder') === 'TBD');
   const dead = INCUMBENT.slice(); dead[7] = 'deceased';
   const dc = fire({ rows: [dead, CHALLENGER] });
   check('B3v3.13 the holder\'s ledger row deceased (office row active): the seat is filled, the record says died in office',
@@ -775,6 +793,38 @@ console.log('═══ B3v3. engine.94 B.3 v3 — the seat turns over on the rea
     nm.cell(2, 'Holder') === undefined && nm.dep.length === 0, String(nm.cell(2, 'Notes')));
   const nm2 = fire({ seat: { approval: 25, notes: nm.cell(2, 'Notes') } });
   check('B3v3.19 … and under 30 the next Cycle the named challenger takes the seat with the grudge', nm2.cell(2, 'Holder') === 'Marcus Webb' && nm2.bonds.length === 1);
+  // BOARD-OUSD turnover (plan F4: council and BOARD rows alike); citywide district → no hood filter
+  const BOARD_INC = ['POP-00706', 'Rosa', 'Ochoa', 'Rosa Ochoa', 3, 'Laurel', 'yes', 'Active', 'School Board Member', 1984];
+  const bNote = A.formatCampaignNote_({ pop: 'POP-00800', name: 'Marcus Webb', since: 110 }, '');
+  const bd = fire({ seats: [seat({ officeId: 'BOARD-OUSD-1', title: 'School Board Member', district: 'citywide', holder: 'Rosa Ochoa', pop: 'POP-00706', approval: 25, notes: bNote })], rows: [BOARD_INC, CHALLENGER] });
+  check('B3v3.21 a BOARD-OUSD seat turns over the same way: successor CIV yes + School Board Member, former CIV no + Former School Board Member, bond in Laurel',
+    bd.cell(2, 'Holder') === 'Marcus Webb' && bd.led('POP-00800').civ === 'yes' && bd.led('POP-00800').role === 'School Board Member' &&
+    bd.led('POP-00706').civ === 'no' && bd.led('POP-00706').role === 'Former School Board Member' && bd.bonds.length === 1 && bd.bonds[0].neighborhood === 'Laurel', JSON.stringify([bd.intents, bd.bonds]));
+  // F6: the saved Story_Hook_Deck row carries the bond id — the real serializer, fed the way storyHook.js hands it the hook
+  {
+    const hookSrc = fs.readFileSync(path.resolve(__dirname, '../phase07-evening-media/storyHook.js'), 'utf8');
+    check('B3v3.22a storyHook.js normalizes description → text before the writer', hookSrc.includes("if (!ch.text && ch.description) ch.text = ch.description;"));
+    const W = new Function(fs.readFileSync(path.resolve(__dirname, '../phase08-v3-chicago/v3StoryHookWriter.js'), 'utf8') + '\nreturn { saveV3Hooks_: saveV3Hooks_, HOOK_DECK_HEADERS: HOOK_DECK_HEADERS };')();
+    const batches = []; G.queueBatchAppendIntent_ = (ctx, tab, rows) => batches.push({ tab, rows }); G.requireTab_ = (ss, n) => ({}); G.inWorldStamp_ = () => 'Y2C45'; G.initializePersistContext_ = (ctx) => { ctx.persist = {}; };
+    const h = Object.assign({}, demo); h.text = h.description;
+    W.saveV3Hooks_({ ss: {}, persist: {}, config: { cycleCount: 113 }, summary: { cycleId: 113, storyHooks: [h] } });
+    const rowH = batches[0] && batches[0].rows[0];
+    check('B3v3.22b the saved HookText ends with the bond id', !!rowH && batches[0].tab === 'Story_Hook_Deck' && rowH[W.HOOK_DECK_HEADERS.indexOf('HookText')].endsWith('(bond ' + d.bonds[0].bondId + ')') && rowH[W.HOOK_DECK_HEADERS.indexOf('HookType')] === 'CIVIC_DEMOTION', JSON.stringify(rowH));
+    delete G.queueBatchAppendIntent_; delete G.inWorldStamp_; delete G.initializePersistContext_;
+  }
+  // F2 (codex F2): the promotion writer's floor-wave pool honours the civic reservation
+  {
+    const PSrc = fs.readFileSync(path.resolve(__dirname, '../phase05-citizens/checkForPromotions.js'), 'utf8');
+    check('B3v3.23a both Generic_Citizens loops in checkForPromotions.js skip a row taken by a civic mint this fire', (PSrc.match(/ctx\.civicGcTaken && ctx\.civicGcTaken\[r\]/g) || []).length === 2);
+    const Pm = new Function(PSrc + '\nreturn { selectFloorWaveRows_: selectFloorWaveRows_ };')();
+    G.resolveHoodOrChild_ = (ctx, h) => String(h || ''); G.underFloorHoods_ = () => ['Fruitvale']; G.hoodFloorDeficit_ = () => 5; G.getHoodHeadcount_ = () => 0; G.getCoreSimNeighborhoods_ = () => ['Fruitvale'];
+    const gv = [GC_HEAD.slice(), GC1.slice(), ['Ada', 'Lee', 40, 2002, 'Fruitvale', 'Teacher', 1, 'Cycle 100', '', 'Active', 'F', '']];
+    const pctx = { config: { hoodCitizenFloor: 1, hoodFloorWaveQuota: 2, hoodFloorPromotePerCycle: 2, hoodFloorMinHoodShare: 0 }, summary: { canonHoods: CANON_HOODS, neighborhoodState: {} }, civicGcTaken: { 1: true }, ledger: { headers: LH.slice(), rows: [] } };
+    let waveOk = true, wave = null;
+    try { wave = Pm.selectFloorWaveRows_(pctx, gv, GC_HEAD.indexOf('Neighborhood'), GC_HEAD.indexOf('Status'), GC_HEAD.indexOf('Sex'), GC_HEAD.indexOf('EmergedCycle'), 113, () => 0.5); } catch (e) { waveOk = false; wave = e.message; }
+    check('B3v3.23b the floor wave never draws the taken row (row 1 reserved → only row 2 is drawable)', waveOk && !(wave && wave[1]) , JSON.stringify(wave));
+    delete G.resolveHoodOrChild_; delete G.underFloorHoods_; delete G.hoodFloorDeficit_; delete G.getHoodHeadcount_; delete G.getCoreSimNeighborhoods_;
+  }
   const nl = fire({ seat: { approval: 25 }, noLedger: true });
   check('B3v3.20 a ctx without a ledger (the E-section shape) runs: under 30 with no pool keeps the holder, no throw',
     nl.cell(2, 'Holder') === undefined && nl.dep.length === 0);
@@ -791,7 +841,7 @@ console.log('═══ F5. engine.94 B.3 v3 — the bond load certifies; a faile
   const BPm = new Function(BPsrc + '\nreturn { loadRelationshipBonds_: loadRelationshipBonds_, saveRelationshipBonds_: saveRelationshipBonds_, missingBondHeaders_: missingBondHeaders_, BOND_REQUIRED_HEADERS_: BOND_REQUIRED_HEADERS_ };')();
   const errors = []; G.logEngineError_ = (ctx, phase, e) => errors.push(phase + ': ' + e.message);
   G.requireTab_ = (ss, n) => { const t = ss.getSheetByName(n); if (!t) throw new Error('missing tab ' + n); return t; };
-  const replaces = []; G.queueReplaceIntent_ = (ctx, tab, rows) => replaces.push({ tab, rows: rows.length });
+  const replaces = []; G.queueReplaceIntent_ = (ctx, tab, rows) => replaces.push({ tab, rows: rows.length, payload: rows });
   G.initializePersistContext_ = (ctx) => { ctx.persist = {}; };
   G.Logger = { log() {} };
   const mk = (rows) => ({ summary: {}, config: { cycleCount: 113 }, ss: { getSheetByName: n => n === 'Relationship_Bonds' ? {
@@ -806,16 +856,35 @@ console.log('═══ F5. engine.94 B.3 v3 — the bond load certifies; a faile
   const c2 = mk([FULL, ['B-1', 'POP-00001', 'POP-00002', 'friendship', 5, 'active', 'seed', '', 'Downtown', 100, 100, '', 'none', 'none', false, false, 'off-season']]); BPm.loadRelationshipBonds_(c2);
   check('F5.2 a full load certifies with the rows loaded', c2.summary.relationshipBondsLoaded === true && c2.summary.relationshipBonds.length === 1);
   const c3 = mk([FULL.filter(h => h !== 'Intensity'), ['B-1', 'POP-00001', 'POP-00002', 'friendship', 'active']]); errors.length = 0; BPm.loadRelationshipBonds_(c3);
-  check('F5.3 a missing required header: flag stays false, one Engine_Errors row names it, nothing loaded',
+  check('F5.3 a missing required header: flag stays false, logEngineError_ called once naming it (the Engine_Errors row is its job), nothing loaded',
     c3.summary.relationshipBondsLoaded === false && errors.length === 1 && /Phase5-LoadBonds: Relationship_Bonds missing header\(s\): Intensity/.test(errors[0]) && c3.summary.relationshipBonds.length === 0, errors.join(';'));
   const c4 = mk([['Timestamp', 'Cycle', 'Action'], ['t', 1, 'x']]); errors.length = 0; BPm.loadRelationshipBonds_(c4);
-  check('F5.4 ledger-schema headers: flag false, one Engine_Errors row, nothing loaded', c4.summary.relationshipBondsLoaded === false && errors.length === 1 && c4.summary.relationshipBonds.length === 0);
+  check('F5.4 ledger-schema headers: flag false, logEngineError_ called once, nothing loaded', c4.summary.relationshipBondsLoaded === false && errors.length === 1 && c4.summary.relationshipBonds.length === 0);
   const c0 = mk([]); errors.length = 0; BPm.loadRelationshipBonds_(c0);
   check('F5.4b an empty tab (no header row) is a failed load, not a quiet empty state', c0.summary.relationshipBondsLoaded === false && errors.length === 1);
   c3.summary.relationshipBonds = [{ bondId: 'B-9', citizenA: 'POP-00001', citizenB: 'POP-00002', bondType: 'tension' }]; replaces.length = 0; BPm.saveRelationshipBonds_(c3);
   check('F5.5 the saver queues no master replace behind a failed load (every bond write held, not only the grudge)', replaces.length === 0);
   replaces.length = 0; BPm.saveRelationshipBonds_(c2);
-  check('F5.6 the saver queues the replace behind a certified load', replaces.length === 1 && replaces[0].tab === 'Relationship_Bonds' && replaces[0].rows === 2, JSON.stringify(replaces));
+  check('F5.6 the saver queues the replace behind a certified load, and the payload row carries both citizen ids',
+    replaces.length === 1 && replaces[0].tab === 'Relationship_Bonds' && replaces[0].rows === 2 && replaces[0].payload[1][1] === 'POP-00001' && replaces[0].payload[1][2] === 'POP-00002', JSON.stringify(replaces[0] && replaces[0].payload));
+  // codex 2026-10-08 F1: one normalized header map for certification and decoding
+  const padded = FULL.map(h => h === 'CitizenA' ? ' CitizenA ' : h);
+  const c6 = mk([padded, ['B-1', 'POP-00001', 'POP-00002', 'friendship', 5, 'active', 'seed', '', 'Downtown', 100, 100, '', 'none', 'none', false, false, 'off-season']]); errors.length = 0; BPm.loadRelationshipBonds_(c6);
+  replaces.length = 0; BPm.saveRelationshipBonds_(c6);
+  check('F5.9 a padded header certifies AND decodes through the same trimmed map — the saved row keeps CitizenA',
+    c6.summary.relationshipBondsLoaded === true && c6.summary.relationshipBonds[0].citizenA === 'POP-00001' && replaces.length === 1 && replaces[0].payload[1][1] === 'POP-00001', JSON.stringify(replaces[0] && replaces[0].payload));
+  const dup = FULL.concat(['CitizenA']);
+  const c7 = mk([dup, ['B-1', 'POP-00001', 'POP-00002', 'friendship', 5, 'active', 'seed', '', 'Downtown', 100, 100, '', 'none', 'none', false, false, 'off-season', 'POP-00009']]); errors.length = 0; BPm.loadRelationshipBonds_(c7);
+  replaces.length = 0; BPm.saveRelationshipBonds_(c7);
+  check('F5.10 a duplicated required header is ambiguous: flag false, error names it, no replace', c7.summary.relationshipBondsLoaded === false && /CitizenA \(x2\)/.test(errors[0] || '') && replaces.length === 0, errors.join(';'));
+  // codex 2026-10-08 F5: the history writer honours the certificate too
+  {
+    const BE = new Function(fs.readFileSync(path.resolve(__dirname, '../phase05-citizens/bondEngine.js'), 'utf8') + '\nreturn { saveV3BondsToLedger_: saveV3BondsToLedger_ };')();
+    let writes = 0; const fakeSheet = { getLastRow: () => 1, getRange: () => ({ setValues: () => { writes++; }, getValues: () => [[]] }), appendRow: () => { writes++; } };
+    const hctx = { ss: { getSheetByName: () => fakeSheet }, config: { cycleCount: 113 }, summary: { cycleId: 113, relationshipBondsLoaded: false, relationshipBonds: [{ bondId: 'B-9', citizenA: 'POP-00001', citizenB: 'POP-00002', bondType: 'tension', lastUpdate: 113, cycleCreated: 113 }] } };
+    BE.saveV3BondsToLedger_(hctx);
+    check('F5.11 the bond history writer writes nothing behind a failed load', writes === 0, String(writes));
+  }
   const c5 = mk([FULL]); c5.summary.relationshipBonds = [{ bondId: 'x' }]; replaces.length = 0; BPm.saveRelationshipBonds_(c5);
   check('F5.7 a Cycle where the loader never ran saves nothing', replaces.length === 0);
   check('F5.8 one required list, shared with the validator', BPm.BOND_REQUIRED_HEADERS_.join() === 'BondId,CitizenA,CitizenB,BondType,Intensity,Status' &&

@@ -2746,6 +2746,14 @@ function saveV3BondsToLedger_(ctx) {
   var ss = ctx.ss;
   var bonds = ctx.summary.relationshipBonds || [];
 
+  // engine.94 B.3 v3 F5 (codex 2026-10-08 F5): a load that did not certify holds
+  // the history ledger as well as the master replace — no history row for a
+  // bond whose master save was held.
+  if (ctx.summary.relationshipBondsLoaded !== true) {
+    Logger.log('saveV3BondsToLedger_ engine.94 B.3 v3: bond load not certified this Cycle — history write held');
+    return;
+  }
+
   if (!bonds.length) {
     Logger.log('saveV3BondsToLedger_: No bonds to write');
     return;

@@ -602,7 +602,11 @@ function updateCivicApprovalRatings_(ctx) {
         : ((status === 'retired' || status === 'deceased') ? status : holderLedgerStatus);
       var fillNotes = iNotes !== -1 ? (row[iNotes] || '').toString() : '';
       var fillVerb = fillKind === 'deceased' ? 'died in office' : 'retired';
-      var fillPick = pickCampaignChallenger_(ctx, district, incumbentPop, occupiedPopIds, officeId, cycle);
+      // codex 2026-10-08 F4: the seat's own named challenger (reserved in the
+      // occupied set by their note, so the picker would refuse them) is first in line.
+      var ownNamed = validateCampaign_(ctx, parseCampaignNote_(fillNotes), incumbentPop, officeId).campaign;
+      var fillPick = ownNamed ? { popId: ownNamed.pop, name: ownNamed.name, origin: 'named' }
+        : pickCampaignChallenger_(ctx, district, incumbentPop, occupiedPopIds, officeId, cycle);
       if (fillPick) {
         occupiedPopIds[fillPick.popId] = true;
         var fillLine = fillKind === 'vacant'
@@ -869,7 +873,11 @@ function updateCivicApprovalRatings_(ctx) {
     }
 
     var priorNotes = iNotes !== -1 ? (row[iNotes] || '').toString() : '';
-    var campaign = parseCampaignNote_(priorNotes);
+    var parsedNote = parseCampaignNote_(priorNotes);
+    var checked = validateCampaign_(ctx, parsedNote, incumbentPop, officeId);
+    var campaign = checked.campaign;
+    var staleNote = !!(parsedNote && !campaign);
+    if (staleNote) reasons.push('stale campaign note dropped: ' + checked.reason);
     if (shouldStartCampaign_(status, newApproval, campaign)) {
       var picked = pickCampaignChallenger_(ctx, district, incumbentPop, occupiedPopIds, officeId, cycle);
       if (picked) {
@@ -911,6 +919,8 @@ function updateCivicApprovalRatings_(ctx) {
       // the named challenger stays named until a seating (ruled 2026-10-08: no stand-down)
       var kept = formatCampaignNote_(campaign, stripCampaignNote_(priorNotes));
       planCeilingWrite(li + 1, iNotes, row[iNotes], kept, 'challenger named');
+    } else if (staleNote && !campaign && iNotes !== -1) {
+      planCeilingWrite(li + 1, iNotes, row[iNotes], stripCampaignNote_(priorNotes), 'stale campaign note dropped');
     }
     if (campaign && !seating && campaign.since === cycle) {
       var campHook = {
@@ -1296,6 +1306,34 @@ function shouldStartCampaign_(status, newApproval, existingCampaign) {
   if (existingCampaign) return false;
   if (String(status || '').toLowerCase() === 'vacant') return false;
   return Number(newApproval) < CHALLENGER_NAMED_BELOW_;
+}
+
+/**
+ * engine.94 B.3 v3 (codex 2026-10-08 F3): a campaign note names a successor,
+ * it does not certify one. Before any seat, bond or ledger mutation the named
+ * challenger must resolve by exact POPID to a ledger row that can serve —
+ * Status active, not the incumbent. Anything else is a stale note: the
+ * caller drops it (strips the note, names afresh if the seat is under 40)
+ * and logs why. The no-stand-down rule covers a valid challenger only.
+ */
+function validateCampaign_(ctx, campaign, incumbentPop, officeId) {
+  if (!campaign) return { campaign: null, reason: '' };
+  var pop = String(campaign.pop || '').trim().toUpperCase();
+  var why = '';
+  if (!/^POP-\d{5}$/.test(pop)) why = 'named challenger id is not a POPID (' + campaign.pop + ')';
+  else if (pop === String(incumbentPop || '').trim().toUpperCase()) why = 'named challenger is the holder';
+  else {
+    var hit = ledgerRowByPop_(ctx, pop);
+    if (!hit) why = 'named challenger ' + pop + ' has no ledger row';
+    else if (hit.iStatus >= 0 && String(hit.row[hit.iStatus] || '').trim().toLowerCase() !== 'active') {
+      why = 'named challenger ' + pop + ' cannot serve (Status ' + hit.row[hit.iStatus] + ')';
+    }
+  }
+  if (why) {
+    Logger.log('  CAMPAIGN ' + officeId + ': stale note dropped — ' + why);
+    return { campaign: null, reason: why };
+  }
+  return { campaign: { pop: pop, name: campaign.name, since: campaign.since }, reason: '' };
 }
 
 /** Exact-POPID row lookup on ctx.ledger; null when absent or the id is not a POPID. */

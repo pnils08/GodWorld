@@ -124,7 +124,7 @@
 | 5-Universe | `runAsUniversePipeline_()` | phase05-citizens/runAsUniversePipeline.js | UNI-flagged citizens ONLY | `!isUNI` skip |
 | 5-CivicRoles | `runCivicRoleEngine_()` | phase05-citizens/runCivicRoleEngine.js | CIV-flagged citizens | CIV check |
 | 5-Initiatives | `runCivicInitiativeEngine_()` | phase05-citizens/civicInitiativeEngine.js | Initiative_Tracker sheet | — |
-| 5-ApprovalRatings | `updateCivicApprovalRatings_()` | phase05-citizens/updateCivicApprovalRatings.js | Dynamic approval from initiative performance + media + district alignment. Writes to Civic_Office_Ledger Approval column. Triggers: vulnerable (<30), recall-pressure (<20), popular (>80) (v1.0 S137b) | — |
+| 5-ApprovalRatings | `updateCivicApprovalRatings_()` | phase05-citizens/updateCivicApprovalRatings.js | Dynamic approval from initiative performance + media + district alignment. Writes to Civic_Office_Ledger Approval column. Under 40 a challenger is named on the row; under 30 the named challenger takes the seat (engine.94 B.3 v3, 2026-10-08); can't-serve and vacant elected seats fill the same way; popular (>80) | — |
 
 ### 5d: Lifecycle Engines (ENGINE mode only, flag-excluded)
 

@@ -314,6 +314,10 @@ function checkForPromotions_(ctx) {
 
     // Only active candidates
     if (status !== "Active") continue;
+    // engine.94 B.3 v3 F2 (codex 2026-10-08 F2): a pool row the approval writer
+    // minted as a challenger this fire is taken — Phase5-ApprovalRatings runs
+    // before this phase and its Emerged cell lands only at Phase 10.
+    if (ctx.civicGcTaken && ctx.civicGcTaken[r]) continue;
     var inWave = !!waveRows[r]; // engine.148: wave rows skip the tick gate and the roll
     if (!inWave) {
       if (emergence < 3) continue;
@@ -636,6 +640,7 @@ function selectFloorWaveRows_(ctx, gVals, gNeigh, gStat, gSex, gEmergedCycle, cy
   var bornThisCycle = "Cycle " + cycle; // the feeder stamps EmergedCycle at creation
   for (var r = 1; r < gVals.length; r++) {
     if ((gVals[r][gStat] || "").toString() !== "Active") continue;
+    if (ctx.civicGcTaken && ctx.civicGcTaken[r]) continue; // engine.94 B.3 v3 F2: taken by a civic mint this fire
     // engine.148: a row minted into the waiting room this cycle (Phase5-GenericCitizens
     // runs first and writes direct) waits at least one cycle before a wave can take it.
     if (gEmergedCycle >= 0 && String(gVals[r][gEmergedCycle] || "").trim() === bornThisCycle) continue;

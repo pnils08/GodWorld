@@ -54,14 +54,23 @@
 // validateRelationshipBondsSchema_ (utilities/ensureRelationshipBonds.js).
 var BOND_REQUIRED_HEADERS_ = ['BondId', 'CitizenA', 'CitizenB', 'BondType', 'Intensity', 'Status'];
 
+// Returns the required headers that are missing or ambiguous (present more
+// than once after trimming). The loader's column map is built from the same
+// trimmed names (codex 2026-10-08 F1: certifying a padded header the reader
+// could not find blessed a load of empty identities).
 function missingBondHeaders_(headers) {
-  var seen = {};
-  for (var i = 0; i < (headers || []).length; i++) seen[String(headers[i] || '').trim()] = true;
-  var missing = [];
-  for (var j = 0; j < BOND_REQUIRED_HEADERS_.length; j++) {
-    if (!seen[BOND_REQUIRED_HEADERS_[j]]) missing.push(BOND_REQUIRED_HEADERS_[j]);
+  var count = {};
+  for (var i = 0; i < (headers || []).length; i++) {
+    var name = String(headers[i] || '').trim();
+    if (name) count[name] = (count[name] || 0) + 1;
   }
-  return missing;
+  var bad = [];
+  for (var j = 0; j < BOND_REQUIRED_HEADERS_.length; j++) {
+    var req = BOND_REQUIRED_HEADERS_[j];
+    if (!count[req]) bad.push(req);
+    else if (count[req] > 1) bad.push(req + ' (x' + count[req] + ')');
+  }
+  return bad;
 }
 
 var BOND_SHEET_HEADERS = [
@@ -166,10 +175,11 @@ function loadRelationshipBonds_(ctx) {
     return; // Only headers, no bonds
   }
 
-  // Build column index map
+  // Build column index map — trimmed names, the same names the certification saw (F1)
   var col = {};
   for (var h = 0; h < headers.length; h++) {
-    col[headers[h]] = h;
+    var hName = String(headers[h] || '').trim();
+    if (hName && col[hName] === undefined) col[hName] = h;
   }
 
   // Load bonds (skip inactive)

@@ -258,6 +258,8 @@ Asked as one list with defaults: (5a) the court week — C110, year position 6, 
 
 ## Changelog
 
+- 2026-10-08 (engine-sheet) — `runCivicElectionsv1.js` deleted under engine.94 B.3 v3 (no scheduled election); the comment-hygiene items this plan names at `:23,:63` are moot.
+
 - 2026-10-07 (engine-sheet, S536) — Builder: Open Court Week at position 6 approved; running-on-its-own week held; Second Dawn stays thin; meaning sentences yes (verbatim under §Builder's words 2026-10-07). ROLLOUT engine.273 → section 3.
 
 - 2026-09-29 (engine-sheet) — Plan filed from builder direction; Task 1 dispatched to codex.

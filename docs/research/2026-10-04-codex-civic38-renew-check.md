@@ -32,3 +32,7 @@ pointers:
 ## Changelog
 
 - 2026-10-04 (codex) — Read-only renew path and stall-clock check filed for Claude review.
+
+## Disposition — research-build 2026-10-08
+
+Folded. The builder ruled 2026-10-04 to keep the as-built two-clock behaviour (work resets the Standing/Delivering untended clock, never the Funded clock); acceptance 7, mechanism 7 and Task 4 step 3 of [[../plans/2026-09-19-civic-wake-game-loop]] were trued to it in `3a193300`. Findings 1 (renew isolation) and 3 (zero approval credit on a revival) needed no change. The one failing local test (`orBatch` importability) was a sandbox `spawnSync EPERM`, not a code finding.

@@ -45,3 +45,7 @@ pointers:
 ## Addendum — 2026-10-04 (codex)
 
 7. **`departure.grudgeBond` is not a civic-desk handoff by itself.** The proposed field would enter `approvalTriggers` and `S.officeDepartures` (`phase05-citizens/updateCivicApprovalRatings.js:849-861,1002-1004`), but the searched active phase/utilities/scripts code has no reader of either array outside this writer. The persisted `CIVIC_DEMOTION` story hook is a separate object and currently contains no bond id (`:862-878`). The old `results[].grudgeBond` is likewise only tested through the direct calendar harness (`phase05-citizens/runCivicElectionsv1.js:497-508`; `scripts/civicApprovalCeiling.test.js:681`). Keep the bond id on the departure for local diagnostics if desired, but name and prove a persisted reader before claiming the civic desk can follow that field.
+
+## Disposition — research-build 2026-10-08
+
+Folded. F1-F7 went into the B.3 revised cut v2 ([[../plans/2026-07-31-citizen-memory-perception]] §B.3, `f7b14c16`) after the builder's 2026-10-04 ruling (unseat under 40, no campaign, no scheduled election). The v2 cut was reviewed in turn by `docs/for-claude-review/2026-10-04-codex-engine94-b3-v2-review.md` (HOLD, still open: B.3 v2 waits on it).

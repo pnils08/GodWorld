@@ -47,3 +47,7 @@ Fold these findings into the scratchpad plan before any live readback or bench w
 ## Changelog
 
 - 2026-10-06 (codex) — Filed read-only C110 smoke and bench resync plan review.
+
+## Disposition — research-build 2026-10-08
+
+Spent. The smoke this reviewed ran at the C110 fire and was read 2026-10-06/07 (`output/smoke_c110.md`); engine.266 and engine.276 closed on it. The plan reviewed was a scratchpad draft, not a repo file, so a per-finding fold was not traced.

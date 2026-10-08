@@ -1,7 +1,7 @@
 ---
 title: Research Sub-Catalog
 created: 2026-06-01
-updated: 2026-10-03
+updated: 2026-10-08
 type: reference
 tags: [research, architecture, active]
 sources:
@@ -25,6 +25,10 @@ Grep here before grepping the tree. Each row: file · one-line purpose · verdic
 
 | File | Purpose | Verdict |
 |------|---------|---------|
+| **[[2026-10-07-codex-engine282-283-plan]]** | codex adversarial review of the engine.282/283 plan (NetWorth default write, Status discharge flag): nine findings incl. the C112 fixture contaminating other checks and the PROD delta needing its own gate; shipped in PROD f2a61e5e | HOLD as written, spent by shipping |
+| **[[2026-10-06-codex-c110-smoke-plan]]** | codex review of the C110 smoke and bench-resync scratchpad plan: S525 checks omitted, recording location against the PIN-only shape, resync needs target/preservation/read-back gates | HOLD before execution, spent (smoke ran) |
+| **[[2026-10-04-codex-engine94-b3-reseam-review]]** | codex review of the first B.3 re-hook (grudge bond at the seating block): calendar-election removal clashes with civic.43, bench fixture does not force a loss, POPID guard too weak, failed bond load can replace the whole set | HOLD, F1-F7 folded into B.3 v2 |
+| **[[2026-10-04-codex-civic38-renew-check]]** | codex source review of the civic.38 `renew` move and stall clock: renew isolation and zero approval credit on revival hold; acceptance 7's "work never renews the clock" conflicted with ruling 17 | HOLD on acceptance 7, folded (builder ruling 2026-10-04) |
 | **[[2026-10-03-agy-engine-204-205-draft-review]]** | agy read-only review of the engine.204/205 read-before: seven hunts; two FIX (`mediaFeedbackEngine.js` hopeBoost + topic multiplier missing from the census; word-test count pattern), five NOTE; folded same hour | SHIP-WITH-FIXES, folded |
 | **[[2026-10-03-agy-pulse-c109-recount]]** | agy blind recount of the pipeline.70 C109 pulse table from the page index: 14/15 themes match; the miss was the ad-hoc surname alternative, folded (full-name only); one-doc total difference is the kit's athlete regex on a youth coach | MATCH (after fold) |
 | **[[2026-10-03-kimi-pipeline70-diff-review]]** | kimi adversarial review of pipeline.70 seam 1 (codex diff) + seam 3 (1d8486c2): eight findings; F1 landing-shape hazard (land the scan/pulse edits with the set + identity fallback), F2 guardrail inside the voice string, F3 leak-guard case, F8 nits — all folded; F4/F5/F7 plan notes | SHIP-WITH-FIXES, folded |
@@ -202,3 +206,4 @@ Grep here before grepping the tree. Each row: file · one-line purpose · verdic
 - 2026-10-03 (research-build, overnight) — Filed [[2026-10-03-kimi-pipeline70-diff-review]]; F1/F2/F3/F8 folded into the seam 1 landing commit, F4/F5/F7 recorded in [[../plans/2026-10-03-citizen-pages-drive-canon]].
 - 2026-10-03 (research-build, overnight) — Filed [[2026-10-03-agy-pulse-c109-recount]] (pipeline.70 seam 3 outside check); fold recorded in [[../plans/2026-10-03-citizen-pages-drive-canon]] changelog.
 - 2026-10-03 (S523, research-build) — Accepted [[2026-10-03-agy-engine-204-205-draft-review]] from the review inbox and folded it into [[2026-10-03-engine-204-205-game-day-economy-read-before]]: media feedback engine added to the consumer census and the band map; the 174 count kept with its pattern stated.
+- 2026-10-08 (research-build) — Accepted four codex reviews from the review inbox: [[2026-10-04-codex-civic38-renew-check]], [[2026-10-04-codex-engine94-b3-reseam-review]], [[2026-10-06-codex-c110-smoke-plan]], [[2026-10-07-codex-engine282-283-plan]]; each carries its disposition. The B.3 v2 review and the cron-path review stay in the inbox (open).

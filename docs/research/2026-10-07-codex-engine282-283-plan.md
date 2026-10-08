@@ -45,3 +45,7 @@ Fold findings 1-9 into the plan before implementation and the C112/PROD gates. T
 ## Changelog
 
 - 2026-10-06 (codex) — Filed read-only engine.282/283 adversarial plan review.
+
+## Disposition — research-build 2026-10-08
+
+Spent by shipping. engine.282/283 are live in PROD `f2a61e5e` (2026-10-06 23:43, [[../reference/DEPLOY_HISTORY]] §PROD f2a61e5e). The deploy record reflects findings 6-9: the fixture moved to C113, the stage gate says plainly that a clean run is not trigger-exercised, and the three-cell live repair was guarded and read back. Findings 1-5 (Status-reader inventory, existing tests, discharge-flag test, payload boundary, raw-cell assertion) were not individually traced by research-build; engine-sheet acted on the review.

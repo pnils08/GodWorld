@@ -1,7 +1,7 @@
 ---
 title: Deploy History — full sandbox + PROD deployment ledger
 created: 2026-09-04
-updated: 2026-10-04
+updated: 2026-10-08
 type: reference
 tags: [engine, deploy, history, active]
 sources:
@@ -133,6 +133,11 @@ pointers:
 ---
 
 ## PROD deploy log — full trail
+
+### PROD f57439e2 — a4cb20df: feed dropdowns cover the whole grid + challenger mint writes `Active` (2026-10-08 01:16 CDT, engine-sheet; bench 1004 @3 C111 clean on live-synced C110)
+- **Delta:** exactly 2 engine files vs a fresh PROD pull (= `f2a61e5e`, no drift): `utilities/setupSportsFeedValidation.js` (dropdown validation over `getMaxRows()`, not the filled rows — menu utility, no cycle caller; the live rows 239-301 were patched by hand 2026-10-08 before this deploy), `phase05-citizens/updateCivicApprovalRatings.js` (`mintChallengerOnLedger_` writes `Active`, was `active` — the last lowercase ledger writer after engine.283; runs only when engine.94 B.3 names a challenger). Pull-back 167/167 + manifest byte-identical, 0 test files. Push only; PROD web app still @135, live fires from the menu.
+- **Bench evidence:** @3 = this stage; C111 fired over live-synced C110: ok, 197 s, 132 phases, 0 new Engine_Errors, ledger 1,025 → 1,033. **engine.283 on a real citizen:** POP-00801 (recovering since C106, severe seasonal flu) discharged → Status `Active`, HealthCause and StatusStartCycle cleared, Hospital_Ledger row closed 111 `recovered`. The mint path was not exercised (0 Civic-candidate rows). Three `active` rows on the bench after the fire (POP-00194/-00528/-01028) were the pre-fix live cells the 2026-10-06 sync carried — the same three hand-fixed on live that session; C111 never touched them (980 + 8 new + 1 discharge = 989 Active exactly). Trued on the bench `L147/L417/L858`, read back; bench Status 989 Active / 44 Retired.
+- **Expectations at the next live fire (C111, Sunday 2026-10-11):** unchanged from §PROD f2a61e5e below, plus: a challenger mint, if one fires, writes Status `Active`.
 
 ### PROD f2a61e5e — the 2026-10-04 eight + engine.282/283 (2026-10-06 23:43 CDT, engine-sheet; bench 1004 @1 C111, @2 C112 clean + C113 fixture)
 - **Delta:** 55 engine files vs a fresh PROD pull (= `e59e89f8`, no drift). Pull-back 167/167 + manifest. Push only; menu-fired.

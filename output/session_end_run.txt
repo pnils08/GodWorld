@@ -1,5 +1,5 @@
 ========================================================================
-sessionEndMechanical: terminal=research-build, rotate-history=false, dry-run=false
+sessionEndMechanical: terminal=engine-sheet, rotate-history=false, dry-run=false
 ========================================================================
 Expected upstream model step (BEFORE this script):
   1. SESSION_CONTEXT.md PIN + NEXT[terminal] line + ROLLOUT_PLAN.md updated
@@ -13,35 +13,51 @@ Mechanical sub-steps (5):
 ========================================================================
 
 --- [1/5] session summary → Supermemory (best-effort) ---
-✓ session log → Supermemory [session-logs] doc yz3Tbn6bmZoPHoXSJdfoUR (296 chars, 1 summary rows folded)
+✓ session log → Supermemory [session-logs] doc 3twjD8RBJCazk4kq7xMAGx (2928 chars, 47 summary rows folded)
 
 --- [2/5] auditPlanTagDrift (informational) ---
   # Plan tag drift audit
   
-  Generated: 2026-10-03T06:55:52.464Z
-  Plans scanned: 134
+  Generated: 2026-10-08T05:49:35.102Z
+  Plans scanned: 136
   No frontmatter: 7
-  No changelog: 7
-  No status-verb match: 118
+  No changelog: 8
+  No status-verb match: 119
   Drifts found: 0
   
   No plan-tag drift detected.
   ✓ no drift detected
 
 --- [3/5] ROLLOUT conformance lint (informational) ---
-  ROLLOUT LINT: clean — every row is a sweep-safe pointer within budget.
+  ROLLOUT LINT: 2 non-conforming row(s) — state-cell breaks the sweep, or item cell over the 280-char pointer budget:
+    L68 civic.43: item cell 306 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
+    L98 engine.193: item cell 290 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
+  ROLLOUT OVERDUE: 6 waiting row(s) past their Cycle/date or naming none — read the record, then flip, re-date or close:
+    L101 engine.20d: latest date named 2026-10-05, today is 2026-10-08
+    L103 engine.53: latest date named 2026-10-05, today is 2026-10-08
+    L104 research.27: latest date named 2026-10-03, today is 2026-10-08
+    L106 engine.201: latest date named 2026-09-14, today is 2026-10-08
+    L107 pipeline.48: latest date named 2026-09-26, today is 2026-10-08
+    L108 pipeline.49: latest date named 2026-09-26, today is 2026-10-08
 
 --- [4/5] cross-terminal git stack check (read-only) ---
-  ⚠ 4 unpushed commit(s) ahead of origin/main:
-    10f45060 engine.204/205: agy review folded (mediaFeedbackEngine hopeBoost + topic multiplier added to the census and band map; count pattern stated); review filed to docs/research, indexed
-    16a362e9 engine.204/205: all four sim calls RULED 2026-10-03 as proposed (priors .750/.400, weights 1.0/0.35, reach table, EconomicFootprint out, FranchiseStability + CommunityInvestment kept) — build-ready for es
-    e59e89f8 engine.208 M1: athlete going-home lines finally reach the players
-    bac8b8fd engine.208 cut Revision 1 after codex HOLD (10 hunts verified against code); review filed to docs/research
+  ⚠ 11 unpushed commit(s) ahead of origin/main:
+    b602fdb6 search_canon returns published canon: edition ingest plus the Saturday-swept articles (builder 2026-10-08) - since the edition ingest went frame-only, article prose lives under source saturday-sweep and was invisible to the tool (Rick Walker's quotes missing, two other Walkers returned). INTAKE register chunks in already-swept articles are dropped from results; compound AND/OR equality filters translate to the 5.x {operator, operands} form. agy search-all.sh moved to --namespace.
+    57256616 godworld MCP server on Supermemory CLI 5.x: --namespace replaces --tag, documents mode is chunks, single-condition filter becomes {field,operator,value}, updatedAt read from system. search_canon, search_world, search_build and the lookup tools had failed 'CLI exited 1' since the npx cache moved to 5.x on 2026-10-06; missing from the v5 migration inventory, now recorded there. Proven against live namespaces; 6/6 offline tests.
+    1a183cbd Saturday sweep posts article prose as canon content: the INTAKE register and self-score are stripped (readerCopy), the register stays in the document metadata (builder 2026-10-08: measured INTAKE chunks taking 1-2 of the top 10 in bay-tribune name searches). Existing swept articles untouched.
+    a4cb20df Sports feed dropdowns cover the whole grid; challenger mint writes canonical Active; engine.208 live seed applied
+    ce1c2fb8 INTAKE-POPID call resolved (builder 2026-10-08: names in what he reads or hears, IDs never contamination): the Rhea gate scans article prose only (scanPopidLeak), the daily brief and delivery strip INTAKE + self-score through one readerCopy, the Edition keeps INTAKE by design (ingestPublishedEntities parses it); cron-path review accepted to research with the builder's words
+    2ee9d241 engine.94 B.3: builder ruling - named challenger stays until a seating; offices for life until performance fails
+    f3be4a01 engine.94 B.3: builder correction - challenger named under 40, seat lost under 30; v3 F1 inverted
+    af13f5b9 engine.94 B.3: fold codex v2 HOLD as revised cut v3 (F1-F8); review accepted to docs/research with disposition
+    641ff58a Review inbox: four folded codex reviews carry their dispositions and are registered in the research index; plan citations repointed; B.3 v2 review handed to engine-sheet; stale unpushed/worktree notes trued
+    5d8ea05d ROLLOUT §1 walked with the builder: rulings recorded verbatim in each plan, rows moved
+    cd749448 engine.270 Review 1 (research-build with the builder): C109-C110 read, six findings D1-D6, scorer rewire kept open, builder's words quoted
   Model decision: push if all yours, hold if other terminals stacked.
 
 --- [5/5] pm2 restart ---
   ✓ godworld-dashboard restarted
 
 ========================================================================
-sessionEndMechanical: complete (terminal=research-build)
+sessionEndMechanical: complete (terminal=engine-sheet)
 ========================================================================

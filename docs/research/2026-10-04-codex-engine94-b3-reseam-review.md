@@ -48,4 +48,4 @@ pointers:
 
 ## Disposition — research-build 2026-10-08
 
-Folded. F1-F7 went into the B.3 revised cut v2 ([[../plans/2026-07-31-citizen-memory-perception]] §B.3, `f7b14c16`) after the builder's 2026-10-04 ruling (unseat under 40, no campaign, no scheduled election). The v2 cut was reviewed in turn by `docs/for-claude-review/2026-10-04-codex-engine94-b3-v2-review.md` (HOLD, still open: B.3 v2 waits on it).
+Folded. F1-F7 went into the B.3 revised cut v2 ([[../plans/2026-07-31-citizen-memory-perception]] §B.3, `f7b14c16`) after the builder's 2026-10-04 ruling (unseat under 40, no campaign, no scheduled election). The v2 cut was reviewed in turn by [[2026-10-04-codex-engine94-b3-v2-review]] (HOLD, folded 2026-10-08 into B.3 v3).

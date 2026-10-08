@@ -1,7 +1,7 @@
 ---
 title: engine.94 B.3 revised cut v2 adversarial review
 created: 2026-10-04
-updated: 2026-10-04
+updated: 2026-10-08
 type: reference
 tags: [engine, civic, draft]
 sources:
@@ -39,6 +39,11 @@ pointers:
 
 Keep the no-scheduled-election, under-40 same-Cycle direction. Before implementation or bench, amend v2 for findings 2-8 and update the campaign tests/occupancy in finding 1. Tests must exercise the real `updateCivicApprovalRatings_` writer and read the persisted hook shape. No code, plan, Sheet, or `SESSION_CONTEXT.md` was changed; this report is the only artifact.
 
+## Disposition — engine-sheet 2026-10-08
+
+Folded. F1-F8 went into the B.3 revised cut v3 ([[../plans/2026-07-31-citizen-memory-perception]] §B.3, "Revised cut v3"), each finding answered by name; the no-scheduled-election, unseat-under-40 direction is unchanged. Tests on the real `updateCivicApprovalRatings_` writer and the dry-run-proved bench are the v3 build's acceptance. Builder confirmed the fold 2026-10-08.
+
 ## Changelog
 
+- 2026-10-08 (engine-sheet) — Disposition added; moved from the review inbox to docs/research/.
 - 2026-10-04 (codex) — Filed source-only B.3 v2 adversarial review for engine-sheet.

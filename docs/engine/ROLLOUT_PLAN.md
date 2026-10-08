@@ -76,7 +76,7 @@
 | engine.283 | C111 (Sun 2026-10-11): every discharge writes Status `Active`, never lowercase, and clears HealthCause. Then done | live-observing | engine-sheet | [[../reference/DEPLOY_HISTORY]] §PROD f2a61e5e |
 | engine.209 | C111 (Sun 2026-10-11): first PREV_FRANCHISE_WEIGHT_JSON carry written; weight drifts on results from there | live-observing | engine-sheet | [[../plans/2026-09-11-sports-as-a-lived-system]] Tasks 9–10 |
 | engine.206 | C111 (Sun 2026-10-11) or the first live home week: one game-day-crowds seed per home week reaches the business and civic desks | live-observing | engine-sheet | [[../plans/2026-09-11-sports-as-a-lived-system]] Task 6 |
-| engine.94 | C115: re-read the B.2 bars on live. B.1 + B.2a LIVE; B.3 v2 held behind the codex review in the inbox | live-observing | engine-sheet / research-build | [[../plans/2026-07-31-citizen-memory-perception]] |
+| engine.94 | C115: re-read the B.2 bars on live. B.1 + B.2a LIVE; B.3 v3 (codex v2 review folded 2026-10-08) ready to build | live-observing | engine-sheet / research-build | [[../plans/2026-07-31-citizen-memory-perception]] |
 | engine.254 | C119: Phase10-CareJusticeCensus timing, point 2 of 2 (1,243 ms at C110); Task 9 review with it | live-observing | engine-sheet | [[../plans/2026-09-21-care-and-justice-system]] §Task 10 handoff |
 | engine.271 | C120: first property-tax day. Fines, court and tickets proven at C110 | live-observing | engine-sheet | [[../plans/2026-09-21-care-and-justice-system]] §engine.271 read-before and design |
 | engine.272 | ~C139: first citizen worn down far enough to reach the conduct-crime gate. Wear proven at C110 (35 of 35) | live-observing | engine-sheet | [[../plans/2026-09-21-care-and-justice-system]] §engine.272 cut |

@@ -56,7 +56,8 @@ function world(opts) {
     computeShortHash_: () => 'hash'
   };
   vm.createContext(box);
-  for (const rel of ['phase01-config/engine94SheetContract.js', 'phase01-config/godWorldEngine2.js', 'utilities/webTrigger.js']) {
+  box.ScriptApp = { newTrigger: () => { throw new Error('no triggers in this harness'); }, getProjectTriggers: () => [], deleteTrigger: () => {} };
+  for (const rel of ['phase01-config/engine94SheetContract.js', 'utilities/sheetCache.js', 'phase10-persistence/cycleCheckpoint.js', 'phase01-config/godWorldEngine2.js', 'utilities/webTrigger.js']) {
     vm.runInContext(fs.readFileSync(path.join(ROOT, rel), 'utf8'), box, { filename: rel });
   }
   box.openSimSpreadsheet_ = () => ss;

@@ -2,7 +2,7 @@
   "generated": "2026-10-08",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 180,
-  "functionsMapped": 1627,
+  "functionsMapped": 1646,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -867,7 +867,8 @@
         "phase03-population/generateCrisisBuckets.js::generateCrisisBuckets_",
         "phase06-analysis/applyCivicLoadIndicator.js::applyCivicLoadIndicator_",
         "phase06-analysis/applyCivicLoadIndicator.js::resetCycleAuditIssues_",
-        "phase08-v3-chicago/v3preLoader.js::v3PreloadContext_"
+        "phase08-v3-chicago/v3preLoader.js::v3PreloadContext_",
+        "phase10-persistence/cycleCheckpoint.js::resumeCore_"
       ]
     },
     "engineErrorCount": {
@@ -876,16 +877,19 @@
       ],
       "readers": [
         "phase01-config/godWorldEngine2.js::logEngineError_",
-        "phase01-config/godWorldEngine2.js::runWorldCycleLocked_"
+        "phase01-config/godWorldEngine2.js::runWorldCycleLocked_",
+        "phase10-persistence/cycleCheckpoint.js::resumeCore_"
       ]
     },
     "phaseTimings": {
       "writers": [
-        "phase01-config/godWorldEngine2.js::recordPhaseTiming_"
+        "phase01-config/godWorldEngine2.js::recordPhaseTiming_",
+        "phase10-persistence/cycleCheckpoint.js::resumeCore_"
       ],
       "readers": [
         "phase01-config/godWorldEngine2.js::emitPhaseTimings_",
-        "phase01-config/godWorldEngine2.js::recordPhaseTiming_"
+        "phase01-config/godWorldEngine2.js::recordPhaseTiming_",
+        "phase10-persistence/cycleCheckpoint.js::resumeCore_"
       ]
     },
     "transitStorySignals": {
@@ -4531,6 +4535,7 @@
         "phase01-config/engine94SheetContract.js::ensureEngine275Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine276Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine94SheetContract_",
+        "phase01-config/engine94SheetContract.js::ensureEngine95Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine96Config_",
         "phase01-config/godWorldEngine2.js::closeCycleFire_",
         "phase01-config/godWorldEngine2.js::readFireGuardConfig_",
@@ -5174,6 +5179,12 @@
         "phase10-persistence/buildCyclePacket.js::getCivicContextForPacket_",
         "utilities/cycleRollback.js::previewRollbackToCycle78",
         "utilities/cycleRollback.js::rollbackToCycle78"
+      ]
+    },
+    "_CycleCheckpoint": {
+      "writers": [],
+      "readers": [
+        "phase10-persistence/cycleCheckpoint.js::getCheckpointSheet_"
       ]
     },
     "Cycle_Weather": {

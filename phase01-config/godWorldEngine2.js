@@ -233,7 +233,7 @@ var FIRE_ADMISSION_PROP = 'FIRE_ADMISSION_JSON';
 var FIRE_OVERRIDE_PROP = 'FIRE_GUARD_OVERRIDE';
 var FIRE_GUARD_MAX_MINUTES = 1440;           // the contract's upper bound
 var FIRE_CLOCK_SLACK_MS = 5 * 60000;        // a record dated further ahead than this is not one we wrote
-var FIRE_STATES = { running: true, done: true, failed: true, unpersisted: true, unverified: true, aborted: true };
+var FIRE_STATES = { running: true, done: true, failed: true, unpersisted: true, unverified: true, aborted: true, checkpointed: true };   // engine.95: checkpointed = saved at the commit boundary, tail pending
 
 function fireGuardRefuse_(ss, cycleId, message) {
   var err = new Error(message);
@@ -274,9 +274,19 @@ function readFireGuardConfig_(ss) {
 }
 
 // Admit or refuse this fire. Returns the admission record; throws to refuse.
-function admitCycleFire_(ss, webOpts, nowMs) {
+function admitCycleFire_(ss, webOpts, nowMs, allOpts) {
   var cfg = readFireGuardConfig_(ss);
   var target = cfg.cycleCount + 1;   // the Cycle this fire would produce
+
+  // engine.95 — the checkpoint manifest is read BEFORE every other test: a held
+  // checkpoint turns this fire into the resume of that Cycle, never a new one.
+  var manifest = readCheckpointManifest_(ss);
+  if (manifest) {
+    var routed = routeCheckpointAtAdmission_(ss, manifest, cfg, webOpts, allOpts, nowMs);
+    if (routed) return routed;
+  } else if (allOpts && allOpts.resumeOnly) {
+    fireGuardRefuse_(ss, target, 'engine.95: nothing to resume — no checkpoint is held');
+  }
 
   if (webOpts) {
     if (typeof webOpts.expect !== 'number' || !isFinite(webOpts.expect)) {
@@ -297,7 +307,7 @@ function admitCycleFire_(ss, webOpts, nowMs) {
       typeof prior.cycle === 'number' && isFinite(prior.cycle) && prior.cycle >= 1 && Math.floor(prior.cycle) === prior.cycle &&
       wholeMs(prior.startedMs) && prior.startedMs <= nowMs + FIRE_CLOCK_SLACK_MS &&
       typeof prior.state === 'string' && FIRE_STATES[prior.state] === true &&
-      (prior.state === 'running' ? prior.finishedMs === undefined : (wholeMs(prior.finishedMs) && prior.finishedMs >= prior.startedMs));
+      ((prior.state === 'running' || prior.state === 'checkpointed') ? prior.finishedMs === undefined : (wholeMs(prior.finishedMs) && prior.finishedMs >= prior.startedMs));
     if (!shapeOk) {
       fireGuardRefuse_(ss, target, 'engine.275: the fire record (script property ' + FIRE_ADMISSION_PROP + ') is unreadable — refusing to fire. ' +
         'Inspect it; to fire deliberately, delete that property.');
@@ -375,6 +385,29 @@ function assertFireAdvanced_(ctx, fire, advanceOk) {
 function closeCycleFire_(fire, threw, ss, flushErr) {
   if (!fire || !fire.admission) return null;
   var cycle = fire.admission.cycle;
+  // engine.95 — a checkpointed fire closes as `checkpointed` (no finish: the tail is pending); a failed save or a
+  // resume that died closes as `failed` naming the checkpoint, whatever the counter reads.
+  if (fire.lifecycle === 'checkpointed') {
+    PropertiesService.getScriptProperties().setProperty(FIRE_ADMISSION_PROP, JSON.stringify({ cycle: cycle, startedMs: fire.admission.startedMs, state: 'checkpointed' }));
+    return { state: 'checkpointed', problem: null };
+  }
+  if (fire.lifecycle === 'resumed' && fire.commitProblem) {
+    // the resume's executor reported a failed write (commit-failed) or its flush did: the counter may read N-1 by design,
+    // so this is judged before the counter test — the manifest holds the state and the payload.
+    var rsProblem = 'engine.95: Cycle ' + cycle + ' resume stopped — ' + fire.commitProblem + '; the checkpoint tab holds the state (' +
+      ((fire.admission.manifest && fire.admission.manifest.state) || '?') + '), reconcile by hand before any fire';
+    PropertiesService.getScriptProperties().setProperty(FIRE_ADMISSION_PROP, JSON.stringify({ cycle: cycle, startedMs: fire.admission.startedMs, state: 'failed', finishedMs: Date.now() }));
+    try { logEngineError_({ ss: ss, summary: { cycleId: cycle } }, 'Phase11-FireGuardClose', new Error(rsProblem)); } catch (logErr) { /* best effort */ }
+    return { state: 'failed', problem: rsProblem };
+  }
+  if (fire.lifecycle === 'save-failed' || fire.lifecycle === 'checkpointing' || (fire.lifecycle === 'resuming' && threw)) {
+    var ckProblem = fire.lifecycle === 'resuming'
+      ? 'engine.95: Cycle ' + cycle + ' resume died (stage ' + ((fire.admission.manifest && fire.admission.manifest.stage) || '?') + ') — the checkpoint tab holds the state; reconcile by hand before any fire'
+      : 'engine.95: Cycle ' + cycle + ' stopped at the commit boundary — ' + (fire.commitProblem || 'the checkpoint did not complete') + '. The producers landed, the counter did not advance; clear the fire record and the checkpoint tab, then fire again';
+    PropertiesService.getScriptProperties().setProperty(FIRE_ADMISSION_PROP, JSON.stringify({ cycle: cycle, startedMs: fire.admission.startedMs, state: 'failed', finishedMs: Date.now() }));
+    try { logEngineError_({ ss: ss, summary: { cycleId: cycle } }, 'Phase11-FireGuardClose', new Error(ckProblem)); } catch (logErr) { /* best effort */ }
+    return { state: 'failed', problem: ckProblem };
+  }
   var advanced = !!(fire.ctx && fire.ctx.summary && Number(fire.ctx.summary.cycleId) === cycle);
   var state, problem = null;
   if (!advanced) {
@@ -411,14 +444,20 @@ function closeCycleFire_(fire, threw, ss, flushErr) {
 // opts is read only when the web trigger built it ({ web: true, expect: n }) — a menu
 // or trigger event object is ignored.
 function runWorldCycle(opts) {
+  var entryMs = Date.now();   // engine.95: the lock + open cost before admission is stamped counts against the wall too
   var lock = LockService.getScriptLock();
   if (!lock.tryLock(5000)) throw new Error('engine.275: a Cycle is already running — refusing an overlapping fire');
-  var fire = { admission: null, ctx: null };
+  var fire = { admission: null, ctx: null, entryMs: entryMs, lifecycle: null, checkpoint: null };
   var threw = false, ss = null, outcome = null, closeProblem = null;
   try {
     ss = openSimSpreadsheet_();  // v2.14: Use configured spreadsheet ID
-    fire.admission = admitCycleFire_(ss, (opts && opts.web === true) ? opts : null, Date.now());
-    runWorldCycleLocked_(ss, fire);
+    fire.admission = admitCycleFire_(ss, (opts && opts.web === true) ? opts : null, Date.now(), opts || {});
+    if (fire.admission.resume) {
+      fire.lifecycle = 'resuming';          // engine.95: a held checkpoint resumes under the lock this fire already holds
+      resumeCore_(ss, fire);
+    } else {
+      fire.checkpoint = runWorldCycleLocked_(ss, fire) || null;
+    }
   } catch (e) {
     threw = true;
     throw e;
@@ -434,6 +473,8 @@ function runWorldCycle(opts) {
   // done is reported to the caller instead of answering ok.
   if (outcome && outcome.problem) throw new Error(outcome.problem);
   if (closeProblem) throw new Error(closeProblem);
+  // engine.95: the caller (menu, web, trigger) learns whether this fire ran its tail, saved it, or resumed one
+  return { state: outcome ? outcome.state : null, lifecycle: fire.lifecycle, checkpoint: fire.checkpoint, cycle: fire.admission ? fire.admission.cycle : null };
 }
 
 function runWorldCycleLocked_(ss, fire) {
@@ -463,6 +504,7 @@ function runWorldCycleLocked_(ss, fire) {
     ensureEngine271Config_(ss);  // engine.271 fine rates and caps, property and business tax rates, tax day, thin-hood floor, same self-arm contract
     ensureEngine254Config_(ss);  // engine.254 Task 10 hospital talk-back window, band, gain, same self-arm contract
     ensureEngine214Config_(ss);  // engine.214 the hoods that anchor each dynamics cluster (string-valued), same self-arm contract
+    ensureEngine95Config_(ss);   // engine.95 wall budget, tail reserve, checkpoint save cost (seeded 0 = gate disarmed) + bench force/fault keys, same self-arm contract
   } catch (e) {
     Logger.log('FATAL: Cannot prepare spreadsheet: ' + e.message);
     throw e; // Cannot continue without spreadsheet
@@ -811,8 +853,17 @@ function runWorldCycleLocked_(ss, fire) {
   // Phase 42 §5.6: consolidated Simulation_Ledger commit (matches runCyclePhases_).
   safePhaseCall_(ctx, 'Phase10-PopIdHighWater', function() { persistPopIdHighWater_(ctx); }); // engine.90 — mint mark rides the World_Config flush
   safePhaseCall_(ctx, 'Phase10-CommitLedger', function() { commitSimulationLedger_(ctx); });
+
+  // engine.95 — the commit-boundary gate. Every producer has written; what remains is the executor, Phase 11,
+  // the flush and the close. If that tail will not fit the wall, the queued writes are saved to _CycleCheckpoint
+  // and a one-shot trigger finishes the tail in a fresh execution. Unwrapped by design: its own failure is the
+  // save-failed branch. A non-null outcome returns here; both finalizers honour fire.lifecycle.
+  var ckOutcome = checkpointGate_(ctx, fire);
+  if (ckOutcome) return ckOutcome;
+
   // Execute all queued write intents (V3 persistence model)
   safePhaseCall_(ctx, 'Phase10-ExecuteIntents', function() { executePersistIntents_(ctx); });
+  checkExecutorStats_(ctx, fire);   // engine.95 part 9: a required write that did not land is a failed Cycle, not a silent stat
 
   // v3.2 REMOVED: appendPopulationHistory_ had a cache-flush ordering bug —
   // it read row 2 before cache.flush(), capturing stale previous-cycle values.
@@ -835,27 +886,10 @@ function runWorldCycleLocked_(ss, fire) {
     logEngineError_(ctx, 'FATAL-CycleError', fatalError);
     throw fatalError; // Re-throw so Apps Script logs it
   } finally {
-    // v2.10: Flush cached writes to sheets
-    if (ctx && ctx.cache) {
-      try {
-        var flushStats = ctx.cache.flush();
-        Logger.log('Cache flush: ' + flushStats.writes + ' writes, ' + flushStats.appends + ' appends');
-        if (flushStats.errors && flushStats.errors.length > 0) {
-          // engine.136 — a PARTIAL flush is as silent as a failed one: these
-          // rows were queued all cycle and never landed. Logger-only before.
-          logEngineError_(ctx, 'Phase11-CacheFlushPartial', new Error(
-            flushStats.errors.length + ' queued write(s) did not land: ' + flushStats.errors.join(', ')));
-          if (fire) fire.commitProblem = flushStats.errors.length + ' queued write(s) did not land';  // engine.275: a known missing write is not a done
-        }
-      } catch (flushErr) {
-        // engine.136 — was Logger-only. Every queued write of the cycle is lost
-        // here, cycleCount included; that has to reach Engine_Errors.
-        logEngineError_(ctx, 'FATAL-CacheFlush', flushErr);
-        if (fire) fire.commitProblem = 'the cache flush threw: ' + flushErr.message;  // engine.275
-      }
-      // engine.136 — runs after either branch: a flush can also report success
-      // and still not have moved the cell (C110's transient took the response too).
-      verifyCycleCountPersisted_(ctx);
+    // v2.10: Flush cached writes to sheets. engine.95: a fire that checkpointed (or failed to) never flushes
+    // the world's queued writes or repairs the counter — the queue is in the checkpoint, or the Cycle stopped.
+    if (ctx && ctx.cache && !(fire && fire.lifecycle)) {
+      flushCacheAndVerify_(ctx, fire);
     }
 
     // Log cycle completion summary. G-RC6 (engine.19, S226): report
@@ -959,6 +993,54 @@ function advanceWorldTime_(ctx) {
  *
  * Never throws: a failure here must not become the thing that breaks close.
  */
+/**
+ * engine.95 — the end-of-cycle flush + counter verify, shared by the runner's finally and the resume.
+ * The partial-flush and thrown-flush branches are engine.136's; fire.commitProblem is engine.275's.
+ */
+function flushCacheAndVerify_(ctx, fire) {
+  try {
+    var flushStats = ctx.cache.flush();
+    Logger.log('Cache flush: ' + flushStats.writes + ' writes, ' + flushStats.appends + ' appends');
+    if (flushStats.errors && flushStats.errors.length > 0) {
+      // engine.136 — a PARTIAL flush is as silent as a failed one: these
+      // rows were queued all cycle and never landed. Logger-only before.
+      logEngineError_(ctx, 'Phase11-CacheFlushPartial', new Error(
+        flushStats.errors.length + ' queued write(s) did not land: ' + flushStats.errors.join(', ')));
+      if (fire) fire.commitProblem = flushStats.errors.length + ' queued write(s) did not land';  // engine.275: a known missing write is not a done
+    }
+  } catch (flushErr) {
+    // engine.136 — was Logger-only. Every queued write of the cycle is lost
+    // here, cycleCount included; that has to reach Engine_Errors.
+    logEngineError_(ctx, 'FATAL-CacheFlush', flushErr);
+    if (fire) fire.commitProblem = 'the cache flush threw: ' + flushErr.message;  // engine.275
+  }
+  // engine.136 — runs after either branch: a flush can also report success
+  // and still not have moved the cell (C110's transient took the response too).
+  verifyCycleCountPersisted_(ctx);
+}
+
+/**
+ * engine.95 part 9 — the executor collects failures into stats.errors and clears every queue regardless
+ * (persistenceExecutor.js); the runner used to discard the return. A missing stats object (the phase threw)
+ * or a non-empty errors list is a required write that did not land: fire.commitProblem, so the close reads
+ * `failed`, and one Engine_Errors row naming the sheets. The fire response carries the stats (out.persist).
+ */
+var ENGINE95_PERSIST_DIAG = null;
+function checkExecutorStats_(ctx, fire) {
+  var stats = ctx && ctx.persist ? ctx.persist.executionStats : null;
+  var problem = null;
+  if (!stats) problem = 'the intent executor reported no stats (it threw before finishing)';
+  else if (stats.errors && stats.errors.length > 0) {
+    problem = stats.errors.length + ' queued intent(s) did not land: ' + stats.errors.slice(0, 3).join('; ') + (stats.errors.length > 3 ? ' …' : '');
+  }
+  ENGINE95_PERSIST_DIAG = { executed: stats ? stats.executed : 0, errors: stats && stats.errors ? stats.errors.slice() : ['no stats'] };
+  if (problem) {
+    if (fire) fire.commitProblem = problem;
+    logEngineError_(ctx, 'Phase10-ExecuteIntents', new Error('engine.95: ' + problem));
+  }
+  return problem;
+}
+
 function verifyCycleCountPersisted_(ctx) {
   if (!ctx || !ctx.ss || !ctx.summary) return;
   if (ctx.mode && (ctx.mode.dryRun || ctx.mode.replay)) return;

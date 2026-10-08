@@ -35,14 +35,32 @@ function doGet(e) {
       out.error = 'CYCLE_TRIGGER_TOKEN script property not set';
     } else if (!e || !e.parameter || String(e.parameter.token || '') !== token) {
       out.error = 'bad token';
+    } else if (String(e.parameter.action || '') === 'checkpoint') {
+      // engine.95: read the checkpoint manifest (the final result of a split fire lives in it). No expect: it runs nothing.
+      out.ok = true;
+      out.checkpoint = readCheckpointManifest_(openSimSpreadsheet_());
     } else if (!/^\d+$/.test(String(e.parameter.expect === undefined ? '' : e.parameter.expect))) {
       out.error = 'engine.275: expect=<cycleCount> is required — read World_Config.cycleCount and send it';
     } else {
       var t0 = Date.now();
       // engine.275: the lock, the admission test and the close live in runWorldCycle.
-      runWorldCycle({ web: true, expect: Number(e.parameter.expect) });
+      var res = runWorldCycle({ web: true, expect: Number(e.parameter.expect) });
       out.ok = true;
       out.ranMs = Date.now() - t0;
+      // engine.95: a fire can run its tail (state done), save it (checkpointed) or resume a held one (lifecycle resumed)
+      if (res) {
+        out.state = res.state;
+        if (res.lifecycle) out.lifecycle = res.lifecycle;
+        if (res.checkpoint) {
+          out.checkpoint = res.checkpoint;
+          if (res.checkpoint.noTrigger) {
+            out.ok = false;
+            out.error = 'engine.95: Cycle ' + res.checkpoint.cycle + ' checkpointed (gen ' + res.checkpoint.gen + ') but no resume trigger was created (' +
+              (res.checkpoint.triggerError || 'unknown') + ') — fire again now to resume';
+          }
+        }
+      }
+      if (typeof ENGINE95_PERSIST_DIAG !== 'undefined' && ENGINE95_PERSIST_DIAG) out.persist = ENGINE95_PERSIST_DIAG;   // engine.95 part 9: executor stats, asserted empty on the bench before any push
       // engine.59 diag-emit: the fire response carries the bond engine's why
       if (typeof ENGINE59_DIAG !== 'undefined' && ENGINE59_DIAG) out.diag59 = ENGINE59_DIAG;
       // engine.61 diag-emit: the rate walk's why (persistence is invisible from outside)
@@ -57,6 +75,7 @@ function doGet(e) {
     }
   } catch (err) {
     out.error = String((err && err.message) || err);
+    if (typeof ENGINE95_PERSIST_DIAG !== 'undefined' && ENGINE95_PERSIST_DIAG) out.persist = ENGINE95_PERSIST_DIAG;   // engine.95: a failed Cycle still reports its executor stats
   }
   return ContentService.createTextOutput(JSON.stringify(out))
     .setMimeType(ContentService.MimeType.JSON);
@@ -89,6 +108,27 @@ function doPost(e) {
       out.error = 'CYCLE_TRIGGER_TOKEN script property not set';
     } else if (String(p.token || '') !== token) {
       out.error = 'bad token';
+    } else if (p.action === 'clearcheckpoint') {
+      // engine.95: the reconciliation door for a BENCH checkpoint tab. Under the fire lock; only where
+      // fireGuardMinutes is 0; the caller names the manifest's gen; a held payload or an unfinished resume
+      // (ready / resuming) is discarded only with force=1 — the hand confirms it has read the state.
+      var ccLock = LockService.getScriptLock();
+      if (!ccLock.tryLock(5000)) {
+        out.error = 'a Cycle is running — clearcheckpoint refused';
+      } else {
+        try {
+          var ccSs = openSimSpreadsheet_();
+          var ccCfg = readFireGuardConfig_(ccSs);
+          var ccMan = readCheckpointManifest_(ccSs);
+          if (ccCfg.guardMinutes !== 0) out.error = 'clearcheckpoint is a bench action: World_Config.fireGuardMinutes must be 0 (live carries 60)';
+          else if (!ccMan) { out.ok = true; out.cleared = null; out.triggersDeleted = deleteResumeTriggers_(null); }
+          else if (String(p.gen || '') !== String(ccMan.gen || '')) out.error = 'the checkpoint tab holds gen ' + ccMan.gen + ' (' + ccMan.state + ') — pass gen=' + ccMan.gen;
+          else if ((ccMan.state === 'ready' || ccMan.state === 'resuming') && String(p.force || '') !== '1') out.error = 'gen ' + ccMan.gen + ' is ' + ccMan.state + ' (a payload is held) — pass force=1 to discard it';
+          else { clearCheckpointTab_(ccSs); out.ok = true; out.cleared = ccMan.state; out.triggersDeleted = deleteResumeTriggers_(null); }
+        } finally {
+          ccLock.releaseLock();
+        }
+      }
     } else if (p.action === 'clearfire') {
       // engine.275: the reconciliation door for a BENCH whose sheet was resynced back behind
       // its fire record (the record then refuses every fire). Narrow on purpose: under the

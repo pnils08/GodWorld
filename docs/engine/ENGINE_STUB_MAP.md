@@ -116,6 +116,9 @@
 - **ensureEngine275Config_(ss)**
   Sheets: World_Config
 
+- **ensureEngine95Config_(ss)**
+  Sheets: World_Config
+
 - **ensureEngine272Config_(ss)**
   Sheets: World_Config
 
@@ -189,7 +192,7 @@
 - **readFireGuardConfig_(ss)**
   Sheets: World_Config
 
-- **admitCycleFire_(ss, webOpts, nowMs)**
+- **admitCycleFire_(ss, webOpts, nowMs, allOpts)**
 
 - **assertFireConfigLoaded_(ctx, fire)**
   Config: ctx.config.cycleCount
@@ -212,6 +215,10 @@
 - **advanceWorldTime_(ctx)**
   Writes: S.cycleId
   Config: ctx.config.cycleCount
+
+- **flushCacheAndVerify_(ctx, fire)**
+
+- **checkExecutorStats_(ctx, fire)**
 
 - **verifyCycleCountPersisted_(ctx)**
   Reads: S.cycleId
@@ -3461,6 +3468,42 @@
 
 - **validateCheckpointPayload_(payload, manifest)**
 
+- **getCheckpointSheet_(ss)**
+  Sheets: _CycleCheckpoint
+
+- **readCheckpointManifest_(ss)**
+
+- **writeCheckpointManifest_(ss, manifest)**
+
+- **clearCheckpointTab_(ss)**
+
+- **clearCheckpointChunks_(ss)**
+
+- **readCheckpointChunkRows_(ss, n)**
+
+- **collectCheckpointDiags_()**
+
+- **restoreCheckpointDiags_(d)**
+
+- **checkpointGateDecision_(cfg, elapsedMs)**
+
+- **checkpointGate_(ctx, fire)**
+
+- **saveCycleCheckpoint_(ctx, fire, o)**
+
+- **armResumeTrigger_()**
+
+- **deleteResumeTriggers_(onlyId)**
+
+- **routeCheckpointAtAdmission_(ss, manifest, cfg, webOpts, allOpts, nowMs)**
+
+- **resumeCore_(ss, fire)**
+  Reads: S.auditIssues, S.engineErrorCount, S.phaseTimings
+  Writes: S.phaseTimings
+  Config: ctx.config.checkpointResumeFaultAt
+
+- **resumeWorldCycle()**
+
 ### cycleExportAutomation.js
 - **exportCurrentCycleAll()**
 
@@ -4552,4 +4595,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1627
+**Functions mapped:** 1646

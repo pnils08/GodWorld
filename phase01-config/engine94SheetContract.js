@@ -325,6 +325,29 @@ function ensureEngine275Config_(ss) {
   return { configSeeded: plan.additions.length };
 }
 
+var ENGINE95_CONFIG_SEEDS = [
+  ['wallBudgetMs', 330000, 'engine.95 the Cycle budget in ms (Apps Script wall 360 s less the platform\'s own slack). The commit-boundary gate runs only when this, tailReserveMs and checkpointSaveMs are all nonzero', 0, 360000, true],
+  ['tailReserveMs', 60000, 'engine.95 ms reserved for the commit tail (executor + Phase 11 + flush + close); elapsed + this within wallBudgetMs = run the tail', 0, 360000, true],
+  ['checkpointSaveMs', 0, 'engine.95 measured ms of one complete checkpoint save (bench, x1.5). 0 = gate disarmed (seeded off; the builder sets it from the bench number)', 0, 360000, true],
+  ['checkpointForce', 0, 'engine.95 BENCH ONLY: 1 = take the checkpoint branch regardless of the arithmetic (also overrides arming), 2 = the late branch. 0 on live', 0, 2, true],
+  ['checkpointFaultAt', 0, 'engine.95 BENCH ONLY: throw/skip inside the save at 1 before-chunks, 2 mid-chunks, 3 after-ready, 4 at-record, 5 at-trigger (creation skipped). 0 on live', 0, 5, true],
+  ['checkpointResumeFaultAt', 0, 'engine.95 BENCH ONLY: throw inside the resume at 1 before the executor, 2 after it, 3 after Phase 11, 4 before the flush. 0 on live', 0, 4, true]
+];
+
+function ensureEngine95Config_(ss) {
+  if (!ss) throw new Error('engine.95 config: spreadsheet required');
+  var configSheet = ss.getSheetByName('World_Config');
+  if (!configSheet) throw new Error('engine.95 config: World_Config not found');
+  var plan = inspectEngine94Config_(configSheet.getDataRange().getValues(), ENGINE95_CONFIG_SEEDS);
+  if (plan.additions.length > 0) {
+    configSheet.getRange(configSheet.getLastRow() + 1, 1, plan.additions.length, 3).setValues(plan.additions);
+    var verified = inspectEngine94Config_(configSheet.getDataRange().getValues(), ENGINE95_CONFIG_SEEDS);
+    if (verified.additions.length > 0) throw new Error('engine.95 config: post-write verification failed');
+  }
+  Logger.log('engine.95 config ready: seeded ' + plan.additions.length + ' row(s)');
+  return { configSeeded: plan.additions.length };
+}
+
 var ENGINE272_CONFIG_SEEDS = [
   ['integrityWearRate', 0, 'engine.272 integrity points a standing hardship (debt, rent, hood, no work) wears off a citizen\'s base each Cycle it holds, regained at the same rate when it lifts. 0 = off (seeded off; the builder sets it)', 0, 10, false],
   ['integrityWearFloor', 10, 'engine.272 the lowest integrity that wear alone can take a citizen (an event may still go lower). Under 20 a worn citizen becomes crime-reachable; 20-39 reads slippery; 40+ changes nothing visible', 0, 100, false]

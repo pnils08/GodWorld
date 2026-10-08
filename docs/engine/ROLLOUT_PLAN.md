@@ -25,8 +25,6 @@
 - [[../plans/2026-08-29-employment-system-cascade]]: civic.33 live-observing
 - [[../plans/2026-09-29-sim-holiday-calendar]]: engine.273 ready
 - [[../plans/2026-08-21-citizen-archive]]: engine.90 ready
-- [[../plans/2026-09-28-storylines-keyed-to-engine-events]]: engine.270 in-progress
-- [[../plans/2026-05-22-engine-regulatory-friction]]: engine.20d blocked
 - [[../plans/2026-10-03-citizen-pages-drive-canon]]: pipeline.70 live-observing
 - [[../plans/2026-07-11-agent-exchange-engine]]: engine.53 live-observing
 - [[../plans/2026-08-07-spacemolt-game-show]]: research.27 live-observing
@@ -47,6 +45,8 @@
 - [[../plans/2026-05-26-engine-27-wd-card-auto-invalidation]]: engine.27 ready
 - [[../plans/2026-07-31-engine-observability-integrity]]: infrastructure.6 ready
 - [[../plans/2026-07-31-platform-ceiling-resilience]]: engine.95 ready
+- [[../plans/2026-09-28-storylines-keyed-to-engine-events]]: engine.270 ready
+- [[../plans/2026-05-22-engine-regulatory-friction]]: engine.20d ready
 - [[../plans/2026-08-10-economy-native-rebuild]]: engine.104 ready
 - [[../research/2026-09-10-kimi-faith-lane-routing]]: engine.248 ready
 - [[../plans/2026-09-19-civic-wake-game-loop]]: engine.253 ready
@@ -97,8 +97,6 @@
 | engine.273 | Holidays LIVE; first Second Dawn C131. Ruled 2026-10-07: add Open Court Week (position 6); meaning sentences for Creation Day + Second Dawn (es drafts, builder approves; rb carries to desks); running-on-its-own week held until it happens | ready | engine-sheet / research-build | [[../plans/2026-09-29-sim-holiday-calendar]] §Builder's words (2026-10-07) |
 | engine.193 | Adversity tiers LIVE. Ruled 2026-10-07: (b) institution growth cools to sector norm, then (a) budget squeeze on public employers; then a CAT-layer design for the builder before build | ready | engine-sheet | [[../plans/2026-09-10-inactivity-is-regression]] §engine.193 Builder's words (2026-10-07) |
 | engine.90 | Citizen Archive LIVE: the flag was flipped by C106 (56 exits archived through C109). Left: verify the archived citizens' cards, run the --from-archive card build if missing | ready | engine-sheet | [[../plans/2026-08-21-citizen-archive]] §Changelog 2026-10-07 |
-| engine.270 | OVERDUE: the storyline review due the week of 2026-10-05. Rewire the seed scorer to the registry if the reporter needs it, else remove the dead path. Decides engine.20d | in-progress | engine-sheet | [[../plans/2026-09-28-storylines-keyed-to-engine-events]] §Observation and review |
-| engine.20d | Initiative coverage cadence: movement-only seeding in buildWorldSummary's civic lane, decided at the engine.270 review (due the week of 2026-10-05) | blocked | research-build | [[../plans/2026-05-22-engine-regulatory-friction]] §Task 5 |
 | pipeline.70 | Read the staged C110 pieces for the story test, then flip; watch the first unattended Opus business run | live-observing | research-build | [[../plans/2026-10-03-citizen-pages-drive-canon]] |
 | engine.53 | Readback owed: the Mon 2026-10-05 fanout shows no exchange-line match in output/cron-compare. Find it or name why it is missing | live-observing | research-build | [[../plans/2026-07-11-agent-exchange-engine]] |
 | research.27 | Readback owed: the Sat 2026-10-03 UNDOCKED write staged; the Citizen_Media_Usage credit is unproven | live-observing | research-build | [[../plans/2026-08-07-spacemolt-game-show]] §Post-ship (e) |
@@ -133,6 +131,8 @@
 | engine.264 | The maker's hand — builder intake tab the sim never sees; after engine.94 (builder 2026-09-29) | ready | research-build | [[../plans/2026-09-26-future-build-ideas]] §Builder rulings |
 | engine.203d | Slow fade after a season ends, unbuilt. Ruled 2026-10-07: a won title fades slowly with no dip; a season ending in a loss is upset first, then the slow fade | ready | engine-sheet | [[../plans/2026-09-11-sports-as-a-lived-system]] Task 2 |
 | engine.194 | Record-driven sentiment and game-night intensity: codex authors Task 7 now that Tasks 1–4 are live | ready | engine-sheet | [[../plans/2026-09-11-sports-as-a-lived-system]] Task 7 |
+| engine.270 | Review 1 ruled 2026-10-08: build the anomaly tag (D1), no age on first-seen stages (D2), Task 7 step 1 attach pass. Queued, not dispatched (es on other work). Step 2 and the scorer rewire wait the C113 read | ready | engine-sheet | [[../plans/2026-09-28-storylines-keyed-to-engine-events]] §Review 1 Disposition |
+| engine.20d | Initiative seeds on movement only in buildWorldSummary's civic lane. Released from the engine.270 wait 2026-10-08; spec only, no code yet. Not dispatched | ready | engine-sheet | [[../plans/2026-05-22-engine-regulatory-friction]] §Task 5 |
 | engine.280 | Fandom dial follow-up (read-before §2.9) | ready | engine-sheet | [[../research/2026-10-02-engine-208-fandom-dial-read-before]] §2.9 |
 | engine.104 | Mint economy: arrivals born with role-consistent salary, education, career stage; plan revision first, codex vets | ready | research-build | [[../plans/2026-08-10-economy-native-rebuild]] |
 | engine.257 | Household stress from real outflows: build spending (makes vs spends) | ready | engine-sheet | [[../plans/2026-09-22-initiative-budget-disbursement]] §Data reality, call 8 |

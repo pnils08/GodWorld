@@ -109,6 +109,8 @@ function printBanner(args, steps) {
 
 function subRolloutLint(args) {
   try {
+    // The plans-in-motion block is regenerated first so the file the builder reads never drifts.
+    execSync('node scripts/docLoopStatus.js --plans --write', { cwd: ROOT, stdio: 'pipe' });
     const out = execSync('node scripts/docLoopStatus.js --lint', { cwd: ROOT, stdio: 'pipe' });
     out.toString().trim().split('\n').forEach(line => console.log('  ' + line));
     return { ok: true };

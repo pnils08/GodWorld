@@ -2,7 +2,56 @@
 
 **Current work and waits only.** A row is here because someone is working it now, because it waits on a dated fire or a named builder call, or because it is ruled and next in the queue. Closed work → [[ROLLOUT_ARCHIVE]]. Parked work and external watches → [[../plans/BACKLOG]] §Parked ideas and external watches. Row contract, states and the sweep → [[rollout-rules]]. Sim lens before touching a mechanic → [[SIM_DOCTRINE]] §15. Last trued 2026-10-07 (engine-sheet, against the C110 smoke, PROD `f2a61e5e` and codex's row chase [[../research/2026-10-07-codex-rollout-chase]]).
 
-**Reading this file:** section 1 is the builder's list. Sections 2–4 are the lanes'. By plan instead: `node scripts/docLoopStatus.js --plans`. Waits whose date has passed: `--lint` (runs at every session close). One line per job; the detail is in the plan the row names. Live Cycle C110; next live fire C111, Sunday 2026-10-11.
+**Reading this file:** section 1 is the builder's list. Sections 2–4 are the lanes'. The plan list below is regenerated at every session close; any wait whose date has passed is named at close too. One line per job; the detail is in the plan the row names. Live Cycle C110; next live fire C111, Sunday 2026-10-11.
+
+<!-- generated: plans in motion (docLoopStatus.js --plans --write; do not hand-edit) -->
+**Plans in motion (44)** — each plan, its rows and the state each is in:
+
+- [[../plans/2026-09-11-sports-as-a-lived-system]]: engine.205 needs-info, engine.203d needs-info, engine.209 live-observing, engine.206 live-observing, engine.202 in-progress, engine.194 ready
+- [[../plans/2026-09-26-future-build-ideas]]: engine.238 live-observing, engine.98 ready, engine.264 ready, engine.261 ready
+- [[../plans/2026-09-10-inactivity-is-regression]]: engine.193 needs-info, engine.201 live-observing, engine.197 in-progress
+- [[../reference/DEPLOY_HISTORY]]: engine.282 live-observing, engine.283 live-observing, engine.213 in-progress
+- [[../plans/2026-09-21-care-and-justice-system]]: engine.254 live-observing, engine.271 live-observing, engine.272 live-observing
+- [[../research/2026-10-03-engine-204-205-game-day-economy-read-before]]: engine.204 needs-info, engine.281 needs-info
+- [[../research/2026-10-02-engine-208-fandom-dial-read-before]]: engine.208 needs-info, engine.280 ready
+- [[../plans/2026-09-13-run-cycle-packages-the-world]]: engine.214 needs-info, pipeline.69 in-progress
+- [[../plans/2026-09-22-initiative-budget-disbursement]]: engine.257 ready, engine.256 ready
+- [[../plans/2026-09-29-sim-holiday-calendar]]: engine.273 needs-info
+- [[../plans/2026-08-21-citizen-archive]]: engine.90 needs-info
+- [[../plans/2026-07-31-platform-ceiling-resilience]]: engine.95 needs-info
+- [[../plans/2026-10-04-school-board]]: civic.43 needs-info
+- [[../plans/2026-07-10-notebooklm-bridge-deploy]]: pipeline.51 needs-info
+- [[../plans/2026-07-31-citizen-memory-perception]]: engine.94 live-observing
+- [[../plans/2026-10-06-supermemory-v5-migration]]: infrastructure.10 blocked
+- [[../plans/2026-05-07-chaos-cars-engine]]: engine.11 live-observing
+- [[../plans/2026-08-16-new-life-intake]]: engine.108 live-observing
+- [[../plans/2026-09-24-initiatives-in-the-world]]: engine.260 live-observing
+- [[../plans/2026-08-29-employment-system-cascade]]: civic.33 live-observing
+- [[../plans/2026-09-28-storylines-keyed-to-engine-events]]: engine.270 in-progress
+- [[../plans/2026-05-22-engine-regulatory-friction]]: engine.20d blocked
+- [[../plans/2026-10-03-citizen-pages-drive-canon]]: pipeline.70 live-observing
+- [[../plans/2026-07-11-agent-exchange-engine]]: engine.53 live-observing
+- [[../plans/2026-08-07-spacemolt-game-show]]: research.27 live-observing
+- [[../plans/2026-07-06-citizen-loop-deepening]]: engine.48 live-observing
+- [[../plans/2026-08-07-anthony-hal-solo-sports-seats]]: pipeline.48 live-observing
+- [[../plans/2026-08-07-civic-solo-seats]]: pipeline.49 live-observing
+- [[../plans/2026-09-07-beat-slices-from-sheets-plan]]: pipeline.68 ready
+- [[../plans/2026-08-09-citizen-day-digest]]: pipeline.53 ready
+- [[../plans/2026-08-29-boot-doc-consolidation]]: governance.51 in-progress
+- [[../plans/2026-08-16-city-hall-nine-seat-table]]: civic.24 ready
+- [[../canon/INSTITUTIONS]]: canon.5 ready
+- [[../engine/archive/LEDGER_REPAIR_HOUSEHOLDS]]: engine.5 in-progress
+- [[../plans/2026-06-24-engine-output-canon-coverage]]: engine.41 ready
+- [[../plans/2026-07-07-citizen-intake-unification]]: engine.51 ready
+- [[../plans/2026-07-31-canon-ingest-backfill]]: engine.91 in-progress
+- [[../plans/2026-08-02-neighborhood-truth-source-migration]]: engine.99 in-progress
+- [[../plans/2026-08-17-sheet-weight-reduction]]: engine.116 in-progress
+- [[../plans/2026-05-26-engine-27-wd-card-auto-invalidation]]: engine.27 ready
+- [[../plans/2026-07-31-engine-observability-integrity]]: infrastructure.6 ready
+- [[../plans/2026-08-10-economy-native-rebuild]]: engine.104 ready
+- [[../research/2026-09-10-kimi-faith-lane-routing]]: engine.248 ready
+- [[../plans/2026-09-19-civic-wake-game-loop]]: engine.253 ready
+<!-- /generated -->
 
 ## Pull order (builder, 2026-09-29; trued 2026-10-07)
 

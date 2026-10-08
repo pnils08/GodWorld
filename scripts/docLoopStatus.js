@@ -21,6 +21,7 @@
 //   node scripts/docLoopStatus.js --json     # machine-readable, all three
 //   node scripts/docLoopStatus.js --lint     # flag rows that break the archive sweep, + overdue waits (exit 0)
 //   node scripts/docLoopStatus.js --plans    # the rollout read by plan: each plan in motion, its rows and states
+//   node scripts/docLoopStatus.js --plans --write  # same, written into ROLLOUT_PLAN.md's generated block
 //   node scripts/docLoopStatus.js --gate     # same, but exit 1 on problems (pre-commit gate)
 //
 // Exits 0 in every mode EXCEPT --gate (S335) — it's a surfacing report by default.
@@ -154,7 +155,8 @@ function currentCycle() {
 
 function overdueRows() {
   const cycle = currentCycle();
-  const today = new Date().toISOString().slice(0, 10);
+  // Chicago date — every deploy and fire record in this project is Chicago time.
+  const today = new Date().toLocaleDateString('en-CA', { timeZone: 'America/Chicago' });
   const out = [];
   fs.readFileSync(ROLLOUT, 'utf8').split('\n').forEach((line, i) => {
     const idMatch = line.match(ROW_ID);
@@ -234,7 +236,7 @@ function printSection(report, which) {
 // --plans: the rollout read by plan, generated from the rows so it cannot drift.
 // One line per plan in motion: its rows and the state each is in. Rows whose
 // pointer names no [[plan]] group under their pointer text.
-function runPlans() {
+function runPlans(write) {
   const byPlan = new Map();
   fs.readFileSync(ROLLOUT, 'utf8').split('\n').forEach(line => {
     const idMatch = line.match(ROW_ID);
@@ -249,15 +251,29 @@ function runPlans() {
     byPlan.get(plan).push(`${idMatch[1]} ${cells[sIdx]}`);
   });
   const plans = [...byPlan.entries()].sort((a, b) => b[1].length - a[1].length);
-  console.log(`## Plans in motion (${plans.length}) — generated from ROLLOUT rows`);
-  plans.forEach(([plan, rows]) => console.log(`- ${plan}: ${rows.join(', ')}`));
+  const body = plans.map(([plan, rows]) => `- [[${plan.startsWith('[') || plan.startsWith('`') ? plan : '../' + plan}]]: ${rows.join(', ')}`.replace('[[`', '`').replace('`]]', '`'));
+  if (!write) {
+    console.log(`## Plans in motion (${plans.length}) — generated from ROLLOUT rows`);
+    body.forEach(l => console.log(l));
+    return;
+  }
+  // --write: replace the generated block in ROLLOUT_PLAN.md (session close runs this).
+  const OPEN = '<!-- generated: plans in motion (docLoopStatus.js --plans --write; do not hand-edit) -->';
+  const CLOSE = '<!-- /generated -->';
+  const text = fs.readFileSync(ROLLOUT, 'utf8');
+  const i = text.indexOf(OPEN), j = text.indexOf(CLOSE);
+  if (i === -1 || j === -1 || j < i) { console.log('PLANS: no generated block in ROLLOUT_PLAN.md — nothing written'); return; }
+  const block = `${OPEN}\n**Plans in motion (${plans.length})** — each plan, its rows and the state each is in:\n\n${body.join('\n')}\n${CLOSE}`;
+  const next = text.slice(0, i) + block + text.slice(j + CLOSE.length);
+  if (next !== text) fs.writeFileSync(ROLLOUT, next);
+  console.log(`PLANS: ${plans.length} plans written to ROLLOUT_PLAN.md${next === text ? ' (unchanged)' : ''}`);
 }
 
 function main() {
   const args = process.argv.slice(2);
   if (args.includes('--gate')) { runLint(true); return; }
   if (args.includes('--lint')) { runLint(false); return; }
-  if (args.includes('--plans')) { runPlans(); return; }
+  if (args.includes('--plans')) { runPlans(args.includes('--write')); return; }
   const report = buildReport();
   if (args.includes('--json')) {
     console.log(JSON.stringify(report, null, 2));

@@ -14,10 +14,10 @@
 - [[../plans/2026-09-10-inactivity-is-regression]]: engine.193 ready, engine.201 live-observing, engine.197 in-progress
 - [[../plans/2026-09-13-run-cycle-packages-the-world]]: engine.214 needs-info, pipeline.69 in-progress
 - [[../research/2026-10-02-engine-208-fandom-dial-read-before]]: engine.208 live-observing, engine.280 ready
+- [[../plans/2026-07-31-citizen-memory-perception]]: engine.94 live-observing, engine.284 ready
 - [[../research/2026-10-03-engine-204-205-game-day-economy-read-before]]: engine.204 in-progress, engine.281 in-progress
 - [[../plans/2026-09-22-initiative-budget-disbursement]]: engine.257 ready, engine.256 ready
 - [[../plans/2026-10-04-school-board]]: civic.43 needs-info
-- [[../plans/2026-07-31-citizen-memory-perception]]: engine.94 live-observing
 - [[../plans/2026-10-06-supermemory-v5-migration]]: infrastructure.10 blocked
 - [[../plans/2026-05-07-chaos-cars-engine]]: engine.11 live-observing
 - [[../plans/2026-08-16-new-life-intake]]: engine.108 live-observing
@@ -76,7 +76,7 @@
 | engine.208 | C111 (Sun 2026-10-11): first fire on the seeded fandom dial (live seed applied 2026-10-08, 141 fans, read back 1,025/1,025). Read the fan week lines and the band spread | live-observing | engine-sheet | [[../research/2026-10-02-engine-208-fandom-dial-read-before]] §Changelog 2026-10-08 |
 | engine.209 | C111 (Sun 2026-10-11): first PREV_FRANCHISE_WEIGHT_JSON carry written; weight drifts on results from there | live-observing | engine-sheet | [[../plans/2026-09-11-sports-as-a-lived-system]] Tasks 9–10 |
 | engine.206 | C111 (Sun 2026-10-11) or the first live home week: one game-day-crowds seed per home week reaches the business and civic desks | live-observing | engine-sheet | [[../plans/2026-09-11-sports-as-a-lived-system]] Task 6 |
-| engine.94 | B.3 v3 LIVE (PROD `e87362b4` 2026-10-08; bench 1004 @4 C112 fixture-proven: seat lost under 30 to the named challenger, grudge bond, ledger turnover; calendar election deleted, 131 phases). C111 Sun 2026-10-11: 131 phases, bond load certifies, nothing names at 61–69. C115: re-read the B.2 bars on live. Open sim call (builder 2026-10-08): how citizens/media liking the challenger feeds the holder's approval down — not designed | live-observing | engine-sheet / research-build | [[../plans/2026-07-31-citizen-memory-perception]] §B.3 Built 2026-10-08 |
+| engine.94 | B.3 v3 LIVE (PROD `e87362b4` 2026-10-08, bench-proven). C111 Sun 2026-10-11 read, C115 B.2 bars; open sim call on challenger appeal → holder approval awaits the builder | live-observing | engine-sheet / research-build | [[../plans/2026-07-31-citizen-memory-perception]] §Status log engine.94 B.3 v3 live reads |
 | engine.254 | C119: Phase10-CareJusticeCensus timing, point 2 of 2 (1,243 ms at C110); Task 9 review with it | live-observing | engine-sheet | [[../plans/2026-09-21-care-and-justice-system]] §Task 10 handoff |
 | engine.271 | C120: first property-tax day. Fines, court and tickets proven at C110 | live-observing | engine-sheet | [[../plans/2026-09-21-care-and-justice-system]] §engine.271 read-before and design |
 | engine.272 | ~C139: first citizen worn down far enough to reach the conduct-crime gate. Wear proven at C110 (35 of 35) | live-observing | engine-sheet | [[../plans/2026-09-21-care-and-justice-system]] §engine.272 cut |
@@ -132,7 +132,7 @@
 | engine.203d | Slow fade after a season ends, unbuilt. Ruled 2026-10-07: a won title fades slowly with no dip; a season ending in a loss is upset first, then the slow fade | ready | engine-sheet | [[../plans/2026-09-11-sports-as-a-lived-system]] Task 2 |
 | engine.194 | Record-driven sentiment and game-night intensity: codex authors Task 7 now that Tasks 1–4 are live | ready | engine-sheet | [[../plans/2026-09-11-sports-as-a-lived-system]] Task 7 |
 | engine.270 | Review 1 ruled 2026-10-08: build the anomaly tag (D1), no age on first-seen stages (D2), Task 7 step 1 attach pass. Queued, not dispatched (es on other work). Step 2 and the scorer rewire wait the C113 read | ready | engine-sheet | [[../plans/2026-09-28-storylines-keyed-to-engine-events]] §Review 1 Disposition |
-| engine.284 | `runCivicRoleEngine_` gates on `CIV (y/n) === 'y'` exactly (`runCivicRoleEngine.js:239-240`); the ledger spells it `yes`/`no` (live 882 no / 58 yes / 0 y), so the civic role engine runs for nobody — a dead gate (SIM_DOCTRINE §15). Found on the B.3 v3 dry-run 2026-10-08. The fix is a prefix match, but it wakes an engine that has never run live for 58 CIV citizens: bench first, read what it generates, builder reads the texture before PROD | ready | engine-sheet | [[../plans/2026-07-31-citizen-memory-perception]] §B.3 Built 2026-10-08 |
+| engine.284 | `runCivicRoleEngine_` gates on CIV `y`; the ledger spells `yes` — a dead gate for 58 CIV citizens. Prefix-match fix wakes a never-run engine: bench, then builder reads the texture | ready | engine-sheet | [[../plans/2026-07-31-citizen-memory-perception]] §Status log engine.284 |
 | engine.20d | Initiative seeds on movement only in buildWorldSummary's civic lane. Released from the engine.270 wait 2026-10-08; spec only, no code yet. Not dispatched | ready | engine-sheet | [[../plans/2026-05-22-engine-regulatory-friction]] §Task 5 |
 | engine.280 | Fandom dial follow-up (read-before §2.9) | ready | engine-sheet | [[../research/2026-10-02-engine-208-fandom-dial-read-before]] §2.9 |
 | engine.104 | Mint economy: arrivals born with role-consistent salary, education, career stage; plan revision first, codex vets | ready | research-build | [[../plans/2026-08-10-economy-native-rebuild]] |

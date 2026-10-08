@@ -180,8 +180,17 @@ Per [[../adr/0015-world-config-tunable-values]], these are required key→value 
 
 Citizen memory and approval ceiling — Track A code-only self-arm plus grief and approval mechanics sandbox-proven through C116. Track B **ambition RULED S416 by engine.157** — the ambition axis is the existing `drive` dial (+ `openness`), typed ambition is the goal read off the chain rung, no ninth dial; grudge + folk-memory design still gated on research.17 and a Mike design session
 
+### engine.94 — B.3 v3 live reads (drained from ROLLOUT, 2026-10-08 / S539)
+
+PROD `e87362b4` 2026-10-08; bench 1004 @4 C112 fixture-proven (seat lost under 30 to the named challenger, grudge bond, ledger turnover; calendar election deleted, 131 phases). C111 Sun 2026-10-11: 131 phases, bond load certifies, nothing names at 61–69 (expectations in [[../reference/DEPLOY_HISTORY]] §PROD e87362b4). C115: re-read the B.2 bars on live. **Open sim call (builder 2026-10-08):** how citizens and media liking the challenger feeds the holder's approval down — not designed; the row stays live-observing until the builder reads it.
+
+### engine.284 — the civic role engine runs for nobody (found 2026-10-08 on the B.3 v3 dry-run)
+
+`runCivicRoleEngine_` gates on `CIV (y/n) === 'y'` exactly (`runCivicRoleEngine.js:239-240`); the ledger spells it `yes`/`no` (live 882 no / 58 yes / 0 y), so the gate never opens — a dead gate (SIM_DOCTRINE §15). The fix is a prefix match, but it wakes an engine that has never run live for 58 CIV citizens: bench first, read what it generates, builder reads the texture before PROD.
+
 ## Changelog
 
+- 2026-10-08 (engine-sheet, S539) — ROLLOUT engine.94 and engine.284 rows drained here (lint: item cells over budget); rows now one line + pointer.
 - 2026-10-08 (engine-sheet, S538) — B.3 v3 LIVE: codex HOLD ([[../research/2026-10-08-codex-engine94-b3-v3-diff-review]]) folded (a note names a successor, it does not certify one — `validateCampaign_`; own named challenger first on the fill path; one trimmed header map for the bond certificate; promotions honour the civic reservation; the history writer holds too); F7 bench on 1004 @4 C112 (Shai Diaz seated over Rose Delgado at 22, bond `v5u2omk8`, ledger turned over, HookText carries the id); PROD `e87362b4`, 166/166. CIV spelled yes/no like the ledger (b55c8e05). engine.284 filed: `runCivicRoleEngine_` gates on `'y'` and so runs for nobody.
 - 2026-10-08 (engine-sheet, S538) — B.3 v3 core built: 40 names / 30 loses (flat, the v1.4 clauses retired — reading recorded in §B.3 "Built 2026-10-08"), can't-serve + vacant fill paths, ledger turnover, demotion grudge behind the F5 load flag, pool consumed per fire; 146/146 + full suite 284/284. Election deletion follows in its own commit.
 - 2026-10-08 (engine-sheet, S536) — Builder: a named challenger never stands down; offices held for life until performance fails; no elections until the offices run autonomously (verbatim in §B.3). B.3 v3 has no open builder call.

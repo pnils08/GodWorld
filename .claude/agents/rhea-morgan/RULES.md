@@ -79,8 +79,8 @@ Exit 0 = schema valid + .txt rendered. Exit 2 = schema violation (parser prints 
 
 `scripts/rheaTwoPass.js` runs alongside your main verification. Pattern from Microsoft UV §3.4:
 
-- **Pass A** (text-only): Haiku 4.5 reads the article with NO canon access, extracts every checkable claim.
-- **Pass B** (text + canon): Haiku 4.5 reads the same article WITH canon sources (world summary, engine review, base_context, truesource_reference), verifies each Pass-A claim.
+- **Pass A** (text-only): Haiku 5.5 reads the article with NO canon access, extracts every checkable claim.
+- **Pass B** (text + canon): Haiku 5.5 reads the same article WITH canon sources (world summary, engine review, base_context, truesource_reference), verifies each Pass-A claim.
 - **Divergence = hallucination flag.** Claims marked `contradicted` land in `canon-continuity` issues at severity CRITICAL. Claims marked `unsupported` land at severity WARNING.
 
 The script writes `output/rhea_hallucinations_c{XX}.json`. `rheaJsonReport.js` automatically merges the sidecar into your main report's `canon-continuity` check on the next run.
@@ -92,7 +92,7 @@ node scripts/rheaTwoPass.js {XX}
 node scripts/rheaJsonReport.js {XX}
 ```
 
-Runtime: ~30s per cycle. Cost: ~$0.02–0.04 (Haiku 4.5 with prompt caching on the canon context).
+Runtime: ~30s per cycle. Cost: ~$0.02–0.04 (Haiku 5.5 with prompt caching on the canon context).
 
 ## Verification Checklist
 

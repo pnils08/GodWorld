@@ -19,7 +19,7 @@
  * hallucinationFlags[] into Rhea's main rhea_report_c{XX}.json when both
  * have run for the cycle (see mergeIntoRheaReport() export).
  *
- * Cost estimate per PHASE_39_PLAN §14.2: ~$0.02–0.04/cycle (Haiku 4.5,
+ * Cost estimate per PHASE_39_PLAN §14.2: ~$0.02–0.04/cycle (Haiku 5.5,
  * ~9 articles × 2 passes, with prompt caching on the canon-context block).
  *
  * Usage:
@@ -46,8 +46,8 @@ const EDITIONS_DIR = path.join(__dirname, '..', 'editions');
 // key if OpenRouter is ever down.
 const PROVIDER = process.env.RHEA_PROVIDER || 'openrouter';
 const MODEL = PROVIDER === 'anthropic'
-  ? 'claude-haiku-4-5-20251001'
-  : 'anthropic/claude-haiku-4.5';
+  ? 'claude-haiku-5-5'
+  : 'anthropic/claude-haiku-5.5';
 const MAX_TOKENS = 1024;
 
 // Age convention: every citizen and player age is the sim's calendar year − BirthYear
@@ -363,6 +363,8 @@ async function callHaiku(client, system, messages, useCache) {
       ? [{ type: 'text', text: system, cache_control: { type: 'ephemeral' } }]
       : system,
     messages,
+    // Haiku 5.5 thinks by default; the 1024-token cap is for the JSON answer alone.
+    thinking: { type: 'disabled' },
   };
   const resp = await client.messages.create(params);
   recordCost(resp.usage);

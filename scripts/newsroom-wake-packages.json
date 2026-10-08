@@ -91,7 +91,7 @@
       },
       "write": {
         "provider": "openrouter",
-        "model": "anthropic/claude-haiku-4.5"
+        "model": "anthropic/claude-haiku-5.5"
       }
     },
     "reviewProfile": {
@@ -330,7 +330,7 @@
       },
       "write": {
         "provider": "openrouter",
-        "model": "anthropic/claude-haiku-4.5"
+        "model": "anthropic/claude-haiku-5.5"
       }
     },
     "reviewProfile": {
@@ -665,7 +665,7 @@
       },
       "write": {
         "provider": "openrouter",
-        "model": "anthropic/claude-haiku-4.5"
+        "model": "anthropic/claude-haiku-5.5"
       }
     },
     "reviewProfile": {
@@ -885,7 +885,7 @@
       },
       "write": {
         "provider": "openrouter",
-        "model": "anthropic/claude-haiku-4.5"
+        "model": "anthropic/claude-haiku-5.5"
       }
     },
     "reviewProfile": {
@@ -1002,7 +1002,7 @@
       },
       "write": {
         "provider": "openrouter",
-        "model": "anthropic/claude-haiku-4.5"
+        "model": "anthropic/claude-haiku-5.5"
       }
     },
     "reviewProfile": {
@@ -1059,7 +1059,7 @@
       },
       "write": {
         "provider": "openrouter",
-        "model": "anthropic/claude-haiku-4.5"
+        "model": "anthropic/claude-haiku-5.5"
       }
     },
     "reviewProfile": {

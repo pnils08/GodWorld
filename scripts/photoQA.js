@@ -60,7 +60,7 @@ const Anthropic = require('@anthropic-ai/sdk');
 // ---------------------------------------------------------------------------
 const QA_PROVIDER = process.env.PHOTOQA_PROVIDER || 'openrouter';
 const QA_MODEL = process.env.PHOTOQA_MODEL
-  || (QA_PROVIDER === 'anthropic' ? 'claude-haiku-4-5-20251001' : 'google/gemini-3.7-flash');
+  || (QA_PROVIDER === 'anthropic' ? 'claude-haiku-5-5' : 'google/gemini-3.7-flash');
 const QA_MAX_TOKENS = parseInt(process.env.PHOTOQA_MAX_TOKENS || '1500', 10);
 
 function makeQaClient() {
@@ -502,7 +502,7 @@ async function main() {
         rawResponse: evaluation.rawResponse,
         tokens: evaluation.tokens,
         evaluatedAt: new Date().toISOString(),
-        model: 'claude-haiku-4-5-20251001'
+        model: QA_MODEL
       };
       var perImagePath = path.join(fullDir, slug + '.qa.json');
       fs.writeFileSync(perImagePath, JSON.stringify(perImageReport, null, 2));
@@ -555,7 +555,7 @@ async function main() {
     type: manifest.type || 'edition',
     photoDir: path.basename(fullDir),
     evaluatedAt: new Date().toISOString(),
-    model: 'claude-haiku-4-5-20251001',
+    model: QA_MODEL,
     summary: { pass: passes, flag: flags, fail: fails, errorOrSkip: errors },
     tokens: { input: totalInput, output: totalOutput },
     results: results

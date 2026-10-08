@@ -107,8 +107,8 @@ const USE_SUPERMEMORY = !!SUPERMEMORY_KEY;
 // MAGS_BOT_PROVIDER=anthropic reverts to the direct key.
 const BOT_PROVIDER = process.env.MAGS_BOT_PROVIDER || 'openrouter';
 const BOT_MODEL = BOT_PROVIDER === 'anthropic'
-  ? 'claude-haiku-4-5-20251001'
-  : 'anthropic/claude-haiku-4.5';
+  ? 'claude-haiku-5-5'
+  : 'anthropic/claude-haiku-5.5';
 const claude = BOT_PROVIDER === 'anthropic'
   ? new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
   : new Anthropic({ apiKey: process.env.OPENROUTER_API_KEY, baseURL: 'https://openrouter.ai/api' });
@@ -486,7 +486,7 @@ async function callClaude(provider, session, userMessage, userName, userId) {
     // Last round: NO tools, so it must answer and can never reply empty
     // (S252 flaw fix — a still-searching turn returned 0 chars).
     var isFinal = (round === MAX_TOOL_ROUNDS - 1);
-    var opts = { model: BOT_MODEL, max_tokens: MAX_RESPONSE_TOKENS, system: systemPrompt, messages: messages, tools: [SEARCH_TOOL] };
+    var opts = { model: BOT_MODEL, max_tokens: MAX_RESPONSE_TOKENS, system: systemPrompt, messages: messages, tools: [SEARCH_TOOL], thinking: { type: 'disabled' } };
     if (isFinal) opts.tool_choice = { type: 'none' };  // force a reply, never empty
     response = await claude.messages.create(opts);
 

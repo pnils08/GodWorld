@@ -91,7 +91,7 @@ const modelFamily = slug => String(slug).split('/')[0];
 // the rule fired FATAL, no tracker write — and four rows would have read as
 // silence at the C107 fire (Mayor projected -16 in one cycle).
 const GATE_MODEL_CANDIDATES = [
-  'google/gemini-3.7-flash', 'mistralai/mistral-large', 'anthropic/claude-haiku-4.5', 'nousresearch/hermes-4-70b'
+  'google/gemini-3.7-flash', 'mistralai/mistral-large', 'anthropic/claude-haiku-5.5', 'nousresearch/hermes-4-70b'
 ];
 
 // Every manifest a chain stage writes. decide_c is the interactive-era name;

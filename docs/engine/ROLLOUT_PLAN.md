@@ -5,7 +5,7 @@
 **Reading this file:** section 1 is the builder's list. Sections 2–4 are the lanes'. The plan list below is regenerated at every session close; any wait whose date has passed is named at close too. One line per job; the detail is in the plan the row names. Live Cycle C110; next live fire C111, Sunday 2026-10-11.
 
 <!-- generated: plans in motion (docLoopStatus.js --plans --write; do not hand-edit) -->
-**Plans in motion (42)** — each plan, its rows and the state each is in:
+**Plans in motion (43)** — each plan, its rows and the state each is in:
 
 - [[../plans/2026-09-11-sports-as-a-lived-system]]: engine.209 live-observing, engine.206 live-observing, engine.205 in-progress, engine.202 in-progress, engine.203d ready, engine.194 ready
 - [[../plans/2026-09-26-future-build-ideas]]: engine.238 live-observing, engine.98 ready, engine.264 ready, engine.261 ready
@@ -14,7 +14,6 @@
 - [[../plans/2026-09-10-inactivity-is-regression]]: engine.193 ready, engine.201 live-observing, engine.197 in-progress
 - [[../plans/2026-09-13-run-cycle-packages-the-world]]: engine.214 needs-info, pipeline.69 in-progress
 - [[../research/2026-10-02-engine-208-fandom-dial-read-before]]: engine.208 live-observing, engine.280 ready
-- [[../plans/2026-07-31-platform-ceiling-resilience]]: engine.95 in-progress, engine.285 ready
 - [[../research/2026-10-03-engine-204-205-game-day-economy-read-before]]: engine.204 in-progress, engine.281 in-progress
 - [[../plans/2026-10-08-engine-286-game-of-life-events]]: engine.284 ready, engine.286 ready
 - [[../plans/2026-09-22-initiative-budget-disbursement]]: engine.257 ready, engine.256 ready
@@ -25,6 +24,7 @@
 - [[../plans/2026-08-16-new-life-intake]]: engine.108 live-observing
 - [[../plans/2026-09-24-initiatives-in-the-world]]: engine.260 live-observing
 - [[../plans/2026-08-29-employment-system-cascade]]: civic.33 live-observing
+- [[../plans/2026-07-31-platform-ceiling-resilience]]: engine.95 in-progress
 - [[../plans/2026-09-29-sim-holiday-calendar]]: engine.273 ready
 - [[../plans/2026-08-21-citizen-archive]]: engine.90 ready
 - [[../plans/2026-10-03-citizen-pages-drive-canon]]: pipeline.70 live-observing
@@ -45,6 +45,7 @@
 - [[../plans/2026-05-26-engine-27-wd-card-auto-invalidation]]: engine.27 ready
 - [[../plans/2026-07-31-engine-observability-integrity]]: infrastructure.6 ready
 - [[../plans/2026-09-28-storylines-keyed-to-engine-events]]: engine.270 ready
+- `docs/research/2026-10-08-codex-engine95-design.md`: engine.285 ready
 - [[../plans/2026-05-22-engine-regulatory-friction]]: engine.20d ready
 - [[../plans/2026-08-10-economy-native-rebuild]]: engine.104 ready
 - [[../research/2026-09-10-kimi-faith-lane-routing]]: engine.248 ready
@@ -90,7 +91,7 @@
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
-| engine.95 | Checkpoint/resume. Builder go 2026-10-07 (330 s / 60 s / measured). Revision 2 (ONE automatic resume, no retry; Task 5 = no blind re-run); codex Reviews 1+2 folded, agy SHIP. **BENCHED 2026-10-08/09: plan steps 0–5 PASS on 1004 @5** (normal, forced checkpoint → timer resume byte-equal to the normal Cycle, save faults 1–5, resume faults 1–4, planted executor error, late branch under guard 60, two clean fires on the real numbers; `checkpointSaveMs` measured → 6000). **LIVE `c49074fc` 2026-10-09** (hidden empty tab + six keys on live, checkpointSaveMs 6000 — gate ARMED from C111; pull-back 167/167). Smoke at C111 Sun 2026-10-11 (131 phases, 0 new Engine_Errors, tab empty, no trigger) | in-progress | engine-sheet | [[../plans/2026-07-31-platform-ceiling-resilience]] §Build notes Revision 2 + §Changelog bench steps 0–5 |
+| engine.95 | Checkpoint/resume — **LIVE `c49074fc` 2026-10-09**, gate armed (checkpointSaveMs 6000); bench plan 0–5 PASS on 1004 @5. Smoke at C111 Sun 2026-10-11: 131 phases, 0 new Engine_Errors, `_CycleCheckpoint` empty, no trigger. Reconcile + expectations: DEPLOY_HISTORY §PROD c49074fc | in-progress | engine-sheet | [[../plans/2026-07-31-platform-ceiling-resilience]] §Changelog bench steps 0–5 |
 | engine.204 | Game-day city impact LIVE since 2026-10-06. Column removal HELD (builder 2026-10-07): ripple map of every feed column + dashboard/sheet/code option-sync audit first; the CommunityInvestment carrier waits on it | in-progress | engine-sheet | [[../research/2026-10-03-engine-204-205-game-day-economy-read-before]] §4 Builder's words (2026-10-07) |
 | engine.205 | Weekly game economy LIVE since 2026-10-06. Held with engine.204 for the same ripple + option-sync review | in-progress | engine-sheet | [[../plans/2026-09-11-sports-as-a-lived-system]] Tasks 4, 10 |
 | engine.281 | Sports-week ladder + venue (a–d) LIVE since 2026-10-06. (e) the column surface folds into the engine.204/205 ripple + option-sync review (2026-10-07) | in-progress | engine-sheet / research-build | [[../research/2026-10-03-engine-204-205-game-day-economy-read-before]] §5 |
@@ -130,7 +131,7 @@
 | engine.194 | Record-driven sentiment and game-night intensity: codex authors Task 7 now that Tasks 1–4 are live | ready | engine-sheet | [[../plans/2026-09-11-sports-as-a-lived-system]] Task 7 |
 | engine.270 | Review 1 ruled 2026-10-08: build the anomaly tag (D1), no age on first-seen stages (D2), Task 7 step 1 attach pass. Queued, not dispatched (es on other work). Step 2 and the scorer rewire wait the C113 read | ready | engine-sheet | [[../plans/2026-09-28-storylines-keyed-to-engine-events]] §Review 1 Disposition |
 | engine.284 | Civic role gate (exact `y` vs ledger `yes`, dead for the civic pool) plus flag registration on birth and intake mints plus the SIMULATION_LEDGER true-up. Folded into the engine.286 plan (builder 2026-10-08): do not wake the engine as written; es builds from the compared plan | ready | engine-sheet | [[../plans/2026-10-08-engine-286-game-of-life-events]] Tasks 6, 8 |
-| engine.285 | Phase-11 and executor kill hazards on every fire (codex Review 1 of engine.95, F7): LifeHistory trim clears the source before rewriting retained rows; BusinessArchive copies then deletes with no copy identity; CitizenArchive's existing-copy check skips the source removal; MediaIntake marks rows processed before writing outputs; ensure-tab inserts then writes the header; batch-append retry recomputes the tail inside the retry while `appendRowWithRetry_` fixes the address. engine.95 shrinks exposure, does not fix them | ready | engine-sheet | [[../plans/2026-07-31-platform-ceiling-resilience]] §Build notes Revision 1 part 11; `docs/research/2026-10-08-codex-engine95-design.md` §7 |
+| engine.285 | Phase-11 and executor kill hazards on every fire (LifeHistory trim clear-before-rewrite, BusinessArchive copy-then-delete, CitizenArchive skip-on-copy, MediaIntake mark-before-write, ensure-tab header, batch-append retry address). engine.95 shrinks exposure, does not fix them | ready | engine-sheet | `docs/research/2026-10-08-codex-engine95-design.md` §7 |
 | engine.286 | Citizen events as real dice-rolled situations the crons read (their reflections feed dials), ECL for variety, generic filler curtailed; engine.284 folded in. Plan is a draft; builder calls open (which life events first, rates) | ready | research-build | [[../plans/2026-10-08-engine-286-game-of-life-events]] |
 | engine.20d | Initiative seeds on movement only in buildWorldSummary's civic lane. Released from the engine.270 wait 2026-10-08; spec only, no code yet. Not dispatched | ready | engine-sheet | [[../plans/2026-05-22-engine-regulatory-friction]] §Task 5 |
 | engine.280 | Fandom dial follow-up (read-before §2.9) | ready | engine-sheet | [[../research/2026-10-02-engine-208-fandom-dial-read-before]] §2.9 |

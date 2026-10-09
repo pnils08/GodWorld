@@ -13,46 +13,59 @@ Mechanical sub-steps (5):
 ========================================================================
 
 --- [1/5] session summary → Supermemory (best-effort) ---
-✓ session log → Supermemory [session-logs] doc 3twjD8RBJCazk4kq7xMAGx (2928 chars, 47 summary rows folded)
+✓ session log → Supermemory [session-logs] doc bBgeSbX1jsy6JDEMHes74J (2908 chars, 29 summary rows folded)
 
 --- [2/5] auditPlanTagDrift (informational) ---
   # Plan tag drift audit
   
-  Generated: 2026-10-08T05:49:35.102Z
-  Plans scanned: 136
+  Generated: 2026-10-09T06:11:52.695Z
+  Plans scanned: 137
   No frontmatter: 7
   No changelog: 8
-  No status-verb match: 119
+  No status-verb match: 120
   Drifts found: 0
   
   No plan-tag drift detected.
   ✓ no drift detected
 
 --- [3/5] ROLLOUT conformance lint (informational) ---
-  ROLLOUT LINT: 2 non-conforming row(s) — state-cell breaks the sweep, or item cell over the 280-char pointer budget:
-    L68 civic.43: item cell 306 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
-    L98 engine.193: item cell 290 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
-  ROLLOUT OVERDUE: 6 waiting row(s) past their Cycle/date or naming none — read the record, then flip, re-date or close:
-    L101 engine.20d: latest date named 2026-10-05, today is 2026-10-08
-    L103 engine.53: latest date named 2026-10-05, today is 2026-10-08
-    L104 research.27: latest date named 2026-10-03, today is 2026-10-08
-    L106 engine.201: latest date named 2026-09-14, today is 2026-10-08
-    L107 pipeline.48: latest date named 2026-09-26, today is 2026-10-08
-    L108 pipeline.49: latest date named 2026-09-26, today is 2026-10-08
+  ROLLOUT LINT: clean — every row is a sweep-safe pointer within budget.
 
 --- [4/5] cross-terminal git stack check (read-only) ---
-  ⚠ 11 unpushed commit(s) ahead of origin/main:
-    b602fdb6 search_canon returns published canon: edition ingest plus the Saturday-swept articles (builder 2026-10-08) - since the edition ingest went frame-only, article prose lives under source saturday-sweep and was invisible to the tool (Rick Walker's quotes missing, two other Walkers returned). INTAKE register chunks in already-swept articles are dropped from results; compound AND/OR equality filters translate to the 5.x {operator, operands} form. agy search-all.sh moved to --namespace.
-    57256616 godworld MCP server on Supermemory CLI 5.x: --namespace replaces --tag, documents mode is chunks, single-condition filter becomes {field,operator,value}, updatedAt read from system. search_canon, search_world, search_build and the lookup tools had failed 'CLI exited 1' since the npx cache moved to 5.x on 2026-10-06; missing from the v5 migration inventory, now recorded there. Proven against live namespaces; 6/6 offline tests.
-    1a183cbd Saturday sweep posts article prose as canon content: the INTAKE register and self-score are stripped (readerCopy), the register stays in the document metadata (builder 2026-10-08: measured INTAKE chunks taking 1-2 of the top 10 in bay-tribune name searches). Existing swept articles untouched.
-    a4cb20df Sports feed dropdowns cover the whole grid; challenger mint writes canonical Active; engine.208 live seed applied
-    ce1c2fb8 INTAKE-POPID call resolved (builder 2026-10-08: names in what he reads or hears, IDs never contamination): the Rhea gate scans article prose only (scanPopidLeak), the daily brief and delivery strip INTAKE + self-score through one readerCopy, the Edition keeps INTAKE by design (ingestPublishedEntities parses it); cron-path review accepted to research with the builder's words
-    2ee9d241 engine.94 B.3: builder ruling - named challenger stays until a seating; offices for life until performance fails
-    f3be4a01 engine.94 B.3: builder correction - challenger named under 40, seat lost under 30; v3 F1 inverted
-    af13f5b9 engine.94 B.3: fold codex v2 HOLD as revised cut v3 (F1-F8); review accepted to docs/research with disposition
-    641ff58a Review inbox: four folded codex reviews carry their dispositions and are registered in the research index; plan citations repointed; B.3 v2 review handed to engine-sheet; stale unpushed/worktree notes trued
-    5d8ea05d ROLLOUT §1 walked with the builder: rulings recorded verbatim in each plan, rows moved
-    cd749448 engine.270 Review 1 (research-build with the builder): C109-C110 read, six findings D1-D6, scorer rewire kept open, builder's words quoted
+  ⚠ 33 unpushed commit(s) ahead of origin/main:
+    a51e5f6f S541 session-end [research-build]: PIN odometer, NEXT rewritten; engine.286 plan A22 (tier is earned by print, read from code); row trimmed to budget; push held (32 unpushed, engine-sheet stack)
+    7c1f512e engine.286: Tre Mingo UNI flag cleared on the builder's explicit yes, read back (POP-00123 yes->no)
+    893e9038 engine.286 plan: codex plan review folded (F1-F42 dispositioned, P1/P9/P10/P11/P13 settled, five misattributions corrected), builder's 2026-10-09 words recorded, goal rewritten around the dials channel; rb read-before P10 inference withdrawn
+    ef546e28 engine.286 plan: A15 corrected — a cron's reflection has one channel, the dials; bonds feed dials too (builder 2026-10-09)
+    3e05999b engine.286 plan: A15 — what a cron's wake can change, read from the wake and the drain; Acceptance 3 chain corrected; home-buying mechanics noted
+    b87e7b81 engine.286 plan: builder's exact quote, civic role retire option removed (builder 2026-10-09), plain-word glossary, first-events question rewritten
+    3eb1a7f2 engine.95 LIVE c49074fc: hidden empty _CycleCheckpoint + six keys on the live sheet (checkpointSaveMs 6000, gate armed from C111), push from the isolated stage, pull-back 167/167 + manifest byte-identical, 0 test files. DEPLOY/DEPLOY_HISTORY/ROLLOUT/SESSION_CONTEXT trued.
+    51446518 engine.95: §PROD expectation written (STAGED, NOT LANDED — the auto-mode classifier refused the live sheet setup and the push); DEPLOY bench pointer C112 on the real numbers; ROLLOUT row BENCHED 0-5 PASS; SESSION_CONTEXT PIN/NEXT handoff
+    c49074fc engine.95 bench step 5 PASS: late branch under fireGuardMinutes 60 resumed through the manifest branch; two clean fires on the real numbers (checkpointSaveMs 6000), trigger list empty. Bench plan 0-5 complete; PROD next.
+    597f698a engine.95 plan: step-3 claim trued to its instrument; full stopped-cycle inventory (18 of 84 tabs move before the gate, Simulation_Ledger does not)
+    8f6bf866 engine.95 bench step 4 PASS: resume faults 1-4 stop in resuming with the stage, record failed, every fire refused with the door, clearcheckpoint force-only, triggersDeleted 1; planted missing tab -> commit-failed at executor-started, Phase 11 not run, payload retained. State table resume row trued (record failed, not checkpointed). saveMs spread 1.5-3.8 s.
+    1cc549d1 engine.286: codex task — plan fidelity review and five proof items
+    51abd45c engine.286 plan cut on the new Reviews-reconciled template: rb + codex reads merged as Agreed / Needs proof / New concepts with pointers, nothing from codex dropped; template gains the section; rows repointed; indexed
+    092fd1d7 engine.286: codex independent run received; read-to-read comparison added (quotas, dial-inert plain tags, premise defects, Tre Mingo flag miss, builder amendment); my first-pass cell for the main generator corrected
+    d884abf8 engine.286 read-before: eight event-engine wiring cards, conditioning table, live Y3C6 tag counts; builds on engine.67 life-state gate; registered in both indexes
+    42d26d2c engine.95 bench step 3 PASS: save faults 1-5 on 1004 @5 match the state table (save-failed + failed record + warn/clear/refuse on the next fire; fault 5 no-trigger alarm then inline resume). Finding recorded: a stopped Cycle carries the Phase-5 own-tab LifeHistory_Log appends (+2,391 rows) — reconcile is revert + clearfire + fire, today's wall-kill shape.
+    fb7f7fcb engine.284 folded into the engine.286 plan (gate fix + mint flag registration + doc true-up); codex independent-run task filed and dispatched
+    056ef471 engine.286 filed: revisit the generic event engines against the game-of-life frame; death-by-clock ruled by design (builder 2026-10-08)
+    81de1f13 engine.95 bench steps 0-2 PASS on SANDBOX 1004 @5 (961d8dcc): snapshot BASELINE-1004-C110, normal C111 clean (566 intents, 0 persist errors), forced checkpoint saveMs 2150 / 91 chunks / resume 73 s, A/B byte-equal bar the wall-clock inventory (HookId is Utilities.getUuid); C=2150 -> checkpointSaveMs 3225 at step 5. DEPLOY bench pointer @5 + the copy-as-source reset route.
+    044e819b engine.284: 13 flag/clock edits applied on the live ledger (5 CIV off, 7 working civilians off UNI, Jada Rayes to MEDIA clock), read back
+    844319ac engine.284: builder ruling — UNI/MED/CIV flags are canon guardrails and stay (retired players keep UNI); death/milestone dice gate on clock only, not flags; row edits held
+    961d8dcc engine.284: builder rulings recorded, flag-vs-clock mechanism read from code (six regular-life gates, flag-only readers, UNI post-career branch), Jada Rayes outlier, A/B fork held for builder; no ledger rows touched
+    76604035 SESSION_CONTEXT: NEXT[engine-sheet] — engine.95 built/unbenched, bench 1004 staged, two builder steps before the proving fires
+    4164346b engine.95: agy adversarial review SHIP, no findings (output/antigravity/2026-10-08-review-engine95.md); plan + ROLLOUT trued. Unbenched; waits on the builder's two bench steps.
+    e84fb385 antigravity: engine.95 review completed (SHIP)
+    7210e6bd engine.95: resume faults 1/3/4 and a tolerated Phase-11 throw inside a resume covered (wiring 94/94); _CycleCheckpoint schema entry says created EMPTY, no header row (a header reads as corrupt, cleared with a warning); bench step-2 certification reads written into the plan (two Engine_Errors rows exactly, 126 in out.timing vs 131 in result.phaseCount, counter N-1 before the trigger as the finally-guard proof). Advisor pass: no uncarried ctx reads in the tail — the citizen archive seeds _popIdAlloc from config.popIdHighWater (carried), _citizenArchiveByPop rebuilds, the business archive calls no helpers.
+    cda93865 engine.95 piece 2 (Revision 2 parts 1-3, 5-12): the commit-boundary checkpoint, wired. cycleCheckpoint.js: tab I/O (manifest A1, chunk rows with a ~ prefix so Sheets never coerces one), checkpointGateDecision_ (three branches, armed only when all three keys are nonzero, bench force 1/2), checkpointGate_ + saveCycleCheckpoint_ (staging → chunks → flush → read-back proof → ready → record checkpointed → trigger → manifest; any failure = save-failed, loud, no world flush), routeCheckpointAtAdmission_ (manifest read before every other admission test: ready → inline resume accepting expect N-1/N; staging/save-failed/corrupt → warn, clear, proceed; committed + checkpointed record → close-only, nothing replayed; resuming/commit-failed/resume-failed → refuse naming the state and the door), resumeCore_ (one attempt, stage cell, executor stats checked → commit-failed stops before Phase 11 with the payload retained, ledger reloaded, Phase 11 ×4, shared flush, 126+5 logical timings, result in the manifest, trigger deleted by id), resumeWorldCycle. Runner: checkpointed fire state (no finish), admitCycleFire_ allOpts, closeCycleFire_ lifecycle branches (checkpointed / failed naming the checkpoint or the resume stage / resumed+commitProblem before the counter test), runWorldCycle entryMs + resume branch + returns the outcome, gate after Phase10-CommitLedger on the inline runner only, checkExecutorStats_ (part 9: executor errors set fire.commitProblem and one Engine_Errors row; ENGINE95_PERSIST_DIAG rides the fire response, also on a failed fire), flushCacheAndVerify_ factored and skipped when fire.lifecycle is set. Seeds: ensureEngine95Config_ — wallBudgetMs 330000, tailReserveMs 60000, checkpointSaveMs 0 (disarmed until the bench number), checkpointForce/FaultAt/ResumeFaultAt 0. Web: action=checkpoint (manifest read, no expect), out.state/lifecycle/checkpoint/persist, ok:false + 'fire again now to resume' when no trigger was created, clearcheckpoint door (bench-only, gen-named, force=1 to discard a held payload, deletes resume triggers). Tests: cycleCheckpointWiring 86/86 over real wrapper+module+cache+web with fake sheets/triggers; fireGuard 114/114 (harness loads the two new sources); codec 47/47; suite 286/286. STUB_MAP/REVERSE regenerated; plan + ROLLOUT trued. Unbenched: agy on the diff next, then bench plan step 0.
+    bfd12ae0 engine.95 piece 1 (Revision 2 part 4): checkpoint codec, chunking, payload shape, and the sheet cache's queue export/import. New phase10-persistence/cycleCheckpoint.js (named in the codex-reviewed design; writer placement per Review 1 F1): recursive codec tags Dates {$d}, undefined array elements {$u}, wraps $-keyed objects {$obj}; rejects functions, non-finite numbers, invalid Dates, class/host objects — loud, no fallback; chunks on the ENCODED length (40k), never on a high surrogate; joinChunks_ refuses missing/reordered/foreign-gen/corrupt rows with a reason; buildCheckpointPayload_ carries persist queues, cache queues, config, the 17 tail summary fields, draws, diags; CHECKPOINT_SCHEMA guards the shape. sheetCache exportQueues()/importQueues() (deep copy; import refuses a non-empty cache; read-your-write holds). scripts/cycleCheckpoint.test.js 47/47 (Review 2 F6 validation list); utilities/sheetCache.test.js 17/17; suite 285/285. Truth docs same commit: STUB_MAP + REVERSE regenerated, SHEETS_MANIFEST §9 checkpoint class + row, SCHEMA_HEADERS _CycleCheckpoint. Not wired: the gate, the tab writer, the resume, admission — next pieces. Unbenched.
+    f0a1792f engine.95 Revision 2, advisor fold: bench baseline is a Drive snapshot of the bench (crons move live tabs daily); CHECKPOINT_SCHEMA replaces the nonexistent deploy-SHA; executor stats ride the fire response, bench step 1 asserts zero errors before any PROD push; checkpoint/resume write visible Engine_Errors rows; ready-with-no-trigger alarms ok:false; admission clears staging/save-failed and proceeds; stage cell during resuming; $obj wrapper; Task 5 status trued (no blind re-run, ever).
+    f8382c2b engine.95 Revision 2: codex Review 2 HOLD (5 BLOCK) folded. The decision: ONE automatic resume, no automatic retry — a resume that dies stops the world visibly (manifest resume-failed, record failed, admission refused until a hand reconciles); receipts, delta-restore and tail-match dedup dropped (Review 2 F1/F4: unsound without a transaction log); Task 5 = no blind re-run, ever. Also: lifecycle flag before the first checkpoint write honoured by both finalizers; manifest state table with recovery per kill point; admission as one locked state machine (manifest first, inline resume core under the held lock); C = measured elapsed of the whole durable save; recursive codec with encoded-length chunking; result column + action=checkpoint; clearcheckpoint door; bench baseline = resync of frozen live C110 + fault matrix; wall-clock exclusion inventory corrected. Both codex reviews accepted into docs/research + index.
+    cae8e860 engine.284 flag-column audit: y/yes gate is safe (12 engines already prefix-match), UNI/MED/CIV agree with ClockMode, 81 blank-flag mints (births + intake) are latent, 5 ENGINE-clock CIV rows and pool-drawn lines on authored seats go to builder read
+    6148846e DEPLOY: bench 1004 resynced from live C110 for the engine.95 Revision 1 bench plan — 83/83 tabs, read-back OK; fireGuardMinutes 0 (B170; a 0-based column slip first landed in C170, restored); clearfire&cycle=112 ok. Bench at C110, next fire &expect=110. Mike's re-authorization for the trigger scope precedes the forced-checkpoint fires.
+    5781f462 engine.95 Revision 1: codex Review 1 HOLD (6 BLOCK) folded — the 2026-10-04 Phase-9 gate was not an intent-only boundary (20 Phase-10 producers write direct before the executor; queue is ctx.persist; executor clears queues on error; Phases 3/5 write direct). Revision 1 in the plan: gate at the commit boundary (after CommitLedger, before ExecuteIntents), payload = persist + cache queues + Phase-11 scalars, chunks-then-manifest save, admission reads the manifest first and resumes inline, (loop,sheet)+Phase-11 receipts, resume-mode-only tail-match dedup, executor errors set fire.commitProblem, trigger scope is a builder re-authorization step. Advisor pass folded. engine.285 filed for the Phase-11/executor kill hazards the review surfaced. Review 2 (codex) before code.
   Model decision: push if all yours, hold if other terminals stacked.
 
 --- [5/5] pm2 restart ---

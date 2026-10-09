@@ -117,7 +117,7 @@
 | engine.116 | Spreadsheet weight: T2 code repoint, T3 archives out, T5 dead-tab prune | in-progress | engine-sheet | [[../plans/2026-08-17-sheet-weight-reduction]] |
 | engine.197 | Dial drift: openness-down volume and the ~60% all-neutral share via event-engine reach | in-progress | engine-sheet | [[../plans/2026-09-10-inactivity-is-regression]] §Acceptance results |
 | engine.202 | Sports WeekRecord: trigger-word hooks, dashboard input (3b), 3c | in-progress | engine-sheet | [[../plans/2026-09-11-sports-as-a-lived-system]] Task 1 |
-| engine.213 | Approval reads the city: the mood sawtooth, and the Mon–Thu office datawakes reaching no sheet | in-progress | engine-sheet | `phase05-citizens/updateCivicApprovalRatings.js`, [[../reference/DEPLOY_HISTORY]] §PROD @84 |
+| engine.213 | Approval reads the city: the mood sawtooth. (The Mon–Thu datawakes reaching no sheet is closed: civic.38 move ledger → Sunday fold → Initiative_Tracker LIVE WRITE C110, civic-cron.log 2026-10-04) | in-progress | engine-sheet | `phase05-citizens/updateCivicApprovalRatings.js`, [[../reference/DEPLOY_HISTORY]] §PROD @84 |
 | engine.27 | Card auto-invalidation Phase B (cycle-end marker hook); Phase A daemon live | ready | engine-sheet | [[../plans/2026-05-26-engine-27-wd-card-auto-invalidation]] |
 | infrastructure.6 | Sim-health observability: /api/sim-health + dashboard panel; 11 ghost tab refs + tab-reference test | ready | engine-sheet | [[../plans/2026-07-31-engine-observability-integrity]] |
 

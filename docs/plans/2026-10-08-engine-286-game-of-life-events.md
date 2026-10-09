@@ -24,11 +24,13 @@ pointers:
 
 **Builder's words (2026-10-09):** on the civic role engine: "not sure what civic role/mode means and why it would even be suggested to retire it" — retiring it is off the table. On flags: "i already approved not As players to not carry a universe flag."
 
+**Builder's words (2026-10-09, verbatim):** "both reviews do nothing for the sim and used 0 code cards to understand, all the crons can do is reflect and start generating a memory, they have zero impact on anything other than their dials and their bonds, the game is unknown , there is no concpet of how a cron actually does anything, but they are a LLM, thats for them to figure out" and "reflection feed dials, those bonds are also reflections that feed dials". Standing rule from the same day: code is the only truth source; nothing in this plan is accepted on a relay.
+
 **Earlier rulings the plan keeps (2026-10-08, [[2026-07-31-citizen-memory-perception]] §engine.284):** the UNI/MED/CIV flags are canon guardrails and stay; retired players keep UNI; game and media clocks cannot die, the civic clock rolls — by design.
 
 **Words used here:** a *kind of life event* is one chance or setback in a citizen's pursuit, such as a promotion chance, with its odds, what changes if it lands, and how the citizen sees it when they wake. *Civic role* is the engine that writes notes for city-hall officials (dead until now); *civic-mode* is the engine that writes events for the civic-clock officials.
 
-**Goal:** The citizen events are the game the wake-cron citizens play: consequential, dice-rolled opportunities and setbacks tied to their pursuits (tier, coverage, family, home, children, promotion, heritage ledger, UNDOCKED, the teams), made unique by tier, hood, net worth, dials, flag and clock, varied by the Event Content Ledger, with generic filler curtailed. engine.284's gate fix, the mint flag registration and the ledger-doc true-up are tasks inside it.
+**Goal:** Citizen events become real, dice-rolled situations drawn from the sim's own numbers (tier, hood, net worth, dials, household, job), varied through the Event Content Ledger, that replace generic filler. The crons read them when they wake; their reflections feed their dials (and bonds, which feed dials). How a cron plays is the cron's to figure out — the engine supplies the world, not the moves. engine.284's gate fix, the mint flag registration and the ledger-doc true-up are tasks inside it.
 
 **Rows:** engine.286 (engine.284 folded) · **Owner:** research-build designs and reconciles; engine-sheet builds; codex reviews the diff before any production release
 
@@ -37,24 +39,25 @@ pointers:
 | # | Task | Owner | Status |
 |---|------|-------|--------|
 | 1 | Resolve the builder calls (Open questions) and pick which kinds of life events come first; reconcile any further review into the tables below. | rb | not started |
-| 2 | Prove ONE consequential path on the bench before expanding content: premise → roll → owning writer persists the change → primary tag folds → wake perceives the event and its stake (pool admission and five-line tail) → reflection reaches Reflection_Intake → a later Cycle applies the response. A citizen outside the wake pool and a setback followed by five routine lines are in the fixture. | es | not started |
+| 2 | Build AND prove the first bounded kind of event on the bench (it carries the slices of Tasks 3–4 it needs and the seven test groups, so the proof does not precede its own prerequisites): a written per-kind design record first — premise, the attributes that move odds and severity, the roll, the existing writer that persists the change, the dial treatment, the wake-readable stake, the existing reader — then premise → roll → owning writer → primary tag folds → wake perceives it (pool admission, five-line tail, the actual wake payload) → reflection → the drain. A citizen outside the wake pool and a setback followed by five routine lines are in the fixture. Wake paths other than the general citizen wake are not covered. | es | not started |
 | 3 | Premise-eligibility contract: extend `deriveLifeState_` / `isEventEligible_` in `citizenContextBuilder.js` (engine.67's helper) into a pure per-row contract applied at every entry path — the household pass, ECL injection, and the eight generators. Clock and the three flags are independent inputs; missing facts are reported, not invented. | es | not started |
-| 4 | `generateCitizensEvents_`: candidates carry a factual premise; kinds of life event (opportunity and setback) originate inside the existing weighted draw; outcome roll is separate from wording weight. Extend the ECL contract (`loadEventContentLedger.js` validation, `generateCitizensEvents.js` scope producer, class selection, tests) with NetWorth, dials, flags, ClockMode and the realized outcome. Same premise validation for ECL and hardcoded lines. | es | not started |
-| 5 | Remove the output quotas (generic micro-event 25, neighborhood 6, game-mode 15) and the ledger-order allocation; individual eligibility instead; stop the neighborhood engine substituting pressure text for a drawn line; make its neighborhood assignment an explicit behavior, not a pre-roll side effect. | es | not started |
+| 4 | `generateCitizensEvents_`: candidates carry a factual premise; kinds of life event (opportunity and setback) originate inside the existing weighted draw; outcome roll is separate from wording weight. Extend the ECL contract (`loadEventContentLedger.js` validation, `generateCitizensEvents.js` scope producer, class selection, tests) with NetWorth, dials, flags, ClockMode and the realized outcome. Same premise validation for ECL and hardcoded lines. Candidates carry the affected POPID/household/hood, source Cycle and identity for a discrete source event, outcome class and chance/severity; observing is not acting (a director seeing an unrelated initiative is not its actor). Boundary: reusable mechanics stay in code, ECL renders the realized outcome; only the fields the first kinds need; no per-phrase code branch, no executable effect in a Sheet, no new tab, no live ECL edits. | es | not started |
+| 5 | Remove the output quotas (generic micro-event 25, neighborhood 6, game-mode 15) and the ledger-order allocation; individual eligibility instead; stop the neighborhood engine substituting pressure text for a drawn line; make its neighborhood assignment an explicit behavior, not a pre-roll side effect. Per-citizen rates come from the existing World_Config contract and a missing required value fails visibly; no new cap and no tuning to reproduce 25/6/15. Audit the daily 1–4 emit choice and the ECL forty-draw limit (`generateCitizensEvents.js:2926–2932`). | es | not started |
 | 6 | Civic role (absorbs the engine.284 gate fix — it is never woken as written): re-align in place so its notes come from what the official actually did (the votes, initiatives and approval they carry), with a record of each action so nothing is written twice, and make sure it and the civic-mode events do not narrate the same action; move its call after the engine that resolves those actions on both scheduler paths. Not retired. | es | not started |
 | 7 | Premise fixes in the clock engines: game-mode (UNI means every job is baseball), Universe pipeline, civic-mode (decisions with no effect, inactive offices), media-mode (press-box lines with no assignment, no publication receipt). Preserve each clock's guardrails and the retired-UNI combination. | es | not started |
-| 8 | Flag registration at `createChildRow_` (births) and `processAdvancementRowsBody_` (intake): explicit values, header validation before mutation, existing rows' flags preserved. Ledger doc true-up (`SIMULATION_LEDGER.md` lines 87, 193–195). The 81 blank rows are a separate, reviewed ledger action. | es | not started |
-| 9 | Check the two direct in-cycle log writers against `SHEETS_MANIFEST.md` §9; clear the written-but-never-read fields as a rider (FIX, don't ADD). | es | not started |
-| 10 | Tests and bench proving sequence: codex's seven test groups and acceptance additions below; builder reads actual success and failure texture before any production release. | es | not started |
-| 11 | Codex reviews the engine-sheet diff before production (house review lane); findings reconciled back into this plan's tables. | codex / rb | not started |
+| 8 | Flag registration at `createChildRow_` (births) and `processAdvancementRowsBody_` (intake): ordinary births and promotions write explicit `no/no/no`; protected entrants write the authoritative affirmative with explicit negatives; no inheritance from a parent; accepted spellings normalized; header validation fails before any mutation; existing rows' flags, the POPID allocator and family links preserved. Ledger doc true-up (`SIMULATION_LEDGER.md` lines 87, 193–195). The 81 blank rows are a separate, reviewed ledger action. | es | not started |
+| 9 | Check the two direct in-cycle log writers against `SHEETS_MANIFEST.md` §9; clear the written-but-never-read fields as a rider (FIX, don't ADD) only after a producer→consumer check — a scoped-file search does not prove a downstream field dead. The daily generator's direct Generic_Citizens writes (`generateCitizensEvents.js:3432`, `:3447`) are absent from its manifest row (`SHEETS_MANIFEST.md:152`): reconcile the class, do not migrate all three direct writes by reflex. | es | not started |
+| 10 | Tests and bench proving sequence: codex's seven test groups, adopted by exact reference (codex report 195–201 — routing matrix with all tiers, spellings, statuses, minors, custody, household and ECL paths, unchanged death behavior; paired causal tests incl. all 22 canonical hoods and child areas and absent/zero/malformed/unknown state; opportunity tests incl. shared events and the RNG boundary; civic identity incl. current vs former holder, a director's own vs unrelated initiative, repeated retired status, replay; mint tests across every mint door; event→dial tests through the real parser, mapper and compressor with named existing suites; failure and persistence tests, four cases, visible errors, no unearned completion) plus the acceptance below. Bench data is labelled synthetic; the builder reads actual success and failure texture before any production release. | es | not started |
+| 11 | After the first kind passes: a second domain and contrasting citizens prove it, then the replacement-driven reduction of overlapping filler with before/after wake-context inspection (per-citizen rates, never a replacement population quota); broader adoption across the eight generators follows. | es | not started |
+| 12 | Codex reviews the engine-sheet diff before production (house review lane); findings reconciled back into this plan's tables. Production deployment and live observation are separately authorized; C111 is not a deadline. | codex / rb | not started |
 
 ## Acceptance
 
 1. Citizens with different Tier, hood, NetWorth and dials, under identical forced rolls, draw different opportunities, consequences or severities, and the reason is readable; repeated for each protected flag/clock combination. Wording differences alone do not pass — proven by paired bench fixtures.
-2. For each event family: advantage, setback, no-event and a follow-on recovery or loss are all reachable and read back from the owning writer's persisted state. An event that claims a benefit but changes no chance, state or perception is filler and fails — proven by bench readback.
-3. The chain event → ECL composition → LifeHistory → dial fold → wake pool, tail and standing → reflection → the drain (base dials, and through a named bond the dials again, plus a one-cycle posture note inside the dial state) works for the first kind of event, including a setback followed by five routine lines and a citizen outside the shaped wake pool (what a cron reflects on is the five-line tail of its own life plus its dials, bonds and standing) — proven on the bench; production frequency and organic exposure are proven by live observation after deployment, never by manufactured incidents.
-4. Growing a family from a few ECL lines to many raises expression variety without raising its mechanical reward or penalty — proven by a rate comparison on the bench.
-5. Pursuit events help or hinder the earned transition without completing it: visibility reaches a coverage or usage path before tier or fame credit; a housing event reaches the ownership writer; a family event respects bonds, households and the birth process; heritage follows the standing calculation; an UNDOCKED interest line does not grant pilot status; following a team uses its actual feed and fandom mechanics.
+2. For each kind of event: advantage, setback, no-event, and a missed or declined opportunity are reachable and read back from the owning writer's persisted state; a follow-on recovery or loss where one applies (no artificial reversal on an irreversible event). Eligible wealthy or high-dial citizens can still fail; a hospitalized or detained citizen cannot perform an infeasible act. An event that claims a benefit but changes no chance, state or perception is filler and fails — proven by bench readback.
+3. The chain event → ECL composition → LifeHistory → dial fold → wake pool, tail and standing → reflection → the drain (base dials, and through a named bond the dials again, plus a one-cycle posture note inside the dial state) works for the first kind of event, including a setback followed by five routine lines and a citizen outside the shaped wake pool (what a cron reflects on is the five-line tail of its own life plus its dials, bonds and standing) — proven on the bench for the general citizen wake only (civic, media, work and show wakes are untraced), and the first kind's stake must survive the actual wake payload — which does not itself carry Tier or NetWorth; production frequency and organic exposure are proven by live observation after deployment, never by manufactured incidents.
+4. Growing a kind from a few ECL lines to many raises expression variety without raising its mechanical reward or penalty, and every rendering of one realized event keeps the same source identity and outcome with exactly one owned consequence — proven by a rate comparison and an identity check on the bench.
+5. Pursuit events help or hinder the earned transition; narration never grants completion, and any earned completion goes through the owning writer: visibility reaches a coverage or usage path before tier or fame credit; a housing event reaches the ownership writer; a family event respects bonds, households and the birth process; heritage follows the standing calculation; an UNDOCKED interest line does not grant pilot status; following a team uses its actual feed and fandom mechanics.
 6. No generic retagging, no output quota replaces the old caps, no historical line is deleted or corrected, and the flag, clock and death rulings are unchanged — proven by the routing matrix test.
 
 ## Reviews reconciled
@@ -64,6 +67,7 @@ pointers:
 | Event-engine read-before (eight wiring cards, conditioning table, C110 tag counts, comparison §7) | rb | [[../research/2026-10-08-engine-286-event-engines-read-before]] | read-only |
 | Independent read and plan, with the builder amendment and wake/return trace | codex | [[../for-claude-review/2026-10-08-codex-engine286-read-and-plan]] | HOLD implementation for builder calls; read-before complete |
 | Wiring cards ×8 (runCivicRoleEngine_, generateCitizensEvents_, generateGenericCitizenMicroEvents_, runNeighborhoodEngine_, runAsUniversePipeline_, generateGameModeMicroEvents_, generateCivicModeEvents_, generateMediaModeEvents_) | rb (engine-wiring agent) | summarized in the rb read-before §1; reproducible per target with the engine-wiring agent | read-only |
+| Plan fidelity review and five proofs (P1, P9, P10, P11, P13); 42 corrections F1–F42, dispositions below | codex | [[../for-claude-review/2026-10-08-codex-engine286-plan-review-and-proofs]] | HOLD on the plan as written; folded 2026-10-09 |
 | engine.284 flag audit and applied ledger edits | rb | [[2026-07-31-citizen-memory-perception]] §engine.284 | 13 edits applied and read back 2026-10-08 |
 
 ### Agreed
@@ -74,8 +78,8 @@ pointers:
 | A2 | Fix the existing engines; no new engine file. | builder · rb · codex | codex task text, header; rb read-before §0 |
 | A3 | Dials follow events; rate and severity of success and failure are the dials, not gates. | builder · codex | standing rulings; codex header |
 | A4 | The goal is events the crons play: consequential, dice-rolled, tied to pursuits, ECL for variety, generic filler curtailed. | builder | builder's words above; codex §Builder clarification |
-| A5 | The main generator is the one engine that draws from the citizen's life; the rest are thinner. | rb · codex | rb §2–§3.1; codex §1–§2 |
-| A6 | Generic micro-event, neighborhood and game-mode stop at a per-cycle event limit and walk the ledger in sheet order (code-verified `EVENT_LIMIT` breaks 2026-10-08); the exact counts 25 and 6 per cycle for C106–C110 are codex's measurement. | rb · codex | rb §7 item 1; codex §Recent output, §2–§3 |
+| A5 | The main generator is conditioned most deeply; the other engines condition shallowly on role, status, tier and hood (corrected 2026-10-09: not "the one engine"). | rb · codex | rb §2–§3.1; codex §1–§2; codex review P1 |
+| A6 | Generic micro-event, neighborhood and game-mode stop at a per-cycle event limit and walk the ledger in sheet order (code-verified `EVENT_LIMIT` breaks 2026-10-08); the exact counts 25 and 6 per cycle for C106–C110 are codex's measurement, and the neighborhood six is reconstructed from text, not a stored writer identity. | rb · codex | rb §7 item 1; codex §Recent output, §2–§3 |
 | A7 | Plain tags (Daily, Personal, Neighborhood, Micro-Event, Background, Lifestyle, Civic, Civic Perception, Sports atmosphere) score `{}` on the dial map; Work, Media, Community, Cultural, Faith, Civic Role, PostCareer and the setback tags score (plain tags re-verified by rb 2026-10-08). | codex · rb | codex §Wiring card and dial composition; rb §7 item 2 |
 | A8 | The civic role engine must not be woken as written; it re-aligns in place to real official actions (retiring it was suggested by rb and codex as an option and is off the table, builder 2026-10-09). | rb · codex | rb §3.3, §5.1; codex §4, call 1 |
 | A9 | The civic role engine runs before initiatives resolve (code-verified: Phase5-CivicRoles at `godWorldEngine2.js:635`, Initiatives at :636, CivicModeEvents at :638, and :2352/:2353/:2355). | codex · rb | codex wiring table; rb code check 2026-10-08 |
@@ -85,24 +89,22 @@ pointers:
 | A13 | The life-state helper already exists (`deriveLifeState_` :60, `isEventEligible_` :120 in `citizenContextBuilder.js`, engine.67); extend it, do not build another. | codex · rb | codex Task 2; rb code check 2026-10-08; [[2026-07-18-event-pools-design]] §3 |
 | A14 | SIM_DOCTRINE governs: causes before dice, no output quotas, persistent consequences. | codex · rb | codex §Evidence boundary |
 | A15 | **A cron's wake has one channel: its dials (builder 2026-10-09).** The wake (`scripts/citizen-wake.js` :360–430) writes a private reflection, classifies it into an event tag and an affect tag, and appends one `Reflection_Intake` row. The cycle's drain (`utilities/compressLifeHistory.js` :115–125, :655–690) adds a bounded share (×0.45 × 0.5) of those tags' dial deltas to the citizen's base dials. The other two things it does are dial-state too: a resolve that names an action sets a one-cycle posture note inside `DialState.maneuver`; a named bond has its intensity nudged by the feeling's sign (`BOND_NUDGE` 0.25, :143–146, :681–683), and bond changes come back as dial tags (`Bond` warmth +1, `ConnectionWithdrawn` sociability −1, `ConnectionMaintained` sociability +1 — `citizenDialMap.js` :186–193). So reflection → dials, and reflection → bond → dials. Tensions stay on the page and never reach the dials. Nothing the wake writes touches money, jobs, homes or households. Not yet traced end to end: how `bondEngine.js` (~:1919) turns a bond change into those dial lines. | rb (code) · builder | `citizen-wake.js` :360–430; `compressLifeHistory.js` :115–125, :143–146, :655–690; `citizenDialMap.js` :186–193, :333; builder 2026-10-09 |
+| A16 | **P1 settled.** `runCivicRoleEngine_`, `runAsUniversePipeline_`, `generateCivicModeEvents_` and `generateMediaModeEvents_` do read the citizen's row — status, role, hood, and for civic/media also tier and clock — but none reads personal NetWorth, Income, household relationships or the individual's DialState in the per-citizen loop. | codex (traced) · rb accepts | codex review Part 2 P1 (field-by-field table, file:line) |
+| A17 | **P9 settled.** The daily generator's and the Universe pipeline's direct `LifeHistory_Log` writes are listed in `SHEETS_MANIFEST.md` (:152, :155); the daily generator's direct `Generic_Citizens` writes (:3432, :3447) are not listed for that writer. | codex (quoted rows) | codex review P9 |
+| A18 | **P10 settled, rb's inference withdrawn.** Retained log rows by exact tag (C106–C110): Work 31/15/19/24/28, Career 10/10/10/8/9, Money 0 in the log but 7/9/13/9/25 in the citizen cells (the Money producer writes the cell only, `generationalWealthEngine.js:544–557`). The engine.67 rarity ruling applies to the shared household lottery, not to tag proportions, and no required ratio exists in the design. The small counts prove neither a defect nor compliance; rb's earlier reading of them as a defect was unsupported. | codex · rb corrected | codex review P10; rb read-before §2 corrected |
+| A19 | **P11 settled.** Daily output differs by life state in part: retirees draw no work-source lines; family inputs add specific candidates; the main loop skips minors by design (engine.144 youth gate). It conditions on WealthLevel, not personal Income or NetWorth; renters are not conditioned on tenure (HousingType unread); the ECL route produces unsupported workplaces (POP-00017 Raines, POP-00023 Mims "badged into the Baylight office"); a high earner (POP-00789 Varek) draws the same comfortable-wealth line as a mid earner. | codex (20-citizen purposive sample) | codex review P11 |
+| A20 | **P13 settled.** C110 fired on PROD @135 = engine source `e59e89f8`; the checkout is not that build. Commits since touching the scoped files: engine.208 fandom (×3), engine.281 sports ladder, engine.94 folk memory (all `generateCitizensEvents.js`), civic.43 (civic-mode and media-mode). All eight scoped files are byte-identical to the recorded current PROD `e87362b4`. | codex | codex review P13; `smoke_c110.md`, `DEPLOY.md:66`, `DEPLOY_HISTORY.md:137–149` |
+| A21 | Code facts codex verified in source and nobody contests: the neighborhood engine assigns a neighborhood before its roll and can discard its drawn line for pressure text; scheduler order puts the generic, game and neighborhood engines before the career, household and health writes; the wake admits only citizens with parseable dials and enough deviation, and its raw tail can drop a setback outside the milestone set. A changed behavior still needs its own bench acceptance. | codex · rb | codex original report §3, wiring table, wake table |
 
 ### Needs proof
 
 | # | Claim | Held by | Proof that settles it | Sources |
 |---|---|---|---|---|
-| P1 | The civic role, Universe, civic-mode and media-mode engines condition on nothing from the citizen's own row. rb's count said so; codex shows civic-mode and media-mode scale by health and condition on role, office and votes. | rb (overstated) vs codex | a per-engine trace listing every row field read in its per-citizen loop | rb §2 caveat, §7; codex §7–§8 |
-| P2 | The neighborhood engine discards a drawn line for pressure text and assigns a neighborhood before its roll. | codex | bench with forced pressure; read the ledger line and `DialState.pressure` | codex §3 |
-| P3 | Retained logs attribute to engines (neighborhood six per cycle is reconstructed from text; no producer receipt exists). | codex | add a producer receipt on the bench and compare | codex §Weakest 1 |
+| P3 | Old C106–C110 log provenance cannot be recovered (neighborhood six per cycle is reconstructed from text). A producer receipt proves future writer identity only. | codex | accept the limitation; add a receipt for future cycles | codex §Weakest 1 |
 | P4 | The full chain event → dial → wake → reflection → next-cycle response works end to end. Each link is source-verified; nobody has run it. | codex | Task 2 bench path | codex §Additional source trace |
 | P5 | A setback tagged Friction/Strain/Stumble can fall out of the wake's five-line tail after routine lines (not in the milestone regex). | codex | setback + five routine lines through the wake perception builder | codex wake table row 4 |
 | P6 | Not every affected citizen can wake: pool admission needs parseable dials and sufficient deviation. | codex | fixture with a citizen outside the pool | codex wake table row 2 |
-| P7 | Early generators (generic micro, game-mode, neighborhood) cannot see later same-cycle career and health writes. | codex | measured dependency check on both scheduler paths | codex §Timing |
-| P8 | Removing the quotas changes runtime and RNG consumption within Apps Script limits. | codex | bench runtime and quota headroom | codex §Rates and quotas |
-| P9 | The two direct in-cycle writers are on `SHEETS_MANIFEST.md` §9 (a tabled direct write is a class, an untabled one a bug). | rb | read §9 | rb §3.4 |
-| P10 | The small Work (28), Money (25) and Career (9) counts against Neighborhood (622) in the C110-end ledger are a defect, not the rarity design engine.67 ruled. | rb | the same counts over several cycles against engine.67's weights | rb §2, §4 |
-| P11 | The main generator's output differs by life state as engine.67 designed. | rb | sample twenty citizens across life states | rb §4 |
-| P12 | A shared household event should require every member's route to admit it. | codex | builder call and a mixed-household bench | codex call 4 |
-| P13 | The local checkout equals the deployed C110 engine. | codex | confirm the deployed version before attributing behavior | codex §Evidence boundary |
+| P8 | Removing the quotas can change runtime and RNG consumption; headroom within Apps Script limits is unproven. | codex | bench runtime and quota headroom | codex §Rates and quotas |
 
 ### New concepts
 
@@ -112,7 +114,7 @@ pointers:
 | N2 | The engine originates a consequential event from a supported situation plus a roll; it does not wait for another system to have produced every incident. | codex · amendment | removes the dependency on upstream incident generators | adopted into Task 4 |
 | N3 | ECL is the variety layer: outcome probability is rolled separately from within-outcome wording weight; the scope grows only by the fields the first families need. | codex · amendment ¶2–3 | variety without multiplying mechanical rewards | adopted into Task 4, Acceptance 4 |
 | N4 | Prove one consequential path end to end before expanding content. | codex · amendment ¶4 | keeps the build from becoming prose | adopted into Task 2 |
-| N5 | Pursuit-specific acceptance: events help or hinder the earned transition without completing it. | codex · amendment (last ¶) | stops events granting tier, fame, home or pilot status by text | adopted into Acceptance 5 |
+| N5 | Pursuit-specific acceptance: events help or hinder the earned transition; narration never grants completion, an earned completion goes through the owning writer (codex's wording was "without immediately completing"). | codex · amendment (last ¶) | stops events granting tier, fame, home or pilot status by text | adopted into Acceptance 5 |
 | N6 | Event identity and receipt: separate multiple genuine events in a cycle, repeated rendering, and re-entry after a persistence failure; test direct-log-then-queued-ledger partial failure. | codex · §Timing and persistence, §Tests 7 | duplicate protection for source-driven events | adopted into Tasks 6, 10 |
 | N7 | Paired causal tests: hold RNG constant, vary one attribute (employer, household, means, health, hood, exposure); the candidate set must change for the relevant reason. | codex · §Tests 2 | the proof of "aligned with the sim" | adopted into Task 10, Acceptance 1 |
 | N8 | Premise validation applies to ECL lines and hardcoded lines alike, before selection. | codex · §1, §Implementation shape | closes the ECL route around the occupation safeguard | adopted into Task 4 |
@@ -123,11 +125,70 @@ pointers:
 | N13 | Audit the daily 1–4 emit choice and the ECL forty-draw limit as further curation constraints. | codex · §Rates and quotas | finds quotas beyond the three named | held (Task 5 audit) |
 | N14 | Backfilling the 81 blank-flag rows is a separately reviewed identity classification plus an authorized sheet write. | codex · §Flags at mint | keeps the mint patch from touching live rows | held for builder |
 | N15 | Keep the civic role engine and the civic-mode events from narrating the same action twice (one record per action, shared). rb and codex also floated folding or retiring the civic role engine; the builder rejected retiring it 2026-10-09. | rb · §3.3, §5.1; codex call 1 | no double civic lines | adopted into Task 6 (engineering call; no builder question) |
-| N16 | Retired players' lives conditioned on state through the Universe pipeline (they stay flagged, so the regular-life engines never reach them). | rb · §5.3 | a post-career life, not a ≤10% filler note | held for builder |
+| N16 | Retired players' lives conditioned on state through the Universe pipeline (they stay flagged, so the regular-life engines never reach them); premise repairs adopted into Task 7, the content and rate choices held; removing regular-life access must not erase a protected citizen's own personal life. | rb · §5.3; codex R:169, R:212 | a post-career life, not a ≤10% filler note | held for builder |
 | N17 | Clear the written-but-never-read fields (at least ten), the phantom `crimeByNeighborhood` read and the unused `grantsThisCycle` read. | rb · §3.5 | hygiene rider | adopted into Task 9 |
 | N18 | Stop the neighborhood engine's pressure-text substitution for a drawn line. | codex · §3, Task 4 | removes a retag | adopted into Task 5 |
 | N19 | Premise defects in the clock engines: UNI means baseball, chief approves patrol changes with no effect, office lookup ignores active status, press-box lines for every media role. | codex · §6–§8 | factual-premise repairs | adopted into Task 7 |
 | N20 | True up `SIMULATION_LEDGER.md` lines 87, 193–195; Tre Mingo (POP-00123, Active port worker) remains on UNI. | rb | docs and one leftover flag | adopted into Task 8; Tre Mingo's write awaits an explicit yes |
+| N21 | Each engine keeps a distinct lived responsibility: daily the ongoing week, generic incidental encounters, neighborhood exposure to local change, the clock engines their profession. Personal is inside daily, not a ninth engine. | codex · R:183, R:66; review F5 | stops the engines becoming interchangeable pools | adopted into Tasks 4–7 |
+| N22 | Factual admission is separate from probabilistic odds: a personality band or prosperity never makes an adverse outcome impossible; a child cannot draw adult employment, a detained citizen cannot commute, a hospitalized citizen cannot do fieldwork. | codex · R:177; review F6, F27 | keeps failure reachable | adopted into Task 3, Acceptance 2 |
+| N23 | Draft, assignment and publication are distinct: a filed or draft line cannot grant publication credit; the Universe retirement line is unstamped; MEDIA/CIVIC health scaling changes chance without making an activity feasible. | codex · R:98–100, R:118–120; review F27 | concrete acceptance cases for the clock engines | adopted into Task 7 |
+| N24 | Avoid duplicate experience or scoring across GAME/feed and civic/daily while allowing many citizens to share one real event; global text uniqueness is not an event identity. | codex · R:106, R:183; review F11 | cross-generator dedupe | adopted into Tasks 6, 10 |
+| N25 | No expansion of the checkpoint system and no claim of cross-tab atomicity: direct log writes and queued ledger writes can diverge, and a Cycle watermark alone cannot identify multiple events. | codex · R:185; review F13 | scope boundary | adopted as a constraint, Task 10 |
+| N26 | Wake perception limits: the general `buildPool` does not carry Citizen Tier or NetWorth explicitly; heritage standing is not full personal state; only the general citizen wake was traced. | codex · R:246, R:251; review F30, F31 | the first kind's stake must reach the actual wake payload | adopted into Acceptance 3 |
+| N27 | Use the existing ascent chain (`2026-09-02-bloodline-ascent`) and the existing posture and wake-selection links; no parallel progression system or scheduler, and no claim that arbitrary commands are supported. | codex · R:238–249; review F29 | scope boundary | adopted as a constraint |
+| N28 | An evidence-boundary row: current snapshot, retained text, current source and deployment records are separate evidence; counts are lines, not people or citywide rates; no inference of route-at-draw from a current snapshot. | codex · R:31–36, R:56–60; review F42 | prevents over-reading data | adopted as a constraint |
+| N29 | Local scope limits for this work: no new tab, no live ECL population, no progression writes, no paid or wake work without the live-automation approval gate. | codex · R:164, R:181, R:269; review F41 | scope control | adopted as a constraint |
+| N30 | Filler reduction is a task of its own and comes after the replacement paths work: removing caps alone can raise filler. | codex · R:232, R:259; review F4 | the point of the whole job | adopted into Task 11 |
+
+## Codex plan-review dispositions (F1–F42)
+
+Every correction in the codex plan review, and where it landed. `folded` = changed in this plan 2026-10-09; the review file holds the full evidence.
+
+| F | Disposition |
+|---|---|
+| F1 | folded — Task 2 now builds and proves the first bounded kind |
+| F2 | folded — per-kind design record in Task 2 |
+| F3 | folded — Task 11 |
+| F4 | folded — Task 11, N30 |
+| F5 | folded — N21 |
+| F6 | folded — N22, Acceptance 2 |
+| F7 | folded — Task 4 candidate contract |
+| F8 | folded — Task 4 boundary |
+| F9 | folded — Acceptance 4 |
+| F10 | folded — Task 9 |
+| F11 | folded — N24 |
+| F12 | folded — Task 2 (persisted-versus-current input contract per kind), A21 |
+| F13 | folded — N25 |
+| F14 | folded — Task 8 |
+| F15 | folded — Task 5 |
+| F16 | folded — Task 5 audit, N13 |
+| F17 | folded — Task 10 |
+| F18 | folded — Task 10 |
+| F19 | folded — Task 10 |
+| F20 | folded — Task 10 (civic identity), Task 6 |
+| F21 | folded — Task 10 (mint tests) |
+| F22 | folded — Task 10 (event→dial tests) |
+| F23 | folded — Task 10 (four failure cases) |
+| F24 | folded — Task 10, Task 12 |
+| F25 | folded — A7 stands; normalization and netting caveats live in Task 10 |
+| F26 | folded — Tasks 5–7 premise and quota repairs |
+| F27 | folded — N23, Task 7 |
+| F28 | folded — N16 |
+| F29 | folded — N27 |
+| F30 | folded — N26, Acceptance 3 |
+| F31 | folded — N26, Acceptance 3 |
+| F32 | folded — N5, Acceptance 5 (attribution fix) |
+| F33 | folded — Acceptance 2 |
+| F34 | folded — A20 (false attribution removed) |
+| F35 | folded — P8 (false attribution removed) |
+| F36 | folded — A5, A16 (P1 refuted) |
+| F37 | folded — A21 |
+| F38 | folded — P3, A6 |
+| F39 | folded — P12 removed; N9 holds it once |
+| F40 | folded — reconfirmation question removed; the builder confirmed the exact quote 2026-10-09 |
+| F41 | folded — N29 |
+| F42 | folded — N28 |
 
 ## Open questions
 
@@ -143,3 +204,4 @@ pointers:
 - 2026-10-09 (research-build) — Builder's exact quote recorded; retire option for civic role removed; plain-word glossary and first-events question rewritten; Tre Mingo flag write pending an explicit yes.
 
 - 2026-10-09 (research-build) — Added A15 after reading the wake and the drain: a cron's reflection changes only dials, one named bond, and a one-cycle posture note; Acceptance 3 now ends there. Home-buying read (`generationalWealthEngine.js` :1757–2116): money gates (net worth, hood floor, income carry, no default) come before a 1%/cycle roll — the earlier stance-nudges-odds picture was wrong.
+- 2026-10-09 (research-build) — Folded codex's plan review: F1–F42 dispositioned, P1/P9/P10/P11/P13 settled into Agreed (A16–A20), five attributions to codex corrected, builder's 2026-10-09 words recorded, Goal rewritten around the dials channel.

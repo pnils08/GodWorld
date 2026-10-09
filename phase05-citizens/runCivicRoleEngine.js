@@ -237,7 +237,7 @@ function runCivicRoleEngine_(ctx) {
 
     var row = rows[r];
     var civFlag = (row[iCIV] || "").toString().toLowerCase();
-    if (civFlag !== "y") continue;
+    if (civFlag !== "y" && civFlag !== "yes") continue;
 
     var status = (row[iStatus] || "").toString().trim().toLowerCase();
     var name = (row[iFirst] + " " + row[iLast]).trim();

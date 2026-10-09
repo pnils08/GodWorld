@@ -129,7 +129,7 @@ pointers:
 | N17 | Clear the written-but-never-read fields (at least ten), the phantom `crimeByNeighborhood` read and the unused `grantsThisCycle` read. | rb · §3.5 | hygiene rider | adopted into Task 9 |
 | N18 | Stop the neighborhood engine's pressure-text substitution for a drawn line. | codex · §3, Task 4 | removes a retag | adopted into Task 5 |
 | N19 | Premise defects in the clock engines: UNI means baseball, chief approves patrol changes with no effect, office lookup ignores active status, press-box lines for every media role. | codex · §6–§8 | factual-premise repairs | adopted into Task 7 |
-| N20 | True up `SIMULATION_LEDGER.md` lines 87, 193–195; Tre Mingo (POP-00123, Active port worker) remains on UNI. | rb | docs and one leftover flag | adopted into Task 8; Tre Mingo's write awaits an explicit yes |
+| N20 | True up `SIMULATION_LEDGER.md` lines 87, 193–195; Tre Mingo (POP-00123, Active port worker) remains on UNI. | rb | docs and one leftover flag | adopted into Task 8; Tre Mingo's UNI `yes`→`no` applied 2026-10-09 on the builder's explicit yes, read back |
 | N21 | Each engine keeps a distinct lived responsibility: daily the ongoing week, generic incidental encounters, neighborhood exposure to local change, the clock engines their profession. Personal is inside daily, not a ninth engine. | codex · R:183, R:66; review F5 | stops the engines becoming interchangeable pools | adopted into Tasks 4–7 |
 | N22 | Factual admission is separate from probabilistic odds: a personality band or prosperity never makes an adverse outcome impossible; a child cannot draw adult employment, a detained citizen cannot commute, a hospitalized citizen cannot do fieldwork. | codex · R:177; review F6, F27 | keeps failure reachable | adopted into Task 3, Acceptance 2 |
 | N23 | Draft, assignment and publication are distinct: a filed or draft line cannot grant publication credit; the Universe retirement line is unstamped; MEDIA/CIVIC health scaling changes chance without making an activity feasible. | codex · R:98–100, R:118–120; review F27 | concrete acceptance cases for the clock engines | adopted into Task 7 |
@@ -195,7 +195,6 @@ Every correction in the codex plan review, and where it landed. `folded` = chang
 - Which kinds of life events do we build first, and how often and how hard do they hit? — blocks Tasks 2, 4, 10; builder. (Plain version: the pursuits in your quote — promotion, a home, a family, coverage, heritage, UNDOCKED, the teams. A starting suggestion: a promotion chance or setback and a home-buying break or setback, because the sim already has the machinery behind both. You pick, and set the odds and the stakes.)
 - Mixed protected and ordinary households (N9) — blocks the household-path part of Task 3; builder.
 - Does any new ENGINE entrant start protected, and which intake field certifies it? (N10) — blocks Task 8's exception; builder.
-- Tre Mingo (POP-00123, Active port worker, GodWorld origin, no baseball ties): clear his UNI flag per the 2026-10-09 flag approval — the live write needs an explicit yes (N20).
 
 ## Changelog
 
@@ -205,3 +204,4 @@ Every correction in the codex plan review, and where it landed. `folded` = chang
 
 - 2026-10-09 (research-build) — Added A15 after reading the wake and the drain: a cron's reflection changes only dials, one named bond, and a one-cycle posture note; Acceptance 3 now ends there. Home-buying read (`generationalWealthEngine.js` :1757–2116): money gates (net worth, hood floor, income carry, no default) come before a 1%/cycle roll — the earlier stance-nudges-odds picture was wrong.
 - 2026-10-09 (research-build) — Folded codex's plan review: F1–F42 dispositioned, P1/P9/P10/P11/P13 settled into Agreed (A16–A20), five attributions to codex corrected, builder's 2026-10-09 words recorded, Goal rewritten around the dials channel.
+- 2026-10-09 (research-build) — Tre Mingo (POP-00123) UNI flag cleared yes→no on the builder's explicit yes; read back from the live ledger.

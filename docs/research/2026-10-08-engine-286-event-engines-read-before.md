@@ -91,6 +91,6 @@ Codex's report: [[../../docs/for-claude-review/2026-10-08-codex-engine286-read-a
 
 ## 6. Next
 
-Codex is running the same job independently (task: `docs/for-claude-review/2026-10-08-engine286-codex-independent-run-TASK.md`, output `docs/for-claude-review/2026-10-08-codex-engine286-read-and-plan.md`). When it lands: compare read to read first (where the two disagree is where one of us is wrong), then cut one plan with the engine.284 build folded in. Plan cut waits for a fresh session; the merged skeleton starts from codex's tasks 2–8 re-ordered around the amendment (one consequential path proven end to end first, quotas and premise defects second).
+Codex is running the same job independently (task: `docs/for-claude-review/2026-10-08-engine286-codex-independent-run-TASK.md`, output `docs/for-claude-review/2026-10-08-codex-engine286-read-and-plan.md`). When it lands: compare read to read first (where the two disagree is where one of us is wrong), then cut one plan with the engine.284 build folded in. The merged plan is cut: [[../plans/2026-10-08-engine-286-game-of-life-events]] (Agreed / Needs proof / New concepts, each pointing back here and at codex's report); it was: the merged skeleton starts from codex's tasks 2–8 re-ordered around the amendment (one consequential path proven end to end first, quotas and premise defects second).
 
 Ignited plans: none yet. Verdict: adopt (the job is ruled; this is its substrate read).

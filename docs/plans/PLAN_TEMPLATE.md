@@ -1,7 +1,7 @@
 ---
 title: Plan, Research and Review Template
 created: 2026-04-16
-updated: 2026-10-07
+updated: 2026-10-08
 type: reference
 tags: [architecture, active]
 sources:
@@ -23,6 +23,7 @@ One shape for every working doc. Plans live in `docs/plans/`, research and revie
 - **The builder's words are quoted, not summarised,** with the date. A summary of a ruling is how engine.277 shipped inverted.
 - **One fact, one place.** A task's state lives in the Tasks table; what changed lives in a dated Changelog line (≤300 chars). Never restate status in prose.
 - **Dates absolute, cycles as `C<N>`.** "Next fire" goes stale; "C111, Sun 2026-10-11" doesn't, and the rollout's overdue check reads it.
+- **Reviews are reconciled in the plan, never folded away (builder 2026-10-08).** Every review a plan receives gets a row in `## Reviews reconciled` with a pointer to the full document, and every substantive item in it lands in exactly one of `### Agreed`, `### Needs proof` or `### New concepts`, each carrying a source pointer (`doc §section` or `doc:line`). An idea the plan author does not adopt still goes in New concepts, marked held; it is never dropped to keep the plan tidy. A rejected item says why, with evidence, in the review's own Disposition.
 - **Existing docs are not rewritten to fit.** They take this shape on their next real edit.
 
 ## Plan
@@ -57,6 +58,38 @@ pointers:
 ## Acceptance
 
 1. <testable outcome> — proven by <bench run / live fire C<N> / readback>.
+
+## Reviews reconciled
+
+One row per review, read, or lane run that bears on this plan. The row points at the full document; the three tables below carry its items in structured form, so the plan reads short and the research behind it stays one click away.
+
+| Review | Lane | Pointer | Result |
+|---|---|---|---|
+| <name> | rb / es / codex / agy / kimi / grok | [[<path>]] | SHIP · SHIP-WITH-FIXES · HOLD · read-only |
+
+### Agreed
+
+Both lanes hold it, or the builder ruled it, or one lane verified it in code and no lane contests it.
+
+| # | Item | Held by | Sources |
+|---|---|---|---|
+| A1 | <the item, one line> | rb · codex · builder | <doc §section or doc:line, one per lane> |
+
+### Needs proof
+
+A claim one lane makes that has not been verified, or a lane disagreement. Each names the proof that would settle it.
+
+| # | Claim | Held by | Proof that settles it | Sources |
+|---|---|---|---|---|
+| P1 | <claim> | <lane> | <bench run / live fire C<N> / code read / data pull> | <pointer> |
+
+### New concepts
+
+An idea a review brought that the plan did not start with. Nothing a reviewer proposes is removed here; the Status column says what the plan did with it.
+
+| # | Concept | Origin | What it adds | Status |
+|---|---|---|---|---|
+| N1 | <concept> | <lane> · <pointer> | <one line> | adopted into Task <n> · held for builder · parked (<trigger>) |
 
 ## Open questions
 
@@ -123,9 +156,12 @@ sources:
 ## Disposition
 
 <Filled by the Claude lane that acts on it: per finding, folded `<commit>` / rejected (<evidence>).>
+
+**Reconciled in:** <[[../plans/...]] §Reviews reconciled — the plan row that points back at this review>
 ```
 
 ## Changelog
 
+- 2026-10-08 (research-build) — Plan gains `## Reviews reconciled` (review pointers; Agreed / Needs proof / New concepts tables); Review gains a Reconciled-in pointer (builder: no reviewer idea minimised in a merged plan).
 - 2026-10-07 (engine-sheet) — Plan, research and review merged into one short template (builder agreed); the how-to prose cut; the research Watch List moved to BACKLOG.
 - 2026-04-16 — Initial plan template (S152).

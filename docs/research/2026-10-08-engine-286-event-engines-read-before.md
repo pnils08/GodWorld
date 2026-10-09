@@ -65,7 +65,7 @@ Live data point (C110-end ledger, 1,025 rows): 924 citizens carry at least one l
 
 ## 5. Builder calls this read already surfaces (for the plan, not decided here)
 
-1. Civic role engine: fold into civic-mode (one civic line source), re-align in place, or retire. (Builder: "an engine that could be better aligned with the sim and actual events that drive actions.")
+1. Civic role engine: fold into civic-mode (one civic line source), re-align in place, or retire. **Builder 2026-10-09: retiring it is off the table** — re-align in place; the plan keeps it and the civic-mode events from narrating the same action twice. (Builder: "an engine that could be better aligned with the sim and actual events that drive actions.")
 2. For the guardrailed canon figures, how much should world-state texture be replaced by lines caused by their own row and role — and which canon figures are "authored, never pool-drawn" (standing rule for top-tier seats).
 3. Whether the Universe pipeline's post-career note stays as a trickle or becomes the retired players' state-conditioned life (they stay flagged, so the regular-life engines will not reach them).
 

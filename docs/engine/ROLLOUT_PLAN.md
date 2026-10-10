@@ -12,10 +12,9 @@
 - [[../reference/DEPLOY_HISTORY]]: engine.282 live-observing, engine.283 live-observing, engine.213 in-progress
 - [[../plans/2026-09-21-care-and-justice-system]]: engine.254 live-observing, engine.271 live-observing, engine.272 live-observing
 - [[../plans/2026-09-10-inactivity-is-regression]]: engine.193 ready, engine.201 live-observing, engine.197 in-progress
-- [[../plans/2026-09-13-run-cycle-packages-the-world]]: engine.214 needs-info, pipeline.69 in-progress
 - [[../research/2026-10-02-engine-208-fandom-dial-read-before]]: engine.208 live-observing, engine.280 ready
+- [[../plans/2026-09-13-run-cycle-packages-the-world]]: engine.214 ready, pipeline.69 in-progress
 - [[../research/2026-10-03-engine-204-205-game-day-economy-read-before]]: engine.204 in-progress, engine.281 in-progress
-- [[../plans/2026-10-08-engine-286-game-of-life-events]]: engine.284 ready, engine.286 ready
 - [[../plans/2026-09-22-initiative-budget-disbursement]]: engine.257 ready, engine.256 ready
 - [[../plans/2026-10-04-school-board]]: civic.43 needs-info
 - [[../plans/2026-07-31-citizen-memory-perception]]: engine.94 live-observing
@@ -46,6 +45,7 @@
 - [[../plans/2026-07-31-engine-observability-integrity]]: infrastructure.6 ready
 - [[../plans/2026-09-28-storylines-keyed-to-engine-events]]: engine.270 ready
 - `docs/research/2026-10-08-codex-engine95-design.md`: engine.285 ready
+- [[../plans/2026-10-08-engine-286-game-of-life-events]]: engine.286 ready
 - [[../plans/2026-05-22-engine-regulatory-friction]]: engine.20d ready
 - [[../plans/2026-08-10-economy-native-rebuild]]: engine.104 ready
 - [[../research/2026-09-10-kimi-faith-lane-routing]]: engine.248 ready
@@ -130,9 +130,9 @@
 | engine.203d | Slow fade after a season ends, unbuilt. Ruled 2026-10-07: a won title fades slowly with no dip; a season ending in a loss is upset first, then the slow fade | ready | engine-sheet | [[../plans/2026-09-11-sports-as-a-lived-system]] Task 2 |
 | engine.194 | Record-driven sentiment and game-night intensity: codex authors Task 7 now that Tasks 1–4 are live | ready | engine-sheet | [[../plans/2026-09-11-sports-as-a-lived-system]] Task 7 |
 | engine.270 | Review 1 ruled 2026-10-08: build the anomaly tag (D1), no age on first-seen stages (D2), Task 7 step 1 attach pass. Queued, not dispatched (es on other work). Step 2 and the scorer rewire wait the C113 read | ready | engine-sheet | [[../plans/2026-09-28-storylines-keyed-to-engine-events]] §Review 1 Disposition |
-| engine.284 | Civic role gate y/yes/true — shipped inside engine.286 Task 6 v3.1, BENCHED 1004 @10 `331d5dc7` C113–C119 (all 53 live CIV rows read "yes"). Task 8 (birth/intake flags) stands. PROD waits on the builder's read of the C116–C119 lines + the C111 smoke | benched | engine-sheet | [[../plans/2026-10-08-engine-286-game-of-life-events]] Tasks 6, 8 |
+| engine.284 | Civic role gate y/yes/true — shipped inside engine.286 Task 6 v3.1, BENCHED 1004 @10 `331d5dc7` C113–C119 (all 53 live CIV rows read "yes"). Task 8 (birth/intake flags) stands. PROD waits on the builder's read of the C116–C119 lines + the C111 smoke | blocked | engine-sheet | [[../plans/2026-10-08-engine-286-game-of-life-events]] Tasks 6, 8 |
 | engine.285 | Phase-11 and executor kill hazards on every fire (LifeHistory trim clear-before-rewrite, BusinessArchive copy-then-delete, CitizenArchive skip-on-copy, MediaIntake mark-before-write, ensure-tab header, batch-append retry address). engine.95 shrinks exposure, does not fix them | ready | engine-sheet | `docs/research/2026-10-08-codex-engine95-design.md` §7 |
-| engine.286 | Event engines as dice-rolled situations the crons read (reflections feed dials), generic filler curtailed. Draft; pursuits code-read A23–A28; Task 6 civic role v3.1 built + benched by es (1004 @10, builder standing rules 2026-10-10: skew up, heavier = rarer, fire less); builder calls open on the other pursuits (first events, rates) | ready | research-build | [[../plans/2026-10-08-engine-286-game-of-life-events]] |
+| engine.286 | Event engines as dice-rolled situations the crons read (reflections feed dials), generic filler curtailed. Draft; pursuits code-read A23–A28; Task 6 civic role v3.1 benched by es (1004 @10, builder rules 2026-10-10 in the plan); builder calls open on the other pursuits | ready | research-build | [[../plans/2026-10-08-engine-286-game-of-life-events]] |
 | engine.20d | Initiative seeds on movement only in buildWorldSummary's civic lane. Released from the engine.270 wait 2026-10-08; spec only, no code yet. Not dispatched | ready | engine-sheet | [[../plans/2026-05-22-engine-regulatory-friction]] §Task 5 |
 | engine.280 | Fandom dial follow-up (read-before §2.9) | ready | engine-sheet | [[../research/2026-10-02-engine-208-fandom-dial-read-before]] §2.9 |
 | engine.104 | Mint economy: arrivals born with role-consistent salary, education, career stage; plan revision first, codex vets | ready | research-build | [[../plans/2026-08-10-economy-native-rebuild]] |

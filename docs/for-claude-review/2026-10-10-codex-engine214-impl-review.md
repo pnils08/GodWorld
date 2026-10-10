@@ -70,6 +70,15 @@ The declared deviations at `docs/plans/2026-10-10-engine-214-mood-per-hood.md:12
 
 ## Disposition
 
+engine-sheet, 2026-10-10 overnight — every finding verified against the code before acting; fix commit follows `89a59860` (failure-path only; the happy path is byte-equal to the benched engine on a 22-hood fixture world with crime, seeds, both buses, commute, sports, carry — `scratchpad eqCheck`, 22×8 hoods + city + carrier + signals + capacity + ripple rows identical):
+1. PASS — nothing to do.
+2. **reconciled, not built.** `citywideWeighted` had no reader before this cut either (the old `buildSeedSignals_` exported it the same way; grep 2026-10-10: zero consumers of `S.storySeedSignals` outside the file) — the plan's "lifts every hood through the citywide term" described a term that never existed. The citywide activity path is the count-relative attention gate in `applyObservedFeedback_` (seeds now vs the six-Cycle baseline), which does lift every hood. A weighted citywide magnitude is a rate — a sim call for the builder, not invented here. The test at `perHoodDynamics.test.js` now states that contract in its name and comment; D5's sentence is corrected in the plan's deviations section.
+3. PASS. 4. PASS.
+5. **held, recorded** as deviation N4 in the plan: `NMAP_NEIGHBORHOODS` (writer `:55`) is executable membership — row order and the per-row RNG draw order ride it, so replacing it with the canon list is its own task with a paired-Cycle RNG check, outside Task 14.
+6. PASS.
+7. **fixed.** (a) `hoodProfile_` / `hoodCharacterBase_` test an OWN property and a valid row shape (`hoodCharacterRowValid_`): `constructor`, `__proto__`, `hasOwnProperty` now throw like any unknown label — tested. (b) adjacency is read into the profile up front (`getAdjacentHoods_` throws at the profile pass, before anything is computed) AND the crime receipt is queued only after pass C, once every hood value exists — a throw anywhere above leaves no Ripple_Ledger row and no `S.rippleEvents` entry; tested with the Adjacent column absent and a two-spike hood (throws, zero ripple rows, nothing published).
+8. **partly.** The three boundary cases above are in the suite with the real ripple collector; `safePhaseCall_` itself is not loaded (godWorldEngine2.js is not a vm-loadable unit) — the contract the suite proves is the one the wrapper relies on: throw before any side effect. The F2 assertion is corrected per 2.
+
 **Reconciled in:** [[../plans/2026-10-10-engine-214-mood-per-hood]] §Reviews reconciled
 
 research-build, 2026-10-10 — F1/F3/F4/F6 PASS recorded (plan A12). F2, F7, F8 → es as Task 16 (citywideWeighted consumed + test inverted; hasOwnProperty on label/zone lookups; adjacency check before pass A so no receipt precedes a throw; safePhaseCall_-path tests). F5 → N3: the `NMAP_NEIGHBORHOODS` enumeration is grandfathered for this cut and named for the post-PROD writer follow-up; the plan no longer says the writer holds only the two holiday exceptions. Step re-declared after Task 16's re-fire.

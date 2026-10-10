@@ -100,7 +100,8 @@ function hoodProfile_(ctx, hood) {
   if (!character) {
     throw new Error('engine.214: Neighborhood_Map.EmployerCharacter is blank for "' + hood + '" — author the cell');
   }
-  if (!HOOD_CHARACTER_BY_EMPLOYER[character]) {
+  // own property only: an inherited key ('constructor', '__proto__') is not a row (codex impl review F7)
+  if (!Object.prototype.hasOwnProperty.call(HOOD_CHARACTER_BY_EMPLOYER, character) || !hoodCharacterRowValid_(HOOD_CHARACTER_BY_EMPLOYER[character])) {
     throw new Error('engine.214: Neighborhood_Map.EmployerCharacter "' + character + '" (' + hood + ') has no row in HOOD_CHARACTER_BY_EMPLOYER — a new label is new logic');
   }
   var zone = getHoodWeatherZone_(ctx, hood).toString().trim().toLowerCase();
@@ -113,14 +114,26 @@ function hoodProfile_(ctx, hood) {
     character: character,
     boomIndex: isFinite(boom) ? boom : 0,   // blank BoomIndex = no boom seed (membership absence is design)
     zone: zone,
-    scenes: getHoodScenes_(ctx, hood) || {}
+    scenes: getHoodScenes_(ctx, hood) || {},
+    // the bleed graph, read here so a missing Adjacent column throws before any receipt is queued (codex impl review F7)
+    adjacent: getAdjacentHoods_(ctx, hood) || []
   };
+}
+
+/** engine.214: a character row is seven finite multipliers plus a finite capacitySensitivity. */
+function hoodCharacterRowValid_(row) {
+  if (!row || typeof row !== 'object') return false;
+  var keys = ['traffic', 'retail', 'tourism', 'nightlife', 'publicSpaces', 'culturalActivity', 'communityEngagement', 'capacitySensitivity'];
+  for (var i = 0; i < keys.length; i++) {
+    if (!Object.prototype.hasOwnProperty.call(row, keys[i]) || !isFinite(Number(row[keys[i]]))) return false;
+  }
+  return true;
 }
 
 /** engine.214 D2 + D3: the hood's base multipliers from its label row and BoomIndex. */
 function hoodCharacterBase_(profile) {
-  var row = HOOD_CHARACTER_BY_EMPLOYER[profile.character];
-  if (!row) throw new Error('engine.214: no character row for "' + profile.character + '"');
+  var row = Object.prototype.hasOwnProperty.call(HOOD_CHARACTER_BY_EMPLOYER, profile.character) ? HOOD_CHARACTER_BY_EMPLOYER[profile.character] : null;
+  if (!hoodCharacterRowValid_(row)) throw new Error('engine.214: no character row for "' + profile.character + '"');
   var b = Number(profile.boomIndex) || 0;
   return {
     traffic: row.traffic,
@@ -1205,34 +1218,6 @@ function applyCityDynamics_(ctx) {
     rawHood[hood] = clampMetrics_(m);
   }
 
-  // engine.45 T3b / engine.214 D7: the crime→dynamics receipt — one row per
-  // Cycle naming the hoods at two or more prev-Cycle spikes, with the spikes
-  // themselves as prose (the line lands in a seed row's Why column).
-  if (crimeHoodsAtTwo.length) {
-    Logger.log('applyCityDynamics_ engine.214: crime ladder at >=2 in ' + crimeHoodsAtTwo.join(', ') +
-      ' (max ' + crimeMaxSpikes + ' prev-cycle spike(s))');
-    if (typeof recordRipple_ === 'function') {
-      recordRipple_(ctx, {
-        causeType: 'crime',
-        causeId: 'Crime_Metrics.shifts.prev-cycle',
-        causeDetail: prevCrimeSpikes.filter(function(sp) {
-          return sp && crimeHoodsAtTwo.indexOf(sp.neighborhood) !== -1;
-        }).map(function(sp) {
-          var metric = String(sp.metric || 'crime').replace(/([A-Z])/g, ' $1').toLowerCase();
-          return sp.neighborhood + ' ' + metric.trim() + ' +' + sp.magnitude +
-            (sp.newValue !== undefined ? ' (now ' + sp.newValue + ')' : '');
-        }).join('; ') || 'prev-cycle crime spike carry',
-        effectType: 'nightlife/tourism/publicSpaces/sentiment',
-        targetScope: 'neighborhood',
-        targetIds: crimeHoodsAtTwo,
-        neighborhood: crimeHoodsAtTwo.join('|'),
-        magnitude: crimeMaxSpikes,
-        duration: 1,
-        sourceEngine: 'applyCityDynamics.applyCrimeLadder_'
-      });
-    }
-  }
-
   // ─────────────────────────────────────────────────────────────────────────
   // CAPACITY CONSTRAINTS (engine.214 D9: peak demand across hoods; friction ×
   // the hood's own capacitySensitivity, applied BEFORE momentum — the hood's
@@ -1324,7 +1309,7 @@ function applyCityDynamics_(ctx) {
     for (var i = 0; i < hoodList.length; i++) {
       var h = hoodList[i];
       var baseSent = dyn[h].sentiment;
-      var neighbors = getAdjacentHoods_(ctx, h) || [];
+      var neighbors = profiles[h].adjacent || [];
       var neighborSum = 0;
       var neighborCount = 0;
       for (var j = 0; j < neighbors.length; j++) {
@@ -1472,6 +1457,36 @@ function applyCityDynamics_(ctx) {
       culturalActivity: cm.culturalActivity,
       communityEngagement: cm.communityEngagement
     });
+  }
+
+  // engine.45 T3b / engine.214 D7: the crime→dynamics receipt — one row per
+  // Cycle naming the hoods at two or more prev-Cycle spikes, with the spikes
+  // themselves as prose (the line lands in a seed row's Why column). Queued
+  // only now, after every hood value exists: a throw anywhere above leaves no
+  // receipt behind for a phase that published nothing (codex impl review F7).
+  if (crimeHoodsAtTwo.length) {
+    Logger.log('applyCityDynamics_ engine.214: crime ladder at >=2 in ' + crimeHoodsAtTwo.join(', ') +
+      ' (max ' + crimeMaxSpikes + ' prev-cycle spike(s))');
+    if (typeof recordRipple_ === 'function') {
+      recordRipple_(ctx, {
+        causeType: 'crime',
+        causeId: 'Crime_Metrics.shifts.prev-cycle',
+        causeDetail: prevCrimeSpikes.filter(function(sp) {
+          return sp && crimeHoodsAtTwo.indexOf(sp.neighborhood) !== -1;
+        }).map(function(sp) {
+          var metric = String(sp.metric || 'crime').replace(/([A-Z])/g, ' $1').toLowerCase();
+          return sp.neighborhood + ' ' + metric.trim() + ' +' + sp.magnitude +
+            (sp.newValue !== undefined ? ' (now ' + sp.newValue + ')' : '');
+        }).join('; ') || 'prev-cycle crime spike carry',
+        effectType: 'nightlife/tourism/publicSpaces/sentiment',
+        targetScope: 'neighborhood',
+        targetIds: crimeHoodsAtTwo,
+        neighborhood: crimeHoodsAtTwo.join('|'),
+        magnitude: crimeMaxSpikes,
+        duration: 1,
+        sourceEngine: 'applyCityDynamics.applyCrimeLadder_'
+      });
+    }
   }
 
   // ─────────────────────────────────────────────────────────────────────────

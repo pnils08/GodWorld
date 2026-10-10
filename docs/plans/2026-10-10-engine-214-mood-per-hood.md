@@ -136,6 +136,9 @@ pointers:
 - An unknown `WeatherZone` throws like an unknown `EmployerCharacter` label (D2 policy applied to D4).
 - Task 14 maps the old top values to the top `Scenes` weight: FF ≥3 → event ×1.8 nightlife ×1.4, 1–2 → ×1.4; CD ≥3 → ×1.5 +0.1, 1–2 → ×1.3.
 - A sixth harness the plan missed, `sportsWeekCity` (calls the writer's calendar mods), migrated with the five. Full suite 287/287; `perHoodDynamics.test.js` 48/48.
+- **D5 correction (codex impl review F2):** `citywideWeighted` is a signal with no reader — before this cut or after it — so "a citywide seed lifts every hood through the citywide term" described a term that never existed; the citywide activity path is the count-relative attention gate in `applyObservedFeedback_`. A weighted citywide seed magnitude would be a new rate: builder's call, not built. The test states the real contract.
+- **N4 (codex impl review F5), held:** `v3NeighborhoodWriter.js:55` `NMAP_NEIGHBORHOODS` is executable membership (row order + per-row RNG draw order ride it). Replacing it with the canon list is its own task with a paired-Cycle RNG check — outside Task 14, like N3.
+- **Fix-up after the bench (codex impl review F7):** inherited object keys as labels throw; the crime receipt is queued only after every hood value exists and adjacency is validated at the profile pass — failure-path only, happy path byte-equal to the benched `89a59860` on a full fixture world (22×8 hoods, city, carrier, signals, capacity, receipts).
 
 ## Open questions
 

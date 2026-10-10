@@ -33,9 +33,11 @@ const throwsLike = (fn, re) => { try { fn(); } catch (e) { return re.test(String
 
 function canonRows(over) {
   over = over || {};
-  return [['Neighborhood', 'WeatherZone', 'Adjacent', 'AttentionWeight', 'EmployerCharacter', 'Scenes']]
+  const rows = [['Neighborhood', 'WeatherZone', 'Adjacent', 'AttentionWeight', 'EmployerCharacter', 'Scenes']]
     .concat(HOODS.map(h => [h, over.zone && h in over.zone ? over.zone[h] : G.zone[h], G.adjacent[h], G.attention[h],
       over.chr && h in over.chr ? over.chr[h] : G.character[h], over.sc && h in over.sc ? over.sc[h] : SC[h]]));
+  if (over.noAdjacent) return rows.map(r => r.filter((_, i) => i !== 2));   // the Adjacent column absent: adjacency is null (engine.148 P2)
+  return rows;
 }
 function world() {
   const ripples = [];
@@ -95,6 +97,17 @@ console.log('engine.214 — mood per hood');
   check('an unknown EmployerCharacter label throws (no silent default)', throwsLike(() => run({ chr: { Laurel: 'spaceport' } }), /engine\.214.*"spaceport".*HOOD_CHARACTER_BY_EMPLOYER/));
   check('a blank label throws', throwsLike(() => run({ chr: { Laurel: '' } }), /engine\.214.*EmployerCharacter is blank/));
   check('a WeatherZone this engine does not key throws', throwsLike(() => run({ zone: { Laurel: 'tundra' } }), /engine\.214.*WeatherZone "tundra"/));
+  // codex impl review F7: an inherited object key is not a row — it must throw like any unknown label, and publish nothing
+  ['constructor', '__proto__', 'hasOwnProperty'].forEach(k => check('an inherited key as a label ("' + k + '") throws, no silent multiplier 1', throwsLike(() => run({ chr: { Laurel: k } }), /engine\.214.*no row in HOOD_CHARACTER_BY_EMPLOYER/)));
+  // codex impl review F7: a missing Adjacent column throws BEFORE any receipt — a failed phase leaves no Ripple_Ledger row
+  check('no Adjacent column: throws before any receipt is queued (two-spike hood, zero ripple rows)', (() => {
+    const w = world(); const rows = canonRows({ noAdjacent: true });
+    const ctx = { config: { cycleCount: 120 }, writeIntents: [], mode: {}, ss: { getSheetByName: n => n === 'Neighborhood_Map' ? { getDataRange: () => ({ getValues: () => rows }) } : null },
+      summary: { cycleId: 120, season: 'Fall', holiday: 'none', sportsSeason: 'off-season', weather: { type: 'clear', impact: 1 }, neighborhoodEconomies: {}, neighborhoodDemographics: {}, worldEvents: [], storySeeds: [], crimeByNeighborhood: { Dimond: 2 }, sportsCity: {}, sportsWeek: {} } };
+    w.sb.loadCanonNeighborhoods_(ctx); ctx.summary.neighborhoodState = {}; HOODS.forEach(h => { ctx.summary.neighborhoodState[h] = { employerCharacter: G.character[h], boomIndex: G.boomIndex[h] }; });
+    const threw = throwsLike(() => w.sb.applyCityDynamics_(ctx), /Adjacent/);
+    return threw && w.ripples.length === 0 && ctx.summary.neighborhoodDynamics === undefined && ctx.summary.cityDynamics === undefined;
+  })());
   check('canon not seeded throws (no embedded hood list)', (() => { const w = world(); const ctx = { config: {}, summary: { neighborhoodState: {} }, ss: { getSheetByName: () => null } };
     return throwsLike(() => w.sb.applyCityDynamics_(ctx), /canonical hood set not seeded/); })());
 }
@@ -137,7 +150,10 @@ console.log('engine.214 — mood per hood');
   const none = run();
   // a citywide seed (no hood) lifts no hood over another: every hood identical to the no-seed run, the weight goes citywide
   const cw = run({ summary: { storySeeds: [seed('', 20), seed('Narnia', 20)] } });
-  check('a citywide seed (no hood, or a hood off the map) goes to citywideWeighted only and moves no hood against another',
+  // citywideWeighted is a SIGNAL (S.storySeedSignals) with no reader — before this cut or after it; the citywide activity
+  // path is the count-relative attention gate in applyObservedFeedback_ (seeds now vs the six-Cycle baseline). So a
+  // citywide seed moves no hood here, and moves none against another (codex impl review F2, reconciled in the plan).
+  check('a citywide seed (no hood, or a hood off the map) goes to citywideWeighted only — a signal with no reader — and moves no hood',
     cw.S.storySeedSignals.citywideWeighted > 0 && HOODS.every(h => cw.S.storySeedSignals.byHood[h].weighted === 0) &&
     HOODS.every(h => JSON.stringify(cw.nd[h]) === JSON.stringify(none.nd[h])));
   // two active hoods (< 3): the median is null, the relative gates read 1 — a weight of 20 fires nothing
@@ -247,6 +263,38 @@ console.log('engine.214 — mood per hood');
   const fn = ws.slice(ws.indexOf('function buildHolidayNeighborhoodMods_'), ws.indexOf('// engine.204/205 §2.2'));
   const calendarPart = fn.slice(fn.indexOf('if (isFirstFriday)'), fn.indexOf("if (holiday === 'NewYearsEve')"));
   check('no First Friday / Creation Day hood literal remains in the writer\'s calendar mods', calendarPart.length > 100 && !/'Temescal'|'Downtown'|'Jack London'|'West Oakland'/.test(calendarPart) && /hoodsWithScene_\(ctx, 'FirstFriday'\)/.test(calendarPart) && /hoodsWithScene_\(ctx, 'CreationDay'\)/.test(calendarPart));
+}
+
+// ── 11. the real phase wrapper: a throw is an Engine_Errors row, nothing published, nothing queued ───
+{
+  const sbw = { Logger: { log: () => {} }, Math, Object, Array, Number, String, JSON, Date, isFinite, isNaN, parseFloat, console };
+  vm.createContext(sbw);
+  load(sbw, 'phase01-config/godWorldEngine2.js');   // safePhaseCall_, logEngineError_, computeShortHash_, recordPhaseTiming_
+  load(sbw, 'phase01-config/canonNeighborhoodLoader.js');
+  load(sbw, 'phase06-analysis/economicRippleEngine.js');
+  load(sbw, 'phase02-world-state/applyCityDynamics.js');
+  const wrapped = (over) => {
+    const ripples = [], errors = []; sbw.recordRipple_ = (c, e) => { ripples.push(e); return true; };
+    const rows = canonRows(over);
+    const ctx = { config: { cycleCount: 120 }, writeIntents: [], mode: {},
+      ss: { getSheetByName: n => n === 'Neighborhood_Map' ? { getDataRange: () => ({ getValues: () => rows }) } : (n === 'Engine_Errors' ? { appendRow: r => errors.push(r) } : null) },
+      summary: { cycleId: 120, season: 'Fall', holiday: 'none', sportsSeason: 'off-season', weather: { type: 'clear', impact: 1 }, neighborhoodEconomies: {}, neighborhoodDemographics: {}, worldEvents: [], storySeeds: [],
+        crimeByNeighborhood: { Dimond: 2 }, sportsCity: {}, sportsWeek: {} } };
+    sbw.loadCanonNeighborhoods_(ctx); ctx.summary.neighborhoodState = {};
+    HOODS.forEach(h => { ctx.summary.neighborhoodState[h] = { employerCharacter: over.chr && h in over.chr ? over.chr[h] : G.character[h], boomIndex: G.boomIndex[h] }; });
+    const ok = sbw.safePhaseCall_(ctx, 'Phase2-CityDynamics', () => sbw.applyCityDynamics_(ctx));
+    return { ok, errors, ripples, S: ctx.summary };
+  };
+  const good = wrapped({});
+  check('wrapper: the ordinary Cycle publishes 22 hoods, one crime receipt (Dimond at 2), no Engine_Errors row', good.ok === true && good.errors.length === 0 && Object.keys(good.S.neighborhoodDynamics).length === 22 && good.ripples.filter(e => e.causeType === 'crime').length === 1);
+  const bad = wrapped({ chr: { Laurel: '__proto__' } });
+  check('wrapper: an inherited-key label → false, one Engine_Errors row naming the label, S.cityDynamics and S.neighborhoodDynamics unset, zero ripple rows',
+    bad.ok === false && bad.errors.length === 1 && /no row in HOOD_CHARACTER_BY_EMPLOYER/.test(String(bad.errors[0][3])) && bad.S.cityDynamics === undefined && bad.S.neighborhoodDynamics === undefined && bad.ripples.length === 0, JSON.stringify(bad.errors[0] && bad.errors[0].slice(1, 4)));
+  const noAdj = wrapped({ noAdjacent: true });
+  check('wrapper: no Adjacent column with a two-spike hood → false, one Engine_Errors row, nothing published, zero ripple rows (no orphan receipt)',
+    noAdj.ok === false && noAdj.errors.length === 1 && /Adjacent/.test(String(noAdj.errors[0][3])) && noAdj.S.cityDynamics === undefined && noAdj.S.neighborhoodDynamics === undefined && noAdj.ripples.length === 0, JSON.stringify(noAdj.errors[0] && noAdj.errors[0].slice(1, 4)));
+  const zone = wrapped({ zone: { Laurel: 'tundra' } });
+  check('wrapper: an unlisted WeatherZone → false, one Engine_Errors row, nothing published', zone.ok === false && zone.errors.length === 1 && /WeatherZone "tundra"/.test(String(zone.errors[0][3])) && zone.S.neighborhoodDynamics === undefined && zone.ripples.length === 0);
 }
 
 console.log('\n' + passed + ' passed, ' + failed + ' failed');

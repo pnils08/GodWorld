@@ -5,7 +5,8 @@
  * [engine/sheet] — Phase 27 civic feedback loop
  *
  * v1.1 (S311, engine.45 T3e): outputs made real — per-initiative Ripple_Ledger
- * rows at compute site; sentimentBoost folded into finalCity.sentiment by
+ * rows at compute site; sentimentBoost is a diagnostic only since engine.214 (the
+ * hood bus is the one city path; applyCityDynamics_ no longer adds it) — was folded into finalCity.sentiment by
  * applyCityDynamics; dead S.sentiment write + unread triggers publish removed.
  *
  * Reads ImplementationPhase from Initiative_Tracker and applies ongoing
@@ -709,8 +710,12 @@ function applyInitiativeImplementationEffects_(ctx) {
       }
     }
 
-    // Sentiment contribution (city-wide, scaled by intensity)
-    var sentDelta = (effects.sentiment || 0.03) * intensity * 0.5; // half weight for city-wide
+    // Sentiment contribution — engine.214 (2026-10-10): this city scalar has NO
+    // reader in applyCityDynamics_ any more. The initiative reaches the city only
+    // through the hood bus above (the per-hood fold, then the equal mean of the
+    // 22 hoods) — one city path per cause. The scalar stays on
+    // S.initiativeImplementationEffects.sentimentBoost as a diagnostic only.
+    var sentDelta = (effects.sentiment || 0.03) * intensity * 0.5;
     totalSentiment += sentDelta;
 
     // Generate triggers for high-intensity active phases
@@ -747,8 +752,11 @@ function applyInitiativeImplementationEffects_(ctx) {
       recordRipple_(ctx, {
         causeType: 'initiative-implementation',
         causeId: name,
+        // engine.214 Task 15: the effect lands on the target hoods and reaches the
+        // city only through them (the hood fold → the equal-22 mean), never as a
+        // separate city add — the Why text says so.
         causeDetail: name + ' is ' + phase + ' — ongoing ' + domain +
-          ' effects in ' + hoods.join(', ') +
+          ' effects in ' + hoods.join(', ') + '; the city feels it through these neighborhoods' +
           (tend < 1 ? ' — untended ' + untended + ' Cycles, running at ' + Math.round(tend * 100) + '% strength' : ''),
         effectType: Object.keys(effects).join('/'),
         targetScope: 'neighborhood',

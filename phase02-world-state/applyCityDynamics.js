@@ -71,7 +71,7 @@ var HOOD_CHARACTER_BY_EMPLOYER = {
   'schools-retail': { traffic: 0.95, retail: 1.00, tourism: 0.80, nightlife: 0.85, publicSpaces: 1.00, culturalActivity: 1.00, communityEngagement: 1.15, capacitySensitivity: 0.7 },
   'professional':   { traffic: 0.95, retail: 1.15, tourism: 0.95, nightlife: 1.05, publicSpaces: 1.05, culturalActivity: 1.08, communityEngagement: 1.05, capacitySensitivity: 0.8 },
   'medical':        { traffic: 1.00, retail: 1.05, tourism: 0.90, nightlife: 0.95, publicSpaces: 1.10, culturalActivity: 1.00, communityEngagement: 1.05, capacitySensitivity: 0.8 },
-  'clinic':         { traffic: 0.95, retail: 1.10, tourism: 0.95, nightlife: 1.05, publicSpaces: 1.08, culturalActivity: 1.12, communityEngagement: 1.05, capacitySensitivity: 0.8 },
+  'clinic':         { traffic: 0.95, retail: 1.10, tourism: 0.95, nightlife: 1.10, publicSpaces: 1.08, culturalActivity: 1.12, communityEngagement: 1.05, capacitySensitivity: 0.8 },   // engine.214 Task 17 (builder 2026-10-10): nightlife above `professional` — Temescal carries Scenes arts / FirstFriday / Halloween, Rockridge Halloween only
   'residential':    { traffic: 0.95, retail: 0.95, tourism: 0.95, nightlife: 0.90, publicSpaces: 1.15, culturalActivity: 1.00, communityEngagement: 1.08, capacitySensitivity: 0.7 },
   'mixed':          { traffic: 1.00, retail: 1.00, tourism: 1.00, nightlife: 1.00, publicSpaces: 1.10, culturalActivity: 1.05, communityEngagement: 1.08, capacitySensitivity: 0.9 },
   'service-labor':  { traffic: 1.05, retail: 0.95, tourism: 0.80, nightlife: 0.90, publicSpaces: 0.95, culturalActivity: 1.00, communityEngagement: 1.12, capacitySensitivity: 0.8 },
@@ -81,6 +81,12 @@ var HOOD_CHARACTER_BY_EMPLOYER = {
 // engine.214 D4: the WeatherZone vocabulary this file keys fronts by (the ten
 // zones on the live sheet 2026-10-10). A zone off this list throws, the same
 // wall as an unknown character label.
+// engine.287 (builder 2026-10-10): the citywide crime gate in applyObservedFeedback_ reads its
+// six-Cycle ratio only from CITYWIDE_CRIME_FLOOR carried spikes this Cycle, and lands on each
+// hood at CITYWIDE_CRIME_SHARE of the citywide numbers (the own-hood ladder is the direct hit).
+var CITYWIDE_CRIME_FLOOR = 3;
+var CITYWIDE_CRIME_SHARE = 0.5;
+
 var HOOD_WEATHER_ZONES = ['urban-core', 'urban-corridor', 'moderate', 'waterfront', 'bay-fog', 'lake', 'inland', 'valley', 'hills', 'piedmont-edge'];
 
 /**
@@ -767,10 +773,23 @@ function applyCityDynamics_(ctx) {
     // At or below baseline is normal activity and costs nothing. This duplicates
     // applyShockMonitor's job as a workaround; once that detector is unstuck
     // (19 of 19 cycles shock-flag) this should read S.shockFlag instead.
+    // engine.287 (builder 2026-10-10): the ratio is read only once this Cycle's carried spike
+    // count reaches CITYWIDE_CRIME_FLOOR — one break-in against a six-Cycle baseline of 0.67 is
+    // single-digit noise, not a wave (it fired −0.28 on every hood C112–C114 on the engine.214
+    // bench). The count is the carried spike list (compactCrimeSpikes_: `increase` shifts on
+    // propertyCrime / violentCrime), not Crime_Metrics.IncidentCount. Live range at the cut:
+    // C108 2, C109 0, C110 0, bench C111 1. Bands and baseline unchanged. The citywide hit lands
+    // on every hood at CITYWIDE_CRIME_SHARE of the citywide numbers — "the world matters to
+    // everyone but your own hood effects you more directly": the own-hood D7 ladder is direct,
+    // the citywide read is half, between the own-hood one-spike (−0.06) and two-spike (−0.20) rungs.
     var crimeNow = safeNum_(obs.crimeNow, crime);
-    var crimeX = (crime > 0) ? crimeNow / crime : 1;
-    if (crimeX >= 1.5) { m.nightlife *= 0.88; m.publicSpaces *= 0.90; m.tourism *= 0.92; m.sentiment -= 0.28; }  // half again the usual: a crime wave
-    else if (crimeX >= 1.25) { m.nightlife *= 0.95; m.tourism *= 0.97; m.sentiment -= 0.12; }            // a bad stretch
+    var crimeX = (crimeNow >= CITYWIDE_CRIME_FLOOR && crime > 0) ? crimeNow / crime : 1;
+    var cs = CITYWIDE_CRIME_SHARE;
+    if (crimeX >= 1.5) {        // half again the usual: a crime wave — citywide −0.28 → −0.14, ×0.88 → ×0.94, ×0.90 → ×0.95, ×0.92 → ×0.96
+      m.nightlife *= 1 - 0.12 * cs; m.publicSpaces *= 1 - 0.10 * cs; m.tourism *= 1 - 0.08 * cs; m.sentiment -= 0.28 * cs;
+    } else if (crimeX >= 1.25) { // a bad stretch — citywide −0.12 → −0.06, ×0.95 → ×0.975, ×0.97 → ×0.985
+      m.nightlife *= 1 - 0.05 * cs; m.tourism *= 1 - 0.03 * cs; m.sentiment -= 0.12 * cs;
+    }
 
     var shocksNow = safeNum_(obs.shockCountNow, shocks);
     var shockX = (shocks > 0) ? shocksNow / shocks : 1;

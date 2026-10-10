@@ -190,6 +190,40 @@ console.log('engine.214 — mood per hood');
   check('no receipt when no hood reaches 2', none.ripples.filter(e => e.causeType === 'crime').length === 0);
 }
 
+// ── 6b. engine.214 Task 17 (north-hills nightlife split) + Task 19 / engine.287 (citywide crime floor + share) ──
+{
+  const w = world();
+  const T = w.sb.HOOD_CHARACTER_BY_EMPLOYER;
+  check('Task 17: `clinic` nightlife 1.10 sits above `professional` 1.05 (builder 2026-10-10: Temescal carries the Scenes, Rockridge does not)',
+    T.clinic.nightlife === 1.10 && T.professional.nightlife === 1.05);
+  const asClinic = run({ chr: { Laurel: 'clinic' } }), asPro = run({ chr: { Laurel: 'professional' } });
+  check('Task 17: the same hood on the same inputs reads more nightlife as `clinic` than as `professional`',
+    asClinic.nd.Laurel.nightlife > asPro.nd.Laurel.nightlife, asClinic.nd.Laurel.nightlife + ' vs ' + asPro.nd.Laurel.nightlife);
+
+  check('engine.287: floor 3 carried spikes, citywide share 0.5 — declared constants', w.sb.CITYWIDE_CRIME_FLOOR === 3 && w.sb.CITYWIDE_CRIME_SHARE === 0.5);
+  const none = run();
+  // last night = the last carried entry; the baseline is the three before it: (2 + 0 + 0) / 3 = 0.67
+  const hist = now => ({ activityObservations: { history: [{ cycle: 116, crime: 2 }, { cycle: 117, crime: 0 }, { cycle: 118, crime: 0 }, { cycle: 119, crime: now }] } });
+  const one = run({ summary: hist(1) });
+  check('engine.287: 1 carried spike vs a 0.67 baseline (ratio 1.5) reads under the floor — no citywide wave, every hood identical to the no-history Cycle',
+    HOODS.every(h => JSON.stringify(one.nd[h]) === JSON.stringify(none.nd[h])), JSON.stringify(one.nd.Dimond) + ' vs ' + JSON.stringify(none.nd.Dimond));
+  const wave = run({ summary: hist(3) });
+  const wr = (h, k) => wave.nd[h][k] / none.nd[h][k];
+  check('engine.287: 3 carried spikes vs 0.67 (ratio 4.5) is a real rise — the wave lands on every hood at the half share: nightlife ×0.94, publicSpaces ×0.95, tourism ×0.96',
+    HOODS.every(h => near(wr(h, 'nightlife'), 0.94, 0.01) && near(wr(h, 'publicSpaces'), 0.95, 0.01) && near(wr(h, 'tourism'), 0.96, 0.01)),   // within 0.01 at run level: capacity friction reads the city load; exact numbers in sentimentRestingLevel.test.js
+    [wr('Dimond', 'nightlife'), wr('Dimond', 'publicSpaces'), wr('Dimond', 'tourism')].map(x => x.toFixed(4)).join(' '));
+  check('engine.287: the citywide wave moves sentiment down on every hood, and by less than the own-hood two-spike rung (−0.20) moves a hood',
+    HOODS.every(h => wave.nd[h].sentiment < none.nd[h].sentiment) && (() => {
+      const two = run({ summary: { crimeByNeighborhood: { Dimond: 2 } } });
+      return (none.nd.Dimond.sentiment - wave.nd.Dimond.sentiment) < (none.nd.Dimond.sentiment - two.nd.Dimond.sentiment);
+    })(), (none.nd.Dimond.sentiment - wave.nd.Dimond.sentiment).toFixed(4));
+  const stretch = run({ summary: hist(4) });   // 4 vs a (2+0+0+... ) baseline — ratio 6: still the wave band; the bad-stretch band needs 1.25 ≤ x < 1.5
+  const bad = run({ summary: { activityObservations: { history: [{ cycle: 116, crime: 3 }, { cycle: 117, crime: 3 }, { cycle: 118, crime: 3 }, { cycle: 119, crime: 4 }] } } });   // 4 / 3 = 1.33
+  check('engine.287: a bad stretch (4 vs 3, ratio 1.33) lands at the half share: nightlife ×0.975, tourism ×0.985, publicSpaces untouched',
+    HOODS.every(h => near(bad.nd[h].nightlife / none.nd[h].nightlife, 0.975, 0.005) && near(bad.nd[h].tourism / none.nd[h].tourism, 0.985, 0.005) && near(bad.nd[h].publicSpaces / none.nd[h].publicSpaces, 1, 0.005)) &&
+    stretch.nd.Dimond.nightlife < bad.nd.Dimond.nightlife);
+}
+
 // ── 7. bleed before the fold; momentum bootstrap ─────────────────────────────
 {
   const none = run();

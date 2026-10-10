@@ -40,6 +40,9 @@ var clamp = function(n,min,max){ return Math.max(min, Math.min(max, n)); };
 var clampSent = function(n){ return clamp(n,-1,1); };
 function safeNum_(v,d){ if(d===undefined)d=0; var n=Number(v); return isFinite(n)?n:d; }
 var S = {};   // engine.214: modifiers take the hood's zone / scenes / name — no cluster table in the harness
+// engine.287: the citywide crime floor + share are file-level constants read by applyObservedFeedback_ — lifted from SRC
+var CITYWIDE_CRIME_FLOOR = ${(SRC.match(/var CITYWIDE_CRIME_FLOOR = ([0-9.]+);/) || [])[1]};
+var CITYWIDE_CRIME_SHARE = ${(SRC.match(/var CITYWIDE_CRIME_SHARE = ([0-9.]+);/) || [])[1]};
 function __setS(x){ S = x; }
 `;
 const M = new Function(HELPERS + NAMES.map(grab).join('\n') + '\nreturn {__setS:__setS,' + NAMES.join(',') + '};')();
@@ -235,6 +238,27 @@ console.log('8. engine.193 cut 1 — unemployment is a share of adults, sickness
   ok('a hood set with no adults reads 0 unemployment, not NaN',
     M.aggregateDemographics_(['X'], { X: { students: 5, adults: 0, seniors: 5, unemployed: 0, sick: 1 } }).unemploymentRate === 0);
   ok('no demographics still falls back', M.aggregateDemographics_(['Y'], {}).totalPopulation === 0);
+}
+
+// ── engine.287 (builder 2026-10-10): citywide crime floor + half share, exact numbers ──
+console.log('engine.287. citywide crime: floor 3 carried spikes, half share on every hood');
+{
+  const base = () => { const m = M.makeMetrics_(); return m; };
+  const feed = (m, crimeNow, crime) => M.applyObservedFeedback_(m, { events: 10, eventsNow: 10, media: 0, mediaNow: 0, storySeedCount: 35, storySeedCountNow: 35, crime: crime, crimeNow: crimeNow, shockCount: 10, shockCountNow: 10 });
+  const q = base(); feed(q, 0, 0);
+  const one = base(); feed(one, 1, 0.67);
+  ok('1 carried spike vs a 0.67 baseline (ratio 1.5) is under the floor: no wave', near(one.sentiment, q.sentiment) && near(one.nightlife, q.nightlife) && near(one.tourism, q.tourism) && near(one.publicSpaces, q.publicSpaces));
+  const two = base(); feed(two, 2, 0.67);
+  ok('2 vs 0.67 (ratio 3) is still under the floor: no wave', near(two.sentiment, q.sentiment) && near(two.nightlife, q.nightlife));
+  const wave = base(); feed(wave, 3, 0.67);
+  ok('3 vs 0.67 (ratio 4.5): the wave at half share — sentiment −0.14, nightlife ×0.94, publicSpaces ×0.95, tourism ×0.96',
+    near(wave.sentiment - q.sentiment, -0.14) && near(wave.nightlife / q.nightlife, 0.94) && near(wave.publicSpaces / q.publicSpaces, 0.95) && near(wave.tourism / q.tourism, 0.96),
+    [wave.sentiment - q.sentiment, wave.nightlife / q.nightlife, wave.publicSpaces / q.publicSpaces, wave.tourism / q.tourism].map(x => x.toFixed(4)).join(' '));
+  const bad = base(); feed(bad, 4, 3);
+  ok('4 vs 3 (ratio 1.33): a bad stretch at half share — sentiment −0.06, nightlife ×0.975, tourism ×0.985, publicSpaces untouched',
+    near(bad.sentiment - q.sentiment, -0.06) && near(bad.nightlife / q.nightlife, 0.975) && near(bad.tourism / q.tourism, 0.985) && near(bad.publicSpaces, q.publicSpaces));
+  const flat = base(); feed(flat, 5, 5);
+  ok('5 vs 5 (ratio 1): the ordinary city pays nothing', near(flat.sentiment, q.sentiment) && near(flat.nightlife, q.nightlife));
 }
 
 console.log('\n' + pass + ' passed, ' + fail + ' failed\n');

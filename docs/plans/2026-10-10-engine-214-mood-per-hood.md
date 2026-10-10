@@ -108,8 +108,8 @@ pointers:
 
 ## Open questions
 
-- Does the stadium lift reach the venue hood's adjacent hoods, and at what share? — blocks nothing (Task 4 ships venue-direct); for the builder.
+- **Builder's words (2026-10-10, on the stadium question):** "when games went for the casino A:L, I'd say take the teams first or last or combined total to determine if home or away". Read: home vs away for the lift comes from the week's games record — the combined total is what the engine already does (`utilities/sportsWeekRecord.js:11–18` parses H/A per game; `:292` `venueShare = homeGames / games`; the lift is `unsigned × venueShare`). "First or last game" variants are not built and not asked for beyond this line. Adjacent hoods: not ruled; Task 4 ships venue-direct. Held open only if the builder wants the first/last reading.
 
 ## Changelog
 
-- 2026-10-10 (research-build) — Created from the parent plan's map and the builder's ruling; codex + agy reviews requested.
+- 2026-10-10 (research-build) — Created from the parent plan's map and the builder's ruling; codex + agy reviews requested. Stadium home/away ruling recorded verbatim: the combined weekly total is the live mechanism (venueShare), nothing new to build.

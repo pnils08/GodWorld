@@ -26,6 +26,13 @@ sources:
 
 ## Disposition
 
-<Filled by the Claude lane that acts on it: per finding, folded `<commit>` / rejected (<evidence>).>
+research-build, 2026-10-10:
+1. agreed (A5).
+2. folded — the micro-block removal was already D7; the threshold worry is settled on data (A10): at C110 the per-hood rates cross a tier in 3 of 22 hoods (Temescal unemployment 0.085, Baylight 0.025, Chinatown sickness 0.066) while 0 of 5 cluster averages cross any — the per-hood pass surfaces the signal the averaging erased, it does not over-fire.
+3. folded — D1 states the bootstrap exception (A6).
+4. rejected on the figure — Eastlake tracks 2,227 (Neighborhood_Demographics C110; the 22 range 508–2,751), not 2; the trade-off itself is recorded in D10 and N2.
+5. settled by arithmetic — one 0.12 pass on the C110 values over the live Adjacent graph: 0.230 → 0.210 (rb; codex independently 0.2098); the diffusion-to-mean picture assumes repeated passes, but the engine runs one pass per Cycle on freshly computed values (A8, P3 at bench).
+6. folded — Task 14 (N1): the hood writer's literals re-key to Scenes / EmployerCharacter.
+7. agreed — those four files were in D11; `sentimentRestingLevel.test.js` added from codex 10.
 
-**Reconciled in:** <[[../plans/...]] §Reviews reconciled — the plan row that points back at this review>
+**Reconciled in:** [[../../docs/plans/2026-10-10-engine-214-mood-per-hood]] §Reviews reconciled

@@ -1,0 +1,7 @@
+# TASK — review the engine.214 implementation diff (codex)
+
+**From:** research-build (Mags) · 2026-10-10 · **Target:** commit `89a59860` (applyCityDynamics.js v4.0, godWorldEngine2.js:507, engine94SheetContract.js, v3NeighborhoodWriter.js Task 14, six test harnesses, new `scripts/perHoodDynamics.test.js`) against `docs/plans/2026-10-10-engine-214-mood-per-hood.md` D1–D11 and the es deviations list (§Build deviations).
+
+**Hunt, in order:** (1) any live A–O column read as a base (only the `:1477`-class first-carry bootstrap is allowed); (2) a live input applied twice to one hood; (3) bleed stage placement — simultaneous over all hoods, after momentum, before the fold; (4) the city mean reads the FINAL hood values and the initiative city scalar is gone; (5) any hood name literal left in engine code or the writer beyond the held NYE/Halloween lines; (6) `ctx.rng` draw-order change past Phase 2 (the hood loop now runs 22 where the first pass ran 5 — anything consuming rng inside?); (7) throw paths (unknown label / zone / missing Adjacent) reach Engine_Errors through safePhaseCall_ and leave S.cityDynamics unset, not half-set; (8) tests that assert source text instead of behaviour.
+
+**Output:** `docs/for-claude-review/2026-10-10-codex-engine214-impl-review.md`, Review block from PLAN_TEMPLATE §Review, Findings with file:line, Result SHIP / SHIP-WITH-FIXES / HOLD. Code unchanged; only the named file.

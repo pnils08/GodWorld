@@ -231,12 +231,14 @@ function ensureEngine192Config_(ss) {
   return { configSeeded: plan.additions.length };
 }
 
-// engine.286 Task 6 (builder 2026-10-09): civic role events — weight coded on probability, up and down.
+// engine.286 Task 6 (builder 2026-10-09 / standing rules 2026-10-10): civic role events —
+// skew up over down, the heavier the rarer (small >= medium >= large at every aura), fires less than every Cycle.
 var ENGINE286_CONFIG_SEEDS = [
-  ['civicRoleUpChance', 0.5, 'engine.286 civic role: base chance an official\'s weekly hood event is up (a lift) rather than down (an obstacle), before the hood premise leans it', 0.05, 0.95, false],
+  ['civicRoleFireChance', 0.35, 'engine.286 civic role: per-citizen chance an official gets a hood event this Cycle at all (flat; aura drives size, not frequency)', 0.05, 1, false],
+  ['civicRoleUpChance', 0.6, 'engine.286 civic role: base chance an official\'s hood event is up (a lift) rather than down (an obstacle), before the hood premise leans it; above 0.5 = skew up', 0.05, 0.95, false],
   ['civicRolePremiseLean', 0.2, 'engine.286 civic role: how far a good or bad hood premise (business, safety, city project, mood) moves the up chance', 0, 0.45, false],
-  ['civicRoleMediumOdds', 0.3, 'engine.286 civic role: base odds of a medium-weight event at aura 1 (aura = 1.2 + approval, Tier, Famous raise it)', 0, 0.9, false],
-  ['civicRoleLargeOdds', 0.1, 'engine.286 civic role: base odds of a large-weight event at aura 1', 0, 0.9, false]
+  ['civicRoleMediumOdds', 0.12, 'engine.286 civic role: base odds of a medium-weight event at aura 1 (aura = 1.2 + approval, Tier, Famous raise it; small is squeezed no lower than medium)', 0, 0.9, false],
+  ['civicRoleLargeOdds', 0.04, 'engine.286 civic role: base odds of a large-weight event at aura 1; must not exceed civicRoleMediumOdds', 0, 0.9, false]
 ];
 
 function ensureEngine286Config_(ss) {

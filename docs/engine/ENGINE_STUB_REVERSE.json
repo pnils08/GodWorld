@@ -1,8 +1,8 @@
 {
-  "generated": "2026-10-09",
+  "generated": "2026-10-10",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 180,
-  "functionsMapped": 1653,
+  "functionsMapped": 1655,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -1977,7 +1977,7 @@
         "phase03-population/updateCrimeMetrics.js::updateCrimeMetrics_Phase3_",
         "phase04-events/buildCityEvents.js::buildCityEvents_",
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
-        "phase05-citizens/runCivicRoleEngine.js::civicRolePremises_",
+        "phase05-citizens/runCivicRoleEngine.js::runCivicRoleEngine_",
         "phase07-evening-media/applyStorySeeds.js::applyStorySeeds_",
         "phase07-evening-media/buildNightLife.js::buildNightlife_",
         "phase07-evening-media/cityEveningSystems.js::buildCityEveningSystems_",
@@ -3134,7 +3134,7 @@
         "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_"
       ],
       "readers": [
-        "phase05-citizens/runCivicRoleEngine.js::civicRolePremises_",
+        "phase05-citizens/runCivicRoleEngine.js::runCivicRoleEngine_",
         "phase08-v3-chicago/v3NeighborhoodWriter.js::hoodBusinessCity_",
         "phase08-v3-chicago/v3NeighborhoodWriter.js::hoodBusinessFactor_"
       ]

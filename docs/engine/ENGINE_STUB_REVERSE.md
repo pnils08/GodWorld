@@ -1,6 +1,6 @@
 # Engine Stub Reverse Index
 
-**Generated:** 2026-10-09 by `scripts/stubEngine.js` (mechanical — no LLM).
+**Generated:** 2026-10-10 by `scripts/stubEngine.js` (mechanical — no LLM).
 
 **Purpose:** Cheap lookup — given an `S.*` field or sheet name, find every function that reads or writes it. Companion to `ENGINE_STUB_MAP.md` (forward: function → fields).
 
@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 180 · **Functions mapped:** 1653 · **S.* fields:** 370 · **Sheets:** 61
+**Files scanned:** 180 · **Functions mapped:** 1655 · **S.* fields:** 370 · **Sheets:** 61
 
 ## S.* / ctx.summary reverse index
 
@@ -202,7 +202,7 @@
 | `S.holidayPriority` | `phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_`, `phase08-v3-chicago/v3preLoader.js::v3PreloadContext_` | `phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_`, `phase01-config/godWorldEngine2.js::updateWorldPopulation_`, `phase02-world-state/applyCityDynamics.js::applyCityDynamics_`, `phase02-world-state/applySeasonWeights.js::applySeasonalWeights_`, `phase02-world-state/applyWeatherModel.js::applyWeatherModel_`, `phase02-world-state/calendarChaosWeights.js::applyChaosCategoryWeights_`, …(+54 more) | 2 | 60 |
 | `S.homesPurchasedByLine` | `phase05-citizens/generationalWealthEngine.js::trackHomeOwnership_` | `phase05-citizens/generationalWealthEngine.js::updateHeritage_` | 1 | 1 |
 | `S.homesSoldByLine` | `phase05-citizens/generationalWealthEngine.js::sellHouseholdHome_` | `phase05-citizens/generationalWealthEngine.js::sellHouseholdHome_`, `phase05-citizens/generationalWealthEngine.js::updateHeritage_` | 1 | 2 |
-| `S.hoodBusinessMomentum` | `phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_` | `phase05-citizens/runCivicRoleEngine.js::civicRolePremises_`, `phase08-v3-chicago/v3NeighborhoodWriter.js::hoodBusinessCity_`, `phase08-v3-chicago/v3NeighborhoodWriter.js::hoodBusinessFactor_` | 1 | 3 |
+| `S.hoodBusinessMomentum` | `phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_` | `phase05-citizens/runCivicRoleEngine.js::runCivicRoleEngine_`, `phase08-v3-chicago/v3NeighborhoodWriter.js::hoodBusinessCity_`, `phase08-v3-chicago/v3NeighborhoodWriter.js::hoodBusinessFactor_` | 1 | 3 |
 | `S.hoodEmployerDepth` | `phase02-world-state/commuteFlowEngine.js::buildCommuteFlows_` | `phase03-population/updateNeighborhoodDemographics.js::buildHoodEmploymentWeights_`, `phase08-v3-chicago/v3NeighborhoodWriter.js::hoodCharacterCity_`, `phase08-v3-chicago/v3NeighborhoodWriter.js::hoodRetailRaw_` | 1 | 3 |
 | `S.hoodFloorWaveCount` | `phase05-citizens/checkForPromotions.js::checkForPromotions_` | _(none)_ | 1 | 0 |
 | `S.hoodHeadcount` | `phase01-config/canonNeighborhoodLoader.js::getHoodHeadcount_` | `phase01-config/canonNeighborhoodLoader.js::getHoodHeadcount_` | 1 | 1 |
@@ -258,7 +258,7 @@
 | `S.neighborhoodAssignments` | `phase05-citizens/runNeighborhoodEngine.js::runNeighborhoodEngine_` | _(none)_ | 1 | 0 |
 | `S.neighborhoodDemographics` | `phase02-world-state/applyCityDynamics.js::applyCityDynamics_`, `phase03-population/updateNeighborhoodDemographics.js::updateNeighborhoodDemographics_` | `phase02-world-state/applyCityDynamics.js::applyCityDynamics_`, `phase04-events/careJusticeService.js::runCareJusticeDemand_`, `phase04-events/generationalEventsEngine.js::checkHealthEvent_`, `phase06-analysis/prioritizeEvents.js::prioritizeEvents_`, `phase07-evening-media/applyStorySeeds.js::applyStorySeeds_`, `phase07-evening-media/storyHook.js::storyHookEngine_` | 2 | 6 |
 | `S.neighborhoodDriftEvents` | `phase05-citizens/runNeighborhoodEngine.js::runNeighborhoodEngine_` | _(none)_ | 1 | 0 |
-| `S.neighborhoodDynamics` | `phase02-world-state/applyCityDynamics.js::applyCityDynamics_` | `phase02-world-state/applyCityDynamics.js::applyCityDynamics_`, `phase02-world-state/applyCityDynamics.js::getNeighborhoodDynamics_`, `phase03-population/updateCrimeMetrics.js::updateCrimeMetrics_Phase3_`, `phase04-events/buildCityEvents.js::buildCityEvents_`, `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_`, `phase05-citizens/runCivicRoleEngine.js::civicRolePremises_`, …(+6 more) | 1 | 12 |
+| `S.neighborhoodDynamics` | `phase02-world-state/applyCityDynamics.js::applyCityDynamics_` | `phase02-world-state/applyCityDynamics.js::applyCityDynamics_`, `phase02-world-state/applyCityDynamics.js::getNeighborhoodDynamics_`, `phase03-population/updateCrimeMetrics.js::updateCrimeMetrics_Phase3_`, `phase04-events/buildCityEvents.js::buildCityEvents_`, `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_`, `phase05-citizens/runCivicRoleEngine.js::runCivicRoleEngine_`, …(+6 more) | 1 | 12 |
 | `S.neighborhoodEconomies` | `phase01-config/loadPreviousEvening.js::seedCarriedNeighborhoodEconomies_`, `phase06-analysis/applyMigrationDrift.js::applyMigrationDrift_`, `phase06-analysis/economicRippleEngine.js::calculateNeighborhoodEconomies_`, `phase06-analysis/economicRippleEngine.js::runEconomicRippleEngine_` | `phase01-config/loadPreviousEvening.js::seedCarriedNeighborhoodEconomies_`, `phase02-world-state/applyCityDynamics.js::applyCityDynamics_`, `phase04-events/buildCityEvents.js::buildCityEvents_`, `phase06-analysis/applyMigrationDrift.js::applyMigrationDrift_`, `phase06-analysis/economicRippleEngine.js::generateEconomicSummary_`, `phase06-analysis/economicRippleEngine.js::runEconomicRippleEngine_`, …(+5 more) | 4 | 11 |
 | `S.neighborhoodEconomyFeedback` | `phase06-analysis/applyMigrationDrift.js::applyMigrationDrift_` | `phase06-analysis/applyMigrationDrift.js::renderMigrationBrief_` | 1 | 1 |
 | `S.neighborhoodEmploymentWeights` | _(none)_ | `phase03-population/updateNeighborhoodDemographics.js::updateNeighborhoodDemographics_` | 0 | 1 |

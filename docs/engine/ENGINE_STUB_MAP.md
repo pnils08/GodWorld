@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-10-09 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-10-10 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -2456,13 +2456,17 @@
 ### runCivicRoleEngine.js
 - **civicRoleConfig_(ctx)**
 
+- **civicRoleBands_(cfg, aura)**
+
 - **civicRoleApprovalByPop_(ctx)**
   Sheets: Civic_Office_Ledger
 
 - **civicRoleAura_(approval, tier, famous)**
 
-- **civicRolePremises_(S, hood)**
-  Reads: S.businessClosures, S.crimeMetrics, S.hoodBusinessMomentum, S.initiativeNeighborhoodEffects, S.neighborhoodDynamics
+- **civicRoleThirds_(byHood, field)**
+
+- **civicRolePremises_(S, hood, bands)**
+  Reads: S.businessClosures, S.crimeMetrics, S.initiativeNeighborhoodEffects
 
 - **civicRoleEclLines_(S, premise, dir)**
   Reads: S.contentLedger
@@ -2470,7 +2474,7 @@
 - **civicRolePickText_(rng, S, premise, dir)**
 
 - **runCivicRoleEngine_(ctx)**
-  Reads: S.absoluteCycle, S.cycleId, S.eventsGenerated
+  Reads: S.absoluteCycle, S.cycleId, S.eventsGenerated, S.hoodBusinessMomentum, S.neighborhoodDynamics
   Writes: S.eventsGenerated
   Config: ctx.config.cycleCount
   Sheets: LifeHistory_Log
@@ -4613,4 +4617,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1653
+**Functions mapped:** 1655

@@ -3,10 +3,21 @@
  * Civic Role Engine v3.0
  * ============================================================================
  *
- * v3.0 (engine.286 Task 6 / builder rulings 2026-10-09):
- * - One weighted event per Active CIV citizen per Cycle, drawn from what is
- *   happening in the citizen's own hood this Cycle — never a re-narration of
- *   what the city-hall crons or civic-mode already carry.
+ * STANDING RULES (builder 2026-10-10, verbatim in the plan) — anything added to
+ * this engine follows them:
+ *   1. The sign skews up over down: civicRoleUpChance sits above 0.5.
+ *   2. The heavier the event, the rarer it is: P(S) >= P(M) >= P(L) at EVERY
+ *      aura. civicRoleBands_ enforces the order structurally and
+ *      civicRoleConfig_ rejects largeOdds > mediumOdds, so no knob setting
+ *      can invert it.
+ *   3. It fires less than once per citizen per Cycle: civicRoleFireChance is a
+ *      flat per-citizen gate (aura drives size, never frequency).
+ *
+ * v3.1 (engine.286 Task 6 / builder rules 2026-10-10): fire gate, ordered bands,
+ *   up skew. v3.0 (builder rulings 2026-10-09):
+ * - A weighted event per Active CIV citizen that passes the fire gate, drawn
+ *   from what is happening in the citizen's own hood this Cycle — never a
+ *   re-narration of what the city-hall crons or civic-mode already carry.
  * - The roll is sign (up / down) then weight band (S / M / L). The hood premise
  *   leans the sign; aura (office Approval as the week opened, Tier, Famous)
  *   raises the odds of the M and L bands. A down draw is the cron's obstacle.
@@ -26,18 +37,18 @@
 
 // World_Config keys (engine94SheetContract.js ENGINE286_CONFIG_SEEDS) — a missing one throws.
 var CIVIC_ROLE_REQUIRED_KEYS = [
-  'civicRoleUpChance',      // base chance the draw is up, before the premise lean
+  'civicRoleFireChance',    // per-citizen chance an event fires at all this Cycle (rule 3)
+  'civicRoleUpChance',      // base chance the draw is up, before the premise lean (rule 1)
   'civicRolePremiseLean',   // how far a good / bad hood premise moves the up chance
   'civicRoleMediumOdds',    // base odds of a medium-weight event (aura 1)
-  'civicRoleLargeOdds'      // base odds of a large-weight event (aura 1)
+  'civicRoleLargeOdds'      // base odds of a large-weight event (aura 1); <= mediumOdds (rule 2)
 ];
 
-// Aura — a general citizen is 1.0; every CIV citizen sits above that.
+// Aura — a general citizen is 1.0; every CIV citizen sits above that. Ceiling 3.1.
 var CIVIC_ROLE_AURA_BASE_ = 1.2;
 var CIVIC_ROLE_AURA_APPROVAL_ = 0.8;   // × Approval / 100 (when the office row has one)
 var CIVIC_ROLE_AURA_TIER_ = { 1: 0.6, 2: 0.4, 3: 0.2, 4: 0 };
 var CIVIC_ROLE_AURA_FAMOUS_ = 0.5;
-var CIVIC_ROLE_SMALL_FLOOR_ = 0.1;     // aura never squeezes the small band below this
 
 // Premise texts; {hood} is the citizen's neighborhood. Hood obstacles and lifts —
 // never a vote, scandal, resignation, construction completion or office action.
@@ -128,7 +139,18 @@ function civicRoleConfig_(ctx) {
     else out[k] = n;
   }
   if (missing.length) throw new Error('runCivicRoleEngine_: World_Config missing or out of 0..1: ' + missing.join(', ') + ' (engine.286 keys — ensureEngine286Config_ self-arms them at open)');
+  if (out.civicRoleLargeOdds > out.civicRoleMediumOdds) throw new Error('runCivicRoleEngine_: civicRoleLargeOdds (' + out.civicRoleLargeOdds + ') above civicRoleMediumOdds (' + out.civicRoleMediumOdds + ') — the heavier event must be the rarer one (builder rule 2026-10-10)');
   return out;
+}
+
+// Band odds at this aura. Rule 2: P(S) >= P(M) >= P(L) always. Aura scales M and L
+// together; if small would fall under medium, both are squeezed by one factor so
+// small lands exactly on medium (the M:L ratio, and so M >= L, is kept).
+function civicRoleBands_(cfg, aura) {
+  var pL = cfg.civicRoleLargeOdds * aura;
+  var pM = cfg.civicRoleMediumOdds * aura;
+  if (1 - pL - pM < pM) { var k = 1 / (2 * pM + pL); pL *= k; pM *= k; }
+  return { pL: pL, pM: pM, pS: 1 - pL - pM };
 }
 
 // POPID -> highest office Approval as the week opened (pre-queue sheet value). Missing = absent key.
@@ -295,6 +317,9 @@ function runCivicRoleEngine_(ctx) {
     var famous = famousCell === 'y' || famousCell === 'yes' || famousCell === 'true';
     var approval = approvalByPop.hasOwnProperty(pop) ? approvalByPop[pop] : null;
 
+    // Fire gate (rule 3): flat per citizen — a quiet week is the default.
+    if (rng() >= cfg.civicRoleFireChance) continue;
+
     // Premise → sign → band (aura) → text.
     var premises = civicRolePremises_(S, neighborhood, bands);
     var premise = premises[Math.floor(rng() * premises.length)];
@@ -302,13 +327,9 @@ function runCivicRoleEngine_(ctx) {
     upChance = Math.max(0.05, Math.min(0.95, upChance));
     var dir = rng() < upChance ? 'up' : 'down';
 
-    var aura = civicRoleAura_(approval, tier, famous);
-    var pL = cfg.civicRoleLargeOdds * aura;
-    var pM = cfg.civicRoleMediumOdds * aura;
-    var room = 1 - CIVIC_ROLE_SMALL_FLOOR_;
-    if (pL + pM > room) { var squeeze = room / (pL + pM); pL *= squeeze; pM *= squeeze; }
+    var odds = civicRoleBands_(cfg, civicRoleAura_(approval, tier, famous));
     var bandRoll = rng();
-    var band = bandRoll < pL ? 'L' : (bandRoll < pL + pM ? 'M' : 'S');
+    var band = bandRoll < odds.pL ? 'L' : (bandRoll < odds.pL + odds.pM ? 'M' : 'S');
 
     var tag = 'CivicRole-' + (dir === 'up' ? 'Up' : 'Down') + '-' + band;
     // A draw against the premise (a down week where crime is falling) stays true to the hood:
@@ -356,6 +377,8 @@ if (typeof module !== 'undefined' && module.exports) {
     civicRolePremises_: civicRolePremises_,
     civicRoleThirds_: civicRoleThirds_,
     civicRoleAura_: civicRoleAura_,
+    civicRoleBands_: civicRoleBands_,
+    civicRoleConfig_: civicRoleConfig_,
     CIVIC_ROLE_REQUIRED_KEYS: CIVIC_ROLE_REQUIRED_KEYS,
     CIVIC_ROLE_TEXT_: CIVIC_ROLE_TEXT_
   };

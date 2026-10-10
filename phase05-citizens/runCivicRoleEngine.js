@@ -49,9 +49,19 @@ var CIVIC_ROLE_TEXT_ = {
       "Busy sidewalks in {hood} — a few business owners wanted them to see it."
     ],
     down: [
-      "Walked past a shuttered storefront in {hood}; a neighbor wanted to know what comes next for the block.",
       "Shop owners in {hood} pressed them about slow weeks on the corridor.",
-      "A merchant in {hood} cornered them about rent and thin foot traffic."
+      "A merchant in {hood} cornered them about rent and thin foot traffic.",
+      "Quiet registers on the {hood} corridor; a business owner asked them what the city sees coming."
+    ]
+  },
+  // A business actually closed in the hood this Cycle (S.businessClosures). Always a down lean,
+  // so an up draw renders as everyday (no up pool).
+  closure: {
+    up: [],
+    down: [
+      "Walked past a storefront that just closed in {hood}; a neighbor wanted to know what comes next for the block.",
+      "A shop on the {hood} corridor shut its doors this week, and people stopped them to talk about it.",
+      "Neighbors in {hood} were still talking about the business that closed down the street."
     ]
   },
   safety: {
@@ -105,7 +115,7 @@ var CIVIC_ROLE_TEXT_ = {
 };
 
 // Premises that have a public footprint pulse the hood; mood / everyday do not.
-var CIVIC_ROLE_PUBLIC_ = { business: true, safety: true, initiative: true };
+var CIVIC_ROLE_PUBLIC_ = { business: true, closure: true, safety: true, initiative: true };
 
 function civicRoleConfig_(ctx) {
   var cfg = (ctx && ctx.config) || {};
@@ -113,10 +123,11 @@ function civicRoleConfig_(ctx) {
   for (var i = 0; i < CIVIC_ROLE_REQUIRED_KEYS.length; i++) {
     var k = CIVIC_ROLE_REQUIRED_KEYS[i];
     var v = cfg[k];
-    if (v === undefined || v === null || v === '' || isNaN(Number(v))) missing.push(k);
-    else out[k] = Number(v);
+    var n = (typeof v === 'boolean' || v === null || v === undefined || String(v).trim() === '') ? NaN : Number(v);
+    if (!isFinite(n) || n < 0 || n > 1) missing.push(k);
+    else out[k] = n;
   }
-  if (missing.length) throw new Error('runCivicRoleEngine_: World_Config missing ' + missing.join(', ') + ' (engine.286 keys — ensureEngine286Config_ self-arms them at open)');
+  if (missing.length) throw new Error('runCivicRoleEngine_: World_Config missing or out of 0..1: ' + missing.join(', ') + ' (engine.286 keys — ensureEngine286Config_ self-arms them at open)');
   return out;
 }
 
@@ -124,7 +135,7 @@ function civicRoleConfig_(ctx) {
 function civicRoleApprovalByPop_(ctx) {
   var out = {};
   var sheet = ctx.ss ? ctx.ss.getSheetByName('Civic_Office_Ledger') : null;
-  if (!sheet) return out;
+  if (!sheet) throw new Error('runCivicRoleEngine_: Civic_Office_Ledger not found');
   var v = sheet.getDataRange().getValues();
   if (!v || v.length < 2) return out;
   var h = v[0], iPop = -1, iAppr = -1;
@@ -133,12 +144,13 @@ function civicRoleApprovalByPop_(ctx) {
     if (hn === 'popid') iPop = c;
     else if (hn === 'approval') iAppr = c;
   }
-  if (iPop < 0 || iAppr < 0) return out;
+  if (iPop < 0 || iAppr < 0) throw new Error('runCivicRoleEngine_: Civic_Office_Ledger has no PopId / Approval header');
   for (var r = 1; r < v.length; r++) {
     var pop = String(v[r][iPop] || '').trim();
-    var a = v[r][iAppr];
-    if (!pop || a === '' || a === null || isNaN(Number(a))) continue;
-    a = Number(a);
+    var raw = String(v[r][iAppr] === null || v[r][iAppr] === undefined ? '' : v[r][iAppr]).trim();
+    if (!pop || raw === '') continue;
+    var a = Number(raw);
+    if (!isFinite(a)) continue;
     if (!out.hasOwnProperty(pop) || a > out[pop]) out[pop] = a;
   }
   return out;
@@ -178,7 +190,7 @@ function civicRolePremises_(S, hood, bands) {
   var out = [];
   var closedHere = 0, cl = S.businessClosures || [];
   for (var i = 0; i < cl.length; i++) if (cl[i] && cl[i].hood === hood) closedHere++;
-  if (closedHere > 0) out.push({ key: 'business', lean: -1 });
+  if (closedHere > 0) out.push({ key: 'closure', lean: -1 });
   else if (bands.business[hood]) out.push({ key: 'business', lean: bands.business[hood] });
 
   var crime = S.crimeMetrics && S.crimeMetrics.context && S.crimeMetrics.context.byHood && S.crimeMetrics.context.byHood[hood];
@@ -214,6 +226,7 @@ function civicRolePickText_(rng, S, premise, dir) {
   var pool = civicRoleEclLines_(S, premise, dir);
   if (!pool.length) {
     var hard = CIVIC_ROLE_TEXT_[premise][dir];
+    if (!hard || !hard.length) hard = CIVIC_ROLE_TEXT_.everyday[dir];
     for (var i = 0; i < hard.length; i++) pool.push({ text: hard[i], weight: 1 });
   }
   var total = 0;
@@ -250,6 +263,12 @@ function runCivicRoleEngine_(ctx) {
   var iNeighborhood = idx('Neighborhood');
   var iTier = idx('Tier');
   var iFamous = idx('Famous');
+  var required = { POPID: iPopID, First: iFirst, Last: iLast, 'CIV (y/n)': iCIV, Status: iStatus, LifeHistory: iLife,
+                   LastUpdated: iLastUpd, Neighborhood: iNeighborhood, Tier: iTier, Famous: iFamous };
+  var absent = [];
+  for (var rk in required) if (required.hasOwnProperty(rk) && required[rk] < 0) absent.push(rk);
+  if (absent.length) throw new Error('runCivicRoleEngine_: Simulation_Ledger missing ' + absent.join(', '));
+  var skipped = [];
 
   var S = ctx.summary;
   var cycle = S.absoluteCycle || S.cycleId || ctx.config.cycleCount || 0;
@@ -269,10 +288,10 @@ function runCivicRoleEngine_(ctx) {
 
     var pop = String(row[iPopID] || '').trim();
     var name = (row[iFirst] + " " + row[iLast]).trim();
-    var neighborhood = iNeighborhood >= 0 ? String(row[iNeighborhood] || '').trim() : '';
-    if (!neighborhood) continue;   // no hood, no hood premise
-    var tier = iTier >= 0 ? Number(row[iTier]) : 4;
-    var famousCell = iFamous >= 0 ? String(row[iFamous] || '').trim().toLowerCase() : '';
+    var neighborhood = String(row[iNeighborhood] || '').trim();
+    var tier = Number(row[iTier]);
+    if (!pop || !neighborhood || !CIVIC_ROLE_AURA_TIER_.hasOwnProperty(tier)) { skipped.push(pop || ('row ' + (r + 2))); continue; }
+    var famousCell = String(row[iFamous] || '').trim().toLowerCase();
     var famous = famousCell === 'y' || famousCell === 'yes' || famousCell === 'true';
     var approval = approvalByPop.hasOwnProperty(pop) ? approvalByPop[pop] : null;
 
@@ -321,6 +340,8 @@ function runCivicRoleEngine_(ctx) {
     S.eventsGenerated = (S.eventsGenerated || 0) + 1;
     events++;
   }
+
+  if (skipped.length) Logger.log('runCivicRoleEngine_: skipped ' + skipped.length + ' Active CIV row(s) with no POPID, hood or Tier 1-4: ' + skipped.join(', '));
 
   // Phase 42 §5.6: flip ctx.ledger.dirty; consolidated commit at Phase 10.
   if (events > 0) {

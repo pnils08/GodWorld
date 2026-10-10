@@ -66,6 +66,18 @@ pointers:
 
 ## Reviews reconciled
 
+### Task 6 — codex design review 2026-10-09 (`docs/for-claude-review/2026-10-09-codex-engine286-task6-civic-role.md`, verdict HOLD; every cited line re-read by es) — dispositions, all engineering
+
+| # | Finding | Disposition |
+|---|---|---|
+| T6-1 | Moving the call past business dynamics changes shared-RNG draws and sees the post-turnover CIV cohort; heritage openings (`godWorldEngine2.js:669`) still come later | Move to after :641/:2358. Any new draw shifts the shared RNG wherever it sits — accepted, the bench is the read. Post-turnover cohort is correct (the person in the seat lives the week). v1 premises are what exists at that slot: `S.cityDynamics`/`S.neighborhoodDynamics`, crime by hood, `S.initiativeNeighborhoodEffects[hood]` (Phase 2), `S.businessClosures` + `S.hoodBusinessMomentum[hood]`. Openings are not a v1 premise. Texts never claim a vote, construction completion or cron action. |
+| T6-2 | Approval writes queue to Phase 10; `S.approvalChanges` is keyed by office | Aura reads `Civic_Office_Ledger.Approval` by `PopId` as the week opened (pre-queue). Missing = unavailable → Tier + `Famous` only, never 0 or a default. |
+| T6-3 | `recordPulse_` adds prose and tag rules on top of the primary tag | Civic role passes `tags=null, text=''` so only the graded primary moves the hood; graded entries in `PULSE_MAP`; pulse only on premises marked public. |
+| T6-4 | LifeHistory cell carries `[Civic Role]` (:379), the log `CivicRole` (:392); scanner allowlist exact; no civic tag is salient | One graded tag string in both (`CivicRole-Up-S/M/L`, `CivicRole-Down-S/M/L`), exact `DIAL_MAP` entries, legacy aliases kept; `generateBaselineBriefs.js:49` allowlist + hint updated; the two L grades join `SALIENT_TAG` (`wakePerception.js:374`) so a large up or down survives the five-line tail. `computeProfile_` has no caller — not a blocker. |
+| T6-5 | No cross-generator dedupe; the scandal/resigned status branches (:258–263) narrate office facts; daily generator draws every ECL pool | Status branches removed (office facts belong to civic-mode and approval). One civic role event per citizen per cycle by construction. Civic role draws only ECL pools `civicRole.*`; the daily generator skips that prefix (`generateCitizensEvents.js:2921`). Down texts are hood obstacles, never scandal, resignation, vote or office loss. |
+| T6-6 | ECL: no `source:civicRole`, no approval DSL field, `fame` = Cultural FameScore, the condition evaluator is nested in the daily generator, ECL Weight is wording weight | v1: pool chosen by premise + sign (`civicRole.<premise>.<up/down>`), ECL Weight used for wording only, no DSL conditions evaluated, no approval/fame DSL field added. `source:civicRole` whitelisted with its `primaryFromTags` branch in the same commit (paired contract). Hardcoded graded pools in code are the fallback until civicRole rows are authored. Sign/band odds live in code + World_Config, never ECL. |
+| T6-7 | Write boundary | Accepted as stated: LifeHistory append, LastUpdated, log intent, counters, in-memory pulse; dials and Neighborhood_Map move downstream by design. `S.civicRoleEvents` orphan removed. |
+
 | Review | Lane | Pointer | Result |
 |---|---|---|---|
 | Event-engine read-before (eight wiring cards, conditioning table, C110 tag counts, comparison §7) | rb | [[../research/2026-10-08-engine-286-event-engines-read-before]] | read-only |
@@ -222,3 +234,4 @@ Every correction in the codex plan review, and where it landed. `folded` = chang
 - 2026-10-09 (engine-sheet) — Builder's civic role ruling recorded verbatim (every cycle, weight by probability, up and down, non-canon-altering, aura = approval + fame + Tier); Task 6 rewritten as the design record.
 - 2026-10-09 (engine-sheet) — Task 6 build facts folded: phase order (move after business dynamics), approval coverage 39/53, pulse carries no weight, ECL variety is authoring volume, scandal seam, gate fix ships only inside Task 6.
 - 2026-10-09 (engine-sheet) — Builder approved the Task 6 design as the start: one weighted civic role event per CIV citizen per cycle.
+- 2026-10-09 (engine-sheet) — codex Task 6 review reconciled (T6-1..T6-7), all findings verified against source; design build-ready.

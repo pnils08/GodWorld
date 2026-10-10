@@ -162,5 +162,84 @@ console.log('engine.228 — activity observations carry');
   check('227: previousCycleState carries last night\'s level for Phase 2/6', sb.compactMediaEffects_({ coverageIntensity: 'heavy', crisisSaturation: 0.3 }).coverageIntensity === 'heavy');
 }
 
+// ── engine.214 Task 18a/18b: the story seeds carry — Phase 2's seed gates get their first input ──
+{
+  const near = (a, b, e) => Math.abs(a - b) <= (e === undefined ? 1e-9 : e);
+  const w = world();
+  const mk = (hood, p, dom, type, extra) => Object.assign({ text: 'seed text', neighborhood: hood, priority: p, domain: dom || 'GENERAL', seedType: type || 'signal',
+    calendarContext: { holiday: 'none', isFirstFriday: true, isCreationDay: false, sportsSeason: 'off-season' }, suggestedCitizens: ['POP-1'], seedId: 'abcd1234' }, extra || {});
+  const S = { cycleId: 108, storySeeds: [mk('Dimond', 3, 'COMMUNITY'), mk('', 5, 'HEALTH', 'shock'), mk('Laurel', 1), { text: '', neighborhood: 'Glenview', priority: 9 }, mk('Narnia', 2)] };
+  const c = w.sb.compactStorySeeds_(S);
+  check('compact: four fields per seed (n/d/p/t), the Cycle\'s calendarContext once, textless seeds skipped, sorted by priority',
+    c && c.cycle === 108 && c.count === 5 && c.seeds.length === 4 && c.seeds[0].p === 5 && c.seeds[0].n === '' && c.seeds[0].t === 'shock' && Object.keys(c.seeds[0]).length === 4 &&
+    c.calendarContext.isFirstFriday === true && c.calendarContext.holiday === 'none', JSON.stringify(c));
+  check('compact: no seeds → null (nothing saved, nothing to load)', w.sb.compactStorySeeds_({ storySeeds: [] }) === null && w.sb.compactStorySeeds_({}) === null);
+  const many = []; for (let i = 0; i < 80; i++) many.push(mk('Dimond', (i % 7) + 1));
+  const cm = w.sb.compactStorySeeds_({ cycleId: 108, storySeeds: many });
+  check('compact: capped at 60 by priority, the count records the real deck size, and 60 seeds sit well under the 9 KB prop cap (' + JSON.stringify(cm).length + ' chars)',
+    cm.seeds.length === 60 && cm.count === 80 && cm.seeds[0].p === 7 && JSON.stringify(cm).length < 4000);
+
+  // Cycle 108: Phase 2 ran with nothing carried (the first fire on this code) → no seed input, no citywideSeedWeight recorded (never a fake 0)
+  const A = ctxFor(108);
+  w.sb.loadPreviousCycleState_(A);
+  w.sb.applyCityDynamics_(seedCanon(w.sb, A));
+  check('first fire: nothing carried → Phase 2 reads no seeds (totalWeighted 0), the citywide ratio is 1', A.summary.storySeedsCarried === undefined && A.summary.storySeedSignals.totalWeighted === 0 && A.summary.storySeedSignals.citywideX === 1);
+  A.summary.eventsGenerated = 12; A.summary.worldEvents = new Array(9);
+  A.summary.storySeeds = [mk('Dimond', 3, 'COMMUNITY'), mk('Dimond', 4, 'COMMUNITY'), mk('Laurel', 2), mk('Glenview', 2), mk('', 5, 'HEALTH', 'shock'), mk('Citywide', 2)];
+  w.sb.finalizeCycleState_(A);
+  w.sb.savePreviousCycleState_(A);
+  check('save: PREV_STORY_SEEDS_JSON written for cycle 108 on its own key, not inside PREV_CYCLE_STATE_JSON',
+    typeof w.props.PREV_STORY_SEEDS_JSON === 'string' && w.props.PREV_STORY_SEEDS_JSON_CYCLE === '108' && JSON.parse(w.props.PREV_STORY_SEEDS_JSON).seeds.length === 6 &&
+    JSON.parse(w.props.PREV_CYCLE_STATE_JSON).storySeeds === undefined && JSON.parse(w.props.PREV_CYCLE_STATE_JSON).storySeedsCarried === undefined);
+  const e108 = JSON.parse(w.props.PREV_ACTIVITY_OBS_JSON).history.slice(-1)[0];
+  check('save: a Cycle whose Phase 2 had no carried seeds records no citywideSeedWeight (never a fake 0 into the baseline)', e108.cycle === 108 && e108.citywideSeedWeight === undefined && e108.seedHoodsActive === undefined, JSON.stringify(e108));
+
+  // Cycle 109: Phase 1 opens last night's seeds; Phase 2's seed gates have input for the first time
+  const B = ctxFor(109);
+  w.sb.loadPreviousCycleState_(B);
+  const carried = B.summary.storySeedsCarried;
+  check('load: S.storySeedsCarried opened from the blob — 6 seeds re-shaped to what seedWeight_ reads, S.storySeeds untouched (Phase 7\'s key)',
+    Array.isArray(carried) && carried.length === 6 && carried[0].priority === 5 && carried[0].seedType === 'shock' && carried[0].neighborhood === '' && carried[0].calendarContext.isFirstFriday === true &&
+    carried[0].carriedFromCycle === 108 && B.summary.storySeeds.length === 0, JSON.stringify(carried && carried[0]));
+  w.sb.applyCityDynamics_(seedCanon(w.sb, B));
+  const sig = B.summary.storySeedSignals;
+  check('Phase 2: the per-hood path has input — Dimond carries weight from its two seeds, Laurel and Glenview theirs; "Citywide" and the hood-less seed go to citywideWeighted',
+    sig.byHood.Dimond.weighted > sig.byHood.Laurel.weighted && sig.byHood.Laurel.weighted > 0 && sig.byHood.Glenview.weighted > 0 && sig.byHood.Dimond.count === 2 && sig.citywideWeighted > 0 && sig.totalWeighted > sig.citywideWeighted,
+    JSON.stringify({ D: sig.byHood.Dimond, L: sig.byHood.Laurel, cw: sig.citywideWeighted }));
+  check('Phase 2: first Cycle with input — no citywide baseline yet, ratio 1', sig.citywideBaseline === null && sig.citywideX === 1);
+  B.summary.eventsGenerated = 12; B.summary.worldEvents = new Array(9); B.summary.storySeeds = A.summary.storySeeds.slice();
+  w.sb.finalizeCycleState_(B);
+  w.sb.savePreviousCycleState_(B);
+  const e109 = JSON.parse(w.props.PREV_ACTIVITY_OBS_JSON).history.slice(-1)[0];
+  check('save: the Cycle that read carried seeds records the citywide read + the active hood count on the activity entry (the numbers for the builder)',
+    e109.cycle === 109 && near(e109.citywideSeedWeight, Math.round(sig.citywideWeighted * 100) / 100) && e109.seedHoodsActive === 3, JSON.stringify(e109));
+
+  // Cycle 110: the baseline exists — the same citywide week reads 1.0; a heavier one lifts every hood
+  const C = ctxFor(110);
+  w.sb.loadPreviousCycleState_(C);
+  w.sb.applyCityDynamics_(seedCanon(w.sb, C));
+  const sigC = C.summary.storySeedSignals;
+  check('next Cycle: the baseline is last Cycle\'s read; the same citywide seeds read ratio 1.0 — an ordinary week pays nothing',
+    near(sigC.citywideBaseline, e109.citywideSeedWeight) && near(sigC.citywideX, sigC.citywideWeighted / sigC.citywideBaseline) && Math.abs(sigC.citywideX - 1) < 0.01, JSON.stringify([sigC.citywideBaseline, sigC.citywideX]));
+  const heavy = world();
+  heavy.props.PREV_CYCLE_STATE_JSON = w.props.PREV_CYCLE_STATE_JSON; heavy.props.PREV_CYCLE_STATE_JSON_CYCLE = w.props.PREV_CYCLE_STATE_JSON_CYCLE;
+  heavy.props.PREV_ACTIVITY_OBS_JSON = w.props.PREV_ACTIVITY_OBS_JSON; heavy.props.PREV_ACTIVITY_OBS_JSON_CYCLE = w.props.PREV_ACTIVITY_OBS_JSON_CYCLE;
+  const heavyBlob = JSON.parse(w.props.PREV_STORY_SEEDS_JSON); heavyBlob.seeds.push({ n: '', d: 'HEALTH', p: 9, t: 'shock' }, { n: '', d: 'CIVIC', p: 6, t: 'event' });
+  heavy.props.PREV_STORY_SEEDS_JSON = JSON.stringify(heavyBlob); heavy.props.PREV_STORY_SEEDS_JSON_CYCLE = w.props.PREV_STORY_SEEDS_JSON_CYCLE;
+  const H = ctxFor(110);
+  heavy.sb.loadPreviousCycleState_(H);
+  heavy.sb.applyCityDynamics_(seedCanon(heavy.sb, H));
+  const sigH = H.summary.storySeedSignals;
+  check('next Cycle: a citywide health crisis + a civic event on top of the same week (ratio ≥ 1.75) lifts every hood — cultural and sentiment above the ordinary week on all 22, by the same amount everywhere',
+    sigH.citywideX >= 1.75 && HOODS.every(h => H.summary.neighborhoodDynamics[h].culturalActivity > C.summary.neighborhoodDynamics[h].culturalActivity && H.summary.neighborhoodDynamics[h].sentiment > C.summary.neighborhoodDynamics[h].sentiment) &&
+    H.summary.cityDynamics.sentiment > C.summary.cityDynamics.sentiment, 'ratio ' + sigH.citywideX.toFixed(2));
+  // the recorded keys survive compaction on later Cycles
+  H.summary.eventsGenerated = 12; H.summary.worldEvents = new Array(9); H.summary.storySeeds = A.summary.storySeeds.slice();
+  heavy.sb.finalizeCycleState_(H); heavy.sb.savePreviousCycleState_(H);
+  const histH = JSON.parse(heavy.props.PREV_ACTIVITY_OBS_JSON).history;
+  check('compact: citywideSeedWeight / seedHoodsActive ride the carried entries (109 kept its read; 110 recorded its own)',
+    histH.length === 3 && histH[0].citywideSeedWeight === undefined && near(histH[1].citywideSeedWeight, e109.citywideSeedWeight) && histH[1].seedHoodsActive === 3 && histH[2].citywideSeedWeight > histH[1].citywideSeedWeight, JSON.stringify(histH));
+}
+
 console.log('\n' + passed + ' passed, ' + failed + ' failed');
 process.exit(failed ? 1 : 0);

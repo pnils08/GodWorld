@@ -519,6 +519,15 @@ function savePreviousCycleState_(ctx) {
       saveCarryForwardBlob_(ctx, 'PREV_ACTIVITY_OBS_JSON', actJson, snapshot.cycle);
       Logger.log('savePreviousCycleState_: Saved ' + actJson.length + ' bytes of activity history for cycle ' + snapshot.cycle);
     }
+    // engine.214 Task 18a: last night's story seeds ride their OWN key for Phase 2's seed gates —
+    // Phase 2 reads seeds before Phase 7 writes them, so the per-hood seed gate and the citywide
+    // term ran on [] every live fire (the engine.228 class). ~52 seeds × 4 fields, ~3–4 KB.
+    var seedCarry = compactStorySeeds_(S);
+    if (seedCarry) {
+      var seedJson = JSON.stringify(seedCarry);
+      saveCarryForwardBlob_(ctx, 'PREV_STORY_SEEDS_JSON', seedJson, snapshot.cycle);
+      Logger.log('savePreviousCycleState_: Saved ' + seedJson.length + ' bytes of story seeds (' + seedCarry.seeds.length + ' of ' + seedCarry.count + ') for cycle ' + snapshot.cycle);
+    }
     // engine.195 (builder 2026-09-27, mood inertia): the city dynamics momentum carrier rides its
     // OWN key (~10 numbers, ~200 chars). Without it the Phase-2 momentum blend always saw prev =
     // null — each Cycle opened on a city with no memory of last week's mood.
@@ -625,6 +634,18 @@ function compactActivityObservations_(S) {
   // Absent when Phase 8 wrote none — never a fake 0.
   var covScore = S.mediaEffects ? Number(S.mediaEffects.coverageIntensityScore) : NaN;
   if (isFinite(covScore)) entry.coverageScore = covScore;
+  // engine.214 Task 18b: the citywide seed weight Phase 2 READ this Cycle (last night's hood-less
+  // seeds, summed by seedWeight_) is next Cycle's baseline for the citywide seed lift, and
+  // seedHoodsActive (hoods with any seed weight) proves the per-hood path had input. Recorded only
+  // when Phase 2 ran on carried seeds — a Cycle that had none yet would write a fake 0 into the
+  // baseline and hand the next real week a free top tier.
+  var ss = S.storySeedSignals;
+  if (ss && Array.isArray(S.storySeedsCarried) && S.storySeedsCarried.length && isFinite(Number(ss.citywideWeighted))) {
+    entry.citywideSeedWeight = Math.round(Number(ss.citywideWeighted) * 100) / 100;
+    var active = 0;
+    for (var hk in (ss.byHood || {})) { if (ss.byHood.hasOwnProperty(hk) && Number(ss.byHood[hk] && ss.byHood[hk].weighted) > 0) active++; }
+    entry.seedHoodsActive = active;
+  }
   var prior = (S.activityObservations && Array.isArray(S.activityObservations.history)) ? S.activityObservations.history : [];
   var out = [];
   for (var i = 0; i < prior.length; i++) {
@@ -634,10 +655,49 @@ function compactActivityObservations_(S) {
     for (var k = 0; k < keys.length; k++) { var v = Number(h[keys[k]]); o[keys[k]] = isFinite(v) ? v : 0; }
     if (h.coverage !== undefined && h.coverage !== null && isFinite(Number(h.coverage))) o.coverage = Number(h.coverage);
     if (h.coverageScore !== undefined && h.coverageScore !== null && isFinite(Number(h.coverageScore))) o.coverageScore = Number(h.coverageScore);
+    if (h.citywideSeedWeight !== undefined && h.citywideSeedWeight !== null && isFinite(Number(h.citywideSeedWeight))) o.citywideSeedWeight = Number(h.citywideSeedWeight);   // engine.214 Task 18b
+    if (h.seedHoodsActive !== undefined && h.seedHoodsActive !== null && isFinite(Number(h.seedHoodsActive))) o.seedHoodsActive = Number(h.seedHoodsActive);
     out.push(o);
   }
   out.push(entry);
   return { history: out.slice(-12) };
+}
+
+/**
+ * engine.214 Task 18a: this Cycle's story seeds, compacted for next Cycle's Phase 2 (applyCityDynamics_
+ * reads `S.storySeedsCarried`). Phase 7 writes S.storySeeds AFTER Phase 2 ran, so without this carry
+ * buildSeedSignals_ saw [] on every live fire: every per-hood seed weight 0, citywideWeighted 0, the
+ * seed gates never fired. Per seed: n (neighborhood), d (domain), p (priority), t (seedType) — the four
+ * inputs seedWeight_ reads; the Cycle's calendarContext once per blob. Cap 60 by priority (the live deck
+ * runs 28–58); seeds without text are skipped as buildSeedSignals_ skips them. null when there are none.
+ */
+function compactStorySeeds_(S) {
+  var seeds = (S && Array.isArray(S.storySeeds)) ? S.storySeeds : [];
+  var out = [];
+  var cc = null;
+  for (var i = 0; i < seeds.length; i++) {
+    var sd = seeds[i];
+    if (!sd || typeof sd !== 'object' || !sd.text) continue;
+    out.push({
+      n: String(sd.neighborhood || ''),
+      d: String(sd.domain || 'GENERAL'),
+      p: isFinite(Number(sd.priority)) && Number(sd.priority) > 0 ? Number(sd.priority) : 1,
+      t: String(sd.seedType || 'signal')
+    });
+    if (!cc && sd.calendarContext && typeof sd.calendarContext === 'object') {
+      cc = {
+        holiday: sd.calendarContext.holiday || '',
+        holidayPriority: sd.calendarContext.holidayPriority || '',
+        isFirstFriday: !!sd.calendarContext.isFirstFriday,
+        isCreationDay: !!sd.calendarContext.isCreationDay,
+        sportsSeason: sd.calendarContext.sportsSeason || ''
+      };
+    }
+  }
+  if (!out.length) return null;
+  out.sort(function(a, b) { return b.p - a.p; });
+  if (out.length > 60) out = out.slice(0, 60);
+  return { cycle: Number(S.cycleId || S.cycle || 0), count: seeds.length, calendarContext: cc, seeds: out };
 }
 
 function compactNeighborhoodDynamics_(nd) {

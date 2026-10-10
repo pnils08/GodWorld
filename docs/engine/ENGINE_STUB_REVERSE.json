@@ -2,7 +2,7 @@
   "generated": "2026-10-10",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 180,
-  "functionsMapped": 1655,
+  "functionsMapped": 1657,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -742,6 +742,7 @@
         "phase09-digest/applyCompressionDigestSummary.js::applyCompressedDigestSummary_",
         "phase09-digest/applyCycleWeight.js::applyCycleWeight_",
         "phase09-digest/finalizeCycleState.js::compactActivityObservations_",
+        "phase09-digest/finalizeCycleState.js::compactStorySeeds_",
         "phase09-digest/finalizeCycleState.js::finalizeCycleState_",
         "phase09-digest/finalizeCycleState.js::snapshotEveningForCarryForward_",
         "phase10-persistence/buildCyclePacket.js::buildCyclePacket_",
@@ -782,6 +783,7 @@
         "phase09-digest/applyCompressionDigestSummary.js::applyCompressedDigestSummary_",
         "phase09-digest/applyCycleWeight.js::applyCycleWeight_",
         "phase09-digest/finalizeCycleState.js::compactActivityObservations_",
+        "phase09-digest/finalizeCycleState.js::compactStorySeeds_",
         "phase09-digest/finalizeCycleState.js::finalizeCycleState_",
         "utilities/rippleLedger.js::recordRipple_"
       ]
@@ -1662,6 +1664,7 @@
         "phase09-digest/applyCompressionDigestSummary.js::applyCompressedDigestSummary_",
         "phase09-digest/applyCycleWeight.js::applyCycleWeight_",
         "phase09-digest/finalizeCycleState.js::compactActivityObservations_",
+        "phase09-digest/finalizeCycleState.js::compactStorySeeds_",
         "phase10-persistence/recordMediaLedger.js::recordMediaLedger_",
         "phase10-persistence/recordWorldEventsv25.js::recordWorldEvents25_",
         "utilities/cycleModes.js::buildCycleChecksum_"
@@ -1843,6 +1846,16 @@
       ],
       "readers": [
         "utilities/sportsWeekRecord.js::driftFranchiseWeight_"
+      ]
+    },
+    "storySeedsCarried": {
+      "writers": [
+        "phase01-config/loadPreviousEvening.js::seedCarriedStorySeeds_"
+      ],
+      "readers": [
+        "phase01-config/loadPreviousEvening.js::seedCarriedStorySeeds_",
+        "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
+        "phase09-digest/finalizeCycleState.js::compactActivityObservations_"
       ]
     },
     "activityObservations": {
@@ -2032,7 +2045,9 @@
       "writers": [
         "phase02-world-state/applyCityDynamics.js::applyCityDynamics_"
       ],
-      "readers": []
+      "readers": [
+        "phase09-digest/finalizeCycleState.js::compactActivityObservations_"
+      ]
     },
     "approvalNeighborhoodEffects": {
       "writers": [

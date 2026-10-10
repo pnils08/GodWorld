@@ -281,6 +281,7 @@ function loadPreviousCycleState_(ctx) {
       seedCarriedEconomicMood_(S);
       seedCarriedNeighborhoodEconomies_(ctx, S);
       seedCarriedActivityObservations_(ctx, S);   // engine.228
+      seedCarriedStorySeeds_(ctx, S);             // engine.214 Task 18a
       seedCarriedCityDynamics_(ctx, S);           // engine.195
       seedCarriedRelocationFlow_(ctx, S);         // engine.249
       seedCarriedFranchiseWeight_(ctx, S);        // engine.209
@@ -379,6 +380,43 @@ function seedCarriedFranchiseWeight_(ctx, S) {
     S.franchiseWeight = weights;
     S.franchiseWeightCarry = carried;
     Logger.log('seedCarriedFranchiseWeight_: ' + n + ' franchise weight(s) carried: ' + JSON.stringify(weights));
+  }
+}
+
+/**
+ * engine.214 Task 18a: last night's story seeds (PREV_STORY_SEEDS_JSON, written by Phase 9's
+ * compactStorySeeds_) opened as `S.storySeedsCarried` for Phase 2's seed gates. Never `S.storySeeds`:
+ * Phase 3 (updateCrimeMetrics) and Phase 5 (bondEngine) read that key for THIS Cycle's seeds and
+ * Phase 7 owns it. Each carried seed is re-shaped to what seedWeight_ reads (neighborhood, domain,
+ * priority, seedType, calendarContext); a missing blob (first fire on this code) is a graceful no-op —
+ * Phase 2 then reads no seeds and every seed ratio is 1, as it was on every live fire before this.
+ */
+function seedCarriedStorySeeds_(ctx, S) {
+  if (Array.isArray(S.storySeedsCarried) && S.storySeedsCarried.length) return;
+  var json = null;
+  try { json = loadCarryForwardBlob_(ctx, 'PREV_STORY_SEEDS_JSON', carryForwardCycleId_(ctx)); } catch (e) { json = null; }
+  if (!json) return;
+  var carried;
+  try { carried = JSON.parse(json); } catch (e) { return; }
+  if (!carried || !Array.isArray(carried.seeds)) return;
+  var cc = (carried.calendarContext && typeof carried.calendarContext === 'object') ? carried.calendarContext : null;
+  var out = [];
+  for (var i = 0; i < carried.seeds.length; i++) {
+    var sd = carried.seeds[i];
+    if (!sd || typeof sd !== 'object') continue;
+    out.push({
+      text: 'carried seed',
+      neighborhood: String(sd.n || ''),
+      domain: String(sd.d || 'GENERAL'),
+      priority: isFinite(Number(sd.p)) && Number(sd.p) > 0 ? Number(sd.p) : 1,
+      seedType: String(sd.t || 'signal'),
+      calendarContext: cc,
+      carriedFromCycle: Number(carried.cycle) || 0
+    });
+  }
+  if (out.length) {
+    S.storySeedsCarried = out;
+    Logger.log('seedCarriedStorySeeds_: ' + out.length + ' story seed(s) from cycle ' + (carried.cycle || '?') + ' opened for Phase 2 (the seed gates\' input)');
   }
 }
 

@@ -205,7 +205,11 @@ function applyCityDynamics_(ctx) {
 
   // Observations (optional)
   var worldEvents = S.worldEvents || [];
-  var storySeeds = S.storySeeds || [];
+  // engine.214 Task 18a: LAST NIGHT's seeds, carried by Phase 9 on PREV_STORY_SEEDS_JSON and opened by
+  // Phase 1 as S.storySeedsCarried. This Cycle's S.storySeeds is written by Phase 7, after this phase —
+  // it read [] here on every live fire, so no seed gate in this file had ever had input. No blob (first
+  // fire on this code): no seeds, every seed ratio reads 1 — exactly what the gates read before.
+  var storySeeds = Array.isArray(S.storySeedsCarried) ? S.storySeedsCarried : [];
   var eventsGenerated = Number(S.eventsGenerated || 0);
   // engine.45 T3b: crime inputs had no writer anywhere (trace K gap G1) — the
   // crime branches below ran on zero every cycle. Source is now the previous
@@ -1091,6 +1095,45 @@ function applyCityDynamics_(ctx) {
     return vals.length >= 3 ? medianOf_(vals) : null;
   }
 
+  // engine.214 Task 18b: the citywide seed weight's own baseline — every carried entry that has the
+  // key, last n. Not rollingAvg_: its slice(0, -1) drops the latest entry because for the counts that
+  // entry IS "now"; this read is taken fresh at Phase 2, so every carried Cycle is baseline. null when
+  // no entry carries the key yet (the key arrived with this cut).
+  function citywideSeedBaseline_(hist, n) {
+    var vals = [];
+    for (var i = 0; i < (hist || []).length; i++) {
+      var h = hist[i];
+      if (!h || h.citywideSeedWeight === undefined || h.citywideSeedWeight === null) continue;
+      var v = Number(h.citywideSeedWeight);
+      if (isFinite(v)) vals.push(v);
+    }
+    if (!vals.length) return null;
+    var start = Math.max(0, vals.length - n);
+    var sum = 0;
+    for (var j = start; j < vals.length; j++) sum += vals[j];
+    return sum / (vals.length - start);
+  }
+
+  // engine.214 Task 18b: the per-hood tier table of applySeedLocalBoost_ (same scale), applied to
+  // every hood on the citywide ratio. An ordinary week pays nothing; a week whose hood-less seeds
+  // weigh 1.15× / 1.35× / 1.75× the city's own recent middle lifts every hood a tier.
+  function applyCitywideSeedLift_(m, x) {
+    var wX = safeNum_(x, 1);
+    if (wX >= 1.75) {
+      m.culturalActivity *= 1.08;
+      m.communityEngagement *= 1.04;
+      m.sentiment += 0.04;
+    } else if (wX >= 1.35) {
+      m.culturalActivity *= 1.05;
+      m.communityEngagement *= 1.03;
+      m.sentiment += 0.02;
+    } else if (wX >= 1.15) {
+      m.culturalActivity *= 1.03;
+      m.communityEngagement *= 1.02;
+      m.sentiment += 0.01;
+    }
+  }
+
   function applySeedLocalBoost_(m, seedSig, hood) {
     if (!seedSig || !seedSig.byHood || !seedSig.byHood[hood]) return;
 
@@ -1148,6 +1191,16 @@ function applyCityDynamics_(ctx) {
   }
 
   var seedSignals = buildSeedSignals_(storySeeds, profiles);
+  // engine.214 Task 18b (builder 2026-10-10: "a city wide seed should move all the hoods, how much
+  // would depend on the weight of the event"). citywideWeighted is the hood-less seeds' summed
+  // seedWeight_ (priority × type × calendar). Its comparator is the term's OWN six-Cycle middle, not
+  // the active hood median: on the live deck C101–C110 the hood-less seeds ran 2.3–6.0× the median
+  // hood EVERY Cycle, so against the hood median the top tier would fire on every fire — a standing
+  // +0.04 on all 22 hoods, the tax engine.188 removed (§15). Phase 9 records each Cycle's read as
+  // `citywideSeedWeight` on the activity history; no baseline yet → ratio 1 → no lift.
+  seedSignals.citywideBaseline = citywideSeedBaseline_(obsHistAll, 6);
+  seedSignals.citywideX = (seedSignals.citywideBaseline !== null && seedSignals.citywideBaseline > 0)
+    ? seedSignals.citywideWeighted / seedSignals.citywideBaseline : 1;
   S.storySeedSignals = seedSignals;
 
   // A catastrophe this cycle: a salient storm / flood / heat wave (applyWeatherModel_,
@@ -1215,6 +1268,8 @@ function applyCityDynamics_(ctx) {
 
     // Story seed boosts (the hood's own weight vs the active hood median)
     applySeedLocalBoost_(m, seedSignals, hood);
+    // engine.214 Task 18b: the citywide seeds, on every hood, by their weight vs the term's own middle
+    applyCitywideSeedLift_(m, seedSignals.citywideX);
 
     // Lag drags — engine.214 D2 re-keys the two extras: tourism drag for the
     // shoreline zones, nightlife drag for the nightlife / arts labels

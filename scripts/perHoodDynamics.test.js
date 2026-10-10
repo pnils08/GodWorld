@@ -148,25 +148,46 @@ console.log('engine.214 — mood per hood');
 {
   const seed = (hood, p, dom) => ({ text: 'x', neighborhood: hood, priority: p, domain: dom || 'GENERAL' });
   const none = run();
-  // a citywide seed (no hood) lifts no hood over another: every hood identical to the no-seed run, the weight goes citywide
-  const cw = run({ summary: { storySeeds: [seed('', 20), seed('Narnia', 20)] } });
-  // citywideWeighted is a SIGNAL (S.storySeedSignals) with no reader — before this cut or after it; the citywide activity
-  // path is the count-relative attention gate in applyObservedFeedback_ (seeds now vs the six-Cycle baseline). So a
-  // citywide seed moves no hood here, and moves none against another (codex impl review F2, reconciled in the plan).
-  check('a citywide seed (no hood, or a hood off the map) goes to citywideWeighted only — a signal with no reader — and moves no hood',
+  // engine.214 Task 18: Phase 2 reads LAST NIGHT's seeds (S.storySeedsCarried, Phase 9 → PREV_STORY_SEEDS_JSON → Phase 1);
+  // this Cycle's S.storySeeds is Phase 7's and is not read here — on every live fire before the carry it was [].
+  const stale = run({ summary: { storySeeds: [seed('Dimond', 20), seed('Laurel', 4), seed('Glenview', 4)] } });
+  check('Task 18a: this Cycle\'s S.storySeeds (Phase 7\'s key) is not the input — only the carried seeds are',
+    HOODS.every(h => JSON.stringify(stale.nd[h]) === JSON.stringify(none.nd[h])) && stale.S.storySeedSignals.totalWeighted === 0);
+  // a citywide seed (no hood, or a hood off the map) goes to citywideWeighted; with no baseline yet the ratio is 1 and no hood moves
+  const cw = run({ summary: { storySeedsCarried: [seed('', 20), seed('Narnia', 20)] } });
+  check('Task 18b: a citywide seed (no hood, or a hood off the map) goes to citywideWeighted, not to any hood; with no baseline yet (the key is new) the ratio reads 1 and no hood moves',
     cw.S.storySeedSignals.citywideWeighted > 0 && HOODS.every(h => cw.S.storySeedSignals.byHood[h].weighted === 0) &&
+    cw.S.storySeedSignals.citywideBaseline === null && cw.S.storySeedSignals.citywideX === 1 &&
     HOODS.every(h => JSON.stringify(cw.nd[h]) === JSON.stringify(none.nd[h])));
+  // the term's own middle: three carried Cycles read 10 → a 20-weight citywide week is 2.0× (top tier), 14 is 1.4× (mid), 10 is 1.0 (nothing)
+  const hist = { activityObservations: { history: [{ cycle: 117, citywideSeedWeight: 10 }, { cycle: 118, citywideSeedWeight: 10 }, { cycle: 119, citywideSeedWeight: 10 }] } };
+  const flat = run({ summary: Object.assign({ storySeedsCarried: [seed('', 10)] }, hist) });
+  const top = run({ summary: Object.assign({ storySeedsCarried: [seed('', 20)] }, hist) });
+  const mid = run({ summary: Object.assign({ storySeedsCarried: [seed('', 14)] }, hist) });
+  check('Task 18b: the baseline is the carried reads (10), the ratio is this Cycle\'s citywide weight over it — 2.0 / 1.4 / 1.0 shown as numbers',
+    flat.S.storySeedSignals.citywideBaseline === 10 && near(top.S.storySeedSignals.citywideX, 2) && near(mid.S.storySeedSignals.citywideX, 1.4) && near(flat.S.storySeedSignals.citywideX, 1),
+    [flat.S.storySeedSignals.citywideBaseline, top.S.storySeedSignals.citywideX, mid.S.storySeedSignals.citywideX].join(' '));
+  check('Task 18b: an ordinary citywide week (1.0×) moves no hood', HOODS.every(h => JSON.stringify(flat.nd[h]) === JSON.stringify(none.nd[h])));
+  check('Task 18b: a 2.0× citywide week lifts EVERY hood a top tier — cultural ×1.08, engagement ×1.04 (±0.01 at run level), sentiment up on all 22',
+    HOODS.every(h => near(top.nd[h].culturalActivity / flat.nd[h].culturalActivity, 1.08, 0.01) && near(top.nd[h].communityEngagement / flat.nd[h].communityEngagement, 1.04, 0.01) && top.nd[h].sentiment > flat.nd[h].sentiment),
+    (top.nd.Dimond.culturalActivity / flat.nd.Dimond.culturalActivity).toFixed(4) + ' ' + (top.nd.Dimond.communityEngagement / flat.nd.Dimond.communityEngagement).toFixed(4));
+  check('Task 18b: a 1.4× week is the mid tier — cultural ×1.05 on every hood, and less sentiment than the 2.0× week',
+    HOODS.every(h => near(mid.nd[h].culturalActivity / flat.nd[h].culturalActivity, 1.05, 0.01) && mid.nd[h].sentiment > flat.nd[h].sentiment && mid.nd[h].sentiment < top.nd[h].sentiment));
+  check('Task 18b: the citywide lift is uniform — no hood moves against another (the spread of sentiment across hoods is unchanged within 0.001)', (() => {
+    const spread = r => { const v = HOODS.map(h => r.nd[h].sentiment); return Math.max(...v) - Math.min(...v); };
+    return Math.abs(spread(top) - spread(flat)) < 0.001;
+  })());
   // two active hoods (< 3): the median is null, the relative gates read 1 — a weight of 20 fires nothing
-  const sparse = run({ summary: { storySeeds: [seed('Dimond', 20), seed('Laurel', 1)] } });
+  const sparse = run({ summary: { storySeedsCarried: [seed('Dimond', 20), seed('Laurel', 1)] } });
   check('a null seed median (fewer than 3 active hoods) fires no relative gate', near(sparse.nd.Dimond.sentiment, none.nd.Dimond.sentiment) && near(sparse.nd.Dimond.culturalActivity, none.nd.Dimond.culturalActivity),
     sparse.nd.Dimond.sentiment + ' vs ' + none.nd.Dimond.sentiment);
   // three active: Dimond at 20 against a median of 4 fires the top tier (cultural ×1.08); Laurel at the median gets nothing
-  const dense = run({ summary: { storySeeds: [seed('Dimond', 20), seed('Laurel', 4), seed('Glenview', 4)] } });
+  const dense = run({ summary: { storySeedsCarried: [seed('Dimond', 20), seed('Laurel', 4), seed('Glenview', 4)] } });
   check('with 3+ active hoods the hood above the active median fires; a hood at the median does not',
     near(dense.nd.Dimond.culturalActivity / none.nd.Dimond.culturalActivity, 1.08, 1e-6) && near(dense.nd.Laurel.culturalActivity, none.nd.Laurel.culturalActivity),
     dense.nd.Dimond.culturalActivity / none.nd.Dimond.culturalActivity);
   // absolute domain gates read the hood's own weight: CIVIC 6 on one hood costs it −0.04 regardless of the median
-  const civic = run({ summary: { storySeeds: [seed('Dimond', 6, 'CIVIC')] } });
+  const civic = run({ summary: { storySeedsCarried: [seed('Dimond', 6, 'CIVIC')] } });
   check('CIVIC+SAFETY >= 6 is absolute on the hood\'s own weight (Dimond sentiment −0.04 before momentum/bleed)',
     civic.nd.Dimond.sentiment < none.nd.Dimond.sentiment - 0.02 && near(civic.nd.Dimond.publicSpaces / none.nd.Dimond.publicSpaces, 0.98, 1e-6));
 }

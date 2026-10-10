@@ -330,6 +330,8 @@
 - **hoodProfile_(ctx, hood)**
   Reads: S.neighborhoodState
 
+- **hoodCharacterRowValid_(row)**
+
 - **hoodCharacterBase_(profile)**
 
 - **applyCityDynamics_(ctx)**
@@ -365,7 +367,7 @@
 - **getCivicTendDials_(ctx)**
 
 - **applyInitiativeImplementationEffects_(ctx)**
-  Reads: S.absoluteCycle, S.cycleId, S.initiativeDisbursement, S.initiativeImplementationTriggers, S.initiativeNeighborhoodEffects, S.previousCycleState, S.sentiment, S.sportsZones
+  Reads: S.absoluteCycle, S.cycleId, S.initiativeDisbursement, S.initiativeImplementationEffects, S.initiativeImplementationTriggers, S.initiativeNeighborhoodEffects, S.previousCycleState, S.sentiment, S.sportsZones
   Writes: S.initiativeDisbursement, S.initiativeHealthRelief, S.initiativeImplementationEffects, S.initiativeNeighborhoodEffects, S.initiativeRenewalCredits, S.initiativeSpend, S.sentiment, S.treasury
   Config: ctx.config.cycleCount, ctx.config.treasuryOpeningBalance, ctx.config.treasuryWeeklyAllocation
   Sheets: City_Treasury, Initiative_Tracker
@@ -4612,4 +4614,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1654
+**Functions mapped:** 1655

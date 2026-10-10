@@ -2,7 +2,7 @@
   "generated": "2026-10-10",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 180,
-  "functionsMapped": 1654,
+  "functionsMapped": 1655,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -2106,6 +2106,7 @@
       ],
       "readers": [
         "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
+        "phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_",
         "phase02-world-state/updateTransitMetrics.js::initiativeTransitEffects_"
       ]
     },

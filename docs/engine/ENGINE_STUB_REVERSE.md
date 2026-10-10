@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 180 · **Functions mapped:** 1654 · **S.* fields:** 367 · **Sheets:** 61
+**Files scanned:** 180 · **Functions mapped:** 1655 · **S.* fields:** 367 · **Sheets:** 61
 
 ## S.* / ctx.summary reverse index
 
@@ -215,7 +215,7 @@
 | `S.initiativeEnginePhaseMoves` | `phase05-citizens/civicInitiativeEngine.js::applyCivicBuildOpen_`, `phase05-citizens/civicInitiativeEngine.js::applyCivicStageMove_` | `phase05-citizens/civicInitiativeEngine.js::applyCivicBuildOpen_`, `phase05-citizens/civicInitiativeEngine.js::applyCivicStageMove_`, `phase09-digest/finalizeCycleState.js::finalizeCycleState_` | 2 | 3 |
 | `S.initiativeEvents` | `phase05-citizens/civicInitiativeEngine.js::runCivicInitiativeEngine_` | `phase05-citizens/civicInitiativeEngine.js::runCivicInitiativeEngine_`, `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_`, `phase05-citizens/generateCivicModeEvents.js::generateCivicModeEvents_`, `phase07-evening-media/storyHook.js::storyHookEngine_`, `utilities/exportCycleArtifacts.js::buildCycleContextPack_` | 1 | 5 |
 | `S.initiativeHealthRelief` | `phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_` | `phase03-population/updateNeighborhoodDemographics.js::updateNeighborhoodDemographics_` | 1 | 1 |
-| `S.initiativeImplementationEffects` | `phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_` | `phase02-world-state/applyCityDynamics.js::applyCityDynamics_`, `phase02-world-state/updateTransitMetrics.js::initiativeTransitEffects_` | 1 | 2 |
+| `S.initiativeImplementationEffects` | `phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_` | `phase02-world-state/applyCityDynamics.js::applyCityDynamics_`, `phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_`, `phase02-world-state/updateTransitMetrics.js::initiativeTransitEffects_` | 1 | 3 |
 | `S.initiativeImplementationTriggers` | _(none)_ | `phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_` | 0 | 1 |
 | `S.initiativeNeighborhoodEffects` | `phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_` | `phase02-world-state/applyCityDynamics.js::applyCityDynamics_`, `phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_`, `phase03-population/updateNeighborhoodDemographics.js::driftNeighborhoodEducation_`, `phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_`, `phase05-citizens/applyBusinessDynamics.test.js::ctxWith`, `phase05-citizens/runCivicRoleEngine.js::civicRolePremises_` | 1 | 6 |
 | `S.initiativePhases` | `phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_` | `phase09-digest/finalizeCycleState.js::finalizeCycleState_` | 1 | 1 |

@@ -14,9 +14,7 @@ const C = new Function(source + '\nreturn {' +
   'columns: ENGINE94_CIVIC_STATE_COLUMNS,' +
   'inspectConfig: inspectEngine94Config_,' +
   'inspectHeader: inspectEngine94CivicHeader_,' +
-  'ensure: ensureEngine94SheetContract_,' +
-  'seeds214: ENGINE214_CONFIG_SEEDS,' +
-  'ensure214: ensureEngine214Config_' +
+  'ensure: ensureEngine94SheetContract_' +
   '};')();
 
 global.Logger = { log() {} };
@@ -146,24 +144,19 @@ console.log('═══ B. Fresh live Sheet self-arms before consumers');
   check('B7 idempotent run performs no writes', f.config.state.writes + f.civic.state.writes === writesAfterFirst);
 }
 
-console.log('═══ B2. engine.214 string-valued seeds (cluster anchors)');
+console.log('═══ B2. string-valued seeds (the engine.214 cluster anchors are gone; the branch stays for any text key)');
 {
-  check('B2.1 five string seeds, each marked string, each a pipe list', C.seeds214.length === 5 &&
-    C.seeds214.every(s => s[3] === 'string' && /^clusterAnchors_[A-Z_]+$/.test(s[0]) && typeof s[1] === 'string' && s[1].indexOf('|') > 0));
-  const f = makeSpreadsheet([['Key', 'Value', 'Description'], ['cycleCount', 115, 'current Cycle']], ['OfficeId', 'Status', 'Approval']);
-  const first = C.ensure214(f.ss);
-  check('B2.2 fresh sheet seeds the five as text', first.configSeeded === 5 &&
-    f.config.values.slice(2).every(r => typeof r[1] === 'string' && r[1].indexOf('|') > 0));
-  check('B2.3 second run is idempotent', C.ensure214(f.ss).configSeeded === 0);
-  const tuned = [['Key', 'Value', 'Description']].concat(C.seeds214.map(r => [r[0], r[1], r[2]]));
-  tuned[1][1] = '  Downtown | Uptown  ';
-  const plan = C.inspectConfig(tuned, C.seeds214);
-  check('B2.4 a tuned text row survives, trimmed', plan.additions.length === 0 && plan.normalized[C.seeds214[0][0]] === 'Downtown | Uptown');
-  const bad = v => { const rows = tuned.map(r => r.slice()); rows[1][1] = v; return () => C.inspectConfig(rows, C.seeds214); };
-  check('B2.5 a number in a text row is invalid', throws(bad(5), /invalid World_Config\.clusterAnchors_DOWNTOWN_CORE/));
-  check('B2.6 a blank text row is invalid', throws(bad('   '), /invalid World_Config\.clusterAnchors_DOWNTOWN_CORE/));
-  check('B2.7 a boolean text row is invalid', throws(bad(true), /invalid World_Config\.clusterAnchors_DOWNTOWN_CORE/));
-  check('B2.8 the numeric lists are untouched by the string branch', C.seeds.every(s => typeof s[3] === 'number'));
+  const strSeeds = [['noteKey', 'alpha|beta', 'a text-valued World_Config key', 'string']];
+  const tuned = [['Key', 'Value', 'Description']].concat(strSeeds.map(r => [r[0], r[1], r[2]]));
+  tuned[1][1] = '  alpha | beta  ';
+  const plan = C.inspectConfig(tuned, strSeeds);
+  check('B2.1 a tuned text row survives, trimmed', plan.additions.length === 0 && plan.normalized.noteKey === 'alpha | beta');
+  const bad = v => { const rows = tuned.map(r => r.slice()); rows[1][1] = v; return () => C.inspectConfig(rows, strSeeds); };
+  check('B2.2 a number in a text row is invalid', throws(bad(5), /invalid World_Config\.noteKey/));
+  check('B2.3 a blank text row is invalid', throws(bad('   '), /invalid World_Config\.noteKey/));
+  check('B2.4 a boolean text row is invalid', throws(bad(true), /invalid World_Config\.noteKey/));
+  check('B2.5 the numeric lists are untouched by the string branch', C.seeds.every(s => typeof s[3] === 'number'));
+  check('B2.6 engine.214: no clusterAnchors seed remains in the contract', !/clusterAnchors_/.test(source) && !/ensureEngine214Config_/.test(source));
 }
 
 console.log('═══ C. Tuning survives; invalid state blocks before writes');

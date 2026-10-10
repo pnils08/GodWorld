@@ -155,14 +155,19 @@ console.log('4. venue consumers');
 {
   const hsb = { Logger: { log: () => {} } };
   vm.createContext(hsb);
+  load(hsb, 'phase01-config/canonNeighborhoodLoader.js');   // engine.214 Task 14: the writer's calendar mods read Scenes
   load(hsb, 'phase08-v3-chicago/v3NeighborhoodWriter.js');
+  const G = require('./fixtures/hood-geography.json'), SC = require('./fixtures/hood-scenes.json').scenes;
+  const rows = [['Neighborhood', 'WeatherZone', 'Adjacent', 'AttentionWeight', 'EmployerCharacter', 'Scenes']].concat(Object.keys(G.zone).map(h => [h, G.zone[h], G.adjacent[h], G.attention[h], G.character[h], SC[h]]));
+  const hctx = { summary: {}, ss: { getSheetByName: n => n === 'Neighborhood_Map' ? { getDataRange: () => ({ getValues: () => rows }) } : null } };
+  hsb.loadCanonNeighborhoods_(hctx);
   const full = { "A's": { unsigned: 1, venueShare: 1, venue: ['Jack London', 'Downtown'] } };
-  const m = JSON.parse(JSON.stringify(hsb.buildHolidayNeighborhoodMods_('none', false, false, 'championship', full)));
+  const m = JSON.parse(JSON.stringify(hsb.buildHolidayNeighborhoodMods_(hctx, 'none', false, false, 'championship', full)));
   check('hood writer: a full home week = the old championship mods at the venue',
     m['Jack London'].eventMod === 2 && Math.abs(m['Jack London'].nightlifeMod - 1.8) < 1e-9 && m['Downtown'].noiseMod === 1.5, JSON.stringify(m));
-  const away = JSON.parse(JSON.stringify(hsb.buildHolidayNeighborhoodMods_('none', false, false, 'championship', { "A's": { unsigned: 0.49, venueShare: 0, venue: ['Jack London'] } })));
+  const away = JSON.parse(JSON.stringify(hsb.buildHolidayNeighborhoodMods_(hctx, 'none', false, false, 'championship', { "A's": { unsigned: 0.49, venueShare: 0, venue: ['Jack London'] } })));
   check('hood writer: the word with an away week moves no stadium hood', !away['Jack London'], JSON.stringify(away));
-  const bay = JSON.parse(JSON.stringify(hsb.buildHolidayNeighborhoodMods_('none', false, false, 'playoffs', { Oaks: { unsigned: 0.2, venueShare: 0.5, venue: ['Baylight District'] } })));
+  const bay = JSON.parse(JSON.stringify(hsb.buildHolidayNeighborhoodMods_(hctx, 'none', false, false, 'playoffs', { Oaks: { unsigned: 0.2, venueShare: 0.5, venue: ['Baylight District'] } })));
   check('hood writer: the Oaks at Baylight, scaled by home volume .1', Math.abs(bay['Baylight District'].eventMod - 1.1) < 1e-9 && !bay['Jack London'], JSON.stringify(bay));
 
   const src = rel => fs.readFileSync(path.join(ROOT, rel), 'utf8');

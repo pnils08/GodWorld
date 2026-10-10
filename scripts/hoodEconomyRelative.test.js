@@ -20,6 +20,8 @@ const path = require('path');
 const vm = require('vm');
 const ROOT = path.join(__dirname, '..');
 const read = rel => fs.readFileSync(path.join(ROOT, rel), 'utf8');
+const G = require('./fixtures/hood-geography.json');
+const SC = require('./fixtures/hood-scenes.json').scenes;
 
 let passed = 0, failed = 0;
 function check(name, cond, detail) {
@@ -38,7 +40,15 @@ function fixtureEconomies(over) {
   HOODS.forEach(h => { const mood = (over && h in over) ? over[h] : (h in MOODS ? MOODS[h] : 55.4); o[h] = { mood, descriptor: 'growing', activeRipples: 0, sectors: ['retail'] }; });
   return o;
 }
-function hoodState() { const o = {}; HOODS.forEach((h, i) => { o[h] = { employerCharacter: i % 3 === 0 ? 'retail' : (i % 3 === 1 ? 'arts' : 'services'), boomIndex: 0 }; }); return o; }
+// engine.214: the authored row (live labels — a label with no character row throws)
+function hoodState() { const o = {}; HOODS.forEach(h => { o[h] = { employerCharacter: G.character[h], boomIndex: G.boomIndex[h] }; }); return o; }
+const canonRows = () => [['Neighborhood', 'WeatherZone', 'Adjacent', 'AttentionWeight', 'EmployerCharacter', 'Scenes']].concat(HOODS.map(h => [h, G.zone[h], G.adjacent[h], G.attention[h], G.character[h], SC[h]]));
+function seedCanon(sb, summary) {
+  const tmp = { summary: {}, ss: { getSheetByName: n => n === 'Neighborhood_Map' ? { getDataRange: () => ({ getValues: () => canonRows() }) } : null } };
+  sb.loadCanonNeighborhoods_(tmp);
+  Object.assign(summary, { canonHoods: tmp.summary.canonHoods, canonHoodCount: tmp.summary.canonHoodCount, neighborhoodAdjacency: tmp.summary.neighborhoodAdjacency });
+  return summary;
+}
 const mapRows = () => [['Neighborhood', 'CrimeIndex', 'Sentiment', 'RetailVitality', 'EventAttractiveness', 'MigrationFlow']]
   .concat(HOODS.map(h => [h, 1, 0.1, 5, 20, 0]));
 
@@ -49,18 +59,16 @@ function world() {
   const sb = { Logger: { log: () => {} }, Math, Object, Array, Number, String, JSON, Date, isFinite, isNaN, parseFloat,
     safeRand_: () => () => 0.5, recordRipple_: () => true, safePhaseCall_: (ctx, label, fn) => fn() };
   vm.createContext(sb);
-  for (const rel of ['phase01-config/engine94SheetContract.js', 'phase06-analysis/economicRippleEngine.js', 'phase02-world-state/applyCityDynamics.js', 'phase06-analysis/applyMigrationDrift.js']) {
+  for (const rel of ['phase01-config/canonNeighborhoodLoader.js', 'phase06-analysis/economicRippleEngine.js', 'phase02-world-state/applyCityDynamics.js', 'phase06-analysis/applyMigrationDrift.js']) {
     vm.runInContext(read(rel), sb, { filename: rel });
   }
   return { sb, rows };
 }
-// engine.214: the cluster anchors the self-arm seeds on a live sheet, read from ctx.config.
-const config214 = sb => Object.fromEntries(sb.ENGINE214_CONFIG_SEEDS.map(s => [s[0], s[1]]));
 function ctxFor(sb, economies) {
-  return { config: Object.assign({ cycleCount: 108, rngSeed: 7 }, config214(sb)), ss: { getSheetByName: n => n === 'Neighborhood_Map' ? sb.__map : null }, writeIntents: [],
-    summary: { cycleId: 108, season: 'Winter', month: 1, holiday: 'none', sportsSeason: 'off-season', weather: { type: 'clear', impact: 1 },
+  return { config: { cycleCount: 108, rngSeed: 7 }, ss: { getSheetByName: n => n === 'Neighborhood_Map' ? sb.__map : null }, writeIntents: [],
+    summary: seedCanon(sb, { cycleId: 108, season: 'Winter', month: 1, holiday: 'none', sportsSeason: 'off-season', weather: { type: 'clear', impact: 1 },
       neighborhoodState: hoodState(), neighborhoodEconomies: economies, economicMood: 55.4, migrationDrift: 0,
-      neighborhoodDemographics: {}, worldEvents: [], storySeeds: [], crimeByNeighborhood: {}, previousCycleState: { cycle: 107, migrationDrift: 0 } } };
+      neighborhoodDemographics: {}, worldEvents: [], storySeeds: [], crimeByNeighborhood: {}, previousCycleState: { cycle: 107, migrationDrift: 0 } }) };
 }
 
 console.log('engine.225 — hood economies relative to the hood median');
@@ -71,10 +79,10 @@ console.log('engine.225 — hood economies relative to the hood median');
   const mig = read('phase06-analysis/applyMigrationDrift.js');
   check('city dynamics: the ≥60 "ahead" tier is gone', !/mood >= 60\)/.test(cd));
   check('city dynamics: no 70/30 descriptor re-derivation', !/avgMood >= 70 \? 'thriving'/.test(cd));
-  check('city dynamics: the micro reads the hood median', /e0mood - hoodMoodMedian/.test(cd));
+  check('city dynamics: the per-hood economy reads the hood median (engine.214: once per hood)', /hoodMood - hoodMoodMedian/.test(cd) && !/e0mood/.test(cd));
   check('migration: no 70/30 descriptor re-derivation', !/afterMood >= 70\) econ\.descriptor/.test(mig));
   check('migration: mood band is an offset, not a ratio', /nhEcon\.mood - medMood >= MOOD_BAND/.test(mig) && !/medMood \* HI/.test(mig));
-  check('one descriptor scale: both consumers call describeHoodEconomy_', /describeHoodEconomy_\(avgMood\)/.test(cd) && /describeHoodEconomy_\(afterMood\)/.test(mig));
+  check('one descriptor scale: both consumers call describeHoodEconomy_', /describeHoodEconomy_\(hoodMood\)/.test(cd) && /describeHoodEconomy_\(afterMood\)/.test(mig));
 }
 
 // ── Phase 2: the real applyCityDynamics_ on the 219 set ──────────────────────
@@ -82,14 +90,13 @@ console.log('engine.225 — hood economies relative to the hood median');
   const w = world();
   const runCD = econ => { const ctx = ctxFor(w.sb, econ); w.sb.__map = null; w.sb.applyCityDynamics_(ctx); return ctx.summary; };
   const S = runCD(fixtureEconomies());
-  const nd = S.neighborhoodDynamics, cl = S.clusterDynamics;
-  // Phase 2 still tracks the 12 hoods of its CLUSTERS literal (engine.214 is the sheet-derived rebuild);
-  // the five rippled fixture hoods are all among them.
+  const nd = S.neighborhoodDynamics;
+  // engine.214: every canon hood has its own track from its sheet row.
   const TRACKED = Object.keys(nd || {});
-  check('runs end-to-end on the tracked hoods', TRACKED.length >= 12 && Object.keys(MOODS).every(h => TRACKED.indexOf(h) >= 0), TRACKED.length);
+  check('runs end-to-end on all 22 hoods', TRACKED.length === 22 && Object.keys(MOODS).every(h => TRACKED.indexOf(h) >= 0), TRACKED.length);
   const baseline = runCD(fixtureEconomies(Object.fromEntries(HOODS.map(h => [h, 55.4])))).neighborhoodDynamics;
-  // one hood above the median, everyone else on it: NORTH_HILLS (Rockridge, Temescal — not adjacent
-  // to Jack London's cluster) must be byte-identical to a flat city — no relative term, no spill.
+  // one hood above the median, everyone else on it: Rockridge and Temescal (not adjacent to Jack
+  // London on the map, so outside its one-pass bleed) must be byte-identical to a flat city — no relative term, no spill.
   const only = runCD(fixtureEconomies(Object.fromEntries(HOODS.map(h => [h, h === 'Jack London' ? 56.96 : 55.4])))).neighborhoodDynamics;
   const untouched = ['Rockridge', 'Temescal'].every(h => near(only[h].sentiment, baseline[h].sentiment) && near(only[h].retail, baseline[h].retail));
   check('hoods at the median, away from the moved hood, carry no relative term', untouched,
@@ -101,12 +108,12 @@ console.log('engine.225 — hood economies relative to the hood median');
     nd['Jack London'].sentiment + ' vs ' + baseline['Jack London'].sentiment);
   check('Fruitvale below the median: sentiment down', nd['Fruitvale'].sentiment < baseline['Fruitvale'].sentiment);
   check('Downtown below the median: retail down', nd['Downtown'].retail < baseline['Downtown'].retail);
-  // cluster: the delta is the cluster average minus the hood median
-  const ww = cl['WATERFRONT_WEST'] && cl['WATERFRONT_WEST'].economy;
-  check('cluster economy carries the delta (WATERFRONT_WEST avg 56.14 − median 55.4)', ww && near(ww.delta, (56.96 + 55.32) / 2 - 55.4, 0.01), JSON.stringify(ww));
+  // engine.214: no cluster average — West Oakland (55.32, 0.08 under the median) is priced on its own delta, not Jack London's
+  check('a hood near the median is not priced by its neighbour\'s boom', Math.abs(nd['West Oakland'].retail - baseline['West Oakland'].retail) < Math.abs(nd['Jack London'].retail - baseline['Jack London'].retail),
+    nd['West Oakland'].retail + ' vs ' + baseline['West Oakland'].retail);
   // first fire: nothing carried → no relative term, no throw
   const S0 = runCD({});
-  check('first fire (no hood economies): runs, no relative term', S0.neighborhoodDynamics && Object.keys(S0.neighborhoodDynamics).length >= 12 && Object.values(S0.clusterDynamics).every(c => !c.economy));
+  check('first fire (no hood economies): runs on all 22, no relative term', S0.neighborhoodDynamics && Object.keys(S0.neighborhoodDynamics).length === 22 && !S0.clusterDynamics);
   // the depression overlay stays absolute: a hood at 28 still takes the engine.185 hit
   const dep = runCD(fixtureEconomies({ Laurel: 28 })).neighborhoodDynamics;
   check('depression overlay (≤30) still fires', dep['Laurel'].sentiment < nd['Laurel'].sentiment - 0.15, dep['Laurel'].sentiment + ' vs ' + nd['Laurel'].sentiment);

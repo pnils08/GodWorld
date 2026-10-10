@@ -1,57 +1,138 @@
 /**
  * ============================================================================
- * applyCityDynamics_ v3.2 (ES5)
+ * applyCityDynamics_ v4.0 (ES5) — mood per hood (engine.214)
  * ============================================================================
  *
- * v3.2 Changes (S216 engine.13 — completes the S202 wiring):
- * - Folds S.editionSentimentBoost into finalCity.sentiment before clamps.
- *   S202 wired traffic/retail/nightlife/publicSpaces/communityEngagement/
- *   culturalActivity from editionNeighborhoodEffects['city'] but missed
- *   sentiment, which lives on a separate scalar (S.editionSentimentBoost in
- *   applyEditionCoverageEffects). Pre-S216 that scalar incremented S.sentiment
- *   directly but no consumer read S.sentiment downstream — the coverage→
- *   per-neighborhood sentiment chain was a dead write. C92 produced +0.16
- *   sentiment from 9 coverage ratings; none reached Neighborhood_Map writes.
- *   v3NeighborhoodWriter reads dynamics.sentiment as base, so once finalCity
- *   absorbs the boost, it propagates to per-neighborhood Sentiment via the
- *   normal (base + neighborhoodMod + variance) formula. Pre-clamp magnitude
- *   capped at ±0.20 in coverage; clampSent at line below caps further.
- *   Closes engine.13 G-EC6 — auditor's writeback-drift detector should drop
- *   the 14/N flat-neighborhood pattern by C95.
- *
- * v3.1 Changes (S202 — wires the dead output):
- * - Folds S.editionNeighborhoodEffects['city'] per-metric deltas into finalCity
- *   before clamps. applyEditionCoverageEffects_ writes those deltas every cycle
- *   based on the prior cycle's edition tone × DOMAIN_RULES; pre-S202 they were
- *   computed-but-never-read. Closes the second half of the S137b feedback loop.
- *   Magnitude per cycle: |rating|*0.02 per active domain weight (typical sum
- *   0.05-0.15 per metric, well below the [0.3, 3.0] clamp range).
- *
- * v3.0 Changes (prior):
- * - prevMedia feedback (hopeFactor, anxietyFactor, crisisSaturation, celebrityBuzz)
- *
- * v2.6 Changes (additive, non-breaking):
- * - Cluster-based dynamics system (5 clusters covering 12 neighborhoods)
- * - getClusterDynamics_(ctx, clusterName) helper with safe fallback
- * - getNeighborhoodDynamics_(ctx, neighborhood) helper
- * - S.clusterDefinitions exposed for downstream enumeration
- * - Weather v3.5 integration (precipitationIntensity, windSpeed, visibility)
- * - CalendarContext-aware story seed weighting (First Friday, Creation Day, sports, holidays)
- * - Lag/drag system (tourismDrag, publicSpaceDrag, nightlifeDrag, congestionHangover)
- * - Capacity constraints with per-cluster friction
- * - Ripple effects: cluster sentiment bleed, crime spillover, weather front targeting
+ * v4.0 (engine.214, 2026-10-10 — builder's ruling: "mood should be per hood …
+ * some creative algorithm can make that become the city wide figure"):
+ * - The five dynamics clusters, their World_Config anchor rows, their hand
+ *   weights and the cluster adjacency are GONE. No hood is named in
+ *   this file; nothing in World_Config names a hood for this engine.
+ * - Every hood's base is its own authored Neighborhood_Map row — the
+ *   INSTITUTIONS seed, the permanent referent: EmployerCharacter (one
+ *   label-keyed table, HOOD_CHARACTER_BY_EMPLOYER), BoomIndex (retail/tourism
+ *   warmth), WeatherZone (fronts), Scenes (calendar), Adjacent (bleed).
+ *   The live columns A–O this engine's output writes (NightlifeProfile,
+ *   RetailVitality, EventAttractiveness, Sentiment) are never read as a base.
+ *   One stated exception: a hood with no carried dynamics bootstraps its own
+ *   prior mood from last Cycle's persisted Sentiment (first-carry only).
+ * - Live inputs apply once, per hood: demographics on the hood's own ratios,
+ *   economy on the hood's own mood vs the hood median, one crime ladder on the
+ *   hood's own prev-Cycle spikes (with the Ripple_Ledger receipt), seeds on
+ *   the hood's own weight against the ACTIVE hood median.
+ * - Three passes, not one loop: A (base → … → microclimate) per hood; peaks
+ *   across hoods → capacity friction × the hood's capacitySensitivity, then
+ *   momentum (B); ONE simultaneous sentiment bleed over the Adjacent graph;
+ *   then fold → commute → clamp (C). Bleed runs BEFORE the initiative /
+ *   approval fold so a same-Cycle targeted delta lands at full strength on its
+ *   hood (the engine.93 placement, preserved).
+ * - The city figure is the equal mean of every canon hood's FINAL value, every
+ *   metric, then city momentum as before. The initiative city scalar add
+ *   (S.initiativeImplementationEffects.sentimentBoost) is retired: its local
+ *   bus lands on the target hoods through the fold and reaches the city
+ *   through the mean — one city path per cause. The sports, edition and media
+ *   adds stay (no hood path). There is no approval city scalar to retire.
+ * - Failure policy: an EmployerCharacter label or WeatherZone with no row in
+ *   this file throws (Engine_Errors, no dynamics that Cycle), never a silent
+ *   default — changing a hood's character is a sheet edit, a NEW label is new
+ *   logic. Canon not seeded (Phase1-CanonHoods did not run) throws the same way.
  *
  * Preserved output schema:
  * - S.cityDynamics: traffic, retail, tourism, nightlife, publicSpaces, sentiment,
  *   culturalActivity, communityEngagement
+ * - S.neighborhoodDynamics[hood]: the same eight metrics, every canon hood
+ * - S.cityDynamicsLag, S.cityDynamicsCapacity, S.activityObservations,
+ *   S.storySeedSignals (byHood / byDomainHood replace byCluster / byDomainCluster)
  *
- * Additive outputs:
- * - S.clusterDynamics, S.neighborhoodDynamics, S.clusterDefinitions
- * - S.cityDynamicsLag, S.cityDynamicsCapacity
- * - S.activityObservations, S.storySeedSignals
- *
+ * Earlier history (kept for the trail): v3.2 S216 engine.13 edition sentiment
+ * fold; v3.1 S202 edition neighborhood effects; v3.0 prev-media feedback;
+ * v2.6 clusters + weather v3.5 + calendar seeds + lag + capacity + ripples.
  * ============================================================================
  */
+
+// engine.214 D2: ONE hand table, keyed by the sheet's EmployerCharacter
+// vocabulary (Neighborhood_Map, 17 labels on the live sheet 2026-10-10), never
+// by hood. Seven multipliers in the 0.80–1.25 range the old cluster weights
+// used, plus capacitySensitivity (0.6–1.4; institutional / nightlife / campus /
+// stadium / arts feel congestion most, residential / village-retail least).
+// The old applyLocalPlaceBias_ statics are folded in (the same character
+// stated twice before). This is the engine's reading of the authored label:
+// a hood changes character by a sheet edit; a label with no row throws.
+var HOOD_CHARACTER_BY_EMPLOYER = {
+  'institutional':  { traffic: 1.22, retail: 1.12, tourism: 1.10, nightlife: 1.25, publicSpaces: 1.05, culturalActivity: 1.20, communityEngagement: 1.00, capacitySensitivity: 1.4 },
+  'nightlife':      { traffic: 1.10, retail: 1.00, tourism: 1.15, nightlife: 1.25, publicSpaces: 1.00, culturalActivity: 1.15, communityEngagement: 1.00, capacitySensitivity: 1.3 },
+  'arts':           { traffic: 1.05, retail: 1.05, tourism: 1.05, nightlife: 1.15, publicSpaces: 1.05, culturalActivity: 1.25, communityEngagement: 1.10, capacitySensitivity: 1.2 },
+  'stadium':        { traffic: 1.15, retail: 0.95, tourism: 1.25, nightlife: 1.15, publicSpaces: 1.05, culturalActivity: 1.00, communityEngagement: 1.05, capacitySensitivity: 1.3 },
+  'campus':         { traffic: 1.05, retail: 0.95, tourism: 1.10, nightlife: 1.05, publicSpaces: 1.05, culturalActivity: 1.10, communityEngagement: 1.10, capacitySensitivity: 1.1 },
+  'transit-retail': { traffic: 1.15, retail: 1.10, tourism: 0.90, nightlife: 0.95, publicSpaces: 1.00, culturalActivity: 1.08, communityEngagement: 1.15, capacitySensitivity: 1.0 },
+  'retail':         { traffic: 1.00, retail: 1.15, tourism: 1.05, nightlife: 1.00, publicSpaces: 1.15, culturalActivity: 1.05, communityEngagement: 1.08, capacitySensitivity: 0.9 },
+  'family-retail':  { traffic: 1.05, retail: 1.12, tourism: 1.10, nightlife: 0.95, publicSpaces: 1.05, culturalActivity: 1.15, communityEngagement: 1.10, capacitySensitivity: 1.1 },
+  'village-retail': { traffic: 0.90, retail: 1.05, tourism: 0.85, nightlife: 0.90, publicSpaces: 1.00, culturalActivity: 1.00, communityEngagement: 1.12, capacitySensitivity: 0.6 },
+  'schools-retail': { traffic: 0.95, retail: 1.00, tourism: 0.80, nightlife: 0.85, publicSpaces: 1.00, culturalActivity: 1.00, communityEngagement: 1.15, capacitySensitivity: 0.7 },
+  'professional':   { traffic: 0.95, retail: 1.15, tourism: 0.95, nightlife: 1.05, publicSpaces: 1.05, culturalActivity: 1.08, communityEngagement: 1.05, capacitySensitivity: 0.8 },
+  'medical':        { traffic: 1.00, retail: 1.05, tourism: 0.90, nightlife: 0.95, publicSpaces: 1.10, culturalActivity: 1.00, communityEngagement: 1.05, capacitySensitivity: 0.8 },
+  'clinic':         { traffic: 0.95, retail: 1.10, tourism: 0.95, nightlife: 1.05, publicSpaces: 1.08, culturalActivity: 1.12, communityEngagement: 1.05, capacitySensitivity: 0.8 },
+  'residential':    { traffic: 0.95, retail: 0.95, tourism: 0.95, nightlife: 0.90, publicSpaces: 1.15, culturalActivity: 1.00, communityEngagement: 1.08, capacitySensitivity: 0.7 },
+  'mixed':          { traffic: 1.00, retail: 1.00, tourism: 1.00, nightlife: 1.00, publicSpaces: 1.10, culturalActivity: 1.05, communityEngagement: 1.08, capacitySensitivity: 0.9 },
+  'service-labor':  { traffic: 1.05, retail: 0.95, tourism: 0.80, nightlife: 0.90, publicSpaces: 0.95, culturalActivity: 1.00, communityEngagement: 1.12, capacitySensitivity: 0.8 },
+  'construction':   { traffic: 1.05, retail: 0.90, tourism: 0.80, nightlife: 0.85, publicSpaces: 0.95, culturalActivity: 1.05, communityEngagement: 1.15, capacitySensitivity: 0.6 }
+};
+
+// engine.214 D4: the WeatherZone vocabulary this file keys fronts by (the ten
+// zones on the live sheet 2026-10-10). A zone off this list throws, the same
+// wall as an unknown character label.
+var HOOD_WEATHER_ZONES = ['urban-core', 'urban-corridor', 'moderate', 'waterfront', 'bay-fog', 'lake', 'inland', 'valley', 'hills', 'piedmont-edge'];
+
+/**
+ * engine.214: one hood's authored seed, read once per Cycle from what Phase 1
+ * (loadCanonNeighborhoods_) and Phase 2 (loadNeighborhoodState_, runs right
+ * before this) already loaded. Throws on a blank label, a label with no row,
+ * a zone off the list, or canon not seeded — never defaults.
+ * Returns { hood, character, boomIndex, zone, scenes }.
+ */
+function hoodProfile_(ctx, hood) {
+  var S = ctx && ctx.summary;
+  var state = S && S.neighborhoodState && S.neighborhoodState[hood];
+  if (!state) {
+    throw new Error('engine.214: no Neighborhood_Map row loaded for "' + hood + '" (Phase2-NeighborhoodState) — every canon hood needs its authored row');
+  }
+  var character = (state.employerCharacter || '').toString().trim().toLowerCase();
+  if (!character) {
+    throw new Error('engine.214: Neighborhood_Map.EmployerCharacter is blank for "' + hood + '" — author the cell');
+  }
+  if (!HOOD_CHARACTER_BY_EMPLOYER[character]) {
+    throw new Error('engine.214: Neighborhood_Map.EmployerCharacter "' + character + '" (' + hood + ') has no row in HOOD_CHARACTER_BY_EMPLOYER — a new label is new logic');
+  }
+  var zone = getHoodWeatherZone_(ctx, hood).toString().trim().toLowerCase();
+  if (HOOD_WEATHER_ZONES.indexOf(zone) < 0) {
+    throw new Error('engine.214: Neighborhood_Map.WeatherZone "' + zone + '" (' + hood + ') is not a zone this engine keys fronts by');
+  }
+  var boom = Number(state.boomIndex);
+  return {
+    hood: hood,
+    character: character,
+    boomIndex: isFinite(boom) ? boom : 0,   // blank BoomIndex = no boom seed (membership absence is design)
+    zone: zone,
+    scenes: getHoodScenes_(ctx, hood) || {}
+  };
+}
+
+/** engine.214 D2 + D3: the hood's base multipliers from its label row and BoomIndex. */
+function hoodCharacterBase_(profile) {
+  var row = HOOD_CHARACTER_BY_EMPLOYER[profile.character];
+  if (!row) throw new Error('engine.214: no character row for "' + profile.character + '"');
+  var b = Number(profile.boomIndex) || 0;
+  return {
+    traffic: row.traffic,
+    retail: row.retail * (1 + 0.10 * b),
+    tourism: row.tourism * (1 + 0.10 * b),
+    nightlife: row.nightlife,
+    publicSpaces: row.publicSpaces,
+    culturalActivity: row.culturalActivity,
+    communityEngagement: row.communityEngagement,
+    capacitySensitivity: row.capacitySensitivity
+  };
+}
 
 function applyCityDynamics_(ctx) {
   if (!ctx) {
@@ -85,7 +166,6 @@ function applyCityDynamics_(ctx) {
     || (weather.type === 'rain' ? 'rain' : (weather.type === 'snow' ? 'snow' : 'none'));
   var windSpeed = (weather.windSpeed === 0 || weather.windSpeed) ? Number(weather.windSpeed) : 5;
   var visibility = (weather.visibility === 0 || weather.visibility) ? Number(weather.visibility) : 10;
-  var weatherFront = (weather.front || weather.type || 'CLEAR').toString().toUpperCase();
 
   // Demographics (optional)
   var neighborhoodDemographics = S.neighborhoodDemographics || {};
@@ -120,7 +200,7 @@ function applyCityDynamics_(ctx) {
   var crimeSpikes = S.crimeSpikes || S.crimeEvents || prevCrimeSpikes;
   var mediaCoverage = S.mediaCoverage || S.mediaCount || 0;
 
-  // Crime by neighborhood (for ripple effects)
+  // Crime by neighborhood (the per-hood ladder)
   var crimeByNeighborhood = S.crimeByNeighborhood;
   if (!crimeByNeighborhood || Object.keys(crimeByNeighborhood).length === 0) {
     crimeByNeighborhood = {};
@@ -194,9 +274,34 @@ function applyCityDynamics_(ctx) {
     };
   }
 
+  var METRIC_KEYS = ['traffic', 'retail', 'tourism', 'nightlife', 'publicSpaces', 'sentiment', 'culturalActivity', 'communityEngagement'];
+
+  function clampMetrics_(m) {
+    m.traffic = clampMult(m.traffic);
+    m.retail = clampMult(m.retail);
+    m.tourism = clampMult(m.tourism);
+    m.nightlife = clampMult(m.nightlife);
+    m.publicSpaces = clampMult(m.publicSpaces);
+    m.sentiment = clampSent(m.sentiment);
+    m.culturalActivity = clampMult(m.culturalActivity);
+    m.communityEngagement = clampMult(m.communityEngagement);
+    return m;
+  }
+
   // ─────────────────────────────────────────────────────────────────────────
   // MODIFIER FUNCTIONS
   // ─────────────────────────────────────────────────────────────────────────
+  // engine.214 D2/D3: the hood's authored base — the character row × BoomIndex.
+  function applyHoodCharacterBase_(m, base) {
+    m.traffic *= safeNum_(base.traffic, 1);
+    m.retail *= safeNum_(base.retail, 1);
+    m.tourism *= safeNum_(base.tourism, 1);
+    m.nightlife *= safeNum_(base.nightlife, 1);
+    m.publicSpaces *= safeNum_(base.publicSpaces, 1);
+    m.culturalActivity *= safeNum_(base.culturalActivity, 1);
+    m.communityEngagement *= safeNum_(base.communityEngagement, 1);
+  }
+
   // engine.188 (2026-09-10): the four season pushes summed to +0.20 across a
   // 52-cycle year (13 cycles each, exactly even), so the calendar alone paid the
   // city +0.05 of mood every cycle forever. Re-centred to sum to zero: the same
@@ -249,7 +354,11 @@ function applyCityDynamics_(ctx) {
   // the weather model (S.weatherEvents, the same events engine.229 ripples as
   // disasters) — counts in full plus WEATHER_CAT_MOOD. Traffic / public-space /
   // tourism effects are unchanged: rain still empties the parks.
-  function applyWeatherModifiers_(m, weather, extra, clusterName) {
+  // engine.214 D4: a front targets the hood's WeatherZone, not a cluster. The
+  // old place-bias weather conditionals (wind / rain / Winter) are here by zone.
+  // The realised microclimate (S.neighborhoodWeather, fog on the ground) is a
+  // separate line in the per-hood pass: a front is the forecast, fog is the event.
+  function applyWeatherModifiers_(m, weather, extra, zone) {
     var WEATHER_MOOD_SCALE = 0.3;
     var WEATHER_CAT_MOOD = 0.15;
     var moodBefore = m.sentiment;
@@ -257,11 +366,13 @@ function applyCityDynamics_(ctx) {
     var t = weather.type || 'clear';
     var impact = safeNum_(weather.impact, 1);
     var front = (weather.front || t || 'CLEAR').toString().toUpperCase();
+    zone = String(zone || '').toLowerCase();
 
     var precipI = safeNum_(extra.precipIntensity, 0);
     var wind = safeNum_(extra.windSpeed, 5);
     var vis = safeNum_(extra.visibility, 10);
     var pType = String(extra.precipType || 'none');
+    var seasonName = String(extra.season || '');
 
     // Base weather type modifiers
     if (t === 'rain' || t === 'fog' || t === 'overcast') {
@@ -310,23 +421,31 @@ function applyCityDynamics_(ctx) {
       m.sentiment -= 0.04;
     }
 
-    // Weather front cluster targeting (ripple effect)
-    if (front === 'MARINE' && clusterName === 'WATERFRONT_WEST') {
+    // engine.214 D4: weather front by WeatherZone (ripple effect)
+    var shoreline = (zone === 'waterfront' || zone === 'bay-fog');
+    var lake = (zone === 'lake');
+    var inland = (zone === 'inland' || zone === 'valley');
+    var high = (zone === 'hills' || zone === 'piedmont-edge');
+    if (front === 'MARINE' && shoreline) {
       m.tourism *= 0.92;
       m.publicSpaces *= 0.88;
       m.sentiment -= 0.06;
     }
-    if (front === 'MARINE' && clusterName === 'LAKE_CORRIDOR') {
+    if (front === 'MARINE' && lake) {
       m.publicSpaces *= 0.94;
     }
-    if (front === 'HEAT' && clusterName === 'EAST_OAKLAND') {
+    if (front === 'HEAT' && inland) {
       m.publicSpaces *= 0.92;
       m.sentiment -= 0.04;
     }
-    if (front === 'COLD' && clusterName === 'NORTH_HILLS') {
+    if (front === 'COLD' && high) {
       m.publicSpaces *= 0.9;
       m.traffic *= 0.95;
     }
+    // the old place-bias conditionals, by zone (codex 9)
+    if (shoreline && (front === 'MARINE' || wind >= 25)) m.tourism *= 0.94;
+    if (lake && precipI >= 0.4) m.publicSpaces *= 0.93;
+    if (high && seasonName === 'Winter') m.publicSpaces *= 0.96;
 
     // Severe weather impact
     if (impact >= 1.4) {
@@ -346,11 +465,15 @@ function applyCityDynamics_(ctx) {
   // Creation Day and the named-holiday table, not First Friday — keeps every holiday's rank
   // and brings the top (major +0.1 stacked on +0.4/+0.5) to ~+0.30. Same shape as
   // WEATHER_MOOD_SCALE above.
-  function applyHolidayModifiers_(m, holiday, holidayPriority, flags, seasonName, clusterName) {
+  // engine.214 D5: the calendar keys on the hood's Scenes tags. First Friday:
+  // weight ≥ 3 is the epicenter, 1–2 spillover, 0 the modest citywide lift.
+  // Creation Day: the citywide lift plus the extra for any hood with CreationDay > 0.
+  function applyHolidayModifiers_(m, holiday, holidayPriority, flags, seasonName, scenes) {
     var HOLIDAY_MOOD_SCALE = 0.6;
     var isFF = !!flags.isFirstFriday;
     var isCD = !!flags.isCreationDay;
     var moodStart = m.sentiment, ffMood = 0;
+    scenes = scenes || {};
 
     // Holiday priority baseline
     if (holidayPriority === 'major') {
@@ -364,11 +487,12 @@ function applyCityDynamics_(ctx) {
       m.culturalActivity *= 1.1;
     }
 
-    // First Friday (cluster-sensitive - arts corridor boost)
+    // First Friday (Scenes.FirstFriday weight)
     var moodPreFF = m.sentiment;
     if (isFF) {
-      if (clusterName === 'DOWNTOWN_CORE') {
-        // KONO/Uptown arts walk epicenter
+      var ffW = safeNum_(scenes.FirstFriday, 0);
+      if (ffW >= 3) {
+        // the arts-walk epicenter
         m.nightlife *= 1.5;
         m.culturalActivity *= 1.6;
         m.communityEngagement *= 1.4;
@@ -376,15 +500,15 @@ function applyCityDynamics_(ctx) {
         m.retail *= 1.3;
         m.traffic *= 1.3;
         m.sentiment += 0.25;
-      } else if (clusterName === 'NORTH_HILLS') {
-        // Temescal/Rockridge get spillover
+      } else if (ffW >= 1) {
+        // spillover
         m.nightlife *= 1.3;
         m.culturalActivity *= 1.4;
         m.communityEngagement *= 1.2;
         m.retail *= 1.2;
         m.sentiment += 0.15;
       } else {
-        // Other clusters get modest boost
+        // every other hood gets the modest boost
         m.nightlife *= 1.2;
         m.culturalActivity *= 1.25;
         m.communityEngagement *= 1.15;
@@ -394,12 +518,12 @@ function applyCityDynamics_(ctx) {
 
     ffMood = m.sentiment - moodPreFF;
 
-    // Creation Day (citywide, East Oakland special)
+    // Creation Day (citywide, plus the extra where the hood hosts it)
     if (isCD || holiday === 'CreationDay') {
       m.communityEngagement *= 1.3;
       m.culturalActivity *= 1.2;
       m.sentiment += 0.2;
-      if (clusterName === 'EAST_OAKLAND') {
+      if (safeNum_(scenes.CreationDay, 0) > 0) {
         m.communityEngagement *= 1.1;
         m.sentiment += 0.05;
       }
@@ -412,8 +536,6 @@ function applyCityDynamics_(ctx) {
     if (holiday === 'Halloween') { m.nightlife *= 1.4; m.publicSpaces *= 1.3; m.communityEngagement *= 1.4; m.culturalActivity *= 1.3; m.retail *= 1.2; m.sentiment += 0.3; }
     if (holiday === 'Thanksgiving') { m.traffic *= 1.3; m.retail *= 1.3; m.communityEngagement *= 1.3; m.nightlife *= 0.7; m.sentiment += 0.3; }
     if (holiday === 'Holiday') { m.retail *= 1.5; m.nightlife *= 1.3; m.publicSpaces *= 1.3; m.communityEngagement *= 1.3; m.traffic *= 1.2; m.sentiment += 0.4; }
-
-    // Oakland-specific
 
     // Minor holidays
     if (holiday === 'Valentine') { m.nightlife *= 1.3; m.retail *= 1.3; m.sentiment += 0.2; }
@@ -431,7 +553,7 @@ function applyCityDynamics_(ctx) {
     m.sentiment = moodStart + ffMood + holidayMood * HOLIDAY_MOOD_SCALE;
   }
 
-  function applySportsModifiers_(m, sportsSeasonRaw, clusterName) {
+  function applySportsModifiers_(m, sportsSeasonRaw, hood) {
     var phase = normalizeSportsPhase_(sportsSeasonRaw);
 
     // Base sports modifiers
@@ -467,22 +589,19 @@ function applyCityDynamics_(ctx) {
       else if (city.band === 'high') m.communityEngagement *= 1.2;
     }
 
-    // At the stadium: the cluster holding a franchise's venue, by that franchise's home
-    // volume (an away week puts nothing at the stadium). engine.281 (c): the venue's cluster
-    // is its named-or-adopted one (hoodClusters) — Baylight District, unnamed, adopts
-    // WATERFRONT_WEST through its map neighbours West Oakland and Jack London (harbor land).
+    // At the stadium: the hood holding a franchise's venue, by that franchise's home
+    // volume (an away week puts nothing at the stadium). engine.214 D6: the lift lands
+    // on the venue hood direct and full (S.sportsWeek[f].venue names it); whether
+    // adjacent hoods feel a share is an open sim call, not built.
     var weeks = S.sportsWeek || {};
     for (var f in weeks) {
       if (!weeks.hasOwnProperty(f)) continue;
       var x = (Number(weeks[f].unsigned) || 0) * (Number(weeks[f].venueShare) || 0);
       if (!(x > 0)) continue;
       var venue = weeks[f].venue || [];
-      for (var vi = 0; vi < venue.length; vi++) {
-        if (hoodClusters.byHood[venue[vi]] !== clusterName) continue;
-        m.traffic *= 1 + 0.15 * x;
-        m.nightlife *= 1 + 0.15 * x;
-        break;
-      }
+      if (venue.indexOf(hood) < 0) continue;
+      m.traffic *= 1 + 0.15 * x;
+      m.nightlife *= 1 + 0.15 * x;
     }
   }
 
@@ -531,6 +650,9 @@ function applyCityDynamics_(ctx) {
     // `< 0.05` was true for 15 of 22 and paid a standing +0.05. Moved below the
     // live median so it marks a hood that is genuinely exceptional. NOTE the
     // two tiers above it fire 0 of 22 at this range — see the engine.185 row.
+    // engine.214 (A10): applied per hood on the hood's own rates — at C110
+    // unemployment > 0.08 fires Temescal alone, < 0.03 Baylight alone, sickness
+    // > 0.06 Chinatown alone; the cluster average hid all three.
     if (ur > 0.12) { m.retail *= 0.92; m.sentiment -= 0.32; }
     else if (ur > 0.08) { m.retail *= 0.96; m.sentiment -= 0.15; }
     else if (ur < 0.03) { m.retail *= 1.05; m.sentiment += 0.05; }
@@ -643,64 +765,36 @@ function applyCityDynamics_(ctx) {
     else if (shockX >= 1.25) { m.sentiment -= 0.10; }                 // an unusually busy one
   }
 
-  // ─────────────────────────────────────────────────────────────────────────
-  // CLUSTER DEFINITIONS (exposed via S.clusterDefinitions)
-  // engine.214: the five clusters are authored CHARACTER (weights, congestion
-  // sensitivity). Which hoods anchor each one is World_Config truth
-  // (clusterAnchors_<CLUSTER>, engine94SheetContract.js self-arm) — no hood is
-  // named in this engine. seedClusterAnchors_ fills `hoods` from the sheet and
-  // throws on a missing key, a name off the canon map, a hood in two clusters
-  // or an empty cluster; every other canon hood adopts by adjacency below.
-  // ─────────────────────────────────────────────────────────────────────────
-  var CLUSTERS = {
-    'DOWNTOWN_CORE': {
-      weights: { traffic: 1.15, retail: 1.12, tourism: 1.10, nightlife: 1.25, publicSpaces: 1.05, culturalActivity: 1.20, communityEngagement: 1.00 },
-      capacitySensitivity: 1.4  // the core feels congestion most
-    },
-    'WATERFRONT_WEST': {
-      weights: { traffic: 1.05, retail: 0.95, tourism: 1.20, nightlife: 1.10, publicSpaces: 1.05, culturalActivity: 1.05, communityEngagement: 1.05 },
-      capacitySensitivity: 1.1
-    },
-    'LAKE_CORRIDOR': {
-      weights: { traffic: 1.00, retail: 1.05, tourism: 1.08, nightlife: 1.00, publicSpaces: 1.25, culturalActivity: 1.10, communityEngagement: 1.10 },
-      capacitySensitivity: 0.9
-    },
-    'NORTH_HILLS': {
-      weights: { traffic: 0.95, retail: 1.10, tourism: 0.95, nightlife: 1.05, publicSpaces: 1.08, culturalActivity: 1.08, communityEngagement: 1.05 },
-      capacitySensitivity: 0.7
-    },
-    'EAST_OAKLAND': {
-      weights: { traffic: 1.00, retail: 0.95, tourism: 0.80, nightlife: 0.90, publicSpaces: 0.95, culturalActivity: 1.08, communityEngagement: 1.15 },
-      capacitySensitivity: 0.6  // least affected by citywide congestion
+  // engine.214 D7: one crime ladder per hood on the hood's own prev-Cycle spike
+  // count, carrying every effect the cluster ripple and the hood block had
+  // between them (codex 4). Returns the count so the receipt can be written once.
+  function applyCrimeLadder_(m, spikes) {
+    var n = safeNum_(spikes, 0);
+    if (n >= 3) {
+      m.nightlife *= 0.90;
+      m.tourism *= 0.88;
+      m.publicSpaces *= 0.88;
+      m.sentiment -= 0.30;   // engine.185: a hood under a crime wave
+    } else if (n >= 2) {
+      m.nightlife *= 0.90;
+      m.tourism *= 0.88;
+      m.sentiment -= 0.20;
+    } else if (n >= 1) {
+      m.nightlife *= 0.96;
+      m.sentiment -= 0.06;
     }
-  };
-  seedClusterAnchors_(ctx, CLUSTERS);
+    return n;
+  }
 
-  // Adjacent clusters for sentiment bleed
-  var CLUSTER_ADJACENCY = {
-    'DOWNTOWN_CORE': ['WATERFRONT_WEST', 'LAKE_CORRIDOR', 'NORTH_HILLS'],
-    'WATERFRONT_WEST': ['DOWNTOWN_CORE', 'EAST_OAKLAND'],
-    'LAKE_CORRIDOR': ['DOWNTOWN_CORE', 'NORTH_HILLS', 'EAST_OAKLAND'],
-    'NORTH_HILLS': ['DOWNTOWN_CORE', 'LAKE_CORRIDOR'],
-    'EAST_OAKLAND': ['WATERFRONT_WEST', 'LAKE_CORRIDOR']
-  };
-
-  var clusterWeights = {
-    'DOWNTOWN_CORE': 0.28,
-    'WATERFRONT_WEST': 0.18,
-    'LAKE_CORRIDOR': 0.22,
-    'NORTH_HILLS': 0.17,
-    'EAST_OAKLAND': 0.15
-  };
-
-  // Expose cluster definitions
-  S.clusterDefinitions = {};
-  for (var ck in CLUSTERS) {
-    if (!CLUSTERS.hasOwnProperty(ck)) continue;
-    S.clusterDefinitions[ck] = {
-      neighborhoods: CLUSTERS[ck].hoods.slice(),
-      adjacent: (CLUSTER_ADJACENCY[ck] || []).slice()
-    };
+  // ─────────────────────────────────────────────────────────────────────────
+  // THE HOODS (engine.214: the canon list, every hood's authored profile)
+  // ─────────────────────────────────────────────────────────────────────────
+  var hoods = getCanonNeighborhoods_(ctx);   // throws when Phase1-CanonHoods did not run (ADR-0016)
+  var profiles = {};
+  var bases = {};
+  for (var hp = 0; hp < hoods.length; hp++) {
+    profiles[hoods[hp]] = hoodProfile_(ctx, hoods[hp]);
+    bases[hoods[hp]] = hoodCharacterBase_(profiles[hoods[hp]]);
   }
 
   // ─────────────────────────────────────────────────────────────────────────
@@ -814,55 +908,68 @@ function applyCityDynamics_(ctx) {
   // holy day counts), so `shocks >= 3` was true 19 of 19 cycles measured and
   // the line it gates was a flat per-cycle tax, never a shock signal.
   var obsCur = obs;   // engine.228: last night's real counts (or this Cycle's empty ones on a first fire)
+  var observedInputs = {
+    events: obsAvg.events,
+    media: obsAvg.media,
+    crime: obsAvg.crime,
+    storySeedCount: obsAvg.storySeedCount,
+    shockCount: obsAvg.shockCount,
+    crimeNow: obsCur.crime,
+    shockCountNow: obsCur.shockCount,
+    eventsNow: obsCur.events,             // engine.188
+    storySeedCountNow: obsCur.storySeedCount,
+    mediaNow: obsCur.media
+  };
 
   // ─────────────────────────────────────────────────────────────────────────
-  // STORY SEED SIGNALS (cluster-aware, calendar-aware)
+  // STORY SEED SIGNALS (hood-aware, calendar-aware) — engine.214 D5/D7
   // ─────────────────────────────────────────────────────────────────────────
-  function isArtsCluster_(clusterName) {
-    return (clusterName === 'DOWNTOWN_CORE' || clusterName === 'NORTH_HILLS');
-  }
-
-  function isNightlifeCluster_(clusterName) {
-    return (clusterName === 'DOWNTOWN_CORE' || clusterName === 'WATERFRONT_WEST');
-  }
-
-  function isPublicSpaceCluster_(clusterName) {
-    return (clusterName === 'LAKE_CORRIDOR');
-  }
-
-  function seedCalendarBoost_(seed, clusterName) {
+  // The calendar keys a seed's hood weight by the hood's own Scenes / label /
+  // zone: arts = Scenes has `arts` or EmployerCharacter arts; nightlife =
+  // EmployerCharacter nightlife or stadium; public-space = WeatherZone lake; a
+  // major holiday's host = the hood whose Scenes carries the holiday's tag.
+  // A seed with no hood (or a hood off the map) is citywide: a neutral profile.
+  function seedCalendarBoost_(seed, profile) {
     var cc = seed && seed.calendarContext;
     if (!cc) return 0;
+    profile = profile || {};
+    var scenes = profile.scenes || {};
+    var character = String(profile.character || '');
+    var zone = String(profile.zone || '');
+    var arts = safeNum_(scenes.arts, 0) > 0 || character === 'arts';
+    var nightlife = (character === 'nightlife' || character === 'stadium');
+    var publicSpace = (zone === 'lake');
 
     var b = 0;
 
     if (cc.isFirstFriday) {
-      b += isArtsCluster_(clusterName) ? 0.40 : 0.20;
+      b += arts ? 0.40 : 0.20;
     }
     if (cc.isCreationDay) {
       b += 0.18;
-      if (clusterName === 'EAST_OAKLAND') b += 0.08;
+      if (safeNum_(scenes.CreationDay, 0) > 0) b += 0.08;
     }
 
     var hp = (cc.holidayPriority || '').toString();
     if (hp === 'major') {
-      b += (clusterName === 'DOWNTOWN_CORE' ? 0.22 : 0.12);
-      if (isPublicSpaceCluster_(clusterName)) b += 0.06;
+      var hostTag = (cc.holiday || '').toString();
+      b += (hostTag && safeNum_(scenes[hostTag], 0) > 0) ? 0.22 : 0.12;
+      if (publicSpace) b += 0.06;
     } else if (hp === 'cultural' || hp === 'oakland') {
-      b += isArtsCluster_(clusterName) ? 0.18 : 0.12;
+      b += arts ? 0.18 : 0.12;
     }
 
     var sp = normalizeSportsPhase_(cc.sportsSeason || '');
     if (sp === 'postseason') {
-      b += isNightlifeCluster_(clusterName) ? 0.22 : 0.12;
+      b += nightlife ? 0.22 : 0.12;
     } else if (sp === 'finals') {
-      b += isNightlifeCluster_(clusterName) ? 0.30 : 0.18;
+      b += nightlife ? 0.30 : 0.18;
     }
 
     return b;
   }
 
-  function seedWeight_(seed, clusterName) {
+  function seedWeight_(seed, profile) {
     var p = safeNum_(seed && seed.priority, 1);
     var w = p;
 
@@ -871,39 +978,27 @@ function applyCityDynamics_(ctx) {
     if (st === 'shock' || st === 'event') w *= 1.08;
 
     // CalendarContext boosts
-    var cal = seedCalendarBoost_(seed, clusterName);
+    var cal = seedCalendarBoost_(seed, profile);
     w *= (1 + clamp(cal, 0, 0.7));
 
     return w;
   }
 
-  function neighborhoodToCluster_(neighborhood, clusters) {
-    if (!neighborhood) return null;
-    for (var ck in clusters) {
-      if (!clusters.hasOwnProperty(ck)) continue;
-      var hoods = clusters[ck].hoods || [];
-      for (var i = 0; i < hoods.length; i++) {
-        if (hoods[i] === neighborhood) return ck;
-      }
-    }
-    return null;
-  }
-
-  function buildSeedSignals_(storySeeds, clusters) {
+  function buildSeedSignals_(storySeeds, profiles) {
     var sig = {
       totalWeighted: 0,
-      byCluster: {},
-      byNeighborhood: {},
-      byDomainCluster: {},
+      byHood: {},
+      byDomainHood: {},
       citywideWeighted: 0
     };
 
-    for (var ck in clusters) {
-      if (!clusters.hasOwnProperty(ck)) continue;
-      sig.byCluster[ck] = { weighted: 0, count: 0 };
-      sig.byDomainCluster[ck] = {};
+    for (var hk in profiles) {
+      if (!profiles.hasOwnProperty(hk)) continue;
+      sig.byHood[hk] = { weighted: 0, count: 0 };
+      sig.byDomainHood[hk] = {};
     }
 
+    var citywideProfile = { character: '', zone: '', scenes: {} };
     for (var i = 0; i < storySeeds.length; i++) {
       var s0 = storySeeds[i];
       if (!s0 || !s0.text) continue;
@@ -911,41 +1006,25 @@ function applyCityDynamics_(ctx) {
       var nh = s0.neighborhood || '';
       var dom = (s0.domain || 'GENERAL').toString().toUpperCase();
 
-      if (nh) {
-        if (!sig.byNeighborhood[nh]) sig.byNeighborhood[nh] = { weighted: 0, count: 0 };
-
-        var cl = neighborhoodToCluster_(nh, clusters);
-        if (cl && sig.byCluster[cl]) {
-          var w = seedWeight_(s0, cl);
-          sig.totalWeighted += w;
-
-          sig.byNeighborhood[nh].weighted += w;
-          sig.byNeighborhood[nh].count += 1;
-
-          sig.byCluster[cl].weighted += w;
-          sig.byCluster[cl].count += 1;
-
-          if (!sig.byDomainCluster[cl][dom]) sig.byDomainCluster[cl][dom] = 0;
-          sig.byDomainCluster[cl][dom] += w;
-        } else {
-          var w2 = seedWeight_(s0, 'DOWNTOWN_CORE');
-          sig.totalWeighted += w2;
-          sig.citywideWeighted += w2;
-
-          sig.byNeighborhood[nh].weighted += w2;
-          sig.byNeighborhood[nh].count += 1;
-        }
+      if (nh && profiles[nh]) {
+        var w = seedWeight_(s0, profiles[nh]);
+        sig.totalWeighted += w;
+        sig.byHood[nh].weighted += w;
+        sig.byHood[nh].count += 1;
+        if (!sig.byDomainHood[nh][dom]) sig.byDomainHood[nh][dom] = 0;
+        sig.byDomainHood[nh][dom] += w;
       } else {
-        var w3 = seedWeight_(s0, 'DOWNTOWN_CORE');
-        sig.totalWeighted += w3;
-        sig.citywideWeighted += w3;
+        // citywide, or a hood off the map: lifts every hood through the citywide term
+        var w2 = seedWeight_(s0, citywideProfile);
+        sig.totalWeighted += w2;
+        sig.citywideWeighted += w2;
       }
     }
 
     return sig;
   }
 
-  // engine.188 (2026-09-10): median of a set of cluster/domain weights, so a
+  // engine.188 (2026-09-10): median of a set of hood/domain weights, so a
   // gate can ask "busier than the rest of the city THIS cycle?" instead of
   // "past a number picked when the deck was smaller". engine.38 B2 / engine.184
   // pattern — a ratio of the cycle's own middle cannot rot when the scale moves.
@@ -956,37 +1035,43 @@ function applyCityDynamics_(ctx) {
     return (a.length % 2) ? a[mid] : (a[mid - 1] + a[mid]) / 2;
   }
 
-  function seedClusterMedian_(seedSig) {
+  // engine.214 D7 (codex 3): the median over ACTIVE entries only (weight > 0);
+  // null when fewer than 3 are active — a null median means every relative gate
+  // reads ratio 1 and nothing fires. 22 hoods with a sparse deck would otherwise
+  // put the median at 0 and read every ratio as 1 regardless of weight.
+  function seedHoodMedian_(seedSig) {
     var vals = [];
-    for (var k in seedSig.byCluster) {
-      if (!seedSig.byCluster.hasOwnProperty(k)) continue;
-      vals.push(safeNum_(seedSig.byCluster[k].weighted, 0));
+    for (var k in seedSig.byHood) {
+      if (!seedSig.byHood.hasOwnProperty(k)) continue;
+      var v = safeNum_(seedSig.byHood[k].weighted, 0);
+      if (v > 0) vals.push(v);
     }
-    return medianOf_(vals);
+    return vals.length >= 3 ? medianOf_(vals) : null;
   }
 
   function seedDomainMedian_(seedSig, domain) {
     var vals = [];
-    for (var k in seedSig.byDomainCluster) {
-      if (!seedSig.byDomainCluster.hasOwnProperty(k)) continue;
-      vals.push(safeNum_((seedSig.byDomainCluster[k] || {})[domain], 0));
+    for (var k in seedSig.byDomainHood) {
+      if (!seedSig.byDomainHood.hasOwnProperty(k)) continue;
+      var v = safeNum_((seedSig.byDomainHood[k] || {})[domain], 0);
+      if (v > 0) vals.push(v);
     }
-    return medianOf_(vals);
+    return vals.length >= 3 ? medianOf_(vals) : null;
   }
 
-  function applySeedLocalBoost_(m, seedSig, clusterName) {
-    if (!seedSig || !seedSig.byCluster || !seedSig.byCluster[clusterName]) return;
+  function applySeedLocalBoost_(m, seedSig, hood) {
+    if (!seedSig || !seedSig.byHood || !seedSig.byHood[hood]) return;
 
-    var c = seedSig.byCluster[clusterName];
+    var c = seedSig.byHood[hood];
     var w = safeNum_(c.weighted, 0);
 
     // engine.188: the absolute ladder fired for 23 of 25 cluster-cycles measured
     // (C102-C106, five clusters) — every cluster in the city collecting a
     // standing lift for having any story activity at all. Against the cycle's
-    // own cross-cluster median, the boost marks the cluster the city is actually
+    // own cross-hood median, the boost marks the hood the city is actually
     // looking at, and an ordinary week pays nothing.
-    var wMed = seedClusterMedian_(seedSig);
-    var wX = (wMed > 0) ? w / wMed : 1;
+    var wMed = seedHoodMedian_(seedSig);
+    var wX = (wMed !== null && wMed > 0) ? w / wMed : 1;
 
     if (wX >= 1.75) {
       m.culturalActivity *= 1.08;
@@ -1003,7 +1088,7 @@ function applyCityDynamics_(ctx) {
     }
 
     // Domain-specific boosts
-    var doms = seedSig.byDomainCluster[clusterName] || {};
+    var doms = seedSig.byDomainHood[hood] || {};
     var wCulture = safeNum_(doms.CULTURE, 0);
     var wComm = safeNum_(doms.COMMUNITY, 0);
     var wBiz = safeNum_(doms.BUSINESS, 0);
@@ -1015,11 +1100,11 @@ function applyCityDynamics_(ctx) {
 
     // engine.188: same treatment for the two domain gates that move sentiment.
     // CULTURE / NIGHTLIFE stay absolute — they move no mood, only activity.
-    var commX = (function() { var d = seedDomainMedian_(seedSig, 'COMMUNITY'); return d > 0 ? wComm / d : 1; })();
+    var commX = (function() { var d = seedDomainMedian_(seedSig, 'COMMUNITY'); return (d !== null && d > 0) ? wComm / d : 1; })();
     if (commX >= 1.5) { m.communityEngagement *= 1.05; m.sentiment += 0.03; }
     else if (commX >= 1.25) { m.communityEngagement *= 1.03; }
 
-    var bizX = (function() { var d = seedDomainMedian_(seedSig, 'BUSINESS'); return d > 0 ? wBiz / d : 1; })();
+    var bizX = (function() { var d = seedDomainMedian_(seedSig, 'BUSINESS'); return (d !== null && d > 0) ? wBiz / d : 1; })();
     if (bizX >= 1.5) { m.retail *= 1.04; m.sentiment += 0.02; }
     else if (bizX >= 1.25) { m.retail *= 1.02; }
 
@@ -1030,95 +1115,8 @@ function applyCityDynamics_(ctx) {
     else if (wCivic >= 3) { m.sentiment -= 0.02; }
   }
 
-  var seedSignals = buildSeedSignals_(storySeeds, CLUSTERS);
+  var seedSignals = buildSeedSignals_(storySeeds, profiles);
   S.storySeedSignals = seedSignals;
-
-  // ─────────────────────────────────────────────────────────────────────────
-  // CRIME RIPPLE EFFECT (per-cluster crime impact)
-  // ─────────────────────────────────────────────────────────────────────────
-  function getClusterCrimeCount_(clusterName) {
-    if (!crimeByNeighborhood || Object.keys(crimeByNeighborhood).length === 0) return 0;
-    var hoods = CLUSTERS[clusterName] ? CLUSTERS[clusterName].hoods : [];
-    var count = 0;
-    for (var i = 0; i < hoods.length; i++) {
-      count += safeNum_(crimeByNeighborhood[hoods[i]], 0);
-    }
-    return count;
-  }
-
-  function applyCrimeRipple_(m, clusterName) {
-    var localCrime = getClusterCrimeCount_(clusterName);
-    if (localCrime >= 3) {
-      m.nightlife *= 0.85;
-      m.tourism *= 0.88;
-      m.publicSpaces *= 0.88;
-      m.sentiment -= 0.30;   // engine.185: a cluster under a crime wave
-    } else if (localCrime >= 2) {
-      m.nightlife *= 0.92;
-      m.tourism *= 0.94;
-      m.sentiment -= 0.15;
-    } else if (localCrime >= 1) {
-      m.nightlife *= 0.97;
-      m.sentiment -= 0.06;
-    }
-
-    // engine.45 T3b: persist the crime→dynamics fold with its cause — first
-    // time this branch fires on real inputs (was hollow, trace K gap G1).
-    if (localCrime >= 1) {
-      Logger.log('applyCityDynamics_ engine.45 T3b: Crime ripple fired — cluster ' +
-        clusterName + ', ' + localCrime + ' prev-cycle spike(s)');
-      if (typeof recordRipple_ === 'function') {
-        var spikeHoods = CLUSTERS[clusterName] ? CLUSTERS[clusterName].hoods.filter(function(h) {
-          return crimeByNeighborhood[h];
-        }) : [];
-        recordRipple_(ctx, {
-          causeType: 'crime',
-          causeId: 'Crime_Metrics.shifts.prev-cycle',
-          // Prose, not JSON — this line lands in the seed row's Why column,
-          // which is world-facing text (seed contract v2, no JSON in the world).
-          causeDetail: prevCrimeSpikes.filter(function(sp) {
-            return spikeHoods.indexOf(sp.neighborhood) !== -1;
-          }).map(function(sp) {
-            var metric = String(sp.metric || 'crime').replace(/([A-Z])/g, ' $1').toLowerCase();
-            return sp.neighborhood + ' ' + metric.trim() + ' +' + sp.magnitude +
-              (sp.newValue !== undefined ? ' (now ' + sp.newValue + ')' : '');
-          }).join('; ') || 'prev-cycle crime spike carry',
-          effectType: 'nightlife/tourism/publicSpaces/sentiment',
-          targetScope: 'neighborhood',
-          targetIds: spikeHoods,
-          neighborhood: spikeHoods.join('|'),
-          magnitude: localCrime,
-          duration: 1,
-          sourceEngine: 'applyCityDynamics.applyCrimeRipple_'
-        });
-      }
-    }
-  }
-
-  // ─────────────────────────────────────────────────────────────────────────
-  // COMPUTE CLUSTER + NEIGHBORHOOD DYNAMICS
-  // ─────────────────────────────────────────────────────────────────────────
-  var clusterDynamics = {};
-  var neighborhoodDynamics = {};
-
-  function applyLocalPlaceBias_(m, clusterName) {
-    if (clusterName === 'DOWNTOWN_CORE') {
-      m.nightlife *= 1.08;
-      m.traffic *= 1.06;
-    } else if (clusterName === 'WATERFRONT_WEST') {
-      m.tourism *= 1.08;
-      if (weatherFront === 'MARINE' || windSpeed >= 25) m.tourism *= 0.94;
-    } else if (clusterName === 'LAKE_CORRIDOR') {
-      m.publicSpaces *= 1.10;
-      if (precipIntensity >= 0.4) m.publicSpaces *= 0.93;
-    } else if (clusterName === 'NORTH_HILLS') {
-      m.retail *= 1.06;
-      if (season === 'Winter') m.publicSpaces *= 0.96;
-    } else if (clusterName === 'EAST_OAKLAND') {
-      m.communityEngagement *= 1.08;
-      m.tourism *= 0.96;
-    }
-  }
 
   // A catastrophe this cycle: a salient storm / flood / heat wave (applyWeatherModel_,
   // Phase2-Weather, runs before this at both entry points).
@@ -1128,157 +1126,225 @@ function applyCityDynamics_(ctx) {
     var wxe = wxEvents[wxi];
     if (wxe && wxe.salient && (wxe.type === 'storm' || wxe.type === 'flood_conditions' || wxe.type === 'heat_wave')) weatherCatastrophe = true;
   }
+  var weatherExtra = {
+    precipIntensity: precipIntensity,
+    precipType: precipType,
+    windSpeed: windSpeed,
+    visibility: visibility,
+    catastrophe: weatherCatastrophe,
+    season: season
+  };
 
-  // Every canon hood's cluster, named + adopted (see the per-hood pass below). Built before
-  // the first pass so the stadium lift in applySportsModifiers_ finds an adopted venue hood.
-  var hoodClusters = buildHoodClusterAssignment_(ctx, CLUSTERS);
+  // ─────────────────────────────────────────────────────────────────────────
+  // PASS A — every hood's raw Cycle value from its own seed and its own inputs
+  // (engine.214 Task 5 order: base → season → weather by zone → holiday by
+  // Scenes → sports → observed feedback → demographics → economy → crime
+  // ladder → seeds → lag drags → microclimate)
+  // ─────────────────────────────────────────────────────────────────────────
+  var rawHood = {};
+  var crimeHoodsAtTwo = [];
+  var crimeMaxSpikes = 0;
+  var hasDemographics = Object.keys(neighborhoodDemographics).length > 0;
 
-  // First pass: compute cluster dynamics
-  for (var cname in CLUSTERS) {
-    if (!CLUSTERS.hasOwnProperty(cname)) continue;
-
-    var cdef = CLUSTERS[cname];
+  for (var ai = 0; ai < hoods.length; ai++) {
+    var hood = hoods[ai];
+    var profile = profiles[hood];
     var m = makeMetrics_();
 
-    // Core modifiers
+    applyHoodCharacterBase_(m, bases[hood]);
     applySeasonModifiers_(m, season);
-    applyWeatherModifiers_(m, weather, {
-      precipIntensity: precipIntensity,
-      precipType: precipType,
-      windSpeed: windSpeed,
-      visibility: visibility,
-      catastrophe: weatherCatastrophe
-    }, cname);
-    applyHolidayModifiers_(m, holiday, holidayPriority, { isFirstFriday: isFirstFriday, isCreationDay: isCreationDay }, season, cname);
-    applySportsModifiers_(m, ss, cname);
+    applyWeatherModifiers_(m, weather, weatherExtra, profile.zone);
+    applyHolidayModifiers_(m, holiday, holidayPriority, { isFirstFriday: isFirstFriday, isCreationDay: isCreationDay }, season, profile.scenes);
+    applySportsModifiers_(m, ss, hood);
 
-    // Place bias
-    applyLocalPlaceBias_(m, cname);
+    // Observed feedback (citywide counts, identical for every hood)
+    applyObservedFeedback_(m, observedInputs);
 
-    // Cluster weights
-    var w = cdef.weights || {};
-    m.traffic *= safeNum_(w.traffic, 1);
-    m.retail *= safeNum_(w.retail, 1);
-    m.tourism *= safeNum_(w.tourism, 1);
-    m.nightlife *= safeNum_(w.nightlife, 1);
-    m.publicSpaces *= safeNum_(w.publicSpaces, 1);
-    m.culturalActivity *= safeNum_(w.culturalActivity, 1);
-    m.communityEngagement *= safeNum_(w.communityEngagement, 1);
-
-    // Demographics
-    if (Object.keys(neighborhoodDemographics).length > 0) {
-      var demoAgg = aggregateDemographics_(cdef.hoods, neighborhoodDemographics);
-      applyDemographicModifiers_(m, demoAgg);
-      m.demographics = {
-        unemploymentRate: round2(demoAgg.unemploymentRate),
-        sicknessRate: round2(demoAgg.sicknessRate),
-        studentRatio: round2(demoAgg.studentRatio),
-        seniorRatio: round2(demoAgg.seniorRatio),
-        totalPopulation: demoAgg.totalPopulation
-      };
+    // Demographics on the hood's own ratios (rates are scale-free; thresholds unchanged)
+    if (hasDemographics && neighborhoodDemographics[hood]) {
+      applyDemographicModifiers_(m, aggregateDemographics_([hood], neighborhoodDemographics));
     }
 
-    // Economy (cluster average)
-    var econMoodSum = 0;
-    var econCount = 0;
-    for (var hi = 0; hi < cdef.hoods.length; hi++) {
-      var hood = cdef.hoods[hi];
-      var he = neighborhoodEconomies[hood];
-      if (he && he.mood !== undefined) { econMoodSum += safeNum_(he.mood, 50); econCount++; }
-    }
-    if (econCount > 0) {
-      var avgMood = econMoodSum / econCount;
-      var avgDelta = (hoodMoodMedian === null) ? null : (avgMood - hoodMoodMedian);
+    // Economy on the hood's own mood vs the hood median (engine.225)
+    var he = neighborhoodEconomies[hood];
+    if (he && he.mood !== undefined) {
+      var hoodMood = safeNum_(he.mood, 50);
       applyEconomyLocal_(m, {
-        mood: avgMood,
-        descriptor: describeHoodEconomy_(avgMood),   // engine.225: the one scale (economicRippleEngine.js), not a 70/30 re-derivation
-        delta: avgDelta
+        mood: hoodMood,
+        descriptor: describeHoodEconomy_(hoodMood),   // engine.225: the one scale (economicRippleEngine.js)
+        delta: (hoodMoodMedian === null) ? null : (hoodMood - hoodMoodMedian)
       });
-      m.economy = { mood: round2(avgMood), delta: (avgDelta === null) ? null : round2(avgDelta) };
     }
 
-    // Observed feedback
-    applyObservedFeedback_(m, {
-      events: obsAvg.events,
-      media: obsAvg.media,
-      crime: obsAvg.crime,
-      storySeedCount: obsAvg.storySeedCount,
-      shockCount: obsAvg.shockCount,
-      crimeNow: obsCur.crime,
-      shockCountNow: obsCur.shockCount,
-      eventsNow: obsCur.events,             // engine.188
-      storySeedCountNow: obsCur.storySeedCount,
-      mediaNow: obsCur.media
-    });
+    // Crime ladder on the hood's own prev-Cycle spikes
+    var spikes = applyCrimeLadder_(m, crimeByNeighborhood[hood]);
+    if (spikes >= 2) crimeHoodsAtTwo.push(hood);
+    if (spikes > crimeMaxSpikes) crimeMaxSpikes = spikes;
 
-    // Story seed boosts
-    applySeedLocalBoost_(m, seedSignals, cname);
+    // Story seed boosts (the hood's own weight vs the active hood median)
+    applySeedLocalBoost_(m, seedSignals, hood);
 
-    // Crime ripple effect
-    applyCrimeRipple_(m, cname);
-
-    // Lag drags (cluster-sensitive)
+    // Lag drags — engine.214 D2 re-keys the two extras: tourism drag for the
+    // shoreline zones, nightlife drag for the nightlife / arts labels
     var tourismDrag = lag.tourismDrag;
     var publicDrag = lag.publicSpaceDrag;
     var nightDrag = lag.nightlifeDrag;
-    if (cname === 'WATERFRONT_WEST') tourismDrag = clamp(tourismDrag + 0.04, 0, 0.5);
-    if (cname === 'DOWNTOWN_CORE') nightDrag = clamp(nightDrag + 0.03, 0, 0.4);
-
+    if (profile.zone === 'waterfront' || profile.zone === 'bay-fog') tourismDrag = clamp(tourismDrag + 0.04, 0, 0.5);
+    if (profile.character === 'nightlife' || profile.character === 'arts') nightDrag = clamp(nightDrag + 0.03, 0, 0.4);
     m.tourism *= (1 - tourismDrag);
     m.publicSpaces *= (1 - publicDrag);
     m.nightlife *= (1 - nightDrag);
 
-    // Clamp
-    m.traffic = clampMult(m.traffic);
-    m.retail = clampMult(m.retail);
-    m.tourism = clampMult(m.tourism);
-    m.nightlife = clampMult(m.nightlife);
-    m.publicSpaces = clampMult(m.publicSpaces);
-    m.sentiment = clampSent(m.sentiment);
-    m.culturalActivity = clampMult(m.culturalActivity);
-    m.communityEngagement = clampMult(m.communityEngagement);
+    // Neighborhood microclimate (realised weather on the ground, applyWeatherModel_)
+    var nhW = S.neighborhoodWeather && S.neighborhoodWeather[hood];
+    if (nhW && nhW.type) {
+      if (nhW.type === 'fog') { m.tourism *= 0.95; m.traffic *= 0.97; }
+      if (nhW.type === 'hot') { m.publicSpaces *= 1.05; }
+    }
 
-    clusterDynamics[cname] = m;
+    rawHood[hood] = clampMetrics_(m);
+  }
+
+  // engine.45 T3b / engine.214 D7: the crime→dynamics receipt — one row per
+  // Cycle naming the hoods at two or more prev-Cycle spikes, with the spikes
+  // themselves as prose (the line lands in a seed row's Why column).
+  if (crimeHoodsAtTwo.length) {
+    Logger.log('applyCityDynamics_ engine.214: crime ladder at >=2 in ' + crimeHoodsAtTwo.join(', ') +
+      ' (max ' + crimeMaxSpikes + ' prev-cycle spike(s))');
+    if (typeof recordRipple_ === 'function') {
+      recordRipple_(ctx, {
+        causeType: 'crime',
+        causeId: 'Crime_Metrics.shifts.prev-cycle',
+        causeDetail: prevCrimeSpikes.filter(function(sp) {
+          return sp && crimeHoodsAtTwo.indexOf(sp.neighborhood) !== -1;
+        }).map(function(sp) {
+          var metric = String(sp.metric || 'crime').replace(/([A-Z])/g, ' $1').toLowerCase();
+          return sp.neighborhood + ' ' + metric.trim() + ' +' + sp.magnitude +
+            (sp.newValue !== undefined ? ' (now ' + sp.newValue + ')' : '');
+        }).join('; ') || 'prev-cycle crime spike carry',
+        effectType: 'nightlife/tourism/publicSpaces/sentiment',
+        targetScope: 'neighborhood',
+        targetIds: crimeHoodsAtTwo,
+        neighborhood: crimeHoodsAtTwo.join('|'),
+        magnitude: crimeMaxSpikes,
+        duration: 1,
+        sourceEngine: 'applyCityDynamics.applyCrimeLadder_'
+      });
+    }
   }
 
   // ─────────────────────────────────────────────────────────────────────────
-  // SENTIMENT BLEED (ripple effect between adjacent clusters)
+  // CAPACITY CONSTRAINTS (engine.214 D9: peak demand across hoods; friction ×
+  // the hood's own capacitySensitivity, applied BEFORE momentum — the hood's
+  // own congestion is part of its raw Cycle value, not a post-blend add)
   // ─────────────────────────────────────────────────────────────────────────
-  function applySentimentBleed_(clusterDynamics, adjacency) {
+  function maxAcrossHoods_(key) {
+    var mx = 0;
+    for (var k in rawHood) {
+      if (!rawHood.hasOwnProperty(k)) continue;
+      mx = Math.max(mx, safeNum_(rawHood[k][key], 0));
+    }
+    return mx;
+  }
+
+  var peakTraffic = maxAcrossHoods_('traffic');
+  var peakNightlife = maxAcrossHoods_('nightlife');
+  var peakTourism = maxAcrossHoods_('tourism');
+
+  var transitDemand = (peakTraffic + peakNightlife) / 2;
+  var venueDemand = peakNightlife;
+  var roadDemand = peakTraffic;
+
+  var transitCongestion = clamp((transitDemand - capacity.transitCapacity) * 0.38, 0, 0.38);
+  var venueCongestion = clamp((venueDemand - capacity.venueCapacity) * 0.32, 0, 0.32);
+  var roadCongestion = clamp((roadDemand - capacity.roadCapacity) * 0.32, 0, 0.32);
+
+  if ((transitCongestion + roadCongestion) >= 0.28) {
+    lag.congestionHangover = clamp(lag.congestionHangover + 0.08, 0, 0.4);
+  }
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // PASS B — capacity friction per hood, then the hood's own momentum
+  // ─────────────────────────────────────────────────────────────────────────
+  // v3.0: Neighborhood momentum — blend with previous cycle's state
+  // S247 FIX (substrate-critical): read S.previousCycleState directly; var
+  // hoisting of a later `prevState` once made this undefined on every hood.
+  // finalizeCycleState v1.3 snapshots neighborhoodDynamics → previousCycleState,
+  // so momentum self-heals from cycle 2.
+  var prevNhoodState = (S.previousCycleState || {}).neighborhoodDynamics || {};
+  var preBleed = {};
+
+  for (var bi = 0; bi < hoods.length; bi++) {
+    var bHood = hoods[bi];
+    var nm = rawHood[bHood];
+
+    var sensitivity = safeNum_(bases[bHood].capacitySensitivity, 1.0);
+    var cong = (transitCongestion + venueCongestion + roadCongestion + lag.congestionHangover) * sensitivity;
+    cong = clamp(cong, 0, 0.6);
+    nm.traffic *= (1 - clamp(cong * 0.20, 0, 0.20));
+    nm.nightlife *= (1 - clamp(cong * 0.12, 0, 0.12));
+    nm.tourism *= (1 - clamp(cong * 0.10, 0, 0.10));
+    nm.publicSpaces *= (1 - clamp(cong * 0.08, 0, 0.08));
+    nm.sentiment -= clamp(cong * 0.12, 0, 0.12);
+    clampMetrics_(nm);
+
+    var prevNhood = prevNhoodState[bHood] || null;
+    // 2026-09-19 / engine.214 D1 (the one stated exception): a hood with no
+    // carried dynamics carries its mood from last cycle's persisted
+    // Neighborhood_Map Sentiment instead of none — a first-carry bootstrap of
+    // the hood's OWN prior mood, never a base (bench C108: ten adopted hoods
+    // 0.1–0.3 under their neighbours without it). Sentiment only: the sheet's
+    // other live columns are on different scales from these multipliers.
+    if (!prevNhood && S.neighborhoodState && S.neighborhoodState[bHood] &&
+        S.neighborhoodState[bHood].sentiment !== null && isFinite(Number(S.neighborhoodState[bHood].sentiment))) {
+      prevNhood = { sentiment: Number(S.neighborhoodState[bHood].sentiment) };
+    }
+    if (prevNhood) {
+      var nhMom = 0.3; // 30% carry-forward from last cycle
+      if (prevNhood.sentiment !== undefined) nm.sentiment = nm.sentiment * (1 - nhMom) + prevNhood.sentiment * nhMom;
+      if (prevNhood.nightlife !== undefined) nm.nightlife = nm.nightlife * (1 - nhMom) + prevNhood.nightlife * nhMom;
+      if (prevNhood.retail !== undefined) nm.retail = nm.retail * (1 - nhMom) + prevNhood.retail * nhMom;
+      if (prevNhood.tourism !== undefined) nm.tourism = nm.tourism * (1 - nhMom) + prevNhood.tourism * nhMom;
+      if (prevNhood.publicSpaces !== undefined) nm.publicSpaces = nm.publicSpaces * (1 - nhMom) + prevNhood.publicSpaces * nhMom;
+      if (prevNhood.communityEngagement !== undefined) nm.communityEngagement = nm.communityEngagement * (1 - nhMom) + prevNhood.communityEngagement * nhMom;
+    }
+
+    preBleed[bHood] = nm;
+  }
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // SENTIMENT BLEED (engine.214 D8: one simultaneous pass over the hood graph,
+  // Neighborhood_Map.Adjacent — after momentum, BEFORE the initiative /
+  // approval fold so a same-Cycle targeted delta lands at full strength)
+  // ─────────────────────────────────────────────────────────────────────────
+  function applySentimentBleed_(dyn, hoodList) {
     var bleedFactor = 0.12;
     var newSentiments = {};
 
-    for (var cn in clusterDynamics) {
-      if (!clusterDynamics.hasOwnProperty(cn)) continue;
-      var baseSent = clusterDynamics[cn].sentiment;
-      var neighbors = adjacency[cn] || [];
+    for (var i = 0; i < hoodList.length; i++) {
+      var h = hoodList[i];
+      var baseSent = dyn[h].sentiment;
+      var neighbors = getAdjacentHoods_(ctx, h) || [];
       var neighborSum = 0;
       var neighborCount = 0;
-
-      for (var i = 0; i < neighbors.length; i++) {
-        var nb = neighbors[i];
-        if (clusterDynamics[nb]) {
-          neighborSum += clusterDynamics[nb].sentiment;
+      for (var j = 0; j < neighbors.length; j++) {
+        var nb = neighbors[j];
+        if (dyn[nb]) {
+          neighborSum += dyn[nb].sentiment;
           neighborCount++;
         }
       }
-
-      if (neighborCount > 0) {
-        var neighborAvg = neighborSum / neighborCount;
-        newSentiments[cn] = baseSent + (neighborAvg - baseSent) * bleedFactor;
-      } else {
-        newSentiments[cn] = baseSent;
-      }
+      newSentiments[h] = (neighborCount > 0)
+        ? baseSent + ((neighborSum / neighborCount) - baseSent) * bleedFactor
+        : baseSent;
     }
 
-    for (var cn2 in newSentiments) {
-      if (clusterDynamics[cn2]) {
-        clusterDynamics[cn2].sentiment = clampSent(newSentiments[cn2]);
-      }
+    for (var h2 in newSentiments) {
+      if (newSentiments.hasOwnProperty(h2) && dyn[h2]) dyn[h2].sentiment = clampSent(newSentiments[h2]);
     }
   }
 
-  applySentimentBleed_(clusterDynamics, CLUSTER_ADJACENCY);
+  applySentimentBleed_(preBleed, hoods);
 
   // engine.93 Task 9: inbound-commuter count at which a hood receives the full
   // daytime lift. Sized against the tracked sample, not real headcount — the
@@ -1290,23 +1356,20 @@ function applyCityDynamics_(ctx) {
   // ─────────────────────────────────────────────────────────────────────────
   // PER-HOOD POLITICAL CONSEQUENCE FOLD (engine.93 Task 5)
   // ─────────────────────────────────────────────────────────────────────────
-  // Two effect buses have been written every cycle with ZERO readers since they
-  // landed: S.initiativeNeighborhoodEffects (applyInitiativeImplementationEffects
-  // :322-336) and S.approvalNeighborhoodEffects (updateCivicApprovalRatings
-  // :305-321). Initiative and approval consequences therefore dissolved into
-  // city-wide scalars and never reached the hoods they targeted. This fold is
-  // their consumer.
+  // Two effect buses had ZERO readers until this fold: S.initiativeNeighborhoodEffects
+  // (applyInitiativeImplementationEffects) and S.approvalNeighborhoodEffects
+  // (updateCivicApprovalRatings). Initiative and approval consequences dissolved
+  // into city-wide scalars and never reached the hoods they targeted.
   //
-  // Placement is load-bearing: the fold runs inside the per-hood loop AFTER the
-  // momentum blend and BEFORE the clamps, so this cycle's targeted deltas land
-  // at full strength (momentum would damp them to 70%) and the existing
-  // clampMult/clampSent catch any overflow — no new clamp code. It is
-  // structurally post-bleed: applySentimentBleed_ runs at cluster level above,
-  // the fold at hood level here, so bleed can never dilute a same-cycle
-  // initiative effect on its target hood.
+  // Placement is load-bearing: the fold runs AFTER the momentum blend and the
+  // bleed stage and BEFORE the clamps, so this cycle's targeted deltas land at
+  // full strength (momentum would damp them to 70%, bleed would export 12%)
+  // and the existing clampMult/clampSent catch any overflow.
   //
   // Decay rides the existing 30% momentum carry — the buses hold per-cycle
   // deltas, not durable strength, so they carry no decay fields.
+  // engine.214 D10: the city sees these deltas through the hood mean — the
+  // initiative city scalar add that used to double them is gone.
   var initiativeBus = (S.initiativeNeighborhoodEffects &&
     typeof S.initiativeNeighborhoodEffects === 'object') ? S.initiativeNeighborhoodEffects : {};
   // engine.250: the approval bus is WRITTEN in Phase 5 (updateCivicApprovalRatings_),
@@ -1373,151 +1436,42 @@ function applyCityDynamics_(ctx) {
   }
 
   // ─────────────────────────────────────────────────────────────────────────
-  // NEIGHBORHOOD DYNAMICS (derived from clusters)
+  // PASS C — fold → commute → clamp: the values the readers see
   // ─────────────────────────────────────────────────────────────────────────
-  // 2026-09-19: every canon hood gets a track. CLUSTERS name 12 of the 22; the
-  // other ten (East Oakland, Baylight District, San Antonio, Ivy Hill, Glenview,
-  // Dimond, Adams Point, Grand Lake, Eastlake, Brooklyn) got NO entry, so
-  // v3NeighborhoodWriter fell back to the city scalar for them every cycle — ten
-  // hoods with no mood of their own, moving in lockstep (C107: all ten +0.25 to
-  // +0.35 in one cycle), their own sickness / economy / crime / initiative folds
-  // never reaching them (OARI and the apprenticeship pipeline both target East
-  // Oakland). An unclustered hood now ADOPTS the cluster most of its canon
-  // neighbours belong to (Neighborhood_Map.Adjacent) as its starting point only:
-  // cluster metrics, the crime ripple and the city blend are unchanged; the
-  // per-hood pass below moves it by its own inputs. (hoodClusters is built before the first pass.)
-  for (var cname2 in CLUSTERS) {
-    if (!CLUSTERS.hasOwnProperty(cname2)) continue;
-    var clusterM = clusterDynamics[cname2];
-    var memberHoods = hoodClusters.members[cname2];   // named + adopted
+  var neighborhoodDynamics = {};
 
-    for (var hn = 0; hn < memberHoods.length; hn++) {
-      var nhood = memberHoods[hn];
+  for (var ci = 0; ci < hoods.length; ci++) {
+    var cHood = hoods[ci];
+    var cm = preBleed[cHood];
 
-      var nm = {
-        traffic: clusterM.traffic,
-        retail: clusterM.retail,
-        tourism: clusterM.tourism,
-        nightlife: clusterM.nightlife,
-        publicSpaces: clusterM.publicSpaces,
-        sentiment: clusterM.sentiment,
-        culturalActivity: clusterM.culturalActivity,
-        communityEngagement: clusterM.communityEngagement
-      };
+    // engine.93 Task 5: per-hood political consequence — post-momentum,
+    // post-bleed, pre-clamp (see the fold block above for why this position).
+    applyNeighborhoodEffectsFold_(cm, cHood);
 
-      // Neighborhood microclimate
-      var nhW = S.neighborhoodWeather && S.neighborhoodWeather[nhood];
-      if (nhW && nhW.type) {
-        if (nhW.type === 'fog') { nm.tourism *= 0.95; nm.traffic *= 0.97; }
-        if (nhW.type === 'hot') { nm.publicSpaces *= 1.05; }
+    // engine.93 Task 9: daytime population. A hood full of offices is a
+    // different place at 1pm than its resident count suggests — those workers
+    // buy lunch and clog the streets. Every metric here was resident-derived
+    // until the commute matrix existed. Bounded: +12% retail / +8% traffic at
+    // the cap, so an employment centre lifts without running away.
+    if (commuteInbound && commuteInbound[cHood]) {
+      var inWorkers = Number(commuteInbound[cHood]) || 0;
+      if (inWorkers > 0) {
+        var dayLift = Math.min(1, inWorkers / COMMUTE_DAYTIME_FULL_LIFT);
+        cm.retail *= (1 + dayLift * 0.12);
+        cm.traffic *= (1 + dayLift * 0.08);
       }
-
-      // Neighborhood-local seeds
-      var nSig = seedSignals.byNeighborhood && seedSignals.byNeighborhood[nhood];
-      if (nSig) {
-        var nw = safeNum_(nSig.weighted, 0);
-        if (nw >= 6) { nm.culturalActivity *= 1.04; nm.communityEngagement *= 1.03; nm.sentiment += 0.02; }
-        else if (nw >= 3) { nm.culturalActivity *= 1.02; nm.communityEngagement *= 1.01; }
-      }
-
-      // Demographics micro
-      var d0 = neighborhoodDemographics[nhood];
-      if (d0) {
-        var pop0 = (d0.students || 0) + (d0.adults || 0) + (d0.seniors || 0);
-        if (pop0 > 0) {
-          var stud0 = (d0.students || 0) / pop0;
-          var sen0 = (d0.seniors || 0) / pop0;
-          var sick0 = (d0.sick || 0) / pop0;
-          if (stud0 >= 0.25) { nm.nightlife *= 1.04; nm.culturalActivity *= 1.03; }
-          if (sen0 >= 0.25) { nm.communityEngagement *= 1.04; nm.nightlife *= 0.97; }
-          if (sick0 >= 0.10) { nm.publicSpaces *= 0.95; nm.sentiment -= 0.22; }  // engine.185: a tenth of the hood is sick
-        }
-      }
-
-      // Economy micro — engine.225: relative to the hoods' own median at half the cluster
-      // pricing; the boom / depression overlays stay absolute (named states).
-      var e0 = neighborhoodEconomies[nhood];
-      if (e0 && e0.mood !== undefined) {
-        var e0mood = safeNum_(e0.mood, 50);
-        if (hoodMoodMedian !== null) {
-          var d0 = clamp(e0mood - hoodMoodMedian, -6, 6);
-          if (d0 !== 0) { nm.retail *= (1 + 0.005 * d0); nm.sentiment += clamp(0.005 * d0, -0.03, 0.03); }
-        }
-        if (e0mood >= 70) { nm.retail *= 1.03; nm.sentiment += 0.02; }
-        else if (e0mood <= 30) { nm.retail *= 0.95; nm.sentiment -= 0.20; }  // engine.185: local depression
-      }
-
-      // Neighborhood-specific crime
-      var nhCrime = safeNum_(crimeByNeighborhood[nhood], 0);
-      if (nhCrime >= 2) { nm.nightlife *= 0.90; nm.sentiment -= 0.20; }   // engine.185
-      else if (nhCrime >= 1) { nm.nightlife *= 0.96; nm.sentiment -= 0.06; }
-
-      // v3.0: Neighborhood momentum — blend with previous cycle's state
-      // S247 FIX (substrate-critical): `prevState` is a var declared at L1254 —
-      // 145 lines AFTER this momentum block, which runs inside the per-neighborhood
-      // loop. var-hoisting made `prevState` undefined here, so the original
-      // `prevState.neighborhoodDynamics` threw "Cannot read properties of undefined
-      // (reading 'neighborhoodDynamics')" on the FIRST neighborhood EVERY cycle
-      // since S136 (89a7057, "34.4 Neighborhood momentum"). safePhaseCall_ caught
-      // the throw (logged to Riley_Digest.Issues) and continued, but applyCityDynamics_
-      // died before setting S.cityDynamics/S.neighborhoodDynamics — leaving the entire
-      // cityDynamics column family (Riley_Digest W–AB incl. CitySentiment) blank and
-      // every downstream consumer on `||0` fallbacks (applyCycleWeight sentiment,
-      // v3NeighborhoodWriter base, godWorldEngine2 illness/employment drift). Read the
-      // source directly (same expr as L1254). finalizeCycleState v1.3 already snapshots
-      // neighborhoodDynamics → previousCycleState, so momentum self-heals from cycle 2.
-      var prevNhoodState = (S.previousCycleState || {}).neighborhoodDynamics || {};
-      var prevNhood = prevNhoodState[nhood] || null;
-      // 2026-09-19: a hood with no carried dynamics (the ten adopted hoods on
-      // their first tracked cycle) carries its mood from last cycle's persisted
-      // Neighborhood_Map Sentiment instead of none — without it their first
-      // cycle is the bare cluster value with no memory (bench C108: all ten
-      // 0.1–0.3 under their neighbours). Sentiment only: the sheet's other
-      // columns are on different scales from these multipliers.
-      if (!prevNhood && S.neighborhoodState && S.neighborhoodState[nhood] &&
-          S.neighborhoodState[nhood].sentiment !== null && isFinite(Number(S.neighborhoodState[nhood].sentiment))) {
-        prevNhood = { sentiment: Number(S.neighborhoodState[nhood].sentiment) };
-      }
-      if (prevNhood) {
-        var nhMom = 0.3; // 30% carry-forward from last cycle
-        if (prevNhood.sentiment !== undefined) nm.sentiment = nm.sentiment * (1 - nhMom) + prevNhood.sentiment * nhMom;
-        if (prevNhood.nightlife !== undefined) nm.nightlife = nm.nightlife * (1 - nhMom) + prevNhood.nightlife * nhMom;
-        if (prevNhood.retail !== undefined) nm.retail = nm.retail * (1 - nhMom) + prevNhood.retail * nhMom;
-        if (prevNhood.tourism !== undefined) nm.tourism = nm.tourism * (1 - nhMom) + prevNhood.tourism * nhMom;
-        if (prevNhood.publicSpaces !== undefined) nm.publicSpaces = nm.publicSpaces * (1 - nhMom) + prevNhood.publicSpaces * nhMom;
-        if (prevNhood.communityEngagement !== undefined) nm.communityEngagement = nm.communityEngagement * (1 - nhMom) + prevNhood.communityEngagement * nhMom;
-      }
-
-      // engine.93 Task 5: per-hood political consequence — post-momentum,
-      // pre-clamp (see the fold block above for why this position).
-      applyNeighborhoodEffectsFold_(nm, nhood);
-
-      // engine.93 Task 9: daytime population. A hood full of offices is a
-      // different place at 1pm than its resident count suggests — those workers
-      // buy lunch and clog the streets. Every metric here was resident-derived
-      // until the commute matrix existed. Bounded: +12% retail / +8% traffic at
-      // the cap, so an employment centre lifts without running away.
-      if (commuteInbound && commuteInbound[nhood]) {
-        var inWorkers = Number(commuteInbound[nhood]) || 0;
-        if (inWorkers > 0) {
-          var dayLift = Math.min(1, inWorkers / COMMUTE_DAYTIME_FULL_LIFT);
-          nm.retail *= (1 + dayLift * 0.12);
-          nm.traffic *= (1 + dayLift * 0.08);
-        }
-      }
-
-      // Clamp
-      nm.traffic = clampMult(nm.traffic);
-      nm.retail = clampMult(nm.retail);
-      nm.tourism = clampMult(nm.tourism);
-      nm.nightlife = clampMult(nm.nightlife);
-      nm.publicSpaces = clampMult(nm.publicSpaces);
-      nm.sentiment = clampSent(nm.sentiment);
-      nm.culturalActivity = clampMult(nm.culturalActivity);
-      nm.communityEngagement = clampMult(nm.communityEngagement);
-
-      neighborhoodDynamics[nhood] = nm;
     }
+
+    neighborhoodDynamics[cHood] = clampMetrics_({
+      traffic: cm.traffic,
+      retail: cm.retail,
+      tourism: cm.tourism,
+      nightlife: cm.nightlife,
+      publicSpaces: cm.publicSpaces,
+      sentiment: cm.sentiment,
+      culturalActivity: cm.culturalActivity,
+      communityEngagement: cm.communityEngagement
+    });
   }
 
   // ─────────────────────────────────────────────────────────────────────────
@@ -1569,108 +1523,32 @@ function applyCityDynamics_(ctx) {
   }
 
   // ─────────────────────────────────────────────────────────────────────────
-  // CAPACITY CONSTRAINTS (per-cluster friction)
+  // THE CITY FROM ITS HOODS (engine.214 D10): the equal mean of every canon
+  // hood's FINAL value — exactly what S.neighborhoodDynamics' readers see —
+  // then city momentum as before. One source (the canon list), no live column,
+  // no sample-vs-population confusion, no hand weights. Every hood is a
+  // character and the city is its hoods.
   // ─────────────────────────────────────────────────────────────────────────
-  function maxAcrossClusters_(key) {
-    var mx = 0;
-    for (var k in clusterDynamics) {
-      if (!clusterDynamics.hasOwnProperty(k)) continue;
-      mx = Math.max(mx, safeNum_(clusterDynamics[k][key], 0));
+  function hoodMean_(key) {
+    var sum = 0, n = 0;
+    for (var k in neighborhoodDynamics) {
+      if (!neighborhoodDynamics.hasOwnProperty(k)) continue;
+      sum += safeNum_(neighborhoodDynamics[k][key], key === 'sentiment' ? 0 : 1);
+      n++;
     }
-    return mx;
+    if (n <= 0) throw new Error('engine.214: no hood dynamics to average — the canon list is empty');
+    return sum / n;
   }
 
-  var peakTraffic = maxAcrossClusters_('traffic');
-  var peakNightlife = maxAcrossClusters_('nightlife');
-  var peakTourism = maxAcrossClusters_('tourism');
-
-  var transitDemand = (peakTraffic + peakNightlife) / 2;
-  var venueDemand = peakNightlife;
-  var roadDemand = peakTraffic;
-
-  var transitCongestion = clamp((transitDemand - capacity.transitCapacity) * 0.38, 0, 0.38);
-  var venueCongestion = clamp((venueDemand - capacity.venueCapacity) * 0.32, 0, 0.32);
-  var roadCongestion = clamp((roadDemand - capacity.roadCapacity) * 0.32, 0, 0.32);
-
-  if ((transitCongestion + roadCongestion) >= 0.28) {
-    lag.congestionHangover = clamp(lag.congestionHangover + 0.08, 0, 0.4);
-  }
-
-  // Apply per-cluster capacity friction
-  for (var cn3 in clusterDynamics) {
-    if (!clusterDynamics.hasOwnProperty(cn3)) continue;
-    var sensitivity = CLUSTERS[cn3] ? (CLUSTERS[cn3].capacitySensitivity || 1.0) : 1.0;
-    var cong = (transitCongestion + venueCongestion + roadCongestion + lag.congestionHangover) * sensitivity;
-    cong = clamp(cong, 0, 0.6);
-
-    var cm = clusterDynamics[cn3];
-    cm.traffic *= (1 - clamp(cong * 0.20, 0, 0.20));
-    cm.nightlife *= (1 - clamp(cong * 0.12, 0, 0.12));
-    cm.tourism *= (1 - clamp(cong * 0.10, 0, 0.10));
-    cm.publicSpaces *= (1 - clamp(cong * 0.08, 0, 0.08));
-    cm.sentiment -= clamp(cong * 0.12, 0, 0.12);
-
-    // Re-clamp
-    cm.traffic = clampMult(cm.traffic);
-    cm.nightlife = clampMult(cm.nightlife);
-    cm.tourism = clampMult(cm.tourism);
-    cm.publicSpaces = clampMult(cm.publicSpaces);
-    cm.sentiment = clampSent(cm.sentiment);
-  }
-
-  // ─────────────────────────────────────────────────────────────────────────
-  // AGGREGATE CITY FROM CLUSTERS
-  // ─────────────────────────────────────────────────────────────────────────
-  function weightedAvg_(key) {
-    var sum = 0;
-    var wsum = 0;
-    for (var k in clusterDynamics) {
-      if (!clusterDynamics.hasOwnProperty(k)) continue;
-      var w = safeNum_(clusterWeights[k], 0.2);
-      sum += safeNum_(clusterDynamics[k][key], 0) * w;
-      wsum += w;
-    }
-    return wsum <= 0 ? 1 : (sum / wsum);
-  }
-
-  function weightedSent_(key) {
-    var sum = 0;
-    var wsum = 0;
-    for (var k in clusterDynamics) {
-      if (!clusterDynamics.hasOwnProperty(k)) continue;
-      var w = safeNum_(clusterWeights[k], 0.2);
-      sum += safeNum_(clusterDynamics[k][key], 0) * w;
-      wsum += w;
-    }
-    return wsum <= 0 ? 0 : (sum / wsum);
-  }
-
-  var rawCity = {
-    traffic: weightedAvg_('traffic'),
-    retail: weightedAvg_('retail'),
-    tourism: weightedAvg_('tourism'),
-    nightlife: weightedAvg_('nightlife'),
-    publicSpaces: weightedAvg_('publicSpaces'),
-    sentiment: weightedSent_('sentiment'),
-    culturalActivity: weightedAvg_('culturalActivity'),
-    communityEngagement: weightedAvg_('communityEngagement')
-  };
-
-  rawCity.traffic = clampMult(rawCity.traffic);
-  rawCity.retail = clampMult(rawCity.retail);
-  rawCity.tourism = clampMult(rawCity.tourism);
-  rawCity.nightlife = clampMult(rawCity.nightlife);
-  rawCity.publicSpaces = clampMult(rawCity.publicSpaces);
-  rawCity.sentiment = clampSent(rawCity.sentiment);
-  rawCity.culturalActivity = clampMult(rawCity.culturalActivity);
-  rawCity.communityEngagement = clampMult(rawCity.communityEngagement);
+  var rawCity = {};
+  for (var rk = 0; rk < METRIC_KEYS.length; rk++) rawCity[METRIC_KEYS[rk]] = hoodMean_(METRIC_KEYS[rk]);
+  clampMetrics_(rawCity);
 
   // ─────────────────────────────────────────────────────────────────────────
   // MOMENTUM SMOOTHING
   // ─────────────────────────────────────────────────────────────────────────
   if (S.resetDynamicsMomentum) {
     S.previousCityDynamics = null;
-    S.previousClusterDynamics = null;
     S.previousNeighborhoodDynamics = null;
     S.resetDynamicsMomentum = false;
   }
@@ -1684,7 +1562,7 @@ function applyCityDynamics_(ctx) {
     finalCity[mk] = blend(prev ? prev[mk] : null, rawCity[mk], mf);
   }
 
-  // engine.188: the blended sentiment BEFORE the four one-cycle boosts below.
+  // engine.188: the blended sentiment BEFORE the one-cycle boosts below.
   // This is what carries to the next cycle — see the note at the persist site.
   var preBoostSentiment = finalCity.sentiment;
   // engine.195: the same carrier fix for every metric. The media block (crisis
@@ -1720,9 +1598,6 @@ function applyCityDynamics_(ctx) {
     finalCity.tourism += celebBuzz * 0.02;
     finalCity.nightlife += celebBuzz * 0.02;
 
-    // Neighborhood-specific effects from media coverage
-    // (Applied to neighborhood dynamics separately if needed — city-level is aggregate)
-
     Logger.log('applyCityDynamics_ v3.0: Media feedback applied (sentiment ' +
       (mediaSentiment * 0.04).toFixed(3) + ', crisisSat ' + crisisSat.toFixed(2) +
       ', celebBuzz ' + celebBuzz.toFixed(2) + ')');
@@ -1733,9 +1608,7 @@ function applyCityDynamics_(ctx) {
   // ─────────────────────────────────────────────────────────────────────────
   // applyEditionCoverageEffects_ (Phase 2, runs immediately before this) writes
   // S.editionNeighborhoodEffects['city'] with per-metric deltas derived from
-  // the prior cycle's edition tone × DOMAIN_RULES. Pre-S202 those deltas were
-  // computed-but-never-read; the comment in applyEditionCoverageEffects.js:232
-  // claimed this function distributes them but no consumer existed. Now wired.
+  // the prior cycle's edition tone × DOMAIN_RULES.
   var cityEffects = (S.editionNeighborhoodEffects && S.editionNeighborhoodEffects['city']) || null;
   if (cityEffects) {
     if (cityEffects.traffic) finalCity.traffic += cityEffects.traffic;
@@ -1776,12 +1649,9 @@ function applyCityDynamics_(ctx) {
   // SPORTS SENTIMENT BOOST (engine.45 T3a)
   // ─────────────────────────────────────────────────────────────────────────
   // applySportsFeedTriggers_ computes S.sportsSentimentBoost from the sports
-  // feed (record + streak + season multiplier, clamped ±0.10 per team). Before
-  // T3a the scalar landed on the dead S.sentiment and never reached
-  // finalCity.sentiment — sports never actually moved the persisted city mood
-  // (trace S1, gaps 1/2). Same fold as editionSentimentBoost below. The
-  // Ripple_Ledger attribution row is written at the compute site in
-  // applySportsFeedTriggers_ (team/streak causeDetail) — no second row here.
+  // feed (record + streak + season multiplier, clamped ±0.10 per team). The
+  // Ripple_Ledger attribution row is written at the compute site — no second
+  // row here. No hood path exists for this add, so it stays a city scalar.
   var sportsBoost = Number(S.sportsSentimentBoost || 0);
   if (sportsBoost !== 0) {
     finalCity.sentiment += sportsBoost;
@@ -1790,33 +1660,21 @@ function applyCityDynamics_(ctx) {
   }
 
   // ─────────────────────────────────────────────────────────────────────────
+  // INITIATIVE IMPLEMENTATION SENTIMENT — RETIRED HERE (engine.214 D10)
+  // ─────────────────────────────────────────────────────────────────────────
+  // applyInitiativeImplementationEffects_ still computes
+  // S.initiativeImplementationEffects.sentimentBoost, but this file no longer
+  // adds it to the city: the same initiative's local bus lands on its target
+  // hoods through the fold above and reaches the city through the hood mean.
+  // Adding the scalar as well counted one cause twice (codex F2). The
+  // compute-site Ripple_Ledger rows still describe the cause; the hoods carry it.
+
+  // ─────────────────────────────────────────────────────────────────────────
   // EDITION COVERAGE SENTIMENT BOOST (v3.2, S216 engine.13)
   // ─────────────────────────────────────────────────────────────────────────
   // applyEditionCoverageEffects_ computes S.editionSentimentBoost from the
   // prior cycle's coverage ratings (rating × sentimentWeight × 0.015 summed
-  // across domains, clamped ±0.20). S202 wired traffic/retail/etc but missed
-  // this scalar — pre-S216, the coverage→sentiment chain was a dead write.
-  // Now the boost flows into finalCity.sentiment, then to per-neighborhood
-  // Sentiment via v3NeighborhoodWriter's base+mod+variance formula.
-  // ─────────────────────────────────────────────────────────────────────────
-  // INITIATIVE IMPLEMENTATION SENTIMENT BOOST (engine.45 T3e)
-  // ─────────────────────────────────────────────────────────────────────────
-  // applyInitiativeImplementationEffects_ (Phase 2, runs before this at both
-  // entry points) computes sentimentBoost from Initiative_Tracker
-  // ImplementationPhase rows — the column voice agents set at city-hall —
-  // clamped ±0.15. Pre-T3e the scalar landed on the dead S.sentiment, so
-  // city-hall implementation state never moved the persisted city mood.
-  // Ripple_Ledger attribution rows are written per-initiative at the compute
-  // site (initiative/phase/domain causeDetail) — no second row here, same
-  // convention as the sports fold above.
-  var initImplBoost = Number((S.initiativeImplementationEffects &&
-    S.initiativeImplementationEffects.sentimentBoost) || 0);
-  if (initImplBoost !== 0) {
-    finalCity.sentiment += initImplBoost;
-    Logger.log('applyCityDynamics_ engine.45 T3e: Initiative implementation sentiment applied — ' +
-      initImplBoost.toFixed(4));
-  }
-
+  // across domains, clamped ±0.20). No hood path: stays a city scalar.
   var sentimentBoost = Number(S.editionSentimentBoost || 0);
   if (sentimentBoost !== 0) {
     finalCity.sentiment += sentimentBoost;
@@ -1839,14 +1697,7 @@ function applyCityDynamics_(ctx) {
     }
   }
 
-  finalCity.traffic = clampMult(finalCity.traffic);
-  finalCity.retail = clampMult(finalCity.retail);
-  finalCity.tourism = clampMult(finalCity.tourism);
-  finalCity.nightlife = clampMult(finalCity.nightlife);
-  finalCity.publicSpaces = clampMult(finalCity.publicSpaces);
-  finalCity.sentiment = clampSent(finalCity.sentiment);
-  finalCity.culturalActivity = clampMult(finalCity.culturalActivity);
-  finalCity.communityEngagement = clampMult(finalCity.communityEngagement);
+  clampMetrics_(finalCity);
 
   // ─────────────────────────────────────────────────────────────────────────
   // OUTPUT
@@ -1865,26 +1716,16 @@ function applyCityDynamics_(ctx) {
   // ─────────────────────────────────────────────────────────────────────────
   // MOMENTUM CARRIER (engine.188, 2026-09-10)
   // ─────────────────────────────────────────────────────────────────────────
-  // The four sentiment boosts folded in above (media hope/anxiety, sports
-  // record, initiative implementation, edition coverage) are applied AFTER the
-  // momentum blend, and the blended-plus-boosted value was then persisted as
-  // the carrier the NEXT cycle blends against. So each boost was re-added on
-  // top of its own echo, every cycle, forever:
+  // The sentiment boosts folded in above (media hope/anxiety, sports record,
+  // edition coverage) are applied AFTER the momentum blend; persisting the
+  // blended-plus-boosted value as the carrier re-added each boost on top of
+  // its own echo every cycle (f = raw + b/(1-m): 2x at m 0.50). Every one of
+  // those is a LEVEL recomputed from current state each cycle, not a one-off
+  // impulse, so integrating it was double-counting — a cap that doesn't cap is
+  // the same trick as a gate that can't fire (SIM_DOCTRINE §15).
   //
-  //     f = m*f + (1-m)*raw + b   ->   f = raw + b/(1-m)
-  //
-  // With the sentiment momentum factor at 0.50 that is 2x, and at 0.40 (the
-  // in-shock factor, which engine.187 shows has been on 19 of 19 cycles) it is
-  // 1.67x. Every one of those four is a LEVEL recomputed from current state
-  // each cycle, not a one-off impulse, so integrating it was double-counting —
-  // and it made the caps the code documents a fiction: the initiative boost is
-  // clamped +/-0.15 and was landing +/-0.30 in the resting mood, edition
-  // +/-0.20 landing +/-0.40. Measured on live C101-C106 the four summed to
-  // about +0.13 and contributed about +0.26. A cap that doesn't cap is the
-  // same trick as a gate that can't fire — SIM_DOCTRINE §15.
-  //
-  // The carrier is now the blended value WITHOUT this cycle's boosts, so a
-  // boost lands at full strength in the cycle it belongs to and does not echo.
+  // The carrier is the blended value WITHOUT this cycle's boosts, so a boost
+  // lands at full strength in the cycle it belongs to and does not echo.
   // S.previousCityDynamics is private to this file (written here, read only at
   // the momentum blend above) — nothing downstream reads it.
   S.previousCityDynamics = copyObj_(S.cityDynamics);
@@ -1896,7 +1737,6 @@ function applyCityDynamics_(ctx) {
   }
 
   // Additive outputs
-  S.clusterDynamics = clusterDynamics;
   S.neighborhoodDynamics = neighborhoodDynamics;
   S.cityDynamicsLag = lag;
   S.cityDynamicsCapacity = {
@@ -1933,105 +1773,6 @@ function applyCityDynamics_(ctx) {
  * Safe accessor with fallback to city dynamics.
  * ============================================================================
  */
-/**
- * engine.214: the hoods that anchor each dynamics cluster come from World_Config
- * (clusterAnchors_<CLUSTER>, a pipe-separated list of canon hood names; seeded
- * once by ensureEngine214Config_, read from ctx.config every Cycle). Fills
- * clusters[c].hoods in place. No fallback: a missing or blank key means the
- * self-arm did not run and throws; a name off the canon map, a hood anchoring
- * two clusters or a cluster with no anchor throws the same way — inside
- * safePhaseCall_ that is an Engine_Errors row and no dynamics this Cycle, the
- * wall the Phase-1 loader already raises for a bad Adjacent name. The canon
- * check is skipped only when Phase1-CanonHoods did not run (an offline harness).
- */
-function seedClusterAnchors_(ctx, clusters) {
-  var cfg = (ctx && ctx.config) || {};
-  var canonSeeded = typeof getCanonNeighborhoods_ === 'function' && !!(ctx && ctx.summary && ctx.summary.canonHoods);
-  var canonSet = {};
-  if (canonSeeded) {
-    var canon = getCanonNeighborhoods_(ctx);
-    for (var ci = 0; ci < canon.length; ci++) canonSet[canon[ci]] = true;
-  }
-  var seen = {};
-  for (var c in clusters) {
-    if (!clusters.hasOwnProperty(c)) continue;
-    var key = 'clusterAnchors_' + c;
-    var raw = cfg[key];
-    if (typeof raw !== 'string' || raw.trim() === '') {
-      throw new Error('engine.214: World_Config.' + key + ' missing or not text — the engine.214 self-arm (ensureEngine214Config_) did not run');
-    }
-    var parts = raw.split('|'), hoods = [];
-    for (var p = 0; p < parts.length; p++) {
-      var h = parts[p].trim();
-      if (!h) continue;
-      if (canonSeeded && !canonSet[h]) throw new Error('engine.214: World_Config.' + key + ' names "' + h + '", not a canon hood (Neighborhood_Map)');
-      if (seen[h]) throw new Error('engine.214: "' + h + '" anchors both ' + seen[h] + ' and ' + c + ' — one cluster per hood');
-      seen[h] = c;
-      hoods.push(h);
-    }
-    if (!hoods.length) throw new Error('engine.214: World_Config.' + key + ' names no hood — every cluster needs at least one anchor');
-    clusters[c].hoods = hoods;
-  }
-  return clusters;
-}
-
-/**
- * 2026-09-19: hood → cluster for the per-hood dynamics pass. The CLUSTERS
- * members keep their cluster; every other canon hood adopts the cluster most of
- * its canon neighbours (Neighborhood_Map.Adjacent, getAdjacentHoods_) belong to,
- * iterating so a hood whose neighbours are themselves adopted still lands.
- * Ties go to the first cluster reached in adjacency order (deterministic). A
- * hood with no placed neighbour at all stays unplaced and is logged — it keeps
- * the writer's city-scalar fallback, as before.
- * Returns { byHood: { hood: cluster }, members: { cluster: [hoods] }, unplaced: [] }.
- */
-function buildHoodClusterAssignment_(ctx, clusters) {
-  var byHood = {}, members = {};
-  for (var c in clusters) {
-    if (!clusters.hasOwnProperty(c)) continue;
-    members[c] = [];
-    for (var i = 0; i < clusters[c].hoods.length; i++) {
-      var h = clusters[c].hoods[i];
-      if (byHood[h]) continue;
-      byHood[h] = c;
-      members[c].push(h);
-    }
-  }
-  // Unseeded canon (Phase1-CanonHoods did not run — only an offline harness
-  // calling applyCityDynamics_ alone): the named members only, as before.
-  if (typeof getCanonNeighborhoods_ !== 'function' || !(ctx && ctx.summary && ctx.summary.canonHoods)) {
-    Logger.log('buildHoodClusterAssignment_: canon hoods not seeded — named cluster members only');
-    return { byHood: byHood, members: members, unplaced: [] };
-  }
-  var canon = getCanonNeighborhoods_(ctx);
-  var pending = [];
-  for (var k = 0; k < canon.length; k++) if (!byHood[canon[k]]) pending.push(canon[k]);
-  var progress = true;
-  while (pending.length && progress) {
-    progress = false;
-    var still = [];
-    for (var p = 0; p < pending.length; p++) {
-      var hood = pending[p];
-      var adj = getAdjacentHoods_(ctx, hood);
-      var counts = {}, best = null;
-      for (var a = 0; a < adj.length; a++) {
-        var ac = byHood[adj[a]];
-        if (!ac) continue;
-        counts[ac] = (counts[ac] || 0) + 1;
-        if (best === null || counts[ac] > counts[best]) best = ac;
-      }
-      if (best) { byHood[hood] = best; members[best].push(hood); progress = true; }
-      else still.push(hood);
-    }
-    pending = still;
-  }
-  if (pending.length) {
-    Logger.log('buildHoodClusterAssignment_: no placed canon neighbour for ' + pending.join(', ') +
-      ' — city-scalar fallback in the writer (check Neighborhood_Map.Adjacent)');
-  }
-  return { byHood: byHood, members: members, unplaced: pending };
-}
-
 function getNeighborhoodDynamics_(ctx, neighborhood) {
   var S = ctx && ctx.summary;
   if (!S) return {
@@ -2054,58 +1795,24 @@ function getNeighborhoodDynamics_(ctx, neighborhood) {
 
 /**
  * ============================================================================
- * getClusterDynamics_(ctx, clusterName) (ES5)
+ * CITY DYNAMICS REFERENCE v4.0 (engine.214)
  * ============================================================================
- * Safe accessor with fallback to city dynamics.
- * ============================================================================
- */
-function getClusterDynamics_(ctx, clusterName) {
-  var S = ctx && ctx.summary;
-  if (!S) return {
-    traffic: 1, retail: 1, tourism: 1, nightlife: 1,
-    publicSpaces: 1, sentiment: 0, culturalActivity: 1, communityEngagement: 1
-  };
-
-  var city = S.cityDynamics || {
-    traffic: 1, retail: 1, tourism: 1, nightlife: 1,
-    publicSpaces: 1, sentiment: 0, culturalActivity: 1, communityEngagement: 1
-  };
-
-  if (!clusterName) return city;
-
-  var cd = S.clusterDynamics && S.clusterDynamics[String(clusterName)];
-  if (cd) return cd;
-
-  return city;
-}
-
-/**
- * ============================================================================
- * CITY DYNAMICS REFERENCE v2.6
- * ============================================================================
- *
- * v2.6 Changes:
- * - Cluster-based dynamics (5 clusters: DOWNTOWN_CORE, WATERFRONT_WEST,
- *   LAKE_CORRIDOR, NORTH_HILLS, EAST_OAKLAND)
- * - getClusterDynamics_(ctx, clusterName) + getNeighborhoodDynamics_(ctx, neighborhood)
- * - S.clusterDefinitions exposed for downstream enumeration
- * - Weather v3.5 integration (precipitationIntensity, windSpeed, visibility, front)
- * - CalendarContext-aware seed weighting (First Friday, Creation Day, sports, holidays)
+ * - Per-hood dynamics from the hood's authored Neighborhood_Map row:
+ *   EmployerCharacter (HOOD_CHARACTER_BY_EMPLOYER), BoomIndex, WeatherZone,
+ *   Scenes, Adjacent. No cluster, no hood name in code.
+ * - getNeighborhoodDynamics_(ctx, neighborhood)
+ * - Weather v3.5 integration (precipitationIntensity, windSpeed, visibility, front by zone)
+ * - CalendarContext-aware seed weighting by Scenes / label / zone
  * - Lag system (tourismDrag, publicSpaceDrag, nightlifeDrag, congestionHangover)
- * - Per-cluster capacity friction (Downtown feels congestion most)
- * - Ripple effects:
- *   - Sentiment bleed between adjacent clusters
- *   - Crime spillover dampens nightlife/tourism in affected clusters
- *   - Weather fronts target specific clusters (MARINE → Waterfront, etc.)
- *   - Sports postseason boosts traffic corridors to venues
- *   - First Friday arts corridor boost (DOWNTOWN_CORE epicenter)
+ * - Per-hood capacity friction (capacitySensitivity by label), pre-momentum
+ * - Ripple effects: sentiment bleed on the Adjacent graph (one simultaneous
+ *   stage before the fold); per-hood crime ladder with the receipt; weather
+ *   fronts by WeatherZone; stadium lift on the venue hood; First Friday by
+ *   Scenes.FirstFriday weight
+ * - The city = equal mean of the 22 final hood values, then city momentum
  *
  * Preserved:
- * - S.cityDynamics schema unchanged (traffic, retail, tourism, nightlife,
- *   publicSpaces, sentiment, culturalActivity, communityEngagement)
- * - Momentum smoothing from v2.3
- * - Demographics integration from v2.5
- * - Holiday modifiers (v2.5 values preserved, not softened)
- *
+ * - S.cityDynamics / S.neighborhoodDynamics schemas unchanged
+ * - Momentum smoothing from v2.3; demographics from v2.5; holiday values v2.5
  * ============================================================================
  */

@@ -16,6 +16,13 @@ const path = require('path');
 const vm = require('vm');
 const ROOT = path.join(__dirname, '..');
 const load = (sb, rel) => vm.runInContext(fs.readFileSync(path.join(ROOT, rel), 'utf8'), sb, { filename: rel });
+const G = require('./fixtures/hood-geography.json');
+const SC = require('./fixtures/hood-scenes.json').scenes;
+const HOODS = Object.keys(G.zone);
+// engine.214: the dynamics read every hood's authored row — canon from the fixture map, character + boom on neighborhoodState
+const canonRows = () => [['Neighborhood', 'WeatherZone', 'Adjacent', 'AttentionWeight', 'EmployerCharacter', 'Scenes']].concat(HOODS.map(h => [h, G.zone[h], G.adjacent[h], G.attention[h], G.character[h], SC[h]]));
+const mapSheet = { getDataRange: () => ({ getValues: () => canonRows() }) };
+function hoodState() { const o = {}; HOODS.forEach(h => { o[h] = { employerCharacter: G.character[h], boomIndex: G.boomIndex[h] }; }); return o; }
 
 let passed = 0, failed = 0;
 function check(name, cond, detail) {
@@ -30,19 +37,21 @@ function world() {
     persistWithRetry_: fn => fn(), appendRowWithRetry_: (sh, row) => sh.appendRow(row),
     safeRand_: () => () => 0.5, recordRipple_: () => true, safePhaseCall_: (ctx, label, fn) => fn(), compactMediaEffects_: () => null, compactCrisisArcs_: x => x, compactCrimeSpikes_: () => [] };
   vm.createContext(sb);
+  load(sb, 'phase01-config/canonNeighborhoodLoader.js');
   load(sb, 'phase01-config/loadPreviousEvening.js');
   load(sb, 'phase06-analysis/economicRippleEngine.js');
   load(sb, 'phase02-world-state/applyCityDynamics.js');
   load(sb, 'phase09-digest/finalizeCycleState.js');
   return { sb, props, store };
 }
-// engine.214: the anchors the self-arm seeds on a live sheet — read from ctx.config, never from the engine.
-const SEEDS214 = Object.fromEntries(vm.runInNewContext(fs.readFileSync(path.join(ROOT, 'phase01-config/engine94SheetContract.js'), 'utf8') + ';ENGINE214_CONFIG_SEEDS').map(s => [s[0], s[1]]));
 function ctxFor(cycle, extra) {
-  return { config: Object.assign({ cycleCount: cycle, rngSeed: 5, econMoodInertia: 0.3 }, SEEDS214), ss: { getSheetByName: () => null }, writeIntents: [], mode: {},
+  const ctx = { config: { cycleCount: cycle, rngSeed: 5, econMoodInertia: 0.3 }, ss: { getSheetByName: n => n === 'Neighborhood_Map' ? mapSheet : null }, writeIntents: [], mode: {},
     summary: Object.assign({ cycleId: cycle, season: 'Spring', month: 4, simMonth: 4, holiday: 'none', sportsSeason: 'off-season', weather: { type: 'clear', impact: 1 },
-      neighborhoodState: {}, neighborhoodEconomies: {}, neighborhoodDemographics: {}, economicMood: 55, economicRipples: [], worldEvents: [], storySeeds: [], crimeByNeighborhood: {} }, extra || {}) };
+      neighborhoodState: hoodState(), neighborhoodEconomies: {}, neighborhoodDemographics: {}, economicMood: 55, economicRipples: [], worldEvents: [], storySeeds: [], crimeByNeighborhood: {} }, extra || {}) };
+  return ctx;
 }
+// the canon loader needs the sandbox; seed it the first time a world runs Phase 2
+const seedCanon = (sb, ctx) => { if (!ctx.summary.canonHoods) sb.loadCanonNeighborhoods_(ctx); return ctx; };
 const obs = (cycle, events, seeds) => ({ cycle, events, storySeedCount: seeds, media: 8, crime: 5, shockCount: 10 });   // shockCount held flat: engine.185's shock ratio is a separate gate on world-event volume
 
 console.log('engine.228 — activity observations carry');
@@ -85,7 +94,7 @@ console.log('engine.228 — activity observations carry');
   // first fire: nothing carried, nothing happened yet → one empty observation, ratio 1 by construction
   const w0 = world();
   const A0 = ctxFor(108);
-  w0.sb.applyCityDynamics_(A0);
+  w0.sb.applyCityDynamics_(seedCanon(w0.sb, A0));
   const ao0 = A0.summary.activityObservations;
   check('first fire: Phase 2 records nothing (no push), latest is this Cycle\'s empty counts, rolling == latest', ao0.history.length === 0 && ao0.latest.events === 0 && ao0.rolling.events === ao0.latest.events, JSON.stringify(ao0));
 
@@ -95,7 +104,7 @@ console.log('engine.228 — activity observations carry');
   w.props.PREV_ACTIVITY_OBS_JSON = JSON.stringify({ history: [obs(104, 10, 30), obs(105, 10, 30), obs(106, 10, 30), obs(107, 15, 45)] }); w.props.PREV_ACTIVITY_OBS_JSON_CYCLE = '107';
   const A = ctxFor(108);
   w.sb.loadPreviousCycleState_(A);
-  w.sb.applyCityDynamics_(A);
+  w.sb.applyCityDynamics_(seedCanon(w.sb, A));
   const ao = A.summary.activityObservations;
   check('carried: Phase 2 leaves the history as carried (4 entries, no Phase-2 push)', ao.history.length === 4 && ao.history[3].cycle === 107, ao.history.length);
   check('carried: latest = last night (15), rolling = the nights before it (10) — the ratio is 1.5, no longer 1', ao.latest.events === 15 && ao.rolling.events === 10, JSON.stringify(ao.rolling) + ' ' + JSON.stringify(ao.latest));
@@ -105,7 +114,7 @@ console.log('engine.228 — activity observations carry');
   flat.props.PREV_ACTIVITY_OBS_JSON = JSON.stringify({ history: [obs(104, 15, 45), obs(105, 15, 45), obs(106, 15, 45), obs(107, 15, 45)] }); flat.props.PREV_ACTIVITY_OBS_JSON_CYCLE = '107';
   const F = ctxFor(108);
   flat.sb.loadPreviousCycleState_(F);
-  flat.sb.applyCityDynamics_(F);
+  flat.sb.applyCityDynamics_(seedCanon(flat.sb, F));
   check('the relative gate fires: a night 1.5× its own baseline lifts public spaces, cultural activity and sentiment vs the same night on a flat baseline',
     A.summary.cityDynamics.publicSpaces > F.summary.cityDynamics.publicSpaces && A.summary.cityDynamics.culturalActivity > F.summary.cityDynamics.culturalActivity && A.summary.cityDynamics.sentiment > F.summary.cityDynamics.sentiment,
     A.summary.cityDynamics.sentiment + ' vs ' + F.summary.cityDynamics.sentiment);
@@ -120,7 +129,7 @@ console.log('engine.228 — activity observations carry');
   check('save: five entries, the new one carrying the real end-of-Cycle counts', saved.length === 5 && saved[4].cycle === 108 && saved[4].events === 12 && saved[4].storySeedCount === 31 && saved[4].shockCount === 9, JSON.stringify(saved[4]));
   const B = ctxFor(109);
   w.sb.loadPreviousCycleState_(B);
-  w.sb.applyCityDynamics_(B);
+  w.sb.applyCityDynamics_(seedCanon(w.sb, B));
   const aoB = B.summary.activityObservations;
   check('next Cycle: latest = Cycle 108\'s real observation (12 events), rolling over the four nights before it (11.25)', aoB.latest.events === 12 && aoB.rolling.events === 11.25, JSON.stringify(aoB.latest) + ' ' + JSON.stringify(aoB.rolling));
 }

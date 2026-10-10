@@ -113,9 +113,6 @@
 - **ensureEngine209Config_(ss)**
   Sheets: World_Config
 
-- **ensureEngine214Config_(ss)**
-  Sheets: World_Config
-
 - **ensureEngine275Config_(ss)**
   Sheets: World_Config
 
@@ -330,22 +327,18 @@
 ## Phase 2: World State (`phase02-world-state/`)
 
 ### applyCityDynamics.js
+- **hoodProfile_(ctx, hood)**
+  Reads: S.neighborhoodState
+
+- **hoodCharacterBase_(profile)**
+
 - **applyCityDynamics_(ctx)**
-  Reads: S.absoluteCycle, S.activityObservations, S.approvalNeighborhoodEffects, S.cityCapacity, S.cityDynamics, S.cityDynamicsLag, S.clusterDefinitions, S.commuteInbound, S.crimeByNeighborhood, S.crimeEvents, S.crimeSpikes, S.cycleId, S.editionNeighborhoodEffects, S.editionSentimentBoost, S.eventsGenerated, S.holiday, S.holidayPriority, S.initiativeImplementationEffects, S.initiativeNeighborhoodEffects, S.isCreationDay, S.isFirstFriday, S.manualDynamicsInputs, S.mediaCount, S.mediaCoverage, S.neighborhoodDemographics, S.neighborhoodDynamics, S.neighborhoodEconomies, S.neighborhoodState, S.neighborhoodWeather, S.previousCityDynamics, S.previousCycleState, S.resetDynamicsMomentum, S.season, S.sentiment, S.shockFlag, S.sportsCity, S.sportsSeason, S.sportsSentimentBoost, S.sportsWeek, S.storySeeds, S.weather, S.weatherEvents, S.worldEvents
-  Writes: S.activityObservations, S.cityDynamics, S.cityDynamicsCapacity, S.cityDynamicsLag, S.clusterDefinitions, S.clusterDynamics, S.neighborhoodDemographics, S.neighborhoodDynamics, S.previousCityDynamics, S.previousClusterDynamics, S.previousNeighborhoodDynamics, S.resetDynamicsMomentum, S.storySeedSignals
+  Reads: S.absoluteCycle, S.activityObservations, S.approvalNeighborhoodEffects, S.cityCapacity, S.cityDynamics, S.cityDynamicsLag, S.commuteInbound, S.crimeByNeighborhood, S.crimeEvents, S.crimeSpikes, S.cycleId, S.editionNeighborhoodEffects, S.editionSentimentBoost, S.eventsGenerated, S.holiday, S.holidayPriority, S.initiativeImplementationEffects, S.initiativeNeighborhoodEffects, S.isCreationDay, S.isFirstFriday, S.manualDynamicsInputs, S.mediaCount, S.mediaCoverage, S.neighborhoodDemographics, S.neighborhoodDynamics, S.neighborhoodEconomies, S.neighborhoodState, S.neighborhoodWeather, S.previousCityDynamics, S.previousCycleState, S.resetDynamicsMomentum, S.season, S.shockFlag, S.sportsCity, S.sportsSeason, S.sportsSentimentBoost, S.sportsWeek, S.storySeeds, S.weather, S.weatherEvents, S.worldEvents
+  Writes: S.activityObservations, S.cityDynamics, S.cityDynamicsCapacity, S.cityDynamicsLag, S.neighborhoodDemographics, S.neighborhoodDynamics, S.previousCityDynamics, S.previousNeighborhoodDynamics, S.resetDynamicsMomentum, S.storySeedSignals
   Config: ctx.config.cityCapacity, ctx.config.cycleCount, ctx.config.manualDynamicsInputs
-
-- **seedClusterAnchors_(ctx, clusters)**
-  Reads: S.canonHoods
-
-- **buildHoodClusterAssignment_(ctx, clusters)**
-  Reads: S.canonHoods
 
 - **getNeighborhoodDynamics_(ctx, neighborhood)**
   Reads: S.cityDynamics, S.neighborhoodDynamics
-
-- **getClusterDynamics_(ctx, clusterName)**
-  Reads: S.cityDynamics, S.clusterDynamics
 
 ### applyEditionCoverageEffects.js
 - **applyEditionCoverageEffects_(ctx)**
@@ -3254,7 +3247,9 @@
 
 - **ensureNeighborhoodMapSchemaAppendOnly_(ss, sheetName, headers)**
 
-- **buildHolidayNeighborhoodMods_(holiday, isFirstFriday, isCreationDay, sportsSeason, sportsWeek)**
+- **buildHolidayNeighborhoodMods_(ctx, holiday, isFirstFriday, isCreationDay, sportsSeason, sportsWeek)**
+
+- **topSceneHood_(summary, tag)**
 
 - **getDemographicMarkerV35_(neighborhood, baseLabel, arcByNeighborhood, summary, holiday, isFirstFriday, isCreationDay)**
 
@@ -4617,4 +4612,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1655
+**Functions mapped:** 1654

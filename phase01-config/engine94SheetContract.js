@@ -299,38 +299,6 @@ function ensureEngine209Config_(ss) {
   return plan;
 }
 
-// engine.214 (pipeline.69 Task 4; S458 rejection: no hood names in the engine) — the
-// five cluster CHARACTER tables in applyCityDynamics_ stay authored, but the hoods
-// that anchor each cluster are World_Config rows: a pipe-separated list of canon
-// hood names, read every Cycle from ctx.config. Every other canon hood adopts the
-// cluster most of its Neighborhood_Map.Adjacent neighbours sit in. Same self-arm
-// contract, string-valued: seeded once, validated as a non-empty string here, the
-// names themselves validated against the canon roster in Phase 2 (a name off the
-// map, a hood in two clusters or an empty cluster throws there, the same wall as a
-// bad Adjacent name). The seed rows are migration payload: the runtime never reads
-// them — a missing key throws naming this self-arm.
-var ENGINE214_CONFIG_SEEDS = [
-  ['clusterAnchors_DOWNTOWN_CORE', 'Downtown|Uptown|KONO|Chinatown', 'engine.214 canon hood names (pipe-separated) that anchor the DOWNTOWN_CORE dynamics cluster; other hoods adopt by adjacency', 'string'],
-  ['clusterAnchors_WATERFRONT_WEST', 'Jack London|West Oakland', 'engine.214 canon hood names (pipe-separated) that anchor the WATERFRONT_WEST dynamics cluster; other hoods adopt by adjacency', 'string'],
-  ['clusterAnchors_LAKE_CORRIDOR', 'Lake Merritt|Piedmont Ave', 'engine.214 canon hood names (pipe-separated) that anchor the LAKE_CORRIDOR dynamics cluster; other hoods adopt by adjacency', 'string'],
-  ['clusterAnchors_NORTH_HILLS', 'Rockridge|Temescal', 'engine.214 canon hood names (pipe-separated) that anchor the NORTH_HILLS dynamics cluster; other hoods adopt by adjacency', 'string'],
-  ['clusterAnchors_EAST_OAKLAND', 'Fruitvale|Laurel', 'engine.214 canon hood names (pipe-separated) that anchor the EAST_OAKLAND dynamics cluster; other hoods adopt by adjacency', 'string']
-];
-
-function ensureEngine214Config_(ss) {
-  if (!ss) throw new Error('engine.214 config: spreadsheet required');
-  var configSheet = ss.getSheetByName('World_Config');
-  if (!configSheet) throw new Error('engine.214 config: World_Config not found');
-  var plan = inspectEngine94Config_(configSheet.getDataRange().getValues(), ENGINE214_CONFIG_SEEDS);
-  if (plan.additions.length > 0) {
-    configSheet.getRange(configSheet.getLastRow() + 1, 1, plan.additions.length, 3).setValues(plan.additions);
-    var verified = inspectEngine94Config_(configSheet.getDataRange().getValues(), ENGINE214_CONFIG_SEEDS);
-    if (verified.additions.length > 0) throw new Error('engine.214 config: post-write verification failed');
-  }
-  Logger.log('engine.214 config ready: seeded ' + plan.additions.length + ' row(s)');
-  return { configSeeded: plan.additions.length };
-}
-
 var ENGINE275_CONFIG_SEEDS = [
   ['fireGuardMinutes', 60, 'engine.275 a Cycle is refused if the last one STARTED fewer than this many minutes ago (a Cycle cannot fire twice). Live stays 60. 0 = no time test — bench only, where back-to-back fires are deliberate and the web trigger\'s expect= guards repeats', 0, 1440, false]
 ];

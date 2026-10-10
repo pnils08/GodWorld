@@ -33,15 +33,13 @@ function grab(name) {
 const NAMES = ['applySeasonModifiers_', 'applyWeatherModifiers_', 'applyHolidayModifiers_',
   'applySportsModifiers_', 'normalizeSportsPhase_', 'applyDemographicModifiers_', 'aggregateDemographics_',
   'applyEconomyLocal_', 'applyObservedFeedback_', 'applySeedLocalBoost_',
-  'medianOf_', 'seedClusterMedian_', 'seedDomainMedian_', 'makeMetrics_',
+  'medianOf_', 'seedHoodMedian_', 'seedDomainMedian_', 'makeMetrics_',
   'getMomentumFactor', 'blend'];
 const HELPERS = `
 var clamp = function(n,min,max){ return Math.max(min, Math.min(max, n)); };
 var clampSent = function(n){ return clamp(n,-1,1); };
 function safeNum_(v,d){ if(d===undefined)d=0; var n=Number(v); return isFinite(n)?n:d; }
-var S = {}; var CLUSTERS = { DOWNTOWN_CORE: { hoods: ['Downtown'] } };
-function neighborhoodToCluster_(h){ return h === 'Downtown' ? 'DOWNTOWN_CORE' : null; }
-var hoodClusters = { byHood: { Downtown: 'DOWNTOWN_CORE' } };   // engine.281 (c): the venue reads named + adopted
+var S = {};   // engine.214: modifiers take the hood's zone / scenes / name — no cluster table in the harness
 function __setS(x){ S = x; }
 `;
 const M = new Function(HELPERS + NAMES.map(grab).join('\n') + '\nreturn {__setS:__setS,' + NAMES.join(',') + '};')();
@@ -58,7 +56,7 @@ const near = (a, b, e) => Math.abs(a - b) <= (e === undefined ? 1e-9 : e);
 function ordinary(over) {
   return Object.assign({
     season: 'Winter', weatherType: 'overcast', holiday: 'none', holidayPriority: '',
-    isFF: false, isCD: false, sports: 'off-season', cluster: 'DOWNTOWN_CORE',
+    isFF: false, isCD: false, sports: 'off-season', hood: 'Downtown', zone: 'urban-core', scenes: {},
     unemp: 0.0445, sick: 0.0486, mood: 50,
     events: 10, eventsNow: 10, media: 8, mediaNow: 8, seeds: 35, seedsNow: 35,
     seedW: 8, seedMedian: 8, wComm: 6, commMedian: 6, wBiz: 6, bizMedian: 6
@@ -69,10 +67,10 @@ function sentimentOf(o) {
   const m = M.makeMetrics_();
   M.applySeasonModifiers_(m, o.season);
   M.applyWeatherModifiers_(m, { type: o.weatherType, impact: 1, front: o.weatherType.toUpperCase() },
-    { precipIntensity: 0, precipType: 'none', windSpeed: 5, visibility: 10 }, o.cluster);
+    { precipIntensity: 0, precipType: 'none', windSpeed: 5, visibility: 10 }, o.zone);
   M.applyHolidayModifiers_(m, o.holiday, o.holidayPriority,
-    { isFirstFriday: o.isFF, isCreationDay: o.isCD }, o.season, o.cluster);
-  M.applySportsModifiers_(m, o.sports, o.cluster);
+    { isFirstFriday: o.isFF, isCreationDay: o.isCD }, o.season, o.scenes);
+  M.applySportsModifiers_(m, o.sports, o.hood);
   M.applyDemographicModifiers_(m, { unemploymentRate: o.unemp, sicknessRate: o.sick, studentRatio: 0.2, seniorRatio: 0.2 });
   M.applyEconomyLocal_(m, { mood: o.mood, descriptor: o.mood >= 70 ? 'thriving' : (o.mood <= 30 ? 'struggling' : 'stable') });
   M.applyObservedFeedback_(m, {
@@ -80,17 +78,16 @@ function sentimentOf(o) {
     storySeedCount: o.seeds, storySeedCountNow: o.seedsNow,
     crime: 5, crimeNow: 5, shockCount: 10, shockCountNow: 10
   });
-  // two other clusters sit at the median so the relative gates have a middle
+  // two other hoods sit at the median so the relative gates have a middle (engine.214: active median, >= 3 active)
   const other = { weighted: o.seedMedian };
   M.applySeedLocalBoost_(m, {
-    byCluster: { [o.cluster]: { weighted: o.seedW }, A: other, B: other },
-    byDomainCluster: {
-      [o.cluster]: { COMMUNITY: o.wComm, BUSINESS: o.wBiz, CIVIC: 2 },
+    byHood: { [o.hood]: { weighted: o.seedW }, A: other, B: other },
+    byDomainHood: {
+      [o.hood]: { COMMUNITY: o.wComm, BUSINESS: o.wBiz, CIVIC: 2 },
       A: { COMMUNITY: o.commMedian, BUSINESS: o.bizMedian, CIVIC: 2 },
       B: { COMMUNITY: o.commMedian, BUSINESS: o.bizMedian, CIVIC: 2 }
-    },
-    byNeighborhood: {}
-  }, o.cluster);
+    }
+  }, o.hood);
   return m.sentiment;
 }
 
@@ -117,7 +114,7 @@ console.log('2. ordinary activity is not good news');
   const base = M.makeMetrics_();
   M.applySeasonModifiers_(base, 'Winter');
   M.applyWeatherModifiers_(base, { type: 'overcast', impact: 1, front: 'OVERCAST' },
-    { precipIntensity: 0, precipType: 'none', windSpeed: 5, visibility: 10 }, 'DOWNTOWN_CORE');
+    { precipIntensity: 0, precipType: 'none', windSpeed: 5, visibility: 10 }, 'urban-core');
   const calendarOnly = base.sentiment;
   const full = sentimentOf(ordinary());
   ok('events/seeds/media/seed-cluster add 0.00 at baseline (was +0.15)',
@@ -136,9 +133,9 @@ console.log('3. the gates can still fire — both directions');
     sentimentOf(ordinary({ eventsNow: 16 })) > flat + 0.04);
   ok('story attention 60% above baseline lifts',
     sentimentOf(ordinary({ seedsNow: 56 })) > flat + 0.02);
-  ok('a cluster at 2x the cycle median lifts',
+  ok('a hood at 2x the cycle median lifts',
     sentimentOf(ordinary({ seedW: 16 })) > flat + 0.03);
-  ok('a cluster BELOW the cycle median gets nothing',
+  ok('a hood BELOW the cycle median gets nothing',
     near(sentimentOf(ordinary({ seedW: 3 })), flat, 1e-9));
   ok('an epidemic still registers',
     sentimentOf(ordinary({ sick: 0.12 })) < flat - 0.25);
@@ -155,12 +152,12 @@ console.log('4. sports phase is a calendar fact, not a result');
   ok('a finals run is still a city-wide event', (fin - off) >= 0.30,
     'delta=' + (fin - off).toFixed(3));
   // engine.204/205: the crowd follows the recorded week, not the word
-  const m2 = M.makeMetrics_(); M.applySportsModifiers_(m2, 'mid-season', 'DOWNTOWN_CORE');
+  const m2 = M.makeMetrics_(); M.applySportsModifiers_(m2, 'mid-season', 'Downtown');
   ok('a phase word with no games moves no crowd (traffic 1, nightlife 1)',
     near(m2.traffic, 1) && near(m2.nightlife, 1));
   M.__setS({ sportsCity: { intensity: 0.5, signed: -0.4, reach: 1, band: 'high' },
     sportsWeek: { "A's": { unsigned: 0.5, venueShare: 1, venue: ['Downtown'] } } });
-  const m3 = M.makeMetrics_(); M.applySportsModifiers_(m3, 'playoffs', 'DOWNTOWN_CORE');
+  const m3 = M.makeMetrics_(); M.applySportsModifiers_(m3, 'playoffs', 'Downtown');
   ok('a losing home week: traffic up (1.25 × stadium 1.075), nightlife below 1 city-wide',
     near(m3.traffic, 1.25 * 1.075) && near(m3.nightlife, 0.8 * 1.075) && near(m3.communityEngagement, 1.2),
     JSON.stringify([m3.traffic, m3.nightlife]));
@@ -219,7 +216,7 @@ console.log('6. resting level has headroom both ways');
 console.log('7. weather is a shade; a catastrophe is a crisis (2026-09-19 ruling)');
 {
   const wx = (type, cat) => { const m = M.makeMetrics_(); const b = m.sentiment;
-    M.applyWeatherModifiers_(m, { type: type, impact: 1.3, front: type.toUpperCase() }, { precipIntensity: 0, precipType: 'none', windSpeed: 5, visibility: 10, catastrophe: cat }, 'DOWNTOWN_CORE'); return m.sentiment - b; };
+    M.applyWeatherModifiers_(m, { type: type, impact: 1.3, front: type.toUpperCase() }, { precipIntensity: 0, precipType: 'none', windSpeed: 5, visibility: 10, catastrophe: cat }, 'urban-core'); return m.sentiment - b; };
   const fog = wx('fog', false), storm = wx('rain', true);
   ok('an ordinary fog week costs under 0.05 (was 0.10)', fog < 0 && fog > -0.05, 'fog=' + fog.toFixed(3));
   ok('a catastrophe costs more than a playoff run can lift (0.10 cap)', storm <= -0.2, 'storm=' + storm.toFixed(3));

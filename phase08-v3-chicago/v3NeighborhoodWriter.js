@@ -463,7 +463,7 @@ function saveV3NeighborhoodMap_(ctx) {
   var hoodBizGrowthMedian = hoodBusinessCity_(S);
 
   // Holiday / calendar neighborhood boosts
-  var holidayMods = buildHolidayNeighborhoodMods_(holiday, isFirstFriday, isCreationDay, sportsSeason, S.sportsWeek || {});
+  var holidayMods = buildHolidayNeighborhoodMods_(ctx, holiday, isFirstFriday, isCreationDay, sportsSeason, S.sportsWeek || {});
 
   // Helpers
   function round2(n) { return Math.round(n * 100) / 100; }
@@ -658,13 +658,42 @@ function ensureNeighborhoodMapSchemaAppendOnly_(ss, sheetName, headers) {
 }
 
 
-function buildHolidayNeighborhoodMods_(holiday, isFirstFriday, isCreationDay, sportsSeason, sportsWeek) {
+// engine.214 Task 14 (agy 6, N1): First Friday and Creation Day key on the
+// hood's Neighborhood_Map.Scenes weight, never on a hood name. The old top
+// values sit at the top weight: FirstFriday ≥ 3 → event ×1.8, nightlife ×1.4
+// (the former Temescal line), 1–2 → event ×1.4; CreationDay ≥ 3 → event ×1.5,
+// sentiment +0.1 (the former Downtown line), 1–2 → event ×1.3. The NewYearsEve
+// and Halloween hood literals below are outside Task 14's scope and stay.
+function buildHolidayNeighborhoodMods_(ctx, holiday, isFirstFriday, isCreationDay, sportsSeason, sportsWeek) {
   var mods = {};
 
+  if (isFirstFriday) {
+    var ffHoods = hoodsWithScene_(ctx, 'FirstFriday');
+    for (var fi = 0; fi < ffHoods.length; fi++) {
+      var ffHood = ffHoods[fi][0], ffW = Number(ffHoods[fi][1]) || 0;
+      var fm = mods[ffHood] = mods[ffHood] || {};
+      if (ffW >= 3) {
+        fm.eventMod = (fm.eventMod || 1) * 1.8;
+        fm.nightlifeMod = (fm.nightlifeMod || 1) * 1.4;
+      } else {
+        fm.eventMod = (fm.eventMod || 1) * 1.4;
+      }
+    }
+  }
 
-
-
-
+  if (isCreationDay) {
+    var cdHoods = hoodsWithScene_(ctx, 'CreationDay');
+    for (var ci = 0; ci < cdHoods.length; ci++) {
+      var cdHood = cdHoods[ci][0], cdW = Number(cdHoods[ci][1]) || 0;
+      var cm = mods[cdHood] = mods[cdHood] || {};
+      if (cdW >= 3) {
+        cm.eventMod = (cm.eventMod || 1) * 1.5;
+        cm.sentimentMod = (cm.sentimentMod || 0) + 0.1;
+      } else {
+        cm.eventMod = (cm.eventMod || 1) * 1.3;
+      }
+    }
+  }
 
   if (holiday === 'NewYearsEve') {
     mods['Downtown'] = { eventMod: 2.0, nightlifeMod: 2.0, noiseMod: 1.8, sentimentMod: 0.1 };
@@ -679,27 +708,6 @@ function buildHolidayNeighborhoodMods_(holiday, isFirstFriday, isCreationDay, sp
   }
 
 
-
-  if (isFirstFriday) {
-    mods['Temescal'] = mods['Temescal'] || {};
-    mods['Temescal'].eventMod = (mods['Temescal'].eventMod || 1) * 1.8;
-    mods['Temescal'].nightlifeMod = (mods['Temescal'].nightlifeMod || 1) * 1.4;
-
-    mods['Downtown'] = mods['Downtown'] || {};
-    mods['Downtown'].eventMod = (mods['Downtown'].eventMod || 1) * 1.5;
-
-    mods['Jack London'] = mods['Jack London'] || {};
-    mods['Jack London'].eventMod = (mods['Jack London'].eventMod || 1) * 1.3;
-  }
-
-  if (isCreationDay) {
-    mods['Downtown'] = mods['Downtown'] || {};
-    mods['Downtown'].eventMod = (mods['Downtown'].eventMod || 1) * 1.5;
-    mods['Downtown'].sentimentMod = (mods['Downtown'].sentimentMod || 0) + 0.1;
-
-    mods['West Oakland'] = mods['West Oakland'] || {};
-    mods['West Oakland'].eventMod = (mods['West Oakland'].eventMod || 1) * 1.3;
-  }
 
   // engine.204/205 §2.2: the stadium hoods by each franchise's home volume (unsigned ×
   // venueShare) at its own venue — the old championship mods are the top of the scale
@@ -722,11 +730,26 @@ function buildHolidayNeighborhoodMods_(holiday, isFirstFriday, isCreationDay, sp
 }
 
 
+// engine.214 Task 14: the hood carrying the top Scenes weight for a tag (ties:
+// first in sheet order). null when no hood carries it.
+function topSceneHood_(summary, tag) {
+  var scenes = summary && summary.canonHoods && summary.canonHoods.scenes;
+  var list = summary && summary.canonHoods && summary.canonHoods.list;
+  if (!scenes || !list) return null;
+  var best = null, bestW = 0;
+  for (var i = 0; i < list.length; i++) {
+    var w = Number((scenes[list[i]] || {})[tag]) || 0;
+    if (w > bestW) { best = list[i]; bestW = w; }
+  }
+  return best;
+}
+
 function getDemographicMarkerV35_(neighborhood, baseLabel, arcByNeighborhood, summary, holiday, isFirstFriday, isCreationDay) {
 
-  // Calendar-first markers
-  if (isFirstFriday && neighborhood === 'Temescal') return 'First Friday arts walk zone';
-  if (isCreationDay && neighborhood === 'Downtown') return 'Creation Day celebration zone';
+  // Calendar-first markers — engine.214 Task 14: the hood with the top Scenes
+  // weight for the day, not a name in code.
+  if (isFirstFriday && neighborhood === topSceneHood_(summary, 'FirstFriday')) return 'First Friday arts walk zone';
+  if (isCreationDay && neighborhood === topSceneHood_(summary, 'CreationDay')) return 'Creation Day celebration zone';
 
   // Arc influence
   var arc = arcByNeighborhood[neighborhood];
@@ -740,8 +763,11 @@ function getDemographicMarkerV35_(neighborhood, baseLabel, arcByNeighborhood, su
   }
 
   // Shock hinting
+  // engine.214 Task 14: the shock-zone marker lands on the institutional hood(s)
+  // (Neighborhood_Map.EmployerCharacter), not on a name in code.
   var shockFlag = (summary.shockFlag || '').toString();
-  if (neighborhood === 'Downtown' && shockFlag === 'shock-flag') return 'Shock event zone';
+  var shockChar = ((summary.neighborhoodState || {})[neighborhood] || {}).employerCharacter;
+  if (shockFlag === 'shock-flag' && String(shockChar || '').toLowerCase() === 'institutional') return 'Shock event zone';
 
   return baseLabel;
 }

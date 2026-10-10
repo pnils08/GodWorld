@@ -504,7 +504,6 @@ function runWorldCycleLocked_(ss, fire) {
     ensureEngine276Config_(ss);  // engine.276 debt line, rise/fall rates, drag cap, default chance + mark, same self-arm contract
     ensureEngine271Config_(ss);  // engine.271 fine rates and caps, property and business tax rates, tax day, thin-hood floor, same self-arm contract
     ensureEngine254Config_(ss);  // engine.254 Task 10 hospital talk-back window, band, gain, same self-arm contract
-    ensureEngine214Config_(ss);  // engine.214 the hoods that anchor each dynamics cluster (string-valued), same self-arm contract
     ensureEngine95Config_(ss);   // engine.95 wall budget, tail reserve, checkpoint save cost (seeded 0 = gate disarmed) + bench force/fault keys, same self-arm contract
   } catch (e) {
     Logger.log('FATAL: Cannot prepare spreadsheet: ' + e.message);

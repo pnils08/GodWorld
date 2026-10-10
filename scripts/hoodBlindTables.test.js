@@ -13,6 +13,7 @@ const path = require('path');
 const vm = require('vm');
 const ROOT = path.join(__dirname, '..');
 const G = require('./fixtures/hood-geography.json');
+const SC = require('./fixtures/hood-scenes.json').scenes;
 const load = (sandbox, rel) => vm.runInContext(fs.readFileSync(path.join(ROOT, rel), 'utf8'), sandbox, { filename: rel });
 const src = rel => fs.readFileSync(path.join(ROOT, rel), 'utf8');
 const eq = (a, b) => assert.strictEqual(JSON.stringify(a), JSON.stringify(b));
@@ -23,15 +24,15 @@ const CRIME = { Temescal:0.73, Downtown:1.07, Fruitvale:1.0, 'Lake Merritt':0.83
 
 function mapSheet(over) {
   over = over || {};
-  const header = ['Neighborhood', 'CoreSimRank', 'ChildAreas', 'WeatherZone', 'Adjacent', 'AttentionWeight'];
-  const rows = HOODS.map((h, i) => [h, i + 1, h === 'Piedmont Ave' ? 'Montclair' : '', over.zone && h in over.zone ? over.zone[h] : G.zone[h], over.adj && h in over.adj ? over.adj[h] : G.adjacent[h], over.att && h in over.att ? over.att[h] : G.attention[h]]);
+  const header = ['Neighborhood', 'CoreSimRank', 'ChildAreas', 'WeatherZone', 'Adjacent', 'AttentionWeight', 'EmployerCharacter', 'Scenes'];
+  const rows = HOODS.map((h, i) => [h, i + 1, h === 'Piedmont Ave' ? 'Montclair' : '', over.zone && h in over.zone ? over.zone[h] : G.zone[h], over.adj && h in over.adj ? over.adj[h] : G.adjacent[h], over.att && h in over.att ? over.att[h] : G.attention[h],
+    over.chr && h in over.chr ? over.chr[h] : G.character[h], SC[h]]);
   return [header].concat(rows);
 }
 function makeSandbox() {
   const sb = { console, Logger: { log() {} }, Utilities: {}, SpreadsheetApp: {} };
   vm.createContext(sb);
   load(sb, 'phase01-config/canonNeighborhoodLoader.js');
-  load(sb, 'phase01-config/engine94SheetContract.js');   // engine.214: the cluster anchors are World_Config seeds, read from ctx.config
   load(sb, 'phase02-world-state/applyWeatherModel.js');
   load(sb, 'phase03-population/updateCrimeMetrics.js');
   load(sb, 'phase06-analysis/prioritizeEvents.js');
@@ -39,13 +40,13 @@ function makeSandbox() {
   load(sb, 'utilities/citizenDerivation.js');
   return sb;
 }
-// engine.214: what the self-arm would have seeded on a live sheet — the harness carries no hood names of its own.
-const config214 = sb => Object.fromEntries(sb.ENGINE214_CONFIG_SEEDS.map(s => [s[0], s[1]]));
 function makeCtx(sb, over) {
-  const ctx = { summary: {}, config: config214(sb), ledger: { headers: ['Neighborhood', 'Status'], rows: [] }, ss: { getSheetByName: n => n === 'Neighborhood_Map' ? { getDataRange: () => ({ getValues: () => mapSheet(over) }) } : null } };
+  over = over || {};
+  const ctx = { summary: {}, config: {}, ledger: { headers: ['Neighborhood', 'Status'], rows: [] }, ss: { getSheetByName: n => n === 'Neighborhood_Map' ? { getDataRange: () => ({ getValues: () => mapSheet(over) }) } : null } };
   sb.loadCanonNeighborhoods_(ctx);
   ctx.summary.neighborhoodState = {};
-  HOODS.forEach(h => { ctx.summary.neighborhoodState[h] = { incomeTier: TIER[h], crimeIndex: CRIME[h] }; });
+  // engine.214: the hood's authored character + boom seed ride neighborhoodState (loadNeighborhoodState_), the base of its dynamics
+  HOODS.forEach(h => { ctx.summary.neighborhoodState[h] = { incomeTier: TIER[h], crimeIndex: CRIME[h], employerCharacter: over.chr && h in over.chr ? over.chr[h] : G.character[h], boomIndex: G.boomIndex[h] }; });
   return ctx;
 }
 let passed = 0, failed = 0;
@@ -221,59 +222,37 @@ t('a blank or unknown label throws (a new label needs a row)', () => {
   assert.throws(() => w.hoodProfileFromCanon_('KONO', canonS({ KONO: ['spaceport', 82164, 0.3, 46] }), city), /no HOOD_CHARACTER_MODS row/);
 });
 
-console.log('T8 every canon hood gets a dynamics track (10 of 22 had none — city scalar, lockstep)');
-t('unclustered hoods adopt the cluster of their canon neighbours; none left unplaced', () => {
+console.log('T8 every canon hood gets its own dynamics track from its sheet row (engine.214: the clusters are gone)');
+const runDyn = (over, extra) => {
+  const ctx = makeCtx(sb, over); Object.assign(ctx, { writeIntents: [], mode: {} });
+  Object.assign(ctx.summary, { cycleId: 902, season: 'Fall', holiday: 'none', sportsSeason: 'off-season', economicMood: 50, sportsCity: {}, sportsWeek: {} }, extra || {});
+  sb.applyCityDynamics_(ctx); return ctx.summary.neighborhoodDynamics;
+};
+t('22 tracks, no cluster and no hood name in the engine, no World_Config anchor', () => {
   load(sb, 'phase02-world-state/applyCityDynamics.js');
-  const ctx = makeCtx(sb);
-  const CL = { DOWNTOWN_CORE: { hoods: ['Downtown', 'Uptown', 'KONO', 'Chinatown'] }, WATERFRONT_WEST: { hoods: ['Jack London', 'West Oakland'] },
-    LAKE_CORRIDOR: { hoods: ['Lake Merritt', 'Piedmont Ave'] }, NORTH_HILLS: { hoods: ['Rockridge', 'Temescal'] }, EAST_OAKLAND: { hoods: ['Fruitvale', 'Laurel'] } };
-  const r = sb.buildHoodClusterAssignment_(ctx, CL);
-  assert.strictEqual(r.unplaced.length, 0);
-  HOODS.forEach(h => assert.ok(r.byHood[h], h + ' unplaced'));
-  const all = [].concat(...Object.values(r.members));
-  assert.strictEqual(all.length, 22);
-  assert.strictEqual(new Set(all).size, 22);
-  ['Rockridge', 'Temescal'].forEach(h => assert.strictEqual(r.byHood[h], 'NORTH_HILLS'));   // named members keep their cluster
-  assert.strictEqual(r.byHood['Baylight District'], 'WATERFRONT_WEST');   // engine.281 (c): the harbor waterfront
-  assert.ok(/buildHoodClusterAssignment_\(ctx, CLUSTERS\)/.test(src('phase02-world-state/applyCityDynamics.js')));
-});
-t('engine.214: the cluster anchors are World_Config rows — the engine names no hood; a bad row throws', () => {
-  // Source: the CLUSTERS table carries character only. No canon hood name between the table and the adjacency map.
+  const nd = runDyn();
+  assert.strictEqual(Object.keys(nd).length, 22);
+  HOODS.forEach(h => assert.ok(nd[h] && typeof nd[h].sentiment === 'number', h + ' has no track'));
   const s = src('phase02-world-state/applyCityDynamics.js');
-  const table = s.slice(s.indexOf('var CLUSTERS = {'), s.indexOf('var CLUSTER_ADJACENCY'));
-  HOODS.forEach(h => assert.ok(table.indexOf("'" + h + "'") < 0 && table.indexOf('"' + h + '"') < 0, h + ' is named in the CLUSTERS table'));
-  assert.ok(/seedClusterAnchors_\(ctx, CLUSTERS\)/.test(table));
-  assert.ok(/ensureEngine214Config_\(ss\)/.test(src('phase01-config/godWorldEngine2.js')), 'self-arm not wired at open');
-  // Runtime: the sheet row decides. Move an anchor and the cluster follows it.
-  const run = (over) => { const ctx = makeCtx(sb); Object.assign(ctx, { writeIntents: [], mode: {} }); Object.assign(ctx.config, over);
-    Object.assign(ctx.summary, { cycleId: 902, season: 'Fall', holiday: 'none', sportsSeason: 'off-season', economicMood: 50, sportsCity: {}, sportsWeek: {} });
-    sb.applyCityDynamics_(ctx); return ctx.summary.clusterDefinitions; };
-  const seeded = run({});
-  assert.strictEqual(seeded.NORTH_HILLS.neighborhoods.length, 2);
-  const moved = run({ clusterAnchors_DOWNTOWN_CORE: 'Downtown|Uptown|KONO|Chinatown|Temescal', clusterAnchors_NORTH_HILLS: ' Rockridge ' });
-  assert.ok(moved.DOWNTOWN_CORE.neighborhoods.includes('Temescal') && !moved.NORTH_HILLS.neighborhoods.includes('Temescal'), JSON.stringify(moved.NORTH_HILLS));
-  eq(moved.NORTH_HILLS.neighborhoods, ['Rockridge']);   // trimmed
-  // Failure policy: the throw, not a fallback to any name in code.
-  assert.throws(() => run({ clusterAnchors_EAST_OAKLAND: '' }), /engine\.214.*clusterAnchors_EAST_OAKLAND.*self-arm/);
-  assert.throws(() => run({ clusterAnchors_EAST_OAKLAND: undefined }), /engine\.214.*self-arm/);
-  assert.throws(() => run({ clusterAnchors_EAST_OAKLAND: 7 }), /engine\.214.*not text/);
-  assert.throws(() => run({ clusterAnchors_EAST_OAKLAND: 'Fruitvale|Montclair' }), /engine\.214.*"Montclair", not a canon hood/);
-  assert.throws(() => run({ clusterAnchors_EAST_OAKLAND: 'Fruitvale|Laurel|Rockridge' }), /engine\.214.*"Rockridge" anchors both NORTH_HILLS and EAST_OAKLAND/);
-  assert.throws(() => run({ clusterAnchors_EAST_OAKLAND: '| |' }), /engine\.214.*names no hood/);
+  assert.ok(!/CLUSTERS\b/.test(s) && !/clusterAnchors_/.test(s) && !/CLUSTER_ADJACENCY/.test(s) && !/buildHoodClusterAssignment_/.test(s), 'cluster surface remains');
+  HOODS.forEach(h => assert.ok(s.indexOf("'" + h + "'") < 0 && s.indexOf('"' + h + '"') < 0, h + ' is named in applyCityDynamics.js'));
+  assert.ok(!/ensureEngine214Config_/.test(src('phase01-config/godWorldEngine2.js')), 'the retired self-arm is still wired at open');
 });
-t('engine.281 (c): a Baylight home week lifts WATERFRONT_WEST at the stadium; an away week lifts nothing', () => {
-  const run = (venueShare) => {
-    const ctx = makeCtx(sb);
-    Object.assign(ctx, { writeIntents: [], mode: {} });
-    Object.assign(ctx.summary, { cycleId: 901, season: 'Fall', holiday: 'none', sportsSeason: 'off-season', economicMood: 50,
-      sportsCity: {}, sportsWeek: { Oaks: { unsigned: 1, venueShare, venue: ['Baylight District'] } } });
-    sb.applyCityDynamics_(ctx);
-    return ctx.summary.clusterDynamics;
-  };
+t('a hood\'s base is its EmployerCharacter row: relabel one hood and only that hood\'s base moves; an unknown label throws', () => {
+  const a = runDyn(), b = runDyn({ chr: { Dimond: 'nightlife' } });   // Dimond: village-retail → nightlife
+  assert.ok(b.Dimond.nightlife > a.Dimond.nightlife * 1.2, 'Dimond nightlife ' + a.Dimond.nightlife + ' → ' + b.Dimond.nightlife);
+  // non-adjacent hoods are byte-identical (bleed reaches Dimond's neighbours only, and only on sentiment)
+  const far = HOODS.filter(h => h !== 'Dimond' && !G.adjacent.Dimond.split(',').map(x => x.trim()).includes(h));
+  far.forEach(h => assert.strictEqual(JSON.stringify(a[h]), JSON.stringify(b[h]), h + ' moved on a Dimond relabel'));
+  assert.throws(() => runDyn({ chr: { Dimond: 'spaceport' } }), /engine\.214.*"spaceport".*no row in HOOD_CHARACTER_BY_EMPLOYER/);
+  assert.throws(() => runDyn({ chr: { Dimond: '' } }), /engine\.214.*EmployerCharacter is blank/);
+});
+t('engine.281 (c) / engine.214 D6: a Baylight home week lifts the venue hood direct; an away week lifts nothing', () => {
+  const run = (venueShare) => runDyn({}, { sportsWeek: { Oaks: { unsigned: 1, venueShare, venue: ['Baylight District'] } } });
   const home = run(1), away = run(0);
-  assert.ok(home.WATERFRONT_WEST.traffic > away.WATERFRONT_WEST.traffic * 1.1, 'WATERFRONT_WEST traffic ' + away.WATERFRONT_WEST.traffic + ' → ' + home.WATERFRONT_WEST.traffic);
-  ['DOWNTOWN_CORE', 'LAKE_CORRIDOR', 'NORTH_HILLS', 'EAST_OAKLAND'].forEach(c =>
-    assert.strictEqual(home[c].traffic, away[c].traffic, c + ' moved on a Baylight home week'));
+  assert.ok(home['Baylight District'].traffic > away['Baylight District'].traffic * 1.1, 'Baylight traffic ' + away['Baylight District'].traffic + ' → ' + home['Baylight District'].traffic);
+  HOODS.filter(h => h !== 'Baylight District').forEach(h =>
+    assert.ok(home[h].traffic <= away[h].traffic * 1.0 + 1e-9, h + ' traffic rose on a Baylight home week: ' + away[h].traffic + ' → ' + home[h].traffic));
 });
 
 console.log('T9 media coverage reaches every canon hood, weighted by the authored attention knob (engine.240)');

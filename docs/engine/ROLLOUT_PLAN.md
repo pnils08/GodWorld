@@ -15,6 +15,7 @@
 - [[../research/2026-10-02-engine-208-fandom-dial-read-before]]: engine.208 live-observing, engine.280 ready
 - [[../plans/2026-09-13-run-cycle-packages-the-world]]: engine.214 ready, pipeline.69 in-progress
 - [[../research/2026-10-03-engine-204-205-game-day-economy-read-before]]: engine.204 in-progress, engine.281 in-progress
+- [[../plans/2026-10-08-engine-286-game-of-life-events]]: engine.284 blocked, engine.286 ready
 - [[../plans/2026-09-22-initiative-budget-disbursement]]: engine.257 ready, engine.256 ready
 - [[../plans/2026-10-04-school-board]]: civic.43 needs-info
 - [[../plans/2026-07-31-citizen-memory-perception]]: engine.94 live-observing
@@ -45,7 +46,6 @@
 - [[../plans/2026-07-31-engine-observability-integrity]]: infrastructure.6 ready
 - [[../plans/2026-09-28-storylines-keyed-to-engine-events]]: engine.270 ready
 - `docs/research/2026-10-08-codex-engine95-design.md`: engine.285 ready
-- [[../plans/2026-10-08-engine-286-game-of-life-events]]: engine.286 ready
 - [[../plans/2026-05-22-engine-regulatory-friction]]: engine.20d ready
 - [[../plans/2026-08-10-economy-native-rebuild]]: engine.104 ready
 - [[../research/2026-09-10-kimi-faith-lane-routing]]: engine.248 ready
@@ -90,7 +90,7 @@
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
-| engine.214 | Cluster anchors LIVE since 2026-10-06. Ruled 2026-10-10: clusters are outdated — mood per hood from the hood's own `Neighborhood_Map` character (INSTITUTIONS seed is the permanent referent), city figure derived from the 22 by a rule rb designs; districts read hood data, never generate it. rb writes the plan; cut lands after the C111–C112 readback | ready | research-build / engine-sheet | [[../plans/2026-09-13-run-cycle-packages-the-world]] §engine.214 Builder's ruling (2026-10-10) |
+| engine.214 | Cluster anchors LIVE since 2026-10-06. Ruled 2026-10-10: clusters are outdated — mood per hood from the hood's own `Neighborhood_Map` character (INSTITUTIONS seed is the permanent referent), city figure derived from the 22 by a rule rb designs; districts read hood data, never generate it. plan written 2026-10-10, codex + agy reviews out; es builds + benches at C112, PROD after the C112 readback, first fire C113 Sun 2026-10-25 | in-progress | research-build / engine-sheet | [[../plans/2026-10-10-engine-214-mood-per-hood]] |
 | engine.95 | Checkpoint/resume — **LIVE `c49074fc` 2026-10-09**, gate armed (checkpointSaveMs 6000); bench plan 0–5 PASS on 1004 @5. Smoke at C111 Sun 2026-10-11: 131 phases, 0 new Engine_Errors, `_CycleCheckpoint` empty, no trigger. Reconcile + expectations: DEPLOY_HISTORY §PROD c49074fc | in-progress | engine-sheet | [[../plans/2026-07-31-platform-ceiling-resilience]] §Changelog bench steps 0–5 |
 | engine.204 | Game-day city impact LIVE since 2026-10-06. Column removal HELD (builder 2026-10-07): ripple map of every feed column + dashboard/sheet/code option-sync audit first; the CommunityInvestment carrier waits on it | in-progress | engine-sheet | [[../research/2026-10-03-engine-204-205-game-day-economy-read-before]] §4 Builder's words (2026-10-07) |
 | engine.205 | Weekly game economy LIVE since 2026-10-06. Held with engine.204 for the same ripple + option-sync review | in-progress | engine-sheet | [[../plans/2026-09-11-sports-as-a-lived-system]] Tasks 4, 10 |
@@ -125,6 +125,7 @@
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
+| pipeline.71 | Media hood read: live vs the INSTITUTIONS seed (today every reader gets prev-Cycle delta only — baseline_briefs, buildWorldSummary classifyDelta). Builder 2026-10-10: the seed is the permanent referent; coverage says 'used to be' when the data moves. Spec after engine.214 lands | ready | research-build | [[../plans/2026-10-10-engine-214-mood-per-hood]] §Reviews reconciled A4 |
 | engine.98 | Pets — designed 2026-10-04 on engine.94 rails; builds after engine.94 | ready | engine-sheet / research-build | [[../plans/2026-09-26-future-build-ideas]] §engine.98 pets — design |
 | engine.264 | The maker's hand — builder intake tab the sim never sees; after engine.94 (builder 2026-09-29) | ready | research-build | [[../plans/2026-09-26-future-build-ideas]] §Builder rulings |
 | engine.203d | Slow fade after a season ends, unbuilt. Ruled 2026-10-07: a won title fades slowly with no dip; a season ending in a loss is upset first, then the slow fade | ready | engine-sheet | [[../plans/2026-09-11-sports-as-a-lived-system]] Task 2 |

@@ -152,15 +152,34 @@ function civicRoleAura_(approval, tier, famous) {
   return aura;
 }
 
+// Each hood's place among all hoods this Cycle — top third / bottom third of the city's own
+// spread (SIM_DOCTRINE §15: relative to the city's middle, never an absolute bar a prosperous
+// city clears everywhere). Returns { hood: 1 | -1 } for the outer thirds; middle hoods absent.
+function civicRoleThirds_(byHood, field) {
+  var vals = [];
+  for (var h in byHood) {
+    if (!byHood.hasOwnProperty(h) || !byHood[h]) continue;
+    var v = Number(byHood[h][field]);
+    if (!isNaN(v)) vals.push({ h: h, v: v });
+  }
+  var out = {};
+  if (vals.length < 3) return out;
+  vals.sort(function(a, b) { return a.v - b.v; });
+  var third = Math.floor(vals.length / 3);
+  for (var i = 0; i < third; i++) out[vals[i].h] = -1;
+  for (var j = vals.length - third; j < vals.length; j++) out[vals[j].h] = 1;
+  return out;
+}
+
 // Candidate premises for one hood this Cycle: [{ key, lean }] — lean +1 good, -1 bad, 0 neutral.
-function civicRolePremises_(S, hood) {
+// `bands` = { business: civicRoleThirds_(momentum, 'growth'), mood: civicRoleThirds_(dynamics, 'sentiment') }.
+// Everyday life is always a candidate, so the week is not only the hood's headline.
+function civicRolePremises_(S, hood, bands) {
   var out = [];
-  var mom = S.hoodBusinessMomentum && S.hoodBusinessMomentum[hood];
   var closedHere = 0, cl = S.businessClosures || [];
   for (var i = 0; i < cl.length; i++) if (cl[i] && cl[i].hood === hood) closedHere++;
   if (closedHere > 0) out.push({ key: 'business', lean: -1 });
-  else if (mom && mom.growth >= 2) out.push({ key: 'business', lean: 1 });
-  else if (mom && mom.growth <= -2) out.push({ key: 'business', lean: -1 });
+  else if (bands.business[hood]) out.push({ key: 'business', lean: bands.business[hood] });
 
   var crime = S.crimeMetrics && S.crimeMetrics.context && S.crimeMetrics.context.byHood && S.crimeMetrics.context.byHood[hood];
   if (crime && crime.trend === 'rising') out.push({ key: 'safety', lean: -1 });
@@ -170,11 +189,9 @@ function civicRolePremises_(S, hood) {
   if (ie && ie.advanced > 0) out.push({ key: 'initiative', lean: 1 });
   else if (ie && ie.sentiment < 0) out.push({ key: 'initiative', lean: -1 });
 
-  var nd = S.neighborhoodDynamics && S.neighborhoodDynamics[hood];
-  if (nd && nd.sentiment >= 0.3) out.push({ key: 'mood', lean: 1 });
-  else if (nd && nd.sentiment <= -0.3) out.push({ key: 'mood', lean: -1 });
+  if (bands.mood[hood]) out.push({ key: 'mood', lean: bands.mood[hood] });
 
-  if (!out.length) out.push({ key: 'everyday', lean: 0 });
+  out.push({ key: 'everyday', lean: 0 });
   return out;
 }
 
@@ -237,6 +254,10 @@ function runCivicRoleEngine_(ctx) {
   var S = ctx.summary;
   var cycle = S.absoluteCycle || S.cycleId || ctx.config.cycleCount || 0;
   var approvalByPop = civicRoleApprovalByPop_(ctx);
+  var bands = {
+    business: civicRoleThirds_(S.hoodBusinessMomentum || {}, 'growth'),
+    mood: civicRoleThirds_(S.neighborhoodDynamics || {}, 'sentiment')
+  };
   var events = 0;
 
   for (var r = 0; r < rows.length; r++) {
@@ -256,7 +277,7 @@ function runCivicRoleEngine_(ctx) {
     var approval = approvalByPop.hasOwnProperty(pop) ? approvalByPop[pop] : null;
 
     // Premise → sign → band (aura) → text.
-    var premises = civicRolePremises_(S, neighborhood);
+    var premises = civicRolePremises_(S, neighborhood, bands);
     var premise = premises[Math.floor(rng() * premises.length)];
     var upChance = cfg.civicRoleUpChance + premise.lean * cfg.civicRolePremiseLean;
     upChance = Math.max(0.05, Math.min(0.95, upChance));
@@ -312,6 +333,7 @@ if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
     runCivicRoleEngine_: runCivicRoleEngine_,
     civicRolePremises_: civicRolePremises_,
+    civicRoleThirds_: civicRoleThirds_,
     civicRoleAura_: civicRoleAura_,
     CIVIC_ROLE_REQUIRED_KEYS: CIVIC_ROLE_REQUIRED_KEYS,
     CIVIC_ROLE_TEXT_: CIVIC_ROLE_TEXT_

@@ -9,6 +9,6 @@
 
 **NEXT[codex]:** Verify board comparator/config/history export gaps per the same plan §Task 4; separate counter threshold-rounding defect in §Health numerator amendment.
 
-**NEXT[antigravity]:** engine.95 checkpoint/resume review completed to output/antigravity/2026-10-08-review-engine95.md. Verdict: SHIP. All 7 hunted vectors (cache flush, admission, context payload, codec, save ordering, assertions, web contract) verified safe and matching the design. Standing by.
+**NEXT[antigravity]:** engine.214 Mood Per Hood plan review completed to output/antigravity/2026-10-10-review-engine214-plan.md. Verdict: SHIP-WITH-FIXES. All 7 hunts resolved (D7 double application, D1 live column read, D2 hand tables, etc). Standing by.
 
 **NEXT[grok]:** No pane; nothing queued.

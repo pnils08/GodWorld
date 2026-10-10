@@ -42,6 +42,13 @@ var DIAL_MAP = {
   'Work':               { drive: 4 },                 // legacy generic work tag
   'CivicRole':          { sociability: 5, drive: 2 },
   'Civic Role':         { sociability: 5, drive: 2 }, // space variant
+  // engine.286 Task 6: graded civic role events — sign and weight are the roll (runCivicRoleEngine.js v3.0).
+  'CivicRole-Up-S':     { sociability: 1, drive: 1 },
+  'CivicRole-Up-M':     { sociability: 2, drive: 2, composure: 1 },
+  'CivicRole-Up-L':     { sociability: 3, drive: 4, composure: 2 },
+  'CivicRole-Down-S':   { composure: -1 },
+  'CivicRole-Down-M':   { composure: -2, drive: -1 },
+  'CivicRole-Down-L':   { composure: -4, drive: -2, sociability: -1 },
   // engine.201 ruling 1b (2026-09-13): a routine generator line is a plain day — it moves nothing.
   //   The crons read these lines as lived experience; the citizen's own reaction routes back
   //   through the reflection path. Before: +1 tints, ~1,300 upward pushes a cycle, none down.

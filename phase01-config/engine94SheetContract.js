@@ -231,6 +231,28 @@ function ensureEngine192Config_(ss) {
   return { configSeeded: plan.additions.length };
 }
 
+// engine.286 Task 6 (builder 2026-10-09): civic role events — weight coded on probability, up and down.
+var ENGINE286_CONFIG_SEEDS = [
+  ['civicRoleUpChance', 0.5, 'engine.286 civic role: base chance an official\'s weekly hood event is up (a lift) rather than down (an obstacle), before the hood premise leans it', 0.05, 0.95, false],
+  ['civicRolePremiseLean', 0.2, 'engine.286 civic role: how far a good or bad hood premise (business, safety, city project, mood) moves the up chance', 0, 0.45, false],
+  ['civicRoleMediumOdds', 0.3, 'engine.286 civic role: base odds of a medium-weight event at aura 1 (aura = 1.2 + approval, Tier, Famous raise it)', 0, 0.9, false],
+  ['civicRoleLargeOdds', 0.1, 'engine.286 civic role: base odds of a large-weight event at aura 1', 0, 0.9, false]
+];
+
+function ensureEngine286Config_(ss) {
+  if (!ss) throw new Error('engine.286 config: spreadsheet required');
+  var configSheet = ss.getSheetByName('World_Config');
+  if (!configSheet) throw new Error('engine.286 config: World_Config not found');
+  var plan = inspectEngine94Config_(configSheet.getDataRange().getValues(), ENGINE286_CONFIG_SEEDS);
+  if (plan.additions.length > 0) {
+    configSheet.getRange(configSheet.getLastRow() + 1, 1, plan.additions.length, 3).setValues(plan.additions);
+    var verified = inspectEngine94Config_(configSheet.getDataRange().getValues(), ENGINE286_CONFIG_SEEDS);
+    if (verified.additions.length > 0) throw new Error('engine.286 config: post-write verification failed');
+  }
+  Logger.log('engine.286 config ready: seeded ' + plan.additions.length + ' row(s)');
+  return { configSeeded: plan.additions.length };
+}
+
 var ENGINE221_CONFIG_SEEDS = [
   ['econMoodInertia', 0.3, 'engine.221 share of the gap between last Cycle\'s carried city economic mood and this Cycle\'s computed level closed at Phase 6 (a mood with memory; 0.3 ≈ 3-4 Cycles to settle; 1 = no memory, the pre-221 behaviour)', 0.05, 1, false]
 ];

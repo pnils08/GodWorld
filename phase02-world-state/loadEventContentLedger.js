@@ -47,6 +47,7 @@ var CONTENT_LEDGER_SOURCE_WHITELIST = {
   'source:identity': 1, 'source:listening': 1, 'source:groove': 1,
   'source:civicNews': 1, 'source:bias': 1, 'source:retirement': 1,
   'source:curiosity': 1, 'source:communityLife': 1,
+  'source:civicRole': 1,   // engine.286 Task 6: civicRole.* pools, drawn only by runCivicRoleEngine_
   // Live engine sources whose Daily fold is BY DESIGN (primaryFromTags
   // fall-through is the deliberate ambient route for these — see the S280
   // depth-step comment there). Whitelisted S298 so authored rows can extend

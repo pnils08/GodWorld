@@ -38,7 +38,6 @@ const ENGINES = [
   ['phase05-citizens/runEducationEngine.js', 'EDUCATION_TEXTURE_BY_CHARACTER_', 'EDUCATION_TEXTURE_BESPOKE_'],
   ['phase05-citizens/runHouseholdEngine.js', 'HOUSEHOLD_TEXTURE_BY_CHARACTER_', 'HOUSEHOLD_TEXTURE_BESPOKE_'],
   ['phase05-citizens/runAsUniversePipeline.js', 'POSTCAREER_TEXTURE_BY_CHARACTER_', 'POSTCAREER_TEXTURE_BESPOKE_'],
-  ['phase05-citizens/runCivicRoleEngine.js', 'CIVIC_NOTE_BY_CHARACTER_', 'CIVIC_NOTE_BESPOKE_'],
   ['phase05-citizens/generateCitizensEvents.js', 'CITIZEN_EVENT_TEXTURE_BY_CHARACTER_', 'CITIZEN_EVENT_TEXTURE_BESPOKE_'],
   ['phase05-citizens/generateCitizensEvents.js', 'CITIZEN_VENUES_BY_CHARACTER_', 'CITIZEN_VENUES_BESPOKE_'],
   ['phase05-citizens/generateCitizensEvents.js', 'CITIZEN_INSTITUTIONS_BY_CHARACTER_', 'CITIZEN_INSTITUTIONS_BESPOKE_'],

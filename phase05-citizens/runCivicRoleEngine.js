@@ -1,123 +1,218 @@
 /**
  * ============================================================================
- * Civic Role Engine v2.3
+ * Civic Role Engine v3.0
  * ============================================================================
  *
- * v2.3 (S204 B2 / 2026-05-06):
- * - LifeHistory_Log appendRow → queueAppendIntent_ (Phase 42 B2 mechanical
- *   migration). Mirrors S184 B0 runHouseholdEngine pattern. logSheet handle
- *   + ctx.ss removed; single caller (godWorldEngine2 Phase5-CivicRole).
+ * v3.0 (engine.286 Task 6 / builder rulings 2026-10-09):
+ * - One weighted event per Active CIV citizen per Cycle, drawn from what is
+ *   happening in the citizen's own hood this Cycle — never a re-narration of
+ *   what the city-hall crons or civic-mode already carry.
+ * - The roll is sign (up / down) then weight band (S / M / L). The hood premise
+ *   leans the sign; aura (office Approval as the week opened, Tier, Famous)
+ *   raises the odds of the M and L bands. A down draw is the cron's obstacle.
+ * - Non-canon-altering: writes only the LifeHistory line + LastUpdated, the
+ *   LifeHistory_Log intent, and (public premises) the hood pulse. Dials move
+ *   downstream through the graded CivicRole tags in citizenDialMap.js.
+ * - Text: ECL pools `civicRole.<premise>.<up|down>` (unconditioned, slot-free
+ *   lines) when authored, the hardcoded pools below otherwise.
+ * - Retired/resigned/scandal status lines removed — office facts belong to
+ *   civic-mode and approval. Called after Phase5-BusinessDynamics so the
+ *   business premise is this Cycle's.
+ * Plan: docs/plans/2026-10-08-engine-286-game-of-life-events.md Task 6 (T6-1..T6-7).
  *
- * Calendar-aware, sentiment-aware, weather-aware civic status observer.
- * Logs CIV citizens with contextual civic notes.
- * Preserves Maker authority. Never modifies status.
- * 
- * v2.2 Enhancements:
- * - Expanded to 12 neighborhoods
- * - First Friday civic presence
- * - Creation Day civic reflection
- * - Cultural activity and community engagement modifiers
- * - Aligned with GodWorld Calendar v1.0
- *
- * Oakland civic context integrated.
- * 
+ * v2.3 (S204 B2 / 2026-05-06): LifeHistory_Log appendRow → queueAppendIntent_.
  * ============================================================================
  */
 
-// ═══════════════════════════════════════════════════════════════════════════
-// engine.148 P3 — civic note pools (was a 12-key literal, ten hoods silent)
-// Every hood gets the pool for its Neighborhood_Map.EmployerCharacter label
-// (a label with no pool throws); the twelve original hoods keep their bespoke
-// lines on top. Resolved by hoodTexturePool_ (canonNeighborhoodLoader.js).
-// ═══════════════════════════════════════════════════════════════════════════
-var CIVIC_NOTE_BY_CHARACTER_ = {
-  'institutional': ["Civic activity continues in the government district.", "Public offices report steady business.", "Administrative matters proceeding nearby."],
-  'clinic': ["Health-access matters under discussion locally.", "Clinic capacity remains a neighborhood concern.", "Community health initiatives continue."],
-  'schools-retail': ["School and main-street matters under review.", "Neighborhood association activity noted.", "Local business and school coordination continues."],
-  'campus': ["Campus and neighborhood coordination ongoing.", "Development matters in focus near the campus.", "Community planning discussions continue."],
-  'transit-retail': ["Transit-corridor matters under discussion.", "Station-area planning continues.", "Local merchant concerns noted."],
-  'nightlife': ["Nightlife and noise matters under review.", "Entertainment district coordination active.", "Local permitting discussions continue."],
-  'professional': ["Neighborhood association activity ongoing.", "Local business matters under review.", "Community planning discussions continue."],
-  'residential': ["Quiet civic engagement on the residential blocks.", "Neighborhood matters progressing steadily.", "Local initiatives moving forward."],
-  'retail': ["Retail district matters under review.", "Merchant association activity noted.", "Local business affairs addressed."],
-  'medical': ["Hospital-district civic matters in focus.", "Health infrastructure discussions ongoing.", "Community health coordination continues."],
-  'family-retail': ["Cultural preservation matters in focus.", "Community civic engagement active on the market street.", "Family business affairs addressed."],
-  'mixed': ["Mixed-use block matters under discussion.", "Neighborhood civic engagement continues.", "Local zoning discussions noted."],
-  'village-retail': ["Village main-street matters reviewed.", "Neighborhood association activity noted.", "Community planning discussions ongoing."],
-  'service-labor': ["Workforce and transit matters under discussion.", "Community civic engagement active.", "Local service concerns addressed."],
-  'arts': ["Creative district civic matters addressed.", "Community arts initiatives proceeding.", "Local cultural affairs receiving attention."],
-  'stadium': ["Arena-district coordination active.", "Event-day planning matters under review.", "Development civic matters in focus."],
-  'construction': ["Development and permitting matters in focus.", "Construction impact discussions ongoing.", "Community development meetings continue."]
+// World_Config keys (engine94SheetContract.js ENGINE286_CONFIG_SEEDS) — a missing one throws.
+var CIVIC_ROLE_REQUIRED_KEYS = [
+  'civicRoleUpChance',      // base chance the draw is up, before the premise lean
+  'civicRolePremiseLean',   // how far a good / bad hood premise moves the up chance
+  'civicRoleMediumOdds',    // base odds of a medium-weight event (aura 1)
+  'civicRoleLargeOdds'      // base odds of a large-weight event (aura 1)
+];
+
+// Aura — a general citizen is 1.0; every CIV citizen sits above that.
+var CIVIC_ROLE_AURA_BASE_ = 1.2;
+var CIVIC_ROLE_AURA_APPROVAL_ = 0.8;   // × Approval / 100 (when the office row has one)
+var CIVIC_ROLE_AURA_TIER_ = { 1: 0.6, 2: 0.4, 3: 0.2, 4: 0 };
+var CIVIC_ROLE_AURA_FAMOUS_ = 0.5;
+var CIVIC_ROLE_SMALL_FLOOR_ = 0.1;     // aura never squeezes the small band below this
+
+// Premise texts; {hood} is the citizen's neighborhood. Hood obstacles and lifts —
+// never a vote, scandal, resignation, construction completion or office action.
+var CIVIC_ROLE_TEXT_ = {
+  business: {
+    up: [
+      "Merchants on the {hood} corridor stopped them to say business is picking up.",
+      "A shop owner in {hood} pulled them aside to talk about a good run of weeks.",
+      "Busy sidewalks in {hood} — a few business owners wanted them to see it."
+    ],
+    down: [
+      "Walked past a shuttered storefront in {hood}; a neighbor wanted to know what comes next for the block.",
+      "Shop owners in {hood} pressed them about slow weeks on the corridor.",
+      "A merchant in {hood} cornered them about rent and thin foot traffic."
+    ]
+  },
+  safety: {
+    up: [
+      "Neighbors in {hood} mentioned the blocks have felt calmer lately.",
+      "A resident in {hood} said they walk home at night without thinking twice now.",
+      "Parents in {hood} told them the park feels safe again."
+    ],
+    down: [
+      "A resident in {hood} stopped them about break-ins on their street.",
+      "Neighbors in {hood} wanted answers about the trouble on the block this week.",
+      "A shop owner in {hood} showed them the damage from a rough night."
+    ]
+  },
+  initiative: {
+    up: [
+      "Residents in {hood} noticed the city project moving forward and said so.",
+      "A neighbor in {hood} asked them about the city project and liked what they heard.",
+      "People in {hood} were talking about the city work nearby — mostly good."
+    ],
+    down: [
+      "People in {hood} complained the city project nearby is making the block harder to live with.",
+      "A resident in {hood} wanted to know why the city work nearby keeps dragging on.",
+      "Got an earful in {hood} about how the city project is landing on the block."
+    ]
+  },
+  mood: {
+    up: [
+      "A good week on the {hood} blocks — people waved them down just to chat.",
+      "The mood in {hood} was easy this week; conversations ran long.",
+      "{hood} felt warm this week; neighbors were glad to see them."
+    ],
+    down: [
+      "Tension on the {hood} blocks this week; conversations ran short and sharp.",
+      "{hood} felt on edge this week, and people let them know it.",
+      "A sour week in {hood}; a neighbor said nobody at the city is listening."
+    ]
+  },
+  everyday: {
+    up: [
+      "A neighbor in {hood} thanked them for showing up around the block.",
+      "Someone in {hood} recognized them at the corner store and said keep going.",
+      "An old acquaintance in {hood} stopped them to say they are doing right by the neighborhood."
+    ],
+    down: [
+      "Got an earful from a neighbor in {hood} who feels nobody listens.",
+      "A resident in {hood} told them flatly they had not seen them around enough.",
+      "A neighbor in {hood} brought up an old promise they felt was never kept."
+    ]
+  }
 };
 
-var CIVIC_NOTE_BESPOKE_ = {
-  'Downtown': [
-    "City Hall activity continues in Downtown.",
-    "Civic presence noted in the government district.",
-    "Administrative matters proceeding at City Hall."
-  ],
-  'Fruitvale': [
-    "Community civic engagement active in Fruitvale.",
-    "Local civic matters addressed in Fruitvale.",
-    "Neighborhood council activity in Fruitvale."
-  ],
-  'West Oakland': [
-    "Infrastructure discussions ongoing in West Oakland.",
-    "Development civic matters in focus.",
-    "Community development meetings continue."
-  ],
-  'Temescal': [
-    "Community board activity noted in Temescal.",
-    "Local civic engagement continues.",
-    "Neighborhood matters under discussion."
-  ],
-  'Lake Merritt': [
-    "Parks and recreation civic matters active.",
-    "Civic presence around Lake Merritt noted.",
-    "Lakeside community initiatives proceeding."
-  ],
-  'Rockridge': [
-    "Neighborhood association activity in Rockridge.",
-    "Local civic matters under review.",
-    "Community planning discussions ongoing."
-  ],
-  'Laurel': [
-    "Quiet civic engagement in Laurel district.",
-    "Community matters progressing steadily.",
-    "Local initiatives moving forward."
-  ],
-  'Jack London': [
-    "Waterfront civic development discussions ongoing.",
-    "Arts district civic matters in focus.",
-    "Maritime and development coordination continues."
-  ],
-  'Uptown': [
-    "Arts district civic coordination active.",
-    "Cultural affairs receiving civic attention.",
-    "Urban development matters under review."
-  ],
-  'KONO': [
-    "Creative district civic matters addressed.",
-    "Community arts initiatives proceeding.",
-    "Local zoning discussions continue."
-  ],
-  'Chinatown': [
-    "Cultural preservation matters in focus.",
-    "Community civic engagement active in Chinatown.",
-    "Neighborhood business affairs addressed."
-  ],
-  'Piedmont Ave': [
-    "Local business district matters reviewed.",
-    "Neighborhood association activity noted.",
-    "Community planning discussions ongoing."
-  ]
-};
+// Premises that have a public footprint pulse the hood; mood / everyday do not.
+var CIVIC_ROLE_PUBLIC_ = { business: true, safety: true, initiative: true };
+
+function civicRoleConfig_(ctx) {
+  var cfg = (ctx && ctx.config) || {};
+  var out = {}, missing = [];
+  for (var i = 0; i < CIVIC_ROLE_REQUIRED_KEYS.length; i++) {
+    var k = CIVIC_ROLE_REQUIRED_KEYS[i];
+    var v = cfg[k];
+    if (v === undefined || v === null || v === '' || isNaN(Number(v))) missing.push(k);
+    else out[k] = Number(v);
+  }
+  if (missing.length) throw new Error('runCivicRoleEngine_: World_Config missing ' + missing.join(', ') + ' (engine.286 keys — ensureEngine286Config_ self-arms them at open)');
+  return out;
+}
+
+// POPID -> highest office Approval as the week opened (pre-queue sheet value). Missing = absent key.
+function civicRoleApprovalByPop_(ctx) {
+  var out = {};
+  var sheet = ctx.ss ? ctx.ss.getSheetByName('Civic_Office_Ledger') : null;
+  if (!sheet) return out;
+  var v = sheet.getDataRange().getValues();
+  if (!v || v.length < 2) return out;
+  var h = v[0], iPop = -1, iAppr = -1;
+  for (var c = 0; c < h.length; c++) {
+    var hn = String(h[c]).trim().toLowerCase();
+    if (hn === 'popid') iPop = c;
+    else if (hn === 'approval') iAppr = c;
+  }
+  if (iPop < 0 || iAppr < 0) return out;
+  for (var r = 1; r < v.length; r++) {
+    var pop = String(v[r][iPop] || '').trim();
+    var a = v[r][iAppr];
+    if (!pop || a === '' || a === null || isNaN(Number(a))) continue;
+    a = Number(a);
+    if (!out.hasOwnProperty(pop) || a > out[pop]) out[pop] = a;
+  }
+  return out;
+}
+
+function civicRoleAura_(approval, tier, famous) {
+  var aura = CIVIC_ROLE_AURA_BASE_;
+  if (approval !== null && approval !== undefined) aura += CIVIC_ROLE_AURA_APPROVAL_ * Math.max(0, Math.min(100, approval)) / 100;
+  aura += CIVIC_ROLE_AURA_TIER_[tier] || 0;
+  if (famous) aura += CIVIC_ROLE_AURA_FAMOUS_;
+  return aura;
+}
+
+// Candidate premises for one hood this Cycle: [{ key, lean }] — lean +1 good, -1 bad, 0 neutral.
+function civicRolePremises_(S, hood) {
+  var out = [];
+  var mom = S.hoodBusinessMomentum && S.hoodBusinessMomentum[hood];
+  var closedHere = 0, cl = S.businessClosures || [];
+  for (var i = 0; i < cl.length; i++) if (cl[i] && cl[i].hood === hood) closedHere++;
+  if (closedHere > 0) out.push({ key: 'business', lean: -1 });
+  else if (mom && mom.growth >= 2) out.push({ key: 'business', lean: 1 });
+  else if (mom && mom.growth <= -2) out.push({ key: 'business', lean: -1 });
+
+  var crime = S.crimeMetrics && S.crimeMetrics.context && S.crimeMetrics.context.byHood && S.crimeMetrics.context.byHood[hood];
+  if (crime && crime.trend === 'rising') out.push({ key: 'safety', lean: -1 });
+  else if (crime && crime.trend === 'falling') out.push({ key: 'safety', lean: 1 });
+
+  var ie = S.initiativeNeighborhoodEffects && S.initiativeNeighborhoodEffects[hood];
+  if (ie && ie.advanced > 0) out.push({ key: 'initiative', lean: 1 });
+  else if (ie && ie.sentiment < 0) out.push({ key: 'initiative', lean: -1 });
+
+  var nd = S.neighborhoodDynamics && S.neighborhoodDynamics[hood];
+  if (nd && nd.sentiment >= 0.3) out.push({ key: 'mood', lean: 1 });
+  else if (nd && nd.sentiment <= -0.3) out.push({ key: 'mood', lean: -1 });
+
+  if (!out.length) out.push({ key: 'everyday', lean: 0 });
+  return out;
+}
+
+// ECL lines for civicRole.<premise>.<dir>: slot-free and unconditioned only (no evaluator here).
+function civicRoleEclLines_(S, premise, dir) {
+  var cl = S.contentLedger && S.contentLedger.lines;
+  var lines = cl && cl['civicRole.' + premise + '.' + dir];
+  var out = [];
+  if (!lines) return out;
+  for (var i = 0; i < lines.length; i++) {
+    var e = lines[i];
+    if (!e || !e.text || String(e.text).indexOf('$') >= 0) continue;
+    if (e.conditions && e.conditions.length) continue;
+    out.push({ text: String(e.text), weight: Number(e.weight) > 0 ? Number(e.weight) : 1 });
+  }
+  return out;
+}
+
+function civicRolePickText_(rng, S, premise, dir) {
+  var pool = civicRoleEclLines_(S, premise, dir);
+  if (!pool.length) {
+    var hard = CIVIC_ROLE_TEXT_[premise][dir];
+    for (var i = 0; i < hard.length; i++) pool.push({ text: hard[i], weight: 1 });
+  }
+  var total = 0;
+  for (var j = 0; j < pool.length; j++) total += pool[j].weight;
+  var roll = rng() * total;
+  for (var k = 0; k < pool.length; k++) {
+    roll -= pool[k].weight;
+    if (roll < 0) return pool[k].text;
+  }
+  return pool[pool.length - 1].text;
+}
 
 function runCivicRoleEngine_(ctx) {
 
   var rng = safeRand_(ctx);
   // Phase 42 §5.6: SL read/mutate via shared ctx.ledger; commit at Phase 10.
-  // LifeHistory_Log handle removed S204 B2 — appends route through queueAppendIntent_.
   if (!ctx.ledger) {
     throw new Error('runCivicRoleEngine_: ctx.ledger not initialized');
   }
@@ -125,6 +220,7 @@ function runCivicRoleEngine_(ctx) {
   var rows = ctx.ledger.rows;
   if (!rows.length) return;
 
+  var cfg = civicRoleConfig_(ctx);
   var idx = function(n) { return header.indexOf(n); };
 
   var iPopID = idx('POPID');
@@ -135,268 +231,70 @@ function runCivicRoleEngine_(ctx) {
   var iLife = idx('LifeHistory');
   var iLastUpd = idx('LastUpdated');
   var iNeighborhood = idx('Neighborhood');
-  // engine.266 (builder 2026-09-28): TierRole never existed — RoleType drives the role-specific civic notes.
-  var iTierRole = idx('TierRole') >= 0 ? idx('TierRole') : idx('RoleType');
+  var iTier = idx('Tier');
+  var iFamous = idx('Famous');
 
-  // ═══════════════════════════════════════════════════════════════════════════
-  // PULL WORLD CONDITIONS
-  // ═══════════════════════════════════════════════════════════════════════════
   var S = ctx.summary;
-  var season = S.season;
-  var holiday = S.holiday || "none";
-  var holidayPriority = S.holidayPriority || "none";
-  var isFirstFriday = S.isFirstFriday || false;
-  var isCreationDay = S.isCreationDay || false;
-  var weather = S.weather || { type: "clear", impact: 1 };
-  var weatherMood = S.weatherMood || {};
-  var chaos = S.worldEvents || [];
-  var dynamics = S.cityDynamics || {
-    sentiment: 0, culturalActivity: 1, communityEngagement: 1
-  };
-  var econMood = S.economicMood || 50;
   var cycle = S.absoluteCycle || S.cycleId || ctx.config.cycleCount || 0;
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // NEIGHBORHOOD CIVIC NOTES (12 neighborhoods - v2.2)
-  // ═══════════════════════════════════════════════════════════════════════════
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // ROLE-SPECIFIC CIVIC NOTES
-  // ═══════════════════════════════════════════════════════════════════════════
-  var roleCivicNotes = {
-    'council': [
-      "Council responsibilities continue.",
-      "Legislative matters under consideration.",
-      "Council session activity noted."
-    ],
-    'mayor': [
-      "Executive civic duties ongoing.",
-      "City leadership matters in focus.",
-      "Mayoral initiatives proceeding."
-    ],
-    'commissioner': [
-      "Commission oversight continues.",
-      "Regulatory matters under review.",
-      "Commission hearings proceeding."
-    ],
-    'director': [
-      "Department operations proceeding.",
-      "Administrative civic duties ongoing.",
-      "Departmental coordination continues."
-    ],
-    'chief': [
-      "Department leadership active.",
-      "Operational oversight continues.",
-      "Executive department matters addressed."
-    ],
-    'superintendent': [
-      "Educational oversight continues.",
-      "School district matters in focus.",
-      "Administrative duties proceeding."
-    ],
-    'attorney': [
-      "Legal civic matters under review.",
-      "City legal affairs proceeding.",
-      "Legal counsel duties ongoing."
-    ]
-  };
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // HOLIDAY-SPECIFIC CIVIC NOTES (v2.2)
-  // ═══════════════════════════════════════════════════════════════════════════
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // FIRST FRIDAY CIVIC NOTES (v2.2)
-  // ═══════════════════════════════════════════════════════════════════════════
-  var firstFridayCivicNotes = [
-    "First Friday cultural affairs oversight maintained.",
-    "Arts community civic engagement noted.",
-    "Cultural district coordination continues.",
-    "Community arts programming supported."
-  ];
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // CREATION DAY CIVIC NOTES (v2.2)
-  // ═══════════════════════════════════════════════════════════════════════════
-  var creationDayCivicNotes = [
-    "Reflected on the city's foundational values.",
-    "Civic responsibilities feel particularly meaningful today.",
-    "Sense of duty to community origins renewed.",
-    "Foundational civic commitments reaffirmed."
-  ];
-
+  var approvalByPop = civicRoleApprovalByPop_(ctx);
   var events = 0;
-  var LIMIT = 6;
 
-  // ═══════════════════════════════════════════════════════════════════════════
-  // ITERATE THROUGH CITIZENS
-  // ═══════════════════════════════════════════════════════════════════════════
   for (var r = 0; r < rows.length; r++) {
-
-    if (events >= LIMIT) break;
-
     var row = rows[r];
     var civFlag = (row[iCIV] || "").toString().trim().toLowerCase();
     if (civFlag !== "y" && civFlag !== "yes" && civFlag !== "true") continue;
-
     var status = (row[iStatus] || "").toString().trim().toLowerCase();
+    if (status !== "active") continue;
+
+    var pop = String(row[iPopID] || '').trim();
     var name = (row[iFirst] + " " + row[iLast]).trim();
-    var neighborhood = iNeighborhood >= 0 ? (row[iNeighborhood] || '') : '';
-    var tierRole = iTierRole >= 0 ? (row[iTierRole] || '').toString().toLowerCase() : '';
+    var neighborhood = iNeighborhood >= 0 ? String(row[iNeighborhood] || '').trim() : '';
+    if (!neighborhood) continue;   // no hood, no hood premise
+    var tier = iTier >= 0 ? Number(row[iTier]) : 4;
+    var famousCell = iFamous >= 0 ? String(row[iFamous] || '').trim().toLowerCase() : '';
+    var famous = famousCell === 'y' || famousCell === 'yes' || famousCell === 'true';
+    var approval = approvalByPop.hasOwnProperty(pop) ? approvalByPop[pop] : null;
 
-    var baseNote = "";
-    var shouldLog = false;
+    // Premise → sign → band (aura) → text.
+    var premises = civicRolePremises_(S, neighborhood);
+    var premise = premises[Math.floor(rng() * premises.length)];
+    var upChance = cfg.civicRoleUpChance + premise.lean * cfg.civicRolePremiseLean;
+    upChance = Math.max(0.05, Math.min(0.95, upChance));
+    var dir = rng() < upChance ? 'up' : 'down';
 
-    // ═══════════════════════════════════════════════════════════════════════
-    // MAKER-DEFINED CIVIC STATUSES
-    // ═══════════════════════════════════════════════════════════════════════
-    if (status === "retired") {
-      baseNote = "Civic role recorded as retired.";
-      shouldLog = true;
-    }
-    else if (status === "resigned") {
-      baseNote = "Civic role recorded as resigned.";
-      shouldLog = true;
-    }
-    else if (status === "scandal") {
-      baseNote = "Civic figure listed under scandal.";
-      shouldLog = true;
-    }
-    else if (status === "active") {
-      // Active CIV citizens get occasional soft civic notes
-      var chance = 0.015;
+    var aura = civicRoleAura_(approval, tier, famous);
+    var pL = cfg.civicRoleLargeOdds * aura;
+    var pM = cfg.civicRoleMediumOdds * aura;
+    var room = 1 - CIVIC_ROLE_SMALL_FLOOR_;
+    if (pL + pM > room) { var squeeze = room / (pL + pM); pL *= squeeze; pM *= squeeze; }
+    var bandRoll = rng();
+    var band = bandRoll < pL ? 'L' : (bandRoll < pL + pM ? 'M' : 'S');
 
-      // Base modifiers
-      if (chaos.length > 0) chance += 0.01;
-      if (dynamics.sentiment <= -0.3) chance += 0.01;
-      if (econMood <= 35) chance += 0.005;
-      if (season === "Fall") chance += 0.005; // Election season
-
-      // Holiday priority boost (v2.2)
-      if (holidayPriority === "major") chance += 0.01;
-      else if (holidayPriority === "cultural") chance += 0.008;
-      else if (holidayPriority === "oakland") chance += 0.008;
-
-      // Civic holidays boost (v2.2)
-
-      // First Friday boost (v2.2)
-      if (isFirstFriday) chance += 0.008;
-
-      // Creation Day boost (v2.2)
-      if (isCreationDay) chance += 0.01;
-
-      // Community engagement boost (v2.2)
-      if (dynamics.communityEngagement >= 1.3) chance += 0.005;
-
-      if (chance > 0.08) chance = 0.08;
-
-      if (rng() < chance) {
-        // Build pool of civic notes
-        var pool = [
-          "Continuing civic responsibilities.",
-          "Public engagement ongoing.",
-          "Civic duties proceeding normally."
-        ];
-
-        // Add role-specific notes
-        var roleKeys = Object.keys(roleCivicNotes);
-        for (var k = 0; k < roleKeys.length; k++) {
-          var roleKey = roleKeys[k];
-          if (tierRole.indexOf(roleKey) >= 0) {
-            pool = pool.concat(roleCivicNotes[roleKey]);
-            break;
-          }
-        }
-
-        // Add neighborhood-specific notes
-        pool = pool.concat(hoodTexturePool_(ctx, neighborhood, CIVIC_NOTE_BY_CHARACTER_, CIVIC_NOTE_BESPOKE_, 'runCivicRoleEngine_'));
-
-        // Add holiday-specific notes (v2.2)
-
-        // Add First Friday notes (v2.2)
-        if (isFirstFriday) {
-          pool = pool.concat(firstFridayCivicNotes);
-        }
-
-        // Add Creation Day notes (v2.2)
-        if (isCreationDay) {
-          pool = pool.concat(creationDayCivicNotes);
-        }
-
-        baseNote = pool[Math.floor(rng() * pool.length)];
-        shouldLog = true;
-      }
-    }
-
-    if (!shouldLog) continue;
-
-    // ═══════════════════════════════════════════════════════════════════════
-    // CONTEXTUAL MODIFIERS
-    // ═══════════════════════════════════════════════════════════════════════
-    var context = "";
-
-    // Season influence
-    if (season === "Spring") context += " Spring civic activity increases attention.";
-    if (season === "Fall") context += " Fall civic cycle heightens public interest.";
-
-    // Holiday influence (expanded v2.2)
-
-    // First Friday influence (v2.2)
-    if (isFirstFriday) context += " First Friday brings cultural civic focus.";
-
-    // Creation Day influence (v2.2)
-    if (isCreationDay) context += " Foundational day deepens civic meaning.";
-
-    // Weather influence
-    if (weather.type === "rain") context += " Rainy conditions tempered public engagement.";
-    if (weather.type === "fog") context += " Foggy conditions muted civic presence.";
-
-    // Weather mood
-    if (weatherMood.irritabilityFactor && weatherMood.irritabilityFactor > 0.3) {
-      context += " Public mood shows strain.";
-    }
-
-    // Chaos influence
-    if (chaos.length > 0) context += " Recent events shifted civic atmosphere.";
-
-    // Public sentiment
-    if (dynamics.sentiment >= 0.3) context += " Public sentiment remains positive.";
-    if (dynamics.sentiment <= -0.3) context += " Public sentiment shows tension.";
-
-    // Community engagement (v2.2)
-    if (dynamics.communityEngagement >= 1.4) context += " High community engagement noted.";
-
-    // Cultural activity (v2.2)
-    if (dynamics.culturalActivity >= 1.4) context += " Cultural vibrancy enhances civic atmosphere.";
-
-    // Economic context
-    if (econMood <= 35) context += " Economic concerns affect civic priorities.";
-    if (econMood >= 65) context += " Economic optimism supports civic agenda.";
+    var tag = 'CivicRole-' + (dir === 'up' ? 'Up' : 'Down') + '-' + band;
+    // A draw against the premise (a down week where crime is falling) stays true to the hood:
+    // the text is an everyday moment and the hood is not pulsed against its own fact.
+    var against = premise.lean !== 0 && (dir === 'up' ? -1 : 1) === premise.lean;
+    var textKey = against ? 'everyday' : premise.key;
+    var text = civicRolePickText_(rng, S, textKey, dir).replace(/\{hood\}/g, neighborhood);
 
     var stamp = inWorldStamp_(ctx);
-
     var existing = row[iLife] ? row[iLife].toString() : "";
-    var finalLine = stamp + " — [Civic Role] " + baseNote + context;
-
+    var finalLine = stamp + " — [" + tag + "] " + text;
     row[iLife] = existing ? existing + "\n" + finalLine : finalLine;
     row[iLastUpd] = ctx.now;
 
-    // Log to LifeHistory_Log
     queueAppendIntent_(
       ctx,
       'LifeHistory_Log',
-      [
-        ctx.now,
-        row[iPopID],
-        name,
-        "CivicRole",
-        baseNote + context,
-        neighborhood,
-        cycle
-      ],
+      [ctx.now, row[iPopID], name, tag, text, neighborhood, cycle],
       'civic role event',
       'citizens'
     );
+
+    // Public premises nudge the hood on the graded primary only (no prose / tag rules — T6-3).
+    if (!against && CIVIC_ROLE_PUBLIC_[premise.key] && typeof recordPulse_ === 'function') {
+      recordPulse_(S, neighborhood, tag, null, '');
+    }
 
     rows[r] = row;
     S.eventsGenerated = (S.eventsGenerated || 0) + 1;
@@ -407,25 +305,15 @@ function runCivicRoleEngine_(ctx) {
   if (events > 0) {
     ctx.ledger.dirty = true;
   }
-
-  // Summary
-  S.civicRoleEvents = events;
   ctx.summary = S;
 }
 
-
-/**
- * ============================================================================
- * CIVIC HOLIDAY REFERENCE
- * ============================================================================
- * 
- * Holiday             | Civic Notes
- * ─────────────────────────────────────────────────────────────────────────
- * 
- * ============================================================================
- * 
- * ROLE KEYWORDS:
- * council, mayor, commissioner, director, chief, superintendent, attorney
- * 
- * ============================================================================
- */
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = {
+    runCivicRoleEngine_: runCivicRoleEngine_,
+    civicRolePremises_: civicRolePremises_,
+    civicRoleAura_: civicRoleAura_,
+    CIVIC_ROLE_REQUIRED_KEYS: CIVIC_ROLE_REQUIRED_KEYS,
+    CIVIC_ROLE_TEXT_: CIVIC_ROLE_TEXT_
+  };
+}

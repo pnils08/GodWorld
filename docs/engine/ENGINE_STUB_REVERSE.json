@@ -1,8 +1,8 @@
 {
-  "generated": "2026-10-08",
+  "generated": "2026-10-09",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 180,
-  "functionsMapped": 1646,
+  "functionsMapped": 1653,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -142,7 +142,6 @@
         "phase05-citizens/generateMediaModeEvents.js::generateMediaModeEvents_",
         "phase05-citizens/runAsUniversePipeline.js::runAsUniversePipeline_",
         "phase05-citizens/runCareerEngine.js::runCareerEngine_",
-        "phase05-citizens/runCivicRoleEngine.js::runCivicRoleEngine_",
         "phase05-citizens/runEducationEngine.js::runEducationEngine_",
         "phase05-citizens/runHouseholdEngine.js::runHouseholdEngine_",
         "phase05-citizens/runNeighborhoodEngine.js::runNeighborhoodEngine_",
@@ -251,7 +250,6 @@
         "phase05-citizens/generateMediaModeEvents.js::generateMediaModeEvents_",
         "phase05-citizens/runAsUniversePipeline.js::runAsUniversePipeline_",
         "phase05-citizens/runCareerEngine.js::runCareerEngine_",
-        "phase05-citizens/runCivicRoleEngine.js::runCivicRoleEngine_",
         "phase05-citizens/runEducationEngine.js::runEducationEngine_",
         "phase05-citizens/runHouseholdEngine.js::runHouseholdEngine_",
         "phase05-citizens/runNeighborhoodEngine.js::runNeighborhoodEngine_",
@@ -320,7 +318,6 @@
         "phase05-citizens/generateGenericCitizens.js::generateGenericCitizens_",
         "phase05-citizens/runAsUniversePipeline.js::runAsUniversePipeline_",
         "phase05-citizens/runCareerEngine.js::runCareerEngine_",
-        "phase05-citizens/runCivicRoleEngine.js::runCivicRoleEngine_",
         "phase05-citizens/runEducationEngine.js::runEducationEngine_",
         "phase05-citizens/runHouseholdEngine.js::runHouseholdEngine_",
         "phase05-citizens/runNeighborhoodEngine.js::runNeighborhoodEngine_",
@@ -389,7 +386,6 @@
         "phase05-citizens/generateGenericCitizens.js::generateGenericCitizens_",
         "phase05-citizens/runAsUniversePipeline.js::runAsUniversePipeline_",
         "phase05-citizens/runCareerEngine.js::runCareerEngine_",
-        "phase05-citizens/runCivicRoleEngine.js::runCivicRoleEngine_",
         "phase05-citizens/runEducationEngine.js::runEducationEngine_",
         "phase05-citizens/runHouseholdEngine.js::runHouseholdEngine_",
         "phase05-citizens/runNeighborhoodEngine.js::runNeighborhoodEngine_",
@@ -475,7 +471,6 @@
         "phase05-citizens/generateGenericCitizens.js::generateGenericCitizens_",
         "phase05-citizens/runAsUniversePipeline.js::runAsUniversePipeline_",
         "phase05-citizens/runCareerEngine.js::runCareerEngine_",
-        "phase05-citizens/runCivicRoleEngine.js::runCivicRoleEngine_",
         "phase05-citizens/runEducationEngine.js::runEducationEngine_",
         "phase05-citizens/runHouseholdEngine.js::runHouseholdEngine_",
         "phase05-citizens/runNeighborhoodEngine.js::runNeighborhoodEngine_",
@@ -563,7 +558,6 @@
         "phase05-citizens/generateMediaModeEvents.js::generateMediaModeEvents_",
         "phase05-citizens/runAsUniversePipeline.js::runAsUniversePipeline_",
         "phase05-citizens/runCareerEngine.js::runCareerEngine_",
-        "phase05-citizens/runCivicRoleEngine.js::runCivicRoleEngine_",
         "phase05-citizens/runEducationEngine.js::runEducationEngine_",
         "phase05-citizens/runHouseholdEngine.js::runHouseholdEngine_",
         "phase05-citizens/runNeighborhoodEngine.js::runNeighborhoodEngine_",
@@ -622,7 +616,6 @@
         "phase05-citizens/generateGenericCitizens.js::generateGenericCitizens_",
         "phase05-citizens/runAsUniversePipeline.js::runAsUniversePipeline_",
         "phase05-citizens/runCareerEngine.js::runCareerEngine_",
-        "phase05-citizens/runCivicRoleEngine.js::runCivicRoleEngine_",
         "phase05-citizens/runEducationEngine.js::runEducationEngine_",
         "phase05-citizens/runHouseholdEngine.js::runHouseholdEngine_",
         "phase05-citizens/runNeighborhoodEngine.js::runNeighborhoodEngine_",
@@ -1209,7 +1202,6 @@
         "phase05-citizens/generateMediaModeEvents.js::generateMediaModeEvents_",
         "phase05-citizens/runAsUniversePipeline.js::runAsUniversePipeline_",
         "phase05-citizens/runCareerEngine.js::runCareerEngine_",
-        "phase05-citizens/runCivicRoleEngine.js::runCivicRoleEngine_",
         "phase05-citizens/runEducationEngine.js::runEducationEngine_",
         "phase05-citizens/runHouseholdEngine.js::runHouseholdEngine_",
         "phase05-citizens/runNeighborhoodEngine.js::runNeighborhoodEngine_",
@@ -1384,7 +1376,6 @@
         "phase05-citizens/generateGenericCitizens.js::generateGenericCitizens_",
         "phase05-citizens/runAsUniversePipeline.js::runAsUniversePipeline_",
         "phase05-citizens/runCareerEngine.js::runCareerEngine_",
-        "phase05-citizens/runCivicRoleEngine.js::runCivicRoleEngine_",
         "phase05-citizens/runEducationEngine.js::runEducationEngine_",
         "phase05-citizens/runHouseholdEngine.js::runHouseholdEngine_",
         "phase05-citizens/runNeighborhoodEngine.js::runNeighborhoodEngine_",
@@ -1775,7 +1766,6 @@
         "phase05-citizens/generateGenericCitizens.js::generateGenericCitizens_",
         "phase05-citizens/runAsUniversePipeline.js::runAsUniversePipeline_",
         "phase05-citizens/runCareerEngine.js::runCareerEngine_",
-        "phase05-citizens/runCivicRoleEngine.js::runCivicRoleEngine_",
         "phase05-citizens/runConductEngine.js::runConductEngine_",
         "phase05-citizens/runEducationEngine.js::runEducationEngine_",
         "phase05-citizens/runHouseholdEngine.js::runHouseholdEngine_",
@@ -1987,6 +1977,7 @@
         "phase03-population/updateCrimeMetrics.js::updateCrimeMetrics_Phase3_",
         "phase04-events/buildCityEvents.js::buildCityEvents_",
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
+        "phase05-citizens/runCivicRoleEngine.js::civicRolePremises_",
         "phase07-evening-media/applyStorySeeds.js::applyStorySeeds_",
         "phase07-evening-media/buildNightLife.js::buildNightlife_",
         "phase07-evening-media/cityEveningSystems.js::buildCityEveningSystems_",
@@ -2105,7 +2096,8 @@
         "phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_",
         "phase03-population/updateNeighborhoodDemographics.js::driftNeighborhoodEducation_",
         "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_",
-        "phase05-citizens/applyBusinessDynamics.test.js::ctxWith"
+        "phase05-citizens/applyBusinessDynamics.test.js::ctxWith",
+        "phase05-citizens/runCivicRoleEngine.js::civicRolePremises_"
       ]
     },
     "manualDynamicsInputs": {
@@ -2555,7 +2547,8 @@
       ],
       "readers": [
         "phase02-world-state/loadEventContentLedger.js::loadEventContentLedger_",
-        "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_"
+        "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
+        "phase05-citizens/runCivicRoleEngine.js::civicRoleEclLines_"
       ]
     },
     "undockedPilots": {
@@ -2780,6 +2773,7 @@
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
         "phase05-citizens/generateCivicModeEvents.js::generateCivicModeEvents_",
         "phase05-citizens/generateMediaModeEvents.js::generateMediaModeEvents_",
+        "phase05-citizens/runCivicRoleEngine.js::civicRolePremises_",
         "phase05-citizens/runConductEngine.js::runConductEngine_",
         "phase05-citizens/runYouthEngine.js::runYouthEngine_",
         "phase07-evening-media/applyStorySeeds.js::applyStorySeeds_",
@@ -3113,7 +3107,8 @@
       ],
       "readers": [
         "phase05-citizens/applyBusinessDynamics.js::archiveClosedBusinesses_",
-        "phase05-citizens/applyBusinessDynamics.test.js::ctxWith"
+        "phase05-citizens/applyBusinessDynamics.test.js::ctxWith",
+        "phase05-citizens/runCivicRoleEngine.js::civicRolePremises_"
       ]
     },
     "businessDeclines": {
@@ -3139,6 +3134,7 @@
         "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_"
       ],
       "readers": [
+        "phase05-citizens/runCivicRoleEngine.js::civicRolePremises_",
         "phase08-v3-chicago/v3NeighborhoodWriter.js::hoodBusinessCity_",
         "phase08-v3-chicago/v3NeighborhoodWriter.js::hoodBusinessFactor_"
       ]
@@ -3651,12 +3647,6 @@
     "careerEvents": {
       "writers": [
         "phase05-citizens/runCareerEngine.js::runCareerEngine_"
-      ],
-      "readers": []
-    },
-    "civicRoleEvents": {
-      "writers": [
-        "phase05-citizens/runCivicRoleEngine.js::runCivicRoleEngine_"
       ],
       "readers": []
     },
@@ -4534,6 +4524,7 @@
         "phase01-config/engine94SheetContract.js::ensureEngine272Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine275Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine276Config_",
+        "phase01-config/engine94SheetContract.js::ensureEngine286Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine94SheetContract_",
         "phase01-config/engine94SheetContract.js::ensureEngine95Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine96Config_",
@@ -4560,6 +4551,7 @@
         "phase05-citizens/civicInitiativeEngine.js::lookupAuthoringSeat_",
         "phase05-citizens/generateCivicModeEvents.js::buildOfficeLookup_",
         "phase05-citizens/generationalWealthEngine.js::updateHeritage_",
+        "phase05-citizens/runCivicRoleEngine.js::civicRoleApprovalByPop_",
         "phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_",
         "phase05-citizens/updateCivicLedgerFactions.js::getCouncilStateFromLedger_",
         "phase05-citizens/updateCivicLedgerFactions.js::updateCivicOfficeLedgerFactions_",

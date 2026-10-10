@@ -500,6 +500,7 @@ function runWorldCycleLocked_(ss, fire) {
     ensureEngine272Config_(ss);  // engine.272 integrity wear rate + floor (seeded off), same self-arm contract
     ensureEngine275Config_(ss);  // engine.275 fireGuardMinutes — the double-fire window, same self-arm contract
     ensureEngine209Config_(ss);  // engine.209 franchise-weight drift dials, same self-arm contract
+    ensureEngine286Config_(ss);  // engine.286 civic role sign / weight odds, same self-arm contract
     ensureEngine276Config_(ss);  // engine.276 debt line, rise/fall rates, drag cap, default chance + mark, same self-arm contract
     ensureEngine271Config_(ss);  // engine.271 fine rates and caps, property and business tax rates, tax day, thin-hood floor, same self-arm contract
     ensureEngine254Config_(ss);  // engine.254 Task 10 hospital talk-back window, band, gain, same self-arm contract
@@ -632,13 +633,13 @@ function runWorldCycleLocked_(ss, fire) {
   safePhaseCall_(ctx, 'Phase5-Relationships', function() { runRelationshipEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase5-Neighborhoods', function() { runNeighborhoodEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase5-Universe', function() { runAsUniversePipeline_(ctx); });
-  safePhaseCall_(ctx, 'Phase5-CivicRoles', function() { runCivicRoleEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase5-Initiatives', function() { runCivicInitiativeEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase5-ApprovalRatings', function() { updateCivicApprovalRatings_(ctx); });  // v1.0 S137b
   safePhaseCall_(ctx, 'Phase5-CivicModeEvents', function() { generateCivicModeEvents_(ctx); });
   safePhaseCall_(ctx, 'Phase5-MediaModeEvents', function() { generateMediaModeEvents_(ctx); });
 
   safePhaseCall_(ctx, 'Phase5-BusinessDynamics', function() { applyBusinessDynamics_(ctx); }); // engine.96 Task 5 — before Career so Task 6's decline records land in careerSignals
+  safePhaseCall_(ctx, 'Phase5-CivicRoles', function() { runCivicRoleEngine_(ctx); }); // engine.286 Task 6 — after business dynamics: this Cycle's closures + hood momentum are the premise
   safePhaseCall_(ctx, 'Phase5-Maneuver', function() { runManeuverEngine_(ctx); }); // engine.157 — the cycle's risk posture, before every Phase-5 roll that reads it (career, solo door, casino, home, relocation)
   safePhaseCall_(ctx, 'Phase5-Career', function() { runCareerEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase5-Education', function() { runEducationEngine_(ctx); });
@@ -2349,13 +2350,13 @@ function runCyclePhases_(ctx) {
   safePhaseCall_(ctx, 'Phase5-Relationships', function() { runRelationshipEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase5-Neighborhoods', function() { runNeighborhoodEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase5-Universe', function() { runAsUniversePipeline_(ctx); });
-  safePhaseCall_(ctx, 'Phase5-CivicRoles', function() { runCivicRoleEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase5-Initiatives', function() { runCivicInitiativeEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase5-ApprovalRatings', function() { updateCivicApprovalRatings_(ctx); });  // v1.0 S137b
   safePhaseCall_(ctx, 'Phase5-CivicModeEvents', function() { generateCivicModeEvents_(ctx); });
   safePhaseCall_(ctx, 'Phase5-MediaModeEvents', function() { generateMediaModeEvents_(ctx); });
 
   safePhaseCall_(ctx, 'Phase5-BusinessDynamics', function() { applyBusinessDynamics_(ctx); }); // engine.96 Task 5 — before Career so Task 6's decline records land in careerSignals
+  safePhaseCall_(ctx, 'Phase5-CivicRoles', function() { runCivicRoleEngine_(ctx); }); // engine.286 Task 6 — after business dynamics: this Cycle's closures + hood momentum are the premise
   safePhaseCall_(ctx, 'Phase5-Maneuver', function() { runManeuverEngine_(ctx); }); // engine.157 — the cycle's risk posture, before every Phase-5 roll that reads it (career, solo door, casino, home, relocation)
   safePhaseCall_(ctx, 'Phase5-Career', function() { runCareerEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase5-Education', function() { runEducationEngine_(ctx); });

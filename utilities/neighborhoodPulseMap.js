@@ -28,6 +28,13 @@ var PULSE_MAP = {
   // --- Community / neighborhood life ---
   'Community':          { sentiment: 2, attractiveness: 1 },
   'Neighborhood':       { sentiment: 1 },
+  // engine.286 Task 6: an official's public hood moment, graded by the roll
+  'CivicRole-Up-S':     { sentiment: 1 },
+  'CivicRole-Up-M':     { sentiment: 2 },
+  'CivicRole-Up-L':     { sentiment: 3 },
+  'CivicRole-Down-S':   { sentiment: -1 },
+  'CivicRole-Down-M':   { sentiment: -2 },
+  'CivicRole-Down-L':   { sentiment: -3 },
   'Mentorship':         { sentiment: 1 },
   'CivicRole':          { sentiment: 1 },
   'Civic Role':         { sentiment: 1 },

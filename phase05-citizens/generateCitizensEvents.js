@@ -968,6 +968,7 @@ function generateCitizensEvents_(ctx) {
     if (has("source:retirement")) return "PostCareer";
     if (has("source:curiosity")) return "Lifestyle";
     if (has("source:communityLife")) return "Neighborhood";
+    if (has("source:civicRole")) return "Civic Perception"; // engine.286: paired with the loader whitelist; civicRole.* pools are skipped by this generator
     return "Daily";
   }
 
@@ -2920,6 +2921,7 @@ function generateCitizensEvents_(ctx) {
       };
       for (var clk in contentLedger.lines) {
         if (!contentLedger.lines.hasOwnProperty(clk)) continue;
+        if (clk.indexOf('civicRole.') === 0) continue; // engine.286 T6-5: owned by runCivicRoleEngine_
         var clLines = contentLedger.lines[clk];
         for (var cli = 0; cli < clLines.length; cli++) {
           var clEntry = clLines[cli];

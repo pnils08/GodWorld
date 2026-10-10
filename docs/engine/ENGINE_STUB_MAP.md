@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-10-08 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-10-09 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -102,6 +102,9 @@
   Sheets: World_Config
 
 - **ensureEngine192Config_(ss)**
+  Sheets: World_Config
+
+- **ensureEngine286Config_(ss)**
   Sheets: World_Config
 
 - **ensureEngine221Config_(ss)**
@@ -2451,9 +2454,24 @@
   RNG: ctx.rng / safeRand_(ctx)
 
 ### runCivicRoleEngine.js
+- **civicRoleConfig_(ctx)**
+
+- **civicRoleApprovalByPop_(ctx)**
+  Sheets: Civic_Office_Ledger
+
+- **civicRoleAura_(approval, tier, famous)**
+
+- **civicRolePremises_(S, hood)**
+  Reads: S.businessClosures, S.crimeMetrics, S.hoodBusinessMomentum, S.initiativeNeighborhoodEffects, S.neighborhoodDynamics
+
+- **civicRoleEclLines_(S, premise, dir)**
+  Reads: S.contentLedger
+
+- **civicRolePickText_(rng, S, premise, dir)**
+
 - **runCivicRoleEngine_(ctx)**
-  Reads: S.absoluteCycle, S.cityDynamics, S.cycleId, S.economicMood, S.eventsGenerated, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.weather, S.weatherMood, S.worldEvents
-  Writes: S.civicRoleEvents, S.eventsGenerated
+  Reads: S.absoluteCycle, S.cycleId, S.eventsGenerated
+  Writes: S.eventsGenerated
   Config: ctx.config.cycleCount
   Sheets: LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)
@@ -4595,4 +4613,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1646
+**Functions mapped:** 1653

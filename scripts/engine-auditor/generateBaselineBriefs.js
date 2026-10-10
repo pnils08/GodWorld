@@ -46,7 +46,8 @@ const STRUCTURAL_LIFE_TAGS = new Set([
   'Life Event',     // generational events (births into population, deaths)
   'Promotion',      // intake → ledger (citizen "emerged")
   'Advancement',    // tier change (T4 → T3, etc.)
-  'CivicRole',      // assumed civic role
+  'CivicRole-Up-L',   // engine.286: an official's large hood lift
+  'CivicRole-Down-L', // engine.286: an official's large hood setback
   'Retirement',     // career end
   'Stabilized',     // post-trauma stabilization
 ]);
@@ -286,7 +287,7 @@ function generate(ctx, ailmentPatterns) {
     if (tag === 'Life Event' && /\bborn\b/i.test(text)) hints.push('Birth into population — three-layer handle for citizen-attributed coverage');
     if (tag === 'Promotion') hints.push('Citizen emerged — first-named appearance candidate');
     if (tag === 'Advancement' && ledgerRow && (ledgerRow.Tier === '2' || ledgerRow.Tier === 2)) hints.push('Advanced to Tier 2 — narrative weight');
-    if (tag === 'CivicRole') hints.push('Civic role assumed — ties citizen to council/initiative coverage');
+    if (tag === 'CivicRole-Up-L' || tag === 'CivicRole-Down-L') hints.push('Official had a big week in their own hood — a citizen-side angle on civic coverage');
     if (tag === 'Retirement') hints.push('Career end — narrative arc closure');
     if (tag === 'Stabilized') hints.push('Post-trauma stabilization — recovery arc');
 

@@ -1,0 +1,25 @@
+West Oakland profile: {"hood":"West Oakland","character":"campus","boomIndex":0.9,"zone":"bay-fog","scenes":{"CreationDay":2,"Juneteenth":4}} 
+base row: {"traffic":1.05,"retail":1.0355,"tourism":1.1990000000000003,"nightlife":1.05,"publicSpaces":1.05,"culturalActivity":1.1,"communityEngagement":1.1,"capacitySensitivity":1.1}
+inputs: Winter, Valentine (minor), mild/1.0 front MILD, off-season; obs last {"cycle":110,"events":2287,"storySeedCount":58,"media":0,"crime":0,"shockCount":10,"coverage":0.10049999999999999,"coverageScore":1.43} | WO econ mood 58.4 median 58.9 | WO demo {"students":314,"adults":1675,"seniors":302,"unemployed":47,"sick":86} | crimeSpikes []
+(not replayed offline: story seeds, initiative/approval bus, commute inbound, sports week — zero here; the bench C111 value carries them)
+
+A1 base (character×boom)                     senti 0.000  night 1.050  touri 1.199  retai 1.036  traff 1.050  publi 1.050  cultu 1.100  commu 1.100
+A2 season                                    senti -0.050  night 0.735  touri 0.719  retai 1.036  traff 0.840  publi 0.735  cultu 0.990  commu 0.880
+A3 weather (zone)                            senti -0.020  night 0.735  touri 0.719  retai 1.036  traff 0.840  publi 0.808  cultu 0.990  commu 0.880
+A4 holiday (scenes)                          senti 0.100  night 0.956  touri 0.719  retai 1.346  traff 0.840  publi 0.784  cultu 0.990  commu 0.880
+A5 sports                                    senti 0.100  night 0.956  touri 0.719  retai 1.346  traff 0.840  publi 0.784  cultu 0.990  commu 0.880
+A6 observed feedback                         senti 0.100  night 0.956  touri 0.719  retai 1.346  traff 0.840  publi 0.816  cultu 1.020  commu 0.906
+A7 demographics (own rates)                  senti 0.150  night 0.956  touri 0.719  retai 1.413  traff 0.840  publi 0.816  cultu 1.020  commu 0.906
+A8 economy (own mood vs median)              senti 0.145  night 0.956  touri 0.719  retai 1.406  traff 0.840  publi 0.816  cultu 1.020  commu 0.906
+A9 crime ladder                              senti 0.145  night 0.956  touri 0.719  retai 1.406  traff 0.840  publi 0.816  cultu 1.020  commu 0.906
+A10 seeds                                    senti 0.145  night 0.956  touri 0.719  retai 1.406  traff 0.840  publi 0.816  cultu 1.020  commu 0.906
+A11 lag drags                                senti 0.145  night 0.956  touri 0.691  retai 1.406  traff 0.840  publi 0.816  cultu 1.020  commu 0.906
+A12 microclimate + clamp (raw)               senti 0.145  night 0.956  touri 0.691  retai 1.406  traff 0.840  publi 0.816  cultu 1.020  commu 0.906
+B1 capacity friction (cong 0.072)            senti 0.136  night 0.947  touri 0.686  retai 1.406  traff 0.828  publi 0.811  cultu 1.020  commu 0.906
+B2 momentum 0.3 (prev 0.532)                 senti 0.255  night 1.053  touri 0.692  retai 1.387  traff 0.828  publi 0.754  cultu 1.020  commu 1.044
+BLEED (adjacent mean)                        senti 0.253  night 1.053  touri 0.692  retai 1.387  traff 0.828  publi 0.754  cultu 1.020  commu 1.044
+C1 fold (initiative/approval bus)            senti 0.253  night 1.053  touri 0.692  retai 1.387  traff 0.828  publi 0.754  cultu 1.020  commu 1.044
+C2 commute lift                              senti 0.253  night 1.053  touri 0.692  retai 1.387  traff 0.828  publi 0.754  cultu 1.020  commu 1.044
+FINAL (offline)                              {"traffic":0.827,"retail":1.386,"tourism":0.691,"nightlife":1.053,"publicSpaces":0.754,"sentiment":0.253,"culturalActivity":1.019,"communityEngagement":1.043}
+city (offline, no boosts) {"traffic":1.08,"retail":1.25,"tourism":0.59,"nightlife":1.21,"publicSpaces":0.7,"sentiment":0.3,"culturalActivity":1.26,"communityEngagement":1.38}
+taps wired 17 of 17

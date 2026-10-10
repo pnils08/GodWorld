@@ -1,0 +1,505 @@
+{
+ "cycleCount": "112",
+ "fireGuardMinutes": "0",
+ "clusterAnchorsRows": 0,
+ "civicRole": {
+  "civicRoleFireChance": "0.35",
+  "civicRoleUpChance": "0.6",
+  "civicRolePremiseLean": "0.2",
+  "civicRoleMediumOdds": "0.12",
+  "civicRoleLargeOdds": "0.04"
+ },
+ "carryCycle": 112,
+ "neighborhoodDynamics": {
+  "Downtown": {
+   "sentiment": -0.027500364626368477,
+   "nightlife": 1.0084440888429718,
+   "retail": 1.7845903783779922,
+   "tourism": 0.6692532081438218,
+   "publicSpaces": 0.7517187519687092,
+   "communityEngagement": 0.8633954729599999
+  },
+  "Temescal": {
+   "sentiment": -0.1987956117749342,
+   "nightlife": 0.7542984857999985,
+   "retail": 1.2834763531099025,
+   "tourism": 0.49930842905653605,
+   "publicSpaces": 0.7848509739689883,
+   "communityEngagement": 0.9388426695839999
+  },
+  "Laurel": {
+   "sentiment": -0.158673873551506,
+   "nightlife": 0.6103912848857819,
+   "retail": 1.1694513951218743,
+   "tourism": 0.4439557358518277,
+   "publicSpaces": 0.7025287386644201,
+   "communityEngagement": 0.9912184737744317
+  },
+  "West Oakland": {
+   "sentiment": 0.03486835197095001,
+   "nightlife": 0.8337730386386966,
+   "retail": 1.4749953354334924,
+   "tourism": 0.6523097983527573,
+   "publicSpaces": 0.7400941140541885,
+   "communityEngagement": 1.028071609108
+  },
+  "Fruitvale": {
+   "sentiment": -0.02019103249238598,
+   "nightlife": 0.7301321919323319,
+   "retail": 1.541115140874314,
+   "tourism": 0.5312425460170502,
+   "publicSpaces": 0.7022720548994826,
+   "communityEngagement": 1.0983309149544318
+  },
+  "Jack London": {
+   "sentiment": -0.061877101574721975,
+   "nightlife": 0.9302601370143715,
+   "retail": 1.5282785105727996,
+   "tourism": 0.6798883028645188,
+   "publicSpaces": 0.7073454582344686,
+   "communityEngagement": 0.8511051679279998
+  },
+  "Rockridge": {
+   "sentiment": -0.16742311695761888,
+   "nightlife": 0.7542984857999985,
+   "retail": 1.4599706074999304,
+   "tourism": 0.5679263595127256,
+   "publicSpaces": 0.712284151811856,
+   "communityEngagement": 0.918356963664
+  },
+  "Adams Point": {
+   "sentiment": -0.17147523182312235,
+   "nightlife": 0.6504916467546,
+   "retail": 1.0517939851471223,
+   "tourism": 0.5593330896995999,
+   "publicSpaces": 0.8224939961474173,
+   "communityEngagement": 0.9156644159999999
+  },
+  "Grand Lake": {
+   "sentiment": -0.15567630452632092,
+   "nightlife": 0.7123156918779999,
+   "retail": 1.2898561593834899,
+   "tourism": 0.6129944838467999,
+   "publicSpaces": 0.8222972052609652,
+   "communityEngagement": 0.9156644159999999
+  },
+  "Piedmont Ave": {
+   "sentiment": -0.16134125522535395,
+   "nightlife": 0.681521077922402,
+   "retail": 1.2470825899817555,
+   "tourism": 0.5332481570488081,
+   "publicSpaces": 0.7615860874285711,
+   "communityEngagement": 0.9246363486758399
+  },
+  "Chinatown": {
+   "sentiment": -0.22262571038076587,
+   "nightlife": 0.7534542391518717,
+   "retail": 1.3806018606876804,
+   "tourism": 0.6172818723540824,
+   "publicSpaces": 0.7177818599466442,
+   "communityEngagement": 0.92810011296
+  },
+  "Brooklyn": {
+   "sentiment": -0.15838238425696485,
+   "nightlife": 0.6696791104626,
+   "retail": 1.1042507828817858,
+   "tourism": 0.567692344832832,
+   "publicSpaces": 0.8052826701974173,
+   "communityEngagement": 0.9056003999999999
+  },
+  "Eastlake": {
+   "sentiment": -0.16114412388717583,
+   "nightlife": 0.7123156918779999,
+   "retail": 1.101098415540943,
+   "tourism": 0.5659220865,
+   "publicSpaces": 0.7897111158257059,
+   "communityEngagement": 0.9156644159999999
+  },
+  "Glenview": {
+   "sentiment": -0.1706617143823777,
+   "nightlife": 0.6504916467546,
+   "retail": 0.9991460593698268,
+   "tourism": 0.5210469992303999,
+   "publicSpaces": 0.7925069222315206,
+   "communityEngagement": 0.9137144159999999
+  },
+  "Dimond": {
+   "sentiment": -0.17454193006428867,
+   "nightlife": 0.6409328299668,
+   "retail": 1.089698758917749,
+   "tourism": 0.4558673426975999,
+   "publicSpaces": 0.7022885021701247,
+   "communityEngagement": 0.9668256368000001
+  },
+  "Ivy Hill": {
+   "sentiment": -0.1731548296808583,
+   "nightlife": 0.6413547592746,
+   "retail": 0.9841255748196478,
+   "tourism": 0.5053702721903999,
+   "publicSpaces": 0.7699998036815205,
+   "communityEngagement": 0.9691713648
+  },
+  "San Antonio": {
+   "sentiment": -0.17421931528042958,
+   "nightlife": 0.6412194409823999,
+   "retail": 0.9853190455003493,
+   "tourism": 0.4356984118848,
+   "publicSpaces": 0.669527012162158,
+   "communityEngagement": 0.9683256368000001
+  },
+  "KONO": {
+   "sentiment": -0.15032903731368485,
+   "nightlife": 0.8560034508119836,
+   "retail": 1.218884951828294,
+   "tourism": 0.6083704790058824,
+   "publicSpaces": 0.7518984306041655,
+   "communityEngagement": 0.9327994729599999
+  },
+  "Lake Merritt": {
+   "sentiment": -0.15503695361734823,
+   "nightlife": 0.650601537677802,
+   "retail": 1.1516166463817004,
+   "tourism": 0.555094438466958,
+   "publicSpaces": 0.8229543737680527,
+   "communityEngagement": 0.9164248686758399
+  },
+  "Uptown": {
+   "sentiment": -0.14213738538820836,
+   "nightlife": 0.9160092353437467,
+   "retail": 1.3953044115048507,
+   "tourism": 0.6816341624491962,
+   "publicSpaces": 0.7192396141021739,
+   "communityEngagement": 0.8594954729599998
+  },
+  "Baylight District": {
+   "sentiment": -0.11216215285886513,
+   "nightlife": 0.8239535513209,
+   "retail": 1.3486077313412401,
+   "tourism": 0.738518806548,
+   "publicSpaces": 0.7395543431695338,
+   "communityEngagement": 0.8870591999999999
+  },
+  "East Oakland": {
+   "sentiment": -0.0721551627679501,
+   "nightlife": 0.6493805058814099,
+   "retail": 1.03948045606284,
+   "tourism": 0.45586734269760004,
+   "publicSpaces": 0.6696895785466185,
+   "communityEngagement": 1.0971993368
+  }
+ },
+ "prevCityDyn": {
+  "traffic": 1.02,
+  "retail": 1.27,
+  "tourism": 0.57,
+  "nightlife": 1.01,
+  "publicSpaces": 0.72,
+  "sentiment": 0.07,
+  "culturalActivity": 1.18,
+  "communityEngagement": 1.27
+ },
+ "prevCityDynCycle": "112",
+ "rileyCols": [
+  "CityEvents",
+  "CityTraffic",
+  "RetailLoad",
+  "TourismLoad",
+  "NightlifeLoad",
+  "CitySentiment"
+ ],
+ "riley": [
+  {
+   "Cycle": "109",
+   "CityEvents": "The Reaves Line Founding Celebration, Lake Merritt Open-Air Book Market, Temescal Street Vendors Block",
+   "CityTraffic": "1.09",
+   "RetailLoad": "1.22",
+   "TourismLoad": "0.63",
+   "NightlifeLoad": "0.99",
+   "CitySentiment": "0.36"
+  },
+  {
+   "Cycle": "110",
+   "CityEvents": "Downtown First Friday Live Music, Lake Merritt Community Circle, Piedmont Ave Winter Walk, Lake Merritt Lantern Parade",
+   "CityTraffic": "1.27",
+   "RetailLoad": "1.29",
+   "TourismLoad": "0.58",
+   "NightlifeLoad": "1.41",
+   "CitySentiment": "0.85"
+  },
+  {
+   "Cycle": "111",
+   "CityEvents": "Rockridge Romance Walk, The Dillon Family Block Party, KONO After-Dark Cultural Showcase",
+   "CityTraffic": "1.09",
+   "RetailLoad": "1.27",
+   "TourismLoad": "0.59",
+   "NightlifeLoad": "1.21",
+   "CitySentiment": "0.38"
+  },
+  {
+   "Cycle": "112",
+   "CityEvents": "Downtown Winter Festival, Lake Merritt Open-Air Book Market, Adams Point Emergency Town Briefing, The Varek Family Block Party",
+   "CityTraffic": "1.02",
+   "RetailLoad": "1.27",
+   "TourismLoad": "0.58",
+   "NightlifeLoad": "1.02",
+   "CitySentiment": "0.14"
+  }
+ ],
+ "engineErrorsRows": 4,
+ "engineErrorsTail": [
+  "2026-09-28T05:50:57.247Z | 109 | Phase2-SportsSeason:WeekRecord | duplicate WeekRecord: A's at Cycle 109 (row 230 rejected; first summary stands) | Error: duplicate WeekRecord: A's at Cycle 109 (row 230 rejected; first s",
+  "2026-09-28T05:50:57.440Z | 109 | Phase2-SportsSeason:WeekRecord | duplicate WeekRecord: A's at Cycle 109 (row 231 rejected; first summary stands) | Error: duplicate WeekRecord: A's at Cycle 109 (row 231 rejected; first s",
+  "2026-09-28T05:50:57.616Z | 109 | Phase2-SportsSeason:WeekRecord | duplicate WeekRecord: Oaks at Cycle 109 (row 233 rejected; first summary stands) | Error: duplicate WeekRecord: Oaks at Cycle 109 (row 233 rejected; first"
+ ],
+ "rippleHeader": [
+  "Cycle",
+  "CauseType",
+  "CauseId",
+  "CauseDetail",
+  "EffectType",
+  "TargetScope",
+  "TargetIds",
+  "Neighborhood",
+  "Magnitude",
+  "Duration",
+  "RemainingStrength",
+  "SourceEngine",
+  "CycleStamp"
+ ],
+ "rippleThisCycle": [
+  {
+   "causeType": "neighborhood-fold",
+   "source": "applyCityDynamics.foldNeighborhoodEffects",
+   "targets": "Downtown|Temescal|West Oakland|Fruitvale|Jack London|East Oakland",
+   "detail": "Initiative work landed in 6 neighborhood(s): Downtown, Temescal, West Oakland, Fruitvale, Jack London, East Oakland"
+  },
+  {
+   "causeType": "neighborhood-fold",
+   "source": "applyCityDynamics.foldNeighborhoodEffects",
+   "targets": "Downtown|Temescal|Laurel|West Oakland|Fruitvale|Jack London|Rockridge|Adams Point|Grand Lake|Piedmont Ave|Chinatown|Brooklyn|Eastlake|San Antonio|KONO|Lake Merritt|Uptown|Baylight District|East Oakland",
+   "detail": "Cycle 111 shifts in how residents rate their officials reached 19 neighborhood(s): Downtown, Temescal, Laurel, West Oakland, Fruitvale, Jack London, Rockridge, "
+  }
+ ],
+ "neighborhoodMap": [
+  {
+   "Neighborhood": "Downtown",
+   "Cycle": "112",
+   "NightlifeProfile": "0.86",
+   "RetailVitality": "14.63",
+   "EventAttractiveness": "5.14",
+   "Sentiment": "0.07",
+   "DemographicMarker": "Inflow surge",
+   "EmployerCharacter": "institutional"
+  },
+  {
+   "Neighborhood": "Temescal",
+   "Cycle": "112",
+   "NightlifeProfile": "0.97",
+   "RetailVitality": "5.65",
+   "EventAttractiveness": "5.32",
+   "Sentiment": "-0.05",
+   "DemographicMarker": "Mild outflow",
+   "EmployerCharacter": "clinic"
+  },
+  {
+   "Neighborhood": "Laurel",
+   "Cycle": "112",
+   "NightlifeProfile": "0.86",
+   "RetailVitality": "8.25",
+   "EventAttractiveness": "4.17",
+   "Sentiment": "-0.03",
+   "DemographicMarker": "Mild inflow",
+   "EmployerCharacter": "schools-retail"
+  },
+  {
+   "Neighborhood": "West Oakland",
+   "Cycle": "112",
+   "NightlifeProfile": "0.91",
+   "RetailVitality": "11.02",
+   "EventAttractiveness": "4.31",
+   "Sentiment": "0.11",
+   "DemographicMarker": "Inflow surge",
+   "EmployerCharacter": "campus"
+  },
+  {
+   "Neighborhood": "Fruitvale",
+   "Cycle": "112",
+   "NightlifeProfile": "1.07",
+   "RetailVitality": "12.95",
+   "EventAttractiveness": "5.15",
+   "Sentiment": "0.15",
+   "DemographicMarker": "Inflow surge",
+   "EmployerCharacter": "transit-retail"
+  },
+  {
+   "Neighborhood": "Jack London",
+   "Cycle": "112",
+   "NightlifeProfile": "1.26",
+   "RetailVitality": "14.49",
+   "EventAttractiveness": "7.16",
+   "Sentiment": "0.08",
+   "DemographicMarker": "Inflow surge",
+   "EmployerCharacter": "nightlife"
+  },
+  {
+   "Neighborhood": "Rockridge",
+   "Cycle": "112",
+   "NightlifeProfile": "0.89",
+   "RetailVitality": "10.87",
+   "EventAttractiveness": "4.44",
+   "Sentiment": "-0.04",
+   "DemographicMarker": "Stable",
+   "EmployerCharacter": "professional"
+  },
+  {
+   "Neighborhood": "Adams Point",
+   "Cycle": "112",
+   "NightlifeProfile": "0.57",
+   "RetailVitality": "6.64",
+   "EventAttractiveness": "3.26",
+   "Sentiment": "-0.17",
+   "DemographicMarker": "Outflow pressure",
+   "EmployerCharacter": "residential"
+  },
+  {
+   "Neighborhood": "Grand Lake",
+   "Cycle": "112",
+   "NightlifeProfile": "1.03",
+   "RetailVitality": "12.98",
+   "EventAttractiveness": "8.24",
+   "Sentiment": "-0.01",
+   "DemographicMarker": "Stable",
+   "EmployerCharacter": "retail"
+  },
+  {
+   "Neighborhood": "Piedmont Ave",
+   "Cycle": "112",
+   "NightlifeProfile": "0.72",
+   "RetailVitality": "13.41",
+   "EventAttractiveness": "3.57",
+   "Sentiment": "-0.07",
+   "DemographicMarker": "Mild inflow",
+   "EmployerCharacter": "medical"
+  },
+  {
+   "Neighborhood": "Chinatown",
+   "Cycle": "112",
+   "NightlifeProfile": "1.12",
+   "RetailVitality": "8.96",
+   "EventAttractiveness": "6.29",
+   "Sentiment": "-0.15",
+   "DemographicMarker": "Mild outflow",
+   "EmployerCharacter": "family-retail"
+  },
+  {
+   "Neighborhood": "Brooklyn",
+   "Cycle": "112",
+   "NightlifeProfile": "0.57",
+   "RetailVitality": "9",
+   "EventAttractiveness": "3.25",
+   "Sentiment": "-0.12",
+   "DemographicMarker": "Stable",
+   "EmployerCharacter": "residential"
+  },
+  {
+   "Neighborhood": "Eastlake",
+   "Cycle": "112",
+   "NightlifeProfile": "0.82",
+   "RetailVitality": "7.14",
+   "EventAttractiveness": "4.47",
+   "Sentiment": "-0.07",
+   "DemographicMarker": "Mild outflow",
+   "EmployerCharacter": "mixed"
+  },
+  {
+   "Neighborhood": "Glenview",
+   "Cycle": "112",
+   "NightlifeProfile": "0.61",
+   "RetailVitality": "5.82",
+   "EventAttractiveness": "4",
+   "Sentiment": "-0.1",
+   "DemographicMarker": "Mild outflow",
+   "EmployerCharacter": "residential"
+  },
+  {
+   "Neighborhood": "Dimond",
+   "Cycle": "112",
+   "NightlifeProfile": "0.77",
+   "RetailVitality": "7.38",
+   "EventAttractiveness": "4.25",
+   "Sentiment": "-0.21",
+   "DemographicMarker": "Mild outflow",
+   "EmployerCharacter": "village-retail"
+  },
+  {
+   "Neighborhood": "Ivy Hill",
+   "Cycle": "112",
+   "NightlifeProfile": "0.63",
+   "RetailVitality": "5.3",
+   "EventAttractiveness": "3.25",
+   "Sentiment": "-0.22",
+   "DemographicMarker": "Outflow accelerating",
+   "EmployerCharacter": "residential"
+  },
+  {
+   "Neighborhood": "San Antonio",
+   "Cycle": "112",
+   "NightlifeProfile": "0.97",
+   "RetailVitality": "5.92",
+   "EventAttractiveness": "4.25",
+   "Sentiment": "-0.15",
+   "DemographicMarker": "Outflow pressure",
+   "EmployerCharacter": "service-labor"
+  },
+  {
+   "Neighborhood": "KONO",
+   "Cycle": "112",
+   "NightlifeProfile": "1.11",
+   "RetailVitality": "8.78",
+   "EventAttractiveness": "6",
+   "Sentiment": "-0.15",
+   "DemographicMarker": "Mild outflow",
+   "EmployerCharacter": "arts"
+  },
+  {
+   "Neighborhood": "Lake Merritt",
+   "Cycle": "112",
+   "NightlifeProfile": "0.57",
+   "RetailVitality": "9.3",
+   "EventAttractiveness": "3.43",
+   "Sentiment": "0",
+   "DemographicMarker": "Mild outflow",
+   "EmployerCharacter": "residential"
+  },
+  {
+   "Neighborhood": "Uptown",
+   "Cycle": "112",
+   "NightlifeProfile": "1.28",
+   "RetailVitality": "13.34",
+   "EventAttractiveness": "7.13",
+   "Sentiment": "-0.02",
+   "DemographicMarker": "Inflow surge",
+   "EmployerCharacter": "nightlife"
+  },
+  {
+   "Neighborhood": "Baylight District",
+   "Cycle": "112",
+   "NightlifeProfile": "0.53",
+   "RetailVitality": "8.39",
+   "EventAttractiveness": "3.25",
+   "Sentiment": "-0.08",
+   "DemographicMarker": "Stable",
+   "EmployerCharacter": "stadium"
+  },
+  {
+   "Neighborhood": "East Oakland",
+   "Cycle": "112",
+   "NightlifeProfile": "0.87",
+   "RetailVitality": "6.4",
+   "EventAttractiveness": "4.25",
+   "Sentiment": "0.08",
+   "DemographicMarker": "Stable",
+   "EmployerCharacter": "construction"
+  }
+ ]
+}

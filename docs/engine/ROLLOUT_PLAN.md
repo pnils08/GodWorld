@@ -126,6 +126,7 @@
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
 | pipeline.71 | Media hood read: live vs the INSTITUTIONS seed (today every reader gets prev-Cycle delta only — baseline_briefs, buildWorldSummary classifyDelta). Builder 2026-10-10: the seed is the permanent referent; coverage says 'used to be' when the data moves. Spec after engine.214 lands | ready | research-build | [[../plans/2026-10-10-engine-214-mood-per-hood]] §Reviews reconciled A4 |
+| engine.287 | Crime gate on single-digit counts: `applyObservedFeedback_` (engine.185) reads 1 carried spike vs a six-Cycle baseline 0.67 as a wave on every hood (−0.28 sentiment, nightlife ×0.88); fired C112–C114 on the engine.214 bench, same on the old engine. A count floor under the ratio is the obvious shape; rate is the builder's dial | ready | engine-sheet | [[../plans/2026-10-10-engine-214-mood-per-hood]] §New concepts N4 |
 | engine.98 | Pets — designed 2026-10-04 on engine.94 rails; builds after engine.94 | ready | engine-sheet / research-build | [[../plans/2026-09-26-future-build-ideas]] §engine.98 pets — design |
 | engine.264 | The maker's hand — builder intake tab the sim never sees; after engine.94 (builder 2026-09-29) | ready | research-build | [[../plans/2026-09-26-future-build-ideas]] §Builder rulings |
 | engine.203d | Slow fade after a season ends, unbuilt. Ruled 2026-10-07: a won title fades slowly with no dip; a season ending in a loss is upset first, then the slow fade | ready | engine-sheet | [[../plans/2026-09-11-sports-as-a-lived-system]] Task 2 |

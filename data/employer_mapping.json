@@ -14,7 +14,8 @@
     "civicEstablishments": "S334: INIT-001/002/003/005/007 minted as BIZ-00094..00098 (Business_Ledger) so civic programs employ their own directors instead of parking at City of Oakland. Keyword rules route future citizens naming these programs.",
     "categoryFix": "S335: Professional -> SELF_EMPLOYED (private practice is honest for vets/CPAs/agents/attorneys); 2041-Specific default REMOVED (no one employer fits the range) with per-role keyword rules routing the placeable specialists. Only Tech & Innovation still defaults to BIZ-00030.",
     "engine83Tail": "S348 (Kimi): Task 7 tail rules — 61 keyword rules from a 6-seat agent fan-out over 293 unmatched citizens, lead-reviewed. Civic/public-safety cluster routed by exact role (DEPUTY CHIEF/INTERNAL AFFAIRS -> BIZ-00024, DISTRICT ATTORNEY/PUBLIC DEFENDER -> BIZ-00022, FIRE CHIEF/EMS -> BIZ-00023), trades -> BIZ-00020, food-service -> BIZ-00044 (Line Cook precedent), creative/gig roles -> SELF_EMPLOYED. Rejected as unearned guesses, left blank: Janitor, Security Guard, Mover, Mechanic, Delivery driver, Maintenance tech, generic Athlete/Driver/Office worker (no honest employer exists in the ledger). Specific-before-generic ordering matters: Climate Modeling before Model; West Oakland Community Center before Community Director.",
-    "engine83Close": "S349: close-out pass on the post-Kimi tail (119). Script gains a no-employment skip class (student/retired/hall-of-famer/resident ~55 rows — blank employer is correct, they are not failed matches); Health Officer -> BIZ-00015 (county public health sits with Alameda Health); informal-economy operators (Booky, Drug Dealer, Organized Crime) -> SELF_EMPLOYED. Remaining unmatched are Kimi's ruled-blank generic-service roles plus role/econ-drift rows — blank with reason, per the plan's 'blank is honest' rule."
+    "engine83Close": "S349: close-out pass on the post-Kimi tail (119). Script gains a no-employment skip class (student/retired/hall-of-famer/resident ~55 rows — blank employer is correct, they are not failed matches); Health Officer -> BIZ-00015 (county public health sits with Alameda Health); informal-economy operators (Booky, Drug Dealer, Organized Crime) -> SELF_EMPLOYED. Remaining unmatched are Kimi's ruled-blank generic-service roles plus role/econ-drift rows — blank with reason, per the plan's 'blank is honest' rule.",
+    "broadcast": "2026-10-11 research.27 §3.2: Bayline 6 (BIZ-00183, UNDOCKED rights holder) + Oakland 12 (BIZ-00184, independent) minted; org-name rules for both + OakTown Echo placed ahead of the generic Tribune title rules (the Echo's 8 staff had resolved to the Tribune)."
   },
   "parentheticalLookup": {
     "Port of Oakland": "BIZ-00012",
@@ -27,9 +28,24 @@
     "Ridgeline Ventures": "BIZ-00007",
     "Community Affairs": "BIZ-00017",
     "UCSD": "BIZ-00035",
-    "Private": "SELF_EMPLOYED"
+    "Private": "SELF_EMPLOYED",
+    "Bayline 6": "BIZ-00183",
+    "Oakland 12": "BIZ-00184",
+    "OakTown Echo": "BIZ-00099"
   },
   "keywordRules": [
+    {
+      "pattern": "Bayline 6",
+      "bizId": "BIZ-00183"
+    },
+    {
+      "pattern": "Oakland 12",
+      "bizId": "BIZ-00184"
+    },
+    {
+      "pattern": "OakTown Echo",
+      "bizId": "BIZ-00099"
+    },
     {
       "pattern": "AC Transit",
       "bizId": "BIZ-00013"
@@ -852,6 +868,18 @@
       "name": "SpeedyBurger",
       "sector": "Fast Food & Quick Service",
       "neighborhood": "Downtown"
+    },
+    {
+      "bizId": "BIZ-00183",
+      "name": "Bayline 6",
+      "sector": "Media & Journalism",
+      "neighborhood": "Jack London"
+    },
+    {
+      "bizId": "BIZ-00184",
+      "name": "Oakland 12",
+      "sector": "Media & Journalism",
+      "neighborhood": "Fruitvale"
     }
   ],
   "notes": "S357 engine.83: 20 generic-occupation keyword rules demoted (generic trade -> tracked biz was the mass-hiring failure; those roles now resolve UNTRACKED). Org-name rules kept."

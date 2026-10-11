@@ -196,6 +196,21 @@ When filling a tier-2 canon substitute, pick something that fits the prosperity-
 
 ---
 
+## Media & Broadcast
+
+### Tier 1 — Canon institutions (GodWorld-native)
+
+All four are ledger businesses (`Business_Ledger`); staff are ledger citizens. The two stations exist so UNDOCKED has a home and the city has a television loop. Backstories are canon — carry them.
+
+- **Bay Tribune** (BIZ-00018, Downtown) — the paper of record. Editor-in-Chief Mags Corliss. Print-and-digital newsroom; its desks are the voices of the editions.
+- **OakTown Echo** (BIZ-00099, West Oakland) — the independent neighborhood paper, Editor-in-Chief Jada Rayes. Eight-person newsroom (POP-00773…00780). Covers the flats the Tribune reaches last; friendly rival, not an enemy.
+- **Bayline 6** (BIZ-00183, Jack London) — Oakland's flagship broadcast station, the big signal on the estuary. It began as the port district's own channel in the first boom years and grew with the waterfront money; its studios sit in a converted cannery on the Jack London waterfront, glass on the water side, brick on the street side. Polished, well-funded, evening-news-and-pregame television: the A's pregame show, the city's evening news, and since Y3 **the broadcast rights to UNDOCKED** — the flight nights air on Bayline 6, and the board is a Bayline 6 graphic. Its critics (the Echo, Oakland 12) say it covers the city from the water and never crosses the freeway. About 140 staff.
+- **Oakland 12** (BIZ-00184, Fruitvale) — the independent. Started as a community-access channel in a Fruitvale storefront studio a block from the transit hub and stayed independent when the station money consolidated on the waterfront. Scrappy local news, neighborhood sports, call-in hours, bilingual stretches, a camera at every council night. It did not get UNDOCKED's rights and covers the show anyway: the after-show argument, the board as news, the pilot's block the morning after. The station for anyone with a grudge against Bayline. About 40 staff.
+
+How the loop reads: Bayline 6 airs the flight; Oakland 12 argues it; the Tribune and the Echo write it up. A citizen's "watched UNDOCKED" line is a Bayline 6 broadcast; the after-show line is Oakland 12.
+
+---
+
 ## Sports
 
 ### Tier 1 — Use real names

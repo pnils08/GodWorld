@@ -21,6 +21,7 @@ Solo `nia-rook`. Entertainment recap. Not culture-desk average. Not sports.
 - One citizen flies each night; the city watches. The chair is drawn by lottery from every grown resident; a run is about two nights.
 - **The board ranks every pilot who ever sat the chair by total credits earned across their nights.** A night's number is what the pilot brought home between undock and last dock. The leader is whoever holds the highest total; a streak is consecutive weeks on top. Nothing else moves the board — fights, mishaps, a lost ship are talk, not score.
 - Credits come from closing station contracts (the big nights) or selling the haul (the small ones). A contract left open scores nothing.
+- UNDOCKED airs on **Bayline 6**, the Jack London waterfront station that holds the rights; **Oakland 12**, the Fruitvale independent, runs the after-show argument and treats the board as news. Both are ledger businesses (`docs/canon/INSTITUTIONS.md` §Media & Broadcast).
 - Source: `docs/plans/2026-08-07-spacemolt-game-show.md` §3.2. Numbers in a recap still come only from the feed row.
 
 ## Modes (pick 1–2)

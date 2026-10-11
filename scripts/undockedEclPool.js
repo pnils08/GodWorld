@@ -74,6 +74,13 @@ const SHOW_ROWS = [
 
   row(POOL_SHOW, 'aspire', 'watched UNDOCKED like someone who already knew what a camera does to a week', 0.75, 'undocked;fame>=25'),
 
+  // §3.2 objective lines (builder-direct 2026-10-11): the city knows what the
+  // board scores — credits brought home, added up across every night a pilot
+  // has flown. Low weights so a wake is not saturated with the rule.
+  row(POOL_SHOW, 'watch', 'explained to the table that the board is only credits brought home, added up over every night a pilot has flown, and nothing else on the screen counts', 1.0, 'undocked'),
+  row(POOL_SHOW, 'argue', 'argued that one closed contract is worth a season of ore and that the board does not care how the credits got there', 0.95, 'undocked'),
+  row(POOL_SHOW, 'lottery', 'knew the rules cold — one night in the chair, bring credits home, the board adds them up — and had never been drawn', 1.0, 'undocked;fame=0;lifestate=working'),
+
   // 4a wager talk — the window, the napkin, the board. No numbers (numbers
   // become canon the moment they print). No money moves. Plan:
   // docs/for-claude-review/2026-08-31-grok-casino-ledger.md Task 0.

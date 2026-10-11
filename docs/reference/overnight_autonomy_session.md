@@ -217,6 +217,8 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 
 11:53 rb CHECK es IDLE at its prompt (11:22 wake: no change). Box draft back to `! bash output/engine-sheet/push-stage3-prod.sh`, unsent — untouched (§4c). No permission prompt. git: 24 unpushed, tree clean of lane work. Live cycleCount 110 — C111 NOT fired; no push .DONE. Guests: none claimed by rb. Inbox 18. NEXT[research-build]: nothing unblocked; first proof of the UNDOCKED/2 brief is tonight's 20:30 CDT flight. Standing by, wake :26.
 
+12:05 rb CLOSE builder up (answered §6 03:31 in rb's own window ~11:58). Hourly wake cron ea4a0c6b deleted. Rulings: (1) citizen objective lines YES, keep a wake unsaturated → 3 lines authored + appended live (823→826 rows, read back), wager lines left undeployed; (2) board stays cumulative, no season boundary; (3) broadcaster — a studio/local station may be minted, waits on a named mint. Detail: plan §3.2 Builder rulings. es box still holds the unsent stage-3 push — his to send.
+
 ## 8. Stop rule and usage
 
 - Judgment work stays premium; volume and scripted work goes to guests. Ask per task: volume × context-portability.

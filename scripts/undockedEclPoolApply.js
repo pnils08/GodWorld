@@ -7,6 +7,7 @@
  *
  *   node scripts/undockedEclPoolApply.js [--pool memory]
  *   node scripts/undockedEclPoolApply.js [--pool memory] --apply
+ *   node scripts/undockedEclPoolApply.js --match 'the board' --apply   # only rows whose Text matches
  */
 
 require('../lib/env');
@@ -17,6 +18,9 @@ if (!POOLS[POOL_ARG]) throw new Error('unknown --pool ' + POOL_ARG + ' (' + Obje
 const P = require(POOLS[POOL_ARG]);
 
 const APPLY = process.argv.includes('--apply');
+// --match <regex>: append only the missing rows whose Text matches. Rows authored
+// but deliberately undeployed (the 4a wager lines, S407) stay out of a targeted apply.
+const MATCH = (function () { const i = process.argv.indexOf('--match'); return i >= 0 ? new RegExp(String(process.argv[i + 1] || ''), 'i') : null; })();
 
 function norm(t) {
   return String(t || '').replace(/\s+/g, ' ').trim().toLowerCase();
@@ -34,7 +38,7 @@ async function main() {
   const seen = {};
   data.slice(1).forEach(function (r) { seen[norm(r[iText])] = true; });
 
-  const missing = P.ROWS.filter(function (row) { return !seen[norm(row.Text)]; });
+  const missing = P.ROWS.filter(function (row) { return !seen[norm(row.Text)] && (!MATCH || MATCH.test(row.Text)); });
   console.log('live rows=' + (data.length - 1) + ' authored=' + P.ROWS.length + ' missing=' + missing.length);
   missing.forEach(function (r) {
     console.log('  NEW [' + r.PoolKey + '] ' + r.Conditions + ' :: ' + r.Text);

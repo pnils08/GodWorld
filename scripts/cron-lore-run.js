@@ -42,9 +42,23 @@ function buildPrompt(target) {
   );
 }
 
+// loreWriter.js writes some pieces into a per-citizen subfolder (e.g.
+// isley_kelley_profile/), so the snapshot has to reach one level down or the
+// new piece reads as "nothing new" and never mirrors to Drive.
 function listQuarantineFiles() {
   if (!fs.existsSync(QUARANTINE_DIR)) return new Set();
-  return new Set(fs.readdirSync(QUARANTINE_DIR).filter((f) => f.endsWith('.md')));
+  const files = new Set();
+  for (const entry of fs.readdirSync(QUARANTINE_DIR, { withFileTypes: true })) {
+    if (entry.isFile() && entry.name.endsWith('.md')) {
+      files.add(entry.name);
+    } else if (entry.isDirectory()) {
+      const sub = path.join(QUARANTINE_DIR, entry.name);
+      for (const f of fs.readdirSync(sub)) {
+        if (f.endsWith('.md')) files.add(path.join(entry.name, f));
+      }
+    }
+  }
+  return files;
 }
 
 function writeStatus(status) {

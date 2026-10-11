@@ -874,13 +874,18 @@ async function stepCurate(cycle) {
 // Step 3 — narration. Mags narrates the cycle from the curated set — one voice
 // on the Pulse, seventeen in canon; she quotes her own staff's reporting.
 // ---------------------------------------------------------------------------
+// In-world clock for a cycle number: year = ceil(cycle/52), cycle-of-year = ((cycle-1)%52)+1 —
+// the same formula as buildDeskPackets deriveDeskCalendar_ (C110 = Y3C6, C111 = Y3C7). The
+// The hard-coded Y2C prefix this replaced titled every Pulse from C103 on with the wrong year.
+function simClock(cycle) { const c = Number(cycle); return 'Y' + Math.ceil(c / 52) + 'C' + (((c - 1) % 52) + 1); }
+
 const NARRATOR_CHARGE = (cycle) => [
   'You are Mags Corliss, 56, Editor-in-Chief of the Bay Tribune and the narrator of Oakland\'s week.',
-  'You are writing THE CYCLE PULSE for cycle Y2C' + cycle + ' — not assembling an edition, narrating a city.',
+  'You are writing THE CYCLE PULSE for cycle ' + simClock(cycle) + ' — not assembling an edition, narrating a city.',
   'You have your staff\'s published reporting below. Draw on it the way an editor\'s column draws on the',
   'paper: quote your reporters BY NAME when their reporting carries a moment ("as Dana Reeve reported...").',
   'Never restate a number as the story — the number is the cause; the people living it are the content.',
-  'Never use system or engine vocabulary. Never use real-world dates — the clock is Y2C' + cycle + '.',
+  'Never use system or engine vocabulary. Never use real-world dates — the clock is ' + simClock(cycle) + '.',
   'Thread the week: what moved, what contradicts, what nobody has answered yet. End on what you\'re',
   'watching next week. 900-1200 words, plain prose, no headers, no bullet lists.'
 ].join('\n');
@@ -930,7 +935,7 @@ async function stepPublish(cycle) {
       '\n\n' + e.text.trim();
   }).filter(Boolean).join('\n\n============================================================\n\n');
   const edition = [
-    'THE CYCLE PULSE — Y2C' + cycle,
+    'THE CYCLE PULSE — ' + simClock(cycle),
     'The Bay Tribune — Oakland',
     'Narrated by Mags Corliss, Editor-in-Chief',
     '',
@@ -944,7 +949,7 @@ async function stepPublish(cycle) {
     '',
     body,
     '',
-    '— The Bay Tribune, Y2C' + cycle
+    '— The Bay Tribune, ' + simClock(cycle)
   ].join('\n');
   const outPath = path.join(ROOT, 'editions', 'cycle_pulse_c' + cycle + '.txt');
   fs.writeFileSync(outPath, edition + '\n');
@@ -962,7 +967,7 @@ async function stepPublish(cycle) {
   const config = readJsonSafe(path.join(ROOT, 'config', 'notebooklm.json')) || {};
   if (!config.notebookId) throw new Error('config/notebooklm.json missing notebookId (permanent notebook)');
   const { nlm } = require(path.join(ROOT, 'scripts', 'notebooklmPush'));
-  const add = nlm(['source', 'add', config.notebookId, '--file', outPath, '--title', 'The Cycle Pulse — Y2C' + cycle, '--wait']);
+  const add = nlm(['source', 'add', config.notebookId, '--file', outPath, '--title', 'The Cycle Pulse — ' + simClock(cycle), '--wait']);
   // nlm() returns {ok, out} (see notebooklmPush.js) — this checked {status,
   // stdout, stderr}, which don't exist on that shape, so a successful push
   // reported "Fatal: ... undefined" every time. Found live 2026-08-15 when a
@@ -975,7 +980,7 @@ async function stepPublish(cycle) {
   // policy or notebooklmCanonSourcesValidate.js reports it unclassified (C104 + C105 were).
   const { recordCanonSource } = require(path.join(ROOT, 'scripts', 'notebooklmPush'));
   recordCanonSource(sourceId, 'allowedPublishedSourceIds', {
-    title: 'The Cycle Pulse — Y2C' + cycle,
+    title: 'The Cycle Pulse — ' + simClock(cycle),
     classification: 'published',
     reason: 'Published Cycle Pulse edition, added to the permanent notebook by the Saturday run (cron-saturday-run.js stepPublish).',
     evidence: [path.relative(ROOT, outPath)],
@@ -990,9 +995,9 @@ async function stepPublish(cycle) {
         config: config,
         format: config.audioFormat || 'deep_dive',
         length: 'long',
-        label: 'The Cycle Pulse — Y2C' + cycle,
+        label: 'The Cycle Pulse — ' + simClock(cycle),
         focus: 'The Cycle Pulse edition C' + cycle,
-        content: '🎧 **The Cycle Pulse — Y2C' + cycle + '**\nSaturday edition audio · deep_dive/long',
+        content: '🎧 **The Cycle Pulse — ' + simClock(cycle) + '**\nSaturday edition audio · deep_dive/long',
         driveDest: config.driveDest || 'edition',
       });
       if (audio && audio.audioPath) {

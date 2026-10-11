@@ -199,6 +199,8 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 
 03:33 rb COMMIT 220d419a + 2038771b (research.27 §3.2; advisor pass: contract calls lead with the proven mission_id= form, id= fallback). NOT pushed — stack ahead of origin carries es's engine.203d/engine.194 commits; es pushes its own. Next: hourly CHECKs; first read = the first TargetCycle-112 flight (~01:30 2026-10-12).
 
+03:53 rb CHECK es WORKING (full suite on codex's engine.194 cut, no prompt, box empty). git: 13 unpushed, all es's stage-2 stack (65e4afea top), tree carries es's applySportsSeason/generateCitizensEvents edits — not mine, untouched. Guests: none claimed by rb; codex on es's engine.194 (inbox +1: 2026-10-11-codex-engine194-cut.md, es's). Inbox 20. NEXT[research-build]: nothing unblocked — UNDOCKED proof waits on the first TargetCycle-112 flight (~01:30 2026-10-12); engine.286 live read waits on the builder's C111 fire. Standing by, wake :26.
+
 ## 8. Stop rule and usage
 
 - Judgment work stays premium; volume and scripted work goes to guests. Ask per task: volume × context-portability.

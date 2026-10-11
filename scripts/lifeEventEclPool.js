@@ -17,6 +17,7 @@
  *                      reads as having to sell and rent in the same hood.
  *   S / M            — "[LifeEvent-<Kind>-<Up|Down>-<S|M>] " + TEXT verbatim.
  * Fill tokens: {hood} on every key; {employer} on lifeEvent.promotion.* only. No `$` (loader drops it).
+ * Tags: home rows carry kind:home (primaryFromTags → Household); promotion rows route Career.
  *
  * Depth follows demand at the ruled seeds (fire .05, up .6, M .08, L .01): promotion S ≈ 12 up /
  * 8 down a Cycle over 426 eligible → S 20 each; M 10; L 6. Home S ≈ 4 a Cycle → 14 / 8 / 6.
@@ -32,10 +33,12 @@ const KINDS = ['promotion', 'home'];
 const KEYS = [];
 KINDS.forEach(function (k) { ['up', 'down'].forEach(function (d) { ['', '.M', '.L'].forEach(function (b) { KEYS.push('lifeEvent.' + k + '.' + d + b); }); }); });
 const TAGS = 'source:lifeEvent,auth:lifeEvent-t2';
+// es 2026-10-11: primaryFromTags returns Household when a row carries kind:home, else Career.
+const TAGS_HOME = 'source:lifeEvent,kind:home,auth:lifeEvent-t2';
 
 function pool(key, texts) {
   return texts.map(function (t) {
-    return { Kind: 'line', PoolKey: key, Slot: '', Text: t, Weight: '1', Conditions: '', Tags: TAGS, Grain: 'citizen', Active: 'yes' };
+    return { Kind: 'line', PoolKey: key, Slot: '', Text: t, Weight: '1', Conditions: '', Tags: key.indexOf('lifeEvent.home.') === 0 ? TAGS_HOME : TAGS, Grain: 'citizen', Active: 'yes' };
   });
 }
 
@@ -224,6 +227,7 @@ function validateRows(rows) {
     if (FOURTH_WALL.test(t) || FOURTH_WALL.test(r.Tags)) errors.push(i + ': fourth-wall');
     if (U.firstTag(r.Tags) !== 'source:lifeEvent') errors.push(i + ': first tag must be source:lifeEvent');
     if (r.Tags.indexOf(';') >= 0) errors.push(i + ': tags must be comma-split');
+    if ((k.indexOf('lifeEvent.home.') === 0) !== /(^|,)kind:home(,|$)/.test(r.Tags)) errors.push(i + ': kind:home on home keys only (primaryFromTags → Household)');
     if (!(Number(r.Weight) > 0)) errors.push(i + ': Weight');
     // render-format contracts (es 2026-10-11)
     if (k === 'lifeEvent.promotion.up.L' && /[.!?]$/.test(t)) errors.push(i + ': promotion.up.L is a verb phrase — no final period (stampPromotion_ appends " after N years as a <RoleType>.")');

@@ -1,0 +1,1462 @@
+{
+ "freshLines": 8531,
+ "civic": {
+  "draws": 69,
+  "keys": 29,
+  "repeats": [],
+  "bandFallback": [],
+  "perKey": [
+   {
+    "key": "Y3C7 civicRole.business.up.L",
+    "band": "L",
+    "total": 2,
+    "distinct": 2
+   },
+   {
+    "key": "Y3C7 civicRole.everyday.down",
+    "band": "S",
+    "total": 3,
+    "distinct": 3
+   },
+   {
+    "key": "Y3C7 civicRole.everyday.down.M",
+    "band": "M",
+    "total": 1,
+    "distinct": 1
+   },
+   {
+    "key": "Y3C7 civicRole.everyday.up",
+    "band": "S",
+    "total": 7,
+    "distinct": 7
+   },
+   {
+    "key": "Y3C7 civicRole.everyday.up.L",
+    "band": "L",
+    "total": 1,
+    "distinct": 1
+   },
+   {
+    "key": "Y3C7 civicRole.everyday.up.M",
+    "band": "M",
+    "total": 2,
+    "distinct": 2
+   },
+   {
+    "key": "Y3C7 civicRole.mood.down",
+    "band": "S",
+    "total": 1,
+    "distinct": 1
+   },
+   {
+    "key": "Y3C7 civicRole.mood.up",
+    "band": "S",
+    "total": 1,
+    "distinct": 1
+   },
+   {
+    "key": "Y3C7 civicRole.mood.up.M",
+    "band": "M",
+    "total": 2,
+    "distinct": 2
+   },
+   {
+    "key": "Y3C7 hardcoded/unknown",
+    "band": "S",
+    "total": 1,
+    "distinct": 1
+   },
+   {
+    "key": "Y3C8 civicRole.business.up",
+    "band": "S",
+    "total": 2,
+    "distinct": 2
+   },
+   {
+    "key": "Y3C8 civicRole.business.up.M",
+    "band": "M",
+    "total": 1,
+    "distinct": 1
+   },
+   {
+    "key": "Y3C8 civicRole.everyday.down",
+    "band": "S",
+    "total": 7,
+    "distinct": 7
+   },
+   {
+    "key": "Y3C8 civicRole.everyday.down.L",
+    "band": "L",
+    "total": 1,
+    "distinct": 1
+   },
+   {
+    "key": "Y3C8 civicRole.everyday.down.M",
+    "band": "M",
+    "total": 2,
+    "distinct": 2
+   },
+   {
+    "key": "Y3C8 civicRole.everyday.up",
+    "band": "S",
+    "total": 5,
+    "distinct": 5
+   },
+   {
+    "key": "Y3C8 civicRole.everyday.up.M",
+    "band": "M",
+    "total": 2,
+    "distinct": 2
+   },
+   {
+    "key": "Y3C8 civicRole.mood.up",
+    "band": "S",
+    "total": 2,
+    "distinct": 2
+   },
+   {
+    "key": "Y3C8 civicRole.safety.up",
+    "band": "S",
+    "total": 1,
+    "distinct": 1
+   },
+   {
+    "key": "Y3C9 civicRole.business.down",
+    "band": "S",
+    "total": 2,
+    "distinct": 2
+   },
+   {
+    "key": "Y3C9 civicRole.business.up",
+    "band": "S",
+    "total": 4,
+    "distinct": 4
+   },
+   {
+    "key": "Y3C9 civicRole.business.up.M",
+    "band": "M",
+    "total": 1,
+    "distinct": 1
+   },
+   {
+    "key": "Y3C9 civicRole.everyday.down",
+    "band": "S",
+    "total": 5,
+    "distinct": 5
+   },
+   {
+    "key": "Y3C9 civicRole.everyday.down.M",
+    "band": "M",
+    "total": 3,
+    "distinct": 3
+   },
+   {
+    "key": "Y3C9 civicRole.everyday.up",
+    "band": "S",
+    "total": 4,
+    "distinct": 4
+   },
+   {
+    "key": "Y3C9 civicRole.everyday.up.M",
+    "band": "M",
+    "total": 2,
+    "distinct": 2
+   },
+   {
+    "key": "Y3C9 civicRole.mood.down",
+    "band": "S",
+    "total": 2,
+    "distinct": 2
+   },
+   {
+    "key": "Y3C9 civicRole.mood.up.L",
+    "band": "L",
+    "total": 1,
+    "distinct": 1
+   },
+   {
+    "key": "Y3C9 civicRole.mood.up.M",
+    "band": "M",
+    "total": 1,
+    "distinct": 1
+   }
+  ]
+ },
+ "life": [
+  {
+   "tag": "LifeEvent-Home-Up-M",
+   "cycle": "Y3C7",
+   "pop": "POP-00007",
+   "name": "Hal Richmond",
+   "hood": "Chinatown",
+   "line": "Y3C7 — [LifeEvent-Home-Up-M] The landlord in Chinatown offered to sell them the unit before putting it on the market."
+  },
+  {
+   "tag": "LifeEvent-Home-Up-S",
+   "cycle": "Y3C8",
+   "pop": "POP-00031",
+   "name": "Martin Richards",
+   "hood": "Fruitvale",
+   "line": "Y3C8 — [LifeEvent-Home-Up-S] A neighbor in Fruitvale is selling to family and asked if they knew anyone, and they said maybe us."
+  },
+  {
+   "tag": "LifeEvent-Home-Up-S",
+   "cycle": "Y3C7",
+   "pop": "POP-00038",
+   "name": "Theo Park",
+   "hood": "Rockridge",
+   "line": "Y3C7 — [LifeEvent-Home-Up-S] Looked at the Rockridge market numbers and the gap had narrowed."
+  },
+  {
+   "tag": "LifeEvent-Home-Down-S",
+   "cycle": "Y3C9",
+   "pop": "POP-00127",
+   "name": "Mason Miller",
+   "hood": "Downtown",
+   "line": "Y3C9 — [LifeEvent-Home-Down-S] An open house in Downtown had a line out the door, and every person in it looked more ready than they felt."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-S",
+   "cycle": "Y3C8",
+   "pop": "POP-00134",
+   "name": "Brianna Lee",
+   "hood": "Laurel",
+   "line": "Y3C8 — [LifeEvent-Promotion-Up-S] Was handed the keys at Baylight Construction Authority to open on their own for the first time."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-S",
+   "cycle": "Y3C7",
+   "pop": "POP-00135",
+   "name": "Mina Linas",
+   "hood": "Lake Merritt",
+   "line": "Y3C7 — [LifeEvent-Promotion-Up-S] A colleague at Marine Systems said the team runs smoother on their days."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-S",
+   "cycle": "Y3C9",
+   "pop": "POP-00173",
+   "name": "Kaila Braun",
+   "hood": "Fruitvale",
+   "line": "Y3C9 — [LifeEvent-Promotion-Up-S] A manager at Alameda County Courts forwarded their write-up upstairs with a note that said look at this."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-S",
+   "cycle": "Y3C7",
+   "pop": "POP-00181",
+   "name": "Xavier Ramington",
+   "hood": "Temescal",
+   "line": "Y3C7 — [LifeEvent-Promotion-Up-S] Was asked to run the morning meeting at Oakland Hospital while the lead was out."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Down-S",
+   "cycle": "Y3C7",
+   "pop": "POP-00183",
+   "name": "Toby Lamont",
+   "hood": "Fruitvale",
+   "line": "Y3C7 — [LifeEvent-Promotion-Down-S] A manager at West Oakland Community Center asked them to redo work that had already been approved."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-M",
+   "cycle": "Y3C8",
+   "pop": "POP-00183",
+   "name": "Toby Lamont",
+   "hood": "Fruitvale",
+   "line": "Y3C8 — [LifeEvent-Promotion-Up-M] The lead at West Oakland Community Center is leaving and told them privately to go for it."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-S",
+   "cycle": "Y3C9",
+   "pop": "POP-00187",
+   "name": "Isla Sike",
+   "hood": "West Oakland",
+   "line": "Y3C9 — [LifeEvent-Promotion-Up-S] A coworker at Oakland Housing Authority said the new hires keep getting pointed their way for answers."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-S",
+   "cycle": "Y3C9",
+   "pop": "POP-00199",
+   "name": "Mateo Allen",
+   "hood": "Laurel",
+   "line": "Y3C9 — [LifeEvent-Promotion-Up-S] A quiet nod from the owner at Oakland Hospital on the way out, the kind that means something."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Down-S",
+   "cycle": "Y3C8",
+   "pop": "POP-00204",
+   "name": "Orlando Phillips",
+   "hood": "Laurel",
+   "line": "Y3C8 — [LifeEvent-Promotion-Down-S] Sat through a meeting at Laurel Market where every idea was theirs and none had their name on it."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-S",
+   "cycle": "Y3C9",
+   "pop": "POP-00215",
+   "name": "Ricky Wilton",
+   "hood": "Downtown",
+   "line": "Y3C9 — [LifeEvent-Promotion-Up-S] Was asked to run the morning meeting at City of Oakland while the lead was out."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-M",
+   "cycle": "Y3C9",
+   "pop": "POP-00223",
+   "name": "Rafael Brannie",
+   "hood": "Piedmont Ave",
+   "line": "Y3C9 — [LifeEvent-Promotion-Up-M] Got the trial run at Mayday Movers: acting lead for the month, with the real title in play."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-S",
+   "cycle": "Y3C9",
+   "pop": "POP-00230",
+   "name": "Jett Walker",
+   "hood": "Rockridge",
+   "line": "Y3C9 — [LifeEvent-Promotion-Up-S] Closed out a problem at Calderon-Nishi that had been open since before they started."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Down-S",
+   "cycle": "Y3C9",
+   "pop": "POP-00241",
+   "name": "Marc Allie",
+   "hood": "Laurel",
+   "line": "Y3C9 — [LifeEvent-Promotion-Down-S] A manager at Oakland Alternative Response Initiative asked them to redo work that had already been approved."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-S",
+   "cycle": "Y3C9",
+   "pop": "POP-00243",
+   "name": "Xanny Allen",
+   "hood": "Jack London",
+   "line": "Y3C9 — [LifeEvent-Promotion-Up-S] Was handed the keys at Port of Oakland to open on their own for the first time."
+  },
+  {
+   "tag": "LifeEvent-Home-Up-S",
+   "cycle": "Y3C7",
+   "pop": "POP-00286",
+   "name": "Yammie Perez",
+   "hood": "Temescal",
+   "line": "Y3C7 — [LifeEvent-Home-Up-S] Started a folder for a down payment and put the first real number in it."
+  },
+  {
+   "tag": "LifeEvent-Home-Up-S",
+   "cycle": "Y3C8",
+   "pop": "POP-00292",
+   "name": "Jack Phillips",
+   "hood": "Temescal",
+   "line": "Y3C8 — [LifeEvent-Home-Up-S] A lender in Temescal said the word pre-approval and nobody flinched."
+  },
+  {
+   "tag": "LifeEvent-Home-Up-S",
+   "cycle": "Y3C8",
+   "pop": "POP-00294",
+   "name": "Miguel Joson",
+   "hood": "Chinatown",
+   "line": "Y3C8 — [LifeEvent-Home-Up-S] A friend in Chinatown who just bought said it was less impossible than it looked."
+  },
+  {
+   "tag": "LifeEvent-Home-Up-S",
+   "cycle": "Y3C7",
+   "pop": "POP-00311",
+   "name": "Andre Lee",
+   "hood": "Jack London",
+   "line": "Y3C7 — [LifeEvent-Home-Up-S] A lender in Jack London said the word pre-approval and nobody flinched."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-S",
+   "cycle": "Y3C7",
+   "pop": "POP-00312",
+   "name": "Wiu Wiu",
+   "hood": "Rockridge",
+   "line": "Y3C7 — [LifeEvent-Promotion-Up-S] A quiet nod from the owner at Oakland Unified School District on the way out, the kind that means something."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-S",
+   "cycle": "Y3C9",
+   "pop": "POP-00312",
+   "name": "Wiu Wiu",
+   "hood": "Rockridge",
+   "line": "Y3C9 — [LifeEvent-Promotion-Up-S] Got the shift at Oakland Unified School District everyone wants, and nobody argued."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Down-S",
+   "cycle": "Y3C9",
+   "pop": "POP-00317",
+   "name": "Lila Bennington",
+   "hood": "Fruitvale",
+   "line": "Y3C9 — [LifeEvent-Promotion-Down-S] Heard secondhand that the opening at Oakland Unified School District they wanted had been filled from outside."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-S",
+   "cycle": "Y3C8",
+   "pop": "POP-00318",
+   "name": "Carter Harris",
+   "hood": "Downtown",
+   "line": "Y3C8 — [LifeEvent-Promotion-Up-S] Left Oakland Housing Authority on Friday with a thank-you from the person whose job they covered all week."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-S",
+   "cycle": "Y3C8",
+   "pop": "POP-00325",
+   "name": "Isabel Lopes",
+   "hood": "Fruitvale",
+   "line": "Y3C8 — [LifeEvent-Promotion-Up-S] A manager at Oakland Unified School District stopped by their desk to say the last stretch of work had not gone unnoticed."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Down-S",
+   "cycle": "Y3C9",
+   "pop": "POP-00325",
+   "name": "Isabel Lopes",
+   "hood": "Fruitvale",
+   "line": "Y3C9 — [LifeEvent-Promotion-Down-S] A supervisor at Oakland Unified School District corrected them in front of a customer."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-M",
+   "cycle": "Y3C9",
+   "pop": "POP-00334",
+   "name": "Solis Walmart",
+   "hood": "Downtown",
+   "line": "Y3C9 — [LifeEvent-Promotion-Up-M] The lead at Oakland Housing Authority is leaving and told them privately to go for it."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-S",
+   "cycle": "Y3C7",
+   "pop": "POP-00352",
+   "name": "Kaila Jordache",
+   "hood": "Piedmont Ave",
+   "line": "Y3C7 — [LifeEvent-Promotion-Up-S] A client thanked them by name in front of the whole floor at Oakland Unified School District."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-S",
+   "cycle": "Y3C8",
+   "pop": "POP-00436",
+   "name": "Augusta Davis",
+   "hood": "Fruitvale",
+   "line": "Y3C8 — [LifeEvent-Promotion-Up-S] Trained the new person at Fruitvale Community Clinic and heard afterward it was the best onboarding in years."
+  },
+  {
+   "tag": "LifeEvent-Home-Up-S",
+   "cycle": "Y3C7",
+   "pop": "POP-00464",
+   "name": "Celeste Park",
+   "hood": "Rockridge",
+   "line": "Y3C7 — [LifeEvent-Home-Up-S] Looked at the Rockridge market numbers and the gap had narrowed."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-M",
+   "cycle": "Y3C8",
+   "pop": "POP-00466",
+   "name": "Juliette Park",
+   "hood": "West Oakland",
+   "line": "Y3C8 — [LifeEvent-Promotion-Up-M] Was asked to interview at Ridgeline Ventures for the step up, with the decision due in a few weeks."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-S",
+   "cycle": "Y3C7",
+   "pop": "POP-00470",
+   "name": "Maren Johns",
+   "hood": "Rockridge",
+   "line": "Y3C7 — [LifeEvent-Promotion-Up-S] A manager at Oakland Hospital forwarded their write-up upstairs with a note that said look at this."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-S",
+   "cycle": "Y3C9",
+   "pop": "POP-00474",
+   "name": "Ally Scott",
+   "hood": "Downtown",
+   "line": "Y3C9 — [LifeEvent-Promotion-Up-S] A colleague at City of Oakland said the team runs smoother on their days."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-S",
+   "cycle": "Y3C9",
+   "pop": "POP-00478",
+   "name": "Maya Brooks",
+   "hood": "Laurel",
+   "line": "Y3C9 — [LifeEvent-Promotion-Up-S] A regular at Baylight Construction Authority asked for them specifically."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-S",
+   "cycle": "Y3C7",
+   "pop": "POP-00481",
+   "name": "Kelvon Ochoa",
+   "hood": "Rockridge",
+   "line": "Y3C7 — [LifeEvent-Promotion-Up-S] Someone from another team at Anthropic asked if they would ever consider moving over."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-S",
+   "cycle": "Y3C8",
+   "pop": "POP-00481",
+   "name": "Kelvon Ochoa",
+   "hood": "Rockridge",
+   "line": "Y3C8 — [LifeEvent-Promotion-Up-S] Their name came up in a good way at the Anthropic staff meeting."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-S",
+   "cycle": "Y3C8",
+   "pop": "POP-00485",
+   "name": "Jillian Tort",
+   "hood": "Downtown",
+   "line": "Y3C8 — [LifeEvent-Promotion-Up-S] The schedule at City of Oakland came out with their name in the slot that used to belong to someone senior."
+  },
+  {
+   "tag": "LifeEvent-Home-Up-S",
+   "cycle": "Y3C7",
+   "pop": "POP-00495",
+   "name": "Rosalind Young",
+   "hood": "Laurel",
+   "line": "Y3C7 — [LifeEvent-Home-Up-S] Drove past a house in Laurel with a sign in the yard and slowed down."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-S",
+   "cycle": "Y3C9",
+   "pop": "POP-00515",
+   "name": "Ingrid Bautista",
+   "hood": "Chinatown",
+   "line": "Y3C9 — [LifeEvent-Promotion-Up-S] Got pulled into a bigger conversation at West Oakland Community Center than the job description covers."
+  },
+  {
+   "tag": "LifeEvent-Home-Up-S",
+   "cycle": "Y3C7",
+   "pop": "POP-00533",
+   "name": "Travis Coles",
+   "hood": "West Oakland",
+   "line": "Y3C7 — [LifeEvent-Home-Up-S] Spent a Sunday at open houses in Downtown and came home talking about one of them."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Down-S",
+   "cycle": "Y3C7",
+   "pop": "POP-00573",
+   "name": "Calvin Mwangi",
+   "hood": "West Oakland",
+   "line": "Y3C7 — [LifeEvent-Promotion-Down-S] Covered for a coworker at AC Transit for a week and heard nothing about it."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-S",
+   "cycle": "Y3C8",
+   "pop": "POP-00576",
+   "name": "Beth Hayes",
+   "hood": "West Oakland",
+   "line": "Y3C8 — [LifeEvent-Promotion-Up-S] Got pulled into a bigger conversation at Oakland Parks & Recreation than the job description covers."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-S",
+   "cycle": "Y3C9",
+   "pop": "POP-00576",
+   "name": "Beth Hayes",
+   "hood": "West Oakland",
+   "line": "Y3C9 — [LifeEvent-Promotion-Up-S] The West Oakland commute felt short this week; work at Oakland Parks & Recreation is going well and they know it."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Down-S",
+   "cycle": "Y3C9",
+   "pop": "POP-00603",
+   "name": "Amir Delia",
+   "hood": "Downtown",
+   "line": "Y3C9 — [LifeEvent-Promotion-Down-S] A manager at Oakland Hospital walked past three times and did not stop once."
+  },
+  {
+   "tag": "Promotion",
+   "cycle": "Y3C8",
+   "pop": "POP-00629",
+   "name": "Marcus Ibarra",
+   "hood": "Jack London",
+   "line": "Y3C8 — [Promotion] Promoted at Baylight Construction Authority after 33 years as a Construction Foreman."
+  },
+  {
+   "tag": "LifeEvent-Home-Down-S",
+   "cycle": "Y3C9",
+   "pop": "POP-00636",
+   "name": "Luis Navarro",
+   "hood": "Fruitvale",
+   "line": "Y3C9 — [LifeEvent-Home-Down-S] Spent a Sunday at open houses in Fruitvale and came home without talking about any of them."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-S",
+   "cycle": "Y3C8",
+   "pop": "POP-00640",
+   "name": "Bryce Lee",
+   "hood": "Temescal",
+   "line": "Y3C8 — [LifeEvent-Promotion-Up-S] Closed out a problem at Eastside Family Market that had been open since before they started."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Down-S",
+   "cycle": "Y3C7",
+   "pop": "POP-00646",
+   "name": "Tiro Worso",
+   "hood": "Piedmont Ave",
+   "line": "Y3C7 — [LifeEvent-Promotion-Down-S] A raise cycle at Mayday Movers came and went without a conversation."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Down-S",
+   "cycle": "Y3C8",
+   "pop": "POP-00652",
+   "name": "Brine Williams",
+   "hood": "Chinatown",
+   "line": "Y3C8 — [LifeEvent-Promotion-Down-S] Covered for a coworker at Baylight Construction Authority for a week and heard nothing about it."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-S",
+   "cycle": "Y3C7",
+   "pop": "POP-00669",
+   "name": "Tank Fiester",
+   "hood": "Lake Merritt",
+   "line": "Y3C7 — [LifeEvent-Promotion-Up-S] A coworker at Portside Bio said the new hires keep getting pointed their way for answers."
+  },
+  {
+   "tag": "LifeEvent-Home-Down-L",
+   "cycle": "Y3C7",
+   "pop": "POP-00684",
+   "name": "Jarko Freako",
+   "hood": "West Oakland",
+   "line": "Y3C7 — [LifeEvent-Home-Down-L] Sold the house in West Oakland and signed a lease three blocks over — $331848 back from the sale"
+  },
+  {
+   "tag": "LifeEvent-Promotion-Down-S",
+   "cycle": "Y3C7",
+   "pop": "POP-00700",
+   "name": "Dave Eriksson",
+   "hood": "Fruitvale",
+   "line": "Y3C7 — [LifeEvent-Promotion-Down-S] A review at Oakland Housing Authority landed cooler than the work deserved."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-M",
+   "cycle": "Y3C8",
+   "pop": "POP-00706",
+   "name": "Rosa Ochoa",
+   "hood": "Laurel",
+   "line": "Y3C8 — [LifeEvent-Promotion-Up-M] A client at Oakland Public Library System asked that they be put in charge of the account, and the request went upstairs."
+  },
+  {
+   "tag": "LifeEvent-Home-Up-L",
+   "cycle": "Y3C8",
+   "pop": "POP-00738",
+   "name": "Vivian Tse",
+   "hood": "Chinatown",
+   "line": "Y3C8 — [LifeEvent-Home-Up-L] Put a down payment on a house in Chinatown and moved the boxes in — $111091 down on $555456"
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-S",
+   "cycle": "Y3C9",
+   "pop": "POP-00739",
+   "name": "Karem Asante",
+   "hood": "West Oakland",
+   "line": "Y3C9 — [LifeEvent-Promotion-Up-S] Trained the new person at Oakland Unified School District and heard afterward it was the best onboarding in years."
+  },
+  {
+   "tag": "LifeEvent-Home-Down-S",
+   "cycle": "Y3C7",
+   "pop": "POP-00763",
+   "name": "Kenji Tanaka",
+   "hood": "Chinatown",
+   "line": "Y3C7 — [LifeEvent-Home-Down-S] The savings took a hit this month and the house talk at dinner stopped."
+  },
+  {
+   "tag": "LifeEvent-Home-Up-S",
+   "cycle": "Y3C8",
+   "pop": "POP-00763",
+   "name": "Kenji Tanaka",
+   "hood": "Chinatown",
+   "line": "Y3C8 — [LifeEvent-Home-Up-S] Walked through an open house in Chinatown and did not laugh at the price."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-M",
+   "cycle": "Y3C9",
+   "pop": "POP-00772",
+   "name": "Beverly Hayes",
+   "hood": "West Oakland",
+   "line": "Y3C9 — [LifeEvent-Promotion-Up-M] A client at West Oakland Community Center asked that they be put in charge of the account, and the request went upstairs."
+  },
+  {
+   "tag": "LifeEvent-Home-Up-S",
+   "cycle": "Y3C7",
+   "pop": "POP-00774",
+   "name": "Malik Hayes",
+   "hood": "Fruitvale",
+   "line": "Y3C7 — [LifeEvent-Home-Up-S] Saved more this month than planned and the house talk at dinner got specific."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-S",
+   "cycle": "Y3C8",
+   "pop": "POP-00786",
+   "name": "Colin Phillips",
+   "hood": "Laurel",
+   "line": "Y3C8 — [LifeEvent-Promotion-Up-S] Was asked to run the morning meeting at Nino's while the lead was out."
+  },
+  {
+   "tag": "LifeEvent-Home-Up-S",
+   "cycle": "Y3C8",
+   "pop": "POP-00792",
+   "name": "Bobby Chen-Ramirez",
+   "hood": "Temescal",
+   "line": "Y3C8 — [LifeEvent-Home-Up-S] Drove past a house in Temescal with a sign in the yard and slowed down."
+  },
+  {
+   "tag": "LifeEvent-Home-Down-S",
+   "cycle": "Y3C7",
+   "pop": "POP-00800",
+   "name": "Rhea Morgan",
+   "hood": "Fruitvale",
+   "line": "Y3C7 — [LifeEvent-Home-Down-S] Looked at the Fruitvale market numbers and the gap had widened."
+  },
+  {
+   "tag": "Promotion",
+   "cycle": "Y3C8",
+   "pop": "POP-00811",
+   "name": "Inez Mendoza",
+   "hood": "Lake Merritt",
+   "line": "Y3C8 — [Promotion] Moved up at West Oakland Community Center after 12 years as a Nonprofit Executive Director."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-M",
+   "cycle": "Y3C8",
+   "pop": "POP-00822",
+   "name": "Patrice Rao",
+   "hood": "West Oakland",
+   "line": "Y3C8 — [LifeEvent-Promotion-Up-M] Their name is one of two at Oakland Hospital for the position everyone has been talking about."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-S",
+   "cycle": "Y3C9",
+   "pop": "POP-00822",
+   "name": "Patrice Rao",
+   "hood": "West Oakland",
+   "line": "Y3C9 — [LifeEvent-Promotion-Up-S] A supervisor at Oakland Hospital asked what they want next, and seemed to mean it."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Down-S",
+   "cycle": "Y3C7",
+   "pop": "POP-00830",
+   "name": "Sandra Velazquez",
+   "hood": "Piedmont Ave",
+   "line": "Y3C7 — [LifeEvent-Promotion-Down-S] The schedule at Oakland Hospital came out and their good shift was gone."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-S",
+   "cycle": "Y3C7",
+   "pop": "POP-00838",
+   "name": "Lillian Gebre",
+   "hood": "Fruitvale",
+   "line": "Y3C7 — [LifeEvent-Promotion-Up-S] Finished the week at Oakland Hospital with the hardest account on the floor squared away."
+  },
+  {
+   "tag": "LifeEvent-Home-Up-S",
+   "cycle": "Y3C7",
+   "pop": "POP-00847",
+   "name": "Caroline Cabrera",
+   "hood": "Uptown",
+   "line": "Y3C7 — [LifeEvent-Home-Up-S] A friend in Uptown who just bought said it was less impossible than it looked."
+  },
+  {
+   "tag": "Promotion",
+   "cycle": "Y3C7",
+   "pop": "POP-00864",
+   "name": "Genevieve Martinez",
+   "hood": "Rockridge",
+   "line": "Y3C7 — [Promotion] Got the nod for the lead role at Anthropic after 18 years as an AI Safety Researcher (Anthropic)."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-S",
+   "cycle": "Y3C9",
+   "pop": "POP-00873",
+   "name": "Hazel Salazar",
+   "hood": "Uptown",
+   "line": "Y3C9 — [LifeEvent-Promotion-Up-S] Finished the week at Fruitvale Diner with the hardest account on the floor squared away."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Down-S",
+   "cycle": "Y3C7",
+   "pop": "POP-00875",
+   "name": "Inez Diop",
+   "hood": "Lake Merritt",
+   "line": "Y3C7 — [LifeEvent-Promotion-Down-S] A supervisor at West Oakland Community Center corrected them in front of a customer."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-M",
+   "cycle": "Y3C8",
+   "pop": "POP-00875",
+   "name": "Inez Diop",
+   "hood": "Lake Merritt",
+   "line": "Y3C8 — [LifeEvent-Promotion-Up-M] A manager at West Oakland Community Center put their name forward for the open lead role."
+  },
+  {
+   "tag": "LifeEvent-Home-Up-S",
+   "cycle": "Y3C7",
+   "pop": "POP-00876",
+   "name": "Jia Carmichael",
+   "hood": "Fruitvale",
+   "line": "Y3C7 — [LifeEvent-Home-Up-S] A coworker said a Fruitvale seller might take an offer before listing, and they wrote the address down."
+  },
+  {
+   "tag": "LifeEvent-Home-Down-M",
+   "cycle": "Y3C8",
+   "pop": "POP-00876",
+   "name": "Jia Carmichael",
+   "hood": "Fruitvale",
+   "line": "Y3C8 — [LifeEvent-Home-Down-M] The Fruitvale place they had been saving toward went to a buyer who did not need a loan."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-S",
+   "cycle": "Y3C8",
+   "pop": "POP-00911",
+   "name": "Devika Wu",
+   "hood": "KONO",
+   "line": "Y3C8 — [LifeEvent-Promotion-Up-S] A manager at West Oakland Community Center forwarded their write-up upstairs with a note that said look at this."
+  },
+  {
+   "tag": "LifeEvent-Home-Up-S",
+   "cycle": "Y3C9",
+   "pop": "POP-00914",
+   "name": "Soo-jin Pham",
+   "hood": "Downtown",
+   "line": "Y3C9 — [LifeEvent-Home-Up-S] A lender in Downtown said the word pre-approval and nobody flinched."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-S",
+   "cycle": "Y3C8",
+   "pop": "POP-00942",
+   "name": "Zaniya Adams",
+   "hood": "Rockridge",
+   "line": "Y3C8 — [LifeEvent-Promotion-Up-S] A client thanked them by name in front of the whole floor at Anthropic."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-S",
+   "cycle": "Y3C7",
+   "pop": "POP-00943",
+   "name": "Pilar Ramirez",
+   "hood": "Lake Merritt",
+   "line": "Y3C7 — [LifeEvent-Promotion-Up-S] Their name came up in a good way at the Oakland Hospital staff meeting."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-S",
+   "cycle": "Y3C9",
+   "pop": "POP-00965",
+   "name": "Bruce Wright",
+   "hood": "Downtown",
+   "line": "Y3C9 — [LifeEvent-Promotion-Up-S] Their name came up in a good way at the Harborline Grill staff meeting."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-S",
+   "cycle": "Y3C8",
+   "pop": "POP-00970",
+   "name": "Guadalupe Lee",
+   "hood": "Uptown",
+   "line": "Y3C8 — [LifeEvent-Promotion-Up-S] A coworker at Blue Lantern Bar said the new hires keep getting pointed their way for answers."
+  },
+  {
+   "tag": "LifeEvent-Home-Down-S",
+   "cycle": "Y3C7",
+   "pop": "POP-01046",
+   "name": "Elliot Abraham",
+   "hood": "Jack London",
+   "line": "Y3C7 — [LifeEvent-Home-Down-S] A lender in Jack London said not yet, and the word yet did not help much."
+  },
+  {
+   "tag": "LifeEvent-Home-Up-S",
+   "cycle": "Y3C8",
+   "pop": "POP-01032",
+   "name": "Sakura Foster",
+   "hood": "Fruitvale",
+   "line": "Y3C8 — [LifeEvent-Home-Up-S] A neighbor in Fruitvale is selling to family and asked if they knew anyone, and they said maybe us."
+  },
+  {
+   "tag": "LifeEvent-Home-Up-S",
+   "cycle": "Y3C7",
+   "pop": "POP-01035",
+   "name": "Kaila Brown",
+   "hood": "Rockridge",
+   "line": "Y3C7 — [LifeEvent-Home-Up-S] Looked at the Rockridge market numbers and the gap had narrowed."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-S",
+   "cycle": "Y3C8",
+   "pop": "POP-01036",
+   "name": "Mei Wong",
+   "hood": "Rockridge",
+   "line": "Y3C8 — [LifeEvent-Promotion-Up-S] Finished the week at Oakland Unified School District with the hardest account on the floor squared away."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Down-S",
+   "cycle": "Y3C9",
+   "pop": "POP-01043",
+   "name": "Mei Renteria",
+   "hood": "Fruitvale",
+   "line": "Y3C9 — [LifeEvent-Promotion-Down-S] A client at City of Oakland asked for someone more senior."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-S",
+   "cycle": "Y3C9",
+   "pop": "POP-01068",
+   "name": "Kai Tanaka",
+   "hood": "Fruitvale",
+   "line": "Y3C9 — [LifeEvent-Promotion-Up-S] The schedule at Atlas Bay Architects came out with their name in the slot that used to belong to someone senior."
+  },
+  {
+   "tag": "LifeEvent-Home-Down-S",
+   "cycle": "Y3C8",
+   "pop": "POP-01083",
+   "name": "Antone Bautista",
+   "hood": "West Oakland",
+   "line": "Y3C8 — [LifeEvent-Home-Down-S] An open house in West Oakland had a line out the door, and every person in it looked more ready than they felt."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Down-S",
+   "cycle": "Y3C8",
+   "pop": "POP-01092",
+   "name": "Desmond Achebe",
+   "hood": "Rockridge",
+   "line": "Y3C8 — [LifeEvent-Promotion-Down-S] A manager at Coastline Construction asked them to redo work that had already been approved."
+  },
+  {
+   "tag": "LifeEvent-Home-Up-S",
+   "cycle": "Y3C8",
+   "pop": "POP-01093",
+   "name": "Marguerite Salcedo",
+   "hood": "Piedmont Ave",
+   "line": "Y3C8 — [LifeEvent-Home-Up-S] Started a folder for a down payment and put the first real number in it."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-S",
+   "cycle": "Y3C9",
+   "pop": "POP-01095",
+   "name": "Helena Voss-Adeyemi",
+   "hood": "West Oakland",
+   "line": "Y3C9 — [LifeEvent-Promotion-Up-S] Closed out a problem at Northgate Construction that had been open since before they started."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-S",
+   "cycle": "Y3C9",
+   "pop": "POP-01113",
+   "name": "Quinn Adeyemi",
+   "hood": "East Oakland",
+   "line": "Y3C9 — [LifeEvent-Promotion-Up-S] Got the shift at Parkedge Diner everyone wants, and nobody argued."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-S",
+   "cycle": "Y3C9",
+   "pop": "POP-01122",
+   "name": "Joel Roberts",
+   "hood": "West Oakland",
+   "line": "Y3C9 — [LifeEvent-Promotion-Up-S] A regular at Telegraph Press asked for them specifically."
+  },
+  {
+   "tag": "LifeEvent-Home-Up-S",
+   "cycle": "Y3C7",
+   "pop": "POP-01130",
+   "name": "Tomás Villanueva",
+   "hood": "West Oakland",
+   "line": "Y3C7 — [LifeEvent-Home-Up-S] A neighbor in San Antonio is selling to family and asked if they knew anyone, and they said maybe us."
+  },
+  {
+   "tag": "LifeEvent-Home-Up-S",
+   "cycle": "Y3C7",
+   "pop": "POP-01131",
+   "name": "Renata Villanueva",
+   "hood": "West Oakland",
+   "line": "Y3C7 — [LifeEvent-Home-Up-S] A neighbor in San Antonio is selling to family and asked if they knew anyone, and they said maybe us."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-S",
+   "cycle": "Y3C9",
+   "pop": "POP-01145",
+   "name": "Marisol Ibarra",
+   "hood": "Fruitvale",
+   "line": "Y3C9 — [LifeEvent-Promotion-Up-S] Left Oakland Police Department on Friday with a thank-you from the person whose job they covered all week."
+  },
+  {
+   "tag": "LifeEvent-Home-Down-S",
+   "cycle": "Y3C8",
+   "pop": "POP-01147",
+   "name": "Ruth Anyanwu",
+   "hood": "East Oakland",
+   "line": "Y3C8 — [LifeEvent-Home-Down-S] Looked at the East Oakland market numbers and the gap had widened."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-S",
+   "cycle": "Y3C7",
+   "pop": "POP-01148",
+   "name": "Jerome Lindqvist",
+   "hood": "Eastlake",
+   "line": "Y3C7 — [LifeEvent-Promotion-Up-S] Got the shift at Oakland Police Department everyone wants, and nobody argued."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-S",
+   "cycle": "Y3C9",
+   "pop": "POP-01150",
+   "name": "Calvin Mokoena",
+   "hood": "Downtown",
+   "line": "Y3C9 — [LifeEvent-Promotion-Up-S] A manager at Oakland Police Department stopped by their desk to say the last stretch of work had not gone unnoticed."
+  },
+  {
+   "tag": "LifeEvent-Home-Up-S",
+   "cycle": "Y3C7",
+   "pop": "POP-01155",
+   "name": "Teodoro Villalpando",
+   "hood": "West Oakland",
+   "line": "Y3C7 — [LifeEvent-Home-Up-S] Ran the numbers on a place in Fruitvale at the kitchen table and they almost worked."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-S",
+   "cycle": "Y3C9",
+   "pop": "POP-01159",
+   "name": "Dmitri Volkov",
+   "hood": "Brooklyn",
+   "line": "Y3C9 — [LifeEvent-Promotion-Up-S] Someone from another team at Oakland Fire Department asked if they would ever consider moving over."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-S",
+   "cycle": "Y3C8",
+   "pop": "POP-01161",
+   "name": "Samuel Adeyemi",
+   "hood": "Ivy Hill",
+   "line": "Y3C8 — [LifeEvent-Promotion-Up-S] A colleague at Oakland Fire Department said the team runs smoother on their days."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-S",
+   "cycle": "Y3C8",
+   "pop": "POP-01162",
+   "name": "Grace Oyelaran",
+   "hood": "West Oakland",
+   "line": "Y3C8 — [LifeEvent-Promotion-Up-S] A regular at Oakland Alternative Response Initiative asked for them specifically."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Down-S",
+   "cycle": "Y3C7",
+   "pop": "POP-01163",
+   "name": "Rashida Coleman-Ortiz",
+   "hood": "Fruitvale",
+   "line": "Y3C7 — [LifeEvent-Promotion-Down-S] A manager at Oakland Alternative Response Initiative walked past three times and did not stop once."
+  },
+  {
+   "tag": "LifeEvent-Home-Down-S",
+   "cycle": "Y3C7",
+   "pop": "POP-01164",
+   "name": "Hector Quintanilla",
+   "hood": "East Oakland",
+   "line": "Y3C7 — [LifeEvent-Home-Down-S] A friend in East Oakland who bought last year said the first year is the hardest, and did not smile."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Down-S",
+   "cycle": "Y3C8",
+   "pop": "POP-01165",
+   "name": "Imani Delacroix",
+   "hood": "West Oakland",
+   "line": "Y3C8 — [LifeEvent-Promotion-Down-S] A raise cycle at Oakland Alternative Response Initiative came and went without a conversation."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Down-S",
+   "cycle": "Y3C7",
+   "pop": "POP-01167",
+   "name": "Lena Marchetti",
+   "hood": "East Oakland",
+   "line": "Y3C7 — [LifeEvent-Promotion-Down-S] The Oakland Alternative Response Initiative break room went quiet when the budget came up."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Down-S",
+   "cycle": "Y3C8",
+   "pop": "POP-01167",
+   "name": "Lena Marchetti",
+   "hood": "East Oakland",
+   "line": "Y3C8 — [LifeEvent-Promotion-Down-S] A supervisor at Oakland Alternative Response Initiative corrected them in front of a customer."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-S",
+   "cycle": "Y3C9",
+   "pop": "POP-01177",
+   "name": "Mei-Lin Zhou",
+   "hood": "Chinatown",
+   "line": "Y3C9 — [LifeEvent-Promotion-Up-S] A client thanked them by name in front of the whole floor at Oakland Hospital."
+  },
+  {
+   "tag": "LifeEvent-Home-Up-S",
+   "cycle": "Y3C8",
+   "pop": "POP-01179",
+   "name": "Ximena Salcedo",
+   "hood": "San Antonio",
+   "line": "Y3C8 — [LifeEvent-Home-Up-S] Looked at the San Antonio market numbers and the gap had narrowed."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Down-S",
+   "cycle": "Y3C7",
+   "pop": "POP-01180",
+   "name": "Kofi Boateng",
+   "hood": "Eastlake",
+   "line": "Y3C7 — [LifeEvent-Promotion-Down-S] Heard secondhand that the opening at Oakland Hospital they wanted had been filled from outside."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-S",
+   "cycle": "Y3C7",
+   "pop": "POP-01183",
+   "name": "Rosalind Achterberg",
+   "hood": "Rockridge",
+   "line": "Y3C7 — [LifeEvent-Promotion-Up-S] The Rockridge commute felt short this week; work at Oakland Unified School District is going well and they know it."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-S",
+   "cycle": "Y3C8",
+   "pop": "POP-01184",
+   "name": "Dominic Okeke-Brandt",
+   "hood": "Laurel",
+   "line": "Y3C8 — [LifeEvent-Promotion-Up-S] The Laurel commute felt short this week; work at Oakland Unified School District is going well and they know it."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-S",
+   "cycle": "Y3C8",
+   "pop": "POP-01186",
+   "name": "Everett Maddox",
+   "hood": "West Oakland",
+   "line": "Y3C8 — [LifeEvent-Promotion-Up-S] A quiet nod from the owner at Oakland Unified School District on the way out, the kind that means something."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Down-M",
+   "cycle": "Y3C7",
+   "pop": "POP-01189",
+   "name": "Tobiah Nakagawa",
+   "hood": "KONO",
+   "line": "Y3C7 — [LifeEvent-Promotion-Down-M] The owner at Oakland Unified School District said hours are being looked at across the board."
+  },
+  {
+   "tag": "LifeEvent-Home-Up-S",
+   "cycle": "Y3C7",
+   "pop": "POP-01195",
+   "name": "Elijah Brown",
+   "hood": "Rockridge",
+   "line": "Y3C7 — [LifeEvent-Home-Up-S] Looked at the Rockridge market numbers and the gap had narrowed."
+  },
+  {
+   "tag": "LifeEvent-Promotion-Up-S",
+   "cycle": "Y3C7",
+   "pop": "POP-01196",
+   "name": "Itzel Murakami",
+   "hood": "West Oakland",
+   "line": "Y3C7 — [LifeEvent-Promotion-Up-S] A supervisor at PG&E Oakland Service Area asked what they want next, and seemed to mean it."
+  }
+ ],
+ "householdTypeChanges": [
+  {
+   "id": "HH-0084-102",
+   "before": {
+    "HouseholdId": "HH-0084-102",
+    "HeadOfHousehold": "POP-00193",
+    "HouseholdType": "couple",
+    "Members": "[\"POP-00193\"]",
+    "Neighborhood": "Jack London",
+    "HousingType": "rented",
+    "MonthlyRent": "2956",
+    "HousingCost": "0",
+    "HouseholdIncome": "181674",
+    "FormedCycle": "84",
+    "DissolvedCycle": "",
+    "Status": "active",
+    "HouseholdSavings": "728519"
+   },
+   "after": {
+    "HouseholdId": "HH-0084-102",
+    "HeadOfHousehold": "POP-00193",
+    "HouseholdType": "couple",
+    "Members": "[\"POP-00193\"]",
+    "Neighborhood": "Jack London",
+    "HousingType": "owned",
+    "MonthlyRent": "3671",
+    "HousingCost": "786720",
+    "HouseholdIncome": "181674",
+    "FormedCycle": "84",
+    "DissolvedCycle": "",
+    "Status": "active",
+    "HouseholdSavings": "572060"
+   }
+  },
+  {
+   "id": "HH-0084-122",
+   "before": {
+    "HouseholdId": "HH-0084-122",
+    "HeadOfHousehold": "POP-00213",
+    "HouseholdType": "couple",
+    "Members": "[\"POP-00213\"]",
+    "Neighborhood": "Temescal",
+    "HousingType": "rented",
+    "MonthlyRent": "1703",
+    "HousingCost": "0",
+    "HouseholdIncome": "135491",
+    "FormedCycle": "84",
+    "DissolvedCycle": "",
+    "Status": "active",
+    "HouseholdSavings": "676432"
+   },
+   "after": {
+    "HouseholdId": "HH-0084-122",
+    "HeadOfHousehold": "POP-00213",
+    "HouseholdType": "couple",
+    "Members": "[\"POP-00213\"]",
+    "Neighborhood": "Temescal",
+    "HousingType": "owned",
+    "MonthlyRent": "2107",
+    "HousingCost": "451440",
+    "HouseholdIncome": "135491",
+    "FormedCycle": "84",
+    "DissolvedCycle": "",
+    "Status": "active",
+    "HouseholdSavings": "676745"
+   }
+  },
+  {
+   "id": "HH-0084-193",
+   "before": {
+    "HouseholdId": "HH-0084-193",
+    "HeadOfHousehold": "POP-00284",
+    "HouseholdType": "couple",
+    "Members": "[\"POP-00284\"]",
+    "Neighborhood": "Temescal",
+    "HousingType": "rented",
+    "MonthlyRent": "1703",
+    "HousingCost": "0",
+    "HouseholdIncome": "117600",
+    "FormedCycle": "84",
+    "DissolvedCycle": "",
+    "Status": "active",
+    "HouseholdSavings": "1013385"
+   },
+   "after": {
+    "HouseholdId": "HH-0084-193",
+    "HeadOfHousehold": "POP-00284",
+    "HouseholdType": "couple",
+    "Members": "[\"POP-00284\"]",
+    "Neighborhood": "Temescal",
+    "HousingType": "owned",
+    "MonthlyRent": "2107",
+    "HousingCost": "451440",
+    "HouseholdIncome": "117600",
+    "FormedCycle": "84",
+    "DissolvedCycle": "",
+    "Status": "active",
+    "HouseholdSavings": "1013610"
+   }
+  },
+  {
+   "id": "HH-0084-306",
+   "before": {
+    "HouseholdId": "HH-0084-306",
+    "HeadOfHousehold": "POP-00459",
+    "HouseholdType": "couple",
+    "Members": "[\"POP-00459\"]",
+    "Neighborhood": "Fruitvale",
+    "HousingType": "owned",
+    "MonthlyRent": "3098",
+    "HousingCost": "0",
+    "HouseholdIncome": "199921",
+    "FormedCycle": "84",
+    "DissolvedCycle": "",
+    "Status": "active",
+    "HouseholdSavings": "1233968"
+   },
+   "after": {
+    "HouseholdId": "HH-0084-306",
+    "HeadOfHousehold": "POP-00459",
+    "HouseholdType": "couple",
+    "Members": "[\"POP-00459\"]",
+    "Neighborhood": "West Oakland",
+    "HousingType": "rented",
+    "MonthlyRent": "3625",
+    "HousingCost": "0",
+    "HouseholdIncome": "199921",
+    "FormedCycle": "84",
+    "DissolvedCycle": "",
+    "Status": "active",
+    "HouseholdSavings": "1365761"
+   }
+  },
+  {
+   "id": "HH-0084-382",
+   "before": {
+    "HouseholdId": "HH-0084-382",
+    "HeadOfHousehold": "POP-00543",
+    "HouseholdType": "couple",
+    "Members": "[\"POP-00543\"]",
+    "Neighborhood": "Downtown",
+    "HousingType": "owned",
+    "MonthlyRent": "2537",
+    "HousingCost": "0",
+    "HouseholdIncome": "247525",
+    "FormedCycle": "84",
+    "DissolvedCycle": "",
+    "Status": "active",
+    "HouseholdSavings": "559767"
+   },
+   "after": {
+    "HouseholdId": "HH-0084-382",
+    "HeadOfHousehold": "POP-00543",
+    "HouseholdType": "couple",
+    "Members": "[\"POP-00543\"]",
+    "Neighborhood": "West Oakland",
+    "HousingType": "rented",
+    "MonthlyRent": "3625",
+    "HousingCost": "0",
+    "HouseholdIncome": "247525",
+    "FormedCycle": "84",
+    "DissolvedCycle": "",
+    "Status": "active",
+    "HouseholdSavings": "722079"
+   }
+  },
+  {
+   "id": "HH-0084-467",
+   "before": {
+    "HouseholdId": "HH-0084-467",
+    "HeadOfHousehold": "POP-00684",
+    "HouseholdType": "couple",
+    "Members": "[\"POP-00684\"]",
+    "Neighborhood": "West Oakland",
+    "HousingType": "owned",
+    "MonthlyRent": "3647",
+    "HousingCost": "781440",
+    "HouseholdIncome": "99415",
+    "FormedCycle": "84",
+    "DissolvedCycle": "",
+    "Status": "active",
+    "HouseholdSavings": "831653"
+   },
+   "after": {
+    "HouseholdId": "HH-0084-467",
+    "HeadOfHousehold": "POP-00684",
+    "HouseholdType": "couple",
+    "Members": "[\"POP-00684\"]",
+    "Neighborhood": "West Oakland",
+    "HousingType": "rented",
+    "MonthlyRent": "3625",
+    "HousingCost": "0",
+    "HouseholdIncome": "99415",
+    "FormedCycle": "84",
+    "DissolvedCycle": "",
+    "Status": "active",
+    "HouseholdSavings": "1156002"
+   }
+  },
+  {
+   "id": "HH-0102-F025",
+   "before": {
+    "HouseholdId": "HH-0102-F025",
+    "HeadOfHousehold": "POP-00815",
+    "HouseholdType": "couple",
+    "Members": "[\"POP-00815\"]",
+    "Neighborhood": "KONO",
+    "HousingType": "owned",
+    "MonthlyRent": "2094",
+    "HousingCost": "448800",
+    "HouseholdIncome": "175400",
+    "FormedCycle": "102",
+    "DissolvedCycle": "",
+    "Status": "active",
+    "HouseholdSavings": "516920"
+   },
+   "after": {
+    "HouseholdId": "HH-0102-F025",
+    "HeadOfHousehold": "POP-00815",
+    "HouseholdType": "couple",
+    "Members": "[\"POP-00815\"]",
+    "Neighborhood": "Brooklyn",
+    "HousingType": "rented",
+    "MonthlyRent": "3244",
+    "HousingCost": "0",
+    "HouseholdIncome": "175400",
+    "FormedCycle": "102",
+    "DissolvedCycle": "",
+    "Status": "active",
+    "HouseholdSavings": "700607"
+   }
+  },
+  {
+   "id": "HH-0104-F009",
+   "before": {
+    "HouseholdId": "HH-0104-F009",
+    "HeadOfHousehold": "POP-00738",
+    "HouseholdType": "family",
+    "Members": "[\"POP-00738\",\"POP-00977\"]",
+    "Neighborhood": "Chinatown",
+    "HousingType": "rented",
+    "MonthlyRent": "2104",
+    "HousingCost": "",
+    "HouseholdIncome": "136175",
+    "FormedCycle": "104",
+    "DissolvedCycle": "",
+    "Status": "active",
+    "HouseholdSavings": "812825"
+   },
+   "after": {
+    "HouseholdId": "HH-0104-F009",
+    "HeadOfHousehold": "POP-00738",
+    "HouseholdType": "family",
+    "Members": "[\"POP-00738\",\"POP-00977\"]",
+    "Neighborhood": "Chinatown",
+    "HousingType": "owned",
+    "MonthlyRent": "2592",
+    "HousingCost": "555456",
+    "HouseholdIncome": "136175",
+    "FormedCycle": "104",
+    "DissolvedCycle": "",
+    "Status": "active",
+    "HouseholdSavings": "702006"
+   }
+  },
+  {
+   "id": "HH-0107-F019",
+   "before": {
+    "HouseholdId": "HH-0107-F019",
+    "HeadOfHousehold": "POP-00640",
+    "HouseholdType": "solo",
+    "Members": "[\"POP-00640\"]",
+    "Neighborhood": "Temescal",
+    "HousingType": "rented",
+    "MonthlyRent": "1707",
+    "HousingCost": "",
+    "HouseholdIncome": "126776",
+    "FormedCycle": "107",
+    "DissolvedCycle": "",
+    "Status": "active",
+    "HouseholdSavings": "867137"
+   },
+   "after": {
+    "HouseholdId": "HH-0107-F019",
+    "HeadOfHousehold": "POP-00640",
+    "HouseholdType": "solo",
+    "Members": "[\"POP-00640\"]",
+    "Neighborhood": "Temescal",
+    "HousingType": "owned",
+    "MonthlyRent": "2107",
+    "HousingCost": "451440",
+    "HouseholdIncome": "126776",
+    "FormedCycle": "107",
+    "DissolvedCycle": "",
+    "Status": "active",
+    "HouseholdSavings": "867442"
+   }
+  },
+  {
+   "id": "HH-0110-F044",
+   "before": {
+    "HouseholdId": "HH-0110-F044",
+    "HeadOfHousehold": "POP-01180",
+    "HouseholdType": "couple",
+    "Members": "[\"POP-01180\"]",
+    "Neighborhood": "Eastlake",
+    "HousingType": "rented",
+    "MonthlyRent": "1818",
+    "HousingCost": "",
+    "HouseholdIncome": "153700",
+    "FormedCycle": "110",
+    "DissolvedCycle": "",
+    "Status": "active"
+   },
+   "after": {
+    "HouseholdId": "HH-0110-F044",
+    "HeadOfHousehold": "POP-01180",
+    "HouseholdType": "couple",
+    "Members": "[\"POP-01180\"]",
+    "Neighborhood": "Eastlake",
+    "HousingType": "owned",
+    "MonthlyRent": "2240",
+    "HousingCost": "479952",
+    "HouseholdIncome": "153700",
+    "FormedCycle": "110",
+    "DissolvedCycle": "",
+    "Status": "active",
+    "HouseholdSavings": "463700"
+   }
+  }
+ ]
+}

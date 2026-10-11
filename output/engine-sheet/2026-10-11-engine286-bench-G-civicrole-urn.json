@@ -1,0 +1,192 @@
+{
+ "byCycle": {
+  "111": {
+   "draws": 21,
+   "keys": 9,
+   "repeats": 0,
+   "fallbackML": 0
+  },
+  "112": {
+   "draws": 23,
+   "keys": 9,
+   "repeats": 0,
+   "fallbackML": 0
+  },
+  "113": {
+   "draws": 25,
+   "keys": 10,
+   "repeats": 0,
+   "fallbackML": 0
+  }
+ },
+ "perKey": [
+  {
+   "key": "111 civicRole.business.up.L",
+   "band": "L",
+   "total": 2,
+   "distinct": 2
+  },
+  {
+   "key": "111 civicRole.everyday.down",
+   "band": "S",
+   "total": 4,
+   "distinct": 4
+  },
+  {
+   "key": "111 civicRole.everyday.down.M",
+   "band": "M",
+   "total": 1,
+   "distinct": 1
+  },
+  {
+   "key": "111 civicRole.everyday.up",
+   "band": "S",
+   "total": 7,
+   "distinct": 7
+  },
+  {
+   "key": "111 civicRole.everyday.up.L",
+   "band": "L",
+   "total": 1,
+   "distinct": 1
+  },
+  {
+   "key": "111 civicRole.everyday.up.M",
+   "band": "M",
+   "total": 2,
+   "distinct": 2
+  },
+  {
+   "key": "111 civicRole.mood.down",
+   "band": "S",
+   "total": 1,
+   "distinct": 1
+  },
+  {
+   "key": "111 civicRole.mood.up",
+   "band": "S",
+   "total": 1,
+   "distinct": 1
+  },
+  {
+   "key": "111 civicRole.mood.up.M",
+   "band": "M",
+   "total": 2,
+   "distinct": 2
+  },
+  {
+   "key": "112 civicRole.business.up",
+   "band": "S",
+   "total": 2,
+   "distinct": 2
+  },
+  {
+   "key": "112 civicRole.business.up.M",
+   "band": "M",
+   "total": 1,
+   "distinct": 1
+  },
+  {
+   "key": "112 civicRole.everyday.down",
+   "band": "S",
+   "total": 7,
+   "distinct": 7
+  },
+  {
+   "key": "112 civicRole.everyday.down.L",
+   "band": "L",
+   "total": 1,
+   "distinct": 1
+  },
+  {
+   "key": "112 civicRole.everyday.down.M",
+   "band": "M",
+   "total": 2,
+   "distinct": 2
+  },
+  {
+   "key": "112 civicRole.everyday.up",
+   "band": "S",
+   "total": 5,
+   "distinct": 5
+  },
+  {
+   "key": "112 civicRole.everyday.up.M",
+   "band": "M",
+   "total": 2,
+   "distinct": 2
+  },
+  {
+   "key": "112 civicRole.mood.up",
+   "band": "S",
+   "total": 2,
+   "distinct": 2
+  },
+  {
+   "key": "112 civicRole.safety.up",
+   "band": "S",
+   "total": 1,
+   "distinct": 1
+  },
+  {
+   "key": "113 civicRole.business.down",
+   "band": "S",
+   "total": 2,
+   "distinct": 2
+  },
+  {
+   "key": "113 civicRole.business.up",
+   "band": "S",
+   "total": 4,
+   "distinct": 4
+  },
+  {
+   "key": "113 civicRole.business.up.M",
+   "band": "M",
+   "total": 1,
+   "distinct": 1
+  },
+  {
+   "key": "113 civicRole.everyday.down",
+   "band": "S",
+   "total": 5,
+   "distinct": 5
+  },
+  {
+   "key": "113 civicRole.everyday.down.M",
+   "band": "M",
+   "total": 3,
+   "distinct": 3
+  },
+  {
+   "key": "113 civicRole.everyday.up",
+   "band": "S",
+   "total": 4,
+   "distinct": 4
+  },
+  {
+   "key": "113 civicRole.everyday.up.M",
+   "band": "M",
+   "total": 2,
+   "distinct": 2
+  },
+  {
+   "key": "113 civicRole.mood.down",
+   "band": "S",
+   "total": 2,
+   "distinct": 2
+  },
+  {
+   "key": "113 civicRole.mood.up.L",
+   "band": "L",
+   "total": 1,
+   "distinct": 1
+  },
+  {
+   "key": "113 civicRole.mood.up.M",
+   "band": "M",
+   "total": 1,
+   "distinct": 1
+  }
+ ]
+}

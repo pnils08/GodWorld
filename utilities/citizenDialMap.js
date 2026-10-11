@@ -49,6 +49,18 @@ var DIAL_MAP = {
   'CivicRole-Down-S':   { composure: -1 },
   'CivicRole-Down-M':   { composure: -2, drive: -1 },
   'CivicRole-Down-L':   { composure: -4, drive: -2, sociability: -1 },
+  // engine.286 Task 2: the pursuit dice. Promotion L is the writer's own tag (Promotion /
+  // Career-Layoff) — one line, one fold; home L carries its graded tag (no dial on [Home]).
+  'LifeEvent-Promotion-Up-S':   { drive: 1 },
+  'LifeEvent-Promotion-Up-M':   { drive: 2, composure: 1 },
+  'LifeEvent-Promotion-Down-S': { composure: -1 },
+  'LifeEvent-Promotion-Down-M': { composure: -2, drive: -1 },
+  'LifeEvent-Home-Up-S':        { family: 1 },
+  'LifeEvent-Home-Up-M':        { family: 2, drive: 1 },
+  'LifeEvent-Home-Up-L':        { family: 4, composure: 2, drive: 1 },
+  'LifeEvent-Home-Down-S':      { composure: -1 },
+  'LifeEvent-Home-Down-M':      { composure: -2, family: -1 },
+  'LifeEvent-Home-Down-L':      { composure: -5, family: -2, drive: -1 },
   // engine.201 ruling 1b (2026-09-13): a routine generator line is a plain day — it moves nothing.
   //   The crons read these lines as lived experience; the citizen's own reaction routes back
   //   through the reflection path. Before: +1 tints, ~1,300 upward pushes a cycle, none down.

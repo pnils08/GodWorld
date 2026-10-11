@@ -1390,6 +1390,7 @@ function serializeDialState_(c) {
   if (c.debtDefault) o.debtDefault = c.debtDefault; // engine.276 default mark {l, n} — written by the money loop in Phase 5, read by the home roll
   if (c.grief) o.grief = c.grief; // engine.94 B.1 durable bereavement stamp
   if (c.fan) o.fan = c.fan; // engine.208 the team a fan follows ('as' | 'oaks' | 'both')
+  if (c.lifeEvent) o.lifeEvent = c.lifeEvent; // engine.286 Task 2 held medium event {k, d, c} — the promotion die writes it, the order + own roll read it
   return JSON.stringify(o);
 }
 

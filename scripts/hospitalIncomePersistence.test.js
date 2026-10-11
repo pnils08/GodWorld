@@ -25,7 +25,7 @@ const sb = { Logger: { log() {} }, safeRand_: ctx => ctx.rng,
   ECONOMIC_PARAMETERS: JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'economic_parameters.json'), 'utf8')) }; // engine.199: live reads the Economic_Parameters tab
 vm.createContext(sb);
 for (const file of ['phase01-config/advanceSimulationCalendar.js', 'utilities/citizenDerivation.js',
-  'phase05-citizens/educationCareerEngine.js', 'phase05-citizens/runCareerEngine.js',
+  'phase05-citizens/educationCareerEngine.js', 'phase05-citizens/runCivicRoleEngine.js', 'phase05-citizens/runCareerEngine.js', // engine.286 Task 2: the die's shared roll
   'utilities/cycleModes.js', 'phase05-citizens/judicialLifecycle.js', // Task 6b: custody clock + seeded dismissal draw
   'phase05-citizens/runHouseholdEngine.js',
   'phase05-citizens/generationalWealthEngine.js', 'phase04-events/generationalEventsEngine.js',
@@ -602,7 +602,7 @@ function custody(people, opts) {
     .map(p => caseRowFor(p.POPID, opts.arrest === undefined ? 110 : opts.arrest));
   const cells = [], errors = [];
   let draws = 0;
-  const ctx = { config: { cycleCount: opts.cycle || CYC, judicialDismissAfterCycles: opts.dial === undefined ? 3 : opts.dial },
+  const ctx = { config: { cycleCount: opts.cycle || CYC, judicialDismissAfterCycles: opts.dial === undefined ? 3 : opts.dial, lifeEventFireChance: 0, lifeEventUpChance: 0.6, lifeEventPremiseLean: 0.2, lifeEventMediumOdds: 0.08, lifeEventLargeOdds: 0.01, lifeEventLiftCycles: 2, lifeEventPromotionLift: 1.5, lifeEventPromotionDrop: 0.5, lifeEventPromotionOwnChance: 0.05, lifeEventHomeRollBoost: 3, lifeEventHomeCarryBar: 0.5, homeLossChance: 0.00625 }, // engine.286 die keys, gate shut
     summary: Object.assign({ cycleId: opts.cycle || CYC }, opts.summary || {}), now: 'synthetic',
     rng: () => { draws++; return opts.rngValue === undefined ? 0.999 : opts.rngValue; },
     ledger: { headers: H.slice(), rows: people.map(p => H.map(name => p[name])), dirty: false }, logRows: [],

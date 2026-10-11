@@ -46,6 +46,7 @@ for (const rel of [
   'phase05-citizens/educationCareerEngine.js', 'phase05-citizens/maneuverEngine.js',
   'utilities/cycleModes.js', 'phase05-citizens/judicialLifecycle.js',
   'phase05-citizens/generationalWealthEngine.js',   // hospitalIncomeHit_ / setHospitalIncomeState_
+  'phase05-citizens/runCivicRoleEngine.js',         // engine.286 Task 2: the promotion die's shared roll
   'phase05-citizens/runCareerEngine.js'
 ]) {
   vm.runInContext(fs.readFileSync(path.join(ROOT, rel), 'utf8'), w, { filename: rel });
@@ -96,7 +97,7 @@ function makeCtx(rows, cycle, rngFn) {
   const trace = { draws: 0 };
   return {
     trace,
-    mode: {}, config: { cycleCount: cycle, judicialDismissAfterCycles: 3 }, now: 'C' + cycle,
+    mode: {}, config: { cycleCount: cycle, judicialDismissAfterCycles: 3, lifeEventFireChance: 0, lifeEventUpChance: 0.6, lifeEventPremiseLean: 0.2, lifeEventMediumOdds: 0.08, lifeEventLargeOdds: 0.01, lifeEventLiftCycles: 2, lifeEventPromotionLift: 1.5, lifeEventPromotionDrop: 0.5, lifeEventPromotionOwnChance: 0.05, lifeEventHomeRollBoost: 3, lifeEventHomeCarryBar: 0.5, homeLossChance: 0.00625 }, // engine.286 die keys, gate shut now: 'C' + cycle,
     cache: { getData: tab => tab === 'Judicial_Ledger' ? { exists: true, values: [w.JUDICIAL_CASE_FIELDS_.slice()] } : { exists: false, values: [] } },
     summary: { absoluteCycle: cycle, simYear: 2042 },
     rng: () => { trace.draws++; return rngFn ? rngFn() : 0.0001; },      // 0.0001: every eligible row before the cap draws an event

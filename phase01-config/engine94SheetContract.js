@@ -238,7 +238,20 @@ var ENGINE286_CONFIG_SEEDS = [
   ['civicRoleUpChance', 0.6, 'engine.286 civic role: base chance an official\'s hood event is up (a lift) rather than down (an obstacle), before the hood premise leans it; above 0.5 = skew up', 0.05, 0.95, false],
   ['civicRolePremiseLean', 0.2, 'engine.286 civic role: how far a good or bad hood premise (business, safety, city project, mood) moves the up chance', 0, 0.45, false],
   ['civicRoleMediumOdds', 0.12, 'engine.286 civic role: base odds of a medium-weight event at aura 1 (aura = 1.2 + approval, Tier, Famous raise it; small is squeezed no lower than medium)', 0, 0.9, false],
-  ['civicRoleLargeOdds', 0.04, 'engine.286 civic role: base odds of a large-weight event at aura 1; must not exceed civicRoleMediumOdds', 0, 0.9, false]
+  ['civicRoleLargeOdds', 0.04, 'engine.286 civic role: base odds of a large-weight event at aura 1; must not exceed civicRoleMediumOdds', 0, 0.9, false],
+  // engine.286 Task 2 — the pursuit dice (promotion, home). Builder 2026-10-11: rare — "we dont want such a volitale tracked popuation".
+  ['lifeEventFireChance', 0.05, 'engine.286 life events: per-citizen (promotion) / per-household (home) chance a pursuit event fires this Cycle at all (aura drives size, not frequency)', 0, 1, false],
+  ['lifeEventUpChance', 0.6, 'engine.286 life events: base chance the event is up (a break) rather than down (a setback), before the premise leans it; above 0.5 = skew up', 0.05, 0.95, false],
+  ['lifeEventPremiseLean', 0.2, 'engine.286 life events: how far a good / bad premise (the employer in the top / bottom third by growth; the household carry) moves the up chance', 0, 0.45, false],
+  ['lifeEventMediumOdds', 0.08, 'engine.286 life events: base odds of a medium event at aura 1 (the writer\'s odds move)', 0, 0.9, false],
+  ['lifeEventLargeOdds', 0.01, 'engine.286 life events: base odds of a large event at aura 1 (the writer fires: promotion / layoff / purchase / forced sale); must not exceed lifeEventMediumOdds', 0, 0.9, false],
+  ['lifeEventLiftCycles', 2, 'engine.286 life events: Cycles a medium promotion break or setback holds (the promotion queue lift, the own shot at a raise)', 1, 8, true],
+  ['lifeEventPromotionLift', 1.5, 'engine.286 life events: promotion-queue wait multiplier while a medium break holds', 1, 4, false],
+  ['lifeEventPromotionDrop', 0.5, 'engine.286 life events: promotion-queue wait multiplier while a medium setback holds', 0, 1, false],
+  ['lifeEventPromotionOwnChance', 0.05, 'engine.286 life events: per-Cycle chance a citizen holding a medium break gets the raise through the writer', 0, 1, false],
+  ['lifeEventHomeRollBoost', 3, 'engine.286 life events: multiplier on a qualified household\'s home-buying roll the Cycle a medium home break lands', 1, 20, false],
+  ['homeLossChance', 0.00625, 'engine.286 life events: per-Cycle chance an at-risk owned household (over lifeEventHomeCarryBar, or a default mark) is forced to sell — a standing risk beside the weekly dice, about one sale in 20 Cycles citywide at 8 stretched households', 0, 0.5, false],
+  ['lifeEventHomeCarryBar', 0.5, 'engine.286 life events: an owned household is at risk of a forced sale when its own payment plus property tax exceeds this share of HouseholdIncome, or a member carries a default mark', 0.1, 1, false]
 ];
 
 function ensureEngine286Config_(ss) {

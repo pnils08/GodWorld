@@ -969,6 +969,7 @@ function generateCitizensEvents_(ctx) {
     if (has("source:curiosity")) return "Lifestyle";
     if (has("source:communityLife")) return "Neighborhood";
     if (has("source:civicRole")) return "Civic Perception"; // engine.286: paired with the loader whitelist; civicRole.* pools are skipped by this generator
+    if (has("source:lifeEvent")) return has("kind:home") ? "Household" : "Career"; // engine.286 Task 2: paired with the loader whitelist; lifeEvent.* pools are skipped by this generator
     return "Daily";
   }
 
@@ -2922,6 +2923,7 @@ function generateCitizensEvents_(ctx) {
       for (var clk in contentLedger.lines) {
         if (!contentLedger.lines.hasOwnProperty(clk)) continue;
         if (clk.indexOf('civicRole.') === 0) continue; // engine.286 T6-5: owned by runCivicRoleEngine_
+        if (clk.indexOf('lifeEvent.') === 0) continue; // engine.286 Task 2: owned by the promotion and home dice
         var clLines = contentLedger.lines[clk];
         for (var cli = 0; cli < clLines.length; cli++) {
           var clEntry = clLines[cli];

@@ -299,6 +299,14 @@ const bl = rows => [BLH].concat(rows);
   assert('deterministic', run() === run());
 }
 
+// engine.286 Task 2: the promotion die's keys with the gate shut — a zero gate draws no rng,
+// so these fixtures' roll sequences reach the business budget exactly as before.
+const LIFE_EVENT_OFF = { lifeEventFireChance: 0, lifeEventUpChance: 0.6, lifeEventPremiseLean: 0.2, lifeEventMediumOdds: 0.08,
+  lifeEventLargeOdds: 0.01, lifeEventLiftCycles: 2, lifeEventPromotionLift: 1.5, lifeEventPromotionDrop: 0.5,
+  lifeEventPromotionOwnChance: 0.05, lifeEventHomeRollBoost: 3, lifeEventHomeCarryBar: 0.5, homeLossChance: 0.00625 };
+
+const DIE_WAKE = {};
+
 // engine.201 W1a/W1b: full career producer -> stored LifeHistory -> Phase 9.
 // All citizens/businesses below are explicitly synthetic and exist only in this VM.
 {
@@ -319,6 +327,7 @@ const bl = rows => [BLH].concat(rows);
     'utilities/citizenDerivation.js', 'phase01-config/advanceSimulationCalendar.js',
     'phase05-citizens/educationCareerEngine.js', 'phase05-citizens/maneuverEngine.js',
     'utilities/cycleModes.js', 'phase05-citizens/judicialLifecycle.js', // engine.254 Task 6b: the custody dismissal pass
+    'phase05-citizens/runCivicRoleEngine.js', // engine.286 Task 2: the promotion die's shared roll
     'phase05-citizens/runCareerEngine.js'
   ]) {
     const filename = path.join(__dirname, '..', rel);
@@ -333,11 +342,11 @@ const bl = rows => [BLH].concat(rows);
       EmployerBizId: 'BIZ-SYNTHETIC-W1', LifeHistory: careerState }, overrides));
     return r.concat(['Updated:c199', w.serializeDialState_(c)]);
   }
-  function run(r, growth, stated, sequence, maneuver) {
+  function run(r, growth, stated, sequence, maneuver, cfgOver) {
     errors.length = 0; writes.length = 0;
     let draw = 0;
     const business = [BLH.slice(), ['BIZ-SYNTHETIC-W1', 'Synthetic W1 Business', 'Bakery', 'Temescal', stated, 50000, 100000, growth]];
-    const ctx = { mode: {}, config: { cycleCount: 200, judicialDismissAfterCycles: 3 }, now: 'C200',
+    const ctx = { mode: {}, config: Object.assign({ cycleCount: 200, judicialDismissAfterCycles: 3 }, LIFE_EVENT_OFF, cfgOver || {}), now: 'C200',
       cache: { getData: tab => tab === 'Judicial_Ledger' ? { exists: true, values: [w.JUDICIAL_CASE_FIELDS_.slice()] } : { exists: false, values: [] } },
       summary: { absoluteCycle: 200, maneuver: { byPop: maneuver || {} } },
       rng: () => draw < sequence.length ? sequence[draw++] : 0.999,
@@ -388,6 +397,55 @@ const bl = rows => [BLH].concat(rows);
     'Career-FieldChange', { drive: 3, openness: 3 },
     ctx => ctx.summary.careerSignals.rehires.hired === 1 && ctx.summary.careerSignals.rehires.crossField === 1);
 
+  // engine.286 Task 2 — the promotion die through the real career engine (synthetic rows).
+  // Sequence: two texture draws miss, then the die (fire, sign, band, text, the writer's income
+  // roll), then the business budget's draw. LIFE_ON is the ruled seeds.
+  const LIFE_ON = { lifeEventFireChance: 0.05 };
+  const dieLayoff = run(fixture({ SkillTags: '' }), 0, 1, [0.999, 0.999, 0, 0.99, 0, 0, 0.5], null, LIFE_ON);
+  proveFold('engine.286 die L down = the layoff through careerApplyLayoff_, one line, folds once',
+    dieLayoff,
+    'Career-Layoff', { drive: -2, composure: -5 },
+    ctx => ctx.summary.lifeEventDice.promotion.laidOff === 1 && ctx.ledger.rows[0][ix('EmployerBizId')] === '' &&
+      /\[Career-Layoff\] Let go from Synthetic W1 Business$/m.test(ctx.ledger.rows[0][ix('LifeHistory')]) &&
+      ctx.summary.jobLosses['SYNTHETIC-W1-CAREER'] === 200);
+  proveFold('engine.286 die L up = the promotion through careerApplyPromotion_, one line, folds once',
+    run(fixture({ SkillTags: '' }), 0, 1, [0.999, 0.999, 0, 0, 0, 0, 0.5], null, LIFE_ON),
+    'Promotion', { drive: 8, composure: 2 },
+    ctx => ctx.summary.lifeEventDice.promotion.promoted === 1 && ctx.ledger.rows[0][ix('LastPromotionCycle')] === 200 &&
+      /\[Promotion\] Promoted at Synthetic W1 Business after 8 years as a Baker\.$/m.test(ctx.ledger.rows[0][ix('LifeHistory')]));
+  DIE_WAKE.row = dieLayoff.ctx.ledger.rows[0].slice(); DIE_WAKE.headers = headers.slice(); // the wake chain below reads this row
+  {
+    const m = run(fixture({ SkillTags: '' }), 0, 1, [0.999, 0.999, 0, 0, 0.05, 0], null, LIFE_ON);
+    const ds = JSON.parse(m.ctx.ledger.rows[0][ix('DialState')]);
+    assert('engine.286 die M up: the line, the held mark, this Cycle\'s order lift',
+      /\[LifeEvent-Promotion-Up-M\]/.test(m.ctx.ledger.rows[0][ix('LifeHistory')]) && ds.lifeEvent && ds.lifeEvent.k === 'promotion' &&
+      ds.lifeEvent.d === 1 && ds.lifeEvent.c === 200 && m.ctx.summary.lifeEventLift['SYNTHETIC-W1-CAREER'] === 1.5, JSON.stringify(ds.lifeEvent));
+    // the mark survives the Phase-9 fold, and next Cycle the own shot lands through the writer
+    w.compressLifeHistory_(m.ctx);
+    const kept = JSON.parse(m.ctx.ledger.rows[0][ix('DialState')]);
+    assert('engine.286 die M mark survives the dial fold', kept.lifeEvent && kept.lifeEvent.c === 200, JSON.stringify(kept));
+    let d2 = 0; const seq2 = [0.999, 0.999, 0.0, 0.5];
+    m.ctx.rng = () => d2 < seq2.length ? seq2[d2++] : 0.999;
+    m.ctx.summary = { absoluteCycle: 201, maneuver: { byPop: {} } }; m.ctx.config.cycleCount = 201;
+    w.runCareerEngine_(m.ctx);
+    const r2 = m.ctx.ledger.rows[0];
+    assert('engine.286 die M up: next Cycle the own shot lands — promoted through the writer, mark cleared',
+      m.ctx.summary.lifeEventDice.promotion.ownRaises === 1 && r2[ix('LastPromotionCycle')] === 201 &&
+      /\[Promotion\] Promoted at Synthetic W1 Business \(the break paid off\)/.test(r2[ix('LifeHistory')]) &&
+      !JSON.parse(r2[ix('DialState')]).lifeEvent, JSON.stringify(m.ctx.summary.lifeEventDice.promotion));
+  }
+  {
+    // Acceptance 1: identical forced rolls, the rung decides the band — Tier 4 medium, Tier 3 large
+    const t4 = run(fixture({ SkillTags: '', Tier: 4 }), 0, 1, [0.999, 0.999, 0, 0, 0.011, 0, 0.5], null, LIFE_ON);
+    const t3 = run(fixture({ SkillTags: '', Tier: 3 }), 0, 1, [0.999, 0.999, 0, 0, 0.011, 0, 0.5], null, LIFE_ON);
+    assert('engine.286 paired: same rolls, Tier 4 draws a medium break, Tier 3 the promotion itself',
+      t4.ctx.summary.lifeEventDice.promotion.M === 1 && t4.ctx.summary.lifeEventDice.promotion.promoted === 0 &&
+      t3.ctx.summary.lifeEventDice.promotion.promoted === 1, JSON.stringify([t4.ctx.summary.lifeEventDice.promotion, t3.ctx.summary.lifeEventDice.promotion]));
+    const t1 = run(fixture({ SkillTags: '', Tier: 1 }), 0, 1, [0.999, 0.999, 0, 0, 0, 0, 0.5], null, LIFE_ON);
+    assert('engine.286 boundary: a Tier-1 citizen is outside the die (the writer\'s boundary)',
+      t1.ctx.summary.lifeEventDice.promotion.eligible === 0 && t1.ctx.summary.lifeEventDice.promotion.fired === 0);
+  }
+
   const latestLayoff = careerState + '\nC199 — [Career-Layoff] Synthetic prior job loss';
   const laidOff = run(fixture({ EmployerBizId: '', SkillTags: 'Food & Culture', Income: 40000, LifeHistory: latestLayoff }), 0, 1, [0.999, 0.999]);
   const selfEmployed = run(fixture({ EmployerBizId: '', SkillTags: 'Food & Culture', Income: 60000 }), 0, 1, [0.999, 0.999]);
@@ -418,5 +476,31 @@ const bl = rows => [BLH].concat(rows);
   }
 }
 
-console.log('\n' + passed + ' passed, ' + failed + ' failed');
-process.exit(failed ? 1 : 0);
+// engine.286 Task 2 Acceptance 3 — the die's layoff reaches the general citizen wake: the real
+// buildPool (lib/wakePerception.js) over a stubbed Simulation_Ledger. The setback is followed by
+// five routine lines and still sits in the five-line tail (Career-Layoff is salient); a citizen
+// with the same life but unshaped dials is outside the pool. Synthetic rows; no Sheets, no network.
+(async () => {
+  const Module = require('module');
+  const stub = (rel, exp) => { const f = require.resolve(path.join(__dirname, '..', rel)); require.cache[f] = new Module(f); require.cache[f].exports = exp; require.cache[f].loaded = true; };
+  const r = DIE_WAKE.row, h = DIE_WAKE.headers, at = n => h.indexOf(n);
+  const routine = [1, 2, 3, 4, 5].map(k => 'C' + (200 + k) + ' — [Daily] Synthetic routine day ' + k).join('\n');
+  const life = String(r[at('LifeHistory')]) + '\n' + routine;
+  const shaped = JSON.parse(r[at('DialState')]); shaped.base.drive = 85; shaped.base.warmth = 80; shaped.base.composure = 25;
+  const flat = JSON.parse(r[at('DialState')]);
+  const ledger = [['POPID', 'First', 'Last', 'Neighborhood', 'RoleType', 'DialState', 'BirthYear', 'LifeHistory'],
+    ['SYNTHETIC-W1-CAREER', 'Synthetic', 'Fixture', 'Temescal', 'Baker', JSON.stringify(shaped), 2003, life],
+    ['SYNTHETIC-OUTSIDE', 'Synthetic', 'Outside', 'Temescal', 'Baker', JSON.stringify(flat), 2003, life]];
+  stub('lib/env.js', {});
+  stub('lib/sheets.js', { getRawSheetData: async tab => tab === 'Simulation_Ledger' ? ledger.map(x => x.slice()) : [], getSheetAsObjects: async () => [] });
+  const wp = require(path.join(__dirname, '..', 'lib', 'wakePerception.js'));
+  const pool = await wp.buildPool();
+  const me = pool.find(p => p.popId === 'SYNTHETIC-W1-CAREER');
+  assert('engine.286 wake: the laid-off citizen is in the shaped pool', !!me, JSON.stringify(pool.map(p => p.popId)));
+  assert('engine.286 wake: the layoff survives five routine lines in the five-line tail',
+    !!me && /\[Career-Layoff\] Let go from Synthetic W1 Business/.test(me.life) && me.life.split('\n').length === 5, me && me.life);
+  assert('engine.286 wake: the same life with unshaped dials is outside the pool (the stake reaches only through the dials)',
+    !pool.find(p => p.popId === 'SYNTHETIC-OUTSIDE'));
+  console.log('\n' + passed + ' passed, ' + failed + ' failed');
+  process.exit(failed ? 1 : 0);
+})().catch(e => { console.error(e); process.exit(1); });

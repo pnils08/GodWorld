@@ -1981,6 +1981,47 @@ function collectPropertyTax_(ss, ctx, cycle) {
   return results;
 }
 
+// ════════════════════════════════════════════════════════════════════════════
+// engine.286 Task 2 — THE HOME DIE (builder rulings 2026-10-11, plan §Task 2 design record).
+// Once per household (R3: a household event is life; the head rolls for it). A pursuit event
+// never grants or removes the house; it moves or fires the writer that does:
+//   renting, qualified (the three money gates pass) — up M multiplies this Cycle's buying roll
+//     (lifeEventHomeRollBoost), up L buys now (the roll is skipped, the gates still held),
+//     down M/L zero this Cycle's roll (a renter has no house to lose: L reads as M).
+//   owned, at risk (a member's default mark, or own payment + tax over lifeEventHomeCarryBar of
+//     HouseholdIncome — builder: "over half") — the forced sale is a standing risk, not a weekly
+//     draw (builder 2026-10-11: "more like 1 every 20 cycles"): homeLossChance per at-risk household
+//     per Cycle, rolled before and apart from the ladder, through the existing writers —
+//     sellHouseholdHome_ (quiet) + updateHouseholdLedgerMove_ (rented in its own hood). The rate
+//     rides the stretched count. The weekly ladder then gives at-risk owners S/M lines only.
+//   S everywhere — the line + its fold only.
+// Text: ECL lifeEvent.home.<up|down>[.M|.L] by the urn ({hood}); L lines are unterminated and
+// the writer appends the money. One line per adult member; minors share the house, not the line.
+// ════════════════════════════════════════════════════════════════════════════
+var LIFE_EVENT_HOME_TEXT_ = {
+  up: ['Saw a place for sale in {hood} that felt like it could be home.'],
+  down: ['Another landlord letter in {hood}; the savings did not stretch the way they hoped.'],
+  'up.M': ['A broker in {hood} called with a listing that fits the budget.'],
+  'down.M': ['The listing in {hood} went to another buyer at the last minute.'],
+  'up.L': ['Closed on a place in {hood}'],
+  'down.L': ['Had to sell the house in {hood} and rent on the same streets']
+};
+
+function homeLifeEventLines_(ctx, members, iLife, iBirth, cycle, tag, text) {
+  var stamp = 'Y' + (Math.floor((cycle - 1) / 52) + 1) + 'C' + (((cycle - 1) % 52) + 1);
+  var simY = simYearOf_(ctx, cycle), n = 0;
+  for (var m = 0; m < members.length; m++) {
+    if (iLife < 0) break;
+    var by = iBirth >= 0 ? (Number(members[m][iBirth]) || 0) : 0;
+    if (by > 1900 && simY && (simY - by) < 18) continue;
+    var life = String(members[m][iLife] || '');
+    members[m][iLife] = (life ? life + '\n' : '') + stamp + ' — [' + tag + '] ' + text;
+    n++;
+  }
+  if (n) ctx.ledger.dirty = true;
+  return n;
+}
+
 function trackHomeOwnership_(ss, ctx, cycle) {
   var results = { purchased: 0 };
   var hhSheet = ss.getSheetByName('Household_Ledger');
@@ -2015,6 +2056,20 @@ function trackHomeOwnership_(ss, ctx, cycle) {
   var rng = safeRand_(ctx);
   var stamp = 'Y' + (Math.floor((cycle - 1) / 52) + 1) + 'C' + (((cycle - 1) % 52) + 1);
   var homesByLine = {};
+  // engine.286 Task 2: the home die. A missing key is a visible Engine_Errors row and the
+  // die stays off this Cycle; the purchase roll runs as before.
+  var dieCfg = null, dieDraws = {}, die = { renting: 0, owned: 0, atRisk: 0, fired: 0, up: 0, down: 0, S: 0, M: 0, L: 0, boosted: 0, zeroed: 0, bought: 0, sold: 0 };
+  try { dieCfg = lifeEventConfig_(ctx); } catch (cfgErr) {
+    if (typeof logEngineError_ === 'function') logEngineError_(ctx, 'Phase5-HomeDie', cfgErr);
+    Logger.log('trackHomeOwnership_ engine.286 home die off this Cycle: ' + cfgErr);
+  }
+  var S286 = ctx.summary;
+  var dieFires = function() { return !!dieCfg && dieCfg.lifeEventFireChance > 0 && rng() < dieCfg.lifeEventFireChance; };
+  var dieText = function(dir, band, hood) {
+    var hk = band === 'S' ? dir : dir + '.' + band;
+    return eclUrnPick_(rng, S286, 'lifeEvent.home', dir, band, dieDraws, LIFE_EVENT_HOME_TEXT_[hk], 'hardcoded.home.' + hk, band === 'L')
+      .replace(/\{hood\}/g, hood || 'the neighborhood');
+  };
 
   for (var q = 1; q < hv.length; q++) {
     if (cStat >= 0 && String(hv[q][cStat] || '').toLowerCase() !== 'active') continue;
@@ -2051,7 +2106,23 @@ function trackHomeOwnership_(ss, ctx, cycle) {
     var headPop = cHead >= 0 ? String(hv[q][cHead] || '').trim() : '';
     if (!headPop && memIds.length) headPop = String(memIds[0]).trim();
     var homeF = (typeof maneuverFactor_ === 'function') ? maneuverFactor_(ctx, headPop, 'home') : 1;
-    if (rng() >= homeBuyChance_(bestTier) * homeF) continue;     // not this week (engine.151: the rung pays on the odds, never on the cash)
+    // engine.286 Task 2: the home die on a qualified renting household — aura is the rung plus
+    // a deep margin over the down payment; size only, never frequency.
+    die.renting++;
+    var dieF = 1, dieBuy = null;
+    if (dieFires()) {
+      var auraH = (typeof tierPayFactor_ === 'function' ? tierPayFactor_(bestTier) : 1) + (combinedNW >= 2 * price * HOME_ELIGIBLE_NW ? 0.2 : 0);
+      var evH = lifeEventRoll_(rng, dieCfg, 0, auraH);
+      if (evH.dir === 'down' && evH.band === 'L') evH.band = 'M'; // a renter has no house to lose
+      die.fired++; die[evH.dir]++; die[evH.band]++;
+      var tH = dieText(evH.dir, evH.band, hood);
+      if (evH.band === 'L') dieBuy = tH; // the purchase writes the line with the money
+      else {
+        homeLifeEventLines_(ctx, members, iLife, iBirthH, cycle, lifeEventTag_('Home', evH.dir, evH.band), tH);
+        if (evH.band === 'M') { if (evH.dir === 'up') { dieF = dieCfg.lifeEventHomeRollBoost; die.boosted++; } else { dieF = 0; die.zeroed++; } }
+      }
+    }
+    if (!dieBuy && rng() >= homeBuyChance_(bestTier) * homeF * dieF) continue;     // not this week (engine.151: the rung pays on the odds, never on the cash)
 
     // ── the purchase ──
     var down = Math.round(price * HOME_DOWN);
@@ -2064,7 +2135,10 @@ function trackHomeOwnership_(ss, ctx, cycle) {
       var mByH = iBirthH >= 0 ? (Number(members[m2][iBirthH]) || 0) : 0;
       if (iLife >= 0 && !(mByH > 1900 && (simYearH - mByH) < 18)) {
         var lifeH = String(members[m2][iLife] || '');
-        if (lifeH.indexOf(stamp + ' — [Home]') < 0) {
+        if (dieBuy) { // engine.286 Task 2: a large break IS the purchase — one line, the graded tag
+          members[m2][iLife] = (lifeH ? lifeH + '\n' : '') + stamp + ' — [' + lifeEventTag_('Home', 'up', 'L') + '] ' +
+            dieBuy + ' — $' + down + ' down on $' + price;
+        } else if (lifeH.indexOf(stamp + ' — [Home]') < 0) {
           members[m2][iLife] = (lifeH ? lifeH + '\n' : '') + stamp +
             ' — [Home] bought the place in ' + String(hv[q][cHood] || 'the neighborhood') +
             ' — keys in hand, rent checks done';
@@ -2094,6 +2168,19 @@ function trackHomeOwnership_(ss, ctx, cycle) {
       text: 'A family bought their home in ' + String(hv[q][cHood] || 'Oakland')
     });
     results.purchased++;
+    if (dieBuy) die.bought++;
+  }
+
+  // engine.286 Task 2: the owned side of the home die — households at risk only.
+  if (dieCfg) homeDieOwned_(ctx, hv, rowByPop, cycle, rng, dieCfg, die, dieText,
+    { cId: cId, cMem: cMem, cHood: cHood, cType: cType, cRent: cRent, cCost: cCost, cStat: cStat, cInc: cInc, cHead: cHead },
+    { iPop: iPop, iNW: iNW, iStatus: iStatus, iLife: iLife, iBirth: iBirthH, iDS: iDSH, iTier: iTierH }, markCycles);
+  if (dieCfg) {
+    var dieStats = eclUrnStats_(dieDraws);
+    die.draws = dieStats.byKey;
+    if (dieStats.forced) Logger.log('trackHomeOwnership_ engine.286 home die: pool exhausted — ' + dieStats.forced + ' forced repeat(s): ' + dieStats.forcedKeys.join('; '));
+    ctx.summary.lifeEventDice = ctx.summary.lifeEventDice || {};
+    ctx.summary.lifeEventDice.home = die;
   }
 
   // Step 7 (updateHeritage_) folds these into each line's HomesOwned.
@@ -2105,6 +2192,74 @@ function trackHomeOwnership_(ss, ctx, cycle) {
   return results;
 }
 
+
+// engine.286 Task 2: owned households at risk roll the home die; a large setback is the forced
+// sale through the two existing writers (no new Household_Ledger write). hv is read before any
+// sale this Cycle; a household sold here is not offered the purchase roll until next Cycle.
+function homeDieOwned_(ctx, hv, rowByPop, cycle, rng, cfg, die, dieText, hc, ic, markCycles) {
+  for (var q = 1; q < hv.length; q++) {
+    if (hc.cStat >= 0 && String(hv[q][hc.cStat] || '').toLowerCase() !== 'active') continue;
+    if (String(hv[q][hc.cType] || '').toLowerCase() !== 'owned') continue;
+    die.owned++;
+    var memIds = [];
+    try { memIds = JSON.parse(String(hv[q][hc.cMem] || '[]')); } catch (e) { memIds = []; }
+    var members = [], marked = false, bestTier = 4;
+    for (var m = 0; m < memIds.length; m++) {
+      var mRow = rowByPop[String(memIds[m]).trim()];
+      if (!mRow) continue;
+      if (String(mRow[ic.iStatus] || 'active').toLowerCase() === 'deceased') continue;
+      members.push(mRow);
+      if (ic.iDS >= 0 && debtDefaultMarked_(mRow[ic.iDS], cycle, markCycles)) marked = true;
+      var mt = ic.iTier >= 0 ? (Math.round(Number(mRow[ic.iTier])) || 4) : 4;
+      if (mt >= 1 && mt < bestTier) bestTier = mt;
+    }
+    if (!members.length) continue;
+    var hood = String(hv[q][hc.cHood] || '').trim();
+    var payment = Number(hv[q][hc.cRent]) || 0;
+    var cost = hc.cCost >= 0 ? (Number(hv[q][hc.cCost]) || 0) : 0;
+    var inc = hc.cInc >= 0 ? (Number(hv[q][hc.cInc]) || 0) : 0;
+    var basis = cost > 0 ? cost : Math.round(homeMarketRent_(ctx, hood, payment) * 12 * HOME_PRICE_TO_RENT);
+    var carryShare = inc > 0 ? (payment * 12 + homeAnnualTax_(ctx, basis)) / inc : Infinity;
+    if (!marked && !(carryShare > cfg.lifeEventHomeCarryBar)) continue;
+    die.atRisk++;
+    var destRent = homeMarketRent_(ctx, hood, 0);
+    var canSell = destRent > 0 && typeof updateHouseholdLedgerMove_ === 'function';
+    var forced = canSell && cfg.homeLossChance > 0 && rng() < cfg.homeLossChance;
+    if (!forced) {
+      if (!(cfg.lifeEventFireChance > 0) || rng() >= cfg.lifeEventFireChance) continue;
+      var ev = lifeEventRoll_(rng, cfg, -1, typeof tierPayFactor_ === 'function' ? tierPayFactor_(bestTier) : 1); // the stretch leans it down
+      if (ev.band === 'L') ev.band = 'M'; // the sale is homeLossChance's, never the weekly ladder's
+      die.fired++; die[ev.dir]++; die[ev.band]++;
+      homeLifeEventLines_(ctx, members, ic.iLife, ic.iBirth, cycle, lifeEventTag_('Home', ev.dir, ev.band), dieText(ev.dir, ev.band, hood));
+      continue;
+    }
+    die.down++; die.L++;
+    var text = dieText('down', 'L', hood);
+    // the forced sale: proceeds to the members (sellHouseholdHome_, quiet — this line is the one),
+    // then the row rents in its own hood (updateHouseholdLedgerMove_ with the owner receipt).
+    var nw0 = [], combined = 0;
+    for (var a = 0; a < members.length; a++) {
+      var v = Number(String(members[a][ic.iNW]).replace(/[$,\s]/g, '')) || 0;
+      nw0.push(v); combined += v;
+    }
+    var hhId = String(hv[q][hc.cId] || '').trim();
+    var sale = sellHouseholdHome_(ctx, { neighborhood: hood, housingCost: cost, householdId: hhId }, memIds, cycle, { quiet: true });
+    updateHouseholdLedgerMove_(ctx, hhId, hood, Math.round(destRent), { housingType: 'rented', monthly: Math.round(destRent), housingCost: 0 });
+    var stamp = 'Y' + (Math.floor((cycle - 1) / 52) + 1) + 'C' + (((cycle - 1) % 52) + 1);
+    var simY = simYearOf_(ctx, cycle), tag = lifeEventTag_('Home', 'down', 'L');
+    for (var b = 0; b < members.length; b++) {
+      if (ic.iLife < 0) break;
+      var by = ic.iBirth >= 0 ? (Number(members[b][ic.iBirth]) || 0) : 0;
+      if (by > 1900 && simY && (simY - by) < 18) continue;
+      var share = combined > 0 ? nw0[b] / combined : 1 / members.length;
+      var back = sale && sale.proceeds > 0 ? ' — $' + Math.round(sale.proceeds * share) + ' back from the sale' : ' — the sale only cleared the mortgage';
+      var life = String(members[b][ic.iLife] || '');
+      members[b][ic.iLife] = (life ? life + '\n' : '') + stamp + ' — [' + tag + '] ' + text + back;
+    }
+    ctx.ledger.dirty = true;
+    die.sold++;
+  }
+}
 
 // ── the sale price and what the members keep (builder 2026-09-24) ─────────
 // A house is a status rung, not a wealth store: the sim keeps no home value,

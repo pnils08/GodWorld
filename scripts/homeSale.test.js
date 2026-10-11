@@ -147,5 +147,87 @@ const ownedRow = ['HH-S1', 'POP-A', 'family', '["POP-A","POP-B"]', 'Testhood', '
   ok('seeded home returns the down share only (100,000 + 105,600), never the full price', nw === 100000 + Math.round(price * E.HOME_DOWN), String(nw));
 }
 
+
+// ---- engine.286 Task 2: the home die (builder rulings 2026-10-11) — synthetic rows only ----
+{
+  const SRC2 = [
+    '../phase02-world-state/loadNeighborhoodState.js',
+    '../phase05-citizens/runCivicRoleEngine.js',
+    '../phase05-citizens/generationalWealthEngine.js',
+    '../phase05-citizens/migrationTrackingEngine.js',
+    '../phase05-citizens/processAdvancementIntake.js', // tierPayFactor_ — the rung is the aura
+  ].map(read).join('\n');
+  const D = new Function(CAL + '\n' + SRC2 + '\nreturn { trackHomeOwnership_ };')();
+  const LIFE = { lifeEventFireChance: 0.05, lifeEventUpChance: 0.6, lifeEventPremiseLean: 0.2, lifeEventMediumOdds: 0.08,
+    lifeEventLargeOdds: 0.01, lifeEventLiftCycles: 2, lifeEventPromotionLift: 1.5, lifeEventPromotionDrop: 0.5,
+    lifeEventPromotionOwnChance: 0.05, lifeEventHomeRollBoost: 3, lifeEventHomeCarryBar: 0.5, homeLossChance: 0.00625,
+    debtLineMultiple: 1, debtRiseRate: 0.02, debtFallRate: 0.08, debtDragCapShare: 0.5, debtDefaultCycles: 12, debtDefaultMarkCycles: 52 };
+  const DH = SL_HEAD.concat(['Tier', 'DialState']);
+  const who = (popid, nw, tier) => person(popid, nw, 1990, '').concat([tier || 4, '{"base":{}}']);
+  const run = (hhRow, members, seq, extra) => {
+    let i = 0, calls = 0;
+    const sheets = { Household_Ledger: mockSheet([HH_HEAD.slice(), hhRow]) };
+    const ctx = { ss: { getSheetByName: (n) => sheets[n] || null }, ledger: { headers: DH.slice(), rows: members, dirty: false },
+      summary: { cycleId: 109, storyHooks: [], neighborhoodState: { Testhood: { medianRent: 2000 } }, contentLedger: { lines: {} } },
+      config: Object.assign({ cycleCount: 109 }, LIFE, extra || {}), now: 't',
+      rng: () => { calls++; return i < seq.length ? seq[i++] : 0.999; } };
+    D.trackHomeOwnership_(ctx.ss, ctx, 109);
+    return { ctx, hh: sheets.Household_Ledger._values[1], calls, die: ctx.summary.lifeEventDice.home };
+  };
+  const rented = (nw) => ['HH-D1', 'POP-D', 'family', '["POP-D"]', 'Testhood', 'rented', 1500, 0, 150000, 101, '', 'active', 0];
+  const lastLine = (r) => String(r[col(SL_HEAD, 'LifeHistory')]).split('\n').pop();
+
+  // L up: the purchase fires now, one line carries the graded tag and the money
+  {
+    const r = run(rented(), [who('POP-D', 300000)], [0.0, 0.0, 0.0, 0.0]);
+    ok('home die L up: the household buys this Cycle (roll skipped, gates held)', r.hh[col(HH_HEAD, 'HousingType')] === 'owned' && r.die.bought === 1, String(r.hh[col(HH_HEAD, 'HousingType')]));
+    ok('home die L up: one [LifeEvent-Home-Up-L] line with the down payment', /\[LifeEvent-Home-Up-L\] Closed on a place in Testhood — \$105600 down on \$528000$/.test(lastLine(r.ctx.ledger.rows[0])) && !/\[Home\]/.test(r.ctx.ledger.rows[0][col(SL_HEAD, 'LifeHistory')]), lastLine(r.ctx.ledger.rows[0]));
+  }
+  // M down: this Cycle's roll is zeroed — a roll of 0.0 that would have bought does not
+  {
+    const r = run(rented(), [who('POP-D', 300000)], [0.0, 0.99, 0.05, 0.0, 0.0]);
+    ok('home die M down: the roll is zeroed, no purchase', r.hh[col(HH_HEAD, 'HousingType')] === 'rented' && r.die.zeroed === 1);
+    ok('home die M down: the setback line', /\[LifeEvent-Home-Down-M\]/.test(lastLine(r.ctx.ledger.rows[0])));
+  }
+  // M up: the roll multiplies — 0.025 misses the plain 1% but lands under 3%
+  {
+    const plain = run(rented(), [who('POP-D', 300000)], [0.9, 0.025]);
+    const boosted = run(rented(), [who('POP-D', 300000)], [0.0, 0.0, 0.05, 0.0, 0.025]);
+    ok('home die M up: same roll, plain misses, boosted buys', plain.hh[col(HH_HEAD, 'HousingType')] === 'rented' && boosted.hh[col(HH_HEAD, 'HousingType')] === 'owned' && boosted.die.boosted === 1);
+  }
+  // Acceptance 1: identical forced rolls, different citizens, different band (the rung is aura)
+  {
+    const t4 = run(rented(), [who('POP-D', 300000, 4)], [0.0, 0.0, 0.012, 0.0, 0.999]);
+    const t1 = run(rented(), [who('POP-D', 300000, 1)], [0.0, 0.0, 0.012, 0.0]);
+    ok('paired: a Tier-4 draw at 0.012 is medium, a Tier-1 draw at 0.012 is large (and buys)', t4.die.M === 1 && t4.die.L === 0 && t1.die.L === 1 && t1.hh[col(HH_HEAD, 'HousingType')] === 'owned', JSON.stringify([t4.die, t1.die]));
+  }
+  // The gate shut: no die draw at all
+  {
+    const r = run(rented(), [who('POP-D', 300000)], [0.5], { lifeEventFireChance: 0 });
+    ok('home die off at a zero gate: only the purchase roll draws', r.calls === 1 && r.die.fired === 0, String(r.calls));
+  }
+  // Forced sale: an owner over half of income on the house; homeLossChance lands
+  {
+    const owned = ['HH-D2', 'POP-E', 'family', '["POP-E","POP-F"]', 'Testhood', 'owned', 6000, 400000, 100000, 101, '', 'active', 0];
+    const r = run(owned, [who('POP-E', 100000), who('POP-F', 300000)], [0.0, 0.0]);
+    ok('forced sale: household rents in its own hood at the market rent, cost cleared', r.hh[col(HH_HEAD, 'HousingType')] === 'rented' && r.hh[col(HH_HEAD, 'MonthlyRent')] === 2000 && r.hh[col(HH_HEAD, 'HousingCost')] === 0 && r.hh[col(HH_HEAD, 'Neighborhood')] === 'Testhood', JSON.stringify(r.hh));
+    ok('forced sale: proceeds (528,000 − 320,000) split by NetWorth share', r.ctx.ledger.rows[0][col(SL_HEAD, 'NetWorth')] === 152000 && r.ctx.ledger.rows[1][col(SL_HEAD, 'NetWorth')] === 456000);
+    ok('forced sale: one [LifeEvent-Home-Down-L] line per adult with their share, no [Home] line', /\[LifeEvent-Home-Down-L\] Had to sell the house in Testhood and rent on the same streets — \$52000 back from the sale$/.test(lastLine(r.ctx.ledger.rows[0])) && !/\[Home\]/.test(r.ctx.ledger.rows[0][col(SL_HEAD, 'LifeHistory')]), lastLine(r.ctx.ledger.rows[0]));
+    ok('forced sale counted', r.die.sold === 1 && r.die.atRisk === 1);
+  }
+  // An owner inside the carry bar is not at risk: no draw
+  {
+    const owned = ['HH-D3', 'POP-E', 'family', '["POP-E"]', 'Testhood', 'owned', 1867, 400000, 100000, 101, '', 'active', 0];
+    const r = run(owned, [who('POP-E', 100000)], []);
+    ok('owner at 22% of income: no risk, no draw', r.calls === 0 && r.die.atRisk === 0 && r.hh[col(HH_HEAD, 'HousingType')] === 'owned', String(r.calls));
+  }
+  // At risk, sale chance misses: the weekly ladder can only give an S/M line (L reads M)
+  {
+    const owned = ['HH-D4', 'POP-E', 'family', '["POP-E"]', 'Testhood', 'owned', 6000, 400000, 100000, 101, '', 'active', 0];
+    const r = run(owned, [who('POP-E', 100000)], [0.5, 0.0, 0.99, 0.0, 0.0]);
+    ok('at risk, no sale: a down L draw reads M, the house stays', r.hh[col(HH_HEAD, 'HousingType')] === 'owned' && r.die.M === 1 && /\[LifeEvent-Home-Down-M\]/.test(lastLine(r.ctx.ledger.rows[0])));
+  }
+}
+
 console.log('homeSale.test.js: ' + passed + ' passed, ' + failed + ' failed');
 process.exit(failed ? 1 : 0);

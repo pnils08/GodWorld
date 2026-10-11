@@ -231,10 +231,10 @@ function civicRolePremises_(S, hood, bands) {
   return out;
 }
 
-// ECL lines for civicRole.<premise>.<dir>: slot-free and unconditioned only (no evaluator here).
-function civicRoleEclLines_(S, premise, dir) {
+// ECL lines for one pool key: slot-free and unconditioned only (no evaluator here).
+function eclPoolLines_(S, key) {
   var cl = S.contentLedger && S.contentLedger.lines;
-  var lines = cl && cl['civicRole.' + premise + '.' + dir];
+  var lines = cl && cl[key];
   var out = [];
   if (!lines) return out;
   for (var i = 0; i < lines.length; i++) {
@@ -245,24 +245,29 @@ function civicRoleEclLines_(S, premise, dir) {
   }
   return out;
 }
+function civicRoleEclLines_(S, premise, dir) {
+  return eclPoolLines_(S, 'civicRole.' + premise + '.' + dir);
+}
 
 // Within one Cycle each pool is an urn drawn without replacement (builder 2026-10-11: "these
 // would only duplicate on purpose not for a lack of options"). A line holds round(Weight)
 // tickets (min 1), so Weight 2-3 is the "on purpose" repeat. Only an empty urn refills — every
 // draw after that is a forced repeat, counted in draws[key].forced. No cross-Cycle memory.
-// The band rides the text (builder 2026-10-11): `civicRole.<premise>.<dir>.<band>` first, then
-// the unbanded key (the small / default pool), then hardcoded. A banded draw that lands on the
-// unbanded or hardcoded pool is tallied in draws[key].bandFallback.
-function civicRolePickText_(rng, S, premise, dir, draws, band) {
-  var key = 'civicRole.' + premise + '.' + dir + '.' + band;
-  var pool = band ? civicRoleEclLines_(S, premise, dir + '.' + band) : [];
+// The band rides the text (builder 2026-10-11): `<base>.<dir>.<band>` first, then the unbanded
+// `<base>.<dir>` (the small / default pool), then the caller's hardcoded lines under hardKey.
+// A banded draw that lands on the unbanded or hardcoded pool is tallied in draws[key].bandFallback.
+// Shared by the civic role engine and the engine.286 life-event dice (runCareerEngine.js,
+// generationalWealthEngine.js) — one urn map per engine per Cycle.
+// strictBand: a band whose line the writer renders in its own shape (the life-event L lines)
+// never borrows the unbanded pool — it falls straight to the caller's hardcoded lines.
+function eclUrnPick_(rng, S, base, dir, band, draws, hardLines, hardKey, strictBand) {
+  var key = base + '.' + dir + '.' + band;
+  var pool = band ? eclPoolLines_(S, key) : [];
   var fellBack = !!band && !pool.length;
-  if (!pool.length) { key = 'civicRole.' + premise + '.' + dir; pool = civicRoleEclLines_(S, premise, dir); }
+  if (!pool.length && !strictBand) { key = base + '.' + dir; pool = eclPoolLines_(S, key); }
   if (!pool.length) {
-    var hp = (CIVIC_ROLE_TEXT_[premise][dir] && CIVIC_ROLE_TEXT_[premise][dir].length) ? premise : 'everyday';
-    key = 'hardcoded.' + hp + '.' + dir;
-    var hard = CIVIC_ROLE_TEXT_[hp][dir];
-    for (var i = 0; i < hard.length; i++) pool.push({ text: hard[i], weight: 1 });
+    key = hardKey;
+    for (var i = 0; i < hardLines.length; i++) pool.push({ text: hardLines[i], weight: 1 });
   }
   var urn = draws[key];
   if (!urn) urn = draws[key] = { pool: pool.length, draws: 0, distinct: 0, forced: 0, bandFallback: 0, round: 1, left: null, seen: {} };
@@ -286,6 +291,60 @@ function civicRolePickText_(rng, S, premise, dir, draws, band) {
   var text = pool[pick].text;
   if (!urn.seen[text]) { urn.seen[text] = true; urn.distinct++; }
   return text;
+}
+
+// The per-pool draw record a Cycle leaves: a repeat shows as forced (pool exhausted), never luck.
+function eclUrnStats_(draws) {
+  var out = { byKey: {}, forced: 0, forcedKeys: [] };
+  for (var dk in draws) {
+    if (!draws.hasOwnProperty(dk)) continue;
+    var u = draws[dk];
+    out.byKey[dk] = { pool: u.pool, draws: u.draws, distinct: u.distinct, forced: u.forced, bandFallback: u.bandFallback };
+    if (u.forced) { out.forced += u.forced; out.forcedKeys.push(dk + ' ' + u.forced + ' (' + u.draws + ' draws / ' + u.pool + ' lines)'); }
+  }
+  return out;
+}
+
+function civicRolePickText_(rng, S, premise, dir, draws, band) {
+  var hp = (CIVIC_ROLE_TEXT_[premise][dir] && CIVIC_ROLE_TEXT_[premise][dir].length) ? premise : 'everyday';
+  return eclUrnPick_(rng, S, 'civicRole.' + premise, dir, band, draws, CIVIC_ROLE_TEXT_[hp][dir], 'hardcoded.' + hp + '.' + dir);
+}
+
+// ── engine.286 Task 2: the pursuit dice share this engine's roll shape ─────────────────────
+// Same standing rules (builder 2026-10-10): up skews over down; S >= M >= L at every aura
+// (civicRoleBands_); fire chance is flat, aura drives size only. Seeds: ENGINE286_CONFIG_SEEDS.
+var LIFE_EVENT_RANGES_ = {
+  lifeEventFireChance: [0, 1], lifeEventUpChance: [0.05, 0.95], lifeEventPremiseLean: [0, 0.45],
+  lifeEventMediumOdds: [0, 0.9], lifeEventLargeOdds: [0, 0.9], lifeEventLiftCycles: [1, 8],
+  lifeEventPromotionLift: [1, 4], lifeEventPromotionDrop: [0, 1], lifeEventPromotionOwnChance: [0, 1],
+  lifeEventHomeRollBoost: [1, 20], lifeEventHomeCarryBar: [0.1, 1], homeLossChance: [0, 0.5]
+};
+function lifeEventConfig_(ctx) {
+  var cfg = (ctx && ctx.config) || {};
+  var out = {}, bad = [];
+  for (var k in LIFE_EVENT_RANGES_) {
+    if (!LIFE_EVENT_RANGES_.hasOwnProperty(k)) continue;
+    var v = cfg[k];
+    var n = (typeof v === 'boolean' || v === null || v === undefined || String(v).trim() === '') ? NaN : Number(v);
+    if (!isFinite(n) || n < LIFE_EVENT_RANGES_[k][0] || n > LIFE_EVENT_RANGES_[k][1]) bad.push(k);
+    else out[k] = n;
+  }
+  if (bad.length) throw new Error('lifeEventConfig_: World_Config missing or out of range: ' + bad.join(', ') + ' (engine.286 keys — ensureEngine286Config_ self-arms them at open)');
+  if (out.lifeEventLargeOdds > out.lifeEventMediumOdds) throw new Error('lifeEventConfig_: lifeEventLargeOdds above lifeEventMediumOdds — the heavier event must be the rarer one (builder rule 2026-10-10)');
+  out.lifeEventLiftCycles = Math.round(out.lifeEventLiftCycles);
+  return out;
+}
+// Sign then band for one fired event. lean: +1 good premise, -1 bad, 0 neutral.
+function lifeEventRoll_(rng, cfg, lean, aura) {
+  var up = Math.max(0.05, Math.min(0.95, cfg.lifeEventUpChance + (lean || 0) * cfg.lifeEventPremiseLean));
+  var dir = rng() < up ? 'up' : 'down';
+  var odds = civicRoleBands_({ civicRoleLargeOdds: cfg.lifeEventLargeOdds, civicRoleMediumOdds: cfg.lifeEventMediumOdds }, aura);
+  var r = rng();
+  return { dir: dir, band: r < odds.pL ? 'L' : (r < odds.pL + odds.pM ? 'M' : 'S') };
+}
+// The graded tag every life-event line carries (citizenDialMap.js holds the weights).
+function lifeEventTag_(kind, dir, band) {
+  return 'LifeEvent-' + kind + '-' + (dir === 'up' ? 'Up' : 'Down') + '-' + band;
 }
 
 function runCivicRoleEngine_(ctx) {
@@ -392,15 +451,9 @@ function runCivicRoleEngine_(ctx) {
   }
 
   // Per-pool draw record this Cycle: a repeat shows as forced (pool exhausted), never luck.
-  var drawStats = {}, forcedTotal = 0, forcedKeys = [];
-  for (var dk in draws) {
-    if (!draws.hasOwnProperty(dk)) continue;
-    var u = draws[dk];
-    drawStats[dk] = { pool: u.pool, draws: u.draws, distinct: u.distinct, forced: u.forced, bandFallback: u.bandFallback };
-    if (u.forced) { forcedTotal += u.forced; forcedKeys.push(dk + ' ' + u.forced + ' (' + u.draws + ' draws / ' + u.pool + ' lines)'); }
-  }
-  S.civicRoleDraws = drawStats;
-  if (forcedTotal) Logger.log('runCivicRoleEngine_: pool exhausted — ' + forcedTotal + ' forced repeat(s): ' + forcedKeys.join('; '));
+  var drawStats = eclUrnStats_(draws);
+  S.civicRoleDraws = drawStats.byKey;
+  if (drawStats.forced) Logger.log('runCivicRoleEngine_: pool exhausted — ' + drawStats.forced + ' forced repeat(s): ' + drawStats.forcedKeys.join('; '));
 
   if (skipped.length) Logger.log('runCivicRoleEngine_: skipped ' + skipped.length + ' Active CIV row(s) with no POPID, hood or Tier 1-4: ' + skipped.join(', '));
 
@@ -420,6 +473,12 @@ if (typeof module !== 'undefined' && module.exports) {
     civicRoleBands_: civicRoleBands_,
     civicRoleConfig_: civicRoleConfig_,
     civicRolePickText_: civicRolePickText_,
+    eclUrnPick_: eclUrnPick_,
+    eclUrnStats_: eclUrnStats_,
+    eclPoolLines_: eclPoolLines_,
+    lifeEventConfig_: lifeEventConfig_,
+    lifeEventRoll_: lifeEventRoll_,
+    lifeEventTag_: lifeEventTag_,
     CIVIC_ROLE_REQUIRED_KEYS: CIVIC_ROLE_REQUIRED_KEYS,
     CIVIC_ROLE_TEXT_: CIVIC_ROLE_TEXT_
   };

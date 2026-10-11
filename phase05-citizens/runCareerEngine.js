@@ -136,17 +136,19 @@ function tierPayOf_(row, iTier) {
 }
 // The wait a promotion order ranks on: cycles since the last promotion (a
 // never-promoted row waits the whole clock), × the rung's pay (engine.151).
-function promotionWait_(row, iLastPromo, iTier, cycle) {
+// engine.286 Task 2: liftF is a held medium life event (lifeEventPromotionLift / Drop), 1 otherwise.
+function promotionWait_(row, iLastPromo, iTier, cycle, liftF) {
   var waited = Math.max(0, (Number(cycle) || 0) - (Number(row[iLastPromo]) || 0));
-  return waited * tierPayOf_(row, iTier);
+  return waited * tierPayOf_(row, iTier) * (liftF > 0 ? liftF : 1);
 }
 
 // E2 beneficiary order: longest since the last promotion (unchanged primary,
 // engine.151: the wait carries the rung's pay), then the higher credential,
 // then the lower earner, then POPID.
-function promotionOrder_(rows, iLastPromo, iEdu, iIncome, iPop, iTier, cycle) {
+function promotionOrder_(rows, iLastPromo, iEdu, iIncome, iPop, iTier, cycle, liftOf) {
+  var lf = function(r) { return liftOf ? liftOf(r) : 1; };
   return function(a, b) {
-    var wa = promotionWait_(rows[a], iLastPromo, iTier, cycle), wb = promotionWait_(rows[b], iLastPromo, iTier, cycle);
+    var wa = promotionWait_(rows[a], iLastPromo, iTier, cycle, lf(rows[a])), wb = promotionWait_(rows[b], iLastPromo, iTier, cycle, lf(rows[b]));
     if (wa !== wb) return wb - wa;
     var ea = credentialRankOf_(rows[a], iEdu), eb = credentialRankOf_(rows[b], iEdu);
     if (ea !== eb) return eb - ea;
@@ -367,26 +369,30 @@ function applyCustodyDismissals_(ctx, cycle, S, logRows) {
   return out;
 }
 
-function applyEmployerSuccess_(ctx, cycle, roll, logRows, S, gapFactor) {
-  var out = { promotions: 0, layoffs: 0, businesses: 0 };
+// engine.286 Task 2: the tracked employers and their eligible staff — the one boundary both
+// the business budget (applyEmployerSuccess_) and the promotion die (applyPromotionDie_) read:
+// sports orgs, GAME/CIVIC/MEDIA rows, Tier 1–2, SPORTS_OVERRIDE and no income are outside.
+function careerEmployerBook_(ctx) {
   var header = ctx.ledger && ctx.ledger.headers, rows = ctx.ledger && ctx.ledger.rows;
-  if (!header || !rows || !rows.length) return out;
+  if (!header || !rows || !rows.length) return null;
   var idx = function(n) { return header.indexOf(n); };
-  var iPop = idx('POPID'), iFirst = idx('First'), iLast = idx('Last'), iNb = idx('Neighborhood'), iRole = idx('RoleType'),
-      iIncome = idx('Income'), iEmp = idx('EmployerBizId'), iStatus = idx('Status'), iTier = idx('Tier'), iClock = idx('ClockMode'),
-      iEcon = idx('EconomicProfileKey'), iLastPromo = idx('LastPromotionCycle'), iYears = idx('YearsInCareer'),
-      iLife = idx('LifeHistory'), iLastUpd = idx('LastUpdated'), iEdu = idx('EducationLevel'); // engine.144
-  if (iIncome < 0 || iEmp < 0) return out;
+  var cols = {
+    iPop: idx('POPID'), iFirst: idx('First'), iLast: idx('Last'), iNb: idx('Neighborhood'), iRole: idx('RoleType'),
+    iIncome: idx('Income'), iEmp: idx('EmployerBizId'), iStatus: idx('Status'), iTier: idx('Tier'), iClock: idx('ClockMode'),
+    iEcon: idx('EconomicProfileKey'), iLastPromo: idx('LastPromotionCycle'), iYears: idx('YearsInCareer'),
+    iLife: idx('LifeHistory'), iLastUpd: idx('LastUpdated'), iEdu: idx('EducationLevel'), iDS: idx('DialState')
+  };
+  if (cols.iIncome < 0 || cols.iEmp < 0) return null;
   var sheet = ctx.ss ? ctx.ss.getSheetByName('Business_Ledger') : null;
-  if (!sheet) return out;
+  if (!sheet) return null;
   var data = sheet.getDataRange().getValues();
-  if (!data || data.length < 2) return out;
+  if (!data || data.length < 2) return null;
   var bh = data[0], bId = -1, bNm = -1, bGrow = -1, bSec = -1;
   for (var c = 0; c < bh.length; c++) {
     var hn = String(bh[c]).trim();
     if (hn === 'BIZ_ID') bId = c; else if (hn === 'Name') bNm = c; else if (hn === 'Growth_Rate') bGrow = c; else if (hn === 'Sector') bSec = c;
   }
-  if (bId < 0 || bGrow < 0) return out;
+  if (bId < 0 || bGrow < 0) return null;
   var biz = {};
   for (var r = 1; r < data.length; r++) {
     var id = String(data[r][bId] || '').trim();
@@ -401,17 +407,181 @@ function applyEmployerSuccess_(ctx, cycle, roll, logRows, S, gapFactor) {
   for (var i = 0; i < rows.length; i++) {
     var row = rows[i];
     if (!row || !Array.isArray(row)) continue;
-    var emp = String(row[iEmp] || '').trim();
+    var emp = String(row[cols.iEmp] || '').trim();
     if (!biz[emp]) continue;
-    if (String(row[iStatus] || 'active').toLowerCase() !== 'active') continue;
-    var clock = String(iClock >= 0 ? (row[iClock] || '') : '').trim().toUpperCase();
+    if (String(row[cols.iStatus] || 'active').toLowerCase() !== 'active') continue;
+    var clock = String(cols.iClock >= 0 ? (row[cols.iClock] || '') : '').trim().toUpperCase();
     if (clock && clock !== 'ENGINE') continue;
-    var tier = iTier >= 0 ? Number(row[iTier]) : 4;
+    var tier = cols.iTier >= 0 ? Number(row[cols.iTier]) : 4;
     if (tier === 1 || tier === 2) continue;
-    if (iEcon >= 0 && String(row[iEcon] || '').trim() === 'SPORTS_OVERRIDE') continue;
-    if ((Number(row[iIncome]) || 0) <= 0) continue;
+    if (cols.iEcon >= 0 && String(row[cols.iEcon] || '').trim() === 'SPORTS_OVERRIDE') continue;
+    if ((Number(row[cols.iIncome]) || 0) <= 0) continue;
     biz[emp].staff.push(i);
   }
+  return { rows: rows, biz: biz, cols: cols };
+}
+
+// The writer of a promotion (engine.135 E2): Income +6–12%, LastPromotionCycle, the
+// [Promotion] line via stampPromotion_ (verb + " after N years as a <role>."). Shared by the
+// business budget and the life-event die so a promotion is one thing however it lands.
+function careerApplyPromotion_(ctx, S, row, c, cycle, roll, verb) {
+  row[c.iIncome] = Math.round((Number(row[c.iIncome]) || 0) * (1.06 + roll() * 0.06)); // +6–12%
+  if (c.iLastPromo >= 0) row[c.iLastPromo] = cycle;
+  if (typeof stampPromotion_ === 'function') {
+    stampPromotion_(ctx, row, c.iLife, c.iLastUpd, c.iPop, c.iFirst, c.iLast, c.iNb, c.iRole, verb, Number(row[c.iYears]) || 0, cycle);
+  } else if (c.iLastUpd >= 0) row[c.iLastUpd] = ctx.now;
+  S.careerSignals.promotions += 1;
+  S.careerSignals.transitions += 1;
+  S.eventsGenerated = (S.eventsGenerated || 0) + 1;
+  if (ctx.ledger) ctx.ledger.dirty = true;
+}
+
+// The writer of a layoff: Income −12–20% (the reconciliation's cut), then careerRecordLayoff_
+// (employer cleared, [Career-Layoff] line, the debt note), the business loses a head.
+function careerApplyLayoff_(ctx, S, row, c, cycle, roll, text, logRows, bizId) {
+  row[c.iIncome] = Math.round((Number(row[c.iIncome]) || 0) * (0.80 + roll() * 0.08)); // −12–20%, the reconciliation's cut
+  careerRecordLayoff_(ctx, row, { iEmp: c.iEmp, iLastUpd: c.iLastUpd, iLife: c.iLife, iPop: c.iPop }, cycle, text, logRows);
+  if (!S.careerSignals.businessDeltas[bizId]) S.careerSignals.businessDeltas[bizId] = { gained: 0, lost: 0 };
+  S.careerSignals.businessDeltas[bizId].lost += 1;
+  S.careerSignals.layoffs += 1;
+  S.careerSignals.transitions += 1;
+  S.eventsGenerated = (S.eventsGenerated || 0) + 1;
+  if (ctx.ledger) ctx.ledger.dirty = true;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// engine.286 Task 2 — THE PROMOTION DIE (builder rulings 2026-10-11, plan §Task 2 design
+// record + R1). A pursuit event never grants or removes the job itself; it moves or fires the
+// writer that does. Per eligible citizen (careerEmployerBook_'s boundary) a flat fire chance,
+// then sign (the employer's growth third leans it) and band (aura = rung + drive third):
+//   S  — a line + its dial fold only.
+//   M  — held lifeEventLiftCycles on DialState.lifeEvent: up lifts the citizen's place in the
+//        promotion order (lifeEventPromotionLift) AND each held Cycle rolls a small own shot at
+//        the writer (lifeEventPromotionOwnChance — builder: "a small personal shot at a real
+//        raise"); down drops the order (lifeEventPromotionDrop).
+//   L  — the writer fires now: careerApplyPromotion_ (the L line is the verb) or
+//        careerApplyLayoff_ (the L line is the text). One line, one fold — no second tag.
+// Text: ECL lifeEvent.promotion.<up|down>[.M|.L] by the urn ({hood}, {employer}).
+// Runs before applyEmployerSuccess_ so this Cycle's lift reaches this Cycle's order.
+// ═══════════════════════════════════════════════════════════════════════════
+var LIFE_EVENT_PROMOTION_TEXT_ = {
+  up: ['Got a word of praise from the floor manager at {employer}.', 'A good week at {employer}; the work got noticed.'],
+  down: ['A rough week at {employer}; a mistake got noticed.', 'Passed over for a shift lead slot at {employer}.'],
+  'up.M': ['Asked to lead a project at {employer} — the kind of thing that gets a name remembered.'],
+  'down.M': ['Written up at {employer}; the next review will remember it.'],
+  'up.L': ['Promoted at {employer}'],
+  'down.L': ['Let go from {employer}']
+};
+
+function lifeEventMarkOf_(row, iDS) {
+  if (iDS < 0 || !row[iDS]) return null;
+  var raw = String(row[iDS]);
+  if (raw.indexOf('"lifeEvent"') < 0) return null;
+  try { var ds = JSON.parse(raw); return ds && ds.lifeEvent ? ds.lifeEvent : null; } catch (e) { return null; }
+}
+function lifeEventSetMark_(row, iDS, mark) {
+  if (iDS < 0 || !row[iDS]) return false;
+  var ds;
+  try { ds = JSON.parse(String(row[iDS])); } catch (e) { return false; }
+  if (!ds || typeof ds !== 'object') return false;
+  if (mark) ds.lifeEvent = mark; else delete ds.lifeEvent;
+  row[iDS] = JSON.stringify(ds);
+  return true;
+}
+// The held medium event's multiplier on this citizen's promotion wait (1 when none).
+function lifeEventLiftOf_(S, pop) {
+  var m = S && S.lifeEventLift;
+  var f = m ? m[String(pop || '').trim()] : null;
+  return f > 0 ? f : 1;
+}
+
+function applyPromotionDie_(ctx, cycle, rng, roll, logRows, S) {
+  var out = { eligible: 0, fired: 0, up: 0, down: 0, S: 0, M: 0, L: 0, promoted: 0, laidOff: 0, ownRaises: 0, held: 0, unmarked: 0 };
+  S.lifeEventLift = {};
+  var cfg = lifeEventConfig_(ctx);
+  var book = careerEmployerBook_(ctx);
+  if (!book) return out;
+  var rows = book.rows, biz = book.biz, c = book.cols;
+  var growthThird = civicRoleThirds_(biz, 'growth');
+  var drive = {}, staff = [];
+  var ids = Object.keys(biz).sort();
+  for (var k = 0; k < ids.length; k++) {
+    for (var s0 = 0; s0 < biz[ids[k]].staff.length; s0++) {
+      var ri = biz[ids[k]].staff[s0];
+      staff.push({ ri: ri, bizId: ids[k] });
+      var dsr = c.iDS >= 0 ? String(rows[ri][c.iDS] || '') : '';
+      var dv = NaN;
+      if (dsr) { try { var dso = JSON.parse(dsr); dv = dso && dso.base ? Number(dso.base.drive) : NaN; } catch (e0) {} }
+      if (!isNaN(dv)) drive[ri] = { drive: dv };
+    }
+  }
+  var driveThird = civicRoleThirds_(drive, 'drive');
+  var draws = {};
+  var pick = function(dir, band, row, bz) {
+    var hardKey = band === 'S' ? dir : dir + '.' + band;
+    var t = eclUrnPick_(rng, S, 'lifeEvent.promotion', dir, band, draws, LIFE_EVENT_PROMOTION_TEXT_[hardKey], 'hardcoded.promotion.' + hardKey, band === 'L');
+    return t.replace(/\{hood\}/g, String(c.iNb >= 0 ? (row[c.iNb] || '') : '').trim() || 'the neighborhood').replace(/\{employer\}/g, bz.name);
+  };
+  for (var i = 0; i < staff.length; i++) {
+    var row = rows[staff[i].ri], bz = biz[staff[i].bizId];
+    out.eligible++;
+    // A held medium event: the order lift this Cycle, and (up) the own shot at the writer.
+    var mark = lifeEventMarkOf_(row, c.iDS);
+    if (mark && mark.k === 'promotion') {
+      if (cycle - Number(mark.c) >= cfg.lifeEventLiftCycles || Number(mark.c) > cycle) { lifeEventSetMark_(row, c.iDS, null); out.unmarked++; }
+      else {
+        out.held++;
+        S.lifeEventLift[String(row[c.iPop]).trim()] = mark.d > 0 ? cfg.lifeEventPromotionLift : cfg.lifeEventPromotionDrop;
+        if (mark.d > 0 && Number(mark.c) < cycle && rng() < cfg.lifeEventPromotionOwnChance) {
+          careerApplyPromotion_(ctx, S, row, c, cycle, roll, 'Promoted at ' + bz.name + ' (the break paid off)');
+          lifeEventSetMark_(row, c.iDS, null);
+          delete S.lifeEventLift[String(row[c.iPop]).trim()];
+          out.ownRaises++;
+          continue;
+        }
+      }
+    }
+    if (!(cfg.lifeEventFireChance > 0) || rng() >= cfg.lifeEventFireChance) continue; // a zero gate draws nothing
+    var tierN = Number(row[c.iTier]);
+    var aura = 1 + (tierN === 3 ? 0.15 : 0) + (driveThird[staff[i].ri] === 1 ? 0.2 : (driveThird[staff[i].ri] === -1 ? -0.1 : 0));
+    var ev = lifeEventRoll_(rng, cfg, growthThird[staff[i].bizId] || 0, aura);
+    out.fired++; out[ev.dir]++; out[ev.band]++;
+    var text = pick(ev.dir, ev.band, row, bz);
+    if (ev.band === 'L') {
+      if (ev.dir === 'up') { careerApplyPromotion_(ctx, S, row, c, cycle, roll, text); out.promoted++; }
+      else { careerApplyLayoff_(ctx, S, row, c, cycle, roll, text, logRows, staff[i].bizId); out.laidOff++; }
+      if (lifeEventMarkOf_(row, c.iDS)) lifeEventSetMark_(row, c.iDS, null);
+      delete S.lifeEventLift[String(row[c.iPop]).trim()];
+      continue;
+    }
+    var tag = lifeEventTag_('Promotion', ev.dir, ev.band);
+    appendCareerLifeLine_(ctx, row, c.iLife, cycle, tag, text);
+    logRows.push([ctx.now, row[c.iPop], '', tag, text, '', cycle]);
+    if (c.iLastUpd >= 0) row[c.iLastUpd] = ctx.now;
+    if (ev.band === 'M') {
+      var d = ev.dir === 'up' ? 1 : -1;
+      lifeEventSetMark_(row, c.iDS, { k: 'promotion', d: d, c: cycle });
+      S.lifeEventLift[String(row[c.iPop]).trim()] = d > 0 ? cfg.lifeEventPromotionLift : cfg.lifeEventPromotionDrop;
+    }
+    S.eventsGenerated = (S.eventsGenerated || 0) + 1;
+    ctx.ledger.dirty = true;
+  }
+  var stats = eclUrnStats_(draws);
+  out.draws = stats.byKey;
+  if (stats.forced) Logger.log('applyPromotionDie_: pool exhausted — ' + stats.forced + ' forced repeat(s): ' + stats.forcedKeys.join('; '));
+  S.lifeEventDice = S.lifeEventDice || {};
+  S.lifeEventDice.promotion = out;
+  return out;
+}
+
+function applyEmployerSuccess_(ctx, cycle, roll, logRows, S, gapFactor) {
+  var out = { promotions: 0, layoffs: 0, businesses: 0 };
+  var book = careerEmployerBook_(ctx);
+  if (!book) return out;
+  var rows = book.rows, biz = book.biz, cols = book.cols;
+  var iPop = cols.iPop, iIncome = cols.iIncome, iTier = cols.iTier, iLastPromo = cols.iLastPromo,
+      iLife = cols.iLife, iEdu = cols.iEdu; // engine.144
+  var liftOf = function(r0) { return lifeEventLiftOf_(S, r0[iPop]); }; // engine.286 Task 2
   var gf = gapFactor || 1;
   var ids = Object.keys(biz).sort();
   var levelOf_ = function(row2) { var m = String(row2[iLife] || '').match(/\[CareerState\][^\n]*level=(\d+)/); return m ? Number(m[1]) : 1; };
@@ -431,7 +601,7 @@ function applyEmployerSuccess_(ctx, cycle, roll, logRows, S, gapFactor) {
     if (promoP > 0 && draw < promoP) {
       // engine.144: longest-waiting first (unchanged), then the credential — one
       // cause among others, never a gate — then the lower earner, then POPID.
-      var ranked = b.staff.slice().sort(promotionOrder_(rows, iLastPromo, iEdu, iIncome, iPop, iTier, cycle));
+      var ranked = b.staff.slice().sort(promotionOrder_(rows, iLastPromo, iEdu, iIncome, iPop, iTier, cycle, liftOf));
       var who = ranked[0];
       var pRow = rows[who];
       var runnerUp = ranked.length > 1 ? rows[ranked[1]] : null;
@@ -439,19 +609,12 @@ function applyEmployerSuccess_(ctx, cycle, roll, logRows, S, gapFactor) {
       var byTier = !!runnerUp && tierPayOf_(pRow, iTier) > tierPayOf_(runnerUp, iTier) &&
         (Number(runnerUp[iLastPromo]) || 0) <= (Number(pRow[iLastPromo]) || 0);
       var byCredential = !byTier && !!runnerUp &&
-        promotionWait_(runnerUp, iLastPromo, iTier, cycle) === promotionWait_(pRow, iLastPromo, iTier, cycle) &&
+        promotionWait_(runnerUp, iLastPromo, iTier, cycle, liftOf(runnerUp)) === promotionWait_(pRow, iLastPromo, iTier, cycle, liftOf(pRow)) &&
         credentialRankOf_(runnerUp, iEdu) < credentialRankOf_(pRow, iEdu);
       var promoVerb = 'Promoted at ' + b.name +
         (byTier ? ' (Tier ' + (Math.round(Number(pRow[iTier])) || 4) + ' counted)' :
          byCredential ? ' (the ' + String(pRow[iEdu]).trim() + ' counted)' : '');
-      pRow[iIncome] = Math.round((Number(pRow[iIncome]) || 0) * (1.06 + roll() * 0.06)); // +6–12%
-      if (iLastPromo >= 0) pRow[iLastPromo] = cycle;
-      if (typeof stampPromotion_ === 'function') {
-        stampPromotion_(ctx, pRow, iLife, iLastUpd, iPop, iFirst, iLast, iNb, iRole, promoVerb, Number(pRow[iYears]) || 0, cycle);
-      } else if (iLastUpd >= 0) pRow[iLastUpd] = ctx.now;
-      S.careerSignals.promotions += 1;
-      S.careerSignals.transitions += 1;
-      S.eventsGenerated = (S.eventsGenerated || 0) + 1;
+      careerApplyPromotion_(ctx, S, pRow, cols, cycle, roll, promoVerb);
       out.promotions++;
     } else if (layoffP > 0 && draw < layoffP) {
       var victim = b.staff.slice().sort(function(a, c3) {
@@ -461,15 +624,7 @@ function applyEmployerSuccess_(ctx, cycle, roll, logRows, S, gapFactor) {
         if (ia2 !== ib2) return ia2 - ib2;
         return byPop_(a, c3);
       })[0];
-      var vRow = rows[victim];
-      vRow[iIncome] = Math.round((Number(vRow[iIncome]) || 0) * (0.80 + roll() * 0.08)); // −12–20%, the reconciliation's cut
-      careerRecordLayoff_(ctx, vRow, { iEmp: iEmp, iLastUpd: iLastUpd, iLife: iLife, iPop: iPop }, cycle,
-        'Let go as ' + b.name + ' pulled back', logRows);
-      if (!S.careerSignals.businessDeltas[ids[k]]) S.careerSignals.businessDeltas[ids[k]] = { gained: 0, lost: 0 };
-      S.careerSignals.businessDeltas[ids[k]].lost += 1;
-      S.careerSignals.layoffs += 1;
-      S.careerSignals.transitions += 1;
-      S.eventsGenerated = (S.eventsGenerated || 0) + 1;
+      careerApplyLayoff_(ctx, S, rows[victim], cols, cycle, roll, 'Let go as ' + b.name + ' pulled back', logRows, ids[k]);
       out.layoffs++;
     }
   }
@@ -1319,6 +1474,16 @@ function runCareerEngine_(ctx) {
   // the write-back below grows the stated headcount with each hire (the
   // business literally grew), and citizens fired by THIS cycle's reconcile
   // only become eligible next cycle: unemployment is a lived state.
+  // engine.286 Task 2: the promotion die before the business budget, so a held medium break
+  // reaches this Cycle's promotion order. Isolated: a fault logs an Engine_Errors row and
+  // leaves the employer budget, the matcher and the reconcile to run as before.
+  try {
+    applyPromotionDie_(ctx, cycle, rng, roll, logRows, S);
+  } catch (dieErr) {
+    if (typeof logEngineError_ === 'function') logEngineError_(ctx, 'Phase5-PromotionDie', dieErr);
+    Logger.log('runCareerEngine engine.286 promotion die failed (career events unaffected): ' + dieErr);
+  }
+
   try {
     // engine.135 E2 (S399): employer success first — promotions/raises where a
     // business grows, layoffs where it shrinks — then the hiring windows.

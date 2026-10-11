@@ -2022,11 +2022,15 @@
   Writes: S.storyHooks
   Sheets: Business_Ledger, Household_Ledger
 
+- **homeLifeEventLines_(ctx, members, iLife, iBirth, cycle, tag, text)**
+
 - **trackHomeOwnership_(ss, ctx, cycle)**
-  Reads: S.storyHooks
-  Writes: S.homesPurchasedByLine, S.storyHooks
+  Reads: S.lifeEventDice, S.storyHooks
+  Writes: S.homesPurchasedByLine, S.lifeEventDice, S.storyHooks
   Sheets: Household_Ledger
   RNG: ctx.rng / safeRand_(ctx)
+
+- **homeDieOwned_(ctx, hv, rowByPop, cycle, rng, cfg, die, dieText, hc, ic, markCycles)**
 
 - **homeSaleProceeds_(st, household)**
 
@@ -2423,9 +2427,9 @@
 
 - **tierPayOf_(row, iTier)**
 
-- **promotionWait_(row, iLastPromo, iTier, cycle)**
+- **promotionWait_(row, iLastPromo, iTier, cycle, liftF)**
 
-- **promotionOrder_(rows, iLastPromo, iEdu, iIncome, iPop, iTier, cycle)**
+- **promotionOrder_(rows, iLastPromo, iEdu, iIncome, iPop, iTier, cycle, liftOf)**
 
 - **hireIncomeBand_(income, tier)**
 
@@ -2446,10 +2450,30 @@
   Writes: S.eventsGenerated
   Sheets: Business_Ledger
 
-- **applyEmployerSuccess_(ctx, cycle, roll, logRows, S, gapFactor)**
+- **careerEmployerBook_(ctx)**
+  Sheets: Business_Ledger
+
+- **careerApplyPromotion_(ctx, S, row, c, cycle, roll, verb)**
   Reads: S.careerSignals, S.eventsGenerated
   Writes: S.eventsGenerated
-  Sheets: Business_Ledger
+
+- **careerApplyLayoff_(ctx, S, row, c, cycle, roll, text, logRows, bizId)**
+  Reads: S.careerSignals, S.eventsGenerated
+  Writes: S.eventsGenerated
+
+- **lifeEventMarkOf_(row, iDS)**
+
+- **lifeEventSetMark_(row, iDS, mark)**
+
+- **lifeEventLiftOf_(S, pop)**
+  Reads: S.lifeEventLift
+
+- **applyPromotionDie_(ctx, cycle, rng, roll, logRows, S)**
+  Reads: S.eventsGenerated, S.lifeEventDice, S.lifeEventLift
+  Writes: S.eventsGenerated, S.lifeEventDice, S.lifeEventLift
+
+- **applyEmployerSuccess_(ctx, cycle, roll, logRows, S, gapFactor)**
+  Reads: S.careerSignals
 
 - **runCareerEngine_(ctx)**
   Reads: S.absoluteCycle, S.businessDeclines, S.careerSignals, S.cityDynamics, S.civicOpenSlots, S.cycleId, S.demographicDrift, S.economicMood, S.eventsGenerated, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.weather, S.weatherMood, S.worldEvents
@@ -2473,10 +2497,22 @@
 - **civicRolePremises_(S, hood, bands)**
   Reads: S.businessClosures, S.crimeMetrics, S.initiativeNeighborhoodEffects
 
-- **civicRoleEclLines_(S, premise, dir)**
+- **eclPoolLines_(S, key)**
   Reads: S.contentLedger
 
+- **civicRoleEclLines_(S, premise, dir)**
+
+- **eclUrnPick_(rng, S, base, dir, band, draws, hardLines, hardKey, strictBand)**
+
+- **eclUrnStats_(draws)**
+
 - **civicRolePickText_(rng, S, premise, dir, draws, band)**
+
+- **lifeEventConfig_(ctx)**
+
+- **lifeEventRoll_(rng, cfg, lean, aura)**
+
+- **lifeEventTag_(kind, dir, band)**
 
 - **runCivicRoleEngine_(ctx)**
   Reads: S.absoluteCycle, S.cycleId, S.eventsGenerated, S.hoodBusinessMomentum, S.neighborhoodDynamics
@@ -4633,4 +4669,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1662
+**Functions mapped:** 1677

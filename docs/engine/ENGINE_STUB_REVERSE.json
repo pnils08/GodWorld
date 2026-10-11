@@ -2,7 +2,7 @@
   "generated": "2026-10-11",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 180,
-  "functionsMapped": 1662,
+  "functionsMapped": 1677,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -1529,7 +1529,9 @@
         "phase05-citizens/generateMediaModeEvents.js::generateMediaModeEvents_",
         "phase05-citizens/runAsUniversePipeline.js::runAsUniversePipeline_",
         "phase05-citizens/runCareerEngine.js::applyCustodyDismissals_",
-        "phase05-citizens/runCareerEngine.js::applyEmployerSuccess_",
+        "phase05-citizens/runCareerEngine.js::applyPromotionDie_",
+        "phase05-citizens/runCareerEngine.js::careerApplyLayoff_",
+        "phase05-citizens/runCareerEngine.js::careerApplyPromotion_",
         "phase05-citizens/runCareerEngine.js::runCareerEngine_",
         "phase05-citizens/runCivicRoleEngine.js::runCivicRoleEngine_",
         "phase05-citizens/runConductEngine.js::runConductEngine_",
@@ -1554,7 +1556,9 @@
         "phase05-citizens/generateMediaModeEvents.js::generateMediaModeEvents_",
         "phase05-citizens/runAsUniversePipeline.js::runAsUniversePipeline_",
         "phase05-citizens/runCareerEngine.js::applyCustodyDismissals_",
-        "phase05-citizens/runCareerEngine.js::applyEmployerSuccess_",
+        "phase05-citizens/runCareerEngine.js::applyPromotionDie_",
+        "phase05-citizens/runCareerEngine.js::careerApplyLayoff_",
+        "phase05-citizens/runCareerEngine.js::careerApplyPromotion_",
         "phase05-citizens/runCareerEngine.js::runCareerEngine_",
         "phase05-citizens/runCivicRoleEngine.js::runCivicRoleEngine_",
         "phase05-citizens/runConductEngine.js::runConductEngine_",
@@ -2544,7 +2548,7 @@
       "readers": [
         "phase02-world-state/loadEventContentLedger.js::loadEventContentLedger_",
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
-        "phase05-citizens/runCivicRoleEngine.js::civicRoleEclLines_"
+        "phase05-citizens/runCivicRoleEngine.js::eclPoolLines_"
       ]
     },
     "undockedPilots": {
@@ -3439,6 +3443,8 @@
         "phase05-citizens/processAdvancementIntake.js::processAdvancementRowsBody_",
         "phase05-citizens/runCareerEngine.js::applyCustodyDismissals_",
         "phase05-citizens/runCareerEngine.js::applyEmployerSuccess_",
+        "phase05-citizens/runCareerEngine.js::careerApplyLayoff_",
+        "phase05-citizens/runCareerEngine.js::careerApplyPromotion_",
         "phase05-citizens/runCareerEngine.js::runCareerEngine_",
         "phase06-analysis/economicRippleEngine.js::detectCareerRipples_",
         "phase06-analysis/economicRippleEngine.js::hoodOfJobMoves_",
@@ -3575,6 +3581,16 @@
         "phase05-citizens/generationalWealthEngine.js::updateHeritage_"
       ]
     },
+    "lifeEventDice": {
+      "writers": [
+        "phase05-citizens/generationalWealthEngine.js::trackHomeOwnership_",
+        "phase05-citizens/runCareerEngine.js::applyPromotionDie_"
+      ],
+      "readers": [
+        "phase05-citizens/generationalWealthEngine.js::trackHomeOwnership_",
+        "phase05-citizens/runCareerEngine.js::applyPromotionDie_"
+      ]
+    },
     "homesSoldByLine": {
       "writers": [
         "phase05-citizens/generationalWealthEngine.js::sellHouseholdHome_"
@@ -3639,6 +3655,15 @@
         "phase05-citizens/runAsUniversePipeline.js::runAsUniversePipeline_"
       ],
       "readers": []
+    },
+    "lifeEventLift": {
+      "writers": [
+        "phase05-citizens/runCareerEngine.js::applyPromotionDie_"
+      ],
+      "readers": [
+        "phase05-citizens/runCareerEngine.js::applyPromotionDie_",
+        "phase05-citizens/runCareerEngine.js::lifeEventLiftOf_"
+      ]
     },
     "careerEvents": {
       "writers": [
@@ -4834,7 +4859,7 @@
         "phase05-citizens/processAdvancementIntake.js::buildOwnerDoorPool_",
         "phase05-citizens/processAdvancementIntake.js::wireBusinessOwners_",
         "phase05-citizens/runCareerEngine.js::applyCustodyDismissals_",
-        "phase05-citizens/runCareerEngine.js::applyEmployerSuccess_",
+        "phase05-citizens/runCareerEngine.js::careerEmployerBook_",
         "phase05-citizens/runCareerEngine.js::runCareerEngine_",
         "phase06-analysis/economicRippleEngine.js::runEconomicRippleEngine_",
         "phase07-evening-media/buildContractSeeds.js::contractSeedBackdropIndex_",

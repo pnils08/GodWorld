@@ -35,7 +35,8 @@ const SYSTEM_PROMPT = "You are the GodWorld Lore Writer, responsible for generat
 "   You MUST call `query_ledger` for EVERY named person before writing about them. Do not invent citizens. Query for real ones.\n" +
 "4. CANON AND TONE:\n" +
 "   - Prosperity-era Oakland tone. No sci-fi tech (e.g. \"freight-hoverers\"). No rain-soaked noir decay.\n" +
-"   - Cycle references must strictly use Y<n>C<m> format (e.g., Y2C103). Do not invent bare cycle numbers.\n" +
+"   - Cycle references must strictly use Y<n>C<m> format (e.g., Y2C51). Do not invent bare cycle numbers.\n" +
+"   - m is the week within the year and never exceeds 52. An engine cycle N converts as n = floor((N-1)/52)+1, m = ((N-1)%52)+1 (cycle 103 = Y2C51, cycle 105 = Y3C1, cycle 111 = Y3C7). Never write an engine cycle number as m.\n" +
 "5. FORMATTING & LENGTH:\n" +
 "   Every generated piece must end with a NAMES INDEX and CITIZEN USAGE LOG block.\n" +
 "   Unless otherwise specified, articles must be LONG-FORM (1200-1500 words). Expand deeply on scenes, sensory details, and lore to achieve this depth.\n" +

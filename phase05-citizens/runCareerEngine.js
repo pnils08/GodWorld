@@ -372,6 +372,8 @@ function applyCustodyDismissals_(ctx, cycle, S, logRows) {
 // engine.286 Task 2: the tracked employers and their eligible staff — the one boundary both
 // the business budget (applyEmployerSuccess_) and the promotion die (applyPromotionDie_) read:
 // sports orgs, GAME/CIVIC/MEDIA rows, Tier 1–2, SPORTS_OVERRIDE and no income are outside.
+// Built fresh per caller on purpose: the die's layoffs clear employers, so the budget must not
+// see a staff list from before them.
 function careerEmployerBook_(ctx) {
   var header = ctx.ledger && ctx.ledger.headers, rows = ctx.ledger && ctx.ledger.rows;
   if (!header || !rows || !rows.length) return null;
@@ -496,7 +498,7 @@ function lifeEventLiftOf_(S, pop) {
 }
 
 function applyPromotionDie_(ctx, cycle, rng, roll, logRows, S) {
-  var out = { eligible: 0, fired: 0, up: 0, down: 0, S: 0, M: 0, L: 0, promoted: 0, laidOff: 0, ownRaises: 0, held: 0, unmarked: 0 };
+  var out = { eligible: 0, fired: 0, up: 0, down: 0, S: 0, M: 0, L: 0, promoted: 0, laidOff: 0, ownRaises: 0, held: 0, unmarked: 0, unheld: 0 };
   S.lifeEventLift = {};
   var cfg = lifeEventConfig_(ctx);
   var book = careerEmployerBook_(ctx);
@@ -560,7 +562,7 @@ function applyPromotionDie_(ctx, cycle, rng, roll, logRows, S) {
     if (c.iLastUpd >= 0) row[c.iLastUpd] = ctx.now;
     if (ev.band === 'M') {
       var d = ev.dir === 'up' ? 1 : -1;
-      lifeEventSetMark_(row, c.iDS, { k: 'promotion', d: d, c: cycle });
+      if (!lifeEventSetMark_(row, c.iDS, { k: 'promotion', d: d, c: cycle })) out.unheld++; // no DialState to hold it: this Cycle's lift only
       S.lifeEventLift[String(row[c.iPop]).trim()] = d > 0 ? cfg.lifeEventPromotionLift : cfg.lifeEventPromotionDrop;
     }
     S.eventsGenerated = (S.eventsGenerated || 0) + 1;

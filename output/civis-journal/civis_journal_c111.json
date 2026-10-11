@@ -1,0 +1,179 @@
+{
+  "cycle": 111,
+  "popid": "POP-00789",
+  "wake": "journal",
+  "replayKey": "POP-00789:C111:journal",
+  "pageCustomId": "cp-POP-00789-c111-journal",
+  "leadFindingId": "AUD-6ba4bd670b67",
+  "findings": [
+    {
+      "auditPatternId": "AUD-3902967a1870",
+      "type": "stuck-initiative",
+      "target": "Fruitvale",
+      "civisFinding": "A public commitment has not moved through its next stage in Fruitvale.",
+      "selected": true
+    },
+    {
+      "auditPatternId": "AUD-cb0cfba3a075",
+      "type": "stuck-initiative",
+      "target": "West Oakland",
+      "civisFinding": "A public commitment has not moved through its next stage in West Oakland.",
+      "selected": true
+    },
+    {
+      "auditPatternId": "AUD-6ba4bd670b67",
+      "type": "repeating-event",
+      "target": null,
+      "civisFinding": "The same signal keeps returning without an answer downstream.",
+      "selected": true
+    },
+    {
+      "auditPatternId": "AUD-8dc7a27dbd29",
+      "type": "math-imbalance",
+      "target": "Downtown",
+      "civisFinding": "Two district readings disagree in Downtown; a rising burden is not reflected in the city's stated mood.",
+      "selected": false
+    },
+    {
+      "auditPatternId": "AUD-b896391ab7c0",
+      "type": "math-imbalance",
+      "target": "Laurel",
+      "civisFinding": "Two district readings disagree in Laurel; a rising burden is not reflected in the city's stated mood.",
+      "selected": false
+    },
+    {
+      "auditPatternId": "AUD-6b3a60b791f1",
+      "type": "math-imbalance",
+      "target": "West Oakland",
+      "civisFinding": "Two district readings disagree in West Oakland; a rising burden is not reflected in the city's stated mood.",
+      "selected": false
+    },
+    {
+      "auditPatternId": "AUD-4b727dfbab45",
+      "type": "math-imbalance",
+      "target": "Fruitvale",
+      "civisFinding": "Two district readings disagree in Fruitvale; a rising burden is not reflected in the city's stated mood.",
+      "selected": false
+    },
+    {
+      "auditPatternId": "AUD-83af3cb2d058",
+      "type": "math-imbalance",
+      "target": "Jack London",
+      "civisFinding": "Two district readings disagree in Jack London; a rising burden is not reflected in the city's stated mood.",
+      "selected": false
+    },
+    {
+      "auditPatternId": "AUD-60d26a503bb5",
+      "type": "math-imbalance",
+      "target": "Rockridge",
+      "civisFinding": "Two district readings disagree in Rockridge; a rising burden is not reflected in the city's stated mood.",
+      "selected": false
+    },
+    {
+      "auditPatternId": "AUD-54a690e0afd4",
+      "type": "math-imbalance",
+      "target": "Adams Point",
+      "civisFinding": "Two district readings disagree in Adams Point; a rising burden is not reflected in the city's stated mood.",
+      "selected": false
+    },
+    {
+      "auditPatternId": "AUD-3dcc64883462",
+      "type": "math-imbalance",
+      "target": "Grand Lake",
+      "civisFinding": "Two district readings disagree in Grand Lake; a rising burden is not reflected in the city's stated mood.",
+      "selected": false
+    },
+    {
+      "auditPatternId": "AUD-12ecdd1410d3",
+      "type": "math-imbalance",
+      "target": "Piedmont Ave",
+      "civisFinding": "Two district readings disagree in Piedmont Ave; a rising burden is not reflected in the city's stated mood.",
+      "selected": false
+    },
+    {
+      "auditPatternId": "AUD-50379bf8515b",
+      "type": "math-imbalance",
+      "target": "Chinatown",
+      "civisFinding": "Two district readings disagree in Chinatown; a rising burden is not reflected in the city's stated mood.",
+      "selected": false
+    },
+    {
+      "auditPatternId": "AUD-6a8c5f59669b",
+      "type": "math-imbalance",
+      "target": "Eastlake",
+      "civisFinding": "Two district readings disagree in Eastlake; a rising burden is not reflected in the city's stated mood.",
+      "selected": false
+    },
+    {
+      "auditPatternId": "AUD-4f10d364fbcf",
+      "type": "math-imbalance",
+      "target": "Glenview",
+      "civisFinding": "Two district readings disagree in Glenview; a rising burden is not reflected in the city's stated mood.",
+      "selected": false
+    },
+    {
+      "auditPatternId": "AUD-ea9dfb007581",
+      "type": "math-imbalance",
+      "target": "Ivy Hill",
+      "civisFinding": "Two district readings disagree in Ivy Hill; a rising burden is not reflected in the city's stated mood.",
+      "selected": false
+    },
+    {
+      "auditPatternId": "AUD-1e8e3c2678bf",
+      "type": "math-imbalance",
+      "target": "San Antonio",
+      "civisFinding": "Two district readings disagree in San Antonio; a rising burden is not reflected in the city's stated mood.",
+      "selected": false
+    },
+    {
+      "auditPatternId": "AUD-1ea2cd030fe8",
+      "type": "math-imbalance",
+      "target": "KONO",
+      "civisFinding": "Two district readings disagree in KONO; a rising burden is not reflected in the city's stated mood.",
+      "selected": false
+    },
+    {
+      "auditPatternId": "AUD-ba0694340430",
+      "type": "math-imbalance",
+      "target": "Lake Merritt",
+      "civisFinding": "Two district readings disagree in Lake Merritt; a rising burden is not reflected in the city's stated mood.",
+      "selected": false
+    },
+    {
+      "auditPatternId": "AUD-bd83e0151913",
+      "type": "math-imbalance",
+      "target": "Uptown",
+      "civisFinding": "Two district readings disagree in Uptown; a rising burden is not reflected in the city's stated mood.",
+      "selected": false
+    },
+    {
+      "auditPatternId": "AUD-1421df281a40",
+      "type": "math-imbalance",
+      "target": "East Oakland",
+      "civisFinding": "Two district readings disagree in East Oakland; a rising burden is not reflected in the city's stated mood.",
+      "selected": false
+    },
+    {
+      "auditPatternId": "AUD-fd3723762851",
+      "type": "coverage-gap",
+      "target": null,
+      "civisFinding": "There was real movement in the city's faith life this week, but the public instrument did not carry it to the paper.",
+      "selected": true
+    },
+    {
+      "auditPatternId": "AUD-7d740cfdcdee",
+      "type": "production-imbalance",
+      "target": "Downtown",
+      "civisFinding": "A district reading is out of balance in Downtown.",
+      "selected": false
+    },
+    {
+      "auditPatternId": "AUD-a402a21e9317",
+      "type": "improvement",
+      "target": "Downtown",
+      "civisFinding": "Downtown Economic Revitalization has advanced; Civis should measure whether the promised service actually reaches people.",
+      "selected": false
+    }
+  ],
+  "prose": "The same signal keeps returning without an answer downstream. It fires, the instrument registers it, and then nothing — no shift in the public record, no council action, no service delivery that the model can trace back to the source. This is not a one-week anomaly; it's a pattern that suggests the instrument is hearing a call the city itself isn't answering, or that the answer is happening in a register we aren't reading. Either way, it's a blind spot, and it's growing.\n\nTwo public commitments — one in Fruitvale, one in West Oakland — have not moved through their next stage. The instrument shows the commitments were made, the public record captured the announcement, but the follow-through hasn't appeared. In both districts, sick resident presence rose this week, even as it fell in much of the rest of the city. That's not proof of a link, but it's the kind of connection the instrument is supposed to surface. Right now, it can't, because the commitment trail goes cold.\n\nThere was real movement in the city's faith life this week — gatherings, services, the kind of civic pulse that shows up in foot traffic and community networks. The instrument didn't carry it to the paper. The reading exists in the raw data, but the public-facing summary missed it entirely. That's a failure of translation, and it means the city's story is being told without one of its most durable connective tissues.\n\nAcross the city, the instrument's internal readings are telling a story of rising burden that the public mood doesn't reflect. In Downtown, in Fruitvale, in West Oakland, in Jack London, and in a dozen other districts, the numbers on the ground are moving in one direction while the city's stated mood stays flat. That gap is not just a curiosity — it's a warning that the instrument's public voice is out of step with what its own sensors are picking up.\n\nNext, Civis will examine whether the Downtown Economic Revitalization's promised service actually reaches people. The initiative has advanced, but the instrument needs to trace the delivery, not just the announcement. That's the tune."
+}

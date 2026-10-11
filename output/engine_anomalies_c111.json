@@ -1,0 +1,168 @@
+{
+  "cycle": 111,
+  "generatedAt": "C111",
+  "detectorVersion": "1.1.0",
+  "anomalies": [
+    {
+      "type": "anomaly",
+      "severity": "high",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [],
+        "neighborhoods": [
+          "Dimond"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Crime_Metrics",
+        "rows": [
+          14
+        ],
+        "fields": {
+          "Neighborhood": "Dimond",
+          "ViolentCrimeIndex": 23,
+          "historicalMean": "26.50",
+          "stddev": "0.50",
+          "zScore": "-7.00",
+          "subCheck": "crime-outlier"
+        }
+      },
+      "description": "Dimond violent crime 23 at -7.0σ from 6-cycle mean 26.50",
+      "historicalContext": {
+        "priorCycles": [
+          27,
+          27,
+          26,
+          27,
+          26,
+          26
+        ],
+        "currentCycle": 23
+      },
+      "triagePath": "cover-as-story",
+      "confidence": "high",
+      "detectorVersion": "1.1.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "medium",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [],
+        "neighborhoods": [
+          "Laurel"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Crime_Metrics",
+        "rows": [
+          16
+        ],
+        "fields": {
+          "Neighborhood": "Laurel",
+          "ViolentCrimeIndex": 26,
+          "historicalMean": "23.50",
+          "stddev": "0.76",
+          "zScore": "3.27",
+          "subCheck": "crime-outlier"
+        }
+      },
+      "description": "Laurel violent crime 26 at 3.3σ from 6-cycle mean 23.50",
+      "historicalContext": {
+        "priorCycles": [
+          23,
+          24,
+          22,
+          24,
+          24,
+          24
+        ],
+        "currentCycle": 26
+      },
+      "triagePath": "cover-as-story",
+      "confidence": "high",
+      "detectorVersion": "1.1.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "medium",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [],
+        "neighborhoods": [
+          "Temescal"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Neighborhood_Map",
+        "rows": [],
+        "fields": {
+          "Neighborhood": "Temescal",
+          "previousMigrationFlow": 0,
+          "currentMigrationFlow": 4,
+          "delta": "4.00",
+          "subCheck": "migration-shift",
+          "band": 3.82
+        }
+      },
+      "description": "Temescal migration flow shifted 0 → 4",
+      "historicalContext": {
+        "priorCycles": [
+          0
+        ],
+        "currentCycle": 4
+      },
+      "triagePath": "suppress-until-verified",
+      "confidence": "medium",
+      "detectorVersion": "1.1.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "medium",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [],
+        "neighborhoods": [
+          "Grand Lake"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Neighborhood_Map",
+        "rows": [],
+        "fields": {
+          "Neighborhood": "Grand Lake",
+          "previousMigrationFlow": 4,
+          "currentMigrationFlow": 0,
+          "delta": "-4.00",
+          "subCheck": "migration-shift",
+          "band": 3.82
+        }
+      },
+      "description": "Grand Lake migration flow shifted 4 → 0",
+      "historicalContext": {
+        "priorCycles": [
+          4
+        ],
+        "currentCycle": 0
+      },
+      "triagePath": "suppress-until-verified",
+      "confidence": "medium",
+      "detectorVersion": "1.1.0"
+    }
+  ],
+  "summary": {
+    "total": 4,
+    "byTriage": {
+      "cover-as-story": 2,
+      "suppress-until-verified": 2
+    }
+  }
+}

@@ -2,7 +2,7 @@
 
 **Current work and waits only.** A row is here because someone is working it now, because it waits on a dated fire or a named builder call, or because it is ruled and next in the queue. Closed work → [[ROLLOUT_ARCHIVE]]. Parked work and external watches → [[../plans/BACKLOG]] §Parked ideas and external watches. Row contract, states and the sweep → [[rollout-rules]]. Sim lens before touching a mechanic → [[SIM_DOCTRINE]] §15. Last trued 2026-10-07 (engine-sheet, against the C110 smoke, PROD `f2a61e5e` and codex's row chase [[../research/2026-10-07-codex-rollout-chase]]).
 
-**Reading this file:** section 1 is the builder's list. Sections 2–4 are the lanes'. The plan list below is regenerated at every session close; any wait whose date has passed is named at close too. One line per job; the detail is in the plan the row names. Live Cycle C110; next live fire C111, Sunday 2026-10-11.
+**Reading this file:** section 1 is the builder's list. Sections 2–4 are the lanes'. The plan list below is regenerated at every session close; any wait whose date has passed is named at close too. One line per job; the detail is in the plan the row names. Live Cycle C111 (fired 2026-10-11 ~16:18 CDT, 0 errors, 148 s); next live fire C112, Sunday 2026-10-18.
 
 <!-- generated: plans in motion (docLoopStatus.js --plans --write; do not hand-edit) -->
 **Plans in motion (44)** — each plan, its rows and the state each is in:
@@ -10,7 +10,7 @@
 - [[../plans/2026-09-11-sports-as-a-lived-system]]: engine.209 live-observing, engine.206 live-observing, engine.205 in-progress, engine.202 in-progress, engine.203d live-observing
 - [[../plans/2026-10-10-engine-214-mood-per-hood]]: engine.214 live-observing, pipeline.71 ready, engine.287 live-observing, engine.288 live-observing, engine.289 blocked
 - [[../plans/2026-09-26-future-build-ideas]]: engine.238 live-observing, engine.98 ready, engine.264 ready, engine.261 ready
-- [[../reference/DEPLOY_HISTORY]]: engine.282 live-observing, engine.283 live-observing, engine.213 in-progress
+- [[../reference/DEPLOY_HISTORY]]: engine.282 done-pending-archive, engine.283 done-pending-archive, engine.213 in-progress
 - [[../plans/2026-09-21-care-and-justice-system]]: engine.254 live-observing, engine.271 live-observing, engine.272 live-observing
 - [[../plans/2026-09-10-inactivity-is-regression]]: engine.193 in-progress, engine.201 live-observing, engine.197 in-progress
 - [[../research/2026-10-02-engine-208-fandom-dial-read-before]]: engine.208 live-observing, engine.280 ready
@@ -71,11 +71,11 @@
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
-| engine.282 | C111 (Sun 2026-10-11): a debt default writes NetWorth 0 on a blank cell; POP-00963/-00971 fill by accrual. Then done | live-observing | engine-sheet | [[../reference/DEPLOY_HISTORY]] §PROD f2a61e5e |
-| engine.283 | C111 (Sun 2026-10-11): every discharge writes Status `Active`, never lowercase, and clears HealthCause. Then done | live-observing | engine-sheet | [[../reference/DEPLOY_HISTORY]] §PROD f2a61e5e |
-| engine.208 | C111 (Sun 2026-10-11): first fire on the seeded fandom dial (live seed applied 2026-10-08, 141 fans, read back 1,025/1,025). Read the fan week lines and the band spread | live-observing | engine-sheet | [[../research/2026-10-02-engine-208-fandom-dial-read-before]] §Changelog 2026-10-08 |
-| engine.209 | C111 (Sun 2026-10-11): first PREV_FRANCHISE_WEIGHT_JSON carry written; weight drifts on results from there | live-observing | engine-sheet | [[../plans/2026-09-11-sports-as-a-lived-system]] Tasks 9–10 |
-| engine.206 | C111 (Sun 2026-10-11) or the first live home week: one game-day-crowds seed per home week reaches the business and civic desks | live-observing | engine-sheet | [[../plans/2026-09-11-sports-as-a-lived-system]] Task 6 |
+| engine.282 | C111 read 2026-10-11: POP-00963 NetWorth 20 / POP-00971 17 — filled by accrual, no blank cell left. Done | done-pending-archive | engine-sheet | [[../reference/DEPLOY_HISTORY]] §PROD f2a61e5e |
+| engine.283 | C111 read 2026-10-11: 0 non-standard Status values on 1,032 rows. Done | done-pending-archive | engine-sheet | [[../reference/DEPLOY_HISTORY]] §PROD f2a61e5e |
+| engine.208 | C111 read: off-season, no game week — 0 fan week lines, `fandom seeded 7`; first real read is the first logged game week (Oaks open C112, Sun 2026-10-18) | live-observing | engine-sheet | [[../research/2026-10-02-engine-208-fandom-dial-read-before]] §Changelog 2026-10-08 |
+| engine.209 | C111 read: first carry written (A's w 1, Oaks w 0.35, weeks 0, fans 0); drifts on results from the first logged game week | live-observing | engine-sheet | [[../plans/2026-09-11-sports-as-a-lived-system]] Tasks 9–10 |
+| engine.206 | First live home week (none at C111 — off-season): one game-day-crowds seed per home week reaches the business and civic desks | live-observing | engine-sheet | [[../plans/2026-09-11-sports-as-a-lived-system]] Task 6 |
 | engine.94 | B.3 v3 LIVE (PROD `e87362b4` 2026-10-08, bench-proven). C111 Sun 2026-10-11 read, C115 B.2 bars; open sim call on challenger appeal → holder approval awaits the builder | live-observing | engine-sheet / research-build | [[../plans/2026-07-31-citizen-memory-perception]] §Status log engine.94 B.3 v3 live reads |
 | engine.254 | C119: Phase10-CareJusticeCensus timing, point 2 of 2 (1,243 ms at C110); Task 9 review with it | live-observing | engine-sheet | [[../plans/2026-09-21-care-and-justice-system]] §Task 10 handoff |
 | engine.271 | C120: first property-tax day. Fines, court and tickets proven at C110 | live-observing | engine-sheet | [[../plans/2026-09-21-care-and-justice-system]] §engine.271 read-before and design |

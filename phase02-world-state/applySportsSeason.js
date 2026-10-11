@@ -766,14 +766,15 @@ function buildActiveSportsFromOverride_(oaklandState) {
  *
  * Feed columns used (by header name, not position):
  *   Cycle             - filters entries to current/past cycles
- *   SeasonType        - season multiplier (playoffs > regular > off-season)
+ *   SeasonType        - canonical season for inferred triggers (raw week lens sets reach)
  *   TeamsUsed         - team identification
- *   Team Record       - win percentage -> base sentiment
+ *   Team Record       - carried record for inferred triggers and logging
  *   EventTrigger      - special event triggers (hot-streak, playoff-clinch, etc.)
- *   Streak            - hot/cold streak amplifier (W6, L3 format)
+ *   Streak            - hot/cold streak triggers (W6, L3 format)
  *   PlayerMood        - story hook triggers (frustrated = drama, electric = energy)
- *   FanSentiment      - sentiment modifier
- *   MediaProfile      - scales the sentiment (national = 1.5x, regional = 1.0x)
+ *   FanSentiment      - carried authored context; no numeric share
+ *   MediaProfile      - carried authored context; no numeric share
+ *   WeekRecord        - accepted upstream in S.sportsWeek; result prices the games share
  *
  * engine.204/205 slice E: HomeNeighborhood, EconomicFootprint, CommunityInvestment and
  * FranchiseStability are no longer read here. Their one consumer was a per-hood effects
@@ -823,6 +824,7 @@ function applySportsFeedTriggers_(ctx) {
     var feedHistory = ctx._sportsWeekHistory ? {
       weeks: ctx._sportsWeekHistory,
       lens: ctx._sportsLensHistory || {},
+      weights: S.franchiseWeight,
       fadeRate: sportsFadeRateConfig_(ctx)
     } : null;
     var oakResult = processFeedSheet_(oakSheet, currentCycle, S.sportsWeek, feedHistory);
@@ -894,13 +896,13 @@ function applySportsFeedTriggers_(ctx) {
 /**
  * Process a single sports feed sheet and extract per-team sentiment + triggers.
  * Scans all rows up to currentCycle, builds latest state per team,
- * then calculates sentiment from record + season + streak.
+ * then prices the accepted week result at its franchise weight and round reach.
  * weeks = S.sportsWeek (Phase2-SportsSeason): a trigger is placed at its franchise's
  * venue on a home week (h > 0) and nowhere on an away week.
- * history = { weeks: ctx._sportsWeekHistory, lens: ctx._sportsLensHistory, fadeRate } —
+ * history = { weeks: ctx._sportsWeekHistory, lens: ctx._sportsLensHistory, weights, fadeRate } —
  * engine.203d: a franchise with an earlier game week and no game this Cycle speaks its
  * aftermath (sportsAftermathShare_) instead of its carried row fields; its authored triggers
- * still fire when it has a row. No history (override, harness) = the pre-203d behaviour.
+ * still fire when it has a row. No history = no aftermath; no week = no new games share.
  */
 function processFeedSheet_(sheet, currentCycle, weeks, history) {
   var empty = { sentiment: 0, triggers: [], aftermath: { total: 0, byTeam: {} } };
@@ -949,7 +951,14 @@ function processFeedSheet_(sheet, currentCycle, weeks, history) {
       teamSentiment = 0;
       if (fadeRate) {
         var lastState = reduceFeedTeamState_(data, cols, lastGame.cycle, feedTz2)[teamName];
-        var lastShare = lastState ? feedTeamShare_(lastState) : 0;
+        // Rebuild the accepted last game week against ONLY its earlier history.
+        // As with deriveSportsIntensity_, historical intensity uses today's weight.
+        var lastLens = (lensHist[teamName] || {})[lastGame.cycle] || '';
+        var lastWeek = buildSportsWeek_(teamName, { wins: lastGame.w, losses: lastGame.l,
+          homeGames: 0, awayGames: 0 }, lastLens, weekHist[teamName], lastGame.cycle);
+        addSportsWeekIntensity_(teamName, lastWeek, sportsLensDepth_(lastLens),
+          canonicalSportsPhase_(lastLens), [], [], history.weights);
+        var lastShare = lastState ? feedTeamShare_(lastState, lastWeek) : 0;
         var kind = sportsAftermathKind_(lastGame, (lensHist[teamName] || {})[lastGame.cycle]);
         var quiet = currentCycle - lastGame.cycle;
         teamSentiment = sportsAftermathShare_(lastShare, kind, quiet, fadeRate);
@@ -971,7 +980,7 @@ function processFeedSheet_(sheet, currentCycle, weeks, history) {
       // stale playoffs x2 multiplier and firing phantom breaking-news
       // triggers every cycle for 10+ cycles.
       if (currentCycle > 0 && state.cycle !== currentCycle) continue;
-      teamSentiment = feedTeamShare_(state);
+      teamSentiment = feedTeamShare_(state, wkH);
       totalSentiment += teamSentiment;
 
       Logger.log('Sports sentiment: ' + teamName + ' = ' + teamSentiment.toFixed(3) +
@@ -1075,43 +1084,17 @@ function reduceFeedTeamState_(data, cols, uptoCycle, feedTz) {
 }
 
 /**
- * One team's share of city mood from its reduced state: record × season × media, plus
- * streak and fan modifiers, clamped ±0.10. Canonicalizes state.seasonType in place (the
- * phase reader's aliases and fail-closed vocabulary, shared with the inferred trigger).
+ * engine.194: accepted game results against the franchise's own expectation, at the
+ * round's city reach. No games / no accepted week = no new games share. The trailing
+ * baseline and expansion/dynasty priors live in buildSportsWeek_, not authored mood.
+ * Canonicalize the state in place for inferFeedTrigger_; never change the raw week lens.
  */
-function feedTeamShare_(state) {
-  // 1. Base sentiment from win percentage (-0.03 to +0.03)
-  var baseSentiment = 0;
-  var winPct = parseWinPercentage_(state.record);
-  if (winPct !== null) {
-    baseSentiment = (winPct - 0.5) * 0.06;
-  }
-
-  // 2. Season multiplier
+function feedTeamShare_(state, wk) {
   state.seasonType = canonicalSportsPhase_(state.seasonType);
-  var seasonMultiplier = 1.0;
-  var st = state.seasonType;
-  if (st === 'playoffs' || st === 'post-season') {
-    seasonMultiplier = 2.0;
-  } else if (st === 'championship') {
-    seasonMultiplier = 3.0;
-  } else if (st === 'off-season') {
-    seasonMultiplier = 0.3;
-  } else if (st === 'spring-training' || st === 'preseason') {
-    seasonMultiplier = 0.5;
-  }
-
-  // 3. Streak amplifier
-  var streakBonus = parseStreakBonus_((state.streak || '').toUpperCase());
-
-  // 4. FanSentiment modifier (v3.0)
-  var fanMod = parseFanSentiment_(state.fanSentiment);
-
-  // 5. MediaProfile scale (v3.0) — national coverage amplifies everything
-  var mediaScale = parseMediaProfile_(state.mediaProfile);
-
-  // Calculate and clamp (-0.10 to +0.10 per team, widened for new inputs)
-  var teamSentiment = (baseSentiment + streakBonus + fanMod) * seasonMultiplier * mediaScale;
+  if (!wk || !(wk.g > 0)) return 0;
+  // 0.5 reaches +0.10 for a two-win dynasty title week; -0.10 for a playoff sweep.
+  // MediaProfile, FanSentiment and Streak remain prose/trigger inputs, not multipliers.
+  var teamSentiment = 0.5 * wk.signed * wk.reach;
   return Math.max(-0.10, Math.min(0.10, teamSentiment));
 }
 

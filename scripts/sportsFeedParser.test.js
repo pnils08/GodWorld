@@ -47,7 +47,7 @@ test('D4: C106 player-feature record survives blank, roster-move 0-0 and team-up
     row({ EventType: 'team-update', SeasonType: '', 'Team Record': '0-0' })
   ]);
   assert.strictEqual(actual.records["A's"], '127-35');
-  near(actual.result.sentiment, (127 / 162 - 0.5) * 0.06 * 2);
+  near(actual.result.sentiment, 0); // carried record is not an accepted game week
 });
 test('D4: lone Oaks 0-0 is retained with zero base sentiment', () => {
   const actual = read([row({ TeamsUsed: 'Oaks', SeasonType: 'preseason', 'Team Record': '0-0' })]);
@@ -59,13 +59,13 @@ for (const filler of ['-', '  -  ', '0-0', '0 – 0', 'unparseable']) {
   test('D4: no-information record cannot replace informative record: ' + filler, () => {
     const actual = read([row({ 'Team Record': '10-2' }), row({ 'Team Record': filler })]);
     assert.strictEqual(actual.records["A's"], '10-2');
-    near(actual.result.sentiment, 0.02);
+    near(actual.result.sentiment, 0);
   });
 }
 test('D4: actual zero wins remains informative and replaces a winning record', () => {
   const actual = read([row({ 'Team Record': '10-2' }), row({ 'Team Record': '0-3' })]);
   assert.strictEqual(actual.records["A's"], '0-3');
-  near(actual.result.sentiment, -0.03);
+  near(actual.result.sentiment, 0);
 });
 test('D4: first played record replaces 0-0', () => {
   assert.strictEqual(read([row({ 'Team Record': '0-0' }), row({ 'Team Record': '1-0' })]).records["A's"], '1-0');
@@ -74,7 +74,7 @@ test('D4: informative record format follows the existing parser', () => {
   assert.strictEqual(read([row({ 'Team Record': '10-2' }), row({ 'Team Record': 'record: 12–3' })]).records["A's"], 'record: 12–3');
 });
 
-// Keep each modifier observable below the sentiment clamp when removed.
+// Authored fields still carry for triggers/prose; they no longer price game results.
 const complete = row({ 'Team Record': '10-2', SeasonType: 'playoffs', Streak: 'W1',
   EventTrigger: 'rivalry', HomeNeighborhood: 'SYNTHETIC-HOOD', PlayerMood: 'electric',
   FanSentiment: 'high', FranchiseStability: 'stable', EconomicFootprint: 'growing',
@@ -99,9 +99,15 @@ for (const [label, factor] of [
   ['mid-season', 1], ['late-season', 1], ['off-season', 0.3],
   ['interplanetary-cup', 0.3], ['world invitational', 0.3], ['playoffish', 0.3], ['', 0.3]
 ]) {
-  test('D1: sentiment uses canonical SeasonType: ' + JSON.stringify(label), () => {
+  test('D1: no week pays no games share; canonical SeasonType: ' + JSON.stringify(label), () => {
     const actual = read([row({ SeasonType: label, 'Team Record': '10-2' })]);
-    near(actual.result.sentiment, 0.02 * factor);
+    near(actual.result.sentiment, 0);
+    const state = { seasonType: label };
+    sandbox.feedTeamShare_(state);
+    const expected = factor === 0.3 ? 'off-season' : factor === 3 ? 'championship' :
+      factor === 2 ? (label === 'postseason' || label === 'post-season' ? 'post-season' : 'playoffs') :
+      label === 'summer league' || label === 'summer-league' ? 'preseason' : label === 'regular' ? 'regular-season' : label;
+    assert.strictEqual(state.seasonType, expected);
   });
 }
 test('D1: unknown season cannot infer a championship through a substring', () => {
@@ -125,7 +131,13 @@ const titleRows = [
   row({ Cycle: 110, EventType: 'game-result', SeasonType: 'championship', 'Team Record': '11-3', Streak: 'W3', EventTrigger: 'championship' })
 ];
 const titleHist = (rate = 0.85) => ({ weeks: { "A's": { 110: { w: 2, l: 0 } } }, lens: { "A's": { 110: 'championship' } }, fadeRate: rate });
-const share110 = () => plain(sandbox.processFeedSheet_(feedSheet(titleRows), 110)).sentiment;
+function weekFor(f, w, l, lens, history = {}, cycle = 110, weights) {
+  const wk = sandbox.buildSportsWeek_(f, { wins: w, losses: l, homeGames: w + l, awayGames: 0 }, lens, history, cycle);
+  sandbox.addSportsWeekIntensity_(f, wk, sandbox.sportsLensDepth_(lens), sandbox.canonicalSportsPhase_(lens), [], [], weights);
+  return wk;
+}
+const share110 = () => plain(sandbox.processFeedSheet_(feedSheet(titleRows), 110,
+  { "A's": weekFor("A's", 2, 0, 'championship') })).sentiment;
 test('203d: the week after a title fades from the title share, no dip', () => {
   const s = share110();
   assert(s > 0.05, 'fixture title share ' + s);
@@ -146,17 +158,21 @@ test('203d: an off-season row after the title does not re-read the carried recor
   assert.deepStrictEqual(r.triggers.map(t => t.trigger), ['breaking-news'], 'the authored trigger still fires');
   near(r.triggers[0].sentiment, share110() * 0.85);
 });
-test('203d: a game week this Cycle reads the live formula, untouched', () => {
+test('203d: a game week this Cycle reads the repriced formula, not aftermath', () => {
   const rows = titleRows.concat([row({ Cycle: 111, EventType: 'game-result', SeasonType: 'regular-season', 'Team Record': '3-1' })]);
-  const withHist = plain(sandbox.processFeedSheet_(feedSheet(rows), 111, { "A's": { g: 2, h: 1 } }, titleHist()));
-  const legacy = plain(sandbox.processFeedSheet_(feedSheet(rows), 111, { "A's": { g: 2, h: 1 } }));
+  const weeks = { "A's": weekFor("A's", 2, 0, 'regular-season') };
+  const withHist = plain(sandbox.processFeedSheet_(feedSheet(rows), 111, weeks, titleHist()));
+  const legacy = plain(sandbox.processFeedSheet_(feedSheet(rows), 111, weeks));
   assert.strictEqual(withHist.sentiment, legacy.sentiment);
+  near(withHist.sentiment, (1 - Math.exp(-2 / 3)) / 48);
   assert.deepStrictEqual(withHist.aftermath, { total: 0, byTeam: {} });
 });
 test('203d: eliminated in a postseason week → upset first (held), then the fade', () => {
   const rows = [row({ Cycle: 110, EventType: 'game-result', SeasonType: 'league-championship', 'Team Record': '7-5', Streak: 'L2' })];
   const hist = { weeks: { "A's": { 110: { w: 1, l: 3 } } }, lens: { "A's": { 110: 'league-championship' } }, fadeRate: 0.85 };
-  const s = plain(sandbox.processFeedSheet_(feedSheet(rows), 110)).sentiment;
+  const s = plain(sandbox.processFeedSheet_(feedSheet(rows), 110,
+    { "A's": weekFor("A's", 1, 3, 'league-championship') })).sentiment;
+  near(s, -0.1);
   const r1 = plain(sandbox.processFeedSheet_(feedSheet(rows), 111, {}, hist));
   const r2 = plain(sandbox.processFeedSheet_(feedSheet(rows), 112, {}, hist));
   assert.strictEqual(r1.aftermath.byTeam["A's"].kind, 'upset');
@@ -170,11 +186,12 @@ test('203d: a postseason run week (W >= L) that goes quiet is a season ended sho
   assert.strictEqual(sandbox.sportsAftermathKind_({ w: 1, l: 2 }, 'preseason'), 'upset', 'went quiet falling');
   assert.strictEqual(sandbox.sportsAftermathKind_({ w: 2, l: 1 }, 'late-season'), 'fade');
 });
-test('203d: the Oaks going quiet after an 0-2 preseason week carry a small upset (expansion stakes)', () => {
+test('203d: the Oaks 0-2 preseason share is below the unchanged aftermath cutoff', () => {
   const rows = [row({ Cycle: 110, TeamsUsed: 'Oaks', EventType: 'game-result', SeasonType: 'preseason', 'Team Record': '0-5', Streak: 'L5' })];
   const hist = { weeks: { Oaks: { 110: { w: 0, l: 2 } } }, lens: { Oaks: { 110: 'preseason' } }, fadeRate: 0.85 };
   const r = plain(sandbox.processFeedSheet_(feedSheet(rows), 111, {}, hist));
-  assert(r.aftermath.total < 0 && r.aftermath.total > -0.05, String(r.aftermath.total));
+  near(r.aftermath.byTeam.Oaks.lastShare, -0.5 * (1 - Math.exp(-2 / 3)) / 6 * 0.35 * 0.8 * 0.15);
+  near(r.aftermath.total, 0); // unchanged 203d cutoff spends shares below 0.01
 });
 test('203d: the aftermath is spent below 0.01 — zero, not a residue', () => {
   near(sandbox.sportsAftermathShare_(0.1, 'title', 14, 0.85), 0.1 * Math.pow(0.85, 14));
@@ -237,8 +254,8 @@ const trigHoods = (week) => {
   return ctx.summary.sportsEventTriggers.map(t => t.neighborhood);
 };
 test('slice E: home week → the venue; away week / no week → no hood; the typed hood is never read', () => {
-  const home = trigHoods({ "A's": { g: 2, h: 1, venue: ['Jack London', 'Downtown'] } });
-  const away = trigHoods({ "A's": { g: 2, h: 0, venue: ['Jack London', 'Downtown'] } });
+  const home = trigHoods({ "A's": Object.assign(weekFor("A's", 2, 0, 'playoffs'), { h: 1, venue: ['Jack London', 'Downtown'] }) });
+  const away = trigHoods({ "A's": Object.assign(weekFor("A's", 2, 0, 'playoffs'), { h: 0, venue: ['Jack London', 'Downtown'] }) });
   const none = trigHoods(undefined);
   assert(home.length > 0 && home.every(h => h === 'Jack London'), JSON.stringify(home));
   assert(away.length === home.length && away.every(h => h === ''), JSON.stringify(away));
@@ -285,5 +302,148 @@ test('engine.247: feed-entry reader hands the casino the typed record', () => {
   assert.strictEqual(entries[0].teamRecord, '4-1');
 });
 
+// engine.194: synthetic, isolated fixtures. These assertions price the RESULT,
+// not authored mood, and exercise the real feed reader -> week -> share path.
+function replay(rows, cycle, weights) {
+  const keys = [...headers, 'WeekRecord'];
+  const sheet = { getDataRange: () => ({ getValues: () => [keys, ...rows.map(r => keys.map(k => r[k] ?? ''))] }) };
+  const ctx = { summary: { cycleId: cycle, franchiseWeight: weights }, config: {},
+    ss: { getSheetByName: () => sheet } };
+  const entries = sandbox.readOaklandFeedEntries_(ctx, cycle);
+  const weeks = sandbox.deriveSportsWeekFromFeed_(entries, ctx._sportsWeekHistory, cycle);
+  sandbox.deriveSportsIntensity_(weeks, ctx._sportsWeekHistory, ctx._sportsLensHistory, {}, cycle, weights);
+  ctx.summary.sportsWeek = weeks;
+  sandbox.applySportsFeedTriggers_(ctx);
+  return ctx;
+}
+const price = (f, w, l, lens, history, weights) => sandbox.feedTeamShare_({ seasonType: lens },
+  weekFor(f, w, l, lens, history, 110, weights));
+test('194: both clamps are reachable; ordinary dynasty results can disappoint', () => {
+  near(price("A's", 2, 0, 'championship'), 0.1);
+  near(price("A's", 0, 4, 'playoffs'), -0.1);
+  near(price("A's", 2, 1, 'late-season'), -(1 - Math.exp(-1)) / 45);
+  near(price("A's", 13, 4, 'late-season'), (1 - Math.exp(-17 / 3)) / 255);
+  near(price("A's", 3, 1, 'regular-season'), 0);
+});
+test('194: the Oaks prior and reach keep preseason small, regular-season larger, both signs', () => {
+  for (const [w, l, surprise] of [[0, 3, -0.8], [3, 1, 0.7]]) {
+    const pre = 0.5 * (1 - Math.exp(-(w + l) / 3)) / 6 * 0.35 * surprise * 0.15;
+    near(price('Oaks', w, l, 'preseason'), pre);
+    near(price('Oaks', w, l, 'regular-season'), pre * 10 / 3);
+  }
+});
+test('194: round reach increases the same result before the clamp', () => {
+  const values = ['wild-card', 'division-series', 'league-championship', 'world-series']
+    .map(lens => price("A's", 1, 0, lens));
+  for (let i = 1; i < values.length; i++) assert(values[i] > values[i - 1]);
+  near(values[0], (1 - Math.exp(-1 / 3)) * 5 / 48);
+  near(values[3], (1 - Math.exp(-1 / 3)) / 4);
+});
+test('194: four regular weeks earn the postseason baseline; current/future cannot leak into it', () => {
+  const history = { 101: { w: 4, l: 1 }, 102: { w: 4, l: 1 }, 103: { w: 4, l: 1 }, 104: { w: 4, l: 1 } };
+  const wk = weekFor("A's", 3, 1, 'division-series', history);
+  near(wk.expectation, 0.8);
+  near(sandbox.feedTeamShare_({ seasonType: 'division-series' }, wk), -(1 - Math.exp(-4 / 3)) / 40);
+  history[110] = { w: 0, l: 20 }; history[111] = { w: 0, l: 20 };
+  near(weekFor("A's", 3, 1, 'division-series', history).expectation, 0.8);
+});
+test('194: record, mood, streak and media cannot overpower or reverse an accepted result', () => {
+  const wk = weekFor("A's", 1, 2, 'division-series');
+  const base = sandbox.feedTeamShare_({ seasonType: 'division-series' }, wk);
+  assert(base < 0);
+  for (const mediaProfile of ['local', 'regional', 'national']) {
+    near(sandbox.feedTeamShare_({ seasonType: 'division-series', record: '127-35',
+      streak: 'W20', fanSentiment: 'ecstatic', mediaProfile }, wk), base);
+  }
+});
+test('194: none, blank and rejected cells pay zero; authored triggers still fire', () => {
+  for (const [eventType, WeekRecord] of [['season-state', 'none'], ['game-result', ''],
+    ['season-state', 'A:W'], ['game-result', 'bad-token']]) {
+    const ctx = replay([row({ Cycle: 110, EventType: eventType, WeekRecord,
+      SeasonType: 'championship', 'Team Record': '11-3', FanSentiment: 'high',
+      MediaProfile: 'national', EventTrigger: 'breaking-news' })], 110);
+    near(ctx.summary.sportsSentimentBoost, 0);
+    assert.strictEqual(ctx.summary.sportsEventTriggers[0].trigger, 'breaking-news');
+  }
+});
+test('194: real reader folds games, rejects wrong row type, preserves postseason result at summary', () => {
+  const rows = [row({ Cycle: 110, EventType: 'game-result', SeasonType: 'playoffs', WeekRecord: 'H:W' }),
+    row({ Cycle: 110, EventType: 'game-result', SeasonType: 'playoffs', WeekRecord: 'A:W' }),
+    row({ Cycle: 110, EventType: 'season-state', SeasonType: 'championship', WeekRecord: 'A:L', 'Team Record': '11-3' }),
+    row({ Cycle: 110, TeamsUsed: 'Oaks', EventType: 'game-result', SeasonType: 'preseason', WeekRecord: 'H:L A:L' })];
+  const ctx = replay(rows, 110);
+  assert.strictEqual(ctx.summary.sportsWeek["A's"].g, 2);
+  near(ctx.summary.sportsSentimentBoost, 0.1 + price('Oaks', 0, 2, 'preseason'));
+  const quiet = replay(rows, 111);
+  near(quiet.summary.sportsAftermath.byTeam["A's"].lastShare, 0.1);
+  near(quiet.summary.sportsSentimentBoost, 0.085);
+});
+test('194: aftermath reconstructs the historical expectation, round and carried weight', () => {
+  const rows = [101, 102, 103, 104].map(Cycle => row({ Cycle, EventType: 'game-result',
+    SeasonType: 'regular-season', WeekRecord: 'H:W H:W A:W A:L' }));
+  rows.push(row({ Cycle: 110, EventType: 'game-result', SeasonType: 'division-series', WeekRecord: 'H:W' }));
+  const weights = { "A's": 0.6 };
+  const played = replay(rows, 110, weights);
+  const quiet = replay(rows, 111, weights);
+  near(quiet.summary.sportsAftermath.byTeam["A's"].lastShare, played.summary.sportsSentimentBoost);
+  near(played.summary.sportsSentimentBoost, (1 - Math.exp(-1 / 3)) * 0.075);
+  near(quiet.summary.sportsSentimentBoost, -played.summary.sportsSentimentBoost); // run ended -> upset
+});
+test('194: gnI uses repriced net games only, preserves cap and loss symmetry', () => {
+  const src = fs.readFileSync(path.join(__dirname, '../phase05-citizens/generateCitizensEvents.js'), 'utf8');
+  const block = src.match(/var gnI = [\s\S]*?var gnW = [^;]+;/);
+  assert(block, 'actual game-night pricing block');
+  const weight = (boost, aftermath) => {
+    const box = { S: { sportsSentimentBoost: boost, sportsAftermath: { total: aftermath } } };
+    vm.runInNewContext(block[0], box);
+    return box;
+  };
+  near(weight(0.08, 0.03).gnI, 0.5);
+  near(weight(0.08, 0.03).gnW, 2.75);
+  near(weight(-0.05, 0).gnW, 2.75);
+  near(weight(0.085, 0.085).gnW, 1.1);
+  near(weight(0.1, 0).gnW, 4);
+  near(weight(0.2, 0).gnI, 1);
+});
+
+// Optional local replay: snapshot JSONL only, never connects to Sheets. The old
+// pricing body is pinned to 024f42d0 for comparison, not an engine fallback.
+const replayArg = process.argv.indexOf('--replay-feed');
+if (replayArg !== -1) {
+  const input = process.argv[replayArg + 1];
+  assert(input, '--replay-feed requires a local JSONL path');
+  const rows = fs.readFileSync(input, 'utf8').trim().split('\n').map(JSON.parse);
+  const oldPrice = state => {
+    const pct = sandbox.parseWinPercentage_(state.record);
+    const phase = sandbox.canonicalSportsPhase_(state.seasonType);
+    const scale = phase === 'championship' ? 3 : phase === 'playoffs' || phase === 'post-season' ? 2 :
+      phase === 'off-season' ? 0.3 : phase === 'preseason' || phase === 'spring-training' ? 0.5 : 1;
+    const value = ((pct === null ? 0 : (pct - 0.5) * 0.06) +
+      sandbox.parseStreakBonus_((state.streak || '').toUpperCase()) + sandbox.parseFanSentiment_(state.fanSentiment)) *
+      scale * sandbox.parseMediaProfile_(state.mediaProfile);
+    return Math.max(-0.1, Math.min(0.1, value));
+  };
+  const cols = { cycle: 0, teams: 1, seasonType: 3, record: 4, streak: 5, trigger: 6,
+    playerMood: 8, fanSentiment: 9, mediaProfile: 13 };
+  const data = [headers, ...rows.map(r => headers.map(h => r[h] ?? ''))];
+  const emit = (label, f, wk, oldShare) => console.log(JSON.stringify({ label, team: f,
+    record: wk.w + '-' + wk.l, lens: wk.lens, n: wk.n, expectation: wk.expectation,
+    reach: wk.reach, weight: wk.weight, old: oldShare, raw: 0.5 * wk.signed * wk.reach,
+    new: sandbox.feedTeamShare_({ seasonType: wk.lens }, wk) }));
+  for (const cycle of [108, 109, 110]) {
+    const ctx = replay(rows, cycle);
+    const states = sandbox.reduceFeedTeamState_(data, cols, cycle, 'America/Chicago');
+    for (const f of ["A's", 'Oaks']) emit('C' + cycle, f, ctx.summary.sportsWeek[f], oldPrice(states[f]));
+  }
+  for (const [f, w, l, lens] of [["A's", 2, 1, 'late-season'], ["A's", 13, 4, 'late-season'],
+    ["A's", 0, 4, 'playoffs'], ["A's", 2, 0, 'world-series'], ["A's", 4, 1, 'world-series'],
+    ['Oaks', 0, 3, 'preseason'], ['Oaks', 3, 1, 'preseason'],
+    ['Oaks', 0, 3, 'regular-season'], ['Oaks', 3, 1, 'regular-season'],
+    ["A's", 1, 0, 'wild-card'], ["A's", 1, 0, 'division-series'],
+    ["A's", 1, 0, 'league-championship'], ["A's", 1, 0, 'world-series']]) {
+    const wk = weekFor(f, w, l, lens);
+    emit('SYNTHETIC', f, wk, oldPrice({ record: w + '-' + l, seasonType: lens }));
+  }
+}
 console.log(`sportsFeedParser: ${passed} passed, ${failed} failed`);
 process.exitCode = failed ? 1 : 0;

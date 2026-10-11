@@ -15,7 +15,6 @@
 - [[../plans/2026-09-10-inactivity-is-regression]]: engine.193 ready, engine.201 live-observing, engine.197 in-progress
 - [[../research/2026-10-02-engine-208-fandom-dial-read-before]]: engine.208 live-observing, engine.280 ready
 - [[../research/2026-10-03-engine-204-205-game-day-economy-read-before]]: engine.204 in-progress, engine.281 in-progress
-- [[../plans/2026-10-08-engine-286-game-of-life-events]]: engine.284 blocked, engine.286 ready
 - [[../plans/2026-09-22-initiative-budget-disbursement]]: engine.257 ready, engine.256 ready
 - [[../plans/2026-10-04-school-board]]: civic.43 needs-info
 - [[../plans/2026-07-31-citizen-memory-perception]]: engine.94 live-observing
@@ -47,6 +46,7 @@
 - [[../plans/2026-07-31-engine-observability-integrity]]: infrastructure.6 ready
 - [[../plans/2026-09-28-storylines-keyed-to-engine-events]]: engine.270 ready
 - `docs/research/2026-10-08-codex-engine95-design.md`: engine.285 ready
+- [[../plans/2026-10-08-engine-286-game-of-life-events]]: engine.286 live-observing
 - [[../plans/2026-05-22-engine-regulatory-friction]]: engine.20d ready
 - [[../plans/2026-08-10-economy-native-rebuild]]: engine.104 ready
 - [[../research/2026-09-10-kimi-faith-lane-routing]]: engine.248 ready
@@ -135,9 +135,8 @@
 | engine.203d | Slow fade after a season ends, unbuilt. Ruled 2026-10-07: a won title fades slowly with no dip; a season ending in a loss is upset first, then the slow fade | ready | engine-sheet | [[../plans/2026-09-11-sports-as-a-lived-system]] Task 2 |
 | engine.194 | Record-driven sentiment and game-night intensity: codex authors Task 7 now that Tasks 1–4 are live | ready | engine-sheet | [[../plans/2026-09-11-sports-as-a-lived-system]] Task 7 |
 | engine.270 | Review 1 ruled 2026-10-08: build the anomaly tag (D1), no age on first-seen stages (D2), Task 7 step 1 attach pass. Queued, not dispatched (es on other work). Step 2 and the scorer rewire wait the C113 read | ready | engine-sheet | [[../plans/2026-09-28-storylines-keyed-to-engine-events]] §Review 1 Disposition |
-| engine.284 | Civic role gate y/yes/true — shipped inside engine.286 Task 6 v3.1; LIVE PROD `63754ca8` 2026-10-11 (all 53 live CIV rows read "yes" on the bench). Task 8 (birth/intake flags, R4: every mint writes explicit no/no/no) stands under engine.286 | done-pending-archive | engine-sheet | [[../plans/2026-10-08-engine-286-game-of-life-events]] Tasks 6, 8 |
 | engine.285 | Phase-11 and executor kill hazards on every fire (LifeHistory trim clear-before-rewrite, BusinessArchive copy-then-delete, CitizenArchive skip-on-copy, MediaIntake mark-before-write, ensure-tab header, batch-append retry address). engine.95 shrinks exposure, does not fix them | ready | engine-sheet | `docs/research/2026-10-08-codex-engine95-design.md` §7 |
-| engine.286 | Event engines as dice-rolled situations the crons read. Tasks 6 (civic role, 336 ECL rows, urn + banded draw) and 2 (promotion + home dice, 128 ECL rows, savings rule) LIVE PROD `63754ca8` 2026-10-11, first live fire C111 — live-observing. Open: builder on the forced-sale rate (1/50 at 3 at-risk vs 1/20 ruled); then Tasks 11 / 3 / 5 / 7 / 8 sequencing (rb). Plan §Rulings R1–R5 | live-observing | research-build | [[../plans/2026-10-08-engine-286-game-of-life-events]] |
+| engine.286 | Life-event dice: Tasks 6 + 2 LIVE PROD `63754ca8` 2026-10-11, first fire C111. Open: builder on the forced-sale rate (1/50 now vs 1/20 ruled); then Tasks 11/3/5/7/8 (rb) | live-observing | research-build | [[../plans/2026-10-08-engine-286-game-of-life-events]] |
 | engine.20d | Initiative seeds on movement only in buildWorldSummary's civic lane. Released from the engine.270 wait 2026-10-08; spec only, no code yet. Not dispatched | ready | engine-sheet | [[../plans/2026-05-22-engine-regulatory-friction]] §Task 5 |
 | engine.280 | Fandom dial follow-up (read-before §2.9) | ready | engine-sheet | [[../research/2026-10-02-engine-208-fandom-dial-read-before]] §2.9 |
 | engine.104 | Mint economy: arrivals born with role-consistent salary, education, career stage; plan revision first, codex vets | ready | research-build | [[../plans/2026-08-10-economy-native-rebuild]] |

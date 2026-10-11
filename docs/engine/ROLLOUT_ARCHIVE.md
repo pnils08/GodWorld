@@ -973,6 +973,14 @@ Prior sweep passes: §S212 Migration Pass (governance.3 + governance.5 + S203 di
 
 This pass: 4 closed (pipeline.3, engine.3, infrastructure.1, infrastructure.2) — not `done-pending-archive` sweep rows, moved by hand per rollout-rules §6 wontfix/unresolvable-stale convention.
 
+## S548 Archive Pass (2026-10-11, engine-sheet) — post-S547 closures sweep
+
+1 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 engine.*.
+
+- **engine.284** [engine-sheet] — Civic role gate y/yes/true — shipped inside engine.286 Task 6 v3.1; LIVE PROD `63754ca8` 2026-10-11 (all 53 live CIV rows read "yes" on the bench). Task 8 (birth/intake flags, R4: every mint writes explicit no/no/no) stands under engine.286 **State at archive:** done-pending-archive. Pointer: [[../plans/2026-10-08-engine-286-game-of-life-events]] Tasks 6, 8
+
+This pass: 1 rows — engine.284. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+
 ## S540 Archive Pass (2026-10-08, research-build) — post-S539 closures sweep
 
 2 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 2 pipeline.*.

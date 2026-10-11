@@ -258,6 +258,8 @@ Asked as one list with defaults: (5a) the court week — C110, year position 6, 
 
 ## Changelog
 
+- 2026-10-11 overnight (engine-sheet) — Open Court Week built: `6: OpenCourtWeek / Open Court Week / oakland / citywide / godworld`; position 6 is a First Friday and shares the week (the season markers at 26/38 are the precedent — engineering resolution of the table test, per the 2026-10-07 reading); digest tag `COURT`; `validateEdition` flags the bare `OpenCourtWeek` token. First live Open Court Week C162. simHolidayCalendar 14/14.
+
 - 2026-10-08 (engine-sheet) — `runCivicElectionsv1.js` deleted under engine.94 B.3 v3 (no scheduled election); the comment-hygiene items this plan names at `:23,:63` are moot.
 
 - 2026-10-07 (engine-sheet, S536) — Builder: Open Court Week at position 6 approved; running-on-its-own week held; Second Dawn stays thin; meaning sentences yes (verbatim under §Builder's words 2026-10-07). ROLLOUT engine.273 → section 3.

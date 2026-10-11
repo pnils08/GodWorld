@@ -180,7 +180,8 @@ function applyCompressedDigestSummary_(ctx) {
       "Halloween": "HWEEN",
       "MothersDay": "MOM",
       "FathersDay": "DAD",
-      "SecondDawn": "DAWN"
+      "SecondDawn": "DAWN",
+      "OpenCourtWeek": "COURT"
     };
     calendarTag = holidayAbbrev[holiday] || holiday.substring(0, 4).toUpperCase();
   }

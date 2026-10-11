@@ -66,6 +66,7 @@ const ENGINE_TERMS = [
   { pattern: /\bFirstFriday\b/g },
   { pattern: /\bCreationDay\b/g },
   { pattern: /\bSecondDawn\b/g },
+  { pattern: /\bOpenCourtWeek\b/g },
   // System language — with exclusions for legitimate uses
   // "the engine" is OK as a sports metaphor ("engine of the offense")
   // "Ledger" used to be flagged here as engine-language, but it's overloaded

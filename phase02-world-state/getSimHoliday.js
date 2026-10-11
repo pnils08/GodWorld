@@ -4,6 +4,9 @@
  */
 var SIM_HOLIDAYS = {
   1:  { name: 'NewYear', label: 'New Year', priority: 'major', neighborhood: 'Downtown', type: 'celebration' },
+  // engine.273 (builder 2026-10-07 "5a, approved default"): the week the court system opened (C110).
+  // Low-key, citywide; position 6 shares a First Friday week, as the season markers at 26/38 do.
+  6:  { name: 'OpenCourtWeek', label: 'Open Court Week', priority: 'oakland', neighborhood: null, type: 'godworld' },
   7:  { name: 'Valentine', label: "Valentine's", priority: 'minor', neighborhood: null, type: 'romance' },
   12: { name: 'SpringEquinox', label: 'Spring Equinox', priority: 'minor', neighborhood: null, type: 'seasonal' },
   15: { name: 'Easter', label: 'Easter', priority: 'major', neighborhood: null, type: 'religious' },

@@ -12,6 +12,7 @@ const { emitHeader } = require('./buildWorldSummary');
 const root = path.resolve(__dirname, '..');
 const expected = {
   1: ['NewYear', 'New Year', 'major', 'Downtown', 'celebration'],
+  6: ['OpenCourtWeek', 'Open Court Week', 'oakland', null, 'godworld'],
   7: ['Valentine', "Valentine's", 'minor', null, 'romance'],
   12: ['SpringEquinox', 'Spring Equinox', 'minor', null, 'seasonal'],
   15: ['Easter', 'Easter', 'major', null, 'religious'],
@@ -67,7 +68,7 @@ test('all 52 engine flags and details follow the table', () => {
 
 test('13 First Fridays follow the fourth-week cadence and miss kept holidays', () => {
   let count = 0;
-  const kept = new Set([1, 7, 15, 19, 25, 27, 44, 47, 48, 51, 52]); // the season markers at 26 and 38 do share a First Friday week
+  const kept = new Set([1, 7, 15, 19, 25, 27, 44, 47, 48, 51, 52]); // the season markers at 26 and 38 and the low-key Open Court Week at 6 share a First Friday week
   for (let position = 1; position <= 52; position++) {
     const firstFriday = holidays.isFirstFridayCycle_(position);
     assert.strictEqual(firstFriday, position % 4 === 2);
@@ -188,6 +189,13 @@ test('a throwing ledger writer never costs the packet (engine.254 Task 8 R1-4)',
   assert.deepStrictEqual(logged, ['Phase10-HospitalLedger:hospital boom', 'Phase10-JudicialLedger:judicial boom']);
 });
 
+test('Open Court Week: position 6, the city\'s-own tier, citywide, on a First Friday week; C110 and C162', () => {
+  const details = holidays.getSimHolidayDetails_(6);
+  assert.deepStrictEqual([details.name, details.label, details.priority, details.neighborhood, details.type],
+    ['OpenCourtWeek', 'Open Court Week', 'oakland', null, 'godworld']);
+  assert.strictEqual(holidays.isFirstFridayCycle_(6), true);
+  for (const c of [110, 162]) assert.strictEqual(holidays.getSimHoliday_(((c - 1) % 52) + 1), 'OpenCourtWeek');
+});
 test('Second Dawn: position 27, the city\'s-own tier, citywide, label in the packet and never the flag', () => {
   const details = holidays.getSimHolidayDetails_(27);
   assert.deepStrictEqual([details.name, details.label, details.priority, details.neighborhood], ['SecondDawn', 'Second Dawn', 'oakland', null]);

@@ -50,14 +50,16 @@ const BRIEF_VERSION = 'UNDOCKED-BRIEF/2';
 // which drives better events. So doing well on the show and being a top the
 // leader board gets you a lot of mentions. Beyond that nothing has been
 // designed to offer anything else."
+// mission_id= is the arg form a live flight proved on accept_mission; the
+// game's REST command list says id= — named as the fallback on both calls.
 const SHOW_RULES = `
 THE SHOW. UNDOCKED is Oakland's show. One citizen flies each night and the city watches. You were drawn by lottery — any grown resident can be — and you hold the chair for this run, about two nights. Nobody coaches you. What you do up there is the episode.
 
 THE OBJECTIVE. Bring credits home. The board ranks every pilot who has ever sat the chair by total credits earned across their nights. Your night's number is what you earned between undock and your last dock. The highest total leads the board, and the pilot who leads the board is the one the whole city reads about. There is no other score. Fights, mishaps, a lost ship — the city talks about those, but only credits move the board.
 
 HOW CREDITS ARE MADE, best way first:
-1. Contracts. While docked, run spacemolt/get_missions. A station supply contract (deliver 30 iron ore, say) pays 1,500 to 3,500 credits. Raw ore sold at the exchange pays 5 to 10 a unit, so one closed contract outweighs a hundred nights of selling rock. Take a contract you can close: ore you can mine nearby, a quantity your hold carries (the starter hold is 50 units), a deadline past tonight. Accept it with spacemolt/accept_mission id=<the mission id shown by get_missions> (if the console rejects id=, use mission_id=).
-2. Close it. Mine the ore, dock at the station that posted it, and claim with spacemolt/complete_mission id=<that id> while docked (spacemolt/get_active_missions shows the id and what is still owed). The reward lands on completion. An open contract scores nothing.
+1. Contracts. While docked, run spacemolt/get_missions. A station supply contract (deliver 30 iron ore, say) pays 1,500 to 3,500 credits. Raw ore sold at the exchange pays 5 to 10 a unit, so one closed contract outweighs a hundred nights of selling rock. Take a contract you can close: ore you can mine nearby, a quantity your hold carries (the starter hold is 50 units), a deadline past tonight. Accept it with spacemolt/accept_mission mission_id=<the mission id shown by get_missions> (if the console rejects mission_id=, use id=).
+2. Close it. Mine the ore, dock at the station that posted it, and claim with spacemolt/complete_mission mission_id=<that id> while docked (if the console rejects mission_id=, use id=; spacemolt/get_active_missions shows the id and what is still owed). The reward lands on completion. An open contract scores nothing.
 3. Whatever is left in the hold, sell at the exchange with spacemolt/sell.
 
 THE RULES OF THE CHAIR:
@@ -76,7 +78,7 @@ const CONSOLE_REFERENCE = `
 Ship console reference — use these EXACT command names; guessing variants wastes the flight:
 - spacemolt/get_status, spacemolt/get_poi, spacemolt/get_cargo, spacemolt/get_nearby, spacemolt/get_system — read state
 - spacemolt/find_route target_system=<system> — route planning
-- spacemolt/get_missions (docked), spacemolt/accept_mission id=<mission id>, spacemolt/get_active_missions, spacemolt/complete_mission id=<mission id> (docked) — contracts
+- spacemolt/get_missions (docked), spacemolt/accept_mission mission_id=<mission id>, spacemolt/get_active_missions, spacemolt/complete_mission mission_id=<mission id> (docked) — contracts (mission_id= is the proven form; id= is the fallback if the console rejects it)
 - spacemolt/undock, spacemolt/dock — station in/out
 - spacemolt/travel target_poi=<poi_id> — in-system travel (never destination=)
 - spacemolt/jump target_system=<system> — between systems
@@ -111,7 +113,7 @@ Your account is already set up — NEVER call register or login. Your ship is fu
 1. While docked: spacemolt/get_active_missions. If a contract from your last night is still open and you can close it tonight, that is the night. Otherwise spacemolt/get_missions and accept ONE contract you can close tonight (ore you can mine nearby, quantity your hold carries, deadline past tonight). If no contract fits, fly the plain run: mine, sell, refuel.
 2. Undock and travel to the nearest asteroid belt. Check it first (spacemolt/get_poi); if it reads too sparse, pick another belt from spacemolt/get_system.
 3. Mine the ore the contract wants until you have it, or until the hold is nearly full. Steady work, no rushing.
-4. Travel back, dock, and close the contract with spacemolt/complete_mission id=<id>. Then sell whatever ore is left over.
+4. Travel back, dock, and close the contract with spacemolt/complete_mission mission_id=<id>. Then sell whatever ore is left over.
 5. Refuel completely — a ship that runs dry strands its pilot. Refuel any time you're low. Repair if anything's damaged.
 6. Before you finish: write one captains_log entry about the flight, in your own plain words — what you did, what it felt like, what the board will say. Then dock and stop.
 

@@ -48,8 +48,9 @@ check('rules block present', brief.includes(B.SHOW_RULES.trim()));
 check('objective: credits move the board', /THE OBJECTIVE\. Bring credits home/.test(brief) && /only credits move the board/.test(brief));
 check('the show: lottery + the chair', /drawn by lottery/.test(brief) && /hold the chair/.test(brief));
 check('contracts outrank raw ore', /1,500 to 3,500 credits/.test(brief) && /5 to 10 a unit/.test(brief));
-check('contract commands exact', brief.includes('spacemolt/get_missions') && brief.includes('spacemolt/accept_mission id=')
-  && brief.includes('spacemolt/get_active_missions') && brief.includes('spacemolt/complete_mission id='));
+check('contract commands exact, proven arg form first', brief.includes('spacemolt/get_missions') && brief.includes('spacemolt/accept_mission mission_id=')
+  && brief.includes('spacemolt/get_active_missions') && brief.includes('spacemolt/complete_mission mission_id='));
+check('id= fallback named on accept and on complete', (brief.match(/rejects mission_id=, use id=/g) || []).length >= 2);
 check('flight plan opens on active contracts', /1\. While docked: spacemolt\/get_active_missions/.test(brief));
 check('plain run kept as the floor', /fly the plain run: mine, sell, refuel/.test(brief));
 check('too-sparse rule', /too sparse/.test(brief) && brief.includes('spacemolt/get_poi'));

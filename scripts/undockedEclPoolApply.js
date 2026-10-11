@@ -3,7 +3,7 @@
 
 /**
  * Append authored ECL rows to Event_Content_Ledger. Default dry-run. Idempotent on Text.
- * Pools: undocked (default) | memory (engine.94 B.2, scripts/memoryEclPool.js) | civicRole (engine.286 T6, scripts/civicRoleEclPool.js).
+ * Pools: undocked (default) | memory (engine.94 B.2, scripts/memoryEclPool.js) |  civicRole (engine.286 T6, scripts/civicRoleEclPool.js) | lifeEvent (engine.286 T2, scripts/lifeEventEclPool.js).
  *
  *   node scripts/undockedEclPoolApply.js [--pool memory]
  *   node scripts/undockedEclPoolApply.js [--pool memory] --apply
@@ -12,7 +12,7 @@
 require('../lib/env');
 // --pool memory selects the engine.94 memory pool (scripts/memoryEclPool.js); --pool civicRole the engine.286 Task 6 civic role pool (scripts/civicRoleEclPool.js); default stays UNDOCKED.
 const POOL_ARG = (function () { const i = process.argv.indexOf('--pool'); return i >= 0 ? String(process.argv[i + 1] || '') : 'undocked'; })();
-const POOLS = { undocked: './undockedEclPool', memory: './memoryEclPool', civicRole: './civicRoleEclPool' };
+const POOLS = { undocked: './undockedEclPool', memory: './memoryEclPool', civicRole: './civicRoleEclPool', lifeEvent: './lifeEventEclPool' };
 if (!POOLS[POOL_ARG]) throw new Error('unknown --pool ' + POOL_ARG + ' (' + Object.keys(POOLS).join('|') + ')');
 const P = require(POOLS[POOL_ARG]);
 

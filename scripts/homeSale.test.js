@@ -210,10 +210,10 @@ const ownedRow = ['HH-S1', 'POP-A', 'family', '["POP-A","POP-B"]', 'Testhood', '
   // Forced sale: an owner over half of income on the house; homeLossChance lands
   {
     const owned = ['HH-D2', 'POP-E', 'family', '["POP-E","POP-F"]', 'Testhood', 'owned', 6000, 400000, 100000, 101, '', 'active', 0];
-    const r = run(owned, [who('POP-E', 100000), who('POP-F', 300000)], [0.0, 0.0]);
+    const r = run(owned, [who('POP-E', 100000), who('POP-F', 200000)], [0.0, 0.0]); // 300,000 saved < 320,000 owed
     ok('forced sale: household rents in its own hood at the market rent, cost cleared', r.hh[col(HH_HEAD, 'HousingType')] === 'rented' && r.hh[col(HH_HEAD, 'MonthlyRent')] === 2000 && r.hh[col(HH_HEAD, 'HousingCost')] === 0 && r.hh[col(HH_HEAD, 'Neighborhood')] === 'Testhood', JSON.stringify(r.hh));
-    ok('forced sale: proceeds (528,000 − 320,000) split by NetWorth share', r.ctx.ledger.rows[0][col(SL_HEAD, 'NetWorth')] === 152000 && r.ctx.ledger.rows[1][col(SL_HEAD, 'NetWorth')] === 456000);
-    ok('forced sale: one [LifeEvent-Home-Down-L] line per adult with their share, no [Home] line', /\[LifeEvent-Home-Down-L\] Had to sell the house in Testhood and rent on the same streets — \$52000 back from the sale$/.test(lastLine(r.ctx.ledger.rows[0])) && !/\[Home\]/.test(r.ctx.ledger.rows[0][col(SL_HEAD, 'LifeHistory')]), lastLine(r.ctx.ledger.rows[0]));
+    ok('forced sale: proceeds (528,000 − 320,000) split by NetWorth share', r.ctx.ledger.rows[0][col(SL_HEAD, 'NetWorth')] === 169333.33 && r.ctx.ledger.rows[1][col(SL_HEAD, 'NetWorth')] === 338666.67, JSON.stringify([r.ctx.ledger.rows[0][col(SL_HEAD, 'NetWorth')], r.ctx.ledger.rows[1][col(SL_HEAD, 'NetWorth')]]));
+    ok('forced sale: one [LifeEvent-Home-Down-L] line per adult with their share, no [Home] line', /\[LifeEvent-Home-Down-L\] Had to sell the house in Testhood and rent on the same streets — \$69333 back from the sale$/.test(lastLine(r.ctx.ledger.rows[0])) && !/\[Home\]/.test(r.ctx.ledger.rows[0][col(SL_HEAD, 'LifeHistory')]), lastLine(r.ctx.ledger.rows[0]));
     ok('forced sale counted', r.die.sold === 1 && r.die.atRisk === 1);
   }
   // An owner inside the carry bar is not at risk: no draw
@@ -257,6 +257,13 @@ const ownedRow = ['HH-S1', 'POP-A', 'family', '["POP-A","POP-B"]', 'Testhood', '
     fail = false; i = 0; ctx.summary.lifeEventDice = null;
     D.trackHomeOwnership_(ctx.ss, ctx, 110);
     ok('F1 retry once the write works: one payout, not two', sheets.Household_Ledger._values[1][col(HH_HEAD, 'HousingType')] === 'rented' && members[0][col(SL_HEAD, 'NetWorth')] === 100000 + 208000, String(members[0][col(SL_HEAD, 'NetWorth')]));
+  }
+  // Builder 2026-10-11 "yes savings should count": a stretched owner whose savings clear the financed share is not at risk
+  {
+    const owned = () => ['HH-D8', 'POP-E', 'family', '["POP-E"]', 'Testhood', 'owned', 6000, 400000, 100000, 101, '', 'active', 0];
+    const rich = run(owned(), [who('POP-E', 320000)], [0.0, 0.0]);    // 400,000 x 0.8 = 320,000 owed: covered
+    const short = run(owned(), [who('POP-E', 319999)], [0.0, 0.0]);   // a dollar short: still at risk
+    ok('savings: covering the financed share protects the house (no draw); a dollar short does not', rich.die.atRisk === 0 && rich.die.savingsCovered === 1 && rich.calls === 0 && rich.hh[col(HH_HEAD, 'HousingType')] === 'owned' && short.die.atRisk === 1 && short.die.sold === 1, JSON.stringify([rich.die, short.die]));
   }
   // codex F6: missing / blank / non-numeric income is unknown, never stretched; a verified zero is
   {

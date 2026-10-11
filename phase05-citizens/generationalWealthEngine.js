@@ -1989,7 +1989,8 @@ function collectPropertyTax_(ss, ctx, cycle) {
 //     (lifeEventHomeRollBoost), up L buys now (the roll is skipped, the gates still held),
 //     down M/L zero this Cycle's roll (a renter has no house to lose: L reads as M).
 //   owned, at risk (a member's default mark, or own payment + tax over lifeEventHomeCarryBar of
-//     HouseholdIncome — builder: "over half") — the forced sale is a standing risk, not a weekly
+//     HouseholdIncome — builder: "over half" — unless the members' savings could clear what is
+//     still owed on the house: builder "yes savings should count") — the forced sale is a standing risk, not a weekly
 //     draw (builder 2026-10-11: "more like 1 every 20 cycles"): homeLossChance per at-risk household
 //     per Cycle, rolled before and apart from the ladder, through the existing writers —
 //     updateHouseholdLedgerMove_ first (rented in its own hood; the payout only if it wrote), then
@@ -2059,7 +2060,7 @@ function trackHomeOwnership_(ss, ctx, cycle) {
   var homesByLine = {};
   // engine.286 Task 2: the home die. A missing key is a visible Engine_Errors row and the
   // die stays off this Cycle; the purchase roll runs as before.
-  var dieCfg = null, dieDraws = {}, die = { renting: 0, owned: 0, atRisk: 0, incomeUnknown: 0, unsellable: 0, saleFailed: 0, fired: 0, up: 0, down: 0, S: 0, M: 0, L: 0, boosted: 0, zeroed: 0, bought: 0, sold: 0 };
+  var dieCfg = null, dieDraws = {}, die = { renting: 0, owned: 0, atRisk: 0, incomeUnknown: 0, savingsCovered: 0, unsellable: 0, saleFailed: 0, fired: 0, up: 0, down: 0, S: 0, M: 0, L: 0, boosted: 0, zeroed: 0, bought: 0, sold: 0 };
   try { dieCfg = lifeEventConfig_(ctx); } catch (cfgErr) {
     if (typeof logEngineError_ === 'function') logEngineError_(ctx, 'Phase5-HomeDie', cfgErr);
     Logger.log('trackHomeOwnership_ engine.286 home die off this Cycle: ' + cfgErr);
@@ -2206,13 +2207,14 @@ function homeDieOwned_(ctx, hv, rowByPop, cycle, rng, cfg, die, dieText, hc, ic,
     die.owned++;
     var memIds = [];
     try { memIds = JSON.parse(String(hv[q][hc.cMem] || '[]')); } catch (e) { memIds = []; }
-    var members = [], marked = false;
+    var members = [], marked = false, savings = 0;
     for (var m = 0; m < memIds.length; m++) {
       var mRow = rowByPop[String(memIds[m]).trim()];
       if (!mRow) continue;
       if (String(mRow[ic.iStatus] || 'active').toLowerCase() === 'deceased') continue;
       members.push(mRow);
       if (ic.iDS >= 0 && debtDefaultMarked_(mRow[ic.iDS], cycle, markCycles)) marked = true;
+      savings += Number(String(mRow[ic.iNW]).replace(/[$,\s]/g, '')) || 0; // NetWorth is lived savings (HouseholdSavings sums it)
     }
     if (!members.length) continue;
     var hood = String(hv[q][hc.cHood] || '').trim();
@@ -2227,6 +2229,9 @@ function homeDieOwned_(ctx, hv, rowByPop, cycle, rng, cfg, die, dieText, hc, ic,
       var inc = Number(rawInc);
       var basis = cost > 0 ? cost : Math.round(homeMarketRent_(ctx, hood, payment) * 12 * HOME_PRICE_TO_RENT);
       stretched = inc > 0 ? (payment * 12 + homeAnnualTax_(ctx, basis)) / inc > cfg.lifeEventHomeCarryBar : true;
+      // Builder 2026-10-11: "yes savings should count" — a household whose savings could clear what
+      // is still owed on the house (the financed share; the sim models no paydown) is not at risk.
+      if (stretched && savings >= basis * (1 - HOME_DOWN)) { stretched = false; die.savingsCovered++; }
     } else if (!marked) die.incomeUnknown++;
     if (!marked && !stretched) continue;
     die.atRisk++;

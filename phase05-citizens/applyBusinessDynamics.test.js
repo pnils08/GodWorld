@@ -20,6 +20,7 @@ function assert(label, cond, detail) { if (cond) { console.log(`  ok   ${label}`
 const CFG = { bizShipEchoShare: 0.15, bizDeclineStreak: 4, bizDriftMaxUp: 1.0, bizDriftMaxDown: 1.0, bizGrowthCeil: 40, bizGrowthFloor: -10, bizNoiseBound: 0.25, bizCoverageUnit: 0.1, bizVitalityGain: 0.15, bizSuccessWindow: 3, bizSuccessVitalityHigh: 9.0, bizSuccessApprovalHigh: 85, bizSuccessPenalty: 0.3, bizDisruptBaseChance: 2, bizDisruptSuccessMult: 3, bizDisruptShock: 2.0, bizClosureStreak: 8, bizClosureRevenueFloorPct: 40, bizEventShockScale: 1.0, bizVol_faith: 0.5, bizVol_retail: 1.2, bizVol_food: 1.3, bizVol_health: 0.7, bizVol_tech: 1.5, bizVol_professional: 0.8, bizVol_construction: 1.1, bizVol_arts: 1.2, bizVol_education: 0.6, bizVol_default: 1.0,
   bizInitiativeStallDrag: 0.5,   // engine.250, builder-ruled half weight
   bizSportsWeekPp: 2.0,          // engine.205 slice D
+  bizSettleRate: 0.05, bizSettleMinStaff: 1000,   // engine.193 (b)
   // engine.178 owner dial gates, as ensureEngine178Config_ seeds them
   dialOwnerStreakRoom: 1, dialOwnerDriveExpandMult: 1.25 };
 const BL_H = ['BIZ_ID', 'Name', 'Sector', 'Neighborhood', 'Employee_Count', 'Avg_Salary', ' Annual_Revenue ', 'Growth_Rate ', 'Key_Personnel'];
@@ -101,7 +102,7 @@ console.log('wiring');
   assert('ensureEngine96Config_ self-arms beside 133/135', /ensureEngine135Config_\(ss\);[^\n]*\n\s*ensureEngine96Config_\(ss\);/.test(orch));
   const contract = fs.readFileSync(path.join(__dirname, '..', 'phase01-config', 'engine94SheetContract.js'), 'utf8');
   const seeded = (contract.match(/\['biz[A-Za-z_]+',/g) || []).map(s => s.slice(2, -2));
-  assert('the 27 signed keys + bizDeclineStreak + bizInitiativeStallDrag (engine.250) + bizShipEchoShare (engine.193 3b) + bizSportsWeekPp (engine.205 D) + the 4 owner-door keys (Task 12) are seeded; the dynamics pass requires exactly its 31', seeded.length === 35 && mod.BIZ_DYNAMICS_REQUIRED_KEYS.length === 31 && mod.BIZ_DYNAMICS_REQUIRED_KEYS.every(k => seeded.includes(k)), JSON.stringify(seeded));
+  assert('the 27 signed keys + bizDeclineStreak + bizInitiativeStallDrag (engine.250) + bizShipEchoShare (engine.193 3b) + bizSportsWeekPp (engine.205 D) + bizSettleRate/bizSettleMinStaff (engine.193 b) + the 4 owner-door keys (Task 12) are seeded; the dynamics pass requires exactly its 33', seeded.length === 37 && mod.BIZ_DYNAMICS_REQUIRED_KEYS.length === 33 && mod.BIZ_DYNAMICS_REQUIRED_KEYS.every(k => seeded.includes(k)), JSON.stringify(seeded));
   const fin = fs.readFileSync(path.join(__dirname, '..', 'phase09-digest', 'finalizeCycleState.js'), 'utf8');
   assert('finalizeCycleState carries businessDynamics from S.businessDynamicsState', /businessDynamics: S\.businessDynamicsState \|\| \{\}/.test(fin));
   const gw = fs.readFileSync(path.join(__dirname, '..', 'phase05-citizens', 'generationalWealthEngine.js'), 'utf8');
@@ -365,6 +366,25 @@ console.log('engine.205 slice D — a game week at the bars');
   assert('engine.206: home loss → only the venue hood\'s bars, negative (−.3 × 2pp = −.6)',
     homeLoss.bars && Object.keys(homeLoss.bars.byHood).join() === 'Jack London' && homeLoss.bars.pp === -0.6 && homeLoss.out.sportsBars === 2, JSON.stringify(homeLoss.bars));
   delete global.recordRipple_;
+}
+console.log('engine.193 (b): institutions settle toward their class normal');
+{
+  const quiet = { chaosAtBusiness: 0, chaosInHood: 0, initiativeAdvanced: false, coverageDeviation: null, vitality: 6.0, vitalityMedian: 6.0, mayorApproval: 60 };
+  const ousd = { id: 'BIZ-00016', sector: 'Education', hood: 'City-wide', growth: 8.89, revenue: null, stated: 5201 };
+  const d = mod.bizDriftOne_(CFG, ousd, { streak: 0, win: 0 }, quiet, 110);
+  assert('an institution 6.89pp over its class (education 2) closes 5% of the gap: settle −0.3445', Math.abs(d.parts.settle + 0.3445) < 1e-9, String(d.parts.settle));
+  assert('the settle lands on growth beside the drift', Math.abs(d.growth - Math.round((8.89 + d.drift - 0.3445) * 100) / 100) < 1e-9, JSON.stringify(d));
+  const shop = Object.assign({}, ousd, { stated: 12 });
+  assert('a small business holds its own track (no settle)', mod.bizDriftOne_(CFG, shop, { streak: 0, win: 0 }, quiet, 110).parts.settle === 0);
+  assert('rate 0 turns it off', mod.bizDriftOne_(Object.assign({}, CFG, { bizSettleRate: 0 }), ousd, { streak: 0, win: 0 }, quiet, 110).parts.settle === 0);
+  const low = Object.assign({}, ousd, { sector: 'Healthcare', growth: 1 });
+  assert('below its class normal it rises toward it (health 3)', mod.bizDriftOne_(CFG, low, { streak: 0, win: 0 }, quiet, 110).parts.settle > 0);
+  // 52 quiet Cycles: the ratchet cools, events and noise still move it
+  let g = 8.89; const path = [];
+  for (let c = 111; c <= 162; c++) { g = mod.bizDriftOne_(CFG, Object.assign({}, ousd, { growth: g }), { streak: 0, win: 0 }, quiet, c).growth; if ((c - 110) % 13 === 0) path.push(g); }
+  assert('52 quiet Cycles: OUSD cools by quarters toward 2 and stays above the floor (' + path.join(' → ') + ')', path[0] < 6.5 && path[3] < 3.5 && path[3] > 0.5, path.join(','));
+  const ship = mod.bizDriftOne_(CFG, Object.assign({}, ousd, { sector: 'Port & Logistics' }), { streak: 0, win: 0, ship: -3 }, Object.assign({}, quiet, { shipOffset: -3 }), 110);
+  assert('the settle reads the shock-free track: a ship offset is not mistaken for cooling', Math.abs(ship.parts.settle - 0.05 * (2 - (8.89 + 3))) < 1e-9, String(ship.parts.settle));
 }
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

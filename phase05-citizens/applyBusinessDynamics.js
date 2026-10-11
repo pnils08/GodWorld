@@ -58,7 +58,9 @@ var BIZ_DYNAMICS_REQUIRED_KEYS = [
   'bizInitiativeStallDrag', // engine.250: share of the event scale a failing initiative drains per Cycle (builder-ruled 0.5)
   'bizDeclineStreak', // Task 6 (S413): distress cycles before shedding starts — not in the signed table; proposed 4, half the closure streak
   'bizShipEchoShare', // engine.193 cut 3b: share of a ship episode's Growth_Rate offset felt by businesses off the port (builder default: small)
-  'bizSportsWeekPp'   // engine.205 slice D: pp event a bar or restaurant takes from a full-strength game week
+  'bizSportsWeekPp',  // engine.205 slice D: pp event a bar or restaurant takes from a full-strength game week
+  'bizSettleRate',    // engine.193 (b): share of the gap to the class norm an institution's growth closes per Cycle
+  'bizSettleMinStaff' // engine.193 (b): stated staff at which a business is an institution that settles (the big employers)
 ];
 
 // The class mint table — the engine copy of scripts/ingestPublishedEntities.js
@@ -463,14 +465,24 @@ function bizDriftOne_(cfg, biz, prevState, inputs, cycle) {
   // offset sits on top, clamped. The aftermath (offset 0) lands back on that track — no
   // ratchet either way, including weeks the floor swallowed.
   var shipPrev = Number(prevState.ship) || 0;
-  var g0 = bizClamp_(biz.growth - shipPrev + drift, cfg.bizGrowthFloor, cfg.bizGrowthCeil);
+  // engine.193 (b) (builder 2026-10-07, "b first"): an institution's growth settles toward its
+  // class's normal (BIZ_CLASS_MINT — what a business of that class IS) instead of holding the
+  // leftover ratchet (OUSD 8.89 / Kaiser 10.17 / Port 12.69 at C110 vs class 2–3). A pull on the
+  // shock-free track, outside the drift cap — events still move it every week; with none, the gap
+  // closes by bizSettleRate a Cycle. Only staffs >= bizSettleMinStaff: live sector medians are
+  // ratcheted too (tech 21.6, education = OUSD + Peralta), so "the sector's own middle" would hold them.
+  var track = biz.growth - shipPrev, settle = 0;
+  if (cfg.bizSettleRate > 0 && (Number(biz.stated) || 0) >= cfg.bizSettleMinStaff) {
+    settle = cfg.bizSettleRate * ((BIZ_CLASS_MINT[cls] || BIZ_CLASS_MINT['default']).growth - track);
+  }
+  var g0 = bizClamp_(track + drift + settle, cfg.bizGrowthFloor, cfg.bizGrowthCeil);
   var g1 = bizClamp_(g0 + (Number(inputs.shipOffset) || 0), cfg.bizGrowthFloor, cfg.bizGrowthCeil);
   var growth = Math.round(g1 * 100) / 100;
   var shipApplied = Math.round((growth - Math.round(g0 * 100) / 100) * 100) / 100;
   var revenue = biz.revenue === null ? null : Math.round(biz.revenue * (1 + growth / 100 / 52));
   var streak = growth < 0 ? (Number(prevState.streak) || 0) + 1 : 0;
   return { growth: growth, revenue: revenue, drift: drift, streak: streak, win: win, disrupted: disrupted, cls: cls, ship: shipApplied,
-    parts: { ev: ev, vit: vitMod, pressure: pressure, shock: shock, noise: noise, ship: shipApplied - shipPrev, sports: sportsPp } };
+    parts: { ev: ev, vit: vitMod, pressure: pressure, shock: shock, noise: noise, ship: shipApplied - shipPrev, sports: sportsPp, settle: settle } };
 }
 
 // engine.193 cut 3b — a hood's fresh chaos swing this Cycle as a sign for its businesses
@@ -603,6 +615,7 @@ function applyBusinessDynamics_(ctx) {
       ownerExpandMult: pressureBar_(ctx, 'dialOwnerDriveExpandMult'),
       sportsWeek: barTerm   // engine.205 slice D
     };
+    biz.stated = stated;   // engine.193 (b): the institution scope
     var d = bizDriftOne_(cfg, biz, ps, inputs, cycle);
     if (d.parts.sports) {
       barIds.push(id); barPp += d.parts.sports;

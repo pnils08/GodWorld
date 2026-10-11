@@ -25,8 +25,9 @@
  *   LifeHistory_Log intent, and (public premises) the hood pulse. Dials move
  *   downstream through the graded CivicRole tags in citizenDialMap.js.
  * - Text: ECL pools `civicRole.<premise>.<up|down>` (unconditioned, slot-free
- *   lines) when authored, the hardcoded pools below otherwise. Drawn without
- *   replacement within a Cycle (builder 2026-10-11); repeats -> S.civicRoleDraws.
+ *   lines) when authored, the hardcoded pools below otherwise; M / L draws read
+ *   `.<band>` pools first. Drawn without replacement within a Cycle (builder
+ *   2026-10-11); repeats and band fall-backs -> S.civicRoleDraws.
  * - Retired/resigned/scandal status lines removed — office facts belong to
  *   civic-mode and approval. Called after Phase5-BusinessDynamics so the
  *   business premise is this Cycle's.
@@ -249,9 +250,14 @@ function civicRoleEclLines_(S, premise, dir) {
 // would only duplicate on purpose not for a lack of options"). A line holds round(Weight)
 // tickets (min 1), so Weight 2-3 is the "on purpose" repeat. Only an empty urn refills — every
 // draw after that is a forced repeat, counted in draws[key].forced. No cross-Cycle memory.
-function civicRolePickText_(rng, S, premise, dir, draws) {
-  var key = 'civicRole.' + premise + '.' + dir;
-  var pool = civicRoleEclLines_(S, premise, dir);
+// The band rides the text (builder 2026-10-11): `civicRole.<premise>.<dir>.<band>` first, then
+// the unbanded key (the small / default pool), then hardcoded. A banded draw that lands on the
+// unbanded or hardcoded pool is tallied in draws[key].bandFallback.
+function civicRolePickText_(rng, S, premise, dir, draws, band) {
+  var key = 'civicRole.' + premise + '.' + dir + '.' + band;
+  var pool = band ? civicRoleEclLines_(S, premise, dir + '.' + band) : [];
+  var fellBack = !!band && !pool.length;
+  if (!pool.length) { key = 'civicRole.' + premise + '.' + dir; pool = civicRoleEclLines_(S, premise, dir); }
   if (!pool.length) {
     var hp = (CIVIC_ROLE_TEXT_[premise][dir] && CIVIC_ROLE_TEXT_[premise][dir].length) ? premise : 'everyday';
     key = 'hardcoded.' + hp + '.' + dir;
@@ -259,7 +265,8 @@ function civicRolePickText_(rng, S, premise, dir, draws) {
     for (var i = 0; i < hard.length; i++) pool.push({ text: hard[i], weight: 1 });
   }
   var urn = draws[key];
-  if (!urn) urn = draws[key] = { pool: pool.length, draws: 0, distinct: 0, forced: 0, round: 1, left: null, seen: {} };
+  if (!urn) urn = draws[key] = { pool: pool.length, draws: 0, distinct: 0, forced: 0, bandFallback: 0, round: 1, left: null, seen: {} };
+  if (fellBack && band !== 'S') urn.bandFallback++;
   var refill = function() {
     urn.left = [];
     for (var a = 0; a < pool.length; a++) urn.left.push(Math.max(1, Math.round(pool[a].weight)));
@@ -354,10 +361,11 @@ function runCivicRoleEngine_(ctx) {
 
     var tag = 'CivicRole-' + (dir === 'up' ? 'Up' : 'Down') + '-' + band;
     // A draw against the premise (a down week where crime is falling) stays true to the hood:
-    // the text is an everyday moment and the hood is not pulsed against its own fact.
+    // the text is an everyday moment and the hood is not pulsed against its own fact. The
+    // band carries into the everyday text — an against-premise large down still reads large.
     var against = premise.lean !== 0 && (dir === 'up' ? -1 : 1) === premise.lean;
     var textKey = against ? 'everyday' : premise.key;
-    var text = civicRolePickText_(rng, S, textKey, dir, draws).replace(/\{hood\}/g, neighborhood);
+    var text = civicRolePickText_(rng, S, textKey, dir, draws, band).replace(/\{hood\}/g, neighborhood);
 
     var stamp = inWorldStamp_(ctx);
     var existing = row[iLife] ? row[iLife].toString() : "";
@@ -388,7 +396,7 @@ function runCivicRoleEngine_(ctx) {
   for (var dk in draws) {
     if (!draws.hasOwnProperty(dk)) continue;
     var u = draws[dk];
-    drawStats[dk] = { pool: u.pool, draws: u.draws, distinct: u.distinct, forced: u.forced };
+    drawStats[dk] = { pool: u.pool, draws: u.draws, distinct: u.distinct, forced: u.forced, bandFallback: u.bandFallback };
     if (u.forced) { forcedTotal += u.forced; forcedKeys.push(dk + ' ' + u.forced + ' (' + u.draws + ' draws / ' + u.pool + ' lines)'); }
   }
   S.civicRoleDraws = drawStats;

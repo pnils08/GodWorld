@@ -2476,7 +2476,7 @@
 - **civicRoleEclLines_(S, premise, dir)**
   Reads: S.contentLedger
 
-- **civicRolePickText_(rng, S, premise, dir, draws)**
+- **civicRolePickText_(rng, S, premise, dir, draws, band)**
 
 - **runCivicRoleEngine_(ctx)**
   Reads: S.absoluteCycle, S.cycleId, S.eventsGenerated, S.hoodBusinessMomentum, S.neighborhoodDynamics

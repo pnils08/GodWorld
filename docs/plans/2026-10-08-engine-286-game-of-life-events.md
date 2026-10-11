@@ -42,6 +42,8 @@ pointers:
 
 **Builder's words (2026-10-11, verbatim selections — the same four calls, answered in the es seat):** (1) "Keep it rare" — "Scale the job-loss and promotion dice down so they stay rare, closer to a few a year citywide. Smaller moments (a good or bad week at work) still happen every week." (2) "Over half" — "Only the 8 truly stretched households are at risk. Losing a house stays rare and always has a reason." (3) "Own small chance" — "A medium good week gives the citizen a small personal shot at a real raise, so it can actually matter." (4) "Keep them out" — "Their jobs are their roles and are authored by hand. The dice only touch everyday working citizens." es reading: (1) agrees with the rb-seat ruling — the .05 / .08 / .01 seeds stand; (2) the explicit pick is the 50% bar (8 owned households at C110), which supersedes the rb-seat 30% reading of "the idea is rarity on these" — `HomeCarryBar` .50; (3) RULED — M promotion gets a small own roll at the writer over the 2-Cycle window; (4) RULED — the writer's boundary stays.
 
+**Builder's words (2026-10-11, verbatim selection — codex F4, the forced sale vs the size order):** "Sale is its own thing" — "Treat the forced sale as a standing risk a stretched mortgage carries, outside the weekly dice and their size order. Rate stays about once every 20 weeks. The size rule keeps governing everything else." es reading: `homeLossChance` (.00625 per at-risk owned household per Cycle) is a ruled exception to R5's S ≥ M ≥ L for the owner path; every weekly ladder keeps the order structurally (`civicRoleBands_`).
+
 **Builder's words (2026-10-11, verbatim — on the forced-sale arithmetic, one in ~600 Cycles at the seeds):** "work with es so its more like 1 every 20 cycles". rb reading: the TARGET is the ruling — a forced home sale about once in 20 Cycles citywide (≈ 0.05 a Cycle) at the over-half bar (8 stretched households at C110), i.e. ≈ 1 in 160 per stretched household per Cycle; the mechanism is es engineering. The rate rides the stretched count — more stretched households, more sales — which is the sim speaking (drift over static). Bench-read against the target.
 
 **Earlier rulings the plan keeps (2026-10-08, [[2026-07-31-citizen-memory-perception]] §engine.284):** the UNI/MED/CIV flags are canon guardrails and stay; retired players keep UNI; game and media clocks cannot die, the civic clock rolls — by design.
@@ -79,6 +81,21 @@ pointers:
 6. No generic retagging, no output quota replaces the old caps, no historical line is deleted or corrected, and the flag, clock and death rulings are unchanged — proven by the routing matrix test.
 
 ## Reviews reconciled
+
+### Task 2 — codex implementation review 2026-10-11 (`docs/research/2026-10-11-codex-engine286-task2-impl-review.md`, HOLD on `ddbe672a` + `67933be4`; each finding re-read against the code by es) — folded `652e608b`
+
+| # | Finding | Disposition |
+|---|---|---|
+| F1 | Forced sale paid out before an unconfirmed household write; purchase debited before its writes | Fixed: `updateHouseholdLedgerMove_` writes the row in one `setValues` and returns true only when written; the forced sale writes first and pays / steps heritage / narrates only on true, else `saleFailed` + Engine_Errors; the purchase writes its three cells before any debit or line. Tests: write failure, retry pays once |
+| F2 | M promotion on an unusable DialState lost its window | Fixed: demoted to S before the line (`out.demoted`); blank / invalid / array cases tested |
+| F3 | Quiet forced sale lost the HOME_SALE hook | Fixed: one HOME_SALE hook + ripple with the forced cause |
+| F4 | Owner path L .00625 > M; up-over-down per premise | Builder ruled 2026-10-11: the sale is its own standing risk, outside the size order (verbatim above). Up over down: per-premise leans are by design (the civic role ruling); the citywide aggregate leans up (renters 0.6, employer thirds symmetric) — the bench reads it |
+| F5 | Owners drew renter pursuit lines and an M with no writer | Fixed: at-risk owners draw only the standing sale; an owner premise + owner pools are a future builder call |
+| F6 | Missing / malformed income read as stretched | Fixed: unknown income never stretched (`incomeUnknown`); verified zero is; four cases tested |
+| F7 | Malformed marks held forever; a zero drop read as no drop | Fixed: marks validated and cleared visibly (`invalid`); `lifeEventPromotionDrop` range 0.05..1 |
+| F8 | Wake test did not prove admission | Relabelled to its real scope (salience); event → fold → admission → reflection → drain stays the bench's Acceptance 3 read |
+| Hunt 1 | Die L promotion and the budget could both promote one citizen in a Cycle | Fixed: die-touched citizens leave the budget's staff that Cycle; tested |
+
 
 ### Task 6 — codex implementation review 2026-10-09 (`docs/for-claude-review/2026-10-09-codex-engine286-task6-impl.md`, HOLD on `6ac15e9f`; each finding re-read by es)
 

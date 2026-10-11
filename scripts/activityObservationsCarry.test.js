@@ -173,7 +173,8 @@ console.log('engine.228 — activity observations carry');
   check('compact: four fields per seed (n/d/p/t), the Cycle\'s calendarContext once, textless seeds skipped, sorted by priority',
     c && c.cycle === 108 && c.count === 5 && c.seeds.length === 4 && c.seeds[0].p === 5 && c.seeds[0].n === '' && c.seeds[0].t === 'shock' && Object.keys(c.seeds[0]).length === 4 &&
     c.calendarContext.isFirstFriday === true && c.calendarContext.holiday === 'none', JSON.stringify(c));
-  check('compact: no seeds → null (nothing saved, nothing to load)', w.sb.compactStorySeeds_({ storySeeds: [] }) === null && w.sb.compactStorySeeds_({}) === null);
+  check('compact: no seeds → an EMPTY blob with the Cycle stamp (codex F4: never null, so the stamp always advances)',
+    JSON.stringify(w.sb.compactStorySeeds_({ cycleId: 108, storySeeds: [] })) === JSON.stringify({ cycle: 108, count: 0, calendarContext: null, seeds: [] }) && w.sb.compactStorySeeds_({}).seeds.length === 0);
   const many = []; for (let i = 0; i < 80; i++) many.push(mk('Dimond', (i % 7) + 1));
   const cm = w.sb.compactStorySeeds_({ cycleId: 108, storySeeds: many });
   check('compact: capped at 60 by priority, the count records the real deck size, and 60 seeds sit well under the 9 KB prop cap (' + JSON.stringify(cm).length + ' chars)',
@@ -239,6 +240,39 @@ console.log('engine.228 — activity observations carry');
   const histH = JSON.parse(heavy.props.PREV_ACTIVITY_OBS_JSON).history;
   check('compact: citywideSeedWeight / seedHoodsActive ride the carried entries (109 kept its read; 110 recorded its own)',
     histH.length === 3 && histH[0].citywideSeedWeight === undefined && near(histH[1].citywideSeedWeight, e109.citywideSeedWeight) && histH[1].seedHoodsActive === 3 && histH[2].citywideSeedWeight > histH[1].citywideSeedWeight, JSON.stringify(histH));
+
+  // codex F4 (HIGH): a Cycle that produced NO seeds must not leave last Cycle's deck in place for the next fire
+  C.summary.eventsGenerated = 12; C.summary.worldEvents = new Array(9); C.summary.storySeeds = [];
+  w.sb.finalizeCycleState_(C); w.sb.savePreviousCycleState_(C);
+  check('F4: an empty deck at Cycle 110 saves an empty blob stamped 110 (the stamp advances)', w.props.PREV_STORY_SEEDS_JSON_CYCLE === '110' && JSON.parse(w.props.PREV_STORY_SEEDS_JSON).seeds.length === 0 && JSON.parse(w.props.PREV_STORY_SEEDS_JSON).cycle === 110);
+  const D = ctxFor(111);
+  w.sb.loadPreviousCycleState_(D);
+  check('F4: Cycle 111 opens no seeds — Cycle 109\'s deck is not replayed', D.summary.storySeedsCarried === undefined);
+  w.sb.applyCityDynamics_(seedCanon(w.sb, D));
+  check('F4: Phase 2 on the empty night reads no seeds — 0 against the carried baseline (ratio 0, no lift), not a replayed deck', D.summary.storySeedSignals.totalWeighted === 0 && D.summary.storySeedSignals.citywideX === 0 && D.summary.storySeedSignals.citywideBaseline > 0, JSON.stringify([D.summary.storySeedSignals.citywideX, D.summary.storySeedSignals.citywideBaseline]));
+
+  // codex F4/F5: a stale blob (two Cycles old) is refused with a diagnostic + Engine_Errors row, never replayed; a malformed one likewise
+  const errs = [];
+  const st = world(); st.sb.logEngineError_ = (ctx, phase, err) => errs.push(phase + ': ' + err.message);
+  st.props.PREV_CYCLE_STATE_JSON = JSON.stringify({ cycle: 109, econMood: 55 }); st.props.PREV_CYCLE_STATE_JSON_CYCLE = '109';
+  st.props.PREV_STORY_SEEDS_JSON = JSON.stringify({ cycle: 108, count: 1, calendarContext: null, seeds: [{ n: 'Dimond', d: 'GENERAL', p: 3, t: 'signal' }] }); st.props.PREV_STORY_SEEDS_JSON_CYCLE = '108';
+  const E = ctxFor(110);
+  st.sb.loadPreviousCycleState_(E);
+  check('F4: a blob stamped 108 for a Cycle-110 fire is stale — refused (no carried seeds), one CARRY_FORWARD_DIAG "stale" event, one Engine_Errors row naming it',
+    E.summary.storySeedsCarried === undefined && st.sb.CARRY_FORWARD_DIAG.some(d => d.key === 'PREV_STORY_SEEDS_JSON' && d.event === 'stale') && errs.length === 1 && /from cycle 108, not last night \(109\)/.test(errs[0]), JSON.stringify(errs));
+  const bad = world(); const errs2 = []; bad.sb.logEngineError_ = (ctx, phase, err) => errs2.push(err.message);
+  bad.props.PREV_CYCLE_STATE_JSON = JSON.stringify({ cycle: 109, econMood: 55 }); bad.props.PREV_CYCLE_STATE_JSON_CYCLE = '109';
+  bad.props.PREV_STORY_SEEDS_JSON = '{not json'; bad.props.PREV_STORY_SEEDS_JSON_CYCLE = '109';
+  const F = ctxFor(110);
+  bad.sb.loadPreviousCycleState_(F);
+  check('F5: a present but unreadable blob is an Engine_Errors row + a "malformed" diagnostic, the Cycle continues with no seeds (no throw, no silent no-input)',
+    F.summary.storySeedsCarried === undefined && F.summary.previousCycleState && F.summary.previousCycleState.cycle === 109 && errs2.length === 1 && /not JSON/.test(errs2[0]) && bad.sb.CARRY_FORWARD_DIAG.some(d => d.event === 'malformed'), JSON.stringify(errs2));
+  const shape = world(); const errs3 = []; shape.sb.logEngineError_ = (ctx, phase, err) => errs3.push(err.message);
+  shape.props.PREV_CYCLE_STATE_JSON = JSON.stringify({ cycle: 109, econMood: 55 }); shape.props.PREV_CYCLE_STATE_JSON_CYCLE = '109';
+  shape.props.PREV_STORY_SEEDS_JSON = JSON.stringify({ cycle: 109, seeds: 'nope' }); shape.props.PREV_STORY_SEEDS_JSON_CYCLE = '109';
+  const G2 = ctxFor(110);
+  shape.sb.loadPreviousCycleState_(G2);
+  check('F5: a mis-shaped blob (no seeds array) is the same fault path', G2.summary.storySeedsCarried === undefined && errs3.length === 1 && /no seeds array/.test(errs3[0]));
 }
 
 console.log('\n' + passed + ' passed, ' + failed + ' failed');

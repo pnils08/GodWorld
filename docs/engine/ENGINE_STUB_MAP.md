@@ -312,6 +312,8 @@
   Reads: S.storySeedsCarried
   Writes: S.storySeedsCarried
 
+- **storySeedsCarryFault_(ctx, target, event, message)**
+
 - **seedCarriedActivityObservations_(ctx, S)**
   Reads: S.activityObservations
   Writes: S.activityObservations
@@ -4621,4 +4623,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1657
+**Functions mapped:** 1658

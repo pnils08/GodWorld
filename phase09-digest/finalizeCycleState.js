@@ -522,7 +522,7 @@ function savePreviousCycleState_(ctx) {
     // engine.214 Task 18a: last night's story seeds ride their OWN key for Phase 2's seed gates —
     // Phase 2 reads seeds before Phase 7 writes them, so the per-hood seed gate and the citywide
     // term ran on [] every live fire (the engine.228 class). ~52 seeds × 4 fields, ~3–4 KB.
-    var seedCarry = compactStorySeeds_(S);
+    var seedCarry = compactStorySeeds_(S);   // never null: an empty deck saves an empty, stamped blob
     if (seedCarry) {
       var seedJson = JSON.stringify(seedCarry);
       saveCarryForwardBlob_(ctx, 'PREV_STORY_SEEDS_JSON', seedJson, snapshot.cycle);
@@ -669,7 +669,9 @@ function compactActivityObservations_(S) {
  * buildSeedSignals_ saw [] on every live fire: every per-hood seed weight 0, citywideWeighted 0, the
  * seed gates never fired. Per seed: n (neighborhood), d (domain), p (priority), t (seedType) — the four
  * inputs seedWeight_ reads; the Cycle's calendarContext once per blob. Cap 60 by priority (the live deck
- * runs 28–58); seeds without text are skipped as buildSeedSignals_ skips them. null when there are none.
+ * runs 28–58); seeds without text are skipped as buildSeedSignals_ skips them. A Cycle with no seeds
+ * saves an EMPTY blob with its own stamp (codex task18 review F4): a null here would leave last Cycle's
+ * blob in place, and the loader would reopen a two-Cycle-old deck as "last night".
  */
 function compactStorySeeds_(S) {
   var seeds = (S && Array.isArray(S.storySeeds)) ? S.storySeeds : [];
@@ -694,7 +696,6 @@ function compactStorySeeds_(S) {
       };
     }
   }
-  if (!out.length) return null;
   out.sort(function(a, b) { return b.p - a.p; });
   if (out.length > 60) out = out.slice(0, 60);
   return { cycle: Number(S.cycleId || S.cycle || 0), count: seeds.length, calendarContext: cc, seeds: out };

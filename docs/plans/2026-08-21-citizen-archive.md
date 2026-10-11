@@ -910,6 +910,8 @@ Citizen Archive — implement Citizen_Archive (v1 deceased+Traded); popIdHighWat
 
 ## Changelog
 
+- 2026-10-11 overnight (engine-sheet) — Remaining lane step closed. Card census `--check-source`: 56 wd-citizens cards with no Simulation_Ledger row = exactly the 56 archived POPIDs (none missing, none extra), but each was the citizen's last pre-exit card (POP-00026 dated 2026-06-13, 'mid-career'). Ran `buildCitizenCards.js --apply --from-archive`: 56 PATCH, 0 POST, 0 errors; census still 1073 docs = 1073 entities; POP-00026 read back `Status: Traded`. engine.90 → done-pending-archive.
+
 - 2026-10-07 (engine-sheet, S536) — ROLLOUT §1 walk found Commit 11 already taken on live: the C110 archive snapshot holds 56 exits (48 traded-away + 6 deceased at ExitCycle 106, deceased at 107 and 109); live Simulation_Ledger carries 0 Traded / 0 deceased. No builder call left. Remaining lane step: verify the archived citizens' cards exist, run `buildCitizenCards.js --apply --from-archive` if not. ROLLOUT engine.90 → section 3.
 
 - 2026-09-06 (engine-sheet, S430, latest) — **Commit 8 landed, PROD @63** (§Commit 8). All code commits 1–9 + 12 are live; the only step left is **Commit 11**: the builder flips `citizenArchiveEnabled` to 1 after his live C106 fire smokes @46–@63, the next cycle moves the 53 (48 traded + 5 deceased, each with its ArchiveNote), then `node scripts/buildCitizenCards.js --apply --from-archive` + `dumpLedger.js`. Open Q5 (SchoolQuality) is no longer a gate for the move.

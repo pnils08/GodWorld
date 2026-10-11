@@ -806,7 +806,11 @@ function applySportsFeedTriggers_(ctx) {
   var ss = ctx.ss;
   if (!ss) return;
 
-  var currentCycle = S.cycle || 0;
+  // engine.203d: S.cycle is never assigned on a fire (Phase 1 sets S.cycleId), so this read 0
+  // on every live Cycle — engine.75's current-row gate never closed and every franchise spoke
+  // its all-time latest row each week (bench C111: C110's +0.08 again with no game). Same
+  // read as applySportsSeason_ above.
+  var currentCycle = S.cycleId || S.cycle || 0;
   var totalSentiment = 0;
   var allTriggers = [];
   var aftermath = { total: 0, byTeam: {} };

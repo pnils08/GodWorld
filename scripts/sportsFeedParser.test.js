@@ -207,6 +207,12 @@ test('203d: applySportsFeedTriggers_ folds the aftermath into the boost, publish
     near(ctx.summary.sportsAftermath.total, ctx.summary.sportsSentimentBoost);
     assert.strictEqual(ripples.length, 1, 'no games term → only the aftermath row');
     assert.strictEqual(ripples[0].causeDetail, "aftermath: A's title week 1 after C110");
+    // a fire sets S.cycleId only (S.cycle is never assigned) — the gate must read it
+    const fire = { summary: { cycleId: 111, sportsWeek: {} }, config: {}, ss: { getSheetByName: () => feedSheet(titleRows) },
+      _sportsWeekHistory: titleHist().weeks, _sportsLensHistory: titleHist().lens };
+    sandbox.applySportsFeedTriggers_(fire);
+    near(fire.summary.sportsSentimentBoost, share110() * 0.85);
+    assert.strictEqual(fire.summary.sportsEventTriggers.length, 0, 'C110 rows do not speak at C111');
     // override / harness: no history on ctx → the pre-203d behaviour
     const bare = { summary: { cycle: 111, sportsWeek: {} }, config: {}, ss: { getSheetByName: () => feedSheet(titleRows) } };
     sandbox.applySportsFeedTriggers_(bare);

@@ -648,10 +648,10 @@ function compactActivityObservations_(S) {
   // when Phase 2 ran on carried seeds — a Cycle that had none yet would write a fake 0 into the
   // baseline and hand the next real week a free top tier.
   var ss = S.storySeedSignals;
-  var listsRead = ss ? Number(ss.listsRead) : 0;
-  if (ss && listsRead > 0 && isFinite(Number(ss.citywideWeighted))) {
+  var seedMix = ss ? Number(ss.seedMix) : 0;
+  if (ss && seedMix > 0 && isFinite(Number(ss.citywideWeighted))) {
     entry.citywideSeedWeight = Math.round(Number(ss.citywideWeighted) * 100) / 100;
-    entry.seedLists = listsRead;   // engine.288: 1 = the engine list only, 2 = engine list + contract deck — the baseline reads only entries of the same mix
+    entry.seedMix = seedMix;   // engine.288: list identity — 1 engine list, 2 contract deck, 3 both; the baseline reads only entries of the same identity
     var active = 0;
     for (var hk in (ss.byHood || {})) { if (ss.byHood.hasOwnProperty(hk) && Number(ss.byHood[hk] && ss.byHood[hk].weighted) > 0) active++; }
     entry.seedHoodsActive = active;
@@ -667,7 +667,7 @@ function compactActivityObservations_(S) {
     if (h.coverageScore !== undefined && h.coverageScore !== null && isFinite(Number(h.coverageScore))) o.coverageScore = Number(h.coverageScore);
     if (h.citywideSeedWeight !== undefined && h.citywideSeedWeight !== null && isFinite(Number(h.citywideSeedWeight))) o.citywideSeedWeight = Number(h.citywideSeedWeight);   // engine.214 Task 18b
     if (h.seedHoodsActive !== undefined && h.seedHoodsActive !== null && isFinite(Number(h.seedHoodsActive))) o.seedHoodsActive = Number(h.seedHoodsActive);
-    if (h.seedLists !== undefined && h.seedLists !== null && isFinite(Number(h.seedLists))) o.seedLists = Number(h.seedLists);   // engine.288
+    if (h.seedMix !== undefined && h.seedMix !== null && isFinite(Number(h.seedMix))) o.seedMix = Number(h.seedMix);   // engine.288
     out.push(o);
   }
   out.push(entry);

@@ -2,7 +2,7 @@
   "generated": "2026-10-10",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 180,
-  "functionsMapped": 1661,
+  "functionsMapped": 1662,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -1863,6 +1863,7 @@
       ],
       "readers": [
         "phase01-config/loadPreviousEvening.js::seedCarriedActivityObservations_",
+        "phase01-config/loadPreviousEvening.js::seedListEstablished_",
         "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
         "phase05-citizens/applyBusinessDynamics.js::bizCoverageDeviation_",
         "phase07-evening-media/mediaFeedbackEngine.js::coverageBaseline_",

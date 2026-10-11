@@ -216,7 +216,9 @@ function applyCityDynamics_(ctx) {
   var engineSeeds = Array.isArray(S.storySeedsCarried) ? S.storySeedsCarried : [];
   var deckSeeds = Array.isArray(S.contractSeedsCarried) ? S.contractSeedsCarried : [];
   var storySeeds = engineSeeds.concat(deckSeeds);
-  var seedListsRead = (engineSeeds.length ? 1 : 0) + (deckSeeds.length ? 1 : 0);
+  // seedMix is list IDENTITY, not a count (codex engine.288 review F2): 1 = the engine list, 2 = the contract
+  // deck, 3 = both, 0 = nothing read. A deck-only week must never share a baseline with engine-only weeks.
+  var seedMix = (engineSeeds.length ? 1 : 0) + (deckSeeds.length ? 2 : 0);
   var eventsGenerated = Number(S.eventsGenerated || 0);
   // engine.45 T3b: crime inputs had no writer anywhere (trace K gap G1) — the
   // crime branches below ran on zero every cycle. Source is now the previous
@@ -1106,15 +1108,16 @@ function applyCityDynamics_(ctx) {
   // key, last n. Not rollingAvg_: its slice(0, -1) drops the latest entry because for the counts that
   // entry IS "now"; this read is taken fresh at Phase 2, so every carried Cycle is baseline. null when
   // no entry carries the key yet (the key arrived with this cut).
-  // engine.288: only entries read from the SAME mix of lists (seedLists; an entry without the field was the
-  // engine list alone = 1) — the week the deck joined is not compared against weeks it was absent.
-  function citywideSeedBaseline_(hist, n, listsRead) {
+  // engine.288: only entries read from the SAME list identity (seedMix 1 engine / 2 deck / 3 both; an entry
+  // without the field was the engine list alone = 1) — the week the deck joined is not compared against weeks
+  // it was absent, and a deck-only week never borrows an engine-only baseline (codex F2).
+  function citywideSeedBaseline_(hist, n, seedMix) {
     var vals = [];
     for (var i = 0; i < (hist || []).length; i++) {
       var h = hist[i];
       if (!h || h.citywideSeedWeight === undefined || h.citywideSeedWeight === null) continue;
-      var hl = (h.seedLists === undefined || h.seedLists === null) ? 1 : Number(h.seedLists);
-      if (hl !== Number(listsRead)) continue;
+      var hm = (h.seedMix === undefined || h.seedMix === null) ? 1 : Number(h.seedMix);
+      if (hm !== Number(seedMix)) continue;
       var v = Number(h.citywideSeedWeight);
       if (isFinite(v)) vals.push(v);
     }
@@ -1209,10 +1212,11 @@ function applyCityDynamics_(ctx) {
   // hood EVERY Cycle, so against the hood median the top tier would fire on every fire — a standing
   // +0.04 on all 22 hoods, the tax engine.188 removed (§15). Phase 9 records each Cycle's read as
   // `citywideSeedWeight` on the activity history; no baseline yet → ratio 1 → no lift.
-  seedSignals.listsRead = seedListsRead;
+  seedSignals.seedMix = seedMix;
+  seedSignals.listsRead = (engineSeeds.length ? 1 : 0) + (deckSeeds.length ? 1 : 0);   // display only
   seedSignals.engineSeeds = engineSeeds.length;
   seedSignals.deckSeeds = deckSeeds.length;
-  seedSignals.citywideBaseline = citywideSeedBaseline_(obsHistAll, 6, seedListsRead);
+  seedSignals.citywideBaseline = citywideSeedBaseline_(obsHistAll, 6, seedMix);
   seedSignals.citywideX = (seedSignals.citywideBaseline !== null && seedSignals.citywideBaseline > 0)
     ? seedSignals.citywideWeighted / seedSignals.citywideBaseline : 1;
   S.storySeedSignals = seedSignals;

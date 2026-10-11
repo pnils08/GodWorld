@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 180 · **Functions mapped:** 1661 · **S.* fields:** 369 · **Sheets:** 61
+**Files scanned:** 180 · **Functions mapped:** 1662 · **S.* fields:** 369 · **Sheets:** 61
 
 ## S.* / ctx.summary reverse index
 
@@ -30,7 +30,7 @@
 | `S.activeRippleCount` | `phase05-citizens/civicInitiativeEngine.js::applyActiveInitiativeRipples_` | _(none)_ | 1 | 0 |
 | `S.activeRipples` | `phase05-citizens/civicInitiativeEngine.js::applyActiveInitiativeRipples_` | _(none)_ | 1 | 0 |
 | `S.activeSports` | `phase02-world-state/applySportsSeason.js::applySportsSeason_` | `phase02-world-state/applySportsSeason.js::applySportsSeason_` | 1 | 1 |
-| `S.activityObservations` | `phase01-config/loadPreviousEvening.js::seedCarriedActivityObservations_`, `phase02-world-state/applyCityDynamics.js::applyCityDynamics_` | `phase01-config/loadPreviousEvening.js::seedCarriedActivityObservations_`, `phase02-world-state/applyCityDynamics.js::applyCityDynamics_`, `phase05-citizens/applyBusinessDynamics.js::bizCoverageDeviation_`, `phase07-evening-media/mediaFeedbackEngine.js::coverageBaseline_`, `phase09-digest/finalizeCycleState.js::compactActivityObservations_` | 2 | 5 |
+| `S.activityObservations` | `phase01-config/loadPreviousEvening.js::seedCarriedActivityObservations_`, `phase02-world-state/applyCityDynamics.js::applyCityDynamics_` | `phase01-config/loadPreviousEvening.js::seedCarriedActivityObservations_`, `phase01-config/loadPreviousEvening.js::seedListEstablished_`, `phase02-world-state/applyCityDynamics.js::applyCityDynamics_`, `phase05-citizens/applyBusinessDynamics.js::bizCoverageDeviation_`, `phase07-evening-media/mediaFeedbackEngine.js::coverageBaseline_`, `phase09-digest/finalizeCycleState.js::compactActivityObservations_` | 2 | 6 |
 | `S.allianceBenefits` | `phase05-citizens/bondEngine.js::applyAllianceBenefits_` | `phase05-citizens/runRelationshipEngine.js::getCombinedEventBoost_` | 1 | 1 |
 | `S.approvalCeilingEvents` | `phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_` | `phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_` | 1 | 1 |
 | `S.approvalChanges` | `phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_` | _(none)_ | 1 | 0 |

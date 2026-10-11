@@ -311,7 +311,10 @@
 - **seedCarriedStorySeeds_(ctx, S)**
   Reads: S.contractSeedsCarried
 
-- **seedCarriedSeedList_(ctx, S, key, field, label)**
+- **seedListEstablished_(S, mixBit)**
+  Reads: S.activityObservations
+
+- **seedCarriedSeedList_(ctx, S, key, field, label, mixBit)**
 
 - **storySeedsCarryFault_(ctx, key, target, event, message)**
 
@@ -4630,4 +4633,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1661
+**Functions mapped:** 1662

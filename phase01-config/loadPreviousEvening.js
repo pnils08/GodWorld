@@ -396,12 +396,23 @@ function seedCarriedFranchiseWeight_(ctx, S) {
  * Replay / dry-run (target 0) skips the stamp check as loadCarryForwardBlob_ does.
  */
 function seedCarriedStorySeeds_(ctx, S) {
-  seedCarriedSeedList_(ctx, S, 'PREV_STORY_SEEDS_JSON', 'storySeedsCarried', 'story seed');
+  seedCarriedSeedList_(ctx, S, 'PREV_STORY_SEEDS_JSON', 'storySeedsCarried', 'story seed', 1);
   // engine.288: the newsroom's hooded contract deck, same shape, own key → S.contractSeedsCarried
-  seedCarriedSeedList_(ctx, S, 'PREV_CONTRACT_SEEDS_JSON', 'contractSeedsCarried', 'contract seed');
+  seedCarriedSeedList_(ctx, S, 'PREV_CONTRACT_SEEDS_JSON', 'contractSeedsCarried', 'contract seed', 2);
 }
 
-function seedCarriedSeedList_(ctx, S, key, field, label) {
+/** engine.288 (codex F6): has this list ever been read on a carried Cycle? — any activity entry whose seedMix carries its bit. */
+function seedListEstablished_(S, mixBit) {
+  var hist = (S && S.activityObservations && Array.isArray(S.activityObservations.history)) ? S.activityObservations.history : [];
+  for (var i = 0; i < hist.length; i++) {
+    var h = hist[i];
+    if (!h || h.seedMix === undefined || h.seedMix === null) continue;
+    if ((Number(h.seedMix) & mixBit) === mixBit) return true;
+  }
+  return false;
+}
+
+function seedCarriedSeedList_(ctx, S, key, field, label, mixBit) {
   if (Array.isArray(S[field]) && S[field].length) return;
   var target = carryForwardCycleId_(ctx);
   if (ctx && ctx.mode && (ctx.mode.replay || ctx.mode.dryRun)) target = 0;
@@ -409,13 +420,20 @@ function seedCarriedSeedList_(ctx, S, key, field, label) {
   var readErr = null;
   try { json = loadCarryForwardBlob_(ctx, key, target); } catch (e) { json = null; readErr = e; }
   if (readErr) { storySeedsCarryFault_(ctx, key, target, 'read-failed', key + ' read failed: ' + (readErr && readErr.message)); return; }
-  if (!json) return;   // first fire on this code: no blob anywhere, no seeds, every seed ratio 1
+  if (!json) {
+    // First fire on this code: no blob anywhere — graceful, no seeds, every seed ratio 1. But once the list has
+    // been read on a carried Cycle (the history says so), a missing blob is Phase 9 failing to save, not adoption
+    // (codex F6): an Engine_Errors row, the Cycle reads no seeds from this list.
+    if (target && seedListEstablished_(S, mixBit)) storySeedsCarryFault_(ctx, key, target, 'missing', key + ' missing for cycle ' + target + ' though the list was read on earlier Cycles — Phase 9 did not save it');
+    return;
+  }
   var carried;
   try { carried = JSON.parse(json); } catch (e) { storySeedsCarryFault_(ctx, key, target, 'malformed', key + ' is not JSON (' + json.length + ' chars)'); return; }
   if (!carried || typeof carried !== 'object' || !Array.isArray(carried.seeds)) { storySeedsCarryFault_(ctx, key, target, 'malformed', key + ' has no seeds array'); return; }
   var stamped = Number(carried.cycle) || 0;
-  if (target && stamped && stamped !== target - 1) {
-    storySeedsCarryFault_(ctx, key, target, 'stale', key + ' is from cycle ' + stamped + ', not last night (' + (target - 1) + ') — Phase 9 did not save; not replayed');
+  // codex F3: on a normal fire the payload must say it is last night's — a zero / missing stamp is refused like a stale one.
+  if (target && stamped !== target - 1) {
+    storySeedsCarryFault_(ctx, key, target, stamped ? 'stale' : 'unstamped', key + ' is from cycle ' + (stamped || '(unstamped)') + ', not last night (' + (target - 1) + ') — Phase 9 did not save; not replayed');
     return;
   }
   if (!carried.seeds.length) { Logger.log('seedCarriedSeedList_: ' + key + ' cycle ' + stamped + ' produced no seeds — Phase 2 reads none'); return; }

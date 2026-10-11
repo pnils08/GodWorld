@@ -92,8 +92,12 @@ function mockSheet(values) {
     _values: values,
     _setCalls: setCalls,
     getDataRange() { return { getValues: () => values.map(r => r.slice()) }; },
-    getRange(row, col) {
-      return { setValue(v) { setCalls.push({ row, col, v }); values[row - 1][col - 1] = v; } };
+    getRange(row, col, nr, nc) {
+      return {
+        setValue(v) { setCalls.push({ row, col, v }); values[row - 1][col - 1] = v; },
+        // engine.286 codex F1: updateHouseholdLedgerMove_ writes the whole row in one setValues
+        setValues(vals) { for (let i = 0; i < (nr || 1); i++) for (let j = 0; j < (nc || 1); j++) { setCalls.push({ row: row + i, col: col + j, v: vals[i][j] }); values[row - 1 + i][col - 1 + j] = vals[i][j]; } }
+      };
     }
   };
 }

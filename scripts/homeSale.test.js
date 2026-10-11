@@ -20,7 +20,8 @@ global.recordHookRipple_ = (ctx, cls, hook, src) => { rippleCalls.push({ cls, ho
 global.queueAppendIntent_ = () => {};
 global.queueCellIntent_ = () => {};
 global.requireTab_ = (ss, n) => ss.getSheetByName(n);
-global.logEngineError_ = () => {};
+let engineErrors = [];
+global.logEngineError_ = (ctx, phase, err) => { engineErrors.push(phase + ': ' + (err && err.message)); };
 global.ECONOMIC_PARAMETERS = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../data/economic_parameters.json'), 'utf8')); // engine.199: live reads the tab
 
 const read = (rel) => fs.readFileSync(path.resolve(__dirname, rel), 'utf8');
@@ -221,11 +222,51 @@ const ownedRow = ['HH-S1', 'POP-A', 'family', '["POP-A","POP-B"]', 'Testhood', '
     const r = run(owned, [who('POP-E', 100000)], []);
     ok('owner at 22% of income: no risk, no draw', r.calls === 0 && r.die.atRisk === 0 && r.hh[col(HH_HEAD, 'HousingType')] === 'owned', String(r.calls));
   }
-  // At risk, sale chance misses: the weekly ladder can only give an S/M line (L reads M)
+  // At risk, the sale chance misses: one draw, no weekly line (codex F5 — no owner premise / M writer)
   {
     const owned = ['HH-D4', 'POP-E', 'family', '["POP-E"]', 'Testhood', 'owned', 6000, 400000, 100000, 101, '', 'active', 0];
-    const r = run(owned, [who('POP-E', 100000)], [0.5, 0.0, 0.99, 0.0, 0.0]);
-    ok('at risk, no sale: a down L draw reads M, the house stays', r.hh[col(HH_HEAD, 'HousingType')] === 'owned' && r.die.M === 1 && /\[LifeEvent-Home-Down-M\]/.test(lastLine(r.ctx.ledger.rows[0])));
+    const r = run(owned, [who('POP-E', 100000)], [0.5]);
+    ok('at risk, no sale: one draw, no line, the house stays', r.calls === 1 && r.die.fired === 0 && r.hh[col(HH_HEAD, 'HousingType')] === 'owned' && lastLine(r.ctx.ledger.rows[0]) === 'Y2C1 — born', String(r.calls));
+  }
+  // codex F3: the forced sale publishes one HOME_SALE hook with the forced cause (not "broke up")
+  {
+    const owned = ['HH-D5', 'POP-E', 'family', '["POP-E"]', 'Testhood', 'owned', 6000, 400000, 100000, 101, '', 'active', 0];
+    const r = run(owned, [who('POP-E', 100000)], [0.0, 0.0]);
+    const hooks = r.ctx.summary.storyHooks.filter(h => h.hookType === 'HOME_SALE');
+    ok('forced sale: exactly one HOME_SALE hook, forced cause, never the dissolution wording', hooks.length === 1 && /had to sell their home in Testhood — the payments outran the income/.test(hooks[0].description) && !/broke up/.test(hooks[0].description), JSON.stringify(r.ctx.summary.storyHooks));
+  }
+  // codex F1: the household row does not turn — no payout, no line, no hook, a visible error; the retry pays once
+  {
+    engineErrors = [];
+    const owned = ['HH-D6', 'POP-E', 'family', '["POP-E"]', 'Testhood', 'owned', 6000, 400000, 100000, 101, '', 'active', 0];
+    const members = [who('POP-E', 100000)];
+    let i = 0; const seq = [0.0, 0.0];
+    const sheets = { Household_Ledger: mockSheet([HH_HEAD.slice(), owned]) };
+    const realRange = sheets.Household_Ledger.getRange.bind(sheets.Household_Ledger);
+    let fail = true;
+    sheets.Household_Ledger.getRange = (r0, c0, nr, nc) => { const g = realRange(r0, c0, nr, nc); if (fail && nr === 1 && nc > 1) g.setValues = () => { throw new Error('synthetic write failure'); }; return g; };
+    const ctx = { ss: { getSheetByName: (n) => sheets[n] || null }, ledger: { headers: DH.slice(), rows: members, dirty: false },
+      summary: { cycleId: 109, storyHooks: [], neighborhoodState: { Testhood: { medianRent: 2000 } }, contentLedger: { lines: {} } },
+      config: Object.assign({ cycleCount: 109 }, LIFE), now: 't', rng: () => i < seq.length ? seq[i++] : 0.999 };
+    D.trackHomeOwnership_(ctx.ss, ctx, 109);
+    const hh = sheets.Household_Ledger._values[1];
+    ok('F1 write fails: household stays owned, NetWorth untouched, no line, no hook, saleFailed + Engine_Errors',
+      hh[col(HH_HEAD, 'HousingType')] === 'owned' && hh[col(HH_HEAD, 'MonthlyRent')] === 6000 && members[0][col(SL_HEAD, 'NetWorth')] === 100000 &&
+      !/LifeEvent/.test(members[0][col(SL_HEAD, 'LifeHistory')]) && ctx.summary.storyHooks.length === 0 &&
+      ctx.summary.lifeEventDice.home.saleFailed === 1 && engineErrors.some(e => /Phase5-HomeDie: forced sale of HH-D6 not written/.test(e)), JSON.stringify({ hh, engineErrors }));
+    fail = false; i = 0; ctx.summary.lifeEventDice = null;
+    D.trackHomeOwnership_(ctx.ss, ctx, 110);
+    ok('F1 retry once the write works: one payout, not two', sheets.Household_Ledger._values[1][col(HH_HEAD, 'HousingType')] === 'rented' && members[0][col(SL_HEAD, 'NetWorth')] === 100000 + 208000, String(members[0][col(SL_HEAD, 'NetWorth')]));
+  }
+  // codex F6: missing / blank / non-numeric income is unknown, never stretched; a verified zero is
+  {
+    const mk = inc => ['HH-D7', 'POP-E', 'family', '["POP-E"]', 'Testhood', 'owned', 6000, 400000, inc, 101, '', 'active', 0];
+    const blank = run(mk(''), [who('POP-E', 100000)], [0.0, 0.0]);
+    const junk = run(mk('n/a'), [who('POP-E', 100000)], [0.0, 0.0]);
+    const zero = run(mk(0), [who('POP-E', 100000)], [0.0, 0.0]);
+    const healthy = run(mk(400000), [who('POP-E', 100000)], [0.0, 0.0]);
+    ok('F6 blank and non-numeric income: unknown, not at risk, no draw', blank.die.atRisk === 0 && blank.die.incomeUnknown === 1 && blank.calls === 0 && junk.die.atRisk === 0 && junk.calls === 0);
+    ok('F6 a verified zero income is stretched; a healthy income is not', zero.die.atRisk === 1 && zero.die.sold === 1 && healthy.die.atRisk === 0 && healthy.calls === 0);
   }
 }
 

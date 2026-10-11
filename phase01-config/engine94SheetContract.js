@@ -247,7 +247,7 @@ var ENGINE286_CONFIG_SEEDS = [
   ['lifeEventLargeOdds', 0.01, 'engine.286 life events: base odds of a large event at aura 1 (the writer fires: promotion / layoff / purchase / forced sale); must not exceed lifeEventMediumOdds', 0, 0.9, false],
   ['lifeEventLiftCycles', 2, 'engine.286 life events: Cycles a medium promotion break or setback holds (the promotion queue lift, the own shot at a raise)', 1, 8, true],
   ['lifeEventPromotionLift', 1.5, 'engine.286 life events: promotion-queue wait multiplier while a medium break holds', 1, 4, false],
-  ['lifeEventPromotionDrop', 0.5, 'engine.286 life events: promotion-queue wait multiplier while a medium setback holds', 0, 1, false],
+  ['lifeEventPromotionDrop', 0.5, 'engine.286 life events: promotion-queue wait multiplier while a medium setback holds (above 0 — a zero would read as no drop)', 0.05, 1, false],
   ['lifeEventPromotionOwnChance', 0.05, 'engine.286 life events: per-Cycle chance a citizen holding a medium break gets the raise through the writer', 0, 1, false],
   ['lifeEventHomeRollBoost', 3, 'engine.286 life events: multiplier on a qualified household\'s home-buying roll the Cycle a medium home break lands', 1, 20, false],
   ['homeLossChance', 0.00625, 'engine.286 life events: per-Cycle chance an at-risk owned household (over lifeEventHomeCarryBar, or a default mark) is forced to sell — a standing risk beside the weekly dice, about one sale in 20 Cycles citywide at 8 stretched households', 0, 0.5, false],

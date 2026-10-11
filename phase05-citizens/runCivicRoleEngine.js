@@ -316,7 +316,7 @@ function civicRolePickText_(rng, S, premise, dir, draws, band) {
 var LIFE_EVENT_RANGES_ = {
   lifeEventFireChance: [0, 1], lifeEventUpChance: [0.05, 0.95], lifeEventPremiseLean: [0, 0.45],
   lifeEventMediumOdds: [0, 0.9], lifeEventLargeOdds: [0, 0.9], lifeEventLiftCycles: [1, 8],
-  lifeEventPromotionLift: [1, 4], lifeEventPromotionDrop: [0, 1], lifeEventPromotionOwnChance: [0, 1],
+  lifeEventPromotionLift: [1, 4], lifeEventPromotionDrop: [0.05, 1], lifeEventPromotionOwnChance: [0, 1],
   lifeEventHomeRollBoost: [1, 20], lifeEventHomeCarryBar: [0.1, 1], homeLossChance: [0, 0.5]
 };
 function lifeEventConfig_(ctx) {

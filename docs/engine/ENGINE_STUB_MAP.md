@@ -2031,6 +2031,8 @@
   RNG: ctx.rng / safeRand_(ctx)
 
 - **homeDieOwned_(ctx, hv, rowByPop, cycle, rng, cfg, die, dieText, hc, ic, markCycles)**
+  Reads: S.storyHooks
+  Writes: S.storyHooks
 
 - **homeSaleProceeds_(st, household)**
 
@@ -2463,17 +2465,21 @@
 
 - **lifeEventMarkOf_(row, iDS)**
 
+- **lifeEventMarkValid_(mark)**
+
+- **lifeEventCanHold_(row, iDS)**
+
 - **lifeEventSetMark_(row, iDS, mark)**
 
 - **lifeEventLiftOf_(S, pop)**
   Reads: S.lifeEventLift
 
 - **applyPromotionDie_(ctx, cycle, rng, roll, logRows, S)**
-  Reads: S.eventsGenerated, S.lifeEventDice, S.lifeEventLift
-  Writes: S.eventsGenerated, S.lifeEventDice, S.lifeEventLift
+  Reads: S.eventsGenerated, S.lifeEventDice, S.lifeEventLift, S.lifeEventTouched
+  Writes: S.eventsGenerated, S.lifeEventDice, S.lifeEventLift, S.lifeEventTouched
 
 - **applyEmployerSuccess_(ctx, cycle, roll, logRows, S, gapFactor)**
-  Reads: S.careerSignals
+  Reads: S.careerSignals, S.lifeEventTouched
 
 - **runCareerEngine_(ctx)**
   Reads: S.absoluteCycle, S.businessDeclines, S.careerSignals, S.cityDynamics, S.civicOpenSlots, S.cycleId, S.demographicDrift, S.economicMood, S.eventsGenerated, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.weather, S.weatherMood, S.worldEvents
@@ -4669,4 +4675,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1677
+**Functions mapped:** 1679

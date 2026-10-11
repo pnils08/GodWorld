@@ -446,6 +446,38 @@ const DIE_WAKE = {};
       t1.ctx.summary.lifeEventDice.promotion.eligible === 0 && t1.ctx.summary.lifeEventDice.promotion.fired === 0);
   }
 
+  {
+    // codex F2: a medium draw on a row with no usable DialState cannot hold two Cycles — it draws S
+    for (const [label, ds] of [['blank', ''], ['invalid JSON', '{not json'], ['an array', '[]']]) {
+      const r = fixture({ SkillTags: '' }); r[ix('DialState')] = ds;
+      const m = run(r, 0, 1, [0.999, 0.999, 0, 0, 0.05, 0], null, LIFE_ON);
+      const p = m.ctx.summary.lifeEventDice.promotion;
+      assert('engine.286 F2 M on ' + label + ' DialState is demoted to S: S line, no lift, no mark',
+        p.demoted === 1 && p.S === 1 && p.M === 0 && /\[LifeEvent-Promotion-Up-S\]/.test(m.ctx.ledger.rows[0][ix('LifeHistory')]) &&
+        !m.ctx.summary.lifeEventLift['SYNTHETIC-W1-CAREER'], JSON.stringify(p));
+    }
+    // codex F7: malformed marks expire visibly; valid future / expired marks clear; a zero drop is refused
+    const withMark = mk => { const r = fixture({ SkillTags: '' }); const d = JSON.parse(r[ix('DialState')]); d.lifeEvent = mk; r[ix('DialState')] = JSON.stringify(d); return r; };
+    const bad = run(withMark({ k: 'promotion', d: 1, c: 'bad' }), 0, 1, [0.999, 0.999, 0.999], null, LIFE_ON);
+    const badP = bad.ctx.summary.lifeEventDice.promotion;
+    assert('engine.286 F7 a malformed mark is cleared and counted, never held',
+      badP.invalid === 1 && badP.held === 0 && !JSON.parse(bad.ctx.ledger.rows[0][ix('DialState')]).lifeEvent && !bad.ctx.summary.lifeEventLift['SYNTHETIC-W1-CAREER'], JSON.stringify(badP));
+    const future = run(withMark({ k: 'promotion', d: 1, c: 205 }), 0, 1, [0.999, 0.999, 0.999], null, LIFE_ON);
+    const old = run(withMark({ k: 'promotion', d: -1, c: 198 }), 0, 1, [0.999, 0.999, 0.999], null, LIFE_ON);
+    const live = run(withMark({ k: 'promotion', d: -1, c: 199 }), 0, 1, [0.999, 0.999, 0.999, 0.999], null, LIFE_ON);
+    assert('engine.286 F7 a future and an expired mark clear; a mark inside the window holds the drop',
+      future.ctx.summary.lifeEventDice.promotion.unmarked === 1 && old.ctx.summary.lifeEventDice.promotion.unmarked === 1 &&
+      live.ctx.summary.lifeEventDice.promotion.held === 1 && live.ctx.summary.lifeEventLift['SYNTHETIC-W1-CAREER'] === 0.5);
+    let zeroDropThrew = false;
+    try { w.lifeEventConfig_({ config: Object.assign({}, LIFE_EVENT_OFF, { lifeEventPromotionDrop: 0 }) }); } catch (e) { zeroDropThrew = /lifeEventPromotionDrop/.test(e.message); }
+    assert('engine.286 F7 a zero promotion drop is refused by the config contract (it would read as no drop)', zeroDropThrew);
+    // codex hunt 1: the die's L promotion and the business budget never both land on one citizen in one Cycle
+    const both = run(fixture({ SkillTags: '' }), 400, 1, [0.999, 0.999, 0, 0, 0, 0, 0.5, 0], null, LIFE_ON);
+    assert('engine.286 one writer event per citizen per Cycle: the budget skips a citizen the die just promoted',
+      both.ctx.summary.lifeEventDice.promotion.promoted === 1 && both.ctx.summary.careerSignals.employerSuccess.promotions === 0 &&
+      (both.ctx.ledger.rows[0][ix('LifeHistory')].match(/\[Promotion\]/g) || []).length === 1, JSON.stringify(both.ctx.summary.careerSignals.employerSuccess));
+  }
+
   const latestLayoff = careerState + '\nC199 — [Career-Layoff] Synthetic prior job loss';
   const laidOff = run(fixture({ EmployerBizId: '', SkillTags: 'Food & Culture', Income: 40000, LifeHistory: latestLayoff }), 0, 1, [0.999, 0.999]);
   const selfEmployed = run(fixture({ EmployerBizId: '', SkillTags: 'Food & Culture', Income: 60000 }), 0, 1, [0.999, 0.999]);
@@ -476,10 +508,11 @@ const DIE_WAKE = {};
   }
 }
 
-// engine.286 Task 2 Acceptance 3 — the die's layoff reaches the general citizen wake: the real
-// buildPool (lib/wakePerception.js) over a stubbed Simulation_Ledger. The setback is followed by
-// five routine lines and still sits in the five-line tail (Career-Layoff is salient); a citizen
-// with the same life but unshaped dials is outside the pool. Synthetic rows; no Sheets, no network.
+// engine.286 Task 2 — SCOPE (codex F8): salience, not admission. The die's real layoff line, in a
+// citizen whose base dials this fixture sets to an already-shaped profile, stays in the real
+// buildPool's five-line tail after five routine lines (Career-Layoff is salient); the same life
+// with the event-produced (unshaped) dials stays outside. This does NOT prove event -> fold ->
+// admission, reflection or the drain — that is the bench's Acceptance 3 read. Synthetic rows only.
 (async () => {
   const Module = require('module');
   const stub = (rel, exp) => { const f = require.resolve(path.join(__dirname, '..', rel)); require.cache[f] = new Module(f); require.cache[f].exports = exp; require.cache[f].loaded = true; };
@@ -496,10 +529,10 @@ const DIE_WAKE = {};
   const wp = require(path.join(__dirname, '..', 'lib', 'wakePerception.js'));
   const pool = await wp.buildPool();
   const me = pool.find(p => p.popId === 'SYNTHETIC-W1-CAREER');
-  assert('engine.286 wake: the laid-off citizen is in the shaped pool', !!me, JSON.stringify(pool.map(p => p.popId)));
+  assert('engine.286 wake (salience scope): a shaped citizen with the die\'s layoff is in the pool', !!me, JSON.stringify(pool.map(p => p.popId)));
   assert('engine.286 wake: the layoff survives five routine lines in the five-line tail',
     !!me && /\[Career-Layoff\] Let go from Synthetic W1 Business/.test(me.life) && me.life.split('\n').length === 5, me && me.life);
-  assert('engine.286 wake: the same life with unshaped dials is outside the pool (the stake reaches only through the dials)',
+  assert('engine.286 wake (salience scope): the same life with the event-produced unshaped dials is outside the pool',
     !pool.find(p => p.popId === 'SYNTHETIC-OUTSIDE'));
   console.log('\n' + passed + ' passed, ' + failed + ' failed');
   process.exit(failed ? 1 : 0);

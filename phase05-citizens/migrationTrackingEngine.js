@@ -894,11 +894,14 @@ function processRelocations_(ctx, cycle) {
 function updateHouseholdLedgerMove_(ctx, householdId, destHood, destRent, ownerReceipt) {
   // Direct write to own-tracking sheet — documented exception class
   // (engine.md Phase 5 citizen life engines: migrationTrackingEngine).
+  // engine.286 Task 2 (codex F1): returns true only when the row was written — one setValues
+  // for the whole row, so a failure leaves the row as it was, never half moved. The mover
+  // ignores the receipt as before; the home die's forced sale pays out only on true.
   try {
     var sheet = ctx.ss.getSheetByName('Household_Ledger');
-    if (!sheet) return;
+    if (!sheet) return false;
     var values = sheet.getDataRange().getValues();
-    if (values.length < 2) return;
+    if (values.length < 2) return false;
     var header = values[0];
     var idx = function(n) { return header.indexOf(n); };
     // G-EC70 belt: an owned row is never moved or rebased here — unless the caller
@@ -909,31 +912,35 @@ function updateHouseholdLedgerMove_(ctx, householdId, destHood, destRent, ownerR
         if (values[g][iHHGuard] !== householdId) continue;
         if (String(values[g][iTypeGuard] == null ? '' : values[g][iTypeGuard]).trim().toLowerCase() === 'owned') {
           Logger.log('updateHouseholdLedgerMove_: ' + householdId + ' is OWNED — ownership survives migration as a first-class fact (G-EC70); no move written');
-          return;
+          return false;
         }
         break;
       }
     }
     var iHH = idx('HouseholdId'), iHood = idx('Neighborhood'),
         iRent = idx('MonthlyRent'), iStatus = idx('Status'), iUpdated = idx('LastUpdated');
-    if (iHH < 0) return;
+    if (iHH < 0) return false;
     for (var r = 1; r < values.length; r++) {
       if (values[r][iHH] !== householdId) continue;
       if (iStatus >= 0 && String(values[r][iStatus]).toLowerCase() === 'dissolved') continue;
-      if (iHood >= 0) sheet.getRange(r + 1, iHood + 1).setValue(destHood);
+      var row = values[r].slice();
+      if (iHood >= 0) row[iHood] = destHood;
       // the destination hood's lease is the new obligation (engine.160 one hood rent rule;
       // owned rows reach here only with the owner-move receipt — G-EC70 refuses them otherwise)
-      if (iRent >= 0 && destRent > 0) sheet.getRange(r + 1, iRent + 1).setValue(destRent);
+      if (iRent >= 0 && destRent > 0) row[iRent] = destRent;
       if (ownerReceipt) {
         var iCostW = idx('HousingCost');
-        if (iTypeGuard >= 0) sheet.getRange(r + 1, iTypeGuard + 1).setValue(ownerReceipt.housingType);
-        if (iCostW >= 0) sheet.getRange(r + 1, iCostW + 1).setValue(ownerReceipt.housingCost);
+        if (iTypeGuard >= 0) row[iTypeGuard] = ownerReceipt.housingType;
+        if (iCostW >= 0) row[iCostW] = ownerReceipt.housingCost;
       }
-      if (iUpdated >= 0 && ctx.now) sheet.getRange(r + 1, iUpdated + 1).setValue(ctx.now);
-      return;
+      if (iUpdated >= 0 && ctx.now) row[iUpdated] = ctx.now;
+      sheet.getRange(r + 1, 1, 1, row.length).setValues([row]);
+      return true;
     }
+    return false;
   } catch (err) {
     Logger.log('updateHouseholdLedgerMove_: ' + err);
+    return false;
   }
 }
 

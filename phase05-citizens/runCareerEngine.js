@@ -481,6 +481,17 @@ function lifeEventMarkOf_(row, iDS) {
   if (raw.indexOf('"lifeEvent"') < 0) return null;
   try { var ds = JSON.parse(raw); return ds && ds.lifeEvent ? ds.lifeEvent : null; } catch (e) { return null; }
 }
+// codex F7: a mark the die can read — kind promotion, direction ±1, a whole Cycle number.
+function lifeEventMarkValid_(mark) {
+  if (!mark || mark.k !== 'promotion' || (mark.d !== 1 && mark.d !== -1)) return false;
+  var c = Number(mark.c);
+  return isFinite(c) && Math.floor(c) === c && c > 0;
+}
+// codex F2: an M event is a two-Cycle hold; a row whose DialState cannot carry it draws S.
+function lifeEventCanHold_(row, iDS) {
+  if (iDS < 0 || !row[iDS]) return false;
+  try { var ds = JSON.parse(String(row[iDS])); return !!ds && typeof ds === 'object' && !Array.isArray(ds); } catch (e) { return false; }
+}
 function lifeEventSetMark_(row, iDS, mark) {
   if (iDS < 0 || !row[iDS]) return false;
   var ds;
@@ -498,7 +509,8 @@ function lifeEventLiftOf_(S, pop) {
 }
 
 function applyPromotionDie_(ctx, cycle, rng, roll, logRows, S) {
-  var out = { eligible: 0, fired: 0, up: 0, down: 0, S: 0, M: 0, L: 0, promoted: 0, laidOff: 0, ownRaises: 0, held: 0, unmarked: 0, unheld: 0 };
+  S.lifeEventTouched = {}; // a citizen the die promoted or laid off this Cycle — the budget leaves them be
+  var out = { eligible: 0, fired: 0, up: 0, down: 0, S: 0, M: 0, L: 0, promoted: 0, laidOff: 0, ownRaises: 0, held: 0, unmarked: 0, invalid: 0, demoted: 0 };
   S.lifeEventLift = {};
   var cfg = lifeEventConfig_(ctx);
   var book = careerEmployerBook_(ctx);
@@ -529,7 +541,12 @@ function applyPromotionDie_(ctx, cycle, rng, roll, logRows, S) {
     out.eligible++;
     // A held medium event: the order lift this Cycle, and (up) the own shot at the writer.
     var mark = lifeEventMarkOf_(row, c.iDS);
-    if (mark && mark.k === 'promotion') {
+    if (mark && !lifeEventMarkValid_(mark)) { // codex F7: unreadable state expires visibly
+      lifeEventSetMark_(row, c.iDS, null); out.invalid++;
+      Logger.log('applyPromotionDie_: cleared an unreadable lifeEvent mark on ' + row[c.iPop] + ': ' + JSON.stringify(mark));
+      mark = null;
+    }
+    if (mark) {
       if (cycle - Number(mark.c) >= cfg.lifeEventLiftCycles || Number(mark.c) > cycle) { lifeEventSetMark_(row, c.iDS, null); out.unmarked++; }
       else {
         out.held++;
@@ -538,6 +555,7 @@ function applyPromotionDie_(ctx, cycle, rng, roll, logRows, S) {
           careerApplyPromotion_(ctx, S, row, c, cycle, roll, 'Promoted at ' + bz.name + ' (the break paid off)');
           lifeEventSetMark_(row, c.iDS, null);
           delete S.lifeEventLift[String(row[c.iPop]).trim()];
+          S.lifeEventTouched[String(row[c.iPop]).trim()] = true;
           out.ownRaises++;
           continue;
         }
@@ -547,6 +565,7 @@ function applyPromotionDie_(ctx, cycle, rng, roll, logRows, S) {
     var tierN = Number(row[c.iTier]);
     var aura = 1 + (tierN === 3 ? 0.15 : 0) + (driveThird[staff[i].ri] === 1 ? 0.2 : (driveThird[staff[i].ri] === -1 ? -0.1 : 0));
     var ev = lifeEventRoll_(rng, cfg, growthThird[staff[i].bizId] || 0, aura);
+    if (ev.band === 'M' && !lifeEventCanHold_(row, c.iDS)) { ev.band = 'S'; out.demoted++; } // codex F2
     out.fired++; out[ev.dir]++; out[ev.band]++;
     var text = pick(ev.dir, ev.band, row, bz);
     if (ev.band === 'L') {
@@ -554,6 +573,7 @@ function applyPromotionDie_(ctx, cycle, rng, roll, logRows, S) {
       else { careerApplyLayoff_(ctx, S, row, c, cycle, roll, text, logRows, staff[i].bizId); out.laidOff++; }
       if (lifeEventMarkOf_(row, c.iDS)) lifeEventSetMark_(row, c.iDS, null);
       delete S.lifeEventLift[String(row[c.iPop]).trim()];
+      S.lifeEventTouched[String(row[c.iPop]).trim()] = true;
       continue;
     }
     var tag = lifeEventTag_('Promotion', ev.dir, ev.band);
@@ -562,7 +582,7 @@ function applyPromotionDie_(ctx, cycle, rng, roll, logRows, S) {
     if (c.iLastUpd >= 0) row[c.iLastUpd] = ctx.now;
     if (ev.band === 'M') {
       var d = ev.dir === 'up' ? 1 : -1;
-      if (!lifeEventSetMark_(row, c.iDS, { k: 'promotion', d: d, c: cycle })) out.unheld++; // no DialState to hold it: this Cycle's lift only
+      lifeEventSetMark_(row, c.iDS, { k: 'promotion', d: d, c: cycle }); // lifeEventCanHold_ checked above
       S.lifeEventLift[String(row[c.iPop]).trim()] = d > 0 ? cfg.lifeEventPromotionLift : cfg.lifeEventPromotionDrop;
     }
     S.eventsGenerated = (S.eventsGenerated || 0) + 1;
@@ -584,6 +604,12 @@ function applyEmployerSuccess_(ctx, cycle, roll, logRows, S, gapFactor) {
   var iPop = cols.iPop, iIncome = cols.iIncome, iTier = cols.iTier, iLastPromo = cols.iLastPromo,
       iLife = cols.iLife, iEdu = cols.iEdu; // engine.144
   var liftOf = function(r0) { return lifeEventLiftOf_(S, r0[iPop]); }; // engine.286 Task 2
+  // codex review: a citizen the die already promoted or laid off this Cycle is not the budget's.
+  var touched = S.lifeEventTouched || {};
+  for (var tb in biz) {
+    if (!biz.hasOwnProperty(tb)) continue;
+    biz[tb].staff = biz[tb].staff.filter(function(ix) { return !touched[String(rows[ix][iPop]).trim()]; });
+  }
   var gf = gapFactor || 1;
   var ids = Object.keys(biz).sort();
   var levelOf_ = function(row2) { var m = String(row2[iLife] || '').match(/\[CareerState\][^\n]*level=(\d+)/); return m ? Number(m[1]) : 1; };

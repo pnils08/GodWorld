@@ -1992,8 +1992,9 @@ function collectPropertyTax_(ss, ctx, cycle) {
 //     HouseholdIncome — builder: "over half") — the forced sale is a standing risk, not a weekly
 //     draw (builder 2026-10-11: "more like 1 every 20 cycles"): homeLossChance per at-risk household
 //     per Cycle, rolled before and apart from the ladder, through the existing writers —
-//     sellHouseholdHome_ (quiet) + updateHouseholdLedgerMove_ (rented in its own hood). The rate
-//     rides the stretched count. The weekly ladder then gives at-risk owners S/M lines only.
+//     updateHouseholdLedgerMove_ first (rented in its own hood; the payout only if it wrote), then
+//     sellHouseholdHome_ (quiet) and one HOME_SALE hook with the forced cause. The rate rides the
+//     stretched count. At-risk owners draw no weekly line (codex F5: no owner premise or M writer).
 //   S everywhere — the line + its fold only.
 // Text: ECL lifeEvent.home.<up|down>[.M|.L] by the urn ({hood}); L lines are unterminated and
 // the writer appends the money. One line per adult member; minors share the house, not the line.
@@ -2058,7 +2059,7 @@ function trackHomeOwnership_(ss, ctx, cycle) {
   var homesByLine = {};
   // engine.286 Task 2: the home die. A missing key is a visible Engine_Errors row and the
   // die stays off this Cycle; the purchase roll runs as before.
-  var dieCfg = null, dieDraws = {}, die = { renting: 0, owned: 0, atRisk: 0, fired: 0, up: 0, down: 0, S: 0, M: 0, L: 0, boosted: 0, zeroed: 0, bought: 0, sold: 0 };
+  var dieCfg = null, dieDraws = {}, die = { renting: 0, owned: 0, atRisk: 0, incomeUnknown: 0, unsellable: 0, saleFailed: 0, fired: 0, up: 0, down: 0, S: 0, M: 0, L: 0, boosted: 0, zeroed: 0, bought: 0, sold: 0 };
   try { dieCfg = lifeEventConfig_(ctx); } catch (cfgErr) {
     if (typeof logEngineError_ === 'function') logEngineError_(ctx, 'Phase5-HomeDie', cfgErr);
     Logger.log('trackHomeOwnership_ engine.286 home die off this Cycle: ' + cfgErr);
@@ -2125,6 +2126,11 @@ function trackHomeOwnership_(ss, ctx, cycle) {
     if (!dieBuy && rng() >= homeBuyChance_(bestTier) * homeF * dieF) continue;     // not this week (engine.151: the rung pays on the odds, never on the cash)
 
     // ── the purchase ──
+    // engine.286 Task 2 (codex F1): the household row turns first — a failed write throws
+    // before any NetWorth or line has moved, so a completion line never precedes ownership.
+    hhSheet.getRange(q + 1, cType + 1).setValue('owned');
+    hhSheet.getRange(q + 1, cRent + 1).setValue(mortgage);
+    if (cCost >= 0) hhSheet.getRange(q + 1, cCost + 1).setValue(price);
     var down = Math.round(price * HOME_DOWN);
     for (var m2 = 0; m2 < members.length; m2++) {
       var mNW = Number(String(members[m2][iNW]).replace(/[$,\s]/g, '')) || 0;
@@ -2154,9 +2160,6 @@ function trackHomeOwnership_(ss, ctx, cycle) {
     }
     for (var lKey in linesInHouse) homesByLine[lKey] = (homesByLine[lKey] || 0) + 1;
     ctx.ledger.dirty = true;
-    hhSheet.getRange(q + 1, cType + 1).setValue('owned');
-    hhSheet.getRange(q + 1, cRent + 1).setValue(mortgage);
-    if (cCost >= 0) hhSheet.getRange(q + 1, cCost + 1).setValue(price);
 
     ctx.summary.storyHooks = ctx.summary.storyHooks || [];
     ctx.summary.storyHooks.push({
@@ -2174,7 +2177,7 @@ function trackHomeOwnership_(ss, ctx, cycle) {
   // engine.286 Task 2: the owned side of the home die — households at risk only.
   if (dieCfg) homeDieOwned_(ctx, hv, rowByPop, cycle, rng, dieCfg, die, dieText,
     { cId: cId, cMem: cMem, cHood: cHood, cType: cType, cRent: cRent, cCost: cCost, cStat: cStat, cInc: cInc, cHead: cHead },
-    { iPop: iPop, iNW: iNW, iStatus: iStatus, iLife: iLife, iBirth: iBirthH, iDS: iDSH, iTier: iTierH }, markCycles);
+    { iPop: iPop, iNW: iNW, iStatus: iStatus, iLife: iLife, iBirth: iBirthH, iDS: iDSH, iTier: iTierH, iFirst: iFirst, iLast: iLast }, markCycles);
   if (dieCfg) {
     var dieStats = eclUrnStats_(dieDraws);
     die.draws = dieStats.byKey;
@@ -2203,48 +2206,52 @@ function homeDieOwned_(ctx, hv, rowByPop, cycle, rng, cfg, die, dieText, hc, ic,
     die.owned++;
     var memIds = [];
     try { memIds = JSON.parse(String(hv[q][hc.cMem] || '[]')); } catch (e) { memIds = []; }
-    var members = [], marked = false, bestTier = 4;
+    var members = [], marked = false;
     for (var m = 0; m < memIds.length; m++) {
       var mRow = rowByPop[String(memIds[m]).trim()];
       if (!mRow) continue;
       if (String(mRow[ic.iStatus] || 'active').toLowerCase() === 'deceased') continue;
       members.push(mRow);
       if (ic.iDS >= 0 && debtDefaultMarked_(mRow[ic.iDS], cycle, markCycles)) marked = true;
-      var mt = ic.iTier >= 0 ? (Math.round(Number(mRow[ic.iTier])) || 4) : 4;
-      if (mt >= 1 && mt < bestTier) bestTier = mt;
     }
     if (!members.length) continue;
     var hood = String(hv[q][hc.cHood] || '').trim();
     var payment = Number(hv[q][hc.cRent]) || 0;
     var cost = hc.cCost >= 0 ? (Number(hv[q][hc.cCost]) || 0) : 0;
-    var inc = hc.cInc >= 0 ? (Number(hv[q][hc.cInc]) || 0) : 0;
-    var basis = cost > 0 ? cost : Math.round(homeMarketRent_(ctx, hood, payment) * 12 * HOME_PRICE_TO_RENT);
-    var carryShare = inc > 0 ? (payment * 12 + homeAnnualTax_(ctx, basis)) / inc : Infinity;
-    if (!marked && !(carryShare > cfg.lifeEventHomeCarryBar)) continue;
+    // codex F6: income that is missing, blank or not a number is unknown, never "stretched" —
+    // only a verified figure (zero included) can put a household over the bar.
+    var rawInc = hc.cInc >= 0 ? hv[q][hc.cInc] : '';
+    var incKnown = rawInc !== '' && rawInc !== null && rawInc !== undefined && typeof rawInc !== 'boolean' && isFinite(Number(rawInc));
+    var stretched = false;
+    if (incKnown) {
+      var inc = Number(rawInc);
+      var basis = cost > 0 ? cost : Math.round(homeMarketRent_(ctx, hood, payment) * 12 * HOME_PRICE_TO_RENT);
+      stretched = inc > 0 ? (payment * 12 + homeAnnualTax_(ctx, basis)) / inc > cfg.lifeEventHomeCarryBar : true;
+    } else if (!marked) die.incomeUnknown++;
+    if (!marked && !stretched) continue;
     die.atRisk++;
+    // The forced sale is a standing risk, not a weekly draw (builder: "more like 1 every 20
+    // cycles"). At-risk owners draw nothing else here — the renter pools are pursuit lines and
+    // no owner M has a writer effect yet (codex F5).
     var destRent = homeMarketRent_(ctx, hood, 0);
-    var canSell = destRent > 0 && typeof updateHouseholdLedgerMove_ === 'function';
-    var forced = canSell && cfg.homeLossChance > 0 && rng() < cfg.homeLossChance;
-    if (!forced) {
-      if (!(cfg.lifeEventFireChance > 0) || rng() >= cfg.lifeEventFireChance) continue;
-      var ev = lifeEventRoll_(rng, cfg, -1, typeof tierPayFactor_ === 'function' ? tierPayFactor_(bestTier) : 1); // the stretch leans it down
-      if (ev.band === 'L') ev.band = 'M'; // the sale is homeLossChance's, never the weekly ladder's
-      die.fired++; die[ev.dir]++; die[ev.band]++;
-      homeLifeEventLines_(ctx, members, ic.iLife, ic.iBirth, cycle, lifeEventTag_('Home', ev.dir, ev.band), dieText(ev.dir, ev.band, hood));
+    if (!(destRent > 0) || typeof updateHouseholdLedgerMove_ !== 'function') { die.unsellable++; continue; }
+    if (!(cfg.homeLossChance > 0) || rng() >= cfg.homeLossChance) continue;
+    var hhId = String(hv[q][hc.cId] || '').trim();
+    // codex F1: the household row turns first (one write, true only when written); no payout,
+    // heritage step or line unless it did.
+    if (!updateHouseholdLedgerMove_(ctx, hhId, hood, Math.round(destRent), { housingType: 'rented', monthly: Math.round(destRent), housingCost: 0 })) {
+      die.saleFailed++;
+      if (typeof logEngineError_ === 'function') logEngineError_(ctx, 'Phase5-HomeDie', new Error('forced sale of ' + hhId + ' not written to Household_Ledger — no payout, no line; the household stays owned'));
       continue;
     }
     die.down++; die.L++;
     var text = dieText('down', 'L', hood);
-    // the forced sale: proceeds to the members (sellHouseholdHome_, quiet — this line is the one),
-    // then the row rents in its own hood (updateHouseholdLedgerMove_ with the owner receipt).
     var nw0 = [], combined = 0;
     for (var a = 0; a < members.length; a++) {
       var v = Number(String(members[a][ic.iNW]).replace(/[$,\s]/g, '')) || 0;
       nw0.push(v); combined += v;
     }
-    var hhId = String(hv[q][hc.cId] || '').trim();
     var sale = sellHouseholdHome_(ctx, { neighborhood: hood, housingCost: cost, householdId: hhId }, memIds, cycle, { quiet: true });
-    updateHouseholdLedgerMove_(ctx, hhId, hood, Math.round(destRent), { housingType: 'rented', monthly: Math.round(destRent), housingCost: 0 });
     var stamp = 'Y' + (Math.floor((cycle - 1) / 52) + 1) + 'C' + (((cycle - 1) % 52) + 1);
     var simY = simYearOf_(ctx, cycle), tag = lifeEventTag_('Home', 'down', 'L');
     for (var b = 0; b < members.length; b++) {
@@ -2257,6 +2264,19 @@ function homeDieOwned_(ctx, hv, rowByPop, cycle, rng, cfg, die, dieText, hc, ic,
       members[b][ic.iLife] = (life ? life + '\n' : '') + stamp + ' — [' + tag + '] ' + text + back;
     }
     ctx.ledger.dirty = true;
+    // codex F3: the quiet sale skips the writer's hook; this one carries the forced-sale cause.
+    ctx.summary.storyHooks = ctx.summary.storyHooks || [];
+    var who = ((members[0][ic.iFirst] || '') + ' ' + (members[0][ic.iLast] || '')).trim() || 'A household';
+    var forcedHook = {
+      hookType: 'HOME_SALE', severity: 4, priority: 3, domain: 'COMMUNITY',
+      description: who + (members.length > 1 ? ' and family' : '') + ' had to sell their home in ' + (hood || 'Oakland') +
+        ' — the payments outran the income; renting on the same streets now — $' + (sale ? sale.price : 0) +
+        (sale && sale.proceeds > 0 ? ', $' + sale.proceeds + ' back' : ', the mortgage took it all'),
+      cycleGenerated: cycle, neighborhood: hood,
+      text: 'A stretched family sold their home in ' + (hood || 'Oakland')
+    };
+    ctx.summary.storyHooks.push(forcedHook);
+    if (typeof recordHookRipple_ === 'function') recordHookRipple_(ctx, 'household', forcedHook, 'generationalWealthEngine');
     die.sold++;
   }
 }

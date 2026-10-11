@@ -973,6 +973,15 @@ Prior sweep passes: §S212 Migration Pass (governance.3 + governance.5 + S203 di
 
 This pass: 4 closed (pipeline.3, engine.3, infrastructure.1, infrastructure.2) — not `done-pending-archive` sweep rows, moved by hand per rollout-rules §6 wontfix/unresolvable-stale convention.
 
+## S552 Archive Pass (2026-10-11, engine-sheet) — post-S551 closures sweep
+
+2 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 2 engine.*.
+
+- **engine.282** [engine-sheet] — C111 read 2026-10-11: POP-00963 NetWorth 20 / POP-00971 17 — filled by accrual, no blank cell left. Done **State at archive:** done-pending-archive. Pointer: [[../reference/DEPLOY_HISTORY]] §PROD f2a61e5e
+- **engine.283** [engine-sheet] — C111 read 2026-10-11: 0 non-standard Status values on 1,032 rows. Done **State at archive:** done-pending-archive. Pointer: [[../reference/DEPLOY_HISTORY]] §PROD f2a61e5e
+
+This pass: 2 rows — engine.282 + engine.283. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+
 ## S551 Archive Pass (2026-10-11, research-build) — post-S550 closures sweep
 
 1 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 engine.*.

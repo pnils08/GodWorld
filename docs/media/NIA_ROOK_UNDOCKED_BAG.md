@@ -1,7 +1,7 @@
 ---
 title: Nia Rook — UNDOCKED Recap Bag
 created: 2026-08-16
-updated: 2026-08-17
+updated: 2026-10-11
 type: reference
 tags: [media, culture, undocked, nia-rook, active]
 sources:
@@ -15,6 +15,13 @@ pointers:
 # Nia Rook — UNDOCKED Recap Bag
 
 Solo `nia-rook`. Entertainment recap. Not culture-desk average. Not sports.
+
+## What the show is (authorized facts — state them, don't explain them)
+
+- One citizen flies each night; the city watches. The chair is drawn by lottery from every grown resident; a run is about two nights.
+- **The board ranks every pilot who ever sat the chair by total credits earned across their nights.** A night's number is what the pilot brought home between undock and last dock. The leader is whoever holds the highest total; a streak is consecutive weeks on top. Nothing else moves the board — fights, mishaps, a lost ship are talk, not score.
+- Credits come from closing station contracts (the big nights) or selling the haul (the small ones). A contract left open scores nothing.
+- Source: `docs/plans/2026-08-07-spacemolt-game-show.md` §3.2. Numbers in a recap still come only from the feed row.
 
 ## Modes (pick 1–2)
 

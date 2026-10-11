@@ -22,7 +22,19 @@ const ROOT = path.resolve(__dirname, '..');
 const V = 'UNDOCKED-ADAPTER/1';
 const BASE = process.env.SPACEMOLT_URL || 'https://game.spacemolt.com/api/v2';
 const UA = 'GodWorld-UNDOCKED-adapter/1';
-const CATEGORIES = ['mining', 'trading', 'combat', 'navigation', 'session'];
+// 'mission' added 2026-10-11: the brief now sends pilots after station
+// contracts (1,500–3,500 cr a close vs 5–10 cr/unit raw ore), and the game logs
+// those under category 'mission', which this list had never fetched — a closed
+// contract would have scored 0 on the board. Category list is the game's own
+// (get_action_log: combat, trading, ship, crafting, faction, mission, skill,
+// salvage, storage, achievement, mining, navigation, exploration, reputation,
+// drone, session, other).
+const CATEGORIES = ['mining', 'trading', 'mission', 'combat', 'navigation', 'session'];
+// Reward credit keys a mission-completion entry may carry. The game's typed
+// MissionRewardsInfo names `credits`; the action-log data map is untyped, so
+// the first key present wins. Only a completion entry counts — an accept entry
+// may echo the posted reward without paying it.
+const MISSION_CREDIT_KEYS = ['credits_delta', 'credits_earned', 'reward_credits', 'credits'];
 const SESSIONS = path.join(ROOT, 'output', 'kimi', 'spacemolt-phase0', 'commander', 'sessions');
 const STAGED = path.join(ROOT, 'output', 'spacemolt-show', 'staged');
 const DRAW = path.join(ROOT, 'output', 'spacemolt-show', 'draws', 'draw-1.json');
@@ -143,6 +155,14 @@ function creditDeltaForEntry(e) {
   }
   if (t === 'trading.order_cancelled') {
     return num(d.refunded_credits);
+  }
+  if (e.category === 'mission' || /^mission\./.test(t)) {
+    if (!/complet|claim|reward|paid/i.test(t)) return null;
+    for (let i = 0; i < MISSION_CREDIT_KEYS.length; i++) {
+      const n = num(d[MISSION_CREDIT_KEYS[i]]);
+      if (n != null) return n;
+    }
+    return null;
   }
   const generic = num(d.credits_delta);
   if (generic != null) return generic;

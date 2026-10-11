@@ -45,6 +45,14 @@ const trading = [
   { id: 3, category: 'trading', event_type: 'trading.exchange_fill', created_at: '2026-08-16T07:32:00Z',
     summary: 'sold ore', data: { total: 206, role: 'seller', item_id: 'iron_ore', quantity: 12, system_name: 'Haven Station' } },
 ];
+const mission = [
+  { id: 7, category: 'mission', event_type: 'mission.accepted', created_at: '2026-08-16T07:27:00Z',
+    summary: 'accepted iron supply run', data: { mission_id: 'iron_supply_run', credits: 1500 } },
+  { id: 8, category: 'mission', event_type: 'mission.completed', created_at: '2026-08-16T07:34:00Z',
+    summary: 'completed iron supply run', data: { mission_id: 'iron_supply_run', credits: 1500 } },
+  { id: 9, category: 'mission', event_type: 'mission.completed', created_at: '2026-08-16T06:10:00Z',
+    summary: 'old contract', data: { mission_id: 'old', credits: 9999 } },
+];
 const combat = [
   { id: 4, category: 'combat', event_type: 'combat.kill', created_at: '2026-08-16T07:33:00Z',
     summary: 'won', data: {} },
@@ -64,6 +72,7 @@ check('drops pre-window mine', windowedMining.length === 1 && windowedMining[0].
 const byCat = {
   mining: windowedMining,
   trading: trading,
+  mission: A.filterWindow(mission, start, end),
   combat: combat,
   navigation: navigation,
   session: session,
@@ -76,7 +85,11 @@ const captains = [
 const staged = A.assemble(ep962, byCat, captains);
 A.assertSplit(staged);
 check('v tag', staged.v === 'UNDOCKED-ADAPTER/1');
-check('credits from trading', staged.facts.credits_delta.value === 206);
+check('credits from trading + closed contract, accept not counted, old contract windowed out',
+  staged.facts.credits_delta.value === 206 + 1500);
+check('mission category fetched', A.CATEGORIES.indexOf('mission') >= 0 && staged.source.categories.indexOf('mission') >= 0);
+check('mission accept alone scores nothing', A.deriveCredits([mission[0]]).value === null);
+check('mission completion scores its credits', A.deriveCredits([mission[1]]).value === 1500);
 check('credits is FACT', staged.facts.credits_delta.type === 'FACT'
   && staged.facts.credits_delta.source === 'get_action_log');
 check('systems from nav+mine', staged.facts.systems_visited.value.indexOf('Haven') >= 0
@@ -94,7 +107,7 @@ check('quote text present', staged.captains_log.entries[0].text.indexOf('belt ga
 check('quote not in facts JSON', JSON.stringify(staged.facts).indexOf('belt gave up iron') === -1);
 check('runner toolErrors not a fact field', !staged.facts.toolErrors);
 
-const empty = A.assemble(ep962, { mining: [], trading: [], combat: [], navigation: [], session: [] }, []);
+const empty = A.assemble(ep962, { mining: [], trading: [], mission: [], combat: [], navigation: [], session: [] }, []);
 check('empty credits null not zero-invented', empty.facts.credits_delta.value === null);
 check('empty still FACT typed', empty.facts.credits_delta.type === 'FACT');
 

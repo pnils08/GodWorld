@@ -183,7 +183,14 @@ function ensureCredentials(pilot) {
 function ensureBrief(pilot) {
   const B = require('./undockedMissionBrief');
   const p = B.briefPathFor(pilot.popid);
-  if (fs.existsSync(p)) return p;
+  // A brief on disk is kept unless it predates the current template version
+  // (no BRIEF_VERSION marker on its first line) — then it is regenerated so a
+  // rules change reaches the next flight without a hand --force per pilot.
+  if (fs.existsSync(p)) {
+    const firstLine = String(fs.readFileSync(p, 'utf8')).split('\n')[0].trim();
+    if (firstLine === B.BRIEF_VERSION) return p;
+    log('preflight: brief ' + path.relative(ROOT, p) + ' is ' + (firstLine || 'unversioned') + ', regenerating as ' + B.BRIEF_VERSION);
+  }
   const brief = B.briefForPilot({
     popid: pilot.popid, name: pilot.name,
     birthYear: pilot.birthYear, age: pilot.age,

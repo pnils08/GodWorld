@@ -41,5 +41,23 @@ check('missing role/neighborhood throws', threw);
 
 check('brief path convention', B.briefPathFor('POP-01076').endsWith('missions/undocked-pop01076.txt'));
 
+// 2026-10-11 — the rules and the objective (builder-direct: the pilot must know
+// what the show is for). In-world register, exact command names, version marker.
+check('version marker leads the brief', brief.startsWith(B.BRIEF_VERSION + '\n') && /^UNDOCKED-BRIEF\/\d+$/.test(B.BRIEF_VERSION));
+check('rules block present', brief.includes(B.SHOW_RULES.trim()));
+check('objective: credits move the board', /THE OBJECTIVE\. Bring credits home/.test(brief) && /only credits move the board/.test(brief));
+check('the show: lottery + the chair', /drawn by lottery/.test(brief) && /hold the chair/.test(brief));
+check('contracts outrank raw ore', /1,500 to 3,500 credits/.test(brief) && /5 to 10 a unit/.test(brief));
+check('contract commands exact', brief.includes('spacemolt/get_missions') && brief.includes('spacemolt/accept_mission id=')
+  && brief.includes('spacemolt/get_active_missions') && brief.includes('spacemolt/complete_mission id='));
+check('flight plan opens on active contracts', /1\. While docked: spacemolt\/get_active_missions/.test(brief));
+check('plain run kept as the floor', /fly the plain run: mine, sell, refuel/.test(brief));
+check('too-sparse rule', /too sparse/.test(brief) && brief.includes('spacemolt/get_poi'));
+check('two-night run rule', /about two nights/.test(brief));
+check('pilot does not bet', /You do not bet\. You fly\./.test(brief));
+check('fourth wall: no engine words', !/tier|UsageCount|FameScore|simulation|video game|MCP|openrouter|ledger|POPID/i.test(B.SHOW_RULES));
+check('hard stop still last', brief.trimEnd().endsWith('Done means done.'));
+
+
 if (failed) { console.error('undockedMissionBrief: ' + failed + ' FAIL'); process.exit(1); }
 console.log('undockedMissionBrief: ok');

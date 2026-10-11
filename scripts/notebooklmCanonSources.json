@@ -88,7 +88,8 @@
     "32e10420-f828-4f5c-8b7a-bdf109c3f508",
     "031d5364-a3d4-47db-b730-cad1e811baeb",
     "fcca44cc-c930-4429-a807-668f3b8c24db",
-    "07783621-142e-4404-916d-7b58b0621a11"
+    "07783621-142e-4404-916d-7b58b0621a11",
+    "579a7aa1-f829-4342-8d5f-2e8a9d45dd99"
   ],
   "decisions": {
     "5a519026-77a2-46c6-87ea-e9dcb5c229d1": {
@@ -749,6 +750,16 @@
       "evidence": [
         "Source file: output/lore-quarantine/darrin_davis_deep_dive.md",
         "Cycle placement: Y3C7",
+        "Verdict: pass (rhea)"
+      ]
+    },
+    "579a7aa1-f829-4342-8d5f-2e8a9d45dd99": {
+      "title": "Lore: deep_dive_carmen_delaine (Y3C4)",
+      "classification": "lore",
+      "reason": "Graded lore piece promoted out of quarantine by the rhea gate (pipeline.59); ledger-grounded deep background, not a published edition.",
+      "evidence": [
+        "Source file: output/lore-quarantine/deep_dive_carmen_delaine.md",
+        "Cycle placement: Y3C4",
         "Verdict: pass (rhea)"
       ]
     }

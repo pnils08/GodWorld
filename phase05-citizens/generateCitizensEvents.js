@@ -1866,7 +1866,10 @@ function generateCitizensEvents_(ctx) {
     // Weight scales with the boost the game actually put on the city
     // (T3a: sportsSentimentBoost, verified 0.11 for a win). Cap 4 — game
     // night concentrates the town's texture, never erases the rest of life.
-    var gnI = Math.min(1, Math.abs(Number(S.sportsSentimentBoost || 0)) / 0.15);
+    // engine.203d: a quiet franchise's aftermath rides the boost for city mood; tonight's
+    // game night weighs only the games played.
+    var gnI = Math.min(1, Math.abs(Number(S.sportsSentimentBoost || 0) -
+      Number((S.sportsAftermath && S.sportsAftermath.total) || 0)) / 0.15);
     var gnW = Math.min(4, 1.1 * (1 + 3 * gnI));
     var gnTexts = {
       win: [

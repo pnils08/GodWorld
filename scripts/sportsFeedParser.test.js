@@ -12,6 +12,8 @@ const logs = [];
 const sandbox = { Logger: { log: (message) => logs.push(String(message)) } };
 vm.createContext(sandbox);
 vm.runInContext(fs.readFileSync(path.join(__dirname, '../phase02-world-state/applySportsSeason.js'), 'utf8'), sandbox);
+// engine.203d: the aftermath helpers live in the shared week utility (one global scope in Apps Script)
+vm.runInContext(fs.readFileSync(path.join(__dirname, '../utilities/sportsWeekRecord.js'), 'utf8'), sandbox);
 
 const headers = ['Cycle', 'TeamsUsed', 'EventType', 'SeasonType', 'Team Record', 'Streak',
   'EventTrigger', 'HomeNeighborhood', 'PlayerMood', 'FanSentiment', 'FranchiseStability',
@@ -110,9 +112,106 @@ test('D3 guard: prior-Cycle fields still carry when the team has a current row',
   const old = Object.assign({}, complete, { Cycle: 105 });
   assert.deepStrictEqual(read([old, { Cycle: 106, TeamsUsed: "A's" }]).result, read([complete]).result);
 });
-test('D3 guard: team without a current row stays silent', () => {
+test('D3 guard: with no game-week history a team without a current row stays silent', () => {
   assert.deepStrictEqual(read([Object.assign({}, complete, { Cycle: 105 })]).result,
-    { sentiment: 0, triggers: [] });
+    { sentiment: 0, triggers: [], aftermath: { total: 0, byTeam: {} } });
+});
+
+// engine.203d — the aftermath of the last game week (builder 2026-10-07: "slow fade for title,
+// upset first on a loss"). Fixtures follow the live C110 title shape; numbers are synthetic.
+const feedSheet = (rows) => ({ getDataRange: () => ({ getValues: () => [headers, ...rows.map(r => headers.map(h => r[h] ?? ''))] }) });
+const titleRows = [
+  row({ Cycle: 110, EventType: 'game-result', SeasonType: 'playoffs', 'Team Record': '4-1', Streak: 'W3' }),
+  row({ Cycle: 110, EventType: 'game-result', SeasonType: 'championship', 'Team Record': '11-3', Streak: 'W3', EventTrigger: 'championship' })
+];
+const titleHist = (rate = 0.85) => ({ weeks: { "A's": { 110: { w: 2, l: 0 } } }, lens: { "A's": { 110: 'championship' } }, fadeRate: rate });
+const share110 = () => plain(sandbox.processFeedSheet_(feedSheet(titleRows), 110)).sentiment;
+test('203d: the week after a title fades from the title share, no dip', () => {
+  const s = share110();
+  assert(s > 0.05, 'fixture title share ' + s);
+  const r = plain(sandbox.processFeedSheet_(feedSheet(titleRows), 111, {}, titleHist()));
+  near(r.aftermath.total, s * 0.85);
+  assert.strictEqual(r.sentiment, 0, 'the games term is empty on a quiet week');
+  assert.deepStrictEqual(r.triggers, [], 'no row this Cycle: nothing authored to trigger on');
+  assert.strictEqual(r.aftermath.byTeam["A's"].kind, 'title');
+  assert.strictEqual(r.aftermath.byTeam["A's"].quiet, 1);
+  const r3 = plain(sandbox.processFeedSheet_(feedSheet(titleRows), 113, {}, titleHist()));
+  near(r3.aftermath.total, s * Math.pow(0.85, 3));
+});
+test('203d: an off-season row after the title does not re-read the carried record (no snap, no hold)', () => {
+  const rows = titleRows.concat([row({ Cycle: 111, EventType: 'front-office', SeasonType: 'off-season', EventTrigger: 'breaking-news' })]);
+  const r = plain(sandbox.processFeedSheet_(feedSheet(rows), 111, { "A's": { g: 0, h: 0 } }, titleHist()));
+  near(r.aftermath.total, share110() * 0.85);
+  assert.strictEqual(r.sentiment, 0);
+  assert.deepStrictEqual(r.triggers.map(t => t.trigger), ['breaking-news'], 'the authored trigger still fires');
+  near(r.triggers[0].sentiment, share110() * 0.85);
+});
+test('203d: a game week this Cycle reads the live formula, untouched', () => {
+  const rows = titleRows.concat([row({ Cycle: 111, EventType: 'game-result', SeasonType: 'regular-season', 'Team Record': '3-1' })]);
+  const withHist = plain(sandbox.processFeedSheet_(feedSheet(rows), 111, { "A's": { g: 2, h: 1 } }, titleHist()));
+  const legacy = plain(sandbox.processFeedSheet_(feedSheet(rows), 111, { "A's": { g: 2, h: 1 } }));
+  assert.strictEqual(withHist.sentiment, legacy.sentiment);
+  assert.deepStrictEqual(withHist.aftermath, { total: 0, byTeam: {} });
+});
+test('203d: eliminated in a postseason week → upset first (held), then the fade', () => {
+  const rows = [row({ Cycle: 110, EventType: 'game-result', SeasonType: 'league-championship', 'Team Record': '7-5', Streak: 'L2' })];
+  const hist = { weeks: { "A's": { 110: { w: 1, l: 3 } } }, lens: { "A's": { 110: 'league-championship' } }, fadeRate: 0.85 };
+  const s = plain(sandbox.processFeedSheet_(feedSheet(rows), 110)).sentiment;
+  const r1 = plain(sandbox.processFeedSheet_(feedSheet(rows), 111, {}, hist));
+  const r2 = plain(sandbox.processFeedSheet_(feedSheet(rows), 112, {}, hist));
+  assert.strictEqual(r1.aftermath.byTeam["A's"].kind, 'upset');
+  near(r1.aftermath.total, -Math.abs(s));
+  near(r2.aftermath.total, -Math.abs(s) * 0.85);
+});
+test('203d: a postseason run week (W >= L) that goes quiet is a season ended short of a title → upset', () => {
+  assert.strictEqual(sandbox.sportsAftermathKind_({ w: 2, l: 1 }, 'playoffs'), 'upset');
+  assert.strictEqual(sandbox.sportsAftermathKind_({ w: 0, l: 2 }, 'championship'), 'upset');
+  assert.strictEqual(sandbox.sportsAftermathKind_({ w: 3, l: 1 }, ' Championship '), 'title');
+  assert.strictEqual(sandbox.sportsAftermathKind_({ w: 1, l: 2 }, 'preseason'), 'upset', 'went quiet falling');
+  assert.strictEqual(sandbox.sportsAftermathKind_({ w: 2, l: 1 }, 'late-season'), 'fade');
+});
+test('203d: the Oaks going quiet after an 0-2 preseason week carry a small upset (expansion stakes)', () => {
+  const rows = [row({ Cycle: 110, TeamsUsed: 'Oaks', EventType: 'game-result', SeasonType: 'preseason', 'Team Record': '0-5', Streak: 'L5' })];
+  const hist = { weeks: { Oaks: { 110: { w: 0, l: 2 } } }, lens: { Oaks: { 110: 'preseason' } }, fadeRate: 0.85 };
+  const r = plain(sandbox.processFeedSheet_(feedSheet(rows), 111, {}, hist));
+  assert(r.aftermath.total < 0 && r.aftermath.total > -0.05, String(r.aftermath.total));
+});
+test('203d: the aftermath is spent below 0.01 — zero, not a residue', () => {
+  near(sandbox.sportsAftermathShare_(0.1, 'title', 14, 0.85), 0.1 * Math.pow(0.85, 14));
+  assert.strictEqual(sandbox.sportsAftermathShare_(0.1, 'title', 15, 0.85), 0);
+  assert.strictEqual(sandbox.sportsAftermathShare_(0.004, 'upset', 1, 0.85), 0);
+});
+test('203d: unusable fade rate → no aftermath this Cycle (the quiet franchise contributes nothing)', () => {
+  const r = plain(sandbox.processFeedSheet_(feedSheet(titleRows), 111, {}, titleHist(null)));
+  assert.deepStrictEqual(r, { sentiment: 0, triggers: [], aftermath: { total: 0, byTeam: {} } });
+});
+test('203d: sportsFadeRate config — absent default, usable value, 0/1/text are Engine_Errors rows', () => {
+  const errs = [];
+  sandbox.logEngineError_ = (ctx, phase, err) => errs.push(phase + ': ' + err.message);
+  try {
+    assert.strictEqual(sandbox.sportsFadeRateConfig_({ config: {} }), 0.85);
+    assert.strictEqual(sandbox.sportsFadeRateConfig_({ config: { sportsFadeRate: '0.9' } }), 0.9);
+    for (const bad of [0, 1, 'fast', '', true]) assert.strictEqual(sandbox.sportsFadeRateConfig_({ config: { sportsFadeRate: bad } }), null);
+    assert.strictEqual(errs.length, 5);
+    assert(errs.every(e => e.indexOf('Phase2-SportsFeed: engine.203d') === 0), errs[0]);
+  } finally { delete sandbox.logEngineError_; }
+});
+test('203d: applySportsFeedTriggers_ folds the aftermath into the boost, publishes it, attributes it', () => {
+  const ripples = [];
+  sandbox.recordRipple_ = (ctx, r) => ripples.push(r);
+  try {
+    const ctx = { summary: { cycle: 111, sportsWeek: {} }, config: {}, ss: { getSheetByName: () => feedSheet(titleRows) },
+      _sportsWeekHistory: titleHist().weeks, _sportsLensHistory: titleHist().lens };
+    sandbox.applySportsFeedTriggers_(ctx);
+    near(ctx.summary.sportsSentimentBoost, share110() * 0.85);
+    near(ctx.summary.sportsAftermath.total, ctx.summary.sportsSentimentBoost);
+    assert.strictEqual(ripples.length, 1, 'no games term → only the aftermath row');
+    assert.strictEqual(ripples[0].causeDetail, "aftermath: A's title week 1 after C110");
+    // override / harness: no history on ctx → the pre-203d behaviour
+    const bare = { summary: { cycle: 111, sportsWeek: {} }, config: {}, ss: { getSheetByName: () => feedSheet(titleRows) } };
+    sandbox.applySportsFeedTriggers_(bare);
+    assert.strictEqual(bare.summary.sportsSentimentBoost, 0);
+  } finally { delete sandbox.recordRipple_; }
 });
 test('published S fields keep their shapes and atmosphere licence stays untouched', () => {
   const sheet = { getDataRange: () => ({ getValues: () => [headers, headers.map(h => complete[h] ?? '')] }) };

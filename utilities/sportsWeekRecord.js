@@ -360,8 +360,71 @@ function sportsBarTerm_(weeks, hood, nightlifeOn) {
   return t;
 }
 
+// engine.203d (S447 D3: inactivity drifts toward the city's baseline across Cycles, never a
+// snap and never a hold; builder 2026-10-07: "slow fade for title, upset first on a loss").
+// A franchise with no game this Cycle carries the aftermath of its LAST game week instead of
+// re-reading its carried row fields. Stateless from the tab like the expectation (C3): the last
+// game week, its lens and its share are re-read from the feed every Cycle.
+//   title  (a won championship week, the TITLE class)     → share × rate^quiet, no dip
+//   upset  (a postseason week that was not a title — the club went out — or any losing week)
+//          → the city is upset first: −|share| held on the first quiet week, then × rate^(quiet−1)
+//   fade   (any other last game week)                     → share × rate^quiet
+// The upset is the last share itself turned against the city, not a new constant, so it is as
+// large as what the club meant to the city that week (an expansion preseason costs little).
+var SPORTS_FADE_DEFAULT_ = 0.85;    // read-before 208 C10; World_Config sportsFadeRate
+var SPORTS_FADE_FLOOR_ = 0.01;      // below this the aftermath is spent — zero, not a residue
+
+// the franchise's latest game week before currentCycle in {cycle: {w, l}}; null when none
+function sportsLastGameWeek_(historyByCycle, currentCycle) {
+  var best = null;
+  for (var c in (historyByCycle || {})) {
+    if (!historyByCycle.hasOwnProperty(c)) continue;
+    var cy = Number(c), hv = historyByCycle[c];
+    if (cy < currentCycle && hv && (hv.w + hv.l) > 0 && (!best || cy > best.cycle)) {
+      best = { cycle: cy, w: hv.w, l: hv.l };
+    }
+  }
+  return best;
+}
+
+// the season-end reading of a last game week; rawLens = the raw SeasonType of that Cycle's last row
+function sportsAftermathKind_(lastWeek, rawLens) {
+  var lens = String(rawLens || '').trim().toLowerCase();
+  if (lens === 'championship' && lastWeek.w >= 1) return 'title';   // sportsWeekClass_ TITLE
+  if (lens === 'championship' || SPORTS_RUN_LENS_[lens] || lastWeek.w < lastWeek.l) return 'upset';
+  return 'fade';
+}
+
+// the aftermath's share of city mood after `quiet` Cycles without a game (quiet >= 1)
+function sportsAftermathShare_(lastShare, kind, quiet, rate) {
+  var v = kind === 'upset'
+    ? -Math.abs(lastShare) * Math.pow(rate, Math.max(0, quiet - 1))
+    : lastShare * Math.pow(rate, quiet);
+  return Math.abs(v) < SPORTS_FADE_FLOOR_ ? 0 : v;
+}
+
+// World_Config sportsFadeRate: absent = the default; unusable = Engine_Errors row and no
+// aftermath this Cycle (the engine.209/272 shape). 0 would be the snap and 1 the hold, so the
+// usable range is 0 < rate < 1.
+function sportsFadeRateConfig_(ctx) {
+  var raw = ctx && ctx.config ? ctx.config.sportsFadeRate : undefined;
+  if (raw === undefined) return SPORTS_FADE_DEFAULT_;
+  var n = (raw === '' || raw === null || typeof raw === 'boolean') ? NaN : Number(raw);
+  if (isFinite(n) && n > 0 && n < 1) return n;
+  var err = new Error('engine.203d: World_Config sportsFadeRate not usable (' + String(raw) +
+    ') — no sports aftermath this Cycle');
+  if (typeof logEngineError_ === 'function') logEngineError_(ctx, 'Phase2-SportsFeed', err);
+  if (typeof Logger !== 'undefined') Logger.log(err.message);
+  return null;
+}
+
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
+    sportsLastGameWeek_: sportsLastGameWeek_,
+    sportsAftermathKind_: sportsAftermathKind_,
+    sportsAftermathShare_: sportsAftermathShare_,
+    sportsFadeRateConfig_: sportsFadeRateConfig_,
+    SPORTS_FADE_DEFAULT_: SPORTS_FADE_DEFAULT_,
     parseSportsWeekRecord_: parseSportsWeekRecord_,
     sportsWeekForEntry_: sportsWeekForEntry_,
     sportsWeeklyResult_: sportsWeeklyResult_,

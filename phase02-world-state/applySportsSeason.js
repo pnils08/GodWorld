@@ -800,6 +800,8 @@ function applySportsFeedTriggers_(ctx) {
   // Initialize outputs
   S.sportsSentimentBoost = 0;
   S.sportsEventTriggers = [];
+  // engine.203d: the part of the boost that is a quiet franchise's aftermath, not a game
+  S.sportsAftermath = { total: 0, byTeam: {} };
 
   var ss = ctx.ss;
   if (!ss) return;
@@ -807,19 +809,30 @@ function applySportsFeedTriggers_(ctx) {
   var currentCycle = S.cycle || 0;
   var totalSentiment = 0;
   var allTriggers = [];
+  var aftermath = { total: 0, byTeam: {} };
 
   // Process Oakland_Sports_Feed
   var oakSheet = ss.getSheetByName('Oakland_Sports_Feed');
   if (oakSheet) {
-    var oakResult = processFeedSheet_(oakSheet, currentCycle, S.sportsWeek);
+    // engine.203d: earlier game weeks + lenses come from Phase2-SportsSeason's feed read
+    // (absent under a World_Config override — no aftermath then, as before).
+    var feedHistory = ctx._sportsWeekHistory ? {
+      weeks: ctx._sportsWeekHistory,
+      lens: ctx._sportsLensHistory || {},
+      fadeRate: sportsFadeRateConfig_(ctx)
+    } : null;
+    var oakResult = processFeedSheet_(oakSheet, currentCycle, S.sportsWeek, feedHistory);
     totalSentiment += oakResult.sentiment;
     allTriggers = allTriggers.concat(oakResult.triggers);
+    aftermath = oakResult.aftermath;
   } else {
     Logger.log('applySportsFeedTriggers_ v3.0: Oakland_Sports_Feed not found');
   }
 
-  // Apply outputs
-  S.sportsSentimentBoost = totalSentiment;
+  // Apply outputs — city mood (applyCityDynamics_) reads one boost: games + aftermath.
+  // Game-night weight reads the games alone (boost − S.sportsAftermath.total).
+  S.sportsSentimentBoost = totalSentiment + aftermath.total;
+  S.sportsAftermath = aftermath;
   S.sportsEventTriggers = allTriggers;
 
   // engine.45 T1: persist sports attribution — the sentiment scalar was a dead write
@@ -842,13 +855,33 @@ function applySportsFeedTriggers_(ctx) {
         sourceEngine: 'applySportsSeason.applySportsFeedTriggers_'
       });
     }
+    // engine.203d: the aftermath is its own attribution — a title glow or an upset, by franchise
+    if (aftermath.total !== 0) {
+      var aftParts = [];
+      for (var at in aftermath.byTeam) {
+        if (!aftermath.byTeam.hasOwnProperty(at) || !aftermath.byTeam[at].share) continue;
+        var ab = aftermath.byTeam[at];
+        aftParts.push(at + ' ' + ab.kind + ' week ' + ab.quiet + ' after C' + ab.lastGameCycle);
+      }
+      recordRipple_(ctx, {
+        causeType: 'sports',
+        causeId: 'Oakland_Sports_Feed',
+        causeDetail: 'aftermath: ' + aftParts.join('; '),
+        effectType: 'sentiment',
+        targetScope: 'citywide',
+        magnitude: Math.round(aftermath.total * 1000) / 1000,
+        duration: 1,
+        sourceEngine: 'applySportsSeason.applySportsFeedTriggers_'
+      });
+    }
   }
 
   // engine.45 T3a: dead S.sentiment write deleted — the scalar had no consumer.
   // S.sportsSentimentBoost now folds into finalCity.sentiment in
   // applyCityDynamics_ (Phase2-CityDynamics runs after Phase2-SportsFeed).
-  if (totalSentiment !== 0) {
-    Logger.log('applySportsFeedTriggers_ v3.0: Total sentiment adjustment: ' + totalSentiment.toFixed(3));
+  if (S.sportsSentimentBoost !== 0) {
+    Logger.log('applySportsFeedTriggers_ v3.0: Total sentiment adjustment: ' + S.sportsSentimentBoost.toFixed(3) +
+      ' (games ' + totalSentiment.toFixed(3) + ', aftermath ' + aftermath.total.toFixed(3) + ')');
   }
 
   ctx.summary = S;
@@ -860,9 +893,13 @@ function applySportsFeedTriggers_(ctx) {
  * then calculates sentiment from record + season + streak.
  * weeks = S.sportsWeek (Phase2-SportsSeason): a trigger is placed at its franchise's
  * venue on a home week (h > 0) and nowhere on an away week.
+ * history = { weeks: ctx._sportsWeekHistory, lens: ctx._sportsLensHistory, fadeRate } —
+ * engine.203d: a franchise with an earlier game week and no game this Cycle speaks its
+ * aftermath (sportsAftermathShare_) instead of its carried row fields; its authored triggers
+ * still fire when it has a row. No history (override, harness) = the pre-203d behaviour.
  */
-function processFeedSheet_(sheet, currentCycle, weeks) {
-  var empty = { sentiment: 0, triggers: [] };
+function processFeedSheet_(sheet, currentCycle, weeks, history) {
+  var empty = { sentiment: 0, triggers: [], aftermath: { total: 0, byTeam: {} } };
 
   var data = sheet.getDataRange().getValues();
   if (data.length < 2) return empty;
@@ -870,70 +907,29 @@ function processFeedSheet_(sheet, currentCycle, weeks) {
   var headers = data[0];
 
   // Find column indices by header name (flexible matching)
-  var cycleCol = findColumnIndex_(headers, ['Cycle', 'cycle']);
-  var seasonTypeCol = findColumnIndex_(headers, ['SeasonType', 'seasontype']);
-  var teamsCol = findColumnIndex_(headers, ['TeamsUsed', 'teamsused', 'Team', 'team']);
-  var recordCol = findColumnIndex_(headers, ['Team Record', 'teamrecord', 'record']);
-  var streakCol = findColumnIndex_(headers, ['Streak', 'streak']);
-  var triggerCol = findColumnIndex_(headers, ['EventTrigger', 'eventtrigger', 'trigger']);
-  var playerMoodCol = findColumnIndex_(headers, ['PlayerMood', 'playermood']);
-  var fanSentimentCol = findColumnIndex_(headers, ['FanSentiment', 'fansentiment']);
-  var mediaProfileCol = findColumnIndex_(headers, ['MediaProfile', 'mediaprofile']);
+  var cols = {
+    cycle: findColumnIndex_(headers, ['Cycle', 'cycle']),
+    seasonType: findColumnIndex_(headers, ['SeasonType', 'seasontype']),
+    teams: findColumnIndex_(headers, ['TeamsUsed', 'teamsused', 'Team', 'team']),
+    record: findColumnIndex_(headers, ['Team Record', 'teamrecord', 'record']),
+    streak: findColumnIndex_(headers, ['Streak', 'streak']),
+    trigger: findColumnIndex_(headers, ['EventTrigger', 'eventtrigger', 'trigger']),
+    playerMood: findColumnIndex_(headers, ['PlayerMood', 'playermood']),
+    fanSentiment: findColumnIndex_(headers, ['FanSentiment', 'fansentiment']),
+    mediaProfile: findColumnIndex_(headers, ['MediaProfile', 'mediaprofile'])
+  };
 
   var feedTz2 = sportsFeedTimeZone_(sheet);   // engine.247
-  // Build per-team latest state by scanning all rows
-  var teamState = {};
+  var teamState = reduceFeedTeamState_(data, cols, currentCycle, feedTz2);
 
-  for (var i = 1; i < data.length; i++) {
-    var row = data[i];
-    var cycle = cycleCol !== -1 ? parseInt(row[cycleCol], 10) : 0;
-    if (isNaN(cycle) || cycle === 0) continue;
-    if (currentCycle > 0 && cycle > currentCycle) continue;
-
-    var team = teamsCol !== -1 ? normalizeOaklandFeedTeam_(row[teamsCol]) : '';
-    if (!team) continue;
-
-    if (!teamState[team]) {
-      teamState[team] = {
-        record: '', seasonType: '', streak: '', trigger: '',
-        playerMood: '', fanSentiment: '', mediaProfile: '',
-        cycle: 0
-      };
-    }
-
-    var ts = teamState[team];
-
-    // Update from newer or same-cycle entries (later rows win for same cycle)
-    // Convention: last entry per cycle is the "season-state" row
-    if (cycle >= ts.cycle) {
-      var record = recordCol !== -1 ? sportsRecordText_(row[recordCol], feedTz2) : '';   // engine.247
-      var seasonType = seasonTypeCol !== -1 ? (row[seasonTypeCol] || '').toString().trim() : '';
-      var streak = streakCol !== -1 ? (row[streakCol] || '').toString().trim() : '';
-      var trigger = triggerCol !== -1 ? (row[triggerCol] || '').toString().trim() : '';
-      var playerMood = playerMoodCol !== -1 ? (row[playerMoodCol] || '').toString().trim() : '';
-      var fanSentiment = fanSentimentCol !== -1 ? (row[fanSentimentCol] || '').toString().trim() : '';
-      var mediaProfile = mediaProfileCol !== -1 ? (row[mediaProfileCol] || '').toString().trim() : '';
-
-      // Blank/dash fields preserve earlier data. Use the sentiment parser to
-      // prevent filler records (including 0-0) from clobbering a played record.
-      // A team with only 0-0 still keeps that legitimate, unplayed record.
-      if (record && record !== '-' &&
-          (parseWinPercentage_(record) !== null || parseWinPercentage_(ts.record) === null)) {
-        ts.record = record;
-      }
-      if (seasonType && seasonType !== '-') ts.seasonType = seasonType;
-      if (streak && streak !== '-') ts.streak = streak;
-      if (trigger && trigger !== '-') ts.trigger = trigger;
-      if (playerMood && playerMood !== '-') ts.playerMood = playerMood;
-      if (fanSentiment && fanSentiment !== '-') ts.fanSentiment = fanSentiment;
-      if (mediaProfile && mediaProfile !== '-') ts.mediaProfile = mediaProfile;
-      ts.cycle = cycle;
-    }
-  }
+  var weekHist = (history && history.weeks) || {};
+  var lensHist = (history && history.lens) || {};
+  var fadeRate = history ? history.fadeRate : null;
 
   // Calculate sentiment and triggers for each team
   var totalSentiment = 0;
   var triggers = [];
+  var aftermath = { total: 0, byTeam: {} };
 
   for (var teamName in teamState) {
     var state = teamState[teamName];
@@ -941,54 +937,44 @@ function processFeedSheet_(sheet, currentCycle, weeks) {
     var wkH = weeks && weeks[teamName];
     var trigHood = (wkH && wkH.h > 0 && wkH.venue && wkH.venue[0]) || '';
 
-    // engine.75 (S328, Mike-direct): only teams with a row in the CURRENT
-    // cycle speak. The carry-forward state map never aged teams out, so
-    // "NBA" (legacy label, last row C92, pre-Oaks branding — one row with a
-    // date string in the record column) kept injecting sentiment at its
-    // stale playoffs x2 multiplier and firing phantom breaking-news
-    // triggers every cycle for 10+ cycles.
-    if (currentCycle > 0 && state.cycle !== currentCycle) continue;
+    // engine.203d: no game this Cycle after an earlier game week → the aftermath of that week.
+    var lastGame = (teamName === "A's" || teamName === 'Oaks') && !(wkH && wkH.g > 0)
+      ? sportsLastGameWeek_(weekHist[teamName], currentCycle) : null;
+    var teamSentiment;
+    if (lastGame) {
+      teamSentiment = 0;
+      if (fadeRate) {
+        var lastState = reduceFeedTeamState_(data, cols, lastGame.cycle, feedTz2)[teamName];
+        var lastShare = lastState ? feedTeamShare_(lastState) : 0;
+        var kind = sportsAftermathKind_(lastGame, (lensHist[teamName] || {})[lastGame.cycle]);
+        var quiet = currentCycle - lastGame.cycle;
+        teamSentiment = sportsAftermathShare_(lastShare, kind, quiet, fadeRate);
+        aftermath.byTeam[teamName] = { kind: kind, lastGameCycle: lastGame.cycle, quiet: quiet,
+          lastShare: lastShare, share: teamSentiment };
+        aftermath.total += teamSentiment;
+        Logger.log('Sports aftermath: ' + teamName + ' ' + kind + ' quiet ' + quiet + ' since C' +
+          lastGame.cycle + ' (' + lastGame.w + '-' + lastGame.l + ', share ' + lastShare.toFixed(3) +
+          ') = ' + teamSentiment.toFixed(3));
+      }
+      // no row this Cycle: nothing authored to trigger on
+      if (currentCycle > 0 && state.cycle !== currentCycle) continue;
+      state.seasonType = canonicalSportsPhase_(state.seasonType);
+    } else {
+      // engine.75 (S328, Mike-direct): only teams with a row in the CURRENT
+      // cycle speak. The carry-forward state map never aged teams out, so
+      // "NBA" (legacy label, last row C92, pre-Oaks branding — one row with a
+      // date string in the record column) kept injecting sentiment at its
+      // stale playoffs x2 multiplier and firing phantom breaking-news
+      // triggers every cycle for 10+ cycles.
+      if (currentCycle > 0 && state.cycle !== currentCycle) continue;
+      teamSentiment = feedTeamShare_(state);
+      totalSentiment += teamSentiment;
 
-    // 1. Base sentiment from win percentage (-0.03 to +0.03)
-    var baseSentiment = 0;
-    var winPct = parseWinPercentage_(state.record);
-    if (winPct !== null) {
-      baseSentiment = (winPct - 0.5) * 0.06;
+      Logger.log('Sports sentiment: ' + teamName + ' = ' + teamSentiment.toFixed(3) +
+        ' (record: ' + state.record + ', season: ' + state.seasonType +
+        ', streak: ' + state.streak + ', fan: ' + state.fanSentiment +
+        ', media: ' + state.mediaProfile + ')');
     }
-
-    // 2. Share the phase reader's aliases and fail-closed vocabulary with
-    // sentiment and the inferred trigger below.
-    state.seasonType = canonicalSportsPhase_(state.seasonType);
-    var seasonMultiplier = 1.0;
-    var st = state.seasonType;
-    if (st === 'playoffs' || st === 'post-season') {
-      seasonMultiplier = 2.0;
-    } else if (st === 'championship') {
-      seasonMultiplier = 3.0;
-    } else if (st === 'off-season') {
-      seasonMultiplier = 0.3;
-    } else if (st === 'spring-training' || st === 'preseason') {
-      seasonMultiplier = 0.5;
-    }
-
-    // 3. Streak amplifier
-    var streakBonus = parseStreakBonus_((state.streak || '').toUpperCase());
-
-    // 4. FanSentiment modifier (v3.0)
-    var fanMod = parseFanSentiment_(state.fanSentiment);
-
-    // 5. MediaProfile scale (v3.0) — national coverage amplifies everything
-    var mediaScale = parseMediaProfile_(state.mediaProfile);
-
-    // Calculate and clamp (-0.10 to +0.10 per team, widened for new inputs)
-    var teamSentiment = (baseSentiment + streakBonus + fanMod) * seasonMultiplier * mediaScale;
-    teamSentiment = Math.max(-0.10, Math.min(0.10, teamSentiment));
-    totalSentiment += teamSentiment;
-
-    Logger.log('Sports sentiment: ' + teamName + ' = ' + teamSentiment.toFixed(3) +
-      ' (record: ' + state.record + ', season: ' + state.seasonType +
-      ', streak: ' + state.streak + ', fan: ' + state.fanSentiment +
-      ', media: ' + state.mediaProfile + ')');
 
     // Process trigger (use manual if set, otherwise infer from state)
     var triggerValue = (state.trigger || '').toLowerCase();
@@ -1030,7 +1016,99 @@ function processFeedSheet_(sheet, currentCycle, weeks) {
     }
   }
 
-  return { sentiment: totalSentiment, triggers: triggers };
+  return { sentiment: totalSentiment, triggers: triggers, aftermath: aftermath };
+}
+
+/**
+ * Per-team latest state from every feed row at or before uptoCycle. Blank/dash fields
+ * preserve earlier data; the record parser keeps filler records (including 0-0) from
+ * clobbering a played record, while a team with only 0-0 keeps that legitimate record.
+ * Later rows win within a Cycle — the last entry per Cycle is the "season-state" row.
+ */
+function reduceFeedTeamState_(data, cols, uptoCycle, feedTz) {
+  var teamState = {};
+  for (var i = 1; i < data.length; i++) {
+    var row = data[i];
+    var cycle = cols.cycle !== -1 ? parseInt(row[cols.cycle], 10) : 0;
+    if (isNaN(cycle) || cycle === 0) continue;
+    if (uptoCycle > 0 && cycle > uptoCycle) continue;
+
+    var team = cols.teams !== -1 ? normalizeOaklandFeedTeam_(row[cols.teams]) : '';
+    if (!team) continue;
+
+    if (!teamState[team]) {
+      teamState[team] = {
+        record: '', seasonType: '', streak: '', trigger: '',
+        playerMood: '', fanSentiment: '', mediaProfile: '',
+        cycle: 0
+      };
+    }
+
+    var ts = teamState[team];
+    if (cycle >= ts.cycle) {
+      var record = cols.record !== -1 ? sportsRecordText_(row[cols.record], feedTz) : '';   // engine.247
+      var seasonType = cols.seasonType !== -1 ? (row[cols.seasonType] || '').toString().trim() : '';
+      var streak = cols.streak !== -1 ? (row[cols.streak] || '').toString().trim() : '';
+      var trigger = cols.trigger !== -1 ? (row[cols.trigger] || '').toString().trim() : '';
+      var playerMood = cols.playerMood !== -1 ? (row[cols.playerMood] || '').toString().trim() : '';
+      var fanSentiment = cols.fanSentiment !== -1 ? (row[cols.fanSentiment] || '').toString().trim() : '';
+      var mediaProfile = cols.mediaProfile !== -1 ? (row[cols.mediaProfile] || '').toString().trim() : '';
+
+      if (record && record !== '-' &&
+          (parseWinPercentage_(record) !== null || parseWinPercentage_(ts.record) === null)) {
+        ts.record = record;
+      }
+      if (seasonType && seasonType !== '-') ts.seasonType = seasonType;
+      if (streak && streak !== '-') ts.streak = streak;
+      if (trigger && trigger !== '-') ts.trigger = trigger;
+      if (playerMood && playerMood !== '-') ts.playerMood = playerMood;
+      if (fanSentiment && fanSentiment !== '-') ts.fanSentiment = fanSentiment;
+      if (mediaProfile && mediaProfile !== '-') ts.mediaProfile = mediaProfile;
+      ts.cycle = cycle;
+    }
+  }
+  return teamState;
+}
+
+/**
+ * One team's share of city mood from its reduced state: record × season × media, plus
+ * streak and fan modifiers, clamped ±0.10. Canonicalizes state.seasonType in place (the
+ * phase reader's aliases and fail-closed vocabulary, shared with the inferred trigger).
+ */
+function feedTeamShare_(state) {
+  // 1. Base sentiment from win percentage (-0.03 to +0.03)
+  var baseSentiment = 0;
+  var winPct = parseWinPercentage_(state.record);
+  if (winPct !== null) {
+    baseSentiment = (winPct - 0.5) * 0.06;
+  }
+
+  // 2. Season multiplier
+  state.seasonType = canonicalSportsPhase_(state.seasonType);
+  var seasonMultiplier = 1.0;
+  var st = state.seasonType;
+  if (st === 'playoffs' || st === 'post-season') {
+    seasonMultiplier = 2.0;
+  } else if (st === 'championship') {
+    seasonMultiplier = 3.0;
+  } else if (st === 'off-season') {
+    seasonMultiplier = 0.3;
+  } else if (st === 'spring-training' || st === 'preseason') {
+    seasonMultiplier = 0.5;
+  }
+
+  // 3. Streak amplifier
+  var streakBonus = parseStreakBonus_((state.streak || '').toUpperCase());
+
+  // 4. FanSentiment modifier (v3.0)
+  var fanMod = parseFanSentiment_(state.fanSentiment);
+
+  // 5. MediaProfile scale (v3.0) — national coverage amplifies everything
+  var mediaScale = parseMediaProfile_(state.mediaProfile);
+
+  // Calculate and clamp (-0.10 to +0.10 per team, widened for new inputs)
+  var teamSentiment = (baseSentiment + streakBonus + fanMod) * seasonMultiplier * mediaScale;
+  return Math.max(-0.10, Math.min(0.10, teamSentiment));
 }
 
 /**

@@ -1,7 +1,7 @@
 ---
 title: Deploy History — full sandbox + PROD deployment ledger
 created: 2026-09-04
-updated: 2026-10-08
+updated: 2026-10-10
 type: reference
 tags: [engine, deploy, history, active]
 sources:
@@ -18,6 +18,8 @@ pointers:
 ---
 
 ## Current sandbox — full trail
+
+**`SANDBOX 1004` @13 = `7cacd759` / @14 = `70bc8f6a` — engine.214 Tasks 17/18/19 (north-hills nightlife split, the story-seed carry + citywide seed lift, engine.287 crime floor + half share), paired bench (2026-10-10 evening, engine-sheet).** Reset from `BASELINE-1004-C110`; C111 on @13 vs the @12 C111: Temescal nightlife ×1.0315 the only moved hood cell, Riley row byte-equal (CitySentiment 0.38), **step −0.10 re-declared unchanged**. C112 on @14 vs the @11 C112: the −0.28 citywide crime wave on one carried spike is gone (floor 3) — every hood +0.196, CitySentiment 0.14 → 0.24, hood mean −0.134 → +0.065; Phase 2 read seeds for the first time on any fire (the finding: `S.storySeeds` is Phase 7's key and was `[]` in Phase 2 on every live Cycle — now carried on `PREV_STORY_SEEDS_JSON`), per-hood seed gate fired on Fruitvale / Chinatown, `citywideSeedWeight` 37.15 recorded. C113: ratio 32 / 37.15 = 0.86, no citywide lift; crime 1, floor holds. 0 new Engine_Errors ×3. Codex impl review (task18) HOLD → F4/F5 fixed in `70bc8f6a`, suite 287/287. PROD gate unchanged: after the C112 live readback Sun 2026-10-18, first fire C113 Sun 2026-10-25, re-declare the step against live C112 before the push. Bench at C113.
 
 **`SANDBOX 1004` @11 = `89a59860` — engine.214 mood per hood, paired bench (2026-10-10 overnight, engine-sheet).** Reset from `BASELINE-1004-C110` twice; C111 on @10 (the current engine, A) and on @11 (the cut, B) over the same carried state. A ok 162 s / B ok 196 s, 0 new Engine_Errors each; the five `clusterAnchors_*` World_Config rows self-arm on A and not on B. **Declared step: CitySentiment C111 A 0.48 → B 0.38 (−0.10)** — carrier +0.04 (equal-22 mean above the cluster-weighted raw), the retired initiative city scalar −0.14. Hood mean 0.218 → 0.194; spread 0.241 → 0.232 (≥ 0.18). Per-hood: Chinatown −0.106 and Temescal −0.098 are their own sickness / unemployment rates firing (A10); nightlife/tourism spread inside the former clusters up in 9 of 10 (north-hills nightlife 0 → 0: `professional` and `clinic` share nightlife 1.05). B C112–C114 ok (173 / 168 / 136 s); C114 with Dimond relabeled `nightlife` moved Dimond's nightlife ×1.92 against its neighbours' ×1.50 (First Friday) — Acceptance 3; label restored. The B C111 → C112 drop is Valentine ending + engine.185's relative crime gate reading one carried spike vs a 0.67 baseline as a wave (pre-existing, citywide, identical in A's lineage) — flagged. P1 (≥2 receipt) and P2 (gate counts per hood) unit-proven only on this bench. Artifacts: `output/engine-sheet/2026-10-10-engine214-*` (A/B/C112/C114 readbacks, paired diff, West Oakland stage trace). PROD gated per the plan: after the C112 live readback (Sun 2026-10-18), first fire C113 (Sun 2026-10-25); step to be re-declared against the live C112 state before the push. **Fix-up `d1efc82c` → @12** (codex impl review folded: own-property label check + row shape, adjacency validated at the profile pass, crime receipt deferred past pass C, four tests through the real `safePhaseCall_`; Task 15 receipt wording): third reset, C111 on @12 byte-equal to the @11 run on every carried hood cell and the Riley row — step −0.10 re-declared unchanged. Bench at C111.
 

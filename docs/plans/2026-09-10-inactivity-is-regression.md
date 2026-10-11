@@ -412,6 +412,8 @@ Defect fixed first (`0848f7d3`): chaos Annual_Revenue cells (flush + Phase5-Chao
 **Builder's words (2026-10-07) — what gives the big employers a bad year (the S496 open call):** asked (b) institutional growth settles toward its sector's normal instead of the leftover +9–11% ratchet, (a) the city's money — a weak tax year / council budget cut squeezes the public employers, a health-funding squeeze the hospitals; recommended b first, then a, a true citywide bad stretch rare (once every few sim years, when bad luck stacks on a weak budget year). **Verbatim:** "i agree on b first and then a, what I would say here is likley a different engine is needed for this at the city level or a chaos car that hits a hood or district. a CAT system is likely needed , a flood may be apart of the weather but havibg a system that tracks CAT probability that maybe esclates each cycle a tick and the sime need to react to it to lower chance, maybe choas cars can have a city inspector that can creat hood wide "bad" events ,"
 **Reading:** (1) build b (institution growth cools toward sector norm), then a (budget squeeze on public employers / hospitals). (2) New direction, design first, builder sees it before build: a city-level CAT (catastrophe) layer — a tracked catastrophe probability that ticks up each Cycle, which the sim's own responses (civic action, initiatives, maintenance) pull back down; reach = a hood or a district. Fold into what exists before adding (engine.229 weather disasters already write NATURAL_DISASTER / INFRASTRUCTURE_FAILURE on hoods; chaos cars already carry an inspector at business scope) — a hood-wide inspector scope is the candidate chaos-car carrier.
 
+**(b) built 2026-10-11 overnight (engine-sheet, `e3a85853`).** `bizDriftOne_` adds `settle = bizSettleRate × (BIZ_CLASS_MINT[class].growth − shock-free track)` for stated staff ≥ `bizSettleMinStaff`, outside the weekly drift cap. Target = the class mint table, not the live sector median — measured C110, the medians are ratcheted too (tech 21.6, education = OUSD + Peralta 8.9, default 5.7 vs mint 2). Defaults stated for the builder: rate 0.05 (~half the gap a sim quarter; 52 quiet Cycles OUSD 8.89 → 5.56 → 4.02 → 2.31 → 2.13), scope 1000 staff = exactly the nine big employers. Bench 1004 @21 C111–C112: ok, 0 new Engine_Errors, every institution down ~5% of its gap per Cycle (`output/engine-sheet/2026-10-11-engine203d-bench-readback.md` §Stage 2). (a) next.
+
 Dials self-arm in World_Config (ADR-0015); `ctx.rng` only. Proof: offline replay harness (`scripts/sentimentRestingLevel.test.js` pattern) on C101–C108 inputs → bench SANDBOX 0908 → PROD after the C109 fire. Blast radius to read back on the bench (untouched per ruling, first-time fire): `civicInitiativeEngine.js:1467–1485`, `updateCrimeMetrics` `UNEMPLOYMENT_THRESHOLD` 0.10, `illnessSupportThreshold` 0.08, hood `sick0 >= 0.10`.
 
 ## Status log
@@ -463,6 +465,8 @@ the old 20/22 pin could not recur here regardless — the proof is the lift size
 Ships after the current stack's live fire (second ship), not inside it.
 
 ## Changelog
+
+- 2026-10-11 overnight (engine-sheet) — engine.193 (b) built + bench-proven (`e3a85853`, 1004 @21 C111–C112); PROD in stage 2, pending the builder's push.
 
 - 2026-10-07 (engine-sheet, S536) — engine.193 builder call closed: institution growth cools first (b), then budget squeeze (a); new direction — a CAT probability layer that escalates per Cycle and the sim lowers, hood/district reach, hood-wide chaos-car inspector (verbatim under §engine.193). ROLLOUT engine.193 → section 3.
 

@@ -81,3 +81,5 @@ research-build, 2026-10-10 — all ten folded into `docs/plans/2026-10-10-engine
 10. folded — `sentimentRestingLevel.test.js` added to D11 with its lines; `hoodEconomyRelative` `:85/:105/:109` and `engine94SheetContract.test.js:18` named; Task 9 requires the five suites to pass alongside the new one.
 
 **Reconciled in:** [[../plans/2026-10-10-engine-214-mood-per-hood]] §Reviews reconciled
+
+- 2026-10-10 (codex), second pass of `39dd87b7` — **HOLD lifts; SHIP-WITH-FIXES for implementation and paired bench.** D7 resolves the seed/crime choices, D8 fixes bleed placement, and D10 removes the duplicate initiative path and unsupported step promise (`docs/plans/2026-10-10-engine-214-mood-per-hood.md:40`, `:42`, `:46`); Tasks 5/9/10 specify ordering, regression coverage and paired measurement (`:60`, `:64`, `:65`). No remaining build blocker in these sections; implementation and bench results remain unproven. One nonblocking correction at `:42`: Codex used the C107 adjacency snapshot with C110 sentiments, not a live C110 graph.

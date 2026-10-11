@@ -37,3 +37,20 @@ BASELINE-1004-C110 (tenth time), pools re-applied, fire record cleared.
 games are logged); World_Config self-arms `bizSettleRate` 0.05 and `bizSettleMinStaff` 1000 (rows after 222 —
 the grid has room); the nine institutions' Growth_Rate each down ~5% of their gap to the class norm; 0 new
 Engine_Errors. Rollback = push the `prodpull` tree (PROD `63754ca8`) back.
+
+## Stage 3 — stage 2 + engine.194, bench 1004 @22 (`ae9278aa`)
+
+Same seven files (applySportsSeason.js + generateCitizensEvents.js at `ae9278aa`). Reset from BASELINE-1004-C110,
+pools re-applied, fire record cleared.
+
+| Cycle | Result | Sports aftermath | CitySentiment |
+|---|---|---|---|
+| C111 | ok 241.6 s, 594 intents, 0 persist errors, EE 4 → 4 | `A's title week 1 after C110` **+0.085** (the C110 title week rebuilt at the new price caps at +0.10; the Oaks' −0.0017 preseason residue is below the 0.01 floor) | 0.46 |
+| C112 | ok 167.1 s, 498 intents, 0 persist errors, EE 4 → 4 | `A's title week 2` **+0.072** | 0.15 |
+
+No game weeks on the bench (the feed ends at C110) — game-week pricing is unit/replay-proven (sportsFeedParser 72/72;
+codex replay table in `docs/research/2026-10-11-codex-engine194-cut.md`). C111 wall 241.6 s vs 151–190 s on the
+earlier runs — same intents, under the 330 s budget; watch it on live.
+**Choose one push:** stage 2 (`push-stage2-prod.sh`) or stage 3 (`push-stage3-prod.sh`, includes 194). Stage 3 changes
+what the builder sees: a 2–1 WS week reads −0.022 (under the dynasty's .750), FanSentiment/Streak/MediaProfile stop
+moving the number.

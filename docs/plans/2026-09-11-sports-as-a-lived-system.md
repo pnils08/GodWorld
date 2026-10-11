@@ -487,6 +487,7 @@ Sports stops being a lane and becomes a horizontal. A cycle's sports emits seeds
 
 ### Task 7 — engine.194: reprice sentiment
 Only after 1-4. Magnitude is downstream of the contract. Carries the `generateCitizensEvents.js:1707` saturation fix (`min(1,abs(boost)/0.15)`).
+**LANDED 2026-10-11 (`ae9278aa`, codex-authored, engine-sheet landed; bench 1004 @22 stage 3 clean):** share = clamp(0.5 × wk.signed × wk.reach, ±0.10) — the week's result against the franchise's own expectation (Q3) at the round's reach (Q4); no accepted game week → no games share; MediaProfile/FanSentiment/Streak stay trigger/prose inputs; the cumulative Team Record no longer prices mood; gnI divisor 0.10. Consequence for the builder: a 2–1 dynasty WS week reads −0.022. Record: [[../research/2026-10-11-codex-engine194-cut]].
 **Builder 2026-09-14: folded to codex.** The open sim question on the ROLLOUT row (title magnitude vs the ±0.20 edition / ±0.15 initiative siblings) is decided here as part of the contract work, not posed separately. Owner codex; engine-sheet lands and benches the cut.
 
 Cuts carried from the drained engine.194 row (measured C101–C106, detail in the research doc §1 and §4): mean +0.015 vs a ±0.10 clamp that never fired in 48 cycles; the record term `(winPct-0.5)*0.06` caps at ±0.03 and is the weakest of five factors; `MediaProfile` multiplies everything ×0.8–1.5; postseason zeroes the record so the ×2 playoff multiplier multiplies nothing; resolved phase pays +0.06 flat for late-season vs +0.017 for going 127-35. The cut: record dominant and clamp-reachable; postseason reads the series record with the regular season as earned baseline; off-season decays the final record; MediaProfile stops multiplying the record; reprice `generateCitizensEvents.js:1707` game-night intensity in the same change.
@@ -559,6 +560,8 @@ LIVE PROD @98 + `WeekRecord` column; dead `VideoGameDate`/`VideoGame` DELETED 20
 engine.210 LIVE on PROD @97; engine.202 LIVE on PROD @98 with the `WeekRecord` column on the live feed (dead VideoGame columns deleted 2026-09-19 — 19 columns, `WeekRecord` at S) — bench-proven C115 (weekly settlement, bad-cell rejection, payouts). Smoke both at live C108. Research for Tasks 3/4/10: [[../research/2026-09-18-sports-intensity-and-game-day-economy]]. Population/economy effects defer to record-driven impact. Event_Content_Ledger selection/feedback remains under engine.208 Task 8.
 
 ## Changelog
+
+- 2026-10-11 overnight (engine-sheet) — engine.194 codex cut landed `ae9278aa`; stage 3 (stage 2 + 194) benched 1004 @22 C111–C112 clean; PROD = builder's pick of stage 2 / stage 3.
 
 - 2026-10-11 overnight (engine-sheet) — engine.203d built + bench-proven (`38f19986`, `e34c8b19`); the S.cycle → S.cycleId read in the feed-trigger pass; live World_Config `sportsFadeRate` row + 50 grid rows; PROD push pending the builder (classifier).
 

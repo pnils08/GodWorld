@@ -7,12 +7,12 @@
 <!-- generated: plans in motion (docLoopStatus.js --plans --write; do not hand-edit) -->
 **Plans in motion (44)** — each plan, its rows and the state each is in:
 
-- [[../plans/2026-09-11-sports-as-a-lived-system]]: engine.209 live-observing, engine.206 live-observing, engine.205 in-progress, engine.202 in-progress, engine.203d live-observing, engine.194 live-observing
+- [[../plans/2026-09-11-sports-as-a-lived-system]]: engine.209 live-observing, engine.206 live-observing, engine.205 in-progress, engine.202 in-progress, engine.203d live-observing
 - [[../plans/2026-10-10-engine-214-mood-per-hood]]: engine.214 live-observing, pipeline.71 ready, engine.287 live-observing, engine.288 live-observing, engine.289 blocked
 - [[../plans/2026-09-26-future-build-ideas]]: engine.238 live-observing, engine.98 ready, engine.264 ready, engine.261 ready
 - [[../reference/DEPLOY_HISTORY]]: engine.282 live-observing, engine.283 live-observing, engine.213 in-progress
 - [[../plans/2026-09-21-care-and-justice-system]]: engine.254 live-observing, engine.271 live-observing, engine.272 live-observing
-- [[../plans/2026-09-10-inactivity-is-regression]]: engine.193 ready, engine.201 live-observing, engine.197 in-progress
+- [[../plans/2026-09-10-inactivity-is-regression]]: engine.193 in-progress, engine.201 live-observing, engine.197 in-progress
 - [[../research/2026-10-02-engine-208-fandom-dial-read-before]]: engine.208 live-observing, engine.280 ready
 - [[../research/2026-10-03-engine-204-205-game-day-economy-read-before]]: engine.204 in-progress, engine.281 in-progress
 - [[../plans/2026-09-22-initiative-budget-disbursement]]: engine.257 ready, engine.256 ready
@@ -24,8 +24,7 @@
 - [[../plans/2026-09-24-initiatives-in-the-world]]: engine.260 live-observing
 - [[../plans/2026-08-29-employment-system-cascade]]: civic.33 live-observing
 - [[../plans/2026-07-31-platform-ceiling-resilience]]: engine.95 in-progress
-- [[../plans/2026-09-29-sim-holiday-calendar]]: engine.273 ready
-- [[../plans/2026-08-21-citizen-archive]]: engine.90 ready
+- [[../plans/2026-09-29-sim-holiday-calendar]]: engine.273 in-progress
 - [[../plans/2026-10-03-citizen-pages-drive-canon]]: pipeline.70 live-observing
 - [[../plans/2026-07-11-agent-exchange-engine]]: engine.53 live-observing
 - [[../plans/2026-08-07-spacemolt-game-show]]: research.27 live-observing
@@ -44,6 +43,7 @@
 - [[../plans/2026-08-17-sheet-weight-reduction]]: engine.116 in-progress
 - [[../plans/2026-05-26-engine-27-wd-card-auto-invalidation]]: engine.27 ready
 - [[../plans/2026-07-31-engine-observability-integrity]]: infrastructure.6 ready
+- [[../research/2026-10-11-codex-engine194-cut]]: engine.194 live-observing
 - [[../plans/2026-09-28-storylines-keyed-to-engine-events]]: engine.270 ready
 - `docs/research/2026-10-08-codex-engine95-design.md`: engine.285 ready
 - [[../plans/2026-10-08-engine-286-game-of-life-events]]: engine.286 live-observing
@@ -98,10 +98,9 @@
 | engine.281 | Sports-week ladder + venue (a–d) LIVE since 2026-10-06. (e) the column surface folds into the engine.204/205 ripple + option-sync review (2026-10-07) | in-progress | engine-sheet / research-build | [[../research/2026-10-03-engine-204-205-game-day-economy-read-before]] §5 |
 | engine.273 | Holidays LIVE; first Second Dawn C131. **Open Court Week BUILT 2026-10-11** (position 6, `oakland` tier, citywide, shares the First Friday week like the season markers; first live C162) — **LIVE PROD `ae9278aa` 2026-10-11** (stage 3; 1004 @21/@22 clean; position 6 not reached on the bench, unit-proven). Meaning sentences approved as working lines (rb carries to desks); running-on-its-own week held until it happens | in-progress | engine-sheet / research-build | [[../plans/2026-09-29-sim-holiday-calendar]] §Builder's words (2026-10-07) |
 | engine.193 | Adversity tiers LIVE. **(b) BUILT + BENCH-PROVEN 2026-10-11** (`e3a85853`): the nine big employers' growth settles toward the class normal (`bizSettleRate` 0.05, `bizSettleMinStaff` 1000), 1004 @21 C111–C112 clean. **LIVE PROD `ae9278aa` 2026-10-11** (stage 3); first live C111 — read the nine Growth_Rates against [[../reference/DEPLOY_HISTORY]] §PROD ae9278aa. Then (a) budget squeeze on public employers; then a CAT-layer design for the builder before build | in-progress | engine-sheet | [[../plans/2026-09-10-inactivity-is-regression]] §engine.193 Builder's words (2026-10-07) |
-| engine.90 | Citizen Archive LIVE. **Cards verified + refreshed 2026-10-11:** all 56 archived POPIDs hold a wd-citizens card (the 56 card orphans vs Simulation_Ledger = exactly the archive set), but they were pre-exit (Allen Lopez: June card, 'mid-career'); `buildCitizenCards.js --apply --from-archive` PATCHed 56 / POST 0 / errors 0, census 1073 = 1073, POP-00026 reads `Status: Traded`. Done | done-pending-archive | engine-sheet | [[../plans/2026-08-21-citizen-archive]] §Changelog 2026-10-11 |
 | pipeline.70 | Read the staged C110 pieces for the story test, then flip; watch the first unattended Opus business run | live-observing | research-build | [[../plans/2026-10-03-citizen-pages-drive-canon]] |
 | engine.53 | Organic: the first exchange-line candidate in a street pool. Mon 2026-10-05 fanout read 2026-10-08: none, because no transcript sentence named that day's highlights (fog, Oaks; 0 of 66 turns) | live-observing | research-build | [[../plans/2026-07-11-agent-exchange-engine]] |
-| research.27 | Next unattended flights (TargetCycle-112 cast): pilot acts on the new rules/objective (contracts first) and a closed contract's credits reach the feed row + board (§3.2 acceptance, built 2026-10-11). Also Sat 2026-10-10 run: featured Citizen_Media_Usage rows for the C110 digest pilots (10-03 digest credited none; fixed 2026-10-08) | live-observing | research-build | [[../plans/2026-08-07-spacemolt-game-show]] §3.2 + §Post-ship (e) |
+| research.27 | Next unattended flight (20:30 CDT 2026-10-11): pilot runs the new rules, a closed contract's credits reach the feed row + board (§3.2 acceptance). Stations Bayline 6 / Oakland 12 minted, seats open. | live-observing | research-build | [[../plans/2026-08-07-spacemolt-game-show]] §3.2 + §Post-ship (e) |
 | engine.48 | Organic: the first T8 tension-seed result off the cron; none recorded yet | live-observing | research-build | [[../plans/2026-07-06-citizen-loop-deepening]] |
 | engine.201 | Fixed-cohort proof: 48 citizens drawn at C110 (output/engine201). Resnap after C111, C112, C113; trace at the C113 fire, Sun 2026-10-25, codex leading | live-observing | engine-sheet | [[../plans/2026-09-10-inactivity-is-regression]] §BUILD SPEC |
 | pipeline.68 | The 54 C110 mints need roster rows: linkCitizensToEmployers --fill-blanks-only, dry-run first. World-gap staff landed at C110 | ready | research-build | [[../plans/2026-09-07-beat-slices-from-sheets-plan]] |

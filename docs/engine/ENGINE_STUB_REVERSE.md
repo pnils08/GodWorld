@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 180 · **Functions mapped:** 1679 · **S.* fields:** 373 · **Sheets:** 61
+**Files scanned:** 180 · **Functions mapped:** 1685 · **S.* fields:** 374 · **Sheets:** 61
 
 ## S.* / ctx.summary reverse index
 
@@ -122,7 +122,7 @@
 | `S.cycleAuditIssues` | `phase06-analysis/applyCivicLoadIndicator.js::resetCycleAuditIssues_` | `phase06-analysis/applyCivicLoadIndicator.js::applyCivicLoadIndicator_` | 1 | 1 |
 | `S.cycleFinalizedAt` | `phase09-digest/finalizeCycleState.js::finalizeCycleState_` | _(none)_ | 1 | 0 |
 | `S.cycleFinalState` | `phase09-digest/finalizeCycleState.js::finalizeCycleState_` | _(none)_ | 1 | 0 |
-| `S.cycleId` | `phase01-config/godWorldEngine2.js::advanceWorldTime_`, `phase08-v3-chicago/v3Integration.js::v3Integration_` | `phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_`, `phase01-config/advanceSimulationCalendar.js::simYearOf_`, `phase01-config/godWorldEngine2.js::assertFireAdvanced_`, `phase01-config/godWorldEngine2.js::emitPhaseTimings_`, `phase01-config/godWorldEngine2.js::logEngineError_`, `phase01-config/godWorldEngine2.js::processIntake_`, …(+114 more) | 2 | 120 |
+| `S.cycleId` | `phase01-config/godWorldEngine2.js::advanceWorldTime_`, `phase08-v3-chicago/v3Integration.js::v3Integration_` | `phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_`, `phase01-config/advanceSimulationCalendar.js::simYearOf_`, `phase01-config/godWorldEngine2.js::assertFireAdvanced_`, `phase01-config/godWorldEngine2.js::emitPhaseTimings_`, `phase01-config/godWorldEngine2.js::logEngineError_`, `phase01-config/godWorldEngine2.js::processIntake_`, …(+115 more) | 2 | 121 |
 | `S.cycleInMonth` | `phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_` | `phase10-persistence/buildCyclePacket.js::buildCyclePacket_` | 1 | 1 |
 | `S.cycleOfYear` | `phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_` | `phase02-world-state/applySeasonWeights.js::applySeasonalWeights_`, `phase02-world-state/applyWeatherModel.js::applyWeatherModel_`, `phase02-world-state/calendarStorySeeds.js::applySeasonalStorySeeds_`, `phase05-citizens/generationalWealthEngine.js::collectPropertyTax_`, `phase07-evening-media/storyHook.js::storyHookEngine_`, `phase10-persistence/buildCyclePacket.js::buildCyclePacket_` | 1 | 6 |
 | `S.cyclePacket` | `phase10-persistence/buildCyclePacket.js::buildCyclePacket_` | _(none)_ | 1 | 0 |
@@ -331,6 +331,7 @@
 | `S.simDay` | `phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_` | _(none)_ | 1 | 0 |
 | `S.simMonth` | `phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_` | `phase02-world-state/applyWeatherModel.js::applyWeatherModel_`, `phase04-events/faithEventsEngine.js::runFaithEventsEngine_`, `phase05-citizens/runYouthEngine.js::runYouthEngine_`, `phase07-evening-media/mediaRoomIntake.js::getCurrentCalendarContext_` | 1 | 4 |
 | `S.simYear` | `phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_` | `phase01-config/advanceSimulationCalendar.js::simYearOf_`, `phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_`, `phase05-citizens/runYouthEngine.js::generateSchoolWideEvents_`, `phase07-evening-media/mediaRoomIntake.js::getCurrentCalendarContext_` | 1 | 4 |
+| `S.sportsAftermath` | `phase02-world-state/applySportsSeason.js::applySportsFeedTriggers_` | `phase02-world-state/applySportsSeason.js::applySportsFeedTriggers_`, `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_` | 1 | 2 |
 | `S.sportsAtmosphereEnabled` | `phase02-world-state/applySportsSeason.js::applySportsSeason_` | `phase02-world-state/applySeasonWeights.js::applySeasonalWeights_`, `phase02-world-state/calendarChaosWeights.js::applyChaosCategoryWeights_`, `phase03-population/applyDemographicDrift.js::applyDemographicDrift_`, `phase03-population/deriveDemographicDrift.js::deriveDemographicDrift_`, `phase03-population/updateNeighborhoodDemographics.js::updateNeighborhoodDemographics_`, `phase04-events/buildCityEvents.js::buildCityEvents_`, …(+3 more) | 1 | 9 |
 | `S.sportsCity` | `phase02-world-state/applySportsSeason.js::applySportsSeason_` | `phase01-config/godWorldEngine2.js::updateWorldPopulation_`, `phase02-world-state/applyCityDynamics.js::applyCityDynamics_`, `phase02-world-state/applySeasonWeights.js::applySeasonalWeights_`, `phase03-population/applyDemographicDrift.js::applyDemographicDrift_`, `phase03-population/generateCrisisSpikes.js::generateCrisisSpikes_`, `phase05-citizens/applyNamedCitizenSpotlight.js::applyNamedCitizenSpotlights_`, …(+23 more) | 1 | 29 |
 | `S.sportsEventTriggers` | `phase02-world-state/applySportsSeason.js::applySportsFeedTriggers_` | `phase07-evening-media/storyHook.js::storyHookEngine_` | 1 | 1 |

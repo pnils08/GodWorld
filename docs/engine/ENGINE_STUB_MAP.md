@@ -464,11 +464,15 @@
 - **buildActiveSportsFromOverride_(oaklandState)**
 
 - **applySportsFeedTriggers_(ctx)**
-  Reads: S.cycle, S.sentiment, S.sportsSentimentBoost, S.sportsWeek
-  Writes: S.sportsEventTriggers, S.sportsSentimentBoost
+  Reads: S.cycle, S.cycleId, S.sentiment, S.sportsAftermath, S.sportsSentimentBoost, S.sportsWeek
+  Writes: S.sportsAftermath, S.sportsEventTriggers, S.sportsSentimentBoost
   Sheets: Oakland_Sports_Feed
 
-- **processFeedSheet_(sheet, currentCycle, weeks)**
+- **processFeedSheet_(sheet, currentCycle, weeks, history)**
+
+- **reduceFeedTeamState_(data, cols, uptoCycle, feedTz)**
+
+- **feedTeamShare_(state)**
 
 - **parseWinPercentage_(record)**
 
@@ -1853,7 +1857,7 @@
 - **folkMemoryScopes_(memory, pop, hood, cycle, dialCell, bonds)**
 
 - **generateCitizensEvents_(ctx)**
-  Reads: S.biasIntents, S.citizenEventMemory, S.citizenEvents, S.cityDynamics, S.contentLedger, S.crimeByNeighborhood, S.crimeMetrics, S.cycle, S.cycleActiveCitizens, S.cycleId, S.economicMood, S.eventsGenerated, S.faithEvents, S.faithExposures, S.holiday, S.holidayPriority, S.initiativeEvents, S.isCreationDay, S.isFirstFriday, S.localEntities, S.neighborhoodDynamics, S.neighborhoodState, S.neighborhoodWeather, S.previousEvening, S.season, S.sportsCity, S.sportsFeedEntries, S.sportsSeason, S.sportsSentimentBoost, S.sportsWeek, S.storyHooks, S.templateCooldowns, S.transitState, S.undockedFeedEntries, S.undockedPilots, S.weather, S.worldEvents
+  Reads: S.biasIntents, S.citizenEventMemory, S.citizenEvents, S.cityDynamics, S.contentLedger, S.crimeByNeighborhood, S.crimeMetrics, S.cycle, S.cycleActiveCitizens, S.cycleId, S.economicMood, S.eventsGenerated, S.faithEvents, S.faithExposures, S.holiday, S.holidayPriority, S.initiativeEvents, S.isCreationDay, S.isFirstFriday, S.localEntities, S.neighborhoodDynamics, S.neighborhoodState, S.neighborhoodWeather, S.previousEvening, S.season, S.sportsAftermath, S.sportsCity, S.sportsFeedEntries, S.sportsSeason, S.sportsSentimentBoost, S.sportsWeek, S.storyHooks, S.templateCooldowns, S.transitState, S.undockedFeedEntries, S.undockedPilots, S.weather, S.worldEvents
   Writes: S.biasIntents, S.citizenEventMemory, S.citizenEvents, S.cycleActiveCitizens, S.eventsGenerated, S.faithExposures, S.folkMemory, S.householdMoments, S.minorsSkippedTexture, S.storyHooks, S.templateCooldowns
   Config: ctx.config.cycleCount, ctx.config.eclExclusiveMinLines, ctx.config.eclExclusivePools, ctx.config.folkMemoryWindow, ctx.config.gcSurfaceChance, ctx.config.hoodFloorSurfaceQuota, ctx.config.rngSeed
   Sheets: Content_Telemetry, Generic_Citizens, LifeHistory_Log
@@ -4594,6 +4598,15 @@
 
 - **sportsBarTerm_(weeks, hood, nightlifeOn)**
 
+- **sportsLastGameWeek_(historyByCycle, currentCycle)**
+
+- **sportsAftermathKind_(lastWeek, rawLens)**
+
+- **sportsAftermathShare_(lastShare, kind, quiet, rate)**
+
+- **sportsFadeRateConfig_(ctx)**
+  Config: ctx.config.sportsFadeRate
+
 ### textCrawler.js
 - **crawlAllTxtFiles(rootFolderId, outputFileName)**
 
@@ -4675,4 +4688,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1679
+**Functions mapped:** 1685

@@ -2,7 +2,7 @@
   "generated": "2026-10-11",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 180,
-  "functionsMapped": 1679,
+  "functionsMapped": 1685,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -655,6 +655,7 @@
         "phase02-world-state/applyEditionCoverageEffects.js::applyEditionCoverageEffects_",
         "phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_",
         "phase02-world-state/applyInitiativeImplementationEffects.js::loadCivicVoiceSentiment_",
+        "phase02-world-state/applySportsSeason.js::applySportsFeedTriggers_",
         "phase02-world-state/applySportsSeason.js::applySportsSeason_",
         "phase02-world-state/applyWeatherModel.js::applyWeatherModel_",
         "phase03-population/applyDemographicDrift.js::readHospitalCensusTail_",
@@ -2435,6 +2436,15 @@
         "phase02-world-state/applySportsSeason.js::applySportsSeason_"
       ],
       "readers": []
+    },
+    "sportsAftermath": {
+      "writers": [
+        "phase02-world-state/applySportsSeason.js::applySportsFeedTriggers_"
+      ],
+      "readers": [
+        "phase02-world-state/applySportsSeason.js::applySportsFeedTriggers_",
+        "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_"
+      ]
     },
     "sportsEventTriggers": {
       "writers": [

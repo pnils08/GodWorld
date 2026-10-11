@@ -309,10 +309,11 @@
   Writes: S.franchiseWeight, S.franchiseWeightCarry
 
 - **seedCarriedStorySeeds_(ctx, S)**
-  Reads: S.storySeedsCarried
-  Writes: S.storySeedsCarried
+  Reads: S.contractSeedsCarried
 
-- **storySeedsCarryFault_(ctx, target, event, message)**
+- **seedCarriedSeedList_(ctx, S, key, field, label)**
+
+- **storySeedsCarryFault_(ctx, key, target, event, message)**
 
 - **seedCarriedActivityObservations_(ctx, S)**
   Reads: S.activityObservations
@@ -341,7 +342,7 @@
 - **hoodCharacterBase_(profile)**
 
 - **applyCityDynamics_(ctx)**
-  Reads: S.absoluteCycle, S.activityObservations, S.approvalNeighborhoodEffects, S.cityCapacity, S.cityDynamics, S.cityDynamicsLag, S.commuteInbound, S.crimeByNeighborhood, S.crimeEvents, S.crimeSpikes, S.cycleId, S.editionNeighborhoodEffects, S.editionSentimentBoost, S.eventsGenerated, S.holiday, S.holidayPriority, S.initiativeImplementationEffects, S.initiativeNeighborhoodEffects, S.isCreationDay, S.isFirstFriday, S.manualDynamicsInputs, S.mediaCount, S.mediaCoverage, S.neighborhoodDemographics, S.neighborhoodDynamics, S.neighborhoodEconomies, S.neighborhoodState, S.neighborhoodWeather, S.previousCityDynamics, S.previousCycleState, S.resetDynamicsMomentum, S.season, S.shockFlag, S.sportsCity, S.sportsSeason, S.sportsSentimentBoost, S.sportsWeek, S.storySeeds, S.storySeedsCarried, S.weather, S.weatherEvents, S.worldEvents
+  Reads: S.absoluteCycle, S.activityObservations, S.approvalNeighborhoodEffects, S.cityCapacity, S.cityDynamics, S.cityDynamicsLag, S.commuteInbound, S.contractSeedsCarried, S.crimeByNeighborhood, S.crimeEvents, S.crimeSpikes, S.cycleId, S.editionNeighborhoodEffects, S.editionSentimentBoost, S.eventsGenerated, S.holiday, S.holidayPriority, S.initiativeImplementationEffects, S.initiativeNeighborhoodEffects, S.isCreationDay, S.isFirstFriday, S.manualDynamicsInputs, S.mediaCount, S.mediaCoverage, S.neighborhoodDemographics, S.neighborhoodDynamics, S.neighborhoodEconomies, S.neighborhoodState, S.neighborhoodWeather, S.previousCityDynamics, S.previousCycleState, S.resetDynamicsMomentum, S.season, S.shockFlag, S.sportsCity, S.sportsSeason, S.sportsSentimentBoost, S.sportsWeek, S.storySeeds, S.storySeedsCarried, S.weather, S.weatherEvents, S.worldEvents
   Writes: S.activityObservations, S.cityDynamics, S.cityDynamicsCapacity, S.cityDynamicsLag, S.neighborhoodDemographics, S.neighborhoodDynamics, S.previousCityDynamics, S.previousNeighborhoodDynamics, S.resetDynamicsMomentum, S.storySeedSignals
   Config: ctx.config.cityCapacity, ctx.config.cycleCount, ctx.config.manualDynamicsInputs
 
@@ -3332,10 +3333,16 @@
 - **compactNeighborhoodEconomies_(ne)**
 
 - **compactActivityObservations_(S)**
-  Reads: S.activityObservations, S.crimeEvents, S.crimeMetrics, S.crimeSpikes, S.cycle, S.cycleId, S.editionSentimentBoost, S.eventsGenerated, S.mediaCount, S.mediaCoverage, S.mediaEffects, S.storySeedSignals, S.storySeeds, S.storySeedsCarried, S.worldEvents
+  Reads: S.activityObservations, S.crimeEvents, S.crimeMetrics, S.crimeSpikes, S.cycle, S.cycleId, S.editionSentimentBoost, S.eventsGenerated, S.mediaCount, S.mediaCoverage, S.mediaEffects, S.storySeedSignals, S.storySeeds, S.worldEvents
 
 - **compactStorySeeds_(S)**
-  Reads: S.cycle, S.cycleId, S.storySeeds
+  Reads: S.storySeeds
+
+- **compactContractSeeds_(S)**
+  Reads: S.contractSeeds
+
+- **compactSeedList_(S, seeds, mapRow)**
+  Reads: S.cycle, S.cycleId
 
 - **compactNeighborhoodDynamics_(nd)**
 
@@ -4623,4 +4630,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1658
+**Functions mapped:** 1661

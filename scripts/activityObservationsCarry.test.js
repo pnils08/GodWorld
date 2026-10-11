@@ -249,7 +249,7 @@ console.log('engine.228 — activity observations carry');
   w.sb.loadPreviousCycleState_(D);
   check('F4: Cycle 111 opens no seeds — Cycle 109\'s deck is not replayed', D.summary.storySeedsCarried === undefined);
   w.sb.applyCityDynamics_(seedCanon(w.sb, D));
-  check('F4: Phase 2 on the empty night reads no seeds — 0 against the carried baseline (ratio 0, no lift), not a replayed deck', D.summary.storySeedSignals.totalWeighted === 0 && D.summary.storySeedSignals.citywideX === 0 && D.summary.storySeedSignals.citywideBaseline > 0, JSON.stringify([D.summary.storySeedSignals.citywideX, D.summary.storySeedSignals.citywideBaseline]));
+  check('F4: Phase 2 on the empty night reads no seeds — no list read (listsRead 0), so no comparable baseline, ratio 1, no lift; not a replayed deck', D.summary.storySeedSignals.totalWeighted === 0 && D.summary.storySeedSignals.listsRead === 0 && D.summary.storySeedSignals.citywideBaseline === null && D.summary.storySeedSignals.citywideX === 1, JSON.stringify([D.summary.storySeedSignals.citywideX, D.summary.storySeedSignals.citywideBaseline]));
 
   // codex F4/F5: a stale blob (two Cycles old) is refused with a diagnostic + Engine_Errors row, never replayed; a malformed one likewise
   const errs = [];
@@ -273,6 +273,57 @@ console.log('engine.228 — activity observations carry');
   const G2 = ctxFor(110);
   shape.sb.loadPreviousCycleState_(G2);
   check('F5: a mis-shaped blob (no seeds array) is the same fault path', G2.summary.storySeedsCarried === undefined && errs3.length === 1 && /no seeds array/.test(errs3[0]));
+}
+
+// ── engine.288: the newsroom's hooded contract deck rides a second carry into the same gates ──
+{
+  const near = (a, b, e) => Math.abs(a - b) <= (e === undefined ? 1e-9 : e);
+  const w = world();
+  const deck = (hood, cls, dom, mag) => ({ seedId: 'x', cycle: 108, desk: 'civic', domain: dom || 'GENERAL', neighborhood: hood, what: 'crime +5', why: 'because', magnitude: mag === undefined ? 5 : mag, seedClass: cls || 'major' });
+  const c = w.sb.compactContractSeeds_({ cycleId: 108, contractSeeds: [deck('Fruitvale', 'major', 'SAFETY'), deck('Dimond', 'texture', 'ECONOMIC', 0.5), deck('Citywide', 'major', 'COMMUNITY'), { seedId: 'y', neighborhood: 'Laurel', what: '' }] });
+  check('288 compact: deck rows map onto the engine list\'s own levels — major → priority 3 / contract-major, texture → 2 / contract-texture; ECONOMIC → BUSINESS; `Citywide` kept as written; a row with no `what` skipped; magnitude rides along',
+    c.cycle === 108 && c.count === 4 && c.seeds.length === 3 && c.seeds[0].p === 3 && c.seeds[0].t === 'contract-major' && c.seeds[0].n === 'Fruitvale' && c.seeds[0].d === 'SAFETY' && c.seeds[0].m === 5 &&
+    c.seeds.find(x => x.n === 'Dimond').p === 2 && c.seeds.find(x => x.n === 'Dimond').t === 'contract-texture' && c.seeds.find(x => x.n === 'Dimond').d === 'BUSINESS' && c.seeds.find(x => x.n === 'Citywide').n === 'Citywide', JSON.stringify(c));
+  check('288 compact: an empty deck → an empty, stamped blob (the F4 rule holds for the second key)', JSON.stringify(w.sb.compactContractSeeds_({ cycleId: 108, contractSeeds: [] })) === JSON.stringify({ cycle: 108, count: 0, calendarContext: null, seeds: [] }));
+
+  // Cycle 108: engine list only (the Task 18 world) → recorded as seedLists 1 at Cycle 109
+  const mk = (hood, p, dom) => ({ text: 'seed text', neighborhood: hood, priority: p, domain: dom || 'GENERAL', seedType: 'signal', calendarContext: { holiday: 'none', isFirstFriday: false, isCreationDay: false, sportsSeason: 'off-season' } });
+  const A = ctxFor(108); w.sb.loadPreviousCycleState_(A); w.sb.applyCityDynamics_(seedCanon(w.sb, A));
+  A.summary.eventsGenerated = 12; A.summary.worldEvents = new Array(9); A.summary.storySeeds = [mk('Dimond', 3), mk('', 2), mk('Laurel', 2)]; A.summary.contractSeeds = [];
+  w.sb.finalizeCycleState_(A); w.sb.savePreviousCycleState_(A);
+  check('288 save: both keys written at Cycle 108 — the deck key carries an empty stamped blob when the deck is empty', w.props.PREV_STORY_SEEDS_JSON_CYCLE === '108' && w.props.PREV_CONTRACT_SEEDS_JSON_CYCLE === '108' && JSON.parse(w.props.PREV_CONTRACT_SEEDS_JSON).seeds.length === 0);
+  const B = ctxFor(109); w.sb.loadPreviousCycleState_(B);
+  check('288 load: an empty deck blob opens nothing; the engine list opens as before', B.summary.contractSeedsCarried === undefined && B.summary.storySeedsCarried.length === 3);
+  w.sb.applyCityDynamics_(seedCanon(w.sb, B));
+  check('288 Phase 2: engine list only → listsRead 1, engineSeeds 3, deckSeeds 0', B.summary.storySeedSignals.listsRead === 1 && B.summary.storySeedSignals.engineSeeds === 3 && B.summary.storySeedSignals.deckSeeds === 0);
+  B.summary.eventsGenerated = 12; B.summary.worldEvents = new Array(9); B.summary.storySeeds = A.summary.storySeeds.slice();
+  B.summary.contractSeeds = [deck('Fruitvale', 'major', 'SAFETY'), deck('Fruitvale', 'major', 'COMMUNITY'), deck('Glenview', 'texture', 'GENERAL'), deck('Citywide', 'major', 'COMMUNITY'), deck('West Oakland', 'major', 'ECONOMIC')];
+  w.sb.finalizeCycleState_(B); w.sb.savePreviousCycleState_(B);
+  const e109 = JSON.parse(w.props.PREV_ACTIVITY_OBS_JSON).history.slice(-1)[0];
+  check('288 record: the Cycle that read one list records seedLists 1 beside its citywide read', e109.seedLists === 1 && e109.citywideSeedWeight > 0 && e109.seedHoodsActive === 2, JSON.stringify(e109));
+  // Cycle 110: both lists for the first time
+  const C = ctxFor(110); w.sb.loadPreviousCycleState_(C);
+  const dc = C.summary.contractSeedsCarried;
+  check('288 load: the deck opens as S.contractSeedsCarried — 5 rows re-shaped (priority 3/2, contract-* types, BUSINESS for ECONOMIC, magnitude kept), S.storySeedsCarried untouched beside it',
+    Array.isArray(dc) && dc.length === 5 && dc[0].priority === 3 && dc[0].seedType === 'contract-major' && dc.find(x => x.neighborhood === 'Glenview').priority === 2 && dc.find(x => x.neighborhood === 'West Oakland').domain === 'BUSINESS' && dc[0].magnitude === 5 && C.summary.storySeedsCarried.length === 3, JSON.stringify(dc && dc[0]));
+  w.sb.applyCityDynamics_(seedCanon(w.sb, C));
+  const sig = C.summary.storySeedSignals;
+  check('288 Phase 2: both lists feed the same gates — listsRead 2; Fruitvale carries deck weight (two majors) above Dimond (one engine seed); Glenview and West Oakland active only through the deck; `Citywide` goes to the citywide term',
+    sig.listsRead === 2 && sig.engineSeeds === 3 && sig.deckSeeds === 5 && sig.byHood.Fruitvale.weighted > sig.byHood.Dimond.weighted && sig.byHood.Glenview.weighted > 0 && sig.byHood['West Oakland'].weighted > 0 && sig.byDomainHood['West Oakland'].BUSINESS > 0 && sig.citywideWeighted > 0,
+    JSON.stringify({ F: sig.byHood.Fruitvale, D: sig.byHood.Dimond, cw: sig.citywideWeighted }));
+  check('288 Phase 2: the first two-list Cycle has no comparable baseline (the Cycle-109 entry was one list) → ratio 1, no citywide lift', sig.citywideBaseline === null && sig.citywideX === 1);
+  C.summary.eventsGenerated = 12; C.summary.worldEvents = new Array(9); C.summary.storySeeds = A.summary.storySeeds.slice(); C.summary.contractSeeds = B.summary.contractSeeds.slice();
+  w.sb.finalizeCycleState_(C); w.sb.savePreviousCycleState_(C);
+  const hist = JSON.parse(w.props.PREV_ACTIVITY_OBS_JSON).history;
+  check('288 record: Cycle 110 recorded seedLists 2 with its own citywide read; Cycle 109 kept seedLists 1', hist.find(h => h.cycle === 110).seedLists === 2 && hist.find(h => h.cycle === 109).seedLists === 1 && hist.find(h => h.cycle === 110).seedHoodsActive === 5, JSON.stringify(hist.slice(-2)));
+  const D2 = ctxFor(111); w.sb.loadPreviousCycleState_(D2); w.sb.applyCityDynamics_(seedCanon(w.sb, D2));
+  check('288 next Cycle: the baseline is the two-list read only (Cycle 110), the same week reads ratio 1.0', near(D2.summary.storySeedSignals.citywideBaseline, hist.find(h => h.cycle === 110).citywideSeedWeight) && Math.abs(D2.summary.storySeedSignals.citywideX - 1) < 0.01, JSON.stringify([D2.summary.storySeedSignals.citywideBaseline, D2.summary.storySeedSignals.citywideX]));
+  // the deck key has the same stale / malformed walls
+  const st = world(); const errs = []; st.sb.logEngineError_ = (ctx, phase, err) => errs.push(err.message);
+  st.props.PREV_CYCLE_STATE_JSON = JSON.stringify({ cycle: 109, econMood: 55 }); st.props.PREV_CYCLE_STATE_JSON_CYCLE = '109';
+  st.props.PREV_CONTRACT_SEEDS_JSON = JSON.stringify({ cycle: 107, count: 1, calendarContext: null, seeds: [{ n: 'Dimond', d: 'SAFETY', p: 3, t: 'contract-major' }] }); st.props.PREV_CONTRACT_SEEDS_JSON_CYCLE = '107';
+  const E = ctxFor(110); st.sb.loadPreviousCycleState_(E);
+  check('288: a stale deck blob is refused with its own key named in the Engine_Errors row and the diagnostic', E.summary.contractSeedsCarried === undefined && errs.length === 1 && /PREV_CONTRACT_SEEDS_JSON is from cycle 107/.test(errs[0]) && st.sb.CARRY_FORWARD_DIAG.some(d => d.key === 'PREV_CONTRACT_SEEDS_JSON' && d.event === 'stale'), JSON.stringify(errs));
 }
 
 console.log('\n' + passed + ' passed, ' + failed + ' failed');

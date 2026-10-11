@@ -281,7 +281,7 @@ function loadPreviousCycleState_(ctx) {
       seedCarriedEconomicMood_(S);
       seedCarriedNeighborhoodEconomies_(ctx, S);
       seedCarriedActivityObservations_(ctx, S);   // engine.228
-      seedCarriedStorySeeds_(ctx, S);             // engine.214 Task 18a
+      seedCarriedStorySeeds_(ctx, S);             // engine.214 Task 18a + engine.288 (both seed lists)
       seedCarriedCityDynamics_(ctx, S);           // engine.195
       seedCarriedRelocationFlow_(ctx, S);         // engine.249
       seedCarriedFranchiseWeight_(ctx, S);        // engine.209
@@ -396,23 +396,29 @@ function seedCarriedFranchiseWeight_(ctx, S) {
  * Replay / dry-run (target 0) skips the stamp check as loadCarryForwardBlob_ does.
  */
 function seedCarriedStorySeeds_(ctx, S) {
-  if (Array.isArray(S.storySeedsCarried) && S.storySeedsCarried.length) return;
+  seedCarriedSeedList_(ctx, S, 'PREV_STORY_SEEDS_JSON', 'storySeedsCarried', 'story seed');
+  // engine.288: the newsroom's hooded contract deck, same shape, own key → S.contractSeedsCarried
+  seedCarriedSeedList_(ctx, S, 'PREV_CONTRACT_SEEDS_JSON', 'contractSeedsCarried', 'contract seed');
+}
+
+function seedCarriedSeedList_(ctx, S, key, field, label) {
+  if (Array.isArray(S[field]) && S[field].length) return;
   var target = carryForwardCycleId_(ctx);
   if (ctx && ctx.mode && (ctx.mode.replay || ctx.mode.dryRun)) target = 0;
   var json = null;
   var readErr = null;
-  try { json = loadCarryForwardBlob_(ctx, 'PREV_STORY_SEEDS_JSON', target); } catch (e) { json = null; readErr = e; }
-  if (readErr) { storySeedsCarryFault_(ctx, target, 'read-failed', 'PREV_STORY_SEEDS_JSON read failed: ' + (readErr && readErr.message)); return; }
+  try { json = loadCarryForwardBlob_(ctx, key, target); } catch (e) { json = null; readErr = e; }
+  if (readErr) { storySeedsCarryFault_(ctx, key, target, 'read-failed', key + ' read failed: ' + (readErr && readErr.message)); return; }
   if (!json) return;   // first fire on this code: no blob anywhere, no seeds, every seed ratio 1
   var carried;
-  try { carried = JSON.parse(json); } catch (e) { storySeedsCarryFault_(ctx, target, 'malformed', 'PREV_STORY_SEEDS_JSON is not JSON (' + json.length + ' chars)'); return; }
-  if (!carried || typeof carried !== 'object' || !Array.isArray(carried.seeds)) { storySeedsCarryFault_(ctx, target, 'malformed', 'PREV_STORY_SEEDS_JSON has no seeds array'); return; }
+  try { carried = JSON.parse(json); } catch (e) { storySeedsCarryFault_(ctx, key, target, 'malformed', key + ' is not JSON (' + json.length + ' chars)'); return; }
+  if (!carried || typeof carried !== 'object' || !Array.isArray(carried.seeds)) { storySeedsCarryFault_(ctx, key, target, 'malformed', key + ' has no seeds array'); return; }
   var stamped = Number(carried.cycle) || 0;
   if (target && stamped && stamped !== target - 1) {
-    storySeedsCarryFault_(ctx, target, 'stale', 'PREV_STORY_SEEDS_JSON is from cycle ' + stamped + ', not last night (' + (target - 1) + ') — Phase 9 did not save; not replayed');
+    storySeedsCarryFault_(ctx, key, target, 'stale', key + ' is from cycle ' + stamped + ', not last night (' + (target - 1) + ') — Phase 9 did not save; not replayed');
     return;
   }
-  if (!carried.seeds.length) { Logger.log('seedCarriedStorySeeds_: cycle ' + stamped + ' produced no seeds — Phase 2 reads none'); return; }
+  if (!carried.seeds.length) { Logger.log('seedCarriedSeedList_: ' + key + ' cycle ' + stamped + ' produced no seeds — Phase 2 reads none'); return; }
   var cc = (carried.calendarContext && typeof carried.calendarContext === 'object') ? carried.calendarContext : null;
   var out = [];
   for (var i = 0; i < carried.seeds.length; i++) {
@@ -424,19 +430,20 @@ function seedCarriedStorySeeds_(ctx, S) {
       domain: String(sd.d || 'GENERAL'),
       priority: isFinite(Number(sd.p)) && Number(sd.p) > 0 ? Number(sd.p) : 1,
       seedType: String(sd.t || 'signal'),
+      magnitude: isFinite(Number(sd.m)) ? Number(sd.m) : undefined,   // engine.288: the deck's magnitude rides along for the record
       calendarContext: cc,
       carriedFromCycle: Number(carried.cycle) || 0
     });
   }
   if (out.length) {
-    S.storySeedsCarried = out;
-    Logger.log('seedCarriedStorySeeds_: ' + out.length + ' story seed(s) from cycle ' + (carried.cycle || '?') + ' opened for Phase 2 (the seed gates\' input)');
+    S[field] = out;
+    Logger.log('seedCarriedSeedList_: ' + out.length + ' ' + label + '(s) from cycle ' + (carried.cycle || '?') + ' opened as S.' + field + ' for Phase 2 (the seed gates\' input)');
   }
 }
 
 /** engine.214 Task 18a fault path: a carry diagnostic + an Engine_Errors row (the loader keeps running — the Cycle reads no seeds). */
-function storySeedsCarryFault_(ctx, target, event, message) {
-  CARRY_FORWARD_DIAG.push({ key: 'PREV_STORY_SEEDS_JSON', event: event, cycleId: target });
+function storySeedsCarryFault_(ctx, key, target, event, message) {
+  CARRY_FORWARD_DIAG.push({ key: key, event: event, cycleId: target });
   Logger.log('seedCarriedStorySeeds_: ' + message);
   if (typeof logEngineError_ === 'function') logEngineError_(ctx, 'Phase1-PrevCycleState', new Error('seedCarriedStorySeeds_: ' + message));
 }

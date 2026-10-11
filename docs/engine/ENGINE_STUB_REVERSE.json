@@ -2,7 +2,7 @@
   "generated": "2026-10-10",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 180,
-  "functionsMapped": 1658,
+  "functionsMapped": 1661,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -742,7 +742,7 @@
         "phase09-digest/applyCompressionDigestSummary.js::applyCompressedDigestSummary_",
         "phase09-digest/applyCycleWeight.js::applyCycleWeight_",
         "phase09-digest/finalizeCycleState.js::compactActivityObservations_",
-        "phase09-digest/finalizeCycleState.js::compactStorySeeds_",
+        "phase09-digest/finalizeCycleState.js::compactSeedList_",
         "phase09-digest/finalizeCycleState.js::finalizeCycleState_",
         "phase09-digest/finalizeCycleState.js::snapshotEveningForCarryForward_",
         "phase10-persistence/buildCyclePacket.js::buildCyclePacket_",
@@ -783,7 +783,7 @@
         "phase09-digest/applyCompressionDigestSummary.js::applyCompressedDigestSummary_",
         "phase09-digest/applyCycleWeight.js::applyCycleWeight_",
         "phase09-digest/finalizeCycleState.js::compactActivityObservations_",
-        "phase09-digest/finalizeCycleState.js::compactStorySeeds_",
+        "phase09-digest/finalizeCycleState.js::compactSeedList_",
         "phase09-digest/finalizeCycleState.js::finalizeCycleState_",
         "utilities/rippleLedger.js::recordRipple_"
       ]
@@ -932,6 +932,7 @@
         "phase01-config/godWorldEngine2.js::runCyclePhases_",
         "phase01-config/godWorldEngine2.js::runWorldCycleLocked_",
         "phase04-events/chaosCarsEngine.js::runChaosEvent_",
+        "phase09-digest/finalizeCycleState.js::compactContractSeeds_",
         "phase10-persistence/saveV3Seeds.js::saveV3Seeds_"
       ]
     },
@@ -1848,14 +1849,11 @@
         "utilities/sportsWeekRecord.js::driftFranchiseWeight_"
       ]
     },
-    "storySeedsCarried": {
-      "writers": [
-        "phase01-config/loadPreviousEvening.js::seedCarriedStorySeeds_"
-      ],
+    "contractSeedsCarried": {
+      "writers": [],
       "readers": [
         "phase01-config/loadPreviousEvening.js::seedCarriedStorySeeds_",
-        "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
-        "phase09-digest/finalizeCycleState.js::compactActivityObservations_"
+        "phase02-world-state/applyCityDynamics.js::applyCityDynamics_"
       ]
     },
     "activityObservations": {
@@ -2202,6 +2200,12 @@
         "phase07-evening-media/cityEveningSystems.js::buildCityEveningSystems_",
         "phase08-v3-chicago/v3NeighborhoodWriter.js::saveV3NeighborhoodMap_",
         "utilities/sportsWeekRecord.js::driftFranchiseWeight_"
+      ]
+    },
+    "storySeedsCarried": {
+      "writers": [],
+      "readers": [
+        "phase02-world-state/applyCityDynamics.js::applyCityDynamics_"
       ]
     },
     "weatherEvents": {

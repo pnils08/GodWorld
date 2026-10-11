@@ -528,6 +528,14 @@ function savePreviousCycleState_(ctx) {
       saveCarryForwardBlob_(ctx, 'PREV_STORY_SEEDS_JSON', seedJson, snapshot.cycle);
       Logger.log('savePreviousCycleState_: Saved ' + seedJson.length + ' bytes of story seeds (' + seedCarry.seeds.length + ' of ' + seedCarry.count + ') for cycle ' + snapshot.cycle);
     }
+    // engine.288 (builder 2026-10-10 evening, "both lists"): the newsroom's hooded contract deck rides
+    // its own key on the same shape, so a hood that makes the paper feels it in Phase 2.
+    var deckCarry = compactContractSeeds_(S);
+    if (deckCarry) {
+      var deckJson = JSON.stringify(deckCarry);
+      saveCarryForwardBlob_(ctx, 'PREV_CONTRACT_SEEDS_JSON', deckJson, snapshot.cycle);
+      Logger.log('savePreviousCycleState_: Saved ' + deckJson.length + ' bytes of contract seeds (' + deckCarry.seeds.length + ' of ' + deckCarry.count + ') for cycle ' + snapshot.cycle);
+    }
     // engine.195 (builder 2026-09-27, mood inertia): the city dynamics momentum carrier rides its
     // OWN key (~10 numbers, ~200 chars). Without it the Phase-2 momentum blend always saw prev =
     // null — each Cycle opened on a city with no memory of last week's mood.
@@ -640,8 +648,10 @@ function compactActivityObservations_(S) {
   // when Phase 2 ran on carried seeds — a Cycle that had none yet would write a fake 0 into the
   // baseline and hand the next real week a free top tier.
   var ss = S.storySeedSignals;
-  if (ss && Array.isArray(S.storySeedsCarried) && S.storySeedsCarried.length && isFinite(Number(ss.citywideWeighted))) {
+  var listsRead = ss ? Number(ss.listsRead) : 0;
+  if (ss && listsRead > 0 && isFinite(Number(ss.citywideWeighted))) {
     entry.citywideSeedWeight = Math.round(Number(ss.citywideWeighted) * 100) / 100;
+    entry.seedLists = listsRead;   // engine.288: 1 = the engine list only, 2 = engine list + contract deck — the baseline reads only entries of the same mix
     var active = 0;
     for (var hk in (ss.byHood || {})) { if (ss.byHood.hasOwnProperty(hk) && Number(ss.byHood[hk] && ss.byHood[hk].weighted) > 0) active++; }
     entry.seedHoodsActive = active;
@@ -657,6 +667,7 @@ function compactActivityObservations_(S) {
     if (h.coverageScore !== undefined && h.coverageScore !== null && isFinite(Number(h.coverageScore))) o.coverageScore = Number(h.coverageScore);
     if (h.citywideSeedWeight !== undefined && h.citywideSeedWeight !== null && isFinite(Number(h.citywideSeedWeight))) o.citywideSeedWeight = Number(h.citywideSeedWeight);   // engine.214 Task 18b
     if (h.seedHoodsActive !== undefined && h.seedHoodsActive !== null && isFinite(Number(h.seedHoodsActive))) o.seedHoodsActive = Number(h.seedHoodsActive);
+    if (h.seedLists !== undefined && h.seedLists !== null && isFinite(Number(h.seedLists))) o.seedLists = Number(h.seedLists);   // engine.288
     out.push(o);
   }
   out.push(entry);
@@ -674,18 +685,40 @@ function compactActivityObservations_(S) {
  * blob in place, and the loader would reopen a two-Cycle-old deck as "last night".
  */
 function compactStorySeeds_(S) {
-  var seeds = (S && Array.isArray(S.storySeeds)) ? S.storySeeds : [];
+  return compactSeedList_(S, (S && Array.isArray(S.storySeeds)) ? S.storySeeds : [], function(sd) {
+    return { n: String(sd.neighborhood || ''), d: String(sd.domain || 'GENERAL'),
+      p: isFinite(Number(sd.priority)) && Number(sd.priority) > 0 ? Number(sd.priority) : 1, t: String(sd.seedType || 'signal') };
+  });
+}
+
+/**
+ * engine.288 (builder 2026-10-10 evening: "Agree with you on the second option" — the mood gates read the
+ * newsroom's hooded contract deck AS WELL AS the engine's own list). S.contractSeeds (Phase7-ContractSeeds →
+ * Story_Seed_Deck) carries desk / domain / neighborhood / magnitude / seedClass, not priority or seedType, so
+ * each row is mapped onto the engine list's OWN live levels, not a new rate: seedClass `major` → priority 3
+ * (the engine list's top level on the bench, C111–C113: 1 ×11–16, 2 ×16–17, 3 ×2–3), `texture` → 2 (the
+ * engine's own texture seeds sit at 2); seedType `contract-major` / `contract-texture` (no type multiplier);
+ * domain ECONOMIC → BUSINESS (the deck's business desk is the gate's BUSINESS domain), the rest as written.
+ * `Citywide` / `CITYWIDE` / a council district stay as written and fall to the citywide term in Phase 2.
+ */
+function compactContractSeeds_(S) {
+  return compactSeedList_(S, (S && Array.isArray(S.contractSeeds)) ? S.contractSeeds : [], function(sd) {
+    var cls = String(sd.seedClass || 'texture').toLowerCase();
+    var dom = String(sd.domain || 'GENERAL').toUpperCase();
+    if (dom === 'ECONOMIC') dom = 'BUSINESS';
+    return { n: String(sd.neighborhood || ''), d: dom, p: cls === 'major' ? 3 : 2, t: 'contract-' + (cls === 'major' ? 'major' : 'texture'),
+      m: isFinite(Number(sd.magnitude)) ? Math.round(Number(sd.magnitude) * 100) / 100 : 0 };
+  });
+}
+
+/** Shared compactor for the two seed carries (engine.214 Task 18a / engine.288): text-bearing rows only, mapped, sorted by priority, cap 60. */
+function compactSeedList_(S, seeds, mapRow) {
   var out = [];
   var cc = null;
   for (var i = 0; i < seeds.length; i++) {
     var sd = seeds[i];
-    if (!sd || typeof sd !== 'object' || !sd.text) continue;
-    out.push({
-      n: String(sd.neighborhood || ''),
-      d: String(sd.domain || 'GENERAL'),
-      p: isFinite(Number(sd.priority)) && Number(sd.priority) > 0 ? Number(sd.priority) : 1,
-      t: String(sd.seedType || 'signal')
-    });
+    if (!sd || typeof sd !== 'object' || !(sd.text || sd.what)) continue;   // the engine list carries `text`, the contract deck `what`
+    out.push(mapRow(sd));
     if (!cc && sd.calendarContext && typeof sd.calendarContext === 'object') {
       cc = {
         holiday: sd.calendarContext.holiday || '',

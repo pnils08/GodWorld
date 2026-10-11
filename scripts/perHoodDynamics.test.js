@@ -173,6 +173,20 @@ console.log('engine.214 — mood per hood');
     (top.nd.Dimond.culturalActivity / flat.nd.Dimond.culturalActivity).toFixed(4) + ' ' + (top.nd.Dimond.communityEngagement / flat.nd.Dimond.communityEngagement).toFixed(4));
   check('Task 18b: a 1.4× week is the mid tier — cultural ×1.05 on every hood, and less sentiment than the 2.0× week',
     HOODS.every(h => near(mid.nd[h].culturalActivity / flat.nd[h].culturalActivity, 1.05, 0.01) && mid.nd[h].sentiment > flat.nd[h].sentiment && mid.nd[h].sentiment < top.nd[h].sentiment));
+  // engine.288: the newsroom's contract deck (S.contractSeedsCarried) reads through the same gates, on the same scale
+  const dk = (hood, p, dom) => ({ text: 'carried seed', neighborhood: hood, priority: p, domain: dom || 'GENERAL', seedType: p >= 3 ? 'contract-major' : 'contract-texture' });
+  const deckOnly = run({ summary: { contractSeedsCarried: [dk('Dimond', 3, 'SAFETY'), dk('Laurel', 2), dk('Glenview', 2), dk('Citywide', 3, 'COMMUNITY')] } });
+  check('288: the deck alone feeds the hood grain (listsRead 1, deckSeeds 4) — Dimond (3) at 1.5× the active median (2) fires the mid tier (cultural ×1.05), Laurel at the median nothing; `Citywide` goes to the citywide term',
+    deckOnly.S.storySeedSignals.listsRead === 1 && deckOnly.S.storySeedSignals.deckSeeds === 4 && deckOnly.S.storySeedSignals.byHood.Dimond.weighted === 3 && deckOnly.S.storySeedSignals.citywideWeighted === 3 &&
+    near(deckOnly.nd.Dimond.culturalActivity / none.nd.Dimond.culturalActivity, 1.05, 0.01) && near(deckOnly.nd.Laurel.culturalActivity / none.nd.Laurel.culturalActivity, 1, 0.01), (deckOnly.nd.Dimond.culturalActivity / none.nd.Dimond.culturalActivity).toFixed(4));
+  const both = run({ summary: { storySeedsCarried: [seed('Laurel', 2)], contractSeedsCarried: [dk('Laurel', 3, 'SAFETY'), dk('Dimond', 2), dk('Glenview', 2)] } });
+  check('288: both lists sum per hood (Laurel 2 + 3 = 5), listsRead 2', both.S.storySeedSignals.listsRead === 2 && both.S.storySeedSignals.byHood.Laurel.weighted === 5 && both.S.storySeedSignals.byHood.Laurel.count === 2);
+  const oneListHist = { activityObservations: { history: [{ cycle: 117, citywideSeedWeight: 10 }, { cycle: 118, citywideSeedWeight: 10, seedLists: 1 }, { cycle: 119, citywideSeedWeight: 40, seedLists: 2 }] } };
+  const mixA = run({ summary: Object.assign({ storySeedsCarried: [seed('', 20)], contractSeedsCarried: [dk('Citywide', 3)] }, oneListHist) });
+  const mixB = run({ summary: Object.assign({ storySeedsCarried: [seed('', 20)] }, oneListHist) });
+  check('288: the citywide baseline reads only entries of the same list mix — two lists see the one two-list entry (40 → ratio 23/40), one list sees the one-list entries (10 → ratio 2.0); an entry without the field counts as one list',
+    mixA.S.storySeedSignals.citywideBaseline === 40 && near(mixA.S.storySeedSignals.citywideX, 23 / 40) && mixB.S.storySeedSignals.citywideBaseline === 10 && near(mixB.S.storySeedSignals.citywideX, 2),
+    JSON.stringify([mixA.S.storySeedSignals.citywideBaseline, mixA.S.storySeedSignals.citywideX, mixB.S.storySeedSignals.citywideBaseline, mixB.S.storySeedSignals.citywideX]));
   check('Task 18b: the citywide lift is uniform — no hood moves against another (the spread of sentiment across hoods is unchanged within 0.001)', (() => {
     const spread = r => { const v = HOODS.map(h => r.nd[h].sentiment); return Math.max(...v) - Math.min(...v); };
     return Math.abs(spread(top) - spread(flat)) < 0.001;

@@ -209,7 +209,14 @@ function applyCityDynamics_(ctx) {
   // Phase 1 as S.storySeedsCarried. This Cycle's S.storySeeds is written by Phase 7, after this phase —
   // it read [] here on every live fire, so no seed gate in this file had ever had input. No blob (first
   // fire on this code): no seeds, every seed ratio reads 1 — exactly what the gates read before.
-  var storySeeds = Array.isArray(S.storySeedsCarried) ? S.storySeedsCarried : [];
+  // engine.288 (builder 2026-10-10 evening, "both lists"): the newsroom's hooded contract deck (last night's
+  // Story_Seed_Deck rows, S.contractSeedsCarried) reads through the same gates as the engine's own list —
+  // a hood that makes the paper feels it. listsRead (0/1/2) is recorded on the activity history so the
+  // citywide baseline compares like with like across the change.
+  var engineSeeds = Array.isArray(S.storySeedsCarried) ? S.storySeedsCarried : [];
+  var deckSeeds = Array.isArray(S.contractSeedsCarried) ? S.contractSeedsCarried : [];
+  var storySeeds = engineSeeds.concat(deckSeeds);
+  var seedListsRead = (engineSeeds.length ? 1 : 0) + (deckSeeds.length ? 1 : 0);
   var eventsGenerated = Number(S.eventsGenerated || 0);
   // engine.45 T3b: crime inputs had no writer anywhere (trace K gap G1) — the
   // crime branches below ran on zero every cycle. Source is now the previous
@@ -1099,11 +1106,15 @@ function applyCityDynamics_(ctx) {
   // key, last n. Not rollingAvg_: its slice(0, -1) drops the latest entry because for the counts that
   // entry IS "now"; this read is taken fresh at Phase 2, so every carried Cycle is baseline. null when
   // no entry carries the key yet (the key arrived with this cut).
-  function citywideSeedBaseline_(hist, n) {
+  // engine.288: only entries read from the SAME mix of lists (seedLists; an entry without the field was the
+  // engine list alone = 1) — the week the deck joined is not compared against weeks it was absent.
+  function citywideSeedBaseline_(hist, n, listsRead) {
     var vals = [];
     for (var i = 0; i < (hist || []).length; i++) {
       var h = hist[i];
       if (!h || h.citywideSeedWeight === undefined || h.citywideSeedWeight === null) continue;
+      var hl = (h.seedLists === undefined || h.seedLists === null) ? 1 : Number(h.seedLists);
+      if (hl !== Number(listsRead)) continue;
       var v = Number(h.citywideSeedWeight);
       if (isFinite(v)) vals.push(v);
     }
@@ -1198,7 +1209,10 @@ function applyCityDynamics_(ctx) {
   // hood EVERY Cycle, so against the hood median the top tier would fire on every fire — a standing
   // +0.04 on all 22 hoods, the tax engine.188 removed (§15). Phase 9 records each Cycle's read as
   // `citywideSeedWeight` on the activity history; no baseline yet → ratio 1 → no lift.
-  seedSignals.citywideBaseline = citywideSeedBaseline_(obsHistAll, 6);
+  seedSignals.listsRead = seedListsRead;
+  seedSignals.engineSeeds = engineSeeds.length;
+  seedSignals.deckSeeds = deckSeeds.length;
+  seedSignals.citywideBaseline = citywideSeedBaseline_(obsHistAll, 6, seedListsRead);
   seedSignals.citywideX = (seedSignals.citywideBaseline !== null && seedSignals.citywideBaseline > 0)
     ? seedSignals.citywideWeighted / seedSignals.citywideBaseline : 1;
   S.storySeedSignals = seedSignals;

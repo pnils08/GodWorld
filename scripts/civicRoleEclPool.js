@@ -44,6 +44,14 @@ const KEYS = [
   'civicRole.mood.up', 'civicRole.mood.down',
   'civicRole.everyday.up', 'civicRole.everyday.down'
 ];
+// Builder 2026-10-11: "a larger event should carry more weight and lower probability than a small."
+// Weight and probability already ride the band (citizenDialMap.js:46-51, civicRoleBands_); the
+// text follows the same rule through band-keyed pools civicRole.<premise>.<dir>.<M|L>, tried
+// before the unbanded key, which stays the small / default pool. A medium is a gathering or a
+// pointed exchange with something at stake; a large is the block turning out — a week people
+// will still talk about. Still never an office fact.
+const BANDS = ['M', 'L'];
+KEYS.slice().forEach(function (k) { BANDS.forEach(function (b) { KEYS.push(k + '.' + b); }); });
 const TAGS = 'source:civicRole,auth:civicRole-t6';
 
 function pool(key, texts) {
@@ -294,6 +302,184 @@ const ROWS = [].concat(
     'A neighbor in {hood} said the block\'s one bench is broken and the one tree is dying, and asked which comes first.',
     'A dad in {hood} said the school crossing needs a guard and has needed one since his kid started.'
   ])
+  ,
+  // ================= MEDIUM =================
+  pool('civicRole.business.up.M', [
+    'The {hood} merchants\' breakfast asked them to say a few words, and the room was in a good mood about the quarter.',
+    'A dozen shop owners in {hood} walked the corridor with them, pointing out every new hire.',
+    'The {hood} corridor had a sidewalk sale that spilled around the corner, and the owners asked them to walk it.',
+    'A merchant in {hood} opened her books on the counter to show them the best month in years.',
+    'A new restaurant in {hood} held its soft opening and seated them at the family table.',
+    'Shop owners in {hood} pooled money for corridor lights and asked them to be there when they went on.'
+  ]),
+  pool('civicRole.business.down.M', [
+    'The {hood} merchants\' meeting ran long and hard, and every question was aimed at them.',
+    'A shop owner in {hood} walked them through an empty afternoon, register by register.',
+    'Six merchants in {hood} signed a letter about the corridor and handed it to them in person.',
+    'A restaurant owner in {hood} said he laid off two servers this week and wanted them to hear the names.',
+    'The {hood} corridor had three sale signs in a row, and an owner asked them to count.',
+    'A business owner in {hood} said the block feels like it is waiting for the city to notice, and then kept them there until they did.'
+  ]),
+  pool('civicRole.closure.down.M', [
+    'The crowd outside the closed shop in {hood} turned toward them when they arrived, and the questions came all at once.',
+    'Neighbors in {hood} held a small send-off for the closed shop and asked them to say something about what comes next.',
+    'The owner of the closed {hood} shop handed them the keys to look at and said this is what a lease looks like when it ends.',
+    'Merchants on the {hood} corridor met in the back of the café about the closure and wanted them in the room.',
+    'A line of regulars in {hood} wrote their names on the closed shop\'s window and asked them to read it.',
+    'A neighbor in {hood} brought a folder of the closed shop\'s history and put it in their hands.'
+  ]),
+  pool('civicRole.safety.up.M', [
+    'The {hood} block watch held its meeting on the sidewalk this week because, as one neighbor said, it finally could.',
+    'Parents in {hood} brought the kids back to the evening game at the park and asked them to throw the first pitch.',
+    'A dozen neighbors in {hood} walked the block with them after dark and nobody checked over a shoulder.',
+    'The {hood} night market reopened a late hour and the vendors asked them to open it.',
+    'A merchant in {hood} took the bars off the window in front of them and said the block is ready.',
+    'Neighbors in {hood} held a porch night that ran past eleven, and they were handed a chair.'
+  ]),
+  pool('civicRole.safety.down.M', [
+    'A room full of neighbors in {hood} wanted to know what the block gets this week, not next year.',
+    'A merchant in {hood} walked them past three storefronts with fresh damage and did not say a word until the end.',
+    'Parents in {hood} met them at the park gate and asked them to see the lock they bought themselves.',
+    'The {hood} block watch handed them a list of the week\'s incidents, in order, with addresses.',
+    'A neighbor in {hood} played them the porch camera footage on her phone while a crowd gathered behind.',
+    'A shop owner in {hood} said she is closing an hour early now, and the block heard her say it to them.'
+  ]),
+  pool('civicRole.initiative.up.M', [
+    'The site crew in {hood} invited the block to see the week\'s progress and the block came.',
+    'Neighbors in {hood} gathered at the project fence for a milestone and pulled them into the photo.',
+    'A merchant in {hood} said the project workers have become her lunch regulars, and introduced them one by one.',
+    'A community walk through the {hood} project site drew more neighbors than chairs.',
+    'A neighbor in {hood} said the project is the first thing on the block her kids are proud of, in front of a crowd.',
+    'The {hood} project posted its timeline on the fence and residents stood reading it with them.'
+  ]),
+  pool('civicRole.initiative.down.M', [
+    'Residents on the project block in {hood} met them in the street, over the noise, and made their point.',
+    'A merchant in {hood} shut her patio for the day because of the site noise and asked them to sit in it.',
+    'A dozen neighbors in {hood} signed a sheet about the construction detour and handed it over on the spot.',
+    'A resident in {hood} brought a jar of site dust from her windowsill and set it on the table.',
+    'The {hood} block meeting ran entirely on the project, and nobody left early.',
+    'Parents in {hood} walked them along the closed sidewalk with a stroller to show how it feels.'
+  ]),
+  pool('civicRole.mood.up.M', [
+    'A block in {hood} threw an unplanned street dinner and set a place for them.',
+    'The {hood} stoops were full this week, and every one of them had a word for them on the way past.',
+    'A neighbor in {hood} said the block is the happiest she has seen it, and the people around her agreed out loud.',
+    'The {hood} community garden had a harvest and sent them home with more than they could carry.',
+    'A porch concert in {hood} drew half the block and somebody handed them the tambourine.',
+    'A {hood} elder said this is what the neighborhood is supposed to feel like, and the porch applauded.'
+  ]),
+  pool('civicRole.mood.down.M', [
+    'A room in {hood} went quiet when they walked in, and stayed that way.',
+    'Two sides of a {hood} block argument stopped only long enough to ask them whose side the city is on.',
+    'A neighbor in {hood} stood up at the block meeting and said the street has lost its patience, and nobody disagreed.',
+    'The {hood} corner that used to be all greetings gave them a wide berth this week.',
+    'A merchant in {hood} said customers are snapping at each other, and then one did, right there.',
+    'A {hood} elder said the block has gone cold, and the people around her did not argue.'
+  ]),
+  pool('civicRole.everyday.up.M', [
+    'A {hood} block association invited them to the potluck and saved them the seat at the head of the table.',
+    'A family in {hood} named them in the toast at a backyard birthday.',
+    'The {hood} rec center kids made a banner with their name on it and hung it over the door.',
+    'A church in {hood} asked them to stand so the congregation could say thank you.',
+    'A {hood} elder gathered a dozen neighbors on her porch to tell them what the block appreciates.',
+    'The {hood} corner store put their photo up by the register with a note that said one of ours.',
+    'A teacher in {hood} brought her class to meet them and every kid had a question.',
+    'A {hood} barbershop went quiet when they walked in, then broke into applause.',
+    'Neighbors on a {hood} block chipped in for a cake with their name on it, for no occasion at all.',
+    'A {hood} little league team asked them to stand with the players for the team photo.',
+    'A couple in {hood} said they named them in their wedding speech, and showed the video.',
+    'A line at the {hood} farmers\' stand turned into a small crowd of people wanting to say something kind.'
+  ]),
+  pool('civicRole.everyday.down.M', [
+    'A {hood} block meeting turned into a list of unanswered calls, read aloud, with dates.',
+    'A neighbor in {hood} stood up at the community room and said the official is here now, so where were they, and the room nodded.',
+    'A family in {hood} said they stopped coming to the block meetings because nothing comes of them, and said it to a full porch.',
+    'A {hood} elder handed them a folder of letters, every one unanswered, in front of a dozen neighbors.',
+    'A teacher in {hood} said her class wrote to the city and got a form letter, and read it aloud.',
+    'A {hood} barbershop went quiet when they walked in and stayed quiet.',
+    'Neighbors on a {hood} block passed around a sign-up sheet for a complaint and filled two pages while they stood there.',
+    'A merchant in {hood} said the block has stopped expecting anything and the people in the shop agreed.',
+    'A {hood} coach said the kids asked why the city does not care and he did not have an answer, and asked them for one in front of the team.',
+    'A couple in {hood} said they are thinking about leaving the block, and said it in front of their neighbors.',
+    'A {hood} church group asked them to explain the delay and listened in silence.',
+    'A line at the {hood} corner store turned into a small crowd of people with the same complaint.'
+  ]),
+  // ================= LARGE =================
+  pool('civicRole.business.up.L', [
+    'The {hood} corridor closed to cars for a street festival the merchants organized themselves, and they were asked to open it.',
+    'Every storefront on the {hood} corridor had a hiring sign this week, and the merchants walked them the whole length to prove it.',
+    'A packed merchants\' night in {hood} ended with a standing thank-you aimed at them.',
+    'The {hood} corridor landed on the cover of the neighborhood paper as the block to watch, and the owners held a party about it.'
+  ]),
+  pool('civicRole.business.down.L', [
+    'The {hood} merchants filled the community room and asked them, one after another, what the city plans to do about the corridor.',
+    'Half the {hood} corridor posted the same handwritten sign in the window: we need customers, and a crowd met them under it.',
+    'A merchant in {hood} wept at the counter in front of a dozen regulars and asked them to see it.',
+    'The {hood} corridor\'s oldest owner announced to a packed room that he does not know how long he can hold on, and looked at them.'
+  ]),
+  pool('civicRole.closure.down.L', [
+    'The block in {hood} filled the sidewalk outside the closed shop and asked them, together, what comes next.',
+    'The {hood} corridor held a vigil for the closed shop with candles in the window and asked them to speak.',
+    'A full community room in {hood} wanted to know how many more closures the block should expect, and would not accept maybe.',
+    'The closed shop\'s owner in {hood} told a packed room exactly why the doors shut, and every face turned to them.'
+  ]),
+  pool('civicRole.safety.up.L', [
+    'The {hood} block threw its first night block party in years, and the whole street was out until midnight with them in the middle of it.',
+    'Parents in {hood} filled the park for an evening game, and a mother said into a microphone that the block feels safe again.',
+    'The {hood} merchants held a late-night open house the length of the corridor to mark the calm, and they walked it with a crowd.',
+    'A hundred neighbors in {hood} walked the block together after dark, and nobody flinched the whole way.'
+  ]),
+  pool('civicRole.safety.down.L', [
+    'A packed room in {hood} wanted to know what the city is doing about the block, and the questions came for an hour.',
+    'Parents in {hood} filled the park gate with signs and asked them to stand there until something changed.',
+    'The {hood} merchants closed the corridor an hour early together in protest and met them on the sidewalk.',
+    'A neighbor in {hood} stood on a porch in front of a crowd and said the block does not feel safe, and the crowd said it back.'
+  ]),
+  pool('civicRole.initiative.up.L', [
+    'The {hood} project hit a milestone and the whole block came to the fence for it, with them at the front.',
+    'A community celebration at the {hood} project site ran past dark and the crews stayed to join it.',
+    'Neighbors in {hood} unveiled a mural on the project fence they painted themselves, and handed them the first brush.',
+    'The {hood} project opened a public walkthrough and more people showed up than anyone planned for.'
+  ]),
+  pool('civicRole.initiative.down.L', [
+    'Residents filled the street beside the {hood} project with signs about the noise and the dust, and met them at the fence.',
+    'A packed room in {hood} spent the whole night on the project, and nobody in it was satisfied.',
+    'The {hood} block delivered a petition about the construction with hundreds of names, in person, in a crowd.',
+    'Parents in {hood} marched the closed sidewalk around the project with strollers and asked them to lead.'
+  ]),
+  pool('civicRole.mood.up.L', [
+    'The whole of a {hood} block was out on the street this week, tables end to end, and they were pulled into the middle of it.',
+    'A {hood} neighborhood festival filled the park and the stage called their name.',
+    'Neighbors in {hood} threw a surprise block celebration for no reason at all, and the whole street turned out.',
+    'A {hood} block renewed its vows, as one neighbor put it, with a street-long dinner and a toast that named them.'
+  ]),
+  pool('civicRole.mood.down.L', [
+    'A {hood} block meeting broke into open argument, and both sides turned on them before it ended.',
+    'The {hood} community room was packed and angry and nobody wanted to be the first to speak, until everyone did.',
+    'A {hood} street that used to greet them went silent as they passed, every porch, the whole block.',
+    'A {hood} elder said in front of a full room that the neighborhood has stopped trusting the city, and the room did not disagree.'
+  ]),
+  pool('civicRole.everyday.up.L', [
+    'The {hood} block threw a thank-you party in their name and the whole street came.',
+    'A {hood} church filled to the back and the pastor asked them to stand while the congregation applauded.',
+    'The {hood} rec center named its community night after them and the gym was full.',
+    'A line formed outside the {hood} library to shake their hand, and it was still there an hour later.',
+    'A {hood} little league ended its season by chanting their name from the dugout.',
+    'The whole of a {hood} block signed a banner that read thank you, and hung it across the street.',
+    'A packed {hood} community room gave them a standing ovation before they said a word.',
+    'A {hood} neighborhood festival put them on the stage and the crowd roared.'
+  ]),
+  pool('civicRole.everyday.down.L', [
+    'A packed {hood} community room asked them to leave until they had answers.',
+    'A {hood} block hung a banner across the street that read we are still waiting, and stood under it when they arrived.',
+    'A {hood} elder stood in front of a full room and read every unanswered letter aloud, with dates.',
+    'The {hood} rec center families walked out of the meeting together and left them at the table.',
+    'A {hood} church filled to the back and the pastor asked, in front of everyone, when the block would hear from the city.',
+    'A {hood} neighborhood meeting ran two hours and ended with the room chanting one word: when.',
+    'Hundreds of names on a {hood} petition were read into the room while they stood there.',
+    'A {hood} block turned its backs as they passed, every porch, and nobody said a word.'
+  ])
+
 );
 
 function norm(t) { return String(t || '').replace(/\s+/g, ' ').trim().toLowerCase(); }

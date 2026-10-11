@@ -152,22 +152,23 @@ const ROWS = [].concat(
     'Looked at the {hood} market numbers and the gap had narrowed.',
     'Walked the block in {hood} they would buy on, if they bought.'
   ]),
-  // S down — a stretched owner's small worry; no sale.
+  // S down — a renting household's small setback on the way to buying (codex F5: at-risk owners draw none of
+  // these; their only outcome is the standing sale). No purchase lost that was never held.
   pool('lifeEvent.home.down', [
-    'The property tax notice for the {hood} house sat on the counter for three days before anyone opened it.',
-    'A roofer in {hood} gave an estimate and it was a conversation.',
-    'The mortgage statement for the {hood} place arrived and the kitchen went quiet.',
-    'A neighbor in {hood} sold under asking and everyone on the block did the math.',
-    'Put off the furnace repair on the {hood} house one more month.',
-    'The {hood} house needs a thing fixed that is not getting fixed this month.',
-    'Moved money between accounts to cover the {hood} payment and did not mention it.',
-    'The insurance on the {hood} house went up and the renewal letter was long.',
-    'A contractor in {hood} said the word foundation and left a card.',
-    'Skipped the weekend out to make the {hood} payment with room to spare.',
-    'Looked up what the {hood} house would list for, and closed the tab.',
-    'The water heater in the {hood} house is on borrowed time and so is the budget.',
-    'A bank letter about the {hood} mortgage came with a phone number and a deadline.',
-    'The {hood} house feels like the biggest thing they own and the heaviest.'
+    'The rent on the {hood} place went up again and the down-payment folder got thinner by the same amount.',
+    'A house in {hood} they had been watching sold in a weekend to someone else.',
+    'Ran the numbers on a place in {hood} and this time they did not work.',
+    'A lender in {hood} said not yet, and the word yet did not help much.',
+    'The {hood} listing they had bookmarked came back with a higher price.',
+    'An open house in {hood} had a line out the door, and every person in it looked more ready than they felt.',
+    'The car needed work this month and the house fund paid for it.',
+    'A friend in {hood} who bought last year said the first year is the hardest, and did not smile.',
+    'Looked at the {hood} market numbers and the gap had widened.',
+    'The landlord in {hood} mentioned a renovation and what rent looks like after one.',
+    'A seller in {hood} took a higher offer the same afternoon theirs went in.',
+    'Spent a Sunday at open houses in {hood} and came home without talking about any of them.',
+    'The savings took a hit this month and the house talk at dinner stopped.',
+    'A unit in their {hood} building sold and the new owner is not renting it.'
   ]),
   // M up — a real break: the buying roll tripled this Cycle. Reads as a chance.
   pool('lifeEvent.home.up.M', [
@@ -180,16 +181,16 @@ const ROWS = [].concat(
     'A {hood} building went condo and the tenants got first right at the inside price.',
     'The seller of a {hood} house they loved said yes to a lower number than they had dared.'
   ]),
-  // M down — the buying roll is zero this Cycle / a stretched owner's real scare.
+  // M down — the buying roll is zero this Cycle: a renter's real setback toward owning.
   pool('lifeEvent.home.down.M', [
-    'The bank called about the {hood} mortgage and used the word delinquent.',
-    'The tax bill on the {hood} house arrived with a penalty attached.',
-    'An appraisal on the {hood} house came in below what they owe.',
-    'A letter about the {hood} mortgage set a date, and the date is soon.',
-    'The {hood} house needs a repair that costs more than they have, and it cannot wait.',
-    'Sat down with a counselor in {hood} about the mortgage and left with a folder.',
-    'The {hood} payment went out late for the first time.',
-    'A relative who had been helping with the {hood} house said they cannot anymore.'
+    'The lender in {hood} pulled the pre-approval after a second look at the numbers.',
+    'Lost the bid on the {hood} house to an all-cash offer.',
+    'The landlord in {hood} raised the rent enough that the house fund went backward this month.',
+    'The {hood} house they had an offer on failed inspection, and the deal with it.',
+    'A relative who had promised help with the down payment in {hood} said they cannot anymore.',
+    'The {hood} seller accepted their offer, then took a better one before the paperwork.',
+    'An unexpected bill emptied the house fund they had been building for {hood}.',
+    'The {hood} place they had been saving toward went to a buyer who did not need a loan.'
   ]),
   // L up — TEXT + " — $N down on $P"; no final period. Bought in their own hood.
   pool('lifeEvent.home.up.L', [

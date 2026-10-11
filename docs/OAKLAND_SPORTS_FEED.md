@@ -189,14 +189,39 @@ deployment was not reverified for this reference update.
 Record assignment uses the same `parseWinPercentage_` as sentiment: filler `0-0`
 or an unparseable value cannot erase a played record. A team with only `0-0`
 keeps it and contributes zero base sentiment; a played `0-3` remains informative.
-Blank and literal `-` fields preserve earlier values. Historical field
-carry-forward remains unchanged (engine.203d / D3 is unbuilt; ruled decay follows engine.210).
+Blank and literal `-` fields preserve earlier values.
 
-The reducer uses `canonicalSportsPhase_` for SeasonType before sentiment and
-season-trigger inference. Existing aliases apply, including `summer league`
-to `preseason`; unknown or blank phases fail closed to `off-season`. Multipliers
-are ×0.3 off-season, ×0.5 spring-training/preseason, ×2 playoffs/post-season,
-×3 championship, and ×1 for the other accepted phases.
+The reducer uses `canonicalSportsPhase_` for SeasonType before season-trigger
+inference. Existing aliases apply, including `summer league` to `preseason`;
+unknown or blank phases fail closed to `off-season`.
+
+### How the feed moves city mood (PROD `ae9278aa`, LIVE 2026-10-11 — engine.194 + engine.203d)
+
+What the engine reads, per franchise (A's, Oaks) per Cycle:
+
+1. **Were there games?** Only the `WeekRecord` marks count: each `H:W` / `H:L` / `A:W` / `A:L` is one game
+   (wins + losses = games that week). A row with no mark — `season-state`, `editorial-note`, a championship
+   write-up row — is not a game.
+2. **A week with games:** mood share = 0.5 × (the week's result against the franchise's own recent
+   expectation) × the round's reach (`SPORTS_REACH_`: preseason 0.15 … division series 0.60 … championship
+   1.00), capped at ±0.10. `Team Record`, `Streak`, `FanSentiment` and `MediaProfile` no longer move the
+   number — they stay story and trigger inputs.
+3. **A week without games:** the franchise speaks the aftermath of its last game week, read from the
+   `SeasonType` on that franchise's **last row** of that Cycle:
+   - `championship` and at least one win → **title**: the last week's share × `sportsFadeRate` (0.85) each
+     quiet Cycle;
+   - `championship` with no win, any playoff round (`playoffs`, `wild-card`, `division-series`,
+     `league-championship`, `finals` …), or a losing week → **elimination**: −|share| held one Cycle, then fading;
+   - anything else → a plain fade.
+   Below 0.01 the aftermath is zero. The C110 title (+0.10) reads +0.085 at C111, +0.072 at C112, and is spent
+   at C125 unless the A's play first — the next game week replaces it.
+
+Known holes (the engine should read the feed as the operator fills it — fixes not yet built):
+- **Row order:** title vs elimination comes from the franchise's *last* row in its last game week. A
+  championship write-up row entered *before* the game rows would read as an elimination.
+- **Gap week between rounds:** a playoff game week followed by a Cycle with no game rows reads as an
+  elimination, even when that Cycle's rows still say `playoffs`. The engine cannot tell a rest week from
+  being knocked out.
 
 Current effects include:
 
@@ -410,6 +435,8 @@ not mutate `Simulation_Ledger` and is assessed separately.
 The A's/Oaks active contract, packet exact-Cycle behavior, and handoff field
 coverage are repaired. Remaining gaps are:
 
+- engine.203d aftermath reads the last row's SeasonType (row order) and treats a no-game playoff week as
+  elimination — see §How the feed moves city mood, Known holes;
 - the Sheet setup utility does not cover columns P–T;
 - the preflight and dropdown utility do not share one validator;
 - A's roster context has wider reviewer coverage than Oaks roster context;
@@ -428,6 +455,7 @@ parsers, validators, and consumers through an approved implementation plan.
 
 ## Changelog
 
+- 2026-10-11 (engine-sheet) — §How the feed moves city mood: what counts as a game, game-week pricing (engine.194), the season aftermath (engine.203d), and the two known holes (row order, gap week). Removed the stale "203d unbuilt" and old phase-multiplier lines — PROD `ae9278aa` no longer uses them.
 - 2026-09-20 (engine-sheet) — `Team Record` (column H) is now Plain text on every data row; 14 cells Sheets had stored as dates (`4-1`, `7-2`, `10-3` …) were restored to text. Until PROD @105 the engine read a date-stored record as unreadable and fell back to the cycle's first text record (engine.247). The engine now converts a date back to `M-d`, and pre-flight warns on any date-stored record and runs the engine's own WeekRecord validator (a `WeekRecord` with games on a non-`game-result` row fails pre-flight).
 - 2026-09-16 (codex) — Corrected the retired off-season sentinel claim and distinguished computed neighborhood values from consumed effects; documented the interim WeekRecord draft guard and pending schema migration.
 

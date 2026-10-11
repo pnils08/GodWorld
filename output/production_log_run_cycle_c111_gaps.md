@@ -303,8 +303,9 @@
 ### G-EC49 — crime-outlier σ on a 0.5-wide band: two false `cover-as-story` HIGH anomalies [judgment] [math-anomaly] [MED]
 - Dimond ViolentCrimeIndex 23 at "−7.0σ" (mean 26.5, stddev 0.50); Laurel 26 at "+3.3σ" (stddev 0.76). `detectAnomalies` stddev floor too low for a 23–27 integer index; any 3-point move reads as a multi-σ event. Both overruled to suppress in engine_review_c111.md. Fix: stddev floor (≥1.0) or a min absolute delta on the crime subCheck.
 
-### G-EC50 — Port of Oakland Growth_Rate 12.69 → 9.38 in one Cycle [judgment] [math-anomaly] [LOW]
-- Settle (engine.193 b) accounts for −0.53 (5% of gap to norm 2). Remainder = chaos ship `berth_delay` start, port sector at full offset (engine.193 3b). Log: `ship berth_delay start on 178` — the echo (`bizShipEchoShare` 0.15) touched every non-port row. Verify at C112 the echo rows moved 0.15 × peak, not the full hit; read the ship's next phase.
+### G-EC50 — engine.193 (b) settle: magnitude unverified on all nine institutions; AC Transit flat, City +0.01 [judgment] [math-anomaly] [MED]
+- 7 of 9 fell 0.18–3.31; settle alone = 0.05 × (norm 2–3 − track) = −0.30…−0.53. Residual = weekly drift (cap ±1) on a retail-unwind week — plausible, not shown: `parts.settle` is computed per row (`applyBusinessDynamics.js:476`) and never logged. AC Transit 12.00 → 12.00 and City of Oakland 10.93 → 10.94 took no visible settle. Fix: one log line per institution (`name settle drift ship → growth`) so the C112 read is a number, not an inference; then explain the two flat rows.
+- Port of Oakland 12.69 → 9.38: settle (engine.193 b) accounts for −0.53 (5% of gap to norm 2). Remainder = chaos ship `berth_delay` start, port sector at full offset (engine.193 3b). Log: `ship berth_delay start on 178` — the echo (`bizShipEchoShare` 0.15) touched every non-port row. Verify at C112 the echo rows moved 0.15 × peak, not the full hit; read the ship's next phase.
 
 ### G-EC51 — generateGenericCitizens_ generated 8, ledger +7 (1,025 → 1,032) [judgment] [writeback-drift] [LOW]
 - Log line 109: `Generated 8 (baseCount=8)`. dumpLedger rowCount 1032 vs pre-fire 1025 (auditSimulationLedger). One row short or one pre-fire count off — reconcile against Generic_Citizens before C112.

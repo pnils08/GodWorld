@@ -84,7 +84,11 @@
     "a1722406-93b3-4ba5-afa9-61e4b82344d5",
     "05877c39-bde2-4acc-bbb2-506169187290",
     "419fc423-8d81-4a8e-9447-aaabe18e3958",
-    "4a0905d4-786c-41af-a485-4387d988b858"
+    "4a0905d4-786c-41af-a485-4387d988b858",
+    "32e10420-f828-4f5c-8b7a-bdf109c3f508",
+    "031d5364-a3d4-47db-b730-cad1e811baeb",
+    "fcca44cc-c930-4429-a807-668f3b8c24db",
+    "07783621-142e-4404-916d-7b58b0621a11"
   ],
   "decisions": {
     "5a519026-77a2-46c6-87ea-e9dcb5c229d1": {
@@ -706,6 +710,46 @@
       "reason": "Published Cycle Pulse edition, added to the permanent notebook by the Saturday run (cron-saturday-run.js stepPublish).",
       "evidence": [
         "editions/cycle_pulse_c110.txt"
+      ]
+    },
+    "32e10420-f828-4f5c-8b7a-bdf109c3f508": {
+      "title": "Lore: hal_richmond_deep_dive (Y3C3)",
+      "classification": "lore",
+      "reason": "Graded lore piece promoted out of quarantine by the rhea gate (pipeline.59); ledger-grounded deep background, not a published edition.",
+      "evidence": [
+        "Source file: output/lore-quarantine/hal_richmond_deep_dive.md",
+        "Cycle placement: Y3C3",
+        "Verdict: pass (rhea)"
+      ]
+    },
+    "031d5364-a3d4-47db-b730-cad1e811baeb": {
+      "title": "Lore: deep_dive_benji_dillon_c109 (Y3C5)",
+      "classification": "lore",
+      "reason": "Graded lore piece promoted out of quarantine by the rhea gate (pipeline.59); ledger-grounded deep background, not a published edition.",
+      "evidence": [
+        "Source file: output/lore-quarantine/deep_dive_benji_dillon_c109.md",
+        "Cycle placement: Y3C5",
+        "Verdict: pass (rhea)"
+      ]
+    },
+    "fcca44cc-c930-4429-a807-668f3b8c24db": {
+      "title": "Lore: deep_dive_isley_kelley (Y3C6)",
+      "classification": "lore",
+      "reason": "Graded lore piece promoted out of quarantine by the rhea gate (pipeline.59); ledger-grounded deep background, not a published edition.",
+      "evidence": [
+        "Source file: output/lore-quarantine/isley_kelley_profile/deep_dive_isley_kelley.md",
+        "Cycle placement: Y3C6",
+        "Verdict: pass (rhea)"
+      ]
+    },
+    "07783621-142e-4404-916d-7b58b0621a11": {
+      "title": "Lore: darrin_davis_deep_dive (Y3C7)",
+      "classification": "lore",
+      "reason": "Graded lore piece promoted out of quarantine by the rhea gate (pipeline.59); ledger-grounded deep background, not a published edition.",
+      "evidence": [
+        "Source file: output/lore-quarantine/darrin_davis_deep_dive.md",
+        "Cycle placement: Y3C7",
+        "Verdict: pass (rhea)"
       ]
     }
   }

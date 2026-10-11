@@ -25,7 +25,8 @@
  *   LifeHistory_Log intent, and (public premises) the hood pulse. Dials move
  *   downstream through the graded CivicRole tags in citizenDialMap.js.
  * - Text: ECL pools `civicRole.<premise>.<up|down>` (unconditioned, slot-free
- *   lines) when authored, the hardcoded pools below otherwise.
+ *   lines) when authored, the hardcoded pools below otherwise. Drawn without
+ *   replacement within a Cycle (builder 2026-10-11); repeats -> S.civicRoleDraws.
  * - Retired/resigned/scandal status lines removed — office facts belong to
  *   civic-mode and approval. Called after Phase5-BusinessDynamics so the
  *   business premise is this Cycle's.
@@ -244,21 +245,40 @@ function civicRoleEclLines_(S, premise, dir) {
   return out;
 }
 
-function civicRolePickText_(rng, S, premise, dir) {
+// Within one Cycle each pool is an urn drawn without replacement (builder 2026-10-11: "these
+// would only duplicate on purpose not for a lack of options"). A line holds round(Weight)
+// tickets (min 1), so Weight 2-3 is the "on purpose" repeat. Only an empty urn refills — every
+// draw after that is a forced repeat, counted in draws[key].forced. No cross-Cycle memory.
+function civicRolePickText_(rng, S, premise, dir, draws) {
+  var key = 'civicRole.' + premise + '.' + dir;
   var pool = civicRoleEclLines_(S, premise, dir);
   if (!pool.length) {
-    var hard = CIVIC_ROLE_TEXT_[premise][dir];
-    if (!hard || !hard.length) hard = CIVIC_ROLE_TEXT_.everyday[dir];
+    var hp = (CIVIC_ROLE_TEXT_[premise][dir] && CIVIC_ROLE_TEXT_[premise][dir].length) ? premise : 'everyday';
+    key = 'hardcoded.' + hp + '.' + dir;
+    var hard = CIVIC_ROLE_TEXT_[hp][dir];
     for (var i = 0; i < hard.length; i++) pool.push({ text: hard[i], weight: 1 });
   }
+  var urn = draws[key];
+  if (!urn) urn = draws[key] = { pool: pool.length, draws: 0, distinct: 0, forced: 0, round: 1, left: null, seen: {} };
+  var refill = function() {
+    urn.left = [];
+    for (var a = 0; a < pool.length; a++) urn.left.push(Math.max(1, Math.round(pool[a].weight)));
+  };
+  if (!urn.left) refill();
   var total = 0;
-  for (var j = 0; j < pool.length; j++) total += pool[j].weight;
-  var roll = rng() * total;
-  for (var k = 0; k < pool.length; k++) {
-    roll -= pool[k].weight;
-    if (roll < 0) return pool[k].text;
+  for (var j = 0; j < urn.left.length; j++) total += urn.left[j];
+  if (total === 0) { refill(); urn.round++; for (j = 0, total = 0; j < urn.left.length; j++) total += urn.left[j]; }
+  var roll = Math.floor(rng() * total), pick = urn.left.length - 1;
+  for (var k = 0; k < urn.left.length; k++) {
+    roll -= urn.left[k];
+    if (roll < 0) { pick = k; break; }
   }
-  return pool[pool.length - 1].text;
+  urn.left[pick]--;
+  urn.draws++;
+  if (urn.round > 1) urn.forced++;
+  var text = pool[pick].text;
+  if (!urn.seen[text]) { urn.seen[text] = true; urn.distinct++; }
+  return text;
 }
 
 function runCivicRoleEngine_(ctx) {
@@ -300,6 +320,7 @@ function runCivicRoleEngine_(ctx) {
     mood: civicRoleThirds_(S.neighborhoodDynamics || {}, 'sentiment')
   };
   var events = 0;
+  var draws = {};
 
   for (var r = 0; r < rows.length; r++) {
     var row = rows[r];
@@ -336,7 +357,7 @@ function runCivicRoleEngine_(ctx) {
     // the text is an everyday moment and the hood is not pulsed against its own fact.
     var against = premise.lean !== 0 && (dir === 'up' ? -1 : 1) === premise.lean;
     var textKey = against ? 'everyday' : premise.key;
-    var text = civicRolePickText_(rng, S, textKey, dir).replace(/\{hood\}/g, neighborhood);
+    var text = civicRolePickText_(rng, S, textKey, dir, draws).replace(/\{hood\}/g, neighborhood);
 
     var stamp = inWorldStamp_(ctx);
     var existing = row[iLife] ? row[iLife].toString() : "";
@@ -362,6 +383,17 @@ function runCivicRoleEngine_(ctx) {
     events++;
   }
 
+  // Per-pool draw record this Cycle: a repeat shows as forced (pool exhausted), never luck.
+  var drawStats = {}, forcedTotal = 0, forcedKeys = [];
+  for (var dk in draws) {
+    if (!draws.hasOwnProperty(dk)) continue;
+    var u = draws[dk];
+    drawStats[dk] = { pool: u.pool, draws: u.draws, distinct: u.distinct, forced: u.forced };
+    if (u.forced) { forcedTotal += u.forced; forcedKeys.push(dk + ' ' + u.forced + ' (' + u.draws + ' draws / ' + u.pool + ' lines)'); }
+  }
+  S.civicRoleDraws = drawStats;
+  if (forcedTotal) Logger.log('runCivicRoleEngine_: pool exhausted — ' + forcedTotal + ' forced repeat(s): ' + forcedKeys.join('; '));
+
   if (skipped.length) Logger.log('runCivicRoleEngine_: skipped ' + skipped.length + ' Active CIV row(s) with no POPID, hood or Tier 1-4: ' + skipped.join(', '));
 
   // Phase 42 §5.6: flip ctx.ledger.dirty; consolidated commit at Phase 10.
@@ -379,6 +411,7 @@ if (typeof module !== 'undefined' && module.exports) {
     civicRoleAura_: civicRoleAura_,
     civicRoleBands_: civicRoleBands_,
     civicRoleConfig_: civicRoleConfig_,
+    civicRolePickText_: civicRolePickText_,
     CIVIC_ROLE_REQUIRED_KEYS: CIVIC_ROLE_REQUIRED_KEYS,
     CIVIC_ROLE_TEXT_: CIVIC_ROLE_TEXT_
   };

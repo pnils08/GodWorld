@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-10",
+  "generated": "2026-10-11",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 180,
   "functionsMapped": 1662,
@@ -3643,6 +3643,12 @@
     "careerEvents": {
       "writers": [
         "phase05-citizens/runCareerEngine.js::runCareerEngine_"
+      ],
+      "readers": []
+    },
+    "civicRoleDraws": {
+      "writers": [
+        "phase05-citizens/runCivicRoleEngine.js::runCivicRoleEngine_"
       ],
       "readers": []
     },

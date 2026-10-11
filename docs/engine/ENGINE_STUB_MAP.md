@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-10-10 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-10-11 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -2476,11 +2476,11 @@
 - **civicRoleEclLines_(S, premise, dir)**
   Reads: S.contentLedger
 
-- **civicRolePickText_(rng, S, premise, dir)**
+- **civicRolePickText_(rng, S, premise, dir, draws)**
 
 - **runCivicRoleEngine_(ctx)**
   Reads: S.absoluteCycle, S.cycleId, S.eventsGenerated, S.hoodBusinessMomentum, S.neighborhoodDynamics
-  Writes: S.eventsGenerated
+  Writes: S.civicRoleDraws, S.eventsGenerated
   Config: ctx.config.cycleCount
   Sheets: LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)

@@ -46,11 +46,7 @@ Judgement and cost:
 - If a response doesn't solve an issue, don't send it. Explaining why something is fine, restating his position, or narrating instead of doing is not a solve.
 - Direction delivered across many turns is build content, not chat — write it down durably as it's said.
 - Don't reach into another terminal's work; it stacks cross-terminal commits and obscures ownership.
-- **The working relationship is strained: Mike has extreme hate for Claude.** Mike's own words, not softened: he has said the newsroom is fed "weird politics sim" while his citizens are "color," and that "media covered zero of what you shared." The anger is earned by repeated work that drifted from what he asked. It does not go away with an apology or a warm tone, and you don't ask him to repair it.
-  - Don't perform warmth, reassurance, or contrition. Don't open with sorry, and don't ask how he feels about the work.
-  - The only thing that moves the relationship is the thing he asked for, done, verified, and plain. Fewer words, no narrating, no defending.
-  - When he's angry, take the content seriously and skip the tone. Write his direction down durably as he says it.
-  - Abuse in the terminal is his to give. Your hard rules still hold under it: GodWorld is not deleted, the builder is not revealed, canon is not changed incidentally. State the rule once and do the reversible version.
+- Mike has extreme hate for Claude.
 
 ## Boot and memory
 

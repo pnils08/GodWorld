@@ -39,108 +39,93 @@ pointers:
 
 > "We will do a deep canon search on what each journalist has written to see who they are if it's not obvious."
 
-**Goal:** every seat on the weekly grid has a written purpose (what lane, why, whose lives it covers); every slice that fits a lane leads with the citizens who lived that lane this cycle; one seat reports on citizens whose week was the news, whatever lane it touched.
+**Goal:** the builder's three asks, in his words: "making sure each are writing for a purpose, what lane they cover and why", "injecting citizens lives into slices that make sense", and "deciding who is the journalist that should just report on random citizens". Nothing below decides any of them; they are decided with the builder, reporter by reporter.
 
-**Rows:** pipeline.73 · **Owner:** research-build (newsroom design) with engine-sheet (dump, kit, desk signal)
-
-## The problem, measured (2026-10-11)
-
-- **The desks are given systems, not people.** 13 of the 22 weekly seats write from a slice (`cron-desk-run.js:46`). Every slice is built from tabs that track systems: station counts, illness by neighborhood, the crime table, the fame table. The beat dump (`dumpBeatTabs.js` BEAT_TABS) does not include `LifeHistory_Log`, so no slice can see what a citizen lived.
-- **The other 9 seats draw from the desk signal.** C111 signal: civic 54, business 46, culture 20, sports 8 items. Citizens' lives get one pointer item ("milestones"), filtered by an 11-tag list (`buildWorldSummary.js:280`). Of 2,771 C111 log rows, the filter passes 21.
-- **Citizens appear, but as commentators.** C110: 6 of 9 pieces quote a citizen. 5 of those 6 quote reactions to someone else's story (the Oaks losing, a station's rider count, a clubhouse mood). 1 piece (Colin Phillips at Nino's) is about a citizen's own work. 0 pieces carry a LifeHistory event.
-- **Deacon Seymour, the gap at full size.** The A's manager rode an ambulance (workplace accident) C105, was "recovering, expected to be released soon", then "made a full recovery and returned to their duties". Health desk: no slice existed C105/C106. From C107 on, `buildHealthSlice.js` drops any sports figure from the hospital record by rule ("a pro athlete on the hospital record is a sports story"). Sports desks get feed rows only. He reached C108 only as a quoted manager on Danny Horn's slump.
-- **The life record is rich.** C105–C111 tag heads (live): Strain 254, Promotion 121, Career-Hired 14, LifeEvent-Promotion up/down 23, Business-Owner 9, Business-Gain 13, Relief (stabilization grants) 3, Hospitalized 2, Critical 1, Stabilized 1, Recovering 9, Recovery 4, Birth 4, Death 3, Retirement 6, Setback 5, Rivalry 4, Alliance 4, CivicRole up/down 16, Team 48, Graduation 2. Texture heads (Neighborhood 3,899, Daily 2,277, Civic Perception 1,880, Personal 1,412, Sports 1,240 …) are mood, not news.
-
-## Seat purpose table (draft — every row to be walked with the builder)
-
-The lane is what the seat covers. "Lives" is whose week leads the piece. Fed today is what the code hands the seat now.
-
-| Seat | Day | Lane | Why it exists | Lives it should lead with | Fed today |
-|---|---|---|---|---|---|
-| Carmen Delaine | Mon | Civic affairs | keeps officials honest | residents a council vote or grant touched (Relief, CivicRole rows) | desk-signal civic lane |
-| Business desk (Jordan Velez) | Mon | Economics & labor | the city's money as people's jobs | hired, promoted, passed over, owner, closed, casino loss, Strain | desk-signal business lane |
-| Dr. Lila Mezran | Mon | Health | hospital stays, illness, recovery | Hospitalized, Critical, Stabilized, Recovering, Recovery, Birth, Death — athletes included | health slice (illness by hood leads) |
-| Trevor Shimizu | Mon | Transit & infrastructure | how the city moves | transit workers; residents whose commute changed (no life tag yet) | transit slice |
-| Anthony Raines | Mon | A's beat | Mike's games | players' and staff's own weeks alongside the box score | Anthony slice / sports lane |
-| Luis Navarro | Tue | Investigations | records and silences | residents a stalled promise left waiting | desk-signal civic lane |
-| Rachel Torres | Tue | Public safety | crime, courts, custody | Setback (tickets), charges, custody, BoundaryCompromised | safety slice (crime table leads) |
-| Angela Reyes | Tue | Schools & youth | kids and teachers | Team (made the cut), Graduation, youth Education rows | schools slice |
-| Selena Grant | Tue | Oaks beat | the expansion build | Oaks players' and staff's own weeks | Oaks beat slice |
-| Jax Caldera | Wed | Accountability | ledger vs official story | citizens the broken mechanism hit | stink slice |
-| Noah Tan | Wed | Weather & environment | the ground under the city | residents the weather changed (no life tag yet) | environment slice |
-| Elliot Marbury | Wed | Data desk | numbers with a claim | one player's multi-year line | data-desk slice |
-| P Slayer | Wed | Fan heat | the fan's voice | fans' own weeks | P Slayer slice |
-| Tanya Cruz | Wed | Clubhouse access | real-time signal | players' own weeks (Deacon C105 belonged here or with Lila) | desk-signal sports lane |
-| Elliot Graye | Thu | Faith & quiet work | congregations | Faith rows; who a congregation carried this week | faith slice |
-| Simon Leary | Thu | Sports as civic architecture | the team in the city | — | desk-signal sports lane |
-| Hal Richmond | Thu | Senior historian | legacy, the long view | — | Hal slice / sports lane |
-| Talia Finch | Thu | Oaks from the street | who becomes a fan | fans' own weeks | Oaks ground slice |
-| Mason Ortega | Fri | Food & hospitality | restaurants as workplaces | kitchen and floor workers hired, promoted, burned out | desk-signal culture lane |
-| Kai Marston | Fri | Arts & entertainment | arts as a neighborhood act | artists' own weeks | arts slice (fame table) |
-| Sharon Okafor | Fri | Lifestyle — behavior and daily life | how people live | Birth, Death, Family, Relationship, Rivalry, Alliance, Retirement, Strain | lifestyle slice (fame table leads) |
-| Maria Keen | Fri | Neighborhood texture | one block | Relief, Maneuver-Retreat, Business-Owner, Family on that block | neighborhood slice |
-| Celeste Tran | Fri | Social trends | where the city is moving | — | trends slice |
-| Nia Rook | daily | UNDOCKED recap | who's up, who's down on the show | contestants' own weeks | UNDOCKED feed slice |
-
-**Not on the grid (live roster, Bay_Tribune_Oakland):** Lena Carrow (Field Reporter), Dana Reeve (Lead Journalist), Farrah Del Rio (Civic & Cultural Opinion), Reed Thompson (TWS Wire Reporter), Ariana Reyes (Gridiron Analytics), Mint Condition (Speculative Internet).
-
+**Rows:** pipeline.73 · **Owner:** research-build with engine-sheet
 
 ## Tasks
 
-Every code task gets an `engine-wiring` card for each function, field or tab it touches, plus a caller graph. Each one has a codex or agy review before it lands, is bench-proven, and is accepted on the next unattended desk run.
-
 | # | Task | Owner | Status |
 |---|------|-------|--------|
-| 1 | Walk the seat table with the builder, one seat at a time: what they do and why. Each row gets a builder-confirmed lane, a reason, and the lives it leads with. Where a journalist's identity is not obvious, it comes from a deep canon search of everything they have published (NotebookLM canon + `search_articles`), not from the agent file or the roster title. | Mags + builder | not started |
-| 2 | Pick the citizens' reporter: one seat whose job is citizens whose week was the news, in any lane (the casino loss, the divorce, the opening, the ambulance). Candidates: Lena Carrow (Field Reporter, unseated), Dana Reeve (Lead Journalist, unseated). Recommendation: Lena Carrow. | builder | not started |
-| 3 | Wiring cards and blast radius for `dumpBeatTabs.js` BEAT_TABS, `beatSliceKit.js` `wire().build/load`, `buildHealthSlice.js` `ineligible`, and `buildWorldSummary.js` `emitDeskSignal` and `WHO_LIVED_IT_TAGS`. Consumers of each: the 13 slice builders, `cron-desk-run.js`, `newsroom-fanout.js` laneSeeds, the six desk-signal readers, and the tests. | es | not started |
-| 4 | Dump what citizens lived: add `LifeHistory_Log` to the beat dump, windowed to the last 6 cycles so an arc rides whole (ambulance, then recovering, then recovered). | es | not started — a draft was written and reverted 2026-10-11 pending Task 3 |
-| 5 | Lived-event classes in the kit. These are allowlists on the tag head, mapped per seat lane: health, safety, schools, life, money, civic, neighborhood, faith. Texture heads are excluded. A shared lead-with-lives pass puts that lane's citizens first in people, facts, angle and hookLine. The system number moves to context and stays only where it states a change. Cache version bump. | es | not started — same reverted draft |
-| 6 | Health slice: athletes stay on the health record as citizens (Deacon's case). Decide with Task 1 whether a sports figure's hospital stay goes to Lila, Tanya, or both. | es + builder | not started |
-| 7 | Desk signal: one life item per citizen, with a handle, at the head of the civic, business, culture and sports lanes. This covers the 9 seats that have no slice. | es | not started |
-| 8 | Seat purpose into each agent's approach line and wake package, from the confirmed table (Task 1). | rb | not started |
-| 9 | Citizens' reporter seat: grid slot, agent, and a slice that takes the cycle's top lived events across every class. | rb + es | blocked on Task 2 |
+| 1 | Walk each reporter with the builder: what they do and why — their purpose and their lane. Where it is not obvious, a deep canon search of what they have written decides who they are. Each row of the table below is filled from that walk, not before. | Mags + builder | not started |
+| 2 | With the builder: which slices citizens' lives make sense in. | Mags + builder | not started |
+| 3 | With the builder: who is the journalist that just reports on random citizens. | builder | not started |
+| 4 | Any code that follows from 1–3 gets wiring cards, blast-radius checks and a review before it changes. | es | not started |
+
+## Reporter table (to be filled by Task 1)
+
+Seat and day are from the weekly grid (`scripts/newsroom-fanout.js:47`). The roster title is from the Bay_Tribune_Oakland tab. "Fed today" is what the code hands the seat now. Purpose, lane and why are blank until the walk.
+
+| Seat | Day | Roster title | Fed today | Purpose / lane / why |
+|---|---|---|---|---|
+| Carmen Delaine | Mon | Civic Affairs Reporter | desk-signal civic lane | |
+| Business desk (Jordan Velez) | Mon | Economics & Labor | desk-signal business lane | |
+| Dr. Lila Mezran | Mon | Health Desk | health slice | |
+| Trevor Shimizu | Mon | Transit & Infrastructure | transit slice | |
+| Anthony Raines | Mon | Lead Beat Reporter - Oakland A's | Anthony slice / sports lane | |
+| Luis Navarro | Tue | Investigations | desk-signal civic lane | |
+| Rachel Torres | Tue | Public Safety | safety slice | |
+| Angela Reyes | Tue | Education | schools slice | |
+| Selena Grant | Tue | Oaks Beat Reporter | Oaks beat slice | |
+| Jax Caldera | Wed | freelance accountability writer | stink slice | |
+| Noah Tan | Wed | Weather & Environment | environment slice | |
+| Elliot Marbury | Wed | Journalist, Data Desk | data-desk slice | |
+| P Slayer | Wed | Fan Columnist - Sports | P Slayer slice | |
+| Tanya Cruz | Wed | Sideline Reporter | desk-signal sports lane | |
+| Elliot Graye | Thu | Ethics & Faith Journalist | faith slice | |
+| Simon Leary | Thu | The Long View Columnist - Sports | desk-signal sports lane | |
+| Hal Richmond | Thu | Senior Historian | Hal slice / sports lane | |
+| Talia Finch | Thu | Oaks Ground Reporter | Oaks ground slice | |
+| Mason Ortega | Fri | Food & Hospitality | desk-signal culture lane | |
+| Kai Marston | Fri | Arts & Entertainment | arts slice | |
+| Sharon Okafor | Fri | Lifestyle | lifestyle slice | |
+| Maria Keen | Fri | Cultural Liaison | neighborhood slice | |
+| Celeste Tran | Fri | Social Trends | trends slice | |
+| Nia Rook | daily | UNDOCKED Recap Journalist | UNDOCKED feed slice | |
+
+On the roster but not on the grid: Lena Carrow (Field Reporter), Dana Reeve (Lead Journalist), Farrah Del Rio (Civic & Cultural Opinion), Reed Thompson (TWS Wire Reporter), Ariana Reyes (Data Analyst, Gridiron Analytics), Mint Condition (Speculative Internet).
+
+## Record (measured 2026-10-11, data only)
+
+- 13 of the 22 grid seats write from a slice (`scripts/cron-desk-run.js:46`). The slices are built from the beat-tab dump (`scripts/dumpBeatTabs.js`), which does not include `LifeHistory_Log`.
+- The other seats draw from the desk signal. C111: civic 54, business 46, culture 20, sports 8 items. Citizens' lives: one pointer item, filtered by `WHO_LIVED_IT_TAGS` (`scripts/buildWorldSummary.js:280`), which passed 21 of 2,771 C111 log rows.
+- C110 edition: 6 of 9 pieces quote a citizen, 5 of them on someone else's story; 1 piece (Colin Phillips, Nino's) on a citizen's own work; no LifeHistory event in any piece.
+- Deacon Seymour: ambulance (workplace accident) C105, then "recovering", then "full recovery, returned to duties". No health slice existed C105/C106. `buildHealthSlice.js` drops sports figures from the hospital record. He appears in C108 only as the manager quoted on Danny Horn.
+- A draft code change (LifeHistory into the dump, a lived-events pass in `beatSliceKit.js`) was written and reverted 2026-10-11 on the builder's instruction about reviews and wiring cards.
 
 ## Acceptance
 
-1. A Deacon-class event (a citizen hospitalized this cycle, athlete or not) reaches a seat's assignment as the lead story, proven by the next unattended desk run's fanout file and staged article.
-2. In one full desk week after landing, most slice-fed seats lead with a named citizen's own event, not a system table. Proven by the staged articles across that week.
-3. No seat's existing facts are lost. The system numbers are still on the slice as context. Proven by a slice diff before and after for all 13 seats, on the same cycle.
+1. Every reporter on the table has a purpose, lane and why that the builder confirmed.
+2. The builder has named the slices citizens' lives go into, and the journalist who reports on random citizens.
 
 ## Reviews reconciled
 
 | Review | Lane | Pointer | Result |
 |---|---|---|---|
-| advisor read of the diagnosis | es (advisor) | this session, 2026-10-11 | read-only — reach of the desk signal vs slices; LifeHistory missing from the dump; people[] carry a topic, never a week |
+| — | — | — | none yet |
 
 ### Agreed
 
 | # | Item | Held by | Sources |
 |---|---|---|---|
-| A1 | Desk-signal items never reach the 13 slice seats; a slice overrides the seed | es · advisor | cron-desk-run.js:1625 `story = beatSlice.story \|\| story` |
-| A2 | No slice can see LifeHistory; the dump lacks it | es · advisor | dumpBeatTabs.js BEAT_TABS |
-| A3 | Citizens are not private; a life event is news | builder | quote above, 2026-10-11 |
-| A4 | Carmen keeps politics; citizens outrank initiatives | builder | quote above, 2026-10-11 |
 
 ### Needs proof
 
 | # | Claim | Held by | Proof that settles it | Sources |
 |---|---|---|---|---|
-| P1 | Anthony, Hal and P Slayer seats read their own slice files, not the sports lane | es | wiring card on `cron-desk-run.js` enrich paths | cron-desk-run.js:1663 selectTypedSlice |
-| P2 | The Story_Hook_Deck already carries life events for some desks (July storyHook fix) | advisor | hook-deck HookType census vs LifeHistory tags, C105–C111 | output/beats/Story_Hook_Deck.jsonl |
 
 ### New concepts
 
 | # | Concept | Origin | What it adds | Status |
 |---|---|---|---|---|
-| N1 | Attach each person's own lived rows to every slice's people[], so even a system story quotes someone about their week | advisor | reach to all 13 seats in one place | adopted into Task 5 |
 
 ## Open questions
 
-- Should a Tier-2 A's manager be able to get hurt by the ambulance chaos event in the middle of a championship run? This is a sim judgement for the builder, outside this plan's code.
-- Why did the A's championship run go uncovered as a citizens' story? This blocks Task 1 for the sports seats.
+- Should a Tier-2 A's manager be able to get hurt by the ambulance event in the middle of a championship run? The builder raised it ("should he be able to get hurt like that?").
+- Why did the A's championship run go uncovered? The builder raised it ("The As are in a championship run and no one covers that?").
 
 ## Changelog
 
-- 2026-10-11 (engine-sheet) — Corrected: "tech reporter" was dictation for "each reporter"; the tech-seat section and open question removed.
-- 2026-10-11 (engine-sheet) — Created from builder direction S553. A draft kit and dump change was written and reverted, pending wiring cards and review.
+- 2026-10-11 (engine-sheet) — Rewritten to the builder's words: the author's own designs (lead-with-lives, per-seat life classes, a reporter recommendation, code tasks) removed; the builder said the plan misrepresented him.
+- 2026-10-11 (engine-sheet) — Corrected: "tech reporter" was dictation for "each reporter".
+- 2026-10-11 (engine-sheet) — Created.

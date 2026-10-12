@@ -152,6 +152,26 @@ console.log('\nTest 7: empty priors — only same-cycle subchecks possible (none
   assert('no patterns when no priors', found.length === 0, `got ${found.length}`);
 }
 
+console.log('\nTest 8: G-EC49 — crime σ floored at the city\'s typical weekly move');
+{
+  // The live C111 shape: Dimond 27 → 23 with a quiet own history (σ 0.5), the city moving 0–3 a week.
+  const hoods = { Dimond: [27, 23], Laurel: [23, 26], Temescal: [23, 21], Fruitvale: [29, 27], 'Ivy Hill': [23, 26], Uptown: [22, 20], Rockridge: [23, 23], Eastlake: [23, 25] };
+  const hist = { Dimond: [26, 27, 26, 27, 26, 27], Laurel: [23, 24, 22, 23, 24, 23] };
+  const priors = [110, 109, 108, 107, 106, 105].map((c, k) => ({ cycle: c, snapshots: { Crime_Metrics: Object.keys(hoods).map(n => ({ Neighborhood: n, ViolentCrimeIndex: k === 0 ? hoods[n][0] : (hist[n] ? hist[n][k] : hoods[n][0]) })) } }));
+  const run = (cur) => detector.detect({ cycle: 111, snapshot: { Simulation_Ledger: [], Civic_Office_Ledger: [], Neighborhood_Map: [], Crime_Metrics: Object.keys(cur).map(n => ({ Neighborhood: n, ViolentCrimeIndex: cur[n] })) }, prior: priors })
+    .filter(f => f.evidence.fields.subCheck === 'crime-outlier');
+  const live = run(Object.fromEntries(Object.keys(hoods).map(n => [n, hoods[n][1]])));
+  assert('C111 shape: Dimond −4 and Laurel +3 amid 2–3 point city moves → no outlier', live.length === 0, JSON.stringify(live.map(f => f.description)));
+  const spike = run(Object.assign(Object.fromEntries(Object.keys(hoods).map(n => [n, hoods[n][0]])), { Dimond: 36 }));
+  const d = spike.find(f => f.affectedEntities.neighborhoods[0] === 'Dimond');
+  assert('a 9-point jump while the rest of the city holds still still fires, σ at the 1.0 floor', d && d.evidence.fields.stddevFloor === '1.00' && Math.abs(parseFloat(d.evidence.fields.zScore)) >= 3, JSON.stringify(spike.map(f => f.evidence.fields)));
+  // σ 0 history used to be skipped outright — a gate that could not fire
+  const flat = detector.detect({ cycle: 111, snapshot: { Simulation_Ledger: [], Civic_Office_Ledger: [], Neighborhood_Map: [], Crime_Metrics: [{ Neighborhood: 'KONO', ViolentCrimeIndex: 30 }] },
+    prior: [110, 109, 108].map(c => ({ cycle: c, snapshots: { Crime_Metrics: [{ Neighborhood: 'KONO', ViolentCrimeIndex: 25 }] } })) })
+    .filter(f => f.evidence.fields.subCheck === 'crime-outlier');
+  assert('a flat history (σ 0) + a 5-point jump now fires instead of being skipped', flat.length === 1 && flat[0].evidence.fields.ownStddev === '0.00', JSON.stringify(flat));
+}
+
 console.log(`\n${passed} passed, ${failed} failed`);
 if (failed > 0) process.exit(1);
 process.exit(0);

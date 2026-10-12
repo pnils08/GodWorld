@@ -5,7 +5,8 @@
  *
  * Checks:
  *   - citizen income Δ > 50% (from prior audit's citizenIncomes map)
- *   - crime metric > 3σ from rolling mean (needs ≥3 prior audit snapshots)
+ *   - crime metric > 3σ from rolling mean (needs ≥3 prior audit snapshots; σ floored at the
+ *     city's typical weekly move, G-EC49)
  *   - council approval Δ > 20pts
  *   - neighborhood migration shift: |Δ| an outlier vs the city's hood deltas (engine.266) (proxy for population shift —
  *     Neighborhood_Map has no Population column)
@@ -13,7 +14,7 @@
  * Emits type: 'anomaly' patterns with historicalContext, triagePath, confidence.
  */
 
-const VERSION = '1.1.0';
+const VERSION = '1.2.0';
 
 const MIGRATION_SHIFT_MIN_STEPS = 3; // a 3-step swing on the −5..+5 scale is the floor for "sudden"
 
@@ -23,6 +24,30 @@ function migrationShiftBand(deltas) {
   const mean = deltas.reduce((a, b) => a + b, 0) / deltas.length;
   const sd = Math.sqrt(deltas.reduce((a, b) => a + (b - mean) * (b - mean), 0) / deltas.length);
   return Math.max(MIGRATION_SHIFT_MIN_STEPS, mean + 2 * sd);
+}
+
+// G-EC49 (C111): ViolentCrimeIndex is a 16–31 integer index that moves 0–4 a week in
+// ordinary weeks. A hood's own 6-week σ can be 0.5, so a routine 3–4 point move read
+// as −7σ (Dimond) and filed cover-as-story HIGH. σ is floored at the city's own typical
+// weekly move — RMS of the OTHER hoods' Δ since the last audit (leave-one-out, so one
+// real outlier cannot hide itself) — and never below this absolute minimum. A hood with
+// a perfectly flat history (σ 0, formerly skipped outright) can now fire.
+const CRIME_SD_FLOOR_MIN = 1.0;
+
+function crimeWeekMoves(crime, lastCrime) {
+  const moves = {};
+  for (const c of crime) {
+    const p = lastCrime.find(r => r.Neighborhood === c.Neighborhood);
+    const a = num(c.ViolentCrimeIndex), b = p ? num(p.ViolentCrimeIndex) : null;
+    if (c.Neighborhood && a != null && b != null) moves[c.Neighborhood] = a - b;
+  }
+  return moves;
+}
+
+function crimeSdFloor(moves, name) {
+  const others = Object.keys(moves).filter(k => k !== name).map(k => moves[k]);
+  const rms = others.length ? Math.sqrt(others.reduce((s, d) => s + d * d, 0) / others.length) : 0;
+  return Math.max(CRIME_SD_FLOOR_MIN, rms);
 }
 
 function num(v) {
@@ -178,6 +203,8 @@ function detect(ctx) {
 
   // --- Crime metric outlier (3σ from rolling 6-cycle mean) ---
   const crime = snapshot.Crime_Metrics || [];
+  const lastCrime = (prior[0] && prior[0].snapshots && prior[0].snapshots.Crime_Metrics) || [];
+  const weekMoves = crimeWeekMoves(crime, lastCrime);
   for (let i = 0; i < crime.length; i++) {
     const c = crime[i];
     const name = c.Neighborhood;
@@ -193,8 +220,9 @@ function detect(ctx) {
       .filter(v => v != null);
     if (history.length < 3) continue;
     const m = mean(history);
-    const sd = stddev(history);
-    if (sd === 0) continue;
+    const ownSd = stddev(history);
+    const sdFloor = crimeSdFloor(weekMoves, name);
+    const sd = Math.max(ownSd, sdFloor);
     const z = (curr - m) / sd;
     if (Math.abs(z) < 3) continue;
 
@@ -211,6 +239,8 @@ function detect(ctx) {
           ViolentCrimeIndex: curr,
           historicalMean: m.toFixed(2),
           stddev: sd.toFixed(2),
+          ownStddev: ownSd.toFixed(2),
+          stddevFloor: sdFloor.toFixed(2),
           zScore: z.toFixed(2),
           subCheck: 'crime-outlier',
         },

@@ -617,6 +617,17 @@ function applyBusinessDynamics_(ctx) {
     };
     biz.stated = stated;   // engine.193 (b): the institution scope
     var d = bizDriftOne_(cfg, biz, ps, inputs, cycle);
+    // G-EC50 (C111 read): the settle was computed per row and never shown, so an institution
+    // that held flat (AC Transit 12.00 → 12.00) could only be inferred. One line each — the
+    // settle, the capped drift and the drift's pre-vol parts, the ship — so the read is a number.
+    if (cfg.bizSettleRate > 0 && stated >= cfg.bizSettleMinStaff) {
+      var r2 = function(x) { return Math.round((Number(x) || 0) * 100) / 100; };
+      var dp = d.parts;
+      Logger.log('applyBusinessDynamics_ engine.193b settle: ' + String(iNm >= 0 ? row[iNm] : id) + ' (' + hood + ', ' + d.cls + ') ' +
+        biz.growth + ' → ' + d.growth + ' = settle ' + r2(dp.settle) + ' + drift ' + r2(d.drift) +
+        ' [ev ' + r2(dp.ev) + ', vit ' + r2(dp.vit) + ', pressure ' + r2(dp.pressure) + ', shock ' + r2(dp.shock) +
+        ', noise ' + r2(dp.noise) + '] + ship ' + r2(dp.ship));
+    }
     if (d.parts.sports) {
       barIds.push(id); barPp += d.parts.sports;
       var bhk = barHood || hood || '';

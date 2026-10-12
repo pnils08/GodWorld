@@ -385,6 +385,13 @@ console.log('engine.193 (b): institutions settle toward their class normal');
   assert('52 quiet Cycles: OUSD cools by quarters toward 2 and stays above the floor (' + path.join(' → ') + ')', path[0] < 6.5 && path[3] < 3.5 && path[3] > 0.5, path.join(','));
   const ship = mod.bizDriftOne_(CFG, Object.assign({}, ousd, { sector: 'Port & Logistics' }), { streak: 0, win: 0, ship: -3 }, Object.assign({}, quiet, { shipOffset: -3 }), 110);
   assert('the settle reads the shock-free track: a ship offset is not mistaken for cooling', Math.abs(ship.parts.settle - 0.05 * (2 - (8.89 + 3))) < 1e-9, String(ship.parts.settle));
+  // G-EC50: one log line per institution, none for a small business
+  const lines = []; global.Logger = { log: (m) => lines.push(String(m)) };
+  const bl = BL.map(r => r.slice()); bl[4][4] = 1201; bl[4][7] = 10.93;
+  mod.applyBusinessDynamics_(ctxWith({ bl: bl }));
+  global.Logger = { log: () => {} };
+  const settle = lines.filter(l => /engine\.193b settle:/.test(l));
+  assert('G-EC50: exactly one settle line, for the institution, carrying settle + drift + parts', settle.length === 1 && /City Hall \(Downtown, default\) 10\.93 → [\d.]+ = settle -0\.45 \+ drift -?[\d.]+ \[ev .*noise -?[\d.]+\] \+ ship 0/.test(settle[0]), JSON.stringify(settle));
 }
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

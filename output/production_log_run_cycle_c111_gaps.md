@@ -302,9 +302,11 @@
 
 ### G-EC49 — crime-outlier σ on a 0.5-wide band: two false `cover-as-story` HIGH anomalies [judgment] [math-anomaly] [MED]
 - Dimond ViolentCrimeIndex 23 at "−7.0σ" (mean 26.5, stddev 0.50); Laurel 26 at "+3.3σ" (stddev 0.76). `detectAnomalies` stddev floor too low for a 23–27 integer index; any 3-point move reads as a multi-σ event. Both overruled to suppress in engine_review_c111.md. Fix: stddev floor (≥1.0) or a min absolute delta on the crime subCheck.
+- **FIXED S553** (`scripts/engine-auditor/detectAnomalies.js` 1.2.0): σ floored at the city's typical weekly move — RMS of the other hoods' ΔViolentCrimeIndex since the last audit, min 1.0; a σ-0 history can now fire. Replay on the real C111 audit + 6 priors: old 1.1.0 flags Dimond −7.0σ / Laurel +3.3σ, new flags none; a 9-point solo jump still fires (test 8).
 
 ### G-EC50 — engine.193 (b) settle: magnitude unverified on all nine institutions; AC Transit flat, City +0.01 [judgment] [math-anomaly] [MED]
 - 7 of 9 fell 0.18–3.31; settle alone = 0.05 × (norm 2–3 − track) = −0.30…−0.53. Residual = weekly drift (cap ±1) on a retail-unwind week — plausible, not shown: `parts.settle` is computed per row (`applyBusinessDynamics.js:476`) and never logged. AC Transit 12.00 → 12.00 and City of Oakland 10.93 → 10.94 took no visible settle. Fix: one log line per institution (`name settle drift ship → growth`) so the C112 read is a number, not an inference; then explain the two flat rows.
+- **Log line BUILT S553** (`applyBusinessDynamics.js`, after `bizDriftOne_`): one `engine.193b settle:` line per institution — growth before → after = settle + capped drift [ev, vit, pressure, shock, noise pre-vol] + ship. Only writer of Growth_Rate is this function (grep), so the flats are computed, not overwritten; all three Downtown institutions (AC Transit, City, EBMUD) netted a positive drift (≈+0.50 / +0.46 / +0.31) against settle −0.50 / −0.45 / −0.49 — the parts get read off the C112 execution log.
 - Port of Oakland 12.69 → 9.38: settle (engine.193 b) accounts for −0.53 (5% of gap to norm 2). Remainder = chaos ship `berth_delay` start, port sector at full offset (engine.193 3b). Log: `ship berth_delay start on 178` — the echo (`bizShipEchoShare` 0.15) touched every non-port row. Verify at C112 the echo rows moved 0.15 × peak, not the full hit; read the ship's next phase.
 
 ### G-EC51 — generateGenericCitizens_ generated 8, ledger +7 (1,025 → 1,032) [judgment] [writeback-drift] [LOW]
@@ -332,3 +334,7 @@
 - A4 Step 2 §3/§4/§6: ctxMap ordering, header alignment, write-intent targets are read by eye; no pass/fail. C111 ctxMap ORDERING = engine.95 resume-path reads only (bench-proven) — a script could assert "no new undefaulted read since last fire".
 - A5 Step 4 + Step 6 judgment: model-written (the premium seat). Everything else in the chain (5–5.85) ran unattended-shaped this Cycle: every script exited 0 with its gate read back.
 - A6 Civic chain: the hourly tick launches on `world_summary_c111.md` + `engine_audit_c111.json`; at 16:30 CDT the log still showed the c110 APPLY tick — confirm `launched the chain` for c111 at the next tick.
+
+## LEG: /city-hall (G-R)
+
+No gaps this run.

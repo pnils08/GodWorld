@@ -1,0 +1,16 @@
+--- a/session-start.js
++++ b/session-start.js
+@@ -153,6 +153,13 @@
+ 
+     const statuslineCleanupNotice = removeLegacyStatusline();
+     pruneState();
++    // GodWorld patch 2026-10-07: honor injectProfile:false — the auto-extracted
++    // profile ("Recent Context") is not injected at boot; the boot hook carries state.
++    if (settings.injectProfile === false) {
++      writeState(sessionId, 'context', { status: 'ready', memoryItemsLoaded: 0 });
++      writeOutput({ continue: true, suppressOutput: true });
++      return;
++    }
+     writeState(sessionId, 'context', { status: 'loading', memoryItemsLoaded: 0 });
+ 
+     const projectConfig = loadProjectConfig(cwd);

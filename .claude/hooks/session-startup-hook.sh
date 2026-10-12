@@ -149,11 +149,29 @@ EOF
   fi
 
   # --- Supermemory recall patch (docs/SUPERMEMORY.md §Hooks) — a plugin update
-  # overwrites it silently (0.1.8 -> 0.1.9 on 2026-10-04 did); say so at boot.
+  # overwrites it silently (0.1.8 -> 0.1.9 on 2026-10-04, 0.1.9 -> 0.1.11 on
+  # 2026-10-12). Self-healing: re-apply scripts/supermemory-patch/*.patch; each
+  # applies only if the plugin file still matches the vendor original, else warn.
   SM_ROOT=$(python3 -c "import json;print(json.load(open('$HOME/.claude/plugins/installed_plugins.json'))['plugins']['supermemory@supermemory-plugins'][0]['installPath'])" 2>/dev/null)
-  if [ -n "$SM_ROOT" ] && ! grep -q "GodWorld patch 2026-10-07" "$SM_ROOT/hooks/recall-directive.js" "$SM_ROOT/hooks/session-start.js" 2>/dev/null; then
-    echo ""
-    echo "SUPERMEMORY PATCH MISSING in $SM_ROOT — recall is serving the undated auto container. Re-port from the .pre-slgodworld notes in docs/SUPERMEMORY.md before trusting ◪ lines."
+  if [ -n "$SM_ROOT" ]; then
+    SM_HEALED=""; SM_FAILED=""
+    for f in session-start recall-directive; do
+      T="$SM_ROOT/hooks/$f.js"; P="$PWD/scripts/supermemory-patch/$f.patch"
+      [ -f "$T" ] && [ -f "$P" ] || continue
+      grep -q "GodWorld patch 2026-10-07" "$T" && continue
+      if patch --dry-run -s "$T" < "$P" >/dev/null 2>&1; then
+        cp -n "$T" "$T.pre-slgodworld" 2>/dev/null; patch -s "$T" < "$P" && SM_HEALED="$SM_HEALED $f"
+      else
+        SM_FAILED="$SM_FAILED $f"
+      fi
+    done
+    if [ -n "$SM_FAILED" ]; then
+      echo ""
+      echo "SUPERMEMORY PATCH MISSING in $SM_ROOT ($SM_FAILED) — the plugin file changed upstream and the patch no longer applies; recall is serving the undated auto container. Re-port scripts/supermemory-patch/ by hand before trusting ◪ lines."
+    elif [ -n "$SM_HEALED" ]; then
+      echo ""
+      echo "SUPERMEMORY PATCH re-applied automatically in $SM_ROOT ($SM_HEALED) after a plugin update."
+    fi
   fi
 
   # (G-SS3 "Last journal" line retired S300 — journal froze to Mags' page; the

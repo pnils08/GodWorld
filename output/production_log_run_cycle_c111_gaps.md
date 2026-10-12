@@ -311,6 +311,7 @@
 
 ### G-EC51 — generateGenericCitizens_ generated 8, ledger +7 (1,025 → 1,032) [judgment] [writeback-drift] [LOW]
 - Log line 109: `Generated 8 (baseCount=8)`. dumpLedger rowCount 1032 vs pre-fire 1025 (auditSimulationLedger). One row short or one pre-fire count off — reconcile against Generic_Citizens before C112.
+- **CLOSED S553 — no row lost; two tabs compared as one.** The 8 go to `Generic_Citizens` (live: exactly 8 rows `EmergedCycle = Cycle 111`, Fatima Laurent … Mina Underwood, hoods matching log line 109 — Uptown 1, Jack London 2, Rockridge 1, Temescal 1, East Oakland 1, KONO 1, Lake Merritt 1). The ledger +7 = `checkForPromotions_` 6 by migration wave (log 140: POP-01198–01203) + 1 `P6 BIRTH` POP-01197 Rosa Zhou (log 134).
 
 ### G-EC52 — civisJournal Sonnet route returned fenced markdown again; DeepSeek wrote the entry [judgment] [silent-fail] [LOW]
 - stderr `Civis Sonnet failed or returned invalid output: Unexpected token '*', "**Civis Sy"`. Repeat of G-EC38 (C110). Journal written on the fallback; the prompt's JSON instruction does not hold on Sonnet 5.5 — fence-strip before parse or move the first route.

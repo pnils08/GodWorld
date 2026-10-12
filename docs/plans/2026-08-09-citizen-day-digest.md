@@ -86,7 +86,7 @@ pointers:
   1. Propose thematic-allocation rebalance per Mike's listener directives: Citizens & neighborhoods up (40% → 60%), city record down (40% → 20%), connections 20% unchanged; add a directive line that the daily citizen digest section is the people-spine of the show.
   2. Hand the diff to engine-sheet (or land it here only if Mike explicitly grants config scope).
 - **Verify:** engine-sheet confirms landing; next daily audio reflects the allocation.
-- **Status:** [ ] proposal written — **owner: engine-sheet (kimi proposed)**. Exact diff at `output/kimi/citizen-day-digest/audio-direction-daily-proposal.md` (city record 40%→20% background-only, citizens 40%→60% spine, digest-first directive).
+- **Status:** [x] landed 2026-10-12 (engine-sheet): citizens 60% spine, city record 20% background, connections 20%; "The people lead" directive names the digest section; execution line puts the people first. Guide title is content-hashed, so the next daily run uploads it. Was: proposal written — **owner: engine-sheet (kimi proposed)**. Exact diff at `output/kimi/citizen-day-digest/audio-direction-daily-proposal.md` (city record 40%→20% background-only, citizens 40%→60% spine, digest-first directive).
 
 ---
 
@@ -95,6 +95,8 @@ pointers:
 - [x] Digest feeds written brief too, or audio only? — **ANSWERED by Mike 2026-08-09: both.**
 
 ## Changelog
+
+- 2026-10-12 (engine-sheet) — Task 5 landed in `config/audio_direction_daily.md` from the plan's step 1 (kimi's proposal file no longer on disk). Acceptance: the next unattended daily audio leads with the people.
 
 - 2026-08-09 (kimi) — Initial draft on Mike's direction ("the daily version to attach to the daily news drop"), per his listener directives carried in NEXT[kimi] at commit 4af31b4a. Design pick (digest feeds written + audio) confirmed same session.
 - 2026-08-09 (kimi) — Tasks 1–4 shipped: `--daily` mode + `buildDigest()` export, timestamp-paired CONVO attribution fix, notebooklmDailyNews wiring (hash + both sources, SOURCE_VERSION 1.6, non-blocking skip), unit tests extended + PASS, live dry-run validated. Task 5 config rebalance proposed at `output/kimi/citizen-day-digest/audio-direction-daily-proposal.md` — engine-sheet lands.

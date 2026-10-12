@@ -102,7 +102,7 @@
 | engine.48 | Organic: the first T8 tension-seed result off the cron; none recorded yet | live-observing | research-build | [[../plans/2026-07-06-citizen-loop-deepening]] |
 | engine.201 | Fixed-cohort proof: 48 citizens drawn at C110 (output/engine201). C111 resnap taken 2026-10-11 (48/48); resnap after C112, C113; trace at the C113 fire, Sun 2026-10-25, codex leading | live-observing | engine-sheet | [[../plans/2026-09-10-inactivity-is-regression]] §BUILD SPEC |
 | pipeline.68 | The 54 C110 mints need roster rows: linkCitizensToEmployers --fill-blanks-only, dry-run first. World-gap staff landed at C110 | ready | research-build | [[../plans/2026-09-07-beat-slices-from-sheets-plan]] |
-| pipeline.53 | Citizen day digest: land the audio-direction rebalance (40/40 city/citizens to 20/60) in config/audio_direction_daily.md | ready | engine-sheet | [[../plans/2026-08-09-citizen-day-digest]] |
+| pipeline.53 | Citizen day digest: audio rebalance LANDED 2026-10-12 (citizens 60% spine, city 20% background). Read: the next unattended daily audio leads with the people | live-observing | engine-sheet | [[../plans/2026-08-09-citizen-day-digest]] |
 | pipeline.69 | Run-cycle packages the world: T1 texture by hood, T2 wake tells a citizen their seed, T3 seed floor, T5 C108 slice readback | in-progress | engine-sheet | [[../plans/2026-09-13-run-cycle-packages-the-world]] |
 | governance.51 | Boot docs: T3 memory-file dedup (proposal ready, builder-reviewed deletes) and T8 | in-progress | engine-sheet | [[../plans/2026-08-29-boot-doc-consolidation]] |
 | civic.24 | Sunday nine-seat table: Task 10 sheet tab | ready | engine-sheet | [[../plans/2026-08-16-city-hall-nine-seat-table]] |

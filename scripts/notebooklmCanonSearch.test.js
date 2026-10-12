@@ -15,6 +15,7 @@ const {
   buildRetrievalRecord,
   appendRetrievalLog,
   buildOutput,
+  openPolicyFromInventory,
 } = require('./notebooklmCanonSearch');
 
 function policyFixture() {
@@ -261,7 +262,29 @@ function testResponseFailures() {
   }
 }
 
+function testOpenPolicyCoversWholeNotebook() {
+  const policy = { ...policyFixture(), notebookId: 'NONCANON_TEST_NB' };
+  const inventory = {
+    notebookId: 'NONCANON_TEST_NB',
+    sources: [
+      { id: 'NONCANON_TEST_PUBLISHED', title: 'NONCANON_TEST Edition' },
+      { id: 'NONCANON_TEST_EXCLUDED', title: 'NONCANON_TEST Draft' },
+      { id: 'NONCANON_TEST_NEW', title: 'NONCANON_TEST Added Later' },
+    ],
+  };
+  const open = openPolicyFromInventory(inventory, policy);
+  const ids = selectSourceIds(open, 'published', null);
+  assert.deepStrictEqual(ids, inventory.sources.map((source) => source.id));
+  assert.strictEqual(open.decisions.NONCANON_TEST_NEW.title, 'NONCANON_TEST Added Later');
+  assert.strictEqual(selectSourceIds(open, 'all', null).length, 3);
+  assert.throws(
+    () => openPolicyFromInventory({ ...inventory, notebookId: 'OTHER' }, policy),
+    /does not match/
+  );
+}
+
 testArgsAndCommand();
+testOpenPolicyCoversWholeNotebook();
 testSourceSelectionFailsClosed();
 testRetrievalStatusClassification();
 testRetrievalLogIsMetadataOnly();

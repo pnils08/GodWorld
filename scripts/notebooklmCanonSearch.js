@@ -5,7 +5,6 @@ const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 const { spawnSync } = require('child_process');
-const { validatePolicy } = require('./notebooklmCanonSourcesValidate');
 
 const ROOT = path.join(__dirname, '..');
 const CONFIG_PATH = path.join(ROOT, 'config', 'notebooklm.json');
@@ -95,7 +94,31 @@ function allowedIdsForClass(policy, sourceClass) {
   const references = policy.allowedCanonReferenceSourceIds || [];
   if (sourceClass === 'published') return [...published];
   if (sourceClass === 'canon-reference') return [...references];
-  return [...published, ...references];
+  return [...new Set([...published, ...references])];
+}
+
+// Builder ruling: the notebook cannot invent canon, so every source in it is
+// canon. The search lane is the whole inventory; the reviewed policy file stays
+// as the strict audit (`notebooklmCanonSourcesValidate.js`), not a gate.
+function openPolicyFromInventory(inventory, policy) {
+  if (!inventory || !Array.isArray(inventory.sources)) {
+    throw new Error('inventory.sources must be an array');
+  }
+  if (inventory.notebookId !== policy.notebookId) {
+    throw new Error('inventory notebook ID does not match canon-source policy');
+  }
+  const ids = inventory.sources.map((source) => source.id);
+  const decisions = { ...(policy.decisions || {}) };
+  for (const source of inventory.sources) {
+    if (!decisions[source.id]) decisions[source.id] = { title: source.title };
+  }
+  return {
+    ...policy,
+    allowedPublishedSourceIds: ids,
+    allowedCanonReferenceSourceIds: ids,
+    excludedSourceIds: [],
+    decisions,
+  };
 }
 
 function selectSourceIds(policy, sourceClass, requestedIds) {
@@ -380,18 +403,9 @@ function main(argv) {
     args = parseArgs(argv);
     logPath = resolveLogPath(args.logPath);
     const config = readJson(CONFIG_PATH, 'NotebookLM configuration');
-    const policy = readJson(POLICY_PATH, 'NotebookLM canon-source policy');
+    const reviewedPolicy = readJson(POLICY_PATH, 'NotebookLM canon-source policy');
     const inventory = readJson(INVENTORY_PATH, 'NotebookLM source inventory');
-    // Scoped: sources added after the last review sit outside the published lane
-    // and must not stop it. `node scripts/notebooklmCanonSourcesValidate.js` is
-    // the strict audit that lists them.
-    const scope = validatePolicy(inventory, policy, { scoped: true });
-    if (scope.unclassifiedIds > 0 || scope.renamedIds.length > 0) {
-      console.error(
-        'canon search note: ' + scope.unclassifiedIds + ' notebook source(s) unclassified and ' +
-        scope.renamedIds.length + ' renamed; neither is in this search lane.'
-      );
-    }
+    const policy = openPolicyFromInventory(inventory, reviewedPolicy);
     if (!config.notebookId || config.notebookId !== policy.notebookId) {
       throw new Error('configured notebook ID does not match canon-source policy');
     }
@@ -451,6 +465,7 @@ if (require.main === module) {
 module.exports = {
   parseArgs,
   allowedIdsForClass,
+  openPolicyFromInventory,
   selectSourceIds,
   buildQueryArgs,
   normalizeCitationMap,

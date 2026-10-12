@@ -33,26 +33,6 @@
     "civic": [
       {
         "kind": "anomaly",
-        "ref": "output/engine_audit_c111.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
-        "label": "stuck-initiative (medium) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"design-phase\" for 4 cycles",
-        "popids": [
-          "POP-00004",
-          "POP-00636",
-          "POP-01057"
-        ],
-        "hood": "Fruitvale",
-        "handle": {
-          "angle": "Fruitvale Transit Hub Phase II — Visioning stalled in design-phase — remedy path + responsible office",
-          "hookLine": "The transit initiative carrying Fruitvale has not advanced in 4 cycles.",
-          "citizens": [
-            "Nina Reyes (POP-01057)",
-            "Luis Navarro (POP-00636)",
-            "Lucia Polito (POP-00004)"
-          ]
-        }
-      },
-      {
-        "kind": "anomaly",
         "ref": "output/engine_audit_c111.json patterns[1]; evidence: Initiative_Tracker row(s) 7",
         "label": "stuck-initiative (medium) | Initiative \"Oakland Youth Apprenticeship Pipeline\" in phase \"operational\" for 4 cycles",
         "popids": [
@@ -151,7 +131,7 @@
         ],
         "hood": "Fruitvale",
         "handle": {
-          "angle": "Fruitvale Transit Hub Phase II — Visioning stalled in design-phase — remedy path + responsible office",
+          "angle": "Fruitvale decay — Sentiment, RetailVitality, HousingPressure moved with no matching active initiative",
           "hookLine": "The transit initiative carrying Fruitvale has not advanced in 4 cycles.",
           "citizens": [
             "Tomas Renteria (POP-00744)",
@@ -513,17 +493,6 @@
       },
       {
         "kind": "initiative",
-        "ref": "Initiative_Tracker (InitiativeID INIT-003); snapshot: engine_audit_c111.json snapshots.Initiative_Tracker; storyline INIT-003:design-phase",
-        "label": "Fruitvale Transit Hub Phase II — Visioning | Status proposed | phase design-phase",
-        "hood": "Fruitvale"
-      },
-      {
-        "kind": "vote",
-        "ref": "Initiative_Tracker (InitiativeID INIT-003); storyline INIT-003:design-phase",
-        "label": "Fruitvale Transit Hub Phase II — Visioning | Schematics completion and community review C112"
-      },
-      {
-        "kind": "initiative",
         "ref": "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c111.json snapshots.Initiative_Tracker; storyline INIT-005:operational",
         "label": "Temescal Community Health Center | Status passed | phase operational",
         "hood": "Temescal"
@@ -599,13 +568,6 @@
       {
         "kind": "ripple",
         "causeType": "initiative-implementation",
-        "ref": "Ripple_Ledger cycle 111 (CauseType initiative-implementation); rendered: world_summary_c111.md \"## What Moved\" > \"### initiative-implementation\"; storyline INIT-003:design-phase",
-        "label": "retail/traffic/sentiment | Fruitvale Transit Hub Phase II — Visioning is design-phase — ongoing transit effects in Fruitvale",
-        "hood": "Fruitvale"
-      },
-      {
-        "kind": "ripple",
-        "causeType": "initiative-implementation",
         "ref": "Ripple_Ledger cycle 111 (CauseType initiative-implementation); rendered: world_summary_c111.md \"## What Moved\" > \"### initiative-implementation\"; storyline INIT-005:operational",
         "label": "sentiment/communityEngagement/publicSpaces | Temescal Community Health Center is operational — ongoing health effects in Temescal",
         "hood": "Temescal"
@@ -640,7 +602,7 @@
         "kind": "ripple",
         "causeType": "approval-shift",
         "ref": "Ripple_Ledger cycle 111 (CauseType approval-shift); rendered: world_summary_c111.md \"## What Moved\" > \"### approval-shift\"",
-        "label": "approval/district-sentiment | Oakland Alternative Response Initiative sitting (0, capped); Fruitvale Transit Hub Phase II — Visioning sitting (0, capped); Oakland Youth Apprenticeship Pipeline sitting (0, capped); level target 60 (mood +1.67 (district 1.70, city 1.64), district -0.04 vs middle, press -1) → -1",
+        "label": "approval/district-sentiment | Oakland Alternative Response Initiative sitting (0, capped); Oakland Youth Apprenticeship Pipeline sitting (0, capped); level target 60 (mood +1.67 (district 1.70, city 1.64), district -0.04 vs middle, press -1) → -1",
         "hood": "D3"
       },
       {
@@ -1356,26 +1318,6 @@
         "hasLedgerRow": true
       },
       {
-        "id": "INIT-003:design-phase",
-        "type": "initiative-stage",
-        "initiativeId": "INIT-003",
-        "name": "Fruitvale Transit Hub Phase II — Visioning — design-phase",
-        "stage": "design-phase",
-        "status": "open",
-        "startCycle": 109,
-        "endCycle": null,
-        "age": 3,
-        "firstSeen": false,
-        "hoods": [
-          "Fruitvale"
-        ],
-        "desks": [
-          "civic"
-        ],
-        "ref": "Initiative_Tracker (InitiativeID INIT-003)",
-        "hasLedgerRow": true
-      },
-      {
         "id": "INIT-005:operational",
         "type": "initiative-stage",
         "initiativeId": "INIT-005",
@@ -1564,26 +1506,6 @@
         "civic"
       ],
       "ref": "Initiative_Tracker (InitiativeID INIT-002)",
-      "hasLedgerRow": true
-    },
-    {
-      "id": "INIT-003:design-phase",
-      "type": "initiative-stage",
-      "initiativeId": "INIT-003",
-      "name": "Fruitvale Transit Hub Phase II — Visioning — design-phase",
-      "stage": "design-phase",
-      "status": "open",
-      "startCycle": 109,
-      "endCycle": null,
-      "age": 3,
-      "firstSeen": false,
-      "hoods": [
-        "Fruitvale"
-      ],
-      "desks": [
-        "civic"
-      ],
-      "ref": "Initiative_Tracker (InitiativeID INIT-003)",
       "hasLedgerRow": true
     },
     {

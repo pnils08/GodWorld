@@ -39,6 +39,8 @@ pointers:
 
 > "We will do a deep canon search on what each journalist has written to see who they are if it's not obvious."
 
+> (2026-10-12) "Civic is likely 10% and Citizens is likely 90%. Same with seeds from the engine, I'd say is 5-10% civic and 90-95% everything else." — "my point is civic is the least important part of the sim and makes up for almost all of the coverage." — "it's the same story written since c 89 yet the As manager gets hurt at work and no one covered it. The crons aren't covering the news, they are writing the same story over and over." — "The reason is there is very little civic to cover, no one is paying attention to it, it's what you're obsessed with pushing on me."
+
 **Goal:** the builder's three asks, in his words: "making sure each are writing for a purpose, what lane they cover and why", "injecting citizens lives into slices that make sense", and "deciding who is the journalist that should just report on random citizens". Nothing below decides any of them; they are decided with the builder, reporter by reporter.
 
 **Rows:** pipeline.73 · **Owner:** research-build with engine-sheet
@@ -91,6 +93,7 @@ On the roster but not on the grid: Lena Carrow (Field Reporter), Dana Reeve (Lea
 - The other seats draw from the desk signal. C111: civic 54, business 46, culture 20, sports 8 items. Citizens' lives: one pointer item, filtered by `WHO_LIVED_IT_TAGS` (`scripts/buildWorldSummary.js:280`), which passed 21 of 2,771 C111 log rows.
 - C110 edition: 6 of 9 pieces quote a citizen, 5 of them on someone else's story; 1 piece (Colin Phillips, Nino's) on a citizen's own work; no LifeHistory event in any piece.
 - Deacon Seymour: ambulance (workplace accident) C105, then "recovering", then "full recovery, returned to duties". No health slice existed C105/C106. `buildHealthSlice.js` drops sports figures from the hospital record. He appears in C108 only as the manager quoted on Danny Horn.
+- Measured 2026-10-12 (engine-sheet, data only): C110 daily news source (142,600 chars) = civic 33%, sports 31%, culture/fame/faith 17%, citizens' lives 12%, UNDOCKED/wire/meta 8%. Cron disk output Oct 5–11: civic ~736 KB vs citizen reflections + exchanges ~26 KB. Desk-signal civic lane C105–C111: 21–33 of 30–58 items each cycle are the same standing initiatives (6–8 initiative + 6 vote items every cycle). Stabilization Fund / Transit Hub named in nearly every edition C89–C110. Seymour C105: the only desk-signal item was sports lane 7 of 12, "A's | team-update | (playoffs) | Deacon Seymour" — the injury itself never reached a desk.
 - A draft code change (LifeHistory into the dump, a lived-events pass in `beatSliceKit.js`) was written and reverted 2026-10-11 on the builder's instruction about reviews and wiring cards.
 
 ## Acceptance
@@ -125,6 +128,8 @@ On the roster but not on the grid: Lena Carrow (Field Reporter), Dana Reeve (Lea
 - Why did the A's championship run go uncovered? The builder raised it ("The As are in a championship run and no one covers that?").
 
 ## Changelog
+
+- 2026-10-12 (engine-sheet) — Builder's words and the share measurements added. No design added.
 
 - 2026-10-11 (engine-sheet) — Rewritten to the builder's words: the author's own designs (lead-with-lives, per-seat life classes, a reporter recommendation, code tasks) removed; the builder said the plan misrepresented him.
 - 2026-10-11 (engine-sheet) — Corrected: "tech reporter" was dictation for "each reporter".

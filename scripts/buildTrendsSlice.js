@@ -43,7 +43,9 @@ function build(cycle, { root, beats, profiles }) {
       name: String(r.Name).trim(),
       role: String(r.RoleType || '').trim() || null,
       domain: String(r.CulturalDomain || '').trim() || null,
-      hood: String(r.Neighborhood || '').trim() || null,
+      // hood: the citizen row's Neighborhood when the figure links to one (K.figureHood) —
+      // the Cultural_Ledger column is a staged-sighting hood, not a residence.
+      ...K.figureHood(profiles, String(r.UniverseLinks || '').split(/[;,\s]+/).filter(t => /^POP-/i.test(t)), r.Neighborhood),
       fame: K.num(r.FameScore),
       mediaCount: K.num(r.MediaCount),
       trend: String(r.TrendTrajectory || '').trim() || null,

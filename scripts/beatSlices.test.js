@@ -348,7 +348,10 @@ try {
 
   console.log('culture lane (kai / sharon / maria):');
   const k = arts.buildArtsSlice(CYCLE, { root });
-  ok('kai: rising figure leads with trajectory + fame', k.facts.some(f => /Test Rising Musician \(Musician\), Arts, Temescal — fame rising \(fame 34, rising\), last seen C103/.test(f.text)));
+  // POP-90001 lives in Fruitvale on the snapshot; the Cultural_Ledger row says Temescal (a staged sighting).
+  // The citizen row wins — that column is where the engine staged a sighting, never a residence.
+  ok('kai: rising figure leads with trajectory + fame', k.facts.some(f => /Test Rising Musician \(Musician\), Arts, Fruitvale — fame rising \(fame 34, rising\), last seen C103/.test(f.text)));
+  ok('kai: linked figure carries the citizen\'s home hood, never the sighting hood', !JSON.stringify(k.facts).includes('Test Rising Musician (Musician), Arts, Temescal'));
   ok('kai: new-on-record figure', k.facts.some(f => /Test New Chef.*new on the culture record this cycle/.test(f.text)));
   ok('kai: fading is the other side of the file', k.facts.some(f => /Test Fading Actor.*fading — the where-are-they-now file/.test(f.text)));
   ok('kai: inactive figure never rides', !JSON.stringify(k.facts).includes('Test Retired Poet'));
@@ -358,6 +361,8 @@ try {
   const sh = lifestyle.buildLifestyleSlice(CYCLE, { root });
   ok('sharon: fading leads the fame file', /Test Fading Actor.*fading — the where-are-they-now file/.test(sh.facts[0].text) && /City-tier/.test(sh.facts[0].text));
   ok('sharon: the city-knows-them row', sh.facts.some(f => /Test Rising Musician.*the city knows them/.test(f.text)));
+  ok('sharon: linked figure carries the citizen\'s home hood (Fruitvale), not the sighting hood (Temescal)', sh.facts.some(f => /Test Rising Musician \(Musician\), Arts, Fruitvale/.test(f.text)) && !JSON.stringify(sh.facts).includes('Arts, Temescal'));
+  ok('sharon: unlinked figure keeps the sighting hood — nothing else to read', sh.facts.some(f => /Test Fading Actor \(Actor\), Media, Piedmont Ave/.test(f.text)));
   ok('sharon: CELEBRITY hook by domain (City Desk misroute)', sh.prewrite.hooks.some(h => /Test Fading Actor spotted at a gala/.test(h.text)));
   ok('sharon: FAME_WATCH hook by type (raw-carried, no desk)', sh.prewrite.hooks.some(h => /Test Rising Musician gaining attention/.test(h.text)));
   const m = neighborhood.buildNeighborhoodSlice(CYCLE, { root });

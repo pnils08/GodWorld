@@ -34,7 +34,7 @@ const ACTIVE_RE = /inactive|retired|closed/i;
 const UP_RE = /rising|surging|ascending|climbing/i;
 const DOWN_RE = /fading|cooling|quiet|declin/i;
 
-function figures(beats) {
+function figures(beats, profiles) {
   return (beats.Cultural_Ledger || [])
     .filter(r => r.Name && !ACTIVE_RE.test(String(r.Status || '')))
     .map(r => ({
@@ -43,7 +43,9 @@ function figures(beats) {
       role: String(r.RoleType || '').trim() || null,
       domain: String(r.CulturalDomain || '').trim() || null,
       category: String(r.FameCategory || '').trim() || null,
-      hood: String(r.Neighborhood || '').trim() || null,
+      // hood: the citizen row's Neighborhood when the figure links to one (K.figureHood) —
+      // the Cultural_Ledger column is a staged-sighting hood, not a residence.
+      ...K.figureHood(profiles, String(r.UniverseLinks || '').split(/[;,\s]+/).filter(t => /^POP-/i.test(t)), r.Neighborhood),
       fame: K.num(r.FameScore),
       trend: String(r.TrendTrajectory || '').trim() || null,
       mediaCount: K.num(r.MediaCount),
@@ -62,7 +64,7 @@ function figureLine(f, why) {
 }
 
 function build(cycle, { beats, profiles }) {
-  const all = figures(beats);
+  const all = figures(beats, profiles);
   if (!all.length) return K.emptySlice(SEAT, cycle, 'no active Cultural_Ledger rows');
   const src = 'output/beats/Cultural_Ledger.jsonl @C' + cycle;
   const rising = all.filter(f => f.trend && UP_RE.test(f.trend)).sort((a, b) => (b.fame || 0) - (a.fame || 0));

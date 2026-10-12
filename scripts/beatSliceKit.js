@@ -153,6 +153,23 @@ function personFromProfile(profiles, popid, why, hoodFallback) {
   return person(String(popid).toUpperCase(), String(p.Name || '').trim(), String(p.RoleType || '').trim() || null,
     String(p.Neighborhood || '').trim() || hoodFallback || null, why);
 }
+/**
+ * A cultural figure's neighborhood for the packet. Cultural_Ledger.Neighborhood is the
+ * hood of the sighting the engine staged the cycle the entity was registered
+ * (buildEveningFamous.js picks it at random) — never where the person lives. When the
+ * figure links to a ledger citizen, the citizen row's Neighborhood is the one Rhea checks
+ * against, so that wins; the sighting hood is only kept for figures with no citizen row.
+ * Returns { hood, hoodSource } — hoodSource is 'ledger' | 'sighting' | null.
+ */
+function figureHood(profiles, popids, sightingHood) {
+  for (const popid of popids || []) {
+    const p = profiles && profiles.get ? profiles.get(String(popid).toUpperCase()) : null;
+    const hood = p ? String(p.Neighborhood || '').trim() : '';
+    if (hood) return { hood, hoodSource: 'ledger' };
+  }
+  const s = String(sightingHood || '').trim();
+  return { hood: s || null, hoodSource: s ? 'sighting' : null };
+}
 function citizenTags(people) {
   return people.map(p => p.name + ' (' + p.popid + ')');
 }
@@ -627,7 +644,7 @@ module.exports = {
   ROOT, SCHEMA, FACTS_TAIL, FORBIDDEN,
   num, hoodKey, fmtInt, loadJson, arg,
   loadBeatTabs, loadProfiles, prevTabRows, rosterAtSectors, hooksFor, domainHooks, seedsFor,
-  person, personFromProfile, citizenTags, makeSlice, emptySlice, formatMarkdown, wire,
+  person, personFromProfile, figureHood, citizenTags, makeSlice, emptySlice, formatMarkdown, wire,
   // engine.254 Task 10
   sportsSubject, money, TREASURY_SOURCES, treasuryWeek, courtCases, censusTrail, censusFacts,
   custodyNamesByHood, careNamesByHood, receiptHookFacts, debtPattern, DEBT_CRISIS_LINE

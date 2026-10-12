@@ -327,6 +327,7 @@
 
 ### G-EC56 — 7 Intake rows parked in review since C105–C109: honorific read as a first name [judgment] [silent-fail] [LOW]
 - "Sgt." Rachel Torres (POP-00057) ×3, "Dr." Lila Mezran (POP-00154) ×4 — Media Room name scanner files the title as First, engine refuses the mint, row sits. Fix: scanner strips honorifics and matches the remainder against the ledger before filing; then clear the seven rows. Pre-flight warns every Cycle meanwhile.
+- **CLOSED S553.** The scanner half already shipped at C109 (`594eadfe`: `routeCitizenUsageToIntake_` strips one leading honorific via `splitUsageName_` on 3+ token names; on PROD — stage-4 pull carries it; no Intake row filed after C109). The seven live rows (2–6, 11, 12) set `IntakeStatus = resolved — existing citizen POP-00057 Rachel Torres / POP-00154 Lila Mezran …` (processIntake_ skips any non-blank status; pre-flight's `^review` count → 0); read-back 7/7.
 
 ### G-EC57 — autonomy gaps in the /run-cycle chain, read at the C111 run [judgment] [phase-ordering] [INFO]
 - A1 Step 3: the fire is a builder menu click; live has no trigger token (DEPLOY_HISTORY §c49074fc). Unattended = timed trigger or token on live — a deploy decision for the builder.
